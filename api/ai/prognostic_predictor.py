@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 class PrognosticOutcome(Enum):
     """Possible disease outcomes."""
+
     RECOVERED = "recovered"
     CHRONIC = "chronic"
     DETERIORATED = "deteriorated"
@@ -25,6 +26,7 @@ class PrognosticOutcome(Enum):
 
 class SeverityLevel(Enum):
     """Disease severity levels."""
+
     MILD = "mild"
     MODERATE = "moderate"
     SEVERE = "severe"
@@ -34,6 +36,7 @@ class SeverityLevel(Enum):
 @dataclass
 class PrognosticFactors:
     """Factors influencing prognosis."""
+
     disease: str
     disease_severity: float  # 0-10
     patient_age: float  # Years
@@ -61,6 +64,7 @@ class PrognosticFactors:
 @dataclass
 class PrognosticPrediction:
     """Prediction of disease outcome and prognosis."""
+
     disease: str
     recovery_probability: float  # 0-1
     recovery_probability_ci: Tuple[float, float]  # Confidence interval
@@ -132,7 +136,7 @@ class DiseasePrognosticKnowledge:
         },
         "Diabetes Mellitus": {
             "base_recovery_rate": 0.30,  # Chronic disease
-            "avg_recovery_time_days": float('inf'),  # Lifelong
+            "avg_recovery_time_days": float("inf"),  # Lifelong
             "severity_impact": 0.12,
             "age_impact": 0.02,
             "complications": ["Kidney Disease", "Neuropathy", "Retinopathy"],
@@ -190,8 +194,7 @@ class PrognosticPredictor:
         self.predictions: Dict[str, PrognosticPrediction] = {}
         self.outcome_database: List[Tuple[str, str, Dict]] = []  # disease, outcome, factors
 
-    def predict_prognosis(self,
-                         factors: PrognosticFactors) -> PrognosticPrediction:
+    def predict_prognosis(self, factors: PrognosticFactors) -> PrognosticPrediction:
         """Predict disease prognosis.
 
         Args:
@@ -223,53 +226,37 @@ class PrognosticPredictor:
         # Adjust for protective factors
         if factors.treatment_type:
             protective_bonus = self._calculate_protective_bonus(
-                factors.disease,
-                factors.treatment_type,
-                disease_info.get("protective_factors_weights", {})
+                factors.disease, factors.treatment_type, disease_info.get("protective_factors_weights", {})
             )
             adjusted_recovery += protective_bonus
 
         # Apply treatment compliance
-        adjusted_recovery *= (0.5 + 0.5 * factors.treatment_compliance_likelihood)
+        adjusted_recovery *= 0.5 + 0.5 * factors.treatment_compliance_likelihood
 
         # Apply access to care
-        adjusted_recovery *= (0.7 + 0.3 * factors.access_to_care)
+        adjusted_recovery *= 0.7 + 0.3 * factors.access_to_care
 
         # Clamp to [0, 1]
         recovery_probability = max(0, min(1, adjusted_recovery))
 
         # Calculate treatment success probability
-        treatment_success = self._calculate_treatment_success(
-            recovery_probability,
-            factors
-        )
+        treatment_success = self._calculate_treatment_success(recovery_probability, factors)
 
         # Calculate complications and mortality
-        complication_risk = self._calculate_complication_risk(
-            factors, disease_info
-        )
-        mortality_risk = self._calculate_mortality_risk(
-            factors, recovery_probability
-        )
+        complication_risk = self._calculate_complication_risk(factors, disease_info)
+        mortality_risk = self._calculate_mortality_risk(factors, recovery_probability)
 
         # Determine likely outcome
         likely_outcome = self._determine_outcome(recovery_probability, mortality_risk)
 
         # Calculate recovery time
-        recovery_time = self._calculate_recovery_time(
-            disease_info,
-            recovery_probability,
-            factors
-        )
+        recovery_time = self._calculate_recovery_time(disease_info, recovery_probability, factors)
 
         # Create prediction
         prediction = PrognosticPrediction(
             disease=factors.disease,
             recovery_probability=recovery_probability,
-            recovery_probability_ci=self._calculate_confidence_interval(
-                recovery_probability,
-                confidence_level=0.95
-            ),
+            recovery_probability_ci=self._calculate_confidence_interval(recovery_probability, confidence_level=0.95),
             treatment_success_probability=treatment_success,
             complication_risk=complication_risk,
             mortality_risk=mortality_risk,
@@ -286,8 +273,7 @@ class PrognosticPredictor:
         self.predictions[factors.disease] = prediction
         return prediction
 
-    def _create_default_prediction(self,
-                                  factors: PrognosticFactors) -> PrognosticPrediction:
+    def _create_default_prediction(self, factors: PrognosticFactors) -> PrognosticPrediction:
         """Create default prediction for unknown diseases."""
         # Conservative estimate for unknown diseases
         recovery_prob = 0.5 - (factors.disease_severity * 0.05)
@@ -304,10 +290,7 @@ class PrognosticPredictor:
             clinical_notes="Insufficient data for specific prognosis",
         )
 
-    def _calculate_protective_bonus(self,
-                                   disease: str,
-                                   treatment_type: str,
-                                   weights: Dict[str, float]) -> float:
+    def _calculate_protective_bonus(self, disease: str, treatment_type: str, weights: Dict[str, float]) -> float:
         """Calculate bonus from protective factors."""
         bonus = 0.0
 
@@ -323,9 +306,7 @@ class PrognosticPredictor:
 
         return min(0.30, bonus)  # Cap bonus at 30%
 
-    def _calculate_treatment_success(self,
-                                    recovery_prob: float,
-                                    factors: PrognosticFactors) -> float:
+    def _calculate_treatment_success(self, recovery_prob: float, factors: PrognosticFactors) -> float:
         """Calculate treatment success probability."""
         # Treatment success correlates with recovery probability
         success = recovery_prob * 0.9  # 90% correlation
@@ -336,9 +317,7 @@ class PrognosticPredictor:
 
         return min(1.0, success)
 
-    def _calculate_complication_risk(self,
-                                    factors: PrognosticFactors,
-                                    disease_info: Dict) -> float:
+    def _calculate_complication_risk(self, factors: PrognosticFactors, disease_info: Dict) -> float:
         """Calculate risk of complications."""
         base_risk = 0.15  # 15% baseline
 
@@ -352,13 +331,11 @@ class PrognosticPredictor:
         base_risk += len(factors.comorbidities) * 0.10
 
         # Reduce with good overall health
-        base_risk *= (1 - factors.overall_health_status * 0.3)
+        base_risk *= 1 - factors.overall_health_status * 0.3
 
         return min(1.0, base_risk)
 
-    def _calculate_mortality_risk(self,
-                                 factors: PrognosticFactors,
-                                 recovery_prob: float) -> float:
+    def _calculate_mortality_risk(self, factors: PrognosticFactors, recovery_prob: float) -> float:
         """Calculate mortality risk."""
         base_risk = (1 - recovery_prob) * 0.3  # Inverse of recovery
 
@@ -373,13 +350,11 @@ class PrognosticPredictor:
         base_risk += len(factors.comorbidities) * 0.05
 
         # Reduce with access to care
-        base_risk *= (1 - factors.access_to_care * 0.3)
+        base_risk *= 1 - factors.access_to_care * 0.3
 
         return min(1.0, max(0, base_risk))
 
-    def _determine_outcome(self,
-                          recovery_prob: float,
-                          mortality_risk: float) -> PrognosticOutcome:
+    def _determine_outcome(self, recovery_prob: float, mortality_risk: float) -> PrognosticOutcome:
         """Determine likely outcome."""
         if mortality_risk > 0.3:
             return PrognosticOutcome.DIED
@@ -392,30 +367,27 @@ class PrognosticPredictor:
 
         return PrognosticOutcome.DETERIORATED
 
-    def _calculate_recovery_time(self,
-                                disease_info: Dict,
-                                recovery_prob: float,
-                                factors: PrognosticFactors) -> Optional[float]:
+    def _calculate_recovery_time(
+        self, disease_info: Dict, recovery_prob: float, factors: PrognosticFactors
+    ) -> Optional[float]:
         """Calculate estimated recovery time."""
         base_time = disease_info.get("avg_recovery_time_days")
 
-        if base_time is None or base_time == float('inf'):
+        if base_time is None or base_time == float("inf"):
             return None
 
         # Increase time if low recovery probability
         time_multiplier = 1.0 + (1 - recovery_prob) * 0.5
 
         # Increase time with age
-        time_multiplier *= (1 + factors.patient_age * 0.02)
+        time_multiplier *= 1 + factors.patient_age * 0.02
 
         # Decrease time with good health status
-        time_multiplier *= (1 - factors.overall_health_status * 0.2)
+        time_multiplier *= 1 - factors.overall_health_status * 0.2
 
         return base_time * time_multiplier
 
-    def _calculate_confidence_interval(self,
-                                      probability: float,
-                                      confidence_level: float = 0.95) -> Tuple[float, float]:
+    def _calculate_confidence_interval(self, probability: float, confidence_level: float = 0.95) -> Tuple[float, float]:
         """Calculate confidence interval for probability."""
         # Standard error approximation
         se = math.sqrt(probability * (1 - probability) / 100)
@@ -557,10 +529,7 @@ class PrognosticPredictor:
 
         return min(0.4, max(0, uncertainty))
 
-    def add_outcome_data(self,
-                        disease: str,
-                        actual_outcome: PrognosticOutcome,
-                        factors: PrognosticFactors):
+    def add_outcome_data(self, disease: str, actual_outcome: PrognosticOutcome, factors: PrognosticFactors):
         """Add actual outcome for model refinement.
 
         Args:
@@ -599,10 +568,7 @@ class PrognosticPredictor:
     def to_dict(self) -> Dict:
         """Export predictor state."""
         return {
-            "predictions": {
-                disease: pred.to_dict()
-                for disease, pred in self.predictions.items()
-            },
+            "predictions": {disease: pred.to_dict() for disease, pred in self.predictions.items()},
             "statistics": self.get_statistics(),
             "outcome_count": len(self.outcome_database),
         }

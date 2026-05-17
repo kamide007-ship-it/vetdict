@@ -32,7 +32,19 @@ _ANTIOX_PATTERNS = re.compile(
     r"atopic dermatit|\batop\w*|dermatit|chronic kidney|\bCKD\b|hepatic|"
     r"liver disease|cirrhos|cognitive dysfunc|immune.mediat|auto.?immune|"
     r"pyoderma|\blupus\b|pemphig|seborrhe|"
-    r"アトピー|皮膚炎|慢性腎臓病|肝疾患|肝炎|肝硬変|認知機能|免疫介在|自己免疫",
+    r"toxicos|toxicit|poisoning|envenom|snakebite|mamushi|"
+    r"rodenticid|bromethalin|cholecalciferol|ivermectin|"
+    r"sepsis|septic|\bSIRS\b|peritoniti|"
+    r"ehrlichi|babesi|leptospir|tick.?borne|"
+    r"vestibular|geriatric|aging|"
+    r"glaucoma|cataract|"
+    r"アトピー|皮膚炎|慢性腎臓病|肝疾患|肝炎|肝硬変|認知機能|免疫介在|自己免疫|"
+    r"中毒|毒|咬傷|マムシ|蛇咬|"
+    r"殺鼠剤|ブロメタリン|コレカルシフェロール|イベルメクチン|"
+    r"敗血症|腹膜炎|"
+    r"エールリヒア|バベシア|レプトスピラ|"
+    r"前庭|高齢|加齢|"
+    r"緑内障|白内障",
     re.IGNORECASE,
 )
 
@@ -79,10 +91,12 @@ _PREBIOTIC_PATTERNS = re.compile(
     r"allergic dermatit|portosystem|hepatic encephalop|urolithi|"
     r"\bstruvite\b|calcium oxal|cystit|sand colic|impact|"
     r"chronic kidney|\bCKD\b|uremia|uraemia|dysbios|"
+    r"gastrinoma|zollinger.?ellison|gastric ulcer|"
     r"疝痛|胃腸炎|腸炎|下痢|便秘|巨大結腸|巨大食道|胃拡張|胃捻転|"
     r"膵炎|炎症性腸疾患|慢性腸症|食物アレルギー|アトピー性皮膚炎|"
     r"アレルギー性皮膚炎|門脈体循環シャント|肝性脳症|尿石症|ストラバイト|"
-    r"シュウ酸カルシウム|膀胱炎|砂疝|便塞|慢性腎臓病|尿毒症|腸内細菌叢",
+    r"シュウ酸カルシウム|膀胱炎|砂疝|便塞|慢性腎臓病|尿毒症|腸内細菌叢|"
+    r"ガストリノーマ|ゾリンジャー|胃潰瘍",
     re.IGNORECASE,
 )
 
@@ -112,11 +126,19 @@ _PROTAIN_PATTERNS = re.compile(
 _BOOSTER_PATTERNS = re.compile(
     r"canine distemp|parvovir|feline panleuk|feline pneumon|"
     r"upper respiratory|influenza|\bURI\b|kennel cough|"
-    r"hypothyroid|hyperthyroid|addison|hypoadrenocort|"
+    r"hypothyroid|hyperthyroid|addison|hypoadrenocort|atypical hypoadrenocort|"
     r"chronic fatigue|debilit|convalescen|poor performance|"
+    r"sepsis|septic|\bSIRS\b|peritoniti|pyothora|"
+    r"toxicos|toxicit|poisoning|envenom|snakebite|mamushi|"
+    r"botulis|tetanus|anaplasm|ehrlichi|babesi|leptospir|"
+    r"vestibul|cognitive dysfunc|"
     r"犬ジステンパー|パルボ|汎白血球減少|上部気道感染|"
     r"ケンネルコフ|甲状腺機能低下|甲状腺機能亢進|アジソン|"
-    r"副腎皮質機能低下|慢性疲労|衰弱|回復期",
+    r"副腎皮質機能低下|慢性疲労|衰弱|回復期|"
+    r"敗血症|腹膜炎|膿胸|"
+    r"中毒|毒|咬傷|マムシ|蛇咬|"
+    r"ボツリヌス|破傷風|アナプラズマ|エールリヒア|バベシア|レプトスピラ|"
+    r"前庭|認知機能",
     re.IGNORECASE,
 )
 

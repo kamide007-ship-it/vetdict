@@ -46,6 +46,7 @@ from api.ai.treatment_response_predictor import (
 @dataclass
 class ClinicalCase:
     """Unified clinical case for comprehensive analysis."""
+
     case_id: str
     patient_age: float
     patient_species: str
@@ -71,6 +72,7 @@ class ClinicalCase:
 @dataclass
 class ComprehensiveDiagnosis:
     """Complete diagnostic and treatment recommendation."""
+
     case_id: str
     primary_diagnosis: str
     differential_diagnoses: List[Tuple[str, float]]  # (disease, probability)
@@ -91,24 +93,13 @@ class ComprehensiveDiagnosis:
             "case_id": self.case_id,
             "primary_diagnosis": self.primary_diagnosis,
             "differential_diagnoses": [
-                {"disease": d, "probability": round(p, 4)}
-                for d, p in self.differential_diagnoses
+                {"disease": d, "probability": round(p, 4)} for d, p in self.differential_diagnoses
             ],
-            "comorbid_conditions": [
-                c.to_dict() for c in self.comorbid_conditions
-            ],
+            "comorbid_conditions": [c.to_dict() for c in self.comorbid_conditions],
             "prognosis": self.prognosis.to_dict(),
-            "treatment_recommendations": [
-                t.to_dict() for t in self.treatment_recommendations
-            ],
-            "risk_stratification": (
-                self.risk_stratification.to_dict()
-                if self.risk_stratification else None
-            ),
-            "decision_support": (
-                self.decision_support.to_dict()
-                if self.decision_support else None
-            ),
+            "treatment_recommendations": [t.to_dict() for t in self.treatment_recommendations],
+            "risk_stratification": (self.risk_stratification.to_dict() if self.risk_stratification else None),
+            "decision_support": (self.decision_support.to_dict() if self.decision_support else None),
             "risk_factors": self.risk_factors,
             "protective_factors": self.protective_factors,
             "monitoring_plan": self.monitoring_plan,
@@ -120,6 +111,7 @@ class ComprehensiveDiagnosis:
 
 class DiagnosticWorkflow(Enum):
     """Clinical workflow stages."""
+
     INITIAL_ASSESSMENT = "initial_assessment"
     DIFFERENTIAL_DIAGNOSIS = "differential_diagnosis"
     PROGNOSTIC_EVALUATION = "prognostic_evaluation"
@@ -155,16 +147,14 @@ class UnifiedClinicalEngine:
         self.diagnoses: Dict[str, ComprehensiveDiagnosis] = {}
         self.workflow_log: List[Tuple[str, DiagnosticWorkflow, datetime]] = []
 
-    def initialize_expander(self,
-                           interaction_matrix: Dict[Tuple[str, str], DiseaseInteraction]):
+    def initialize_expander(self, interaction_matrix: Dict[Tuple[str, str], DiseaseInteraction]):
         """Initialize multi-disease expander with interaction matrix."""
         self.expander = MultiDiseaseExpander(interaction_matrix)
         logger.info("Multi-disease expander initialized")
 
-    def comprehensive_analysis(self,
-                              case: ClinicalCase,
-                              initial_predictions: Dict[str, float]
-                              ) -> ComprehensiveDiagnosis:
+    def comprehensive_analysis(
+        self, case: ClinicalCase, initial_predictions: Dict[str, float]
+    ) -> ComprehensiveDiagnosis:
         """Perform comprehensive diagnostic and treatment analysis.
 
         Args:
@@ -187,14 +177,10 @@ class UnifiedClinicalEngine:
         self._log_workflow(case.case_id, DiagnosticWorkflow.DIFFERENTIAL_DIAGNOSIS)
 
         # Step 2: Identify primary and differential diagnoses
-        primary_diagnosis, differential_diagnoses = self._identify_diagnoses(
-            adjusted_predictions
-        )
+        primary_diagnosis, differential_diagnoses = self._identify_diagnoses(adjusted_predictions)
 
         # Step 3: Analyze disease combinations (comorbidities)
-        comorbid_patterns = self._analyze_combinations(
-            list(adjusted_predictions.keys())
-        )
+        comorbid_patterns = self._analyze_combinations(list(adjusted_predictions.keys()))
 
         self._log_workflow(case.case_id, DiagnosticWorkflow.PROGNOSTIC_EVALUATION)
 
@@ -249,9 +235,7 @@ class UnifiedClinicalEngine:
         )
 
         # Step 7: Compile comprehensive diagnosis
-        confidence_level = self._calculate_overall_confidence(
-            adjusted_predictions, prognosis
-        )
+        confidence_level = self._calculate_overall_confidence(adjusted_predictions, prognosis)
 
         diagnosis = ComprehensiveDiagnosis(
             case_id=case.case_id,
@@ -271,19 +255,13 @@ class UnifiedClinicalEngine:
         self.diagnoses[case.case_id] = diagnosis
         return diagnosis
 
-    def _identify_diagnoses(self,
-                           predictions: Dict[str, float]
-                           ) -> Tuple[str, List[Tuple[str, float]]]:
+    def _identify_diagnoses(self, predictions: Dict[str, float]) -> Tuple[str, List[Tuple[str, float]]]:
         """Identify primary and differential diagnoses from predictions.
 
         Returns:
             (primary_diagnosis, list of (disease, probability) tuples)
         """
-        sorted_diseases = sorted(
-            predictions.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )
+        sorted_diseases = sorted(predictions.items(), key=lambda x: x[1], reverse=True)
 
         if not sorted_diseases:
             return "Unknown", []
@@ -305,9 +283,7 @@ class UnifiedClinicalEngine:
         patterns = self.expander.expand_combinations(diseases, min_combined_prob=0.1)
         return patterns
 
-    def _recommend_treatments(self,
-                             primary_diagnosis: str,
-                             case: ClinicalCase) -> List[TreatmentResponse]:
+    def _recommend_treatments(self, primary_diagnosis: str, case: ClinicalCase) -> List[TreatmentResponse]:
         """Generate ranked treatment recommendations.
 
         Returns:
@@ -323,10 +299,9 @@ class UnifiedClinicalEngine:
         # Top 3 treatments
         return treatments[:3]
 
-    def _generate_monitoring_plan(self,
-                                 case: ClinicalCase,
-                                 prognosis: PrognosticPrediction,
-                                 treatments: List[TreatmentResponse]) -> List[str]:
+    def _generate_monitoring_plan(
+        self, case: ClinicalCase, prognosis: PrognosticPrediction, treatments: List[TreatmentResponse]
+    ) -> List[str]:
         """Generate comprehensive monitoring plan.
 
         Returns:
@@ -354,9 +329,7 @@ class UnifiedClinicalEngine:
 
         return plan
 
-    def _calculate_overall_confidence(self,
-                                     predictions: Dict[str, float],
-                                     prognosis: PrognosticPrediction) -> float:
+    def _calculate_overall_confidence(self, predictions: Dict[str, float], prognosis: PrognosticPrediction) -> float:
         """Calculate overall confidence in diagnosis.
 
         Factors:
@@ -373,15 +346,13 @@ class UnifiedClinicalEngine:
 
         # Average with uncertainty penalty
         overall = (primary_confidence + prognostic_confidence) / 2
-        overall *= (1 - epistemic_uncertainty * 0.5)
+        overall *= 1 - epistemic_uncertainty * 0.5
 
         return max(0.2, min(1.0, overall))
 
-    def record_diagnosis_outcome(self,
-                                case_id: str,
-                                actual_diagnosis: str,
-                                treatment_used: Optional[str] = None,
-                                treatment_success: bool = False):
+    def record_diagnosis_outcome(
+        self, case_id: str, actual_diagnosis: str, treatment_used: Optional[str] = None, treatment_success: bool = False
+    ):
         """Record actual diagnosis outcome for learning.
 
         Args:
@@ -400,9 +371,7 @@ class UnifiedClinicalEngine:
                 symptoms=[],  # Would be populated from case
                 initial_predictions={},  # From original predictions
                 actual_diagnosis=actual_diagnosis,
-                final_diagnosis_confirmed=(
-                    case_data.primary_diagnosis == actual_diagnosis
-                ),
+                final_diagnosis_confirmed=(case_data.primary_diagnosis == actual_diagnosis),
                 veterinarian_id="unknown",
                 clinic_id="unknown",
                 patient_age=0.0,
@@ -490,10 +459,7 @@ class UnifiedClinicalEngine:
         try:
             # This would deserialize the case data
             # For now, just validate structure
-            required_keys = [
-                "case_id", "primary_diagnosis", "differential_diagnoses",
-                "treatment_recommendations"
-            ]
+            required_keys = ["case_id", "primary_diagnosis", "differential_diagnoses", "treatment_recommendations"]
             if all(k in case_data for k in required_keys):
                 return True
         except Exception as e:

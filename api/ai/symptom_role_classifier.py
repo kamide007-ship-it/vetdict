@@ -105,9 +105,7 @@ class SymptomRoleAnalyzer:
         )
 
         # Analyze pathophysiology connection
-        patho_explanation = cls._explain_pathophysiology(
-            symptom_name, pathophysiology, primary_role
-        )
+        patho_explanation = cls._explain_pathophysiology(symptom_name, pathophysiology, primary_role)
 
         # Determine clinical significance
         significance = cls._assess_clinical_significance(
@@ -115,24 +113,16 @@ class SymptomRoleAnalyzer:
         )
 
         # Check progression timing
-        appears_early = cls._check_early_appearance(
-            symptom_name, pathophysiology, disease
-        )
+        appears_early = cls._check_early_appearance(symptom_name, pathophysiology, disease)
 
         # Check reversibility
-        reversible = cls._check_reversibility(
-            symptom_name, disease, primary_role
-        )
+        reversible = cls._check_reversibility(symptom_name, disease, primary_role)
 
         # Get alternative roles
-        alternatives = cls._get_alternative_roles(
-            primary_role, role_confidence
-        )
+        alternatives = cls._get_alternative_roles(primary_role, role_confidence)
 
         # Find associated symptoms
-        associations = cls._find_symptom_associations(
-            symptom_name, disease
-        )
+        associations = cls._find_symptom_associations(symptom_name, disease)
 
         analysis = SymptomRoleAnalysis(
             symptom_id=symptom_id,
@@ -173,9 +163,7 @@ class SymptomRoleAnalyzer:
         keyword_scores = cls._score_by_keywords(symptom_name, pathophysiology)
 
         # Signal 3: Complication list membership
-        complication_score = cls._score_complication_membership(
-            symptom_id, symptom_name, complications
-        )
+        complication_score = cls._score_complication_membership(symptom_id, symptom_name, complications)
 
         # Signal 4: Symptom-disease name similarity
         name_similarity_score = cls._score_name_similarity(symptom_name, pathophysiology)
@@ -265,11 +253,7 @@ class SymptomRoleAnalyzer:
                 scores["complication"] = max(scores["complication"], score)
 
         # Combined score (weighted by role)
-        scores["combined"] = (
-            scores["primary"] * 0.4
-            + scores["secondary"] * 0.3
-            + scores["complication"] * 0.3
-        )
+        scores["combined"] = scores["primary"] * 0.4 + scores["secondary"] * 0.3 + scores["complication"] * 0.3
 
         return scores
 
@@ -317,7 +301,13 @@ class SymptomRoleAnalyzer:
         """Assess clinical significance of symptom."""
         if primary_role == "primary" and role_confidence > 0.7:
             return "essential"
-        elif primary_role in ["primary", "warning_sign"] or primary_role == "secondary" and role_confidence > 0.6 or primary_role == "complication" and disease_severity > 0.6:
+        elif (
+            primary_role in ["primary", "warning_sign"]
+            or primary_role == "secondary"
+            and role_confidence > 0.6
+            or primary_role == "complication"
+            and disease_severity > 0.6
+        ):
             return "important"
         else:
             return "minor"
@@ -342,10 +332,7 @@ class SymptomRoleAnalyzer:
 
         # Check pathophysiology for early-stage keywords
         patho_lower = pathophysiology.lower()
-        early_keywords = [
-            "initially", "early", "開始時", "最初", "最初の症状",
-            "first manifestation", "早期"
-        ]
+        early_keywords = ["initially", "early", "開始時", "最初", "最初の症状", "first manifestation", "早期"]
 
         return any(keyword in patho_lower and symptom_lower in patho_lower for keyword in early_keywords)
 
@@ -358,9 +345,17 @@ class SymptomRoleAnalyzer:
         """Check if symptom is reversible with treatment."""
         # Structural complications are often irreversible
         structural_keywords = [
-            "fibrosis", "atrophy", "necrosis", "death",
-            "scarring", "degeneration", "permanent",
-            "線維化", "萎縮", "壊死", "瘢痕化"
+            "fibrosis",
+            "atrophy",
+            "necrosis",
+            "death",
+            "scarring",
+            "degeneration",
+            "permanent",
+            "線維化",
+            "萎縮",
+            "壊死",
+            "瘢痕化",
         ]
 
         pathophysiology = disease.get("pathophysiology", "").lower()
@@ -513,9 +508,7 @@ class RoleClassifier:
             # Filter to specific symptoms
             primary = []
             for symptom_id in symptom_ids:
-                role_analysis = SymptomRoleAnalyzer.analyze_symptom_role(
-                    symptom_id, symptom_id, disease
-                )
+                role_analysis = SymptomRoleAnalyzer.analyze_symptom_role(symptom_id, symptom_id, disease)
                 if role_analysis.primary_role == "primary":
                     primary.append(symptom_id)
             return primary

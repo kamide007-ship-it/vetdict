@@ -23,6 +23,7 @@ logger = logging.getLogger(__name__)
 
 class ClinicalPathway(Enum):
     """Recommended clinical care pathway."""
+
     OUTPATIENT_CONSERVATIVE = "outpatient_conservative"
     OUTPATIENT_ACTIVE = "outpatient_active"
     DAY_HOSPITAL = "day_hospital"
@@ -33,6 +34,7 @@ class ClinicalPathway(Enum):
 
 class AlertSeverity(Enum):
     """Clinical alert severity levels."""
+
     INFO = "info"
     WARNING = "warning"
     URGENT = "urgent"
@@ -42,6 +44,7 @@ class AlertSeverity(Enum):
 @dataclass
 class ClinicalAlert:
     """A clinical alert or flag for veterinary staff."""
+
     severity: AlertSeverity
     message: str
     category: str  # e.g. "risk", "treatment", "follow-up"
@@ -57,6 +60,7 @@ class ClinicalAlert:
 @dataclass
 class FollowUpSchedule:
     """Recommended follow-up schedule."""
+
     next_visit_days: int
     visit_type: str  # e.g. "recheck", "lab_only", "full_exam"
     recurring_interval_days: Optional[int] = None
@@ -76,6 +80,7 @@ class FollowUpSchedule:
 @dataclass
 class DecisionSupportResult:
     """Complete decision support output."""
+
     clinical_pathway: ClinicalPathway
     alerts: List[ClinicalAlert] = field(default_factory=list)
     follow_up: Optional[FollowUpSchedule] = None
@@ -195,37 +200,25 @@ class DecisionSupportEngine:
         tier = risk_result.risk_tier
 
         # 1. Select clinical pathway
-        pathway = self._select_pathway(
-            tier, prognosis, disease_severity
-        )
+        pathway = self._select_pathway(tier, prognosis, disease_severity)
 
         # 2. Generate alerts
-        alerts = self._generate_alerts(
-            risk_result, prognosis, treatments, disease_severity
-        )
+        alerts = self._generate_alerts(risk_result, prognosis, treatments, disease_severity)
 
         # 3. Build follow-up schedule
         follow_up = self._build_follow_up(tier, disease, prognosis)
 
         # 4. Determine referral need
-        referral_recommended, referral_reason = self._assess_referral(
-            tier, prognosis, disease_severity
-        )
+        referral_recommended, referral_reason = self._assess_referral(tier, prognosis, disease_severity)
 
         # 5. Hospitalization recommendation
-        hospitalization = self._assess_hospitalization(
-            risk_result, prognosis
-        )
+        hospitalization = self._assess_hospitalization(risk_result, prognosis)
 
         # 6. Owner instructions
-        owner_instructions = self._generate_owner_instructions(
-            tier, disease, treatments
-        )
+        owner_instructions = self._generate_owner_instructions(tier, disease, treatments)
 
         # 7. Clinical summary
-        summary = self._generate_summary(
-            disease, tier, pathway, prognosis, treatments
-        )
+        summary = self._generate_summary(disease, tier, pathway, prognosis, treatments)
 
         return DecisionSupportResult(
             clinical_pathway=pathway,
@@ -269,57 +262,71 @@ class DecisionSupportEngine:
 
         # Risk-based alerts
         if risk_result.risk_tier == RiskTier.CRITICAL:
-            alerts.append(ClinicalAlert(
-                severity=AlertSeverity.CRITICAL,
-                message="Patient classified as CRITICAL risk — immediate intervention required",
-                category="risk",
-            ))
+            alerts.append(
+                ClinicalAlert(
+                    severity=AlertSeverity.CRITICAL,
+                    message="Patient classified as CRITICAL risk — immediate intervention required",
+                    category="risk",
+                )
+            )
         elif risk_result.risk_tier == RiskTier.HIGH:
-            alerts.append(ClinicalAlert(
-                severity=AlertSeverity.URGENT,
-                message="Patient classified as HIGH risk — close monitoring required",
-                category="risk",
-            ))
+            alerts.append(
+                ClinicalAlert(
+                    severity=AlertSeverity.URGENT,
+                    message="Patient classified as HIGH risk — close monitoring required",
+                    category="risk",
+                )
+            )
 
         # Hospitalization alert
         if risk_result.hospitalization_risk > 0.7:
-            alerts.append(ClinicalAlert(
-                severity=AlertSeverity.URGENT,
-                message=f"High hospitalization probability ({risk_result.hospitalization_risk:.0%})",
-                category="risk",
-            ))
+            alerts.append(
+                ClinicalAlert(
+                    severity=AlertSeverity.URGENT,
+                    message=f"High hospitalization probability ({risk_result.hospitalization_risk:.0%})",
+                    category="risk",
+                )
+            )
 
         # Mortality alert
         if prognosis.mortality_risk > 0.3:
-            alerts.append(ClinicalAlert(
-                severity=AlertSeverity.CRITICAL,
-                message=f"Elevated mortality risk ({prognosis.mortality_risk:.0%})",
-                category="prognosis",
-            ))
+            alerts.append(
+                ClinicalAlert(
+                    severity=AlertSeverity.CRITICAL,
+                    message=f"Elevated mortality risk ({prognosis.mortality_risk:.0%})",
+                    category="prognosis",
+                )
+            )
 
         # Low recovery alert
         if prognosis.recovery_probability < 0.3:
-            alerts.append(ClinicalAlert(
-                severity=AlertSeverity.WARNING,
-                message=f"Low recovery probability ({prognosis.recovery_probability:.0%})",
-                category="prognosis",
-            ))
+            alerts.append(
+                ClinicalAlert(
+                    severity=AlertSeverity.WARNING,
+                    message=f"Low recovery probability ({prognosis.recovery_probability:.0%})",
+                    category="prognosis",
+                )
+            )
 
         # Treatment concern: no high-success options
         if treatments and all(t.success_probability < 0.4 for t in treatments):
-            alerts.append(ClinicalAlert(
-                severity=AlertSeverity.WARNING,
-                message="No treatment option exceeds 40% success probability",
-                category="treatment",
-            ))
+            alerts.append(
+                ClinicalAlert(
+                    severity=AlertSeverity.WARNING,
+                    message="No treatment option exceeds 40% success probability",
+                    category="treatment",
+                )
+            )
 
         # Severity alert
         if disease_severity >= 9:
-            alerts.append(ClinicalAlert(
-                severity=AlertSeverity.URGENT,
-                message=f"Very high disease severity ({disease_severity}/10)",
-                category="risk",
-            ))
+            alerts.append(
+                ClinicalAlert(
+                    severity=AlertSeverity.URGENT,
+                    message=f"Very high disease severity ({disease_severity}/10)",
+                    category="risk",
+                )
+            )
 
         return alerts
 

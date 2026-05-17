@@ -49,34 +49,84 @@ HUSBANDRY_DATA: dict = {
         },
         "subtypes": [
             {
-                "name": "Brachycephalic Breeds (Pug, French Bulldog, English Bulldog, etc.)", "name_ja": "短頭種（パグ、フレンチブルドッグ、イングリッシュブルドッグ等）",
-                "temperature": {"en": "18–24°C — extremely heat-sensitive. Heat stroke risk is high above 26°C. NEVER leave in hot cars. Cool areas, fans, cooling mats essential in summer.", "ja": "18〜24℃ — 極めて暑さに弱い。26℃以上で熱中症のリスク大。絶対に暑い車内に放置しない。夏場は涼しいエリア、扇風機、クールマットが必須。"},
-                "diet": {"en": "Weight management critical (obesity worsens breathing). Slow feeder bowls (prevent gulping air → bloating). Elevated food bowls may help. Avoid overfeeding — these breeds gain weight easily.", "ja": "体重管理が最重要（肥満は呼吸を悪化させる）。早食い防止食器（空気の飲み込み→膨満を防ぐ）。高さのある食器が有効な場合も。過食に注意 — 太りやすい犬種。"},
-                "notes": {"en": "BOAS (Brachycephalic Obstructive Airway Syndrome) is lifelong. Skin fold infections need daily cleaning. Spinal issues (hemivertebrae). Corneal ulcers (protruding eyes). Difficulty with anesthesia. Cannot fly on many airlines.", "ja": "BOAS（短頭種気道閉塞症候群）は生涯の問題。皮膚のしわは毎日清掃が必要。脊椎の異常（半椎）。角膜潰瘍（突出した眼）。麻酔リスクが高い。多くの航空会社で搭乗不可。"},
+                "name": "Brachycephalic Breeds (Pug, French Bulldog, English Bulldog, etc.)",
+                "name_ja": "短頭種（パグ、フレンチブルドッグ、イングリッシュブルドッグ等）",
+                "temperature": {
+                    "en": "18–24°C — extremely heat-sensitive. Heat stroke risk is high above 26°C. NEVER leave in hot cars. Cool areas, fans, cooling mats essential in summer.",
+                    "ja": "18〜24℃ — 極めて暑さに弱い。26℃以上で熱中症のリスク大。絶対に暑い車内に放置しない。夏場は涼しいエリア、扇風機、クールマットが必須。",
+                },
+                "diet": {
+                    "en": "Weight management critical (obesity worsens breathing). Slow feeder bowls (prevent gulping air → bloating). Elevated food bowls may help. Avoid overfeeding — these breeds gain weight easily.",
+                    "ja": "体重管理が最重要（肥満は呼吸を悪化させる）。早食い防止食器（空気の飲み込み→膨満を防ぐ）。高さのある食器が有効な場合も。過食に注意 — 太りやすい犬種。",
+                },
+                "notes": {
+                    "en": "BOAS (Brachycephalic Obstructive Airway Syndrome) is lifelong. Skin fold infections need daily cleaning. Spinal issues (hemivertebrae). Corneal ulcers (protruding eyes). Difficulty with anesthesia. Cannot fly on many airlines.",
+                    "ja": "BOAS（短頭種気道閉塞症候群）は生涯の問題。皮膚のしわは毎日清掃が必要。脊椎の異常（半椎）。角膜潰瘍（突出した眼）。麻酔リスクが高い。多くの航空会社で搭乗不可。",
+                },
             },
             {
-                "name": "Large / Giant Breeds (Great Dane, St. Bernard, Newfoundland, etc.)", "name_ja": "大型・超大型犬（グレートデーン、セントバーナード、ニューファンドランド等）",
-                "housing": {"en": "Ample indoor space. Orthopedic beds essential (joint support). Non-slip flooring important (hip dysplasia). Ramps instead of stairs for older dogs. Vehicle ramp for car access.", "ja": "十分な室内スペース。整形外科用ベッド必須（関節サポート）。滑りにくい床が重要（股関節形成不全）。シニア犬には階段の代わりにスロープ。車の乗り降り用のスロープ。"},
-                "diet": {"en": "Large-breed specific food (controlled calcium/phosphorus for proper growth). Slow growth rate prevents orthopedic issues. 2–3 small meals/day (bloat/GDV prevention). Elevated feeders controversial — consult vet.", "ja": "大型犬専用フード（適正な成長のためCa/P比管理）。ゆっくりとした成長が骨格異常を予防。1日2〜3回の分食（胃拡張・胃捻転予防）。食器の高さは獣医に相談。"},
-                "notes": {"en": "Lifespan 6–10 years (shorter than small breeds). GDV (bloat) is life-threatening emergency — know the signs. Hip/elbow dysplasia, osteosarcoma common. Cardiomyopathy in some breeds. Higher anesthesia drug costs.", "ja": "寿命6〜10年（小型犬より短い）。胃拡張・胃捻転（GDV）は致死的緊急疾患 — 徴候を知っておく。股関節/肘関節形成不全、骨肉腫が多い。一部犬種で心筋症。麻酔薬コストが高い。"},
+                "name": "Large / Giant Breeds (Great Dane, St. Bernard, Newfoundland, etc.)",
+                "name_ja": "大型・超大型犬（グレートデーン、セントバーナード、ニューファンドランド等）",
+                "housing": {
+                    "en": "Ample indoor space. Orthopedic beds essential (joint support). Non-slip flooring important (hip dysplasia). Ramps instead of stairs for older dogs. Vehicle ramp for car access.",
+                    "ja": "十分な室内スペース。整形外科用ベッド必須（関節サポート）。滑りにくい床が重要（股関節形成不全）。シニア犬には階段の代わりにスロープ。車の乗り降り用のスロープ。",
+                },
+                "diet": {
+                    "en": "Large-breed specific food (controlled calcium/phosphorus for proper growth). Slow growth rate prevents orthopedic issues. 2–3 small meals/day (bloat/GDV prevention). Elevated feeders controversial — consult vet.",
+                    "ja": "大型犬専用フード（適正な成長のためCa/P比管理）。ゆっくりとした成長が骨格異常を予防。1日2〜3回の分食（胃拡張・胃捻転予防）。食器の高さは獣医に相談。",
+                },
+                "notes": {
+                    "en": "Lifespan 6–10 years (shorter than small breeds). GDV (bloat) is life-threatening emergency — know the signs. Hip/elbow dysplasia, osteosarcoma common. Cardiomyopathy in some breeds. Higher anesthesia drug costs.",
+                    "ja": "寿命6〜10年（小型犬より短い）。胃拡張・胃捻転（GDV）は致死的緊急疾患 — 徴候を知っておく。股関節/肘関節形成不全、骨肉腫が多い。一部犬種で心筋症。麻酔薬コストが高い。",
+                },
             },
             {
-                "name": "Small / Toy Breeds (Chihuahua, Yorkshire Terrier, Toy Poodle, etc.)", "name_ja": "小型・超小型犬（チワワ、ヨークシャーテリア、トイプードル等）",
-                "temperature": {"en": "Prefer warm environments — more susceptible to cold due to small body mass. Sweaters/coats helpful in winter. Warm bedding essential.", "ja": "暖かい環境を好む — 体が小さいため寒さに弱い。冬は洋服/コートが有効。暖かい寝床が必須。"},
-                "diet": {"en": "Small-breed specific food (higher calorie density, smaller kibble). Prone to hypoglycemia (especially puppies) — frequent small meals. Dental disease extremely common — dental-specific diet or chews.", "ja": "小型犬専用フード（高カロリー密度、小粒）。低血糖になりやすい（特に子犬）— 少量頻回の食事。歯周病が非常に多い — デンタル用フードやガム。"},
-                "notes": {"en": "Lifespan 12–18+ years. Patellar luxation, tracheal collapse, dental disease very common. Fontanelles (open skull) in some toy breeds. Fragile — risk of injury from falls, being stepped on. Prone to anxiety.", "ja": "寿命12〜18年以上。膝蓋骨脱臼、気管虚脱、歯周病が非常に多い。一部超小型犬は泉門が開いたまま。骨折しやすい — 落下、踏まれる危険。不安になりやすい傾向。"},
+                "name": "Small / Toy Breeds (Chihuahua, Yorkshire Terrier, Toy Poodle, etc.)",
+                "name_ja": "小型・超小型犬（チワワ、ヨークシャーテリア、トイプードル等）",
+                "temperature": {
+                    "en": "Prefer warm environments — more susceptible to cold due to small body mass. Sweaters/coats helpful in winter. Warm bedding essential.",
+                    "ja": "暖かい環境を好む — 体が小さいため寒さに弱い。冬は洋服/コートが有効。暖かい寝床が必須。",
+                },
+                "diet": {
+                    "en": "Small-breed specific food (higher calorie density, smaller kibble). Prone to hypoglycemia (especially puppies) — frequent small meals. Dental disease extremely common — dental-specific diet or chews.",
+                    "ja": "小型犬専用フード（高カロリー密度、小粒）。低血糖になりやすい（特に子犬）— 少量頻回の食事。歯周病が非常に多い — デンタル用フードやガム。",
+                },
+                "notes": {
+                    "en": "Lifespan 12–18+ years. Patellar luxation, tracheal collapse, dental disease very common. Fontanelles (open skull) in some toy breeds. Fragile — risk of injury from falls, being stepped on. Prone to anxiety.",
+                    "ja": "寿命12〜18年以上。膝蓋骨脱臼、気管虚脱、歯周病が非常に多い。一部超小型犬は泉門が開いたまま。骨折しやすい — 落下、踏まれる危険。不安になりやすい傾向。",
+                },
             },
             {
-                "name": "Working / Sporting Breeds (Labrador, Golden Retriever, German Shepherd, Border Collie, etc.)", "name_ja": "使役犬・スポーティング種（ラブラドール、ゴールデンレトリーバー、ジャーマンシェパード、ボーダーコリー等）",
-                "diet": {"en": "High-quality protein for muscle maintenance. Active dogs need 20–40% more calories than sedentary. Joint supplements (glucosamine, omega-3) beneficial early. Labrador/Golden: notorious overeaters — strict portion control.", "ja": "筋肉維持のための良質なタンパク質。活動的な犬は非活動犬より20〜40%多いカロリーが必要。関節サプリメント（グルコサミン、オメガ3）を早期から。ラブ/ゴールデン：過食で有名 — 厳格な量管理。"},
-                "enrichment": {"en": "Physical exercise 60–120 min/day (breed-dependent). Mental stimulation critical (puzzle toys, training, nose work). Herding breeds (Border Collie, Aussie) need a 'job' — boredom leads to destructive behavior.", "ja": "1日60〜120分の運動（犬種による）。精神的刺激が不可欠（知育玩具、トレーニング、ノーズワーク）。牧羊犬種（ボーダーコリー、オゥシー）には「仕事」が必要 — 退屈は破壊行動に。"},
-                "notes": {"en": "Lifespan 10–14 years. Hip/elbow dysplasia screening (OFA/PennHIP) recommended. Labrador/Golden: high cancer rates. GSD: degenerative myelopathy risk. Sporting breeds: ear infections common (floppy ears + water exposure). Regular training essential for well-being.", "ja": "寿命10〜14年。股関節/肘関節形成不全のスクリーニング推奨。ラブ/ゴールデン：がんの発生率が高い。GSD：変性性脊髄症のリスク。スポーティング種：垂れ耳＋水濡れで耳炎が多い。定期的なトレーニングが健康に不可欠。"},
+                "name": "Working / Sporting Breeds (Labrador, Golden Retriever, German Shepherd, Border Collie, etc.)",
+                "name_ja": "使役犬・スポーティング種（ラブラドール、ゴールデンレトリーバー、ジャーマンシェパード、ボーダーコリー等）",
+                "diet": {
+                    "en": "High-quality protein for muscle maintenance. Active dogs need 20–40% more calories than sedentary. Joint supplements (glucosamine, omega-3) beneficial early. Labrador/Golden: notorious overeaters — strict portion control.",
+                    "ja": "筋肉維持のための良質なタンパク質。活動的な犬は非活動犬より20〜40%多いカロリーが必要。関節サプリメント（グルコサミン、オメガ3）を早期から。ラブ/ゴールデン：過食で有名 — 厳格な量管理。",
+                },
+                "enrichment": {
+                    "en": "Physical exercise 60–120 min/day (breed-dependent). Mental stimulation critical (puzzle toys, training, nose work). Herding breeds (Border Collie, Aussie) need a 'job' — boredom leads to destructive behavior.",
+                    "ja": "1日60〜120分の運動（犬種による）。精神的刺激が不可欠（知育玩具、トレーニング、ノーズワーク）。牧羊犬種（ボーダーコリー、オゥシー）には「仕事」が必要 — 退屈は破壊行動に。",
+                },
+                "notes": {
+                    "en": "Lifespan 10–14 years. Hip/elbow dysplasia screening (OFA/PennHIP) recommended. Labrador/Golden: high cancer rates. GSD: degenerative myelopathy risk. Sporting breeds: ear infections common (floppy ears + water exposure). Regular training essential for well-being.",
+                    "ja": "寿命10〜14年。股関節/肘関節形成不全のスクリーニング推奨。ラブ/ゴールデン：がんの発生率が高い。GSD：変性性脊髄症のリスク。スポーティング種：垂れ耳＋水濡れで耳炎が多い。定期的なトレーニングが健康に不可欠。",
+                },
             },
             {
-                "name": "Sighthounds (Greyhound, Whippet, Italian Greyhound, Saluki, etc.)", "name_ja": "サイトハウンド（グレーハウンド、ウィペット、イタリアングレーハウンド、サルーキ等）",
-                "temperature": {"en": "Very cold-sensitive (minimal body fat, thin coat). Winter coats/sweaters essential. Greyhounds especially prone to hypothermia. Warm bedding (they love soft beds).", "ja": "寒さに非常に弱い（体脂肪が少なく被毛が薄い）。冬は洋服/コートが必須。グレーハウンドは特に低体温になりやすい。暖かい寝床（柔らかいベッドを好む）。"},
-                "diet": {"en": "Higher protein needs. Lean body type is normal — do NOT overfeed to 'fill out'. Smaller, frequent meals for deep-chested breeds (bloat prevention). Some sighthounds have unique drug sensitivities.", "ja": "タンパク質の必要量が高い。細身の体型は正常 — 太らせようとしない。深胸種は少量頻回の食事（胃捻転予防）。一部のサイトハウンドは特異的な薬物感受性あり。"},
-                "notes": {"en": "Unique physiology: higher RBC/hemoglobin (normal for breed — don't treat as polycythemia), different anesthesia protocols (thiopental contraindicated, propofol preferred), thin skin tears easily. Prey drive management essential (secure fencing). Retired racers may have track injuries.", "ja": "特殊な生理：RBC/ヘモグロビンが高い（犬種正常値 — 多血症と間違えない）。麻酔プロトコルが異なる（チオペンタール禁忌、プロポフォール推奨）。皮膚が薄く裂けやすい。追跡本能の管理（確実な柵）。元競走犬はレース中の怪我の既往があることも。"},
+                "name": "Sighthounds (Greyhound, Whippet, Italian Greyhound, Saluki, etc.)",
+                "name_ja": "サイトハウンド（グレーハウンド、ウィペット、イタリアングレーハウンド、サルーキ等）",
+                "temperature": {
+                    "en": "Very cold-sensitive (minimal body fat, thin coat). Winter coats/sweaters essential. Greyhounds especially prone to hypothermia. Warm bedding (they love soft beds).",
+                    "ja": "寒さに非常に弱い（体脂肪が少なく被毛が薄い）。冬は洋服/コートが必須。グレーハウンドは特に低体温になりやすい。暖かい寝床（柔らかいベッドを好む）。",
+                },
+                "diet": {
+                    "en": "Higher protein needs. Lean body type is normal — do NOT overfeed to 'fill out'. Smaller, frequent meals for deep-chested breeds (bloat prevention). Some sighthounds have unique drug sensitivities.",
+                    "ja": "タンパク質の必要量が高い。細身の体型は正常 — 太らせようとしない。深胸種は少量頻回の食事（胃捻転予防）。一部のサイトハウンドは特異的な薬物感受性あり。",
+                },
+                "notes": {
+                    "en": "Unique physiology: higher RBC/hemoglobin (normal for breed — don't treat as polycythemia), different anesthesia protocols (thiopental contraindicated, propofol preferred), thin skin tears easily. Prey drive management essential (secure fencing). Retired racers may have track injuries.",
+                    "ja": "特殊な生理：RBC/ヘモグロビンが高い（犬種正常値 — 多血症と間違えない）。麻酔プロトコルが異なる（チオペンタール禁忌、プロポフォール推奨）。皮膚が薄く裂けやすい。追跡本能の管理（確実な柵）。元競走犬はレース中の怪我の既往があることも。",
+                },
             },
         ],
     },
@@ -116,31 +166,72 @@ HUSBANDRY_DATA: dict = {
         },
         "subtypes": [
             {
-                "name": "Brachycephalic (Persian, Exotic Shorthair, Himalayan)", "name_ja": "短頭種（ペルシャ、エキゾチックショートヘア、ヒマラヤン）",
-                "housing": {"en": "Air-conditioned environment recommended (heat-sensitive). Eye-level food/water bowls (flat face makes eating from floor difficult). Daily eye cleaning essential.", "ja": "エアコン環境推奨（暑さに弱い）。顔の高さの食器・水入れ（扁平な顔のため床からの食事が困難）。毎日の目の周りの清掃が必須。"},
-                "diet": {"en": "Flat-face specific kibble (easier to pick up). Wet food often preferred (easier to eat). Monitor for obesity — less active than other breeds.", "ja": "扁平顔用の特殊形状キブル（拾いやすい）。ウェットフードを好むことが多い（食べやすい）。肥満に注意 — 他の品種より活動量が少ない。"},
-                "notes": {"en": "Prone to: brachycephalic airway issues, chronic eye discharge (epiphora), PKD (polycystic kidney disease — screen parents), dental malocclusion. Persian: daily brushing essential (matting). Anesthesia risk higher.", "ja": "好発疾患：短頭種気道障害、慢性流涙（エピフォーラ）、PKD（多発性嚢胞腎 — 親の検査を）、不正咬合。ペルシャ：毎日のブラッシング必須（毛玉）。麻酔リスクが高い。"},
+                "name": "Brachycephalic (Persian, Exotic Shorthair, Himalayan)",
+                "name_ja": "短頭種（ペルシャ、エキゾチックショートヘア、ヒマラヤン）",
+                "housing": {
+                    "en": "Air-conditioned environment recommended (heat-sensitive). Eye-level food/water bowls (flat face makes eating from floor difficult). Daily eye cleaning essential.",
+                    "ja": "エアコン環境推奨（暑さに弱い）。顔の高さの食器・水入れ（扁平な顔のため床からの食事が困難）。毎日の目の周りの清掃が必須。",
+                },
+                "diet": {
+                    "en": "Flat-face specific kibble (easier to pick up). Wet food often preferred (easier to eat). Monitor for obesity — less active than other breeds.",
+                    "ja": "扁平顔用の特殊形状キブル（拾いやすい）。ウェットフードを好むことが多い（食べやすい）。肥満に注意 — 他の品種より活動量が少ない。",
+                },
+                "notes": {
+                    "en": "Prone to: brachycephalic airway issues, chronic eye discharge (epiphora), PKD (polycystic kidney disease — screen parents), dental malocclusion. Persian: daily brushing essential (matting). Anesthesia risk higher.",
+                    "ja": "好発疾患：短頭種気道障害、慢性流涙（エピフォーラ）、PKD（多発性嚢胞腎 — 親の検査を）、不正咬合。ペルシャ：毎日のブラッシング必須（毛玉）。麻酔リスクが高い。",
+                },
             },
             {
-                "name": "Large Breeds (Maine Coon, Norwegian Forest Cat, Ragdoll)", "name_ja": "大型種（メインクーン、ノルウェージャンフォレストキャット、ラグドール）",
-                "housing": {"en": "Sturdy cat trees (weight-rated for 8+ kg). Extra-large litter boxes. Reinforced shelves. More floor space needed. Larger carriers for vet visits.", "ja": "頑丈なキャットタワー（8kg以上対応）。特大トイレ。補強された棚。より広い床面積が必要。通院用に大きめのキャリー。"},
-                "diet": {"en": "Large-breed specific food available. Slow growth important (reaches full size at 3–5 years). Joint supplements (glucosamine) may benefit. Monitor weight — easy to overfeed.", "ja": "大型猫専用フードあり。ゆっくりとした成長が重要（3〜5歳で成猫サイズ）。関節サプリメント（グルコサミン）が有効な場合も。体重管理 — 過食になりやすい。"},
-                "notes": {"en": "Maine Coon: HCM (hypertrophic cardiomyopathy) screening recommended, hip dysplasia possible. Ragdoll: HCM risk, docile temperament ('floppy' when held). Norwegian: generally healthy, thick double coat needs regular grooming.", "ja": "メインクーン：HCM（肥大型心筋症）のスクリーニング推奨、股関節形成不全の可能性。ラグドール：HCMリスク、穏やかな気質（抱くと脱力）。ノルウェージャン：比較的健康、厚いダブルコートの定期グルーミング。"},
+                "name": "Large Breeds (Maine Coon, Norwegian Forest Cat, Ragdoll)",
+                "name_ja": "大型種（メインクーン、ノルウェージャンフォレストキャット、ラグドール）",
+                "housing": {
+                    "en": "Sturdy cat trees (weight-rated for 8+ kg). Extra-large litter boxes. Reinforced shelves. More floor space needed. Larger carriers for vet visits.",
+                    "ja": "頑丈なキャットタワー（8kg以上対応）。特大トイレ。補強された棚。より広い床面積が必要。通院用に大きめのキャリー。",
+                },
+                "diet": {
+                    "en": "Large-breed specific food available. Slow growth important (reaches full size at 3–5 years). Joint supplements (glucosamine) may benefit. Monitor weight — easy to overfeed.",
+                    "ja": "大型猫専用フードあり。ゆっくりとした成長が重要（3〜5歳で成猫サイズ）。関節サプリメント（グルコサミン）が有効な場合も。体重管理 — 過食になりやすい。",
+                },
+                "notes": {
+                    "en": "Maine Coon: HCM (hypertrophic cardiomyopathy) screening recommended, hip dysplasia possible. Ragdoll: HCM risk, docile temperament ('floppy' when held). Norwegian: generally healthy, thick double coat needs regular grooming.",
+                    "ja": "メインクーン：HCM（肥大型心筋症）のスクリーニング推奨、股関節形成不全の可能性。ラグドール：HCMリスク、穏やかな気質（抱くと脱力）。ノルウェージャン：比較的健康、厚いダブルコートの定期グルーミング。",
+                },
             },
             {
-                "name": "Hairless / Low-maintenance (Sphynx, Devon Rex, Cornish Rex)", "name_ja": "無毛・特殊被毛種（スフィンクス、デボンレックス、コーニッシュレックス）",
-                "temperature": {"en": "24–28°C — higher than normal cats (no/thin fur insulation). Cat sweaters and heated beds essential. Avoid cold drafts.", "ja": "24〜28℃ — 通常の猫より高めに（毛がないまたは薄い）。猫用セーターとヒーター付きベッドが必須。冷たい隙間風を避ける。"},
-                "notes": {"en": "Sphynx: weekly baths needed (skin oil buildup), ear cleaning 1–2x/week, sunburn risk. HCM screening essential. Devon/Cornish Rex: fragile curly coat, prone to yeast infections in ears. Higher calorie needs for thermoregulation.", "ja": "スフィンクス：週1回の入浴（皮脂蓄積）、耳掃除週1〜2回、日焼けのリスク。HCMスクリーニング必須。デボン/コーニッシュ：繊細な巻き毛、耳の酵母感染に注意。体温維持のためカロリー需要が高い。"},
+                "name": "Hairless / Low-maintenance (Sphynx, Devon Rex, Cornish Rex)",
+                "name_ja": "無毛・特殊被毛種（スフィンクス、デボンレックス、コーニッシュレックス）",
+                "temperature": {
+                    "en": "24–28°C — higher than normal cats (no/thin fur insulation). Cat sweaters and heated beds essential. Avoid cold drafts.",
+                    "ja": "24〜28℃ — 通常の猫より高めに（毛がないまたは薄い）。猫用セーターとヒーター付きベッドが必須。冷たい隙間風を避ける。",
+                },
+                "notes": {
+                    "en": "Sphynx: weekly baths needed (skin oil buildup), ear cleaning 1–2x/week, sunburn risk. HCM screening essential. Devon/Cornish Rex: fragile curly coat, prone to yeast infections in ears. Higher calorie needs for thermoregulation.",
+                    "ja": "スフィンクス：週1回の入浴（皮脂蓄積）、耳掃除週1〜2回、日焼けのリスク。HCMスクリーニング必須。デボン/コーニッシュ：繊細な巻き毛、耳の酵母感染に注意。体温維持のためカロリー需要が高い。",
+                },
             },
             {
-                "name": "Bengal / Active Hybrid Breeds (Bengal, Savannah, Abyssinian)", "name_ja": "ベンガル / 活発なハイブリッド種（ベンガル、サバンナ、アビシニアン）",
-                "housing": {"en": "Cat-proofed rooms essential (extremely curious, destructive if bored). Tall cat trees with multiple levels. Running wheels popular. Secure windows/doors (escape artists). Consider catio (enclosed outdoor space).", "ja": "猫対策した部屋が必須（極めて好奇心旺盛、退屈だと破壊的）。多段の高いキャットタワー。猫用回し車が人気。窓/ドアの確実な施錠（脱走の名人）。キャティオ（囲い付き屋外スペース）の検討を。"},
-                "enrichment": {"en": "High-energy play 30+ min/day. Interactive puzzle feeders. Water play (many Bengals love water). Clicker training (highly intelligent). Companionship — consider a pair. Without enrichment, behavioral issues are guaranteed.", "ja": "1日30分以上の激しい遊び。インタラクティブなパズルフィーダー。水遊び（ベンガルは水好きが多い）。クリッカートレーニング（非常に高い知能）。仲間を検討 — ペア飼育。エンリッチメントなしでは問題行動は確実。"},
-                "notes": {"en": "Bengal: HCM screening, PRA-b (progressive retinal atrophy) testing. Savannah: F1–F3 generations may be restricted by law — check local regulations. Very vocal. NOT for first-time cat owners. May not get along with docile breeds.", "ja": "ベンガル：HCMスクリーニング、PRA-b（進行性網膜萎縮症）検査。サバンナ：F1〜F3世代は法規制の対象 — 地域の法律確認を。非常に声が大きい。猫初心者には不向き。穏やかな品種とは合わない場合も。"},
+                "name": "Bengal / Active Hybrid Breeds (Bengal, Savannah, Abyssinian)",
+                "name_ja": "ベンガル / 活発なハイブリッド種（ベンガル、サバンナ、アビシニアン）",
+                "housing": {
+                    "en": "Cat-proofed rooms essential (extremely curious, destructive if bored). Tall cat trees with multiple levels. Running wheels popular. Secure windows/doors (escape artists). Consider catio (enclosed outdoor space).",
+                    "ja": "猫対策した部屋が必須（極めて好奇心旺盛、退屈だと破壊的）。多段の高いキャットタワー。猫用回し車が人気。窓/ドアの確実な施錠（脱走の名人）。キャティオ（囲い付き屋外スペース）の検討を。",
+                },
+                "enrichment": {
+                    "en": "High-energy play 30+ min/day. Interactive puzzle feeders. Water play (many Bengals love water). Clicker training (highly intelligent). Companionship — consider a pair. Without enrichment, behavioral issues are guaranteed.",
+                    "ja": "1日30分以上の激しい遊び。インタラクティブなパズルフィーダー。水遊び（ベンガルは水好きが多い）。クリッカートレーニング（非常に高い知能）。仲間を検討 — ペア飼育。エンリッチメントなしでは問題行動は確実。",
+                },
+                "notes": {
+                    "en": "Bengal: HCM screening, PRA-b (progressive retinal atrophy) testing. Savannah: F1–F3 generations may be restricted by law — check local regulations. Very vocal. NOT for first-time cat owners. May not get along with docile breeds.",
+                    "ja": "ベンガル：HCMスクリーニング、PRA-b（進行性網膜萎縮症）検査。サバンナ：F1〜F3世代は法規制の対象 — 地域の法律確認を。非常に声が大きい。猫初心者には不向き。穏やかな品種とは合わない場合も。",
+                },
             },
             {
-                "name": "Scottish Fold / Fold-eared Breeds", "name_ja": "スコティッシュフォールド",
-                "notes": {"en": "Osteochondrodysplasia (OCD) is inherent to ALL fold-eared cats — cartilage defect that causes the folded ears also affects joints. Fold × Fold breeding is unethical (severe OCD). Joint pain/stiffness common from young age. Ear infections: folded ears trap moisture — clean 1–2x/week. Monitor for signs of pain (reluctance to jump, stiff gait). Tail stiffness is an early OCD sign. Consider: some countries have banned Scottish Fold breeding due to welfare concerns.", "ja": "骨軟骨異形成症（OCD）は全ての折れ耳猫に内在する — 耳を折る軟骨欠損は関節にも影響。フォールド×フォールドの交配は非倫理的（重度OCD）。若齢から関節痛・硬直が多い。耳感染：折れ耳に湿気がこもる — 週1〜2回清掃。痛みの徴候を監視（ジャンプの拒否、硬い歩様）。尻尾の硬直はOCDの初期徴候。注意：動物福祉の観点から繁殖を禁止している国もある。"},
+                "name": "Scottish Fold / Fold-eared Breeds",
+                "name_ja": "スコティッシュフォールド",
+                "notes": {
+                    "en": "Osteochondrodysplasia (OCD) is inherent to ALL fold-eared cats — cartilage defect that causes the folded ears also affects joints. Fold × Fold breeding is unethical (severe OCD). Joint pain/stiffness common from young age. Ear infections: folded ears trap moisture — clean 1–2x/week. Monitor for signs of pain (reluctance to jump, stiff gait). Tail stiffness is an early OCD sign. Consider: some countries have banned Scottish Fold breeding due to welfare concerns.",
+                    "ja": "骨軟骨異形成症（OCD）は全ての折れ耳猫に内在する — 耳を折る軟骨欠損は関節にも影響。フォールド×フォールドの交配は非倫理的（重度OCD）。若齢から関節痛・硬直が多い。耳感染：折れ耳に湿気がこもる — 週1〜2回清掃。痛みの徴候を監視（ジャンプの拒否、硬い歩様）。尻尾の硬直はOCDの初期徴候。注意：動物福祉の観点から繁殖を禁止している国もある。",
+                },
             },
         ],
     },
@@ -180,28 +271,68 @@ HUSBANDRY_DATA: dict = {
         },
         "subtypes": [
             {
-                "name": "Dwarf Breeds (Netherland Dwarf, Holland Lop, etc.)", "name_ja": "小型種（ネザーランドドワーフ、ホーランドロップ等）",
-                "housing": {"en": "Minimum cage 60×90 cm + daily free-roaming. Smaller body but equally active — don't underestimate space needs. Lower platforms to prevent fall injuries (small, fragile bones).", "ja": "最低ケージ60×90cm＋毎日の放し飼い。小さいが同等に活発 — スペース需要を過小評価しない。落下事故防止のため低い段差に（小さく骨が脆い）。"},
-                "diet": {"en": "Timothy hay unlimited. Pellets: 1/8 cup/day (small breed, easy to overfeed). Fewer leafy greens than large breeds (proportional). Monitor weight closely — obesity common in small breeds.", "ja": "チモシー牧草食べ放題。ペレット：1/8カップ/日（小型種は過食になりやすい）。葉物は大型種より少なめ（体格に応じて）。体重管理を厳密に — 小型種は肥満になりやすい。"},
-                "notes": {"en": "Lifespan 8–12 years. Dental malocclusion very common in dwarfs (shortened skull). Holland Lops: ear infections due to lop ears trapping moisture. Netherland Dwarf: can be skittish — patient handling needed.", "ja": "寿命8〜12年。不正咬合がドワーフ種に非常に多い（短頭型頭蓋）。ホーランドロップ：垂れ耳に湿気がこもり耳炎になりやすい。ネザーランドドワーフ：臆病な傾向 — 根気強いハンドリングが必要。"},
+                "name": "Dwarf Breeds (Netherland Dwarf, Holland Lop, etc.)",
+                "name_ja": "小型種（ネザーランドドワーフ、ホーランドロップ等）",
+                "housing": {
+                    "en": "Minimum cage 60×90 cm + daily free-roaming. Smaller body but equally active — don't underestimate space needs. Lower platforms to prevent fall injuries (small, fragile bones).",
+                    "ja": "最低ケージ60×90cm＋毎日の放し飼い。小さいが同等に活発 — スペース需要を過小評価しない。落下事故防止のため低い段差に（小さく骨が脆い）。",
+                },
+                "diet": {
+                    "en": "Timothy hay unlimited. Pellets: 1/8 cup/day (small breed, easy to overfeed). Fewer leafy greens than large breeds (proportional). Monitor weight closely — obesity common in small breeds.",
+                    "ja": "チモシー牧草食べ放題。ペレット：1/8カップ/日（小型種は過食になりやすい）。葉物は大型種より少なめ（体格に応じて）。体重管理を厳密に — 小型種は肥満になりやすい。",
+                },
+                "notes": {
+                    "en": "Lifespan 8–12 years. Dental malocclusion very common in dwarfs (shortened skull). Holland Lops: ear infections due to lop ears trapping moisture. Netherland Dwarf: can be skittish — patient handling needed.",
+                    "ja": "寿命8〜12年。不正咬合がドワーフ種に非常に多い（短頭型頭蓋）。ホーランドロップ：垂れ耳に湿気がこもり耳炎になりやすい。ネザーランドドワーフ：臆病な傾向 — 根気強いハンドリングが必要。",
+                },
             },
             {
-                "name": "Medium Breeds (Mini Rex, Dutch, etc.)", "name_ja": "中型種（ミニレッキス、ダッチ等）",
-                "housing": {"en": "Minimum cage 75×120 cm + 4+ hours free-roaming daily. Sturdy platforms for jumping. Rex breeds: sensitive feet — fleece liners preferred over hard surfaces.", "ja": "最低ケージ75×120cm＋毎日4時間以上の放し飼い。ジャンプ用の頑丈な段差。レッキス種：足裏が敏感 — 硬い床よりフリースライナー推奨。"},
-                "diet": {"en": "Timothy hay unlimited. Pellets: 1/4 cup/day. Generous leafy greens (2 packed cups/day). Good balance of size vs metabolism.", "ja": "チモシー牧草食べ放題。ペレット：1/4カップ/日。たっぷりの葉物野菜（1日パック2カップ分）。体格と代謝のバランスが良い。"},
-                "notes": {"en": "Lifespan 8–12 years. Often considered ideal pet rabbits — manageable size, generally friendly. Mini Rex: velvet-like fur, sore hocks on hard surfaces. Dutch: active and social.", "ja": "寿命8〜12年。ペットウサギとして理想的とされることが多い — 扱いやすいサイズ、概して人懐こい。ミニレッキス：ビロードのような毛、硬い床でソアホック。ダッチ：活発で社交的。"},
+                "name": "Medium Breeds (Mini Rex, Dutch, etc.)",
+                "name_ja": "中型種（ミニレッキス、ダッチ等）",
+                "housing": {
+                    "en": "Minimum cage 75×120 cm + 4+ hours free-roaming daily. Sturdy platforms for jumping. Rex breeds: sensitive feet — fleece liners preferred over hard surfaces.",
+                    "ja": "最低ケージ75×120cm＋毎日4時間以上の放し飼い。ジャンプ用の頑丈な段差。レッキス種：足裏が敏感 — 硬い床よりフリースライナー推奨。",
+                },
+                "diet": {
+                    "en": "Timothy hay unlimited. Pellets: 1/4 cup/day. Generous leafy greens (2 packed cups/day). Good balance of size vs metabolism.",
+                    "ja": "チモシー牧草食べ放題。ペレット：1/4カップ/日。たっぷりの葉物野菜（1日パック2カップ分）。体格と代謝のバランスが良い。",
+                },
+                "notes": {
+                    "en": "Lifespan 8–12 years. Often considered ideal pet rabbits — manageable size, generally friendly. Mini Rex: velvet-like fur, sore hocks on hard surfaces. Dutch: active and social.",
+                    "ja": "寿命8〜12年。ペットウサギとして理想的とされることが多い — 扱いやすいサイズ、概して人懐こい。ミニレッキス：ビロードのような毛、硬い床でソアホック。ダッチ：活発で社交的。",
+                },
             },
             {
-                "name": "Large/Giant Breeds (Flemish Giant, French Lop, etc.)", "name_ja": "大型種（フレミッシュジャイアント、フレンチロップ等）",
-                "housing": {"en": "Large pen or dedicated room — standard cages too small. Minimum 120×180 cm. Reinforced flooring (heavy body weight). Low platforms only (spinal injuries from falls).", "ja": "大型ペンまたは専用部屋 — 標準ケージでは小さすぎる。最低120×180cm。補強された床（体重が重い）。段差は低くする（落下で脊椎損傷の危険）。"},
-                "diet": {"en": "Timothy hay unlimited (they eat a LOT). Pellets: 1/4–1/2 cup/day (weight-dependent, up to 6+ kg). Large amounts of leafy greens. Higher calorie needs but still monitor for obesity.", "ja": "チモシー牧草食べ放題（大量に食べる）。ペレット：1/4〜1/2カップ/日（体重6kg以上にもなるため体重に応じて）。大量の葉物野菜。カロリー需要は高いが肥満に注意。"},
-                "notes": {"en": "Lifespan 5–8 years (shorter than small breeds). Spondylosis and arthritis common due to body weight. Heart disease more prevalent. Gentle giants — excellent temperament but need experienced handling due to size.", "ja": "寿命5〜8年（小型種より短い）。体重による脊椎症・関節炎が多い。心疾患も多い。穏やかな巨人 — 優れた気質だがサイズのため経験者向けのハンドリング。"},
+                "name": "Large/Giant Breeds (Flemish Giant, French Lop, etc.)",
+                "name_ja": "大型種（フレミッシュジャイアント、フレンチロップ等）",
+                "housing": {
+                    "en": "Large pen or dedicated room — standard cages too small. Minimum 120×180 cm. Reinforced flooring (heavy body weight). Low platforms only (spinal injuries from falls).",
+                    "ja": "大型ペンまたは専用部屋 — 標準ケージでは小さすぎる。最低120×180cm。補強された床（体重が重い）。段差は低くする（落下で脊椎損傷の危険）。",
+                },
+                "diet": {
+                    "en": "Timothy hay unlimited (they eat a LOT). Pellets: 1/4–1/2 cup/day (weight-dependent, up to 6+ kg). Large amounts of leafy greens. Higher calorie needs but still monitor for obesity.",
+                    "ja": "チモシー牧草食べ放題（大量に食べる）。ペレット：1/4〜1/2カップ/日（体重6kg以上にもなるため体重に応じて）。大量の葉物野菜。カロリー需要は高いが肥満に注意。",
+                },
+                "notes": {
+                    "en": "Lifespan 5–8 years (shorter than small breeds). Spondylosis and arthritis common due to body weight. Heart disease more prevalent. Gentle giants — excellent temperament but need experienced handling due to size.",
+                    "ja": "寿命5〜8年（小型種より短い）。体重による脊椎症・関節炎が多い。心疾患も多い。穏やかな巨人 — 優れた気質だがサイズのため経験者向けのハンドリング。",
+                },
             },
             {
-                "name": "Angora / Long-haired (English Angora, French Angora, Jersey Wooly)", "name_ja": "アンゴラ / 長毛種（イングリッシュアンゴラ、フレンチアンゴラ、ジャージーウーリー）",
-                "housing": {"en": "Wire-bottom cage sections may be needed (wool gets soiled on solid flooring). Extra-clean environment essential. Grooming table or area. Avoid hay racks that tangle wool.", "ja": "ワイヤーボトム区画が必要な場合も（固い床では毛が汚れる）。特別に清潔な環境が必須。グルーミング台またはエリア。毛が絡まる牧草ラックは避ける。"},
-                "diet": {"en": "Timothy hay unlimited (critical for wool block prevention — ingested fur can cause fatal GI blockage). Papaya/pineapple enzyme supplements may help. Higher protein needs during heavy wool growth. Extra water intake important.", "ja": "チモシー牧草食べ放題（ウールブロック予防に不可欠 — 飲み込んだ毛が致死的な消化管閉塞の原因）。パパイヤ/パイナップル酵素サプリメントが有効な場合も。毛の成長期は高タンパク。十分な水分摂取が重要。"},
-                "notes": {"en": "Daily grooming MANDATORY (30+ min) — matting occurs rapidly and causes skin infections, flystrike. Shearing/trimming every 3 months. Wool block (trichobezoar) is life-threatening — recognize signs early (decreased appetite, small droppings). NOT beginner rabbits. Temperature: more heat-sensitive than short-haired breeds due to wool insulation.", "ja": "毎日のグルーミングが必須（30分以上）— 毛玉は急速に形成され皮膚感染症・ハエウジ症の原因。3ヶ月ごとに刈り込み/トリミング。ウールブロック（毛球症）は致死的 — 徴候を早期に認識（食欲低下、糞の縮小）。初心者向けではない。温度：毛の断熱効果で短毛種より暑さに弱い。"},
+                "name": "Angora / Long-haired (English Angora, French Angora, Jersey Wooly)",
+                "name_ja": "アンゴラ / 長毛種（イングリッシュアンゴラ、フレンチアンゴラ、ジャージーウーリー）",
+                "housing": {
+                    "en": "Wire-bottom cage sections may be needed (wool gets soiled on solid flooring). Extra-clean environment essential. Grooming table or area. Avoid hay racks that tangle wool.",
+                    "ja": "ワイヤーボトム区画が必要な場合も（固い床では毛が汚れる）。特別に清潔な環境が必須。グルーミング台またはエリア。毛が絡まる牧草ラックは避ける。",
+                },
+                "diet": {
+                    "en": "Timothy hay unlimited (critical for wool block prevention — ingested fur can cause fatal GI blockage). Papaya/pineapple enzyme supplements may help. Higher protein needs during heavy wool growth. Extra water intake important.",
+                    "ja": "チモシー牧草食べ放題（ウールブロック予防に不可欠 — 飲み込んだ毛が致死的な消化管閉塞の原因）。パパイヤ/パイナップル酵素サプリメントが有効な場合も。毛の成長期は高タンパク。十分な水分摂取が重要。",
+                },
+                "notes": {
+                    "en": "Daily grooming MANDATORY (30+ min) — matting occurs rapidly and causes skin infections, flystrike. Shearing/trimming every 3 months. Wool block (trichobezoar) is life-threatening — recognize signs early (decreased appetite, small droppings). NOT beginner rabbits. Temperature: more heat-sensitive than short-haired breeds due to wool insulation.",
+                    "ja": "毎日のグルーミングが必須（30分以上）— 毛玉は急速に形成され皮膚感染症・ハエウジ症の原因。3ヶ月ごとに刈り込み/トリミング。ウールブロック（毛球症）は致死的 — 徴候を早期に認識（食欲低下、糞の縮小）。初心者向けではない。温度：毛の断熱効果で短毛種より暑さに弱い。",
+                },
             },
         ],
     },
@@ -241,18 +372,44 @@ HUSBANDRY_DATA: dict = {
         },
         "subtypes": [
             {
-                "name": "Syrian (Golden) Hamster", "name_ja": "ゴールデンハムスター",
-                "temperature": {"en": "20–24°C. Torpor risk below 10°C — slightly more cold-tolerant than dwarf species.", "ja": "20〜24℃。10℃以下で擬似冬眠の危険 — ドワーフ種よりやや寒さに強い。"},
-                "housing": {"en": "Minimum 5,000 cm² floor space (100×50 cm). Deep bedding 20+ cm for burrowing. Exercise wheel 28+ cm diameter (back must not arch). STRICTLY solitary — will fight to death if cohabited.", "ja": "最低床面積5,000cm²（100×50cm）。巣穴掘り用に20cm以上の深い床材。回し車は直径28cm以上（背中が反らないサイズ）。厳格な単独飼育 — 同居は死闘になる。"},
-                "diet": {"en": "Hamster seed mix + pellets. Protein: boiled egg, mealworm, chicken 2–3x/week. Fresh vegetables daily (broccoli, cucumber, carrot). Larger body = slightly more food than dwarf.", "ja": "ハムスター用シードミックス＋ペレット。タンパク質：ゆで卵、ミルワーム、鶏肉を週2〜3回。毎日新鮮な野菜（ブロッコリー、キュウリ、ニンジン）。体が大きいぶんドワーフよりやや多めに。"},
-                "notes": {"en": "Lifespan 2–3 years. Body length 15–18 cm. Docile and easy to handle — best hamster for children. Large cheek pouches. Nocturnal but can adjust to evening handling.", "ja": "寿命2〜3年。体長15〜18cm。温厚でハンドリングしやすい — 子供向きのハムスター。大きな頬袋。夜行性だが夕方のふれあいに順応可能。"},
+                "name": "Syrian (Golden) Hamster",
+                "name_ja": "ゴールデンハムスター",
+                "temperature": {
+                    "en": "20–24°C. Torpor risk below 10°C — slightly more cold-tolerant than dwarf species.",
+                    "ja": "20〜24℃。10℃以下で擬似冬眠の危険 — ドワーフ種よりやや寒さに強い。",
+                },
+                "housing": {
+                    "en": "Minimum 5,000 cm² floor space (100×50 cm). Deep bedding 20+ cm for burrowing. Exercise wheel 28+ cm diameter (back must not arch). STRICTLY solitary — will fight to death if cohabited.",
+                    "ja": "最低床面積5,000cm²（100×50cm）。巣穴掘り用に20cm以上の深い床材。回し車は直径28cm以上（背中が反らないサイズ）。厳格な単独飼育 — 同居は死闘になる。",
+                },
+                "diet": {
+                    "en": "Hamster seed mix + pellets. Protein: boiled egg, mealworm, chicken 2–3x/week. Fresh vegetables daily (broccoli, cucumber, carrot). Larger body = slightly more food than dwarf.",
+                    "ja": "ハムスター用シードミックス＋ペレット。タンパク質：ゆで卵、ミルワーム、鶏肉を週2〜3回。毎日新鮮な野菜（ブロッコリー、キュウリ、ニンジン）。体が大きいぶんドワーフよりやや多めに。",
+                },
+                "notes": {
+                    "en": "Lifespan 2–3 years. Body length 15–18 cm. Docile and easy to handle — best hamster for children. Large cheek pouches. Nocturnal but can adjust to evening handling.",
+                    "ja": "寿命2〜3年。体長15〜18cm。温厚でハンドリングしやすい — 子供向きのハムスター。大きな頬袋。夜行性だが夕方のふれあいに順応可能。",
+                },
             },
             {
-                "name": "Dwarf Hamster (Roborovski / Campbell's / Winter White)", "name_ja": "ドワーフハムスター（ロボロフスキー/キャンベル/ジャンガリアン）",
-                "temperature": {"en": "20–24°C. Torpor risk below 10°C. Winter White may change coat color in response to light cycle changes.", "ja": "20〜24℃。10℃以下で擬似冬眠の危険。ジャンガリアンは日照変化で毛色が変わることがある。"},
-                "housing": {"en": "Minimum 4,000 cm² floor space. Deep bedding 15+ cm. Exercise wheel 20+ cm (Roborovski: 20 cm, Campbell's/Winter White: 21+ cm). Same-sex pairs possible if raised together (monitor closely).", "ja": "最低床面積4,000cm²。巣穴掘り用に15cm以上の深い床材。回し車は直径20cm以上（ロボ：20cm、キャンベル/ジャンガリ：21cm以上）。幼少期からの同性ペア飼育は可能（要監視）。"},
-                "diet": {"en": "Dwarf hamster-specific mix (lower sugar — Campbell's highly prone to diabetes). Tiny portions of vegetables. Protein 2–3x/week. Avoid sugary fruits especially for Campbell's.", "ja": "ドワーフハムスター専用ミックス（低糖質 — キャンベルは糖尿病になりやすい）。野菜は少量。タンパク質は週2〜3回。特にキャンベルは甘い果物を避ける。"},
-                "notes": {"en": "Lifespan 1.5–3 years. Roborovski: fastest, rarely bites but hard to handle (5 cm). Campbell's: diabetes-prone, can be nippy. Winter White: gentle, seasonal coat change. Chinese hamster is technically not a dwarf but similar care.", "ja": "寿命1.5〜3年。ロボロフスキー：最速、噛まないがハンドリング困難（5cm）。キャンベル：糖尿病に注意、噛むことも。ジャンガリアン：穏やか、季節で毛色変化。チャイニーズは厳密にはドワーフではないが飼育法は類似。"},
+                "name": "Dwarf Hamster (Roborovski / Campbell's / Winter White)",
+                "name_ja": "ドワーフハムスター（ロボロフスキー/キャンベル/ジャンガリアン）",
+                "temperature": {
+                    "en": "20–24°C. Torpor risk below 10°C. Winter White may change coat color in response to light cycle changes.",
+                    "ja": "20〜24℃。10℃以下で擬似冬眠の危険。ジャンガリアンは日照変化で毛色が変わることがある。",
+                },
+                "housing": {
+                    "en": "Minimum 4,000 cm² floor space. Deep bedding 15+ cm. Exercise wheel 20+ cm (Roborovski: 20 cm, Campbell's/Winter White: 21+ cm). Same-sex pairs possible if raised together (monitor closely).",
+                    "ja": "最低床面積4,000cm²。巣穴掘り用に15cm以上の深い床材。回し車は直径20cm以上（ロボ：20cm、キャンベル/ジャンガリ：21cm以上）。幼少期からの同性ペア飼育は可能（要監視）。",
+                },
+                "diet": {
+                    "en": "Dwarf hamster-specific mix (lower sugar — Campbell's highly prone to diabetes). Tiny portions of vegetables. Protein 2–3x/week. Avoid sugary fruits especially for Campbell's.",
+                    "ja": "ドワーフハムスター専用ミックス（低糖質 — キャンベルは糖尿病になりやすい）。野菜は少量。タンパク質は週2〜3回。特にキャンベルは甘い果物を避ける。",
+                },
+                "notes": {
+                    "en": "Lifespan 1.5–3 years. Roborovski: fastest, rarely bites but hard to handle (5 cm). Campbell's: diabetes-prone, can be nippy. Winter White: gentle, seasonal coat change. Chinese hamster is technically not a dwarf but similar care.",
+                    "ja": "寿命1.5〜3年。ロボロフスキー：最速、噛まないがハンドリング困難（5cm）。キャンベル：糖尿病に注意、噛むことも。ジャンガリアン：穏やか、季節で毛色変化。チャイニーズは厳密にはドワーフではないが飼育法は類似。",
+                },
             },
         ],
     },
@@ -292,17 +449,32 @@ HUSBANDRY_DATA: dict = {
         },
         "subtypes": [
             {
-                "name": "Short-haired (American, Crested, etc.)", "name_ja": "短毛種（アメリカン、クレステッド等）",
-                "notes": {"en": "Easiest to care for — minimal grooming needed. Most common pet variety. Rosettes (Abyssinian) need occasional brushing. Hardy and beginner-friendly.", "ja": "最も飼いやすい — グルーミングの手間が少ない。最も一般的なペット品種。アビシニアン（ロゼット毛）は時々ブラッシング。丈夫で初心者向き。"},
+                "name": "Short-haired (American, Crested, etc.)",
+                "name_ja": "短毛種（アメリカン、クレステッド等）",
+                "notes": {
+                    "en": "Easiest to care for — minimal grooming needed. Most common pet variety. Rosettes (Abyssinian) need occasional brushing. Hardy and beginner-friendly.",
+                    "ja": "最も飼いやすい — グルーミングの手間が少ない。最も一般的なペット品種。アビシニアン（ロゼット毛）は時々ブラッシング。丈夫で初心者向き。",
+                },
             },
             {
-                "name": "Long-haired (Peruvian, Silkie, Texel, etc.)", "name_ja": "長毛種（ペルビアン、シェルティ、テッセル等）",
-                "notes": {"en": "Daily brushing essential to prevent matting. Regular trimming (especially around rear). Bedding gets tangled in fur — fleece liners preferred. More prone to flystrike in warm weather. Show breeds may need coat wraps.", "ja": "毛玉防止のため毎日のブラッシングが必須。定期的なカット（特にお尻周り）。床材が毛に絡む — フリースライナー推奨。暖かい季節はハエウジ症になりやすい。ショー用品種はコートラッピングが必要。"},
+                "name": "Long-haired (Peruvian, Silkie, Texel, etc.)",
+                "name_ja": "長毛種（ペルビアン、シェルティ、テッセル等）",
+                "notes": {
+                    "en": "Daily brushing essential to prevent matting. Regular trimming (especially around rear). Bedding gets tangled in fur — fleece liners preferred. More prone to flystrike in warm weather. Show breeds may need coat wraps.",
+                    "ja": "毛玉防止のため毎日のブラッシングが必須。定期的なカット（特にお尻周り）。床材が毛に絡む — フリースライナー推奨。暖かい季節はハエウジ症になりやすい。ショー用品種はコートラッピングが必要。",
+                },
             },
             {
-                "name": "Skinny Pig / Baldwin (Hairless)", "name_ja": "スキニーギニアピッグ / ボールドウィン（無毛種）",
-                "temperature": {"en": "22–26°C — higher than haired breeds (no fur for insulation). Fleece blankets and cozy hides essential. Avoid drafts.", "ja": "22〜26℃ — 有毛種より高めに（断熱する毛がない）。フリースブランケットと暖かい隠れ家が必須。隙間風を避ける。"},
-                "notes": {"en": "Higher calorie needs (to maintain body temperature). Skin needs moisturizing (coconut oil). Sunburn risk — no direct sunlight. More susceptible to skin injuries and fungal infections.", "ja": "カロリー需要が高い（体温維持のため）。皮膚の保湿が必要（ココナッツオイル）。日焼けのリスク — 直射日光不可。皮膚の怪我や真菌感染に罹りやすい。"},
+                "name": "Skinny Pig / Baldwin (Hairless)",
+                "name_ja": "スキニーギニアピッグ / ボールドウィン（無毛種）",
+                "temperature": {
+                    "en": "22–26°C — higher than haired breeds (no fur for insulation). Fleece blankets and cozy hides essential. Avoid drafts.",
+                    "ja": "22〜26℃ — 有毛種より高めに（断熱する毛がない）。フリースブランケットと暖かい隠れ家が必須。隙間風を避ける。",
+                },
+                "notes": {
+                    "en": "Higher calorie needs (to maintain body temperature). Skin needs moisturizing (coconut oil). Sunburn risk — no direct sunlight. More susceptible to skin injuries and fungal infections.",
+                    "ja": "カロリー需要が高い（体温維持のため）。皮膚の保湿が必要（ココナッツオイル）。日焼けのリスク — 直射日光不可。皮膚の怪我や真菌感染に罹りやすい。",
+                },
             },
         ],
     },
@@ -377,12 +549,20 @@ HUSBANDRY_DATA: dict = {
         },
         "subtypes": [
             {
-                "name": "Standard Ferret (Sable, Albino, etc.)", "name_ja": "スタンダードフェレット（セーブル、アルビノ等）",
-                "notes": {"en": "Most common pet ferrets. Sable: most popular color, generally healthy. Albino: may have slightly higher deafness risk but care is identical. Dark-eyed White (DEW): higher incidence of Waardenburg syndrome (deafness) — test hearing. All colors have same adrenal/insulinoma/lymphoma risks.", "ja": "最も一般的なペットフェレット。セーブル：最も人気のカラー、概して健康。アルビノ：聴覚障害リスクがやや高いが飼育法は同じ。ダークアイドホワイト（DEW）：ワールデンブルグ症候群（聴覚障害）の発生率が高い — 聴力検査を。全てのカラーで副腎/インスリノーマ/リンパ腫リスクは同等。"},
+                "name": "Standard Ferret (Sable, Albino, etc.)",
+                "name_ja": "スタンダードフェレット（セーブル、アルビノ等）",
+                "notes": {
+                    "en": "Most common pet ferrets. Sable: most popular color, generally healthy. Albino: may have slightly higher deafness risk but care is identical. Dark-eyed White (DEW): higher incidence of Waardenburg syndrome (deafness) — test hearing. All colors have same adrenal/insulinoma/lymphoma risks.",
+                    "ja": "最も一般的なペットフェレット。セーブル：最も人気のカラー、概して健康。アルビノ：聴覚障害リスクがやや高いが飼育法は同じ。ダークアイドホワイト（DEW）：ワールデンブルグ症候群（聴覚障害）の発生率が高い — 聴力検査を。全てのカラーで副腎/インスリノーマ/リンパ腫リスクは同等。",
+                },
             },
             {
-                "name": "Angora Ferret (Long-haired)", "name_ja": "アンゴラフェレット（長毛種）",
-                "notes": {"en": "Longer, silky coat requiring more grooming than standard ferrets. Brush 2–3x/week to prevent matting. More prone to hairballs — add hairball paste/laxatone 2–3x/week. Some Angoras have no undercoat (single coat) — slightly more cold-sensitive. Rare and expensive. Same disease predispositions as standard ferrets.", "ja": "長く柔らかい毛のため通常フェレットよりグルーミングが必要。週2〜3回のブラッシングで毛玉防止。毛球症になりやすい — ヘアボールペースト/ラキサトーンを週2〜3回。アンダーコートがない個体もあり寒さにやや弱い。希少で高価。疾患の素因は通常フェレットと同じ。"},
+                "name": "Angora Ferret (Long-haired)",
+                "name_ja": "アンゴラフェレット（長毛種）",
+                "notes": {
+                    "en": "Longer, silky coat requiring more grooming than standard ferrets. Brush 2–3x/week to prevent matting. More prone to hairballs — add hairball paste/laxatone 2–3x/week. Some Angoras have no undercoat (single coat) — slightly more cold-sensitive. Rare and expensive. Same disease predispositions as standard ferrets.",
+                    "ja": "長く柔らかい毛のため通常フェレットよりグルーミングが必要。週2〜3回のブラッシングで毛玉防止。毛球症になりやすい — ヘアボールペースト/ラキサトーンを週2〜3回。アンダーコートがない個体もあり寒さにやや弱い。希少で高価。疾患の素因は通常フェレットと同じ。",
+                },
             },
         ],
     },
@@ -527,16 +707,36 @@ HUSBANDRY_DATA: dict = {
         },
         "subtypes": [
             {
-                "name": "Finch / Canary", "name_ja": "フィンチ / カナリア",
-                "housing": {"en": "Flight cage (horizontal space more important than height). Minimum 75×45×45 cm for a pair. Multiple perches at different heights. Finches need companions — never keep alone.", "ja": "フライトケージ（高さより横幅が重要）。ペアで最低75×45×45cm。高さの異なる複数の止まり木。フィンチは必ずペア以上で飼育。"},
-                "diet": {"en": "High-quality finch/canary seed mix as base. Egg food for breeding and molting. Fresh greens (spinach, broccoli). Cuttlebone for calcium. Canaries: song food supplement for males.", "ja": "良質なフィンチ/カナリア用シードミックスが主食。繁殖期・換羽期にエッグフード。新鮮な葉物（ほうれん草、ブロッコリー）。カトルボーンでカルシウム補給。カナリア：オスにはソングフード。"},
-                "notes": {"en": "Finch lifespan 5–8 years; Canary 10–15 years. Observation birds — not handleable. Canary males sing; females generally don't. Air sac mites common in finches. Draft-sensitive.", "ja": "フィンチ寿命5〜8年、カナリア10〜15年。観賞用 — ハンドリングには向かない。カナリアのオスはさえずる、メスは通常さえずらない。フィンチは気嚢ダニが多い。隙間風に弱い。"},
+                "name": "Finch / Canary",
+                "name_ja": "フィンチ / カナリア",
+                "housing": {
+                    "en": "Flight cage (horizontal space more important than height). Minimum 75×45×45 cm for a pair. Multiple perches at different heights. Finches need companions — never keep alone.",
+                    "ja": "フライトケージ（高さより横幅が重要）。ペアで最低75×45×45cm。高さの異なる複数の止まり木。フィンチは必ずペア以上で飼育。",
+                },
+                "diet": {
+                    "en": "High-quality finch/canary seed mix as base. Egg food for breeding and molting. Fresh greens (spinach, broccoli). Cuttlebone for calcium. Canaries: song food supplement for males.",
+                    "ja": "良質なフィンチ/カナリア用シードミックスが主食。繁殖期・換羽期にエッグフード。新鮮な葉物（ほうれん草、ブロッコリー）。カトルボーンでカルシウム補給。カナリア：オスにはソングフード。",
+                },
+                "notes": {
+                    "en": "Finch lifespan 5–8 years; Canary 10–15 years. Observation birds — not handleable. Canary males sing; females generally don't. Air sac mites common in finches. Draft-sensitive.",
+                    "ja": "フィンチ寿命5〜8年、カナリア10〜15年。観賞用 — ハンドリングには向かない。カナリアのオスはさえずる、メスは通常さえずらない。フィンチは気嚢ダニが多い。隙間風に弱い。",
+                },
             },
             {
-                "name": "Dove / Pigeon", "name_ja": "ハト / ジュズカケバト",
-                "housing": {"en": "Large flight cage or aviary. Minimum 90×60×60 cm for a pair. Flat perches (not round — they have flat feet). Floor space important (ground feeders). Can be kept outdoors in mild climates.", "ja": "大型フライトケージまたは鳥舎。ペアで最低90×60×60cm。平らな止まり木（丸棒でなく — 足が平ら）。床面積が重要（地面で採食）。温暖な気候なら屋外飼育可。"},
-                "diet": {"en": "Dove seed mix (millet, safflower, wheat). Grit essential for digestion (doves have a crop/gizzard system). Fresh vegetables. Pellets can supplement.", "ja": "ハト用シードミックス（アワ、ベニバナ、小麦）。消化にグリット（砂嚢で消化するため）が必須。新鮮な野菜。ペレットで補助。"},
-                "notes": {"en": "Lifespan 10–20+ years. Gentle, quiet birds — great for apartments. Can be trained to fly and return. Canker (trichomoniasis) is common. Pair bonding is strong — keep in pairs.", "ja": "寿命10〜20年以上。穏やかで静か — マンション向き。飛んで戻るトレーニングが可能。カンカー（トリコモナス症）が多い。ペアの絆が強い — ペアで飼育。"},
+                "name": "Dove / Pigeon",
+                "name_ja": "ハト / ジュズカケバト",
+                "housing": {
+                    "en": "Large flight cage or aviary. Minimum 90×60×60 cm for a pair. Flat perches (not round — they have flat feet). Floor space important (ground feeders). Can be kept outdoors in mild climates.",
+                    "ja": "大型フライトケージまたは鳥舎。ペアで最低90×60×60cm。平らな止まり木（丸棒でなく — 足が平ら）。床面積が重要（地面で採食）。温暖な気候なら屋外飼育可。",
+                },
+                "diet": {
+                    "en": "Dove seed mix (millet, safflower, wheat). Grit essential for digestion (doves have a crop/gizzard system). Fresh vegetables. Pellets can supplement.",
+                    "ja": "ハト用シードミックス（アワ、ベニバナ、小麦）。消化にグリット（砂嚢で消化するため）が必須。新鮮な野菜。ペレットで補助。",
+                },
+                "notes": {
+                    "en": "Lifespan 10–20+ years. Gentle, quiet birds — great for apartments. Can be trained to fly and return. Canker (trichomoniasis) is common. Pair bonding is strong — keep in pairs.",
+                    "ja": "寿命10〜20年以上。穏やかで静か — マンション向き。飛んで戻るトレーニングが可能。カンカー（トリコモナス症）が多い。ペアの絆が強い — ペアで飼育。",
+                },
             },
         ],
     },
@@ -576,22 +776,52 @@ HUSBANDRY_DATA: dict = {
         },
         "subtypes": [
             {
-                "name": "Budgerigar (Budgie)", "name_ja": "セキセイインコ",
-                "housing": {"en": "Minimum 45×45×60 cm for a pair. Horizontal bars for climbing. Mirrors can be enriching but may cause hormonal issues in solitary birds.", "ja": "ペアで最低45×45×60cm。登攀用の横向き金網。鏡はエンリッチメントになるが単独飼育では発情の原因にも。"},
-                "diet": {"en": "Pellets as base (transition from seeds gradually). Fresh vegetables daily: broccoli, carrot, leafy greens. Seed mix as treat (10–20%). Millet spray as training reward.", "ja": "ペレットを主食に（シードから徐々に移行）。毎日新鮮な野菜：ブロッコリー、ニンジン、葉物。シードミックスはおやつ（10〜20%）。粟の穂をトレーニングのご褒美に。"},
-                "notes": {"en": "Lifespan 8–15 years. Tumors (lipomas, kidney, gonadal) very common over age 5. Budgerigar fledgling disease (polyomavirus). Scaly face mites (Knemidokoptes). Social — pairs recommended.", "ja": "寿命8〜15年。5歳以上で腫瘍（脂肪腫、腎臓、性腺）が非常に多い。セキセイヒナ病（ポリオーマウイルス）。疥癬ダニ。社会的 — ペア飼育推奨。"},
+                "name": "Budgerigar (Budgie)",
+                "name_ja": "セキセイインコ",
+                "housing": {
+                    "en": "Minimum 45×45×60 cm for a pair. Horizontal bars for climbing. Mirrors can be enriching but may cause hormonal issues in solitary birds.",
+                    "ja": "ペアで最低45×45×60cm。登攀用の横向き金網。鏡はエンリッチメントになるが単独飼育では発情の原因にも。",
+                },
+                "diet": {
+                    "en": "Pellets as base (transition from seeds gradually). Fresh vegetables daily: broccoli, carrot, leafy greens. Seed mix as treat (10–20%). Millet spray as training reward.",
+                    "ja": "ペレットを主食に（シードから徐々に移行）。毎日新鮮な野菜：ブロッコリー、ニンジン、葉物。シードミックスはおやつ（10〜20%）。粟の穂をトレーニングのご褒美に。",
+                },
+                "notes": {
+                    "en": "Lifespan 8–15 years. Tumors (lipomas, kidney, gonadal) very common over age 5. Budgerigar fledgling disease (polyomavirus). Scaly face mites (Knemidokoptes). Social — pairs recommended.",
+                    "ja": "寿命8〜15年。5歳以上で腫瘍（脂肪腫、腎臓、性腺）が非常に多い。セキセイヒナ病（ポリオーマウイルス）。疥癬ダニ。社会的 — ペア飼育推奨。",
+                },
             },
             {
-                "name": "Cockatiel", "name_ja": "オカメインコ",
-                "housing": {"en": "Minimum 60×45×75 cm. Wider cage preferred for wing stretching. Night light essential (prone to night frights — can injure themselves thrashing in dark).", "ja": "最低60×45×75cm。翼を広げられる幅広ケージ推奨。常夜灯必須（ナイトフライトを起こしやすい — 暗闇でパニックになり怪我する）。"},
-                "diet": {"en": "Pellets (60–70%) + fresh vegetables + limited seeds. Prone to seed addiction — transition to pellets early. Higher fat needs than budgies. Sunflower seeds sparingly (high fat).", "ja": "ペレット（60〜70%）＋新鮮な野菜＋少量のシード。シード依存になりやすい — 早期にペレットへ移行。セキセイより脂肪の必要量が多い。ヒマワリの種は少量で。"},
-                "notes": {"en": "Lifespan 15–25 years. Dust producers (powder down) — caution with asthmatic owners. Chronic egg laying common in females (calcium depletion risk). Whistlers — males sing, females tend to be quieter.", "ja": "寿命15〜25年。粉綿羽で粉っぽい — 喘息の飼い主は注意。メスの慢性産卵が多い（カルシウム枯渇のリスク）。オスは口笛のようにさえずる、メスは比較的静か。"},
+                "name": "Cockatiel",
+                "name_ja": "オカメインコ",
+                "housing": {
+                    "en": "Minimum 60×45×75 cm. Wider cage preferred for wing stretching. Night light essential (prone to night frights — can injure themselves thrashing in dark).",
+                    "ja": "最低60×45×75cm。翼を広げられる幅広ケージ推奨。常夜灯必須（ナイトフライトを起こしやすい — 暗闇でパニックになり怪我する）。",
+                },
+                "diet": {
+                    "en": "Pellets (60–70%) + fresh vegetables + limited seeds. Prone to seed addiction — transition to pellets early. Higher fat needs than budgies. Sunflower seeds sparingly (high fat).",
+                    "ja": "ペレット（60〜70%）＋新鮮な野菜＋少量のシード。シード依存になりやすい — 早期にペレットへ移行。セキセイより脂肪の必要量が多い。ヒマワリの種は少量で。",
+                },
+                "notes": {
+                    "en": "Lifespan 15–25 years. Dust producers (powder down) — caution with asthmatic owners. Chronic egg laying common in females (calcium depletion risk). Whistlers — males sing, females tend to be quieter.",
+                    "ja": "寿命15〜25年。粉綿羽で粉っぽい — 喘息の飼い主は注意。メスの慢性産卵が多い（カルシウム枯渇のリスク）。オスは口笛のようにさえずる、メスは比較的静か。",
+                },
             },
             {
-                "name": "Lovebird / Conure", "name_ja": "ラブバード / コニュア",
-                "housing": {"en": "Lovebird: minimum 45×45×60 cm. Conure: 60×60×90 cm (active, need room). Strong bars (powerful chewers for their size). Lots of shredding toys.", "ja": "ラブバード：最低45×45×60cm。コニュア：60×60×90cm（活発、スペースが必要）。頑丈な金網（体の割に噛む力が強い）。裂けるおもちゃを豊富に。"},
-                "diet": {"en": "Pellets as base + fresh vegetables + small amounts of fruit and seeds. Conures: diverse diet important — they enjoy a wide variety. Warm foods (cooked beans, rice) appreciated.", "ja": "ペレットを主食に＋新鮮な野菜＋少量の果物・シード。コニュア：多様な食事が重要 — バラエティを好む。温かい食べ物（茹でた豆、ご飯）も好む。"},
-                "notes": {"en": "Lovebird lifespan 10–15 years; Conure 20–30 years. Lovebirds: nippy but loyal, pairs bond intensely. Conures: loud but affectionate, 'velcro birds'. Sun conure: very loud — not apartment-friendly.", "ja": "ラブバード寿命10〜15年、コニュア20〜30年。ラブバード：噛み癖があるが忠実、ペアの絆が強い。コニュア：声は大きいが愛情深い。サンコニュア：非常にうるさい — マンション不向き。"},
+                "name": "Lovebird / Conure",
+                "name_ja": "ラブバード / コニュア",
+                "housing": {
+                    "en": "Lovebird: minimum 45×45×60 cm. Conure: 60×60×90 cm (active, need room). Strong bars (powerful chewers for their size). Lots of shredding toys.",
+                    "ja": "ラブバード：最低45×45×60cm。コニュア：60×60×90cm（活発、スペースが必要）。頑丈な金網（体の割に噛む力が強い）。裂けるおもちゃを豊富に。",
+                },
+                "diet": {
+                    "en": "Pellets as base + fresh vegetables + small amounts of fruit and seeds. Conures: diverse diet important — they enjoy a wide variety. Warm foods (cooked beans, rice) appreciated.",
+                    "ja": "ペレットを主食に＋新鮮な野菜＋少量の果物・シード。コニュア：多様な食事が重要 — バラエティを好む。温かい食べ物（茹でた豆、ご飯）も好む。",
+                },
+                "notes": {
+                    "en": "Lovebird lifespan 10–15 years; Conure 20–30 years. Lovebirds: nippy but loyal, pairs bond intensely. Conures: loud but affectionate, 'velcro birds'. Sun conure: very loud — not apartment-friendly.",
+                    "ja": "ラブバード寿命10〜15年、コニュア20〜30年。ラブバード：噛み癖があるが忠実、ペアの絆が強い。コニュア：声は大きいが愛情深い。サンコニュア：非常にうるさい — マンション不向き。",
+                },
             },
         ],
     },
@@ -631,22 +861,52 @@ HUSBANDRY_DATA: dict = {
         },
         "subtypes": [
             {
-                "name": "African Grey", "name_ja": "ヨウム",
-                "housing": {"en": "Minimum 90×60×120 cm. Intelligent — need complex environment. Multiple foraging stations. Sensitive to change — keep cage in consistent location.", "ja": "最低90×60×120cm。知能が高い — 複雑な環境が必要。複数の採食ステーション。変化に敏感 — ケージの位置は固定。"},
-                "diet": {"en": "Pellets (60–70%) + fresh vegetables + limited nuts (almonds, walnuts as treats). Prone to calcium deficiency and vitamin A deficiency — red/orange vegetables important.", "ja": "ペレット（60〜70%）＋新鮮な野菜＋少量のナッツ（アーモンド、くるみをおやつに）。カルシウム・ビタミンA欠乏になりやすい — 赤/オレンジ色の野菜が重要。"},
-                "notes": {"en": "Lifespan 40–60 years. Considered most intelligent parrot — can learn 1,000+ words with context. Feather plucking very common (stress, boredom). Hypocalcemia/seizures if calcium-deficient. Shy, sensitive — need patient, consistent handling.", "ja": "寿命40〜60年。最も知能の高いオウムとされる — 文脈を理解して1,000語以上を習得。毛引きが非常に多い（ストレス、退屈）。Ca不足で低Ca血症/痙攣。繊細で臆病 — 根気強く一貫したハンドリングが必要。"},
+                "name": "African Grey",
+                "name_ja": "ヨウム",
+                "housing": {
+                    "en": "Minimum 90×60×120 cm. Intelligent — need complex environment. Multiple foraging stations. Sensitive to change — keep cage in consistent location.",
+                    "ja": "最低90×60×120cm。知能が高い — 複雑な環境が必要。複数の採食ステーション。変化に敏感 — ケージの位置は固定。",
+                },
+                "diet": {
+                    "en": "Pellets (60–70%) + fresh vegetables + limited nuts (almonds, walnuts as treats). Prone to calcium deficiency and vitamin A deficiency — red/orange vegetables important.",
+                    "ja": "ペレット（60〜70%）＋新鮮な野菜＋少量のナッツ（アーモンド、くるみをおやつに）。カルシウム・ビタミンA欠乏になりやすい — 赤/オレンジ色の野菜が重要。",
+                },
+                "notes": {
+                    "en": "Lifespan 40–60 years. Considered most intelligent parrot — can learn 1,000+ words with context. Feather plucking very common (stress, boredom). Hypocalcemia/seizures if calcium-deficient. Shy, sensitive — need patient, consistent handling.",
+                    "ja": "寿命40〜60年。最も知能の高いオウムとされる — 文脈を理解して1,000語以上を習得。毛引きが非常に多い（ストレス、退屈）。Ca不足で低Ca血症/痙攣。繊細で臆病 — 根気強く一貫したハンドリングが必要。",
+                },
             },
             {
-                "name": "Cockatoo", "name_ja": "オウム（キバタン、モモイロインコ等）",
-                "housing": {"en": "Large cage minimum 120×90×150 cm (they are very active). Powder-coated steel bars (extremely powerful beaks). Padlock on doors (they learn to open latches). Extensive out-of-cage time.", "ja": "大型ケージ最低120×90×150cm（非常に活発）。パウダーコート鋼鉄の金網（嘴の力が極めて強い）。ドアに南京錠（開け方を覚える）。十分なケージ外時間。"},
-                "diet": {"en": "Pellets + fresh vegetables + limited nuts and seeds. Low-fat diet important (fatty liver disease common). Offer varied fresh foods daily. Avoid excess sunflower seeds.", "ja": "ペレット＋新鮮な野菜＋少量のナッツ・シード。低脂肪食が重要（脂肪肝が多い）。毎日多様な新鮮な食品を。ヒマワリの種の過剰は避ける。"},
-                "notes": {"en": "Lifespan 40–80 years. EXTREMELY loud (100+ dB). Velcro birds — intense bonding leads to screaming when separated. Feather destruction very common. Needs 4–6 hours daily interaction. Not for beginners.", "ja": "寿命40〜80年。極めて大きな鳴き声（100dB以上）。飼い主への強い愛着 — 離れると絶叫。毛引きが非常に多い。1日4〜6時間の交流が必要。初心者には不向き。"},
+                "name": "Cockatoo",
+                "name_ja": "オウム（キバタン、モモイロインコ等）",
+                "housing": {
+                    "en": "Large cage minimum 120×90×150 cm (they are very active). Powder-coated steel bars (extremely powerful beaks). Padlock on doors (they learn to open latches). Extensive out-of-cage time.",
+                    "ja": "大型ケージ最低120×90×150cm（非常に活発）。パウダーコート鋼鉄の金網（嘴の力が極めて強い）。ドアに南京錠（開け方を覚える）。十分なケージ外時間。",
+                },
+                "diet": {
+                    "en": "Pellets + fresh vegetables + limited nuts and seeds. Low-fat diet important (fatty liver disease common). Offer varied fresh foods daily. Avoid excess sunflower seeds.",
+                    "ja": "ペレット＋新鮮な野菜＋少量のナッツ・シード。低脂肪食が重要（脂肪肝が多い）。毎日多様な新鮮な食品を。ヒマワリの種の過剰は避ける。",
+                },
+                "notes": {
+                    "en": "Lifespan 40–80 years. EXTREMELY loud (100+ dB). Velcro birds — intense bonding leads to screaming when separated. Feather destruction very common. Needs 4–6 hours daily interaction. Not for beginners.",
+                    "ja": "寿命40〜80年。極めて大きな鳴き声（100dB以上）。飼い主への強い愛着 — 離れると絶叫。毛引きが非常に多い。1日4〜6時間の交流が必要。初心者には不向き。",
+                },
             },
             {
-                "name": "Macaw", "name_ja": "コンゴウインコ",
-                "housing": {"en": "Massive cage (minimum 150×90×180 cm) or dedicated bird room. Stainless steel bars essential (they destroy powder-coated). Custom-built enclosures often needed. Outdoor aviary ideal in warm climates.", "ja": "巨大ケージ（最低150×90×180cm）または専用バードルーム。ステンレス鋼の金網が必須（パウダーコートは破壊する）。特注ケージが必要になることも。温暖な気候では屋外鳥舎が理想。"},
-                "diet": {"en": "Pellets + fresh vegetables + nuts (macadamia, brazil nuts, almonds — higher fat needs than other parrots). Fresh fruits. Varied diet critical. Calcium supplementation.", "ja": "ペレット＋新鮮な野菜＋ナッツ（マカダミア、ブラジルナッツ、アーモンド — 他のオウムより脂肪の必要量が多い）。新鮮な果物。多様な食事が不可欠。カルシウム補給。"},
-                "notes": {"en": "Lifespan 50–80+ years. Largest parrots (up to 100 cm). Proventricular dilatation disease (PDD) is a serious threat. Very loud. Powerful beaks can cause serious injury. Need experienced, committed owners. Estate planning recommended.", "ja": "寿命50〜80年以上。最大のオウム（体長100cmに達する）。腺胃拡張症（PDD）は深刻な脅威。非常にうるさい。強力な嘴で重傷を負わせうる。経験豊富で献身的な飼い主が必要。遺言での引き取り先計画を推奨。"},
+                "name": "Macaw",
+                "name_ja": "コンゴウインコ",
+                "housing": {
+                    "en": "Massive cage (minimum 150×90×180 cm) or dedicated bird room. Stainless steel bars essential (they destroy powder-coated). Custom-built enclosures often needed. Outdoor aviary ideal in warm climates.",
+                    "ja": "巨大ケージ（最低150×90×180cm）または専用バードルーム。ステンレス鋼の金網が必須（パウダーコートは破壊する）。特注ケージが必要になることも。温暖な気候では屋外鳥舎が理想。",
+                },
+                "diet": {
+                    "en": "Pellets + fresh vegetables + nuts (macadamia, brazil nuts, almonds — higher fat needs than other parrots). Fresh fruits. Varied diet critical. Calcium supplementation.",
+                    "ja": "ペレット＋新鮮な野菜＋ナッツ（マカダミア、ブラジルナッツ、アーモンド — 他のオウムより脂肪の必要量が多い）。新鮮な果物。多様な食事が不可欠。カルシウム補給。",
+                },
+                "notes": {
+                    "en": "Lifespan 50–80+ years. Largest parrots (up to 100 cm). Proventricular dilatation disease (PDD) is a serious threat. Very loud. Powerful beaks can cause serious injury. Need experienced, committed owners. Estate planning recommended.",
+                    "ja": "寿命50〜80年以上。最大のオウム（体長100cmに達する）。腺胃拡張症（PDD）は深刻な脅威。非常にうるさい。強力な嘴で重傷を負わせうる。経験豊富で献身的な飼い主が必要。遺言での引き取り先計画を推奨。",
+                },
             },
         ],
     },
@@ -686,22 +946,52 @@ HUSBANDRY_DATA: dict = {
         },
         "subtypes": [
             {
-                "name": "Thoroughbred / Sport Horse", "name_ja": "サラブレッド / スポーツホース",
-                "diet": {"en": "High-energy diet for performance: quality hay + concentrates (oats, commercial feeds). Electrolyte supplementation during heavy work. 2–3% BW in total daily feed. Risk of gastric ulcers from high-grain diets.", "ja": "パフォーマンス用の高エネルギー食：良質な乾草＋濃厚飼料（オーツ、配合飼料）。激しい運動時は電解質補給。総給餌量は体重の2〜3%/日。高穀物食では胃潰瘍のリスク。"},
-                "housing": {"en": "Stall 3.6×3.6 m minimum. Daily turnout essential for mental health. Careful footing in arenas (tendon/ligament injuries). Adequate warm-up before exercise.", "ja": "馬房3.6×3.6m以上。精神的健康のため毎日の放牧が必須。馬場の足場管理（腱・靱帯損傷予防）。運動前の十分なウォームアップ。"},
-                "notes": {"en": "Prone to: gastric ulcers (60–90% prevalence in racehorses), tendon injuries, exercise-induced pulmonary hemorrhage (EIPH), osteochondrosis. Regular sport horse vet exams. Retirement planning important.", "ja": "好発疾患：胃潰瘍（競走馬の60〜90%に発生）、腱損傷、運動誘発性肺出血（EIPH）、骨軟骨症。定期的なスポーツホース健診。引退後の計画も重要。"},
+                "name": "Thoroughbred / Sport Horse",
+                "name_ja": "サラブレッド / スポーツホース",
+                "diet": {
+                    "en": "High-energy diet for performance: quality hay + concentrates (oats, commercial feeds). Electrolyte supplementation during heavy work. 2–3% BW in total daily feed. Risk of gastric ulcers from high-grain diets.",
+                    "ja": "パフォーマンス用の高エネルギー食：良質な乾草＋濃厚飼料（オーツ、配合飼料）。激しい運動時は電解質補給。総給餌量は体重の2〜3%/日。高穀物食では胃潰瘍のリスク。",
+                },
+                "housing": {
+                    "en": "Stall 3.6×3.6 m minimum. Daily turnout essential for mental health. Careful footing in arenas (tendon/ligament injuries). Adequate warm-up before exercise.",
+                    "ja": "馬房3.6×3.6m以上。精神的健康のため毎日の放牧が必須。馬場の足場管理（腱・靱帯損傷予防）。運動前の十分なウォームアップ。",
+                },
+                "notes": {
+                    "en": "Prone to: gastric ulcers (60–90% prevalence in racehorses), tendon injuries, exercise-induced pulmonary hemorrhage (EIPH), osteochondrosis. Regular sport horse vet exams. Retirement planning important.",
+                    "ja": "好発疾患：胃潰瘍（競走馬の60〜90%に発生）、腱損傷、運動誘発性肺出血（EIPH）、骨軟骨症。定期的なスポーツホース健診。引退後の計画も重要。",
+                },
             },
             {
-                "name": "Pony / Miniature Horse", "name_ja": "ポニー / ミニチュアホース",
-                "diet": {"en": "RESTRICTED grazing — highly prone to obesity and laminitis from rich pasture. Low-sugar hay (soaked if necessary). Minimal to no concentrates. Grazing muzzle recommended.", "ja": "放牧制限 — 肥満と蹄葉炎に非常になりやすい。低糖質の乾草（必要なら浸水）。濃厚飼料は最小限〜不要。グレージングマズル推奨。"},
-                "housing": {"en": "Smaller stalls adequate (3×3 m). Need companionship. Fencing must be appropriate for small size (can escape through standard horse fencing). Dry lot turnout often safer than rich pasture.", "ja": "小さめの馬房で可（3×3m）。仲間が必要。小さい体に合った柵（標準の馬用柵から脱走可能）。栄養豊富な牧草地よりドライロットでの放牧が安全なことが多い。"},
-                "notes": {"en": "Lifespan 25–35 years. #1 issue: obesity → laminitis → founder. Equine Metabolic Syndrome (EMS) and PPID (Cushing's) very common. Dental issues due to crowded teeth in small jaws. Hyperlipemia risk if suddenly starved.", "ja": "寿命25〜35年。最大の問題：肥満→蹄葉炎→蹄骨沈下。馬メタボリックシンドローム（EMS）とPPID（クッシング病）が非常に多い。小さな顎に歯が密集し歯科問題多発。急な絶食で高脂血症の危険。"},
+                "name": "Pony / Miniature Horse",
+                "name_ja": "ポニー / ミニチュアホース",
+                "diet": {
+                    "en": "RESTRICTED grazing — highly prone to obesity and laminitis from rich pasture. Low-sugar hay (soaked if necessary). Minimal to no concentrates. Grazing muzzle recommended.",
+                    "ja": "放牧制限 — 肥満と蹄葉炎に非常になりやすい。低糖質の乾草（必要なら浸水）。濃厚飼料は最小限〜不要。グレージングマズル推奨。",
+                },
+                "housing": {
+                    "en": "Smaller stalls adequate (3×3 m). Need companionship. Fencing must be appropriate for small size (can escape through standard horse fencing). Dry lot turnout often safer than rich pasture.",
+                    "ja": "小さめの馬房で可（3×3m）。仲間が必要。小さい体に合った柵（標準の馬用柵から脱走可能）。栄養豊富な牧草地よりドライロットでの放牧が安全なことが多い。",
+                },
+                "notes": {
+                    "en": "Lifespan 25–35 years. #1 issue: obesity → laminitis → founder. Equine Metabolic Syndrome (EMS) and PPID (Cushing's) very common. Dental issues due to crowded teeth in small jaws. Hyperlipemia risk if suddenly starved.",
+                    "ja": "寿命25〜35年。最大の問題：肥満→蹄葉炎→蹄骨沈下。馬メタボリックシンドローム（EMS）とPPID（クッシング病）が非常に多い。小さな顎に歯が密集し歯科問題多発。急な絶食で高脂血症の危険。",
+                },
             },
             {
-                "name": "Draft Horse", "name_ja": "重種馬（輓馬）",
-                "diet": {"en": "Moderate energy requirements despite large size. Quality hay (2% BW). Concentrates only for working horses. Some breeds prone to polysaccharide storage myopathy (PSSM) — low starch/sugar diet essential.", "ja": "体が大きいが必要エネルギーは中程度。良質な乾草（体重の2%）。濃厚飼料は使役馬のみ。PSSM（多糖類貯蔵筋症）になりやすい品種あり — 低澱粉・低糖質食が必須。"},
-                "housing": {"en": "Larger stalls needed (4×4 m minimum). Reinforced fencing and equipment. Wider doorways. Heavy-duty halters and lead ropes. Good footing — heavy body stresses joints.", "ja": "大きめの馬房が必要（最低4×4m）。柵と設備を強化。広い出入口。丈夫な無口と曳き綱。良好な足場 — 重い体重が関節に負担。"},
-                "notes": {"en": "Lifespan 18–25 years. Prone to: PSSM, shivers, chronic progressive lymphedema (feathered breeds), scratches/mud fever. Larger hooves need experienced farrier. Gentle temperament.", "ja": "寿命18〜25年。好発疾患：PSSM、シバーズ、慢性進行性リンパ浮腫（飾り毛品種）、球節皮膚炎。大きな蹄に経験豊富な装蹄師が必要。穏やかな気質。"},
+                "name": "Draft Horse",
+                "name_ja": "重種馬（輓馬）",
+                "diet": {
+                    "en": "Moderate energy requirements despite large size. Quality hay (2% BW). Concentrates only for working horses. Some breeds prone to polysaccharide storage myopathy (PSSM) — low starch/sugar diet essential.",
+                    "ja": "体が大きいが必要エネルギーは中程度。良質な乾草（体重の2%）。濃厚飼料は使役馬のみ。PSSM（多糖類貯蔵筋症）になりやすい品種あり — 低澱粉・低糖質食が必須。",
+                },
+                "housing": {
+                    "en": "Larger stalls needed (4×4 m minimum). Reinforced fencing and equipment. Wider doorways. Heavy-duty halters and lead ropes. Good footing — heavy body stresses joints.",
+                    "ja": "大きめの馬房が必要（最低4×4m）。柵と設備を強化。広い出入口。丈夫な無口と曳き綱。良好な足場 — 重い体重が関節に負担。",
+                },
+                "notes": {
+                    "en": "Lifespan 18–25 years. Prone to: PSSM, shivers, chronic progressive lymphedema (feathered breeds), scratches/mud fever. Larger hooves need experienced farrier. Gentle temperament.",
+                    "ja": "寿命18〜25年。好発疾患：PSSM、シバーズ、慢性進行性リンパ浮腫（飾り毛品種）、球節皮膚炎。大きな蹄に経験豊富な装蹄師が必要。穏やかな気質。",
+                },
             },
         ],
     },
@@ -715,12 +1005,30 @@ HUSBANDRY_DATA: dict = {
             "en": "Species-dependent. Thermal gradient essential: warm basking zone (30–40°C) and cool zone (22–28°C). UVB lighting required for most species.",
             "ja": "種により異なる。温度勾配が必須：ホットスポット（30〜40℃）とクールゾーン（22〜28℃）。ほとんどの種でUVBライトが必要。",
         },
-        "humidity": {"en": "Species-dependent: desert (20–40%), tropical (60–80%)", "ja": "種により異なる：砂漠系（20〜40%）、熱帯系（60〜80%）"},
-        "housing": {"en": "Enclosure size varies by species. Secure lid essential (escape artists). Appropriate substrate. Hides on warm and cool sides. UVB bulb replaced every 6 months.", "ja": "ケージサイズは種による。脱走防止の蓋が必須。適切な床材。温暖側・冷涼側それぞれにシェルター。UVBランプは6ヶ月ごとに交換。"},
-        "diet": {"en": "Varies: herbivorous (greens, vegetables), insectivorous (gut-loaded crickets, dubia roaches), or carnivorous (whole prey). Calcium + D3 dusting for most species.", "ja": "種により異なる：草食（葉物、野菜）、昆虫食（ガットローディング済みコオロギ、デュビア）、肉食（ホールプレイ）。多くの種でカルシウム＋D3ダスティング。"},
-        "enrichment": {"en": "Climbing branches, basking platforms, water features. Environmental complexity reduces stress. Supervised exploration outside enclosure.", "ja": "登攀用枝、バスキング台、水場。環境の複雑さがストレスを軽減。監視下でのケージ外探索。"},
-        "socialization": {"en": "Most reptiles are solitary. Co-habitation often causes stress and aggression. Handle regularly but gently for taming. Respect species-specific temperament.", "ja": "多くの爬虫類は単独飼育。同居はストレスと攻撃の原因。定期的に優しくハンドリングして馴らす。種ごとの気性を尊重。"},
-        "notes": {"en": "UVB + calcium crucial to prevent MBD. Ecdysis (shedding) problems indicate husbandry issues. Reptile-experienced vet essential. Salmonella risk — wash hands after handling.", "ja": "UVB＋カルシウムはMBD予防に不可欠。脱皮不全は飼育環境の問題を示唆。爬虫類診療経験のある獣医が必須。サルモネラのリスク — 触った後は手洗い。"},
+        "humidity": {
+            "en": "Species-dependent: desert (20–40%), tropical (60–80%)",
+            "ja": "種により異なる：砂漠系（20〜40%）、熱帯系（60〜80%）",
+        },
+        "housing": {
+            "en": "Enclosure size varies by species. Secure lid essential (escape artists). Appropriate substrate. Hides on warm and cool sides. UVB bulb replaced every 6 months.",
+            "ja": "ケージサイズは種による。脱走防止の蓋が必須。適切な床材。温暖側・冷涼側それぞれにシェルター。UVBランプは6ヶ月ごとに交換。",
+        },
+        "diet": {
+            "en": "Varies: herbivorous (greens, vegetables), insectivorous (gut-loaded crickets, dubia roaches), or carnivorous (whole prey). Calcium + D3 dusting for most species.",
+            "ja": "種により異なる：草食（葉物、野菜）、昆虫食（ガットローディング済みコオロギ、デュビア）、肉食（ホールプレイ）。多くの種でカルシウム＋D3ダスティング。",
+        },
+        "enrichment": {
+            "en": "Climbing branches, basking platforms, water features. Environmental complexity reduces stress. Supervised exploration outside enclosure.",
+            "ja": "登攀用枝、バスキング台、水場。環境の複雑さがストレスを軽減。監視下でのケージ外探索。",
+        },
+        "socialization": {
+            "en": "Most reptiles are solitary. Co-habitation often causes stress and aggression. Handle regularly but gently for taming. Respect species-specific temperament.",
+            "ja": "多くの爬虫類は単独飼育。同居はストレスと攻撃の原因。定期的に優しくハンドリングして馴らす。種ごとの気性を尊重。",
+        },
+        "notes": {
+            "en": "UVB + calcium crucial to prevent MBD. Ecdysis (shedding) problems indicate husbandry issues. Reptile-experienced vet essential. Salmonella risk — wash hands after handling.",
+            "ja": "UVB＋カルシウムはMBD予防に不可欠。脱皮不全は飼育環境の問題を示唆。爬虫類診療経験のある獣医が必須。サルモネラのリスク — 触った後は手洗い。",
+        },
     },
     # =========================================================================
     # リクガメ (Tortoise)
@@ -728,37 +1036,106 @@ HUSBANDRY_DATA: dict = {
     "tortoise": {
         "name": "Tortoise",
         "name_ja": "リクガメ",
-        "temperature": {"en": "Basking spot 32–38°C, cool side 22–28°C. Night drop to 18–22°C acceptable. UVB essential (10.0–12.0 for desert species).", "ja": "ホットスポット32〜38℃、クールゾーン22〜28℃。夜間18〜22℃まで低下可。UVB必須（砂漠種は10.0〜12.0）。"},
-        "humidity": {"en": "Species-dependent: Russian/Greek (40–60%), Red-foot/Tropical (70–80%). Humid hide box recommended for all.", "ja": "種による：ロシアリクガメ/ギリシャ（40〜60%）、アカアシ/熱帯種（70〜80%）。湿度の高いシェルターを全種に推奨。"},
-        "housing": {"en": "Open-top tortoise table preferred over glass tanks (better ventilation). Outdoor enclosure in warm months ideal. Substrate: coco coir, topsoil mix. Shallow water dish for soaking.", "ja": "ガラス水槽よりオープントップのトータステーブル推奨（換気が良い）。暖かい季節は屋外飼育が理想。床材：ココヤシ繊維、培養土ミックス。浅い水皿で水浴び。"},
-        "diet": {"en": "Herbivorous: dark leafy greens (dandelion, endive, watercress), weeds, hay. Calcium supplement 2–3x/week. Avoid: fruit (except tropical species), iceberg lettuce, spinach (oxalates).", "ja": "草食：濃い色の葉物（タンポポ、エンダイブ、クレソン）、野草、牧草。カルシウムを週2〜3回。禁忌：果物（熱帯種以外）、玉レタス、ほうれん草（シュウ酸）。"},
-        "enrichment": {"en": "Outdoor grazing time. Varied terrain with slopes and obstacles. Hiding spots. Edible plants in enclosure for foraging. Shallow warm soaks 1–2x/week.", "ja": "屋外での放牧。傾斜や障害物のある変化に富んだ地形。隠れ家。ケージ内に食用植物で採食エンリッチメント。温浴を週1〜2回。"},
-        "socialization": {"en": "Generally solitary. Males may fight. Gentle handling acceptable but they are not cuddly pets. Recognize owners over time.", "ja": "基本的に単独飼育。オス同士は喧嘩することも。穏やかなハンドリングは可能だが抱っこ向きではない。時間をかけて飼い主を認識。"},
-        "notes": {"en": "Lifespan 50–100+ years. Shell pyramiding indicates poor husbandry (low humidity, excess protein). MBD very common without proper UVB/calcium. Brumation (winter dormancy) natural for temperate species.", "ja": "寿命50〜100年以上。甲羅のピラミッド化は飼育環境の問題（低湿度、過剰タンパク質）を示す。UVB/カルシウム不足でMBDが非常に多い。温帯種のブルメーション（冬眠）は自然。"},
+        "temperature": {
+            "en": "Basking spot 32–38°C, cool side 22–28°C. Night drop to 18–22°C acceptable. UVB essential (10.0–12.0 for desert species).",
+            "ja": "ホットスポット32〜38℃、クールゾーン22〜28℃。夜間18〜22℃まで低下可。UVB必須（砂漠種は10.0〜12.0）。",
+        },
+        "humidity": {
+            "en": "Species-dependent: Russian/Greek (40–60%), Red-foot/Tropical (70–80%). Humid hide box recommended for all.",
+            "ja": "種による：ロシアリクガメ/ギリシャ（40〜60%）、アカアシ/熱帯種（70〜80%）。湿度の高いシェルターを全種に推奨。",
+        },
+        "housing": {
+            "en": "Open-top tortoise table preferred over glass tanks (better ventilation). Outdoor enclosure in warm months ideal. Substrate: coco coir, topsoil mix. Shallow water dish for soaking.",
+            "ja": "ガラス水槽よりオープントップのトータステーブル推奨（換気が良い）。暖かい季節は屋外飼育が理想。床材：ココヤシ繊維、培養土ミックス。浅い水皿で水浴び。",
+        },
+        "diet": {
+            "en": "Herbivorous: dark leafy greens (dandelion, endive, watercress), weeds, hay. Calcium supplement 2–3x/week. Avoid: fruit (except tropical species), iceberg lettuce, spinach (oxalates).",
+            "ja": "草食：濃い色の葉物（タンポポ、エンダイブ、クレソン）、野草、牧草。カルシウムを週2〜3回。禁忌：果物（熱帯種以外）、玉レタス、ほうれん草（シュウ酸）。",
+        },
+        "enrichment": {
+            "en": "Outdoor grazing time. Varied terrain with slopes and obstacles. Hiding spots. Edible plants in enclosure for foraging. Shallow warm soaks 1–2x/week.",
+            "ja": "屋外での放牧。傾斜や障害物のある変化に富んだ地形。隠れ家。ケージ内に食用植物で採食エンリッチメント。温浴を週1〜2回。",
+        },
+        "socialization": {
+            "en": "Generally solitary. Males may fight. Gentle handling acceptable but they are not cuddly pets. Recognize owners over time.",
+            "ja": "基本的に単独飼育。オス同士は喧嘩することも。穏やかなハンドリングは可能だが抱っこ向きではない。時間をかけて飼い主を認識。",
+        },
+        "notes": {
+            "en": "Lifespan 50–100+ years. Shell pyramiding indicates poor husbandry (low humidity, excess protein). MBD very common without proper UVB/calcium. Brumation (winter dormancy) natural for temperate species.",
+            "ja": "寿命50〜100年以上。甲羅のピラミッド化は飼育環境の問題（低湿度、過剰タンパク質）を示す。UVB/カルシウム不足でMBDが非常に多い。温帯種のブルメーション（冬眠）は自然。",
+        },
         "subtypes": [
             {
-                "name": "Russian Tortoise", "name_ja": "ロシアリクガメ（ホルスフィールド）",
-                "temperature": {"en": "Basking 32–35°C, cool side 22–26°C, night 15–18°C. UVB 10.0. Tolerates wider temperature range than tropical species.", "ja": "ホットスポット32〜35℃、クールゾーン22〜26℃、夜間15〜18℃。UVB 10.0。熱帯種より広い温度範囲に耐える。"},
-                "humidity": {"en": "40–60%. Dry species from Central Asian steppes. Humid hide still recommended. Avoid constant high humidity.", "ja": "40〜60%。中央アジアのステップ原産の乾燥種。ウェットシェルターは設置推奨。常時高湿度は避ける。"},
-                "housing": {"en": "Tortoise table 120×60 cm minimum. Prolific diggers — deep substrate (15+ cm). Outdoor enclosure excellent in warm months. Excellent climbers — secure walls.", "ja": "トータステーブル最低120×60cm。掘るのが好き — 深い床材（15cm以上）。暖かい季節の屋外飼育は最適。登るのが上手 — 壁を確実に。"},
-                "diet": {"en": "Weeds and greens: dandelion, plantain, clover, hibiscus leaves. Very high fiber. NO fruit. Timothy hay available. Calcium 3x/week.", "ja": "野草と葉物：タンポポ、オオバコ、クローバー、ハイビスカスの葉。非常に高繊維。果物は不可。チモシー牧草を常備。カルシウム週3回。"},
-                "notes": {"en": "Lifespan 40–60+ years. Small species (15–20 cm). Brumation natural and recommended for health. Very active and personable. Most popular pet tortoise species.", "ja": "寿命40〜60年以上。小型種（15〜20cm）。ブルメーションは自然で健康に推奨。非常に活発で人に馴れやすい。最も人気のあるペットリクガメ。"},
+                "name": "Russian Tortoise",
+                "name_ja": "ロシアリクガメ（ホルスフィールド）",
+                "temperature": {
+                    "en": "Basking 32–35°C, cool side 22–26°C, night 15–18°C. UVB 10.0. Tolerates wider temperature range than tropical species.",
+                    "ja": "ホットスポット32〜35℃、クールゾーン22〜26℃、夜間15〜18℃。UVB 10.0。熱帯種より広い温度範囲に耐える。",
+                },
+                "humidity": {
+                    "en": "40–60%. Dry species from Central Asian steppes. Humid hide still recommended. Avoid constant high humidity.",
+                    "ja": "40〜60%。中央アジアのステップ原産の乾燥種。ウェットシェルターは設置推奨。常時高湿度は避ける。",
+                },
+                "housing": {
+                    "en": "Tortoise table 120×60 cm minimum. Prolific diggers — deep substrate (15+ cm). Outdoor enclosure excellent in warm months. Excellent climbers — secure walls.",
+                    "ja": "トータステーブル最低120×60cm。掘るのが好き — 深い床材（15cm以上）。暖かい季節の屋外飼育は最適。登るのが上手 — 壁を確実に。",
+                },
+                "diet": {
+                    "en": "Weeds and greens: dandelion, plantain, clover, hibiscus leaves. Very high fiber. NO fruit. Timothy hay available. Calcium 3x/week.",
+                    "ja": "野草と葉物：タンポポ、オオバコ、クローバー、ハイビスカスの葉。非常に高繊維。果物は不可。チモシー牧草を常備。カルシウム週3回。",
+                },
+                "notes": {
+                    "en": "Lifespan 40–60+ years. Small species (15–20 cm). Brumation natural and recommended for health. Very active and personable. Most popular pet tortoise species.",
+                    "ja": "寿命40〜60年以上。小型種（15〜20cm）。ブルメーションは自然で健康に推奨。非常に活発で人に馴れやすい。最も人気のあるペットリクガメ。",
+                },
             },
             {
-                "name": "Hermann's / Greek Tortoise", "name_ja": "ヘルマンリクガメ / ギリシャリクガメ",
-                "temperature": {"en": "Basking 30–34°C, cool side 22–26°C, night 16–20°C. UVB 10.0. Mediterranean climate species.", "ja": "ホットスポット30〜34℃、クールゾーン22〜26℃、夜間16〜20℃。UVB 10.0。地中海性気候の種。"},
-                "humidity": {"en": "50–60%. Moderate humidity; humid hide essential for proper shell growth and hydration.", "ja": "50〜60%。中程度の湿度。甲羅の正常な成長と水分補給のためウェットシェルター必須。"},
-                "housing": {"en": "Tortoise table 120×60 cm minimum. Outdoor gardens ideal in Mediterranean-like climates. Mix of sunny and shaded areas. Varied substrate.", "ja": "トータステーブル最低120×60cm。温暖な気候では屋外庭園が理想。日向と日陰を組み合わせる。様々な床材。"},
-                "diet": {"en": "Mediterranean weeds and greens: dandelion, plantain, hawkbit, sow thistle. High fiber, low protein. NO fruit for Hermann's (small amounts OK for Greek). Calcium regularly.", "ja": "地中海の野草と葉物：タンポポ、オオバコ、ブタナ、ノゲシ。高繊維・低タンパク質。ヘルマンは果物不可（ギリシャは少量可）。カルシウムを定期的に。"},
-                "notes": {"en": "Lifespan 50–80+ years. Brumation recommended for breeding and long-term health. Pyramiding prevention: adequate humidity + proper diet (no excess protein).", "ja": "寿命50〜80年以上。繁殖と長期的健康のためブルメーション推奨。ピラミッド化予防：適切な湿度＋正しい食事（過剰タンパク質を避ける）。"},
+                "name": "Hermann's / Greek Tortoise",
+                "name_ja": "ヘルマンリクガメ / ギリシャリクガメ",
+                "temperature": {
+                    "en": "Basking 30–34°C, cool side 22–26°C, night 16–20°C. UVB 10.0. Mediterranean climate species.",
+                    "ja": "ホットスポット30〜34℃、クールゾーン22〜26℃、夜間16〜20℃。UVB 10.0。地中海性気候の種。",
+                },
+                "humidity": {
+                    "en": "50–60%. Moderate humidity; humid hide essential for proper shell growth and hydration.",
+                    "ja": "50〜60%。中程度の湿度。甲羅の正常な成長と水分補給のためウェットシェルター必須。",
+                },
+                "housing": {
+                    "en": "Tortoise table 120×60 cm minimum. Outdoor gardens ideal in Mediterranean-like climates. Mix of sunny and shaded areas. Varied substrate.",
+                    "ja": "トータステーブル最低120×60cm。温暖な気候では屋外庭園が理想。日向と日陰を組み合わせる。様々な床材。",
+                },
+                "diet": {
+                    "en": "Mediterranean weeds and greens: dandelion, plantain, hawkbit, sow thistle. High fiber, low protein. NO fruit for Hermann's (small amounts OK for Greek). Calcium regularly.",
+                    "ja": "地中海の野草と葉物：タンポポ、オオバコ、ブタナ、ノゲシ。高繊維・低タンパク質。ヘルマンは果物不可（ギリシャは少量可）。カルシウムを定期的に。",
+                },
+                "notes": {
+                    "en": "Lifespan 50–80+ years. Brumation recommended for breeding and long-term health. Pyramiding prevention: adequate humidity + proper diet (no excess protein).",
+                    "ja": "寿命50〜80年以上。繁殖と長期的健康のためブルメーション推奨。ピラミッド化予防：適切な湿度＋正しい食事（過剰タンパク質を避ける）。",
+                },
             },
             {
-                "name": "Red-footed Tortoise", "name_ja": "アカアシガメ",
-                "temperature": {"en": "Basking 32–35°C, ambient 26–30°C, night 22–25°C. UVB 5.0–10.0. Tropical species — no brumation.", "ja": "ホットスポット32〜35℃、環境温度26〜30℃、夜間22〜25℃。UVB 5.0〜10.0。熱帯種 — ブルメーションなし。"},
-                "humidity": {"en": "70–80%. High humidity species from South American forests. Frequent misting. Large shallow water dish.", "ja": "70〜80%。南米の森林原産の高湿度種。頻繁な霧吹き。大きな浅い水皿。"},
-                "housing": {"en": "Larger enclosure needed (150×60 cm minimum — they grow to 30–35 cm). Closed-top vivarium helps retain humidity. Deep, moisture-retaining substrate (cypress mulch, coco coir).", "ja": "より大きなケージが必要（最低150×60cm — 30〜35cmに成長）。密閉型ビバリウムで湿度維持。保湿性のある深い床材（サイプレスマルチ、ココヤシ繊維）。"},
-                "diet": {"en": "Mixed diet: greens (70%), fruits (20% — unlike temperate species, fruit is OK), protein (10% — mushrooms, occasional snail/worm). Calcium 2–3x/week.", "ja": "混合食：葉物（70%）、果物（20% — 温帯種と違い果物OK）、タンパク質（10% — キノコ、時々カタツムリ/ミミズ）。カルシウム週2〜3回。"},
-                "notes": {"en": "Lifespan 50+ years. More omnivorous than most tortoises. Personable and interactive. Prone to respiratory infections if kept too cool/dry.", "ja": "寿命50年以上。多くのリクガメより雑食性。人に馴れやすく対話的。低温・乾燥環境では呼吸器感染症になりやすい。"},
+                "name": "Red-footed Tortoise",
+                "name_ja": "アカアシガメ",
+                "temperature": {
+                    "en": "Basking 32–35°C, ambient 26–30°C, night 22–25°C. UVB 5.0–10.0. Tropical species — no brumation.",
+                    "ja": "ホットスポット32〜35℃、環境温度26〜30℃、夜間22〜25℃。UVB 5.0〜10.0。熱帯種 — ブルメーションなし。",
+                },
+                "humidity": {
+                    "en": "70–80%. High humidity species from South American forests. Frequent misting. Large shallow water dish.",
+                    "ja": "70〜80%。南米の森林原産の高湿度種。頻繁な霧吹き。大きな浅い水皿。",
+                },
+                "housing": {
+                    "en": "Larger enclosure needed (150×60 cm minimum — they grow to 30–35 cm). Closed-top vivarium helps retain humidity. Deep, moisture-retaining substrate (cypress mulch, coco coir).",
+                    "ja": "より大きなケージが必要（最低150×60cm — 30〜35cmに成長）。密閉型ビバリウムで湿度維持。保湿性のある深い床材（サイプレスマルチ、ココヤシ繊維）。",
+                },
+                "diet": {
+                    "en": "Mixed diet: greens (70%), fruits (20% — unlike temperate species, fruit is OK), protein (10% — mushrooms, occasional snail/worm). Calcium 2–3x/week.",
+                    "ja": "混合食：葉物（70%）、果物（20% — 温帯種と違い果物OK）、タンパク質（10% — キノコ、時々カタツムリ/ミミズ）。カルシウム週2〜3回。",
+                },
+                "notes": {
+                    "en": "Lifespan 50+ years. More omnivorous than most tortoises. Personable and interactive. Prone to respiratory infections if kept too cool/dry.",
+                    "ja": "寿命50年以上。多くのリクガメより雑食性。人に馴れやすく対話的。低温・乾燥環境では呼吸器感染症になりやすい。",
+                },
             },
         ],
     },
@@ -768,37 +1145,106 @@ HUSBANDRY_DATA: dict = {
     "snake": {
         "name": "Snake",
         "name_ja": "ヘビ",
-        "temperature": {"en": "Thermal gradient: warm side 28–32°C, cool side 23–27°C. Belly heat (under-tank heater with thermostat) preferred by many species.", "ja": "温度勾配：温暖側28〜32℃、冷涼側23〜27℃。腹部からの加温（サーモスタット付きパネルヒーター）を好む種が多い。"},
-        "humidity": {"en": "Species-dependent: corn snake (40–50%), ball python (50–60%), tropical boas (60–80%). Increase during shedding.", "ja": "種による：コーンスネーク（40〜50%）、ボールパイソン（50〜60%）、熱帯ボア（60〜80%）。脱皮時は湿度を上げる。"},
-        "housing": {"en": "Minimum length = snake's body length. Secure locking lid mandatory. At least 2 hides (warm and cool side). Water bowl large enough to soak in. Climbing branches for arboreal species.", "ja": "最低ケージ長＝ヘビの体長。施錠できる蓋が必須。最低2つのシェルター（温暖側と冷涼側）。浸かれる大きさの水入れ。樹上性種には登攀用の枝。"},
-        "diet": {"en": "Whole prey (frozen-thawed recommended over live). Feeding frequency varies by age/species (weekly for juveniles, biweekly for adults). Size: prey width ≈ snake's widest point.", "ja": "ホールプレイ（冷凍解凍が生き餌より推奨）。給餌頻度は年齢・種による（幼体は週1回、成体は2週に1回）。餌のサイズ：ヘビの最も太い部分と同程度。"},
-        "enrichment": {"en": "Multiple hides and cover. Branches and ledges. Novel scents (shed from other species). Environmental changes (rearrange decor). Some species benefit from handling.", "ja": "複数のシェルターとカバー。枝や棚。新しい匂い（他種の脱皮殻など）。環境の模様替え。ハンドリングが有益な種もある。"},
-        "socialization": {"en": "Strictly solitary (with very few exceptions). Co-habitation is stressful and dangerous (cannibalism risk in some species). Regular gentle handling tames most species.", "ja": "厳格な単独飼育（ごく一部の例外を除く）。同居はストレスと危険（共食いのリスクも）。定期的な穏やかなハンドリングで多くの種は馴れる。"},
-        "notes": {"en": "Lifespan 15–30+ years (ball pythons). Do not handle 48 hours after feeding. Blue/milky eyes indicate upcoming shed. Respiratory infections common with improper humidity. Escape prevention is critical.", "ja": "寿命15〜30年以上（ボールパイソン）。給餌後48時間はハンドリング不可。目が白く濁ると脱皮間近。湿度管理不良で呼吸器感染症が多い。脱走防止が最重要。"},
+        "temperature": {
+            "en": "Thermal gradient: warm side 28–32°C, cool side 23–27°C. Belly heat (under-tank heater with thermostat) preferred by many species.",
+            "ja": "温度勾配：温暖側28〜32℃、冷涼側23〜27℃。腹部からの加温（サーモスタット付きパネルヒーター）を好む種が多い。",
+        },
+        "humidity": {
+            "en": "Species-dependent: corn snake (40–50%), ball python (50–60%), tropical boas (60–80%). Increase during shedding.",
+            "ja": "種による：コーンスネーク（40〜50%）、ボールパイソン（50〜60%）、熱帯ボア（60〜80%）。脱皮時は湿度を上げる。",
+        },
+        "housing": {
+            "en": "Minimum length = snake's body length. Secure locking lid mandatory. At least 2 hides (warm and cool side). Water bowl large enough to soak in. Climbing branches for arboreal species.",
+            "ja": "最低ケージ長＝ヘビの体長。施錠できる蓋が必須。最低2つのシェルター（温暖側と冷涼側）。浸かれる大きさの水入れ。樹上性種には登攀用の枝。",
+        },
+        "diet": {
+            "en": "Whole prey (frozen-thawed recommended over live). Feeding frequency varies by age/species (weekly for juveniles, biweekly for adults). Size: prey width ≈ snake's widest point.",
+            "ja": "ホールプレイ（冷凍解凍が生き餌より推奨）。給餌頻度は年齢・種による（幼体は週1回、成体は2週に1回）。餌のサイズ：ヘビの最も太い部分と同程度。",
+        },
+        "enrichment": {
+            "en": "Multiple hides and cover. Branches and ledges. Novel scents (shed from other species). Environmental changes (rearrange decor). Some species benefit from handling.",
+            "ja": "複数のシェルターとカバー。枝や棚。新しい匂い（他種の脱皮殻など）。環境の模様替え。ハンドリングが有益な種もある。",
+        },
+        "socialization": {
+            "en": "Strictly solitary (with very few exceptions). Co-habitation is stressful and dangerous (cannibalism risk in some species). Regular gentle handling tames most species.",
+            "ja": "厳格な単独飼育（ごく一部の例外を除く）。同居はストレスと危険（共食いのリスクも）。定期的な穏やかなハンドリングで多くの種は馴れる。",
+        },
+        "notes": {
+            "en": "Lifespan 15–30+ years (ball pythons). Do not handle 48 hours after feeding. Blue/milky eyes indicate upcoming shed. Respiratory infections common with improper humidity. Escape prevention is critical.",
+            "ja": "寿命15〜30年以上（ボールパイソン）。給餌後48時間はハンドリング不可。目が白く濁ると脱皮間近。湿度管理不良で呼吸器感染症が多い。脱走防止が最重要。",
+        },
         "subtypes": [
             {
-                "name": "Ball Python", "name_ja": "ボールパイソン",
-                "temperature": {"en": "Warm side 30–32°C, cool side 24–26°C, night 24°C. Belly heat (under-tank heater + thermostat) preferred. Ceramic heat emitter for ambient.", "ja": "温暖側30〜32℃、冷涼側24〜26℃、夜間24℃。パネルヒーター＋サーモスタットで腹部加温。暖突で環境温度調整。"},
-                "humidity": {"en": "50–60% ambient; 70–80% during shed (humid hide or misting). Dehydration and stuck shed are common issues.", "ja": "通常50〜60%。脱皮時は70〜80%（ウェットシェルターまたは霧吹き）。脱水と脱皮不全がよくある問題。"},
-                "housing": {"en": "Minimum 120×60×45 cm for adults. PVC or tub setups retain humidity better than screen cages. Tight-fitting hides (they like snug spaces). Climbing opportunities appreciated.", "ja": "成体で最低120×60×45cm。PVCケージやタブ飼育はメッシュケージより湿度維持が容易。体にフィットする隠れ家（狭い空間を好む）。登る機会も喜ぶ。"},
-                "diet": {"en": "Frozen-thawed rats/mice. Juveniles: every 5–7 days. Adults: every 10–14 days. Prey width ≈ widest part of snake. Known for hunger strikes (months-long fasting can be normal).", "ja": "冷凍解凍マウス/ラット。幼体：5〜7日ごと。成体：10〜14日ごと。餌の幅≒ヘビの最太部。拒食しやすい（数ヶ月の絶食が正常なことも）。"},
-                "notes": {"en": "Lifespan 20–30+ years. Ball-up defense posture (curls into ball). Notorious picky eaters. Respiratory infections if too cold/humid. Many morphs available but some linked to neurological issues (spider morph wobble).", "ja": "寿命20〜30年以上。ボール防御姿勢（丸まる）。偏食で有名。低温/高湿度で呼吸器感染症。多数のモルフがあるが一部は神経障害と関連（スパイダーモルフのウォブル）。"},
+                "name": "Ball Python",
+                "name_ja": "ボールパイソン",
+                "temperature": {
+                    "en": "Warm side 30–32°C, cool side 24–26°C, night 24°C. Belly heat (under-tank heater + thermostat) preferred. Ceramic heat emitter for ambient.",
+                    "ja": "温暖側30〜32℃、冷涼側24〜26℃、夜間24℃。パネルヒーター＋サーモスタットで腹部加温。暖突で環境温度調整。",
+                },
+                "humidity": {
+                    "en": "50–60% ambient; 70–80% during shed (humid hide or misting). Dehydration and stuck shed are common issues.",
+                    "ja": "通常50〜60%。脱皮時は70〜80%（ウェットシェルターまたは霧吹き）。脱水と脱皮不全がよくある問題。",
+                },
+                "housing": {
+                    "en": "Minimum 120×60×45 cm for adults. PVC or tub setups retain humidity better than screen cages. Tight-fitting hides (they like snug spaces). Climbing opportunities appreciated.",
+                    "ja": "成体で最低120×60×45cm。PVCケージやタブ飼育はメッシュケージより湿度維持が容易。体にフィットする隠れ家（狭い空間を好む）。登る機会も喜ぶ。",
+                },
+                "diet": {
+                    "en": "Frozen-thawed rats/mice. Juveniles: every 5–7 days. Adults: every 10–14 days. Prey width ≈ widest part of snake. Known for hunger strikes (months-long fasting can be normal).",
+                    "ja": "冷凍解凍マウス/ラット。幼体：5〜7日ごと。成体：10〜14日ごと。餌の幅≒ヘビの最太部。拒食しやすい（数ヶ月の絶食が正常なことも）。",
+                },
+                "notes": {
+                    "en": "Lifespan 20–30+ years. Ball-up defense posture (curls into ball). Notorious picky eaters. Respiratory infections if too cold/humid. Many morphs available but some linked to neurological issues (spider morph wobble).",
+                    "ja": "寿命20〜30年以上。ボール防御姿勢（丸まる）。偏食で有名。低温/高湿度で呼吸器感染症。多数のモルフがあるが一部は神経障害と関連（スパイダーモルフのウォブル）。",
+                },
             },
             {
-                "name": "Corn Snake", "name_ja": "コーンスネーク",
-                "temperature": {"en": "Warm side 28–30°C, cool side 22–25°C, night 20–22°C. Heat mat with thermostat. Room temperature is often too cool.", "ja": "温暖側28〜30℃、冷涼側22〜25℃、夜間20〜22℃。サーモスタット付きヒートマット。室温だけでは低すぎることが多い。"},
-                "humidity": {"en": "40–50% ambient; increase to 60–70% during shed. Good ventilation important.", "ja": "通常40〜50%。脱皮時は60〜70%に上げる。換気の確保が重要。"},
-                "housing": {"en": "Minimum 90×45×45 cm for adults. Escape-proof lid essential (notorious escape artists). Multiple hides. Semi-arboreal — provide climbing branches.", "ja": "成体で最低90×45×45cm。脱走防止の蓋が必須（脱走の名人）。複数のシェルター。半樹上性 — 登攀用の枝を設置。"},
-                "diet": {"en": "Frozen-thawed mice. Hatchlings: pinky mice every 5–7 days. Adults: adult mice every 10–14 days. Usually excellent feeders.", "ja": "冷凍解凍マウス。ハッチリング：ピンクマウスを5〜7日ごと。成体：アダルトマウスを10〜14日ごと。通常は食欲旺盛。"},
-                "notes": {"en": "Lifespan 15–20 years. Excellent beginner snake — docile, hardy, great feeders. Many color morphs. Brumation possible (2–3 months at 10–15°C) for breeding.", "ja": "寿命15〜20年。初心者に最適 — 温厚、丈夫、食欲旺盛。多数のカラーモルフ。繁殖にはブルメーション（2〜3ヶ月、10〜15℃）が可能。"},
+                "name": "Corn Snake",
+                "name_ja": "コーンスネーク",
+                "temperature": {
+                    "en": "Warm side 28–30°C, cool side 22–25°C, night 20–22°C. Heat mat with thermostat. Room temperature is often too cool.",
+                    "ja": "温暖側28〜30℃、冷涼側22〜25℃、夜間20〜22℃。サーモスタット付きヒートマット。室温だけでは低すぎることが多い。",
+                },
+                "humidity": {
+                    "en": "40–50% ambient; increase to 60–70% during shed. Good ventilation important.",
+                    "ja": "通常40〜50%。脱皮時は60〜70%に上げる。換気の確保が重要。",
+                },
+                "housing": {
+                    "en": "Minimum 90×45×45 cm for adults. Escape-proof lid essential (notorious escape artists). Multiple hides. Semi-arboreal — provide climbing branches.",
+                    "ja": "成体で最低90×45×45cm。脱走防止の蓋が必須（脱走の名人）。複数のシェルター。半樹上性 — 登攀用の枝を設置。",
+                },
+                "diet": {
+                    "en": "Frozen-thawed mice. Hatchlings: pinky mice every 5–7 days. Adults: adult mice every 10–14 days. Usually excellent feeders.",
+                    "ja": "冷凍解凍マウス。ハッチリング：ピンクマウスを5〜7日ごと。成体：アダルトマウスを10〜14日ごと。通常は食欲旺盛。",
+                },
+                "notes": {
+                    "en": "Lifespan 15–20 years. Excellent beginner snake — docile, hardy, great feeders. Many color morphs. Brumation possible (2–3 months at 10–15°C) for breeding.",
+                    "ja": "寿命15〜20年。初心者に最適 — 温厚、丈夫、食欲旺盛。多数のカラーモルフ。繁殖にはブルメーション（2〜3ヶ月、10〜15℃）が可能。",
+                },
             },
             {
-                "name": "Boa Constrictor", "name_ja": "ボアコンストリクター",
-                "temperature": {"en": "Basking 32–35°C, cool side 26–28°C, night 24–26°C. Radiant heat panel or ceramic heat emitter for large enclosures.", "ja": "ホットスポット32〜35℃、冷涼側26〜28℃、夜間24〜26℃。大型ケージにはラジアントヒートパネルまたは暖突。"},
-                "humidity": {"en": "60–70%. Higher for tropical subspecies (BCI: 60–70%, BCC: 70–80%). Misting or large water bowl for humidity.", "ja": "60〜70%。熱帯亜種はより高湿度（BCI：60〜70%、BCC：70〜80%）。霧吹きまたは大型水入れで湿度確保。"},
-                "housing": {"en": "Adults need 180×60×60 cm minimum (can reach 2–3 m). Heavy-duty enclosure with secure locking. Large water bowl for soaking. PVC enclosures preferred.", "ja": "成体は最低180×60×60cm（体長2〜3mに達する）。頑丈なケージと確実なロック。浸かれる大型水入れ。PVCケージ推奨。"},
-                "diet": {"en": "Frozen-thawed rats/rabbits (size-appropriate). Juveniles: every 7–10 days. Adults: every 2–4 weeks. Obesity is common in captivity — monitor body condition.", "ja": "冷凍解凍ラット/ウサギ（サイズに合わせて）。幼体：7〜10日ごと。成体：2〜4週ごと。飼育下では肥満が多い — 体型管理を。"},
-                "notes": {"en": "Lifespan 20–30+ years. Can become large and strong — experienced keeper recommended. Inclusion body disease (IBD) is a serious viral threat. Regular health checks important.", "ja": "寿命20〜30年以上。大きく力も強くなるため経験者向け。封入体病（IBD）は深刻なウイルス疾患。定期的な健康チェックが重要。"},
+                "name": "Boa Constrictor",
+                "name_ja": "ボアコンストリクター",
+                "temperature": {
+                    "en": "Basking 32–35°C, cool side 26–28°C, night 24–26°C. Radiant heat panel or ceramic heat emitter for large enclosures.",
+                    "ja": "ホットスポット32〜35℃、冷涼側26〜28℃、夜間24〜26℃。大型ケージにはラジアントヒートパネルまたは暖突。",
+                },
+                "humidity": {
+                    "en": "60–70%. Higher for tropical subspecies (BCI: 60–70%, BCC: 70–80%). Misting or large water bowl for humidity.",
+                    "ja": "60〜70%。熱帯亜種はより高湿度（BCI：60〜70%、BCC：70〜80%）。霧吹きまたは大型水入れで湿度確保。",
+                },
+                "housing": {
+                    "en": "Adults need 180×60×60 cm minimum (can reach 2–3 m). Heavy-duty enclosure with secure locking. Large water bowl for soaking. PVC enclosures preferred.",
+                    "ja": "成体は最低180×60×60cm（体長2〜3mに達する）。頑丈なケージと確実なロック。浸かれる大型水入れ。PVCケージ推奨。",
+                },
+                "diet": {
+                    "en": "Frozen-thawed rats/rabbits (size-appropriate). Juveniles: every 7–10 days. Adults: every 2–4 weeks. Obesity is common in captivity — monitor body condition.",
+                    "ja": "冷凍解凍ラット/ウサギ（サイズに合わせて）。幼体：7〜10日ごと。成体：2〜4週ごと。飼育下では肥満が多い — 体型管理を。",
+                },
+                "notes": {
+                    "en": "Lifespan 20–30+ years. Can become large and strong — experienced keeper recommended. Inclusion body disease (IBD) is a serious viral threat. Regular health checks important.",
+                    "ja": "寿命20〜30年以上。大きく力も強くなるため経験者向け。封入体病（IBD）は深刻なウイルス疾患。定期的な健康チェックが重要。",
+                },
             },
         ],
     },
@@ -808,45 +1254,130 @@ HUSBANDRY_DATA: dict = {
     "lizard": {
         "name": "Lizard",
         "name_ja": "トカゲ",
-        "temperature": {"en": "Basking spot 35–42°C (species-dependent), cool side 24–28°C. UVB essential for diurnal species. Thermostat-controlled heating.", "ja": "ホットスポット35〜42℃（種による）、クールゾーン24〜28℃。昼行性種にはUVBが必須。サーモスタット制御の加温。"},
-        "humidity": {"en": "Bearded dragon (30–40%), leopard gecko (30–40%), chameleon (50–70%), crested gecko (60–80%). Misting system for tropical species.", "ja": "フトアゴヒゲトカゲ（30〜40%）、ヒョウモントカゲモドキ（30〜40%）、カメレオン（50〜70%）、クレステッドゲッコー（60〜80%）。熱帯種にはミスティングシステム。"},
-        "housing": {"en": "Size varies greatly by species. Arboreal species need tall enclosures; terrestrial need floor space. UVB + basking light. Appropriate substrate (no loose sand for bearded dragons).", "ja": "サイズは種により大きく異なる。樹上性種は縦長、地表性種は床面積が重要。UVB＋バスキングライト。適切な床材（フトアゴに砂は不可）。"},
-        "diet": {"en": "Varies: omnivore (bearded dragon — insects + greens), insectivore (leopard gecko), herbivore (iguana — greens only). Gut-load insects. Calcium + D3 dusting.", "ja": "種による：雑食（フトアゴ — 昆虫＋野菜）、昆虫食（ヒョウモン）、草食（イグアナ — 野菜のみ）。昆虫はガットローディング。カルシウム＋D3ダスティング。"},
-        "enrichment": {"en": "Climbing structures, basking platforms. Varied substrate textures. Live plants (non-toxic). Foraging opportunities. Supervised outdoor time in warm weather.", "ja": "登攀構造物、バスキング台。様々な質感の床材。無毒の生きた植物。採食機会。暖かい日には監視下で屋外日光浴。"},
-        "socialization": {"en": "Most lizards are solitary. Bearded dragons can be handleable and interactive. Chameleons are strictly solitary and stress-sensitive. Leopard geckos tolerate gentle handling.", "ja": "多くのトカゲは単独飼育。フトアゴはハンドリングしやすく人馴れする。カメレオンは完全単独でストレスに弱い。ヒョウモンは穏やかなハンドリングを許容。"},
-        "notes": {"en": "MBD (metabolic bone disease) is #1 health issue — proper UVB and calcium critical. Tail autotomy in geckos is a defense mechanism (may or may not regrow). Impaction from substrate ingestion is common.", "ja": "MBD（代謝性骨疾患）が最大の健康問題 — UVBとカルシウムが不可欠。ヤモリの尾の自切は防御反応（再生する場合としない場合あり）。床材の誤飲による腸閉塞が多い。"},
+        "temperature": {
+            "en": "Basking spot 35–42°C (species-dependent), cool side 24–28°C. UVB essential for diurnal species. Thermostat-controlled heating.",
+            "ja": "ホットスポット35〜42℃（種による）、クールゾーン24〜28℃。昼行性種にはUVBが必須。サーモスタット制御の加温。",
+        },
+        "humidity": {
+            "en": "Bearded dragon (30–40%), leopard gecko (30–40%), chameleon (50–70%), crested gecko (60–80%). Misting system for tropical species.",
+            "ja": "フトアゴヒゲトカゲ（30〜40%）、ヒョウモントカゲモドキ（30〜40%）、カメレオン（50〜70%）、クレステッドゲッコー（60〜80%）。熱帯種にはミスティングシステム。",
+        },
+        "housing": {
+            "en": "Size varies greatly by species. Arboreal species need tall enclosures; terrestrial need floor space. UVB + basking light. Appropriate substrate (no loose sand for bearded dragons).",
+            "ja": "サイズは種により大きく異なる。樹上性種は縦長、地表性種は床面積が重要。UVB＋バスキングライト。適切な床材（フトアゴに砂は不可）。",
+        },
+        "diet": {
+            "en": "Varies: omnivore (bearded dragon — insects + greens), insectivore (leopard gecko), herbivore (iguana — greens only). Gut-load insects. Calcium + D3 dusting.",
+            "ja": "種による：雑食（フトアゴ — 昆虫＋野菜）、昆虫食（ヒョウモン）、草食（イグアナ — 野菜のみ）。昆虫はガットローディング。カルシウム＋D3ダスティング。",
+        },
+        "enrichment": {
+            "en": "Climbing structures, basking platforms. Varied substrate textures. Live plants (non-toxic). Foraging opportunities. Supervised outdoor time in warm weather.",
+            "ja": "登攀構造物、バスキング台。様々な質感の床材。無毒の生きた植物。採食機会。暖かい日には監視下で屋外日光浴。",
+        },
+        "socialization": {
+            "en": "Most lizards are solitary. Bearded dragons can be handleable and interactive. Chameleons are strictly solitary and stress-sensitive. Leopard geckos tolerate gentle handling.",
+            "ja": "多くのトカゲは単独飼育。フトアゴはハンドリングしやすく人馴れする。カメレオンは完全単独でストレスに弱い。ヒョウモンは穏やかなハンドリングを許容。",
+        },
+        "notes": {
+            "en": "MBD (metabolic bone disease) is #1 health issue — proper UVB and calcium critical. Tail autotomy in geckos is a defense mechanism (may or may not regrow). Impaction from substrate ingestion is common.",
+            "ja": "MBD（代謝性骨疾患）が最大の健康問題 — UVBとカルシウムが不可欠。ヤモリの尾の自切は防御反応（再生する場合としない場合あり）。床材の誤飲による腸閉塞が多い。",
+        },
         "subtypes": [
             {
-                "name": "Bearded Dragon", "name_ja": "フトアゴヒゲトカゲ",
-                "temperature": {"en": "Basking 38–42°C, cool side 24–28°C, night 20–22°C. UVB 10.0 essential (10–12 hr/day).", "ja": "ホットスポット38〜42℃、クールゾーン24〜28℃、夜間20〜22℃。UVB 10.0必須（10〜12時間/日）。"},
-                "humidity": {"en": "30–40%. Low humidity species; excessive humidity causes respiratory infections.", "ja": "30〜40%。乾燥環境の種。高湿度は呼吸器感染の原因。"},
-                "housing": {"en": "120×60×60 cm minimum for adults. Front-opening terrarium preferred. No loose sand substrate (impaction risk) — tile, reptile carpet, or excavator clay.", "ja": "成体で最低120×60×60cm。前面開閉式テラリウム推奨。砂の床材不可（腸閉塞リスク）— タイル、レプタイルカーペット、クレイ系床材。"},
-                "diet": {"en": "Juveniles: 70% insects, 30% greens. Adults: 70% greens, 30% insects. Staple insects: dubia roaches, black soldier fly larvae. Greens: collard, mustard, dandelion. Calcium dust daily for juveniles.", "ja": "幼体：昆虫70%、野菜30%。成体：野菜70%、昆虫30%。主食昆虫：デュビアローチ、アメリカミズアブ幼虫。野菜：コラード、マスタードグリーン、タンポポ。幼体はCaダスティング毎日。"},
-                "notes": {"en": "Lifespan 10–15 years. Brumation (winter dormancy) normal in adults. Arm waving = submission, head bobbing = dominance/territorial. Black beard = stress or aggression.", "ja": "寿命10〜15年。成体のブルメーション（冬季休眠）は正常。腕振り＝服従、ヘッドボビング＝優位/縄張り。顎が黒くなる＝ストレスまたは攻撃性。"},
+                "name": "Bearded Dragon",
+                "name_ja": "フトアゴヒゲトカゲ",
+                "temperature": {
+                    "en": "Basking 38–42°C, cool side 24–28°C, night 20–22°C. UVB 10.0 essential (10–12 hr/day).",
+                    "ja": "ホットスポット38〜42℃、クールゾーン24〜28℃、夜間20〜22℃。UVB 10.0必須（10〜12時間/日）。",
+                },
+                "humidity": {
+                    "en": "30–40%. Low humidity species; excessive humidity causes respiratory infections.",
+                    "ja": "30〜40%。乾燥環境の種。高湿度は呼吸器感染の原因。",
+                },
+                "housing": {
+                    "en": "120×60×60 cm minimum for adults. Front-opening terrarium preferred. No loose sand substrate (impaction risk) — tile, reptile carpet, or excavator clay.",
+                    "ja": "成体で最低120×60×60cm。前面開閉式テラリウム推奨。砂の床材不可（腸閉塞リスク）— タイル、レプタイルカーペット、クレイ系床材。",
+                },
+                "diet": {
+                    "en": "Juveniles: 70% insects, 30% greens. Adults: 70% greens, 30% insects. Staple insects: dubia roaches, black soldier fly larvae. Greens: collard, mustard, dandelion. Calcium dust daily for juveniles.",
+                    "ja": "幼体：昆虫70%、野菜30%。成体：野菜70%、昆虫30%。主食昆虫：デュビアローチ、アメリカミズアブ幼虫。野菜：コラード、マスタードグリーン、タンポポ。幼体はCaダスティング毎日。",
+                },
+                "notes": {
+                    "en": "Lifespan 10–15 years. Brumation (winter dormancy) normal in adults. Arm waving = submission, head bobbing = dominance/territorial. Black beard = stress or aggression.",
+                    "ja": "寿命10〜15年。成体のブルメーション（冬季休眠）は正常。腕振り＝服従、ヘッドボビング＝優位/縄張り。顎が黒くなる＝ストレスまたは攻撃性。",
+                },
             },
             {
-                "name": "Leopard Gecko", "name_ja": "ヒョウモントカゲモドキ",
-                "temperature": {"en": "Warm side 28–32°C (belly heat via under-tank heater), cool side 24–26°C, night 20–22°C. No UVB strictly required but beneficial.", "ja": "温暖側28〜32℃（パネルヒーターで腹部加温）、冷涼側24〜26℃、夜間20〜22℃。UVBは必須ではないが有益。"},
-                "humidity": {"en": "30–40% ambient; humid hide (70–80%) for shedding support.", "ja": "環境湿度30〜40%。脱皮補助用のウェットシェルター（70〜80%）を設置。"},
-                "housing": {"en": "60×45×30 cm minimum. Terrestrial — floor space more important than height. 3 hides minimum (warm, cool, humid). Paper towel or tile substrate safest.", "ja": "最低60×45×30cm。地表性 — 高さより床面積重要。最低3つのシェルター（温暖側、冷涼側、ウェット）。キッチンペーパーまたはタイルが最も安全。"},
-                "diet": {"en": "Strictly insectivorous: crickets, dubia roaches, mealworms (treat only — high fat). Calcium + D3 dusting every feeding. No vegetables/fruit.", "ja": "完全昆虫食：コオロギ、デュビアローチ、ミルワーム（おやつ程度 — 高脂肪）。毎回Ca＋D3ダスティング。野菜・果物は不可。"},
-                "notes": {"en": "Lifespan 15–20+ years. Crepuscular (dawn/dusk active). Fat stored in tail — thin tail indicates illness. Tail autotomy if grabbed — handle body, never tail.", "ja": "寿命15〜20年以上。薄明薄暮性。尻尾に脂肪を蓄積 — 尻尾が細いと体調不良。尻尾を掴むと自切 — 体を持ち、尻尾は決して掴まない。"},
+                "name": "Leopard Gecko",
+                "name_ja": "ヒョウモントカゲモドキ",
+                "temperature": {
+                    "en": "Warm side 28–32°C (belly heat via under-tank heater), cool side 24–26°C, night 20–22°C. No UVB strictly required but beneficial.",
+                    "ja": "温暖側28〜32℃（パネルヒーターで腹部加温）、冷涼側24〜26℃、夜間20〜22℃。UVBは必須ではないが有益。",
+                },
+                "humidity": {
+                    "en": "30–40% ambient; humid hide (70–80%) for shedding support.",
+                    "ja": "環境湿度30〜40%。脱皮補助用のウェットシェルター（70〜80%）を設置。",
+                },
+                "housing": {
+                    "en": "60×45×30 cm minimum. Terrestrial — floor space more important than height. 3 hides minimum (warm, cool, humid). Paper towel or tile substrate safest.",
+                    "ja": "最低60×45×30cm。地表性 — 高さより床面積重要。最低3つのシェルター（温暖側、冷涼側、ウェット）。キッチンペーパーまたはタイルが最も安全。",
+                },
+                "diet": {
+                    "en": "Strictly insectivorous: crickets, dubia roaches, mealworms (treat only — high fat). Calcium + D3 dusting every feeding. No vegetables/fruit.",
+                    "ja": "完全昆虫食：コオロギ、デュビアローチ、ミルワーム（おやつ程度 — 高脂肪）。毎回Ca＋D3ダスティング。野菜・果物は不可。",
+                },
+                "notes": {
+                    "en": "Lifespan 15–20+ years. Crepuscular (dawn/dusk active). Fat stored in tail — thin tail indicates illness. Tail autotomy if grabbed — handle body, never tail.",
+                    "ja": "寿命15〜20年以上。薄明薄暮性。尻尾に脂肪を蓄積 — 尻尾が細いと体調不良。尻尾を掴むと自切 — 体を持ち、尻尾は決して掴まない。",
+                },
             },
             {
-                "name": "Chameleon", "name_ja": "カメレオン",
-                "temperature": {"en": "Basking 30–35°C, ambient 24–28°C, night drop to 16–22°C important. UVB 5.0 essential.", "ja": "ホットスポット30〜35℃、環境温度24〜28℃、夜間16〜22℃への温度低下が重要。UVB 5.0必須。"},
-                "humidity": {"en": "50–70%. Misting 2–4x daily (they drink water droplets off leaves — do NOT use standing water bowls). Drip system or misting system essential.", "ja": "50〜70%。1日2〜4回の霧吹き（葉の水滴を舐めて飲水 — 水入れは使わない）。ドリップシステムまたはミスティングシステム必須。"},
-                "housing": {"en": "Screen/mesh cage (NOT glass — need ventilation). Minimum 60×60×120 cm for veiled/panther chameleons. Live plants (pothos, ficus) essential. Horizontal branches at multiple levels.", "ja": "メッシュケージ（ガラス不可 — 通気性が必要）。エボシ/パンサーで最低60×60×120cm。生きた植物（ポトス、フィカス）必須。複数の高さに水平の枝。"},
-                "diet": {"en": "Insectivorous: crickets, silkworms, hornworms. Gut-load insects with greens. Calcium every feeding, D3 2x/month, multivitamin 2x/month.", "ja": "昆虫食：コオロギ、シルクワーム、ホーンワーム。昆虫には野菜でガットローディング。Ca毎回、D3月2回、マルチビタミン月2回。"},
-                "notes": {"en": "Lifespan 5–8 years. Strictly solitary — visual contact with other chameleons causes chronic stress. Color changes indicate mood/health. Very stress-sensitive — not a handling pet.", "ja": "寿命5〜8年。厳格な単独飼育 — 他のカメレオンが見えるだけでストレス。体色変化は気分/健康のバロメーター。ストレスに非常に弱い — ハンドリング向きではない。"},
+                "name": "Chameleon",
+                "name_ja": "カメレオン",
+                "temperature": {
+                    "en": "Basking 30–35°C, ambient 24–28°C, night drop to 16–22°C important. UVB 5.0 essential.",
+                    "ja": "ホットスポット30〜35℃、環境温度24〜28℃、夜間16〜22℃への温度低下が重要。UVB 5.0必須。",
+                },
+                "humidity": {
+                    "en": "50–70%. Misting 2–4x daily (they drink water droplets off leaves — do NOT use standing water bowls). Drip system or misting system essential.",
+                    "ja": "50〜70%。1日2〜4回の霧吹き（葉の水滴を舐めて飲水 — 水入れは使わない）。ドリップシステムまたはミスティングシステム必須。",
+                },
+                "housing": {
+                    "en": "Screen/mesh cage (NOT glass — need ventilation). Minimum 60×60×120 cm for veiled/panther chameleons. Live plants (pothos, ficus) essential. Horizontal branches at multiple levels.",
+                    "ja": "メッシュケージ（ガラス不可 — 通気性が必要）。エボシ/パンサーで最低60×60×120cm。生きた植物（ポトス、フィカス）必須。複数の高さに水平の枝。",
+                },
+                "diet": {
+                    "en": "Insectivorous: crickets, silkworms, hornworms. Gut-load insects with greens. Calcium every feeding, D3 2x/month, multivitamin 2x/month.",
+                    "ja": "昆虫食：コオロギ、シルクワーム、ホーンワーム。昆虫には野菜でガットローディング。Ca毎回、D3月2回、マルチビタミン月2回。",
+                },
+                "notes": {
+                    "en": "Lifespan 5–8 years. Strictly solitary — visual contact with other chameleons causes chronic stress. Color changes indicate mood/health. Very stress-sensitive — not a handling pet.",
+                    "ja": "寿命5〜8年。厳格な単独飼育 — 他のカメレオンが見えるだけでストレス。体色変化は気分/健康のバロメーター。ストレスに非常に弱い — ハンドリング向きではない。",
+                },
             },
             {
-                "name": "Crested Gecko", "name_ja": "クレステッドゲッコー",
-                "temperature": {"en": "22–27°C (room temperature often sufficient). Do NOT exceed 30°C — heat-sensitive. No basking light needed. Low UVB beneficial but not essential.", "ja": "22〜27℃（室温で十分なことが多い）。30℃を超えてはならない — 暑さに弱い。バスキングライト不要。低出力UVBは有益だが必須ではない。"},
-                "humidity": {"en": "60–80%. Mist heavily in evening, let dry during day. Good ventilation to prevent stagnant air.", "ja": "60〜80%。夕方にたっぷり霧吹き、日中は乾燥させる。空気が淀まないよう換気を確保。"},
-                "housing": {"en": "Tall enclosure (45×45×60 cm minimum). Arboreal — vertical space critical. Cork bark, branches, live/artificial plants. Front-opening preferred.", "ja": "縦長ケージ（最低45×45×60cm）。樹上性 — 垂直空間が重要。コルクバーク、枝、生体/人工植物。前面開閉式推奨。"},
-                "diet": {"en": "Commercial crested gecko diet (CGD: Repashy, Pangea) as staple — complete nutrition. Insects 1–2x/week as supplement. Fresh CGD every other day.", "ja": "クレステッドゲッコー用人工飼料（CGD：レパシー、パンゲア）が主食 — 完全栄養食。昆虫は週1〜2回の補助。新鮮なCGDを1日おきに。"},
-                "notes": {"en": "Lifespan 15–20 years. Dropped tail does NOT regrow (unlike many geckos). 'Floppy tail syndrome' from always hanging upside down. Easy beginner reptile.", "ja": "寿命15〜20年。自切した尻尾は再生しない（他のヤモリと異なる）。常に逆さにいると尻尾が曲がる（フロッピーテール症候群）。初心者向けの飼いやすい種。"},
+                "name": "Crested Gecko",
+                "name_ja": "クレステッドゲッコー",
+                "temperature": {
+                    "en": "22–27°C (room temperature often sufficient). Do NOT exceed 30°C — heat-sensitive. No basking light needed. Low UVB beneficial but not essential.",
+                    "ja": "22〜27℃（室温で十分なことが多い）。30℃を超えてはならない — 暑さに弱い。バスキングライト不要。低出力UVBは有益だが必須ではない。",
+                },
+                "humidity": {
+                    "en": "60–80%. Mist heavily in evening, let dry during day. Good ventilation to prevent stagnant air.",
+                    "ja": "60〜80%。夕方にたっぷり霧吹き、日中は乾燥させる。空気が淀まないよう換気を確保。",
+                },
+                "housing": {
+                    "en": "Tall enclosure (45×45×60 cm minimum). Arboreal — vertical space critical. Cork bark, branches, live/artificial plants. Front-opening preferred.",
+                    "ja": "縦長ケージ（最低45×45×60cm）。樹上性 — 垂直空間が重要。コルクバーク、枝、生体/人工植物。前面開閉式推奨。",
+                },
+                "diet": {
+                    "en": "Commercial crested gecko diet (CGD: Repashy, Pangea) as staple — complete nutrition. Insects 1–2x/week as supplement. Fresh CGD every other day.",
+                    "ja": "クレステッドゲッコー用人工飼料（CGD：レパシー、パンゲア）が主食 — 完全栄養食。昆虫は週1〜2回の補助。新鮮なCGDを1日おきに。",
+                },
+                "notes": {
+                    "en": "Lifespan 15–20 years. Dropped tail does NOT regrow (unlike many geckos). 'Floppy tail syndrome' from always hanging upside down. Easy beginner reptile.",
+                    "ja": "寿命15〜20年。自切した尻尾は再生しない（他のヤモリと異なる）。常に逆さにいると尻尾が曲がる（フロッピーテール症候群）。初心者向けの飼いやすい種。",
+                },
             },
         ],
     },
@@ -856,37 +1387,106 @@ HUSBANDRY_DATA: dict = {
     "amphibian": {
         "name": "Amphibian",
         "name_ja": "両生類",
-        "temperature": {"en": "18–26°C for most species. Avoid overheating — amphibians are ectothermic and sensitive. No direct sunlight on enclosure.", "ja": "多くの種で18〜26℃。過加温に注意 — 変温動物で敏感。ケージに直射日光を当てない。"},
-        "humidity": {"en": "60–80%+ for most species. Misting 1–2x daily. Standing water for aquatic/semi-aquatic species. Dechlorinated water only.", "ja": "多くの種で60〜80%以上。1日1〜2回の霧吹き。水生・半水生種には常水。必ずカルキ抜きした水を使用。"},
-        "housing": {"en": "Terrestrial, semi-aquatic, or fully aquatic setup depending on species. Tight-fitting lid (they climb). Live plants help humidity. No sharp objects (delicate skin).", "ja": "種により陸上、半水生、完全水生のセットアップ。しっかり閉まる蓋（登る）。生きた植物で湿度維持。鋭い物は不可（皮膚が繊細）。"},
-        "diet": {"en": "Most are insectivorous: gut-loaded crickets, fruit flies (for small species), earthworms. Aquatic species may eat bloodworms, brine shrimp. Calcium dusting essential.", "ja": "多くは昆虫食：ガットローディング済みコオロギ、ショウジョウバエ（小型種）、ミミズ。水生種はアカムシ、ブラインシュリンプ。カルシウムダスティング必須。"},
-        "enrichment": {"en": "Live plants, leaf litter, cork bark hides. Water features (small waterfall/drip wall). Varied terrain. Dim lighting (many are nocturnal/crepuscular).", "ja": "生きた植物、落ち葉、コルクバークのシェルター。水場（小さな滝・点滴壁）。変化のある地形。薄暗い照明（夜行性・薄明性が多い）。"},
-        "socialization": {"en": "Observation pets — minimal handling recommended. Skin absorbs toxins from human hands (wash hands, wet them before handling). Some species (dart frogs) can be kept in groups.", "ja": "観察型ペット — ハンドリングは最小限推奨。皮膚が人間の手の毒素を吸収（触る前に手を洗い湿らせる）。ヤドクガエルなどはグループ飼育可。"},
-        "notes": {"en": "Skin is semi-permeable — water quality and air quality are critical. Chytrid fungus is a global amphibian threat. Never release pet amphibians into the wild. Use dechlorinated or RO water only.", "ja": "皮膚は半透過性 — 水質と空気の質が生命に直結。ツボカビ症は世界的な両生類の脅威。ペットの両生類を野外に放さない。カルキ抜きまたはRO水のみ使用。"},
+        "temperature": {
+            "en": "18–26°C for most species. Avoid overheating — amphibians are ectothermic and sensitive. No direct sunlight on enclosure.",
+            "ja": "多くの種で18〜26℃。過加温に注意 — 変温動物で敏感。ケージに直射日光を当てない。",
+        },
+        "humidity": {
+            "en": "60–80%+ for most species. Misting 1–2x daily. Standing water for aquatic/semi-aquatic species. Dechlorinated water only.",
+            "ja": "多くの種で60〜80%以上。1日1〜2回の霧吹き。水生・半水生種には常水。必ずカルキ抜きした水を使用。",
+        },
+        "housing": {
+            "en": "Terrestrial, semi-aquatic, or fully aquatic setup depending on species. Tight-fitting lid (they climb). Live plants help humidity. No sharp objects (delicate skin).",
+            "ja": "種により陸上、半水生、完全水生のセットアップ。しっかり閉まる蓋（登る）。生きた植物で湿度維持。鋭い物は不可（皮膚が繊細）。",
+        },
+        "diet": {
+            "en": "Most are insectivorous: gut-loaded crickets, fruit flies (for small species), earthworms. Aquatic species may eat bloodworms, brine shrimp. Calcium dusting essential.",
+            "ja": "多くは昆虫食：ガットローディング済みコオロギ、ショウジョウバエ（小型種）、ミミズ。水生種はアカムシ、ブラインシュリンプ。カルシウムダスティング必須。",
+        },
+        "enrichment": {
+            "en": "Live plants, leaf litter, cork bark hides. Water features (small waterfall/drip wall). Varied terrain. Dim lighting (many are nocturnal/crepuscular).",
+            "ja": "生きた植物、落ち葉、コルクバークのシェルター。水場（小さな滝・点滴壁）。変化のある地形。薄暗い照明（夜行性・薄明性が多い）。",
+        },
+        "socialization": {
+            "en": "Observation pets — minimal handling recommended. Skin absorbs toxins from human hands (wash hands, wet them before handling). Some species (dart frogs) can be kept in groups.",
+            "ja": "観察型ペット — ハンドリングは最小限推奨。皮膚が人間の手の毒素を吸収（触る前に手を洗い湿らせる）。ヤドクガエルなどはグループ飼育可。",
+        },
+        "notes": {
+            "en": "Skin is semi-permeable — water quality and air quality are critical. Chytrid fungus is a global amphibian threat. Never release pet amphibians into the wild. Use dechlorinated or RO water only.",
+            "ja": "皮膚は半透過性 — 水質と空気の質が生命に直結。ツボカビ症は世界的な両生類の脅威。ペットの両生類を野外に放さない。カルキ抜きまたはRO水のみ使用。",
+        },
         "subtypes": [
             {
-                "name": "Axolotl", "name_ja": "ウーパールーパー（メキシコサラマンダー）",
-                "temperature": {"en": "16–20°C (CRITICAL — cold water species). Above 24°C causes severe stress and death. Aquarium chiller or cool room essential in summer.", "ja": "16〜20℃（厳守 — 冷水種）。24℃以上で重度ストレスと死亡。夏季は水槽用クーラーまたは冷房必須。"},
-                "humidity": {"en": "N/A (fully aquatic). Water changes 20% weekly. Dechlorinated water. Ammonia/nitrite must be 0.", "ja": "該当なし（完全水生）。週20%の水替え。カルキ抜き水使用。アンモニア/亜硝酸は0であること。"},
-                "housing": {"en": "Minimum 75 L for one axolotl. Fine sand or bare bottom (gravel causes impaction). Gentle filtration (they dislike strong current). Hides and live plants.", "ja": "1匹あたり最低75L。細かい砂またはベアタンク（砂利は誤飲で腸閉塞）。穏やかなろ過（強い水流を嫌う）。隠れ家と水草。"},
-                "diet": {"en": "Carnivorous: earthworms (staple), sinking pellets (Hikari), frozen bloodworms. Feed every 1–2 days for juveniles, 2–3x/week for adults.", "ja": "肉食：ミミズ（主食）、沈降性ペレット（ひかり）、冷凍アカムシ。幼体は1〜2日ごと、成体は週2〜3回。"},
-                "notes": {"en": "Lifespan 10–15 years. Remarkable regeneration ability (limbs, gills, organs). External gills are normal (neotenic). NEVER house with fish (they eat or get bitten). Critically endangered in the wild.", "ja": "寿命10〜15年。驚異的な再生能力（四肢、鰓、臓器）。外鰓は正常（ネオテニー）。魚との同居は厳禁（食べる/噛まれる）。野生では絶滅危惧種。"},
+                "name": "Axolotl",
+                "name_ja": "ウーパールーパー（メキシコサラマンダー）",
+                "temperature": {
+                    "en": "16–20°C (CRITICAL — cold water species). Above 24°C causes severe stress and death. Aquarium chiller or cool room essential in summer.",
+                    "ja": "16〜20℃（厳守 — 冷水種）。24℃以上で重度ストレスと死亡。夏季は水槽用クーラーまたは冷房必須。",
+                },
+                "humidity": {
+                    "en": "N/A (fully aquatic). Water changes 20% weekly. Dechlorinated water. Ammonia/nitrite must be 0.",
+                    "ja": "該当なし（完全水生）。週20%の水替え。カルキ抜き水使用。アンモニア/亜硝酸は0であること。",
+                },
+                "housing": {
+                    "en": "Minimum 75 L for one axolotl. Fine sand or bare bottom (gravel causes impaction). Gentle filtration (they dislike strong current). Hides and live plants.",
+                    "ja": "1匹あたり最低75L。細かい砂またはベアタンク（砂利は誤飲で腸閉塞）。穏やかなろ過（強い水流を嫌う）。隠れ家と水草。",
+                },
+                "diet": {
+                    "en": "Carnivorous: earthworms (staple), sinking pellets (Hikari), frozen bloodworms. Feed every 1–2 days for juveniles, 2–3x/week for adults.",
+                    "ja": "肉食：ミミズ（主食）、沈降性ペレット（ひかり）、冷凍アカムシ。幼体は1〜2日ごと、成体は週2〜3回。",
+                },
+                "notes": {
+                    "en": "Lifespan 10–15 years. Remarkable regeneration ability (limbs, gills, organs). External gills are normal (neotenic). NEVER house with fish (they eat or get bitten). Critically endangered in the wild.",
+                    "ja": "寿命10〜15年。驚異的な再生能力（四肢、鰓、臓器）。外鰓は正常（ネオテニー）。魚との同居は厳禁（食べる/噛まれる）。野生では絶滅危惧種。",
+                },
             },
             {
-                "name": "Tree Frog", "name_ja": "ツリーフロッグ（アマガエル類）",
-                "temperature": {"en": "22–27°C daytime, 18–22°C night. Avoid overheating. Temperate species (Japanese tree frog) tolerate cooler temperatures.", "ja": "日中22〜27℃、夜間18〜22℃。過加温に注意。温帯種（ニホンアマガエル）はより低温に耐える。"},
-                "humidity": {"en": "60–80%. Mist 2–3x daily. Good ventilation to prevent stagnant air. Drip system or large water dish.", "ja": "60〜80%。1日2〜3回霧吹き。換気を確保して空気の淀みを防ぐ。ドリップシステムまたは大きめの水皿。"},
-                "housing": {"en": "Tall terrarium (30×30×45 cm minimum). Arboreal — vertical space with branches, vines, broad-leaf plants. Screen or ventilated lid. Shallow water section at bottom.", "ja": "縦長テラリウム（最低30×30×45cm）。樹上性 — 枝、蔓、広葉植物で垂直空間を。メッシュまたは通気性のある蓋。底部に浅い水場。"},
-                "diet": {"en": "Small insects: fruit flies, small crickets, springtails. Calcium dusting every feeding. Size-appropriate prey (smaller than frog's head).", "ja": "小型昆虫：ショウジョウバエ、小さなコオロギ、トビムシ。毎回カルシウムダスティング。カエルの頭より小さい餌。"},
-                "notes": {"en": "Lifespan varies (5–15+ years by species). Nocturnal/crepuscular — most active at night. Observation pet — handle minimally. Some species produce mild skin toxins.", "ja": "寿命は種により異なる（5〜15年以上）。夜行性/薄明性。観察型ペット — ハンドリングは最小限。軽度の皮膚毒を出す種もある。"},
+                "name": "Tree Frog",
+                "name_ja": "ツリーフロッグ（アマガエル類）",
+                "temperature": {
+                    "en": "22–27°C daytime, 18–22°C night. Avoid overheating. Temperate species (Japanese tree frog) tolerate cooler temperatures.",
+                    "ja": "日中22〜27℃、夜間18〜22℃。過加温に注意。温帯種（ニホンアマガエル）はより低温に耐える。",
+                },
+                "humidity": {
+                    "en": "60–80%. Mist 2–3x daily. Good ventilation to prevent stagnant air. Drip system or large water dish.",
+                    "ja": "60〜80%。1日2〜3回霧吹き。換気を確保して空気の淀みを防ぐ。ドリップシステムまたは大きめの水皿。",
+                },
+                "housing": {
+                    "en": "Tall terrarium (30×30×45 cm minimum). Arboreal — vertical space with branches, vines, broad-leaf plants. Screen or ventilated lid. Shallow water section at bottom.",
+                    "ja": "縦長テラリウム（最低30×30×45cm）。樹上性 — 枝、蔓、広葉植物で垂直空間を。メッシュまたは通気性のある蓋。底部に浅い水場。",
+                },
+                "diet": {
+                    "en": "Small insects: fruit flies, small crickets, springtails. Calcium dusting every feeding. Size-appropriate prey (smaller than frog's head).",
+                    "ja": "小型昆虫：ショウジョウバエ、小さなコオロギ、トビムシ。毎回カルシウムダスティング。カエルの頭より小さい餌。",
+                },
+                "notes": {
+                    "en": "Lifespan varies (5–15+ years by species). Nocturnal/crepuscular — most active at night. Observation pet — handle minimally. Some species produce mild skin toxins.",
+                    "ja": "寿命は種により異なる（5〜15年以上）。夜行性/薄明性。観察型ペット — ハンドリングは最小限。軽度の皮膚毒を出す種もある。",
+                },
             },
             {
-                "name": "Poison Dart Frog", "name_ja": "ヤドクガエル",
-                "temperature": {"en": "22–27°C. Stable temperature crucial. Avoid direct sunlight. Air conditioning may be needed in summer.", "ja": "22〜27℃。安定した温度が重要。直射日光を避ける。夏季はエアコンが必要になることも。"},
-                "humidity": {"en": "80–100%. Misting system essential (automatic preferred). Live moss and tropical plants maintain humidity. Fogger can supplement.", "ja": "80〜100%。ミスティングシステム必須（自動が望ましい）。生きた苔と熱帯植物で湿度維持。フォガーで補助。"},
-                "housing": {"en": "Bioactive vivarium ideal. Minimum 45×45×45 cm. Drainage layer + substrate + live plants + leaf litter. Tight-fitting lid. Can keep small groups of same species.", "ja": "バイオアクティブビバリウムが理想。最低45×45×45cm。排水層＋床材＋生きた植物＋落ち葉。密閉蓋。同種なら小グループ飼育可。"},
-                "diet": {"en": "Tiny insects: fruit flies (Drosophila melanogaster/hydei), springtails, isopods. Calcium + vitamin dusting every feeding. Feed daily.", "ja": "極小昆虫：ショウジョウバエ（メラノガスター/ハイデイ）、トビムシ、ワラジムシ。毎回Ca＋ビタミンダスティング。毎日給餌。"},
-                "notes": {"en": "Lifespan 10–20 years. Captive-bred are NOT toxic (toxins come from wild diet). Bold, diurnal, colorful — great display animals. Sensitive to water quality — use RO or spring water.", "ja": "寿命10〜20年。飼育下繁殖個体は無毒（毒は野生の餌由来）。大胆で昼行性、色鮮やか — 素晴らしい観賞動物。水質に敏感 — RO水または湧水を使用。"},
+                "name": "Poison Dart Frog",
+                "name_ja": "ヤドクガエル",
+                "temperature": {
+                    "en": "22–27°C. Stable temperature crucial. Avoid direct sunlight. Air conditioning may be needed in summer.",
+                    "ja": "22〜27℃。安定した温度が重要。直射日光を避ける。夏季はエアコンが必要になることも。",
+                },
+                "humidity": {
+                    "en": "80–100%. Misting system essential (automatic preferred). Live moss and tropical plants maintain humidity. Fogger can supplement.",
+                    "ja": "80〜100%。ミスティングシステム必須（自動が望ましい）。生きた苔と熱帯植物で湿度維持。フォガーで補助。",
+                },
+                "housing": {
+                    "en": "Bioactive vivarium ideal. Minimum 45×45×45 cm. Drainage layer + substrate + live plants + leaf litter. Tight-fitting lid. Can keep small groups of same species.",
+                    "ja": "バイオアクティブビバリウムが理想。最低45×45×45cm。排水層＋床材＋生きた植物＋落ち葉。密閉蓋。同種なら小グループ飼育可。",
+                },
+                "diet": {
+                    "en": "Tiny insects: fruit flies (Drosophila melanogaster/hydei), springtails, isopods. Calcium + vitamin dusting every feeding. Feed daily.",
+                    "ja": "極小昆虫：ショウジョウバエ（メラノガスター/ハイデイ）、トビムシ、ワラジムシ。毎回Ca＋ビタミンダスティング。毎日給餌。",
+                },
+                "notes": {
+                    "en": "Lifespan 10–20 years. Captive-bred are NOT toxic (toxins come from wild diet). Bold, diurnal, colorful — great display animals. Sensitive to water quality — use RO or spring water.",
+                    "ja": "寿命10〜20年。飼育下繁殖個体は無毒（毒は野生の餌由来）。大胆で昼行性、色鮮やか — 素晴らしい観賞動物。水質に敏感 — RO水または湧水を使用。",
+                },
             },
         ],
     },
@@ -896,41 +1496,114 @@ HUSBANDRY_DATA: dict = {
     "fish": {
         "name": "Fish",
         "name_ja": "魚",
-        "temperature": {"en": "Tropical: 24–28°C; Goldfish/Koi: 15–22°C; Marine: 24–27°C. Heater with thermostat essential for tropical. Stable temperature critical.", "ja": "熱帯魚：24〜28℃、金魚/錦鯉：15〜22℃、海水魚：24〜27℃。熱帯魚にはサーモスタット付きヒーター必須。水温の安定が重要。"},
-        "humidity": {"en": "N/A (aquatic environment). Tank lid prevents excessive evaporation and fish jumping.", "ja": "該当なし（水中環境）。蓋で蒸発防止と飛び出し事故を予防。"},
-        "housing": {"en": "Rule of thumb: 1 inch of fish per gallon (freshwater). Larger is always better. Filtration (mechanical, biological, chemical) essential. Regular water changes (20–30% weekly).", "ja": "目安：魚体長2.5cmあたり約4Lの水量（淡水）。大きいほど良い。ろ過（物理・生物・化学）が必須。定期的な水替え（週20〜30%）。"},
-        "diet": {"en": "Species-specific: flake/pellet for community fish, frozen/live foods for predators, algae wafers for bottom feeders. Feed small amounts 1–2x daily. Avoid overfeeding.", "ja": "種に応じて：コミュニティフィッシュにフレーク/ペレット、肉食魚に冷凍/生き餌、底生魚にアルジーウエハー。少量を1日1〜2回。餌の与えすぎに注意。"},
-        "enrichment": {"en": "Plants (live preferred), driftwood, rocks, caves. Varied terrain mimicking natural habitat. Appropriate tankmates for social species. LED lighting on timer (8–10 hr photoperiod).", "ja": "水草（生体が望ましい）、流木、石、洞窟。自然の生息地を模した多様な地形。社会性のある種には適切な混泳相手。LEDライトをタイマーで管理（明期8〜10時間）。"},
-        "socialization": {"en": "Varies greatly: schooling fish need 6+ of same species, territorial species need space, aggressive species may need solitary tanks. Research compatibility.", "ja": "種により大きく異なる：群泳魚は同種6匹以上、縄張り魚にはスペース、攻撃的な種は単独水槽。混泳の相性を事前に調査。"},
-        "notes": {"en": "Nitrogen cycle must be established before adding fish (fishless cycling). Test water parameters regularly (ammonia, nitrite, nitrate, pH). Quarantine new fish 2–4 weeks. Never flush sick fish.", "ja": "魚を入れる前に窒素循環を確立（フィッシュレスサイクリング）。水質パラメータを定期検査（アンモニア、亜硝酸、硝酸、pH）。新しい魚は2〜4週間隔離。病気の魚を流しに捨てない。"},
+        "temperature": {
+            "en": "Tropical: 24–28°C; Goldfish/Koi: 15–22°C; Marine: 24–27°C. Heater with thermostat essential for tropical. Stable temperature critical.",
+            "ja": "熱帯魚：24〜28℃、金魚/錦鯉：15〜22℃、海水魚：24〜27℃。熱帯魚にはサーモスタット付きヒーター必須。水温の安定が重要。",
+        },
+        "humidity": {
+            "en": "N/A (aquatic environment). Tank lid prevents excessive evaporation and fish jumping.",
+            "ja": "該当なし（水中環境）。蓋で蒸発防止と飛び出し事故を予防。",
+        },
+        "housing": {
+            "en": "Rule of thumb: 1 inch of fish per gallon (freshwater). Larger is always better. Filtration (mechanical, biological, chemical) essential. Regular water changes (20–30% weekly).",
+            "ja": "目安：魚体長2.5cmあたり約4Lの水量（淡水）。大きいほど良い。ろ過（物理・生物・化学）が必須。定期的な水替え（週20〜30%）。",
+        },
+        "diet": {
+            "en": "Species-specific: flake/pellet for community fish, frozen/live foods for predators, algae wafers for bottom feeders. Feed small amounts 1–2x daily. Avoid overfeeding.",
+            "ja": "種に応じて：コミュニティフィッシュにフレーク/ペレット、肉食魚に冷凍/生き餌、底生魚にアルジーウエハー。少量を1日1〜2回。餌の与えすぎに注意。",
+        },
+        "enrichment": {
+            "en": "Plants (live preferred), driftwood, rocks, caves. Varied terrain mimicking natural habitat. Appropriate tankmates for social species. LED lighting on timer (8–10 hr photoperiod).",
+            "ja": "水草（生体が望ましい）、流木、石、洞窟。自然の生息地を模した多様な地形。社会性のある種には適切な混泳相手。LEDライトをタイマーで管理（明期8〜10時間）。",
+        },
+        "socialization": {
+            "en": "Varies greatly: schooling fish need 6+ of same species, territorial species need space, aggressive species may need solitary tanks. Research compatibility.",
+            "ja": "種により大きく異なる：群泳魚は同種6匹以上、縄張り魚にはスペース、攻撃的な種は単独水槽。混泳の相性を事前に調査。",
+        },
+        "notes": {
+            "en": "Nitrogen cycle must be established before adding fish (fishless cycling). Test water parameters regularly (ammonia, nitrite, nitrate, pH). Quarantine new fish 2–4 weeks. Never flush sick fish.",
+            "ja": "魚を入れる前に窒素循環を確立（フィッシュレスサイクリング）。水質パラメータを定期検査（アンモニア、亜硝酸、硝酸、pH）。新しい魚は2〜4週間隔離。病気の魚を流しに捨てない。",
+        },
         "subtypes": [
             {
-                "name": "Goldfish / Koi", "name_ja": "金魚・錦鯉",
-                "temperature": {"en": "15–22°C (cold water — NO heater needed). Tolerate 4–30°C but optimal range is narrow. Outdoor ponds: seasonal temperature changes are natural.", "ja": "15〜22℃（冷水魚 — ヒーター不要）。4〜30℃に耐えるが最適範囲は狭い。屋外池：季節的な水温変化は自然。"},
-                "housing": {"en": "Goldfish: minimum 75 L for first fish, +40 L each additional. Koi: 1,000+ L pond. Powerful filtration essential (heavy bioload). No bowls — goldfish need space and filtration.", "ja": "金魚：最初の1匹に最低75L、追加1匹につき＋40L。錦鯉：1,000L以上の池。強力なろ過が必須（生物負荷が高い）。金魚鉢は不可 — スペースとろ過が必要。"},
-                "diet": {"en": "Sinking pellets preferred (floating food causes air gulping → swim bladder issues). Peas (deshelled), blanched vegetables as treats. Feed 2x daily, amount consumed in 2 minutes.", "ja": "沈降性ペレット推奨（浮上性餌は空気を飲む→転覆病の原因）。剥いたエンドウ豆、茹で野菜をおやつに。1日2回、2分で食べ切る量。"},
-                "notes": {"en": "Goldfish lifespan 10–15+ years (NOT disposable pets). Koi 25–35+ years. Swim bladder disease very common in fancy varieties. Ammonia burns are #1 killer — cycle the tank first.", "ja": "金魚の寿命10〜15年以上（使い捨てではない）。錦鯉25〜35年以上。琉金等のファンシー種は転覆病が非常に多い。アンモニア中毒が最大の死因 — 先にフィッシュレスサイクリングを。"},
+                "name": "Goldfish / Koi",
+                "name_ja": "金魚・錦鯉",
+                "temperature": {
+                    "en": "15–22°C (cold water — NO heater needed). Tolerate 4–30°C but optimal range is narrow. Outdoor ponds: seasonal temperature changes are natural.",
+                    "ja": "15〜22℃（冷水魚 — ヒーター不要）。4〜30℃に耐えるが最適範囲は狭い。屋外池：季節的な水温変化は自然。",
+                },
+                "housing": {
+                    "en": "Goldfish: minimum 75 L for first fish, +40 L each additional. Koi: 1,000+ L pond. Powerful filtration essential (heavy bioload). No bowls — goldfish need space and filtration.",
+                    "ja": "金魚：最初の1匹に最低75L、追加1匹につき＋40L。錦鯉：1,000L以上の池。強力なろ過が必須（生物負荷が高い）。金魚鉢は不可 — スペースとろ過が必要。",
+                },
+                "diet": {
+                    "en": "Sinking pellets preferred (floating food causes air gulping → swim bladder issues). Peas (deshelled), blanched vegetables as treats. Feed 2x daily, amount consumed in 2 minutes.",
+                    "ja": "沈降性ペレット推奨（浮上性餌は空気を飲む→転覆病の原因）。剥いたエンドウ豆、茹で野菜をおやつに。1日2回、2分で食べ切る量。",
+                },
+                "notes": {
+                    "en": "Goldfish lifespan 10–15+ years (NOT disposable pets). Koi 25–35+ years. Swim bladder disease very common in fancy varieties. Ammonia burns are #1 killer — cycle the tank first.",
+                    "ja": "金魚の寿命10〜15年以上（使い捨てではない）。錦鯉25〜35年以上。琉金等のファンシー種は転覆病が非常に多い。アンモニア中毒が最大の死因 — 先にフィッシュレスサイクリングを。",
+                },
             },
             {
-                "name": "Tropical Freshwater", "name_ja": "熱帯淡水魚",
-                "temperature": {"en": "24–28°C (heater with thermostat essential). Stable temperature critical — fluctuations cause stress and ich outbreaks.", "ja": "24〜28℃（サーモスタット付きヒーター必須）。安定した水温が重要 — 変動はストレスと白点病の原因。"},
-                "housing": {"en": "Community tanks: 60+ L minimum. Planted tanks ideal. Species-appropriate flow rate. Driftwood, rocks for territory. Dimmer lighting for shy species (tetras, corydoras).", "ja": "コミュニティタンク：最低60L以上。水草水槽が理想。種に合った水流。流木、石で縄張り。シャイな種（テトラ、コリドラス）には暗めの照明。"},
-                "diet": {"en": "High-quality flake/micro pellets as staple. Frozen/live foods (brine shrimp, daphnia, bloodworms) 2–3x/week. Bottom feeders: algae wafers, sinking pellets. Feed small amounts 1–2x daily.", "ja": "良質なフレーク/マイクロペレットを主食に。冷凍/生き餌（ブラインシュリンプ、ミジンコ、アカムシ）を週2〜3回。底生魚：アルジーウエハー、沈降性ペレット。少量を1日1〜2回。"},
-                "notes": {"en": "Water parameters vary by species: tetras/discus prefer soft acidic (pH 6.0–7.0), livebearers prefer hard alkaline (pH 7.0–8.0). Research species requirements before mixing.", "ja": "水質は種により異なる：テトラ/ディスカスは軟水・酸性（pH 6.0〜7.0）、グッピー等は硬水・アルカリ性（pH 7.0〜8.0）。混泳前に種の要件を調査。"},
+                "name": "Tropical Freshwater",
+                "name_ja": "熱帯淡水魚",
+                "temperature": {
+                    "en": "24–28°C (heater with thermostat essential). Stable temperature critical — fluctuations cause stress and ich outbreaks.",
+                    "ja": "24〜28℃（サーモスタット付きヒーター必須）。安定した水温が重要 — 変動はストレスと白点病の原因。",
+                },
+                "housing": {
+                    "en": "Community tanks: 60+ L minimum. Planted tanks ideal. Species-appropriate flow rate. Driftwood, rocks for territory. Dimmer lighting for shy species (tetras, corydoras).",
+                    "ja": "コミュニティタンク：最低60L以上。水草水槽が理想。種に合った水流。流木、石で縄張り。シャイな種（テトラ、コリドラス）には暗めの照明。",
+                },
+                "diet": {
+                    "en": "High-quality flake/micro pellets as staple. Frozen/live foods (brine shrimp, daphnia, bloodworms) 2–3x/week. Bottom feeders: algae wafers, sinking pellets. Feed small amounts 1–2x daily.",
+                    "ja": "良質なフレーク/マイクロペレットを主食に。冷凍/生き餌（ブラインシュリンプ、ミジンコ、アカムシ）を週2〜3回。底生魚：アルジーウエハー、沈降性ペレット。少量を1日1〜2回。",
+                },
+                "notes": {
+                    "en": "Water parameters vary by species: tetras/discus prefer soft acidic (pH 6.0–7.0), livebearers prefer hard alkaline (pH 7.0–8.0). Research species requirements before mixing.",
+                    "ja": "水質は種により異なる：テトラ/ディスカスは軟水・酸性（pH 6.0〜7.0）、グッピー等は硬水・アルカリ性（pH 7.0〜8.0）。混泳前に種の要件を調査。",
+                },
             },
             {
-                "name": "Betta (Siamese Fighting Fish)", "name_ja": "ベタ（闘魚）",
-                "temperature": {"en": "25–28°C. Tropical species — heater essential (NOT a cold-water fish despite common misconception). Stable temperature critical.", "ja": "25〜28℃。熱帯魚 — ヒーター必須（一般的な誤解に反して冷水魚ではない）。水温の安定が重要。"},
-                "housing": {"en": "Minimum 20 L (NOT tiny bowls/cups). Gentle filtration (they dislike strong current due to long fins). Lid essential (they jump). Live or silk plants (no sharp plastic — fin damage).", "ja": "最低20L（小さなボウル/カップは不可）。穏やかなろ過（長いヒレのため強い水流を嫌う）。蓋必須（飛び出す）。生体またはシルク製の植物（鋭いプラスチックはヒレを傷つける）。"},
-                "diet": {"en": "High-protein betta pellets as staple. Frozen/live bloodworms, brine shrimp, daphnia as treats 2–3x/week. Feed 2–3 pellets 2x daily. Prone to bloating from overfeeding.", "ja": "高タンパクのベタ用ペレットを主食に。冷凍/生きアカムシ、ブラインシュリンプ、ミジンコを週2〜3回のおやつに。1回2〜3粒を1日2回。過食で膨満しやすい。"},
-                "notes": {"en": "Lifespan 3–5 years. Males MUST be housed alone (will fight to death). Females can sometimes coexist in 'sorority' tanks (5+ in 75+ L). Bubble nest building is normal healthy behavior.", "ja": "寿命3〜5年。オスは必ず単独飼育（死ぬまで戦う）。メスは「ソロリティ」タンク（75L以上に5匹以上）で共存可能な場合も。泡巣作りは正常な健康行動。"},
+                "name": "Betta (Siamese Fighting Fish)",
+                "name_ja": "ベタ（闘魚）",
+                "temperature": {
+                    "en": "25–28°C. Tropical species — heater essential (NOT a cold-water fish despite common misconception). Stable temperature critical.",
+                    "ja": "25〜28℃。熱帯魚 — ヒーター必須（一般的な誤解に反して冷水魚ではない）。水温の安定が重要。",
+                },
+                "housing": {
+                    "en": "Minimum 20 L (NOT tiny bowls/cups). Gentle filtration (they dislike strong current due to long fins). Lid essential (they jump). Live or silk plants (no sharp plastic — fin damage).",
+                    "ja": "最低20L（小さなボウル/カップは不可）。穏やかなろ過（長いヒレのため強い水流を嫌う）。蓋必須（飛び出す）。生体またはシルク製の植物（鋭いプラスチックはヒレを傷つける）。",
+                },
+                "diet": {
+                    "en": "High-protein betta pellets as staple. Frozen/live bloodworms, brine shrimp, daphnia as treats 2–3x/week. Feed 2–3 pellets 2x daily. Prone to bloating from overfeeding.",
+                    "ja": "高タンパクのベタ用ペレットを主食に。冷凍/生きアカムシ、ブラインシュリンプ、ミジンコを週2〜3回のおやつに。1回2〜3粒を1日2回。過食で膨満しやすい。",
+                },
+                "notes": {
+                    "en": "Lifespan 3–5 years. Males MUST be housed alone (will fight to death). Females can sometimes coexist in 'sorority' tanks (5+ in 75+ L). Bubble nest building is normal healthy behavior.",
+                    "ja": "寿命3〜5年。オスは必ず単独飼育（死ぬまで戦う）。メスは「ソロリティ」タンク（75L以上に5匹以上）で共存可能な場合も。泡巣作りは正常な健康行動。",
+                },
             },
             {
-                "name": "Marine / Saltwater", "name_ja": "海水魚",
-                "temperature": {"en": "24–27°C. Chiller may be needed in summer. Temperature stability even more critical than freshwater — ±1°C fluctuation max.", "ja": "24〜27℃。夏季はクーラーが必要になることも。淡水以上に水温安定が重要 — 変動は±1℃以内。"},
-                "housing": {"en": "Minimum 150 L for fish-only, 200+ L for reef. Protein skimmer essential. Live rock for biological filtration. RO/DI water for top-off and salt mixing. Salinity 1.023–1.025 SG.", "ja": "魚のみなら最低150L、サンゴ水槽なら200L以上。プロテインスキマー必須。ライブロックで生物ろ過。RO/DI水で足し水と人工海水。比重1.023〜1.025。"},
-                "diet": {"en": "Species-specific: herbivores (nori, spirulina), omnivores (mixed flake + frozen mysis), carnivores (frozen shrimp, silversides). Marine fish often need multiple small feedings per day.", "ja": "種による：草食魚（海苔、スピルリナ）、雑食魚（フレーク＋冷凍ミシスシュリンプ）、肉食魚（冷凍エビ、シルバーサイド）。海水魚は1日複数回の少量給餌が必要なことが多い。"},
-                "notes": {"en": "Most expensive and demanding aquarium type. Quarantine ALL new fish (ich/velvet can devastate a tank). Copper medications kill invertebrates. Research extensively before starting — high learning curve.", "ja": "最も費用と手間がかかる水槽タイプ。新しい魚は全て隔離（白点病/ウーディニウムが水槽を壊滅させる）。銅系薬品は無脊椎動物を殺す。始める前に徹底的にリサーチ — 学習曲線が急。"},
+                "name": "Marine / Saltwater",
+                "name_ja": "海水魚",
+                "temperature": {
+                    "en": "24–27°C. Chiller may be needed in summer. Temperature stability even more critical than freshwater — ±1°C fluctuation max.",
+                    "ja": "24〜27℃。夏季はクーラーが必要になることも。淡水以上に水温安定が重要 — 変動は±1℃以内。",
+                },
+                "housing": {
+                    "en": "Minimum 150 L for fish-only, 200+ L for reef. Protein skimmer essential. Live rock for biological filtration. RO/DI water for top-off and salt mixing. Salinity 1.023–1.025 SG.",
+                    "ja": "魚のみなら最低150L、サンゴ水槽なら200L以上。プロテインスキマー必須。ライブロックで生物ろ過。RO/DI水で足し水と人工海水。比重1.023〜1.025。",
+                },
+                "diet": {
+                    "en": "Species-specific: herbivores (nori, spirulina), omnivores (mixed flake + frozen mysis), carnivores (frozen shrimp, silversides). Marine fish often need multiple small feedings per day.",
+                    "ja": "種による：草食魚（海苔、スピルリナ）、雑食魚（フレーク＋冷凍ミシスシュリンプ）、肉食魚（冷凍エビ、シルバーサイド）。海水魚は1日複数回の少量給餌が必要なことが多い。",
+                },
+                "notes": {
+                    "en": "Most expensive and demanding aquarium type. Quarantine ALL new fish (ich/velvet can devastate a tank). Copper medications kill invertebrates. Research extensively before starting — high learning curve.",
+                    "ja": "最も費用と手間がかかる水槽タイプ。新しい魚は全て隔離（白点病/ウーディニウムが水槽を壊滅させる）。銅系薬品は無脊椎動物を殺す。始める前に徹底的にリサーチ — 学習曲線が急。",
+                },
             },
         ],
     },
@@ -940,12 +1613,33 @@ HUSBANDRY_DATA: dict = {
     "exotic_other": {
         "name": "Other Exotic",
         "name_ja": "その他エキゾチック",
-        "temperature": {"en": "Highly species-dependent. Research the specific species' natural habitat to replicate appropriate thermal conditions.", "ja": "種により大きく異なる。飼育する種の自然生息地を調べて適切な温度条件を再現。"},
-        "humidity": {"en": "Species-dependent. Match the natural habitat conditions of the specific animal.", "ja": "種による。飼育する動物の自然生息地の条件に合わせる。"},
-        "housing": {"en": "Research species-specific requirements thoroughly before acquisition. Provide appropriate space, substrate, and environmental features. Escape prevention critical for all exotic species.", "ja": "飼育前に種固有の要件を徹底的に調査。適切な広さ、床材、環境設備を提供。全てのエキゾチック種で脱走防止が重要。"},
-        "diet": {"en": "Highly variable. Consult exotic animal veterinarian and species-specific care guides. Nutritional deficiencies are the most common health issue in exotic pets.", "ja": "種により大きく異なる。エキゾチック動物の獣医と種別飼育ガイドを参照。栄養不足がエキゾチックペットの最も一般的な健康問題。"},
-        "enrichment": {"en": "Environmental complexity matching natural habitat. Foraging opportunities. Species-appropriate social grouping. Mental stimulation through novel objects and experiences.", "ja": "自然生息地に合った環境の複雑さ。採食機会。種に適した社会的グループ。新しい物や経験による精神的刺激。"},
-        "socialization": {"en": "Research species-specific social needs. Some exotic species are strictly solitary, others require social groups. Improper socialization is a major welfare concern.", "ja": "種固有の社会的ニーズを調査。厳格に単独飼育の種もあれば、群れが必要な種もある。不適切な社会化は重大な福祉問題。"},
-        "notes": {"en": "Always check local laws regarding exotic pet ownership. Find an exotic-experienced veterinarian BEFORE acquiring the animal. Many exotic pets have long lifespans — ensure long-term commitment.", "ja": "エキゾチックペットの飼育に関する地域の法律を必ず確認。動物を迎える前にエキゾチック診療経験のある獣医を見つける。長寿の種が多い — 長期飼育の覚悟を。"},
+        "temperature": {
+            "en": "Highly species-dependent. Research the specific species' natural habitat to replicate appropriate thermal conditions.",
+            "ja": "種により大きく異なる。飼育する種の自然生息地を調べて適切な温度条件を再現。",
+        },
+        "humidity": {
+            "en": "Species-dependent. Match the natural habitat conditions of the specific animal.",
+            "ja": "種による。飼育する動物の自然生息地の条件に合わせる。",
+        },
+        "housing": {
+            "en": "Research species-specific requirements thoroughly before acquisition. Provide appropriate space, substrate, and environmental features. Escape prevention critical for all exotic species.",
+            "ja": "飼育前に種固有の要件を徹底的に調査。適切な広さ、床材、環境設備を提供。全てのエキゾチック種で脱走防止が重要。",
+        },
+        "diet": {
+            "en": "Highly variable. Consult exotic animal veterinarian and species-specific care guides. Nutritional deficiencies are the most common health issue in exotic pets.",
+            "ja": "種により大きく異なる。エキゾチック動物の獣医と種別飼育ガイドを参照。栄養不足がエキゾチックペットの最も一般的な健康問題。",
+        },
+        "enrichment": {
+            "en": "Environmental complexity matching natural habitat. Foraging opportunities. Species-appropriate social grouping. Mental stimulation through novel objects and experiences.",
+            "ja": "自然生息地に合った環境の複雑さ。採食機会。種に適した社会的グループ。新しい物や経験による精神的刺激。",
+        },
+        "socialization": {
+            "en": "Research species-specific social needs. Some exotic species are strictly solitary, others require social groups. Improper socialization is a major welfare concern.",
+            "ja": "種固有の社会的ニーズを調査。厳格に単独飼育の種もあれば、群れが必要な種もある。不適切な社会化は重大な福祉問題。",
+        },
+        "notes": {
+            "en": "Always check local laws regarding exotic pet ownership. Find an exotic-experienced veterinarian BEFORE acquiring the animal. Many exotic pets have long lifespans — ensure long-term commitment.",
+            "ja": "エキゾチックペットの飼育に関する地域の法律を必ず確認。動物を迎える前にエキゾチック診療経験のある獣医を見つける。長寿の種が多い — 長期飼育の覚悟を。",
+        },
     },
 }

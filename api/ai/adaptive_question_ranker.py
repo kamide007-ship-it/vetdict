@@ -34,9 +34,7 @@ class RankedQuestion:
             "composite_score": round(self.composite_score, 3),
             "information_gain": round(self.information_gain, 3),
             "features": self.features.to_dict(),
-            "score_breakdown": {
-                k: round(v, 3) for k, v in self.score_breakdown.items()
-            },
+            "score_breakdown": {k: round(v, 3) for k, v in self.score_breakdown.items()},
         }
 
 
@@ -209,9 +207,7 @@ class AdaptiveQuestionRanker:
                 continue
 
             # Calculate coverage
-            coverage = QuestionFeatureExtractor.calculate_coverage_score(
-                targets, candidate_diseases
-            )
+            coverage = QuestionFeatureExtractor.calculate_coverage_score(targets, candidate_diseases)
 
             if coverage > 0:
                 ranked.append(
@@ -262,10 +258,7 @@ class AdaptiveQuestionRanker:
         # Round-robin selection
         while len(result) < len(ranked_questions):
             for cat in categories:
-                if (
-                    category_counts[cat] < max_per_category
-                    and len(categories[cat]) > 0
-                ):
+                if category_counts[cat] < max_per_category and len(categories[cat]) > 0:
                     # Find next question from this category
                     for q in categories[cat]:
                         if q not in result:

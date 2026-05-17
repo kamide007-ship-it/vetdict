@@ -26,21 +26,66 @@ class Phase2QAValidator:
 
     # Medical keywords for validation
     TREATMENT_KEYWORDS = [
-        "treatment", "therapy", "medication", "drug", "antibiotic", "antifungal",
-        "surgery", "surgical", "procedure", "management", "care", "protocol",
-        "injection", "infusion", "supplement", "vitamin", "supportive", "palliative"
+        "treatment",
+        "therapy",
+        "medication",
+        "drug",
+        "antibiotic",
+        "antifungal",
+        "surgery",
+        "surgical",
+        "procedure",
+        "management",
+        "care",
+        "protocol",
+        "injection",
+        "infusion",
+        "supplement",
+        "vitamin",
+        "supportive",
+        "palliative",
     ]
 
     PREVENTION_KEYWORDS = [
-        "prevention", "prevention", "vaccine", "vaccination", "prophylactic", "hygiene",
-        "management", "environment", "quarantine", "isolation", "screening",
-        "avoid", "risk", "reduce", "minimize", "protection", "screen"
+        "prevention",
+        "prevention",
+        "vaccine",
+        "vaccination",
+        "prophylactic",
+        "hygiene",
+        "management",
+        "environment",
+        "quarantine",
+        "isolation",
+        "screening",
+        "avoid",
+        "risk",
+        "reduce",
+        "minimize",
+        "protection",
+        "screen",
     ]
 
     PROGNOSIS_KEYWORDS = [
-        "prognosis", "outcome", "survival", "recovery", "timeline", "period",
-        "rate", "percentage", "complication", "mortality", "morbidity",
-        "expected", "forecast", "prediction", "prognostic", "factor", "days", "weeks", "months"
+        "prognosis",
+        "outcome",
+        "survival",
+        "recovery",
+        "timeline",
+        "period",
+        "rate",
+        "percentage",
+        "complication",
+        "mortality",
+        "morbidity",
+        "expected",
+        "forecast",
+        "prediction",
+        "prognostic",
+        "factor",
+        "days",
+        "weeks",
+        "months",
     ]
 
     def __init__(self):
@@ -120,7 +165,7 @@ class Phase2QAValidator:
             "en_length": len(en_text),
             "ja_length": len(ja_text),
             "ratio": round(ratio, 2),
-            "ratio_ok": is_valid
+            "ratio_ok": is_valid,
         }
 
     def validate_keyword_presence(self, disease: Dict, field: str) -> Tuple[bool, Dict]:
@@ -148,11 +193,7 @@ class Phase2QAValidator:
         found_keywords = [kw for kw in keywords if kw in en_text]
 
         is_valid = len(found_keywords) >= 2  # At least 2 keywords
-        return is_valid, {
-            "found_keywords": found_keywords,
-            "keyword_count": len(found_keywords),
-            "required": 2
-        }
+        return is_valid, {"found_keywords": found_keywords, "keyword_count": len(found_keywords), "required": 2}
 
     def validate_sentence_structure(self, disease: Dict, field: str) -> Tuple[bool, Dict]:
         """Validate text has proper sentence structure (2-3 sentences).
@@ -175,11 +216,7 @@ class Phase2QAValidator:
         # Target: 2-3 sentences
         is_valid = 2 <= sentence_count <= 4  # Allow some flexibility
 
-        return is_valid, {
-            "sentence_count": sentence_count,
-            "target": "2-3",
-            "is_ok": is_valid
-        }
+        return is_valid, {"sentence_count": sentence_count, "target": "2-3", "is_ok": is_valid}
 
     def validate_species_specificity(self, disease: Dict) -> Tuple[bool, Dict]:
         """Check if content mentions species or is generic.
@@ -192,8 +229,13 @@ class Phase2QAValidator:
         """
         species = disease.get("species", "Unknown")
         generic_indicators = [
-            "depends on", "may be", "could be", "typically",
-            "generally", "in some cases", "if applicable"
+            "depends on",
+            "may be",
+            "could be",
+            "typically",
+            "generally",
+            "in some cases",
+            "if applicable",
         ]
 
         details = {"species": species}
@@ -205,9 +247,7 @@ class Phase2QAValidator:
                 continue
 
             # Check if field mentions species or has specific details
-            species.lower() in text or any(
-                indicator in text for indicator in generic_indicators
-            )
+            species.lower() in text or any(indicator in text for indicator in generic_indicators)
             # For now, any non-empty field is considered specific enough
             details[f"{field}_specific"] = len(text) > 50
 
@@ -235,7 +275,7 @@ class Phase2QAValidator:
                     "bilingual": {"passed": 0, "failed": 0, "total": 0},
                     "keywords": {"passed": 0, "failed": 0, "total": 0},
                     "sentences": {"passed": 0, "failed": 0, "total": 0},
-                    "failed_samples": []
+                    "failed_samples": [],
                 },
                 "prevention": {
                     "presence": {"passed": 0, "failed": 0, "total": 0},
@@ -243,7 +283,7 @@ class Phase2QAValidator:
                     "bilingual": {"passed": 0, "failed": 0, "total": 0},
                     "keywords": {"passed": 0, "failed": 0, "total": 0},
                     "sentences": {"passed": 0, "failed": 0, "total": 0},
-                    "failed_samples": []
+                    "failed_samples": [],
                 },
                 "prognosis": {
                     "presence": {"passed": 0, "failed": 0, "total": 0},
@@ -251,13 +291,10 @@ class Phase2QAValidator:
                     "bilingual": {"passed": 0, "failed": 0, "total": 0},
                     "keywords": {"passed": 0, "failed": 0, "total": 0},
                     "sentences": {"passed": 0, "failed": 0, "total": 0},
-                    "failed_samples": []
-                }
+                    "failed_samples": [],
+                },
             },
-            "overall": {
-                "completion_rate": 0,
-                "quality_rate": 0
-            }
+            "overall": {"completion_rate": 0, "quality_rate": 0},
         }
 
         # Validate each disease and field
@@ -273,10 +310,7 @@ class Phase2QAValidator:
                 else:
                     report["fields"][field]["presence"]["failed"] += 1
                     if len(report["fields"][field]["failed_samples"]) < 3:
-                        report["fields"][field]["failed_samples"].append({
-                            "disease_id": disease_id,
-                            "issue": msg
-                        })
+                        report["fields"][field]["failed_samples"].append({"disease_id": disease_id, "issue": msg})
 
                 if not is_present:
                     continue  # Skip other checks if field missing
@@ -289,10 +323,12 @@ class Phase2QAValidator:
                 else:
                     report["fields"][field]["length"]["failed"] += 1
                     if len(report["fields"][field]["failed_samples"]) < 3:
-                        report["fields"][field]["failed_samples"].append({
-                            "disease_id": disease_id,
-                            "issue": f"Length issue: EN={details['en_length']}, JA={details['ja_length']}"
-                        })
+                        report["fields"][field]["failed_samples"].append(
+                            {
+                                "disease_id": disease_id,
+                                "issue": f"Length issue: EN={details['en_length']}, JA={details['ja_length']}",
+                            }
+                        )
 
                 # Bilingual balance
                 is_valid, details = self.validate_bilingual_balance(disease, field)
@@ -348,14 +384,14 @@ class Phase2QAValidator:
 
     def print_validation_report(self, report: Dict):
         """Print formatted validation report."""
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("PHASE 2 QA VALIDATION REPORT")
-        print("="*70)
+        print("=" * 70)
         print(f"Generated: {report['timestamp']}")
         print(f"Total diseases: {report['total_diseases']}")
 
         print(f"\n{'FIELD VALIDATION RESULTS':^70}")
-        print("-"*70)
+        print("-" * 70)
 
         for field in ["treatment", "prevention", "prognosis"]:
             print(f"\n{field.upper()}")
@@ -377,8 +413,8 @@ class Phase2QAValidator:
                     print(f"      - {sample['disease_id']}: {sample['issue']}")
 
         print(f"\n{'OVERALL METRICS':^70}")
-        print("-"*70)
+        print("-" * 70)
         print(f"Completion rate: {report['overall']['completion_rate']:.1f}%")
         print(f"Quality rate: {report['overall']['quality_rate']:.1f}%")
 
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)

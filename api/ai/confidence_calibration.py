@@ -107,9 +107,9 @@ class ConfidenceCalibrator:
         if abs(factor - 1.0) < 0.01:
             return "Well-calibrated (factor: 1.0)"
         elif factor > 1.0:
-            return f"Underconfident historically (boosted by {(factor-1.0)*100:.0f}%)"
+            return f"Underconfident historically (boosted by {(factor - 1.0) * 100:.0f}%)"
         else:
-            return f"Overconfident historically (reduced by {(1.0-factor)*100:.0f}%)"
+            return f"Overconfident historically (reduced by {(1.0 - factor) * 100:.0f}%)"
 
     def get_calibration_report(self) -> Dict[str, Any]:
         """
@@ -153,20 +153,20 @@ class ConfidenceCalibrator:
                 else:
                     status = "underconfident"
 
-            domain_reports.append({
-                "domain": domain,
-                "status": status,
-                "samples": total,
-                "avg_confidence": metric.get("avg_confidence", 0),
-                "actual_accuracy": (
-                    metric.get("correct_extractions", 0) / metric.get("total_extractions", 1)
-                    if metric.get("total_extractions", 0) > 0
-                    else 0
-                ),
-                "calibration_factor": self.get_calibration_factor(
-                    metric.get("avg_confidence", 0.5), domain
-                ),
-            })
+            domain_reports.append(
+                {
+                    "domain": domain,
+                    "status": status,
+                    "samples": total,
+                    "avg_confidence": metric.get("avg_confidence", 0),
+                    "actual_accuracy": (
+                        metric.get("correct_extractions", 0) / metric.get("total_extractions", 1)
+                        if metric.get("total_extractions", 0) > 0
+                        else 0
+                    ),
+                    "calibration_factor": self.get_calibration_factor(metric.get("avg_confidence", 0.5), domain),
+                }
+            )
 
         return {
             "status": "ready",

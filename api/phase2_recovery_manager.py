@@ -38,11 +38,7 @@ class Phase2RecoveryManager:
         if self.recovery_state_path.exists():
             with open(self.recovery_state_path, "r") as f:
                 return json.load(f)
-        return {
-            "checkpoints": [],
-            "failed_batches": [],
-            "last_recovery": None
-        }
+        return {"checkpoints": [], "failed_batches": [], "last_recovery": None}
 
     def save_recovery_state(self, state: Dict):
         """Save recovery state."""
@@ -64,7 +60,7 @@ class Phase2RecoveryManager:
             "stage": stage,
             "batch_num": batch_num,
             "batch_id": batch_id,
-            "status": "completed"
+            "status": "completed",
         }
 
         state["checkpoints"].append(checkpoint)
@@ -88,7 +84,7 @@ class Phase2RecoveryManager:
             "stage": stage,
             "error": error,
             "timestamp": datetime.now().isoformat(),
-            "retry_count": 0
+            "retry_count": 0,
         }
 
         state["failed_batches"].append(failed)
@@ -192,7 +188,7 @@ class Phase2RecoveryManager:
             "failed_batches": len(state.get("failed_batches", [])),
             "checkpoints": len(state.get("checkpoints", [])),
             "last_checkpoint": state.get("last_checkpoint"),
-            "stages_status": {}
+            "stages_status": {},
         }
 
         # Get status by stage
@@ -206,7 +202,7 @@ class Phase2RecoveryManager:
             report["stages_status"][stage_name] = {
                 "submitted": submitted,
                 "completed": completed,
-                "status": stage_data.get("status")
+                "status": stage_data.get("status"),
             }
             report["batches_submitted"] += submitted
             report["batches_completed"] += completed
@@ -214,12 +210,14 @@ class Phase2RecoveryManager:
         # Failed batches details
         report["failed_batch_details"] = []
         for failed in state.get("failed_batches", [])[:5]:  # Show last 5
-            report["failed_batch_details"].append({
-                "batch_id": failed.get("batch_id"),
-                "stage": failed.get("stage"),
-                "retry_count": failed.get("retry_count", 0),
-                "error": failed.get("error")
-            })
+            report["failed_batch_details"].append(
+                {
+                    "batch_id": failed.get("batch_id"),
+                    "stage": failed.get("stage"),
+                    "retry_count": failed.get("retry_count", 0),
+                    "error": failed.get("error"),
+                }
+            )
 
         return report
 
@@ -229,9 +227,9 @@ class Phase2RecoveryManager:
         Args:
             report: Report dictionary from get_recovery_report()
         """
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("PHASE 2 RECOVERY STATUS REPORT")
-        print("="*70)
+        print("=" * 70)
         print(f"Generated: {report['timestamp']}")
         print(f"Current Status: {report['manifest_status']}")
 
@@ -243,9 +241,11 @@ class Phase2RecoveryManager:
 
         print("\nStage Status:")
         for stage_name, stage_status in report["stages_status"].items():
-            print(f"  {stage_name:12}: {stage_status['submitted']:3} submitted, "
-                  f"{stage_status['completed']:3} completed "
-                  f"({stage_status['status']})")
+            print(
+                f"  {stage_name:12}: {stage_status['submitted']:3} submitted, "
+                f"{stage_status['completed']:3} completed "
+                f"({stage_status['status']})"
+            )
 
         if report["failed_batch_details"]:
             print("\nFailed Batches (Recent):")
@@ -260,7 +260,7 @@ class Phase2RecoveryManager:
             print(f"  Batch: {last_checkpoint.get('batch_num')}")
             print(f"  Time: {last_checkpoint.get('timestamp')}")
 
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
 
     def cleanup_old_checkpoints(self, keep_count: int = 20):
         """Clean up old checkpoints, keeping only recent ones.

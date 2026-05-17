@@ -73,10 +73,7 @@ class SymptomCache:
         """Clear all expired entries."""
         with self._lock:
             current_time = time.time()
-            expired_keys = [
-                k for k, (_, ts) in self._cache.items()
-                if current_time - ts > self.ttl
-            ]
+            expired_keys = [k for k, (_, ts) in self._cache.items() if current_time - ts > self.ttl]
             for k in expired_keys:
                 del self._cache[k]
 

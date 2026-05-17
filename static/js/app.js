@@ -838,6 +838,9 @@ document.addEventListener("DOMContentLoaded",async()=>{
     }
     /* Hero stats: clickable navigation */
     setupHeroStats();
+    /* Dashboard modal trigger */
+    const dashBtn=document.getElementById("dashboardBtn");
+    if(dashBtn)dashBtn.addEventListener("click",openDashboard);
     /* Always-visible quick-nav strip (shows default label pre-selection) */
     renderQuickNav(null);
     /* Breadcrumb bar below header */
@@ -1427,7 +1430,7 @@ function selectSpecies(id){
     const sel=c.dataset.species===id;
     c.setAttribute("aria-pressed",sel);
   });
-  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);updatePainScaleVisibility();loadHusbandry(id);reloadAnesthesiaForSpecies();updateCheckerProgress(2);
+  renderSelectedSymptoms();loadSymptoms(id);loadDiseaseDb(id);loadBreeds(id);updateLabRangesForSpecies(id);updatePainScaleVisibility();loadHusbandry(id);reloadAnesthesiaForSpecies();updateCheckerProgress(2);if(typeof renderLabCalculators==="function")renderLabCalculators();
   resetSpeciesChat(id);
   // Reset guided consultation if active
   const guidedCont=document.getElementById("chatGuidedContainer");
@@ -1966,8 +1969,89 @@ function highlightLabAbnormals(){
 function clearLabValues(){
   document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{el.value="";});
   highlightLabAbnormals();
+  renderLabCalculators();
 }
-document.addEventListener("input",e=>{if(e.target.matches("#labValuesGrid input"))highlightLabAbnormals();});
+document.addEventListener("input",e=>{if(e.target.matches("#labValuesGrid input")){highlightLabAbnormals();renderLabCalculators();}});
+
+/* --- Clinical lab calculators (derived values from entered labs) --- */
+function _getLabFloat(id){
+  const el=document.getElementById(id);
+  if(!el||!el.value.trim())return null;
+  const v=parseFloat(el.value);
+  return isNaN(v)?null:v;
+}
+
+function renderLabCalculators(){
+  const container=document.getElementById("labCalculators");
+  if(!container)return;
+  const calcs=[];
+  /* 1. Anion Gap = (Na + K) - (Cl + HCO3); normal dog 12-24, cat 13-27 */
+  const na=_getLabFloat("lab-sodium"),k=_getLabFloat("lab-potassium"),cl=_getLabFloat("lab-chloride"),hco3=_getLabFloat("lab-hco3");
+  if(na!==null&&k!==null&&cl!==null&&hco3!==null){
+    const ag=(na+k)-(cl+hco3);
+    const high=ag>24;
+    const interp=high?(currentLang==="ja"?"高アニオンギャップ — DKA/乳酸/中毒/尿毒症":"High AG — DKA/lactic/toxin/uremia"):(currentLang==="ja"?"正常":"Normal");
+    calcs.push({name:currentLang==="ja"?"アニオンギャップ":"Anion Gap",value:ag.toFixed(1),unit:"mEq/L",interp,high});
+  }
+  /* 2. Corrected Calcium for albumin (dog): Cor_Ca = Ca - Alb + 3.5 */
+  const ca=_getLabFloat("lab-calcium"),alb=_getLabFloat("lab-albumin");
+  if(ca!==null&&alb!==null){
+    const corrected=ca-alb+3.5;
+    const lo=8.5,hi=11.5;
+    const flag=corrected>hi?"high":(corrected<lo?"low":"");
+    const interp=flag==="high"?(currentLang==="ja"?"アルブミン補正で高Ca（リンパ腫/上皮小体機能亢進/ビタミンD中毒）":"Albumin-corrected hypercalcemia (lymphoma/hyperparathyroid/Vit D)"):
+                 flag==="low"?(currentLang==="ja"?"補正後も低Ca（PLE/腎不全/低Mg）":"Corrected hypocalcemia (PLE/renal/hypoMg)"):
+                 (currentLang==="ja"?"正常":"Normal");
+    calcs.push({name:currentLang==="ja"?"アルブミン補正Ca":"Albumin-corrected Ca",value:corrected.toFixed(2),unit:"mg/dL",interp,high:flag==="high",low:flag==="low"});
+  }
+  /* 3. BUN:Creatinine ratio (>20 → prerenal/GI bleed; <10 → liver/protein loss) */
+  const bun=_getLabFloat("lab-bun"),cre=_getLabFloat("lab-creatinine");
+  if(bun!==null&&cre!==null&&cre>0){
+    const ratio=bun/cre;
+    const interp=ratio>20?(currentLang==="ja"?"高比 — 脱水/前腎性/消化管出血":"High ratio — dehydration/prerenal/GI bleed"):
+                 ratio<10?(currentLang==="ja"?"低比 — 肝不全/タンパク漏出":"Low ratio — liver failure/protein-losing"):
+                 (currentLang==="ja"?"正常範囲":"Normal range");
+    calcs.push({name:currentLang==="ja"?"BUN:Cre 比":"BUN:Cre Ratio",value:ratio.toFixed(1),unit:"",interp,high:ratio>20,low:ratio<10});
+  }
+  /* 4. ALT:ALP ratio (>2 hepatocellular; <1 cholestatic) */
+  const alt=_getLabFloat("lab-alt"),alp=_getLabFloat("lab-alp");
+  if(alt!==null&&alp!==null&&alp>0){
+    const r=alt/alp;
+    const interp=r>2?(currentLang==="ja"?"肝細胞障害優位":"Hepatocellular predominant"):
+                 r<1?(currentLang==="ja"?"胆汁うっ滞優位":"Cholestatic predominant"):
+                 (currentLang==="ja"?"混合":"Mixed");
+    calcs.push({name:"ALT:ALP",value:r.toFixed(2),unit:"",interp});
+  }
+  /* 5. Na:K ratio (<27 → Addisonian; 27-32 → suspicious; >32 → normal) */
+  if(na!==null&&k!==null&&k>0){
+    const r=na/k;
+    const interp=r<27?(currentLang==="ja"?"アジソン病疑い (<27)":"Addisonian suspicion (<27)"):
+                 r<32?(currentLang==="ja"?"要精査 (27-32)":"Borderline (27-32)"):
+                 (currentLang==="ja"?"正常":"Normal");
+    calcs.push({name:currentLang==="ja"?"Na:K 比":"Na:K Ratio",value:r.toFixed(1),unit:"",interp,low:r<27});
+  }
+  /* 6. Calcium × Phosphorus product (>70 → soft-tissue mineralization risk) */
+  const ph=_getLabFloat("lab-phosphorus");
+  if(ca!==null&&ph!==null){
+    const prod=ca*ph;
+    const high=prod>70;
+    const interp=high?(currentLang==="ja"?"Ca×P > 70 軟部組織石灰化リスク":"Ca×P > 70 mineralization risk"):
+                 (currentLang==="ja"?"正常":"Normal");
+    calcs.push({name:"Ca × P",value:prod.toFixed(1),unit:"",interp,high});
+  }
+  /* Render */
+  if(!calcs.length){
+    container.innerHTML=`<div style="font-size:.72rem;color:var(--gray-500);font-style:italic">${currentLang==="ja"?"💡 検査値を入力すると自動計算（アニオンギャップ・補正Ca・BUN:Cre比・Na:K比・Ca×P 等）":"💡 Enter labs above to auto-compute (Anion Gap, corrected Ca, BUN:Cre, Na:K, Ca×P, etc.)"}</div>`;
+    return;
+  }
+  const header=`<div style="font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:6px">${currentLang==="ja"?"📐 自動計算":"📐 Auto Calculations"}</div>`;
+  const items=calcs.map(c=>{
+    const color=c.high?"#e74c3c":c.low?"#2980b9":"var(--gray-700)";
+    const arrow=c.high?"↑":c.low?"↓":"";
+    return`<div class="lab-calc-row" style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px dashed var(--gray-200);font-size:.76rem"><span style="font-weight:600">${escapeHtml(c.name)}</span><span style="color:${color};font-weight:700">${escapeHtml(c.value)} ${escapeHtml(c.unit)} ${arrow}</span><span style="color:var(--gray-600);font-size:.72rem;flex:1;text-align:right;margin-left:8px">${escapeHtml(c.interp)}</span></div>`;
+  }).join("");
+  container.innerHTML=header+items;
+}
 
 
 function buildFieldFallback(label,name){
@@ -2535,16 +2619,51 @@ function renderResults(data){
 
 /* ===== Print / Export ===== */
 function createPrintButton(){
+  const wrap=document.createElement("div");
+  wrap.className="results-actions-bar";
+  wrap.style.cssText="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px auto";
   const btn=document.createElement("button");
   btn.type="button";
   btn.className="print-results-btn";
-  btn.style.cssText="display:block;margin:12px auto;padding:10px 24px;background:var(--white);border:2px solid var(--navy);color:var(--navy);border-radius:8px;font-size:.84rem;font-weight:600;cursor:pointer";
-  btn.textContent=currentLang==="ja"?"🖨 診断結果を印刷":"🖨 Print Results";
+  btn.style.cssText="padding:10px 24px;background:var(--white);border:2px solid var(--navy);color:var(--navy);border-radius:8px;font-size:.84rem;font-weight:600;cursor:pointer";
+  btn.textContent=currentLang==="ja"?"🖨 印刷／PDF保存":"🖨 Print / Save PDF";
+  btn.title=currentLang==="ja"?"ブラウザ印刷で「PDFに保存」を選択するとPDF化できます":"Use browser print dialog \"Save as PDF\" option";
   btn.addEventListener("click",function(){
     trackEvent("print_results",{species:currentSpecies});
-    window.print();
+    document.body.classList.add("print-mode-results");
+    // Auto-expand all closed disease details for printing
+    document.querySelectorAll(".disease-detail").forEach(d=>{if(!d.classList.contains("open"))d.classList.add("print-expanded");});
+    setTimeout(()=>{
+      window.print();
+      // Cleanup after print dialog closes
+      setTimeout(()=>{
+        document.body.classList.remove("print-mode-results");
+        document.querySelectorAll(".disease-detail.print-expanded").forEach(d=>d.classList.remove("print-expanded"));
+      },500);
+    },50);
   });
-  return btn;
+  wrap.appendChild(btn);
+  /* JSON export of result data */
+  const jsonBtn=document.createElement("button");
+  jsonBtn.className="export-results-btn";
+  jsonBtn.style.cssText="padding:10px 24px;background:var(--white);border:2px solid var(--green);color:var(--green);border-radius:8px;font-size:.84rem;font-weight:600;cursor:pointer";
+  jsonBtn.textContent=currentLang==="ja"?"💾 結果をJSON保存":"💾 Export JSON";
+  jsonBtn.addEventListener("click",function(){
+    try{
+      const history=loadDiagnosisHistory();
+      const latest=history[0];
+      if(!latest)return;
+      const blob=new Blob([JSON.stringify(latest,null,2)],{type:"application/json"});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement("a");
+      a.href=url;a.download=`vetdict-case-${new Date().toISOString().slice(0,10)}.json`;
+      document.body.appendChild(a);a.click();
+      setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},300);
+      trackEvent("export_case_json",{species:currentSpecies});
+    }catch(e){if(typeof showToast==="function")showToast(currentLang==="ja"?"エクスポート失敗":"Export failed","error");}
+  });
+  wrap.appendChild(jsonBtn);
+  return wrap;
 }
 
 /* ===== Diagnosis History (localStorage) ===== */
@@ -2569,6 +2688,219 @@ function loadDiagnosisHistory(){
   try{return JSON.parse(localStorage.getItem("vetdict-history")||"[]");}catch(e){return[];}
 }
 
+/* --- Dashboard modal: detailed VetDict statistics --- */
+let _dashboardLoaded=false;
+let _dashboardCache=null;
+
+function openDashboard(){
+  trackEvent("open_dashboard");
+  if(_dashboardLoaded&&_dashboardCache){
+    _showDashboardModal(_dashboardCache);
+    return;
+  }
+  // Show loading skeleton
+  _showDashboardModal(null);
+  fetchWithTimeout("/api/dashboard-stats/detailed")
+    .then(r=>r.ok?r.json():null)
+    .then(data=>{
+      if(!data)return;
+      _dashboardCache=data;
+      _dashboardLoaded=true;
+      _showDashboardModal(data);
+    })
+    .catch(err=>{
+      const body=document.getElementById("dashboardModalBody");
+      if(body)body.innerHTML=`<div style="padding:24px;text-align:center;color:var(--gray-500)">${currentLang==="ja"?"統計の取得に失敗しました":"Failed to load statistics"}<br><small>${escapeHtml(err.message||"")}</small></div>`;
+    });
+}
+
+function _showDashboardModal(data){
+  let modal=document.getElementById("dashboardModal");
+  if(!modal){
+    modal=document.createElement("div");
+    modal.id="dashboardModal";
+    modal.className="dashboard-modal";
+    modal.setAttribute("role","dialog");
+    modal.setAttribute("aria-modal","true");
+    modal.setAttribute("aria-labelledby","dashboardTitle");
+    modal.innerHTML=`<div class="dashboard-backdrop"></div><div class="dashboard-panel"><div class="dashboard-header"><h2 id="dashboardTitle">${currentLang==="ja"?"📊 統計ダッシュボード":"📊 Statistics Dashboard"}</h2><button class="dashboard-close" aria-label="${currentLang==="ja"?"閉じる":"Close"}">✕</button></div><div class="dashboard-body" id="dashboardModalBody"><div class="dashboard-loading">${currentLang==="ja"?"読み込み中…":"Loading…"}</div></div></div>`;
+    document.body.appendChild(modal);
+    modal.querySelector(".dashboard-close").addEventListener("click",closeDashboard);
+    modal.querySelector(".dashboard-backdrop").addEventListener("click",closeDashboard);
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("open"))closeDashboard();});
+  }
+  modal.classList.add("open");
+  document.body.style.overflow="hidden";
+  if(!data)return;
+  const body=document.getElementById("dashboardModalBody");
+  if(!body)return;
+  body.innerHTML=_renderDashboardContent(data);
+}
+
+function closeDashboard(){
+  const modal=document.getElementById("dashboardModal");
+  if(modal)modal.classList.remove("open");
+  document.body.style.overflow="";
+}
+
+function _renderDashboardContent(data){
+  const isJa=currentLang==="ja";
+  /* Section 1: Overall totals */
+  const totalDiseases=data.species_disease_counts.reduce((sum,s)=>sum+s.count,0);
+  const totalDrugs=data.drug_category_counts.reduce((sum,c)=>sum+c.count,0);
+  const totalProtocols=data.total_emergency_protocols||0;
+  const overview=`<div class="dashboard-section"><h3>${isJa?"概要":"Overview"}</h3><div class="dashboard-kpi-grid">
+    <div class="dashboard-kpi"><div class="kpi-value">${totalDiseases.toLocaleString()}</div><div class="kpi-label">${isJa?"総疾患数":"Total Diseases"}</div></div>
+    <div class="dashboard-kpi"><div class="kpi-value">${data.species_disease_counts.length}</div><div class="kpi-label">${isJa?"対応動物種":"Species"}</div></div>
+    <div class="dashboard-kpi"><div class="kpi-value">${totalDrugs}</div><div class="kpi-label">${isJa?"総薬品数":"Drugs"}</div></div>
+    <div class="dashboard-kpi"><div class="kpi-value">${data.drug_category_counts.length}</div><div class="kpi-label">${isJa?"薬品カテゴリ":"Drug Categories"}</div></div>
+    <div class="dashboard-kpi"><div class="kpi-value">${totalProtocols}</div><div class="kpi-label">${isJa?"緊急プロトコル":"Emergency Protocols"}</div></div>
+    <div class="dashboard-kpi"><div class="kpi-value">${data.lab_combination_patterns}</div><div class="kpi-label">${isJa?"検査値パターン":"Lab Patterns"}</div></div>
+  </div></div>`;
+
+  /* Section 2: Species disease counts (bar chart) */
+  const sortedSp=[...data.species_disease_counts].sort((a,b)=>b.count-a.count);
+  const maxSp=sortedSp[0]?sortedSp[0].count:1;
+  const speciesBars=sortedSp.map(s=>{
+    const spObj=SPECIES.find(x=>x.id===s.species);
+    const label=spObj?(isJa?spObj.name:spObj.nameEn):s.species;
+    const pct=Math.round(s.count/maxSp*100);
+    return`<div class="dashboard-bar-row"><span class="bar-label">${escapeHtml(label)}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="bar-value">${s.count}</span></div>`;
+  }).join("");
+  const speciesSection=`<div class="dashboard-section"><h3>${isJa?"動物種別 疾患数":"Diseases by Species"}</h3><div class="dashboard-bars">${speciesBars}</div></div>`;
+
+  /* Section 3: Drug category breakdown */
+  const drugRows=data.drug_category_counts.slice(0,15);
+  const maxDrug=drugRows[0]?drugRows[0].count:1;
+  const drugBars=drugRows.map(c=>{
+    const label=isJa?(c.name_ja||c.category):(c.name_en||c.category);
+    const pct=Math.round(c.count/maxDrug*100);
+    return`<div class="dashboard-bar-row"><span class="bar-label">${escapeHtml(label)}</span><div class="bar-track"><div class="bar-fill bar-fill-drug" style="width:${pct}%"></div></div><span class="bar-value">${c.count}</span></div>`;
+  }).join("");
+  const drugSection=`<div class="dashboard-section"><h3>${isJa?"薬品カテゴリ別 (上位15)":"Drug Categories (Top 15)"}</h3><div class="dashboard-bars">${drugBars}</div></div>`;
+
+  /* Section 4: ECVN coverage */
+  const ecvnRows=Object.entries(data.ecvn_coverage||{}).map(([sp,info])=>{
+    const spObj=SPECIES.find(x=>x.id===sp);
+    const label=spObj?(isJa?spObj.name:spObj.nameEn):sp;
+    return{label,pct:info.pct,covered:info.covered,total:info.total};
+  }).sort((a,b)=>b.pct-a.pct);
+  const ecvnBars=ecvnRows.map(r=>{
+    return`<div class="dashboard-bar-row"><span class="bar-label">${escapeHtml(r.label)}</span><div class="bar-track"><div class="bar-fill bar-fill-ecvn" style="width:${r.pct}%"></div></div><span class="bar-value">${r.covered}/${r.total} (${r.pct}%)</span></div>`;
+  }).join("");
+  const ecvnSection=`<div class="dashboard-section"><h3>${isJa?"ECVN補助療法カバレッジ":"ECVN Adjunct Coverage"}</h3><div class="dashboard-bars">${ecvnBars}</div></div>`;
+
+  /* Section 5: Emergency category breakdown */
+  const emRows=Object.entries(data.emergency_categories||{}).map(([k,v])=>({cat:k,count:v})).sort((a,b)=>b.count-a.count);
+  const emBars=emRows.map(r=>{
+    return`<div class="dashboard-bar-row"><span class="bar-label">${escapeHtml(r.cat||"-")}</span><div class="bar-track"><div class="bar-fill bar-fill-emergency" style="width:${Math.round(r.count/(emRows[0]?.count||1)*100)}%"></div></div><span class="bar-value">${r.count}</span></div>`;
+  }).join("");
+  const emSection=`<div class="dashboard-section"><h3>${isJa?"緊急プロトコル カテゴリ":"Emergency Protocol Categories"}</h3><div class="dashboard-bars">${emBars}</div></div>`;
+
+  /* Section 6: User's diagnosis history */
+  const history=loadDiagnosisHistory();
+  let historySection="";
+  if(history.length){
+    const sp_counts={};
+    history.forEach(h=>{if(h.species)sp_counts[h.species]=(sp_counts[h.species]||0)+1;});
+    const hRows=Object.entries(sp_counts).map(([k,v])=>({sp:k,count:v})).sort((a,b)=>b.count-a.count);
+    const max=hRows[0]?.count||1;
+    const hBars=hRows.map(r=>{
+      const spObj=SPECIES.find(x=>x.id===r.sp);
+      const label=spObj?(isJa?spObj.name:spObj.nameEn):r.sp;
+      return`<div class="dashboard-bar-row"><span class="bar-label">${escapeHtml(label)}</span><div class="bar-track"><div class="bar-fill bar-fill-history" style="width:${Math.round(r.count/max*100)}%"></div></div><span class="bar-value">${r.count}</span></div>`;
+    }).join("");
+    historySection=`<div class="dashboard-section"><h3>${isJa?"あなたの診断履歴 ("+history.length+"件)":"Your Diagnosis History ("+history.length+" cases)"}</h3><div class="dashboard-bars">${hBars}</div><div style="margin-top:10px;text-align:right"><button class="dashboard-export-btn" data-action="csv" style="margin-right:8px;padding:6px 12px;background:var(--white);border:1px solid var(--green);color:var(--green);border-radius:6px;cursor:pointer;font-size:.78rem">📊 CSV</button><button class="dashboard-export-btn" data-action="json" style="padding:6px 12px;background:var(--white);border:1px solid var(--navy);color:var(--navy);border-radius:6px;cursor:pointer;font-size:.78rem">💾 JSON</button></div></div>`;
+  }
+
+  return overview+speciesSection+drugSection+ecvnSection+emSection+historySection;
+}
+
+// Wire history export buttons after modal content loaded
+document.addEventListener("click",e=>{
+  const exportBtn=e.target.closest(".dashboard-export-btn");
+  if(!exportBtn)return;
+  if(exportBtn.dataset.action==="csv")exportHistoryAsCSV();
+  else if(exportBtn.dataset.action==="json")exportHistoryAsJSON();
+});
+
+/* --- Drug interaction rendering with severity classification --- */
+function _classifyInteractionSeverity(di){
+  // Honor explicit severity if present
+  const sev=(di.severity||"").toLowerCase();
+  if(sev==="major"||sev==="severe"||sev==="contraindicated")return"major";
+  if(sev==="moderate")return"moderate";
+  if(sev==="minor"||sev==="mild")return"minor";
+  // Heuristic: infer from effect text keywords
+  const txt=((di.effect||"")+" "+(di.effect_ja||"")).toLowerCase();
+  if(/contraindicat|fatal|lethal|death|severe|life.?threatening|seizure|cardiac arrest|致死|禁忌|生命|重篤/.test(txt))return"major";
+  if(/toxicity|nephrotox|hepatotox|ototox|coagulopath|bleeding|hemorrhage|hypotension|arrhythmi|qt|肝毒|腎毒|耳毒|出血|低血圧|不整脈/.test(txt))return"moderate";
+  return"minor";
+}
+
+function renderDrugInteractionsList(interactions){
+  if(!interactions||!interactions.length)return"";
+  // Sort by severity: major > moderate > minor
+  const order={major:0,moderate:1,minor:2};
+  const sorted=[...interactions].sort((a,b)=>order[_classifyInteractionSeverity(a)]-order[_classifyInteractionSeverity(b)]);
+  return sorted.map(di=>{
+    const sev=_classifyInteractionSeverity(di);
+    const label=currentLang==="ja"?(di.effect_ja||di.effect||""):(di.effect||di.effect_ja||"");
+    const sevLabel={
+      major:currentLang==="ja"?"重度":"MAJOR",
+      moderate:currentLang==="ja"?"中等度":"MODERATE",
+      minor:currentLang==="ja"?"軽度":"MINOR",
+    }[sev]||sev.toUpperCase();
+    const icon={major:"⛔",moderate:"⚠️",minor:"ℹ️"}[sev]||"";
+    return `<span class="drug-interaction-tag severity-${sev}"><span class="severity-badge">${icon} ${sevLabel}</span><span class="interaction-drug">${escapeHtml(di.drug||"")}</span><span class="interaction-effect">${escapeHtml(label)}</span></span>`;
+  }).join("");
+}
+
+function exportHistoryAsCSV(){
+  const history=loadDiagnosisHistory();
+  if(!history.length){if(typeof showToast==="function")showToast(currentLang==="ja"?"履歴なし":"No history","warning");return;}
+  /* CSV header */
+  const headers=["id","date","species","severity","symptom_count","symptoms","top1_name","top1_confidence","top2_name","top2_confidence","top3_name","top3_confidence"];
+  const escapeCsv=s=>{const t=String(s??"");return /[",\n]/.test(t)?`"${t.replace(/"/g,'""')}"`:t;};
+  const rows=history.map(h=>{
+    const td=h.topDiseases||[];
+    return [
+      h.id,
+      h.date||"",
+      h.species||"",
+      h.severity||"",
+      (h.symptoms||[]).length,
+      (h.symptoms||[]).join("|"),
+      td[0]?(td[0].name||td[0].name_ja||""):"",
+      td[0]?td[0].confidence:"",
+      td[1]?(td[1].name||td[1].name_ja||""):"",
+      td[1]?td[1].confidence:"",
+      td[2]?(td[2].name||td[2].name_ja||""):"",
+      td[2]?td[2].confidence:"",
+    ].map(escapeCsv).join(",");
+  });
+  const csv="﻿"+headers.join(",")+"\n"+rows.join("\n");
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download=`vetdict-history-${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},300);
+  trackEvent("export_history_csv",{count:history.length});
+}
+
+function exportHistoryAsJSON(){
+  const history=loadDiagnosisHistory();
+  if(!history.length){if(typeof showToast==="function")showToast(currentLang==="ja"?"履歴なし":"No history","warning");return;}
+  const blob=new Blob([JSON.stringify({exported:new Date().toISOString(),count:history.length,cases:history},null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download=`vetdict-history-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},300);
+  trackEvent("export_history_json",{count:history.length});
+}
+
 function renderHistoryPanel(){
   const history=loadDiagnosisHistory();
   if(!history.length)return"";
@@ -2581,7 +2913,7 @@ function renderHistoryPanel(){
     const top=h.topDiseases&&h.topDiseases[0]?(currentLang==="ja"?(h.topDiseases[0].name_ja||h.topDiseases[0].name):h.topDiseases[0].name):"";
     return`<div class="history-item" data-id="${h.id}" style="padding:8px 12px;border-bottom:1px solid var(--gray-100);cursor:pointer;font-size:.82rem"><span>${icon}</span> <strong>${escapeHtml(spName)}</strong> <span style="color:var(--gray-500)">${date}</span><br><span style="color:var(--navy)">${escapeHtml(top)}</span> <span style="color:var(--gray-400)">${h.symptoms?h.symptoms.length:0}症状</span></div>`;
   }).join("");
-  return`<div class="history-panel" style="margin-top:12px"><div style="font-size:.82rem;font-weight:700;color:var(--navy);padding:8px 12px;border-bottom:2px solid var(--green)">${currentLang==="ja"?"📋 診断履歴":"📋 Diagnosis History"}</div>${items}<div class="history-actions" style="padding:6px 12px;display:flex;justify-content:flex-end"><button type="button" class="history-clear-btn" aria-label="${currentLang==="ja"?"診断履歴をすべて削除":"Clear diagnosis history"}" style="font-size:.72rem;color:var(--gray-400);background:none;border:none;cursor:pointer;text-decoration:underline">${currentLang==="ja"?"履歴をクリア":"Clear history"}</button></div></div>`;
+  return`<div class="history-panel" style="margin-top:12px"><div style="font-size:.82rem;font-weight:700;color:var(--navy);padding:8px 12px;border-bottom:2px solid var(--green)">${currentLang==="ja"?"📋 診断履歴":"📋 Diagnosis History"} <span style="font-size:.7rem;color:var(--gray-500);font-weight:400">(${history.length})</span></div>${items}<div class="history-actions" style="padding:8px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><div style="display:flex;gap:6px;flex-wrap:wrap"><button type="button" class="history-export-csv" aria-label="${currentLang==="ja"?"CSV保存":"Export CSV"}" style="font-size:.72rem;color:var(--green);background:var(--white);border:1px solid var(--green);padding:4px 10px;border-radius:6px;cursor:pointer">${currentLang==="ja"?"📊 CSV":"📊 CSV"}</button><button type="button" class="history-export-json" aria-label="${currentLang==="ja"?"JSON保存":"Export JSON"}" style="font-size:.72rem;color:var(--navy);background:var(--white);border:1px solid var(--navy);padding:4px 10px;border-radius:6px;cursor:pointer">${currentLang==="ja"?"💾 JSON":"💾 JSON"}</button></div><button type="button" class="history-clear-btn" aria-label="${currentLang==="ja"?"診断履歴をすべて削除":"Clear diagnosis history"}" style="font-size:.72rem;color:var(--gray-400);background:none;border:none;cursor:pointer;text-decoration:underline">${currentLang==="ja"?"履歴をクリア":"Clear history"}</button></div></div>`;
 }
 
 function attachHistoryHandlers(container){
@@ -2624,6 +2956,10 @@ function attachHistoryHandlers(container){
       }}:null);
     }
   });}
+  const csvBtn=container.querySelector(".history-export-csv");
+  if(csvBtn)csvBtn.addEventListener("click",e=>{e.stopPropagation();exportHistoryAsCSV();});
+  const jsonBtn=container.querySelector(".history-export-json");
+  if(jsonBtn)jsonBtn.addEventListener("click",e=>{e.stopPropagation();exportHistoryAsJSON();});
 }
 
 function loadCommonDiseases(species){
@@ -4529,7 +4865,7 @@ function renderDrugList(){
         <dl><dt>${t("dtContraindications")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||""))}</dd></dl>
         ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.routes_ja||[]).join(", "):(d.routes||[]).join(", "))}</dd></dl>`:""}
         ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.formulations_ja||d.formulations||[]).join(", "):(d.formulations||d.formulations_ja||[]).join(", "))}</dd></dl>`:""}
-        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")}</dt><dd>${d.drug_interactions.map(di=>`<span class="drug-interaction-tag">${escapeHtml(di.drug)}: ${escapeHtml(currentLang==="ja"?(di.effect_ja||di.effect):(di.effect||di.effect_ja))}</span>`).join("")}</dd></dl>`:""}
+        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")} <span style="font-size:.7rem;color:var(--gray-500);font-weight:400">(${d.drug_interactions.length})</span></dt><dd>${renderDrugInteractionsList(d.drug_interactions)}</dd></dl>`:""}
         <div class="drug-species-section"><strong class="drug-species-title">${t("dtSpeciesInfo")}</strong>
           <div class="drug-species-grid">
             ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");const highlight=currentSpecies===sp?"drug-species-highlight":"";return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"} ${highlight}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}

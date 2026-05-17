@@ -138,9 +138,7 @@ class MultiDiseaseAnalyzer:
 
             if cached_confidence:
                 breakdown_dict = cached_confidence
-                logger.debug(
-                    f"Cache hit: confidence for {adjusted_combination.diseases}"
-                )
+                logger.debug(f"Cache hit: confidence for {adjusted_combination.diseases}")
             else:
                 # Calculate detailed Bayesian breakdown
                 breakdown = CombinedConfidenceCalculator.calculate_bayesian_combination(
@@ -179,9 +177,7 @@ class MultiDiseaseAnalyzer:
 
             if cached_questions:
                 questions = cached_questions
-                logger.debug(
-                    f"Cache hit: questions for {adjusted_combination.diseases}"
-                )
+                logger.debug(f"Cache hit: questions for {adjusted_combination.diseases}")
             else:
                 questions = MultiDiseaseQuestionGenerator.generate_combination_focused_questions(
                     diseases=adjusted_combination.diseases,
@@ -217,12 +213,8 @@ class MultiDiseaseAnalyzer:
 
         # Add English explanation
         if response.get("confidence_breakdown"):
-            response["explanation_en"] = response["confidence_breakdown"].get(
-                "explanation_en", ""
-            )
-            response["explanation_ja"] = response["confidence_breakdown"].get(
-                "explanation_ja", ""
-            )
+            response["explanation_en"] = response["confidence_breakdown"].get("explanation_en", "")
+            response["explanation_ja"] = response["confidence_breakdown"].get("explanation_ja", "")
 
         return response
 

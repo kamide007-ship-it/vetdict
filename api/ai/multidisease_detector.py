@@ -13,37 +13,89 @@ logger = logging.getLogger(__name__)
 # Body-system prefixes/keywords for symptom clustering
 _BODY_SYSTEM_KEYWORDS: Dict[str, List[str]] = {
     "respiratory": [
-        "cough", "sneez", "wheez", "nasal", "breathing", "dyspnea",
-        "respiratory", "trachea",
+        "cough",
+        "sneez",
+        "wheez",
+        "nasal",
+        "breathing",
+        "dyspnea",
+        "respiratory",
+        "trachea",
     ],
     "gastrointestinal": [
-        "vomit", "diarrhea", "constipat", "bloat", "nausea", "anorexia",
-        "stool", "feces", "appetite",
+        "vomit",
+        "diarrhea",
+        "constipat",
+        "bloat",
+        "nausea",
+        "anorexia",
+        "stool",
+        "feces",
+        "appetite",
     ],
     "musculoskeletal": [
-        "limp", "lame", "stiff", "joint", "pain", "paralysis", "paresis",
-        "swollen_joint", "fracture", "dysplasia",
+        "limp",
+        "lame",
+        "stiff",
+        "joint",
+        "pain",
+        "paralysis",
+        "paresis",
+        "swollen_joint",
+        "fracture",
+        "dysplasia",
     ],
     "neurological": [
-        "seizure", "tremor", "ataxia", "disorientation", "head_tilt",
-        "circling", "paralysis", "paresis",
+        "seizure",
+        "tremor",
+        "ataxia",
+        "disorientation",
+        "head_tilt",
+        "circling",
+        "paralysis",
+        "paresis",
     ],
     "dermatological": [
-        "itch", "scratch", "rash", "hair_loss", "alopecia", "skin",
-        "lesion", "licking",
+        "itch",
+        "scratch",
+        "rash",
+        "hair_loss",
+        "alopecia",
+        "skin",
+        "lesion",
+        "licking",
     ],
     "urinary": [
-        "urin", "incontinence", "straining", "hematuria", "polyuria",
-        "polydipsia", "thirst",
+        "urin",
+        "incontinence",
+        "straining",
+        "hematuria",
+        "polyuria",
+        "polydipsia",
+        "thirst",
     ],
     "cardiac": [
-        "heart", "murmur", "cyanosis", "faint", "syncope", "exercise_intolerance",
+        "heart",
+        "murmur",
+        "cyanosis",
+        "faint",
+        "syncope",
+        "exercise_intolerance",
     ],
     "ophthalmic": [
-        "eye", "squint", "cloudi", "redness", "discharge_eye",
+        "eye",
+        "squint",
+        "cloudi",
+        "redness",
+        "discharge_eye",
     ],
     "systemic": [
-        "fever", "lethargy", "weight", "lymph", "pale_gum", "jaundice",
+        "fever",
+        "lethargy",
+        "weight",
+        "lymph",
+        "pale_gum",
+        "jaundice",
     ],
 }
 
@@ -58,6 +110,7 @@ def _classify_symptom_system(symptom_id: str) -> Set[str]:
                 systems.add(system)
                 break
     return systems if systems else {"unclassified"}
+
 
 from api.ai.comorbidity_scorer import ComorbidityScorer
 from api.ai.disease_interactions import DiseaseInteractionMatrix
@@ -75,15 +128,11 @@ class DiseaseCombination:
     component_confidences: Dict[str, float]  # Individual disease scores
     interaction_effect: float  # -1.0 (competitive) to 1.0 (synergistic)
     shared_symptom_count: int  # Symptoms explained by multiple diseases
-    unique_symptoms_per_disease: Dict[str, List[str]] = field(
-        default_factory=dict
-    )  # Each disease's specific symptoms
+    unique_symptoms_per_disease: Dict[str, List[str]] = field(default_factory=dict)  # Each disease's specific symptoms
     explanation_ja: str = ""  # Plain-text explanation in Japanese
     explanation_en: str = ""  # Plain-text explanation in English
     mechanism: str = ""  # Medical mechanism
-    confidence_sources: List[str] = field(
-        default_factory=list
-    )  # ["symptom_overlap", "comorbidity_db", "age_factor"]
+    confidence_sources: List[str] = field(default_factory=list)  # ["symptom_overlap", "comorbidity_db", "age_factor"]
     ambiguity_adjusted: bool = False  # Whether ambiguity analysis was applied
     ambiguity_adjustment_factor: float = 1.0  # Confidence adjustment from ambiguity analysis
 
@@ -91,9 +140,7 @@ class DiseaseCombination:
         return {
             "diseases": self.diseases,
             "combined_confidence": round(self.combined_confidence, 3),
-            "component_confidences": {
-                k: round(v, 3) for k, v in self.component_confidences.items()
-            },
+            "component_confidences": {k: round(v, 3) for k, v in self.component_confidences.items()},
             "interaction_effect": round(self.interaction_effect, 3),
             "shared_symptom_count": self.shared_symptom_count,
             "unique_symptoms_per_disease": self.unique_symptoms_per_disease,
@@ -304,9 +351,7 @@ class MultiDiseaseDetector:
         )
 
         # Get mechanism and explanation
-        mechanism = DiseaseInteractionMatrix.COMORBIDITY_DATABASE.get(
-            (disease_a, disease_b)
-        )
+        mechanism = DiseaseInteractionMatrix.COMORBIDITY_DATABASE.get((disease_a, disease_b))
         mechanism_name = mechanism.mechanism if mechanism else "unknown"
 
         explanation_ja = cls._generate_explanation_ja(disease_a, disease_b, mechanism)
@@ -402,9 +447,7 @@ class MultiDiseaseDetector:
         """
         # Check comorbidity database
         disease_a, disease_b = combination.diseases[0], combination.diseases[1]
-        relation = DiseaseInteractionMatrix.COMORBIDITY_DATABASE.get(
-            (disease_a, disease_b)
-        )
+        relation = DiseaseInteractionMatrix.COMORBIDITY_DATABASE.get((disease_a, disease_b))
 
         if relation is None:
             # Unknown combination: not explicitly invalid, but less confident
@@ -464,10 +507,7 @@ class MultiDiseaseDetector:
 
         for symptom in detected_symptoms:
             # Which of our candidate diseases include this symptom?
-            matching = [
-                d for d in diseases
-                if symptom in disease_symptom_sets.get(d, set())
-            ]
+            matching = [d for d in diseases if symptom in disease_symptom_sets.get(d, set())]
 
             if not matching:
                 continue
@@ -507,10 +547,7 @@ class MultiDiseaseDetector:
             }
         """
         # Get disease names from candidates
-        [
-            d.get("name", d.get("name_ja", ""))
-            for d in suspected_diseases[:5]
-        ]
+        [d.get("name", d.get("name_ja", "")) for d in suspected_diseases[:5]]
 
         # Analyze symptom set
         ambiguity_reports = AmbiguitySolver.analyze_symptom_set(
@@ -522,28 +559,18 @@ class MultiDiseaseDetector:
 
         # Calculate overall adjustment factor
         if ambiguity_reports:
-            adjustment_factors = [
-                report.confidence_adjustment_factor
-                for report in ambiguity_reports
-            ]
-            overall_factor = (
-                sum(adjustment_factors) / len(adjustment_factors)
-            )
+            adjustment_factors = [report.confidence_adjustment_factor for report in ambiguity_reports]
+            overall_factor = sum(adjustment_factors) / len(adjustment_factors)
         else:
             overall_factor = 1.0
 
         # Identify high-ambiguity symptoms
         high_ambiguity = [
-            report.symptom_id
-            for report in ambiguity_reports
-            if report.recommendation == "ask_clarification"
+            report.symptom_id for report in ambiguity_reports if report.recommendation == "ask_clarification"
         ]
 
         # Build recommendations map
-        recommendations = {
-            report.symptom_id: report.recommendation
-            for report in ambiguity_reports
-        }
+        recommendations = {report.symptom_id: report.recommendation for report in ambiguity_reports}
 
         return {
             "ambiguity_reports": ambiguity_reports,
@@ -571,10 +598,7 @@ class MultiDiseaseDetector:
         adjusted_combination = DiseaseCombination(
             diseases=combination.diseases,
             combined_confidence=combination.combined_confidence * adjustment_factor,
-            component_confidences={
-                d: c * adjustment_factor
-                for d, c in combination.component_confidences.items()
-            },
+            component_confidences={d: c * adjustment_factor for d, c in combination.component_confidences.items()},
             interaction_effect=combination.interaction_effect,
             shared_symptom_count=combination.shared_symptom_count,
             unique_symptoms_per_disease=combination.unique_symptoms_per_disease,
@@ -602,9 +626,7 @@ class MultiDiseaseSession:
         self.session_id = session_id
         self.detected_symptoms = detected_symptoms
         self.explored_combinations = initial_candidates.copy()
-        self.current_focus: Optional[DiseaseCombination] = (
-            initial_candidates[0] if initial_candidates else None
-        )
+        self.current_focus: Optional[DiseaseCombination] = initial_candidates[0] if initial_candidates else None
         self.confidence_history: Dict[str, List[float]] = {}
 
         # Track confidence changes
