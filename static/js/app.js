@@ -1573,6 +1573,7 @@ function setupMobileBottomNav(){
   nav.setAttribute("aria-label",currentLang==="ja"?"メインナビゲーション":"Main navigation");
   views.forEach(v=>{
     const btn=document.createElement("button");
+    btn.type="button";
     btn.dataset.view=v;
     btn.className=v===currentView?"active":"";
     btn.innerHTML=icons[v]+'<span>'+t("mobileNav"+v.charAt(0).toUpperCase()+v.slice(1))+'</span>';
@@ -2075,6 +2076,7 @@ function showRelatedSuggestions(){
     btns.className="related-btns";
     data.related.forEach(s=>{
       const btn=document.createElement("button");
+      btn.type="button";
       btn.className="related-sym-btn";
       btn.textContent=`+ ${currentLang==="ja"?s.name_ja:s.name_en}`;
       btn.onclick=()=>{
@@ -2368,6 +2370,7 @@ function renderResults(data){
 /* ===== Print / Export ===== */
 function createPrintButton(){
   const btn=document.createElement("button");
+  btn.type="button";
   btn.className="print-results-btn";
   btn.style.cssText="display:block;margin:12px auto;padding:10px 24px;background:var(--white);border:2px solid var(--navy);color:var(--navy);border-radius:8px;font-size:.84rem;font-weight:600;cursor:pointer";
   btn.textContent=currentLang==="ja"?"🖨 診断結果を印刷":"🖨 Print Results";
@@ -2978,6 +2981,7 @@ function renderDiseaseDb(){
   if(totalCount>shownCount){
     const remaining=totalCount-shownCount;
     const showMoreBtn=document.createElement("button");
+    showMoreBtn.type="button";
     showMoreBtn.className="show-more-btn";
     showMoreBtn.style.cssText="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer";
     showMoreBtn.textContent=t("showMoreItems").replace("%n%",remaining);
@@ -3409,6 +3413,7 @@ function renderChatResult(container,data){
         btnGroup.className="chat-q-btns";
         fq.options.forEach(opt=>{
           const btn=document.createElement("button");
+          btn.type="button";
           const isYes=opt.value.startsWith("+");
           btn.className="chat-q-btn "+(isYes?"chat-q-yes":"chat-q-no");
           btn.textContent=currentLang==="ja"?(opt.label_ja||""):(opt.label_en||"");
@@ -3442,6 +3447,7 @@ function renderChatResult(container,data){
           btnGroup.className="chat-q-btns";
           fq.options.forEach(opt=>{
             const btn=document.createElement("button");
+            btn.type="button";
             btn.className="chat-followup-btn";
             btn.textContent=currentLang==="ja"?(opt.label_ja||""):(opt.label_en||"");
             btn.addEventListener("click",()=>{
@@ -3456,6 +3462,7 @@ function renderChatResult(container,data){
           fqDiv.appendChild(qRow);
         }else{
           const btn=document.createElement("button");
+          btn.type="button";
           btn.className="chat-followup-btn";
           btn.textContent=currentLang==="ja"?(fq.question_ja||""):(fq.question_en||"");
           btn.addEventListener("click",()=>{
@@ -4977,6 +4984,7 @@ function toggleDbItem(el){
       trackEvent("view_disease_detail",{species:currentSpecies,disease:diseaseName});
       if(!detail.querySelector(".detail-close-btn")){
         const closeBtn=document.createElement("button");
+        closeBtn.type="button";
         closeBtn.className="detail-close-btn";
         closeBtn.setAttribute("aria-label",currentLang==="ja"?"閉じる":"Close");
         closeBtn.textContent="\u2715";
@@ -5071,8 +5079,9 @@ function highlightMatch(text,query){
 /* --- Scroll-to-top button with progress ring --- */
 (function(){
   const btn=document.createElement("button");
+  btn.type="button";
   btn.className="scroll-top";
-  btn.setAttribute("aria-label","Scroll to top");
+  btn.setAttribute("aria-label",currentLang==="ja"?"ページの先頭へ":"Scroll to top");
   btn.innerHTML='<svg class="scroll-progress-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2"/><circle class="scroll-progress-arc" cx="18" cy="18" r="16" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-dasharray="100.53" stroke-dashoffset="100.53" transform="rotate(-90 18 18)"/></svg><span class="scroll-arrow">\u2191</span>';
   document.body.appendChild(btn);
   const arc=btn.querySelector(".scroll-progress-arc");
@@ -5426,6 +5435,7 @@ function renderClarifyingQuestions(questions) {
 
   questions.forEach((q) => {
     const item = document.createElement('button');
+    item.type = 'button';
     item.className = 'question-item';
     item.setAttribute('data-question-id', q.question.question_id);
     item.setAttribute('data-ranking-score', q.ranking_score);
