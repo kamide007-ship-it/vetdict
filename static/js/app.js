@@ -277,11 +277,16 @@ const I18N={
     filterReset:"リセット",
     // Cookie consent
     cookieConsentRegion:"Cookieに関するお知らせ",
-    cookieConsentText:"当サイトでは利用状況の改善のためGoogle Analyticsを使用しています。",
+    cookieConsentText:"当サイトでは利用状況の改善のためGoogle Analyticsを使用しています。あなたの選択は localStorage に保存され、後から設定変更できます。",
     cookiePrivacyLink:"プライバシーポリシー",
     cookieAccept:"同意する",
-    cookieDismiss:"閉じる",
+    cookieReject:"拒否する",
+    cookieDismiss:"後で決める",
     cookieDismissAria:"同意せずに閉じる",
+    dashboardOpen:"統計ダッシュボード",
+    helpButton:"使い方ガイド",
+    helpTitle:"VetDict — 使い方ガイド",
+    helpClose:"閉じる",
     // Pricing
     pricingSubtitle:"現在オープンベータ — 獣医師・獣医学生は全機能を無料でご利用いただけます",
     pricingBadge:"オープンベータ",
@@ -529,11 +534,16 @@ const I18N={
     filterReset:"Reset",
     // Cookie consent
     cookieConsentRegion:"Cookie notice",
-    cookieConsentText:"This site uses Google Analytics to improve usability.",
+    cookieConsentText:"This site uses Google Analytics to improve usability. Your choice is saved in localStorage and can be changed later.",
     cookiePrivacyLink:"Privacy policy",
     cookieAccept:"Accept",
-    cookieDismiss:"Close",
+    cookieReject:"Reject",
+    cookieDismiss:"Decide later",
     cookieDismissAria:"Close without accepting",
+    dashboardOpen:"Statistics Dashboard",
+    helpButton:"Quick Guide",
+    helpTitle:"VetDict — Quick Guide",
+    helpClose:"Close",
     // Pricing
     pricingSubtitle:"Open beta — Veterinarians and veterinary students get full access for free",
     pricingBadge:"Open Beta",
@@ -841,6 +851,9 @@ document.addEventListener("DOMContentLoaded",async()=>{
     /* Dashboard modal trigger */
     const dashBtn=document.getElementById("dashboardBtn");
     if(dashBtn)dashBtn.addEventListener("click",openDashboard);
+    /* Help/Tour modal trigger */
+    const helpBtn=document.getElementById("helpGuideBtn");
+    if(helpBtn)helpBtn.addEventListener("click",openHelpGuide);
     /* Always-visible quick-nav strip (shows default label pre-selection) */
     renderQuickNav(null);
     /* Breadcrumb bar below header */
@@ -2741,6 +2754,174 @@ function closeDashboard(){
   const modal=document.getElementById("dashboardModal");
   if(modal)modal.classList.remove("open");
   document.body.style.overflow="";
+}
+
+/* --- In-app Help / Tour modal (educational content) --- */
+function openHelpGuide(){
+  trackEvent("open_help_guide");
+  let modal=document.getElementById("helpGuideModal");
+  if(!modal){
+    modal=document.createElement("div");
+    modal.id="helpGuideModal";
+    modal.className="dashboard-modal";
+    modal.setAttribute("role","dialog");
+    modal.setAttribute("aria-modal","true");
+    modal.setAttribute("aria-labelledby","helpGuideTitle");
+    modal.innerHTML=`<div class="dashboard-backdrop"></div><div class="dashboard-panel"><div class="dashboard-header"><h2 id="helpGuideTitle">${currentLang==="ja"?"📖 "+t("helpTitle"):"📖 "+t("helpTitle")}</h2><button class="dashboard-close" aria-label="${t("helpClose")}">✕</button></div><div class="dashboard-body">${_renderHelpGuideContent()}</div></div>`;
+    document.body.appendChild(modal);
+    modal.querySelector(".dashboard-close").addEventListener("click",closeHelpGuide);
+    modal.querySelector(".dashboard-backdrop").addEventListener("click",closeHelpGuide);
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("open"))closeHelpGuide();});
+  } else {
+    /* Refresh content for language change */
+    const body=modal.querySelector(".dashboard-body");
+    if(body)body.innerHTML=_renderHelpGuideContent();
+  }
+  modal.classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeHelpGuide(){
+  const modal=document.getElementById("helpGuideModal");
+  if(modal)modal.classList.remove("open");
+  document.body.style.overflow="";
+}
+
+function _renderHelpGuideContent(){
+  const isJa=currentLang==="ja";
+  const sections=isJa?[
+    {
+      title:"🩺 1. 鑑別診断（症状チェッカー）",
+      steps:[
+        "対応動物種（21種）から該当する種を選択",
+        "観察された臨床症状をチェックボックスで選択（複数可）",
+        "任意：血液検査値・痛みスコア・年齢・品種を入力",
+        "「鑑別診断を実行」で IDF重み付け＋特異度＋有病率補正のランキング表示",
+        "各候補をクリックで病態生理・治療プロトコル・関連薬品を確認",
+      ],
+      tips:"💡 症状3つ以上で精度が向上。検査値が入力されると lab_factor (最大1.4倍) でスコア調整",
+    },
+    {
+      title:"💬 2. AI 臨床相談チャット",
+      steps:[
+        "自由入力モード：自然言語で症状を記述（「3日前から嘔吐と下痢」等）",
+        "問診モード：カテゴリ→症状→年齢→犬種→診断 のステップバイステップ",
+        "AI が onset/age/breed を自動抽出して鑑別ランキングに反映",
+        "結果はリアルタイムで確信度バーと共に表示",
+      ],
+      tips:"💡 「3週間前」「2ヶ月前」等の時間表現を自動認識し急性/亜急性/慢性を判定",
+    },
+    {
+      title:"💊 3. 薬品辞書（610+薬品）",
+      steps:[
+        "薬品名（日英）・カテゴリ・動物種でフィルタ検索",
+        "種別の安全性 ✓/✗ と用量（mg/kg）を表示",
+        "体重を入力すると計算用量を自動表示",
+        "薬物相互作用は重要度別（⛔ MAJOR / ⚠️ MODERATE / ℹ️ MINOR）で表示",
+        "「この薬品を使う疾患」リンクで逆方向ナビゲーション",
+      ],
+      tips:"💡 治療プロトコル中の薬品名をクリックすると、そのまま薬品詳細にジャンプ",
+    },
+    {
+      title:"💉 4. 鎮静・麻酔プロトコル（188件）",
+      steps:[
+        "動物種・カテゴリ（鎮静/麻酔導入/維持/緊急/CRI）でフィルタ",
+        "ASA分類でリスク別表示",
+        "薬品名クリックで薬品詳細にジャンプ",
+        "禁忌・モニタリングパラメータ・参考文献を確認",
+      ],
+      tips:"💡 体重入力で計算用量を表示。チェックリストは印刷可能",
+    },
+    {
+      title:"🚨 5. 緊急対応プロトコル（25件）",
+      steps:[
+        "CPR・敗血症・GDV・マムシ咬傷など25シナリオ",
+        "各シナリオは time-target 付きステップ（0-5分・15-30分・以降）",
+        "key_drugs と monitoring パラメータを併記",
+        "RECOVER/Surviving Sepsis Campaign/CURATIVE 等のガイドライン準拠",
+      ],
+    },
+    {
+      title:"📊 6. 統計ダッシュボード・症例履歴",
+      steps:[
+        "📊 ボタンで動物種別疾患数・薬品カテゴリ・ECVN カバレッジを可視化",
+        "診断履歴は最大50件 localStorage に保存",
+        "CSV/JSON エクスポートで Excel・他システム連携",
+        "印刷は全疾患詳細を自動展開して PDF 化可能",
+      ],
+      tips:"💡 すべての結果はブラウザ内のみで処理（個人情報外部送信なし）",
+    },
+  ]:[
+    {
+      title:"🩺 1. Differential Diagnosis (Symptom Checker)",
+      steps:[
+        "Select the species from 21 supported animals",
+        "Check observed clinical symptoms (multiple selection)",
+        "Optional: enter lab values, pain score, age, breed",
+        "Click \"Run Differential\" to see IDF-weighted ranking with specificity & prevalence correction",
+        "Click any candidate to expand pathophysiology, treatment, related drugs",
+      ],
+      tips:"💡 3+ symptoms improve accuracy. Entered labs apply lab_factor (up to 1.4×) to relevant diseases",
+    },
+    {
+      title:"💬 2. AI Clinical Consultation Chat",
+      steps:[
+        "Free-input mode: natural language symptom descriptions",
+        "Guided mode: step-by-step category→symptoms→age→breed",
+        "AI auto-extracts onset/age/breed for ranking refinement",
+        "Real-time confidence bars on results",
+      ],
+      tips:"💡 Auto-detects time expressions like \"3 weeks ago\" → acute/subacute/chronic",
+    },
+    {
+      title:"💊 3. Drug Dictionary (610+ drugs)",
+      steps:[
+        "Filter by name (JP/EN), category, or species",
+        "Species-specific safety ✓/✗ and dosing (mg/kg) shown",
+        "Auto-calculate dose by patient weight",
+        "Interactions ranked by severity (⛔ MAJOR / ⚠️ MODERATE / ℹ️ MINOR)",
+        "Reverse-link: see diseases treated with this drug",
+      ],
+      tips:"💡 Click any drug name in a treatment protocol to jump directly to drug detail",
+    },
+    {
+      title:"💉 4. Sedation/Anesthesia Protocols (188 items)",
+      steps:[
+        "Filter by species & category (sedation/induction/maintenance/emergency/CRI)",
+        "ASA classification risk filter",
+        "Click drug names to jump to drug detail",
+        "View contraindications, monitoring params, references",
+      ],
+      tips:"💡 Weight input auto-calculates doses. Checklist is printable",
+    },
+    {
+      title:"🚨 5. Emergency Protocols (25 scenarios)",
+      steps:[
+        "CPR, sepsis, GDV, mamushi snakebite, etc. — 25 scenarios",
+        "Each has time-targeted steps (0-5 min, 15-30 min, etc.)",
+        "Key drugs and monitoring parameters listed",
+        "Following RECOVER, Surviving Sepsis Campaign, CURATIVE guidelines",
+      ],
+    },
+    {
+      title:"📊 6. Statistics Dashboard & Case History",
+      steps:[
+        "📊 button visualizes species-disease counts, drug categories, ECVN coverage",
+        "Up to 50 diagnosis cases saved in localStorage",
+        "CSV/JSON export for Excel & other system integration",
+        "Print auto-expands all disease details for PDF generation",
+      ],
+      tips:"💡 All processing happens in your browser (no personal data sent externally)",
+    },
+  ];
+  const intro=`<div style="padding:10px 14px;background:rgba(34,168,79,.06);border-left:3px solid var(--green);border-radius:6px;margin-bottom:14px;font-size:.82rem;color:var(--gray-700)">${isJa?"VetDict の主要機能と使い方を6セクションで解説します。各機能は独立して動作するため、必要な部分だけ参照できます。":"6 sections covering all VetDict features. Each feature works independently — reference only what you need."}</div>`;
+  const sectionsHtml=sections.map(s=>{
+    const stepsHtml=s.steps.map((step,i)=>`<li style="margin-bottom:4px">${escapeHtml(step)}</li>`).join("");
+    const tipsHtml=s.tips?`<div style="margin-top:8px;padding:6px 10px;background:rgba(26,48,104,.05);border-radius:5px;font-size:.74rem;color:var(--gray-600)">${escapeHtml(s.tips)}</div>`:"";
+    return `<details class="help-section" style="margin-bottom:10px;border:1px solid var(--gray-200);border-radius:6px;padding:0" open><summary style="cursor:pointer;padding:10px 14px;font-weight:700;color:var(--navy);background:var(--gray-50);border-radius:6px;font-size:.86rem;user-select:none">${escapeHtml(s.title)}</summary><div style="padding:10px 14px"><ol style="margin:0;padding-left:20px;font-size:.78rem;color:var(--gray-700);line-height:1.6">${stepsHtml}</ol>${tipsHtml}</div></details>`;
+  }).join("");
+  const disclaimer=`<div style="margin-top:14px;padding:10px;background:#fef3c7;border-left:3px solid #f59e0b;border-radius:5px;font-size:.74rem;color:#78350f">${isJa?"⚠ VetDict は臨床意思決定支援ツールであり、確定診断は獣医師の判断と検査結果との総合判断が必要です。獣医師法・FDA・農水省未認証のオフラベル投与量を含む場合があります。":"⚠ VetDict is a clinical decision-support tool. Definitive diagnosis requires veterinary judgment with diagnostic results. May contain off-label dosages not approved by veterinary boards/FDA/MAFF."}</div>`;
+  return intro+sectionsHtml+disclaimer;
 }
 
 function _renderDashboardContent(data){
