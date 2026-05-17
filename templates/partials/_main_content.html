@@ -22,7 +22,7 @@
             <div class="selected-symptoms" id="selectedSymptoms"></div>
             <div class="symptom-search">
               <input type="search" id="symptomSearch" placeholder="症状を検索... (例: 咳, vomiting, 下痢)" data-i18n-ph="symptomSearchPh" aria-label="症状を検索" autocomplete="off" inputmode="search"/>
-              <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
+              <button class="search-clear" type="button" data-i18n-aria="ariaClearSearch" aria-label="検索をクリア" data-action="clear-search">&times;</button>
             </div>
             <div class="symptom-list" id="symptomList" role="group" aria-label="症状一覧"></div>
             <details class="lab-values-section" id="labDetails" style="margin-top:12px;border:2px solid var(--gray-200);border-radius:var(--radius);padding:0">
@@ -82,7 +82,7 @@
                 </div>
               </div>
             </details>
-            <button class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px" data-i18n="analyzeBtn">鑑別疾患を検索</button>
+            <button type="button" class="analyze-btn" id="analyzeBtn" disabled style="margin-top:12px" data-i18n="analyzeBtn">鑑別疾患を検索</button>
             <div class="analyze-progress" id="analyzeProgress"><div class="analyze-progress-bar"></div></div>
             <div id="checkerGuide" style="margin-top:8px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius);font-size:.76rem;color:var(--gray-500);line-height:1.5">
               <span data-i18n-html="checkerGuide">💡 <strong>使い方:</strong> 上の症状リストからチェックを入れ、「鑑別疾患を検索」を押してください。<br/>症状が多いほど精度が向上します（3つ以上推奨）。</span>
@@ -112,7 +112,7 @@
       <div class="card-body">
         <div class="symptom-search" style="margin-bottom:12px">
           <input type="search" id="diseaseSearch" placeholder="疾患名で検索... (例: 腎臓, colic, 感染)" data-i18n-ph="diseaseSearchPh" aria-label="疾患名で検索" autocomplete="off" inputmode="search"/>
-          <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
+          <button class="search-clear" type="button" data-i18n-aria="ariaClearSearch" aria-label="検索をクリア" data-action="clear-search">&times;</button>
         </div>
         <div id="diseaseCategoryGrid" class="disease-cat-grid"></div>
         <div class="az-nav" id="azNav"></div>
@@ -130,8 +130,8 @@
     <div class="card" style="margin-top:20px">
       <div class="card-header" data-i18n-html="cardChat">&#128172; 臨床相談</div>
       <div class="chat-mode-toggle" role="tablist" aria-label="チャットモード">
-        <button id="chatModeFree" class="chat-mode-btn active" role="tab" aria-selected="true" aria-controls="chatFreeContainer" data-i18n="chatModeFree">自由入力</button>
-        <button id="chatModeGuided" class="chat-mode-btn" role="tab" aria-selected="false" aria-controls="chatGuidedContainer" data-i18n="chatModeGuided">問診モード</button>
+        <button type="button" id="chatModeFree" class="chat-mode-btn active" role="tab" aria-selected="true" aria-controls="chatFreeContainer" data-i18n="chatModeFree">自由入力</button>
+        <button type="button" id="chatModeGuided" class="chat-mode-btn" role="tab" aria-selected="false" aria-controls="chatGuidedContainer" data-i18n="chatModeGuided">問診モード</button>
       </div>
       <div class="chat-container" id="chatFreeContainer">
         <div class="chat-messages" id="chatMessages" aria-live="polite" aria-relevant="additions">
@@ -257,7 +257,7 @@
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
             <input type="search" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)" data-i18n-ph="drugSearchPh" aria-label="薬品名で検索" autocomplete="off" inputmode="search"/>
-            <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
+            <button class="search-clear" type="button" data-i18n-aria="ariaClearSearch" aria-label="検索をクリア" data-action="clear-search">&times;</button>
           </div>
           <select id="drugCategoryFilter" aria-label="薬品カテゴリで絞り込み" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:150px;background:var(--white)">
             <option value="" data-i18n="allCategories">全カテゴリ</option>
@@ -284,7 +284,7 @@
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
             <input type="search" id="anesthesiaSearch" placeholder="薬品名・プロトコルを検索... (例: propofol, ketamine)" data-i18n-ph="anesthesiaSearchPh" aria-label="麻酔プロトコルを検索" autocomplete="off" inputmode="search"/>
-            <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
+            <button class="search-clear" type="button" data-i18n-aria="ariaClearSearch" aria-label="検索をクリア" data-action="clear-search">&times;</button>
           </div>
           <select id="anesthesiaCategoryFilter" aria-label="Anesthesia category filter" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:150px;background:var(--white)">
             <option value="" data-i18n="allCategories">全カテゴリ</option>
@@ -327,7 +327,7 @@
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
             <input type="search" id="emergencySearch" placeholder="プロトコル名・症状で検索 (例: CPR, ショック, 痙攣)" aria-label="緊急プロトコル検索" autocomplete="off" inputmode="search"/>
-            <button class="search-clear" type="button" aria-label="Clear" data-action="clear-search">&times;</button>
+            <button class="search-clear" type="button" data-i18n-aria="ariaClearSearch" aria-label="検索をクリア" data-action="clear-search">&times;</button>
           </div>
           <select id="emergencyCategoryFilter" aria-label="緊急プロトコルカテゴリ" style="padding:8px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.86rem;min-width:160px;background:var(--white)">
             <option value="" data-i18n="allCategories">全カテゴリ</option>

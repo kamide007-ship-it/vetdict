@@ -269,6 +269,7 @@ const I18N={
     ariaCloseFilter:"閉じる",
     ariaMainNav:"メインナビゲーション",
     ariaLangToggle:"表示言語",
+    ariaClearSearch:"検索をクリア",
     ariaSpeciesFilterDialog:"動物種フィルター",
     ariaCategoryFilterDialog:"症状カテゴリーフィルター",
     speciesFilterTitle:"動物種で絞り込み",
@@ -520,6 +521,7 @@ const I18N={
     ariaCloseFilter:"Close",
     ariaMainNav:"Main navigation",
     ariaLangToggle:"Display language",
+    ariaClearSearch:"Clear search",
     ariaSpeciesFilterDialog:"Species filter",
     ariaCategoryFilterDialog:"Symptom category filter",
     speciesFilterTitle:"Filter by species",
@@ -787,6 +789,21 @@ document.addEventListener("DOMContentLoaded",async()=>{
         if(e.key==="Escape"&&inp.value){e.preventDefault();inp.value="";inp.dispatchEvent(new Event("input"));}
       });
     });
+    // Symptom search Enter: add first visible match (productivity shortcut for clinicians)
+    if(symptomSearch){
+      symptomSearch.addEventListener("keydown",e=>{
+        if(e.key!=="Enter"||e.isComposing)return;
+        e.preventDefault();
+        const list=document.getElementById("symptomList");
+        const first=list&&list.querySelector('.symptom-item[aria-checked="false"]');
+        if(first){
+          toggleSymptom(first.dataset.id);
+          symptomSearch.value="";
+          symptomSearch.dispatchEvent(new Event("input"));
+          symptomSearch.focus();
+        }
+      });
+    }
     // Clear lab values button
     const clearLabBtn=document.getElementById("clearLabBtn");
     if(clearLabBtn)clearLabBtn.addEventListener("click",clearLabValues);
@@ -842,7 +859,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
       if(e.target.matches("input,textarea,select,[contenteditable]"))return;
       if(e.key==="Escape"){
         const kb=document.getElementById("kbShortcutsPanel");
-        if(kb&&kb.classList.contains("visible")){kb.classList.remove("visible");return;}
+        if(kb&&kb.classList.contains("visible")){_kbPanelClose();return;}
         const spPanel=document.getElementById("speciesFilterPanel");
         if(spPanel&&spPanel.style.display!=="none"){
           spPanel.style.display="none";
@@ -1556,6 +1573,7 @@ function setupMobileBottomNav(){
   nav.setAttribute("aria-label",currentLang==="ja"?"メインナビゲーション":"Main navigation");
   views.forEach(v=>{
     const btn=document.createElement("button");
+    btn.type="button";
     btn.dataset.view=v;
     btn.className=v===currentView?"active":"";
     btn.innerHTML=icons[v]+'<span>'+t("mobileNav"+v.charAt(0).toUpperCase()+v.slice(1))+'</span>';
@@ -1610,17 +1628,39 @@ function setupSwipeGesture(){
   },{passive:true});
 }
 
+let _kbPanelOpener=null;
 function toggleKbShortcuts(){
   let panel=document.getElementById("kbShortcutsPanel");
   if(!panel){
     panel=document.createElement("div");panel.id="kbShortcutsPanel";panel.className="kb-shortcuts-panel";
+    panel.setAttribute("role","dialog");
+    panel.setAttribute("aria-modal","true");
+    panel.setAttribute("aria-labelledby","kbShortcutsTitle");
     const isJa=currentLang==="ja";
-    panel.innerHTML=`<div class="kb-shortcuts-inner"><div class="kb-shortcuts-header"><h3>${isJa?"キーボードショートカット":"Keyboard Shortcuts"}</h3><button class="kb-close" aria-label="Close">✕</button></div><div class="kb-shortcuts-body"><div class="kb-group"><div class="kb-title">${isJa?"ナビゲーション":"Navigation"}</div><div class="kb-row"><kbd>1</kbd><span>${isJa?"症状チェッカー":"Symptom Checker"}</span></div><div class="kb-row"><kbd>2</kbd><span>${isJa?"疾患データベース":"Disease Database"}</span></div><div class="kb-row"><kbd>3</kbd><span>${isJa?"AIチャット":"AI Chat"}</span></div><div class="kb-row"><kbd>4</kbd><span>${isJa?"薬品辞書":"Drug Dictionary"}</span></div><div class="kb-row"><kbd>5</kbd><span>${isJa?"鎮静・麻酔":"Anesthesia"}</span></div><div class="kb-row"><kbd>6</kbd><span>${isJa?"緊急対応":"Emergency"}</span></div></div><div class="kb-group"><div class="kb-title">${isJa?"操作":"Actions"}</div><div class="kb-row"><kbd>/</kbd><span>${isJa?"検索にフォーカス":"Focus search"}</span></div><div class="kb-row"><kbd>Esc</kbd><span>${isJa?"パネルを閉じる":"Close panel"}</span></div><div class="kb-row"><kbd>?</kbd><span>${isJa?"このヘルプ":"This help"}</span></div><div class="kb-row"><kbd>←→↑↓</kbd><span>${isJa?"動物種グリッドを移動":"Navigate species grid"}</span></div></div></div></div>`;
+    const closeLabel=isJa?"閉じる":"Close";
+    panel.innerHTML=`<div class="kb-shortcuts-inner"><div class="kb-shortcuts-header"><h3 id="kbShortcutsTitle">${isJa?"キーボードショートカット":"Keyboard Shortcuts"}</h3><button type="button" class="kb-close" aria-label="${closeLabel}">✕</button></div><div class="kb-shortcuts-body"><div class="kb-group"><div class="kb-title">${isJa?"ナビゲーション":"Navigation"}</div><div class="kb-row"><kbd>1</kbd><span>${isJa?"症状チェッカー":"Symptom Checker"}</span></div><div class="kb-row"><kbd>2</kbd><span>${isJa?"疾患データベース":"Disease Database"}</span></div><div class="kb-row"><kbd>3</kbd><span>${isJa?"AIチャット":"AI Chat"}</span></div><div class="kb-row"><kbd>4</kbd><span>${isJa?"薬品辞書":"Drug Dictionary"}</span></div><div class="kb-row"><kbd>5</kbd><span>${isJa?"鎮静・麻酔":"Anesthesia"}</span></div><div class="kb-row"><kbd>6</kbd><span>${isJa?"緊急対応":"Emergency"}</span></div></div><div class="kb-group"><div class="kb-title">${isJa?"操作":"Actions"}</div><div class="kb-row"><kbd>/</kbd><span>${isJa?"検索にフォーカス":"Focus search"}</span></div><div class="kb-row"><kbd>Esc</kbd><span>${isJa?"パネルを閉じる":"Close panel"}</span></div><div class="kb-row"><kbd>?</kbd><span>${isJa?"このヘルプ":"This help"}</span></div><div class="kb-row"><kbd>←→↑↓</kbd><span>${isJa?"動物種グリッドを移動":"Navigate species grid"}</span></div></div></div></div>`;
     document.body.appendChild(panel);
-    panel.querySelector(".kb-close").addEventListener("click",()=>panel.classList.remove("visible"));
-    panel.addEventListener("click",e=>{if(e.target===panel)panel.classList.remove("visible");});
+    panel.querySelector(".kb-close").addEventListener("click",()=>_kbPanelClose());
+    panel.addEventListener("click",e=>{if(e.target===panel)_kbPanelClose();});
   }
-  panel.classList.toggle("visible");
+  const willOpen=!panel.classList.contains("visible");
+  panel.classList.toggle("visible",willOpen);
+  if(willOpen){
+    _kbPanelOpener=document.activeElement;
+    const closeBtn=panel.querySelector(".kb-close");
+    if(closeBtn)setTimeout(()=>closeBtn.focus(),20);
+  }else{
+    _kbPanelClose();
+  }
+}
+function _kbPanelClose(){
+  const panel=document.getElementById("kbShortcutsPanel");
+  if(!panel)return;
+  panel.classList.remove("visible");
+  if(_kbPanelOpener&&typeof _kbPanelOpener.focus==="function"){
+    try{_kbPanelOpener.focus();}catch(_){}
+    _kbPanelOpener=null;
+  }
 }
 
 function setupOfflineIndicator(){
@@ -2036,6 +2076,7 @@ function showRelatedSuggestions(){
     btns.className="related-btns";
     data.related.forEach(s=>{
       const btn=document.createElement("button");
+      btn.type="button";
       btn.className="related-sym-btn";
       btn.textContent=`+ ${currentLang==="ja"?s.name_ja:s.name_en}`;
       btn.onclick=()=>{
@@ -2086,7 +2127,7 @@ function createResultsDisclaimer(){
 function createFeedbackWidget(){
   const w=document.createElement("div");
   w.className="feedback-widget";
-  w.innerHTML='<span data-i18n="feedbackQuestion">'+t("feedbackQuestion")+'</span><div class="feedback-btns"><button class="feedback-btn helpful">&#128077; '+t("feedbackYes")+'</button><button class="feedback-btn not-helpful">&#128078; '+t("feedbackNo")+'</button></div>';
+  w.innerHTML='<span data-i18n="feedbackQuestion">'+t("feedbackQuestion")+'</span><div class="feedback-btns"><button type="button" class="feedback-btn helpful">&#128077; '+t("feedbackYes")+'</button><button type="button" class="feedback-btn not-helpful">&#128078; '+t("feedbackNo")+'</button></div>';
   w.querySelector(".feedback-btn.helpful").addEventListener("click",function(){sendFeedback(true);});
   w.querySelector(".feedback-btn.not-helpful").addEventListener("click",function(){sendFeedback(false);});
   return w;
@@ -2124,7 +2165,7 @@ function createShareWidget(diseases){
   const fullText=currentLang==="ja"
     ?`【VetDict 鑑別診断結果】\n動物種: ${spLabel}\n症状: ${sympList}\n\n${diseaseLines}\n\n※ 参考情報です。獣医師の診察を受けてください。\n${shareUrl}`
     :`[VetDict Differential Diagnosis]\nSpecies: ${spLabel}\nSymptoms: ${sympList}\n\n${diseaseLines}\n\nNote: For reference only. Consult a veterinarian.\n${shareUrl}`;
-  w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener noreferrer" class="share-btn twitter">X</a><a href="${lineUrl}" target="_blank" rel="noopener noreferrer" class="share-btn line">LINE</a><button class="share-btn copy">${t("shareCopy")}</button><button class="share-btn copy-full" style="background:var(--navy)">${currentLang==="ja"?"詳細コピー":"Copy Full"}</button></div>`;
+  w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener noreferrer" class="share-btn twitter">X</a><a href="${lineUrl}" target="_blank" rel="noopener noreferrer" class="share-btn line">LINE</a><button type="button" class="share-btn copy">${t("shareCopy")}</button><button type="button" class="share-btn copy-full" style="background:var(--navy)">${currentLang==="ja"?"詳細コピー":"Copy Full"}</button></div>`;
   w.querySelector(".share-btn.twitter").addEventListener("click",function(){trackEvent("share_results",{method:"twitter",species:currentSpecies});});
   w.querySelector(".share-btn.line").addEventListener("click",function(){trackEvent("share_results",{method:"line",species:currentSpecies});});
   function _bindCopy(btn,text,trackMethod){
@@ -2329,6 +2370,7 @@ function renderResults(data){
 /* ===== Print / Export ===== */
 function createPrintButton(){
   const btn=document.createElement("button");
+  btn.type="button";
   btn.className="print-results-btn";
   btn.style.cssText="display:block;margin:12px auto;padding:10px 24px;background:var(--white);border:2px solid var(--navy);color:var(--navy);border-radius:8px;font-size:.84rem;font-weight:600;cursor:pointer";
   btn.textContent=currentLang==="ja"?"🖨 診断結果を印刷":"🖨 Print Results";
@@ -2939,6 +2981,7 @@ function renderDiseaseDb(){
   if(totalCount>shownCount){
     const remaining=totalCount-shownCount;
     const showMoreBtn=document.createElement("button");
+    showMoreBtn.type="button";
     showMoreBtn.className="show-more-btn";
     showMoreBtn.style.cssText="display:block;margin:16px auto;padding:8px 24px;border:1px solid var(--gray-300);border-radius:6px;background:var(--white);cursor:pointer";
     showMoreBtn.textContent=t("showMoreItems").replace("%n%",remaining);
@@ -3370,6 +3413,7 @@ function renderChatResult(container,data){
         btnGroup.className="chat-q-btns";
         fq.options.forEach(opt=>{
           const btn=document.createElement("button");
+          btn.type="button";
           const isYes=opt.value.startsWith("+");
           btn.className="chat-q-btn "+(isYes?"chat-q-yes":"chat-q-no");
           btn.textContent=currentLang==="ja"?(opt.label_ja||""):(opt.label_en||"");
@@ -3403,6 +3447,7 @@ function renderChatResult(container,data){
           btnGroup.className="chat-q-btns";
           fq.options.forEach(opt=>{
             const btn=document.createElement("button");
+            btn.type="button";
             btn.className="chat-followup-btn";
             btn.textContent=currentLang==="ja"?(opt.label_ja||""):(opt.label_en||"");
             btn.addEventListener("click",()=>{
@@ -3417,6 +3462,7 @@ function renderChatResult(container,data){
           fqDiv.appendChild(qRow);
         }else{
           const btn=document.createElement("button");
+          btn.type="button";
           btn.className="chat-followup-btn";
           btn.textContent=currentLang==="ja"?(fq.question_ja||""):(fq.question_en||"");
           btn.addEventListener("click",()=>{
@@ -4938,6 +4984,7 @@ function toggleDbItem(el){
       trackEvent("view_disease_detail",{species:currentSpecies,disease:diseaseName});
       if(!detail.querySelector(".detail-close-btn")){
         const closeBtn=document.createElement("button");
+        closeBtn.type="button";
         closeBtn.className="detail-close-btn";
         closeBtn.setAttribute("aria-label",currentLang==="ja"?"閉じる":"Close");
         closeBtn.textContent="\u2715";
@@ -5032,8 +5079,9 @@ function highlightMatch(text,query){
 /* --- Scroll-to-top button with progress ring --- */
 (function(){
   const btn=document.createElement("button");
+  btn.type="button";
   btn.className="scroll-top";
-  btn.setAttribute("aria-label","Scroll to top");
+  btn.setAttribute("aria-label",currentLang==="ja"?"ページの先頭へ":"Scroll to top");
   btn.innerHTML='<svg class="scroll-progress-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2"/><circle class="scroll-progress-arc" cx="18" cy="18" r="16" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-dasharray="100.53" stroke-dashoffset="100.53" transform="rotate(-90 18 18)"/></svg><span class="scroll-arrow">\u2191</span>';
   document.body.appendChild(btn);
   const arc=btn.querySelector(".scroll-progress-arc");
@@ -5387,6 +5435,7 @@ function renderClarifyingQuestions(questions) {
 
   questions.forEach((q) => {
     const item = document.createElement('button');
+    item.type = 'button';
     item.className = 'question-item';
     item.setAttribute('data-question-id', q.question.question_id);
     item.setAttribute('data-ranking-score', q.ranking_score);
