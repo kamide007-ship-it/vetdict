@@ -269,6 +269,7 @@ const I18N={
     ariaCloseFilter:"閉じる",
     ariaMainNav:"メインナビゲーション",
     ariaLangToggle:"表示言語",
+    ariaClearSearch:"検索をクリア",
     ariaSpeciesFilterDialog:"動物種フィルター",
     ariaCategoryFilterDialog:"症状カテゴリーフィルター",
     speciesFilterTitle:"動物種で絞り込み",
@@ -520,6 +521,7 @@ const I18N={
     ariaCloseFilter:"Close",
     ariaMainNav:"Main navigation",
     ariaLangToggle:"Display language",
+    ariaClearSearch:"Clear search",
     ariaSpeciesFilterDialog:"Species filter",
     ariaCategoryFilterDialog:"Symptom category filter",
     speciesFilterTitle:"Filter by species",
@@ -787,6 +789,21 @@ document.addEventListener("DOMContentLoaded",async()=>{
         if(e.key==="Escape"&&inp.value){e.preventDefault();inp.value="";inp.dispatchEvent(new Event("input"));}
       });
     });
+    // Symptom search Enter: add first visible match (productivity shortcut for clinicians)
+    if(symptomSearch){
+      symptomSearch.addEventListener("keydown",e=>{
+        if(e.key!=="Enter"||e.isComposing)return;
+        e.preventDefault();
+        const list=document.getElementById("symptomList");
+        const first=list&&list.querySelector('.symptom-item[aria-checked="false"]');
+        if(first){
+          toggleSymptom(first.dataset.id);
+          symptomSearch.value="";
+          symptomSearch.dispatchEvent(new Event("input"));
+          symptomSearch.focus();
+        }
+      });
+    }
     // Clear lab values button
     const clearLabBtn=document.getElementById("clearLabBtn");
     if(clearLabBtn)clearLabBtn.addEventListener("click",clearLabValues);
@@ -842,7 +859,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
       if(e.target.matches("input,textarea,select,[contenteditable]"))return;
       if(e.key==="Escape"){
         const kb=document.getElementById("kbShortcutsPanel");
-        if(kb&&kb.classList.contains("visible")){kb.classList.remove("visible");return;}
+        if(kb&&kb.classList.contains("visible")){_kbPanelClose();return;}
         const spPanel=document.getElementById("speciesFilterPanel");
         if(spPanel&&spPanel.style.display!=="none"){
           spPanel.style.display="none";
@@ -1610,17 +1627,39 @@ function setupSwipeGesture(){
   },{passive:true});
 }
 
+let _kbPanelOpener=null;
 function toggleKbShortcuts(){
   let panel=document.getElementById("kbShortcutsPanel");
   if(!panel){
     panel=document.createElement("div");panel.id="kbShortcutsPanel";panel.className="kb-shortcuts-panel";
+    panel.setAttribute("role","dialog");
+    panel.setAttribute("aria-modal","true");
+    panel.setAttribute("aria-labelledby","kbShortcutsTitle");
     const isJa=currentLang==="ja";
-    panel.innerHTML=`<div class="kb-shortcuts-inner"><div class="kb-shortcuts-header"><h3>${isJa?"キーボードショートカット":"Keyboard Shortcuts"}</h3><button class="kb-close" aria-label="Close">✕</button></div><div class="kb-shortcuts-body"><div class="kb-group"><div class="kb-title">${isJa?"ナビゲーション":"Navigation"}</div><div class="kb-row"><kbd>1</kbd><span>${isJa?"症状チェッカー":"Symptom Checker"}</span></div><div class="kb-row"><kbd>2</kbd><span>${isJa?"疾患データベース":"Disease Database"}</span></div><div class="kb-row"><kbd>3</kbd><span>${isJa?"AIチャット":"AI Chat"}</span></div><div class="kb-row"><kbd>4</kbd><span>${isJa?"薬品辞書":"Drug Dictionary"}</span></div><div class="kb-row"><kbd>5</kbd><span>${isJa?"鎮静・麻酔":"Anesthesia"}</span></div><div class="kb-row"><kbd>6</kbd><span>${isJa?"緊急対応":"Emergency"}</span></div></div><div class="kb-group"><div class="kb-title">${isJa?"操作":"Actions"}</div><div class="kb-row"><kbd>/</kbd><span>${isJa?"検索にフォーカス":"Focus search"}</span></div><div class="kb-row"><kbd>Esc</kbd><span>${isJa?"パネルを閉じる":"Close panel"}</span></div><div class="kb-row"><kbd>?</kbd><span>${isJa?"このヘルプ":"This help"}</span></div><div class="kb-row"><kbd>←→↑↓</kbd><span>${isJa?"動物種グリッドを移動":"Navigate species grid"}</span></div></div></div></div>`;
+    const closeLabel=isJa?"閉じる":"Close";
+    panel.innerHTML=`<div class="kb-shortcuts-inner"><div class="kb-shortcuts-header"><h3 id="kbShortcutsTitle">${isJa?"キーボードショートカット":"Keyboard Shortcuts"}</h3><button type="button" class="kb-close" aria-label="${closeLabel}">✕</button></div><div class="kb-shortcuts-body"><div class="kb-group"><div class="kb-title">${isJa?"ナビゲーション":"Navigation"}</div><div class="kb-row"><kbd>1</kbd><span>${isJa?"症状チェッカー":"Symptom Checker"}</span></div><div class="kb-row"><kbd>2</kbd><span>${isJa?"疾患データベース":"Disease Database"}</span></div><div class="kb-row"><kbd>3</kbd><span>${isJa?"AIチャット":"AI Chat"}</span></div><div class="kb-row"><kbd>4</kbd><span>${isJa?"薬品辞書":"Drug Dictionary"}</span></div><div class="kb-row"><kbd>5</kbd><span>${isJa?"鎮静・麻酔":"Anesthesia"}</span></div><div class="kb-row"><kbd>6</kbd><span>${isJa?"緊急対応":"Emergency"}</span></div></div><div class="kb-group"><div class="kb-title">${isJa?"操作":"Actions"}</div><div class="kb-row"><kbd>/</kbd><span>${isJa?"検索にフォーカス":"Focus search"}</span></div><div class="kb-row"><kbd>Esc</kbd><span>${isJa?"パネルを閉じる":"Close panel"}</span></div><div class="kb-row"><kbd>?</kbd><span>${isJa?"このヘルプ":"This help"}</span></div><div class="kb-row"><kbd>←→↑↓</kbd><span>${isJa?"動物種グリッドを移動":"Navigate species grid"}</span></div></div></div></div>`;
     document.body.appendChild(panel);
-    panel.querySelector(".kb-close").addEventListener("click",()=>panel.classList.remove("visible"));
-    panel.addEventListener("click",e=>{if(e.target===panel)panel.classList.remove("visible");});
+    panel.querySelector(".kb-close").addEventListener("click",()=>_kbPanelClose());
+    panel.addEventListener("click",e=>{if(e.target===panel)_kbPanelClose();});
   }
-  panel.classList.toggle("visible");
+  const willOpen=!panel.classList.contains("visible");
+  panel.classList.toggle("visible",willOpen);
+  if(willOpen){
+    _kbPanelOpener=document.activeElement;
+    const closeBtn=panel.querySelector(".kb-close");
+    if(closeBtn)setTimeout(()=>closeBtn.focus(),20);
+  }else{
+    _kbPanelClose();
+  }
+}
+function _kbPanelClose(){
+  const panel=document.getElementById("kbShortcutsPanel");
+  if(!panel)return;
+  panel.classList.remove("visible");
+  if(_kbPanelOpener&&typeof _kbPanelOpener.focus==="function"){
+    try{_kbPanelOpener.focus();}catch(_){}
+    _kbPanelOpener=null;
+  }
 }
 
 function setupOfflineIndicator(){
@@ -2086,7 +2125,7 @@ function createResultsDisclaimer(){
 function createFeedbackWidget(){
   const w=document.createElement("div");
   w.className="feedback-widget";
-  w.innerHTML='<span data-i18n="feedbackQuestion">'+t("feedbackQuestion")+'</span><div class="feedback-btns"><button class="feedback-btn helpful">&#128077; '+t("feedbackYes")+'</button><button class="feedback-btn not-helpful">&#128078; '+t("feedbackNo")+'</button></div>';
+  w.innerHTML='<span data-i18n="feedbackQuestion">'+t("feedbackQuestion")+'</span><div class="feedback-btns"><button type="button" class="feedback-btn helpful">&#128077; '+t("feedbackYes")+'</button><button type="button" class="feedback-btn not-helpful">&#128078; '+t("feedbackNo")+'</button></div>';
   w.querySelector(".feedback-btn.helpful").addEventListener("click",function(){sendFeedback(true);});
   w.querySelector(".feedback-btn.not-helpful").addEventListener("click",function(){sendFeedback(false);});
   return w;

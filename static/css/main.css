@@ -198,7 +198,8 @@ a:hover{text-decoration:underline}
 .search-clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--gray-200);border:none;border-radius:50%;width:32px;height:32px;font-size:.9rem;cursor:pointer;display:none;align-items:center;justify-content:center;color:var(--gray-600);transition:all var(--transition-fast);line-height:1;padding:0}
 .search-clear:hover{background:var(--gray-300);color:var(--gray-900)}
 .search-clear:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
-@media(max-width:600px){.search-clear{width:36px;height:36px;right:4px}}
+/* WCAG 2.5.5 minimum 44x44 target on touch viewports */
+@media(max-width:600px){.search-clear{width:44px;height:44px;right:4px;font-size:1rem}}
 .symptom-search input:not(:placeholder-shown)~.search-clear{display:flex}
 .symptom-sort-toggle{display:block;margin:0 auto 8px;padding:4px 14px;font-size:.75rem;border:1px solid var(--gray-300);border-radius:var(--radius);background:var(--white);color:var(--gray-700);cursor:pointer;transition:all var(--transition-fast)}
 .symptom-sort-toggle:hover{background:var(--gray-100);border-color:var(--navy-light);color:var(--navy)}
@@ -603,10 +604,11 @@ a:hover{text-decoration:underline}
 .sponsor-btn:active{transform:translateY(0)}
 
 /* --- Language toggle --- */
-.lang-toggle{display:flex;align-items:center;gap:0;border:2px solid rgba(255,255,255,.3);border-radius:20px;overflow:hidden;flex-shrink:0;margin-left:8px}
-.lang-toggle button{border:none;background:transparent;padding:5px 12px;font-size:.76rem;font-weight:700;cursor:pointer;transition:background .2s,color .2s;font-family:var(--font);color:rgba(255,255,255,.7)}
+.lang-toggle{display:flex;align-items:center;gap:0;border:2px solid rgba(255,255,255,.3);border-radius:20px;flex-shrink:0;margin-left:8px}
+.lang-toggle button{border:none;background:transparent;padding:5px 12px;font-size:.76rem;font-weight:700;cursor:pointer;transition:background .2s,color .2s;font-family:var(--font);color:rgba(255,255,255,.7);border-radius:20px;min-height:32px}
 .lang-toggle button.active{background:var(--navy);color:var(--white)}
-.lang-toggle button:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px}
+.lang-toggle button:focus-visible{outline:2px solid var(--navy-light);outline-offset:2px;z-index:1;position:relative}
+@media(max-width:600px){.lang-toggle button{min-height:44px;padding:8px 14px;font-size:.82rem}}
 
 /* --- Pricing --- */
 .pricing-section{max-width:800px;margin:0 auto;padding:40px 20px}
