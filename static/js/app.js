@@ -1918,6 +1918,90 @@ function _renderTreatmentDrugsList(drugs,heading){
   return `<div class="treatment-drugs-section" data-rendered="1"><div class="treatment-drugs-heading">${heading}</div><div class="treatment-drugs-list">${items}</div></div>`;
 }
 
+// --- Reverse direction: drug → diseases (rendered in drug detail panel) ---
+const _drugDiseasesCache=new Map();
+function _drugDiseasesCacheKey(drugId,species){return `${drugId}::${species||"all"}::${currentLang||""}`;}
+
+function buildDrugDiseasesPlaceholder(drugId){
+  if(!drugId) return "";
+  const headingJa="この薬品を使う疾患";
+  const headingEn="Diseases Treated";
+  const heading=currentLang==="ja"?headingJa:headingEn;
+  const key=_drugDiseasesCacheKey(drugId,"");
+  const cached=_drugDiseasesCache.get(key);
+  if(cached!==undefined){
+    return _renderDrugDiseasesList(cached,heading,drugId);
+  }
+  return `<div class="drug-diseases-section" data-drug-diseases="1" data-drug-id="${escapeHtml(drugId)}" data-rendered="0"><div class="drug-diseases-heading">${heading}</div><div class="drug-diseases-loading">${currentLang==="ja"?"読み込み中…":"Loading…"}</div></div>`;
+}
+
+function _renderDrugDiseasesList(diseases,heading,drugId){
+  if(!diseases||!diseases.length){
+    return `<div class="drug-diseases-section" data-rendered="1"><div class="drug-diseases-heading">${heading}</div><div class="drug-diseases-empty">${currentLang==="ja"?"該当疾患なし":"No diseases found"}</div></div>`;
+  }
+  // Group by species for readability
+  const bySpecies=new Map();
+  diseases.forEach(d=>{const s=d.species||"";if(!bySpecies.has(s))bySpecies.set(s,[]);bySpecies.get(s).push(d);});
+  const urgencyColor={emergency:"badge-emergency",high:"badge-high",urgent:"badge-high",moderate:"badge-moderate",normal:"badge-normal"};
+  const groups=[...bySpecies.entries()].map(([sp,list])=>{
+    const spObj=SPECIES.find(x=>x.id===sp);
+    const spLabel=spObj?(currentLang==="ja"?spObj.name:spObj.nameEn):sp;
+    const chips=list.slice(0,12).map(d=>{
+      const label=currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
+      const urg=d.urgency||"";
+      const badge=urg?`<span class="drug-disease-urgency ${urgencyColor[urg]||""}">${escapeHtml(urg)}</span>`:"";
+      return `<a class="drug-disease-chip" href="#diseases" data-disease="${escapeHtml(label)}" data-species="${escapeHtml(sp)}">${escapeHtml(label)}${badge}</a>`;
+    }).join("");
+    const more=list.length>12?`<span class="drug-disease-more">+${list.length-12}</span>`:"";
+    return `<div class="drug-disease-group"><div class="drug-disease-species-label">${escapeHtml(spLabel)} <span class="drug-disease-count">(${list.length})</span></div><div class="drug-disease-chips">${chips}${more}</div></div>`;
+  }).join("");
+  return `<div class="drug-diseases-section" data-rendered="1"><div class="drug-diseases-heading">${heading} <span class="drug-disease-total">${diseases.length}</span></div>${groups}</div>`;
+}
+
+function hydrateDrugDiseases(container){
+  const root=container||document;
+  const placeholders=root.querySelectorAll('[data-drug-diseases="1"][data-rendered="0"]');
+  placeholders.forEach(ph=>{
+    const drugId=ph.getAttribute("data-drug-id")||"";
+    if(!drugId)return;
+    ph.setAttribute("data-rendered","loading");
+    const heading=currentLang==="ja"?"この薬品を使う疾患":"Diseases Treated";
+    fetchWithTimeout(`/api/drugs/${encodeURIComponent(drugId)}/diseases?limit=80`)
+      .then(r=>r.ok?r.json():null)
+      .then(data=>{
+        const diseases=(data&&Array.isArray(data.diseases))?data.diseases:[];
+        _drugDiseasesCache.set(_drugDiseasesCacheKey(drugId,""),diseases);
+        const html=_renderDrugDiseasesList(diseases,heading,drugId);
+        const wrap=document.createElement("div");
+        wrap.innerHTML=html;
+        const newNode=wrap.firstElementChild;
+        if(newNode&&ph.parentNode)ph.parentNode.replaceChild(newNode,ph);
+        if(newNode){
+          newNode.querySelectorAll(".drug-disease-chip").forEach(a=>{
+            a.addEventListener("click",e=>{
+              e.preventDefault();
+              const diseaseName=a.getAttribute("data-disease")||"";
+              const species=a.getAttribute("data-species")||"";
+              if(species&&species!==currentSpecies){
+                const speciesObj=SPECIES.find(s=>s.id===species);
+                if(speciesObj&&typeof selectSpecies==="function")selectSpecies(species);
+              }
+              if(typeof switchView==="function")switchView("diseases");
+              setTimeout(()=>{
+                const ds=document.getElementById("diseaseDbSearch");
+                if(ds&&diseaseName){ds.value=diseaseName;ds.dispatchEvent(new Event("input"));}
+              },350);
+            });
+          });
+        }
+      })
+      .catch(()=>{
+        ph.setAttribute("data-rendered","error");
+        ph.innerHTML=`<div class="drug-diseases-heading">${heading}</div><div class="drug-diseases-empty">${currentLang==="ja"?"取得に失敗しました":"Failed to load"}</div>`;
+      });
+  });
+}
+
 function hydrateTreatmentDrugs(container){
   // Find unhydrated placeholders within the container and fetch their drug lists
   const root=container||document;
@@ -4211,6 +4295,7 @@ function renderDrugList(){
             ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");const highlight=currentSpecies===sp?"drug-species-highlight":"";return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"} ${highlight}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
           </div>
         </div>
+        ${buildDrugDiseasesPlaceholder(d.id||"")}
       </div>
     </div>`;
   }).join("");
@@ -4529,7 +4614,10 @@ function renderAnesthesiaList(){
               return`<tr class="anesthesia-contra-row"><td colspan="${cols}"><span class="anesthesia-contra-badge" style="background:${sevColors[sev]||"#ea580c"}">${sevIcons[sev]||"⚠️"} ${escapeHtml(sevLabels[sev]||sev)}</span> ${escapeHtml(msg)}</td></tr>`;
             }).join("");
           }
-          return`<tr><td><strong>${escapeHtml(d.name||"")}</strong><br/><span class="d-name-ja">${escapeHtml(d.name_ja||"")}</span></td><td>${escapeHtml(d.dose||"")}</td>${calcCell}<td>${escapeHtml(d.route||"")}</td><td>${escapeHtml(d.onset||"")}</td><td>${escapeHtml(d.duration||"")}</td></tr>`
+          /* Drug name as anchor → navigates to drug detail (consistent with treatment chips) */
+          const drugSearchTerm=(d.name_ja||d.name||"").trim();
+          const drugAnchorEn=drugSearchTerm?`<a class="anesthesia-drug-link drug-nav-link" href="#drugs" data-drug="${escapeHtml(drugSearchTerm)}" title="${currentLang==="ja"?"薬品詳細を見る":"View drug details"}">${escapeHtml(d.name||"")}</a>`:escapeHtml(d.name||"");
+          return`<tr><td><strong>${drugAnchorEn}</strong><br/><span class="d-name-ja">${escapeHtml(d.name_ja||"")}</span></td><td>${escapeHtml(d.dose||"")}</td>${calcCell}<td>${escapeHtml(d.route||"")}</td><td>${escapeHtml(d.onset||"")}</td><td>${escapeHtml(d.duration||"")}</td></tr>`
           +contraHtml
           +(dNotes?`<tr class="anesthesia-drug-note"><td colspan="${cols}">${escapeHtml(dNotes)}</td></tr>`:"");
         }).join("")
@@ -4840,6 +4928,8 @@ function toggleDbItem(el){
       }
       /* Hydrate any server-API treatment-drug placeholders inside this panel */
       if(typeof hydrateTreatmentDrugs==="function")hydrateTreatmentDrugs(detail);
+      /* Hydrate drug→diseases placeholders (drug detail panels) */
+      if(typeof hydrateDrugDiseases==="function")hydrateDrugDiseases(detail);
     }
   }
 }
