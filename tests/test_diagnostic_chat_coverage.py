@@ -175,6 +175,59 @@ class TestExtractOnsetFromText:
         assert result is None or isinstance(result, str)
 
 
+class TestMetadataEnricher:
+    """metadata_enricher infers age_predisposition / onset_pattern conservatively."""
+
+    def test_young_inferred_from_juvenile_name(self):
+        from api.chat.metadata_enricher import _infer_age_predisposition
+
+        assert _infer_age_predisposition("Juvenile Cellulitis", "") == {"young"}
+        assert _infer_age_predisposition("Congenital Hypothyroidism", "") == {"young"}
+        assert _infer_age_predisposition("Patent Ductus Arteriosus", "") == {"young"}
+
+    def test_senior_inferred_from_geriatric_name(self):
+        from api.chat.metadata_enricher import _infer_age_predisposition
+
+        assert _infer_age_predisposition("Cognitive Dysfunction Syndrome", "") == {"senior"}
+        assert _infer_age_predisposition("Degenerative Myelopathy", "") == {"senior"}
+
+    def test_age_undecidable_returns_none(self):
+        from api.chat.metadata_enricher import _infer_age_predisposition
+
+        assert _infer_age_predisposition("Vomiting", "") is None
+        assert _infer_age_predisposition("Diarrhea", "") is None
+
+    def test_acute_inferred_from_emergency_or_keywords(self):
+        from api.chat.metadata_enricher import _infer_onset_pattern
+
+        # Emergency urgency → acute
+        assert _infer_onset_pattern("Some Disease", urgency="emergency") == {"acute"}
+        # Acute keyword in name
+        assert _infer_onset_pattern("Acute Pancreatitis", "") == {"acute"}
+        assert _infer_onset_pattern("Gastric Dilatation Volvulus", "") == {"acute"}
+
+    def test_chronic_inferred_from_keywords(self):
+        from api.chat.metadata_enricher import _infer_onset_pattern
+
+        assert _infer_onset_pattern("Chronic Hepatitis", "") == {"chronic"}
+        assert _infer_onset_pattern("Degenerative Joint Disease", "") == {"chronic"}
+
+    def test_enrich_inplace_idempotent(self):
+        """Re-running enrichment should not mutate already-set fields."""
+        from api.chat.metadata_enricher import enrich_diseases_inplace
+
+        diseases = [
+            {"name": "Acute Pancreatitis", "urgency": "emergency"},
+            {"name": "Some Existing", "age_predisposition": {"adult"}, "onset_pattern": {"chronic"}},
+        ]
+        enrich_diseases_inplace(diseases)
+        # First entry got enriched
+        assert diseases[0].get("onset_pattern") == {"acute"}
+        # Second entry unchanged
+        assert diseases[1].get("age_predisposition") == {"adult"}
+        assert diseases[1].get("onset_pattern") == {"chronic"}
+
+
 class TestMatcherLabValuesIntegration:
     """lab_values parameter applies disease-boost factors via compute_lab_boosts."""
 
