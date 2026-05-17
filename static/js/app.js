@@ -1888,6 +1888,86 @@ function renderTreatmentWithAdjunct(text){
   return `${mainHtml}<div class="ecvn-adjunct-block" role="note" aria-label="ECVN adjunct options">${adjHtml}</div>`;
 }
 
+// Cache of fetched drug-disease results keyed by `${species}::${diseaseName}::${lang}`
+const _diseaseDrugCache=new Map();
+function _drugDiseaseCacheKey(species,diseaseName){return `${species||""}::${diseaseName||""}::${currentLang||""}`;}
+
+function buildTreatmentDrugsPlaceholder(species,diseaseName){
+  if(!species||!diseaseName) return "";
+  const key=_drugDiseaseCacheKey(species,diseaseName);
+  const cached=_diseaseDrugCache.get(key);
+  const heading=currentLang==="ja"?"治療に関連する薬品":"Related Drugs";
+  if(cached){
+    if(!cached.length){
+      return `<div class="treatment-drugs-section" data-rendered="1"><div class="treatment-drugs-heading">${heading}</div><div class="treatment-drugs-empty">${currentLang==="ja"?"該当薬品なし":"No drug links found"}</div></div>`;
+    }
+    return _renderTreatmentDrugsList(cached,heading);
+  }
+  // Async loading placeholder; will be hydrated by hydrateTreatmentDrugs()
+  const encSp=escapeHtml(species);
+  const encName=escapeHtml(diseaseName);
+  return `<div class="treatment-drugs-section" data-treatment-drugs="1" data-species="${encSp}" data-disease="${encName}" data-rendered="0"><div class="treatment-drugs-heading">${heading}</div><div class="treatment-drugs-loading">${currentLang==="ja"?"読み込み中…":"Loading…"}</div></div>`;
+}
+
+function _renderTreatmentDrugsList(drugs,heading){
+  const items=drugs.slice(0,15).map(d=>{
+    const label=currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
+    const cat=d.category||"";
+    return `<a class="treatment-drug-chip" href="#drugs" data-drug="${escapeHtml(d.name_ja||d.name||"")}"><span class="treatment-drug-name">${escapeHtml(label)}</span>${cat?`<span class="treatment-drug-cat">${escapeHtml(cat)}</span>`:""}</a>`;
+  }).join("");
+  return `<div class="treatment-drugs-section" data-rendered="1"><div class="treatment-drugs-heading">${heading}</div><div class="treatment-drugs-list">${items}</div></div>`;
+}
+
+function hydrateTreatmentDrugs(container){
+  // Find unhydrated placeholders within the container and fetch their drug lists
+  const root=container||document;
+  const placeholders=root.querySelectorAll('[data-treatment-drugs="1"][data-rendered="0"]');
+  placeholders.forEach(ph=>{
+    const species=ph.getAttribute("data-species")||"";
+    const disease=ph.getAttribute("data-disease")||"";
+    if(!species||!disease)return;
+    const key=_drugDiseaseCacheKey(species,disease);
+    // Mark in-flight to avoid duplicate fetches
+    ph.setAttribute("data-rendered","loading");
+    const params=new URLSearchParams({species,name:disease,lang:currentLang||""});
+    fetchWithTimeout("/api/drugs/for-disease?"+params.toString())
+      .then(r=>r.ok?r.json():null)
+      .then(data=>{
+        const drugs=(data&&Array.isArray(data.drugs))?data.drugs:[];
+        _diseaseDrugCache.set(key,drugs);
+        const heading=currentLang==="ja"?"治療に関連する薬品":"Related Drugs";
+        const html=drugs.length
+          ? _renderTreatmentDrugsList(drugs,heading)
+          : `<div class="treatment-drugs-section" data-rendered="1"><div class="treatment-drugs-heading">${heading}</div><div class="treatment-drugs-empty">${currentLang==="ja"?"該当薬品なし":"No drug links found"}</div></div>`;
+        // Replace placeholder element
+        const wrap=document.createElement("div");
+        wrap.innerHTML=html;
+        const newNode=wrap.firstElementChild;
+        if(newNode&&ph.parentNode)ph.parentNode.replaceChild(newNode,ph);
+        // Wire click handlers on new chips
+        if(newNode){
+          newNode.querySelectorAll(".treatment-drug-chip").forEach(a=>{
+            a.addEventListener("click",e=>{
+              e.preventDefault();
+              const drugName=a.getAttribute("data-drug")||"";
+              if(typeof switchView==="function"){switchView("drugs");}
+              if(typeof searchDrugByName==="function"&&drugName){searchDrugByName(drugName);}
+              else{
+                const input=document.getElementById("drugSearchInput");
+                if(input&&drugName){input.value=drugName;input.dispatchEvent(new Event("input"));}
+              }
+            });
+          });
+        }
+      })
+      .catch(()=>{
+        ph.setAttribute("data-rendered","error");
+        const heading=currentLang==="ja"?"治療に関連する薬品":"Related Drugs";
+        ph.innerHTML=`<div class="treatment-drugs-heading">${heading}</div><div class="treatment-drugs-empty">${currentLang==="ja"?"取得に失敗しました":"Failed to load"}</div>`;
+      });
+  });
+}
+
 function sanitizeUrl(value){
   try{
     const url=new URL(String(value??""),window.location.origin);
@@ -2234,6 +2314,8 @@ function renderResults(data){
   area.appendChild(createPrintButton());
   loadCommonDiseases(currentSpecies);
   loadBreedEcology(currentSpecies,currentBreed);
+  /* Hydrate treatment-drug placeholders within result cards (async fetch) */
+  if(typeof hydrateTreatmentDrugs==="function")hydrateTreatmentDrugs(area);
   /* Save diagnosis to history (localStorage) */
   saveDiagnosisHistory(data,diseases);
 }
@@ -2550,7 +2632,7 @@ function renderDiseaseCard(d,data){
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F48A}</span> ${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</div>
-          <div class="detail-section-body">${renderTreatmentWithAdjunct(treatment)}</div>
+          <div class="detail-section-body">${renderTreatmentWithAdjunct(treatment)}${buildTreatmentDrugsPlaceholder(currentSpecies||"dog",d.name_ja||d.name||"")}</div>
         </div>
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F6E1}\uFE0F</span> ${t("dtPrevention")}</div>
@@ -2801,7 +2883,7 @@ function renderDiseaseDb(){
         <dt>${t("dtPathophysiology")}</dt><dd>${escapeHtml(patho)}</dd>
         <dt>${t("dtCauses")}</dt><dd>${escapeHtml(causes)}</dd>
         <dt>${t("dtPrevention")}</dt><dd>${escapeHtml(prevention)}</dd>
-        <dt>${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</dt><dd>${renderTreatmentWithAdjunct(treatment)}</dd>
+        <dt>${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</dt><dd>${renderTreatmentWithAdjunct(treatment)}${buildTreatmentDrugsPlaceholder(currentSpecies||"dog",d.name_ja||d.name||"")}</dd>
         <dt>${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
         ${(d.symptoms_display&&d.symptoms_display.length)?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(d.symptoms_display.map(s=>currentLang==="ja"?(s.name_ja||s.id):(s.name_en||s.id)).join("、"))}</dd>`:(d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):String(d.symptoms)))}</dd>`:"")}
         ${(d.recommended_tests_display&&d.recommended_tests_display.length)?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests_display.map(x=>currentLang==="ja"?(x.name_ja||x.id):(x.name_en||x.id)).join("、"))}</dd>`:(d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:"")}
@@ -4756,6 +4838,8 @@ function toggleDbItem(el){
         detail.dataset.drugsLoaded="1";
         _loadDbItemDrugs(detail);
       }
+      /* Hydrate any server-API treatment-drug placeholders inside this panel */
+      if(typeof hydrateTreatmentDrugs==="function")hydrateTreatmentDrugs(detail);
     }
   }
 }
