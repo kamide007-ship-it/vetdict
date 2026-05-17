@@ -767,6 +767,9 @@ document.addEventListener("DOMContentLoaded",async()=>{
     // Clear lab values button
     const clearLabBtn=document.getElementById("clearLabBtn");
     if(clearLabBtn)clearLabBtn.addEventListener("click",clearLabValues);
+    // Lab import (OCR / text paste) button
+    const labImportBtn=document.getElementById("labImportBtn");
+    if(labImportBtn)labImportBtn.addEventListener("click",openLabImportModal);
     // References toggle (replaces inline onclick)
     const refHeader=document.querySelector(".ref-header");
     if(refHeader){
@@ -1876,6 +1879,188 @@ function clearLabValues(){
   document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{el.value="";});
   highlightLabAbnormals();
   renderLabCalculators();
+}
+
+/* --- Lab import from image/text --- */
+function openLabImportModal(){
+  trackEvent("open_lab_import");
+  let modal=document.getElementById("labImportModal");
+  if(modal){modal.classList.add("open");document.body.style.overflow="hidden";return;}
+  const isJa=currentLang==="ja";
+  modal=document.createElement("div");
+  modal.id="labImportModal";
+  modal.className="dashboard-modal";
+  modal.setAttribute("role","dialog");
+  modal.setAttribute("aria-modal","true");
+  modal.setAttribute("aria-labelledby","labImportTitle");
+  modal.innerHTML=`<div class="dashboard-backdrop"></div><div class="dashboard-panel" style="max-width:700px"><div class="dashboard-header"><h2 id="labImportTitle">📷 ${isJa?"検査値の取り込み":"Import Lab Values"}</h2><button class="dashboard-close" aria-label="${isJa?"閉じる":"Close"}">✕</button></div><div class="dashboard-body">
+    <div class="lab-import-tabs" role="tablist" style="display:flex;gap:6px;border-bottom:2px solid var(--gray-200);margin-bottom:14px">
+      <button class="lab-import-tab active" data-tab="image" role="tab" aria-selected="true" style="padding:8px 16px;background:none;border:none;border-bottom:3px solid var(--navy);color:var(--navy);font-weight:700;cursor:pointer">${isJa?"🖼️ 画像":"🖼️ Image"}</button>
+      <button class="lab-import-tab" data-tab="text" role="tab" aria-selected="false" style="padding:8px 16px;background:none;border:none;border-bottom:3px solid transparent;color:var(--gray-500);font-weight:600;cursor:pointer">${isJa?"📝 テキスト":"📝 Text"}</button>
+    </div>
+    <div class="lab-import-content lab-tab-image">
+      <div id="labDropZone" style="border:2px dashed var(--gray-300);border-radius:10px;padding:30px;text-align:center;cursor:pointer;transition:all .2s;background:var(--gray-50)">
+        <div style="font-size:2rem;margin-bottom:8px">📤</div>
+        <div style="font-weight:600;color:var(--navy);margin-bottom:4px">${isJa?"クリックして画像を選択":"Click to choose image"}</div>
+        <div style="font-size:.78rem;color:var(--gray-500)">${isJa?"または、ドラッグ&ドロップ／クリップボードから貼り付け (Ctrl+V)":"Or drag-and-drop / paste from clipboard (Ctrl+V)"}</div>
+        <div style="font-size:.72rem;color:var(--gray-400);margin-top:6px">${isJa?"PNG/JPEG ≤ 8 MB":"PNG/JPEG ≤ 8 MB"}</div>
+      </div>
+      <input type="file" id="labImageInput" accept="image/*" capture="environment" style="display:none">
+      <div id="labImagePreview" style="display:none;margin-top:14px;text-align:center"></div>
+      <div id="labOcrProgress" style="display:none;text-align:center;padding:16px;color:var(--gray-600);font-size:.84rem"><div class="loader" style="display:inline-block;width:20px;height:20px;border:3px solid var(--gray-300);border-top-color:var(--navy);border-radius:50%;animation:spin 1s linear infinite;vertical-align:middle"></div> <span>${isJa?"画像を解析中…":"Analyzing image…"}</span></div>
+    </div>
+    <div class="lab-import-content lab-tab-text" style="display:none">
+      <textarea id="labTextInput" rows="10" placeholder="${isJa?"検査結果テキストをここに貼り付けてください\n例:\nBUN 45 mg/dL\nクレアチニン 3.2 mg/dL\nALT 220 U/L":"Paste lab report text here\nExample:\nBUN 45 mg/dL\nCreatinine 3.2 mg/dL\nALT 220 U/L"}" style="width:100%;padding:10px;border:1.5px solid var(--gray-300);border-radius:6px;font-family:monospace;font-size:.84rem;resize:vertical"></textarea>
+      <div style="margin-top:8px;display:flex;justify-content:flex-end"><button id="labTextParseBtn" style="padding:8px 16px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-weight:600">${isJa?"解析する":"Parse"}</button></div>
+    </div>
+    <div id="labImportResults" style="display:none;margin-top:14px"></div>
+  </div></div>`;
+  document.body.appendChild(modal);
+  // Tab switching
+  modal.querySelectorAll(".lab-import-tab").forEach(tab=>{
+    tab.addEventListener("click",()=>{
+      modal.querySelectorAll(".lab-import-tab").forEach(t=>{t.classList.remove("active");t.style.borderBottomColor="transparent";t.style.color="var(--gray-500)";t.setAttribute("aria-selected","false");});
+      tab.classList.add("active");tab.style.borderBottomColor="var(--navy)";tab.style.color="var(--navy)";tab.setAttribute("aria-selected","true");
+      modal.querySelector(".lab-tab-image").style.display=tab.dataset.tab==="image"?"block":"none";
+      modal.querySelector(".lab-tab-text").style.display=tab.dataset.tab==="text"?"block":"none";
+    });
+  });
+  // Close handlers
+  modal.querySelector(".dashboard-close").addEventListener("click",closeLabImportModal);
+  modal.querySelector(".dashboard-backdrop").addEventListener("click",closeLabImportModal);
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("open"))closeLabImportModal();});
+  // Image upload
+  const dropZone=modal.querySelector("#labDropZone");
+  const fileInput=modal.querySelector("#labImageInput");
+  dropZone.addEventListener("click",()=>fileInput.click());
+  fileInput.addEventListener("change",e=>{if(e.target.files[0])_handleLabImageFile(e.target.files[0]);});
+  dropZone.addEventListener("dragover",e=>{e.preventDefault();dropZone.style.borderColor="var(--navy)";dropZone.style.background="rgba(26,48,104,.05)";});
+  dropZone.addEventListener("dragleave",()=>{dropZone.style.borderColor="var(--gray-300)";dropZone.style.background="var(--gray-50)";});
+  dropZone.addEventListener("drop",e=>{
+    e.preventDefault();dropZone.style.borderColor="var(--gray-300)";dropZone.style.background="var(--gray-50)";
+    const f=e.dataTransfer.files[0];if(f&&f.type.startsWith("image/"))_handleLabImageFile(f);
+  });
+  // Paste from clipboard
+  modal.addEventListener("paste",e=>{
+    const items=e.clipboardData.items;
+    for(const item of items){
+      if(item.type.startsWith("image/")){
+        const file=item.getAsFile();
+        if(file)_handleLabImageFile(file);
+        break;
+      }
+    }
+  });
+  // Text parse
+  modal.querySelector("#labTextParseBtn").addEventListener("click",()=>{
+    const txt=modal.querySelector("#labTextInput").value.trim();
+    if(!txt)return;
+    _parseLabText(txt);
+  });
+  modal.classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeLabImportModal(){
+  const modal=document.getElementById("labImportModal");
+  if(modal)modal.classList.remove("open");
+  document.body.style.overflow="";
+}
+
+function _handleLabImageFile(file){
+  if(file.size>8*1024*1024){showToast(currentLang==="ja"?"画像が大きすぎます（8MB以下）":"Image too large (max 8MB)","error");return;}
+  const preview=document.getElementById("labImagePreview");
+  const progress=document.getElementById("labOcrProgress");
+  const results=document.getElementById("labImportResults");
+  results.style.display="none";
+  // Show preview
+  const reader=new FileReader();
+  reader.onload=e=>{
+    preview.style.display="block";
+    preview.innerHTML=`<img src="${e.target.result}" alt="${currentLang==="ja"?"検査結果プレビュー":"Lab preview"}" style="max-width:100%;max-height:200px;border:1px solid var(--gray-300);border-radius:6px">`;
+  };
+  reader.readAsDataURL(file);
+  // Upload + OCR
+  progress.style.display="block";
+  const fd=new FormData();
+  fd.append("image",file);
+  fetchWithTimeout("/api/lab-ocr/image",{method:"POST",body:fd},60000)
+    .then(r=>r.json())
+    .then(data=>{
+      progress.style.display="none";
+      if(data.error){
+        showToast((currentLang==="ja"?"OCR失敗: ":"OCR failed: ")+(data.error||""),"error");
+        if(data.fallback)showToast(currentLang==="ja"?"📝 テキストタブに切り替えて手入力もできます":"📝 Try Text tab for manual input","info");
+        return;
+      }
+      _renderExtractedLabs(data.labs||{},data.ocr_text||"");
+    })
+    .catch(err=>{
+      progress.style.display="none";
+      showToast((currentLang==="ja"?"取り込み失敗: ":"Failed: ")+err.message,"error");
+    });
+}
+
+function _parseLabText(text){
+  const results=document.getElementById("labImportResults");
+  results.style.display="none";
+  fetchWithTimeout("/api/lab-ocr/text",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text})},30000)
+    .then(r=>r.json())
+    .then(data=>{
+      if(data.error){showToast((currentLang==="ja"?"解析失敗: ":"Parse failed: ")+data.error,"error");return;}
+      _renderExtractedLabs(data.labs||{},text);
+    })
+    .catch(err=>{showToast((currentLang==="ja"?"解析失敗: ":"Failed: ")+err.message,"error");});
+}
+
+function _renderExtractedLabs(labs,sourceText){
+  const container=document.getElementById("labImportResults");
+  const isJa=currentLang==="ja";
+  const keys=Object.keys(labs);
+  if(!keys.length){
+    container.style.display="block";
+    container.innerHTML=`<div style="padding:14px;background:#fef3c7;border-left:3px solid #f59e0b;border-radius:6px;color:#78350f;font-size:.86rem">${isJa?"検査値を検出できませんでした。テキストの一部を直接入力してください。":"No lab values detected. Try entering values directly."}</div>`;
+    return;
+  }
+  let html=`<div style="padding:10px;background:rgba(34,168,79,.06);border-left:3px solid var(--green);border-radius:6px;margin-bottom:10px;font-size:.84rem"><strong style="color:var(--green)">${keys.length}${isJa?"件の検査値を検出":" lab values detected"}</strong> — ${isJa?"確認して取り込みボタンをクリック":"review and click Apply"}</div>`;
+  html+=`<div style="max-height:280px;overflow-y:auto;border:1px solid var(--gray-200);border-radius:6px">`;
+  html+=`<table style="width:100%;border-collapse:collapse;font-size:.84rem"><thead><tr style="background:var(--gray-100)"><th style="padding:6px 8px;text-align:left;border-bottom:1px solid var(--gray-200)">${isJa?"検査":"Lab"}</th><th style="padding:6px 8px;text-align:right;border-bottom:1px solid var(--gray-200)">${isJa?"値":"Value"}</th><th style="padding:6px 8px;text-align:left;border-bottom:1px solid var(--gray-200)">${isJa?"単位":"Unit"}</th><th style="padding:6px 8px;text-align:center;border-bottom:1px solid var(--gray-200)"><input type="checkbox" id="labImportAll" checked aria-label="${isJa?"全選択":"Select all"}"></th></tr></thead><tbody>`;
+  for(const[k,v]of Object.entries(labs)){
+    const input=document.querySelector(`input[data-lab="${k}"]`);
+    const label=input?(input.closest(".lab-group")?.querySelector("label")?.textContent||k):k;
+    html+=`<tr><td style="padding:6px 8px;border-bottom:1px solid var(--gray-100);font-weight:600">${escapeHtml(label.replace(/\s+/g," ").trim())}</td><td style="padding:6px 8px;text-align:right;border-bottom:1px solid var(--gray-100);font-family:monospace"><input type="number" step="any" value="${v.value}" data-lab-import="${escapeHtml(k)}" style="width:80px;padding:3px 6px;border:1px solid var(--gray-300);border-radius:4px;text-align:right;font-family:monospace"></td><td style="padding:6px 8px;border-bottom:1px solid var(--gray-100);color:var(--gray-500);font-size:.78rem">${escapeHtml(v.unit||"")}</td><td style="padding:6px 8px;text-align:center;border-bottom:1px solid var(--gray-100)"><input type="checkbox" class="lab-import-cb" data-lab-key="${escapeHtml(k)}" checked></td></tr>`;
+  }
+  html+=`</tbody></table></div>`;
+  html+=`<div style="margin-top:12px;display:flex;justify-content:space-between;gap:8px"><button id="labImportApplyBtn" style="padding:8px 18px;background:var(--green);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-weight:700">${isJa?"✓ 選択した値を取込":"✓ Apply Selected"}</button><button id="labImportCancelBtn" style="padding:8px 18px;background:var(--white);color:var(--gray-600);border:1px solid var(--gray-300);border-radius:6px;cursor:pointer">${isJa?"キャンセル":"Cancel"}</button></div>`;
+  container.style.display="block";
+  container.innerHTML=html;
+  // Select-all toggle
+  const selAll=container.querySelector("#labImportAll");
+  selAll.addEventListener("change",e=>{container.querySelectorAll(".lab-import-cb").forEach(cb=>{cb.checked=e.target.checked;});});
+  // Apply button
+  container.querySelector("#labImportApplyBtn").addEventListener("click",()=>{
+    let applied=0;
+    container.querySelectorAll(".lab-import-cb:checked").forEach(cb=>{
+      const k=cb.dataset.labKey;
+      const valInput=container.querySelector(`input[data-lab-import="${k}"]`);
+      const target=document.querySelector(`input[data-lab="${k}"]`);
+      if(target&&valInput){
+        target.value=valInput.value;
+        applied++;
+      }
+    });
+    highlightLabAbnormals();
+    renderLabCalculators();
+    closeLabImportModal();
+    if(applied>0){
+      showToast((currentLang==="ja"?"✓ ":"✓ ")+applied+(currentLang==="ja"?"件の検査値を取り込みました":" lab values imported"),"success");
+      // Open lab section if collapsed
+      const labDetails=document.getElementById("labDetails");
+      if(labDetails)labDetails.open=true;
+      trackEvent("lab_import_applied",{count:applied});
+    }
+  });
+  container.querySelector("#labImportCancelBtn").addEventListener("click",closeLabImportModal);
 }
 document.addEventListener("input",e=>{if(e.target.matches("#labValuesGrid input")){highlightLabAbnormals();renderLabCalculators();}});
 

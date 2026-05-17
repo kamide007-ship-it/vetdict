@@ -66,7 +66,10 @@
                   <div class="lab-group"><label for="lab-crp">CRP <span class="lab-unit">mg/L</span></label><input type="number" step="any" min="0" max="500" id="lab-crp" data-lab="crp" data-lo="0" data-hi="10" placeholder="0–10" inputmode="decimal"/><span class="lab-flag"></span></div>
                   <div class="lab-group"><label for="lab-usg">USG <span class="lab-unit">比重</span></label><input type="number" step="any" min="1" max="1.1" id="lab-usg" data-lab="usg" data-lo="1.030" data-hi="99" placeholder="1.030+" inputmode="decimal"/><span class="lab-flag"></span></div>
                 </div>
-                <button type="button" id="clearLabBtn" style="margin-top:8px;padding:6px 14px;font-size:.78rem;background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-300);border-radius:6px;cursor:pointer" data-i18n="labClear">検査値をクリア</button>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+                  <button type="button" id="clearLabBtn" style="padding:6px 14px;font-size:.78rem;background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-300);border-radius:6px;cursor:pointer" data-i18n="labClear">検査値をクリア</button>
+                  <button type="button" id="labImportBtn" style="padding:6px 14px;font-size:.78rem;background:var(--white);border:1px solid var(--navy);color:var(--navy);border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:5px" aria-label="画像/テキストから検査値を取り込む" data-i18n="labImport">📷 画像/テキストから取込</button>
+                </div>
                 <div id="labCalculators" class="lab-calculators-section" style="margin-top:12px;padding:10px;background:rgba(26,48,104,.04);border-radius:6px"></div>
               </div>
             </details>
