@@ -182,6 +182,65 @@ _SYN: dict[str, list[str]] = {
     "leg_scales": ["scaly_legs", "scaly_face"],
     "scaly_face": ["scaly_legs", "leg_scales", "crusty_beak"],
     "hole_in_head": ["head_erosion", "head_pitting"],
+    # --- Additional clinical synonyms (extended coverage; new keys only) ---
+    # Cardiac signs
+    "coughing": ["cough", "honking_cough", "kennel_cough", "reverse_sneezing"],
+    "cough": ["coughing", "honking_cough"],
+    "exercise_intolerance": ["weakness", "lethargy", "reluctance_to_move", "reluctance_move"],
+    "syncope": ["collapse", "fainting", "loss_of_consciousness"],
+    "collapse": ["syncope", "fainting", "loss_of_consciousness"],
+    "fainting": ["syncope", "collapse"],
+    # Neurological
+    "seizures": ["convulsions", "fits", "epileptic_seizure", "tonic_clonic"],
+    "convulsions": ["seizures", "fits"],
+    "circling": ["walking_in_circles", "head_pressing"],
+    "head_pressing": ["circling", "head_tilt"],
+    "disorientation": ["confusion", "circling", "head_pressing", "behavior_change"],
+    "behavior_change": ["aggression_change", "anxiety", "disorientation"],
+    # GI extended (NEW keys only — keys already defined above are skipped)
+    "appetite_increase": ["polyphagia", "increased_appetite"],
+    "vomiting_after_drinking": ["vomiting", "regurgitation", "projectile_vomiting"],
+    "hematochezia": ["bloody_stool", "blood_in_stool", "melena"],
+    "melena": ["dark_stool", "blood_in_stool", "bloody_stool"],
+    # Urinary extended
+    "straining_urinate": ["dysuria", "stranguria", "blocked_urethra", "urethral_obstruction"],
+    "blood_urine": ["hematuria", "bloody_urine", "pink_urine", "red_urine"],
+    "incontinence": ["urinary_incontinence", "fecal_incontinence", "urine_leakage"],
+    "urinary_incontinence": ["incontinence", "urine_leakage", "bladder_leakage"],
+    # Respiratory extended
+    "nasal_discharge": ["runny_nose", "rhinitis", "sniffles", "snuffles"],
+    "rapid_breathing": ["tachypnea", "labored_breathing", "panting"],
+    "excessive_panting": ["tachypnea", "rapid_breathing", "panting"],
+    "dyspnea": ["labored_breathing", "respiratory_distress", "open_mouth_breathing"],
+    # Pain/orthopedic
+    "limping_fl": ["lameness_fl", "limp", "lameness", "stiffness", "limping"],
+    "limping_fr": ["lameness_fr", "limp", "lameness", "stiffness", "limping"],
+    "limping_rl": ["lameness_rl", "limp", "lameness", "stiffness", "limping"],
+    "limping_rr": ["lameness_rr", "limp", "lameness", "stiffness", "limping"],
+    "lameness": ["limp", "limping", "limping_fl", "limping_fr", "limping_rl", "limping_rr"],
+    "stiffness": ["stiff_gait", "lameness", "reluctance_to_move", "reluctance_move"],
+    "pain_on_touch": ["pain_on_palpation", "tenderness", "discomfort"],
+    # Skin/coat extended (new keys only)
+    "skin_itching": ["itching", "pruritus", "scratching"],
+    "lumps": ["mass", "tumor", "nodule", "growth", "swelling"],
+    # Eye
+    "eye_redness": ["red_eye", "ocular_redness", "conjunctivitis"],
+    "eye_discharge": ["ocular_discharge", "tearing", "epiphora", "pus_in_eye"],
+    "squinting": ["blepharospasm", "eye_closed", "eye_squint", "photophobia"],
+    # Ear
+    "ear_scratching": ["ear_pruritus", "scratching_ears", "head_shaking"],
+    # General/systemic
+    "fever": ["pyrexia", "hyperthermia", "high_temperature"],
+    "low_temperature": ["hypothermia", "cold_extremities", "subnormal_temperature"],
+    "weak_pulse": ["thready_pulse", "absent_pulse", "weak_femoral_pulse"],
+    "pale_gums": ["pallor", "mucous_membrane_pallor", "white_gums", "anemic"],
+    # Reproductive
+    "mammary_swelling": ["mammary_enlargement", "lactation", "mammary_mass"],
+    "genital_discharge": ["vulvar_discharge", "preputial_discharge", "vaginal_discharge"],
+    # Behavioral
+    "anxiety": ["nervousness", "hiding", "trembling", "panting"],
+    "aggression_change": ["aggression", "irritability", "behavior_change"],
+    "hiding": ["seeking_solitude", "withdrawal", "anxiety"],
 }
 
 # Prevalence tier multipliers (region-aware data is loaded per call by species).

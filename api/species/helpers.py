@@ -3415,6 +3415,123 @@ LAB_COMBINATION_PATTERNS: Dict[frozenset, Dict[str, float]] = {
         "Liver Disease": 2.2,
         "Portosystemic Shunt": 2.8,
     },
+    # --- Additional high-yield combination patterns (expanded clinical coverage) ---
+    # Pancreatitis: elevated lipase + amylase (specific test: cPLI/fPLI)
+    frozenset({("lipase", "high"), ("amylase", "high")}): {
+        "Pancreatitis": 3.2,
+        "Acute Pancreatitis": 3.5,
+        "Feline Pancreatitis": 3.0,
+    },
+    frozenset({("cpli", "high")}): {
+        "Pancreatitis": 3.5,
+        "Acute Pancreatitis": 3.8,
+    },
+    frozenset({("fpli", "high")}): {
+        "Feline Pancreatitis": 3.5,
+        "Feline Chronic Pancreatitis": 3.0,
+    },
+    # DKA: hyperglycemia + ketones + metabolic acidosis
+    frozenset({("glucose", "high"), ("ketones", "high")}): {
+        "Diabetic Ketoacidosis (DKA)": 3.8,
+        "Diabetes Mellitus": 2.5,
+    },
+    # Insulinoma: hypoglycemia + inappropriate insulin
+    frozenset({("glucose", "low"), ("insulin", "high")}): {
+        "Insulinoma": 3.8,
+        "Ferret Insulinoma": 3.8,
+    },
+    frozenset({("glucose", "low")}): {
+        "Insulinoma": 2.0,
+        "Hepatic Failure": 1.8,
+        "Sepsis": 1.5,
+        "Hypoadrenocorticism": 1.5,
+    },
+    # Hyperthyroid cat: elevated T4 + clinical
+    frozenset({("t4", "high"), ("alt", "high")}): {
+        "Hyperthyroidism": 3.5,
+        "Feline Hyperthyroidism": 3.8,
+    },
+    # Hepatic lipidosis (cat): markedly elevated ALT + ALP + bilirubin in anorectic cat
+    frozenset({("alt", "high"), ("alp", "high"), ("tbil", "high"), ("ggt", "high")}): {
+        "Hepatic Lipidosis (Fatty Liver Disease)": 3.8,
+        "Cholangiohepatitis": 3.5,
+    },
+    # IMHA: anemia + spherocytes-equivalent labs
+    frozenset({("hct", "low"), ("retics", "high")}): {
+        "Immune-Mediated Hemolytic Anemia (IMHA)": 3.5,
+        "Hemolytic Anemia": 3.0,
+    },
+    frozenset({("hct", "low"), ("tbil", "high")}): {
+        "Immune-Mediated Hemolytic Anemia (IMHA)": 3.2,
+        "Babesiosis": 2.8,
+        "Hemolytic Anemia": 2.8,
+    },
+    # ITP: isolated severe thrombocytopenia
+    frozenset({("platelets", "low")}): {
+        "Immune-Mediated Thrombocytopenia (ITP)": 2.5,
+        "Ehrlichiosis": 2.0,
+        "DIC": 2.0,
+    },
+    # Hypercalcemia of malignancy: high calcium suggests lymphoma, anal sac adenocarcinoma
+    frozenset({("calcium", "high")}): {
+        "Lymphoma": 2.5,
+        "Multicentric Lymphoma": 2.5,
+        "Anal Sac Adenocarcinoma": 2.8,
+        "Hyperparathyroidism": 2.5,
+        "Vitamin D Toxicosis": 3.0,
+        "Cholecalciferol Rodenticide Toxicosis": 3.5,
+    },
+    # Hypercalcemia + azotemia: classic vitamin D / cholecalciferol toxicosis
+    frozenset({("calcium", "high"), ("phosphorus", "high"), ("creatinine", "high")}): {
+        "Cholecalciferol Rodenticide Toxicosis": 4.0,
+        "Vitamin D Toxicosis": 3.8,
+    },
+    # Protein-losing nephropathy: hypoalbuminemia + proteinuria + sometimes azotemia
+    frozenset({("albumin", "low"), ("upc", "high")}): {
+        "Protein-Losing Nephropathy (PLN)": 3.5,
+        "Glomerulonephritis": 3.5,
+        "Lyme Nephritis": 3.5,
+    },
+    # Acromegaly (cat): elevated IGF-1 + insulin resistance + glucose intolerance
+    frozenset({("glucose", "high"), ("igf_1", "high")}): {
+        "Acromegaly": 3.8,
+        "Acromegaly (Hypersomatotropism)": 3.8,
+    },
+    # Aldosteronism (Conn's): hypokalemia + hypertension + elevated aldosterone
+    frozenset({("potassium", "low"), ("aldosterone", "high")}): {
+        "Hyperaldosteronism (Conn's Syndrome)": 4.0,
+        "Feline Primary Hyperaldosteronism (Conn's Syndrome)": 4.0,
+    },
+    # Hepatopathy + coagulopathy: chronic liver disease consequence
+    frozenset({("alt", "high"), ("pt", "high")}): {
+        "Hepatic Failure": 3.0,
+        "Liver Disease": 2.8,
+    },
+    # Anticoagulant rodenticide: severe coagulopathy without liver markers elevated
+    frozenset({("pt", "high"), ("aptt", "high")}): {
+        "Anticoagulant Rodenticide Toxicosis": 3.8,
+        "Disseminated Intravascular Coagulation": 3.0,
+    },
+    # Severe neutrophilia with left shift: sepsis or pyometra
+    frozenset({("wbc", "high"), ("neutrophils", "high"), ("bands", "high")}): {
+        "Sepsis": 3.5,
+        "Sepsis and SIRS": 3.5,
+        "Pyometra": 3.2,
+        "Peritonitis": 3.0,
+    },
+    # Severe neutropenia: parvovirus, sepsis end-stage, drug toxicity
+    frozenset({("wbc", "low"), ("neutrophils", "low")}): {
+        "Parvovirus": 3.0,
+        "Canine Parvovirus": 3.0,
+        "Feline Panleukopenia (Feline Distemper)": 3.0,
+        "Sepsis": 2.5,
+        "Bone Marrow Failure": 2.8,
+    },
+    # Renal failure with hyperphosphatemia + anemia: chronic kidney disease
+    frozenset({("creatinine", "high"), ("phosphorus", "high"), ("hct", "low")}): {
+        "Chronic Kidney Disease (CKD)": 3.8,
+        "Chronic Renal Failure": 3.8,
+    },
 }
 
 
