@@ -35,13 +35,24 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
 <meta property="og:image:alt" content="VetDict — 獣医師のための臨床意思決定支援ツール">
 <link rel="canonical" href="https://vetdict.info/">
 <link rel="alternate" hreflang="x-default" href="https://vetdict.info/">
+<link rel="alternate" hreflang="ja" href="https://vetdict.info/">
+<link rel="alternate" hreflang="en" href="https://vetdict.info/?lang=en">
 <link rel="icon" type="image/svg+xml" href="/static/favicon.svg"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png"/>
 <link rel="manifest" href="/static/manifest.json">
 <meta name="theme-color" content="#1a3068">
+<meta name="color-scheme" content="light">
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="VetDict">
+<meta name="format-detection" content="telephone=no">
+<!-- Microsoft tile (Windows PWA) -->
+<meta name="msapplication-TileColor" content="#1a3068">
+<meta name="msapplication-config" content="none">
+<!-- Performance hints -->
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
 <link rel="stylesheet" href="/static/css/main.css?v={{ g.asset_ver }}"/>
 <script type="application/ld+json">
 {
@@ -180,6 +191,37 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
   ]
 }
 </script>
+<!-- BreadcrumbList: helps Google show site hierarchy in SERPs -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "VetDict", "item": "https://vetdict.info/"},
+    {"@type": "ListItem", "position": 2, "name": "鑑別診断", "item": "https://vetdict.info/#checker"},
+    {"@type": "ListItem", "position": 3, "name": "疾患データベース", "item": "https://vetdict.info/diseases"},
+    {"@type": "ListItem", "position": 4, "name": "薬品辞書", "item": "https://vetdict.info/#drugs"},
+    {"@type": "ListItem", "position": 5, "name": "鎮静・麻酔プロトコル", "item": "https://vetdict.info/#anesthesia"},
+    {"@type": "ListItem", "position": 6, "name": "緊急対応", "item": "https://vetdict.info/#emergency"}
+  ]
+}
+</script>
+<!-- HowTo: explains the symptom checker workflow for SERPs -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "VetDict 鑑別診断の使い方",
+  "description": "動物種を選び、観察された臨床症状にチェックを入れて、エビデンスに基づく鑑別疾患リストを生成します。",
+  "totalTime": "PT2M",
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "動物種を選択", "text": "21対応動物種から該当の種を選びます（犬・猫・馬・ウサギ・鳥類・爬虫類・両生類・魚など）"},
+    {"@type": "HowToStep", "position": 2, "name": "症状を選択", "text": "観察された臨床症状をチェックボックスから選択します。検査値（任意）も入力可能"},
+    {"@type": "HowToStep", "position": 3, "name": "鑑別診断を実行", "text": "「鑑別診断を実行」ボタンで IDF重み付け＋特異度ボーナス＋有病率補正によるランキング表示"},
+    {"@type": "HowToStep", "position": 4, "name": "詳細を確認", "text": "各候補疾患の病態生理・治療プロトコル・関連薬品・参考文献を確認"}
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -195,18 +237,49 @@ if(localStorage.getItem('vetdict-analytics-consent')==='1'){
 {% include 'partials/_footer.html' %}
 
 <div id="cookieConsent" class="cookie-consent" style="display:none" role="region" data-i18n-aria="cookieConsentRegion" aria-label="Cookieに関するお知らせ">
-  <p><span data-i18n="cookieConsentText">当サイトでは利用状況の改善のためGoogle Analyticsを使用しています。</span><a href="/privacy" style="color:var(--green)" data-i18n="cookiePrivacyLink">プライバシーポリシー</a></p>
-  <div style="display:flex;gap:8px">
+  <p><span data-i18n="cookieConsentText">当サイトでは利用状況の改善のためGoogle Analyticsを使用しています。あなたの選択は <strong>localStorage</strong> に保存され、後から設定変更できます。</span><a href="/privacy" style="color:var(--green)" data-i18n="cookiePrivacyLink">プライバシーポリシー</a></p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
     <button type="button" class="cookie-btn accept" id="cookieAcceptBtn" data-i18n="cookieAccept">同意する</button>
-    <button type="button" class="cookie-btn dismiss" id="cookieDismissBtn" data-i18n-aria="cookieDismissAria" aria-label="同意せずに閉じる" data-i18n="cookieDismiss">閉じる</button>
+    <button type="button" class="cookie-btn reject" id="cookieRejectBtn" data-i18n="cookieReject" style="background:var(--white);color:var(--gray-600);border:1px solid var(--gray-300)">拒否する</button>
+    <button type="button" class="cookie-btn dismiss" id="cookieDismissBtn" data-i18n-aria="cookieDismissAria" aria-label="同意せずに閉じる" data-i18n="cookieDismiss" style="font-size:.72rem;color:var(--gray-400);background:none;border:none;text-decoration:underline">後で決める</button>
   </div>
 </div>
+<button type="button" id="cookieReopenBtn" aria-label="Cookie設定を再表示" title="Cookie設定" style="display:none;position:fixed;bottom:16px;left:16px;width:40px;height:40px;border-radius:50%;background:var(--white);border:1px solid var(--gray-300);box-shadow:0 2px 8px rgba(0,0,0,.12);cursor:pointer;font-size:1.1rem;z-index:998;color:var(--gray-600)">🍪</button>
 <script nonce="{{ g.csp_nonce }}">
-function acceptAnalytics(){gtag('consent','update',{'analytics_storage':'granted'});localStorage.setItem('vetdict-analytics-consent','1');document.getElementById('cookieConsent').style.display='none';}
-function dismissConsent(){localStorage.setItem('vetdict-analytics-dismissed','1');document.getElementById('cookieConsent').style.display='none';}
-if(!localStorage.getItem('vetdict-analytics-consent')&&!localStorage.getItem('vetdict-analytics-dismissed')){document.getElementById('cookieConsent').style.display='flex';}
-document.getElementById('cookieAcceptBtn').addEventListener('click',acceptAnalytics);
-document.getElementById('cookieDismissBtn').addEventListener('click',dismissConsent);
+function _setConsent(state){
+  if(state==='granted'){
+    if(typeof gtag==='function')gtag('consent','update',{'analytics_storage':'granted'});
+    localStorage.setItem('vetdict-analytics-consent','granted');
+  } else if(state==='denied'){
+    if(typeof gtag==='function')gtag('consent','update',{'analytics_storage':'denied'});
+    localStorage.setItem('vetdict-analytics-consent','denied');
+  } else {
+    localStorage.setItem('vetdict-analytics-consent','dismissed');
+  }
+  document.getElementById('cookieConsent').style.display='none';
+  document.getElementById('cookieReopenBtn').style.display='block';
+}
+function reopenCookieConsent(){
+  document.getElementById('cookieConsent').style.display='flex';
+  document.getElementById('cookieReopenBtn').style.display='none';
+}
+function _initCookieConsent(){
+  const state=localStorage.getItem('vetdict-analytics-consent');
+  if(!state){
+    /* First visit: show banner */
+    document.getElementById('cookieConsent').style.display='flex';
+  } else {
+    /* Already responded: show small reopen button */
+    document.getElementById('cookieReopenBtn').style.display='block';
+    /* Sync gtag if already granted */
+    if(state==='granted'&&typeof gtag==='function')gtag('consent','update',{'analytics_storage':'granted'});
+  }
+}
+document.getElementById('cookieAcceptBtn').addEventListener('click',()=>_setConsent('granted'));
+document.getElementById('cookieRejectBtn').addEventListener('click',()=>_setConsent('denied'));
+document.getElementById('cookieDismissBtn').addEventListener('click',()=>_setConsent('dismissed'));
+document.getElementById('cookieReopenBtn').addEventListener('click',reopenCookieConsent);
+_initCookieConsent();
 </script>
 <script defer src="/static/js/app.js?v={{ g.asset_ver }}" nonce="{{ g.csp_nonce }}"></script>
 <script nonce="{{ g.csp_nonce }}">if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js?v={{ g.asset_ver }}').catch(()=>{});}</script>

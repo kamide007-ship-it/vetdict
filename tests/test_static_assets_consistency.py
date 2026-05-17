@@ -25,13 +25,14 @@ def _read(rel: str) -> str:
 def test_manifest_is_valid_json_and_has_shortcuts():
     data = json.loads(_read("static/manifest.json"))
     assert data["name"]
-    assert data["start_url"] == "/"
+    # start_url may include utm_source query for analytics tracking
+    assert data["start_url"].startswith("/")
     shortcuts = data.get("shortcuts") or []
     # Must list every primary tab so PWA users can deep-link from the
-    # home-screen shortcut menu.
-    urls = {s["url"] for s in shortcuts}
-    for required in ("/#checker", "/#database", "/#chat", "/#drugs", "/#anesthesia"):
-        assert required in urls, f"PWA shortcut missing for {required}"
+    # home-screen shortcut menu. Tracking params (utm_source) are allowed.
+    fragments = {s["url"].split("#")[-1] for s in shortcuts if "#" in s["url"]}
+    for required in ("checker", "database", "chat", "drugs", "anesthesia"):
+        assert required in fragments, f"PWA shortcut missing for #{required}"
 
 
 def test_manifest_has_no_stale_counts():

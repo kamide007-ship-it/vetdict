@@ -1,13 +1,17 @@
 {
   "name": "VetDict - Clinical Decision Support for Veterinarians",
   "short_name": "VetDict",
-  "description": "獣医師・獣医学生のための臨床意思決定支援ツール。7,000+疾患・250+薬品・21動物種・188麻酔プロトコル対応。",
-  "start_url": "/",
+  "description": "獣医師・獣医学生のための臨床意思決定支援ツール。7,000+疾患・610+薬品・21動物種・188麻酔プロトコル対応。",
+  "start_url": "/?utm_source=pwa",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
   "background_color": "#1a3068",
   "theme_color": "#1a3068",
   "lang": "ja",
   "dir": "ltr",
+  "id": "vetdict-app",
   "icons": [
     {
       "src": "/static/favicon.svg",
@@ -22,6 +26,12 @@
       "purpose": "any"
     },
     {
+      "src": "/static/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
       "src": "/static/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png",
@@ -31,34 +41,65 @@
   "categories": ["medical", "education", "health"],
   "shortcuts": [
     {
-      "name": "鑑別診断",
+      "name": "鑑別診断 / Differential",
       "short_name": "鑑別Dx",
-      "url": "/#checker",
-      "description": "臨床症状から鑑別疾患リストを生成"
+      "url": "/?utm_source=pwa_shortcut#checker",
+      "description": "臨床症状から鑑別疾患リストを生成 / Generate differential from symptoms",
+      "icons": [{"src": "/static/icon-192.png", "sizes": "192x192"}]
     },
     {
-      "name": "疾患データベース",
+      "name": "疾患データベース / Diseases",
       "short_name": "疾患DB",
-      "url": "/#database",
-      "description": "7,000+疾患を検索・閲覧"
+      "url": "/?utm_source=pwa_shortcut#database",
+      "description": "7,000+疾患を検索・閲覧 / Search 7,000+ diseases",
+      "icons": [{"src": "/static/icon-192.png", "sizes": "192x192"}]
     },
     {
-      "name": "臨床相談チャット",
-      "short_name": "臨床相談",
-      "url": "/#chat",
-      "description": "臨床症状から鑑別疾患を相談"
+      "name": "臨床相談チャット / Chat",
+      "short_name": "相談",
+      "url": "/?utm_source=pwa_shortcut#chat",
+      "description": "臨床症状から鑑別疾患を相談 / Discuss symptoms with AI",
+      "icons": [{"src": "/static/icon-192.png", "sizes": "192x192"}]
     },
     {
-      "name": "薬品辞書",
+      "name": "薬品辞書 / Drug Dictionary",
       "short_name": "薬品",
-      "url": "/#drugs",
-      "description": "250+薬品の種別投与量を検索"
+      "url": "/?utm_source=pwa_shortcut#drugs",
+      "description": "610+薬品の種別投与量を検索 / Search 610+ drugs",
+      "icons": [{"src": "/static/icon-192.png", "sizes": "192x192"}]
     },
     {
-      "name": "鎮静・麻酔プロトコル",
+      "name": "鎮静・麻酔プロトコル / Anesthesia",
       "short_name": "麻酔",
-      "url": "/#anesthesia",
-      "description": "21動物種・188プロトコル"
+      "url": "/?utm_source=pwa_shortcut#anesthesia",
+      "description": "21動物種・188プロトコル / 21 species, 188 protocols",
+      "icons": [{"src": "/static/icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "緊急対応プロトコル / Emergency",
+      "short_name": "緊急",
+      "url": "/?utm_source=pwa_shortcut#emergency",
+      "description": "25緊急シナリオの即時参照 / 25 emergency scenarios",
+      "icons": [{"src": "/static/icon-192.png", "sizes": "192x192"}]
+    }
+  ],
+  "share_target": {
+    "action": "/?utm_source=pwa_share",
+    "method": "GET",
+    "params": {
+      "title": "shared_title",
+      "text": "shared_text",
+      "url": "shared_url"
+    }
+  },
+  "prefer_related_applications": false,
+  "screenshots": [
+    {
+      "src": "/static/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "VetDict ホーム画面 — 21動物種対応の臨床意思決定支援"
     }
   ]
 }
