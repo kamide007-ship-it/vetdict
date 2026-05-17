@@ -935,6 +935,18 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   a[href^="http"]:after{content:" (" attr(href) ")";font-size:8pt;color:#666}
   .disease-page,.index-page,.hub-page{padding:10pt}
   h1,h2,h3,h4{break-after:avoid}
+  /* Auto-expanded details for printing (set by print button JS) */
+  .disease-detail.print-expanded{display:block!important;max-height:none!important;opacity:1!important;padding:8pt;border-top:1px solid #aaa}
+  /* Treatment drug chips: keep readable, no hover effects */
+  .treatment-drugs-section,.drug-diseases-section{background:#f7f7f7!important;border-left:2px solid #555;padding:6pt 8pt;margin-top:6pt}
+  .treatment-drug-chip,.drug-disease-chip{background:#fff!important;border:1px solid #888;color:#000!important;padding:1pt 6pt;font-size:9pt;text-decoration:none}
+  .treatment-drug-chip:hover,.drug-disease-chip:hover{transform:none!important}
+  /* Drug-disease section heading in print */
+  .treatment-drugs-heading,.drug-diseases-heading{font-weight:700;color:#000!important;font-size:9pt;margin-bottom:3pt}
+  /* Force show treatment drug section even when not hydrated */
+  [data-treatment-drugs="1"]{display:block!important}
+  /* Page footer with date */
+  @page{margin:14mm 12mm;size:A4}
 }
 
 /* --- Landing Chat --- */
