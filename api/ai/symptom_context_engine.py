@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 class SymptomRole(Enum):
     """Role of symptom in disease pathophysiology."""
+
     PRIMARY_SYMPTOM = "primary_symptom"
     SECONDARY_SYMPTOM = "secondary_symptom"
     COMPLICATION = "complication"
@@ -82,10 +83,7 @@ class AmbiguityReport:
             "symptom_name": self.symptom_name,
             "ambiguity_score": round(self.ambiguity_score, 3),
             "entropy_score": round(self.entropy_score, 3),
-            "contexts": {
-                disease: ctx.to_dict()
-                for disease, ctx in self.contexts.items()
-            },
+            "contexts": {disease: ctx.to_dict() for disease, ctx in self.contexts.items()},
             "disease_count_with_symptom": self.disease_count_with_symptom,
             "predominant_disease": self.predominant_disease,
             "competing_diseases": self.competing_diseases,
@@ -136,9 +134,12 @@ class SymptomContextualizer:
         for disease_name in disease_names:
             # Find disease in database
             disease = next(
-                (d for d in disease_database
-                 if d.get("name", "") == disease_name or d.get("name_ja", "") == disease_name),
-                None
+                (
+                    d
+                    for d in disease_database
+                    if d.get("name", "") == disease_name or d.get("name_ja", "") == disease_name
+                ),
+                None,
             )
 
             if not disease:
@@ -175,41 +176,27 @@ class SymptomContextualizer:
             disease_symptoms = [disease_symptoms]
 
         # Check if symptom is present
-        symptom_present = any(
-            symptom_id in sym or symptom_name.lower() in str(sym).lower()
-            for sym in disease_symptoms
-        )
+        symptom_present = any(symptom_id in sym or symptom_name.lower() in str(sym).lower() for sym in disease_symptoms)
 
         if not symptom_present:
             return None
 
         # Get pathophysiology
-        pathophysiology = disease.get(
-            "pathophysiology",
-            disease.get("description", "")
-        )
+        pathophysiology = disease.get("pathophysiology", disease.get("description", ""))
 
         # Estimate specificity and sensitivity
-        specificity = SymptomContextualizer._estimate_specificity(
-            symptom_id, disease, disease_symptoms
-        )
-        sensitivity = SymptomContextualizer._estimate_sensitivity(
-            symptom_id, disease, disease_symptoms
-        )
+        specificity = SymptomContextualizer._estimate_specificity(symptom_id, disease, disease_symptoms)
+        sensitivity = SymptomContextualizer._estimate_sensitivity(symptom_id, disease, disease_symptoms)
 
         # Calculate LR+ and LR-
         lr_positive = sensitivity / (1 - specificity) if specificity < 1 else 100.0
         lr_negative = (1 - sensitivity) / specificity if specificity > 0 else 0.01
 
         # Determine role
-        role = SymptomContextualizer._classify_symptom_role(
-            specificity, sensitivity, lr_positive, lr_negative
-        )
+        role = SymptomContextualizer._classify_symptom_role(specificity, sensitivity, lr_positive, lr_negative)
 
         # Extract evidence
-        evidence = SymptomContextualizer._extract_evidence(
-            disease, symptom_name
-        )
+        evidence = SymptomContextualizer._extract_evidence(disease, symptom_name)
 
         context = SymptomContext(
             symptom_id=symptom_id,
@@ -221,9 +208,7 @@ class SymptomContextualizer:
             sensitivity_score=sensitivity,
             likelihood_ratio_positive=lr_positive,
             likelihood_ratio_negative=lr_negative,
-            confidence_weight=SymptomContextualizer._calculate_weight(
-                specificity, sensitivity, role
-            ),
+            confidence_weight=SymptomContextualizer._calculate_weight(specificity, sensitivity, role),
             supporting_evidence=evidence,
             related_findings=disease.get("common_findings", []),
         )
@@ -243,9 +228,8 @@ class SymptomContextualizer:
         """
         # Base specificity: position in symptom list (earlier = more specific)
         symptom_position = next(
-            (i for i, s in enumerate(disease_symptoms)
-             if symptom_id in str(s) or symptom_id in str(s).lower()),
-            len(disease_symptoms)
+            (i for i, s in enumerate(disease_symptoms) if symptom_id in str(s) or symptom_id in str(s).lower()),
+            len(disease_symptoms),
         )
 
         position_specificity = 1.0 - (symptom_position / max(len(disease_symptoms), 1))
@@ -269,9 +253,7 @@ class SymptomContextualizer:
         Based on its presence in symptom list and disease severity.
         """
         # Presence = sensitivity (symptom is present in disease record)
-        presence = 1.0 if any(
-            symptom_id in str(s) for s in disease_symptoms
-        ) else 0.0
+        presence = 1.0 if any(symptom_id in str(s) for s in disease_symptoms) else 0.0
 
         # Severity factor (severe diseases have more variable symptoms)
         severity = disease.get("severity_score", 0.5)
@@ -377,10 +359,7 @@ class AmbiguitySolver:
         reports = []
 
         # Get top disease names from candidates
-        top_diseases = [
-            d.get("name", d.get("name_ja", ""))
-            for d in disease_candidates[:5]
-        ]
+        top_diseases = [d.get("name", d.get("name_ja", "")) for d in disease_candidates[:5]]
 
         for symptom_id in symptom_ids:
             symptom_name = symptom_names.get(symptom_id) if symptom_names else symptom_id
@@ -426,21 +405,21 @@ class AmbiguitySolver:
         recommendation = cls._get_recommendation(ambiguity_score)
 
         # Find predominant disease
-        predominant = max(
-            contexts.items(),
-            key=lambda x: (x[1].specificity_score, x[1].sensitivity_score)
-        )[0] if contexts else None
+        predominant = (
+            max(contexts.items(), key=lambda x: (x[1].specificity_score, x[1].sensitivity_score))[0]
+            if contexts
+            else None
+        )
 
         # Get competing diseases
-        competing = [
-            disease for disease in contexts
-            if disease != predominant
-        ]
+        competing = [disease for disease in contexts if disease != predominant]
 
         # Generate clarification questions
-        clarification_qs = cls._generate_clarification_questions(
-            symptom_name, contexts
-        ) if recommendation == "ask_clarification" else []
+        clarification_qs = (
+            cls._generate_clarification_questions(symptom_name, contexts)
+            if recommendation == "ask_clarification"
+            else []
+        )
 
         report = AmbiguityReport(
             symptom_id=symptom_id,
@@ -453,20 +432,14 @@ class AmbiguitySolver:
             competing_diseases=competing,
             recommendation=recommendation,
             clarification_questions=clarification_qs,
-            confidence_adjustment_factor=cls._calculate_adjustment_factor(
-                ambiguity_score, recommendation
-            ),
-            explanation_en=cls._generate_explanation(
-                symptom_name, ambiguity_score, predominant, competing
-            ),
+            confidence_adjustment_factor=cls._calculate_adjustment_factor(ambiguity_score, recommendation),
+            explanation_en=cls._generate_explanation(symptom_name, ambiguity_score, predominant, competing),
         )
 
         return report
 
     @staticmethod
-    def _calculate_ambiguity_score(
-        contexts: Dict[str, SymptomContext]
-    ) -> float:
+    def _calculate_ambiguity_score(contexts: Dict[str, SymptomContext]) -> float:
         """
         Calculate symptom ambiguity using Shannon entropy-inspired metric.
 
@@ -486,10 +459,7 @@ class AmbiguitySolver:
         probs = [s / total for s in specificities]
 
         # Shannon entropy: H = -sum(p * log2(p))
-        entropy = -sum(
-            p * math.log2(p) if p > 0 else 0
-            for p in probs
-        )
+        entropy = -sum(p * math.log2(p) if p > 0 else 0 for p in probs)
 
         # Normalize by max entropy (uniform distribution)
         max_entropy = math.log2(len(contexts)) if len(contexts) > 1 else 1.0
@@ -498,9 +468,7 @@ class AmbiguitySolver:
         return min(1.0, normalized_entropy)
 
     @staticmethod
-    def _calculate_entropy(
-        contexts: Dict[str, SymptomContext]
-    ) -> float:
+    def _calculate_entropy(contexts: Dict[str, SymptomContext]) -> float:
         """Calculate raw Shannon entropy for diagnostic information content."""
         if not contexts:
             return 0.0
@@ -512,10 +480,7 @@ class AmbiguitySolver:
             return 0.0
 
         probs = [s / total for s in specificities]
-        entropy = -sum(
-            p * math.log2(p) if p > 0 else 0
-            for p in probs
-        )
+        entropy = -sum(p * math.log2(p) if p > 0 else 0 for p in probs)
 
         return entropy
 
@@ -560,18 +525,12 @@ class AmbiguitySolver:
             questions.append(f"Has {symptom_name.lower()} worsened, improved, or stayed the same?")
 
         # Disease-specific questions for top contexts
-        sorted_contexts = sorted(
-            contexts.items(),
-            key=lambda x: x[1].specificity_score,
-            reverse=True
-        )
+        sorted_contexts = sorted(contexts.items(), key=lambda x: x[1].specificity_score, reverse=True)
 
         for _disease, context in sorted_contexts[:2]:
             if context.related_findings:
                 finding = context.related_findings[0]
-                questions.append(
-                    f"Is there {finding.lower()} accompanying the {symptom_name.lower()}?"
-                )
+                questions.append(f"Is there {finding.lower()} accompanying the {symptom_name.lower()}?")
 
         return questions[:3]  # Return top 3 questions
 
@@ -584,9 +543,7 @@ class AmbiguitySolver:
     ) -> str:
         """Generate human-readable explanation of ambiguity."""
         if ambiguity_score >= SymptomContextualizer.HIGH_AMBIGUITY_THRESHOLD:
-            explanation = (
-                f"'{symptom_name}' is ambiguous across multiple diseases. "
-            )
+            explanation = f"'{symptom_name}' is ambiguous across multiple diseases. "
             if predominant:
                 explanation += f"Most likely associated with {predominant}, "
             if competing:
@@ -594,9 +551,7 @@ class AmbiguitySolver:
             explanation += "Clarification questions will help narrow down the diagnosis."
             return explanation
         elif ambiguity_score >= SymptomContextualizer.MODERATE_AMBIGUITY_THRESHOLD:
-            explanation = (
-                f"'{symptom_name}' has moderate ambiguity. "
-            )
+            explanation = f"'{symptom_name}' has moderate ambiguity. "
             if predominant:
                 explanation += f"Most specific to {predominant}."
             return explanation

@@ -185,9 +185,7 @@ class DiagnosticQuestionnaireEngine:
         # Try to use ML ranking if available
         if use_ml:
             try:
-                return cls._generate_questions_ml(
-                    suspected_diseases, symptoms, limit, previously_asked or set()
-                )
+                return cls._generate_questions_ml(suspected_diseases, symptoms, limit, previously_asked or set())
             except ImportError:
                 logger.debug("ML ranking unavailable, falling back to coverage-based ranking")
             except Exception as e:
@@ -230,12 +228,14 @@ class DiagnosticQuestionnaireEngine:
                 coverage_score = len(covered_diseases) / len(top_diseases)
                 priority = int(coverage_score * 100)  # Higher score = higher priority
 
-                candidate_questions.append({
-                    "id": q_id,
-                    "priority": priority,
-                    "coverage": len(covered_diseases),
-                    "q_data": q_data,
-                })
+                candidate_questions.append(
+                    {
+                        "id": q_id,
+                        "priority": priority,
+                        "coverage": len(covered_diseases),
+                        "q_data": q_data,
+                    }
+                )
 
         # Sort by priority (descending) and return top N
         candidate_questions.sort(key=lambda x: x["priority"], reverse=True)
@@ -296,12 +296,14 @@ class DiagnosticQuestionnaireEngine:
                 for value in answer_values:
                     answer_types[value] = q_data.get("disease_targets", [])
 
-            questions_with_metadata.append({
-                "id": q_id,
-                "type": q_data.get("question_type", "binary"),
-                "targets": q_data.get("disease_targets", []),
-                "answer_types": answer_types,
-            })
+            questions_with_metadata.append(
+                {
+                    "id": q_id,
+                    "type": q_data.get("question_type", "binary"),
+                    "targets": q_data.get("disease_targets", []),
+                    "answer_types": answer_types,
+                }
+            )
 
         # Rank questions using ML
         ranked_questions = AdaptiveQuestionRanker.rank_questions(
@@ -331,8 +333,8 @@ class DiagnosticQuestionnaireEngine:
                 priority=int(ranked_q.composite_score * 100),
                 options=q_data["options"],
                 disease_targets=q_data["disease_targets"],
-                reasoning_ja=f"情報利得スコア: {ig_score:.3f}。この質問は約{int(coverage*100)}%の候補疾患を対象とします。",
-                reasoning_en=f"Information gain: {ig_score:.3f}. Targets ~{int(coverage*100)}% of candidates.",
+                reasoning_ja=f"情報利得スコア: {ig_score:.3f}。この質問は約{int(coverage * 100)}%の候補疾患を対象とします。",
+                reasoning_en=f"Information gain: {ig_score:.3f}. Targets ~{int(coverage * 100)}% of candidates.",
             )
             questions.append(question)
 
@@ -419,17 +421,19 @@ def build_next_question_response(
     # Convert to serializable format
     serialized_questions = []
     for q in questions:
-        serialized_questions.append({
-            "id": q.id,
-            "question_ja": q.question_ja,
-            "question_en": q.question_en,
-            "type": q.question_type,
-            "options": q.options,
-            "priority": q.priority,
-            "targets": q.disease_targets,
-            "reasoning_ja": q.reasoning_ja,
-            "reasoning_en": q.reasoning_en,
-        })
+        serialized_questions.append(
+            {
+                "id": q.id,
+                "question_ja": q.question_ja,
+                "question_en": q.question_en,
+                "type": q.question_type,
+                "options": q.options,
+                "priority": q.priority,
+                "targets": q.disease_targets,
+                "reasoning_ja": q.reasoning_ja,
+                "reasoning_en": q.reasoning_en,
+            }
+        )
 
     remaining_candidates = len(suspected_diseases)
     estimated_next_questions = max(0, (remaining_candidates - 1) // 2)

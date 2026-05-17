@@ -89,6 +89,7 @@ class SymptomExtractor:
 
         try:
             from reco2.llm_adapter import ClaudeAdapter
+
             self._llm_adapter = ClaudeAdapter(api_key=self.api_key)
             self._llm_loaded = True
             return True
@@ -198,9 +199,7 @@ class SymptomExtractor:
             self.confidence_threshold,
         ):
             if self.fallback_enabled:
-                logger.debug(
-                    f"Falling back to manual extraction: {result.get('_reason')}"
-                )
+                logger.debug(f"Falling back to manual extraction: {result.get('_reason')}")
                 manual_result = self._manual_extraction(text)
                 manual_result["fallback_used"] = True
                 # Don't cache fallback results
@@ -336,9 +335,7 @@ class SymptomExtractor:
         # Phase 2a: Symptom interactions
         if self.enable_interactions and self._interaction_matrix:
             symptoms = result.get("symptoms", [])
-            interactions = self._interaction_matrix.find_interactions(
-                symptoms, weight_threshold=0.1
-            )
+            interactions = self._interaction_matrix.find_interactions(symptoms, weight_threshold=0.1)
 
             if interactions:
                 # Apply confidence boost from strongest interaction

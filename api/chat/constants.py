@@ -1,9 +1,25 @@
 """Shared constants for the diagnostic chat system."""
 
 _GENERIC_SPECIES = [
-    "dog", "cat", "rabbit", "hamster", "chinchilla", "guinea_pig", "ferret",
-    "hedgehog", "sugar_glider", "degu", "bird", "parakeet", "parrot",
-    "reptile", "tortoise", "snake", "lizard", "amphibian", "fish",
+    "dog",
+    "cat",
+    "rabbit",
+    "hamster",
+    "chinchilla",
+    "guinea_pig",
+    "ferret",
+    "hedgehog",
+    "sugar_glider",
+    "degu",
+    "bird",
+    "parakeet",
+    "parrot",
+    "reptile",
+    "tortoise",
+    "snake",
+    "lizard",
+    "amphibian",
+    "fish",
     "exotic_other",
 ]
 

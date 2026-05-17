@@ -315,9 +315,7 @@ class DiseaseInteractionMatrix:
 
         for (d_a, d_b), relation in cls.COMORBIDITY_DATABASE.items():
             if d_a == primary_disease:
-                prob = cls.get_comorbidity_probability(
-                    d_a, d_b, age_years, severity, breed
-                )
+                prob = cls.get_comorbidity_probability(d_a, d_b, age_years, severity, breed)
                 if prob >= threshold:
                     candidates.append((d_b, prob, relation.mechanism))
 
@@ -359,9 +357,7 @@ class DiseaseInteractionMatrix:
             "blood_loss": "寄生虫感染による失血性貧血が発生します。",
         }
 
-        mechanism_desc = mechanism_descriptions.get(
-            relation.mechanism, relation.mechanism
-        )
+        mechanism_desc = mechanism_descriptions.get(relation.mechanism, relation.mechanism)
         return f"{disease_a}と{disease_b}は共存することがあります。理由：{mechanism_desc}"
 
 

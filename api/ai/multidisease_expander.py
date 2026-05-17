@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 class InteractionType(Enum):
     """Types of disease interactions."""
+
     CAUSAL = "causal"  # Disease A causes Disease B
     CASCADE = "cascade"  # Disease A → Disease B → Disease C
     SYNERGISTIC = "synergistic"  # Diseases enhance each other's severity
@@ -27,6 +28,7 @@ class InteractionType(Enum):
 @dataclass
 class DiseaseInteraction:
     """Represents interaction between two diseases."""
+
     disease_a: str
     disease_b: str
     interaction_type: InteractionType
@@ -52,6 +54,7 @@ class DiseaseInteraction:
 @dataclass
 class CombinationPattern:
     """Pattern of 3+ diseases that commonly coexist."""
+
     diseases: Tuple[str, ...]  # Sorted tuple of disease names
     interaction_types: Dict[Tuple[str, str], InteractionType]
     combined_probability: float  # Probability all 3+ coexist
@@ -70,10 +73,7 @@ class CombinationPattern:
             "mechanism_description": self.mechanism_description,
             "clinical_significance": self.clinical_significance,
             "supporting_cases": self.supporting_cases,
-            "interaction_types": {
-                f"{d1}-{d2}": itype.value
-                for (d1, d2), itype in self.interaction_types.items()
-            }
+            "interaction_types": {f"{d1}-{d2}": itype.value for (d1, d2), itype in self.interaction_types.items()},
         }
 
 
@@ -142,8 +142,7 @@ class MultiDiseaseExpander:
             self.disease_clusters[f"cluster_{cluster_id}"] = cluster
             cluster_id += 1
 
-    def expand_combinations(self, diseases: List[str],
-                           min_combined_prob: float = 0.15) -> List[CombinationPattern]:
+    def expand_combinations(self, diseases: List[str], min_combined_prob: float = 0.15) -> List[CombinationPattern]:
         """Expand 2-disease pair to 3+ combinations.
 
         Args:
@@ -234,17 +233,14 @@ class MultiDiseaseExpander:
             cascade_order=cascade_order,
             complexity_score=complexity,
             mechanism_description=mechanism,
-            clinical_significance=self._assess_clinical_significance(
-                diseases, combined_prob, complexity
-            )
+            clinical_significance=self._assess_clinical_significance(diseases, combined_prob, complexity),
         )
 
         return pattern
 
-    def _calculate_complexity(self,
-                             diseases: Tuple[str, ...],
-                             interactions: Dict[Tuple[str, str], InteractionType],
-                             combined_prob: float) -> float:
+    def _calculate_complexity(
+        self, diseases: Tuple[str, ...], interactions: Dict[Tuple[str, str], InteractionType], combined_prob: float
+    ) -> float:
         """Calculate overall complexity score for disease combination.
 
         Complexity = f(
@@ -274,7 +270,7 @@ class MultiDiseaseExpander:
         num_interactions = len(interactions)
         if num_interactions > 0:
             interaction_points /= num_interactions
-            interaction_points *= (num_interactions * 5)  # Scale back up
+            interaction_points *= num_interactions * 5  # Scale back up
 
         # Factor in combined probability (rarer combinations are more complex)
         probability_factor = (1 - combined_prob) * 10
@@ -282,20 +278,16 @@ class MultiDiseaseExpander:
         total = base_complexity + interaction_points + probability_factor
         return min(100, total)  # Cap at 100
 
-    def _determine_cascade_order(self,
-                                diseases: Tuple[str, ...],
-                                interactions: Dict[Tuple[str, str], InteractionType]
-                                ) -> Optional[List[str]]:
+    def _determine_cascade_order(
+        self, diseases: Tuple[str, ...], interactions: Dict[Tuple[str, str], InteractionType]
+    ) -> Optional[List[str]]:
         """Determine temporal progression order if cascade pattern exists.
 
         Returns:
             List of diseases in cascade order, or None if not a cascade
         """
         # Check if this is primarily a cascade pattern
-        cascade_count = sum(
-            1 for itype in interactions.values()
-            if itype == InteractionType.CASCADE
-        )
+        cascade_count = sum(1 for itype in interactions.values() if itype == InteractionType.CASCADE)
 
         if cascade_count < len(diseases) - 1:
             return None  # Not enough cascade interactions
@@ -308,20 +300,11 @@ class MultiDiseaseExpander:
         while remaining:
             if not ordered:
                 # Start with most central disease (most interactions)
-                disease = max(
-                    remaining,
-                    key=lambda d: sum(
-                        1 for (d1, d2) in interactions
-                        if d in (d1, d2)
-                    )
-                )
+                disease = max(remaining, key=lambda d: sum(1 for (d1, d2) in interactions if d in (d1, d2)))
             else:
                 # Find next disease most connected to last
                 last = ordered[-1]
-                candidates = [
-                    d for d in remaining
-                    if tuple(sorted([last, d])) in interactions
-                ]
+                candidates = [d for d in remaining if tuple(sorted([last, d])) in interactions]
                 disease = candidates[0] if candidates else remaining.pop()
 
             ordered.append(disease)
@@ -329,28 +312,18 @@ class MultiDiseaseExpander:
 
         return ordered if len(ordered) > 1 else None
 
-    def _generate_mechanism_description(self,
-                                       diseases: Tuple[str, ...],
-                                       interactions: Dict[Tuple[str, str], InteractionType]
-                                       ) -> str:
+    def _generate_mechanism_description(
+        self, diseases: Tuple[str, ...], interactions: Dict[Tuple[str, str], InteractionType]
+    ) -> str:
         """Generate human-readable description of interaction mechanism."""
         if len(diseases) == 2:
             interaction_type = list(interactions.values())[0]
             return f"{interaction_type.value} interaction"
 
         # For 3+ diseases
-        cascade_interactions = sum(
-            1 for itype in interactions.values()
-            if itype == InteractionType.CASCADE
-        )
-        synergistic = sum(
-            1 for itype in interactions.values()
-            if itype == InteractionType.SYNERGISTIC
-        )
-        shared_pathway = sum(
-            1 for itype in interactions.values()
-            if itype == InteractionType.SHARED_PATHWAY
-        )
+        cascade_interactions = sum(1 for itype in interactions.values() if itype == InteractionType.CASCADE)
+        synergistic = sum(1 for itype in interactions.values() if itype == InteractionType.SYNERGISTIC)
+        shared_pathway = sum(1 for itype in interactions.values() if itype == InteractionType.SHARED_PATHWAY)
 
         parts = []
         if cascade_interactions >= len(diseases) - 1:
@@ -365,10 +338,7 @@ class MultiDiseaseExpander:
 
         return "multiple disease interactions"
 
-    def _assess_clinical_significance(self,
-                                     diseases: Tuple[str, ...],
-                                     combined_prob: float,
-                                     complexity: float) -> str:
+    def _assess_clinical_significance(self, diseases: Tuple[str, ...], combined_prob: float, complexity: float) -> str:
         """Assess clinical significance of combination."""
         if combined_prob >= 0.60 and complexity >= 70:
             return "High significance - monitor all concurrent disease progression"
@@ -403,9 +373,7 @@ class MultiDiseaseExpander:
             List of top CombinationPattern objects
         """
         sorted_patterns = sorted(
-            self.combination_patterns.values(),
-            key=lambda p: (p.combined_probability, p.complexity_score),
-            reverse=True
+            self.combination_patterns.values(), key=lambda p: (p.combined_probability, p.complexity_score), reverse=True
         )
         return sorted_patterns[:max_combinations]
 
@@ -416,21 +384,20 @@ class MultiDiseaseExpander:
             Dict with network statistics and insights
         """
         return {
-            "total_diseases": len(set(
-                d for combo in self.combination_patterns
-                for d in combo
-            )),
+            "total_diseases": len(set(d for combo in self.combination_patterns for d in combo)),
             "total_combinations": len(self.combination_patterns),
             "clusters": len(self.disease_clusters),
             "avg_combination_probability": round(
-                sum(p.combined_probability for p in self.combination_patterns.values())
-                / len(self.combination_patterns) if self.combination_patterns else 0,
-                3
+                sum(p.combined_probability for p in self.combination_patterns.values()) / len(self.combination_patterns)
+                if self.combination_patterns
+                else 0,
+                3,
             ),
             "avg_complexity": round(
-                sum(p.complexity_score for p in self.combination_patterns.values())
-                / len(self.combination_patterns) if self.combination_patterns else 0,
-                2
+                sum(p.complexity_score for p in self.combination_patterns.values()) / len(self.combination_patterns)
+                if self.combination_patterns
+                else 0,
+                2,
             ),
         }
 

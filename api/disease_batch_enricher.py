@@ -53,9 +53,7 @@ Generate JSON with these fields (use empty string "" if unable to generate):
 
 Return ONLY valid JSON. Be concise (2-3 sentences each)."""
 
-    def create_batch_requests(
-        self, diseases: List[dict], batch_size: int = 100000
-    ) -> List[List[Request]]:
+    def create_batch_requests(self, diseases: List[dict], batch_size: int = 100000) -> List[List[Request]]:
         """Create batch requests for disease enrichment."""
         batches = []
         current_batch = []
@@ -126,9 +124,7 @@ Return ONLY valid JSON. Be concise (2-3 sentences each)."""
 
             time.sleep(poll_interval)
 
-    def process_batch_results(
-        self, batch_id: str, diseases: List[dict]
-    ) -> List[dict]:
+    def process_batch_results(self, batch_id: str, diseases: List[dict]) -> List[dict]:
         """Process batch results and apply to disease records."""
         {d.get("name"): d for d in diseases}
         updated_count = 0
@@ -142,9 +138,7 @@ Return ONLY valid JSON. Be concise (2-3 sentences each)."""
 
             try:
                 # Extract JSON from response
-                response_text = next(
-                    (b.text for b in message.content if b.type == "text"), ""
-                )
+                response_text = next((b.text for b in message.content if b.type == "text"), "")
                 json_start = response_text.find("{")
                 json_end = response_text.rfind("}") + 1
 
@@ -167,9 +161,7 @@ Return ONLY valid JSON. Be concise (2-3 sentences each)."""
         logger.info("Updated %d diseases from batch %s", updated_count, batch_id)
         return diseases
 
-    def enrich_diseases_batch(
-        self, diseases: List[dict], wait: bool = True
-    ) -> dict:
+    def enrich_diseases_batch(self, diseases: List[dict], wait: bool = True) -> dict:
         """Enrich diseases using batch API."""
         batches = self.create_batch_requests(diseases)
         logger.info("Created %d batch(es)", len(batches))

@@ -53,7 +53,6 @@ class Evidence:
 # Organized by species and disease category for clarity
 DISEASE_EVIDENCE: Dict[str, Evidence] = {
     # ==================== DOG DISEASES ====================
-
     # Gastrointestinal Diseases
     "Canine Parvovirus": Evidence(
         level=1,
@@ -158,7 +157,6 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Common in young puppies and unvaccinated dogs. Fecal examination definitive. Age is strong predictor.",
     ),
-
     # Respiratory Diseases
     "Tracheal Collapse": Evidence(
         level=2,
@@ -205,7 +203,6 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Chronic dry/wet cough, exercise intolerance, syncope. Echocardiography definitive. Prevalence increases with age.",
     ),
-
     # Urinary Diseases
     "Bladder Stones (Uroliths)": Evidence(
         level=2,
@@ -247,7 +244,6 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Dark/red urine, lethargy, icterus. CBC with differential critical. Coombs test often positive.",
     ),
-
     # Reproductive Diseases
     "Pyometra": Evidence(
         level=2,
@@ -275,7 +271,6 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Males only. Dysuria, hematuria, constipation, back pain. Digital rectal exam and ultrasound helpful.",
     ),
-
     # Systemic/Infectious Diseases
     "Fever (Infectious)": Evidence(
         level=2,
@@ -316,7 +311,6 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Geographic variation. Fever, thrombocytopenia, lethargy. Serology/PCR diagnostic.",
     ),
-
     # Metabolic/Endocrine
     "Diabetes Mellitus": Evidence(
         level=1,
@@ -357,7 +351,6 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Rare in dogs. Weight loss, increased appetite, hyperactivity. TSH and free T4 diagnostic.",
     ),
-
     # Orthopedic Diseases
     "Hip Dysplasia": Evidence(
         level=1,
@@ -385,9 +378,7 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Age-related. Stiffness, reluctance to exercise, lameness. Radiographs show degenerative changes.",
     ),
-
     # ==================== CAT DISEASES ====================
-
     # Urinary Diseases
     "Feline Lower Urinary Tract Disease (FLUTD)": Evidence(
         level=2,
@@ -429,7 +420,6 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Males > females. Struvite and calcium oxalate are common types. Ultrasound/radiographs diagnostic.",
     ),
-
     # Gastrointestinal
     "Feline Panleukopenia": Evidence(
         level=1,
@@ -459,7 +449,6 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Fatal disease. Wet form: ascites, fever; dry form: fever, lethargy. Diagnosis often presumptive.",
     ),
-
     # Reproductive
     "Feline Pyometra": Evidence(
         level=2,
@@ -474,7 +463,6 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Unspayed females only. Purulent vaginal discharge, fever, polyuria. Ultrasound definitive.",
     ),
-
     # Respiratory/Cardiac
     "Feline Asthma": Evidence(
         level=2,
@@ -502,9 +490,7 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Most common feline heart disease. Often asymptomatic or presents with thromboembolism. Echocardiography diagnostic.",
     ),
-
     # ==================== RABBIT DISEASES ====================
-
     "Rabbit Myxomatosis": Evidence(
         level=2,
         confidence_multiplier=1.26,
@@ -544,9 +530,7 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Life-threatening. Loss of appetite, lethargy, small/absent feces. Often secondary to pain/stress.",
     ),
-
     # ==================== HAMSTER DISEASES ====================
-
     "Hamster Wet Tail (Proliferative Ileitis)": Evidence(
         level=2,
         confidence_multiplier=1.24,
@@ -573,9 +557,7 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Females only. Foul-smelling discharge, swollen abdomen. Often requires ovariohysterectomy.",
     ),
-
     # ==================== GUINEA PIG DISEASES ====================
-
     "Guinea Pig Scurvy (Vitamin C Deficiency)": Evidence(
         level=2,
         confidence_multiplier=1.22,
@@ -602,9 +584,7 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Bacterial or viral. Sneezing, nasal discharge, lethargy. Often triggered by stress or poor ventilation.",
     ),
-
     # ==================== FERRET DISEASES ====================
-
     "Ferret Adrenal Disease": Evidence(
         level=2,
         confidence_multiplier=1.27,
@@ -631,9 +611,7 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Hypoglycemia causing seizures, lethargy. Elevated insulin with low glucose diagnostic. Common in aged ferrets.",
     ),
-
     # ==================== BIRD DISEASES ====================
-
     "Avian Egg Binding": Evidence(
         level=2,
         confidence_multiplier=1.25,
@@ -660,9 +638,7 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Young birds most susceptible. Lethargy, anorexia, regurgitation, diarrhea. Often fatal. Vaccine available.",
     ),
-
     # ==================== REPTILE DISEASES ====================
-
     "Reptile Metabolic Bone Disease": Evidence(
         level=2,
         confidence_multiplier=1.26,
@@ -689,9 +665,7 @@ DISEASE_EVIDENCE: Dict[str, Evidence] = {
         ],
         notes="Mucus discharge, wheezing, open-mouth breathing. Often associated with improper temperature/humidity.",
     ),
-
     # ==================== HORSE DISEASES ====================
-
     "Equine Colic": Evidence(
         level=1,
         confidence_multiplier=1.45,

@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 class RiskTier(Enum):
     """Patient risk classification tiers."""
+
     LOW = "low"
     MODERATE = "moderate"
     HIGH = "high"
@@ -25,6 +26,7 @@ class RiskTier(Enum):
 @dataclass
 class RiskAssessmentFactors:
     """Input factors for risk stratification."""
+
     disease: str
     disease_severity: float  # 0-10
     patient_age: float  # years
@@ -50,6 +52,7 @@ class RiskAssessmentFactors:
 @dataclass
 class RiskStratificationResult:
     """Output of risk stratification assessment."""
+
     risk_tier: RiskTier
     risk_score: float  # 0-100
     hospitalization_risk: float  # 0-1
@@ -211,9 +214,7 @@ class RiskStratifier:
     def __init__(self):
         self.assessments: Dict[str, RiskStratificationResult] = {}
 
-    def stratify_risk(
-        self, factors: RiskAssessmentFactors
-    ) -> RiskStratificationResult:
+    def stratify_risk(self, factors: RiskAssessmentFactors) -> RiskStratificationResult:
         """
         Main entry point: calculate risk tier for a patient-disease pair.
 
@@ -235,9 +236,7 @@ class RiskStratifier:
         score += self._calculate_age_adjustment(factors.patient_age, profile)
 
         # Step 4: Comorbidity penalties
-        score += self._calculate_comorbidity_penalty(
-            factors.comorbidities, profile
-        )
+        score += self._calculate_comorbidity_penalty(factors.comorbidities, profile)
 
         # Step 5: Prognostic adjustments
         score = self._apply_prognostic_adjustments(
@@ -254,9 +253,7 @@ class RiskStratifier:
         tier = self._determine_risk_tier(score)
 
         # Calculate hospitalization risk
-        hosp_risk = self._calculate_hospitalization_risk(
-            factors, score, profile
-        )
+        hosp_risk = self._calculate_hospitalization_risk(factors, score, profile)
 
         # Identify risk factors
         risk_factors = self._identify_risk_factors(factors, profile)
@@ -301,9 +298,7 @@ class RiskStratifier:
             return 0.0  # Prime age: no adjustment
 
     @staticmethod
-    def _calculate_comorbidity_penalty(
-        comorbidities: List[str], profile: Dict
-    ) -> float:
+    def _calculate_comorbidity_penalty(comorbidities: List[str], profile: Dict) -> float:
         """Sum comorbidity-specific penalties from disease profile."""
         penalties = profile.get("comorbidity_penalties", {})
         total = 0.0
@@ -344,9 +339,7 @@ class RiskStratifier:
             return RiskTier.LOW
 
     @staticmethod
-    def _calculate_hospitalization_risk(
-        factors: RiskAssessmentFactors, risk_score: float, profile: Dict
-    ) -> float:
+    def _calculate_hospitalization_risk(factors: RiskAssessmentFactors, risk_score: float, profile: Dict) -> float:
         """Estimate probability of hospitalization being needed."""
         base = profile.get("hospitalization_base", 0.30)
 
@@ -368,9 +361,7 @@ class RiskStratifier:
         return max(0.0, min(1.0, hosp_risk))
 
     @staticmethod
-    def _identify_risk_factors(
-        factors: RiskAssessmentFactors, profile: Dict
-    ) -> List[str]:
+    def _identify_risk_factors(factors: RiskAssessmentFactors, profile: Dict) -> List[str]:
         """List primary risk factors driving the score."""
         risk_factors = []
 
@@ -385,32 +376,21 @@ class RiskStratifier:
             risk_factors.append(f"Neonatal/juvenile patient (age {factors.patient_age})")
 
         if factors.comorbidities:
-            risk_factors.append(
-                f"{len(factors.comorbidities)} comorbidities: "
-                + ", ".join(factors.comorbidities[:3])
-            )
+            risk_factors.append(f"{len(factors.comorbidities)} comorbidities: " + ", ".join(factors.comorbidities[:3]))
 
         if factors.recovery_probability < 0.5:
-            risk_factors.append(
-                f"Low recovery probability ({factors.recovery_probability:.0%})"
-            )
+            risk_factors.append(f"Low recovery probability ({factors.recovery_probability:.0%})")
 
         if factors.mortality_risk > 0.1:
-            risk_factors.append(
-                f"Elevated mortality risk ({factors.mortality_risk:.0%})"
-            )
+            risk_factors.append(f"Elevated mortality risk ({factors.mortality_risk:.0%})")
 
         if factors.complication_risk > 0.3:
-            risk_factors.append(
-                f"High complication risk ({factors.complication_risk:.0%})"
-            )
+            risk_factors.append(f"High complication risk ({factors.complication_risk:.0%})")
 
         return risk_factors
 
     @staticmethod
-    def _generate_monitoring_recommendations(
-        tier: RiskTier, factors: RiskAssessmentFactors
-    ) -> List[str]:
+    def _generate_monitoring_recommendations(tier: RiskTier, factors: RiskAssessmentFactors) -> List[str]:
         """Generate tier-appropriate monitoring plan."""
         info = TIER_INTERVENTIONS[tier]
         recs = [
@@ -430,9 +410,7 @@ class RiskStratifier:
         return recs
 
     @staticmethod
-    def _generate_escalation_triggers(
-        tier: RiskTier, profile: Dict
-    ) -> List[str]:
+    def _generate_escalation_triggers(tier: RiskTier, profile: Dict) -> List[str]:
         """Generate triggers for escalating to a higher care level."""
         triggers = []
 

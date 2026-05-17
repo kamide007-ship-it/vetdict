@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 # Import engine (would be injected in production)
 # from api.ai.unified_clinical_engine import UnifiedClinicalEngine, ClinicalCase
 
-clinical_bp = Blueprint('clinical', __name__, url_prefix='/api/clinical')
+clinical_bp = Blueprint("clinical", __name__, url_prefix="/api/clinical")
 
 
 class ClinicalAPIHandler:
@@ -52,8 +52,14 @@ class ClinicalAPIHandler:
             data = request.get_json()
 
             # Validate required fields
-            required = ["case_id", "patient_age", "patient_species", "symptoms",
-                       "disease_severity", "initial_predictions"]
+            required = [
+                "case_id",
+                "patient_age",
+                "patient_species",
+                "symptoms",
+                "disease_severity",
+                "initial_predictions",
+            ]
             if not all(k in data for k in required):
                 return {"error": "Missing required fields"}, 400
 
@@ -117,13 +123,14 @@ class ClinicalAPIHandler:
         Returns: List of (disease, probability) tuples ranked by probability
         """
         try:
-            symptoms = [s.strip() for s in request.args.get('symptoms', '').split(',') if s.strip()]
-            age = float(request.args.get('age', 5.0))
-            species = request.args.get('species', 'dog').lower()
+            symptoms = [s.strip() for s in request.args.get("symptoms", "").split(",") if s.strip()]
+            age = float(request.args.get("age", 5.0))
+            species = request.args.get("species", "dog").lower()
 
             differentials = []
             if symptoms:
                 from api.species_analyzer import analyze_species_symptoms
+
                 result = analyze_species_symptoms(species, symptoms)
 
                 # Extract differentials from species analyzer output
@@ -133,8 +140,8 @@ class ClinicalAPIHandler:
                         "disease": d.get("name", ""),
                         "disease_ja": d.get("name_ja", ""),
                         "probability": d.get("confidence", d.get("match_percent", 0)) / 100
-                            if d.get("confidence", d.get("match_percent", 0)) > 1
-                            else d.get("confidence", 0),
+                        if d.get("confidence", d.get("match_percent", 0)) > 1
+                        else d.get("confidence", 0),
                         "urgency": d.get("urgency", ""),
                         "recommended_tests": d.get("recommended_tests", []),
                     }
@@ -153,7 +160,7 @@ class ClinicalAPIHandler:
                 "status": "success",
                 "differentials": differentials,
                 "symptoms": symptoms,
-                "patient": {"age": age, "species": species}
+                "patient": {"age": age, "species": species},
             }, 200
 
         except Exception as e:
@@ -445,11 +452,7 @@ class ClinicalAPIHandler:
                 "timestamp": None,
             }
 
-            return {
-                "status": "success",
-                "training_results": results,
-                "message": "Models trained successfully"
-            }, 200
+            return {"status": "success", "training_results": results, "message": "Models trained successfully"}, 200
 
         except Exception as e:
             logger.error("Error training models: %s", e)
@@ -481,107 +484,68 @@ class ClinicalAPIHandler:
 # ===== ROUTE REGISTRATION =====
 # These would be registered in the Flask app
 
+
 def register_clinical_routes(app, handler: ClinicalAPIHandler):
     """Register all clinical API routes."""
 
     # Analysis
     app.add_url_rule(
-        '/api/clinical/analysis',
-        'clinical_analysis',
-        handler.post_comprehensive_analysis,
-        methods=['POST']
+        "/api/clinical/analysis", "clinical_analysis", handler.post_comprehensive_analysis, methods=["POST"]
     )
 
     # Cases
-    app.add_url_rule(
-        '/api/clinical/cases/<case_id>',
-        'get_case',
-        handler.get_case_by_id,
-        methods=['GET']
-    )
+    app.add_url_rule("/api/clinical/cases/<case_id>", "get_case", handler.get_case_by_id, methods=["GET"])
 
     # Diagnosis
     app.add_url_rule(
-        '/api/clinical/differential',
-        'differential_diagnoses',
-        handler.get_differential_diagnoses,
-        methods=['GET']
+        "/api/clinical/differential", "differential_diagnoses", handler.get_differential_diagnoses, methods=["GET"]
     )
 
-    app.add_url_rule(
-        '/api/clinical/outcomes',
-        'record_outcome',
-        handler.post_record_outcome,
-        methods=['POST']
-    )
+    app.add_url_rule("/api/clinical/outcomes", "record_outcome", handler.post_record_outcome, methods=["POST"])
 
     # Prognosis
-    app.add_url_rule(
-        '/api/clinical/prognosis',
-        'predict_prognosis',
-        handler.post_predict_prognosis,
-        methods=['POST']
-    )
+    app.add_url_rule("/api/clinical/prognosis", "predict_prognosis", handler.post_predict_prognosis, methods=["POST"])
 
     # Treatment
     app.add_url_rule(
-        '/api/clinical/treatment/predict',
-        'predict_treatment',
+        "/api/clinical/treatment/predict",
+        "predict_treatment",
         handler.post_predict_treatment_response,
-        methods=['POST']
+        methods=["POST"],
     )
 
     app.add_url_rule(
-        '/api/clinical/treatment/recommend',
-        'recommend_treatments',
-        handler.post_recommend_treatments,
-        methods=['POST']
+        "/api/clinical/treatment/recommend", "recommend_treatments", handler.post_recommend_treatments, methods=["POST"]
     )
 
     # Combinations
     app.add_url_rule(
-        '/api/clinical/combinations/analyze',
-        'analyze_combinations',
+        "/api/clinical/combinations/analyze",
+        "analyze_combinations",
         handler.post_analyze_combinations,
-        methods=['POST']
+        methods=["POST"],
     )
 
     # Statistics
-    app.add_url_rule(
-        '/api/clinical/stats',
-        'system_statistics',
-        handler.get_system_statistics,
-        methods=['GET']
-    )
+    app.add_url_rule("/api/clinical/stats", "system_statistics", handler.get_system_statistics, methods=["GET"])
 
     app.add_url_rule(
-        '/api/clinical/stats/veterinarian/<vet_id>',
-        'veterinarian_stats',
+        "/api/clinical/stats/veterinarian/<vet_id>",
+        "veterinarian_stats",
         handler.get_veterinarian_stats,
-        methods=['GET']
+        methods=["GET"],
     )
 
     app.add_url_rule(
-        '/api/clinical/stats/clinic/<clinic_id>',
-        'clinic_stats',
-        handler.get_clinic_stats,
-        methods=['GET']
+        "/api/clinical/stats/clinic/<clinic_id>", "clinic_stats", handler.get_clinic_stats, methods=["GET"]
     )
 
     # Models
-    app.add_url_rule(
-        '/api/clinical/models/train',
-        'train_models',
-        handler.post_train_models,
-        methods=['POST']
-    )
+    app.add_url_rule("/api/clinical/models/train", "train_models", handler.post_train_models, methods=["POST"])
 
     # Summary
     app.add_url_rule(
-        '/api/clinical/cases/<case_id>/summary',
-        'clinical_summary',
-        handler.get_clinical_summary,
-        methods=['GET']
+        "/api/clinical/cases/<case_id>/summary", "clinical_summary", handler.get_clinical_summary, methods=["GET"]
     )
 
 

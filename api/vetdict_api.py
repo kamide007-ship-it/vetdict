@@ -1215,6 +1215,134 @@ def api_dashboard_stats():
     }
 
 
+@app.route("/api/dashboard-stats/detailed", methods=["GET"])
+@ensure_json_response
+def api_dashboard_stats_detailed():
+    """詳細ダッシュボード統計：種別疾患数・薬品カテゴリ別・緊急プロトコル等。
+
+    Returns:
+        dict containing:
+        - species_disease_counts: list[{species, count}]
+        - drug_category_counts: list[{category, name_ja, count}]
+        - urgency_distribution: dict[species → dict[urgency → count]]
+        - top_lab_combinations: list (lab patterns)
+        - emergency_categories: dict[category → count]
+        - ecvn_coverage: dict (sponsor adjunct coverage per species)
+    """
+    import importlib
+    from collections import Counter
+
+    # Species disease counts
+    species_modules = [
+        ("dog", "api.species.dog_diseases", "DISEASES"),
+        ("cat", "api.species.cat_diseases", "DISEASES"),
+        ("horse", "api.species.equine_diseases", "DISEASE_DATABASE"),
+        ("rabbit", "api.species.rabbit_diseases", "DISEASES"),
+        ("hamster", "api.species.hamster_diseases", "DISEASES"),
+        ("guinea_pig", "api.species.guinea_pig_diseases", "DISEASES"),
+        ("chinchilla", "api.species.chinchilla_diseases", "DISEASES"),
+        ("ferret", "api.species.ferret_diseases", "DISEASES"),
+        ("hedgehog", "api.species.hedgehog_diseases", "DISEASES"),
+        ("sugar_glider", "api.species.sugar_glider_diseases", "DISEASES"),
+        ("degu", "api.species.degu_diseases", "DISEASES"),
+        ("bird", "api.species.bird_diseases", "DISEASES"),
+        ("parakeet", "api.species.parakeet_diseases", "DISEASES"),
+        ("parrot", "api.species.parrot_diseases", "DISEASES"),
+        ("reptile", "api.species.reptile_diseases", "DISEASES"),
+        ("tortoise", "api.species.tortoise_diseases", "DISEASES"),
+        ("snake", "api.species.snake_diseases", "DISEASES"),
+        ("lizard", "api.species.lizard_diseases", "DISEASES"),
+        ("amphibian", "api.species.amphibian_diseases", "DISEASES"),
+        ("fish", "api.species.fish_diseases", "DISEASES"),
+        ("exotic_other", "api.species.exotic_other_diseases", "DISEASES"),
+    ]
+
+    species_counts = []
+    urgency_dist: dict = {}
+    ecvn_coverage: dict = {}
+    ecvn_marker = "[ECVN:Block]"
+
+    for sp, mod_name, attr in species_modules:
+        try:
+            mod = importlib.import_module(mod_name)
+            diseases = getattr(mod, attr, [])
+        except (ImportError, AttributeError):
+            continue
+        species_counts.append({"species": sp, "count": len(diseases)})
+        # Urgency distribution
+        u_counter: Counter = Counter()
+        ecvn_count = 0
+        for d in diseases:
+            if isinstance(d, dict):
+                u = d.get("urgency", "") or ""
+                u_counter[u] += 1
+                treatment_text = (d.get("treatment_ja") or "") + (d.get("treatment") or "")
+                if ecvn_marker in treatment_text:
+                    ecvn_count += 1
+            else:
+                # Equine Disease dataclass
+                u = getattr(d, "urgency", "") or ""
+                u_counter[u] += 1
+                if ecvn_marker in (getattr(d, "treatment_protocol", "") or ""):
+                    ecvn_count += 1
+        urgency_dist[sp] = dict(u_counter)
+        ecvn_coverage[sp] = {
+            "covered": ecvn_count,
+            "total": len(diseases),
+            "pct": round(ecvn_count / len(diseases) * 100, 1) if diseases else 0,
+        }
+
+    # Drug category counts
+    try:
+        from api.drug_dictionary import DRUG_CATEGORIES, DRUGS
+
+        drug_cat_counter: Counter = Counter()
+        for d in DRUGS:
+            drug_cat_counter[d.get("category", "")] += 1
+        drug_category_counts = []
+        for cat_id, info in DRUG_CATEGORIES.items():
+            drug_category_counts.append(
+                {
+                    "category": cat_id,
+                    "name_ja": info.get("ja", cat_id),
+                    "name_en": info.get("en", cat_id),
+                    "count": drug_cat_counter.get(cat_id, 0),
+                }
+            )
+        drug_category_counts.sort(key=lambda x: -x["count"])
+    except (ImportError, AttributeError):
+        drug_category_counts = []
+
+    # Emergency category breakdown
+    try:
+        from api.emergency_protocols import EMERGENCY_PROTOCOLS
+
+        emergency_cat_counter: Counter = Counter()
+        for p in EMERGENCY_PROTOCOLS:
+            emergency_cat_counter[p.get("category", "")] += 1
+        emergency_categories = dict(emergency_cat_counter)
+    except (ImportError, AttributeError):
+        emergency_categories = {}
+
+    # Lab pattern count
+    try:
+        from api.species.helpers import LAB_COMBINATION_PATTERNS
+
+        lab_pattern_count = len(LAB_COMBINATION_PATTERNS)
+    except (ImportError, AttributeError):
+        lab_pattern_count = 0
+
+    return {
+        "species_disease_counts": species_counts,
+        "drug_category_counts": drug_category_counts,
+        "urgency_distribution": urgency_dist,
+        "emergency_categories": emergency_categories,
+        "lab_combination_patterns": lab_pattern_count,
+        "ecvn_coverage": ecvn_coverage,
+        "total_emergency_protocols": sum(emergency_categories.values()),
+    }
+
+
 # =============================================================================
 # API: Species-specific Symptoms (from SQLite)
 # =============================================================================

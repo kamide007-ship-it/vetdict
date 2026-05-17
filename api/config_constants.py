@@ -8,8 +8,8 @@ All hardcoded values should be defined here to centralise configuration.
 # File Upload
 # ---------------------------------------------------------------------------
 UPLOAD_MAX_SIZE_BYTES = 50 * 1024 * 1024  # 50MB
-ALLOWED_IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png'}
-ALLOWED_VIDEO_EXTENSIONS = {'.mp4', '.mov', '.webm'}
+ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png"}
+ALLOWED_VIDEO_EXTENSIONS = {".mp4", ".mov", ".webm"}
 
 # ---------------------------------------------------------------------------
 # Timeout settings (seconds)
@@ -34,8 +34,8 @@ RATE_LIMIT_WINDOW_SECONDS = 600  # 10 minutes
 # ---------------------------------------------------------------------------
 # Default values
 # ---------------------------------------------------------------------------
-DEFAULT_BREED_ID = '172d_poodle_toy'
-DEFAULT_LANGUAGE = 'ja'
+DEFAULT_BREED_ID = "172d_poodle_toy"
+DEFAULT_LANGUAGE = "ja"
 
 # ---------------------------------------------------------------------------
 # Pagination

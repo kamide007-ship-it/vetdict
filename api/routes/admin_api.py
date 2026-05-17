@@ -1,6 +1,5 @@
 """Admin API routes for managing diseases, drugs, and symptoms via SQLite."""
 
-
 from flask import Blueprint, jsonify, request
 
 from api.auth import require_internal_api_access
@@ -23,6 +22,7 @@ admin_bp = Blueprint("admin", __name__, url_prefix="/api/admin")
 # ---------------------------------------------------------------------------
 # Diseases
 # ---------------------------------------------------------------------------
+
 
 @admin_bp.route("/diseases", methods=["GET"])
 @require_internal_api_access
@@ -110,6 +110,7 @@ def disease_stats():
 # Drugs
 # ---------------------------------------------------------------------------
 
+
 @admin_bp.route("/drugs", methods=["GET"])
 @require_internal_api_access
 def list_drugs():
@@ -145,6 +146,7 @@ def create_drug():
 # ---------------------------------------------------------------------------
 # Bulk import
 # ---------------------------------------------------------------------------
+
 
 @admin_bp.route("/import", methods=["POST"])
 @require_internal_api_access

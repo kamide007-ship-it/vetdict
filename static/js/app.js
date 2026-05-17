@@ -788,6 +788,9 @@ document.addEventListener("DOMContentLoaded",async()=>{
     }
     /* Hero stats: clickable navigation */
     setupHeroStats();
+    /* Dashboard modal trigger */
+    const dashBtn=document.getElementById("dashboardBtn");
+    if(dashBtn)dashBtn.addEventListener("click",openDashboard);
     /* Always-visible quick-nav strip (shows default label pre-selection) */
     renderQuickNav(null);
     /* Breadcrumb bar below header */
@@ -2553,6 +2556,174 @@ function saveDiagnosisHistory(data,diseases){
 
 function loadDiagnosisHistory(){
   try{return JSON.parse(localStorage.getItem("vetdict-history")||"[]");}catch(e){return[];}
+}
+
+/* --- Dashboard modal: detailed VetDict statistics --- */
+let _dashboardLoaded=false;
+let _dashboardCache=null;
+
+function openDashboard(){
+  trackEvent("open_dashboard");
+  if(_dashboardLoaded&&_dashboardCache){
+    _showDashboardModal(_dashboardCache);
+    return;
+  }
+  // Show loading skeleton
+  _showDashboardModal(null);
+  fetchWithTimeout("/api/dashboard-stats/detailed")
+    .then(r=>r.ok?r.json():null)
+    .then(data=>{
+      if(!data)return;
+      _dashboardCache=data;
+      _dashboardLoaded=true;
+      _showDashboardModal(data);
+    })
+    .catch(err=>{
+      const body=document.getElementById("dashboardModalBody");
+      if(body)body.innerHTML=`<div style="padding:24px;text-align:center;color:var(--gray-500)">${currentLang==="ja"?"統計の取得に失敗しました":"Failed to load statistics"}<br><small>${escapeHtml(err.message||"")}</small></div>`;
+    });
+}
+
+function _showDashboardModal(data){
+  let modal=document.getElementById("dashboardModal");
+  if(!modal){
+    modal=document.createElement("div");
+    modal.id="dashboardModal";
+    modal.className="dashboard-modal";
+    modal.setAttribute("role","dialog");
+    modal.setAttribute("aria-modal","true");
+    modal.setAttribute("aria-labelledby","dashboardTitle");
+    modal.innerHTML=`<div class="dashboard-backdrop"></div><div class="dashboard-panel"><div class="dashboard-header"><h2 id="dashboardTitle">${currentLang==="ja"?"📊 統計ダッシュボード":"📊 Statistics Dashboard"}</h2><button class="dashboard-close" aria-label="${currentLang==="ja"?"閉じる":"Close"}">✕</button></div><div class="dashboard-body" id="dashboardModalBody"><div class="dashboard-loading">${currentLang==="ja"?"読み込み中…":"Loading…"}</div></div></div>`;
+    document.body.appendChild(modal);
+    modal.querySelector(".dashboard-close").addEventListener("click",closeDashboard);
+    modal.querySelector(".dashboard-backdrop").addEventListener("click",closeDashboard);
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("open"))closeDashboard();});
+  }
+  modal.classList.add("open");
+  document.body.style.overflow="hidden";
+  if(!data)return;
+  const body=document.getElementById("dashboardModalBody");
+  if(!body)return;
+  body.innerHTML=_renderDashboardContent(data);
+}
+
+function closeDashboard(){
+  const modal=document.getElementById("dashboardModal");
+  if(modal)modal.classList.remove("open");
+  document.body.style.overflow="";
+}
+
+function _renderDashboardContent(data){
+  const isJa=currentLang==="ja";
+  /* Section 1: Overall totals */
+  const totalDiseases=data.species_disease_counts.reduce((sum,s)=>sum+s.count,0);
+  const totalDrugs=data.drug_category_counts.reduce((sum,c)=>sum+c.count,0);
+  const totalProtocols=data.total_emergency_protocols||0;
+  const overview=`<div class="dashboard-section"><h3>${isJa?"概要":"Overview"}</h3><div class="dashboard-kpi-grid">
+    <div class="dashboard-kpi"><div class="kpi-value">${totalDiseases.toLocaleString()}</div><div class="kpi-label">${isJa?"総疾患数":"Total Diseases"}</div></div>
+    <div class="dashboard-kpi"><div class="kpi-value">${data.species_disease_counts.length}</div><div class="kpi-label">${isJa?"対応動物種":"Species"}</div></div>
+    <div class="dashboard-kpi"><div class="kpi-value">${totalDrugs}</div><div class="kpi-label">${isJa?"総薬品数":"Drugs"}</div></div>
+    <div class="dashboard-kpi"><div class="kpi-value">${data.drug_category_counts.length}</div><div class="kpi-label">${isJa?"薬品カテゴリ":"Drug Categories"}</div></div>
+    <div class="dashboard-kpi"><div class="kpi-value">${totalProtocols}</div><div class="kpi-label">${isJa?"緊急プロトコル":"Emergency Protocols"}</div></div>
+    <div class="dashboard-kpi"><div class="kpi-value">${data.lab_combination_patterns}</div><div class="kpi-label">${isJa?"検査値パターン":"Lab Patterns"}</div></div>
+  </div></div>`;
+
+  /* Section 2: Species disease counts (bar chart) */
+  const sortedSp=[...data.species_disease_counts].sort((a,b)=>b.count-a.count);
+  const maxSp=sortedSp[0]?sortedSp[0].count:1;
+  const speciesBars=sortedSp.map(s=>{
+    const spObj=SPECIES.find(x=>x.id===s.species);
+    const label=spObj?(isJa?spObj.name:spObj.nameEn):s.species;
+    const pct=Math.round(s.count/maxSp*100);
+    return`<div class="dashboard-bar-row"><span class="bar-label">${escapeHtml(label)}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="bar-value">${s.count}</span></div>`;
+  }).join("");
+  const speciesSection=`<div class="dashboard-section"><h3>${isJa?"動物種別 疾患数":"Diseases by Species"}</h3><div class="dashboard-bars">${speciesBars}</div></div>`;
+
+  /* Section 3: Drug category breakdown */
+  const drugRows=data.drug_category_counts.slice(0,15);
+  const maxDrug=drugRows[0]?drugRows[0].count:1;
+  const drugBars=drugRows.map(c=>{
+    const label=isJa?(c.name_ja||c.category):(c.name_en||c.category);
+    const pct=Math.round(c.count/maxDrug*100);
+    return`<div class="dashboard-bar-row"><span class="bar-label">${escapeHtml(label)}</span><div class="bar-track"><div class="bar-fill bar-fill-drug" style="width:${pct}%"></div></div><span class="bar-value">${c.count}</span></div>`;
+  }).join("");
+  const drugSection=`<div class="dashboard-section"><h3>${isJa?"薬品カテゴリ別 (上位15)":"Drug Categories (Top 15)"}</h3><div class="dashboard-bars">${drugBars}</div></div>`;
+
+  /* Section 4: ECVN coverage */
+  const ecvnRows=Object.entries(data.ecvn_coverage||{}).map(([sp,info])=>{
+    const spObj=SPECIES.find(x=>x.id===sp);
+    const label=spObj?(isJa?spObj.name:spObj.nameEn):sp;
+    return{label,pct:info.pct,covered:info.covered,total:info.total};
+  }).sort((a,b)=>b.pct-a.pct);
+  const ecvnBars=ecvnRows.map(r=>{
+    return`<div class="dashboard-bar-row"><span class="bar-label">${escapeHtml(r.label)}</span><div class="bar-track"><div class="bar-fill bar-fill-ecvn" style="width:${r.pct}%"></div></div><span class="bar-value">${r.covered}/${r.total} (${r.pct}%)</span></div>`;
+  }).join("");
+  const ecvnSection=`<div class="dashboard-section"><h3>${isJa?"ECVN補助療法カバレッジ":"ECVN Adjunct Coverage"}</h3><div class="dashboard-bars">${ecvnBars}</div></div>`;
+
+  /* Section 5: Emergency category breakdown */
+  const emRows=Object.entries(data.emergency_categories||{}).map(([k,v])=>({cat:k,count:v})).sort((a,b)=>b.count-a.count);
+  const emBars=emRows.map(r=>{
+    return`<div class="dashboard-bar-row"><span class="bar-label">${escapeHtml(r.cat||"-")}</span><div class="bar-track"><div class="bar-fill bar-fill-emergency" style="width:${Math.round(r.count/(emRows[0]?.count||1)*100)}%"></div></div><span class="bar-value">${r.count}</span></div>`;
+  }).join("");
+  const emSection=`<div class="dashboard-section"><h3>${isJa?"緊急プロトコル カテゴリ":"Emergency Protocol Categories"}</h3><div class="dashboard-bars">${emBars}</div></div>`;
+
+  /* Section 6: User's diagnosis history */
+  const history=loadDiagnosisHistory();
+  let historySection="";
+  if(history.length){
+    const sp_counts={};
+    history.forEach(h=>{if(h.species)sp_counts[h.species]=(sp_counts[h.species]||0)+1;});
+    const hRows=Object.entries(sp_counts).map(([k,v])=>({sp:k,count:v})).sort((a,b)=>b.count-a.count);
+    const max=hRows[0]?.count||1;
+    const hBars=hRows.map(r=>{
+      const spObj=SPECIES.find(x=>x.id===r.sp);
+      const label=spObj?(isJa?spObj.name:spObj.nameEn):r.sp;
+      return`<div class="dashboard-bar-row"><span class="bar-label">${escapeHtml(label)}</span><div class="bar-track"><div class="bar-fill bar-fill-history" style="width:${Math.round(r.count/max*100)}%"></div></div><span class="bar-value">${r.count}</span></div>`;
+    }).join("");
+    historySection=`<div class="dashboard-section"><h3>${isJa?"あなたの診断履歴 ("+history.length+"件)":"Your Diagnosis History ("+history.length+" cases)"}</h3><div class="dashboard-bars">${hBars}</div><div style="margin-top:10px;text-align:right"><button class="dashboard-export-btn" data-action="csv" style="margin-right:8px;padding:6px 12px;background:var(--white);border:1px solid var(--green);color:var(--green);border-radius:6px;cursor:pointer;font-size:.78rem">📊 CSV</button><button class="dashboard-export-btn" data-action="json" style="padding:6px 12px;background:var(--white);border:1px solid var(--navy);color:var(--navy);border-radius:6px;cursor:pointer;font-size:.78rem">💾 JSON</button></div></div>`;
+  }
+
+  return overview+speciesSection+drugSection+ecvnSection+emSection+historySection;
+}
+
+// Wire history export buttons after modal content loaded
+document.addEventListener("click",e=>{
+  const exportBtn=e.target.closest(".dashboard-export-btn");
+  if(!exportBtn)return;
+  if(exportBtn.dataset.action==="csv")exportHistoryAsCSV();
+  else if(exportBtn.dataset.action==="json")exportHistoryAsJSON();
+});
+
+/* --- Drug interaction rendering with severity classification --- */
+function _classifyInteractionSeverity(di){
+  // Honor explicit severity if present
+  const sev=(di.severity||"").toLowerCase();
+  if(sev==="major"||sev==="severe"||sev==="contraindicated")return"major";
+  if(sev==="moderate")return"moderate";
+  if(sev==="minor"||sev==="mild")return"minor";
+  // Heuristic: infer from effect text keywords
+  const txt=((di.effect||"")+" "+(di.effect_ja||"")).toLowerCase();
+  if(/contraindicat|fatal|lethal|death|severe|life.?threatening|seizure|cardiac arrest|致死|禁忌|生命|重篤/.test(txt))return"major";
+  if(/toxicity|nephrotox|hepatotox|ototox|coagulopath|bleeding|hemorrhage|hypotension|arrhythmi|qt|肝毒|腎毒|耳毒|出血|低血圧|不整脈/.test(txt))return"moderate";
+  return"minor";
+}
+
+function renderDrugInteractionsList(interactions){
+  if(!interactions||!interactions.length)return"";
+  // Sort by severity: major > moderate > minor
+  const order={major:0,moderate:1,minor:2};
+  const sorted=[...interactions].sort((a,b)=>order[_classifyInteractionSeverity(a)]-order[_classifyInteractionSeverity(b)]);
+  return sorted.map(di=>{
+    const sev=_classifyInteractionSeverity(di);
+    const label=currentLang==="ja"?(di.effect_ja||di.effect||""):(di.effect||di.effect_ja||"");
+    const sevLabel={
+      major:currentLang==="ja"?"重度":"MAJOR",
+      moderate:currentLang==="ja"?"中等度":"MODERATE",
+      minor:currentLang==="ja"?"軽度":"MINOR",
+    }[sev]||sev.toUpperCase();
+    const icon={major:"⛔",moderate:"⚠️",minor:"ℹ️"}[sev]||"";
+    return `<span class="drug-interaction-tag severity-${sev}"><span class="severity-badge">${icon} ${sevLabel}</span><span class="interaction-drug">${escapeHtml(di.drug||"")}</span><span class="interaction-effect">${escapeHtml(label)}</span></span>`;
+  }).join("");
 }
 
 function exportHistoryAsCSV(){
@@ -4454,7 +4625,7 @@ function renderDrugList(){
         <dl><dt>${t("dtContraindications")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||""))}</dd></dl>
         ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.routes_ja||[]).join(", "):(d.routes||[]).join(", "))}</dd></dl>`:""}
         ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.formulations_ja||d.formulations||[]).join(", "):(d.formulations||d.formulations_ja||[]).join(", "))}</dd></dl>`:""}
-        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")}</dt><dd>${d.drug_interactions.map(di=>`<span class="drug-interaction-tag">${escapeHtml(di.drug)}: ${escapeHtml(currentLang==="ja"?(di.effect_ja||di.effect):(di.effect||di.effect_ja))}</span>`).join("")}</dd></dl>`:""}
+        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")} <span style="font-size:.7rem;color:var(--gray-500);font-weight:400">(${d.drug_interactions.length})</span></dt><dd>${renderDrugInteractionsList(d.drug_interactions)}</dd></dl>`:""}
         <div class="drug-species-section"><strong class="drug-species-title">${t("dtSpeciesInfo")}</strong>
           <div class="drug-species-grid">
             ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");const highlight=currentSpecies===sp?"drug-species-highlight":"";return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"} ${highlight}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
