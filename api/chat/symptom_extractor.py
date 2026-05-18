@@ -47,8 +47,20 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
         "teeth_grinding": ["bruxism", "dental_pain"],
         "abdominal_pain": ["abdominal_distension", "hunched_posture", "bloating", "bloated_abdomen"],
-        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen", "abdominal_pain", "bloated_abdomen"],
-        "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen", "abdominal_pain", "bloated_abdomen"],
+        "bloating": [
+            "abdominal_distension",
+            "abdominal_distention",
+            "distended_abdomen",
+            "abdominal_pain",
+            "bloated_abdomen",
+        ],
+        "abdominal_distension": [
+            "bloating",
+            "abdominal_distention",
+            "distended_abdomen",
+            "abdominal_pain",
+            "bloated_abdomen",
+        ],
         # Neuro
         "seizures": ["convulsions", "fits", "epileptic_episodes"],
         "fainting": ["collapse", "syncope"],
