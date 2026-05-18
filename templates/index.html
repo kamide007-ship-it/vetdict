@@ -8,9 +8,12 @@
 <script nonce="{{ g.csp_nonce }}">
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{'analytics_storage':'denied'});
-if(localStorage.getItem('vetdict-analytics-consent')==='1'){
-  gtag('consent','update',{'analytics_storage':'granted'});
-}
+/* Stored values are 'granted' / 'denied' / 'dismissed' (see _setConsent below).
+   Legacy '1' is still honored so users who opted in before the storage format
+   was unified are not silently downgraded. */
+(function(){var v=localStorage.getItem('vetdict-analytics-consent');
+if(v==='granted'||v==='1'){gtag('consent','update',{'analytics_storage':'granted'});}
+})();
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8LSEGW9ZX" nonce="{{ g.csp_nonce }}"></script>
 <script nonce="{{ g.csp_nonce }}">gtag('js',new Date());gtag('config','G-D8LSEGW9ZX');</script>

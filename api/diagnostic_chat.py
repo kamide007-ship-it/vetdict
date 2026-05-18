@@ -601,6 +601,38 @@ def extract_symptoms_from_text(text: str) -> list:
     text_lower = text.lower()
     matched_symptoms = set()
 
+    # Cross-vocabulary fallback: legacy dog vocabulary (52 IDs) differs from the
+    # species-specific vocabularies. When an alias resolves to an ID outside
+    # SYMPTOM_IDS (e.g. "weakness" from 起立不能, "dropsy" from 腹水, "anorexia"),
+    # try a small synonym map to fall back to a valid generic ID.
+    _LEGACY_FALLBACK = {
+        "weakness": ["lethargy", "exercise_intolerance"],
+        "dropsy": ["bloating", "abdominal_distension"],
+        "ascites": ["bloating", "abdominal_distension"],
+        "effusion": ["labored_breathing", "bloating"],
+        "appetite_loss": ["loss_of_appetite"],
+        "anorexia": ["loss_of_appetite"],
+        "depression": ["lethargy"],
+        "recumbency": ["lethargy", "exercise_intolerance"],
+        "obtundation": ["lethargy"],
+        "cachexia": ["weight_loss", "muscle_wasting"],
+        "emaciation": ["weight_loss", "muscle_wasting"],
+        "polyuria": ["frequent_urination"],
+        "polydipsia": ["excessive_thirst"],
+        "tachypnea": ["labored_breathing"],
+        "dyspnea": ["labored_breathing"],
+        "icterus": ["jaundice"],
+        "syncope": ["fainting"],
+    }
+
+    def _resolve_legacy_id(sid: str) -> str | None:
+        if sid in SYMPTOM_IDS:
+            return sid
+        for alt in _LEGACY_FALLBACK.get(sid, []):
+            if alt in SYMPTOM_IDS:
+                return alt
+        return None
+
     # ---------------------------------------------------------------
     # Phase 1: Longest-match-first alias matching
     # Sort aliases by length descending so that longer, more specific
@@ -614,8 +646,8 @@ def extract_symptoms_from_text(text: str) -> list:
         pos = text_lower.find(alias)
         if pos == -1:
             continue
-        symptom_id = SYMPTOM_ALIASES[alias]
-        if symptom_id not in SYMPTOM_IDS:
+        symptom_id = _resolve_legacy_id(SYMPTOM_ALIASES[alias])
+        if symptom_id is None:
             continue
         end = pos + len(alias)
         # Skip if this range overlaps with an already-consumed range
@@ -653,8 +685,8 @@ def extract_symptoms_from_text(text: str) -> list:
         for frag in fragments:
             for alias in _sorted_aliases:
                 if alias in frag:
-                    sid = SYMPTOM_ALIASES[alias]
-                    if sid in SYMPTOM_IDS:
+                    sid = _resolve_legacy_id(SYMPTOM_ALIASES[alias])
+                    if sid is not None:
                         matched_symptoms.add(sid)
                         break  # one match per fragment is enough
             # Also check direct names

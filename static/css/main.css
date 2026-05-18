@@ -75,7 +75,8 @@ a:hover{text-decoration:underline}
 .search-filter-btn svg{width:16px;height:16px}
 .global-search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;max-height:400px;overflow-y:auto;z-index:1000;box-shadow:var(--shadow-lg)}
 .search-result-item{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--gray-100);color:var(--navy);text-decoration:none;cursor:pointer;transition:background var(--transition-fast),border-left-color var(--transition-fast);border-left:4px solid transparent}
-.search-result-item:hover{background:var(--gray-50);border-left-color:var(--green)}
+.search-result-item:hover,.search-result-item.active{background:var(--gray-50);border-left-color:var(--green)}
+.search-result-item.active{outline:2px solid var(--green);outline-offset:-2px}
 .search-result-item:last-child{border-bottom:none}
 .search-result-type{font-size:.68rem;padding:2px 6px;border-radius:4px;background:var(--gray-100);color:var(--gray-500);font-weight:500;white-space:nowrap}
 .search-result-item strong{font-weight:600;display:block;margin-bottom:2px}
