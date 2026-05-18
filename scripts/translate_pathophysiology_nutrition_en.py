@@ -305,7 +305,7 @@ def _claude_translate_batch(items: list[tuple[str, str]]) -> dict[str, str]:
     prompt_lines = [
         "Translate each Japanese veterinary clinical text below into clear, professional English.",
         "Preserve markdown formatting (headers, bullets, bold). Keep numeric values, drug names, and units unchanged.",
-        "Output ONLY valid JSON of the form {\"id\": \"english_translation\", ...} with the same ids as input — no other commentary.",
+        'Output ONLY valid JSON of the form {"id": "english_translation", ...} with the same ids as input — no other commentary.',
         "",
     ]
     for did, txt in items:
@@ -357,10 +357,10 @@ def _is_japanese(s: str) -> bool:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--manual-only", action="store_true",
-                        help="Skip Claude API; apply only hand-curated translations")
-    parser.add_argument("--limit", type=int, default=None,
-                        help="Translate at most N API entries (for testing)")
+    parser.add_argument(
+        "--manual-only", action="store_true", help="Skip Claude API; apply only hand-curated translations"
+    )
+    parser.add_argument("--limit", type=int, default=None, help="Translate at most N API entries (for testing)")
     args = parser.parse_args()
 
     data = json.loads(JSON_PATH.read_text(encoding="utf-8"))
@@ -389,10 +389,10 @@ def main() -> None:
     print(f"Hand-curated applied: pathophysiology={applied_pp}, nutrition_management={applied_nm}")
 
     # Phase 2: gather remaining + (optionally) translate via API
-    remaining_pp = [(d["id"], d["pathophysiology"]) for d in data
-                    if _is_japanese(d.get("pathophysiology", ""))]
-    remaining_nm = [(d["id"], d["nutrition_management"]) for d in data
-                    if _is_japanese(d.get("nutrition_management", ""))]
+    remaining_pp = [(d["id"], d["pathophysiology"]) for d in data if _is_japanese(d.get("pathophysiology", ""))]
+    remaining_nm = [
+        (d["id"], d["nutrition_management"]) for d in data if _is_japanese(d.get("nutrition_management", ""))
+    ]
     print(f"Remaining JP: pathophysiology={len(remaining_pp)}, nutrition_management={len(remaining_nm)}")
 
     if not args.manual_only and os.environ.get("ANTHROPIC_API_KEY"):
@@ -421,9 +421,7 @@ def main() -> None:
     print(f"\nFinal JP-only EN fields: pathophysiology={still_jp_pp}, nutrition_management={still_jp_nm}")
 
     if applied_pp + applied_nm > 0 or (not args.manual_only and os.environ.get("ANTHROPIC_API_KEY")):
-        JSON_PATH.write_text(
-            json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-        )
+        JSON_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"Saved: {JSON_PATH}")
     else:
         print("No changes to write.")
