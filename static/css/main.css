@@ -1626,8 +1626,7 @@ button.combination-item:focus-visible {
 .cookie-btn.reject{background:var(--white);color:var(--gray-600);border:1px solid var(--gray-300)}
 .cookie-btn.reject:hover{background:var(--gray-100);color:var(--gray-800)}
 .cookie-btn.dismiss{background:transparent;color:var(--gray-300);border:1px solid var(--gray-500)}
-#cookieReopenBtn:hover{background:var(--gray-50);color:var(--navy);transform:scale(1.05)}
-@media print{#cookieReopenBtn,#cookieConsent{display:none!important}}
+@media print{#cookieConsent{display:none!important}}
 .help-section[open] summary{border-bottom:1px solid var(--gray-200);border-radius:6px 6px 0 0}
 .help-section ol li::marker{color:var(--green);font-weight:700}
 

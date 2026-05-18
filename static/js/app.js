@@ -323,7 +323,7 @@ const I18N={
     footerLegalHeading:"法務",
     footerLegalTerms:"利用規約",
     footerLegalPrivacy:"プライバシーポリシー",
-    footerLegalTokushoho:"特定商取引法に基づく表記",
+    footerLegalTokushoho:"特定商取引法に基づく表記",footerLegalCookies:"Cookie設定",
     footerCopyright:"© 2026 Equine Vet Synapse. All rights reserved.",
     footerPaypal:"PayPal: equinevet.owners@gmail.com",
     // Analyze button states
@@ -577,7 +577,7 @@ const I18N={
     footerLegalHeading:"Legal",
     footerLegalTerms:"Terms of Use",
     footerLegalPrivacy:"Privacy Policy",
-    footerLegalTokushoho:"Specified Commercial Transactions Act Disclosure",
+    footerLegalTokushoho:"Specified Commercial Transactions Act Disclosure",footerLegalCookies:"Cookie settings",
     footerCopyright:"© 2026 Equine Vet Synapse. All rights reserved.",
     footerPaypal:"PayPal: equinevet.owners@gmail.com",
     // Analyze button states
