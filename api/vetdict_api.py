@@ -1766,6 +1766,85 @@ _PAIN_DISEASE_BOOST = {
 # =============================================================================
 
 
+@app.route("/api/lab-ocr/text", methods=["POST"])
+@ensure_json_response
+def api_lab_parse_text():
+    """Parse free-text lab report → structured {lab_id: value}.
+
+    Body JSON: {text: "BUN 45 mg/dL ALT 220 U/L ..."}
+    Response: {labs: {...}, count: int}
+    """
+    rate_limited = _check_public_rate_limit()
+    if rate_limited:
+        return rate_limited
+    try:
+        from api.lab_ocr import parse_lab_text
+    except ImportError:
+        return {"error": "Lab parser unavailable"}, 503
+    data = request.get_json(silent=True) or {}
+    text = str(data.get("text") or "").strip()
+    if not text:
+        return {"error": "text parameter required"}, 400
+    if len(text) > 20000:
+        return {"error": "text too long (max 20000 chars)"}, 413
+    labs = parse_lab_text(text)
+    return {"labs": labs, "count": len(labs)}
+
+
+@app.route("/api/lab-ocr/image", methods=["POST"])
+@ensure_json_response
+def api_lab_parse_image():
+    """OCR an uploaded image of a lab report → structured {lab_id: value}.
+
+    Accepts: multipart/form-data with field 'image' (PNG/JPEG ≤8 MB), or
+    JSON body {image_base64: "..."} for paste-from-clipboard flows.
+    Response: {labs: {...}, ocr_text: str, meta: {...}}
+    """
+    rate_limited = _check_public_rate_limit()
+    if rate_limited:
+        return rate_limited
+    try:
+        from api.lab_ocr import extract_labs_from_image
+    except ImportError:
+        return {"error": "OCR module unavailable"}, 503
+
+    image_bytes: bytes | None = None
+    # Multipart upload path
+    if "image" in request.files:
+        f = request.files["image"]
+        if f.filename:
+            image_bytes = f.read()
+    # JSON base64 path (for paste support)
+    elif request.is_json:
+        import base64
+
+        b64 = (request.get_json(silent=True) or {}).get("image_base64", "")
+        if isinstance(b64, str) and b64:
+            # Allow optional data URL prefix
+            if b64.startswith("data:") and "base64," in b64:
+                b64 = b64.split("base64,", 1)[1]
+            try:
+                image_bytes = base64.b64decode(b64)
+            except (ValueError, TypeError):
+                return {"error": "invalid base64 image data"}, 400
+
+    if not image_bytes:
+        return {"error": "image (multipart) or image_base64 (JSON) required"}, 400
+    if len(image_bytes) > 8 * 1024 * 1024:
+        return {"error": "image too large (max 8 MB)"}, 413
+
+    try:
+        result = extract_labs_from_image(image_bytes)
+    except RuntimeError as exc:
+        # Most common cause: Tesseract not installed on host
+        logger.warning("Lab OCR failed: %s", exc)
+        return {"error": str(exc), "fallback": "Use /api/lab-ocr/text with manually typed values"}, 503
+    except Exception as exc:  # noqa: BLE001 — sanitize OCR errors
+        logger.exception("Unexpected lab OCR error")
+        return {"error": f"OCR processing error: {type(exc).__name__}"}, 500
+    return result
+
+
 @app.route("/api/lab-ranges/<species>", methods=["GET"])
 @ensure_json_response
 def api_lab_ranges(species):

@@ -247,7 +247,6 @@ if(v==='granted'||v==='1'){gtag('consent','update',{'analytics_storage':'granted
     <button type="button" class="cookie-btn dismiss" id="cookieDismissBtn" data-i18n-aria="cookieDismissAria" aria-label="同意せずに閉じる" data-i18n="cookieDismiss" style="font-size:.72rem;color:var(--gray-400);background:none;border:none;text-decoration:underline">後で決める</button>
   </div>
 </div>
-<button type="button" id="cookieReopenBtn" aria-label="Cookie設定を再表示" title="Cookie設定" style="display:none;position:fixed;bottom:16px;left:16px;width:40px;height:40px;border-radius:50%;background:var(--white);border:1px solid var(--gray-300);box-shadow:0 2px 8px rgba(0,0,0,.12);cursor:pointer;font-size:1.1rem;z-index:998;color:var(--gray-600)">🍪</button>
 <script nonce="{{ g.csp_nonce }}">
 function _setConsent(state){
   if(state==='granted'){
@@ -260,28 +259,26 @@ function _setConsent(state){
     localStorage.setItem('vetdict-analytics-consent','dismissed');
   }
   document.getElementById('cookieConsent').style.display='none';
-  document.getElementById('cookieReopenBtn').style.display='block';
 }
 function reopenCookieConsent(){
   document.getElementById('cookieConsent').style.display='flex';
-  document.getElementById('cookieReopenBtn').style.display='none';
 }
 function _initCookieConsent(){
   const state=localStorage.getItem('vetdict-analytics-consent');
   if(!state){
     /* First visit: show banner */
     document.getElementById('cookieConsent').style.display='flex';
-  } else {
-    /* Already responded: show small reopen button */
-    document.getElementById('cookieReopenBtn').style.display='block';
+  } else if(state==='granted'&&typeof gtag==='function'){
     /* Sync gtag if already granted */
-    if(state==='granted'&&typeof gtag==='function')gtag('consent','update',{'analytics_storage':'granted'});
+    gtag('consent','update',{'analytics_storage':'granted'});
   }
 }
 document.getElementById('cookieAcceptBtn').addEventListener('click',()=>_setConsent('granted'));
 document.getElementById('cookieRejectBtn').addEventListener('click',()=>_setConsent('denied'));
 document.getElementById('cookieDismissBtn').addEventListener('click',()=>_setConsent('dismissed'));
-document.getElementById('cookieReopenBtn').addEventListener('click',reopenCookieConsent);
+document.addEventListener('click',(e)=>{
+  if(e.target&&e.target.id==='cookieSettingsLink'){e.preventDefault();reopenCookieConsent();}
+});
 _initCookieConsent();
 </script>
 <script defer src="/static/js/app.js?v={{ g.asset_ver }}" nonce="{{ g.csp_nonce }}"></script>
