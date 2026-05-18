@@ -1002,6 +1002,11 @@ function setupGlobalSearch(){
   const input=document.getElementById("globalSearch");
   const results=document.getElementById("globalSearchResults");
   if(!input||!results)return;
+  /* Keep aria-expanded in sync with dropdown visibility (WAI-ARIA combobox pattern). */
+  new MutationObserver(()=>{
+    const open=results.style.display!=="none"&&!!results.innerHTML.trim();
+    input.setAttribute("aria-expanded",open?"true":"false");
+  }).observe(results,{attributes:true,attributeFilter:["style"],childList:true,subtree:false});
   let debounceTimer=null;
   function runSearch(){
     clearTimeout(debounceTimer);
@@ -1064,9 +1069,27 @@ function setupGlobalSearch(){
       if(catBtn)catBtn.setAttribute("aria-expanded","false");
     }
   });
+  /* Keyboard navigation for global search dropdown (Arrow/Enter/Escape). */
+  let activeIdx=-1;
+  function _items(){return Array.from(results.querySelectorAll(".search-result-item[data-type]"));}
+  function _highlight(items,idx){
+    items.forEach((el,i)=>{
+      if(i===idx){el.classList.add("active");el.setAttribute("aria-selected","true");el.scrollIntoView({block:"nearest"});}
+      else{el.classList.remove("active");el.removeAttribute("aria-selected");}
+    });
+  }
   input.addEventListener("keydown",e=>{
-    if(e.key==="Escape"){results.style.display="none";input.blur();}
+    if(e.key==="Escape"){results.style.display="none";input.blur();activeIdx=-1;return;}
+    if(results.style.display==="none")return;
+    const items=_items();
+    if(!items.length)return;
+    if(e.key==="ArrowDown"){e.preventDefault();activeIdx=(activeIdx+1)%items.length;_highlight(items,activeIdx);}
+    else if(e.key==="ArrowUp"){e.preventDefault();activeIdx=(activeIdx-1+items.length)%items.length;_highlight(items,activeIdx);}
+    else if(e.key==="Enter"&&activeIdx>=0){e.preventDefault();items[activeIdx].click();activeIdx=-1;}
   });
+  /* Reset highlight whenever the result list re-renders. */
+  const _resetIdx=new MutationObserver(()=>{activeIdx=-1;});
+  _resetIdx.observe(results,{childList:true});
   setupSearchFilters(runSearch);
 }
 
@@ -1328,11 +1351,11 @@ function setDefaultStats(){
     {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:248,drugs:103,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
     {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:250,drugs:98,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:258,drugs:17,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
-    {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:36,drugs:26,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
+    {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:26,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:292,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:7084,
+    diseases:7093,
     species:21,
     drugs:610,
     symptoms:52,
