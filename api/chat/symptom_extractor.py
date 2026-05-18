@@ -46,9 +46,21 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "decreased_fecal_output": ["reduced_fecal_output", "constipation", "small_fecal_pellets"],
         "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
         "teeth_grinding": ["bruxism", "dental_pain"],
-        "abdominal_pain": ["abdominal_distension", "hunched_posture", "bloating"],
-        "bloating": ["abdominal_distension", "abdominal_distention", "distended_abdomen", "abdominal_pain"],
-        "abdominal_distension": ["bloating", "abdominal_distention", "distended_abdomen", "abdominal_pain"],
+        "abdominal_pain": ["abdominal_distension", "hunched_posture", "bloating", "bloated_abdomen"],
+        "bloating": [
+            "abdominal_distension",
+            "abdominal_distention",
+            "distended_abdomen",
+            "abdominal_pain",
+            "bloated_abdomen",
+        ],
+        "abdominal_distension": [
+            "bloating",
+            "abdominal_distention",
+            "distended_abdomen",
+            "abdominal_pain",
+            "bloated_abdomen",
+        ],
         # Neuro
         "seizures": ["convulsions", "fits", "epileptic_episodes"],
         "fainting": ["collapse", "syncope"],
@@ -319,11 +331,12 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
         "red_ventrum": ["red_legs", "skin_redness", "hemorrhage"],
         "edema": ["swelling", "bloating", "ascites"],
-        # Effusion
-        "effusion": ["pleural_effusion", "abdominal_distension", "ascites"],
+        # Effusion / ascites (dogs/cats use "bloated_abdomen" / "abdominal_pain")
+        "effusion": ["pleural_effusion", "abdominal_distension", "ascites", "bloated_abdomen"],
         "pleural_effusion": ["effusion", "labored_breathing"],
-        "ascites": ["effusion", "abdominal_distension", "bloating", "dropsy"],
-        "dropsy": ["bloating", "edema", "ascites", "abdominal_distension"],
+        "ascites": ["effusion", "abdominal_distension", "bloating", "dropsy", "bloated_abdomen", "abdominal_pain"],
+        "dropsy": ["bloating", "edema", "ascites", "abdominal_distension", "bloated_abdomen", "abdominal_pain"],
+        # NOTE: bloating / abdominal_distension keys defined earlier; bloated_abdomen added there
         # Swelling (generic)
         "swelling": ["facial_swelling", "eye_swelling", "edema"],
     }

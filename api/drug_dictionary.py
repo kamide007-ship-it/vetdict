@@ -11137,6 +11137,7 @@ def api_check_interactions():
     """
     薬品-薬品相互作用チェック。
     Body JSON: {drug_ids: [...], species?: "..."}
+    Returns unknown_drug_ids so the UI can tell the user which inputs didn't match.
     """
     data = request.get_json(silent=True) or {}
     drug_ids = data.get("drug_ids", []) or []
@@ -11144,7 +11145,19 @@ def api_check_interactions():
     if not isinstance(drug_ids, list):
         return jsonify({"error": "drug_ids must be a list"}), 400
     if len(drug_ids) < 1:
-        return jsonify({"interactions": [], "species_specific_warnings": []})
+        return jsonify(
+            {
+                "interactions": [],
+                "species_specific_warnings": [],
+                "total_interactions": 0,
+                "unknown_drug_ids": [],
+                "recognized_drug_ids": [],
+            }
+        )
+
+    # Identify which submitted IDs are recognized so the UI can warn on typos.
+    recognized = [did for did in drug_ids if get_drug_by_id(did) is not None]
+    unknown = [did for did in drug_ids if get_drug_by_id(did) is None]
 
     interactions = find_interactions(drug_ids)
     species_warnings = []
@@ -11157,6 +11170,8 @@ def api_check_interactions():
             "interactions": interactions,
             "species_specific_warnings": species_warnings,
             "total_interactions": len(interactions),
+            "recognized_drug_ids": recognized,
+            "unknown_drug_ids": unknown,
         }
     )
 
