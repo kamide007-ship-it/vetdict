@@ -1139,9 +1139,7 @@ def health():
             try:
                 from api.disease_store import get_species_stats
 
-                _effective_count = sum(
-                    s.get("diseases", 0) for s in get_species_stats().get("species", [])
-                )
+                _effective_count = sum(s.get("diseases", 0) for s in get_species_stats().get("species", []))
             except Exception:
                 _effective_count = _sqlite_count
             checks["database"] = {
