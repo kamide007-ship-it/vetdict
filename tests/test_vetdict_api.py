@@ -108,7 +108,8 @@ class TestSecurityHeaders:
 
     def test_x_frame_options(self, client):
         resp = client.get('/api/health')
-        assert resp.headers.get('X-Frame-Options') == 'SAMEORIGIN'
+        # DENY aligns with CSP frame-ancestors 'none'; we never embed our own pages.
+        assert resp.headers.get('X-Frame-Options') == 'DENY'
 
     def test_permissions_policy(self, client):
         resp = client.get('/api/health')

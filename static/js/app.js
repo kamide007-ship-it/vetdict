@@ -284,7 +284,9 @@ const I18N={
     cookieDismiss:"後で決める",
     cookieDismissAria:"同意せずに閉じる",
     dashboardOpen:"統計ダッシュボード",
+    dashboardOpenAria:"統計ダッシュボードを開く",
     helpButton:"使い方ガイド",
+    helpGuideAria:"使い方ガイドを開く",
     helpTitle:"VetDict — 使い方ガイド",
     helpClose:"閉じる",
     // Pricing
@@ -541,7 +543,9 @@ const I18N={
     cookieDismiss:"Decide later",
     cookieDismissAria:"Close without accepting",
     dashboardOpen:"Statistics Dashboard",
+    dashboardOpenAria:"Open statistics dashboard",
     helpButton:"Quick Guide",
+    helpGuideAria:"Open quick guide",
     helpTitle:"VetDict — Quick Guide",
     helpClose:"Close",
     // Pricing
@@ -2015,7 +2019,7 @@ function clearLabValues(){
 function openLabImportModal(){
   trackEvent("open_lab_import");
   let modal=document.getElementById("labImportModal");
-  if(modal){modal.classList.add("open");document.body.style.overflow="hidden";return;}
+  if(modal){modal.classList.add("open");document.body.style.overflow="hidden";openModalA11y(modal,".dashboard-close");return;}
   const isJa=currentLang==="ja";
   modal=document.createElement("div");
   modal.id="labImportModal";
@@ -2089,12 +2093,14 @@ function openLabImportModal(){
   });
   modal.classList.add("open");
   document.body.style.overflow="hidden";
+  openModalA11y(modal,".dashboard-close");
 }
 
 function closeLabImportModal(){
   const modal=document.getElementById("labImportModal");
   if(modal)modal.classList.remove("open");
   document.body.style.overflow="";
+  closeModalA11y(modal);
 }
 
 function _handleLabImageFile(file){
@@ -2283,6 +2289,32 @@ function buildFieldFallback(label,name){
 
 function escapeHtml(value){
   return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
+}
+
+/* --- Modal focus management (a11y) ---
+   Saves the trigger element on open so focus can be restored on close,
+   and moves keyboard focus into the modal so Esc/Tab work as expected. */
+const _modalLastFocus=new WeakMap();
+function openModalA11y(modal,initialFocusSel){
+  if(!modal)return;
+  const prev=document.activeElement;
+  if(prev&&prev!==document.body)_modalLastFocus.set(modal,prev);
+  // Defer to allow display:flex / classList transition to apply.
+  requestAnimationFrame(()=>{
+    let target=null;
+    if(initialFocusSel)target=modal.querySelector(initialFocusSel);
+    if(!target)target=modal.querySelector(".dashboard-close,[autofocus]")
+      ||modal.querySelector("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])");
+    if(target&&typeof target.focus==="function"){try{target.focus({preventScroll:true});}catch(_){target.focus();}}
+  });
+}
+function closeModalA11y(modal){
+  if(!modal)return;
+  const prev=_modalLastFocus.get(modal);
+  _modalLastFocus.delete(modal);
+  if(prev&&typeof prev.focus==="function"&&document.body.contains(prev)){
+    try{prev.focus({preventScroll:true});}catch(_){prev.focus();}
+  }
 }
 
 function renderTreatmentWithAdjunct(text){
@@ -2952,6 +2984,7 @@ function _showDashboardModal(data){
   }
   modal.classList.add("open");
   document.body.style.overflow="hidden";
+  openModalA11y(modal,".dashboard-close");
   if(!data)return;
   const body=document.getElementById("dashboardModalBody");
   if(!body)return;
@@ -2962,6 +2995,7 @@ function closeDashboard(){
   const modal=document.getElementById("dashboardModal");
   if(modal)modal.classList.remove("open");
   document.body.style.overflow="";
+  closeModalA11y(modal);
 }
 
 /* --- In-app Help / Tour modal (educational content) --- */
@@ -2987,12 +3021,14 @@ function openHelpGuide(){
   }
   modal.classList.add("open");
   document.body.style.overflow="hidden";
+  openModalA11y(modal,".dashboard-close");
 }
 
 function closeHelpGuide(){
   const modal=document.getElementById("helpGuideModal");
   if(modal)modal.classList.remove("open");
   document.body.style.overflow="";
+  closeModalA11y(modal);
 }
 
 function _renderHelpGuideContent(){
@@ -4935,7 +4971,7 @@ function loadDrugDictionary(){
     if(currentSpecies){spSelect.value=currentSpecies;}
     renderDrugList();
   }).catch(()=>{
-    list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-drug-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
+    list.innerHTML=`<div role="alert" style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button type="button" class="retry-drug-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
     const rb=list.querySelector(".retry-drug-btn");
     if(rb)rb.addEventListener("click",()=>{drugsLoaded=false;loadDrugDictionary();});
   });
