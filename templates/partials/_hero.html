@@ -21,26 +21,28 @@
   <!-- Hero Statistics -->
   <!-- aria-live intentionally omitted: counters animate from "-" to final value on load, -->
   <!-- which would otherwise be announced repeatedly by screen readers. -->
+  <!-- num span uses aria-labelledby to bind the count to its label, so screen readers -->
+  <!-- announce "7,093 疾患数" rather than masking the count with a static aria-label. -->
   <div class="hero-stats" role="group" data-i18n-aria="heroStatsAria" aria-label="データベース統計">
     <div class="hero-stat">
-      <span class="num" id="statDiseases" data-i18n-aria="statDiseases" aria-label="疾患数">-</span>
-      <span class="label" data-i18n="statDiseases">疾患数</span>
+      <span class="num" id="statDiseases" aria-labelledby="statDiseases statDiseasesLabel">-</span>
+      <span class="label" id="statDiseasesLabel" data-i18n="statDiseases">疾患数</span>
     </div>
     <div class="hero-stat">
-      <span class="num" id="statSpecies" data-i18n-aria="statSpecies" aria-label="対応動物種">-</span>
-      <span class="label" data-i18n="statSpecies">対応動物種</span>
+      <span class="num" id="statSpecies" aria-labelledby="statSpecies statSpeciesLabel">-</span>
+      <span class="label" id="statSpeciesLabel" data-i18n="statSpecies">対応動物種</span>
     </div>
     <div class="hero-stat">
-      <span class="num" id="statSymptoms" data-i18n-aria="statSymptoms" aria-label="症状項目">-</span>
-      <span class="label" data-i18n="statSymptoms">症状項目</span>
+      <span class="num" id="statSymptoms" aria-labelledby="statSymptoms statSymptomsLabel">-</span>
+      <span class="label" id="statSymptomsLabel" data-i18n="statSymptoms">症状項目</span>
     </div>
     <div class="hero-stat">
-      <span class="num" id="statDrugs" data-i18n-aria="statDrugs" aria-label="薬品数">-</span>
-      <span class="label" data-i18n="statDrugs">薬品数</span>
+      <span class="num" id="statDrugs" aria-labelledby="statDrugs statDrugsLabel">-</span>
+      <span class="label" id="statDrugsLabel" data-i18n="statDrugs">薬品数</span>
     </div>
     <div class="hero-stat">
-      <span class="num" id="statProtocols" data-i18n-aria="statProtocols" aria-label="麻酔プロトコル">-</span>
-      <span class="label" data-i18n="statProtocols">麻酔プロトコル</span>
+      <span class="num" id="statProtocols" aria-labelledby="statProtocols statProtocolsLabel">-</span>
+      <span class="label" id="statProtocolsLabel" data-i18n="statProtocols">麻酔プロトコル</span>
     </div>
   </div>
   <div style="margin-top:14px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap">

@@ -787,9 +787,10 @@ document.addEventListener("DOMContentLoaded",async()=>{
     if(analyzeBtn)analyzeBtn.addEventListener("click",doAnalyze);
     if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;renderDiseaseDb();},200));
     setupGlobalSearch();
-    // Restore view from URL hash
+    // Restore view from URL hash (silent: don't auto-focus inputs on initial load —
+    // would pop the mobile keyboard for users landing on /#chat etc.)
     const hash=location.hash.replace("#","");
-    if(hash&&["checker","database","chat","drugs","anesthesia","emergency"].includes(hash))switchView(hash);
+    if(hash&&["checker","database","chat","drugs","anesthesia","emergency"].includes(hash))switchView(hash,{silent:true});
     // Handle ?species= query param (from sitemap/SEO links)
     const spParam=new URLSearchParams(location.search).get("species");
     if(spParam&&SPECIES_ICONS[spParam])selectSpecies(spParam);
@@ -1985,16 +1986,42 @@ function _applyLabRanges(ranges){
 }
 function highlightLabAbnormals(){
   let filled=0,abnormal=0;
+  const isJa=currentLang==="ja";
+  const highTxt=isJa?"\u57fa\u6e96\u7bc4\u56f2\u3088\u308a\u9ad8\u5024":"above reference range";
+  const lowTxt=isJa?"\u57fa\u6e96\u7bc4\u56f2\u3088\u308a\u4f4e\u5024":"below reference range";
   document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{
     const v=parseFloat(el.value),lo=parseFloat(el.dataset.lo),hi=parseFloat(el.dataset.hi);
     const flag=el.nextElementSibling;
     el.classList.remove("lab-high","lab-low");
     el.removeAttribute("aria-invalid");
-    if(flag){flag.textContent="";flag.setAttribute("aria-hidden","true");}
+    if(flag){
+      flag.textContent="";
+      // Marker has no accessible name when empty, so it can stay hidden from AT.
+      flag.setAttribute("aria-hidden","true");
+      flag.removeAttribute("aria-label");
+    }
     if(isNaN(v)||el.value.trim()==="")return;
     filled++;
-    if(v>hi){el.classList.add("lab-high");el.setAttribute("aria-invalid","true");if(flag){flag.textContent="\u2191";flag.style.color="#e74c3c";}abnormal++;}
-    else if(v<lo){el.classList.add("lab-low");el.setAttribute("aria-invalid","true");if(flag){flag.textContent="\u2193";flag.style.color="#2980b9";}abnormal++;}
+    if(v>hi){
+      el.classList.add("lab-high");el.setAttribute("aria-invalid","true");
+      if(flag){
+        flag.textContent="\u2191";flag.style.color="#e74c3c";
+        // Make the marker accessible: name = "above reference range"
+        flag.removeAttribute("aria-hidden");
+        flag.setAttribute("role","img");
+        flag.setAttribute("aria-label",highTxt);
+      }
+      abnormal++;
+    } else if(v<lo){
+      el.classList.add("lab-low");el.setAttribute("aria-invalid","true");
+      if(flag){
+        flag.textContent="\u2193";flag.style.color="#2980b9";
+        flag.removeAttribute("aria-hidden");
+        flag.setAttribute("role","img");
+        flag.setAttribute("aria-label",lowTxt);
+      }
+      abnormal++;
+    }
   });
   const badge=document.getElementById("labSummaryBadge");
   if(!badge)return;
@@ -2293,8 +2320,15 @@ function escapeHtml(value){
 
 /* --- Modal focus management (a11y) ---
    Saves the trigger element on open so focus can be restored on close,
-   and moves keyboard focus into the modal so Esc/Tab work as expected. */
+   moves keyboard focus into the modal, and installs a Tab-cycle trap so
+   focus cannot escape into background content. */
 const _modalLastFocus=new WeakMap();
+const _modalTrapHandlers=new WeakMap();
+const _FOCUSABLE_SEL='button:not([disabled]),[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+function _modalFocusables(modal){
+  return Array.from(modal.querySelectorAll(_FOCUSABLE_SEL))
+    .filter(el=>el.offsetParent!==null||el.getClientRects().length>0);
+}
 function openModalA11y(modal,initialFocusSel){
   if(!modal)return;
   const prev=document.activeElement;
@@ -2304,9 +2338,27 @@ function openModalA11y(modal,initialFocusSel){
     let target=null;
     if(initialFocusSel)target=modal.querySelector(initialFocusSel);
     if(!target)target=modal.querySelector(".dashboard-close,[autofocus]")
-      ||modal.querySelector("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])");
+      ||modal.querySelector(_FOCUSABLE_SEL);
     if(target&&typeof target.focus==="function"){try{target.focus({preventScroll:true});}catch(_){target.focus();}}
   });
+  // Tab/Shift+Tab cycling trap. One handler per modal — removed on close.
+  if(!_modalTrapHandlers.has(modal)){
+    const handler=function(e){
+      if(e.key!=="Tab")return;
+      if(!modal.classList.contains("open"))return;
+      const items=_modalFocusables(modal);
+      if(!items.length){e.preventDefault();return;}
+      const first=items[0],last=items[items.length-1];
+      const active=document.activeElement;
+      if(e.shiftKey){
+        if(active===first||!modal.contains(active)){e.preventDefault();last.focus();}
+      }else{
+        if(active===last||!modal.contains(active)){e.preventDefault();first.focus();}
+      }
+    };
+    _modalTrapHandlers.set(modal,handler);
+    modal.addEventListener("keydown",handler);
+  }
 }
 function closeModalA11y(modal){
   if(!modal)return;
@@ -3957,8 +4009,11 @@ function navigateToDiseaseDb(query){
   },350);
 }
 
-function switchView(view){
-  trackEvent("switch_view",{view:view});
+function switchView(view,opts){
+  /* opts.silent — skip event tracking + auto-focus (used for initial hash routing
+     on page load so the soft keyboard does not pop up unexpectedly on mobile). */
+  opts=opts||{};
+  if(!opts.silent)trackEvent("switch_view",{view:view});
   currentView=view;
   const views=["checker","database","chat","drugs","anesthesia","emergency"];
   const prefersReduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -3967,7 +4022,7 @@ function switchView(view){
     const panel=document.getElementById("view"+v.charAt(0).toUpperCase()+v.slice(1));
     if(tab)tab.setAttribute("aria-selected",v===view);
     if(panel){
-      if(v===view){panel.classList.remove("hidden");if(!prefersReduced)panel.style.animation="fade-tab-in .3s ease-out";}
+      if(v===view){panel.classList.remove("hidden");if(!prefersReduced&&!opts.silent)panel.style.animation="fade-tab-in .3s ease-out";}
       else{panel.classList.add("hidden");panel.style.animation="";}
     }
   });
@@ -3977,9 +4032,14 @@ function switchView(view){
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
   if(view==="anesthesia"&&!anesthesiaLoaded)loadAnesthesiaProtocols();
   if(view==="emergency"&&!emergencyLoaded)loadEmergencyProtocols();
-  /* フォーカスを新しいパネルの最初のインタラクティブ要素に移動 */
   const activePanel=document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
-  if(activePanel){const focusable=activePanel.querySelector("input,select,button:not([disabled]),textarea,[tabindex='0']");if(focusable)setTimeout(()=>focusable.focus(),50);}
+  /* Move focus to the panel itself (programmatic focus, no soft-keyboard popup).
+     We avoid auto-focusing inputs because that triggers the mobile keyboard on
+     every tab change. Skipped entirely when called silently (initial hash routing). */
+  if(activePanel&&!opts.silent){
+    if(!activePanel.hasAttribute("tabindex"))activePanel.setAttribute("tabindex","-1");
+    try{activePanel.focus({preventScroll:true});}catch(_){activePanel.focus();}
+  }
   /* モバイル: ハンバーガーメニューを閉じる + コンテンツへスクロール */
   const nav=document.getElementById("mainNav");
   if(nav&&nav.classList.contains("open")){
