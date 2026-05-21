@@ -4175,8 +4175,8 @@ def analyze():
             },
             "emergency_flag": has_emergency,
             "emergency_message": (
-                "緊急の可能性があります。直ちに獣医師の診察を受けてください。"
-                " / EMERGENCY: Seek immediate veterinary care."
+                "緊急度の高い所見です。安定化と緊急の検査を優先してください。"
+                " / EMERGENCY: prioritize stabilization and urgent workup."
                 if has_emergency
                 else None
             ),

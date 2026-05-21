@@ -1323,7 +1323,7 @@ def diagnostic_chat():
         else:
             treatments = {
                 "supplements": [],
-                "primary_care_plan_ja": "獣医師にご相談ください。",
+                "primary_care_plan_ja": "詳細な治療方針は臨床所見・検査結果と併せてご判断ください。",
                 "recommended_tests": disease.get("recommended_tests", []),
             }
 
@@ -1349,7 +1349,7 @@ def diagnostic_chat():
             response_text += f"{i}. **{c['name_ja']}** ({c['name_en']}) — 一致度 {c['confidence_level']}\n"
             if c.get("description_ja") or c.get("description"):
                 response_text += f"   {c.get('description_ja') or c.get('description', '')}\n"
-        response_text += "\n※ こちらは参考情報です。獣医師の診察を受けてください。"
+        response_text += "\n※ こちらは鑑別の参考情報です。最終診断は臨床所見・検査結果と併せてご判断ください。"
     elif all_symptoms:
         response_text = (
             f"{guidance_line}\n"
@@ -1396,8 +1396,8 @@ def diagnostic_chat():
             species=species,
         ),
         "recommendations": {
-            "next_step": "This is reference information only. Supervised by Kentaro Kamide, DVM (Minamisoma Animal Clinic). Please consult a veterinarian for professional evaluation.",
-            "next_step_ja": "こちらは参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。正確な評価のため、獣医師の診察を受けてください。",
+            "next_step": "Reference information to support clinical judgment (supervised by Kentaro Kamide, DVM / Minamisoma Animal Clinic). Integrate with clinical findings and diagnostic results for final diagnosis.",
+            "next_step_ja": "こちらは臨床判断を補助する参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。最終診断は臨床所見・検査結果と併せてご判断ください。",
         },
     }
 
@@ -2437,8 +2437,8 @@ def consultation():
                 "pain_score": pain_score,
                 "species": species,
                 "recommendations": {
-                    "next_step_ja": "こちらは参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。正確な評価のため、獣医師の診察を受けてください。",
-                    "next_step_en": "This is reference information only. Supervised by Kentaro Kamide, DVM (Minamisoma Animal Clinic). Please consult a veterinarian.",
+                    "next_step_ja": "こちらは臨床判断を補助する参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。最終診断は臨床所見・検査結果と併せてご判断ください。",
+                    "next_step_en": "Reference information to support clinical judgment (supervised by Kentaro Kamide, DVM / Minamisoma Animal Clinic). Integrate with clinical findings and diagnostic results for final diagnosis.",
                 },
             }
         )
