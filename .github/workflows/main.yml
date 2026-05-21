@@ -81,5 +81,11 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install pip-audit
-      - run: pip-audit -r requirements.txt
-      - run: pip-audit -r requirements-dev.txt
+      # PYSEC-2024-271 (CVE-2024-1681): flask-cors log injection that only
+      # triggers when the log level is DEBUG. flask-cors 6.0.2 is the latest
+      # release and the advisory records no fixed version, so it cannot be
+      # resolved by upgrading. Production runs with FLASK_DEBUG=0, so the
+      # debug-only path is not reachable. The ignore is scoped to this single
+      # ID, so any new advisory still fails the build.
+      - run: pip-audit -r requirements.txt --ignore-vuln PYSEC-2024-271
+      - run: pip-audit -r requirements-dev.txt --ignore-vuln PYSEC-2024-271
