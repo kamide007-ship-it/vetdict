@@ -2873,7 +2873,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Multifactorial etiology associated with Retained Hemipenes; may involve genetic predisposition, environmental factors, infectious agents, and/or metabolic dysfunction.",
         "causes_ja": "爬虫類における半陰茎残留の原因: 交尾後の半陰茎還納不能で、壊死のリスクがある。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "半陰茎残留は爬虫類における皮膚疾患である。表皮バリア、真皮炎症、または付属器機能の障害を伴う。バリア機能の低下により経表皮水分喪失、アレルゲン浸透、微生物コロニー形成が促進される。炎症メディエーター（ヒスタミン、プロスタグランジン、サイトカイン）が掻痒、紅斑、二次的な擦過傷を駆動する。慢性疾患では表皮過形成、苔癬化、色素沈着、線維化が生じる。",
+        "pathophysiology_ja": "雄のヘビ・トカゲが交尾後に半陰茎（hemipenis）を総排泄腔内へ収納できず、外部に脱出したまま留まる病態。脱出した勃起組織は乾燥・浮腫・外傷・自咬・床材の付着により急速にうっ血・壊死し、整復が困難となる。基礎には脱水、感染、神経筋障害、外傷、結石・腫瘍による圧迫などがある。露出組織の壊死・二次感染が進むと全身性感染に至るため、早期の洗浄・整復、不能例では半陰茎切除（amputation）を要する。生殖器（総排泄腔）の問題であり皮膚疾患ではない。",
         "treatment": "Appropriate medical or surgical intervention based on diagnosis, supportive care with IV fluids as needed, pain management, nutritional support, and regular monitoring of treatment response.",
         "treatment_ja": "爬虫類における半陰茎残留の治療: 原因に応じた特異的治療。支持療法（輸液・栄養・疼痛管理）。定期モニタリング。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
