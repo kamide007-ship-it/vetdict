@@ -392,24 +392,26 @@ except ImportError:
     EXTENDED_SYMPTOM_PAIR_BOOST = {}
     SYMPTOM_TRIPLE_BOOST = {}
 
-# Default advice messages for various severity levels. These are used when
-# species-specific modules do not supply their own advice dictionary.
+# Default clinician-facing triage guidance for each severity level, used when
+# a species module does not supply its own advice dictionary. Wording frames
+# the next clinical action for the attending veterinarian rather than telling
+# the reader to "see a vet."
 ADVICE: Dict[str, Dict[str, str]] = {
     "low": {
-        "en": "Low severity: Monitor the condition and consult a veterinarian if symptoms worsen.",
-        "ja": "軽度: 様子を見て、症状が悪化した場合は獣医師に相談してください。",
+        "en": "Low severity: monitor the patient and pursue further evaluation if symptoms persist or worsen.",
+        "ja": "軽度: 経過を観察し、症状が持続・悪化する場合は追加の精査を検討してください。",
     },
     "moderate": {
-        "en": "Moderate severity: It is advisable to have the animal examined by a veterinarian soon.",
-        "ja": "中等度: 早めに獣医師の診察を受けることをお勧めします。",
+        "en": "Moderate severity: clinical evaluation within the next few days is advisable; consider targeted diagnostics to narrow the differential.",
+        "ja": "中等度: 数日以内の臨床評価が望まれます。鑑別を絞り込むための検査を検討してください。",
     },
     "high": {
-        "en": "High severity: Prompt veterinary care is recommended.",
-        "ja": "重度: 速やかに獣医師の診察を受けてください。",
+        "en": "High severity: prioritize prompt diagnostic workup and early therapeutic intervention.",
+        "ja": "重度: 早急な精査と早期の治療介入を優先してください。",
     },
     "emergency": {
-        "en": "Emergency: Seek immediate veterinary attention.",
-        "ja": "緊急: 直ちに獣医師の診察を受けてください。",
+        "en": "Emergency: prioritize stabilization and emergency workup; consider referral to a 24-hour or specialty facility if needed.",
+        "ja": "緊急: 安定化と緊急の検査を優先し、必要に応じて二次診療施設への紹介を検討してください。",
     },
 }
 

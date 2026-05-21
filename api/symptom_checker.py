@@ -2195,63 +2195,54 @@ _BREED_GENETIC_TESTS: dict[str, list[dict[str, str]]] = {
 # ---------------------------------------------------------------------------
 # General advice templates
 # ---------------------------------------------------------------------------
+# Clinician-facing triage guidance. The audience is veterinarians and
+# veterinary students using this as decision support, so wording frames the
+# next clinical action (stabilization, workup, referral) rather than telling
+# the reader to "see a vet."
 _ADVICE: dict[str, dict[str, str]] = {
     "emergency": {
         "en": (
-            "EMERGENCY: One or more symptoms strongly suggest a "
-            "life-threatening condition. Seek immediate veterinary "
-            "emergency care. Do not wait."
+            "Emergency-level findings: one or more symptoms are consistent "
+            "with a potentially life-threatening condition. Prioritize "
+            "stabilization and emergency workup, and consider referral to a "
+            "24-hour or specialty facility if needed."
         ),
         "ja": (
-            "\u3010\u7dca\u6025\u3011\u4e00\u3064\u4ee5\u4e0a\u306e\u75c7\u72b6"
-            "\u304c\u751f\u547d\u306b\u95a2\u308f\u308b\u6df1\u523b\u306a\u72b6"
-            "\u614b\u3092\u793a\u5506\u3057\u3066\u3044\u307e\u3059\u3002\u76f4"
-            "\u3061\u306b\u7dca\u6025\u52d5\u7269\u75c5\u9662\u3092\u53d7\u8a3a"
-            "\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
+            "\u7dca\u6025\u5ea6\u306e\u9ad8\u3044\u6240\u898b\u3067\u3059\u3002\u4e00\u3064\u4ee5\u4e0a\u306e\u75c7\u72b6\u304c\u751f\u547d\u3092\u8105\u304b\u3059\u75c5\u614b\u3068\u77db\u76fe\u3057\u307e\u305b\u3093\u3002"
+            "\u5b89\u5b9a\u5316\u3068\u7dca\u6025\u306e\u691c\u67fb\u3092\u512a\u5148\u3057\u3001\u5fc5\u8981\u306b\u5fdc\u3058\u3066\u4e8c\u6b21\u8a3a\u7642\u65bd\u8a2d\u3078\u306e\u7d39\u4ecb\u3092"
+            "\u691c\u8a0e\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
         ),
     },
     "high": {
         "en": (
-            "Some symptoms indicate a potentially serious condition that "
-            "requires prompt veterinary attention. Schedule an appointment "
-            "as soon as possible, ideally within 24 hours."
+            "Several symptoms point to a potentially serious condition. "
+            "Prioritize a prompt diagnostic workup (bloodwork, imaging) and "
+            "early intervention, ideally within 24 hours."
         ),
         "ja": (
-            "\u3044\u304f\u3064\u304b\u306e\u75c7\u72b6\u304c\u6df1\u523b\u306a"
-            "\u72b6\u614b\u3092\u793a\u3057\u3066\u3044\u308b\u53ef\u80fd\u6027"
-            "\u304c\u3042\u308a\u307e\u3059\u3002\u3067\u304d\u308b\u3060\u3051"
-            "\u65e9\u304f\uff08\u7406\u60f3\u7684\u306b\u306f24\u6642\u9593\u4ee5"
-            "\u5185\u306b\uff09\u52d5\u7269\u75c5\u9662\u3092\u53d7\u8a3a\u3057"
-            "\u3066\u304f\u3060\u3055\u3044\u3002"
+            "\u3044\u304f\u3064\u304b\u306e\u75c7\u72b6\u304c\u91cd\u7be4\u306a\u75c5\u614b\u3092\u793a\u5506\u3057\u307e\u3059\u3002\u65e9\u6025\u306a\u7cbe\u67fb\uff08\u8840\u6db2\u691c\u67fb\u30fb"
+            "\u753b\u50cf\u8a3a\u65ad\u7b49\uff09\u3068\u65e9\u671f\u4ecb\u5165\u3092\u3001\u7406\u60f3\u7684\u306b\u306f24\u6642\u9593\u4ee5\u5185\u306b\u512a\u5148\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
         ),
     },
     "moderate": {
         "en": (
-            "The combination of symptoms suggests a condition that should "
-            "be evaluated by a veterinarian. Schedule an appointment within "
-            "the next few days."
+            "The symptom pattern warrants clinical evaluation within the next "
+            "few days. Consider targeted diagnostics to narrow the "
+            "differential."
         ),
         "ja": (
-            "\u75c7\u72b6\u306e\u7d44\u307f\u5408\u308f\u305b\u304b\u3089\u3001"
-            "\u7363\u533b\u5e2b\u306b\u3088\u308b\u8a3a\u5bdf\u304c\u5fc5\u8981"
-            "\u3067\u3059\u3002\u6570\u65e5\u4ee5\u5185\u306b\u52d5\u7269\u75c5"
-            "\u9662\u3092\u53d7\u8a3a\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
+            "\u75c7\u72b6\u306e\u7d44\u307f\u5408\u308f\u305b\u304b\u3089\u3001\u6570\u65e5\u4ee5\u5185\u306e\u81e8\u5e8a\u8a55\u4fa1\u304c\u671b\u307e\u308c\u307e\u3059\u3002\u9451\u5225\u3092"
+            "\u7d5e\u308a\u8fbc\u3080\u305f\u3081\u306e\u691c\u67fb\u3092\u691c\u8a0e\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
         ),
     },
     "low": {
         "en": (
-            "The reported symptoms may indicate a minor issue, but "
-            "monitoring is advised. If symptoms persist or worsen, consult "
-            "a veterinarian."
+            "Findings suggest a likely minor issue. Monitor the patient and "
+            "pursue further workup if symptoms persist or worsen."
         ),
         "ja": (
-            "\u5831\u544a\u3055\u308c\u305f\u75c7\u72b6\u306f\u8efd\u5ea6\u306e"
-            "\u554f\u984c\u3092\u793a\u3057\u3066\u3044\u308b\u53ef\u80fd\u6027"
-            "\u304c\u3042\u308a\u307e\u3059\u304c\u3001\u7d4c\u904e\u89b3\u5bdf"
-            "\u3092\u304a\u52e7\u3081\u3057\u307e\u3059\u3002\u75c7\u72b6\u304c"
-            "\u7d9a\u304f\u307e\u305f\u306f\u60aa\u5316\u3059\u308b\u5834\u5408"
-            "\u306f\u3001\u7363\u533b\u5e2b\u306b\u3054\u76f8\u8ac7\u304f\u3060"
-            "\u3055\u3044\u3002"
+            "\u8efd\u5ea6\u306e\u554f\u984c\u306e\u53ef\u80fd\u6027\u304c\u9ad8\u3044\u6240\u898b\u3067\u3059\u3002\u7d4c\u904e\u3092\u89b3\u5bdf\u3057\u3001\u75c7\u72b6\u304c\u6301\u7d9a\u30fb"
+            "\u60aa\u5316\u3059\u308b\u5834\u5408\u306f\u8ffd\u52a0\u306e\u7cbe\u67fb\u3092\u691c\u8a0e\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
         ),
     },
 }

@@ -1189,8 +1189,8 @@ def get_treatment_recommendations_for_disease(disease_id: str, breed_id=None, ag
         supplements = []
 
     recommendations = {
-        "primary_care_plan_ja": "こちらは参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。具体的なケアについては獣医師にご相談ください。",
-        "primary_care_plan_en": "This is reference information (supervised by Kentaro Kamide, DVM / Minamisoma Animal Clinic). Please consult a veterinarian for specific care.",
+        "primary_care_plan_ja": "こちらは臨床判断を補助する参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。具体的な治療方針は臨床所見・検査結果と併せてご判断ください。",
+        "primary_care_plan_en": "Reference information to support veterinary clinical judgment (supervised by Kentaro Kamide, DVM / Minamisoma Animal Clinic). Base specific treatment decisions on clinical findings and diagnostic results.",
         "supplements": supplements,
         "diagnostic_tests": [
             {

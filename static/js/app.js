@@ -2716,8 +2716,8 @@ function createShareWidget(diseases){
   const sympList=[...selectedSymptoms].map(id=>{const s=symptomData.find(x=>x.id===id);return s?(currentLang==="ja"?(s.name_ja||s.name_en):s.name_en):id;}).join(", ");
   const diseaseLines=diseases.slice(0,10).map((d,i)=>{const name=currentLang==="ja"?(d.name_ja||d.name):d.name;const pct=d.match_percent||d.confidence||0;return`${i+1}. ${name} (${pct}%)`;}).join("\n");
   const fullText=currentLang==="ja"
-    ?`【VetDict 鑑別診断結果】\n動物種: ${spLabel}\n症状: ${sympList}\n\n${diseaseLines}\n\n※ 参考情報です。獣医師の診察を受けてください。\n${shareUrl}`
-    :`[VetDict Differential Diagnosis]\nSpecies: ${spLabel}\nSymptoms: ${sympList}\n\n${diseaseLines}\n\nNote: For reference only. Consult a veterinarian.\n${shareUrl}`;
+    ?`【VetDict 鑑別診断結果】\n動物種: ${spLabel}\n症状: ${sympList}\n\n${diseaseLines}\n\n※ 鑑別の参考情報です。最終診断は臨床所見・検査結果と併せてご判断ください。\n${shareUrl}`
+    :`[VetDict Differential Diagnosis]\nSpecies: ${spLabel}\nSymptoms: ${sympList}\n\n${diseaseLines}\n\nNote: differential reference only. Integrate with clinical findings and diagnostic results.\n${shareUrl}`;
   w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener noreferrer" class="share-btn twitter">X</a><a href="${lineUrl}" target="_blank" rel="noopener noreferrer" class="share-btn line">LINE</a><button type="button" class="share-btn copy">${t("shareCopy")}</button><button type="button" class="share-btn copy-full" style="background:var(--navy)">${currentLang==="ja"?"詳細コピー":"Copy Full"}</button></div>`;
   w.querySelector(".share-btn.twitter").addEventListener("click",function(){trackEvent("share_results",{method:"twitter",species:currentSpecies});});
   w.querySelector(".share-btn.line").addEventListener("click",function(){trackEvent("share_results",{method:"line",species:currentSpecies});});
@@ -2782,15 +2782,15 @@ function renderResults(data){
   }
   /* Next steps banner based on severity */
   const nextSteps=currentLang==="ja"?{
-    emergency:"⚠️ 緊急：直ちに獣医師の診察を受けてください。応急処置が必要な場合があります。",
-    high:"🔴 早急に獣医師の診察を予約してください。24時間以内の受診を推奨します。",
-    moderate:"🟡 近日中に獣医師にご相談ください。経過観察しながら1週間以内の受診を推奨します。",
-    low:"🟢 通常の健康診断時にご相談ください。症状が悪化した場合は早めの受診を。",
+    emergency:"⚠️ 緊急トリアージ：安定化を最優先し、緊急対応・必要に応じ二次診療施設への紹介を。",
+    high:"🔴 高リスク：24時間以内の精査（血液検査・画像診断等）と治療介入を優先。",
+    moderate:"🟡 中等度：数日以内の精査を。追加検査で鑑別を絞り込んでください。",
+    low:"🟢 低リスク：経過観察。症状の持続・悪化があれば精査を検討。",
   }:{
-    emergency:"⚠️ Emergency: Seek immediate veterinary care. First aid may be required.",
-    high:"🔴 Schedule a veterinary visit urgently. Within 24 hours recommended.",
-    moderate:"🟡 Consult your veterinarian soon. Visit within 1 week recommended.",
-    low:"🟢 Discuss at next routine checkup. Seek earlier care if symptoms worsen.",
+    emergency:"⚠️ Emergency triage: prioritize stabilization and emergency management; refer to a 24h/specialty facility if needed.",
+    high:"🔴 High risk: prioritize diagnostic workup (bloodwork, imaging) and intervention within 24 hours.",
+    moderate:"🟡 Moderate: evaluate within a few days; narrow the differential with targeted diagnostics.",
+    low:"🟢 Low risk: monitor; pursue workup if symptoms persist or worsen.",
   };
   if(nextSteps[severity])html+=`<div style="padding:10px 14px;margin-bottom:12px;border-radius:var(--radius);font-size:.84rem;font-weight:500;background:var(--gray-50);border-left:4px solid ${severity==='emergency'||severity==='high'?'#ef4444':severity==='moderate'?'#f59e0b':'#22a853'}">${nextSteps[severity]}</div>`;
   html+=`<div class="results-sort-bar" role="group" aria-label="${currentLang==="ja"?"結果の並び替え":"Sort results"}"><span style="font-size:.74rem;color:var(--gray-500)">${currentLang==="ja"?"並び替え:":"Sort:"}</span><button type="button" class="results-sort-btn active" data-sort="default" aria-pressed="true">${t("sortByDefault")}</button><button type="button" class="results-sort-btn" data-sort="confidence" aria-pressed="false">${t("sortByConfidence")}</button><button type="button" class="results-sort-btn" data-sort="severity" aria-pressed="false">${t("sortBySeverity")}</button></div>`;
