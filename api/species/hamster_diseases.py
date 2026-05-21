@@ -1988,7 +1988,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Caused by neoplastic growth within the cheek pouch, including squamous cell carcinoma and papilloma. Chronic irritation may be a predisposing factor.",
         "causes_ja": "ハムスターにおける頬袋腫瘍の原因: 頬袋内の腫瘍性増殖で、扁平上皮癌やパピローマを含みます。摂食困難を引き起こすことがあります。",
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
-        "pathophysiology_ja": "頬袋腫瘍はハムスターにおけるウイルス感染症である。ウイルスは特定の受容体を介して宿主細胞に侵入し、細胞内機構を利用して複製する。直接的な細胞変性効果（細胞溶解、アポトーシス、標的臓器の組織壊死）を引き起こす。自然免疫（インターフェロン、NK細胞）および適応免疫（抗体、細胞性免疫）の宿主免疫応答が免疫病理に寄与することがある。ウイルス血症により病原体が複数の臓器系に播種される可能性があり、免疫抑制により二次的な細菌・真菌感染のリスクが高まる。",
+        "pathophysiology_ja": "頬袋粘膜に発生する腫瘍性病変で、扁平上皮癌などの悪性腫瘍が報告される。遺伝子変異の蓄積により頬袋上皮細胞が制御を失って増殖し、腫瘤を形成して局所組織へ浸潤する。腫瘤により頬袋が膨隆・脱出し、採食・貯食の障害、出血、潰瘍、二次感染を生じる。頬袋は免疫学的に隔絶された部位（immunologically privileged site）として知られ移植腫瘍研究に用いられてきたが、自然発生の頬袋腫瘍は外反した頬袋の腫瘤として認められる。膿瘍・食物貯留との鑑別が必要で、生検で確定する。",
         "treatment": "Complete surgical excision of the cheek pouch mass is first-line if feasible; debulking surgery if not fully resectable. Histopathology for definitive diagnosis (SCC, papilloma). Meloxicam 0.2-1 mg/kg PO q24h for pain. Syringe feeding and SC fluid therapy for supportive care. Monitor for recurrence.",
         "treatment_ja": "可能であれば外科的完全切除が第一選択、切除不能な場合は減量手術。病理組織検査で確定診断（扁平上皮癌、パピローマ）。メロキシカム0.2-1 mg/kg PO q24hで疼痛管理。シリンジによる強制給餌と皮下輸液で支持療法。再発のモニタリング。",
         "prevention": "Prevention is limited for most neoplastic conditions. Regular health examinations facilitate early detection. Spaying/neutering may reduce risk of hormone-dependent tumors.",
