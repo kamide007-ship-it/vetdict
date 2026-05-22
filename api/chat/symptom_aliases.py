@@ -313,6 +313,16 @@ SYMPTOM_ALIASES = {
     "inappetence": "loss_of_appetite",
     "decreased appetite": "loss_of_appetite",
     "anorexic": "loss_of_appetite",
+    # 食欲増進（多食）— 甲状腺機能亢進症・糖尿病・クッシングの主徴
+    "食欲増加": "increased_appetite",
+    "食欲増進": "increased_appetite",
+    "食欲亢進": "increased_appetite",
+    "多食": "increased_appetite",
+    "過食": "increased_appetite",
+    "よく食べるのに痩せる": "increased_appetite",
+    "polyphagia": "increased_appetite",
+    "increased appetite": "increased_appetite",
+    "polyphagic": "increased_appetite",
     # 嘔吐
     "吐いた": "vomiting",
     "吐く": "vomiting",

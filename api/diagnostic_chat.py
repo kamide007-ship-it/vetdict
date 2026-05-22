@@ -165,7 +165,7 @@ def _get_equine_health_check_items():
 # ---------------------------------------------------------------------------
 # Shared constants, species data & symptom aliases (extracted to api/chat/)
 # ---------------------------------------------------------------------------
-from api.chat.constants import _GENERIC_SPECIES, SPECIES_LABELS  # noqa: F401
+from api.chat.constants import _GENERIC_SPECIES, SPECIES_LABELS, detect_species_from_text  # noqa: F401
 from api.chat.species_data import _SPECIES_DATA, get_species_data  # noqa: F401
 from api.chat.symptom_aliases import SYMPTOM_ALIASES  # noqa: F401
 
@@ -1236,6 +1236,14 @@ def diagnostic_chat():
     if len(message) > 5000:
         return jsonify({"error": "Message too long (max 5000 chars)"}), 400
 
+    # Infer species from the message text. Clinicians type the species inline
+    # ("猫 多飲多尿 体重減少", "5yo dog PU/PD"), so an explicit mention in the
+    # message takes precedence over the client default — otherwise a fresh
+    # visitor's "猫 …" query would be silently analysed against the dog database.
+    detected_species = detect_species_from_text(message)
+    if detected_species and (detected_species == "horse" or bool(get_species_data(detected_species))):
+        species = detected_species
+
     # Sanitise previous_symptoms: must be a list of short strings
     if not isinstance(previous_symptoms_raw, list):
         previous_symptoms_raw = []
@@ -1323,7 +1331,7 @@ def diagnostic_chat():
         else:
             treatments = {
                 "supplements": [],
-                "primary_care_plan_ja": "獣医師にご相談ください。",
+                "primary_care_plan_ja": "詳細な治療方針は臨床所見・検査結果と併せてご判断ください。",
                 "recommended_tests": disease.get("recommended_tests", []),
             }
 
@@ -1349,7 +1357,7 @@ def diagnostic_chat():
             response_text += f"{i}. **{c['name_ja']}** ({c['name_en']}) — 一致度 {c['confidence_level']}\n"
             if c.get("description_ja") or c.get("description"):
                 response_text += f"   {c.get('description_ja') or c.get('description', '')}\n"
-        response_text += "\n※ こちらは参考情報です。獣医師の診察を受けてください。"
+        response_text += "\n※ こちらは鑑別の参考情報です。最終診断は臨床所見・検査結果と併せてご判断ください。"
     elif all_symptoms:
         response_text = (
             f"{guidance_line}\n"
@@ -1396,8 +1404,8 @@ def diagnostic_chat():
             species=species,
         ),
         "recommendations": {
-            "next_step": "This is reference information only. Supervised by Kentaro Kamide, DVM (Minamisoma Animal Clinic). Please consult a veterinarian for professional evaluation.",
-            "next_step_ja": "こちらは参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。正確な評価のため、獣医師の診察を受けてください。",
+            "next_step": "Reference information to support clinical judgment (supervised by Kentaro Kamide, DVM / Minamisoma Animal Clinic). Integrate with clinical findings and diagnostic results for final diagnosis.",
+            "next_step_ja": "こちらは臨床判断を補助する参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。最終診断は臨床所見・検査結果と併せてご判断ください。",
         },
     }
 
@@ -2437,8 +2445,8 @@ def consultation():
                 "pain_score": pain_score,
                 "species": species,
                 "recommendations": {
-                    "next_step_ja": "こちらは参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。正確な評価のため、獣医師の診察を受けてください。",
-                    "next_step_en": "This is reference information only. Supervised by Kentaro Kamide, DVM (Minamisoma Animal Clinic). Please consult a veterinarian.",
+                    "next_step_ja": "こちらは臨床判断を補助する参考情報です（獣医師監修：上手 健太郎／南相馬アニマルクリニック）。最終診断は臨床所見・検査結果と併せてご判断ください。",
+                    "next_step_en": "Reference information to support clinical judgment (supervised by Kentaro Kamide, DVM / Minamisoma Animal Clinic). Integrate with clinical findings and diagnostic results for final diagnosis.",
                 },
             }
         )

@@ -219,7 +219,7 @@ const I18N={
     commError:"通信エラーが発生しました。ネットワーク接続を確認の上、再試行してください。",
     noResponse:"応答を取得できませんでした",
     diseaseCount:"%filtered% / %total% 件表示",
-    catLabels:{respiratory:"呼吸器",digestive:"消化器",neurological:"神経",musculoskeletal:"運動器",dermatological:"皮膚",urinary:"泌尿器",ophthalmological:"眼",cardiovascular:"循環器",behavioral:"行動",general:"全身",skin:"体表・外観",fins:"鰭",gills:"鰓",eyes:"眼",body:"腹部・体型",parasites:"寄生虫",emergency:"急変",reproductive:"繁殖",behavior:"行動",other:"その他"},
+    catLabels:{respiratory:"呼吸器",digestive:"消化器",neurological:"神経",musculoskeletal:"運動器",dermatological:"皮膚",urinary:"泌尿器",ophthalmological:"眼",cardiovascular:"循環器",cardiac:"循環器",behavioral:"行動",general:"全身",skin:"体表・外観",fins:"鰭",gills:"鰓",eyes:"眼",eye:"眼",ocular:"眼",ears:"耳",eyes_ears:"眼・耳",oral:"口腔",internal:"内科・全身",developmental:"発達",limb:"四肢",hoof:"蹄",dental:"歯科",repository_exam:"検査所見",toxic:"中毒",foal:"子馬",immune:"免疫",endocrine:"内分泌",misc:"その他",body:"腹部・体型",parasites:"寄生虫",emergency:"急変",reproductive:"繁殖",behavior:"行動",other:"その他"},
     sevLabels:{low:"軽度",moderate:"中等度",high:"重度",emergency:"緊急"},
     dtDescription:"説明",dtPathophysiology:"病態生理",dtCauses:"原因",dtPrevention:"予防",dtTreatment:"治療",dtPrognosis:"予後",
     dtMatchedSymptoms:"一致した症状",dtRecommendedTests:"推奨検査",dtRecTestList:"推奨検査一覧:",
@@ -287,7 +287,9 @@ const I18N={
     cookieDismiss:"後で決める",
     cookieDismissAria:"同意せずに閉じる",
     dashboardOpen:"統計ダッシュボード",
+    dashboardOpenAria:"統計ダッシュボードを開く",
     helpButton:"使い方ガイド",
+    helpGuideAria:"使い方ガイドを開く",
     helpTitle:"VetDict — 使い方ガイド",
     helpClose:"閉じる",
     // Pricing
@@ -479,7 +481,7 @@ const I18N={
     commError:"A communication error occurred. Please check your network and retry.",
     noResponse:"Could not retrieve response",
     diseaseCount:"%filtered% / %total% shown",
-    catLabels:{respiratory:"Respiratory",digestive:"Digestive",neurological:"Neurological",musculoskeletal:"Musculoskeletal",dermatological:"Dermatological",urinary:"Urinary",ophthalmological:"Ophthalmological",cardiovascular:"Cardiovascular",behavioral:"Behavioral",general:"General",skin:"Skin & Appearance",fins:"Fins",gills:"Gills",eyes:"Eyes",body:"Body & Shape",parasites:"Parasites",emergency:"Emergency",reproductive:"Reproductive",behavior:"Behavior",other:"Other"},
+    catLabels:{respiratory:"Respiratory",digestive:"Digestive",neurological:"Neurological",musculoskeletal:"Musculoskeletal",dermatological:"Dermatological",urinary:"Urinary",ophthalmological:"Ophthalmological",cardiovascular:"Cardiovascular",cardiac:"Cardiac",behavioral:"Behavioral",general:"General",skin:"Skin & Appearance",fins:"Fins",gills:"Gills",eyes:"Eyes",eye:"Eyes",ocular:"Ocular",ears:"Ears",eyes_ears:"Eyes & Ears",oral:"Oral",internal:"Internal & Systemic",developmental:"Developmental",limb:"Limbs",hoof:"Hoof",dental:"Dental",repository_exam:"Exam Findings",toxic:"Toxic",foal:"Foal",immune:"Immune",endocrine:"Endocrine",misc:"Miscellaneous",body:"Body & Shape",parasites:"Parasites",emergency:"Emergency",reproductive:"Reproductive",behavior:"Behavior",other:"Other"},
     sevLabels:{low:"Mild",moderate:"Moderate",high:"Severe",emergency:"Emergency"},
     dtDescription:"Description",dtPathophysiology:"Pathophysiology",dtCauses:"Causes",dtPrevention:"Prevention",dtTreatment:"Treatment",dtPrognosis:"Prognosis",
     dtMatchedSymptoms:"Matched Symptoms",dtRecommendedTests:"Recommended Tests",dtRecTestList:"Recommended Tests:",
@@ -547,7 +549,9 @@ const I18N={
     cookieDismiss:"Decide later",
     cookieDismissAria:"Close without accepting",
     dashboardOpen:"Statistics Dashboard",
+    dashboardOpenAria:"Open statistics dashboard",
     helpButton:"Quick Guide",
+    helpGuideAria:"Open quick guide",
     helpTitle:"VetDict — Quick Guide",
     helpClose:"Close",
     // Pricing
@@ -762,6 +766,10 @@ function trackEvent(name,params){
 }
 
 let currentSpecies=null,currentView="checker",selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="",currentBreed="";
+// Species used for the free-text chat. Seeded by an explicit species selection
+// and updated from each response's detected species so multi-turn follow-ups
+// (which may omit the species word) stay on the same animal.
+let chatSpecies="";
 let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
 let symptomSortMode="category";
 
@@ -789,9 +797,10 @@ document.addEventListener("DOMContentLoaded",async()=>{
     if(analyzeBtn)analyzeBtn.addEventListener("click",doAnalyze);
     if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;renderDiseaseDb();},200));
     setupGlobalSearch();
-    // Restore view from URL hash
+    // Restore view from URL hash (silent: don't auto-focus inputs on initial load —
+    // would pop the mobile keyboard for users landing on /#chat etc.)
     const hash=location.hash.replace("#","");
-    if(hash&&["checker","database","chat","drugs","anesthesia","emergency"].includes(hash))switchView(hash);
+    if(hash&&["checker","database","chat","drugs","anesthesia","emergency"].includes(hash))switchView(hash,{silent:true});
     // Handle ?species= query param (from sitemap/SEO links)
     const spParam=new URLSearchParams(location.search).get("species");
     if(spParam&&SPECIES_ICONS[spParam])selectSpecies(spParam);
@@ -1757,6 +1766,7 @@ function setupOfflineIndicator(){
 
 function resetSpeciesChat(species){
   chatAccumulatedSymptoms=[];
+  chatSpecies=species||"";
   const sp=SPECIES.find(s=>s.id===species);
   const spLabel=sp?(currentLang==="ja"?sp.name:sp.nameEn):(species||"dog");
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
@@ -2016,16 +2026,42 @@ function _applyLabRanges(ranges){
 }
 function highlightLabAbnormals(){
   let filled=0,abnormal=0;
+  const isJa=currentLang==="ja";
+  const highTxt=isJa?"\u57fa\u6e96\u7bc4\u56f2\u3088\u308a\u9ad8\u5024":"above reference range";
+  const lowTxt=isJa?"\u57fa\u6e96\u7bc4\u56f2\u3088\u308a\u4f4e\u5024":"below reference range";
   document.querySelectorAll("#labValuesGrid input[data-lab]").forEach(el=>{
     const v=parseFloat(el.value),lo=parseFloat(el.dataset.lo),hi=parseFloat(el.dataset.hi);
     const flag=el.nextElementSibling;
     el.classList.remove("lab-high","lab-low");
     el.removeAttribute("aria-invalid");
-    if(flag){flag.textContent="";flag.setAttribute("aria-hidden","true");}
+    if(flag){
+      flag.textContent="";
+      // Marker has no accessible name when empty, so it can stay hidden from AT.
+      flag.setAttribute("aria-hidden","true");
+      flag.removeAttribute("aria-label");
+    }
     if(isNaN(v)||el.value.trim()==="")return;
     filled++;
-    if(v>hi){el.classList.add("lab-high");el.setAttribute("aria-invalid","true");if(flag){flag.textContent="\u2191";flag.style.color="#e74c3c";}abnormal++;}
-    else if(v<lo){el.classList.add("lab-low");el.setAttribute("aria-invalid","true");if(flag){flag.textContent="\u2193";flag.style.color="#2980b9";}abnormal++;}
+    if(v>hi){
+      el.classList.add("lab-high");el.setAttribute("aria-invalid","true");
+      if(flag){
+        flag.textContent="\u2191";flag.style.color="#e74c3c";
+        // Make the marker accessible: name = "above reference range"
+        flag.removeAttribute("aria-hidden");
+        flag.setAttribute("role","img");
+        flag.setAttribute("aria-label",highTxt);
+      }
+      abnormal++;
+    } else if(v<lo){
+      el.classList.add("lab-low");el.setAttribute("aria-invalid","true");
+      if(flag){
+        flag.textContent="\u2193";flag.style.color="#2980b9";
+        flag.removeAttribute("aria-hidden");
+        flag.setAttribute("role","img");
+        flag.setAttribute("aria-label",lowTxt);
+      }
+      abnormal++;
+    }
   });
   const badge=document.getElementById("labSummaryBadge");
   if(!badge)return;
@@ -2050,7 +2086,7 @@ function clearLabValues(){
 function openLabImportModal(){
   trackEvent("open_lab_import");
   let modal=document.getElementById("labImportModal");
-  if(modal){modal.classList.add("open");document.body.style.overflow="hidden";return;}
+  if(modal){modal.classList.add("open");document.body.style.overflow="hidden";openModalA11y(modal,".dashboard-close");return;}
   const isJa=currentLang==="ja";
   modal=document.createElement("div");
   modal.id="labImportModal";
@@ -2124,12 +2160,14 @@ function openLabImportModal(){
   });
   modal.classList.add("open");
   document.body.style.overflow="hidden";
+  openModalA11y(modal,".dashboard-close");
 }
 
 function closeLabImportModal(){
   const modal=document.getElementById("labImportModal");
   if(modal)modal.classList.remove("open");
   document.body.style.overflow="";
+  closeModalA11y(modal);
 }
 
 function _handleLabImageFile(file){
@@ -2318,6 +2356,57 @@ function buildFieldFallback(label,name){
 
 function escapeHtml(value){
   return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
+}
+
+/* --- Modal focus management (a11y) ---
+   Saves the trigger element on open so focus can be restored on close,
+   moves keyboard focus into the modal, and installs a Tab-cycle trap so
+   focus cannot escape into background content. */
+const _modalLastFocus=new WeakMap();
+const _modalTrapHandlers=new WeakMap();
+const _FOCUSABLE_SEL='button:not([disabled]),[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+function _modalFocusables(modal){
+  return Array.from(modal.querySelectorAll(_FOCUSABLE_SEL))
+    .filter(el=>el.offsetParent!==null||el.getClientRects().length>0);
+}
+function openModalA11y(modal,initialFocusSel){
+  if(!modal)return;
+  const prev=document.activeElement;
+  if(prev&&prev!==document.body)_modalLastFocus.set(modal,prev);
+  // Defer to allow display:flex / classList transition to apply.
+  requestAnimationFrame(()=>{
+    let target=null;
+    if(initialFocusSel)target=modal.querySelector(initialFocusSel);
+    if(!target)target=modal.querySelector(".dashboard-close,[autofocus]")
+      ||modal.querySelector(_FOCUSABLE_SEL);
+    if(target&&typeof target.focus==="function"){try{target.focus({preventScroll:true});}catch(_){target.focus();}}
+  });
+  // Tab/Shift+Tab cycling trap. One handler per modal — removed on close.
+  if(!_modalTrapHandlers.has(modal)){
+    const handler=function(e){
+      if(e.key!=="Tab")return;
+      if(!modal.classList.contains("open"))return;
+      const items=_modalFocusables(modal);
+      if(!items.length){e.preventDefault();return;}
+      const first=items[0],last=items[items.length-1];
+      const active=document.activeElement;
+      if(e.shiftKey){
+        if(active===first||!modal.contains(active)){e.preventDefault();last.focus();}
+      }else{
+        if(active===last||!modal.contains(active)){e.preventDefault();first.focus();}
+      }
+    };
+    _modalTrapHandlers.set(modal,handler);
+    modal.addEventListener("keydown",handler);
+  }
+}
+function closeModalA11y(modal){
+  if(!modal)return;
+  const prev=_modalLastFocus.get(modal);
+  _modalLastFocus.delete(modal);
+  if(prev&&typeof prev.focus==="function"&&document.body.contains(prev)){
+    try{prev.focus({preventScroll:true});}catch(_){prev.focus();}
+  }
 }
 
 function renderTreatmentWithAdjunct(text){
@@ -2667,8 +2756,8 @@ function createShareWidget(diseases){
   const sympList=[...selectedSymptoms].map(id=>{const s=symptomData.find(x=>x.id===id);return s?(currentLang==="ja"?(s.name_ja||s.name_en):s.name_en):id;}).join(", ");
   const diseaseLines=diseases.slice(0,10).map((d,i)=>{const name=currentLang==="ja"?(d.name_ja||d.name):d.name;const pct=d.match_percent||d.confidence||0;return`${i+1}. ${name} (${pct}%)`;}).join("\n");
   const fullText=currentLang==="ja"
-    ?`【VetDict 鑑別診断結果】\n動物種: ${spLabel}\n症状: ${sympList}\n\n${diseaseLines}\n\n※ 参考情報です。獣医師の診察を受けてください。\n${shareUrl}`
-    :`[VetDict Differential Diagnosis]\nSpecies: ${spLabel}\nSymptoms: ${sympList}\n\n${diseaseLines}\n\nNote: For reference only. Consult a veterinarian.\n${shareUrl}`;
+    ?`【VetDict 鑑別診断結果】\n動物種: ${spLabel}\n症状: ${sympList}\n\n${diseaseLines}\n\n※ 鑑別の参考情報です。最終診断は臨床所見・検査結果と併せてご判断ください。\n${shareUrl}`
+    :`[VetDict Differential Diagnosis]\nSpecies: ${spLabel}\nSymptoms: ${sympList}\n\n${diseaseLines}\n\nNote: differential reference only. Integrate with clinical findings and diagnostic results.\n${shareUrl}`;
   w.innerHTML=`<span>${t("shareResults")}</span><div class="share-btns"><a href="${twitterUrl}" target="_blank" rel="noopener noreferrer" class="share-btn twitter">X</a><a href="${lineUrl}" target="_blank" rel="noopener noreferrer" class="share-btn line">LINE</a><button type="button" class="share-btn copy">${t("shareCopy")}</button><button type="button" class="share-btn copy-full" style="background:var(--navy)">${currentLang==="ja"?"詳細コピー":"Copy Full"}</button></div>`;
   w.querySelector(".share-btn.twitter").addEventListener("click",function(){trackEvent("share_results",{method:"twitter",species:currentSpecies});});
   w.querySelector(".share-btn.line").addEventListener("click",function(){trackEvent("share_results",{method:"line",species:currentSpecies});});
@@ -2733,15 +2822,15 @@ function renderResults(data){
   }
   /* Next steps banner based on severity */
   const nextSteps=currentLang==="ja"?{
-    emergency:"⚠️ 緊急：直ちに獣医師の診察を受けてください。応急処置が必要な場合があります。",
-    high:"🔴 早急に獣医師の診察を予約してください。24時間以内の受診を推奨します。",
-    moderate:"🟡 近日中に獣医師にご相談ください。経過観察しながら1週間以内の受診を推奨します。",
-    low:"🟢 通常の健康診断時にご相談ください。症状が悪化した場合は早めの受診を。",
+    emergency:"⚠️ 緊急トリアージ：安定化を最優先し、緊急対応・必要に応じ二次診療施設への紹介を。",
+    high:"🔴 高リスク：24時間以内の精査（血液検査・画像診断等）と治療介入を優先。",
+    moderate:"🟡 中等度：数日以内の精査を。追加検査で鑑別を絞り込んでください。",
+    low:"🟢 低リスク：経過観察。症状の持続・悪化があれば精査を検討。",
   }:{
-    emergency:"⚠️ Emergency: Seek immediate veterinary care. First aid may be required.",
-    high:"🔴 Schedule a veterinary visit urgently. Within 24 hours recommended.",
-    moderate:"🟡 Consult your veterinarian soon. Visit within 1 week recommended.",
-    low:"🟢 Discuss at next routine checkup. Seek earlier care if symptoms worsen.",
+    emergency:"⚠️ Emergency triage: prioritize stabilization and emergency management; refer to a 24h/specialty facility if needed.",
+    high:"🔴 High risk: prioritize diagnostic workup (bloodwork, imaging) and intervention within 24 hours.",
+    moderate:"🟡 Moderate: evaluate within a few days; narrow the differential with targeted diagnostics.",
+    low:"🟢 Low risk: monitor; pursue workup if symptoms persist or worsen.",
   };
   if(nextSteps[severity])html+=`<div style="padding:10px 14px;margin-bottom:12px;border-radius:var(--radius);font-size:.84rem;font-weight:500;background:var(--gray-50);border-left:4px solid ${severity==='emergency'||severity==='high'?'#ef4444':severity==='moderate'?'#f59e0b':'#22a853'}">${nextSteps[severity]}</div>`;
   html+=`<div class="results-sort-bar" role="group" aria-label="${currentLang==="ja"?"結果の並び替え":"Sort results"}"><span style="font-size:.74rem;color:var(--gray-500)">${currentLang==="ja"?"並び替え:":"Sort:"}</span><button type="button" class="results-sort-btn active" data-sort="default" aria-pressed="true">${t("sortByDefault")}</button><button type="button" class="results-sort-btn" data-sort="confidence" aria-pressed="false">${t("sortByConfidence")}</button><button type="button" class="results-sort-btn" data-sort="severity" aria-pressed="false">${t("sortBySeverity")}</button></div>`;
@@ -2987,6 +3076,7 @@ function _showDashboardModal(data){
   }
   modal.classList.add("open");
   document.body.style.overflow="hidden";
+  openModalA11y(modal,".dashboard-close");
   if(!data)return;
   const body=document.getElementById("dashboardModalBody");
   if(!body)return;
@@ -2997,6 +3087,7 @@ function closeDashboard(){
   const modal=document.getElementById("dashboardModal");
   if(modal)modal.classList.remove("open");
   document.body.style.overflow="";
+  closeModalA11y(modal);
 }
 
 /* --- In-app Help / Tour modal (educational content) --- */
@@ -3022,12 +3113,14 @@ function openHelpGuide(){
   }
   modal.classList.add("open");
   document.body.style.overflow="hidden";
+  openModalA11y(modal,".dashboard-close");
 }
 
 function closeHelpGuide(){
   const modal=document.getElementById("helpGuideModal");
   if(modal)modal.classList.remove("open");
   document.body.style.overflow="";
+  closeModalA11y(modal);
 }
 
 function _renderHelpGuideContent(){
@@ -4016,8 +4109,12 @@ function navigateToDiseaseDb(query){
 }
 
 function switchView(view,opts){
+  /* opts.silent — skip event tracking + auto-focus (used for initial hash routing
+     on page load so the soft keyboard does not pop up unexpectedly on mobile).
+     opts.focusSearch — focus the view's primary search input within the tap gesture
+     so the mobile soft keyboard opens (used for explicit tab/menu taps). */
   opts=opts||{};
-  trackEvent("switch_view",{view:view});
+  if(!opts.silent)trackEvent("switch_view",{view:view});
   currentView=view;
   const views=["checker","database","chat","drugs","anesthesia","emergency"];
   const prefersReduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -4026,7 +4123,7 @@ function switchView(view,opts){
     const panel=document.getElementById("view"+v.charAt(0).toUpperCase()+v.slice(1));
     if(tab)tab.setAttribute("aria-selected",v===view);
     if(panel){
-      if(v===view){panel.classList.remove("hidden");if(!prefersReduced)panel.style.animation="fade-tab-in .3s ease-out";}
+      if(v===view){panel.classList.remove("hidden");if(!prefersReduced&&!opts.silent)panel.style.animation="fade-tab-in .3s ease-out";}
       else{panel.classList.add("hidden");panel.style.animation="";}
     }
   });
@@ -4036,16 +4133,21 @@ function switchView(view,opts){
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
   if(view==="anesthesia"&&!anesthesiaLoaded)loadAnesthesiaProtocols();
   if(view==="emergency"&&!emergencyLoaded)loadEmergencyProtocols();
-  /* フォーカスを新しいパネルへ移動。タブ/メニューのタップ時は検索ボックスへ即フォーカス（モバイルでキーボードが確実に開く） */
+  /* フォーカス制御:
+     - opts.silent（初期ハッシュルーティング）: フォーカスしない（モバイルでキーボードが勝手に出ない）
+     - opts.focusSearch（タブ/メニューのタップ）: 検索ボックスへ同期フォーカス → モバイルでキーボードが開く
+     - それ以外（既定）: パネル自体へプログラムフォーカス（キーボードは出さない） */
   const activePanel=document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
   const searchIds={database:"diseaseSearch",chat:"chatInput",drugs:"drugSearch",anesthesia:"anesthesiaSearch",emergency:"emergencySearch"};
   const searchEl=searchIds[view]?document.getElementById(searchIds[view]):null;
-  if(opts.focusSearch&&searchEl){
+  if(opts.silent){
+    /* 初期ルーティング: フォーカスもキーボードも出さない */
+  }else if(opts.focusSearch&&searchEl){
     /* ユーザー操作と同じ同期コンテキストで focus → iOS/Android でソフトキーボードが起動する */
     try{searchEl.focus({preventScroll:true});}catch(_){searchEl.focus();}
   }else if(activePanel){
-    const focusable=activePanel.querySelector("input,select,button:not([disabled]),textarea,[tabindex='0']");
-    if(focusable)setTimeout(()=>focusable.focus(),50);
+    if(!activePanel.hasAttribute("tabindex"))activePanel.setAttribute("tabindex","-1");
+    try{activePanel.focus({preventScroll:true});}catch(_){activePanel.focus();}
   }
   /* モバイル: ハンバーガーメニューを閉じる + コンテンツへスクロール */
   const nav=document.getElementById("mainNav");
@@ -4162,13 +4264,14 @@ function sendLandingChat(isRetry){
   input.value="";input.disabled=true;if(sendBtn)sendBtn.disabled=true;
   const msgs=document.getElementById("landingChatMessages");
   const userDiv=document.createElement("div");userDiv.className="chat-msg user";userDiv.textContent=text;msgs.appendChild(userDiv);msgs.scrollTop=msgs.scrollHeight;
-  const species=currentSpecies||"dog";
+  const species=chatSpecies||currentSpecies||"dog";
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
   fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})},20000)
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
     loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
+    if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
     const continueBtn=document.createElement("div");
@@ -4218,7 +4321,7 @@ let chatAccumulatedSymptoms=[];
 let chatDeniedSymptoms=[];
 
 function _sendSymptomUpdate(symptomId,confirmed){
-  const species=currentSpecies||"dog";
+  const species=chatSpecies||currentSpecies||"dog";
   if(!confirmed)chatDeniedSymptoms.push(symptomId);
   const msgs=document.getElementById("chatMessages");
   // Show brief status
@@ -4230,6 +4333,7 @@ function _sendSymptomUpdate(symptomId,confirmed){
   .then(data=>{
     loading.remove();
     if(!data)return;
+    if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms)chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
   })
@@ -4243,8 +4347,8 @@ function sendChatMessage(isRetry){
   // doesn't prevent retries on a new question.
   if(!isRetry)_chatRetries=0;
   input.value="";input.disabled=true;if(sendBtn){sendBtn.disabled=true;sendBtn.setAttribute("aria-busy","true");}
-  trackEvent("chat_message",{species:currentSpecies||"dog",message_length:text.length});
-  addChatMsg(text,"user");const species=currentSpecies||"dog";
+  trackEvent("chat_message",{species:chatSpecies||currentSpecies||"dog",message_length:text.length});
+  addChatMsg(text,"user");const species=chatSpecies||currentSpecies||"dog";
   const msgs=document.getElementById("chatMessages");
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.setAttribute("aria-label",currentLang==="ja"?"解析中":"Analyzing");loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
   const slowTimer=setTimeout(()=>{loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span><div style="font-size:.72rem;color:var(--gray-400);margin-top:4px">'+(currentLang==="ja"?"解析中... 通常より時間がかかっています":"Analyzing... taking longer than usual")+'</div>';},3000);
@@ -4253,6 +4357,7 @@ function sendChatMessage(isRetry){
   .then(data=>{
     clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn){sendBtn.disabled=false;sendBtn.removeAttribute("aria-busy");}input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
+    if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
     _chatRetries=0;
@@ -5038,7 +5143,7 @@ function loadDrugDictionary(){
     if(currentSpecies){spSelect.value=currentSpecies;}
     renderDrugList();
   }).catch(()=>{
-    list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button class="retry-drug-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
+    list.innerHTML=`<div role="alert" style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button type="button" class="retry-drug-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
     const rb=list.querySelector(".retry-drug-btn");
     if(rb)rb.addEventListener("click",()=>{drugsLoaded=false;loadDrugDictionary();});
   });

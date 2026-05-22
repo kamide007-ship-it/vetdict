@@ -28,6 +28,8 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "loss_of_appetite": ["appetite_loss", "anorexia", "poor_appetite", "decreased_appetite"],
         "appetite_loss": ["loss_of_appetite", "anorexia", "poor_appetite", "decreased_appetite"],
         "anorexia": ["loss_of_appetite", "appetite_loss", "poor_appetite"],
+        "increased_appetite": ["appetite_increase", "polyphagia", "increased_hunger", "gen_increased_appetite"],
+        "appetite_increase": ["increased_appetite", "polyphagia", "increased_hunger"],
         # General
         "lethargy": ["depression", "inactivity", "weakness", "listlessness", "muscle_wasting"],
         "weakness": ["lethargy", "depression", "inactivity"],

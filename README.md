@@ -1,6 +1,6 @@
 # VetDict - Veterinary Differential Diagnosis Platform
 
-The world's largest open veterinary differential diagnosis platform — **4,800+ diseases** across **20 animal species**, **175+ drugs** with species-specific safety data, and an AI integrity control layer (RECO2/RECO3).
+A clinical decision support platform for veterinarians and veterinary students — **7,000+ diseases** across **21 animal species**, **610+ drugs** with species-specific safety data, **188 sedation/anesthesia protocols**, and an AI integrity control layer (RECO2/RECO3).
 
 > Built by a practicing veterinarian. Bilingual (Japanese / English).
 
@@ -10,9 +10,11 @@ The world's largest open veterinary differential diagnosis platform — **4,800+
 
 | Metric | Value |
 |--------|-------|
-| Animal Species | 20 |
-| Diseases | 4,800+ |
-| Drugs | 175+ |
+| Animal Species | 21 |
+| Diseases | 7,000+ |
+| Drugs | 610+ |
+| Drug Categories | 49 |
+| Sedation/Anesthesia Protocols | 188 |
 | Symptoms | 52 |
 | Breeds (cat) | 15 |
 | API Endpoints | 28+ |
@@ -25,11 +27,17 @@ The world's largest open veterinary differential diagnosis platform — **4,800+
 - Real-time animated disease counts on the landing page
 
 ### Disease Database
-- 4,800+ diseases with Japanese / English bilingual descriptions
-- 20 species: Dog (577), Cat (516), Horse (736), Rabbit (271), Bird (308), Parakeet (251), Guinea Pig (200), Hamster (190), Chinchilla (169), Reptile (161), Tortoise (161), Ferret (160), Parrot (160), Exotic Other (151), Snake (141), Lizard (141), Hedgehog (140), Amphibian (131), Sugar Glider (130), Degu (120)
+- 7,000+ diseases with Japanese / English bilingual descriptions
+- 21 species: Dog (622), Cat (550), Horse (621), Rabbit (452), Bird (551), Parakeet (459), Parrot (283), Guinea Pig (346), Hamster (321), Chinchilla (278), Ferret (277), Hedgehog (244), Sugar Glider (221), Degu (201), Reptile (286), Tortoise (288), Snake (248), Lizard (250), Amphibian (258), Fish (45), Exotic Other (292)
 
 ### Drug Dictionary
-- 175+ drugs with species-specific dosage, safety, routes, formulations, and drug interactions
+- 610+ drugs across 49 categories with species-specific dosage, safety, routes, formulations, and drug interactions
+- Includes biologics (Cytopoint, Librela, Solensia), antivirals (GS-441524, molnupiravir), and ECVN-formulated nutraceuticals
+
+### Sedation & Anesthesia Protocols
+- 188 protocols across all 21 species (sedation, premedication, induction, maintenance, locoregional, monitoring, recovery, emergency)
+- Includes non-narcotic Japanese-market protocols (medetomidine/dexmedetomidine + butorphanol + midazolam)
+- Drug–disease contraindication warnings (31 rules)
 
 ### Bilingual Mode (JP / EN)
 - One-click language toggle (JP / EN) in the header
@@ -68,7 +76,7 @@ vetdict/
 │   ├── health_checker.py   # Checkbox UI blueprint
 │   ├── diagnostic_chat.py  # Chat interface
 │   ├── drug_dictionary.py  # Drug database
-│   └── species/            # 20 species disease modules
+│   └── species/            # 21 species disease modules
 ├── reco2/                  # AI integrity control layer
 │   ├── engine.py           # Evaluation algorithm (psi scoring)
 │   ├── input_gate.py       # Input risk analysis
@@ -123,7 +131,7 @@ The project includes `render.yaml` for automatic deployment.
 
 ## References
 
-Disease data compiled from 52 veterinary references including Merck Veterinary Manual, Plumb's Veterinary Drug Handbook, BSAVA manuals, and species-specific clinical texts.
+Disease and drug data compiled from 190+ veterinary references including Merck Veterinary Manual, Plumb's Veterinary Drug Handbook, BSAVA manuals, Lumb & Jones (5th ed.), Carpenter's Exotic Animal Formulary (6th ed.), Ettinger's Textbook of Veterinary Internal Medicine (8th ed.), AAHA/AVMA/WSAVA clinical guidelines, ISCAID 2019 UTI guidelines, and species-specific clinical texts.
 
 ## Sponsor
 

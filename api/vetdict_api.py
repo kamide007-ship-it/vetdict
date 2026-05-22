@@ -350,7 +350,9 @@ def add_headers(response):
     """Add security headers to all responses."""
     # Content security headers
     response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    # Use DENY to align with CSP frame-ancestors 'none' (we never embed our own
+    # pages in frames). SAMEORIGIN here contradicted the stricter CSP directive.
+    response.headers["X-Frame-Options"] = "DENY"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
 
@@ -1125,14 +1127,25 @@ def health():
         if _db_file.exists() and _db_file.stat().st_size > 0:
             _t0 = _time.monotonic()
             _conn = _sqlite3.connect(_db_path, timeout=5.0)
-            _count = _conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
+            _sqlite_count = _conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
             _integrity = _conn.execute("PRAGMA quick_check").fetchone()[0]
             _conn.close()
             _latency_ms = round((_time.monotonic() - _t0) * 1000, 1)
             _db_ok = _integrity == "ok"
+            # Report the count actually served by the API. When SQLite is empty
+            # the disease_store falls back to in-memory Python modules, so a
+            # bare SELECT COUNT(*) misrepresents the system as having 0
+            # diseases. Use the effective count for monitoring/uptime checks.
+            try:
+                from api.disease_store import get_species_stats
+
+                _effective_count = sum(s.get("diseases", 0) for s in get_species_stats().get("species", []))
+            except Exception:
+                _effective_count = _sqlite_count
             checks["database"] = {
                 "status": "ok" if _db_ok else "error",
-                "diseases": _count,
+                "diseases": _effective_count,
+                "diseases_sqlite": _sqlite_count,
                 "integrity": _integrity,
                 "latency_ms": _latency_ms,
             }
