@@ -170,10 +170,13 @@ class TestDifferentialAnalysis:
 
     def test_unknown_disease_ids(self):
         client = app.test_client()
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "nonexistent_1",
-            "disease_id_2": "nonexistent_2",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "nonexistent_1",
+                "disease_id_2": "nonexistent_2",
+            },
+        )
         assert r.status_code == 404
 
 
@@ -187,9 +190,12 @@ class TestTreatmentPlan:
 
     def test_unknown_disease_id(self):
         client = app.test_client()
-        r = client.post("/api/diagnostic-chat/treatment-plan", json={
-            "disease_id": "nonexistent_disease",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/treatment-plan",
+            json={
+                "disease_id": "nonexistent_disease",
+            },
+        )
         assert r.status_code == 404
 
 
@@ -198,26 +204,35 @@ class TestFeedback:
 
     def test_missing_session_id(self):
         client = app.test_client()
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "feedback": "good",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "feedback": "good",
+            },
+        )
         assert r.status_code == 400
 
     def test_invalid_feedback_type(self):
         client = app.test_client()
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "test-session",
-            "feedback": "invalid_type",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "test-session",
+                "feedback": "invalid_type",
+            },
+        )
         assert r.status_code == 400
 
     def test_valid_feedback(self):
         client = app.test_client()
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "test-session-123",
-            "feedback": "good",
-            "domain": "general",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "test-session-123",
+                "feedback": "good",
+                "domain": "general",
+            },
+        )
         assert r.status_code == 201
         data = r.get_json()
         assert data["status"] == "recorded"
