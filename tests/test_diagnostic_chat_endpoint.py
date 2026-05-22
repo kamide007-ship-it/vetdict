@@ -1,4 +1,56 @@
+from api.chat.constants import detect_species_from_text
 from api.vetdict_api import app
+
+
+class TestSpeciesDetectionFromText:
+    """Free-text chat must infer the patient species from the message itself.
+
+    Clinicians type the species inline ("猫 多飲多尿", "5yo dog PU/PD"); the
+    chat must not silently analyse a cat case against the dog database.
+    """
+
+    def test_japanese_leading_token(self):
+        assert detect_species_from_text("猫 多飲多尿 体重減少 食欲増加") == "cat"
+        assert detect_species_from_text("3歳猫 嘔吐 食欲廃絶 黄疸") == "cat"
+        assert detect_species_from_text("犬 咳 発熱") == "dog"
+        assert detect_species_from_text("うちのうさぎが食べない") == "rabbit"
+        assert detect_species_from_text("リクガメの甲羅が柔らかい") == "tortoise"
+        assert detect_species_from_text("セキセイインコ 羽を膨らませる") == "parakeet"
+
+    def test_english_keywords(self):
+        assert detect_species_from_text("5yo dog PU/PD weight loss") == "dog"
+        assert detect_species_from_text("horse has cough fever and diarrhea") == "horse"
+        assert detect_species_from_text("my kitten is sneezing") == "cat"
+
+    def test_earliest_match_wins(self):
+        # The patient species is whichever is mentioned first.
+        assert detect_species_from_text("猫背気味の犬 嘔吐") == "dog"
+        assert detect_species_from_text("犬歯の破折（猫）") == "cat"
+
+    def test_false_positive_compounds_ignored(self):
+        # 犬歯 = canine tooth, 猫背 = hunched posture — not a species mention.
+        assert detect_species_from_text("犬歯破折") is None
+        assert detect_species_from_text("猫背の改善") is None
+
+    def test_no_species_returns_none(self):
+        assert detect_species_from_text("coughing") is None
+        assert detect_species_from_text("xyz nonsense 9999") is None
+        assert detect_species_from_text("") is None
+        assert detect_species_from_text(None) is None
+
+
+def test_chat_detects_cat_despite_dog_default():
+    """A fresh visitor typing a cat case (client default species=dog) must be
+    routed to the cat database rather than analysed as a dog."""
+    client = app.test_client()
+    resp = client.post(
+        "/api/diagnostic-chat/chat",
+        json={"species": "dog", "message": "猫 多飲多尿 体重減少", "lang": "ja"},
+    )
+    assert resp.status_code == 200
+    payload = resp.get_json()
+    assert payload["species"] == "cat"
+    assert "猫として解析" in payload["species_guidance"]
 
 
 def test_chat_returns_species_guidance_for_cat():
@@ -118,10 +170,13 @@ class TestDifferentialAnalysis:
 
     def test_unknown_disease_ids(self):
         client = app.test_client()
-        r = client.post("/api/diagnostic-chat/differential-analysis", json={
-            "disease_id_1": "nonexistent_1",
-            "disease_id_2": "nonexistent_2",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/differential-analysis",
+            json={
+                "disease_id_1": "nonexistent_1",
+                "disease_id_2": "nonexistent_2",
+            },
+        )
         assert r.status_code == 404
 
 
@@ -135,9 +190,12 @@ class TestTreatmentPlan:
 
     def test_unknown_disease_id(self):
         client = app.test_client()
-        r = client.post("/api/diagnostic-chat/treatment-plan", json={
-            "disease_id": "nonexistent_disease",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/treatment-plan",
+            json={
+                "disease_id": "nonexistent_disease",
+            },
+        )
         assert r.status_code == 404
 
 
@@ -146,26 +204,35 @@ class TestFeedback:
 
     def test_missing_session_id(self):
         client = app.test_client()
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "feedback": "good",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "feedback": "good",
+            },
+        )
         assert r.status_code == 400
 
     def test_invalid_feedback_type(self):
         client = app.test_client()
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "test-session",
-            "feedback": "invalid_type",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "test-session",
+                "feedback": "invalid_type",
+            },
+        )
         assert r.status_code == 400
 
     def test_valid_feedback(self):
         client = app.test_client()
-        r = client.post("/api/diagnostic-chat/feedback", json={
-            "session_id": "test-session-123",
-            "feedback": "good",
-            "domain": "general",
-        })
+        r = client.post(
+            "/api/diagnostic-chat/feedback",
+            json={
+                "session_id": "test-session-123",
+                "feedback": "good",
+                "domain": "general",
+            },
+        )
         assert r.status_code == 201
         data = r.get_json()
         assert data["status"] == "recorded"

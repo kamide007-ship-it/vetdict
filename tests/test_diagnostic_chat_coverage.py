@@ -746,6 +746,19 @@ class TestExtractSpeciesSymptoms:
         result = _extract_species_symptoms("vomiting vomiting diarrhea", "cat")
         assert len(result) == len(set(result))
 
+    @pytest.mark.skipif("cat" not in _SPECIES_DATA, reason="Cat data not loaded")
+    def test_cat_polyphagia_alias_extracted(self):
+        # 食欲増加 (typed) vs 食欲増進 (canonical name) — polyphagia is a cardinal
+        # sign of hyperthyroidism/diabetes and must be recognised.
+        assert "increased_appetite" in _extract_species_symptoms("猫 食欲増加 体重減少", "cat")
+        assert "increased_appetite" in _extract_species_symptoms("polyphagia weight loss", "cat")
+
+    @pytest.mark.skipif("dog" not in _SPECIES_DATA, reason="Dog data not loaded")
+    def test_dog_polyphagia_cross_species_id(self):
+        # Dog vocabulary uses "appetite_increase"; the alias maps to
+        # "increased_appetite" and must bridge via the synonym map.
+        assert "appetite_increase" in _extract_species_symptoms("犬 多食 体重減少", "dog")
+
     @pytest.mark.skipif("rabbit" not in _SPECIES_DATA, reason="Rabbit data not loaded")
     def test_rabbit_extracts_symptom(self):
         result = _extract_species_symptoms("not eating", "rabbit")
