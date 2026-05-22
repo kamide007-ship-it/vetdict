@@ -165,7 +165,7 @@ def _get_equine_health_check_items():
 # ---------------------------------------------------------------------------
 # Shared constants, species data & symptom aliases (extracted to api/chat/)
 # ---------------------------------------------------------------------------
-from api.chat.constants import _GENERIC_SPECIES, SPECIES_LABELS  # noqa: F401
+from api.chat.constants import _GENERIC_SPECIES, SPECIES_LABELS, detect_species_from_text  # noqa: F401
 from api.chat.species_data import _SPECIES_DATA, get_species_data  # noqa: F401
 from api.chat.symptom_aliases import SYMPTOM_ALIASES  # noqa: F401
 
@@ -1235,6 +1235,14 @@ def diagnostic_chat():
     # Input validation
     if len(message) > 5000:
         return jsonify({"error": "Message too long (max 5000 chars)"}), 400
+
+    # Infer species from the message text. Clinicians type the species inline
+    # ("猫 多飲多尿 体重減少", "5yo dog PU/PD"), so an explicit mention in the
+    # message takes precedence over the client default — otherwise a fresh
+    # visitor's "猫 …" query would be silently analysed against the dog database.
+    detected_species = detect_species_from_text(message)
+    if detected_species and (detected_species == "horse" or bool(get_species_data(detected_species))):
+        species = detected_species
 
     # Sanitise previous_symptoms: must be a list of short strings
     if not isinstance(previous_symptoms_raw, list):

@@ -219,7 +219,7 @@ const I18N={
     commError:"通信エラーが発生しました。ネットワーク接続を確認の上、再試行してください。",
     noResponse:"応答を取得できませんでした",
     diseaseCount:"%filtered% / %total% 件表示",
-    catLabels:{respiratory:"呼吸器",digestive:"消化器",neurological:"神経",musculoskeletal:"運動器",dermatological:"皮膚",urinary:"泌尿器",ophthalmological:"眼",cardiovascular:"循環器",behavioral:"行動",general:"全身",skin:"体表・外観",fins:"鰭",gills:"鰓",eyes:"眼",body:"腹部・体型",parasites:"寄生虫",emergency:"急変",reproductive:"繁殖",behavior:"行動",other:"その他"},
+    catLabels:{respiratory:"呼吸器",digestive:"消化器",neurological:"神経",musculoskeletal:"運動器",dermatological:"皮膚",urinary:"泌尿器",ophthalmological:"眼",cardiovascular:"循環器",cardiac:"循環器",behavioral:"行動",general:"全身",skin:"体表・外観",fins:"鰭",gills:"鰓",eyes:"眼",eye:"眼",ocular:"眼",ears:"耳",eyes_ears:"眼・耳",oral:"口腔",internal:"内科・全身",developmental:"発達",limb:"四肢",hoof:"蹄",dental:"歯科",repository_exam:"検査所見",toxic:"中毒",foal:"子馬",immune:"免疫",endocrine:"内分泌",misc:"その他",body:"腹部・体型",parasites:"寄生虫",emergency:"急変",reproductive:"繁殖",behavior:"行動",other:"その他"},
     sevLabels:{low:"軽度",moderate:"中等度",high:"重度",emergency:"緊急"},
     dtDescription:"説明",dtPathophysiology:"病態生理",dtCauses:"原因",dtPrevention:"予防",dtTreatment:"治療",dtPrognosis:"予後",
     dtMatchedSymptoms:"一致した症状",dtRecommendedTests:"推奨検査",dtRecTestList:"推奨検査一覧:",
@@ -478,7 +478,7 @@ const I18N={
     commError:"A communication error occurred. Please check your network and retry.",
     noResponse:"Could not retrieve response",
     diseaseCount:"%filtered% / %total% shown",
-    catLabels:{respiratory:"Respiratory",digestive:"Digestive",neurological:"Neurological",musculoskeletal:"Musculoskeletal",dermatological:"Dermatological",urinary:"Urinary",ophthalmological:"Ophthalmological",cardiovascular:"Cardiovascular",behavioral:"Behavioral",general:"General",skin:"Skin & Appearance",fins:"Fins",gills:"Gills",eyes:"Eyes",body:"Body & Shape",parasites:"Parasites",emergency:"Emergency",reproductive:"Reproductive",behavior:"Behavior",other:"Other"},
+    catLabels:{respiratory:"Respiratory",digestive:"Digestive",neurological:"Neurological",musculoskeletal:"Musculoskeletal",dermatological:"Dermatological",urinary:"Urinary",ophthalmological:"Ophthalmological",cardiovascular:"Cardiovascular",cardiac:"Cardiac",behavioral:"Behavioral",general:"General",skin:"Skin & Appearance",fins:"Fins",gills:"Gills",eyes:"Eyes",eye:"Eyes",ocular:"Ocular",ears:"Ears",eyes_ears:"Eyes & Ears",oral:"Oral",internal:"Internal & Systemic",developmental:"Developmental",limb:"Limbs",hoof:"Hoof",dental:"Dental",repository_exam:"Exam Findings",toxic:"Toxic",foal:"Foal",immune:"Immune",endocrine:"Endocrine",misc:"Miscellaneous",body:"Body & Shape",parasites:"Parasites",emergency:"Emergency",reproductive:"Reproductive",behavior:"Behavior",other:"Other"},
     sevLabels:{low:"Mild",moderate:"Moderate",high:"Severe",emergency:"Emergency"},
     dtDescription:"Description",dtPathophysiology:"Pathophysiology",dtCauses:"Causes",dtPrevention:"Prevention",dtTreatment:"Treatment",dtPrognosis:"Prognosis",
     dtMatchedSymptoms:"Matched Symptoms",dtRecommendedTests:"Recommended Tests",dtRecTestList:"Recommended Tests:",
@@ -760,6 +760,10 @@ function trackEvent(name,params){
 }
 
 let currentSpecies=null,currentView="checker",selectedSymptoms=new Set(),symptomData=[],allDiseases=[],diseaseFilter="",currentBreed="";
+// Species used for the free-text chat. Seeded by an explicit species selection
+// and updated from each response's detected species so multi-turn follow-ups
+// (which may omit the species word) stay on the same animal.
+let chatSpecies="";
 let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
 let symptomSortMode="category";
 
@@ -1727,6 +1731,7 @@ function setupOfflineIndicator(){
 
 function resetSpeciesChat(species){
   chatAccumulatedSymptoms=[];
+  chatSpecies=species||"";
   const sp=SPECIES.find(s=>s.id===species);
   const spLabel=sp?(currentLang==="ja"?sp.name:sp.nameEn):(species||"dog");
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
@@ -4155,13 +4160,14 @@ function sendLandingChat(isRetry){
   input.value="";input.disabled=true;if(sendBtn)sendBtn.disabled=true;
   const msgs=document.getElementById("landingChatMessages");
   const userDiv=document.createElement("div");userDiv.className="chat-msg user";userDiv.textContent=text;msgs.appendChild(userDiv);msgs.scrollTop=msgs.scrollHeight;
-  const species=currentSpecies||"dog";
+  const species=chatSpecies||currentSpecies||"dog";
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
   fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})},20000)
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
     loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
+    if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
     const continueBtn=document.createElement("div");
@@ -4211,7 +4217,7 @@ let chatAccumulatedSymptoms=[];
 let chatDeniedSymptoms=[];
 
 function _sendSymptomUpdate(symptomId,confirmed){
-  const species=currentSpecies||"dog";
+  const species=chatSpecies||currentSpecies||"dog";
   if(!confirmed)chatDeniedSymptoms.push(symptomId);
   const msgs=document.getElementById("chatMessages");
   // Show brief status
@@ -4223,6 +4229,7 @@ function _sendSymptomUpdate(symptomId,confirmed){
   .then(data=>{
     loading.remove();
     if(!data)return;
+    if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms)chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
   })
@@ -4236,8 +4243,8 @@ function sendChatMessage(isRetry){
   // doesn't prevent retries on a new question.
   if(!isRetry)_chatRetries=0;
   input.value="";input.disabled=true;if(sendBtn){sendBtn.disabled=true;sendBtn.setAttribute("aria-busy","true");}
-  trackEvent("chat_message",{species:currentSpecies||"dog",message_length:text.length});
-  addChatMsg(text,"user");const species=currentSpecies||"dog";
+  trackEvent("chat_message",{species:chatSpecies||currentSpecies||"dog",message_length:text.length});
+  addChatMsg(text,"user");const species=chatSpecies||currentSpecies||"dog";
   const msgs=document.getElementById("chatMessages");
   const loading=document.createElement("div");loading.className="chat-msg bot typing-indicator";loading.setAttribute("aria-label",currentLang==="ja"?"解析中":"Analyzing");loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';msgs.appendChild(loading);msgs.scrollTop=msgs.scrollHeight;
   const slowTimer=setTimeout(()=>{loading.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span><div style="font-size:.72rem;color:var(--gray-400);margin-top:4px">'+(currentLang==="ja"?"解析中... 通常より時間がかかっています":"Analyzing... taking longer than usual")+'</div>';},3000);
@@ -4246,6 +4253,7 @@ function sendChatMessage(isRetry){
   .then(data=>{
     clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn){sendBtn.disabled=false;sendBtn.removeAttribute("aria-busy");}input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
+    if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
     _chatRetries=0;

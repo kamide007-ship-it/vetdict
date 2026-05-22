@@ -612,11 +612,46 @@ def _get_symptoms_for_species_cached(species: str, _version: int = 0) -> list[di
     return sorted(symptom_map.values(), key=lambda s: s["id"])
 
 
+_EQUINE_SYMPTOMS_CACHE: list[dict] | None = None
+
+
+def _get_equine_symptoms() -> list[dict]:
+    """Build the equine symptom list from HEALTH_CHECK_ITEMS.
+
+    Horse uses finding keys (HEALTH_CHECK_ITEMS) rather than SYMPTOM_NAMES and
+    is not migrated to SQLite, so it needs a dedicated builder; otherwise the
+    checker falls back to the generic small-animal symptom set.
+    """
+    global _EQUINE_SYMPTOMS_CACHE
+    if _EQUINE_SYMPTOMS_CACHE is None:
+        try:
+            from api.species.equine_diseases import HEALTH_CHECK_ITEMS
+
+            _EQUINE_SYMPTOMS_CACHE = [
+                {"id": key, "name_ja": ja, "name_en": en, "category": cat}
+                for cat, items in HEALTH_CHECK_ITEMS.items()
+                for key, ja, en in items
+            ]
+        except Exception:
+            logger.debug("Equine symptom build failed")
+            _EQUINE_SYMPTOMS_CACHE = []
+    return _EQUINE_SYMPTOMS_CACHE
+
+
 def get_symptoms_for_species(species: str) -> list[dict]:
     """Return symptom list for a species from SQLite, with module fallback."""
     result = _get_symptoms_for_species_cached(species, _cache_version)
     if result:
         return result
+
+    # Horse uses finding keys (HEALTH_CHECK_ITEMS) and is not always migrated to
+    # SQLite. When SQLite is empty (e.g. low-memory deploys that skip migration)
+    # build the equine symptom set directly so the checker shows horse-specific
+    # findings instead of falling back to the generic small-animal list.
+    if species == "horse":
+        equine = _get_equine_symptoms()
+        if equine:
+            return equine
 
     # Fallback: load from Python species module if SQLite has no data
     import importlib as _importlib
