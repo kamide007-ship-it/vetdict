@@ -2257,7 +2257,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Caused by urinary calculi lodging in the urethra, preventing urination. Complete obstruction is a life-threatening emergency requiring immediate intervention.",
         "causes_ja": "デグーにおける尿道閉塞の原因: 結石による尿道の閉塞で排尿不能。完全閉塞は生命を脅かします。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "尿道閉塞はデグーにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
+        "pathophysiology_ja": "尿石・結晶・粘液栓が尿道に嵌頓し、尿の流出が機械的に閉塞される。デグーは草食性で食事性カルシウムを効率的に吸収し腎から排泄するため尿が結晶化しやすく、結石形成の素因となる。閉塞により膀胱が過伸展し、背圧が尿管・腎へ伝わって腎後性高窒素血症を生じ、排泄されないカリウムの蓄積による高カリウム血症で致死的となりうる。雄は尿道が細く屈曲するため閉塞しやすく、膀胱破裂・尿毒症に至る緊急疾患で、閉塞解除と全身状態の補正を要する。",
         "treatment": "Stabilization with IV fluids, pain management, radiographic assessment. Surgical intervention (enterotomy/gastrotomy) for confirmed obstruction. Post-operative monitoring for dehiscence, peritonitis, and ileus.",
         "treatment_ja": "緊急処置: 輸液療法（乳酸リンゲル液 10mL/kg SC/IP）でショック管理と高カリウム血症の補正。膀胱穿刺（経皮的: 25G針で一時的減圧）が必要な場合あり。尿道カテーテル挿入を試みる（デグーの体格では非常に困難）。外科的尿道切開術/膀胱切開術による結石摘出が根治的治療。疼痛管理: ブプレノルフィン 0.05-0.1mg/kg SC q8-12h + メロキシカム 0.2-0.5mg/kg PO q24h。抗菌薬（エンロフロキサシン 5-10mg/kg PO/SC q12h）。高カリウム血症が重度の場合はカルシウムグルコン酸 50-100mg/kg IP。術後は食事改善（低カルシウム食）と水分摂取促進。糖尿病の併存時はその管理も並行。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
@@ -2368,7 +2368,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Caused by uterine inertia, fetal malpresentation, or oversized fetuses preventing complete expulsion during parturition, leading to infection and toxemia.",
         "causes_ja": "デグーにおける胎児残留の原因: 分娩時にすべての子を排出できない状態で、感染と毒血症に至ります。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "胎児残留はデグーにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
+        "pathophysiology_ja": "分娩時に胎仔の一部または全部が娩出されずに子宮内に停滞する病態。子宮無力症（低カルシウム血症・肥満・高齢・栄養不良）、胎仔の過大・胎位異常、胎仔死による分娩停止が原因となる。遺残した胎仔・胎盤は子宮内で変性・ミイラ化または腐敗し、細菌感染による子宮蓄膿・子宮炎、毒素吸収による敗血症に進行する。母体は食欲廃絶・元気消失・努責を示し、放置すると致死的となるため、オキシトシンによる娩出または帝王切開を要する緊急疾患である。",
         "treatment": "EMERGENCY: Stabilize with SC/IP lactated Ringer's 10-15 mL/kg/hr (IV rarely achievable in degus; IP absorption adequate), oxygen supplementation (nasal prongs), and analgesia (buprenorphine 0.05-0.1 mg/kg SC q8-12h or meloxicam 0.2-0.5 mg/kg PO q24h). CRITICAL NOTE: Degus (300-350g body mass) progress to septic shock in 36-48 hours (faster than rabbits/guinea pigs); delays are fatal. EXTREME CAUTION with anesthesia in septic degus (increased cardiovascular collapse risk). Attempt MEDICAL management ONLY if <12 hours post-parturition: Oxytocin 0.5-2 IU/kg IM (max 2 doses, 15-30 minute intervals). Response expected within 30-60 minutes. If no response OR sepsis signs (fever, vaginal hemorrhage, lethargy, anorexia, shock signs), PROCEED TO EMERGENCY SURGICAL INTERVENTION. ANESTHESIA: Use MINIMAL dexmedetomidine (1-3 μg/kg IM only—higher doses cause severe bradycardia/collapse). Atropine 0.01-0.05 mg/kg SC 10-15 min prior. Isoflurane mask induction preferred. Emergency ovariohysterectomy (OVE) only; cesarean not recommended in septic/shock state. POST-OPERATIVE PROTOCOL: Maintain strict temperature control (15-22°C); hypothermia accelerates cardiovascular collapse in tiny animals. Keep in incubator or heat lamp. Metoclopramide 0.5-1 mg/kg SC/PO q8h × 7 days. Antibiotics: Enrofloxacin 5-10 mg/kg SC/PO q12h × 10-14 days (MANDATORY—NO β-lactams/sulfa which cause fatal dysbiosis). Consider metronidazole 10-20 mg/kg PO q12h × 5-7 days if anaerobic infection suspected. CRITICAL: ZERO sugar/fruit post-operatively for 4-6 weeks (degus have innate diabetes predisposition; surgery/sepsis induce hyperglycemia/glycosuria; monitor for diabetes insipidus/mellitus). Soft timothy hay only diet post-op. Supportive fluids SC/IP until stable. Pain management: meloxicam 0.2-0.5 mg/kg PO q24h × 7 days. Monitor blood glucose if possible (hyperglycemia common post-sepsis). Monitor for DIC (petechiae, hematuria). Transfusion rarely possible at this body mass; manage shock medically. Prognosis: 60-70% survival with OVE <36 hours + temperature management + sugar avoidance; 30-40% if 36-48 hours; <5% if delayed >48 hours.",
         "treatment_ja": "緊急安定化: 輸液療法（乳酸リンゲル液 10mL/kg SC/IP）、酸素補給、保温管理。オキシトシン（0.5-2 IU/kg IM、15-30分間隔で最大2回）で排出促進を試みる。カルシウムグルコン酸（50-100mg/kg SC）で子宮収縮を補助。反応がない場合や敗血症徴候がある場合は緊急帝王切開術/卵巣子宮摘出術（イソフルラン吸入麻酔）。抗菌薬（エンロフロキサシン 5-10mg/kg PO/SC q12h）。疼痛管理（ブプレノルフィン 0.05-0.1mg/kg SC q8-12h、メロキシカム 0.2-0.5mg/kg PO q24h）。術後の敗血症・DIC徴候をモニタリング。デグーの糖尿病傾向に留意し血糖値管理。強制給餌と保温。",
         "prevention": "Prevention of retained fetus requires stringent pre-breeding screening given degus' precocial neonate burden (large gestational investment in small body mass, 300-350g) and rapid septic progression (36-48 hour window). Pre-breeding MANDATORY weight assessment: exclude females >400g (obesity = dystocia contraindication). Ideal weight 300-350g pre-breeding. Assess pelvic anatomy (ultrasound/radiographs). Nutrition: timothy hay-based diet with calcium minimum 0.4% throughout gestation. Temperature control 15-22°C (heat stress worsens dystocia progression). Avoid sugar/fruit for 6-8 weeks pre-breeding (normalize blood glucose for pregnancy). During labor: Monitor actively—normal labor <1-2 hours with complete delivery of all kits. Count kits before breeding to verify litter size matches expected count. Actively manage dystocia: if straining without fetal delivery >30 minutes, intervene with cesarean (do NOT delay). Post-parturition: Verify complete placental expulsion. Monitor for vaginal discharge (purulent = emergency). Maintain 15-22°C temperature post-partum (cold stress delays uterine involution). Weight cycling post-partum: restrict food slightly if >420g post-birth (prevents future obesity-related dystocia). OVE recommended for non-breeding females.",
@@ -2428,19 +2428,19 @@ DISEASES: List[Dict[str, Any]] = [
         "exertion. References: Quesenberry & Carpenter (2012); Keeble & Meredith (2009) "
         "BSAVA Manual of Rodents and Ferrets.",
         "treatment_ja": "心タンポナーデ（閉塞性ショック、虚脱、重度呼吸困難）は緊急。【心嚢穿刺】イソフルラン"
-        "麻酔下��超音波ガイド下でのニードル吸引。デグーの小さい体サイズ（<300g）により"
+        "麻酔下で超音波ガイド下でのニードル吸引。デグーの小さい体サイズ（<300g）により"
         "技術的に非常に困難 — エキゾチック専門医への紹介を強く推奨。【内科管理】フロセミド"
         "1-4 mg/kg PO/SC/IM q8-12h。エナラプリル0.5 mg/kg PO q24h。ピモベンダン"
         "0.1-0.3 mg/kg PO q12h（収縮機能障害併発時）。【原因治療】感染性: エンロフロキサシン"
         "5-10 mg/kg PO q12h × 14-21日（経口βラクタム系禁忌）。腫瘍性: 緩和ケア。代謝性: "
-        "血��管理最適化。【酸素】フローバイO2 1-2 L/min。心エコーで2-4週ごとモニタリング。",
+        "血圧管理最適化。【酸素】フローバイO2 1-2 L/min。心エコーで2-4週ごとモニタリング。",
         "prevention": "No specific prevention for idiopathic pericardial effusion. Optimal glycemic control in "
         "diabetic degus reduces risk of diabetic cardiomyopathy. Regular health monitoring in "
         "senior degus (>4 years). Prompt treatment of respiratory and systemic infections. "
         "Maintain appropriate environmental temperature (20-22°C) — cold stress may exacerbate "
         "cardiac conditions. Reference: Quesenberry & Carpenter (2012).",
         "prevention_ja": "特発性心嚢液貯留の特異的予防法はない。糖尿病デグーでは最適な血糖管理で糖尿病性"
-        "心筋症リスクを軽減。高齢デグー（>4歳）の定期健康モニタリング。適切な環���温度維持"
+        "心筋症リスクを軽減。高齢デグー（>4歳）の定期健康モニタリング。適切な環境温度維持"
         "（20-22°C）。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "特発性疾患の予後は個々の症例により変動する。自然寛解する場合もあるが、慢性再発性の経過をたどることもある。対症療法と支持療法が治療の中心。定期的な再評価により治療方針を調整する。",
@@ -2539,7 +2539,7 @@ DISEASES: List[Dict[str, Any]] = [
         "References: Quesenberry & Carpenter (2012); Percy & Barthold (2007).",
         "treatment_ja": "【保存的管理（大多数の症例）】脂肪腫は良性で、小型・非増大・運動/機能に影響がなければ"
         "通常治療不要。月1回のサイズモニタリング。【外科的切除】適応: 急速増大、運動制限、"
-        "潰瘍化、不快感がある場合; FNA細胞診が不確定の場��（脂肪肉腫の除外必須）。"
+        "潰瘍化、不快感がある場合; FNA細胞診が不確定の場合（脂肪肉腫の除外必須）。"
         "イソフルラン麻酔下で被膜に沿った鈍的剥離による完全切除。病理組織検査に提出。"
         "【診断】FNAで成熟脂肪細胞を確認（異型性なし）。紡錘形細胞や多形性細胞がある場合は"
         "切除生検。【体重管理】肥満は脂肪腫の素因 — チモシー牧草ベースの厳格食で理想体重維持。"
@@ -2550,7 +2550,7 @@ DISEASES: List[Dict[str, Any]] = [
         "new masses early. No specific pharmacological prevention available. "
         "Reference: Percy & Barthold (2007) Pathology of Laboratory Rodents 3rd ed.",
         "prevention_ja": "チモシー牧草ベース食と運動による理想体重（170-300g）の維持。肥満は脂肪腫の最も重要な"
-        "修正可能リスク因子。糖分/果物禁忌（糖尿病と肥満の両方を��防）。新しい腫瘤の早期発見"
+        "修正可能リスク因子。糖分/果物禁忌（糖尿病と肥満の両方を予防）。新しい腫瘤の早期発見"
         "のための定期身体検査。",
         "prognosis": "Good prognosis. Benign condition that may be managed conservatively or with surgical excision.",
         "prognosis_ja": "脂肪腫の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
