@@ -234,6 +234,9 @@ const I18N={
     quickNavDefault:"データベースを直接閲覧",
     emptyStateSelectSpecies:"動物種を選択してください",
     emptyStateDiseaseDb:"動物種を選択すると、その種に対応する疾患データベースが表示されます",
+    emptyStateDiseaseDbHint:"または上の検索ボックスに病名を入力すると、全21動物種から横断検索できます",
+    xspeciesSearching:"全動物種から検索中…",
+    xspeciesResultsLabel:"全種横断の検索結果（種を選ばずに調べられます）",
     emptyStateDrugs:"薬品辞書は動物種に関わらず全薬品を表示できます",
     emptyStateAnesthesia:"動物種を選択すると、種別の鎮静・麻酔プロトコルが表示されます",
     emptyStateSelectBtn:"動物種を選択する",
@@ -493,6 +496,9 @@ const I18N={
     quickNavDefault:"Browse databases directly",
     emptyStateSelectSpecies:"Select a species",
     emptyStateDiseaseDb:"Select a species to view its disease database",
+    emptyStateDiseaseDbHint:"Or type a disease name in the search box above to search across all 21 species",
+    xspeciesSearching:"Searching all species…",
+    xspeciesResultsLabel:"Cross-species results (no species selection needed)",
     emptyStateDrugs:"The drug dictionary shows all drugs regardless of species",
     emptyStateAnesthesia:"Select a species to view sedation & anesthesia protocols",
     emptyStateSelectBtn:"Select a species",
@@ -984,6 +990,7 @@ function setupFloatingNav(){
 
 let globalSearchSpeciesFilter=null;
 let globalSearchTypeFilter=null;
+let globalSearchReqId=0;
 
 function saveRecentSearch(type,name,nameJa){
   try{
@@ -1028,13 +1035,29 @@ function setupGlobalSearch(){
       else{results.style.display="none";results.innerHTML="";}
       return;
     }
+    const reqId=++globalSearchReqId;
+    function renderMatches(matches){
+      if(reqId!==globalSearchReqId)return;
+      if(matches.length===0){results.innerHTML=`<div class="search-result-item" style="color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;results.style.display="block";return;}
+      results.innerHTML=matches.slice(0,15).map(m=>{
+        const icon=m.type==="disease"?"\u{1F4D6}":"\u{1F48A}";
+        const label=currentLang==="ja"?(m.name_ja||m.name):(m.name||m.name_ja);
+        const sub=currentLang==="ja"?(m.name||""):(m.name_ja||"");
+        const sp=m.species?SPECIES.find(s=>s.id===m.species):null;
+        const spTag=sp?`<span class="search-result-species">${SPECIES_ICONS[m.species]||""} ${escapeHtml(currentLang==="ja"?sp.name:sp.nameEn)}</span>`:"";
+        const typeLabel=m.type==="disease"?(currentLang==="ja"?"疾患":"Disease"):(currentLang==="ja"?"薬品":"Drug");
+        return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||m.name_ja||"")}" data-name-ja="${escapeHtml(m.name_ja||"")}" data-species="${escapeHtml(m.species||"")}">${icon} <strong>${escapeHtml(label)}</strong>${sub?` <span style="color:var(--gray-400);font-size:.78rem">${escapeHtml(sub)}</span>`:""}${spTag} <span class="search-result-type">${typeLabel}</span></div>`;
+      }).join("")+(matches.length>15?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem;text-align:center">${currentLang==="ja"?`他${matches.length-15}件`:`${matches.length-15} more...`}</div>`:"");
+      results.style.display="block";
+    }
     debounceTimer=setTimeout(()=>{
       const matches=[];
+      const seen=new Set();
       if(globalSearchTypeFilter!=="drug"){
         allDiseases.forEach(d=>{
           const name=(d.name||"").toLowerCase();
           const nameJa=(d.name_ja||"").toLowerCase();
-          if(name.includes(q)||nameJa.includes(q)){matches.push({type:"disease",name:d.name,name_ja:d.name_ja});}
+          if(name.includes(q)||nameJa.includes(q)){const key="d:"+(d.name||d.name_ja||"")+":"+(currentSpecies||"");if(!seen.has(key)){seen.add(key);matches.push({type:"disease",name:d.name,name_ja:d.name_ja,species:currentSpecies||""});}}
         });
       }
       if(globalSearchTypeFilter!=="disease"){
@@ -1045,15 +1068,23 @@ function setupGlobalSearch(){
           if(name.includes(q)||nameJa.includes(q)){matches.push({type:"drug",name:d.name,name_ja:d.name_ja});}
         });
       }
-      if(matches.length===0){results.innerHTML=`<div class="search-result-item" style="color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;results.style.display="block";return;}
-      results.innerHTML=matches.slice(0,15).map(m=>{
-        const icon=m.type==="disease"?"\u{1F4D6}":"\u{1F48A}";
-        const label=currentLang==="ja"?(m.name_ja||m.name):(m.name||m.name_ja);
-        const sub=currentLang==="ja"?(m.name||""):(m.name_ja||"");
-        const typeLabel=m.type==="disease"?(currentLang==="ja"?"疾患":"Disease"):(currentLang==="ja"?"薬品":"Drug");
-        return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||m.name_ja||"")}" data-name-ja="${escapeHtml(m.name_ja||"")}">${icon} <strong>${escapeHtml(label)}</strong>${sub?` <span style="color:var(--gray-400);font-size:.78rem">${escapeHtml(sub)}</span>`:""} <span class="search-result-type">${typeLabel}</span></div>`;
-      }).join("")+(matches.length>15?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem;text-align:center">${currentLang==="ja"?`他${matches.length-15}件`:`${matches.length-15} more...`}</div>`:"");
-      results.style.display="block";
+      renderMatches(matches);
+      /* 全種横断: 動物種を選ばなくても全21種から疾患をヒットさせる（ローカルに無い種の疾患を補完） */
+      if(globalSearchTypeFilter!=="drug"){
+        const spFilter=globalSearchSpeciesFilter?"&species="+encodeURIComponent(globalSearchSpeciesFilter):"";
+        fetchWithTimeout(`/api/diseases?q=${encodeURIComponent(q)}&limit=20${spFilter}`).then(r=>r.json()).then(data=>{
+          if(reqId!==globalSearchReqId)return;
+          const extra=(data&&data.diseases)||[];
+          extra.forEach(d=>{
+            const key="d:"+(d.name||d.name_ja||"")+":"+(d.species||"");
+            if(seen.has(key))return;seen.add(key);
+            matches.push({type:"disease",name:d.name,name_ja:d.name_ja,species:d.species||""});
+          });
+          /* 疾患を先頭に並べ替え（横断結果を見つけやすく） */
+          matches.sort((a,b)=>(a.type==="disease"?0:1)-(b.type==="disease"?0:1));
+          renderMatches(matches);
+        }).catch(err=>{debugWarn("global cross-species search failed:",err);});
+      }
     },200);
   }
   input.addEventListener("input",runSearch);
@@ -1062,7 +1093,11 @@ function setupGlobalSearch(){
     const item=e.target.closest(".search-result-item");
     if(!item||!item.dataset.type)return;
     saveRecentSearch(item.dataset.type,item.dataset.name,item.dataset.nameJa||"");
-    if(item.dataset.type==="disease"){navigateToDiseaseDb(item.dataset.name);}
+    if(item.dataset.type==="disease"){
+      const sp=item.dataset.species||"";
+      if(sp&&sp!==currentSpecies)openDiseaseAcrossSpecies(item.dataset.name,sp);
+      else navigateToDiseaseDb(item.dataset.name);
+    }
     else{navigateToDrug(item.dataset.name);}
     input.value="";results.style.display="none";
   });
@@ -1635,7 +1670,7 @@ function setupMobileBottomNav(){
     const btn=e.target.closest("button[data-view]");
     if(!btn)return;
     haptic(10);
-    switchView(btn.dataset.view);
+    switchView(btn.dataset.view,{focusSearch:true});
     const panel=document.getElementById("view"+btn.dataset.view.charAt(0).toUpperCase()+btn.dataset.view.slice(1));
     if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
   });
@@ -3851,7 +3886,10 @@ function filterDiseaseDb(letter){
 let diseaseDisplayLimit=100;
 function renderDiseaseDb(){
   const list=document.getElementById("diseaseDbList");
-  const search=(document.getElementById("diseaseSearch").value||"").toLowerCase();
+  const rawSearch=(document.getElementById("diseaseSearch").value||"").trim();
+  const search=rawSearch.toLowerCase();
+  /* 種未選択でも調べられるように: 動物種が未選択のまま検索した場合は全種横断APIで検索 */
+  if(!currentSpecies&&rawSearch.length>=2){renderCrossSpeciesDiseaseSearch(rawSearch);return;}
   let filtered=allDiseases;
   if(diseaseFilter){
     if(diseaseNavMode==="kana"){
@@ -3977,7 +4015,63 @@ function renderDiseaseDb(){
 function renderEmptyState(tab){
   const icons={database:"\u{1F4D6}",drugs:"\u{1F48A}",anesthesia:"\u{1F489}"};
   const msgs={database:t("emptyStateDiseaseDb"),drugs:t("emptyStateDrugs"),anesthesia:t("emptyStateAnesthesia")};
-  return`<div class="empty-state-prompt"><span class="empty-state-icon" aria-hidden="true">${icons[tab]||"\u{1F50D}"}</span><p class="empty-state-title">${t("emptyStateSelectSpecies")}</p><p class="empty-state-desc">${msgs[tab]||""}</p><button type="button" class="empty-state-btn" data-action="scroll-to-species">${t("emptyStateSelectBtn")}</button></div>`;
+  const hint=tab==="database"?`<p class="empty-state-desc empty-state-hint">${t("emptyStateDiseaseDbHint")}</p>`:"";
+  return`<div class="empty-state-prompt"><span class="empty-state-icon" aria-hidden="true">${icons[tab]||"\u{1F50D}"}</span><p class="empty-state-title">${t("emptyStateSelectSpecies")}</p><p class="empty-state-desc">${msgs[tab]||""}</p>${hint}<button type="button" class="empty-state-btn" data-action="scroll-to-species">${t("emptyStateSelectBtn")}</button></div>`;
+}
+
+/* 全種横断の疾患検索（動物種未選択時にDBタブから直接調べられるようにする） */
+let _xspeciesDiseaseReqId=0;
+function renderCrossSpeciesDiseaseSearch(query){
+  const list=document.getElementById("diseaseDbList");
+  if(!list)return;
+  const reqId=++_xspeciesDiseaseReqId;
+  const dbCountEl=document.getElementById("diseaseDbCount");if(dbCountEl)dbCountEl.textContent="";
+  list.innerHTML=`<div class="xspecies-searching" style="padding:16px;text-align:center;color:var(--gray-500)">${escapeHtml(t("xspeciesSearching"))}</div>`;
+  fetchWithTimeout(`/api/diseases?q=${encodeURIComponent(query)}&limit=60`).then(r=>r.json()).then(data=>{
+    if(reqId!==_xspeciesDiseaseReqId)return;
+    const diseases=(data&&data.diseases)||[];
+    if(!diseases.length){list.innerHTML=`<div role="status" style="padding:20px;text-align:center;color:var(--gray-500)">${escapeHtml(t("noDiseaseMatch"))}</div>`;return;}
+    const items=diseases.map(d=>{
+      const spId=d.species||"";
+      const sp=SPECIES.find(s=>s.id===spId);
+      const spIcon=SPECIES_ICONS[spId]||"\u{1F43E}";
+      const spLabel=sp?(currentLang==="ja"?sp.name:sp.nameEn):spId;
+      const label=currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
+      const sub=currentLang==="ja"?(d.name||""):(d.name_ja||"");
+      return`<button type="button" class="xspecies-result" data-name="${escapeHtml(d.name||d.name_ja||"")}" data-species="${escapeHtml(spId)}"><span class="xspecies-result-sp"><span aria-hidden="true">${spIcon}</span> ${escapeHtml(spLabel)}</span><span class="xspecies-result-name">${escapeHtml(label)}${sub?`<span class="xspecies-result-sub">${escapeHtml(sub)}</span>`:""}</span></button>`;
+    }).join("");
+    list.innerHTML=`<div class="xspecies-results-label">${escapeHtml(t("xspeciesResultsLabel"))}</div>${items}`;
+    if(dbCountEl)dbCountEl.textContent=t("diseaseCount").replace("%filtered%",diseases.length).replace("%total%",diseases.length);
+  }).catch(err=>{
+    if(reqId!==_xspeciesDiseaseReqId)return;
+    debugError("cross-species disease search failed:",err);
+    list.innerHTML=`<div role="alert" style="padding:20px;text-align:center;color:var(--gray-500)">${escapeHtml(t("loadFailed"))}</div>`;
+  });
+}
+
+/* 横断検索結果クリック時: その種を選択して疾患DBで該当疾患を開く */
+function openDiseaseAcrossSpecies(name,species){
+  const needSwitch=species&&species!==currentSpecies;
+  if(needSwitch&&typeof selectSpecies==="function")selectSpecies(species);
+  switchView("database");
+  const panel=document.getElementById("viewDatabase");
+  if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+  let tries=0;
+  const apply=()=>{
+    /* 種切替後は loadDiseaseDb が非同期で allDiseases を更新する。対象疾患がロード済みになるまで待つ
+       （前の種のデータが残っていても誤って処理しないよう、疾患名の存在で判定） */
+    if(needSwitch){
+      const ready=currentSpecies===species&&allDiseases.some(d=>d.name===name||d.name_ja===name);
+      if(!ready&&tries++<25){setTimeout(apply,150);return;}
+    }
+    diseaseFilter="";diseaseDisplayLimit=100;
+    const input=document.getElementById("diseaseSearch");
+    if(input)input.value=name;
+    renderDiseaseDb();
+    const list=document.getElementById("diseaseDbList");
+    if(list){const first=list.querySelector(".disease-db-item");if(first&&!first.querySelector(".disease-detail.open"))toggleDbItem(first);}
+  };
+  setTimeout(apply,needSwitch?200:0);
 }
 document.addEventListener("click",function(e){
   const btn=e.target.closest('[data-action="scroll-to-species"]');
@@ -4016,7 +4110,9 @@ function navigateToDiseaseDb(query){
 
 function switchView(view,opts){
   /* opts.silent — skip event tracking + auto-focus (used for initial hash routing
-     on page load so the soft keyboard does not pop up unexpectedly on mobile). */
+     on page load so the soft keyboard does not pop up unexpectedly on mobile).
+     opts.focusSearch — focus the view's primary search input within the tap gesture
+     so the mobile soft keyboard opens (used for explicit tab/menu taps). */
   opts=opts||{};
   if(!opts.silent)trackEvent("switch_view",{view:view});
   currentView=view;
@@ -4037,11 +4133,19 @@ function switchView(view,opts){
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
   if(view==="anesthesia"&&!anesthesiaLoaded)loadAnesthesiaProtocols();
   if(view==="emergency"&&!emergencyLoaded)loadEmergencyProtocols();
+  /* フォーカス制御:
+     - opts.silent（初期ハッシュルーティング）: フォーカスしない（モバイルでキーボードが勝手に出ない）
+     - opts.focusSearch（タブ/メニューのタップ）: 検索ボックスへ同期フォーカス → モバイルでキーボードが開く
+     - それ以外（既定）: パネル自体へプログラムフォーカス（キーボードは出さない） */
   const activePanel=document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
-  /* Move focus to the panel itself (programmatic focus, no soft-keyboard popup).
-     We avoid auto-focusing inputs because that triggers the mobile keyboard on
-     every tab change. Skipped entirely when called silently (initial hash routing). */
-  if(activePanel&&!opts.silent){
+  const searchIds={database:"diseaseSearch",chat:"chatInput",drugs:"drugSearch",anesthesia:"anesthesiaSearch",emergency:"emergencySearch"};
+  const searchEl=searchIds[view]?document.getElementById(searchIds[view]):null;
+  if(opts.silent){
+    /* 初期ルーティング: フォーカスもキーボードも出さない */
+  }else if(opts.focusSearch&&searchEl){
+    /* ユーザー操作と同じ同期コンテキストで focus → iOS/Android でソフトキーボードが起動する */
+    try{searchEl.focus({preventScroll:true});}catch(_){searchEl.focus();}
+  }else if(activePanel){
     if(!activePanel.hasAttribute("tabindex"))activePanel.setAttribute("tabindex","-1");
     try{activePanel.focus({preventScroll:true});}catch(_){activePanel.focus();}
   }
@@ -4060,7 +4164,7 @@ function setupNavigation(){
   if(!nav){debugWarn("mainNav element not found");return;}
   nav.addEventListener("click",e=>{
     const tab=e.target.closest("[role=tab]");
-    if(tab)switchView(tab.dataset.view);
+    if(tab)switchView(tab.dataset.view,{focusSearch:true});
   });
   // Keyboard navigation: arrow keys between tabs
   nav.addEventListener("keydown",e=>{
@@ -5961,6 +6065,8 @@ function toggleDetail(head){
 /* Attach click/keyboard handlers to .disease-db-item elements via event delegation */
 function _attachDbItemHandlers(container){
   container.addEventListener("click",function(e){
+    const xsp=e.target.closest(".xspecies-result");
+    if(xsp){e.preventDefault();openDiseaseAcrossSpecies(xsp.dataset.name,xsp.dataset.species);return;}
     const drugLink=e.target.closest(".drug-nav-link");
     if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
     const anesthLink=e.target.closest(".anesthesia-nav-link");
