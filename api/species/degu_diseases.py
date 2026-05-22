@@ -2428,19 +2428,19 @@ DISEASES: List[Dict[str, Any]] = [
         "exertion. References: Quesenberry & Carpenter (2012); Keeble & Meredith (2009) "
         "BSAVA Manual of Rodents and Ferrets.",
         "treatment_ja": "心タンポナーデ（閉塞性ショック、虚脱、重度呼吸困難）は緊急。【心嚢穿刺】イソフルラン"
-        "麻酔下��超音波ガイド下でのニードル吸引。デグーの小さい体サイズ（<300g）により"
+        "麻酔下で超音波ガイド下でのニードル吸引。デグーの小さい体サイズ（<300g）により"
         "技術的に非常に困難 — エキゾチック専門医への紹介を強く推奨。【内科管理】フロセミド"
         "1-4 mg/kg PO/SC/IM q8-12h。エナラプリル0.5 mg/kg PO q24h。ピモベンダン"
         "0.1-0.3 mg/kg PO q12h（収縮機能障害併発時）。【原因治療】感染性: エンロフロキサシン"
         "5-10 mg/kg PO q12h × 14-21日（経口βラクタム系禁忌）。腫瘍性: 緩和ケア。代謝性: "
-        "血��管理最適化。【酸素】フローバイO2 1-2 L/min。心エコーで2-4週ごとモニタリング。",
+        "血圧管理最適化。【酸素】フローバイO2 1-2 L/min。心エコーで2-4週ごとモニタリング。",
         "prevention": "No specific prevention for idiopathic pericardial effusion. Optimal glycemic control in "
         "diabetic degus reduces risk of diabetic cardiomyopathy. Regular health monitoring in "
         "senior degus (>4 years). Prompt treatment of respiratory and systemic infections. "
         "Maintain appropriate environmental temperature (20-22°C) — cold stress may exacerbate "
         "cardiac conditions. Reference: Quesenberry & Carpenter (2012).",
         "prevention_ja": "特発性心嚢液貯留の特異的予防法はない。糖尿病デグーでは最適な血糖管理で糖尿病性"
-        "心筋症リスクを軽減。高齢デグー（>4歳）の定期健康モニタリング。適切な環���温度維持"
+        "心筋症リスクを軽減。高齢デグー（>4歳）の定期健康モニタリング。適切な環境温度維持"
         "（20-22°C）。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "特発性疾患の予後は個々の症例により変動する。自然寛解する場合もあるが、慢性再発性の経過をたどることもある。対症療法と支持療法が治療の中心。定期的な再評価により治療方針を調整する。",
@@ -2539,7 +2539,7 @@ DISEASES: List[Dict[str, Any]] = [
         "References: Quesenberry & Carpenter (2012); Percy & Barthold (2007).",
         "treatment_ja": "【保存的管理（大多数の症例）】脂肪腫は良性で、小型・非増大・運動/機能に影響がなければ"
         "通常治療不要。月1回のサイズモニタリング。【外科的切除】適応: 急速増大、運動制限、"
-        "潰瘍化、不快感がある場合; FNA細胞診が不確定の場��（脂肪肉腫の除外必須）。"
+        "潰瘍化、不快感がある場合; FNA細胞診が不確定の場合（脂肪肉腫の除外必須）。"
         "イソフルラン麻酔下で被膜に沿った鈍的剥離による完全切除。病理組織検査に提出。"
         "【診断】FNAで成熟脂肪細胞を確認（異型性なし）。紡錘形細胞や多形性細胞がある場合は"
         "切除生検。【体重管理】肥満は脂肪腫の素因 — チモシー牧草ベースの厳格食で理想体重維持。"
@@ -2550,7 +2550,7 @@ DISEASES: List[Dict[str, Any]] = [
         "new masses early. No specific pharmacological prevention available. "
         "Reference: Percy & Barthold (2007) Pathology of Laboratory Rodents 3rd ed.",
         "prevention_ja": "チモシー牧草ベース食と運動による理想体重（170-300g）の維持。肥満は脂肪腫の最も重要な"
-        "修正可能リスク因子。糖分/果物禁忌（糖尿病と肥満の両方を��防）。新しい腫瘤の早期発見"
+        "修正可能リスク因子。糖分/果物禁忌（糖尿病と肥満の両方を予防）。新しい腫瘤の早期発見"
         "のための定期身体検査。",
         "prognosis": "Good prognosis. Benign condition that may be managed conservatively or with surgical excision.",
         "prognosis_ja": "脂肪腫の予後: 早期発見と適切な治療で多くの疾患は予後良好。慢性疾患は定期的モニタリングと治療調整で長期管理可能。",
