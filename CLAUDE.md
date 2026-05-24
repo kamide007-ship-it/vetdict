@@ -197,8 +197,9 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 3. `api/diagnostic_chat.py`: _GENERIC_SPECIES + SPECIES_LABELS に追加
 4. `api/disease_store.py`: SPECIES_META + _MODULE_MAP に追加
 5. `scripts/migrate_to_sqlite.py`: SPECIES_MODULES に追加
-6. `static/js/app.js`: SPECIES_ICONS + SPECIES配列 + pendingStats更新
-7. テスト: `tests/test_disease_store.py` と `tests/test_vetdict_api.py` の種数アサーション更新
+6. `scripts/build_disease_search_index.py`: SPECIES_MODULE_MAP に追加 → `python3 scripts/build_disease_search_index.py` で `api/data/disease_search_index.json` を再生成（全種横断検索 `/api/diseases?q=` が空SQLite環境でも動くための軽量名前インデックス）
+7. `static/js/app.js`: SPECIES_ICONS + SPECIES配列 + pendingStats更新
+8. テスト: `tests/test_disease_store.py` と `tests/test_vetdict_api.py` の種数アサーション更新
 
 ## 薬品投与量を追加する手順
 - 既存薬品に種別投与量を追加: `api/drug_batch_3.py` の SPECIES_INFO_PATCH

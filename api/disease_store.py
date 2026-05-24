@@ -233,6 +233,7 @@ def invalidate_cache() -> None:
         get_species_stats.cache_clear()
         get_urgency_stats.cache_clear()
         _get_symptoms_for_species_cached.cache_clear()
+        _diseases_table_empty.cache_clear()  # Re-check table state after writes
         _symptom_category_cache.clear()  # Clear category cache
 
 
@@ -835,6 +836,115 @@ def _infer_disease_categories(disease: dict, species: str) -> set[str]:
     return categories if categories else {"other"}
 
 
+# ---------------------------------------------------------------------------
+# Cross-species search fallback (used when SQLite diseases table is empty)
+# ---------------------------------------------------------------------------
+#
+# Low-memory deploys (512 MB) skip the full disease migration to avoid the
+# ~535 MB peak RSS of importing every species module at once, leaving the
+# SQLite ``diseases`` table empty.  Per-species browsing works because the API
+# imports one module at a time, but cross-species search (``/api/diseases?q=``)
+# has nothing to query.  A compact prebuilt name index keeps that feature
+# working without touching memory.  See scripts/build_disease_search_index.py.
+
+_DISEASE_INDEX_ARTIFACT = Path(__file__).resolve().parent / "data" / "disease_search_index.json"
+_DISEASE_INDEX_RUNTIME = Path(DB_PATH).parent / "disease_search_index.json"
+
+
+@lru_cache(maxsize=1)
+def _diseases_table_empty() -> bool:
+    """True when the SQLite diseases table holds no rows (or is unavailable)."""
+    try:
+        _ensure_db()
+        with get_connection() as conn:
+            count = conn.execute("SELECT COUNT(*) FROM diseases").fetchone()[0]
+        return count == 0
+    except Exception:
+        logger.debug("Could not determine diseases table state", exc_info=True)
+        return True
+
+
+@lru_cache(maxsize=1)
+def _disease_search_index() -> list[dict]:
+    """Load the compact cross-species disease name index.
+
+    Fast path reads the committed build artifact; if absent (e.g. it was
+    pruned) it tries a runtime copy, then rebuilds via the memory-bounded
+    subprocess builder and caches the result next to the database.
+    """
+    for path in (_DISEASE_INDEX_ARTIFACT, _DISEASE_INDEX_RUNTIME):
+        try:
+            if path.exists():
+                data = json.loads(path.read_text(encoding="utf-8"))
+                if data:
+                    logger.info("Loaded disease search index from %s (%d entries)", path, len(data))
+                    return data
+        except Exception:
+            logger.debug("Could not read disease search index from %s", path, exc_info=True)
+
+    # Last resort: build it (one subprocess per species keeps peak RSS bounded).
+    try:
+        import subprocess
+        import sys
+
+        repo_root = Path(__file__).resolve().parent.parent
+        script = repo_root / "scripts" / "build_disease_search_index.py"
+        result = subprocess.run(
+            [sys.executable, str(script)],
+            capture_output=True,
+            text=True,
+            timeout=600,
+            cwd=str(repo_root),
+        )
+        if result.returncode == 0 and _DISEASE_INDEX_ARTIFACT.exists():
+            data = json.loads(_DISEASE_INDEX_ARTIFACT.read_text(encoding="utf-8"))
+            logger.info("Built disease search index via subprocess (%d entries)", len(data))
+            return data
+        logger.warning("Disease search index build failed: %s", result.stderr.strip()[:300])
+    except Exception:
+        logger.warning("Could not build disease search index", exc_info=True)
+    return []
+
+
+def _search_index_fallback(keywords: list[str], species: str | None, limit: int) -> list[dict]:
+    """Keyword search over the prebuilt name index (name + name_ja, AND logic)."""
+    index = _disease_search_index()
+    if not index:
+        return []
+
+    lowered = [k.lower() for k in keywords]
+    scored: list[tuple[int, dict]] = []
+    for entry in index:
+        if species and entry.get("species") != species:
+            continue
+        name = (entry.get("name") or "").lower()
+        name_ja = (entry.get("name_ja") or "").lower()
+        haystack = name + "\n" + name_ja
+        if not all(kw in haystack for kw in lowered):
+            continue
+        score = 0
+        for kw in lowered:
+            if kw in name:
+                score += 100 + name.count(kw) * 10
+            if kw in name_ja:
+                score += 100
+        scored.append(
+            (
+                score,
+                {
+                    "id": entry.get("id"),
+                    "species": entry.get("species"),
+                    "name": entry.get("name"),
+                    "name_ja": entry.get("name_ja"),
+                    "urgency": entry.get("urgency"),
+                },
+            )
+        )
+
+    scored.sort(key=lambda x: (-x[0], x[1].get("name") or ""))
+    return [d for _, d in scored[:limit]]
+
+
 def search_diseases(query: str, species: str | None = None, category: str | None = None, limit: int = 50) -> list[dict]:
     """Search diseases by name, description, treatment, and other fields.
 
@@ -849,6 +959,13 @@ def search_diseases(query: str, species: str | None = None, category: str | None
     keywords = [k.strip() for k in query.split() if k.strip()]
     if not keywords:
         return []
+
+    # When the SQLite diseases table is empty (low-memory deploys skip the full
+    # migration), search the prebuilt cross-species name index instead so that
+    # cross-species search keeps working.  Category filtering needs symptom data
+    # that the index omits, so it is only honoured against the populated table.
+    if not category and _diseases_table_empty():
+        return _search_index_fallback(keywords, species, limit)
 
     # Escape special characters
     def escape_like(s):
