@@ -105,6 +105,7 @@ const I18N={
     labSectionTitle:"&#128300; 検査値を入力（任意）",
     labCatRenal:"腎機能",labCatHepatic:"肝機能",labCatMetabolic:"代謝・膵",labCatElectrolyte:"電解質",labCatCBC:"CBC",labCatEndocrine:"内分泌・炎症・尿",
     labClear:"検査値をクリア",
+    labImport:"📷 画像/テキストから取込",
     painScaleTitle:"&#x1F9D1;&#x200D;&#x2695;&#xFE0F; 痛みの評価 (CSU Pain Scale)",
     painScaleHint:"Colorado State University 犬急性痛みスケール（0〜4）を選択してください。",
     painDesc0:"快適、リラックス、尾を振る",
@@ -368,6 +369,7 @@ const I18N={
     labSectionTitle:"&#128300; Enter lab values (optional)",
     labCatRenal:"Renal",labCatHepatic:"Hepatic",labCatMetabolic:"Metabolic / Pancreas",labCatElectrolyte:"Electrolytes",labCatCBC:"CBC",labCatEndocrine:"Endocrine / Inflammation / Urine",
     labClear:"Clear lab values",
+    labImport:"📷 Import from image/text",
     painScaleTitle:"&#x1F9D1;&#x200D;&#x2695;&#xFE0F; Pain assessment (CSU Pain Scale)",
     painScaleHint:"Select Colorado State University Canine Acute Pain Scale (0–4).",
     painDesc0:"Comfortable, relaxed, wagging tail",
@@ -2781,6 +2783,27 @@ function createShareWidget(diseases){
   return w;
 }
 
+/* Initial-display caps for differential cards. The engine returns the full
+   ranked list (often 100+ low-match entries), but showing every card at once
+   buries the clinically relevant differentials. We render a focused set and
+   tuck the long tail behind a "show more" toggle (all cards stay in the DOM,
+   so search/print/expand-all keep working). */
+const DX_CAP_COMMON=12,DX_CAP_RARE=6,DX_CAP_FLAT=15;
+function renderDxCards(diseases,data,cap){
+  let out="";
+  diseases.forEach((d,i)=>{
+    let card=renderDiseaseCard(d,data);
+    if(i>=cap)card=card.replace('<div class="disease-result ','<div class="disease-result dx-hidden ');
+    out+=card;
+  });
+  if(diseases.length>cap){
+    const more=diseases.length-cap;
+    const label=currentLang==="ja"?`さらに${more}件の鑑別を表示`:`Show ${more} more differential${more!==1?"s":""}`;
+    out+=`<button type="button" class="dx-show-more" data-action="dx-show-more" aria-label="${label}">${label} ▾</button>`;
+  }
+  return out;
+}
+
 function renderResults(data){
   updateCheckerProgress(3);
   _cardIndex=0;
@@ -2879,23 +2902,21 @@ function renderResults(data){
   html+=`<div class="results-cards-area">`;
   // Render Phase 1 (Common/Very Common)
   if(phase1.length>0){
-    html+=`<div style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--green);padding:8px 12px;background:rgba(34,168,79,.08);border-left:4px solid var(--green);border-radius:var(--radius);margin-bottom:10px">🎯 ${currentLang==="ja"?"最初に検討すべき疾患（よくある疾患）":"Primary Differential (Common diseases)"}</div>`;
-    phase1.forEach(d=>{html+=renderDiseaseCard(d,data);});
+    html+=`<div class="dx-group" style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--green);padding:8px 12px;background:rgba(34,168,79,.08);border-left:4px solid var(--green);border-radius:var(--radius);margin-bottom:10px">🎯 ${currentLang==="ja"?"最初に検討すべき疾患（よくある疾患）":"Primary Differential (Common diseases)"}</div>`;
+    html+=renderDxCards(phase1,data,DX_CAP_COMMON);
     html+=`</div>`;
   }
 
   // Render Phase 2 (Uncommon/Rare)
   if(phase2.length>0){
-    html+=`<div style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--orange);padding:8px 12px;background:rgba(240,133,14,.08);border-left:4px solid var(--orange);border-radius:var(--radius);margin-bottom:10px">🔍 ${currentLang==="ja"?"さらに検討すべき疾患（稀な疾患）":"Secondary Differential (Rare/Uncommon diseases)"}</div>`;
-    phase2.forEach(d=>{html+=renderDiseaseCard(d,data);});
+    html+=`<div class="dx-group" style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--orange);padding:8px 12px;background:rgba(240,133,14,.08);border-left:4px solid var(--orange);border-radius:var(--radius);margin-bottom:10px">🔍 ${currentLang==="ja"?"さらに検討すべき疾患（稀な疾患）":"Secondary Differential (Rare/Uncommon diseases)"}</div>`;
+    html+=renderDxCards(phase2,data,DX_CAP_RARE);
     html+=`</div>`;
   }
 
   // Fallback: render all diseases if no phase info
   if(phase1.length===0&&phase2.length===0){
-    diseases.forEach(d=>{
-      html+=renderDiseaseCard(d,data);
-    });
+    html+=`<div class="dx-group">${renderDxCards(diseases,data,DX_CAP_FLAT)}</div>`;
   }
   html+=`</div>`;
 
@@ -2907,6 +2928,13 @@ function renderResults(data){
   contentDiv.innerHTML=html;
   /* Disease card expand/collapse — event delegation on contentDiv */
   contentDiv.addEventListener("click",function(e){
+    const moreBtn=e.target.closest(".dx-show-more");
+    if(moreBtn){
+      const parent=moreBtn.parentElement;
+      if(parent)parent.querySelectorAll(".disease-result.dx-hidden").forEach(c=>c.classList.remove("dx-hidden"));
+      moreBtn.remove();
+      return;
+    }
     const drugLink=e.target.closest(".drug-nav-link");
     if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
     if(e.target.closest("a"))return;
@@ -2928,17 +2956,17 @@ function renderResults(data){
     if(mode==="default"){
       let groupHtml="";
       if(phase1.length>0){
-        groupHtml+=`<div style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--green);padding:8px 12px;background:rgba(34,168,79,.08);border-left:4px solid var(--green);border-radius:var(--radius);margin-bottom:10px">🎯 ${currentLang==="ja"?"最初に検討すべき疾患（よくある疾患）":"Primary Differential (Common diseases)"}</div>`;
-        phase1.forEach(d=>{groupHtml+=renderDiseaseCard(d,data);});
+        groupHtml+=`<div class="dx-group" style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--green);padding:8px 12px;background:rgba(34,168,79,.08);border-left:4px solid var(--green);border-radius:var(--radius);margin-bottom:10px">🎯 ${currentLang==="ja"?"最初に検討すべき疾患（よくある疾患）":"Primary Differential (Common diseases)"}</div>`;
+        groupHtml+=renderDxCards(phase1,data,DX_CAP_COMMON);
         groupHtml+=`</div>`;
       }
       if(phase2.length>0){
-        groupHtml+=`<div style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--orange);padding:8px 12px;background:rgba(240,133,14,.08);border-left:4px solid var(--orange);border-radius:var(--radius);margin-bottom:10px">🔍 ${currentLang==="ja"?"さらに検討すべき疾患（稀な疾患）":"Secondary Differential (Rare/Uncommon diseases)"}</div>`;
-        phase2.forEach(d=>{groupHtml+=renderDiseaseCard(d,data);});
+        groupHtml+=`<div class="dx-group" style="margin-bottom:16px"><div style="font-size:.86rem;font-weight:700;color:var(--orange);padding:8px 12px;background:rgba(240,133,14,.08);border-left:4px solid var(--orange);border-radius:var(--radius);margin-bottom:10px">🔍 ${currentLang==="ja"?"さらに検討すべき疾患（稀な疾患）":"Secondary Differential (Rare/Uncommon diseases)"}</div>`;
+        groupHtml+=renderDxCards(phase2,data,DX_CAP_RARE);
         groupHtml+=`</div>`;
       }
       if(phase1.length===0&&phase2.length===0){
-        diseases.forEach(d=>{groupHtml+=renderDiseaseCard(d,data);});
+        groupHtml+=`<div class="dx-group">${renderDxCards(diseases,data,DX_CAP_FLAT)}</div>`;
       }
       cardsArea.innerHTML=groupHtml;
       return;
@@ -2947,8 +2975,7 @@ function renderResults(data){
     let sorted=[...diseases];
     if(mode==="confidence")sorted.sort((a,b)=>(b.match_percent||b.confidence||0)-(a.match_percent||a.confidence||0));
     else if(mode==="severity")sorted.sort((a,b)=>(sevOrder[a.severity]??4)-(sevOrder[b.severity]??4));
-    cardsArea.innerHTML="";
-    sorted.forEach(d=>{cardsArea.insertAdjacentHTML("beforeend",renderDiseaseCard(d,data));});
+    cardsArea.innerHTML=`<div class="dx-group">${renderDxCards(sorted,data,DX_CAP_FLAT)}</div>`;
   });
   area.appendChild(contentDiv);
   area.appendChild(createFeedbackWidget());

@@ -1410,17 +1410,30 @@ def get_related_symptoms(species):
                 (species_key,),
             ).fetchall()
 
-        if not rows:
+        # Build the list of per-disease symptom sets. Prefer SQLite, but fall
+        # back to the in-memory disease modules when the table has no rows for
+        # this species (e.g. migration skipped on memory-constrained hosts) so
+        # the co-occurrence suggestions still work.
+        disease_symptom_sets: list[set] = []
+        if rows:
+            for row in rows:
+                try:
+                    disease_symptom_sets.append(set(_json.loads(row["symptoms"])))
+                except (ValueError, TypeError):
+                    logger.warning("Corrupted symptoms JSON for disease %s", row.get("id", "unknown"))
+                    continue
+        else:
+            for d in _load_diseases(species_key):
+                syms = d.get("symptoms") if isinstance(d, dict) else getattr(d, "symptoms", None)
+                if syms:
+                    disease_symptom_sets.append(set(syms))
+
+        if not disease_symptom_sets:
             return {"related": []}
 
         selected_set = set(selected)
         co_occur: dict[str, int] = {}
-        for row in rows:
-            try:
-                disease_symptoms = set(_json.loads(row["symptoms"]))
-            except (ValueError, TypeError):
-                logger.warning("Corrupted symptoms JSON for disease %s", row.get("id", "unknown"))
-                continue
+        for disease_symptoms in disease_symptom_sets:
             overlap = disease_symptoms & selected_set
             if overlap:
                 for s in disease_symptoms - selected_set:
@@ -1982,60 +1995,6 @@ def api_common_diseases(species):
     # Sort: very_common first, then common
     result.sort(key=lambda x: (0 if x["prevalence"] == "very_common" else 1, x["name"]))
     return {"species": species, "common_diseases": result}
-
-
-@app.route("/api/diseases", methods=["GET"])
-@ensure_json_response
-def api_search_diseases():
-    """Global search endpoint for diseases with keyword + species + category filters.
-
-    Query params:
-      - q: search query (space-separated keywords, each required)
-      - species: optional species filter (comma-separated for multiple, e.g. 'dog,cat,horse')
-      - category: optional symptom category filter (e.g. 'respiratory', 'digestive')
-      - limit: max results (default 20, max 100)
-
-    Returns: diseases list with name, name_ja, species, slug, urgency
-    """
-    query = request.args.get("q", "").strip()
-    species_param = request.args.get("species", "").strip()
-    category_param = request.args.get("category", "").strip()
-    try:
-        limit = max(1, min(int(request.args.get("limit", "20")), 100))
-    except (ValueError, TypeError):
-        limit = 20
-
-    if len(query) < 2:
-        return {"error": "Query must be at least 2 characters", "diseases": []}, 400
-
-    from api.disease_store import _disease_slug, search_diseases
-
-    # Parse multiple species (comma-separated)
-    species_list = [s.strip() for s in species_param.split(",") if s.strip()] if species_param else []
-
-    # Search all species first, then filter if needed
-    all_results = search_diseases(
-        query, species=None, category=category_param if category_param else None, limit=limit * 2
-    )
-
-    # Filter by species if specified
-    if species_list:
-        all_results = [d for d in all_results if d.get("species") in species_list]
-
-    # Limit results
-    results = all_results[:limit]
-
-    # Add slug to each result
-    for disease in results:
-        disease["slug"] = _disease_slug(disease)
-
-    return {
-        "diseases": results,
-        "query": query,
-        "count": len(results),
-        "species_filter": species_list,
-        "category_filter": category_param if category_param else None,
-    }
 
 
 # =============================================================================
