@@ -1407,3 +1407,65 @@ class TestMatchEdgeCases:
         result = match_symptoms_to_diseases(["coughing"])
         for match in result:
             assert "coughing" in match["matched_symptoms"]
+
+
+# ============================================================================
+# Cardinal-sign coverage regression tests
+#
+# These clinical terms were previously dropped by the extractor (no alias /
+# vocabulary gap). They map to existing symptom IDs, so they must always be
+# captured. See api/chat/symptom_aliases.py and symptom_extractor.py.
+# ============================================================================
+
+
+class TestCardinalSignCoverageLegacyDog:
+    """Common clinical signs must be extracted on the legacy dog free-text path."""
+
+    def test_collapse(self):
+        # collapse -> fainting (legacy vocab has no 'collapse' ID)
+        assert "fainting" in extract_symptoms_from_text("dog collapse")
+        assert "fainting" in extract_symptoms_from_text("犬が虚脱した")
+
+    def test_distended_abdomen(self):
+        assert "bloating" in extract_symptoms_from_text("dog with a distended abdomen")
+        assert "bloating" in extract_symptoms_from_text("お腹が膨れている犬")
+
+    def test_dyspnea_synonyms(self):
+        assert "labored_breathing" in extract_symptoms_from_text("the dog has dyspnea")
+        assert "labored_breathing" in extract_symptoms_from_text("respiratory distress")
+
+    def test_melena_and_hematochezia(self):
+        assert "blood_in_stool" in extract_symptoms_from_text("dog has melena")
+        assert "blood_in_stool" in extract_symptoms_from_text("hematochezia noted")
+
+    def test_hemoabdomen_triad_ranks_hemangiosarcoma(self):
+        """collapse + pale gums + distended abdomen is a classic hemoabdomen
+        presentation; hemangiosarcoma should rank at the top."""
+        syms = extract_symptoms_from_text("dog acute collapse pale gums distended abdomen")
+        assert {"fainting", "pale_gums", "bloating"}.issubset(set(syms))
+        matches = match_symptoms_to_diseases(syms)
+        top_names = [m.get("name_en", "") + m.get("name_ja", "") for m in matches[:3]]
+        assert any("ngiosarcoma" in n or "血管肉腫" in n for n in top_names)
+
+
+class TestCardinalSignCoverageModernEngine:
+    """Same signs must resolve to species-appropriate IDs on the modern engine."""
+
+    def test_collapse_resolves_per_species(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        assert "collapse" in _extract_species_symptoms("cat collapse", "cat")
+        # rabbit vocabulary uses 'prostration' for collapse
+        assert "prostration" in _extract_species_symptoms("rabbit collapse", "rabbit")
+
+    def test_distended_abdomen_not_resolved_to_pain(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # distension should resolve to a distension-like ID, never to abdominal_pain alone
+        assert "abdominal_distension" in _extract_species_symptoms("cat distended abdomen", "cat")
+
+    def test_lymphadenopathy_resolves_to_species_id(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # cat uses 'lymph_node_enlargement'
+        assert "lymph_node_enlargement" in _extract_species_symptoms("cat lymphadenopathy", "cat")
