@@ -623,6 +623,12 @@ def extract_symptoms_from_text(text: str) -> list:
         "dyspnea": ["labored_breathing"],
         "icterus": ["jaundice"],
         "syncope": ["fainting"],
+        "collapse": ["fainting"],
+        "prostration": ["fainting", "lethargy"],
+        "abdominal_distension": ["bloating"],
+        "regurgitation": ["vomiting"],
+        "ataxia": ["tremors"],
+        "incoordination": ["tremors"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

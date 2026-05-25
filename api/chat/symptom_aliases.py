@@ -477,6 +477,13 @@ SYMPTOM_ALIASES = {
     "倒れた": "collapse",
     "倒れる": "collapse",
     "気絶": "collapse",
+    "虚脱": "collapse",
+    "コラプス": "collapse",
+    "卒倒": "collapse",
+    "ぐったりして倒れた": "collapse",
+    "collapse": "collapse",
+    "collapsed": "collapse",
+    "collapsing": "collapse",
     # 皮膚
     "かゆい": "excessive_licking",
     "痒い": "excessive_licking",
@@ -496,6 +503,16 @@ SYMPTOM_ALIASES = {
     "お腹が張ってる": "bloating",
     "おなかが膨れてる": "bloating",
     "お腹パンパン": "bloating",
+    "腹部膨隆": "bloating",
+    "distended abdomen": "bloating",
+    "distended belly": "bloating",
+    "distended stomach": "bloating",
+    "abdominal distention": "bloating",
+    "swollen abdomen": "bloating",
+    "pot belly": "bloating",
+    "pot-bellied": "bloating",
+    "potbelly": "bloating",
+    "pot-bellied appearance": "bloating",
     # 目
     "目が赤い": "redness_in_eyes",
     "目が白い": "cloudiness_in_eyes",
@@ -1507,4 +1524,37 @@ SYMPTOM_ALIASES = {
     "vaginal tear": "genital_discharge",
     "birth trauma": "genital_discharge",
     "genital tract injury": "genital_discharge",
+    # --- Standard clinical terminology that was previously unmatched ---
+    # Respiratory distress (clinical synonyms for labored breathing)
+    "dyspnea": "labored_breathing",
+    "dyspnoea": "labored_breathing",
+    "dyspneic": "labored_breathing",
+    "respiratory distress": "labored_breathing",
+    "increased respiratory effort": "labored_breathing",
+    "呼吸窮迫": "labored_breathing",
+    # GI hemorrhage (melena / hematochezia)
+    "melena": "blood_in_stool",
+    "black stool": "blood_in_stool",
+    "black tarry stool": "blood_in_stool",
+    "tarry stool": "blood_in_stool",
+    "hematochezia": "blood_in_stool",
+    "黒色便": "blood_in_stool",
+    # Regurgitation (esophageal — distinct from vomiting; falls back to vomiting on legacy dog vocab)
+    "regurgitation": "regurgitation",
+    "regurgitate": "regurgitation",
+    "regurgitating": "regurgitation",
+    "食べ物を戻す": "regurgitation",
+    # Generalized weakness
+    "weakness": "weakness",
+    "generalized weakness": "weakness",
+    "脱力": "weakness",
+    "全身の脱力": "weakness",
+    # Ataxia / incoordination
+    "ataxia": "ataxia",
+    "incoordination": "ataxia",
+    "運動失調": "ataxia",
+    # Lymphadenopathy
+    "enlarged lymph nodes": "swollen_lymph_nodes",
+    "リンパ節腫大": "swollen_lymph_nodes",
+    "リンパ節が腫れてる": "swollen_lymph_nodes",
 }

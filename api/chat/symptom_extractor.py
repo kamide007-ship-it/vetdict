@@ -32,10 +32,18 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         "appetite_increase": ["increased_appetite", "polyphagia", "increased_hunger"],
         # General
         "lethargy": ["depression", "inactivity", "weakness", "listlessness", "muscle_wasting"],
-        "weakness": ["lethargy", "depression", "inactivity"],
+        "weakness": ["lethargy", "depression", "inactivity", "muscle_weakness", "generalized_weakness"],
         "depression": ["lethargy", "inactivity", "weakness"],
         "fever": ["hyperthermia", "elevated_temperature"],
+        "swollen_lymph_nodes": [
+            "lymph_node_enlargement",
+            "enlarged_lymph_nodes",
+            "lymphadenopathy",
+            "lymphadenomegaly",
+            "lymph_node_swelling",
+        ],
         # GI
+        "regurgitation": ["vomiting", "emesis"],
         "diarrhea": ["loose_stool", "watery_stool", "soft_stool"],
         "vomiting": ["regurgitation", "emesis"],
         "constipation": [
@@ -53,20 +61,20 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
             "abdominal_distension",
             "abdominal_distention",
             "distended_abdomen",
-            "abdominal_pain",
             "bloated_abdomen",
+            "abdominal_pain",
         ],
         "abdominal_distension": [
             "bloating",
             "abdominal_distention",
             "distended_abdomen",
-            "abdominal_pain",
             "bloated_abdomen",
+            "abdominal_pain",
         ],
         # Neuro
         "seizures": ["convulsions", "fits", "epileptic_episodes"],
-        "fainting": ["collapse", "syncope"],
-        "collapse": ["fainting", "syncope"],
+        "fainting": ["collapse", "syncope", "prostration", "recumbency"],
+        "collapse": ["fainting", "syncope", "prostration", "recumbency"],
         "paralysis_or_paresis": [
             "paralysis",
             "paresis",
