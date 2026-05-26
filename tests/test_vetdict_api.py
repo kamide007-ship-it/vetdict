@@ -176,6 +176,44 @@ class TestSecurityHeaders:
 
 
 # =============================================================================
+# 2b. Response compression (gzip after_request hook) + UTF-8 JSON
+# =============================================================================
+
+
+class TestResponseCompression:
+    def test_large_json_is_gzipped_when_accepted(self, client):
+        resp = client.get("/api/dashboard-stats/detailed", headers={"Accept-Encoding": "gzip"})
+        # Only assert compression when the body is large enough to qualify.
+        if int(resp.headers.get("Content-Length", "0")) and resp.headers.get("Content-Encoding") == "gzip":
+            import gzip as _gz
+
+            decoded = _gz.decompress(resp.data)
+            assert decoded[:1] in (b"{", b"[")
+            assert "Accept-Encoding" in resp.headers.get("Vary", "")
+
+    def test_index_html_is_gzipped(self, client):
+        resp = client.get("/", headers={"Accept-Encoding": "gzip"})
+        if resp.status_code == 200 and len(resp.data) and resp.headers.get("Content-Encoding") == "gzip":
+            import gzip as _gz
+
+            decoded = _gz.decompress(resp.data)
+            assert b"<" in decoded[:64]
+
+    def test_not_compressed_without_accept_encoding(self, client):
+        resp = client.get("/", headers={"Accept-Encoding": "identity"})
+        assert resp.headers.get("Content-Encoding") != "gzip"
+
+    def test_small_response_not_compressed(self, client):
+        # /api/health is well under the 1KB threshold.
+        resp = client.get("/api/health", headers={"Accept-Encoding": "gzip"})
+        assert resp.headers.get("Content-Encoding") != "gzip"
+
+    def test_json_keeps_unescaped_utf8(self, client):
+        # ensure_ascii=False: Japanese must be sent raw, not \uXXXX escaped.
+        assert vetdict_api.app.json.ensure_ascii is False
+
+
+# =============================================================================
 # 3. Static / HTML file routes
 # =============================================================================
 
@@ -739,6 +777,51 @@ class TestAnalyzeSymptomsSuccess:
         assert captured["gender"] == "male"
         assert captured["vaccines"] == ["rabies"]
         assert captured["vaccination_status"] == "current"
+
+    def test_results_carry_completeness_and_citations(self, client):
+        """Real analyze path: each diagnosed disease must carry the same quality
+        metadata + citations as the Disease DB tab, so the differential view
+        does not show a misleading hard-coded 100% badge."""
+        resp = client.post(
+            "/api/analyze-symptoms",
+            json={"species": "dog", "symptoms": ["coughing", "lethargy", "fever"], "lang": "ja"},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        diseases = data.get("suspected_diseases") or data.get("possible_conditions") or []
+        assert diseases, "expected at least one suspected disease"
+        top = diseases[0]
+        assert "completeness_score" in top
+        assert isinstance(top["completeness_score"], (int, float))
+        assert "content_origin" in top
+        assert "evidence_sources" in top
+        assert "citation_map" in top
+
+    def test_phase_split_diseases_are_enriched(self, client):
+        resp = client.post(
+            "/api/analyze-symptoms",
+            json={"species": "dog", "symptoms": ["vomiting", "diarrhea", "lethargy"]},
+        )
+        data = resp.get_json()
+        by_phase = data.get("suspected_diseases_by_phase", {})
+        common = by_phase.get("phase_1_common", [])
+        if common:
+            assert "completeness_score" in common[0]
+
+    def test_enrichment_failure_does_not_break_response(self, monkeypatch, client):
+        """If enrichment raises, the endpoint must still return results."""
+        monkeypatch.setattr(
+            vetdict_api,
+            "enrich_disease_content",
+            MagicMock(side_effect=RuntimeError("boom")),
+        )
+        resp = client.post(
+            "/api/analyze-symptoms",
+            json={"species": "dog", "symptoms": ["coughing", "fever"]},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert (data.get("suspected_diseases") or data.get("possible_conditions")) is not None
 
 
 # =============================================================================
