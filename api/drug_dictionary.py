@@ -10995,6 +10995,45 @@ def get_drug_by_id(drug_id: str) -> Optional[Dict]:
 # ---------------------------------------------------------------------------
 
 
+def _drug_list_payload(d: Dict) -> Dict:
+    """薬品一覧用のペイロードを構築する。
+
+    一覧と展開詳細パネルの両方を1リクエストで賄うため、臨床的に重要な
+    フィールド（作用機序・副作用・薬物相互作用・禁忌・投与経路・製剤・
+    スポンサー情報）を含める。存在するフィールドのみを含めてペイロードを
+    肥大化させない。
+    """
+    payload = {
+        "id": d["id"],
+        "name": d["name"],
+        "name_ja": d["name_ja"],
+        "category": d["category"],
+        "category_ja": DRUG_CATEGORIES.get(d["category"], {}).get("ja", d["category"]),
+        "contraindications": d.get("contraindications", ""),
+        "contraindications_ja": d.get("contraindications_ja", ""),
+        "species_info": d.get("species_info", {}),
+    }
+    for field in (
+        "mechanism",
+        "mechanism_ja",
+        "side_effects",
+        "side_effects_ja",
+        "drug_interactions",
+        "routes",
+        "routes_ja",
+        "formulations",
+        "formulations_ja",
+        "sponsor",
+        "sponsor_name",
+        "sponsor_url",
+        "sponsor_url_dog",
+    ):
+        value = d.get(field)
+        if value:
+            payload[field] = value
+    return payload
+
+
 @drug_bp.route("/api/drugs", methods=["GET"])
 def api_list_drugs():
     """薬品一覧を返す。クエリパラメータ: search, category, species"""
@@ -11004,18 +11043,7 @@ def api_list_drugs():
     results = search_drugs(query, category, species)
     return jsonify(
         {
-            "drugs": [
-                {
-                    "id": d["id"],
-                    "name": d["name"],
-                    "name_ja": d["name_ja"],
-                    "category": d["category"],
-                    "category_ja": DRUG_CATEGORIES.get(d["category"], {}).get("ja", d["category"]),
-                    "contraindications_ja": d.get("contraindications_ja", ""),
-                    "species_info": d.get("species_info", {}),
-                }
-                for d in results
-            ],
+            "drugs": [_drug_list_payload(d) for d in results],
             "total": len(results),
             "categories": DRUG_CATEGORIES,
         }

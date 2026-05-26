@@ -10,6 +10,7 @@ Provides:
 """
 
 import contextlib
+import gzip
 import logging
 import os
 import secrets
@@ -42,6 +43,9 @@ RATE_LIMIT_ERROR_MESSAGE = "リクエスト制限に達しました。"
 app = Flask(__name__, static_folder=None, template_folder=str(Path(__file__).resolve().parent.parent / "templates"))
 app.config["DEBUG"] = is_debug_mode_enabled()
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16 MB
+# UTF-8 JSONをそのまま返す（日本語を\uXXXXにエスケープしない）。
+# 日本語が多いレスポンスのペイロードを約25%削減する。
+app.json.ensure_ascii = False
 _secret = os.getenv("SECRET_KEY") or os.getenv("FLASK_SECRET_KEY")
 if not _secret:
     if is_debug_mode_enabled():
@@ -127,6 +131,16 @@ except ImportError:
         SPECIES_ANALYZER_AVAILABLE = False
         analyze_species_symptoms = None
         logger.warning("Species analyzer module not available")
+
+# Content quality enrichment (completeness score + literature citations)
+try:
+    from api.content_quality import enrich_disease_content
+except ImportError:
+    try:
+        from content_quality import enrich_disease_content
+    except ImportError:
+        enrich_disease_content = None
+        logger.warning("Content quality module not available — diagnosis results will not carry citations")
 
 # Health checker blueprint (checkbox UI)
 try:
@@ -395,6 +409,66 @@ def add_headers(response):
         else:
             response.headers.setdefault("Cache-Control", "public, max-age=3600, must-revalidate")
 
+    return response
+
+
+_COMPRESSIBLE_TYPES = frozenset(
+    {
+        "application/json",
+        "application/javascript",
+        "text/javascript",
+        "text/html",
+        "text/css",
+        "text/plain",
+        "image/svg+xml",
+        "application/xml",
+        "text/xml",
+    }
+)
+_COMPRESS_MIN_BYTES = 1024
+
+
+@app.after_request
+def compress_response(response):
+    """大きめのテキスト/JSONレスポンスをgzip圧縮する（依存追加なし）。
+
+    日本語を多く含むJSON（薬品辞書・麻酔プロトコル・疾患DB）や app.js /
+    main.css などの転送量を大幅に削減し、モバイル回線でのUXを改善する。
+    クライアントが gzip を受け入れる場合のみ、未圧縮の 2xx テキスト応答に適用。
+    """
+    try:
+        if "gzip" not in request.headers.get("Accept-Encoding", "").lower():
+            return response
+        if not (200 <= response.status_code < 300):
+            return response
+        if response.headers.get("Content-Encoding"):
+            return response
+        ctype = (response.content_type or "").split(";", 1)[0].strip().lower()
+        if ctype not in _COMPRESSIBLE_TYPES:
+            return response
+        # 静的ファイル等の passthrough 応答はサイズが判明していて妥当な場合のみ
+        # バッファリングして圧縮する（巨大/ストリーミング応答は素通し）。
+        if response.direct_passthrough:
+            length = response.content_length
+            if length is None or length > 5 * 1024 * 1024:
+                return response
+            response.direct_passthrough = False
+        data = response.get_data()
+        if len(data) < _COMPRESS_MIN_BYTES:
+            return response
+        compressed = gzip.compress(data, compresslevel=6)
+        if len(compressed) >= len(data):
+            return response
+        response.set_data(compressed)
+        response.headers["Content-Encoding"] = "gzip"
+        response.headers["Content-Length"] = str(len(compressed))
+        vary = response.headers.get("Vary")
+        if not vary:
+            response.headers["Vary"] = "Accept-Encoding"
+        elif "accept-encoding" not in vary.lower():
+            response.headers["Vary"] = f"{vary}, Accept-Encoding"
+    except Exception:
+        logger.exception("response compression failed; sending uncompressed")
     return response
 
 
@@ -1466,6 +1540,47 @@ def get_related_symptoms(species):
 # =============================================================================
 
 
+def _iter_result_disease_lists(result):
+    """Yield each list of disease dicts contained in an analysis result.
+
+    Covers the flat ranked list (``suspected_diseases`` / ``possible_conditions``)
+    and the phase-split lists used by the stepwise UI.
+    """
+    if not isinstance(result, dict):
+        return
+    for key in ("suspected_diseases", "possible_conditions"):
+        value = result.get(key)
+        if isinstance(value, list):
+            yield value
+    by_phase = result.get("suspected_diseases_by_phase", {})
+    if isinstance(by_phase, dict):
+        for phase_diseases in by_phase.values():
+            if isinstance(phase_diseases, list):
+                yield phase_diseases
+
+
+def _enrich_result_diseases(result, species):
+    """Add completeness score + literature citations to each diagnosed disease.
+
+    Mirrors the enrichment applied by /api/health-check/diseases so the
+    differential-diagnosis view shows an accurate completeness badge and the
+    same evidence-source / citation-map references as the Disease DB tab —
+    instead of a hard-coded "100%" placeholder. Cheap (pure dict work) and
+    safe: failures fall back to the unenriched result.
+    """
+    if enrich_disease_content is None:
+        return
+    sp = species or "dog"
+    for diseases in _iter_result_disease_lists(result):
+        for i, disease in enumerate(diseases):
+            if not isinstance(disease, dict):
+                continue
+            try:
+                diseases[i] = enrich_disease_content(disease, sp)
+            except Exception:
+                logger.exception("disease enrichment failed for %s", disease.get("name", "?"))
+
+
 def _attach_mentioned_drugs(result, species):
     """Attach mentioned_drugs with species-specific dosage to each disease."""
     try:
@@ -1649,7 +1764,10 @@ def api_analyze_symptoms():
                 lang=lang,
             )
 
-        # Attach mentioned_drugs with species-specific dosage to each disease
+        # Enrich each disease with completeness score + literature citations so
+        # the differential view matches the Disease DB tab (accurate quality
+        # badge + evidence sources), then attach species-specific drug dosing.
+        _enrich_result_diseases(result, species or "dog")
         _attach_mentioned_drugs(result, species or "dog")
 
         return result

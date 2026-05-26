@@ -530,6 +530,39 @@ class TestApiListDrugs:
         assert "antibiotics" in data["categories"]
         assert data["categories"]["antibiotics"]["en"] == "Antibiotics"
 
+    def test_list_includes_clinical_detail_fields(self, client):
+        """The list payload must carry the fields the detail panel renders, so
+        the expandable drug view shows mechanism / side effects / interactions /
+        contraindications rather than blank sections."""
+        resp = client.get("/api/drugs?search=meloxicam")
+        data = resp.get_json()
+        mel = next(d for d in data["drugs"] if d["id"] == "meloxicam")
+        assert mel.get("mechanism_ja")
+        assert mel.get("side_effects_ja") and isinstance(mel["side_effects_ja"], list)
+        assert mel.get("drug_interactions") and len(mel["drug_interactions"]) > 0
+        assert mel.get("contraindications")  # English contraindications
+        assert mel.get("contraindications_ja")
+
+    def test_list_omits_empty_optional_fields(self, client):
+        """Optional fields absent from the source drug should not be emitted,
+        keeping the payload lean."""
+        resp = client.get("/api/drugs?search=meloxicam")
+        data = resp.get_json()
+        mel = next(d for d in data["drugs"] if d["id"] == "meloxicam")
+        # meloxicam has no route/formulation/sponsor data → keys should be absent
+        assert "routes" not in mel
+        assert "sponsor" not in mel
+
+    def test_sponsor_drugs_expose_sponsor_metadata(self, client):
+        resp = client.get("/api/drugs")
+        data = resp.get_json()
+        sponsored = [d for d in data["drugs"] if d.get("sponsor")]
+        assert sponsored, "expected at least one sponsor drug in catalog"
+        for d in sponsored:
+            assert d.get("sponsor_name")
+            # frontend falls back sponsor_url -> sponsor_url_dog -> default
+            assert d.get("sponsor_url") or d.get("sponsor_url_dog")
+
 
 class TestApiGetDrug:
     def test_get_existing_drug_status_200(self, client):

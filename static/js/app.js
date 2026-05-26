@@ -225,7 +225,7 @@ const I18N={
     dtDescription:"説明",dtPathophysiology:"病態生理",dtCauses:"原因",dtPrevention:"予防",dtTreatment:"治療",dtPrognosis:"予後",
     dtMatchedSymptoms:"一致した症状",dtRecommendedTests:"推奨検査",dtRecTestList:"推奨検査一覧:",
     dtSymptoms:"症状",
-    dtContraindications:"禁忌事項",dtRoutes:"投与経路",dtFormulations:"製剤",dtInteractions:"薬物相互作用",dtSpeciesInfo:"動物種別情報:",
+    dtContraindications:"禁忌事項",dtRoutes:"投与経路",dtFormulations:"製剤",dtInteractions:"薬物相互作用",dtSpeciesInfo:"動物種別情報:",dtMechanism:"作用機序",dtSideEffects:"主な副作用",
     safe:"安全",contraindicated:"禁忌",dosageLabel:"投与量: ",
     sponsorVetLabel:"獣医師考案・国内製造・競走馬理化学研究所検査合格",
     productDetails:"製品詳細 \u2192",
@@ -488,7 +488,7 @@ const I18N={
     dtDescription:"Description",dtPathophysiology:"Pathophysiology",dtCauses:"Causes",dtPrevention:"Prevention",dtTreatment:"Treatment",dtPrognosis:"Prognosis",
     dtMatchedSymptoms:"Matched Symptoms",dtRecommendedTests:"Recommended Tests",dtRecTestList:"Recommended Tests:",
     dtSymptoms:"Symptoms",
-    dtContraindications:"Contraindications",dtRoutes:"Routes",dtFormulations:"Formulations",dtInteractions:"Drug Interactions",dtSpeciesInfo:"Species Information:",
+    dtContraindications:"Contraindications",dtRoutes:"Routes",dtFormulations:"Formulations",dtInteractions:"Drug Interactions",dtSpeciesInfo:"Species Information:",dtMechanism:"Mechanism of Action",dtSideEffects:"Common Side Effects",
     safe:"Safe",contraindicated:"Contraindicated",dosageLabel:"Dosage: ",
     sponsorVetLabel:"Formulated by a veterinarian — Made in Japan — Passed racing lab tests",
     productDetails:"Product details \u2192",
@@ -2630,10 +2630,43 @@ function renderOrthopedicReferences(d){
   return `<div class="ortho-refs" style="margin-top:12px;padding:10px;background:var(--gray-50,#f9fafb);border-radius:6px;border-left:3px solid var(--green)"><div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--green);margin-bottom:6px">📚 ${currentLang==="ja"?"参考文献（エビデンスベース）":"References (Evidence-based)"}</div>${rendered}</div>`;
 }
 
+/* Map a content field id (e.g. "treatment", "pathophysiology_ja") to a readable
+   bilingual label so quality notes never expose raw internal field names. */
+const _FIELD_LABEL_KEYS={description:"dtDescription",pathophysiology:"dtPathophysiology",causes:"dtCauses",prevention:"dtPrevention",treatment:"dtTreatment",prognosis:"dtPrognosis",clinical_signs:"dtClinicalSigns",diagnosis:"dtDiagnosis",transmission:"dtTransmission"};
+function fieldLabel(field){
+  const base=String(field||"").replace(/_ja$/,"");
+  const key=_FIELD_LABEL_KEYS[base];
+  if(key){const v=t(key);if(v&&v!==key)return v;}
+  return base.replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase());
+}
+/* "Data needs review" note: collapse _ja variants, drop the always auto-generated
+   per-query summary fields (they aren't clinical-data gaps), and show readable
+   labels. Returns "" when nothing meaningful is missing. */
+function renderDataReviewNote(item){
+  const raw=(item&&Array.isArray(item.missing_fields))?item.missing_fields:[];
+  const seen=new Set();
+  const labels=[];
+  raw.forEach(f=>{
+    const base=String(f||"").replace(/_ja$/,"");
+    if(!base||base==="symptoms_summary"||base==="literature_summary"||seen.has(base))return;
+    seen.add(base);
+    labels.push(fieldLabel(base));
+  });
+  if(!labels.length)return "";
+  return `<div class="missing-note">${currentLang==="ja"?"AI補完項目（要獣医師確認）":"AI-generated (clinician review advised)"}: ${escapeHtml(labels.join(", "))}</div>`;
+}
+function contentOriginLabel(origin){
+  const map=currentLang==="ja"
+    ?{sourced:"出典あり",mixed:"一部AI補完",generated:"AI生成"}
+    :{sourced:"Sourced",mixed:"Partially AI-generated",generated:"AI-generated"};
+  return map[origin]||origin;
+}
+
 function renderReferenceLinks(item){
   const refs=(item&&Array.isArray(item.evidence_sources))?item.evidence_sources:[];
   if(!refs.length)return "";
-  return `<div class="missing-note">References: ${refs.map(r=>`<a href="${r&&r.url?sanitizeUrl(r.url):"#"}" target="_blank" rel="noopener noreferrer">${escapeHtml(r&&r.name)}</a>`).join(" | ")}</div>`;
+  const label=currentLang==="ja"?"参考文献":"References";
+  return `<div class="missing-note">${label}: ${refs.map(r=>`<a href="${r&&r.url?sanitizeUrl(r.url):"#"}" target="_blank" rel="noopener noreferrer">${escapeHtml(r&&r.name)}</a>`).join(" | ")}</div>`;
 }
 
 function renderCitationMap(item){
@@ -2651,7 +2684,8 @@ function renderCitationMap(item){
   });
   const entries=Object.entries(cmap).filter(([,ids])=>Array.isArray(ids)&&ids.length>0);
   if(!entries.length)return "";
-  return `<div class="missing-note">Citation map: ${entries.map(([k,ids])=>`${escapeHtml(k)} → ${ids.map(id=>idToNumber[id]?`[${escapeHtml(idToNumber[id])}]`:escapeHtml(id)).join(", ")}`).join(" / ")}</div>`;
+  const label=currentLang==="ja"?"引用対応":"Citation map";
+  return `<div class="missing-note">${label}: ${entries.map(([k,ids])=>`${escapeHtml(fieldLabel(k))} → ${ids.map(id=>idToNumber[id]?`[${escapeHtml(idToNumber[id])}]`:escapeHtml(id)).join(", ")}`).join(" / ")}</div>`;
 }
 
 function showRelatedSuggestions(){
@@ -3758,7 +3792,7 @@ function renderDiseaseCard(d,data){
       ${renderMentionedDrugs(d)}
       ${renderAnesthesiaConsiderations(d)}
       <div class="detail-page-link"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">${currentLang==="ja"?"📖 この疾患の詳細ページを見る":"📖 View full disease page"} →</a></div>
-      ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${missing.length?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(missing.join(", "))}</div>`:""}
+      ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}
     </div>
   </div>`;
   return html;
@@ -4024,7 +4058,7 @@ function renderDiseaseDb(){
         ${recoveryWeeks?`<dt>回復期間/Recovery Timeline</dt><dd>${recoveryWeeks}週間 / ${recoveryWeeks} weeks</dd>`:""}
         ${successRate!==undefined?`<dt>成功率/Success Rate</dt><dd>${(successRate*100).toFixed(1)}%</dd>`:""}
         ${mortalityRate!==undefined?`<dt>死亡率/Mortality Rate</dt><dd>${(mortalityRate*100).toFixed(1)}%</dd>`:""}
-      </dl>${renderOrthopedicReferences(d)}<div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(d.content_origin)}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${(d.missing_fields&&d.missing_fields.length)?`<div class="missing-note">${currentLang==="ja"?"要確認データ":"Data needs review"}: ${escapeHtml(d.missing_fields.join(", "))}</div>`:""}</div>
+      </dl>${renderOrthopedicReferences(d)}<div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
     </div>`}).join("");
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
@@ -5486,6 +5520,8 @@ function renderDrugList(){
         <span class="drug-category-tag">${escapeHtml(catLabel)}</span>
       </div>${dosageHtml}
       <div class="disease-detail">${sponsorLink}
+        ${d.mechanism_ja||d.mechanism?`<dl><dt>${t("dtMechanism")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.mechanism_ja||d.mechanism||""):(d.mechanism||d.mechanism_ja||""))}</dd></dl>`:""}
+        ${(()=>{const se=currentLang==="ja"?(d.side_effects_ja||d.side_effects):(d.side_effects||d.side_effects_ja);return se&&se.length?`<dl><dt>${t("dtSideEffects")}</dt><dd>${se.map(s=>`<span class="drug-se-tag">${escapeHtml(s)}</span>`).join("")}</dd></dl>`:"";})()}
         <dl><dt>${t("dtContraindications")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||""))}</dd></dl>
         ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.routes_ja||[]).join(", "):(d.routes||[]).join(", "))}</dd></dl>`:""}
         ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.formulations_ja||d.formulations||[]).join(", "):(d.formulations||d.formulations_ja||[]).join(", "))}</dd></dl>`:""}

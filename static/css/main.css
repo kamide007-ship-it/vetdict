@@ -780,6 +780,7 @@ a:hover{text-decoration:underline}
 .drug-interaction-tag.severity-major .severity-badge{background:#dc2626;color:#fff}
 .drug-interaction-tag.severity-moderate .severity-badge{background:#ea580c;color:#fff}
 .drug-interaction-tag.severity-minor .severity-badge{background:#ca8a04;color:#fff}
+.drug-se-tag{display:inline-block;margin:2px 4px 2px 0;padding:2px 9px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;font-size:.74rem;line-height:1.5}
 /* --- Dashboard modal --- */
 .dashboard-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center}
 .dashboard-modal.open{display:flex}
