@@ -72,6 +72,24 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = str(ROOT_DIR / "templates")
 STATIC_DIR = str(ROOT_DIR / "static")
 
+
+def _compute_asset_version() -> str:
+    """Content hash of the main JS/CSS bundles, appended as ``?v=`` to asset
+    URLs so a code change automatically busts the browser/CDN cache. Falls back
+    to ``VERSION`` if the files cannot be read."""
+    import hashlib
+
+    h = hashlib.sha1()
+    for rel in ("js/app.js", "css/main.css"):
+        try:
+            h.update((ROOT_DIR / "static" / rel).read_bytes())
+        except OSError:
+            return VERSION
+    return f"{VERSION}-{h.hexdigest()[:8]}"
+
+
+ASSET_VERSION = _compute_asset_version()
+
 # ---------------------------------------------------------------------------
 # Public API rate limiter (prevents abuse of compute-heavy endpoints)
 # ---------------------------------------------------------------------------
@@ -356,7 +374,7 @@ def generate_csp_nonce():
     forward-compatibility if we re-enable nonce-based CSP later.
     """
     g.csp_nonce = secrets.token_urlsafe(16)
-    g.asset_ver = VERSION
+    g.asset_ver = ASSET_VERSION
 
 
 @app.after_request

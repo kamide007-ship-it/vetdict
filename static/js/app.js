@@ -34,6 +34,15 @@ async function copyToClipboard(text){
   }catch(e){debugError("copy fallback failed",e);return false;}
 }
 
+// Coerce a possibly string/undefined field into an array. Some drug entries
+// store list fields (side_effects, routes, …) as comma-separated strings;
+// rendering them as arrays without this guard throws and blanks the whole list.
+function toList(v){
+  if(Array.isArray(v))return v;
+  if(typeof v==="string")return v.split(/[、,，]/).map(s=>s.trim()).filter(Boolean);
+  return v==null?[]:[v];
+}
+
 async function checkAccess(){
   const params=new URLSearchParams(location.search);
   if(OPEN_BETA) isPro=true;
@@ -115,6 +124,8 @@ const I18N={
     painDesc4:"横臥、叫び声、硬直、無反応",
     resultsEmpty:'動物種を選択し、症状にチェックを入れて<br/>「鑑別疾患を検索」を押してください',
     resultsSelectSymptom:"症状を選択してください",
+    selectSpeciesFirst:"まず動物種を選択すると、その種の症状リストが表示されます",
+    selectSpeciesFirstBtn:"動物種を選択する",
     cardDiseaseDb:"&#128218; 疾患データベース",
     diseaseSearchPh:"疾患名で検索... (例: 腎臓, colic, 感染)",
     cardChat:"&#128172; 症状相談",
@@ -379,6 +390,8 @@ const I18N={
     painDesc4:"Lateral recumbency, screaming, rigid, unresponsive",
     resultsEmpty:'Select a species, check symptoms, and<br/>press "Search Differential Diagnoses"',
     resultsSelectSymptom:"Please select symptoms",
+    selectSpeciesFirst:"Pick a species first to load its symptom checklist",
+    selectSpeciesFirstBtn:"Choose a species",
     cardDiseaseDb:"&#128218; Disease Database",
     diseaseSearchPh:"Search diseases... (e.g. renal, colic, infection)",
     cardChat:"&#128172; Symptom Chat",
@@ -703,8 +716,8 @@ function applyLanguage(){
   const mbn=document.getElementById("mobileBottomNav");
   if(mbn){
     mbn.setAttribute("aria-label",currentLang==="ja"?"メインナビゲーション":"Main navigation");
-    const views=["checker","database","chat","drugs","anesthesia"];
-    mbn.querySelectorAll("button[data-view]").forEach((btn,i)=>{const sp=btn.querySelector("span");if(sp)sp.textContent=t("mobileNav"+views[i].charAt(0).toUpperCase()+views[i].slice(1));});
+    const views=["checker","database","chat","drugs","anesthesia","emergency"];
+    mbn.querySelectorAll("button[data-view]").forEach((btn,i)=>{const v=views[i];if(!v)return;const sp=btn.querySelector("span");if(sp)sp.textContent=t("mobileNav"+v.charAt(0).toUpperCase()+v.slice(1));});
   }
   const fab=document.getElementById("floatingNav");
   if(fab){
@@ -806,6 +819,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     // Handle ?species= query param (from sitemap/SEO links)
     const spParam=new URLSearchParams(location.search).get("species");
     if(spParam&&SPECIES_ICONS[spParam])selectSpecies(spParam);
+    else renderSymptomEmptyState();
     // Search clear buttons (replaces inline onclick)
     document.querySelectorAll('[data-action="clear-search"]').forEach(btn=>{
       btn.addEventListener("click",()=>{const inp=btn.previousElementSibling;inp.value='';inp.dispatchEvent(new Event('input'));inp.focus();});
@@ -1924,6 +1938,16 @@ function renderSymptomList(symptoms){
   });
   list.onclick=e=>{const item=e.target.closest(".symptom-item");if(item)toggleSymptom(item.dataset.id);};
   list.onkeydown=e=>{const item=e.target.closest(".symptom-item");if(item&&(e.key==="Enter"||e.key===" ")){e.preventDefault();toggleSymptom(item.dataset.id);}};
+}
+
+function renderSymptomEmptyState(){
+  /* Shown before any species is picked: the symptom list would otherwise be a
+     blank card with just a search box, which reads as broken. */
+  const list=document.getElementById("symptomList");
+  if(!list||currentSpecies)return;
+  list.innerHTML=`<div class="symptom-empty-state"><span class="symptom-empty-icon" aria-hidden="true">\u{1F43E}</span><p>${escapeHtml(t("selectSpeciesFirst"))}</p><button type="button" class="symptom-empty-btn">${escapeHtml(t("selectSpeciesFirstBtn"))}</button></div>`;
+  const btn=list.querySelector(".symptom-empty-btn");
+  if(btn)btn.addEventListener("click",()=>{const s=document.getElementById("speciesSection");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});});
 }
 
 function toggleSymptom(id){const adding=!selectedSymptoms.has(id);if(adding)selectedSymptoms.add(id);else selectedSymptoms.delete(id);haptic(adding?12:6);renderSelectedSymptoms();renderSymptomList(symptomData);if(adding)trackEvent("add_symptom",{species:currentSpecies,symptom:id,total:selectedSymptoms.size});}
@@ -3728,9 +3752,6 @@ function renderDiseaseCard(d,data){
   const treatment=pick(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
   const prognosis=pick(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
   const matchDisplay=matchSymptoms.map(s=>{const n=symNames[s];if(!n)return escapeHtml(s);return currentLang==="ja"?`${escapeHtml(n.ja)} <span style="color:var(--gray-500);font-size:.78rem">${escapeHtml(n.en)}</span>`:`${escapeHtml(n.en)} <span style="color:var(--gray-500);font-size:.78rem">${escapeHtml(n.ja)}</span>`;}).join("&ensp;|&ensp;");
-  const completeness=Number(d.completeness_score||100);
-  const missing=(d.missing_fields||[]);
-  const qualityClass=completeness>=90?"quality-ok":"quality-warn";
   const prevalenceTier=d.prevalence_tier||"unknown";
   const prevalenceLabel={very_common:(currentLang==="ja"?"非常に一般的":"Very Common"),common:(currentLang==="ja"?"一般的":"Common"),uncommon:(currentLang==="ja"?"稀":"Uncommon"),rare:(currentLang==="ja"?"非常に稀":"Rare"),unknown:(currentLang==="ja"?"不明":"Unknown")}[prevalenceTier]||"";
 
@@ -3747,7 +3768,6 @@ function renderDiseaseCard(d,data){
         <div class="disease-name-row">
           <span class="disease-name">${escapeHtml(name)}</span>
           ${nameSecondary&&nameSecondary!==name?`<span class="disease-name-ja">${escapeHtml(nameSecondary)}</span>`:""}
-          <span class="quality-badge ${qualityClass}">${completeness}%</span>
           ${prevalenceLabel?`<span class="prevalence-badge">${escapeHtml(prevalenceLabel)}</span>`:""}
         </div>
         <div class="disease-match-bar-row">
@@ -3805,14 +3825,15 @@ function loadHusbandry(species){
   const container=document.getElementById("husbandryPanel");
   if(!container)return;
   container.innerHTML=`<div class="skeleton skeleton-line" style="margin:12px"></div>`;
+  const card=document.getElementById("husbandryCard");
   fetchWithTimeout(`/api/species/${encodeURIComponent(species)}/husbandry`).then(r=>r.ok?r.json():Promise.reject(new Error("HTTP "+r.status))).then(data=>{
     if(requestId!==husbandryRequestId||species!==currentSpecies)return;
-    if(data.husbandry){renderHusbandry(data.husbandry,container);}
-    else{container.innerHTML=`<p role="status" style="padding:12px;color:var(--gray-500)">${t("husbandryError")}</p>`;}
+    if(data.husbandry){renderHusbandry(data.husbandry,container);if(card)card.style.display="";}
+    else if(card){card.style.display="none";}
   }).catch(err=>{
     if(requestId!==husbandryRequestId||species!==currentSpecies)return;
     debugWarn("husbandry load failed:",err);
-    container.innerHTML=`<p role="status" style="padding:12px;color:var(--gray-500)">${t("husbandryError")}</p>`;
+    if(card)card.style.display="none";
   });
 }
 function renderHusbandry(h,container){
@@ -4041,7 +4062,7 @@ function renderDiseaseDb(){
     const _dCatObj=DISEASE_CATEGORIES[_dCat];
     const _dCatLbl=currentLang==="ja"?(_dCatObj?.ja||"その他"):(_dCatObj?.en||"Other");
     return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false">
-      <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span><span class="quality-badge ${(Number(d.completeness_score||100)>=90)?"quality-ok":"quality-warn"}">${Number(d.completeness_score||100)}%</span></div>
+      <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span></div>
       <div class="d-meta"><span class="d-cat-badge" data-cat="${escapeHtml(_dCat)}">${escapeHtml(_dCatLbl)}</span></div>
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
@@ -4194,6 +4215,11 @@ function switchView(view,opts){
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
   if(view==="anesthesia"&&!anesthesiaLoaded)loadAnesthesiaProtocols();
   if(view==="emergency"&&!emergencyLoaded)loadEmergencyProtocols();
+  /* 動物種未選択で疾患DBを開いた場合、空白ではなく案内（種選択 + 横断検索ヒント）を表示 */
+  if(view==="database"&&!currentSpecies){
+    const dbList=document.getElementById("diseaseDbList");
+    if(dbList&&!dbList.children.length)dbList.innerHTML=renderEmptyState("database");
+  }
   /* フォーカス制御:
      - opts.silent（初期ハッシュルーティング）: フォーカスしない（モバイルでキーボードが勝手に出ない）
      - opts.focusSearch（タブ/メニューのタップ）: 検索ボックスへ同期フォーカス → モバイルでキーボードが開く
@@ -4225,7 +4251,20 @@ function setupNavigation(){
   if(!nav){debugWarn("mainNav element not found");return;}
   nav.addEventListener("click",e=>{
     const tab=e.target.closest("[role=tab]");
-    if(tab)switchView(tab.dataset.view,{focusSearch:true});
+    if(!tab)return;
+    const view=tab.dataset.view;
+    const menuWasOpen=nav.classList.contains("open");
+    switchView(view,{focusSearch:true});
+    /* On desktop the content panels sit far below the landing sections, so a
+       bare view switch happens off-screen and looks like a no-op. Scroll the
+       chosen panel (or the species picker, which is the checker's entry point)
+       into view. switchView already scrolls when the mobile menu was open. */
+    if(!menuWasOpen){
+      const target=view==="checker"
+        ?document.getElementById("speciesSection")
+        :document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
+      if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
+    }
   });
   // Keyboard navigation: arrow keys between tabs
   nav.addEventListener("keydown",e=>{
@@ -5203,7 +5242,8 @@ function loadDrugDictionary(){
     /* Auto-select current species in drug filter */
     if(currentSpecies){spSelect.value=currentSpecies;}
     renderDrugList();
-  }).catch(()=>{
+  }).catch((err)=>{
+    debugError("loadDrugDictionary failed:",err);
     list.innerHTML=`<div role="alert" style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button type="button" class="retry-drug-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
     const rb=list.querySelector(".retry-drug-btn");
     if(rb)rb.addEventListener("click",()=>{drugsLoaded=false;loadDrugDictionary();});
@@ -5521,10 +5561,10 @@ function renderDrugList(){
       </div>${dosageHtml}
       <div class="disease-detail">${sponsorLink}
         ${d.mechanism_ja||d.mechanism?`<dl><dt>${t("dtMechanism")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.mechanism_ja||d.mechanism||""):(d.mechanism||d.mechanism_ja||""))}</dd></dl>`:""}
-        ${(()=>{const se=currentLang==="ja"?(d.side_effects_ja||d.side_effects):(d.side_effects||d.side_effects_ja);return se&&se.length?`<dl><dt>${t("dtSideEffects")}</dt><dd>${se.map(s=>`<span class="drug-se-tag">${escapeHtml(s)}</span>`).join("")}</dd></dl>`:"";})()}
+        ${(()=>{let se=currentLang==="ja"?(d.side_effects_ja||d.side_effects):(d.side_effects||d.side_effects_ja);se=toList(se);return se.length?`<dl><dt>${t("dtSideEffects")}</dt><dd>${se.map(s=>`<span class="drug-se-tag">${escapeHtml(s)}</span>`).join("")}</dd></dl>`:"";})()}
         <dl><dt>${t("dtContraindications")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||""))}</dd></dl>
-        ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.routes_ja||[]).join(", "):(d.routes||[]).join(", "))}</dd></dl>`:""}
-        ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.formulations_ja||d.formulations||[]).join(", "):(d.formulations||d.formulations_ja||[]).join(", "))}</dd></dl>`:""}
+        ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${escapeHtml(toList(currentLang==="ja"?(d.routes_ja||d.routes):(d.routes||d.routes_ja)).join(", "))}</dd></dl>`:""}
+        ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${escapeHtml(toList(currentLang==="ja"?(d.formulations_ja||d.formulations):(d.formulations||d.formulations_ja)).join(", "))}</dd></dl>`:""}
         ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")} <span style="font-size:.7rem;color:var(--gray-500);font-weight:400">(${d.drug_interactions.length})</span></dt><dd>${renderDrugInteractionsList(d.drug_interactions)}</dd></dl>`:""}
         <div class="drug-species-section"><strong class="drug-species-title">${t("dtSpeciesInfo")}</strong>
           <div class="drug-species-grid">
