@@ -11,6 +11,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any, Dict, List, Optional
 
 from flask import Blueprint, jsonify, request
@@ -10995,6 +10996,34 @@ def get_drug_by_id(drug_id: str) -> Optional[Dict]:
 # ---------------------------------------------------------------------------
 
 
+_LIST_FIELDS = frozenset(
+    {
+        "side_effects",
+        "side_effects_ja",
+        "routes",
+        "routes_ja",
+        "formulations",
+        "formulations_ja",
+    }
+)
+
+
+def _as_list(value):
+    """Normalize a list-typed field so the API contract is consistent.
+
+    Some drug entries store ``side_effects`` (etc.) as a comma-separated
+    string rather than a list. The frontend renders these as tags / joins
+    them, so a stray string crashes the whole list render. Split such strings
+    on Japanese (、) and ASCII/fullwidth commas; pass lists through unchanged.
+    """
+    if isinstance(value, list):
+        return value
+    if isinstance(value, str):
+        parts = re.split(r"[、,，]", value)
+        return [p.strip() for p in parts if p.strip()]
+    return value
+
+
 def _drug_list_payload(d: Dict) -> Dict:
     """薬品一覧用のペイロードを構築する。
 
@@ -11030,7 +11059,7 @@ def _drug_list_payload(d: Dict) -> Dict:
     ):
         value = d.get(field)
         if value:
-            payload[field] = value
+            payload[field] = _as_list(value) if field in _LIST_FIELDS else value
     return payload
 
 

@@ -480,6 +480,39 @@ class TestApiListDrugs:
             assert "category_ja" in drug
             assert "species_info" in drug
 
+    def test_list_fields_always_serialized_as_lists(self, client):
+        """side_effects/routes/formulations must be arrays in the API response.
+
+        Some source entries store these as comma-separated strings; the
+        frontend maps/joins them, so a stray string crashed the entire drug
+        list render. The API normalizes them to lists at the boundary.
+        """
+        resp = client.get("/api/drugs")
+        data = resp.get_json()
+        list_fields = (
+            "side_effects",
+            "side_effects_ja",
+            "routes",
+            "routes_ja",
+            "formulations",
+            "formulations_ja",
+        )
+        for drug in data["drugs"]:
+            for field in list_fields:
+                if field in drug:
+                    assert isinstance(drug[field], list), (
+                        f"{drug['id']}.{field} should be a list, got {type(drug[field]).__name__}"
+                    )
+
+    def test_string_side_effects_split_into_list(self, client):
+        """A drug whose source side_effects is a comma string is split to tags."""
+        resp = client.get("/api/drugs?search=gabapentin")
+        data = resp.get_json()
+        gaba = next((d for d in data["drugs"] if d["id"] == "gabapentin_oral"), None)
+        assert gaba is not None
+        assert isinstance(gaba["side_effects"], list)
+        assert len(gaba["side_effects"]) >= 2
+
     def test_search_by_query_param(self, client):
         resp = client.get("/api/drugs?search=amoxicillin")
         data = resp.get_json()
