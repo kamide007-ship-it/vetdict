@@ -713,6 +713,11 @@ a:hover{text-decoration:underline}
 .score-badge.penalty{background:rgba(239,68,68,.08);color:#991b1b;border:1px solid rgba(239,68,68,.15)}
 
 /* --- Drug dictionary cards --- */
+.drug-back-btn,.drug-clear-btn{padding:6px 14px;border:1px solid var(--gray-300);border-radius:var(--radius);font-size:.82rem;font-weight:600;cursor:pointer;transition:background .15s}
+.drug-back-btn{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.drug-back-btn:hover{background:var(--blue)}
+.drug-clear-btn{background:var(--white);color:var(--gray-700)}
+.drug-clear-btn:hover{background:var(--gray-100)}
 .drug-item.drug-sponsored{border-left:3px solid var(--green)}
 .drug-head-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
 .drug-category-tag{font-size:.7rem;padding:2px 8px;background:var(--gray-100);color:var(--navy);border-radius:10px;font-weight:600;flex-shrink:0}
