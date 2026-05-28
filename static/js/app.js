@@ -4165,13 +4165,36 @@ document.addEventListener("click",function(e){
   if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
 });
 
+/* --- Cross-view navigation history (shared by all views) --- */
+let _navHistory=[];
+function _pushNavHistory(fromView,toView,query){
+  _navHistory.push({from:fromView,to:toView,query:query||"",ts:Date.now()});
+  if(_navHistory.length>10)_navHistory.shift();
+}
+function _showBackNav(containerId,searchInputId){
+  const c=document.getElementById(containerId);
+  if(!c||!_navHistory.length)return;
+  const last=_navHistory[_navHistory.length-1];
+  const vn={checker:{ja:"鑑別診断",en:"Checker"},database:{ja:"疾患DB",en:"Disease DB"},chat:{ja:"臨床相談",en:"Chat"},drugs:{ja:"薬品辞書",en:"Drugs"},anesthesia:{ja:"麻酔",en:"Anesthesia"},emergency:{ja:"緊急",en:"Emergency"}};
+  const fn=vn[last.from]?(currentLang==="ja"?vn[last.from].ja:vn[last.from].en):last.from;
+  c.innerHTML=`<button type="button" class="nav-back-btn" data-cid="${containerId}" data-sid="${searchInputId}">← ${fn}${currentLang==="ja"?"に戻る":""}</button><button type="button" class="nav-clear-btn" data-cid="${containerId}" data-sid="${searchInputId}">✕ ${currentLang==="ja"?"検索クリア":"Clear"}</button>`;
+  c.style.display="flex";
+}
+document.addEventListener("click",function(e){
+  const bb=e.target.closest(".nav-back-btn");
+  if(bb){const si=bb.dataset.sid;if(si){const inp=document.getElementById(si);if(inp){inp.value="";inp.dispatchEvent(new Event("input"));}}const ci=document.getElementById(bb.dataset.cid);if(ci){ci.style.display="none";ci.innerHTML="";}if(_navHistory.length){const last=_navHistory.pop();switchView(last.from);}return;}
+  const cb=e.target.closest(".nav-clear-btn");
+  if(cb){const si=cb.dataset.sid;if(si){const inp=document.getElementById(si);if(inp){inp.value="";inp.dispatchEvent(new Event("input"));}}const ci=document.getElementById(cb.dataset.cid);if(ci){ci.style.display="none";ci.innerHTML="";}return;}
+});
+
 let _drugNavReturnView=null;
 function navigateToDrug(drugName){
+  _pushNavHistory(currentView,"drugs",drugName);
   _drugNavReturnView=currentView;
   switchView("drugs");
   const input=document.getElementById("drugSearch");
   if(input){input.value=drugName;input.dispatchEvent(new Event("input"));}
-  _showDrugBackButton(drugName);
+  _showBackNav("drugBackNav","drugSearch");
   const panel=document.getElementById("viewDrugs");
   if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
   setTimeout(()=>{
@@ -4181,33 +4204,12 @@ function navigateToDrug(drugName){
     if(first&&!first.querySelector(".disease-detail.open"))toggleDbItem(first);
   },350);
 }
-function _showDrugBackButton(query){
-  const container=document.getElementById("drugBackNav");
-  if(!container)return;
-  const returnView=_drugNavReturnView;
-  const label=currentLang==="ja"?"← 元の画面に戻る":"← Back";
-  const clearLabel=currentLang==="ja"?"✕ 検索をクリア":"✕ Clear search";
-  container.innerHTML=`<button type="button" class="drug-back-btn" onclick="_drugGoBack()">${label}</button><button type="button" class="drug-clear-btn" onclick="_drugClearSearch()">${clearLabel}</button>`;
-  container.style.display="flex";
-  container.dataset.returnView=returnView||"";
-}
-function _drugGoBack(){
-  const container=document.getElementById("drugBackNav");
-  const returnView=container?container.dataset.returnView:"";
-  _drugClearSearch();
-  if(returnView)switchView(returnView);
-}
-function _drugClearSearch(){
-  const input=document.getElementById("drugSearch");
-  if(input){input.value="";input.dispatchEvent(new Event("input"));}
-  const container=document.getElementById("drugBackNav");
-  if(container){container.style.display="none";container.innerHTML="";}
-}
-
 function navigateToDiseaseDb(query){
+  _pushNavHistory(currentView,"database",query);
   switchView("database");
   const input=document.getElementById("diseaseSearch");
   if(input){input.value=query;input.dispatchEvent(new Event("input"));}
+  _showBackNav("diseaseBackNav","diseaseSearch");
   const panel=document.getElementById("viewDatabase");
   if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
   setTimeout(()=>{
@@ -6204,7 +6206,7 @@ function _attachDbItemHandlers(container){
     const drugLink=e.target.closest(".drug-nav-link");
     if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
     const anesthLink=e.target.closest(".anesthesia-nav-link");
-    if(anesthLink){e.preventDefault();switchView("anesthesia");const p=document.getElementById("viewAnesthesia");if(p)p.scrollIntoView({behavior:"smooth",block:"start"});return;}
+    if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)p.scrollIntoView({behavior:"smooth",block:"start"});return;}
     if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);
   });
   container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")&&!e.target.closest(".disease-detail.open")){e.preventDefault();toggleDbItem(item);}}});
