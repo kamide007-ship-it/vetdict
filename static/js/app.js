@@ -4165,10 +4165,13 @@ document.addEventListener("click",function(e){
   if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
 });
 
+let _drugNavReturnView=null;
 function navigateToDrug(drugName){
+  _drugNavReturnView=currentView;
   switchView("drugs");
   const input=document.getElementById("drugSearch");
   if(input){input.value=drugName;input.dispatchEvent(new Event("input"));}
+  _showDrugBackButton(drugName);
   const panel=document.getElementById("viewDrugs");
   if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
   setTimeout(()=>{
@@ -4177,6 +4180,28 @@ function navigateToDrug(drugName){
     const first=list.querySelector(".disease-db-item");
     if(first&&!first.querySelector(".disease-detail.open"))toggleDbItem(first);
   },350);
+}
+function _showDrugBackButton(query){
+  const container=document.getElementById("drugBackNav");
+  if(!container)return;
+  const returnView=_drugNavReturnView;
+  const label=currentLang==="ja"?"← 元の画面に戻る":"← Back";
+  const clearLabel=currentLang==="ja"?"✕ 検索をクリア":"✕ Clear search";
+  container.innerHTML=`<button type="button" class="drug-back-btn" onclick="_drugGoBack()">${label}</button><button type="button" class="drug-clear-btn" onclick="_drugClearSearch()">${clearLabel}</button>`;
+  container.style.display="flex";
+  container.dataset.returnView=returnView||"";
+}
+function _drugGoBack(){
+  const container=document.getElementById("drugBackNav");
+  const returnView=container?container.dataset.returnView:"";
+  _drugClearSearch();
+  if(returnView)switchView(returnView);
+}
+function _drugClearSearch(){
+  const input=document.getElementById("drugSearch");
+  if(input){input.value="";input.dispatchEvent(new Event("input"));}
+  const container=document.getElementById("drugBackNav");
+  if(container){container.style.display="none";container.innerHTML="";}
 }
 
 function navigateToDiseaseDb(query){
