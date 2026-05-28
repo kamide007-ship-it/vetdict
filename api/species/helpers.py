@@ -4134,19 +4134,28 @@ def analyze_symptoms_generic(
     # Compute overall severity
     severity = _compute_severity(suspected)
 
-    # Collect recommended tests, preserving order and uniqueness. We look up
-    # the corresponding disease definition by name and extend the list with
-    # its recommended tests only once per unique test.
+    # Collect recommended tests, preserving order and uniqueness. We aggregate
+    # only from the TOP differentials (the diseases a clinician would actually
+    # pursue first) rather than every match — with broad symptoms, dozens of
+    # diseases match a single sign, producing an unusably long, unprioritized
+    # test list. `suspected` is already ranked, so the first entries are the
+    # most relevant.
+    _TESTS_FROM_TOP_N = 8
+    _MAX_RECOMMENDED_TESTS = 15
+    name_to_def = {d.get("name"): d for d in diseases}
     recommended_tests: List[str] = []
     seen_tests: Set[str] = set()
-    for entry in suspected:
-        for disease in diseases:
-            if disease.get("name") == entry.get("name"):
-                for test in disease.get("recommended_tests", []):
-                    if test not in seen_tests:
-                        recommended_tests.append(test)
-                        seen_tests.add(test)
-                break
+    for entry in suspected[:_TESTS_FROM_TOP_N]:
+        disease = name_to_def.get(entry.get("name"))
+        if not disease:
+            continue
+        for test in disease.get("recommended_tests", []):
+            if test not in seen_tests:
+                recommended_tests.append(test)
+                seen_tests.add(test)
+        if len(recommended_tests) >= _MAX_RECOMMENDED_TESTS:
+            break
+    recommended_tests = recommended_tests[:_MAX_RECOMMENDED_TESTS]
 
     # Clean internal fields
     for entry in suspected:

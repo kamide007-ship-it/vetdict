@@ -825,6 +825,77 @@ class TestAnalyzeSymptomsSuccess:
 
 
 # =============================================================================
+# 7b. _cap_result_diseases — payload trimming
+# =============================================================================
+
+
+class TestCapResultDiseases:
+    def _result_with_n(self, n):
+        # Phase buckets reference the SAME dict objects as suspected_diseases,
+        # mirroring the real analyzer output, so identity-based capping applies.
+        diseases = [{"name": f"D{i}", "prevalence_tier": "common" if i % 2 else "rare"} for i in range(n)]
+        common = [d for d in diseases if d["prevalence_tier"] == "common"]
+        rare = [d for d in diseases if d["prevalence_tier"] == "rare"]
+        return {
+            "suspected_diseases": diseases,
+            "suspected_diseases_by_phase": {"phase_1_common": common, "phase_2_rare": rare},
+        }
+
+    def test_caps_to_max_total_and_keeps_top_ranked(self):
+        result = self._result_with_n(231)
+        vetdict_api._cap_result_diseases(result, max_total=50)
+        assert len(result["suspected_diseases"]) == 50
+        # Ranking preserved: the head of the list is kept, the tail dropped.
+        assert result["suspected_diseases"][0]["name"] == "D0"
+        assert all(d["name"] != "D230" for d in result["suspected_diseases"])
+
+    def test_phase_buckets_stay_consistent_with_capped_list(self):
+        result = self._result_with_n(231)
+        vetdict_api._cap_result_diseases(result, max_total=50)
+        by_phase = result["suspected_diseases_by_phase"]
+        total = len(by_phase["phase_1_common"]) + len(by_phase["phase_2_rare"])
+        assert total == 50
+        kept = {id(d) for d in result["suspected_diseases"]}
+        for bucket in by_phase.values():
+            assert all(id(d) in kept for d in bucket)
+
+    def test_short_list_is_untouched(self):
+        result = self._result_with_n(10)
+        vetdict_api._cap_result_diseases(result, max_total=50)
+        assert len(result["suspected_diseases"]) == 10
+        assert len(result["suspected_diseases_by_phase"]["phase_1_common"]) == 5
+
+    def test_possible_conditions_alias_capped_too(self):
+        result = self._result_with_n(120)
+        result["possible_conditions"] = result["suspected_diseases"]
+        vetdict_api._cap_result_diseases(result, max_total=50)
+        assert len(result["possible_conditions"]) == 50
+
+    def test_non_dict_input_is_safe(self):
+        # Should not raise.
+        vetdict_api._cap_result_diseases(None)
+        vetdict_api._cap_result_diseases([1, 2, 3])
+
+    def test_endpoint_payload_is_capped_for_broad_symptoms(self, client):
+        # A single broad symptom matches many diseases in the real engine; the
+        # response must be trimmed rather than returning the full long tail.
+        resp = client.post(
+            "/api/analyze-symptoms",
+            json={"species": "cat", "symptoms": ["vomiting", "lethargy", "appetite_loss"], "lang": "ja"},
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        sd = data.get("suspected_diseases") or []
+        assert 0 < len(sd) <= 50
+        ph = data.get("suspected_diseases_by_phase") or {}
+        if ph:
+            phase_total = len(ph.get("phase_1_common", [])) + len(ph.get("phase_2_rare", []))
+            assert phase_total == len(sd)
+        # Recommended-test list is focused, not an unprioritized dump.
+        assert len(data.get("recommended_tests") or []) <= 15
+
+
+# =============================================================================
 # 8. GET /api/species/<species>/symptoms
 # =============================================================================
 
