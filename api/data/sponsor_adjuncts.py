@@ -22,9 +22,11 @@ from typing import Any, Dict, List
 _JOINT_PATTERNS = re.compile(
     r"osteoarthrit|arthrit|\bjoint\b|hip dyspl|elbow dyspl|patellar|patella|"
     r"cruciate|\bOCD\b|osteochondr|spondylos|meniscal|meniscus|tendinit|"
-    r"\btendon\b|"
+    r"\btendon\b|laminit|navicular|suspensory|desmit|sesamoid|"
+    r"ringbone|sidebone|bog spavin|bone spavin|splint|bucked shin|"
     r"関節炎|関節|股関節|肘関節|膝蓋骨|十字靱帯|十字靭帯|離断性骨軟骨症|"
-    r"脊椎症|半月板|腱炎|腱損傷",
+    r"脊椎症|半月板|腱炎|腱損傷|蹄葉炎|舟状骨|繋靭帯|種子骨|"
+    r"輪骨瘤|側骨瘤|飛節腫|管骨瘤",
     re.IGNORECASE,
 )
 
@@ -103,7 +105,10 @@ _PREBIOTIC_PATTERNS = re.compile(
 _RELAX_CBD_PATTERNS = re.compile(
     r"osteoarthrit|\barthrit|\bIVDD\b|intervertebral disc|disc disease|"
     r"wobbler|lumbar.?sacral|laryngeal paraly|separation anxiety|"
+    r"cognitive dysfunc|\bCDS\b|dementia|"
     r"noise phobia|storm phobia|thunderstorm|generalized anxiety|"
+    r"feather.*(pluck|destruct)|self.?mutilat|compulsive|stereotyp|"
+    r"cribbing|weaving|wind.?suck|stall walk|head.?shak|"
     r"\bepilep|seizure|refractory seizure|status epilepticus|"
     r"cancer pain|end.?of.?life|palliative|chronic pain|"
     r"変形性関節症|関節炎|椎間板|脊髄|ウォブラー|腰仙部|喉頭麻痺|"
@@ -328,7 +333,7 @@ _PRODUCTS = [
         "name_en": "For Joint",
         "ingredients_ja": "MSM+グルコサミン/コンドロイチン",
         "ingredients_en": "MSM + glucosamine/chondroitin",
-        "indication_ja": "関節軟骨保護・抗炎症",
+        "indication_ja": "関節軟骨保護・抗炎症。MSMの抗炎症作用+グルコサミン/コンドロイチンの軟骨基質合成促進。変形性関節症の疼痛緩和・進行抑制、術後の関節リハビリ、馬の蹄葉炎回復期サポートに",
         "indication_en": "articular cartilage protection & anti-inflammatory",
         "caution_ja": None,
         "caution_en": None,
@@ -338,9 +343,9 @@ _PRODUCTS = [
         "species": _ANTIOX_SPECIES,
         "name_ja": "For Antioxidant",
         "name_en": "For Antioxidant",
-        "ingredients_ja": "アスタキサンチン+SOD+VitE+システイン",
-        "ingredients_en": "astaxanthin + melon SOD + VitE + cysteine",
-        "indication_ja": "抗酸化・慢性疾患免疫サポート",
+        "ingredients_ja": "アスタキサンチン+メロンSOD+VitE+システイン（アスタアミノ処方）",
+        "ingredients_en": "astaxanthin + melon SOD + VitE + cysteine (Asta-Amino formula)",
+        "indication_ja": "抗酸化・慢性疾患免疫サポート。アスタキサンチン(カロテノイド系)+SOD(スーパーオキシドジスムターゼ)が活性酸素種を消去。CKD・肝疾患・アトピー・ダニ媒介性感染症の酸化ストレス軽減、高齢動物の免疫機能維持に",
         "indication_en": "antioxidant & immune support in chronic disease",
         "caution_ja": None,
         "caution_en": None,
@@ -352,7 +357,7 @@ _PRODUCTS = [
         "name_en": "MSM + Amino Complete",
         "ingredients_ja": "MSM+必須アミノ酸(BCAA中心)",
         "ingredients_en": "high-dose MSM + essential amino acid blend",
-        "indication_ja": "組織修復・筋肉維持・肝腎栄養サポート",
+        "indication_ja": "組織修復・筋肉維持・肝腎栄養サポート。BCAA(分岐鎖アミノ酸)が筋蛋白合成を促進+MSMが結合組織の修復をサポート。術後回復、骨折治癒、CKD/肝疾患の筋肉量維持、競走馬・スポーツ犬の運動器サポートに",
         "indication_en": "tissue repair, muscle maintenance, hepatic/renal nutrition",
         "caution_ja": "重度肝・腎不全は蛋白負荷に留意",
         "caution_en": "caution: protein load in severe hepatic/renal failure",
@@ -364,7 +369,7 @@ _PRODUCTS = [
         "name_en": "NMN Mitochondria Assist",
         "ingredients_ja": "NMN+α-リポ酸+システイン+プロバイオティクス",
         "ingredients_en": "NMN + α-lipoic acid + cysteine + probiotics",
-        "indication_ja": "細胞エネルギー代謝・サーチュイン活性化・抗老化",
+        "indication_ja": "細胞エネルギー代謝・サーチュイン活性化・抗老化。NMN 5000mgがNAD+産生を促進→ミトコンドリア機能改善+サーチュイン(SIRT1-7)活性化。認知機能低下(CDS)、変性性脊髄症、慢性代謝疾患(糖尿病/クッシング)、加齢性臓器機能低下のサポートに",
         "indication_en": "cellular energy metabolism, sirtuin activation, anti-aging",
         "caution_ja": None,
         "caution_en": None,
@@ -376,7 +381,7 @@ _PRODUCTS = [
         "name_en": "CP Powder",
         "ingredients_ja": "プレバイオ+プロバイオ+サイリウム",
         "ingredients_en": "prebiotics + probiotics + psyllium",
-        "indication_ja": "腸内細菌叢正常化・腸管バリア強化・腸腎連関",
+        "indication_ja": "腸内細菌叢正常化・腸管バリア強化・腸腎連関サポート。サイリウム(水溶性繊維)が腸管運動を促進+プレバイオティクスが有益菌(Lactobacillus/Bifidobacterium)の増殖を支援。IBD、慢性腸症、抗菌薬関連dysbiosis、CKDの尿毒素軽減(インドキシル硫酸低減)に",
         "indication_en": "microbiome restoration, gut barrier, gut-kidney axis",
         "caution_ja": "完全腸閉塞は禁忌",
         "caution_en": "contraindicated in complete intestinal obstruction",
@@ -388,7 +393,7 @@ _PRODUCTS = [
         "name_en": "Relax & CBD",
         "ingredients_ja": "フルスペクトラムCBD",
         "ingredients_en": "full-spectrum CBD",
-        "indication_ja": "慢性疼痛・不安・難治性てんかん・緩和ケア",
+        "indication_ja": "慢性疼痛・不安・難治性てんかん・緩和ケア。フルスペクトラムCBDがECS(エンドカンナビノイドシステム)のCB1/CB2受容体に作用→抗炎症・抗不安・抗けいれん。変形性関節症の疼痛、分離不安・騒音恐怖症、難治性てんかんの発作頻度低減、終末期QOL改善に",
         "indication_en": "chronic pain, anxiety, refractory epilepsy, palliative care",
         "caution_ja": "肝代謝(CYP450)薬物相互作用に注意",
         "caution_en": "CYP450 hepatic metabolism — monitor concurrent drug levels",
@@ -400,7 +405,7 @@ _PRODUCTS = [
         "name_en": "Protain",
         "ingredients_ja": "高品質タンパク質+コラーゲン前駆体",
         "ingredients_en": "high-quality protein + collagen precursors",
-        "indication_ja": "がん悪液質・術後筋肉維持・除脂肪体重保持",
+        "indication_ja": "がん悪液質・術後筋肉維持・除脂肪体重保持。高品質タンパク質+コラーゲン前駆体が筋蛋白合成を促進。腫瘍関連悪液質のLBM(除脂肪体重)維持、大手術後の回復促進、サルコペニア予防、肥満管理時の筋量維持に",
         "indication_en": "cancer cachexia, post-surgical muscle preservation, lean mass retention",
         "caution_ja": "重度肝・腎不全は蛋白負荷に留意",
         "caution_en": "caution: protein load in severe hepatic/renal failure",
@@ -412,7 +417,7 @@ _PRODUCTS = [
         "name_en": "Booster & Relax",
         "ingredients_ja": "アダプトゲン+Bビタミン複合体",
         "ingredients_en": "adaptogens + B-complex vitamins",
-        "indication_ja": "ウイルス後回復・内分泌疾患エネルギー補給・高齢期慢性疲労",
+        "indication_ja": "ウイルス後回復・内分泌疾患エネルギー補給・高齢期慢性疲労。アダプトゲン(ストレス適応促進)+Bビタミン複合体がエネルギー代謝と副腎機能をサポート。パルボ/ジステンパー回復期、甲状腺機能低下症/アジソン病の倦怠感、ダニ媒介性感染症回復期のエネルギー補給に",
         "indication_en": "post-viral convalescence, endocrinopathy energy support, senior fatigue",
         "caution_ja": None,
         "caution_en": None,
@@ -424,7 +429,7 @@ _PRODUCTS = [
         "name_en": "Kamide Milk",
         "ingredients_ja": "消化吸収しやすい流動性栄養",
         "ingredients_en": "highly digestible liquid nutrition",
-        "indication_ja": "食欲不振・クリティカルケア・経管栄養",
+        "indication_ja": "食欲不振・クリティカルケア・経管栄養。消化吸収しやすい流動性栄養で、肝リピドーシス予防(猫/ウサギ)、パルボウイルス回復期、膵炎の低脂肪栄養、巨大食道症の経口流動食、新生子の人工哺乳補助に",
         "indication_en": "anorexia, critical-care feeding, enteral/tube feeding",
         "caution_ja": "完全腸閉塞は禁忌; 重症膵炎は低脂肪配合",
         "caution_en": "contraindicated in complete obstruction; use low-fat version in severe pancreatitis",
