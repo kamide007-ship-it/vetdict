@@ -1829,6 +1829,7 @@ function loadBreeds(species){
   const requestId=++breedRequestId;
   const area=document.getElementById("breedSelectArea");
   const select=document.getElementById("breedSelect");
+  if(!select)return;
   select.innerHTML=`<option value="">${t("breedNone")}</option>`;
   currentBreed="";cachedBreeds=[];
   const ecoPanel=document.getElementById("breedEcologyPanel");
@@ -2384,6 +2385,17 @@ function escapeHtml(value){
   return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
 }
 
+/* Turn a raw snake_case test id (e.g. "abdominal_ultrasound", "fpl_test") into
+   a readable label. Leaves entries that already contain spaces or CJK text
+   (already-translated names) untouched, and keeps common abbreviations upper. */
+const _TEST_ABBR=new Set(["cbc","pcr","mri","ct","ecg","ekg","crp","bun","alt","alp","ggt","sdma","usg","fpl","cpl","pcv","wbc","plt","t4","fpli","cpli","snap","ofa","csf","fna","tli","ck","ldh","ast","ph"]);
+function humanizeTestId(tid){
+  if(typeof tid!=="string"||!tid)return tid;
+  if(/\s/.test(tid)||/[　-鿿＀-￯]/.test(tid))return tid;
+  if(tid.indexOf("_")<0)return _TEST_ABBR.has(tid.toLowerCase())?tid.toUpperCase():tid;
+  return tid.split("_").map(p=>_TEST_ABBR.has(p.toLowerCase())?p.toUpperCase():(p.charAt(0).toUpperCase()+p.slice(1))).join(" ");
+}
+
 /* --- Modal focus management (a11y) ---
    Saves the trigger element on open so focus can be restored on close,
    moves keyboard focus into the modal, and installs a Tab-cycle trap so
@@ -2548,11 +2560,7 @@ function hydrateDrugDiseases(container){
                 const speciesObj=SPECIES.find(s=>s.id===species);
                 if(speciesObj&&typeof selectSpecies==="function")selectSpecies(species);
               }
-              if(typeof switchView==="function")switchView("diseases");
-              setTimeout(()=>{
-                const ds=document.getElementById("diseaseDbSearch");
-                if(ds&&diseaseName){ds.value=diseaseName;ds.dispatchEvent(new Event("input"));}
-              },350);
+              if(typeof navigateToDiseaseDb==="function")navigateToDiseaseDb(diseaseName);
             });
           });
         }
@@ -2596,12 +2604,7 @@ function hydrateTreatmentDrugs(container){
             a.addEventListener("click",e=>{
               e.preventDefault();
               const drugName=a.getAttribute("data-drug")||"";
-              if(typeof switchView==="function"){switchView("drugs");}
-              if(typeof searchDrugByName==="function"&&drugName){searchDrugByName(drugName);}
-              else{
-                const input=document.getElementById("drugSearchInput");
-                if(input&&drugName){input.value=drugName;input.dispatchEvent(new Event("input"));}
-              }
+              if(drugName&&typeof navigateToDrug==="function")navigateToDrug(drugName);
             });
           });
         }
@@ -2944,7 +2947,7 @@ function renderResults(data){
   }
   // Pain score display
   if(data.pain_score!==undefined&&data.pain_score!==null&&currentSpecies==="dog"){
-    const ps=data.pain_score;
+    const ps=Math.max(0,Math.min(4,parseInt(data.pain_score,10)||0));
     const painLabels=t("painLabels")||["No Pain","Mild","Moderate","Severe","Excruciating"];
     const painColors=["#16a34a","#65a30d","#eab308","#ea580c","#dc2626"];
     const painPct=ps*25;
@@ -2978,7 +2981,7 @@ function renderResults(data){
   }
   html+=`</div>`;
 
-  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));const priority=x.priority?` <span style="color:var(--gray-500);font-size:.75rem">[${escapeHtml(x.priority)}]</span>`:"";return`<li>\u{1F52C} ${escapeHtml(label)}${priority}</li>`;}).join("")}</ul></div>`;}
+  if(tests.length){html+=`<div style="margin-top:16px"><strong style="font-size:.86rem">${t("dtRecTestList")}</strong><ul class="test-list">${tests.map(x=>{const label=humanizeTestId(typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja)));const priority=x.priority?` <span style="color:var(--gray-500);font-size:.75rem">[${escapeHtml(x.priority)}]</span>`:"";return`<li>\u{1F52C} ${escapeHtml(label)}${priority}</li>`;}).join("")}</ul></div>`;}
   html+=`<div id="commonDiseasesArea"></div><div id="breedEcologyArea"></div>`;
   area.innerHTML="";
   area.appendChild(createResultsDisclaimer());
@@ -3808,7 +3811,7 @@ function renderDiseaseCard(d,data){
       ${matchSymptoms.length?`<div class="detail-matched"><strong>${t("dtMatchedSymptoms")}:</strong> ${matchDisplay}</div>`:""}
       ${renderMissingKeySymptoms(d,data)}
       ${renderScoringDetail(d)}
-      ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">${recTests.map(x=>{const label=typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja));return`<span style="display:inline-block;padding:3px 8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:4px;font-size:.78rem;color:var(--navy)">\u{1F52C} ${escapeHtml(label)}</span>`;}).join("")}</div></div>`:""}
+      ${recTests.length?`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">${recTests.map(x=>{const label=humanizeTestId(typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja)));return`<span style="display:inline-block;padding:3px 8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:4px;font-size:.78rem;color:var(--navy)">\u{1F52C} ${escapeHtml(label)}</span>`;}).join("")}</div></div>`:""}
       ${renderMentionedDrugs(d)}
       ${renderAnesthesiaConsiderations(d)}
       <div class="detail-page-link"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">${currentLang==="ja"?"📖 この疾患の詳細ページを見る":"📖 View full disease page"} →</a></div>
@@ -4374,6 +4377,9 @@ function sendLandingChat(isRetry){
     if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
+    /* Keep a single "Continue in Clinical Chat" affordance — remove any from a
+       previous response so they don't stack up across multiple messages. */
+    msgs.querySelectorAll(".landing-chat-continue").forEach(el=>el.remove());
     const continueBtn=document.createElement("div");
     continueBtn.className="landing-chat-continue";
     continueBtn.innerHTML=`<button class="landing-continue-btn">${currentLang==="ja"?"臨床相談で詳しく相談する →":"Continue in Clinical Chat →"}</button>`;
@@ -6540,7 +6546,7 @@ function renderAmbiguityAnalysis(analysis) {
         <div class="guidance-title">${escapeHtml(t('mdRecommendations'))}</div>
         <ul style="margin-left: 16px; margin-top: 4px;">
           ${recommendations
-            .map(([key, value]) => `<li>${value}</li>`)
+            .map(([key, value]) => `<li>${escapeHtml(String(value))}</li>`)
             .join('')}
         </ul>
       `;
@@ -6581,7 +6587,7 @@ function renderConfidenceBreakdown(breakdown) {
         const label = document.createElement('div');
         label.className = 'breakdown-label';
         label.innerHTML = `
-          <span>${disease}</span>
+          <span>${escapeHtml(String(disease))}</span>
           <span class="breakdown-percentage">${(score * 100).toFixed(1)}%</span>
         `;
         item.appendChild(label);

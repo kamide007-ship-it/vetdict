@@ -1577,6 +1577,36 @@ def _iter_result_disease_lists(result):
                 yield phase_diseases
 
 
+def _cap_result_diseases(result, max_total=50):
+    """Trim the differential to the top ``max_total`` ranked diseases.
+
+    The engine returns every disease that matches at least one symptom (often
+    150+ entries, the long tail matching a single non-specific sign). The UI
+    only ever shows ~18 cards plus a "show more" tail, so returning the full
+    list bloats the response (multi-MB JSON) and wastes downstream enrichment
+    CPU. The list is already ranked, so we keep the clinically relevant head
+    and re-derive the phase buckets from the survivors (they reference the same
+    dict objects, so identity matching keeps them consistent). Overall severity
+    has already been computed from the full list upstream, so capping here does
+    not change triage.
+    """
+    if not isinstance(result, dict):
+        return
+    sd = result.get("suspected_diseases")
+    if not isinstance(sd, list) or len(sd) <= max_total:
+        return
+    capped = sd[:max_total]
+    result["suspected_diseases"] = capped
+    if isinstance(result.get("possible_conditions"), list):
+        result["possible_conditions"] = capped
+    kept_ids = {id(d) for d in capped}
+    by_phase = result.get("suspected_diseases_by_phase")
+    if isinstance(by_phase, dict):
+        for phase_key, phase_diseases in by_phase.items():
+            if isinstance(phase_diseases, list):
+                by_phase[phase_key] = [d for d in phase_diseases if id(d) in kept_ids]
+
+
 def _enrich_result_diseases(result, species):
     """Add completeness score + literature citations to each diagnosed disease.
 
@@ -1781,6 +1811,11 @@ def api_analyze_symptoms():
                 vaccination_status=vaccination_status,
                 lang=lang,
             )
+
+        # Trim the long tail of single-symptom matches before the expensive
+        # per-disease enrichment + drug-matching passes run, so we only do that
+        # work for the differentials the UI actually shows.
+        _cap_result_diseases(result)
 
         # Enrich each disease with completeness score + literature citations so
         # the differential view matches the Disease DB tab (accurate quality

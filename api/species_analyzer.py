@@ -196,7 +196,6 @@ def analyze_horse(
         lab_boosts = compute_lab_boosts(lab_values, species="horse")
 
     possible_conditions = []
-    recommended_tests: List[str] = []
 
     for item in diff_list:
         dis = item.disease
@@ -216,7 +215,6 @@ def analyze_horse(
         }
         severity_level = severity_map.get(severity, "unknown")
         tests = [t[1] for t in (dis.recommended_exams or [])]
-        recommended_tests.extend(tests)
         _cat = _horse_category(dis.name_en or "", dis.description_ja or "")
         _trans = _HORSE_TRANSMISSION.get(_cat, _HORSE_TRANS_DEFAULT)
         _diag_en = (
@@ -373,11 +371,22 @@ def analyze_horse(
         # 内部キーを除去
         cond.pop("_name_en", None)
 
-    # 重複する検査を除外
-    dedup_tests = []
-    for t in recommended_tests:
-        if t not in dedup_tests:
-            dedup_tests.append(t)
+    # 推奨検査は上位鑑別（臨床的に優先される疾患）からのみ集約する。
+    # 非特異的な徴候では多数の疾患がヒットするため、全件から集めると
+    # 優先順位のない長大なリストになり実用性を欠く。possible_conditions は
+    # スコア順なので先頭が最優先。
+    _TESTS_FROM_TOP_N = 8
+    _MAX_RECOMMENDED_TESTS = 15
+    dedup_tests: List[str] = []
+    seen_tests: set[str] = set()
+    for cond in possible_conditions[:_TESTS_FROM_TOP_N]:
+        for t in cond.get("recommended_tests", []):
+            if t not in seen_tests:
+                dedup_tests.append(t)
+                seen_tests.add(t)
+        if len(dedup_tests) >= _MAX_RECOMMENDED_TESTS:
+            break
+    dedup_tests = dedup_tests[:_MAX_RECOMMENDED_TESTS]
     # Compute overall severity
     severity = "low"
     for c in possible_conditions:
