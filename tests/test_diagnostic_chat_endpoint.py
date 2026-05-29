@@ -91,6 +91,75 @@ def test_multi_disease_endpoint_is_registered():
     assert "/api/diagnostic-chat/multi-disease/analyze" in routes
 
 
+class TestFollowUpQuestionLabels:
+    """Regression guard: follow-up question labels must never expose raw symptom IDs.
+
+    Bug: when a missing_key_symptom ID (e.g. ``loss_of_appetite``) didn't appear
+    directly in the species symptom_names map, the chat surfaced raw IDs like
+    ``loss_of_appetiteはありますか？`` instead of localized labels.
+    """
+
+    def _follow_up_labels(self, species: str, message: str) -> list[tuple[str, str]]:
+        client = app.test_client()
+        r = client.post(
+            "/api/diagnostic-chat/chat",
+            json={"species": species, "message": message, "lang": "ja"},
+        )
+        assert r.status_code == 200
+        data = r.get_json() or {}
+        out: list[tuple[str, str]] = []
+        for fq in data.get("follow_up_questions") or []:
+            out.append((fq.get("question_ja", ""), fq.get("question_en", "")))
+            for opt in fq.get("options") or []:
+                out.append((opt.get("label_ja", ""), opt.get("label_en", "")))
+        return out
+
+    def _assert_no_snake_case_leak(self, pairs):
+        for ja, en in pairs:
+            for text in (ja, en):
+                # Snake_case IDs always contain underscores; localized labels never do.
+                assert "_" not in (text or ""), f"Raw symptom ID leaked into label: {text!r}"
+
+    def test_dog_no_raw_ids(self):
+        self._assert_no_snake_case_leak(self._follow_up_labels("dog", "咳と熱"))
+
+    def test_cat_no_raw_ids(self):
+        self._assert_no_snake_case_leak(self._follow_up_labels("cat", "下痢と嘔吐"))
+
+    def test_horse_no_raw_ids(self):
+        self._assert_no_snake_case_leak(self._follow_up_labels("horse", "fever and depression"))
+
+
+class TestChatConfidencePercent:
+    """Disease candidates returned to the chat UI must carry a calibrated
+    ``confidence_percent`` so the frontend doesn't fall back to raw Jaccard.
+    """
+
+    def test_dog_candidate_has_confidence_percent(self):
+        client = app.test_client()
+        r = client.post(
+            "/api/diagnostic-chat/chat",
+            json={"species": "dog", "message": "咳と熱と食欲不振", "lang": "ja"},
+        )
+        assert r.status_code == 200
+        cands = (r.get_json() or {}).get("disease_candidates") or []
+        assert cands, "Expected at least one disease candidate"
+        assert cands[0].get("confidence_percent") is not None
+        assert 0 < cands[0]["confidence_percent"] <= 95.0
+
+    def test_horse_candidate_has_confidence_percent(self):
+        client = app.test_client()
+        r = client.post(
+            "/api/diagnostic-chat/chat",
+            json={"species": "horse", "message": "fever and depression and ataxia", "lang": "en"},
+        )
+        assert r.status_code == 200
+        cands = (r.get_json() or {}).get("disease_candidates") or []
+        assert cands, "Expected at least one equine candidate"
+        assert cands[0].get("confidence_percent") is not None
+        assert 0 < cands[0]["confidence_percent"] <= 95.0
+
+
 # =============================================================================
 # Secondary endpoints
 # =============================================================================

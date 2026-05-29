@@ -21,6 +21,7 @@ permitted by the Veterinary Practice Act (獣医師法).
 """
 
 import logging
+import math
 import os
 import threading
 from typing import Any, Dict, Optional
@@ -533,6 +534,16 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
 
         if intersection > 0:
             similarity = intersection / union
+            # Logistic confidence calibration — same curve as other species
+            # so the frontend can display a comparable, calibrated percentage.
+            raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (similarity - 0.4)))
+            confidence = min(round(raw_logistic * 100, 1), 95.0)
+            # Cap when very few user symptoms were provided
+            n_user = len(key_set)
+            if n_user == 1:
+                confidence = min(confidence, 35.0)
+            elif n_user == 2:
+                confidence = min(confidence, 55.0)
             matches.append(
                 {
                     "disease_id": disease.id,
@@ -540,6 +551,7 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
                     "name_en": disease.name_en,
                     "severity": disease.severity,
                     "similarity_score": round(similarity, 3),
+                    "confidence_percent": confidence,
                     "matched_symptoms": list(key_set & disease_findings),
                     "unmatched_user_symptoms": list(key_set - disease_findings),
                     "additional_disease_symptoms": list(disease_findings - key_set),
@@ -556,7 +568,7 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
 
 # Symptom extractor & disease matcher extracted to api/chat/
 from api.chat.disease_matcher import _match_species_symptoms_to_diseases  # noqa: F401
-from api.chat.symptom_extractor import _extract_species_symptoms  # noqa: F401
+from api.chat.symptom_extractor import ID_SYNONYMS, _extract_species_symptoms  # noqa: F401
 
 # =============================================================================
 # SYMPTOM EXTRACTION FROM TEXT
@@ -1144,8 +1156,10 @@ def _build_follow_up_questions(
         symptom_set = set(symptoms)
         # Collect key missing symptoms from top candidates for differentiation
         seen_symptoms: set[str] = set()
-        sp_names = {}
-        if bool(get_species_data(species)):
+        sp_names: dict = {}
+        if species == "horse":
+            sp_names = _horse_symptom_name_map()
+        elif bool(get_species_data(species)):
             sp_names = get_species_data(species).get("symptom_names", {})
 
         for candidate in disease_candidates[:5]:
@@ -1156,9 +1170,7 @@ def _build_follow_up_questions(
                 if len(questions) >= 5:
                     break
                 seen_symptoms.add(sid)
-                names = sp_names.get(sid, {})
-                name_ja = names.get("ja", sid)
-                name_en = names.get("en", sid)
+                name_ja, name_en = _localize_symptom_id(sid, sp_names)
                 questions.append(
                     {
                         "question_ja": f"{name_ja}はありますか？",
@@ -1175,6 +1187,64 @@ def _build_follow_up_questions(
                 break
 
     return questions
+
+
+_HORSE_NAME_MAP_CACHE: dict[str, dict[str, str]] | None = None
+
+
+def _horse_symptom_name_map() -> dict[str, dict[str, str]]:
+    """Return {finding_key: {"ja": ja_name, "en": en_name}} from equine HEALTH_CHECK_ITEMS."""
+    global _HORSE_NAME_MAP_CACHE
+    if _HORSE_NAME_MAP_CACHE is not None:
+        return _HORSE_NAME_MAP_CACHE
+    out: dict[str, dict[str, str]] = {}
+    try:
+        for _cat, items in _get_equine_health_check_items().items():
+            for entry in items:
+                if len(entry) >= 3:
+                    sid, ja, en = entry[0], entry[1], entry[2]
+                    out[sid] = {"ja": ja, "en": en}
+    except (AttributeError, TypeError, ValueError) as exc:
+        logger.warning("Could not build horse symptom name map: %s", exc)
+    _HORSE_NAME_MAP_CACHE = out
+    return out
+
+
+def _localize_symptom_id(sid: str, sp_names: dict) -> tuple[str, str]:
+    """Resolve a symptom ID to (name_ja, name_en) for user-facing labels.
+
+    Tries direct lookup, then follows cross-species ID synonyms, then the
+    global symptom catalog, and finally humanizes the snake_case ID. Ensures
+    raw IDs like "loss_of_appetite" never leak into the UI.
+    """
+    # 1. Direct hit in species symptom_names
+    entry = sp_names.get(sid)
+    if entry:
+        ja = entry.get("ja") or ""
+        en = entry.get("en") or ""
+        if ja or en:
+            return (ja or en, en or ja)
+
+    # 2. Follow cross-species synonym mapping
+    for alt in ID_SYNONYMS.get(sid, []):
+        entry = sp_names.get(alt)
+        if entry:
+            ja = entry.get("ja") or ""
+            en = entry.get("en") or ""
+            if ja or en:
+                return (ja or en, en or ja)
+
+    # 3. Try the global symptom catalog (dog-centric SYMPTOMS list)
+    g = _SYMPTOMS_BY_ID.get(sid) or {}
+    ja = g.get("name_ja") or ""
+    en = g.get("name_en") or ""
+    if ja or en:
+        return (ja or en, en or ja)
+
+    # 4. Humanize fallback: "dig_salivation" → "Dig salivation"
+    humanized = sid.replace("_", " ").strip()
+    humanized = humanized[:1].upper() + humanized[1:] if humanized else sid
+    return (humanized, humanized)
 
 
 def _species_guidance_line(species: str, symptom_count: int) -> str:
