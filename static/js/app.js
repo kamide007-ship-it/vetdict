@@ -4588,7 +4588,9 @@ function renderChatResult(container,data){
     candidates.slice(0,5).forEach((c,i)=>{
       const card=document.createElement("div");
       card.className="chat-disease-card";
-      const pct=Math.round((c.similarity_score||0)*100);
+      // Prefer the backend-calibrated confidence_percent (IDF + prevalence + cluster boost)
+      // over the raw Jaccard similarity_score so vets see the same value the model ranks by.
+      const pct=Math.round(c.confidence_percent!=null?c.confidence_percent:(c.similarity_score||0)*100);
       const sevClass=c.severity==="high"||c.severity==="critical"?"sev-high":c.severity==="medium"?"sev-med":"sev-low";
       card.innerHTML=`
         <div class="chat-disease-head">
@@ -4999,7 +5001,8 @@ function guidedRenderInterim(data){
     let html=`<div class="guided-interim-label">${t("guidedInterimTitle")}</div>`;
     html+='<div class="chat-disease-list">';
     candidates.slice(0,3).forEach((c,i)=>{
-      const pct=Math.round((c.similarity_score||0)*100);
+      // Use backend-calibrated confidence_percent (same field used in free-input chat results).
+      const pct=Math.round(c.confidence_percent!=null?c.confidence_percent:(c.similarity_score||0)*100);
       const sevClass=pct>=70?"sev-high":pct>=45?"sev-med":"sev-low";
       html+=`<div class="chat-disease-card">
         <div class="chat-disease-head">
