@@ -1656,9 +1656,7 @@ def _attach_recommended_tests_display(result, species):
             if not tests:
                 continue
             try:
-                disease["recommended_tests_display"] = _build_recommended_tests_display(
-                    tests, sp
-                )
+                disease["recommended_tests_display"] = _build_recommended_tests_display(tests, sp)
             except Exception:
                 logger.exception(
                     "recommended_tests display enrichment failed for %s",
@@ -1672,9 +1670,7 @@ def _attach_recommended_tests_display(result, species):
         and "recommended_tests_display" not in result
     ):
         try:
-            result["recommended_tests_display"] = _build_recommended_tests_display(
-                result["recommended_tests"], sp
-            )
+            result["recommended_tests_display"] = _build_recommended_tests_display(result["recommended_tests"], sp)
         except Exception:
             logger.exception("top-level recommended_tests display enrichment failed")
 

@@ -159,7 +159,10 @@ _DEFAULT_TEST_NAMES: dict[str, dict[str, str]] = {
     "gram_stain": {"ja": "グラム染色", "en": "Gram Stain"},
     "acid_fast_stain": {"ja": "抗酸菌染色", "en": "Acid-fast Stain"},
     "urine_specific_gravity": {"ja": "尿比重測定", "en": "Urine Specific Gravity"},
-    "urine_protein_creatinine_ratio": {"ja": "尿蛋白/クレアチニン比（UPC）", "en": "Urine Protein/Creatinine Ratio (UPC)"},
+    "urine_protein_creatinine_ratio": {
+        "ja": "尿蛋白/クレアチニン比（UPC）",
+        "en": "Urine Protein/Creatinine Ratio (UPC)",
+    },
     "upc_ratio": {"ja": "尿蛋白/クレアチニン比（UPC）", "en": "UPC Ratio"},
     "blood_pressure_measurement": {"ja": "血圧測定", "en": "Blood Pressure Measurement"},
     "tracheal_wash_cytology": {"ja": "気管洗浄細胞診", "en": "Tracheal Wash Cytology"},
