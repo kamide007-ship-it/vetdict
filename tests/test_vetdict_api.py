@@ -895,6 +895,63 @@ class TestCapResultDiseases:
         assert len(data.get("recommended_tests") or []) <= 15
 
 
+class TestRecommendedTestsDisplayAttached:
+    """Translated recommended_tests_display must reach the symptom-checker JSON.
+
+    Each suspected disease gets a parallel display list with JA/EN labels so the
+    UI doesn't render snake_case English IDs to Japanese veterinarians.
+    """
+
+    def test_per_disease_display_is_populated_in_japanese(self, client):
+        resp = client.post(
+            "/api/analyze-symptoms",
+            json={
+                "species": "cat",
+                "symptoms": ["vomiting", "appetite_loss", "weight_loss"],
+                "lang": "ja",
+            },
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        diseases = data.get("suspected_diseases") or []
+        assert diseases, "expected at least one suspected disease"
+
+        # Find a disease whose recommended_tests contains common IDs we translated.
+        for d in diseases:
+            display = d.get("recommended_tests_display")
+            if not display:
+                continue
+            ja_labels = {x.get("name_ja") for x in display}
+            if "血液一般検査 (CBC)" in ja_labels or "腹部超音波検査" in ja_labels:
+                # And the per-test entries always carry a JA label distinct from id
+                for x in display:
+                    assert x.get("name_ja")
+                    assert x.get("name_en")
+                return
+        raise AssertionError("no translated recommended_tests_display entries seen")
+
+    def test_top_level_recommended_tests_display_present(self, client):
+        resp = client.post(
+            "/api/analyze-symptoms",
+            json={
+                "species": "cat",
+                "symptoms": ["vomiting", "appetite_loss", "weight_loss"],
+                "lang": "ja",
+            },
+        )
+        assert resp.status_code == 200
+        data = resp.get_json()
+        rtd = data.get("recommended_tests_display")
+        assert isinstance(rtd, list)
+        # When the aggregate list is non-empty, the display variant matches length
+        # and every entry carries id/name_ja/name_en keys.
+        assert len(rtd) == len(data.get("recommended_tests") or [])
+        for entry in rtd:
+            assert "id" in entry
+            assert "name_ja" in entry
+            assert "name_en" in entry
+
+
 # =============================================================================
 # 8. GET /api/species/<species>/symptoms
 # =============================================================================

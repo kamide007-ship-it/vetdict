@@ -502,3 +502,69 @@ class TestBreedRisksRoute:
     def test_unknown_breed_404(self, client):
         resp = client.get("/api/health-check/breed-risks/nonexistent_xyz")
         assert resp.status_code in (200, 404)
+
+
+class TestRecommendedTestsDisplay:
+    """Translation table for diagnostic test IDs powers the symptom checker UI.
+
+    Without these, the JA pane shows snake_case English (e.g. "Complete Blood
+    Count") in both name_ja and name_en, which is unreadable to JA users.
+    """
+
+    def test_known_id_translates_to_japanese(self):
+        from api.health_checker import _build_recommended_tests_display
+
+        out = _build_recommended_tests_display(["complete_blood_count"], "cat")
+        assert out == [
+            {
+                "id": "complete_blood_count",
+                "name_ja": "血液一般検査 (CBC)",
+                "name_en": "Complete Blood Count (CBC)",
+            }
+        ]
+
+    def test_unknown_id_falls_back_to_humanized(self):
+        from api.health_checker import _build_recommended_tests_display
+
+        out = _build_recommended_tests_display(["zebra_dx_panel"], "cat")
+        assert out[0]["id"] == "zebra_dx_panel"
+        # Humanized fallback is the same string for both langs
+        assert out[0]["name_en"] == "Zebra Dx Panel"
+        assert out[0]["name_ja"] == "Zebra Dx Panel"
+
+    def test_pre_translated_japanese_passes_through(self):
+        from api.health_checker import _build_recommended_tests_display
+
+        out = _build_recommended_tests_display(["PCR検査", "血液生化学検査"], "cat")
+        assert {d["id"] for d in out} == {"PCR検査", "血液生化学検査"}
+        # CJK entries kept identical across name_ja and name_en
+        for d in out:
+            assert d["name_ja"] == d["id"]
+            assert d["name_en"] == d["id"]
+
+    def test_single_token_id_gets_capitalized(self):
+        from api.health_checker import _humanize_test_id
+
+        # Without underscores, single tokens are now title-cased so they don't
+        # appear as raw lowercase IDs in the UI.
+        assert _humanize_test_id("endoscopy") == "Endoscopy"
+        # Known abbreviations stay uppercase.
+        assert _humanize_test_id("cbc") == "CBC"
+
+    def test_abbreviation_segments_remain_upper(self):
+        from api.health_checker import _humanize_test_id
+
+        # In a multi-token ID, abbreviation segments must stay uppercase
+        # ("CT scan", not "Ct Scan").
+        assert _humanize_test_id("ct_scan") == "CT Scan"
+        assert _humanize_test_id("mri_brain") == "MRI Brain"
+
+    def test_empty_or_invalid_input_returns_empty_list(self):
+        from api.health_checker import _build_recommended_tests_display
+
+        assert _build_recommended_tests_display([], "cat") == []
+        assert _build_recommended_tests_display(None, "cat") == []
+        # Mixed bad entries are skipped, valid entries kept
+        out = _build_recommended_tests_display(["cbc", None, "", 42], "cat")
+        ids = [d["id"] for d in out]
+        assert ids == ["cbc"]

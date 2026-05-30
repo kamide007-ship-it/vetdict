@@ -61,6 +61,213 @@ _KEEP_UPPER_ABBREVIATIONS = frozenset(
 )
 
 # ---------------------------------------------------------------------------
+# Japanese translations for common diagnostic test IDs
+# Used to provide proper JA labels when species disease modules emit
+# snake_case test identifiers (e.g. "complete_blood_count" → "血液一般検査").
+# ---------------------------------------------------------------------------
+_TEST_ID_JA: dict[str, str] = {
+    # Hematology / chemistry
+    "cbc": "血液一般検査 (CBC)",
+    "complete_blood_count": "血液一般検査 (CBC)",
+    "blood_work": "血液検査",
+    "blood_panel": "血液検査",
+    "blood_chemistry": "血液生化学検査",
+    "biochemistry_panel": "血液生化学検査",
+    "chemistry_panel": "血液生化学検査",
+    "serum_chemistry": "血清生化学検査",
+    "blood_smear": "血液塗抹検査",
+    "buffy_coat_smear": "バフィーコート塗抹",
+    "blood_glucose": "血糖測定",
+    "blood_gas": "血液ガス分析",
+    "blood_gas_analysis": "血液ガス分析",
+    "arterial_blood_gas": "動脈血液ガス分析",
+    "blood_culture": "血液培養",
+    "blood_typing": "血液型判定",
+    "blood_pressure": "血圧測定",
+    "blood_pressure_measurement": "血圧測定",
+    "coagulation_panel": "凝固機能検査",
+    "coagulation_profile": "凝固機能検査",
+    "pt_aptt": "PT/APTT",
+    "ammonia_level": "アンモニア測定",
+    "bile_acids": "胆汁酸検査",
+    "bile_acids_test": "胆汁酸検査",
+    "bile_acid_stimulation": "胆汁酸刺激試験",
+    "lactate": "乳酸測定",
+    "crp": "CRP測定",
+    "spec_cpl": "膵特異的リパーゼ (Spec cPL)",
+    "spec_fpl": "膵特異的リパーゼ (Spec fPL)",
+    # Urinalysis
+    "urinalysis": "尿検査",
+    "urine_culture": "尿培養",
+    "urine_protein_creatinine_ratio": "尿蛋白/クレアチニン比 (UPC)",
+    "upc_ratio": "尿蛋白/クレアチニン比 (UPC)",
+    "urine_specific_gravity": "尿比重測定",
+    # Fecal
+    "fecal_exam": "糞便検査",
+    "fecal_examination": "糞便検査",
+    "fecal_float": "糞便浮遊法",
+    "fecal_flotation": "糞便浮遊法",
+    "fecal_smear": "糞便塗抹",
+    "fecal_culture": "糞便培養",
+    "fecal_pcr": "糞便PCR",
+    "fecal_giardia_antigen": "ジアルジア抗原検査",
+    "baermann_technique": "ベルマン法",
+    # Imaging
+    "radiography": "レントゲン検査",
+    "radiographs": "レントゲン検査",
+    "xray": "レントゲン検査",
+    "x_ray": "レントゲン検査",
+    "chest_xray": "胸部レントゲン",
+    "chest_radiograph": "胸部レントゲン",
+    "thoracic_radiographs": "胸部レントゲン",
+    "abdominal_xray": "腹部レントゲン",
+    "abdominal_radiograph": "腹部レントゲン",
+    "abdominal_radiographs": "腹部レントゲン",
+    "skull_radiographs": "頭部レントゲン",
+    "spinal_radiographs": "脊椎レントゲン",
+    "dental_radiographs": "歯科レントゲン",
+    "ultrasound": "超音波検査",
+    "abdominal_ultrasound": "腹部超音波検査",
+    "thoracic_ultrasound": "胸部超音波検査",
+    "echocardiography": "心エコー検査",
+    "echocardiogram": "心エコー検査",
+    "ct_scan": "CT検査",
+    "ct": "CT検査",
+    "mri": "MRI検査",
+    "fluoroscopy": "X線透視検査",
+    "barium_study": "バリウム造影検査",
+    "barium_swallow": "バリウム嚥下造影",
+    "contrast_radiography": "造影レントゲン検査",
+    # Cardiology / neurology / scopy
+    "ecg": "心電図 (ECG)",
+    "ekg": "心電図 (EKG)",
+    "holter_monitor": "ホルター心電図",
+    "eeg": "脳波検査 (EEG)",
+    "endoscopy": "内視鏡検査",
+    "gastroscopy": "胃内視鏡",
+    "colonoscopy": "大腸内視鏡",
+    "bronchoscopy": "気管支鏡",
+    "rhinoscopy": "鼻鏡検査",
+    "cystoscopy": "膀胱鏡",
+    "laparoscopy": "腹腔鏡",
+    "laparotomy": "開腹術 (試験開腹)",
+    # Microbiology / culture
+    "bacterial_culture": "細菌培養",
+    "fungal_culture": "真菌培養",
+    "culture": "培養検査",
+    "culture_sensitivity": "培養・感受性試験",
+    "sensitivity_testing": "感受性試験",
+    "acid_fast_stain": "抗酸菌染色",
+    "gram_stain": "グラム染色",
+    # Cytology / pathology / biopsy
+    "cytology": "細胞診",
+    "fine_needle_aspirate": "細針吸引細胞診 (FNA)",
+    "fna": "細針吸引細胞診 (FNA)",
+    "biopsy": "生検",
+    "skin_biopsy": "皮膚生検",
+    "liver_biopsy": "肝生検",
+    "kidney_biopsy": "腎生検",
+    "bone_biopsy": "骨生検",
+    "bone_marrow_aspirate": "骨髄穿刺",
+    "bone_marrow_biopsy": "骨髄生検",
+    "lymph_node_aspirate": "リンパ節穿刺",
+    "histopathology": "病理組織検査",
+    "necropsy": "剖検",
+    # Skin / external
+    "skin_scraping": "皮膚掻爬検査",
+    "wood_lamp_examination": "ウッド灯検査",
+    "trichogram": "毛検査 (Trichogram)",
+    "tape_preparation": "テープ捺印標本",
+    # Serology / molecular
+    "serology": "血清抗体検査",
+    "elisa": "ELISA法",
+    "pcr": "PCR検査",
+    "pcr_testing": "PCR検査",
+    "rt_pcr": "RT-PCR検査",
+    "snap_test": "SNAPテスト",
+    "fiv_felv_test": "FIV/FeLV検査",
+    # Endocrine
+    "t4": "T4測定",
+    "free_t4": "遊離T4 (Free T4)",
+    "tsh": "TSH測定",
+    "acth_stimulation_test": "ACTH刺激試験",
+    "ldds": "低用量デキサメサゾン抑制試験 (LDDS)",
+    "low_dose_dex_suppression": "低用量デキサメサゾン抑制試験 (LDDS)",
+    "cortisol_level": "コルチゾール測定",
+    "insulin_level": "インスリン測定",
+    "fructosamine": "フルクトサミン",
+    # Examination
+    "physical_exam": "身体検査",
+    "neurological_exam": "神経学的検査",
+    "ophthalmic_exam": "眼科検査",
+    "oral_exam": "口腔検査",
+    "dental_exam": "歯科検査",
+    "otoscopic_exam": "耳鏡検査",
+    "clinical_examination": "臨床検査",
+    "fundic_examination": "眼底検査",
+    "schirmer_tear_test": "シルマー涙液試験",
+    "fluorescein_stain": "フルオレセイン染色",
+    "tonometry": "眼圧測定",
+    # Other procedures
+    "abdominocentesis": "腹腔穿刺",
+    "thoracocentesis": "胸腔穿刺",
+    "csf_analysis": "脳脊髄液検査",
+    "csf_tap": "脳脊髄液採取",
+    "tracheal_wash": "気管洗浄",
+    "bronchoalveolar_lavage": "気管支肺胞洗浄 (BAL)",
+    "joint_tap": "関節液採取",
+    "arthrocentesis": "関節穿刺",
+    "synovial_fluid_analysis": "関節液検査",
+    "husbandry_review": "飼育環境評価",
+    "dietary_review": "食事内容評価",
+    "behavioral_assessment": "行動評価",
+    "hormone_panel": "ホルモン検査",
+    "allergy_testing": "アレルギー検査",
+}
+
+# Cache common humanized English labels too so we don't repeatedly call humanize().
+_TEST_ID_EN: dict[str, str] = {
+    "cbc": "CBC",
+    "complete_blood_count": "Complete Blood Count (CBC)",
+    "biochemistry_panel": "Biochemistry Panel",
+    "blood_chemistry": "Blood Chemistry",
+    "urinalysis": "Urinalysis",
+    "fecal_exam": "Fecal Examination",
+    "fecal_examination": "Fecal Examination",
+    "abdominal_ultrasound": "Abdominal Ultrasound",
+    "abdominal_xray": "Abdominal Radiograph",
+    "chest_xray": "Thoracic Radiograph",
+    "ecg": "ECG",
+    "ekg": "EKG",
+    "mri": "MRI",
+    "ct_scan": "CT Scan",
+    "fine_needle_aspirate": "Fine Needle Aspirate (FNA)",
+    "fna": "Fine Needle Aspirate (FNA)",
+    "spec_cpl": "Spec cPL",
+    "spec_fpl": "Spec fPL",
+    "upc_ratio": "Urine Protein/Creatinine Ratio",
+}
+
+
+def _translate_test_id_ja(tid: str) -> str:
+    """Return a Japanese label for a test ID, falling back to humanized English."""
+    if not tid or not isinstance(tid, str):
+        return tid
+    if _CJK_PATTERN.search(tid):
+        return tid
+    return _TEST_ID_JA.get(tid.lower(), _humanize_test_id(tid))
+
+
+def _translate_test_id_en(tid: str) -> str:
+    """Return an English label for a test ID."""
+    if not tid or not isinstance(tid, str):
+        return tid
+    if _CJK_PATTERN.search(tid):
+        return tid
+    return _TEST_ID_EN.get(tid.lower(), _humanize_test_id(tid))
+
+
+# ---------------------------------------------------------------------------
 # Japanese name reading lookup for あいうえお sorting
 # ---------------------------------------------------------------------------
 _NAME_JA_READINGS: dict[str, str] = {}
@@ -3772,7 +3979,9 @@ def _humanize_test_id(tid: str) -> str:
     if _CJK_PATTERN.search(tid) or " " in tid:
         return tid
     if "_" not in tid:
-        return tid
+        # Single-token ID: title-case for display, but keep known abbreviations
+        # uppercase (e.g. "cbc" → "CBC", "endoscopy" → "Endoscopy").
+        return tid.upper() if tid.lower() in _KEEP_UPPER_ABBREVIATIONS else tid.capitalize()
     parts = tid.split("_")
     out_parts = []
     for p in parts:
@@ -3784,8 +3993,13 @@ def _humanize_test_id(tid: str) -> str:
 
 
 def _build_recommended_tests_display(tests, species: str) -> list[dict[str, str]]:
-    """Build display list for recommended_tests. Uses humanized labels for
-    snake_case IDs. Preserves existing Japanese/mixed labels."""
+    """Build display list for recommended_tests with JA/EN translations.
+
+    Uses a curated lookup table (`_TEST_ID_JA` / `_TEST_ID_EN`) for the common
+    diagnostic test IDs emitted by species disease modules; falls back to a
+    humanized English label for unknown IDs. Pre-translated Japanese strings
+    (containing CJK characters) are passed through unchanged.
+    """
     if not tests:
         return []
     if isinstance(tests, (list, tuple, set)):
@@ -3796,8 +4010,17 @@ def _build_recommended_tests_display(tests, species: str) -> list[dict[str, str]
     for tid in ids:
         if not isinstance(tid, str) or not tid:
             continue
-        label = _humanize_test_id(tid)
-        out.append({"id": tid, "name_ja": label, "name_en": label})
+        # Pre-translated entries already mix JA/EN — pass through unchanged.
+        if _CJK_PATTERN.search(tid) or " " in tid:
+            out.append({"id": tid, "name_ja": tid, "name_en": tid})
+            continue
+        out.append(
+            {
+                "id": tid,
+                "name_ja": _translate_test_id_ja(tid),
+                "name_en": _translate_test_id_en(tid),
+            }
+        )
     return out
 
 
