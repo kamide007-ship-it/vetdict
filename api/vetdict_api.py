@@ -1629,6 +1629,52 @@ def _enrich_result_diseases(result, species):
                 logger.exception("disease enrichment failed for %s", disease.get("name", "?"))
 
 
+def _attach_recommended_tests_display(result, species):
+    """Add a translated ``recommended_tests_display`` field to each disease.
+
+    Disease modules emit ``recommended_tests`` as snake_case IDs
+    (e.g. "complete_blood_count"). The UI needs both JA and EN labels per
+    selected language, so we attach a parallel display list using the curated
+    translations in ``health_checker._build_recommended_tests_display``. Costs
+    a few µs per disease (in-memory dict lookup) — runs after capping so the
+    cost scales only with the top-N differentials shown to the user.
+    """
+    try:
+        from api.health_checker import _build_recommended_tests_display
+    except Exception:
+        return
+    sp = species or "dog"
+
+    # Per-disease enrichment
+    for diseases in _iter_result_disease_lists(result):
+        for disease in diseases:
+            if not isinstance(disease, dict):
+                continue
+            if "recommended_tests_display" in disease:
+                continue  # already supplied by a species handler
+            tests = disease.get("recommended_tests")
+            if not tests:
+                continue
+            try:
+                disease["recommended_tests_display"] = _build_recommended_tests_display(tests, sp)
+            except Exception:
+                logger.exception(
+                    "recommended_tests display enrichment failed for %s",
+                    disease.get("name", "?"),
+                )
+
+    # Top-level aggregate enrichment
+    if (
+        isinstance(result, dict)
+        and isinstance(result.get("recommended_tests"), list)
+        and "recommended_tests_display" not in result
+    ):
+        try:
+            result["recommended_tests_display"] = _build_recommended_tests_display(result["recommended_tests"], sp)
+        except Exception:
+            logger.exception("top-level recommended_tests display enrichment failed")
+
+
 def _attach_mentioned_drugs(result, species):
     """Attach mentioned_drugs with species-specific dosage to each disease."""
     try:
@@ -1819,8 +1865,10 @@ def api_analyze_symptoms():
 
         # Enrich each disease with completeness score + literature citations so
         # the differential view matches the Disease DB tab (accurate quality
-        # badge + evidence sources), then attach species-specific drug dosing.
+        # badge + evidence sources), then attach species-specific drug dosing
+        # and translated diagnostic-test labels.
         _enrich_result_diseases(result, species or "dog")
+        _attach_recommended_tests_display(result, species or "dog")
         _attach_mentioned_drugs(result, species or "dog")
 
         return result

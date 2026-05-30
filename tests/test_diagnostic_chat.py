@@ -852,6 +852,45 @@ class TestGenerateDiseaseReasoningEn:
         assert len(result) > 0
 
 
+class TestDiseaseReasoningSpecies:
+    """Reasoning text must reflect the patient's species, not hard-code dog."""
+
+    def _disease(self, name_ja="テスト病", name_en="Test Disease"):
+        return {
+            "name_ja": name_ja,
+            "name_en": name_en,
+            "similarity_score": 0.5,
+            "matched_symptoms": ["vomiting"],
+            "unmatched_user_symptoms": [],
+        }
+
+    def test_cat_ja_uses_cat_label(self):
+        result = generate_disease_reasoning_ja(self._disease(), [], species="cat")
+        assert "猫" in result
+        assert "犬" not in result
+
+    def test_rabbit_ja_uses_rabbit_label(self):
+        result = generate_disease_reasoning_ja(self._disease(), [], species="rabbit")
+        assert "ウサギ" in result
+        assert "犬" not in result
+
+    def test_cat_en_uses_cat_label(self):
+        result = generate_disease_reasoning_en(self._disease(), [], species="cat")
+        assert "cat" in result.lower()
+        assert "dog" not in result.lower()
+
+    def test_horse_en_uses_horse_label(self):
+        result = generate_disease_reasoning_en(self._disease(), [], species="horse")
+        assert "horse" in result.lower()
+        assert "dog" not in result.lower()
+
+    def test_default_species_is_dog_for_backcompat(self):
+        result_ja = generate_disease_reasoning_ja(self._disease(), [])
+        result_en = generate_disease_reasoning_en(self._disease(), [])
+        assert "犬" in result_ja
+        assert "dog" in result_en.lower()
+
+
 # ============================================================================
 # 4. get_treatment_recommendations_for_disease()
 # ============================================================================

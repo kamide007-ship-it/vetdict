@@ -913,20 +913,29 @@ def extract_age_from_text(text: str) -> float | None:
     return None
 
 
-def generate_disease_reasoning_ja(disease: dict, symptoms: list) -> str:
-    """Generate Japanese explanation for why this disease was suggested."""
+def generate_disease_reasoning_ja(disease: dict, symptoms: list, species: str = "dog") -> str:
+    """Generate Japanese explanation for why this disease was suggested.
+
+    Uses the species-appropriate noun ("猫" / "ウサギ" / "馬" / …) instead of
+    hard-coding 犬, so the reasoning paragraph in the chat panel makes sense for
+    every supported species.
+    """
     matched_count = len(disease.get("matched_symptoms", []))
     total_symptoms = matched_count + len(disease.get("unmatched_user_symptoms", []))
+    sp_ja = SPECIES_LABELS.get(species or "dog", {}).get("ja", "患者")
+    return f"患者（{sp_ja}）の症状セット（{matched_count}/{total_symptoms}）が{disease['name_ja']}と高く一致しており、類似度は{int(disease['similarity_score'] * 100)}%です。"
 
-    return f"患者犬の症状セット（{matched_count}/{total_symptoms}）が{disease['name_ja']}と高く一致しており、類似度は{int(disease['similarity_score'] * 100)}%です。"
 
+def generate_disease_reasoning_en(disease: dict, symptoms: list, species: str = "dog") -> str:
+    """Generate English explanation for why this disease was suggested.
 
-def generate_disease_reasoning_en(disease: dict, symptoms: list) -> str:
-    """Generate English explanation for why this disease was suggested."""
+    Uses the species-appropriate noun ("cat" / "rabbit" / "horse" / …) instead
+    of hard-coding "dog".
+    """
     matched_count = len(disease.get("matched_symptoms", []))
     total_symptoms = matched_count + len(disease.get("unmatched_user_symptoms", []))
-
-    return f"The dog's symptom profile ({matched_count}/{total_symptoms}) shows strong alignment with {disease['name_en']}, with a similarity score of {int(disease['similarity_score'] * 100)}%."
+    sp_en = SPECIES_LABELS.get(species or "dog", {}).get("en", "patient").lower()
+    return f"The {sp_en}'s symptom profile ({matched_count}/{total_symptoms}) shows strong alignment with {disease['name_en']}, with a similarity score of {int(disease['similarity_score'] * 100)}%."
 
 
 # DISEASE_SUPPLEMENTS extracted to api/chat/supplements.py
@@ -1392,8 +1401,8 @@ def diagnostic_chat():
     enhanced_candidates = []
     for disease in disease_matches[:10]:  # Top 10
         reasoning = {
-            "why_this_condition_ja": generate_disease_reasoning_ja(disease, all_symptoms),
-            "why_this_condition_en": generate_disease_reasoning_en(disease, all_symptoms),
+            "why_this_condition_ja": generate_disease_reasoning_ja(disease, all_symptoms, species),
+            "why_this_condition_en": generate_disease_reasoning_en(disease, all_symptoms, species),
             "confidence_factors": [
                 {"factor": "symptom_match", "percentage": int(disease["similarity_score"] * 100), "weight": "High"},
                 {"factor": "breed_predisposition", "percentage": 0, "weight": "Medium"},
