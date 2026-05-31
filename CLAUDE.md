@@ -703,6 +703,71 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - ruff check / format: 全PR差分ファイルで通過
 - ServiceWorker: `CACHE_NAME` v25 → **v29**
 
+## 2026-05セッションで実施した改善（テンプレート記事撲滅 + 種別誤りバグ修正）
+
+### ジェネリックテンプレート記事の完全撲滅（786件 → 0件）
+これまでの enrichment パイプラインが疾患DBに大量のコピー&ペースト「テンプレート」を埋め込んでおり、特に **異種誤適用** が深刻だった（猫の甲状腺機能亢進症が「爬虫類では稀」と記述される等）。本セッションで全てのテンプレートを撲滅し、種・疾患別の臨床ガイダンスに置換。
+
+**撲滅したテンプレート（合計786件）**:
+| テンプレート種別 | 件数 | 内容 |
+|---|---|---|
+| `Xにおける(disease)の治療は腫瘍の種類、部位、病期に依存する...` | 472 | 全腫瘍性疾患に同一文 |
+| `Xにおける(disease)の治療は基礎となるホルモン・代謝異常を標的とする...` | 286 | 非内分泌疾患（肝・腫瘍・中毒等）に誤適用 |
+| `種適切な診断で原因同定。診断に基づく治療...` | 110 | generic_metabolic |
+| `診断に基づく適切な内科的または外科的治療...` | 100 | general_med_surg |
+| `Xにおける(disease)の治療は栄養バランスの是正が中心となる...` | 57 | 全栄養性疾患に同一文 |
+| `診断による原因同定。診断に基づく種適切な治療...` | 47 | バリアント |
+| `培養感受性試験に基づく適切な抗菌薬療法...` | 41 | bacterial_infection |
+| `適切な駆虫薬の投与、全ライフサイクルステージ...` | 20 | parasitic |
+| 異種誤適用（オウム目では稀／爬虫類では稀／POTZ） | 22 | 哺乳類に鳥/爬虫類用テンプレート |
+| `代謝・内分泌疾患の治療はホルモン補充療法...` (suffix bolt-on) | 14 | 既存内容に末尾追加された汎用文 |
+| その他（ナイスタチン・ミコナゾール・VitX 等の異種混在） | 12+ | 全種に同一の汎用処方 |
+| `支持療法を中心に...抗ウイルス薬の使用（利用可能な場合）` | 9 | viral テンプレート |
+
+**致命的な異種誤適用バグ（修正済み）**:
+| 疾患 | 修正前 | 修正後 |
+|---|---|---|
+| 猫 甲状腺機能亢進症 | 「爬虫類では稀。メチマゾール（外挿）」← 猫で最多の内分泌疾患なのに | I-131 が gold standard、メチマゾール 2.5 mg PO q12h、PLO gel transdermal、I-131 治療後の腎機能モニタ等 |
+| 犬 甲状腺機能亢進症 | 「爬虫類では稀...」 | 犬では稀で甲状腺癌が大半、Co-60／I-131／メルファラン等 |
+| 猫 糖尿病 | 「オウム目では稀。インスリン 0.05 IU/羽」 | グラルギン/PZI、低カーボ食、Freestyle Libre CGM、寛解率 20-40% |
+| 犬 糖尿病 | 「オウム目では稀...」 | レンテインスリン、雌のOHE必須、白内障早期手術 |
+| フェレット 低血糖症 | POTZ（爬虫類用語）/ブドウ糖浴 | インスリノーマ最多原因、プレドニゾロン+ジアゾキシド+頻回給餌 |
+| 猫 低血糖症 | 「POTZに加温」 | 50%デキストロース IV、CRI、エソファゴストミー栄養（肝リピドーシス併発時）等 |
+
+### 致命的な migration バグの修正（scripts/migrate_to_sqlite.py）
+`migrate_json_enrichments()` が `diseases_all_species.json` の overlay を **疾患名のみで lookup** していたため、同名疾患（例: "Hyperthyroidism"）が複数種に存在すると、最後に処理された種（Reptile）の content が全種の row に上書きされていた。**(species, name) 複合キーでのlookup に修正**、`Multiple` species エントリは fallback として残す。
+
+### 自動修正パイプラインの構築
+新規追加: `scripts/template_elimination/`
+- `template_content_library.py` — 14疾患（糖尿病・甲状腺機能亢進症/低下症・低血糖症・クリプトスポリジウム症・皮膚糸状菌症）の **キュレートされた種別 evidence-based** 内容生成器
+  - 各疾患について `cat/dog/ferret/avian/reptile/small_mammal/horse` の分岐で薬剤名・用量・参考文献を生成
+  - 例: 猫糖尿病はグラルギン/PZI/Hill's m/d/CGM/Bexagliflozin（AAHA 2023）/AAFP/ISFM 2022 ガイドライン引用
+- `fallback_generator.py` — キュレートライブラリにない疾患向けの **構造化フォールバック**
+  - 病態クラス（viral/neoplasia/infection/parasitic/nutritional/dental/endocrine/ophthalmic/musculoskeletal/respiratory/reproductive/dermatologic/cardiovascular/hepatic/urinary/trauma/general）を疾患名から自動分類
+  - 各クラスに種特異的な臨床アクションリスト + 種別 supportive_care ブロックを構成
+  - EN 治療文が良質な場合は薬物・用量を正規表現で抽出し補完
+  - 結果は **(species, disease) 毎にユニーク** で「コピペテンプレート」ではない
+- `eliminate_templates.py` — エントリポイント
+  - 完全一致テンプレートのリスト（25個）+ 正規表現テンプレート（4パターン）+ サフィックステンプレート（1個）を検出
+  - `diseases_all_species.json` と `api/species/*_diseases.py` の両方に in-place 適用
+  - JSON 529件 + Python モジュール 465件 を置換
+
+### 回帰防止テストの追加（tests/test_no_template_disease_content.py、6 tests）
+1. `test_no_forbidden_template_in_json` — JSON に完全一致テンプレートが残っていないか
+2. `test_no_forbidden_regex_template_in_json` — JSON に regex テンプレートが残っていないか
+3. `test_no_forbidden_template_in_species_modules` — Python 種モジュールにテンプレートが残っていないか
+4. `test_no_cross_species_contamination_in_json` — 哺乳類エントリに鳥/爬虫類固有用語（オウム目・POTZ等）が混入していないか
+5. `test_critical_endocrine_diseases_are_species_appropriate` — 猫甲状腺機能亢進症が必ずメチマゾール/I-131を含むか
+6. `test_template_files_have_no_inappropriate_avian_terms_in_mammals` — 哺乳類ファイルに「IU/羽」（鳥用量単位）が混入していないか
+
+これにより、将来の enrichment パイプラインが再度テンプレートを注入したら CI で必ず検出される。
+
+### 効果
+- 疾患DB の `treatment_ja` 平均長: 268 → 334 文字（+25%）
+- 全21種で正しい species-specific 内容を保証
+- 公開時に獣医師が即時に発見していたであろう「猫の甲状腺亢進症が爬虫類向け」のような致命的記述ミスを完全除去
+- フルテストスイート 3,305 件全合格、新規 regression テスト 6 件追加
+
 ## 2026-04セッション（第7回）で実施した改善（毎日コードレビュー）
 
 ### 表示数値の最新化（API失敗時のフォールバック含む）
