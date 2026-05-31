@@ -221,17 +221,52 @@ def migrate_json_enrichments(conn) -> int:
     with open(json_path, encoding="utf-8") as f:
         entries = json.load(f)
 
-    # Build a lookup by normalised English name for name-based matching.
+    # Build lookups keyed on (species, normalised name) so we cannot pull a
+    # different species' enrichment onto the wrong row. Cat hyperthyroidism
+    # was previously being overwritten by reptile hyperthyroidism because the
+    # lookup ignored species.
     import re
 
     def _norm(name: str) -> str:
         return re.sub(r"\s+", " ", name.strip().lower())
 
-    json_by_name: dict[str, dict] = {}
+    # JSON file uses capitalized / space-separated species names — normalize
+    # to the lowercase / underscore form used by the Python species modules.
+    _JSON_SPECIES_TO_DB = {
+        "Bird": "bird",
+        "Parakeet": "parakeet",
+        "Parrot": "parrot",
+        "Horse": "horse",
+        "Guinea Pig": "guinea_pig",
+        "Rabbit": "rabbit",
+        "Chinchilla": "chinchilla",
+        "Hedgehog": "hedgehog",
+        "Snake": "snake",
+        "Lizard": "lizard",
+        "Amphibian": "amphibian",
+        "Sugar Glider": "sugar_glider",
+        "Degu": "degu",
+        "Reptile": "reptile",
+        "Exotic Other": "exotic_other",
+        "Hamster": "hamster",
+        "Ferret": "ferret",
+        "Tortoise": "tortoise",
+        "Fish": "fish",
+        "Cat": "cat",
+        "Dog": "dog",
+    }
+
+    json_by_species_name: dict[tuple[str, str], dict] = {}
+    json_by_name_multi: dict[str, dict] = {}  # cross-species ("Multiple") fallback
     for entry in entries:
         name = entry.get("name", "")
-        if name:
-            json_by_name[_norm(name)] = entry
+        if not name:
+            continue
+        sp_raw = entry.get("species", "")
+        sp_db = _JSON_SPECIES_TO_DB.get(sp_raw, sp_raw.lower())
+        json_by_species_name[(sp_db, _norm(name))] = entry
+        if sp_raw == "Multiple":
+            json_by_name_multi[_norm(name)] = entry
 
     def _clean(value: str | None) -> str | None:
         """Return None for template text so COALESCE keeps existing data."""
@@ -240,7 +275,7 @@ def migrate_json_enrichments(conn) -> int:
         return value
 
     # Iterate over all diseases currently in SQLite and enrich where names match.
-    rows = conn.execute("SELECT id, name FROM diseases").fetchall()
+    rows = conn.execute("SELECT id, species, name FROM diseases").fetchall()
     count = 0
 
     def _extract_ja_en(field_val):
@@ -268,8 +303,13 @@ def migrate_json_enrichments(conn) -> int:
         return val
 
     for row in rows:
-        db_id, db_name = row["id"], row["name"]
-        entry = json_by_name.get(_norm(db_name))
+        db_id, db_species, db_name = row["id"], row["species"], row["name"]
+        # First try species-specific match — this prevents reptile content
+        # from being applied to a cat row (and vice versa).
+        entry = json_by_species_name.get((db_species, _norm(db_name)))
+        if not entry:
+            # Fall back to cross-species "Multiple" entries when present.
+            entry = json_by_name_multi.get(_norm(db_name))
         if not entry:
             continue
 
