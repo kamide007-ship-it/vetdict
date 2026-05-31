@@ -314,6 +314,18 @@ _TEMPLATE_MARKERS = (
     "感染性、環境、免疫、宿主関連因子を含む多因子性の病因",
     "Prognosis depends on severity, timeliness of diagnosis",
     "Amphibianにおける",
+    # Category-level pathophysiology boilerplate (overridden by disease-specific JSON)
+    "腫瘍の病態生理は正常細胞の悪性転換",
+    "栄養性疾患の病態生理は必須栄養素",
+    "先天性疾患の病態生理は胚発生期",
+    "消化器疾患の病態生理は消化管の運動",
+    "外力（落下、衝突、圧迫、咬傷",
+    "物理的損傷・機械的圧迫・血流遮断",
+    "病原菌は付着因子を通じて組織にコロニーを形成し",
+    "ウイルスは特定の受容体を介して宿主細胞に侵入",
+    "真菌は分生子または菌糸",
+    "寄生虫は宿主組織に定着し",
+    "にみられる疾患である",
 )
 
 
