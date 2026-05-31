@@ -233,14 +233,27 @@ def migrate_json_enrichments(conn) -> int:
     # JSON file uses capitalized / space-separated species names — normalize
     # to the lowercase / underscore form used by the Python species modules.
     _JSON_SPECIES_TO_DB = {
-        "Bird": "bird", "Parakeet": "parakeet", "Parrot": "parrot",
-        "Horse": "horse", "Guinea Pig": "guinea_pig", "Rabbit": "rabbit",
-        "Chinchilla": "chinchilla", "Hedgehog": "hedgehog",
-        "Snake": "snake", "Lizard": "lizard", "Amphibian": "amphibian",
-        "Sugar Glider": "sugar_glider", "Degu": "degu",
-        "Reptile": "reptile", "Exotic Other": "exotic_other",
-        "Hamster": "hamster", "Ferret": "ferret", "Tortoise": "tortoise",
-        "Fish": "fish", "Cat": "cat", "Dog": "dog",
+        "Bird": "bird",
+        "Parakeet": "parakeet",
+        "Parrot": "parrot",
+        "Horse": "horse",
+        "Guinea Pig": "guinea_pig",
+        "Rabbit": "rabbit",
+        "Chinchilla": "chinchilla",
+        "Hedgehog": "hedgehog",
+        "Snake": "snake",
+        "Lizard": "lizard",
+        "Amphibian": "amphibian",
+        "Sugar Glider": "sugar_glider",
+        "Degu": "degu",
+        "Reptile": "reptile",
+        "Exotic Other": "exotic_other",
+        "Hamster": "hamster",
+        "Ferret": "ferret",
+        "Tortoise": "tortoise",
+        "Fish": "fish",
+        "Cat": "cat",
+        "Dog": "dog",
     }
 
     json_by_species_name: dict[tuple[str, str], dict] = {}
