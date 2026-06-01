@@ -12007,11 +12007,33 @@ def _enrich_horse_diseases() -> None:
         "clinical_signs_detail": ("clinical_signs_ja", "clinical_signs"),
         "risk_factors": ("causes_ja", "causes"),
     }
+    # Template markers — content matching these is generic boilerplate that should
+    # be replaced by disease-specific JSON enrichment data when available.
+    _horse_template_markers = (
+        "免疫介在性疾患である",
+        "組織に病理学的変化を引き起こす疾患",
+        "感染症である。病原菌は付着因子を通じて",
+        "感染症である。ウイルスは特定の受容体を介して",
+        "腫瘍性疾患である",
+        "外傷性疾患である",
+        "栄養障害である",
+        "先天性疾患である",
+        "の原因には、遺伝的素因、体型、",
+        "の管理は、原因への対処、適切な支持療法",
+        "免疫系が自己抗原または環境アレルゲンに対して",
+    )
+
+    def _is_horse_template(val: str) -> bool:
+        if not val:
+            return True
+        return any(m in val for m in _horse_template_markers)
+
     for disease in DISEASE_DATABASE:
         enrichment = lookup.get(disease.name_en)
         if enrichment:
             for dc_field, json_fields in field_map.items():
-                if getattr(disease, dc_field, None):
+                current = getattr(disease, dc_field, None) or ""
+                if current and not _is_horse_template(current):
                     continue
                 for jf in json_fields:
                     val = enrichment.get(jf)
@@ -12026,7 +12048,7 @@ def _enrich_horse_diseases() -> None:
         name = disease.name_en or disease.name_ja
         desc = disease.description_ja or disease.name_ja
         ja_name = disease.name_ja or name
-        if not disease.pathophysiology:
+        if not disease.pathophysiology or _is_horse_template(disease.pathophysiology):
             disease.pathophysiology = (
                 f"{ja_name}は馬の組織に病理学的変化を引き起こす疾患である。"
                 f"{desc} 未治療の場合、細胞障害、炎症反応、組織損傷の段階を経て進行しうる。"
