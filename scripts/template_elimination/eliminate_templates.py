@@ -3,11 +3,14 @@
 This script:
 1. Scans ``diseases_all_species.json`` and ``api/species/*_diseases.py`` for
    known generic templates in ``treatment_ja`` and ``treatment`` fields.
-2. For each template instance, generates **disease-specific, species-tailored**
+2. **Auto-detects implicit templates** (any treatment_ja text shared by 2+
+   different disease names within same species, OR 4+ disease names across
+   3+ species), in addition to the hardcoded template list.
+3. For each template instance, generates **disease-specific, species-tailored**
    replacement content using the curated content library
    (``template_content_library.py``) or the structured fallback generator
    (``fallback_generator.py``).
-3. Writes the updated JSON in-place and patches the Python species modules
+4. Writes the updated JSON in-place and patches the Python species modules
    in-place (preserving formatting, just swapping the templated strings).
 
 Run with::
@@ -22,6 +25,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -178,18 +182,64 @@ def _matches_regex_template(text: str) -> bool:
     return any(pattern.match(text.strip()) for pattern in TEMPLATE_REGEX_PATTERNS)
 
 
-def update_json(json_path: Path) -> tuple[int, int, int]:
-    """Update diseases_all_species.json in-place. Returns (replaced, suffix_stripped, unchanged)."""
+def _detect_implicit_templates(entries: list[dict]) -> set[str]:
+    """Auto-detect implicit templates.
+
+    A treatment_ja string is considered an implicit template if:
+    - It is used by 2+ DIFFERENT disease names within the same species, OR
+    - It is used by 4+ different disease names across 3+ species.
+
+    A duplicate text that legitimately covers the same disease across species
+    (e.g. "Vestibular disease" in 14 species → 1 disease name) is NOT a template
+    by this definition; we only flag cross-disease misapplication.
+    """
+    intra_groups: dict[tuple[str, str], set[str]] = defaultdict(set)
+    global_groups_diseases: dict[str, set[str]] = defaultdict(set)
+    global_groups_species: dict[str, set[str]] = defaultdict(set)
+    for e in entries:
+        tx = (e.get("treatment_ja", "") or "").strip()
+        if not tx or len(tx) < 30:
+            continue
+        sp = e.get("species", "")
+        # Use the most specific identifier — name_ja distinguishes per-species
+        # variants (e.g. "前庭疾患（ウサギ）" vs "前庭疾患（猫）") that share name="Vestibular Disease"
+        name_key = (e.get("name_ja") or "").strip() or (e.get("name") or "").strip()
+        intra_groups[(sp, tx)].add(name_key)
+        global_groups_diseases[tx].add(name_key)
+        global_groups_species[tx].add(sp)
+
+    flagged: set[str] = set()
+    # Intra-species: same text for 2+ different disease names
+    for (_sp, tx), names in intra_groups.items():
+        if len(names) >= 2:
+            flagged.add(tx)
+    # Cross-species: same text used by 3+ species is treated as a template
+    # (each species needs different dosing/supportive care). Loose disease-name
+    # threshold (3+) catches the per-species name_ja suffix case.
+    for tx, names in global_groups_diseases.items():
+        species_n = len(global_groups_species[tx])
+        if species_n >= 3 and len(names) >= 3:
+            flagged.add(tx)
+    return flagged
+
+
+def update_json(json_path: Path) -> tuple[int, int, int, int]:
+    """Update diseases_all_species.json in-place. Returns (replaced, suffix_stripped, implicit_replaced, unchanged)."""
     with open(json_path, encoding="utf-8") as f:
         data = json.load(f)
+
+    implicit_templates = _detect_implicit_templates(data)
+
     replaced = 0
     suffix_stripped = 0
+    implicit_replaced = 0
     unchanged = 0
     for entry in data:
-        tx_ja = entry.get("treatment_ja", "")
+        tx_ja = entry.get("treatment_ja", "") or ""
         is_exact_template = tx_ja in TEMPLATES_JA_SET
         is_regex_template = _matches_regex_template(tx_ja)
-        if is_exact_template or is_regex_template:
+        is_implicit_template = tx_ja.strip() in implicit_templates and not (is_exact_template or is_regex_template)
+        if is_exact_template or is_regex_template or is_implicit_template:
             species = entry.get("species", "")
             name = entry.get("name", "")
             name_ja = entry.get("name_ja", "")
@@ -203,7 +253,10 @@ def update_json(json_path: Path) -> tuple[int, int, int]:
                 entry["prognosis_ja"] = replacement["prognosis_ja"]
             if replacement.get("causes_ja"):
                 entry["causes_ja"] = replacement["causes_ja"]
-            replaced += 1
+            if is_implicit_template:
+                implicit_replaced += 1
+            else:
+                replaced += 1
         else:
             # Strip suffix templates from otherwise-good content
             new_tx, changed = _strip_suffix_templates(tx_ja)
@@ -214,7 +267,7 @@ def update_json(json_path: Path) -> tuple[int, int, int]:
                 unchanged += 1
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    return replaced, suffix_stripped, unchanged
+    return replaced, suffix_stripped, implicit_replaced, unchanged
 
 
 _NAME_BLOCK_RE = re.compile(r'"name":\s*"([^"\\]*(?:\\.[^"\\]*)*)"', re.S)
@@ -254,6 +307,30 @@ def _escape_for_python_string(s: str) -> str:
     """Escape a Python string for inclusion inside a Python string literal."""
     # Escape backslashes first, then quotes, then convert real newlines to \n
     return s.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
+
+
+def _scan_module_implicit_templates(text: str) -> set[str]:
+    """Find treatment_ja texts shared by 2+ different disease names in one Python module."""
+    # Match (name, treatment_ja) pairs within reasonable proximity
+    # Strategy: iterate all "treatment_ja": "X" fields and lookup the immediately-preceding name field
+    treatment_ja_field = re.compile(r'"treatment_ja":\s*"((?:[^"\\]|\\.)*)"')
+    by_text: dict[str, set[str]] = defaultdict(set)
+    for m in treatment_ja_field.finditer(text):
+        body = m.group(1)
+        if "\\" in body:
+            decoded = body.replace('\\"', '"').replace("\\n", "\n").replace("\\t", "\t").replace("\\\\", "\\")
+        else:
+            decoded = body
+        decoded = decoded.strip()
+        if len(decoded) < 30:
+            continue
+        meta = _find_entry_metadata(text, m.start())
+        name = meta["name"] or meta["name_ja"]
+        if not name:
+            continue
+        by_text[decoded].add(name)
+    flagged = {tx for tx, names in by_text.items() if len(names) >= 2}
+    return flagged
 
 
 def update_python_module(path: Path) -> tuple[int, int]:
@@ -328,6 +405,32 @@ def update_python_module(path: Path) -> tuple[int, int]:
         text = text[:start] + new_field + text[end:]
         replaced += 1
 
+    # Implicit templates: any treatment_ja shared by 2+ different disease names in this file
+    implicit = _scan_module_implicit_templates(text)
+    if implicit:
+        edits = []
+        for m in treatment_ja_field.finditer(text):
+            body = m.group(1)
+            if "\\" in body:
+                decoded = body.replace('\\"', '"').replace("\\n", "\n").replace("\\t", "\t").replace("\\\\", "\\")
+            else:
+                decoded = body
+            if decoded.strip() not in implicit:
+                continue
+            meta = _find_entry_metadata(text, m.start())
+            replacement = _replacement_for(
+                species_norm,
+                meta["name_ja"],
+                meta["name"],
+                meta["treatment"],
+                meta["description_ja"],
+            )
+            new_field = f'"treatment_ja": "{_escape_for_python_string(replacement["treatment_ja"])}"'
+            edits.append((m.start(), m.end(), new_field))
+        for start, end, new_field in reversed(edits):
+            text = text[:start] + new_field + text[end:]
+            replaced += 1
+
     if replaced > 0:
         path.write_text(text, encoding="utf-8")
     return replaced, len(text) - original_len
@@ -341,8 +444,11 @@ def main() -> int:
     json_path = ROOT / "diseases_all_species.json"
     if json_path.exists():
         print(f"\n[1/2] Updating {json_path.name}…")
-        replaced, suffix_stripped, unchanged = update_json(json_path)
-        print(f"  Replaced: {replaced}  |  Suffix-stripped: {suffix_stripped}  |  Unchanged: {unchanged}")
+        replaced, suffix_stripped, implicit_replaced, unchanged = update_json(json_path)
+        print(
+            f"  Hardcoded-template replaced: {replaced}  |  Implicit-template replaced: {implicit_replaced}"
+            f"  |  Suffix-stripped: {suffix_stripped}  |  Unchanged: {unchanged}"
+        )
 
     print("\n[2/2] Updating Python species modules…")
     total = 0
