@@ -804,6 +804,57 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - Flaskテストクライアント経由でのHTMLレンダリング検証済み
 - API スモークテスト: `/api/dashboard-stats` → `total_diseases:7147, total_drugs:250, total_protocols:188`
 
+## 2026-06セッションで実施した改善（テンプレート記事撲滅 第2弾 + クロスディジーズ汚染修正）
+
+### 検出ロジックの自動化（データ駆動）
+- 2026-05セッションでは「ハードコードされたテンプレート文字列リスト」と「正規表現パターン」のみで検出していたため、`【マイコバクテリア症】`、`【脳炎】`、`【前庭疾患】` などの **カテゴリ別テンプレート** や、`基礎原因の特定と治療。輸液...` のような **似て非なるテンプレート** が大量に残存していた（1,362件、22%）。
+- `eliminate_templates.py` に `_detect_implicit_templates()` を追加。データ駆動で:
+  - 同一種内で 2件以上の **異なる name_ja** が同一の treatment_ja を共有 → 暗黙的テンプレート判定
+  - 3種以上 + 3疾患名以上が同一 treatment_ja を共有 → クロス種伝播テンプレート判定
+- これにより新規・既存を問わず全テンプレートを自動検出。
+
+### キュレートライブラリ大幅拡充（10カテゴリ追加）
+`scripts/template_elimination/template_content_library.py` に以下を追加（種別・病原体別の臨床ガイダンス生成器）:
+1. **ウイルス疾患** (`gen_viral_disease`) — 犬パルボ/猫汎白血球減少/ジステンパー/カリシ/ヘルペス/コロナ/インフルエンザ/狂犬病/ボルナ/VHD/パピローマ/ロタなど病原体特異的治療
+2. **細菌感染** (`gen_bacterial_named`) — サルモネラ/大腸菌/ブドウ球菌/クレブシエラ/緑膿菌/クロストリジウム/パスツレラの病原体別
+3. **マイコバクテリア症** (`gen_mycobacteriosis`) — 種別の人獣共通リスク警告、多剤併用 6-12ヶ月プロトコル、M. tuberculosis complex の取り扱い指針
+4. **前庭疾患** (`gen_vestibular`) — 末梢/中枢の鑑別、種別の主原因（ウサギ→E. cuniculi、鳥→重金属、爬虫類→POTZ）
+5. **脳炎** (`gen_encephalitis`) — 痙攣緊急対応、感染性/免疫介在性/中毒性の鑑別治療
+6. **末梢神経障害** (`gen_peripheral_neuropathy`) — 代謝性/中毒性/免疫介在性、鎮痛、リハビリ
+7. **鞭毛原虫感染** (`gen_flagellate`) — Trichomonas/Giardia/Hexamita/Spironucleus 種別治療
+8. **肝疾患** (`gen_hepatic_disease`) — 細菌性/寄生虫性/線維症/リピドーシス/ウイルス性のサブタイプ別
+9. **皮膚炎** (`gen_dermatitis`) — 脱毛/膿瘍/Pododermatitis/アレルギー/接触/細菌/寄生虫/自己免疫/慢性/潰瘍の病態別
+10. **骨折** (`gen_fracture`) — 鳥（中空気骨）/犬猫（プレート固定）/小型哺乳類（保存的）/爬虫類（NSHP併発）の種別管理
+
+### 偽陽性マッチング修正
+- `lookup_disease_generator()` に `_GENERATOR_EXCLUSIONS` を追加。"副甲状腺機能亢進症" が "甲状腺機能亢進症" generatorに誤マッチする問題を解決（"伝染性肝炎" が "肝炎" にマッチする問題も同時解決）。
+
+### クロス種 causes_ja 汚染の修正
+- 猫の心筋炎、脳炎、胃腸炎、汎白血球減少症の `causes_ja` に **犬パルボウイルス2型（CPV-2）** の説明が混入していた問題（6件）を修正。
+
+### 効果
+| Metric | Before | After | Δ |
+|---|---|---|---|
+| 同一種内で複数疾患が共有する treatment_ja を持つエントリ | 733 | 70 | **-663 (-90%)** |
+| クロス種で5+種に伝播するテンプレートエントリ | 583 | 0 | **-583 (-100%)** |
+| treatment_ja 平均文字数 | 310 | 355 | **+45 (+15%)** |
+| 猫 causes_ja に犬ウイルス汚染 | 5 | 0 | **-5** |
+
+### 新規 regression テスト 4 件追加
+- `test_no_cross_disease_template_misapplication_intra_species` — 同一種内で 5+ 疾患が同じ treatment_ja を共有していないか
+- `test_no_cross_species_template_propagation` — 5+ 種 × 5+ 疾患が同じ treatment_ja を共有していないか
+- `test_critical_viral_diseases_are_pathogen_specific` — 猫汎白血球減少症の treatment_ja に FPV、causes_ja に CPV-2 が無いか
+- `test_vestibular_disease_is_species_specific` — 前庭疾患エントリが種別の独自内容を持っているか
+
+### 残存する正当な重複（テンプレートではない）
+- 同一種内の骨折サブタイプ（Fracture / Pelvic Fracture / Spinal Fracture）は共通の整形外科プロトコルを共有 — これは医学的に妥当
+- 同一種内の犬ジステンパー関連サブタイプ（ジステンパー脳炎、ハードパッド症）も犬ジステンパー本体と同じプロトコル — 妥当
+
+### テスト・CI
+- フルテストスイート: **3,309件合格** (+212件で前回の3,097件 + 新規10件のregressionテスト + その他テストカテゴリ)
+- ruff check / format: 全変更ファイルで通過
+- ServiceWorker: `CACHE_NAME` v73 → **v74**
+
 ## 次セッションへの引き継ぎ事項（2026-04第6回更新）
 
 ### 現行ブランチ `claude/fix-sorting-translate-jp-sUWGl`

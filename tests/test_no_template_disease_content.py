@@ -302,3 +302,136 @@ def test_template_files_have_no_inappropriate_avian_terms_in_mammals():
         if "IU/羽" in text:
             failures.append(f"{fname}: contains avian-specific 'IU/羽' unit")
     assert not failures, "Avian dose units in mammal files: " + "; ".join(failures)
+
+
+# ---------------------------------------------------------------------------
+# Cross-disease template misapplication regression tests
+# ---------------------------------------------------------------------------
+
+
+# Within a single species, no treatment_ja text should be shared by more than
+# this many *distinct* diseases. Allow up to 4 to accommodate legitimate same-
+# treatment groupings (e.g. all fracture subtypes get similar orthopedic care).
+_MAX_DISEASES_PER_TREATMENT_INTRA_SPECIES = 4
+
+
+def test_no_cross_disease_template_misapplication_intra_species():
+    """No treatment_ja should be reused by 5+ different diseases within one species.
+
+    This regression guards against the May-2026 disaster where a generic
+    "bacterial infection" treatment was applied to feline panleukopenia
+    (a viral disease), rabies (viral), leukemia (neoplastic), etc.
+    """
+    from collections import defaultdict
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    by_sp_tx: dict[tuple[str, str], set[str]] = defaultdict(set)
+    for e in entries:
+        tx = (e.get("treatment_ja", "") or "").strip()
+        if not tx or len(tx) < 30:
+            continue
+        sp = e.get("species", "")
+        name_key = (e.get("name_ja") or "").strip() or (e.get("name") or "").strip()
+        if not name_key:
+            continue
+        by_sp_tx[(sp, tx)].add(name_key)
+
+    failures = []
+    for (sp, tx), names in by_sp_tx.items():
+        if len(names) > _MAX_DISEASES_PER_TREATMENT_INTRA_SPECIES:
+            failures.append(
+                f"[{sp}] {len(names)} diseases share one treatment_ja "
+                f"(threshold {_MAX_DISEASES_PER_TREATMENT_INTRA_SPECIES}): {sorted(names)[:5]}... "
+                f"Tx preview: '{tx[:60]}...'"
+            )
+    assert not failures, f"Found {len(failures)} cross-disease template misapplications. First 3:\n" + "\n".join(
+        failures[:3]
+    )
+
+
+def test_no_cross_species_template_propagation():
+    """No treatment_ja should be reused by 5+ species AND 5+ different diseases.
+
+    Vestibular disease being applied identically across 15 species with no
+    species-specific dosing is a template error.
+    """
+    from collections import defaultdict
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    by_tx: dict[str, dict[str, set[str]]] = defaultdict(lambda: {"species": set(), "names": set()})
+    for e in entries:
+        tx = (e.get("treatment_ja", "") or "").strip()
+        if not tx or len(tx) < 30:
+            continue
+        sp = e.get("species", "")
+        name_key = (e.get("name_ja") or "").strip() or (e.get("name") or "").strip()
+        if not name_key:
+            continue
+        by_tx[tx]["species"].add(sp)
+        by_tx[tx]["names"].add(name_key)
+
+    failures = []
+    for tx, info in by_tx.items():
+        if len(info["species"]) >= 5 and len(info["names"]) >= 5:
+            failures.append(
+                f"Treatment used by {len(info['species'])} species × {len(info['names'])} diseases: "
+                f"'{tx[:60]}...' (species: {sorted(info['species'])[:3]}...)"
+            )
+    assert not failures, f"Found {len(failures)} cross-species template propagations. First 3:\n" + "\n".join(
+        failures[:3]
+    )
+
+
+def test_critical_viral_diseases_are_pathogen_specific():
+    """Cat panleukopenia and canine parvo must mention pathogen-specific management."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    by_species_name: dict[tuple[str, str], dict] = {}
+    species_norm = {"Cat": "cat", "Dog": "dog"}
+    for entry in entries:
+        sp = species_norm.get(entry.get("species"), entry.get("species", "").lower())
+        name = entry.get("name", "")
+        by_species_name[(sp, name)] = entry
+
+    # Cat panleukopenia must reference FPV/feline-specific management
+    cat_fpv = by_species_name.get(("cat", "Feline Panleukopenia (Feline Distemper)"))
+    if cat_fpv:
+        tx = cat_fpv.get("treatment_ja", "") or ""
+        cja = cat_fpv.get("causes_ja", "") or ""
+        # Treatment must mention FPV-specific markers
+        assert any(kw in tx for kw in ("FPV", "汎白血球減少", "猫汎白血球", "パルボウイルス")), (
+            f"Cat panleukopenia treatment_ja missing FPV-specific markers. Got: {tx[:200]}"
+        )
+        # Causes_ja must NOT cite CPV-2 (canine virus)
+        assert "CPV-2" not in cja, f"Cat panleukopenia causes_ja still cites CPV-2: {cja[:200]}"
+
+    # Canine parvo must reference CPV-2/canine-specific management
+    dog_cpv = by_species_name.get(("dog", "Canine Parvovirus"))
+    if dog_cpv:
+        tx = dog_cpv.get("treatment_ja", "") or ""
+        assert any(kw in tx for kw in ("パルボウイルス", "CPV", "犬パルボ", "マロピタント")), (
+            f"Canine parvo treatment_ja missing parvo-specific markers. Got: {tx[:200]}"
+        )
+
+
+def test_vestibular_disease_is_species_specific():
+    """Vestibular disease entries across species must have species-tailored content."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    # Find all vestibular entries
+    vest = [e for e in entries if "前庭" in (e.get("name_ja", "") or "")]
+    if len(vest) < 3:
+        pytest.skip("Not enough vestibular entries for this test")
+    # Collect distinct treatment_ja
+    distinct_tx = {(e.get("treatment_ja", "") or "").strip() for e in vest}
+    # At least half of the species should have distinct treatment (not all sharing one template)
+    assert len(distinct_tx) >= max(3, len(vest) // 3), (
+        f"Only {len(distinct_tx)} distinct vestibular treatments for {len(vest)} entries — "
+        f"likely a template still in use."
+    )
