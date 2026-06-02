@@ -1495,6 +1495,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"diarrhea", "bloody_stool", "weight_loss", "lethargy", "appetite_loss"},
         "description": "A protozoal intestinal infection common in puppies, causing watery or bloody diarrhea.",
         "description_ja": "子犬に多い原虫性の腸管感染症で、水様便や血便を引き起こします。",
+        "pathophysiology_ja": "コクシジウム症は原虫（Eimeria属・Isospora属等のコクシジウム）の経口感染による腸管疾患である。摂取されたオーシストが腸管内でスポロゾイトを放出し、腸上皮細胞内で無性生殖（メロゴニー）と有性生殖を繰り返す。多数の上皮細胞が破壊されることで絨毛が萎縮し、吸収不良・出血性腸炎・下痢を引き起こす。若齢・過密・不衛生環境で重症化しやすい。",
         "urgency": "normal",
     },
     {
