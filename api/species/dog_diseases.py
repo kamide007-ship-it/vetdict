@@ -1039,7 +1039,7 @@ DISEASES: List[Dict[str, Any]] = [
         "phenobarbital 2-4 mg/kg IV q20-30min to effect or CRI if refractory. "
         "Midazolam 0.2 mg/kg IM/IN as alternative benzodiazepine (faster IM onset). "
         "Owner education: seizure diary, rectal diazepam for at-home cluster seizures. Never abruptly discontinue AEDs.",
-        "treatment_ja": "抗てんかん薬による生涯管理：フェノバルビタール（2.5〜5mg/kg BID、第一選択）、"
+        "treatment_ja": "犬痙攣の治療: ① 緊急安定化（active seizure）—気道確保、酸素、輸液確保、体温管理。② 初期発作中: ジアゼパム 0.5-1 mg/kg IV/IR（直腸）q5-10分まで × 3回、midazolam 0.2-0.5 mg/kg IM/IN（鼻腔内、静脈確保前に有効）。③ 持続発作（status epilepticus）: ジアゼパムCRI 0.5-2 mg/kg/h IV、phenobarbital 4-16 mg/kg IV slow（負荷量）、levetiracetam 30-60 mg/kg IV。④ 難治性: プロポフォール CRI 0.1-0.6 mg/kg/min（人工呼吸準備）、ketamine CRI 0.5-2 mg/kg/h（強直性発作）。⑤ 原因検索: 血糖、Ca、Na、肝酵素、毒物、CT/MRI、脳脊髄液検査。⑥ 慢性管理: phenobarbital 2-3 mg/kg PO q12h（血中濃度 25-35 µg/mL目標、肝酵素モニタ）、levetiracetam 20-30 mg/kg PO q8h、zonisamide 5-10 mg/kg PO q12h、bromide 20-30 mg/kg PO q24h（猫禁忌—呼吸器症状）。⑦ 高体温（>40.5℃）はクーリング+鎮静。AAHA 2015 Seizure Guidelines。"
         "臭化カリウム（20〜40mg/kg/日、単独or併用）、レベチラセタム（20mg/kg TID、新規薬）。"
         "血中薬物濃度モニタリング（フェノバルビタール15〜40μg/mL）。"
         "重積発作：ジアゼパム0.5〜1mg/kg IV/IR→レベチラセタム負荷→"

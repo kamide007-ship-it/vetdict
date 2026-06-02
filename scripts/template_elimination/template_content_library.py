@@ -3010,6 +3010,583 @@ def gen_leech_infestation(species: str, name_ja: str) -> Optional[dict]:
 
 
 # ============================================================================
+# Common emergency/chronic conditions — high-frequency fallback replacement
+# ============================================================================
+
+
+def gen_dehydration(species: str, name_ja: str) -> Optional[dict]:
+    species_ja = _species_label_ja_local(species)
+    if species in DOG_CAT:
+        return {
+            "treatment_ja": (
+                f"{species_ja}脱水症の治療: ① 脱水度評価—皮膚弾力、粘膜湿潤、CRT、眼球陥凹、PCV/TS、BUN。"
+                "軽度<5%、中等度5-8%、重度8-12%、ショック>12%。"
+                "② 輸液製剤選択: 等張晶質液（乳酸リンゲル、ノルモソルR）が第一選択。"
+                "Na異常時は0.9% NaClまたは0.45% NaCl/2.5%dextrose。"
+                "③ 投与経路: 軽度はSC（30-50 mL/kg）、中等度以上はIV（推奨）またはIO。"
+                "④ 用量計算: 維持量 40-60 mL/kg/日 + 不足量（体重×脱水%）+ 進行性損失。"
+                "ショック時はボーラス 30-90 mL/kg IV q15-30分（再評価しつつ）。"
+                "⑤ K補正: <3.5 mEq/L で20-40 mEq/L KCl添加（投与速度0.5 mEq/kg/h以下）。"
+                "⑥ モニタリング: PCV/TS、尿量（>1-2 mL/kg/h目標）、体重q12-24h、肺音（過剰負荷の聴取）。"
+                "⑦ 原因治療を並行: 嘔吐・下痢・多尿・高体温の制御。"
+                "AAHA Fluid Therapy Guidelines 2013参照。"
+            ),
+            "prognosis_ja": "原疾患による。早期適切な輸液で多くは予後良好。",
+        }
+    if species == "horse":
+        return {
+            "treatment_ja": (
+                "馬脱水症の治療: ① 急性疝痛・下痢・敗血症で急速進行—緊急対応。"
+                "② 輸液: 等張晶質液（乳酸リンゲル）2-10 L/h IV—大型動物は短時間で大量必要。"
+                "ショック時20-40 mL/kg/h、維持60-80 mL/kg/日。"
+                "③ 経鼻胃管経腸液（warm isotonic electrolyte solution、3-5 L/h）は重度脱水＋IV併用で有効。"
+                "④ 電解質補正: K、Na、Ca、Cl、HCO3 のモニタと補正。"
+                "⑤ コロイド（ボルベン、ヘタスターチ）は重度低蛋白血症時に検討。"
+                "⑥ モニタリング: PCV/TS、CVP、尿量、心拍数、血圧、乳酸。"
+                "⑦ 原因治療: 疝痛は外科適応評価、下痢はC. difficile/Salmonella培養、感染症は抗菌薬。"
+                + _horse_supportive(species)
+            ),
+            "prognosis_ja": "原因による—急性大量輸液で多くは予後改善。",
+        }
+    if species in AVIAN:
+        return {
+            "treatment_ja": (
+                f"{species_ja}脱水症の治療: ① 鳥類脱水評価困難—体重、皮膚弾力、眼球陥凹、PCV/TPで判断。"
+                "② 輸液製剤: 温乳酸リンゲルまたはノルモソルR、温度38-40℃。"
+                "③ 投与経路: 軽度はSC（鼠径部 50-100 mL/kg/日 分割）、"
+                "中等度以上はIO（脛骨近位または尺骨遠位 10-20 mL/kg q4-6h）または IV（静脈確保困難な場合多い）。"
+                "④ ボーラス（ショック時）: 10 mL/kg IV/IO q5-10分まで × 3回まで。"
+                "⑤ 経口は意識ある安定例のみ—シリンジまたは経口胃管。"
+                "⑥ 保温30-32℃、温度勾配確保—低体温防止が代謝・吸収の前提。"
+                "⑦ K補正は注意深く、Ca補正（テタニー時）50 mg/kg slow IV/IO。" + _avian_supportive(species)
+            ),
+            "prognosis_ja": "早期輸液+保温で予後改善。原疾患重症度で決まる。",
+        }
+    if species in SMALL_MAMMAL:
+        return {
+            "treatment_ja": (
+                f"{species_ja}脱水症の治療: ① 評価—皮膚弾力（小型では限定的）、体重トレンド、PCV/TS、粘膜湿潤。"
+                "② 輸液製剤: 温乳酸リンゲルまたはノルモソルR。"
+                "③ 投与経路: 軽-中等度はSC（背中皮下 80-100 mL/kg/日 分割）、"
+                "重度・ショックはIO（脛骨近位 10-20 mL/kg q4-6h）または小型でもIV試行。"
+                "④ 保温（26-28℃）が吸収・代謝に必須。"
+                "⑤ シリンジ給餌（Critical Care 50-90 mL/kg/日）併用で経口水分も補給。"
+                "⑥ K補正注意深く、Ca補正（Hypocalcemia時）50-100 mg/kg PO/IV。"
+                "⑦ 原疾患治療: 草食種のGI stasis、肉食種の嘔吐/下痢、高体温の制御。" + _small_mammal_supportive(species)
+            ),
+            "prognosis_ja": "早期輸液+原因治療で予後改善。",
+        }
+    if species in REPTILE or species == "amphibian":
+        return {
+            "treatment_ja": (
+                f"{species_ja}脱水症の治療: ① 評価—皮膚張り、眼球陥凹、PCV/TS、体重、尿量（尿酸塩濃度）。"
+                "爬虫類は慢性脱水多い—代謝性疾患（痛風・腎症）合併に注意。"
+                "② 輸液製剤: 温ノルモソルR、温乳酸リンゲル（38-40℃）。"
+                "③ 投与経路: 軽-中等度はSC（軸下・鼡径部 25-30 mL/kg/日）、"
+                "重度はICe（腹腔内、亀は前肢窩、ヘビ・トカゲは尾側1/3腹腔 25-30 mL/kg q24h）、"
+                "またはIO（脛骨近位・甲羅gular bridge 10-20 mL/kg q4-6h）。"
+                "④ 温浴 q24h × 20-30分（種別温度）—皮膚吸収も期待でき特に両生類で有効。"
+                "⑤ POTZ維持（前後72時間以上）—吸収・代謝の前提。"
+                "⑥ 経口は意識・嚥下反射ある例のみ—シリンジまたは胃管。" + _reptile_supportive(species)
+            ),
+            "prognosis_ja": "POTZ＋輸液で予後改善。慢性化・腎症合併例は要警戒。",
+        }
+    return None
+
+
+def gen_seizures(species: str, name_ja: str) -> Optional[dict]:
+    species_ja = _species_label_ja_local(species)
+    if species in DOG_CAT:
+        return {
+            "treatment_ja": (
+                f"{species_ja}痙攣の治療: ① 緊急安定化（active seizure）—気道確保、酸素、輸液確保、体温管理。"
+                "② 初期発作中: ジアゼパム 0.5-1 mg/kg IV/IR（直腸）q5-10分まで × 3回、"
+                "midazolam 0.2-0.5 mg/kg IM/IN（鼻腔内、静脈確保前に有効）。"
+                "③ 持続発作（status epilepticus）: ジアゼパムCRI 0.5-2 mg/kg/h IV、"
+                "phenobarbital 4-16 mg/kg IV slow（負荷量）、levetiracetam 30-60 mg/kg IV。"
+                "④ 難治性: プロポフォール CRI 0.1-0.6 mg/kg/min（人工呼吸準備）、"
+                "ketamine CRI 0.5-2 mg/kg/h（強直性発作）。"
+                "⑤ 原因検索: 血糖、Ca、Na、肝酵素、毒物、CT/MRI、脳脊髄液検査。"
+                "⑥ 慢性管理: phenobarbital 2-3 mg/kg PO q12h（血中濃度 25-35 µg/mL目標、肝酵素モニタ）、"
+                "levetiracetam 20-30 mg/kg PO q8h、zonisamide 5-10 mg/kg PO q12h、"
+                "bromide 20-30 mg/kg PO q24h（猫禁忌—呼吸器症状）。"
+                "⑦ 高体温（>40.5℃）はクーリング+鎮静。"
+                "AAHA 2015 Seizure Guidelines。"
+            ),
+            "prognosis_ja": ("原因による—特発性は薬物療法でコントロール可能。脳腫瘍・代謝性は原疾患による。"),
+        }
+    if species == "horse":
+        return {
+            "treatment_ja": (
+                "馬痙攣の治療: ① 馬の痙攣は稀—多くは新生子（neonatal）、低Ca/低Mg、肝性脳症、頭部外傷、毒物。"
+                "② 緊急: ジアゼパム 0.05-0.2 mg/kg IV slow（成馬）、0.1-0.5 mg/kg IV（仔馬）。"
+                "③ 持続: midazolam 0.04-0.1 mg/kg/h CRI IV、phenobarbital 5-15 mg/kg IV slow。"
+                "④ Ca補正: グルコン酸Ca 23% 250-500 mL IV slow（成馬、心電図モニタ）。"
+                "⑤ 原因検索: 血糖、電解質、肝酵素、毒物、脳脊髄液。"
+                "⑥ 安全確保: 厩房に詰物、観察、外傷予防。" + _horse_supportive(species)
+            ),
+            "prognosis_ja": "原因による—早期治療で予後改善。",
+        }
+    if species in AVIAN:
+        return {
+            "treatment_ja": (
+                f"{species_ja}痙攣の治療: ① 鳥類の痙攣は重大サイン—重金属中毒（鉛・亜鉛）、低Ca、低血糖、感染（PDD、ボルナ、PCV）、頭部外傷が主因。"
+                "② 緊急安定化: 保温30-32℃、酸素、安全な静置（外傷防止）。"
+                "③ 抗痙攣: ジアゼパム 0.5-1 mg/kg IM、midazolam 0.2-0.5 mg/kg IM/IN、"
+                "phenobarbital 1-7 mg/kg IM（血中濃度モニタ）。"
+                "④ 原因治療: 鉛中毒はCa-EDTA 35 mg/kg IM q12h × 5-7日、亜鉛同様、"
+                "低Caはグルコン酸Ca 50-100 mg/kg slow IV/IO、低血糖は5%デキストロース 0.25-0.5 mL/羽 IV/IO。"
+                "⑤ 検査: 血液鉛・亜鉛、Ca、血糖、X線（金属異物）、PCV/TS、ボルナPCR、PDD組織生検。"
+                + _avian_supportive(species)
+            ),
+            "prognosis_ja": "原因による—重金属・低Caは早期治療で予後良好、神経感染症は予後不良。",
+        }
+    if species in SMALL_MAMMAL:
+        return {
+            "treatment_ja": (
+                f"{species_ja}痙攣の治療: ① 原因鑑別重要—低血糖、低Ca、肝性脳症、感染（E. cuniculi、リステリア）、頭部外傷、毒物。"
+                "② 緊急: ジアゼパム 0.5-2 mg/kg IM/IV、midazolam 0.2-0.5 mg/kg IM/IN。"
+                "③ 持続: phenobarbital 2-5 mg/kg IM/IV、levetiracetam 20-30 mg/kg PO/SC q8h。"
+                "④ 原因治療: 低血糖は5%デキストロース slow IV、低Caはグルコン酸Ca 50-100 mg/kg slow IV、"
+                "E. cuniculi疑いはfenbendazole 20 mg/kg PO q24h × 28日（ウサギ）、"
+                "肝性脳症はラクツロース、Hill's l/d、ジアゼパム回避（GABA作動性悪化）。"
+                "⑤ 検査: 血糖、Ca、ALT、BUN、E. cuniculi抗体、MRI。" + _small_mammal_supportive(species)
+            ),
+            "prognosis_ja": "原因による—代謝性は治療反応良好、感染性・腫瘍性は要警戒。",
+        }
+    if species in REPTILE or species == "amphibian":
+        return {
+            "treatment_ja": (
+                f"{species_ja}痙攣の治療: ① 原因鑑別—NSHP（低Ca）、低血糖、敗血症、毒物（殺虫剤、植物）、頭部外傷、感染症。"
+                "② 緊急: midazolam 0.2-1 mg/kg IM、ジアゼパム 0.5-2 mg/kg IM/IV。"
+                "③ Ca補正: グルコン酸Ca 100 mg/kg slow IV/ICe（NSHP痙攣で第一選択）。"
+                "④ 低血糖: 5%デキストロース 10-30 mL/kg ICe/IV。"
+                "⑤ 持続: phenobarbital 5-10 mg/kg IM（代謝差大、血中濃度モニタ困難）、levetiracetam 20-30 mg/kg PO。"
+                "⑥ 原因検索: 血清Ca・P、血糖、肝酵素、X線（NSHP）、感染症スクリーニング、毒物履歴。"
+                + _reptile_supportive(species)
+            ),
+            "prognosis_ja": "NSHP・低血糖は早期治療で予後良好、感染・毒物は重症度による。",
+        }
+    return None
+
+
+def gen_hypothermia(species: str, name_ja: str) -> Optional[dict]:
+    species_ja = _species_label_ja_local(species)
+    if species in DOG_CAT:
+        return {
+            "treatment_ja": (
+                f"{species_ja}低体温症の治療: ① 重症度評価—軽度32-36℃、中等度28-32℃、重度<28℃。"
+                "② 加温法選択: 軽度は受動的（毛布、温暖環境）、中等度は能動的体表加温（温風器、温水パッド、Bair Hugger）、"
+                "重度は能動的中心加温（温輸液 40-42℃ IV、温乳酸リンゲル胃管／温浴洗浄、温潅注）。"
+                "③ 急速加温は不整脈リスク—0.5-1℃/h で漸進加温（after-drop注意）。"
+                "④ 輸液: 温乳酸リンゲル 60-90 mL/kg/h IV（重度脱水例）、加温した輸液のみ。"
+                "⑤ モニタリング: 心電図（心室細動・徐脈）、血糖（低血糖併発）、PCV/TS、電解質、酸塩基。"
+                "⑥ 原因対処: 麻酔覚醒中、shock、敗血症、内分泌（甲状腺機能低下）、長時間屋外曝露。"
+                "⑦ ⚠重度<28℃の蘇生はAHA推奨'not dead until warm and dead'—心停止例も復温まで蘇生継続。"
+            ),
+            "prognosis_ja": ("復温速度・原疾患・合併症で決まる。早期適切な復温で多くは予後良好。"),
+        }
+    if species in AVIAN:
+        return {
+            "treatment_ja": (
+                f"{species_ja}低体温症の治療: ① 鳥類は体表/体積比大—急速に低体温化、急速復温必須。"
+                "正常体温39-42℃、<37℃で緊急。"
+                "② 加温: ICU/インキュベーター30-32℃（重度は32-34℃）、温水パッド、温風器。"
+                "③ 温輸液: 温乳酸リンゲル38-40℃ IV/IO/SC 50-100 mL/kg/日。"
+                "④ 経口給餌は意識・嚥下反射回復後（誤嚥防止）。"
+                "⑤ 5%デキストロース併用（低血糖併発）—10-30 mg/kg slow IV/IO。"
+                "⑥ モニタリング: 体温q15-30分、呼吸、心拍、酸素飽和度。" + _avian_supportive(species)
+            ),
+            "prognosis_ja": "早期復温で多くは予後良好—重度遷延例は要警戒。",
+        }
+    if species in SMALL_MAMMAL:
+        return {
+            "treatment_ja": (
+                f"{species_ja}低体温症の治療: ① 小型・体表/体積比大—急速低体温化。正常体温は種別（37-39℃）。"
+                "② 加温: ICU/温風器26-30℃、温水パッド、温毛布。"
+                "③ 温輸液: 温乳酸リンゲル 80-100 mL/kg/日 SC/IV、低血糖時は5%デキストロース併用。"
+                "④ 急速加温は心電図異常リスク—0.5-1℃/h 漸進的に。"
+                "⑤ 経口給餌は意識・嚥下反射回復後（シリンジ Critical Care 少量）。"
+                "⑥ 原因検索: 麻酔覚醒中、ショック、敗血症、低栄養、長時間屋外曝露。" + _small_mammal_supportive(species)
+            ),
+            "prognosis_ja": "早期復温で予後改善。",
+        }
+    if species in REPTILE or species == "amphibian":
+        return {
+            "treatment_ja": (
+                f"{species_ja}低体温症の治療: ① 爬虫類・両生類は外温性—環境温度低下で低体温→代謝停止→免疫低下。"
+                "種別POTZの最適温度に復温が必須。"
+                "② 加温: 種別POTZ温度勾配で復温（急速復温は代謝過負荷で禁忌）—4-12時間かけて。"
+                "③ 温浴 q24h × 20-30分（種別温度）—皮膚吸収＋復温。"
+                "④ 輸液（IV/ICe）: 温度はPOTZと同等以上。"
+                "⑤ POTZ復元: ベーシング温度、エアアンビエント温度、湿度、UVBの再評価。"
+                "⑥ 原因対処: 加熱機器故障、停電、誤った種別温度設定。" + _reptile_supportive(species)
+            ),
+            "prognosis_ja": "POTZ復元で多くは予後良好—長時間低体温で免疫抑制・日和見感染に注意。",
+        }
+    return None
+
+
+def gen_constipation(species: str, name_ja: str) -> Optional[dict]:
+    species_ja = _species_label_ja_local(species)
+    if species == "rabbit":
+        return {
+            "treatment_ja": (
+                "ウサギ便秘/GI stasis: ① ⚠緊急—ウサギの便秘は多くがGI stasisで致死的になりうる。"
+                "② 確定: 触診（盲腸の硬結・小ペレット）、X線（gas pattern）、腹部超音波。"
+                "③ 鎮痛（最優先）: ブプレノルフィン 0.01-0.05 mg/kg SC q8-12h、メロキシカム 0.5-1.5 mg/kg PO q12-24h。"
+                "④ 輸液療法（必須）: 80-100 mL/kg/日 SC、重度脱水時はIV。"
+                "⑤ 強制給餌: Critical Care/Recovery 50-90 mL/kg/日 を3-4分割—腸蠕動の最強の刺激。"
+                "⑥ 蠕動促進薬: メトクロプラミド 0.5 mg/kg SC/PO q6-8h、シサプリド 0.5 mg/kg PO q8-12h（H2拮抗・腸蠕動促進）。"
+                "⑦ 経腸誘導: ラクツロース 0.5-1 mL/kg PO q12h（柔らかい便促進）、または0.9% NaCl温胃管。"
+                "⑧ ⚠経口β-ラクタム禁忌（腸内細菌叢破壊）、シメチコン使用可（ガス管理）。"
+                "⑨ ケージ運動促進、新鮮チモシー牧草の常時提供、新鮮葉野菜励行、ペレット制限。"
+                "Carpenter Exotic Animal Formulary 6th ed、Quesenberry 2020。"
+            ),
+            "prognosis_ja": ("早期介入で予後良好（72時間以内）。肝リピドーシス・敗血症合併例は予後不良。"),
+        }
+    if species == "guinea_pig":
+        return {
+            "treatment_ja": (
+                "モルモット便秘/GI stasis: ① ⚠緊急—ウサギと同様に致死的。"
+                "② 鎮痛: ブプレノルフィン 0.01-0.05 mg/kg SC q8-12h、メロキシカム 0.5-1.5 mg/kg PO q12-24h。"
+                "③ 輸液: 80-100 mL/kg/日 SC。"
+                "④ 強制給餌: Critical Care 50-90 mL/kg/日 分割、ビタミンC 25-50 mg/kg PO q24h併用。"
+                "⑤ 蠕動促進: メトクロプラミド 0.5 mg/kg SC q6-8h、シサプリド 0.5 mg/kg PO q8-12h。"
+                "⑥ ⚠経口ペニシリン・アンピシリン・セファロスポリン禁忌（Clostridium difficile腸炎）。"
+                "⑦ 食事改善: 新鮮チモシー、葉野菜（パセリ・コリアンダー）、ペレット制限。"
+                + _small_mammal_supportive(species)
+            ),
+            "prognosis_ja": "早期介入で予後良好。",
+        }
+    if species in DOG_CAT:
+        return {
+            "treatment_ja": (
+                f"{species_ja}便秘/巨大結腸症の治療: ① 評価—X線（便塊量・分布）、超音波、CBC・生化学・電解質。"
+                "猫は巨大結腸症（megacolon）合併多い。"
+                "② 軽度: 食物繊維増量（缶ピューレ、Hill's w/d）、水分摂取促進、適度運動。"
+                "③ 緩下薬: ラクツロース 0.5-1 mL/kg PO q8-12h、シサプリド 0.5 mg/kg PO q8h（猫megacolon）、"
+                "MiraLAX（ポリエチレングリコール）1/4-1 tsp PO q12h。"
+                "④ 浣腸: 温水浣腸（4-10 mL/kg）、無菌生理食塩水。"
+                "⑤ 重度（fecal impaction）: 全身麻酔下用手摘出+多量浣腸+輸液療法。"
+                "⑥ 慢性megacolon（猫）: subtotal colectomy（保存的治療無効例）—85-90%奏効率。"
+                "⑦ 鎮痛: ブプレノルフィン、ガバペンチン 10-20 mg/kg PO q8-12h。"
+                "AAFP 2014 Constipation Consensus。"
+            ),
+            "prognosis_ja": "軽度は食事・薬物で管理良好、慢性megacolonは外科で改善。",
+        }
+    if species in REPTILE or species == "amphibian":
+        return {
+            "treatment_ja": (
+                f"{species_ja}便秘の治療: ① 原因鑑別—脱水、不適切食事（低繊維・基質飲み込み）、POTZ不足、腸内寄生虫、NSHP、卵管圧迫。"
+                "② 確定: 触診、X線（便塊・異物）、超音波。"
+                "③ 温浴: q24h × 20-30分（種別温度）—自然排便促進。"
+                "④ 輸液: ノルモソルR 25-30 mL/kg/日 SC/ICe（脱水補正）。"
+                "⑤ 緩下: ラクツロース 0.5 mL/kg PO q24h、ミネラルオイル 0.5-1 mL/kg PO（基質誤食時）。"
+                "⑥ 蠕動促進: メトクロプラミド 0.5 mg/kg PO/IM q24h。"
+                "⑦ 重度・異物: 用手摘出（鎮静下）または外科的除去。"
+                "⑧ 環境改善: POTZ最適化、湿度、基質変更（吸湿性のないもの）、適切な飲水器。"
+                + _reptile_supportive(species)
+            ),
+            "prognosis_ja": "原因除去で予後良好。",
+        }
+    if species in AVIAN:
+        return {
+            "treatment_ja": (
+                f"{species_ja}便秘/総排泄腔停滞: ① 原因—脱水、骨盤腔狭窄（NSHP、卵詰まり）、腫瘍、神経損傷。"
+                "② 確定: 触診、X線、超音波、CBC・生化学。"
+                "③ 輸液: 温乳酸リンゲル 50-100 mL/kg/日 SC/IO。"
+                "④ 用手援助: 鎮静下総排泄腔潤滑+用手摘出（ガード鉗子）。"
+                "⑤ 蠕動促進: メトクロプラミド 0.5 mg/kg IM/PO q12h。"
+                "⑥ 卵詰まり合併時はGnRHアゴニスト・温浴・カルシウム補正。" + _avian_supportive(species)
+            ),
+            "prognosis_ja": "原因除去で予後良好—腫瘍・神経損傷例は予後要警戒。",
+        }
+    return None
+
+
+def gen_chronic_kidney_disease(species: str, name_ja: str) -> Optional[dict]:
+    species_ja = _species_label_ja_local(species)
+    if species == "cat":
+        return {
+            "treatment_ja": (
+                "猫慢性腎臓病（CKD）の治療: ① 病期分類—IRIS stage 1-4（血清クレアチニン・SDMA・蛋白尿・血圧で評価）。"
+                "② 食事療法: 低リン・適量蛋白・高EPA/DHA処方食（Hill's k/d、Royal Canin Renal、Purina NF）—最重要。"
+                "③ リン制限: SDMA上昇・高P血症時にPバインダー（aluminum hydroxide 30-100 mg/kg PO q12h、"
+                "lanthanum carbonate）追加—血清P 2-5 mg/dL目標。"
+                "④ 高血圧管理: 収縮期>160 mmHgでアムロジピン 0.625-1.25 mg/cat PO q24h、目標<140 mmHg。"
+                "⑤ 蛋白尿管理: UPC>0.4で benazepril 0.25-0.5 mg/kg PO q24h または telmisartan 1 mg/kg PO q24h。"
+                "⑥ 貧血管理: HCT<20% でダルベポエチンα 0.45-1 μg/kg SC q週、鉄補給。"
+                "⑦ 輸液（脱水・高窒素血症）: 乳酸リンゲルSC 100-150 mL/cat 1-7日毎（在宅可）。"
+                "⑧ 制吐: マロピタント 1 mg/kg PO/SC q24h、ondansetron 0.5-1 mg/kg PO q12h。"
+                "⑨ K補給: 低K血症時 potassium gluconate 2-4 mEq/cat PO q12h。"
+                "⑩ ⚠ NSAIDs回避、感染症スクリーニング、定期再評価 q1-3ヶ月。"
+                "IRIS 2023 Staging Guidelines, ISFM 2016 CKD Consensus。"
+            ),
+            "prognosis_ja": (
+                "IRIS stage 1-2: MST 数年。Stage 3: MST 1-2年。Stage 4: MST 数ヶ月。早期診断・適切な管理で生存延長。"
+            ),
+        }
+    if species == "dog":
+        return {
+            "treatment_ja": (
+                "犬慢性腎臓病の治療: ① IRIS病期分類（SDMA・クレアチニン・蛋白尿・血圧）。"
+                "② 食事療法: 低リン・適量蛋白・高EPA/DHA（Hill's k/d、Royal Canin Renal、Purina NF）。"
+                "③ Pバインダー: aluminum hydroxide 30-100 mg/kg PO q12h、目標 P 2.5-4.5 mg/dL。"
+                "④ 高血圧: アムロジピン 0.1-0.4 mg/kg PO q24h、目標<160 mmHg。"
+                "⑤ 蛋白尿: ベナゼプリル 0.25-0.5 mg/kg PO q24h、telmisartan 1 mg/kg PO q24h。"
+                "⑥ 貧血: ダルベポエチンα 0.45 μg/kg SC q週、鉄補給。"
+                "⑦ 輸液: 在宅SCまたは入院IV、症状による。"
+                "⑧ 制吐: マロピタント 1-2 mg/kg PO/SC q24h、ondansetron 0.5-1 mg/kg PO q12h。"
+                "⑨ 定期再評価 q1-3ヶ月。"
+                "IRIS 2023 Staging, AAHA 2013 CKD Guidelines。"
+            ),
+            "prognosis_ja": ("IRIS病期で決まる。早期介入で生存延長—stage 4は緩和ケア中心。"),
+        }
+    if species in SMALL_MAMMAL:
+        return {
+            "treatment_ja": (
+                f"{species_ja}慢性腎臓病の治療: ① 評価—BUN・クレアチニン・SDMA・尿比重・尿蛋白、超音波（腎構造）。"
+                "② 食事療法: 低タンパク・低リン処方食（種別、入手可能性で）、新鮮野菜中心（草食種）。"
+                "③ Pバインダー: aluminum hydroxide 30-100 mg/kg PO q12h（必要時）。"
+                "④ 輸液: SC 80-100 mL/kg/日（脱水時）—在宅維持輸液有効。"
+                "⑤ 高血圧（測定困難だが）: アムロジピン 0.1-0.2 mg/kg PO q24h。"
+                "⑥ 蛋白尿: ベナゼプリル 0.1-0.25 mg/kg PO q24h（種別データ限定的）。"
+                "⑦ 制吐: メトクロプラミド 0.5 mg/kg SC/PO q6-8h、マロピタント（試験的）。"
+                "⑧ ⚠ NSAIDs回避、定期モニタ q1-3ヶ月。" + _small_mammal_supportive(species)
+            ),
+            "prognosis_ja": "進行性—症状軽減・QOL維持が目標。",
+        }
+    if species in AVIAN:
+        return {
+            "treatment_ja": (
+                f"{species_ja}慢性腎臓病の治療: ① 鳥類腎症は痛風合併が多い—評価は尿酸・血漿生化学・腎超音波。"
+                "② 輸液: 50-100 mL/kg/日 SC/IO—脱水補正＋尿酸排泄促進。"
+                "③ 食事: 低タンパク（12-14%）、水分豊富（果物・野菜）、ペレット主体。"
+                "④ アロプリノール（痛風合併時）10-30 mg/kg PO q12-24h（種別注意）。"
+                "⑤ Pバインダー: aluminum hydroxide 30-100 mg/kg PO q12h（必要時）。"
+                "⑥ ⚠ ビタミンA過剰、腎毒性薬剤（aminoglycoside、NSAIDs長期）回避。" + _avian_supportive(species)
+            ),
+            "prognosis_ja": "進行性—早期介入で延命可能。",
+        }
+    if species in REPTILE or species == "amphibian":
+        return {
+            "treatment_ja": (
+                f"{species_ja}慢性腎症の治療: ① 爬虫類腎症は脱水・高タンパク食・痛風と関連—血漿尿酸・BUN・超音波で評価。"
+                "② 輸液: ノルモソルR 25-30 mL/kg/日 SC/ICe（脱水補正・尿酸排泄）、温浴 q24h。"
+                "③ 食事: 低タンパク化（草食種は野菜中心、肉食種は低リン）、水分豊富。"
+                "④ アロプリノール 10-20 mg/kg PO q24h（痛風合併時）。"
+                "⑤ POTZ維持、湿度適正化。"
+                "⑥ ⚠ NSAIDs長期回避（腎毒性）、aminoglycoside慎重投与。" + _reptile_supportive(species)
+            ),
+            "prognosis_ja": "進行性—早期発見・脱水管理で予後改善。",
+        }
+    return None
+
+
+def gen_chlamydiosis(species: str, name_ja: str) -> Optional[dict]:
+    species_ja = _species_label_ja_local(species)
+    if species in AVIAN:
+        return {
+            "treatment_ja": (
+                f"{species_ja}クラミジア症（オウム病、Chlamydia psittaci）: ① ⚠人獣共通—取扱注意（人psittacosis原因）。"
+                "② 確定: PCR（咽頭・総排泄腔スワブ）、IFA、ELISA、培養（困難）。"
+                "③ 第一選択: ドキシサイクリン 25-35 mg/kg PO q24h × 45日—長期治療必須。"
+                "経口困難例はdoxycycline hyclate IM 75-100 mg/kg q5-7日 × 6-7回。"
+                "④ 代替: アジスロマイシン 40 mg/kg PO q48h × 45日、エンロフロキサシン 15 mg/kg PO q12h × 21日（軽症）。"
+                "⑤ 支持療法: 強制給餌（Emeraid Carnivore/Omnivore）、輸液 50-100 mL/kg/日 SC、保温30-32℃。"
+                "⑥ 環境消毒: 1:1000ベンザルコニウム塩化、3%ホルマリン、quaternary ammonium、5%漂白剤。"
+                "⑦ 隔離: 治療中・治療後2ヶ月は他鳥との接触回避。"
+                "⑧ 飼主教育: 人感染リスク（インフルエンザ様症状で受診時にpsittacosis申告）、PPE使用。"
+                "⑨ 都道府県保健所への届出（家畜伝染病予防法）。"
+                "Compendium of Measures to Control C. psittaci, CDC/NASPHV 2017。" + _avian_supportive(species)
+            ),
+            "prognosis_ja": (
+                "適切な抗菌薬治療（45日）で予後良好。"
+                "重度感染（敗血症・肝障害）は要警戒。再発リスクあり、ストレス回避必須。"
+            ),
+        }
+    if species in DOG_CAT:
+        return {
+            "treatment_ja": (
+                f"{species_ja}クラミジア感染症: ① 病原体—C. felis（猫）、C. abortus（人獣共通リスク）。"
+                "② 主に結膜炎（猫）、流産（C. abortus妊娠犬）として発症。"
+                "③ 確定: 結膜PCR、IFA、ELISA、培養。"
+                "④ 第一選択: ドキシサイクリン 5-10 mg/kg PO q24h × 21-28日（猫の結膜炎は最低14日）、"
+                "結膜病変は局所抗菌点眼（オフロキサシン）。"
+                "⑤ 代替: アジスロマイシン 5-10 mg/kg PO q24h（パルス療法も可）。"
+                "⑥ 妊娠犬: テトラサイクリン系は催奇性—erythromycin 10-20 mg/kg PO q8h × 14日に変更。"
+                "⑦ ⚠人獣共通—特にC. abortus（妊婦の流産リスク）、衛生管理徹底。"
+                "ABCD 2015 Chlamydiosis Guidelines（猫）。"
+            ),
+            "prognosis_ja": "早期治療で予後良好。慢性再発例は長期管理が必要。",
+        }
+    if species in SMALL_MAMMAL:
+        return {
+            "treatment_ja": (
+                f"{species_ja}クラミジア症: ① モルモット・ウサギ・ハムスター等で結膜炎・呼吸器症状—Chlamydia psittaci/caviae。"
+                "② 確定: 結膜・呼吸器スワブPCR、IFA。"
+                "③ 抗菌薬: ドキシサイクリン 2.5-5 mg/kg PO q12h × 14-21日"
+                "（ウサギは消化器副作用注意、enrofloxacin 5-10 mg/kg PO q12h 代替）。"
+                "④ 結膜局所: ofloxacin/tetracycline点眼 q6h。"
+                "⑤ ⚠人獣共通—衛生管理徹底。" + _small_mammal_supportive(species)
+            ),
+            "prognosis_ja": "早期治療で予後良好。",
+        }
+    return None
+
+
+def gen_aspergillosis(species: str, name_ja: str) -> Optional[dict]:
+    species_ja = _species_label_ja_local(species)
+    if species in AVIAN:
+        return {
+            "treatment_ja": (
+                f"{species_ja}アスペルギルス症: ① 病原体—Aspergillus fumigatus（最多）、A. flavus、A. niger等の侵襲性真菌感染。"
+                "免疫抑制・大気質悪化（カビ含むハウスダスト・基質）・ストレスで発症。"
+                "② 確定: 内視鏡＋気嚢病変生検（gold standard）、X線/CT（肉芽腫陰影）、"
+                "PCR、IgY ELISA、galactomannan ELISA（補助的）。"
+                "③ 抗真菌薬（長期治療4-12ヶ月）: イトラコナゾール 5-10 mg/kg PO q12-24h（最も使用）、"
+                "voriconazole 12-18 mg/kg PO q12h（重症例、種別差大—African Grayは要注意）、"
+                "terbinafine 10-15 mg/kg PO q12-24h（補助）、"
+                "amphotericin B 1-1.5 mg/kg IV/IT q24h（重症例）。"
+                "④ 局所治療: 気管内ネブライザー（amphotericin B 1 mg/mL × 15分 q24h × 7日）、"
+                "内視鏡下病変直接注入。"
+                "⑤ 環境管理: HEPAフィルター、基質変更（カビ含むウッドチップ回避、紙系基質推奨）、"
+                "湿度・換気適正化、定期的清掃消毒。"
+                "⑥ 免疫サポート: 栄養改善（ペレット・新鮮野菜・果物）、ストレス除去、ビタミンA補給。"
+                "⑦ ⚠肝酵素モニタ必須（アゾール系の肝毒性）—q4-6週。"
+                "Carpenter Exotic Formulary 6th ed、Avian Medicine Principles & Application。"
+                + _avian_supportive(species)
+            ),
+            "prognosis_ja": ("早期発見＋長期抗真菌治療で予後改善。重度気嚢病変・全身性は予後不良（>50%死亡）。"),
+        }
+    if species in REPTILE or species == "amphibian":
+        return {
+            "treatment_ja": (
+                f"{species_ja}アスペルギルス症: ① 不適切な飼育環境（高湿度・換気不良・カビ基質）で発症—呼吸器・皮膚感染。"
+                "② 確定: 病変生検＋培養＋PCR、X線/CT。"
+                "③ 抗真菌薬: イトラコナゾール 5 mg/kg PO q24h × 4-8週、"
+                "voriconazole 10 mg/kg PO q24h、"
+                "terbinafine 25 mg/kg PO q24h（補助）。"
+                "④ 局所: 病変外科切除/デブリードマン、外用クロトリマゾール。"
+                "⑤ 環境管理: 換気・湿度適正化、基質変更、清掃。"
+                "⑥ 肝酵素モニタ。" + _reptile_supportive(species)
+            ),
+            "prognosis_ja": "早期治療で予後改善。",
+        }
+    if species in DOG_CAT:
+        return {
+            "treatment_ja": (
+                f"{species_ja}アスペルギルス症: ① 病型—鼻腔型（最多、ドリコセファリック種好発）、"
+                "播種型（免疫抑制例、A. terreus）。"
+                "② 確定: 鼻腔内視鏡＋鼻腔粘膜生検＋培養、PCR、galactomannan ELISA、CT/MRI。"
+                "③ 鼻腔型治療: 経鼻クロトリマゾール 1% 50-60 mL × 60分 注入（全身麻酔下）、"
+                "1-2回で奏効率70-80%。"
+                "④ 全身治療: イトラコナゾール 5-10 mg/kg PO q12-24h × 4-12週、"
+                "voriconazole 4-5 mg/kg PO q12h（耐性例）、肝酵素モニタ。"
+                "⑤ 播種型（重症）: amphotericin B+ posaconazole 経口、長期治療、予後不良。"
+                "⑥ 鼻孔潰瘍管理、二次感染予防。"
+                "AAHA Infectious Disease Guidelines。"
+            ),
+            "prognosis_ja": "鼻腔型は局所治療で予後良好。播種型は予後不良。",
+        }
+    return None
+
+
+def gen_cardiomyopathy(species: str, name_ja: str) -> Optional[dict]:
+    species_ja = _species_label_ja_local(species)
+    if species == "cat":
+        return {
+            "treatment_ja": (
+                "猫心筋症の治療: ① 病型—HCM（最多 14.7%、Ragdoll/MCO好発）、RCM、DCM、ARVC、unclassified。"
+                "② 確定: 心エコー（左室壁厚>6mm でHCM）、NT-proBNP（>270 pmol/L 心疾患示唆）、Tn-I。"
+                "③ 無症候期: 経過観察＋6-12ヶ月毎心エコー。"
+                "④ 心不全症状（うっ血性心不全）: フロセミド 1-4 mg/kg PO/IM/SC q8-12h（個別調整）、"
+                "ピモベンダン 0.5-1 mg/kg PO q12h（収縮機能低下時）、ベナゼプリル 0.25-0.5 mg/kg PO q24h。"
+                "⑤ 血栓予防（左房拡張>15-16mm、SEC、ATE既往）: クロピドグレル 18.75 mg/cat PO q24h"
+                "（FATCAT試験で有効）、リバロキサバン 2.5 mg/cat PO q24h（補助）。"
+                "⑥ HCMの不整脈/頻脈: アテノロール 6.25-12.5 mg/cat PO q12-24h、ジルチアゼム 7.5 mg/cat PO q8h。"
+                "⑦ ATE（大動脈血栓塞栓症）: 緊急疼痛管理（ブプレノルフィン）、抗凝固（dalteparin 100-150 IU/kg SC q12h）、"
+                "tPA は限定的—温熱保護、リハビリ。"
+                "ACVIM 2020 HCM Consensus、AAFP 2024。"
+            ),
+            "prognosis_ja": (
+                "無症候HCM: MST 5+年。心不全発症: MST 9-18ヶ月。ATE発症: MST 2-12ヶ月。"
+                "早期発見・薬物療法・血栓予防で生存延長。"
+            ),
+        }
+    if species == "dog":
+        return {
+            "treatment_ja": (
+                "犬心筋症（DCM主）の治療: ① 病型—DCM（ドーベルマン・大型犬好発）、"
+                "拡張型ARVC（ボクサー）、栄養関連（grain-free食、タウリン欠乏）。"
+                "② 確定: 心エコー（拡張+収縮機能低下）、NT-proBNP、Tn-I、ホルター心電図。"
+                "③ Occult期: ピモベンダン 0.25-0.5 mg/kg PO q12h（PROTECT試験）、ベナゼプリル 0.25-0.5 mg/kg PO q24h。"
+                "④ うっ血性心不全: ピモベンダン+フロセミド 1-4 mg/kg PO q8-12h+ベナゼプリル、"
+                "スピロノラクトン 1-2 mg/kg PO q12h（補助）。"
+                "⑤ 心房細動: ジルチアゼム 1.5-3 mg/kg PO q8h、ジゴキシン 0.003-0.005 mg/kg PO q12h（血中濃度0.5-1 ng/mL）。"
+                "⑥ 心室性不整脈: ソタロール 1-3 mg/kg PO q12h、メキシレチン 5-8 mg/kg PO q8h。"
+                "⑦ 栄養性DCM: タウリン補給 500-1000 mg PO q12h、L-カルニチン 50-100 mg/kg PO q8h、"
+                "grain-free食の中止。"
+                "ACVIM 2009 DCM Consensus、Adin 2018 grain-free。"
+            ),
+            "prognosis_ja": ("Occult期: MST 2-3年。CHF発症: MST 6-12ヶ月。栄養性で食事改善+タウリン補給は予後改善。"),
+        }
+    if species == "ferret":
+        return {
+            "treatment_ja": (
+                "フェレット心筋症の治療: ① 病型—DCM（最多、中-高齢）、HCM稀。"
+                "② 確定: 心エコー、CBC・生化学、X線（肺水腫評価）、心電図。"
+                "③ うっ血性心不全: フロセミド 1-4 mg/kg PO q12h、ピモベンダン 0.25-0.5 mg/kg PO q12h、"
+                "ベナゼプリル 0.25-0.5 mg/kg PO q24h。"
+                "④ タウリン補給 250 mg PO q12-24h（栄養性疑い）。"
+                "⑤ 高血圧管理: アムロジピン 0.625-1.25 mg PO q24h。"
+                "⑥ モニタリング: 体重、呼吸数、エネルギー、食欲、定期心エコー q3-6ヶ月。"
+                + _small_mammal_supportive(species)
+            ),
+            "prognosis_ja": "DCMは進行性—薬物療法で延命可能、MST 6-12ヶ月。",
+        }
+    if species in AVIAN:
+        return {
+            "treatment_ja": (
+                f"{species_ja}心筋症: ① 鳥類—アテローム性心臓病・DCM・心嚢液貯留が多い。"
+                "好発: アフリカン・グレイ、Amazon、コザクラ等。"
+                "② 確定: 心エコー（経胸壁または経静脈）、X線（心拡大）、ECG、生化学（Tn-I）。"
+                "③ 治療: フロセミド 1-2 mg/kg PO/IM q12h、エナラプリル 1.25-2.5 mg/kg PO q24h、"
+                "ピモベンダン 0.25 mg/kg PO q12h（試験的—鳥種別データ限定）。"
+                "④ アテローム関連: 低脂肪食、L-カルニチン、運動増加、ストレス除去。"
+                "⑤ 心嚢液貯留: 超音波ガイド穿刺、原因治療。" + _avian_supportive(species)
+            ),
+            "prognosis_ja": "進行性—早期介入で延命可能。",
+        }
+    if species in REPTILE or species == "amphibian":
+        return {
+            "treatment_ja": (
+                f"{species_ja}心筋症: ① 爬虫類の心筋症は稀—多くは慢性脱水・寄生虫・腫瘍性の二次性。"
+                "② 確定: 心エコー、X線、CBC・生化学。"
+                "③ 治療: フロセミド 2-5 mg/kg IM q12-24h（短期）、エナラプリル 0.25-0.5 mg/kg PO q24h（試験的）。"
+                "④ POTZ維持、ストレス除去、栄養支持。" + _reptile_supportive(species)
+            ),
+            "prognosis_ja": "進行性—緩和ケア中心が現実的。",
+        }
+    if species == "horse":
+        return {
+            "treatment_ja": (
+                "馬心筋症の治療: ① 病型—idiopathic（稀）、毒物（fumonisin、白カビ、ライグラス）、"
+                "感染（EHV、ボルナ）、ビタミンE/セレン欠乏。"
+                "② 確定: 心エコー、Tn-I、ECG、運動負荷検査、心臓MRI。"
+                "③ 心不全: フロセミド 1-3 mg/kg IV/PO q12h、ジゴキシン 0.0022-0.0044 mg/kg PO q12h（モニタ）、"
+                "エナラプリル 0.5 mg/kg PO q12-24h。"
+                "④ ビタミンE/セレン補給（欠乏例）: VitE 5000 IU PO q24h、Se 0.06 mg/kg。"
+                "⑤ 不整脈管理: キニジン（心房細動）、リドカイン（心室性）。"
+                "⑥ 運動制限、ストレス除去。" + _horse_supportive(species)
+            ),
+            "prognosis_ja": "原因による—栄養性は治療可能、特発性は予後不良。",
+        }
+    return None
+
+
+# ============================================================================
 # Endocrine "Others" multi-species placeholder (replaces 「種特異的治療が必要」 template)
 # ============================================================================
 
@@ -3208,6 +3785,42 @@ DISEASE_GENERATORS: list[tuple[str, Callable[[str, str], Optional[dict]]]] = [
     ("Drowning", gen_drowning),
     ("ヒル寄生", gen_leech_infestation),
     ("Leech", gen_leech_infestation),
+    # === Phase 4 — high-frequency common conditions ===
+    # Dehydration (universal supportive care)
+    ("脱水", gen_dehydration),
+    ("Dehydration", gen_dehydration),
+    # Seizures (emergency)
+    ("痙攣", gen_seizures),
+    ("発作", gen_seizures),
+    ("てんかん", gen_seizures),
+    ("Seizure", gen_seizures),
+    # Hypothermia (emergency)
+    ("低体温", gen_hypothermia),
+    ("Hypothermia", gen_hypothermia),
+    # Constipation / GI stasis
+    ("便秘", gen_constipation),
+    ("GI stasis", gen_constipation),
+    ("消化管うっ滞", gen_constipation),
+    ("Constipation", gen_constipation),
+    ("巨大結腸", gen_constipation),
+    # Chronic kidney disease
+    ("慢性腎臓病", gen_chronic_kidney_disease),
+    ("慢性腎症", gen_chronic_kidney_disease),
+    ("CKD", gen_chronic_kidney_disease),
+    ("Chronic Kidney", gen_chronic_kidney_disease),
+    # Chlamydiosis
+    ("クラミジア", gen_chlamydiosis),
+    ("オウム病", gen_chlamydiosis),
+    ("Chlamydia", gen_chlamydiosis),
+    ("Psittacosis", gen_chlamydiosis),
+    # Aspergillosis
+    ("アスペルギルス", gen_aspergillosis),
+    ("Aspergillus", gen_aspergillosis),
+    # Cardiomyopathy
+    ("心筋症", gen_cardiomyopathy),
+    ("Cardiomyopathy", gen_cardiomyopathy),
+    ("HCM", gen_cardiomyopathy),
+    ("DCM", gen_cardiomyopathy),
 ]
 
 
@@ -3252,6 +3865,25 @@ _GENERATOR_EXCLUSIONS: dict[str, list[str]] = {
     "筋萎縮": ["筋肥大"],
     # Cachexia generic — narrow to wasting context
     "悪液質": [],
+    # Constipation — don't fire on neoplasia/dysplasia (similar kanji)
+    "便秘": [],
+    "GI stasis": [],
+    # Hypothermia must not catch "高体温" (hyperthermia)
+    "低体温": ["高体温"],
+    # Seizures — narrow context; don't catch "neuromuscular twitch" or epilepsy variants
+    "痙攣": ["子宮"],  # uterine torsion uses 子宮 not 痙攣
+    "発作": ["心房", "心室"],  # avoid atrial/ventricular tachycardia which use 発作
+    # CKD must not catch acute kidney injury
+    "慢性腎臓病": ["急性"],
+    "慢性腎症": ["急性"],
+    # Chlamydia generic
+    "クラミジア": [],
+    # Aspergillosis don't catch generic "fungal"
+    "アスペルギルス": [],
+    # Cardiomyopathy must not catch pericarditis/endocarditis (different diseases)
+    "心筋症": ["心膜", "心内膜炎", "心筋炎"],
+    # Dehydration - narrow to actual dehydration (not "脱水酵素" etc.)
+    "脱水": ["酵素"],
 }
 
 

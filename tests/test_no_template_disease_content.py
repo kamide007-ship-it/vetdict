@@ -632,6 +632,92 @@ def test_mucormycosis_warns_azole_resistance():
         )
 
 
+def test_cat_ckd_mentions_iris_staging():
+    """Cat CKD entries must reference IRIS staging system (standard of care)."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    cat_ckd = [e for e in entries if e.get("species") == "Cat" and "慢性腎臓病" in (e.get("name_ja", "") or "")]
+    if not cat_ckd:
+        pytest.skip("No cat CKD entries")
+    for entry in cat_ckd:
+        tx = entry.get("treatment_ja", "") or ""
+        if len(tx) < 100:
+            continue
+        assert "IRIS" in tx or "病期" in tx, f"Cat CKD missing IRIS/staging reference: '{tx[:120]}'"
+
+
+def test_cat_hcm_mentions_thromboprophylaxis():
+    """Cat HCM entries must reference echocardiography, beta-blocker, or thromboprophylaxis (ATE risk)."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    cat_hcm = [
+        e
+        for e in entries
+        if e.get("species") == "Cat"
+        and ("HCM" in (e.get("name_ja", "") or "") or "肥大型心筋症" in (e.get("name_ja", "") or ""))
+    ]
+    if not cat_hcm:
+        pytest.skip("No cat HCM entries")
+    for entry in cat_hcm:
+        tx = entry.get("treatment_ja", "") or ""
+        if len(tx) < 100:
+            continue
+        assert any(kw in tx for kw in ("心エコー", "アテノロール", "クロピドグレル", "ピモベンダン", "ATE")), (
+            f"Cat HCM missing standard-of-care markers: '{tx[:160]}'"
+        )
+
+
+def test_avian_chlamydiosis_mentions_doxycycline_and_zoonosis():
+    """Avian chlamydiosis (psittacosis) must mention doxycycline + zoonotic warning."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    avian_species = {"Bird", "Parakeet", "Parrot"}
+    chlamydia = [
+        e
+        for e in entries
+        if e.get("species") in avian_species
+        and ("クラミジア" in (e.get("name_ja", "") or "") or "オウム病" in (e.get("name_ja", "") or ""))
+    ]
+    if not chlamydia:
+        pytest.skip("No avian chlamydiosis entries")
+    for entry in chlamydia:
+        tx = entry.get("treatment_ja", "") or ""
+        if len(tx) < 100:
+            continue
+        assert "ドキシサイクリン" in tx or "アジスロマイシン" in tx, (
+            f"Avian chlamydiosis missing antibiotic: '{tx[:120]}'"
+        )
+        assert any(kw in tx for kw in ("人獣共通", "人感染", "psittacosis", "zoonotic", "PPE")), (
+            f"Avian chlamydiosis missing zoonotic warning: '{tx[:160]}'"
+        )
+
+
+def test_rabbit_gi_stasis_warns_about_oral_betalactam():
+    """Rabbit GI stasis/constipation must warn about oral β-lactam contraindication."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    rabbit_gi = [
+        e
+        for e in entries
+        if e.get("species") == "Rabbit"
+        and any(kw in (e.get("name_ja", "") or "") for kw in ("GI stasis", "消化管うっ滞", "便秘"))
+    ]
+    if not rabbit_gi:
+        pytest.skip("No rabbit GI stasis entries")
+    for entry in rabbit_gi:
+        tx = entry.get("treatment_ja", "") or ""
+        if len(tx) < 200:
+            continue
+        # Must mention Critical Care or strong supportive treatment
+        assert any(kw in tx for kw in ("Critical Care", "シリンジ", "強制給餌", "シサプリド", "ブプレノルフィン")), (
+            f"Rabbit GI stasis missing standard-of-care: '{tx[:160]}'"
+        )
+
+
 def test_streptococcus_warns_pcn_contraindication_in_herbivores():
     """Streptococcus in guinea pig must warn about oral β-lactam contraindication."""
     entries = _load_json_entries()

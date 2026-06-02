@@ -1235,7 +1235,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Progressive loss of functional nephrons impairs glomerular filtration, tubular reabsorption, and endocrine function. Uremic toxin accumulation and fluid-electrolyte imbalance lead to systemic complications.",
         "pathophysiology_ja": "ハリネズミの泌尿器系組織における進行性変性変化は、細胞構造と機能の漸進的喪失を伴う。酸化ストレス・慢性炎症・細胞老化・組織修復障害が関与する。加齢変化・累積的環境侵襲・遺伝的素因が疾患進行に寄与する。飼育管理と食事要因が変性疾患を悪化させうる。",
         "treatment": "Treatment includes fluid therapy, dietary modification (reduced protein/phosphorus), phosphate binders, ACE inhibitors, and management of secondary complications including hypertension and anemia.",
-        "treatment_ja": "ハリネズミにおける慢性腎臓病の治療: 尿検査・培養で原因特定。感染性は培養感受性に基づく抗菌薬。結石は種類に応じ溶解食または外科。輸液で脱水補正。疼痛管理。飲水量増加策。",
+        "treatment_ja": "ハリネズミ慢性腎臓病の治療: ① 評価—BUN・クレアチニン・SDMA・尿比重・尿蛋白、超音波（腎構造）。② 食事療法: 低タンパク・低リン処方食（種別、入手可能性で）、新鮮野菜中心（草食種）。③ Pバインダー: aluminum hydroxide 30-100 mg/kg PO q12h（必要時）。④ 輸液: SC 80-100 mL/kg/日（脱水時）—在宅維持輸液有効。⑤ 高血圧（測定困難だが）: アムロジピン 0.1-0.2 mg/kg PO q24h。⑥ 蛋白尿: ベナゼプリル 0.1-0.25 mg/kg PO q24h（種別データ限定的）。⑦ 制吐: メトクロプラミド 0.5 mg/kg SC/PO q6-8h、マロピタント（試験的）。⑧ ⚠ NSAIDs回避、定期モニタ q1-3ヶ月。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes ensuring adequate hydration, balanced diet, regular health screening, and avoiding nephrotoxic substances.",
         "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
         "prognosis": "Prognosis is guarded to poor long-term. Disease progression can be slowed with appropriate management, but CKD is ultimately irreversible.",
