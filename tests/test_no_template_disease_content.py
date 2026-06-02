@@ -435,3 +435,221 @@ def test_vestibular_disease_is_species_specific():
         f"Only {len(distinct_tx)} distinct vestibular treatments for {len(vest)} entries — "
         f"likely a template still in use."
     )
+
+
+# ---------------------------------------------------------------------------
+# 2026-06 phase-3 regression — neoplasia + nutritional + exotic syndromes
+# ---------------------------------------------------------------------------
+
+
+def _find_by_substring(entries, name_substr):
+    return [e for e in entries if name_substr in (e.get("name_ja", "") or "")]
+
+
+def test_neoplasia_entries_are_species_specific():
+    """Lipoma, Melanoma, Leukemia/Lymphoma must have species-tailored content.
+
+    Each species needs different biology, surgical considerations, and prognosis.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    for label, substr in [
+        ("Lipoma", "脂肪腫"),
+        ("Melanoma", "メラノーマ"),
+        ("Leukemia", "白血病"),
+        ("Lymphoma", "リンパ腫"),
+    ]:
+        matches = _find_by_substring(entries, substr)
+        if len(matches) < 3:
+            continue
+        short = [e for e in matches if len(e.get("treatment_ja", "") or "") < 100]
+        assert not short, (
+            f"{label}: {len(short)} entries still have <100c treatment_ja. "
+            f"First: [{short[0].get('species')}] {short[0].get('name_ja')}: "
+            f"'{short[0].get('treatment_ja', '')[:80]}'"
+        )
+
+
+def test_avian_gout_mentions_allopurinol():
+    """Avian gout entries must mention allopurinol or fluid therapy (standard of care)."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    avian_species = {"Bird", "Parakeet", "Parrot"}
+    gout_avian = [e for e in entries if "痛風" in (e.get("name_ja", "") or "") and e.get("species") in avian_species]
+    if not gout_avian:
+        pytest.skip("No avian gout entries found")
+    for entry in gout_avian:
+        tx = entry.get("treatment_ja", "") or ""
+        assert any(kw in tx for kw in ("アロプリノール", "ベンズブロマロン", "輸液")), (
+            f"Avian gout missing standard-of-care: [{entry.get('species')}] {entry.get('name_ja')}: '{tx[:120]}'"
+        )
+
+
+def test_nshp_mbd_mentions_calcium_uvb():
+    """Nutritional Secondary Hyperparathyroidism / MBD must mention Ca + VitD3 + UVB."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    for substr in ("栄養性二次性副甲状腺機能亢進症", "栄養性骨異栄養"):
+        matches = _find_by_substring(entries, substr)
+        for entry in matches:
+            tx = entry.get("treatment_ja", "") or ""
+            if len(tx) < 100:
+                # Allow short entries from species without specific generator (e.g. Exotic Other)
+                continue
+            assert any(kw in tx for kw in ("カルシウム", "Ca", "グルコン酸")), (
+                f"NSHP/MBD missing calcium reference: [{entry.get('species')}] {entry.get('name_ja')}: '{tx[:120]}'"
+            )
+            assert any(kw in tx for kw in ("VitD3", "ビタミンD3", "D3", "UVB", "UV-B")), (
+                f"NSHP/MBD missing VitD3/UVB reference: [{entry.get('species')}] {entry.get('name_ja')}: '{tx[:120]}'"
+            )
+
+
+def test_vitamin_deficiency_excess_correctly_distinguished():
+    """VitA/D/E excess vs deficiency content must not be swapped.
+
+    Excess entries should mention 中止 (stop) or 過剰 (excess); deficiency entries
+    should mention 補給 (supplementation).
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    # Excess entries must contain "中止" or "過剰" — they're about stopping supplementation
+    for substr in ("ビタミンA過剰", "ビタミンD3過剰"):
+        for entry in _find_by_substring(entries, substr):
+            tx = entry.get("treatment_ja", "") or ""
+            if len(tx) < 80:
+                continue
+            assert any(kw in tx for kw in ("中止", "停止", "過剰")), (
+                f"{substr} missing 中止/過剰 reference: [{entry.get('species')}] {entry.get('name_ja')}: '{tx[:120]}'"
+            )
+            # Must NOT recommend supplementation
+            assert "補給を増やす" not in tx, f"{substr} incorrectly recommends supplementation: '{tx[:120]}'"
+
+
+def test_iron_storage_disease_mentions_phlebotomy_or_deferoxamine():
+    """Iron storage disease entries (in species where it's clinically meaningful)
+    must mention bloodletting or deferoxamine. The 'Exotic Other' catch-all species
+    is exempt because it lacks species-specific protocols."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    matches = _find_by_substring(entries, "鉄蓄積")
+    exempt_species = {"Exotic Other"}
+    for entry in matches:
+        if entry.get("species") in exempt_species:
+            continue
+        tx = entry.get("treatment_ja", "") or ""
+        if len(tx) < 80:
+            continue
+        assert any(kw in tx for kw in ("瀉血", "デフェロキサミン", "鉄キレート", "低鉄")), (
+            f"Iron storage missing treatment markers: [{entry.get('species')}] {entry.get('name_ja')}: '{tx[:120]}'"
+        )
+
+
+def test_thiamine_deficiency_mentions_b1():
+    """Thiamine deficiency entries must mention thiamine/B1 supplementation."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    matches = _find_by_substring(entries, "チアミン欠乏")
+    for entry in matches:
+        tx = entry.get("treatment_ja", "") or ""
+        if len(tx) < 80:
+            continue
+        assert any(kw in tx for kw in ("チアミン", "ビタミンB1", "B1", "B群")), (
+            f"Thiamine deficiency missing B1 reference: [{entry.get('species')}] {entry.get('name_ja')}: '{tx[:120]}'"
+        )
+
+
+def test_reptile_syndromes_mention_potz():
+    """Reptile-specific syndromes (peritonitis, stress, drowning) must reference
+    thermal management — either POTZ, 温度, or 温浴 (warm-water bath, which is
+    a clinically equivalent thermal-support intervention)."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    reptile_sp = {"Reptile", "Tortoise", "Snake", "Lizard", "Amphibian"}
+    targets = [
+        "腹膜炎",
+        "ストレス症候群",
+        "濾胞停滞",
+        "腹壁ヘルニア",
+        "アナサルカ",
+        "全身浮腫",
+        "溺水",
+    ]
+    thermal_keywords = ("POTZ", "温熱", "保温", "種別温度", "温度勾配", "温浴", "加温", "温度")
+    # Amphibians use water quality as their primary husbandry intervention rather than
+    # thermal management; "水質" / "清潔な水" are also acceptable.
+    amphib_extra = ("水質", "清潔な水", "湿潤", "塩浴", "皮膚湿潤")
+    for substr in targets:
+        matches = [e for e in _find_by_substring(entries, substr) if e.get("species") in reptile_sp]
+        for entry in matches:
+            tx = entry.get("treatment_ja", "") or ""
+            if len(tx) < 100:
+                continue
+            keywords = thermal_keywords
+            if entry.get("species") == "Amphibian":
+                keywords = thermal_keywords + amphib_extra
+            assert any(kw in tx for kw in keywords), (
+                f"Reptile syndrome ({substr}) missing thermal/environmental management: [{entry.get('species')}] "
+                f"{entry.get('name_ja')}: '{tx[:140]}'"
+            )
+
+
+def test_myiasis_mentions_larva_removal_or_ivermectin():
+    """Myiasis (fly larvae infestation) must mention larva removal or ivermectin."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    matches = _find_by_substring(entries, "蝿蛆")
+    for entry in matches:
+        tx = entry.get("treatment_ja", "") or ""
+        if len(tx) < 80:
+            continue
+        assert any(kw in tx for kw in ("除去", "イベルメクチン", "ivermectin", "蛆")), (
+            f"Myiasis missing removal/ivermectin: [{entry.get('species')}] {entry.get('name_ja')}: '{tx[:120]}'"
+        )
+
+
+def test_mucormycosis_warns_azole_resistance():
+    """Mucormycosis entries must warn about azole resistance (Mucorales are azole-resistant)."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    matches = _find_by_substring(entries, "ムコール")
+    for entry in matches:
+        tx = entry.get("treatment_ja", "") or ""
+        if len(tx) < 100:
+            continue
+        # Must mention amphotericin B or warning about azoles
+        assert any(kw in tx for kw in ("アムホテリシン", "amphotericin", "アゾール")), (
+            f"Mucormycosis missing amphotericin/azole-warning: [{entry.get('species')}] "
+            f"{entry.get('name_ja')}: '{tx[:120]}'"
+        )
+
+
+def test_streptococcus_warns_pcn_contraindication_in_herbivores():
+    """Streptococcus in guinea pig must warn about oral β-lactam contraindication."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    gp_strep = [
+        e
+        for e in entries
+        if ("連鎖球菌" in (e.get("name_ja", "") or "") or "レンサ球菌" in (e.get("name_ja", "") or ""))
+        and e.get("species") == "Guinea Pig"
+    ]
+    if not gp_strep:
+        pytest.skip("No guinea pig Streptococcus entries")
+    for entry in gp_strep:
+        tx = entry.get("treatment_ja", "") or ""
+        if len(tx) < 100:
+            continue
+        # Must warn about Clostridium / orals or β-lactams
+        assert any(kw in tx for kw in ("Clostridium", "禁忌", "経口", "β-ラクタム", "ペニシリン")), (
+            f"Guinea pig Streptococcus missing antibiotic-warning: '{tx[:160]}'"
+        )

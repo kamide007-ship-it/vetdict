@@ -512,7 +512,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "デグーの筋骨格系組織における炎症過程は、自然免疫および適応免疫応答の活性化を伴う。炎症性サイトカイン（TNF-α、IL-1、IL-6）とケモカインが好中球・マクロファージ・リンパ球を患部組織に動員する。持続的炎症は組織浮腫・血管透過性変化・進行性組織損傷をもたらす。デグーの生理学的特性が炎症反応パターンと治癒能力に影響しうる。",
         "treatment": "Debride necrotic tissue. Topical silver sulfadiazine. Bandage q48h. Enrofloxacin 5-10 mg/kg PO q12h x 14d if systemic. Meloxicam 0.2 mg/kg PO q24h. Improve bedding (soft, clean). Remove wire mesh floors.",
-        "treatment_ja": "デグーにおける趾瘤症（バンブルフット）の治療: 原因の鑑別（真菌培養/皮膚掻爬/細胞診）。感染性は適切な抗菌薬/抗真菌薬。アレルギー性は原因除去+対症療法。環境改善・衛生管理。",
+        "treatment_ja": "デグー足底皮膚炎（バンブルフット/Pododermatitis）: 環境改善が治療の根幹。① 環境改善: 床材を柔らかいもの（タオル、Vetbed、人工芝）に変更、湿潤回避、止まり木の太さ・形状を見直す（鳥）。② 局所処置: ぬるま湯と0.05%クロルヘキシジン洗浄 q12h、外用シルバースルファジアジン or Manuka honey、患部包帯（鳥はballブートやテープシューズ）。③ 重症例（潰瘍・骨髄炎）: 培養感受性後の全身抗菌薬—エンロフロキサシン 10-15 mg/kg PO/IM q12-24h、アモキシシリン/クラブラン酸 12.5-25 mg/kg PO q12h（鳥含む）、4-8週継続。④ 外科的デブリードマン（壊死組織除去）必要例あり。⑤ 鎮痛: メロキシカム 0.5-1 mg/kg PO q12-24h。⑥ 肥満は最大のリスク因子—体重管理（特に飛ばない大型鳥、ウサギ、モルモット）。⑦ ビタミンA欠乏（鳥）も誘因—食事改善（種子食偏重を脱却）。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
@@ -533,7 +533,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Mechanical force exceeds bone strength, causing cortical disruption. Associated soft tissue damage, hemorrhage, and inflammation follow. Healing proceeds through hematoma formation, callus development, and remodeling.",
         "pathophysiology_ja": "デグーの筋骨格系組織への外傷性損傷は、挫傷・裂傷・骨折を含む直接的な機械的組織損傷を引き起こす。急性炎症反応により浮腫・出血・疼痛が生じる。二次合併症として細菌汚染・感染・治癒遅延がある。デグーでは損傷からのストレスが追加の全身合併症を引き起こしうる。",
         "treatment": "Fracture stabilization (splinting, surgical fixation), pain management with multimodal analgesia, restricted activity, and monitoring for healing complications.",
-        "treatment_ja": "デグーにおける四肢骨折の治療: 疼痛管理。骨折は外科的固定または保存的管理（ケージレスト）。関節疾患は抗炎症薬+体重管理。リハビリテーション。",
+        "treatment_ja": "デグー四肢折: ① 小型・骨脆弱性が外科的固定を難しくする—保存的治療（副木）が多い。四肢骨折は副木またはTape splint、長管骨は外科固定検討、関節を跨ぐ場合は早期可動域訓練。② 安定化: 副木（Robert Jones、軽量副木）またはケージ制限、4-6週で癒合。③ 重症・長管骨は外科的固定（mini IM pin、外固定）—専門医推奨。④ 鎮痛: メロキシカム 0.5-1.0 mg/kg PO q12-24h、ブプレノルフィン 0.01-0.05 mg/kg SC q8-12h。⑤ 開放骨折: 培養感受性後の抗菌薬（草食種は経口β-ラクタム禁忌、エンロフロキサシン 5-10 mg/kg PO q12-24h）。⑥ ケージ制限: ステップ・ハンモック撤去、床に柔らかいパッド、シリンジ給餌で活動を最小化。⑦ 経過: X線3-4週毎、若齢は癒合早い（2-4週）。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes providing safe housing, appropriate handling techniques, supervised exercise, and removal of environmental hazards.",
         "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
         "prognosis": "Good for uncomplicated fractures with appropriate stabilization. Open fractures and those with concurrent injuries carry a more guarded prognosis.",
@@ -554,7 +554,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Mechanical force exceeds bone strength, causing cortical disruption. Associated soft tissue damage, hemorrhage, and inflammation follow. Healing proceeds through hematoma formation, callus development, and remodeling.",
         "pathophysiology_ja": "脊椎骨折はデグーにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
         "treatment": "Treatment includes fracture stabilization (splinting, pinning, or plating), pain management, restricted activity, and monitoring for healing. Physical rehabilitation may be beneficial.",
-        "treatment_ja": "デグーにおける脊椎骨折の治療は安定化、疼痛管理、創傷ケアを優先する。生命を脅かす損傷を最初に評価・対処する（気道、呼吸、循環）。種に適した鎮痛薬（NSAIDs、オピオイド、局所麻酔薬）による鎮痛が不可欠である。創傷を洗浄・デブリードマンし、一次閉鎖、二次治癒、再建手術を適宜行う。汚染創には広域抗菌薬を使用する。骨折には副子固定または外科的固定を行う。遅発性合併症をモニタリングする。",
+        "treatment_ja": "デグー脊椎折: ① 小型・骨脆弱性が外科的固定を難しくする—保存的治療（副木）が多い。脊椎骨折は厳格な ケージ制限・脊柱安定化、神経学的評価（運動・感覚・尿便）必須、損傷高位の特定で予後判断。② 安定化: 副木（Robert Jones、軽量副木）またはケージ制限、4-6週で癒合。③ 重症・長管骨は外科的固定（mini IM pin、外固定）—専門医推奨。④ 鎮痛: メロキシカム 0.5-1.0 mg/kg PO q12-24h、ブプレノルフィン 0.01-0.05 mg/kg SC q8-12h。⑤ 開放骨折: 培養感受性後の抗菌薬（草食種は経口β-ラクタム禁忌、エンロフロキサシン 5-10 mg/kg PO q12-24h）。⑥ ケージ制限: ステップ・ハンモック撤去、床に柔らかいパッド、シリンジ給餌で活動を最小化。⑦ 経過: X線3-4週毎、若齢は癒合早い（2-4週）。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes providing safe housing, appropriate handling techniques, supervised exercise, and removal of environmental hazards.",
         "prevention_ja": "脊椎骨折の予防には安全で種に適した飼育環境の整備、鋭利物・危険物の除去、適切な取り扱い技術、他の動物との接触時の監視、温度管理、落下防止策が含まれる。",
         "prognosis": "Generally good for isolated fractures with appropriate fixation. Prognosis worsens with concurrent soft tissue injury, open fractures, or delayed treatment.",
@@ -836,7 +836,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "寄生虫は経口摂取・皮膚穿通・ベクター媒介によりデグーの消化器系組織に感染を確立する。寄生体は直接的な機械的損傷・栄養競合・免疫病理学的反応を通じて宿主組織を損傷する。寄生体段階の周囲に好酸球性・肉芽腫性炎症が発生する。慢性感染は組織線維化と臓器機能障害に至る。",
         "treatment": "Treatment includes appropriate antiparasitic medication, environmental decontamination, and supportive care. Repeat treatments may be necessary to address lifecycle stages.",
-        "treatment_ja": "デグーにおけるジアルジア症の治療: 輸液で脱水補正。消化管運動促進薬。制吐薬。疼痛管理。食事管理（繊維質の確保）。原因に応じた特異的治療。",
+        "treatment_ja": "デグー鞭毛原虫感染症（Giardia、Tritrichomonas、Spironucleus）: ① 第一選択: メトロニダゾール 15-25 mg/kg PO q12h × 5-7日（神経毒性注意）、フェンベンダゾール 20-50 mg/kg PO q24h × 5日（Giardiaに有効）。② 環境消毒: 次亜塩素酸1:32、給水器・床面毎日洗浄。③ ⚠人獣共通感染症（Giardia）—家族の手洗い徹底。④ プロバイオティクスで腸内細菌叢回復。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes regular parasite screening and treatment, environmental sanitation, quarantine of new animals, and avoiding overcrowding.",
         "prevention_ja": "予防には適切な飼育管理（適切な食事・清潔な環境・最適な温湿度）；定期的な獣医師の健康診断；新規動物の検疫；ストレス軽減；種特異的予防措置が含まれる",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
@@ -879,7 +879,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Hepatocellular damage impairs metabolic, synthetic, and detoxification functions. Progressive injury leads to inflammation, fibrosis, and potential hepatic failure with systemic consequences.",
         "pathophysiology_ja": "肝リピドーシス（脂肪肝）はデグーにおける代謝・肝臓疾患である。食欲不振や高脂肪食により末梢脂肪組織から遊離脂肪酸が大量に肝臓へ動員され、肝細胞内にトリグリセリドが過剰蓄積する。デグーは糖代謝能が低いため、インスリン抵抗性に伴う脂質代謝異常が肝脂肪蓄積を加速させる。進行すると肝細胞機能障害、胆汁うっ滞、肝不全に至る。",
         "treatment": "Nutritional support (assisted feeding for hepatic lipidosis), hepatoprotectants (SAMe, ursodiol), IV fluid therapy, anti-emetics, and treatment of underlying cause.",
-        "treatment_ja": "デグーにおける肝リピドーシス（脂肪肝）の治療は、積極的な栄養支持が最も重要である。食欲不振の場合はシリンジでの強制給餌（草食動物用流動食）を行う。肝保護剤（SAMe、ウルソデオキシコール酸）の投与、皮下輸液による脱水補正、制吐薬の使用を検討する。糖尿病の併存がある場合は食事管理（低糖質・高繊維食）で血糖コントロールを並行して行う。肝酵素値の定期的モニタリングが必要である。",
+        "treatment_ja": "デグー肝リピドーシス（脂肪肝）: 原因（感染性・中毒・免疫介在性・腫瘍・代謝）特定が治療方針を決定。① 検査: CBC・生化学（ALT/AST/ALP/GGT/T-Bil/Alb）、胆汁酸負荷試験、凝固系（PT/aPTT）、超音波、肝生検（細胞診/組織学/培養）。② 原因別治療: 細菌→培養に基づく抗菌薬4-6週、寄生虫→駆虫、ウイルス→支持療法、免疫介在性→プレドニゾロン 1-2 mg/kg PO q12h漸減、薬剤性→暴露除去。③ 肝庇護: ウルソデオキシコール酸 10-15 mg/kg PO q24h、SAMe 20 mg/kg PO q24h（空腹時）、シリマリン 4-15 mg/kg PO q24h、ビタミンE 10-15 IU/kg PO q24h。④ 栄養: 高品質中等量蛋白、十分なカロリー（脂肪は耐容性で調整）、ビタミンK1補充。⑤ モニタ: 肝酵素 q2-4週、Alb・凝固系、必要なら肝生検でstaging。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "肝リピドーシス（脂肪肝）の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
         "prognosis": "Variable. Hepatic lipidosis has a fair prognosis with early aggressive nutritional support. Chronic liver disease is guarded depending on underlying cause and degree of fibrosis.",
@@ -1168,7 +1168,7 @@ DISEASES: List[Dict[str, Any]] = [
         "permanently but does not affect quality of life. NOTE: Oral β-lactam antibiotics are "
         "CONTRAINDICATED in degus. References: Quesenberry & Carpenter (2012); Jekl & "
         "Redrobe (2013) BSAVA Manual.",
-        "treatment_ja": "【原因の特定】(1) 内耳炎/中耳炎 — 最も一般的な治療可能な原因。耳鏡検査、頭蓋X線、"
+        "treatment_ja": "デグー前庭疾患: 鑑別—中耳炎/内耳炎、脳炎、外傷、腫瘍、特発性。① 診断: 神経学的検査、耳鏡、X線/CT（耳道・bulla）、CBC・血清化学・血液培養。② 細菌性中耳炎/内耳炎: 培養感受性に基づく全身抗菌薬3-6週（エンロフロキサシン 5-15 mg/kg PO q12-24h）、重症例は鼓室洗浄。③ 対症療法: メクリジン 2-12 mg/kg PO q8-24h、メロキシカム 0.5-1 mg/kg PO q12-24h、輸液 80 mL/kg/日 SC。④ 自傷・転倒防止のためパッド入りケージ、シリンジ給餌で栄養維持。⑤ 重症・進行性は脳腫瘍・脳症の鑑別にMRI/CT。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
         "理想的にはCT/MRIで鼓室評価。全身性抗菌薬: エンロフロキサシン5-10 mg/kg PO/SC q12h "
         "× 21-28日（優れたCNS浸透性）、またはTMS 15-30 mg/kg PO q12h。(2) エンセファリト"
         "ゾーン・クニクリ — デグーでも報告あり; フェンベンダゾール20 mg/kg PO q24h × 28日。"
@@ -1464,7 +1464,7 @@ DISEASES: List[Dict[str, Any]] = [
         "damage is largely irreversible once established. Early glycemic control is the ONLY "
         "effective intervention. References: Edwards (2009) Vet Clin Exot Anim; Jekl et al. "
         "(2011) J Small Anim Pract.",
-        "treatment_ja": "【網膜症自体の直接治療法はない — 進行を停止させるための血糖管理に焦点】"
+        "treatment_ja": "糖尿病性網膜症はdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
         "【血糖管理（最重要）】厳格な食事管理 — 糖分を含む全食品の排除、チモシー牧草ベース食"
         "（≥80%）、果物・根菜・糖分添加おやつ禁忌。空腹時血糖<200 mg/dLを目標。フルクトサミン"
         "を4-8週ごとにモニタリング。注: デグーではインスリン療法は標準的実践ではない — "
@@ -1825,7 +1825,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "白癬菌感染 - 広範囲型はデグーにおける真菌感染症である。真菌は胞子吸入、直接接種、または粘膜コロニー形成を通じて感染を確立する。菌糸または酵母形態が酵素分解と機械的圧力により組織に侵入し、肉芽腫性炎症反応を惹起する。免疫不全個体は特に感受性が高い。感染は局所にとどまるか、血行性に遠隔臓器へ播種される可能性がある。慢性感染は線維化、組織リモデリング、進行性臓器機能障害を引き起こしうる。",
         "treatment": "Treatment includes systemic antifungal therapy (azoles or amphotericin B), topical antifungal agents, environmental decontamination, and supportive care. Monitor hepatic function during prolonged therapy.",
-        "treatment_ja": "デグーにおける白癬菌感染 - 広範囲型の治療には全身性抗真菌薬療法が必要である。アゾール系抗真菌薬（フルコナゾール、イトラコナゾール、ケトコナゾール）またはアムホテリシンBが菌種と重症度に応じて使用される。治療期間は完全な除菌のため通常長期間（数週間〜数ヶ月）を要する。表在性感染には局所抗真菌剤を併用する。環境消毒により再感染リスクを低減する。長期アゾール療法中は肝機能をモニタリングする。",
+        "treatment_ja": "degu皮膚糸状菌症: 局所2%ミコナゾールクリーム q12h、全身でイトラコナゾール 5-10 mg/kg PO q24h × 4-6週またはテルビナフィン 20-40 mg/kg PO q24h × 4-6週。肝酵素q2週モニタ。長毛種は毛刈り。 環境消毒（次亜塩素酸1:10）、寝床完全交換。⚠人獣共通感染症。 支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "白癬菌感染 - 広範囲型の予防には適切な環境湿度・温度の維持、良好な換気、過密の回避、定期的な清掃・消毒、罹患個体の隔離、適切な栄養による免疫機能の維持が含まれる。",
         "prognosis": "Good with appropriate antifungal therapy, though treatment course may be prolonged. Environmental recontamination can cause recurrence.",
@@ -1909,7 +1909,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "クロストリジウム腸炎はデグーにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "treatment": "EMERGENCY: Metronidazole 20 mg/kg PO q12h. SC fluids aggressively. Syringe feed. Probiotic. NEVER use penicillins orally (hindgut fermenter). Prognosis guarded.",
-        "treatment_ja": "デグーにおけるクロストリジウム腸炎の治療には、可能であれば培養感受性試験に基づく標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。",
+        "treatment_ja": "デグーにおけるクロストリジウム感染症: ① 第一選択: メトロニダゾール 15-25 mg/kg PO q12h × 5-10日 （神経毒性に注意、長期投与は避ける）、または アモキシシリン 11-22 mg/kg PO q12h（C. perfringens）。② C. difficile: バンコマイシン 10 mg/kg PO q8h × 7-10日（耐性例）。③ 重症腸毒血症: 抗毒素血清（入手可能な場合）、輸液・電解質補正、嫌気性ショック対応。④ 食事性管理: 高繊維食、急激な食変えを避け、プロバイオティクスで腸内細菌叢回復。⑤ 草食動物（ウサギ・モルモット）はC. difficile腸炎リスクが極めて高い—ペニシリン系・セファロスポリン系経口禁忌。⑥ 環境芽胞対策: 次亜塩素酸1:10で消毒、乾燥環境維持。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "クロストリジウム腸炎の予防には適切な衛生管理・消毒、利用可能なワクチン接種、創傷の迅速な処置、ストレス軽減、適切な換気、感染動物の隔離が含まれる。",
         "prognosis": "Prognosis depends on severity, underlying cause, and timeliness of treatment. Early aggressive intervention generally improves outcomes. Delayed presentation carries a guarded to poor prognosis.",
@@ -1930,7 +1930,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "サルモネラ症はデグーにおける細菌感染症である。病原菌は付着因子を通じて組織にコロニーを形成し、毒素産生、酵素分泌、免疫回避戦略などの病原性メカニズムを介して侵入する。好中球浸潤、サイトカイン放出、補体活性化を含む炎症カスケードが生じる。組織損傷は細菌の直接作用と宿主の炎症反応の両方に起因する。菌種と宿主の免疫状態に応じて、膿瘍形成、敗血症、または慢性肉芽腫性炎症が発生しうる。",
         "treatment": "Enrofloxacin 5-10 mg/kg PO q12h based on C&S. SC fluids. Zoonotic. Carrier state possible.",
-        "treatment_ja": "デグーにおけるサルモネラ症の治療には、可能であれば培養感受性試験に基づく標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。",
+        "treatment_ja": "デグーにおけるサルモネラ症の治療: ① 健常成獣の無症候性キャリアは抗菌薬を控え自然排菌待ち（抗菌薬は耐性化・キャリア化リスク）。② 重症臨床例（敗血症・下血・脱水）には培養感受性後の抗菌薬: エンロフロキサシン 10-20 mg/kg PO/IM q12-24h（鳥類）/ 5-10 mg/kg PO q12-24h（小型哺乳類） × 14-21日、または トリメトプリム・スルファ 15-30 mg/kg PO q12h。③ 輸液療法 + 電解質補正、制吐・止瀉対症療法。④ ⚠人獣共通感染症—家族（特に小児・免疫不全者）の手洗い・接触予防徹底。⑤ 環境消毒は塩素系（次亜塩素酸 1:10）または過酢酸が有効。⑥ 群飼育では感染源（飼料・水・媒介動物）の検索と隔離。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "サルモネラ症の予防には適切な衛生管理・消毒、利用可能なワクチン接種、創傷の迅速な処置、ストレス軽減、適切な換気、感染動物の隔離が含まれる。",
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
@@ -2481,7 +2481,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Accumulated genetic mutations lead to uncontrolled cell proliferation, evasion of apoptosis, and potential metastatic spread. Tumor growth causes tissue compression, invasion, and paraneoplastic effects.",
         "pathophysiology_ja": "リンパ腫はデグーにおける腫瘍性疾患である。癌遺伝子、腫瘍抑制遺伝子、DNA修復機構における遺伝子変異の蓄積により腫瘍性形質転換が生じる。制御不能な細胞増殖により腫瘍が形成され、局所組織への浸潤・破壊の可能性がある。悪性腫瘍はリンパ行性または血行性に転移しうる。高カルシウム血症、悪液質、免疫調節障害などの腫瘍随伴症候群が原発腫瘍に伴い、罹患率に寄与することがある。",
         "treatment": "Prednisolone 0.5-2 mg/kg PO SID (avoid dexamethasone due to diabetes risk). Palliative management is mainstay given limited chemo data in degus. Meloxicam 1-2 mg/kg PO SID for comfort. Supportive care with syringe feeding and fluid therapy SC as needed.",
-        "treatment_ja": "プレドニゾロン0.5-2 mg/kg PO SID（デキサメタゾンは糖尿病リスクで禁忌）。デグーでは化学療法データが限られるため緩和的管理が主体。メロキシカム1-2 mg/kg PO SIDで疼痛管理。必要に応じシリンジ給餌・皮下輸液で支持療法。",
+        "treatment_ja": "デグー白血病/リンパ腫: ① エキゾチック小型哺乳類でのリンパ系腫瘍は症例報告レベル—フェレット以外では治療プロトコル未確立。② 確定: リンパ節/腫瘤FNA・生検＋IHC、CBC（リンパ球数、白血球分画）、画像診断（超音波・X線）、骨髄穿刺。③ 緩和的化学療法: プレドニゾロン 1-2 mg/kg PO q24h（多くで第一選択、QOL改善）、クロラムブシル 0.1-0.2 mg/kg PO q24-48h、L-asparaginase 10,000 IU/m² IM/SC q週（試験的）。④ 外科切除: 孤立性腫瘤型に限定的—多発性・全身性は化学療法。⑤ 支持療法: シリンジ給餌（Critical Care 50-90 mL/kg/日）、輸液 80-100 mL/kg/日 SC、温熱管理、メロキシカム 0.5-1.5 mg/kg PO q12-24h（疼痛・炎症）。⑥ 個別意思決定—QOL中心の緩和ケアを優先する場合が多い。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention is limited for most neoplastic conditions. Regular health examinations facilitate early detection. Spaying/neutering may reduce risk of hormone-dependent tumors.",
         "prevention_ja": "リンパ腫の予防は限定的であるが、ホルモン依存性腫瘍軽減のための避妊・去勢手術、既知の発癌物質の回避、早期発見のための定期健診、適正体型の維持、該当する場合は遺伝的素因軽減のための責任ある繁殖が含まれる。",
         "prognosis": "Variable prognosis depending on type, staging, and treatment response. Chemotherapy can achieve remission in many cases, but relapse is common.",
@@ -2537,7 +2537,7 @@ DISEASES: List[Dict[str, Any]] = [
         "Meloxicam 1-2 mg/kg PO/SC q24h × 3-5 days. Wound check at 5-7 days. Skin sutures "
         "(if used) removal at 10-14 days. Recurrence at same site is uncommon for simple lipomas. "
         "References: Quesenberry & Carpenter (2012); Percy & Barthold (2007).",
-        "treatment_ja": "【保存的管理（大多数の症例）】脂肪腫は良性で、小型・非増大・運動/機能に影響がなければ"
+        "treatment_ja": "デグー脂肪腫: ① 多くは老齢肥満個体に発生する良性皮下腫瘤。② 確定診断: 細胞診（FNA）で脂肪細胞確認、急速増大例は針生検または切除生検で脂肪肉腫/腺癌/膿瘍を除外。③ 手術適応: 機能障害（歩行・摂食・排泄阻害）、皮膚潰瘍、急速増大、整容的要請。④ 切除: 局所麻酔 + 軽鎮静で対応可能な小型腫瘤、全身麻酔が必要な深部・大型は周術期低体温・絶食管理を厳格に。⑤ 鎮痛: メロキシカム 0.5-1.5 mg/kg PO q12-24h、ブプレノルフィン 0.01-0.05 mg/kg SC q8-12h、術後5-7日継続。⑥ 食事/体重管理: 高繊維低脂肪（チモシー主体、ペレット制限）、運動空間の確保、四半期毎の体重トレンド評価。⑦ 浸潤性脂肪腫（infiltrative lipoma）—筋層に浸潤、不完全切除で再発—に注意。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
         "通常治療不要。月1回のサイズモニタリング。【外科的切除】適応: 急速増大、運動制限、"
         "潰瘍化、不快感がある場合; FNA細胞診が不確定の場合（脂肪肉腫の除外必須）。"
         "イソフルラン麻酔下で被膜に沿った鈍的剥離による完全切除。病理組織検査に提出。"
@@ -2776,7 +2776,7 @@ DISEASES: List[Dict[str, Any]] = [
         "PROGNOSIS NOTE: Nerve damage is often partially irreversible once established; early "
         "glycemic control is critical to prevent progression. "
         "References: Edwards (2009) Vet Clin Exot Anim; Jekl et al. (2011).",
-        "treatment_ja": "【最重要: 厳格な食事管理による血糖コントロール】糖分を含む全食品の排除。チモシー牧草"
+        "treatment_ja": "末梢神経障害（糖尿病性）はdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
         "≥80%。空腹時血糖<200 mg/dL目標。デグーではインスリン療法は標準的でない。"
         "【神経障害性疼痛管理】ガバペンチン5-10 mg/kg PO q8-12h（神経障害性疼痛の第一選択 — "
         "他種からの外挿）。メロキシカム1-2 mg/kg PO/SC q24h。【補助】ビタミンB群サプリメント。"
@@ -2822,7 +2822,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Mechanical force exceeds bone strength, causing cortical disruption. Associated soft tissue damage, hemorrhage, and inflammation follow. Healing proceeds through hematoma formation, callus development, and remodeling.",
         "pathophysiology_ja": "脛骨骨折はデグーにおける外傷性・機械的疾患である。罹患組織の構造的耐性を超える外部機械的力により組織損傷が生じる。損傷は出血、浮腫、疼痛を伴う急性炎症カスケードを惹起する。重症度に応じて、血管供給の途絶による虚血、環境微生物による汚染、進行性の組織壊死が生じうる。治癒過程は止血、炎症、増殖、リモデリングの各段階を経る。",
         "treatment": "Treatment includes fracture stabilization (splinting, pinning, or plating), pain management, restricted activity, and monitoring for healing. Physical rehabilitation may be beneficial.",
-        "treatment_ja": "デグーにおける脛骨骨折の治療は安定化、疼痛管理、創傷ケアを優先する。生命を脅かす損傷を最初に評価・対処する（気道、呼吸、循環）。種に適した鎮痛薬（NSAIDs、オピオイド、局所麻酔薬）による鎮痛が不可欠である。創傷を洗浄・デブリードマンし、一次閉鎖、二次治癒、再建手術を適宜行う。汚染創には広域抗菌薬を使用する。骨折には副子固定または外科的固定を行う。遅発性合併症をモニタリングする。",
+        "treatment_ja": "デグー骨折: ① 小型・骨脆弱性が外科的固定を難しくする—保存的治療（副木）が多い。② 安定化: 副木（Robert Jones、軽量副木）またはケージ制限、4-6週で癒合。③ 重症・長管骨は外科的固定（mini IM pin、外固定）—専門医推奨。④ 鎮痛: メロキシカム 0.5-1.0 mg/kg PO q12-24h、ブプレノルフィン 0.01-0.05 mg/kg SC q8-12h。⑤ 開放骨折: 培養感受性後の抗菌薬（草食種は経口β-ラクタム禁忌、エンロフロキサシン 5-10 mg/kg PO q12-24h）。⑥ ケージ制限: ステップ・ハンモック撤去、床に柔らかいパッド、シリンジ給餌で活動を最小化。⑦ 経過: X線3-4週毎、若齢は癒合早い（2-4週）。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes providing safe housing, appropriate handling techniques, supervised exercise, and removal of environmental hazards.",
         "prevention_ja": "脛骨骨折の予防には安全で種に適した飼育環境の整備、鋭利物・危険物の除去、適切な取り扱い技術、他の動物との接触時の監視、温度管理、落下防止策が含まれる。",
         "prognosis": "Good for uncomplicated fractures with appropriate stabilization. Open fractures and those with concurrent injuries carry a more guarded prognosis.",
@@ -3190,7 +3190,7 @@ DISEASES: List[Dict[str, Any]] = [
         "Skin/coat condition should improve within 4-8 weeks of adequate replacement. Lifelong "
         "treatment is typically required. "
         "References: Quesenberry & Carpenter (2012); Edwards (2009) Vet Clin Exot Anim.",
-        "treatment_ja": "【重要】真の甲状腺機能低下症はデグーではまれで、十分に文書化されていない。沈鬱、肥満、"
+        "treatment_ja": "deguでの甲状腺機能低下症は稀で診断は慎重に。低T4のみでは診断不確実（病気個体は普遍的にT4低下＝euthyroid sick syndrome）。TSH刺激試験で確認後、レボチロキシン 0.01-0.02 mg/kg PO q12-24h試用。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
         "被毛不良の鑑別診断として、まず糖尿病（デグーで遥かに一般的）、栄養不良、慢性ストレス、"
         "加齢変化を除外すべき。【診断確定】総T4と遊離T4測定（デグーの基準値は確立されていない "
         "— ラット/モルモットの基準値から外挿して慎重に解釈）。TSH刺激試験。"
@@ -3225,7 +3225,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Wire-bottom cages, hard surfaces, obesity, inactivity, poor hygiene.",
         "causes_ja": "金網底ケージ、硬い床材、肥満、運動不足、不衛生な飼育環境。爪の過長も寄与。",
         "treatment": "Wound care, antibiotics, padding, address husbandry issues.",
-        "treatment_ja": "軽度：局所洗浄＋抗菌軟膏（ムピロシン等）＋包帯＋床材改善。"
+        "treatment_ja": "デグー足底皮膚炎（バンブルフット/Pododermatitis）: 環境改善が治療の根幹。① 環境改善: 床材を柔らかいもの（タオル、Vetbed、人工芝）に変更、湿潤回避、止まり木の太さ・形状を見直す（鳥）。② 局所処置: ぬるま湯と0.05%クロルヘキシジン洗浄 q12h、外用シルバースルファジアジン or Manuka honey、患部包帯（鳥はballブートやテープシューズ）。③ 重症例（潰瘍・骨髄炎）: 培養感受性後の全身抗菌薬—エンロフロキサシン 10-15 mg/kg PO/IM q12-24h、アモキシシリン/クラブラン酸 12.5-25 mg/kg PO q12h（鳥含む）、4-8週継続。④ 外科的デブリードマン（壊死組織除去）必要例あり。⑤ 鎮痛: メロキシカム 0.5-1 mg/kg PO q12-24h。⑥ 肥満は最大のリスク因子—体重管理（特に飛ばない大型鳥、ウサギ、モルモット）。⑦ ビタミンA欠乏（鳥）も誘因—食事改善（種子食偏重を脱却）。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
         "中等度：全身性抗菌薬（エンロフロキサシン5mg/kg BID）＋NSAIDs。"
         "重度（膿瘍・骨髄炎）：外科的デブリードマン＋長期抗菌薬。"
         "床材を柔らかいもの（フリース等）に変更が必須。",
