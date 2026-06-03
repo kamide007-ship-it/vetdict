@@ -438,6 +438,239 @@ def test_vestibular_disease_is_species_specific():
 
 
 # ---------------------------------------------------------------------------
+# Misapplied pathophysiology_ja templates (2026-06 fix)
+# ---------------------------------------------------------------------------
+# enrich_diseases() overlays pathophysiology_ja onto each species module. The
+# overlay contained CATEGORY-level boilerplate that was bulk-applied to the
+# WRONG disease class — e.g. bacterial toxin diseases (botulism, tetanus,
+# clostridial enteritis) receiving the chemical-toxicant paragraph, or viral
+# diseases (avian influenza, Bornavirus/PDD) receiving the toxicant/neoplasia
+# paragraph. These were corrected by
+# scripts/template_elimination/fix_misapplied_pathophysiology.py.
+
+# Substring signatures of the category templates.
+_PATHO_TEMPLATE_SIGS = {
+    "toxicant": "毒性物質は細胞レベルで",
+    "fungal": "真菌感染の病態生理",
+    "neoplasia": "腫瘍の病態生理は正常細胞の悪性転換",
+    "bacterial_colonisation": "細菌感染症である。病原菌は付着因子",
+    "autoimmune": "免疫介在性疾患である。免疫系が自己抗原",
+}
+
+_TRUE_CLASS_HINTS = {
+    "bacterial": [
+        "菌",
+        "bacteri",
+        "sepsis",
+        "敗血",
+        "pneumonia",
+        "肺炎",
+        "tetanus",
+        "破傷風",
+        "botulism",
+        "ボツリヌス",
+        "bordetella",
+        "actinomyc",
+        "放線菌",
+        "clostrid",
+        "salmonella",
+        "e. coli",
+        "大腸菌",
+        "erysipel",
+        "pseudomonas",
+        "緑膿菌",
+        "strepto",
+        "レンサ球菌",
+        "pasteurell",
+        "enterotox",
+        "dysbiosis",
+        "enteritis",
+        "abscess",
+        "膿瘍",
+        "rhinitis",
+        "sacculitis",
+        "気嚢炎",
+        "dermatophilosis",
+    ],
+    "fungal": [
+        "真菌",
+        "fungal",
+        "mycosis",
+        "mycetoma",
+        "aspergill",
+        "candid",
+        "カンジダ",
+        "crypto",
+        "histoplasm",
+        "dermatophyt",
+        "皮膚糸状菌",
+        "sporotrich",
+        "ringworm",
+        "白癬",
+        "yeast",
+        "酵母",
+        "canv",
+        "ophidiomyces",
+    ],
+    "viral": [
+        "ウイルス",
+        "virus",
+        "viral",
+        "herpes",
+        "calici",
+        "parvo",
+        "influenza",
+        "reovirus",
+        "bornavirus",
+        "birnavirus",
+        "ビルナ",
+        "poxvirus",
+        "ポックス",
+        "iridovirus",
+        "proventricular dilatation",
+        "pdd",
+    ],
+    "parasitic": [
+        "寄生虫",
+        "parasit",
+        "mite",
+        "ダニ",
+        "worm",
+        "線虫",
+        "coccidi",
+        "コクシジウム",
+        "アイメリア",
+        "eimeria",
+        "giardia",
+        "pinworm",
+        "cheyletiella",
+        "demodex",
+        "hexamit",
+    ],
+}
+
+_PATHO_INCOMPAT = {
+    "toxicant": {"bacterial", "viral", "fungal", "parasitic"},
+    "fungal": {"bacterial", "viral", "parasitic"},
+    "neoplasia": {"bacterial", "viral", "fungal", "parasitic"},
+    "bacterial_colonisation": {"viral", "fungal", "parasitic"},
+    "autoimmune": {"bacterial", "viral", "fungal", "parasitic"},
+}
+
+
+def _patho_template_class(text: str):
+    for cls, sig in _PATHO_TEMPLATE_SIGS.items():
+        if sig in text:
+            return cls
+    return None
+
+
+def _patho_true_classes(name: str, desc: str) -> set:
+    blob = (name + " " + desc).lower()
+    classes = {c for c, kws in _TRUE_CLASS_HINTS.items() if any(k.lower() in blob for k in kws)}
+    if "bacterial" in classes:
+        has_fungal_context = "真菌" in blob or "fungal" in blob or "mycosis" in blob
+        has_aseptic_context = "無菌" in blob
+        if has_fungal_context or has_aseptic_context:
+            strong = [k for k in _TRUE_CLASS_HINTS["bacterial"] if k != "菌" and k.lower() in blob]
+            if not strong:
+                classes.discard("bacterial")
+    return classes
+
+
+def _patho_is_misapplied(text: str, name: str, desc: str) -> bool:
+    if not text:
+        return False
+    tcls = _patho_template_class(text)
+    if tcls is None:
+        return False
+    bench = "bacterial" if tcls == "bacterial_colonisation" else tcls
+    truth = _patho_true_classes(name, desc)
+    if bench in truth:
+        return False
+    return bool(truth & _PATHO_INCOMPAT[tcls])
+
+
+_PATHO_SPECIES_MODULES = [
+    "cat",
+    "dog",
+    "rabbit",
+    "hamster",
+    "guinea_pig",
+    "chinchilla",
+    "ferret",
+    "hedgehog",
+    "sugar_glider",
+    "degu",
+    "bird",
+    "parakeet",
+    "parrot",
+    "reptile",
+    "tortoise",
+    "snake",
+    "lizard",
+    "amphibian",
+    "fish",
+    "exotic_other",
+]
+
+
+def test_no_misapplied_pathophysiology_template_in_modules():
+    """No disease may carry a pathophysiology_ja template from the wrong class.
+
+    Operates on the *enriched* (served) DISEASES — exactly what the live site
+    shows — so it catches misapplications introduced by either the module, the
+    JSON overlay, or the runtime fallback generator.
+    """
+    import importlib
+
+    failures = []
+    for sp in _PATHO_SPECIES_MODULES:
+        try:
+            mod = importlib.import_module(f"api.species.{sp}_diseases")
+        except ImportError:
+            continue
+        for d in getattr(mod, "DISEASES", []):
+            if not isinstance(d, dict):
+                continue
+            name = d.get("name", "") or d.get("name_en", "")
+            if _patho_is_misapplied(d.get("pathophysiology_ja", ""), name, d.get("description_ja", "")):
+                cls = _patho_template_class(d.get("pathophysiology_ja", ""))
+                failures.append(
+                    f"[{sp}] {name}: carries '{cls}' template for a "
+                    f"{_patho_true_classes(name, d.get('description_ja', ''))} disease"
+                )
+    assert not failures, f"Found {len(failures)} misapplied pathophysiology templates. First 10:\n" + "\n".join(
+        failures[:10]
+    )
+
+
+def test_specific_infectious_diseases_have_pathogen_specific_pathophysiology():
+    """Spot-check that key fixed diseases mention BOTH pathogen AND mechanism."""
+    import importlib
+
+    # (pathogen markers, mechanism markers) — both groups must have at least one hit.
+    expectations = {
+        ("cat", "Feline Botulism"): (("Clostridium botulinum",), ("アセチルコリン",)),
+        ("cat", "Feline Tetanus"): (("Clostridium tetani",), ("テタノスパスミン",)),
+        ("bird", "Avian Influenza"): (("インフルエンザ",), ("ヘマグルチニン",)),
+        ("dog", "Coccidiosis"): (("コクシジウム",), ("オーシスト",)),
+    }
+    for (sp, name), (pathogen_kws, mechanism_kws) in expectations.items():
+        mod = importlib.import_module(f"api.species.{sp}_diseases")
+        entry = next((d for d in getattr(mod, "DISEASES", []) if d.get("name") == name), None)
+        if entry is None:
+            continue
+        patho = entry.get("pathophysiology_ja", "") or ""
+        assert any(k in patho for k in pathogen_kws), (
+            f"[{sp}] {name} pathophysiology_ja missing pathogen markers {pathogen_kws}. Got: {patho[:120]}"
+        )
+        assert any(k in patho for k in mechanism_kws), (
+            f"[{sp}] {name} pathophysiology_ja missing mechanism markers {mechanism_kws}. Got: {patho[:120]}"
+        )
+
+
+# ---------------------------------------------------------------------------
 # 2026-06 phase-3 regression — neoplasia + nutritional + exotic syndromes
 # ---------------------------------------------------------------------------
 
