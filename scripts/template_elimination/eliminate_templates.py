@@ -144,6 +144,36 @@ TEMPLATE_REGEX_PATTERNS: list[re.Pattern] = [
         r"過不足のない摂取を確保するため定期的に再評価する。$",
         re.DOTALL,
     ),
+    # Blood-disorder template (42 instances, Jun 2026):
+    # "Xにおける(disease)の治療は血液異常の基礎原因の特定と対処が必要である..."
+    # Mis-applied to all hematology disorders (anemia, DIC, thrombocytopenia, hemolysis,
+    # polycythemia, splenomegaly, hemorrhagic syndrome) with identical body text.
+    re.compile(
+        r"^[^。]{1,40}における[^。]{1,80}の治療は血液異常の基礎原因の特定と対処が必要である。"
+        r"重度の貧血や急性出血には輸血が必要となりうる。"
+        r"凝固障害には新鮮凍結血漿、ビタミンK、または特定の凝固因子補充が必要な場合がある。"
+        r"免疫介在性破壊には免疫抑制療法が適応となる。"
+        r"酸素補充、輸液、栄養サポート、連続血液検査による血液学的パラメータのモニタリングを含む支持療法を行う。$",
+        re.DOTALL,
+    ),
+    # Antifungal template (60 instances, Jun 2026):
+    # "Xにおける(disease)の治療には全身性抗真菌薬療法が必要である..."
+    # This template is medically appropriate for dermatophytosis / aspergillosis / candidiasis,
+    # but is being applied verbatim across many species with NO species-specific dosing.
+    # It has also been mis-applied to bacterial infections like cat hemoplasmosis
+    # (a clinically dangerous error). Whenever this template appears, regenerate via the
+    # appropriate curated generator (dermatophytosis / aspergillosis / mucormycosis /
+    # blood_disorder for hemoplasmosis) or the fallback.
+    re.compile(
+        r"^[^。]{1,40}における[^。]{1,80}の治療には全身性抗真菌薬療法が必要である。"
+        r"アゾール系抗真菌薬（フルコナゾール、イトラコナゾール、ケトコナゾール）"
+        r"またはアムホテリシンBが菌種と重症度に応じて使用される。"
+        r"治療期間は完全な除菌のため通常長期間（数週間〜数ヶ月）を要する。"
+        r"表在性感染には局所抗真菌剤を併用する。"
+        r"環境消毒により再感染リスクを低減する。"
+        r"長期アゾール療法中は肝機能をモニタリングする。$",
+        re.DOTALL,
+    ),
 ]
 
 SPECIES_NORM = {
