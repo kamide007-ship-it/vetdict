@@ -821,7 +821,7 @@ DISEASES: List[Dict[str, Any]] = [
         "(4) Secondary infection management — cephalexin 22-30 mg/kg PO BID for Staphylococcus pyoderma; itraconazole 5 mg/kg PO SID for Malassezia dermatitis. "
         "(5) Allergen-specific immunotherapy (ASIT) — sole disease-modifying therapy (60-70% success rate, requires 6-12 months for full effect). "
         "Elimination diet trial (8-12 weeks, novel protein or hydrolyzed) to rule out food allergy (30% comorbidity).",
-        "treatment_ja": "多角的アプローチ：(1)アレルゲン回避（環境整備）、"
+        "treatment_ja": "犬犬アトピー性皮膚炎（CAD）: 原因（感染・アレルギー・寄生虫・自己免疫・内分泌）特定が治療方針を決定。① 検査: 培養（細菌・真菌）、皮膚生検、寄生虫検査、内分泌・CBC・生化学。② 局所: 患部洗浄（0.05%クロルヘキシジン q12h）、外用抗菌・抗真菌軟膏、保護包帯。③ 全身抗菌薬（感染時）: 培養感受性で選択—エンロフロキサシン 5-15 mg/kg PO/IM q12-24h、アモキシシリン/クラブラン酸 12.5-25 mg/kg PO q12h（草食種除く）、最低3-4週。④ 抗炎症: 短期プレドニゾロン 0.5-1 mg/kg PO q24h × 5-7日（必要時）、ω3脂肪酸補充。⑤ 自傷防止のエリザベスカラー、環境整備（湿度・清潔）、栄養改善。支持療法: 輸液（晶質液 60-80 mL/kg/日 IV、ショック時 90 mL/kg初期ボーラス）、酸素化、栄養管理、疼痛管理。メサドン 0.1-0.5 mg/kg IM/IV q4-6h またはブプレノルフィン 0.01-0.02 mg/kg IM q6-8h。"
         "(2)薬物療法—オクラシチニブ（アポキル0.4〜0.6mg/kg BID→SID）、"
         "ロキベトマブ（サイトポイント2mg/kg SC月1回）が第一選択。重症急性期のみ短期プレドニゾロン。"
         "(3)スキンケア—セラミド配合シャンプー・保湿（週1〜2回）、"
@@ -1039,7 +1039,7 @@ DISEASES: List[Dict[str, Any]] = [
         "phenobarbital 2-4 mg/kg IV q20-30min to effect or CRI if refractory. "
         "Midazolam 0.2 mg/kg IM/IN as alternative benzodiazepine (faster IM onset). "
         "Owner education: seizure diary, rectal diazepam for at-home cluster seizures. Never abruptly discontinue AEDs.",
-        "treatment_ja": "抗てんかん薬による生涯管理：フェノバルビタール（2.5〜5mg/kg BID、第一選択）、"
+        "treatment_ja": "犬痙攣の治療: ① 緊急安定化（active seizure）—気道確保、酸素、輸液確保、体温管理。② 初期発作中: ジアゼパム 0.5-1 mg/kg IV/IR（直腸）q5-10分まで × 3回、midazolam 0.2-0.5 mg/kg IM/IN（鼻腔内、静脈確保前に有効）。③ 持続発作（status epilepticus）: ジアゼパムCRI 0.5-2 mg/kg/h IV、phenobarbital 4-16 mg/kg IV slow（負荷量）、levetiracetam 30-60 mg/kg IV。④ 難治性: プロポフォール CRI 0.1-0.6 mg/kg/min（人工呼吸準備）、ketamine CRI 0.5-2 mg/kg/h（強直性発作）。⑤ 原因検索: 血糖、Ca、Na、肝酵素、毒物、CT/MRI、脳脊髄液検査。⑥ 慢性管理: phenobarbital 2-3 mg/kg PO q12h（血中濃度 25-35 µg/mL目標、肝酵素モニタ）、levetiracetam 20-30 mg/kg PO q8h、zonisamide 5-10 mg/kg PO q12h、bromide 20-30 mg/kg PO q24h（猫禁忌—呼吸器症状）。⑦ 高体温（>40.5℃）はクーリング+鎮静。AAHA 2015 Seizure Guidelines。"
         "臭化カリウム（20〜40mg/kg/日、単独or併用）、レベチラセタム（20mg/kg TID、新規薬）。"
         "血中薬物濃度モニタリング（フェノバルビタール15〜40μg/mL）。"
         "重積発作：ジアゼパム0.5〜1mg/kg IV/IR→レベチラセタム負荷→"
@@ -1084,7 +1084,7 @@ DISEASES: List[Dict[str, Any]] = [
         "Otitis media/interna: systemic antibiotics 4-6 weeks (culture-guided; fluoroquinolones or potentiated penicillins for CNS penetration) ± TECA-LBO for refractory cases. "
         "Central vestibular disease: treat underlying cause — brain tumor (prednisolone 1-2 mg/kg + lomustine/radiation), meningoencephalitis (immunosuppressive protocol: prednisolone + cytarabine or cyclosporine). "
         "Hypothyroidism-associated: levothyroxine supplementation (improvement expected within weeks). Residual mild head tilt is common and rarely affects QOL.",
-        "treatment_ja": "特発性前庭疾患：対症療法（制吐薬マロピタント、ジアゼパム短期間で過度の不安に対して）。"
+        "treatment_ja": "犬前庭疾患: 末梢性（内耳・中耳由来、約85%）vs 中枢性（脳幹）の鑑別が治療方針を決定。① 神経学的検査: 末梢性=水平/回旋性眼振・同側Horner症候群・正常意識；中枢性=垂直/方向変換性眼振・固有受容覚欠損・意識変容→MRI/CT必須。② 末梢性の対症療法: メクリジン 12.5-25 mg/dog PO q24h（鎮静・抗悪心）、マロピタント 1 mg/kg SC/PO q24h（嘔気強い時）、輸液 60 mL/kg/日 IV/SC。③ 原疾患治療: 細菌性中耳炎/内耳炎→培養に基づく抗菌薬3-6週（エンロフロキサシン 5-10 mg/kg PO q24h、アモキシシリン/クラブラン酸 12.5-25 mg/kg PO q12h）、必要なら鼓室切開・bulla osteotomy。④ 特発性老齢性前庭疾患（idiopathic geriatric vestibular disease）は通常3-7日で自然軽快、2-4週で頭部傾斜以外消失。⑤ 中枢性: ステロイド（プレドニゾロン 0.5-1 mg/kg PO q12h漸減）、抗てんかん薬、原因（腫瘍・梗塞・MUO）治療。⑥ 安全管理: 転倒予防、寝具を厚く、誤嚥防止のため食事は柔らかいフード・少量頻回。"
         "多くは2〜3週間で自然改善。支持療法（補助歩行、スリップ防止マット、給餌補助）。"
         "中耳炎性：抗菌薬長期投与（4〜6週間）±手術（TECA-LBO）。"
         "中枢性：原因に応じた治療（脳腫瘍→ステロイド/化学療法/放射線、脳炎→免疫抑制療法）。",
@@ -2986,7 +2986,7 @@ DISEASES: List[Dict[str, Any]] = [
         "Relapse/rescue protocols: CCNU (lomustine) 70-90 mg/m² PO q3wk, rabacfosadine (Tanovea) 1 mg/kg IV q3wk (for relapsed B-cell lymphoma). "
         "Alimentary lymphoma: surgical resection ± chemotherapy. "
         "Staging: FNA of enlarged nodes (diagnostic), thoracic radiographs, abdominal ultrasound, CBC/chemistry, immunophenotyping (B vs T cell).",
-        "treatment_ja": "多剤併用化学療法が標準：CHOPプロトコール（シクロフォスファミド、ドキソルビシン、"
+        "treatment_ja": "犬リンパ系腫瘍/白血病の治療: ① 病型分類—多中心型（最多80%）、消化管型、縦隔型、皮膚型、中枢神経型、白血病（ALL/AML、CLL/CML）。② 確定: リンパ節FNA/コア生検＋IHC（CD3/CD20/Pax5）、フローサイトメトリー、PARR。③ 病期診断: CBC・生化学・尿検査、胸腹部X線・超音波、骨髄穿刺（白血病疑い）。④ CHOP-25週プロトコル（標準）: ビンクリスチン → シクロホスファミド → ドキソルビシン → メトトレキセート/プレドニゾロン、8週後に維持—完全寛解率80-90%。⑤ COP療法（低リソース環境）: シクロホスファミド + ビンクリスチン + プレドニゾロン、完全寛解率70%、MST 6-7ヶ月。⑥ 救援療法: MOPP、ロムスチン、L-asparaginase、ダカルバジン。⑦ B細胞型は予後良好、T細胞型（特に CD4-CD8- ALL）は予後悪化。⑧ 支持療法: 制吐薬、輸液、好中球減少期の感染管理（抗菌薬予防投与）。Vail et al. JVIM、AAHA Oncology Guidelines 2016。"
         "ビンクリスチン、プレドニゾロン）19〜25週。寛解率80〜90%。"
         "単剤プレドニゾロン：化学療法非実施の場合（中央生存期間1〜2ヶ月）。"
         "再発時：レスキュープロトコール（CCNU、ラバムスチン等）。"
@@ -3284,7 +3284,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Rabies lyssavirus via bite wound (saliva). Reservoirs vary by geography: dogs (Asia, Africa), bats (Americas, Europe), raccoons/skunks/foxes (North America). Japan: imported animals (MAFF quarantine required); domestic dogs legally vaccinated.",
         "causes_ja": "リッサウイルス咬傷感染。貯蔵宿主：犬（アジア・アフリカ）、コウモリ（南北アメリカ・欧州）、アライグマ/スカンク/キツネ（北米）。日本国内での自然感染は報告なし（輸入動物は農水省検疫必須）。",
         "treatment": "No effective treatment once clinical signs develop - uniformly fatal. Post-exposure prophylaxis in vaccinated dogs: immediate wound cleaning (15 min soap and water + povidone-iodine), booster vaccination, 45-day observation quarantine (per Japanese Rabies Prevention Law). Unvaccinated dog exposed to confirmed rabid animal: immediate euthanasia or strict 180-day quarantine. Public health notification mandatory. Zoonosis: human PEP (post-exposure prophylaxis) with rabies immunoglobulin + 4-dose vaccination series is effective if started before symptom onset.",
-        "treatment_ja": "発症後の有効な治療なし（ほぼ100%致死）。ワクチン接種済み犬の咬傷後処置：創傷洗浄（15分間の石鹸洗浄＋ポビドンヨード）→追加接種→45日間の観察隔離（狂犬病予防法）。未接種犬が確定狂犬病動物に咬まれた場合：安楽死または180日間厳格隔離。公衆衛生当局への届け出義務。人間への暴露：発症前のrabies immunoglobulin＋ワクチン4回接種で予防可能。",
+        "treatment_ja": "犬における狂犬病の治療: 特異的抗ウイルス薬は限定的—支持療法と二次感染予防が中心。① 輸液療法: 等張晶質液 60-80 mL/kg/日 IV（脱水補正＋維持）。重症は90 mL/kg初期ボーラス。② 制吐剤（消化器症状時）: マロピタント 1 mg/kg IV/SC q24h、オンダンセトロン 0.5 mg/kg IV q8h。③ 二次性細菌感染予防: アモキシシリン/クラブラン酸 12.5-25 mg/kg PO q12h、または ドキシサイクリン 5-10 mg/kg PO q12h（呼吸器症状時）。④ 食欲増進: カプロモレリン 3 mg/kg PO q24h、ミルタザピン 0.6 mg/kg PO q24h。⑤ 隔離（感染力が消失するまで）、ケージ消毒（次亜塩素酸1:32、エンベロープウイルスはエタノール70%でも可）。⑥ ワクチン未接種個体の同居動物にはコアワクチン接種を検討。AAHA/AAFP Vaccination Guidelines参照。",
         "prognosis": "Uniformly fatal once clinical signs appear (100% mortality). Post-exposure prophylaxis in vaccinated dogs has high success rate if implemented within 24-48h of exposure.",
         "prognosis_ja": "臨床症状出現後は100%致死。ワクチン接種済み犬の暴露後処置（48時間以内）は高い予防効果。",
         "prevention": "Annual rabies vaccination mandatory in Japan (Rabies Prevention Law 狂犬病予防法). Core vaccine. Import/export quarantine compliance. Do not handle unvaccinated wildlife bats.",

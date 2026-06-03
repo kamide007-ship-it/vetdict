@@ -74,6 +74,27 @@ TEMPLATES_JA: list[str] = [
 TEMPLATES_JA_SET = set(TEMPLATES_JA)
 
 
+# Fallback-pattern markers. If a treatment_ja contains 2+ of these phrases,
+# it's almost certainly fallback-generated text that should be upgraded to
+# curated content if a generator is available. The fallback generator emits
+# very recognizable filler phrases.
+_FALLBACK_MARKERS = [
+    "における正確な臨床評価（病歴、身体検査、CBC・生化学、画像）から治療方針を決定",
+    "基礎疾患の特定→特異的治療＋支持療法の組み合わせが原則",
+    "経過モニタリング: 主訴の改善、検査値の変化、QOLを",
+    "複雑症例は",
+    "【鑑別と経過観察】類似症候を呈する疾患の除外と",
+]
+
+
+def _is_fallback_generated(text: str) -> bool:
+    """True if the text is recognizably from the fallback generator (deserves curated upgrade)."""
+    if not text:
+        return False
+    matches = sum(1 for marker in _FALLBACK_MARKERS if marker in text)
+    return matches >= 2
+
+
 # Template patterns that detect a generic SUFFIX bolted onto otherwise good content.
 # These are stripped (not replaced) because the content before them is usually fine.
 TEMPLATE_SUFFIXES: list[str] = [
@@ -121,6 +142,36 @@ TEMPLATE_REGEX_PATTERNS: list[re.Pattern] = [
         r"栄養不良動物ではリフィーディング症候群予防のため段階的に是正する。"
         r"種特異的な食事要求に基づく長期栄養計画を立案する。"
         r"過不足のない摂取を確保するため定期的に再評価する。$",
+        re.DOTALL,
+    ),
+    # Blood-disorder template (42 instances, Jun 2026):
+    # "Xにおける(disease)の治療は血液異常の基礎原因の特定と対処が必要である..."
+    # Mis-applied to all hematology disorders (anemia, DIC, thrombocytopenia, hemolysis,
+    # polycythemia, splenomegaly, hemorrhagic syndrome) with identical body text.
+    re.compile(
+        r"^[^。]{1,40}における[^。]{1,80}の治療は血液異常の基礎原因の特定と対処が必要である。"
+        r"重度の貧血や急性出血には輸血が必要となりうる。"
+        r"凝固障害には新鮮凍結血漿、ビタミンK、または特定の凝固因子補充が必要な場合がある。"
+        r"免疫介在性破壊には免疫抑制療法が適応となる。"
+        r"酸素補充、輸液、栄養サポート、連続血液検査による血液学的パラメータのモニタリングを含む支持療法を行う。$",
+        re.DOTALL,
+    ),
+    # Antifungal template (60 instances, Jun 2026):
+    # "Xにおける(disease)の治療には全身性抗真菌薬療法が必要である..."
+    # This template is medically appropriate for dermatophytosis / aspergillosis / candidiasis,
+    # but is being applied verbatim across many species with NO species-specific dosing.
+    # It has also been mis-applied to bacterial infections like cat hemoplasmosis
+    # (a clinically dangerous error). Whenever this template appears, regenerate via the
+    # appropriate curated generator (dermatophytosis / aspergillosis / mucormycosis /
+    # blood_disorder for hemoplasmosis) or the fallback.
+    re.compile(
+        r"^[^。]{1,40}における[^。]{1,80}の治療には全身性抗真菌薬療法が必要である。"
+        r"アゾール系抗真菌薬（フルコナゾール、イトラコナゾール、ケトコナゾール）"
+        r"またはアムホテリシンBが菌種と重症度に応じて使用される。"
+        r"治療期間は完全な除菌のため通常長期間（数週間〜数ヶ月）を要する。"
+        r"表在性感染には局所抗真菌剤を併用する。"
+        r"環境消毒により再感染リスクを低減する。"
+        r"長期アゾール療法中は肝機能をモニタリングする。$",
         re.DOTALL,
     ),
 ]
@@ -187,18 +238,24 @@ def _detect_implicit_templates(entries: list[dict]) -> set[str]:
 
     A treatment_ja string is considered an implicit template if:
     - It is used by 2+ DIFFERENT disease names within the same species, OR
-    - It is used by 4+ different disease names across 3+ species.
+    - It is used by 3+ different disease names across 3+ species, OR
+    - It is SHORT (<100 chars) and shared across 3+ species (same or different name).
+      Short generic content like "広範囲切除。化学療法未確立。予後要注意。" is template-like
+      by definition: any 4-clause generic clinical hint can't be species-appropriate
+      for 3 different species simultaneously.
 
     A duplicate text that legitimately covers the same disease across species
     (e.g. "Vestibular disease" in 14 species → 1 disease name) is NOT a template
-    by this definition; we only flag cross-disease misapplication.
+    by this definition; we only flag cross-disease misapplication and short
+    cross-species duplicates.
     """
     intra_groups: dict[tuple[str, str], set[str]] = defaultdict(set)
     global_groups_diseases: dict[str, set[str]] = defaultdict(set)
     global_groups_species: dict[str, set[str]] = defaultdict(set)
     for e in entries:
         tx = (e.get("treatment_ja", "") or "").strip()
-        if not tx or len(tx) < 30:
+        # Lower minimum length (was 30) so we catch the short "メラノーマ" templates
+        if not tx or len(tx) < 15:
             continue
         sp = e.get("species", "")
         # Use the most specific identifier — name_ja distinguishes per-species
@@ -220,19 +277,39 @@ def _detect_implicit_templates(entries: list[dict]) -> set[str]:
         species_n = len(global_groups_species[tx])
         if species_n >= 3 and len(names) >= 3:
             flagged.add(tx)
+        # SHORT cross-species duplicates: <100 chars and 3+ species — even if
+        # disease name is identical. Short content cannot be properly species-tailored
+        # for 3+ animals (different dosing, anatomy, supportive care needed).
+        if species_n >= 3 and len(tx) < 100:
+            flagged.add(tx)
+        # ANY cross-species duplicate where 3+ species share identical text —
+        # even when disease name is identical (e.g. "腹膜炎・体腔炎" copy-pasted
+        # to reptile/snake/lizard/tortoise). Each species deserves its own
+        # anatomy/dosing/POTZ note. We rely on the curated library to produce
+        # species-specific content; if none is available, fallback runs.
+        if species_n >= 4:
+            flagged.add(tx)
     return flagged
 
 
-def update_json(json_path: Path) -> tuple[int, int, int, int]:
-    """Update diseases_all_species.json in-place. Returns (replaced, suffix_stripped, implicit_replaced, unchanged)."""
+def update_json(json_path: Path) -> tuple[int, int, int, int, int]:
+    """Update diseases_all_species.json in-place.
+    Returns (replaced, suffix_stripped, implicit_replaced, curated_upgraded, unchanged).
+    """
     with open(json_path, encoding="utf-8") as f:
         data = json.load(f)
 
     implicit_templates = _detect_implicit_templates(data)
+    # Threshold for curated upgrades: if the curated library has content for the disease
+    # AND the existing treatment_ja is shorter than this, upgrade in place. The threshold
+    # is set so that genuinely well-written entries (e.g. specific to a single species,
+    # >=200 chars with citations) are not overwritten.
+    CURATED_UPGRADE_MAX_LEN = 200
 
     replaced = 0
     suffix_stripped = 0
     implicit_replaced = 0
+    curated_upgraded = 0
     unchanged = 0
     for entry in data:
         tx_ja = entry.get("treatment_ja", "") or ""
@@ -257,17 +334,48 @@ def update_json(json_path: Path) -> tuple[int, int, int, int]:
                 implicit_replaced += 1
             else:
                 replaced += 1
+            continue
+        # Curated-upgrade pass: entries with a curated generator available
+        # Triggers on:
+        #   (a) short content (<CURATED_UPGRADE_MAX_LEN), OR
+        #   (b) fallback-generated content (regardless of length) — these have
+        #       recognizable filler phrases and deserve curated content if a
+        #       species-specific generator exists.
+        is_short = len(tx_ja.strip()) < CURATED_UPGRADE_MAX_LEN
+        is_fallback = _is_fallback_generated(tx_ja)
+        if is_short or is_fallback:
+            species = entry.get("species", "")
+            name = entry.get("name", "")
+            name_ja = entry.get("name_ja", "")
+            species_norm = SPECIES_NORM.get(species, species)
+            curated = generate_content(species_norm, name_ja, name)
+            # Apply if curated content is meaningfully longer (for short entries) or
+            # at least as long (for fallback entries that need replacement regardless of length).
+            curated_tx = (curated or {}).get("treatment_ja", "")
+            should_apply = bool(curated_tx) and (
+                (is_short and len(curated_tx) > len(tx_ja) + 100) or (is_fallback and len(curated_tx) > 200)
+            )
+            if should_apply:
+                en_tx = entry.get("treatment", "")
+                entry["treatment_ja"] = curated["treatment_ja"]
+                if curated.get("treatment") and en_tx != curated["treatment"]:
+                    entry["treatment"] = curated["treatment"]
+                if curated.get("prognosis_ja"):
+                    entry["prognosis_ja"] = curated["prognosis_ja"]
+                if curated.get("causes_ja"):
+                    entry["causes_ja"] = curated["causes_ja"]
+                curated_upgraded += 1
+                continue
+        # Strip suffix templates from otherwise-good content
+        new_tx, changed = _strip_suffix_templates(tx_ja)
+        if changed:
+            entry["treatment_ja"] = new_tx
+            suffix_stripped += 1
         else:
-            # Strip suffix templates from otherwise-good content
-            new_tx, changed = _strip_suffix_templates(tx_ja)
-            if changed:
-                entry["treatment_ja"] = new_tx
-                suffix_stripped += 1
-            else:
-                unchanged += 1
+            unchanged += 1
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    return replaced, suffix_stripped, implicit_replaced, unchanged
+    return replaced, suffix_stripped, implicit_replaced, curated_upgraded, unchanged
 
 
 _NAME_BLOCK_RE = re.compile(r'"name":\s*"([^"\\]*(?:\\.[^"\\]*)*)"', re.S)
@@ -431,6 +539,37 @@ def update_python_module(path: Path) -> tuple[int, int]:
             text = text[:start] + new_field + text[end:]
             replaced += 1
 
+    # Curated-upgrade pass: for each short OR fallback-generated treatment_ja,
+    # if a curated generator is available AND produces meaningfully better content,
+    # upgrade in-place.
+    CURATED_UPGRADE_MAX_LEN = 200
+    edits = []
+    for m in treatment_ja_field.finditer(text):
+        body = m.group(1)
+        if "\\" in body:
+            decoded = body.replace('\\"', '"').replace("\\n", "\n").replace("\\t", "\t").replace("\\\\", "\\")
+        else:
+            decoded = body
+        is_short = len(decoded.strip()) < CURATED_UPGRADE_MAX_LEN
+        is_fallback = _is_fallback_generated(decoded)
+        if not (is_short or is_fallback):
+            continue
+        meta = _find_entry_metadata(text, m.start())
+        from scripts.template_elimination.template_content_library import generate_content
+
+        curated = generate_content(species_norm, meta["name_ja"], meta["name"])
+        if not curated or not curated.get("treatment_ja"):
+            continue
+        curated_tx = curated["treatment_ja"]
+        should_apply = (is_short and len(curated_tx) > len(decoded) + 100) or (is_fallback and len(curated_tx) > 200)
+        if not should_apply:
+            continue
+        new_field = f'"treatment_ja": "{_escape_for_python_string(curated_tx)}"'
+        edits.append((m.start(), m.end(), new_field))
+    for start, end, new_field in reversed(edits):
+        text = text[:start] + new_field + text[end:]
+        replaced += 1
+
     if replaced > 0:
         path.write_text(text, encoding="utf-8")
     return replaced, len(text) - original_len
@@ -444,10 +583,10 @@ def main() -> int:
     json_path = ROOT / "diseases_all_species.json"
     if json_path.exists():
         print(f"\n[1/2] Updating {json_path.name}…")
-        replaced, suffix_stripped, implicit_replaced, unchanged = update_json(json_path)
+        replaced, suffix_stripped, implicit_replaced, curated_upgraded, unchanged = update_json(json_path)
         print(
             f"  Hardcoded-template replaced: {replaced}  |  Implicit-template replaced: {implicit_replaced}"
-            f"  |  Suffix-stripped: {suffix_stripped}  |  Unchanged: {unchanged}"
+            f"  |  Curated upgrade: {curated_upgraded}  |  Suffix-stripped: {suffix_stripped}  |  Unchanged: {unchanged}"
         )
 
     print("\n[2/2] Updating Python species modules…")
