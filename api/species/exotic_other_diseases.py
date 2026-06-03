@@ -2785,7 +2785,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Acute toxemia caused by Clostridium perfringens types C and D proliferating in the intestine following dietary excess or abrupt feed changes.",
         "causes_ja": "Exotic Otherにおける腸管毒血症（過食症）の原因: ウェルシュ菌C/D型による急性毒血症。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "腸管毒血症（過食症）は抗菌薬投与や急激な食事変化による腸内細菌叢の撹乱を契機に、Clostridium 属菌（C. perfringens、C. difficile、C. spiroforme 等）が異常増殖し、外毒素（toxin A/B、α・ι・ε毒素など）を産生することで発症する。毒素は腸上皮細胞を傷害して粘膜壊死・透過性亢進・体液漏出を引き起こし、重度の下痢・腸毒素血症・内毒素性ショックへ進展する。草食小動物では特に急速に致死的となる。",
+        "pathophysiology_ja": "腸管毒血症（過食症）は抗菌薬投与や急激な食事変化による腸内細菌叢の撹乱を契機に、Clostridium 属菌（C. perfringens、C. difficile、C. spiroforme 等）が異常増殖し、外毒素（toxin A/B、α・ι・ε毒素など）を産生することで発症する。毒素は腸上皮細胞を傷害して粘膜壊死・透過性亢進・体液漏出を引き起こし、重度の下痢・腸毒素血症・毒素性ショックへ進展する。草食小動物では特に急速に致死的となる。",
         "treatment": "EMERGENCY: C. perfringens antitoxin. Penicillin G 20,000 IU/kg IM q12h. IV fluids. Vaccination for prevention.",
         "treatment_ja": "Exotic Otherにおける腸管毒血症（過食症）の治療には、可能であれば培養感受性試験に基づく標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。",
         "prevention": "適切な飼育管理、バランスの取れた栄養、定期的な獣医師による健康診断、ストレス軽減、初期症状の早期治療が予防に重要である。",

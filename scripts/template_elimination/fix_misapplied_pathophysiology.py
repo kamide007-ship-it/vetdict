@@ -179,11 +179,15 @@ INCOMPAT = {
 def _true_classes(name: str, desc: str) -> set:
     blob = (name + " " + desc).lower()
     classes = {cls for cls, kws in NAME_HINTS.items() if any(k.lower() in blob for k in kws)}
-    # Guard against "無菌(性)" (aseptic) being read as a bacterial cue via "菌".
-    if "bacterial" in classes and "無菌" in blob:
-        strong = [k for k in NAME_HINTS["bacterial"] if k != "菌" and k.lower() in blob]
-        if not strong:
-            classes.discard("bacterial")
+    # Guard against "菌" false-positives for bacterial when the real class is fungal
+    # ("真菌" contains "菌") or aseptic ("無菌" contains "菌").
+    if "bacterial" in classes:
+        has_fungal_context = "真菌" in blob or "fungal" in blob or "mycosis" in blob
+        has_aseptic_context = "無菌" in blob
+        if has_fungal_context or has_aseptic_context:
+            strong = [k for k in NAME_HINTS["bacterial"] if k != "菌" and k.lower() in blob]
+            if not strong:
+                classes.discard("bacterial")
     return classes
 
 
@@ -240,7 +244,7 @@ def g_clostridial_enteric(ja: str) -> str:
         "Clostridium 属菌（C. perfringens、C. difficile、C. spiroforme 等）が異常増殖し、"
         "外毒素（toxin A/B、α・ι・ε毒素など）を産生することで発症する。"
         "毒素は腸上皮細胞を傷害して粘膜壊死・透過性亢進・体液漏出を引き起こし、"
-        "重度の下痢・腸毒素血症・内毒素性ショックへ進展する。草食小動物では特に急速に致死的となる。"
+        "重度の下痢・腸毒素血症・毒素性ショックへ進展する。草食小動物では特に急速に致死的となる。"
     )
 
 

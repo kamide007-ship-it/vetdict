@@ -568,10 +568,13 @@ def _patho_template_class(text: str):
 def _patho_true_classes(name: str, desc: str) -> set:
     blob = (name + " " + desc).lower()
     classes = {c for c, kws in _TRUE_CLASS_HINTS.items() if any(k.lower() in blob for k in kws)}
-    if "bacterial" in classes and "無菌" in blob:
-        strong = [k for k in _TRUE_CLASS_HINTS["bacterial"] if k != "菌" and k.lower() in blob]
-        if not strong:
-            classes.discard("bacterial")
+    if "bacterial" in classes:
+        has_fungal_context = "真菌" in blob or "fungal" in blob or "mycosis" in blob
+        has_aseptic_context = "無菌" in blob
+        if has_fungal_context or has_aseptic_context:
+            strong = [k for k in _TRUE_CLASS_HINTS["bacterial"] if k != "菌" and k.lower() in blob]
+            if not strong:
+                classes.discard("bacterial")
     return classes
 
 
@@ -643,23 +646,27 @@ def test_no_misapplied_pathophysiology_template_in_modules():
 
 
 def test_specific_infectious_diseases_have_pathogen_specific_pathophysiology():
-    """Spot-check that key fixed diseases mention their actual pathogen/mechanism."""
+    """Spot-check that key fixed diseases mention BOTH pathogen AND mechanism."""
     import importlib
 
+    # (pathogen markers, mechanism markers) — both groups must have at least one hit.
     expectations = {
-        ("cat", "Feline Botulism"): ("Clostridium botulinum", "アセチルコリン"),
-        ("cat", "Feline Tetanus"): ("Clostridium tetani", "テタノスパスミン"),
-        ("bird", "Avian Influenza"): ("インフルエンザ", "ヘマグルチニン"),
-        ("dog", "Coccidiosis"): ("オーシスト", "コクシジウム"),
+        ("cat", "Feline Botulism"): (("Clostridium botulinum",), ("アセチルコリン",)),
+        ("cat", "Feline Tetanus"): (("Clostridium tetani",), ("テタノスパスミン",)),
+        ("bird", "Avian Influenza"): (("インフルエンザ",), ("ヘマグルチニン",)),
+        ("dog", "Coccidiosis"): (("コクシジウム",), ("オーシスト",)),
     }
-    for (sp, name), keywords in expectations.items():
+    for (sp, name), (pathogen_kws, mechanism_kws) in expectations.items():
         mod = importlib.import_module(f"api.species.{sp}_diseases")
         entry = next((d for d in getattr(mod, "DISEASES", []) if d.get("name") == name), None)
         if entry is None:
             continue
         patho = entry.get("pathophysiology_ja", "") or ""
-        assert any(k in patho for k in keywords), (
-            f"[{sp}] {name} pathophysiology_ja missing pathogen-specific markers {keywords}. Got: {patho[:120]}"
+        assert any(k in patho for k in pathogen_kws), (
+            f"[{sp}] {name} pathophysiology_ja missing pathogen markers {pathogen_kws}. Got: {patho[:120]}"
+        )
+        assert any(k in patho for k in mechanism_kws), (
+            f"[{sp}] {name} pathophysiology_ja missing mechanism markers {mechanism_kws}. Got: {patho[:120]}"
         )
 
 
