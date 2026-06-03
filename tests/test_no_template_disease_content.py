@@ -739,3 +739,147 @@ def test_streptococcus_warns_pcn_contraindication_in_herbivores():
         assert any(kw in tx for kw in ("Clostridium", "禁忌", "経口", "β-ラクタム", "ペニシリン")), (
             f"Guinea pig Streptococcus missing antibiotic-warning: '{tx[:160]}'"
         )
+
+
+# ============================================================================
+# 2026-06 (Phase 5) regression tests: garbled medical phrase + blood disorders
+# ============================================================================
+
+
+def test_no_garbled_single_agent_phrase():
+    """Regression: the garbled fallback phrase 'single-agent修正治療' (medically nonsense
+    — meant to describe wide-margin surgical resection) must never appear in any field.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    offenders = []
+    for entry in entries:
+        for fld in ("treatment_ja", "treatment", "prognosis_ja", "causes_ja"):
+            v = entry.get(fld) or ""
+            if "single-agent修正治療" in v:
+                offenders.append((entry.get("species"), entry.get("name_ja", "?"), fld))
+    assert not offenders, f"Garbled neoplasia phrase persists in {len(offenders)} fields: {offenders[:5]}"
+    # Also enforce on the Python species modules
+    py_offenders = []
+    for path in (ROOT / "api" / "species").glob("*_diseases.py"):
+        if "single-agent修正治療" in path.read_text(encoding="utf-8"):
+            py_offenders.append(path.name)
+    assert not py_offenders, f"Garbled phrase in Python modules: {py_offenders}"
+
+
+def test_no_blood_disorder_template():
+    """Regression: the generic blood-disorder template (42 instances pre-fix) must be eradicated.
+
+    Pre-fix wording: "Xにおける(disease)の治療は血液異常の基礎原因の特定と対処が必要である。
+    重度の貧血や急性出血には輸血が必要となりうる..."
+
+    Each species/disorder combination now gets disorder-specific evidence-based content.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    bad_phrase = "の治療は血液異常の基礎原因の特定と対処が必要である"
+    offenders = [
+        (e.get("species"), e.get("name_ja", "?")) for e in entries if bad_phrase in (e.get("treatment_ja", "") or "")
+    ]
+    assert not offenders, f"Generic blood-disorder template persists in {len(offenders)} entries: {offenders[:10]}"
+
+
+def test_eia_marked_as_reportable_with_no_cure():
+    """Regression: equine infectious anemia (馬伝染性貧血) must be marked as reportable
+    and explicitly state that there is no cure (this is critical clinical/legal info).
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    eia = [
+        e
+        for e in entries
+        if ("馬伝染性貧血" in (e.get("name_ja", "") or "") or "EIA" in (e.get("name_ja", "") or ""))
+        and e.get("species") == "Horse"
+    ]
+    if not eia:
+        pytest.skip("No EIA entry found")
+    for entry in eia:
+        tx = entry.get("treatment_ja", "") or ""
+        # Must mention reportable status (届出/法定) AND lack of cure (治療法なし or similar)
+        assert any(kw in tx for kw in ("届出", "法定", "OIE", "Coggins")), (
+            f"EIA entry missing reportable-disease language: '{tx[:200]}'"
+        )
+        assert any(kw in tx for kw in ("治療法なし", "根治不能", "治癒不可", "生涯", "隔離", "殺処分", "安楽死")), (
+            f"EIA entry missing 'no cure / lifelong carrier' language: '{tx[:200]}'"
+        )
+
+
+def test_neonatal_iso_is_species_specific():
+    """Regression: neonatal isoerythrolysis must have species-specific (cat=FNI, horse=NI)
+    content with the critical colostrum-restriction message, not generic hemolysis text.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    cat_ni = [e for e in entries if "新生子溶血" in (e.get("name_ja", "") or "") and e.get("species") == "Cat"]
+    horse_ni = [e for e in entries if "新生子溶血" in (e.get("name_ja", "") or "") and e.get("species") == "Horse"]
+    if cat_ni:
+        tx = cat_ni[0].get("treatment_ja", "") or ""
+        # Must mention type B mother & A/AB kitten OR colostrum restriction
+        assert any(kw in tx for kw in ("B型母猫", "FNI", "初乳", "人工哺乳")), (
+            f"Cat NI missing critical management info: '{tx[:200]}'"
+        )
+    if horse_ni:
+        tx = horse_ni[0].get("treatment_ja", "") or ""
+        assert any(kw in tx for kw in ("Aa", "Qa", "初乳", "新生駒", "凝集試験")), (
+            f"Horse NI missing critical management info: '{tx[:200]}'"
+        )
+
+
+def test_ferret_estrogen_aplastic_anemia_management():
+    """Regression: ferret estrogen-induced aplastic anemia entries must mention the
+    species-specific treatment pillars (hCG/GnRH for ovulation induction, OHE for prevention).
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    ferret_est = [
+        e
+        for e in entries
+        if e.get("species") == "Ferret"
+        and ("エストロゲン" in (e.get("name_ja", "") or "") or "高エストロゲン" in (e.get("name_ja", "") or ""))
+    ]
+    if not ferret_est:
+        pytest.skip("No ferret estrogen entries found")
+    for entry in ferret_est:
+        tx = entry.get("treatment_ja", "") or ""
+        assert any(kw in tx for kw in ("hCG", "HCG", "GnRH", "buserelin", "デスロレリン", "排卵誘起", "持続発情")), (
+            f"Ferret estrogen-AA missing ovulation-induction mention: '{tx[:200]}'"
+        )
+        assert any(kw in tx for kw in ("OHE", "OVH", "卵巣子宮", "去勢", "避妊", "ovariohysterectomy")), (
+            f"Ferret estrogen-AA missing OHE/spay prevention message: '{tx[:200]}'"
+        )
+
+
+def test_feline_hemoplasmosis_mentions_doxycycline():
+    """Regression: feline hemoplasmosis (Mycoplasma haemofelis/haemominutum) must
+    mention doxycycline (gold-standard 1st line), not just generic anemia content.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    hp = [
+        e
+        for e in entries
+        if e.get("species") == "Cat"
+        and any(
+            kw in (e.get("name_ja", "") or "")
+            for kw in ("ヘモプラズマ", "haemominutum", "haemofelis", "感染性貧血", "伝染性貧血")
+        )
+    ]
+    if not hp:
+        pytest.skip("No feline hemoplasmosis entries")
+    for entry in hp:
+        tx = entry.get("treatment_ja", "") or ""
+        # Must mention doxycycline OR marbofloxacin (first-line anti-hemoplasma)
+        assert any(kw in tx for kw in ("ドキシサイクリン", "doxycycline", "マルボフロキサシン", "marbofloxacin")), (
+            f"Feline hemoplasmosis missing first-line antibiotic: '{tx[:240]}'"
+        )

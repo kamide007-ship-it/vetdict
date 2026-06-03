@@ -3591,6 +3591,619 @@ def gen_cardiomyopathy(species: str, name_ja: str) -> Optional[dict]:
 # ============================================================================
 
 
+def gen_candidiasis(species: str, name_ja: str) -> Optional[dict]:
+    """Candida infections — distinct from dermatophytes; nystatin/fluconazole based.
+    Common sites: oral (thrush), GI, urinary, systemic in immunocompromised.
+    """
+    species_ja = _species_label_ja_local(species)
+    nm = name_ja or ""
+
+    is_oral = "口腔" in nm or "Oral" in nm or "thrush" in nm.lower()
+    is_systemic = "全身" in nm or "敗血" in nm or "播種" in nm
+    is_gi = "胃腸" in nm or "腸" in nm or "GI" in nm or "腸炎" in nm or "嘔吐" in nm or "下痢" in nm
+
+    # Determine clinical context block
+    if is_oral:
+        context = "口腔カンジダ症（thrush）—白斑性プラーク・グラム陰性炎症性肉芽腫を伴う。"
+    elif is_systemic:
+        context = "全身性カンジダ症—免疫不全・長期抗菌薬・カテーテル留置で発症、致死率高い。"
+    elif is_gi:
+        context = "消化管カンジダ症—下痢・嘔吐・体重減少、特に幼若・免疫抑制動物。"
+    else:
+        context = f"{species_ja}カンジダ症—皮膚・粘膜・全身に発症、免疫低下が誘因。"
+
+    if species in DOG_CAT:
+        return {
+            "treatment_ja": (
+                f"{species_ja}カンジダ症の治療: ① {context}"
+                "② 確定: 培養（Sabouraud寒天）、組織生検（PAS染色で偽菌糸・菌体）、"
+                "PCR、KOH直接鏡検、CBC・生化学（基礎免疫不全評価）。"
+                "③ 局所治療: ニスタチン経口懸濁液 100,000 IU/mL を 0.25-1.0 mL PO q6-8h × 7-14日"
+                "（経口・GI カンジダで第一選択、吸収されないので全身副作用少）、"
+                "またはクロトリマゾール1%軟膏 q12h（皮膚・外陰）、"
+                "ミコナゾール2%軟膏 q12h（皮膚）。"
+                "④ 全身治療: フルコナゾール 5-10 mg/kg PO q24h × 4-6週（GI・全身・尿路）、"
+                "イトラコナゾール 5 mg/kg PO q24h × 4-6週（代替）、"
+                "アムホテリシンB 0.5 mg/kg IV q48h（重症全身、腎毒性モニタ必須）。"
+                "⑤ 基礎免疫不全治療: 糖尿病管理、ステロイド減量、長期抗菌薬の見直し。"
+                "⑥ 環境: 哺乳瓶・食器・ケージの煮沸消毒、新鮮水給水。"
+                "⑦ モニタ: 肝酵素 q2-4週（アゾール療法中）、改善まで臨床評価 q1-2週。"
+            ),
+            "prognosis_ja": (
+                "局所感染は適切治療で予後良好、全身性カンジダ症は致死率20-50%—早期診断・"
+                "高用量抗真菌薬・基礎免疫不全治療が予後を決定する。"
+            ),
+        }
+    if species in SMALL_MAMMAL:
+        return {
+            "treatment_ja": (
+                f"{species_ja}カンジダ症の治療: ① {context}"
+                "幼若個体・抗菌薬使用後・免疫抑制で発症しやすい。"
+                "② 確定: 口腔・皮膚スワブKOH/培養、糞便培養（GI型）、CBC・生化学。"
+                "③ 局所治療: ニスタチン経口懸濁液 50,000-100,000 IU/動物 PO q8h × 7-14日（経口・GI）、"
+                "クロトリマゾール1%軟膏 q12h（皮膚・粘膜）。"
+                "④ 全身治療: フルコナゾール 10-20 mg/kg PO q24h × 4-6週（全身性のみ）、"
+                "草食種ではアゾール系の長期投与で食欲低下に注意（プロバイオ併用）。"
+                "⑤ 基礎管理: 不適切抗菌薬使用の見直し、ストレス除去、栄養改善。" + _small_mammal_supportive(species)
+            ),
+            "prognosis_ja": ("局所感染は予後良好、全身型は予後注意。基礎免疫不全の管理が成功の鍵。"),
+        }
+    if species in AVIAN:
+        return {
+            "treatment_ja": (
+                f"{species_ja}カンジダ症（thrush、moniliasis）の治療: ① そ嚢・口腔・GI でC. albicans感染、"
+                "幼鳥（雛）に多い—そ嚢内白斑・粘液性そ嚢液、食滞、嘔吐、消化不良。"
+                "成鳥は免疫抑制（PBFD、PDD、長期抗菌薬、不適切栄養）で発症。"
+                "② 確定: そ嚢洗浄液KOH/グラム染色（出芽酵母・偽菌糸）、培養（Sabouraud）、PCR。"
+                "③ 局所治療: ニスタチン経口懸濁液 100,000 IU/羽 PO q8h × 7-14日（第一選択）、"
+                "投与は強制給餌チューブで直接そ嚢へ。"
+                "④ 全身治療（重症・難治性）: フルコナゾール 10-15 mg/kg PO q24h × 14-21日、"
+                "ケトコナゾール 30 mg/kg PO q12h（代替）。"
+                "⑤ そ嚢洗浄: 重症例は鎮静下で滅菌生食でそ嚢洗浄・残留物除去。"
+                "⑥ 食事改善: ペレット食への切替、新鮮水（毎日交換）、ヨーグルト/プロバイオ。"
+                "⑦ 環境: 哺乳器具消毒（次亜塩素酸1:32）、繁殖期は親鳥のスクリーニング。"
+                "Harrison & Lightfoot Clinical Avian Medicine 2006; Speer Current Avian Therapy 4th ed。"
+                + _avian_supportive(species)
+            ),
+            "prognosis_ja": (
+                "雛のそ嚢カンジダ症は適切治療で予後良好、全身性・PBFD/PDD合併例は予後ガード、基礎免疫不全の管理が必要。"
+            ),
+        }
+    if species in REPTILE or species == "amphibian":
+        return {
+            "treatment_ja": (
+                f"{species_ja}カンジダ症の治療: ① 稀だが免疫抑制・不適切POTZ・抗菌薬使用で発症—"
+                "口腔・皮膚・GI感染、両生類では皮膚浅表性。"
+                "② 確定: 病変スワブKOH/培養、組織生検（PAS染色）、PCR。"
+                "③ 局所治療: ニスタチン経口懸濁液 100,000 IU/kg PO q12h × 14日、"
+                "ミコナゾール/クロトリマゾール局所 q12h（皮膚）。"
+                "④ 全身治療: イトラコナゾール 5 mg/kg PO q24h × 4-6週、"
+                "フルコナゾール 5-10 mg/kg PO q24h（代替）。"
+                "⑤ 環境改善: POTZ最適化（免疫機能の基盤）、清浄度向上、湿度適正化。" + _reptile_supportive(species)
+            ),
+            "prognosis_ja": ("原因除去（POTZ・栄養）で予後良好、全身性・免疫不全合併は予後注意。"),
+        }
+    return None
+
+
+def gen_sporotrichosis(species: str, name_ja: str) -> Optional[dict]:
+    """Sporotrichosis — dimorphic fungus (Sporothrix schenckii complex), zoonotic.
+    Cats are the most affected mammal and zoonotic source.
+    """
+    if species == "cat":
+        return {
+            "treatment_ja": (
+                "猫スポロトリックス症（Sporothrix schenckii complex）: ⚠**人獣共通感染症**—"
+                "猫は最も感染しやすく、人への感染源として最重要（特にS. brasiliensis）。"
+                "獣医師・飼い主の手指感染を防ぐため、診察時手袋・予防衣着用必須。"
+                "① 病態—外傷からの感染（多くは喧嘩・ひっかき傷）、皮膚結節・潰瘍・リンパ管性散布、"
+                "全身型では肺・骨・中枢神経に進展、未治療では致死的。"
+                "② 確定: 病変からの細胞診（酵母様・葉巻型菌体）、培養（Sabouraud、25-30℃でカビ相、35-37℃で酵母相）、"
+                "組織生検（GMS染色）、PCR、被嚢菌型確認。"
+                "③ 第一選択: イトラコナゾール 10 mg/kg PO q24h（食後）× 病変消失後+1ヶ月（通常3-6ヶ月）、"
+                "肝酵素 q4週モニタリング、奏効率60-90%。"
+                "④ 第二選択: ヨウ化カリウム飽和液（SSKI）20 mg/kg PO q12h（食事と共に）— "
+                "胃刺激・甲状腺機能低下・流涎・嘔吐が副作用、忍容性で減量。"
+                "⑤ 重症・全身型: アムホテリシンB 0.25-0.5 mg/kg IV q48h（リポソーマル製剤推奨、腎毒性監視）、"
+                "ヨウ化カリウムとの併用も。"
+                "⑥ 局所外科: 限局性病変の切除、温熱療法（40-42℃、Sporothrix熱感受性）。"
+                "⑦ 隔離: 治療中・治癒判定（培養2回連続陰性）まで他猫・人との接触制限。"
+                "AAFP/ISFM 2018; Larsson Vet Microbiol 2020 (Brazilian epidemic)。"
+            ),
+            "prognosis_ja": (
+                "皮膚限局型は治療6-12ヶ月で60-90%治癒、全身型・骨・中枢神経合併は予後不良。"
+                "治療中断で再発、感染源として人獣共通リスクが続く。"
+            ),
+        }
+    if species == "dog":
+        return {
+            "treatment_ja": (
+                "犬スポロトリックス症: 猫より稀、皮膚・皮下結節・リンパ管型が主。"
+                "① 確定: 細胞診・培養・組織生検・PCR。"
+                "② 第一選択: イトラコナゾール 5-10 mg/kg PO q24h × 病変消失後+1ヶ月、"
+                "ヨウ化カリウム 40 mg/kg PO q24h（食事と共に、犬では忍容性比較的良好）。"
+                "③ 局所: 温熱療法、限局病変の外科切除。"
+                "④ ⚠人獣共通—診察時の感染予防（手袋・予防衣）。"
+                "Lecuyer et al. Vet Dermatol 2018。"
+            ),
+            "prognosis_ja": ("適切治療で予後良好、全身型は予後ガード。"),
+        }
+    if species == "horse":
+        return {
+            "treatment_ja": (
+                "馬スポロトリックス症: リンパ管型が多い（皮膚結節の鎖状連結）。"
+                "① 第一選択: ヨウ化ナトリウム 20-40 mg/kg IV週1-2回 × 4-6週、"
+                "またはヨウ化カリウム 1-2 g PO q24h × 4-8週。"
+                "② 代替: イトラコナゾール 3-5 mg/kg PO q24h × 4-6週。"
+                "③ 切除可能病変は外科的切除。"
+                "④ ⚠人獣共通—診察時の感染予防。" + _horse_supportive(species)
+            ),
+            "prognosis_ja": ("限局型は適切治療で予後良好。"),
+        }
+    return None
+
+
+def gen_blood_disorder(species: str, name_ja: str) -> Optional[dict]:
+    """Hematology disorders: anemia, thrombocytopenia, DIC, hemolysis, polycythemia, splenomegaly,
+    hemorrhagic syndromes. Replaces the cross-species "血液異常の基礎原因の特定と対処" template
+    with disorder-specific evidence-based guidance per species.
+    """
+    species_ja = _species_label_ja_local(species)
+    nm = name_ja or ""
+
+    # Determine which blood disorder this is — specific subtypes first
+    if "新生子溶血" in nm or "新生児溶血" in nm or "neonatal iso" in nm.lower():
+        disorder = "neonatal_iso"
+    elif "エストロゲン" in nm or "高エストロゲン" in nm:
+        disorder = "estrogen_aplastic"
+    elif "馬伝染性貧血" in nm or "EIA" in nm:
+        disorder = "eia"
+    elif "ヘモプラズマ" in nm or "haemominutum" in nm or "haemofelis" in nm or "伝染性貧血" in nm or "感染性貧血" in nm:
+        disorder = "hemoplasmosis"
+    elif "溶血性尿毒症" in nm or "HUS" in nm:
+        disorder = "hus"
+    elif "鉄欠乏" in nm:
+        disorder = "iron_deficiency"
+    elif "コニュア" in nm and "出血" in nm:
+        disorder = "conure_hemorrhagic"
+    elif any(kw in nm for kw in ("DIC", "播種性血管内凝固")):
+        disorder = "dic"
+    elif "溶血" in nm:
+        disorder = "hemolysis"
+    elif "血小板減少" in nm:
+        disorder = "thrombocytopenia"
+    elif "赤血球増加" in nm or "多血" in nm:
+        disorder = "polycythemia"
+    elif "脾腫" in nm or "脾臓腫大" in nm:
+        disorder = "splenomegaly"
+    elif "出血" in nm:
+        disorder = "hemorrhage"
+    elif "貧血" in nm or "Anemia" in nm or "anemia" in nm:
+        disorder = "anemia"
+    elif "血液疾患" in nm:
+        disorder = "anemia"  # treat generic "blood disease" as workup-driven approach
+    else:
+        return None
+
+    # Species-class specific supportive care
+    if species in SMALL_MAMMAL:
+        support = _small_mammal_supportive(species)
+        transfuse_note = (
+            "輸血: 同種輸血が理想（事前クロスマッチ）—ウサギ・モルモットでは少量（5-10 mL/kg, 10 mL/kg/h）"
+            "を緩徐に。ドナーは同種・同居の健常個体から採血（最大体重の1%）。"
+        )
+    elif species in DOG_CAT:
+        support = _dogcat_supportive(species)
+        if species == "cat":
+            transfuse_note = (
+                "輸血: 全血または濃厚赤血球 10-20 mL/kg IV（4-6時間かけて）。"
+                "猫は必ず血液型判定（A/B/AB）—不適合輸血は致死的（特にB型レシピエント）。"
+                "DEA・血液型サイドカード使用、クロスマッチ推奨。"
+            )
+        else:
+            transfuse_note = (
+                "輸血: 濃厚赤血球 6-10 mL/kg または全血 10-20 mL/kg IV（4-6時間）。"
+                "初回輸血はクロスマッチ陰性なら血液型判定なしで可能だが、2回目以降は必須（DEA 1.1）。"
+            )
+    elif species in AVIAN:
+        support = _avian_supportive(species)
+        transfuse_note = (
+            "輸血: 鳥類は赤血球寿命短く（28-35日）輸血効果は限定的（数日のみ）。"
+            "緊急時に同種全血 10-20 mL/kg IO/IV を 4-6時間かけて。ドナーは健常個体から最大体重の1%採血。"
+        )
+    elif species in REPTILE or species == "amphibian":
+        support = _reptile_supportive(species)
+        transfuse_note = (
+            "輸血: 爬虫類では輸血の臨床的エビデンス限定的。重度貧血では同種全血を試みる場合あり"
+            "（5-10 mL/kg IO/IV）が、POTZ最適化・原因除去を優先。"
+        )
+    else:
+        support = "支持療法: 種に適切な輸液・栄養・酸素化・温度管理を行う。"
+        transfuse_note = "輸血: 種特異的なドナー選択とクロスマッチを行う。"
+
+    if disorder == "estrogen_aplastic":
+        return {
+            "treatment_ja": (
+                f"{species_ja}エストロゲン誘発性再生不良性貧血: ① 病態—未去勢雌フェレットの持続発情で"
+                "高エストロゲンが骨髄を非可逆的に抑制—汎血球減少、致死的。"
+                "発情が10日以上持続する個体はリスク高。"
+                "② 確定: 病歴（未去勢・発情持続・外陰膨大）、CBC（汎血球減少: PCV <15%、血小板 <50,000、好中球減少）、"
+                "塗抹（網赤血球低値）、エストラジオール上昇、骨髄穿刺（骨髄低形成・脂肪置換）。"
+                "③ 排卵誘起（早期介入で骨髄回復可能性あり）: hCG 100 IU IM 単回（外陰膨大が72時間以内に消失することを確認、"
+                "効果不十分なら7日後反復）、または GnRH（buserelin）1.5 µg/動物 IM 単回—排卵させエストロゲンを下げる。"
+                "④ 持続発情予防の根本治療: 卵巣子宮全摘出（OHE）—骨髄回復後（または準緊急で）に施行。"
+                "デスロレリン徐放インプラント（4.7 mg SC）は薬学的去勢として有効、6-12ヶ月作用。"
+                "⑤ 重度汎血球減少: 新鮮全血輸血 6-12 mL/kg IV/IO（同種ドナーフェレット、血液型判定不要だがクロスマッチ望ましい）、"
+                "重度好中球減少（<500/µL）には予防的広域抗菌薬。"
+                "⑥ サポートとしてエリスロポエチン製剤（ダーベポエチン 1 µg/kg SC q週）試行可。"
+                "⑦ モニタ: CBC q3-7日、骨髄回復には4-12週要、PCV >25%回復を目標。"
+                "Quesenberry & Carpenter Ferrets 3rd ed; Lewington 2007。" + support
+            ),
+            "prognosis_ja": (
+                "PCV >25%なら骨髄回復可能性高い、PCV <15%（特に <10%）は予後極めて不良"
+                "（死亡率50-90%）。早期介入と速やかなOHEが救命の鍵。発症予防には繁殖計画外の雌は早期OHE。"
+            ),
+        }
+
+    if disorder == "neonatal_iso":
+        if species == "cat":
+            return {
+                "treatment_ja": (
+                    "猫新生子溶血性疾患（FNI、新生子赤血球溶解症）: ① 病態—B型母猫のA/AB型新生子が"
+                    "初乳中の抗A抗体（自然抗体）を吸収して溶血—生後12-72時間で発症。"
+                    "Type B多発品種: ブリティッシュショートヘア、デボンレックス、コーニッシュレックス、トルコバン、ペルシャ。"
+                    "② 予防が最重要—妊娠/分娩前に母猫の血液型判定（A/B/AB）。B型母猫×A型雄の場合、生まれた子猫は全て"
+                    "出生から24時間は隔離・人工哺乳（初乳禁、KMR等の代替）、24時間後から通常授乳。"
+                    "③ 発症した子猫の救命: 母乳離脱（直ちに）、保温（30-32℃）、適切な人工哺乳（KMR 1 mL/30 g BW q2-4h）、"
+                    "重症（PCV <15%、ヘモグロビン尿、虚脱）には洗浄赤血球輸血（同型A型ドナーまたはO型代替）2-5 mL IO/IV。"
+                    "④ 軽症は支持療法とモニタで自然回復可能、重症は1-3日で死亡することが多い。"
+                    "⑤ 母猫の管理: 次回交配前に雄を再選定（A型雄に変更）。"
+                    "AAFP Feline Blood Type Guidelines; Casal 2008 J Feline Med Surg。"
+                ),
+                "prognosis_ja": (
+                    "予防（出生24時間人工哺乳）で罹患回避可能。発症例は重症度による—軽症は回復、"
+                    "重症（虚脱・尿黒色化・PCV <10%）は致死率50-90%。"
+                ),
+            }
+        if species == "horse":
+            return {
+                "treatment_ja": (
+                    "馬新生子溶血性疾患（NI、新生駒赤血球溶解症）: ① 病態—Aa/Qa血液型不一致の繁殖で、"
+                    "母馬が前産・輸血で感作され、初乳中の抗体が新生駒を溶血。生後12-48時間で発症。"
+                    "経産母馬・輸血歴のある母馬・ロバ×馬交配（ミュール）でリスク高。"
+                    "② 予防: 妊娠280-300日に母馬血清と父馬赤血球で凝集試験 → 陽性なら出産前準備。"
+                    "代替初乳（他のNI陰性母馬または市販Equicolostrum）給与、または出生直後母乳禁止＋免疫グロブリン代替。"
+                    "③ 発症した新生駒の救命: 直ちに授乳停止、初乳代替（バンクされた他母馬初乳または"
+                    "市販製品 1-2 L PO q4h × 24h）、生後24時間後は通常授乳再開可能。"
+                    "重症例（PCV <15%、虚脱、ヘモグロビン尿、黄疸）には洗浄赤血球輸血（父馬以外のドナー、"
+                    "母馬血清と非凝集ドナー）8-12 mL/kg IV、または濃厚赤血球。"
+                    "④ 支持療法: 等張輸液 4-6 mL/kg/h IV、保温、IgG確認（>800 mg/dL）、"
+                    "腎機能保護（ヘモグロビン尿による尿細管障害予防）。"
+                    "⑤ 次産での予防: 父馬変更または代替初乳プロトコル準備。"
+                    "MacLeay 2001 Equine Vet J; Becht 1985 JAVMA。" + _horse_supportive(species)
+                ),
+                "prognosis_ja": (
+                    "早期発見・初乳遮断と適切な輸血で予後改善（生存率60-80%）、"
+                    "発見遅延・重度溶血では致死率高い。次産では予防プロトコル必須。"
+                ),
+            }
+        # Other species fallback: route to generic hemolysis section
+        disorder = "hemolysis"
+
+    if disorder == "eia":
+        return {
+            "treatment_ja": (
+                "馬伝染性貧血（EIA、Equine Infectious Anemia）: ⚠**国内法定届出伝染病**—診断確定で即時届出。"
+                "① 病態—EIAウイルス（レトロウイルス科Lentivirus）による生涯持続感染、"
+                "アブ・サシバエの機械的伝播、子宮内伝播、輸血感染。"
+                "急性期（発熱・血小板減少・貧血）→慢性期（再燃性発熱・体重減少）→不顕性キャリア。"
+                "② 確定診断: Coggins試験（AGID、世界基準）—国際輸送・販売時必須。"
+                "ELISA（迅速、感度高い）と確認試験の併用が現在は標準。"
+                "急性期はPCR陽性、抗体は感染後14-45日で陽転。"
+                "③ ⚠**治療法なし**—感染馬は生涯ウイルス保有、感染源として隔離または安楽死が原則。"
+                "農林水産省告示に従い、確定例は届出後、隔離（200 m以上他馬から、虫除けスクリーニング）または殺処分。"
+                "④ 群管理: 同居馬の検査（Coggins陰性確認）、消毒（吸血昆虫対策）、ピレスロイド系塗布。"
+                "感染馬の使用器具・針は専用化し、共有禁止。"
+                "⑤ 国際馬輸送: 出発前30-180日のCoggins陰性証明必須。"
+                "MAFF 馬伝染性貧血対策要綱; OIE Terrestrial Manual; Sellon Equine Infectious Diseases 2nd ed。"
+                + _horse_supportive(species)
+            ),
+            "prognosis_ja": (
+                "治癒不可能。生涯キャリア（不顕性または再燃性）として隔離管理または淘汰。"
+                "急性期重症例は致死的、慢性期は数年以上生存可能だが感染源となる。"
+            ),
+        }
+
+    if disorder == "hemoplasmosis":
+        if species == "cat":
+            return {
+                "treatment_ja": (
+                    "猫ヘモプラズマ症（Mycoplasma haemofelis, Candidatus M. haemominutum, M. turicensis）: "
+                    "① 病態—赤血球膜に付着する細胞壁欠損細菌、ノミ・吸血昆虫・輸血媒介、FeLV/FIV合併で重症化。"
+                    "M. haemofelis が最病原性（重度溶血性貧血）、他2種は軽度。"
+                    "② 確定: PCR（種別同定、最も感度・特異度高い）、塗抹（Wright-Giemsa染色で赤血球辺縁の"
+                    "リング/コンマ状菌体—感度低）、Coombs試験（しばしば陽性）、FeLV/FIVスクリーニング併行。"
+                    "③ 第一選択抗菌薬: ドキシサイクリン 10 mg/kg PO q24h × 21-28日（水と共に投与—食道狭窄予防）、"
+                    "またはマルボフロキサシン 2.75 mg/kg PO q24h × 14日（迅速効果、ドキシ不耐例）。"
+                    "プラジカンテルは無効。"
+                    "④ 重度貧血（PCV <15%、虚脱）: 全血輸血 10-20 mL/kg IV（血液型判定とクロスマッチ必須）。"
+                    "⑤ 免疫介在性溶血合併: プレドニゾロン 1-2 mg/kg PO q12h（Coombs陽性または改善鈍化時）。"
+                    "⑥ 重症例には酸素化、輸液、栄養管理。"
+                    "⑦ 治療後もPCR陽性が持続（不顕性キャリア化）—臨床改善で十分、再燃時に再治療。"
+                    "ABCD 2018 Guidelines; AAFP 2020 Feline Retrovirus Guidelines。"
+                ),
+                "prognosis_ja": (
+                    "M. haemofelis急性期は適切治療で生存率70-90%、無治療は致死率高い。"
+                    "他種は軽症で予後良好。FeLV/FIV併発は予後悪化。"
+                ),
+            }
+        # Other species fallback
+        disorder = "hemolysis"
+
+    if disorder == "hus":
+        species_specific = ""
+        if species == "dog":
+            species_specific = (
+                "犬HUS（Greyhound急性皮膚血管症 CRGV/'Alabama rot'）: シガ毒素産生大腸菌（STEC）誘発、"
+                "皮膚潰瘍＋急性腎不全＋微小血管症性溶血性貧血。"
+            )
+        elif species == "horse":
+            species_specific = "馬HUS: 大腸菌・サルモネラ感染や黒くるみ中毒で発症—溶血＋急性腎不全＋血小板減少。"
+        return {
+            "treatment_ja": (
+                f"{species_ja}溶血性尿毒症症候群（HUS）の治療: ① 病態—志賀毒素産生細菌（STEC O157:H7, Stx2）または"
+                "他の血管内皮損傷で微小血管症性溶血性貧血（MAHA）＋急性腎不全＋血小板減少の三徴。"
+                f"{species_specific}"
+                "② 確定: 塗抹で破砕赤血球（schistocyte >10%）、CBC（PCV低下、血小板 <100,000）、"
+                "生化学（BUN/Cre上昇、LDH上昇、ハプトグロビン低下）、糞便培養（STEC PCR・Stx）、"
+                "Coombs陰性、補体（C3, CH50）測定（aHUS鑑別）。"
+                "③ 集中支持療法: 等張輸液で循環維持（過剰輸液回避—腎不全悪化）、"
+                "電解質・酸塩基管理、利尿不全には透析（腹膜透析または血液透析、可能な施設で）。"
+                "④ 輸血: 重度貧血には洗浄赤血球（PRBC 6-10 mL/kg IV、ゆっくり投与）、血小板輸血は"
+                "活動性出血時のみ（消費を促進するため通常は避ける）。"
+                f"{transfuse_note} "
+                "⑤ 抗菌薬: STEC感染では抗菌薬がStx放出を増加させHUS悪化させうるため慎重—培養感受性で個別判断、"
+                "アジスロマイシンは比較的安全。"
+                "⑥ 補体阻害薬（エクリズマブ）: 非典型HUS（aHUS）で人医エビデンスあり、獣医適応外使用は限定的。"
+                "⑦ モニタ: 腎機能 q12-24h、血小板・PCV・LDH、尿量、血圧。" + support
+            ),
+            "prognosis_ja": (
+                "犬CRGV（Alabama rot）は致死率70-90%と極めて不良、"
+                "STEC合併症は早期透析支援で生存率改善（30-70%）。回復例も慢性腎症リスク残存。"
+            ),
+        }
+
+    if disorder == "iron_deficiency":
+        species_specific = ""
+        if species == "horse":
+            species_specific = "馬では稀（出血性原因が多い）—鉄欠乏よりも慢性失血や寄生虫を疑う。"
+        elif species in SMALL_MAMMAL:
+            species_specific = "小型哺乳類では子犬子猫期や繁殖期母体に多い—栄養性または寄生虫性。"
+        return {
+            "treatment_ja": (
+                f"{species_ja}鉄欠乏性貧血の治療: ① 病態—慢性失血（GI出血・寄生虫・出血性腫瘍）、"
+                "鉄摂取不足（離乳期・成長期）、鉄吸収障害が主因。"
+                "小球性低色素性貧血（MCV低下、MCHC低下）が特徴。"
+                f"{species_specific}"
+                "② 確定: CBC（小球性低色素性貧血、網赤血球反応性）、血清鉄・TIBC（鉄飽和度 <20%）、"
+                "フェリチン低値（鉄貯蔵枯渇）、糞便潜血、寄生虫検査、消化管検査（出血源同定）、"
+                "塗抹（標的細胞、楕円赤血球、Heinz小体なし）。"
+                "③ 原因除去: 出血源治療（GI腫瘍切除、寄生虫駆除—フェンベンダゾール 50 mg/kg PO q24h × 3日）。"
+                "④ 鉄補充療法: 経口硫酸第一鉄 4-6 mg/kg PO q24h × 4-8週（食事と分けて空腹時投与—吸収↑）、"
+                "重症例または経口不耐には鉄デキストラン 10-20 mg/kg IM 単回（アナフィラキシー注意、テストドーズ推奨）。"
+                "⑤ 食事: 鉄豊富食（赤身肉、肝臓、貝類、緑黄色野菜）、ビタミンC併用で吸収促進、"
+                "コーヒー・茶・カルシウム剤は同時投与回避（吸収阻害）。"
+                "⑥ モニタ: 網赤血球 q2週（治療開始7-10日でピーク）、CBC q4週、フェリチン q3ヶ月。"
+                "鉄補給は貯蔵鉄回復まで4-6ヶ月継続。" + support
+            ),
+            "prognosis_ja": (
+                "原因除去と適切な鉄補給で予後良好—4-6週でPCV正常化、6ヶ月で完全回復。"
+                "出血源が制御できない場合は反復治療要。"
+            ),
+        }
+
+    if disorder == "conure_hemorrhagic":
+        return {
+            "treatment_ja": (
+                "コニュア出血症候群（Conure Bleeding Syndrome、CBS）: "
+                "① 病態—未解明、ビタミンK欠乏症またはカルシウム代謝異常が関連と推定—"
+                "繰り返す自発性出血（皮下・口腔・腸管）、塗抹で形態異常の血小板。"
+                "ナンデイコニュア、コガネメキシコインコ、ジャンデーコニュアで報告多。"
+                "② 確定: 臨床所見（再発性出血エピソード、血腫）、CBC（軽度貧血、血小板可変）、"
+                "凝固系（PT延長、aPTT正常）、生化学（Ca低下例あり）、"
+                "鉛・亜鉛中毒除外（X線で重金属検出）、肝機能、糞便潜血。"
+                "③ 治療: ビタミンK1 0.2-2.5 mg/kg IM/SC 急性期 q12h × 3日→PO維持 q24h、"
+                "カルシウム補給（経口グルコン酸カルシウム 50-100 mg/kg q12h、注射用は重症時）、"
+                "出血エピソードには局所止血（圧迫、フェリック硫酸）。"
+                "④ 食事改善: ペレット食への切替（VK含有）、緑黄色野菜・小松菜・パセリ、"
+                "種子主体を脱却。"
+                "⑤ 環境: 紫外線ライト（D3合成・Ca代謝促進）、止まり木の高さ調整（出血時転落防止）。"
+                "⑥ モニタ: 出血エピソード頻度、CBC・凝固系 q1-3ヶ月。"
+                "Harrison & Lightfoot Clinical Avian Medicine 2006; Carpenter Exotic Animal Formulary 6th ed。"
+                + _avian_supportive(species)
+            ),
+            "prognosis_ja": (
+                "適切な食事改善・ビタミンK補給で多くは寛解、再発予防には終生の食事管理が必要。重症急性出血は致死的。"
+            ),
+        }
+
+    if disorder == "anemia":
+        return {
+            "treatment_ja": (
+                f"{species_ja}貧血の治療: ① 病因鑑別が最重要—失血性（外傷・寄生虫・GI出血）、"
+                "溶血性（免疫介在性・感染・酸化障害）、非再生性（慢性疾患・腎性・骨髄抑制）の3型に分類。"
+                "② 確定検査: CBC＋網赤血球数（再生性 vs 非再生性鑑別）、塗抹標本（球状赤血球・"
+                "ハインツ小体・血液寄生虫）、生化学（BUN/Cre・肝酵素）、Coombs試験（IMHA疑い）、"
+                "尿検査（ヘモグロビン尿）、超音波（脾腫・腹腔内出血）、感染症スクリーニング。"
+                "③ 急性失血の場合: 出血源同定と止血（外科・圧迫・薬物）。"
+                "PCV <15%（犬猫）/<20%（草食種）または症候性低血圧では輸血を検討。"
+                f"{transfuse_note} "
+                "④ 慢性失血（GI出血・寄生虫）: 原因治療＋鉄補給"
+                "（鉄デキストラン 10-20 mg/kg IM 単回、または硫酸鉄 4-6 mg/kg PO q24h）。"
+                "⑤ 溶血性: 免疫介在性疑いではプレドニゾロン 1-2 mg/kg PO q12h、改善後3-6ヶ月で漸減。"
+                "感染性（バベシア・マイコプラズマ・ヘモプラズマ）には特異的抗微生物薬。"
+                "⑥ 非再生性: 腎性貧血→エリスロポエチン製剤（ダーベポエチン 1 µg/kg SC q週、"
+                "鉄補給併用）、骨髄抑制→原因薬剤中止・骨髄生検・支持療法。"
+                "⑦ モニタ: 24-48時間ごとPCV、網赤血球、塗抹で治療反応評価。" + support
+            ),
+            "prognosis_ja": (
+                "再生性貧血で原因除去可能なら予後良好。免疫介在性は適切治療で寛解可能だが再燃あり。"
+                "非再生性（特に骨髄性）は予後ガード、慢性腎性貧血は基礎疾患のステージに依存。"
+            ),
+        }
+
+    if disorder == "thrombocytopenia":
+        return {
+            "treatment_ja": (
+                f"{species_ja}血小板減少症の治療: ① 病因鑑別—免疫介在性（ITP/IMTP）、感染性（"
+                "エールリヒア・アナプラズマ・FeLV・FIV・RHDV2・敗血症）、薬剤性、消費性（DIC）、"
+                "産生不全（骨髄抑制）、希釈性（大量輸液後）。"
+                "② 確定検査: CBC＋塗抹（凝集除外、巨大血小板の有無）、生化学、凝固系（PT/aPTT、"
+                "Dダイマー）、感染症PCR、抗血小板抗体（可能なら）、骨髄穿刺/生検（産生不全評価）、"
+                "腹部超音波（脾腫・出血）。"
+                "③ 緊急止血: 血小板<30,000/µLで重度出血時は新鮮全血または血小板濃厚液輸血"
+                "（10 mL/kg IV、半減期5-7日）。"
+                f"{transfuse_note} "
+                "④ 免疫介在性: プレドニゾロン 2 mg/kg PO q12h（犬猫）/0.5-1 mg/kg q24h（馬は限定使用）、"
+                "重症例ではビンクリスチン 0.02 mg/kg IV 単回 or ヒト免疫グロブリン（IVIG）0.5-1 g/kg IV、"
+                "難治例はミコフェノール酸モフェチル 10 mg/kg PO q12h。"
+                "⑤ 感染性: 特異的治療（ドキシサイクリン 5-10 mg/kg PO q12h × 28日 for エールリヒア/アナプラズマ）。"
+                "⑥ 出血予防: 安静、外傷回避、IM注射・静脈穿刺最小限、ヘパリン/NSAIDs禁忌。"
+                "⑦ モニタ: 血小板数 q24-48h、安定後は週1回。" + support
+            ),
+            "prognosis_ja": (
+                "免疫介在性は寛解率70-85%（犬）、再燃あり生涯管理。"
+                "感染性は原因除去で予後良好。骨髄性・腫瘍随伴は予後ガード。"
+            ),
+        }
+
+    if disorder == "dic":
+        return {
+            "treatment_ja": (
+                f"{species_ja}播種性血管内凝固（DIC）の治療: ① DICは独立した疾患ではなく、"
+                "重症基礎疾患（敗血症・腫瘍・熱射病・膵炎・外傷・蛇咬傷）に続発する症候群—"
+                "基礎疾患制御が最優先で、これなくしてDICは治癒しない。"
+                "② 確定: 血小板減少＋PT/aPTT延長＋Dダイマー上昇＋フィブリノーゲン低下（または逆に高値=代償期）"
+                "＋抗トロンビンIII低下、塗抹で破砕赤血球（schistocyte）。"
+                "ISTH DICスコア≥5で診断（人医基準を獣医に応用）。"
+                "③ 基礎疾患治療: 敗血症→感受性ベース広域抗菌薬・敗血症ガイドラインに沿った蘇生（"
+                "晶質液 60-90 mL/kg/h、目標MAP>65、乳酸クリアランス）。腫瘍→外科・化学療法。"
+                "膵炎→絶食・輸液・鎮痛。"
+                "④ 凝固因子補充: 新鮮凍結血漿（FFP）10-20 mL/kg IV q6-12h で凝固因子・AT補充、"
+                "重度血小板減少は血小板輸血または新鮮全血。"
+                "⑤ 抗凝固療法: 低分子ヘパリン（エノキサパリン 0.8-1 mg/kg SC q12h、抗Xaモニタ）"
+                "—出血傾向と血栓形成のバランスを慎重に判断、低凝固期は禁忌。"
+                f"{transfuse_note} "
+                "⑥ 支持療法: 輸液・酸素化・電解質補正・腎機能保護（dopamine 微量CRI、利尿薬）。"
+                "⑦ モニタ: 4-6時間ごとPT/aPTT・血小板・乳酸・尿量、改善傾向で漸減。" + support
+            ),
+            "prognosis_ja": (
+                "予後は基礎疾患制御の成否に依存—制御可能なら回復可能だが、"
+                "進行例・敗血症性ショック合併では死亡率50-80%と高い。"
+            ),
+        }
+
+    if disorder == "hemolysis":
+        return {
+            "treatment_ja": (
+                f"{species_ja}溶血性疾患の治療: ① 病型鑑別が治療方針を決める—免疫介在性溶血性貧血（IMHA）、"
+                "感染性（バベシア・マイコプラズマ・ヘモプラズマ・RHDV2/3 for rabbits）、"
+                "酸化障害性（タマネギ・ニンニク・アセトアミノフェン・亜鉛中毒）、機械的（DIC・心血管疾患）、"
+                "遺伝性（ピルビン酸キナーゼ欠損症等）。"
+                "② 確定: CBC＋網赤血球増加、塗抹（球状赤血球・ハインツ小体・Howell-Jolly体・寄生虫体・破砕赤血球）、"
+                "Coombs試験、感染症PCR、生化学（ビリルビン・LDH・ハプトグロビン）、尿（ヘモグロビン尿）。"
+                "③ 緊急輸血: PCV <15%（犬）/<12%（猫）または症候性は輸血適応。"
+                f"{transfuse_note} "
+                "④ IMHA: プレドニゾロン 2 mg/kg PO q12h × 2-4週後漸減、難治例にミコフェノール酸モフェチル 10 mg/kg PO q12h、"
+                "ヒト免疫グロブリン 0.5-1 g/kg IV、シクロスポリン 5 mg/kg PO q12h。"
+                "血栓塞栓予防にクロピドグレル 1-2 mg/kg PO q24h（IMHAは血栓リスク高）。"
+                "⑤ 感染性: バベシア→イミドカルブ 6.6 mg/kg IM 2回（14日間隔）、"
+                "マイコプラズマ→ドキシサイクリン 5-10 mg/kg PO q12h × 4-6週。"
+                "⑥ 酸化障害性: 原因物質除去、活性炭、N-アセチルシステイン 140 mg/kg IV 初回→70 mg/kg q6h（パラセタモール中毒時）。"
+                "⑦ モニタ: PCV・網赤血球・ビリルビン q12-24h、安定後週1回。" + support
+            ),
+            "prognosis_ja": (
+                "IMHA死亡率30-70%（最初の2週が最重症）、感染性は治療反応良好。"
+                "中毒性は早期除染で予後良好、遺伝性は管理疾患として終生対応。"
+            ),
+        }
+
+    if disorder == "polycythemia":
+        return {
+            "treatment_ja": (
+                f"{species_ja}赤血球増加症（多血症）の治療: ① 病型鑑別—相対性（脱水）、絶対性原発性（真性多血症 PV）、"
+                "絶対性二次性（慢性低酸素症—心疾患・肺疾患・高地、エリスロポエチン産生腫瘍—腎癌・肝癌）。"
+                "② 確定: HCT >65%（犬）/>55%（猫）/種特異的高値、CBC、塗抹、血清EPO値（PVで低値、二次性で高値）、"
+                "胸腔・腹腔の画像（心臓・肺・腎・肝の評価）、動脈血ガス（低酸素症評価）、骨髄生検（PV確診）。"
+                "③ 脱水性（相対性）: 等張輸液で補正、HCT低下を確認。"
+                "④ 二次性低酸素症: 基礎疾患治療（心疾患→ピモベンダン、肺疾患→気管支拡張薬・酸素）—"
+                "代償性赤血球増加は完全には正常化しないが基礎疾患制御を優先。"
+                "⑤ 真性多血症（PV）: 治療的瀉血（10-20 mL/kg、目標HCT <60%、等量輸液置換）q2-4週、"
+                "ヒドロキシ尿素 30 mg/kg PO q24h × 7日 → 15 mg/kg PO q24h 維持で骨髄抑制、CBCモニタ。"
+                "⑥ 過粘稠症候群（神経症状・血栓・出血）: 緊急瀉血、補液で粘度低下、低分子ヘパリン併用検討。"
+                "⑦ モニタ: HCT q2-4週、肝腎機能、神経症状の有無。" + support
+            ),
+            "prognosis_ja": (
+                "相対性（脱水）は補正で予後良好、二次性は基礎疾患による、PVは適切治療で中央生存期間2-5年（犬）。"
+            ),
+        }
+
+    if disorder == "splenomegaly":
+        return {
+            "treatment_ja": (
+                f"{species_ja}脾腫の治療: ① 脾腫は独立疾患ではなく、原因鑑別が必須—"
+                "鬱血性（門脈圧亢進・心不全・脾捻転）、増殖性（リンパ腫・血管肉腫・MCT・髄外造血）、"
+                "感染性（マイコプラズマ・エールリヒア・バベシア・FIV・FeLV・敗血症）、"
+                "免疫介在性（IMHA・SLE・脾過誤腫）、薬剤性（バルビツール酸長期）。"
+                "② 確定: 触診・超音波（びまん性 vs 結節性、血管系評価）、CBC・生化学・凝固系、"
+                "塗抹（血液寄生虫・腫瘍細胞）、感染症PCR・抗体、"
+                "脾穿刺/針生検（細胞診—リンパ腫・MCT・髄外造血鑑別）、CT（病期評価・血管造影）。"
+                "③ 緊急脾捻転: 緊急脾摘出術—腹部膨満・低血圧・乳酸上昇・心不全合併で死亡率高い。"
+                "④ 腫瘍性（血管肉腫・リンパ腫）: 脾摘出＋化学療法（血管肉腫はDoxorubicin、リンパ腫はCHOP）、"
+                "破裂例は緊急輸血＋外科。"
+                f"{transfuse_note} "
+                "⑤ 感染性: ドキシサイクリン 5-10 mg/kg PO q12h × 28日（リケッチア・マイコプラズマ）、"
+                "イミドカルブ（バベシア）。"
+                "⑥ 鬱血性: 基礎疾患治療（心不全→ピモベンダン・利尿、門脈圧亢進→原因対処）。"
+                "⑦ モニタ: 4-8週毎の超音波と血液検査、腫瘍例は転移評価。" + support
+            ),
+            "prognosis_ja": (
+                "原因による—感染性・鬱血性は基礎疾患制御で改善、"
+                "脾血管肉腫（犬）は中央生存3-6ヶ月と予後不良、リンパ腫は化学療法反応性で改善可能。"
+            ),
+        }
+
+    if disorder == "hemorrhage":
+        return {
+            "treatment_ja": (
+                f"{species_ja}出血症候群の治療: ① 病因鑑別—一次性止血障害（血小板減少・血小板機能不全・"
+                "vWD）、二次性（凝固因子欠損—肝疾患・ビタミンK欠乏・抗凝固薬中毒・先天性血友病）、"
+                "血管脆弱（外傷・血管炎・敗血症）。"
+                "② 確定: CBC＋血小板、塗抹、凝固系（PT/aPTT・Dダイマー・フィブリノーゲン）、"
+                "頬粘膜出血時間（BMBT、一次止血評価）、vWF測定、肝機能、毒物検査（殺鼠剤）。"
+                "③ 緊急止血: 圧迫・止血剤（フェリック硫酸・ハイドロコロイド剤）、外科的結紮。"
+                "ショック例には輸液＋輸血（重度出血で大量出血プロトコル）。"
+                f"{transfuse_note} "
+                "④ ビタミンK拮抗性殺鼠剤中毒: ビタミンK1 2.5-5 mg/kg PO/SC q12h × 14-42日"
+                "（製剤により期間調整、PT正常化後さらに2週継続）、新鮮凍結血漿 10-20 mL/kg IV（PT延長時）。"
+                "⑤ 肝性凝固障害: FFP補充、UDCA、肝保護薬、肝原疾患治療。"
+                "⑥ 血友病: 反復FFP・濃厚血漿輸血で因子補充。先天性vWDではDDAVP 1 µg/kg SC（type 1）。"
+                "⑦ 血小板機能不全: 抗血小板薬中止（クロピドグレル・アスピリン）、新鮮血小板輸血。"
+                "⑧ モニタ: PT/aPTT・PCV・血小板 q6-12h（急性期）。" + support
+            ),
+            "prognosis_ja": (
+                "ビタミンK拮抗中毒は早期治療で予後良好、肝性は基礎疾患による、先天性血友病は管理疾患として生涯対応。"
+            ),
+        }
+
+    return None
+
+
+# ============================================================================
+# Endocrine "Others" multi-species placeholder (replaces 「種特異的治療が必要」 template)
+# ============================================================================
+
+
 def gen_endocrine_others(species: str, name_ja: str) -> Optional[dict]:
     species_ja = _species_label_ja_local(species)
     nm = name_ja or ""
@@ -3712,6 +4325,40 @@ DISEASE_GENERATORS: list[tuple[str, Callable[[str, str], Optional[dict]]]] = [
     # Generic endocrine "Others"
     ("内分泌系", gen_endocrine_others),
     ("代謝性疾患（複数種）", gen_endocrine_others),
+    # === Phase 5 — Blood/hematology disorders (Jun 2026) ===
+    # These conditions previously shared a generic "血液異常の基礎原因の特定と対処" template;
+    # gen_blood_disorder produces disorder-specific (anemia/DIC/IMHA/etc.) content per species.
+    ("貧血", gen_blood_disorder),
+    ("Anemia", gen_blood_disorder),
+    ("血小板減少", gen_blood_disorder),
+    ("Thrombocytopenia", gen_blood_disorder),
+    ("播種性血管内凝固", gen_blood_disorder),
+    ("DIC", gen_blood_disorder),
+    ("溶血", gen_blood_disorder),
+    ("Hemolytic", gen_blood_disorder),
+    ("赤血球増加", gen_blood_disorder),
+    ("多血", gen_blood_disorder),
+    ("Polycythemia", gen_blood_disorder),
+    ("脾腫", gen_blood_disorder),
+    ("Splenomegaly", gen_blood_disorder),
+    ("出血症候群", gen_blood_disorder),
+    ("血液疾患", gen_blood_disorder),
+    # Subtype routing (must be present so lookup matches names that don't include 貧血)
+    ("ヘモプラズマ", gen_blood_disorder),
+    ("haemofelis", gen_blood_disorder),
+    ("haemominutum", gen_blood_disorder),
+    ("Mycoplasma haem", gen_blood_disorder),
+    ("猫感染性貧血", gen_blood_disorder),
+    ("猫伝染性貧血", gen_blood_disorder),
+    ("馬伝染性貧血", gen_blood_disorder),
+    ("EIA", gen_blood_disorder),
+    ("新生子溶血", gen_blood_disorder),
+    ("新生児溶血", gen_blood_disorder),
+    ("溶血性尿毒症", gen_blood_disorder),
+    ("HUS", gen_blood_disorder),
+    ("コニュア出血", gen_blood_disorder),
+    ("エストロゲン中毒", gen_blood_disorder),
+    ("高エストロゲン血症", gen_blood_disorder),
     # === Phase 3 — Neoplasia & nutritional & exotic syndromes ===
     # Neoplasia (must come before broader "腫瘍" matches if added)
     ("脂肪腫", gen_lipoma),
@@ -3754,6 +4401,17 @@ DISEASE_GENERATORS: list[tuple[str, Callable[[str, str], Optional[dict]]]] = [
     ("ムコール症", gen_mucormycosis),
     ("Mucormycosis", gen_mucormycosis),
     ("接合菌症", gen_mucormycosis),
+    # Candidiasis — distinct from dermatophytes; needs nystatin/fluconazole content
+    ("カンジダ", gen_candidiasis),
+    ("Candida", gen_candidiasis),
+    ("Candidiasis", gen_candidiasis),
+    ("thrush", gen_candidiasis),
+    ("カンジダ症", gen_candidiasis),
+    # Sporotrichosis — zoonotic dimorphic fungus, cats are major source
+    ("スポロトリックス", gen_sporotrichosis),
+    ("スポロトリコ", gen_sporotrichosis),
+    ("Sporothrix", gen_sporotrichosis),
+    ("Sporotrichosis", gen_sporotrichosis),
     # Muscle wasting / cachexia
     ("筋萎縮", gen_muscle_wasting),
     ("悪液質", gen_muscle_wasting),
@@ -3884,6 +4542,17 @@ _GENERATOR_EXCLUSIONS: dict[str, list[str]] = {
     "心筋症": ["心膜", "心内膜炎", "心筋炎"],
     # Dehydration - narrow to actual dehydration (not "脱水酵素" etc.)
     "脱水": ["酵素"],
+    # Blood disorders: tight scoping to avoid clobbering specific conditions
+    "貧血": [],  # 溶血性貧血 should match 貧血 — gen_blood_disorder routes internally
+    "血小板減少": [],
+    "播種性血管内凝固": [],
+    "DIC": [],
+    "溶血": [],
+    "赤血球増加": [],
+    "多血": [],
+    "脾腫": [],
+    "出血症候群": [],
+    "血液疾患": [],
 }
 
 
