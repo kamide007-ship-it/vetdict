@@ -374,7 +374,9 @@ def update_json(json_path: Path) -> tuple[int, int, int, int, int]:
         else:
             unchanged += 1
     with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        # Compact (no indent): keeps diseases_all_species.json under GitHub's
+        # 100 MiB blob limit; it is NOT LFS-tracked (read at runtime).
+        json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
     return replaced, suffix_stripped, implicit_replaced, curated_upgraded, unchanged
 
 
