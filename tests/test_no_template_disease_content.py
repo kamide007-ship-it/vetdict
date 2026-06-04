@@ -144,6 +144,14 @@ def _load_json_entries() -> list[dict]:
     json_path = ROOT / "diseases_all_species.json"
     if not json_path.exists():
         return []
+    # The file is git-LFS-tracked; on CI without `git lfs pull` we get a
+    # ~134-byte pointer file instead of the actual content. Treat that as
+    # "not present" so tests skip cleanly rather than crashing on JSON decode.
+    if json_path.stat().st_size < 10_000:
+        with open(json_path, encoding="utf-8") as f:
+            head = f.read(200)
+        if head.startswith("version https://git-lfs"):
+            return []
     with open(json_path, encoding="utf-8") as f:
         return json.load(f)
 
@@ -1116,3 +1124,179 @@ def test_feline_hemoplasmosis_mentions_doxycycline():
         assert any(kw in tx for kw in ("ドキシサイクリン", "doxycycline", "マルボフロキサシン", "marbofloxacin")), (
             f"Feline hemoplasmosis missing first-line antibiotic: '{tx[:240]}'"
         )
+
+
+# ---------------------------------------------------------------------------
+# Multi-field clinical template regression tests (2026-06 fix)
+# ---------------------------------------------------------------------------
+# The non-treatment JA fields (causes_ja, transmission_ja, prevention_ja,
+# prognosis_ja, clinical_signs_ja, differential_diagnosis_ja,
+# nutrition_management_ja, prognosis_detailed_ja, rehabilitation_protocol_ja,
+# pathophysiology_ja) had ~0% uniqueness across 6,400+ entries — every
+# infection had the same causes_ja, every neoplasia the same prognosis, etc.
+# Worse, cross-category misapplications were rife (FeLV got "tumors do not
+# transmit", asthma got the parasite template, etc.).
+#
+# These were eliminated in scripts/template_elimination/
+# eliminate_clinical_field_templates.py.
+
+# Fields whose uniqueness must remain above the threshold below.
+_CLINICAL_FIELDS_REQUIRING_UNIQUENESS = [
+    "causes_ja",
+    "transmission_ja",
+    "prevention_ja",
+    "clinical_signs_ja",
+    "differential_diagnosis_ja",
+    "nutrition_management_ja",
+    "prognosis_detailed_ja",
+    "rehabilitation_protocol_ja",
+]
+
+# Minimum allowed unique-text % for each field. Anything below this signals
+# that templates have re-infected the database.
+_MIN_UNIQUENESS_PCT = 70.0
+
+
+def test_clinical_fields_meet_uniqueness_threshold():
+    """Every non-treatment JA clinical field must be ≥70% unique across entries.
+
+    A field that's <70% unique means category-level templates have been
+    bulk-applied across many distinct diseases — which is what we just
+    eliminated.
+    """
+    from collections import Counter
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+
+    failures = []
+    for field in _CLINICAL_FIELDS_REQUIRING_UNIQUENESS:
+        texts = [(e.get(field, "") or "").strip() for e in entries]
+        nonempty = [t for t in texts if len(t) >= 50]
+        if len(nonempty) < 100:
+            continue
+        cnt = Counter(nonempty)
+        unique = sum(1 for c in cnt.values() if c == 1)
+        pct = 100.0 * unique / len(nonempty)
+        if pct < _MIN_UNIQUENESS_PCT:
+            # Show the most-repeated text
+            top_text, top_count = cnt.most_common(1)[0]
+            failures.append(
+                f"{field}: {pct:.1f}% unique (need ≥{_MIN_UNIQUENESS_PCT:.0f}%). "
+                f"Worst offender: '{top_text[:80]}…' shared by {top_count} entries."
+            )
+    assert not failures, "Clinical fields below uniqueness threshold:\n" + "\n".join(failures)
+
+
+def test_felv_transmission_does_not_claim_tumors_dont_transmit():
+    """FeLV is a contagious virus — its transmission_ja must NOT say
+    "tumors don't transmit between individuals" (a credibility-killing
+    cross-category template error from the May-2026 enrichment).
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    felv = [
+        e for e in entries if e.get("species") == "Cat" and "FeLV" in ((e.get("name_ja") or "") + (e.get("name") or ""))
+    ]
+    if not felv:
+        pytest.skip("No FeLV entries")
+    for entry in felv:
+        tx = entry.get("transmission_ja", "") or ""
+        assert "腫瘍は感染性疾患ではない" not in tx, f"FeLV transmission_ja still has neoplasia template: '{tx[:200]}'"
+        # Must mention actual transmission route
+        assert any(kw in tx for kw in ("唾液", "咬傷", "水平感染", "母子伝播", "saliva")), (
+            f"FeLV transmission_ja missing virus-specific transmission: '{tx[:200]}'"
+        )
+
+
+def test_asthma_causes_is_not_parasitic_template():
+    """Feline asthma is an allergic/inflammatory airway disease — not parasitic.
+    Its causes_ja must NOT be the generic parasite-infection template.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    asthma = [
+        e
+        for e in entries
+        if e.get("species") == "Cat" and "喘息" in ((e.get("name_ja") or "") + (e.get("name") or "Asthma"))
+    ]
+    if not asthma:
+        pytest.skip("No feline asthma entries")
+    for entry in asthma:
+        cja = entry.get("causes_ja", "") or ""
+        # The parasite template starts with "寄生虫（線虫・条虫..."
+        assert not cja.startswith("寄生虫（線虫"), f"Feline asthma causes_ja is the parasite template: '{cja[:200]}'"
+
+
+def test_hyperthyroidism_does_not_have_neoplasia_transmission():
+    """Cat hyperthyroidism is endocrine — its transmission_ja must NOT use
+    the neoplasia template's "tumors don't transmit" boilerplate (because
+    hyperthyroidism IS caused by a benign tumor and the template is being
+    auto-applied incorrectly to other endocrine details).
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    cat_hyp = [
+        e
+        for e in entries
+        if e.get("species") == "Cat" and "甲状腺機能亢進" in ((e.get("name_ja") or "") + (e.get("name") or ""))
+    ]
+    if not cat_hyp:
+        pytest.skip("No cat hyperthyroidism entries")
+    for entry in cat_hyp:
+        tx = entry.get("transmission_ja", "") or ""
+        # Must mention "non-infectious / no transmission" but in endocrine-appropriate language
+        # The neoplasia template specifically says "CTVT" and "FeLV-related tumors"
+        # which shouldn't be in hyperthyroidism transmission_ja
+        assert "CTVT" not in tx, f"Cat hyperthyroidism transmission_ja contains CTVT (canine tumor): '{tx[:200]}'"
+
+
+def test_no_double_species_prefix_in_clinical_fields():
+    """Generated content must not have '猫における猫XXX...' double-species patterns."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    sp_map = {
+        "Dog": "犬",
+        "Cat": "猫",
+        "Horse": "馬",
+        "Rabbit": "ウサギ",
+        "Hamster": "ハムスター",
+        "Guinea Pig": "モルモット",
+        "Chinchilla": "チンチラ",
+        "Bird": "鳥",
+        "Parakeet": "インコ",
+        "Parrot": "オウム",
+        "Ferret": "フェレット",
+        "Hedgehog": "ハリネズミ",
+    }
+    fields = [
+        "causes_ja",
+        "transmission_ja",
+        "prognosis_ja",
+        "clinical_signs_ja",
+        "differential_diagnosis_ja",
+        "prevention_ja",
+        "nutrition_management_ja",
+        "prognosis_detailed_ja",
+        "rehabilitation_protocol_ja",
+    ]
+    failures = []
+    for entry in entries:
+        sp_ja = sp_map.get(entry.get("species", ""), "")
+        if not sp_ja:
+            continue
+        for field in fields:
+            v = entry.get(field, "") or ""
+            if v.startswith(f"{sp_ja}における{sp_ja}"):
+                failures.append(
+                    f"[{entry.get('species')}] {entry.get('name_ja')}/{field}: starts with '{sp_ja}における{sp_ja}'"
+                )
+                break
+    assert not failures, f"Found {len(failures)} entries with double-species prefix. First 5:\n" + "\n".join(
+        failures[:5]
+    )
