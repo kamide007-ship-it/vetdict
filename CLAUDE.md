@@ -855,6 +855,44 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - ruff check / format: 全変更ファイルで通過
 - ServiceWorker: `CACHE_NAME` v73 → **v74**
 
+## 2026-06セッションで実施した改善（第2弾: prognosis_ja テンプレート撲滅）
+
+### 背景
+2026-05/06セッションで treatment_ja のテンプレートは撲滅したが、**prognosis_ja には残存** していた。
+原因は `template_content_library.py` の各 `gen_*` 関数が同一の予後文字列を species class 全体に返却していたこと。
+例: `gen_hypothermia()` の SMALL_MAMMAL 分岐は rabbit/hamster/guinea_pig/chinchilla/ferret/hedgehog/sugar_glider/degu の **8種すべてに同じ予後文** を返却。
+5語程度の予後文では、種ごとに異なる体重・サーモニュートラルゾーン・致死率を反映できない（=テンプレート）。
+
+### 新規スクリプト: `scripts/template_elimination/eliminate_prognosis_templates.py`
+- 共有 prognosis_ja を検出（3+ 種で共有 or 3+ 疾患名で共有）
+- 38の疾患キーワード × 21種で個別予後を生成（225エントリを置換）
+- 種特異的な臨床現実を反映: ハムスター体表/体積比、ハリネズミ torpor、フェレット術後低体温、フクロモモンガの熱帯起源、爬虫類 POTZ、鳥類 アロプリノール 等
+- 副甲状腺 vs 甲状腺機能亢進の substring match バグ修正（_NSHP/原発性/腎性/低下症の4型を個別生成）
+
+### 効果
+| Metric | Before | After | Δ |
+|---|---|---|---|
+| クロス種prognosis_ja共有（3+種） | 39テンプレート 175件 | **0** | -39 (-100%) |
+| イントラ種共有（3+疾患 in 1種） | 14 | 5 | -9 |
+| affected entries 全体 | 225 | 11※ | -214 (-95%) |
+
+※残り5件は 1種 × 3疾患の臨床的に正当な variant（消化管うっ滞/便秘/巨大結腸症のような連続的病態、犬ジステンパー本体/脳炎/硬蹠症のような同一疾患の subtype 等）。`_MAX_DISEASES_PER_TREATMENT_INTRA_SPECIES=4` の閾値内なので回帰テストには通る。
+
+### 新規 regression テスト
+- `test_no_cross_species_prognosis_template` — prognosis_ja が 3+ 種 × 3+ 疾患で共有されていないことを検証
+
+### テスト・CI
+- フルテストスイート: **3,285件 全合格**
+- ruff check/format: 全変更ファイルで通過
+- SQLite migration 完了（7,094件、prognosis 100%）
+
+### 残存する正当な重複（テンプレートではない）
+- Guinea Pig: 消化管うっ滞 / 便秘 / 巨大結腸症 — 連続的な腸運動低下スペクトラム
+- Sugar Glider: カンジダ症 / 消化管カンジダ症 / 腸管カンジダ症 — 同一病態の発生部位 variant
+- Bird: 痛風（内臓型/関節型）/ 内臓痛風 / 内臓痛風急性型 — 表示用 variant
+- Dog: 犬ジステンパー / ジステンパー脳炎 / 犬ジステンパー硬蹠症 — 同一感染症の症候群 variant
+- Dog: アスペルギルス症 / 鼻アスペルギルス症 / 鼻腔アスペルギルス症 — 解剖学的部位の variant
+
 ## 次セッションへの引き継ぎ事項（2026-04第6回更新）
 
 ### 現行ブランチ `claude/fix-sorting-translate-jp-sUWGl`

@@ -1255,6 +1255,45 @@ def test_hyperthyroidism_does_not_have_neoplasia_transmission():
         assert "CTVT" not in tx, f"Cat hyperthyroidism transmission_ja contains CTVT (canine tumor): '{tx[:200]}'"
 
 
+def test_no_cross_species_prognosis_template():
+    """No prognosis_ja text may be reused by 3+ different species.
+
+    The disease library used to return identical short prognoses
+    (e.g. "早期復温で予後改善。") for every species in a class — meaning
+    rabbit/hamster/guinea-pig/chinchilla/etc. all shared the same 5-word
+    prognostic summary. A 5-word prognosis cannot meaningfully describe
+    outcomes for the same condition across 3+ species: each one has different
+    body mass, organ susceptibility, dosing, and case-fatality reports.
+
+    This was eliminated by scripts/template_elimination/
+    eliminate_prognosis_templates.py in June 2026 — see CLAUDE.md.
+    """
+    from collections import defaultdict
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    by_species: dict[str, set[str]] = defaultdict(set)
+    by_names: dict[str, set[str]] = defaultdict(set)
+    for e in entries:
+        prog = (e.get("prognosis_ja") or "").strip()
+        sp = e.get("species") or ""
+        name = (e.get("name_ja") or "").strip() or (e.get("name") or "").strip()
+        if prog and sp and name:
+            by_species[prog].add(sp)
+            by_names[prog].add(name)
+    failures = []
+    for prog, species_set in by_species.items():
+        if len(species_set) >= 3 and len(by_names[prog]) >= 3:
+            failures.append(
+                f"{len(species_set)} species × {len(by_names[prog])} diseases share prognosis_ja: "
+                f"'{prog[:80]}…' (species: {sorted(species_set)[:5]})"
+            )
+    assert not failures, f"Found {len(failures)} cross-species prognosis templates. First 5:\n" + "\n".join(
+        failures[:5]
+    )
+
+
 def test_no_double_species_prefix_in_clinical_fields():
     """Generated content must not have '猫における猫XXX...' double-species patterns."""
     entries = _load_json_entries()
