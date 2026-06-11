@@ -1448,8 +1448,6 @@ def test_no_stub_description_in_json():
     failures = []
     for entry in entries:
         ja = entry.get("description_ja", "") or ""
-        if "にみられる疾患である" in ja and (
-            "の臨床徴候は以下を含む" in ja or "の原因:" in ja or "の原因：" in ja
-        ):
+        if "にみられる疾患である" in ja and ("の臨床徴候は以下を含む" in ja or "の原因:" in ja or "の原因：" in ja):
             failures.append(f"[{entry.get('species')}] {entry.get('name_ja')}: stub description_ja")
     assert not failures, f"Found {len(failures)} stub descriptions. First 5:\n" + "\n".join(failures[:5])

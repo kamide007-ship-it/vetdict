@@ -1176,9 +1176,7 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
         return _paren.sub("", name or "").strip()
 
     counts: dict[str, int] = {f: 0 for f in fields}
-    rows = conn.execute(
-        "SELECT id, species, name, name_ja, " + ", ".join(fields) + " FROM diseases"
-    ).fetchall()
+    rows = conn.execute("SELECT id, species, name, name_ja, " + ", ".join(fields) + " FROM diseases").fetchall()
 
     for field in fields:
         groups: dict[str, list] = defaultdict(list)
@@ -1189,8 +1187,7 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
         template_texts = {
             val
             for val, items in groups.items()
-            if len(items) >= MIN_SHARE
-            and len({_base(r["name_ja"] or r["name"]) for r in items}) >= MIN_NAMES
+            if len(items) >= MIN_SHARE and len({_base(r["name_ja"] or r["name"]) for r in items}) >= MIN_NAMES
         }
         for val in template_texts:
             for row in groups[val]:

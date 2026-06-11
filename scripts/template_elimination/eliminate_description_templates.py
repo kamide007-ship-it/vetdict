@@ -70,6 +70,7 @@ def _is_stub_ja(text: str) -> bool:
         return False
     return "の臨床徴候は以下を含む" in text or "の原因:" in text or "の原因：" in text
 
+
 # A description is also treated as a template if its exact text is shared by
 # this many or more entries (catches any boilerplate without a known marker).
 DUPLICATE_THRESHOLD = 3
