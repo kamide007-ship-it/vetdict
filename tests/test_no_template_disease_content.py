@@ -1339,3 +1339,117 @@ def test_no_double_species_prefix_in_clinical_fields():
     assert not failures, f"Found {len(failures)} entries with double-species prefix. First 5:\n" + "\n".join(
         failures[:5]
     )
+
+
+# ---------------------------------------------------------------------------
+# Disease description templates (2026-06 elimination)
+# ---------------------------------------------------------------------------
+
+# Generic boilerplate that the early enrichment pass appended to exotic-species
+# descriptions. These sentences carry no disease-specific information and were
+# shared verbatim across hundreds of unrelated diseases.
+DESCRIPTION_BOILERPLATE_JA = (
+    "臨床症状の重症度と全身状態を総合的に評価し",
+    "飼育環境の最適化と栄養管理が回復の促進に重要な役割を果たす",
+    "定期的な再評価により治療反応を確認し、必要に応じて治療計画の修正を行う",
+)
+DESCRIPTION_BOILERPLATE_EN = (
+    "Comprehensive assessment of clinical signs and overall condition",
+    "Optimization of husbandry and nutritional management plays",
+)
+
+_PAREN_TAG = re.compile(r"[（(][^（）()]*[）)]\s*$")
+
+
+def _base_name(entry: dict) -> str:
+    name = entry.get("name_ja") or entry.get("name") or ""
+    return _PAREN_TAG.sub("", name).strip()
+
+
+def test_no_description_boilerplate_in_json():
+    """description / description_ja must not carry the generic boilerplate tail."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    failures = []
+    for entry in entries:
+        ja = entry.get("description_ja", "") or ""
+        en = entry.get("description", "") or ""
+        if any(m in ja for m in DESCRIPTION_BOILERPLATE_JA):
+            failures.append(f"[{entry.get('species')}] {entry.get('name_ja')}: description_ja boilerplate")
+        elif any(m in en for m in DESCRIPTION_BOILERPLATE_EN):
+            failures.append(f"[{entry.get('species')}] {entry.get('name')}: description boilerplate")
+    assert not failures, f"Found {len(failures)} entries with boilerplate descriptions. First 5:\n" + "\n".join(
+        failures[:5]
+    )
+
+
+def test_no_cross_disease_description_template_in_json():
+    """No description text may be shared by 4+ entries spanning 4+ distinct diseases.
+
+    Same-disease families (portosystemic shunt congenital/acquired, hemangiosarcoma
+    at different sites) legitimately share a summary, so the guard fires only when
+    4+ *distinct base disease names* share one text — a genuine template spanned
+    dozens of unrelated diseases.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    from collections import defaultdict
+
+    failures = []
+    for field in ("description_ja", "description"):
+        by_text: dict[str, list] = defaultdict(list)
+        for entry in entries:
+            v = (entry.get(field) or "").strip()
+            if v and len(v) >= 40:
+                by_text[v].append(entry)
+        for text, items in by_text.items():
+            names = {_base_name(e) for e in items}
+            if len(items) >= 4 and len(names) >= 4:
+                failures.append(
+                    f"{field}: {len(items)} entries / {len(names)} diseases share "
+                    f"'{text[:60]}…' (e.g. {sorted(names)[:3]})"
+                )
+    assert not failures, f"Found {len(failures)} cross-disease description templates. First 5:\n" + "\n".join(
+        failures[:5]
+    )
+
+
+def test_avian_goiter_description_not_neoplasia():
+    """Avian goiter (iodine-deficiency thyroid hyperplasia) must not be described as a tumour.
+
+    Regression for the '腺腫' substring inside '甲状腺腫' matching the neoplasia
+    category resolver.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    for entry in entries:
+        name = entry.get("name_ja", "") or ""
+        if entry.get("species") in ("Parakeet", "Parrot", "Bird") and "甲状腺腫" in name and "腫瘍" not in name:
+            ja = entry.get("description_ja", "") or ""
+            if ja and ("臨床症状の重症度" not in ja):  # only assert on regenerated descriptions
+                assert "腫瘍性疾患" not in ja, (
+                    f"[{entry.get('species')}] {name}: goiter described as neoplasia: {ja[:120]}"
+                )
+
+
+def test_no_stub_description_in_json():
+    """description_ja must not contain the field-label-scaffolding stub prose.
+
+    The stub form ("XはYにみられる疾患である。YにおけるXの原因: …。主要な臨床
+    徴候はYにおけるXの臨床徴候は以下を含む。など。") reads as broken prose and
+    was replaced by clean category summaries in 2026-06.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    failures = []
+    for entry in entries:
+        ja = entry.get("description_ja", "") or ""
+        if "にみられる疾患である" in ja and (
+            "の臨床徴候は以下を含む" in ja or "の原因:" in ja or "の原因：" in ja
+        ):
+            failures.append(f"[{entry.get('species')}] {entry.get('name_ja')}: stub description_ja")
+    assert not failures, f"Found {len(failures)} stub descriptions. First 5:\n" + "\n".join(failures[:5])
