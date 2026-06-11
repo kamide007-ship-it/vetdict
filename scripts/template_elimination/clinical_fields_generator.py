@@ -102,6 +102,8 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"コクシジウム|Coccidi|ジアルジア|Giardia|トリコモナス|Trichomonas|"
             r"ヘキサミタ|Hexamita|スピロヌクレウス|Spironucleus|"
             r"トキソプラズマ|Toxoplasma|エンセファリトゾーン|Encephalitozoon|"
+            r"原虫|protozoa|protozoan|鞭毛虫|flagellate|アメーバ|amoeb|ameb|"
+            r"微胞子虫|microspor|住肉胞子虫|Sarcocystis|"
             r"クリプトスポリジウム|Cryptosporidium|住血吸虫|Schistosoma|"
             r"バベシア|Babesia|トリパノソーマ|Trypanosoma|リーシュマニア|Leishmania|"
             r"ダニ|mite|tick|ツメダニ|ヒゼンダニ|アカルス|Demodex|ノミ|flea|"
@@ -113,6 +115,13 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"羽ダニ|気嚢ダニ"
         ),
         "parasitic",
+    ),
+    # Goiter (thyroid hyperplasia) — must precede neoplasia because the
+    # substring "腺腫" in "甲状腺腫" would otherwise match the adenoma pattern.
+    # In exotics (esp. budgerigars) goiter is iodine-deficiency driven.
+    (
+        re.compile(r"甲状腺腫(?!瘍)|goiter|goitre|ヨウ素欠乏|iodine deficienc"),
+        "nutritional",
     ),
     # Neoplasia (after viral so FeLV doesn't match lymphoma)
     (
@@ -365,6 +374,20 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
         "behavioral",
     ),
 ]
+
+
+def resolve_category_from_name(name_ja: str, name_en: str) -> Optional[str]:
+    """Resolve category from the disease *name* only, or None if no pattern matches.
+
+    Used for the disease description (the most visible headline field), where
+    trusting a possibly-wrong stored ``category`` tag would yield embarrassing
+    mis-categorisations such as "cheek pouch impaction is a bacterial infection".
+    """
+    name = f"{name_ja or ''} {name_en or ''}"
+    for pattern, cat in NAME_CATEGORY_PATTERNS:
+        if pattern.search(name):
+            return cat
+    return None
 
 
 def resolve_true_category(name_ja: str, name_en: str, tagged_category: str) -> str:
@@ -2157,8 +2180,262 @@ def gen_rehabilitation_protocol_ja(category: str, name_ja: str, species: str) ->
 
 
 # ---------------------------------------------------------------------------
+# Disease description generators (concise "what is this disease" summary)
+# ---------------------------------------------------------------------------
+
+SPECIES_EN = {
+    "dog": "dogs",
+    "cat": "cats",
+    "horse": "horses",
+    "rabbit": "rabbits",
+    "hamster": "hamsters",
+    "guinea_pig": "guinea pigs",
+    "chinchilla": "chinchillas",
+    "ferret": "ferrets",
+    "hedgehog": "hedgehogs",
+    "sugar_glider": "sugar gliders",
+    "degu": "degus",
+    "bird": "birds",
+    "parakeet": "parakeets",
+    "parrot": "parrots",
+    "reptile": "reptiles",
+    "tortoise": "tortoises",
+    "snake": "snakes",
+    "lizard": "lizards",
+    "amphibian": "amphibians",
+    "fish": "fish",
+    "exotic_other": "exotic pets",
+}
+
+# Trailing parenthetical species tags, e.g. "鞭毛虫原虫感染（リクガメ）" -> "鞭毛虫原虫感染".
+_PAREN_TAG_RE = re.compile(r"[（(][^（）()]*[）)]\s*$")
+
+
+def _clean_name(name: str) -> str:
+    """Strip a trailing ``（species）`` tag so generated text reads naturally."""
+    if not name:
+        return name
+    return _PAREN_TAG_RE.sub("", name).strip() or name
+
+
+# Concise category definitions: {category: (ja_definition, en_definition)}.
+# ``{n}`` = cleaned disease name, ``{s}`` = species (JA/EN).
+_DESC_CATEGORY: dict[str, tuple[str, str]] = {
+    "viral_infection": (
+        "{n}は、{s}にみられるウイルス性感染症である。病原ウイルスが宿主細胞内で複製し組織傷害と免疫応答を引き起こす。"
+        "確定診断にはPCR・抗原/抗体検査を用い、治療は支持療法と感染管理が中心となる。",
+        "{n} is a viral infectious disease of {s}, in which the causative virus replicates within host "
+        "cells and drives tissue injury and immune responses. Diagnosis relies on PCR and antigen/antibody "
+        "testing, and management centres on supportive care and biosecurity.",
+    ),
+    "bacterial_infection": (
+        "{n}は、{s}にみられる細菌感染症である。原因菌の定着・増殖と毒素産生により局所および全身性の炎症を生じる。"
+        "培養・感受性試験に基づく抗菌薬選択と支持療法が治療の基本となる。",
+        "{n} is a bacterial infection of {s}, in which colonisation, proliferation and toxin production by the "
+        "causative organism drive local and systemic inflammation. Treatment is guided by culture and "
+        "sensitivity testing alongside supportive care.",
+    ),
+    "respiratory_infection": (
+        "{n}は、{s}の気道に生じる感染性呼吸器疾患である。鼻汁・くしゃみ・呼吸促迫・努力性呼吸などを呈する。"
+        "病原体同定に基づく抗菌・抗ウイルス療法と、加温・酸素・ネブライザーなどの支持療法を組み合わせる。",
+        "{n} is an infectious respiratory disease affecting the airways of {s}, presenting with nasal discharge, "
+        "sneezing and increased respiratory effort. Care combines pathogen-directed therapy with supportive "
+        "measures such as warmth, oxygen and nebulisation.",
+    ),
+    "fungal_infection": (
+        "{n}は、{s}にみられる真菌感染症である。皮膚・呼吸器・全身臓器に病変を形成し、免疫低下個体で重症化しやすい。"
+        "鏡検・培養・細胞診で診断し、長期の抗真菌療法と環境管理を要する。",
+        "{n} is a fungal infection of {s} that can involve the skin, respiratory tract or internal organs and "
+        "tends to be more severe in immunocompromised individuals. Diagnosis uses cytology and culture, and "
+        "prolonged antifungal therapy with environmental control is required.",
+    ),
+    "parasitic": (
+        "{n}は、{s}にみられる寄生虫性疾患である。寄生虫種・寄生数・寄生部位により消化器・血液・皮膚などに障害を生じる。"
+        "糞便・血液・皮膚検査で原因虫を同定し、適切な駆虫薬と再感染予防を行う。",
+        "{n} is a parasitic disease of {s} in which the species, burden and location of the parasite determine "
+        "gastrointestinal, haematological or dermatological damage. Diagnosis identifies the organism on faecal, "
+        "blood or skin testing, followed by targeted antiparasitic therapy and reinfection control.",
+    ),
+    "neoplasia": (
+        "{n}は、{s}にみられる腫瘍性疾患である。正常細胞の悪性転換により異常増殖・浸潤・転移が進行しうる。"
+        "細胞診・組織生検・画像診断で病型と進行度を評価し、外科・化学療法・放射線療法を病期に応じて選択する。",
+        "{n} is a neoplastic disease of {s} arising from malignant transformation of normal cells, with potential "
+        "for abnormal proliferation, invasion and metastasis. Cytology, biopsy and imaging establish tumour type "
+        "and stage, guiding surgery, chemotherapy or radiation as appropriate.",
+    ),
+    "endocrine_metabolic": (
+        "{n}は、{s}の内分泌・代謝機能の異常により生じる疾患である。ホルモン分泌や代謝経路の破綻が全身のホメオスタシスを乱す。"
+        "血液生化学・ホルモン測定で診断し、原因に応じたホルモン補充・抑制療法と食事管理を行う。",
+        "{n} is an endocrine/metabolic disorder of {s} in which disrupted hormone secretion or metabolic pathways "
+        "impair systemic homeostasis. Diagnosis uses biochemistry and hormone assays, and treatment combines "
+        "hormone replacement or suppression with dietary management.",
+    ),
+    "renal_urinary": (
+        "{n}は、{s}の腎臓・尿路に生じる疾患である。ネフロン障害や尿路の閉塞・炎症により排泄・電解質調節が障害される。"
+        "尿検査・血液検査・画像診断で評価し、輸液・食事療法・尿路管理を行う。",
+        "{n} is a renal/urinary disease of {s} in which nephron injury or urinary obstruction and inflammation "
+        "impair excretion and electrolyte balance. Diagnosis uses urinalysis, bloodwork and imaging, with "
+        "treatment based on fluid therapy, diet and urinary management.",
+    ),
+    "cardiac": (
+        "{n}は、{s}の心臓・循環系に生じる疾患である。心筋・弁・伝導系の異常が心拍出量低下と代償機構の連鎖を招く。"
+        "聴診・心電図・心エコー・胸部X線で評価し、強心・利尿・血管拡張薬などで管理する。",
+        "{n} is a cardiac/circulatory disease of {s} in which abnormalities of the myocardium, valves or conduction "
+        "system reduce cardiac output and trigger compensatory cascades. Auscultation, ECG, echocardiography and "
+        "radiography guide management with inotropes, diuretics and vasodilators.",
+    ),
+    "respiratory_other": (
+        "{n}は、{s}の呼吸器に生じる非感染性疾患である。気道・肺・胸腔の構造または機能異常により呼吸困難・咳・運動不耐を呈する。"
+        "画像診断・気道評価で病態を把握し、気管支拡張・抗炎症療法と環境管理を行う。",
+        "{n} is a non-infectious respiratory disease of {s} in which structural or functional abnormalities of the "
+        "airways, lungs or thorax cause dyspnoea, coughing and exercise intolerance. Imaging and airway evaluation "
+        "guide bronchodilator/anti-inflammatory therapy and environmental control.",
+    ),
+    "gastrointestinal": (
+        "{n}は、{s}の消化器に生じる疾患である。消化管の運動・吸収・分泌の障害により食欲不振・嘔吐・下痢・体重減少を呈する。"
+        "画像・血液・便検査で評価し、食事療法・整腸・支持療法を組み合わせて管理する。",
+        "{n} is a gastrointestinal disease of {s} in which impaired motility, absorption or secretion produces "
+        "inappetence, vomiting, diarrhoea and weight loss. Imaging, bloodwork and faecal testing guide dietary "
+        "therapy, gut support and supportive care.",
+    ),
+    "neurological": (
+        "{n}は、{s}の神経系に生じる疾患である。中枢または末梢神経の障害により運動失調・発作・麻痺・行動変化などを呈する。"
+        "神経学的検査と画像診断（必要に応じMRI・CT・脳脊髄液検査）で局在を診断し、原因に応じて治療する。",
+        "{n} is a neurological disease of {s} in which central or peripheral nervous system injury causes ataxia, "
+        "seizures, paresis or behavioural change. Neurological examination and advanced imaging (MRI/CT, CSF "
+        "analysis where indicated) localise the lesion and direct cause-specific treatment.",
+    ),
+    "ophthalmic": (
+        "{n}は、{s}の眼・付属器に生じる疾患である。角膜・結膜・水晶体・網膜などの障害により疼痛・流涙・視覚障害を呈する。"
+        "細隙灯・眼圧・染色検査などで評価し、点眼・全身療法あるいは外科的治療を行う。",
+        "{n} is an ophthalmic disease of {s} affecting the eye and adnexa — cornea, conjunctiva, lens or retina — "
+        "and causing pain, ocular discharge and visual impairment. Slit-lamp, tonometry and staining guide topical, "
+        "systemic or surgical treatment.",
+    ),
+    "musculoskeletal": (
+        "{n}は、{s}の運動器に生じる疾患である。骨・関節・筋・腱の障害により跛行・疼痛・可動域制限・姿勢異常を呈する。"
+        "触診・X線などの画像診断で評価し、鎮痛・安静・外科的整復やリハビリテーションを行う。",
+        "{n} is a musculoskeletal disease of {s} in which disorders of bone, joint, muscle or tendon cause "
+        "lameness, pain, reduced range of motion and postural change. Palpation and radiography guide analgesia, "
+        "rest, surgical repair and rehabilitation.",
+    ),
+    "dental": (
+        "{n}は、{s}の歯・口腔に生じる疾患である。不正咬合・歯根膿瘍・歯周病などにより採食困難・流涎・疼痛・体重減少を呈する。"
+        "口腔検査と歯科X線で評価し、歯冠調整・抜歯・抗菌療法と栄養支持を行う。",
+        "{n} is a dental/oral disease of {s} in which malocclusion, tooth-root abscessation or periodontal disease "
+        "causes difficulty eating, drooling, pain and weight loss. Oral examination and dental radiography guide "
+        "crown reduction, extraction, antimicrobial therapy and nutritional support.",
+    ),
+    "dermatological": (
+        "{n}は、{s}の皮膚・被毛に生じる疾患である。脱毛・掻痒・発赤・痂皮・二次感染などを呈する。"
+        "皮膚掻爬・細胞診・培養で原因を特定し、原因療法と局所・全身療法を組み合わせる。",
+        "{n} is a dermatological disease of {s} presenting with alopecia, pruritus, erythema, crusting and "
+        "secondary infection. Skin scrapings, cytology and culture identify the cause, guiding combined "
+        "topical and systemic therapy.",
+    ),
+    "hematological": (
+        "{n}は、{s}の血液・造血系に生じる疾患である。赤血球・白血球・血小板または凝固系の異常により貧血・出血・易感染を呈する。"
+        "血球計算・血液塗抹・凝固検査で評価し、輸血・免疫抑制・原因療法を行う。",
+        "{n} is a haematological disease of {s} in which abnormalities of red cells, white cells, platelets or "
+        "coagulation cause anaemia, bleeding or susceptibility to infection. Complete blood count, blood smear "
+        "and coagulation testing guide transfusion, immunosuppression and cause-specific therapy.",
+    ),
+    "reproductive": (
+        "{n}は、{s}の生殖器系に生じる疾患である。生殖器の感染・腫瘍・ホルモン異常や周産期の合併症として発症する。"
+        "触診・画像診断・ホルモン検査で評価し、内科的管理あるいは外科的治療（避妊・去勢を含む）を行う。",
+        "{n} is a reproductive disease of {s} arising from genital infection, neoplasia, hormonal imbalance or "
+        "peripartum complications. Palpation, imaging and hormone assays guide medical management or surgery, "
+        "including spay/neuter.",
+    ),
+    "toxicity": (
+        "{n}は、{s}における有害物質の曝露により生じる中毒性疾患である。摂取・吸入・経皮曝露した毒物が標的臓器を傷害する。"
+        "曝露歴と臨床徴候から診断し、除染・拮抗薬・支持療法を迅速に行う。",
+        "{n} is a toxicological condition of {s} caused by exposure to a harmful substance that injures target "
+        "organs after ingestion, inhalation or dermal contact. Diagnosis rests on exposure history and clinical "
+        "signs, with prompt decontamination, antidotes and supportive care.",
+    ),
+    "trauma": (
+        "{n}は、{s}における外力により生じる外傷性疾患である。挫傷・裂傷・骨折・内臓損傷などを生じ、出血やショックを伴いうる。"
+        "全身状態の安定化を最優先とし、創傷管理・整復・疼痛管理を行う。",
+        "{n} is a traumatic condition of {s} resulting from external force, producing contusions, lacerations, "
+        "fractures or internal injury that may be accompanied by haemorrhage and shock. Stabilisation takes "
+        "priority, followed by wound management, reduction and analgesia.",
+    ),
+    "autoimmune": (
+        "{n}は、{s}にみられる免疫介在性疾患である。自己組織に対する異常な免疫応答が標的臓器を傷害する。"
+        "除外診断と免疫学的検査で診断し、免疫抑制療法と支持療法で管理する。",
+        "{n} is an immune-mediated disease of {s} in which an aberrant immune response against self tissue damages "
+        "target organs. Diagnosis is by exclusion with immunological testing, and management relies on "
+        "immunosuppression and supportive care.",
+    ),
+    "nutritional": (
+        "{n}は、{s}における必須栄養素の欠乏・過剰・不均衡により生じる栄養性疾患である。"
+        "骨格・皮膚・神経・代謝など多系統に影響し、飼育下では食餌内容の不備が主因となる。"
+        "食餌歴と血液検査で評価し、食餌是正と栄養補給により管理する。",
+        "{n} is a nutritional disease of {s} caused by deficiency, excess or imbalance of essential nutrients, "
+        "affecting skeletal, dermatological, neurological and metabolic systems. In captivity it usually stems "
+        "from an inadequate diet, and management centres on dietary correction and supplementation.",
+    ),
+    "genetic_congenital": (
+        "{n}は、{s}にみられる遺伝性・先天性疾患である。遺伝的素因または発生過程の異常により出生時または若齢期から徴候が現れる。"
+        "臨床・画像・遺伝学的検査で診断し、対症療法と生活管理、繁殖計画への配慮を行う。",
+        "{n} is a genetic/congenital disorder of {s} in which inherited predisposition or developmental "
+        "abnormality produces signs from birth or early life. Clinical, imaging and genetic testing establish "
+        "the diagnosis, with symptomatic care, husbandry adjustment and breeding considerations.",
+    ),
+    "degenerative": (
+        "{n}は、{s}にみられる変性性・加齢性疾患である。組織の進行性変性により機能が緩徐に低下する。"
+        "臨床経過と画像診断で評価し、進行抑制・症状緩和・QOL維持を目標に管理する。",
+        "{n} is a degenerative/age-related disease of {s} in which progressive tissue degeneration causes a "
+        "gradual decline in function. Clinical course and imaging guide management aimed at slowing progression, "
+        "relieving signs and maintaining quality of life.",
+    ),
+    "behavioral": (
+        "{n}は、{s}にみられる行動学的疾患である。環境・社会・神経生物学的要因が複合し、不安・攻撃性・常同行動などとして発現する。"
+        "病歴と行動評価で診断し、行動修正・環境エンリッチメント・必要に応じた薬物療法を組み合わせる。",
+        "{n} is a behavioural disorder of {s} arising from a combination of environmental, social and "
+        "neurobiological factors, expressed as anxiety, aggression or stereotypies. History and behavioural "
+        "assessment guide management with behaviour modification, enrichment and, where indicated, medication.",
+    ),
+    "generic": (
+        "{n}は、{s}にみられる疾患である。原因・病態・進行段階により臨床像は多様で、初期の局所障害から全身性合併症に進展しうる。"
+        "病歴・身体検査・各種検査で診断し、原因療法と支持療法を組み合わせて管理する。早期発見・早期治療が予後改善の鍵となる。",
+        "{n} is a disease of {s} whose presentation varies with cause, pathophysiology and stage, potentially "
+        "progressing from localised dysfunction to systemic complications. History, physical examination and "
+        "diagnostics establish the diagnosis, and management combines cause-specific and supportive care, with "
+        "early detection key to a better prognosis.",
+    ),
+}
+
+
+def gen_description_ja(category: str, name_ja: str, species: str) -> str:
+    """Concise disease-specific Japanese description (replaces category templates)."""
+    sp_ja = SPECIES_JA.get(species, species)
+    name = _clean_name(name_ja) or f"{sp_ja}の疾患"
+    ja, _ = _DESC_CATEGORY.get(category, _DESC_CATEGORY["generic"])
+    return ja.format(n=name, s=sp_ja)
+
+
+def gen_description(category: str, name_en: str, species: str) -> str:
+    """Concise disease-specific English description (replaces category templates)."""
+    sp_en = SPECIES_EN.get(species, species)
+    name = _clean_name(name_en) or f"This {sp_en[:-1] if sp_en.endswith('s') else sp_en} disease"
+    _, en = _DESC_CATEGORY.get(category, _DESC_CATEGORY["generic"])
+    return en.format(n=name, s=sp_en)
+
+
+# ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
+
+
+# Curated-pattern false positives: a pattern that is a substring of a *different*
+# disease name. e.g. "甲状腺機能亢進" (hyperthyroidism) is contained in
+# "副甲状腺機能亢進症" (hyperparathyroidism) — a distinct parathyroid disease.
+_CURATED_EXCLUSIONS: dict[str, tuple[str, ...]] = {
+    "甲状腺機能亢進": ("副甲状腺",),
+    "甲状腺機能低下": ("副甲状腺",),
+}
 
 
 def lookup_curated(species: str, name_ja: str, name_en: str) -> Optional[dict]:
@@ -2167,8 +2444,11 @@ def lookup_curated(species: str, name_ja: str, name_en: str) -> Optional[dict]:
     for (sp, pattern), fields in CURATED.items():
         if sp != species:
             continue
-        if pattern in name:
-            return dict(fields)
+        if pattern not in name:
+            continue
+        if any(bad in name for bad in _CURATED_EXCLUSIONS.get(pattern, ())):
+            continue
+        return dict(fields)
     return None
 
 
@@ -2185,6 +2465,10 @@ def generate_clinical_fields(
     """
     curated = lookup_curated(species, name_ja, name_en) or {}
     category = resolve_true_category(name_ja, name_en, tagged_category)
+    # The description is the most visible field, so it never trusts a possibly
+    # wrong stored category tag — it falls back to "generic" rather than risk a
+    # mis-categorised headline (e.g. impaction labelled a bacterial infection).
+    desc_category = resolve_category_from_name(name_ja, name_en) or "generic"
 
     GENERATORS = {
         "causes_ja": gen_causes_ja,
@@ -2197,6 +2481,7 @@ def generate_clinical_fields(
         "nutrition_management_ja": gen_nutrition_management_ja,
         "prognosis_detailed_ja": gen_prognosis_detailed_ja,
         "rehabilitation_protocol_ja": gen_rehabilitation_protocol_ja,
+        "description_ja": gen_description_ja,
     }
 
     result: dict[str, str] = {}
@@ -2204,6 +2489,13 @@ def generate_clinical_fields(
         # Curated content takes priority
         if field in curated:
             result[field] = curated[field]
+            continue
+        # English description uses the English disease name + name-only category.
+        if field == "description":
+            result[field] = gen_description(desc_category, name_en, species)
+            continue
+        if field == "description_ja":
+            result[field] = gen_description_ja(desc_category, name_ja, species)
             continue
         gen = GENERATORS.get(field)
         if gen is None:

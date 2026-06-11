@@ -931,3 +931,50 @@ python3 -m pytest tests/test_drug_dictionary.py -x -q   # 薬品辞書テスト
 - 依存関係lockfile未導入（pip-compile等）
 - ruffの全プロジェクトファイル整形（mainのコードに222ファイル分の format 必要 — 漸進的に対応）
 - 依存関係lockfile未導入（pip-compile等）
+
+## 2026-06セッションで実施した改善（第3弾: 疾患説明文テンプレート撲滅 + クロス疾患臨床フィールド整理）
+
+### 背景
+これまでのセッションで treatment_ja / prognosis_ja のテンプレートは撲滅したが、**最も目立つ「説明文」（疾患DB詳細・診断結果・チャット結果カードの見出し要約）** にはテンプレートが残存していた。獣医師が疾患名のすぐ下で最初に読むフィールドであり、公開時の信頼性に直結する。
+
+### 説明文（description / description_ja）テンプレートの撲滅
+**問題2系統**:
+1. **カテゴリ共通ボイラープレート**（エキゾチック1,833件）: 「…臨床症状の重症度と全身状態を総合的に評価し…飼育環境の最適化と栄養管理が回復の促進に重要な役割を果たす」を異なる疾患に逐語コピー。さらに**カテゴリ誤適用**が多発（例: 頬袋閉塞=機械的疾患が「感染症」、甲状腺腫=ヨウ素欠乏が「腫瘍性疾患」）。
+2. **スタブ文**（1,921件、犬331・猫308含む）: 「XはYにみられる疾患である。YにおけるXの原因: …。主要な臨床徴候はYにおけるXの臨床徴候は以下を含む。など。」というフィールドラベル連結の壊れた文（「以下を含む。など。」が何も列挙しない）。
+3. **EN説明**（6,434件＝ほぼ全DB）: 31種のカテゴリ・ボイラープレートを全疾患で共有（犬猫馬含む）。英語版サイトの全疾患が定型文表示だった。
+
+**対応**:
+- `scripts/template_elimination/clinical_fields_generator.py` に `gen_description_ja` / `gen_description`（EN）を追加。全26カテゴリの簡潔な疾患固有要約（疾患名・種名・カテゴリを埋込、ボイラープレート末尾なし）を生成。
+- **説明文のカテゴリ解決は名前ベースのみ**（`resolve_category_from_name`）。不正な保存カテゴリタグを信用せず、名前で分類できなければ `generic` にフォールバック。「頬袋閉塞は細菌感染症」のような見出し誤分類を防止。
+- カテゴリ解決の精度改善: `鞭毛虫/原虫/flagellate/protozoa/microsporidia` → parasitic、`甲状腺腫(goiter)/ヨウ素欠乏` → nutritional（「腺腫」部分一致でneoplasiaに誤分類されるのを修正、neoplasiaより前に配置）。
+- `scripts/template_elimination/eliminate_description_templates.py`（新規）: ボイラープレート末尾マーカー＋完全重複（≥3）＋スタブ文を検出し、EN/JAを各言語独立に再生成。キュレート済み・固有の説明（犬パルボ、猫甲状腺亢進症/CKD/糖尿病等）は保持。
+- 結果: description_ja 3,775件（ボイラープレート1,854＋スタブ1,921）、description 6,434件を再生成。
+
+### モジュール由来クロス疾患テンプレートの撲滅（migration後処理パス）
+JSONオーバーレイが届かないPythonモジュール専用エントリ（同名疾患のバリアント・JSON未収録の英語名疾患）に、短いカテゴリ共通の臨床テンプレートが残存（例: 1つの予後文が chytridiomycosis/dysecdysis/anorexia など186疾患で共有）。
+- `scripts/migrate_to_sqlite.py` に `regenerate_cross_disease_templates(conn)` を追加。配信DB上で「同一テキストを≥3エントリ＋≥3個の異なる疾患名（括弧種名を除いた基底名）が共有」するフィールドを検出し、`clinical_fields_generator` で疾患固有テキストに再生成。対象: prognosis_ja / causes_ja / pathophysiology_ja。
+- 同一疾患のサブタイプ（骨折の部位別、FIP病型、ジステンパー症候群、門脈シャント先天/後天等）は基底名が少なく除外され、医学的に妥当な共有が保持される。
+
+### 副甲状腺/甲状腺の取り違えバグ修正
+`lookup_curated` が「甲状腺機能亢進」を部分一致で「**副**甲状腺機能亢進症」（別疾患＝parathyroid）にも適用していた。`_CURATED_EXCLUSIONS` で `副甲状腺` を除外。猫の栄養性二次性/原発性/腎性副甲状腺機能亢進症の causes/transmission/prevention が「猫甲状腺機能亢進症の原因の98%は腺腫」と誤記されていた問題（JSON 3件＋配信DB）を修正。
+
+### 効果（配信SQLite実測、7,094疾患）
+| フィールド | クロス疾患テンプレート（≥4疾患共有） |
+|---|---|
+| description_ja | 0 |
+| description | 0 |
+| causes_ja | 0 |
+| prognosis_ja | 0 |
+| pathophysiology_ja | 0 |
+- スタブ文: 1,921 → **0**、カテゴリ・ボイラープレート: 1,833 → **0**
+
+### 回帰テスト追加（tests/test_no_template_disease_content.py）
+- `test_no_description_boilerplate_in_json` — 説明文にボイラープレート末尾が無いか
+- `test_no_cross_disease_description_template_in_json` — 説明文が4疾患以上で共有されていないか（同一疾患ファミリーは許容）
+- `test_avian_goiter_description_not_neoplasia` — 鳥の甲状腺腫が腫瘍性疾患と誤記されていないか
+- `test_no_stub_description_in_json` — スタブ文が残っていないか
+
+### テスト・CI
+- フルテストスイート: **3,340件合格**（34 skip）
+- ruff check: 全変更ファイルで通過
+- 注: 各カテゴリ生成器に残る種固有の例示（GDV犬・モルモット壊血病等）はDB全体で一貫した既存仕様。種別ゲーティングは将来の改善候補。

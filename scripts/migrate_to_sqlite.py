@@ -1141,6 +1141,73 @@ def migrate_equine_symptoms(conn) -> int:
     return count
 
 
+def regenerate_cross_disease_templates(conn) -> dict[str, int]:
+    """Replace cross-disease template clinical fields in the served DB.
+
+    Some diseases live only in the Python species modules (no JSON overlay) and
+    still carry short category-level template text shared verbatim by many
+    unrelated diseases — e.g. one prognosis sentence on 186 different diseases
+    spanning chytridiomycosis, dysecdysis and anorexia. Those read as generic
+    boilerplate to a clinician.
+
+    A field value is treated as a cross-disease template when the same text is
+    shared by >= ``MIN_SHARE`` entries spanning >= ``MIN_NAMES`` distinct base
+    disease names. Such values are regenerated into disease-specific text with
+    ``clinical_fields_generator`` (which embeds the disease name and resolves
+    the true category from the name). Genuine same-disease variants (e.g.
+    fracture subtypes) span too few distinct names and are left untouched.
+    """
+    import re as _re
+    from collections import defaultdict
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import generate_clinical_fields
+
+    fields = ["prognosis_ja", "causes_ja", "pathophysiology_ja"]
+    # Short category one-liners (e.g. a 28-char mite prognosis shared by 25
+    # different parasites) are templates too, so the floor is low; the
+    # distinct-name guard below is what protects genuine same-disease variants.
+    MIN_LEN = 20
+    MIN_SHARE = 3
+    MIN_NAMES = 3
+    _paren = _re.compile(r"[（(][^（）()]*[）)]\s*$")
+
+    def _base(name: str) -> str:
+        return _paren.sub("", name or "").strip()
+
+    counts: dict[str, int] = {f: 0 for f in fields}
+    rows = conn.execute("SELECT id, species, name, name_ja, " + ", ".join(fields) + " FROM diseases").fetchall()
+
+    for field in fields:
+        groups: dict[str, list] = defaultdict(list)
+        for row in rows:
+            val = (row[field] or "").strip()
+            if val and len(val) >= MIN_LEN:
+                groups[val].append(row)
+        template_texts = {
+            val
+            for val, items in groups.items()
+            if len(items) >= MIN_SHARE and len({_base(r["name_ja"] or r["name"]) for r in items}) >= MIN_NAMES
+        }
+        for val in template_texts:
+            for row in groups[val]:
+                new = generate_clinical_fields(
+                    (row["species"] or "").lower(),
+                    row["name_ja"] or "",
+                    row["name"] or "",
+                    "",
+                    [field],
+                )
+                text = new.get(field)
+                if text and text != val:
+                    conn.execute(
+                        f"UPDATE diseases SET {field} = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                        (text, row["id"]),
+                    )
+                    counts[field] += 1
+    return counts
+
+
 def main(db_path: str | None = None):
     print("=" * 60)
     print("VetDict Data Migration → SQLite")
@@ -1190,6 +1257,13 @@ def main(db_path: str | None = None):
         print(f"  → treatment:  {enrich_stats['treatment']} generated")
         print(f"  → prevention: {enrich_stats['prevention']} generated")
         print(f"  → prognosis:  {enrich_stats['prognosis']} generated")
+
+        # Replace cross-disease template clinical fields that survive in
+        # module-sourced entries (no JSON overlay) with disease-specific text.
+        print("\n[enrichment] regenerating cross-disease template clinical fields...")
+        regen_stats = regenerate_cross_disease_templates(conn)
+        for field, n in regen_stats.items():
+            print(f"  → {field}: {n} regenerated")
 
         # Drugs
         print("\n[drugs] migrating drug dictionary...")
