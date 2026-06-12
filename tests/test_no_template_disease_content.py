@@ -1451,3 +1451,183 @@ def test_no_stub_description_in_json():
         if "にみられる疾患である" in ja and ("の臨床徴候は以下を含む" in ja or "の原因:" in ja or "の原因：" in ja):
             failures.append(f"[{entry.get('species')}] {entry.get('name_ja')}: stub description_ja")
     assert not failures, f"Found {len(failures)} stub descriptions. First 5:\n" + "\n".join(failures[:5])
+
+
+# ---------------------------------------------------------------------------
+# Prevention field: no dog/cat advice on other species (2026-06 fix).
+#
+# The legacy gen_prevention_ja emitted dog/cat category templates (DCM-
+# predisposed breeds, puppy/kitten deworming, indoor-cat confinement, BCS
+# 4-5/9, FLUTD, 子宮蓄膿症リスク...) for EVERY species, so a horse colic entry
+# read "猫の屋内飼育、リード散歩" and a bird feather-plucking entry cited
+# "DCM/HCM素因品種（ドーベルマン...）". 2,630 non-companion entries were
+# contaminated. The generator is now species-class aware and the migration
+# regenerates any contaminated prevention into species-appropriate text.
+# ---------------------------------------------------------------------------
+
+# Dog/cat-specific phrases that must never reach another species' prevention.
+_COMPANION_ONLY_PHRASES = [
+    "子犬子猫",
+    "ドーベルマン",
+    "コッカースパニエル",
+    "メインクーン",
+    "ラグドール",
+    "猫の屋内飼育",
+    "リード散歩",
+    "短頭種",
+    "グレインフリー",
+    "蚤予防薬",
+    "蚤アレルギー",
+    "DCM/HCM素因品種",
+    "FLUTD",
+    "BCS 4-5/9",
+    "缶詰食のBPA",
+    "HD・ED・OCD・FCP",
+    "デンタルガム",
+]
+
+_PREVENTION_CATEGORIES = [
+    "viral_infection",
+    "bacterial_infection",
+    "respiratory_infection",
+    "fungal_infection",
+    "parasitic",
+    "neoplasia",
+    "endocrine_metabolic",
+    "renal_urinary",
+    "cardiac",
+    "respiratory_other",
+    "gastrointestinal",
+    "neurological",
+    "ophthalmic",
+    "musculoskeletal",
+    "dental",
+    "dermatological",
+    "hematological",
+    "reproductive",
+    "toxicity",
+    "trauma",
+    "autoimmune",
+    "nutritional",
+    "behavioral",
+    "generic",
+]
+
+_NON_COMPANION_SPECIES = [
+    "horse",
+    "rabbit",
+    "hamster",
+    "guinea_pig",
+    "chinchilla",
+    "ferret",
+    "hedgehog",
+    "sugar_glider",
+    "degu",
+    "bird",
+    "parakeet",
+    "parrot",
+    "reptile",
+    "tortoise",
+    "snake",
+    "lizard",
+    "amphibian",
+    "fish",
+    "exotic_other",
+]
+
+
+def test_prevention_generator_no_dogcat_advice_for_other_species():
+    """gen_prevention_ja must not put dog/cat-specific advice on other species."""
+    from scripts.template_elimination.clinical_fields_generator import gen_prevention_ja
+
+    failures = []
+    for species in _NON_COMPANION_SPECIES:
+        for cat in _PREVENTION_CATEGORIES:
+            text = gen_prevention_ja(cat, "テスト疾患", species)
+            for phrase in _COMPANION_ONLY_PHRASES:
+                if phrase in text:
+                    failures.append(f"[{species}/{cat}] contains companion-only phrase '{phrase}'")
+    assert not failures, "Companion advice leaked into non-companion prevention:\n" + "\n".join(failures[:15])
+
+
+def test_prevention_generator_is_species_class_appropriate():
+    """Each non-companion class must surface its own husbandry markers."""
+    from scripts.template_elimination.clinical_fields_generator import gen_prevention_ja
+
+    # (species, marker that must appear in its generic prevention core)
+    expectations = [
+        ("horse", "装蹄"),
+        ("bird", "止まり木"),
+        ("parrot", "ペレット"),
+        ("reptile", "POTZ"),
+        ("snake", "UV-B"),
+        ("fish", "水質"),
+        ("amphibian", "脱塩素"),
+        ("rabbit", "ケージ"),
+    ]
+    failures = []
+    for species, marker in expectations:
+        text = gen_prevention_ja("generic", "テスト疾患", species)
+        if marker not in text:
+            failures.append(f"[{species}] generic prevention missing expected marker '{marker}': {text[:80]}")
+    assert not failures, "\n".join(failures)
+
+
+def _served_db_path():
+    p = ROOT / "instance" / "vetdict.db"
+    return p if p.exists() else None
+
+
+def test_served_db_prevention_no_cross_species_contamination():
+    """The served SQLite DB must carry no dog/cat advice on other species."""
+    import sqlite3
+
+    db = _served_db_path()
+    if db is None:
+        pytest.skip("served vetdict.db not present (run scripts/migrate_to_sqlite.py)")
+    conn = sqlite3.connect(str(db))
+    try:
+        rows = conn.execute(
+            "SELECT species, name_ja, prevention_ja FROM diseases "
+            "WHERE species NOT IN ('dog','cat') AND prevention_ja IS NOT NULL"
+        ).fetchall()
+    finally:
+        conn.close()
+    failures = []
+    for species, name_ja, prevention in rows:
+        for phrase in _COMPANION_ONLY_PHRASES:
+            if phrase in (prevention or ""):
+                failures.append(f"[{species}] {name_ja}: '{phrase}'")
+                break
+    assert not failures, f"Found {len(failures)} contaminated prevention entries. First 10:\n" + "\n".join(
+        failures[:10]
+    )
+
+
+def test_served_db_prevention_not_cross_disease_template():
+    """No prevention_ja text may be shared by >=4 distinct disease base names."""
+    import sqlite3
+    from collections import defaultdict
+
+    db = _served_db_path()
+    if db is None:
+        pytest.skip("served vetdict.db not present (run scripts/migrate_to_sqlite.py)")
+    conn = sqlite3.connect(str(db))
+    try:
+        rows = conn.execute(
+            "SELECT species, name, name_ja, prevention_ja FROM diseases WHERE prevention_ja IS NOT NULL"
+        ).fetchall()
+    finally:
+        conn.close()
+    paren = re.compile(r"[（(][^（）()]*[）)]\s*$")
+    groups = defaultdict(list)
+    for _species, name, name_ja, prevention in rows:
+        text = (prevention or "").strip()
+        if len(text) >= 20:
+            base = paren.sub("", (name_ja or name or "")).strip()
+            groups[text].append(base)
+    offenders = [(len(set(bases)), text) for text, bases in groups.items() if len(set(bases)) >= 4]
+    offenders.sort(reverse=True)
+    assert not offenders, f"Found {len(offenders)} cross-disease prevention templates. First 5:\n" + "\n".join(
+        f"  {n} names: {t[:80]}" for n, t in offenders[:5]
+    )
