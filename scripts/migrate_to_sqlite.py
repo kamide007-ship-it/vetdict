@@ -1163,7 +1163,7 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
     sys.path.insert(0, str(ROOT))
     from scripts.template_elimination.clinical_fields_generator import generate_clinical_fields
 
-    fields = ["prognosis_ja", "causes_ja", "pathophysiology_ja"]
+    fields = ["prognosis_ja", "causes_ja", "pathophysiology_ja", "prevention_ja"]
     # Short category one-liners (e.g. a 28-char mite prognosis shared by 25
     # different parasites) are templates too, so the floor is low; the
     # distinct-name guard below is what protects genuine same-disease variants.
@@ -1174,6 +1174,64 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
 
     def _base(name: str) -> str:
         return _paren.sub("", name or "").strip()
+
+    # Dog/cat prevention advice must never sit on another species' entry. The
+    # legacy generator emitted dog/cat category templates (DCM-predisposed
+    # breeds, puppy/kitten deworming, BCS 4-5/9, FLUTD, 子宮蓄膿症リスク...) for
+    # every species. Rather than hand-maintaining a fragment list, derive the
+    # companion template bodies straight from the generator: any non-companion
+    # entry whose text contains one of those bodies has been contaminated and is
+    # regenerated into species-appropriate text — even when its name-prefixed
+    # text is otherwise unique.
+    _COMPANION = {"dog", "cat"}
+    from scripts.template_elimination.clinical_fields_generator import gen_prevention_ja as _gen_prev
+
+    _PREVENT_CATEGORIES = (
+        "viral_infection",
+        "bacterial_infection",
+        "respiratory_infection",
+        "fungal_infection",
+        "parasitic",
+        "neoplasia",
+        "endocrine_metabolic",
+        "renal_urinary",
+        "cardiac",
+        "respiratory_other",
+        "gastrointestinal",
+        "neurological",
+        "ophthalmic",
+        "musculoskeletal",
+        "dental",
+        "dermatological",
+        "hematological",
+        "reproductive",
+        "toxicity",
+        "trauma",
+        "autoimmune",
+        "nutritional",
+        "behavioral",
+        "generic",
+    )
+
+    def _companion_body(text: str) -> str:
+        # Strip the "犬における<name>の予防は/には" lead to leave the shared body.
+        for sep in ("の予防には", "の予防は"):
+            idx = text.find(sep)
+            if idx != -1:
+                return text[idx + len(sep) :].strip()
+        return text.strip()
+
+    _COMPANION_BODIES = {
+        body
+        for cat in _PREVENT_CATEGORIES
+        for body in (_companion_body(_gen_prev(cat, "ZZ", "dog")),)
+        if len(body) >= 25
+    }
+
+    def _is_contaminated(species: str, val: str) -> bool:
+        if (species or "").lower() in _COMPANION:
+            return False
+        return any(body in val for body in _COMPANION_BODIES)
 
     counts: dict[str, int] = {f: 0 for f in fields}
     rows = conn.execute("SELECT id, species, name, name_ja, " + ", ".join(fields) + " FROM diseases").fetchall()
@@ -1189,22 +1247,34 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
             for val, items in groups.items()
             if len(items) >= MIN_SHARE and len({_base(r["name_ja"] or r["name"]) for r in items}) >= MIN_NAMES
         }
+        # Collect the rows to regenerate: cross-disease templates (all fields)
+        # plus, for prevention, any non-companion entry carrying dog/cat markers.
+        targets: dict[int, object] = {}
         for val in template_texts:
             for row in groups[val]:
-                new = generate_clinical_fields(
-                    (row["species"] or "").lower(),
-                    row["name_ja"] or "",
-                    row["name"] or "",
-                    "",
-                    [field],
+                targets[row["id"]] = row
+        if field == "prevention_ja":
+            for row in rows:
+                val = (row[field] or "").strip()
+                if val and _is_contaminated(row["species"], val):
+                    targets[row["id"]] = row
+
+        for row in targets.values():
+            val = (row[field] or "").strip()
+            new = generate_clinical_fields(
+                (row["species"] or "").lower(),
+                row["name_ja"] or "",
+                row["name"] or "",
+                "",
+                [field],
+            )
+            text = new.get(field)
+            if text and text != val:
+                conn.execute(
+                    f"UPDATE diseases SET {field} = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                    (text, row["id"]),
                 )
-                text = new.get(field)
-                if text and text != val:
-                    conn.execute(
-                        f"UPDATE diseases SET {field} = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
-                        (text, row["id"]),
-                    )
-                    counts[field] += 1
+                counts[field] += 1
     return counts
 
 

@@ -1518,9 +1518,184 @@ def gen_differential_diagnosis_ja(category: str, name_ja: str, species: str) -> 
     )
 
 
+def _species_class(species: str) -> str:
+    """Group a species into a husbandry class for species-appropriate guidance.
+
+    Prevention advice for an exotic species must never borrow dog/cat-specific
+    examples (DCM-predisposed breeds, puppy/kitten deworming schedules, indoor-cat
+    confinement, monthly flea products). Each class gets husbandry guidance that
+    actually applies to it.
+    """
+    if species in ("dog", "cat"):
+        return "companion"
+    if species == "horse":
+        return "equine"
+    if species in ("bird", "parakeet", "parrot"):
+        return "avian"
+    if species in ("reptile", "tortoise", "snake", "lizard"):
+        return "reptile"
+    if species == "amphibian":
+        return "amphibian"
+    if species == "fish":
+        return "fish"
+    # rabbit, hamster, guinea_pig, chinchilla, ferret, hedgehog, sugar_glider,
+    # degu, exotic_other
+    return "exotic_mammal"
+
+
+# Husbandry foundation each non-companion class shares — the baseline that every
+# prevention statement for that class rests on, free of dog/cat-specific advice.
+_PREVENT_CLASS_CORE = {
+    "equine": (
+        "良質な粗飼料を中心とした給餌と計画的な飼料変更、十分な飲水と運動の確保、"
+        "糞便検査に基づく計画的駆虫、定期的な装蹄と歯科ケア、コアワクチン接種（破傷風・日本脳炎・馬インフルエンザ）、"
+        "衛生的な馬房環境の維持"
+    ),
+    "exotic_mammal": (
+        "種に適した飼育環境（ケージサイズ・温湿度・床材・隠れ家）の整備、種特異的な栄養管理、"
+        "ストレスの最小化、新規導入個体の検疫、定期的な健康診断"
+    ),
+    "avian": (
+        "適切な飼育環境（ケージサイズ・止まり木・温度・換気）の確保、種子過多を避けたバランスの良いペレット主体の給餌、"
+        "気道刺激物（タバコ煙・調理時の蒸気・エアロゾル）の回避、新規鳥の検疫、定期的な健康診断"
+    ),
+    "reptile": (
+        "種特異的な適温域（POTZ）と温度勾配の維持、昼行性種への適切なUV-B照射、適切な湿度・基質・隠れ家の提供、"
+        "カルシウム/ビタミンD3を考慮した給餌、新規個体の検疫"
+    ),
+    "amphibian": (
+        "清潔な水質（脱塩素・適切なpHと水温）の維持、適切な湿度環境と隠れ家の確保、"
+        "取り扱い時の濡れた清潔な手袋使用、新規個体の検疫"
+    ),
+    "fish": (
+        "良好な水質管理（アンモニア・亜硝酸・硝酸塩・pH・水温の定期測定）、適切な濾過と計画的な水換え、"
+        "新規魚の検疫とトリートメント、過密飼育と給餌過多の回避"
+    ),
+}
+
+
+def _prevention_overlay(category: str, sp_class: str) -> str:
+    """Category-specific prevention concern, written to apply to ``sp_class``.
+
+    Returns a trailing sentence (or "") that refines the class husbandry core
+    with the concern most relevant to the disease category for that class.
+    """
+    if category in ("viral_infection", "bacterial_infection", "respiratory_infection"):
+        base = "感染個体との接触回避、器具・環境の消毒、検疫期間の遵守、過密と換気不良の改善が蔓延防止の鍵となる。"
+        if sp_class == "avian":
+            return base + "新規導入鳥はクラミジア・ポリオーマ・PBFDのスクリーニング後に合流させる。"
+        if sp_class == "equine":
+            return base + "輸送・競技でのストレスと鼻腔分泌物を介した伝播に留意し、発症馬は速やかに隔離する。"
+        return base
+    if category == "fungal_infection":
+        return "過度な湿潤・結露を避けた清潔で乾燥した環境の維持、罹患個体の隔離、汚染した床材・器具の交換と消毒が中心となる。"
+    if category == "parasitic":
+        overlay = (
+            "定期的な糞便・体表検査と結果に基づく適切な駆虫、媒介動物・中間宿主の制御、こまめな環境清掃が3本柱となる。"
+        )
+        if sp_class == "fish":
+            return (
+                "新規魚・水草・生餌の検疫と必要に応じた予防的薬浴、適切な水質維持により外部・内部寄生虫の侵入を防ぐ。"
+            )
+        if sp_class == "amphibian":
+            return "新規個体・餌昆虫の検疫、水質と基質の清潔維持、こまめな糞便検査により寄生虫負荷を抑える。"
+        return overlay
+    if category == "neoplasia":
+        return "確立された一次予防は限られるが、発癌性物質・過度な紫外線曝露の回避と定期的な健康診断による早期発見が中心となる。"
+    if category in ("endocrine_metabolic", "nutritional"):
+        if sp_class == "reptile":
+            return "代謝性骨疾患・栄養障害の予防には種に応じたカルシウム/リン比とビタミンD3、適切なUV-B照射、多様な食餌の給与が要となる。"
+        if sp_class == "avian":
+            return "種子偏重による栄養障害・肥満を避け、ビタミンA・カルシウムを適正に含むペレット主体食へ段階的に移行する。"
+        if sp_class == "fish":
+            return "栄養性疾患の予防には種に適した良質な配合飼料の給与と過給・偏食の回避、ビタミン保持のための適切な飼料保管が重要となる。"
+        if sp_class == "equine":
+            return "代謝性疾患の予防には適正体重の維持、過剰な穀物・糖質の制限、放牧草の管理（蹄葉炎・EMS予防）が重要となる。"
+        # exotic_mammal
+        return (
+            "種特異的な栄養要求を満たす給餌が要となる（草食性小動物は高繊維チモシー乾草を主体に、"
+            "モルモットはビタミンCを継続補給、糖質過多を避ける）。"
+        )
+    if category == "musculoskeletal":
+        if sp_class == "reptile":
+            return "代謝性骨疾患の予防が中核で、適切なUV-B照射とカルシウム/D3補給、適温域維持が骨格の健全性を支える。"
+        if sp_class == "equine":
+            return "適切な装蹄と蹄管理、硬い馬場や過度な運動負荷の回避、計画的なウォームアップが運動器疾患の予防に重要となる。"
+        if sp_class == "avian":
+            return "適切な止まり木の太さ・材質、十分な飛翔運動、カルシウム充足によりバンブルフット・骨折・骨格異常を予防する。"
+        return "安全な飼育環境（落下・挟み込みの防止）、適正体重の維持、種に応じたカルシウム・ビタミンD栄養の充足が予防の基本となる。"
+    if category == "dental":
+        if sp_class in ("exotic_mammal",):
+            return "草食性小動物では高繊維チモシー乾草を主体に歯の自然摩耗を促し、定期的な歯科検診で不正咬合・過長歯を早期に発見する。"
+        if sp_class == "avian":
+            return "嘴の適切な摩耗のための硬質食材・カトルボーンの提供と、定期的な嘴の点検が予防に役立つ。"
+        return "適切な食餌構成と定期的な口腔・咬合の点検により歯科疾患の進行を防ぐ。"
+    if category == "gastrointestinal":
+        if sp_class == "exotic_mammal":
+            return "草食性小動物では高繊維食と十分な飲水で消化管うっ滞を予防し、急な食事変更・絶食・ストレスを避ける。"
+        if sp_class == "equine":
+            return "疝痛予防には規則的な給餌と十分な飲水、急な飼料変更の回避、計画的駆虫、砂の摂取防止が重要となる。"
+        if sp_class == "fish":
+            return (
+                "消化器疾患の予防には適切な水温・水質の維持、良質な飼料の適量給与、過給と急な餌替えの回避が要となる。"
+            )
+        return "高品質な食餌の給与、急激な食事変更の回避、異物誤食の防止、清潔な飲食環境の維持が中心となる。"
+    if category == "renal_urinary":
+        return "十分な飲水の確保と適切なミネラルバランスの食餌、定期的な健康診断による腎機能・尿性状の早期評価が予防に役立つ。"
+    if category == "cardiac":
+        return "確立された一次予防は限られるが、適正体重の維持、定期的な健康診断による早期発見、基礎疾患の適切な管理が重要となる。"
+    if category in ("respiratory_other",):
+        if sp_class == "avian":
+            return "気道刺激物（タバコ煙・テフロン加熱蒸気・エアロゾル・粉塵）の徹底回避と適切な換気・湿度管理が予防の要となる。"
+        return "粉塵・刺激性ガス・アレルゲンへの曝露低減、適切な換気と湿度管理、適正体重の維持が予防に重要となる。"
+    if category == "neurological":
+        return "外傷の防止、中毒物質へのアクセス制限、感染症対策、適切な栄養管理により神経疾患の発症リスクを低減する。"
+    if category == "ophthalmic":
+        return "眼の外傷・刺激物からの保護、適切な飼育環境の衛生維持、初期の眼症状の早期受診が予防に役立つ。"
+    if category == "dermatological":
+        if sp_class == "fish":
+            return "皮膚・鰭疾患の予防には良好な水質、傷つけない取り扱い、過密回避、新規個体の検疫が中心となる。"
+        return (
+            "適切な床材・基質と湿度管理、清潔な被毛・羽毛・皮膚の維持、外部寄生虫対策、外傷の防止が予防の基本となる。"
+        )
+    if category == "hematological":
+        return "感染性・中毒性の原因への曝露回避と基礎疾患の管理、定期的な健康診断による早期発見が予防に役立つ。"
+    if category == "reproductive":
+        return (
+            "計画的な繁殖管理、適切な栄養と分娩環境の整備、生殖器疾患の早期発見、必要に応じた避妊去勢が予防に寄与する。"
+        )
+    if category == "toxicity":
+        return "有毒物質（植物・化学物質・重金属・医薬品）への接触防止と安全な保管、種特異的な毒性食材の排除が最も実効性ある予防策となる。"
+    if category == "trauma":
+        return "安全な飼育環境（鋭利物・落下・挟み込みの排除）、同居個体間の闘争管理、適切な取り扱いが外傷予防の中心となる。"
+    if category == "autoimmune":
+        return (
+            "確立された予防法はないが、誘因と考えられる感染・薬剤・ストレスの管理と、早期発見・早期介入が重要となる。"
+        )
+    if category == "behavioral":
+        return "適切な環境エンリッチメント、十分な運動・採食行動の機会、同居個体との適切な社会的環境、ストレス要因の除去が予防に重要となる。"
+    return ""
+
+
+def _prevention_noncompanion(category: str, prefix: str, sp_class: str) -> str:
+    """Build species-class-appropriate prevention text (no dog/cat-specific advice)."""
+    core = _PREVENT_CLASS_CORE.get(sp_class, _PREVENT_CLASS_CORE["exotic_mammal"])
+    overlay = _prevention_overlay(category, sp_class)
+    text = f"{prefix}の予防は、{core}が基本となる。"
+    if overlay:
+        text += overlay
+    return text
+
+
 def gen_prevention_ja(category: str, name_ja: str, species: str) -> str:
     sp_ja = SPECIES_JA.get(species, species)
     prefix = _disease_prefix(name_ja, sp_ja)
+
+    sp_class = _species_class(species)
+    if sp_class != "companion":
+        # Exotic, avian, reptile, equine, amphibian and fish species must not
+        # receive the dog/cat-specific examples baked into the branches below.
+        return _prevention_noncompanion(category, prefix, sp_class)
 
     if category in ("viral_infection", "bacterial_infection", "respiratory_infection"):
         return (
