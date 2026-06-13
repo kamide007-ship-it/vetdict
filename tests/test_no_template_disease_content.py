@@ -1150,6 +1150,13 @@ _CLINICAL_FIELDS_REQUIRING_UNIQUENESS = [
     "nutrition_management_ja",
     "prognosis_detailed_ja",
     "rehabilitation_protocol_ja",
+    "diagnosis_ja",
+    # English-language clinical fields. These previously shipped as a single
+    # category paragraph reused across thousands of diseases (transmission was
+    # <40% unique, diagnosis ~0% unique with one text on 1,600+ entries).
+    "clinical_signs",
+    "transmission",
+    "diagnosis",
 ]
 
 # Minimum allowed unique-text % for each field. Anything below this signals
@@ -1412,6 +1419,48 @@ def test_no_cross_disease_description_template_in_json():
                     f"'{text[:60]}…' (e.g. {sorted(names)[:3]})"
                 )
     assert not failures, f"Found {len(failures)} cross-disease description templates. First 5:\n" + "\n".join(
+        failures[:5]
+    )
+
+
+def test_no_cross_disease_clinical_field_template_in_json():
+    """clinical_signs / transmission / diagnosis (EN+JA) must not be shared by
+    4+ entries spanning 4+ distinct diseases.
+
+    These fields previously shipped as category boilerplate — one English
+    transmission paragraph on 6,000+ diseases, one diagnosis paragraph on
+    1,600+ — so the English site displayed identical clinical text for almost
+    every disease. Same-disease families (fracture subtypes, mite infestation
+    variants) legitimately share text and span <4 distinct base names, so the
+    guard fires only on genuine cross-disease templates.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    from collections import defaultdict
+
+    failures = []
+    for field in (
+        "clinical_signs",
+        "clinical_signs_ja",
+        "transmission",
+        "transmission_ja",
+        "diagnosis",
+        "diagnosis_ja",
+    ):
+        by_text: dict[str, list] = defaultdict(list)
+        for entry in entries:
+            v = (entry.get(field) or "").strip()
+            if v and len(v) >= 40:
+                by_text[v].append(entry)
+        for text, items in by_text.items():
+            names = {_base_name(e) for e in items}
+            if len(items) >= 4 and len(names) >= 4:
+                failures.append(
+                    f"{field}: {len(items)} entries / {len(names)} diseases share "
+                    f"'{text[:60]}…' (e.g. {sorted(names)[:3]})"
+                )
+    assert not failures, f"Found {len(failures)} cross-disease clinical-field templates. First 5:\n" + "\n".join(
         failures[:5]
     )
 

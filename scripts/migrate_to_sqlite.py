@@ -343,6 +343,12 @@ def migrate_json_enrichments(conn) -> int:
                 rehabilitation_protocol_ja = COALESCE(?, rehabilitation_protocol_ja),
                 nutrition_management = COALESCE(?, nutrition_management),
                 nutrition_management_ja = COALESCE(?, nutrition_management_ja),
+                clinical_signs = COALESCE(?, clinical_signs),
+                clinical_signs_ja = COALESCE(?, clinical_signs_ja),
+                transmission = COALESCE(?, transmission),
+                transmission_ja = COALESCE(?, transmission_ja),
+                diagnosis = COALESCE(?, diagnosis),
+                diagnosis_ja = COALESCE(?, diagnosis_ja),
                 prognosis_references = COALESCE(?, prognosis_references),
                 rehabilitation_references = COALESCE(?, rehabilitation_references),
                 nutrition_references = COALESCE(?, nutrition_references),
@@ -372,6 +378,12 @@ def migrate_json_enrichments(conn) -> int:
                 _ensure_string_or_none(entry.get("rehabilitation_protocol_ja")),
                 _ensure_string_or_none(entry.get("nutrition_management")),
                 _ensure_string_or_none(entry.get("nutrition_management_ja")),
+                _ensure_string_or_none(entry.get("clinical_signs")),
+                _ensure_string_or_none(entry.get("clinical_signs_ja")),
+                _ensure_string_or_none(entry.get("transmission")),
+                _ensure_string_or_none(entry.get("transmission_ja")),
+                _ensure_string_or_none(entry.get("diagnosis")),
+                _ensure_string_or_none(entry.get("diagnosis_ja")),
                 prognosis_refs,
                 rehab_refs,
                 nutrition_refs,
@@ -1163,7 +1175,18 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
     sys.path.insert(0, str(ROOT))
     from scripts.template_elimination.clinical_fields_generator import generate_clinical_fields
 
-    fields = ["prognosis_ja", "causes_ja", "pathophysiology_ja", "prevention_ja"]
+    fields = [
+        "prognosis_ja",
+        "causes_ja",
+        "pathophysiology_ja",
+        "prevention_ja",
+        "clinical_signs_ja",
+        "clinical_signs",
+        "transmission_ja",
+        "transmission",
+        "diagnosis_ja",
+        "diagnosis",
+    ]
     # Short category one-liners (e.g. a 28-char mite prognosis shared by 25
     # different parasites) are templates too, so the floor is low; the
     # distinct-name guard below is what protects genuine same-disease variants.
