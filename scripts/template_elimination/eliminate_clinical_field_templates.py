@@ -26,10 +26,63 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+import re  # noqa: E402
+
 from scripts.template_elimination.clinical_fields_generator import (  # noqa: E402
+    SPECIES_JA,
     generate_clinical_fields,
 )
 from scripts.template_elimination.eliminate_templates import SPECIES_NORM  # noqa: E402
+
+# Japanese clinical fields whose generated text opens with a
+# "<species>における<disease>" lead-in built by ``_disease_prefix``.
+_JA_LEAD_FIELDS = [
+    "causes_ja",
+    "transmission_ja",
+    "clinical_signs_ja",
+    "differential_diagnosis_ja",
+    "prevention_ja",
+    "prognosis_ja",
+    "pathophysiology_ja",
+    "diagnosis_ja",
+]
+
+_PAREN_TAG = re.compile(r"[（(][^（）()]*[）)]\s*$")
+
+
+def strip_redundant_species_lead(data: list[dict]) -> int:
+    """Remove a doubled species tag from the generated lead-in.
+
+    Disease names in the species modules sometimes carry a trailing species
+    tag (e.g. ``四肢骨折（ハムスター）``). Earlier generator runs produced
+    ``ハムスターにおける四肢骨折（ハムスター）`` — the species named twice.
+    This rewrites only the exact redundant lead-in to
+    ``ハムスターにおける四肢骨折``, touching nothing else, so curated or
+    otherwise disease-specific text is left untouched. Descriptive tags such
+    as ``（ヨウ素欠乏性）`` are preserved because they do not name the species.
+    """
+    fixed = 0
+    for entry in data:
+        name_ja = (entry.get("name_ja") or "").strip()
+        if not name_ja:
+            continue
+        species = entry.get("species", "")
+        sp_ja = SPECIES_JA.get(SPECIES_NORM.get(species, species).lower())
+        if not sp_ja:
+            continue
+        m = _PAREN_TAG.search(name_ja)
+        if not (m and sp_ja in m.group(0)):
+            continue
+        clean = _PAREN_TAG.sub("", name_ja).strip()
+        redundant_lead = f"{sp_ja}における{name_ja}"
+        clean_lead = f"{sp_ja}における{clean}"
+        for field in _JA_LEAD_FIELDS:
+            val = entry.get(field)
+            if isinstance(val, str) and val.startswith(redundant_lead):
+                entry[field] = clean_lead + val[len(redundant_lead) :]
+                fixed += 1
+    return fixed
+
 
 CLINICAL_FIELDS = [
     "causes_ja",
@@ -42,6 +95,14 @@ CLINICAL_FIELDS = [
     "nutrition_management_ja",
     "prognosis_detailed_ja",
     "rehabilitation_protocol_ja",
+    "diagnosis_ja",
+    # English-language counterparts. These shipped almost entirely as
+    # category boilerplate (e.g. one transmission paragraph on 6,000+ diseases,
+    # one diagnosis paragraph on 1,600+), so the English site showed identical
+    # text for nearly every disease.
+    "clinical_signs",
+    "transmission",
+    "diagnosis",
 ]
 
 # Minimum text length to consider "non-trivial" (shorter strings are placeholders)
@@ -113,6 +174,10 @@ def update_json(json_path: Path) -> tuple[int, dict[str, int]]:
                 any_changed = True
         if any_changed:
             entries_modified += 1
+
+    lead_fixed = strip_redundant_species_lead(data)
+    if lead_fixed:
+        print(f"Stripped redundant species tag from {lead_fixed} generated lead-ins")
 
     with open(json_path, "w", encoding="utf-8") as f:
         # Compact (no indent): the file would exceed GitHub's 100 MiB blob

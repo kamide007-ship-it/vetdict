@@ -786,6 +786,13 @@ def _disease_prefix(name_ja: str, species_ja: str) -> str:
     species name (e.g. "猫下部尿路疾患" + species "猫" -> avoid "猫における猫下部尿路疾患").
     """
     if name_ja:
+        # Drop a trailing "（<species>）" tag so the species is not repeated by
+        # the "<species>における…" lead-in (e.g. "四肢骨折（ハムスター）" ->
+        # "ハムスターにおける四肢骨折"). Descriptive tags such as
+        # "（ヨウ素欠乏性）" are kept because they do not name the species.
+        m = _PAREN_TAG_RE.search(name_ja)
+        if m and species_ja and species_ja in m.group(0):
+            name_ja = _PAREN_TAG_RE.sub("", name_ja).strip()
         if species_ja and name_ja.startswith(species_ja):
             return name_ja
         return f"{species_ja}における{name_ja}"
@@ -1344,6 +1351,419 @@ def gen_clinical_signs_ja(category: str, name_ja: str, species: str) -> str:
         f"病歴聴取と詳細な身体検査により症状パターンを把握し、補助検査で確定診断に至る。"
         f"早期発見と適切な介入が予後改善の鍵となる。"
     )
+
+
+def _disease_prefix_en(name_en: str, species_en: str) -> str:
+    """English disease subject phrase, species-qualified for prose.
+
+    Embeds the species (mirroring the JA ``_disease_prefix``) so the same
+    disease name in different species yields distinct, species-aware text —
+    a fracture in a bird with pneumatic bones is not the fracture of a cat.
+    """
+    name = _clean_name(name_en)
+    if name:
+        return f"{name} in {species_en}"
+    return f"this disease in {species_en}"
+
+
+def gen_clinical_signs(category: str, name_en: str, species: str) -> str:
+    """Disease-specific English clinical signs (replaces category templates)."""
+    sp_en = SPECIES_EN.get(species, species)
+    name = _disease_prefix_en(name_en, sp_en)
+
+    if category in ("viral_infection", "bacterial_infection", "respiratory_infection", "fungal_infection"):
+        sys_specific = ""
+        if category == "respiratory_infection":
+            sys_specific = " Respiratory signs predominate (cough, sneezing, nasal discharge, dyspnoea), with pneumonia in advanced cases."
+        elif category == "fungal_infection":
+            sys_specific = " Skin lesions (circular alopecia, scaling, crusting), chronic nasal discharge, or—in systemic mycoses—cough, weight loss and neurological signs may occur."
+        return (
+            f"Clinical signs of {name} vary with the site of infection and the pathogen, "
+            f"but fever, lethargy, inappetence and weight loss are common shared findings. "
+            f"Local infection causes redness, swelling, pain and purulent discharge, while systemic infection may progress to dehydration, sepsis and multi-organ failure.{sys_specific} "
+            f"Juvenile, geriatric and immunosuppressed animals are at higher risk of severe disease, so early intervention improves outcome."
+        )
+    if category == "parasitic":
+        return (
+            f"Clinical signs of {name} depend on the parasite species, location and burden. "
+            f"Gastrointestinal parasitism causes diarrhoea, vomiting, weight loss and abdominal distension; ectoparasites cause pruritus, alopecia and dermatitis; "
+            f"cardiovascular parasites cause cough, exercise intolerance and ascites; and haemoparasites cause anaemia, fever and lethargy. "
+            f"Young or malnourished animals are prone to severe disease, with poor growth in chronic cases."
+        )
+    if category == "neoplasia":
+        return (
+            f"Clinical signs of {name} depend on the affected organ and tumour type. "
+            f"Common findings include a progressive mass, weight loss, inappetence, lethargy and anaemia. "
+            f"Cutaneous tumours present as a palpable swelling, while internal tumours cause non-specific signs such as abdominal distension, vomiting, diarrhoea, dyspnoea or lymphadenopathy. "
+            f"Paraneoplastic syndromes such as hypercalcaemia (lymphoma, anal-sac carcinoma) or hypoglycaemia (insulinoma) may accompany the disease."
+        )
+    if category == "endocrine_metabolic":
+        return (
+            f"Clinical signs of {name} follow the specific hormonal or metabolic disturbance. "
+            f"Diabetes mellitus: polyuria/polydipsia, polyphagia and weight loss. Hyperthyroidism: weight loss, polyphagia, hyperactivity and tachycardia. "
+            f"Cushing's syndrome: abdominal distension, alopecia, polyuria/polydipsia and thin skin. Addison's disease: lethargy, vomiting, diarrhoea and electrolyte derangement. "
+            f"Early disease is often subclinical, so periodic endocrine screening aids early detection."
+        )
+    if category == "renal_urinary":
+        return (
+            f"Clinical signs of {name} vary with the underlying lesion and stage. "
+            f"Chronic kidney disease: polyuria/polydipsia, weight loss, inappetence, vomiting, halitosis and dehydration (subclinical when early). "
+            f"Acute kidney injury: oliguria/anuria, vomiting, lethargy and electrolyte disturbance. "
+            f"Lower urinary tract disease: pollakiuria, dysuria, haematuria and inappropriate urination, with urethral obstruction (an emergency) in males."
+        )
+    if category == "cardiac":
+        return (
+            f"Clinical signs of {name} progress in stages with declining cardiac function. "
+            f"Compensated (asymptomatic): a murmur may be the only finding on auscultation. "
+            f"Early failure: exercise intolerance, cough (left-sided) or ascites (right-sided). "
+            f"Advanced failure: dyspnoea, cyanosis, syncope and nocturnal cough. "
+            f"In cats, feline aortic thromboembolism may present acutely with hindlimb paresis, cold limbs, pain and absent pulses."
+        )
+    if category == "respiratory_other":
+        return (
+            f"Clinical signs of {name} depend on the site of airway obstruction or ventilatory compromise. "
+            f"Upper airway: stertor, inspiratory stridor, exercise intolerance and inspiratory cyanosis (brachycephalic airway syndrome). "
+            f"Trachea: a short, dry, paroxysmal cough and stridor (tracheal collapse). "
+            f"Lower airway: chronic cough, expiratory dyspnoea and wheezing (asthma/COPD-like disease), often triggered by stress, exercise or temperature change."
+        )
+    if category == "gastrointestinal":
+        return (
+            f"Clinical signs of {name} vary with the site and nature of the gastrointestinal lesion. "
+            f"Upper GI: vomiting, haematemesis and inappetence. Small intestine: small-bowel diarrhoea (large volume, low frequency, weight loss), vomiting and abdominal pain. "
+            f"Large intestine: large-bowel diarrhoea (small volume, high frequency, mucus, haematochezia, tenesmus). "
+            f"Acute abdomen with severe pain, vomiting, shock or a palpable mass (GDV, volvulus, obstruction) requires emergency evaluation."
+        )
+    if category == "neurological":
+        return (
+            f"Clinical signs of {name} localise to the affected region (forebrain, brainstem, cerebellum, spinal cord or peripheral nerve). "
+            f"Forebrain: seizures, behavioural change, blindness, circling and ataxia. Brainstem: cranial nerve deficits, ataxia and altered consciousness. "
+            f"Cerebellum: intention tremor, hypermetria and a broad-based stance. Spinal cord: para-/tetraparesis, urinary dysfunction and reflex changes that vary with the lesion level. "
+            f"Peripheral nerve: muscle atrophy, hyporeflexia and distal flaccid paresis."
+        )
+    if category == "ophthalmic":
+        return (
+            f"Clinical signs of {name} vary with the affected structure (cornea, conjunctiva, anterior chamber, lens, retina). "
+            f"Conjunctivitis: conjunctival hyperaemia, discharge, epiphora and blepharospasm. Corneal ulcer: epiphora, blepharospasm, photophobia and corneal opacity (fluorescein positive). "
+            f"Glaucoma: acute ocular pain, corneal oedema, mydriasis, buphthalmos and vision loss. "
+            f"Cataract: progressive vision loss from lens opacity; retinal disease: progressive or acute vision loss (PRA, retinal detachment)."
+        )
+    if category == "musculoskeletal":
+        return (
+            f"Clinical signs of {name} depend on the site and whether the process is acute or chronic. "
+            f"Acute trauma: non-weight-bearing lameness, swelling, pain and deformity (fracture, luxation). "
+            f"Chronic degeneration: difficulty rising, exercise intolerance, lameness worse after exercise or in cold, and joint swelling (osteoarthritis). "
+            f"Developmental disease: mild lameness from a young age (hip/elbow dysplasia); infectious: febrile joint swelling and pain (septic arthritis)."
+        )
+    if category == "dental":
+        return (
+            f"Clinical signs of {name} vary with the dental condition and its progression. "
+            f"Periodontal disease: halitosis, gingival redness/swelling, ptyalism, difficulty eating and facial swelling with apical abscessation. "
+            f"Malocclusion (herbivores): drooling, slow or selective eating, weight loss, reduced faecal output, exophthalmos and mandibular abscesses. "
+            f"Tooth-root fracture: difficulty eating, unilateral chewing and halitosis; oral tumours: an oral mass, bleeding, ptyalism and dysphagia."
+        )
+    if category == "dermatological":
+        return (
+            f"Clinical signs of {name} vary with the cause and stage. "
+            f"Acute: erythema, vesicles, moist lesions, intense pruritus and alopecia (contact dermatitis, urticaria). "
+            f"Chronic: lichenification, hyperpigmentation, alopecia, scaling and crusting (atopic dermatitis, chronic pyoderma). "
+            f"Distribution aids diagnosis: face/paws (atopy), ears/ventrum (flea allergy), symmetrical alopecia (endocrine), circular lesions (dermatophytosis, demodicosis)."
+        )
+    if category == "hematological":
+        return (
+            f"Clinical signs of {name} vary with the blood component affected. "
+            f"Anaemia: pale mucous membranes, lethargy, exercise intolerance, tachycardia and tachypnoea (syncope and a murmur when severe). "
+            f"Bleeding tendency: petechiae, mucosal bleeding, haematuria, melena and haemarthrosis (coagulopathy, thrombocytopathy). "
+            f"Thrombosis: acute limb pain and paresis (FATE) or dyspnoea (pulmonary embolism); haemolysis: icterus, dark urine and splenomegaly."
+        )
+    if category == "reproductive":
+        return (
+            f"Clinical signs of {name} vary with the reproductive lesion. "
+            f"Pyometra: polyuria/polydipsia, vomiting, lethargy, abdominal distension and vulvar discharge (open) or insidious progression (closed). "
+            f"Mastitis: mammary swelling, pain, fever and abnormal milk. Prostatic disease: dysuria, haematuria, dyschezia and hindlimb lameness. "
+            f"Dystocia: prolonged labour, persistent straining and abnormal interval between offspring; eclampsia: peripartum lethargy, inappetence and neurological signs."
+        )
+    if category == "toxicity":
+        return (
+            f"Clinical signs of {name} range from acute to chronic depending on the toxicant and dose. "
+            f"Gastrointestinal signs (vomiting, diarrhoea, ptyalism, abdominal pain) are the most common early finding. "
+            f"Neurotoxins cause tremor, seizures, ataxia and coma; hepatotoxins cause icterus, coagulopathy and hepatic encephalopathy; nephrotoxins cause oliguria and uraemia. "
+            f"Acute exposure produces rapid onset, where early decontamination and supportive care determine the outcome."
+        )
+    if category == "trauma":
+        return (
+            f"Clinical signs of {name} vary with the site and severity of injury. "
+            f"Fracture: non-weight-bearing lameness, swelling, crepitus, deformity and pain. Laceration: bleeding, tissue loss and infection risk. "
+            f"Visceral injury: shock, abdominal guarding and dyspnoea (diaphragmatic hernia, pneumothorax). "
+            f"Brain contusion: depressed consciousness, pupillary abnormalities, ataxia and seizures; spinal injury: paralysis, abnormal reflexes and urinary dysfunction."
+        )
+    if category == "autoimmune":
+        return (
+            f"Clinical signs of {name} are diverse and depend on the tissue affected. "
+            f"IMHA: icterus, pallor, lethargy and tachypnoea. ITP: petechiae, mucosal bleeding, melena and haematuria. "
+            f"Immune-mediated polyarthritis: shifting-leg lameness, fever and joint swelling. Pemphigus: scaly/vesicular skin and mucosal lesions with crusting. "
+            f"SLE: multi-organ involvement (skin, joints, kidney, blood). A relapsing-remitting course is characteristic."
+        )
+    if category == "nutritional":
+        return (
+            f"Clinical signs of {name} show specific patterns according to the deficient or excess nutrient. "
+            f"Calcium deficiency: osteomalacia, pathological fractures, seizures and poor growth. Vitamin A deficiency: ocular disease, abnormal keratinisation, night blindness and reproductive failure. "
+            f"Vitamin C deficiency (guinea pigs): joint swelling, bleeding tendency, periodontal disease and poor growth. "
+            f"Protein-energy malnutrition: emaciation, muscle wasting, hypoalbuminaemia and oedema; vitamin D/UV-B deficiency (reptiles): metabolic bone disease."
+        )
+    if category == "behavioral":
+        return (
+            f"Clinical signs of {name} vary with the behavioural problem. "
+            f"Separation anxiety: destructive behaviour, excessive vocalisation and inappropriate elimination when the owner is absent. "
+            f"Phobias (thunder, fireworks): trembling, hiding, panting, destruction and escape attempts. Aggression: growling, baring teeth and biting (fear, territorial, resource-guarding). "
+            f"Compulsive disorder: repetitive purposeless behaviour (tail-chasing, flank-sucking, over-grooming); cognitive dysfunction: circling, night vocalisation, reduced interaction and altered elimination."
+        )
+    return (
+        f"Clinical signs of {name} are varied and depend on the disease process and its stage. "
+        f"In addition to non-specific findings (inappetence, lethargy, weight loss), signs specific to the affected organ or system become apparent. "
+        f"History-taking and a thorough physical examination establish the pattern of signs, with ancillary testing used to reach a definitive diagnosis. "
+        f"Early detection and appropriate intervention are key to an improved outcome."
+    )
+
+
+def gen_transmission(category: str, name_en: str, species: str) -> str:
+    """Disease-specific English transmission text (replaces category templates)."""
+    sp_en = SPECIES_EN.get(species, species)
+    name = _disease_prefix_en(name_en, sp_en)
+
+    if category == "viral_infection":
+        return (
+            f"Transmission of {name} depends on the causative virus. "
+            f"Major routes include aerosol/droplet spread (respiratory viruses), faecal-oral spread (enteric viruses), arthropod vectors (arboviruses), sexual contact, and vertical transplacental or lactogenic transmission. "
+            f"Environmental stability of the virus determines the risk of indirect (fomite) transmission via contaminated surfaces, equipment and clothing. "
+            f"For highly contagious viruses, maintaining vaccination coverage for herd immunity is an important public-health measure."
+        )
+    if category == "bacterial_infection":
+        return (
+            f"Transmission of {name} is diverse and reflects the ecology of the causative organism. "
+            f"Routes include direct contact (bites, sexual contact, transplacental), droplet spread, faecal-oral spread, arthropod vectors, opportunistic infection by environmental commensals, and ingestion of contaminated food or water. "
+            f"Identifying and isolating the source animal, hand hygiene, disinfection of contaminated equipment and the environment, and vector control are the mainstays of breaking transmission. "
+            f"Zoonotic pathogens require notification of public-health authorities and screening of contacts."
+        )
+    if category == "respiratory_infection":
+        return (
+            f"The principal route of transmission for {name} is droplet spread of respiratory secretions (coughing, sneezing). "
+            f"Close contact in confined spaces, shared food and water bowls or bedding, and indirect spread via contaminated hands and clothing also occur. "
+            f"Ventilation, density management, quarantine of new arrivals (minimum 14 days) and environmental disinfection (hypochlorite or alcohol-based) help interrupt transmission. "
+            f"Animals may shed the pathogen for weeks after clinical recovery, so contact should be limited until full recovery is confirmed."
+        )
+    if category == "fungal_infection":
+        return (
+            f"Transmission of {name} varies with the fungal species. "
+            f"Dermatophytosis spreads by direct contact with infected animals or by arthrospores in a contaminated environment (bedding, carpet, grooming tools). "
+            f"Systemic mycoses (Coccidioides, Blastomyces, Histoplasma) follow inhalation of environmental spores, so animal-to-animal transmission essentially does not occur. "
+            f"Candida and Malassezia are commensals that cause opportunistic infection under immunosuppression."
+        )
+    if category == "parasitic":
+        return (
+            f"Transmission of {name} is determined by the parasite species. "
+            f"Routes include ingestion (contaminated food/water or predation of intermediate hosts), percutaneous penetration (hookworm, schistosomes), arthropod vectors (ticks, mosquitoes, fleas), the faecal-oral route (coccidia, Giardia), and sexual or transplacental transmission of certain protozoa. "
+            f"Understanding the life cycle of intermediate and definitive hosts is key to interrupting transmission. "
+            f"Strict environmental hygiene, vector control and routine deworming are preventive measures."
+        )
+    if category == "neoplasia":
+        return (
+            f"As a neoplastic disease, {name} is essentially non-infectious and is not directly transmitted between animals. "
+            f"However, oncogenic viruses (e.g. FeLV, papillomaviruses) are transmissible and can later cause virus-associated tumours. "
+            f"Canine transmissible venereal tumour (CTVT) and Tasmanian devil facial tumour are rare exceptions in which the tumour cells themselves spread directly. "
+            f"Genetic predisposition is inherited vertically, so breeding management of affected lines is important."
+        )
+    if category == "endocrine_metabolic":
+        return (
+            f"As a non-infectious disease, {name} is not directly transmitted between animals. "
+            f"Several animals sharing the same environmental factors (high-carbohydrate diet, inactivity, obesity-promoting husbandry) may, however, be affected concurrently. "
+            f"Hereditary predisposition (breed susceptibility to Cushing's syndrome or diabetes) is passed from parent to offspring. "
+            f"It is not transmissible to humans, and accurate owner education prevents the misperception that the animal is an infectious source."
+        )
+    if category == "toxicity":
+        return (
+            f"As a non-infectious condition, {name} is not directly transmitted between animals. "
+            f"Exposure to the toxicant is environmental; concurrent poisoning of several animals in the same environment reflects common exposure rather than transmission. "
+            f"Identifying and removing the source, assessing exposure risk to other animals, and advising on safe storage and disposal are important to prevent recurrence. "
+            f"The risk of human exposure should be assessed at the same time."
+        )
+    if category == "trauma":
+        return (
+            f"As a traumatic condition, {name} is not directly transmitted between animals. "
+            f"Shared environmental hazards (cramped cages, slippery flooring, contact with other animals) may, however, cause sequential injury to several animals. "
+            f"Identifying the cause and improving the environment (reviewing housing, separating animals, improving flooring) is essential to prevent recurrence and spread to other individuals."
+        )
+    if category == "autoimmune":
+        return (
+            f"As an autoimmune disease, {name} is not directly transmitted between animals. "
+            f"Reported triggers include infection (T-cell activation by molecular mimicry), vaccination, drug administration and UV exposure, so incidence may rise in groups sharing these environmental factors. "
+            f"Genetic predisposition (HLA/DLA associations) is inherited, so breeding of affected animals should be considered carefully."
+        )
+    if category == "nutritional":
+        return (
+            f"As a non-infectious disease, {name} is not directly transmitted between animals. "
+            f"Several animals in a group may be affected at once, but this represents a common-source outbreak from an inappropriate diet rather than contagion. "
+            f"Dietary correction for the whole group is required to resolve it collectively. "
+            f"Owner education (basic nutrition and species-specific requirements) is most important for prevention of recurrence."
+        )
+    if category == "renal_urinary":
+        return (
+            f"As a predominantly non-infectious disease, {name} is usually not transmitted between animals. "
+            f"Indirect transmission is possible only with bacterial urinary tract infection or pyelonephritis, but the condition is essentially individual. "
+            f"Leptospirosis is a zoonosis transmitted via urine, so confirmed cases require notification of public-health authorities and contact management. "
+            f"Hereditary renal disease (e.g. PKD) is inherited, making breeding management important."
+        )
+    if category == "cardiac":
+        return (
+            f"As a non-infectious disease, {name} is not directly transmitted between animals. "
+            f"Hereditary cardiac disease (breeds predisposed to DCM or HCM) is inherited, so avoiding breeding of affected animals is important for population-level control. "
+            f"In infective endocarditis the organism reaches the heart haematogenously from another site of infection; there is no animal-to-animal transmission from the heart itself."
+        )
+    if category == "respiratory_other":
+        return (
+            f"As a non-infectious disease, {name} is not directly transmitted between animals. "
+            f"In allergic disease, several individuals may be affected concurrently through exposure to the same environment (tobacco smoke, house dust, chemicals). "
+            f"Brachycephalic airway syndrome, tracheal collapse and laryngeal paralysis arise from anatomical predisposition with a breed-specific genetic background."
+        )
+    if category == "gastrointestinal":
+        return (
+            f"Transmission of {name} varies with the cause. "
+            f"Infectious causes (parvovirus, Salmonella, parasites) spread to other animals by the faecal-oral route. "
+            f"Non-infectious causes (IBD, neoplasia, mechanical obstruction, motility disorders) are not transmitted between animals. "
+            f"Environmental disinfection, quarantine of new arrivals and strict faecal management are important to prevent infectious gastrointestinal disease."
+        )
+    if category == "neurological":
+        return (
+            f"Transmissibility of {name} varies with the cause. "
+            f"Infectious encephalitis/meningitis (bacterial, viral, protozoal) spreads by the route appropriate to the pathogen. "
+            f"Idiopathic epilepsy, degenerative disease and neoplasia are not transmitted between animals. "
+            f"Rabies (a zoonosis) is transmitted via saliva through bite wounds, so vaccination and avoiding contact with wildlife are critically important."
+        )
+    if category == "ophthalmic":
+        return (
+            f"Transmission of {name} varies with the cause. "
+            f"Infectious conjunctivitis (feline herpesvirus, Chlamydia, Mycoplasma) spreads to other cats by droplet and contact. "
+            f"Non-infectious causes (cataract, glaucoma, retinal degeneration) are not transmitted between animals. "
+            f"Hereditary ocular disease (collie eye anomaly, PRA) is inherited from parent to offspring."
+        )
+    if category == "musculoskeletal":
+        return (
+            f"As a non-infectious disease, {name} is usually not transmitted between animals. "
+            f"Only in septic osteomyelitis or septic arthritis can the organism spread haematogenously; the joint disease itself is individual. "
+            f"Hereditary orthopaedic disease (hip dysplasia, intervertebral disc degeneration) is inherited, so breeding management is important for population-level control."
+        )
+    if category == "dental":
+        return (
+            f"As a non-infectious disease, {name} is not directly transmitted between animals. "
+            f"The bacteria causing periodontal disease are oral commensals, not an external source of infection. "
+            f"Hereditary predisposition to malocclusion (brachycephalic and small-breed dogs) is inherited. "
+            f"Malocclusion in herbivores can affect a group through the shared husbandry factor of inadequate dietary fibre."
+        )
+    if category == "dermatological":
+        return (
+            f"Transmission of {name} varies with the cause. "
+            f"Infectious skin disease (dermatophytosis, scabies, ear mites) spreads between animals by contact. "
+            f"Allergic, immune-mediated and endocrine skin disease is not transmitted. "
+            f"Dermatophytosis (especially Microsporum canis) and scabies are zoonoses that can spread to owners, requiring public-health consideration."
+        )
+    if category == "hematological":
+        return (
+            f"Transmission of {name} varies with the cause. "
+            f"Infectious blood diseases (Babesia, Ehrlichia, haemoplasma) are tick-borne. "
+            f"FeLV-associated anaemia and myelosuppression have an underlying viral infection. "
+            f"Immune-mediated, nutritional and hereditary blood diseases are not transmitted between animals. "
+            f"Because of transfusion-associated infection risk, blood donors are screened for blood-borne disease."
+        )
+    if category == "reproductive":
+        return (
+            f"Transmission of {name} varies with the cause. "
+            f"Infectious reproductive disease (brucellosis, herpesvirus, the venereal tumour CTVT) spreads by sexual contact or transplacentally. "
+            f"Non-infectious causes (pyometra, dystocia, neoplasia) are not transmitted. "
+            f"Early spay/neuter and screening for infectious reproductive disease (brucellosis in particular is zoonotic) are important for prevention."
+        )
+    if category == "genetic_congenital":
+        return (
+            f"As a genetic or congenital disorder, {name} is not acquired by transmission between animals. "
+            f"It is inherited from parent to offspring according to the mode of inheritance (autosomal dominant, recessive, X-linked or polygenic). "
+            f"Population-level control requires pre-breeding genetic testing, exclusion of carriers and avoidance of inbreeding. "
+            f"Tracking affected lines and pedigree management are important."
+        )
+    return (
+        f"Transmissibility of {name} depends on the underlying cause. "
+        f"Infectious causes spread between animals by pathogen-specific routes (contact, droplet, vectors, transplacental). "
+        f"Non-infectious causes (traumatic, metabolic, neoplastic, degenerative, hereditary) are not transmitted between animals. "
+        f"Accurate identification of the cause allows assessment of transmission risk and design of preventive measures."
+    )
+
+
+# Category-specific diagnostic workups. {p} = species-qualified disease prefix.
+_DIAGNOSIS_JA: dict[str, str] = {
+    "viral_infection": "{p}の診断は病歴（ワクチン歴・曝露歴・発症経過）と身体検査を起点とし、PCR・抗原検査・ペア血清抗体価でウイルスを同定する。CBC・生化学で全身状態と臓器障害を評価し、画像検査で罹患臓器を確認する。確定診断と他疾患の除外が治療方針を決定する。",
+    "bacterial_infection": "{p}の診断は病歴・身体検査に加え、罹患部位の細菌培養・感受性試験を基本とする。CBC（白血球増多・核左方移動）・生化学・CRP/SAAなど炎症マーカー、グラム染色・細胞診、必要に応じPCRで起因菌を同定する。感受性結果に基づく抗菌薬選択が治療成功の鍵となる。",
+    "respiratory_infection": "{p}の診断は呼吸器症状の評価と病歴聴取を起点に、胸部X線・必要に応じCTで肺病変を評価する。鼻腔・咽頭スワブまたはBALのPCR・培養で病原体を同定し、CBC・生化学で全身状態を確認する。低酸素血症の評価にSpO2・血液ガスを用いる。",
+    "fungal_infection": "{p}の診断は病変部の細胞診・真菌培養・KOH直接鏡検を基本とし、皮膚糸状菌ではウッド灯検査・毛検査を併用する。深在性真菌症では抗原・抗体検査、画像検査、組織生検による確定診断を要する。再発・難治例では薬剤感受性評価も検討する。",
+    "parasitic": "{p}の診断は寄生部位に応じた検査を選択する。消化管寄生では糞便浮遊法・直接塗抹・抗原検査、外部寄生では皮膚掻爬・セロハンテープ法・被毛検査、血液・心血管寄生では血液塗抹・抗原検査・画像検査を用いる。寄生虫種とライフサイクルの同定が治療・予防計画の基盤となる。",
+    "neoplasia": "{p}の診断はFNA細胞診を第一選択とし、確定には組織生検・病理組織学的検査を要する。CBC・生化学、胸腹部X線・超音波・必要に応じCT/MRIで原発巣と転移を評価し、所属リンパ節の細胞診を含めた病期分類（ステージング）を行う。腫瘍型と病期が治療法と予後を左右する。",
+    "endocrine_metabolic": "{p}の診断はホルモン・代謝指標の測定を中心とする。糖尿病: 血糖・尿糖・フルクトサミン。甲状腺機能: T4・freeT4・TSH。副腎皮質機能亢進: ACTH刺激試験・低用量デキサメサゾン抑制試験。電解質・血液ガスで代謝状態を評価する。早期は無症候のため定期的内分泌スクリーニングが有用。",
+    "renal_urinary": "{p}の診断は尿検査（比重・蛋白・沈渣）・血液検査（クレアチニン・BUN・SDMA・リン・カリウム）を基本とし、尿蛋白クレアチニン比（UPC）、画像検査（超音波・X線）で形態を評価する。細菌感染では尿培養、結石では成分分析を行う。IRISステージ分類で病期を判定する。",
+    "cardiac": "{p}の診断は聴診（心雑音・不整脈・奔馬調律）を起点に、胸部X線（心拡大・肺水腫）、心エコー図（構造・機能評価の中心）、心電図（不整脈評価）を組み合わせる。NT-proBNP・トロポニン、血圧測定を補助的に用い、心不全のステージ分類で治療方針を決定する。",
+    "respiratory_other": "{p}の診断は胸部X線・必要に応じCTで気道・肺実質を評価し、気管支鏡・気管支肺胞洗浄（BAL）で細胞診・培養を行う。上気道閉塞では喉頭・咽頭の内視鏡評価、気管虚脱では透視（呼気・吸気）が有用。SpO2・血液ガスで換気・酸素化を確認する。",
+    "gastrointestinal": "{p}の診断は病歴・身体検査・腹部触診を起点に、糞便検査、血液検査、腹部X線・超音波で評価する。慢性・難治例では内視鏡・生検による組織診断、消化吸収試験（cobalamin・folate・TLI）を行う。急性腹症では緊急画像評価で外科適応を判断する。",
+    "neurological": "{p}の診断は神経学的検査による病変局在診断を起点とし、MRI（脳・脊髄の第一選択）・CTで構造を評価する。脳脊髄液（CSF）検査で炎症・感染・腫瘍を鑑別し、末梢神経・筋疾患では電気生理学的検査（筋電図・神経伝導速度）・筋生検を用いる。",
+    "ophthalmic": "{p}の診断は眼科検査（細隙灯顕微鏡・眼底検査）を基本とし、フルオレセイン染色（角膜潰瘍）、眼圧測定（緑内障）、シルマー涙液試験（乾性角結膜炎）を組み合わせる。網膜疾患では眼底検査・網膜電図（ERG）、眼内構造評価には眼超音波を用いる。",
+    "musculoskeletal": "{p}の診断は整形外科的検査（跛行評価・触診・関節可動域）を起点に、X線で骨・関節を評価する。必要に応じCT/MRI、関節液検査（敗血症性・免疫介在性関節炎の鑑別）、関節鏡を用いる。発達性疾患では特定肢位での撮影、感染では培養を行う。",
+    "dental": "{p}の診断は口腔内視診（歯牙・歯肉・咬合・口腔粘膜）を起点に、歯科X線で歯根・歯槽骨を評価する。草食動物では臼歯の過長・スパー・歯根膿瘍を頬側・舌側から評価し、頭部X線で歯根伸長・骨融解を確認する。麻酔下の精密検査が確定診断に有用。",
+    "dermatological": "{p}の診断は病変分布の評価を起点に、皮膚掻爬（疥癬・毛包虫）、被毛検査・真菌培養（皮膚糸状菌）、押捺・掻爬細胞診（細菌・マラセチア）、ウッド灯を用いる。アレルギーでは除外診断・食物試験・皮内/血清IgE検査、難治例では皮膚生検を行う。",
+    "hematological": "{p}の診断はCBC・血液塗抹（形態評価）を基本とし、貧血では網赤血球数・鉄指標・クームス試験、出血傾向では血小板数・凝固系（PT/APTT）・D-ダイマーを評価する。必要に応じ骨髄検査、感染では病原体PCR・血液塗抹、画像検査で脾腫・出血源を確認する。",
+    "reproductive": "{p}の診断は病歴（発情・交配・分娩歴）と身体検査を起点に、腹部・生殖器の超音波検査・X線で評価する。子宮蓄膿症ではCBC（白血球増多）・超音波、膣スメア細胞診、感染ではブルセラ等の血清・培養検査を行う。難産では胎子・産道評価を緊急に行う。",
+    "toxicity": "{p}の診断は曝露歴の聴取が最も重要で、原因物質の特定を起点とする。CBC・生化学・血液ガス・電解質で臓器障害を評価し、特異的毒物では血中・尿中濃度測定や特異検査（コリンエステラーゼ活性等）を行う。摂取物・包装の確認と中毒管理センターへの照会が有用。",
+    "trauma": "{p}の診断はプライマリーサーベイ（ABC）による全身状態評価を最優先とし、X線・FAST超音波・必要に応じCTで損傷部位を評価する。骨折では二方向撮影、内臓・胸腔損傷では超音波・X線、神経損傷では神経学的検査を行う。多発外傷では系統的な損傷検索が重要。",
+    "autoimmune": "{p}の診断は除外診断（感染・腫瘍・薬剤性の除外）を前提に、CBC・血液塗抹、自己抗体検査（ANA・クームス）、罹患組織の生検・病理を組み合わせる。免疫介在性多発性関節炎では関節液検査、IMHA/ITPでは溶血・血小板減少の確認と二次性原因の検索を行う。",
+    "nutritional": "{p}の診断は詳細な食餌歴の聴取を起点とし、欠乏・過剰栄養素を推定する。血液検査（カルシウム・リン・ビタミン濃度・総蛋白・アルブミン）、代謝性骨疾患ではX線で骨密度・病的骨折を評価する。飼育環境（UV-B・食餌組成）の評価が原因同定に不可欠。",
+    "behavioral": "{p}の診断は詳細な行動歴・環境歴の聴取を中核とし、誘因・頻度・状況を評価する。まず疼痛・内分泌・神経疾患など医学的原因を血液検査・画像で除外し、その上で行動学的評価（恐怖・不安・葛藤の分類）を行う。飼育環境とヒト-動物関係の評価が治療計画の基盤となる。",
+}
+
+_DIAGNOSIS_EN: dict[str, str] = {
+    "viral_infection": "Diagnosis of {p} begins with history (vaccination, exposure, course) and physical examination, with the virus identified by PCR, antigen testing or paired serology. CBC and biochemistry assess systemic status and organ injury, and imaging localises affected organs. Confirmation and exclusion of differentials guide treatment.",
+    "bacterial_infection": "Diagnosis of {p} rests on history, physical examination and culture with sensitivity testing from the affected site. CBC (leukocytosis, left shift), biochemistry, inflammatory markers (CRP/SAA), Gram stain and cytology—plus PCR where needed—identify the organism. Sensitivity-guided antimicrobial selection is key to success.",
+    "respiratory_infection": "Diagnosis of {p} combines assessment of respiratory signs and history with thoracic radiography (and CT where indicated) to evaluate lung lesions. Nasal/pharyngeal swabs or BAL undergo PCR and culture to identify the pathogen, while CBC and biochemistry assess systemic status. SpO2 and blood gas evaluate hypoxaemia.",
+    "fungal_infection": "Diagnosis of {p} relies on cytology, fungal culture and KOH direct microscopy of lesions, with Wood's-lamp and hair examination for dermatophytosis. Systemic mycoses require antigen/antibody testing, imaging and tissue biopsy for confirmation. Antifungal susceptibility is considered in refractory or relapsing cases.",
+    "parasitic": "Diagnosis of {p} uses tests matched to the parasite's location: faecal flotation, direct smear and antigen testing for gastrointestinal parasites; skin scraping, acetate-tape and hair examination for ectoparasites; and blood smear, antigen tests and imaging for haemo- or cardiovascular parasites. Identifying the species and life cycle underpins treatment and prevention.",
+    "neoplasia": "Diagnosis of {p} starts with FNA cytology, with biopsy and histopathology required for confirmation. CBC and biochemistry, thoracic/abdominal radiography, ultrasonography and CT/MRI as needed evaluate the primary and metastasis, and staging includes cytology of regional lymph nodes. Tumour type and stage determine treatment and prognosis.",
+    "endocrine_metabolic": "Diagnosis of {p} centres on hormonal and metabolic assays. Diabetes: glucose, glucosuria, fructosamine. Thyroid: T4, free T4, TSH. Hyperadrenocorticism: ACTH-stimulation and low-dose dexamethasone suppression testing. Electrolytes and blood gas assess metabolic status. As early disease is subclinical, periodic endocrine screening is useful.",
+    "renal_urinary": "Diagnosis of {p} rests on urinalysis (specific gravity, protein, sediment) and bloodwork (creatinine, BUN, SDMA, phosphorus, potassium), with the urine protein:creatinine ratio and imaging (ultrasound, radiography) assessing morphology. Urine culture is used for infection and stone analysis for urolithiasis, with IRIS staging defining the stage.",
+    "cardiac": "Diagnosis of {p} begins with auscultation (murmur, arrhythmia, gallop) and proceeds to thoracic radiography (cardiomegaly, pulmonary oedema), echocardiography (the mainstay of structural and functional assessment) and ECG (arrhythmia). NT-proBNP, troponin and blood pressure are adjuncts, and heart-failure staging guides management.",
+    "respiratory_other": "Diagnosis of {p} uses thoracic radiography and CT where indicated to evaluate the airways and lung parenchyma, with bronchoscopy and bronchoalveolar lavage (BAL) for cytology and culture. Laryngeal/pharyngeal endoscopy is useful for upper airway obstruction and fluoroscopy (expiratory/inspiratory) for tracheal collapse. SpO2 and blood gas confirm ventilation and oxygenation.",
+    "gastrointestinal": "Diagnosis of {p} begins with history, physical examination and abdominal palpation, supported by faecal testing, bloodwork and abdominal radiography/ultrasonography. Chronic or refractory cases warrant endoscopy with biopsy and digestive testing (cobalamin, folate, TLI). In acute abdomen, emergency imaging determines the need for surgery.",
+    "neurological": "Diagnosis of {p} begins with a neurological examination to localise the lesion, with MRI (the first choice for brain and spinal cord) or CT for structure. Cerebrospinal fluid analysis differentiates inflammation, infection and neoplasia, while electrodiagnostics (EMG, nerve conduction) and muscle biopsy are used for peripheral nerve and muscle disease.",
+    "ophthalmic": "Diagnosis of {p} rests on an ophthalmic examination (slit lamp, fundoscopy) with fluorescein staining (corneal ulcer), tonometry (glaucoma) and the Schirmer tear test (keratoconjunctivitis sicca). Fundoscopy and electroretinography (ERG) assess retinal disease, and ocular ultrasound evaluates intraocular structures.",
+    "musculoskeletal": "Diagnosis of {p} begins with an orthopaedic examination (lameness assessment, palpation, range of motion) and radiography of bone and joint. CT/MRI, joint-fluid analysis (to distinguish septic from immune-mediated arthritis) and arthroscopy are used as needed. Specific-view radiography is used for developmental disease and culture for infection.",
+    "dental": "Diagnosis of {p} begins with oral examination (teeth, gingiva, occlusion, mucosa) and dental radiography of roots and alveolar bone. In herbivores, cheek-tooth overgrowth, spurs and apical abscesses are assessed buccally and lingually, with skull radiography confirming root elongation and bone lysis. Examination under anaesthesia aids definitive diagnosis.",
+    "dermatological": "Diagnosis of {p} begins with the lesion distribution, using skin scraping (scabies, demodicosis), hair examination and fungal culture (dermatophytosis), impression/scraping cytology (bacteria, Malassezia) and Wood's lamp. Allergy is approached by exclusion, diet trials and intradermal/serum IgE testing, with skin biopsy for refractory cases.",
+    "hematological": "Diagnosis of {p} rests on CBC and blood smear (morphology), with reticulocyte count, iron indices and a Coombs test for anaemia, and platelet count and coagulation (PT/APTT, D-dimer) for bleeding tendency. Bone marrow examination, pathogen PCR/blood smear for infection, and imaging for splenomegaly or a bleeding source are used as needed.",
+    "reproductive": "Diagnosis of {p} begins with history (oestrus, mating, parturition) and physical examination, with abdominal and reproductive-tract ultrasonography and radiography. Pyometra is assessed by CBC (leukocytosis) and ultrasound, vaginal cytology is used as indicated, and serology/culture (e.g. Brucella) for infection. Dystocia requires urgent fetal and birth-canal assessment.",
+    "toxicity": "Diagnosis of {p} hinges on an exposure history to identify the toxicant. CBC, biochemistry, blood gas and electrolytes assess organ injury, and specific toxicants warrant blood/urine concentrations or targeted assays (e.g. cholinesterase activity). Inspection of the ingested material/packaging and consultation with a poison-control centre are valuable.",
+    "trauma": "Diagnosis of {p} prioritises a primary survey (ABC) of overall status, with radiography, FAST ultrasound and CT as needed to evaluate injuries. Two-view radiography is used for fractures, ultrasound/radiography for visceral and thoracic injury, and a neurological examination for nerve injury. Systematic injury search is important in polytrauma.",
+    "autoimmune": "Diagnosis of {p} requires exclusion of infection, neoplasia and drug reaction, combined with CBC and blood smear, autoantibody testing (ANA, Coombs) and biopsy/histopathology of affected tissue. Joint-fluid analysis is used for immune-mediated polyarthritis, and confirmation of haemolysis/thrombocytopenia with a search for secondary causes for IMHA/ITP.",
+    "nutritional": "Diagnosis of {p} begins with a detailed dietary history to identify the deficient or excess nutrient. Bloodwork (calcium, phosphorus, vitamin levels, total protein, albumin) and—for metabolic bone disease—radiography of bone density and pathological fractures are used. Assessment of husbandry (UV-B, diet composition) is essential to identify the cause.",
+    "behavioral": "Diagnosis of {p} centres on a detailed behavioural and environmental history assessing triggers, frequency and context. Medical causes (pain, endocrine, neurological disease) are first excluded with bloodwork and imaging, followed by behavioural assessment (classifying fear, anxiety and conflict). Evaluation of the environment and human-animal relationship underpins the treatment plan.",
+}
+
+_DIAGNOSIS_JA_GENERIC = "{p}の診断は病歴聴取と身体検査を起点に、CBC・生化学などの血液検査と画像検査（X線・超音波）で全身状態と罹患臓器を評価する。病態に応じた特異的検査（細胞診・培養・PCR・内視鏡・生検）で確定診断に至り、他疾患の除外を行う。早期診断が予後改善の鍵となる。"
+_DIAGNOSIS_EN_GENERIC = "Diagnosis of {p} begins with history and physical examination, with bloodwork (CBC, biochemistry) and imaging (radiography, ultrasonography) assessing systemic status and the affected organs. Condition-specific testing (cytology, culture, PCR, endoscopy, biopsy) reaches a definitive diagnosis while excluding differentials. Early diagnosis is key to an improved outcome."
+
+
+def gen_diagnosis_ja(category: str, name_ja: str, species: str) -> str:
+    """Disease-specific Japanese diagnostic workup (replaces category templates)."""
+    sp_ja = SPECIES_JA.get(species, species)
+    p = _disease_prefix(name_ja, sp_ja)
+    return _DIAGNOSIS_JA.get(category, _DIAGNOSIS_JA_GENERIC).format(p=p)
+
+
+def gen_diagnosis(category: str, name_en: str, species: str) -> str:
+    """Disease-specific English diagnostic workup (replaces category templates)."""
+    sp_en = SPECIES_EN.get(species, species)
+    p = _disease_prefix_en(name_en, sp_en)
+    return _DIAGNOSIS_EN.get(category, _DIAGNOSIS_EN_GENERIC).format(p=p)
 
 
 def gen_differential_diagnosis_ja(category: str, name_ja: str, species: str) -> str:
@@ -2671,6 +3091,19 @@ def generate_clinical_fields(
             continue
         if field == "description_ja":
             result[field] = gen_description_ja(desc_category, name_ja, species)
+            continue
+        # English clinical-signs / transmission use the English disease name.
+        if field == "clinical_signs":
+            result[field] = gen_clinical_signs(category, name_en, species)
+            continue
+        if field == "transmission":
+            result[field] = gen_transmission(category, name_en, species)
+            continue
+        if field == "diagnosis_ja":
+            result[field] = gen_diagnosis_ja(category, name_ja, species)
+            continue
+        if field == "diagnosis":
+            result[field] = gen_diagnosis(category, name_en, species)
             continue
         gen = GENERATORS.get(field)
         if gen is None:
