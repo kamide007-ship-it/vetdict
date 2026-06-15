@@ -637,6 +637,8 @@ def dynamic_sitemap():
         (f"{base}/#checker", "weekly", "0.9"),
         (f"{base}/#database", "weekly", "0.9"),
         (f"{base}/diseases", "weekly", "0.9"),
+        (f"{base}/drugs", "weekly", "0.9"),
+        (f"{base}/anesthesia", "weekly", "0.8"),
         (f"{base}/#chat", "weekly", "0.8"),
         (f"{base}/#drugs", "monthly", "0.8"),
     ]
@@ -657,6 +659,26 @@ def dynamic_sitemap():
                     urls.append((f"{base}/diseases/{sp}/{_slug}", "monthly", "0.5"))
         except ImportError:
             pass
+
+    # Drug detail pages (SEO: each drug = a crawlable page)
+    try:
+        from api.drug_dictionary import DRUGS as _ALL_DRUGS
+
+        for _dr in _ALL_DRUGS:
+            _did = _dr.get("id", "")
+            if _did:
+                urls.append((f"{base}/drugs/{_did}", "monthly", "0.5"))
+    except ImportError:
+        pass
+
+    # Anesthesia / sedation protocol pages (per species)
+    try:
+        from api.anesthesia_protocols import ANESTHESIA_PROTOCOLS as _AP
+
+        for _sp in _AP:
+            urls.append((f"{base}/anesthesia/{_sp}", "monthly", "0.6"))
+    except ImportError:
+        pass
 
     # Legal pages
     for page in ("terms", "privacy", "tokushoho"):
@@ -1177,6 +1199,317 @@ def disease_detail(species: str, disease_slug: str):
         disease_category_ja=cat_ja,
         disease_category_en=cat_en,
         same_category_diseases=same_cat_diseases,
+    )
+
+
+# =============================================================================
+# Drug dictionary SEO pages (each drug = a crawlable long-tail page)
+# =============================================================================
+
+# Species labels for drug dosage tables (superset of disease SPECIES_META keys;
+# drug data also uses "pig" and "others").
+_DRUG_SPECIES_LABELS: dict[str, tuple[str, str]] = {
+    "dog": ("犬", "Dog"),
+    "cat": ("猫", "Cat"),
+    "horse": ("馬", "Horse"),
+    "rabbit": ("うさぎ", "Rabbit"),
+    "hamster": ("ハムスター", "Hamster"),
+    "guinea_pig": ("モルモット", "Guinea Pig"),
+    "chinchilla": ("チンチラ", "Chinchilla"),
+    "ferret": ("フェレット", "Ferret"),
+    "hedgehog": ("ハリネズミ", "Hedgehog"),
+    "sugar_glider": ("フクロモモンガ", "Sugar Glider"),
+    "degu": ("デグー", "Degu"),
+    "bird": ("鳥", "Bird"),
+    "parakeet": ("インコ", "Parakeet"),
+    "parrot": ("オウム", "Parrot"),
+    "reptile": ("爬虫類", "Reptile"),
+    "tortoise": ("リクガメ", "Tortoise"),
+    "snake": ("ヘビ", "Snake"),
+    "lizard": ("トカゲ", "Lizard"),
+    "amphibian": ("両生類", "Amphibian"),
+    "fish": ("魚", "Fish"),
+    "pig": ("豚", "Pig"),
+    "exotic_other": ("その他エキゾチック", "Exotic Other"),
+    "others": ("その他", "Other"),
+}
+
+# Stable ordering for species columns in drug tables.
+_DRUG_SPECIES_ORDER = list(_DRUG_SPECIES_LABELS.keys())
+
+
+def _drug_cat_label(cat_id: str):
+    """Return (ja, en) label for a drug category id."""
+    from api.drug_dictionary import DRUG_CATEGORIES
+
+    meta = DRUG_CATEGORIES.get(cat_id, {})
+    return meta.get("ja", cat_id), meta.get("en", cat_id.replace("_", " ").title())
+
+
+@app.route("/drugs")
+def drugs_hub():
+    """Top-level drug dictionary hub grouping every drug by category for SEO."""
+    from api.drug_dictionary import DRUGS
+
+    groups: dict[str, list] = {}
+    for d in DRUGS:
+        did = d.get("id", "")
+        if not did:
+            continue
+        cat = d.get("category", "") or "miscellaneous"
+        groups.setdefault(cat, []).append(
+            {
+                "id": did,
+                "name": d.get("name", ""),
+                "name_ja": d.get("name_ja", ""),
+            }
+        )
+
+    categories = []
+    for cat_id in sorted(groups, key=lambda c: -len(groups[c])):
+        ja, en = _drug_cat_label(cat_id)
+        items = sorted(groups[cat_id], key=lambda x: (x["name_ja"] or x["name"]).lower())
+        categories.append({"id": cat_id, "ja": ja, "en": en, "count": len(items), "drugs": items})
+
+    return render_template(
+        "drugs_hub.html",
+        categories=categories,
+        total=sum(c["count"] for c in categories),
+    )
+
+
+@app.route("/drugs/<drug_id>")
+def drug_detail(drug_id: str):
+    """Server-rendered drug detail page for SEO indexing.
+
+    Each drug in the dictionary gets its own crawlable URL with mechanism,
+    species-specific dosing, side effects, interactions and links to the
+    diseases it is used to treat.
+    """
+    from api.drug_dictionary import DRUGS, get_drug_by_id
+
+    drug = get_drug_by_id(drug_id)
+    if not drug:
+        logger.info("drug_detail: unknown drug id=%s", drug_id)
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Drug not found"}), 404
+
+    cat_id = drug.get("category", "") or "miscellaneous"
+    cat_ja, cat_en = _drug_cat_label(cat_id)
+
+    # Species-specific dosing rows (ordered, labelled, JA preferred)
+    species_info = drug.get("species_info") or {}
+    dosing_rows = []
+    for sp_key in _DRUG_SPECIES_ORDER:
+        info = species_info.get(sp_key)
+        if not isinstance(info, dict):
+            continue
+        ja, en = _DRUG_SPECIES_LABELS.get(sp_key, (sp_key, sp_key.title()))
+        dosing_rows.append(
+            {
+                "species": sp_key,
+                "species_ja": ja,
+                "species_en": en,
+                "safe": info.get("safe"),
+                "dosage": info.get("dosage_ja") or info.get("dosage", ""),
+                "dosage_en": info.get("dosage", ""),
+                "notes": info.get("notes_ja") or info.get("notes", ""),
+            }
+        )
+    # Append any species keys not in the canonical order (defensive)
+    for sp_key, info in species_info.items():
+        if sp_key in _DRUG_SPECIES_ORDER or not isinstance(info, dict):
+            continue
+        ja, en = _DRUG_SPECIES_LABELS.get(sp_key, (sp_key, sp_key.title()))
+        dosing_rows.append(
+            {
+                "species": sp_key,
+                "species_ja": ja,
+                "species_en": en,
+                "safe": info.get("safe"),
+                "dosage": info.get("dosage_ja") or info.get("dosage", ""),
+                "dosage_en": info.get("dosage", ""),
+                "notes": info.get("notes_ja") or info.get("notes", ""),
+            }
+        )
+
+    # Normalize side effects / contraindications to displayable forms
+    def _as_text_list(val):
+        if isinstance(val, (list, tuple)):
+            return [str(x) for x in val if x]
+        if isinstance(val, str) and val.strip():
+            return [val.strip()]
+        return []
+
+    side_effects = _as_text_list(drug.get("side_effects_ja")) or _as_text_list(drug.get("side_effects"))
+    contraindications = drug.get("contraindications_ja") or drug.get("contraindications") or ""
+
+    interactions = []
+    for it in drug.get("drug_interactions") or []:
+        if isinstance(it, dict):
+            interactions.append(
+                {
+                    "drug": it.get("drug", ""),
+                    "effect": it.get("effect_ja") or it.get("effect", ""),
+                }
+            )
+
+    # Diseases this drug is used to treat (cross-link to disease pages)
+    treated = []
+    try:
+        from api.drug_dictionary import find_diseases_for_drug
+
+        for row in find_diseases_for_drug(drug_id, limit=24):
+            sp = row.get("species", "")
+            if sp not in _DISEASE_MODULES:
+                continue
+            name = row.get("name", "")
+            slug = _re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+            if not slug:
+                continue
+            sp_ja = _DRUG_SPECIES_LABELS.get(sp, (sp, sp))[0]
+            treated.append(
+                {
+                    "species": sp,
+                    "species_ja": sp_ja,
+                    "name": name,
+                    "name_ja": row.get("name_ja", ""),
+                    "slug": slug,
+                    "urgency": row.get("urgency", ""),
+                }
+            )
+    except Exception:
+        logger.debug("drug_detail: find_diseases_for_drug failed for %s", drug_id, exc_info=True)
+
+    # Related drugs in the same category
+    related_drugs = []
+    for d in DRUGS:
+        if d.get("id") == drug_id or (d.get("category") or "miscellaneous") != cat_id:
+            continue
+        if d.get("id"):
+            related_drugs.append({"id": d["id"], "name": d.get("name", ""), "name_ja": d.get("name_ja", "")})
+    related_drugs.sort(key=lambda x: (x["name_ja"] or x["name"]).lower())
+    related_drugs = related_drugs[:12]
+
+    return render_template(
+        "drug_detail.html",
+        drug=drug,
+        drug_id=drug_id,
+        category_id=cat_id,
+        category_ja=cat_ja,
+        category_en=cat_en,
+        dosing_rows=dosing_rows,
+        side_effects=side_effects,
+        contraindications=contraindications,
+        interactions=interactions,
+        treated_diseases=treated,
+        related_drugs=related_drugs,
+    )
+
+
+# =============================================================================
+# Anesthesia / sedation protocol SEO pages (per-species clinical routines)
+# =============================================================================
+
+
+@app.route("/anesthesia")
+def anesthesia_hub():
+    """Hub page listing all species with their anesthesia/sedation protocols."""
+    from api.anesthesia_protocols import ANESTHESIA_CATEGORIES, ANESTHESIA_PROTOCOLS
+
+    species_list = []
+    total = 0
+    for sp_id, data in ANESTHESIA_PROTOCOLS.items():
+        protocols = data.get("protocols", []) or []
+        total += len(protocols)
+        name = data.get("species_name", {}) or {}
+        species_list.append(
+            {
+                "id": sp_id,
+                "name_ja": name.get("ja", sp_id),
+                "name_en": name.get("en", sp_id.title()),
+                "icon": _SPECIES_ICONS.get(sp_id, "\U0001f43e"),
+                "count": len(protocols),
+            }
+        )
+    species_list.sort(key=lambda x: x["count"], reverse=True)
+
+    categories = [
+        {"id": cid, "ja": c.get("ja", cid), "en": c.get("en", cid)} for cid, c in ANESTHESIA_CATEGORIES.items()
+    ]
+
+    return render_template(
+        "anesthesia_hub.html",
+        species=species_list,
+        categories=categories,
+        total=total,
+        species_count=len(species_list),
+    )
+
+
+@app.route("/anesthesia/<species>")
+def anesthesia_species(species: str):
+    """Server-rendered per-species anesthesia/sedation protocol page for SEO."""
+    from api.anesthesia_protocols import ANESTHESIA_CATEGORIES, ANESTHESIA_PROTOCOLS
+
+    sp_key = species.lower()
+    data = ANESTHESIA_PROTOCOLS.get(sp_key)
+    if not data:
+        logger.info("anesthesia_species: unknown species %s", sp_key)
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Unknown species"}), 404
+
+    name = data.get("species_name", {}) or {}
+    sp_ja = name.get("ja", sp_key)
+    sp_en = name.get("en", sp_key.title())
+
+    # Group protocols by category, preserving the canonical category order
+    protocols = data.get("protocols", []) or []
+    cat_order = list(ANESTHESIA_CATEGORIES.keys())
+    grouped: dict[str, list] = {}
+    for p in protocols:
+        grouped.setdefault(p.get("category", "other"), []).append(p)
+
+    sections = []
+    for cid in cat_order:
+        if cid in grouped:
+            c = ANESTHESIA_CATEGORIES.get(cid, {})
+            sections.append({"id": cid, "ja": c.get("ja", cid), "en": c.get("en", cid), "protocols": grouped[cid]})
+    # Any categories not in the canonical order
+    for cid, plist in grouped.items():
+        if cid not in cat_order:
+            sections.append({"id": cid, "ja": cid, "en": cid, "protocols": plist})
+
+    # Other species links for cross-navigation
+    other_species = []
+    for osp, odata in ANESTHESIA_PROTOCOLS.items():
+        if osp == sp_key:
+            continue
+        oname = odata.get("species_name", {}) or {}
+        other_species.append(
+            {
+                "id": osp,
+                "name_ja": oname.get("ja", osp),
+                "icon": _SPECIES_ICONS.get(osp, "\U0001f43e"),
+            }
+        )
+
+    return render_template(
+        "anesthesia_detail.html",
+        species=sp_key,
+        species_ja=sp_ja,
+        species_en=sp_en,
+        overview=data.get("overview", {}) or {},
+        fasting=data.get("fasting", {}) or {},
+        breed_considerations=data.get("breed_considerations", {}) or {},
+        references=data.get("references", []) or [],
+        sections=sections,
+        protocol_count=len(protocols),
+        other_species=other_species,
     )
 
 

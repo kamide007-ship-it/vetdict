@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% set drug_name = drug.name_ja or drug.name %}
+{% set drug_desc = (drug.mechanism_ja or drug.mechanism or '')[:160] %}
+
+{% block title %}{{ drug_name }}（{{ drug.name }}）の用量・適応・副作用 | VetDict 動物用医薬品辞典{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="{{ drug_name }}（{{ drug.name }}）の作用機序・動物種別投与量・副作用・禁忌・薬物相互作用を解説。{{ category_ja }}。獣医師が開発した動物用医薬品辞典。">
+<meta property="og:title" content="{{ drug_name }} - {{ category_ja }} | VetDict 薬品辞典">
+<meta property="og:description" content="{{ drug_desc }}">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://vetdict.info/static/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://vetdict.info/drugs/{{ drug_id }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ drug_name }} | VetDict 薬品辞典">
+<meta name="twitter:description" content="{{ drug_desc }}">
+<meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
+<link rel="canonical" href="https://vetdict.info/drugs/{{ drug_id }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Drug",
+  "name": "{{ drug.name or '' }}",
+  "alternateName": "{{ drug.name_ja or '' }}",
+  "description": "{{ (drug.mechanism or '')[:300] }}",
+  "drugClass": "{{ category_en }}"{% if contraindications %},
+  "contraindication": "{{ (contraindications)[:300] }}"{% endif %}{% if side_effects %},
+  "warning": "{{ (side_effects | join('; '))[:300] }}"{% endif %}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "VetDict", "item": "https://vetdict.info/"},
+    {"@type": "ListItem", "position": 2, "name": "動物用医薬品辞典", "item": "https://vetdict.info/drugs"},
+    {"@type": "ListItem", "position": 3, "name": "{{ drug_name }}"}
+  ]
+}
+</script>
+<style>
+.drug-page{max-width:880px;margin:0 auto;padding:20px 20px 60px}
+.drug-page h1{font-size:1.6rem;color:var(--navy);margin-bottom:4px}
+.drug-page .drug-subtitle{font-size:1rem;color:var(--gray-600);margin-bottom:16px}
+.drug-page .drug-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.drug-page .meta-tag{padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600}
+.meta-cat{background:#f0f7ff;color:#1565c0}
+.meta-safe{background:#e8f5e9;color:#2e7d32}
+.drug-page section{margin-bottom:24px}
+.drug-page section h2{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--gray-200)}
+.drug-page section p{font-size:.9rem;line-height:1.8;color:var(--gray-700)}
+.dose-table{width:100%;border-collapse:collapse;font-size:.84rem}
+.dose-table th,.dose-table td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--gray-200);vertical-align:top}
+.dose-table th{background:var(--gray-50);color:var(--navy);font-weight:700;white-space:nowrap}
+.dose-table .sp-cell{white-space:nowrap;font-weight:600;color:var(--navy)}
+.dose-table .dose-cell{font-family:var(--font-mono,monospace);color:var(--gray-800);white-space:nowrap}
+.dose-table .notes-cell{color:var(--gray-600);font-size:.78rem;line-height:1.6}
+.safe-yes{color:#2e7d32;font-weight:700}
+.safe-no{color:#c62828;font-weight:700}
+.safe-caution{color:#e65100;font-weight:700}
+.drug-list-chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-block;padding:5px 12px;border-radius:6px;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .15s}
+.chip-disease{background:var(--gray-50);border:1px solid var(--gray-200);color:var(--gray-800)}
+.chip-disease:hover{border-color:var(--green);background:#f0f7ff;color:var(--navy)}
+.chip-drug{background:#f0f7ff;border:1px solid #bfdbfe;color:var(--navy)}
+.chip-drug:hover{border-color:var(--navy)}
+.warn-list{list-style:none;padding:0;margin:0}
+.warn-list li{padding:6px 10px;background:#fff8e1;border-left:3px solid #f57f17;border-radius:4px;margin-bottom:6px;font-size:.84rem;color:var(--gray-800)}
+.contra-box{padding:12px 14px;background:#ffebee;border-left:3px solid #c62828;border-radius:6px;font-size:.86rem;line-height:1.7;color:#7f1d1d}
+.drug-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin-top:32px}
+.drug-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none;font-size:.92rem}
+.drug-page .disclaimer{font-size:.76rem;color:var(--gray-500);margin-top:20px;padding:12px;background:var(--gray-50);border-radius:6px;line-height:1.7}
+@media(max-width:600px){
+  .dose-table .dose-cell,.dose-table .sp-cell{white-space:normal}
+  .dose-table th,.dose-table td{padding:6px 6px}
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="drug-page">
+  <nav style="font-size:.8rem;margin-bottom:12px;color:var(--gray-500)">
+    <a href="/" style="color:var(--navy);text-decoration:none">VetDict</a>
+    <span> › </span>
+    <a href="/drugs" style="color:var(--navy);text-decoration:none">動物用医薬品辞典</a>
+    <span> › </span>
+    <span>{{ drug_name }}</span>
+  </nav>
+
+  <div class="drug-meta">
+    <a href="/drugs?category={{ category_id }}" class="meta-tag meta-cat" style="text-decoration:none">{{ category_ja }}</a>
+  </div>
+
+  <h1>💊 {{ drug_name }}</h1>
+  <div class="drug-subtitle">{{ drug.name or '' }}{% if drug.name_ja and drug.name %} / {{ drug.name_ja }}{% endif %}</div>
+
+  {% if drug.mechanism_ja or drug.mechanism %}
+  <section>
+    <h2>作用機序</h2>
+    <p>{{ drug.mechanism_ja or drug.mechanism }}</p>
+    {% if drug.mechanism_ja and drug.mechanism and drug.mechanism_ja != drug.mechanism %}
+    <p style="font-size:.8rem;color:var(--gray-500);margin-top:4px">{{ drug.mechanism }}</p>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if dosing_rows %}
+  <section>
+    <h2>動物種別 投与量</h2>
+    <table class="dose-table">
+      <thead>
+        <tr><th>動物種</th><th>安全性</th><th>用量</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        {% for row in dosing_rows %}
+        <tr>
+          <td class="sp-cell">{{ row.species_ja }}<br><span style="font-weight:400;color:var(--gray-400);font-size:.72rem">{{ row.species_en }}</span></td>
+          <td>
+            {% if row.safe is true %}<span class="safe-yes">✓ 可</span>
+            {% elif row.safe is false %}<span class="safe-no">✕ 禁忌</span>
+            {% else %}<span class="safe-caution">△ 注意</span>{% endif %}
+          </td>
+          <td class="dose-cell">{{ row.dosage or '—' }}</td>
+          <td class="notes-cell">{{ row.notes or '' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% endif %}
+
+  {% if side_effects %}
+  <section>
+    <h2>主な副作用</h2>
+    <ul class="warn-list">
+      {% for se in side_effects %}<li>⚠️ {{ se }}</li>{% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if contraindications %}
+  <section>
+    <h2>禁忌・注意</h2>
+    <div class="contra-box">🚫 {{ contraindications }}</div>
+  </section>
+  {% endif %}
+
+  {% if interactions %}
+  <section>
+    <h2>薬物相互作用</h2>
+    <table class="dose-table">
+      <thead><tr><th>併用薬</th><th>影響</th></tr></thead>
+      <tbody>
+        {% for it in interactions %}
+        <tr><td class="sp-cell">{{ it.drug }}</td><td class="notes-cell">{{ it.effect }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% endif %}
+
+  {% if treated_diseases %}
+  <section>
+    <h2>この薬が使われる疾患</h2>
+    <div class="drug-list-chips">
+      {% for d in treated_diseases %}
+      <a href="/diseases/{{ d.species }}/{{ d.slug }}" class="chip chip-disease">{{ d.name_ja or d.name }} <span style="color:var(--gray-400);font-size:.72rem">{{ d.species_ja }}</span></a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if related_drugs %}
+  <section>
+    <h2>{{ category_ja }}の他の薬品</h2>
+    <div class="drug-list-chips">
+      {% for r in related_drugs %}
+      <a href="/drugs/{{ r.id }}" class="chip chip-drug">💊 {{ r.name_ja or r.name }}</a>
+      {% endfor %}
+    </div>
+    <div style="margin-top:8px">
+      <a href="/drugs" style="font-size:.78rem;color:var(--green);text-decoration:none;font-weight:600">薬品辞典トップへ →</a>
+    </div>
+  </section>
+  {% endif %}
+
+  <div class="cta-box">
+    <p style="margin-bottom:12px;font-weight:600;color:var(--navy)">VetDictで鑑別診断・薬用量を確認する</p>
+    <a href="/#drugs">薬品辞典を開く</a>
+  </div>
+
+  <div class="disclaimer">
+    ※ 本ページの用量・相互作用情報は獣医学的参考資料であり、処方の代替ではありません。投与前に必ず原典（Plumb's Veterinary Drug Handbook 等）および添付文書で再確認し、獣医師の判断のもとで使用してください。<br>
+    VetDict は獣医師（DVM）が開発した臨床支援ツールです。
+  </div>
+</div>
+<script nonce="{{ g.csp_nonce }}">
+if(typeof gtag==="function"){
+  gtag("event","view_drug_page",{drug:"{{ drug_id|e }}",category:"{{ category_id|e }}"});
+}
+</script>
+{% endblock %}

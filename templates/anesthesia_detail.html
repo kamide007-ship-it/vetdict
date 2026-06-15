@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}{{ species_ja }}の鎮静・麻酔プロトコル（{{ protocol_count }}件） | VetDict{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="{{ species_ja }}（{{ species_en }}）の鎮静・麻酔プロトコル{{ protocol_count }}件。{{ (overview.ja or '')[:120] }}">
+<meta property="og:title" content="{{ species_ja }}の鎮静・麻酔プロトコル | VetDict">
+<meta property="og:description" content="{{ (overview.ja or '')[:200] }}">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://vetdict.info/static/og-image.png">
+<meta property="og:url" content="https://vetdict.info/anesthesia/{{ species }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ species_ja }}の鎮静・麻酔プロトコル | VetDict">
+<meta name="twitter:description" content="{{ (overview.ja or '')[:200] }}">
+<meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
+<link rel="canonical" href="https://vetdict.info/anesthesia/{{ species }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  "name": "{{ species_en }} Anesthesia and Sedation Protocols",
+  "description": "{{ (overview.en or overview.ja or '')[:300] }}",
+  "procedureType": "https://schema.org/PercutaneousProcedure"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "VetDict", "item": "https://vetdict.info/"},
+    {"@type": "ListItem", "position": 2, "name": "鎮静・麻酔プロトコル", "item": "https://vetdict.info/anesthesia"},
+    {"@type": "ListItem", "position": 3, "name": "{{ species_ja }}"}
+  ]
+}
+</script>
+<style>
+.anes-page{max-width:880px;margin:0 auto;padding:20px 20px 60px}
+.anes-page h1{font-size:1.6rem;color:var(--navy);margin-bottom:8px}
+.anes-page section{margin-bottom:24px}
+.anes-page section h2{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid var(--green)}
+.anes-page section h3{font-size:.95rem;font-weight:700;color:var(--navy);margin:14px 0 6px}
+.anes-page p{font-size:.9rem;line-height:1.8;color:var(--gray-700)}
+.info-box{padding:12px 14px;border-radius:8px;font-size:.86rem;line-height:1.7;color:var(--gray-800);margin-bottom:12px}
+.info-overview{background:#f0f7ff;border-left:3px solid #1565c0}
+.info-fasting{background:#fff8e1;border-left:3px solid #f57f17}
+.info-breed{background:#e8f5e9;border-left:3px solid #2e7d32}
+.proto-card{border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:12px}
+.proto-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.proto-name{font-size:.95rem;font-weight:700;color:var(--navy)}
+.risk-tag{padding:2px 10px;border-radius:12px;font-size:.72rem;font-weight:700;white-space:nowrap}
+.risk-low{background:#e8f5e9;color:#2e7d32}
+.risk-moderate{background:#fff8e1;color:#f57f17}
+.risk-high{background:#fff3e0;color:#e65100}
+.risk-critical{background:#ffebee;color:#c62828}
+.drug-table{width:100%;border-collapse:collapse;font-size:.8rem;margin:6px 0}
+.drug-table th,.drug-table td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--gray-200);vertical-align:top}
+.drug-table th{background:var(--gray-50);color:var(--navy);font-weight:700;white-space:nowrap}
+.drug-table .dname{font-weight:600;color:var(--navy);white-space:nowrap}
+.drug-table .ddose{font-family:var(--font-mono,monospace);white-space:nowrap}
+.drug-table .dnote{color:var(--gray-600);font-size:.74rem;line-height:1.5}
+.proto-note{font-size:.82rem;color:var(--gray-700);background:var(--gray-50);padding:8px 10px;border-radius:6px;margin-top:6px;line-height:1.6}
+.refs-list{font-size:.76rem;line-height:1.7;padding-left:20px;color:var(--gray-600);margin-top:6px}
+.cat-jump{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.cat-jump a{padding:4px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:20px;text-decoration:none;color:var(--navy);font-size:.78rem;font-weight:600}
+.anes-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin-top:28px}
+.anes-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none}
+.other-sp{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.other-sp a{padding:4px 10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:4px;text-decoration:none;color:var(--gray-700);font-size:.78rem}
+.disclaimer{font-size:.76rem;color:var(--gray-500);margin-top:20px;padding:12px;background:var(--gray-50);border-radius:6px;line-height:1.7}
+@media(max-width:600px){.drug-table .ddose,.drug-table .dname{white-space:normal}.drug-table th,.drug-table td{padding:5px 5px}}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="anes-page">
+  <nav style="font-size:.8rem;margin-bottom:12px;color:var(--gray-500)">
+    <a href="/" style="color:var(--navy);text-decoration:none">VetDict</a>
+    <span> › </span>
+    <a href="/anesthesia" style="color:var(--navy);text-decoration:none">鎮静・麻酔プロトコル</a>
+    <span> › </span>
+    <span>{{ species_ja }}</span>
+  </nav>
+
+  <h1>💉 {{ species_ja }}の鎮静・麻酔プロトコル</h1>
+  <p style="color:var(--gray-500);font-size:.88rem;margin-bottom:16px">{{ species_en }} — {{ protocol_count }}プロトコル</p>
+
+  {% if overview.ja or overview.en %}
+  <div class="info-box info-overview"><strong>概要：</strong>{{ overview.ja or overview.en }}</div>
+  {% endif %}
+  {% if fasting.ja or fasting.en %}
+  <div class="info-box info-fasting"><strong>⏱ 絶食・絶水：</strong>{{ fasting.ja or fasting.en }}</div>
+  {% endif %}
+  {% if breed_considerations.ja or breed_considerations.en %}
+  <div class="info-box info-breed"><strong>品種別の注意：</strong>{{ breed_considerations.ja or breed_considerations.en }}</div>
+  {% endif %}
+
+  {% if sections|length > 1 %}
+  <div class="cat-jump">
+    {% for sec in sections %}<a href="#sec-{{ sec.id }}">{{ sec.ja }}</a>{% endfor %}
+  </div>
+  {% endif %}
+
+  {% for sec in sections %}
+  <section id="sec-{{ sec.id }}">
+    <h2>{{ sec.ja }} <span style="font-size:.74rem;color:var(--gray-400);font-weight:400">{{ sec.en }}</span></h2>
+    {% for p in sec.protocols %}
+    <div class="proto-card">
+      <div class="proto-head">
+        <span class="proto-name">{{ p.name.ja or p.name.en }}</span>
+        {% if p.risk_level %}<span class="risk-tag risk-{{ p.risk_level }}">{% if p.risk_level == 'low' %}低リスク{% elif p.risk_level == 'moderate' %}中リスク{% elif p.risk_level == 'high' %}高リスク{% elif p.risk_level == 'critical' %}最高リスク{% else %}{{ p.risk_level }}{% endif %}</span>{% endif %}
+      </div>
+      {% if p.drugs %}
+      <table class="drug-table">
+        <thead><tr><th>薬品</th><th>用量</th><th>経路</th><th>備考</th></tr></thead>
+        <tbody>
+          {% for dr in p.drugs %}
+          <tr>
+            <td class="dname">{{ dr.name_ja or dr.name }}</td>
+            <td class="ddose">{{ dr.dose or '—' }}</td>
+            <td>{{ dr.route or '' }}</td>
+            <td class="dnote">{{ dr.notes_ja or dr.notes or '' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if p.notes_ja or p.notes %}
+      <div class="proto-note">📝 {{ p.notes_ja or p.notes }}</div>
+      {% endif %}
+      {% if p.references %}
+      <details style="margin-top:6px">
+        <summary style="font-size:.78rem;font-weight:600;color:var(--navy);cursor:pointer">📚 参考文献</summary>
+        <ul class="refs-list">{% for r in p.references %}<li>{{ r }}</li>{% endfor %}</ul>
+      </details>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </section>
+  {% endfor %}
+
+  {% if references %}
+  <section>
+    <h2>📚 参考文献（{{ species_ja }}全般）</h2>
+    <ul class="refs-list">{% for r in references %}<li>{{ r }}</li>{% endfor %}</ul>
+  </section>
+  {% endif %}
+
+  <div class="cta-box">
+    <p style="margin-bottom:12px;font-weight:600;color:var(--navy)">{{ species_ja }}の鑑別診断・薬用量を確認する</p>
+    <a href="/?species={{ species }}#checker">症状チェッカーを使う</a>
+  </div>
+
+  <section style="margin-top:24px">
+    <h2>他の動物種の麻酔プロトコル</h2>
+    <div class="other-sp">
+      {% for osp in other_species %}
+      <a href="/anesthesia/{{ osp.id }}">{{ osp.name_ja }}</a>
+      {% endfor %}
+    </div>
+    <div style="margin-top:10px">
+      <a href="/anesthesia" style="font-size:.82rem;color:var(--green);text-decoration:none;font-weight:600">麻酔プロトコル一覧へ →</a>
+      <span style="margin:0 8px;color:var(--gray-300)">|</span>
+      <a href="/diseases/{{ species }}" style="font-size:.82rem;color:var(--green);text-decoration:none;font-weight:600">{{ species_ja }}の疾患データベース →</a>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    ※ 本ページの麻酔プロトコル・用量は獣医学的参考資料であり、麻酔管理の代替ではありません。各症例のASA分類・併存疾患を評価し、必ず獣医師の判断のもとで実施してください。<br>
+    VetDict は獣医師（DVM）が開発した臨床支援ツールです。
+  </div>
+</div>
+<script nonce="{{ g.csp_nonce }}">
+if(typeof gtag==="function"){
+  gtag("event","view_anesthesia_page",{species:"{{ species|e }}"});
+}
+</script>
+{% endblock %}

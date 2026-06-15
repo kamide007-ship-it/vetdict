@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}動物用医薬品辞典 — 全{{ total }}薬品の用量・適応 | VetDict{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="犬・猫・エキゾチック動物の動物用医薬品 {{ total }}剤を収載。作用機序・動物種別投与量・副作用・禁忌・薬物相互作用を解説。獣医師が開発した臨床薬品辞典。">
+<meta property="og:title" content="動物用医薬品辞典 — {{ total }}薬品 | VetDict">
+<meta property="og:description" content="{{ total }}剤の動物用医薬品の用量・適応・副作用・相互作用を収載。">
+<meta property="og:image" content="https://vetdict.info/static/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="動物用医薬品辞典 | VetDict">
+<meta name="twitter:description" content="{{ total }}剤の動物用医薬品データベース。">
+<meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
+<link rel="canonical" href="https://vetdict.info/drugs">
+<style>
+.hub-page{max-width:920px;margin:0 auto;padding:20px 20px 60px}
+.hub-page h1{font-size:1.5rem;color:var(--navy);margin-bottom:4px}
+.hub-page .subtitle{color:var(--gray-600);font-size:.9rem;margin-bottom:20px}
+.drug-cat-block{margin-bottom:20px;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden}
+.drug-cat-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--gray-50);cursor:pointer}
+.drug-cat-head h2{font-size:1rem;color:var(--navy);margin:0}
+.drug-cat-head .cat-en{font-size:.74rem;color:var(--gray-500);font-weight:400}
+.drug-cat-head .cat-count{font-size:.78rem;color:var(--green);font-weight:700;background:#e8f5e9;padding:2px 10px;border-radius:10px}
+.drug-cat-body{padding:12px 16px;display:flex;flex-wrap:wrap;gap:6px}
+.drug-chip{display:inline-block;padding:6px 12px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:6px;text-decoration:none;color:var(--navy);font-size:.83rem;transition:all .15s}
+.drug-chip:hover{border-color:var(--navy);background:#e0efff}
+.drug-chip .chip-en{color:var(--gray-400);font-size:.72rem;margin-left:2px}
+.hub-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin:24px 0}
+.hub-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none}
+.crosslinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.crosslinks a{padding:6px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:6px;text-decoration:none;color:var(--navy);font-size:.84rem;font-weight:600}
+@media(max-width:600px){.drug-cat-body{padding:10px}}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hub-page">
+  <h1>💊 動物用医薬品辞典</h1>
+  <p class="subtitle">{{ categories|length }}カテゴリ・全{{ total }}薬品の用量・適応・副作用・相互作用を収載</p>
+
+  <div class="cta-box">
+    <p style="margin-bottom:10px;font-weight:600;color:var(--navy)">疾患から薬を探す・鑑別診断を行う</p>
+    <a href="/#checker">症状チェッカーを使う</a>
+  </div>
+
+  {% for cat in categories %}
+  <div class="drug-cat-block" id="cat-{{ cat.id }}">
+    <div class="drug-cat-head">
+      <h2>{{ cat.ja }} <span class="cat-en">{{ cat.en }}</span></h2>
+      <span class="cat-count">{{ cat.count }}剤</span>
+    </div>
+    <div class="drug-cat-body">
+      {% for d in cat.drugs %}
+      <a href="/drugs/{{ d.id }}" class="drug-chip">{{ d.name_ja or d.name }}{% if d.name_ja and d.name %}<span class="chip-en">{{ d.name }}</span>{% endif %}</a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <div style="margin-top:28px">
+    <h2 style="font-size:1rem;color:var(--navy);margin-bottom:8px">関連データベース</h2>
+    <div class="crosslinks">
+      <a href="/diseases">🩺 疾患データベース</a>
+      <a href="/anesthesia">💉 鎮静・麻酔プロトコル</a>
+      <a href="/#chat">💬 AI診断チャット</a>
+    </div>
+  </div>
+
+  <p style="font-size:.76rem;color:var(--gray-500);margin-top:24px;text-align:center;line-height:1.7">
+    ※ 用量・相互作用情報は獣医学的参考資料です。処方前に必ず原典（Plumb's 等）で再確認してください。<br>
+    VetDict は獣医師（DVM）が開発した臨床支援ツールです。
+  </p>
+</div>
+{% if request.args.get('category') %}
+<script nonce="{{ g.csp_nonce }}">
+(function(){
+  var el = document.getElementById('cat-' + {{ request.args.get('category') | tojson }});
+  if(el){ el.scrollIntoView({behavior:'smooth',block:'start'}); el.style.boxShadow='0 0 0 2px var(--green)'; }
+})();
+</script>
+{% endif %}
+{% endblock %}

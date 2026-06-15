@@ -1,14 +1,24 @@
 User-agent: *
 Allow: /
 Allow: /diseases/
+Allow: /drugs/
+Allow: /anesthesia/
 Disallow: /api/
 Allow: /static/js/
 Allow: /static/css/
 Allow: /static/manifest.json
 
-# Disease database pages (6,400+ diseases)
+# Disease database pages (7,000+ diseases)
 # /diseases — hub page
 # /diseases/<species> — species index
 # /diseases/<species>/<disease> — individual disease
+
+# Drug dictionary pages (600+ drugs)
+# /drugs — hub page (grouped by category)
+# /drugs/<drug_id> — individual drug (mechanism, dosing, interactions)
+
+# Anesthesia / sedation protocol pages (21 species)
+# /anesthesia — hub page
+# /anesthesia/<species> — per-species protocols
 
 Sitemap: https://vetdict.info/sitemap.xml

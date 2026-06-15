@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}鎮静・麻酔プロトコル — 全{{ species_count }}動物種・{{ total }}プロトコル | VetDict{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="犬・猫・馬・エキゾチック動物 {{ species_count }}種の鎮静・麻酔プロトコル {{ total }}件。前投薬・導入・維持・モニタリング・覚醒・緊急対応を薬品用量付きで解説。獣医師が開発。">
+<meta property="og:title" content="鎮静・麻酔プロトコル — {{ total }}プロトコル | VetDict">
+<meta property="og:description" content="{{ species_count }}動物種の鎮静・麻酔プロトコルを薬品用量付きで収載。">
+<meta property="og:image" content="https://vetdict.info/static/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="鎮静・麻酔プロトコル | VetDict">
+<meta name="twitter:description" content="{{ species_count }}動物種・{{ total }}プロトコル。">
+<meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
+<link rel="canonical" href="https://vetdict.info/anesthesia">
+<style>
+.hub-page{max-width:900px;margin:0 auto;padding:20px 20px 60px}
+.hub-page h1{font-size:1.5rem;color:var(--navy);margin-bottom:4px}
+.hub-page .subtitle{color:var(--gray-600);font-size:.9rem;margin-bottom:20px}
+.cat-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.cat-pill{padding:5px 12px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:20px;font-size:.78rem;color:var(--navy);font-weight:600}
+.species-hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.species-hub-card{display:block;padding:16px;border:1px solid var(--gray-200);border-radius:var(--radius-lg);text-decoration:none;color:var(--gray-800);transition:all .2s;text-align:center}
+.species-hub-card:hover{border-color:var(--green);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.species-hub-card .sp-name{font-size:1.1rem;font-weight:700;color:var(--navy);display:block}
+.species-hub-card .sp-en{font-size:.78rem;color:var(--gray-500);display:block;margin-bottom:6px}
+.species-hub-card .sp-count{font-size:.86rem;color:var(--green);font-weight:600}
+.hub-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin:24px 0}
+.hub-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none}
+.crosslinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.crosslinks a{padding:6px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:6px;text-decoration:none;color:var(--navy);font-size:.84rem;font-weight:600}
+@media(max-width:600px){.species-hub-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}.species-hub-card{padding:12px}}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hub-page">
+  <h1>💉 鎮静・麻酔プロトコル</h1>
+  <p class="subtitle">{{ species_count }}動物種・全{{ total }}プロトコルを薬品用量・投与経路付きで収載</p>
+
+  <div class="cat-pills">
+    {% for c in categories %}<span class="cat-pill">{{ c.ja }}</span>{% endfor %}
+  </div>
+
+  <h2 style="font-size:1.1rem;color:var(--navy);margin-bottom:12px">動物種から探す</h2>
+  <div class="species-hub-grid">
+    {% for sp in species %}
+    <a href="/anesthesia/{{ sp.id }}" class="species-hub-card">
+      <span style="font-size:2rem;display:block;margin-bottom:4px" aria-hidden="true">{{ sp.icon }}</span>
+      <span class="sp-name">{{ sp.name_ja }}</span>
+      <span class="sp-en">{{ sp.name_en }}</span>
+      <span class="sp-count">{{ sp.count }}プロトコル</span>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="cta-box">
+    <p style="margin-bottom:10px;font-weight:600;color:var(--navy)">鎮静・麻酔タブをアプリで使う</p>
+    <a href="/#anesthesia">麻酔プロトコルを開く</a>
+  </div>
+
+  <div style="margin-top:8px">
+    <h2 style="font-size:1rem;color:var(--navy);margin-bottom:8px">関連データベース</h2>
+    <div class="crosslinks">
+      <a href="/diseases">🩺 疾患データベース</a>
+      <a href="/drugs">💊 動物用医薬品辞典</a>
+      <a href="/#chat">💬 AI診断チャット</a>
+    </div>
+  </div>
+
+  <p style="font-size:.76rem;color:var(--gray-500);margin-top:24px;text-align:center;line-height:1.7">
+    ※ 麻酔プロトコル・用量は獣医学的参考資料です。実際の麻酔管理は症例の状態を評価し獣医師の判断で行ってください。<br>
+    VetDict は獣医師（DVM）が開発した臨床支援ツールです。
+  </p>
+</div>
+{% endblock %}
