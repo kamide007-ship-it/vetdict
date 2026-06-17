@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}{{ species_ja }}の症状一覧（{{ count }}症状）から疾患を逆引き | VetDict{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="{{ species_ja }}（{{ species_en }}）の臨床症状{{ count }}件。各症状をクリックすると、その症状を示す{{ species_ja }}の疾患一覧を確認できます。獣医師が開発した鑑別診断支援ツール。">
+<meta property="og:title" content="{{ species_ja }}の症状一覧 | VetDict">
+<meta property="og:description" content="{{ species_ja }}の臨床症状{{ count }}件から疾患を逆引き。">
+<meta property="og:image" content="https://vetdict.info/static/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ species_ja }}の症状一覧 | VetDict">
+<meta name="twitter:description" content="{{ species_ja }}の臨床症状{{ count }}件から疾患を逆引き。">
+<meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
+<link rel="canonical" href="https://vetdict.info/symptoms/{{ species }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "VetDict", "item": "https://vetdict.info/"},
+    {"@type": "ListItem", "position": 2, "name": "症状から調べる", "item": "https://vetdict.info/symptoms"},
+    {"@type": "ListItem", "position": 3, "name": "{{ species_ja }}"}
+  ]
+}
+</script>
+<style>
+.index-page{max-width:880px;margin:0 auto;padding:20px 20px 60px}
+.index-page h1{font-size:1.5rem;color:var(--navy);margin-bottom:4px}
+.index-page .subtitle{color:var(--gray-600);font-size:.9rem;margin-bottom:20px}
+.sym-search{width:100%;padding:10px 14px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:.9rem;box-sizing:border-box;margin-bottom:16px}
+.sym-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.sym-link{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:10px 12px;border:1px solid var(--gray-200);border-radius:8px;text-decoration:none;color:var(--gray-800);transition:all .15s;background:var(--white)}
+.sym-link:hover{border-color:var(--green);background:#f0f7ff}
+.sym-link .sym-ja{font-size:.88rem;font-weight:600;color:var(--navy)}
+.sym-link .sym-en{font-size:.72rem;color:var(--gray-400);display:block}
+.sym-link .sym-count{font-size:.74rem;color:var(--green);font-weight:700;background:#e8f5e9;padding:1px 8px;border-radius:10px;white-space:nowrap}
+.index-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin:24px 0}
+.index-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none}
+.crosslinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.crosslinks a{padding:6px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:6px;text-decoration:none;color:var(--navy);font-size:.84rem;font-weight:600}
+@media(max-width:600px){.sym-grid{grid-template-columns:1fr 1fr;gap:6px}}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="index-page">
+  <nav style="font-size:.8rem;margin-bottom:12px;color:var(--gray-500)">
+    <a href="/" style="color:var(--navy);text-decoration:none">VetDict</a>
+    <span> › </span>
+    <a href="/symptoms" style="color:var(--navy);text-decoration:none">症状から調べる</a>
+    <span> › </span>
+    <span>{{ species_ja }}</span>
+  </nav>
+
+  <h1>🔍 {{ species_ja }}の症状一覧</h1>
+  <p class="subtitle">{{ species_en }} — {{ count }}症状。症状名をクリックすると、その症状を示す疾患一覧を確認できます。</p>
+
+  <input type="search" class="sym-search" id="symSearch" placeholder="症状名で絞り込む... (例: 嘔吐, 発熱)" aria-label="症状名で絞り込む" autocomplete="off">
+
+  <div class="sym-grid" id="symGrid">
+    {% for s in symptoms %}
+    <a href="/symptoms/{{ species }}/{{ s.id }}" class="sym-link" data-ja="{{ s.ja|lower }}" data-en="{{ s.en|lower }}">
+      <span><span class="sym-ja">{{ s.ja }}</span><span class="sym-en">{{ s.en }}</span></span>
+      <span class="sym-count">{{ s.count }}</span>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="cta-box" style="margin-top:28px">
+    <p style="margin-bottom:10px;font-weight:600;color:var(--navy)">{{ species_ja }}の症状を組み合わせて鑑別診断を行う</p>
+    <a href="/?species={{ species }}#checker">症状チェッカーを使う</a>
+  </div>
+
+  <div style="margin-top:8px">
+    <h2 style="font-size:1rem;color:var(--navy);margin-bottom:8px">関連データベース</h2>
+    <div class="crosslinks">
+      <a href="/diseases/{{ species }}">🩺 {{ species_ja }}の疾患データベース</a>
+      <a href="/anesthesia/{{ species }}">💉 {{ species_ja }}の麻酔プロトコル</a>
+      <a href="/symptoms">🔍 他の動物種の症状</a>
+    </div>
+  </div>
+</div>
+
+<script nonce="{{ g.csp_nonce }}">
+(function(){
+  var input = document.getElementById('symSearch');
+  var links = document.querySelectorAll('#symGrid .sym-link');
+  if(!input) return;
+  input.addEventListener('input', function(){
+    var q = input.value.trim().toLowerCase();
+    links.forEach(function(a){
+      var hit = !q || a.dataset.ja.indexOf(q) >= 0 || a.dataset.en.indexOf(q) >= 0;
+      a.style.display = hit ? '' : 'none';
+    });
+  });
+})();
+</script>
+{% endblock %}

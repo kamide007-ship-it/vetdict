@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}{{ symptom_ja }}を示す{{ species_ja }}の疾患（{{ count }}件） | VetDict{% endblock %}
+
+{% block head_extra %}
+<meta name="description" content="{{ symptom_ja }}（{{ symptom_en }}）を示す{{ species_ja }}の疾患{{ count }}件を一覧。各疾患の症状・原因・治療法へリンク。獣医師が開発した鑑別診断支援ツール。">
+<meta property="og:title" content="{{ symptom_ja }}を示す{{ species_ja }}の疾患 | VetDict">
+<meta property="og:description" content="{{ symptom_ja }}を示す{{ species_ja }}の疾患{{ count }}件を一覧。">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://vetdict.info/static/og-image.png">
+<meta property="og:url" content="https://vetdict.info/symptoms/{{ species }}/{{ symptom_id }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ symptom_ja }}を示す{{ species_ja }}の疾患 | VetDict">
+<meta name="twitter:description" content="{{ symptom_ja }}を示す{{ species_ja }}の疾患{{ count }}件を一覧。">
+<meta name="twitter:image" content="https://vetdict.info/static/og-image.png">
+<link rel="canonical" href="https://vetdict.info/symptoms/{{ species }}/{{ symptom_id }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalSignOrSymptom",
+  "name": "{{ symptom_en }}",
+  "alternateName": "{{ symptom_ja }}",
+  "possibleCause": [
+    {% for d in diseases %}{"@type": "MedicalCondition", "name": "{{ d.name or d.name_ja }}"}{% if not loop.last %}, {% endif %}{% endfor %}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "VetDict", "item": "https://vetdict.info/"},
+    {"@type": "ListItem", "position": 2, "name": "症状から調べる", "item": "https://vetdict.info/symptoms"},
+    {"@type": "ListItem", "position": 3, "name": "{{ species_ja }}", "item": "https://vetdict.info/symptoms/{{ species }}"},
+    {"@type": "ListItem", "position": 4, "name": "{{ symptom_ja }}"}
+  ]
+}
+</script>
+<style>
+.sym-page{max-width:880px;margin:0 auto;padding:20px 20px 60px}
+.sym-page h1{font-size:1.6rem;color:var(--navy);margin-bottom:4px}
+.sym-page .subtitle{font-size:.95rem;color:var(--gray-600);margin-bottom:18px}
+.sym-page section{margin-bottom:24px}
+.sym-page section h2{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--green)}
+.dz-list{display:flex;flex-direction:column;gap:8px}
+.dz-card{display:block;padding:12px 14px;border:1px solid var(--gray-200);border-left-width:4px;border-radius:8px;text-decoration:none;color:var(--gray-800);transition:all .15s}
+.dz-card:hover{box-shadow:var(--shadow-md);transform:translateX(2px)}
+.dz-card.urgency-emergency{border-left-color:#c62828}
+.dz-card.urgency-high{border-left-color:#e65100}
+.dz-card.urgency-moderate{border-left-color:#f57f17}
+.dz-card.urgency-low{border-left-color:#2e7d32}
+.dz-card .dz-name{font-size:.96rem;font-weight:700;color:var(--navy)}
+.dz-card .dz-en{font-size:.76rem;color:var(--gray-400);margin-left:6px;font-weight:400}
+.dz-card .dz-urgency{font-size:.7rem;font-weight:700;padding:1px 8px;border-radius:10px;margin-left:6px}
+.u-emergency{background:#ffebee;color:#c62828}
+.u-high{background:#fff3e0;color:#e65100}
+.u-moderate{background:#fff8e1;color:#f57f17}
+.u-low{background:#e8f5e9;color:#2e7d32}
+.dz-card .dz-others{font-size:.76rem;color:var(--gray-500);margin-top:4px}
+.dz-card .dz-others b{color:var(--gray-600);font-weight:600}
+.rel-syms{display:flex;flex-wrap:wrap;gap:6px}
+.rel-syms a{display:inline-block;padding:5px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:6px;text-decoration:none;color:var(--gray-700);font-size:.82rem;transition:all .15s}
+.rel-syms a:hover{border-color:var(--green);background:#f0f7ff;color:var(--navy)}
+.sym-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin-top:28px}
+.sym-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none}
+.disclaimer{font-size:.76rem;color:var(--gray-500);margin-top:20px;padding:12px;background:var(--gray-50);border-radius:6px;line-height:1.7}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="sym-page">
+  <nav style="font-size:.8rem;margin-bottom:12px;color:var(--gray-500)">
+    <a href="/" style="color:var(--navy);text-decoration:none">VetDict</a>
+    <span> › </span>
+    <a href="/symptoms" style="color:var(--navy);text-decoration:none">症状から調べる</a>
+    <span> › </span>
+    <a href="/symptoms/{{ species }}" style="color:var(--navy);text-decoration:none">{{ species_ja }}</a>
+    <span> › </span>
+    <span>{{ symptom_ja }}</span>
+  </nav>
+
+  <h1>{{ symptom_ja }}</h1>
+  <div class="subtitle">{{ symptom_en }} — この症状を示す{{ species_ja }}の疾患 {{ count }}件</div>
+
+  <section>
+    <h2>{{ symptom_ja }}を示す疾患</h2>
+    <div class="dz-list">
+      {% for d in diseases %}
+      <a href="/diseases/{{ species }}/{{ d.slug }}" class="dz-card urgency-{{ d.urgency }}">
+        <div>
+          <span class="dz-name">{{ d.name_ja or d.name }}</span>
+          {% if d.name_ja and d.name %}<span class="dz-en">{{ d.name }}</span>{% endif %}
+          {% if d.urgency %}<span class="dz-urgency u-{{ d.urgency }}">{% if d.urgency == 'emergency' %}緊急{% elif d.urgency == 'high' %}重度{% elif d.urgency == 'moderate' %}中等度{% else %}軽度{% endif %}</span>{% endif %}
+        </div>
+        {% if d.other_symptoms %}
+        <div class="dz-others"><b>併発症状:</b> {% for o in d.other_symptoms %}{{ o.ja }}{% if not loop.last %} ・ {% endif %}{% endfor %}</div>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% if related_symptoms %}
+  <section>
+    <h2>よく併発する症状</h2>
+    <div class="rel-syms">
+      {% for r in related_symptoms %}
+      <a href="/symptoms/{{ species }}/{{ r.id }}">{{ r.ja }} <span style="color:var(--gray-400);font-size:.72rem">{{ r.count }}</span></a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <div class="cta-box">
+    <p style="margin-bottom:12px;font-weight:600;color:var(--navy)">複数の症状から{{ species_ja }}の鑑別診断を行う</p>
+    <a href="/?species={{ species }}#checker">症状チェッカーを使う</a>
+  </div>
+
+  <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:8px">
+    <a href="/symptoms/{{ species }}" style="font-size:.84rem;color:var(--green);text-decoration:none;font-weight:600">← {{ species_ja }}の全症状</a>
+    <span style="color:var(--gray-300)">|</span>
+    <a href="/diseases/{{ species }}" style="font-size:.84rem;color:var(--green);text-decoration:none;font-weight:600">{{ species_ja }}の疾患データベース →</a>
+  </div>
+
+  <div class="disclaimer">
+    ※ 単一症状からの逆引きは鑑別の出発点に過ぎません。確定診断には複数の臨床所見・検査結果との総合判断が必要です。<br>
+    VetDict は獣医師（DVM）が開発した臨床支援ツールです。
+  </div>
+</div>
+<script nonce="{{ g.csp_nonce }}">
+if(typeof gtag==="function"){
+  gtag("event","view_symptom_page",{species:"{{ species|e }}",symptom:"{{ symptom_id|e }}"});
+}
+</script>
+{% endblock %}

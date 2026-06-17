@@ -64,6 +64,8 @@
 .disease-page section p{font-size:.9rem;line-height:1.8;color:var(--gray-700)}
 .disease-page .symptoms-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .disease-page .symptom-tag{background:var(--gray-50);border:1px solid var(--gray-200);padding:4px 10px;border-radius:6px;font-size:.8rem;color:var(--gray-700)}
+.disease-page a.symptom-link{text-decoration:none;transition:all .15s}
+.disease-page a.symptom-link:hover{border-color:var(--green);background:#f0f7ff;color:var(--navy)}
 .disease-page .cta-box{background:linear-gradient(135deg,#f0f7ff,#e8f5e9);border:2px solid var(--green);border-radius:var(--radius-lg);padding:20px;text-align:center;margin-top:32px}
 .disease-page .cta-box a{display:inline-block;padding:12px 28px;background:var(--green);color:var(--white);border-radius:8px;font-weight:700;text-decoration:none;font-size:.92rem}
 .disease-page .cta-box a:hover{opacity:.9}
@@ -103,14 +105,15 @@
   </section>
   {% endif %}
 
-  {% if disease.symptoms %}
+  {% if symptom_ids %}
   <section>
     <h2>主な症状</h2>
     <div class="symptoms-grid">
-      {% for s in disease.symptoms|sort %}
-      <span class="symptom-tag">{{ symptom_names.get(s, s | replace('_', ' ')) }}</span>
+      {% for s in symptom_ids %}
+      <a class="symptom-tag symptom-link" href="/symptoms/{{ species }}/{{ s }}">{{ symptom_names.get(s, s | replace('_', ' ')) }}</a>
       {% endfor %}
     </div>
+    <p style="font-size:.72rem;color:var(--gray-400);margin-top:6px">※ 症状をクリックすると、その症状を示す{{ species_ja }}の他の疾患を確認できます</p>
   </section>
   {% endif %}
 
