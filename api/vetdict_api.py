@@ -639,6 +639,7 @@ def dynamic_sitemap():
         (f"{base}/diseases", "weekly", "0.9"),
         (f"{base}/drugs", "weekly", "0.9"),
         (f"{base}/anesthesia", "weekly", "0.8"),
+        (f"{base}/symptoms", "weekly", "0.8"),
         (f"{base}/#chat", "weekly", "0.8"),
         (f"{base}/#drugs", "monthly", "0.8"),
     ]
@@ -647,6 +648,7 @@ def dynamic_sitemap():
         urls.append((f"{base}/?species={sp}#checker", "weekly", "0.7"))
         urls.append((f"{base}/?species={sp}#database", "weekly", "0.7"))
         urls.append((f"{base}/diseases/{sp}", "weekly", "0.8"))  # Disease index per species
+        urls.append((f"{base}/symptoms/{sp}", "weekly", "0.6"))  # Symptom index per species
 
     # Disease detail pages (SEO: each disease = a crawlable page)
     for sp in _DISEASE_MODULES:
@@ -657,6 +659,20 @@ def dynamic_sitemap():
                 _slug = _disease_slug(_d)
                 if _slug:
                     urls.append((f"{base}/diseases/{sp}/{_slug}", "monthly", "0.5"))
+        except ImportError:
+            pass
+
+    # Symptom detail pages (SEO: each symptom = a crawlable disease-listing page)
+    for sp in _DISEASE_MODULES:
+        if sp not in SPECIES_META:
+            continue
+        try:
+            _sym_names = _symptom_names_for_species(sp)
+            _used = set()
+            for _d in _load_diseases(sp):
+                _used |= _disease_symptom_ids(_d)
+            for _sid in _used & set(_sym_names.keys()):
+                urls.append((f"{base}/symptoms/{sp}/{_sid}", "monthly", "0.4"))
         except ImportError:
             pass
 
@@ -1091,23 +1107,14 @@ def disease_detail(species: str, disease_slug: str):
     sp_label_ja = sp_meta.get("name_ja", species_key)
     sp_label_en = sp_meta.get("name_en", species_key.title())
 
-    # Load symptom names for human-readable display
-    symptom_names = {}
-    try:
-        import importlib
+    # Load symptom names for human-readable display (handles equine findings too)
+    _sym_full = _symptom_names_for_species(species_key)
+    symptom_names = {k: v.get("ja", k) for k, v in _sym_full.items()}
 
-        _mod = importlib.import_module(_DISEASE_MODULES[species_key])
-        sym_names_dict = getattr(_mod, "SYMPTOM_NAMES", {})
-        symptom_names = {k: v.get("ja", k) for k, v in sym_names_dict.items()}
-    except Exception:
-        pass
-
-    # Build related diseases (same species, shared symptoms)
-    disease_symptoms = disease.get("symptoms", set())
-    if isinstance(disease_symptoms, (set, list)):
-        disease_symptoms = set(disease_symptoms)
-    else:
-        disease_symptoms = set()
+    # Symptom ids for this disease (set converter; equine uses associated_findings),
+    # sorted with only those that have a known name (so each can link to its page)
+    disease_symptoms = _disease_symptom_ids(disease)
+    symptom_ids = sorted(sid for sid in disease_symptoms if sid in _sym_full)
     related = []
     if disease_symptoms:
         for d in diseases:
@@ -1192,6 +1199,7 @@ def disease_detail(species: str, disease_slug: str):
         species_ja=sp_label_ja,
         species_en=sp_label_en,
         symptom_names=symptom_names,
+        symptom_ids=symptom_ids,
         related_diseases=related,
         mentioned_drugs=mentioned_drugs,
         pubmed_refs=pubmed_refs,
@@ -1511,6 +1519,302 @@ def anesthesia_species(species: str):
         protocol_count=len(protocols),
         other_species=other_species,
     )
+
+
+# =============================================================================
+# Symptom SEO pages (disease ↔ symptom bipartite internal-link graph)
+# =============================================================================
+
+
+def _symptom_names_for_species(species_key: str) -> dict:
+    """Return {symptom_id: {"ja": .., "en": ..}} for a species.
+
+    Most species expose ``SYMPTOM_NAMES``; the equine module instead exposes
+    ``HEALTH_CHECK_ITEMS`` (category -> list of (id, ja, en) tuples).
+    """
+    mod_name = _DISEASE_MODULES.get(species_key)
+    if not mod_name:
+        return {}
+    try:
+        import importlib
+
+        mod = importlib.import_module(mod_name)
+    except ImportError:
+        return {}
+
+    sym_names = getattr(mod, "SYMPTOM_NAMES", None)
+    if isinstance(sym_names, dict) and sym_names:
+        out = {}
+        for sid, val in sym_names.items():
+            if isinstance(val, dict):
+                out[sid] = {"ja": val.get("ja", sid), "en": val.get("en", sid)}
+            else:
+                out[sid] = {"ja": str(val), "en": str(val)}
+        return out
+
+    # Equine (HEALTH_CHECK_ITEMS) fallback
+    hci = getattr(mod, "HEALTH_CHECK_ITEMS", None)
+    if isinstance(hci, dict):
+        out = {}
+        for items in hci.values():
+            for tup in items:
+                if len(tup) >= 3:
+                    out[tup[0]] = {"ja": tup[1], "en": tup[2]}
+        return out
+    return {}
+
+
+def _disease_symptom_ids(disease) -> set:
+    """Return the set of symptom/finding ids for a disease (dict or dataclass)."""
+    for key in ("symptoms", "associated_findings"):
+        if isinstance(disease, dict):
+            val = disease.get(key)
+        else:
+            val = getattr(disease, key, None)
+        if val and isinstance(val, (set, list, tuple)):
+            return set(val)
+    return set()
+
+
+@app.route("/symptoms")
+def symptoms_hub():
+    """Hub page linking to every species' symptom index for SEO."""
+    from api.disease_store import SPECIES_META
+
+    species_list = []
+    for sp_id in _DISEASE_MODULES:
+        if sp_id not in SPECIES_META:
+            continue
+        meta = SPECIES_META[sp_id]
+        sym_names = _symptom_names_for_species(sp_id)
+        # Count only symptoms actually used by at least one disease
+        used = set()
+        for d in _load_diseases(sp_id):
+            used |= _disease_symptom_ids(d)
+        used &= set(sym_names.keys())
+        species_list.append(
+            {
+                "id": sp_id,
+                "name_ja": meta.get("name_ja", sp_id),
+                "name_en": meta.get("name_en", sp_id.title()),
+                "icon": _SPECIES_ICONS.get(sp_id, "\U0001f43e"),
+                "count": len(used),
+            }
+        )
+    species_list.sort(key=lambda x: x["count"], reverse=True)
+
+    return render_template(
+        "symptoms_hub.html",
+        species=species_list,
+        species_count=len(species_list),
+        total=sum(s["count"] for s in species_list),
+    )
+
+
+@app.route("/symptoms/<species>")
+def symptoms_index(species: str):
+    """Per-species index of symptoms, each linking to its symptom page."""
+    from api.disease_store import SPECIES_META
+
+    sp_key = species.lower()
+    if sp_key not in SPECIES_META or sp_key not in _DISEASE_MODULES:
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Unknown species"}), 404
+
+    sp_meta = SPECIES_META[sp_key]
+    sym_names = _symptom_names_for_species(sp_key)
+
+    # Count diseases per symptom id
+    counts: dict[str, int] = {}
+    for d in _load_diseases(sp_key):
+        for sid in _disease_symptom_ids(d):
+            counts[sid] = counts.get(sid, 0) + 1
+
+    symptoms = []
+    for sid, cnt in counts.items():
+        names = sym_names.get(sid)
+        if not names:
+            continue
+        symptoms.append(
+            {
+                "id": sid,
+                "ja": names["ja"],
+                "en": names["en"],
+                "count": cnt,
+            }
+        )
+    symptoms.sort(key=lambda x: (-x["count"], x["ja"]))
+
+    return render_template(
+        "symptoms_index.html",
+        species=sp_key,
+        species_ja=sp_meta.get("name_ja", sp_key),
+        species_en=sp_meta.get("name_en", sp_key.title()),
+        symptoms=symptoms,
+        count=len(symptoms),
+    )
+
+
+@app.route("/symptoms/<species>/<symptom_id>")
+def symptom_detail(species: str, symptom_id: str):
+    """List every disease in a species that presents a given symptom."""
+    from api.disease_store import SPECIES_META
+
+    sp_key = species.lower()
+    if sp_key not in SPECIES_META or sp_key not in _DISEASE_MODULES:
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Unknown species"}), 404
+
+    sym_names = _symptom_names_for_species(sp_key)
+    names = sym_names.get(symptom_id)
+    if not names:
+        try:
+            return render_template("404.html"), 404
+        except Exception:
+            return jsonify({"error": "Unknown symptom"}), 404
+
+    sp_meta = SPECIES_META[sp_key]
+
+    # Diseases presenting this symptom, with their other symptoms for context
+    diseases = []
+    for d in _load_diseases(sp_key):
+        sids = _disease_symptom_ids(d)
+        if symptom_id not in sids:
+            continue
+        slug = _disease_slug(d)
+        if not slug:
+            continue
+        other = []
+        for sid in sids:
+            if sid == symptom_id:
+                continue
+            on = sym_names.get(sid)
+            if on:
+                other.append({"id": sid, "ja": on["ja"]})
+        other.sort(key=lambda x: x["ja"])
+        diseases.append(
+            {
+                "name": _disease_get(d, "name", ""),
+                "name_ja": _disease_get(d, "name_ja", ""),
+                "slug": slug,
+                "urgency": _disease_get(d, "urgency", ""),
+                "category": _classify_disease_dict(
+                    {
+                        "name": _disease_get(d, "name", ""),
+                        "name_ja": _disease_get(d, "name_ja", ""),
+                        "description": _disease_get(d, "description", ""),
+                    }
+                ),
+                "other_symptoms": other[:6],
+            }
+        )
+
+    # Order: emergency first, then by name
+    _urg_rank = {"emergency": 0, "high": 1, "moderate": 2, "low": 3, "": 4}
+    diseases.sort(key=lambda x: (_urg_rank.get(x["urgency"], 4), (x["name_ja"] or x["name"]).lower()))
+
+    # Related symptoms (co-occurring) for cross-linking
+    co_counts: dict[str, int] = {}
+    for d in _load_diseases(sp_key):
+        sids = _disease_symptom_ids(d)
+        if symptom_id not in sids:
+            continue
+        for sid in sids:
+            if sid != symptom_id and sid in sym_names:
+                co_counts[sid] = co_counts.get(sid, 0) + 1
+    related = sorted(co_counts.items(), key=lambda x: -x[1])[:12]
+    related_symptoms = [{"id": sid, "ja": sym_names[sid]["ja"], "count": c} for sid, c in related]
+
+    return render_template(
+        "symptom_detail.html",
+        species=sp_key,
+        species_ja=sp_meta.get("name_ja", sp_key),
+        species_en=sp_meta.get("name_en", sp_key.title()),
+        symptom_id=symptom_id,
+        symptom_ja=names["ja"],
+        symptom_en=names["en"],
+        diseases=diseases,
+        count=len(diseases),
+        related_symptoms=related_symptoms,
+    )
+
+
+# =============================================================================
+# Anesthesia protocol drug-name linking (link each drug to its /drugs/<id>)
+# =============================================================================
+
+_ANES_DRUG_LOOKUP: dict[str, str] | None = None
+_ANES_SUFFIX_RE = _re.compile(
+    r"\b(CRI|TIVA|IM|IV|IN|PO|SC|IP|q\d\S*|low[- ]?dose|premed\w*|intranasal|atomization|"
+    r"combined|injection|cream|bath|immersion|infusion|drip|nebuli\w*|induction|step\s*\d)\b",
+    _re.IGNORECASE,
+)
+
+
+def _build_anes_drug_lookup() -> dict[str, str]:
+    """Lowercase drug-name / id -> drug_id map for linking protocol drugs."""
+    global _ANES_DRUG_LOOKUP
+    if _ANES_DRUG_LOOKUP is not None:
+        return _ANES_DRUG_LOOKUP
+    lookup: dict[str, str] = {}
+    try:
+        from api.drug_dictionary import DRUGS
+
+        for d in DRUGS:
+            did = d.get("id")
+            if not did:
+                continue
+            lookup.setdefault(did.lower(), did)
+            for key in (d.get("name"), d.get("name_ja")):
+                if key:
+                    lookup.setdefault(key.strip().lower(), did)
+    except Exception:
+        pass
+    _ANES_DRUG_LOOKUP = lookup
+    return lookup
+
+
+def _match_anes_component(token: str):
+    """Resolve a single drug-name component to a drug_id, or None."""
+    lookup = _build_anes_drug_lookup()
+    t = token.split("(")[0]
+    t = _ANES_SUFFIX_RE.sub("", t)
+    t = _re.sub(r"[^a-zA-Z0-9\- ]", " ", t).strip().lower()
+    if not t:
+        return None
+    if t in lookup:
+        return lookup[t]
+    parts = t.split()
+    if parts and parts[0] in lookup:
+        return lookup[parts[0]]
+    return None
+
+
+def _anes_drug_segments(name: str) -> list:
+    """Split a protocol drug-name into linkable segments.
+
+    Returns a list of {"text": str, "id": str|None}. Combination entries
+    ("Dexmedetomidine + Butorphanol") become separate linked components with
+    the "+" separators preserved as plain text.
+    """
+    if not name:
+        return []
+    segments = []
+    parts = name.split("+")
+    for i, part in enumerate(parts):
+        did = _match_anes_component(part)
+        segments.append({"text": part.strip(), "id": did})
+        if i < len(parts) - 1:
+            segments.append({"text": " + ", "id": None})
+    return segments
+
+
+# Expose drug-name linking to Jinja templates (anesthesia protocol tables)
+app.jinja_env.globals["anes_drug_links"] = _anes_drug_segments
 
 
 @app.route("/<path:filename>")

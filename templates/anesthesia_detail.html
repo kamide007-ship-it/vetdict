@@ -57,6 +57,9 @@
 .drug-table th,.drug-table td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--gray-200);vertical-align:top}
 .drug-table th{background:var(--gray-50);color:var(--navy);font-weight:700;white-space:nowrap}
 .drug-table .dname{font-weight:600;color:var(--navy);white-space:nowrap}
+.drug-table .dname-en{display:block;font-weight:400;font-size:.74rem}
+.drug-table .dname-en a{color:#1565c0;text-decoration:none;border-bottom:1px dotted #90caf9}
+.drug-table .dname-en a:hover{color:var(--navy);border-bottom-color:var(--navy)}
 .drug-table .ddose{font-family:var(--font-mono,monospace);white-space:nowrap}
 .drug-table .dnote{color:var(--gray-600);font-size:.74rem;line-height:1.5}
 .proto-note{font-size:.82rem;color:var(--gray-700);background:var(--gray-50);padding:8px 10px;border-radius:6px;margin-top:6px;line-height:1.6}
@@ -115,8 +118,14 @@
         <thead><tr><th>薬品</th><th>用量</th><th>経路</th><th>備考</th></tr></thead>
         <tbody>
           {% for dr in p.drugs %}
+          {% set segs = anes_drug_links(dr.name) %}
           <tr>
-            <td class="dname">{{ dr.name_ja or dr.name }}</td>
+            <td class="dname">
+              {% if dr.name_ja and dr.name_ja != dr.name %}{{ dr.name_ja }}{% endif %}
+              {% if segs %}
+              <span class="dname-en">{% for s in segs %}{% if s.id %}<a href="/drugs/{{ s.id }}">{{ s.text }}</a>{% else %}{{ s.text }}{% endif %}{% endfor %}</span>
+              {% elif not dr.name_ja %}{{ dr.name }}{% endif %}
+            </td>
             <td class="ddose">{{ dr.dose or '—' }}</td>
             <td>{{ dr.route or '' }}</td>
             <td class="dnote">{{ dr.notes_ja or dr.notes or '' }}</td>

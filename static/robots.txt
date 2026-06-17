@@ -3,6 +3,7 @@ Allow: /
 Allow: /diseases/
 Allow: /drugs/
 Allow: /anesthesia/
+Allow: /symptoms/
 Disallow: /api/
 Allow: /static/js/
 Allow: /static/css/
@@ -20,5 +21,10 @@ Allow: /static/manifest.json
 # Anesthesia / sedation protocol pages (21 species)
 # /anesthesia — hub page
 # /anesthesia/<species> — per-species protocols
+
+# Symptom reverse-lookup pages (disease <-> symptom graph)
+# /symptoms — hub page
+# /symptoms/<species> — per-species symptom index
+# /symptoms/<species>/<symptom_id> — diseases presenting a symptom
 
 Sitemap: https://vetdict.info/sitemap.xml
