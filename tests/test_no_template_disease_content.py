@@ -1680,3 +1680,152 @@ def test_served_db_prevention_not_cross_disease_template():
     assert not offenders, f"Found {len(offenders)} cross-disease prevention templates. First 5:\n" + "\n".join(
         f"  {n} names: {t[:80]}" for n, t in offenders[:5]
     )
+
+
+# ---------------------------------------------------------------------------
+# Description grounding + Japanese localisation (2026-06)
+# ---------------------------------------------------------------------------
+#
+# Earlier passes deduplicated descriptions only by *exact string*, but the
+# description generator slots the disease name + species into one per-category
+# paragraph, so every neoplasm (or viral infection, …) of a species shared a
+# structurally identical headline — a "generic AI" tell. Those paragraphs were
+# replaced by grounded one-line summaries built from each record's own signs,
+# work-up and urgency. Separately, English species placeholders had leaked into
+# Japanese fields (``Hamsterにおける…`` / ``…（Amphibian）``). These tests lock in
+# both fixes.
+
+# Distinctive sentences from the per-category description paragraphs. None of
+# these may appear in any description any more.
+_DESCRIPTION_BOILERPLATE_JA = (
+    "正常細胞の悪性転換により異常増殖・浸潤・転移が進行しうる",
+    "病原ウイルスが宿主細胞内で複製し組織傷害と免疫応答を引き起こす",
+    "原因・病態・進行段階により臨床像は多様",
+    "寄生虫種・寄生数・寄生部位により消化器",
+    "消化管の運動・吸収・分泌の障害により",
+    "中枢または末梢神経の障害により運動失調",
+    "原因菌の定着・増殖と毒素産生により局所および全身性の炎症",
+)
+
+# English species names that must never sit immediately before a Japanese
+# particle or inside parentheses in Japanese text (breed names like
+# "Quarter Horse" are excluded by the preceding-word lookbehind).
+_EN_SPECIES = (
+    "Guinea Pig",
+    "Sugar Glider",
+    "Exotic Other",
+    "Hedgehog",
+    "Chinchilla",
+    "Parakeet",
+    "Hamster",
+    "Tortoise",
+    "Amphibian",
+    "Reptile",
+    "Rabbit",
+    "Ferret",
+    "Parrot",
+    "Lizard",
+    "Snake",
+    "Degu",
+    "Bird",
+    "Cat",
+    "Dog",
+    "Horse",
+)
+_EN_ALT = "|".join(re.escape(n) for n in sorted(_EN_SPECIES, key=len, reverse=True))
+_EN_SPECIES_PARTICLE = re.compile(
+    rf"(?<![A-Za-z])(?<![A-Za-z]\s)(?P<sp>{_EN_ALT})(?=(に|の|は|を|では|における|にみられる|に発症|に好発))"
+)
+_EN_SPECIES_PAREN = re.compile(rf"[（(](?P<sp>{_EN_ALT})[）)]")
+
+_JA_TEXT_FIELDS = (
+    "name_ja",
+    "description_ja",
+    "treatment_ja",
+    "prognosis_ja",
+    "causes_ja",
+    "pathophysiology_ja",
+    "clinical_signs_ja",
+    "prevention_ja",
+    "diagnosis_ja",
+    "transmission_ja",
+)
+
+
+def test_no_description_category_boilerplate_in_json():
+    """No description may reuse a per-category boilerplate paragraph."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not available")
+    offenders = []
+    for e in entries:
+        text = e.get("description_ja") or ""
+        for fp in _DESCRIPTION_BOILERPLATE_JA:
+            if fp in text:
+                offenders.append((e.get("species"), e.get("name_ja"), fp))
+                break
+    assert not offenders, f"Found {len(offenders)} category-boilerplate descriptions. First 5:\n" + "\n".join(
+        f"  [{s}] {n}: {fp}" for s, n, fp in offenders[:5]
+    )
+
+
+def test_no_english_species_name_in_japanese_json_fields():
+    """English species placeholders must not appear in JA fields of the JSON."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not available")
+    offenders = []
+    for e in entries:
+        for f in _JA_TEXT_FIELDS:
+            v = e.get(f) or ""
+            if _EN_SPECIES_PARTICLE.search(v) or _EN_SPECIES_PAREN.search(v):
+                offenders.append((e.get("species"), e.get("name_ja"), f))
+    assert not offenders, f"Found {len(offenders)} English species names in JA fields. First 8:\n" + "\n".join(
+        f"  [{s}] {n}.{f}" for s, n, f in offenders[:8]
+    )
+
+
+def test_no_english_species_name_in_supplementary_diseases():
+    """Supplementary disease names/fields must use Japanese species labels."""
+    path = ROOT / "api" / "data" / "supplementary_diseases.json"
+    if not path.exists():
+        pytest.skip("supplementary_diseases.json not available")
+    with open(path, encoding="utf-8") as f:
+        entries = json.load(f)
+    offenders = []
+    for e in entries:
+        for f in _JA_TEXT_FIELDS:
+            v = e.get(f) or ""
+            if _EN_SPECIES_PARTICLE.search(v) or _EN_SPECIES_PAREN.search(v):
+                offenders.append((e.get("species"), e.get("name_ja"), f))
+    assert not offenders, (
+        f"Found {len(offenders)} English species names in supplementary JA fields. First 8:\n"
+        + "\n".join(f"  [{s}] {n}.{f}" for s, n, f in offenders[:8])
+    )
+
+
+def test_served_db_no_english_species_in_japanese_fields():
+    """The served SQLite DB must carry no English species placeholders in JA text."""
+    import sqlite3
+
+    db = _served_db_path()
+    if db is None:
+        pytest.skip("served vetdict.db not present (run scripts/migrate_to_sqlite.py)")
+    conn = sqlite3.connect(str(db))
+    try:
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(diseases)").fetchall()]
+        fields = [f for f in _JA_TEXT_FIELDS if f in cols]
+        rows = conn.execute("SELECT name_ja, " + ", ".join(fields) + " FROM diseases").fetchall()
+    finally:
+        conn.close()
+    offenders = []
+    for row in rows:
+        name_ja = row[0]
+        for f, v in zip(fields, row[1:]):
+            v = v or ""
+            if _EN_SPECIES_PARTICLE.search(v) or _EN_SPECIES_PAREN.search(v):
+                offenders.append((name_ja, f))
+    assert not offenders, (
+        f"Found {len(offenders)} English species names in served-DB JA fields. First 8:\n"
+        + "\n".join(f"  {n}.{f}" for n, f in offenders[:8])
+    )
