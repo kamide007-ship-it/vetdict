@@ -251,9 +251,7 @@ def main() -> int:
     if args.apply:
         # Preserve the file's compact on-disk format (no indent, no trailing
         # newline) so the diff is limited to the changed values.
-        JSON_PATH.write_text(
-            json.dumps(records, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
-        )
+        JSON_PATH.write_text(json.dumps(records, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         # Verify no residual structural templates among regenerated descriptions
         residual_ja = find_template_norms(records, "description_ja", args.min_cluster)
         residual_en = find_template_norms(records, "description", args.min_cluster)
