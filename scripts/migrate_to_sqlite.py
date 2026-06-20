@@ -1301,6 +1301,42 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
     return counts
 
 
+def localize_english_species_in_served_db(conn) -> int:
+    """Replace English species placeholders that leaked into Japanese DB fields.
+
+    Module-sourced and supplementary entries occasionally carry the *English*
+    species name inside Japanese text (``Hamsterにおける…`` / ``…（Amphibian）``),
+    which reads as broken localisation to a Japanese clinician. This sweeps the
+    served database so the delivered content is clean regardless of which source
+    introduced the token. Breed/proper names (``Quarter Horse``) are preserved by
+    the localiser's lookbehind.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.fix_english_species_in_ja import JA_FIELDS, localise
+
+    existing = {r["name"] for r in conn.execute("PRAGMA table_info(diseases)").fetchall()}
+    fields = [f for f in JA_FIELDS if f in existing]
+    rows = conn.execute("SELECT id, " + ", ".join(fields) + " FROM diseases").fetchall()
+    total = 0
+    for row in rows:
+        updates = {}
+        for f in fields:
+            v = row[f]
+            if not v:
+                continue
+            new, n = localise(v)
+            if n:
+                updates[f] = new
+                total += n
+        if updates:
+            sets = ", ".join(f"{f} = ?" for f in updates)
+            conn.execute(
+                f"UPDATE diseases SET {sets}, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (*updates.values(), row["id"]),
+            )
+    return total
+
+
 def main(db_path: str | None = None):
     print("=" * 60)
     print("VetDict Data Migration → SQLite")
@@ -1357,6 +1393,11 @@ def main(db_path: str | None = None):
         regen_stats = regenerate_cross_disease_templates(conn)
         for field, n in regen_stats.items():
             print(f"  → {field}: {n} regenerated")
+
+        # Localise any English species placeholders that leaked into JA fields.
+        print("\n[enrichment] localising English species names in Japanese fields...")
+        loc_n = localize_english_species_in_served_db(conn)
+        print(f"  → {loc_n} English species tokens localised")
 
         # Drugs
         print("\n[drugs] migrating drug dictionary...")

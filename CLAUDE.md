@@ -978,3 +978,57 @@ JSONオーバーレイが届かないPythonモジュール専用エントリ（�
 - フルテストスイート: **3,340件合格**（34 skip）
 - ruff check: 全変更ファイルで通過
 - 注: 各カテゴリ生成器に残る種固有の例示（GDV犬・モルモット壊血病等）はDB全体で一貫した既存仕様。種別ゲーティングは将来の改善候補。
+
+## 2026-06セッション（第4弾: 説明文の構造的テンプレート撲滅 + 日本語フィールドの英語種名ローカライズ）
+
+### 背景: 完全一致dedupをすり抜ける「名前差し込み型」テンプレート
+これまでの撲滅パスは説明文を**完全一致文字列**でのみ重複判定していた。しかし説明文ジェネレーター（`clinical_fields_generator.py` の `gen_description_ja`）は疾患名＋種名をカテゴリ別の定型段落に差し込むため、生成文字列はユニークでも構造は同一だった。疾患名・種名・数字を正規化して除去すると、同一構造が露見する:
+- description_ja: 45クラスタ **3,635件**（最大: 「<D>は、<S>にみられる疾患である。原因・病態・進行段階により…」1,095件）
+- description (EN): **6,434件**（ほぼ全DB — 英語版サイトは全疾患が定型段落）
+- 獣医師が疾患を開くたびに同じ段落 → 公開時の「生成AIコンテンツ」の典型的な信号
+
+重要な発見: templated descriptionの**81%が固有のtreatment_jaを持つ**——疾患固有データは存在するのに、最も目立つ見出し要約が定型文のままだった。
+
+### グラウンディング型説明文（`compose_grounded_description_ja/en`）
+カテゴリ定型段落を、各レコードが**実際に保持する固有データ**から組み立てた1行臨床要約に置換:
+- 疾患名 + 種名 + カテゴリ名詞（短い1句）
+- 実際の主訴（`symptoms` を `health_checker._get_species_symptom_names` で日本語解決、最大5件、生IDは漏らさない）
+- 実際の推奨検査（`recommended_tests`、最大4件）
+- 緊急度（emergency/high のみ補足句）
+- **既存の確定データの言い換えのみ**で新たな医学的主張をしない（安全）
+- 例（猫消化管リンパ腫）: 旧「正常細胞の悪性転換により異常増殖・浸潤・転移が進行しうる…」（良性腫瘍にも誤適用）→ 新「消化管リンパ腫は猫にみられる腫瘍性疾患。主な臨床徴候は腹部膨満・行動変化・下痢・元気消失・嘔吐など。診断には細胞診・病理組織検査・画像診断・全血球計算などを用いる。早期の診断と治療が予後を大きく左右する。」
+- 副次効果: 旧版が良性脂肪腫を「悪性転換・転移」と誤記していた問題も解消（正確性向上）
+
+### 検出ロジック（`eliminate_generic_descriptions.py`）
+- 正規化クラスタ（≥5）+ `_DESC_CATEGORY` 由来のフィンガープリント文 + レガシー「系統的アプローチ」段落の3系統で検出
+- キュレート済み説明（猫糖尿病/CKD/疝痛/斜頸/膀胱結石等）は保持
+- 結果: description_ja **3,799件** + description (EN) **6,434件** をグラウンディング化
+
+### 日本語フィールドへの英語種名混入を撲滅（ローカライズ漏れ）
+品質監査で発見した別系統のバグ: 日本語フィールドに英語の種名プレースホルダが残存。
+- `treatment_ja` 等に「Hamsterにおける」「Catにおける」（テンプレ生成時の未ローカライズ）— 297件
+- `supplementary_diseases.json` の疾患名 `name_ja` に英語種タグ「Bsal感染症（**Amphibian**）」←「（両生類）」であるべき — **2,231件** + diagnosis_ja 2,265件
+- `api/species/helpers.py` の `_generate_fallback_content` が `{species}`（"Dog"）を日本語文に直接埋込 → `species_ja` 導出に修正
+- `scripts/template_elimination/fix_english_species_in_ja.py`: 英語種名が日本語助詞（に・の・は・を・における等）の直前、または全角括弧内にある場合のみ置換。品種名（Quarter Horse, Welsh Pony 等）は「英単語+空白」の後読みで保護（誤変換ゼロを検証）
+- 対象: `diseases_all_species.json`（311件）+ `supplementary_diseases.json`（6,746件）
+
+### 配信DBへのローカライズsweep（堅牢な安全網）
+- `migrate_to_sqlite.py` に `localize_english_species_in_served_db()` を追加。配信SQLite構築後に全JA列を走査し、生成元（モジュール/JSON/supplementary/動的生成）を問わず英語種名を日本語化
+- 配信DB（7,094疾患）の英語種名混入: **0件**、説明文フィンガープリント: **0件**
+- `api/data/disease_search_index.json` も再生成（英語種タグ 771→0件）
+
+### 回帰テスト追加（tests/test_no_template_disease_content.py、+4件）
+- `test_no_description_category_boilerplate_in_json` — 説明文にカテゴリ定型段落が残っていないか
+- `test_no_english_species_name_in_japanese_json_fields` — JSONのJAフィールドに英語種名プレースホルダが無いか
+- `test_no_english_species_name_in_supplementary_diseases` — supplementaryのJAフィールド同上
+- `test_served_db_no_english_species_in_japanese_fields` — 配信DBのJAフィールド同上
+
+### テスト・CI
+- フルテストスイート: **3,390件合格**（34 skip）
+- ruff check / format: 全変更ファイルで通過
+- 再現手順: `eliminate_generic_descriptions.py --apply` → `fix_english_species_in_ja.py --apply` → `migrate_to_sqlite.py` → `build_disease_search_index.py`
+
+### 残課題（次セッション候補）
+- treatment_ja の構造的カテゴリテンプレート約1,007件（腫瘍学・中毒等は医学的に妥当な汎用ガイダンス。ただし permethrin中毒→駆虫薬テンプレ等のごく少数の誤カテゴリは要修正）
+- causes_ja / prognosis_ja の構造的カテゴリテンプレート（医療的に機微なため、キュレート/獣医レビュー前提での慎重な対応が必要）
+- 合成的なクロスカテゴリ疾患名（例「心血管系行動障害」）のデータモデル整理

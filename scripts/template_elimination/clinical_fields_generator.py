@@ -3020,6 +3020,170 @@ def gen_description(category: str, name_en: str, species: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Grounded descriptions
+# ---------------------------------------------------------------------------
+#
+# The plain ``gen_description*`` helpers above only slot the disease name and
+# species into a per-category paragraph, so every neoplasm (or every viral
+# infection, …) of a species ends up with a *structurally identical* headline.
+# Normalising out the name + species reveals these as templates even though the
+# raw strings differ — an immediate "generic AI" tell when a clinician opens the
+# database.
+#
+# ``compose_grounded_description*`` instead build a short clinical summary out of
+# the data that is actually curated *per disease* in each record: its own
+# presenting signs, its own recommended diagnostic work-up and its triage
+# urgency. The result varies disease-to-disease (different sign set, different
+# test set, different urgency) and reads like a real one-line summary rather than
+# boilerplate. It only restates facts already stored in the record, so it adds no
+# new (and therefore no unverified) medical claims.
+
+# Short noun describing each category, used as the lead clause.
+_CATEGORY_NOUN_JA: dict[str, str] = {
+    "viral_infection": "ウイルス感染症",
+    "bacterial_infection": "細菌感染症",
+    "respiratory_infection": "呼吸器感染症",
+    "fungal_infection": "真菌感染症",
+    "parasitic": "寄生虫性疾患",
+    "neoplasia": "腫瘍性疾患",
+    "endocrine_metabolic": "内分泌・代謝疾患",
+    "renal_urinary": "泌尿器疾患",
+    "cardiac": "循環器疾患",
+    "respiratory_other": "呼吸器疾患",
+    "gastrointestinal": "消化器疾患",
+    "neurological": "神経疾患",
+    "ophthalmic": "眼疾患",
+    "musculoskeletal": "運動器疾患",
+    "dental": "歯科疾患",
+    "dermatological": "皮膚疾患",
+    "hematological": "血液疾患",
+    "reproductive": "生殖器疾患",
+    "toxicity": "中毒性疾患",
+    "trauma": "外傷性疾患",
+    "autoimmune": "免疫介在性疾患",
+    "nutritional": "栄養性疾患",
+    "genetic_congenital": "遺伝性・先天性疾患",
+    "degenerative": "変性性疾患",
+    "behavioral": "行動学的疾患",
+    "generic": "疾患",
+}
+
+_CATEGORY_NOUN_EN: dict[str, str] = {
+    "viral_infection": "viral infection",
+    "bacterial_infection": "bacterial infection",
+    "respiratory_infection": "respiratory infection",
+    "fungal_infection": "fungal infection",
+    "parasitic": "parasitic disease",
+    "neoplasia": "neoplastic disease",
+    "endocrine_metabolic": "endocrine/metabolic disorder",
+    "renal_urinary": "urinary-tract disorder",
+    "cardiac": "cardiovascular disorder",
+    "respiratory_other": "respiratory disorder",
+    "gastrointestinal": "gastrointestinal disorder",
+    "neurological": "neurological disorder",
+    "ophthalmic": "ophthalmic disorder",
+    "musculoskeletal": "musculoskeletal disorder",
+    "dental": "dental disorder",
+    "dermatological": "dermatological disorder",
+    "hematological": "haematological disorder",
+    "reproductive": "reproductive disorder",
+    "toxicity": "toxicosis",
+    "trauma": "traumatic injury",
+    "autoimmune": "immune-mediated disease",
+    "nutritional": "nutritional disorder",
+    "genetic_congenital": "genetic/congenital disorder",
+    "degenerative": "degenerative disorder",
+    "behavioral": "behavioural disorder",
+    "generic": "disorder",
+}
+
+_URGENCY_CLAUSE_JA: dict[str, str] = {
+    "emergency": "緊急性が高く、診断後は速やかな治療介入を要する。",
+    "high": "早期の診断と治療が予後を大きく左右する。",
+}
+
+_URGENCY_CLAUSE_EN: dict[str, str] = {
+    "emergency": "It is an emergency that requires prompt intervention once diagnosed.",
+    "high": "Early diagnosis and treatment strongly influence the outcome.",
+}
+
+
+def _join_ja(items: list[str], limit: int) -> str:
+    seen: list[str] = []
+    for it in items:
+        it = (it or "").strip()
+        if it and it not in seen:
+            seen.append(it)
+        if len(seen) >= limit:
+            break
+    return "・".join(seen)
+
+
+def _join_en(items: list[str], limit: int) -> str:
+    seen: list[str] = []
+    for it in items:
+        it = (it or "").strip()
+        if it and it not in seen:
+            seen.append(it)
+        if len(seen) >= limit:
+            break
+    if len(seen) <= 1:
+        return "".join(seen)
+    return ", ".join(seen[:-1]) + " and " + seen[-1]
+
+
+def compose_grounded_description_ja(
+    name_ja: str,
+    species: str,
+    category: str,
+    sign_names_ja: list[str],
+    test_names_ja: list[str],
+    urgency: str,
+) -> str:
+    """Build a per-disease Japanese summary from the record's own curated data."""
+    sp_ja = SPECIES_JA.get(species, species)
+    name = _clean_name(name_ja) or f"{sp_ja}の疾患"
+    noun = _CATEGORY_NOUN_JA.get(category, _CATEGORY_NOUN_JA["generic"])
+    parts = [f"{name}は{sp_ja}にみられる{noun}。"]
+    signs = _join_ja(sign_names_ja, 5)
+    if signs:
+        parts.append(f"主な臨床徴候は{signs}など。")
+    tests = _join_ja(test_names_ja, 4)
+    if tests:
+        parts.append(f"診断には{tests}などを用いる。")
+    clause = _URGENCY_CLAUSE_JA.get((urgency or "").lower())
+    if clause:
+        parts.append(clause)
+    return "".join(parts)
+
+
+def compose_grounded_description(
+    name_en: str,
+    species: str,
+    category: str,
+    sign_names_en: list[str],
+    test_names_en: list[str],
+    urgency: str,
+) -> str:
+    """Build a per-disease English summary from the record's own curated data."""
+    sp_en = SPECIES_EN.get(species, species)
+    name = _clean_name(name_en) or f"This {sp_en[:-1] if sp_en.endswith('s') else sp_en} disorder"
+    noun = _CATEGORY_NOUN_EN.get(category, _CATEGORY_NOUN_EN["generic"])
+    article = "an" if noun[0] in "aeiou" else "a"
+    parts = [f"{name} is {article} {noun} of {sp_en}."]
+    signs = _join_en(sign_names_en, 5)
+    if signs:
+        parts.append(f"Common clinical signs include {signs}.")
+    tests = _join_en(test_names_en, 4)
+    if tests:
+        parts.append(f"Work-up typically uses {tests}.")
+    clause = _URGENCY_CLAUSE_EN.get((urgency or "").lower())
+    if clause:
+        parts.append(clause)
+    return " ".join(parts)
+
+
+# ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
 

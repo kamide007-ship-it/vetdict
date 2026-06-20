@@ -227,6 +227,41 @@ def _find_enrichment(species: str, disease_name: str) -> Dict[str, Any] | None:
     return None
 
 
+# Japanese species labels, keyed by both the English display name ("Dog") and
+# the lowercase species code ("dog"), so the Japanese fallback text never leaks
+# an English species name (e.g. "Dogの診療経験のある獣医師").
+_SPECIES_LABEL_JA: Dict[str, str] = {
+    "dog": "犬",
+    "cat": "猫",
+    "horse": "馬",
+    "rabbit": "ウサギ",
+    "hamster": "ハムスター",
+    "guinea_pig": "モルモット",
+    "guinea pig": "モルモット",
+    "chinchilla": "チンチラ",
+    "ferret": "フェレット",
+    "hedgehog": "ハリネズミ",
+    "sugar_glider": "フクロモモンガ",
+    "sugar glider": "フクロモモンガ",
+    "degu": "デグー",
+    "bird": "鳥",
+    "parakeet": "インコ",
+    "parrot": "オウム",
+    "reptile": "爬虫類",
+    "tortoise": "リクガメ",
+    "snake": "ヘビ",
+    "lizard": "トカゲ",
+    "amphibian": "両生類",
+    "fish": "魚",
+    "exotic_other": "その他",
+    "exotic other": "その他",
+}
+_SPECIES_LABEL_JA.update({k.title(): v for k, v in list(_SPECIES_LABEL_JA.items())})
+_SPECIES_LABEL_JA["Guinea Pig"] = "モルモット"
+_SPECIES_LABEL_JA["Sugar Glider"] = "フクロモモンガ"
+_SPECIES_LABEL_JA["Exotic Other"] = "その他"
+
+
 def _generate_fallback_content(disease: Dict[str, Any], species: str) -> Dict[str, str]:
     """Generate fallback content fields from the disease's existing description/name."""
     name = disease.get("name", "")
@@ -235,6 +270,10 @@ def _generate_fallback_content(disease: Dict[str, Any], species: str) -> Dict[st
     urgency = disease.get("urgency", "moderate")
 
     urgency_ja = {"emergency": "緊急", "high": "高", "moderate": "中等度", "low": "軽度"}.get(urgency, "中等度")
+
+    # Japanese species label — never leak the English code/display name into the
+    # Japanese fallback text.
+    species_ja = _SPECIES_LABEL_JA.get(species) or _SPECIES_LABEL_JA.get(species.lower(), species)
 
     content: Dict[str, str] = {}
 
@@ -278,7 +317,7 @@ def _generate_fallback_content(disease: Dict[str, Any], species: str) -> Dict[st
     if not disease.get("treatment_ja"):
         content["treatment_ja"] = (
             f"{name_ja}の治療は原因への対処、支持療法、および種に適した治療介入を含む。"
-            f"重症度: {urgency_ja}。{species}の診療経験のある獣医師への相談が推奨される。"
+            f"重症度: {urgency_ja}。{species_ja}の診療経験のある獣医師への相談が推奨される。"
         )
     if not disease.get("prevention"):
         content["prevention"] = (
