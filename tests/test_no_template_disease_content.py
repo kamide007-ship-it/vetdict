@@ -1829,3 +1829,129 @@ def test_served_db_no_english_species_in_japanese_fields():
         f"Found {len(offenders)} English species names in served-DB JA fields. First 8:\n"
         + "\n".join(f"  {n}.{f}" for n, f in offenders[:8])
     )
+
+
+# ---------------------------------------------------------------------------
+# Prognosis: disease-specific (no category-catalogue dumping, no clinically
+# wrong benign-curable line on malignancies). June-2026 session — see CLAUDE.md.
+# ---------------------------------------------------------------------------
+
+# Tumours whose name marks them as a malignancy. The benign-tumour-is-curable
+# prognosis line is clinically wrong for these and must never appear.
+_MALIGNANT_NAME_MARKERS_JA = ("リンパ腫", "白血病", "肉腫", "腺癌", "扁平上皮癌", "骨髄腫", "悪性")
+_MALIGNANT_NAME_MARKERS_EN = (
+    "lymphoma",
+    "leukemia",
+    "leukaemia",
+    "sarcoma",
+    "carcinoma",
+    "myeloma",
+    "malignant",
+)
+_BENIGN_CURABLE_JA = "良性腫瘍は完全切除により治癒"
+_BENIGN_CURABLE_EN = "Benign tumors carry an excellent prognosis with complete excision"
+
+
+def test_malignant_tumor_prognosis_not_benign_curable():
+    """A lymphoma/sarcoma/carcinoma must not carry the benign-curable prognosis.
+
+    The legacy generator dumped the whole neoplasia catalogue — opening with
+    "良性腫瘍は完全切除により治癒が期待できる" / "Benign tumors carry an
+    excellent prognosis with complete excision" — onto every tumour, including
+    systemic malignancies that surgery cannot cure. A reviewing clinician spots
+    this immediately.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    offenders = []
+    for e in entries:
+        name_ja = e.get("name_ja") or ""
+        name_en = (e.get("name") or "").lower()
+        prog_ja = e.get("prognosis_ja") or ""
+        prog_en = e.get("prognosis") or ""
+        if any(m in name_ja for m in _MALIGNANT_NAME_MARKERS_JA) and _BENIGN_CURABLE_JA in prog_ja:
+            offenders.append((name_ja, "prognosis_ja"))
+        if any(m in name_en for m in _MALIGNANT_NAME_MARKERS_EN) and _BENIGN_CURABLE_EN in prog_en:
+            offenders.append((e.get("name"), "prognosis"))
+    assert not offenders, (
+        f"{len(offenders)} malignant tumours carry the benign-curable prognosis line. First 8:\n"
+        + "\n".join(f"  {n}.{f}" for n, f in offenders[:8])
+    )
+
+
+def test_lymphoma_prognosis_is_systemic_not_surgical():
+    """Lymphoma prognosis must describe systemic/chemotherapy management."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    lymphomas = [
+        e for e in entries if "リンパ腫" in (e.get("name_ja") or "") or "lymphoma" in (e.get("name") or "").lower()
+    ]
+    if not lymphomas:
+        pytest.skip("no lymphoma entries")
+    bad = []
+    for e in lymphomas:
+        pja = e.get("prognosis_ja") or ""
+        if pja and not any(kw in pja for kw in ("化学療法", "全身", "寛解")):
+            bad.append((e.get("name_ja"), pja[:60]))
+    assert not bad, "Lymphoma prognosis_ja not describing systemic/chemo management. First 5:\n" + "\n".join(
+        f"  {n}: {t}" for n, t in bad[:5]
+    )
+
+
+def test_prognosis_en_meets_uniqueness_threshold():
+    """English prognosis must be ≥70% unique.
+
+    It previously shipped as a single category paragraph reused verbatim across
+    thousands of diseases (one neoplasia paragraph on 800+ tumours), i.e. ~2%
+    unique — an obvious generic-content tell on the public English site.
+    """
+    from collections import Counter
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    texts = [(e.get("prognosis", "") or "").strip() for e in entries]
+    nonempty = [t for t in texts if len(t) >= 50]
+    if len(nonempty) < 100:
+        pytest.skip("not enough English prognosis text")
+    cnt = Counter(nonempty)
+    pct = 100.0 * sum(1 for c in cnt.values() if c == 1) / len(nonempty)
+    top_text, top_count = cnt.most_common(1)[0]
+    assert pct >= 70.0, (
+        f"English prognosis only {pct:.1f}% unique (need ≥70%). "
+        f"Worst offender: '{top_text[:80]}…' shared by {top_count} entries."
+    )
+
+
+def test_prognosis_not_category_catalogue_dump():
+    """A single disease's prognosis must not enumerate several unrelated diseases.
+
+    The old generator emitted a whole category 'textbook chapter' (e.g. a GI
+    disease's prognosis listing GDV survival, IBD, lymphoma and megacolon) on
+    every member. Those multi-disease enumeration markers must not co-occur on
+    one disease's prognosis_ja.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    # Marker pairs that only co-occur in a catalogue dump, never in a single
+    # disease's genuine prognosis.
+    catalogue_markers = [
+        ("GDV（犬）: 早期手術で生存率80%以上", "IBD"),
+        ("特発性てんかん:", "椎間板疾患:"),
+        ("白内障: 外科的水晶体摘出術", "緑内障:"),
+        ("子宮蓋膿症:", "乳腺腫瘍:"),
+        ("単純骨折:", "靭帯損傷:"),
+    ]
+    offenders = []
+    for e in entries:
+        p = e.get("prognosis_ja") or ""
+        for a, b in catalogue_markers:
+            if a in p and b in p:
+                offenders.append((e.get("name_ja"), a))
+                break
+    assert not offenders, f"{len(offenders)} prognoses are category-catalogue dumps. First 8:\n" + "\n".join(
+        f"  {n}: has '{a}'" for n, a in offenders[:8]
+    )
