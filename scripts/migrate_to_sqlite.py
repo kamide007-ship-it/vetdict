@@ -1177,6 +1177,7 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
 
     fields = [
         "prognosis_ja",
+        "prognosis",
         "causes_ja",
         "pathophysiology_ja",
         "prevention_ja",

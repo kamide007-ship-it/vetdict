@@ -2297,9 +2297,330 @@ def gen_prevention_ja(category: str, name_ja: str, species: str) -> str:
     )
 
 
+def _neoplasia_subtype(name_ja: str) -> str:
+    """Classify a tumour from its Japanese name into a prognostic subtype.
+
+    Order matters: malignant suffixes (肉腫 / 癌) must be tested before the
+    benign ones (腫) because e.g. 血管肉腫 contains 腫 and 骨肉腫 contains 腫.
+    """
+    n = name_ja or ""
+    if "良性" in n:
+        return "benign"
+    if any(k in n for k in ("リンパ腫", "リンパ肉腫", "白血病", "骨髄腫", "形質細胞腫")):
+        return "lymphoid"
+    if "肥満細胞腫" in n:
+        return "mast_cell"
+    if any(k in n for k in ("黒色腫", "メラノーマ")):
+        return "melanoma"
+    if "肉腫" in n:  # 血管肉腫・骨肉腫・線維肉腫・軟骨肉腫・横紋筋肉腫…
+        return "sarcoma"
+    if "癌" in n or "carcinoma" in n.lower():  # 腺癌・扁平上皮癌・移行上皮癌…
+        return "carcinoma"
+    # A generic "<organ>腫瘍" / "tumour" name is unspecified: classify it as such
+    # *before* the benign check so e.g. 甲状腺腫瘍 / 乳腺腫瘍 are not mis-read as
+    # adenomas via the spurious 腺腫 substring (甲状[腺腫]瘍).
+    if "腫瘍" in n or "新生物" in n or "tumor" in n.lower() or "neoplas" in n.lower():
+        return "unspecified"
+    # Benign neoplasms: adenoma(腺腫)/lipoma(脂肪腫)/papilloma(乳頭腫)/cyst(嚢胞)…
+    if any(
+        k in n
+        for k in (
+            "脂肪腫",
+            "腺腫",
+            "乳頭腫",
+            "嚢胞",
+            "組織球腫",
+            "線維腫",
+            "血管腫",
+            "平滑筋腫",
+            "軟骨腫",
+            "ポリープ",
+            "母斑",
+            "色素細胞腫",
+        )
+    ):
+        return "benign"
+    return "unspecified"
+
+
+_NEOPLASIA_PROGNOSIS: dict[str, str] = {
+    "benign": (
+        "は良性腫瘍で、外科的完全切除により治癒が期待でき予後は良好。"
+        "切除困難な部位・高齢・基礎疾患で麻酔リスクが高い場合は経過観察も選択肢となる。"
+        "不完全切除では局所再発がありうるため切除マージンの病理評価が望ましい。"
+        "急速な増大・出血・潰瘍化を認める場合は悪性転化を疑い再評価する。"
+    ),
+    "lymphoid": (
+        "は全身性に進展する造血器腫瘍であり外科的治癒は困難。"
+        "多剤併用化学療法（CHOP系等）が治療の主体で、寛解導入により生存期間の延長が期待できる。"
+        "完全寛解率・寛解期間・生存期間は病型・免疫表現型（B/T細胞）・臨床ステージにより異なる。"
+        "再発例では救援プロトコルを検討する。猫ではFeLV/FIV感染が予後を悪化させる。"
+        "無治療では進行性で予後不良。"
+    ),
+    "mast_cell": (
+        "の予後は組織学的グレード（Patnaik/Kiupel分類）・c-kit変異・臨床ステージにより層別化される。"
+        "低悪性度・完全切除例は予後良好。"
+        "高悪性度・転移例では予後不良で、外科＋放射線±チロシンキナーゼ阻害薬（トセラニブ等）の集学的治療を要する。"
+        "脱顆粒による全身症状（胃十二指腸潰瘍・凝固異常）の管理も予後に影響する。"
+    ),
+    "melanoma": (
+        "の予後は発生部位と組織学的悪性度に強く依存する。"
+        "口腔・爪床メラノーマは悪性度が高く転移率が高い一方、皮膚（被毛部）メラノーマの多くは良性挙動を示す。"
+        "外科的広範切除が基本で、悪性例では所属リンパ節・遠隔転移評価と補助療法（放射線・免疫療法）を検討する。"
+    ),
+    "carcinoma": (
+        "は上皮性悪性腫瘍で、臨床ステージ・組織学的グレード・切除マージン・転移の有無が予後を規定する。"
+        "早期・限局例は外科的広範切除で良好な予後が得られるが、浸潤・転移例では予後不良。"
+        "完全切除が難しい部位では放射線療法・化学療法を併用する集学的治療を検討する。"
+    ),
+    "sarcoma": (
+        "は間葉系悪性腫瘍で、局所浸潤性が高く広範切除でも局所再発しやすい。"
+        "組織学的グレードと切除マージンが予後を左右し、不完全切除例では放射線療法の追加が再発抑制に有効。"
+        "高悪性度・転移例（特に血管肉腫）は予後不良で、化学療法の併用を検討する。"
+    ),
+    "unspecified": (
+        "の予後は組織型・悪性度・臨床ステージ・転移の有無・治療反応性により大きく異なる。"
+        "確定診断（細胞診・病理組織検査）と病期診断（画像・所属リンパ節評価）に基づき、"
+        "外科・化学療法・放射線療法を組み合わせた治療方針を決定する。"
+        "早期診断・早期介入が予後改善の鍵となる。"
+    ),
+}
+
+
+# Enumerated-catalog categories: instead of dumping every sub-disease's
+# prognosis on every member (a "textbook chapter" that reads as generic
+# template content), pick the clause whose keywords match THIS disease's name.
+# Each entry is (keywords, clause-without-prefix). Clause text is reused from
+# the previously vetted category catalogue, so no new medical claim is made —
+# only the relevant statement is selected. ``None`` keywords = category lead.
+_PROGNOSIS_CATALOG: dict[str, tuple[tuple[tuple[str, ...], str], ...]] = {
+    "endocrine_metabolic": (
+        (
+            ("糖尿", "diabet"),
+            "の予後は早期診断・適切なインスリン療法・食事管理により管理可能で、猫では20-40%が寛解を達成しうる。",
+        ),
+        (
+            ("甲状腺機能亢進", "hyperthyroid"),
+            "の予後はI-131治療で治癒可能（猫95%以上）、メチマゾール内服でも長期管理良好。",
+        ),
+        (
+            ("甲状腺機能低下", "hypothyroid"),
+            "の予後はレボチロキシン補充により良好で、適切な用量調整で寿命に近い予後が期待できる。",
+        ),
+        (
+            ("クッシング", "副腎皮質機能亢進", "cushing"),
+            "の予後はトリロスタン・ミトタンによる症状制御で中央生存2年以上が期待できる。",
+        ),
+        (
+            ("アジソン", "副腎皮質機能低下", "addison"),
+            "の予後は適切な鉱質・糖質コルチコイド補充療法により寿命に近い良好な予後。",
+        ),
+        (
+            ("インスリノーマ", "insulinoma"),
+            "の予後は外科的切除で無症状期間の延長が可能だが、多くは進行性で内科管理（プレドニゾロン・ジアゾキシド）を要する。",
+        ),
+        (
+            ("上皮小体", "副甲状腺", "parathyroid"),
+            "の予後は原因（原発性・腎性・栄養性）により異なり、原因是正とカルシウム・リン管理で多くは改善する。",
+        ),
+    ),
+    "renal_urinary": (
+        (
+            ("慢性腎", "CKD", "腎不全"),
+            "の予後はIRISステージと進行速度により異なり、早期（ステージ2）は腎臓食・降圧・低リン療法で中央生存3年以上、進行例（ステージ3-4）は数週〜2年。",
+        ),
+        (("急性腎", "AKI"), "の予後は原因除去と早期介入により可逆性があり、乏尿・無尿の遷延例では予後不良。"),
+        (
+            ("膀胱炎", "FLUTD", "FIC", "特発性膀胱"),
+            "の予後は自然寛解率が約50%だが再発も多く、ストレス・環境・飲水管理で長期予後が改善する。",
+        ),
+        (
+            ("尿石", "結石", "urolith"),
+            "の予後は結石組成に応じた溶解食・外科的摘出で良好だが、食事・飲水管理を怠ると再発する。",
+        ),
+        (
+            ("尿路感染", "膀胱感染", "UTI"),
+            "の予後は培養感受性に基づく適切な抗菌薬で治癒率が高く、基礎疾患の管理が再発予防の鍵。",
+        ),
+        (
+            ("尿閉", "尿道閉塞", "obstruction"),
+            "の予後は閉塞解除の迅速さに依存し、緊急対応で良好、遅延例では急性腎障害・高K血症で致死的となりうる。",
+        ),
+    ),
+    "cardiac": (
+        (
+            ("肥大型心筋症", "HCM"),
+            "の予後は症状発現後の中央生存が約1.3年（猫）で、動脈血栓塞栓症（FATE）の併発が予後を悪化させる。",
+        ),
+        (("拡張型心筋症", "DCM"), "の予後は基礎疾患として予後不良で、特にドーベルマンでは突然死リスクが高い。"),
+        (
+            ("僧帽弁", "弁膜症", "粘液腫様"),
+            "の予後は代償期は数年以上良好だが、心不全発症後はACE阻害薬・利尿薬・ピモベンダンで中央生存1-2年程度。",
+        ),
+        (("動脈血栓", "FATE", "血栓塞栓"), "の予後は急性期生存率が約30-50%と低く、再発予防（抗血栓療法）が重要。"),
+        (
+            ("動脈管開存", "心室中隔", "心房中隔", "ファロー", "先天性心"),
+            "の予後は欠損の種類・大きさによるが、早期の外科的・カテーテル治療で良好となりうる。",
+        ),
+        (("心不全", "うっ血"), "の予後は進行度により異なり、早期は薬物療法で1-2年以上、末期は数ヶ月。"),
+    ),
+    "respiratory_other": (
+        (("短頭種", "軟口蓋"), "の予後は外科的気道形成術（軟口蓋切除・鼻孔形成）で良好。"),
+        (
+            ("気管虚脱",),
+            "の予後は内科的管理（鎮咳・抗炎症・体重管理）で長期管理可能、重度例では気管ステントを検討する。",
+        ),
+        (("喉頭麻痺",), "の予後は片側披裂軟骨側方化術で良好。"),
+        (("喘息", "気管支"), "の予後は適切なステロイド・気管支拡張薬とアレルゲン回避により長期管理可能。"),
+        (
+            ("肺炎", "誤嚥"),
+            "の予後は原因と重症度により異なり、早期の抗菌薬・支持療法で多くは回復するが、重症例は予後注意。",
+        ),
+        (("肺水腫", "胸水", "膿胸", "気胸"), "の予後は原因疾患の管理と排液・酸素療法により左右される。"),
+    ),
+    "gastrointestinal": (
+        (("拡張", "捻転", "GDV", "鼓脹"), "の予後は早期手術で生存率80%以上、診断・整復の遅延で急速に悪化する。"),
+        (
+            ("うっ滞", "stasis", "イレウス", "鼓腸"),
+            "の予後は早期介入で良好だが、草食動物では遷延すると致死的となりうる。",
+        ),
+        (("炎症性腸", "IBD"), "の予後は食事療法・免疫抑制療法で長期管理可能だが、生涯治療を要することが多い。"),
+        (
+            ("リンパ腫", "腺癌", "消化器腫瘍"),
+            "の予後は組織型により異なり、リンパ腫は化学療法で寛解可能だが腺癌・肉腫は予後不良。",
+        ),
+        (("膵炎",), "の予後は軽症例は支持療法で良好だが、重症・壊死性では全身性合併症により予後不良となりうる。"),
+        (
+            ("巨大結腸", "便秘", "宿便"),
+            "の予後は内科管理（食事・緩下剤・摘便）で管理可能だが、難治例では外科的結腸亜全摘を検討する。",
+        ),
+        (
+            ("肝", "胆管", "胆嚢"),
+            "の予後は基礎病態と肝予備能により異なり、早期介入で可逆的だが線維化進行例は予後注意。",
+        ),
+    ),
+    "neurological": (
+        (
+            ("てんかん", "発作", "痙攣"),
+            "の予後は抗てんかん薬による発作管理で多くは寿命に近い予後だが、難治性では生活の質の低下を伴う。",
+        ),
+        (
+            ("椎間板", "IVDD", "脊髄"),
+            "の予後は神経学的重症度により異なり、深部痛覚が温存されていれば外科的予後良好、消失例は予後不良。",
+        ),
+        (("脳炎", "髄膜"), "の予後は病因により異なり、自己免疫性は免疫抑制で寛解可能、感染性は病原体により異なる。"),
+        (("脳腫瘍", "腫瘍"), "の予後は外科切除・放射線療法で延命可能だが、部位・組織型により制限される。"),
+        (
+            ("認知機能", "認知症"),
+            "の予後は進行性だが、薬物・サプリメント・環境エンリッチメントで進行遅延とQOL改善が可能。",
+        ),
+        (("前庭", "斜頸"), "の予後は末梢性（特発性）は数週で改善することが多く良好、中枢性は原因により異なる。"),
+        (("水頭症",), "の予後は重症度により異なり、内科的減圧・外科的シャント術で管理しうる。"),
+    ),
+    "ophthalmic": (
+        (
+            ("角膜潰瘍", "角膜"),
+            "の予後は早期治療で良好だが、感染性深層潰瘍は穿孔リスクがあり眼科専門医への紹介を要する。",
+        ),
+        (("白内障",), "の予後は外科的水晶体乳化吸引術で視力回復が可能。"),
+        (("緑内障",), "の予後は急性期治療で視覚温存が可能だが、慢性期は視覚消失が多く義眼・眼球摘出となる。"),
+        (("網膜",), "の予後は早期復位・原因治療で視覚温存が可能な場合がある。"),
+        (("ぶどう膜炎", "虹彩"), "の予後は基礎疾患の治療により決定される。"),
+        (("結膜炎", "眼瞼", "流涙"), "の予後は原因に応じた治療で概ね良好。"),
+    ),
+    "musculoskeletal": (
+        (("骨折",), "の予後は部位・粉砕度に応じた整復・固定で良好だが、開放骨折・感染併発例は治癒が遷延する。"),
+        (
+            ("変形性関節", "OA", "関節症"),
+            "の予後は進行性だが、体重管理・運動療法・NSAID・関節保護で長期に良好なQOLを維持しうる。",
+        ),
+        (("十字靭帯", "靭帯", "膝蓋骨"), "の予後は外科的整復（TPLO・TTA・側方制動術）で良好。"),
+        (("股関節形成", "肘異形成", "発達性"), "の予後は軽度は内科管理、重度は外科介入（人工股関節等）で改善する。"),
+        (("椎間板", "脊椎"), "の予後は神経学的重症度と治療時期により決定される。"),
+        (("骨髄炎", "感染"), "の予後は起因菌に応じた長期抗菌薬と外科的デブリードマンで管理する。"),
+    ),
+    "dermatological": (
+        (("アトピー", "アレルギー"), "の予後は根治は困難だが、環境・薬物・減感作療法による長期管理で症状制御が可能。"),
+        (("膿皮症", "細菌"), "の予後は適切な抗菌薬で良好、基礎疾患の管理が再発予防の鍵。"),
+        (("皮膚糸状菌", "真菌"), "の予後は抗真菌薬で治癒可能（通常4-12週）。"),
+        (("天疱瘡", "自己免疫", "エリテマトーデス"), "の予後は免疫抑制療法で寛解可能だが、長期維持療法を要する。"),
+        (
+            ("疥癬", "ニキビダニ", "毛包虫", "ダニ", "寄生"),
+            "の予後は適切な駆虫薬で良好だが、基礎免疫状態が経過に影響する。",
+        ),
+        (("膿瘍", "蜂窩織"), "の予後は排膿・洗浄と抗菌薬で良好。"),
+    ),
+    "hematological": (
+        (
+            ("免疫介在性溶血", "IMHA", "自己免疫性溶血"),
+            "の予後は急性期死亡率20-50%だが、免疫抑制療法に反応した長期生存例は良好。",
+        ),
+        (("血小板減少", "IMTP", "ITP"), "の予後は適切な免疫抑制療法で多くは良好。"),
+        (("貧血",), "の予後は基礎疾患（FeLV・FIV・CKD・出血等）により左右される。"),
+        (("失血", "出血"), "の予後は早期止血と輸血で生存可能。"),
+        (("凝固", "DIC", "血友病"), "の予後は原因（抗凝固殺鼠剤中毒・肝不全・DIC）により異なる。"),
+    ),
+    "reproductive": (
+        (("子宮蓄膿", "子宮蓄膿症", "pyometra"), "の予後は卵巣子宮全摘術で良好、早期診断が鍵。"),
+        (("乳腺炎",), "の予後は抗菌薬・支持療法で良好。"),
+        (("難産", "帝王切開"), "の予後は早期診断（必要時は緊急帝王切開）で母子ともに良好。"),
+        (("子癇", "妊娠中毒", "周産期"), "の予後は早期治療で良好、遅延で致死的となりうる。"),
+        (("前立腺",), "の予後は良性過形成は去勢で良好、前立腺癌は診断時進行例が多く予後不良。"),
+        (("乳腺腫瘍", "乳腺腫"), "の予後は早期完全切除で良好、悪性度に応じて化学療法を併用する。"),
+        (("精巣", "卵巣", "停留"), "の予後は外科的摘出で良好。"),
+    ),
+    "dental": (
+        (("歯周",), "の予後は早期スケーリングと適切な口腔ケアで進行を抑制できる。"),
+        (("歯根膿瘍", "根尖"), "の予後は抜歯・根管治療で治癒可能。"),
+        (("不正咬合", "過長歯"), "の予後は定期的歯科処置（4-6週毎）で長期管理可能だが、咬合の根本的矯正は困難。"),
+        (("口腔腫瘍", "扁平上皮"), "の予後は良性は完全切除で治癒、悪性（扁平上皮癌等）は予後不良。"),
+        (("吸収病巣", "破歯細胞"), "の予後は罹患歯の抜歯により疼痛は解消するが、進行を止める内科治療はない。"),
+    ),
+}
+
+
+# Category-specific prognostic determinants for the no-keyword-match fallback,
+# so the general statement reflects the organ system rather than reading
+# identically across cardiac / GI / musculoskeletal / etc.
+_CATALOG_FALLBACK: dict[str, str] = {
+    "endocrine_metabolic": "ホルモン・代謝異常の種類と是正の可否、合併症の有無",
+    "renal_urinary": "腎機能・尿路病変の重症度と進行速度",
+    "cardiac": "基礎心疾患の種類と心不全の進行度",
+    "respiratory_other": "気道・肺病変の部位と重症度、基礎疾患",
+    "gastrointestinal": "原因病態・脱水と電解質異常の程度・治療開始時期",
+    "neurological": "病因と神経学的重症度（特に深部痛覚の有無）",
+    "ophthalmic": "病変の部位・進行度と治療開始時期、視覚温存の可否",
+    "musculoskeletal": "罹患部位・損傷の重症度と治療法",
+    "dental": "病変の進行度と早期介入の可否",
+    "dermatological": "原因（アレルギー性・感染性・自己免疫性）と慢性度",
+    "hematological": "基礎病態と貧血・出血・凝固異常の重症度",
+    "reproductive": "病態と治療時期、緊急性の有無",
+}
+
+
 def gen_prognosis_ja(category: str, name_ja: str, species: str) -> str:
     sp_ja = SPECIES_JA.get(species, species)
     prefix = _disease_prefix(name_ja, sp_ja)
+
+    if category == "neoplasia":
+        subtype = _neoplasia_subtype(name_ja)
+        return prefix + _NEOPLASIA_PROGNOSIS[subtype]
+
+    catalog = _PROGNOSIS_CATALOG.get(category)
+    if catalog:
+        name_l = (name_ja or "").lower()
+        for keywords, clause in catalog:
+            if any(k.lower() in name_l for k in keywords):
+                return prefix + clause
+        # No sub-type keyword matched: emit a concise, honest statement framed by
+        # the *category's* key prognostic determinants (so a navicular case reads
+        # differently from an arrhythmia) rather than dumping the full catalogue.
+        lead = _CATALOG_FALLBACK.get(category, "基礎病態・重症度・治療開始時期")
+        return (
+            f"{prefix}の予後は{lead}により異なる。"
+            f"早期診断と病態に応じた適切な治療・モニタリングにより多くの症例で良好な経過が期待できるが、"
+            f"進行例・合併症を伴う例では予後が悪化しうる。"
+        )
 
     if category in ("viral_infection", "bacterial_infection", "respiratory_infection", "fungal_infection"):
         return (
@@ -2314,123 +2635,6 @@ def gen_prognosis_ja(category: str, name_ja: str, species: str) -> str:
             f"早期発見と適切な駆虫薬投与により多くの寄生虫症は良好な予後だが、重度感染・心血管寄生虫・血液寄生虫では治療反応が遅延する。"
             f"再感染予防のための環境管理・媒介動物制御の継続が長期予後を左右する。"
             f"免疫不全状態では治療抵抗性となるため、基礎疾患管理も並行する。"
-        )
-    if category == "neoplasia":
-        return (
-            f"{prefix}の予後は腫瘍の種類・組織学的悪性度・臨床ステージ・転移の有無・治療反応性により大きく異なる。"
-            f"良性腫瘍は完全切除により治癒が期待できる。"
-            f"悪性腫瘍では早期発見・早期介入が生存期間を有意に延長させる。"
-            f"不完全切除・高悪性度腫瘍では再発・転移リスクが高く、定期的経過観察と追加治療検討が必要。"
-            f"集学的治療（外科＋化学療法＋放射線療法）により単独治療より生存期間延長が期待できる場合がある。"
-        )
-    if category == "endocrine_metabolic":
-        return (
-            f"{prefix}の予後は適切な治療と継続的モニタリングにより多くの場合良好に管理可能。"
-            f"糖尿病: 早期診断・適切なインスリン療法・食事管理により猫では20-40%が寛解達成可能。"
-            f"甲状腺機能亢進症: I-131治療は治癒可能（猫95%以上）、メチマゾール内服も長期管理良好。"
-            f"クッシング症候群: トリロスタン・ミトタンによる症状制御で中央生存2年以上。"
-            f"アジソン病: 適切な補充療法で寿命に近い予後。"
-        )
-    if category == "renal_urinary":
-        return (
-            f"{prefix}の予後はIRISステージと進行速度により異なる。"
-            f"早期CKD（ステージ2）: 適切な管理（腎臓食・降圧療法・低リン療法）で中央生存3年以上。"
-            f"進行CKD（ステージ3-4）: 中央生存数週〜2年。"
-            f"FLUTD/FIC: 自然寛解率約50%だが再発率も高い、ストレス管理で長期予後改善。"
-            f"尿路感染: 適切な抗菌薬で治癒率高い。"
-            f"急性腎障害: 早期介入で可逆性、原因除去後の腎機能回復可能。"
-        )
-    if category == "cardiac":
-        return (
-            f"{prefix}の予後は基礎心疾患の種類と心不全の進行度により異なる。"
-            f"代償期: 適切な管理で長期予後良好（数年以上）。"
-            f"早期心不全: 薬物療法（ACE阻害薬・利尿薬・ピモベンダン）で中央生存1-2年以上。"
-            f"末期心不全: 中央生存数ヶ月。"
-            f"DCM（ドーベルマン）は予後不良、HCM（猫）は症状発現後の中央生存約1.3年。"
-            f"FATE（猫）: 急性期生存率約30-50%、再発予防が重要。"
-        )
-    if category == "respiratory_other":
-        return (
-            f"{prefix}の予後は基礎疾患により異なる。"
-            f"短頭種気道症候群: 外科的気道形成術（軟口蓋切除・鼻孔形成）で良好予後。"
-            f"気管虚脱: 内科的管理（鎮咳・抗炎症）で長期管理可能、重度では気管ステント検討。"
-            f"喉頭麻痺: 片側披裂軟骨側方化術で良好予後。"
-            f"猫喘息: 適切なステロイド・気管支拡張剤で長期管理可能。"
-            f"アレルゲン回避と環境管理が長期予後を左右する。"
-        )
-    if category == "gastrointestinal":
-        return (
-            f"{prefix}の予後は原因病態により異なる。"
-            f"急性感染性: 適切な支持療法で多くは良好予後。"
-            f"IBD: 食事療法・免疫抑制療法で長期管理可能、生涯治療が必要なことが多い。"
-            f"消化器腫瘍: リンパ腫は化学療法で寛解可能だが、その他の腺癌・肉腫は予後不良。"
-            f"GDV（犬）: 早期手術で生存率80%以上、診断遅延で予後悪化。"
-            f"GI stasis（草食動物）: 早期介入で良好予後、遅延で致死的。"
-        )
-    if category == "neurological":
-        return (
-            f"{prefix}の予後は病因により大きく異なる。"
-            f"特発性てんかん: 抗痙攣薬で発作頻度低下、寿命に近い予後。"
-            f"椎間板疾患: 早期手術で良好回復、深部痛覚消失例は予後不良。"
-            f"脳炎: 自己免疫性は免疫抑制で寛解可能、感染性は病原体により異なる。"
-            f"脳腫瘍: 外科切除可能例は予後改善、放射線療法併用で中央生存延長。"
-            f"認知機能不全: 進行性だが薬物・サプリで進行遅延可能。"
-        )
-    if category == "ophthalmic":
-        return (
-            f"{prefix}の予後は病態の進行度と治療開始時期により異なる。"
-            f"角膜潰瘍: 早期治療で良好予後、感染性深層潰瘍は穿孔リスクで眼科専門医紹介。"
-            f"白内障: 外科的水晶体摘出術で視力回復可能。"
-            f"緑内障: 急性期治療で視覚温存可能、慢性期は視覚消失多く義眼または眼球摘出。"
-            f"網膜剥離: 早期復位手術で視覚温存可能。"
-            f"ぶどう膜炎: 原因治療で予後決定。"
-        )
-    if category == "musculoskeletal":
-        return (
-            f"{prefix}の予後は損傷部位・重症度・治療法により異なる。"
-            f"単純骨折: 適切な整復・固定で良好予後。"
-            f"複雑骨折: プレート固定・専門医対応で良好予後。"
-            f"OA: 進行性だが体重管理・運動療法・NSAID等で長期管理可能。"
-            f"靭帯損傷: TPLO・TTA・側方制動術で良好予後（犬の十字靭帯）。"
-            f"発達性疾患: 軽度は内科管理、重度は外科介入（人工股関節等）。"
-        )
-    if category == "dental":
-        return (
-            f"{prefix}の予後は早期介入により概ね良好。"
-            f"歯周病: 早期スケーリング・適切な口腔ケアで進行抑制。"
-            f"歯根膿瘍: 抜歯・根管治療で治癒可能。"
-            f"不正咬合（草食動物）: 定期的な歯科処置（4-6週毎）で長期管理可能、咬合関係の根本的矯正は困難。"
-            f"口腔腫瘍: 良性は完全切除で治癒、悪性（扁平上皮癌）は予後不良。"
-            f"重度歯科疾患は全身状態（栄養・敗血症）に影響するため早期介入が重要。"
-        )
-    if category == "dermatological":
-        return (
-            f"{prefix}の予後は原因により異なる。"
-            f"急性アレルギー: 原因除去で良好予後。"
-            f"慢性アトピー性皮膚炎: 長期管理（環境・薬物・免疫療法）で症状制御可能、根治は困難。"
-            f"細菌性膿皮症: 適切な抗菌薬で良好予後、基礎疾患管理が再発予防の鍵。"
-            f"皮膚糸状菌症: 抗真菌薬で治癒可能（4-12週）。"
-            f"自己免疫性皮膚疾患: 免疫抑制療法で寛解可能、長期維持療法が必要。"
-        )
-    if category == "hematological":
-        return (
-            f"{prefix}の予後は基礎病態により異なる。"
-            f"IMHA: 急性期死亡率20-50%、長期生存例は良好予後。"
-            f"IMTP: 適切な免疫抑制療法で多くは良好予後。"
-            f"非再生性貧血: 基礎疾患（FeLV・FIV・CKD等）の予後に依存。"
-            f"急性失血: 早期止血と輸血で生存可能。"
-            f"凝固障害: 原因（抗凝固殺鼠剤・肝不全・DIC）により異なる。"
-            f"血液腫瘍は他章参照。"
-        )
-    if category == "reproductive":
-        return (
-            f"{prefix}の予後は病態と治療時期により異なる。"
-            f"子宮蓋膿症: 卵巣子宮全摘術で良好予後、早期診断が鍵。"
-            f"乳腺炎: 抗菌薬・支持療法で良好予後。"
-            f"難産: 早期診断（緊急帝王切開含む）で良好予後。"
-            f"妊娠中毒症: 早期治療で良好予後、遅延で致死的。"
-            f"前立腺癌: 予後不良、診断時に既に進行例多い。"
-            f"乳腺腫瘍: 早期完全切除で良好予後、悪性度に応じて化学療法併用。"
         )
     if category == "toxicity":
         return (
@@ -2482,6 +2686,465 @@ def gen_prognosis_ja(category: str, name_ja: str, species: str) -> str:
         f"継続的なモニタリングと飼育環境管理が長期予後改善に重要である。"
         f"重症例・進行例・基礎疾患合併例では予後が悪化することがある。"
     )
+
+
+def _neoplasia_subtype_en(name_en: str) -> str:
+    """English-name counterpart of ``_neoplasia_subtype``."""
+    n = (name_en or "").lower()
+    if "benign" in n:
+        return "benign"
+    if any(k in n for k in ("lymphoma", "leukemia", "leukaemia", "myeloma", "plasmacytoma", "lymphosarcoma")):
+        return "lymphoid"
+    if "mast cell" in n or "mastocytoma" in n:
+        return "mast_cell"
+    if "melanoma" in n:
+        return "melanoma"
+    if "sarcoma" in n:
+        return "sarcoma"
+    if "carcinoma" in n:
+        return "carcinoma"
+    if any(k in n for k in ("tumor", "tumour", "neoplas", "mass", "cancer")):
+        return "unspecified"
+    if any(
+        k in n for k in ("adenoma", "lipoma", "papilloma", "cyst", "histiocytoma", "fibroma", "hemangioma", "polyp")
+    ):
+        return "benign"
+    return "unspecified"
+
+
+_NEOPLASIA_PROGNOSIS_EN: dict[str, str] = {
+    "benign": (
+        " is a benign neoplasm: complete surgical excision is usually curative and the prognosis is good. "
+        "Observation is reasonable when the location, age or comorbidities make anaesthesia high-risk. "
+        "Incomplete excision can recur locally, so histopathological margin assessment is advised, and "
+        "rapid enlargement, ulceration or bleeding warrants re-evaluation for malignant transformation."
+    ),
+    "lymphoid": (
+        " is a systemic haematopoietic malignancy that is not cured by surgery. "
+        "Multi-agent chemotherapy (CHOP-based protocols) is the mainstay; remission induction can extend survival. "
+        "Remission rate, remission duration and survival vary with subtype, immunophenotype (B/T cell) and clinical stage. "
+        "Rescue protocols are considered at relapse, and FeLV/FIV co-infection worsens the prognosis in cats. "
+        "Untreated disease is progressive with a poor outcome."
+    ),
+    "mast_cell": (
+        " carries a prognosis stratified by histological grade (Patnaik/Kiupel), c-kit mutation status and clinical stage. "
+        "Low-grade, completely excised tumours have a good prognosis. "
+        "High-grade or metastatic disease has a guarded prognosis and warrants multimodal therapy "
+        "(surgery + radiation ± tyrosine-kinase inhibitors such as toceranib). "
+        "Management of degranulation-related systemic signs (gastroduodenal ulceration) also affects outcome."
+    ),
+    "melanoma": (
+        " has a prognosis that depends strongly on anatomic site and histological grade. "
+        "Oral and subungual melanomas are highly malignant with a high metastatic rate, whereas most haired-skin "
+        "melanomas behave benignly. Wide surgical excision is the basis of treatment, and malignant cases warrant "
+        "regional lymph-node and distant-metastasis staging with adjunctive therapy (radiation, immunotherapy)."
+    ),
+    "carcinoma": (
+        " is an epithelial malignancy whose prognosis is governed by clinical stage, histological grade, surgical "
+        "margins and the presence of metastasis. Early, localised disease can do well after wide excision, while "
+        "invasive or metastatic disease carries a poor prognosis. Where complete excision is not feasible, multimodal "
+        "therapy combining radiation and chemotherapy is considered."
+    ),
+    "sarcoma": (
+        " is a mesenchymal malignancy that is locally invasive and prone to local recurrence even after wide excision. "
+        "Histological grade and surgical margins drive the prognosis; adjunctive radiation reduces recurrence after "
+        "incomplete excision. High-grade or metastatic disease (notably haemangiosarcoma) has a poor prognosis and "
+        "chemotherapy is considered."
+    ),
+    "unspecified": (
+        " has a prognosis that varies widely with tumour type, grade, clinical stage, presence of metastasis and "
+        "treatment response. A definitive diagnosis (cytology, histopathology) and staging (imaging, regional "
+        "lymph-node assessment) guide a treatment plan combining surgery, chemotherapy and radiation. "
+        "Early diagnosis and intervention are key to an improved outcome."
+    ),
+}
+
+
+_PROGNOSIS_CATALOG_EN: dict[str, tuple[tuple[tuple[str, ...], str], ...]] = {
+    "endocrine_metabolic": (
+        (
+            ("diabet",),
+            "'s prognosis is favourable with early diagnosis, appropriate insulin therapy and dietary management; up to 20-40% of cats achieve remission.",
+        ),
+        (
+            ("hyperthyroid",),
+            "'s prognosis is excellent — I-131 is curative in over 95% of cats and methimazole gives good long-term control.",
+        ),
+        (
+            ("hypothyroid",),
+            "'s prognosis is good with levothyroxine supplementation and dose titration, approaching a normal lifespan.",
+        ),
+        (
+            ("cushing", "hyperadrenocortic"),
+            "'s prognosis is reasonable, with trilostane or mitotane control giving median survival over 2 years.",
+        ),
+        (
+            ("addison", "hypoadrenocortic"),
+            "'s prognosis is excellent with appropriate mineralocorticoid/glucocorticoid replacement, approaching a normal lifespan.",
+        ),
+        (
+            ("insulinoma",),
+            "'s prognosis is improved by surgery, but most cases are progressive and require medical management (prednisolone, diazoxide).",
+        ),
+        (
+            ("parathyroid",),
+            "'s prognosis depends on the cause (primary, renal, nutritional); most improve with correction of the cause and calcium/phosphorus management.",
+        ),
+    ),
+    "renal_urinary": (
+        (
+            ("chronic kidney", "chronic renal", "ckd"),
+            "'s prognosis depends on IRIS stage and rate of progression — early disease can have median survival over 3 years with renal diet and supportive care, advanced disease weeks to 2 years.",
+        ),
+        (
+            ("acute kidney", "acute renal", "aki"),
+            "'s prognosis is potentially reversible with early intervention and removal of the cause; persistent oliguria/anuria carries a poor prognosis.",
+        ),
+        (
+            ("cystitis", "flutd", "fic", "idiopathic"),
+            "'s prognosis includes a roughly 50% spontaneous remission rate but frequent recurrence; stress, environmental and water-intake management improve long-term outcome.",
+        ),
+        (
+            ("urolith", "stone", "calculi"),
+            "'s prognosis is good with composition-appropriate dissolution diets or surgical removal, but recurs without ongoing dietary and water management.",
+        ),
+        (
+            ("urinary tract infection", "uti", "bacteriuria"),
+            "'s prognosis is good with culture-guided antimicrobials; management of underlying disease is key to preventing recurrence.",
+        ),
+        (
+            ("obstruction", "blocked"),
+            "'s prognosis depends on how rapidly the obstruction is relieved — good with prompt management, but delay risks fatal acute kidney injury and hyperkalaemia.",
+        ),
+    ),
+    "cardiac": (
+        (
+            ("hypertrophic", "hcm"),
+            "'s prognosis after onset of signs is a median survival of about 1.3 years in cats, worsened by arterial thromboembolism (FATE).",
+        ),
+        (("dilated", "dcm"), "'s prognosis is guarded, with a high risk of sudden death, particularly in Dobermans."),
+        (
+            ("mitral", "valv", "myxomatous", "endocardiosis"),
+            "'s prognosis is good for years in the compensated phase; after heart failure, ACE inhibitors, diuretics and pimobendan give a median survival of 1-2 years.",
+        ),
+        (
+            ("thromboembolism", "fate", "aortic thrombo"),
+            "'s prognosis is guarded, with an acute survival rate of about 30-50%; antithrombotic prophylaxis is important.",
+        ),
+        (
+            ("patent ductus", "septal defect", "tetralogy", "congenital"),
+            "'s prognosis varies with the defect, but early surgical or catheter-based correction can give a good outcome.",
+        ),
+        (
+            ("heart failure", "congestive"),
+            "'s prognosis depends on stage — early disease has 1-2+ years with medical therapy, end-stage a few months.",
+        ),
+    ),
+    "respiratory_other": (
+        (
+            ("brachycephalic", "soft palate"),
+            "'s prognosis is good after surgical airway correction (soft-palate resection, nares widening).",
+        ),
+        (
+            ("tracheal collapse",),
+            "'s prognosis allows long-term medical management (antitussives, anti-inflammatories, weight control); a tracheal stent is considered in severe cases.",
+        ),
+        (("laryngeal paralysis",), "'s prognosis is good after unilateral arytenoid lateralisation."),
+        (
+            ("asthma", "bronch"),
+            "'s prognosis allows long-term control with appropriate corticosteroids, bronchodilators and allergen avoidance.",
+        ),
+        (
+            ("pneumonia", "aspiration"),
+            "'s prognosis varies with cause and severity — most recover with early antimicrobials and supportive care, but severe cases are guarded.",
+        ),
+        (
+            ("pulmonary oedema", "pleural effusion", "pyothorax", "pneumothorax"),
+            "'s prognosis is governed by management of the underlying disease together with drainage and oxygen therapy.",
+        ),
+    ),
+    "gastrointestinal": (
+        (
+            ("dilatation", "volvulus", "gdv", "bloat"),
+            "'s prognosis is over 80% survival with early surgery, deteriorating rapidly with delayed decompression.",
+        ),
+        (
+            ("stasis", "ileus"),
+            "'s prognosis is good with early intervention but can be fatal in herbivores if it persists.",
+        ),
+        (
+            ("inflammatory bowel", "ibd"),
+            "'s prognosis allows long-term control with dietary and immunosuppressive therapy, though lifelong treatment is often required.",
+        ),
+        (
+            ("lymphoma", "adenocarcinoma", "gastrointestinal tumor", "gi tumor"),
+            "'s prognosis varies with histology — lymphoma can achieve remission with chemotherapy, but adenocarcinoma and sarcoma are poor.",
+        ),
+        (
+            ("pancreatitis",),
+            "'s prognosis is good for mild cases with supportive care, but severe or necrotising disease carries a guarded prognosis from systemic complications.",
+        ),
+        (
+            ("megacolon", "constipation", "obstipation"),
+            "'s prognosis allows medical management (diet, laxatives, deobstipation), with subtotal colectomy considered for refractory cases.",
+        ),
+        (
+            ("hepat", "liver", "cholang", "gallbladder"),
+            "'s prognosis depends on the underlying disease and hepatic reserve — reversible with early intervention, but guarded once fibrosis is advanced.",
+        ),
+    ),
+    "neurological": (
+        (
+            ("epilep", "seizure"),
+            "'s prognosis with anti-seizure medication is good (near-normal lifespan) in many cases, though refractory disease reduces quality of life.",
+        ),
+        (
+            ("intervertebral", "ivdd", "disc", "spinal cord"),
+            "'s prognosis depends on neurological severity — good surgical outcome when deep pain is preserved, poor when it is absent.",
+        ),
+        (
+            ("encephalitis", "meningitis", "meningo"),
+            "'s prognosis depends on the cause — autoimmune forms can remit with immunosuppression, infectious forms vary with the pathogen.",
+        ),
+        (
+            ("brain tumor", "brain tumour", "tumor", "tumour"),
+            "'s prognosis can be extended with surgery and radiation, but is limited by location and histology.",
+        ),
+        (
+            ("cognitive", "dementia"),
+            "'s prognosis is progressive, but medication, supplements and environmental enrichment can slow progression and improve quality of life.",
+        ),
+        (
+            ("vestibular", "head tilt", "torticollis"),
+            "'s prognosis is good for peripheral (idiopathic) disease, which often improves within weeks; central disease varies with the cause.",
+        ),
+        (
+            ("hydrocephalus",),
+            "'s prognosis varies with severity and can be managed with medical decompression or surgical shunting.",
+        ),
+    ),
+    "ophthalmic": (
+        (
+            ("corneal ulcer", "cornea"),
+            "'s prognosis is good with early treatment, but infected deep ulcers risk perforation and warrant ophthalmology referral.",
+        ),
+        (("cataract",), "'s prognosis allows vision restoration with phacoemulsification surgery."),
+        (
+            ("glaucoma",),
+            "'s prognosis allows vision preservation with acute treatment, but chronic disease often loses vision, requiring a prosthesis or enucleation.",
+        ),
+        (("retina", "retinal"), "'s prognosis can preserve vision with early reattachment and treatment of the cause."),
+        (("uveitis", "iris"), "'s prognosis is determined by treatment of the underlying disease."),
+        (("conjunctivitis", "eyelid", "epiphora"), "'s prognosis is generally good with cause-directed treatment."),
+    ),
+    "musculoskeletal": (
+        (
+            ("fracture",),
+            "'s prognosis is good with site- and configuration-appropriate reduction and fixation, though open or infected fractures heal more slowly.",
+        ),
+        (
+            ("osteoarthritis", " oa", "degenerative joint"),
+            "'s prognosis is progressive but a good quality of life is sustainable long-term with weight control, physiotherapy, NSAIDs and joint protection.",
+        ),
+        (
+            ("cruciate", "ligament", "patellar luxation"),
+            "'s prognosis is good after surgical stabilisation (TPLO, TTA, lateral suture).",
+        ),
+        (
+            ("hip dysplasia", "elbow dysplasia", "developmental"),
+            "'s prognosis is good — mild disease is managed medically, severe disease with surgery (e.g. total hip replacement).",
+        ),
+        (("intervertebral", "spinal"), "'s prognosis is determined by neurological severity and timing of treatment."),
+        (
+            ("osteomyelitis", "infection"),
+            "'s prognosis depends on long-term pathogen-directed antimicrobials and surgical debridement.",
+        ),
+    ),
+    "dermatological": (
+        (
+            ("atopic", "allergy", "allergic"),
+            "'s prognosis is not curative but allows symptom control through long-term environmental, pharmacological and desensitisation management.",
+        ),
+        (
+            ("pyoderma", "bacterial"),
+            "'s prognosis is good with appropriate antimicrobials; management of underlying disease is key to preventing recurrence.",
+        ),
+        (
+            ("dermatophyt", "ringworm", "fungal"),
+            "'s prognosis is good — antifungal therapy is usually curative (typically 4-12 weeks).",
+        ),
+        (
+            ("pemphigus", "autoimmune", "lupus"),
+            "'s prognosis allows remission with immunosuppression, but long-term maintenance therapy is required.",
+        ),
+        (
+            ("mange", "demodic", "sarcoptic", "mite", "parasit"),
+            "'s prognosis is good with appropriate antiparasitics, though underlying immune status affects the course.",
+        ),
+        (("abscess", "cellulitis"), "'s prognosis is good with drainage, lavage and antimicrobials."),
+    ),
+    "hematological": (
+        (
+            ("immune-mediated hemolytic", "imha", "autoimmune hemolytic"),
+            "'s prognosis has an acute mortality of 20-50%, but long-term survivors do well after immunosuppression.",
+        ),
+        (
+            ("thrombocytopenia", "itp", "imtp"),
+            "'s prognosis is good in most cases with appropriate immunosuppressive therapy.",
+        ),
+        (("anemia", "anaemia"), "'s prognosis depends on the underlying disease (FeLV, FIV, CKD, haemorrhage)."),
+        (
+            ("blood loss", "hemorrhage", "haemorrhage"),
+            "'s prognosis allows survival with early haemostasis and transfusion.",
+        ),
+        (
+            ("coagulopathy", "dic", "hemophilia"),
+            "'s prognosis depends on the cause (anticoagulant rodenticide toxicity, hepatic failure, DIC).",
+        ),
+    ),
+    "reproductive": (
+        (("pyometra",), "'s prognosis is good with ovariohysterectomy; early diagnosis is key."),
+        (("mastitis",), "'s prognosis is good with antimicrobials and supportive care."),
+        (
+            ("dystocia", "cesarean", "caesarean"),
+            "'s prognosis is good for dam and offspring with early diagnosis (emergency caesarean when indicated).",
+        ),
+        (
+            ("eclampsia", "toxemia", "toxaemia"),
+            "'s prognosis is good with early treatment but can be fatal if delayed.",
+        ),
+        (
+            ("prostat",),
+            "'s prognosis is good for benign hyperplasia after castration, but prostatic carcinoma is poor (often advanced at diagnosis).",
+        ),
+        (
+            ("mammary tumor", "mammary tumour"),
+            "'s prognosis is good with early complete excision, with chemotherapy added according to grade.",
+        ),
+        (("testic", "ovari", "retained", "cryptorchid"), "'s prognosis is good after surgical removal."),
+    ),
+    "dental": (
+        (
+            ("periodont", "gingivit"),
+            "'s prognosis allows arrest of progression with early scaling and appropriate oral care.",
+        ),
+        (
+            ("tooth root abscess", "apical", "endodontic"),
+            "'s prognosis allows cure with extraction or root-canal therapy.",
+        ),
+        (
+            ("malocclusion", "overgrown", "elongated crown"),
+            "'s prognosis allows long-term management with regular dental procedures (every 4-6 weeks), though definitive occlusal correction is difficult.",
+        ),
+        (
+            ("oral tumor", "oral tumour", "squamous"),
+            "'s prognosis is good for benign masses after complete excision, but malignant disease (e.g. squamous cell carcinoma) is poor.",
+        ),
+        (
+            ("resorpt",),
+            "'s prognosis: extraction of the affected tooth resolves the pain, but there is no medical treatment to halt progression.",
+        ),
+    ),
+}
+
+
+_CATALOG_FALLBACK_EN: dict[str, str] = {
+    "endocrine_metabolic": "the type of hormonal/metabolic derangement, whether it can be corrected, and the presence of complications",
+    "renal_urinary": "the severity and rate of progression of the renal or urinary-tract disease",
+    "cardiac": "the type of underlying cardiac disease and the stage of heart failure",
+    "respiratory_other": "the site and severity of the airway or lung disease and any underlying condition",
+    "gastrointestinal": "the underlying disease, the degree of dehydration and electrolyte derangement, and treatment timing",
+    "neurological": "the cause and neurological severity (particularly the presence of deep pain)",
+    "ophthalmic": "the location and progression of the lesion, treatment timing, and whether vision can be preserved",
+    "musculoskeletal": "the site and severity of the injury and the treatment used",
+    "dental": "the progression of the lesion and the availability of early intervention",
+    "dermatological": "the cause (allergic, infectious or autoimmune) and chronicity",
+    "hematological": "the underlying disease and the severity of anaemia, bleeding or coagulopathy",
+    "reproductive": "the disease process, treatment timing and urgency",
+}
+
+# English general-statement category paragraphs (faithful to the JA bodies).
+_PROGNOSIS_GENERAL_EN: dict[str, str] = {
+    "infection": (
+        "'s prognosis varies widely with pathogen virulence, host immune status, treatment timing and "
+        "any underlying disease. Most infections do well with early diagnosis and appropriate "
+        "antimicrobial and supportive therapy. Immunosuppressed, very young, geriatric or "
+        "multi-organ-failure cases can have a guarded prognosis. Recurrence, chronicity and "
+        "antimicrobial resistance are also important prognostic factors."
+    ),
+    "parasitic": (
+        "'s prognosis varies with the parasite species, burden, host immune status and treatment "
+        "response. Most parasitic disease does well with early detection and appropriate "
+        "antiparasitics, but heavy, cardiovascular or blood-borne infections respond more slowly. "
+        "Ongoing environmental and vector management is key to long-term outcome, and concurrent "
+        "management of underlying disease is needed when the host is immunocompromised."
+    ),
+    "toxicity": (
+        "'s prognosis depends heavily on the toxin, the dose, the time from exposure to treatment and "
+        "the degree of organ injury. Most acute intoxications do well with early decontamination "
+        "(emesis, gastric lavage, activated charcoal) and aggressive supportive care. Severe cases "
+        "with hepatic necrosis or renal failure carry a guarded prognosis, and chronic intoxication "
+        "may cause irreversible organ damage. Early use of a specific antidote, where one exists "
+        "(N-acetylcysteine, vitamin K1, chelators), greatly improves the outcome."
+    ),
+    "trauma": (
+        "'s prognosis varies with the site, severity and timing of treatment. Simple fractures and "
+        "minor lacerations do well with appropriate treatment; polytrauma is survivable with early "
+        "stabilisation and staged repair; severe visceral injury is survivable with emergency surgery "
+        "but fatal if diagnosis is delayed. Brain and spinal injury have a neurological prognosis set "
+        "by injury severity and treatment timing, and severe shock is survivable with early intervention."
+    ),
+    "autoimmune": (
+        "'s prognosis varies with the affected organ, treatment response and control of relapses. "
+        "Appropriate immunosuppression controls the acute phase (with disease-dependent early "
+        "mortality), and long-term immunosuppressive therapy maintains remission. Relapses are managed "
+        "by adjusting therapy, though repeated relapses can become treatment-resistant. Management of "
+        "secondary complications (infection, thrombosis, drug side-effects) governs long-term outcome."
+    ),
+    "nutritional": (
+        "'s prognosis is good in most cases once the underlying nutrient imbalance is corrected. Most "
+        "clinical signs are reversible with early dietary correction and supplementation, though "
+        "developmental or organ damage from severe chronic malnutrition may be irreversible. Owner "
+        "education to prevent recurrence is key to long-term outcome."
+    ),
+    "behavioral": (
+        "'s prognosis is improvable with an integrated approach of behaviour modification, environmental "
+        "management and medication. Many cases improve with early intervention, and severe cases "
+        "benefit from concurrent pharmacotherapy; concurrent medical disease must be managed first."
+    ),
+    "generic": (
+        "'s prognosis varies with the underlying disease process, treatment timing and any comorbidity. "
+        "Early diagnosis and appropriate intervention give a good outcome in many cases, while severe, "
+        "advanced or complicated cases can do worse. Ongoing monitoring supports long-term outcome."
+    ),
+}
+
+
+def gen_prognosis_en(category: str, name_en: str, species: str) -> str:
+    """English counterpart of ``gen_prognosis_ja`` (disease-specific prognosis)."""
+    sp_en = SPECIES_EN.get(species, species)
+    prefix = _disease_prefix_en(name_en, sp_en)
+
+    if category == "neoplasia":
+        return prefix + _NEOPLASIA_PROGNOSIS_EN[_neoplasia_subtype_en(name_en)]
+
+    catalog = _PROGNOSIS_CATALOG_EN.get(category)
+    if catalog:
+        name_l = (name_en or "").lower()
+        for keywords, clause in catalog:
+            if any(k in name_l for k in keywords):
+                return prefix + clause
+        lead = _CATALOG_FALLBACK_EN.get(category, "the underlying disease process, its severity and treatment timing")
+        return (
+            f"{prefix}'s prognosis varies with {lead}. Early diagnosis and disease-appropriate treatment "
+            f"and monitoring give a good outcome in many cases, while advanced or complicated cases can do worse."
+        )
+
+    if category in ("viral_infection", "bacterial_infection", "respiratory_infection", "fungal_infection"):
+        return prefix + _PROGNOSIS_GENERAL_EN["infection"]
+    if category in _PROGNOSIS_GENERAL_EN:
+        return prefix + _PROGNOSIS_GENERAL_EN[category]
+    return prefix + _PROGNOSIS_GENERAL_EN["generic"]
 
 
 def gen_pathophysiology_ja(category: str, name_ja: str, species: str) -> str:
@@ -3268,6 +3931,10 @@ def generate_clinical_fields(
             continue
         if field == "diagnosis":
             result[field] = gen_diagnosis(category, name_en, species)
+            continue
+        # English prognosis embeds the English disease name and is disease-specific.
+        if field == "prognosis":
+            result[field] = gen_prognosis_en(category, name_en, species)
             continue
         gen = GENERATORS.get(field)
         if gen is None:
