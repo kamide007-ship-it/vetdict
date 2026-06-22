@@ -1955,3 +1955,129 @@ def test_prognosis_not_category_catalogue_dump():
     assert not offenders, f"{len(offenders)} prognoses are category-catalogue dumps. First 8:\n" + "\n".join(
         f"  {n}: has '{a}'" for n, a in offenders[:8]
     )
+
+
+# ---------------------------------------------------------------------------
+# 2026-06 phase-4 regression — name-interpolated category templates
+# ---------------------------------------------------------------------------
+#
+# Prior elimination passes deduped only by *exact* string, but the category
+# generators slot the disease name + species into a fixed paragraph, so every
+# disease of a category shared a byte-identical prevention/prognosis once the
+# name was normalised out. ``compose_grounded_prevention_ja`` /
+# ``compose_grounded_prognosis_ja`` append a clause built from each record's own
+# curated presenting signs, so the surveillance / monitoring targets differ
+# per disease. These tests lock that in.
+
+
+def test_grounded_prevention_composer_differentiates_by_signs():
+    from scripts.template_elimination.clinical_fields_generator import (
+        compose_grounded_prevention_ja,
+    )
+
+    base = "チンチラにおけるXの予防は、種に適した飼育環境の整備が基本となる。"
+    a = compose_grounded_prevention_ja(base, ["よだれ", "濡れた顎", "食欲不振"])
+    b = compose_grounded_prevention_ja(base, ["皮下腫瘤", "緩徐に増大する腫瘤", "軟らかい腫瘤"])
+    # Both keep the vetted base but diverge on disease-specific surveillance.
+    assert a.startswith(base) and b.startswith(base)
+    assert a != b
+    assert "よだれ" in a and "皮下腫瘤" in b
+    # Too few signs => unchanged (no fabricated clause).
+    assert compose_grounded_prevention_ja(base, ["元気消失"]) == base.strip()
+    assert compose_grounded_prevention_ja(base, []) == base.strip()
+
+
+def test_grounded_prognosis_composer_differentiates_by_signs():
+    from scripts.template_elimination.clinical_fields_generator import (
+        compose_grounded_prognosis_ja,
+    )
+
+    base = "犬におけるXの予後は治療開始時期により異なる。"
+    a = compose_grounded_prognosis_ja(base, ["痙攣", "呼吸困難", "こわばり"])
+    b = compose_grounded_prognosis_ja(base, ["黄疸", "腹水", "体重減少"])
+    assert a.startswith(base) and b.startswith(base)
+    assert a != b
+    assert "痙攣" in a and "黄疸" in b
+    # Idempotent: re-running must not stack a second monitoring clause.
+    assert compose_grounded_prognosis_ja(a, ["痙攣", "呼吸困難", "こわばり"]) == a
+    assert compose_grounded_prognosis_ja(base, ["疼痛"]) == base.strip()
+
+
+def _served_db_path():
+    try:
+        from api.database import DB_PATH
+
+        return Path(DB_PATH)
+    except Exception:
+        return ROOT / "instance" / "vetdict.db"
+
+
+def _served_db_ready(path: Path) -> bool:
+    if not path.exists():
+        return False
+    try:
+        import sqlite3
+
+        conn = sqlite3.connect(str(path))
+        ok = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='diseases'").fetchone()
+        conn.close()
+        return bool(ok)
+    except Exception:
+        return False
+
+
+def _templated_ratio(conn, field: str) -> tuple[int, int]:
+    """Return (templated_entries, total) where templated == identical-modulo-name
+    shared by >=5 records spanning >=5 distinct base disease names."""
+    import collections
+    import re as _re
+
+    paren = _re.compile(r"[（(][^（）()]*[）)]")
+    rows = conn.execute(f"SELECT name_ja, {field} FROM diseases WHERE {field} IS NOT NULL AND {field} != ''").fetchall()
+    groups = collections.defaultdict(list)
+    for nm, val in rows:
+        nm = nm or ""
+        base = paren.sub("", nm).strip()
+        key = val or ""
+        for x in (nm, base):
+            if x:
+                key = key.replace(x, "※")
+        groups[key].append(base or "∅")
+    templated = sum(len(names) for names in groups.values() if len(names) >= 5 and len(set(names)) >= 5)
+    return templated, len(rows)
+
+
+def test_served_db_prevention_not_mostly_templated():
+    """The served DB's prevention_ja must be predominantly disease-specific."""
+    import sqlite3
+
+    path = _served_db_path()
+    if not _served_db_ready(path):
+        pytest.skip("served DB not built — run scripts/migrate_to_sqlite.py first")
+    conn = sqlite3.connect(str(path))
+    try:
+        templated, total = _templated_ratio(conn, "prevention_ja")
+    finally:
+        conn.close()
+    ratio = templated / total if total else 0
+    assert ratio < 0.30, (
+        f"prevention_ja is {ratio:.0%} name-interpolated template ({templated}/{total}); grounding regressed."
+    )
+
+
+def test_served_db_prognosis_not_mostly_templated():
+    """The served DB's prognosis_ja must be predominantly disease-specific."""
+    import sqlite3
+
+    path = _served_db_path()
+    if not _served_db_ready(path):
+        pytest.skip("served DB not built — run scripts/migrate_to_sqlite.py first")
+    conn = sqlite3.connect(str(path))
+    try:
+        templated, total = _templated_ratio(conn, "prognosis_ja")
+    finally:
+        conn.close()
+    ratio = templated / total if total else 0
+    assert ratio < 0.30, (
+        f"prognosis_ja is {ratio:.0%} name-interpolated template ({templated}/{total}); grounding regressed."
+    )

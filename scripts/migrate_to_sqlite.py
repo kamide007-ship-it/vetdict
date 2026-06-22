@@ -1302,6 +1302,111 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
     return counts
 
 
+def ground_templated_fields_with_signs(conn) -> dict[str, int]:
+    """Make templated prevention_ja / prognosis_ja disease-specific via own signs.
+
+    ``regenerate_cross_disease_templates`` only replaces *exact* duplicates, and
+    its replacement generators are keyed on (species, category) — so prevention
+    and prognosis text stays byte-identical across every disease of a category
+    once the disease name is normalised out. A clinician opening several diseases
+    of a species sees the identical paragraph, the classic "generic AI" tell.
+
+    This pass keeps the vetted category base but appends a disease-specific
+    clause built from the record's *own* curated presenting signs (resolved to
+    Japanese): prevention gets early-detection surveillance targets, prognosis
+    gets treatment-response monitoring targets. Only entries whose text is shared
+    verbatim (modulo disease name) by >= ``MIN_SHARE`` records spanning >=
+    ``MIN_NAMES`` distinct disease names are grounded; genuinely unique/curated
+    text is left untouched. It only restates signs already on the record, so no
+    new medical claim is introduced.
+    """
+    import json as _json
+    import re as _re
+    from collections import defaultdict
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        compose_grounded_prevention_ja,
+        compose_grounded_prognosis_ja,
+    )
+
+    try:
+        from api.health_checker import _get_species_symptom_names
+    except ImportError:
+        from health_checker import _get_species_symptom_names  # type: ignore
+
+    _cjk = _re.compile(r"[぀-ヿ㐀-鿿]")
+    _paren = _re.compile(r"[（(][^（）()]*[）)]\s*$")
+    MIN_LEN = 20
+    MIN_SHARE = 3
+    MIN_NAMES = 3
+
+    composers = {
+        "prevention_ja": compose_grounded_prevention_ja,
+        "prognosis_ja": compose_grounded_prognosis_ja,
+    }
+
+    def _base(name: str) -> str:
+        return _paren.sub("", name or "").strip()
+
+    _signs_cache: dict[int, list[str]] = {}
+
+    def _signs(row) -> list[str]:
+        if row["id"] in _signs_cache:
+            return _signs_cache[row["id"]]
+        try:
+            ids = _json.loads(row["symptoms"] or "[]")
+        except (ValueError, TypeError):
+            ids = []
+        lut = _get_species_symptom_names((row["species"] or "").lower())
+        out: list[str] = []
+        for sid in ids:
+            entry = lut.get(sid)
+            ja = entry.get("ja") if isinstance(entry, dict) else None
+            if ja and _cjk.search(ja) and ja not in out:
+                out.append(ja)
+        _signs_cache[row["id"]] = out
+        return out
+
+    def _strip_name(text: str, name_ja: str, name: str) -> str:
+        for nm in (name_ja, _base(name_ja), name, _base(name)):
+            if nm:
+                text = text.replace(nm, "※")
+        return text
+
+    fields = list(composers)
+    rows = conn.execute(
+        "SELECT id, species, name, name_ja, symptoms, " + ", ".join(fields) + " FROM diseases"
+    ).fetchall()
+
+    counts = {f: 0 for f in fields}
+    for field in fields:
+        groups: dict[str, list] = defaultdict(list)
+        for row in rows:
+            val = (row[field] or "").strip()
+            if val and len(val) >= MIN_LEN:
+                key = _strip_name(val, row["name_ja"] or "", row["name"] or "")
+                groups[key].append(row)
+        templated_ids = {
+            r["id"]
+            for items in groups.values()
+            if len(items) >= MIN_SHARE and len({_base(r["name_ja"] or r["name"]) for r in items}) >= MIN_NAMES
+            for r in items
+        }
+        compose = composers[field]
+        for row in rows:
+            if row["id"] not in templated_ids:
+                continue
+            new = compose(row[field] or "", _signs(row))
+            if new and new != (row[field] or "").strip():
+                conn.execute(
+                    f"UPDATE diseases SET {field} = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                    (new, row["id"]),
+                )
+                counts[field] += 1
+    return counts
+
+
 def localize_english_species_in_served_db(conn) -> int:
     """Replace English species placeholders that leaked into Japanese DB fields.
 
@@ -1394,6 +1499,13 @@ def main(db_path: str | None = None):
         regen_stats = regenerate_cross_disease_templates(conn)
         for field, n in regen_stats.items():
             print(f"  → {field}: {n} regenerated")
+
+        # Ground templated prevention/prognosis text on each disease's own
+        # presenting signs so surveillance/monitoring targets differ per disease.
+        print("\n[enrichment] grounding templated prevention/prognosis on disease signs...")
+        ground_stats = ground_templated_fields_with_signs(conn)
+        for field, n in ground_stats.items():
+            print(f"  → {field}: {n} grounded with disease-specific signs")
 
         # Localise any English species placeholders that leaked into JA fields.
         print("\n[enrichment] localising English species names in Japanese fields...")

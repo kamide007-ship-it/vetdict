@@ -1029,6 +1029,48 @@ JSONオーバーレイが届かないPythonモジュール専用エントリ（�
 - 再現手順: `eliminate_generic_descriptions.py --apply` → `fix_english_species_in_ja.py --apply` → `migrate_to_sqlite.py` → `build_disease_search_index.py`
 
 ### 残課題（次セッション候補）
-- treatment_ja の構造的カテゴリテンプレート約1,007件（腫瘍学・中毒等は医学的に妥当な汎用ガイダンス。ただし permethrin中毒→駆虫薬テンプレ等のごく少数の誤カテゴリは要修正）
-- causes_ja / prognosis_ja の構造的カテゴリテンプレート（医療的に機微なため、キュレート/獣医レビュー前提での慎重な対応が必要）
+- treatment_ja の構造的カテゴリテンプレート約915件（腫瘍学・中毒等は医学的に妥当な汎用ガイダンス。ただし permethrin中毒→駆虫薬テンプレ等のごく少数の誤カテゴリは要修正）
+- causes_ja（74%）/ pathophysiology_ja（51%）の構造的カテゴリテンプレート（病因・機序フィールドは徴候グラウンディングが不自然で、無典拠の疾患別生成は捏造リスク。キュレート/獣医レビュー前提での慎重な対応が必要）
 - 合成的なクロスカテゴリ疾患名（例「心血管系行動障害」）のデータモデル整理
+
+## 2026-06セッション（第5弾: 名前差し込み型カテゴリテンプレートの撲滅 — prevention/prognosis グラウンディング）
+
+### 背景: 完全一致dedupをすり抜ける「名前差し込み型」テンプレート（再発）
+過去の撲滅パスは**完全一致文字列**でのみ重複判定していたため、カテゴリ生成器（`gen_prevention_ja` 等）が疾患名＋種名を固定段落に差し込んで作る文は、**疾患名を正規化除去すると全く同一**だった。配信DB実測（7,094疾患、name正規化後の identical-modulo-name ≥5共有）:
+| フィールド | Before | 内容 |
+|---|---|---|
+| prevention_ja | **87%（6,188件）** | 「予防は種に適した飼育環境…定期健診が基本」を疾患名だけ変えて全件共有 |
+| prognosis_ja | **58%（4,091件）** | カテゴリ別予後段落を疾患名差し込みで共有 |
+| causes_ja | 74% | 病因機序段落（機序フィールド、グラウンディング不自然のため今回は対象外） |
+| pathophysiology_ja | 51% | 同上 |
+- `regenerate_cross_disease_templates()` は exact重複のみ検出→`gen_prevention_ja`（=同じ名前差し込み生成器）で置換していたため、exact重複を modulo-name重複に変換していただけだった。
+
+### グラウンディング型 prevention / prognosis（配信DBビルド時パス）
+description のグラウンディング（第4弾）と同じ哲学を、最も顕著かつ安全な2フィールドに適用:
+- `clinical_fields_generator.py` に追加:
+  - `compose_grounded_prevention_ja(base, signs)` — カテゴリ別予防ベース（既存の獣医監修済み内容）を保持しつつ、**その疾患自身の主訴**（`symptoms` を `health_checker._get_species_symptom_names` で日本語解決）を早期発見サーベイランス標的として付加
+  - `compose_grounded_prognosis_ja(base, signs)` — 同様に、主訴の推移を治療反応・重症度の指標として付加（経過モニタリングは実臨床の標準）
+- `migrate_to_sqlite.py` に `ground_templated_fields_with_signs(conn)` を追加（`localize_*` 同様の配信DBビルド時sweep）:
+  - identical-modulo-name で ≥3件 × ≥3疾患名 共有のテンプレートのみ対象（キュレート/固有テキストは温存）
+  - 各疾患の `symptoms` を日本語徴候に解決し、各フィールドにグラウンディング句を付加
+  - **既存の確定データ（その疾患の徴候）の言い換えのみ**で新たな医学的主張をしない（安全）。病因・機序フィールドには適用しない（徴候は原因ではないため）
+- 例（チンチラ）: 流涎症→「…定期健診が基本。早期発見には顎の被毛固着・体重減少・食欲不振・よだれ等の変化を見逃さず…」／脂肪腫→「…早期発見には皮下腫瘤・緩徐に増大する腫瘤等…」（同種同カテゴリでも徴候で分化）
+
+### 効果（配信SQLite実測、7,094疾患）
+| フィールド | Before | After | Δ |
+|---|---|---|---|
+| prevention_ja identical-modulo-name(≥5) | 87% | **11%** | -76pt（6,509件グラウンディング） |
+| prognosis_ja identical-modulo-name(≥5) | 58% | **5%** | -53pt（4,648件グラウンディング） |
+- 残存分は「徴候2個未満で句を付加できない」エントリのみ（捏造しない設計）
+
+### 回帰テスト追加（tests/test_no_template_disease_content.py、+4件）
+- `test_grounded_prevention_composer_differentiates_by_signs` — 異なる徴候集合で異なる出力＋徴候不足時は無改変
+- `test_grounded_prognosis_composer_differentiates_by_signs` — 同上＋冪等性（モニタリング句を二重付加しない）
+- `test_served_db_prevention_not_mostly_templated` — 配信DBの prevention_ja テンプレ率 <30%
+- `test_served_db_prognosis_not_mostly_templated` — 配信DBの prognosis_ja テンプレ率 <30%
+
+### テスト・CI
+- フルテストスイート: **3,398件合格**（34 skip）
+- ruff check: 全変更ファイルで通過
+- ServiceWorker: `CACHE_NAME` v80 → **v81**
+- 再現手順: `migrate_to_sqlite.py`（grounding は配信DBビルドに統合済み）→ `build_disease_search_index.py`
