@@ -3846,6 +3846,61 @@ def compose_grounded_description(
     return " ".join(parts)
 
 
+# The category prevention generators (``gen_prevention_ja`` / ``_prevention_*``)
+# produce husbandry + category guidance keyed only on (species, category), so
+# every disease of one category for a species shares a byte-identical paragraph
+# once the disease name is normalised out. That reads as boilerplate when a
+# clinician opens several diseases in a row.
+#
+# ``compose_grounded_prevention_ja`` keeps that vetted category/husbandry base
+# (which is genuinely correct) but appends a surveillance clause built from the
+# *disease's own* curated presenting signs, so the early-detection targets differ
+# disease-to-disease. It only restates signs already stored on the record, adding
+# no new medical claims, and is the prevention analogue of
+# ``compose_grounded_description_ja``.
+
+
+def compose_grounded_prevention_ja(base_text: str, sign_names_ja: list[str]) -> str:
+    """Append a disease-specific early-detection clause to category prevention.
+
+    ``base_text`` is the category/husbandry prevention paragraph; ``sign_names_ja``
+    are the record's own presenting signs (Japanese). Returns ``base_text``
+    unchanged when there are too few usable signs to add value.
+    """
+    base = (base_text or "").strip()
+    # Use signs not already named in the base, so the clause adds information.
+    fresh = [s for s in sign_names_ja if s and s not in base]
+    signs = _join_ja(fresh or sign_names_ja, 4)
+    if not signs or signs.count("・") < 1:
+        # Need at least two distinct signs for a meaningful surveillance list.
+        return base
+    clause = f"早期発見には{signs}などの変化を見逃さず、異常時は速やかに受診することが重要。"
+    if clause in base:
+        return base
+    return f"{base}{clause}"
+
+
+def compose_grounded_prognosis_ja(base_text: str, sign_names_ja: list[str]) -> str:
+    """Append a disease-specific monitoring clause to category prognosis.
+
+    The category prognosis paragraph is shared across every disease of a
+    category. Tracking the trajectory of a patient's own presenting signs to
+    gauge treatment response is routine clinical practice, so appending the
+    record's curated signs as monitoring targets makes the prognosis vary
+    per disease without adding any unverified medical claim. Returns
+    ``base_text`` unchanged when there are too few usable signs.
+    """
+    base = (base_text or "").strip()
+    fresh = [s for s in sign_names_ja if s and s not in base]
+    signs = _join_ja(fresh or sign_names_ja, 4)
+    if not signs or signs.count("・") < 1:
+        return base
+    clause = f"経過中は{signs}などの推移を指標に重症度と治療反応を評価する。"
+    if clause in base or "の推移を指標に" in base:
+        return base
+    return f"{base}{clause}"
+
+
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
