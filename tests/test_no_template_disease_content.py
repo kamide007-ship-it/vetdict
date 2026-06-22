@@ -2019,9 +2019,7 @@ def _served_db_ready(path: Path) -> bool:
         import sqlite3
 
         conn = sqlite3.connect(str(path))
-        ok = conn.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='diseases'"
-        ).fetchone()
+        ok = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='diseases'").fetchone()
         conn.close()
         return bool(ok)
     except Exception:
@@ -2035,21 +2033,17 @@ def _templated_ratio(conn, field: str) -> tuple[int, int]:
     import re as _re
 
     paren = _re.compile(r"[（(][^（）()]*[）)]")
-    rows = conn.execute(
-        f"SELECT name_ja, {field} FROM diseases WHERE {field} IS NOT NULL AND {field} != ''"
-    ).fetchall()
+    rows = conn.execute(f"SELECT name_ja, {field} FROM diseases WHERE {field} IS NOT NULL AND {field} != ''").fetchall()
     groups = collections.defaultdict(list)
     for nm, val in rows:
         nm = nm or ""
         base = paren.sub("", nm).strip()
-        key = (val or "")
+        key = val or ""
         for x in (nm, base):
             if x:
                 key = key.replace(x, "※")
         groups[key].append(base or "∅")
-    templated = sum(
-        len(names) for names in groups.values() if len(names) >= 5 and len(set(names)) >= 5
-    )
+    templated = sum(len(names) for names in groups.values() if len(names) >= 5 and len(set(names)) >= 5)
     return templated, len(rows)
 
 
@@ -2067,8 +2061,7 @@ def test_served_db_prevention_not_mostly_templated():
         conn.close()
     ratio = templated / total if total else 0
     assert ratio < 0.30, (
-        f"prevention_ja is {ratio:.0%} name-interpolated template "
-        f"({templated}/{total}); grounding regressed."
+        f"prevention_ja is {ratio:.0%} name-interpolated template ({templated}/{total}); grounding regressed."
     )
 
 
@@ -2086,6 +2079,5 @@ def test_served_db_prognosis_not_mostly_templated():
         conn.close()
     ratio = templated / total if total else 0
     assert ratio < 0.30, (
-        f"prognosis_ja is {ratio:.0%} name-interpolated template "
-        f"({templated}/{total}); grounding regressed."
+        f"prognosis_ja is {ratio:.0%} name-interpolated template ({templated}/{total}); grounding regressed."
     )

@@ -1390,8 +1390,7 @@ def ground_templated_fields_with_signs(conn) -> dict[str, int]:
         templated_ids = {
             r["id"]
             for items in groups.values()
-            if len(items) >= MIN_SHARE
-            and len({_base(r["name_ja"] or r["name"]) for r in items}) >= MIN_NAMES
+            if len(items) >= MIN_SHARE and len({_base(r["name_ja"] or r["name"]) for r in items}) >= MIN_NAMES
             for r in items
         }
         compose = composers[field]
