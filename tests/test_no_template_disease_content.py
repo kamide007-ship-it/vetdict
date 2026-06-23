@@ -2081,3 +2081,94 @@ def test_served_db_prognosis_not_mostly_templated():
     assert ratio < 0.30, (
         f"prognosis_ja is {ratio:.0%} name-interpolated template ({templated}/{total}); grounding regressed."
     )
+
+
+# ---------------------------------------------------------------------------
+# Clinical-field category correctness (2026-06)
+# ---------------------------------------------------------------------------
+#
+# The category generators for causes_ja / pathophysiology_ja / the English
+# signs+transmission fields used to trust the stored ``category`` tag, which was
+# wrong on thousands of records (a thyroid-storm tagged "oncology", a flagellate
+# protozoan tagged "bacterial"). The regenerator now resolves the category from
+# the disease *name*, so a non-tumour can no longer carry tumour etiology and a
+# protozoan parasite can no longer be described as a bacterial infection. These
+# tests lock the credibility fix in both the JSON source and the served DB.
+
+# Signature phrase of each wrong category's causes_ja paragraph. If a disease
+# whose name clearly belongs to category X carries category Y's signature, the
+# record is mis-categorised.
+_NEOPLASIA_CAUSE_SIGNATURE = "発癌性ウイルス感染"
+_BACTERIAL_CAUSE_SIGNATURE = "特定の細菌病原体の感染である"
+
+
+def test_non_neoplastic_diseases_have_no_neoplasia_etiology():
+    """A clearly non-tumour disease must not carry the neoplasia causes paragraph."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    # Names that are unambiguously NOT neoplasia but were mis-tagged "oncology".
+    non_tumour_markers = (
+        "甲状腺クリーゼ",
+        "貧血",
+        "腸閉塞",
+        "てんかん",
+        "中毒",
+        "胸水",
+        "水腎症",
+        "心嚢液",
+        "顔面神経麻痺",
+    )
+    tumour_markers = ("腫瘍", "腫", "癌", "肉腫", "リンパ腫", "白血病", "メラノーマ", "インスリノーマ")
+    failures = []
+    for entry in entries:
+        name_ja = entry.get("name_ja") or ""
+        causes = entry.get("causes_ja") or ""
+        if _NEOPLASIA_CAUSE_SIGNATURE not in causes:
+            continue
+        if any(m in name_ja for m in non_tumour_markers) and not any(t in name_ja for t in tumour_markers):
+            failures.append(f"[{entry.get('species')}] {name_ja}: carries neoplasia etiology")
+    assert not failures, "Non-neoplastic diseases with tumour etiology:\n" + "\n".join(failures[:10])
+
+
+def test_flagellate_protozoa_not_described_as_bacterial():
+    """Protozoan / parasitic diseases must not carry the bacterial-infection causes paragraph."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    parasite_markers = ("鞭毛虫", "原虫", "寄生虫", "コクシジウム", "ジアルジア", "トリコモナス")
+    failures = []
+    for entry in entries:
+        name_ja = entry.get("name_ja") or ""
+        causes = entry.get("causes_ja") or ""
+        if _BACTERIAL_CAUSE_SIGNATURE in causes and any(m in name_ja for m in parasite_markers):
+            failures.append(f"[{entry.get('species')}] {name_ja}: parasitic disease described as bacterial")
+    assert not failures, "Parasitic diseases with bacterial etiology:\n" + "\n".join(failures[:10])
+
+
+def test_same_disease_name_has_consistent_name_category_across_species():
+    """The same disease name must resolve to one category regardless of species/tag.
+
+    Tag-based category resolution left e.g. "Gastrointestinal Motility Disorder"
+    parasitic in parrots but toxic in birds. Name-based resolution is consistent.
+    """
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import resolve_category_from_name
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    from collections import defaultdict
+
+    by_name: dict[str, set] = defaultdict(set)
+    for entry in entries:
+        cat = resolve_category_from_name(entry.get("name_ja", ""), entry.get("name", ""))
+        if cat is not None:
+            by_name[entry.get("name", "")].add(cat)
+    conflicting = {n: cats for n, cats in by_name.items() if len(cats) > 1}
+    assert len(conflicting) <= 3, (
+        f"{len(conflicting)} disease names resolve to conflicting categories across species: "
+        + ", ".join(list(conflicting)[:5])
+    )

@@ -110,7 +110,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"アタマジラミ|シラミ|louse|ノミ症|ハジラミ|ウマバエ|"
             r"線虫|nematod|条虫|tapeworm|吸虫|fluke|蟯虫|pinworm|回虫|"
             r"ascarid|鞭虫|whipworm|鉤虫|hookworm|肝吸虫|"
-            r"白点病|ich|白点虫|イクチオフチリウス|"
+            r"白点病|\bich\b|白点虫|イクチオフチリウス|"
             r"イカリ虫|Lernaea|ウオジラミ|Argulus|住血吸虫|"
             r"羽ダニ|気嚢ダニ"
         ),
@@ -134,6 +134,12 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"インスリノーマ|insulinoma|"
             r"褐色細胞腫|pheochromocytoma|腺癌|adenocarcinoma|"
             r"腺腫|adenoma|脂肪腫|lipoma|血管腫|hemangioma|"
+            r"毛芽腫|trichoblastoma|毛包腫|trichoepithelioma|"
+            r"セミノーマ|seminoma|精上皮腫|基底細胞腫|basal cell tumor|"
+            r"形質細胞腫|plasmacytoma|髄膜腫|meningioma|神経鞘腫|schwannoma|"
+            r"線維肉腫|fibrosarcoma|線維腫|fibroma|骨腫|osteoma|軟骨肉腫|chondrosarcoma|"
+            r"乳頭腫|papilloma(?!virus|ウイルス)|胸腺腫|thymoma|中皮腫|mesothelioma|"
+            r"組織球腫|histiocytoma|奇形腫|teratoma|髄芽腫|"
             r"巨大食道|megaesophagus|脊索腫|chordoma"
         ),
         "neoplasia",
@@ -143,6 +149,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
         re.compile(
             r"糖尿病|diabetes|低血糖|hypoglycemia|高血糖|hyperglycemia|"
             r"甲状腺機能亢進|hyperthyroid|甲状腺機能低下|hypothyroid|"
+            r"甲状腺クリーゼ|甲状腺中毒症|thyroid storm|thyroid crisis|thyrotoxic|"
             r"クッシング|Cushing|副腎皮質機能亢進|副腎皮質機能低下|"
             r"アジソン|Addison|hyperadrenocorticism|hypoadrenocorticism|"
             r"副甲状腺|parathyroid|栄養性二次性|代謝性|metabolic|"
@@ -161,7 +168,8 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"尿閉|urinary obstruction|蛋白尿|proteinuria|"
             r"糸球体|glomerular|腎盂腎炎|pyelonephritis|"
             r"前立腺|prostate|前立腺炎|prostatitis|"
-            r"水腎症|hydronephrosis|腎瘤|ureter"
+            r"水腎症|hydronephrosis|腎瘤|ureter|"
+            r"尿腹症|uroperitoneum|膀胱破裂|bladder rupture|尿膜管|urachal"
         ),
         "renal_urinary",
     ),
@@ -199,7 +207,10 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"胆管|biliary|cholangiohepatitis|胆嚢|gallbladder|"
             r"IBD|inflammatory bowel|炎症性腸疾患|リンパ球性形質細胞性腸炎|"
             r"GDV|胃拡張捻転|疝痛(?!性)|colic|"
-            r"幽門狭窄|アクアラジア|食道|esophag"
+            r"幽門狭窄|アクアラジア|食道|esophag|"
+            r"胎便停滞|胎便|meconium|直腸脱|rectal prolapse|脱肛|"
+            r"消化管運動|gastrointestinal motility|イレウス|ileus|"
+            r"消化管うっ滞|enteritis|colitis|gastroenteritis|胃腸炎"
         ),
         "gastrointestinal",
     ),
@@ -222,6 +233,8 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"眼(?!球突出)|角膜|cornea|緑内障|glaucoma|白内障|cataract|"
             r"網膜|retina|ぶどう膜炎|uveitis|結膜炎|conjunctivitis|"
             r"涙嚢|nasolacrimal|チェリーアイ|cherry eye|乾性角結膜炎|KCS|"
+            r"睫毛|eyelash|distichiasis|ectopic cilia|眼瞼|eyelid|entropion|"
+            r"内反症|外反症|ectropion|prolapsed gland|"
             r"眼科|ophthalmic|ophth|眼疾患"
         ),
         "ophthalmic",
@@ -238,6 +251,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"代謝性骨疾患|MBD|metabolic bone|"
             r"クル病|くる病|rickets|歯学|"
             r"舟状骨|navicular|蹄|hoof|laminitis|蹄葉炎|蹄壁|"
+            r"挫跖|sole bruise|釘傷|nail bind|nail prick|蹄膿瘍|hoof abscess|"
             r"骨粗鬆症|osteoporosis"
         ),
         "musculoskeletal",
@@ -3213,6 +3227,126 @@ def gen_pathophysiology_ja(category: str, name_ja: str, species: str) -> str:
             f"DCMでは心筋収縮力低下→心室拡張→低心拍出量→神経内分泌系活性化（RAAS・交感神経）→さらなる心室リモデリングが進行する。"
             f"弁膜疾患では逆流による前負荷増大→心室拡張→不全進行。"
             f"末期では肺水腫・腹水・心原性ショック・致死的不整脈に進展する。"
+        )
+    if category in ("respiratory_other", "respiratory_infection"):
+        return (
+            f"{prefix}の病態生理は気道・肺実質・胸腔の機能/構造異常によりガス交換が障害される。"
+            f"上気道閉塞（喉頭麻痺・気管虚脱・短頭種気道症候群）では吸気抵抗増大→陰圧性気道虚脱→気道炎症の悪循環を生じる。"
+            f"下気道・肺実質病変（肺炎・肺水腫・気管支炎）では換気血流不均衡・拡散障害により低酸素血症を来す。"
+            f"胸腔病変（胸水・気胸）では肺の物理的圧排により拘束性換気障害を生じる。"
+            f"慢性低酸素は肺高血圧・右心負荷（肺性心）に進展し、急性増悪は呼吸不全・チアノーゼを呈する。"
+        )
+    if category == "gastrointestinal":
+        return (
+            f"{prefix}の病態生理は消化管の運動・分泌・吸収・粘膜バリア機能の破綻により展開する。"
+            f"炎症性・潰瘍性病変では粘膜傷害→蛋白漏出・出血・吸収不良→低アルブミン血症・体重減少を生じる。"
+            f"閉塞・うっ滞（イレウス・GI stasis・GDV）では内容物貯留→腸管拡張・血流障害・細菌異常増殖→内毒素血症・脱水・電解質異常に進展する。"
+            f"膵・肝胆道病変では消化酵素・胆汁うっ滞による自己消化・全身炎症反応を惹起する。"
+            f"重症例では循環血液量減少性ショック・敗血症・多臓器不全に至る。"
+        )
+    if category == "neurological":
+        return (
+            f"{prefix}の病態生理は中枢・末梢神経または神経筋接合部の機能/構造障害により神経伝達が破綻する。"
+            f"占拠性・圧迫性病変（椎間板ヘルニア・腫瘍・水頭症）では実質圧迫→局所虚血・浮腫→神経機能脱落を生じる。"
+            f"炎症性・感染性病変（髄膜脳炎）ではサイトカイン放出・血液脳関門破綻により神経細胞傷害が進行する。"
+            f"発作性疾患（てんかん）では神経細胞の過剰同期性発火により痙攣を反復し、重積は不可逆的神経傷害を招く。"
+            f"前庭・小脳病変では平衡・協調運動障害を、脊髄病変では病変部以下の運動・感覚・自律神経障害を呈する。"
+        )
+    if category == "musculoskeletal":
+        return (
+            f"{prefix}の病態生理は骨・関節・靱帯・腱・筋の構造的破綻と二次的炎症により展開する。"
+            f"関節疾患では軟骨基質の変性・摩耗→軟骨下骨硬化・骨棘形成→滑膜炎・疼痛・可動域制限の悪循環を生じる。"
+            f"骨折・靱帯損傷では構造的支持の喪失→不安定性・異常負荷→疼痛・跛行・廃用性筋萎縮を来す。"
+            f"骨代謝異常（代謝性骨疾患・栄養性二次性副甲状腺機能亢進症）では骨吸収亢進・骨基質石灰化障害により病的骨折・骨変形を生じる。"
+            f"慢性経過では関節拘縮・筋力低下・運動機能障害が進行する。"
+        )
+    if category == "dermatological":
+        return (
+            f"{prefix}の病態生理は皮膚バリア機能の破綻と炎症・免疫応答により展開する。"
+            f"アレルギー性皮膚炎では経皮アレルゲン感作→Th2優位の免疫応答→IgE産生・肥満細胞脱顆粒→掻痒・炎症の連鎖を生じる。"
+            f"角化・バリア異常では経表皮水分喪失増加・微生物定着により二次感染（膿皮症・マラセチア）を招く。"
+            f"掻破による自己傷害が炎症をさらに増悪させる掻痒-掻破サイクルを形成する。"
+            f"慢性炎症では苔癬化・色素沈着・脱毛が進行し、難治化する。"
+        )
+    if category == "ophthalmic":
+        return (
+            f"{prefix}の病態生理は眼組織（角膜・ぶどう膜・水晶体・網膜・眼圧調節系）の構造/機能障害により視機能が脅かされる。"
+            f"角膜病変では上皮バリア破綻→間質浮腫・血管新生・潰瘍進行→穿孔リスクを生じる。"
+            f"ぶどう膜炎では血液眼関門破綻・炎症細胞浸潤により続発性緑内障・白内障・網膜剥離を招く。"
+            f"房水産生・流出の不均衡では眼圧上昇→視神経・網膜神経節細胞傷害（緑内障）により不可逆的失明に至る。"
+            f"水晶体・網膜変性では透光体混濁・光受容器変性により進行性視覚障害を呈する。"
+        )
+    if category == "hematological":
+        return (
+            f"{prefix}の病態生理は赤血球・白血球・血小板・凝固系の産生/破壊/機能の不均衡により展開する。"
+            f"貧血では赤血球産生低下（骨髄抑制・腎性エリスロポエチン低下）または喪失亢進（出血・溶血）により組織への酸素供給が低下する。"
+            f"溶血では赤血球膜傷害・免疫介在性破壊によりビリルビン上昇・ヘモグロビン尿を生じる。"
+            f"血小板・凝固異常では一次/二次止血の破綻により出血傾向（点状出血・体腔内出血）を、過凝固ではDIC・血栓塞栓を来す。"
+            f"重症貧血・出血は循環性ショック・組織低酸素により多臓器障害に進展する。"
+        )
+    if category == "reproductive":
+        return (
+            f"{prefix}の病態生理は生殖器の構造/機能異常およびホルモン環境の変化により展開する。"
+            f"子宮蓄膿症ではプロゲステロン優位下の子宮内膜過形成・嚢胞性変化に細菌感染が重畳し、内毒素血症・敗血症・急性腎傷害に進展する。"
+            f"難産では胎子・産道・娩出力の異常により分娩停止→胎子仮死・子宮破裂・低カルシウム血症を生じる。"
+            f"妊娠中毒・産褥疾患では代謝需要急増に対する恒常性破綻を来す。"
+            f"性ホルモン依存性疾患では内分泌刺激の持続が組織増殖・腫瘍化を促進する。"
+        )
+    if category == "toxicity":
+        return (
+            f"{prefix}の病態生理は毒性物質の吸収・分布・標的分子への作用・代謝/排泄の過程により決定される。"
+            f"毒物は特異的標的（酵素阻害・受容体結合・細胞膜傷害・DNA損傷）に作用し、用量依存的に細胞機能を障害する。"
+            f"肝・腎は代謝・排泄の主要臓器であり、毒性代謝物の生成や蓄積により標的臓器傷害（肝壊死・急性腎傷害）を生じる。"
+            f"酸化ストレス・ミトコンドリア傷害・細胞死（壊死・アポトーシス）が組織傷害の共通機序となる。"
+            f"重症例では多臓器不全・凝固障害・神経症状・循環虚脱に進展する。"
+        )
+    if category == "trauma":
+        return (
+            f"{prefix}の病態生理は外力による組織の物理的破壊と続発する炎症・修復反応により展開する。"
+            f"一次損傷（裂傷・骨折・挫滅・熱傷）に続き、炎症メディエーター放出・浮腫・微小循環障害による二次損傷が拡大する。"
+            f"重度外傷では出血性ショック・全身性炎症反応症候群（SIRS）・凝固障害（外傷性凝固障害）を併発する。"
+            f"組織修復は止血→炎症→増殖→リモデリングの過程を辿るが、感染・血流不良・異物残存は治癒遅延・瘢痕拘縮を招く。"
+            f"頭部・体腔・脊髄の外傷では臓器特異的な致死的合併症を生じうる。"
+        )
+    if category == "autoimmune":
+        return (
+            f"{prefix}の病態生理は自己寛容の破綻により自己抗原に対する免疫応答が惹起されることに基づく。"
+            f"自己抗体・自己反応性T細胞が標的組織を攻撃し、II型（細胞傷害性）・III型（免疫複合体）・IV型（細胞性）過敏反応により組織傷害を生じる。"
+            f"免疫介在性溶血性貧血・血小板減少症では血球が破壊され、多発性関節炎・天疱瘡では関節・皮膚が標的となる。"
+            f"遺伝的素因に感染・薬剤・腫瘍などの誘因が加わり発症する（続発性も多い）。"
+            f"再燃と寛解を繰り返し、免疫抑制療法への反応性が予後を左右する。"
+        )
+    if category == "dental":
+        return (
+            f"{prefix}の病態生理は歯・歯周組織・咬合の異常により摂食機能と全身状態が障害される。"
+            f"歯周病ではプラーク細菌→歯肉炎→歯周ポケット形成・歯槽骨吸収→歯の動揺・脱落の進行とともに、菌血症を介した全身臓器への影響を生じる。"
+            f"草食・げっ歯類の不正咬合では常生歯の過長・スパー形成により口腔粘膜傷害・疼痛・摂食困難を来す。"
+            f"歯根尖膿瘍では根尖部感染が顎骨・眼窩へ波及する。"
+            f"摂食低下は二次的な消化管うっ滞・肝リピドーシス等の致死的病態を誘発しうる。"
+        )
+    if category == "fungal_infection":
+        return (
+            f"{prefix}の病態生理は真菌の定着・組織侵入と宿主免疫応答により展開する。"
+            f"皮膚糸状菌・酵母（マラセチア等）は角質層に定着し、表在性の炎症・掻痒・脱毛を生じる。"
+            f"全身性真菌（アスペルギルス・クリプトコッカス等）は経気道・経皮的に侵入し、肉芽腫性炎症を介して多臓器に播種する。"
+            f"宿主の細胞性免疫低下（免疫抑制・基礎疾患）が侵襲性・播種性感染の主要リスクとなる。"
+            f"慢性肉芽腫・組織破壊・線維化が進行し、中枢神経・眼への波及は予後を悪化させる。"
+        )
+    if category in ("genetic_congenital", "degenerative"):
+        return (
+            f"{prefix}の病態生理は先天的・遺伝的素因または加齢性の進行性組織変性により展開する。"
+            f"遺伝性疾患では特定遺伝子変異により酵素・構造蛋白・受容体の機能異常を生じ、出生時または特定年齢で発症する。"
+            f"変性性疾患では加齢・酸化ストレス・慢性機械的負荷により細胞・基質が緩徐に変性・脱落する。"
+            f"代償機構により初期は無症状でも、機能予備能を超えると臨床徴候が顕在化する。"
+            f"多くは不可逆性・進行性であり、進行抑制と支持療法が管理の中心となる。"
+        )
+    if category == "behavioral":
+        return (
+            f"{prefix}の病態生理は神経生物学的素因・学習・環境ストレスの相互作用により展開する。"
+            f"恐怖・不安では扁桃体を中心とした情動回路の過活動と視床下部-下垂体-副腎系（HPA軸）の慢性活性化が関与する。"
+            f"セロトニン・ドパミン等の神経伝達バランスの乱れが情動・衝動制御に影響する。"
+            f"嫌悪的経験の学習・社会化不足・環境の不適合が問題行動を強化・維持する。"
+            f"慢性ストレスは常同行動・自己傷害・身体疾患（消化管・皮膚）の併発を招く。"
         )
     # generic
     return (
