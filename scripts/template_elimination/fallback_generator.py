@@ -136,15 +136,41 @@ def _disease_class_hint(name_ja: str) -> str:
         )
     ):
         return "viral"
+    # Benign cysts and polyps must be checked *before* neoplasia: they are not
+    # neoplasms and must never receive a chemotherapy/biopsy-staging protocol.
+    # A name that pairs a cyst/polyp with an explicit malignancy term
+    # (e.g. "嚢胞腺癌") still falls through to neoplasia below.
+    if any(kw in name_ja for kw in ("嚢胞", "ポリープ", "嚢腫")) and not any(
+        kw in name_ja for kw in ("腫瘍", "癌", "腺癌", "肉腫", "腺腫", "リンパ腫", "メラノーマ")
+    ):
+        return "cyst_polyp"
+    if any(kw in name_ja for kw in ("腫瘍", "癌", "リンパ腫", "白血", "肉腫", "腺腫", "メラノーマ", "セミノーマ")):
+        return "neoplasia"
+    # Tick-borne / hemotropic bacteria (Ehrlichia, Anaplasma, Rickettsia/spotted
+    # fever, hemoplasma) are doxycycline-responsive and do NOT respond to
+    # fluoroquinolones or dewormers — they need their own branch before the
+    # generic "infection" (enrofloxacin) and any parasitic mis-tag.
     if any(
         kw in name_ja
-        for kw in ("腫瘍", "癌", "リンパ腫", "白血", "肉腫", "腺腫", "嚢胞", "ポリープ", "メラノーマ", "セミノーマ")
+        for kw in (
+            "エールリヒア",
+            "エールリッヒア",
+            "エーリキア",
+            "エーリヒア",
+            "アナプラズマ",
+            "紅斑熱",
+            "ヘモトロピックマイコプラズマ",
+            "ヘモプラズマ",
+            "ヘモバルトネラ",
+        )
     ):
-        return "neoplasia"
+        return "rickettsial"
     if any(kw in name_ja for kw in ("膿瘍", "蓄膿", "膿皮症", "感染症", "炎", "敗血", "セプティ")):
         return "infection"
     if any(kw in name_ja for kw in ("外傷", "骨折", "創傷", "脱臼", "裂傷", "熱傷", "凍傷")):
         return "trauma"
+    if any(kw in name_ja for kw in ("中毒", "毒症", "毒性")):
+        return "toxic"
     if any(kw in name_ja for kw in ("欠乏", "過剰", "ビタミン", "ミネラル", "栄養")):
         return "nutritional"
     if any(
@@ -210,6 +236,27 @@ def _class_specific_lines(species: str, klass: str, name_ja: str) -> list[str]:
             "外科的完全切除が可能なら広範マージン外科的切除を第一選択（推奨マージン2-3cm、攻撃的肉腫・MCT高グレードは3-5cm、種・部位・組織型で調整）。",
             "切除不能例・残存例には化学療法（プロトコルは腫瘍型別、リンパ腫はCHOP、肥満細胞腫はビンブラスチン+プレドニゾロン等）または緩和的放射線療法。",
             f"オーナーの治療希望・予算・{species_ja}のQOL・転帰確率を総合判断し、緩和ケア選択肢（鎮痛・栄養管理・在宅看取り）も明示提示する。",
+        ]
+    if klass == "toxic":
+        return [
+            f"{name_ja}の治療は迅速な除染と支持療法が基本。摂取直後（種にとって安全な場合）は催吐、または胃洗浄で吸収を低減し、活性炭 1-4 g/kg PO（適応毒物に限る）を投与する。",
+            "可能な毒物には特異的解毒・拮抗（例: 有機リン→アトロピン+プラリドキシム、エチレングリコール→フォメピゾール/エタノール、殺鼠剤→ビタミンK1、ピレスロイド→メトカルバモール+脂肪乳剤）を適用する。",
+            "等張輸液で利尿・腎保護を図り、体温・痙攣・不整脈・電解質を集中モニタリング。痙攣にはミダゾラム/メトカルバモール、重症例は脂肪乳剤（ILE）療法を検討。",
+            f"曝露源（殺虫剤・植物・家庭用化学物質・薬剤）の特定と環境からの除去を行い、{species_ja}と同居動物の再曝露を防止する。中毒情報センターへの照会も有用。",
+        ]
+    if klass == "rickettsial":
+        return [
+            f"{name_ja}はダニ媒介性のリケッチア・ヘモトロピック細菌感染であり、第一選択はドキシサイクリン 5 mg/kg PO/IV q12h または 10 mg/kg q24h を最低28日間（馬は10 mg/kg PO q12-24h）。フルオロキノロン・駆虫薬は無効。",
+            "急性期で血小板減少・発熱が著明な例は、PCR/血清抗体（IFA）の結果を待たずにドキシサイクリンを経験的に開始してよい（治療反応＝24-48時間で解熱・血小板回復が診断的）。",
+            "重度貧血・出血傾向には輸血・支持療法を併用。ヘモプラズマ／重症免疫介在性溶血併発例ではプレドニゾロン 1-2 mg/kg/日の短期併用を検討。",
+            f"媒介ダニの駆除と再寄生予防（イソオキサゾリン系等）を{species_ja}と同居動物に実施し、慢性・潜伏感染（特に犬単球性エールリヒア症）は治療後もモニタリングする。",
+        ]
+    if klass == "cyst_polyp":
+        return [
+            f"{name_ja}は良性の嚢胞性・ポリープ性病変であり、まず細胞診（針吸引）・画像（超音波/X線）で内容と被膜を評価し、腫瘍性病変との鑑別を行う。",
+            "症候性または増大傾向の病変は外科的完全切除が第一選択。穿刺吸引のみでは再貯留しやすく、被膜を含めた摘出が再発予防に重要。",
+            "切除組織は必ず病理組織検査に提出し、嚢胞腺癌・嚢胞化した腫瘍など悪性病変を除外する（悪性が確定した場合は腫瘍プロトコルへ移行）。",
+            f"無症候性で増大のない小病変は経過観察も可。再発・急速な増大・潰瘍化を認めた場合は{species_ja}の全身評価と再生検を行う。",
         ]
     if klass == "trauma":
         return [
