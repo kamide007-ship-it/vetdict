@@ -1443,6 +1443,72 @@ def localize_english_species_in_served_db(conn) -> int:
     return total
 
 
+def fix_dangerous_treatment_in_served_db(conn) -> dict[str, int]:
+    """Replace clinically dangerous treatment templates on the served DB.
+
+    Module-sourced and supplementary entries can carry a category-specific
+    treatment template whose category contradicts the disease, producing
+    recommendations that would harm a patient if published:
+
+    * a *deworming* protocol on tick-borne / hemotropic bacteria (ehrlichiosis,
+      anaplasmosis, spotted fever, hemoplasmosis — doxycycline-responsive);
+    * a *deworming* protocol on a toxicosis (permethrin / Teflon);
+    * a *chemotherapy / TNM-staging* protocol on a benign cyst or polyp.
+
+    This sweeps the served database so the delivered content is corrected
+    regardless of which source introduced the template. The replacement is gated
+    on the corrected name-priority class (``_disease_class_hint``), so genuine
+    parasites and genuine tumours are never touched.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.eliminate_templates import SPECIES_NORM
+    from scripts.template_elimination.fallback_generator import (
+        _disease_class_hint,
+        generate_fallback_content,
+    )
+
+    ONCO_SIG = "腫瘍の組織学的型・グレード"
+    DEWORM_OVERRIDE = {"rickettsial", "toxic", "nutritional"}
+    NAME_EXCLUDE = ("サーモン中毒", "サケ中毒")
+
+    def _has_deworm_template(tx: str) -> bool:
+        # Matches the parasitic deworming protocols ("適切な駆虫薬が必要" /
+        # "駆虫薬を選択") but never the doxycycline text that *warns* dewormers
+        # are ineffective ("フルオロキノロン・駆虫薬は無効").
+        return "駆虫薬" in tx and "駆虫薬は無効" not in tx
+
+    rows = conn.execute("SELECT id, name_ja, name, species, treatment_ja, treatment FROM diseases").fetchall()
+    stats: dict[str, int] = {}
+    for row in rows:
+        tx = row["treatment_ja"] or ""
+        if not tx:
+            continue
+        name_ja = row["name_ja"] or ""
+        name_en = row["name"] or ""
+        klass = _disease_class_hint(name_ja or name_en)
+
+        target = None
+        if _has_deworm_template(tx) and klass in DEWORM_OVERRIDE:
+            if not any(x in (name_ja + name_en) for x in NAME_EXCLUDE):
+                target = klass
+        elif ONCO_SIG in tx and klass == "cyst_polyp":
+            target = "cyst_polyp"
+        if target is None:
+            continue
+
+        species = SPECIES_NORM.get(row["species"], row["species"]).lower()
+        new = generate_fallback_content(species, name_ja, name_en, en_treatment=row["treatment"])
+        new_tx = new.get("treatment_ja")
+        if not new_tx or new_tx == tx:
+            continue
+        conn.execute(
+            "UPDATE diseases SET treatment_ja = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+            (new_tx, row["id"]),
+        )
+        stats[target] = stats.get(target, 0) + 1
+    return stats
+
+
 def main(db_path: str | None = None):
     print("=" * 60)
     print("VetDict Data Migration → SQLite")
@@ -1511,6 +1577,14 @@ def main(db_path: str | None = None):
         print("\n[enrichment] localising English species names in Japanese fields...")
         loc_n = localize_english_species_in_served_db(conn)
         print(f"  → {loc_n} English species tokens localised")
+
+        # Correct clinically dangerous treatment templates (deworming on
+        # rickettsial bacteria, chemotherapy on benign cysts/polyps) that
+        # survive in module/supplementary-sourced entries.
+        print("\n[enrichment] correcting dangerous treatment miscategorisations...")
+        tx_fix = fix_dangerous_treatment_in_served_db(conn)
+        for klass, n in tx_fix.items():
+            print(f"  → {klass}: {n} treatments corrected")
 
         # Drugs
         print("\n[drugs] migrating drug dictionary...")

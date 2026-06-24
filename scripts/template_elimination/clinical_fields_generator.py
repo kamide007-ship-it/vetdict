@@ -63,12 +63,14 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"パスツレラ|Pasteurella|ボルデテラ|Bordetella|クロストリジウム|Clostridium|"
             r"クラミジア|Chlamydia|マイコプラズマ|Mycoplasma|マイコバクテリア|Mycobacterium|"
             r"ブドウ球菌|Staphylococcus|連鎖球菌|Streptococcus|大腸菌|E\. coli|サルモネラ|"
-            r"Salmonella|レプトスピラ|Leptospira|エールリッヒア|Ehrlichia|アナプラズマ|"
+            r"Salmonella|レプトスピラ|Leptospira|エールリッヒア|エールリヒア|エーリキア|エーリヒア|"
+            r"Ehrlichia|アナプラズマ|"
             r"Anaplasma|ライム病|Borrelia|ボレリア|破傷風|Tetanus|botulism|ボツリヌス|"
             r"野兎病|Tularemia|ブルセラ|Brucella|腺疫|Strangles|トレポネーマ|Treponema|"
             r"スピロヘータ|Spirochete|リステリア|Listeria|エルシニア|Yersinia|"
             r"バルトネラ|Bartonella|ヘモバルトネラ|ヘモプラズマ|hemoplasma|"
             r"猫ひっかき病|cat scratch|肺炎球菌|髄膜炎菌|淋菌|破傷風|"
+            r"ノカルジア|Nocardia|紅斑熱|spotted fever|"
             r"豚丹毒|Erysipelothrix|Q熱|Coxiella|リケッチア|Rickettsia"
         ),
         "bacterial_infection",
@@ -140,7 +142,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"線維肉腫|fibrosarcoma|線維腫|fibroma|骨腫|osteoma|軟骨肉腫|chondrosarcoma|"
             r"乳頭腫|papilloma(?!virus|ウイルス)|胸腺腫|thymoma|中皮腫|mesothelioma|"
             r"組織球腫|histiocytoma|奇形腫|teratoma|髄芽腫|"
-            r"巨大食道|megaesophagus|脊索腫|chordoma"
+            r"脊索腫|chordoma"
         ),
         "neoplasia",
     ),
@@ -176,7 +178,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
     # Cardiac
     (
         re.compile(
-            r"心臓|心筋|心房|心室|弁膜|心不全|cardiac|cardio|heart|"
+            r"心臓|心筋|心房|心室|弁膜|心不全|cardiac|\bcardio|heart|"
             r"DCM|HCM|拡張型心筋症|肥大型心筋症|"
             r"僧帽弁|mitral|三尖弁|tricuspid|心房中隔|心室中隔|"
             r"動脈管開存|PDA|不整脈|arrhythmia|"

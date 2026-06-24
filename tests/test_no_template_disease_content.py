@@ -2172,3 +2172,138 @@ def test_same_disease_name_has_consistent_name_category_across_species():
         f"{len(conflicting)} disease names resolve to conflicting categories across species: "
         + ", ".join(list(conflicting)[:5])
     )
+
+
+# ---------------------------------------------------------------------------
+# 2026-06 phase — dangerous treatment / etiology miscategorisation
+# (deworming on rickettsial bacteria, chemotherapy on benign cysts, "cancer"
+#  etiology on megaesophagus, "cardiac" etiology on nocardiosis)
+# ---------------------------------------------------------------------------
+
+
+def _served_db_rows():
+    """Yield rows from the freshly-migrated served DB, or skip if unavailable."""
+    import sqlite3
+
+    db = ROOT / "instance" / "vetdict.db"
+    if not db.exists():
+        pytest.skip("served DB (instance/vetdict.db) not present; run migrate_to_sqlite.py")
+    conn = sqlite3.connect(str(db))
+    conn.row_factory = sqlite3.Row
+    try:
+        yield from conn.execute(
+            "SELECT name_ja, name, species, treatment_ja, causes_ja, pathophysiology_ja FROM diseases"
+        )
+    finally:
+        conn.close()
+
+
+def test_disease_class_hint_does_not_chemo_benign_cysts():
+    """Benign cysts/polyps must never classify as neoplasia (→ chemo protocol)."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.fallback_generator import _disease_class_hint
+
+    for name in ("卵巣嚢胞", "皮脂嚢胞", "羽毛嚢胞", "腎嚢胞", "直腸ポリープ", "猫アポクリン腺嚢胞"):
+        assert _disease_class_hint(name) == "cyst_polyp", (
+            f"{name} must classify as cyst_polyp, got {_disease_class_hint(name)}"
+        )
+    # A cyst paired with an explicit malignancy term is still neoplastic.
+    assert _disease_class_hint("嚢胞腺癌") == "neoplasia"
+
+
+def test_disease_class_hint_rickettsial_get_doxycycline_class():
+    """Tick-borne / hemotropic bacteria must classify as rickettsial, not parasitic."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.fallback_generator import _disease_class_hint
+
+    for name in (
+        "エールリヒア症",
+        "犬単球性エールリヒア症",
+        "犬顆粒球性アナプラズマ症",
+        "ロッキー山紅斑熱",
+        "猫エーリキア症",
+        "犬ヘモトロピックマイコプラズマ症",
+    ):
+        assert _disease_class_hint(name) == "rickettsial", (
+            f"{name} must classify as rickettsial, got {_disease_class_hint(name)}"
+        )
+
+
+def test_resolve_category_fixes_known_miscategorisations():
+    """Name-priority category resolver must not mislabel these landmark diseases."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import resolve_true_category
+
+    # Megaesophagus is a motility disorder, NOT a neoplasm.
+    assert resolve_true_category("巨大食道症", "Megaesophagus", "tumor") == "gastrointestinal"
+    # Nocardiosis is a bacterial (actinomycete) infection — the substring
+    # "cardio" in "Nocardiosis" must not pull it into the cardiac branch.
+    assert resolve_true_category("ノカルジア症", "Nocardiosis", "") == "bacterial_infection"
+    # Ehrlichiosis is bacterial despite a legacy "parasite" tag.
+    assert resolve_true_category("エールリヒア症", "Ehrlichiosis", "parasite") == "bacterial_infection"
+    # Genuine cardiomyopathy is unaffected by the \bcardio tightening.
+    assert resolve_true_category("拡張型心筋症", "Dilated Cardiomyopathy", "") == "cardiac"
+
+
+def test_served_db_no_deworm_on_rickettsial():
+    """No rickettsial/hemotropic bacterial disease may carry a deworming protocol."""
+    failures = []
+    rick_kw = ("エールリヒア", "エーリキア", "アナプラズマ", "紅斑熱", "ヘモトロピックマイコプラズマ", "ヘモプラズマ")
+    for row in _served_db_rows():
+        name = row["name_ja"] or row["name"] or ""
+        if not any(k in name for k in rick_kw):
+            continue
+        tx = row["treatment_ja"] or ""
+        # The doxycycline text legitimately says "駆虫薬は無効"; only flag a real
+        # deworming *protocol*.
+        if "駆虫薬" in tx and "駆虫薬は無効" not in tx:
+            failures.append(f"[{row['species']}] {name}: deworming protocol on a rickettsial disease")
+        # Positively assert doxycycline is recommended.
+        elif "ドキシサイクリン" not in tx:
+            failures.append(f"[{row['species']}] {name}: rickettsial disease without doxycycline")
+    assert not failures, "Rickettsial treatment errors:\n" + "\n".join(failures[:10])
+
+
+def test_served_db_no_chemotherapy_on_benign_cysts():
+    """Benign cysts/polyps must not carry a chemotherapy / TNM-staging protocol."""
+    failures = []
+    for row in _served_db_rows():
+        name = row["name_ja"] or row["name"] or ""
+        if not any(k in name for k in ("嚢胞", "ポリープ", "嚢腫")):
+            continue
+        if any(k in name for k in ("腺癌", "腫瘍", "癌", "肉腫", "腺腫", "リンパ腫", "メラノーマ")):
+            continue  # explicitly malignant — chemo framing is legitimate
+        tx = row["treatment_ja"] or ""
+        if "腫瘍の組織学的型・グレード" in tx or "TNM分類" in tx:
+            failures.append(f"[{row['species']}] {name}: chemotherapy/staging protocol on a benign cyst")
+    assert not failures, "Benign cyst treatment errors:\n" + "\n".join(failures[:10])
+
+
+def test_served_db_megaesophagus_not_described_as_cancer():
+    """Megaesophagus (a motility disorder) must not have a neoplasia etiology."""
+    failures = []
+    for row in _served_db_rows():
+        name = row["name_ja"] or row["name"] or ""
+        if "巨大食道" not in name and "Megaesophagus" not in (row["name"] or ""):
+            continue
+        if "発癌" in (row["causes_ja"] or "") or "悪性転換" in (row["pathophysiology_ja"] or ""):
+            failures.append(f"[{row['species']}] {name}: neoplasia etiology on megaesophagus")
+    assert not failures, "Megaesophagus etiology errors:\n" + "\n".join(failures)
+
+
+def test_served_db_nocardiosis_not_described_as_cardiac():
+    """Nocardiosis (bacterial) must not carry a cardiomyopathy etiology."""
+    failures = []
+    for row in _served_db_rows():
+        name = row["name_ja"] or row["name"] or ""
+        if "ノカルジア" not in name:
+            continue
+        if "心筋症" in (row["causes_ja"] or ""):
+            failures.append(f"[{row['species']}] {name}: cardiac etiology on nocardiosis")
+    assert not failures, "Nocardiosis etiology errors:\n" + "\n".join(failures)
