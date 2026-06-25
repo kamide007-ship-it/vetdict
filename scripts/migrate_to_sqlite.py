@@ -1509,6 +1509,76 @@ def fix_dangerous_treatment_in_served_db(conn) -> dict[str, int]:
     return stats
 
 
+def recategorize_etiology_fields(conn) -> dict[str, int]:
+    """Fix causes_ja / pathophysiology_ja that carry the WRONG category template.
+
+    Two failure modes are corrected on the served database:
+
+    * **Mis-categorised etiology** — e.g. ferret adrenal disease received the
+      *renal* causes template (``Adrenal`` contains ``renal``), retained fetus
+      and anaesthetic complications received the *toxicity* template. The
+      category template currently applied is fingerprinted, the correct category
+      is resolved from the disease name, and a confident contradiction triggers
+      regeneration with the right category.
+    * **Cross-species toxin examples** — the toxicity causes template formerly
+      listed dog/cat toxins (chocolate, lily) for every species. Every entry that
+      keeps the toxicity category is re-rendered so its toxin examples match the
+      animal actually being treated.
+
+    Curated / disease-specific text (no recognised category template) is left
+    untouched, so no hand-written content is overwritten.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        build_etiology_fingerprints,
+        decide_etiology_category,
+        fingerprint_etiology,
+        gen_causes_ja,
+        gen_pathophysiology_ja,
+    )
+
+    fps = {
+        "causes_ja": (build_etiology_fingerprints(gen_causes_ja), gen_causes_ja),
+        "pathophysiology_ja": (
+            build_etiology_fingerprints(gen_pathophysiology_ja),
+            gen_pathophysiology_ja,
+        ),
+    }
+
+    rows = conn.execute("SELECT id, species, name, name_ja, causes_ja, pathophysiology_ja FROM diseases").fetchall()
+
+    counts = {"recategorized": 0, "toxicity_respeciated": 0}
+    for row in rows:
+        species = (row["species"] or "").lower()
+        name_ja = row["name_ja"] or ""
+        name_en = row["name"] or ""
+        for field, (fingerprints, gen_fn) in fps.items():
+            text = row[field] or ""
+            applied = fingerprint_etiology(text, fingerprints)
+            if applied is None:
+                continue  # curated / disease-specific — leave alone
+            target = decide_etiology_category(name_ja, name_en, applied)
+            if target != applied:
+                new = gen_fn(target, name_ja, species)
+                if new and new != text:
+                    conn.execute(
+                        f"UPDATE diseases SET {field} = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                        (new, row["id"]),
+                    )
+                    counts["recategorized"] += 1
+            elif applied == "toxicity" and field == "causes_ja":
+                # Same category, but re-render to drop cross-species toxin
+                # examples in favour of species-appropriate ones.
+                new = gen_fn("toxicity", name_ja, species)
+                if new and new != text:
+                    conn.execute(
+                        f"UPDATE diseases SET {field} = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                        (new, row["id"]),
+                    )
+                    counts["toxicity_respeciated"] += 1
+    return counts
+
+
 def main(db_path: str | None = None):
     print("=" * 60)
     print("VetDict Data Migration → SQLite")
@@ -1585,6 +1655,14 @@ def main(db_path: str | None = None):
         tx_fix = fix_dangerous_treatment_in_served_db(conn)
         for klass, n in tx_fix.items():
             print(f"  → {klass}: {n} treatments corrected")
+
+        # Correct miscategorised causes_ja / pathophysiology_ja (e.g. ferret
+        # adrenal disease tagged renal, non-toxicoses tagged toxicity) and drop
+        # cross-species toxin examples from the toxicity etiology template.
+        print("\n[enrichment] re-categorising etiology / pathophysiology fields...")
+        recat = recategorize_etiology_fields(conn)
+        print(f"  → {recat['recategorized']} fields re-categorised")
+        print(f"  → {recat['toxicity_respeciated']} toxicity etiologies re-speciated")
 
         # Drugs
         print("\n[drugs] migrating drug dictionary...")

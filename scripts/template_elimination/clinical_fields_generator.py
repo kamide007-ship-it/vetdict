@@ -51,7 +51,8 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"アデノウイルス|ロタウイルス|狂犬病|レオウイルス|パピローマウイルス|パピローマ|"
             r"PBFD|BFDV|サーコウイルス|ボルナ|ニューカッスル|マレック|鳥痘|オウム嘴羽病|"
             r"伝染性気管支炎|伝染性ファブリキウス嚢病|伝染性喉頭気管炎|"
-            r"伝染性腹膜炎|伝染性肝炎|伝染性貧血|流産ウイルス|脳脊髄炎ウイルス|"
+            r"伝染性腹膜炎|伝染性肝炎|感染性肝炎|infectious hepatitis|"
+            r"伝染性貧血|流産ウイルス|脳脊髄炎ウイルス|"
             r"日本脳炎|ウエストナイル|EHV|EIV|EAV|EVA|VHD|RHD|ミクソーマ|"
             r"白血病ウイルス|免疫不全ウイルス|エボラ|ボルナ病"
         ),
@@ -152,7 +153,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"糖尿病|diabetes|低血糖|hypoglycemia|高血糖|hyperglycemia|"
             r"甲状腺機能亢進|hyperthyroid|甲状腺機能低下|hypothyroid|"
             r"甲状腺クリーゼ|甲状腺中毒症|thyroid storm|thyroid crisis|thyrotoxic|"
-            r"クッシング|Cushing|副腎皮質機能亢進|副腎皮質機能低下|"
+            r"クッシング|Cushing|副腎皮質機能亢進|副腎皮質機能低下|副腎|adrenal|"
             r"アジソン|Addison|hyperadrenocorticism|hypoadrenocorticism|"
             r"副甲状腺|parathyroid|栄養性二次性|代謝性|metabolic|"
             r"インスリン|insulin|糖原病|glycogen storage|脂肪肝|肝リピドーシス|"
@@ -164,7 +165,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
     # Renal / urinary
     (
         re.compile(
-            r"腎臓|腎不全|腎症|腎結石|renal|kidney|nephritis|nephropathy|"
+            r"腎臓|腎不全|腎症|腎結石|(?<!ad)renal|kidney|nephritis|nephropathy|"
             r"CKD|AKI|尿石|尿路結石|urolith|膀胱炎|cystitis|"
             r"下部尿路|lower urinary|FLUTD|FIC|間質性膀胱炎|"
             r"尿閉|urinary obstruction|蛋白尿|proteinuria|"
@@ -392,6 +393,35 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
 ]
 
 
+# Negated phrases whose embedded category keyword would otherwise produce a
+# false-positive match (e.g. "非寄生虫性脱毛症" must NOT resolve to parasitic,
+# "猫角膜炎（非ヘルペス性）" must NOT resolve to viral). We neutralise the
+# negation by blanking the negated token before pattern matching.
+_NEGATION_TOKENS: tuple[str, ...] = (
+    "非寄生虫性",
+    "非寄生虫",
+    "非感染性",
+    "非感染",
+    "非腫瘍性",
+    "非腫瘍",
+    "非ヘルペス性",
+    "非ヘルペス",
+    "非炎症性",
+    "非ウイルス性",
+    "non-parasitic",
+    "non-infectious",
+    "non-neoplastic",
+    "non-herpetic",
+)
+
+
+_NEGATION_RE = re.compile("|".join(re.escape(tok) for tok in _NEGATION_TOKENS), re.IGNORECASE)
+
+
+def _neutralise_negations(name: str) -> str:
+    return _NEGATION_RE.sub("—", name)
+
+
 def resolve_category_from_name(name_ja: str, name_en: str) -> Optional[str]:
     """Resolve category from the disease *name* only, or None if no pattern matches.
 
@@ -399,7 +429,7 @@ def resolve_category_from_name(name_ja: str, name_en: str) -> Optional[str]:
     trusting a possibly-wrong stored ``category`` tag would yield embarrassing
     mis-categorisations such as "cheek pouch impaction is a bacterial infection".
     """
-    name = f"{name_ja or ''} {name_en or ''}"
+    name = _neutralise_negations(f"{name_ja or ''} {name_en or ''}")
     for pattern, cat in NAME_CATEGORY_PATTERNS:
         if pattern.search(name):
             return cat
@@ -416,7 +446,7 @@ def resolve_true_category(name_ja: str, name_en: str, tagged_category: str) -> s
     toxicity, trauma, autoimmune, nutritional, genetic_congenital, degenerative,
     behavioral, generic.
     """
-    name = f"{name_ja or ''} {name_en or ''}"
+    name = _neutralise_negations(f"{name_ja or ''} {name_en or ''}")
     for pattern, cat in NAME_CATEGORY_PATTERNS:
         if pattern.search(name):
             return cat
@@ -506,6 +536,43 @@ SPECIES_SUPPORTIVE_NOTES_JA = {
 
 def _species_note(species: str) -> str:
     return SPECIES_SUPPORTIVE_NOTES_JA.get(species, "")
+
+
+# Species-appropriate examples of common toxic exposures. The generic toxicity
+# template previously listed dog/cat toxins (chocolate, lily) for *every*
+# species — embarrassing and clinically misleading when shown for a horse,
+# bird or reptile. These fragments keep the toxin examples relevant to the
+# animal actually being treated.
+TOXIN_SOURCES_JA: dict[str, str] = {
+    "dog": "チョコレート（テオブロミン）・キシリトール・ブドウ/レーズン・タマネギ/ニンニク・抗凝固性殺鼠剤・人用NSAID/アセトアミノフェン・不凍液（エチレングリコール）",
+    "cat": "ユリ科植物（腎毒性）・アセトアミノフェン・犬用ペルメトリン製剤・タマネギ/ニンニク・不凍液・抗凝固性殺鼠剤",
+    "horse": "有毒植物（イチイ・キョウチクトウ・カエデ赤葉・ワラビ・キバナハウチワマメ）・カビ毒（アフラトキシン・フモニシン）・モネンシン（飼料添加物）・鉛・有機リン系駆虫薬の過量",
+    "rabbit": "経口β-ラクタム/リンコサミド系抗菌薬（致死的腸内菌叢崩壊）・有毒観葉植物・殺鼠剤・農薬・鉛",
+    "guinea_pig": "経口ペニシリン系抗菌薬（Clostridium腸毒血症を誘発）・有毒植物・殺鼠剤・フィプロニル",
+    "chinchilla": "経口β-ラクタム系抗菌薬・フィプロニル（致死的）・有毒植物・殺鼠剤",
+    "degu": "経口β-ラクタム系抗菌薬・糖分過剰（糖尿病誘発）・有毒植物・殺鼠剤",
+    "hamster": "経口β-ラクタム系抗菌薬・有毒植物・殺鼠剤・家庭用化学物質",
+    "ferret": "イブプロフェン/人用NSAID・抗凝固性殺鼠剤・タマネギ・カフェイン・人用薬剤",
+    "hedgehog": "有毒植物・殺虫剤・家庭用化学物質・重金属",
+    "sugar_glider": "有毒植物・殺虫剤・カルシウム拮抗性食餌（高リン）・家庭用化学物質",
+    "bird": "重金属（鉛・亜鉛）・PTFE（フッ素樹脂）加熱煙・アボカド・タマネギ・有毒観葉植物・殺虫剤・カビ毒",
+    "parakeet": "重金属（鉛・亜鉛）・PTFE加熱煙・アボカド・有毒観葉植物・殺虫剤・カビ毒",
+    "parrot": "重金属（鉛・亜鉛）・PTFE加熱煙・アボカド・有毒観葉植物・殺虫剤・カビ毒",
+    "reptile": "殺虫剤（有機リン・ピレスロイド）・不適切な消毒剤・重金属・イベルメクチン（一部種で致死）・有毒植物",
+    "tortoise": "殺虫剤・不適切な消毒剤・重金属・有毒植物・シュウ酸過剰植物",
+    "snake": "殺虫剤・不適切な消毒剤（ヒノキ/杉チップの揮発成分）・重金属・イベルメクチン",
+    "lizard": "殺虫剤・不適切な消毒剤・重金属・イベルメクチン・有毒植物",
+    "amphibian": "水質毒性（アンモニア・亜硝酸・残留塩素/クロラミン）・重金属・農薬流入・不適切なpH",
+    "fish": "水質毒性（アンモニア・亜硝酸・残留塩素・重金属）・農薬流入・過剰投薬（銅・ホルマリン）",
+    "exotic_other": "有毒植物・殺虫剤・家庭用化学物質・重金属・不適切な飼育用品からの化学物質溶出",
+}
+
+
+def _toxin_sources(species: str) -> str:
+    return TOXIN_SOURCES_JA.get(
+        species,
+        "有毒植物・殺鼠剤/農薬・家庭用化学物質・重金属・医薬品の過量投与",
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -959,8 +1026,8 @@ def gen_causes_ja(category: str, name_ja: str, species: str) -> str:
     if category == "toxicity":
         return (
             f"{prefix}の原因は特定の毒性物質への摂取・吸入・経皮吸収である。"
-            f"代表的毒性源: 家庭用化学物質（漂白剤・洗剤・界面活性剤）、医薬品の過量投与（人用 OTC・NSAID・抗うつ薬）、有毒植物（種特異的: 犬のチョコレート・ブドウ、猫のユリ、馬の Ergot 等）、農薬・殺鼠剤、重金属（鉛・銅）、煙・煙草、食品中の毒（玉ねぎ・キシリトール）。"
-            f"毒性の発現は用量依存性で、体重・種差・代謝能力・曝露経路・曝露時間により重症度が大きく異なる。"
+            f"{sp_ja}で問題となりやすい代表的毒性源: {_toxin_sources(species)}。"
+            f"毒性の発現は用量依存性で、体重・代謝能力・曝露経路・曝露時間により重症度が大きく異なる。"
             f"肝臓と腎臓が主要な標的臓器となる。{note}"
         )
     if category == "trauma":
@@ -4035,6 +4102,150 @@ def compose_grounded_prognosis_ja(base_text: str, sign_names_ja: list[str]) -> s
     if clause in base or "の推移を指標に" in base:
         return base
     return f"{base}{clause}"
+
+
+# ---------------------------------------------------------------------------
+# Etiology / pathophysiology re-categorisation
+# ---------------------------------------------------------------------------
+# The causes_ja / pathophysiology_ja fields were generated by ``gen_causes_ja``
+# / ``gen_pathophysiology_ja`` keyed on a stored category that is sometimes
+# wrong — e.g. ferret adrenal disease received the *renal* etiology template
+# (because "Adrenal" contains "renal"), and many non-toxicoses (anaesthetic
+# complications, retained fetus, hepatic disease) received the *toxicity*
+# template that falsely lists "chocolate / lily ingestion" as the cause.
+#
+# These helpers identify which category template a record currently carries
+# (name-independent fingerprint) and decide the correct category from the
+# disease *name*. Only a confident contradiction triggers a switch, so a record
+# is never made worse; genuinely toxic diseases keep the toxicity category (and
+# are merely re-rendered with species-appropriate toxin examples).
+
+_ETIOLOGY_CATS: list[str] = [
+    "viral_infection",
+    "bacterial_infection",
+    "respiratory_infection",
+    "fungal_infection",
+    "parasitic",
+    "neoplasia",
+    "endocrine_metabolic",
+    "renal_urinary",
+    "cardiac",
+    "respiratory_other",
+    "gastrointestinal",
+    "neurological",
+    "ophthalmic",
+    "musculoskeletal",
+    "dental",
+    "dermatological",
+    "hematological",
+    "reproductive",
+    "toxicity",
+    "trauma",
+    "autoimmune",
+    "nutritional",
+    "genetic_congenital",
+    "degenerative",
+    "behavioral",
+    "generic",
+]
+
+# Near-synonym category pairs whose distinction is a coin-flip for etiology
+# (e.g. pneumonia "respiratory infection" vs "respiratory other"). Never switch
+# between these — it would just churn text without improving accuracy.
+_NOISE_PAIRS: frozenset[tuple[str, str]] = frozenset(
+    {
+        ("respiratory_infection", "respiratory_other"),
+        ("respiratory_other", "respiratory_infection"),
+        ("genetic_congenital", "degenerative"),
+        ("degenerative", "genetic_congenital"),
+    }
+)
+
+# A name that genuinely denotes a toxicosis — keep the toxicity category even if
+# an organ-system keyword (e.g. 神経型 in 鉛中毒（神経型）) would otherwise win.
+_TOXIC_NAME_RE = re.compile(
+    r"中毒|毒性|毒素|毒物|poison|toxic|intoxic|油汚染|硝酸塩|フッ素症|鉄過剰|"
+    r"メトヘモグロビン|煙吸入|パーキンソニズム|殺鼠|農薬|重金属|鉛|銅中毒|ヒ素|"
+    r"キシリトール|エチレングリコール|不凍液|アフラトキシン|モネンシン"
+)
+
+# A name whose etiology is fundamentally nutritional (vitamin/mineral
+# deficiency) — keep the nutritional causes category even when an affected-organ
+# keyword (e.g. 眼型 in ビタミンA欠乏症（眼型）) resolves to that organ system.
+_NUTRITIONAL_NAME_RE = re.compile(r"欠乏|ビタミン|壊血病|deficiency|scurvy")
+
+
+_FP_NAME = "ＮＡＭＥ"  # placeholder unlikely to collide with real text
+_FP_SPECIES = "ＳＰＣ"  # sentinel species (absent from SPECIES_JA -> used verbatim)
+_FP_MIN_CHUNK = 20
+
+
+def build_etiology_fingerprints(gen_fn) -> dict[str, list[str]]:
+    """Return {category: [name/species-independent marker fragments]}.
+
+    ``gen_fn`` is ``gen_causes_ja`` or ``gen_pathophysiology_ja``. Rendering the
+    template with sentinel disease *and* species names, splitting into sentences
+    and stripping the sentinels (and the "における" lead-in) yields boilerplate
+    fragments independent of the disease name **and** the species. A record
+    matches its category if *any* fragment is a substring of its text, so
+    detection stays robust when one sentence is later edited (e.g. re-speciating
+    the toxicity examples): the other stable fragments still identify the
+    template in already-baked data of any species.
+    """
+    fps: dict[str, list[str]] = {}
+    for cat in _ETIOLOGY_CATS:
+        rendered = gen_fn(cat, _FP_NAME, _FP_SPECIES)
+        frags = []
+        for sentence in rendered.split("。"):
+            residual = sentence.replace(_FP_NAME, "").replace(_FP_SPECIES, "").replace("における", "")
+            if len(residual) >= _FP_MIN_CHUNK:
+                frags.append(residual)
+        if frags:
+            fps[cat] = frags
+    return fps
+
+
+def fingerprint_etiology(text: str, fingerprints: dict[str, list[str]]) -> Optional[str]:
+    """Return the category whose template fragments appear in ``text``, else None.
+
+    None means the text is curated / disease-specific (no category template) and
+    must be left untouched.
+    """
+    if not text:
+        return None
+    for cat, chunks in fingerprints.items():
+        if any(chunk in text for chunk in chunks):
+            return cat
+    return None
+
+
+def decide_etiology_category(name_ja: str, name_en: str, applied: str) -> str:
+    """Return the category the etiology text *should* use, given the applied one.
+
+    Returns ``applied`` unchanged unless the disease name confidently indicates a
+    different, non-near-synonym category. Genuinely toxic names keep toxicity;
+    genuinely nutritional names keep nutritional.
+    """
+    resolved = resolve_category_from_name(name_ja, name_en)
+    name = f"{name_ja or ''} {name_en or ''}"
+
+    if applied == "toxicity":
+        # Keep toxicity for real toxicoses (text is still re-rendered with
+        # species-appropriate examples elsewhere). Otherwise move off the
+        # misleading "ingested a poison" etiology to the resolved category, or
+        # the safe generic etiology when the name gives no signal.
+        if _TOXIC_NAME_RE.search(name):
+            return "toxicity"
+        return resolved or "generic"
+
+    if applied == "nutritional" and _NUTRITIONAL_NAME_RE.search(name):
+        # Deficiency diseases: etiology is nutritional even if the name carries
+        # an affected-organ qualifier (e.g. ビタミンA欠乏症（眼型）).
+        return "nutritional"
+
+    if resolved and resolved != applied and (applied, resolved) not in _NOISE_PAIRS:
+        return resolved
+    return applied
 
 
 # ---------------------------------------------------------------------------

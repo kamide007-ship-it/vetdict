@@ -2307,3 +2307,166 @@ def test_served_db_nocardiosis_not_described_as_cardiac():
         if "心筋症" in (row["causes_ja"] or ""):
             failures.append(f"[{row['species']}] {name}: cardiac etiology on nocardiosis")
     assert not failures, "Nocardiosis etiology errors:\n" + "\n".join(failures)
+
+
+# ---------------------------------------------------------------------------
+# Etiology / pathophysiology re-categorisation (causes_ja / pathophysiology_ja)
+# ---------------------------------------------------------------------------
+
+
+def test_served_db_no_cross_species_toxin_examples_in_causes():
+    """The toxicity causes template must not list dog/cat toxins for other species.
+
+    The legacy toxicity etiology hard-coded "犬のチョコレート・猫のユリ" (dog
+    chocolate, cat lily) for *every* species — clinically misleading when shown
+    for a horse, bird or reptile. After re-speciation no non-dog/cat disease may
+    carry those foreign-species toxin examples.
+    """
+    failures = []
+    for row in _served_db_rows():
+        if row["species"] in ("dog", "cat"):
+            continue
+        causes = row["causes_ja"] or ""
+        for phrase in ("犬のチョコレート", "猫のユリ"):
+            if phrase in causes:
+                failures.append(f"[{row['species']}] {row['name_ja']}: '{phrase}'")
+                break
+    assert not failures, f"Found {len(failures)} cross-species toxin etiologies. First 10:\n" + "\n".join(failures[:10])
+
+
+def test_served_db_non_toxicosis_not_described_as_poisoning():
+    """Non-toxic diseases must not claim a toxin-ingestion etiology.
+
+    Anaesthetic complications, retained fetus, photosensitivity etc. previously
+    received the toxicity causes template ("特定の毒性物質への摂取・吸入・経皮
+    吸収である"). Such a name carries no toxic signal, so the etiology must have
+    been moved off the poisoning template.
+    """
+    tox_marker = "特定の毒性物質への摂取"
+    # Names that genuinely denote a toxicosis (keep the toxicity etiology).
+    toxic_kw = (
+        "中毒",
+        "毒性",
+        "毒素",
+        "油汚染",
+        "硝酸塩",
+        "フッ素症",
+        "鉄過剰",
+        "メトヘモグロビン",
+        "煙吸入",
+        "パーキンソニズム",
+        "重金属",
+        "鉛",
+    )
+    non_toxic_names = ("麻酔合併症", "胎児残留", "光線過敏症", "医原性疾患", "購入後症候群")
+    failures = []
+    for row in _served_db_rows():
+        name = row["name_ja"] or ""
+        causes = row["causes_ja"] or ""
+        if tox_marker not in causes:
+            continue
+        if any(k in name for k in toxic_kw):
+            continue  # genuine toxicosis — poisoning etiology is correct
+        if any(k in name for k in non_toxic_names):
+            failures.append(f"[{row['species']}] {name}: poisoning etiology on a non-toxic disease")
+    assert not failures, "Non-toxic poisoning-etiology errors:\n" + "\n".join(failures[:10])
+
+
+def test_served_db_ferret_adrenal_disease_is_endocrine_not_renal():
+    """Ferret adrenal disease must have an endocrine (not renal) etiology.
+
+    "Adrenal" contains the substring "renal", which previously pulled adrenal
+    disease into the renal_urinary etiology template — a notable error since
+    ferret adrenal disease is one of the most common ferret presentations.
+    """
+    renal_marker = "ネフロンの進行性損傷"  # distinctive to the renal causes template
+    failures = []
+    checked = 0
+    for row in _served_db_rows():
+        name = row["name_ja"] or ""
+        if "副腎" not in name:
+            continue
+        # Skip names that are genuinely renal/urinary or explicitly neoplastic.
+        if any(k in name for k in ("腎不全", "腎症", "腎結石")):
+            continue
+        checked += 1
+        if renal_marker in (row["causes_ja"] or ""):
+            failures.append(f"[{row['species']}] {name}: renal etiology on an adrenal disease")
+    if checked == 0:
+        pytest.skip("no adrenal-disease entries found")
+    assert not failures, "Adrenal-disease etiology errors:\n" + "\n".join(failures[:10])
+
+
+def test_resolver_negation_and_substring_guards():
+    """The name-priority resolver must honour negations and word boundaries."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        resolve_category_from_name,
+    )
+
+    # Negated category words must not match (非寄生虫性 != parasitic).
+    assert resolve_category_from_name("脱毛症（非寄生虫性）", "Alopecia (Non-parasitic)") != "parasitic"
+    # "Adrenal" must not resolve to renal via the embedded "renal" substring.
+    assert resolve_category_from_name("副腎嚢胞", "Adrenal Cyst") == "endocrine_metabolic"
+    # Infectious canine hepatitis is viral (adenovirus), not a GI hepatopathy.
+    assert resolve_category_from_name("犬感染性肝炎", "Canine Infectious Hepatitis") == "viral_infection"
+    # Non-herpetic keratitis must not resolve to viral.
+    assert (
+        resolve_category_from_name("猫角膜炎（非ヘルペス性）", "Feline Keratitis (Non-Herpetic)") != "viral_infection"
+    )
+
+
+def test_etiology_recategoriser_keeps_genuine_toxicoses_and_nutrition():
+    """decide_etiology_category must keep correct categories and fix wrong ones."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        decide_etiology_category,
+    )
+
+    # Genuine toxicosis keeps toxicity even with an organ qualifier in the name.
+    assert decide_etiology_category("鉛中毒（神経型）", "Lead Poisoning (Neuro)", "toxicity") == "toxicity"
+    # Non-toxic disease wrongly tagged toxicity moves off the poisoning etiology.
+    assert decide_etiology_category("麻酔合併症", "Anesthetic Complication", "toxicity") != "toxicity"
+    # Deficiency disease keeps a nutritional etiology despite the (眼型) organ tag.
+    assert (
+        decide_etiology_category("ビタミンA欠乏症（眼型）", "Vitamin A Deficiency - Ocular", "nutritional")
+        == "nutritional"
+    )
+    # Near-synonym respiratory categories are never churned.
+    assert decide_etiology_category("上部呼吸器感染症", "Upper Respiratory Infection", "respiratory_infection") in (
+        "respiratory_infection",
+        "respiratory_other",
+    )
+
+
+def test_etiology_fingerprint_detects_legacy_toxicity_text():
+    """Fingerprinting must still recognise the *old* (pre-re-speciation) template.
+
+    Detection keys on name/species-independent fragments, so a later edit of one
+    sentence (the toxin examples) must not blind the detector to baked data.
+    """
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        build_etiology_fingerprints,
+        fingerprint_etiology,
+        gen_causes_ja,
+    )
+
+    fps = build_etiology_fingerprints(gen_causes_ja)
+    legacy = (
+        "馬における光線過敏症の原因は特定の毒性物質への摂取・吸入・経皮吸収である。"
+        "代表的毒性源: 家庭用化学物質（漂白剤・洗剤・界面活性剤）、医薬品の過量投与"
+        "（人用 OTC・NSAID・抗うつ薬）、有毒植物（種特異的: 犬のチョコレート・ブドウ、"
+        "猫のユリ、馬の Ergot 等）、農薬・殺鼠剤、重金属（鉛・銅）、煙・煙草。"
+        "毒性の発現は用量依存性で、体重・種差・代謝能力により重症度が大きく異なる。"
+        "肝臓と腎臓が主要な標的臓器となる。"
+    )
+    assert fingerprint_etiology(legacy, fps) == "toxicity"
+    # Curated / unique text must not be mistaken for a category template.
+    assert fingerprint_etiology("これは完全に独自の臨床記述であり定型文ではない。", fps) is None
