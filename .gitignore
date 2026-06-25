@@ -5,6 +5,7 @@ instance/
 *.db
 *.db.backup_*
 venv/
+.venv/
 
 # Phase enrichment runtime files
 phase1_enrichment_manifest.json
