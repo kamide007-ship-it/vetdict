@@ -10450,8 +10450,65 @@ for _d in DRUGS:
 # ---------------------------------------------------------------------------
 
 
+# ---------------------------------------------------------------------------
+# 商品名（ブランド名）パッチ
+#
+# 日本の臨床現場では商品名（プリンペラン・セレニア等）で薬品を覚えていることが
+# 多いため、ジェネリック名だけでなく商品名でも検索できるよう brand_names_ja /
+# brand_names_en を付与する。検索（search_drugs）と一覧APIのペイロードが
+# brand_names_* を参照する。
+#
+# 追加方法: 薬品 ID をキーに { "brand_names_ja": [...], "brand_names_en": [...] } を
+# 追記するだけ。同じ ID への重複付与は自動でマージ・重複除去される。
+# ---------------------------------------------------------------------------
+BRAND_NAMES_PATCH: Dict[str, Dict[str, List[str]]] = {
+    "metoclopramide": {"brand_names_ja": ["プリンペラン", "テルペラン"], "brand_names_en": ["Reglan", "Primperan"]},
+    "maropitant": {"brand_names_ja": ["セレニア"], "brand_names_en": ["Cerenia"]},
+    "carprofen": {"brand_names_ja": ["リマダイル"], "brand_names_en": ["Rimadyl"]},
+    "meloxicam": {"brand_names_ja": ["メタカム", "モビコックス"], "brand_names_en": ["Metacam", "Mobic"]},
+    "pimobendan": {"brand_names_ja": ["ベトメディン", "ピモベハート"], "brand_names_en": ["Vetmedin"]},
+    "oclacitinib": {"brand_names_ja": ["アポクエル"], "brand_names_en": ["Apoquel"]},
+    "enrofloxacin": {"brand_names_ja": ["バイトリル"], "brand_names_en": ["Baytril"]},
+    "furosemide": {"brand_names_ja": ["ラシックス", "フロセミド"], "brand_names_en": ["Lasix"]},
+    "benazepril": {"brand_names_ja": ["フォルテコール"], "brand_names_en": ["Fortekor"]},
+    "telmisartan": {"brand_names_ja": ["セミントラ", "ミカルディス"], "brand_names_en": ["Semintra", "Micardis"]},
+    "famotidine": {"brand_names_ja": ["ガスター"], "brand_names_en": ["Pepcid"]},
+    "omeprazole": {"brand_names_ja": ["オメプラール", "オメプラゾン"], "brand_names_en": ["Prilosec", "Losec"]},
+    "gabapentin": {"brand_names_ja": ["ガバペン"], "brand_names_en": ["Neurontin"]},
+    "prednisolone": {"brand_names_ja": ["プレドニン", "プレドニゾロン"], "brand_names_en": ["Prelone"]},
+    "diazepam": {"brand_names_ja": ["セルシン", "ホリゾン"], "brand_names_en": ["Valium"]},
+    "midazolam": {"brand_names_ja": ["ドルミカム"], "brand_names_en": ["Versed"]},
+    "ketamine": {"brand_names_ja": ["ケタラール"], "brand_names_en": ["Ketalar", "Ketaset"]},
+    "propofol": {"brand_names_ja": ["ディプリバン", "プロポフォール"], "brand_names_en": ["Diprivan", "PropoFlo"]},
+    "amoxicillin": {"brand_names_ja": ["サワシリン", "パセトシン", "アモキシシリン"], "brand_names_en": ["Amoxil"]},
+    "doxycycline": {"brand_names_ja": ["ビブラマイシン"], "brand_names_en": ["Vibramycin"]},
+    "spironolactone": {"brand_names_ja": ["アルダクトン"], "brand_names_en": ["Aldactone"]},
+    "phenobarbital": {"brand_names_ja": ["フェノバール", "フェノバルビタール"], "brand_names_en": ["Luminal"]},
+    "levetiracetam": {"brand_names_ja": ["イーケプラ"], "brand_names_en": ["Keppra"]},
+    "mirtazapine": {"brand_names_ja": ["レメロン", "リフレックス"], "brand_names_en": ["Remeron", "Mirataz"]},
+    "amlodipine": {"brand_names_ja": ["ノルバスク", "アムロジン"], "brand_names_en": ["Norvasc"]},
+    "famciclovir": {"brand_names_ja": ["ファムビル"], "brand_names_en": ["Famvir"]},
+    "frunevetmab_extended": {"brand_names_ja": ["ソレンシア"], "brand_names_en": ["Solensia"]},
+    "bedinvetmab": {"brand_names_ja": ["リブレラ"], "brand_names_en": ["Librela"]},
+    "lokivetmab": {"brand_names_ja": ["サイトポイント"], "brand_names_en": ["Cytopoint"]},
+    "fuzapladib": {"brand_names_ja": ["ブレンダ"], "brand_names_en": ["Brenda"]},
+}
+
+for _drug_id, _brand in BRAND_NAMES_PATCH.items():
+    _target = _drug_index.get(_drug_id)
+    if not _target:
+        continue
+    for _key in ("brand_names_ja", "brand_names_en"):
+        _existing = list(_target.get(_key) or [])
+        for _name in _brand.get(_key, []):
+            if _name and _name not in _existing:
+                _existing.append(_name)
+        if _existing:
+            _target[_key] = _existing
+
+
 def search_drugs(query: str, category: str | None = None, species: str | None = None) -> List[Dict]:
-    """薬品名・カテゴリ・動物種で検索する。"""
+    """薬品名・カテゴリ・動物種で検索する。商品名（ブランド名）でもヒットさせる。"""
     query_lower = query.lower() if query else ""
     results = []
     for drug in DRUGS:
@@ -10464,8 +10521,11 @@ def search_drugs(query: str, category: str | None = None, species: str | None = 
         elif species:
             continue
         if query_lower:
+            brand_ja = " ".join(drug.get("brand_names_ja") or [])
+            brand_en = " ".join(drug.get("brand_names_en") or [])
             searchable = (
-                f"{drug['name']} {drug['name_ja']} {drug.get('mechanism', '')} {drug.get('mechanism_ja', '')}".lower()
+                f"{drug['name']} {drug['name_ja']} {brand_ja} {brand_en} "
+                f"{drug.get('mechanism', '')} {drug.get('mechanism_ja', '')}".lower()
             )
             if query_lower not in searchable:
                 continue
@@ -10519,6 +10579,8 @@ def api_list_drugs():
                     "category_ja": DRUG_CATEGORIES.get(d["category"], {}).get("ja", d["category"]),
                     "contraindications_ja": d.get("contraindications_ja", ""),
                     "species_info": d.get("species_info", {}),
+                    "brand_names_ja": d.get("brand_names_ja") or [],
+                    "brand_names_en": d.get("brand_names_en") or [],
                 }
                 for d in results
             ],

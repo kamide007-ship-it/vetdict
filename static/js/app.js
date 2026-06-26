@@ -833,7 +833,10 @@ function setupGlobalSearch(){
           if(globalSearchSpeciesFilter&&d.species_info&&!d.species_info[globalSearchSpeciesFilter])return;
           const name=(d.name||"").toLowerCase();
           const nameJa=(d.name_ja||"").toLowerCase();
-          if(name.includes(q)||nameJa.includes(q)){matches.push({type:"drug",name:d.name,name_ja:d.name_ja});}
+          /* 商品名（プリンペラン等）でもヒットさせる */
+          const brands=(d.brand_names_ja||[]).concat(d.brand_names_en||[]);
+          const brandHit=brands.some(b=>String(b).toLowerCase().includes(q));
+          if(name.includes(q)||nameJa.includes(q)||brandHit){matches.push({type:"drug",name:d.name,name_ja:d.name_ja});}
         });
       }
       if(matches.length===0){results.innerHTML=`<div class="search-result-item" style="color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;results.style.display="block";return;}
@@ -3592,7 +3595,11 @@ function renderDrugList(){
   let filtered=allDrugs;
   if(cat)filtered=filtered.filter(d=>d.category===cat);
   if(species)filtered=filtered.filter(d=>d.species_info&&d.species_info[species]);
-  if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.category_ja||"").toLowerCase().includes(search));
+  if(search){
+    /* 商品名（プリンペラン等）でもヒットさせる */
+    const brandsHit=d=>{const b=(d.brand_names_ja||[]).concat(d.brand_names_en||[]);for(let i=0;i<b.length;i++){if(String(b[i]).toLowerCase().includes(search))return true;}return false;};
+    filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.category_ja||"").toLowerCase().includes(search)||brandsHit(d));
+  }
   document.getElementById("drugCount").textContent=t("diseaseCount").replace("%filtered%",filtered.length).replace("%total%",allDrugs.length);
   if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDrugMatch")}</div>`;return;}
   filtered=[...filtered].sort((a,b)=>(b.sponsor?1:0)-(a.sponsor?1:0));
@@ -3621,9 +3628,13 @@ function renderDrugList(){
     const sponsorLink=d.sponsor?`<div class="drug-sponsor-link"><strong class="drug-sponsor-name">${escapeHtml(d.sponsor_name||"Equine & Canine Vet Nutrition")}</strong><br/><span class="drug-sponsor-vet">${t("sponsorVetLabel")}</span><br/><a href="${sanitizeUrl(d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/')}" target="_blank" class="drug-sponsor-url">${t("productDetails")}</a></div>`:"";
     const dName=highlightMatch(d.name||"",search);
     const dNameJa=highlightMatch(d.name_ja||"",search);
+    /* 商品名（ブランド名）表示。日本獣医臨床ではプリンペラン等の商品名で覚えていることが多いため、
+       一覧カードに小さく表示し、検索でヒットしたものはハイライトする。 */
+    const brands=(d.brand_names_ja||[]).concat(d.brand_names_en||[]);
+    const brandRow=brands.length?`<div class="d-name-brand">${currentLang==="ja"?"別名":"Brand"}: ${brands.map(b=>highlightMatch(String(b),search)).join("・")}</div>`:"";
     return`<div class="disease-db-item drug-item${d.sponsor?" drug-sponsored":""}" role="button" tabindex="0" aria-expanded="false">
       <div class="drug-head-row">
-        <div class="d-name">${dName} <span class="d-name-ja">${dNameJa}</span>${sponsorBadge}</div>
+        <div class="d-name">${dName} <span class="d-name-ja">${dNameJa}</span>${sponsorBadge}${brandRow}</div>
         <span class="drug-category-tag">${escapeHtml(catLabel)}</span>
       </div>${dosageHtml}
       <div class="disease-detail">${sponsorLink}
