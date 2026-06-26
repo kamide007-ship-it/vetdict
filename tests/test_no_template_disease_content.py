@@ -2470,3 +2470,123 @@ def test_etiology_fingerprint_detects_legacy_toxicity_text():
     assert fingerprint_etiology(legacy, fps) == "toxicity"
     # Curated / unique text must not be mistaken for a category template.
     assert fingerprint_etiology("これは完全に独自の臨床記述であり定型文ではない。", fps) is None
+
+
+# ===========================================================================
+# Toxicology: agent-specific pathophysiology / etiology
+# ===========================================================================
+# Every poison previously received the SAME generic category paragraph for its
+# pathophysiology/causes ("毒物は特異的標的に作用し…肝・腎は代謝・排泄の主要臓器").
+# This is clinically misleading: chocolate acts on the heart/CNS, xylitol on
+# insulin/liver, ethylene glycol on renal oxalate crystals, lead on haem
+# synthesis. The toxicology library (scripts/template_elimination/
+# toxicology_library.py) replaces these with accurate, agent-specific text.
+# These tests fail if the generic toxin template resurfaces on a curated agent,
+# or if a critical poison loses its mechanism-defining keywords.
+
+# (disease-name substring, species, required mechanism keyword(s) that the
+#  curated pathophysiology MUST contain — any one of the inner tuple suffices).
+_CRITICAL_TOXIN_MECHANISMS = [
+    ("チョコレート中毒", "Dog", ("メチルキサンチン", "テオブロミン")),
+    ("キシリトール中毒", "Dog", ("インスリン",)),
+    ("ブドウ・レーズン中毒", "Dog", ("腎",)),
+    ("タマネギ・ニンニク中毒", "Dog", ("溶血", "ハインツ")),
+    ("エチレングリコール中毒", "Cat", ("シュウ酸", "オキサ")),
+    ("アセトアミノフェン中毒", "Cat", ("メトヘモグロビン", "NAPQI", "グルタチオン")),
+    ("鉛中毒", "Dog", ("ヘム", "δ-アミノレブリン")),
+    ("亜鉛中毒", "Dog", ("溶血", "酸化")),
+    ("有機リン中毒", "Horse", ("アセチルコリンエステラーゼ", "コリン")),
+    ("イベルメクチン中毒", "Reptile", ("GABA", "塩素チャネル", "塩素", "ABCB1")),
+]
+
+_GENERIC_TOXIN_PATHO_MARKER = "毒物は特異的標的"
+_GENERIC_TOXIN_CAUSE_MARKER = "特定の毒性物質への摂取"
+
+
+def _toxicology_lib():
+    import sys
+
+    sys.path.insert(0, str(ROOT / "scripts" / "template_elimination"))
+    import toxicology_library
+
+    return toxicology_library
+
+
+def test_critical_toxins_have_agent_specific_pathophysiology():
+    """Common poisons must carry their true, distinct mechanism — not the generic
+    'a toxin damages cells' template."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    by_key = {}
+    for e in entries:
+        by_key.setdefault((str(e.get("name_ja", "")).split("（")[0], e.get("species")), e)
+
+    failures = []
+    for name, species, keywords in _CRITICAL_TOXIN_MECHANISMS:
+        entry = by_key.get((name, species))
+        if entry is None:
+            continue
+        patho = str(entry.get("pathophysiology_ja", ""))
+        if _GENERIC_TOXIN_PATHO_MARKER in patho:
+            failures.append(f"{species}/{name}: still has the generic toxin template")
+        elif not any(kw in patho for kw in keywords):
+            failures.append(f"{species}/{name}: missing mechanism keyword {keywords}; got {patho[:60]!r}")
+    assert not failures, "Toxin pathophysiology not agent-specific:\n" + "\n".join(failures)
+
+
+def test_no_generic_toxin_template_on_curated_agents_in_json():
+    """No disease that resolves to a curated toxic agent may still carry the
+    generic toxin pathophysiology/causes template in the source JSON."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    lib = _toxicology_lib()
+
+    offenders = []
+    for e in entries:
+        name_ja = str(e.get("name_ja", ""))
+        name_en = str(e.get("name", ""))
+        if not lib.resolve_toxic_agent(name_ja, name_en):
+            continue
+        if _GENERIC_TOXIN_PATHO_MARKER in str(e.get("pathophysiology_ja", "")):
+            offenders.append(f"patho_ja: {e.get('species')}/{name_ja}")
+        if _GENERIC_TOXIN_CAUSE_MARKER in str(e.get("causes_ja", "")):
+            offenders.append(f"causes_ja: {e.get('species')}/{name_ja}")
+    assert not offenders, "Curated toxic agents still carry the generic template:\n" + "\n".join(offenders[:30])
+
+
+def test_toxin_resolver_does_not_confuse_zinc_and_lead():
+    """亜鉛 (zinc) contains 鉛 (lead) as a substring — the resolver must not map
+    zinc to lead's mechanism (a real bug that mislabelled zinc as haem-synthesis
+    inhibition)."""
+    lib = _toxicology_lib()
+    assert lib.resolve_toxic_agent("亜鉛中毒", "Zinc Toxicosis") == "zinc"
+    assert lib.resolve_toxic_agent("鉛中毒", "Lead Poisoning") == "lead"
+    # 硝酸塩 (nitrate) contains 塩 — must not map to salt.
+    assert lib.resolve_toxic_agent("硝酸塩中毒", "Nitrate Toxicity") == "nitrate"
+    assert lib.resolve_toxic_agent("塩中毒", "Salt Toxicosis") == "salt"
+
+
+def test_toxin_resolver_ignores_non_chemical_toxicoses():
+    """Names containing a toxin keyword but that are NOT chemical poisonings
+    (salmon poisoning = an infection) must resolve to None and be left alone."""
+    lib = _toxicology_lib()
+    assert lib.resolve_toxic_agent("サケ中毒症", "Salmon Poisoning Disease") is None
+
+
+def test_lily_toxicosis_is_species_accurate():
+    """Lily nephrotoxicity is cat-specific; the dog entry must NOT claim
+    cat-specific acute kidney injury, and must note dogs get only GI signs."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    for e in entries:
+        if str(e.get("name_ja", "")).split("（")[0] != "ユリ中毒":
+            continue
+        patho = str(e.get("pathophysiology_ja", ""))
+        if not patho or "は、" not in patho[:40]:
+            continue
+        if e.get("species") == "Dog":
+            assert "猫特異的" not in patho, "Dog lily entry wrongly labelled cat-specific"
+            assert "犬では" in patho, "Dog lily entry must describe the canine (GI-only) course"
