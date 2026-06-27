@@ -2769,3 +2769,73 @@ def test_served_db_hepatic_fibrosis_etiology_is_hepatic():
         if "骨折・脱臼・靭帯損傷" in causes:
             failures.append(f"[{row['species']}] {name}: fracture cause on hepatic fibrosis")
     assert not failures, "Hepatic fibrosis etiology errors:\n" + "\n".join(failures)
+
+
+# ---------------------------------------------------------------------------
+# Resolver coverage for behavioral / electrolyte / arrhythmia / urinary
+# diseases that previously fell through to a wrong organ-system template.
+# ---------------------------------------------------------------------------
+
+
+def test_resolve_category_behavioral_disorders():
+    """Behavioural disorders must not get an organ-system (cardiac/renal) cause."""
+    R = _resolver()
+    behavioral = {
+        "羽毛破壊行動": "behavioral",
+        "常同行動（バー噛み）": "behavioral",
+        "毛引き（毛噛み）": "behavioral",
+        "過剰グルーミング": "behavioral",
+        "ケージ噛み": "behavioral",
+        "マーキング・スプレー行動": "behavioral",
+        "過活動症（犬のADHD）": "behavioral",
+        "猫心因性多飲": "behavioral",
+    }
+    failures = [f"{n}: {R(n, '')} != {c}" for n, c in behavioral.items() if R(n, "") != c]
+    assert not failures, "Behavioral resolution errors:\n" + "\n".join(failures)
+
+
+def test_resolve_category_electrolyte_arrhythmia_urinary():
+    """Electrolyte → endocrine_metabolic, arrhythmia/hypertension → cardiac,
+    ureter/urethra/nephritis → renal_urinary."""
+    R = _resolver()
+    expected = {
+        "高リン血症": "endocrine_metabolic",
+        "猫高カリウム血症": "endocrine_metabolic",
+        "低ナトリウム血症": "endocrine_metabolic",
+        "全身性高血圧": "cardiac",
+        "第三度房室ブロック": "cardiac",
+        "洞不全症候群": "cardiac",
+        "心嚢水貯留": "cardiac",
+        "猫尿管閉塞": "renal_urinary",
+        "尿道閉塞": "renal_urinary",
+        "間質性腎炎": "renal_urinary",
+    }
+    failures = [f"{n}: {R(n, '')} != {c}" for n, c in expected.items() if R(n, "") != c]
+    assert not failures, "Resolution errors:\n" + "\n".join(failures)
+
+
+def test_resolve_category_no_false_positives_from_new_patterns():
+    """New tokens must not capture look-alike diseases of other systems."""
+    R = _resolver()
+    # 不安定症 (instability) must not become behavioral via 不安*.
+    assert R("環軸椎不安定症", "Atlantoaxial Instability") != "behavioral"
+    # Vitamin-E/Se cage paralysis is nutritional, not behavioral (no bare ケージ).
+    assert R("ケージ麻痺（VE/Se欠乏）", "Cage Paralysis") != "behavioral"
+    # Predator attack injury is trauma, not behavioral (no bare 攻撃).
+    assert R("捕食者攻撃損傷", "Predator Attack Injury") != "behavioral"
+    # HYPP is a channelopathy — must keep neurological, not flip to metabolic.
+    assert R("高カリウム血性周期性四肢麻痺 (HYPP)", "HYPP") == "neurological"
+
+
+def test_served_db_behavioral_disorders_not_organ_system_etiology():
+    """No behavioural disorder may carry a cardiomyopathy / nephron-damage cause."""
+    behavioral_kw = ("羽毛破壊", "常同行動", "毛引き", "過剰グルーミング", "ケージ噛み", "毛噛み")
+    failures = []
+    for row in _served_db_rows():
+        name = (row["name_ja"] or "") + " " + (row["name"] or "")
+        if not any(k in name for k in behavioral_kw):
+            continue
+        causes = row["causes_ja"] or ""
+        if "心筋症（DCM/HCM）" in causes or "ネフロンの進行性損傷" in causes:
+            failures.append(f"[{row['species']}] {name}: organ-system cause on a behavioral disorder")
+    assert not failures, "Behavioral etiology errors:\n" + "\n".join(failures[:10])
