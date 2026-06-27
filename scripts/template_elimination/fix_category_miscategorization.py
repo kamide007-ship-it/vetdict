@@ -53,9 +53,23 @@ from scripts.template_elimination.clinical_fields_generator import (  # noqa: E4
 from scripts.template_elimination.curated_dangerous_treatments import (  # noqa: E402
     curated_dangerous_treatment,
 )
+from scripts.template_elimination.curated_etiology import (  # noqa: E402
+    STUB_SIGNATURES,
+    curated_etiology,
+)
 from scripts.template_elimination.eliminate_templates import SPECIES_NORM  # noqa: E402
 
 JSON_PATH = ROOT / "diseases_all_species.json"
+
+
+def _field_is_replaceable(text: str, fingerprints) -> bool:
+    """A field may be overwritten with curated text when it is empty, a category
+    template, or a vague generic stub — never when it is genuine curated prose."""
+    if not text:
+        return True
+    if fingerprint_etiology(text, fingerprints) is not None:
+        return True
+    return any(sig in text for sig in STUB_SIGNATURES)
 
 
 def remediate(data: list[dict], apply: bool) -> dict:
@@ -67,7 +81,7 @@ def remediate(data: list[dict], apply: bool) -> dict:
         ),
     }
 
-    stats = {"treatment": 0, "causes_ja": 0, "pathophysiology_ja": 0}
+    stats = {"treatment": 0, "causes_ja": 0, "pathophysiology_ja": 0, "curated_etiology": 0}
     treatment_examples: list[str] = []
 
     for entry in data:
@@ -86,7 +100,19 @@ def remediate(data: list[dict], apply: bool) -> dict:
             if apply:
                 entry["treatment_ja"] = new_tx
 
-        # 2. Etiology / pathophysiology re-categorisation.
+        # 2. Curated etiology / pathophysiology for multifactorial diseases that
+        #    resist single-category templating (laminitis, hepatic fibrosis).
+        #    Applied BEFORE recategorisation so the resulting curated prose is not
+        #    a template and the recategoriser leaves it alone.
+        curated = curated_etiology(species, name_ja, name_en)
+        if curated:
+            for field, new_val in curated.items():
+                if _field_is_replaceable(entry.get(field) or "", fps[field][0]) and new_val != (entry.get(field) or ""):
+                    stats["curated_etiology"] += 1
+                    if apply:
+                        entry[field] = new_val
+
+        # 3. Etiology / pathophysiology re-categorisation.
         for field, (fingerprints, gen_fn) in fps.items():
             text = entry.get(field) or ""
             applied = fingerprint_etiology(text, fingerprints)

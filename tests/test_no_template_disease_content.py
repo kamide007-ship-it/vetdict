@@ -2712,3 +2712,60 @@ def test_served_db_thrush_etiology_is_not_musculoskeletal():
         if "骨折・脱臼・靭帯損傷" in causes:
             failures.append(f"[{row['species']}] {name}: musculoskeletal cause on thrush")
     assert not failures, "Thrush etiology errors:\n" + "\n".join(failures)
+
+
+# ---------------------------------------------------------------------------
+# Curated etiology for multifactorial diseases (laminitis, hepatic fibrosis)
+# ---------------------------------------------------------------------------
+
+
+def test_curated_etiology_is_disease_specific():
+    """Laminitis & hepatic fibrosis get accurate, disease-specific etiology."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    lam = curated_etiology("horse", "蹄葉炎", "Laminitis")
+    assert lam is not None
+    # Endocrinopathic cause (EMS/PPID) is the modern consensus, not "fractures".
+    assert "EMS" in lam["causes_ja"] and "インスリン" in lam["causes_ja"]
+    assert "骨折・脱臼・靭帯損傷" not in lam["causes_ja"]
+    # Pathophysiology describes the laminar failure, not a generic bone template.
+    assert "葉層" in lam["pathophysiology_ja"]
+
+    hf = curated_etiology("parrot", "肝線維症（オウム）", "Hepatic Fibrosis")
+    assert hf is not None
+    assert "肝" in hf["causes_ja"] and "骨折・脱臼・靭帯損傷" not in hf["causes_ja"]
+    # Species name is woven in (not a hard-coded other species).
+    assert "オウム" in hf["pathophysiology_ja"]
+    assert "肝星細胞" in hf["pathophysiology_ja"]
+
+    # Non-curated disease returns None.
+    assert curated_etiology("dog", "骨折", "Fracture") is None
+
+
+def test_served_db_laminitis_etiology_not_musculoskeletal():
+    """Equine laminitis causes must not be the fracture/dislocation template."""
+    failures = []
+    for row in _served_db_rows():
+        name = (row["name_ja"] or "") + " " + (row["name"] or "")
+        if "蹄葉炎" not in name and "Laminitis" not in name:
+            continue
+        causes = row["causes_ja"] or ""
+        if "骨折・脱臼・靭帯損傷" in causes:
+            failures.append(f"[{row['species']}] {name}: musculoskeletal fracture cause on laminitis")
+    assert not failures, "Laminitis etiology errors:\n" + "\n".join(failures)
+
+
+def test_served_db_hepatic_fibrosis_etiology_is_hepatic():
+    """Hepatic fibrosis causes must describe liver injury, not fractures."""
+    failures = []
+    for row in _served_db_rows():
+        name = (row["name_ja"] or "") + " " + (row["name"] or "")
+        if "肝線維症" not in name and "Hepatic Fibrosis" not in name:
+            continue
+        causes = row["causes_ja"] or ""
+        if "骨折・脱臼・靭帯損傷" in causes:
+            failures.append(f"[{row['species']}] {name}: fracture cause on hepatic fibrosis")
+    assert not failures, "Hepatic fibrosis etiology errors:\n" + "\n".join(failures)

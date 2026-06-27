@@ -1174,7 +1174,20 @@ JSONオーバーレイ自体を修正し、served-DB パスは安全網として
 - ruff check / format: 全変更ファイルで通過
 - 再現手順: `fix_category_miscategorization.py --apply` → `migrate_to_sqlite.py` → `build_disease_search_index.py`（名前不変のためno-op）
 
+### 蹄葉炎・肝線維症のキュレート病因（単一カテゴリに収まらない疾患）
+カテゴリ再分類では「誤テンプレを別の誤テンプレに置換」するだけになる多因子疾患を、
+教科書準拠の疾患固有の病因・病態生理に置換（`scripts/template_elimination/curated_etiology.py`、新規）。
+- **蹄葉炎/Laminitis（馬3件）**: 病因を内分泌性（EMS/PPID高インスリン血症 — 現在の最多原因）・
+  敗血症/炎症性（SIRS）・過重負重性に正確化。「骨折・脱臼・股関節形成不全」という誤病因を撲滅。
+  病態生理は葉層機能不全→蹄骨回転・沈下の機序（MMP活性化・微小循環障害）を記述。
+  既存の良質な病態生理（基本の蹄葉炎エントリ）は**上書きせず温存**（置換は空/テンプレ/スタブのみ）。
+- **肝線維症/Hepatic Fibrosis（全8種）**: 慢性肝傷害→肝星細胞活性化→コラーゲン沈着→門脈圧亢進/肝不全の
+  病態生理と、胆汁うっ滞・栄養性・毒性（カビ毒/重金属）・感染・鉄過剰・慢性うっ血の病因を種名込みで記述。
+- 実装: `fix_category_miscategorization.py` に curated etiology パスを追加（JSON本体、置換可能フィールドのみ）。
+  `migrate_to_sqlite.py` に `apply_curated_etiology()` を served-DB安全網として追加。
+- 回帰テスト +3件（curated_etiology のユニット + 配信DBで蹄葉炎/肝線維症が骨折病因を持たないこと）。
+- フルテストスイート: **3,427件合格**（34 skip）、ruff clean。
+
 ### 残課題（次セッション候補）
-- 蹄葉炎/Laminitis の病因: 内分泌(EMS/PPID)/炎症/血管性が複合 — 単一カテゴリに収まらずキュレート推奨
-- 肝線維症の病因: 肝専用カテゴリが無く GI テンプレートが最善近似 — キュレート推奨
 - causes_ja/pathophysiology_ja のカテゴリテンプレート自体の疾患固有化（無典拠生成は捏造リスクのため獣医レビュー前提）
+- 他の多因子疾患（合成カテゴリ名等）のキュレート病因の拡充
