@@ -163,14 +163,22 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"副甲状腺|parathyroid|栄養性二次性|代謝性|metabolic|"
             r"インスリン|insulin|糖原病|glycogen storage|脂肪肝|肝リピドーシス|"
             r"hepatic lipidosis|ケトーシス|ketosis|アシドーシス|acidosis|"
-            r"アルカローシス|電解質異常|electrolyte"
+            r"アルカローシス|電解質異常|electrolyte|"
+            # Specific electrolyte derangements (were mis-tagged cardiac/renal).
+            # Require 血症 in JA so HYPP (高カリウム血性周期性四肢麻痺) keeps its
+            # neurological classification rather than flipping to metabolic.
+            r"高リン血症|hyperphosphat|低リン血症|hypophosphat|"
+            r"高カリウム血症|hyperkal|低カリウム血症|hypokal|"
+            r"高ナトリウム血症|hypernatr|低ナトリウム血症|hyponatr|"
+            r"高マグネシウム血症|hypermagnes|低マグネシウム血症|hypomagnes"
         ),
         "endocrine_metabolic",
     ),
     # Renal / urinary
     (
         re.compile(
-            r"腎臓|腎不全|腎症|腎結石|腎疾患|腎障害|(?<!ad)renal|kidney|nephritis|nephropathy|"
+            r"腎臓|腎不全|腎症|腎炎|腎結石|腎疾患|腎障害|腎石灰化|nephrocalcin|"
+            r"腎アミロイド|renal amyloid|尿道|urethra|尿管|ureter|(?<!ad)renal|kidney|nephritis|nephropathy|"
             r"CKD|AKI|尿石|尿路結石|urolith|膀胱炎|cystitis|"
             r"下部尿路|lower urinary|FLUTD|FIC|間質性膀胱炎|"
             r"尿閉|urinary obstruction|蛋白尿|proteinuria|"
@@ -188,7 +196,9 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"DCM|HCM|拡張型心筋症|肥大型心筋症|"
             r"僧帽弁|mitral|三尖弁|tricuspid|心房中隔|心室中隔|"
             r"動脈管開存|PDA|不整脈|arrhythmia|"
-            r"心嚢液貯留|pericardial|心タンポナーデ|"
+            r"心嚢液貯留|心嚢水|pericardial|心タンポナーデ|"
+            r"房室ブロック|atrioventricular block|洞不全|sick sinus|"
+            r"全身性高血圧|動脈性高血圧|hypertension|"
             r"血栓塞栓症|thromboembolism|FATE|サドル血栓|"
             # Vascular / aortic disease — previously fell through to a
             # musculoskeletal "fracture" etiology or no category at all.
@@ -397,12 +407,30 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
         ),
         "degenerative",
     ),
-    # Behavioral
+    # Behavioral. NB: precise tokens (不安症 not 不安, 攻撃行動 not 攻撃) so spinal
+    # "不安定症" and trauma "攻撃損傷" are never mis-tagged behavioral. This is the
+    # last pattern, so it only claims diseases no organ-system pattern matched.
     (
         re.compile(
-            r"行動学|behavioral|behavior|anxiety|不安症|"
+            r"行動学|behavioral|behavior|anxiety|不安症|不安障害|"
             r"強迫|compulsive|分離不安|separation|"
-            r"恐怖|phobia|aggression|攻撃行動"
+            r"恐怖|phobia|aggression|攻撃行動|"
+            # Stereotypies / self-directed / husbandry-behaviour disorders
+            r"毛引き|barbering|常同行動|stereotyp|過剰グルーミング|overgroom|over-groom|over groom|"
+            r"毛噛み|毛咬み|毛むしり|fur chew|fur-chew|fur pluck|"
+            r"ケージ噛み|バー噛み|cage bit|cage chew|bar chew|bar-bit|"
+            r"自己塗布|self-anoint|self anoint|"
+            r"羽毛破壊|羽咬|羽毛むしり|feather destruct|feather pick|feather-pick|feather pluck|"
+            r"過度発声|過剰発声|夜間発声|scream|excessive vocal|night vocal|vocalization issue|barking|"
+            r"マーキング|尿スプレー|尿マーキング|urine spray|urine mark|territorial marking|spraying behavior|"
+            r"行動性拒食|behavioral anorexia|"
+            r"共食い|子食い|子拒絶|食殺|cannibal|joey reject|infanticide|"
+            r"資源防衛|resource guard|"
+            r"過活動症|hyperkinesis|ADHD|"
+            r"異食症|\bpica\b|"
+            r"つがい攻撃|縄張り攻撃|同居個体攻撃|ケージメイト攻撃|mate aggression|territorial aggression|"
+            r"ストレス症候群|ストレス関連行動|ストレス性自己|社会的ストレス|ストレス誘発性自己|"
+            r"うつ・ストレス|psychogenic|心因性|オウム目ストレス|環境ストレス症候群|psittacine stress"
         ),
         "behavioral",
     ),
