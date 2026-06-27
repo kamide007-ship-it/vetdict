@@ -2891,3 +2891,15 @@ def test_served_db_egg_binding_not_respiratory_or_bacterial_template():
         if "卵" not in causes and "産卵" not in causes and "胎位" not in causes:
             failures.append(f"[{row['species']}] {name}: non-reproductive etiology on egg binding")
     assert not failures, "Egg binding etiology errors:\n" + "\n".join(failures)
+
+
+def test_resolve_category_slobbers_buccal_spur_dental_and_behavioral():
+    """Slobbers/buccal spur -> dental; behavioral-disorder names -> behavioral."""
+    R = _resolver()
+    assert R("流涎（歯科関連）", "Slobbers (Dental-Related)") == "dental"
+    assert R("頬棘状突起潰瘍", "Buccal Spur Ulceration") == "dental"
+    assert R("拒食（行動性）", "Anorexia (Behavioral)") == "behavioral"
+    assert R("ストレス関連疾患", "Stress-Related Illness") == "behavioral"
+    # Guard: muscle/spine 棘 names must NOT become dental.
+    assert R("棘下筋拘縮", "Infraspinatus Contracture") != "dental"
+    assert R("棘突起重複症（キッシングスパイン）", "Kissing Spines") != "dental"

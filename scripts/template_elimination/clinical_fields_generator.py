@@ -290,7 +290,11 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
         re.compile(
             r"歯(?!科)|歯肉|歯周|歯石|歯髄|齲歯|dental|tooth|periodontal|"
             r"歯科疾患|不正咬合|malocclusion|過長歯|"
-            r"歯根膿瘍|tooth root abscess|歯瘻"
+            r"歯根膿瘍|tooth root abscess|歯瘻|"
+            # Slobbers/ptyalism in rodents & rabbits is a dental sign; buccal
+            # spurs are tooth points. NB: 頬棘 only (臼歯棘 already matches via
+            # 歯) so 棘下筋/棘突起 (muscle/spine) are never mis-tagged dental.
+            r"流涎|スロバーズ|slobber|ptyalism|頬棘|buccal spur|cheek teeth point"
         ),
         "dental",
     ),
@@ -426,6 +430,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
     (
         re.compile(
             r"行動学|behavioral|behavior|anxiety|不安症|不安障害|"
+            r"行動障害|行動性|ストレス関連疾患|"
             r"強迫|compulsive|分離不安|separation|"
             r"恐怖|phobia|aggression|攻撃行動|"
             # Stereotypies / self-directed / husbandry-behaviour disorders
