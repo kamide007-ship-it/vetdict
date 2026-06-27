@@ -1509,6 +1509,37 @@ def fix_dangerous_treatment_in_served_db(conn) -> dict[str, int]:
     return stats
 
 
+def apply_curated_dangerous_treatments(conn) -> int:
+    """Replace dangerous category-mismatched treatments with curated protocols.
+
+    Handles the residual cases ``fix_dangerous_treatment_in_served_db`` cannot:
+    diseases that resolve to the generic ``general`` class but carry a
+    toxin-decontamination or deworming template that is clinically wrong for them
+    (cecal dysbiosis, haemolytic anaemia, proventricular ulceration, a gizzard
+    foreign body, a cerebral infarct, rectal prolapse, fibrotic myopathy,
+    neonatal conjunctivitis). Gated on a dangerous fingerprint AND a curated
+    entry matching the disease, so no other record is touched.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_dangerous_treatments import (
+        curated_dangerous_treatment,
+    )
+
+    rows = conn.execute("SELECT id, species, name, name_ja, treatment_ja FROM diseases").fetchall()
+    n = 0
+    for row in rows:
+        new_tx = curated_dangerous_treatment(
+            row["species"] or "", row["name_ja"] or "", row["name"] or "", row["treatment_ja"] or ""
+        )
+        if new_tx:
+            conn.execute(
+                "UPDATE diseases SET treatment_ja = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new_tx, row["id"]),
+            )
+            n += 1
+    return n
+
+
 def recategorize_etiology_fields(conn) -> dict[str, int]:
     """Fix causes_ja / pathophysiology_ja that carry the WRONG category template.
 
@@ -1655,6 +1686,13 @@ def main(db_path: str | None = None):
         tx_fix = fix_dangerous_treatment_in_served_db(conn)
         for klass, n in tx_fix.items():
             print(f"  → {klass}: {n} treatments corrected")
+
+        # Replace the remaining dangerous *category* mismatches the fallback
+        # generator cannot fix (toxin-decontamination on dysbiosis/ulcer/anaemia,
+        # deworming on a cerebral infarct / rectal prolapse) with curated,
+        # condition-specific, species-appropriate protocols.
+        cur_n = apply_curated_dangerous_treatments(conn)
+        print(f"  → {cur_n} curated treatment replacements")
 
         # Correct miscategorised causes_ja / pathophysiology_ja (e.g. ferret
         # adrenal disease tagged renal, non-toxicoses tagged toxicity) and drop

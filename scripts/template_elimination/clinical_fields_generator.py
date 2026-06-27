@@ -72,7 +72,12 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"バルトネラ|Bartonella|ヘモバルトネラ|ヘモプラズマ|hemoplasma|"
             r"猫ひっかき病|cat scratch|肺炎球菌|髄膜炎菌|淋菌|破傷風|"
             r"ノカルジア|Nocardia|紅斑熱|spotted fever|"
-            r"豚丹毒|Erysipelothrix|Q熱|Coxiella|リケッチア|Rickettsia"
+            r"豚丹毒|Erysipelothrix|Q熱|Coxiella|リケッチア|Rickettsia|"
+            # Bacterial hoof/foot infections (anaerobic, Fusobacterium,
+            # Dichelobacter). Must precede the musculoskeletal "蹄/hoof"
+            # catch-all so e.g. Thrush is not given a fracture etiology.
+            r"蹄叉腐爛|thrush|蹄膿瘍|hoof abscess|蹄底膿瘍|subsolar abscess|"
+            r"蹄腐敗|foot rot|蹄冠瘻|quittor"
         ),
         "bacterial_infection",
     ),
@@ -165,7 +170,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
     # Renal / urinary
     (
         re.compile(
-            r"腎臓|腎不全|腎症|腎結石|(?<!ad)renal|kidney|nephritis|nephropathy|"
+            r"腎臓|腎不全|腎症|腎結石|腎疾患|腎障害|(?<!ad)renal|kidney|nephritis|nephropathy|"
             r"CKD|AKI|尿石|尿路結石|urolith|膀胱炎|cystitis|"
             r"下部尿路|lower urinary|FLUTD|FIC|間質性膀胱炎|"
             r"尿閉|urinary obstruction|蛋白尿|proteinuria|"
@@ -184,7 +189,13 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"僧帽弁|mitral|三尖弁|tricuspid|心房中隔|心室中隔|"
             r"動脈管開存|PDA|不整脈|arrhythmia|"
             r"心嚢液貯留|pericardial|心タンポナーデ|"
-            r"血栓塞栓症|thromboembolism|FATE|サドル血栓"
+            r"血栓塞栓症|thromboembolism|FATE|サドル血栓|"
+            # Vascular / aortic disease — previously fell through to a
+            # musculoskeletal "fracture" etiology or no category at all.
+            r"心疾患|心血管疾患|動脈硬化|アテローム|atheroscler|arterioscler|"
+            # NB: 動脈瘤(?!様) excludes "動脈瘤様" (aneurysm-*like*), which is a
+            # descriptor for aneurysmal bone cysts — a bone lesion, not vascular.
+            r"大動脈|aortic|動脈瘤(?!様)|aneurysm"
         ),
         "cardiac",
     ),
@@ -226,7 +237,9 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"脊髄|spinal cord|椎間板|IVDD|disc disease|"
             r"麻痺|paralysis|paresis|"
             r"重症筋無力症|myasthenia|"
-            r"水頭症|hydrocephalus|髄膜|meningitis|脳炎|encephalitis"
+            r"水頭症|hydrocephalus|髄膜|meningitis|脳炎|encephalitis|"
+            # Neurodegenerative syndromes previously mis-tagged musculoskeletal.
+            r"ふらつき|wobbly hedgehog|WHS|運動失調|ataxia|脱髄|demyelin"
         ),
         "neurological",
     ),
@@ -252,9 +265,12 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"膝蓋骨|patella|patellar|ステーキ|"
             r"骨髄炎|osteomyelitis|筋ジストロフィー|"
             r"代謝性骨疾患|MBD|metabolic bone|"
-            r"クル病|くる病|rickets|歯学|"
+            # NB: rickets (くる病) is a vitamin-D/Ca/P *nutritional* disease — it
+            # is intentionally NOT matched here so the nutritional pattern (and
+            # nutritional etiology) wins. Likewise bacterial hoof infections
+            # (thrush/hoof abscess) are matched by the bacterial pattern above.
             r"舟状骨|navicular|蹄|hoof|laminitis|蹄葉炎|蹄壁|"
-            r"挫跖|sole bruise|釘傷|nail bind|nail prick|蹄膿瘍|hoof abscess|"
+            r"挫跖|sole bruise|釘傷|nail bind|nail prick|"
             r"骨粗鬆症|osteoporosis"
         ),
         "musculoskeletal",

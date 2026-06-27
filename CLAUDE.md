@@ -1124,3 +1124,57 @@ description のグラウンディング（第4弾）と同じ哲学を、最も�
 - フルテストスイート: **3,419件合格**（34 skip）
 - ruff check / format: 全変更ファイルで通過
 - 再現手順: `eliminate_toxicology_templates.py --apply` → `migrate_to_sqlite.py`
+
+## 2026-06セッション（第7弾: 臨床的に危険なカテゴリ誤適用の撲滅 — 治療・病因の取り違え修正）
+
+### 背景: JSONオーバーレイ（配信本体）に残る危険な誤カテゴリ
+低メモリ本番（512MB）では migrate がスキップされ SQLite が空のまま、各種ページは
+`helpers.enrich_diseases()` が `diseases_all_species.json` をモジュールへ**実行時オーバーレイ**して配信する。
+従って migrate の served-DB パスだけに置いた修正はユーザーに届かない。本セッションでは
+JSONオーバーレイ自体を修正し、served-DB パスは安全網として併設した。
+
+### 治療フィールド（treatment_ja）の危険な誤適用 15件を修正
+あるカテゴリの治療テンプレートが別カテゴリの疾患に適用され、公開時に有害となる記述を是正：
+- **毒物除染テンプレート（催吐・胃洗浄・活性炭）が非中毒疾患に**: 盲腸内細菌叢異常（草食小動物4種）、
+  溶血性貧血（ウサギ）、抗生物質関連腸内細菌叢異常、急性盲腸鼓腸、腺胃/前胃潰瘍（鳥2種）、
+  筋胃異物（鳥）、ヤドカリ入手後症候群
+- **駆虫薬テンプレートが非寄生虫疾患に**: 猫虚血性脳症（脳梗塞）、直腸脱（猫）、
+  薄筋・半腱様筋ミオパチー（犬）、新生児粘着眼（ハムスター）
+- いずれも `scripts/template_elimination/curated_dangerous_treatments.py` に獣医学的に正確で
+  種特異的なプロトコルを記述（Carpenter Formulary 6th, Quesenberry & Carpenter 4th 等）
+- EN治療フィールドは元々正確だったため、本修正でJA=ENの品質に到達
+
+### 病因/病態生理（causes_ja / pathophysiology_ja）の誤カテゴリ 182件を再分類
+`resolve_category_from_name`（NAME_CATEGORY_PATTERNS）のバグを修正し、名前から正しいカテゴリを解決：
+- **くる病/Rickets**: musculoskeletal → **nutritional**（ビタミンD/Ca/P欠乏症）
+- **蹄叉腐爛/Thrush・蹄膿瘍・蹄底膿瘍・蹄腐敗・蹄冠瘻**: musculoskeletal → **bacterial_infection**
+  （細菌性蹄感染。「骨折・脱臼・股関節形成不全」という誤病因を撲滅）
+- **動脈硬化症・大動脈疾患・心疾患**: musculoskeletal/None → **cardiac**（約40件、血管疾患）
+- **腎疾患**: None → **renal_urinary**、**副腎過形成**: renal → **endocrine_metabolic**（"ad-renal"部分一致バグ）
+- **ふらつき症候群（WHS）**: musculoskeletal → **neurological**（神経変性疾患）
+- **動脈瘤(?!様)** で「骨嚢腫（動脈瘤様）」が cardiac に誤分類されるのを防止
+- 偽陽性に注意（Bone Spavin/Kissing Spines/Collateral Ligament 等は正しく musculoskeletal を維持）
+
+### 実装（JSON本体 + served-DB安全網）
+- `scripts/template_elimination/fix_category_miscategorization.py`（新規）— JSONオーバーレイに
+  治療キュレーション＋病因再分類を冪等適用（compact JSON形式を保持）
+- `scripts/migrate_to_sqlite.py` に `apply_curated_dangerous_treatments()` を追加（served-DB安全網、
+  ソースを問わず危険テンプレートを補正）
+- JSON修正後は served-DB パスの再分類対象が 233 → 50（モジュール専用エントリのみ）に減少
+
+### 回帰テスト追加（tests/test_no_template_disease_content.py、+5件）
+- `test_resolve_category_landmark_miscategorisations_fixed` — 動脈硬化症/くる病/蹄叉腐爛/腎疾患/WHS等の解決
+- `test_resolve_category_genuine_musculoskeletal_unaffected` — 骨折/十字靭帯/舟状骨等のMSK維持
+- `test_curated_dangerous_treatment_replaces_mismatch` — キュレーターの動作（非該当はNone）
+- `test_served_db_no_toxin_decontamination_on_non_toxicoses` — 配信DBの除染テンプレート不在
+- `test_served_db_thrush_etiology_is_not_musculoskeletal` — 蹄叉腐爛の骨折病因不在
+
+### テスト・CI
+- フルテストスイート: **3,424件合格**（34 skip、+5回帰テスト）
+- ruff check / format: 全変更ファイルで通過
+- 再現手順: `fix_category_miscategorization.py --apply` → `migrate_to_sqlite.py` → `build_disease_search_index.py`（名前不変のためno-op）
+
+### 残課題（次セッション候補）
+- 蹄葉炎/Laminitis の病因: 内分泌(EMS/PPID)/炎症/血管性が複合 — 単一カテゴリに収まらずキュレート推奨
+- 肝線維症の病因: 肝専用カテゴリが無く GI テンプレートが最善近似 — キュレート推奨
+- causes_ja/pathophysiology_ja のカテゴリテンプレート自体の疾患固有化（無典拠生成は捏造リスクのため獣医レビュー前提）

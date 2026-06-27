@@ -2590,3 +2590,125 @@ def test_lily_toxicosis_is_species_accurate():
         if e.get("species") == "Dog":
             assert "猫特異的" not in patho, "Dog lily entry wrongly labelled cat-specific"
             assert "犬では" in patho, "Dog lily entry must describe the canine (GI-only) course"
+
+
+# ---------------------------------------------------------------------------
+# Category-mismatch fixes (2026-06): name-priority resolver corrections and
+# curated replacements for clinically dangerous treatment miscategorisations.
+# ---------------------------------------------------------------------------
+
+
+def _resolver():
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        resolve_category_from_name,
+    )
+
+    return resolve_category_from_name
+
+
+def test_resolve_category_landmark_miscategorisations_fixed():
+    """Name resolver must classify these by their true clinical category.
+
+    Each previously resolved to the wrong category (or None, leaving a wrong
+    applied template), producing an embarrassing etiology — e.g. arteriosclerosis
+    or a cerebral disease described with a fracture/dislocation cause.
+    """
+    R = _resolver()
+    expected = {
+        # Vascular disease → cardiac (was musculoskeletal "fractures" or None)
+        "動脈硬化症": "cardiac",
+        "大動脈石灰化": "cardiac",
+        "心疾患": "cardiac",
+        # Rickets is a vitamin-D/Ca/P deficiency → nutritional (was MSK)
+        "くる病": "nutritional",
+        # Thrush / hoof abscess are bacterial infections (was MSK "fracture")
+        "蹄叉腐爛": "bacterial_infection",
+        "蹄膿瘍": "bacterial_infection",
+        # Renal disease → renal_urinary (was None → kept wrong template)
+        "腎疾患": "renal_urinary",
+        # Wobbly Hedgehog Syndrome is a neurodegenerative disease (was MSK)
+        "ふらつき症候群（WHS）": "neurological",
+    }
+    failures = []
+    for name_ja, cat in expected.items():
+        got = R(name_ja, "")
+        if got != cat:
+            failures.append(f"{name_ja}: got {got}, expected {cat}")
+    assert not failures, "Category resolution regressions:\n" + "\n".join(failures)
+
+
+def test_resolve_category_genuine_musculoskeletal_unaffected():
+    """The MSK reclassifications must not strip genuine orthopaedic diseases."""
+    R = _resolver()
+    for name_ja in ("骨折", "十字靭帯断裂", "蹄舟骨症候群", "低蹄関節リングボーン", "変形性関節症"):
+        assert R(name_ja, "") == "musculoskeletal", f"{name_ja} must stay musculoskeletal, got {R(name_ja, '')}"
+
+
+def test_curated_dangerous_treatment_replaces_mismatch():
+    """The curated corrector replaces dangerous category-mismatched treatments."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_dangerous_treatments import (
+        DEWORM_SIG,
+        TOXIN_DECONTAM_SIG,
+        curated_dangerous_treatment,
+    )
+
+    # Toxin-decontamination template on cecal dysbiosis → high-fibre protocol.
+    out = curated_dangerous_treatment(
+        "chinchilla", "盲腸内細菌叢異常", "Cecal Dysbiosis", TOXIN_DECONTAM_SIG + "（以下略）"
+    )
+    assert out and "高繊維食" in out and "催吐" not in out[:60]
+
+    # Deworming template on a cerebral infarct → supportive/anticonvulsant.
+    out = curated_dangerous_treatment(
+        "cat", "猫虚血性脳症", "Feline Ischemic Encephalopathy", DEWORM_SIG + "（以下略）"
+    )
+    assert out and "抗痙攣薬" in out
+
+    # A genuinely parasitic disease with the deworm sig is left untouched
+    # (no curated entry matches) — returns None.
+    assert curated_dangerous_treatment("dog", "回虫症", "Roundworm Infection", DEWORM_SIG) is None
+
+
+def test_served_db_no_toxin_decontamination_on_non_toxicoses():
+    """Dysbiosis / ulcers / haemolytic anaemia must not advise gastric lavage."""
+    danger = "迅速な除染と支持療法"
+    nontoxic_kw = (
+        "細菌叢異常",
+        "Dysbiosis",
+        "潰瘍",
+        "Ulcer",
+        "溶血性貧血",
+        "異物",
+        "Foreign Body",
+        "鼓脹",
+        "購入後症候群",
+    )
+    failures = []
+    for row in _served_db_rows():
+        name = (row["name_ja"] or "") + " " + (row["name"] or "")
+        tx = row["treatment_ja"] or ""
+        # Skip genuine toxicoses (pesticide/poison) where decontamination is right.
+        if any(k in name for k in ("中毒", "毒", "農薬", "除草剤", "Poison", "Toxic", "Pesticide")):
+            continue
+        if any(k in name for k in nontoxic_kw) and danger in tx:
+            failures.append(f"[{row['species']}] {name}: decontamination protocol on a non-toxicosis")
+    assert not failures, "Toxin-decontamination misapplication:\n" + "\n".join(failures[:10])
+
+
+def test_served_db_thrush_etiology_is_not_musculoskeletal():
+    """Equine thrush (a bacterial hoof infection) must not have a fracture cause."""
+    failures = []
+    for row in _served_db_rows():
+        name = (row["name_ja"] or "") + " " + (row["name"] or "")
+        if "蹄叉腐爛" not in name and "Thrush" not in name:
+            continue
+        causes = row["causes_ja"] or ""
+        if "骨折・脱臼・靭帯損傷" in causes:
+            failures.append(f"[{row['species']}] {name}: musculoskeletal cause on thrush")
+    assert not failures, "Thrush etiology errors:\n" + "\n".join(failures)
