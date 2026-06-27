@@ -1540,6 +1540,54 @@ def apply_curated_dangerous_treatments(conn) -> int:
     return n
 
 
+def apply_curated_etiology(conn) -> int:
+    """Supply curated causes_ja / pathophysiology_ja for multifactorial diseases.
+
+    Laminitis (predominantly endocrinopathic/inflammatory, not orthopaedic) and
+    hepatic fibrosis (the fibrotic end-stage of chronic liver injury, with no
+    dedicated hepatic etiology bucket) cannot be templated into one category, so
+    the recategoriser can only swap one imperfect template for another. This pass
+    writes concise, textbook-accurate, disease-specific etiology — but ONLY over a
+    field that is empty, a recognised category template, or a vague stub, so
+    genuine curated prose (e.g. the existing laminitis pathophysiology) is kept.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        build_etiology_fingerprints,
+        fingerprint_etiology,
+        gen_causes_ja,
+        gen_pathophysiology_ja,
+    )
+    from scripts.template_elimination.curated_etiology import STUB_SIGNATURES, curated_etiology
+
+    fps = {
+        "causes_ja": build_etiology_fingerprints(gen_causes_ja),
+        "pathophysiology_ja": build_etiology_fingerprints(gen_pathophysiology_ja),
+    }
+
+    def _replaceable(text: str, field: str) -> bool:
+        if not text:
+            return True
+        if fingerprint_etiology(text, fps[field]) is not None:
+            return True
+        return any(sig in text for sig in STUB_SIGNATURES)
+
+    rows = conn.execute("SELECT id, species, name, name_ja, causes_ja, pathophysiology_ja FROM diseases").fetchall()
+    n = 0
+    for row in rows:
+        curated = curated_etiology(row["species"] or "", row["name_ja"] or "", row["name"] or "")
+        if not curated:
+            continue
+        for field, new_val in curated.items():
+            if _replaceable(row[field] or "", field) and new_val != (row[field] or ""):
+                conn.execute(
+                    f"UPDATE diseases SET {field} = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                    (new_val, row["id"]),
+                )
+                n += 1
+    return n
+
+
 def recategorize_etiology_fields(conn) -> dict[str, int]:
     """Fix causes_ja / pathophysiology_ja that carry the WRONG category template.
 
@@ -1693,6 +1741,11 @@ def main(db_path: str | None = None):
         # condition-specific, species-appropriate protocols.
         cur_n = apply_curated_dangerous_treatments(conn)
         print(f"  → {cur_n} curated treatment replacements")
+
+        # Supply curated etiology/pathophysiology for multifactorial diseases
+        # (laminitis, hepatic fibrosis) that resist single-category templating.
+        cur_e = apply_curated_etiology(conn)
+        print(f"  → {cur_e} curated etiology/pathophysiology replacements")
 
         # Correct miscategorised causes_ja / pathophysiology_ja (e.g. ferret
         # adrenal disease tagged renal, non-toxicoses tagged toxicity) and drop
