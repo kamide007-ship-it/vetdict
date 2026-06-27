@@ -1203,6 +1203,19 @@ NAME_CATEGORY_PATTERNS への精密トークン追加で解決（causes_ja 107 +
 - 全種 before/after 比較で category→category の変化 0 件（純粋に None→正カテゴリの 120件のみ）
 - 回帰テスト +4件、フルスイート 3,431件合格
 
+### 産卵・神経筋・鼻涙管疾患の残存誤カテゴリを撲滅（113件）
+resolver が None を返すため recat が補正できなかった残りの臓器系テンプレート誤適用を、精密トークンで解決
+（causes_ja 65 + pathophysiology_ja 48 再分類）:
+- **産卵・卵管疾患（65件）→ reproductive**: 卵詰まり（egg binding）・卵胞停滞/卵停滞（follicular/egg stasis）・
+  卵管炎/卵管脱/卵管閉塞（salpingitis/oviduct）・卵巣嚢胞（ovarian cyst）・卵黄性腹膜炎（yolk coelomitis）・
+  慢性産卵症候群（chronic egg laying）等。鳥・爬虫類の頻発する生殖器救急が呼吸器/内分泌/細菌テンプレートだった
+- **神経筋（1件）→ neurological**: 筋無力症クリーゼ（重症筋無力症だけでなく筋無力症を捕捉）
+- **鼻涙管（3件）→ ophthalmic**: 鼻涙管/涙管/涙小管閉塞
+- **偽陽性回避**: 卵巣腺癌/奇形腫/顆粒膜細胞腫は neoplasia 維持（`卵巣嚢胞` 等の精密語のみ使用、bare `卵巣` 不使用）。
+  カルシウム欠乏症繁殖型（産卵鳥）は nutritional 維持（bare `産卵` を除外し `産卵鳥` 記述子の誤マッチを回避）
+- before/after 全種比較で category→category の変化 0 件（69件すべて None→正カテゴリ）
+- 回帰テスト +4件、フルスイート 3,435件合格
+
 ### 残課題（次セッション候補）
 - causes_ja/pathophysiology_ja のカテゴリテンプレート自体の疾患固有化（無典拠生成は捏造リスクのため獣医レビュー前提）
 - 他の多因子疾患（合成カテゴリ名等）のキュレート病因の拡充

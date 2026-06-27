@@ -2839,3 +2839,55 @@ def test_served_db_behavioral_disorders_not_organ_system_etiology():
         if "心筋症（DCM/HCM）" in causes or "ネフロンの進行性損傷" in causes:
             failures.append(f"[{row['species']}] {name}: organ-system cause on a behavioral disorder")
     assert not failures, "Behavioral etiology errors:\n" + "\n".join(failures[:10])
+
+
+# ---------------------------------------------------------------------------
+# Egg-laying / reproductive, neuromuscular, nasolacrimal resolver coverage
+# ---------------------------------------------------------------------------
+
+
+def test_resolve_category_egg_laying_disorders_are_reproductive():
+    """Avian/reptile egg-laying disorders must resolve to reproductive."""
+    R = _resolver()
+    repro = (
+        "卵詰まり",
+        "卵管炎",
+        "卵管脱出",
+        "排卵前卵胞停滞",
+        "排卵後卵停滞",
+        "卵巣嚢胞",
+        "卵黄性腹膜炎",
+        "慢性産卵症候群",
+    )
+    failures = [n for n in repro if R(n, "") != "reproductive"]
+    assert not failures, "Not resolved reproductive: " + ", ".join(failures)
+
+
+def test_resolve_category_ovarian_tumours_stay_neoplasia():
+    """Ovarian *tumours* must stay neoplasia, not be pulled into reproductive."""
+    R = _resolver()
+    for n in ("卵巣腺癌", "卵巣奇形腫", "卵巣腫瘍"):
+        assert R(n, "") == "neoplasia", f"{n} should be neoplasia, got {R(n, '')}"
+    # Calcium deficiency in laying hens is nutritional, not reproductive.
+    assert R("カルシウム欠乏症繁殖型（産卵鳥）", "") == "nutritional"
+
+
+def test_resolve_category_myasthenia_and_nasolacrimal():
+    """Myasthenic crisis → neurological; nasolacrimal duct → ophthalmic."""
+    R = _resolver()
+    assert R("筋無力症クリーゼ", "Myasthenic Crisis") == "neurological"
+    assert R("鼻涙管閉塞", "Nasolacrimal Duct Obstruction") == "ophthalmic"
+
+
+def test_served_db_egg_binding_not_respiratory_or_bacterial_template():
+    """Egg binding etiology must be reproductive, not a respiratory/bacterial one."""
+    failures = []
+    for row in _served_db_rows():
+        name = (row["name_ja"] or "") + " " + (row["name"] or "")
+        if "卵詰まり" not in name and "Egg Binding" not in name:
+            continue
+        causes = row["causes_ja"] or ""
+        # The reproductive etiology mentions egg-laying-specific factors.
+        if "卵" not in causes and "産卵" not in causes and "胎位" not in causes:
+            failures.append(f"[{row['species']}] {name}: non-reproductive etiology on egg binding")
+    assert not failures, "Egg binding etiology errors:\n" + "\n".join(failures)
