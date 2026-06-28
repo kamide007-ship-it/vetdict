@@ -31,6 +31,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from scripts.template_elimination.clinical_fields_generator import SPECIES_JA  # noqa: E402
+from scripts.template_elimination.curated_common_diseases import COMMON_DISEASES  # noqa: E402
 
 # A field is replaceable (safe to overwrite with curated text) when it is empty,
 # carries a category template (detected by the caller via fingerprint), or is one
@@ -112,6 +113,19 @@ def curated_etiology(species: str, name_ja: str, name_en: str) -> dict | None:
     species = (species or "").lower()
     name = f"{name_ja or ''} {name_en or ''}"
     species_ja = SPECIES_JA.get(species, species)
+
+    # Static, disease-specific curated text for high-traffic conditions. Checked
+    # first; name_exclusions guard against substring collisions (e.g.
+    # 甲状腺機能低下 ⊂ 副甲状腺機能低下症).
+    for species_set, name_subs, name_excl, fields in COMMON_DISEASES:
+        if species not in species_set:
+            continue
+        if not any(sub in name for sub in name_subs):
+            continue
+        if any(bad in name for bad in name_excl):
+            continue
+        return dict(fields)
+
     for species_set, name_subs, fields in _CURATED:
         if species_set is not None and species not in species_set:
             continue
