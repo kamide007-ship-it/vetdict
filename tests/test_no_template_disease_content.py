@@ -3232,3 +3232,51 @@ def test_served_db_flagship_diseases_not_category_templated():
             if fingerprint_etiology(row[field] or "", fp) is not None:
                 failures.append(f"[{key[0]}] {key[1]}: {field} still carries a category template")
     assert not failures, "Flagship diseases still templated:\n" + "\n".join(failures)
+
+
+def test_curated_etiology_equine_flagship():
+    """Equine flagship diseases are curated with substantial, disease-specific text."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    for name in (
+        "疝痛（コリック）",
+        "胃潰瘍",
+        "馬喘息 (IAD/RAO)",
+        "下垂体中葉機能障害 (PPID)",
+        "馬メタボリック症候群 (EMS)",
+        "浅指屈腱炎",
+        "蹄舟骨症候群",
+        "離断性骨軟骨症 (OCD)",
+        "馬再発性ぶどう膜炎 (ERU)",
+        "馬原虫性脊髄脳炎 (EPM)",
+        "多糖類蓄積性ミオパシー (PSSM)",
+        "腺疫",
+        "ピロプラズマ症",
+        "子宮内膜炎",
+        "胎盤炎",
+        "大腸炎",
+        "食道閉塞（チョーク）",
+        "喉嚢疾患（喉嚢鼓脹・喉嚢真菌症）",
+    ):
+        out = curated_etiology("horse", name, "")
+        assert out is not None, f"equine {name} should be curated"
+        blob = (out.get("causes_ja", "") + out.get("pathophysiology_ja", "")).strip()
+        assert len(blob) >= 40, f"equine {name} curated text too short"
+
+
+def test_equine_ppid_is_endocrine_not_bacterial():
+    """Equine PPID (pituitary pars intermedia dysfunction) is a neurodegenerative
+    endocrine disease — its etiology must NOT be the bacterial-infection template."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    out = curated_etiology("horse", "下垂体中葉機能障害 (PPID)", "")
+    assert out is not None
+    blob = out.get("causes_ja", "") + out.get("pathophysiology_ja", "")
+    assert "ドパミン" in blob and "下垂体中葉" in blob
+    assert "細菌病原体の感染" not in blob
