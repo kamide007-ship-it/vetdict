@@ -833,6 +833,16 @@ _CRYPTORCHIDISM_DOG = _f(
 )
 
 
+_PRAA_DOG = _f(
+    "右大動脈弓遺残（PRAA）は犬で最も多い血管輪奇形で、胎生期の大動脈弓系の異常退縮（本来退縮すべき右第4大動脈弓が"
+    "遺残）により、食道が右大動脈弓・左側の動脈管索・心基部・気管からなる血管輪に囲まれて絞扼される先天性疾患である。"
+    "ジャーマン・シェパード、アイリッシュ・セッター、ボストン・テリア等に素因がある。",
+    "遺残した右大動脈弓と左側の動脈管索が食道を血管輪として絞扼し、輪より頭側（心基部前方）の胸部食道が拡張する"
+    "（限局性巨大食道）。離乳・固形食開始時に食物が狭窄部でつかえ、未消化物の反復性逆流をきたして誤嚥性肺炎・"
+    "発育不良を生じる。早期の外科的整復（動脈管索の切断）で多くは改善するが、拡張した食道の運動障害は残存しうる。",
+)
+
+
 def _di_c(sp):
     return (
         f"{sp}の尿崩症は抗利尿ホルモン（ADH／バソプレシン）の分泌低下（中枢性）または腎尿細管のADH反応性低下"
@@ -1212,7 +1222,10 @@ _CURATED: tuple[tuple[frozenset | None, tuple[str, ...], tuple[str, ...], dict],
     (frozenset({"dog"}), ("膝蓋骨脱臼",), (), _PATELLAR_LUXATION_DOG),
     (frozenset({"dog"}), ("前十字靭帯",), (), _CCL_RUPTURE_DOG),
     (frozenset({"dog"}), ("白内障",), (), _CATARACT_DOG),
-    (frozenset({"dog"}), ("進行性網膜萎縮", "PRA"), (), _PRA_DOG),
+    # NB: 進行性網膜萎縮 only — the bare "PRA" token collided with "PRAA"
+    # (持続性右大動脈弓遺残), a vascular ring, giving it retinal-atrophy text.
+    (frozenset({"dog"}), ("進行性網膜萎縮",), (), _PRA_DOG),
+    (frozenset({"dog"}), ("大動脈弓遺残", "血管輪奇形", "PRAA"), (), _PRAA_DOG),
     (frozenset({"dog"}), ("チェリーアイ", "第三眼瞼腺脱出"), (), _CHERRY_EYE_DOG),
     (frozenset({"dog"}), ("膿皮症",), (), _PYODERMA_DOG),
     (frozenset({"dog"}), ("巨大食道",), (), _MEGAESOPHAGUS_DOG),

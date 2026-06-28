@@ -3280,3 +3280,30 @@ def test_equine_ppid_is_endocrine_not_bacterial():
     blob = out.get("causes_ja", "") + out.get("pathophysiology_ja", "")
     assert "ドパミン" in blob and "下垂体中葉" in blob
     assert "細菌病原体の感染" not in blob
+
+
+def test_praa_not_confused_with_pra_retinal_atrophy():
+    """Persistent right aortic arch (PRAA, a vascular ring) must NOT inherit
+    progressive retinal atrophy (PRA) curation via the 'PRA' ⊂ 'PRAA' collision."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    praa = curated_etiology("dog", "右大動脈弓遺残", "Persistent Right Aortic Arch (PRAA)")
+    assert praa is not None and "血管輪" in praa["causes_ja"]
+    assert "網膜" not in praa["causes_ja"], "PRAA must not describe retinal atrophy"
+    # The genuine PRA disease still curates correctly.
+    pra = curated_etiology("dog", "進行性網膜萎縮症（PRA）", "")
+    assert pra is not None and "光受容体" in pra["pathophysiology_ja"]
+
+
+def test_served_db_praa_is_vascular_ring_not_retinal():
+    """Served PRAA etiology must describe the vascular ring, not retinal atrophy."""
+    for row in _served_db_rows():
+        if "大動脈弓遺残" in (row["name_ja"] or ""):
+            causes = row["causes_ja"] or ""
+            if causes:
+                assert "進行性網膜萎縮症（PRA）は" not in causes, (
+                    f"[{row['species']}] {row['name_ja']}: PRAA still has PRA retinal text"
+                )
