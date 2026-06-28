@@ -3063,3 +3063,48 @@ def test_curated_etiology_parathyroid_variants_are_distinct():
     assert nshp != primary and primary != renal and nshp != renal
     # Anal-sac adenocarcinoma must NOT get the (benign) anal-sac-disease curation.
     assert curated_etiology("dog", "肛門嚢腺癌", "") is None
+
+
+def test_curated_etiology_fourth_batch_dog_cat():
+    """Fourth batch (ophthalmic/orthopaedic/derm/hepatic/haematology)."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    cases = {
+        ("dog", "股関節形成不全"): "寛骨臼",
+        ("dog", "膝蓋骨脱臼"): "滑車溝",
+        ("dog", "前十字靭帯断裂"): "半月板",
+        ("dog", "白内障"): "クリスタリン",
+        ("dog", "進行性網膜萎縮症（PRA）"): "夜盲",
+        ("dog", "膿皮症"): "pseudintermedius",
+        ("dog", "巨大食道症"): "蠕動",
+        ("dog", "先天性門脈体循環シャント"): "アンモニア",
+        ("dog", "銅関連慢性肝炎"): "COMMD1",
+        ("dog", "中枢性尿崩症"): "ADH",
+        ("cat", "角膜潰瘍"): "melting",
+        ("cat", "結膜炎"): "Chlamydia",
+        ("cat", "角膜壊死（角膜分離症）"): "壊死片",
+        ("cat", "免疫介在性血小板減少症"): "自己抗体",
+    }
+    for (sp, name), marker in cases.items():
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"{name} should be curated"
+        assert marker in out["causes_ja"] + out["pathophysiology_ja"], f"{name} missing {marker!r}"
+
+
+def test_feline_hemoplasmosis_is_bacterial_not_viral_or_fungal():
+    """Feline infectious anaemia is a hemotropic *Mycoplasma* (bacterial) — its
+    etiology must say so, not the legacy viral/fungal template."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    for name in ("猫伝染性貧血（ヘモプラズマ症）", "猫感染性貧血（Candidatus M. haemominutum）"):
+        out = curated_etiology("cat", name, "")
+        assert out is not None
+        blob = out["causes_ja"] + out["pathophysiology_ja"]
+        assert "マイコプラズマ" in blob and "細菌" in blob
+        assert "真菌" not in blob
