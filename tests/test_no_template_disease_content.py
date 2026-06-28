@@ -2903,3 +2903,62 @@ def test_resolve_category_slobbers_buccal_spur_dental_and_behavioral():
     # Guard: muscle/spine 棘 names must NOT become dental.
     assert R("棘下筋拘縮", "Infraspinatus Contracture") != "dental"
     assert R("棘突起重複症（キッシングスパイン）", "Kissing Spines") != "dental"
+
+
+# ---------------------------------------------------------------------------
+# Curated etiology for flagship dog / cat diseases
+# ---------------------------------------------------------------------------
+
+
+def test_curated_etiology_flagship_dog_cat_diseases():
+    """Major dog/cat diseases get disease-specific (not category-template) cause."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    cases = {
+        ("dog", "胃拡張胃捻転症候群（GDV）"): "胸深",
+        ("dog", "椎間板ヘルニア（IVDD）"): "軟骨異栄養",
+        ("dog", "拡張型心筋症（DCM）"): "ドーベルマン",
+        ("dog", "粘液腫様僧帽弁変性症"): "粘液腫様",
+        ("cat", "肥大型心筋症"): "MYBPC3",
+        ("cat", "猫慢性歯肉口内炎"): "歯垢",
+        ("cat", "慢性腎臓病（CKD）"): "ネフロン",
+    }
+    for (sp, name), marker in cases.items():
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"{name} should be curated"
+        assert marker in out["causes_ja"] + out["pathophysiology_ja"], (
+            f"{name} curated text missing expected marker {marker!r}"
+        )
+
+
+def test_curated_etiology_excludes_lookalike_diseases():
+    """Parathyroid / mitral dysplasia / non-LP stomatitis must NOT be curated as
+    thyroid / MMVD / FCGS respectively."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    assert curated_etiology("dog", "副甲状腺機能低下症", "") is None
+    assert curated_etiology("dog", "僧帽弁形成不全", "Mitral Valve Dysplasia") is None
+    assert curated_etiology("cat", "猫口内炎（非リンパ形質細胞性）", "") is None
+    assert curated_etiology("dog", "膵外分泌不全（EPI）", "") is None
+
+
+def test_served_db_flagship_diseases_not_category_template():
+    """Served flagship-disease etiology must carry the disease-specific text."""
+    checks = {
+        "胃拡張胃捻転症候群（GDV）": "胸深",
+        "椎間板ヘルニア（IVDD）": "軟骨異栄養",
+    }
+    found = {}
+    for row in _served_db_rows():
+        nm = row["name_ja"] or ""
+        if nm in checks:
+            found[nm] = (row["causes_ja"] or "") + (row["pathophysiology_ja"] or "")
+    for nm, marker in checks.items():
+        if nm in found:
+            assert marker in found[nm], f"{nm}: served etiology missing {marker!r}"
