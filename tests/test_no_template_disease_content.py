@@ -2935,17 +2935,29 @@ def test_curated_etiology_flagship_dog_cat_diseases():
 
 
 def test_curated_etiology_excludes_lookalike_diseases():
-    """Parathyroid / mitral dysplasia / non-LP stomatitis must NOT be curated as
-    thyroid / MMVD / FCGS respectively."""
+    """Look-alike diseases must get their OWN curation (or none) — never the
+    neighbouring disease's text.
+
+    Hypoparathyroidism and EPI are now curated as their own entities, so they
+    must carry hypoparathyroidism / EPI content, NOT thyroid / pancreatitis text.
+    Mitral valve *dysplasia* (congenital) and non-LP stomatitis stay uncurated.
+    """
     import sys
 
     sys.path.insert(0, str(ROOT))
     from scripts.template_elimination.curated_etiology import curated_etiology
 
-    assert curated_etiology("dog", "副甲状腺機能低下症", "") is None
+    # Hypoparathyroidism: curated as parathyroid (PTH), not thyroid (T4/T3).
+    hypopara = curated_etiology("dog", "副甲状腺機能低下症", "")
+    assert hypopara is not None and "PTH" in hypopara["causes_ja"]
+    assert "T4" not in hypopara["pathophysiology_ja"]
+    # EPI: curated as exocrine pancreatic insufficiency, not pancreatitis.
+    epi = curated_etiology("dog", "膵外分泌不全症（EPI）", "")
+    assert epi is not None and "腺房萎縮" in epi["causes_ja"]
+    assert "自己消化" not in epi["pathophysiology_ja"]
+    # Still uncurated (congenital dysplasia ≠ MMVD; non-LP stomatitis ≠ FCGS).
     assert curated_etiology("dog", "僧帽弁形成不全", "Mitral Valve Dysplasia") is None
     assert curated_etiology("cat", "猫口内炎（非リンパ形質細胞性）", "") is None
-    assert curated_etiology("dog", "膵外分泌不全（EPI）", "") is None
 
 
 def test_served_db_flagship_diseases_not_category_template():
@@ -3005,3 +3017,49 @@ def test_curated_etiology_second_batch_exclusions():
     assert curated_etiology("cat", "猫ヘルペスウイルス性角膜炎", "") is None
     assert curated_etiology("cat", "猫ヘルペスウイルス性皮膚炎", "") is None
     assert curated_etiology("dog", "前立腺膿瘍", "") is None
+
+
+def test_curated_etiology_third_batch_dog_cat():
+    """Third batch (endocrine/neuro/GI/urinary flagships) is disease-specific."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    cases = {
+        ("dog", "アジソン病（副腎皮質機能低下症）"): "アルドステロン",
+        ("dog", "膵外分泌不全症（EPI）"): "腺房萎縮",
+        ("dog", "喉頭麻痺"): "反回喉頭神経",
+        ("dog", "変性性脊髄症（DM）"): "SOD1",
+        ("dog", "胆嚢粘液嚢腫"): "ムチン",
+        ("cat", "尿道閉塞"): "高カリウム",
+        ("cat", "猫特発性巨大結腸症"): "結腸",
+        ("cat", "多発性嚢胞腎"): "PKD1",
+        ("cat", "拡張型心筋症"): "タウリン",
+        ("cat", "猫シュウ酸カルシウム尿路結石症"): "過飽和",
+        ("cat", "猫ストルバイト尿路結石症"): "アルカリ",
+        ("cat", "トキソプラズマ症"): "終宿主",
+        ("cat", "栄養性二次性副甲状腺機能亢進症"): "食事",
+        ("cat", "猫腎性二次性副甲状腺機能亢進症"): "FGF23",
+    }
+    for (sp, name), marker in cases.items():
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"{name} should be curated"
+        assert marker in out["causes_ja"] + out["pathophysiology_ja"], f"{name} missing {marker!r}"
+
+
+def test_curated_etiology_parathyroid_variants_are_distinct():
+    """The three hyperparathyroidism variants must get DISTINCT etiology
+    (nutritional vs primary adenoma vs renal-secondary), not one shared text."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    nshp = curated_etiology("cat", "栄養性二次性副甲状腺機能亢進症", "")["causes_ja"]
+    primary = curated_etiology("cat", "猫原発性副甲状腺機能亢進症", "")["causes_ja"]
+    renal = curated_etiology("cat", "猫腎性二次性副甲状腺機能亢進症", "")["causes_ja"]
+    assert "食事" in nshp and "腺腫" in primary and "CKD" in renal
+    assert nshp != primary and primary != renal and nshp != renal
+    # Anal-sac adenocarcinoma must NOT get the (benign) anal-sac-disease curation.
+    assert curated_etiology("dog", "肛門嚢腺癌", "") is None
