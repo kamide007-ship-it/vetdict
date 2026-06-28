@@ -31,6 +31,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from scripts.template_elimination.clinical_fields_generator import SPECIES_JA  # noqa: E402
+from scripts.template_elimination.curated_common_diseases import COMMON_DISEASES  # noqa: E402
 
 # A field is replaceable (safe to overwrite with curated text) when it is empty,
 # carries a category template (detected by the caller via fingerprint), or is one
@@ -952,7 +953,7 @@ _CURATED: tuple[tuple[frozenset | None, tuple[str, ...], tuple[str, ...], dict],
     # --- Dog flagship diseases ---
     (frozenset({"dog"}), ("胃拡張",), (), _GDV),
     (frozenset({"dog"}), ("膵炎",), (), _PANCREATITIS_DOG),
-    (frozenset({"dog"}), ("甲状腺機能低下",), ("副甲状腺",), _HYPOTHYROID_DOG),
+    (frozenset({"dog"}), ("甲状腺機能低下",), ("副甲状腺", "先天性"), _HYPOTHYROID_DOG),
     (frozenset({"dog"}), ("クッシング", "副腎皮質機能亢進"), (), _CUSHING_DOG),
     (frozenset({"dog"}), ("慢性腎臓病", "慢性腎不全"), (), _CKD_DOG),
     (frozenset({"dog"}), ("アトピー性皮膚炎",), (), _CAD_DOG),
@@ -1051,6 +1052,20 @@ def curated_etiology(species: str, name_ja: str, name_en: str) -> dict | None:
     species = (species or "").lower()
     name = f"{name_ja or ''} {name_en or ''}"
     species_ja = SPECIES_JA.get(species, species)
+    # Static, disease-specific curated text for high-traffic conditions
+    # (curated_common_diseases). Checked first; name_exclusions guard against
+    # substring collisions (e.g. 甲状腺機能低下 ⊂ 副甲状腺機能低下症).
+    for species_set, name_subs, name_excl, fields in COMMON_DISEASES:
+        if species not in species_set:
+            continue
+        if not any(sub in name for sub in name_subs):
+            continue
+        if any(bad in name for bad in name_excl):
+            continue
+        return dict(fields)
+
+    # Generator-based curated entries (this module's _CURATED, 4-tuple with
+    # exclusion support).
     for species_set, name_subs, exclude_subs, fields in _CURATED:
         if species_set is not None and species not in species_set:
             continue
