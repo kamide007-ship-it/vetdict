@@ -2962,3 +2962,46 @@ def test_served_db_flagship_diseases_not_category_template():
     for nm, marker in checks.items():
         if nm in found:
             assert marker in found[nm], f"{nm}: served etiology missing {marker!r}"
+
+
+def test_curated_etiology_second_batch_dog_cat():
+    """Second batch of flagship dog/cat diseases is disease-specific."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    cases = {
+        ("dog", "糖尿病"): "インスリン依存",
+        ("cat", "糖尿病"): "2型",
+        ("dog", "緑内障"): "眼圧",
+        ("dog", "子宮蓄膿症"): "黄体期",
+        ("dog", "免疫介在性溶血性貧血（IMHA）"): "自己抗体",
+        ("dog", "レプトスピラ症"): "スピロヘータ",
+        ("dog", "骨肉腫"): "骨芽細胞",
+        ("dog", "肥満細胞腫"): "脱顆粒",
+        ("dog", "脾臓血管肉腫"): "血管内皮",
+        ("cat", "消化器型リンパ腫"): "FeLV",
+        ("cat", "肝リピドーシス（脂肪肝）"): "遊離脂肪酸",
+        ("cat", "猫特発性膀胱炎"): "GAG",
+        ("cat", "猫上部呼吸器感染症"): "FHV-1",
+    }
+    for (sp, name), marker in cases.items():
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"{name} should be curated"
+        assert marker in out["causes_ja"] + out["pathophysiology_ja"], f"{name} missing {marker!r}"
+
+
+def test_curated_etiology_second_batch_exclusions():
+    """DKA, chondrosarcoma, herpetic keratitis/dermatitis, prostatic abscess
+    must NOT inherit the diabetes / osteosarcoma / herpes-URI / BPH curation."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    assert curated_etiology("dog", "糖尿病性ケトアシドーシス", "") is None
+    assert curated_etiology("dog", "軟骨肉腫", "Chondrosarcoma") is None
+    assert curated_etiology("cat", "猫ヘルペスウイルス性角膜炎", "") is None
+    assert curated_etiology("cat", "猫ヘルペスウイルス性皮膚炎", "") is None
+    assert curated_etiology("dog", "前立腺膿瘍", "") is None
