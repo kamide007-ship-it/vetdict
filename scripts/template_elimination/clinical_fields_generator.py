@@ -246,7 +246,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"認知機能|cognitive|dementia|CDS|"
             r"脊髄|spinal cord|椎間板|IVDD|disc disease|"
             r"麻痺|paralysis|paresis|"
-            r"重症筋無力症|myasthenia|"
+            r"重症筋無力症|筋無力症|myasthenia|myasthenic|"
             r"水頭症|hydrocephalus|髄膜|meningitis|脳炎|encephalitis|"
             # Neurodegenerative syndromes previously mis-tagged musculoskeletal.
             r"ふらつき|wobbly hedgehog|WHS|運動失調|ataxia|脱髄|demyelin"
@@ -258,7 +258,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
         re.compile(
             r"眼(?!球突出)|角膜|cornea|緑内障|glaucoma|白内障|cataract|"
             r"網膜|retina|ぶどう膜炎|uveitis|結膜炎|conjunctivitis|"
-            r"涙嚢|nasolacrimal|チェリーアイ|cherry eye|乾性角結膜炎|KCS|"
+            r"涙嚢|鼻涙管|涙管|涙小管|nasolacrimal|チェリーアイ|cherry eye|乾性角結膜炎|KCS|"
             r"睫毛|eyelash|distichiasis|ectopic cilia|眼瞼|eyelid|entropion|"
             r"内反症|外反症|ectropion|prolapsed gland|"
             r"眼科|ophthalmic|ophth|眼疾患"
@@ -290,7 +290,11 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
         re.compile(
             r"歯(?!科)|歯肉|歯周|歯石|歯髄|齲歯|dental|tooth|periodontal|"
             r"歯科疾患|不正咬合|malocclusion|過長歯|"
-            r"歯根膿瘍|tooth root abscess|歯瘻"
+            r"歯根膿瘍|tooth root abscess|歯瘻|"
+            # Slobbers/ptyalism in rodents & rabbits is a dental sign; buccal
+            # spurs are tooth points. NB: 頬棘 only (臼歯棘 already matches via
+            # 歯) so 棘下筋/棘突起 (muscle/spine) are never mis-tagged dental.
+            r"流涎|スロバーズ|slobber|ptyalism|頬棘|buccal spur|cheek teeth point"
         ),
         "dental",
     ),
@@ -335,7 +339,20 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"胎盤|placental|placenta|"
             r"妊娠中毒|pregnancy toxemia|"
             r"流産|abortion|stillbirth|"
-            r"発情|estrus|estrous"
+            r"発情|estrus|estrous|"
+            # Egg-laying / oviductal disorders (common avian & reptile repro
+            # emergencies) — were scattered across respiratory/endocrine/bacterial
+            # templates. NB: specific terms (卵巣嚢胞, not bare 卵巣) so ovarian
+            # *tumours* (卵巣腺癌/奇形腫/顆粒膜細胞腫) keep their neoplasia class.
+            r"卵詰|卵塞|卵秘|egg bind|egg-bind|"
+            r"卵胞停滞|卵停滞|卵停|follicular stasis|egg stasis|egg retention|卵閉塞|"
+            r"卵管炎|卵管脱|卵管閉塞|卵管|salping|oviduct|"
+            r"卵巣嚢胞|嚢胞性卵巣|多嚢胞性卵巣|ovarian cyst|polycystic ovar|"
+            r"卵黄性腹膜炎|卵黄体腔炎|卵黄性体腔炎|yolk perito|yolk coelom|卵黄塞栓|"
+            # NB: 慢性/過剰産卵 only — bare 産卵 would mis-claim "産卵鳥" (a
+            # laying-hen descriptor) in calcium-deficiency, which is nutritional.
+            r"慢性産卵|過剰産卵|chronic egg lay|excessive egg lay|"
+            r"卵巣遺残|ovarian remnant|繁殖障害"
         ),
         "reproductive",
     ),
@@ -413,6 +430,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
     (
         re.compile(
             r"行動学|behavioral|behavior|anxiety|不安症|不安障害|"
+            r"行動障害|行動性|ストレス関連疾患|"
             r"強迫|compulsive|分離不安|separation|"
             r"恐怖|phobia|aggression|攻撃行動|"
             # Stereotypies / self-directed / husbandry-behaviour disorders

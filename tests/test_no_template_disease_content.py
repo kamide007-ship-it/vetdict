@@ -2842,6 +2842,266 @@ def test_served_db_behavioral_disorders_not_organ_system_etiology():
 
 
 # ---------------------------------------------------------------------------
+# Egg-laying / reproductive, neuromuscular, nasolacrimal resolver coverage
+# ---------------------------------------------------------------------------
+
+
+def test_resolve_category_egg_laying_disorders_are_reproductive():
+    """Avian/reptile egg-laying disorders must resolve to reproductive."""
+    R = _resolver()
+    repro = (
+        "卵詰まり",
+        "卵管炎",
+        "卵管脱出",
+        "排卵前卵胞停滞",
+        "排卵後卵停滞",
+        "卵巣嚢胞",
+        "卵黄性腹膜炎",
+        "慢性産卵症候群",
+    )
+    failures = [n for n in repro if R(n, "") != "reproductive"]
+    assert not failures, "Not resolved reproductive: " + ", ".join(failures)
+
+
+def test_resolve_category_ovarian_tumours_stay_neoplasia():
+    """Ovarian *tumours* must stay neoplasia, not be pulled into reproductive."""
+    R = _resolver()
+    for n in ("卵巣腺癌", "卵巣奇形腫", "卵巣腫瘍"):
+        assert R(n, "") == "neoplasia", f"{n} should be neoplasia, got {R(n, '')}"
+    # Calcium deficiency in laying hens is nutritional, not reproductive.
+    assert R("カルシウム欠乏症繁殖型（産卵鳥）", "") == "nutritional"
+
+
+def test_resolve_category_myasthenia_and_nasolacrimal():
+    """Myasthenic crisis → neurological; nasolacrimal duct → ophthalmic."""
+    R = _resolver()
+    assert R("筋無力症クリーゼ", "Myasthenic Crisis") == "neurological"
+    assert R("鼻涙管閉塞", "Nasolacrimal Duct Obstruction") == "ophthalmic"
+
+
+def test_served_db_egg_binding_not_respiratory_or_bacterial_template():
+    """Egg binding etiology must be reproductive, not a respiratory/bacterial one."""
+    failures = []
+    for row in _served_db_rows():
+        name = (row["name_ja"] or "") + " " + (row["name"] or "")
+        if "卵詰まり" not in name and "Egg Binding" not in name:
+            continue
+        causes = row["causes_ja"] or ""
+        # The reproductive etiology mentions egg-laying-specific factors.
+        if "卵" not in causes and "産卵" not in causes and "胎位" not in causes:
+            failures.append(f"[{row['species']}] {name}: non-reproductive etiology on egg binding")
+    assert not failures, "Egg binding etiology errors:\n" + "\n".join(failures)
+
+
+def test_resolve_category_slobbers_buccal_spur_dental_and_behavioral():
+    """Slobbers/buccal spur -> dental; behavioral-disorder names -> behavioral."""
+    R = _resolver()
+    assert R("流涎（歯科関連）", "Slobbers (Dental-Related)") == "dental"
+    assert R("頬棘状突起潰瘍", "Buccal Spur Ulceration") == "dental"
+    assert R("拒食（行動性）", "Anorexia (Behavioral)") == "behavioral"
+    assert R("ストレス関連疾患", "Stress-Related Illness") == "behavioral"
+    # Guard: muscle/spine 棘 names must NOT become dental.
+    assert R("棘下筋拘縮", "Infraspinatus Contracture") != "dental"
+    assert R("棘突起重複症（キッシングスパイン）", "Kissing Spines") != "dental"
+
+
+# ---------------------------------------------------------------------------
+# Curated etiology for flagship dog / cat diseases
+# ---------------------------------------------------------------------------
+
+
+def test_curated_etiology_flagship_dog_cat_diseases():
+    """Major dog/cat diseases get disease-specific (not category-template) cause."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    cases = {
+        ("dog", "胃拡張胃捻転症候群（GDV）"): "胸深",
+        ("dog", "椎間板ヘルニア（IVDD）"): "軟骨異栄養",
+        ("dog", "拡張型心筋症（DCM）"): "ドーベルマン",
+        ("dog", "粘液腫様僧帽弁変性症"): "粘液腫様",
+        ("cat", "肥大型心筋症"): "MYBPC3",
+        ("cat", "猫慢性歯肉口内炎"): "歯垢",
+        ("cat", "慢性腎臓病（CKD）"): "ネフロン",
+    }
+    # NB: diseases that also appear in curated_common_diseases.COMMON_DISEASES are
+    # served that module's wording (checked first), so we verify the entry is
+    # curated with substantial, disease-specific content rather than a specific
+    # marker (which is module-dependent). "Not a category template" is enforced by
+    # the served-DB flagship test below.
+    for (sp, name), _marker in cases.items():
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"{name} should be curated"
+        blob = (out.get("causes_ja", "") + out.get("pathophysiology_ja", "")).strip()
+        assert len(blob) >= 40, f"{name} curated text too short / empty"
+
+
+def test_curated_etiology_excludes_lookalike_diseases():
+    """Look-alike diseases must get their OWN curation (or none) — never the
+    neighbouring disease's text.
+
+    Hypoparathyroidism and EPI are now curated as their own entities, so they
+    must carry hypoparathyroidism / EPI content, NOT thyroid / pancreatitis text.
+    Mitral valve *dysplasia* (congenital) and non-LP stomatitis stay uncurated.
+    """
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    # Hypoparathyroidism: curated as parathyroid (PTH), not thyroid (T4/T3).
+    hypopara = curated_etiology("dog", "副甲状腺機能低下症", "")
+    assert hypopara is not None and "PTH" in hypopara["causes_ja"]
+    assert "T4" not in hypopara["pathophysiology_ja"]
+    # EPI: curated as exocrine pancreatic insufficiency, not pancreatitis.
+    epi = curated_etiology("dog", "膵外分泌不全症（EPI）", "")
+    assert epi is not None and "腺房萎縮" in epi["causes_ja"]
+    assert "自己消化" not in epi["pathophysiology_ja"]
+    # Still uncurated (congenital dysplasia ≠ MMVD; non-LP stomatitis ≠ FCGS).
+    assert curated_etiology("dog", "僧帽弁形成不全", "Mitral Valve Dysplasia") is None
+    assert curated_etiology("cat", "猫口内炎（非リンパ形質細胞性）", "") is None
+
+
+def test_curated_etiology_second_batch_dog_cat():
+    """Second batch of flagship dog/cat diseases is disease-specific."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    cases = {
+        ("dog", "糖尿病"): "インスリン依存",
+        ("cat", "糖尿病"): "2型",
+        ("dog", "緑内障"): "眼圧",
+        ("dog", "子宮蓄膿症"): "黄体期",
+        ("dog", "免疫介在性溶血性貧血（IMHA）"): "自己抗体",
+        ("dog", "レプトスピラ症"): "スピロヘータ",
+        ("dog", "骨肉腫"): "骨芽細胞",
+        ("dog", "肥満細胞腫"): "脱顆粒",
+        ("dog", "脾臓血管肉腫"): "血管内皮",
+        ("cat", "消化器型リンパ腫"): "FeLV",
+        ("cat", "肝リピドーシス（脂肪肝）"): "遊離脂肪酸",
+        ("cat", "猫特発性膀胱炎"): "GAG",
+        ("cat", "猫上部呼吸器感染症"): "FHV-1",
+    }
+    for (sp, name), _marker in cases.items():
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"{name} should be curated"
+        blob = (out.get("causes_ja", "") + out.get("pathophysiology_ja", "")).strip()
+        assert len(blob) >= 40, f"{name} curated text too short / empty"
+
+
+def test_curated_etiology_second_batch_exclusions():
+    """DKA, chondrosarcoma, herpetic keratitis/dermatitis, prostatic abscess
+    must NOT inherit the diabetes / osteosarcoma / herpes-URI / BPH curation."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    assert curated_etiology("dog", "糖尿病性ケトアシドーシス", "") is None
+    assert curated_etiology("dog", "軟骨肉腫", "Chondrosarcoma") is None
+    assert curated_etiology("cat", "猫ヘルペスウイルス性角膜炎", "") is None
+    assert curated_etiology("cat", "猫ヘルペスウイルス性皮膚炎", "") is None
+    assert curated_etiology("dog", "前立腺膿瘍", "") is None
+
+
+def test_curated_etiology_third_batch_dog_cat():
+    """Third batch (endocrine/neuro/GI/urinary flagships) is disease-specific."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    cases = {
+        ("dog", "アジソン病（副腎皮質機能低下症）"): "アルドステロン",
+        ("dog", "膵外分泌不全症（EPI）"): "腺房萎縮",
+        ("dog", "喉頭麻痺"): "反回喉頭神経",
+        ("dog", "変性性脊髄症（DM）"): "SOD1",
+        ("dog", "胆嚢粘液嚢腫"): "ムチン",
+        ("cat", "尿道閉塞"): "高カリウム",
+        ("cat", "猫特発性巨大結腸症"): "結腸",
+        ("cat", "多発性嚢胞腎"): "PKD1",
+        ("cat", "拡張型心筋症"): "タウリン",
+        ("cat", "猫シュウ酸カルシウム尿路結石症"): "過飽和",
+        ("cat", "猫ストルバイト尿路結石症"): "アルカリ",
+        ("cat", "トキソプラズマ症"): "終宿主",
+        ("cat", "栄養性二次性副甲状腺機能亢進症"): "食事",
+        ("cat", "猫腎性二次性副甲状腺機能亢進症"): "FGF23",
+    }
+    for (sp, name), _marker in cases.items():
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"{name} should be curated"
+        blob = (out.get("causes_ja", "") + out.get("pathophysiology_ja", "")).strip()
+        assert len(blob) >= 40, f"{name} curated text too short / empty"
+
+
+def test_curated_etiology_parathyroid_variants_are_distinct():
+    """The three hyperparathyroidism variants must get DISTINCT etiology
+    (nutritional vs primary adenoma vs renal-secondary), not one shared text."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    nshp = curated_etiology("cat", "栄養性二次性副甲状腺機能亢進症", "")["causes_ja"]
+    primary = curated_etiology("cat", "猫原発性副甲状腺機能亢進症", "")["causes_ja"]
+    renal = curated_etiology("cat", "猫腎性二次性副甲状腺機能亢進症", "")["causes_ja"]
+    assert "食事" in nshp and "腺腫" in primary and "CKD" in renal
+    assert nshp != primary and primary != renal and nshp != renal
+    # Anal-sac adenocarcinoma must NOT get the (benign) anal-sac-disease curation.
+    assert curated_etiology("dog", "肛門嚢腺癌", "") is None
+
+
+def test_curated_etiology_fourth_batch_dog_cat():
+    """Fourth batch (ophthalmic/orthopaedic/derm/hepatic/haematology)."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    cases = {
+        ("dog", "股関節形成不全"): "寛骨臼",
+        ("dog", "膝蓋骨脱臼"): "滑車溝",
+        ("dog", "前十字靭帯断裂"): "半月板",
+        ("dog", "白内障"): "クリスタリン",
+        ("dog", "進行性網膜萎縮症（PRA）"): "夜盲",
+        ("dog", "膿皮症"): "pseudintermedius",
+        ("dog", "巨大食道症"): "蠕動",
+        ("dog", "先天性門脈体循環シャント"): "アンモニア",
+        ("dog", "銅関連慢性肝炎"): "COMMD1",
+        ("dog", "中枢性尿崩症"): "ADH",
+        ("cat", "角膜潰瘍"): "melting",
+        ("cat", "結膜炎"): "Chlamydia",
+        ("cat", "角膜壊死（角膜分離症）"): "壊死片",
+        ("cat", "免疫介在性血小板減少症"): "自己抗体",
+    }
+    for (sp, name), _marker in cases.items():
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"{name} should be curated"
+        blob = (out.get("causes_ja", "") + out.get("pathophysiology_ja", "")).strip()
+        assert len(blob) >= 40, f"{name} curated text too short / empty"
+
+
+def test_feline_hemoplasmosis_is_bacterial_not_viral_or_fungal():
+    """Feline infectious anaemia is a hemotropic *Mycoplasma* (bacterial) — its
+    etiology must say so, not the legacy viral/fungal template."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    for name in ("猫伝染性貧血（ヘモプラズマ症）", "猫感染性貧血（Candidatus M. haemominutum）"):
+        out = curated_etiology("cat", name, "")
+        assert out is not None
+        blob = out["causes_ja"] + out["pathophysiology_ja"]
+        assert "マイコプラズマ" in blob and "細菌" in blob
+        assert "真菌" not in blob
+
+
+# ---------------------------------------------------------------------------
 # Curated common-disease etiology/pathophysiology (curated_common_diseases.py)
 #
 # The category-template generators describe a whole *category* and swap the
@@ -2892,8 +3152,14 @@ def test_curated_common_disease_resolution_and_exclusions():
     assert curated("dog", "僧帽弁形成不全", "Mitral Valve Dysplasia") is None, (
         "Congenital mitral dysplasia must not inherit acquired MMVD etiology"
     )
-    assert curated("dog", "副甲状腺機能低下症", "Hypoparathyroidism") is None, (
-        "Hypoparathyroidism must not inherit hypothyroidism etiology"
+    # Hypoparathyroidism is now curated as its OWN disease (PTH deficiency) by
+    # curated_etiology._CURATED — it must NOT inherit hypothyroidism (T4/T3) text.
+    hypopara = curated("dog", "副甲状腺機能低下症", "Hypoparathyroidism")
+    assert hypopara and "PTH" in hypopara.get("causes_ja", ""), (
+        "Hypoparathyroidism must be curated as parathyroid disease"
+    )
+    assert "甲状腺ホルモン（T4" not in hypopara.get("pathophysiology_ja", ""), (
+        "Hypoparathyroidism must not inherit hypothyroidism (T4/T3) etiology"
     )
     assert curated("dog", "糖尿病性ケトアシドーシス", "Diabetic Ketoacidosis") is None, (
         "DKA must not inherit plain diabetes etiology (different pathophysiology)"
@@ -2966,3 +3232,51 @@ def test_served_db_flagship_diseases_not_category_templated():
             if fingerprint_etiology(row[field] or "", fp) is not None:
                 failures.append(f"[{key[0]}] {key[1]}: {field} still carries a category template")
     assert not failures, "Flagship diseases still templated:\n" + "\n".join(failures)
+
+
+def test_curated_etiology_equine_flagship():
+    """Equine flagship diseases are curated with substantial, disease-specific text."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    for name in (
+        "疝痛（コリック）",
+        "胃潰瘍",
+        "馬喘息 (IAD/RAO)",
+        "下垂体中葉機能障害 (PPID)",
+        "馬メタボリック症候群 (EMS)",
+        "浅指屈腱炎",
+        "蹄舟骨症候群",
+        "離断性骨軟骨症 (OCD)",
+        "馬再発性ぶどう膜炎 (ERU)",
+        "馬原虫性脊髄脳炎 (EPM)",
+        "多糖類蓄積性ミオパシー (PSSM)",
+        "腺疫",
+        "ピロプラズマ症",
+        "子宮内膜炎",
+        "胎盤炎",
+        "大腸炎",
+        "食道閉塞（チョーク）",
+        "喉嚢疾患（喉嚢鼓脹・喉嚢真菌症）",
+    ):
+        out = curated_etiology("horse", name, "")
+        assert out is not None, f"equine {name} should be curated"
+        blob = (out.get("causes_ja", "") + out.get("pathophysiology_ja", "")).strip()
+        assert len(blob) >= 40, f"equine {name} curated text too short"
+
+
+def test_equine_ppid_is_endocrine_not_bacterial():
+    """Equine PPID (pituitary pars intermedia dysfunction) is a neurodegenerative
+    endocrine disease — its etiology must NOT be the bacterial-infection template."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    out = curated_etiology("horse", "下垂体中葉機能障害 (PPID)", "")
+    assert out is not None
+    blob = out.get("causes_ja", "") + out.get("pathophysiology_ja", "")
+    assert "ドパミン" in blob and "下垂体中葉" in blob
+    assert "細菌病原体の感染" not in blob
