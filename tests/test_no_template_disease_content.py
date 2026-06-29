@@ -3385,9 +3385,7 @@ def test_no_deworming_template_on_protozoal_diseases_in_json():
 
     bad = []
     for e in entries:
-        if _DEWORM_SIG in (e.get("treatment_ja") or "") and resolve_protozoal_agent(
-            e.get("name_ja"), e.get("name")
-        ):
+        if _DEWORM_SIG in (e.get("treatment_ja") or "") and resolve_protozoal_agent(e.get("name_ja"), e.get("name")):
             bad.append(f"[{e.get('species')}] {e.get('name_ja') or e.get('name')}")
     assert not bad, "Protozoal diseases still carry the deworming template:\n" + "\n".join(bad[:20])
 
