@@ -3307,3 +3307,46 @@ def test_served_db_praa_is_vascular_ring_not_retinal():
                 assert "進行性網膜萎縮症（PRA）は" not in causes, (
                     f"[{row['species']}] {row['name_ja']}: PRAA still has PRA retinal text"
                 )
+
+
+def test_curated_etiology_exotic_flagship():
+    """Exotic companion-mammal flagship diseases are curated, disease-specific."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    cases = [
+        ("rabbit", "消化管うっ滞（ウサギ）"),
+        ("guinea_pig", "消化管うっ滞（モルモット）"),
+        ("chinchilla", "切歯不正咬合（チンチラ）"),
+        ("rabbit", "パスツレラ症（スナッフル）（ウサギ）"),
+        ("rabbit", "エンセファリトゾーン・クニクリ感染症"),
+        ("rabbit", "子宮腺癌（ウサギ）"),
+        ("ferret", "インスリノーマ（フェレット）"),
+        ("ferret", "副腎疾患（フェレット）"),
+        ("ferret", "拡張型心筋症（フェレット）"),
+        ("chinchilla", "陰茎毛輪"),
+        ("guinea_pig", "壊血病（ビタミンC欠乏症）（モルモット）"),
+    ]
+    for sp, name in cases:
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"exotic {name} should be curated"
+        blob = (out.get("causes_ja", "") + out.get("pathophysiology_ja", "")).strip()
+        assert len(blob) >= 40, f"exotic {name} curated text too short"
+
+
+def test_exotic_category_error_fixes():
+    """Aleutian disease is a parvovirus (not bacterial); chinchilla heatstroke is
+    not nutritional; trichobezoar is a GI-stasis sign (not parasitic)."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    ad = curated_etiology("ferret", "アリューシャン病（フェレット）", "")
+    assert ad and "parvovirus" in ad["causes_ja"].lower() and "細菌感染ではない" in ad["causes_ja"]
+    heat = curated_etiology("chinchilla", "熱中症（チンチラ）", "")
+    assert heat and "体温調節" in heat["causes_ja"]
+    tricho = curated_etiology("rabbit", "毛球症（ウサギ）", "")
+    assert tricho and "GI stasis" in tricho["causes_ja"] and "寄生虫" not in tricho["causes_ja"]
