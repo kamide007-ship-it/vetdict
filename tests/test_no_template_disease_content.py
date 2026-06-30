@@ -3309,6 +3309,101 @@ def test_served_db_praa_is_vascular_ring_not_retinal():
                 )
 
 
+# ---------------------------------------------------------------------------
+# Protozoal diseases must not carry the helminth deworming template.
+# Anthelmintics ("駆虫薬") do not treat intracellular/erythrocytic protozoa;
+# babesiosis, toxoplasmosis, cytauxzoonosis, leishmaniosis, hepatozoonosis,
+# coccidiosis etc. require antiprotozoal chemotherapy. See
+# scripts/template_elimination/antiprotozoal_library.py.
+# ---------------------------------------------------------------------------
+
+_DEWORM_SIG = "同定された寄生虫に応じた適切な駆虫薬"
+
+
+def test_protozoal_resolver_maps_agents_and_ignores_helminths():
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.antiprotozoal_library import resolve_protozoal_agent
+
+    # Protozoal diseases resolve to a curated agent.
+    for nj, ne in [
+        ("バベシア症", "Babesiosis"),
+        ("トキソプラズマ症", "Toxoplasmosis"),
+        ("サイトークスゾーン症", "Cytauxzoonosis"),
+        ("リーシュマニア症", "Leishmaniasis"),
+        ("ヘパトゾーン症", "Hepatozoonosis"),
+        ("エンセファリトゾーン症", "Encephalitozoonosis"),
+        ("コクシジウム症", "Coccidiosis"),
+    ]:
+        assert resolve_protozoal_agent(nj, ne) is not None, f"{ne} should resolve to a protozoal agent"
+
+    # Genuine helminths / ectoparasites must NOT resolve (they keep the dewormer).
+    for nj, ne in [
+        ("回虫症", "Roundworm Infection"),
+        ("条虫症", "Tapeworm Infection"),
+        ("ノミ寄生症", "Flea Infestation"),
+        ("ミミヒゼンダニ症", "Ear Mite Infestation"),
+        ("糞線虫症", "Strongyloidiasis"),
+    ]:
+        assert resolve_protozoal_agent(nj, ne) is None, f"{ne} is a helminth/ectoparasite and must keep deworming"
+
+
+def test_protozoal_curated_treatments_name_the_correct_drug():
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.antiprotozoal_library import protozoal_clinical_fields
+
+    sig = _DEWORM_SIG
+    cases = [
+        ("dog", "バベシア症", "Babesiosis", "イミドカルブ"),
+        ("dog", "トキソプラズマ症", "Toxoplasmosis", "クリンダマイシン"),
+        ("dog", "リーシュマニア症", "Leishmaniasis", "アロプリノール"),
+        ("cat", "サイトークスゾーン症", "Cytauxzoonosis", "アトバコン"),
+        ("rabbit", "エンセファリトゾーン症", "Encephalitozoonosis", "フェンベンダゾール"),
+        ("cat", "コクシジウム症", "Coccidiosis", "サルファ"),
+    ]
+    for species, nj, ne, expected in cases:
+        fields = protozoal_clinical_fields(species, nj, ne, f"…{sig}…")
+        assert fields is not None, f"{ne} should yield curated antiprotozoal fields"
+        assert "駆虫薬" not in fields["treatment_ja"], f"{ne} treatment must not say 駆虫薬"
+        assert expected in fields["treatment_ja"], f"{ne} treatment should mention {expected}"
+
+    # Without the deworming fingerprint, nothing is changed (curated text is safe).
+    assert protozoal_clinical_fields("dog", "バベシア症", "Babesiosis", "既存のキュレート治療") is None
+
+
+def test_no_deworming_template_on_protozoal_diseases_in_json():
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.antiprotozoal_library import resolve_protozoal_agent
+
+    bad = []
+    for e in entries:
+        if _DEWORM_SIG in (e.get("treatment_ja") or "") and resolve_protozoal_agent(e.get("name_ja"), e.get("name")):
+            bad.append(f"[{e.get('species')}] {e.get('name_ja') or e.get('name')}")
+    assert not bad, "Protozoal diseases still carry the deworming template:\n" + "\n".join(bad[:20])
+
+
+def test_served_db_protozoal_diseases_are_not_dewormed():
+    """No protozoal disease in the served DB may carry the deworming treatment."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.antiprotozoal_library import resolve_protozoal_agent
+
+    bad = []
+    for row in _served_db_rows():
+        if _DEWORM_SIG in (row["treatment_ja"] or "") and resolve_protozoal_agent(row["name_ja"], row["name"]):
+            bad.append(f"[{row['species']}] {row['name_ja']}")
+    assert not bad, "Served DB protozoal diseases still dewormed:\n" + "\n".join(bad[:20])
+
+
 def test_curated_etiology_exotic_flagship():
     """Exotic companion-mammal flagship diseases are curated, disease-specific."""
     import sys

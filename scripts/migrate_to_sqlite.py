@@ -1540,6 +1540,79 @@ def apply_curated_dangerous_treatments(conn) -> int:
     return n
 
 
+def regenerate_protozoal_treatments(conn) -> dict[str, int]:
+    """Replace the deworming template on protozoal diseases with antiprotozoal protocols.
+
+    Protozoa (Babesia, Toxoplasma, Leishmania, Hepatozoon, Cytauxzoon,
+    Encephalitozoon, coccidia, Sarcocystis, Atoxoplasma, Leucocytozoon, avian
+    malaria) are not treated with anthelmintics, yet ~40 records carry the generic
+    deworming treatment template. This served-database safety net corrects
+    module-sourced records the JSON-overlay pass cannot reach. ``treatment_ja`` /
+    ``treatment`` are always replaced (the dewormer text is clinically wrong);
+    ``pathophysiology_ja`` / ``pathophysiology`` are replaced only when empty, a
+    category template, or a recognised stub, so curated mechanism prose that names
+    the pathogen is preserved.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.antiprotozoal_library import (
+        PATHO_EN_STUB_MARKS,
+        PATHO_JA_STUB_MARKS,
+        protozoal_clinical_fields,
+    )
+    from scripts.template_elimination.clinical_fields_generator import (
+        build_etiology_fingerprints,
+        fingerprint_etiology,
+        gen_pathophysiology_ja,
+    )
+    from scripts.template_elimination.curated_etiology import STUB_SIGNATURES
+
+    patho_fps = build_etiology_fingerprints(gen_pathophysiology_ja)
+
+    def _ja_replaceable(text: str) -> bool:
+        if not text:
+            return True
+        if fingerprint_etiology(text, patho_fps) is not None:
+            return True
+        if any(sig in text for sig in STUB_SIGNATURES):
+            return True
+        return any(m in text for m in PATHO_JA_STUB_MARKS)
+
+    def _en_replaceable(text: str) -> bool:
+        if not text:
+            return True
+        low = text.lower()
+        return any(m in low for m in PATHO_EN_STUB_MARKS)
+
+    rows = conn.execute(
+        "SELECT id, species, name, name_ja, treatment_ja, pathophysiology_ja, pathophysiology FROM diseases"
+    ).fetchall()
+    stats = {"treatment": 0, "pathophysiology_ja": 0, "pathophysiology": 0}
+    for row in rows:
+        fields = protozoal_clinical_fields(
+            row["species"] or "", row["name_ja"] or "", row["name"] or "", row["treatment_ja"] or ""
+        )
+        if not fields:
+            continue
+        conn.execute(
+            "UPDATE diseases SET treatment_ja = ?, treatment = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+            (fields["treatment_ja"], fields["treatment"], row["id"]),
+        )
+        stats["treatment"] += 1
+        if _ja_replaceable(row["pathophysiology_ja"] or ""):
+            conn.execute(
+                "UPDATE diseases SET pathophysiology_ja = ? WHERE id = ?",
+                (fields["pathophysiology_ja"], row["id"]),
+            )
+            stats["pathophysiology_ja"] += 1
+        if _en_replaceable(row["pathophysiology"] or ""):
+            conn.execute(
+                "UPDATE diseases SET pathophysiology = ? WHERE id = ?",
+                (fields["pathophysiology"], row["id"]),
+            )
+            stats["pathophysiology"] += 1
+    return stats
+
+
 def apply_curated_etiology(conn) -> int:
     """Supply curated causes_ja / pathophysiology_ja for multifactorial diseases.
 
@@ -1741,6 +1814,15 @@ def main(db_path: str | None = None):
         # condition-specific, species-appropriate protocols.
         cur_n = apply_curated_dangerous_treatments(conn)
         print(f"  → {cur_n} curated treatment replacements")
+
+        # Replace the deworming template on protozoal diseases (babesiosis,
+        # toxoplasmosis, cytauxzoonosis, coccidiosis, …) with evidence-based
+        # antiprotozoal protocols — anthelmintics do not treat protozoa.
+        proto = regenerate_protozoal_treatments(conn)
+        print(
+            f"  → {proto['treatment']} protozoal treatments corrected "
+            f"({proto['pathophysiology_ja']} JA / {proto['pathophysiology']} EN pathophysiology)"
+        )
 
         # Supply curated etiology/pathophysiology for multifactorial diseases
         # (laminitis, hepatic fibrosis) that resist single-category templating.
