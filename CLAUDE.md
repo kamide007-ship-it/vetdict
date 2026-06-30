@@ -1314,3 +1314,48 @@ resolver が None を返すため recat が補正できなかった残りの臓�
 ### 残課題（次セッション候補）
 - 主要疾患キュレート第7弾（鳥/爬虫類の主要疾患、犬猫の残り）
 - causes_ja/pathophysiology_ja の残りカテゴリテンプレートの疾患固有化（獣医レビュー前提で漸進的に）
+
+## 2026-06セッション（第8弾: 原虫症の「駆虫薬」テンプレート撲滅 — 臨床的に危険な治療誤りの是正）
+
+### 背景: 原虫に駆虫薬を処方する致命的なテンプレート
+配信DB監査で、40件の**原虫症**（バベシア症・トキソプラズマ症・リーシュマニア症・ヘパトゾーン症・
+サイトークスゾーン症・エンセファリトゾーン症・コクシジウム症・サルコシスティス症・アトキソプラズマ症・
+ロイコチトゾーン症・鳥マラリア）が、蠕虫用の汎用「駆虫薬」治療テンプレート
+（「…同定された寄生虫に応じた適切な駆虫薬が必要…全てのライフステージを排除するため複数回投与…」）を
+保持していた。これは単なるテンプレートではなく**臨床的に誤り**: 駆虫薬（anthelmintic）は赤血球内・組織内・
+細胞内の原虫を治療しない。獣医師が「バベシア症やサイトークスゾーン症に駆虫薬」と読めば信頼を失う致命的な誤記。
+
+### キュレート抗原虫薬ライブラリ（`scripts/template_elimination/antiprotozoal_library.py` 新規）
+- 11の原虫エージェント別にエビデンスベース（Solano-Gallego/ESCCAP・LeishVet・ACVIM・Baneth・
+  Cohn & Birkenheuer・Künzel & Fisher・Carpenter Formulary 6th・Greene 4th）の**種特異的**治療＋
+  病態生理を JA/EN で記述:
+  - バベシア: 大型(イミドカルブ6.6 mg/kg IM×2)/小型B. gibsoni(アトバコン＋アジスロマイシン)/猫(プリマキン)
+  - トキソプラズマ: クリンダマイシン10-12.5 mg/kg PO q12h×4週（鳥はサルファ＋ピリメタミン＋支持療法）
+  - リーシュマニア: メグルミンアンチモン酸/ミルテホシン＋アロプリノール長期、腎症モニタリング必須
+  - ヘパトゾーン: H. canis(イミドカルブ)/American型H. americanum(TCP→デコキネート長期)
+  - サイトークスゾーン: アトバコン15 mg/kg q8h＋アジスロマイシン10日（最高生存率）＋集中支持療法
+  - エンセファリトゾーン(E. cuniculi): フェンベンダゾール20 mg/kg PO q24h×28日（微胞子虫＝ベンズイミダゾール正解）
+  - コクシジウム: サルファジメトキシン/ポナズリル/トルトラズリル（ウサギ肝コクシE. stiedae注記）
+  - サルコシスティス/アトキソプラズマ/ロイコチトゾーン/鳥マラリア: 各々の標準治療＋媒介昆虫防除
+- `resolve_protozoal_agent()` で疾患名→原虫エージェント解決。**蠕虫・外部寄生虫（回虫・条虫・ノミ・
+  ダニ・糞線虫）は None を返し駆虫薬テンプレートを維持**（正しいため）
+- `protozoal_clinical_fields()` は駆虫薬フィンガープリント＋原虫解決の両方を満たす場合のみ返却
+
+### 適用（JSON本体 + 配信DB安全網）
+- `scripts/template_elimination/fix_antiprotozoal.py --apply`（新規）— JSONオーバーレイに適用（39件）
+  - treatment_ja/treatment(EN): 駆虫薬テンプレート＋原虫解決で**常に**置換（臨床的に危険なため）
+  - pathophysiology_ja/(EN): 空/カテゴリテンプレート/スタブの場合のみ置換。**病原体名を明記した
+    キュレート病態生理（Babesia属・Toxoplasma gondii・Cytauxzoon felis・Encephalitozoon cuniculi）は温存**
+- `migrate_to_sqlite.py` に `regenerate_protozoal_treatments()` を追加（配信DB安全網、モジュール由来1件を捕捉）
+- 配信DB（7,094疾患）: 原虫症の駆虫薬テンプレート **40→0件**
+
+### 回帰テスト追加（tests/test_no_template_disease_content.py、+5件）
+- `test_protozoal_resolver_maps_agents_and_ignores_helminths` — 原虫は解決、蠕虫/外部寄生虫はNone
+- `test_protozoal_curated_treatments_name_the_correct_drug` — 各原虫が正しい抗原虫薬を含み「駆虫薬」を含まない
+- `test_no_deworming_template_on_protozoal_diseases_in_json` — JSONに原虫×駆虫薬テンプレートが残っていない
+- `test_served_db_protozoal_diseases_are_not_dewormed` — 配信DBに原虫×駆虫薬テンプレートが残っていない
+
+### テスト・CI
+- フルテストスイート: **3,455件合格**（34 skip）
+- ruff check / format: 全変更ファイルで通過
+- 再現手順: `fix_antiprotozoal.py --apply` → `migrate_to_sqlite.py`
