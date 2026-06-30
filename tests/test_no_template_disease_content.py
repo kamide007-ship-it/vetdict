@@ -3445,3 +3445,96 @@ def test_exotic_category_error_fixes():
     assert heat and "体温調節" in heat["causes_ja"]
     tricho = curated_etiology("rabbit", "毛球症（ウサギ）", "")
     assert tricho and "GI stasis" in tricho["causes_ja"] and "寄生虫" not in tricho["causes_ja"]
+
+
+def test_curated_etiology_seventh_batch_avian_reptile_amphibian():
+    """Flagship avian/reptile/amphibian diseases get disease-specific etiology."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    cases = {
+        ("bird", "オウム病（クラミジア症）（鳥）"): "psittaci",
+        ("parrot", "嘴羽毛病（PBFD）（オウム）"): "Circovirus",
+        ("parakeet", "前胃拡張症（PDD）（インコ）"): "ボルナ",
+        ("bird", "アスペルギルス症（鳥）"): "fumigatus",
+        ("parakeet", "甲状腺腫（インコ）"): "ヨウ素",
+        ("reptile", "代謝性骨疾患（MBD）（爬虫類）"): "上皮小体",
+        ("snake", "封入体病（IBD）（ヘビ）"): "レプタレナ",
+        ("tortoise", "甲羅腐敗（リクガメ）"): "SCUD",
+        ("lizard", "口内炎（マウスロット）（トカゲ）"): "マウスロット",
+        ("amphibian", "ツボカビ症（両生類）"): "Batrachochytrium",
+        ("amphibian", "ラナウイルス感染症（両生類）"): "Ranavirus",
+    }
+    for (sp, name), marker in cases.items():
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"{name} should be curated"
+        blob = out.get("causes_ja", "") + out.get("pathophysiology_ja", "")
+        assert marker in blob, f"{name} curated text missing marker {marker!r}"
+        assert len(blob.strip()) >= 60, f"{name} curated text too short"
+
+
+def test_curated_etiology_seventh_batch_exclusions_and_gating():
+    """Avian goiter (iodine, non-neoplastic) must not capture thyroid *tumours*,
+    and species gating must keep mammal diseases away from bird/reptile text."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    # 甲状腺腫瘍 (thyroid tumour) excluded from the goiter (甲状腺腫) generator.
+    assert curated_etiology("bird", "甲状腺腫瘍（鳥）", "") is None
+    # Cat hyperthyroidism must not match avian goiter (species-gated + name).
+    cat_thy = curated_etiology("cat", "甲状腺機能亢進症", "")
+    assert cat_thy is None or "ヨウ素欠乏" not in cat_thy.get("causes_ja", "")
+    # Gout is curated separately for birds vs reptiles (species-appropriate).
+    bird_gout = curated_etiology("bird", "痛風（内臓型/関節型）（鳥）", "")
+    rept_gout = curated_etiology("reptile", "痛風（内臓型）（爬虫類）", "")
+    assert bird_gout and "尿酸排泄型" in bird_gout["causes_ja"]
+    assert rept_gout and "脱水" in rept_gout["causes_ja"]
+
+
+def test_reptile_amphibian_skin_rot_not_autoimmune():
+    """Scale rot / blister disease / shell rot are bacterial dermatoses — they
+    must NOT carry the autoimmune-tolerance etiology template."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.curated_etiology import curated_etiology
+
+    for sp, name in [
+        ("snake", "鱗腐敗（ヘビ）"),
+        ("reptile", "水疱症"),
+        ("amphibian", "水疱病（両生類）"),
+        ("amphibian", "甲羅腐敗（両生類）"),
+        ("bird", "黄色腫（インコ）"),
+        ("hedgehog", "針毛包炎（ハリネズミ）"),
+    ]:
+        out = curated_etiology(sp, name, "")
+        assert out is not None, f"{name} should be curated (was autoimmune-mislabelled)"
+        assert "自己免疫寛容の破綻" not in out["causes_ja"]
+    # Reptile shell rot keeps its proper shell (SCUD) text, not generic skin-rot.
+    tortoise_shell = curated_etiology("tortoise", "甲羅腐敗（リクガメ）", "")
+    assert tortoise_shell and "SCUD" in tortoise_shell["causes_ja"]
+
+
+def test_served_db_no_autoimmune_template_on_bacterial_dermatoses():
+    """The served DB must not describe reptile/amphibian scale-rot/blister/shell
+    disease or avian xanthoma as autoimmune."""
+    import sqlite3
+
+    db = ROOT / "instance" / "vetdict.db"
+    if not db.exists():
+        import pytest
+
+        pytest.skip("served DB not built")
+    con = sqlite3.connect(str(db))
+    rows = con.execute(
+        "SELECT species, name_ja FROM diseases WHERE causes_ja LIKE '%自己免疫寛容の破綻による自己抗原%'"
+    ).fetchall()
+    con.close()
+    offenders = [
+        nj for _sp, nj in rows if any(k in nj for k in ("鱗腐敗", "甲羅腐敗", "水疱病", "水疱症", "黄色腫", "針毛包炎"))
+    ]
+    assert not offenders, f"bacterial dermatoses still autoimmune-labelled: {offenders}"

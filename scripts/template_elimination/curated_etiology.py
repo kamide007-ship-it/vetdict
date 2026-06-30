@@ -1337,6 +1337,466 @@ _GP_OVARIAN_CYST = _f(
 )
 
 
+# --- Seventh batch: avian, reptile & amphibian flagship diseases ---
+# References: Harrison & Lightfoot, Clinical Avian Medicine (2006); Carpenter,
+# Exotic Animal Formulary 6th ed; Mader, Reptile and Amphibian Medicine and
+# Surgery 3rd ed; Divers & Stahl, Mader's Reptile Medicine 3rd ed; BSAVA
+# Manual of Exotic Pets / Avian / Reptiles.
+_AVES = frozenset({"bird", "parakeet", "parrot"})
+_REPT = frozenset({"reptile", "tortoise", "snake", "lizard"})
+_AMPH = frozenset({"amphibian"})
+
+
+def _chlamydiosis_c(sp):
+    return (
+        f"{sp}のオウム病（クラミジア症）は偏性細胞内寄生細菌 Chlamydia psittaci の感染が原因で、"
+        "感染鳥の乾燥した糞・気道分泌物・羽毛粉塵の吸入や経口摂取により伝播する。"
+        "不顕性キャリアがストレス（輸送・過密・繁殖・寒冷）で排菌するため、新規導入個体や鳥フェアが感染源となりやすい。"
+        "ヒトにも感染するズーノーシス（オウム病）であり、取り扱い時の防護を要する。"
+    )
+
+
+def _chlamydiosis_p(sp):
+    return (
+        f"{sp}では、吸入・経口侵入した基本小体が気道・消化管上皮細胞内に取り込まれ、封入体内で網様体へ変化して増殖する。"
+        "血行性に肝・脾へ播種し、肝脾腫・気嚢炎・結膜炎・腸炎を引き起こす。"
+        "緑色～黄緑色の尿酸（肝障害・胆汁うっ滞による biliverdin 排泄）、呼吸器症状、削痩を呈する。"
+        "ドキシサイクリンによる45日間の長期治療を要する。"
+    )
+
+
+def _pbfd_c(sp):
+    return (
+        f"{sp}の嘴羽毛病（PBFD）は Circovirus 科の Beak and Feather Disease Virus（BFDV）が原因で、"
+        "羽毛粉塵・糞・嗉嚢分泌物を介した水平感染と、卵を介した垂直感染が知られる。環境抵抗性が高く長期間残存する。"
+        "オカメインコ・ヨウム・オウム類など若齢個体が最も感受性が高い。"
+    )
+
+
+def _pbfd_p(sp):
+    return (
+        f"{sp}ではBFDVが分裂活発な細胞（羽包の上皮、嘴・爪の角化組織、ファブリキウス嚢・胸腺などのリンパ組織）を標的とする。"
+        "羽包の傷害により羽軸の出血・狭窄・脱落・異常羽（ロウ様鞘の残存・羽毛変形）を生じ、嘴・爪が変形・脆弱化する。"
+        "リンパ組織の傷害による免疫抑制で二次感染（細菌・真菌・ウイルス）を併発し、予後不良となることが多い。"
+    )
+
+
+def _pdd_c(sp):
+    return (
+        f"{sp}の前胃拡張症（PDD）は鳥ボルナウイルス（avian bornavirus / Parrot bornavirus, PaBV）感染が主因で、"
+        "糞・尿を介した水平感染が想定される。コニュアやヨウム・ボウシインコなど大型インコに多い。"
+    )
+
+
+def _pdd_p(sp):
+    return (
+        f"{sp}ではボルナウイルスに対する免疫介在性のリンパ形質細胞性神経炎が、消化管の自律神経叢（特に前胃・腺胃・筋胃の"
+        "ミエンテリック神経叢）に生じ、消化管運動を障害する。前胃・腺胃の拡張と未消化物の停滞・通過障害により、"
+        "未消化種子の排泄・削痩・嘔吐をきたす。中枢神経に及ぶと運動失調・振戦・発作などの神経症状を呈する。"
+    )
+
+
+def _aspergillosis_bird_c(sp):
+    return (
+        f"{sp}のアスペルギルス症は環境中の Aspergillus fumigatus 等の分生子（胞子）吸入による日和見真菌感染である。"
+        "換気不良・高湿度・汚れた敷料・カビた飼料による胞子曝露と、栄養不良（ビタミンA欠乏）・基礎疾患・"
+        "ステロイド投与・ストレスによる免疫低下が発症を促す。"
+    )
+
+
+def _aspergillosis_bird_p(sp):
+    return (
+        f"{sp}では吸入された胞子が下部気道（鳴管・気管支・気嚢・肺）で発芽し、肉芽腫・真菌プラークを形成する。"
+        "鳴管部の閉塞は嗄声・呼吸困難を、気嚢の肉芽腫は慢性消耗・呼吸促迫を招く。"
+        "鳥は気嚢系をもち横隔膜を欠くため病変が広がりやすく、重症例では血管侵襲性に全身播種する。診断・治療が困難で予後は慎重を要する。"
+    )
+
+
+def _hypovit_a_bird_c(sp):
+    return (
+        f"{sp}のビタミンA欠乏症は、ビタミンA前駆体に乏しい種子（ヒマワリ・アワ等）偏重の不適切な食餌が原因で、"
+        "ペレット食やビタミンA豊富な緑黄色野菜の不足により慢性的に発症する。インコ・オウムに極めて多い。"
+    )
+
+
+def _hypovit_a_bird_p(sp):
+    return (
+        f"{sp}ではビタミンA欠乏により上皮の扁平上皮化生が生じ、口腔・鼻腔・気道・腎の正常な粘液分泌上皮が角化する。"
+        "口腔内白色プラーク（特に舌根・口蓋）、後鼻孔乳頭の鈍化、副鼻腔炎、尿酸塩沈着を招き、"
+        "粘膜防御の破綻から細菌・真菌（カンジダ・アスペルギルス）の二次感染を起こしやすくなる。"
+    )
+
+
+def _gout_bird_c(sp):
+    return (
+        f"{sp}の痛風は高尿酸血症の結果として尿酸塩が組織に沈着する病態で、鳥類は尿酸を主要窒素代謝産物とする（尿酸排泄型）。"
+        "原因は腎機能障害（脱水、腎毒性物質、高蛋白食、ビタミンA欠乏、感染）による尿酸排泄低下が中心である。"
+    )
+
+
+def _gout_bird_p(sp):
+    return (
+        f"{sp}では血中尿酸が過飽和となり、尿酸塩結晶（トーフス）が漿膜面（内臓型: 心膜・肝・気嚢・腹膜）や"
+        "関節・腱鞘（関節型）に沈着する。内臓型は予後不良で多くは剖検で診断される。"
+        "関節型は趾・足根の腫脹・疼痛による跛行を呈する。脱水の補正と尿酸産生抑制（アロプリノール）・食餌管理が治療の柱となる。"
+    )
+
+
+def _candidiasis_bird_c(sp):
+    return (
+        f"{sp}のカンジダ症（そ嚢真菌症）は常在酵母 Candida albicans の日和見的過増殖による消化管感染で、"
+        "若齢個体（挿し餌雛）、長期抗菌薬投与による細菌叢撹乱、免疫低下、ビタミンA欠乏、不衛生な給餌器具が誘因となる。"
+    )
+
+
+def _candidiasis_bird_p(sp):
+    return (
+        f"{sp}ではカンジダが嗉嚢・口腔・上部消化管粘膜で過増殖し、白色の偽膜・肥厚（ターキッシュタオル様）を形成する。"
+        "嗉嚢停滞（sour crop）・嘔吐・食欲不振をきたし、雛では発育不良を招く。抗真菌薬（ナイスタチン・フルコナゾール）と基礎要因の是正で治療する。"
+    )
+
+
+def _goiter_bird_c(sp):
+    return (
+        f"{sp}の甲状腺腫は食餌性ヨウ素欠乏が主因で、ヨウ素に乏しい種子（特にアワ）偏重食のセキセイインコに古典的に多い。"
+        "ヨウ素欠乏により甲状腺ホルモン合成が低下し、これは腫瘍性ではなく代償性の甲状腺過形成である。"
+    )
+
+
+def _goiter_bird_p(sp):
+    return (
+        f"{sp}ではヨウ素欠乏で甲状腺ホルモン合成が低下し、フィードバックによるTSH分泌亢進が甲状腺の代償性過形成・腫大を招く。"
+        "腫大した甲状腺が気管・鳴管・食道（嗉嚢入口）を圧迫し、呼吸困難・吸気時の異常音（squeak）・鳴き声変化・嘔吐・嗉嚢拡張を呈する。"
+        "ヨウ素補給により可逆的に改善することが多い。"
+    )
+
+
+def _polyoma_c(sp):
+    return (
+        f"{sp}のポリオーマウイルス感染症は鳥ポリオーマウイルス（APV）が原因で、糞・羽毛粉塵・分泌物および垂直感染により伝播する。"
+        "免疫の未熟な雛・幼鳥が極めて感受性が高く、繁殖施設で問題となる。"
+    )
+
+
+def _polyoma_p(sp):
+    return (
+        f"{sp}ではAPVが全身臓器で複製し、肝壊死・出血・心嚢液貯留・腎障害を引き起こす。"
+        "雛では急性経過で出血・腹部膨満を伴い突然死することが多い。セキセイインコでは羽毛形成異常（フレンチモルト: 風切羽・尾羽の脱落・変形）として現れる。"
+    )
+
+
+_CHLAMYDIOSIS = {"causes_ja": _chlamydiosis_c, "pathophysiology_ja": _chlamydiosis_p}
+_PBFD = {"causes_ja": _pbfd_c, "pathophysiology_ja": _pbfd_p}
+_PDD = {"causes_ja": _pdd_c, "pathophysiology_ja": _pdd_p}
+_ASPERGILLOSIS_BIRD = {"causes_ja": _aspergillosis_bird_c, "pathophysiology_ja": _aspergillosis_bird_p}
+_HYPOVIT_A_BIRD = {"causes_ja": _hypovit_a_bird_c, "pathophysiology_ja": _hypovit_a_bird_p}
+_GOUT_BIRD = {"causes_ja": _gout_bird_c, "pathophysiology_ja": _gout_bird_p}
+_CANDIDIASIS_BIRD = {"causes_ja": _candidiasis_bird_c, "pathophysiology_ja": _candidiasis_bird_p}
+_GOITER_BIRD = {"causes_ja": _goiter_bird_c, "pathophysiology_ja": _goiter_bird_p}
+_POLYOMA_BIRD = {"causes_ja": _polyoma_c, "pathophysiology_ja": _polyoma_p}
+
+
+def _mbd_reptile_c(sp):
+    return (
+        f"{sp}の代謝性骨疾患（MBD）は飼育下で極めて多い栄養性疾患で、食餌性カルシウム欠乏、Ca:P比の逆転（高リン食）、"
+        "ビタミンD3欠乏、UVB照射の不足、不適切な温度（消化・代謝低下）が複合して発症する。"
+        "特に草食・昆虫食のリクガメやトカゲ（フトアゴ・イグアナ）で多い。"
+    )
+
+
+def _mbd_reptile_p(sp):
+    return (
+        f"{sp}ではカルシウム・ビタミンD3不足により低カルシウム血症が生じ、二次性上皮小体機能亢進症を介して"
+        "骨吸収（線維性骨異栄養症）が進行する。骨が脆弱・変形し、四肢の腫脹・湾曲、下顎の軟化（rubber jaw）、"
+        "甲羅の変形・軟化、病的骨折を招く。重度の低カルシウム血症では筋振戦・テタニー・後肢麻痺・痙攣を呈する。"
+    )
+
+
+def _resp_reptile_c(sp):
+    return (
+        f"{sp}の呼吸器感染症はグラム陰性菌（Pseudomonas・Aeromonas・Klebsiella）やマイコプラズマ（リクガメの上部気道病）が"
+        "主因だが、ウイルス・真菌も原因となる。適正温度域（POTZ）を下回る飼育、低湿度・乾燥、過密、栄養不良（ビタミンA欠乏）が発症を助長する。"
+    )
+
+
+def _resp_reptile_p(sp):
+    return (
+        f"{sp}は横隔膜を欠き気道の線毛クリアランスが乏しいため、下気道に分泌物が貯留しやすい。"
+        "病原体が気道粘膜に定着・増殖して肺炎・気道炎を起こし、開口呼吸・努力性呼吸・鼻汁・口腔内粘液・"
+        "頭部挙上姿勢を呈する。低体温による免疫低下が遷延化を招くため、温度管理が治療の前提となる。"
+    )
+
+
+def _dysecdysis_c(sp):
+    return (
+        f"{sp}の脱皮不全（dysecdysis）は低湿度・脱水・栄養不良・外部寄生虫（ダニ）・摩擦面の不足、"
+        "および甲状腺機能異常や全身疾患を背景に生じる、脱皮（蛻皮）が正常に完了しない状態である。"
+    )
+
+
+def _dysecdysis_p(sp):
+    return (
+        f"{sp}では角質層（古い表皮）の剥離が不完全となり、皮膚や眼の透明鱗（spectacle）に古い皮が残存する。"
+        "趾・尾端に残った皮が乾燥・収縮してリング状に締め付け、循環障害から趾・尾端の壊死・脱落を招く。"
+        "ヘビでは透明鱗の遺残（retained eye cap）が反復すると角膜損傷の原因となる。湿度・温浴・基礎要因の是正で対応する。"
+    )
+
+
+def _shell_rot_c(sp):
+    return (
+        f"{sp}の甲羅腐敗（潰瘍性甲羅病, SCUD）は外傷・過湿・不衛生な環境を契機とした、甲羅の細菌（グラム陰性菌）・"
+        "真菌感染である。咬傷・擦過、過密、汚れた水、低温による免疫低下が誘因となる。"
+    )
+
+
+def _shell_rot_p(sp):
+    return (
+        f"{sp}では甲羅の角質（鱗板）と骨組織に感染が及び、点状・潰瘍状の欠損・悪臭を伴う滲出・鱗板の浮き上がりを生じる。"
+        "進行すると骨甲板の骨髄炎、さらに血行性に播種して敗血症に至る。早期のデブリードマン・局所抗菌処置・環境改善・全身抗菌薬で治療する。"
+    )
+
+
+def _mouth_rot_c(sp):
+    return (
+        f"{sp}の口内炎（マウスロット, 感染性口内炎）はグラム陰性菌（Aeromonas・Pseudomonas）の感染が主で、"
+        "ストレス・不適切な飼育環境（低温・低湿）・外傷・栄養不良・免疫低下を背景に二次的に発症する。"
+    )
+
+
+def _mouth_rot_p(sp):
+    return (
+        f"{sp}では口腔粘膜に細菌感染が成立し、点状出血・乾酪性の膿（プラーク）・粘膜の発赤腫脹を生じる。"
+        "進行すると顎骨の骨髄炎や歯（ヘビ）の脱落、口腔から下気道への波及による肺炎を招く。"
+        "全身状態の評価と環境是正、デブリードマン・抗菌薬投与で治療する。"
+    )
+
+
+def _hypovit_a_reptile_c(sp):
+    return (
+        f"{sp}のビタミンA欠乏症はビタミンAに乏しい食餌（水棲ガメに筋肉・レタス偏重給餌、不適切な昆虫食）による"
+        "慢性的な欠乏が原因で、特にミズガメ類に古典的に多い。"
+    )
+
+
+def _hypovit_a_reptile_p(sp):
+    return (
+        f"{sp}ではビタミンA欠乏により上皮の扁平上皮化生が生じ、ハーダー腺・涙腺・呼吸器・腎の上皮が角化・閉塞する。"
+        "ミズガメでは眼瞼の腫脹（眼瞼浮腫）・閉眼が特徴的で、外耳道上皮の角化片貯留は耳膿瘍（aural abscess）の素因となる。"
+        "粘膜防御の破綻から呼吸器・腎の二次感染を起こしやすい。"
+    )
+
+
+def _gout_reptile_c(sp):
+    return (
+        f"{sp}の痛風は高尿酸血症による尿酸塩沈着で、原因は脱水（最重要）、腎障害（腎毒性物質・感染）、"
+        "高蛋白食（草食種への動物性蛋白給与）、不適切な飼育温度による代謝障害である。"
+    )
+
+
+def _gout_reptile_p(sp):
+    return (
+        f"{sp}では尿酸排泄の低下により血中尿酸が過飽和となり、尿酸塩結晶が内臓漿膜（心膜・腎・肝）や関節に沈着する。"
+        "内臓型は予後不良で剖検診断が多く、関節型は四肢関節の腫脹・疼痛・運動性低下を呈する。"
+        "十分な飲水・温浴による脱水補正と食餌・温度管理が治療の中心となる。"
+    )
+
+
+def _septicemia_reptile_c(sp):
+    return (
+        f"{sp}の敗血症は、口内炎・甲羅腐敗・膿瘍・消化管感染などの局所感染巣からグラム陰性菌が血流に侵入して全身に播種する病態で、"
+        "不適切な飼育環境・低温による免疫低下・外傷・栄養不良が背景となる。"
+    )
+
+
+def _septicemia_reptile_p(sp):
+    return (
+        f"{sp}では細菌とエンドトキシンが全身循環に入り、点状出血（特に腹甲・腹側鱗）・元気消失・多臓器障害を引き起こす。"
+        "リクガメの敗血症性皮膚潰瘍性疾患（SCUD）が代表例である。急速に進行し予後不良となりやすく、"
+        "積極的な輸液・全身抗菌薬・温度管理を要する救急病態である。"
+    )
+
+
+def _crypto_reptile_c(sp):
+    return (
+        f"{sp}のクリプトスポリジウム症は宿主特異的な原虫（ヘビ: Cryptosporidium serpentis、トカゲ: C. varanii）の感染で、"
+        "環境抵抗性の強いオーシストの経口摂取（糞口感染）により伝播する。汚染された飼育環境・器具が感染源となる。"
+    )
+
+
+def _crypto_reptile_p(sp):
+    return (
+        f"{sp}では原虫が消化管上皮（ヘビでは胃、トカゲでは小腸）に寄生し、ヘビでは胃粘膜の著明な肥厚により"
+        "嚥下後の中部体幹の膨隆・慢性嘔吐・削痩（慢性消耗）を呈する。確実に有効な治療法はなく予後不良で、"
+        "他個体への伝播防止のための検疫・衛生管理が重要である。"
+    )
+
+
+def _ibd_reptile_c(sp):
+    return (
+        f"{sp}の封入体病（IBD）は主にボア・パイソン（ボア科）に発生するレプタレナウイルス感染症で、"
+        "ヘビダニ（Ophionyssus）の媒介や接触感染が想定される。"
+    )
+
+
+def _ibd_reptile_p(sp):
+    return (
+        f"{sp}では多くの細胞に好酸性の細胞質内封入体が形成され、中枢神経症状（スターゲイジング: 頭部後屈、"
+        "斜頸、運動失調、立ち直り反射消失）、慢性的な逆流・口内炎、免疫抑制による二次感染、リンパ増殖性疾患を伴う。"
+        "ボアは長期キャリアとなりうる一方、パイソンは急性経過をとりやすい。確実な治療法はなく予後不良である。"
+    )
+
+
+def _abscess_reptile_c(sp):
+    return (
+        f"{sp}の膿瘍は外傷・咬傷・異物・基礎感染を契機としたグラム陰性菌の限局性感染で、"
+        "不衛生・過密環境や、耳膿瘍ではビタミンA欠乏が素因となる。"
+    )
+
+
+def _abscess_reptile_p(sp):
+    return (
+        f"{sp}の膿は哺乳類と異なり乾酪性（チーズ様の固形）で、自然排膿しにくく被膜に包まれた腫瘤を形成する。"
+        "皮下・耳道（リクガメの耳膿瘍）・眼鏡鱗下（ヘビ）など部位は多様で、放置すると深部組織・骨へ波及する。"
+        "治療は外科的な被膜ごとの摘出・デブリードマンが基本で、抗菌薬単独では消退しにくい。"
+    )
+
+
+_MBD_REPTILE = {"causes_ja": _mbd_reptile_c, "pathophysiology_ja": _mbd_reptile_p}
+_RESP_REPTILE = {"causes_ja": _resp_reptile_c, "pathophysiology_ja": _resp_reptile_p}
+_DYSECDYSIS = {"causes_ja": _dysecdysis_c, "pathophysiology_ja": _dysecdysis_p}
+_SHELL_ROT = {"causes_ja": _shell_rot_c, "pathophysiology_ja": _shell_rot_p}
+_MOUTH_ROT = {"causes_ja": _mouth_rot_c, "pathophysiology_ja": _mouth_rot_p}
+_HYPOVIT_A_REPTILE = {"causes_ja": _hypovit_a_reptile_c, "pathophysiology_ja": _hypovit_a_reptile_p}
+_GOUT_REPTILE = {"causes_ja": _gout_reptile_c, "pathophysiology_ja": _gout_reptile_p}
+_SEPTICEMIA_REPTILE = {"causes_ja": _septicemia_reptile_c, "pathophysiology_ja": _septicemia_reptile_p}
+_CRYPTO_REPTILE = {"causes_ja": _crypto_reptile_c, "pathophysiology_ja": _crypto_reptile_p}
+_IBD_REPTILE = {"causes_ja": _ibd_reptile_c, "pathophysiology_ja": _ibd_reptile_p}
+_ABSCESS_REPTILE = {"causes_ja": _abscess_reptile_c, "pathophysiology_ja": _abscess_reptile_p}
+
+
+def _chytrid_c(sp):
+    return (
+        f"{sp}のツボカビ症は真菌 Batrachochytrium dendrobatidis（Bd）の感染が原因で、水中を遊泳する遊走子により"
+        "個体間・水系を介して伝播する。世界的な両生類の減少・絶滅の主要因として知られる。"
+    )
+
+
+def _chytrid_p(sp):
+    return (
+        f"{sp}ではBdが角化した表皮（成体の四肢・腹側、オタマジャクシの口器）に感染し、皮膚の角化亢進・肥厚を起こす。"
+        "両生類は皮膚を介して電解質・水分を調節するため、皮膚機能の破綻により血中ナトリウム・カリウムが低下し、"
+        "心停止に至る。嗜眠・食欲不振・異常脱皮・後肢の伸展（立ち直り反射消失）を呈する。"
+    )
+
+
+def _ranavirus_c(sp):
+    return (
+        f"{sp}のラナウイルス感染症はイリドウイルス科 Ranavirus 属の感染で、水・直接接触・器具を介して伝播し、"
+        "両生類（および魚類・爬虫類）に大量死を引き起こす。"
+    )
+
+
+def _ranavirus_p(sp):
+    return (
+        f"{sp}ではウイルスが全身で複製し、造血組織・皮膚・内臓の壊死、皮下・筋肉内の出血、四肢・体腔の浮腫を生じる。"
+        "皮膚潰瘍・出血斑・腹部膨満を呈し、急性経過で高い致死率を示す。有効な治療はなく、検疫・消毒による防疫が中心となる。"
+    )
+
+
+def _amphibian_edema_c(sp):
+    return (
+        f"{sp}の浮腫症候群（水腫・dropsy）は単一疾患ではなく、腎不全・心疾患・敗血症・リンパ系（リンパ心臓）の機能障害・"
+        "低蛋白血症・寄生虫症、および不適切な水質・飼育環境を背景に生じる体液貯留の症候群である。"
+    )
+
+
+def _amphibian_edema_p(sp):
+    return (
+        f"{sp}は皮下リンパ嚢とリンパ心臓により体液を循環・排出するが、これらの機能やオスモレギュレーションが破綻すると"
+        "皮下リンパ嚢・体腔に体液が貯留し、全身性の腫脹（風船様膨満）を呈する。"
+        "基礎疾患の特定と治療、水質・環境改善が予後を左右し、原因不明例は予後不良なことが多い。"
+    )
+
+
+_CHYTRID = {"causes_ja": _chytrid_c, "pathophysiology_ja": _chytrid_p}
+_RANAVIRUS = {"causes_ja": _ranavirus_c, "pathophysiology_ja": _ranavirus_p}
+_AMPHIBIAN_EDEMA = {"causes_ja": _amphibian_edema_c, "pathophysiology_ja": _amphibian_edema_p}
+
+
+# Bacterial dermatoses of reptiles/amphibians (scale rot / blister disease /
+# vesicular dermatitis). Previously mislabelled with an autoimmune-tolerance
+# template — these are gram-negative bacterial skin infections from husbandry
+# failures, NOT immune-mediated disease.
+def _skin_rot_c(sp):
+    if sp == "両生類":
+        return (
+            "両生類の皮膚びらん・水疱性皮膚炎は、不衛生な水環境・水質悪化・過密・低温による免疫低下を背景とした"
+            "グラム陰性菌（Aeromonas hydrophila・Pseudomonas・Citrobacter 等）の日和見感染が原因で、"
+            "レッドレッグ症候群の一部として現れることが多い。"
+        )
+    return (
+        f"{sp}の鱗腐敗・水疱性皮膚炎（blister disease）は、湿った不衛生な床材・過湿・低温・外傷・熱傷を背景とした"
+        "グラム陰性菌（Aeromonas・Pseudomonas・Citrobacter・Serratia 等）の感染が原因である。"
+        "腹側鱗が床材に長時間接することで生じやすく、適切な飼育環境の欠如が根本要因となる。"
+    )
+
+
+def _skin_rot_p(sp):
+    if sp == "両生類":
+        return (
+            "両生類では皮膚バリアの破綻に細菌感染が成立し、紅斑・びらん・水疱・潰瘍を生じる。"
+            "両生類の皮膚は電解質・水分調節とガス交換を担うため、広範な傷害は致死的となりうる。"
+            "細菌が血流に侵入すると敗血症（レッドレッグ）へ進展する。水質改善と抗菌療法を要する。"
+        )
+    return (
+        f"{sp}では細菌が皮膚・鱗の下に感染し、漿液性～漿液血性の内容を伴う水疱（blister disease）・びらん・"
+        "潰瘍・痂皮を形成する。多くは腹側に好発し、進行すると深部組織・骨へ波及し、血行性に播種して敗血症に至る。"
+        "治療は飼育環境の是正（乾燥・清潔・適正温度）を前提に、局所処置と全身抗菌薬を行う。"
+    )
+
+
+_SKIN_ROT = {"causes_ja": _skin_rot_c, "pathophysiology_ja": _skin_rot_p}
+
+
+# Avian xanthoma — lipid/lipogranulomatous lesion, NOT autoimmune (mislabelled).
+def _xanthoma_c(sp):
+    return (
+        f"{sp}の黄色腫（キサントーマ）は脂質沈着による黄橙色の腫瘤で、自己免疫疾患ではない。"
+        "高脂肪の種子偏重食・高脂血症・肥満が背景にあり、慢性的な外傷・刺激・既存病変（脂肪腫・羽包嚢腫等）に"
+        "続発することが多い。セキセイインコ・オカメインコに好発する。"
+    )
+
+
+def _xanthoma_p(sp):
+    return (
+        f"{sp}の黄色腫は、脂質を貪食したマクロファージ（泡沫細胞）とコレステリン裂隙・多核巨細胞からなる"
+        "肉芽腫性病変で、皮膚・皮下に黄橙色で脆く易出血性の腫瘤を形成する。翼端・胸骨部・体側に好発し、"
+        "増大すると潰瘍・出血・自咬を招く。低脂肪食への是正と外科的切除が治療の中心となる。"
+    )
+
+
+_XANTHOMA_BIRD = {"causes_ja": _xanthoma_c, "pathophysiology_ja": _xanthoma_p}
+
+
+# Hedgehog quill folliculitis — bacterial/dermatophyte, NOT autoimmune.
+def _quill_folliculitis_c(sp):
+    return (
+        f"{sp}の針（棘）毛包炎は、細菌（Staphylococcus 等）または皮膚糸状菌（Trichophyton）による"
+        "毛包（針包）の感染が原因で、ダニ寄生（Caparinia）・不衛生な環境・免疫低下に続発することが多い。自己免疫疾患ではない。"
+    )
+
+
+def _quill_folliculitis_p(sp):
+    return (
+        f"{sp}では針包への感染・炎症により針（棘）の脱落・痂皮・落屑・皮膚の発赤を生じる。"
+        "皮膚糸状菌症は人獣共通感染症であり取り扱いに注意を要する。"
+        "原因（細菌・真菌・ダニ）の同定（被毛検査・培養・ウッド灯）に基づく治療と環境衛生の改善で対応する。"
+    )
+
+
+_QUILL_FOLLICULITIS = {"causes_ja": _quill_folliculitis_c, "pathophysiology_ja": _quill_folliculitis_p}
+
+
 # (species_set_or_None, name_substrings, exclude_substrings, {field: generator})
 _CURATED: tuple[tuple[frozenset | None, tuple[str, ...], tuple[str, ...], dict], ...] = (
     (
@@ -1488,6 +1948,37 @@ _CURATED: tuple[tuple[frozenset | None, tuple[str, ...], tuple[str, ...], dict],
     # Guinea pig
     (frozenset({"guinea_pig"}), ("壊血病", "ビタミンC欠乏"), (), _SCURVY_GP),
     (frozenset({"guinea_pig"}), ("卵巣嚢胞",), (), _GP_OVARIAN_CYST),
+    # --- Seventh batch: birds ---
+    (_AVES, ("クラミジア", "オウム病"), (), _CHLAMYDIOSIS),
+    (_AVES, ("嘴羽毛", "PBFD"), (), _PBFD),
+    (_AVES, ("前胃拡張", "PDD", "ボルナ"), (), _PDD),
+    (_AVES, ("アスペルギルス",), (), _ASPERGILLOSIS_BIRD),
+    (_AVES, ("ビタミンA欠乏",), ("過剰",), _HYPOVIT_A_BIRD),
+    (_AVES, ("痛風",), (), _GOUT_BIRD),
+    (_AVES, ("カンジダ",), (), _CANDIDIASIS_BIRD),
+    (_AVES, ("甲状腺腫",), ("腫瘍",), _GOITER_BIRD),
+    (_AVES, ("ポリオーマ",), (), _POLYOMA_BIRD),
+    # --- Seventh batch: reptiles ---
+    (_REPT, ("代謝性骨", "MBD", "くる病"), (), _MBD_REPTILE),
+    (_REPT, ("呼吸器感染症",), (), _RESP_REPTILE),
+    (_REPT, ("脱皮不全",), (), _DYSECDYSIS),
+    (_REPT, ("甲羅腐敗",), (), _SHELL_ROT),
+    (_REPT, ("マウスロット", "口内炎"), (), _MOUTH_ROT),
+    (_REPT, ("ビタミンA欠乏",), ("過剰",), _HYPOVIT_A_REPTILE),
+    (_REPT, ("痛風",), (), _GOUT_REPTILE),
+    (_REPT, ("敗血症",), (), _SEPTICEMIA_REPTILE),
+    (_REPT, ("クリプトスポリジウム",), (), _CRYPTO_REPTILE),
+    (_REPT, ("封入体",), (), _IBD_REPTILE),
+    (_REPT, ("膿瘍",), (), _ABSCESS_REPTILE),
+    # --- Seventh batch: amphibians ---
+    (_AMPH, ("ツボカビ",), (), _CHYTRID),
+    (_AMPH, ("ラナウイルス",), (), _RANAVIRUS),
+    (_AMPH, ("浮腫症候群", "リンパ嚢浮腫"), (), _AMPHIBIAN_EDEMA),
+    # Bacterial dermatoses (scale rot / blister disease) — fix autoimmune mislabel
+    (_REPT | _AMPH, ("鱗腐敗", "水疱病", "水疱症", "甲羅腐敗"), (), _SKIN_ROT),
+    # Misc. autoimmune-template mislabels on non-autoimmune exotic diseases
+    (_AVES, ("黄色腫",), (), _XANTHOMA_BIRD),
+    (frozenset({"hedgehog"}), ("針毛包炎", "棘毛包炎", "針包炎"), (), _QUILL_FOLLICULITIS),
 )
 
 
