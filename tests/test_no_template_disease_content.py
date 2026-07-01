@@ -4047,7 +4047,7 @@ def test_served_db_flagship_english_causes_curated():
         ).fetchall()
     finally:
         conn.close()
-    for name, causes in rows:
+    for _name, causes in rows:
         low = (causes or "").lower()
         assert not low.startswith("cardiac etiology")
         assert not low.startswith("multifactorial etiology")
