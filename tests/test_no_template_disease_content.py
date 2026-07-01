@@ -3538,3 +3538,136 @@ def test_served_db_no_autoimmune_template_on_bacterial_dermatoses():
         nj for _sp, nj in rows if any(k in nj for k in ("鱗腐敗", "甲羅腐敗", "水疱病", "水疱症", "黄色腫", "針毛包炎"))
     ]
     assert not offenders, f"bacterial dermatoses still autoimmune-labelled: {offenders}"
+
+
+# ---------------------------------------------------------------------------
+# English-language grounding + grammar (2026-07)
+# ---------------------------------------------------------------------------
+# The Japanese fields are the curated primary product; the English fields had
+# lagged far behind — prevention/prognosis/pathophysiology were, for most
+# diseases, the raw category paragraph shared byte-for-byte across a whole
+# category (English visitors browsing several diseases saw the identical text).
+# The bilingual grounding pass now appends a clause built from each record's own
+# presenting signs. These tests guard the English composers and the served DB.
+
+
+def test_grounded_en_prevention_prognosis_differentiate_by_signs():
+    from scripts.template_elimination.clinical_fields_generator import (
+        compose_grounded_prevention,
+        compose_grounded_prognosis,
+    )
+
+    base_prev = "Prevention relies on appropriate husbandry and routine veterinary examination."
+    a = compose_grounded_prevention(base_prev, ["Drooling", "Weight Loss", "Anorexia"])
+    b = compose_grounded_prevention(base_prev, ["Subcutaneous Mass", "Enlarging Lump"])
+    assert a.startswith(base_prev) and b.startswith(base_prev)
+    assert a != b and "Drooling" in a and "Subcutaneous Mass" in b
+    # Needs >= 2 signs to add a meaningful surveillance list; else returns base.
+    assert compose_grounded_prevention(base_prev, ["Lethargy"]) == base_prev.strip()
+    assert compose_grounded_prevention(base_prev, []) == base_prev.strip()
+
+    base_prog = "The prognosis of X in dogs varies with treatment timing."
+    c = compose_grounded_prognosis(base_prog, ["Seizures", "Dyspnoea", "Rigidity"])
+    assert c.startswith(base_prog) and "Seizures" in c
+    # Idempotent: no second monitoring clause on re-run.
+    assert compose_grounded_prognosis(c, ["Seizures", "Dyspnoea", "Rigidity"]) == c
+
+
+def test_grounded_en_pathophysiology_manifestation_clause():
+    from scripts.template_elimination.clinical_fields_generator import (
+        compose_grounded_pathophysiology,
+        compose_grounded_pathophysiology_ja,
+    )
+
+    base_en = "The pathophysiology of infectious diseases involves pathogen entry and host response."
+    a = compose_grounded_pathophysiology(base_en, ["Fever", "Coughing", "Lethargy"])
+    b = compose_grounded_pathophysiology(base_en, ["Diarrhoea", "Vomiting", "Dehydration"])
+    assert a != b and "Fever" in a and "Diarrhoea" in b
+    assert compose_grounded_pathophysiology(base_en, ["Fever"]) == base_en.strip()
+    # Idempotent.
+    assert compose_grounded_pathophysiology(a, ["Fever", "Coughing", "Lethargy"]) == a
+
+    base_ja = "感染症の病態生理は病原体の侵入と宿主応答により展開する。"
+    ja = compose_grounded_pathophysiology_ja(base_ja, ["発熱", "咳", "元気消失"])
+    assert ja.startswith(base_ja) and "発熱" in ja
+    assert compose_grounded_pathophysiology_ja(ja, ["発熱", "咳", "元気消失"]) == ja
+
+
+def test_gen_prognosis_en_has_no_double_possessive():
+    """gen_prognosis_en must never emit '<species>s's prognosis'."""
+    from scripts.template_elimination.clinical_fields_generator import gen_prognosis_en
+
+    cats = [
+        "viral_infection",
+        "neoplasia",
+        "endocrine_metabolic",
+        "renal_urinary",
+        "cardiac",
+        "gastrointestinal",
+        "generic",
+        "nutritional",
+    ]
+    species = ["dog", "cat", "rabbit", "horse", "bird", "reptile"]
+    offenders = []
+    for c in cats:
+        for sp in species:
+            out = gen_prognosis_en(c, "Test Disease", sp)
+            if "s's prognosis" in out or "s's " in out:
+                offenders.append(f"[{c}/{sp}] {out[:80]}")
+    assert not offenders, "double-possessive in EN prognosis:\n" + "\n".join(offenders[:10])
+
+
+def _served_db_or_skip():
+    db = ROOT / "instance" / "vetdict.db"
+    if not db.exists():
+        pytest.skip("served DB not built — run scripts/migrate_to_sqlite.py first")
+    import sqlite3
+
+    return sqlite3.connect(str(db))
+
+
+def test_served_db_no_double_possessive_prognosis():
+    """No English prognosis in the served DB may carry the double-possessive bug."""
+    conn = _served_db_or_skip()
+    try:
+        n = conn.execute('SELECT COUNT(*) FROM diseases WHERE prognosis LIKE "%s\'s prognosis%"').fetchone()[0]
+    finally:
+        conn.close()
+    assert n == 0, f"{n} served-DB prognosis entries still read '<species>s's prognosis'"
+
+
+def _templated_ratio_en(conn, field: str) -> tuple[int, int]:
+    """(templated_entries, total) for an English field, normalising out the
+    English disease name (>=5 records spanning >=5 distinct base names)."""
+    import collections
+    import re as _re
+
+    paren = _re.compile(r"[（(][^（）()]*[）)]")
+    rows = conn.execute(f"SELECT name, {field} FROM diseases WHERE {field} IS NOT NULL AND {field} != ''").fetchall()
+    groups = collections.defaultdict(list)
+    for nm, val in rows:
+        nm = nm or ""
+        base = paren.sub("", nm).strip()
+        key = val or ""
+        for x in (nm, base):
+            if x:
+                key = key.replace(x, "※")
+        groups[key].append(base or "∅")
+    templated = sum(len(v) for v in groups.values() if len(v) >= 5 and len(set(v)) >= 5)
+    return templated, len(rows)
+
+
+def test_served_db_en_prognosis_prevention_pathophysiology_grounded():
+    """English prevention/prognosis/pathophysiology must be predominantly
+    disease-specific after the bilingual grounding pass (regression guard)."""
+    conn = _served_db_or_skip()
+    try:
+        results = {f: _templated_ratio_en(conn, f) for f in ("prevention", "prognosis", "pathophysiology")}
+    finally:
+        conn.close()
+    failures = []
+    for field, (templated, total) in results.items():
+        ratio = templated / total if total else 0
+        if ratio >= 0.40:
+            failures.append(f"{field} is {ratio:.0%} templated ({templated}/{total})")
+    assert not failures, "English grounding regressed:\n" + "\n".join(failures)
