@@ -4019,8 +4019,16 @@ def test_flagship_library_resolver_precision():
     )  # "gme" ⊄ pigmentary
     # Species gating and diagnosis collisions.
     assert flagship_clinical_fields("cat", "甲状腺機能低下症", "Hypothyroidism") is None
-    assert flagship_clinical_fields("cat", "原発性副甲状腺機能亢進症", "Primary Hyperparathyroidism") is None
     assert flagship_clinical_fields("dog", "水疱性類天疱瘡", "Bullous Pemphigoid") is None  # 類天疱瘡 excluded
+    # Batch 3: primary vs renal-secondary feline hyperparathyroidism must resolve
+    # to DISTINCT generators (different aetiology: tumour vs CKD-driven).
+    primary = flagship_clinical_fields("cat", "原発性副甲状腺機能亢進症", "Primary Hyperparathyroidism")
+    renal = flagship_clinical_fields("cat", "腎性二次性副甲状腺機能亢進症", "Renal Secondary Hyperparathyroidism")
+    assert primary is not None and renal is not None and primary["causes"] != renal["causes"]
+    assert "adenoma" in primary["causes"].lower()
+    assert "chronic kidney disease" in renal["causes"].lower()
+    # Symblepharon is a distinct cicatricial sequela, not simple conjunctivitis.
+    assert flagship_clinical_fields("cat", "猫癒着性角結膜炎", "Feline Symblepharon") is None
 
 
 def test_flagship_causes_are_bilingual_and_specific():
@@ -4053,3 +4061,72 @@ def test_served_db_flagship_english_causes_curated():
         assert not low.startswith("multifactorial etiology")
         assert not low.startswith("caused by physical trauma")
         assert not low.startswith("caused by progressive deterioration")
+
+
+# ---------------------------------------------------------------------------
+# Batch 3 non-infectious flagship backfill (2026-07)
+# ---------------------------------------------------------------------------
+def test_flagship_batch3_resolver_precision():
+    from scripts.template_elimination.flagship_noninfectious_library import (
+        flagship_clinical_fields,
+        resolve_flagship,
+    )
+
+    # Genuine batch-3 flagships resolve.
+    assert resolve_flagship("股関節形成不全", "Hip Dysplasia", "dog") is not None
+    assert resolve_flagship("前十字靭帯断裂", "Cranial Cruciate Ligament Rupture", "dog") is not None
+    assert resolve_flagship("リンパ腫", "Lymphoma", "dog") is not None
+    assert resolve_flagship("肥大型心筋症", "Hypertrophic Cardiomyopathy (HCM)", "cat") is not None
+    assert resolve_flagship("尿崩症", "Diabetes Insipidus", "dog") is not None
+    assert resolve_flagship("多糖類蓄積性ミオパシー", "PSSM", "horse") is not None
+    # "膵外分泌不全" must NOT resolve via a bare "epi" collision with epilepsy.
+    epi = flagship_clinical_fields("dog", "膵外分泌不全症", "Exocrine Pancreatic Insufficiency (EPI)")
+    assert epi is not None and "epilep" not in epi["causes"].lower()
+    epilepsy = flagship_clinical_fields("dog", "特発性てんかん", "Idiopathic Epilepsy")
+    assert epilepsy is not None and "epilep" in epilepsy["causes"].lower()
+    # "門脈体循環シャント" (PSS) must NOT collide with "PSSM" (a horse myopathy).
+    pss = flagship_clinical_fields("dog", "門脈体循環シャント", "Portosystemic Shunt (PSS)")
+    assert pss is not None and "myopathy" not in pss["causes"].lower()
+    pssm = flagship_clinical_fields("horse", "多糖体蓄積性ミオパチー", "Polysaccharide Storage Myopathy (PSSM)")
+    assert pssm is not None and "shunt" not in pssm["causes"].lower()
+    # Mast cell tumour must not be caught by any obesity/"肥満" logic elsewhere.
+    mct = flagship_clinical_fields("dog", "肥満細胞腫", "Mast Cell Tumor")
+    assert mct is not None and "mast cell" in mct["causes"].lower()
+
+
+def test_flagship_batch3_primary_vs_renal_hyperparathyroidism_distinct():
+    from scripts.template_elimination.flagship_noninfectious_library import flagship_clinical_fields
+
+    primary = flagship_clinical_fields("cat", "原発性副甲状腺機能亢進症", "Primary Hyperparathyroidism")
+    renal = flagship_clinical_fields("cat", "腎性二次性副甲状腺機能亢進症", "Renal Secondary Hyperparathyroidism")
+    calcium_oxalate = flagship_clinical_fields("cat", "シュウ酸カルシウム尿路結石症", "Calcium Oxalate Urolithiasis")
+    struvite = flagship_clinical_fields("cat", "ストルバイト尿路結石症", "Struvite Urolithiasis")
+    assert primary["causes"] != renal["causes"]
+    assert calcium_oxalate["causes"] != struvite["causes"]
+    # Calcium oxalate cannot be medically dissolved (surgery/prevention only);
+    # struvite can — a clinically important contrast the text must preserve.
+    assert "cannot be dissolved" in calcium_oxalate["pathophysiology"].lower()
+    assert "cannot be dissolved" not in struvite["pathophysiology"].lower()
+    assert "dissolv" in struvite["pathophysiology"].lower()
+
+
+def test_served_db_flagship_batch3_english_causes_curated():
+    # Species-scoped: these flagship generators are gated to specific hosts (e.g.
+    # Hip Dysplasia is curated for dogs only; a rabbit/cat row with the same name
+    # is out of scope and legitimately still templated).
+    conn = _served_db_or_skip()
+    try:
+        rows = conn.execute(
+            "SELECT name, causes FROM diseases WHERE lower(species)='dog' AND name IN "
+            "('Hip Dysplasia','Cranial Cruciate Ligament Rupture','Lymphoma',"
+            "'Diabetes Insipidus','Osteoarthritis','Immune-Mediated Hemolytic Anemia (IMHA)')"
+        ).fetchall()
+    finally:
+        conn.close()
+    assert rows, "expected at least one matching dog row in the served DB"
+    for _name, causes in rows:
+        low = (causes or "").lower()
+        assert not low.startswith("musculoskeletal etiology")
+        assert not low.startswith("neoplastic etiology")
+        assert not low.startswith("multifactorial etiology")
+        assert not low.startswith("endocrine or metabolic dysfunction")
