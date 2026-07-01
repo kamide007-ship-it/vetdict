@@ -3937,3 +3937,64 @@ def test_no_generic_parasite_causes_on_named_parasites_in_json():
         ):
             offenders.append(ne or nj)
     assert not offenders, f"{len(offenders)} named-parasite diseases keep the generic template: {offenders[:10]}"
+
+
+# ---------------------------------------------------------------------------
+# Named-nutrient (deficiency/excess) etiology curation (2026-07)
+# ---------------------------------------------------------------------------
+def test_nutritional_library_resolver_precision():
+    from scripts.template_elimination.nutritional_library import (
+        nutrient_clinical_fields,
+        resolve_nutrient_agent,
+    )
+
+    assert resolve_nutrient_agent("壊血病", "Scurvy") is not None
+    assert resolve_nutrient_agent("くる病", "Rickets") is not None
+    assert resolve_nutrient_agent("栄養性二次性上皮小体機能亢進症", "NSHP") is not None
+    # Toxicoses are poisonings, not nutritional deficiency.
+    assert resolve_nutrient_agent("亜鉛中毒", "Zinc Toxicosis") is None
+    assert resolve_nutrient_agent("ビタミンD中毒", "Vitamin D Toxicosis") is None
+    # Primary/renal HPT and thyroid tumours are not nutritional.
+    assert resolve_nutrient_agent("原発性上皮小体機能亢進症", "Primary Hyperparathyroidism") is None
+    assert resolve_nutrient_agent("甲状腺癌", "Thyroid Carcinoma") is None
+    assert resolve_nutrient_agent("肥満細胞腫", "Mast Cell Tumor") is None  # not "obesity"
+    # Taurine deficiency is feline-specific.
+    assert nutrient_clinical_fields("dog", "タウリン欠乏症", "Taurine Deficiency") is None
+    assert nutrient_clinical_fields("cat", "タウリン欠乏症", "Taurine Deficiency") is not None
+
+
+def test_named_nutrient_causes_cite_correct_nutrient():
+    from scripts.template_elimination.nutritional_library import nutrient_clinical_fields
+
+    # Guinea pig scurvy names the vitamin-C synthesis defect.
+    scurvy = nutrient_clinical_fields("guinea_pig", "壊血病", "Scurvy")
+    assert "vitamin c" in scurvy["causes"].lower() and "collagen" in scurvy["pathophysiology"].lower()
+    # NSHP names calcium/phosphorus/vitamin-D and PTH mechanism.
+    nshp = nutrient_clinical_fields("reptile", "栄養性二次性上皮小体機能亢進症", "NSHP")
+    assert "calcium" in nshp["causes"].lower() and "parathyroid" in nshp["pathophysiology"].lower()
+    # Avian goitre is iodine deficiency, not a tumour.
+    goitre = nutrient_clinical_fields("bird", "甲状腺腫", "Goiter")
+    assert "iodine" in goitre["causes"].lower()
+
+
+def test_no_generic_nutritional_causes_on_named_nutrients_in_json():
+    from scripts.template_elimination.nutritional_library import nutrient_clinical_fields
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    species_norm = {"Cat": "cat", "Dog": "dog", "Horse": "horse", "Rabbit": "rabbit"}
+    offenders = []
+    for e in entries:
+        nj, ne = e.get("name_ja") or "", e.get("name") or ""
+        sp = species_norm.get(e.get("species"), (e.get("species") or "").lower())
+        if nutrient_clinical_fields(sp, nj, ne) is None:
+            continue
+        cen = (e.get("causes") or "").lower()
+        if (
+            cen.startswith("caused by dietary deficiency or excess")
+            or cen.startswith("nutritional imbalance")
+            or cen.startswith("nutritional diseases result from")
+        ):
+            offenders.append(ne or nj)
+    assert not offenders, f"{len(offenders)} named-nutrient diseases keep the generic template: {offenders[:10]}"

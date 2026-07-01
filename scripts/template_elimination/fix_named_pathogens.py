@@ -45,6 +45,10 @@ from scripts.template_elimination.fungal_library import (  # noqa: E402
     fungal_clinical_fields,
     resolve_fungal_agent,
 )
+from scripts.template_elimination.nutritional_library import (  # noqa: E402
+    nutrient_clinical_fields,
+    resolve_nutrient_agent,
+)
 from scripts.template_elimination.parasite_library import (  # noqa: E402
     parasite_clinical_fields,
     resolve_parasite_agent,
@@ -73,6 +77,7 @@ def _clinical_fields(species: str, name_ja: str, name_en: str):
         or bacterial_clinical_fields(species, name_ja, name_en)
         or fungal_clinical_fields(species, name_ja, name_en)
         or parasite_clinical_fields(species, name_ja, name_en)
+        or nutrient_clinical_fields(species, name_ja, name_en)
     )
 
 
@@ -82,6 +87,7 @@ def _resolves(name_ja: str, name_en: str) -> bool:
         or resolve_bacterial_agent(name_ja, name_en) is not None
         or resolve_fungal_agent(name_ja, name_en) is not None
         or resolve_parasite_agent(name_ja, name_en) is not None
+        or resolve_nutrient_agent(name_ja, name_en) is not None
     )
 
 

@@ -1557,3 +1557,33 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 
 ### named-agent キュレーション累計（第2〜5弾）
 毒物64 + 原虫treatment11 + ウイルス28 + 細菌24 + 真菌14 + 寄生虫22 = **163病原体生成器**。感染症の全系統（ウイルス・細菌・真菌・寄生虫）の named-pathogen 化が完了し、計 **約1,000疾患**の病因・病態生理を汎用テンプレートから日英の疾患特異的記述に置換。
+
+## 2026-07セッション（第6弾: named-agent キュレーション拡充 — 栄養性欠乏/過剰）
+
+### 栄養性 named-nutrient ライブラリ（`scripts/template_elimination/nutritional_library.py` 新規）
+感染症に続く最後の「名前が決定論的に原因を示す」病因クラス。汎用栄養テンプレート（JA「…栄養バランスの是正が中心…」/ EN "Caused by dietary deficiency or excess…" / "Nutritional imbalance…" / "Nutritional diseases result from…"）を、疾患名が示す栄養素に基づき疾患特異化。
+- **12の栄養素生成器**（causes + pathophysiology を JA+EN、種特異的分岐あり）:
+  - カルシウム/NSHP・代謝性骨疾患（爬虫類 UV-B 分岐）、ビタミンA、ビタミンD/くる病、ビタミンE/セレン（白筋症）、ビタミンC/壊血病（モルモット等の合成不能種）、ビタミンB群、チアミン(B1)、ヨウ素/甲状腺腫、亜鉛、タウリン（猫特異的）、蛋白エネルギー栄養失調/悪液質、肥満
+- **致命的な誤適用をレビューで回避**:
+  - `中毒`/`toxicosis`（亜鉛中毒・ビタミンD中毒＝毒性で toxicology 管轄）を欠乏症と誤記しないよう除外
+  - `原発性`/`腎性`上皮小体機能亢進症（腫瘍性/腎性で非栄養性）を NSHP と誤適用しないよう除外
+  - `肥満細胞腫`(mast cell tumor)≠`肥満`(obesity)、`甲状腺癌`/`甲状腺腫瘍`≠`甲状腺腫`(goiter=ヨウ素欠乏)
+  - タウリン欠乏は猫のみ（非猫には猫用文を付与しない）
+
+### 統合
+- `fix_named_pathogens.py` / `migrate_to_sqlite.py` を viral→bacterial→fungal→parasite→nutrient の5段に拡張。
+
+### 効果（配信SQLite実測）
+- **205栄養性疾患**を疾患特異的病因・病態生理に置換。
+- EN causes の distinct 値: 1,004（第5弾後）→ **1,126**（全バッチ前 604 から +86%）。
+
+### 回帰テスト（+3件）
+- `test_nutritional_library_resolver_precision` — 中毒/原発性HPT/甲状腺癌/肥満細胞腫を除外、タウリン猫限定
+- `test_named_nutrient_causes_cite_correct_nutrient` — 壊血病=ビタミンC/コラーゲン、NSHP=Ca/PTH、鳥甲状腺腫=ヨウ素
+- `test_no_generic_nutritional_causes_on_named_nutrients_in_json`
+
+### テスト・CI
+- フルスイート **3,482件合格**（34 skip、+3新規）、ruff clean
+
+### named-agent キュレーション累計（第2〜6弾）
+毒物64 + 原虫11 + ウイルス28 + 細菌24 + 真菌14 + 寄生虫22 + 栄養素12 = **175病原体/病因生成器**。感染症の全系統＋栄養性まで、名前が決定論的に原因を示す病因クラスを網羅し、計 **約1,200疾患**の病因・病態生理を汎用テンプレートから日英の疾患特異的記述に置換。

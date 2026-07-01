@@ -1732,6 +1732,10 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
         fungal_clinical_fields,
         resolve_fungal_agent,
     )
+    from scripts.template_elimination.nutritional_library import (
+        nutrient_clinical_fields,
+        resolve_nutrient_agent,
+    )
     from scripts.template_elimination.parasite_library import (
         parasite_clinical_fields,
         resolve_parasite_agent,
@@ -1750,6 +1754,7 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
             or resolve_bacterial_agent(nj, ne)
             or resolve_fungal_agent(nj, ne)
             or resolve_parasite_agent(nj, ne)
+            or resolve_nutrient_agent(nj, ne)
         )
 
     def _fields(sp, nj, ne):
@@ -1758,6 +1763,7 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
             or bacterial_clinical_fields(sp, nj, ne)
             or fungal_clinical_fields(sp, nj, ne)
             or parasite_clinical_fields(sp, nj, ne)
+            or nutrient_clinical_fields(sp, nj, ne)
         )
 
     causes_fps = build_etiology_fingerprints(gen_causes_ja)
