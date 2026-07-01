@@ -1732,6 +1732,10 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
         fungal_clinical_fields,
         resolve_fungal_agent,
     )
+    from scripts.template_elimination.parasite_library import (
+        parasite_clinical_fields,
+        resolve_parasite_agent,
+    )
     from scripts.template_elimination.pathogen_library import (
         GENERIC_CAUSES_EN_MARKS,
         GENERIC_CAUSES_JA_MARKS,
@@ -1741,13 +1745,19 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
     )
 
     def _resolve(nj, ne):
-        return resolve_viral_agent(nj, ne) or resolve_bacterial_agent(nj, ne) or resolve_fungal_agent(nj, ne)
+        return (
+            resolve_viral_agent(nj, ne)
+            or resolve_bacterial_agent(nj, ne)
+            or resolve_fungal_agent(nj, ne)
+            or resolve_parasite_agent(nj, ne)
+        )
 
     def _fields(sp, nj, ne):
         return (
             viral_clinical_fields(sp, nj, ne)
             or bacterial_clinical_fields(sp, nj, ne)
             or fungal_clinical_fields(sp, nj, ne)
+            or parasite_clinical_fields(sp, nj, ne)
         )
 
     causes_fps = build_etiology_fingerprints(gen_causes_ja)

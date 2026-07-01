@@ -1520,3 +1520,40 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 
 ### named-agent キュレーション累計（第2〜4弾）
 毒物64 + 原虫11 + ウイルス28 + 細菌24 + 真菌14 = **141病原体生成器**。ウイルス+細菌+真菌で計 **約720疾患**の病因・病態生理を汎用テンプレートから疾患特異的記述（日英）に置換。
+
+## 2026-07セッション（第5弾: named-agent キュレーション拡充 — 寄生虫）
+
+### 寄生虫 named-parasite ライブラリ（`scripts/template_elimination/parasite_library.py` 新規）
+汎用寄生虫テンプレート（JA「…の原因は寄生虫（蠕虫・原虫・節足動物）の感染である…」/ EN "Caused by parasites infecting affected tissues…" / "External parasite infestation…" / "Endoparasitic infection…" / "Parasitic diseases are caused by infection with…"）を、疾患名が示す寄生虫に基づき疾患特異化。
+- **22の寄生虫生成器**（causes + pathophysiology を JA+EN）:
+  - 線虫: 回虫/鉤虫/鞭虫/蟯虫/円虫(馬)/肺虫/毛細線虫/犬糸状虫(フィラリア, 猫は非好適宿主分岐)
+  - 条虫/鉤頭虫、吸虫(肝蛭・肺吸虫・住血吸虫)
+  - 腸管原虫: コクシジウム/ジアルジア/トリコモナス（causes/病態のみ。治療は antiprotozoal_library が担当）
+  - 外部寄生虫: ダニ(疥癬/毛包虫/耳ダニ)/マダニ/ノミ/シラミ/ハエ幼虫症
+  - 水生: 白点病/単生虫(ギロダクチルス・ダクチロギルス)/甲殻類(イカリムシ・ウオジラミ)
+- **致命的な部分文字列衝突をレビューで発見・回避**:
+  - `包虫`→「毛**包虫**症」(demodicosis, ダニ疾患) → `エキノコックス`/`hydatid`/`echinococc`
+  - `ich`→itch/which → `ichthyophthirius`/`白点病`/`cryptocaryon`
+  - `lice`→police/slice → `louse`/`pediculosis`/`シラミ`
+  - `coccidia`≠`coccidioides`(真菌)、`tick`(マダニ寄生)≠tick-borne病原体疾患（ehrlichia/babesia/lyme は resolve せず）
+- 検出マーカーを `GENERIC_CAUSES_*_MARKS` に集約（寄生虫EN 4変種 + JA 2変種を追加）。
+
+### 統合
+- `fix_named_pathogens.py` / `migrate_to_sqlite.py` を viral→bacterial→fungal→parasite の4段に拡張。
+
+### 効果（配信SQLite実測）
+- **281寄生虫疾患**を疾患特異的病因・病態生理に置換。
+- EN causes の distinct 値: **604（全バッチ前）→ 1,004**（named-agent 全5系統で +66%）。
+- 解決した寄生虫疾患で汎用テンプレートが残るものは **0件**。
+- 残る汎用寄生虫テンプレート（EN ~90 / JA ~200）は「腸管寄生虫症」等、**寄生虫名を持たない汎用疾患**で対象外（設計通り）。
+
+### 回帰テスト（+3件）
+- `test_parasite_library_resolver_precision` — 毛包虫≠包虫、lice≠police、coccidia≠coccidioides、tick-borne病原体を除外
+- `test_named_parasite_causes_cite_correct_parasite` — Dirofilaria/hookworm/Trichuris、猫フィラリア=非好適宿主、coccidia=原虫
+- `test_no_generic_parasite_causes_on_named_parasites_in_json`
+
+### テスト・CI
+- フルスイート **3,479件合格**（34 skip、+3新規）、ruff clean
+
+### named-agent キュレーション累計（第2〜5弾）
+毒物64 + 原虫treatment11 + ウイルス28 + 細菌24 + 真菌14 + 寄生虫22 = **163病原体生成器**。感染症の全系統（ウイルス・細菌・真菌・寄生虫）の named-pathogen 化が完了し、計 **約1,000疾患**の病因・病態生理を汎用テンプレートから日英の疾患特異的記述に置換。

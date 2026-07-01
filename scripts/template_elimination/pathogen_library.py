@@ -47,6 +47,8 @@ GENERIC_CAUSES_JA_MARKS: tuple[str, ...] = (
     "特異的ウイルス病原体が宿主細胞",
     "特定の細菌病原体の感染",
     "病原性細菌が体内に侵入",
+    "原因は寄生虫（蠕虫",
+    "原因は外部寄生虫",
 )
 GENERIC_CAUSES_EN_MARKS: tuple[str, ...] = (
     "viral infection. transmission via",
@@ -57,6 +59,9 @@ GENERIC_CAUSES_EN_MARKS: tuple[str, ...] = (
     "caused by physical trauma to musculoskeletal",
     "gastrointestinal etiology. may include",
     "caused by parasites infecting affected tissues",
+    "parasitic diseases are caused by infection with",
+    "endoparasitic infection.",
+    "ectoparasitic infestation.",
     "caused by progressive deterioration of cardiovascular",
     "respiratory etiology. includes",
     "endocrine or metabolic dysfunction. may result",

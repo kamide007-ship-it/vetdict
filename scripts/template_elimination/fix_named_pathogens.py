@@ -45,6 +45,10 @@ from scripts.template_elimination.fungal_library import (  # noqa: E402
     fungal_clinical_fields,
     resolve_fungal_agent,
 )
+from scripts.template_elimination.parasite_library import (  # noqa: E402
+    parasite_clinical_fields,
+    resolve_parasite_agent,
+)
 from scripts.template_elimination.pathogen_library import (  # noqa: E402
     GENERIC_CAUSES_EN_MARKS,
     GENERIC_CAUSES_JA_MARKS,
@@ -63,11 +67,12 @@ PATHO_EN_MARKS = GENERIC_PATHO_EN_MARKS
 
 
 def _clinical_fields(species: str, name_ja: str, name_en: str):
-    """Named-pathogen curated fields: viral, then bacterial, then fungal; None if none."""
+    """Named-pathogen curated fields: viral, bacterial, fungal, then parasite; None if none."""
     return (
         viral_clinical_fields(species, name_ja, name_en)
         or bacterial_clinical_fields(species, name_ja, name_en)
         or fungal_clinical_fields(species, name_ja, name_en)
+        or parasite_clinical_fields(species, name_ja, name_en)
     )
 
 
@@ -76,6 +81,7 @@ def _resolves(name_ja: str, name_en: str) -> bool:
         resolve_viral_agent(name_ja, name_en) is not None
         or resolve_bacterial_agent(name_ja, name_en) is not None
         or resolve_fungal_agent(name_ja, name_en) is not None
+        or resolve_parasite_agent(name_ja, name_en) is not None
     )
 
 
