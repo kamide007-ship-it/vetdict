@@ -1419,3 +1419,43 @@ resolver が None を返すため recat が補正できなかった残りの臓�
 - causes（病因）: JA 81% / EN 93% が構造的カテゴリテンプレート。徴候 grounding 不可（徴候≠病因）のため named-agent キュレーションの継続が必要（毒物64・原虫11・curated_etiology 100+ 済み。ウイルス/細菌の named-pathogen 疾患の拡充が最大の残メイン）
 - 英語 causes/pathophysiology のフラグシップ・キュレーション: 現状キュレート済み病因は JA のみ（curated_etiology は JA 専用）。最頻閲覧疾患の英語 causes/patho をバイリンガル化するには curated_etiology の EN 対応が望ましい（textbook 事実ベース、獣医レビュー前提）
 - treatment（EN 35%）: 腫瘍学・中毒等の医学的に妥当な汎用カテゴリガイダンスが中心。危険な誤カテゴリは既に是正済み
+
+## 2026-07セッション（第2弾: named-agent キュレーション継続 — ウイルス病因の疾患特異化）
+
+### 背景
+causes（病因）フィールドは徴候 grounding が不可能（臨床徴候≠病因）なため、named-agent キュレーションでのみ撲滅できる。カテゴリ生成器は全ウイルス疾患に同一の汎用病因を付与していた（JA「…の原因はウイルス感染である。特異的ウイルス病原体が…」245件、EN "Viral infection. Transmission via…" 200件超）。疾患名が病原体を示す疾患（犬パルボ・猫ヘルペス・狂犬病等）では、病因は名称から導ける教科書的事実なので捏造リスクゼロで疾患特異化できる。
+
+### `scripts/template_elimination/pathogen_library.py`（新規）
+- 13のウイルス病原体ファミリー生成器（herpes/parvo/distemper/calici/corona/influenza/adeno/papilloma/pox/rabies/rota/FeLV/FIV）が causes・pathophysiology を **JA+EN** で返却。
+- **宿主適応型ウイルスは種別に正しい株名**を記載: 猫→FHV-1/FPV/FCV/FCoV、犬→CHV-1/CPV-2/CDV/CAV、馬→EHV-1/4、鳥→アビポックス/サイタシドヘルペス、ウサギ→RHDV。
+- 誤マッチ防止（レビューで発見・修正）:
+  - `adeno`（bare）→ `adenovirus`（腺腫/腺癌 adenoma/adenocarcinoma を誤検出しない）
+  - `カリシ`→`カリシウイルス`（「カリシン過敏症」＝Culicoides を誤検出しない）
+  - `corona`→`coronavirus`、`pox`(bare)→`痘`/`poxvirus`/named pox（hypoxia 等を回避）
+  - `immunodeficiency`→`immunodeficiency virus`（複合免疫不全症を回避）
+  - 否定名（`非ヘルペス性`/`Non-Herpetic`）は `_neutralise_negations` で除外
+  - FeLV/FIV は cat 限定（サル免疫不全ウイルス等の非猫レンチウイルスに猫用文を付与しない）
+
+### 適用（JSON本体 + 配信DB安全網）
+- `scripts/template_elimination/fix_named_pathogens.py`（新規, `--apply`）: JSONオーバーレイに適用。カテゴリテンプレート/スタブのフィールドのみ置換（キュレート済み prose は温存 — フラグシップの curated JA を残しつつ、templated だった **EN** のみアップグレード）。適用実績: 152疾患（causes 135 JA/133 EN, pathophysiology 72 JA/130 EN）。
+- `migrate_to_sqlite.py` に `regenerate_named_pathogen_etiology()` を追加（配信DB安全網, モジュール由来 causes 65 JA / patho 61 JA を捕捉）。
+
+### 効果（配信SQLite実測）
+- 汎用ウイルス病因: **EN 201→98件 / JA 245→129件**（約50%削減）
+- ウイルス名を持つ疾患のうち causes が具体的病原体を明記: 95/248
+- 猫汎白血球減少症の病因は **FPV**（CPV-2 ではない）、CHV-1、avipoxvirus 等を正しく記載
+- 注: modulo-name テンプレート率（causes_ja 81→80%）はほぼ不変。papillomavirus が14種で共有される等、病原体ファミリーの共有は**医学的に正当**（テンプレートではない）ため。本バッチの価値は率ではなく**病因の正確性・疾患特異性**にある。
+
+### 回帰テスト追加（+6件）
+- `test_pathogen_library_resolver_precision` — 非ウイルス（腺腫/夏癬）・否定名・非猫レンチウイルスを除外
+- `test_named_pathogen_causes_cite_correct_pathogen` — 汎白血球減少症=FPV(≠CPV-2)、FHV-1/CHV-1/EHV/lyssavirus を明記
+- `test_no_generic_viral_causes_on_named_pathogens_in_json` / `test_served_db_named_pathogen_etiology_is_specific`
+
+### テスト・CI
+- フルテストスイート: **3,470件合格**（34 skip、+4新規）
+- ruff check / format: 全変更ファイルで通過
+- 再現手順: `fix_named_pathogens.py --apply` → `migrate_to_sqlite.py`
+
+### 次バッチ候補
+- 残る汎用ウイルス病因 EN 98 / JA 129（paramyxo/reo/circo/borna 非フラグシップ、fish/reptile の iridovirus・birnavirus 等）
+- 細菌 named-pathogen（salmonella/E.coli/staph/strep/pseudomonas/clostridium/pasteurella/bordetella/leptospira/chlamydia — スキャンで ~120フィールド）
