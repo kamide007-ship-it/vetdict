@@ -41,6 +41,14 @@ from scripts.template_elimination.clinical_fields_generator import (  # noqa: E4
 )
 from scripts.template_elimination.curated_etiology import STUB_SIGNATURES  # noqa: E402
 from scripts.template_elimination.eliminate_templates import SPECIES_NORM  # noqa: E402
+from scripts.template_elimination.fungal_library import (  # noqa: E402
+    fungal_clinical_fields,
+    resolve_fungal_agent,
+)
+from scripts.template_elimination.parasite_library import (  # noqa: E402
+    parasite_clinical_fields,
+    resolve_parasite_agent,
+)
 from scripts.template_elimination.pathogen_library import (  # noqa: E402
     GENERIC_CAUSES_EN_MARKS,
     GENERIC_CAUSES_JA_MARKS,
@@ -59,12 +67,22 @@ PATHO_EN_MARKS = GENERIC_PATHO_EN_MARKS
 
 
 def _clinical_fields(species: str, name_ja: str, name_en: str):
-    """Named-pathogen curated fields: viral first, then bacterial; None if neither."""
-    return viral_clinical_fields(species, name_ja, name_en) or bacterial_clinical_fields(species, name_ja, name_en)
+    """Named-pathogen curated fields: viral, bacterial, fungal, then parasite; None if none."""
+    return (
+        viral_clinical_fields(species, name_ja, name_en)
+        or bacterial_clinical_fields(species, name_ja, name_en)
+        or fungal_clinical_fields(species, name_ja, name_en)
+        or parasite_clinical_fields(species, name_ja, name_en)
+    )
 
 
 def _resolves(name_ja: str, name_en: str) -> bool:
-    return resolve_viral_agent(name_ja, name_en) is not None or resolve_bacterial_agent(name_ja, name_en) is not None
+    return (
+        resolve_viral_agent(name_ja, name_en) is not None
+        or resolve_bacterial_agent(name_ja, name_en) is not None
+        or resolve_fungal_agent(name_ja, name_en) is not None
+        or resolve_parasite_agent(name_ja, name_en) is not None
+    )
 
 
 def _make_replaceable(fingerprints, marks, en=False):

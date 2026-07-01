@@ -3820,3 +3820,120 @@ def test_no_generic_infectious_causes_on_named_bacteria_in_json():
         ):
             offenders.append(ne or nj)
     assert not offenders, f"{len(offenders)} named-bacterium diseases keep the generic template: {offenders[:10]}"
+
+
+# ---------------------------------------------------------------------------
+# Named-pathogen fungal etiology curation (2026-07)
+# ---------------------------------------------------------------------------
+def test_fungal_library_resolver_precision():
+    from scripts.template_elimination.fungal_library import resolve_fungal_agent
+
+    # Genuine mycoses resolve.
+    assert resolve_fungal_agent("皮膚糸状菌症", "Dermatophytosis (Ringworm)") is not None
+    assert resolve_fungal_agent("アスペルギルス症", "Aspergillosis") is not None
+    assert resolve_fungal_agent("コクシジオイデス症", "Coccidioidomycosis") is not None
+    assert resolve_fungal_agent("水カビ病", "Saprolegniasis") is not None
+    # Critical collisions must NOT resolve as fungal.
+    assert resolve_fungal_agent("コクシジウム症", "Coccidiosis") is None  # protozoal, not coccidioides
+    assert resolve_fungal_agent("エンセファリトゾーン症", "Microsporidiosis") is None  # not microsporum
+    assert resolve_fungal_agent("クリプトスポリジウム症", "Cryptosporidiosis") is None  # not cryptococcus
+    assert resolve_fungal_agent("ボールパイソン", "Ball Python Husbandry") is None  # not pythium
+
+
+def test_named_fungal_causes_cite_correct_organism():
+    from scripts.template_elimination.fungal_library import fungal_clinical_fields
+
+    # Cats/dogs: Microsporum canis; rodents: Trichophyton.
+    assert "Microsporum canis" in fungal_clinical_fields("cat", "皮膚糸状菌症", "Dermatophytosis")["causes"]
+    assert "Trichophyton" in fungal_clinical_fields("hamster", "皮膚糸状菌症", "Dermatophytosis")["causes"]
+    # Aspergillus is host-aware (avian air-sac vs equine guttural pouch).
+    assert "air sac" in fungal_clinical_fields("bird", "アスペルギルス症", "Aspergillosis")["pathophysiology"].lower()
+    assert "guttural" in fungal_clinical_fields("horse", "喉嚢真菌症", "Guttural Pouch Mycosis")["causes"].lower()
+    # Cryptococcus names the encapsulated yeast.
+    assert "Cryptococcus" in fungal_clinical_fields("cat", "クリプトコッカス症", "Cryptococcosis")["causes"]
+    # Macrorhabdus (avian gastric yeast) named, not "megabacteria".
+    agy = fungal_clinical_fields("parakeet", "メガバクテリア症", "Megabacteriosis (AGY)")
+    assert "Macrorhabdus" in agy["causes"]
+
+
+def test_no_generic_fungal_causes_on_named_fungi_in_json():
+    from scripts.template_elimination.fungal_library import fungal_clinical_fields
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    species_norm = {"Cat": "cat", "Dog": "dog", "Horse": "horse", "Rabbit": "rabbit"}
+    offenders = []
+    for e in entries:
+        nj, ne = e.get("name_ja") or "", e.get("name") or ""
+        sp = species_norm.get(e.get("species"), (e.get("species") or "").lower())
+        if fungal_clinical_fields(sp, nj, ne) is None:
+            continue
+        cen = (e.get("causes") or "").lower()
+        if cen.startswith("fungal infection. inhalation") or cen.startswith("fungal infections are caused by"):
+            offenders.append(ne or nj)
+    assert not offenders, f"{len(offenders)} named-fungus diseases keep the generic template: {offenders[:10]}"
+
+
+# ---------------------------------------------------------------------------
+# Named-parasite etiology curation (2026-07)
+# ---------------------------------------------------------------------------
+def test_parasite_library_resolver_precision():
+    from scripts.template_elimination.parasite_library import (
+        parasite_clinical_fields,
+        resolve_parasite_agent,
+    )
+
+    # Genuine parasites resolve.
+    assert resolve_parasite_agent("回虫症", "Roundworm") is not None
+    assert resolve_parasite_agent("犬糸状虫症", "Heartworm Disease") is not None
+    assert resolve_parasite_agent("疥癬", "Sarcoptic Mange") is not None
+    assert resolve_parasite_agent("コクシジウム症", "Coccidiosis") is not None
+    # Demodex (毛包虫) must resolve to mite, NOT tapeworm (包虫 collision).
+    demodex = parasite_clinical_fields("dog", "毛包虫症", "Demodicosis")
+    assert "mite" in demodex["causes"].lower() and "tapeworm" not in demodex["causes"].lower()
+    # Collisions must NOT resolve.
+    assert resolve_parasite_agent("夏癬", "Sweet Itch") is None
+    assert resolve_parasite_agent("使役犬外傷", "Police Dog Injury") is None  # not "lice"
+    assert resolve_parasite_agent("コクシジオイデス症", "Coccidioidomycosis") is None  # fungal, not coccidia
+    assert resolve_parasite_agent("ボールパイソン飼育", "Ball Python Care") is None
+    # Tick-borne PATHOGEN diseases are not tick infestation.
+    assert resolve_parasite_agent("バベシア症", "Babesiosis") is None
+    assert resolve_parasite_agent("ライム病", "Lyme Disease") is None
+
+
+def test_named_parasite_causes_cite_correct_parasite():
+    from scripts.template_elimination.parasite_library import parasite_clinical_fields
+
+    assert "Dirofilaria" in parasite_clinical_fields("dog", "犬糸状虫症", "Heartworm")["causes"]
+    assert "hookworm" in parasite_clinical_fields("dog", "鉤虫症", "Hookworm")["causes"].lower()
+    assert "Trichuris" in parasite_clinical_fields("dog", "鞭虫症", "Whipworm")["causes"]
+    # Feline heartworm is host-aware (non-permissive host / HARD).
+    assert "non-permissive" in parasite_clinical_fields("cat", "猫フィラリア症", "Feline Heartworm")["causes"].lower()
+    # Coccidia named as protozoa; giardia as flagellate.
+    assert "coccidian" in parasite_clinical_fields("dog", "コクシジウム症", "Coccidiosis")["causes"].lower()
+    assert "Giardia" in parasite_clinical_fields("dog", "ジアルジア症", "Giardiasis")["causes"]
+
+
+def test_no_generic_parasite_causes_on_named_parasites_in_json():
+    from scripts.template_elimination.parasite_library import parasite_clinical_fields
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    species_norm = {"Cat": "cat", "Dog": "dog", "Horse": "horse", "Rabbit": "rabbit"}
+    offenders = []
+    for e in entries:
+        nj, ne = e.get("name_ja") or "", e.get("name") or ""
+        sp = species_norm.get(e.get("species"), (e.get("species") or "").lower())
+        if parasite_clinical_fields(sp, nj, ne) is None:
+            continue
+        cen = (e.get("causes") or "").lower()
+        if (
+            cen.startswith("caused by parasites infecting affected tissues")
+            or cen.startswith("external parasite infestation")
+            or cen.startswith("endoparasitic infection")
+            or cen.startswith("parasitic diseases are caused by infection with")
+        ):
+            offenders.append(ne or nj)
+    assert not offenders, f"{len(offenders)} named-parasite diseases keep the generic template: {offenders[:10]}"
