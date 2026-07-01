@@ -1326,7 +1326,11 @@ def ground_templated_fields_with_signs(conn) -> dict[str, int]:
 
     sys.path.insert(0, str(ROOT))
     from scripts.template_elimination.clinical_fields_generator import (
+        compose_grounded_pathophysiology,
+        compose_grounded_pathophysiology_ja,
+        compose_grounded_prevention,
         compose_grounded_prevention_ja,
+        compose_grounded_prognosis,
         compose_grounded_prognosis_ja,
     )
 
@@ -1341,19 +1345,26 @@ def ground_templated_fields_with_signs(conn) -> dict[str, int]:
     MIN_SHARE = 3
     MIN_NAMES = 3
 
+    # Japanese fields take Japanese sign names; English fields take English sign
+    # names. Each maps to its grounding composer + which language of signs to feed.
     composers = {
-        "prevention_ja": compose_grounded_prevention_ja,
-        "prognosis_ja": compose_grounded_prognosis_ja,
+        "prevention_ja": (compose_grounded_prevention_ja, "ja"),
+        "prognosis_ja": (compose_grounded_prognosis_ja, "ja"),
+        "pathophysiology_ja": (compose_grounded_pathophysiology_ja, "ja"),
+        "prevention": (compose_grounded_prevention, "en"),
+        "prognosis": (compose_grounded_prognosis, "en"),
+        "pathophysiology": (compose_grounded_pathophysiology, "en"),
     }
 
     def _base(name: str) -> str:
         return _paren.sub("", name or "").strip()
 
-    _signs_cache: dict[int, list[str]] = {}
+    _signs_cache: dict[tuple[int, str], list[str]] = {}
 
-    def _signs(row) -> list[str]:
-        if row["id"] in _signs_cache:
-            return _signs_cache[row["id"]]
+    def _signs(row, lang: str) -> list[str]:
+        ck = (row["id"], lang)
+        if ck in _signs_cache:
+            return _signs_cache[ck]
         try:
             ids = _json.loads(row["symptoms"] or "[]")
         except (ValueError, TypeError):
@@ -1362,10 +1373,18 @@ def ground_templated_fields_with_signs(conn) -> dict[str, int]:
         out: list[str] = []
         for sid in ids:
             entry = lut.get(sid)
-            ja = entry.get("ja") if isinstance(entry, dict) else None
-            if ja and _cjk.search(ja) and ja not in out:
-                out.append(ja)
-        _signs_cache[row["id"]] = out
+            if not isinstance(entry, dict):
+                continue
+            val = entry.get(lang)
+            if not val:
+                continue
+            # Japanese clauses want CJK sign names; English clauses want the
+            # English label (skip if it is only a raw snake_case id fallback).
+            if lang == "ja" and not _cjk.search(val):
+                continue
+            if val not in out:
+                out.append(val)
+        _signs_cache[ck] = out
         return out
 
     def _strip_name(text: str, name_ja: str, name: str) -> str:
@@ -1393,11 +1412,11 @@ def ground_templated_fields_with_signs(conn) -> dict[str, int]:
             if len(items) >= MIN_SHARE and len({_base(r["name_ja"] or r["name"]) for r in items}) >= MIN_NAMES
             for r in items
         }
-        compose = composers[field]
+        compose, lang = composers[field]
         for row in rows:
             if row["id"] not in templated_ids:
                 continue
-            new = compose(row[field] or "", _signs(row))
+            new = compose(row[field] or "", _signs(row, lang))
             if new and new != (row[field] or "").strip():
                 conn.execute(
                     f"UPDATE diseases SET {field} = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
@@ -1405,6 +1424,32 @@ def ground_templated_fields_with_signs(conn) -> dict[str, int]:
                 )
                 counts[field] += 1
     return counts
+
+
+def fix_prognosis_possessive_en(conn) -> int:
+    """Repair the ``"... in <species>s's prognosis ..."`` double-possessive bug.
+
+    ``gen_prognosis_en`` historically joined the subject ``"<disease> in
+    <species>s"`` with catalog clauses beginning ``"'s prognosis ..."``, giving
+    ungrammatical text like ``"Acute Enteritis in rabbits's prognosis varies
+    ..."`` that reads as machine output to an English visitor. The generator is
+    now fixed; this pass repairs any such text already materialised in the served
+    DB from module/supplementary sources. It only rewrites the possessive to
+    ``"The prognosis of <disease> in <species> ..."`` — no clinical content
+    changes.
+    """
+    import re as _re
+
+    pat = _re.compile(r"^(.+?) in ([A-Za-z][A-Za-z ]*?)'s prognosis")
+    rows = conn.execute('SELECT id, prognosis FROM diseases WHERE prognosis LIKE "%\'s prognosis%"').fetchall()
+    n = 0
+    for row in rows:
+        val = row["prognosis"] or ""
+        new = pat.sub(r"The prognosis of \1 in \2", val, count=1)
+        if new != val:
+            conn.execute("UPDATE diseases SET prognosis = ? WHERE id = ?", (new, row["id"]))
+            n += 1
+    return n
 
 
 def localize_english_species_in_served_db(conn) -> int:
@@ -1794,6 +1839,11 @@ def main(db_path: str | None = None):
         ground_stats = ground_templated_fields_with_signs(conn)
         for field, n in ground_stats.items():
             print(f"  → {field}: {n} grounded with disease-specific signs")
+
+        # Repair the "in <species>s's prognosis" double-possessive grammar bug
+        # in any prognosis text materialised from module/supplementary sources.
+        prog_fix = fix_prognosis_possessive_en(conn)
+        print(f"  → {prog_fix} English prognosis possessives repaired")
 
         # Localise any English species placeholders that leaked into JA fields.
         print("\n[enrichment] localising English species names in Japanese fields...")

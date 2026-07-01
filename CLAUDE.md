@@ -1359,3 +1359,63 @@ resolver が None を返すため recat が補正できなかった残りの臓�
 - フルテストスイート: **3,455件合格**（34 skip）
 - ruff check / format: 全変更ファイルで通過
 - 再現手順: `fix_antiprotozoal.py --apply` → `migrate_to_sqlite.py`
+
+## 2026-07セッション（英語フィールドの構造的テンプレート撲滅 + 予後の二重所有格バグ修正 + i18n整合）
+
+### 背景: 英語版サイトが構造的テンプレートに埋もれていた
+これまでのテンプレート撲滅は日本語フィールド（主対象＝日本の獣医師）に集中しており、**英語フィールドは grounding パスの対象外**だった。名前を正規化して除去する監査（identical-modulo-name、5+疾患名で共有）を英語版に対して初めて実施した結果、英語版は公開レベルに達していないことが判明:
+| フィールド | JA (before) | EN (before) |
+|---|---|---|
+| prevention | 13% | **89%** |
+| prognosis | 17% | **88%** |
+| pathophysiology | **61%** | **88%** |
+| causes | 81% | 93% |
+- 英語圏の閲覧者が疾患を数件開くと、prevention/prognosis/pathophysiology が category 単位でバイト単位一致の同一段落だった（英語 causes は 604 distinct / 7,094 疾患＝疾患名すら差し込まれていない生テンプレート）。
+- 監査バグも修正: 従来の内部監査は JA フィールドの正規化に英語疾患名を使っていたため、JA のテンプレート率を実際より低く見積もっていた（causes_ja は 2% ではなく実測 81%）。正しくは JA フィールドは name_ja、EN フィールドは name で正規化する。
+
+### grounding パスの英語対応 + 病態生理への拡張（捏造ゼロ）
+実証済みの JA grounding（疾患自身の確定データ＝症状のみを言い換え、新規の医学的主張をしない）を英語へ横展開し、さらに病態生理フィールドにも適用:
+- `clinical_fields_generator.py` に英語版 composer を追加:
+  - `compose_grounded_prevention` / `compose_grounded_prognosis`（英語）— category ベースに疾患自身の徴候を早期発見・経過観察標的として付加
+  - `compose_grounded_pathophysiology_ja` / `compose_grounded_pathophysiology`（日英）— 病態生理は定義上「機序→臨床発現」の連鎖なので、その疾患自身の記録済み徴候を発現として付記するのは医学的に自然かつ捏造ゼロ
+  - **causes（病因）は徴候 grounding の対象外**: 臨床徴候は病因ではないため。病因は named-agent キュレーション（toxicology/antiprotozoal/curated_etiology バッチ）に委ねる方針を維持
+- `migrate_to_sqlite.py` の `ground_templated_fields_with_signs` を **バイリンガル化**（JA フィールドは JA 徴候、EN フィールドは EN 徴候で解決）+ pathophysiology_ja / pathophysiology を追加
+- 徴候が2個未満で有意なリストを作れない場合は base のまま（捏造しない設計の下限）
+
+### 効果（配信SQLite実測、7,094疾患）
+| フィールド | before | after |
+|---|---|---|
+| prevention (EN) | 89% | **13%** |
+| prognosis (EN) | 88% | **19%** |
+| pathophysiology (EN) | 88% | **11%** |
+| pathophysiology (JA) | 61% | **15%** |
+- キュレート済みフラグシップ疾患（猫喘息・PBFD 等）は grounding が上書きせず温存されることを確認
+
+### 英語予後の二重所有格バグ修正（5,665件）
+`gen_prognosis_en` が主語 `"<disease> in <species>s"` に `"'s prognosis ..."` で始まる clause を連結していたため、`"Acute Enteritis in rabbits's prognosis varies ..."` という非文法的・機械翻訳的な英語を **5,665件** 生成していた。
+- `_combine_prognosis_en()` を追加し `"The prognosis of <disease> in <species> ..."` 形式に修正（generator + fallback 両方）
+- `diseases_all_species.json` の既存 5,665件を一括修正（compact JSON 形式維持）
+- `migrate_to_sqlite.py` に `fix_prognosis_possessive_en()` を配信DB安全網として追加（module/supplementary 由来を捕捉）
+- 配信DB実測: `s's prognosis` **0件**
+
+### i18n 整合（英語UXの日本語混入除去）
+- `renderDiseaseDb()` の enrichment ラベル（リハビリ/栄養管理/回復期間/成功率/死亡率）が `"リハビリテーション/Rehabilitation"` のように **言語問わず日英併記** され、他の全ラベル（`t()` / `currentLang` 準拠）と不整合だった → `currentLang` 準拠に統一（英語ユーザーに日本語が混じらない）
+- 回復期間の値 `"N週間 / N weeks"` も言語別表示に修正
+
+### 回帰テスト追加（tests/test_no_template_disease_content.py、+5件）
+- `test_grounded_en_prevention_prognosis_differentiate_by_signs` — 英語 composer が徴候で分化＋徴候不足時は無改変＋冪等
+- `test_grounded_en_pathophysiology_manifestation_clause` — 日英 pathophysiology composer の分化＋冪等
+- `test_gen_prognosis_en_has_no_double_possessive` — generator が `s's prognosis` を生成しない
+- `test_served_db_no_double_possessive_prognosis` — 配信DBに二重所有格が残っていない
+- `test_served_db_en_prognosis_prevention_pathophysiology_grounded` — 英語3フィールドのテンプレート率 <40%（回帰ガード）
+
+### テスト・CI
+- フルテストスイート: **3,466件合格**（34 skip、+5回帰テスト）
+- ruff check / format: 全変更ファイルで通過
+- ServiceWorker: `CACHE_NAME` v82 → **v83**
+- 再現手順: JSON修正は適用済み → `migrate_to_sqlite.py`（grounding/possessive-fix は配信DBビルドに統合済み）
+
+### 残課題（次セッション候補）
+- causes（病因）: JA 81% / EN 93% が構造的カテゴリテンプレート。徴候 grounding 不可（徴候≠病因）のため named-agent キュレーションの継続が必要（毒物64・原虫11・curated_etiology 100+ 済み。ウイルス/細菌の named-pathogen 疾患の拡充が最大の残メイン）
+- 英語 causes/pathophysiology のフラグシップ・キュレーション: 現状キュレート済み病因は JA のみ（curated_etiology は JA 専用）。最頻閲覧疾患の英語 causes/patho をバイリンガル化するには curated_etiology の EN 対応が望ましい（textbook 事実ベース、獣医レビュー前提）
+- treatment（EN 35%）: 腫瘍学・中毒等の医学的に妥当な汎用カテゴリガイダンスが中心。危険な誤カテゴリは既に是正済み

@@ -3265,31 +3265,45 @@ _PROGNOSIS_GENERAL_EN: dict[str, str] = {
 }
 
 
+def _combine_prognosis_en(prefix: str, clause: str) -> str:
+    """Join an EN prognosis subject and clause without the double-possessive bug.
+
+    The catalog clauses begin ``"'s prognosis ..."`` and ``prefix`` ends in the
+    (plural) species name, so naive concatenation yields ``"... in rabbits's
+    prognosis ..."`` — grammatically wrong and reading like machine output.
+    Render it instead as ``"The prognosis of <prefix> ..."``.
+    """
+    marker = "'s prognosis"
+    if clause.startswith(marker):
+        return f"The prognosis of {prefix}{clause[len(marker) :]}"
+    return prefix + clause
+
+
 def gen_prognosis_en(category: str, name_en: str, species: str) -> str:
     """English counterpart of ``gen_prognosis_ja`` (disease-specific prognosis)."""
     sp_en = SPECIES_EN.get(species, species)
     prefix = _disease_prefix_en(name_en, sp_en)
 
     if category == "neoplasia":
-        return prefix + _NEOPLASIA_PROGNOSIS_EN[_neoplasia_subtype_en(name_en)]
+        return _combine_prognosis_en(prefix, _NEOPLASIA_PROGNOSIS_EN[_neoplasia_subtype_en(name_en)])
 
     catalog = _PROGNOSIS_CATALOG_EN.get(category)
     if catalog:
         name_l = (name_en or "").lower()
         for keywords, clause in catalog:
             if any(k in name_l for k in keywords):
-                return prefix + clause
+                return _combine_prognosis_en(prefix, clause)
         lead = _CATALOG_FALLBACK_EN.get(category, "the underlying disease process, its severity and treatment timing")
         return (
-            f"{prefix}'s prognosis varies with {lead}. Early diagnosis and disease-appropriate treatment "
+            f"The prognosis of {prefix} varies with {lead}. Early diagnosis and disease-appropriate treatment "
             f"and monitoring give a good outcome in many cases, while advanced or complicated cases can do worse."
         )
 
     if category in ("viral_infection", "bacterial_infection", "respiratory_infection", "fungal_infection"):
-        return prefix + _PROGNOSIS_GENERAL_EN["infection"]
+        return _combine_prognosis_en(prefix, _PROGNOSIS_GENERAL_EN["infection"])
     if category in _PROGNOSIS_GENERAL_EN:
-        return prefix + _PROGNOSIS_GENERAL_EN[category]
-    return prefix + _PROGNOSIS_GENERAL_EN["generic"]
+        return _combine_prognosis_en(prefix, _PROGNOSIS_GENERAL_EN[category])
+    return _combine_prognosis_en(prefix, _PROGNOSIS_GENERAL_EN["generic"])
 
 
 def gen_pathophysiology_ja(category: str, name_ja: str, species: str) -> str:
@@ -4162,6 +4176,78 @@ def compose_grounded_prognosis_ja(base_text: str, sign_names_ja: list[str]) -> s
         return base
     clause = f"経過中は{signs}などの推移を指標に重症度と治療反応を評価する。"
     if clause in base or "の推移を指標に" in base:
+        return base
+    return f"{base}{clause}"
+
+
+# English analogues of the two grounding composers above. The English
+# prevention / prognosis fields are, for most diseases, the raw category
+# paragraph shared byte-for-byte across every disease of a category (only ~600
+# distinct causes strings across 7k diseases), so an English-language visitor
+# browsing several diseases sees the identical paragraph — the classic "generic
+# AI" tell. These keep the vetted category base and append a surveillance /
+# monitoring clause built from the record's *own* presenting signs (English),
+# restating data already stored on the record with no new medical claim.
+
+
+def compose_grounded_prevention(base_text: str, sign_names_en: list[str]) -> str:
+    """Append a disease-specific early-detection clause to category prevention (EN)."""
+    base = (base_text or "").strip()
+    fresh = [s for s in sign_names_en if s and s not in base]
+    signs = _join_en(fresh or sign_names_en, 4)
+    # ``_join_en`` only emits " and " when there are >= 2 distinct signs; require
+    # that so the surveillance list is meaningful.
+    if not signs or " and " not in signs:
+        return base
+    clause = f" Early detection relies on watching for {signs}, with prompt veterinary assessment if they develop."
+    if clause.strip() in base or "Early detection relies on watching for" in base:
+        return base
+    return f"{base}{clause}"
+
+
+def compose_grounded_prognosis(base_text: str, sign_names_en: list[str]) -> str:
+    """Append a disease-specific monitoring clause to category prognosis (EN)."""
+    base = (base_text or "").strip()
+    fresh = [s for s in sign_names_en if s and s not in base]
+    signs = _join_en(fresh or sign_names_en, 4)
+    if not signs or " and " not in signs:
+        return base
+    clause = f" Tracking the course of {signs} helps gauge severity and treatment response."
+    if clause.strip() in base or "helps gauge severity and treatment response" in base:
+        return base
+    return f"{base}{clause}"
+
+
+# Pathophysiology, unlike causes, is by definition the mechanism -> clinical
+# manifestation chain, so tying the category-level mechanism paragraph to the
+# record's OWN presenting signs (as the observed manifestation) is medically
+# natural and, like the composers above, only restates data already on the
+# record — no new claim. (Causes / etiology cannot be sign-grounded, because a
+# clinical sign is not an aetiology; that field is left to named-agent curation.)
+
+
+def compose_grounded_pathophysiology_ja(base_text: str, sign_names_ja: list[str]) -> str:
+    """Append a disease-specific clinical-manifestation clause to category pathophysiology (JA)."""
+    base = (base_text or "").strip()
+    fresh = [s for s in sign_names_ja if s and s not in base]
+    signs = _join_ja(fresh or sign_names_ja, 5)
+    if not signs or signs.count("・") < 1:
+        return base
+    clause = f"本症例では臨床的に{signs}などとして顕在化する。"
+    if clause in base or "などとして顕在化する" in base:
+        return base
+    return f"{base}{clause}"
+
+
+def compose_grounded_pathophysiology(base_text: str, sign_names_en: list[str]) -> str:
+    """Append a disease-specific clinical-manifestation clause to category pathophysiology (EN)."""
+    base = (base_text or "").strip()
+    fresh = [s for s in sign_names_en if s and s not in base]
+    signs = _join_en(fresh or sign_names_en, 5)
+    if not signs or " and " not in signs:
+        return base
+    clause = f" In this disease the process manifests clinically as {signs}."
+    if clause.strip() in base or "the process manifests clinically as" in base:
         return base
     return f"{base}{clause}"
 
