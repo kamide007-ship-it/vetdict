@@ -1717,6 +1717,10 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
     (and a curated JA field with a still-templated EN field gets only the EN
     upgraded)."""
     sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.bacterial_library import (
+        bacterial_clinical_fields,
+        resolve_bacterial_agent,
+    )
     from scripts.template_elimination.clinical_fields_generator import (
         build_etiology_fingerprints,
         fingerprint_etiology,
@@ -1724,18 +1728,26 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
         gen_pathophysiology_ja,
     )
     from scripts.template_elimination.curated_etiology import STUB_SIGNATURES
-    from scripts.template_elimination.pathogen_library import resolve_viral_agent, viral_clinical_fields
+    from scripts.template_elimination.pathogen_library import (
+        GENERIC_CAUSES_EN_MARKS,
+        GENERIC_CAUSES_JA_MARKS,
+        GENERIC_PATHO_EN_MARKS,
+        resolve_viral_agent,
+        viral_clinical_fields,
+    )
+
+    def _resolve(nj, ne):
+        return resolve_viral_agent(nj, ne) or resolve_bacterial_agent(nj, ne)
+
+    def _fields(sp, nj, ne):
+        return viral_clinical_fields(sp, nj, ne) or bacterial_clinical_fields(sp, nj, ne)
 
     causes_fps = build_etiology_fingerprints(gen_causes_ja)
     patho_fps = build_etiology_fingerprints(gen_pathophysiology_ja)
-    CAUSES_JA_MARKS = ("の原因はウイルス感染である", "特異的ウイルス病原体が宿主細胞")
-    CAUSES_EN_MARKS = (
-        "viral infection. transmission via",
-        "infectious diseases are caused by pathogenic organisms",
-        "multifactorial etiology depending on disease type",
-    )
+    CAUSES_JA_MARKS = GENERIC_CAUSES_JA_MARKS
+    CAUSES_EN_MARKS = GENERIC_CAUSES_EN_MARKS
     PATHO_JA_MARKS = ("病態生理はウイルス侵入", "病原ウイルスは特異的細胞受容体")
-    PATHO_EN_MARKS = ("pathophysiology of infectious diseases",)
+    PATHO_EN_MARKS = GENERIC_PATHO_EN_MARKS
 
     def _ja_ok(text, fps, marks):
         if not text:
@@ -1757,9 +1769,9 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
     ).fetchall()
     counts = {"causes_ja": 0, "causes": 0, "pathophysiology_ja": 0, "pathophysiology": 0}
     for row in rows:
-        if resolve_viral_agent(row["name_ja"] or "", row["name"] or "") is None:
+        if _resolve(row["name_ja"] or "", row["name"] or "") is None:
             continue
-        fields = viral_clinical_fields((row["species"] or "").lower(), row["name_ja"] or "", row["name"] or "")
+        fields = _fields((row["species"] or "").lower(), row["name_ja"] or "", row["name"] or "")
         if not fields:
             continue
         checks = {
@@ -1951,10 +1963,11 @@ def main(db_path: str | None = None):
         cur_e = apply_curated_etiology(conn)
         print(f"  → {cur_e} curated etiology/pathophysiology replacements")
 
-        # Named-pathogen viral diseases (parvovirus, herpesvirus, rabies, …):
-        # replace the generic viral category template with pathogen-specific
-        # causes / pathophysiology (JA+EN). Catches module-sourced entries the
-        # JSON pass (fix_named_pathogens.py) cannot reach.
+        # Named-pathogen diseases — viral (parvovirus, herpesvirus, rabies, …) and
+        # bacterial (salmonella, tetanus, strangles, …): replace the generic
+        # viral/bacterial category template with pathogen-specific causes /
+        # pathophysiology (JA+EN). Catches module-sourced entries the JSON pass
+        # (fix_named_pathogens.py) cannot reach.
         vir = regenerate_named_pathogen_etiology(conn)
         print(
             f"  → named-pathogen etiology: causes {vir['causes_ja']} JA / {vir['causes']} EN, "

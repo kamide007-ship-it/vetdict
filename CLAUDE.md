@@ -1459,3 +1459,31 @@ causes（病因）フィールドは徴候 grounding が不可能（臨床徴候
 ### 次バッチ候補
 - 残る汎用ウイルス病因 EN 98 / JA 129（paramyxo/reo/circo/borna 非フラグシップ、fish/reptile の iridovirus・birnavirus 等）
 - 細菌 named-pathogen（salmonella/E.coli/staph/strep/pseudomonas/clostridium/pasteurella/bordetella/leptospira/chlamydia — スキャンで ~120フィールド）
+
+## 2026-07セッション（第3弾: named-agent キュレーション拡充 — 細菌 + 残ウイルス）
+
+### 細菌 named-pathogen ライブラリ（`scripts/template_elimination/bacterial_library.py` 新規）
+汎用細菌テンプレート（JA「…の原因は特定の細菌病原体の感染である…」/ EN "Bacterial infection. Transmission via…" / "Infectious diseases are caused by pathogenic organisms…"）を、疾患名が示す菌に基づき疾患特異化。
+- **24の細菌属生成器**（causes + pathophysiology を JA+EN）: salmonella / E.coli / staph / strep / pseudomonas / clostridium / pasteurella / mycoplasma / chlamydia / bordetella / mycobacterium / leptospira / klebsiella / listeria / abscess / lawsonia / helicobacter / campylobacter / brucella / borrelia / actinomyces。
+- **臨床的に重要な分岐**: クロストリジウム＝毒素別（C. tetani テタノスパスミン / C. botulinum ボツリヌス毒素 / C. perfringens 腸毒血症）、マイコプラズマ＝ヘモトロピック vs 呼吸器、クラミジア＝オウム病(鳥) vs C. felis(猫)、レンサ球菌＝馬腺疫 S. equi、マイコバクテリア＝結核/らい/非定型。
+- **部分文字列衝突をレビューで発見・回避**: `coli`(bare)→大腸炎/疝痛を誤検出 → `大腸菌`/`escherichia`/`e. coli`/`colibacill`；`listeri`→「blistering(水疱症)」→ `listeria`/`listerio`；属名は全綴りで指定。
+- **abscess 除外**: 二次性/非細菌一次性の膿瘍（ビタミンA欠乏性口腔膿瘍、Corynebacterium 鳩熱）は `_ABSCESS_EXCLUSIONS` で除外。
+
+### 残ウイルスの拡充（`pathogen_library.py`）
+汎用ウイルステンプレートに残っていた named-pathogen を追加（13→28生成器）:
+- 追加: パラミクソ(Newcastle/PMV/Sendai) / イリドウイルス(Ranavirus/FV3/ATV) / サーコ / ポリオーマ / レオ / ボルナ(ABV) / アリューシャン病(amdoparvovirus) / アレナ(LCMV, 人獣共通) / フラビ(West Nile/日本脳炎) / EIA(馬伝染性貧血, 届出) / EVA(馬ウイルス性動脈炎) / ビルナ(ガンボロ) / ヘニパ(Hendra/Nipah) / ハンタ。
+- 既存生成器へキー追加: Marek病/伝染性喉頭気管炎/サイトメガロ → herpes；伝染性気管支炎(IBV) → corona；ノロウイルス → calici。
+
+### 検出ロジックの汎用化（`GENERIC_CAUSES_*_MARKS` / `GENERIC_PATHO_EN_MARKS`）
+named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を検出（例: West Nile 脳炎の EN causes が「Neurological etiology…」= 神経カテゴリ）。EN病態生理は全て "The pathophysiology of …" で始まるため1マーカーで捕捉。マーカーを `pathogen_library.py` に集約し JSON パス・配信DB安全網の両方で共有。
+
+### 適用と効果（配信SQLite実測）
+- `fix_named_pathogens.py` を viral+bacterial 両対応化（`_clinical_fields`/`_resolves`）。`migrate_to_sqlite.py` の `regenerate_named_pathogen_etiology` も両対応。
+- **583疾患**（viral+bacterial）を疾患特異的病因・病態生理に置換。
+- 汎用ウイルス causes: JA 245→63 / EN 201→25。EN pathophysiology の distinct 値: 896→**5730**（grounding と併せて大幅にユニーク化）。
+- 残る汎用細菌テンプレート（375 JA）は「細菌性皮膚炎」等、**菌名を持たない汎用細菌疾患**で、named-agent 化の対象外（設計通り）。
+
+### 回帰テスト（+8件）
+- ウイルス: resolver 精度（腺腫/否定名/非猫レンチ除外）、正病原体名、汎用テンプレート不在
+- 細菌: resolver 精度（coli/listeri 衝突・abscess 除外）、正病原体名（S. equi / C. tetani+tetanospasmin / botulinum / haemoplasma）、汎用テンプレート不在
+- フルスイート **3,473件合格**（34 skip）、ruff clean

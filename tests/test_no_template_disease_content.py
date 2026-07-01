@@ -3755,3 +3755,68 @@ def test_served_db_named_pathogen_etiology_is_specific():
     for cja, cen in rows:
         assert "の原因はウイルス感染である" not in (cja or "")
         assert not (cen or "").startswith("Viral infection. Transmission via")
+
+
+# ---------------------------------------------------------------------------
+# Named-pathogen bacterial etiology curation (2026-07)
+# ---------------------------------------------------------------------------
+def test_bacterial_library_resolver_precision():
+    from scripts.template_elimination.bacterial_library import (
+        bacterial_clinical_fields,
+        resolve_bacterial_agent,
+    )
+
+    # Genuine bacterial diseases resolve.
+    assert resolve_bacterial_agent("馬腺疫", "Strangles") is not None
+    assert resolve_bacterial_agent("破傷風", "Tetanus") is not None
+    assert resolve_bacterial_agent("サルモネラ症", "Salmonellosis") is not None
+    assert resolve_bacterial_agent("皮下膿瘍", "Subcutaneous Abscess") is not None
+    # Substring collisions must NOT resolve.
+    assert resolve_bacterial_agent("大腸炎", "Colitis") is None  # not "coli"
+    assert resolve_bacterial_agent("疝痛", "Colic") is None
+    assert resolve_bacterial_agent("水疱症", "Blister Disease") is None  # not "listeri"
+    assert resolve_bacterial_agent("酵素欠乏", "Enzyme Deficiency") is None  # not "lyme"
+    # Abscess exclusions: secondary/non-bacterial-primary abscesses are not claimed.
+    assert (
+        bacterial_clinical_fields("bird", "ビタミンA欠乏症口腔膿瘍型", "Vitamin A Deficiency – Oral Abscesses") is None
+    )
+    assert bacterial_clinical_fields("horse", "鳩熱", "Pigeon Fever") is None
+
+
+def test_named_bacterial_causes_cite_correct_pathogen():
+    from scripts.template_elimination.bacterial_library import bacterial_clinical_fields
+
+    strangles = bacterial_clinical_fields("horse", "馬腺疫", "Strangles")
+    assert "Streptococcus equi" in strangles["causes"]
+    tetanus = bacterial_clinical_fields("dog", "破傷風", "Tetanus")
+    assert "Clostridium tetani" in tetanus["causes"] and "tetanospasmin" in tetanus["pathophysiology"].lower()
+    botulism = bacterial_clinical_fields("horse", "ボツリヌス中毒", "Botulism")
+    assert "botulinum" in botulism["causes"].lower()
+    hemoplasma = bacterial_clinical_fields("cat", "猫ヘモプラズマ症", "Feline Hemoplasmosis")
+    assert "haemotropic" in hemoplasma["causes"].lower() or "mycoplasma" in hemoplasma["causes"].lower()
+
+
+def test_no_generic_infectious_causes_on_named_bacteria_in_json():
+    """A disease naming its bacterium must not keep the generic bacterial /
+    infectious causes template."""
+    from scripts.template_elimination.bacterial_library import bacterial_clinical_fields
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    species_norm = {"Cat": "cat", "Dog": "dog", "Horse": "horse", "Rabbit": "rabbit"}
+    offenders = []
+    for e in entries:
+        nj, ne = e.get("name_ja") or "", e.get("name") or ""
+        sp = species_norm.get(e.get("species"), (e.get("species") or "").lower())
+        if bacterial_clinical_fields(sp, nj, ne) is None:
+            continue
+        cja = e.get("causes_ja") or ""
+        cen = (e.get("causes") or "").lower()
+        if (
+            "特定の細菌病原体の感染" in cja
+            or cen.startswith("bacterial infection. transmission via")
+            or cen.startswith("infectious diseases are caused by pathogenic organisms")
+        ):
+            offenders.append(ne or nj)
+    assert not offenders, f"{len(offenders)} named-bacterium diseases keep the generic template: {offenders[:10]}"

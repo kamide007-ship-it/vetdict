@@ -29,6 +29,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+from scripts.template_elimination.bacterial_library import (  # noqa: E402
+    bacterial_clinical_fields,
+    resolve_bacterial_agent,
+)
 from scripts.template_elimination.clinical_fields_generator import (  # noqa: E402
     build_etiology_fingerprints,
     fingerprint_etiology,
@@ -38,6 +42,9 @@ from scripts.template_elimination.clinical_fields_generator import (  # noqa: E4
 from scripts.template_elimination.curated_etiology import STUB_SIGNATURES  # noqa: E402
 from scripts.template_elimination.eliminate_templates import SPECIES_NORM  # noqa: E402
 from scripts.template_elimination.pathogen_library import (  # noqa: E402
+    GENERIC_CAUSES_EN_MARKS,
+    GENERIC_CAUSES_JA_MARKS,
+    GENERIC_PATHO_EN_MARKS,
     resolve_viral_agent,
     viral_clinical_fields,
 )
@@ -45,14 +52,19 @@ from scripts.template_elimination.pathogen_library import (  # noqa: E402
 JSON_PATH = ROOT / "diseases_all_species.json"
 
 # Explicit category-template signatures (belt-and-braces alongside fingerprints).
-CAUSES_JA_MARKS = ("の原因はウイルス感染である", "特異的ウイルス病原体が宿主細胞")
-CAUSES_EN_MARKS = (
-    "Viral infection. Transmission via",
-    "Infectious diseases are caused by pathogenic organisms",
-    "Multifactorial etiology depending on disease type",
-)
+CAUSES_JA_MARKS = GENERIC_CAUSES_JA_MARKS
+CAUSES_EN_MARKS = GENERIC_CAUSES_EN_MARKS
 PATHO_JA_MARKS = ("病態生理はウイルス侵入", "病原ウイルスは特異的細胞受容体")
-PATHO_EN_MARKS = ("pathophysiology of infectious diseases",)
+PATHO_EN_MARKS = GENERIC_PATHO_EN_MARKS
+
+
+def _clinical_fields(species: str, name_ja: str, name_en: str):
+    """Named-pathogen curated fields: viral first, then bacterial; None if neither."""
+    return viral_clinical_fields(species, name_ja, name_en) or bacterial_clinical_fields(species, name_ja, name_en)
+
+
+def _resolves(name_ja: str, name_en: str) -> bool:
+    return resolve_viral_agent(name_ja, name_en) is not None or resolve_bacterial_agent(name_ja, name_en) is not None
 
 
 def _make_replaceable(fingerprints, marks, en=False):
@@ -83,11 +95,11 @@ def remediate(data: list[dict], apply: bool) -> dict:
     for entry in data:
         name_ja = entry.get("name_ja") or ""
         name_en = entry.get("name") or ""
-        if resolve_viral_agent(name_ja, name_en) is None:
+        if not _resolves(name_ja, name_en):
             continue
         raw_species = entry.get("species", "")
         species = SPECIES_NORM.get(raw_species, (raw_species or "").lower())
-        fields = viral_clinical_fields(species, name_ja, name_en)
+        fields = _clinical_fields(species, name_ja, name_en)
         if not fields:
             continue
         touched = False

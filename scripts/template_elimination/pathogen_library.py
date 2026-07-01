@@ -38,6 +38,48 @@ from scripts.template_elimination.clinical_fields_generator import (  # noqa: E4
 
 _BIRDS = {"bird", "parakeet", "parrot"}
 
+# Generic category-causes / pathophysiology template lead phrases. When a disease
+# resolves to a *named* pathogen, ANY of these is a mislabel (the aetiology is the
+# organism), so the field is safe to overwrite. Shared by the JSON pass and the
+# served-DB safety net. Lowercased for case-insensitive substring matching.
+GENERIC_CAUSES_JA_MARKS: tuple[str, ...] = (
+    "の原因はウイルス感染である",
+    "特異的ウイルス病原体が宿主細胞",
+    "特定の細菌病原体の感染",
+    "病原性細菌が体内に侵入",
+)
+GENERIC_CAUSES_EN_MARKS: tuple[str, ...] = (
+    "viral infection. transmission via",
+    "bacterial infection. transmission via",
+    "infectious diseases are caused by pathogenic organisms",
+    "multifactorial etiology depending on disease type",
+    "neoplastic etiology, often unknown",
+    "caused by physical trauma to musculoskeletal",
+    "gastrointestinal etiology. may include",
+    "caused by parasites infecting affected tissues",
+    "caused by progressive deterioration of cardiovascular",
+    "respiratory etiology. includes",
+    "endocrine or metabolic dysfunction. may result",
+    "caused by exposure to toxic substances",
+    "caused by dietary deficiency or excess",
+    "fungal infection. inhalation or contact",
+    "nutritional diseases result from",
+    "musculoskeletal etiology. includes",
+    "reproductive etiology. includes",
+    "neurological etiology. may include",
+    "hepatic etiology. includes",
+    "ophthalmic etiology. includes",
+    "nutritional imbalance. caused by",
+    "dermatological etiology. includes",
+    "dental etiology. includes",
+    "external parasite infestation",
+    "cardiac etiology. may include",
+    "toxicosis results from exposure",
+    "neoplastic diseases arise from",
+)
+# All English category pathophysiology templates begin "The pathophysiology of …".
+GENERIC_PATHO_EN_MARKS: tuple[str, ...] = ("the pathophysiology of ",)
+
 
 def _ja(species: str) -> str:
     return SPECIES_JA.get(species, species)
@@ -252,10 +294,184 @@ def _retrovirus_fiv(sp: str):
     return cja, cen, pja, pen
 
 
+def _paramyxovirus(sp: str):
+    j, e = _ja(sp), _en(sp)
+    if sp in _BIRDS:
+        cja = f"{j}のパラミクソウイルス感染症（ニューカッスル病＝鳥パラミクソウイルス1型が代表）による。感染鳥の分泌物・糞や汚染物を介した接触・吸入で伝播する。"
+        cen = f"Caused by an avian paramyxovirus (Newcastle disease = avian paramyxovirus-1 being the archetype) in {e}, spread by contact with and inhalation of secretions, faeces and fomites."
+        pja = "ウイルスは呼吸器・消化器上皮で複製後に全身・中枢神経へ播種し、呼吸器症状・緑色下痢・捻転斜頸や旋回などの神経症状を起こす。強毒株は高致死率で届出対象となる。"
+        pen = "The virus replicates in respiratory/enteric epithelium then disseminates to viscera and CNS, causing respiratory signs, greenish diarrhoea and neurological disease (torticollis, circling); virulent strains are highly fatal and notifiable."
+    else:
+        cja = f"{j}のパラミクソウイルス感染症（げっ歯類ではセンダイウイルス等）による。呼吸器飛沫・接触で伝播し、密飼いで急速に広がる。"
+        cen = f"Caused by a paramyxovirus of {e} (e.g. Sendai virus in rodents), spread by respiratory aerosol and contact and spreading rapidly in crowding."
+        pja = "ウイルスは気道上皮で複製して線毛障害と間質性肺炎を起こし、二次性細菌感染で重症化する。幼若・免疫低下個体で致死的となりうる。"
+        pen = "The virus replicates in airway epithelium causing ciliary damage and interstitial pneumonia, worsened by secondary bacterial infection and potentially fatal in the young or immunosuppressed."
+    return cja, cen, pja, pen
+
+
+def _iridovirus(sp: str):
+    j, e = _ja(sp), _en(sp)
+    cja = f"{j}のイリドウイルス感染症（ラナウイルス属等）による。水・接触・被食を介して伝播し、水生・両生・爬虫類で集団死を起こす。"
+    cen = f"Caused by an iridovirus (e.g. Ranavirus) of {e}, transmitted via water, contact and ingestion, and causing mass mortality in aquatic, amphibian and reptile populations."
+    pja = "イリドウイルスは造血組織・内皮・上皮で複製し、全身の壊死・出血・多臓器不全を起こす。皮膚潰瘍・浮腫・体腔液貯留を伴い、しばしば急速に致死的となる。"
+    pen = "The iridovirus replicates in haematopoietic tissue, endothelium and epithelium causing systemic necrosis, haemorrhage and multi-organ failure with skin ulceration, oedema and effusion — often rapidly fatal."
+    return cja, cen, pja, pen
+
+
+def _circovirus(sp: str):
+    j, e = _ja(sp), _en(sp)
+    cja = f"{j}のサーコウイルス感染症による。糞・羽毛粉塵・分泌物を介して伝播する環境抵抗性の高い小型DNAウイルスで、若齢個体で発症しやすい。"
+    cen = f"Caused by a circovirus of {e}, a small, environmentally stable DNA virus spread via faeces, feather dust and secretions, with young animals most susceptible."
+    pja = "サーコウイルスはリンパ組織・分裂の盛んな上皮（羽包・腸・皮膚）で複製し、免疫抑制と発育中組織の傷害を起こす。鳥では羽毛・嘴の異常、豚では削痩・リンパ組織の消耗を招く。"
+    pen = "The circovirus replicates in lymphoid tissue and rapidly dividing epithelium (feather follicles, gut, skin), causing immunosuppression and injury to developing tissues — feather/beak abnormalities in birds, wasting and lymphoid depletion in pigs."
+    return cja, cen, pja, pen
+
+
+def _polyomavirus(sp: str):
+    j, e = _ja(sp), _en(sp)
+    cja = f"{j}のポリオーマウイルス感染症による。糞・分泌物・羽毛粉塵を介して伝播する小型DNAウイルスで、幼若個体で急性・致死的な経過をとりやすい。"
+    cen = f"Caused by a polyomavirus of {e}, a small DNA virus spread via faeces, secretions and feather dust, often acute and fatal in the very young."
+    pja = "ポリオーマウイルスは複数臓器で複製して壊死・出血を起こし、幼鳥では羽毛形成不全・皮下出血・突然死を、慢性キャリアでは持続排出を生じる。"
+    pen = "The polyomavirus replicates in multiple organs causing necrosis and haemorrhage — abnormal feathering, subcutaneous haemorrhage and sudden death in nestlings, with persistent shedding in chronic carriers."
+    return cja, cen, pja, pen
+
+
+def _reovirus(sp: str):
+    j, e = _ja(sp), _en(sp)
+    cja = f"{j}のレオウイルス感染症による。糞口・接触で伝播し、免疫抑制や他病原体との混合感染で顕在化する。"
+    cen = f"Caused by a reovirus of {e}, transmitted faecal-orally and by contact, becoming clinical with immunosuppression or co-infection."
+    pja = "レオウイルスは腱鞘・関節・消化器・肝で複製し、腱滑膜炎・関節炎（跛行）、腸炎、発育不良を起こす。若齢個体で影響が大きい。"
+    pen = "The reovirus replicates in tendon sheaths, joints, gut and liver, causing tenosynovitis/arthritis (lameness), enteritis and stunting, with the greatest impact in the young."
+    return cja, cen, pja, pen
+
+
+def _bornavirus(sp: str):
+    j, e = _ja(sp), _en(sp)
+    if sp in _BIRDS:
+        cja = f"{j}の鳥ボルナウイルス（ABV）感染による。腺胃拡張症（PDD）の原因ウイルスで、糞・分泌物を介して緩慢に伝播し、無症候キャリアも多い。"
+        cen = f"Caused by avian bornavirus (ABV) in {e}, the agent of proventricular dilatation disease, spread slowly via faeces/secretions with many asymptomatic carriers."
+        pja = "ABVは自律神経叢・中枢神経に感染し、免疫介在性の神経節神経炎を起こす。消化管運動の障害による腺胃拡張・未消化便・削痩と、運動失調・振戦などの神経症状を生じる。"
+        pen = "ABV infects autonomic ganglia and CNS provoking immune-mediated ganglioneuritis; loss of gut motility causes proventricular dilatation, undigested droppings and wasting, alongside ataxia and tremors."
+    else:
+        cja = f"{j}のボルナ病はボルナ病ウイルスの感染による。神経向性ウイルスで、感染経路は完全には解明されていない。"
+        cen = f"Caused by Borna disease virus in {e}, a neurotropic virus whose route of transmission is incompletely understood."
+        pja = "ボルナ病ウイルスは中枢神経に持続感染し、免疫介在性の非化膿性脳脊髄炎を起こして行動異常・運動失調・麻痺などの神経症状を生じる。"
+        pen = "Borna disease virus persistently infects the CNS causing immune-mediated non-suppurative meningoencephalitis with behavioural change, ataxia and paresis."
+    return cja, cen, pja, pen
+
+
+def _aleutian(sp: str):
+    j = _ja(sp)
+    cja = f"{j}のアリューシャン病はアリューシャン病ウイルス（アムドパルボウイルス）の感染による。糞・尿・唾液や汚染環境を介して伝播する。"
+    cen = "Caused by Aleutian disease virus (an amdoparvovirus), spread via faeces, urine, saliva and a contaminated environment."
+    pja = "本ウイルスは持続感染し、抗原過剰下で形成された免疫複合体が全身の血管・腎糸球体に沈着して、多クローン性高ガンマグロブリン血症・糸球体腎炎・血管炎・進行性削痩を起こす。"
+    pen = "The virus persists and, under antigen excess, drives immune-complex deposition in vessels and renal glomeruli, producing polyclonal hypergammaglobulinaemia, glomerulonephritis, vasculitis and progressive wasting."
+    return cja, cen, pja, pen
+
+
+def _arenavirus_lcmv(sp: str):
+    j = _ja(sp)
+    cja = f"{j}のリンパ球性脈絡髄膜炎はLCMウイルス（アレナウイルス）の感染による。保菌げっ歯類の尿・糞・唾液を介して伝播する人獣共通感染症。"
+    cen = "Caused by lymphocytic choriomeningitis virus (an arenavirus), transmitted via the urine, faeces and saliva of reservoir rodents — a zoonosis."
+    pja = "LCMVは中枢神経の脈絡叢・髄膜で複製し、免疫介在性の髄膜炎・脈絡膜炎を起こす。周産期感染では持続感染・成長遅延を、宿主外感染では髄膜炎症状を生じる。"
+    pen = "LCMV replicates in the choroid plexus and meninges provoking immune-mediated meningitis/choroiditis; perinatal infection leads to persistence and stunting, while later infection causes meningeal disease."
+    return cja, cen, pja, pen
+
+
+def _flavivirus(sp: str):
+    j = _ja(sp)
+    cja = f"{j}のフラビウイルス性脳炎（ウエストナイル熱・日本脳炎等）は蚊が媒介するフラビウイルスの感染による。鳥類が増幅動物となり、蚊の吸血で哺乳類・馬に伝播する人獣共通感染症。"
+    cen = "Caused by a mosquito-borne flavivirus (West Nile, Japanese encephalitis); birds amplify the virus and mosquitoes transmit it to mammals and horses — a zoonosis."
+    pja = "ウイルスは吸血で侵入後に増殖・ウイルス血症を経て中枢神経に到達し、神経細胞に感染して非化膿性脳脊髄炎を起こす。運動失調・筋振戦・麻痺・起立不能などの神経症状を生じる。"
+    pen = "After a mosquito bite the virus amplifies, produces viraemia and reaches the CNS, infecting neurons to cause non-suppurative encephalomyelitis with ataxia, muscle tremors, paresis and recumbency."
+    return cja, cen, pja, pen
+
+
+def _eia(sp: str):
+    cja = "馬伝染性貧血（EIA, スワンプフィーバー）はレンチウイルス（レトロウイルス科）の感染による。アブ等の吸血昆虫や汚染注射器・輸血を介して機械的に伝播する。日本では届出対象で根治療法はない。"
+    cen = "Caused by equine infectious anaemia virus (a lentivirus); it is transmitted mechanically by biting flies (tabanids), contaminated needles and transfusion. It is reportable with no curative therapy."
+    pja = "ウイルスはマクロファージに持続感染し、抗原変異を繰り返す。免疫介在性の赤血球破壊と血小板減少・血管炎により反復する発熱・貧血・浮腫・削痩を起こし、感染馬は生涯キャリアとなる。"
+    pen = "The virus persistently infects macrophages and undergoes antigenic variation; immune-mediated red-cell destruction, thrombocytopenia and vasculitis produce recurrent fever, anaemia, oedema and wasting, and infected horses remain lifelong carriers."
+    return cja, cen, pja, pen
+
+
+def _eva(sp: str):
+    cja = "馬ウイルス性動脈炎（EVA）はエクウイアルテリウイルス（アルテリウイルス）の感染による。呼吸器飛沫や、持続感染した種雄馬の精液を介した交配・人工授精で伝播する。"
+    cen = "Caused by equine arteritis virus (an arterivirus), spread by respiratory aerosol and, importantly, via the semen of persistently infected stallions during breeding/AI."
+    pja = "ウイルスは血管内皮・中膜平滑筋に感染して壊死性血管炎（動脈炎）を起こし、浮腫（四肢・陰嚢）・結膜炎・発熱を生じる。妊娠馬では胎盤血管障害により流産を招き、種雄馬は持続排出源となる。"
+    pen = "The virus infects vascular endothelium and medial smooth muscle causing necrotising arteritis with oedema (limbs/scrotum), conjunctivitis and fever; in mares placental vascular injury causes abortion, and stallions become persistent shedders."
+    return cja, cen, pja, pen
+
+
+def _birnavirus(sp: str):
+    j = _ja(sp)
+    cja = f"{j}の伝染性ファブリキウス嚢病（ガンボロ病）は伝染性ファブリキウス嚢病ウイルス（ビルナウイルス）による。糞口感染で伝播し、環境抵抗性が極めて高い。"
+    cen = "Caused by infectious bursal disease virus (a birnavirus); transmitted faecal-orally and extremely resistant in the environment (Gumboro disease)."
+    pja = "ウイルスはファブリキウス嚢のBリンパ球を破壊して重度の免疫抑制を起こし、ワクチン不応・二次感染の素因となる。急性型では出血・脱水・腎障害を伴う。"
+    pen = "The virus destroys B-lymphocytes in the bursa of Fabricius causing profound immunosuppression that impairs vaccine response and predisposes to secondary infection; the acute form adds haemorrhage, dehydration and renal injury."
+    return cja, cen, pja, pen
+
+
+def _henipavirus(sp: str):
+    j, e = _ja(sp), _en(sp)
+    cja = f"{j}のヘンドラ／ニパウイルス感染症はヘニパウイルス（パラミクソウイルス科）による。オオコウモリを自然宿主とし、その分泌物で汚染された飼料等を介して伝播する高病原性の人獣共通感染症。"
+    cen = f"Caused by a henipavirus (Hendra/Nipah, family Paramyxoviridae) in {e}; fruit bats are the reservoir and infection follows contact with feed/environment contaminated by bat secretions — a highly lethal zoonosis."
+    pja = "ウイルスは血管内皮に親和性を持ち、全身性の血管炎・血栓と、呼吸器・中枢神経の傷害を起こす。重度の呼吸器症状と脳炎を呈し致死率が高い。取扱いには厳重なバイオセーフティを要する。"
+    pen = "The virus is endotheliotropic, causing systemic vasculitis and thrombosis with respiratory and CNS injury; severe respiratory disease and encephalitis carry high mortality, and handling demands strict biosafety."
+    return cja, cen, pja, pen
+
+
+def _hantavirus(sp: str):
+    j, e = _ja(sp), _en(sp)
+    cja = f"{j}のハンタウイルス感染症はハンタウイルス（ブニヤウイルス目）による。保菌げっ歯類の尿・糞・唾液のエアロゾル吸入で伝播する人獣共通感染症で、げっ歯類自身はほぼ無症状のキャリアとなる。"
+    cen = f"Caused by a hantavirus (order Bunyavirales) in {e}, transmitted by inhaling aerosolised urine/faeces/saliva of reservoir rodents — a zoonosis in which the rodent host is a largely asymptomatic carrier."
+    pja = "ハンタウイルスは血管内皮に感染して血管透過性亢進を起こす。げっ歯類では持続感染・排出が続き、ヒトでは腎症候性出血熱や肺症候群の原因となるため公衆衛生上重要。"
+    pen = "Hantaviruses infect vascular endothelium increasing vascular permeability; rodents shed persistently while human infection causes haemorrhagic fever with renal syndrome or pulmonary syndrome, making it a public-health concern."
+    return cja, cen, pja, pen
+
+
 # name-pattern -> generator. Order matters: more specific keys first.
 _AGENTS: tuple[tuple[tuple[str, ...], object], ...] = (
     (("白血病ウイルス", "leukemia virus", "leukaemia virus", "felv"), _retrovirus_felv),
     (("免疫不全ウイルス", "immunodeficiency virus", "fiv"), _retrovirus_fiv),
+    (("馬伝染性貧血", "equine infectious an", "swamp fever"), _eia),
+    (("馬ウイルス性動脈炎", "equine viral arteritis"), _eva),
+    (("アリューシャン", "aleutian"), _aleutian),
+    (("脈絡髄膜炎", "choriomeningitis", "lcmv"), _arenavirus_lcmv),
+    (("ハンタウイルス", "hantavirus"), _hantavirus),
+    (("ヘンドラ", "hendra", "ニパ", "nipah", "henipavirus"), _henipavirus),
+    (("ウエストナイル", "west nile", "日本脳炎", "japanese encephalitis", "flavivirus"), _flavivirus),
+    (("ファブリキウス嚢", "infectious bursal", "gumboro", "ガンボロ", "birnavirus"), _birnavirus),
+    (("ボルナ", "borna"), _bornavirus),
+    (
+        (
+            "イリドウイルス",
+            "iridovirus",
+            "ラナウイルス",
+            "ranavirus",
+            "カエルウイルス",
+            "frog virus 3",
+            "ambystoma tigrinum",
+        ),
+        _iridovirus,
+    ),
+    (("サーコウイルス", "circovirus", "嘴羽毛", "beak and feather", "pbfd"), _circovirus),
+    (("ポリオーマ", "polyomavirus"), _polyomavirus),
+    (("レオウイルス", "reovirus"), _reovirus),
+    (
+        (
+            "ニューカッスル",
+            "newcastle",
+            "パラミクソ",
+            "paramyxo",
+            "センダイ",
+            "sendai",
+            "メタニューモ",
+            "metapneumovirus",
+        ),
+        _paramyxovirus,
+    ),
+    (("マレック", "marek", "伝染性喉頭気管炎", "laryngotracheitis", "サイトメガロ", "cytomegalo"), _herpesvirus),
     # Parvovirus/panleukopenia BEFORE distemper: feline panleukopenia is named
     # "Feline Panleukopenia (Feline Distemper)" and must resolve to FPV, not CDV.
     (("パルボ", "parvo", "汎白血球減少", "panleukopenia"), _parvovirus),
@@ -264,10 +480,22 @@ _AGENTS: tuple[tuple[tuple[str, ...], object], ...] = (
     # "カリシウイルス"/"calicivirus" (not bare "カリシ"/"calici") so "カリシン過敏症"
     # (Culicoides hypersensitivity) is not miscaught.
     (
-        ("カリシウイルス", "calicivirus", "ウサギ出血", "rabbit haemorrhagic", "rabbit hemorrhagic", "rhdv"),
+        (
+            "カリシウイルス",
+            "calicivirus",
+            "ノロウイルス",
+            "norovirus",
+            "ウサギ出血",
+            "rabbit haemorrhagic",
+            "rabbit hemorrhagic",
+            "rhdv",
+        ),
         _calicivirus,
     ),
-    (("コロナ", "coronavirus", "伝染性腹膜炎", "infectious peritonitis"), _coronavirus),
+    (
+        ("コロナ", "coronavirus", "伝染性腹膜炎", "infectious peritonitis", "伝染性気管支炎", "infectious bronchitis"),
+        _coronavirus,
+    ),
     (("インフルエンザ", "influenza"), _influenza),
     # "adenovirus" (not bare "adeno") so adenoma/adenocarcinoma are not miscaught.
     (("アデノ", "adenovirus", "伝染性肝炎", "infectious canine hepatitis"), _adenovirus),
