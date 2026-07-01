@@ -1706,6 +1706,78 @@ def apply_curated_etiology(conn) -> int:
     return n
 
 
+def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
+    """Give named-pathogen viral diseases pathogen-specific causes / pathophysiology.
+
+    Diseases whose name identifies the virus (parvovirus, herpesvirus, rabies …)
+    otherwise carry the generic viral category template. The JSON pass
+    (fix_named_pathogens.py) handles overlay entries; this served-DB safety net
+    catches module/supplementary-sourced records. Fields are replaced only when
+    they hold a recognised category template or stub, so curated prose is kept
+    (and a curated JA field with a still-templated EN field gets only the EN
+    upgraded)."""
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        build_etiology_fingerprints,
+        fingerprint_etiology,
+        gen_causes_ja,
+        gen_pathophysiology_ja,
+    )
+    from scripts.template_elimination.curated_etiology import STUB_SIGNATURES
+    from scripts.template_elimination.pathogen_library import resolve_viral_agent, viral_clinical_fields
+
+    causes_fps = build_etiology_fingerprints(gen_causes_ja)
+    patho_fps = build_etiology_fingerprints(gen_pathophysiology_ja)
+    CAUSES_JA_MARKS = ("の原因はウイルス感染である", "特異的ウイルス病原体が宿主細胞")
+    CAUSES_EN_MARKS = (
+        "viral infection. transmission via",
+        "infectious diseases are caused by pathogenic organisms",
+        "multifactorial etiology depending on disease type",
+    )
+    PATHO_JA_MARKS = ("病態生理はウイルス侵入", "病原ウイルスは特異的細胞受容体")
+    PATHO_EN_MARKS = ("pathophysiology of infectious diseases",)
+
+    def _ja_ok(text, fps, marks):
+        if not text:
+            return True
+        if fingerprint_etiology(text, fps) is not None:
+            return True
+        if any(s in text for s in STUB_SIGNATURES):
+            return True
+        return any(m in text for m in marks)
+
+    def _en_ok(text, marks):
+        if not text:
+            return True
+        low = text.lower()
+        return any(m in low for m in marks)
+
+    rows = conn.execute(
+        "SELECT id, species, name, name_ja, causes_ja, causes, pathophysiology_ja, pathophysiology FROM diseases"
+    ).fetchall()
+    counts = {"causes_ja": 0, "causes": 0, "pathophysiology_ja": 0, "pathophysiology": 0}
+    for row in rows:
+        if resolve_viral_agent(row["name_ja"] or "", row["name"] or "") is None:
+            continue
+        fields = viral_clinical_fields((row["species"] or "").lower(), row["name_ja"] or "", row["name"] or "")
+        if not fields:
+            continue
+        checks = {
+            "causes_ja": _ja_ok(row["causes_ja"] or "", causes_fps, CAUSES_JA_MARKS),
+            "causes": _en_ok(row["causes"] or "", CAUSES_EN_MARKS),
+            "pathophysiology_ja": _ja_ok(row["pathophysiology_ja"] or "", patho_fps, PATHO_JA_MARKS),
+            "pathophysiology": _en_ok(row["pathophysiology"] or "", PATHO_EN_MARKS),
+        }
+        for field, ok in checks.items():
+            if ok and fields[field] != (row[field] or ""):
+                conn.execute(
+                    f"UPDATE diseases SET {field} = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                    (fields[field], row["id"]),
+                )
+                counts[field] += 1
+    return counts
+
+
 def recategorize_etiology_fields(conn) -> dict[str, int]:
     """Fix causes_ja / pathophysiology_ja that carry the WRONG category template.
 
@@ -1878,6 +1950,16 @@ def main(db_path: str | None = None):
         # (laminitis, hepatic fibrosis) that resist single-category templating.
         cur_e = apply_curated_etiology(conn)
         print(f"  → {cur_e} curated etiology/pathophysiology replacements")
+
+        # Named-pathogen viral diseases (parvovirus, herpesvirus, rabies, …):
+        # replace the generic viral category template with pathogen-specific
+        # causes / pathophysiology (JA+EN). Catches module-sourced entries the
+        # JSON pass (fix_named_pathogens.py) cannot reach.
+        vir = regenerate_named_pathogen_etiology(conn)
+        print(
+            f"  → named-pathogen etiology: causes {vir['causes_ja']} JA / {vir['causes']} EN, "
+            f"pathophysiology {vir['pathophysiology_ja']} JA / {vir['pathophysiology']} EN"
+        )
 
         # Correct miscategorised causes_ja / pathophysiology_ja (e.g. ferret
         # adrenal disease tagged renal, non-toxicoses tagged toxicity) and drop

@@ -3671,3 +3671,87 @@ def test_served_db_en_prognosis_prevention_pathophysiology_grounded():
         if ratio >= 0.40:
             failures.append(f"{field} is {ratio:.0%} templated ({templated}/{total})")
     assert not failures, "English grounding regressed:\n" + "\n".join(failures)
+
+
+# ---------------------------------------------------------------------------
+# Named-pathogen viral etiology curation (2026-07)
+# ---------------------------------------------------------------------------
+# Diseases that name their causative virus shipped the generic viral category
+# template for causes/pathophysiology in both languages. pathogen_library.py now
+# supplies pathogen-specific, host-aware etiology; these tests guard the resolver
+# (no non-viral / negated / cross-host false positives) and the applied data.
+
+
+def test_pathogen_library_resolver_precision():
+    from scripts.template_elimination.pathogen_library import (
+        resolve_viral_agent,
+        viral_clinical_fields,
+    )
+
+    # Genuine viral diseases resolve.
+    assert resolve_viral_agent("犬パルボウイルス感染症", "Canine Parvovirus") is not None
+    assert resolve_viral_agent("狂犬病", "Rabies") is not None
+    # Non-viral must NOT resolve.
+    assert resolve_viral_agent("猫喘息", "Feline Asthma") is None
+    assert resolve_viral_agent("腸腺癌", "Intestinal Adenocarcinoma") is None  # not "adenovirus"
+    assert resolve_viral_agent("副腎皮質腺腫", "Adrenocortical Adenoma") is None
+    assert resolve_viral_agent("夏癬（カリシン過敏症）", "Sweet Itch (Culicoides Hypersensitivity)") is None
+    # Negated names must NOT resolve.
+    assert resolve_viral_agent("猫角膜炎（非ヘルペス性）", "Feline Keratitis (Non-Herpetic)") is None
+    # Feline retroviruses must not stamp feline prose on a non-cat lentivirus.
+    assert viral_clinical_fields("exotic_other", "サル免疫不全ウイルス", "Simian Immunodeficiency Virus") is None
+    assert viral_clinical_fields("cat", "猫免疫不全ウイルス感染症", "Feline Immunodeficiency Virus (FIV)") is not None
+
+
+def test_named_pathogen_causes_cite_correct_pathogen():
+    from scripts.template_elimination.pathogen_library import viral_clinical_fields
+
+    # Feline panleukopenia => FPV, never CPV-2 (canine virus).
+    fpv = viral_clinical_fields("cat", "猫汎白血球減少症", "Feline Panleukopenia (Feline Distemper)")
+    assert "FPV" in fpv["causes_ja"] and "CPV-2" not in fpv["causes_ja"]
+    assert "FPV" in fpv["causes"] and "CPV-2" not in fpv["causes"]
+    # Species-adapted herpesviruses are named correctly.
+    assert "FHV-1" in viral_clinical_fields("cat", "猫ヘルペスウイルス", "Feline Herpesvirus")["causes"]
+    assert "CHV-1" in viral_clinical_fields("dog", "犬ヘルペスウイルス", "Canine Herpesvirus")["causes"]
+    assert "EHV" in viral_clinical_fields("horse", "馬ヘルペスウイルス", "Equine Herpesvirus")["causes"]
+    # Rabies names the lyssavirus.
+    assert "yssavirus" in viral_clinical_fields("dog", "狂犬病", "Rabies")["causes"]
+
+
+def test_no_generic_viral_causes_on_named_pathogens_in_json():
+    """A disease that names its virus must not still carry the generic viral
+    'Viral infection. Transmission via …' / 'の原因はウイルス感染である' template."""
+    from scripts.template_elimination.pathogen_library import viral_clinical_fields
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    species_norm = {"Cat": "cat", "Dog": "dog", "Horse": "horse", "Rabbit": "rabbit"}
+    offenders = []
+    for e in entries:
+        nj, ne = e.get("name_ja") or "", e.get("name") or ""
+        sp = species_norm.get(e.get("species"), (e.get("species") or "").lower())
+        # Gate on what we actually curate — a non-cat lentivirus resolves but is
+        # deliberately left alone, so it is not an offender.
+        if viral_clinical_fields(sp, nj, ne) is None:
+            continue
+        cja = e.get("causes_ja") or ""
+        cen = e.get("causes") or ""
+        if "の原因はウイルス感染である" in cja or cen.startswith("Viral infection. Transmission via"):
+            offenders.append(ne or nj)
+    assert not offenders, f"{len(offenders)} named-pathogen diseases keep the generic viral template: {offenders[:10]}"
+
+
+def test_served_db_named_pathogen_etiology_is_specific():
+    conn = _served_db_or_skip()
+    try:
+        rows = conn.execute(
+            "SELECT causes_ja, causes FROM diseases WHERE name IN "
+            "('Feline Panleukopenia (Feline Distemper)','Canine Herpesvirus','Rabies','Avian Influenza')"
+        ).fetchall()
+    finally:
+        conn.close()
+    # None of these should carry the generic viral template in either language.
+    for cja, cen in rows:
+        assert "の原因はウイルス感染である" not in (cja or "")
+        assert not (cen or "").startswith("Viral infection. Transmission via")
