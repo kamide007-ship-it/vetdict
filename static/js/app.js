@@ -1750,7 +1750,7 @@ function toggleKbShortcuts(){
     panel.setAttribute("aria-labelledby","kbShortcutsTitle");
     const isJa=currentLang==="ja";
     const closeLabel=isJa?"閉じる":"Close";
-    panel.innerHTML=`<div class="kb-shortcuts-inner"><div class="kb-shortcuts-header"><h3 id="kbShortcutsTitle">${isJa?"キーボードショートカット":"Keyboard Shortcuts"}</h3><button type="button" class="kb-close" aria-label="${closeLabel}">✕</button></div><div class="kb-shortcuts-body"><div class="kb-group"><div class="kb-title">${isJa?"ナビゲーション":"Navigation"}</div><div class="kb-row"><kbd>1</kbd><span>${isJa?"症状チェッカー":"Symptom Checker"}</span></div><div class="kb-row"><kbd>2</kbd><span>${isJa?"疾患データベース":"Disease Database"}</span></div><div class="kb-row"><kbd>3</kbd><span>${isJa?"AIチャット":"AI Chat"}</span></div><div class="kb-row"><kbd>4</kbd><span>${isJa?"薬品辞書":"Drug Dictionary"}</span></div><div class="kb-row"><kbd>5</kbd><span>${isJa?"鎮静・麻酔":"Anesthesia"}</span></div><div class="kb-row"><kbd>6</kbd><span>${isJa?"緊急対応":"Emergency"}</span></div></div><div class="kb-group"><div class="kb-title">${isJa?"操作":"Actions"}</div><div class="kb-row"><kbd>/</kbd><span>${isJa?"検索にフォーカス":"Focus search"}</span></div><div class="kb-row"><kbd>Esc</kbd><span>${isJa?"パネルを閉じる":"Close panel"}</span></div><div class="kb-row"><kbd>?</kbd><span>${isJa?"このヘルプ":"This help"}</span></div><div class="kb-row"><kbd>←→↑↓</kbd><span>${isJa?"動物種グリッドを移動":"Navigate species grid"}</span></div></div></div></div>`;
+    panel.innerHTML=`<div class="kb-shortcuts-inner"><div class="kb-shortcuts-header"><h3 id="kbShortcutsTitle">${isJa?"キーボードショートカット":"Keyboard Shortcuts"}</h3><button type="button" class="kb-close" aria-label="${closeLabel}">✕</button></div><div class="kb-shortcuts-body"><div class="kb-group"><div class="kb-title">${isJa?"ナビゲーション":"Navigation"}</div><div class="kb-row"><kbd>1</kbd><span>${isJa?"症状チェッカー":"Symptom Checker"}</span></div><div class="kb-row"><kbd>2</kbd><span>${isJa?"疾患データベース":"Disease Database"}</span></div><div class="kb-row"><kbd>3</kbd><span>${isJa?"AIチャット":"AI Chat"}</span></div><div class="kb-row"><kbd>4</kbd><span>${isJa?"薬品辞書":"Drug Dictionary"}</span></div><div class="kb-row"><kbd>5</kbd><span>${isJa?"鎮静・麻酔":"Anesthesia"}</span></div><div class="kb-row"><kbd>6</kbd><span>${isJa?"緊急対応":"Emergency"}</span></div></div><div class="kb-group"><div class="kb-title">${isJa?"操作":"Actions"}</div><div class="kb-row"><kbd>/</kbd><span>${isJa?"検索にフォーカス":"Focus search"}</span></div><div class="kb-row"><kbd>Esc</kbd><span>${isJa?"パネルを閉じる":"Close panel"}</span></div><div class="kb-row"><kbd>?</kbd><span>${isJa?"このヘルプ":"This help"}</span></div><div class="kb-row"><kbd>←→↑↓</kbd><span>${isJa?"動物種グリッドを移動":"Navigate species grid"}</span></div><div class="kb-row"><kbd>↑↓</kbd><span>${isJa?"疾患・薬品リストを移動 / Enterで開く":"Move through disease/drug list · Enter to open"}</span></div></div></div></div>`;
     document.body.appendChild(panel);
     panel.querySelector(".kb-close").addEventListener("click",()=>_kbPanelClose());
     panel.addEventListener("click",e=>{if(e.target===panel)_kbPanelClose();});
@@ -3978,6 +3978,14 @@ function filterDiseaseDb(letter){
   renderDiseaseDb();
 }
 
+/* Emergency flag for disease-DB rows. Only the "emergency" severity is badged —
+   it is a clean, high-precision signal (verified: pyothorax, saddle thrombus,
+   blocked cat, DKA…), so a clinician scanning the list spots true emergencies at
+   a glance without the badge becoming noise. */
+function severityBadge(sev){
+  if((sev||"").toLowerCase()!=="emergency")return "";
+  return `<span class="d-urgency-badge badge-emergency" title="${currentLang==="ja"?"緊急疾患":"Emergency"}">🚨 ${currentLang==="ja"?"緊急":"Emergency"}</span>`;
+}
 let diseaseDisplayLimit=100;
 function renderDiseaseDb(){
   const list=document.getElementById("diseaseDbList");
@@ -4076,7 +4084,7 @@ function renderDiseaseDb(){
     const _dCatLbl=currentLang==="ja"?(_dCatObj?.ja||"その他"):(_dCatObj?.en||"Other");
     return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false">
       <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span></div>
-      <div class="d-meta"><span class="d-cat-badge" data-cat="${escapeHtml(_dCat)}">${escapeHtml(_dCatLbl)}</span></div>
+      <div class="d-meta"><span class="d-cat-badge" data-cat="${escapeHtml(_dCat)}">${escapeHtml(_dCatLbl)}</span>${severityBadge(d.severity)}</div>
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
         <dt>${t("dtDescription")}</dt><dd>${escapeHtml(desc)}</dd>
@@ -6222,7 +6230,24 @@ function _attachDbItemHandlers(container){
     if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)p.scrollIntoView({behavior:"smooth",block:"start"});return;}
     if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);
   });
-  container.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")&&!e.target.closest(".disease-detail.open")){e.preventDefault();toggleDbItem(item);}}});
+  container.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){const item=e.target.closest(".disease-db-item");if(item&&!e.target.closest("a")&&!e.target.closest(".disease-detail.open")){e.preventDefault();toggleDbItem(item);}return;}
+    /* Roving arrow navigation between disease rows so a whole list can be scanned
+       from the keyboard. Only act when a collapsed row itself is focused — never
+       hijack arrows inside an open detail panel or a form field. */
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"||e.key==="Home"||e.key==="End"){
+      const item=e.target.closest(".disease-db-item");
+      if(!item||e.target!==item)return;
+      const items=Array.prototype.slice.call(container.querySelectorAll(".disease-db-item"));
+      const idx=items.indexOf(item);
+      let next;
+      if(e.key==="ArrowDown")next=items[idx+1];
+      else if(e.key==="ArrowUp")next=items[idx-1];
+      else if(e.key==="Home")next=items[0];
+      else next=items[items.length-1];
+      if(next){e.preventDefault();next.focus();next.scrollIntoView({block:"nearest"});}
+    }
+  });
 }
 
 /* Toggle disease DB item */
