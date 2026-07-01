@@ -1145,6 +1145,15 @@ def _dysecdysis_reptile(sp):
     )
 
 
+def _dysecdysis_amphibian(sp):
+    return (
+        "両生類の脱皮不全（ディセクダイシス）は、低湿度・不適切な水質・脱水・栄養不良（ビタミンA欠乏）・甲状腺機能異常など不適切な飼育環境による皮膚の正常な脱皮周期の障害。ツボカビ症（Bd/Bsal感染）も脱皮異常を引き起こす基礎疾患の一つとなりうるが、大半の症例は非感染性の飼育管理要因による。",
+        "Dysecdysis in amphibians is disruption of the normal skin-shedding cycle from inadequate husbandry — low humidity, poor water quality, dehydration, malnutrition (vitamin A deficiency) or thyroid dysfunction. Chytridiomycosis (Bd/Bsal infection) can also underlie abnormal shedding, but most cases stem from non-infectious husbandry factors.",
+        "古い角質層が部分的に付着したまま残留し、特に趾端では残留した皮膚が輪状に締め付けて血流を阻害し（絞扼）、虚血性壊死に至ることがある。両生類は皮膚呼吸・皮膚からの水分吸収に依存するため、脱皮不全は健常な皮膚が担うガス交換・水分代謝の機能も損なう。正常な脱皮では自己摂食するため、皮膚残存の目視自体が疾患の徴候となる。",
+        "Old keratinised skin remains partially attached; at the digit tips the retained skin can form a constricting band that impairs blood flow, leading to ischaemic necrosis. Because amphibians depend on cutaneous respiration and water uptake through the skin, dysecdysis also compromises these functions of otherwise healthy skin; since normal sloughed skin is self-consumed, visibly retained skin is itself a sign of disease.",
+    )
+
+
 def _retained_spectacle_reptile(sp):
     j, e = _sp(sp), _spe(sp)
     return (
@@ -1584,6 +1593,12 @@ _FLAGSHIPS: tuple[tuple[frozenset | None, tuple[str, ...], tuple[str, ...], obje
         ("脱皮不全", "dysecdysis", "retained shed"),
         ("スペクタクル", "spectacle"),
         _dysecdysis_reptile,
+    ),
+    (
+        frozenset({"amphibian"}),
+        ("脱皮不全", "dysecdysis", "retained shed", "abnormal shedding"),
+        ("スペクタクル", "spectacle"),
+        _dysecdysis_amphibian,
     ),
     (
         frozenset({"reptile", "tortoise", "snake", "lizard"}),
