@@ -3937,3 +3937,119 @@ def test_no_generic_parasite_causes_on_named_parasites_in_json():
         ):
             offenders.append(ne or nj)
     assert not offenders, f"{len(offenders)} named-parasite diseases keep the generic template: {offenders[:10]}"
+
+
+# ---------------------------------------------------------------------------
+# Named-nutrient (deficiency/excess) etiology curation (2026-07)
+# ---------------------------------------------------------------------------
+def test_nutritional_library_resolver_precision():
+    from scripts.template_elimination.nutritional_library import (
+        nutrient_clinical_fields,
+        resolve_nutrient_agent,
+    )
+
+    assert resolve_nutrient_agent("壊血病", "Scurvy") is not None
+    assert resolve_nutrient_agent("くる病", "Rickets") is not None
+    assert resolve_nutrient_agent("栄養性二次性上皮小体機能亢進症", "NSHP") is not None
+    # Toxicoses are poisonings, not nutritional deficiency.
+    assert resolve_nutrient_agent("亜鉛中毒", "Zinc Toxicosis") is None
+    assert resolve_nutrient_agent("ビタミンD中毒", "Vitamin D Toxicosis") is None
+    # Primary/renal HPT and thyroid tumours are not nutritional.
+    assert resolve_nutrient_agent("原発性上皮小体機能亢進症", "Primary Hyperparathyroidism") is None
+    assert resolve_nutrient_agent("甲状腺癌", "Thyroid Carcinoma") is None
+    assert resolve_nutrient_agent("肥満細胞腫", "Mast Cell Tumor") is None  # not "obesity"
+    # Taurine deficiency is feline-specific.
+    assert nutrient_clinical_fields("dog", "タウリン欠乏症", "Taurine Deficiency") is None
+    assert nutrient_clinical_fields("cat", "タウリン欠乏症", "Taurine Deficiency") is not None
+
+
+def test_named_nutrient_causes_cite_correct_nutrient():
+    from scripts.template_elimination.nutritional_library import nutrient_clinical_fields
+
+    # Guinea pig scurvy names the vitamin-C synthesis defect.
+    scurvy = nutrient_clinical_fields("guinea_pig", "壊血病", "Scurvy")
+    assert "vitamin c" in scurvy["causes"].lower() and "collagen" in scurvy["pathophysiology"].lower()
+    # NSHP names calcium/phosphorus/vitamin-D and PTH mechanism.
+    nshp = nutrient_clinical_fields("reptile", "栄養性二次性上皮小体機能亢進症", "NSHP")
+    assert "calcium" in nshp["causes"].lower() and "parathyroid" in nshp["pathophysiology"].lower()
+    # Avian goitre is iodine deficiency, not a tumour.
+    goitre = nutrient_clinical_fields("bird", "甲状腺腫", "Goiter")
+    assert "iodine" in goitre["causes"].lower()
+
+
+def test_no_generic_nutritional_causes_on_named_nutrients_in_json():
+    from scripts.template_elimination.nutritional_library import nutrient_clinical_fields
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    species_norm = {"Cat": "cat", "Dog": "dog", "Horse": "horse", "Rabbit": "rabbit"}
+    offenders = []
+    for e in entries:
+        nj, ne = e.get("name_ja") or "", e.get("name") or ""
+        sp = species_norm.get(e.get("species"), (e.get("species") or "").lower())
+        if nutrient_clinical_fields(sp, nj, ne) is None:
+            continue
+        cen = (e.get("causes") or "").lower()
+        if (
+            cen.startswith("caused by dietary deficiency or excess")
+            or cen.startswith("nutritional imbalance")
+            or cen.startswith("nutritional diseases result from")
+        ):
+            offenders.append(ne or nj)
+    assert not offenders, f"{len(offenders)} named-nutrient diseases keep the generic template: {offenders[:10]}"
+
+
+# ---------------------------------------------------------------------------
+# Non-infectious flagship etiology curation (bilingual, 2026-07)
+# ---------------------------------------------------------------------------
+def test_flagship_library_resolver_precision():
+    from scripts.template_elimination.flagship_noninfectious_library import (
+        flagship_clinical_fields,
+        resolve_flagship,
+    )
+
+    assert resolve_flagship("甲状腺機能亢進症", "Hyperthyroidism", "cat") is not None
+    assert resolve_flagship("動脈管開存症", "Patent Ductus Arteriosus", "dog") is not None
+    assert resolve_flagship("離断性骨軟骨症", "Osteochondritis Dissecans (OCD)", "dog") is not None
+    # Acronym-substring collisions must NOT resolve.
+    assert resolve_flagship("強迫性障害", "Compulsive Disorder (Canine OCD)", "dog") is None  # not osteochondritis
+    assert (
+        resolve_flagship("色素性ぶどう膜炎", "Golden Retriever Pigmentary Uveitis", "dog") is None
+    )  # "gme" ⊄ pigmentary
+    # Species gating and diagnosis collisions.
+    assert flagship_clinical_fields("cat", "甲状腺機能低下症", "Hypothyroidism") is None
+    assert flagship_clinical_fields("cat", "原発性副甲状腺機能亢進症", "Primary Hyperparathyroidism") is None
+    assert flagship_clinical_fields("dog", "水疱性類天疱瘡", "Bullous Pemphigoid") is None  # 類天疱瘡 excluded
+
+
+def test_flagship_causes_are_bilingual_and_specific():
+    from scripts.template_elimination.flagship_noninfectious_library import flagship_clinical_fields
+
+    ht = flagship_clinical_fields("cat", "甲状腺機能亢進症", "Hyperthyroidism")
+    assert "hyperplasia" in ht["causes"].lower() and "甲状腺" in ht["causes_ja"]
+    pda = flagship_clinical_fields("dog", "動脈管開存症", "Patent Ductus Arteriosus")
+    assert "ductus arteriosus" in pda["causes"].lower() and "shunt" in pda["pathophysiology"].lower()
+    sat = flagship_clinical_fields("cat", "大動脈血栓塞栓症", "Saddle Thrombus")
+    assert "thrombus" in sat["causes"].lower() and "左心房" in sat["causes_ja"]
+    # Multi-species generators use the ENGLISH species name in the English text.
+    hyp = flagship_clinical_fields("dog", "全身性高血圧", "Systemic Hypertension")
+    assert "in dogs" in hyp["causes"] and "犬" not in hyp["causes"]
+
+
+def test_served_db_flagship_english_causes_curated():
+    conn = _served_db_or_skip()
+    try:
+        rows = conn.execute(
+            "SELECT name, causes FROM diseases WHERE name IN "
+            "('Patent Ductus Arteriosus (PDA)','Aortic Thromboembolism (Saddle Thrombus)',"
+            "'Brachycephalic Airway Syndrome','Legg-Calvé-Perthes Disease')"
+        ).fetchall()
+    finally:
+        conn.close()
+    for _name, causes in rows:
+        low = (causes or "").lower()
+        assert not low.startswith("cardiac etiology")
+        assert not low.startswith("multifactorial etiology")
+        assert not low.startswith("caused by physical trauma")
+        assert not low.startswith("caused by progressive deterioration")

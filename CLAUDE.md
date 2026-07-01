@@ -1557,3 +1557,71 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 
 ### named-agent キュレーション累計（第2〜5弾）
 毒物64 + 原虫treatment11 + ウイルス28 + 細菌24 + 真菌14 + 寄生虫22 = **163病原体生成器**。感染症の全系統（ウイルス・細菌・真菌・寄生虫）の named-pathogen 化が完了し、計 **約1,000疾患**の病因・病態生理を汎用テンプレートから日英の疾患特異的記述に置換。
+
+## 2026-07セッション（第6弾: named-agent キュレーション拡充 — 栄養性欠乏/過剰）
+
+### 栄養性 named-nutrient ライブラリ（`scripts/template_elimination/nutritional_library.py` 新規）
+感染症に続く最後の「名前が決定論的に原因を示す」病因クラス。汎用栄養テンプレート（JA「…栄養バランスの是正が中心…」/ EN "Caused by dietary deficiency or excess…" / "Nutritional imbalance…" / "Nutritional diseases result from…"）を、疾患名が示す栄養素に基づき疾患特異化。
+- **12の栄養素生成器**（causes + pathophysiology を JA+EN、種特異的分岐あり）:
+  - カルシウム/NSHP・代謝性骨疾患（爬虫類 UV-B 分岐）、ビタミンA、ビタミンD/くる病、ビタミンE/セレン（白筋症）、ビタミンC/壊血病（モルモット等の合成不能種）、ビタミンB群、チアミン(B1)、ヨウ素/甲状腺腫、亜鉛、タウリン（猫特異的）、蛋白エネルギー栄養失調/悪液質、肥満
+- **致命的な誤適用をレビューで回避**:
+  - `中毒`/`toxicosis`（亜鉛中毒・ビタミンD中毒＝毒性で toxicology 管轄）を欠乏症と誤記しないよう除外
+  - `原発性`/`腎性`上皮小体機能亢進症（腫瘍性/腎性で非栄養性）を NSHP と誤適用しないよう除外
+  - `肥満細胞腫`(mast cell tumor)≠`肥満`(obesity)、`甲状腺癌`/`甲状腺腫瘍`≠`甲状腺腫`(goiter=ヨウ素欠乏)
+  - タウリン欠乏は猫のみ（非猫には猫用文を付与しない）
+
+### 統合
+- `fix_named_pathogens.py` / `migrate_to_sqlite.py` を viral→bacterial→fungal→parasite→nutrient の5段に拡張。
+
+### 効果（配信SQLite実測）
+- **205栄養性疾患**を疾患特異的病因・病態生理に置換。
+- EN causes の distinct 値: 1,004（第5弾後）→ **1,126**（全バッチ前 604 から +86%）。
+
+### 回帰テスト（+3件）
+- `test_nutritional_library_resolver_precision` — 中毒/原発性HPT/甲状腺癌/肥満細胞腫を除外、タウリン猫限定
+- `test_named_nutrient_causes_cite_correct_nutrient` — 壊血病=ビタミンC/コラーゲン、NSHP=Ca/PTH、鳥甲状腺腫=ヨウ素
+- `test_no_generic_nutritional_causes_on_named_nutrients_in_json`
+
+### テスト・CI
+- フルスイート **3,482件合格**（34 skip、+3新規）、ruff clean
+
+### named-agent キュレーション累計（第2〜6弾）
+毒物64 + 原虫11 + ウイルス28 + 細菌24 + 真菌14 + 寄生虫22 + 栄養素12 = **175病原体/病因生成器**。感染症の全系統＋栄養性まで、名前が決定論的に原因を示す病因クラスを網羅し、計 **約1,200疾患**の病因・病態生理を汎用テンプレートから日英の疾患特異的記述に置換。
+
+## 2026-07セッション（第7弾: 非感染性フラグシップの bilingual キュレーション）
+
+### 背景: 既存フラグシップは JA のみ、EN は category テンプレートのまま
+`curated_etiology` / `curated_common_diseases` は ~120 のフラグシップ疾患に優れた JA 病因・病態を供給するが **JA 専用**のため、これらのレコードの **英語 causes は "Cardiac etiology…"/"Endocrine or metabolic dysfunction…" 等の category テンプレートのまま**だった。加えて、名前が原因を一意に決めない非感染性フラグシップ（猫甲状腺機能亢進症・PDA・サドル血栓・レッグペルテス・BOAS 等）は未キュレートだった。
+
+### `scripts/template_elimination/flagship_noninfectious_library.py`（新規、日英両対応）
+非感染性の病因は病原体のように name-deterministic ではないため、明確に定義された高頻度フラグシップに限り教科書的知識を**日英両方**でキュレート。既存 pipeline（`fix_named_pathogens`）に接続し、category テンプレート/スタブのフィールドのみ置換するので、**JA がキュレート済みのレコードは英語のみアップグレード**され JA は温存される。
+- **20の生成器**（causes + pathophysiology を JA+EN）:
+  - 内分泌（猫）: 甲状腺機能亢進症・原発性アルドステロン症・先端巨大症、全身性高血圧（続発性）
+  - 心臓: 猫サドル血栓、犬先天性（PDA・大動脈弁下狭窄・肺動脈狭窄）
+  - 運動器/発育（犬）: レッグ・カルベ・ペルテス病・OCD・汎骨炎・HOD・ウォブラー症候群
+  - 気道（犬）: 短頭種気道症候群(BOAS)
+  - 神経（犬）: 認知機能不全症候群(CDS)・肉芽腫性髄膜脳脊髄炎(GME/MUO)
+  - 皮膚/免疫: 脂腺炎・落葉状天疱瘡・脱毛症X（犬）、好酸球性肉芽腫群（猫）
+- **頭字語の部分文字列衝突をレビューで回避**:
+  - bare `ocd` → 「Compulsive Disorder (Canine OCD)」（行動疾患）を誤検出 → `osteochondritis dissecans`/`骨軟骨症`
+  - bare `gme` → 「pi**gme**ntary uveitis」を誤検出 → `granulomatous meningoencephal`/`肉芽腫性髄膜脳`
+  - `類天疱瘡`(pemphigoid)≠`天疱瘡`(pemphigus)、`副甲状腺`/`甲状腺機能低下`除外、`肺高血圧`≠全身性高血圧
+  - 種ゲーティング（猫内分泌・犬先天性心疾患等）+ 多種生成器は英語に英語種名を使用
+
+### 効果（配信SQLite実測）
+- **50疾患**（品種・解剖・種別バリアント含む）を日英の疾患特異的病因・病態に置換。既存 JA キュレート済みフラグシップの**英語 causes をテンプレート→キュレートに昇格**。
+
+### 回帰テスト（+3件）
+- `test_flagship_library_resolver_precision` — ocd/gme頭字語衝突・pemphigoid・種ゲーティング除外
+- `test_flagship_causes_are_bilingual_and_specific` — 日英両方が疾患特異的、多種生成器の英語種名検証
+- `test_served_db_flagship_english_causes_curated` — 配信DBで PDA/サドル血栓等の英語 causes が category テンプレートでない
+
+### テスト・CI
+- フルスイート **3,485件合格**（34 skip、+3新規）、ruff clean
+
+### 非感染性フラグシップ拡充 第2弾（既存JAキュレート済み疾患の英語 backfill）
+`curated_etiology` の~120フラグシップは JA 専用のため英語 causes が category テンプレートのままだった。`flagship_noninfectious_library.py` に高頻度の内科フラグシップ16件を**日英**で追加。JSON は既に curated JA を持つ（テンプレートでない）ため、pipeline は**英語のみ**を安全に置換し、curated JA は温存される。
+- 追加（犬猫）: GDV・膵炎・甲状腺機能低下症・クッシング症候群・慢性腎臓病・アトピー性皮膚炎・変形性関節症・椎間板ヘルニア・特発性てんかん・拡張型心筋症・粘液腫様僧帽弁変性症・糖尿病・炎症性腸疾患(猫)・肝リピドーシス(猫)・喘息(猫)
+- curated_etiology と同じ除外を踏襲（甲状腺機能低下←副甲状腺/先天性、糖尿病←ケトアシドーシス/尿崩症、膵炎←膵外分泌不全/膵癌、僧帽弁←形成不全）
+- flagship 解決数: 50→**78疾患**。回帰テストは既存3件でカバー（頭字語衝突・種ゲーティング・英語 causes 非テンプレート）。
+- フルスイート **3,485件合格**、ruff clean。
