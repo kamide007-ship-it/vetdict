@@ -1961,7 +1961,7 @@ _CURATED: tuple[tuple[frozenset | None, tuple[str, ...], tuple[str, ...], dict],
     # --- Seventh batch: reptiles ---
     (_REPT, ("代謝性骨", "MBD", "くる病"), (), _MBD_REPTILE),
     (_REPT, ("呼吸器感染症",), (), _RESP_REPTILE),
-    (_REPT, ("脱皮不全",), (), _DYSECDYSIS),
+    (_REPT, ("脱皮不全",), ("スペクタクル", "spectacle"), _DYSECDYSIS),
     (_REPT, ("甲羅腐敗",), (), _SHELL_ROT),
     (_REPT, ("マウスロット", "口内炎"), (), _MOUTH_ROT),
     (_REPT, ("ビタミンA欠乏",), ("過剰",), _HYPOVIT_A_REPTILE),

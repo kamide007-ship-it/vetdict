@@ -1670,6 +1670,38 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 - フルスイート **3,491件合格**（34 skip）、ruff clean
 
 ### 既知の残課題（次セッション候補）
-- 両生類の脱皮不全（Dysecdysis）に爬虫類のキーが適用されず（意図通り）、既存の causes_ja にツボカビ(Bd)のテキストが誤って残存しているのを発見（本セッションのスコープ外の既存データ不具合、要調査）
 - 鳥/爬虫類の残りフラグシップ（PBFD以外の羽毛疾患、爬虫類代謝性骨疾患の個別種対応等）
 - causes_ja/pathophysiology_ja の残りカテゴリテンプレートの疾患固有化（獣医レビュー前提で漸進的に）
+
+## 2026-07セッション（第8弾: 両生類ツボカビ混入バグ + 爬虫類スペクタクル誤カテゴリの修正）
+
+### 背景: データ汚染バグ（テンプレートではなく「具体的に間違った内容」）
+前セッションで発見した「両生類の脱皮不全（Dysecdysis）」2件の causes_ja が、無関係なツボカビ症（Batrachochytrium dendrobatidis/Bd、B. salamandrivorans/Bsal）の感染経路テキストで完全に置き換わっていた（"Batrachochytrium dendrobatidis（Bd）またはB. salamandrivorans（Bsal）の遊走子が水中を介して皮膚に感染する…"）。これは汎用カテゴリテンプレートではなく「別疾患の具体的に正しい内容が誤った疾患に紛れ込んだ」データ汚染で、既存の置換可否判定（フィンガープリント/STUB_SIGNATURES/汎用マーク）のいずれにも該当せず、標準の名前解決パスでは検出も修正もできなかった。pathophysiology_ja は既に正しい内容（低湿度・ビタミンA欠乏・甲状腺機能異常を主因とし、ツボカビ感染は数ある基礎疾患の一つとして適切に言及）だったため、これは温存が必須だった。
+
+### 両生類専用の脱皮不全ジェネレーターを追加
+`scripts/template_elimination/flagship_noninfectious_library.py` に `_dysecdysis_amphibian()` を新規追加し、`_FLAGSHIPS` に `frozenset({"amphibian"})` 限定のレジストリエントリを追加（既存の爬虫類用 `_dysecdysis_reptile`（POTZ等の爬虫類専門用語を含む）とは完全に分離）。内容は既存の正しい pathophysiology_ja のフレーミング（低湿度・ビタミンA欠乏・甲状腺機能異常が主因、ツボカビ感染は基礎疾患の一つとして言及するが唯一の原因ではない）と整合させ、両生類の皮膚呼吸・皮膚からの水分吸収への依存という両生類特有の生理も明記。
+- 汚染された causes_ja はテンプレートではなく特定の間違った内容だったため、`GENERIC_CAUSES_JA_MARKS`（`pathogen_library.py`）に汚染テキストのフィンガープリント `"の遊走子が水中を介して皮膚に感染する"` を追加。このマークは脱皮不全の名前キーに一致したエントリでのみ評価されるため、無関係な本物のツボカビ症エントリ（このマークにはヒットしない別文言）を誤って上書きするリスクはない。
+- `fix_named_pathogens.py --apply` → JSON上の "Dysecdysis (Retained Shed)"（両生類）を修正。「Dysecdysis (Abnormal Shedding)」はJSONオーバーレイに存在せずPythonモジュール（`amphibian_diseases.py`）にも causes_ja/pathophysiology_ja が定義されていない（=NULL）ため、`migrate_to_sqlite.py` の `regenerate_named_pathogen_etiology()` 安全網が両エントリとも正しく修正。
+
+### 副産物として発見・修正した既存バグ: 爬虫類「スペクタクル脱皮不全（アイキャップ残留）」のカテゴリ誤り
+調査中に、`curated_etiology.py` の爬虫類 `_DYSECDYSIS`（`("脱皮不全",)` キー、除外なし）が "Retained Spectacle (Retained Eye Cap)"（name_ja: "スペクタクル脱皮不全（アイキャップ残留）"）にも部分一致し、本来の眼科疾患特異的内容ではなく汎用の脱皮不全文で上書きしていたことを発見（過去のセッションでこのキーに対する除外漏れがあった）。
+- `curated_etiology.py` の爬虫類 `_DYSECDYSIS` キーに除外 `("スペクタクル", "spectacle")` を追加（他の類似キー、例: 鳥ビタミンA欠乏の `("過剰",)` 除外と同じパターン）。
+- 汚染された causes_ja は既に `diseases_all_species.json`（Reptile種）に静的テキストとして焼き込まれていたため、コード修正だけでは反映されない。`flagship_clinical_fields()`（`_retained_spectacle_reptile` ジェネレーター）の出力で該当 JSON エントリの `causes_ja` と `pathophysiology_ja`（同様に汎用外傷カテゴリ文で誤っていた）を直接置換する一回限りの修正を実施。
+
+### 効果（配信SQLite実測）
+- 両生類脱皮不全2件: causes_ja のツボカビ混入 **完全除去**（"Batrachochytrium" 0件）、EN causes/pathophysiology も汎用感染症テンプレートから疾患特異的文に更新
+- 爬虫類「スペクタクル脱皮不全（アイキャップ残留）」: causes_ja/pathophysiology_ja がスペクタクル特異的な眼科内容に修正（汎用脱皮不全文・汎用外傷文が残存 0件）
+
+### 回帰テスト追加（tests/test_no_template_disease_content.py、+4件）
+- `test_amphibian_dysecdysis_not_chytrid_contaminated` — Batrachochytrium不在、湿度/水質記述あり、POTZ用語不在、"Abnormal Shedding"も同様に解決、爬虫類ジェネレーターとの分離確認
+- `test_reptile_spectacle_retention_not_mislabelled_as_generic_dysecdysis` — curated_etiology が None を返す、flagship がスペクタクル特異的内容を返す
+- `test_served_db_amphibian_dysecdysis_and_reptile_spectacle_fixed` — 配信DBで両方の修正を確認
+
+### テスト・CI
+- フルテストスイート: **3,494件合格**（34 skip、+4新規）、ruff check/format 全て通過
+- 再現手順: `fix_named_pathogens.py --apply` → 一回限りのJSON直接修正（スペクタクル） → `migrate_to_sqlite.py`
+
+### 既知の残課題（次セッション候補）
+- 鳥/爬虫類の残りフラグシップ（PBFD以外の羽毛疾患、爬虫類代謝性骨疾患の個別種対応等）
+- causes_ja/pathophysiology_ja の残りカテゴリテンプレートの疾患固有化（獣医レビュー前提で漸進的に）
+- 腫瘍学・多因子性疾患のcauses/pathophysiologyに残る汎用カテゴリガイダンス（医学的に妥当な内容だが疾患固有化の余地あり）

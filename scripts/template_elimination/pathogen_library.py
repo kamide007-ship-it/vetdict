@@ -49,6 +49,10 @@ GENERIC_CAUSES_JA_MARKS: tuple[str, ...] = (
     "病原性細菌が体内に侵入",
     "原因は寄生虫（蠕虫",
     "原因は外部寄生虫",
+    # Chytrid-fungus transmission text misapplied to two amphibian dysecdysis
+    # entries (a data-contamination bug, not a category template) — safe to
+    # list here since no resolver key matches genuine chytridiomycosis names.
+    "の遊走子が水中を介して皮膚に感染する",
 )
 GENERIC_CAUSES_EN_MARKS: tuple[str, ...] = (
     "viral infection. transmission via",

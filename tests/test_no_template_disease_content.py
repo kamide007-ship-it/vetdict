@@ -4197,3 +4197,75 @@ def test_served_db_flagship_batch4_exotic_english_causes_curated():
         assert not low.startswith("multifactorial etiology")
         assert not low.startswith("infectious diseases are caused by pathogenic organisms")
         assert not low.startswith("endocrine or metabolic dysfunction")
+
+
+def test_amphibian_dysecdysis_not_chytrid_contaminated():
+    """causes_ja for amphibian dysecdysis was pure chytrid-fungus transmission
+    text copied from the unrelated Chytridiomycosis entries — a data
+    contamination bug, not a category template. It must discuss husbandry
+    (humidity/water quality/vitamin A/thyroid), not lead with Batrachochytrium,
+    and must never use reptile-only jargon (POTZ)."""
+    from scripts.template_elimination.flagship_noninfectious_library import (
+        flagship_clinical_fields,
+        resolve_flagship,
+    )
+
+    fields = flagship_clinical_fields("amphibian", "脱皮不全（両生類）", "Dysecdysis (Retained Shed)")
+    assert fields is not None
+    assert "batrachochytrium" not in fields["causes_ja"].lower()
+    assert "遊走子が水中を介して皮膚に感染する" not in fields["causes_ja"]
+    assert "低湿度" in fields["causes_ja"] or "水質" in fields["causes_ja"]
+    assert "potz" not in fields["causes_ja"].lower()
+    assert "potz" not in fields["causes"].lower()
+    # "Abnormal Shedding" is the same underlying condition under a different
+    # display name and must resolve identically (both amphibian module entries
+    # were affected).
+    assert resolve_flagship("脱皮不全", "Dysecdysis (Abnormal Shedding)", "amphibian") is not None
+    # The reptile-specific generator (POTZ terminology) must never fire for
+    # amphibians, and vice versa.
+    assert flagship_clinical_fields("reptile", "脱皮不全（両生類）", "Dysecdysis (Retained Shed)") is not None
+    reptile_fields = flagship_clinical_fields("reptile", "脱皮不全", "Dysecdysis (Retained Shed)")
+    assert "potz" in reptile_fields["causes"].lower() or "potz" in reptile_fields["causes_ja"].lower()
+
+
+def test_reptile_spectacle_retention_not_mislabelled_as_generic_dysecdysis():
+    """'Retained Spectacle (Retained Eye Cap)' is an ocular-specific condition
+    and must never receive curated_etiology's generic reptile dysecdysis text
+    (a substring-collision bug: its name_ja contains '脱皮不全')."""
+    from scripts.template_elimination.curated_etiology import curated_etiology
+    from scripts.template_elimination.flagship_noninfectious_library import (
+        flagship_clinical_fields,
+    )
+
+    curated = curated_etiology(
+        "reptile", "スペクタクル脱皮不全（アイキャップ残留）", "Retained Spectacle (Retained Eye Cap)"
+    )
+    assert curated is None
+    fields = flagship_clinical_fields(
+        "reptile", "スペクタクル脱皮不全（アイキャップ残留）", "Retained Spectacle (Retained Eye Cap)"
+    )
+    assert fields is not None
+    assert "dysecdysis）は低湿度・脱水・栄養不良・外部寄生虫" not in fields["causes_ja"]
+    assert "スペクタクル" in fields["causes_ja"]
+
+
+def test_served_db_amphibian_dysecdysis_and_reptile_spectacle_fixed():
+    conn = _served_db_or_skip()
+    try:
+        rows = conn.execute(
+            "SELECT species, name, causes_ja, pathophysiology_ja FROM diseases "
+            "WHERE species='amphibian' AND name IN "
+            "('Dysecdysis (Abnormal Shedding)','Dysecdysis (Retained Shed)')"
+        ).fetchall()
+        spectacle_rows = conn.execute(
+            "SELECT species, name, causes_ja FROM diseases "
+            "WHERE species='reptile' AND name='Retained Spectacle (Retained Eye Cap)'"
+        ).fetchall()
+    finally:
+        conn.close()
+    assert len(rows) == 2, "expected both amphibian dysecdysis entries in the served DB"
+    for _species, _name, causes_ja, _patho_ja in rows:
+        assert "Batrachochytrium" not in (causes_ja or "")
+    assert spectacle_rows, "expected the reptile retained-spectacle row in the served DB"
+    for _species, _name, causes_ja in spectacle_rows:
+        assert "dysecdysis）は低湿度・脱水・栄養不良・外部寄生虫" not in (causes_ja or "")
