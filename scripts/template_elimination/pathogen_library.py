@@ -182,7 +182,12 @@ def _calicivirus(sp: str):
 
 def _coronavirus(sp: str):
     j, e = _ja(sp), _en(sp)
-    if sp == "cat":
+    if sp == "ferret":
+        cja = "フェレットの流行性カタル性腸炎（ECE、グリーンスライム病）はフェレット腸コロナウイルス（FRECV）の感染による。糞口感染で伝播し、新規導入個体（新規個体症候群）で重症化しやすい。"
+        cen = "Caused by ferret enteric coronavirus (FRECV) — epizootic catarrhal enteritis (ECE, 'green slime disease') — transmitted faecal-orally, with severe disease typical when the virus is newly introduced to a naive colony ('ferret epidemic catarrhal enteritis')."
+        pja = "ウイルスが小腸絨毛上皮を破壊して重度の絨毛萎縮・吸収不良を起こし、特徴的な緑色粘液様下痢・嘔吐・急激な削痩を生じる。新規感染群で罹患率がほぼ100%となる高い伝播力を持つ。"
+        pen = "The virus destroys small-intestinal villous epithelium causing severe villous atrophy and malabsorption, producing the characteristic green mucoid diarrhoea, vomiting and rapid wasting; it is highly transmissible, with near-100% morbidity in a naive colony."
+    elif sp == "cat":
         cja = "猫コロナウイルス（FCoV）の感染による。糞口感染で伝播し、体内で強毒変異（FIPV）を生じると猫伝染性腹膜炎（FIP）に進展する。"
         cen = "Caused by feline coronavirus (FCoV), transmitted faecal-orally; an in-host virulent mutation (FIPV) leads to feline infectious peritonitis."
         pja = "FCoVは腸上皮で複製して軽度腸炎を起こす。変異株がマクロファージ指向性を獲得すると全身に播種し、免疫複合体・血管炎による滲出型（体腔液貯留）または肉芽腫型のFIPを生じる。"
@@ -448,7 +453,14 @@ _AGENTS: tuple[tuple[tuple[str, ...], object], ...] = (
     (("ヘンドラ", "hendra", "ニパ", "nipah", "henipavirus"), _henipavirus),
     (("ウエストナイル", "west nile", "日本脳炎", "japanese encephalitis", "flavivirus"), _flavivirus),
     (("ファブリキウス嚢", "infectious bursal", "gumboro", "ガンボロ", "birnavirus"), _birnavirus),
-    (("ボルナ", "borna"), _bornavirus),
+    # "前胃拡張症"/"proventricular dilatation disease" (full phrase) plus the exact
+    # compounds "pdd神経型"/"pdd neurological" — never bare "pdd" or bare "胃拡張",
+    # so "Gastric Dilatation (Non-PDD)" / "胃拡張（PDD以外）" is never miscaught
+    # (that JA phrasing isn't covered by the "non-pdd" negation token).
+    (
+        ("ボルナ", "borna", "前胃拡張症", "proventricular dilatation disease", "pdd神経型", "pdd neurological"),
+        _bornavirus,
+    ),
     (
         (
             "イリドウイルス",
@@ -499,7 +511,16 @@ _AGENTS: tuple[tuple[tuple[str, ...], object], ...] = (
         _calicivirus,
     ),
     (
-        ("コロナ", "coronavirus", "伝染性腹膜炎", "infectious peritonitis", "伝染性気管支炎", "infectious bronchitis"),
+        (
+            "コロナ",
+            "coronavirus",
+            "伝染性腹膜炎",
+            "infectious peritonitis",
+            "伝染性気管支炎",
+            "infectious bronchitis",
+            "流行性カタル性腸炎",
+            "epizootic catarrhal enteritis",
+        ),
         _coronavirus,
     ),
     (("インフルエンザ", "influenza"), _influenza),

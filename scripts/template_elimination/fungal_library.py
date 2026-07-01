@@ -189,6 +189,15 @@ def _macrorhabdus(sp):
     return cja, cen, pja, pen
 
 
+def _fungal_shell_disease(sp):
+    j, e = _ja(sp), _en(sp)
+    cja = f"{j}の真菌性甲羅疾患は環境中の日和見真菌（Fusarium・Paecilomyces等）が甲羅の角質層・下床骨に感染することによる。外傷・不衛生な基質・過湿環境・免疫低下が誘因となる。"
+    cen = f"Caused by opportunistic environmental fungi (Fusarium, Paecilomyces) infecting the keratinised shell layer and underlying bone in {e}; trauma, unsanitary substrate, excessive dampness and immunosuppression predispose."
+    pja = "菌糸が損傷した角質層から侵入して角質下に壊死性病変を形成し、進行すると骨組織に達して深部の骨融解・敗血症を招く。細菌性の甲羅腐敗症より進行が緩徐だが、より深部に浸潤しやすく難治性となりやすい。"
+    pen = "Hyphae invade through breached keratin, producing necrotic lesions beneath the shell surface; advanced disease reaches bone causing deep osteolysis and can progress to septicaemia. Progression is typically slower than bacterial shell rot but the fungus penetrates more deeply, making it more refractory to treatment."
+    return cja, cen, pja, pen
+
+
 def _pneumocystis(sp):
     j = _ja(sp)
     cja = f"{j}のニューモシスチス肺炎は真菌 Pneumocystis の感染による。基礎的な免疫不全（原発性免疫不全・免疫抑制療法）を背景に発症する日和見感染。"
@@ -216,6 +225,7 @@ _AGENTS: tuple[tuple[tuple[str, ...], object], ...] = (
     (("サプロレグニア", "水カビ", "綿かぶり", "saprolegni", "water mould", "water mold"), _saprolegnia),
     (("マクロラブダス", "メガバクテリア", "macrorhabdus", "avian gastric yeast"), _macrorhabdus),
     (("ニューモシスチス", "pneumocystis"), _pneumocystis),
+    (("真菌性甲羅疾患", "fungal shell disease"), _fungal_shell_disease),
 )
 
 

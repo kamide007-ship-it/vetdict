@@ -474,6 +474,8 @@ _NEGATION_TOKENS: tuple[str, ...] = (
     "non-infectious",
     "non-neoplastic",
     "non-herpetic",
+    "非pdd",
+    "non-pdd",
 )
 
 

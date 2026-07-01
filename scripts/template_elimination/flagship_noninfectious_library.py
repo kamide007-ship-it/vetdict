@@ -1011,6 +1011,207 @@ def _placentitis_horse(sp):
     )
 
 
+# ---------------------------------------------------------------------------
+# Batch 4 — bilingual backfill for high-traffic exotic-companion-animal
+# flagships already curated in Japanese by curated_etiology. As in batch 3,
+# broad substring keys deliberately cover the many named variants (grade,
+# anatomic form, laterality) that share one underlying condition.
+# ---------------------------------------------------------------------------
+
+
+# --- Small herbivorous mammals (rabbit/chinchilla/guinea pig/degu) ----------
+def _gi_stasis_herbivore(sp):
+    j, e = _sp(sp), _spe(sp)
+    return (
+        f"{j}の消化管うっ滞（GIステイシス）は、疼痛・ストレス・低繊維食・脱水・不正咬合・異物などを契機に腸管蠕動が低下する、草食小型哺乳類に特有の症候群。二次的に腸内細菌叢が乱れてガス産生菌が優位となる悪循環を形成する。",
+        f"Gastrointestinal (GI) stasis in {e} is a syndrome unique to hindgut-fermenting herbivores in which gut motility slows in response to pain, stress, a low-fibre diet, dehydration, dental disease or a foreign body; a secondary dysbiosis favouring gas-producing bacteria perpetuates a vicious cycle.",
+        "腸管蠕動の低下により内容物が停滞し、水分再吸収の亢進で糞塊が硬化する一方、発酵によるガス貯留が腹部膨満・疼痛を招く。疼痛がさらに食欲不振・蠕動低下を助長する悪循環（うっ滞→疼痛→うっ滞）を形成し、治療しない場合は致死的な腸閉塞・肝リピドーシスに進行しうる。",
+        "Slowed motility allows gut contents to stagnate; increased water reabsorption hardens the faecal mass while fermentation produces gas, causing abdominal distension and pain. Pain further suppresses appetite and motility in a self-perpetuating cycle (stasis leads to pain leads to more stasis), and untreated cases progress to fatal obstruction or hepatic lipidosis.",
+    )
+
+
+def _trichobezoar_herbivore(sp):
+    j, e = _sp(sp), _spe(sp)
+    return (
+        f"{j}の毛球症（トリコベゾア）は、グルーミングで飲み込んだ被毛が消化管内で塊状化することによる。低繊維食・換毛期の過剰グルーミング・脱水・基礎の消化管うっ滞が誘因となる。",
+        f"Trichobezoar (hairball) formation in {e} occurs when hair swallowed during grooming aggregates into a mass within the gut; a low-fibre diet, excessive grooming during shedding, dehydration and underlying GI hypomotility predispose.",
+        "正常な腸管蠕動があれば被毛は糞便とともに排出されるが、蠕動低下や水分不足があると被毛が凝集・圧縮されて毛球を形成し、胃または腸管を部分的〜完全に閉塞する。慢性例では食欲不振・削痩・間欠的な排便異常を、急性完全閉塞では致死的な腸閉塞を呈する。",
+        "With normal motility, swallowed hair passes with the faeces, but reduced motility or inadequate hydration lets hair aggregate and compact into a mass that partially or completely obstructs the stomach or intestine; chronic cases show inappetence, wasting and intermittent faecal changes, while acute complete obstruction is a fatal emergency.",
+    )
+
+
+def _encephalitozoonosis_rabbit(sp):
+    return (
+        "ウサギのエンセファリトゾーン症は、微胞子虫 Encephalitozoon cuniculi の感染による。経胎盤感染および感染ウサギの尿中に排出される胞子の経口摂取で伝播する。多くは不顕性感染だが、免疫低下やストレスで顕在化する。",
+        "Encephalitozoonosis in rabbits is caused by the microsporidian Encephalitozoon cuniculi, transmitted transplacentally and by ingestion of spores shed in the urine of infected rabbits; infection is often subclinical, becoming apparent with immunosuppression or stress.",
+        "胞子が細胞内に侵入して増殖し、破裂時に炎症反応を誘発する。腎では肉芽腫性間質性腎炎（腎型）、眼では水晶体嚢の破裂によるぶどう膜炎・白内障（眼型）、中枢神経では血管周囲性肉芽腫性脳炎による前庭症状・斜頸・振戦（神経型）を生じる。",
+        "Spores invade and multiply within cells, provoking an inflammatory response on rupture; in the kidney this causes granulomatous interstitial nephritis (renal form), in the eye it causes uveitis/cataract from lens-capsule rupture (ocular form), and in the CNS it causes perivascular granulomatous encephalitis with vestibular signs, head tilt and tremor (neurological form).",
+    )
+
+
+def _torticollis_rabbit(sp):
+    return (
+        "ウサギの斜頸（捻転斜頸）は、前庭系（末梢性：中耳炎/内耳炎、中枢性：エンセファリトゾーン症・鉛中毒）の障害による頭部の異常姿勢。パスツレラ性中耳炎とE. cuniculi感染が二大原因。",
+        "Torticollis (wry neck) in rabbits is an abnormal head posture from vestibular dysfunction — peripheral (otitis media/interna) or central (Encephalitozoon cuniculi infection, lead toxicosis) — with Pasteurella-associated otitis media and E. cuniculi infection the two leading causes.",
+        "前庭系の左右の入力不均衡により、健側への異常な頭部傾斜・眼振・運動失調が生じる。末梢性病変では顔面神経麻痺・ホルネル症候群を伴うことがあり、中枢性病変ではより重度の意識障害・他の脳神経障害を合併しうる。急激な体位変換はストレス性の心停止を誘発しうるため取扱いに注意を要する。",
+        "Asymmetric vestibular input causes an abnormal head tilt toward the affected side with nystagmus and ataxia; peripheral lesions may add facial nerve paralysis or Horner's syndrome, while central lesions can bring more severe obtundation and other cranial-nerve deficits. Rapid repositioning risks stress-induced cardiac arrest, so careful handling is essential.",
+    )
+
+
+def _pododermatitis_rabbit(sp):
+    return (
+        "ウサギの潰瘍性足底皮膚炎（ソアホック）は、硬い/不衛生な床材上での持続的な圧迫・摩擦による飛節の皮膚・皮下組織の損傷で、肥満・大型品種・不適切な床材・運動不足が誘因となる。",
+        "Ulcerative pododermatitis (sore hocks) in rabbits results from sustained pressure and friction on the hock skin/subcutis from hard or unsanitary flooring; obesity, large breeds, unsuitable substrate and inactivity predispose.",
+        "持続的な圧迫が局所の血流を障害して皮膚の菲薄化・脱毛・びらんを生じ、進行すると潰瘍化・二次性細菌感染（Staphylococcus aureus等）により深部組織（腱・骨）に及ぶ膿瘍・骨髄炎に至る。グレードが進むほど疼痛による活動性低下・不食を招く悪循環となる。",
+        "Sustained pressure impairs local blood flow, causing skin thinning, alopecia and erosion; progression brings ulceration and secondary bacterial infection (e.g. Staphylococcus aureus) that can reach deeper tissue (tendon, bone) as abscessation or osteomyelitis. Higher grades bring pain-driven inactivity and anorexia in a self-perpetuating cycle.",
+    )
+
+
+def _uterine_adenocarcinoma_rabbit(sp):
+    return (
+        "ウサギの子宮腺癌は、未避妊の雌ウサギにおいて発生率が極めて高い（4歳以上で50-80%との報告）子宮内膜腺上皮由来の悪性腫瘍で、エストロゲンの持続刺激が発生に関与するとされる。",
+        "Rabbit uterine adenocarcinoma is a malignant tumour of endometrial glandular epithelium with an extremely high incidence in intact does (reported 50-80% by age 4+ years); sustained oestrogen stimulation is implicated in its development.",
+        "子宮内膜腺上皮が悪性転化して浸潤性に増殖し、子宮筋層・漿膜を越えて腹腔内に播種する。肺・肝への血行性転移も高頻度に生じる。無症状で進行することが多く、発見時に転移が成立している例が少なくない。予防的避妊手術（6か月齢まで）が最も確実な予防法。",
+        "Malignant transformation of endometrial glandular epithelium drives invasive growth beyond the myometrium and serosa into the abdominal cavity, with frequent haematogenous metastasis to lung and liver; disease often progresses silently, and metastasis is commonly already present at detection. Prophylactic ovariohysterectomy (by 6 months of age) is the most reliable prevention.",
+    )
+
+
+# --- Ferret -------------------------------------------------------------
+def _ferret_adrenal_disease(sp):
+    return (
+        "フェレット副腎疾患（FAD）は、中高齢フェレットで極めて多い内分泌疾患で、副腎皮質の過形成・腺腫・稀に腺癌による性ホルモン（エストラジオール・17-OHプロゲステロン・アンドロステンジオン）の過剰産生による。幼若期の早期不妊手術による下垂体-性腺軸の脱抑制（GnRH持続刺激）が主要因とされ、季節性の長日照も関与する。",
+        "Ferret adrenal disease (FAD) is a very common endocrinopathy of middle-aged to older ferrets, caused by adrenocortical hyperplasia, adenoma or, rarely, carcinoma oversecreting sex hormones (oestradiol, 17-OH progesterone, androstenedione); early-age neutering removes negative feedback on the pituitary-gonadal axis (causing sustained GnRH drive), the presumed main cause, with long daylight exposure also implicated.",
+        "性腺摘出後もGnRH/LHが持続的に分泌され、副腎皮質の性ホルモン産生細胞が過剰刺激されて過形成・腫瘍化する。過剰な性ホルモンにより左右対称性の脱毛（尾部から進行）、外陰部腫脹（雌）、前立腺腫大に伴う排尿障害（雄）、骨髄抑制を生じる。",
+        "With no gonadal feedback after neutering, sustained GnRH/LH drive over-stimulates the adrenal cortex's sex-hormone-producing cells, causing hyperplasia and neoplastic transformation; the resulting hormone excess produces symmetric alopecia (starting at the tail), vulvar swelling (females), prostatic enlargement with dysuria (males) and bone-marrow suppression.",
+    )
+
+
+def _ferret_insulinoma(sp):
+    return (
+        "フェレットのインスリノーマは、膵島β細胞由来の機能性腫瘍で、中高齢フェレットの膵腫瘍として最多。腫瘍細胞がグルコース濃度に依存しない自律的インスリン分泌を行う。",
+        "Ferret insulinoma is a functional tumour of pancreatic islet beta cells, the most common pancreatic tumour of middle-aged to older ferrets, in which tumour cells secrete insulin autonomously, independent of glucose concentration.",
+        "自律的な高インスリン血症により肝グリコーゲン分解・糖新生が持続的に抑制され、慢性の低血糖状態が生じる。中枢神経はブドウ糖依存性が高いため、低血糖により後肢脱力・虚脱・振戦・痙攣などの神経症状を呈する。反復する低血糖発作は不可逆的な神経傷害を招きうる。",
+        "Autonomous hyperinsulinaemia persistently suppresses hepatic glycogenolysis and gluconeogenesis, producing chronic hypoglycaemia; because the CNS depends heavily on glucose, hypoglycaemia causes hindlimb weakness, collapse, tremors and seizures, and recurrent hypoglycaemic episodes can cause irreversible neurological injury.",
+    )
+
+
+def _ferret_cardiomyopathy(sp):
+    return (
+        "フェレットの心筋症は、拡張型（DCM、原因不明の心筋収縮力低下が最多）と肥大型（HCM、稀）に大別される。基礎の副腎疾患・インスリノーマとの関連は明確でないが、加齢に伴い発生率が上昇する。",
+        "Ferret cardiomyopathy is chiefly dilated (DCM, idiopathic loss of myocardial contractility being the most common form) with a rarer hypertrophic (HCM) form; a clear link to underlying adrenal disease or insulinoma is not established, but incidence rises with age.",
+        "DCMでは心筋収縮力低下により心拍出量が減少し、代償性の心室拡張とうっ血性心不全（肺水腫・胸水・腹水）に進行する。HCMでは心室壁肥厚による拡張障害から左房拡大・肺水腫を生じる。いずれも慢性進行性で不整脈のリスクを伴う。",
+        "In DCM, reduced myocardial contractility lowers cardiac output, driving compensatory ventricular dilation that progresses to congestive heart failure (pulmonary oedema, pleural/abdominal effusion); in HCM, wall thickening impairs diastolic filling, causing left-atrial enlargement and pulmonary oedema. Both are chronic-progressive and carry arrhythmia risk.",
+    )
+
+
+def _ferret_lymphoma(sp):
+    return (
+        "フェレットのリンパ腫は、フェレットで最も多い悪性腫瘍の一つで、若齢型（急性、リンパ芽球性、進行が速い）と成年型（慢性、小型リンパ球性、緩徐進行）に大別される。フェレット白血病ウイルス（FeLV関連レトロウイルス）の関与が示唆されるが確定的ではない。",
+        "Ferret lymphoma, one of the most common ferret malignancies, is broadly a juvenile form (acute, lymphoblastic, rapidly progressive) or an adult form (chronic, small lymphocytic, slowly progressive); a role for a ferret leukaemia-associated retrovirus is suspected but unconfirmed.",
+        "腫瘍性リンパ球がリンパ節・脾臓・肝臓・骨髄・節外部位（腸管・縦隔・皮膚）にクローン性に浸潤・増殖し、正常組織構築を破壊する。若齢型は急速な全身状態悪化を、成年型は緩徐な体重減少・リンパ節腫大を呈する。",
+        "Clonal neoplastic lymphocytes infiltrate and proliferate within lymph nodes, spleen, liver, bone marrow and extranodal sites (gut, mediastinum, skin), destroying normal tissue architecture; the juvenile form causes rapid systemic decline while the adult form causes gradual weight loss and lymphadenopathy.",
+    )
+
+
+# --- Birds (bird/parakeet/parrot) -------------------------------------------
+def _avian_gout(sp):
+    j, e = _sp(sp), _spe(sp)
+    return (
+        f"{j}の痛風（内臓型・関節型）は、腎機能障害・脱水・高蛋白食・ビタミンA欠乏による尿酸排泄低下で血中尿酸値が上昇し（高尿酸血症）、尿酸塩が組織に析出することによる。",
+        f"Gout (visceral and articular forms) in {e} results from hyperuricaemia — reduced urate excretion from renal impairment, dehydration, a high-protein diet or vitamin A deficiency — with urate crystals then precipitating in tissue.",
+        "過飽和状態の尿酸が内臓漿膜面（心膜・肝被膜・気嚢＝内臓型）または関節腔・腱鞘（関節型）に尿酸塩結晶として沈着し、異物型肉芽腫性炎症を惹起する。内臓型は無症状のまま急死することがあり、関節型は疼痛による跛行・関節腫脹を呈する。根治的治療はなく進行性かつ致死率が高い。",
+        "Supersaturated urate precipitates as urate crystals on visceral serosal surfaces (pericardium, hepatic capsule, air sacs — the visceral form) or in joints/tendon sheaths (the articular form), provoking foreign-body granulomatous inflammation; the visceral form can cause sudden death with no premonitory signs, while the articular form causes painful lameness and joint swelling. There is no cure, and the disease is progressive with high mortality.",
+    )
+
+
+def _avian_xanthoma(sp):
+    j, e = _sp(sp), _spe(sp)
+    return (
+        f"{j}の黄色腫は、慢性の組織損傷・出血・高脂血症を背景に脂質を貪食したマクロファージ（泡沫細胞）が蓄積して形成される良性の脂質肉芽腫。翼・胸骨部の慢性的な外傷/自傷部位に好発する。",
+        f"Xanthoma in {e} is a benign lipid granuloma formed by accumulation of lipid-laden macrophages (foam cells) against a background of chronic tissue damage, haemorrhage or hyperlipidaemia, most often at sites of chronic trauma/self-trauma on the wing or keel.",
+        "組織損傷部で漏出した脂質・血液成分をマクロファージが貪食し、コレステロール結晶を核とした黄色〜橙色の結節性病変を形成する。増大すると皮膚が脆弱化して出血・潰瘍化しやすく、飛行や運動を妨げることがある。悪性化はしないが再発しやすい。",
+        "Macrophages phagocytose lipid and blood components leaking from the damaged tissue, forming yellow-to-orange nodular lesions centred on cholesterol crystals; as they enlarge, the overlying skin becomes fragile and prone to bleeding and ulceration, and the mass can impede flight or movement. Xanthomas do not become malignant but recur readily.",
+    )
+
+
+# --- Reptiles/amphibians (reptile/tortoise/snake/lizard/amphibian) ----------
+def _dysecdysis_reptile(sp):
+    j, e = _sp(sp), _spe(sp)
+    return (
+        f"{j}の脱皮不全（ディセクダイシス）は、低湿度・不適切な温度勾配（POTZ逸脱）・脱水・栄養不良（蛋白/ビタミンA不足）・皮膚寄生虫・粗い床材の欠如など、不適切な飼育環境による皮膚の正常な脱皮周期の障害。",
+        f"Dysecdysis (retained shed) in {e} is disruption of the normal skin-shedding cycle from inadequate husbandry — low humidity, an incorrect temperature gradient (deviation from the POTZ), dehydration, malnutrition (protein/vitamin A deficiency), skin parasites or lack of abrasive substrate/décor.",
+        "古い角質層が部分的に付着したまま残留し、特に四肢末端・尾端では残留した皮膚が輪状に締め付けて血流を阻害し（絞扼）、虚血性壊死に至ることがある。眼部では残留したスペクタクル（アイキャップ）が視覚障害・感染の温床となる。",
+        "Old keratinised skin remains partially attached; at the extremities (digits, tail tip) the retained skin can form a constricting band that impairs blood flow, leading to ischaemic necrosis, while a retained ocular spectacle (eye cap) causes visual impairment and predisposes to infection.",
+    )
+
+
+def _retained_spectacle_reptile(sp):
+    j, e = _sp(sp), _spe(sp)
+    return (
+        f"{j}のスペクタクル（アイキャップ）脱皮不全は、まぶたを持たず眼球を透明な鱗（スペクタクル）で覆う種特有の脱皮異常で、低湿度・脱水・眼周囲の外傷/感染による局所的な脱皮障害が原因となる。",
+        f"Retained spectacle (eye cap) in {e} — species with no eyelids, whose eye is instead covered by a transparent scale (the spectacle) — results from localised shedding failure due to low humidity, dehydration or periocular trauma/infection.",
+        "残留したスペクタクルが重層化して視界を曇らせ、涙液の正常な排出経路を妨げて眼窩内貯留・二次感染のリスクを高める。無理な剥離は下床の角膜を損傷するため、湿潤環境での自然脱落を待つ愛護的な管理が原則。",
+        "Layers of retained spectacle cloud vision and obstruct normal tear drainage, raising the risk of subspectacular fluid accumulation and secondary infection; forced removal risks damaging the underlying cornea, so gentle humidification to allow natural shedding is the standard approach.",
+    )
+
+
+def _shell_disease_reptile(sp):
+    j, e = _sp(sp), _spe(sp)
+    return (
+        f"{j}の甲羅疾患（甲羅腐敗症・敗血症性皮膚潰瘍症/SCUD）は、外傷・不適切な基質による慢性擦過傷・過湿環境を契機に、日和見グラム陰性菌（Citrobacter・Aeromonas・Pseudomonas等）が甲羅の角質層・下床の骨組織に感染することによる。",
+        f"Shell disease (shell rot, septicaemic cutaneous ulcerative disease/SCUD) in {e} follows opportunistic infection of the shell's keratinised layer and underlying bone by Gram-negative bacteria (Citrobacter, Aeromonas, Pseudomonas), precipitated by trauma, chronic abrasion from unsuitable substrate or an overly damp environment.",
+        "細菌が損傷した角質層から侵入して角質下に膿瘍・潰瘍を形成し、進行すると骨組織にまで達して骨髄炎・敗血症に至る致死的経過をとりうる。皮膚型（SCUD）では四肢・頸部の皮膚にも同時に潰瘍性病変を生じる。",
+        "Bacteria enter through breached keratin, forming abscesses and ulcers beneath the shell surface; advanced disease reaches the underlying bone causing osteomyelitis and can progress to fatal septicaemia. The cutaneous form (SCUD) produces concurrent ulcerative lesions on the limb and neck skin.",
+    )
+
+
+def _reptile_septicemia(sp):
+    j, e = _sp(sp), _spe(sp)
+    return (
+        f"{j}の敗血症は、原発巣（口内炎・皮膚感染・肺炎・卵塞栓等）から血流に細菌が侵入・全身播種することによる。低温飼育・不適切なPOTZ・栄養不良・過密飼育による免疫低下が基礎的な誘因となる。",
+        f"Septicaemia in {e} follows bacterial entry into the bloodstream and systemic dissemination from a primary focus (stomatitis, skin infection, pneumonia, egg-binding); husbandry-related immunosuppression from suboptimal temperature/POTZ, malnutrition and overcrowding predisposes.",
+        "細菌および内毒素が全身循環に播種し、多臓器への播種性感染・血管内皮傷害・凝固異常を引き起こす。爬虫類は変温動物であるため哺乳類的な発熱反応を欠き、無気力・食欲不振・皮膚の点状出血斑など非特異的な徴候で進行し、末期には急速な虚脱・死亡に至る。",
+        "Bacteria and endotoxin disseminate through the systemic circulation, causing multi-organ seeding, vascular endothelial injury and coagulopathy; because reptiles are ectothermic they lack a mammalian-type fever response, so disease progresses with non-specific signs (lethargy, anorexia, petechial skin haemorrhage) before rapid terminal collapse.",
+    )
+
+
+def _amphibian_edema_syndrome(sp):
+    return (
+        "両生類の浮腫症候群（リンパ嚢浮腫）は、腎機能障害・低蛋白血症・心不全・不適切な水質（浸透圧異常）・細菌感染（レッドレッグ症候群）など多様な基礎疾患による体液調節の破綻で、皮下のリンパ嚢に体液が異常貯留することによる。",
+        "Amphibian oedema syndrome (lymph sac oedema) results from breakdown of fluid regulation — renal dysfunction, hypoproteinaemia, heart failure, inappropriate water quality (osmotic disturbance) or bacterial infection (red-leg syndrome) — causing abnormal fluid accumulation in the subcutaneous lymph sacs.",
+        "血漿膠質浸透圧の低下または静水圧の上昇、あるいはリンパ管/腎における水分再吸収障害により、皮下のリンパ嚢に体液が異常貯留して顕著な全身性膨隆を生じる。皮膚呼吸への依存度が高い両生類では、皮膚の伸展・圧迫がガス交換を障害し、重度例では呼吸不全に至る。",
+        "A fall in plasma oncotic pressure, a rise in hydrostatic pressure, or impaired fluid reabsorption by the lymphatics/kidney lets fluid abnormally accumulate in the subcutaneous lymph sacs, causing marked generalised swelling; because amphibians depend heavily on cutaneous respiration, the stretched, compressed skin impairs gas exchange, and severe cases progress to respiratory failure.",
+    )
+
+
+def _guinea_pig_ovarian_cysts(sp):
+    return (
+        "モルモットの卵巣嚢胞は、中高齢の未避妊雌に極めて高頻度（3歳以上で75%以上との報告）にみられる、卵巣の嚢胞性変化。機能性（ホルモン産生性、エストロゲン過剰による左右対称性脱毛を伴う）と非機能性（漿液性・濾胞性）に分けられる。",
+        "Guinea pig ovarian cysts are cystic ovarian changes with an extremely high prevalence in intact older sows (reported over 75% by age 3+); they are either functional (hormone-secreting, causing oestrogen-driven symmetric alopecia) or non-functional (serous, follicular).",
+        "卵巣の嚢胞性構造が持続的に増大し、機能性嚢胞では過剰なエストロゲン分泌により対称性の側腹部脱毛・骨髄抑制を、非機能性嚢胞では腹部膨満・触知可能な腹部腫瘤を生じる。大型化した嚢胞は捻転・破裂のリスクを伴う。予防的避妊手術が唯一の根治的予防法。",
+        "The cystic ovarian structures enlarge progressively; functional cysts cause symmetric flank alopecia and bone-marrow suppression from oestrogen excess, while non-functional cysts cause abdominal distension and a palpable abdominal mass. Large cysts risk torsion or rupture, and prophylactic ovariectomy is the only definitive preventive measure.",
+    )
+
+
+def _hedgehog_quill_folliculitis(sp):
+    return (
+        "ハリネズミの針毛包炎は、皮膚糸状菌感染・ダニ寄生・栄養不良・不衛生な床材による毛包の炎症を背景に、細菌の二次感染（ブドウ球菌等）が針の毛包に生じることによる。",
+        "Quill folliculitis in hedgehogs follows secondary bacterial infection (staphylococci etc.) of the quill follicles, arising against a background of follicular inflammation from dermatophytosis, mite infestation, malnutrition or unsanitary bedding.",
+        "毛包の炎症により針の基部が発赤・腫脹し、進行すると膿性滲出物の付着・針の脱落を生じる。掻痒による自傷が病変を拡大させ、広範囲に及ぶと二次的な皮膚バリア機能低下・全身性感染のリスクが高まる。基礎疾患（皮膚糸状菌・ダニ）の特定が再発防止に重要。",
+        "Follicular inflammation causes redness and swelling at the quill base, progressing to purulent exudate and quill loss; pruritus-driven self-trauma extends the lesions, and extensive involvement raises the risk of secondary skin-barrier failure and systemic infection. Identifying the underlying cause (dermatophyte, mites) is key to preventing recurrence.",
+    )
+
+
+def _hepatic_fibrosis_biling(sp):
+    j, e = _sp(sp), _spe(sp)
+    return (
+        f"{j}の肝線維症は、慢性的な肝細胞傷害（感染性・栄養性・毒素性・胆汁うっ滞性・慢性うっ血性）に対する修復反応として星細胞が活性化し、過剰なコラーゲン沈着を来す終末像である。",
+        f"Hepatic fibrosis in {e} is the end-stage repair response to chronic hepatocellular injury (infectious, nutritional, toxic, cholestatic or chronic-congestive), in which activated hepatic stellate cells lay down excess collagen.",
+        "持続する肝傷害が肝星細胞を活性化させ、筋線維芽細胞様に形質転換した星細胞が過剰なコラーゲンを産生・沈着させる。線維化が進行すると肝小葉構築が改築され、門脈圧亢進・肝機能低下・腹水・肝性脳症に至りうる不可逆的な病態。",
+        "Ongoing hepatic injury activates hepatic stellate cells, which transform into myofibroblast-like cells producing and depositing excess collagen; as fibrosis progresses it remodels lobular architecture, potentially causing portal hypertension, hepatic dysfunction, ascites and hepatic encephalopathy — an irreversible process.",
+    )
+
+
 # name-pattern -> generator. species_set restricts host; exclusions guard collisions.
 _FLAGSHIPS: tuple[tuple[frozenset | None, tuple[str, ...], tuple[str, ...], object], ...] = (
     (frozenset({"cat"}), ("甲状腺機能亢進", "hyperthyroid"), ("副甲状腺",), _feline_hyperthyroid),
@@ -1328,6 +1529,94 @@ _FLAGSHIPS: tuple[tuple[frozenset | None, tuple[str, ...], tuple[str, ...], obje
         _spaopd_horse,
     ),
     (frozenset({"horse"}), ("胎盤炎", "placentitis"), (), _placentitis_horse),
+    # --- Batch 4: exotic companion animal bilingual backfill ---
+    (
+        frozenset({"rabbit", "chinchilla", "guinea_pig", "degu"}),
+        ("消化管うっ滞", "gi stasis", "gastrointestinal stasis"),
+        (),
+        _gi_stasis_herbivore,
+    ),
+    (
+        frozenset({"rabbit", "chinchilla", "guinea_pig"}),
+        ("毛球症", "トリコベゾア", "trichobezoar", "hairball"),
+        (),
+        _trichobezoar_herbivore,
+    ),
+    (
+        frozenset({"rabbit"}),
+        ("エンセファリトゾーン", "encephalitozoon"),
+        (),
+        _encephalitozoonosis_rabbit,
+    ),
+    (frozenset({"rabbit"}), ("斜頸", "torticollis", "wry neck"), (), _torticollis_rabbit),
+    (
+        frozenset({"rabbit"}),
+        ("潰瘍性足底皮膚炎", "飛節びらん", "ulcerative pododermatitis", "sore hock"),
+        (),
+        _pododermatitis_rabbit,
+    ),
+    (frozenset({"rabbit"}), ("子宮腺癌", "uterine adenocarcinoma"), (), _uterine_adenocarcinoma_rabbit),
+    (frozenset({"guinea_pig"}), ("卵巣嚢胞", "ovarian cyst"), (), _guinea_pig_ovarian_cysts),
+    (frozenset({"hedgehog"}), ("針毛包炎", "quill folliculitis"), (), _hedgehog_quill_folliculitis),
+    (frozenset({"ferret"}), ("副腎", "adrenal"), (), _ferret_adrenal_disease),
+    (frozenset({"ferret"}), ("インスリノーマ", "insulinoma"), (), _ferret_insulinoma),
+    (
+        frozenset({"ferret"}),
+        ("心筋症", "cardiomyopathy"),
+        (),
+        _ferret_cardiomyopathy,
+    ),
+    (frozenset({"ferret"}), ("リンパ腫", "lymphoma"), (), _ferret_lymphoma),
+    (
+        frozenset({"bird", "parakeet", "parrot"}),
+        ("痛風", "gout"),
+        (),
+        _avian_gout,
+    ),
+    (
+        frozenset({"bird", "parakeet", "parrot"}),
+        ("黄色腫", "xanthoma"),
+        (),
+        _avian_xanthoma,
+    ),
+    (
+        frozenset({"reptile", "tortoise", "snake", "lizard"}),
+        ("脱皮不全", "dysecdysis", "retained shed"),
+        ("スペクタクル", "spectacle"),
+        _dysecdysis_reptile,
+    ),
+    (
+        frozenset({"reptile", "tortoise", "snake", "lizard"}),
+        ("スペクタクル", "spectacle", "アイキャップ", "eye cap"),
+        (),
+        _retained_spectacle_reptile,
+    ),
+    (
+        frozenset({"reptile", "tortoise"}),
+        ("甲羅腐敗", "甲羅疾患", "shell rot", "shell disease", "scud", "septicemic cutaneous ulcerative"),
+        # "真菌性"/"fungal" excluded — that variant is a fungal (not bacterial)
+        # shell infection, curated separately by fungal_library.
+        ("真菌性", "fungal"),
+        _shell_disease_reptile,
+    ),
+    (
+        frozenset({"reptile", "tortoise", "snake", "lizard"}),
+        ("敗血症", "septicemia", "septicaemia"),
+        (),
+        _reptile_septicemia,
+    ),
+    (
+        frozenset({"amphibian"}),
+        ("リンパ嚢浮腫", "浮腫症候群", "edema syndrome", "oedema syndrome", "lymph sac"),
+        (),
+        _amphibian_edema_syndrome,
+    ),
+    (
+        None,
+        ("肝線維症", "肝繊維症", "hepatic fibrosis"),
+        (),
+        _hepatic_fibrosis_biling,
+    ),
 )
 
 

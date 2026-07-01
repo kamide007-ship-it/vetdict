@@ -4130,3 +4130,70 @@ def test_served_db_flagship_batch3_english_causes_curated():
         assert not low.startswith("neoplastic etiology")
         assert not low.startswith("multifactorial etiology")
         assert not low.startswith("endocrine or metabolic dysfunction")
+
+
+# ---------------------------------------------------------------------------
+# Batch 4 exotic-companion-animal flagship backfill (2026-07)
+# ---------------------------------------------------------------------------
+def test_flagship_batch4_exotic_resolver_precision():
+    from scripts.template_elimination.flagship_noninfectious_library import (
+        flagship_clinical_fields,
+        resolve_flagship,
+    )
+
+    assert resolve_flagship("消化管うっ滞", "GI Stasis", "rabbit") is not None
+    assert resolve_flagship("エンセファリトゾーン症", "Encephalitozoonosis", "rabbit") is not None
+    assert resolve_flagship("副腎疾患", "Ferret Adrenal Disease (FAD)", "ferret") is not None
+    assert resolve_flagship("痛風", "Gout (Visceral)", "bird") is not None
+    assert resolve_flagship("脱皮不全", "Dysecdysis (Retained Shed)", "reptile") is not None
+    # Dysecdysis excludes retained spectacle (a distinct, ocular-specific entity).
+    assert flagship_clinical_fields("snake", "スペクタクル脱皮不全", "Retained Spectacle") is not None
+    # Fungal shell disease must NOT get the bacterial shell-rot text (curated
+    # separately by fungal_library, which names Fusarium/Paecilomyces, not the
+    # Gram-negative bacteria of ordinary shell rot).
+    assert flagship_clinical_fields("tortoise", "真菌性甲羅疾患", "Fungal Shell Disease") is None
+    fungal_shell = None
+    from scripts.template_elimination.fungal_library import fungal_clinical_fields
+
+    fungal_shell = fungal_clinical_fields("tortoise", "真菌性甲羅疾患", "Fungal Shell Disease")
+    assert fungal_shell is not None and "fusarium" in fungal_shell["causes"].lower()
+    # Ordinary (bacterial) shell rot is unaffected by the fungal exclusion.
+    assert flagship_clinical_fields("tortoise", "甲羅腐敗症", "Shell Rot") is not None
+
+
+def test_flagship_batch4_pdd_bornavirus_and_ferret_ece_coronavirus():
+    from scripts.template_elimination.pathogen_library import viral_clinical_fields
+
+    # Genuine PDD (avian bornavirus) resolves and names the virus.
+    pdd = viral_clinical_fields("bird", "前胃拡張症（PDD）", "Proventricular Dilatation Disease (PDD)")
+    assert pdd is not None and "bornavirus" in pdd["causes"].lower()
+    neuro = viral_clinical_fields("bird", "PDD神経型", "PDD Neurological Form")
+    assert neuro is not None and "bornavirus" in neuro["causes"].lower()
+    # "Non-PDD" gastric dilatation must NOT be given the bornavirus text — this
+    # JA phrasing ("PDD以外") is not covered by the shared "non-pdd" negation
+    # token, so the resolver key itself must require the full "proventricular
+    # dilatation disease" phrase, never bare "pdd".
+    non_pdd = viral_clinical_fields("bird", "胃拡張（PDD以外）", "Gastric Dilatation (Non-PDD)")
+    assert non_pdd is None
+    # Ferret ECE is caused by a coronavirus (FRECV), not a generic template.
+    ece = viral_clinical_fields("ferret", "流行性カタル性腸炎（ECE）", "Epizootic Catarrhal Enteritis (ECE)")
+    assert ece is not None and "coronavirus" in ece["causes"].lower()
+
+
+def test_served_db_flagship_batch4_exotic_english_causes_curated():
+    conn = _served_db_or_skip()
+    try:
+        rows = conn.execute(
+            "SELECT species, name, causes FROM diseases WHERE name IN "
+            "('Gastrointestinal Stasis','Ferret Adrenal Disease (FAD)','Encephalitozoonosis',"
+            "'Dysecdysis (Retained Shed)','Fungal Shell Disease') AND lower(species) IN "
+            "('rabbit','ferret','reptile','tortoise')"
+        ).fetchall()
+    finally:
+        conn.close()
+    assert rows, "expected at least one matching exotic row in the served DB"
+    for _species, _name, causes in rows:
+        low = (causes or "").lower()
+        assert not low.startswith("multifactorial etiology")
+        assert not low.startswith("infectious diseases are caused by pathogenic organisms")
+        assert not low.startswith("endocrine or metabolic dysfunction")

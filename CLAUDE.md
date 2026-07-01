@@ -1636,3 +1636,40 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 - 効果: flagship 解決数 78→**245疾患**（品種/解剖バリアント含む）。英語 causes の distinct 値: 1,126（栄養バッチ後）→**1,262**。
 - 回帰テスト +2件（衝突回避・原発性/腎性副甲状腺機能亢進の区別・尿路結石の溶解性コントラスト）
 - フルスイート **3,488件合格**（34 skip）、ruff clean。
+
+
+### 非感染性フラグシップ拡充 第4弾（エキゾチック伴侶動物 + PDD/ECE 病原体キー修正）
+`flagship_noninfectious_library.py` にエキゾチック伴侶動物の高頻度フラグシップを追加（草食小型哺乳類・フェレット・鳥・爬虫類・両生類）。既存 JAキュレート済みだが英語未対応だった疾患群の bilingual backfill。
+- **草食小型哺乳類共通**（ウサギ/チンチラ/モルモット/デグー、species引数で動的種名挿入）: 消化管うっ滞(GI stasis)・毛球症(トリコベゾア)
+- **ウサギ固有**: エンセファリトゾーン症（腎/眼/神経の3型を1テキストで統合、既存curated_etiology設計を踏襲）・斜頸（前庭疾患）・潰瘍性足底皮膚炎（ソアホック、グレード共有）・子宮腺癌
+- **モルモット固有**: 卵巣嚢胞（機能性/漿液性/濾胞性）　**ハリネズミ固有**: 針毛包炎
+- **フェレット**: 副腎疾患(FAD、名称バリアント10件超を1生成器で統合)・インスリノーマ・心筋症(DCM/HCM統合)・リンパ腫
+- **鳥類（鳥/インコ/オウム共通）**: 痛風（内臓型/関節型統合）・黄色腫
+- **爬虫類（爬虫類/リクガメ/ヘビ/トカゲ共通）**: 脱皮不全(ディセクダイシス)・スペクタクル(アイキャップ)脱皮不全・甲羅疾患(甲羅腐敗症/SCUD)・敗血症
+- **両生類固有**: 浮腫症候群(リンパ嚢浮腫)
+- **種問わず共通**: 肝線維症（既存curated_etiologyのJA generic entryに英語をbackfill）
+
+### PDD/ECE の pathogen_library 統合 + 頭字語衝突の追加是正
+- **鳥ボルナウイルス(PDD)**: 「前胃拡張症」full phrase + 「PDD神経型」/「PDD Neurological」の精密複合キーで解決。**bare `pdd` は使用禁止**と判明: 「Gastric Dilatation (Non-PDD)」の日本語名「胃拡張（PDD以外）」は共有否定トークン`non-pdd`（英語のみ想定）でカバーされず、bare `pdd` だと誤マッチすることをレビューで発見。
+- 共有 `_NEGATION_TOKENS`（`clinical_fields_generator.py`）に `非pdd`/`non-pdd` を追加（全 resolver 共通で恩恵）。
+- **フェレット流行性カタル性腸炎(ECE)**: フェレット腸コロナウイルス(FRECV)であることを`pathogen_library.py`の`_coronavirus`にフェレット分岐として追加、「流行性カタル性腸炎」/「epizootic catarrhal enteritis」full phrase キーで解決（bare `ece` は"niece"等に誤爆するため不使用）。
+
+### 真菌性甲羅疾患の誤カテゴリ発見・是正
+爬虫類の甲羅疾患フラグシップ生成器（`_shell_disease_reptile`）は細菌性病因（Citrobacter等）を記述するため、「真菌性甲羅疾患」に適用すると誤り。`fungal_library.py`に`_fungal_shell_disease`（Fusarium/Paecilomyces）を新設し、flagship側は`真菌性`/`fungal`を除外して二重適用・誤適用を防止。
+
+### 効果（配信SQLite実測）
+- **99疾患**を疾患特異的病因・病態生理に追加置換。flagship 累計解決数: 245→**330疾患**。
+- 英語 causes の distinct 値: 1,262→**1,307**。
+
+### 回帰テスト（+3件）
+- `test_flagship_batch4_exotic_resolver_precision` — エキゾチック解決精度、真菌性甲羅疾患の除外
+- `test_flagship_batch4_pdd_bornavirus_and_ferret_ece_coronavirus` — PDD/Non-PDD衝突・ECE=コロナウイルス
+- `test_served_db_flagship_batch4_exotic_english_causes_curated`
+
+### テスト・CI
+- フルスイート **3,491件合格**（34 skip）、ruff clean
+
+### 既知の残課題（次セッション候補）
+- 両生類の脱皮不全（Dysecdysis）に爬虫類のキーが適用されず（意図通り）、既存の causes_ja にツボカビ(Bd)のテキストが誤って残存しているのを発見（本セッションのスコープ外の既存データ不具合、要調査）
+- 鳥/爬虫類の残りフラグシップ（PBFD以外の羽毛疾患、爬虫類代謝性骨疾患の個別種対応等）
+- causes_ja/pathophysiology_ja の残りカテゴリテンプレートの疾患固有化（獣医レビュー前提で漸進的に）
