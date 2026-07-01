@@ -63,6 +63,7 @@ GENERIC_CAUSES_EN_MARKS: tuple[str, ...] = (
     "caused by exposure to toxic substances",
     "caused by dietary deficiency or excess",
     "fungal infection. inhalation or contact",
+    "fungal infections are caused by pathogenic or opportunistic fungi",
     "nutritional diseases result from",
     "musculoskeletal etiology. includes",
     "reproductive etiology. includes",

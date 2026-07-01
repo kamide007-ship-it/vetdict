@@ -1487,3 +1487,36 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 - ウイルス: resolver 精度（腺腫/否定名/非猫レンチ除外）、正病原体名、汎用テンプレート不在
 - 細菌: resolver 精度（coli/listeri 衝突・abscess 除外）、正病原体名（S. equi / C. tetani+tetanospasmin / botulinum / haemoplasma）、汎用テンプレート不在
 - フルスイート **3,473件合格**（34 skip）、ruff clean
+
+## 2026-07セッション（第4弾: named-agent キュレーション拡充 — 真菌）
+
+### 真菌 named-pathogen ライブラリ（`scripts/template_elimination/fungal_library.py` 新規）
+汎用真菌テンプレート（JA「…の原因は真菌感染である…」/ EN "Fungal infection. Inhalation or contact…" / "Fungal infections are caused by pathogenic or opportunistic fungi…"）を、疾患名が示す真菌に基づき疾患特異化。
+- **14の真菌属生成器**（causes + pathophysiology を JA+EN、宿主特異的分岐あり）:
+  - 皮膚糸状菌（犬猫→Microsporum canis / げっ歯類→Trichophyton）、アスペルギルス（鳥→気嚢型 / 犬→鼻腔型 / 馬→喉嚢真菌症）、カンジダ（鳥→そ嚢真菌症）、クリプトコッカス（猫→鼻腔・CNS）、マラセチア、ヒストプラズマ、ブラストミセス、コクシジオイデス（渓谷熱）、スポロトリックス（人獣共通）、接合菌（ムコール、血管侵襲）、ピシウム（卵菌）、サプロレグニア（水カビ、魚・両生類）、マクロラブダス（鳥胃酵母、旧メガバクテリア）、ニューモシスチス。
+- **致命的な部分文字列衝突をレビューで回避**:
+  - `coccidio`(bare)→原虫コクシジウム症 → `coccidioidomyc`/`coccidioides`
+  - `microspor`→微胞子虫（Encephalitozoon）→ `microsporum`（全綴り）
+  - `crypto`→クリプトスポリジウム(原虫) → `cryptococc`
+  - `pythi`→python（ヘビ）は非衝突を確認（pythi≠pytho）
+- キュレート済み JA（フラグシップのアスペルギルス・カンジダ）は fingerprint 検出で温存し、テンプレートだった英語のみアップグレード。
+
+### 統合
+- `fix_named_pathogens.py` の `_clinical_fields`/`_resolves` を viral→bacterial→fungal の3段に拡張。`migrate_to_sqlite.py` の配信DB安全網も同様。
+- EN 第2真菌テンプレート "Fungal infections are caused by pathogenic or opportunistic fungi" を `GENERIC_CAUSES_EN_MARKS` に追加（"Fungal infection. Inhalation…" は既収載）。
+
+### 効果（配信SQLite実測）
+- **133真菌疾患**を疾患特異的病因・病態生理に置換。
+- 残る汎用 "Fungal infection" EN（73件）は「全身性真菌症」等、菌名を持たない汎用真菌疾患で対象外（設計通り）。
+
+### 回帰テスト（+3件）
+- `test_fungal_library_resolver_precision` — コクシジウム症/微胞子虫/クリプトスポリジウム/python を除外
+- `test_named_fungal_causes_cite_correct_organism` — Microsporum canis(犬猫)/Trichophyton(げっ歯類)、鳥アスペルギルス=気嚢、馬=喉嚢、Macrorhabdus 明記
+- `test_no_generic_fungal_causes_on_named_fungi_in_json`
+
+### テスト・CI
+- フルスイート **3,476件合格**（34 skip、+3新規）、ruff clean
+- 再現手順: `fix_named_pathogens.py --apply` → `migrate_to_sqlite.py`
+
+### named-agent キュレーション累計（第2〜4弾）
+毒物64 + 原虫11 + ウイルス28 + 細菌24 + 真菌14 = **141病原体生成器**。ウイルス+細菌+真菌で計 **約720疾患**の病因・病態生理を汎用テンプレートから疾患特異的記述（日英）に置換。

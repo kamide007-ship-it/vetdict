@@ -3820,3 +3820,56 @@ def test_no_generic_infectious_causes_on_named_bacteria_in_json():
         ):
             offenders.append(ne or nj)
     assert not offenders, f"{len(offenders)} named-bacterium diseases keep the generic template: {offenders[:10]}"
+
+
+# ---------------------------------------------------------------------------
+# Named-pathogen fungal etiology curation (2026-07)
+# ---------------------------------------------------------------------------
+def test_fungal_library_resolver_precision():
+    from scripts.template_elimination.fungal_library import resolve_fungal_agent
+
+    # Genuine mycoses resolve.
+    assert resolve_fungal_agent("皮膚糸状菌症", "Dermatophytosis (Ringworm)") is not None
+    assert resolve_fungal_agent("アスペルギルス症", "Aspergillosis") is not None
+    assert resolve_fungal_agent("コクシジオイデス症", "Coccidioidomycosis") is not None
+    assert resolve_fungal_agent("水カビ病", "Saprolegniasis") is not None
+    # Critical collisions must NOT resolve as fungal.
+    assert resolve_fungal_agent("コクシジウム症", "Coccidiosis") is None  # protozoal, not coccidioides
+    assert resolve_fungal_agent("エンセファリトゾーン症", "Microsporidiosis") is None  # not microsporum
+    assert resolve_fungal_agent("クリプトスポリジウム症", "Cryptosporidiosis") is None  # not cryptococcus
+    assert resolve_fungal_agent("ボールパイソン", "Ball Python Husbandry") is None  # not pythium
+
+
+def test_named_fungal_causes_cite_correct_organism():
+    from scripts.template_elimination.fungal_library import fungal_clinical_fields
+
+    # Cats/dogs: Microsporum canis; rodents: Trichophyton.
+    assert "Microsporum canis" in fungal_clinical_fields("cat", "皮膚糸状菌症", "Dermatophytosis")["causes"]
+    assert "Trichophyton" in fungal_clinical_fields("hamster", "皮膚糸状菌症", "Dermatophytosis")["causes"]
+    # Aspergillus is host-aware (avian air-sac vs equine guttural pouch).
+    assert "air sac" in fungal_clinical_fields("bird", "アスペルギルス症", "Aspergillosis")["pathophysiology"].lower()
+    assert "guttural" in fungal_clinical_fields("horse", "喉嚢真菌症", "Guttural Pouch Mycosis")["causes"].lower()
+    # Cryptococcus names the encapsulated yeast.
+    assert "Cryptococcus" in fungal_clinical_fields("cat", "クリプトコッカス症", "Cryptococcosis")["causes"]
+    # Macrorhabdus (avian gastric yeast) named, not "megabacteria".
+    agy = fungal_clinical_fields("parakeet", "メガバクテリア症", "Megabacteriosis (AGY)")
+    assert "Macrorhabdus" in agy["causes"]
+
+
+def test_no_generic_fungal_causes_on_named_fungi_in_json():
+    from scripts.template_elimination.fungal_library import fungal_clinical_fields
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    species_norm = {"Cat": "cat", "Dog": "dog", "Horse": "horse", "Rabbit": "rabbit"}
+    offenders = []
+    for e in entries:
+        nj, ne = e.get("name_ja") or "", e.get("name") or ""
+        sp = species_norm.get(e.get("species"), (e.get("species") or "").lower())
+        if fungal_clinical_fields(sp, nj, ne) is None:
+            continue
+        cen = (e.get("causes") or "").lower()
+        if cen.startswith("fungal infection. inhalation") or cen.startswith("fungal infections are caused by"):
+            offenders.append(ne or nj)
+    assert not offenders, f"{len(offenders)} named-fungus diseases keep the generic template: {offenders[:10]}"
