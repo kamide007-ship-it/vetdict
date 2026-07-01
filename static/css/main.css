@@ -481,6 +481,8 @@ a:hover{text-decoration:underline}
 .disease-db-item:focus-visible{outline:2px solid var(--navy-light);outline-offset:-2px}
 .disease-db-item[aria-expanded="true"]{background:var(--green-light);border-left:3px solid var(--green);padding-left:11px}
 .disease-db-item[aria-expanded="true"] .d-name{color:var(--navy)}
+.d-urgency-badge{display:inline-block;font-size:.66rem;font-weight:700;padding:1px 8px;border-radius:10px;line-height:1.6;margin-left:4px}
+.d-urgency-badge.badge-emergency{background:#fef2f2;color:#dc2626}
 @media(hover:hover){.disease-db-item:hover{background:var(--green-light)}}
 .disease-db-item .d-name{font-weight:600;font-size:.86rem}
 .disease-db-item .d-name-ja{color:var(--gray-600);font-size:.78rem;margin-left:6px}

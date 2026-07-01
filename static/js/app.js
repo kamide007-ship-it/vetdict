@@ -3978,6 +3978,14 @@ function filterDiseaseDb(letter){
   renderDiseaseDb();
 }
 
+/* Emergency flag for disease-DB rows. Only the "emergency" severity is badged —
+   it is a clean, high-precision signal (verified: pyothorax, saddle thrombus,
+   blocked cat, DKA…), so a clinician scanning the list spots true emergencies at
+   a glance without the badge becoming noise. */
+function severityBadge(sev){
+  if((sev||"").toLowerCase()!=="emergency")return "";
+  return `<span class="d-urgency-badge badge-emergency" title="${currentLang==="ja"?"緊急疾患":"Emergency"}">🚨 ${currentLang==="ja"?"緊急":"Emergency"}</span>`;
+}
 let diseaseDisplayLimit=100;
 function renderDiseaseDb(){
   const list=document.getElementById("diseaseDbList");
@@ -4076,7 +4084,7 @@ function renderDiseaseDb(){
     const _dCatLbl=currentLang==="ja"?(_dCatObj?.ja||"その他"):(_dCatObj?.en||"Other");
     return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false">
       <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span></div>
-      <div class="d-meta"><span class="d-cat-badge" data-cat="${escapeHtml(_dCat)}">${escapeHtml(_dCatLbl)}</span></div>
+      <div class="d-meta"><span class="d-cat-badge" data-cat="${escapeHtml(_dCat)}">${escapeHtml(_dCatLbl)}</span>${severityBadge(d.severity)}</div>
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
         <dt>${t("dtDescription")}</dt><dd>${escapeHtml(desc)}</dd>
