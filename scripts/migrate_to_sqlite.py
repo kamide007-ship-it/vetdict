@@ -1719,7 +1719,6 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
     sys.path.insert(0, str(ROOT))
     from scripts.template_elimination.bacterial_library import (
         bacterial_clinical_fields,
-        resolve_bacterial_agent,
     )
     from scripts.template_elimination.clinical_fields_generator import (
         build_etiology_fingerprints,
@@ -1728,34 +1727,18 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
         gen_pathophysiology_ja,
     )
     from scripts.template_elimination.curated_etiology import STUB_SIGNATURES
+    from scripts.template_elimination.flagship_noninfectious_library import flagship_clinical_fields
     from scripts.template_elimination.fungal_library import (
         fungal_clinical_fields,
-        resolve_fungal_agent,
     )
-    from scripts.template_elimination.nutritional_library import (
-        nutrient_clinical_fields,
-        resolve_nutrient_agent,
-    )
-    from scripts.template_elimination.parasite_library import (
-        parasite_clinical_fields,
-        resolve_parasite_agent,
-    )
+    from scripts.template_elimination.nutritional_library import nutrient_clinical_fields
+    from scripts.template_elimination.parasite_library import parasite_clinical_fields
     from scripts.template_elimination.pathogen_library import (
         GENERIC_CAUSES_EN_MARKS,
         GENERIC_CAUSES_JA_MARKS,
         GENERIC_PATHO_EN_MARKS,
-        resolve_viral_agent,
         viral_clinical_fields,
     )
-
-    def _resolve(nj, ne):
-        return (
-            resolve_viral_agent(nj, ne)
-            or resolve_bacterial_agent(nj, ne)
-            or resolve_fungal_agent(nj, ne)
-            or resolve_parasite_agent(nj, ne)
-            or resolve_nutrient_agent(nj, ne)
-        )
 
     def _fields(sp, nj, ne):
         return (
@@ -1764,6 +1747,7 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
             or fungal_clinical_fields(sp, nj, ne)
             or parasite_clinical_fields(sp, nj, ne)
             or nutrient_clinical_fields(sp, nj, ne)
+            or flagship_clinical_fields(sp, nj, ne)
         )
 
     causes_fps = build_etiology_fingerprints(gen_causes_ja)
@@ -1793,8 +1777,6 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
     ).fetchall()
     counts = {"causes_ja": 0, "causes": 0, "pathophysiology_ja": 0, "pathophysiology": 0}
     for row in rows:
-        if _resolve(row["name_ja"] or "", row["name"] or "") is None:
-            continue
         fields = _fields((row["species"] or "").lower(), row["name_ja"] or "", row["name"] or "")
         if not fields:
             continue

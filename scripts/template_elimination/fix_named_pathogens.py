@@ -31,7 +31,6 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.template_elimination.bacterial_library import (  # noqa: E402
     bacterial_clinical_fields,
-    resolve_bacterial_agent,
 )
 from scripts.template_elimination.clinical_fields_generator import (  # noqa: E402
     build_etiology_fingerprints,
@@ -41,23 +40,22 @@ from scripts.template_elimination.clinical_fields_generator import (  # noqa: E4
 )
 from scripts.template_elimination.curated_etiology import STUB_SIGNATURES  # noqa: E402
 from scripts.template_elimination.eliminate_templates import SPECIES_NORM  # noqa: E402
+from scripts.template_elimination.flagship_noninfectious_library import (  # noqa: E402
+    flagship_clinical_fields,
+)
 from scripts.template_elimination.fungal_library import (  # noqa: E402
     fungal_clinical_fields,
-    resolve_fungal_agent,
 )
 from scripts.template_elimination.nutritional_library import (  # noqa: E402
     nutrient_clinical_fields,
-    resolve_nutrient_agent,
 )
 from scripts.template_elimination.parasite_library import (  # noqa: E402
     parasite_clinical_fields,
-    resolve_parasite_agent,
 )
 from scripts.template_elimination.pathogen_library import (  # noqa: E402
     GENERIC_CAUSES_EN_MARKS,
     GENERIC_CAUSES_JA_MARKS,
     GENERIC_PATHO_EN_MARKS,
-    resolve_viral_agent,
     viral_clinical_fields,
 )
 
@@ -71,23 +69,15 @@ PATHO_EN_MARKS = GENERIC_PATHO_EN_MARKS
 
 
 def _clinical_fields(species: str, name_ja: str, name_en: str):
-    """Named-pathogen curated fields: viral, bacterial, fungal, then parasite; None if none."""
+    """Curated causes/pathophysiology: named pathogen (viral/bacterial/fungal/
+    parasite), then named nutrient, then non-infectious flagship; None if none."""
     return (
         viral_clinical_fields(species, name_ja, name_en)
         or bacterial_clinical_fields(species, name_ja, name_en)
         or fungal_clinical_fields(species, name_ja, name_en)
         or parasite_clinical_fields(species, name_ja, name_en)
         or nutrient_clinical_fields(species, name_ja, name_en)
-    )
-
-
-def _resolves(name_ja: str, name_en: str) -> bool:
-    return (
-        resolve_viral_agent(name_ja, name_en) is not None
-        or resolve_bacterial_agent(name_ja, name_en) is not None
-        or resolve_fungal_agent(name_ja, name_en) is not None
-        or resolve_parasite_agent(name_ja, name_en) is not None
-        or resolve_nutrient_agent(name_ja, name_en) is not None
+        or flagship_clinical_fields(species, name_ja, name_en)
     )
 
 
@@ -119,8 +109,6 @@ def remediate(data: list[dict], apply: bool) -> dict:
     for entry in data:
         name_ja = entry.get("name_ja") or ""
         name_en = entry.get("name") or ""
-        if not _resolves(name_ja, name_en):
-            continue
         raw_species = entry.get("species", "")
         species = SPECIES_NORM.get(raw_species, (raw_species or "").lower())
         fields = _clinical_fields(species, name_ja, name_en)
