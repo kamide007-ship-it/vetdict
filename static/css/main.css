@@ -479,6 +479,8 @@ a:hover{text-decoration:underline}
 .disease-db-item{padding:10px 14px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .15s}
 .disease-db-item:active{background:var(--green-light)}
 .disease-db-item:focus-visible{outline:2px solid var(--navy-light);outline-offset:-2px}
+.disease-db-item[aria-expanded="true"]{background:var(--green-light);border-left:3px solid var(--green);padding-left:11px}
+.disease-db-item[aria-expanded="true"] .d-name{color:var(--navy)}
 @media(hover:hover){.disease-db-item:hover{background:var(--green-light)}}
 .disease-db-item .d-name{font-weight:600;font-size:.86rem}
 .disease-db-item .d-name-ja{color:var(--gray-600);font-size:.78rem;margin-left:6px}

@@ -6235,6 +6235,20 @@ function toggleDbItem(el){
     const diseaseName=nameEl?(nameEl.textContent||"").trim().substring(0,80):"";
     el.setAttribute("aria-label",isOpen?(currentLang==="ja"?`${diseaseName}を閉じる`:`Close ${diseaseName}`):(currentLang==="ja"?`${diseaseName}の詳細を見る`:`View ${diseaseName} details`));
     if(isOpen){
+      /* Accordion: collapse any other open item in the same list so browsing
+         stays compact and oriented — one disease at a time. */
+      const listEl=el.closest(".disease-db-list");
+      if(listEl){
+        listEl.querySelectorAll(".disease-db-item[aria-expanded='true']").forEach(other=>{
+          if(other===el)return;
+          const od=other.querySelector(".disease-detail.open");
+          if(od)od.classList.remove("open");
+          other.setAttribute("aria-expanded","false");
+          const on=other.querySelector(".d-name")||other.querySelector(".disease-name");
+          const onm=on?(on.textContent||"").trim().substring(0,80):"";
+          other.setAttribute("aria-label",currentLang==="ja"?`${onm}の詳細を見る`:`View ${onm} details`);
+        });
+      }
       trackEvent("view_disease_detail",{species:currentSpecies,disease:diseaseName});
       if(!detail.querySelector(".detail-close-btn")){
         const closeBtn=document.createElement("button");
