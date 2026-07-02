@@ -58,19 +58,31 @@ from scripts.template_elimination.pathogen_library import (  # noqa: E402
     GENERIC_PATHO_EN_MARKS,
     viral_clinical_fields,
 )
+from scripts.template_elimination.structural_library import (  # noqa: E402
+    structural_clinical_fields,
+)
 
 JSON_PATH = ROOT / "diseases_all_species.json"
 
 # Explicit category-template signatures (belt-and-braces alongside fingerprints).
+# The fallback-generator infection paragraphs ("…病原体（細菌・ウイルス・真菌・原虫）の
+# 感染が直接的な原因…") are not category fingerprints, so name them explicitly — this
+# only ever fires when a disease resolves to a curated generator below.
 CAUSES_JA_MARKS = GENERIC_CAUSES_JA_MARKS
 CAUSES_EN_MARKS = GENERIC_CAUSES_EN_MARKS
-PATHO_JA_MARKS = ("病態生理はウイルス侵入", "病原ウイルスは特異的細胞受容体")
+PATHO_JA_MARKS = (
+    "病態生理はウイルス侵入",
+    "病原ウイルスは特異的細胞受容体",
+    "の感染が直接的な原因",
+    "病原体（細菌・ウイルス・真菌・原虫）",
+)
 PATHO_EN_MARKS = GENERIC_PATHO_EN_MARKS
 
 
 def _clinical_fields(species: str, name_ja: str, name_en: str):
     """Curated causes/pathophysiology: named pathogen (viral/bacterial/fungal/
-    parasite), then named nutrient, then non-infectious flagship; None if none."""
+    parasite), then named nutrient, then non-infectious flagship, then
+    structural/mechanical mechanism; None if none."""
     return (
         viral_clinical_fields(species, name_ja, name_en)
         or bacterial_clinical_fields(species, name_ja, name_en)
@@ -78,6 +90,7 @@ def _clinical_fields(species: str, name_ja: str, name_en: str):
         or parasite_clinical_fields(species, name_ja, name_en)
         or nutrient_clinical_fields(species, name_ja, name_en)
         or flagship_clinical_fields(species, name_ja, name_en)
+        or structural_clinical_fields(species, name_ja, name_en)
     )
 
 

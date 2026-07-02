@@ -4269,3 +4269,125 @@ def test_served_db_amphibian_dysecdysis_and_reptile_spectacle_fixed():
     assert spectacle_rows, "expected the reptile retained-spectacle row in the served DB"
     for _species, _name, causes_ja in spectacle_rows:
         assert "dysecdysis）は低湿度・脱水・栄養不良・外部寄生虫" not in (causes_ja or "")
+
+
+# --- Structural / mechanical diseases (bladder stones, prolapse, crop stasis,
+#     impaction, torsion, foreign body, dystocia …) must NOT carry infection /
+#     toxicosis / parasite category templates. -------------------------------- #
+def test_structural_library_resolver_precision():
+    """The structural resolver maps mechanical names but rejects the
+    neoplastic / infectious / necrotic variants of the same organ (so it never
+    overwrites their correct category content)."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.structural_library import resolve_structural_agent
+
+    # Mechanical → resolves.
+    for nj, ne in [
+        ("膀胱結石", "Bladder Stones"),
+        ("直腸脱", "Rectal Prolapse"),
+        ("そ嚢うっ滞", "Crop Stasis"),
+        ("頬袋閉塞", "Cheek Pouch Impaction"),
+        ("肝葉捻転", "Hepatic Lobe Torsion"),
+        ("肛門腺貯留", "Anal Gland Impaction"),
+        ("卵塞", "Egg Binding"),
+        ("披裂軟骨炎", "Arytenoid Chondritis"),
+    ]:
+        assert resolve_structural_agent(nj, ne) is not None, f"{ne} should resolve to a structural mechanism"
+
+    # Same organ, but neoplastic / infectious / necrotic / dysbiotic → must NOT resolve.
+    for nj, ne in [
+        ("肛門腺癌", "Anal Gland Carcinoma"),
+        ("頬袋膿瘍", "Cheek Pouch Abscess"),
+        ("頬袋腫瘍", "Cheek Pouch Tumor"),
+        ("そ嚢カンジダ症", "Crop Candidiasis"),
+        ("陰茎壊死", "Penile Necrosis"),
+        ("盲腸癌", "Cecal Carcinoma"),
+        ("筋胃炎", "Ventriculitis (Gizzard Inflammation)"),
+        ("小腸内細菌異常増殖", "Small Intestinal Bacterial Overgrowth (SIBO)"),
+    ]:
+        assert resolve_structural_agent(nj, ne) is None, f"{ne} must NOT resolve to a mechanical mechanism"
+
+
+def test_structural_causes_name_the_mechanism_not_infection():
+    """Curated structural causes/pathophysiology cite the mechanical mechanism
+    (concretion, straining, motility) and never the 'bacterial pathogen invades
+    the body' template."""
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.structural_library import structural_clinical_fields
+
+    stone = structural_clinical_fields("dog", "膀胱結石", "Bladder Stones")
+    assert "細菌病原体の感染" not in stone["causes_ja"]
+    assert "ミネラル" in stone["causes_ja"] and "結石" in stone["causes_ja"]
+    assert "urolith" in stone["causes"].lower() or "calcul" in stone["causes"].lower()
+
+    prolapse = structural_clinical_fields("cat", "直腸脱", "Rectal Prolapse")
+    assert "努責" in prolapse["causes_ja"]
+    assert "straining" in prolapse["causes"].lower()
+
+    crop = structural_clinical_fields("parakeet", "そ嚢うっ滞", "Crop Stasis")
+    assert "運動低下" in crop["pathophysiology_ja"] or "停滞" in crop["pathophysiology_ja"]
+
+
+def test_served_db_structural_diseases_not_infection_templated():
+    """No mechanical/structural disease in the served DB may carry an infection /
+    toxicosis / parasite pathophysiology template (English or Japanese)."""
+    conn = _served_db_or_skip()
+    try:
+        rows = conn.execute("SELECT species, name, name_ja, causes_ja, pathophysiology FROM diseases").fetchall()
+    finally:
+        conn.close()
+    # Unambiguously mechanical name markers.
+    markers = (
+        "膀胱結石",
+        "Bladder Stone",
+        "Cheek Pouch Impaction",
+        "Cecal Impaction",
+        "Rectal Prolapse",
+        "Uterine Torsion",
+        "Hepatic Lobe Torsion",
+        "Anal Gland Impaction",
+        "Cloacal Calculi",
+    )
+    bad_en = (
+        "pathophysiology of infectious diseases",
+        "pathophysiology of parasitic diseases",
+        "pathophysiology of fungal infections",
+        "pathophysiology of toxicosis",
+    )
+    failures = []
+    for species, name, name_ja, causes_ja, patho in rows:
+        hay = f"{name or ''} {name_ja or ''}"
+        if not any(m in hay for m in markers):
+            continue
+        p_en = (patho or "").lower()
+        if any(b in p_en for b in bad_en):
+            failures.append(f"{species}/{name}: EN patho template")
+        if "細菌病原体の感染" in (causes_ja or ""):
+            failures.append(f"{species}/{name}: JA bacterial causes template")
+    assert not failures, "Structural diseases still carry infection templates:\n" + "\n".join(failures[:15])
+
+
+def test_served_db_english_description_has_no_japanese():
+    """The English ``description`` (most-visible headline field) must never
+    contain Japanese — no untranslated JA prose and no leaked JA test names.
+
+    Module/supplementary entries used to ship the content-free English stub or,
+    for newly-added diseases, the Japanese description verbatim; a handful of
+    grounded descriptions also embedded Japanese test names ("Work-up typically
+    uses 身体検査…"). ``ground_stub_descriptions`` rebuilds these from the record's
+    own signs with Latin-only tokens.
+    """
+    import re as _re
+
+    conn = _served_db_or_skip()
+    try:
+        rows = conn.execute("SELECT species, name, description FROM diseases").fetchall()
+    finally:
+        conn.close()
+    cjk = _re.compile(r"[぀-ヿ㐀-鿿]")
+    offenders = [f"{sp}/{nm}" for sp, nm, desc in rows if desc and cjk.search(desc)]
+    assert not offenders, f"{len(offenders)} English descriptions contain Japanese: {offenders[:15]}"
