@@ -1705,3 +1705,45 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 - 鳥/爬虫類の残りフラグシップ（PBFD以外の羽毛疾患、爬虫類代謝性骨疾患の個別種対応等）
 - causes_ja/pathophysiology_ja の残りカテゴリテンプレートの疾患固有化（獣医レビュー前提で漸進的に）
 - 腫瘍学・多因子性疾患のcauses/pathophysiologyに残る汎用カテゴリガイダンス（医学的に妥当な内容だが疾患固有化の余地あり）
+
+## 2026-07セッション（第9弾: 構造的・機械的疾患の感染テンプレート撲滅 + 英語説明文の日本語混入除去）
+
+### 背景: 機械的疾患に「細菌が体内に侵入」— 臨床的に危険な誤り
+配信DB監査で、**101件の構造的・機械的疾患**（膀胱結石・臓器脱・そ嚢うっ滞・盲腸/頬袋閉塞・臓器捻転・異物・卵塞等）が、causes_ja/pathophysiology_ja（および英語patho）に**感染症・中毒・寄生虫のカテゴリテンプレート**を保持していた。例: 犬「膀胱結石」の病因が「特定の細菌病原体の感染である。病原性細菌が体内に侵入…」（尿石症＝ミネラル析出なのに）、英語pathophysiologyが "The pathophysiology of infectious/parasitic/fungal/toxicosis diseases…" を機械的疾患に適用。獣医師が即座に発見する信頼失墜レベルの記述。根本原因は誤った保存カテゴリタグ（infectious等）をpathophysiology生成器が信用していたこと + 疾患名のタイプミス（膨胱結石←膀胱結石）。
+
+### 構造的・機械的キュレートライブラリ（`scripts/template_elimination/structural_library.py` 新規）
+病原体ライブラリの姉妹版。機械的機序は教科書的・種横断的な事実（結石＝凝固物、脱出＝突出、閉塞＝通過障害）なので捏造リスクゼロでキュレート。17機序生成器（causes + pathophysiology を JA+EN、種名補間・種特異的注記付き）:
+- 尿石症（腎/膀胱/総排泄腔、爬虫類=脱水/温度勾配、草食=炭酸Ca）・臓器脱（直腸/総排泄腔/子宮/膣/陰茎/卵管）・異物（消化管/鼻腔/蹄/砂嚢）・そ嚢うっ滞（サワークロップ=二次発酵）・頬袋閉塞・盲腸停滞・消化管うっ滞（草食=肝リピドーシスリスク）・毛球症・臓器捻転（子宮/肝葉）・腺閉塞（肛門腺/臭腺/大腿孔）・嘴不正咬合・蹄過長・卵塞/卵胞停滞・披裂軟骨炎
+- **機序修飾語を必須とするキー設計**（…閉塞/…stasis/…prolapse）で、同一臓器の腫瘍/膿瘍/壊死/カンジダ変異（肛門腺癌・頬袋膿瘍・嘴腐敗・陰茎壊死）は解決させない。加えて neoplasia/abscess/necrosis/mycosis/dysbiosis 等の除外リストを二重の安全網に。
+- SIBO・繊毛虫過増殖（＝dysbiosis）は設計通り除外（機械的でない）。
+
+### 統合と効果
+- `fix_named_pathogens.py`／`migrate_to_sqlite.py` の `_clinical_fields` チェーン末尾に `structural_clinical_fields` を追加（named-agent・flagship の後）。fallback生成器の感染patho（「病原体（細菌・ウイルス・真菌・原虫）の感染が直接的な原因」）を捕捉する PATHO_JA_MARKS も追加。
+- 疾患名タイプミス「膨胱結石」→「膀胱結石」を全11箇所修正（`diseases_all_species.json`、name_ja含む）→ 検索インデックス再生成。
+- 効果: 構造的疾患の感染テンプレート **101→1**（残り1は Cryptosporidium/MBD/膀胱結石起因の努責を記述した**正当な種別キュレート**で、検出器の偽陽性）。副次的に named-pathogen 疾患の fallback感染patho も疾患固有化（増殖性腸症=L. intracellularis、各種膿瘍=好中球集積機序）。
+- キュレート済みコンテンツ（ウサギ肝葉捻転patho、猫直腸脱patho）は温存を確認。
+
+### 英語説明文（description）の日本語混入を撲滅（193件）
+最も目立つ見出し要約フィールドで、モジュール/補足由来の**193件**が英語未対応だった:
+- 170件: 内容空虚な英語スタブ "…is a clinical condition requiring veterinary evaluation…"（症状は記録済み）
+- 23件: 完全日本語（新規追加疾患でENが未翻訳）または英語文に日本語検査名混入（"Work-up typically uses 身体検査…"）
+- `migrate_to_sqlite.py` に `ground_stub_descriptions()` を追加。CJK混入または空スタブの英語説明を、その疾患自身の症状・推奨検査（**Latin文字のみにフィルタ**しCJK漏出を防止）・緊急度・名前ベースカテゴリから `compose_grounded_description` で再構築（記録済みデータの言い換えのみ、新規医学的主張なし）。
+- 効果: 英語説明のCJK混入 **0件**。英語causes のCJK混入も構造的修正の副次効果で 115→20。
+
+### バグ修正（本セッションで作り込んだものを検出・是正）
+- 構造的生成器の一部が英語文に `nj`（日本語名）を使用（"脾捻転 in dogs is…"）→ 全5箇所を英語名 `_en_name(ne, fallback)`（CJKガード付き）に修正。JSONをリセットして修正後生成器で再適用。
+- 種名サフィックスの重複（"トカゲの膀胱結石（トカゲ）は…"）を `_strip_species_suffix` で除去。
+
+### 回帰テスト追加（tests/test_no_template_disease_content.py、+4件）
+- `test_structural_library_resolver_precision` — 機械的名は解決、同一臓器の腫瘍/膿瘍/壊死/カンジダ/SIBO は非解決
+- `test_structural_causes_name_the_mechanism_not_infection` — 結石=ミネラル/尿石、脱出=努責/straining、そ嚢=運動低下
+- `test_served_db_structural_diseases_not_infection_templated` — 配信DBで機械的疾患に感染patho（EN/JA）が残っていない
+- `test_served_db_english_description_has_no_japanese` — 英語説明にCJKが残っていない
+
+### テスト・CI
+- フルテストスイート: **3,498件合格**（34 skip、+4新規）、カバレッジ81.15%
+- ruff check / format: 全変更ファイルで通過
+- 再現手順: `fix_named_pathogens.py --apply` → `migrate_to_sqlite.py` → `build_disease_search_index.py`
+
+### 既知の残課題（次セッション候補・要人手翻訳）
+- **52疾患の英語臨床フィールドが完全日本語**（新規追加のJA-first コンテンツ: 観賞魚26疾患、馬の胃潰瘍/繁殖疾患、新生児症候群、マムシ咬傷等）。causes/treatment/prevention/prognosis/clinical_signs/pathophysiology が未翻訳。**臨床用量プロトコルの機械翻訳は患者安全上のリスク**があるため本セッションでは自動翻訳せず、獣医監修下での人手翻訳を推奨（description は英語グラウンディング済み）。

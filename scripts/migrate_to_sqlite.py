@@ -1452,6 +1452,96 @@ def fix_prognosis_possessive_en(conn) -> int:
     return n
 
 
+def ground_stub_descriptions(conn) -> dict[str, int]:
+    """Replace content-free stub descriptions with a per-disease grounded summary.
+
+    Module/supplementary-sourced records that the JSON description pass
+    (eliminate_generic_descriptions.py) never saw still ship the fallback English
+    stub ``"<name> is a clinical condition requiring veterinary evaluation,
+    diagnosis, and appropriate treatment."`` (and, rarely, its Japanese
+    equivalent) — a summary that says nothing, on the most-visible field. When the
+    record carries its own presenting signs, ``compose_grounded_description``
+    rebuilds a specific one-line summary from that data (name, species, name-based
+    category, own signs, own recommended tests, urgency) — restating stored data
+    only, so no new medical claim is introduced. Records without usable signs are
+    left unchanged rather than re-stubbed.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        compose_grounded_description,
+        compose_grounded_description_ja,
+        resolve_category_from_name,
+    )
+
+    try:
+        from api.health_checker import _get_species_symptom_names, _humanize_test_id
+    except ImportError:
+        from health_checker import _get_species_symptom_names, _humanize_test_id  # type: ignore
+
+    import re as _re
+
+    EN_STUB = "is a clinical condition requiring veterinary evaluation"
+    JA_STUB = "は臨床的評価と診断、適切な治療を要する疾患である"
+    _cjk = _re.compile(r"[぀-ヿ㐀-鿿]")
+
+    def _ids(raw):
+        try:
+            val = json.loads(raw) if raw else []
+        except (json.JSONDecodeError, TypeError):
+            return []
+        return [str(x) for x in val] if isinstance(val, list) else []
+
+    _sym_cache: dict[str, dict] = {}
+
+    def _syms(species):
+        if species not in _sym_cache:
+            try:
+                _sym_cache[species] = _get_species_symptom_names(species) or {}
+            except Exception:
+                _sym_cache[species] = {}
+        return _sym_cache[species]
+
+    rows = conn.execute(
+        "SELECT id, species, name, name_ja, description, description_ja, symptoms, "
+        "recommended_tests, urgency FROM diseases"
+    ).fetchall()
+    counts = {"description": 0, "description_ja": 0}
+    for row in rows:
+        desc, desc_ja = row["description"] or "", row["description_ja"] or ""
+        # English field needs rebuilding if it is the content-free stub OR if it
+        # contains Japanese text (untranslated JA prose, or leaked JA test names).
+        en_stub = EN_STUB in desc or bool(_cjk.search(desc))
+        ja_stub = JA_STUB in desc_ja
+        if not (en_stub or ja_stub):
+            continue
+        species = (row["species"] or "").lower()
+        category = resolve_category_from_name(row["name"] or "", row["name_ja"] or "") or "generic"
+        lookup = _syms(species)
+
+        def _ascii(tok):  # keep Latin-only tokens out of English prose (no CJK leakage)
+            return bool(tok) and all(ord(c) < 0x3000 for c in tok)
+
+        sym_ids = _ids(row["symptoms"])
+        signs_en = [t for t in (lookup.get(s, {}).get("en") or _humanize_test_id(s) for s in sym_ids) if _ascii(t)]
+        signs_ja = [lookup.get(s, {}).get("ja") for s in sym_ids if lookup.get(s, {}).get("ja")]
+        test_ids = _ids(row["recommended_tests"])
+        tests_en = [t for t in (_humanize_test_id(t) for t in test_ids) if _ascii(t)]
+        urgency = row["urgency"] or ""
+        if en_stub and signs_en:
+            new = compose_grounded_description(row["name"] or "", species, category, signs_en, tests_en, urgency)
+            if new and new != desc:
+                conn.execute("UPDATE diseases SET description = ? WHERE id = ?", (new, row["id"]))
+                counts["description"] += 1
+        if ja_stub and signs_ja:
+            new = compose_grounded_description_ja(
+                row["name_ja"] or "", species, category, signs_ja, [_humanize_test_id(t) for t in test_ids], urgency
+            )
+            if new and new != desc_ja:
+                conn.execute("UPDATE diseases SET description_ja = ? WHERE id = ?", (new, row["id"]))
+                counts["description_ja"] += 1
+    return counts
+
+
 def localize_english_species_in_served_db(conn) -> int:
     """Replace English species placeholders that leaked into Japanese DB fields.
 
@@ -1739,6 +1829,7 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
         GENERIC_PATHO_EN_MARKS,
         viral_clinical_fields,
     )
+    from scripts.template_elimination.structural_library import structural_clinical_fields
 
     def _fields(sp, nj, ne):
         return (
@@ -1748,13 +1839,19 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
             or parasite_clinical_fields(sp, nj, ne)
             or nutrient_clinical_fields(sp, nj, ne)
             or flagship_clinical_fields(sp, nj, ne)
+            or structural_clinical_fields(sp, nj, ne)
         )
 
     causes_fps = build_etiology_fingerprints(gen_causes_ja)
     patho_fps = build_etiology_fingerprints(gen_pathophysiology_ja)
     CAUSES_JA_MARKS = GENERIC_CAUSES_JA_MARKS
     CAUSES_EN_MARKS = GENERIC_CAUSES_EN_MARKS
-    PATHO_JA_MARKS = ("病態生理はウイルス侵入", "病原ウイルスは特異的細胞受容体")
+    PATHO_JA_MARKS = (
+        "病態生理はウイルス侵入",
+        "病原ウイルスは特異的細胞受容体",
+        "の感染が直接的な原因",
+        "病原体（細菌・ウイルス・真菌・原虫）",
+    )
     PATHO_EN_MARKS = GENERIC_PATHO_EN_MARKS
 
     def _ja_ok(text, fps, marks):
@@ -1929,6 +2026,12 @@ def main(db_path: str | None = None):
         ground_stats = ground_templated_fields_with_signs(conn)
         for field, n in ground_stats.items():
             print(f"  → {field}: {n} grounded with disease-specific signs")
+
+        # Rebuild content-free stub descriptions (module/supplementary entries the
+        # JSON description pass never saw) into per-disease grounded summaries.
+        desc_stats = ground_stub_descriptions(conn)
+        for field, n in desc_stats.items():
+            print(f"  → {field}: {n} stub descriptions grounded")
 
         # Repair the "in <species>s's prognosis" double-possessive grammar bug
         # in any prognosis text materialised from module/supplementary sources.
