@@ -4255,6 +4255,258 @@ def compose_grounded_pathophysiology(base_text: str, sign_names_en: list[str]) -
 
 
 # ---------------------------------------------------------------------------
+# Cross-species breed-clause filter
+# ---------------------------------------------------------------------------
+# Several category templates embed dog- (and a few cat-) breed predispositions —
+# e.g. the neurological aetiology template names "Border Collie storm anxiety",
+# the cardiac prevention template lists Doberman/Cocker Spaniel/Maine Coon. When
+# such a template is applied to an unrelated species (a horse's lameness, a
+# rabbit's seizures) the breed clause becomes cross-species contamination that a
+# clinician spots immediately. Each rule replaces one EXACT template fragment
+# with a species-neutral (or removed) version for species the breed does not
+# apply to. Using fixed fragments — not bare breed tokens — means zero false
+# positives (bare "コリー" would hit ブロッコリー, "ゴールデン" ゴールデンハムスター,
+# "ベンガル" ローズベンガル染色, "ヨークシャー" the Yorkshire pig).
+_BREED_DOG = frozenset({"dog"})
+_BREED_DOG_CAT = frozenset({"dog", "cat"})
+
+# (exact_fragment, species_where_kept, replacement_for_other_species)
+_BREED_CLAUSE_RULES: tuple[tuple[str, frozenset, str], ...] = (
+    # causes_ja
+    (
+        "品種特異的好発性（コリーのCDS、ボーダーコリーのストーム不安、特発性てんかんの素因犬種）も重要な背景因子。",
+        _BREED_DOG,
+        "",
+    ),
+    (
+        "心筋症（DCM/HCM）の素因犬種・猫品種、変性性弁膜疾患（小型犬の僧帽弁粘液腫様変性）、先天性心奇形（PDA・VSD・ASD）、不整脈源性心筋症が主要病因。",
+        _BREED_DOG_CAT,
+        "心筋症（拡張型・肥大型）、変性性弁膜疾患、先天性心奇形（PDA・VSD・ASD）、不整脈源性心筋症が主要病因。",
+    ),
+    (
+        "アレルギー性（猫喘息・好酸球性気管支炎）、解剖学的異常（短頭種気道症候群BOAS・気管虚脱・喉頭麻痺）、腫瘍性、栄養性（肥満による拘束性換気障害）、慢性炎症性（COPD様病態）、誤嚥性が含まれる。",
+        _BREED_DOG_CAT,
+        "アレルギー性・好酸球性気管支炎、解剖学的異常（気管虚脱・喉頭麻痺）、腫瘍性、栄養性（肥満による拘束性換気障害）、慢性炎症性（COPD様病態）、誤嚥性が含まれる。",
+    ),
+    (
+        "短頭種・気道解剖学的異常を有する個体、若齢・高齢、免疫抑制状態は重症化しやすい。",
+        _BREED_DOG_CAT,
+        "気道解剖学的異常を有する個体、若齢・高齢、免疫抑制状態は重症化しやすい。",
+    ),
+    ("小型犬・短頭種では歯列圧迫による歯周病が多発。", _BREED_DOG_CAT, ""),
+    # prevention_ja
+    (
+        "屋外アクセス制限（猫の屋内飼育）、リード散歩の徹底、自宅内の鋭利物・落下物の除去、滑床対策（マット）、階段事故予防（小型犬・高齢動物）。",
+        _BREED_DOG_CAT,
+        "鋭利物・落下物の除去、滑床対策（マット）、高所からの落下・脱走防止など飼育環境の安全管理。",
+    ),
+    (
+        "発達性疾患（HD・ED・OCD・FCP）予防: 大型犬の成長期過剰カロリー回避、適切なカルシウム/リン比、過度な運動・階段使用回避。",
+        _BREED_DOG,
+        "発達性疾患予防: 成長期の過剰カロリー回避、適切なカルシウム/リン比、過度な運動の回避。",
+    ),
+    (
+        "角膜潰瘍: 短頭種の眼球突出予防（眼球保護環境）、グルーミング時の眼科ケア。",
+        _BREED_DOG_CAT,
+        "角膜潰瘍: 眼外傷の予防、グルーミング時の眼科ケア。",
+    ),
+    (
+        "DCM/HCM素因品種（ドーベルマン・コッカースパニエル・メインクーン・ラグドール）の繁殖前心エコースクリーニング。",
+        _BREED_DOG_CAT,
+        "",
+    ),
+    ("短頭種気道症候群: 適正体重維持、暑熱環境回避、必要に応じた外科的気道形成術。", _BREED_DOG_CAT, ""),
+    # clinical_signs_ja
+    (
+        "上気道: いびき・吸気性ストライダー・運動不耐性・吸気性チアノーゼ（短頭種気道症候群）。",
+        _BREED_DOG_CAT,
+        "上気道: いびき・吸気性ストライダー・運動不耐性・吸気性チアノーゼ。",
+    ),
+    # pathophysiology_ja
+    (
+        "上気道閉塞（喉頭麻痺・気管虚脱・短頭種気道症候群）では吸気抵抗増大→陰圧性気道虚脱→気道炎症の悪循環を生じる。",
+        _BREED_DOG_CAT,
+        "上気道閉塞（喉頭麻痺・気管虚脱）では吸気抵抗増大→陰圧性気道虚脱→気道炎症の悪循環を生じる。",
+    ),
+    (
+        "短頭種気道症候群・気管虚脱・喉頭麻痺は解剖学的素因によるもので、品種ごとの遺伝的素因が背景にある。",
+        _BREED_DOG_CAT,
+        "気管虚脱・喉頭麻痺は解剖学的素因によるものである。",
+    ),
+    ("短頭種は眼球露出・涙液分布不良・角膜知覚低下から難治性・自然発生性の潰瘍が多い。", _BREED_DOG_CAT, ""),
+    # differential_diagnosis_ja (parenthetical within a valuable differential list)
+    ("（短頭種気道症候群・気管虚脱・喉頭麻痺）", _BREED_DOG_CAT, "（気管虚脱・喉頭麻痺）"),
+    # rehabilitation_protocol_ja
+    ("短頭種気道症候群: 適正体重維持、暑熱回避、ハーネス使用、術後の段階的活動再開。", _BREED_DOG_CAT, ""),
+    # transmission_ja
+    ("遺伝性眼疾患（コリーアイ症候群・PRA等）は親から子へ継承される。", _BREED_DOG, ""),
+    (
+        "不正咬合の遺伝性素因（短頭種・小型犬）は親から子へ継承される。",
+        _BREED_DOG_CAT,
+        "不正咬合の遺伝性素因は親から子へ継承される。",
+    ),
+    # nutrition_management_ja
+    (
+        "L-カルニチン補給（DCM疑い犬・ボクサー・ドーベルマン）。",
+        _BREED_DOG,
+        "L-カルニチン補給（拡張型心筋症疑い例）。",
+    ),
+    # prognosis_ja (DCM tuple) — fixed sub-fragment, name prefix precedes it
+    (
+        "予後は基礎疾患として予後不良で、特にドーベルマンでは突然死リスクが高い。",
+        _BREED_DOG,
+        "予後は基礎疾患として予後不良である。",
+    ),
+    # misc toxicity / infection templates naming a dog size class
+    (
+        "好奇心の強い若齢個体や大量摂取が可能な大型犬で発生が多い。",
+        _BREED_DOG,
+        "好奇心の強い若齢個体や大量に摂取した個体で発生が多い。",
+    ),
+    ("浅い眼窩を持つ種（短頭種等）で発生リスクが高い。", _BREED_DOG_CAT, "浅い眼窩を持つ種で発生リスクが高い。"),
+    ("水辺・湿潤な土壌が感染源で、若齢大型犬に多い。", _BREED_DOG, "水辺・湿潤な土壌が感染源となる。"),
+    (
+        "甘くコーティングされた鉄錠剤を大量に誤食した小型犬で重症化しやすい。",
+        _BREED_DOG,
+        "甘くコーティングされた鉄錠剤を大量に誤食した個体で重症化しやすい。",
+    ),
+    # English fields
+    ("Hereditary ocular disease (collie eye anomaly, PRA) is inherited from parent to offspring.", _BREED_DOG, ""),
+    (
+        "Brachycephalic airway syndrome, tracheal collapse and laryngeal paralysis arise from anatomical predisposition with a breed-specific genetic background.",
+        _BREED_DOG_CAT,
+        "Tracheal collapse and laryngeal paralysis arise from anatomical predisposition.",
+    ),
+    (
+        "Hereditary predisposition to malocclusion (brachycephalic and small-breed dogs) is inherited.",
+        _BREED_DOG_CAT,
+        "Hereditary predisposition to malocclusion is inherited.",
+    ),
+    (" (brachycephalic airway syndrome)", _BREED_DOG_CAT, ""),
+    ("brachycephalic conformational abnormalities, ", _BREED_DOG_CAT, ""),
+    (
+        ", with a high risk of sudden death, particularly in Dobermans.",
+        _BREED_DOG,
+        ", with a high risk of sudden death.",
+    ),
+    ("Weight management reduces respiratory compromise in brachycephalic breeds.", _BREED_DOG_CAT, ""),
+    # Curated Wobbler (cervical spondylomyelopathy) entry describes both the dog
+    # and horse forms in one string; keep the dog comparison only on dog records.
+    (
+        "大型犬（椎間板関連型）・ドーベルマン等、馬（頸椎奇形/不安定）でみられ、遺伝・急速成長・栄養が関与する。",
+        _BREED_DOG,
+        "頸椎の奇形・不安定性によって生じ、遺伝・急速な成長・栄養が関与する。",
+    ),
+    (
+        " — in large-breed dogs (disc-associated), Dobermanns, and horses (cervical malformation/instability); genetics, rapid growth and nutrition contribute.",
+        _BREED_DOG,
+        " from cervical vertebral malformation and instability; genetics, rapid growth and nutrition contribute.",
+    ),
+)
+
+
+def filter_species_inapplicable_clauses(text: str, species: str) -> str:
+    """Strip cross-species breed clauses inapplicable to ``species`` from ``text``.
+
+    A no-op for dog/cat records (their own breed clauses are kept) and for any
+    text that contains none of the template fragments. Safe on already-clean or
+    curated content because every rule matches an exact template fragment.
+    """
+    if not text:
+        return text
+    sp = (species or "").strip().lower()
+    out = text
+    changed = False
+    for fragment, kept_species, replacement in _BREED_CLAUSE_RULES:
+        if sp in kept_species:
+            continue
+        if fragment in out:
+            out = out.replace(fragment, replacement)
+            changed = True
+    if changed:
+        # Tidy stray artefacts left by removals (e.g. two adjacent 。 or spaces).
+        out = out.replace("。。", "。").replace("． ", ". ").replace("  ", " ").strip()
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Frozen-organ correction for the exotic "degenerative" English aetiology
+# ---------------------------------------------------------------------------
+# The exotic-species generator (scripts/enrichment/generate_all_exotic.py) froze
+# the organ word to "cardiovascular" for every degenerative English `causes`
+# field, so Cataracts, Osteoarthritis, Chronic Kidney Disease etc. all read
+# "Caused by progressive deterioration of cardiovascular tissues …". The organ
+# is deterministically recoverable from the disease name, so this is a pure bug
+# fix (no fabrication): swap "cardiovascular" for the organ the name denotes.
+_FROZEN_ORGAN_MARK = "progressive deterioration of cardiovascular tissue"
+
+# Ordered (regex, organ_en) — first match on the English/Japanese name wins.
+_NAME_ORGAN_EN: tuple[tuple[re.Pattern, str], ...] = (
+    (
+        re.compile(
+            r"cardiomyopath|heart|cardiac|cardiovascular|aortic|arterioscler|"
+            r"atheroscler|myocard|cor pulmonale|心筋|心臓|心不全|動脈|心血管",
+            re.I,
+        ),
+        "cardiovascular",
+    ),
+    (re.compile(r"catarac|retina|ocular|\beye\b|lens|glaucoma|uveitis|白内障|網膜|眼", re.I), "ocular"),
+    (
+        re.compile(
+            r"osteoarthr|arthritis|spondylo|joint|osteo|bone|skeletal|luxat|"
+            r"関節|骨|脊椎|変形性",
+            re.I,
+        ),
+        "musculoskeletal",
+    ),
+    (re.compile(r"nephro|kidney|renal|urinary|bladder|腎|尿", re.I), "renal and urinary"),
+    (
+        re.compile(
+            r"neuropath|nerve|neural|cerebell|ataxia|myelopath|cauda equina|"
+            r"intervertebral|\bdisc\b|wobbly|spinal|paresis|paralysis|"
+            r"神経|脊髄|椎間板|運動失調|麻痺|ふらつき",
+            re.I,
+        ),
+        "nervous system",
+    ),
+    (re.compile(r"pulmonary|tracheal|respiratory|bronch|lung|肺|気管|呼吸", re.I), "respiratory"),
+    (
+        re.compile(
+            r"molar|cheek teeth|dental|tooth|teeth|slobber|malocclus|"
+            r"臼歯|歯|不正咬合",
+            re.I,
+        ),
+        "dental",
+    ),
+    (re.compile(r"hepat|liver|肝", re.I), "hepatic"),
+    # Generic multi-organ ageing syndromes (amyloidosis, geriatric, age-related
+    # degenerative) — no single organ, but "cardiovascular" is still wrong.
+    (re.compile(r"amyloid|geriatric|age-related|老齢|加齢|老化", re.I), "multiple organ"),
+)
+
+
+def correct_degenerative_organ_en(name_ja: str, name_en: str, causes_en: str) -> str:
+    """Fix the frozen "cardiovascular" organ in the degenerative English aetiology.
+
+    Returns ``causes_en`` unchanged unless it carries the frozen-organ template
+    AND the disease name denotes a non-cardiac organ system. Never fabricates —
+    only substitutes the organ noun the name already implies.
+    """
+    if not causes_en or _FROZEN_ORGAN_MARK not in causes_en:
+        return causes_en
+    name = f"{name_en or ''} {name_ja or ''}"
+    organ = None
+    for pattern, org in _NAME_ORGAN_EN:
+        if pattern.search(name):
+            organ = org
+            break
+    if organ is None or organ == "cardiovascular":
+        # Genuinely cardiac, or name gives no confident organ — leave untouched.
+        return causes_en
+    return causes_en.replace("cardiovascular tissue", f"{organ} tissue")
+
+
+# ---------------------------------------------------------------------------
 # Etiology / pathophysiology re-categorisation
 # ---------------------------------------------------------------------------
 # The causes_ja / pathophysiology_ja fields were generated by ``gen_causes_ja``
@@ -4492,4 +4744,8 @@ def generate_clinical_fields(
         if gen is None:
             continue
         result[field] = gen(category, name_ja, species)
+    # Strip any cross-species breed clause the category templates may embed
+    # (e.g. "Border Collie storm anxiety" in a non-dog neurological aetiology).
+    for field in result:
+        result[field] = filter_species_inapplicable_clauses(result[field], species)
     return result
