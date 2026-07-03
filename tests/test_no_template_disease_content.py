@@ -4391,3 +4391,209 @@ def test_served_db_english_description_has_no_japanese():
     cjk = _re.compile(r"[぀-ヿ㐀-鿿]")
     offenders = [f"{sp}/{nm}" for sp, nm, desc in rows if desc and cjk.search(desc)]
     assert not offenders, f"{len(offenders)} English descriptions contain Japanese: {offenders[:15]}"
+
+
+# ---------------------------------------------------------------------------
+# Cross-species breed-clause contamination + frozen "cardiovascular" organ
+# ---------------------------------------------------------------------------
+# Category templates embedded dog- (and a few cat-) breed predispositions that
+# leaked into unrelated species: a horse's lameness aetiology cited "Border
+# Collie storm anxiety", a rabbit's DCM prognosis warned about Dobermans, the
+# respiratory templates cited "brachycephalic airway syndrome" on prairie dogs.
+# Separately, the exotic generator froze the degenerative English ``causes``
+# organ to "cardiovascular", so Cataracts / Osteoarthritis / CKD all read
+# "…deterioration of cardiovascular tissues…". These regressions guard the fix
+# (scripts/template_elimination/fix_cross_species_breed_contamination.py + the
+# filter/organ helpers in clinical_fields_generator.py + the migrate sweep).
+
+# Unambiguous dog/cat breed tokens. Bare 短頭種 is deliberately EXCLUDED because
+# it is legitimate for non-dog/cat species (dwarf/lop rabbits are brachycephalic
+# and prone to dental malocclusion), so we assert only on breed proper nouns and
+# the dog size-class words.
+_DOG_BREED_TOKENS = (
+    "ボーダーコリー",
+    "コリーのCDS",
+    "コリーアイ",
+    "ドーベルマン",
+    "コッカースパニエル",
+    "メインクーン",
+    "ラグドール",
+    "素因犬種",
+    "小型犬",
+    "大型犬",
+    "中型犬",
+    "Border Collie",
+    "Doberman",
+    "Cocker Spaniel",
+    "collie eye",
+)
+
+
+def _breed_generator_module():
+    import importlib.util
+
+    path = ROOT / "scripts" / "template_elimination" / "clinical_fields_generator.py"
+    spec = importlib.util.spec_from_file_location("clinical_fields_generator", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def test_breed_filter_removes_dog_clause_for_nondog_keeps_for_dog():
+    """filter_species_inapplicable_clauses strips a dog breed clause from a horse
+    but leaves it intact for a dog, and is idempotent."""
+    m = _breed_generator_module()
+    filt = m.filter_species_inapplicable_clauses
+    neuro = (
+        "馬における発作の原因は多岐にわたり、特発性（特発性てんかん）に分類される。"
+        "品種特異的好発性（コリーのCDS、ボーダーコリーのストーム不安、特発性てんかんの素因犬種）も重要な背景因子。"
+        "急性発症は外傷を示唆する。"
+    )
+    horse = filt(neuro, "horse")
+    assert "ボーダーコリー" not in horse
+    assert "素因犬種" not in horse
+    assert "特発性てんかん" in horse  # non-breed content preserved
+    assert filt(horse, "horse") == horse  # idempotent
+    # Dog record keeps its own breed clause.
+    dog = filt(neuro.replace("馬における", "犬における"), "dog")
+    assert "ボーダーコリー" in dog
+    # English brachycephalic parenthetical is removed for non-dog/cat, kept for dog.
+    en = "Upper airway: stridor and inspiratory cyanosis (brachycephalic airway syndrome)."
+    assert "brachycephalic" not in filt(en, "rabbit")
+    assert "brachycephalic" in filt(en, "dog")
+
+
+def test_correct_degenerative_organ_en_maps_organ_from_name():
+    """The frozen 'cardiovascular' organ is swapped for the organ the name denotes,
+    and genuinely cardiac diseases are left unchanged."""
+    m = _breed_generator_module()
+    fix = m.correct_degenerative_organ_en
+    frozen = (
+        "Caused by progressive deterioration of cardiovascular tissues from aging, chronic wear, and cumulative damage."
+    )
+    assert "ocular tissues" in fix("白内障", "Cataracts", frozen)
+    assert "musculoskeletal tissues" in fix("変形性関節症", "Osteoarthritis", frozen)
+    assert "renal and urinary tissues" in fix("慢性腎臓病", "Chronic Kidney Disease", frozen)
+    assert "nervous system tissues" in fix("末梢神経障害", "Peripheral Neuropathy", frozen)
+    assert "dental tissues" in fix("臼歯過長", "Molar Spurs", frozen)
+    # Genuinely cardiac: untouched.
+    assert fix("拡張型心筋症", "Dilated Cardiomyopathy", frozen) == frozen
+    assert fix("動脈硬化症", "Arteriosclerosis", frozen) == frozen
+    # Non-frozen text: untouched.
+    other = "Caused by lens opacification from aging and UV exposure."
+    assert fix("白内障", "Cataracts", other) == other
+
+
+def test_no_breed_contamination_in_json():
+    """diseases_all_species.json must carry no dog-breed proper nouns on
+    non-dog/cat clinical fields."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    fields = (
+        "causes",
+        "causes_ja",
+        "pathophysiology",
+        "pathophysiology_ja",
+        "prognosis",
+        "prognosis_ja",
+        "prevention",
+        "prevention_ja",
+        "clinical_signs",
+        "clinical_signs_ja",
+        "transmission",
+        "transmission_ja",
+        "differential_diagnosis_ja",
+        "nutrition_management_ja",
+        "rehabilitation_protocol_ja",
+        "description",
+        "description_ja",
+    )
+    failures = []
+    for e in entries:
+        if (e.get("species") or "").strip().lower() in ("dog", "cat"):
+            continue
+        for f in fields:
+            v = e.get(f) or ""
+            for tok in _DOG_BREED_TOKENS:
+                if tok.lower() in v.lower():
+                    failures.append(f"[{e.get('species')}] {e.get('name')}.{f}: '{tok}'")
+                    break
+    assert not failures, f"{len(failures)} breed-contaminated JSON fields. First 15:\n" + "\n".join(failures[:15])
+
+
+def test_served_db_no_breed_contamination():
+    """The served DB must carry no dog-breed proper nouns on non-dog/cat fields."""
+    import sqlite3
+
+    conn = _served_db_or_skip()
+    conn.row_factory = sqlite3.Row
+    try:
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(diseases)").fetchall()]
+        text_cols = [
+            c
+            for c in cols
+            if c.endswith("_ja")
+            or c
+            in (
+                "causes",
+                "pathophysiology",
+                "prognosis",
+                "prevention",
+                "clinical_signs",
+                "description",
+                "treatment",
+                "transmission",
+                "differential_diagnosis",
+            )
+        ]
+        rows = conn.execute(
+            "SELECT species, name, " + ", ".join(text_cols) + " FROM diseases WHERE species NOT IN ('dog','cat')"
+        ).fetchall()
+    finally:
+        conn.close()
+    failures = []
+    for row in rows:
+        for c in text_cols:
+            v = row[c] or ""
+            for tok in _DOG_BREED_TOKENS:
+                if tok.lower() in v.lower():
+                    failures.append(f"[{row['species']}] {row['name']}.{c}: '{tok}'")
+                    break
+    assert not failures, f"{len(failures)} breed-contaminated served rows. First 15:\n" + "\n".join(failures[:15])
+
+
+def test_served_db_no_frozen_cardiovascular_organ_on_noncardiac():
+    """No non-cardiac disease may describe its English cause as 'deterioration of
+    cardiovascular tissues' (the frozen-organ generator bug)."""
+    import sqlite3
+
+    conn = _served_db_or_skip()
+    conn.row_factory = sqlite3.Row
+    try:
+        rows = conn.execute(
+            "SELECT species, name, causes FROM diseases WHERE causes LIKE '%deterioration of cardiovascular tissue%'"
+        ).fetchall()
+    finally:
+        conn.close()
+    cardiac = re.compile(
+        r"cardio|heart|cardiac|aortic|arterio|athero|myocard|vascular|cor pulmonale",
+        re.I,
+    )
+    offenders = [f"{r['species']}/{r['name']}" for r in rows if not cardiac.search(r["name"] or "")]
+    assert not offenders, f"{len(offenders)} non-cardiac diseases still frozen to 'cardiovascular': {offenders[:15]}"
+
+
+def test_generate_clinical_fields_emits_no_breed_clause_for_nondog():
+    """generate_clinical_fields must not emit dog-breed clauses for a non-dog species."""
+    m = _breed_generator_module()
+    out = m.generate_clinical_fields(
+        "rabbit",
+        "てんかん発作",
+        "Seizures",
+        "neurological",
+        ["causes_ja", "prevention_ja", "clinical_signs_ja"],
+    )
+    for field, text in out.items():
+        for tok in _DOG_BREED_TOKENS:
+            assert tok not in text, f"{field} still emits breed token '{tok}': {text[:80]}"
