@@ -47,7 +47,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
     (
         re.compile(
             r"ウイルス|レトロウイルス|パルボウイルス|パルボ|ジステンパー|カリシウイルス|"
-            r"カリシ|ヘルペスウイルス|ヘルペス|コロナウイルス|コロナ|インフルエンザ|"
+            r"カリシ(?!ン)|ヘルペスウイルス|ヘルペス|コロナウイルス|コロナ|インフルエンザ|"
             r"アデノウイルス|ロタウイルス|狂犬病|レオウイルス|パピローマウイルス|パピローマ|"
             r"PBFD|BFDV|サーコウイルス|ボルナ|ニューカッスル|マレック|鳥痘|オウム嘴羽病|"
             r"伝染性気管支炎|伝染性ファブリキウス嚢病|伝染性喉頭気管炎|"
@@ -87,6 +87,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"スナッフル|kennel cough|ケンネルコフ|気管支敗血症|気管支炎|"
             r"肺炎|pneumonia|ニューモニア|"
             r"上気道感染|URI|気道感染症|鼻気管炎|"
+            r"鼻炎|rhinitis|副鼻腔炎|sinusitis|"
             r"伝染性鼻気管炎"
         ),
         "respiratory_infection",
@@ -118,6 +119,12 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"アタマジラミ|シラミ|louse|ノミ症|ハジラミ|ウマバエ|"
             r"線虫|nematod|条虫|tapeworm|吸虫|fluke|蟯虫|pinworm|回虫|"
             r"ascarid|鞭虫|whipworm|鉤虫|hookworm|肝吸虫|"
+            # Worm diseases with organ-based names (must be matched here so they
+            # are not mis-resolved to the organ system: gapeworm is respiratory,
+            # eyeworm is ophthalmic — both are PARASITIC). NB: never a bare
+            # "worm" token because ringworm is a dermatophyte (fungal).
+            r"眼虫|eyeworm|eye worm|Thelazia|ガペworm|gapeworm|gape worm|Syngamus|"
+            r"lungworm|肺虫|kidney worm|腎虫|stomach worm|gizzard worm|"
             r"白点病|\bich\b|白点虫|イクチオフチリウス|"
             r"イカリ虫|Lernaea|ウオジラミ|Argulus|住血吸虫|"
             r"羽ダニ|気嚢ダニ"
@@ -179,7 +186,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
         re.compile(
             r"腎臓|腎不全|腎症|腎炎|腎結石|腎疾患|腎障害|腎石灰化|nephrocalcin|"
             r"腎アミロイド|renal amyloid|尿道|urethra|尿管|ureter|(?<!ad)renal|kidney|nephritis|nephropathy|"
-            r"CKD|AKI|尿石|尿路結石|urolith|膀胱炎|cystitis|"
+            r"CKD|AKI|尿石|尿路結石|urolith|膀胱炎|\bcystitis|"
             r"下部尿路|lower urinary|FLUTD|FIC|間質性膀胱炎|"
             r"尿閉|urinary obstruction|蛋白尿|proteinuria|"
             r"糸球体|glomerular|腎盂腎炎|pyelonephritis|"
@@ -196,7 +203,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"DCM|HCM|拡張型心筋症|肥大型心筋症|"
             r"僧帽弁|mitral|三尖弁|tricuspid|心房中隔|心室中隔|"
             r"動脈管開存|PDA|不整脈|arrhythmia|"
-            r"心嚢液貯留|心嚢水|pericardial|心タンポナーデ|"
+            r"心嚢液貯留|心嚢水|pericardial|心膜炎|pericarditis|心内膜炎|endocarditis|心タンポナーデ|"
             r"房室ブロック|atrioventricular block|洞不全|sick sinus|"
             r"全身性高血圧|動脈性高血圧|hypertension|"
             r"血栓塞栓症|thromboembolism|FATE|サドル血栓|"
@@ -257,7 +264,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
     (
         re.compile(
             r"眼(?!球突出)|角膜|cornea|緑内障|glaucoma|白内障|cataract|"
-            r"網膜|retina|ぶどう膜炎|uveitis|結膜炎|conjunctivitis|"
+            r"網膜|retina|ぶどう膜炎|uveitis|結膜炎|conjunctivitis|水晶体|lens|"
             r"涙嚢|鼻涙管|涙管|涙小管|nasolacrimal|チェリーアイ|cherry eye|乾性角結膜炎|KCS|"
             r"睫毛|eyelash|distichiasis|ectopic cilia|眼瞼|eyelid|entropion|"
             r"内反症|外反症|ectropion|prolapsed gland|"
@@ -273,7 +280,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
             r"関節炎|arthritis|変形性関節症|osteoarthritis|OA|"
             r"股関節|hip dysplasia|肘関節|elbow dysplasia|"
             r"膝蓋骨|patella|patellar|ステーキ|"
-            r"骨髄炎|osteomyelitis|筋ジストロフィー|"
+            r"骨髄炎|osteomyelitis|筋ジストロフィー|筋炎|myositis|腱炎|tendonitis|tendinitis|滑液包炎|bursitis|"
             r"代謝性骨疾患|MBD|metabolic bone|"
             # NB: rickets (くる病) is a vitamin-D/Ca/P *nutritional* disease — it
             # is intentionally NOT matched here so the nutritional pattern (and
@@ -290,7 +297,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
         re.compile(
             r"歯(?!科)|歯肉|歯周|歯石|歯髄|齲歯|dental|tooth|periodontal|"
             r"歯科疾患|不正咬合|malocclusion|過長歯|"
-            r"歯根膿瘍|tooth root abscess|歯瘻|"
+            r"歯根膿瘍|tooth root abscess|歯瘻|口内炎|stomatitis|口唇炎|cheilitis|"
             # Slobbers/ptyalism in rodents & rabbits is a dental sign; buccal
             # spurs are tooth points. NB: 頬棘 only (臼歯棘 already matches via
             # 歯) so 棘下筋/棘突起 (muscle/spine) are never mis-tagged dental.
@@ -360,6 +367,7 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
     (
         re.compile(
             r"中毒|toxicity|toxicosis|poisoning|"
+            r"咬傷毒|毒蛇|マムシ|ハブ|envenom|snakebite|snake bite|venom|"
             r"鉛中毒|lead poisoning|"
             r"アスピリン中毒|アセトアミノフェン|"
             r"チョコレート中毒|ブドウ中毒|ユリ中毒|"
@@ -452,6 +460,27 @@ NAME_CATEGORY_PATTERNS: list[tuple[re.Pattern, str]] = [
         ),
         "behavioral",
     ),
+    # ---------------------------------------------------------------------
+    # Low-priority ORGAN-SYSTEM fallbacks. These run LAST so every specific
+    # pattern above wins first (e.g. "Cardiovascular Neoplasia" -> neoplasia,
+    # not cardiac). They exist to catch synthetic composite names such as
+    # "Gastrointestinal Inflammatory Disease" / "泌尿生殖器炎症性疾患" that no
+    # specific rule matches, so the dangerous "toxic substances" template is
+    # never left on an inflammatory disease.
+    (re.compile(r"心血管|cardiovascular"), "cardiac"),
+    (re.compile(r"消化管|消化器|gastrointestinal"), "gastrointestinal"),
+    (re.compile(r"筋骨格|musculoskeletal"), "musculoskeletal"),
+    (re.compile(r"泌尿生殖器|泌尿|urogenital|urinary tract"), "renal_urinary"),
+    (re.compile(r"生殖器|reproductive"), "reproductive"),
+    (re.compile(r"呼吸器|鼻汁|nasal discharge|respiratory"), "respiratory_other"),
+    (re.compile(r"神経系|neurological"), "neurological"),
+    (re.compile(r"内分泌|代謝性|endocrine|metabolic"), "endocrine_metabolic"),
+    (re.compile(r"眼科|ophthalmolog"), "ophthalmic"),
+    (re.compile(r"血液系|hematolog|haematolog"), "hematological"),
+    (re.compile(r"尿やけ|尿焼け|ハッチバーン|urine scald|hutch burn"), "dermatological"),
+    (re.compile(r"全身性炎症反応|systemic inflammatory"), "generic"),
+    (re.compile(r"皮膚|dermatolog|integument"), "dermatological"),
+    (re.compile(r"口腔|口内|oral ulcer"), "dental"),
 ]
 
 
@@ -636,6 +665,39 @@ def _toxin_sources(species: str) -> str:
     return TOXIN_SOURCES_JA.get(
         species,
         "有毒植物・殺鼠剤/農薬・家庭用化学物質・重金属・医薬品の過量投与",
+    )
+
+
+# English counterpart of TOXIN_SOURCES_JA, used by ``gen_causes_en``.
+TOXIN_SOURCES_EN: dict[str, str] = {
+    "dog": "chocolate (theobromine), xylitol, grapes/raisins, onion/garlic, anticoagulant rodenticides, human NSAIDs/acetaminophen, and antifreeze (ethylene glycol)",
+    "cat": "lilies (nephrotoxic), acetaminophen, canine permethrin spot-ons, onion/garlic, antifreeze, and anticoagulant rodenticides",
+    "horse": "toxic plants (yew, oleander, red maple leaves, bracken fern, lupins), mycotoxins (aflatoxin, fumonisin), monensin (feed additive), lead, and organophosphate anthelmintic overdose",
+    "rabbit": "oral beta-lactam/lincosamide antibiotics (fatal gut dysbiosis), toxic houseplants, rodenticides, pesticides, and lead",
+    "guinea_pig": "oral penicillins (Clostridium enterotoxaemia), toxic plants, rodenticides, and fipronil",
+    "chinchilla": "oral beta-lactam antibiotics, fipronil (fatal), toxic plants, and rodenticides",
+    "degu": "oral beta-lactam antibiotics, excess dietary sugar (diabetogenic), toxic plants, and rodenticides",
+    "hamster": "oral beta-lactam antibiotics, toxic plants, rodenticides, and household chemicals",
+    "ferret": "ibuprofen/human NSAIDs, anticoagulant rodenticides, onion, caffeine, and human medications",
+    "hedgehog": "toxic plants, insecticides, household chemicals, and heavy metals",
+    "sugar_glider": "toxic plants, insecticides, high-phosphorus calcium-binding diets, and household chemicals",
+    "bird": "heavy metals (lead, zinc), heated PTFE (non-stick) fumes, avocado, onion, toxic houseplants, insecticides, and mycotoxins",
+    "parakeet": "heavy metals (lead, zinc), heated PTFE fumes, avocado, toxic houseplants, insecticides, and mycotoxins",
+    "parrot": "heavy metals (lead, zinc), heated PTFE fumes, avocado, toxic houseplants, insecticides, and mycotoxins",
+    "reptile": "insecticides (organophosphates, pyrethroids), inappropriate disinfectants, heavy metals, ivermectin (fatal in some species), and toxic plants",
+    "tortoise": "insecticides, inappropriate disinfectants, heavy metals, toxic plants, and oxalate-rich plants",
+    "snake": "insecticides, inappropriate disinfectants (cedar/pine shaving volatiles), heavy metals, and ivermectin",
+    "lizard": "insecticides, inappropriate disinfectants, heavy metals, ivermectin, and toxic plants",
+    "amphibian": "water-quality toxins (ammonia, nitrite, residual chlorine/chloramine), heavy metals, agricultural pesticide run-off, and inappropriate pH",
+    "fish": "water-quality toxins (ammonia, nitrite, residual chlorine, heavy metals), pesticide run-off, and medication overdose (copper, formalin)",
+    "exotic_other": "toxic plants, insecticides, household chemicals, heavy metals, and chemical leaching from inappropriate enclosure materials",
+}
+
+
+def _toxin_sources_en(species: str) -> str:
+    return TOXIN_SOURCES_EN.get(
+        species,
+        "toxic plants, rodenticides/pesticides, household chemicals, heavy metals, and medication overdose",
     )
 
 
@@ -1140,6 +1202,207 @@ def gen_causes_ja(category: str, name_ja: str, species: str) -> str:
         f"{prefix}の正確な病因は症例により異なる。"
         f"遺伝的素因、環境要因（温度・湿度・衛生状態の不適切な管理）、感染性病原体への曝露、栄養バランスの偏り、免疫系の調節異常、加齢に伴う組織変化が単独または複合的に関与する。"
         f"原因の同定は治療方針の決定と再発予防に不可欠であり、病歴聴取・身体検査・補助検査の統合的評価により行う。{note}"
+    )
+
+
+def gen_causes_en(category: str, name_en: str, species: str) -> str:
+    """English category aetiology mirroring ``gen_causes_ja``.
+
+    Produces professional veterinary English for the same category set the
+    Japanese generator uses, so the English ``causes`` field reaches parity
+    with the (vet-reviewed) Japanese text and no longer shows the wrong
+    organ-system template (e.g. an inflammatory disease described as a
+    toxicosis). Category is resolved from the disease *name* by the caller.
+    """
+    sp_en = SPECIES_EN.get(species, species)
+    prefix = _disease_prefix_en(name_en, sp_en)
+
+    if category == "viral_infection":
+        return (
+            f"{prefix} is caused by viral infection. "
+            f"A specific viral pathogen enters host cells and replicates intracellularly, producing tissue injury and a systemic inflammatory response. "
+            f"Major risk factors include incomplete vaccination, immunosuppression, very young or old age, group housing, contact with newly introduced animals, and exposure to vectors (arthropods, wildlife). "
+            f"The balance between pathogen virulence and host immune response determines onset and severity."
+        )
+    if category == "bacterial_infection":
+        return (
+            f"{prefix} is caused by infection with a specific bacterial pathogen. "
+            f"Pathogenic bacteria enter the body (oral, percutaneous, respiratory, or vector-borne routes) and cause disease through proliferation, toxin production and tissue invasion. "
+            f"Key risk factors are host immunosuppression (stress, malnutrition, concurrent disease), dysbiosis from inappropriate antimicrobial use, persistent exposure to a contaminated environment, and entry through bites or wounds. "
+            f"The emergence of drug-resistant organisms (MRSP, ESBL producers) complicates treatment."
+        )
+    if category == "respiratory_infection":
+        return (
+            f"{prefix} is caused by infection of the upper or lower airway with respiratory pathogens (bacteria, viruses, fungi). "
+            f"Environmental stress (abrupt temperature or humidity change, poor ventilation), overcrowding, group transport, and exposure to smoke or dust increase the risk of disease. "
+            f"Brachycephalic animals or those with anatomical airway abnormalities, and the very young, old or immunosuppressed, are prone to severe disease. "
+            f"Co-infection with multiple pathogens (e.g. Bordetella plus parainfluenza virus) frequently worsens the clinical picture."
+        )
+    if category == "fungal_infection":
+        return (
+            f"{prefix} is caused by infection with fungal pathogens. "
+            f"These include dermatophytes (Microsporum/Trichophyton), yeasts (Malassezia/Candida) and deep/systemic fungi (Aspergillus/Cryptococcus/Histoplasma). "
+            f"Risk factors include a humid environment, immunosuppression, disruption of normal flora by prolonged antimicrobial therapy, trauma or breakdown of the skin barrier, and residence in a geographically endemic area (e.g. coccidioidomycosis). "
+            f"Dermatophytosis in particular is an important zoonosis with public-health implications."
+        )
+    if category == "parasitic":
+        return (
+            f"{prefix} is caused by infection with parasites (helminths, protozoa, arthropods). "
+            f"Routes of infection vary by parasite species and include ingestion (contaminated food or water, predation of intermediate hosts), percutaneous penetration, arthropod vectors (ticks, mosquitoes, fleas), and transplacental or lactogenic transmission. "
+            f"Overcrowding, poor hygiene, immunosuppression and inadequate routine deworming increase the risk of infection. "
+            f"Understanding the parasite life cycle is key to successful treatment and to preventing re-infection; climate-driven expansion of vector ranges is increasing disease in areas previously considered low-risk."
+        )
+    if category == "neoplasia":
+        return (
+            f"The development of {prefix} is multifactorial. "
+            f"Major factors include genetic predisposition (breed-specific tendencies), persistent chronic inflammation, oncogenic viral infection (aside from specific examples such as FeLV-associated lymphoma), prolonged exposure to chemical carcinogens, hormonal imbalance (sex-hormone-dependent tumours), failure of immune surveillance, and ultraviolet or ionising radiation. "
+            f"Age-related decline in DNA repair capacity and dysregulated control of cell proliferation are promoting factors. "
+            f"Early detection and staging (TNM classification) underpin prognosis and treatment selection."
+        )
+    if category == "endocrine_metabolic":
+        return (
+            f"{prefix} is caused by dysfunction of an endocrine gland or disruption of a metabolic pathway. "
+            f"Specific mechanisms include autoimmune endocrine gland destruction, neoplastic hormone production (functional adenoma/carcinoma), iatrogenic causes (long-term steroids or other drugs), nutritional factors (dietary mineral or vitamin imbalance) and inherited enzyme deficiencies. "
+            f"Age, obesity, breed-specific predisposition and concurrent disease (secondary endocrine disturbance from pancreatitis or renal failure) modify the risk. "
+            f"Endocrine screening tests are important for early diagnosis."
+        )
+    if category == "renal_urinary":
+        return (
+            f"{prefix} is caused by progressive nephron injury, urinary tract obstruction or infection, or idiopathic lower-urinary-tract inflammation. "
+            f"Major risk factors include ageing, chronic dehydration, exposure to nephrotoxins (NSAIDs, antifreeze, lilies, certain antibiotics), systemic hypertension, diabetic nephropathy, immune-complex glomerulonephritis, inherited structural renal anomalies, and stress-related neuroendocrine disturbance. "
+            f"Because early disease is asymptomatic, periodic renal screening (SDMA, urine specific gravity, urine protein) is important."
+        )
+    if category == "cardiac":
+        return (
+            f"{prefix} is strongly influenced by breed-specific genetic predisposition. "
+            f"Major primary causes are cardiomyopathy (DCM/HCM) in predisposed breeds, degenerative valve disease (myxomatous mitral valve degeneration in small-breed dogs), congenital defects (PDA, VSD, ASD) and arrhythmogenic cardiomyopathy. "
+            f"Secondary factors include hypertension, hyperthyroidism (cats), nutritional causes (taurine/carnitine deficiency, grain-free-diet-associated DCM), drugs, and infective endocarditis. "
+            f"Early diagnosis (echocardiography after murmur detection) and staged therapy directly improve prognosis."
+        )
+    if category == "respiratory_other":
+        return (
+            f"{prefix} comprises non-infectious airway disease with diverse causes. "
+            f"These include allergic disease (feline asthma, eosinophilic bronchitis), anatomical abnormality (brachycephalic obstructive airway syndrome, tracheal collapse, laryngeal paralysis), neoplasia, nutritional causes (restrictive ventilation from obesity), chronic inflammatory disease (COPD-like conditions), and aspiration. "
+            f"Environmental exposure to tobacco smoke, household chemicals, fragrances and excessive dust is an important risk factor. "
+            f"Early intervention is desirable to prevent airway remodelling and irreversible structural change."
+        )
+    if category == "gastrointestinal":
+        return (
+            f"{prefix} has infectious, dietary, immune-mediated, mechanical and functional causes. "
+            f"These include infectious (bacterial, viral, parasitic, protozoal), dietary (inappropriate food, foreign material, abrupt diet change, food allergy), immune-mediated (inflammatory bowel disease), mechanical (obstruction, torsion, neoplasia) and functional (motility disorder) causes. "
+            f"In herbivores, insufficient dietary fibre and abrupt diet change are the leading causes of gastrointestinal stasis, so understanding species-specific nutritional requirements is important. "
+            f"Stressors (environmental change, introduction of new animals) also contribute to onset."
+        )
+    if category == "neurological":
+        return (
+            f"{prefix} has diverse causes classified as infectious (encephalitis, meningitis), immune-mediated, degenerative, neoplastic, traumatic, vascular, metabolic, toxic, genetic and idiopathic (idiopathic epilepsy). "
+            f"Breed-specific predisposition (cognitive dysfunction in older dogs, predisposed breeds for idiopathic epilepsy) is an important background factor. "
+            f"Acute onset suggests trauma, vascular events or intoxication; chronic progression suggests degenerative, neoplastic or metabolic disease; and recurrent seizures suggest idiopathic epilepsy."
+        )
+    if category == "ophthalmic":
+        breed_note = ""
+        if species in ("dog", "cat"):
+            breed_note = "Breed-specific predisposition is important (brachycephalic proptosis and keratoconjunctivitis sicca, cataract in Cocker Spaniels, Collie eye anomaly, breeds predisposed to progressive retinal atrophy). "
+        elif species == "horse":
+            breed_note = "In horses, equine recurrent uveitis (moon blindness) is associated with genetic predisposition (e.g. Appaloosa), and corneal ulceration is precipitated by stabling conditions (bedding, manure). "
+        elif species in ("bird", "parakeet", "parrot"):
+            breed_note = "In birds, nutritional (vitamin A deficiency), infectious (herpesvirus, Chlamydia, pox) and traumatic causes predominate. "
+        elif species in ("reptile", "tortoise", "snake", "lizard"):
+            breed_note = "In reptiles, nutritional causes (vitamin A deficiency, metabolic bone disease), eyelid obstruction from dysecdysis, and low POTZ predominate. "
+        return (
+            f"{prefix} has infectious (bacterial, viral, fungal, parasitic), traumatic, immune-mediated, congenital, degenerative, neoplastic, metabolic and iatrogenic causes. "
+            f"{breed_note}"
+            f"Because delayed treatment leads to irreversible vision loss, early diagnosis (tonometry, fundic examination, corneal staining) and specialist referral are essential."
+        )
+    if category == "musculoskeletal":
+        species_specific = ""
+        if species == "horse":
+            species_specific = "In horses, laminitis, navicular syndrome, tendonitis and arthritis are the leading diseases that markedly reduce athletic performance. "
+        elif species in ("reptile", "tortoise", "snake", "lizard", "amphibian"):
+            species_specific = "In reptiles and amphibians, metabolic bone disease from vitamin D/UV-B deficiency and Ca/P imbalance is most common. "
+        elif species in ("bird", "parakeet", "parrot"):
+            species_specific = "In birds, nutritional osteomalacia, egg-laying-related calcium depletion and pneumatic (air-filled) bone fractures are the major conditions. "
+        elif species in ("rabbit", "guinea_pig", "chinchilla", "hamster", "degu", "sugar_glider"):
+            species_specific = "In small mammals, fractures and luxations (during handling or falls) and spinal injury are the major traumas, against a background of a fragile skeleton. "
+        return (
+            f"{prefix} is classified as traumatic (fracture, luxation, ligament injury), degenerative (osteoarthritis), developmental/genetic (hip or elbow dysplasia, patellar luxation), immune-mediated (polyarthritis), infectious (osteomyelitis, septic arthritis), nutritional (metabolic bone disease, nutritional secondary hyperparathyroidism), neoplastic (osteosarcoma) and hereditary (chondrodysplasia). "
+            f"{species_specific}"
+            f"Obesity, excessive exercise and inappropriate nutrition (excess calories or calcium during growth) increase the risk of degenerative and developmental disease."
+        )
+    if category == "dental":
+        return (
+            f"{prefix} is chiefly caused by bacterial inflammation from plaque and calculus accumulation (periodontal disease), malocclusion, traumatic tooth fracture, periapical abscess, overgrown (elodont) teeth in herbivores and rodents, and malignancy (oral squamous cell carcinoma, fibrosarcoma). "
+            f"In herbivores (rabbit, guinea pig, chinchilla, degu) the teeth grow continuously throughout life, and insufficient fibre, hereditary malocclusion or trauma leads to overgrowth and molar spur formation. "
+            f"In small and brachycephalic dogs, dental crowding causes frequent periodontal disease. Early oral care and annual dental scaling are the foundation of prevention."
+        )
+    if category == "dermatological":
+        return (
+            f"{prefix} has diverse causes classified as allergic (atopic dermatitis, food allergy, flea-allergy dermatitis), infectious (bacterial pyoderma, dermatophytosis, Malassezia dermatitis), parasitic (mange, demodicosis, ear mites), immune-mediated (pemphigus, lupus), endocrine (dermatoses associated with hypothyroidism or Cushing's), nutritional, psychogenic/behavioural (over-grooming, self-trauma) and neoplastic. "
+            f"Environmental factors (humidity, temperature, bedding hygiene) and breed-specific predisposition are important modifiers of onset."
+        )
+    if category == "hematological":
+        return (
+            f"{prefix} is classified by mechanism as decreased production (marrow hypoplasia, nutritional deficiency, reduced erythropoietic drive in renal failure), haemolysis (immune-mediated, parasitic, oxidative injury, hereditary membrane defects), haemorrhage (trauma, coagulopathy, platelet disorders), consumption (DIC, thrombosis) and sequestration (splenomegaly). "
+            f"Important specific causes include infectious agents (FeLV, FIV, Babesia, haemoplasma, Ehrlichia), immune-mediated disease (IMHA, ITP), drugs (chemotherapy, certain antibiotics) and toxins (onion, acetaminophen, anticoagulant rodenticides)."
+        )
+    if category == "reproductive":
+        return (
+            f"{prefix} has infectious (bacterial, viral, parasitic), anatomical (fetal malposition, pelvic stenosis), endocrine (luteal insufficiency, prolactin disturbance), metabolic (pregnancy toxaemia, hypocalcaemia), traumatic, neoplastic (mammary, testicular, prostatic tumours), hereditary and age-related causes. "
+            f"Early neutering has a clear protective effect against hormone-dependent tumours, pyometra and prostatic hyperplasia (notably the relationship between early spaying and reduced mammary tumour risk)."
+        )
+    if category == "toxicity":
+        return (
+            f"{prefix} is caused by ingestion, inhalation or dermal absorption of a specific toxic substance. "
+            f"Toxic sources of particular concern in {sp_en} include {_toxin_sources_en(species)}. "
+            f"Toxicity is dose-dependent, and severity varies markedly with body weight, metabolic capacity, route of exposure and duration of exposure. "
+            f"The liver and kidneys are the principal target organs."
+        )
+    if category == "trauma":
+        return (
+            f"{prefix} is caused by physical tissue injury from external force (falls, collision, crushing, bites, lacerations from sharp objects). "
+            f"Major causes include inappropriate housing (cramped or excessively tall enclosures, sharp protrusions, slippery flooring), fighting with other animals, careless handling, escape/flight, and road traffic accidents. "
+            f"Small and young animals are prone to severe trauma, and much of it is preventable through appropriate enclosure design and safety management. "
+            f"Initial assessment should anticipate secondary complications (infection, haemorrhagic shock, tissue necrosis)."
+        )
+    if category == "autoimmune":
+        return (
+            f"{prefix} is caused by loss of self-tolerance and an aberrant immune response against self-antigens. "
+            f"Reported triggers include genetic predisposition, molecular mimicry from infection, drug administration, ultraviolet exposure, hormonal fluctuation and vaccination. "
+            f"Autoantibodies and self-reactive T cells attack and destroy normal tissue, causing multi-organ injury. "
+            f"Diagnosis requires specific autoantibody testing and histopathology; long-term immunosuppression and relapse monitoring are central to management."
+        )
+    if category == "nutritional":
+        return (
+            f"{prefix} is caused by deficiency, excess or imbalance of essential nutrients. "
+            f"Inappropriate diet composition, malabsorption, metabolic disturbance and increased demand (growth, pregnancy, lactation) contribute. "
+            f"Imbalances of vitamins, minerals, essential amino acids and essential fatty acids manifest as skeletal developmental abnormalities, impaired immune function, skin and coat changes, and reproductive failure. "
+            f"Key risks include the quality of commercial complete diets, the nutritional balance of home-prepared food, over-supplementation, and inadequate understanding of species-specific requirements (taurine in cats, vitamin C in guinea pigs, calcium/UV-B in reptiles)."
+        )
+    if category == "genetic_congenital":
+        return (
+            f"{prefix} is caused by gene mutation or chromosomal abnormality arising during embryonic development. "
+            f"Inheritance patterns are varied (autosomal dominant or recessive, X-linked, polygenic), and abnormal intrauterine environment, maternal infection, drug exposure or nutritional deficiency can also affect fetal organogenesis. "
+            f"Incidence is higher in highly inbred purebreds and specific closed populations. "
+            f"Pre-breeding genetic testing and carrier-exclusion programmes are important for population-level control."
+        )
+    if category == "degenerative":
+        return (
+            f"{prefix} is caused by progressive age-related tissue degeneration and declining repair capacity. "
+            f"It progresses particularly in tissues with limited regenerative capacity such as cartilage, intervertebral discs and nervous tissue. "
+            f"Genetic predisposition, chronic mechanical load from excess body weight, repetitive microtrauma, oxidative stress and persistent chronic inflammation are promoting factors. "
+            f"Progression can be slowed by early detection and appropriate weight management, physical therapy and anti-inflammatory treatment."
+        )
+    if category == "behavioral":
+        return (
+            f"{prefix} arises from a complex interplay of neuroendocrine dysregulation, genetic predisposition, inadequate socialisation, past traumatic experience, environmental stress, and the influence of medical disease (pain, thyroid disease, cognitive dysfunction). "
+            f"Triggers include insufficient experience during the developmental (socialisation) period, chronic environmental stress, punishment-based training, and life changes (change of owner, moving house, introduction of a new animal). "
+            f"Because behavioural problems directly affect the animal's quality of life and the owner relationship, an integrated approach of ruling out medical disease plus environmental enrichment, behaviour modification and, where indicated, medication is required."
+        )
+    # generic
+    return (
+        f"The precise aetiology of {prefix} varies between cases. "
+        f"Genetic predisposition, environmental factors (inappropriate management of temperature, humidity and hygiene), exposure to infectious pathogens, dietary imbalance, immune dysregulation and age-related tissue change contribute alone or in combination. "
+        f"Identifying the cause is essential for treatment planning and relapse prevention, and is achieved through integrated assessment of history, physical examination and ancillary tests."
     )
 
 
@@ -3501,6 +3764,185 @@ def gen_pathophysiology_ja(category: str, name_ja: str, species: str) -> str:
         f"初期の局所組織傷害・機能異常から全身的代償機構の動員、最終的な臓器機能不全への進展という共通の流れがある。"
         f"病態の進行は原因と宿主の免疫・代謝状態に依存する。"
         f"早期発見・早期治療が予後改善の鍵。"
+    )
+
+
+def gen_pathophysiology_en(category: str, name_en: str, species: str) -> str:
+    """English category pathophysiology mirroring ``gen_pathophysiology_ja``.
+
+    Called when the English pathophysiology carries the wrong organ-system
+    category template (e.g. myocarditis described with the *parasitic* template).
+    Category is resolved from the disease *name* by the caller.
+    """
+    sp_en = SPECIES_EN.get(species, species)
+    prefix = _disease_prefix_en(name_en, sp_en)
+
+    if category == "viral_infection":
+        return (
+            f"The pathophysiology of {prefix} unfolds as viral entry → intracellular replication → tissue injury → immune response. "
+            f"The pathogen binds specific cell-surface receptors, enters the cell and hijacks host machinery to replicate its RNA or DNA. "
+            f"The balance between the host innate/adaptive immune response and viral virulence determines the course. "
+            f"The acute phase produces local inflammation and systemic cytokine release, while the chronic phase causes organ-specific injury (lymphopenia, marrow suppression, neural damage)."
+        )
+    if category == "bacterial_infection":
+        return (
+            f"The pathophysiology of {prefix} unfolds as bacterial entry → colonisation/proliferation → toxin production and tissue injury → immune response. "
+            f"Pathogenic bacteria breach mucosal or skin barriers, adhere to target tissue via adhesins, proliferate and release exotoxins and endotoxins. "
+            f"Host neutrophil, complement and antibody responses control the organism, but an excessive response causes tissue injury (SIRS, sepsis). "
+            f"Bacterial resistance mechanisms (beta-lactamases, efflux pumps, target-site mutation) affect the therapeutic response."
+        )
+    if category in ("respiratory_infection", "respiratory_other"):
+        return (
+            f"The pathophysiology of {prefix} impairs gas exchange through functional or structural abnormality of the airway, lung parenchyma or pleural space. "
+            f"Upper-airway obstruction (laryngeal paralysis, tracheal collapse, brachycephalic airway syndrome) sets up a vicious cycle of increased inspiratory resistance → negative-pressure airway collapse → airway inflammation. "
+            f"Lower-airway and parenchymal disease (pneumonia, oedema, bronchitis) causes hypoxaemia through ventilation-perfusion mismatch and diffusion impairment. "
+            f"Chronic hypoxia progresses to pulmonary hypertension and right-heart strain (cor pulmonale)."
+        )
+    if category == "fungal_infection":
+        return (
+            f"The pathophysiology of {prefix} unfolds through fungal colonisation and tissue invasion with the host immune response. "
+            f"Dermatophytes and yeasts (e.g. Malassezia) colonise the stratum corneum, producing superficial inflammation, pruritus and alopecia. "
+            f"Systemic fungi (Aspergillus, Cryptococcus) enter via the airway or skin and disseminate to multiple organs through granulomatous inflammation. "
+            f"Impaired cell-mediated immunity (immunosuppression, underlying disease) is the major risk for invasive, disseminated infection."
+        )
+    if category == "parasitic":
+        return (
+            f"The pathophysiology of {prefix} varies with parasite species, burden and location. "
+            f"Gastrointestinal parasites cause mucosal injury, impaired nutrient absorption and, with vascular invasion, haemorrhage or obstruction. "
+            f"Cardiovascular parasites (heartworm) cause pulmonary arterial obstruction, vasculitis and right-heart overload, progressing to right-sided heart failure. "
+            f"Blood parasites (e.g. Babesia) cause haemolysis, immune-mediated secondary haemolysis and disseminated intravascular coagulation; ectoparasites drive skin injury, allergy and vector-borne secondary disease."
+        )
+    if category == "neoplasia":
+        return (
+            f"The pathophysiology of {prefix} begins with malignant transformation of normal cells. "
+            f"Activation of oncogenes and inactivation of tumour-suppressor genes progressively confer sustained proliferative signalling, evasion of apoptosis, angiogenesis and invasive/metastatic capacity. "
+            f"The tumour microenvironment builds immune-evasion mechanisms, with tumour-associated macrophages and regulatory T cells suppressing anti-tumour immunity. "
+            f"Advanced disease causes cachexia, paraneoplastic syndromes (hypercalcaemia, hypoglycaemia) and systemic complications."
+        )
+    if category == "endocrine_metabolic":
+        return (
+            f"The pathophysiology of {prefix} disrupts systemic homeostasis through endocrine gland dysfunction or a deranged metabolic pathway. "
+            f"Diabetes: beta-cell failure and insulin resistance cause chronic hyperglycaemia, advanced-glycation-end-product formation, microvascular injury and multi-organ complications. "
+            f"Hyperthyroidism: excess T3/T4 raises basal metabolism and cardiac output, causing weight loss with secondary hypertension and renal decline. "
+            f"Cushing's: chronic cortisol excess causes protein catabolism, immunosuppression, secondary diabetes and increased susceptibility to infection."
+        )
+    if category == "renal_urinary":
+        return (
+            f"The pathophysiology of {prefix} unfolds through progressive nephron loss or urinary-tract dysfunction. "
+            f"CKD: loss of functional nephrons → overload of remaining nephrons → glomerular hypertension and proteinuria → further nephron injury forms a vicious cycle. "
+            f"Secondary hyperphosphataemia, secondary hyperparathyroidism, anaemia (low erythropoietin), systemic hypertension and accumulation of uraemic toxins follow. "
+            f"In FLUTD/FIC, a chronic neuroendocrine stress response drives bladder-wall neurogenic inflammation and increased permeability, causing spontaneous pain and abnormal urination."
+        )
+    if category == "nutritional":
+        return (
+            f"The pathophysiology of {prefix} rests on biochemical pathway derangement from deficiency or excess of essential nutrients. "
+            f"Calcium/phosphorus imbalance drives secondary hyperparathyroidism with bone resorption, osteomalacia and pathological fracture. "
+            f"Vitamin deficiency impairs the enzyme reactions each vitamin serves, producing specific syndromes (vitamin A deficiency → visual impairment; thiamine deficiency → neurological signs). "
+            f"Protein-energy malnutrition causes catabolism, muscle wasting, impaired immunity and delayed wound healing, while nutrient excess increases hepatic/renal metabolic load and toxicity (fat-soluble vitamin excess)."
+        )
+    if category == "cardiac":
+        return (
+            f"The pathophysiology of {prefix} unfolds as functional or structural abnormality of the myocardium, valves, conduction system or pericardium drives reduced cardiac output and a cascade of compensatory mechanisms. "
+            f"In HCM, myocardial hypertrophy → left-ventricular outflow obstruction → raised left-atrial pressure → pulmonary oedema. "
+            f"In DCM, reduced contractility → ventricular dilation → low output → neurohormonal activation (RAAS, sympathetic) → further remodelling. "
+            f"End-stage disease progresses to pulmonary oedema, ascites, cardiogenic shock and fatal arrhythmias."
+        )
+    if category == "gastrointestinal":
+        return (
+            f"The pathophysiology of {prefix} unfolds through breakdown of gastrointestinal motility, secretion, absorption and mucosal-barrier function. "
+            f"Inflammatory and ulcerative lesions cause mucosal injury → protein loss, haemorrhage and malabsorption → hypoalbuminaemia and weight loss. "
+            f"Obstruction and stasis (ileus, GI stasis, GDV) cause content retention → bowel distension, compromised perfusion and bacterial overgrowth → endotoxaemia, dehydration and electrolyte derangement. "
+            f"Severe cases progress to hypovolaemic shock, sepsis and multi-organ failure."
+        )
+    if category == "neurological":
+        return (
+            f"The pathophysiology of {prefix} disrupts neural transmission through functional or structural injury of the central, peripheral or neuromuscular systems. "
+            f"Space-occupying or compressive lesions (intervertebral disc disease, tumour, hydrocephalus) cause parenchymal compression → local ischaemia and oedema → neurological deficit. "
+            f"Inflammatory and infectious lesions (meningoencephalitis) drive neuronal injury via cytokine release and blood-brain-barrier breakdown. "
+            f"In seizure disorders, hypersynchronous neuronal firing produces repeated convulsions, and status epilepticus causes irreversible neural injury."
+        )
+    if category == "ophthalmic":
+        return (
+            f"The pathophysiology of {prefix} threatens vision through structural or functional injury of ocular tissues (cornea, uvea, lens, retina, pressure-regulating system). "
+            f"Corneal lesions progress from epithelial-barrier breakdown → stromal oedema, vascularisation and ulceration → risk of perforation. "
+            f"Uveitis breaks the blood-ocular barrier and drives inflammatory infiltration, causing secondary glaucoma, cataract and retinal detachment. "
+            f"Imbalance of aqueous production and outflow raises intraocular pressure → optic-nerve and retinal ganglion cell injury (glaucoma) → irreversible blindness."
+        )
+    if category == "musculoskeletal":
+        return (
+            f"The pathophysiology of {prefix} unfolds through structural failure of bone, joint, ligament, tendon or muscle with secondary inflammation. "
+            f"Joint disease sets up a vicious cycle of cartilage-matrix degeneration and wear → subchondral bone sclerosis and osteophyte formation → synovitis, pain and reduced range of motion. "
+            f"Fractures and ligament injury cause loss of structural support → instability and abnormal loading → pain, lameness and disuse muscle atrophy. "
+            f"Bone-metabolic disorders (metabolic bone disease, nutritional secondary hyperparathyroidism) cause increased resorption and defective mineralisation with pathological fracture and deformity."
+        )
+    if category == "dermatological":
+        return (
+            f"The pathophysiology of {prefix} unfolds through breakdown of the skin barrier with inflammatory and immune responses. "
+            f"Allergic dermatitis links percutaneous allergen sensitisation → a Th2-dominant response → IgE production and mast-cell degranulation → pruritus and inflammation. "
+            f"Keratinisation and barrier defects increase transepidermal water loss and microbial colonisation, inviting secondary infection (pyoderma, Malassezia). "
+            f"Self-trauma from scratching establishes a pruritus-scratch cycle, and chronic inflammation progresses to lichenification, hyperpigmentation and alopecia."
+        )
+    if category == "hematological":
+        return (
+            f"The pathophysiology of {prefix} unfolds through imbalance in the production, destruction or function of red cells, white cells, platelets and the coagulation system. "
+            f"Anaemia reduces tissue oxygen delivery through decreased red-cell production (marrow suppression, low renal erythropoietin) or increased loss (haemorrhage, haemolysis). "
+            f"Haemolysis causes raised bilirubin and haemoglobinuria through membrane injury or immune-mediated destruction. "
+            f"Platelet and coagulation disorders cause a bleeding tendency, while hypercoagulability causes DIC and thromboembolism; severe anaemia or haemorrhage progresses to shock and multi-organ injury."
+        )
+    if category == "reproductive":
+        return (
+            f"The pathophysiology of {prefix} unfolds through structural or functional abnormality of the reproductive tract and changes in the hormonal environment. "
+            f"In pyometra, cystic endometrial hyperplasia under progesterone dominance is complicated by bacterial infection, progressing to endotoxaemia, sepsis and acute kidney injury. "
+            f"Dystocia from fetal, birth-canal or expulsive-force abnormality causes arrested labour → fetal distress, uterine rupture and hypocalcaemia. "
+            f"Sex-hormone-dependent diseases are promoted by sustained endocrine stimulation of tissue proliferation and neoplasia."
+        )
+    if category == "toxicity":
+        return (
+            f"The pathophysiology of {prefix} is determined by absorption, distribution, action on the molecular target and metabolism/excretion of the toxic substance. "
+            f"The toxin acts on a specific target (enzyme inhibition, receptor binding, membrane injury, DNA damage), impairing cell function in a dose-dependent manner. "
+            f"The liver and kidneys, as the principal organs of metabolism and excretion, sustain target-organ injury (hepatic necrosis, acute kidney injury) from toxic metabolites. "
+            f"Oxidative stress, mitochondrial injury and cell death are common mechanisms; severe cases progress to multi-organ failure, coagulopathy and circulatory collapse."
+        )
+    if category == "trauma":
+        return (
+            f"The pathophysiology of {prefix} unfolds through physical tissue destruction by external force with a subsequent inflammatory and reparative response. "
+            f"Primary injury (laceration, fracture, crush, burn) is followed by secondary injury that spreads through inflammatory-mediator release, oedema and microcirculatory compromise. "
+            f"Severe trauma is complicated by haemorrhagic shock, systemic inflammatory response syndrome (SIRS) and trauma-induced coagulopathy. "
+            f"Repair follows haemostasis → inflammation → proliferation → remodelling, but infection, poor perfusion or retained foreign material delays healing and causes scar contracture."
+        )
+    if category == "autoimmune":
+        return (
+            f"The pathophysiology of {prefix} rests on loss of self-tolerance and an immune response mounted against self-antigens. "
+            f"Autoantibodies and self-reactive T cells attack target tissue, causing injury through type II (cytotoxic), type III (immune-complex) and type IV (cell-mediated) hypersensitivity. "
+            f"In immune-mediated haemolytic anaemia and thrombocytopenia the blood cells are destroyed; in polyarthritis and pemphigus the joints and skin are targeted. "
+            f"A genetic predisposition combines with triggers (infection, drugs, neoplasia) to precipitate disease, which relapses and remits, with the response to immunosuppression governing prognosis."
+        )
+    if category == "dental":
+        return (
+            f"The pathophysiology of {prefix} impairs feeding and systemic health through abnormality of the teeth, periodontium or occlusion. "
+            f"In periodontal disease, plaque bacteria → gingivitis → periodontal pocket formation and alveolar bone resorption → tooth mobility and loss, with bacteraemia affecting distant organs. "
+            f"In herbivore and rodent malocclusion, overgrowth and spur formation of the continuously growing teeth cause oral mucosal injury, pain and inappetence. "
+            f"Reduced intake can precipitate life-threatening secondary conditions such as gastrointestinal stasis and hepatic lipidosis."
+        )
+    if category in ("genetic_congenital", "degenerative"):
+        return (
+            f"The pathophysiology of {prefix} unfolds through a congenital/genetic predisposition or age-related progressive tissue degeneration. "
+            f"In genetic disease, a specific gene mutation causes dysfunction of an enzyme, structural protein or receptor, presenting at birth or a characteristic age. "
+            f"In degenerative disease, ageing, oxidative stress and chronic mechanical load slowly degenerate and deplete cells and matrix. "
+            f"Compensatory mechanisms keep the animal asymptomatic early, but clinical signs emerge once functional reserve is exceeded; most are irreversible and progressive."
+        )
+    if category == "behavioral":
+        return (
+            f"The pathophysiology of {prefix} unfolds through interaction between neurobiological predisposition, learning and environmental stress. "
+            f"Fear and anxiety involve overactivity of amygdala-centred emotional circuits and chronic activation of the hypothalamic-pituitary-adrenal (HPA) axis. "
+            f"Imbalance of neurotransmitters such as serotonin and dopamine affects emotional and impulse control. "
+            f"Learning of aversive experiences, inadequate socialisation and environmental mismatch reinforce and maintain the problem, and chronic stress invites stereotypies, self-trauma and concurrent physical disease."
+        )
+    # generic
+    return (
+        f"The pathophysiology of {prefix} unfolds along multiple lines depending on the underlying cause and stage. "
+        f"There is a common progression from early local tissue injury and dysfunction, through mobilisation of systemic compensatory mechanisms, to eventual organ dysfunction. "
+        f"Progression depends on the cause and on the host's immune and metabolic state; early detection and treatment are key to improving prognosis."
     )
 
 
