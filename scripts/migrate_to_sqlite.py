@@ -58,7 +58,16 @@ def _load_module(module_path: str):
 def migrate_species_diseases(conn, species_key: str, module_path: str) -> int:
     """Load DISEASES from a species module and insert into SQLite. Returns count."""
     mod = _load_module(module_path)
-    diseases = getattr(mod, "DISEASES", [])
+    raw = getattr(mod, "DISEASES", [])
+    # Collapse duplicate entries (same English name or same name_ja) but keep
+    # each kept entry's ORIGINAL index so generated ids stay stable.
+    try:
+        from api.species.helpers import dedupe_disease_list
+
+        diseases = dedupe_disease_list(raw)
+    except Exception:
+        diseases = raw
+    orig_index = {id(e): i for i, e in enumerate(raw)}
     count = 0
 
     # Helper to extract ja/en from dict fields
@@ -67,7 +76,8 @@ def migrate_species_diseases(conn, species_key: str, module_path: str) -> int:
             return field_val.get("ja"), field_val.get("en")
         return None, field_val
 
-    for i, d in enumerate(diseases):
+    for d in diseases:
+        i = orig_index.get(id(d), 0)
         disease_id = d.get("id") or f"{species_key}_{i:04d}"
 
         # Extract ja/en from fields that might be dicts
@@ -130,9 +140,17 @@ def migrate_species_symptoms(conn, species_key: str, module_path: str) -> int:
 def migrate_dog_diseases(conn) -> int:
     """Migrate dog diseases from symptom_checker module."""
     mod = _load_module(DOG_MODULE)
-    diseases = getattr(mod, DOG_DISEASES_VAR, [])
+    raw = getattr(mod, DOG_DISEASES_VAR, [])
+    try:
+        from api.species.helpers import dedupe_disease_list
+
+        diseases = dedupe_disease_list(raw)
+    except Exception:
+        diseases = raw
+    orig_index = {id(e): i for i, e in enumerate(raw)}
     count = 0
-    for i, d in enumerate(diseases):
+    for d in diseases:
+        i = orig_index.get(id(d), 0)
         disease_id = d.get("id") or f"dog_{i:04d}"
 
         # Handle fields that might be dict with 'ja'/'en' keys
@@ -1578,6 +1596,43 @@ def localize_english_species_in_served_db(conn) -> int:
     return total
 
 
+def strip_cross_species_clauses_in_served_db(conn) -> int:
+    """Remove stale cross-species enumeration clauses from visible JA fields.
+
+    Older enrichment runs bolted fixed multi-species blocks onto every article —
+    e.g. the reptile "支持療法（爬虫類）: 種別POTZ…" supportive-care sentence appears
+    in mammal/bird treatments, and the cat "甲状腺機能亢進症（猫）: ヨウ素…" /
+    "喘息（猫）: …" prevention clauses appear in non-cat articles. Each clause is a
+    self-contained sentence, so it is dropped only from species where it is not
+    clinically relevant, while inline comparative mentions are left intact.
+    """
+    sys.path.insert(0, str(ROOT))
+    from api.species.helpers import _CS_VISIBLE_FIELDS, strip_cross_species_text
+
+    existing = {r["name"] for r in conn.execute("PRAGMA table_info(diseases)").fetchall()}
+    fields = [f for f in _CS_VISIBLE_FIELDS if f in existing]
+    rows = conn.execute("SELECT id, species, " + ", ".join(fields) + " FROM diseases").fetchall()
+    total = 0
+    for row in rows:
+        species = row["species"]
+        updates = {}
+        for f in fields:
+            v = row[f]
+            if not v:
+                continue
+            cleaned = strip_cross_species_text(v, species)
+            if cleaned != v:
+                updates[f] = cleaned
+                total += 1
+        if updates:
+            sets = ", ".join(f"{f} = ?" for f in updates)
+            conn.execute(
+                f"UPDATE diseases SET {sets}, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (*updates.values(), row["id"]),
+            )
+    return total
+
+
 def fix_cross_species_breed_clauses_in_served_db(conn) -> dict[str, int]:
     """Strip cross-species breed clauses and the frozen "cardiovascular" organ.
 
@@ -2123,6 +2178,12 @@ def main(db_path: str | None = None):
         print("\n[enrichment] localising English species names in Japanese fields...")
         loc_n = localize_english_species_in_served_db(conn)
         print(f"  → {loc_n} English species tokens localised")
+
+        # Strip stale cross-species enumeration clauses (reptile POTZ supportive
+        # care in mammals, cat hyperthyroid/asthma prevention in non-cats, etc.).
+        print("\n[enrichment] stripping cross-species boilerplate clauses...")
+        cs_n = strip_cross_species_clauses_in_served_db(conn)
+        print(f"  → {cs_n} cross-species clauses removed")
 
         # Correct clinically dangerous treatment templates (deworming on
         # rickettsial bacteria, chemotherapy on benign cysts/polyps) that

@@ -1747,3 +1747,41 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 
 ### 既知の残課題（次セッション候補・要人手翻訳）
 - **52疾患の英語臨床フィールドが完全日本語**（新規追加のJA-first コンテンツ: 観賞魚26疾患、馬の胃潰瘍/繁殖疾患、新生児症候群、マムシ咬傷等）。causes/treatment/prevention/prognosis/clinical_signs/pathophysiology が未翻訳。**臨床用量プロトコルの機械翻訳は患者安全上のリスク**があるため本セッションでは自動翻訳せず、獣医監修下での人手翻訳を推奨（description は英語グラウンディング済み）。
+
+## 2026-07セッション（第10弾: 疾患重複カードの撲滅 + 可視フィールドのクロス種テンプレート除去）
+
+### 背景: 同一疾患が2枚のカードで表示される公開品質バグ
+複数の種モジュールが同一疾患を2エントリで保持しており、疾患ブラウザに**同一カードが2枚**表示されていた（例: dog「特発性てんかん」×2、chinchilla「熱中症」「難産」「子宮蓄膿症」各×2）。原因は英名の綴り違い（Xylitol Poisoning / Xylitol Toxicosis）や冗長な種サフィックス（Heat Stroke / Heat Stroke - Chinchilla）で同一疾患が重複登録されていたこと。監査で(species,name)完全重複11組＋(species,name_ja)重複33組を検出。
+
+### 中央集約的な重複排除（`dedupe_disease_list`、非破壊）
+`api/species/helpers.py` に `dedupe_disease_list(diseases)` を追加。同一種内で **英名 OR name_ja が一致**する2エントリを同一疾患とみなし（UIは name_ja(JA)/name(EN)を表示するため、どちらか一致すれば見た目は同一カード）、内容が最も充実したエントリ（非空フィールド数→総文字数→先頭優先）を残す。union-findで推移的にマージ。dict/dataclass両対応、入力非破壊。
+- 全読み込み経路に適用（ソース.pyは無改変・可逆）:
+  - `vetdict_api._load_diseases`（SEO詳細ページ/ハブ/サイトマップ/横断検索）
+  - `health_checker.get_diseases`（SPA疾患ブラウザ）
+  - `migrate_to_sqlite`（配信DB、生成idの安定性のため元indexを保持）
+  - `helpers.enrich_diseases` 末尾（低メモリ本番の実行時オーバーレイ経路）
+- 効果: 配信DB **7,094→7,055疾患**（39重複を統合）。全21種でブラウザに重複カード **0**。残す方は常により充実したエントリ（39件全て検証）。
+
+### 可視フィールドのクロス種テンプレート除去（`strip_cross_species_clauses`）
+可視JAフィールド（prevention_ja/causes_ja/treatment_ja等）に、古いenrichmentが焼き込んだ**多種列挙ボイラープレート**が残存（監査で999件）。ジェネレータ自体は既に種別対応済みで、これは**過去生成の残留汚染**。7種類の識別可能な文が大半を占めた:
+- 「支持療法（爬虫類）: 種別POTZ…」が非爬虫類の治療に548件（POTZは爬虫類概念）
+- 「甲状腺機能亢進症（猫）: ヨウ素…」「喘息（猫）: …」が非猫の予防に計380件超
+- 「⑤ アトピー性（犬）: シクロスポリン…」等
+`strip_cross_species_text(text, species)` を追加。**文頭（リスト記号・改行を除去後）が既知のクロス種マーカーで始まる文のみ**を除去し、コンマ列挙内のインライン言及（「…、甲状腺機能亢進症（猫）、…」）は温存。フィールドを空にしない安全ガード付き。
+- `health_checker.get_diseases`（SPAブラウザ）+ `migrate_to_sqlite` 配信DBスイープ `strip_cross_species_clauses_in_served_db` に適用。
+- 効果: 配信DBのクロス種文 **753→0**（爬虫類自身のPOTZ・猫自身の予防文は温存を確認）。dog甲状腺機能低下症の予防文が「糖尿病:…。クッシング:…。アジソン:…」と自然に流れることを確認。
+
+### 表示数値の同期
+`static/js/app.js` の `setDefaultStats()` フォールバック（API失敗時のみ表示）を重複排除後の実測値に同期（dog 622→611, chinchilla 278→266 等13種、総数 7093→7055）。
+
+### 回帰テスト（tests/test_disease_dedup.py、22件）
+- dedup単体: 英名/name_ja/推移マージ、順序保持、dataclass対応、非破壊
+- dedup統合: 7種のSPAブラウザ応答に重複英名/JA名が無い
+- cross-species: 爬虫類ブロックを哺乳類から除去し爬虫類では温存、猫予防文を犬から除去、インライン言及は温存、改行前置クラウス対応、空にしない
+- `test_enrich_diseases.py::test_multiple_diseases`: プレースホルダ name_ja 衝突を回避するため2疾患に個別 name_ja を付与
+
+### テスト・CI
+- フルテストスイート: **3,526件合格**（34 skip）
+- ruff check/format: 全変更ファイルで通過
+- ServiceWorker: `CACHE_NAME` v86 → **v87**
+- 再現手順: `migrate_to_sqlite.py`（dedup/cross-species strip は配信DBビルドに統合済み）

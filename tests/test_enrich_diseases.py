@@ -53,8 +53,8 @@ class TestEnrichDiseases:
 
     def test_multiple_diseases(self):
         diseases = [
-            self._make_disease("Disease A"),
-            self._make_disease("Disease B"),
+            self._make_disease("Disease A", name_ja="疾患A"),
+            self._make_disease("Disease B", name_ja="疾患B"),
         ]
         result = enrich_diseases(diseases, "rabbit")
         assert len(result) >= 2

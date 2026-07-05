@@ -80,6 +80,171 @@ def _normalize_disease_name(name: str) -> str:
     return n
 
 
+def _disease_field(entry: Any, key: str, default: str = "") -> Any:
+    """Read a field from a disease entry that may be a dict or a dataclass/object."""
+    if isinstance(entry, dict):
+        return entry.get(key, default)
+    return getattr(entry, key, default)
+
+
+_DEDUP_CONTENT_FIELDS = (
+    "description_ja",
+    "description",
+    "causes_ja",
+    "causes",
+    "pathophysiology_ja",
+    "pathophysiology",
+    "treatment_ja",
+    "treatment",
+    "prevention_ja",
+    "prevention",
+    "prognosis_ja",
+    "prognosis",
+)
+
+
+def _dedup_richness(entry: Any) -> tuple[int, int]:
+    """Rank a disease entry by content completeness (non-empty fields, then total length)."""
+    nonempty = 0
+    total = 0
+    for f in _DEDUP_CONTENT_FIELDS:
+        v = _disease_field(entry, f, "")
+        if isinstance(v, str) and v.strip():
+            nonempty += 1
+            total += len(v)
+    return (nonempty, total)
+
+
+def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
+    """Remove duplicate disease entries within a single species list.
+
+    Two entries are treated as the same disease when they share the same
+    case-insensitive English ``name`` OR the same non-empty ``name_ja``. Because
+    the UI renders ``name_ja`` (JA mode) or ``name`` (EN mode), any two entries
+    that collide on either would appear as identical cards to the user.
+
+    The richest entry (most non-empty content fields, then longest total
+    content) is kept; ties resolve to the earliest entry. The relative order of
+    kept entries is preserved. Handles dict entries and dataclass/objects
+    (e.g. equine). Returns a new list; the input is not mutated.
+    """
+    if not diseases or len(diseases) < 2:
+        return diseases
+
+    parent = list(range(len(diseases)))
+
+    def find(i: int) -> int:
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    def union(a: int, b: int) -> None:
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[max(ra, rb)] = min(ra, rb)
+
+    by_name: Dict[str, int] = {}
+    by_ja: Dict[str, int] = {}
+    for i, e in enumerate(diseases):
+        nm = (_disease_field(e, "name", "") or _disease_field(e, "name_en", "") or "").strip().lower()
+        ja = (_disease_field(e, "name_ja", "") or "").strip()
+        if nm:
+            if nm in by_name:
+                union(i, by_name[nm])
+            else:
+                by_name[nm] = i
+        if ja:
+            if ja in by_ja:
+                union(i, by_ja[ja])
+            else:
+                by_ja[ja] = i
+
+    groups: Dict[int, List[int]] = {}
+    for i in range(len(diseases)):
+        groups.setdefault(find(i), []).append(i)
+
+    keep: Set[int] = set()
+    for idxs in groups.values():
+        if len(idxs) == 1:
+            keep.add(idxs[0])
+        else:
+            keep.add(max(idxs, key=lambda i: (_dedup_richness(diseases[i]), -i)))
+
+    if len(keep) == len(diseases):
+        return diseases
+    return [diseases[i] for i in range(len(diseases)) if i in keep]
+
+
+# Cross-species boilerplate clauses that older enrichment runs baked into every
+# species' articles. Each marker leads a self-contained enumeration sentence
+# (e.g. "甲状腺機能亢進症（猫）: ヨウ素…") that is only clinically relevant for the
+# listed owner species; in any other species it is stale contamination. Matching
+# is anchored to the START of a sentence so inline comparative mentions
+# (e.g. "…、甲状腺機能亢進症（猫）、…" inside a differential list) are left intact.
+_CROSS_SPECIES_CLAUSES: tuple[tuple[str, frozenset[str]], ...] = (
+    ("支持療法（爬虫類）", frozenset({"reptile", "tortoise", "snake", "lizard"})),
+    ("喘息（猫）", frozenset({"cat"})),
+    ("甲状腺機能亢進症（猫）", frozenset({"cat"})),
+    ("アトピー性（犬）", frozenset({"dog"})),
+    ("FIP（猫）", frozenset({"cat"})),
+    ("ビタミンC欠乏（モルモット）", frozenset({"guinea_pig"})),
+    ("Cryptosporidium（ヘビ）", frozenset({"snake"})),
+)
+
+_CS_LEADING_SYMBOLS = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳■●○◆・※【】 　\t\n\r"
+
+_CS_VISIBLE_FIELDS = (
+    "prevention_ja",
+    "causes_ja",
+    "treatment_ja",
+    "pathophysiology_ja",
+    "description_ja",
+    "prognosis_ja",
+)
+
+
+def strip_cross_species_text(text: str, species: str) -> str:
+    """Remove stale cross-species enumeration sentences from one JA field.
+
+    Only sentences whose leading token (after any list markers) matches a known
+    foreign-species clause are dropped; everything else is preserved verbatim.
+    Returns the original text unchanged when nothing matches, and never blanks a
+    field that becomes empty after stripping.
+    """
+    if not text or "（" not in text:
+        return text
+    segments = _re.split(r"(?<=。)", text)
+    kept: List[str] = []
+    changed = False
+    for seg in segments:
+        core = seg.lstrip(_CS_LEADING_SYMBOLS)
+        drop = any(species not in owners and core.startswith(marker) for marker, owners in _CROSS_SPECIES_CLAUSES)
+        if drop:
+            changed = True
+            continue
+        kept.append(seg)
+    if not changed:
+        return text
+    result = "".join(kept).strip()
+    return result if result else text
+
+
+def strip_cross_species_clauses(disease: Any, species: str) -> Any:
+    """Strip stale cross-species clauses from a disease's visible JA fields in place."""
+    for field in _CS_VISIBLE_FIELDS:
+        current = _disease_field(disease, field, "")
+        if not isinstance(current, str) or not current:
+            continue
+        cleaned = strip_cross_species_text(current, species)
+        if cleaned is not current and cleaned != current:
+            if isinstance(disease, dict):
+                disease[field] = cleaned
+            else:
+                setattr(disease, field, cleaned)
+    return disease
+
+
 def _extract_all_name_variants(name: str) -> List[str]:
     """Generate multiple normalized variants for a disease name.
 
@@ -424,7 +589,9 @@ def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[s
             apply_sponsor_adjuncts_dict(disease, species)
         except ImportError:
             pass
-    return diseases
+    # Collapse any duplicates introduced by the module list or the supplementary
+    # append above (same English name or same name_ja) before returning.
+    return dedupe_disease_list(diseases)
 
 
 # Import gender risk data

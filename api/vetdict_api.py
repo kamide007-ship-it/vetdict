@@ -598,7 +598,13 @@ def _load_diseases(species_key: str) -> list:
         import importlib
 
         mod = importlib.import_module(mod_name)
-        return getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
+        raw = getattr(mod, "DISEASES", getattr(mod, "DISEASE_DATABASE", []))
+        try:
+            from api.species.helpers import dedupe_disease_list
+
+            return dedupe_disease_list(raw)
+        except ImportError:
+            return raw
     except ImportError:
         return []
 

@@ -4268,6 +4268,18 @@ def get_diseases():
                 )
             )
 
+    # Collapse duplicate disease entries (same English name or same name_ja)
+    # so the browser never renders two identical cards for one disease, and
+    # strip stale cross-species boilerplate from the visible JA fields.
+    try:
+        from api.species.helpers import dedupe_disease_list, strip_cross_species_clauses
+
+        for item in output:
+            strip_cross_species_clauses(item, species)
+        output = dedupe_disease_list(output)
+    except ImportError:
+        pass
+
     # Inject hiragana reading for あいうえお sorting
     for item in output:
         name_ja = item.get("name_ja", "")
