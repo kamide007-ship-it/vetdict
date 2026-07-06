@@ -4597,3 +4597,203 @@ def test_generate_clinical_fields_emits_no_breed_clause_for_nondog():
     for field, text in out.items():
         for tok in _DOG_BREED_TOKENS:
             assert tok not in text, f"{field} still emits breed token '{tok}': {text[:80]}"
+
+
+# ---------------------------------------------------------------------------
+# English `causes` parity — the field was left carrying the old organ-system
+# category templates (and, dangerously, the toxicology template on
+# inflammatory "-itis" diseases). Fixed by
+# scripts/template_elimination/fix_english_causes_category.py plus a served-DB
+# safety net in migrate_to_sqlite.py (regenerate_english_category_causes) and
+# resolver-collision fixes in clinical_fields_generator.py. See CLAUDE.md.
+# ---------------------------------------------------------------------------
+
+# Leading fingerprint of the dangerous toxicology `causes` template.
+_TOXIC_CAUSES_PREFIX = "Caused by exposure to toxic substances"
+
+# Names that ARE genuine toxicoses — a toxic aetiology is correct for these.
+_LEGIT_TOXICOSIS_RE = re.compile(
+    r"toxic|poison|中毒|venom|envenom|snakebite|zinc|lead|salt|aflatox|"
+    r"vitamin\s*d|copper|selenium|thermal|heavy metal|chocolate|xylitol|"
+    r"antifreeze|ethylene|rodenticide|arsenic|mercury",
+    re.I,
+)
+
+
+def test_no_toxic_causes_template_on_inflammatory_disease_in_json():
+    """No inflammatory "-itis" disease may claim it is "caused by exposure to
+    toxic substances" in its English causes.
+
+    The exotic-enrichment pipeline mis-applied the toxicology causes template
+    to keratitis, hepatitis, myocarditis, pericarditis, dermatitis and dozens
+    of other inflammatory diseases — a claim a clinician flags immediately.
+    """
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    offenders = []
+    for e in entries:
+        causes = e.get("causes") or ""
+        name = e.get("name") or ""
+        if causes.startswith(_TOXIC_CAUSES_PREFIX) and name.endswith("itis"):
+            offenders.append(f"[{e.get('species')}] {name}")
+    assert not offenders, (
+        f"{len(offenders)} inflammatory diseases still have the toxicology causes template: {offenders[:15]}"
+    )
+
+
+def test_served_db_no_toxic_causes_on_non_toxicosis():
+    """The served DB must not describe a non-toxicosis as a toxicosis (EN causes)."""
+    import sqlite3
+
+    db = _served_db_path()
+    if db is None:
+        pytest.skip("served vetdict.db not present (run scripts/migrate_to_sqlite.py)")
+    conn = sqlite3.connect(str(db))
+    try:
+        rows = conn.execute(
+            "SELECT species, name FROM diseases WHERE causes LIKE 'Caused by exposure to toxic substances%'"
+        ).fetchall()
+    finally:
+        conn.close()
+    offenders = [f"[{s}] {n}" for s, n in rows if not _LEGIT_TOXICOSIS_RE.search(n or "")]
+    assert not offenders, (
+        f"{len(offenders)} non-toxicosis diseases have the toxic-substances causes template: {offenders[:15]}"
+    )
+
+
+def test_resolver_no_substring_collisions():
+    """Regression guard for the name→category resolver substring collisions
+    fixed alongside the English causes work.
+
+    * calici (calicivirus) must not swallow カリシン (Culicoides) → sweet itch
+      is NOT viral.
+    * bare "cystitis" must not swallow cholecystitis (gallbladder) or
+      dacryocystitis (tear sac).
+    * "lens" luxation is ophthalmic, not musculoskeletal.
+    """
+    from scripts.template_elimination.clinical_fields_generator import resolve_category_from_name
+
+    assert (
+        resolve_category_from_name("夏癬(カリシン過敏症)", "Sweet Itch (Culicoides Hypersensitivity)")
+        != "viral_infection"
+    )
+    assert resolve_category_from_name("猫カリシウイルス感染症", "Feline Calicivirus") == "viral_infection"
+    assert resolve_category_from_name("胆嚢炎", "Cholecystitis") == "gastrointestinal"
+    assert resolve_category_from_name("涙嚢炎（鼻涙管閉塞）", "Dacryocystitis") == "ophthalmic"
+    assert resolve_category_from_name("膀胱炎", "Cystitis") == "renal_urinary"
+    assert resolve_category_from_name("水晶体脱臼", "Lens Luxation") == "ophthalmic"
+    assert resolve_category_from_name("膝蓋骨脱臼", "Patellar Luxation") == "musculoskeletal"
+
+
+def test_inflammatory_conditions_resolve_to_correct_system():
+    """Inflammatory conditions the resolver previously missed (returning None,
+    leaving the toxic template in place) now resolve to the right system."""
+    from scripts.template_elimination.clinical_fields_generator import resolve_category_from_name
+
+    cases = {
+        ("口内炎", "Stomatitis"): "dental",
+        ("鼻炎", "Rhinitis"): "respiratory_infection",
+        ("副鼻腔炎", "Sinusitis"): "respiratory_infection",
+        ("心膜炎", "Pericarditis"): "cardiac",
+        ("筋炎", "Myositis"): "musculoskeletal",
+    }
+    for (ja, en), expected in cases.items():
+        assert resolve_category_from_name(ja, en) == expected, f"{en} did not resolve to {expected}"
+
+
+def test_gen_causes_en_is_category_correct_and_idempotent():
+    """gen_causes_en returns English text that names the resolved category and
+    is not itself a generic template (so re-running the fix is a no-op)."""
+    from scripts.template_elimination.clinical_fields_generator import gen_causes_en
+    from scripts.template_elimination.fix_english_causes_category import is_generic_causes_en
+
+    ophthalmic = gen_causes_en("ophthalmic", "Keratitis", "bird")
+    assert "vision" in ophthalmic.lower() or "cornea" in ophthalmic.lower() or "eye" in ophthalmic.lower()
+    assert not is_generic_causes_en(ophthalmic), "gen_causes_en output re-matches a template fingerprint"
+    cardiac = gen_causes_en("cardiac", "Myocarditis", "dog")
+    assert "cardio" in cardiac.lower() or "heart" in cardiac.lower() or "valve" in cardiac.lower()
+
+
+def test_laminitis_english_causes_is_endocrine_not_musculoskeletal():
+    """Equine laminitis is now predominantly endocrine (EMS/PPID). Its English
+    causes must reflect that, not a musculoskeletal fracture/arthritis template."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    lam = [e for e in entries if e.get("species") == "Horse" and e.get("name") == "Laminitis"]
+    if not lam:
+        pytest.skip("No equine Laminitis entry")
+    causes = lam[0].get("causes") or ""
+    low = causes.lower()
+    assert "insulin" in low or "endocrin" in low or "ems" in low or "ppid" in low, (
+        f"Laminitis English causes is not endocrine-aware: '{causes[:160]}'"
+    )
+    assert "fracture" not in low, "Laminitis English causes wrongly reads as a musculoskeletal/fracture aetiology"
+
+
+def test_no_parasitic_pathophysiology_on_non_parasitic_disease_in_json():
+    """No non-parasitic disease may carry the parasitic pathophysiology template.
+
+    The exotic-enrichment pipeline applied "The pathophysiology of parasitic
+    diseases involves direct tissue damage from parasite attachment ..." to
+    myocarditis, pica, encephalitis, alopecia and other non-parasitic diseases.
+    Fixed by fix_english_causes_category.regenerate_entry_pathophysiology, which
+    preserves genuinely-parasitic diseases (whose name signals a parasite).
+    """
+    from scripts.template_elimination.fix_english_causes_category import (
+        regenerate_entry_pathophysiology,
+    )
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    # Any entry the fixer would still change is a dangerous survivor.
+    survivors = [
+        f"[{e.get('species')}] {e.get('name')}" for e in entries if regenerate_entry_pathophysiology(e) is not None
+    ]
+    assert not survivors, (
+        f"{len(survivors)} diseases still have a mis-applied infection pathophysiology: {survivors[:15]}"
+    )
+
+
+def test_pathophysiology_fixer_preserves_genuine_parasitic_and_fixes_myocarditis():
+    """The pathophysiology fixer must keep genuinely-parasitic diseases and
+    correct the parasitic template on a cardiac disease."""
+    from scripts.template_elimination.fix_english_causes_category import (
+        regenerate_entry_pathophysiology,
+    )
+
+    parasite_template = (
+        "The pathophysiology of parasitic diseases involves direct tissue damage "
+        "from parasite attachment, migration, and feeding."
+    )
+    # Genuinely parasitic — name signals a parasite → preserved.
+    thelazia = {
+        "species": "Dog",
+        "name": "Thelazia Eye Worm",
+        "name_ja": "眼虫症",
+        "pathophysiology": parasite_template,
+    }
+    assert regenerate_entry_pathophysiology(thelazia) is None
+    # Not parasitic — parasitic template is wrong → corrected to cardiac.
+    myocarditis = {
+        "species": "Dog",
+        "name": "Myocarditis",
+        "name_ja": "心筋炎",
+        "pathophysiology": parasite_template,
+    }
+    fixed = regenerate_entry_pathophysiology(myocarditis)
+    assert fixed is not None and "parasit" not in fixed.lower()
+
+
+def test_worm_diseases_resolve_to_parasitic_not_organ_system():
+    """Gapeworm (respiratory) and eyeworm (ophthalmic) must resolve to
+    parasitic — never to the organ their name evokes — while ringworm (a
+    dermatophyte) stays fungal."""
+    from scripts.template_elimination.clinical_fields_generator import resolve_category_from_name
+
+    assert resolve_category_from_name("シンガムス症", "Syngamus (Gapeworm)") == "parasitic"
+    assert resolve_category_from_name("眼虫症", "Thelazia Eye Worm") == "parasitic"
+    assert resolve_category_from_name("肺虫症", "Lungworm") == "parasitic"
+    assert resolve_category_from_name("皮膚糸状菌症", "Ringworm") == "fungal_infection"
