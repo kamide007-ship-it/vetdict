@@ -912,6 +912,15 @@ def _ppid_horse(sp):
     )
 
 
+def _laminitis_horse(sp):
+    return (
+        "馬の蹄葉炎の原因は多くが全身性で、現在は内分泌性が最多とされる。(1) 内分泌性：馬代謝症候群（EMS）や下垂体中葉機能障害（PPID）に伴う高インスリン血症。(2) 敗血症・全身性炎症：大腸炎・胎盤炎・穀物過食による腸内毒素血症（SIRS）。(3) 過重負重性：対側肢の重度疼痛時に健常肢へ体重が偏る支持側肢蹄葉炎。医原性としてコルチコステロイド投与も誘因となりうる。",
+        "Laminitis in horses is usually systemic in origin, and endocrine causes are now the most common: (1) endocrinopathic — hyperinsulinaemia associated with equine metabolic syndrome (EMS) or pituitary pars intermedia dysfunction (PPID); (2) sepsis-related/inflammatory — endotoxaemia and SIRS from colitis, placentitis or grain overload; and (3) supporting-limb — weight overload of a sound limb during severe contralateral limb pain. Corticosteroid administration can also be a precipitating (iatrogenic) factor.",
+        "葉層（ラメラ）の上皮細胞の増殖・接着異常により、第三指骨（蹄骨）を蹄壁に固定する葉間結合が脆弱化し、蹄骨の回転・沈下を生じる。高インスリン血症によるラメラ細胞への直接作用、基質金属プロテアーゼ（MMP）活性化、微小循環障害・虚血再灌流傷害が関与する。急性期の激しい蹄部疼痛から慢性期の蹄骨変位・蹄葉層破壊へ進行する。",
+        "Dysregulated proliferation and adhesion of lamellar epithelial cells weakens the interdigitating lamellae that suspend the distal phalanx (coffin bone) from the hoof wall, allowing rotation and sinking of the bone. Direct effects of hyperinsulinaemia on lamellar cells, matrix metalloproteinase (MMP) activation, and microvascular/ischaemia-reperfusion injury are implicated. Disease progresses from severe acute foot pain to chronic displacement of the distal phalanx and lamellar breakdown.",
+    )
+
+
 def _rhabdomyolysis_horse(sp):
     return (
         "馬の運動誘発性横紋筋融解症（タイングアップ）は、散発性（過度な運動・電解質異常・ビタミンE/セレン欠乏）と、遺伝性の反復性型（RER：カルシウム調節異常、PSSM：糖原蓄積異常）に大別される骨格筋の急性壊死性疾患。",
@@ -1510,6 +1519,7 @@ _FLAGSHIPS: tuple[tuple[frozenset | None, tuple[str, ...], tuple[str, ...], obje
         _pssm_horse,
     ),
     (frozenset({"horse"}), ("メタボリック症候群", "metabolic syndrome", "ems"), (), _ems_horse),
+    (frozenset({"horse"}), ("蹄葉炎", "laminitis"), (), _laminitis_horse),
     (
         frozenset({"horse"}),
         ("下垂体中葉機能障害", "pituitary pars intermedia", "ppid"),

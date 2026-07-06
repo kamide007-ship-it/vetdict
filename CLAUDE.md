@@ -1792,3 +1792,84 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 - 英語 pathophysiology の残りカテゴリテンプレート（9%、grounding で対応可能）
 - Ehrlichia/Anaplasma/Babesia 等の named-agent 化（現状はカテゴリ解決で日英一致だが、病原体特異化の余地あり）
 - 52疾患の完全日本語な英語臨床フィールド（要人手翻訳、患者安全上の理由で自動翻訳せず）
+## 2026-07セッション（第11弾: 疾患重複カードの撲滅 + 可視フィールドのクロス種テンプレート除去）
+
+### 背景: 同一疾患が2枚のカードで表示される公開品質バグ
+複数の種モジュールが同一疾患を2エントリで保持しており、疾患ブラウザに**同一カードが2枚**表示されていた（例: dog「特発性てんかん」×2、chinchilla「熱中症」「難産」「子宮蓄膿症」各×2）。原因は英名の綴り違い（Xylitol Poisoning / Xylitol Toxicosis）や冗長な種サフィックス（Heat Stroke / Heat Stroke - Chinchilla）で同一疾患が重複登録されていたこと。監査で(species,name)完全重複11組＋(species,name_ja)重複33組を検出。
+
+### 中央集約的な重複排除（`dedupe_disease_list`、非破壊）
+`api/species/helpers.py` に `dedupe_disease_list(diseases)` を追加。同一種内で **英名 OR name_ja が一致**する2エントリを同一疾患とみなし（UIは name_ja(JA)/name(EN)を表示するため、どちらか一致すれば見た目は同一カード）、内容が最も充実したエントリ（非空フィールド数→総文字数→先頭優先）を残す。union-findで推移的にマージ。dict/dataclass両対応、入力非破壊。
+- 全読み込み経路に適用（ソース.pyは無改変・可逆）:
+  - `vetdict_api._load_diseases`（SEO詳細ページ/ハブ/サイトマップ/横断検索）
+  - `health_checker.get_diseases`（SPA疾患ブラウザ）
+  - `migrate_to_sqlite`（配信DB、生成idの安定性のため元indexを保持）
+  - `helpers.enrich_diseases` 末尾（低メモリ本番の実行時オーバーレイ経路）
+- 効果: 配信DB **7,094→7,055疾患**（39重複を統合）。全21種でブラウザに重複カード **0**。残す方は常により充実したエントリ（39件全て検証）。
+
+### 可視フィールドのクロス種テンプレート除去（`strip_cross_species_clauses`）
+可視JAフィールド（prevention_ja/causes_ja/treatment_ja等）に、古いenrichmentが焼き込んだ**多種列挙ボイラープレート**が残存（監査で999件）。ジェネレータ自体は既に種別対応済みで、これは**過去生成の残留汚染**。7種類の識別可能な文が大半を占めた:
+- 「支持療法（爬虫類）: 種別POTZ…」が非爬虫類の治療に548件（POTZは爬虫類概念）
+- 「甲状腺機能亢進症（猫）: ヨウ素…」「喘息（猫）: …」が非猫の予防に計380件超
+- 「⑤ アトピー性（犬）: シクロスポリン…」等
+`strip_cross_species_text(text, species)` を追加。**文頭（リスト記号・改行を除去後）が既知のクロス種マーカーで始まる文のみ**を除去し、コンマ列挙内のインライン言及（「…、甲状腺機能亢進症（猫）、…」）は温存。フィールドを空にしない安全ガード付き。
+- `health_checker.get_diseases`（SPAブラウザ）+ `migrate_to_sqlite` 配信DBスイープ `strip_cross_species_clauses_in_served_db` に適用。
+- 効果: 配信DBのクロス種文 **753→0**（爬虫類自身のPOTZ・猫自身の予防文は温存を確認）。dog甲状腺機能低下症の予防文が「糖尿病:…。クッシング:…。アジソン:…」と自然に流れることを確認。
+
+### 表示数値の同期
+`static/js/app.js` の `setDefaultStats()` フォールバック（API失敗時のみ表示）を重複排除後の実測値に同期（dog 622→611, chinchilla 278→266 等13種、総数 7093→7055）。
+
+### 回帰テスト（tests/test_disease_dedup.py、22件）
+- dedup単体: 英名/name_ja/推移マージ、順序保持、dataclass対応、非破壊
+- dedup統合: 7種のSPAブラウザ応答に重複英名/JA名が無い
+- cross-species: 爬虫類ブロックを哺乳類から除去し爬虫類では温存、猫予防文を犬から除去、インライン言及は温存、改行前置クラウス対応、空にしない
+- `test_enrich_diseases.py::test_multiple_diseases`: プレースホルダ name_ja 衝突を回避するため2疾患に個別 name_ja を付与
+
+### テスト・CI
+- フルテストスイート: **3,526件合格**（34 skip）
+- ruff check/format: 全変更ファイルで通過
+- ServiceWorker: `CACHE_NAME` v86 → **v87**
+- 再現手順: `migrate_to_sqlite.py`（dedup/cross-species strip は配信DBビルドに統合済み）
+
+## 2026-07セッション（第10弾: 英語 causes/pathophysiology の組織系パリティ + リゾルバ衝突バグ修正）
+
+### 背景: 英語 causes が組織系テンプレートに埋もれ、危険な誤カテゴリを含んでいた
+日本語 causes は多セッションのキュレートで category-correct になっていたが、**英語 causes は旧 exotic-enrichment の組織系テンプレートのまま**（identical-modulo-name で87%）。単なる generic ではなく、**炎症性「-itis」疾患159件が「Caused by exposure to toxic substances（毒物曝露が原因）」と記述**される致命的な誤り（角膜炎・肝炎・心筋炎・皮膚炎等）。獣医師が即座に発見する信頼失墜レベル。日本語側は同レコードで正しく眼科/心臓/消化器と記述されていた。
+
+### 英語カテゴリ生成器の新設（`clinical_fields_generator.py`）
+- `gen_causes_en(category, name_en, species)` — `gen_causes_ja` の26カテゴリ英語ミラー（獣医監修済みの日本語と同一の医学内容）
+- `gen_pathophysiology_en(category, name_en, species)` — `gen_pathophysiology_ja` の英語ミラー
+- `TOXIN_SOURCES_EN` / `_toxin_sources_en` — 種別の毒性源例（英語）
+
+### 修正スクリプト `scripts/template_elimination/fix_english_causes_category.py`（新規）
+- 40+の generic 英語 causes テンプレート fingerprint を検出 → 疾患**名**から category を解決（信頼済み name-based resolver）→ `gen_causes_en` で再生成。キュレート/named-agent 文（fingerprint非該当）は不変。名前が category に解決しない場合は不変（捏造しない）。
+- 多因子疾患は flagship 生成器を優先（例: 蹄葉炎は musculoskeletal ではなく内分泌性）。`flagship_noninfectious_library.py` に **蹄葉炎の bilingual 生成器 `_laminitis_horse`** を追加（EMS/PPID高インスリン血症・敗血症性・過重負重性）。
+- **pathophysiology の誤カテゴリ修正**: 「The pathophysiology of {parasitic/viral/fungal/toxicosis} diseases…」を、名前が当該 category を示さない疾患（心筋炎=parasitic 等）でのみ再生成。**genuinely parasitic/toxic な疾患（名前が当該 category に一致）は温存**（Thelazia眼虫/Syngamusガペ虫/Cryptosporidium/マムシ咬傷等）。bacterial/infectious テンプレートは骨髄炎・心内膜炎・髄膜炎等が真に細菌性のため対象外。
+
+### リゾルバ衝突バグ4件を修正（`resolve_category_from_name`、JA description/migration にも波及）
+| バグ | 修正前 | 修正 |
+|---|---|---|
+| `カリシ` が `カリシン` を誤検出 | 夏癬（カリシン=Culicoides過敏症）→ viral | `カリシ(?!ン)` |
+| bare `cystitis` 部分一致 | 胆嚢炎(Cholecystitis)・涙嚢炎(Dacryocystitis) → renal | `\bcystitis`（語境界） |
+| `lens` 欠落 | 水晶体脱臼(Lens Luxation) → musculoskeletal | ophthalmic に `水晶体|lens` 追加 |
+| worm 疾患の組織系誤解決 | Gapeworm→呼吸器, Eyeworm→眼科（実は寄生虫） | parasitic に `eyeworm|gapeworm|Syngamus|lungworm` 等追加（bare `worm` は ringworm=真菌のため不使用） |
+- 追加の精密トークン: 鼻炎/副鼻腔炎→respiratory_infection、心膜炎/心内膜炎→cardiac、口内炎→dental、筋炎/腱炎→musculoskeletal、envenom/snakebite→toxicity。組織系フォールバック（心血管/消化管/生殖器等、**最低優先度**で合成複合名「Gastrointestinal Inflammatory Disease」等を捕捉、特異的パターンが常に優先）。
+
+### 配信DB安全網（`migrate_to_sqlite.py`）
+- `regenerate_english_category_causes(conn)` + `regenerate_english_pathophysiology_miscat(conn)` を追加（recategorize の後）。JSON overlay が届かないモジュール専用エントリを捕捉。
+
+### 効果（配信SQLite実測、7,094疾患）
+- 炎症性疾患の毒物テンプレート（EN causes）: **159 → 0**
+- 英語 causes 再生成: **2,942件**（category-correct パリティ）。Colic の誤 parasitic causes、Cholecystitis の誤 renal 等を是正
+- 英語 pathophysiology 誤カテゴリ修正: **280件**（心筋炎/Pica/脳炎/貧血/脱毛症の誤 parasitic 等）
+- 残207 parasitic/toxicosis patho は genuinely parasitic（Dourine/Surra/鳥マラリア=トリパノソーマ/Plasmodium）またはリゾルバ None の pre-existing（保守的に温存）
+
+### 回帰テスト（+9件）
+- 毒物テンプレートが -itis 疾患に無い（JSON/配信DB）、リゾルバ衝突（カリシ/cystitis/lens）、炎症性の system 解決、gen_causes_en の category 正確性・冪等性、蹄葉炎=内分泌、pathophysiology fixer が genuine parasitic を温存し心筋炎を修正、worm 疾患=parasitic/ringworm=fungal
+
+### テスト・CI
+- フルテストスイート: **3,510件+ 合格**（新規9件）、ruff check/format 全変更ファイル通過
+- 再現手順: `fix_english_causes_category.py --apply` → `migrate_to_sqlite.py`
+
+### 既知の残課題（次セッション候補）
+- 英語 causes/pathophysiology の category-generic は依然クラスタ化（causes は徴候グラウンディング不可のため named-agent/flagship キュレートの継続が本質的改善）。`curated_etiology`（JA専用100+疾患）の bilingual 化が英語ユニーク性の最大レバー
+- リゾルバ None の pre-existing patho 誤テンプレート（Erysipelas→toxicity 等、数十件）— 名前が category に解決しないため要キュレート

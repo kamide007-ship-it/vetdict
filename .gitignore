@@ -2,6 +2,7 @@ __pycache__/
 .claude/
 instance/
 .coverage
+.coverage.*
 *.db
 *.db.backup_*
 venv/
