@@ -1,0 +1,1287 @@
+{
+  "species": "degu",
+  "record_count": 201,
+  "T101": {
+    "detector": "T101",
+    "total_records": 201,
+    "exact_duplicate_clusters": [
+      {
+        "members": [
+          {
+            "id": "degu_0004",
+            "name": "Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "degu_0181",
+            "name": "Heat Stroke (Respiratory)",
+            "name_ja": "熱中症（呼吸器型）（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0010",
+            "name": "Dental Malocclusion",
+            "name_ja": "不正咬合"
+          },
+          {
+            "id": "degu_0129",
+            "name": "Malocclusion",
+            "name_ja": "不正咬合（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0014",
+            "name": "Ringworm (Dermatophytosis)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "degu_0139",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0016",
+            "name": "Tail Degloving Injury",
+            "name_ja": "尾部脱皮損傷"
+          },
+          {
+            "id": "degu_0121",
+            "name": "Tail Degloving Injury",
+            "name_ja": "尾部皮膚剥脱損傷（テイルスリップ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0017",
+            "name": "Barbering (Over-grooming)",
+            "name_ja": "バーバリング（過剰毛繕い）"
+          },
+          {
+            "id": "degu_0142",
+            "name": "Barbering",
+            "name_ja": "毛引き（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0020",
+            "name": "Bumblefoot (Pododermatitis)",
+            "name_ja": "趾瘤症（バンブルフット）"
+          },
+          {
+            "id": "degu_0120",
+            "name": "Bumblefoot (Pododermatitis)",
+            "name_ja": "趾瘤症（バンブルフット）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0027",
+            "name": "Gastrointestinal Stasis",
+            "name_ja": "消化管うっ滞"
+          },
+          {
+            "id": "degu_0134",
+            "name": "GI Stasis",
+            "name_ja": "消化管うっ滞（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0029",
+            "name": "Diarrhea (Non-specific)",
+            "name_ja": "下痢（非特異的）"
+          },
+          {
+            "id": "degu_0135",
+            "name": "Diarrhea",
+            "name_ja": "下痢（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0034",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "degu_0138",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0037",
+            "name": "Urolithiasis (Bladder Stones)",
+            "name_ja": "尿路結石症"
+          },
+          {
+            "id": "degu_0150",
+            "name": "Urolithiasis",
+            "name_ja": "尿路結石症（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0045",
+            "name": "Seizures (Epilepsy)",
+            "name_ja": "てんかん発作"
+          },
+          {
+            "id": "degu_0147",
+            "name": "Seizures",
+            "name_ja": "痙攣発作（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0048",
+            "name": "Hind Limb Paralysis",
+            "name_ja": "後肢麻痺"
+          },
+          {
+            "id": "degu_0149",
+            "name": "Posterior Paralysis",
+            "name_ja": "後肢麻痺（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0051",
+            "name": "Ear Infection (Otitis)",
+            "name_ja": "耳感染症（外耳炎）"
+          },
+          {
+            "id": "degu_0170",
+            "name": "Ear Infection",
+            "name_ja": "耳感染症（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0081",
+            "name": "Gastric Ulceration",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "degu_0175",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0085",
+            "name": "Pinworm Infection (Syphacia)",
+            "name_ja": "蟯虫感染（シファシア）"
+          },
+          {
+            "id": "degu_0137",
+            "name": "Pinworm Infection",
+            "name_ja": "蟯虫症（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0090",
+            "name": "Ovarian Cysts",
+            "name_ja": "卵巣嚢胞"
+          },
+          {
+            "id": "degu_0151",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞（デグー）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "degu_0118",
+            "name": "Cage Aggression (Territorial)",
+            "name_ja": "ケージ攻撃性（縄張り）"
+          },
+          {
+            "id": "degu_0165",
+            "name": "Cage Aggression",
+            "name_ja": "ケージ内攻撃行動（デグー）"
+          }
+        ]
+      }
+    ],
+    "exact_duplicate_cluster_count": 17,
+    "redundant_record_count": 17,
+    "family_clusters": [
+      {
+        "shared_stem": "diabet",
+        "size": 11,
+        "members": [
+          {
+            "id": "degu_0000",
+            "name": "Diabetes Mellitus",
+            "name_ja": "糖尿病"
+          },
+          {
+            "id": "degu_0001",
+            "name": "Diabetic Ketoacidosis",
+            "name_ja": "糖尿病性ケトアシドーシス"
+          },
+          {
+            "id": "degu_0006",
+            "name": "Diabetic Cataracts",
+            "name_ja": "糖尿病性白内障"
+          },
+          {
+            "id": "degu_0056",
+            "name": "Diabetes-related Neuropathy",
+            "name_ja": "糖尿病性神経障害"
+          },
+          {
+            "id": "degu_0057",
+            "name": "Diabetes Mellitus - Type 1 (Juvenile Onset)",
+            "name_ja": "糖尿病 - 1型（若年発症）"
+          },
+          {
+            "id": "degu_0058",
+            "name": "Diabetes Mellitus - Type 2 (Diet-Induced)",
+            "name_ja": "糖尿病 - 2型（食事誘発性）"
+          },
+          {
+            "id": "degu_0059",
+            "name": "Diabetic Retinopathy",
+            "name_ja": "糖尿病性網膜症"
+          },
+          {
+            "id": "degu_0060",
+            "name": "Diabetic Nephropathy",
+            "name_ja": "糖尿病性腎症"
+          },
+          {
+            "id": "degu_0061",
+            "name": "Diabetic Foot Ulcer",
+            "name_ja": "糖尿病性足潰瘍"
+          },
+          {
+            "id": "degu_0122",
+            "name": "Degu Diabetes-Induced Cataracts",
+            "name_ja": "デグー糖尿病性白内障"
+          },
+          {
+            "id": "degu_0127",
+            "name": "Diabetes-Related Cataracts",
+            "name_ja": "糖尿病関連白内障（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 6,
+        "members": [
+          {
+            "id": "degu_0013",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "degu_0018",
+            "name": "Bite Wounds / Abscess",
+            "name_ja": "咬傷・膿瘍"
+          },
+          {
+            "id": "degu_0065",
+            "name": "Mandibular Abscess (Dental Origin)",
+            "name_ja": "下顎膿瘍（歯原性）"
+          },
+          {
+            "id": "degu_0131",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（デグー）"
+          },
+          {
+            "id": "degu_0144",
+            "name": "Skin Abscess",
+            "name_ja": "皮膚膿瘍（デグー）"
+          },
+          {
+            "id": "degu_0194",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "catara",
+        "size": 5,
+        "members": [
+          {
+            "id": "degu_0006",
+            "name": "Diabetic Cataracts",
+            "name_ja": "糖尿病性白内障"
+          },
+          {
+            "id": "degu_0007",
+            "name": "Senile Cataracts",
+            "name_ja": "老年性白内障"
+          },
+          {
+            "id": "degu_0122",
+            "name": "Degu Diabetes-Induced Cataracts",
+            "name_ja": "デグー糖尿病性白内障"
+          },
+          {
+            "id": "degu_0123",
+            "name": "Cataracts (Diabetic)",
+            "name_ja": "白内障（糖尿病性）（デグー）"
+          },
+          {
+            "id": "degu_0127",
+            "name": "Diabetes-Related Cataracts",
+            "name_ja": "糖尿病関連白内障（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dental",
+        "size": 5,
+        "members": [
+          {
+            "id": "degu_0010",
+            "name": "Dental Malocclusion",
+            "name_ja": "不正咬合"
+          },
+          {
+            "id": "degu_0062",
+            "name": "Dental Malocclusion - Molar (Acquired)",
+            "name_ja": "不正咬合 - 臼歯（後天性）"
+          },
+          {
+            "id": "degu_0063",
+            "name": "Dental Malocclusion - Incisor (Congenital)",
+            "name_ja": "不正咬合 - 切歯（先天性）"
+          },
+          {
+            "id": "degu_0124",
+            "name": "Dental Disease",
+            "name_ja": "歯科疾患（デグー）"
+          },
+          {
+            "id": "degu_0131",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 5,
+        "members": [
+          {
+            "id": "degu_0021",
+            "name": "Limb Fracture",
+            "name_ja": "四肢骨折"
+          },
+          {
+            "id": "degu_0022",
+            "name": "Spinal Fracture",
+            "name_ja": "脊椎骨折"
+          },
+          {
+            "id": "degu_0108",
+            "name": "Femoral Fracture",
+            "name_ja": "大腿骨骨折"
+          },
+          {
+            "id": "degu_0109",
+            "name": "Tibial Fracture",
+            "name_ja": "脛骨骨折"
+          },
+          {
+            "id": "degu_0152",
+            "name": "Fracture",
+            "name_ja": "骨折（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tail",
+        "size": 5,
+        "members": [
+          {
+            "id": "degu_0016",
+            "name": "Tail Degloving Injury",
+            "name_ja": "尾部脱皮損傷"
+          },
+          {
+            "id": "degu_0068",
+            "name": "Tail Degloving - Complete",
+            "name_ja": "尾部皮膚剥離 - 完全型"
+          },
+          {
+            "id": "degu_0069",
+            "name": "Tail Amputation Stump Infection",
+            "name_ja": "尾切断部感染"
+          },
+          {
+            "id": "degu_0121",
+            "name": "Tail Degloving Injury",
+            "name_ja": "尾部皮膚剥脱損傷（テイルスリップ）"
+          },
+          {
+            "id": "degu_0125",
+            "name": "Tail Slip (Degloving)",
+            "name_ja": "尾剥脱（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 5,
+        "members": [
+          {
+            "id": "degu_0039",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "degu_0040",
+            "name": "Skin Tumor",
+            "name_ja": "皮膚腫瘍"
+          },
+          {
+            "id": "degu_0041",
+            "name": "Abdominal Tumor",
+            "name_ja": "腹腔内腫瘍"
+          },
+          {
+            "id": "degu_0044",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "degu_0189",
+            "name": "Adrenal Tumor",
+            "name_ja": "副腎腫瘍（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 4,
+        "members": [
+          {
+            "id": "degu_0052",
+            "name": "Vitamin C Deficiency (Scurvy)",
+            "name_ja": "ビタミンC欠乏症（壊血病）"
+          },
+          {
+            "id": "degu_0157",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（デグー）"
+          },
+          {
+            "id": "degu_0158",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（デグー）"
+          },
+          {
+            "id": "degu_0159",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 4,
+        "members": [
+          {
+            "id": "degu_0034",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "degu_0084",
+            "name": "Hepatic Coccidiosis",
+            "name_ja": "肝コクシジウム症"
+          },
+          {
+            "id": "degu_0138",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（デグー）"
+          },
+          {
+            "id": "degu_0194",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "injury",
+        "size": 4,
+        "members": [
+          {
+            "id": "degu_0016",
+            "name": "Tail Degloving Injury",
+            "name_ja": "尾部脱皮損傷"
+          },
+          {
+            "id": "degu_0111",
+            "name": "Exercise Wheel Injury",
+            "name_ja": "回し車による外傷"
+          },
+          {
+            "id": "degu_0121",
+            "name": "Tail Degloving Injury",
+            "name_ja": "尾部皮膚剥脱損傷（テイルスリップ）"
+          },
+          {
+            "id": "degu_0172",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "malocc",
+        "size": 4,
+        "members": [
+          {
+            "id": "degu_0010",
+            "name": "Dental Malocclusion",
+            "name_ja": "不正咬合"
+          },
+          {
+            "id": "degu_0062",
+            "name": "Dental Malocclusion - Molar (Acquired)",
+            "name_ja": "不正咬合 - 臼歯（後天性）"
+          },
+          {
+            "id": "degu_0063",
+            "name": "Dental Malocclusion - Incisor (Congenital)",
+            "name_ja": "不正咬合 - 切歯（先天性）"
+          },
+          {
+            "id": "degu_0129",
+            "name": "Malocclusion",
+            "name_ja": "不正咬合（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 4,
+        "members": [
+          {
+            "id": "degu_0025",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
+          },
+          {
+            "id": "degu_0026",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎"
+          },
+          {
+            "id": "degu_0074",
+            "name": "Bacterial Pneumonia (Acute)",
+            "name_ja": "細菌性肺炎（急性）"
+          },
+          {
+            "id": "degu_0076",
+            "name": "Bordetella Pneumonia",
+            "name_ja": "ボルデテラ肺炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bumble",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0020",
+            "name": "Bumblefoot (Pododermatitis)",
+            "name_ja": "趾瘤症（バンブルフット）"
+          },
+          {
+            "id": "degu_0067",
+            "name": "Bumblefoot - Advanced (Osteomyelitis)",
+            "name_ja": "趾瘤症 - 進行型（骨髄炎）"
+          },
+          {
+            "id": "degu_0120",
+            "name": "Bumblefoot (Pododermatitis)",
+            "name_ja": "趾瘤症（バンブルフット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0101",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "degu_0102",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "degu_0185",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "deglov",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0016",
+            "name": "Tail Degloving Injury",
+            "name_ja": "尾部脱皮損傷"
+          },
+          {
+            "id": "degu_0068",
+            "name": "Tail Degloving - Complete",
+            "name_ja": "尾部皮膚剥離 - 完全型"
+          },
+          {
+            "id": "degu_0121",
+            "name": "Tail Degloving Injury",
+            "name_ja": "尾部皮膚剥脱損傷（テイルスリップ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0019",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎"
+          },
+          {
+            "id": "degu_0139",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（デグー）"
+          },
+          {
+            "id": "degu_0167",
+            "name": "Sand Bath Dermatitis",
+            "name_ja": "砂浴び皮膚炎（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0072",
+            "name": "Lice Infestation",
+            "name_ja": "シラミ寄生症"
+          },
+          {
+            "id": "degu_0140",
+            "name": "Mite Infestation",
+            "name_ja": "ダニ症（デグー）"
+          },
+          {
+            "id": "degu_0141",
+            "name": "Flea Infestation",
+            "name_ja": "ノミ寄生（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0031",
+            "name": "Intestinal Parasites",
+            "name_ja": "腸内寄生虫症"
+          },
+          {
+            "id": "degu_0033",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞"
+          },
+          {
+            "id": "degu_0177",
+            "name": "Intestinal Parasitism",
+            "name_ja": "腸管寄生虫症（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mellit",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0000",
+            "name": "Diabetes Mellitus",
+            "name_ja": "糖尿病"
+          },
+          {
+            "id": "degu_0057",
+            "name": "Diabetes Mellitus - Type 1 (Juvenile Onset)",
+            "name_ja": "糖尿病 - 1型（若年発症）"
+          },
+          {
+            "id": "degu_0058",
+            "name": "Diabetes Mellitus - Type 2 (Diet-Induced)",
+            "name_ja": "糖尿病 - 2型（食事誘発性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "molar",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0012",
+            "name": "Molar Spurs",
+            "name_ja": "臼歯棘"
+          },
+          {
+            "id": "degu_0062",
+            "name": "Dental Malocclusion - Molar (Acquired)",
+            "name_ja": "不正咬合 - 臼歯（後天性）"
+          },
+          {
+            "id": "degu_0130",
+            "name": "Molar Elongation",
+            "name_ja": "臼歯伸長（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nephro",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0060",
+            "name": "Diabetic Nephropathy",
+            "name_ja": "糖尿病性腎症"
+          },
+          {
+            "id": "degu_0087",
+            "name": "Nephrolithiasis",
+            "name_ja": "腎結石症"
+          },
+          {
+            "id": "degu_0187",
+            "name": "Nephrocalcinosis",
+            "name_ja": "腎石灰化症（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "overgr",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0011",
+            "name": "Incisor Overgrowth",
+            "name_ja": "切歯過長"
+          },
+          {
+            "id": "degu_0166",
+            "name": "Overgrooming",
+            "name_ja": "過剰グルーミング（デグー）"
+          },
+          {
+            "id": "degu_0199",
+            "name": "Nail Overgrowth",
+            "name_ja": "爪過成長（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "relate",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0056",
+            "name": "Diabetes-related Neuropathy",
+            "name_ja": "糖尿病性神経障害"
+          },
+          {
+            "id": "degu_0127",
+            "name": "Diabetes-Related Cataracts",
+            "name_ja": "糖尿病関連白内障（デグー）"
+          },
+          {
+            "id": "degu_0164",
+            "name": "Stress-Related Illness",
+            "name_ja": "ストレス関連疾患（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "seizur",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0045",
+            "name": "Seizures (Epilepsy)",
+            "name_ja": "てんかん発作"
+          },
+          {
+            "id": "degu_0147",
+            "name": "Seizures",
+            "name_ja": "痙攣発作（デグー）"
+          },
+          {
+            "id": "degu_0173",
+            "name": "Toxin-Induced Seizures",
+            "name_ja": "中毒性痙攣（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stroke",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0004",
+            "name": "Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "degu_0046",
+            "name": "Stroke (Cerebrovascular Accident)",
+            "name_ja": "脳卒中"
+          },
+          {
+            "id": "degu_0181",
+            "name": "Heat Stroke (Respiratory)",
+            "name_ja": "熱中症（呼吸器型）（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tooth",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0013",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "degu_0064",
+            "name": "Tooth Root Elongation",
+            "name_ja": "歯根伸長"
+          },
+          {
+            "id": "degu_0179",
+            "name": "Broken Tooth",
+            "name_ja": "歯牙破折（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0112",
+            "name": "Toxicosis (Plant Poisoning)",
+            "name_ja": "中毒症（植物中毒）"
+          },
+          {
+            "id": "degu_0113",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "degu_0161",
+            "name": "Plant Toxicosis",
+            "name_ja": "植物中毒（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ulcer",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0009",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍"
+          },
+          {
+            "id": "degu_0061",
+            "name": "Diabetic Foot Ulcer",
+            "name_ja": "糖尿病性足潰瘍"
+          },
+          {
+            "id": "degu_0175",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0052",
+            "name": "Vitamin C Deficiency (Scurvy)",
+            "name_ja": "ビタミンC欠乏症（壊血病）"
+          },
+          {
+            "id": "degu_0158",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（デグー）"
+          },
+          {
+            "id": "degu_0159",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（デグー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wound",
+        "size": 3,
+        "members": [
+          {
+            "id": "degu_0018",
+            "name": "Bite Wounds / Abscess",
+            "name_ja": "咬傷・膿瘍"
+          },
+          {
+            "id": "degu_0145",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（デグー）"
+          },
+          {
+            "id": "degu_0162",
+            "name": "Wound Infection",
+            "name_ja": "創傷感染（デグー）"
+          }
+        ]
+      }
+    ],
+    "family_cluster_count": 30
+  },
+  "T102": {
+    "detector": "T102",
+    "total_records": 201,
+    "flagged_count": 3,
+    "flags": [
+      {
+        "id": "degu_0059",
+        "name": "Diabetic Retinopathy",
+        "name_ja": "糖尿病性網膜症",
+        "matches": [
+          {
+            "category": "human_medicine_transplant",
+            "term": "diabetic retinopathy"
+          },
+          {
+            "category": "human_medicine_transplant",
+            "term": "糖尿病性網膜症"
+          }
+        ]
+      },
+      {
+        "id": "degu_0061",
+        "name": "Diabetic Foot Ulcer",
+        "name_ja": "糖尿病性足潰瘍",
+        "matches": [
+          {
+            "category": "human_medicine_transplant",
+            "term": "diabetic foot ulcer"
+          },
+          {
+            "category": "human_medicine_transplant",
+            "term": "糖尿病性足潰瘍"
+          },
+          {
+            "category": "human_medicine_transplant",
+            "term": "足潰瘍"
+          }
+        ]
+      },
+      {
+        "id": "degu_0105",
+        "name": "Alzheimer's-like Disease",
+        "name_ja": "アルツハイマー様疾患",
+        "matches": [
+          {
+            "category": "research_model",
+            "term": "alzheimer"
+          },
+          {
+            "category": "research_model",
+            "term": "アルツハイマー"
+          }
+        ]
+      }
+    ]
+  },
+  "T104": {
+    "detector": "T104",
+    "total_records": 201,
+    "empty_count": 0,
+    "heading_only_count": 26,
+    "with_dosage_count": 175,
+    "empty": [],
+    "heading_only": [
+      {
+        "id": "degu_0002",
+        "name": "Insulin Resistance",
+        "name_ja": "インスリン抵抗性",
+        "treatment_ja_len": 549,
+        "treatment_len": 1560,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0003",
+        "name": "Obesity",
+        "name_ja": "肥満",
+        "treatment_ja_len": 473,
+        "treatment_len": 573,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0004",
+        "name": "Heat Stroke",
+        "name_ja": "熱中症",
+        "treatment_ja_len": 191,
+        "treatment_len": 158,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0010",
+        "name": "Dental Malocclusion",
+        "name_ja": "不正咬合",
+        "treatment_ja_len": 183,
+        "treatment_len": 175,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0011",
+        "name": "Incisor Overgrowth",
+        "name_ja": "切歯過長",
+        "treatment_ja_len": 71,
+        "treatment_len": 178,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0015",
+        "name": "Fur Mites (Demodex / Notoedres)",
+        "name_ja": "毛包虫症",
+        "treatment_ja_len": 163,
+        "treatment_len": 488,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0026",
+        "name": "Aspiration Pneumonia",
+        "name_ja": "誤嚥性肺炎",
+        "treatment_ja_len": 76,
+        "treatment_len": 186,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0031",
+        "name": "Intestinal Parasites",
+        "name_ja": "腸内寄生虫症",
+        "treatment_ja_len": 430,
+        "treatment_len": 422,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0049",
+        "name": "Congestive Heart Failure",
+        "name_ja": "うっ血性心不全",
+        "treatment_ja_len": 345,
+        "treatment_len": 413,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0050",
+        "name": "Cardiomyopathy",
+        "name_ja": "心筋症",
+        "treatment_ja_len": 338,
+        "treatment_len": 492,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0051",
+        "name": "Ear Infection (Otitis)",
+        "name_ja": "耳感染症（外耳炎）",
+        "treatment_ja_len": 165,
+        "treatment_len": 137,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0053",
+        "name": "Septicemia",
+        "name_ja": "敗血症",
+        "treatment_ja_len": 559,
+        "treatment_len": 568,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0062",
+        "name": "Dental Malocclusion - Molar (Acquired)",
+        "name_ja": "不正咬合 - 臼歯（後天性）",
+        "treatment_ja_len": 185,
+        "treatment_len": 158,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0063",
+        "name": "Dental Malocclusion - Incisor (Congenital)",
+        "name_ja": "不正咬合 - 切歯（先天性）",
+        "treatment_ja_len": 185,
+        "treatment_len": 158,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0069",
+        "name": "Tail Amputation Stump Infection",
+        "name_ja": "尾切断部感染",
+        "treatment_ja_len": 194,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0075",
+        "name": "Mycoplasma Infection",
+        "name_ja": "マイコプラズマ感染症",
+        "treatment_ja_len": 166,
+        "treatment_len": 137,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0086",
+        "name": "Tapeworm Infection",
+        "name_ja": "条虫感染症",
+        "treatment_ja_len": 164,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0112",
+        "name": "Toxicosis (Plant Poisoning)",
+        "name_ja": "中毒症（植物中毒）",
+        "treatment_ja_len": 484,
+        "treatment_len": 590,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0113",
+        "name": "Zinc Toxicosis",
+        "name_ja": "亜鉛中毒",
+        "treatment_ja_len": 771,
+        "treatment_len": 1000,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0126",
+        "name": "Repetitive Behavior (Stereotypy)",
+        "name_ja": "常同行動（デグー）",
+        "treatment_ja_len": 493,
+        "treatment_len": 1004,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0142",
+        "name": "Barbering",
+        "name_ja": "毛引き（デグー）",
+        "treatment_ja_len": 213,
+        "treatment_len": 298,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0154",
+        "name": "Splay Leg",
+        "name_ja": "開脚症（デグー）",
+        "treatment_ja_len": 188,
+        "treatment_len": 228,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0164",
+        "name": "Stress-Related Illness",
+        "name_ja": "ストレス関連疾患（デグー）",
+        "treatment_ja_len": 224,
+        "treatment_len": 363,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0181",
+        "name": "Heat Stroke (Respiratory)",
+        "name_ja": "熱中症（呼吸器型）（デグー）",
+        "treatment_ja_len": 220,
+        "treatment_len": 507,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0183",
+        "name": "Arteriosclerosis",
+        "name_ja": "動脈硬化症（デグー）",
+        "treatment_ja_len": 204,
+        "treatment_len": 225,
+        "has_dosage": false
+      },
+      {
+        "id": "degu_0199",
+        "name": "Nail Overgrowth",
+        "name_ja": "爪過成長（デグー）",
+        "treatment_ja_len": 172,
+        "treatment_len": 209,
+        "has_dosage": false
+      }
+    ]
+  }
+}
