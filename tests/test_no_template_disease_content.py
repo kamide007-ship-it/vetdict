@@ -2198,6 +2198,21 @@ def _served_db_rows():
         conn.close()
 
 
+def _served_db_rows_full(cols: str):
+    """Yield rows selecting an explicit column list from the served DB, or skip."""
+    import sqlite3
+
+    db = ROOT / "instance" / "vetdict.db"
+    if not db.exists():
+        pytest.skip("served DB (instance/vetdict.db) not present; run migrate_to_sqlite.py")
+    conn = sqlite3.connect(str(db))
+    conn.row_factory = sqlite3.Row
+    try:
+        yield from conn.execute(f"SELECT {cols} FROM diseases")
+    finally:
+        conn.close()
+
+
 def test_disease_class_hint_does_not_chemo_benign_cysts():
     """Benign cysts/polyps must never classify as neoplasia (→ chemo protocol)."""
     import sys
@@ -4597,3 +4612,89 @@ def test_generate_clinical_fields_emits_no_breed_clause_for_nondog():
     for field, text in out.items():
         for tok in _DOG_BREED_TOKENS:
             assert tok not in text, f"{field} still emits breed token '{tok}': {text[:80]}"
+
+
+# ---------------------------------------------------------------------------
+# English `causes` — parity with the reviewed Japanese category (2026-07)
+#
+# The English `causes` field historically shipped a single contentless catch-all
+# ("Multifactorial etiology depending on disease type.") for hundreds of diseases
+# whose Japanese `causes_ja` was already category-resolved. These tests guard the
+# upgrade that brings English causes up to the same category the Japanese uses.
+# ---------------------------------------------------------------------------
+
+
+def test_no_contentless_multifactorial_causes_in_json():
+    """The contentless English catch-all must not survive in the JSON overlay."""
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    offenders = [
+        f"{e.get('species')}/{e.get('name')}"
+        for e in entries
+        if (e.get("causes") or "").startswith("Multifactorial etiology depending on disease type")
+    ]
+    assert not offenders, (
+        f"{len(offenders)} diseases still carry the contentless English 'Multifactorial "
+        f"etiology depending on disease type' catch-all: {offenders[:15]}"
+    )
+
+
+def test_served_db_no_contentless_multifactorial_causes():
+    """The served DB must not carry the contentless English causes catch-all."""
+    offenders = [
+        f"{r['species']}/{r['name']}"
+        for r in _served_db_rows_full("name, species, causes")
+        if (r["causes"] or "").startswith("Multifactorial etiology depending on disease type")
+    ]
+    assert not offenders, f"{len(offenders)} served-DB diseases still contentless: {offenders[:15]}"
+
+
+def test_english_causes_matches_japanese_category():
+    """gen_causes (EN) mirrors gen_causes_ja for each category — a spot check that
+    the upgraded English aetiology states the correct, category-appropriate cause
+    rather than a contentless or wrong-category paragraph."""
+    from scripts.template_elimination.clinical_fields_generator import gen_causes
+
+    checks = {
+        "cardiac": ("breed-specific genetic predisposition", "cardiomyopathies"),
+        "genetic_congenital": ("gene mutation", "embryonic development"),
+        "autoimmune": ("self-tolerance", "autoantibodies"),
+        "behavioral": ("neuroendocrine dysregulation", "socialisation"),
+        "renal_urinary": ("nephron", "nephrotoxins"),
+        "neoplasia": ("genetic predisposition", "carcinogens"),
+        "toxicity": ("toxic substance", "dose-dependent"),
+    }
+    for cat, needles in checks.items():
+        text = gen_causes(cat, "Test Disease", "dog").lower()
+        for needle in needles:
+            assert needle.lower() in text, f"gen_causes({cat!r}) missing '{needle}': {text[:120]}"
+        # contentless catch-all must never be produced
+        assert "multifactorial etiology depending on disease type" not in text
+
+
+def test_generic_english_causes_skips_named_agents():
+    """A disease resolving to a named agent must NOT be overwritten with a generic
+    category paragraph — that is owned by the named-pathogen pass."""
+    from scripts.template_elimination.generic_english_causes import upgrade_english_causes
+
+    # Canine parvovirus resolves to a named viral agent → leave untouched even if
+    # its English causes still looked like a generic template.
+    result = upgrade_english_causes(
+        "dog",
+        "犬パルボウイルス感染症",
+        "Canine Parvovirus",
+        "犬におけるパルボの原因はウイルス感染である。",
+        "Multifactorial etiology depending on disease type. Includes infectious agents.",
+    )
+    assert result is None, "named-agent disease should be skipped, not category-templated"
+
+    # A non-named cardiac disease with the generic catch-all IS upgraded.
+    result2 = upgrade_english_causes(
+        "dog",
+        "うっ血性心不全",
+        "Congestive Heart Failure",
+        "犬における心不全の原因には品種特異的遺伝素因が大きく関与する。",
+        "Multifactorial etiology depending on disease type. Includes infectious agents.",
+    )
+    assert result2 is not None and "cardiomyopathies" in result2

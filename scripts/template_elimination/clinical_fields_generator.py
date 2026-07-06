@@ -639,6 +639,41 @@ def _toxin_sources(species: str) -> str:
     )
 
 
+# English counterpart of TOXIN_SOURCES_JA, so the English ``causes`` text lists
+# toxins relevant to the species actually being treated rather than always
+# defaulting to dog/cat exposures.
+TOXIN_SOURCES_EN: dict[str, str] = {
+    "dog": "chocolate (theobromine), xylitol, grapes/raisins, onion/garlic, anticoagulant rodenticides, human NSAIDs/acetaminophen and ethylene-glycol antifreeze",
+    "cat": "lilies (nephrotoxic), acetaminophen, canine permethrin spot-ons, onion/garlic, antifreeze and anticoagulant rodenticides",
+    "horse": "toxic plants (yew, oleander, red maple, bracken fern, lupins), mycotoxins (aflatoxin, fumonisin), the feed additive monensin, lead and overdosed organophosphate anthelmintics",
+    "rabbit": "oral beta-lactam/lincosamide antibiotics (fatal caecal dysbiosis), toxic houseplants, rodenticides, pesticides and lead",
+    "guinea_pig": "oral penicillins (Clostridium enterotoxaemia), toxic plants, rodenticides and fipronil",
+    "chinchilla": "oral beta-lactam antibiotics, fipronil (fatal), toxic plants and rodenticides",
+    "degu": "oral beta-lactam antibiotics, excess dietary sugar (diabetogenic), toxic plants and rodenticides",
+    "hamster": "oral beta-lactam antibiotics, toxic plants, rodenticides and household chemicals",
+    "ferret": "ibuprofen/human NSAIDs, anticoagulant rodenticides, onion, caffeine and human medications",
+    "hedgehog": "toxic plants, insecticides, household chemicals and heavy metals",
+    "sugar_glider": "toxic plants, insecticides, calcium-antagonising (high-phosphorus) diets and household chemicals",
+    "bird": "heavy metals (lead, zinc), heated PTFE (non-stick) fumes, avocado, onion, toxic houseplants, insecticides and mycotoxins",
+    "parakeet": "heavy metals (lead, zinc), heated PTFE fumes, avocado, toxic houseplants, insecticides and mycotoxins",
+    "parrot": "heavy metals (lead, zinc), heated PTFE fumes, avocado, toxic houseplants, insecticides and mycotoxins",
+    "reptile": "insecticides (organophosphates, pyrethroids), inappropriate disinfectants, heavy metals, ivermectin (fatal in some species) and toxic plants",
+    "tortoise": "insecticides, inappropriate disinfectants, heavy metals, toxic plants and oxalate-rich plants",
+    "snake": "insecticides, volatile cedar/pine shavings, heavy metals and ivermectin",
+    "lizard": "insecticides, inappropriate disinfectants, heavy metals, ivermectin and toxic plants",
+    "amphibian": "water-quality toxins (ammonia, nitrite, residual chlorine/chloramine), heavy metals, pesticide run-off and inappropriate pH",
+    "fish": "water-quality toxins (ammonia, nitrite, residual chlorine, heavy metals), pesticide run-off and overdosed medications (copper, formalin)",
+    "exotic_other": "toxic plants, insecticides, household chemicals, heavy metals and leaching from inappropriate housing materials",
+}
+
+
+def _toxin_sources_en(species: str) -> str:
+    return TOXIN_SOURCES_EN.get(
+        species,
+        "toxic plants, rodenticides/pesticides, household chemicals, heavy metals and medication overdose",
+    )
+
+
 # ---------------------------------------------------------------------------
 # Curated content for top-priority diseases
 # ---------------------------------------------------------------------------
@@ -1140,6 +1175,215 @@ def gen_causes_ja(category: str, name_ja: str, species: str) -> str:
         f"{prefix}の正確な病因は症例により異なる。"
         f"遺伝的素因、環境要因（温度・湿度・衛生状態の不適切な管理）、感染性病原体への曝露、栄養バランスの偏り、免疫系の調節異常、加齢に伴う組織変化が単独または複合的に関与する。"
         f"原因の同定は治療方針の決定と再発予防に不可欠であり、病歴聴取・身体検査・補助検査の統合的評価により行う。{note}"
+    )
+
+
+def gen_causes(category: str, name_en: str, species: str) -> str:
+    """Category-aware English aetiology — a faithful mirror of ``gen_causes_ja``.
+
+    The English ``causes`` field historically carried a single contentless
+    catch-all ("Multifactorial etiology depending on disease type") for hundreds
+    of diseases whose Japanese ``causes_ja`` was already category-resolved. This
+    generator brings the English text to parity: it restates the same
+    category-level, vet-reviewed aetiology the Japanese already conveys — no new
+    medical claims, just an English rendering resolved to the correct category.
+    """
+    sp_en = SPECIES_EN.get(species, species)
+    prefix = _disease_prefix_en(name_en, sp_en)
+
+    if category == "viral_infection":
+        return (
+            f"{prefix} is caused by viral infection. A specific viral pathogen enters and replicates within host cells, "
+            f"producing tissue injury and a systemic inflammatory response. Key risk factors include unvaccinated status, "
+            f"immunosuppression, very young or old age, group housing, contact with newly introduced animals, and exposure to "
+            f"vectors (arthropods, wildlife). The balance between pathogen virulence and host immune response determines onset and severity."
+        )
+    if category == "bacterial_infection":
+        return (
+            f"{prefix} is caused by infection with a specific bacterial pathogen. Pathogenic bacteria enter the body "
+            f"(oral, percutaneous, respiratory or vector-borne) and cause disease through proliferation, toxin production and tissue invasion. "
+            f"Major risks are host immunosuppression (stress, malnutrition, concurrent disease), microbiome disruption from inappropriate antibiotic use, "
+            f"persistent exposure to a contaminated environment, and entry through bites or wounds. Emerging resistant organisms (MRSP, ESBL producers) "
+            f"complicate treatment."
+        )
+    if category == "respiratory_infection":
+        return (
+            f"{prefix} is caused by upper- or lower-airway infection with respiratory pathogens (bacteria, viruses, fungi). "
+            f"Environmental stress (abrupt temperature or humidity change, poor ventilation), overcrowding, group transport, and exposure to "
+            f"tobacco smoke or dust increase risk. Brachycephalic animals, those with airway anatomical abnormalities, and the very young, old or "
+            f"immunosuppressed are prone to severe disease. Co-infection with multiple pathogens (e.g. Bordetella plus parainfluenza virus) frequently worsens the course."
+        )
+    if category == "fungal_infection":
+        return (
+            f"{prefix} is caused by infection with fungal pathogens — dermatophytes (Microsporum/Trichophyton), yeast-like fungi "
+            f"(Malassezia/Candida), and systemic fungi (Aspergillus, Cryptococcus, Histoplasma and others). Risk factors include a humid environment, "
+            f"immunosuppression, microbiome disruption from prolonged antibiotic therapy, trauma or a broken skin barrier, and residence in a geographically "
+            f"endemic region (e.g. coccidioidomycosis). Dermatophytosis in particular is an important zoonosis."
+        )
+    if category == "parasitic":
+        return (
+            f"{prefix} is caused by infection with parasites (helminths, protozoa, arthropods). Routes vary by parasite species and include "
+            f"ingestion (contaminated food or water, predation of intermediate hosts), percutaneous penetration, arthropod transmission (ticks, mosquitoes, fleas), "
+            f"and transplacental or transmammary spread. Overcrowding, poor hygiene, immunosuppression and inadequate routine deworming raise risk. Understanding the "
+            f"parasite life cycle is key to successful treatment and preventing reinfection; climate-driven expansion of vector ranges is increasing disease in previously low-risk areas."
+        )
+    if category == "neoplasia":
+        return (
+            f"{prefix} arises from the interplay of multiple factors. Major contributors include genetic predisposition (breed-specific tendencies), "
+            f"chronic inflammation, oncogenic viral infection (apart from specific examples such as FeLV-associated lymphoma), long-term exposure to chemical carcinogens, "
+            f"hormonal influences (sex-hormone-dependent tumours), failure of immune surveillance, and UV or ionising radiation. Age-related decline in DNA repair and loss of "
+            f"cell-cycle control are promoting factors. Early detection and staging (TNM) underpin prognosis and treatment selection."
+        )
+    if category == "endocrine_metabolic":
+        return (
+            f"{prefix} is caused by dysfunction of an endocrine gland or a metabolic pathway — autoimmune glandular destruction, neoplastic hormone production "
+            f"(functional adenoma or carcinoma), iatrogenic causes (long-term steroids or other drugs), nutritional factors (dietary mineral or vitamin imbalance), or inherited "
+            f"enzyme deficiency. Age, obesity, breed-specific predisposition, and concurrent disease (secondary endocrine derangement from pancreatitis or renal failure) modify risk. "
+            f"Endocrine screening for early diagnosis is important."
+        )
+    if category == "renal_urinary":
+        return (
+            f"{prefix} is caused by progressive nephron injury, urinary-tract obstruction or infection, or idiopathic lower-urinary-tract inflammation. "
+            f"Major risk factors include ageing, chronic dehydration, exposure to nephrotoxins (NSAIDs, antifreeze, lilies, certain antibiotics), systemic hypertension, diabetic "
+            f"nephropathy, immune-complex glomerulonephritis, inherited renal structural anomalies, and stress-related neuroendocrine disturbance. Because early disease is often "
+            f"asymptomatic, periodic renal screening (SDMA, urine specific gravity, urine protein) is important."
+        )
+    if category == "cardiac":
+        return (
+            f"{prefix} is strongly influenced by breed-specific genetic predisposition. Major causes are cardiomyopathies (DCM/HCM predisposed breeds), degenerative "
+            f"valve disease (myxomatous mitral valve degeneration in small-breed dogs), congenital defects (PDA, VSD, ASD) and arrhythmogenic cardiomyopathy. Secondary contributors "
+            f"include hypertension, feline hyperthyroidism, nutritional causes (taurine/carnitine deficiency, grain-free-diet-associated DCM), drug toxicity and infective endocarditis. "
+            f"Early diagnosis (echocardiography after murmur detection) and staged therapy directly improve prognosis."
+        )
+    if category == "respiratory_other":
+        return (
+            f"{prefix} encompasses non-infectious airway disease with diverse causes — allergic (feline asthma, eosinophilic bronchitis), anatomical (brachycephalic obstructive "
+            f"airway syndrome, tracheal collapse, laryngeal paralysis), neoplastic, nutritional (obesity-related restrictive ventilation), chronic inflammatory (COPD-like disease) and "
+            f"aspiration. Environmental factors such as tobacco smoke, household chemicals, fragrances and excessive dust are important risks. Early intervention is preferable to prevent "
+            f"airway remodelling and irreversible structural change."
+        )
+    if category == "gastrointestinal":
+        return (
+            f"{prefix} has infectious, dietary, immune-mediated, mechanical and functional causes. These include infection (bacterial, viral, parasitic, protozoal), dietary factors "
+            f"(inappropriate food, foreign bodies, abrupt diet change, food allergy), immune-mediated disease (inflammatory bowel disease), mechanical causes (obstruction, volvulus, neoplasia) "
+            f"and functional motility disorders. In herbivores, inadequate fibre and abrupt dietary change are leading causes of gastrointestinal stasis, so species-specific nutritional "
+            f"requirements must be understood. Stressors (environmental change, new animals) also contribute."
+        )
+    if category == "neurological":
+        return (
+            f"{prefix} has diverse causes classified as infectious (encephalitis, meningitis), immune-mediated, degenerative, neoplastic, traumatic, vascular, metabolic, toxic, hereditary "
+            f"and idiopathic (idiopathic epilepsy). Breed-specific predisposition is an important background factor. Acute onset suggests trauma, vascular events or toxicosis; chronic progression "
+            f"suggests degenerative, neoplastic or metabolic disease; and recurrent seizures suggest idiopathic epilepsy."
+        )
+    if category == "ophthalmic":
+        breed_note = ""
+        if species in ("dog", "cat"):
+            breed_note = (
+                " Breed-specific predispositions are important (brachycephalic exophthalmos and keratoconjunctivitis sicca, cocker-spaniel cataract, "
+                "collie eye anomaly, PRA-predisposed breeds)."
+            )
+        elif species == "horse":
+            breed_note = (
+                " In horses, equine recurrent uveitis (moon blindness) is linked to genetic predisposition (e.g. Appaloosa); corneal ulcers are triggered by "
+                "the stable environment (manure, bedding)."
+            )
+        elif species in ("bird", "parakeet", "parrot"):
+            breed_note = " In birds, nutritional (vitamin A deficiency), infectious (herpesvirus, chlamydia, pox) and traumatic causes predominate."
+        elif species in ("reptile", "tortoise", "snake", "lizard"):
+            breed_note = " In reptiles, nutritional causes (vitamin A deficiency, MBD), eyelid closure from dysecdysis, and low POTZ are the main factors."
+        return (
+            f"{prefix} has infectious (bacterial, viral, fungal, parasitic), traumatic, immune-mediated, congenital, degenerative, neoplastic, metabolic and iatrogenic causes."
+            f"{breed_note} Because delayed treatment leads to irreversible vision loss, early diagnosis (tonometry, fundoscopy, corneal staining) and specialist referral are essential."
+        )
+    if category == "musculoskeletal":
+        species_specific = ""
+        if species == "horse":
+            species_specific = " In horses, laminitis, navicular syndrome, tendinitis and arthritis are leading diseases that markedly reduce athletic performance."
+        elif species in ("reptile", "tortoise", "snake", "lizard", "amphibian"):
+            species_specific = " In reptiles and amphibians, metabolic bone disease (MBD) from vitamin D/UV-B deficiency and Ca/P imbalance is most common."
+        elif species in ("bird", "parakeet", "parrot"):
+            species_specific = " In birds, nutritional osteomalacia, egg-laying-related calcium depletion and pneumatic-bone (hollow-bone) fractures predominate."
+        elif species in ("rabbit", "guinea_pig", "chinchilla", "hamster", "degu", "sugar_glider"):
+            species_specific = " In small mammals, fractures and luxations (handling, falls) and spinal injury predominate, against a background of a fragile skeleton."
+        return (
+            f"{prefix} is classified as traumatic (fracture, luxation, ligament injury), degenerative (osteoarthritis), developmental (hip/elbow dysplasia, patellar luxation), "
+            f"immune-mediated (polyarthritis), infectious (osteomyelitis, septic arthritis), nutritional (metabolic bone disease, nutritional secondary hyperparathyroidism), neoplastic (osteosarcoma) "
+            f"and hereditary (chondrodysplasia)."
+            f"{species_specific} Obesity, over-exercise and inappropriate nutrition (excess calories/calcium during growth) increase the risk of degenerative and developmental disease."
+        )
+    if category == "dental":
+        return (
+            f"{prefix} is mainly caused by bacterial inflammation from plaque and calculus accumulation (periodontal disease), malocclusion, traumatic tooth fracture, periapical abscess, "
+            f"overgrown teeth (herbivores and rodents), and malignancy (oral squamous cell carcinoma, fibrosarcoma). In herbivores (rabbits, guinea pigs, chinchillas, degus) the teeth grow "
+            f"continuously, so inadequate fibre, hereditary malocclusion and trauma produce overgrowth and molar spikes. Small and brachycephalic dogs are prone to periodontal disease from dental "
+            f"crowding. Early oral care and annual dental scaling are the basis of prevention."
+        )
+    if category == "dermatological":
+        return (
+            f"{prefix} has diverse causes classified as allergic (atopic dermatitis, food allergy, flea-allergy dermatitis), infectious (bacterial pyoderma, dermatophytosis, Malassezia dermatitis), "
+            f"parasitic (mange, demodicosis, ear mites), immune-mediated (pemphigus, lupus), endocrine (hypothyroidism, Cushing-related dermatosis), nutritional, psychogenic/behavioural (over-grooming, "
+            f"self-trauma) and neoplastic. Environmental factors (humidity, temperature, bedding hygiene) and breed-specific predisposition are important modifiers of onset."
+        )
+    if category == "hematological":
+        return (
+            f"{prefix} is classified by mechanism as decreased production (marrow hypoplasia, nutritional deficiency, reduced erythropoietic drive in renal failure), haemolysis (immune-mediated, parasitic, "
+            f"oxidative injury, hereditary red-cell membrane defects), haemorrhage (trauma, coagulopathy, platelet disorder), consumption (DIC, thrombosis) and sequestration (splenomegaly). Important specific "
+            f"causes are infectious (FeLV, FIV, Babesia, haemoplasma, Ehrlichia), immune-mediated (IMHA, ITP), drug-induced (chemotherapy, certain antibiotics) and toxic (onion, acetaminophen, anticoagulant rodenticides)."
+        )
+    if category == "reproductive":
+        return (
+            f"{prefix} has infectious (bacterial, viral, parasitic), anatomical (fetal malposition, pelvic stenosis), endocrine (luteal insufficiency, prolactin disorders), metabolic (eclampsia, hypocalcaemia), "
+            f"traumatic, neoplastic (mammary tumour, testicular tumour, prostatic carcinoma), hereditary and age-related causes. Early spay/neuter clearly reduces hormone-dependent tumours, pyometra and prostatic "
+            f"hyperplasia (notably the link between early spaying and reduced mammary-tumour risk)."
+        )
+    if category == "toxicity":
+        return (
+            f"{prefix} is caused by ingestion, inhalation or dermal absorption of a specific toxic substance. Representative sources in {sp_en} include {_toxin_sources_en(species)}. "
+            f"Toxicity is dose-dependent, with severity varying markedly by body weight, metabolic capacity, route and duration of exposure. The liver and kidneys are the principal target organs."
+        )
+    if category == "trauma":
+        return (
+            f"{prefix} is caused by physical tissue injury from external force (falls, collisions, crushing, bites, lacerations from sharp objects). Major causes are inappropriate housing (cramped or overly tall "
+            f"structures, sharp projections, slippery floors), conspecific fighting, careless handling, escape attempts and road traffic accidents. Small and juvenile animals are prone to severe injury, and many "
+            f"injuries are preventable through appropriate enclosure design and safety management. Initial assessment should anticipate secondary complications (infection, haemorrhagic shock, tissue necrosis)."
+        )
+    if category == "autoimmune":
+        return (
+            f"{prefix} is caused by breakdown of self-tolerance and an abnormal immune response to self-antigens. Reported triggers include genetic predisposition, molecular mimicry from infection, drug administration, "
+            f"UV exposure, hormonal fluctuation and vaccination. Autoantibodies and self-reactive T cells attack and destroy normal tissue, causing multi-organ injury. Diagnosis requires specific autoantibody testing and "
+            f"histopathology, and long-term immunosuppression with relapse monitoring is central to management."
+        )
+    if category == "nutritional":
+        return (
+            f"{prefix} is caused by deficiency, excess or imbalance of essential nutrients. Inappropriate diet composition, malabsorption, metabolic disorders and increased demand (growth, pregnancy, lactation) are "
+            f"involved. Imbalances of vitamins, minerals, essential amino acids and essential fatty acids manifest as skeletal abnormalities, impaired immunity, skin/coat change and reproductive dysfunction. Major risks "
+            f"are the quality of commercial complete diets, the nutritional balance of home-prepared food, over-supplementation, and inadequate understanding of species-specific requirements (taurine in cats, vitamin C in "
+            f"guinea pigs, calcium/UV-B in reptiles)."
+        )
+    if category == "genetic_congenital":
+        return (
+            f"{prefix} is caused by gene mutation or chromosomal abnormality arising during embryonic development. Inheritance is varied (autosomal dominant or recessive, X-linked, polygenic), and abnormal intrauterine "
+            f"environment, maternal infection, drug exposure or nutritional deficiency can also affect fetal organogenesis. Incidence is higher in highly inbred purebreds and specific closed populations. Pre-breeding genetic "
+            f"testing and carrier-exclusion programmes are important for reducing incidence at the population level."
+        )
+    if category == "degenerative":
+        return (
+            f"{prefix} is caused by progressive age-related tissue degeneration and declining repair capacity. It progresses most markedly in tissues with limited regenerative ability (cartilage, intervertebral disc, "
+            f"nervous tissue). Genetic predisposition, chronic mechanical loading from excess weight, repetitive microtrauma, oxidative stress and persistent chronic inflammation are promoting factors. Early detection with "
+            f"appropriate weight management, exercise therapy and anti-inflammatory treatment can slow progression."
+        )
+    if category == "behavioral":
+        return (
+            f"{prefix} results from a complex interplay of neuroendocrine dysregulation, genetic predisposition, inadequate socialisation, past trauma, environmental stress and medical disease (pain, thyroid disease, cognitive "
+            f"dysfunction). Insufficient developmental (socialisation-period) experience, chronic environmental stress, punishment-based training and lifestyle change (change of owner, moving, new animals) are triggers. Because "
+            f"behavioural problems directly affect patient quality of life and the owner relationship, an integrated approach — ruling out medical disease plus environmental enrichment, behaviour modification and, where indicated, "
+            f"medication — is required."
+        )
+    # generic
+    return (
+        f"The precise aetiology of {prefix} varies from case to case. Genetic predisposition, environmental factors (inappropriate temperature, humidity or hygiene), exposure to infectious pathogens, dietary imbalance, immune "
+        f"dysregulation and age-related tissue change contribute singly or in combination. Identifying the cause is essential for directing treatment and preventing recurrence, and is achieved through integrated assessment of history, "
+        f"physical examination and ancillary tests."
     )
 
 
