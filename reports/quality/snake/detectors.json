@@ -1,0 +1,2885 @@
+{
+  "species": "snake",
+  "record_count": 248,
+  "T101": {
+    "detector": "T101",
+    "total_records": 248,
+    "exact_duplicate_clusters": [
+      {
+        "members": [
+          {
+            "id": "snake_0005",
+            "name": "Sunshine Virus (Reptile Sunshinevirus)",
+            "name_ja": "サンシャインウイルス感染症"
+          },
+          {
+            "id": "snake_0147",
+            "name": "Sunshine Virus (Reptarenavirus)",
+            "name_ja": "サンシャインウイルス（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0008",
+            "name": "Pneumonia (Lower Respiratory Infection)",
+            "name_ja": "肺炎（下部呼吸器感染症）"
+          },
+          {
+            "id": "snake_0201",
+            "name": "Pneumonia",
+            "name_ja": "肺炎（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0012",
+            "name": "Snake Mites (Ophionyssus natricis)",
+            "name_ja": "ヘビダニ（オフィオニッスス）"
+          },
+          {
+            "id": "snake_0148",
+            "name": "Snake Mite (Ophionyssus natricis)",
+            "name_ja": "ヘビダニ（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0014",
+            "name": "Amoebic Infection (Entamoeba invadens)",
+            "name_ja": "アメーバ感染症"
+          },
+          {
+            "id": "snake_0170",
+            "name": "Amoebic Infection",
+            "name_ja": "アメーバ感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0016",
+            "name": "Pentastomid Infection (Tongue Worms)",
+            "name_ja": "舌虫症"
+          },
+          {
+            "id": "snake_0167",
+            "name": "Pentastomid Infection",
+            "name_ja": "舌虫感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0019",
+            "name": "Blister Disease (Vesicular Dermatitis)",
+            "name_ja": "水疱症（水疱性皮膚炎）"
+          },
+          {
+            "id": "snake_0172",
+            "name": "Blister Disease",
+            "name_ja": "水疱病（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0020",
+            "name": "Scale Rot (Ulcerative Dermatitis)",
+            "name_ja": "スケイルロット（潰瘍性皮膚炎）"
+          },
+          {
+            "id": "snake_0174",
+            "name": "Scale Rot",
+            "name_ja": "鱗腐敗（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0023",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷"
+          },
+          {
+            "id": "snake_0131",
+            "name": "Burns (Chemical)",
+            "name_ja": "化学熱傷"
+          },
+          {
+            "id": "snake_0236",
+            "name": "Burns",
+            "name_ja": "熱傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0024",
+            "name": "Dermatophytosis (Fungal Skin Infection)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "snake_0160",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0026",
+            "name": "Rostral Abrasion (Nose Rub)",
+            "name_ja": "吻部擦過傷（ノーズラブ）"
+          },
+          {
+            "id": "snake_0171",
+            "name": "Rostral Abrasion",
+            "name_ja": "吻端擦過傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0030",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "snake_0190",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0033",
+            "name": "Anorexia (Non-specific)",
+            "name_ja": "食欲不振（非特異的）"
+          },
+          {
+            "id": "snake_0197",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（ヘビ）"
+          },
+          {
+            "id": "snake_0241",
+            "name": "Anorexia (Stress-Related)",
+            "name_ja": "ストレス性拒食（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0037",
+            "name": "Septicemia (Blood Poisoning)",
+            "name_ja": "敗血症"
+          },
+          {
+            "id": "snake_0234",
+            "name": "Septicemia",
+            "name_ja": "敗血症（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0044",
+            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
+            "name_ja": "排卵後卵停滞（スラグ残留）"
+          },
+          {
+            "id": "snake_0185",
+            "name": "Post-Ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0062",
+            "name": "Hyperthermia (Heat Stroke)",
+            "name_ja": "高体温症"
+          },
+          {
+            "id": "snake_0231",
+            "name": "Hyperthermia",
+            "name_ja": "高体温症（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0082",
+            "name": "Ophidiomyces ophiodiicola (Snake Fungal Disease - SFD)",
+            "name_ja": "ヘビ真菌症（SFD）"
+          },
+          {
+            "id": "snake_0142",
+            "name": "Snake Fungal Disease (Ophidiomycosis / SFD)",
+            "name_ja": "ヘビ真菌症（オフィディオミセス症・SFD）"
+          },
+          {
+            "id": "snake_0143",
+            "name": "Snake Fungal Disease (Ophidiomyces)",
+            "name_ja": "蛇真菌病（オフィディオミセス）（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0088",
+            "name": "Cestode (Tapeworm) Infection",
+            "name_ja": "条虫感染症"
+          },
+          {
+            "id": "snake_0165",
+            "name": "Cestode Infection",
+            "name_ja": "条虫感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0108",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "snake_0232",
+            "name": "Lead Poisoning",
+            "name_ja": "鉛中毒（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0180",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（ヘビ）"
+          },
+          {
+            "id": "snake_0181",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（ヘビ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "snake_0211",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（ヘビ）"
+          },
+          {
+            "id": "snake_0212",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（ヘビ）"
+          }
+        ]
+      }
+    ],
+    "exact_duplicate_cluster_count": 20,
+    "redundant_record_count": 23,
+    "family_clusters": [
+      {
+        "shared_stem": "defici",
+        "size": 9,
+        "members": [
+          {
+            "id": "snake_0035",
+            "name": "Vitamin Deficiency (General)",
+            "name_ja": "ビタミン欠乏症（一般）"
+          },
+          {
+            "id": "snake_0114",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "snake_0115",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "snake_0116",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン欠乏症"
+          },
+          {
+            "id": "snake_0117",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "snake_0120",
+            "name": "Protein Deficiency / Malnutrition",
+            "name_ja": "タンパク質欠乏・栄養不良"
+          },
+          {
+            "id": "snake_0122",
+            "name": "UV Light Deficiency",
+            "name_ja": "紫外線不足症"
+          },
+          {
+            "id": "snake_0150",
+            "name": "Thermal Gradient Deficiency Disease",
+            "name_ja": "温度勾配欠乏症（ヘビ）"
+          },
+          {
+            "id": "snake_0229",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 9,
+        "members": [
+          {
+            "id": "snake_0030",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "snake_0190",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（ヘビ）"
+          },
+          {
+            "id": "snake_0191",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（ヘビ）"
+          },
+          {
+            "id": "snake_0192",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（ヘビ）"
+          },
+          {
+            "id": "snake_0242",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（ヘビ）"
+          },
+          {
+            "id": "snake_0243",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（ヘビ）"
+          },
+          {
+            "id": "snake_0244",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（ヘビ）"
+          },
+          {
+            "id": "snake_0245",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（ヘビ）"
+          },
+          {
+            "id": "snake_0246",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 6,
+        "members": [
+          {
+            "id": "snake_0011",
+            "name": "Oral Abscess",
+            "name_ja": "口腔膿瘍"
+          },
+          {
+            "id": "snake_0038",
+            "name": "Subcutaneous Abscess",
+            "name_ja": "皮下膿瘍"
+          },
+          {
+            "id": "snake_0039",
+            "name": "Subspectacular Abscess",
+            "name_ja": "スペクタクル下膿瘍"
+          },
+          {
+            "id": "snake_0057",
+            "name": "Venom Gland Infection / Abscess",
+            "name_ja": "毒腺感染・膿瘍"
+          },
+          {
+            "id": "snake_0133",
+            "name": "Aural Abscess (Ear Infection)",
+            "name_ja": "耳膿瘍"
+          },
+          {
+            "id": "snake_0175",
+            "name": "Abscess",
+            "name_ja": "膿瘍（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 6,
+        "members": [
+          {
+            "id": "snake_0045",
+            "name": "Hemipenal Prolapse",
+            "name_ja": "半陰茎脱出"
+          },
+          {
+            "id": "snake_0046",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "snake_0130",
+            "name": "Organ Prolapse (Gastric/Intestinal)",
+            "name_ja": "臓器脱（胃・腸）"
+          },
+          {
+            "id": "snake_0187",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（ヘビ）"
+          },
+          {
+            "id": "snake_0194",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱（ヘビ）"
+          },
+          {
+            "id": "snake_0199",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 5,
+        "members": [
+          {
+            "id": "snake_0024",
+            "name": "Dermatophytosis (Fungal Skin Infection)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "snake_0025",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "snake_0136",
+            "name": "Photosensitization Dermatitis",
+            "name_ja": "光線過敏性皮膚炎"
+          },
+          {
+            "id": "snake_0160",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（ヘビ）"
+          },
+          {
+            "id": "snake_0178",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gout",
+        "size": 5,
+        "members": [
+          {
+            "id": "snake_0048",
+            "name": "Articular Gout",
+            "name_ja": "関節痛風"
+          },
+          {
+            "id": "snake_0049",
+            "name": "Visceral Gout",
+            "name_ja": "内臓痛風"
+          },
+          {
+            "id": "snake_0111",
+            "name": "Hyperuricemia / Pre-gout",
+            "name_ja": "高尿酸血症・痛風前状態"
+          },
+          {
+            "id": "snake_0180",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（ヘビ）"
+          },
+          {
+            "id": "snake_0181",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "respir",
+        "size": 5,
+        "members": [
+          {
+            "id": "snake_0007",
+            "name": "Upper Respiratory Infection (URI)",
+            "name_ja": "上部呼吸器感染症"
+          },
+          {
+            "id": "snake_0124",
+            "name": "Chronic Respiratory Disease Complex",
+            "name_ja": "慢性呼吸器疾患複合"
+          },
+          {
+            "id": "snake_0144",
+            "name": "Nidovirus Respiratory Disease",
+            "name_ja": "ニドウイルス呼吸器疾患（ヘビ）"
+          },
+          {
+            "id": "snake_0154",
+            "name": "Respiratory Infection",
+            "name_ja": "呼吸器感染症（ヘビ）"
+          },
+          {
+            "id": "snake_0202",
+            "name": "Upper Respiratory Tract Disease",
+            "name_ja": "上部気道疾患（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 5,
+        "members": [
+          {
+            "id": "snake_0061",
+            "name": "Toxicosis (Poisoning)",
+            "name_ja": "中毒症"
+          },
+          {
+            "id": "snake_0107",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "snake_0108",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "snake_0109",
+            "name": "Ivermectin Toxicosis",
+            "name_ja": "イベルメクチン中毒"
+          },
+          {
+            "id": "snake_0110",
+            "name": "Metronidazole Toxicosis",
+            "name_ja": "メトロニダゾール中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bacter",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0025",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "snake_0139",
+            "name": "Bacterial Pneumonia (Chronic)",
+            "name_ja": "慢性細菌性肺炎"
+          },
+          {
+            "id": "snake_0242",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（ヘビ）"
+          },
+          {
+            "id": "snake_0247",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0100",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "snake_0101",
+            "name": "Rib Fractures",
+            "name_ja": "肋骨骨折"
+          },
+          {
+            "id": "snake_0211",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（ヘビ）"
+          },
+          {
+            "id": "snake_0212",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0017",
+            "name": "Tick Infestation",
+            "name_ja": "マダニ寄生"
+          },
+          {
+            "id": "snake_0092",
+            "name": "Chigger Mite Infestation (Trombiculidae)",
+            "name_ja": "ツツガムシ寄生症"
+          },
+          {
+            "id": "snake_0093",
+            "name": "Leech Infestation",
+            "name_ja": "ヒル寄生症"
+          },
+          {
+            "id": "snake_0163",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "injury",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0040",
+            "name": "Corneal Opacity / Injury",
+            "name_ja": "角膜混濁・損傷"
+          },
+          {
+            "id": "snake_0059",
+            "name": "Prey Bite Injury",
+            "name_ja": "餌動物による咬傷"
+          },
+          {
+            "id": "snake_0149",
+            "name": "Prey-Related Injury",
+            "name_ja": "餌関連損傷（ヘビ）"
+          },
+          {
+            "id": "snake_0215",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0008",
+            "name": "Pneumonia (Lower Respiratory Infection)",
+            "name_ja": "肺炎（下部呼吸器感染症）"
+          },
+          {
+            "id": "snake_0139",
+            "name": "Bacterial Pneumonia (Chronic)",
+            "name_ja": "慢性細菌性肺炎"
+          },
+          {
+            "id": "snake_0145",
+            "name": "Paramyxovirus Pneumonia",
+            "name_ja": "パラミクソウイルス肺炎（ヘビ）"
+          },
+          {
+            "id": "snake_0201",
+            "name": "Pneumonia",
+            "name_ja": "肺炎（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "snake",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0012",
+            "name": "Snake Mites (Ophionyssus natricis)",
+            "name_ja": "ヘビダニ（オフィオニッスス）"
+          },
+          {
+            "id": "snake_0142",
+            "name": "Snake Fungal Disease (Ophidiomycosis / SFD)",
+            "name_ja": "ヘビ真菌症（オフィディオミセス症・SFD）"
+          },
+          {
+            "id": "snake_0143",
+            "name": "Snake Fungal Disease (Ophidiomyces)",
+            "name_ja": "蛇真菌病（オフィディオミセス）（ヘビ）"
+          },
+          {
+            "id": "snake_0148",
+            "name": "Snake Mite (Ophionyssus natricis)",
+            "name_ja": "ヘビダニ（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spinal",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0051",
+            "name": "Spinal Osteopathy / Spondylosis",
+            "name_ja": "脊椎骨症/脊椎症"
+          },
+          {
+            "id": "snake_0100",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "snake_0151",
+            "name": "Spinal Osteopathy",
+            "name_ja": "脊椎骨症（ヘビ）"
+          },
+          {
+            "id": "snake_0215",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stasi",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0043",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "snake_0044",
+            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
+            "name_ja": "排卵後卵停滞（スラグ残留）"
+          },
+          {
+            "id": "snake_0105",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          },
+          {
+            "id": "snake_0185",
+            "name": "Post-Ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anorex",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0033",
+            "name": "Anorexia (Non-specific)",
+            "name_ja": "食欲不振（非特異的）"
+          },
+          {
+            "id": "snake_0197",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（ヘビ）"
+          },
+          {
+            "id": "snake_0241",
+            "name": "Anorexia (Stress-Related)",
+            "name_ja": "ストレス性拒食（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bite",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0058",
+            "name": "Trauma / Bite Wounds",
+            "name_ja": "外傷・咬傷"
+          },
+          {
+            "id": "snake_0059",
+            "name": "Prey Bite Injury",
+            "name_ja": "餌動物による咬傷"
+          },
+          {
+            "id": "snake_0177",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "burn",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0023",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷"
+          },
+          {
+            "id": "snake_0131",
+            "name": "Burns (Chemical)",
+            "name_ja": "化学熱傷"
+          },
+          {
+            "id": "snake_0236",
+            "name": "Burns",
+            "name_ja": "熱傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0052",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "snake_0094",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "snake_0095",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cloaca",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0046",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "snake_0106",
+            "name": "Cloacal Calculi",
+            "name_ja": "総排泄腔結石"
+          },
+          {
+            "id": "snake_0199",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coelom",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0064",
+            "name": "Peritonitis / Coelomitis",
+            "name_ja": "腹膜炎・体腔炎"
+          },
+          {
+            "id": "snake_0104",
+            "name": "Egg-related Coelomitis",
+            "name_ja": "卵関連体腔炎"
+          },
+          {
+            "id": "snake_0186",
+            "name": "Egg Yolk Coelomitis",
+            "name_ja": "卵黄体腔炎（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cornea",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0040",
+            "name": "Corneal Opacity / Injury",
+            "name_ja": "角膜混濁・損傷"
+          },
+          {
+            "id": "snake_0134",
+            "name": "Corneal Disease",
+            "name_ja": "角膜疾患"
+          },
+          {
+            "id": "snake_0206",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastro",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0028",
+            "name": "Gastrointestinal Impaction",
+            "name_ja": "消化管閉塞"
+          },
+          {
+            "id": "snake_0029",
+            "name": "Gastroenteritis",
+            "name_ja": "胃腸炎"
+          },
+          {
+            "id": "snake_0247",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemipe",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0045",
+            "name": "Hemipenal Prolapse",
+            "name_ja": "半陰茎脱出"
+          },
+          {
+            "id": "snake_0153",
+            "name": "Retained Hemipenes",
+            "name_ja": "半陰茎停滞（ヘビ）"
+          },
+          {
+            "id": "snake_0187",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0103",
+            "name": "Intestinal Volvulus / Intussusception",
+            "name_ja": "腸捻転・腸重積"
+          },
+          {
+            "id": "snake_0193",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（ヘビ）"
+          },
+          {
+            "id": "snake_0194",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mite",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0092",
+            "name": "Chigger Mite Infestation (Trombiculidae)",
+            "name_ja": "ツツガムシ寄生症"
+          },
+          {
+            "id": "snake_0148",
+            "name": "Snake Mite (Ophionyssus natricis)",
+            "name_ja": "ヘビダニ（ヘビ）"
+          },
+          {
+            "id": "snake_0163",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nidovi",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0002",
+            "name": "Nidovirus Infection",
+            "name_ja": "ニドウイルス感染症"
+          },
+          {
+            "id": "snake_0070",
+            "name": "Boid Nidovirus (Ball Python Nidovirus)",
+            "name_ja": "ボア科ニドウイルス（ボールパイソンニドウイルス）"
+          },
+          {
+            "id": "snake_0144",
+            "name": "Nidovirus Respiratory Disease",
+            "name_ja": "ニドウイルス呼吸器疾患（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ovulat",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0043",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "snake_0044",
+            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
+            "name_ja": "排卵後卵停滞（スラグ残留）"
+          },
+          {
+            "id": "snake_0185",
+            "name": "Post-Ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "paramy",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0001",
+            "name": "Paramyxovirus Infection",
+            "name_ja": "パラミクソウイルス感染症"
+          },
+          {
+            "id": "snake_0145",
+            "name": "Paramyxovirus Pneumonia",
+            "name_ja": "パラミクソウイルス肺炎（ヘビ）"
+          },
+          {
+            "id": "snake_0156",
+            "name": "Paramyxovirus",
+            "name_ja": "パラミクソウイルス（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "protoz",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0089",
+            "name": "Flagellate Protozoal Infection",
+            "name_ja": "鞭毛虫感染症"
+          },
+          {
+            "id": "snake_0090",
+            "name": "Ciliate Protozoal Overgrowth",
+            "name_ja": "繊毛虫過増殖症"
+          },
+          {
+            "id": "snake_0169",
+            "name": "Flagellate Protozoan Infection",
+            "name_ja": "鞭毛虫感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "relate",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0104",
+            "name": "Egg-related Coelomitis",
+            "name_ja": "卵関連体腔炎"
+          },
+          {
+            "id": "snake_0149",
+            "name": "Prey-Related Injury",
+            "name_ja": "餌関連損傷（ヘビ）"
+          },
+          {
+            "id": "snake_0239",
+            "name": "Stress-Related Illness",
+            "name_ja": "ストレス関連疾患（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0035",
+            "name": "Vitamin Deficiency (General)",
+            "name_ja": "ビタミン欠乏症（一般）"
+          },
+          {
+            "id": "snake_0114",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "snake_0115",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wound",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0058",
+            "name": "Trauma / Bite Wounds",
+            "name_ja": "外傷・咬傷"
+          },
+          {
+            "id": "snake_0177",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（ヘビ）"
+          },
+          {
+            "id": "snake_0235",
+            "name": "Wound Infection",
+            "name_ja": "創傷感染（ヘビ）"
+          }
+        ]
+      }
+    ],
+    "family_cluster_count": 34
+  },
+  "T102": {
+    "detector": "T102",
+    "total_records": 248,
+    "flagged_count": 0,
+    "flags": []
+  },
+  "T104": {
+    "detector": "T104",
+    "total_records": 248,
+    "empty_count": 0,
+    "heading_only_count": 50,
+    "with_dosage_count": 198,
+    "empty": [],
+    "heading_only": [
+      {
+        "id": "snake_0011",
+        "name": "Oral Abscess",
+        "name_ja": "口腔膿瘍",
+        "treatment_ja_len": 159,
+        "treatment_len": 196,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0015",
+        "name": "Internal Nematodes (Roundworms)",
+        "name_ja": "内部線虫（回虫）感染",
+        "treatment_ja_len": 168,
+        "treatment_len": 489,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0017",
+        "name": "Tick Infestation",
+        "name_ja": "マダニ寄生",
+        "treatment_ja_len": 80,
+        "treatment_len": 470,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0018",
+        "name": "Coccidia Infection",
+        "name_ja": "コクシジウム症",
+        "treatment_ja_len": 165,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0021",
+        "name": "Dysecdysis (Retained Shed)",
+        "name_ja": "脱皮不全",
+        "treatment_ja_len": 191,
+        "treatment_len": 527,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0022",
+        "name": "Retained Spectacle (Retained Eye Cap)",
+        "name_ja": "スペクタクル脱皮不全",
+        "treatment_ja_len": 53,
+        "treatment_len": 170,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0023",
+        "name": "Thermal Burns",
+        "name_ja": "熱傷",
+        "treatment_ja_len": 77,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0026",
+        "name": "Rostral Abrasion (Nose Rub)",
+        "name_ja": "吻部擦過傷（ノーズラブ）",
+        "treatment_ja_len": 87,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0027",
+        "name": "Regurgitation Syndrome",
+        "name_ja": "吐出症候群",
+        "treatment_ja_len": 54,
+        "treatment_len": 142,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0032",
+        "name": "Obesity",
+        "name_ja": "肥満",
+        "treatment_ja_len": 68,
+        "treatment_len": 165,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0038",
+        "name": "Subcutaneous Abscess",
+        "name_ja": "皮下膿瘍",
+        "treatment_ja_len": 159,
+        "treatment_len": 137,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0039",
+        "name": "Subspectacular Abscess",
+        "name_ja": "スペクタクル下膿瘍",
+        "treatment_ja_len": 161,
+        "treatment_len": 196,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0040",
+        "name": "Corneal Opacity / Injury",
+        "name_ja": "角膜混濁・損傷",
+        "treatment_ja_len": 194,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0045",
+        "name": "Hemipenal Prolapse",
+        "name_ja": "半陰茎脱出",
+        "treatment_ja_len": 71,
+        "treatment_len": 190,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0046",
+        "name": "Cloacal Prolapse",
+        "name_ja": "総排泄腔脱",
+        "treatment_ja_len": 67,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0047",
+        "name": "Renal Failure",
+        "name_ja": "腎不全",
+        "treatment_ja_len": 43,
+        "treatment_len": 188,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0051",
+        "name": "Spinal Osteopathy / Spondylosis",
+        "name_ja": "脊椎骨症/脊椎症",
+        "treatment_ja_len": 43,
+        "treatment_len": 190,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0056",
+        "name": "Cardiac Disease",
+        "name_ja": "心疾患",
+        "treatment_ja_len": 49,
+        "treatment_len": 185,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0059",
+        "name": "Prey Bite Injury",
+        "name_ja": "餌動物による咬傷",
+        "treatment_ja_len": 195,
+        "treatment_len": 517,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0062",
+        "name": "Hyperthermia (Heat Stroke)",
+        "name_ja": "高体温症",
+        "treatment_ja_len": 81,
+        "treatment_len": 232,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0065",
+        "name": "Osteomyelitis",
+        "name_ja": "骨髄炎",
+        "treatment_ja_len": 52,
+        "treatment_len": 190,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0074",
+        "name": "Chlamydiosis",
+        "name_ja": "クラミジア症",
+        "treatment_ja_len": 161,
+        "treatment_len": 190,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0076",
+        "name": "Aeromonas Infection",
+        "name_ja": "エロモナス感染症",
+        "treatment_ja_len": 162,
+        "treatment_len": 196,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0077",
+        "name": "Citrobacter Infection",
+        "name_ja": "シトロバクター感染症",
+        "treatment_ja_len": 165,
+        "treatment_len": 196,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0078",
+        "name": "Mycoplasmosis",
+        "name_ja": "マイコプラズマ症",
+        "treatment_ja_len": 163,
+        "treatment_len": 149,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0080",
+        "name": "Erysipelas",
+        "name_ja": "丹毒",
+        "treatment_ja_len": 157,
+        "treatment_len": 196,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0084",
+        "name": "Hookworm Infection (Kalicephalus)",
+        "name_ja": "鉤虫感染症（カリケファルス）",
+        "treatment_ja_len": 172,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0085",
+        "name": "Rhabdias Lungworm",
+        "name_ja": "ラブディアス肺虫症",
+        "treatment_ja_len": 167,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0086",
+        "name": "Strongyloides Infection",
+        "name_ja": "糞線虫症",
+        "treatment_ja_len": 162,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0087",
+        "name": "Acanthocephalan Infection",
+        "name_ja": "鉤頭虫感染症",
+        "treatment_ja_len": 164,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0089",
+        "name": "Flagellate Protozoal Infection",
+        "name_ja": "鞭毛虫感染症",
+        "treatment_ja_len": 161,
+        "treatment_len": 137,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0091",
+        "name": "Sarcocystosis",
+        "name_ja": "住肉胞子虫症",
+        "treatment_ja_len": 164,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0097",
+        "name": "Chromatophoroma",
+        "name_ja": "色素細胞腫",
+        "treatment_ja_len": 104,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0103",
+        "name": "Intestinal Volvulus / Intussusception",
+        "name_ja": "腸捻転・腸重積",
+        "treatment_ja_len": 53,
+        "treatment_len": 247,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0107",
+        "name": "Zinc Toxicosis",
+        "name_ja": "亜鉛中毒",
+        "treatment_ja_len": 66,
+        "treatment_len": 159,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0108",
+        "name": "Lead Toxicosis",
+        "name_ja": "鉛中毒",
+        "treatment_ja_len": 194,
+        "treatment_len": 159,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0109",
+        "name": "Ivermectin Toxicosis",
+        "name_ja": "イベルメクチン中毒",
+        "treatment_ja_len": 200,
+        "treatment_len": 159,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0110",
+        "name": "Metronidazole Toxicosis",
+        "name_ja": "メトロニダゾール中毒",
+        "treatment_ja_len": 201,
+        "treatment_len": 159,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0115",
+        "name": "Vitamin D3 Deficiency",
+        "name_ja": "ビタミンD3欠乏症",
+        "treatment_ja_len": 84,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0123",
+        "name": "Constriction Band Necrosis",
+        "name_ja": "絞扼帯壊死",
+        "treatment_ja_len": 192,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0124",
+        "name": "Chronic Respiratory Disease Complex",
+        "name_ja": "慢性呼吸器疾患複合",
+        "treatment_ja_len": 57,
+        "treatment_len": 190,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0129",
+        "name": "Hemoparasites (Blood Parasites)",
+        "name_ja": "血液寄生虫症",
+        "treatment_ja_len": 164,
+        "treatment_len": 172,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0130",
+        "name": "Organ Prolapse (Gastric/Intestinal)",
+        "name_ja": "臓器脱（胃・腸）",
+        "treatment_ja_len": 195,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0131",
+        "name": "Burns (Chemical)",
+        "name_ja": "化学熱傷",
+        "treatment_ja_len": 62,
+        "treatment_len": 190,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0133",
+        "name": "Aural Abscess (Ear Infection)",
+        "name_ja": "耳膿瘍",
+        "treatment_ja_len": 158,
+        "treatment_len": 137,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0134",
+        "name": "Corneal Disease",
+        "name_ja": "角膜疾患",
+        "treatment_ja_len": 52,
+        "treatment_len": 170,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0135",
+        "name": "Proliferative Osteoarthritis",
+        "name_ja": "増殖性骨関節症",
+        "treatment_ja_len": 50,
+        "treatment_len": 149,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0139",
+        "name": "Bacterial Pneumonia (Chronic)",
+        "name_ja": "慢性細菌性肺炎",
+        "treatment_ja_len": 162,
+        "treatment_len": 196,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0147",
+        "name": "Sunshine Virus (Reptarenavirus)",
+        "name_ja": "サンシャインウイルス（ヘビ）",
+        "treatment_ja_len": 293,
+        "treatment_len": 682,
+        "has_dosage": false
+      },
+      {
+        "id": "snake_0155",
+        "name": "Stomatitis (Mouth Rot)",
+        "name_ja": "口内炎（マウスロット）（ヘビ）",
+        "treatment_ja_len": 185,
+        "treatment_len": 667,
+        "has_dosage": false
+      }
+    ]
+  },
+  "T108": {
+    "detector": "T108",
+    "total_records": 248,
+    "drug_available": 610,
+    "ref_keys_available": 30,
+    "drug_mismatch_count": 84,
+    "citation_mismatch_count": 9,
+    "drug_mismatches": [
+      {
+        "id": "snake_0005",
+        "name": "Sunshine Virus (Reptile Sunshinevirus)",
+        "name_ja": "サンシャインウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0006",
+        "name": "Ophidian Herpesvirus Infection",
+        "name_ja": "ヘビヘルペスウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0007",
+        "name": "Upper Respiratory Infection (URI)",
+        "name_ja": "上部呼吸器感染症",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0008",
+        "name": "Pneumonia (Lower Respiratory Infection)",
+        "name_ja": "肺炎（下部呼吸器感染症）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0009",
+        "name": "Aspergillosis",
+        "name_ja": "アスペルギルス症",
+        "drugs": [
+          {
+            "drug": "Clotrimazole",
+            "drug_ja": "クロトリマゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0010",
+        "name": "Infectious Stomatitis (Mouth Rot)",
+        "name_ja": "感染性口内炎（マウスロット）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0014",
+        "name": "Amoebic Infection (Entamoeba invadens)",
+        "name_ja": "アメーバ感染症",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0020",
+        "name": "Scale Rot (Ulcerative Dermatitis)",
+        "name_ja": "スケイルロット（潰瘍性皮膚炎）",
+        "drugs": [
+          {
+            "drug": "Mupirocin",
+            "drug_ja": "ムピロシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0025",
+        "name": "Bacterial Dermatitis",
+        "name_ja": "細菌性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Cephalexin",
+            "drug_ja": "セファレキシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clindamycin",
+            "drug_ja": "クリンダマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mupirocin",
+            "drug_ja": "ムピロシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0028",
+        "name": "Gastrointestinal Impaction",
+        "name_ja": "消化管閉塞",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0030",
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）",
+        "drugs": [
+          {
+            "drug": "Ursodiol (UDCA)",
+            "drug_ja": "ウルソデオキシコール酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0037",
+        "name": "Septicemia (Blood Poisoning)",
+        "name_ja": "敗血症",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0041",
+        "name": "Conjunctivitis / Periocular Swelling",
+        "name_ja": "結膜炎・眼周囲腫脹",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0042",
+        "name": "Egg Binding / Dystocia",
+        "name_ja": "卵塞・難産",
+        "drugs": [
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Propofol",
+            "drug_ja": "プロポフォール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0043",
+        "name": "Pre-ovulatory Follicular Stasis",
+        "name_ja": "排卵前卵胞停滞",
+        "drugs": [
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0044",
+        "name": "Post-ovulatory Egg Stasis (Slug Retention)",
+        "name_ja": "排卵後卵停滞（スラグ残留）",
+        "drugs": [
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0052",
+        "name": "Squamous Cell Carcinoma",
+        "name_ja": "扁平上皮癌",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0054",
+        "name": "Fibrosarcoma",
+        "name_ja": "線維肉腫",
+        "drugs": [
+          {
+            "drug": "Doxorubicin",
+            "drug_ja": "ドキソルビシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0057",
+        "name": "Venom Gland Infection / Abscess",
+        "name_ja": "毒腺感染・膿瘍",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0058",
+        "name": "Trauma / Bite Wounds",
+        "name_ja": "外傷・咬傷",
+        "drugs": [
+          {
+            "drug": "Methadone",
+            "drug_ja": "メサドン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0061",
+        "name": "Toxicosis (Poisoning)",
+        "name_ja": "中毒症",
+        "drugs": [
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0064",
+        "name": "Peritonitis / Coelomitis",
+        "name_ja": "腹膜炎・体腔炎",
+        "drugs": [
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0067",
+        "name": "Mycobacteriosis",
+        "name_ja": "マイコバクテリウム症",
+        "drugs": [
+          {
+            "drug": "Clarithromycin",
+            "drug_ja": "クラリスロマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0075",
+        "name": "Pseudomonas Infection",
+        "name_ja": "緑膿菌感染症",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0083",
+        "name": "Mucormycosis (Zygomycosis)",
+        "name_ja": "ムコール症",
+        "drugs": [
+          {
+            "drug": "Posaconazole",
+            "drug_ja": "ポサコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0088",
+        "name": "Cestode (Tapeworm) Infection",
+        "name_ja": "条虫感染症",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0093",
+        "name": "Leech Infestation",
+        "name_ja": "ヒル寄生症",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0096",
+        "name": "Melanoma",
+        "name_ja": "メラノーマ",
+        "drugs": [
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0100",
+        "name": "Spinal Fracture / Vertebral Luxation",
+        "name_ja": "脊椎骨折・椎体脱臼",
+        "drugs": [
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0101",
+        "name": "Rib Fractures",
+        "name_ja": "肋骨骨折",
+        "drugs": [
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0102",
+        "name": "Substrate Impaction",
+        "name_ja": "床材インパクション",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0104",
+        "name": "Egg-related Coelomitis",
+        "name_ja": "卵関連体腔炎",
+        "drugs": [
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0108",
+        "name": "Lead Toxicosis",
+        "name_ja": "鉛中毒",
+        "drugs": [
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0109",
+        "name": "Ivermectin Toxicosis",
+        "name_ja": "イベルメクチン中毒",
+        "drugs": [
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0110",
+        "name": "Metronidazole Toxicosis",
+        "name_ja": "メトロニダゾール中毒",
+        "drugs": [
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0126",
+        "name": "Disseminated Granulomatous Disease",
+        "name_ja": "播種性肉芽腫性疾患",
+        "drugs": [
+          {
+            "drug": "Clarithromycin",
+            "drug_ja": "クラリスロマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0128",
+        "name": "Hemolytic Anemia",
+        "name_ja": "溶血性貧血",
+        "drugs": [
+          {
+            "drug": "Mycophenolate Mofetil",
+            "drug_ja": "ミコフェノール酸モフェチル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clopidogrel",
+            "drug_ja": "クロピドグレル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0131",
+        "name": "Burns (Chemical)",
+        "name_ja": "化学熱傷",
+        "drugs": [
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0142",
+        "name": "Snake Fungal Disease (Ophidiomycosis / SFD)",
+        "name_ja": "ヘビ真菌症（オフィディオミセス症・SFD）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0148",
+        "name": "Snake Mite (Ophionyssus natricis)",
+        "name_ja": "ヘビダニ（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Moxidectin",
+            "drug_ja": "モキシデクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Imidacloprid",
+            "drug_ja": "イミダクロプリド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0149",
+        "name": "Prey-Related Injury",
+        "name_ja": "餌関連損傷（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0157",
+        "name": "Herpesvirus Infection",
+        "name_ja": "ヘルペスウイルス感染（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Acyclovir (Aciclovir)",
+            "drug_ja": "アシクロビル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0161",
+        "name": "Candidiasis",
+        "name_ja": "カンジダ症（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Miconazole",
+            "drug_ja": "ミコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clotrimazole",
+            "drug_ja": "クロトリマゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0163",
+        "name": "Mite Infestation (Ophionyssus)",
+        "name_ja": "ダニ症（Ophionyssus）（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Moxidectin",
+            "drug_ja": "モキシデクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Imidacloprid",
+            "drug_ja": "イミダクロプリド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0171",
+        "name": "Rostral Abrasion",
+        "name_ja": "吻端擦過傷（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0172",
+        "name": "Blister Disease",
+        "name_ja": "水疱病（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0173",
+        "name": "Shell Rot",
+        "name_ja": "甲羅腐敗（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0174",
+        "name": "Scale Rot",
+        "name_ja": "鱗腐敗（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0176",
+        "name": "Tail Necrosis",
+        "name_ja": "尾壊死（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0179",
+        "name": "Photosensitization",
+        "name_ja": "光線過敏症（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0184",
+        "name": "Egg Binding (Dystocia)",
+        "name_ja": "卵詰まり（難産）（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0185",
+        "name": "Post-Ovulatory Egg Stasis",
+        "name_ja": "排卵後卵停滞（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0186",
+        "name": "Egg Yolk Coelomitis",
+        "name_ja": "卵黄体腔炎（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0190",
+        "name": "Hepatic Lipidosis",
+        "name_ja": "肝リピドーシス（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Ursodiol (UDCA)",
+            "drug_ja": "ウルソデオキシコール酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0191",
+        "name": "Hepatitis",
+        "name_ja": "肝炎（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Ursodiol (UDCA)",
+            "drug_ja": "ウルソデオキシコール酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0195",
+        "name": "Constipation",
+        "name_ja": "便秘（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0196",
+        "name": "Regurgitation",
+        "name_ja": "吐出（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0197",
+        "name": "Anorexia (Behavioral)",
+        "name_ja": "拒食（行動性）（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0199",
+        "name": "Rectal/Cloacal Prolapse",
+        "name_ja": "直腸/総排泄腔脱（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0200",
+        "name": "Pancreatitis",
+        "name_ja": "膵炎（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0201",
+        "name": "Pneumonia",
+        "name_ja": "肺炎（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0203",
+        "name": "Rhinitis",
+        "name_ja": "鼻炎（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0204",
+        "name": "Pulmonary Edema",
+        "name_ja": "肺水腫（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Theophylline",
+            "drug_ja": "テオフィリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0205",
+        "name": "Conjunctivitis",
+        "name_ja": "結膜炎（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0209",
+        "name": "Uveitis",
+        "name_ja": "ぶどう膜炎（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0210",
+        "name": "Eye Infection",
+        "name_ja": "眼感染症（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0213",
+        "name": "Osteoarthritis",
+        "name_ja": "変形性関節症（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Glucosamine/Chondroitin",
+            "drug_ja": "グルコサミン・コンドロイチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0218",
+        "name": "Seizures",
+        "name_ja": "痙攣発作（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Zonisamide",
+            "drug_ja": "ゾニサミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Zonisamide",
+            "drug_ja": "ゾニサミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0219",
+        "name": "Vestibular Disease",
+        "name_ja": "前庭疾患（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0220",
+        "name": "Encephalitis",
+        "name_ja": "脳炎（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Clindamycin",
+            "drug_ja": "クリンダマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mannitol",
+            "drug_ja": "マンニトール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0221",
+        "name": "Peripheral Neuropathy",
+        "name_ja": "末梢神経障害（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Pregabalin",
+            "drug_ja": "プレガバリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0226",
+        "name": "Anemia",
+        "name_ja": "貧血（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Erythropoietin (EPO)",
+            "drug_ja": "エリスロポエチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0230",
+        "name": "Hyperphosphatemia",
+        "name_ja": "高リン血症（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Aluminum Hydroxide",
+            "drug_ja": "水酸化アルミニウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0233",
+        "name": "Pesticide Poisoning",
+        "name_ja": "農薬中毒（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Methocarbamol",
+            "drug_ja": "メトカルバモール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0234",
+        "name": "Septicemia",
+        "name_ja": "敗血症（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Dopamine",
+            "drug_ja": "ドパミン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Norepinephrine",
+            "drug_ja": "ノルエピネフリン（ノルアドレナリン）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0235",
+        "name": "Wound Infection",
+        "name_ja": "創傷感染（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Methadone",
+            "drug_ja": "メサドン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0236",
+        "name": "Burns",
+        "name_ja": "熱傷（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Methadone",
+            "drug_ja": "メサドン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0237",
+        "name": "Frostbite",
+        "name_ja": "凍傷（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Methadone",
+            "drug_ja": "メサドン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0238",
+        "name": "Anesthetic Complication",
+        "name_ja": "麻酔合併症（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Atipamezole",
+            "drug_ja": "アチパメゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Naloxone",
+            "drug_ja": "ナロキソン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Flumazenil",
+            "drug_ja": "フルマゼニル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0241",
+        "name": "Anorexia (Stress-Related)",
+        "name_ja": "ストレス性拒食（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0242",
+        "name": "Hepatic Bacterial Infection",
+        "name_ja": "肝細菌感染症（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Ursodiol (UDCA)",
+            "drug_ja": "ウルソデオキシコール酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0243",
+        "name": "Hepatic Viral Infection",
+        "name_ja": "肝ウイルス感染症（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Ursodiol (UDCA)",
+            "drug_ja": "ウルソデオキシコール酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0244",
+        "name": "Hepatic Parasitic Disease",
+        "name_ja": "肝寄生虫疾患（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Clindamycin",
+            "drug_ja": "クリンダマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0245",
+        "name": "Hepatic Fibrosis",
+        "name_ja": "肝線維症（ヘビ）",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Spironolactone",
+            "drug_ja": "スピロノラクトン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ursodiol (UDCA)",
+            "drug_ja": "ウルソデオキシコール酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      }
+    ],
+    "citation_mismatches": [
+      {
+        "id": "snake_0024",
+        "name": "Dermatophytosis (Fungal Skin Infection)",
+        "name_ja": "皮膚糸状菌症",
+        "matched_keys": [
+          "dermatophytosis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "snake_0053",
+        "name": "Lymphoma",
+        "name_ja": "リンパ腫",
+        "matched_keys": [
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "snake_0079",
+        "name": "Pasteurellosis",
+        "name_ja": "パスツレラ症",
+        "matched_keys": [
+          "pasteurellosis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "snake_0128",
+        "name": "Hemolytic Anemia",
+        "name_ja": "溶血性貧血",
+        "matched_keys": [
+          "immune-mediated hemolytic anemia"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "snake_0160",
+        "name": "Dermatophytosis",
+        "name_ja": "皮膚糸状菌症（ヘビ）",
+        "matched_keys": [
+          "dermatophytosis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "snake_0182",
+        "name": "Urolithiasis",
+        "name_ja": "尿路結石症（ヘビ）",
+        "matched_keys": [
+          "urolithiasis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "snake_0200",
+        "name": "Pancreatitis",
+        "name_ja": "膵炎（ヘビ）",
+        "matched_keys": [
+          "feline pancreatitis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "snake_0223",
+        "name": "Cardiomyopathy",
+        "name_ja": "心筋症（ヘビ）",
+        "matched_keys": [
+          "hypertrophic cardiomyopathy (hcm)"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "snake_0226",
+        "name": "Anemia",
+        "name_ja": "貧血（ヘビ）",
+        "matched_keys": [
+          "immune-mediated hemolytic anemia"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      }
+    ]
+  },
+  "T109": {
+    "detector": "T109",
+    "total_records": 248,
+    "hit_count": 0,
+    "safe_occurrences": 0,
+    "review_occurrences": 0,
+    "term_counts": {},
+    "hits": []
+  }
+}

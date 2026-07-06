@@ -11,9 +11,9 @@
 - [x] **T101** 重複/過分割 検出器（degu で実行済み）
 - [x] **T102** 非臨床エントリ 検出器（degu で実行済み）
 - [x] **T104** 空/見出しのみ治療 検出器（degu で実行済み）
-- [ ] T108 出典/薬品リンク整合性 検出器（キーワード自動マッチの誤紐付けを検出）
-- [ ] T109 機械翻訳臭 検出器（葡萄糖/β細胞疲出/並発/遺伝学的インスリン抵抗 等の辞書）
-- [ ] 全21種へ検出器を横展開（read-only・集計レポート）
+- [x] **T108** 出典/薬品リンク整合性 検出器（request-time マッチャを再現し種不整合を検出）
+- [x] **T109** 機械翻訳臭 検出器（curated lexicon: safe/review 2区分）
+- [x] 全21種へ検出器を横展開（`scripts/quality/rollout.py` → `reports/quality/_rollout_summary.md`）
 
 ## フェーズ2：スキーマ/不変ID（🟡 前提整備）
 - [ ] `schema_migrations` テーブル + 冪等 ADD COLUMN（canonical_id, status, …）

@@ -1,0 +1,6987 @@
+{
+  "species": "amphibian",
+  "record_count": 258,
+  "T101": {
+    "detector": "T101",
+    "total_records": 258,
+    "exact_duplicate_clusters": [
+      {
+        "members": [
+          {
+            "id": "amphibian_0000",
+            "name": "Chytridiomycosis (Bd)",
+            "name_ja": "ツボカビ症（Bd）"
+          },
+          {
+            "id": "amphibian_0001",
+            "name": "Chytridiomycosis (Bsal)",
+            "name_ja": "ツボカビ症（Bsal）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0013",
+            "name": "Nematode Infection",
+            "name_ja": "線虫感染症"
+          },
+          {
+            "id": "amphibian_0163",
+            "name": "Nematode Infection (Rhabdias)",
+            "name_ja": "線虫感染（ラブディアス）（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0016",
+            "name": "Myxosporean Infection",
+            "name_ja": "粘液胞子虫感染症"
+          },
+          {
+            "id": "amphibian_0076",
+            "name": "Myxozoan Infection",
+            "name_ja": "粘液胞子虫感染症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0020",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患"
+          },
+          {
+            "id": "amphibian_0178",
+            "name": "Metabolic Bone Disease (MBD)",
+            "name_ja": "代謝性骨疾患（MBD）（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0021",
+            "name": "Hypovitaminosis A",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "amphibian_0253",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0022",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
+          },
+          {
+            "id": "amphibian_0254",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0025",
+            "name": "Ammonia Poisoning",
+            "name_ja": "アンモニア中毒"
+          },
+          {
+            "id": "amphibian_0165",
+            "name": "Ammonia Toxicosis",
+            "name_ja": "アンモニア中毒（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0030",
+            "name": "Thermal Stress (Hyperthermia)",
+            "name_ja": "温熱ストレス（高体温症）"
+          },
+          {
+            "id": "amphibian_0031",
+            "name": "Thermal Stress (Hypothermia)",
+            "name_ja": "低温ストレス（低体温症）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0036",
+            "name": "Intestinal Impaction",
+            "name_ja": "腸閉塞（腸インパクション）"
+          },
+          {
+            "id": "amphibian_0220",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0050",
+            "name": "Dysecdysis (Abnormal Shedding)",
+            "name_ja": "脱皮不全"
+          },
+          {
+            "id": "amphibian_0197",
+            "name": "Dysecdysis (Retained Shed)",
+            "name_ja": "脱皮不全（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0052",
+            "name": "Anorexia (Multifactorial)",
+            "name_ja": "食欲不振（多因子性）"
+          },
+          {
+            "id": "amphibian_0223",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0082",
+            "name": "Mite Infestation (Hannemania)",
+            "name_ja": "ダニ寄生症（ハンネマニア）"
+          },
+          {
+            "id": "amphibian_0084",
+            "name": "Tick Infestation",
+            "name_ja": "ダニ寄生症（マダニ）"
+          },
+          {
+            "id": "amphibian_0191",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0130",
+            "name": "Thermal Burn (Heat Lamp)",
+            "name_ja": "熱傷（ヒートランプ）"
+          },
+          {
+            "id": "amphibian_0198",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0207",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（両生類）"
+          },
+          {
+            "id": "amphibian_0208",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（両生類）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "amphibian_0235",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（両生類）"
+          },
+          {
+            "id": "amphibian_0236",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（両生類）"
+          }
+        ]
+      }
+    ],
+    "exact_duplicate_cluster_count": 15,
+    "redundant_record_count": 16,
+    "family_clusters": [
+      {
+        "shared_stem": "defici",
+        "size": 11,
+        "members": [
+          {
+            "id": "amphibian_0022",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
+          },
+          {
+            "id": "amphibian_0023",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "amphibian_0024",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン（ビタミンB1）欠乏症"
+          },
+          {
+            "id": "amphibian_0095",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症"
+          },
+          {
+            "id": "amphibian_0096",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "amphibian_0097",
+            "name": "Iodine Deficiency (Goiter)",
+            "name_ja": "ヨウ素欠乏症（甲状腺腫）"
+          },
+          {
+            "id": "amphibian_0098",
+            "name": "Protein Deficiency",
+            "name_ja": "タンパク質欠乏症"
+          },
+          {
+            "id": "amphibian_0100",
+            "name": "UV Light Deficiency",
+            "name_ja": "紫外線不足症"
+          },
+          {
+            "id": "amphibian_0149",
+            "name": "Newt Iodine Deficiency Goiter",
+            "name_ja": "イモリヨウ素欠乏性甲状腺腫"
+          },
+          {
+            "id": "amphibian_0253",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（両生類）"
+          },
+          {
+            "id": "amphibian_0254",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "amphib",
+        "size": 9,
+        "members": [
+          {
+            "id": "amphibian_0147",
+            "name": "Amphibian Collagenoma",
+            "name_ja": "両生類コラゲノーマ（膠原線維腫）"
+          },
+          {
+            "id": "amphibian_0150",
+            "name": "Amphibian Chromomycosis (Pigmented Fungal Infection)",
+            "name_ja": "両生類クロモミコーシス（色素性真菌感染症）"
+          },
+          {
+            "id": "amphibian_0151",
+            "name": "Amphibian Rhabdias Pulmonary Nematodiasis",
+            "name_ja": "両生類ラブジアス肺線虫症"
+          },
+          {
+            "id": "amphibian_0152",
+            "name": "Amphibian Elizabethkingia Meningoencephalitis",
+            "name_ja": "両生類エリザベスキンギア髄膜脳炎"
+          },
+          {
+            "id": "amphibian_0153",
+            "name": "Amphibian Chlamydiosis",
+            "name_ja": "両生類クラミジア症"
+          },
+          {
+            "id": "amphibian_0154",
+            "name": "Amphibian Ventral Dermal Scald (Husbandry)",
+            "name_ja": "両生類腹側皮膚熱傷（飼育管理）"
+          },
+          {
+            "id": "amphibian_0155",
+            "name": "Amphibian Ozone / Chloramine Toxicity (Water Treatment)",
+            "name_ja": "両生類オゾン・クロラミン中毒（水処理）"
+          },
+          {
+            "id": "amphibian_0159",
+            "name": "Amphibian Mycobacteriosis (Chronic Wasting)",
+            "name_ja": "両生類マイコバクテリウム症（慢性消耗性）"
+          },
+          {
+            "id": "amphibian_0160",
+            "name": "Amphibian Metabolic Bone Disease (NSHP)",
+            "name_ja": "両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "frog",
+        "size": 9,
+        "members": [
+          {
+            "id": "amphibian_0059",
+            "name": "Frog Virus 3 (FV3)",
+            "name_ja": "カエルウイルス3型（FV3）"
+          },
+          {
+            "id": "amphibian_0134",
+            "name": "Goliath Frog Stress Syndrome",
+            "name_ja": "ゴライアスガエルストレス症候群"
+          },
+          {
+            "id": "amphibian_0135",
+            "name": "Goliath Frog Filariasis",
+            "name_ja": "ゴライアスガエルフィラリア症"
+          },
+          {
+            "id": "amphibian_0136",
+            "name": "Pacman Frog Water Edema Syndrome",
+            "name_ja": "パックマンフロッグ水浮腫症候群"
+          },
+          {
+            "id": "amphibian_0137",
+            "name": "Pacman Frog Gastric Overload Syndrome",
+            "name_ja": "パックマンフロッグ胃過負荷症候群"
+          },
+          {
+            "id": "amphibian_0138",
+            "name": "Pacman Frog Substrate Impaction (Ceratophrys)",
+            "name_ja": "パックマンフロッグ床材誤飲性閉塞"
+          },
+          {
+            "id": "amphibian_0140",
+            "name": "Dart Frog Spindly Leg Syndrome (SLS)",
+            "name_ja": "ヤドクガエルスピンドリーレッグ症候群"
+          },
+          {
+            "id": "amphibian_0141",
+            "name": "Dart Frog Enteric Protozoal Infection",
+            "name_ja": "ヤドクガエル腸管原虫感染症"
+          },
+          {
+            "id": "amphibian_0146",
+            "name": "Tree Frog Bacterial Pneumonia",
+            "name_ja": "アマガエル細菌性肺炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 7,
+        "members": [
+          {
+            "id": "amphibian_0039",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "amphibian_0040",
+            "name": "Gastric Prolapse",
+            "name_ja": "胃脱"
+          },
+          {
+            "id": "amphibian_0041",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱"
+          },
+          {
+            "id": "amphibian_0119",
+            "name": "Organ Prolapse (Gastric/Intestinal/Cloacal)",
+            "name_ja": "臓器脱（胃・腸・総排泄腔）"
+          },
+          {
+            "id": "amphibian_0174",
+            "name": "Prolapse (Gastric/Intestinal)",
+            "name_ja": "胃/腸脱出（両生類）"
+          },
+          {
+            "id": "amphibian_0215",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（両生類）"
+          },
+          {
+            "id": "amphibian_0224",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "edema",
+        "size": 6,
+        "members": [
+          {
+            "id": "amphibian_0034",
+            "name": "Edema / Hydrops (Dropsy)",
+            "name_ja": "浮腫・水腫（腹水症）"
+          },
+          {
+            "id": "amphibian_0047",
+            "name": "Periorbital Edema",
+            "name_ja": "眼窩周囲浮腫"
+          },
+          {
+            "id": "amphibian_0136",
+            "name": "Pacman Frog Water Edema Syndrome",
+            "name_ja": "パックマンフロッグ水浮腫症候群"
+          },
+          {
+            "id": "amphibian_0172",
+            "name": "Lymph Sac Edema",
+            "name_ja": "リンパ嚢浮腫（両生類）"
+          },
+          {
+            "id": "amphibian_0175",
+            "name": "Edema Syndrome",
+            "name_ja": "浮腫症候群（両生類）"
+          },
+          {
+            "id": "amphibian_0228",
+            "name": "Pulmonary Edema",
+            "name_ja": "肺水腫（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 6,
+        "members": [
+          {
+            "id": "amphibian_0019",
+            "name": "Leech Infestation",
+            "name_ja": "ヒル寄生症"
+          },
+          {
+            "id": "amphibian_0082",
+            "name": "Mite Infestation (Hannemania)",
+            "name_ja": "ダニ寄生症（ハンネマニア）"
+          },
+          {
+            "id": "amphibian_0084",
+            "name": "Tick Infestation",
+            "name_ja": "ダニ寄生症（マダニ）"
+          },
+          {
+            "id": "amphibian_0110",
+            "name": "Vorticella Infestation",
+            "name_ja": "ツリガネムシ寄生症"
+          },
+          {
+            "id": "amphibian_0111",
+            "name": "Planarian Infestation",
+            "name_ja": "プラナリア寄生"
+          },
+          {
+            "id": "amphibian_0191",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 6,
+        "members": [
+          {
+            "id": "amphibian_0101",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "amphibian_0102",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "amphibian_0103",
+            "name": "Copper Toxicosis",
+            "name_ja": "銅中毒"
+          },
+          {
+            "id": "amphibian_0165",
+            "name": "Ammonia Toxicosis",
+            "name_ja": "アンモニア中毒（両生類）"
+          },
+          {
+            "id": "amphibian_0166",
+            "name": "Nitrite/Nitrate Toxicosis",
+            "name_ja": "亜硝酸/硝酸中毒（両生類）"
+          },
+          {
+            "id": "amphibian_0167",
+            "name": "Chlorine/Chloramine Toxicosis",
+            "name_ja": "塩素/クロラミン中毒（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "salama",
+        "size": 5,
+        "members": [
+          {
+            "id": "amphibian_0056",
+            "name": "Batrachochytrium salamandrivorans (Bsal) - Systemic",
+            "name_ja": "バトラコキトリウム・サラマンドリボランス全身型"
+          },
+          {
+            "id": "amphibian_0131",
+            "name": "Giant Salamander Skin Ulcer Disease",
+            "name_ja": "オオサンショウウオ皮膚潰瘍病"
+          },
+          {
+            "id": "amphibian_0132",
+            "name": "Giant Salamander Iridovirus Disease",
+            "name_ja": "オオサンショウウオイリドウイルス病"
+          },
+          {
+            "id": "amphibian_0156",
+            "name": "Giant Salamander Fungal Granuloma",
+            "name_ja": "オオサンショウウオ真菌性肉芽腫"
+          },
+          {
+            "id": "amphibian_0161",
+            "name": "Batrachochytrium salamandrivorans (Bsal)",
+            "name_ja": "Bsal感染症（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "therma",
+        "size": 5,
+        "members": [
+          {
+            "id": "amphibian_0030",
+            "name": "Thermal Stress (Hyperthermia)",
+            "name_ja": "温熱ストレス（高体温症）"
+          },
+          {
+            "id": "amphibian_0031",
+            "name": "Thermal Stress (Hypothermia)",
+            "name_ja": "低温ストレス（低体温症）"
+          },
+          {
+            "id": "amphibian_0130",
+            "name": "Thermal Burn (Heat Lamp)",
+            "name_ja": "熱傷（ヒートランプ）"
+          },
+          {
+            "id": "amphibian_0170",
+            "name": "Thermal Shock",
+            "name_ja": "温度ショック（両生類）"
+          },
+          {
+            "id": "amphibian_0198",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "body",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0037",
+            "name": "Foreign Body Ingestion",
+            "name_ja": "異物摂取"
+          },
+          {
+            "id": "amphibian_0043",
+            "name": "Short Body Syndrome (SBS)",
+            "name_ja": "ショートボディ症候群"
+          },
+          {
+            "id": "amphibian_0171",
+            "name": "Short Body Disease",
+            "name_ja": "短体病（両生類）"
+          },
+          {
+            "id": "amphibian_0181",
+            "name": "Inclusion Body Disease (IBD)",
+            "name_ja": "封入体病（IBD）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0006",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "amphibian_0054",
+            "name": "Tail Rot / Necrotic Dermatitis",
+            "name_ja": "尾腐れ・壊死性皮膚炎"
+          },
+          {
+            "id": "amphibian_0188",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（両生類）"
+          },
+          {
+            "id": "amphibian_0206",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "failur",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0048",
+            "name": "Renal Failure",
+            "name_ja": "腎不全"
+          },
+          {
+            "id": "amphibian_0114",
+            "name": "Reproductive Failure / Egg Retention",
+            "name_ja": "繁殖障害・卵停滞"
+          },
+          {
+            "id": "amphibian_0120",
+            "name": "Congestive Heart Failure",
+            "name_ja": "うっ血性心不全"
+          },
+          {
+            "id": "amphibian_0129",
+            "name": "Metamorphosis Failure (Neoteny Complications)",
+            "name_ja": "変態障害（幼形成熟合併症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0092",
+            "name": "Limb Fractures / Trauma",
+            "name_ja": "四肢骨折・外傷"
+          },
+          {
+            "id": "amphibian_0093",
+            "name": "Spinal Injury / Vertebral Fracture",
+            "name_ja": "脊椎損傷・椎体骨折"
+          },
+          {
+            "id": "amphibian_0235",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（両生類）"
+          },
+          {
+            "id": "amphibian_0236",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastri",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0038",
+            "name": "Gastric Overload",
+            "name_ja": "胃過負荷"
+          },
+          {
+            "id": "amphibian_0040",
+            "name": "Gastric Prolapse",
+            "name_ja": "胃脱"
+          },
+          {
+            "id": "amphibian_0113",
+            "name": "Gastric Torsion",
+            "name_ja": "胃捻転"
+          },
+          {
+            "id": "amphibian_0137",
+            "name": "Pacman Frog Gastric Overload Syndrome",
+            "name_ja": "パックマンフロッグ胃過負荷症候群"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxici",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0027",
+            "name": "Chlorine / Chloramine Toxicity",
+            "name_ja": "塩素・クロラミン中毒"
+          },
+          {
+            "id": "amphibian_0028",
+            "name": "Chemical Toxicity (Pesticides/Metals)",
+            "name_ja": "化学物質中毒（農薬・重金属）"
+          },
+          {
+            "id": "amphibian_0106",
+            "name": "High Nitrate Toxicity",
+            "name_ja": "高硝酸塩毒性"
+          },
+          {
+            "id": "amphibian_0155",
+            "name": "Amphibian Ozone / Chloramine Toxicity (Water Treatment)",
+            "name_ja": "両生類オゾン・クロラミン中毒（水処理）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0044",
+            "name": "Neoplasia / Tumors",
+            "name_ja": "腫瘍性疾患"
+          },
+          {
+            "id": "amphibian_0058",
+            "name": "Lucke Tumor Herpesvirus (Renal Carcinoma)",
+            "name_ja": "ルッケ腫瘍ヘルペスウイルス（腎癌）"
+          },
+          {
+            "id": "amphibian_0216",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍（両生類）"
+          },
+          {
+            "id": "amphibian_0217",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "aeromo",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0064",
+            "name": "Aeromonas hydrophila Infection (Acute)",
+            "name_ja": "エロモナス・ハイドロフィラ急性感染症"
+          },
+          {
+            "id": "amphibian_0108",
+            "name": "Aeromonas Chronic Infection",
+            "name_ja": "エロモナス慢性感染症"
+          },
+          {
+            "id": "amphibian_0187",
+            "name": "Aeromonas Infection",
+            "name_ja": "エロモナス感染（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ammoni",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0025",
+            "name": "Ammonia Poisoning",
+            "name_ja": "アンモニア中毒"
+          },
+          {
+            "id": "amphibian_0029",
+            "name": "Ammonia Burn",
+            "name_ja": "アンモニア熱傷"
+          },
+          {
+            "id": "amphibian_0165",
+            "name": "Ammonia Toxicosis",
+            "name_ja": "アンモニア中毒（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bone",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0020",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患"
+          },
+          {
+            "id": "amphibian_0160",
+            "name": "Amphibian Metabolic Bone Disease (NSHP)",
+            "name_ja": "両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）"
+          },
+          {
+            "id": "amphibian_0178",
+            "name": "Metabolic Bone Disease (MBD)",
+            "name_ja": "代謝性骨疾患（MBD）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "burn",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0029",
+            "name": "Ammonia Burn",
+            "name_ja": "アンモニア熱傷"
+          },
+          {
+            "id": "amphibian_0130",
+            "name": "Thermal Burn (Heat Lamp)",
+            "name_ja": "熱傷（ヒートランプ）"
+          },
+          {
+            "id": "amphibian_0198",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "chlora",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0027",
+            "name": "Chlorine / Chloramine Toxicity",
+            "name_ja": "塩素・クロラミン中毒"
+          },
+          {
+            "id": "amphibian_0155",
+            "name": "Amphibian Ozone / Chloramine Toxicity (Water Treatment)",
+            "name_ja": "両生類オゾン・クロラミン中毒（水処理）"
+          },
+          {
+            "id": "amphibian_0167",
+            "name": "Chlorine/Chloramine Toxicosis",
+            "name_ja": "塩素/クロラミン中毒（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "chytri",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0000",
+            "name": "Chytridiomycosis (Bd)",
+            "name_ja": "ツボカビ症（Bd）"
+          },
+          {
+            "id": "amphibian_0001",
+            "name": "Chytridiomycosis (Bsal)",
+            "name_ja": "ツボカビ症（Bsal）"
+          },
+          {
+            "id": "amphibian_0139",
+            "name": "Dendrobatid Chytridiomycosis (Bd - Dart Frog)",
+            "name_ja": "ヤドクガエルツボカビ症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "giant",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0131",
+            "name": "Giant Salamander Skin Ulcer Disease",
+            "name_ja": "オオサンショウウオ皮膚潰瘍病"
+          },
+          {
+            "id": "amphibian_0132",
+            "name": "Giant Salamander Iridovirus Disease",
+            "name_ja": "オオサンショウウオイリドウイルス病"
+          },
+          {
+            "id": "amphibian_0156",
+            "name": "Giant Salamander Fungal Granuloma",
+            "name_ja": "オオサンショウウオ真菌性肉芽腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gill",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0055",
+            "name": "Gill Necrosis (Larval)",
+            "name_ja": "鰓壊死（幼生期）"
+          },
+          {
+            "id": "amphibian_0123",
+            "name": "Axolotl Gill Curl",
+            "name_ja": "アホロートル鰓カール"
+          },
+          {
+            "id": "amphibian_0133",
+            "name": "Cryptobranchid Gill Disease (Larval)",
+            "name_ja": "サンショウウオ科幼生鰓疾患"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0049",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "amphibian_0121",
+            "name": "Hepatitis",
+            "name_ja": "肝炎"
+          },
+          {
+            "id": "amphibian_0218",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "impact",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0036",
+            "name": "Intestinal Impaction",
+            "name_ja": "腸閉塞（腸インパクション）"
+          },
+          {
+            "id": "amphibian_0128",
+            "name": "Substrate Impaction",
+            "name_ja": "床材インパクション"
+          },
+          {
+            "id": "amphibian_0138",
+            "name": "Pacman Frog Substrate Impaction (Ceratophrys)",
+            "name_ja": "パックマンフロッグ床材誤飲性閉塞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0036",
+            "name": "Intestinal Impaction",
+            "name_ja": "腸閉塞（腸インパクション）"
+          },
+          {
+            "id": "amphibian_0041",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱"
+          },
+          {
+            "id": "amphibian_0220",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "iridov",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0011",
+            "name": "Iridovirus Infection (non-Ranavirus)",
+            "name_ja": "イリドウイルス感染症（ラナウイルス以外）"
+          },
+          {
+            "id": "amphibian_0132",
+            "name": "Giant Salamander Iridovirus Disease",
+            "name_ja": "オオサンショウウオイリドウイルス病"
+          },
+          {
+            "id": "amphibian_0185",
+            "name": "Iridovirus (Ranavirus)",
+            "name_ja": "イリドウイルス（ラナウイルス）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "metabo",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0020",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患"
+          },
+          {
+            "id": "amphibian_0160",
+            "name": "Amphibian Metabolic Bone Disease (NSHP)",
+            "name_ja": "両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）"
+          },
+          {
+            "id": "amphibian_0178",
+            "name": "Metabolic Bone Disease (MBD)",
+            "name_ja": "代謝性骨疾患（MBD）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nemato",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0013",
+            "name": "Nematode Infection",
+            "name_ja": "線虫感染症"
+          },
+          {
+            "id": "amphibian_0151",
+            "name": "Amphibian Rhabdias Pulmonary Nematodiasis",
+            "name_ja": "両生類ラブジアス肺線虫症"
+          },
+          {
+            "id": "amphibian_0163",
+            "name": "Nematode Infection (Rhabdias)",
+            "name_ja": "線虫感染（ラブディアス）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0044",
+            "name": "Neoplasia / Tumors",
+            "name_ja": "腫瘍性疾患"
+          },
+          {
+            "id": "amphibian_0173",
+            "name": "Chromatophore Neoplasia",
+            "name_ja": "色素胞腫瘍（両生類）"
+          },
+          {
+            "id": "amphibian_0218",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pacman",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0136",
+            "name": "Pacman Frog Water Edema Syndrome",
+            "name_ja": "パックマンフロッグ水浮腫症候群"
+          },
+          {
+            "id": "amphibian_0137",
+            "name": "Pacman Frog Gastric Overload Syndrome",
+            "name_ja": "パックマンフロッグ胃過負荷症候群"
+          },
+          {
+            "id": "amphibian_0138",
+            "name": "Pacman Frog Substrate Impaction (Ceratophrys)",
+            "name_ja": "パックマンフロッグ床材誤飲性閉塞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "short",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0043",
+            "name": "Short Body Syndrome (SBS)",
+            "name_ja": "ショートボディ症候群"
+          },
+          {
+            "id": "amphibian_0142",
+            "name": "Short Tongue Syndrome (Hypovitaminosis A - Anuran)",
+            "name_ja": "短舌症候群（低ビタミンA症）"
+          },
+          {
+            "id": "amphibian_0171",
+            "name": "Short Body Disease",
+            "name_ja": "短体病（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "skin",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0131",
+            "name": "Giant Salamander Skin Ulcer Disease",
+            "name_ja": "オオサンショウウオ皮膚潰瘍病"
+          },
+          {
+            "id": "amphibian_0145",
+            "name": "Xenopus Pseudocapillaroides Skin Infection",
+            "name_ja": "アフリカツメガエル皮膚線虫症"
+          },
+          {
+            "id": "amphibian_0148",
+            "name": "Bsal Ulcerative Skin Disease (Fire Salamander)",
+            "name_ja": "Bsal潰瘍性皮膚疾患（ファイアサラマンダー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stres",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0030",
+            "name": "Thermal Stress (Hyperthermia)",
+            "name_ja": "温熱ストレス（高体温症）"
+          },
+          {
+            "id": "amphibian_0031",
+            "name": "Thermal Stress (Hypothermia)",
+            "name_ja": "低温ストレス（低体温症）"
+          },
+          {
+            "id": "amphibian_0134",
+            "name": "Goliath Frog Stress Syndrome",
+            "name_ja": "ゴライアスガエルストレス症候群"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tail",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0054",
+            "name": "Tail Rot / Necrotic Dermatitis",
+            "name_ja": "尾腐れ・壊死性皮膚炎"
+          },
+          {
+            "id": "amphibian_0204",
+            "name": "Tail Necrosis",
+            "name_ja": "尾壊死（両生類）"
+          },
+          {
+            "id": "amphibian_0242",
+            "name": "Tail Amputation",
+            "name_ja": "尾切断（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0023",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "amphibian_0095",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症"
+          },
+          {
+            "id": "amphibian_0253",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（両生類）"
+          }
+        ]
+      }
+    ],
+    "family_cluster_count": 37
+  },
+  "T102": {
+    "detector": "T102",
+    "total_records": 258,
+    "flagged_count": 0,
+    "flags": []
+  },
+  "T104": {
+    "detector": "T104",
+    "total_records": 258,
+    "empty_count": 0,
+    "heading_only_count": 30,
+    "with_dosage_count": 228,
+    "empty": [],
+    "heading_only": [
+      {
+        "id": "amphibian_0016",
+        "name": "Myxosporean Infection",
+        "name_ja": "粘液胞子虫感染症",
+        "treatment_ja_len": 167,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0042",
+        "name": "Spindly Leg Syndrome",
+        "name_ja": "スピンドリーレッグ症候群",
+        "treatment_ja_len": 888,
+        "treatment_len": 2170,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0074",
+        "name": "Dermocystidium Infection",
+        "name_ja": "デルモシスチジウム感染症",
+        "treatment_ja_len": 168,
+        "treatment_len": 137,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0078",
+        "name": "Oxyurid (Pinworm) Infection",
+        "name_ja": "蟯虫感染症",
+        "treatment_ja_len": 164,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0080",
+        "name": "Strongyloides Infection",
+        "name_ja": "糞線虫症",
+        "treatment_ja_len": 163,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0081",
+        "name": "Acanthocephalan Infection",
+        "name_ja": "鉤頭虫感染症",
+        "treatment_ja_len": 165,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0102",
+        "name": "Zinc Toxicosis",
+        "name_ja": "亜鉛中毒",
+        "treatment_ja_len": 196,
+        "treatment_len": 159,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0106",
+        "name": "High Nitrate Toxicity",
+        "name_ja": "高硝酸塩毒性",
+        "treatment_ja_len": 198,
+        "treatment_len": 159,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0112",
+        "name": "Enteric Flagellate Infection",
+        "name_ja": "腸管鞭毛虫感染症",
+        "treatment_ja_len": 164,
+        "treatment_len": 137,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0133",
+        "name": "Cryptobranchid Gill Disease (Larval)",
+        "name_ja": "サンショウウオ科幼生鰓疾患",
+        "treatment_ja_len": 102,
+        "treatment_len": 239,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0138",
+        "name": "Pacman Frog Substrate Impaction (Ceratophrys)",
+        "name_ja": "パックマンフロッグ床材誤飲性閉塞",
+        "treatment_ja_len": 95,
+        "treatment_len": 268,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0140",
+        "name": "Dart Frog Spindly Leg Syndrome (SLS)",
+        "name_ja": "ヤドクガエルスピンドリーレッグ症候群",
+        "treatment_ja_len": 85,
+        "treatment_len": 220,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0142",
+        "name": "Short Tongue Syndrome (Hypovitaminosis A - Anuran)",
+        "name_ja": "短舌症候群（低ビタミンA症）",
+        "treatment_ja_len": 130,
+        "treatment_len": 308,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0147",
+        "name": "Amphibian Collagenoma",
+        "name_ja": "両生類コラゲノーマ（膠原線維腫）",
+        "treatment_ja_len": 70,
+        "treatment_len": 201,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0150",
+        "name": "Amphibian Chromomycosis (Pigmented Fungal Infection)",
+        "name_ja": "両生類クロモミコーシス（色素性真菌感染症）",
+        "treatment_ja_len": 120,
+        "treatment_len": 272,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0154",
+        "name": "Amphibian Ventral Dermal Scald (Husbandry)",
+        "name_ja": "両生類腹側皮膚熱傷（飼育管理）",
+        "treatment_ja_len": 92,
+        "treatment_len": 227,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0156",
+        "name": "Giant Salamander Fungal Granuloma",
+        "name_ja": "オオサンショウウオ真菌性肉芽腫",
+        "treatment_ja_len": 96,
+        "treatment_len": 235,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0157",
+        "name": "Cane Toad / Large Anuran Obesity Syndrome",
+        "name_ja": "大型無尾目肥満症候群",
+        "treatment_ja_len": 123,
+        "treatment_len": 312,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0158",
+        "name": "Hellbender Decline Syndrome",
+        "name_ja": "ヘルベンダー衰退症候群",
+        "treatment_ja_len": 103,
+        "treatment_len": 262,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0164",
+        "name": "Ichthyophonus Infection",
+        "name_ja": "イクチオホヌス感染（両生類）",
+        "treatment_ja_len": 179,
+        "treatment_len": 381,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0165",
+        "name": "Ammonia Toxicosis",
+        "name_ja": "アンモニア中毒（両生類）",
+        "treatment_ja_len": 393,
+        "treatment_len": 909,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0167",
+        "name": "Chlorine/Chloramine Toxicosis",
+        "name_ja": "塩素/クロラミン中毒（両生類）",
+        "treatment_ja_len": 432,
+        "treatment_len": 972,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0168",
+        "name": "pH Imbalance Disease",
+        "name_ja": "pH不均衡疾患（両生類）",
+        "treatment_ja_len": 209,
+        "treatment_len": 428,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0169",
+        "name": "Water Quality Disease",
+        "name_ja": "水質関連疾患（両生類）",
+        "treatment_ja_len": 222,
+        "treatment_len": 514,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0170",
+        "name": "Thermal Shock",
+        "name_ja": "温度ショック（両生類）",
+        "treatment_ja_len": 197,
+        "treatment_len": 460,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0171",
+        "name": "Short Body Disease",
+        "name_ja": "短体病（両生類）",
+        "treatment_ja_len": 167,
+        "treatment_len": 339,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0176",
+        "name": "Toxin Absorption Disease",
+        "name_ja": "毒素吸収疾患（両生類）",
+        "treatment_ja_len": 226,
+        "treatment_len": 597,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0209",
+        "name": "Urolithiasis",
+        "name_ja": "尿路結石症（両生類）",
+        "treatment_ja_len": 166,
+        "treatment_len": 283,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0218",
+        "name": "Hepatic Neoplasia",
+        "name_ja": "肝腫瘍（両生類）",
+        "treatment_ja_len": 216,
+        "treatment_len": 181,
+        "has_dosage": false
+      },
+      {
+        "id": "amphibian_0223",
+        "name": "Anorexia (Behavioral)",
+        "name_ja": "拒食（行動性）（両生類）",
+        "treatment_ja_len": 477,
+        "treatment_len": 1139,
+        "has_dosage": false
+      }
+    ]
+  },
+  "T108": {
+    "detector": "T108",
+    "total_records": 258,
+    "drug_available": 610,
+    "ref_keys_available": 30,
+    "drug_mismatch_count": 220,
+    "citation_mismatch_count": 7,
+    "drug_mismatches": [
+      {
+        "id": "amphibian_0000",
+        "name": "Chytridiomycosis (Bd)",
+        "name_ja": "ツボカビ症（Bd）",
+        "drugs": [
+          {
+            "drug": "Chloramphenicol",
+            "drug_ja": "クロラムフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Terbinafine",
+            "drug_ja": "テルビナフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0001",
+        "name": "Chytridiomycosis (Bsal)",
+        "name_ja": "ツボカビ症（Bsal）",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0002",
+        "name": "Saprolegniasis",
+        "name_ja": "ミズカビ症",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Fluconazole",
+            "drug_ja": "フルコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amphotericin B",
+            "drug_ja": "アムホテリシンB",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0003",
+        "name": "Mucormycosis",
+        "name_ja": "ムコール症",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Fluconazole",
+            "drug_ja": "フルコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Terbinafine",
+            "drug_ja": "テルビナフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amphotericin B",
+            "drug_ja": "アムホテリシンB",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clotrimazole",
+            "drug_ja": "クロトリマゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Posaconazole",
+            "drug_ja": "ポサコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0004",
+        "name": "Chromomycosis",
+        "name_ja": "クロモミコーシス（黒色真菌症）",
+        "drugs": [
+          {
+            "drug": "Amphotericin B",
+            "drug_ja": "アムホテリシンB",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0005",
+        "name": "Red Leg Syndrome",
+        "name_ja": "レッドレッグ症候群",
+        "drugs": [
+          {
+            "drug": "Chloramphenicol",
+            "drug_ja": "クロラムフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Potassium Permanganate",
+            "drug_ja": "過マンガン酸カリウム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Nitrofurazone",
+            "drug_ja": "ニトロフラゾン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0006",
+        "name": "Bacterial Dermatitis",
+        "name_ja": "細菌性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cephalexin",
+            "drug_ja": "セファレキシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clindamycin",
+            "drug_ja": "クリンダマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chloramphenicol",
+            "drug_ja": "クロラムフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mupirocin",
+            "drug_ja": "ムピロシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0007",
+        "name": "Mycobacteriosis",
+        "name_ja": "マイコバクテリウム症",
+        "drugs": [
+          {
+            "drug": "Rifampin",
+            "drug_ja": "リファンピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clarithromycin",
+            "drug_ja": "クラリスロマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0008",
+        "name": "Septicemia",
+        "name_ja": "敗血症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0009",
+        "name": "Chlamydiosis",
+        "name_ja": "クラミジア症",
+        "drugs": [
+          {
+            "drug": "Azithromycin",
+            "drug_ja": "アジスロマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Oxytetracycline",
+            "drug_ja": "オキシテトラサイクリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0010",
+        "name": "Ranavirus Infection",
+        "name_ja": "ラナウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Acyclovir (Aciclovir)",
+            "drug_ja": "アシクロビル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0011",
+        "name": "Iridovirus Infection (non-Ranavirus)",
+        "name_ja": "イリドウイルス感染症（ラナウイルス以外）",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Acyclovir (Aciclovir)",
+            "drug_ja": "アシクロビル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0012",
+        "name": "Herpesvirus Infection",
+        "name_ja": "ヘルペスウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Acyclovir (Aciclovir)",
+            "drug_ja": "アシクロビル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0013",
+        "name": "Nematode Infection",
+        "name_ja": "線虫感染症",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Moxidectin",
+            "drug_ja": "モキシデクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Pyrantel Pamoate",
+            "drug_ja": "ピランテルパモ酸塩",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Pyrantel Pamoate",
+            "drug_ja": "ピランテルパモ酸塩",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0015",
+        "name": "Coccidiosis",
+        "name_ja": "コクシジウム症",
+        "drugs": [
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadimethoxine",
+            "drug_ja": "スルファジメトキシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ponazuril",
+            "drug_ja": "ポナズリル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0017",
+        "name": "Ichthyophthirius (White Spot Disease)",
+        "name_ja": "白点病（イクチオフチリウス症）",
+        "drugs": [
+          {
+            "drug": "Malachite Green",
+            "drug_ja": "マラカイトグリーン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Formalin (37% Formaldehyde)",
+            "drug_ja": "ホルマリン（37%ホルムアルデヒド）",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Copper Sulfate",
+            "drug_ja": "硫酸銅",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0018",
+        "name": "Capillariasis",
+        "name_ja": "毛細線虫症",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0019",
+        "name": "Leech Infestation",
+        "name_ja": "ヒル寄生症",
+        "drugs": [
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0020",
+        "name": "Metabolic Bone Disease",
+        "name_ja": "代謝性骨疾患",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0021",
+        "name": "Hypovitaminosis A",
+        "name_ja": "ビタミンA欠乏症",
+        "drugs": [
+          {
+            "drug": "Chloramphenicol",
+            "drug_ja": "クロラムフェニコール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0022",
+        "name": "Calcium Deficiency (Hypocalcemia)",
+        "name_ja": "カルシウム欠乏症（低カルシウム血症）",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Midazolam",
+            "drug_ja": "ミダゾラム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0023",
+        "name": "Vitamin D3 Deficiency",
+        "name_ja": "ビタミンD3欠乏症",
+        "drugs": [
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Glubionate Syrup",
+            "drug_ja": "グルビオン酸カルシウムシロップ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0024",
+        "name": "Thiamine Deficiency",
+        "name_ja": "チアミン（ビタミンB1）欠乏症",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Midazolam",
+            "drug_ja": "ミダゾラム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0025",
+        "name": "Ammonia Poisoning",
+        "name_ja": "アンモニア中毒",
+        "drugs": [
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0026",
+        "name": "Nitrite Poisoning",
+        "name_ja": "亜硝酸中毒",
+        "drugs": [
+          {
+            "drug": "Methylene Blue",
+            "drug_ja": "メチレンブルー",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0027",
+        "name": "Chlorine / Chloramine Toxicity",
+        "name_ja": "塩素・クロラミン中毒",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0028",
+        "name": "Chemical Toxicity (Pesticides/Metals)",
+        "name_ja": "化学物質中毒（農薬・重金属）",
+        "drugs": [
+          {
+            "drug": "Midazolam",
+            "drug_ja": "ミダゾラム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atropine",
+            "drug_ja": "アトロピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Methocarbamol",
+            "drug_ja": "メトカルバモール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0029",
+        "name": "Ammonia Burn",
+        "name_ja": "アンモニア熱傷",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0030",
+        "name": "Thermal Stress (Hyperthermia)",
+        "name_ja": "温熱ストレス（高体温症）",
+        "drugs": [
+          {
+            "drug": "Midazolam",
+            "drug_ja": "ミダゾラム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0032",
+        "name": "Dehydration",
+        "name_ja": "脱水症",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0033",
+        "name": "Trauma / Abrasions",
+        "name_ja": "外傷・擦傷",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tramadol",
+            "drug_ja": "トラマドール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Polymyxin B",
+            "drug_ja": "ポリミキシンB",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lidocaine",
+            "drug_ja": "リドカイン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0034",
+        "name": "Edema / Hydrops (Dropsy)",
+        "name_ja": "浮腫・水腫（腹水症）",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0035",
+        "name": "Gas Bubble Disease",
+        "name_ja": "ガス泡病",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0036",
+        "name": "Intestinal Impaction",
+        "name_ja": "腸閉塞（腸インパクション）",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0037",
+        "name": "Foreign Body Ingestion",
+        "name_ja": "異物摂取",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0038",
+        "name": "Gastric Overload",
+        "name_ja": "胃過負荷",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0039",
+        "name": "Cloacal Prolapse",
+        "name_ja": "総排泄腔脱",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lidocaine",
+            "drug_ja": "リドカイン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0040",
+        "name": "Gastric Prolapse",
+        "name_ja": "胃脱",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sodium Bicarbonate",
+            "drug_ja": "炭酸水素ナトリウム（重曹）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0041",
+        "name": "Intestinal Prolapse",
+        "name_ja": "腸脱",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0043",
+        "name": "Short Body Syndrome (SBS)",
+        "name_ja": "ショートボディ症候群",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0044",
+        "name": "Neoplasia / Tumors",
+        "name_ja": "腫瘍性疾患",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0045",
+        "name": "Corneal Lipidosis",
+        "name_ja": "角膜脂質症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0047",
+        "name": "Periorbital Edema",
+        "name_ja": "眼窩周囲浮腫",
+        "drugs": [
+          {
+            "drug": "Gentamicin",
+            "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0048",
+        "name": "Renal Failure",
+        "name_ja": "腎不全",
+        "drugs": [
+          {
+            "drug": "Aluminum Hydroxide",
+            "drug_ja": "水酸化アルミニウム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0049",
+        "name": "Hepatic Lipidosis",
+        "name_ja": "肝リピドーシス（脂肪肝）",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Neomycin",
+            "drug_ja": "ネオマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silymarin (Milk Thistle)",
+            "drug_ja": "シリマリン（マリアアザミ）",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "S-Adenosylmethionine (SAMe)",
+            "drug_ja": "S-アデノシルメチオニン（SAMe）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0050",
+        "name": "Dysecdysis (Abnormal Shedding)",
+        "name_ja": "脱皮不全",
+        "drugs": [
+          {
+            "drug": "Chloramphenicol",
+            "drug_ja": "クロラムフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Bacitracin",
+            "drug_ja": "バシトラシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0051",
+        "name": "Spring Disease (Post-hibernation Syndrome)",
+        "name_ja": "春病（冬眠後症候群）",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0052",
+        "name": "Anorexia (Multifactorial)",
+        "name_ja": "食欲不振（多因子性）",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cyproheptadine",
+            "drug_ja": "シプロヘプタジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cyproheptadine",
+            "drug_ja": "シプロヘプタジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0053",
+        "name": "Obesity",
+        "name_ja": "肥満症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0054",
+        "name": "Tail Rot / Necrotic Dermatitis",
+        "name_ja": "尾腐れ・壊死性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Trimethoprim-Sulfamethoxazole",
+            "drug_ja": "トリメトプリム・スルファメトキサゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0055",
+        "name": "Gill Necrosis (Larval)",
+        "name_ja": "鰓壊死（幼生期）",
+        "drugs": [
+          {
+            "drug": "Trimethoprim-Sulfamethoxazole",
+            "drug_ja": "トリメトプリム・スルファメトキサゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Florfenicol",
+            "drug_ja": "フロルフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Oxytetracycline",
+            "drug_ja": "オキシテトラサイクリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Malachite Green",
+            "drug_ja": "マラカイトグリーン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0056",
+        "name": "Batrachochytrium salamandrivorans (Bsal) - Systemic",
+        "name_ja": "バトラコキトリウム・サラマンドリボランス全身型",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0057",
+        "name": "Perkinsea Infection",
+        "name_ja": "パーキンシア感染症",
+        "drugs": [
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ponazuril",
+            "drug_ja": "ポナズリル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0058",
+        "name": "Lucke Tumor Herpesvirus (Renal Carcinoma)",
+        "name_ja": "ルッケ腫瘍ヘルペスウイルス（腎癌）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Acyclovir (Aciclovir)",
+            "drug_ja": "アシクロビル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0059",
+        "name": "Frog Virus 3 (FV3)",
+        "name_ja": "カエルウイルス3型（FV3）",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0060",
+        "name": "Ambystoma Tigrinum Virus (ATV)",
+        "name_ja": "タイガーサラマンダーウイルス",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Acyclovir (Aciclovir)",
+            "drug_ja": "アシクロビル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0061",
+        "name": "Calicivirus Infection",
+        "name_ja": "カリシウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Acyclovir (Aciclovir)",
+            "drug_ja": "アシクロビル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0062",
+        "name": "Adenovirus Infection",
+        "name_ja": "アデノウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0063",
+        "name": "Papillomavirus Infection",
+        "name_ja": "パピローマウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0064",
+        "name": "Aeromonas hydrophila Infection (Acute)",
+        "name_ja": "エロモナス・ハイドロフィラ急性感染症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Dexamethasone",
+            "drug_ja": "デキサメタゾン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0065",
+        "name": "Pseudomonas Infection",
+        "name_ja": "緑膿菌感染症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mupirocin",
+            "drug_ja": "ムピロシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meropenem",
+            "drug_ja": "メロペネム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0066",
+        "name": "Citrobacter Infection",
+        "name_ja": "シトロバクター感染症",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Trimethoprim-Sulfamethoxazole",
+            "drug_ja": "トリメトプリム・スルファメトキサゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meropenem",
+            "drug_ja": "メロペネム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0067",
+        "name": "Flavobacterium Infection",
+        "name_ja": "フラボバクテリウム感染症",
+        "drugs": [
+          {
+            "drug": "Trimethoprim-Sulfamethoxazole",
+            "drug_ja": "トリメトプリム・スルファメトキサゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Florfenicol",
+            "drug_ja": "フロルフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Oxytetracycline",
+            "drug_ja": "オキシテトラサイクリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Potassium Permanganate",
+            "drug_ja": "過マンガン酸カリウム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0068",
+        "name": "Salmonellosis",
+        "name_ja": "サルモネラ症",
+        "drugs": [
+          {
+            "drug": "Trimethoprim-Sulfamethoxazole",
+            "drug_ja": "トリメトプリム・スルファメトキサゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0069",
+        "name": "Elizabethkingia meningoseptica Infection",
+        "name_ja": "エリザベスキンギア感染症",
+        "drugs": [
+          {
+            "drug": "Trimethoprim-Sulfamethoxazole",
+            "drug_ja": "トリメトプリム・スルファメトキサゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Rifampin",
+            "drug_ja": "リファンピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Vancomycin",
+            "drug_ja": "バンコマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0070",
+        "name": "Erysipelas",
+        "name_ja": "丹毒",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Gentamicin",
+            "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftiofur",
+            "drug_ja": "セフチオフル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Erythromycin",
+            "drug_ja": "エリスロマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Vancomycin",
+            "drug_ja": "バンコマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0071",
+        "name": "Basidiobolus Infection",
+        "name_ja": "バシディオボルス感染症",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0072",
+        "name": "Fusarium Infection",
+        "name_ja": "フザリウム感染症",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0073",
+        "name": "Aspergillosis",
+        "name_ja": "アスペルギルス症",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Fluconazole",
+            "drug_ja": "フルコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Terbinafine",
+            "drug_ja": "テルビナフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amphotericin B",
+            "drug_ja": "アムホテリシンB",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Miconazole",
+            "drug_ja": "ミコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clotrimazole",
+            "drug_ja": "クロトリマゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0075",
+        "name": "Trypanosomiasis",
+        "name_ja": "トリパノソーマ症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0076",
+        "name": "Myxozoan Infection",
+        "name_ja": "粘液胞子虫感染症",
+        "drugs": [
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Methylene Blue",
+            "drug_ja": "メチレンブルー",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0077",
+        "name": "Trematode Encystment (Heavy Burden)",
+        "name_ja": "吸虫被嚢（重度寄生）",
+        "drugs": [
+          {
+            "drug": "Copper Sulfate",
+            "drug_ja": "硫酸銅",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0079",
+        "name": "Rhabdias Lungworm",
+        "name_ja": "ラブディアス肺虫症",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Moxidectin",
+            "drug_ja": "モキシデクチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0082",
+        "name": "Mite Infestation (Hannemania)",
+        "name_ja": "ダニ寄生症（ハンネマニア）",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0083",
+        "name": "Myiasis (Fly Strike)",
+        "name_ja": "蝿蛆症",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Nitenpyram (Capstar)",
+            "drug_ja": "ニテンピラム（キャプスター）",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0084",
+        "name": "Tick Infestation",
+        "name_ja": "ダニ寄生症（マダニ）",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Neomycin",
+            "drug_ja": "ネオマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0085",
+        "name": "Fibrosarcoma",
+        "name_ja": "線維肉腫",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0086",
+        "name": "Squamous Cell Carcinoma",
+        "name_ja": "扁平上皮癌",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0087",
+        "name": "Lymphoma",
+        "name_ja": "リンパ腫",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0088",
+        "name": "Melanoma",
+        "name_ja": "メラノーマ",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0089",
+        "name": "Hepatocellular Carcinoma",
+        "name_ja": "肝細胞癌",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0090",
+        "name": "Renal Adenocarcinoma",
+        "name_ja": "腎腺癌",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0091",
+        "name": "Osteosarcoma",
+        "name_ja": "骨肉腫",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0092",
+        "name": "Limb Fractures / Trauma",
+        "name_ja": "四肢骨折・外傷",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Methadone",
+            "drug_ja": "メサドン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0093",
+        "name": "Spinal Injury / Vertebral Fracture",
+        "name_ja": "脊椎損傷・椎体骨折",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lidocaine",
+            "drug_ja": "リドカイン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0094",
+        "name": "Nutritional Secondary Hyperparathyroidism",
+        "name_ja": "栄養性二次性上皮小体機能亢進症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0095",
+        "name": "Vitamin E Deficiency",
+        "name_ja": "ビタミンE欠乏症",
+        "drugs": [
+          {
+            "drug": "Vitamin E (Alpha-tocopherol)",
+            "drug_ja": "ビタミンE（α-トコフェロール）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0096",
+        "name": "Biotin Deficiency",
+        "name_ja": "ビオチン欠乏症",
+        "drugs": [
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0097",
+        "name": "Iodine Deficiency (Goiter)",
+        "name_ja": "ヨウ素欠乏症（甲状腺腫）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0098",
+        "name": "Protein Deficiency",
+        "name_ja": "タンパク質欠乏症",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0099",
+        "name": "Hypoglycemia",
+        "name_ja": "低血糖症",
+        "drugs": [
+          {
+            "drug": "Midazolam",
+            "drug_ja": "ミダゾラム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0100",
+        "name": "UV Light Deficiency",
+        "name_ja": "紫外線不足症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0101",
+        "name": "Lead Toxicosis",
+        "name_ja": "鉛中毒",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Midazolam",
+            "drug_ja": "ミダゾラム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0102",
+        "name": "Zinc Toxicosis",
+        "name_ja": "亜鉛中毒",
+        "drugs": [
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0103",
+        "name": "Copper Toxicosis",
+        "name_ja": "銅中毒",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Copper Sulfate",
+            "drug_ja": "硫酸銅",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0104",
+        "name": "pH Shock",
+        "name_ja": "pHショック",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0105",
+        "name": "Low Dissolved Oxygen",
+        "name_ja": "溶存酸素低下症",
+        "drugs": [
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0106",
+        "name": "High Nitrate Toxicity",
+        "name_ja": "高硝酸塩毒性",
+        "drugs": [
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0107",
+        "name": "Columnaris Disease (Flavobacterium columnare)",
+        "name_ja": "カラムナリス病",
+        "drugs": [
+          {
+            "drug": "Florfenicol",
+            "drug_ja": "フロルフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Oxytetracycline",
+            "drug_ja": "オキシテトラサイクリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0108",
+        "name": "Aeromonas Chronic Infection",
+        "name_ja": "エロモナス慢性感染症",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0109",
+        "name": "Oodinium (Velvet Disease)",
+        "name_ja": "ウーディニウム症（ベルベット病）",
+        "drugs": [
+          {
+            "drug": "Copper Sulfate",
+            "drug_ja": "硫酸銅",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0111",
+        "name": "Planarian Infestation",
+        "name_ja": "プラナリア寄生",
+        "drugs": [
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0113",
+        "name": "Gastric Torsion",
+        "name_ja": "胃捻転",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sodium Bicarbonate",
+            "drug_ja": "炭酸水素ナトリウム（重曹）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0114",
+        "name": "Reproductive Failure / Egg Retention",
+        "name_ja": "繁殖障害・卵停滞",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lidocaine",
+            "drug_ja": "リドカイン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0115",
+        "name": "Hemolytic Anemia",
+        "name_ja": "溶血性貧血",
+        "drugs": [
+          {
+            "drug": "Trimethoprim-Sulfamethoxazole",
+            "drug_ja": "トリメトプリム・スルファメトキサゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Dexamethasone",
+            "drug_ja": "デキサメタゾン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0116",
+        "name": "Nephrocalcinosis",
+        "name_ja": "腎石灰沈着症",
+        "drugs": [
+          {
+            "drug": "Gentamicin",
+            "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Aluminum Hydroxide",
+            "drug_ja": "水酸化アルミニウム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Erythropoietin (EPO)",
+            "drug_ja": "エリスロポエチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcitriol",
+            "drug_ja": "カルシトリオール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0117",
+        "name": "Photosensitization",
+        "name_ja": "光線過敏症",
+        "drugs": [
+          {
+            "drug": "Gentamicin",
+            "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0118",
+        "name": "Anasarca (Generalized Edema / Bloat)",
+        "name_ja": "全身浮腫・膨満",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0119",
+        "name": "Organ Prolapse (Gastric/Intestinal/Cloacal)",
+        "name_ja": "臓器脱（胃・腸・総排泄腔）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sodium Bicarbonate",
+            "drug_ja": "炭酸水素ナトリウム（重曹）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0120",
+        "name": "Congestive Heart Failure",
+        "name_ja": "うっ血性心不全",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Spironolactone",
+            "drug_ja": "スピロノラクトン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0121",
+        "name": "Hepatitis",
+        "name_ja": "肝炎",
+        "drugs": [
+          {
+            "drug": "Rifampin",
+            "drug_ja": "リファンピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Neomycin",
+            "drug_ja": "ネオマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clarithromycin",
+            "drug_ja": "クラリスロマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0122",
+        "name": "Pancreatitis",
+        "name_ja": "膵炎",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ondansetron",
+            "drug_ja": "オンダンセトロン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lidocaine",
+            "drug_ja": "リドカイン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0123",
+        "name": "Axolotl Gill Curl",
+        "name_ja": "アホロートル鰓カール",
+        "drugs": [
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0124",
+        "name": "Axolotl Floating Disorder",
+        "name_ja": "アホロートル浮遊障害",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0125",
+        "name": "Limb Deformity (Developmental)",
+        "name_ja": "肢奇形（発育性）",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0126",
+        "name": "Disseminated Granulomatous Disease",
+        "name_ja": "播種性肉芽腫性疾患",
+        "drugs": [
+          {
+            "drug": "Rifampin",
+            "drug_ja": "リファンピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amphotericin B",
+            "drug_ja": "アムホテリシンB",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clarithromycin",
+            "drug_ja": "クラリスロマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0127",
+        "name": "Chronic Dehydration (Terrestrial Species)",
+        "name_ja": "慢性脱水（陸生種）",
+        "drugs": [
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0128",
+        "name": "Substrate Impaction",
+        "name_ja": "床材インパクション",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Isoflurane",
+            "drug_ja": "イソフルラン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0129",
+        "name": "Metamorphosis Failure (Neoteny Complications)",
+        "name_ja": "変態障害（幼形成熟合併症）",
+        "drugs": [
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0130",
+        "name": "Thermal Burn (Heat Lamp)",
+        "name_ja": "熱傷（ヒートランプ）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lidocaine",
+            "drug_ja": "リドカイン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0131",
+        "name": "Giant Salamander Skin Ulcer Disease",
+        "name_ja": "オオサンショウウオ皮膚潰瘍病",
+        "drugs": [
+          {
+            "drug": "Gentamicin",
+            "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0132",
+        "name": "Giant Salamander Iridovirus Disease",
+        "name_ja": "オオサンショウウオイリドウイルス病",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0133",
+        "name": "Cryptobranchid Gill Disease (Larval)",
+        "name_ja": "サンショウウオ科幼生鰓疾患",
+        "drugs": [
+          {
+            "drug": "Oxytetracycline",
+            "drug_ja": "オキシテトラサイクリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Methylene Blue",
+            "drug_ja": "メチレンブルー",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0134",
+        "name": "Goliath Frog Stress Syndrome",
+        "name_ja": "ゴライアスガエルストレス症候群",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0135",
+        "name": "Goliath Frog Filariasis",
+        "name_ja": "ゴライアスガエルフィラリア症",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0137",
+        "name": "Pacman Frog Gastric Overload Syndrome",
+        "name_ja": "パックマンフロッグ胃過負荷症候群",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0139",
+        "name": "Dendrobatid Chytridiomycosis (Bd - Dart Frog)",
+        "name_ja": "ヤドクガエルツボカビ症",
+        "drugs": [
+          {
+            "drug": "Chloramphenicol",
+            "drug_ja": "クロラムフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Terbinafine",
+            "drug_ja": "テルビナフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0141",
+        "name": "Dart Frog Enteric Protozoal Infection",
+        "name_ja": "ヤドクガエル腸管原虫感染症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0143",
+        "name": "Hypervitaminosis A (Vitamin A Toxicity)",
+        "name_ja": "ビタミンA過剰症",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0144",
+        "name": "Xenopus Dropsy (Balloon Frog Syndrome)",
+        "name_ja": "アフリカツメガエル水腫症（バルーンフロッグ症候群）",
+        "drugs": [
+          {
+            "drug": "Trimethoprim-Sulfamethoxazole",
+            "drug_ja": "トリメトプリム・スルファメトキサゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0145",
+        "name": "Xenopus Pseudocapillaroides Skin Infection",
+        "name_ja": "アフリカツメガエル皮膚線虫症",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0148",
+        "name": "Bsal Ulcerative Skin Disease (Fire Salamander)",
+        "name_ja": "Bsal潰瘍性皮膚疾患（ファイアサラマンダー）",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0150",
+        "name": "Amphibian Chromomycosis (Pigmented Fungal Infection)",
+        "name_ja": "両生類クロモミコーシス（色素性真菌感染症）",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0151",
+        "name": "Amphibian Rhabdias Pulmonary Nematodiasis",
+        "name_ja": "両生類ラブジアス肺線虫症",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0152",
+        "name": "Amphibian Elizabethkingia Meningoencephalitis",
+        "name_ja": "両生類エリザベスキンギア髄膜脳炎",
+        "drugs": [
+          {
+            "drug": "Trimethoprim-Sulfamethoxazole",
+            "drug_ja": "トリメトプリム・スルファメトキサゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chloramphenicol",
+            "drug_ja": "クロラムフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Gentamicin",
+            "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Rifampin",
+            "drug_ja": "リファンピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mannitol",
+            "drug_ja": "マンニトール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Minocycline",
+            "drug_ja": "ミノサイクリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0153",
+        "name": "Amphibian Chlamydiosis",
+        "name_ja": "両生類クラミジア症",
+        "drugs": [
+          {
+            "drug": "Oxytetracycline",
+            "drug_ja": "オキシテトラサイクリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0154",
+        "name": "Amphibian Ventral Dermal Scald (Husbandry)",
+        "name_ja": "両生類腹側皮膚熱傷（飼育管理）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0155",
+        "name": "Amphibian Ozone / Chloramine Toxicity (Water Treatment)",
+        "name_ja": "両生類オゾン・クロラミン中毒（水処理）",
+        "drugs": [
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Methylene Blue",
+            "drug_ja": "メチレンブルー",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0156",
+        "name": "Giant Salamander Fungal Granuloma",
+        "name_ja": "オオサンショウウオ真菌性肉芽腫",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0158",
+        "name": "Hellbender Decline Syndrome",
+        "name_ja": "ヘルベンダー衰退症候群",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0159",
+        "name": "Amphibian Mycobacteriosis (Chronic Wasting)",
+        "name_ja": "両生類マイコバクテリウム症（慢性消耗性）",
+        "drugs": [
+          {
+            "drug": "Rifampin",
+            "drug_ja": "リファンピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clarithromycin",
+            "drug_ja": "クラリスロマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0160",
+        "name": "Amphibian Metabolic Bone Disease (NSHP)",
+        "name_ja": "両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）",
+        "drugs": [
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0161",
+        "name": "Batrachochytrium salamandrivorans (Bsal)",
+        "name_ja": "Bsal感染症（両生類）",
+        "drugs": [
+          {
+            "drug": "Terbinafine",
+            "drug_ja": "テルビナフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0162",
+        "name": "Saprolegnia Infection",
+        "name_ja": "サプロレグニア感染（両生類）",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Methylene Blue",
+            "drug_ja": "メチレンブルー",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Malachite Green",
+            "drug_ja": "マラカイトグリーン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0163",
+        "name": "Nematode Infection (Rhabdias)",
+        "name_ja": "線虫感染（ラブディアス）（両生類）",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0164",
+        "name": "Ichthyophonus Infection",
+        "name_ja": "イクチオホヌス感染（両生類）",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Malachite Green",
+            "drug_ja": "マラカイトグリーン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0166",
+        "name": "Nitrite/Nitrate Toxicosis",
+        "name_ja": "亜硝酸/硝酸中毒（両生類）",
+        "drugs": [
+          {
+            "drug": "Methylene Blue",
+            "drug_ja": "メチレンブルー",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0167",
+        "name": "Chlorine/Chloramine Toxicosis",
+        "name_ja": "塩素/クロラミン中毒（両生類）",
+        "drugs": [
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0173",
+        "name": "Chromatophore Neoplasia",
+        "name_ja": "色素胞腫瘍（両生類）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0175",
+        "name": "Edema Syndrome",
+        "name_ja": "浮腫症候群（両生類）",
+        "drugs": [
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0176",
+        "name": "Toxin Absorption Disease",
+        "name_ja": "毒素吸収疾患（両生類）",
+        "drugs": [
+          {
+            "drug": "Midazolam",
+            "drug_ja": "ミダゾラム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0177",
+        "name": "Ossification Disorder",
+        "name_ja": "骨化障害（両生類）",
+        "drugs": [
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0178",
+        "name": "Metabolic Bone Disease (MBD)",
+        "name_ja": "代謝性骨疾患（MBD）（両生類）",
+        "drugs": [
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0179",
+        "name": "Respiratory Infection",
+        "name_ja": "呼吸器感染症（両生類）",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0180",
+        "name": "Stomatitis (Mouth Rot)",
+        "name_ja": "口内炎（マウスロット）（両生類）",
+        "drugs": [
+          {
+            "drug": "Gentamicin",
+            "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tramadol",
+            "drug_ja": "トラマドール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Nitrofurazone",
+            "drug_ja": "ニトロフラゾン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0181",
+        "name": "Inclusion Body Disease (IBD)",
+        "name_ja": "封入体病（IBD）（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0182",
+        "name": "Cryptosporidiosis",
+        "name_ja": "クリプトスポリジウム症（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0183",
+        "name": "Paramyxovirus",
+        "name_ja": "パラミクソウイルス（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0184",
+        "name": "Nidovirus Infection",
+        "name_ja": "ニドウイルス感染（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0185",
+        "name": "Iridovirus (Ranavirus)",
+        "name_ja": "イリドウイルス（ラナウイルス）（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atropine",
+            "drug_ja": "アトロピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0186",
+        "name": "Mycoplasma Infection",
+        "name_ja": "マイコプラズマ感染（両生類）",
+        "drugs": [
+          {
+            "drug": "Azithromycin",
+            "drug_ja": "アジスロマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Gentamicin",
+            "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0187",
+        "name": "Aeromonas Infection",
+        "name_ja": "エロモナス感染（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0188",
+        "name": "Dermatophytosis",
+        "name_ja": "皮膚糸状菌症（両生類）",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Miconazole",
+            "drug_ja": "ミコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clotrimazole",
+            "drug_ja": "クロトリマゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0189",
+        "name": "Candidiasis",
+        "name_ja": "カンジダ症（両生類）",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Fluconazole",
+            "drug_ja": "フルコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Nystatin",
+            "drug_ja": "ナイスタチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clotrimazole",
+            "drug_ja": "クロトリマゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0190",
+        "name": "Chrysosporium (CANV) Infection",
+        "name_ja": "クリソスポリウム感染（両生類）",
+        "drugs": [
+          {
+            "drug": "Terbinafine",
+            "drug_ja": "テルビナフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0191",
+        "name": "Mite Infestation (Ophionyssus)",
+        "name_ja": "ダニ症（Ophionyssus）（両生類）",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0192",
+        "name": "Cestode Infection",
+        "name_ja": "条虫感染（両生類）",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0193",
+        "name": "Pentastomid Infection",
+        "name_ja": "舌虫感染（両生類）",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0194",
+        "name": "Coccidia",
+        "name_ja": "コクシジウム（両生類）",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadimethoxine",
+            "drug_ja": "スルファジメトキシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0195",
+        "name": "Flagellate Protozoan Infection",
+        "name_ja": "鞭毛虫感染（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0196",
+        "name": "Amoebic Infection",
+        "name_ja": "アメーバ感染（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0197",
+        "name": "Dysecdysis (Retained Shed)",
+        "name_ja": "脱皮不全（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0198",
+        "name": "Thermal Burns",
+        "name_ja": "熱傷（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Gabapentin",
+            "drug_ja": "ガバペンチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Methadone",
+            "drug_ja": "メサドン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0199",
+        "name": "Rostral Abrasion",
+        "name_ja": "吻端擦過傷（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0200",
+        "name": "Blister Disease",
+        "name_ja": "水疱病（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0201",
+        "name": "Shell Rot",
+        "name_ja": "甲羅腐敗（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0202",
+        "name": "Scale Rot",
+        "name_ja": "鱗腐敗（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0203",
+        "name": "Abscess",
+        "name_ja": "膿瘍（両生類）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0204",
+        "name": "Tail Necrosis",
+        "name_ja": "尾壊死（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0205",
+        "name": "Bite Wounds",
+        "name_ja": "咬傷（両生類）",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tramadol",
+            "drug_ja": "トラマドール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0206",
+        "name": "Ulcerative Dermatitis",
+        "name_ja": "潰瘍性皮膚炎（両生類）",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0207",
+        "name": "Gout (Visceral)",
+        "name_ja": "痛風（内臓型）（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0208",
+        "name": "Gout (Articular)",
+        "name_ja": "痛風（関節型）（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0211",
+        "name": "Egg Binding (Dystocia)",
+        "name_ja": "卵詰まり（難産）（両生類）",
+        "drugs": [
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0212",
+        "name": "Pre-Ovulatory Follicular Stasis",
+        "name_ja": "排卵前卵胞停滞（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0213",
+        "name": "Post-Ovulatory Egg Stasis",
+        "name_ja": "排卵後卵停滞（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0214",
+        "name": "Egg Yolk Coelomitis",
+        "name_ja": "卵黄体腔炎（両生類）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0215",
+        "name": "Penile/Hemipenal Prolapse",
+        "name_ja": "陰茎/半陰茎脱（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0219",
+        "name": "Gastroenteritis",
+        "name_ja": "胃腸炎（両生類）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0222",
+        "name": "Regurgitation",
+        "name_ja": "吐出（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0223",
+        "name": "Anorexia (Behavioral)",
+        "name_ja": "拒食（行動性）（両生類）",
+        "drugs": [
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0224",
+        "name": "Rectal/Cloacal Prolapse",
+        "name_ja": "直腸/総排泄腔脱（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0225",
+        "name": "Pneumonia",
+        "name_ja": "肺炎（両生類）",
+        "drugs": [
+          {
+            "drug": "Gentamicin",
+            "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0229",
+        "name": "Conjunctivitis",
+        "name_ja": "結膜炎（両生類）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chloramphenicol",
+            "drug_ja": "クロラムフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0231",
+        "name": "Spectacle Retention",
+        "name_ja": "眼鏡鱗停滞（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0232",
+        "name": "Subspectacular Abscess",
+        "name_ja": "眼鏡鱗下膿瘍（両生類）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0233",
+        "name": "Uveitis",
+        "name_ja": "ぶどう膜炎（両生類）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atropine",
+            "drug_ja": "アトロピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0234",
+        "name": "Eye Infection",
+        "name_ja": "眼感染症（両生類）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Gentamicin",
+            "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atropine",
+            "drug_ja": "アトロピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0235",
+        "name": "Fracture (Limb)",
+        "name_ja": "四肢骨折（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Butorphanol",
+            "drug_ja": "ブトルファノール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0236",
+        "name": "Fracture (Shell/Carapace)",
+        "name_ja": "甲羅骨折（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0237",
+        "name": "Osteoarthritis",
+        "name_ja": "変形性関節症（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Glucosamine/Chondroitin",
+            "drug_ja": "グルコサミン・コンドロイチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0238",
+        "name": "Osteomyelitis",
+        "name_ja": "骨髄炎（両生類）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cephalexin",
+            "drug_ja": "セファレキシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clindamycin",
+            "drug_ja": "クリンダマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Gabapentin",
+            "drug_ja": "ガバペンチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0239",
+        "name": "Rickets",
+        "name_ja": "くる病（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcitriol",
+            "drug_ja": "カルシトリオール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0240",
+        "name": "Spinal Injury",
+        "name_ja": "脊髄損傷（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Dexamethasone",
+            "drug_ja": "デキサメタゾン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0241",
+        "name": "Scoliosis/Kyphosis",
+        "name_ja": "脊柱側弯/後弯（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0242",
+        "name": "Tail Amputation",
+        "name_ja": "尾切断（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0243",
+        "name": "Seizures",
+        "name_ja": "痙攣発作（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Midazolam",
+            "drug_ja": "ミダゾラム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Zonisamide",
+            "drug_ja": "ゾニサミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Zonisamide",
+            "drug_ja": "ゾニサミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0244",
+        "name": "Vestibular Disease",
+        "name_ja": "前庭疾患（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0245",
+        "name": "Encephalitis",
+        "name_ja": "脳炎（両生類）",
+        "drugs": [
+          {
+            "drug": "Clindamycin",
+            "drug_ja": "クリンダマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chloramphenicol",
+            "drug_ja": "クロラムフェニコール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Midazolam",
+            "drug_ja": "ミダゾラム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mannitol",
+            "drug_ja": "マンニトール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ceftazidime",
+            "drug_ja": "セフタジジム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mannitol",
+            "drug_ja": "マンニトール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0246",
+        "name": "Peripheral Neuropathy",
+        "name_ja": "末梢神経障害（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tramadol",
+            "drug_ja": "トラマドール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Gabapentin",
+            "drug_ja": "ガバペンチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Pregabalin",
+            "drug_ja": "プレガバリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0247",
+        "name": "Paralysis (Posterior)",
+        "name_ja": "後肢麻痺（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0249",
+        "name": "Pericardial Effusion",
+        "name_ja": "心嚢液貯留（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0250",
+        "name": "Arteriosclerosis",
+        "name_ja": "動脈硬化症（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0251",
+        "name": "Anemia",
+        "name_ja": "貧血（両生類）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0252",
+        "name": "Lipoma",
+        "name_ja": "脂肪腫（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Buprenorphine",
+            "drug_ja": "ブプレノルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Isoflurane",
+            "drug_ja": "イソフルラン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0253",
+        "name": "Vitamin A Deficiency",
+        "name_ja": "ビタミンA欠乏症（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0254",
+        "name": "Calcium Deficiency",
+        "name_ja": "カルシウム欠乏症（両生類）",
+        "drugs": [
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0255",
+        "name": "Hypocalcemia",
+        "name_ja": "低カルシウム血症（両生類）",
+        "drugs": [
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcitriol",
+            "drug_ja": "カルシトリオール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0256",
+        "name": "Hyperphosphatemia",
+        "name_ja": "高リン血症（両生類）",
+        "drugs": [
+          {
+            "drug": "Aluminum Hydroxide",
+            "drug_ja": "水酸化アルミニウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "amphibian_0257",
+        "name": "Hypothermia",
+        "name_ja": "低体温症（両生類）",
+        "drugs": [
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      }
+    ],
+    "citation_mismatches": [
+      {
+        "id": "amphibian_0087",
+        "name": "Lymphoma",
+        "name_ja": "リンパ腫",
+        "matched_keys": [
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "amphibian_0115",
+        "name": "Hemolytic Anemia",
+        "name_ja": "溶血性貧血",
+        "matched_keys": [
+          "immune-mediated hemolytic anemia"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "amphibian_0122",
+        "name": "Pancreatitis",
+        "name_ja": "膵炎",
+        "matched_keys": [
+          "feline pancreatitis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "amphibian_0188",
+        "name": "Dermatophytosis",
+        "name_ja": "皮膚糸状菌症（両生類）",
+        "matched_keys": [
+          "dermatophytosis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "amphibian_0209",
+        "name": "Urolithiasis",
+        "name_ja": "尿路結石症（両生類）",
+        "matched_keys": [
+          "urolithiasis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "amphibian_0248",
+        "name": "Cardiomyopathy",
+        "name_ja": "心筋症（両生類）",
+        "matched_keys": [
+          "hypertrophic cardiomyopathy (hcm)"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "amphibian_0251",
+        "name": "Anemia",
+        "name_ja": "貧血（両生類）",
+        "matched_keys": [
+          "immune-mediated hemolytic anemia"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      }
+    ]
+  },
+  "T109": {
+    "detector": "T109",
+    "total_records": 258,
+    "hit_count": 0,
+    "safe_occurrences": 0,
+    "review_occurrences": 0,
+    "term_counts": {},
+    "hits": []
+  }
+}

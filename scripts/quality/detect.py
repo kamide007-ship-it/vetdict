@@ -24,12 +24,15 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
+import logging
 import re
 import sys
 import unicodedata
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
+
+logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(REPO_ROOT) not in sys.path:
@@ -52,6 +55,29 @@ def _module_attr_for(species: str) -> tuple[str, str]:
     return (f"api.species.{species}_diseases", "DISEASES")
 
 
+_OVERLAY_CACHE: dict[str, dict] | None = None
+
+
+def _overlay_by_name(species: str) -> dict:
+    """Return {name: overlay_entry} for a species, reading the 94MB overlay once."""
+    global _OVERLAY_CACHE
+    if _OVERLAY_CACHE is None:
+        _OVERLAY_CACHE = {}
+        if OVERLAY_PATH.exists():
+            for o in json.loads(OVERLAY_PATH.read_text(encoding="utf-8")):
+                sp = o.get("species")
+                if sp:
+                    _OVERLAY_CACHE.setdefault(sp, {})[o.get("name")] = o
+    return _OVERLAY_CACHE.get(species, {})
+
+
+ALL_SPECIES = (
+    "dog", "cat", "horse", "rabbit", "hamster", "guinea_pig", "chinchilla",
+    "ferret", "hedgehog", "sugar_glider", "degu", "bird", "parakeet", "parrot",
+    "reptile", "tortoise", "snake", "lizard", "amphibian", "fish", "exotic_other",
+)  # fmt: skip
+
+
 def _normalise_entry(raw: Any) -> dict:
     """Coerce a module/overlay entry (sets, dataclass) into a plain dict."""
     if hasattr(raw, "__dict__") and not isinstance(raw, dict):
@@ -61,6 +87,24 @@ def _normalise_entry(raw: Any) -> dict:
         if isinstance(v, set):
             d[k] = sorted(v)
     return d
+
+
+# The equine module (DISEASE_DATABASE) uses a bespoke dataclass schema; map its
+# fields onto the standard keys the detectors expect so horse is analysed
+# correctly rather than reported as 621 "empty treatments".
+_EQUINE_FIELD_MAP = {
+    "name_en": "name",
+    "treatment_protocol": "treatment_ja",
+    "etiology": "causes_ja",
+    "clinical_signs_detail": "clinical_signs_ja",
+}
+
+
+def _adapt_equine(rec: dict) -> dict:
+    for src, dst in _EQUINE_FIELD_MAP.items():
+        if not rec.get(dst) and rec.get(src):
+            rec[dst] = rec[src]
+    return rec
 
 
 def load_species_records(species: str) -> list[dict]:
@@ -73,18 +117,16 @@ def load_species_records(species: str) -> list[dict]:
     else:
         records = [_normalise_entry(v) for v in container]
 
+    if species == "horse":
+        records = [_adapt_equine(r) for r in records]
+
     # Apply JSON overlay (overrides module content by (species, name)).
-    if OVERLAY_PATH.exists():
-        overlay = json.loads(OVERLAY_PATH.read_text(encoding="utf-8"))
-        by_name = {}
-        for o in overlay:
-            if o.get("species") == species:
-                by_name[o.get("name")] = o
-        if by_name:
-            for rec in records:
-                ov = by_name.get(rec.get("name"))
-                if ov:
-                    rec.update({k: v for k, v in ov.items() if v not in (None, "")})
+    by_name = _overlay_by_name(species)
+    if by_name:
+        for rec in records:
+            ov = by_name.get(rec.get("name"))
+            if ov:
+                rec.update({k: v for k, v in ov.items() if v not in (None, "")})
 
     # Assign positional ids the same way migrate_to_sqlite.py does, so the
     # report references match served ids.
@@ -348,6 +390,178 @@ def detect_empty_treatment(records: list[dict]) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# T108 — source / drug-link integrity detection
+# ---------------------------------------------------------------------------
+#
+# Replicates the two request-time keyword matchers that attach drugs and
+# citations to a disease WITHOUT a species guard (api/vetdict_api.py:1148
+# `mentioned_drugs` and api/pubmed_references.py:333 `get_references_for_disease`)
+# and flags the attachments that are not species-appropriate.
+
+_DOGCAT = {"dog", "cat"}
+
+
+def _load_drugs() -> list[dict]:
+    try:
+        from api.drug_dictionary import DRUGS
+
+        return list(DRUGS)
+    except Exception:
+        logger.warning("Could not import DRUGS for T108", exc_info=True)
+        return []
+
+
+def _load_disease_reference_keys() -> list[str]:
+    try:
+        from api.pubmed_references import DISEASE_REFERENCES
+
+        return list(DISEASE_REFERENCES.keys())
+    except Exception:
+        logger.warning("Could not import DISEASE_REFERENCES for T108", exc_info=True)
+        return []
+
+
+def detect_source_integrity(records: list[dict], species: str) -> dict:
+    """T108: flag species-mismatched auto-attached drugs and citations."""
+    drugs = _load_drugs()
+    ref_keys = _load_disease_reference_keys()
+
+    drug_flags: list[dict] = []
+    ref_flags: list[dict] = []
+    for r in records:
+        treatment_text = ((r.get("treatment_ja") or "") + " " + (r.get("treatment") or "")).lower()
+
+        # --- drug links (mirror mentioned_drugs substring matcher) ---
+        mism: list[dict] = []
+        for dr in drugs:
+            dr_name = (dr.get("name") or "").strip()
+            dr_name_ja = (dr.get("name_ja") or "").strip()
+            # Mirror the buggy substring match; skip 1-2 char names that match spuriously.
+            hit = (len(dr_name) >= 3 and dr_name.lower() in treatment_text) or (
+                len(dr_name_ja) >= 2 and dr_name_ja in treatment_text
+            )
+            if not hit:
+                continue
+            sp_info = dr.get("species_info") or {}
+            if species not in sp_info:
+                mism.append({"drug": dr_name, "drug_ja": dr_name_ja, "reason": "no dosing data for this species"})
+        if mism:
+            drug_flags.append({"id": r["id"], "name": r.get("name"), "name_ja": r.get("name_ja"), "drugs": mism[:10]})
+
+        # --- citations (mirror get_references_for_disease matcher) ---
+        if species not in _DOGCAT and ref_keys:
+            name_lower = (r.get("name") or "").lower()
+            matched_keys = [k for k in ref_keys if name_lower and (k in name_lower or name_lower in k)]
+            if matched_keys:
+                ref_flags.append(
+                    {
+                        "id": r["id"],
+                        "name": r.get("name"),
+                        "name_ja": r.get("name_ja"),
+                        "matched_keys": matched_keys[:5],
+                        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)",
+                    }
+                )
+
+    return {
+        "detector": "T108",
+        "total_records": len(records),
+        "drug_available": len(drugs),
+        "ref_keys_available": len(ref_keys),
+        "drug_mismatch_count": len(drug_flags),
+        "citation_mismatch_count": len(ref_flags),
+        "drug_mismatches": drug_flags,
+        "citation_mismatches": ref_flags,
+    }
+
+
+# ---------------------------------------------------------------------------
+# T109 — machine-translation-smell detection (curated lexicon)
+# ---------------------------------------------------------------------------
+#
+# High-precision curated lexicon only.  ``safe`` = orthographic fix with no
+# meaning change; ``review`` = clinically meaning-sensitive, must be checked by
+# a vet before applying (per SPEC).  Legitimate clinical Japanese (制御, 低下,
+# 良好, 素因, 代償 …) is deliberately NOT listed to avoid false positives.
+
+_MT_LEXICON: list[dict] = [
+    {"term": "葡萄糖", "suggest": "ブドウ糖", "category": "safe", "note": "表記ゆれ（医学表記はブドウ糖）"},
+    {"term": "並発", "suggest": "併発", "category": "safe", "note": "誤字"},
+    {"term": "疲出", "suggest": "疲弊", "category": "safe", "note": "誤字（β細胞疲弊が標準）"},
+    {
+        "term": "遺伝学的",
+        "suggest": "遺伝性 / 遺伝的",
+        "category": "review",
+        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
+    },
+    {"term": "易感受性", "suggest": "感受性が高い / 罹患しやすい", "category": "review", "note": "機械翻訳調"},
+    {"term": "可遺伝", "suggest": "遺伝性 / 遺伝的", "category": "review", "note": "機械翻訳調"},
+    {"term": "貧弱な", "suggest": "乏しい / 不十分な", "category": "review", "note": "『貧弱な耐性』等は機械翻訳調"},
+    {"term": "細胞失敗", "suggest": "細胞不全", "category": "review", "note": "β細胞失敗→β細胞不全（failure の誤訳）"},
+]
+
+_JA_FIELDS = (
+    "name_ja",
+    "description_ja",
+    "causes_ja",
+    "pathophysiology_ja",
+    "treatment_ja",
+    "prevention_ja",
+    "prognosis_ja",
+    "clinical_signs_ja",
+    "diagnosis_ja",
+    "transmission_ja",
+)
+
+
+def detect_mt_smell(records: list[dict]) -> dict:
+    """T109: flag curated machine-translation-smell terms in JA fields."""
+    hits: list[dict] = []
+    term_counts: dict[str, int] = defaultdict(int)
+    safe_total = 0
+    review_total = 0
+    for r in records:
+        for field in _JA_FIELDS:
+            text = str(r.get(field) or "")
+            if not text:
+                continue
+            for entry in _MT_LEXICON:
+                term = entry["term"]
+                idx = text.find(term)
+                if idx == -1:
+                    continue
+                n = text.count(term)
+                term_counts[term] += n
+                if entry["category"] == "safe":
+                    safe_total += n
+                else:
+                    review_total += n
+                ctx = text[max(0, idx - 20) : idx + len(term) + 20]
+                hits.append(
+                    {
+                        "id": r["id"],
+                        "name_ja": r.get("name_ja"),
+                        "field": field,
+                        "term": term,
+                        "suggest": entry["suggest"],
+                        "category": entry["category"],
+                        "note": entry["note"],
+                        "count": n,
+                        "context": ctx,
+                    }
+                )
+    return {
+        "detector": "T109",
+        "total_records": len(records),
+        "hit_count": len(hits),
+        "safe_occurrences": safe_total,
+        "review_occurrences": review_total,
+        "term_counts": dict(sorted(term_counts.items(), key=lambda x: -x[1])),
+        "hits": hits,
+    }
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -360,6 +574,8 @@ def run(species: str) -> dict:
         "T101": detect_duplicates(records),
         "T102": detect_nonclinical(records),
         "T104": detect_empty_treatment(records),
+        "T108": detect_source_integrity(records, species),
+        "T109": detect_mt_smell(records),
     }
 
 
@@ -411,6 +627,38 @@ def _markdown_summary(report: dict) -> str:
         lines += ["", "### 完全に空（上位30）"]
         for e in t4["empty"][:30]:
             lines.append(f"- {e['name_ja']}（{e['name']}）[{e['id']}]")
+
+    t8 = report["T108"]
+    lines += [
+        "",
+        "## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）",
+        f"- 種別投与量なしの薬品リンク: **{t8['drug_mismatch_count']}** 疾患",
+        f"- 犬猫論文の他種への自動紐付け: **{t8['citation_mismatch_count']}** 疾患",
+        "",
+        "### 種に投与量データが無い薬品リンク（上位20）",
+    ]
+    for fl in t8["drug_mismatches"][:20]:
+        drugs = ", ".join(f"{d['drug_ja'] or d['drug']}" for d in fl["drugs"])
+        lines.append(f"- {fl['name_ja']}（{fl['name']}）[{fl['id']}] → {drugs}")
+    if t8["citation_mismatches"]:
+        lines += ["", "### 犬猫論文が他種に自動紐付け（上位20）"]
+        for fl in t8["citation_mismatches"][:20]:
+            keys = ", ".join(fl["matched_keys"])
+            lines.append(f"- {fl['name_ja']}（{fl['name']}）[{fl['id']}] → key: {keys}")
+
+    t9 = report["T109"]
+    lines += [
+        "",
+        "## T109 機械翻訳臭（置換辞書）",
+        f"- ヒット総数: **{t9['hit_count']}**（safe {t9['safe_occurrences']} / review {t9['review_occurrences']}）",
+        "",
+        "### 用語別ヒット数",
+    ]
+    for term, n in t9["term_counts"].items():
+        lines.append(f"- `{term}` × {n}")
+    lines += ["", "### 出現箇所（上位30）"]
+    for h in t9["hits"][:30]:
+        lines.append(f"- [{h['category']}] `{h['term']}`→{h['suggest']} @ {h['field']} [{h['id']}] …{h['context']}…")
     return "\n".join(lines) + "\n"
 
 
@@ -426,7 +674,7 @@ def main() -> int:
     (out_dir / "detectors.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     (out_dir / "detectors.md").write_text(_markdown_summary(report), encoding="utf-8")
 
-    t1, t2, t4 = report["T101"], report["T102"], report["T104"]
+    t1, t2, t4, t8, t9 = (report["T101"], report["T102"], report["T104"], report["T108"], report["T109"])
     print(f"[{args.species}] records={report['record_count']}")
     print(
         f"  T101 exact-dup clusters={t1['exact_duplicate_cluster_count']} "
@@ -437,6 +685,8 @@ def main() -> int:
         f"  T104 empty={t4['empty_count']} heading-only={t4['heading_only_count']} "
         f"with-dosage={t4['with_dosage_count']}"
     )
+    print(f"  T108 drug-mismatch={t8['drug_mismatch_count']} citation-mismatch={t8['citation_mismatch_count']}")
+    print(f"  T109 mt-smell hits={t9['hit_count']} (safe={t9['safe_occurrences']} review={t9['review_occurrences']})")
     print(f"  reports -> {out_dir}/detectors.json, detectors.md")
     return 0
 

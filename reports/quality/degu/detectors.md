@@ -151,3 +151,82 @@
 - 熱中症（呼吸器型）（デグー）（Heat Stroke (Respiratory)）[degu_0181] — ja:220字 / en:507字
 - 動脈硬化症（デグー）（Arteriosclerosis）[degu_0183] — ja:204字 / en:225字
 - 爪過成長（デグー）（Nail Overgrowth）[degu_0199] — ja:172字 / en:209字
+
+## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
+- 種別投与量なしの薬品リンク: **57** 疾患
+- 犬猫論文の他種への自動紐付け: **19** 疾患
+
+### 種に投与量データが無い薬品リンク（上位20）
+- インスリン抵抗性（Insulin Resistance）[degu_0002] → グリピジド
+- 結膜炎（Conjunctivitis）[degu_0008] → オフロキサシン点眼
+- 角膜潰瘍（Corneal Ulcer）[degu_0009] → シプロフロキサシン
+- 尾部脱皮損傷（Tail Degloving Injury）[degu_0016] → スルファジアジン, スルファジアジン銀
+- 趾瘤症（バンブルフット）（Bumblefoot (Pododermatitis)）[degu_0020] → スルファジアジン, スルファジアジン銀
+- 変形性関節症（Osteoarthritis）[degu_0023] → グルコサミン・コンドロイチン
+- ジアルジア症（Giardiasis）[degu_0032] → ロニダゾール
+- 子宮蓄膿症（Pyometra）[degu_0042] → メデトミジン, ロニダゾール
+- 尾部皮膚剥離 - 完全型（Tail Degloving - Complete）[degu_0068] → スルファジアジン, スルファジアジン銀
+- 白癬菌感染 - 広範囲型（Trichophyton mentagrophytes (Ringworm) - Extensive）[degu_0073] → アムホテリシンB
+- クロストリジウム腸炎（Clostridial Enteritis）[degu_0077] → ロニダゾール, バンコマイシン
+- 盲腸内細菌叢異常（Cecal Dysbiosis）[degu_0080] → ロニダゾール
+- 胃潰瘍（Gastric Ulceration）[degu_0081] → ロニダゾール
+- 腸重積症（Intussusception）[degu_0083] → ロニダゾール
+- 肝コクシジウム症（Hepatic Coccidiosis）[degu_0084] → スルファジメトキシン, シリマリン（マリアアザミ抽出物）
+- 卵巣嚢胞（Ovarian Cysts）[degu_0090] → メデトミジン, デスロレリン
+- 子宮内膜炎（Endometritis）[degu_0091] → ロニダゾール
+- 乳腺炎（Mastitis）[degu_0093] → リネゾリド
+- 胎児残留（Retained Fetus）[degu_0094] → メデトミジン, ロニダゾール
+- リンパ腫（Lymphoma）[degu_0098] → L-アスパラギナーゼ
+
+### 犬猫論文が他種に自動紐付け（上位20）
+- 糖尿病（Diabetes Mellitus）[degu_0000] → key: diabetes mellitus
+- 不正咬合（Dental Malocclusion）[degu_0010] → key: malocclusion
+- 皮膚糸状菌症（Ringworm (Dermatophytosis)）[degu_0014] → key: dermatophytosis
+- 消化管うっ滞（Gastrointestinal Stasis）[degu_0027] → key: gastrointestinal stasis
+- 慢性腎臓病（Chronic Kidney Disease）[degu_0036] → key: chronic kidney disease
+- 尿路結石症（Urolithiasis (Bladder Stones)）[degu_0037] → key: urolithiasis
+- 子宮蓄膿症（Pyometra）[degu_0042] → key: pyometra
+- 心筋症（Cardiomyopathy）[degu_0050] → key: hypertrophic cardiomyopathy (hcm)
+- 糖尿病 - 1型（若年発症）（Diabetes Mellitus - Type 1 (Juvenile Onset)）[degu_0057] → key: diabetes mellitus
+- 糖尿病 - 2型（食事誘発性）（Diabetes Mellitus - Type 2 (Diet-Induced)）[degu_0058] → key: diabetes mellitus
+- 不正咬合 - 臼歯（後天性）（Dental Malocclusion - Molar (Acquired)）[degu_0062] → key: malocclusion
+- 不正咬合 - 切歯（先天性）（Dental Malocclusion - Incisor (Congenital)）[degu_0063] → key: malocclusion
+- リンパ腫（Lymphoma）[degu_0098] → key: lymphoma
+- 不正咬合（デグー）（Malocclusion）[degu_0129] → key: malocclusion
+- 皮膚糸状菌症（デグー）（Dermatophytosis）[degu_0139] → key: dermatophytosis
+- 尿路結石症（デグー）（Urolithiasis）[degu_0150] → key: urolithiasis
+- 貧血（デグー）（Anemia）[degu_0155] → key: immune-mediated hemolytic anemia
+- 膀胱炎（デグー）（Cystitis）[degu_0186] → key: feline idiopathic cystitis (fic)
+- 白血病（デグー）（Leukemia）[degu_0197] → key: feline leukemia virus
+
+## T109 機械翻訳臭（置換辞書）
+- ヒット総数: **17**（safe 4 / review 16）
+
+### 用語別ヒット数
+- `遺伝学的` × 7
+- `易感受性` × 6
+- `並発` × 2
+- `貧弱な` × 1
+- `細胞失敗` × 1
+- `可遺伝` × 1
+- `葡萄糖` × 1
+- `疲出` × 1
+
+### 出現箇所（上位30）
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ description_ja [degu_0000] …抵抗、続発性ベータ細胞失敗）として提示、遺伝学的素因と食事炭水化物曝露による。早期検出を…
+- [review] `易感受性`→感受性が高い / 罹患しやすい @ description_ja [degu_0000] …る。早期検出を通じた検査と厳格食事管理は易感受性動物の発症を防止または遅延可能。…
+- [review] `貧弱な`→乏しい / 不十分な @ description_ja [degu_0000] …な代謝疾患。重大：デグーは食事糖に対する貧弱な耐性—ほとんどげっ歯類と異なり、デグーは…
+- [review] `細胞失敗`→細胞不全 @ description_ja [degu_0000] … 2糖尿病（インスリン抵抗、続発性ベータ細胞失敗）として提示、遺伝学的素因と食事炭水化物…
+- [safe] `並発`→併発 @ causes_ja [degu_0000] …(2) 加齢。(3) ストレス。(4) 並発疾患。(5) 先行ケトアシドーシス。…
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ causes_ja [degu_0000] …デグー特異的遺伝学的素因：デグーは糖を効率的に代謝するための…
+- [review] `易感受性`→感受性が高い / 罹患しやすい @ causes_ja [degu_0000] …伝成分を示唆）。食事リスク要因（遺伝学的易感受性デグーの主要トリガー）：(1) 直接糖含…
+- [review] `可遺伝`→遺伝性 / 遺伝的 @ causes_ja [degu_0000] …0%生涯糖尿病有病率対他の20-30%、可遺伝成分を示唆）。食事リスク要因（遺伝学的易…
+- [safe] `葡萄糖`→ブドウ糖 @ pathophysiology_ja [degu_0000] …ら存在、無症候）—膵ベータ細胞は先天的に葡萄糖刺激への反応性低下。基礎空腹時インスリン…
+- [safe] `疲出`→疲弊 @ pathophysiology_ja [degu_0000] …ピソード発生、繰り返しエピソードでβ細胞疲出。(3) 明白な糖尿病への進行（持続糖曝…
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ pathophysiology_ja [degu_0000] …の種の典型的なタイプ2と異なる：(1) 遺伝学的インスリン抵抗相（出生時から存在、無症候…
+- [review] `易感受性`→感受性が高い / 罹患しやすい @ pathophysiology_ja [degu_0000] …ース耐性は重症傷害：経口グルコース負荷で易感受性デグーで血糖250 mg/dL以上で30…
+- [safe] `並発`→併発 @ prevention_ja [degu_0000] …(7) 水質。(8) 生殖管理。(9) 並発疾患予防。(10) 診断後予防。…
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ prevention_ja [degu_0000] …デグーの重大予防（積極的食事管理で遺伝学的易感受性動物の50-70%で糖尿病を防止…
+- [review] `易感受性`→感受性が高い / 罹患しやすい @ prevention_ja [degu_0000] …グーの重大予防（積極的食事管理で遺伝学的易感受性動物の50-70%で糖尿病を防止可能）：…
+- [review] `易感受性`→感受性が高い / 罹患しやすい @ pathophysiology_ja [degu_0091] …進行→爆発的敗血症。デグーは産科ショック易感受性を示す（難産でも治療時20-30%死亡率…
+- [review] `易感受性`→感受性が高い / 罹患しやすい @ description_ja [degu_0092] …妊娠毒血症が不顕性糖尿病を顕性化させたり易感受性個体で顕性高血糖を誘発しうる。…
