@@ -191,9 +191,7 @@ def detect_duplicates(records: list[dict]) -> dict:
     dup_clusters: dict[int, list[int]] = defaultdict(list)
     for i in range(n):
         dup_clusters[uf_dup.find(i)].append(i)
-    exact_dups = [
-        sorted(idxs) for idxs in dup_clusters.values() if len(idxs) >= 2
-    ]
+    exact_dups = [sorted(idxs) for idxs in dup_clusters.values() if len(idxs) >= 2]
 
     # Family clusters via shared stem tokens (over-split candidates).
     # Grouped per-stem (NOT transitively merged) so an entry may appear under
@@ -277,10 +275,7 @@ def detect_nonclinical(records: list[dict]) -> dict:
     """T102: flag research-model / human-medicine transplant entries."""
     flags = []
     for r in records:
-        hay = " ".join(
-            str(r.get(k, "") or "")
-            for k in ("name", "name_ja", "description", "description_ja")
-        ).lower()
+        hay = " ".join(str(r.get(k, "") or "") for k in ("name", "name_ja", "description", "description_ja")).lower()
         matched: list[dict] = []
         for category, terms in _NONCLINICAL_TERMS.items():
             for term in terms:
@@ -410,8 +405,7 @@ def _markdown_summary(report: dict) -> str:
     ]
     for e in t4["heading_only"][:30]:
         lines.append(
-            f"- {e['name_ja']}（{e['name']}）[{e['id']}] "
-            f"— ja:{e['treatment_ja_len']}字 / en:{e['treatment_len']}字"
+            f"- {e['name_ja']}（{e['name']}）[{e['id']}] — ja:{e['treatment_ja_len']}字 / en:{e['treatment_len']}字"
         )
     if t4["empty"]:
         lines += ["", "### 完全に空（上位30）"]
@@ -429,9 +423,7 @@ def main() -> int:
     report = run(args.species)
     out_dir = REPO_ROOT / args.out / args.species
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "detectors.json").write_text(
-        json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    (out_dir / "detectors.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     (out_dir / "detectors.md").write_text(_markdown_summary(report), encoding="utf-8")
 
     t1, t2, t4 = report["T101"], report["T102"], report["T104"]
