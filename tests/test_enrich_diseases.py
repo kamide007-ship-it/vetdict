@@ -1,7 +1,5 @@
 """Tests for enrich_diseases() in api/species/helpers.py."""
 
-
-
 from api.species.helpers import enrich_diseases
 
 
@@ -26,9 +24,18 @@ class TestEnrichDiseases:
         result = enrich_diseases(diseases, "dog")
         d = result[0]
         # enrich_diseases should fill fallback content for missing fields
-        for field in ("pathophysiology", "pathophysiology_ja",
-                      "causes", "causes_ja", "treatment", "treatment_ja",
-                      "prevention", "prevention_ja", "prognosis", "prognosis_ja"):
+        for field in (
+            "pathophysiology",
+            "pathophysiology_ja",
+            "causes",
+            "causes_ja",
+            "treatment",
+            "treatment_ja",
+            "prevention",
+            "prevention_ja",
+            "prognosis",
+            "prognosis_ja",
+        ):
             assert d.get(field), f"Field '{field}' should be filled"
 
     def test_preserves_existing_fields(self):
