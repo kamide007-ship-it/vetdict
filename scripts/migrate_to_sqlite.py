@@ -1974,6 +1974,96 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
     return counts
 
 
+def regenerate_english_category_causes(conn) -> int:
+    """Bring the English ``causes`` field to parity with the Japanese one.
+
+    The old exotic/enrichment pipeline left English ``causes`` carrying generic
+    organ-system templates — and, worse, many inflammatory "-itis" diseases were
+    described as *"Caused by exposure to toxic substances ..."*.  The Japanese
+    ``causes`` for the same records is already category-correct.  This served-DB
+    safety net detects those generic English templates (regardless of whether
+    the value came from a module literal, a supplementary record or the JSON
+    overlay), resolves the correct category from the disease *name*, and
+    regenerates the English text with :func:`gen_causes_en` — deferring to the
+    bilingual curated (flagship) generator when one covers the disease.
+
+    Curated / named-agent English text (no generic fingerprint) is never
+    touched, and records whose name does not resolve to a category are left
+    unchanged (no fabrication).
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        gen_causes_en,
+        resolve_category_from_name,
+    )
+    from scripts.template_elimination.fix_english_causes_category import is_generic_causes_en
+    from scripts.template_elimination.flagship_noninfectious_library import (
+        flagship_clinical_fields,
+    )
+
+    rows = conn.execute("SELECT id, species, name, name_ja, causes FROM diseases").fetchall()
+    changed = 0
+    for row in rows:
+        causes = row["causes"] or ""
+        if not is_generic_causes_en(causes):
+            continue
+        species = (row["species"] or "").lower()
+        name_ja = row["name_ja"] or ""
+        name_en = row["name"] or ""
+
+        new = None
+        flag = flagship_clinical_fields(species, name_ja, name_en)
+        if flag and flag.get("causes") and not is_generic_causes_en(flag["causes"]):
+            new = flag["causes"]
+        else:
+            category = resolve_category_from_name(name_ja, name_en)
+            if category:
+                candidate = gen_causes_en(category, name_en, species)
+                if candidate and not is_generic_causes_en(candidate):
+                    new = candidate
+        if new and new != causes:
+            conn.execute(
+                "UPDATE diseases SET causes = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new, row["id"]),
+            )
+            changed += 1
+    return changed
+
+
+def regenerate_english_pathophysiology_miscat(conn) -> int:
+    """Served-DB safety net: fix an English pathophysiology carrying a
+    parasitic/viral/fungal/toxicosis mechanism template on a disease that shows
+    no such signal in its name (e.g. the *parasitic* template on myocarditis).
+
+    Genuine infectious/parasitic diseases (whose name matches an infection
+    pattern) are preserved, as are bacterial/"infectious" templates (many
+    organ-named ``-itis`` diseases are genuinely bacterial). Mirrors the JA
+    behaviour of ``recategorize_etiology_fields``; runs after sign-grounding, so
+    grounded signs on the corrected rows are dropped in favour of the right
+    category — the same trade-off the JA pass already makes.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.fix_english_causes_category import regenerate_entry_pathophysiology
+
+    rows = conn.execute("SELECT id, species, name, name_ja, pathophysiology FROM diseases").fetchall()
+    changed = 0
+    for row in rows:
+        entry = {
+            "species": row["species"] or "",
+            "name": row["name"] or "",
+            "name_ja": row["name_ja"] or "",
+            "pathophysiology": row["pathophysiology"] or "",
+        }
+        new = regenerate_entry_pathophysiology(entry)
+        if new and new != entry["pathophysiology"]:
+            conn.execute(
+                "UPDATE diseases SET pathophysiology = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new, row["id"]),
+            )
+            changed += 1
+    return changed
+
+
 def recategorize_etiology_fields(conn) -> dict[str, int]:
     """Fix causes_ja / pathophysiology_ja that carry the WRONG category template.
 
@@ -2171,6 +2261,15 @@ def main(db_path: str | None = None):
         recat = recategorize_etiology_fields(conn)
         print(f"  → {recat['recategorized']} fields re-categorised")
         print(f"  → {recat['toxicity_respeciated']} toxicity etiologies re-speciated")
+
+        # Bring English `causes` to parity with Japanese: replace generic
+        # organ-system templates (and the dangerous "toxic substances" text
+        # applied to inflammatory diseases) with the name-resolved category.
+        print("\n[enrichment] regenerating English category causes...")
+        en_causes = regenerate_english_category_causes(conn)
+        print(f"  → {en_causes} English causes regenerated")
+        en_patho = regenerate_english_pathophysiology_miscat(conn)
+        print(f"  → {en_patho} English pathophysiology miscategorisations fixed")
 
         # Strip cross-species breed clauses (Border Collie / Doberman / brachy-
         # cephalic embedded in non-dog templates) and fix the frozen
