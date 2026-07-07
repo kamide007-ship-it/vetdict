@@ -1,0 +1,324 @@
+# VetDict 品質検出レポート — dog
+
+- 総レコード数: **623**
+
+## T101 重複 / 過分割
+- 完全一致重複クラスタ: **35** （冗長レコード 38 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **119**
+
+### 完全一致重複（上位20）
+- 犬アトピー性皮膚炎（CAD）（Allergic Dermatitis）[dog_0019] / 犬アトピー性皮膚炎（Canine Atopic Dermatitis）[dog_0297]
+- 特発性てんかん（Epilepsy）[dog_0027] / 特発性てんかん（Idiopathic Epilepsy）[dog_0495]
+- 免疫介在性溶血性貧血（IMHA）（Immune-Mediated Hemolytic Anemia）[dog_0037] / 免疫介在性溶血性貧血（IMHA）（Immune-Mediated Hemolytic Anemia (IMHA)）[dog_0491]
+- 犬インフルエンザ（Canine Influenza (CIV)）[dog_0040] / 犬インフルエンザ（Canine Influenza）[dog_0499]
+- 門脈体循環シャント（肝シャント）（Portosystemic Shunt (Liver Shunt)）[dog_0055] / 先天性門脈体循環シャント（Portosystemic Shunt (Congenital)）[dog_0252] / 後天性門脈体循環シャント（Portosystemic Shunt (Acquired)）[dog_0349] / 門脈体循環シャント（Portosystemic Shunt (PSS)）[dog_0484]
+- 肢端舐性皮膚炎（Acral Lick Dermatitis）[dog_0065] / 肢端舐性皮膚炎（舐性肉芽腫）（Acral Lick Dermatitis (Lick Granuloma)）[dog_0619]
+- 肥大性骨異栄養症（HOD）（Hypertrophic Osteodystrophy (HOD)）[dog_0077] / 肥大性骨異栄養症（重症型）（Hypertrophic Osteodystrophy (HOD) - Severe）[dog_0273]
+- 脊髄空洞症（キアリ様奇形）（Syringomyelia (Chiari Malformation)）[dog_0080] / 脊髄空洞症（Syringomyelia）[dog_0456]
+- 乳腺炎（Mastitis）[dog_0085] / 乳腺炎（哺乳期・非哺乳期）（Mastitis (Lactational and Non-lactational)）[dog_0600]
+- 良性前立腺肥大症（Benign Prostatic Hyperplasia (BPH)）[dog_0087] / 前立腺肥大症（Benign Prostatic Hyperplasia）[dog_0475]
+- 変性性脊髄症（DM）（Degenerative Myelopathy (DM)）[dog_0099] / 変性性脊髄症（Degenerative Myelopathy）[dog_0454]
+- 血管肉腫（HSA）（Hemangiosarcoma）[dog_0103] / 血管肉腫（脾臓型）（Hemangiosarcoma (Splenic)）[dog_0459] / 血管肉腫（心臓型）（Hemangiosarcoma (Cardiac)）[dog_0460]
+- 免疫介在性血小板減少症（ITP）（Autoimmune Thrombocytopenia (ITP)）[dog_0113] / 免疫介在性血小板減少症（ITP）（Immune-Mediated Thrombocytopenia (ITP)）[dog_0490]
+- インスリノーマ（Insulinoma）[dog_0116] / 膵臓β細胞腫瘍（Insulinoma (Pancreatic Beta Cell Tumor)）[dog_0228]
+- 犬ヘルペスウイルス感染症（Canine Herpesvirus (CHV)）[dog_0121] / 犬ヘルペスウイルス（Canine Herpesvirus）[dog_0479]
+- アスペルギルス症（Aspergillosis）[dog_0132] / 鼻アスペルギルス症（Aspergillosis (Nasal)）[dog_0500]
+- リーシュマニア症（Leishmaniasis）[dog_0134] / リーシュマニア症（Leishmaniosis）[dog_0481]
+- 免疫介在性多発性関節炎（Immune-Mediated Polyarthritis (IMPA)）[dog_0173] / 免疫介在性多発性関節炎（Immune-Mediated Polyarthritis）[dog_0488]
+- 円板状エリテマトーデス（Discoid Lupus Erythematosus (DLE)）[dog_0176] / 円板状エリテマトーデス（Discoid Lupus Erythematosus）[dog_0463]
+- 胃潰瘍（Gastric Ulcer）[dog_0184] / 胃潰瘍（Gastric Ulceration）[dog_0472]
+
+### 疾患ファミリー候補（上位15）
+- stem=`canine` × 49件
+    - 犬パルボウイルス感染症（Canine Parvovirus）[dog_0000]
+    - 犬ジステンパー（Canine Distemper）[dog_0001]
+    - 犬インフルエンザ（Canine Influenza (CIV)）[dog_0040]
+    - 犬感染性肝炎（Canine Infectious Hepatitis）[dog_0042]
+    - 犬コロナウイルス腸炎（Canine Coronavirus (Enteric)）[dog_0048]
+    - 犬ヘルペスウイルス感染症（Canine Herpesvirus (CHV)）[dog_0121]
+    - 犬乳頭腫症（パピローマ）（Canine Papillomatosis）[dog_0122]
+    - ジステンパー脳炎（Canine Distemper Encephalitis）[dog_0166]
+    - 犬脊髄性筋萎縮症（Canine Spinal Muscular Atrophy）[dog_0281]
+    - 犬アトピー性皮膚炎（Canine Atopic Dermatitis）[dog_0297]
+    - 犬パターン脱毛症（Canine Pattern Baldness）[dog_0300]
+    - 犬慢性潰瘍性口内炎（Canine Chronic Ulcerative Stomatitis (CCUS)）[dog_0310]
+    - 犬住血吸虫症（Canine Schistosomiasis）[dog_0348]
+    - 犬ハエ追い症候群（Canine Fly-Snapping Syndrome）[dog_0383]
+    - 犬アデノウイルス1型（Canine Adenovirus Type 1 (CAV-1)）[dog_0386]
+    - 犬パラインフルエンザウイルス（Canine Parainfluenza Virus）[dog_0387]
+    - 犬呼吸器コロナウイルス（Canine Respiratory Coronavirus）[dog_0388]
+    - 犬ヘモトロピックマイコプラズマ症（Canine Hemotropic Mycoplasmosis）[dog_0405]
+    - 犬ブルセラ症（生殖器型）（Canine Brucellosis (Reproductive)）[dog_0434]
+    - 犬家族性腎症（Canine Familial Nephropathy）[dog_0436]
+    - 犬ハンセン病様肉芽腫（Canine Leproid Granuloma）[dog_0441]
+    - 犬ジステンパー硬蹠症（Canine Distemper - Hardpad Disease）[dog_0442]
+    - 犬認知機能不全症候群（Canine Cognitive Dysfunction Syndrome）[dog_0455]
+    - 犬ブルセラ症（Canine Brucellosis）[dog_0477]
+    - 犬レプトスピラ症（Canine Leptospirosis）[dog_0478]
+    - 犬ヘルペスウイルス（Canine Herpesvirus）[dog_0479]
+    - 犬慢性肝炎（Canine Chronic Hepatitis）[dog_0492]
+    - 犬インフルエンザ（Canine Influenza）[dog_0499]
+    - 犬モノサイティック・エーリキア症（Canine Monocytic Ehrlichiosis）[dog_0506]
+    - 犬顆粒球性アナプラズマ症（Canine Granulocytic Anaplasmosis）[dog_0507]
+    - ドーベルマン強迫性わき腹吸引（Canine Compulsive Flank Sucking (Doberman)）[dog_0578]
+    - 犬甲状腺クリーゼ（Canine Thyroid Storm）[dog_0579]
+    - 犬血友病B（Canine Hemophilia B）[dog_0580]
+    - 犬慢性腸症（非IBD）（Canine Chronic Enteropathy (Non-IBD)）[dog_0582]
+    - 犬急性特発性多発性神経根炎（Canine Idiopathic Polyradiculoneuritis (Acute)）[dog_0584]
+    - 犬血管周皮腫（Canine Hemangiopericytoma）[dog_0585]
+    - 犬後腹膜線維症（Canine Retroperitoneal Fibrosis）[dog_0586]
+    - 犬脾臓結節性過形成（Canine Splenic Nodular Hyperplasia）[dog_0587]
+    - 犬壊死性唾液腺化生（Canine Necrotizing Sialometaplasia）[dog_0588]
+    - 犬心筋挫傷（Canine Myocardial Contusion）[dog_0589]
+    - 犬先天性気管支食道瘻（Canine Bronchoesophageal Fistula (Congenital)）[dog_0590]
+    - 犬脊髄くも膜嚢胞（Canine Spinal Arachnoid Cyst）[dog_0591]
+    - 犬輪状咽頭嚥下障害（Canine Cricopharyngeal Dysphagia）[dog_0592]
+    - 犬肺胞蛋白症（Canine Pulmonary Alveolar Proteinosis）[dog_0593]
+    - 犬原発性繊毛運動不全症（犬種特異性）（Canine Primary Ciliary Dyskinesia (Breed-Specific)）[dog_0594]
+    - 犬慢性表在性角膜炎（パンヌス）重症型（Canine Chronic Superficial Keratitis (Pannus) - Severe）[dog_0595]
+    - 犬先天性巨大食道症（Canine Megaesophagus (Congenital)）[dog_0596]
+    - 雌犬不妊症（受胎困難・不妊症）（Female Canine Infertility）[dog_0601]
+    - 犬エールリヒア症（Canine Ehrlichiosis）[dog_0612]
+- stem=`toxico` × 29件
+    - チョコレート中毒（Chocolate Toxicosis）[dog_0208]
+    - ブドウ・レーズン中毒（Grape/Raisin Toxicosis）[dog_0209]
+    - ニコチン中毒（Nicotine Toxicosis）[dog_0211]
+    - 鎮痛剤中毒（NSAID）（NSAID Toxicosis）[dog_0212]
+    - タマネギ・ニンニク中毒（Onion/Garlic Toxicosis）[dog_0214]
+    - 大麻中毒（Marijuana Toxicosis）[dog_0216]
+    - マカデミアナッツ中毒（Macadamia Nut Toxicosis）[dog_0332]
+    - イブプロフェン中毒（Ibuprofen Toxicosis）[dog_0333]
+    - アセトアミノフェン中毒（Acetaminophen Toxicosis）[dog_0334]
+    - キノコ中毒（Mushroom Toxicosis）[dog_0335]
+    - ユリ中毒（Lily Toxicosis）[dog_0337]
+    - ソテツ中毒（Sago Palm Toxicosis）[dog_0338]
+    - 藍藻（シアノバクテリア）中毒（Blue-Green Algae (Cyanobacteria) Toxicosis）[dog_0339]
+    - ペルメトリン中毒（Permethrin Toxicosis）[dog_0340]
+    - カフェイン中毒（Caffeine Toxicosis）[dog_0341]
+    - キシリトール中毒（Xylitol Toxicosis）[dog_0466]
+    - ブドウ・レーズン中毒（Grape and Raisin Toxicosis）[dog_0467]
+    - 抗凝固性殺鼠剤中毒（Anticoagulant Rodenticide Toxicosis）[dog_0468]
+    - エチレングリコール中毒（Ethylene Glycol Toxicosis）[dog_0469]
+    - メタアルデヒド中毒（ナメクジ忌避剤）（Metaldehyde Toxicosis）[dog_0470]
+    - エタノール中毒（Ethanol Toxicosis）[dog_0537]
+    - 有機リン中毒（Organophosphate Toxicosis）[dog_0538]
+    - ピレトリン・ペルメトリン中毒（犬）（Pyrethrin/Permethrin Toxicosis (Canine)）[dog_0539]
+    - 亜鉛中毒（Zinc Toxicosis）[dog_0540]
+    - 鉄中毒（Iron Toxicosis）[dog_0542]
+    - ビタミンD中毒（Vitamin D Toxicosis）[dog_0543]
+    - ブロメタリン中毒（殺鼠剤）（Bromethalin Rodenticide Toxicosis）[dog_0605]
+    - コレカルシフェロール中毒（ビタミンD3殺鼠剤）（Cholecalciferol Rodenticide Toxicosis）[dog_0606]
+    - イベルメクチン中毒（MDR1変異関連）（Ivermectin Toxicosis (MDR1 Mutation)）[dog_0608]
+- stem=`carcin` × 15件
+    - 扁平上皮がん（SCC）（Squamous Cell Carcinoma）[dog_0108]
+    - 移行上皮がん（膀胱がん）（Transitional Cell Carcinoma）[dog_0110]
+    - 甲状腺がん（Thyroid Carcinoma）[dog_0229]
+    - 肝細胞がん（Hepatocellular Carcinoma）[dog_0231]
+    - 肛門腺癌（Anal Gland Carcinoma）[dog_0317]
+    - 胃癌（Gastric Carcinoma）[dog_0355]
+    - 指趾部扁平上皮癌（Digital Squamous Cell Carcinoma）[dog_0423]
+    - 肺癌（Pulmonary Carcinoma）[dog_0465]
+    - 気管支原性癌（Bronchogenic Carcinoma）[dog_0512]
+    - 膀胱移行上皮癌（Bladder Transitional Cell Carcinoma）[dog_0513]
+    - 肝細胞癌（巨大型）（Hepatocellular Carcinoma (Massive)）[dog_0514]
+    - 胆管癌（肝外）（Biliary Carcinoma）[dog_0515]
+    - 胆管細胞癌（肝内）（Cholangiocellular Carcinoma）[dog_0516]
+    - 腎癌（Renal Carcinoma）[dog_0517]
+    - 副腎皮質癌（Adrenal Cortical Carcinoma）[dog_0518]
+- stem=`dermat` × 11件
+    - 犬アトピー性皮膚炎（CAD）（Allergic Dermatitis）[dog_0019]
+    - 肢端舐性皮膚炎（Acral Lick Dermatitis）[dog_0065]
+    - ノミアレルギー性皮膚炎（Flea Allergy Dermatitis）[dog_0143]
+    - 亜鉛反応性皮膚症（Zinc-Responsive Dermatosis）[dog_0179]
+    - マラセチア皮膚炎（Malassezia Dermatitis）[dog_0180]
+    - 成長ホルモン反応性皮膚症（Growth Hormone-Responsive Dermatosis）[dog_0193]
+    - 犬アトピー性皮膚炎（Canine Atopic Dermatitis）[dog_0297]
+    - 亜鉛反応性皮膚症候群I型（Zinc-Responsive Dermatosis - Syndrome I）[dog_0298]
+    - 皮膚筋炎（Dermatomyositis）[dog_0299]
+    - シェットランド・シープドッグ皮膚筋炎（Shetland Sheepdog Dermatomyositis）[dog_0556]
+    - 肢端舐性皮膚炎（舐性肉芽腫）（Acral Lick Dermatitis (Lick Granuloma)）[dog_0619]
+- stem=`dyspla` × 11件
+    - 股関節形成不全（Hip Dysplasia）[dog_0025]
+    - 肘関節形成不全（Elbow Dysplasia）[dog_0073]
+    - 網膜形成異常（Retinal Dysplasia）[dog_0149]
+    - 毛包形成異常（Follicular Dysplasia）[dog_0177]
+    - 顎関節形成不全（Temporomandibular Joint (TMJ) Dysplasia）[dog_0271]
+    - 三尖弁形成不全（Tricuspid Valve Dysplasia）[dog_0285]
+    - 肺動脈弁形成不全（Pulmonic Valve Dysplasia）[dog_0351]
+    - 僧帽弁形成不全（Mitral Valve Dysplasia）[dog_0352]
+    - 腎形成不全（Renal Dysplasia）[dog_0373]
+    - シー・ズー腎異形成（Shih Tzu Renal Dysplasia）[dog_0577]
+    - 肝微小血管異形成（MVD）（Hepatic Microvascular Dysplasia）[dog_0583]
+- stem=`pulmon` × 11件
+    - 肺動脈弁狭窄症（Pulmonic Stenosis）[dog_0059]
+    - 肺高血圧症（Pulmonary Hypertension）[dog_0093]
+    - 肺線維症（Pulmonary Fibrosis）[dog_0160]
+    - 肺性心（Cor Pulmonale）[dog_0288]
+    - 肺腺癌（Pulmonary Adenocarcinoma）[dog_0319]
+    - 肺動脈弁形成不全（Pulmonic Valve Dysplasia）[dog_0351]
+    - 肺血栓塞栓症 (PTE)（Pulmonary Thromboembolism (PTE)）[dog_0367]
+    - 肺血栓塞栓症（Pulmonary Thromboembolism）[dog_0458]
+    - 肺癌（Pulmonary Carcinoma）[dog_0465]
+    - ウェストハイランドホワイトテリア肺線維症（West Highland White Terrier Pulmonary Fibrosis）[dog_0554]
+    - 犬肺胞蛋白症（Canine Pulmonary Alveolar Proteinosis）[dog_0593]
+- stem=`immune` × 10件
+    - 免疫介在性溶血性貧血（IMHA）（Immune-Mediated Hemolytic Anemia）[dog_0037]
+    - 免疫介在性多発性関節炎（Immune-Mediated Polyarthritis (IMPA)）[dog_0173]
+    - 免疫介在性好中球減少症（Immune-Mediated Neutropenia）[dog_0327]
+    - 免疫介在性髄膜炎（Immune-Mediated Meningitis）[dog_0329]
+    - 免疫介在性多発性関節炎（Immune-Mediated Polyarthritis）[dog_0488]
+    - 免疫介在性血小板減少症（ITP）（Immune-Mediated Thrombocytopenia (ITP)）[dog_0490]
+    - 免疫介在性溶血性貧血（IMHA）（Immune-Mediated Hemolytic Anemia (IMHA)）[dog_0491]
+    - コッカースパニエル免疫介在性溶血性貧血（Cocker Spaniel Immune-Mediated Hemolytic Anemia）[dog_0564]
+    - 秋田犬免疫介在性多発性関節炎（Akita Immune-Mediated Polyarthritis）[dog_0574]
+    - 特発性免疫介在性筋炎（Idiopathic Immune-Mediated Myositis）[dog_0581]
+- stem=`mediat` × 10件
+    - 免疫介在性溶血性貧血（IMHA）（Immune-Mediated Hemolytic Anemia）[dog_0037]
+    - 免疫介在性多発性関節炎（Immune-Mediated Polyarthritis (IMPA)）[dog_0173]
+    - 免疫介在性好中球減少症（Immune-Mediated Neutropenia）[dog_0327]
+    - 免疫介在性髄膜炎（Immune-Mediated Meningitis）[dog_0329]
+    - 免疫介在性多発性関節炎（Immune-Mediated Polyarthritis）[dog_0488]
+    - 免疫介在性血小板減少症（ITP）（Immune-Mediated Thrombocytopenia (ITP)）[dog_0490]
+    - 免疫介在性溶血性貧血（IMHA）（Immune-Mediated Hemolytic Anemia (IMHA)）[dog_0491]
+    - コッカースパニエル免疫介在性溶血性貧血（Cocker Spaniel Immune-Mediated Hemolytic Anemia）[dog_0564]
+    - 秋田犬免疫介在性多発性関節炎（Akita Immune-Mediated Polyarthritis）[dog_0574]
+    - 特発性免疫介在性筋炎（Idiopathic Immune-Mediated Myositis）[dog_0581]
+- stem=`tumor` × 10件
+    - 肥満細胞腫（MCT）（Mast Cell Tumor）[dog_0106]
+    - 乳腺腫瘍（Mammary Tumor）[dog_0109]
+    - 鼻腔腫瘍（Nasal Tumor）[dog_0161]
+    - 脳腫瘍（Brain Tumor）[dog_0169]
+    - 精巣腫瘍（Testicular Tumor）[dog_0195]
+    - 末梢神経鞘腫瘍（Peripheral Nerve Sheath Tumor）[dog_0283]
+    - 陰茎/包皮腫瘍（Penile/Preputial Tumor）[dog_0379]
+    - 膀胱腫瘍（移行上皮癌）（Urinary Bladder Tumor (TCC)）[dog_0402]
+    - 副腎腫瘍（Adrenal Gland Tumor）[dog_0404]
+    - グロムス腫瘍（Glomus Tumor）[dog_0519]
+- stem=`gastri` × 8件
+    - 胃拡張胃捻転症候群（GDV）（Gastric Dilatation-Volvulus (GDV/Bloat)）[dog_0003]
+    - 胃潰瘍（Gastric Ulcer）[dog_0184]
+    - 胃内異物（Gastric Foreign Body）[dog_0224]
+    - 胃癌（Gastric Carcinoma）[dog_0355]
+    - 胃ポリープ（Gastric Polyps）[dog_0424]
+    - 胃潰瘍（Gastric Ulceration）[dog_0472]
+    - グレートデーン胃拡張捻転症候群素因（Great Dane Gastric Dilatation-Volvulus Predisposition）[dog_0561]
+    - ガストリノーマ（ゾリンジャー・エリソン症候群）（Gastrinoma (Zollinger-Ellison Syndrome)）[dog_0610]
+- stem=`hepati` × 8件
+    - 犬感染性肝炎（Canine Infectious Hepatitis）[dog_0042]
+    - 肝臓リンパ腫（Hepatic Lymphoma）[dog_0316]
+    - 慢性肝炎（Chronic Hepatitis）[dog_0360]
+    - 肝リピドーシス（Hepatic Lipidosis）[dog_0361]
+    - 肝膿瘍（Hepatic Abscess）[dog_0392]
+    - 犬慢性肝炎（Canine Chronic Hepatitis）[dog_0492]
+    - 銅関連慢性肝炎（犬種特異的）（Copper-Associated Chronic Hepatitis (Breed-Specific)）[dog_0544]
+    - 肝微小血管異形成（MVD）（Hepatic Microvascular Dysplasia）[dog_0583]
+- stem=`hypert` × 8件
+    - 甲状腺機能亢進症（Hyperthyroidism）[dog_0007]
+    - 肥大性骨異栄養症（HOD）（Hypertrophic Osteodystrophy (HOD)）[dog_0077]
+    - 肺高血圧症（Pulmonary Hypertension）[dog_0093]
+    - 肥大性骨症（Hypertrophic Osteopathy）[dog_0175]
+    - 悪性高体温症（Malignant Hyperthermia）[dog_0260]
+    - 肥大性骨異栄養症（重症型）（Hypertrophic Osteodystrophy (HOD) - Severe）[dog_0273]
+    - 高血圧性網膜症（Hypertensive Retinopathy）[dog_0408]
+    - ワイマラナー肥大性骨異栄養症（犬種特異性）（Weimaraner Hypertrophic Osteodystrophy (Breed-Specific)）[dog_0571]
+- stem=`adenoc` × 7件
+    - 肛門嚢腺癌（Anal Sac Adenocarcinoma）[dog_0227]
+    - 鼻腔腺がん（Nasal Adenocarcinoma）[dog_0233]
+    - 肺腺癌（Pulmonary Adenocarcinoma）[dog_0319]
+    - 肛門周囲腺癌（Perianal Gland Adenocarcinoma）[dog_0323]
+    - 腸腺癌（Intestinal Adenocarcinoma）[dog_0356]
+    - 膵腺癌（Pancreatic Adenocarcinoma）[dog_0403]
+    - アポクリン腺癌（Apocrine Gland Adenocarcinoma）[dog_0427]
+- stem=`mening` × 7件
+    - 肉芽腫性髄膜脳炎（GME）（Granulomatous Meningoencephalitis (GME)）[dog_0083]
+    - 壊死性髄膜脳炎（NME）（Necrotizing Meningoencephalitis (NME)）[dog_0277]
+    - ステロイド反応性髄膜炎-動脈炎（Steroid-Responsive Meningitis-Arteritis (SRMA)）[dog_0280]
+    - 髄膜腫（Meningioma）[dog_0322]
+    - 免疫介在性髄膜炎（Immune-Mediated Meningitis）[dog_0329]
+    - 肉芽腫性髄膜脳脊髄炎（Granulomatous Meningoencephalomyelitis (GME)）[dog_0451]
+    - 壊死性髄膜脳炎（パグ脳炎）（Necrotizing Meningoencephalitis (Pug Dog Encephalitis)）[dog_0452]
+- stem=`poison` × 7件
+    - キシリトール中毒（Xylitol Poisoning）[dog_0210]
+    - 殺鼠剤中毒（Rodenticide Poisoning）[dog_0213]
+    - エチレングリコール中毒（不凍液）（Ethylene Glycol Poisoning (Antifreeze)）[dog_0215]
+    - 鉛中毒（Lead Poisoning）[dog_0217]
+    - ナメクジ駆除剤（メタアルデヒド）中毒（Snail Bait (Metaldehyde) Poisoning）[dog_0336]
+    - サーモン中毒（サケ中毒症）（Salmon Poisoning Disease）[dog_0480]
+    - ストリキニーネ中毒（Strychnine Poisoning）[dog_0541]
+
+## T102 非臨床エントリ
+- フラグ数: **0**
+
+## T104 空 / 見出しのみ治療セクション
+- 完全に空: **0**
+- 投与量なし（見出しのみ）: **38**
+- 投与量あり: **585**
+
+### 投与量なし（上位30）
+- 甲状腺機能亢進症（Hyperthyroidism）[dog_0007] — ja:422字 / en:570字
+- 進行性網膜萎縮症（PRA）（Progressive Retinal Atrophy (PRA)）[dog_0095] — ja:454字 / en:786字
+- 変性性脊髄症（DM）（Degenerative Myelopathy (DM)）[dog_0099] — ja:976字 / en:1245字
+- 運動誘発性虚脱（EIC）（Exercise-Induced Collapse (EIC)）[dog_0101] — ja:534字 / en:1152字
+- 核硬化症（Nuclear Sclerosis）[dog_0148] — ja:691字 / en:645字
+- 網膜形成異常（Retinal Dysplasia）[dog_0149] — ja:376字 / en:487字
+- コリー眼異常（CEA）（Collie Eye Anomaly (CEA)）[dog_0153] — ja:346字 / en:602字
+- 肺葉捻転（Lung Lobe Torsion）[dog_0162] — ja:159字 / en:661字
+- 線維軟骨塞栓症（FCE）（Fibrocartilaginous Embolism (FCE)）[dog_0165] — ja:666字 / en:1200字
+- 包皮嵌頓（Paraphimosis）[dog_0196] — ja:306字 / en:1131字
+- 胎児発育不全（IUGR）・胎盤機能低下症（Intrauterine Growth Restriction (IUGR) / Placental Insufficiency）[dog_0199] — ja:1048字 / en:2496字
+- 先天性聴覚障害（Congenital Deafness）[dog_0253] — ja:163字 / en:626字
+- 右大動脈弓遺残（Persistent Right Aortic Arch (PRAA)）[dog_0257] — ja:449字 / en:572字
+- 手根関節過伸展損傷（Carpal Hyperextension Injury）[dog_0268] — ja:579字 / en:1016字
+- 肘突起癒合不全（Ununited Anconeal Process (UAP)）[dog_0270] — ja:956字 / en:1068字
+- 棘下筋拘縮（Infraspinatus Contracture）[dog_0272] — ja:632字 / en:414字
+- 心タンポナーデ（Cardiac Tamponade）[dog_0287] — ja:181字 / en:646字
+- 虹彩萎縮（Iris Atrophy）[dog_0305] — ja:634字 / en:588字
+- 含歯性嚢胞（Dentigerous Cyst）[dog_0314] — ja:174字 / en:405字
+- ピルビン酸キナーゼ欠損症（Pyruvate Kinase Deficiency）[dog_0354] — ja:442字 / en:699字
+- 鼻咽頭ポリープ（Nasopharyngeal Polyp）[dog_0370] — ja:157字 / en:370字
+- 尿道脱（Urethral Prolapse）[dog_0376] — ja:167字 / en:377字
+- 横隔膜ヘルニア（Diaphragmatic Hernia）[dog_0394] — ja:401字 / en:1007字
+- 会陰ヘルニア（Perineal Hernia）[dog_0395] — ja:596字 / en:986字
+- 鼠径ヘルニア（Inguinal Hernia）[dog_0396] — ja:467字 / en:372字
+- 臍ヘルニア（Umbilical Hernia）[dog_0397] — ja:824字 / en:305字
+- 唾液腺嚢胞（Salivary Mucocele (Sialocele)）[dog_0398] — ja:431字 / en:543字
+- 特発性頭部振戦症候群（Idiopathic Head Tremor Syndrome）[dog_0439] — ja:442字 / en:545字
+- 唾液腺嚢腫（Salivary Mucocele）[dog_0487] — ja:173字 / en:616字
+- 鼻孔狭窄（Stenotic Nares）[dog_0504] — ja:266字 / en:607字
+
+## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
+- 種別投与量なしの薬品リンク: **45** 疾患
+- 犬猫論文の他種への自動紐付け: **0** 疾患
+
+### 種に投与量データが無い薬品リンク（上位20）
+- 犬パルボウイルス感染症（Canine Parvovirus）[dog_0000] → ロニダゾール
+- 膵炎（Pancreatitis）[dog_0004] → ロニダゾール
+- 肝臓病（肝障害）（Liver Disease）[dog_0017] → ロニダゾール
+- 子宮蓄膿症（Pyometra）[dog_0032] → ロニダゾール
+- 急性胃腸炎（Gastroenteritis）[dog_0038] → ロニダゾール
+- 犬感染性肝炎（Canine Infectious Hepatitis）[dog_0042] → ロニダゾール
+- ジアルジア症（Giardiasis）[dog_0043] → ロニダゾール
+- 犬コロナウイルス腸炎（Canine Coronavirus (Enteric)）[dog_0048] → ロニダゾール
+- 炎症性腸疾患（IBD）（Inflammatory Bowel Disease (IBD)）[dog_0049] → ロニダゾール
+- 膵外分泌不全症（EPI）（Exocrine Pancreatic Insufficiency (EPI)）[dog_0051] → ロニダゾール
+- 消化管異物閉塞（Foreign Body Obstruction）[dog_0052] → ロニダゾール
+- 急性出血性下痢症候群（AHDS/HGE）（Hemorrhagic Gastroenteritis (HGE)）[dog_0053] → ロニダゾール
+- 大腸炎（Colitis）[dog_0054] → ロニダゾール
+- 門脈体循環シャント（肝シャント）（Portosystemic Shunt (Liver Shunt)）[dog_0055] → ロニダゾール
+- 流涙症（Epiphora (Watery Eyes)）[dog_0068] → ロニダゾール
+- 肺炎（Pneumonia）[dog_0090] → ロニダゾール
+- 誤嚥性肺炎（Aspiration Pneumonia）[dog_0091] → ロニダゾール
+- 胸水貯留（Pleural Effusion）[dog_0092] → ロニダゾール
+- 破傷風（Tetanus）[dog_0125] → ロニダゾール
+- ジステンパー脳炎（Canine Distemper Encephalitis）[dog_0166] → アシクロビル
+
+## T109 機械翻訳臭（置換辞書）
+- ヒット総数: **3**（safe 0 / review 3）
+
+### 用語別ヒット数
+- `遺伝学的` × 3
+
+### 出現箇所（上位30）
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ causes_ja [dog_0254] …の原因なし—純粋にTVL退縮の発生学的・遺伝学的異常。母体ビタミンA低下は歴史的に示唆さ…
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ causes_ja [dog_0255] …なし—純粋に硝子体血管系退縮の発生学的・遺伝学的異常。妊娠中の母体感染（CHV-1等）は…
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ diagnosis_ja [dog_0551] …ニン比でアミロイド腎症のスクリーニング。遺伝学的にはHAS2遺伝子過剰発現によるヒアルロ…

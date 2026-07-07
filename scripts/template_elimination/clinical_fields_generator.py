@@ -5191,3 +5191,10 @@ def generate_clinical_fields(
     for field in result:
         result[field] = filter_species_inapplicable_clauses(result[field], species)
     return result
+
+
+# ``gen_causes`` is the name PR #703's generic_english_causes.py imports for the
+# category-aware English aetiology generator. main independently added the same
+# generator as ``gen_causes_en``; alias so both callers share one implementation
+# (they were byte-for-byte-equivalent mirrors of ``gen_causes_ja``).
+gen_causes = gen_causes_en

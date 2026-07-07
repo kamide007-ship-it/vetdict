@@ -1748,6 +1748,50 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 ### 既知の残課題（次セッション候補・要人手翻訳）
 - **52疾患の英語臨床フィールドが完全日本語**（新規追加のJA-first コンテンツ: 観賞魚26疾患、馬の胃潰瘍/繁殖疾患、新生児症候群、マムシ咬傷等）。causes/treatment/prevention/prognosis/clinical_signs/pathophysiology が未翻訳。**臨床用量プロトコルの機械翻訳は患者安全上のリスク**があるため本セッションでは自動翻訳せず、獣医監修下での人手翻訳を推奨（description は英語グラウンディング済み）。
 
+## 2026-07セッション（第10弾: 英語 causes の日英カテゴリ・パリティ — 内容空虚な catch-all の撲滅）
+
+### 背景: 英語 causes だけが日本語と非同期の「単一 catch-all」だった
+過去セッションで日本語 `causes_ja` は `gen_causes_ja`（獣医監修済みのカテゴリ対応生成器、25カテゴリ）で正しいカテゴリに解決済みだった。しかし**英語 `causes` にはカテゴリ対応の生成器が存在せず**（`gen_causes_ja` はあるが `gen_causes`(EN) は欠落）、836疾患が単一の**内容空虚な catch-all**「Multifactorial etiology depending on disease type. Includes infectious agents, environmental factors…」を、残りが日本語カテゴリと**非同期**の英語カテゴリテンプレートを保持していた。
+- 実測（配信DB 7,094疾患）: 英語 causes の modulo-name テンプレート率 **86%**、distinct 値わずか **886**。
+- バイリンガル臨床ツールとして致命的: 英語ユーザーが *Heart Disease* を開くと「Multifactorial etiology depending on disease type」（無内容）、日本語ユーザーは正しい循環器病因を見る、という日英不一致。「一般公開しても評価の高いUX」を損なう最大要因。
+
+### `gen_causes`(EN) の実装 — `gen_causes_ja` の忠実な英語ミラー
+`clinical_fields_generator.py` に `gen_causes(category, name_en, species)` を追加（25カテゴリ、`gen_causes_ja` と同一の医学内容を英訳、新たな医学的主張なし）。英語版の毒性ソース辞書 `TOXIN_SOURCES_EN` / `_toxin_sources_en` も追加（種別に適切な毒物例を列挙）。既存の英語生成器（`gen_clinical_signs`/`gen_transmission`/`gen_diagnosis`/`gen_description`）と同じクリーンなスタイル。
+
+### 日英パリティを保証する検出・置換ロジック（`generic_english_causes.py` 新規）
+「捏造ゼロ」で日英を一致させる設計:
+- **検出**: 英語 causes が汎用カテゴリテンプレート（`GENERIC_CATEGORY_CAUSES_EN_MARKS`、47マーク）にマッチ。内容空虚な catch-all・`<system> etiology. includes…`・`<Category> diseases result from…`・`Caused by progressive deterioration of…` 等を網羅。**名前付き病原体（Salmonella等）・機序特異的（Urolithiasis causes:等）は除外**（正当な共有）。
+- **名前付き病原体の保護**: `viral/bacterial/fungal/parasite/nutrient/flagship/structural` の各 `_clinical_fields` に解決する疾患は**スキップ**（named-pathogen パスが所有）。
+- **カテゴリ決定**: 既にレビュー済みで正しい `causes_ja` を `fingerprint_etiology` でカテゴリ判定し、**同一カテゴリ**の英語文を適用 → 日英カテゴリが完全一致。JA がキュレート済み（fingerprint None）の場合のみ `resolve_true_category` にフォールバック。
+- JSONパス `eliminate_generic_english_causes.py --apply`（4,060件置換）+ 配信DB安全網 `ground_english_causes_to_category`（`migrate_to_sqlite.py`、named-pathogen/re-categorisation の**後**に実行しモジュール由来6件を捕捉）。
+
+### 効果（配信SQLite実測、7,094疾患）
+| Metric | Before | After |
+|---|---|---|
+| 内容空虚な「Multifactorial」catch-all | 836 | **0** |
+| distinct な英語 causes | 886 | **5,366**（6倍） |
+| 英語 causes modulo-name テンプレート率 | 86% | 75%※ |
+- ※残る75%は**正しいカテゴリに解決済み**の許容可能なカテゴリテンプレート（腫瘍/前庭→神経/肝→消化器 等）＋名前付き病原体の正当な共有。内容空虚・誤カテゴリはゼロ。確立された方針（causes のカテゴリレベル記述は許容、無内容 catch-all と誤カテゴリは不許容）に完全準拠。
+- 手動サンプル10疾患で日英カテゴリ完全一致を確認（Heart Disease→cardiac, von Willebrand→genetic_congenital, IBD→gastrointestinal, SLE→autoimmune, OCD→behavioral 等）。
+
+### エンドツーエンド検証
+- API: `/api/diseases/<id>` が更新後の英語 causes を配信（status 200、正しい循環器病因テキスト）を確認。
+- フロントエンド: `app.js` の言語ピック `(ja,en)=>currentLang==="ja"?...:(en||ja)` が英語UIで英語 causes を表示（鑑別診断結果ビュー + 疾患DB詳細パネルの両表示箇所）を確認。
+
+### 回帰テスト追加（tests/test_no_template_disease_content.py、+4件）
+- `test_no_contentless_multifactorial_causes_in_json` / `test_served_db_no_contentless_multifactorial_causes` — 内容空虚 catch-all の不在（JSON + 配信DB）
+- `test_english_causes_matches_japanese_category` — `gen_causes`(EN) が各カテゴリで正しいキーワードを含み catch-all を生成しない
+- `test_generic_english_causes_skips_named_agents` — 名前付き病原体疾患は上書きされない、非病原体は昇格される
+
+### テスト・CI
+- フルテストスイート: **3,508件合格**（34 skip、+4新規）
+- ruff check / format: 全変更ファイルで通過
+- 再現手順: `eliminate_generic_english_causes.py --apply` → `migrate_to_sqlite.py`
+
+### 次セッション候補
+- 英語 pathophysiology の残りカテゴリテンプレート（9%、grounding で対応可能）
+- Ehrlichia/Anaplasma/Babesia 等の named-agent 化（現状はカテゴリ解決で日英一致だが、病原体特異化の余地あり）
+- 52疾患の完全日本語な英語臨床フィールド（要人手翻訳、患者安全上の理由で自動翻訳せず）
 ## 2026-07セッション（第11弾: 疾患重複カードの撲滅 + 可視フィールドのクロス種テンプレート除去）
 
 ### 背景: 同一疾患が2枚のカードで表示される公開品質バグ
