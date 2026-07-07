@@ -1,0 +1,796 @@
+{
+  "species": "degu",
+  "n_records": 199,
+  "T101_duplicates": {
+    "exact_duplicate_clusters": [
+      {
+        "key": "熱中症",
+        "count": 2,
+        "members": [
+          {
+            "idx": 4,
+            "name": "Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "idx": 179,
+            "name": "Heat Stroke (Respiratory)",
+            "name_ja": "熱中症（呼吸器型）（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "heatstroke",
+        "count": 2,
+        "members": [
+          {
+            "idx": 4,
+            "name": "Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "idx": 179,
+            "name": "Heat Stroke (Respiratory)",
+            "name_ja": "熱中症（呼吸器型）（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "不正咬合",
+        "count": 2,
+        "members": [
+          {
+            "idx": 10,
+            "name": "Dental Malocclusion",
+            "name_ja": "不正咬合"
+          },
+          {
+            "idx": 127,
+            "name": "Malocclusion",
+            "name_ja": "不正咬合（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "皮膚糸状菌症",
+        "count": 2,
+        "members": [
+          {
+            "idx": 14,
+            "name": "Ringworm (Dermatophytosis)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "idx": 137,
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "barbering",
+        "count": 2,
+        "members": [
+          {
+            "idx": 17,
+            "name": "Barbering (Over-grooming)",
+            "name_ja": "バーバリング（過剰毛繕い）"
+          },
+          {
+            "idx": 140,
+            "name": "Barbering",
+            "name_ja": "毛引き（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "消化管うっ滞",
+        "count": 2,
+        "members": [
+          {
+            "idx": 27,
+            "name": "Gastrointestinal Stasis",
+            "name_ja": "消化管うっ滞"
+          },
+          {
+            "idx": 132,
+            "name": "GI Stasis",
+            "name_ja": "消化管うっ滞（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "diarrhea",
+        "count": 2,
+        "members": [
+          {
+            "idx": 29,
+            "name": "Diarrhea (Non-specific)",
+            "name_ja": "下痢（非特異的）"
+          },
+          {
+            "idx": 133,
+            "name": "Diarrhea",
+            "name_ja": "下痢（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "下痢",
+        "count": 2,
+        "members": [
+          {
+            "idx": 29,
+            "name": "Diarrhea (Non-specific)",
+            "name_ja": "下痢（非特異的）"
+          },
+          {
+            "idx": 133,
+            "name": "Diarrhea",
+            "name_ja": "下痢（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "hepaticlipidosis",
+        "count": 2,
+        "members": [
+          {
+            "idx": 34,
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "idx": 136,
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "肝リピドーシス",
+        "count": 2,
+        "members": [
+          {
+            "idx": 34,
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "idx": 136,
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "urolithiasis",
+        "count": 2,
+        "members": [
+          {
+            "idx": 37,
+            "name": "Urolithiasis (Bladder Stones)",
+            "name_ja": "尿路結石症"
+          },
+          {
+            "idx": 148,
+            "name": "Urolithiasis",
+            "name_ja": "尿路結石症（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "尿路結石症",
+        "count": 2,
+        "members": [
+          {
+            "idx": 37,
+            "name": "Urolithiasis (Bladder Stones)",
+            "name_ja": "尿路結石症"
+          },
+          {
+            "idx": 148,
+            "name": "Urolithiasis",
+            "name_ja": "尿路結石症（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "seizures",
+        "count": 2,
+        "members": [
+          {
+            "idx": 45,
+            "name": "Seizures (Epilepsy)",
+            "name_ja": "てんかん発作"
+          },
+          {
+            "idx": 145,
+            "name": "Seizures",
+            "name_ja": "痙攣発作（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "後肢麻痺",
+        "count": 2,
+        "members": [
+          {
+            "idx": 48,
+            "name": "Hind Limb Paralysis",
+            "name_ja": "後肢麻痺"
+          },
+          {
+            "idx": 147,
+            "name": "Posterior Paralysis",
+            "name_ja": "後肢麻痺（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "earinfection",
+        "count": 2,
+        "members": [
+          {
+            "idx": 51,
+            "name": "Ear Infection (Otitis)",
+            "name_ja": "耳感染症（外耳炎）"
+          },
+          {
+            "idx": 168,
+            "name": "Ear Infection",
+            "name_ja": "耳感染症（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "耳感染症",
+        "count": 2,
+        "members": [
+          {
+            "idx": 51,
+            "name": "Ear Infection (Otitis)",
+            "name_ja": "耳感染症（外耳炎）"
+          },
+          {
+            "idx": 168,
+            "name": "Ear Infection",
+            "name_ja": "耳感染症（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "胃潰瘍",
+        "count": 2,
+        "members": [
+          {
+            "idx": 81,
+            "name": "Gastric Ulceration",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "idx": 173,
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "pinworminfection",
+        "count": 2,
+        "members": [
+          {
+            "idx": 85,
+            "name": "Pinworm Infection (Syphacia)",
+            "name_ja": "蟯虫感染（シファシア）"
+          },
+          {
+            "idx": 135,
+            "name": "Pinworm Infection",
+            "name_ja": "蟯虫症（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "卵巣嚢胞",
+        "count": 2,
+        "members": [
+          {
+            "idx": 90,
+            "name": "Ovarian Cysts",
+            "name_ja": "卵巣嚢胞"
+          },
+          {
+            "idx": 149,
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞（デグー）"
+          }
+        ]
+      },
+      {
+        "key": "cageaggression",
+        "count": 2,
+        "members": [
+          {
+            "idx": 118,
+            "name": "Cage Aggression (Territorial)",
+            "name_ja": "ケージ攻撃性（縄張り）"
+          },
+          {
+            "idx": 163,
+            "name": "Cage Aggression",
+            "name_ja": "ケージ内攻撃行動（デグー）"
+          }
+        ]
+      }
+    ],
+    "split_family_clusters": [
+      {
+        "stem": "糖尿病",
+        "count": 7,
+        "members": [
+          {
+            "idx": 0,
+            "name_ja": "糖尿病",
+            "name": "Diabetes Mellitus"
+          },
+          {
+            "idx": 1,
+            "name_ja": "糖尿病性ケトアシドーシス",
+            "name": "Diabetic Ketoacidosis"
+          },
+          {
+            "idx": 6,
+            "name_ja": "糖尿病性白内障",
+            "name": "Diabetic Cataracts"
+          },
+          {
+            "idx": 56,
+            "name_ja": "糖尿病性神経障害",
+            "name": "Diabetes-related Neuropathy"
+          },
+          {
+            "idx": 59,
+            "name_ja": "糖尿病性網膜症",
+            "name": "Diabetic Retinopathy"
+          },
+          {
+            "idx": 60,
+            "name_ja": "糖尿病性腎症",
+            "name": "Diabetic Nephropathy"
+          },
+          {
+            "idx": 61,
+            "name_ja": "糖尿病性足潰瘍",
+            "name": "Diabetic Foot Ulcer"
+          }
+        ]
+      }
+    ],
+    "n_exact_duplicate_records": 40,
+    "n_split_family_clusters": 1
+  },
+  "T102_nonclinical": {
+    "flagged": [
+      {
+        "idx": 56,
+        "name": "Diabetes-related Neuropathy",
+        "name_ja": "糖尿病性神経障害",
+        "flags": [
+          "human_transplant_neuropathy_dm"
+        ]
+      },
+      {
+        "idx": 59,
+        "name": "Diabetic Retinopathy",
+        "name_ja": "糖尿病性網膜症",
+        "flags": [
+          "human_transplant_retinopathy"
+        ]
+      },
+      {
+        "idx": 60,
+        "name": "Diabetic Nephropathy",
+        "name_ja": "糖尿病性腎症",
+        "flags": [
+          "human_transplant_nephropathy"
+        ]
+      },
+      {
+        "idx": 61,
+        "name": "Diabetic Foot Ulcer",
+        "name_ja": "糖尿病性足潰瘍",
+        "flags": [
+          "human_transplant_footulcer",
+          "human_transplant_neuropathy_dm"
+        ]
+      },
+      {
+        "idx": 105,
+        "name": "Alzheimer's-like Disease",
+        "name_ja": "アルツハイマー様疾患",
+        "flags": [
+          "research_model_alzheimer",
+          "research_model_neurodegen"
+        ]
+      }
+    ],
+    "n_flagged": 5
+  },
+  "T104_empty_treatment": {
+    "flagged": [
+      {
+        "idx": 0,
+        "name": "Diabetes Mellitus",
+        "name_ja": "糖尿病",
+        "ja_len": 435,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 3,
+        "name": "Obesity",
+        "name_ja": "肥満",
+        "ja_len": 473,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 4,
+        "name": "Heat Stroke",
+        "name_ja": "熱中症",
+        "ja_len": 191,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 9,
+        "name": "Corneal Ulcer",
+        "name_ja": "角膜潰瘍",
+        "ja_len": 310,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 10,
+        "name": "Dental Malocclusion",
+        "name_ja": "不正咬合",
+        "ja_len": 183,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 11,
+        "name": "Incisor Overgrowth",
+        "name_ja": "切歯過長",
+        "ja_len": 71,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 12,
+        "name": "Molar Spurs",
+        "name_ja": "臼歯棘",
+        "ja_len": 174,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 13,
+        "name": "Tooth Root Abscess",
+        "name_ja": "歯根膿瘍",
+        "ja_len": 160,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 15,
+        "name": "Fur Mites (Demodex / Notoedres)",
+        "name_ja": "毛包虫症",
+        "ja_len": 163,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 16,
+        "name": "Tail Degloving Injury",
+        "name_ja": "尾部脱皮損傷",
+        "ja_len": 438,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 26,
+        "name": "Aspiration Pneumonia",
+        "name_ja": "誤嚥性肺炎",
+        "ja_len": 76,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 31,
+        "name": "Intestinal Parasites",
+        "name_ja": "腸内寄生虫症",
+        "ja_len": 430,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 33,
+        "name": "Intestinal Obstruction",
+        "name_ja": "腸閉塞",
+        "ja_len": 66,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 37,
+        "name": "Urolithiasis (Bladder Stones)",
+        "name_ja": "尿路結石症",
+        "ja_len": 413,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 46,
+        "name": "Stroke (Cerebrovascular Accident)",
+        "name_ja": "脳卒中",
+        "ja_len": 191,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 48,
+        "name": "Hind Limb Paralysis",
+        "name_ja": "後肢麻痺",
+        "ja_len": 436,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 49,
+        "name": "Congestive Heart Failure",
+        "name_ja": "うっ血性心不全",
+        "ja_len": 345,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 50,
+        "name": "Cardiomyopathy",
+        "name_ja": "心筋症",
+        "ja_len": 338,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 51,
+        "name": "Ear Infection (Otitis)",
+        "name_ja": "耳感染症（外耳炎）",
+        "ja_len": 165,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 53,
+        "name": "Septicemia",
+        "name_ja": "敗血症",
+        "ja_len": 559,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 55,
+        "name": "Rectal Prolapse",
+        "name_ja": "直腸脱",
+        "ja_len": 66,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 62,
+        "name": "Dental Malocclusion - Molar (Acquired)",
+        "name_ja": "不正咬合 - 臼歯（後天性）",
+        "ja_len": 185,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 63,
+        "name": "Dental Malocclusion - Incisor (Congenital)",
+        "name_ja": "不正咬合 - 切歯（先天性）",
+        "ja_len": 185,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 64,
+        "name": "Tooth Root Elongation",
+        "name_ja": "歯根伸長",
+        "ja_len": 175,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 65,
+        "name": "Mandibular Abscess (Dental Origin)",
+        "name_ja": "下顎膿瘍（歯原性）",
+        "ja_len": 165,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 68,
+        "name": "Tail Degloving - Complete",
+        "name_ja": "尾部皮膚剥離 - 完全型",
+        "ja_len": 200,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 69,
+        "name": "Tail Amputation Stump Infection",
+        "name_ja": "尾切断部感染",
+        "ja_len": 194,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 71,
+        "name": "Sarcoptic Mange",
+        "name_ja": "疥癬",
+        "ja_len": 161,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 75,
+        "name": "Mycoplasma Infection",
+        "name_ja": "マイコプラズマ感染症",
+        "ja_len": 166,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 76,
+        "name": "Bordetella Pneumonia",
+        "name_ja": "ボルデテラ肺炎",
+        "ja_len": 163,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 86,
+        "name": "Tapeworm Infection",
+        "name_ja": "条虫感染症",
+        "ja_len": 164,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 112,
+        "name": "Toxicosis (Plant Poisoning)",
+        "name_ja": "中毒症（植物中毒）",
+        "ja_len": 484,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 113,
+        "name": "Zinc Toxicosis",
+        "name_ja": "亜鉛中毒",
+        "ja_len": 771,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 122,
+        "name": "Dental Disease",
+        "name_ja": "歯科疾患（デグー）",
+        "ja_len": 247,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 123,
+        "name": "Tail Slip (Degloving)",
+        "name_ja": "尾剥脱（デグー）",
+        "ja_len": 478,
+        "ja_has_dose": false,
+        "en_has_dose": true,
+        "severity": "no_dose_ja_only"
+      },
+      {
+        "idx": 124,
+        "name": "Repetitive Behavior (Stereotypy)",
+        "name_ja": "常同行動（デグー）",
+        "ja_len": 493,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 140,
+        "name": "Barbering",
+        "name_ja": "毛引き（デグー）",
+        "ja_len": 213,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 152,
+        "name": "Splay Leg",
+        "name_ja": "開脚症（デグー）",
+        "ja_len": 188,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 162,
+        "name": "Stress-Related Illness",
+        "name_ja": "ストレス関連疾患（デグー）",
+        "ja_len": 224,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 181,
+        "name": "Arteriosclerosis",
+        "name_ja": "動脈硬化症（デグー）",
+        "ja_len": 204,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      },
+      {
+        "idx": 197,
+        "name": "Nail Overgrowth",
+        "name_ja": "爪過成長（デグー）",
+        "ja_len": 172,
+        "ja_has_dose": false,
+        "en_has_dose": false,
+        "severity": "no_dose"
+      }
+    ],
+    "n_flagged": 41,
+    "n_ja_empty": 0,
+    "n_no_dose_either": 20
+  }
+}
