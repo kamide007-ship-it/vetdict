@@ -40,12 +40,16 @@ def _md(report: dict) -> str:
     lines.append("")
     lines.append("## Summary")
     lines.append("")
-    lines.append(f"- **T101 exact-duplicate records:** {dup['n_exact_duplicate_records']} "
-                 f"in {len(dup['exact_duplicate_clusters'])} clusters")
+    lines.append(
+        f"- **T101 exact-duplicate records:** {dup['n_exact_duplicate_records']} "
+        f"in {len(dup['exact_duplicate_clusters'])} clusters"
+    )
     lines.append(f"- **T101 split-family clusters (≥3):** {dup['n_split_family_clusters']}")
     lines.append(f"- **T102 non-clinical / transplant flags:** {nc['n_flagged']}")
-    lines.append(f"- **T104 treatment w/o JA dosage:** {et['n_flagged']} "
-                 f"(fully empty JA: {et['n_ja_empty']}; no dose in either lang: {et['n_no_dose_either']})")
+    lines.append(
+        f"- **T104 treatment w/o JA dosage:** {et['n_flagged']} "
+        f"(fully empty JA: {et['n_ja_empty']}; no dose in either lang: {et['n_no_dose_either']})"
+    )
     lines.append("")
 
     lines.append("## T101 — Exact-duplicate name clusters")
@@ -99,11 +103,13 @@ def main(argv: list[str]) -> int:
         md_path.write_text(_md(report), encoding="utf-8")
 
         d = report["T101_duplicates"]
-        print(f"[{sp}] {report['n_records']} diseases | "
-              f"exact-dup records={d['n_exact_duplicate_records']} "
-              f"split-families={d['n_split_family_clusters']} | "
-              f"nonclinical={report['T102_nonclinical']['n_flagged']} | "
-              f"no-dose-tx={report['T104_empty_treatment']['n_flagged']}")
+        print(
+            f"[{sp}] {report['n_records']} diseases | "
+            f"exact-dup records={d['n_exact_duplicate_records']} "
+            f"split-families={d['n_split_family_clusters']} | "
+            f"nonclinical={report['T102_nonclinical']['n_flagged']} | "
+            f"no-dose-tx={report['T104_empty_treatment']['n_flagged']}"
+        )
         print(f"       -> {json_path.relative_to(REPORT_DIR.parents[1])}")
         print(f"       -> {md_path.relative_to(REPORT_DIR.parents[1])}")
     return 0

@@ -166,7 +166,10 @@ def detect_duplicates(records: list[dict[str, Any]]) -> dict[str, Any]:
 _NONCLINICAL_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     ("research_model_alzheimer", re.compile(r"アルツハイマー|alzheimer|amyloid|βアミロイド|アミロイド斑", re.I)),
     ("research_model_neurodegen", re.compile(r"パーキンソン|parkinson|神経変性.*モデル|タウ病理", re.I)),
-    ("research_model_generic", re.compile(r"研究モデル|動物モデル|疾患モデル|実験的誘発|induced model|research model", re.I)),
+    (
+        "research_model_generic",
+        re.compile(r"研究モデル|動物モデル|疾患モデル|実験的誘発|induced model|research model", re.I),
+    ),
     ("human_transplant_footulcer", re.compile(r"糖尿病性足潰瘍|足壊疽|diabetic foot", re.I)),
     ("human_transplant_retinopathy", re.compile(r"糖尿病性網膜症|diabetic retinopathy", re.I)),
     ("human_transplant_nephropathy", re.compile(r"糖尿病性腎症|diabetic nephropathy", re.I)),
@@ -181,10 +184,7 @@ def detect_nonclinical(records: list[dict[str, Any]]) -> dict[str, Any]:
     rather than genuine spontaneous companion-animal diseases. Read-only."""
     findings: list[dict[str, Any]] = []
     for i, r in enumerate(records):
-        haystack = " ".join(
-            str(r.get(f, "") or "")
-            for f in ("name", "name_ja", "description", "description_ja")
-        )
+        haystack = " ".join(str(r.get(f, "") or "") for f in ("name", "name_ja", "description", "description_ja"))
         hits = [label for label, rx in _NONCLINICAL_PATTERNS if rx.search(haystack)]
         if hits:
             findings.append(
