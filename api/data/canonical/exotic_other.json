@@ -1,0 +1,2225 @@
+{
+  "species": "exotic_other",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 292,
+    "merge_clusters": 3,
+    "records_merged_away": 3,
+    "archived": 0,
+    "served_after": 289
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "exotic_other_0021",
+        "slug": "gastrointestinal-stasis",
+        "name": "Gastrointestinal Stasis",
+        "name_ja": "消化管うっ滞"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0200",
+          "slug": "gi-stasis",
+          "name": "GI Stasis",
+          "name_ja": "消化管うっ滞（その他）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0042",
+        "slug": "heat-stress-heat-stroke",
+        "name": "Heat Stress / Heat Stroke",
+        "name_ja": "熱中症"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0186",
+          "slug": "heat-stroke",
+          "name": "Heat Stroke",
+          "name_ja": "熱中症（その他）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0140",
+        "slug": "porcine-epidemic-diarrhea-ped",
+        "name": "Porcine Epidemic Diarrhea (PED)",
+        "name_ja": "豚流行性下痢（PED）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0085",
+          "slug": "porcine-epidemic-diarrhea-ped",
+          "name": "Porcine Epidemic Diarrhea (PED)",
+          "name_ja": "豚流行性下痢（PED）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Gastric Ulcers (Porcine)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0005",
+            "slug": "gastric-ulcers-porcine",
+            "name": "Gastric Ulcers (Porcine)",
+            "name_ja": "胃潰瘍（豚）"
+          },
+          {
+            "id": "exotic_other_0202",
+            "slug": "gastric-ulcer",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Tetanus (Porcine)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0011",
+            "slug": "tetanus-porcine",
+            "name": "Tetanus (Porcine)",
+            "name_ja": "破傷風（豚）"
+          },
+          {
+            "id": "exotic_other_0115",
+            "slug": "tetanus-goat",
+            "name": "Tetanus (Goat)",
+            "name_ja": "ヤギ破傷風"
+          }
+        ]
+      },
+      {
+        "base": "Leptospirosis (Porcine)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0012",
+            "slug": "leptospirosis-porcine",
+            "name": "Leptospirosis (Porcine)",
+            "name_ja": "レプトスピラ症（豚）"
+          },
+          {
+            "id": "exotic_other_0149",
+            "slug": "leptospirosis",
+            "name": "Leptospirosis",
+            "name_ja": "レプトスピラ症（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Intestinal Parasitism (Porcine)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0013",
+            "slug": "intestinal-parasitism-porcine",
+            "name": "Intestinal Parasitism (Porcine)",
+            "name_ja": "腸管寄生虫症（豚）"
+          },
+          {
+            "id": "exotic_other_0024",
+            "slug": "intestinal-parasitism-exotic-mammal",
+            "name": "Intestinal Parasitism (Exotic Mammal)",
+            "name_ja": "腸管寄生虫症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0066",
+            "slug": "intestinal-parasitism-skunk",
+            "name": "Intestinal Parasitism (Skunk)",
+            "name_ja": "腸管寄生虫症（スカンク）"
+          },
+          {
+            "id": "exotic_other_0147",
+            "slug": "intestinal-parasitism",
+            "name": "Intestinal Parasitism",
+            "name_ja": "腸管寄生虫症（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Metabolic Bone Disease (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0015",
+            "slug": "metabolic-bone-disease-exotic-mammal",
+            "name": "Metabolic Bone Disease (Exotic Mammal)",
+            "name_ja": "代謝性骨疾患（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0065",
+            "slug": "metabolic-bone-disease-skunk",
+            "name": "Metabolic Bone Disease (Skunk)",
+            "name_ja": "代謝性骨疾患（スカンク）"
+          },
+          {
+            "id": "exotic_other_0163",
+            "slug": "metabolic-bone-disease",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0016",
+            "slug": "hepatic-lipidosis-exotic-mammal",
+            "name": "Hepatic Lipidosis (Exotic Mammal)",
+            "name_ja": "肝リピドーシス（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0164",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Diabetes Mellitus (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0017",
+            "slug": "diabetes-mellitus-exotic-mammal",
+            "name": "Diabetes Mellitus (Exotic Mammal)",
+            "name_ja": "糖尿病（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0172",
+            "slug": "diabetes-mellitus",
+            "name": "Diabetes Mellitus",
+            "name_ja": "糖尿病（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Upper Respiratory Infection (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0019",
+            "slug": "upper-respiratory-infection-exotic-mammal",
+            "name": "Upper Respiratory Infection (Exotic Mammal)",
+            "name_ja": "上部気道感染症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0182",
+            "slug": "upper-respiratory-infection",
+            "name": "Upper Respiratory Infection",
+            "name_ja": "上部気道感染症（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Pneumonia (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0020",
+            "slug": "pneumonia-exotic-mammal",
+            "name": "Pneumonia (Exotic Mammal)",
+            "name_ja": "肺炎（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0181",
+            "slug": "pneumonia-bacterial",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Rectal Prolapse (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0025",
+            "slug": "rectal-prolapse-exotic-mammal",
+            "name": "Rectal Prolapse (Exotic Mammal)",
+            "name_ja": "直腸脱（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0199",
+            "slug": "rectal-prolapse",
+            "name": "Rectal Prolapse",
+            "name_ja": "直腸脱（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Dental Abscess (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0027",
+            "slug": "dental-abscess-exotic-mammal",
+            "name": "Dental Abscess (Exotic Mammal)",
+            "name_ja": "歯根膿瘍（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0211",
+            "slug": "dental-abscess",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Pyometra (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0028",
+            "slug": "pyometra-exotic-mammal",
+            "name": "Pyometra (Exotic Mammal)",
+            "name_ja": "子宮蓄膿症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0234",
+            "slug": "pyometra",
+            "name": "Pyometra",
+            "name_ja": "子宮蓄膿症（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Dystocia (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0029",
+            "slug": "dystocia-exotic-mammal",
+            "name": "Dystocia (Exotic Mammal)",
+            "name_ja": "難産（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0236",
+            "slug": "dystocia",
+            "name": "Dystocia",
+            "name_ja": "難産（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Mammary Tumors (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0030",
+            "slug": "mammary-tumors-exotic-mammal",
+            "name": "Mammary Tumors (Exotic Mammal)",
+            "name_ja": "乳腺腫瘍（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0237",
+            "slug": "mammary-tumor",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Canine Distemper (Raccoon/Skunk)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0032",
+            "slug": "canine-distemper-raccoon-skunk",
+            "name": "Canine Distemper (Raccoon/Skunk)",
+            "name_ja": "犬ジステンパー（アライグマ・スカンク）"
+          },
+          {
+            "id": "exotic_other_0144",
+            "slug": "canine-distemper",
+            "name": "Canine Distemper",
+            "name_ja": "犬ジステンパー（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Rabies (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0033",
+            "slug": "rabies-exotic-mammal",
+            "name": "Rabies (Exotic Mammal)",
+            "name_ja": "狂犬病（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0143",
+            "slug": "rabies",
+            "name": "Rabies",
+            "name_ja": "狂犬病（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Vestibular Disease (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0034",
+            "slug": "vestibular-disease-exotic-mammal",
+            "name": "Vestibular Disease (Exotic Mammal)",
+            "name_ja": "前庭疾患（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0220",
+            "slug": "vestibular-disease",
+            "name": "Vestibular Disease",
+            "name_ja": "前庭疾患（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Dermatophytosis / Ringworm (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0035",
+            "slug": "dermatophytosis-ringworm-exotic-mammal",
+            "name": "Dermatophytosis / Ringworm (Exotic Mammal)",
+            "name_ja": "皮膚糸状菌症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0187",
+            "slug": "dermatophytosis-ringworm",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Contact Dermatitis (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0038",
+            "slug": "contact-dermatitis-exotic-mammal",
+            "name": "Contact Dermatitis (Exotic Mammal)",
+            "name_ja": "接触性皮膚炎（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0191",
+            "slug": "contact-dermatitis",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Obesity (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0044",
+            "slug": "obesity-exotic-mammal",
+            "name": "Obesity (Exotic Mammal)",
+            "name_ja": "肥満症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0062",
+            "slug": "obesity-prairie-dog",
+            "name": "Obesity (Prairie Dog)",
+            "name_ja": "肥満症（プレーリードッグ）"
+          },
+          {
+            "id": "exotic_other_0171",
+            "slug": "obesity-exotic",
+            "name": "Obesity (Exotic)",
+            "name_ja": "肥満（エキゾチック）（その他）"
+          },
+          {
+            "id": "exotic_other_0229",
+            "slug": "obesity",
+            "name": "Obesity",
+            "name_ja": "肥満（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Lymphoma (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0045",
+            "slug": "lymphoma-exotic-mammal",
+            "name": "Lymphoma (Exotic Mammal)",
+            "name_ja": "リンパ腫（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0238",
+            "slug": "lymphoma",
+            "name": "Lymphoma",
+            "name_ja": "リンパ腫（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Cutaneous Neoplasia (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0046",
+            "slug": "cutaneous-neoplasia-exotic-mammal",
+            "name": "Cutaneous Neoplasia (Exotic Mammal)",
+            "name_ja": "皮膚腫瘍（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0167",
+            "slug": "skin-tumor",
+            "name": "Skin Tumor",
+            "name_ja": "皮膚腫瘍（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Plague (Prairie Dog)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0047",
+            "slug": "plague-prairie-dog",
+            "name": "Plague (Prairie Dog)",
+            "name_ja": "ペスト（プレーリードッグ）"
+          },
+          {
+            "id": "exotic_other_0155",
+            "slug": "plague-yersinia-pestis",
+            "name": "Plague (Yersinia pestis)",
+            "name_ja": "ペスト（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Tularemia (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0048",
+            "slug": "tularemia-exotic-mammal",
+            "name": "Tularemia (Exotic Mammal)",
+            "name_ja": "野兎病（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0154",
+            "slug": "tularemia",
+            "name": "Tularemia",
+            "name_ja": "野兎病（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Salmonellosis (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0049",
+            "slug": "salmonellosis-exotic-mammal",
+            "name": "Salmonellosis (Exotic Mammal)",
+            "name_ja": "サルモネラ症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0203",
+            "slug": "salmonellosis",
+            "name": "Salmonellosis",
+            "name_ja": "サルモネラ症（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Toxoplasmosis (Wallaby/Marsupial)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0052",
+            "slug": "toxoplasmosis-wallaby-marsupial",
+            "name": "Toxoplasmosis (Wallaby/Marsupial)",
+            "name_ja": "トキソプラズマ症（有袋類）"
+          },
+          {
+            "id": "exotic_other_0150",
+            "slug": "toxoplasmosis",
+            "name": "Toxoplasmosis",
+            "name_ja": "トキソプラズマ症（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Urolithiasis (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0053",
+            "slug": "urolithiasis-exotic-mammal",
+            "name": "Urolithiasis (Exotic Mammal)",
+            "name_ja": "尿路結石症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0109",
+            "slug": "urolithiasis-goat",
+            "name": "Urolithiasis (Goat)",
+            "name_ja": "ヤギ尿路結石症"
+          },
+          {
+            "id": "exotic_other_0233",
+            "slug": "urolithiasis",
+            "name": "Urolithiasis",
+            "name_ja": "尿路結石症（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Renal Disease (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0054",
+            "slug": "renal-disease-exotic-mammal",
+            "name": "Renal Disease (Exotic Mammal)",
+            "name_ja": "腎疾患（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0165",
+            "slug": "renal-disease",
+            "name": "Renal Disease",
+            "name_ja": "腎疾患（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Adrenal Disease (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0056",
+            "slug": "adrenal-disease-exotic-mammal",
+            "name": "Adrenal Disease (Exotic Mammal)",
+            "name_ja": "副腎疾患（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0173",
+            "slug": "adrenal-disease",
+            "name": "Adrenal Disease",
+            "name_ja": "副腎疾患（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Heart Disease (Exotic Mammal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0057",
+            "slug": "heart-disease-exotic-mammal",
+            "name": "Heart Disease (Exotic Mammal)",
+            "name_ja": "心疾患（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0063",
+            "slug": "heart-disease-prairie-dog",
+            "name": "Heart Disease (Prairie Dog)",
+            "name_ja": "心疾患（プレーリードッグ）"
+          },
+          {
+            "id": "exotic_other_0174",
+            "slug": "cardiac-disease",
+            "name": "Cardiac Disease",
+            "name_ja": "心疾患（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Dehydration (Tarantula)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0067",
+            "slug": "dehydration-tarantula",
+            "name": "Dehydration (Tarantula)",
+            "name_ja": "脱水（タランチュラ）"
+          },
+          {
+            "id": "exotic_other_0240",
+            "slug": "dehydration",
+            "name": "Dehydration",
+            "name_ja": "脱水（その他）"
+          }
+        ]
+      },
+      {
+        "base": "Coccidiosis (Goat)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "exotic_other_0112",
+            "slug": "coccidiosis-goat",
+            "name": "Coccidiosis (Goat)",
+            "name_ja": "ヤギコクシジウム症"
+          },
+          {
+            "id": "exotic_other_0207",
+            "slug": "coccidiosis",
+            "name": "Coccidiosis",
+            "name_ja": "コクシジウム症（その他）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "porcin",
+        "size": 15,
+        "members": [
+          {
+            "id": "exotic_other_0003",
+            "name": "Porcine Stress Syndrome (Malignant Hyperthermia)",
+            "name_ja": "豚ストレス症候群（悪性高熱症）"
+          },
+          {
+            "id": "exotic_other_0006",
+            "name": "Porcine Obesity",
+            "name_ja": "豚の肥満症"
+          },
+          {
+            "id": "exotic_other_0009",
+            "name": "Porcine Reproductive Disorders",
+            "name_ja": "豚の繁殖障害"
+          },
+          {
+            "id": "exotic_other_0010",
+            "name": "Porcine Pneumonia",
+            "name_ja": "豚肺炎"
+          },
+          {
+            "id": "exotic_other_0058",
+            "name": "Porcine Arthritis",
+            "name_ja": "豚関節炎"
+          },
+          {
+            "id": "exotic_other_0081",
+            "name": "Porcine Parvovirus (PPV)",
+            "name_ja": "ブタパルボウイルス感染症"
+          },
+          {
+            "id": "exotic_other_0082",
+            "name": "Porcine Circovirus Disease (PCV2)",
+            "name_ja": "ブタサーコウイルス2型疾患"
+          },
+          {
+            "id": "exotic_other_0083",
+            "name": "Porcine Rotavirus",
+            "name_ja": "ブタロタウイルス感染症"
+          },
+          {
+            "id": "exotic_other_0085",
+            "name": "Porcine Epidemic Diarrhea (PED)",
+            "name_ja": "豚流行性下痢（PED）"
+          },
+          {
+            "id": "exotic_other_0094",
+            "name": "Porcine Dermatitis / Nephropathy Syndrome (PDNS)",
+            "name_ja": "豚皮膚炎腎症症候群"
+          },
+          {
+            "id": "exotic_other_0096",
+            "name": "Porcine Pityriasis Rosea",
+            "name_ja": "ブタ粃糠疹"
+          },
+          {
+            "id": "exotic_other_0097",
+            "name": "Porcine Mastitis",
+            "name_ja": "ブタ乳房炎"
+          },
+          {
+            "id": "exotic_other_0098",
+            "name": "Porcine Uterine Infection (Metritis)",
+            "name_ja": "ブタ子宮感染症（子宮炎）"
+          },
+          {
+            "id": "exotic_other_0100",
+            "name": "Porcine Melanoma",
+            "name_ja": "ブタメラノーマ"
+          },
+          {
+            "id": "exotic_other_0140",
+            "name": "Porcine Epidemic Diarrhea (PED)",
+            "name_ja": "豚流行性下痢（PED）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 14,
+        "members": [
+          {
+            "id": "exotic_other_0035",
+            "name": "Dermatophytosis / Ringworm (Exotic Mammal)",
+            "name_ja": "皮膚糸状菌症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0038",
+            "name": "Contact Dermatitis (Exotic Mammal)",
+            "name_ja": "接触性皮膚炎（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0079",
+            "name": "Parasitic Dermatitis (General Exotic)",
+            "name_ja": "寄生虫性皮膚炎（一般エキゾチック）"
+          },
+          {
+            "id": "exotic_other_0094",
+            "name": "Porcine Dermatitis / Nephropathy Syndrome (PDNS)",
+            "name_ja": "豚皮膚炎腎症症候群"
+          },
+          {
+            "id": "exotic_other_0187",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（その他）"
+          },
+          {
+            "id": "exotic_other_0191",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎（その他）"
+          },
+          {
+            "id": "exotic_other_0268",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0269",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0270",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0271",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（その他）"
+          },
+          {
+            "id": "exotic_other_0272",
+            "name": "Dermatological Neoplasia",
+            "name_ja": "皮膚腫瘍性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0273",
+            "name": "Dermatological Autoimmune Disease",
+            "name_ja": "皮膚自己免疫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0274",
+            "name": "Dermatological Allergic Disease",
+            "name_ja": "皮膚アレルギー疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0275",
+            "name": "Chronic Dermatitis",
+            "name_ja": "慢性皮膚炎（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ferret",
+        "size": 12,
+        "members": [
+          {
+            "id": "exotic_other_0127",
+            "name": "Ferret Adrenal Gland Disease",
+            "name_ja": "フェレット副腎疾患"
+          },
+          {
+            "id": "exotic_other_0128",
+            "name": "Ferret Insulinoma",
+            "name_ja": "フェレットインスリノーマ"
+          },
+          {
+            "id": "exotic_other_0129",
+            "name": "Ferret Lymphoma",
+            "name_ja": "フェレットリンパ腫"
+          },
+          {
+            "id": "exotic_other_0130",
+            "name": "Ferret Aplastic Anemia (Estrogen Toxicity)",
+            "name_ja": "フェレット再生不良性貧血（エストロゲン中毒）"
+          },
+          {
+            "id": "exotic_other_0131",
+            "name": "Ferret Canine Distemper",
+            "name_ja": "フェレットジステンパー"
+          },
+          {
+            "id": "exotic_other_0132",
+            "name": "Ferret Influenza",
+            "name_ja": "フェレットインフルエンザ"
+          },
+          {
+            "id": "exotic_other_0133",
+            "name": "Ferret Aleutian Disease",
+            "name_ja": "フェレットアリューシャン病"
+          },
+          {
+            "id": "exotic_other_0134",
+            "name": "Ferret ECE (Epizootic Catarrhal Enteritis)",
+            "name_ja": "フェレット流行性カタル性腸炎（ECE）"
+          },
+          {
+            "id": "exotic_other_0135",
+            "name": "Ferret Gastric Foreign Body",
+            "name_ja": "フェレット胃異物"
+          },
+          {
+            "id": "exotic_other_0136",
+            "name": "Ferret Helicobacter Gastritis",
+            "name_ja": "フェレットヘリコバクター胃炎"
+          },
+          {
+            "id": "exotic_other_0137",
+            "name": "Ferret Proliferative Bowel Disease",
+            "name_ja": "フェレット増殖性腸疾患"
+          },
+          {
+            "id": "exotic_other_0138",
+            "name": "Ferret Heart Disease (Cardiomyopathy)",
+            "name_ja": "フェレット心疾患（心筋症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "respir",
+        "size": 12,
+        "members": [
+          {
+            "id": "exotic_other_0019",
+            "name": "Upper Respiratory Infection (Exotic Mammal)",
+            "name_ja": "上部気道感染症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0061",
+            "name": "Respiratory Infection (Prairie Dog)",
+            "name_ja": "呼吸器感染症（プレーリードッグ）"
+          },
+          {
+            "id": "exotic_other_0175",
+            "name": "Respiratory Disease",
+            "name_ja": "呼吸器疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0182",
+            "name": "Upper Respiratory Infection",
+            "name_ja": "上部気道感染症（その他）"
+          },
+          {
+            "id": "exotic_other_0260",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0261",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0262",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0263",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0264",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0265",
+            "name": "Respiratory Inflammatory Disease",
+            "name_ja": "呼吸器炎症性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0266",
+            "name": "Lower Respiratory Tract Infection",
+            "name_ja": "下部気道感染（その他）"
+          },
+          {
+            "id": "exotic_other_0267",
+            "name": "Chronic Respiratory Disease",
+            "name_ja": "慢性呼吸器疾患（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastro",
+        "size": 11,
+        "members": [
+          {
+            "id": "exotic_other_0021",
+            "name": "Gastrointestinal Stasis",
+            "name_ja": "消化管うっ滞"
+          },
+          {
+            "id": "exotic_other_0084",
+            "name": "Transmissible Gastroenteritis (TGE)",
+            "name_ja": "伝染性胃腸炎（TGE）"
+          },
+          {
+            "id": "exotic_other_0176",
+            "name": "Gastrointestinal Disease",
+            "name_ja": "消化器疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0252",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0253",
+            "name": "Gastrointestinal Viral Infection",
+            "name_ja": "消化管ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0254",
+            "name": "Gastrointestinal Fungal Infection",
+            "name_ja": "消化管真菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0255",
+            "name": "Gastrointestinal Parasitic Disease",
+            "name_ja": "消化管寄生虫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0256",
+            "name": "Gastrointestinal Neoplasia",
+            "name_ja": "消化管腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0257",
+            "name": "Gastrointestinal Inflammatory Disease",
+            "name_ja": "消化管炎症性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0258",
+            "name": "Gastrointestinal Motility Disorder",
+            "name_ja": "消化管運動障害（その他）"
+          },
+          {
+            "id": "exotic_other_0259",
+            "name": "Gastrointestinal Obstruction (Partial)",
+            "name_ja": "消化管部分閉塞（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "parasi",
+        "size": 11,
+        "members": [
+          {
+            "id": "exotic_other_0013",
+            "name": "Intestinal Parasitism (Porcine)",
+            "name_ja": "腸管寄生虫症（豚）"
+          },
+          {
+            "id": "exotic_other_0024",
+            "name": "Intestinal Parasitism (Exotic Mammal)",
+            "name_ja": "腸管寄生虫症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0036",
+            "name": "External Parasites (Mites/Fleas/Ticks)",
+            "name_ja": "外部寄生虫（ダニ・ノミ・マダニ）"
+          },
+          {
+            "id": "exotic_other_0066",
+            "name": "Intestinal Parasitism (Skunk)",
+            "name_ja": "腸管寄生虫症（スカンク）"
+          },
+          {
+            "id": "exotic_other_0079",
+            "name": "Parasitic Dermatitis (General Exotic)",
+            "name_ja": "寄生虫性皮膚炎（一般エキゾチック）"
+          },
+          {
+            "id": "exotic_other_0147",
+            "name": "Intestinal Parasitism",
+            "name_ja": "腸管寄生虫症（その他）"
+          },
+          {
+            "id": "exotic_other_0248",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0255",
+            "name": "Gastrointestinal Parasitic Disease",
+            "name_ja": "消化管寄生虫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0263",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0271",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（その他）"
+          },
+          {
+            "id": "exotic_other_0282",
+            "name": "Neurological Parasitic Disease",
+            "name_ja": "神経系寄生虫疾患（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 9,
+        "members": [
+          {
+            "id": "exotic_other_0016",
+            "name": "Hepatic Lipidosis (Exotic Mammal)",
+            "name_ja": "肝リピドーシス（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0121",
+            "name": "Hedgehog Hepatic Lipidosis",
+            "name_ja": "ハリネズミ肝脂肪症"
+          },
+          {
+            "id": "exotic_other_0164",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（その他）"
+          },
+          {
+            "id": "exotic_other_0246",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（その他）"
+          },
+          {
+            "id": "exotic_other_0247",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（その他）"
+          },
+          {
+            "id": "exotic_other_0248",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0249",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（その他）"
+          },
+          {
+            "id": "exotic_other_0250",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0251",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 9,
+        "members": [
+          {
+            "id": "exotic_other_0046",
+            "name": "Cutaneous Neoplasia (Exotic Mammal)",
+            "name_ja": "皮膚腫瘍（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0168",
+            "name": "Internal Neoplasia",
+            "name_ja": "内臓腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0250",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0256",
+            "name": "Gastrointestinal Neoplasia",
+            "name_ja": "消化管腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0264",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0272",
+            "name": "Dermatological Neoplasia",
+            "name_ja": "皮膚腫瘍性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0277",
+            "name": "Urogenital Neoplasia",
+            "name_ja": "泌尿生殖器腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0283",
+            "name": "Neurological Neoplasia",
+            "name_ja": "神経系腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0290",
+            "name": "Ophthalmological Neoplasia",
+            "name_ja": "眼科腫瘍（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neurol",
+        "size": 9,
+        "members": [
+          {
+            "id": "exotic_other_0177",
+            "name": "Neurological Disease",
+            "name_ja": "神経疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0280",
+            "name": "Neurological Bacterial Infection",
+            "name_ja": "神経系細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0281",
+            "name": "Neurological Viral Infection",
+            "name_ja": "神経系ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0282",
+            "name": "Neurological Parasitic Disease",
+            "name_ja": "神経系寄生虫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0283",
+            "name": "Neurological Neoplasia",
+            "name_ja": "神経系腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0284",
+            "name": "Neurological Degenerative Disease",
+            "name_ja": "神経変性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0285",
+            "name": "Neurological Inflammatory Disease",
+            "name_ja": "神経炎症性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0286",
+            "name": "Neurological Traumatic Injury",
+            "name_ja": "神経外傷性損傷（その他）"
+          },
+          {
+            "id": "exotic_other_0287",
+            "name": "Neurological Metabolic Disease",
+            "name_ja": "神経代謝疾患（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bacter",
+        "size": 8,
+        "members": [
+          {
+            "id": "exotic_other_0142",
+            "name": "Zoonotic Bacterial Infection",
+            "name_ja": "人獣共通細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0246",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（その他）"
+          },
+          {
+            "id": "exotic_other_0252",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0260",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0268",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0276",
+            "name": "Urogenital Bacterial Infection",
+            "name_ja": "泌尿生殖器細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0280",
+            "name": "Neurological Bacterial Infection",
+            "name_ja": "神経系細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0288",
+            "name": "Ophthalmological Bacterial Infection",
+            "name_ja": "眼科細菌感染（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hedgeh",
+        "size": 7,
+        "members": [
+          {
+            "id": "exotic_other_0116",
+            "name": "Hedgehog Wobbly Hedgehog Syndrome (WHS)",
+            "name_ja": "ハリネズミふらつき症候群（WHS）"
+          },
+          {
+            "id": "exotic_other_0117",
+            "name": "Hedgehog Oral Squamous Cell Carcinoma",
+            "name_ja": "ハリネズミ口腔扁平上皮癌"
+          },
+          {
+            "id": "exotic_other_0118",
+            "name": "Hedgehog Skin Mites (Caparinia tripilis)",
+            "name_ja": "ハリネズミダニ症（カパリニア）"
+          },
+          {
+            "id": "exotic_other_0119",
+            "name": "Hedgehog Ringworm (Trichophyton)",
+            "name_ja": "ハリネズミ白癬（トリコフィトン）"
+          },
+          {
+            "id": "exotic_other_0120",
+            "name": "Hedgehog Obesity",
+            "name_ja": "ハリネズミ肥満症"
+          },
+          {
+            "id": "exotic_other_0121",
+            "name": "Hedgehog Hepatic Lipidosis",
+            "name_ja": "ハリネズミ肝脂肪症"
+          },
+          {
+            "id": "exotic_other_0122",
+            "name": "Hedgehog Cardiomyopathy",
+            "name_ja": "ハリネズミ心筋症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "obesit",
+        "size": 7,
+        "members": [
+          {
+            "id": "exotic_other_0006",
+            "name": "Porcine Obesity",
+            "name_ja": "豚の肥満症"
+          },
+          {
+            "id": "exotic_other_0044",
+            "name": "Obesity (Exotic Mammal)",
+            "name_ja": "肥満症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0062",
+            "name": "Obesity (Prairie Dog)",
+            "name_ja": "肥満症（プレーリードッグ）"
+          },
+          {
+            "id": "exotic_other_0064",
+            "name": "Skunk Obesity",
+            "name_ja": "スカンクの肥満症"
+          },
+          {
+            "id": "exotic_other_0120",
+            "name": "Hedgehog Obesity",
+            "name_ja": "ハリネズミ肥満症"
+          },
+          {
+            "id": "exotic_other_0171",
+            "name": "Obesity (Exotic)",
+            "name_ja": "肥満（エキゾチック）（その他）"
+          },
+          {
+            "id": "exotic_other_0229",
+            "name": "Obesity",
+            "name_ja": "肥満（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stres",
+        "size": 6,
+        "members": [
+          {
+            "id": "exotic_other_0003",
+            "name": "Porcine Stress Syndrome (Malignant Hyperthermia)",
+            "name_ja": "豚ストレス症候群（悪性高熱症）"
+          },
+          {
+            "id": "exotic_other_0042",
+            "name": "Heat Stress / Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "exotic_other_0043",
+            "name": "Hypothermia / Cold Stress",
+            "name_ja": "低温ストレス・低体温症"
+          },
+          {
+            "id": "exotic_other_0051",
+            "name": "Stress Myopathy (Capture Myopathy)",
+            "name_ja": "ストレス性ミオパチー（捕獲ミオパチー）"
+          },
+          {
+            "id": "exotic_other_0076",
+            "name": "Stress-Related Illness (Exotic)",
+            "name_ja": "ストレス関連疾患（エキゾチック）"
+          },
+          {
+            "id": "exotic_other_0078",
+            "name": "Thermal Burns / Thermal Stress (Exotic)",
+            "name_ja": "熱傷・温度ストレス（エキゾチック）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "viral",
+        "size": 6,
+        "members": [
+          {
+            "id": "exotic_other_0247",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（その他）"
+          },
+          {
+            "id": "exotic_other_0253",
+            "name": "Gastrointestinal Viral Infection",
+            "name_ja": "消化管ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0261",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0269",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0281",
+            "name": "Neurological Viral Infection",
+            "name_ja": "神経系ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0289",
+            "name": "Ophthalmological Viral Infection",
+            "name_ja": "眼科ウイルス感染（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastri",
+        "size": 5,
+        "members": [
+          {
+            "id": "exotic_other_0005",
+            "name": "Gastric Ulcers (Porcine)",
+            "name_ja": "胃潰瘍（豚）"
+          },
+          {
+            "id": "exotic_other_0022",
+            "name": "Gastric Dilatation",
+            "name_ja": "胃拡張"
+          },
+          {
+            "id": "exotic_other_0135",
+            "name": "Ferret Gastric Foreign Body",
+            "name_ja": "フェレット胃異物"
+          },
+          {
+            "id": "exotic_other_0136",
+            "name": "Ferret Helicobacter Gastritis",
+            "name_ja": "フェレットヘリコバクター胃炎"
+          },
+          {
+            "id": "exotic_other_0202",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "heart",
+        "size": 5,
+        "members": [
+          {
+            "id": "exotic_other_0057",
+            "name": "Heart Disease (Exotic Mammal)",
+            "name_ja": "心疾患（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0063",
+            "name": "Heart Disease (Prairie Dog)",
+            "name_ja": "心疾患（プレーリードッグ）"
+          },
+          {
+            "id": "exotic_other_0138",
+            "name": "Ferret Heart Disease (Cardiomyopathy)",
+            "name_ja": "フェレット心疾患（心筋症）"
+          },
+          {
+            "id": "exotic_other_0141",
+            "name": "Mulberry Heart Disease (Vitamin E/Selenium Deficiency)",
+            "name_ja": "桑実心臓病（ビタミンE/セレン欠乏症）"
+          },
+          {
+            "id": "exotic_other_0226",
+            "name": "Congestive Heart Failure",
+            "name_ja": "うっ血性心不全（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 5,
+        "members": [
+          {
+            "id": "exotic_other_0013",
+            "name": "Intestinal Parasitism (Porcine)",
+            "name_ja": "腸管寄生虫症（豚）"
+          },
+          {
+            "id": "exotic_other_0024",
+            "name": "Intestinal Parasitism (Exotic Mammal)",
+            "name_ja": "腸管寄生虫症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0066",
+            "name": "Intestinal Parasitism (Skunk)",
+            "name_ja": "腸管寄生虫症（スカンク）"
+          },
+          {
+            "id": "exotic_other_0147",
+            "name": "Intestinal Parasitism",
+            "name_ja": "腸管寄生虫症（その他）"
+          },
+          {
+            "id": "exotic_other_0197",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "metabo",
+        "size": 5,
+        "members": [
+          {
+            "id": "exotic_other_0015",
+            "name": "Metabolic Bone Disease (Exotic Mammal)",
+            "name_ja": "代謝性骨疾患（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0065",
+            "name": "Metabolic Bone Disease (Skunk)",
+            "name_ja": "代謝性骨疾患（スカンク）"
+          },
+          {
+            "id": "exotic_other_0163",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0251",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（その他）"
+          },
+          {
+            "id": "exotic_other_0287",
+            "name": "Neurological Metabolic Disease",
+            "name_ja": "神経代謝疾患（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ophtha",
+        "size": 5,
+        "members": [
+          {
+            "id": "exotic_other_0178",
+            "name": "Ophthalmological Disease",
+            "name_ja": "眼疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0288",
+            "name": "Ophthalmological Bacterial Infection",
+            "name_ja": "眼科細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0289",
+            "name": "Ophthalmological Viral Infection",
+            "name_ja": "眼科ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0290",
+            "name": "Ophthalmological Neoplasia",
+            "name_ja": "眼科腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0291",
+            "name": "Ophthalmological Degenerative Disease",
+            "name_ja": "眼科変性疾患（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 5,
+        "members": [
+          {
+            "id": "exotic_other_0010",
+            "name": "Porcine Pneumonia",
+            "name_ja": "豚肺炎"
+          },
+          {
+            "id": "exotic_other_0020",
+            "name": "Pneumonia (Exotic Mammal)",
+            "name_ja": "肺炎（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0090",
+            "name": "Mycoplasma Pneumonia (Porcine)",
+            "name_ja": "ブタマイコプラズマ肺炎"
+          },
+          {
+            "id": "exotic_other_0181",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（その他）"
+          },
+          {
+            "id": "exotic_other_0184",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 4,
+        "members": [
+          {
+            "id": "exotic_other_0027",
+            "name": "Dental Abscess (Exotic Mammal)",
+            "name_ja": "歯根膿瘍（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0037",
+            "name": "Subcutaneous Abscess (Exotic Mammal)",
+            "name_ja": "皮下膿瘍（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0189",
+            "name": "Skin Abscess",
+            "name_ja": "皮膚膿瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0211",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "caprin",
+        "size": 4,
+        "members": [
+          {
+            "id": "exotic_other_0101",
+            "name": "Caprine Arthritis Encephalitis (CAE)",
+            "name_ja": "ヤギ関節炎脳炎（CAE）"
+          },
+          {
+            "id": "exotic_other_0103",
+            "name": "Caprine Contagious Pleuropneumonia",
+            "name_ja": "ヤギ伝染性胸膜肺炎"
+          },
+          {
+            "id": "exotic_other_0105",
+            "name": "Caprine Foot Rot",
+            "name_ja": "ヤギ蹄腐敗症"
+          },
+          {
+            "id": "exotic_other_0113",
+            "name": "Caprine Mastitis",
+            "name_ja": "ヤギ乳房炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dental",
+        "size": 4,
+        "members": [
+          {
+            "id": "exotic_other_0026",
+            "name": "Dental Malocclusion (Exotic Mammal)",
+            "name_ja": "不正咬合（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0027",
+            "name": "Dental Abscess (Exotic Mammal)",
+            "name_ja": "歯根膿瘍（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0161",
+            "name": "Dental Disease (Exotic)",
+            "name_ja": "歯科疾患（エキゾチック）（その他）"
+          },
+          {
+            "id": "exotic_other_0211",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "glider",
+        "size": 4,
+        "members": [
+          {
+            "id": "exotic_other_0123",
+            "name": "Sugar Glider Self-Mutilation",
+            "name_ja": "フクロモモンガ自傷行動"
+          },
+          {
+            "id": "exotic_other_0124",
+            "name": "Sugar Glider Nutritional Osteodystrophy",
+            "name_ja": "フクロモモンガ栄養性骨異栄養症"
+          },
+          {
+            "id": "exotic_other_0125",
+            "name": "Sugar Glider Aflatoxicosis",
+            "name_ja": "フクロモモンガアフラトキシン中毒"
+          },
+          {
+            "id": "exotic_other_0126",
+            "name": "Sugar Glider Ick (Bacterial Dermatitis)",
+            "name_ja": "フクロモモンガ皮膚細菌感染症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "inflam",
+        "size": 4,
+        "members": [
+          {
+            "id": "exotic_other_0257",
+            "name": "Gastrointestinal Inflammatory Disease",
+            "name_ja": "消化管炎症性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0265",
+            "name": "Respiratory Inflammatory Disease",
+            "name_ja": "呼吸器炎症性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0278",
+            "name": "Urogenital Inflammatory Disease",
+            "name_ja": "泌尿生殖器炎症性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0285",
+            "name": "Neurological Inflammatory Disease",
+            "name_ja": "神経炎症性疾患（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "sugar",
+        "size": 4,
+        "members": [
+          {
+            "id": "exotic_other_0123",
+            "name": "Sugar Glider Self-Mutilation",
+            "name_ja": "フクロモモンガ自傷行動"
+          },
+          {
+            "id": "exotic_other_0124",
+            "name": "Sugar Glider Nutritional Osteodystrophy",
+            "name_ja": "フクロモモンガ栄養性骨異栄養症"
+          },
+          {
+            "id": "exotic_other_0125",
+            "name": "Sugar Glider Aflatoxicosis",
+            "name_ja": "フクロモモンガアフラトキシン中毒"
+          },
+          {
+            "id": "exotic_other_0126",
+            "name": "Sugar Glider Ick (Bacterial Dermatitis)",
+            "name_ja": "フクロモモンガ皮膚細菌感染症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "urogen",
+        "size": 4,
+        "members": [
+          {
+            "id": "exotic_other_0276",
+            "name": "Urogenital Bacterial Infection",
+            "name_ja": "泌尿生殖器細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0277",
+            "name": "Urogenital Neoplasia",
+            "name_ja": "泌尿生殖器腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0278",
+            "name": "Urogenital Inflammatory Disease",
+            "name_ja": "泌尿生殖器炎症性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0279",
+            "name": "Urogenital Congenital Anomaly",
+            "name_ja": "泌尿生殖器先天異常（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adrena",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0056",
+            "name": "Adrenal Disease (Exotic Mammal)",
+            "name_ja": "副腎疾患（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0127",
+            "name": "Ferret Adrenal Gland Disease",
+            "name_ja": "フェレット副腎疾患"
+          },
+          {
+            "id": "exotic_other_0173",
+            "name": "Adrenal Disease",
+            "name_ja": "副腎疾患（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bone",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0015",
+            "name": "Metabolic Bone Disease (Exotic Mammal)",
+            "name_ja": "代謝性骨疾患（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0065",
+            "name": "Metabolic Bone Disease (Skunk)",
+            "name_ja": "代謝性骨疾患（スカンク）"
+          },
+          {
+            "id": "exotic_other_0163",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "canine",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0032",
+            "name": "Canine Distemper (Raccoon/Skunk)",
+            "name_ja": "犬ジステンパー（アライグマ・スカンク）"
+          },
+          {
+            "id": "exotic_other_0131",
+            "name": "Ferret Canine Distemper",
+            "name_ja": "フェレットジステンパー"
+          },
+          {
+            "id": "exotic_other_0144",
+            "name": "Canine Distemper",
+            "name_ja": "犬ジステンパー（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0039",
+            "name": "Vitamin C Deficiency (Scurvy-like)",
+            "name_ja": "ビタミンC欠乏症"
+          },
+          {
+            "id": "exotic_other_0040",
+            "name": "Vitamin A Deficiency (Exotic Mammal)",
+            "name_ja": "ビタミンA欠乏症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0162",
+            "name": "Nutritional Deficiency",
+            "name_ja": "栄養欠乏症（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "diarrh",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0085",
+            "name": "Porcine Epidemic Diarrhea (PED)",
+            "name_ja": "豚流行性下痢（PED）"
+          },
+          {
+            "id": "exotic_other_0140",
+            "name": "Porcine Epidemic Diarrhea (PED)",
+            "name_ja": "豚流行性下痢（PED）"
+          },
+          {
+            "id": "exotic_other_0196",
+            "name": "Diarrhea (Non-specific)",
+            "name_ja": "非特異的下痢（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "distem",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0032",
+            "name": "Canine Distemper (Raccoon/Skunk)",
+            "name_ja": "犬ジステンパー（アライグマ・スカンク）"
+          },
+          {
+            "id": "exotic_other_0131",
+            "name": "Ferret Canine Distemper",
+            "name_ja": "フェレットジステンパー"
+          },
+          {
+            "id": "exotic_other_0144",
+            "name": "Canine Distemper",
+            "name_ja": "犬ジステンパー（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enteri",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0023",
+            "name": "Enteritis / Colitis (Exotic Mammal)",
+            "name_ja": "腸炎・大腸炎（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0086",
+            "name": "Clostridial Enteritis",
+            "name_ja": "クロストリジウム性腸炎"
+          },
+          {
+            "id": "exotic_other_0204",
+            "name": "E. coli Enteritis",
+            "name_ja": "大腸菌性腸炎（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fungal",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0254",
+            "name": "Gastrointestinal Fungal Infection",
+            "name_ja": "消化管真菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0262",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0270",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0070",
+            "name": "Mite Infestation (Tarantula)",
+            "name_ja": "ダニ寄生症（タランチュラ）"
+          },
+          {
+            "id": "exotic_other_0111",
+            "name": "Goat Lice Infestation",
+            "name_ja": "ヤギシラミ寄生症"
+          },
+          {
+            "id": "exotic_other_0271",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lipido",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0016",
+            "name": "Hepatic Lipidosis (Exotic Mammal)",
+            "name_ja": "肝リピドーシス（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0121",
+            "name": "Hedgehog Hepatic Lipidosis",
+            "name_ja": "ハリネズミ肝脂肪症"
+          },
+          {
+            "id": "exotic_other_0164",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lympho",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0045",
+            "name": "Lymphoma (Exotic Mammal)",
+            "name_ja": "リンパ腫（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0129",
+            "name": "Ferret Lymphoma",
+            "name_ja": "フェレットリンパ腫"
+          },
+          {
+            "id": "exotic_other_0238",
+            "name": "Lymphoma",
+            "name_ja": "リンパ腫（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nutrit",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0077",
+            "name": "Nutritional Secondary Hyperparathyroidism",
+            "name_ja": "栄養性二次性上皮小体機能亢進症"
+          },
+          {
+            "id": "exotic_other_0124",
+            "name": "Sugar Glider Nutritional Osteodystrophy",
+            "name_ja": "フクロモモンガ栄養性骨異栄養症"
+          },
+          {
+            "id": "exotic_other_0162",
+            "name": "Nutritional Deficiency",
+            "name_ja": "栄養欠乏症（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "skin",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0118",
+            "name": "Hedgehog Skin Mites (Caparinia tripilis)",
+            "name_ja": "ハリネズミダニ症（カパリニア）"
+          },
+          {
+            "id": "exotic_other_0167",
+            "name": "Skin Tumor",
+            "name_ja": "皮膚腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0189",
+            "name": "Skin Abscess",
+            "name_ja": "皮膚膿瘍（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "swine",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0014",
+            "name": "Swine Influenza",
+            "name_ja": "豚インフルエンザ"
+          },
+          {
+            "id": "exotic_other_0087",
+            "name": "Swine Dysentery (Brachyspira)",
+            "name_ja": "豚赤痢（ブラキスピラ）"
+          },
+          {
+            "id": "exotic_other_0139",
+            "name": "African Swine Fever (ASF)",
+            "name_ja": "アフリカ豚熱（アフリカ豚コレラ・ASF）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tract",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0093",
+            "name": "Cystitis / Urinary Tract Infection (Porcine)",
+            "name_ja": "ブタ膀胱炎・尿路感染症"
+          },
+          {
+            "id": "exotic_other_0231",
+            "name": "Urinary Tract Infection",
+            "name_ja": "尿路感染症（その他）"
+          },
+          {
+            "id": "exotic_other_0266",
+            "name": "Lower Respiratory Tract Infection",
+            "name_ja": "下部気道感染（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0030",
+            "name": "Mammary Tumors (Exotic Mammal)",
+            "name_ja": "乳腺腫瘍（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0167",
+            "name": "Skin Tumor",
+            "name_ja": "皮膚腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0237",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ulcer",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0005",
+            "name": "Gastric Ulcers (Porcine)",
+            "name_ja": "胃潰瘍（豚）"
+          },
+          {
+            "id": "exotic_other_0202",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0215",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "urolit",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0053",
+            "name": "Urolithiasis (Exotic Mammal)",
+            "name_ja": "尿路結石症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0109",
+            "name": "Urolithiasis (Goat)",
+            "name_ja": "ヤギ尿路結石症"
+          },
+          {
+            "id": "exotic_other_0233",
+            "name": "Urolithiasis",
+            "name_ja": "尿路結石症（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wound",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0080",
+            "name": "Trauma / Wound Infection (Exotic)",
+            "name_ja": "外傷・創傷感染（エキゾチック）"
+          },
+          {
+            "id": "exotic_other_0190",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（その他）"
+          },
+          {
+            "id": "exotic_other_0243",
+            "name": "Wound Infection",
+            "name_ja": "創傷感染（その他）"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1401 @@
+{
+  "species": "lizard",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 250,
+    "merge_clusters": 9,
+    "records_merged_away": 9,
+    "archived": 0,
+    "served_after": 241
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "lizard_0001",
+        "slug": "nutritional-secondary-hyperparathyroidism-nshp",
+        "name": "Nutritional Secondary Hyperparathyroidism (NSHP)",
+        "name_ja": "栄養性二次性副甲状腺機能亢進症"
+      },
+      "merged": [
+        {
+          "id": "lizard_0150",
+          "slug": "nutritional-secondary-hyperparathyroidism",
+          "name": "Nutritional Secondary Hyperparathyroidism",
+          "name_ja": "栄養性二次性副甲状腺機能亢進症（トカゲ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0002",
+        "slug": "vitamin-a-deficiency-hypovitaminosis-a",
+        "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+        "name_ja": "ビタミンA欠乏症"
+      },
+      "merged": [
+        {
+          "id": "lizard_0233",
+          "slug": "vitamin-a-deficiency",
+          "name": "Vitamin A Deficiency",
+          "name_ja": "ビタミンA欠乏症（トカゲ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0015",
+        "slug": "dermatophytosis-fungal-skin-infection",
+        "name": "Dermatophytosis (Fungal Skin Infection)",
+        "name_ja": "皮膚糸状菌症"
+      },
+      "merged": [
+        {
+          "id": "lizard_0167",
+          "slug": "dermatophytosis",
+          "name": "Dermatophytosis",
+          "name_ja": "皮膚糸状菌症（トカゲ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0019",
+        "slug": "infectious-stomatitis-mouth-rot",
+        "name": "Infectious Stomatitis (Mouth Rot)",
+        "name_ja": "感染性口内炎（マウスロット）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0141",
+          "slug": "infectious-stomatitis-mouth-rot",
+          "name": "Infectious Stomatitis (Mouth Rot)",
+          "name_ja": "感染性口内炎（マウスロット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0032",
+        "slug": "thermal-burns",
+        "name": "Thermal Burns",
+        "name_ja": "熱傷"
+      },
+      "merged": [
+        {
+          "id": "lizard_0240",
+          "slug": "burns",
+          "name": "Burns",
+          "name_ja": "熱傷（トカゲ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0052",
+        "slug": "renal-failure-chronic-kidney-disease",
+        "name": "Renal Failure (Chronic Kidney Disease)",
+        "name_ja": "腎不全"
+      },
+      "merged": [
+        {
+          "id": "lizard_0189",
+          "slug": "renal-failure",
+          "name": "Renal Failure",
+          "name_ja": "腎不全（トカゲ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0053",
+        "slug": "bladder-stones-urolithiasis",
+        "name": "Bladder Stones (Urolithiasis)",
+        "name_ja": "膀胱結石"
+      },
+      "merged": [
+        {
+          "id": "lizard_0191",
+          "slug": "bladder-stone",
+          "name": "Bladder Stone",
+          "name_ja": "膀胱結石（トカゲ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0109",
+        "slug": "limb-fractures",
+        "name": "Limb Fractures",
+        "name_ja": "四肢骨折"
+      },
+      "merged": [
+        {
+          "id": "lizard_0216",
+          "slug": "fracture-limb",
+          "name": "Fracture (Limb)",
+          "name_ja": "四肢骨折（トカゲ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0115",
+        "slug": "lead-toxicosis",
+        "name": "Lead Toxicosis",
+        "name_ja": "鉛中毒"
+      },
+      "merged": [
+        {
+          "id": "lizard_0237",
+          "slug": "lead-poisoning",
+          "name": "Lead Poisoning",
+          "name_ja": "鉛中毒（トカゲ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Metabolic Bone Disease (MBD)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0000",
+            "slug": "metabolic-bone-disease-mbd",
+            "name": "Metabolic Bone Disease (MBD)",
+            "name_ja": "代謝性骨疾患（MBD）"
+          },
+          {
+            "id": "lizard_0149",
+            "slug": "metabolic-bone-disease-severe",
+            "name": "Metabolic Bone Disease (Severe)",
+            "name_ja": "重度代謝性骨疾患（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Atadenovirus Infection (ADV)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0009",
+            "slug": "atadenovirus-infection-adv",
+            "name": "Atadenovirus Infection (ADV)",
+            "name_ja": "アタデノウイルス感染症（ADV）"
+          },
+          {
+            "id": "lizard_0144",
+            "slug": "atadenovirus-infection",
+            "name": "Atadenovirus Infection",
+            "name_ja": "アタデノウイルス感染（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Adenovirus Infection (Non-Atadenovirus)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0010",
+            "slug": "adenovirus-infection-non-atadenovirus",
+            "name": "Adenovirus Infection (Non-Atadenovirus)",
+            "name_ja": "アデノウイルス感染症（非アタデノ）"
+          },
+          {
+            "id": "lizard_0164",
+            "slug": "adenovirus-infection",
+            "name": "Adenovirus Infection",
+            "name_ja": "アデノウイルス感染（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Yellow Fungus Disease (CANV - Chrysosporium anamorph of Nannizziopsis vriesii)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0014",
+            "slug": "yellow-fungus-disease-canv-chrysosporium-anamorph-of-nannizziopsis-vriesii",
+            "name": "Yellow Fungus Disease (CANV - Chrysosporium anamorph of Nannizziopsis vriesii)",
+            "name_ja": "黄色真菌症（CANV）"
+          },
+          {
+            "id": "lizard_0142",
+            "slug": "yellow-fungus-disease-chrysosporium-anamorph-of-nannizziopsis-vriesii-canv",
+            "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
+            "name_ja": "黄色真菌症（CANV感染症）"
+          },
+          {
+            "id": "lizard_0145",
+            "slug": "yellow-fungus-disease",
+            "name": "Yellow Fungus Disease",
+            "name_ja": "黄色真菌病（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Pneumonia (Lower Respiratory Infection)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0018",
+            "slug": "pneumonia-lower-respiratory-infection",
+            "name": "Pneumonia (Lower Respiratory Infection)",
+            "name_ja": "肺炎（下部呼吸器感染症）"
+          },
+          {
+            "id": "lizard_0207",
+            "slug": "pneumonia",
+            "name": "Pneumonia",
+            "name_ja": "肺炎（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Mite Infestation (Ectoparasites)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0024",
+            "slug": "mite-infestation-ectoparasites",
+            "name": "Mite Infestation (Ectoparasites)",
+            "name_ja": "ダニ寄生（外部寄生虫）"
+          },
+          {
+            "id": "lizard_0170",
+            "slug": "mite-infestation-ophionyssus",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Amoebic Infection (Entamoeba)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0026",
+            "slug": "amoebic-infection-entamoeba",
+            "name": "Amoebic Infection (Entamoeba)",
+            "name_ja": "アメーバ感染症"
+          },
+          {
+            "id": "lizard_0177",
+            "slug": "amoebic-infection",
+            "name": "Amoebic Infection",
+            "name_ja": "アメーバ感染（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Thermal Burns",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0032",
+            "slug": "thermal-burns",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷"
+          },
+          {
+            "id": "lizard_0134",
+            "slug": "burns-chemical",
+            "name": "Burns (Chemical)",
+            "name_ja": "化学熱傷"
+          },
+          {
+            "id": "lizard_0240",
+            "slug": "burns",
+            "name": "Burns",
+            "name_ja": "熱傷（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Scale Rot (Ulcerative Dermatitis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0033",
+            "slug": "scale-rot-ulcerative-dermatitis",
+            "name": "Scale Rot (Ulcerative Dermatitis)",
+            "name_ja": "スケイルロット（潰瘍性皮膚炎）"
+          },
+          {
+            "id": "lizard_0181",
+            "slug": "scale-rot",
+            "name": "Scale Rot",
+            "name_ja": "鱗腐敗（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Rostral Abrasion (Nose Rub)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0036",
+            "slug": "rostral-abrasion-nose-rub",
+            "name": "Rostral Abrasion (Nose Rub)",
+            "name_ja": "吻部擦過傷（ノーズラブ）"
+          },
+          {
+            "id": "lizard_0178",
+            "slug": "rostral-abrasion",
+            "name": "Rostral Abrasion",
+            "name_ja": "吻端擦過傷（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0040",
+            "slug": "hepatic-lipidosis-fatty-liver-disease",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "lizard_0197",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Anorexia (Non-specific)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0055",
+            "slug": "anorexia-non-specific",
+            "name": "Anorexia (Non-specific)",
+            "name_ja": "食欲不振（非特異的）"
+          },
+          {
+            "id": "lizard_0204",
+            "slug": "anorexia-behavioral",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（トカゲ）"
+          },
+          {
+            "id": "lizard_0245",
+            "slug": "anorexia-stress-related",
+            "name": "Anorexia (Stress-Related)",
+            "name_ja": "ストレス性拒食（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Hyperthermia (Heat Stroke)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0064",
+            "slug": "hyperthermia-heat-stroke",
+            "name": "Hyperthermia (Heat Stroke)",
+            "name_ja": "高体温症（熱中症）"
+          },
+          {
+            "id": "lizard_0236",
+            "slug": "hyperthermia",
+            "name": "Hyperthermia",
+            "name_ja": "高体温症（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Cestode (Tapeworm) Infection",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0096",
+            "slug": "cestode-tapeworm-infection",
+            "name": "Cestode (Tapeworm) Infection",
+            "name_ja": "条虫感染症"
+          },
+          {
+            "id": "lizard_0172",
+            "slug": "cestode-infection",
+            "name": "Cestode Infection",
+            "name_ja": "条虫感染（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Limb Fractures",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0109",
+            "slug": "limb-fractures",
+            "name": "Limb Fractures",
+            "name_ja": "四肢骨折"
+          },
+          {
+            "id": "lizard_0216",
+            "slug": "fracture-limb",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（トカゲ）"
+          },
+          {
+            "id": "lizard_0217",
+            "slug": "fracture-shell-carapace",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（トカゲ）"
+          }
+        ]
+      },
+      {
+        "base": "Gout (Visceral)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "lizard_0187",
+            "slug": "gout-visceral",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（トカゲ）"
+          },
+          {
+            "id": "lizard_0188",
+            "slug": "gout-articular",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（トカゲ）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "defici",
+        "size": 9,
+        "members": [
+          {
+            "id": "lizard_0002",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "lizard_0003",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "lizard_0120",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン欠乏症"
+          },
+          {
+            "id": "lizard_0121",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "lizard_0122",
+            "name": "Protein Deficiency / Malnutrition",
+            "name_ja": "タンパク質欠乏・栄養不良"
+          },
+          {
+            "id": "lizard_0123",
+            "name": "UV Light Deficiency",
+            "name_ja": "紫外線不足症"
+          },
+          {
+            "id": "lizard_0157",
+            "name": "UV Light Deficiency Syndrome",
+            "name_ja": "紫外線欠乏症候群（トカゲ）"
+          },
+          {
+            "id": "lizard_0233",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（トカゲ）"
+          },
+          {
+            "id": "lizard_0234",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 8,
+        "members": [
+          {
+            "id": "lizard_0040",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "lizard_0197",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（トカゲ）"
+          },
+          {
+            "id": "lizard_0198",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（トカゲ）"
+          },
+          {
+            "id": "lizard_0199",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（トカゲ）"
+          },
+          {
+            "id": "lizard_0246",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（トカゲ）"
+          },
+          {
+            "id": "lizard_0247",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（トカゲ）"
+          },
+          {
+            "id": "lizard_0248",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（トカゲ）"
+          },
+          {
+            "id": "lizard_0249",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 6,
+        "members": [
+          {
+            "id": "lizard_0035",
+            "name": "Subcutaneous Abscess",
+            "name_ja": "皮下膿瘍"
+          },
+          {
+            "id": "lizard_0044",
+            "name": "Periocular Abscess",
+            "name_ja": "眼周囲膿瘍"
+          },
+          {
+            "id": "lizard_0127",
+            "name": "Aural Abscess",
+            "name_ja": "耳膿瘍"
+          },
+          {
+            "id": "lizard_0152",
+            "name": "Temporal Gland Abscess",
+            "name_ja": "側頭腺膿瘍（トカゲ）"
+          },
+          {
+            "id": "lizard_0182",
+            "name": "Abscess",
+            "name_ja": "膿瘍（トカゲ）"
+          },
+          {
+            "id": "lizard_0212",
+            "name": "Subspectacular Abscess",
+            "name_ja": "眼鏡鱗下膿瘍（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 6,
+        "members": [
+          {
+            "id": "lizard_0015",
+            "name": "Dermatophytosis (Fungal Skin Infection)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "lizard_0034",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "lizard_0138",
+            "name": "Photosensitization Dermatitis",
+            "name_ja": "光線過敏性皮膚炎"
+          },
+          {
+            "id": "lizard_0146",
+            "name": "Nannizziopsis Dermatitis",
+            "name_ja": "ナンニジオプシス皮膚炎（トカゲ）"
+          },
+          {
+            "id": "lizard_0167",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（トカゲ）"
+          },
+          {
+            "id": "lizard_0185",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 6,
+        "members": [
+          {
+            "id": "lizard_0048",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "lizard_0049",
+            "name": "Hemipenal Prolapse",
+            "name_ja": "半陰茎脱出"
+          },
+          {
+            "id": "lizard_0133",
+            "name": "Organ Prolapse (Gastric/Intestinal)",
+            "name_ja": "臓器脱（胃・腸）"
+          },
+          {
+            "id": "lizard_0194",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（トカゲ）"
+          },
+          {
+            "id": "lizard_0201",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱（トカゲ）"
+          },
+          {
+            "id": "lizard_0205",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gout",
+        "size": 5,
+        "members": [
+          {
+            "id": "lizard_0050",
+            "name": "Articular Gout",
+            "name_ja": "関節痛風"
+          },
+          {
+            "id": "lizard_0051",
+            "name": "Visceral Gout",
+            "name_ja": "内臓痛風"
+          },
+          {
+            "id": "lizard_0118",
+            "name": "Hyperuricemia / Pre-gout",
+            "name_ja": "高尿酸血症"
+          },
+          {
+            "id": "lizard_0187",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（トカゲ）"
+          },
+          {
+            "id": "lizard_0188",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "impact",
+        "size": 5,
+        "members": [
+          {
+            "id": "lizard_0037",
+            "name": "Gastrointestinal Impaction (Substrate Impaction)",
+            "name_ja": "消化管閉塞（床材インパクション）"
+          },
+          {
+            "id": "lizard_0072",
+            "name": "Femoral Pore Impaction / Infection",
+            "name_ja": "大腿孔閉塞・感染"
+          },
+          {
+            "id": "lizard_0125",
+            "name": "Substrate Impaction (Non-GI)",
+            "name_ja": "床材インパクション（消化管外型）"
+          },
+          {
+            "id": "lizard_0155",
+            "name": "Sand Impaction",
+            "name_ja": "砂停滞（トカゲ）"
+          },
+          {
+            "id": "lizard_0158",
+            "name": "Femoral Pore Impaction",
+            "name_ja": "大腿腺閉塞（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 5,
+        "members": [
+          {
+            "id": "lizard_0024",
+            "name": "Mite Infestation (Ectoparasites)",
+            "name_ja": "ダニ寄生（外部寄生虫）"
+          },
+          {
+            "id": "lizard_0027",
+            "name": "Tick Infestation",
+            "name_ja": "マダニ寄生"
+          },
+          {
+            "id": "lizard_0099",
+            "name": "Chigger Mite Infestation (Trombiculidae)",
+            "name_ja": "ツツガムシ寄生症"
+          },
+          {
+            "id": "lizard_0100",
+            "name": "Leech Infestation",
+            "name_ja": "ヒル寄生症"
+          },
+          {
+            "id": "lizard_0170",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tail",
+        "size": 5,
+        "members": [
+          {
+            "id": "lizard_0031",
+            "name": "Tail Autotomy Infection",
+            "name_ja": "自切部位感染"
+          },
+          {
+            "id": "lizard_0147",
+            "name": "Tail Autotomy Complication",
+            "name_ja": "自切合併症（トカゲ）"
+          },
+          {
+            "id": "lizard_0148",
+            "name": "Tail Regeneration Abnormality",
+            "name_ja": "尾再生異常（トカゲ）"
+          },
+          {
+            "id": "lizard_0183",
+            "name": "Tail Necrosis",
+            "name_ja": "尾壊死（トカゲ）"
+          },
+          {
+            "id": "lizard_0222",
+            "name": "Tail Amputation",
+            "name_ja": "尾切断（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 5,
+        "members": [
+          {
+            "id": "lizard_0068",
+            "name": "Toxicosis (Poisoning)",
+            "name_ja": "中毒症"
+          },
+          {
+            "id": "lizard_0114",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "lizard_0115",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "lizard_0116",
+            "name": "Ivermectin Toxicosis",
+            "name_ja": "イベルメクチン中毒"
+          },
+          {
+            "id": "lizard_0117",
+            "name": "Metronidazole Toxicosis",
+            "name_ja": "メトロニダゾール中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adenov",
+        "size": 4,
+        "members": [
+          {
+            "id": "lizard_0010",
+            "name": "Adenovirus Infection (Non-Atadenovirus)",
+            "name_ja": "アデノウイルス感染症（非アタデノ）"
+          },
+          {
+            "id": "lizard_0143",
+            "name": "Agamid Adenovirus (Bearded Dragon Atadenovirus)",
+            "name_ja": "アガマアデノウイルス（フトアゴヒゲトカゲアタデノウイルス）"
+          },
+          {
+            "id": "lizard_0153",
+            "name": "Bearded Dragon Adenovirus",
+            "name_ja": "フトアゴヒゲトカゲアデノウイルス（トカゲ）"
+          },
+          {
+            "id": "lizard_0164",
+            "name": "Adenovirus Infection",
+            "name_ja": "アデノウイルス感染（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 4,
+        "members": [
+          {
+            "id": "lizard_0108",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "lizard_0109",
+            "name": "Limb Fractures",
+            "name_ja": "四肢骨折"
+          },
+          {
+            "id": "lizard_0216",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（トカゲ）"
+          },
+          {
+            "id": "lizard_0217",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "necros",
+        "size": 4,
+        "members": [
+          {
+            "id": "lizard_0030",
+            "name": "Toe Necrosis from Retained Shed",
+            "name_ja": "脱皮残りによる趾壊死"
+          },
+          {
+            "id": "lizard_0112",
+            "name": "Hemipenal Necrosis",
+            "name_ja": "半陰茎壊死"
+          },
+          {
+            "id": "lizard_0151",
+            "name": "Toe Necrosis (Retained Shed)",
+            "name_ja": "趾壊死（脱皮不全）（トカゲ）"
+          },
+          {
+            "id": "lizard_0183",
+            "name": "Tail Necrosis",
+            "name_ja": "尾壊死（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "respir",
+        "size": 4,
+        "members": [
+          {
+            "id": "lizard_0017",
+            "name": "Upper Respiratory Infection (URI)",
+            "name_ja": "上部呼吸器感染症"
+          },
+          {
+            "id": "lizard_0132",
+            "name": "Chronic Respiratory Disease Complex",
+            "name_ja": "慢性呼吸器疾患複合"
+          },
+          {
+            "id": "lizard_0160",
+            "name": "Respiratory Infection",
+            "name_ja": "呼吸器感染症（トカゲ）"
+          },
+          {
+            "id": "lizard_0208",
+            "name": "Upper Respiratory Tract Disease",
+            "name_ja": "上部気道疾患（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anorex",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0055",
+            "name": "Anorexia (Non-specific)",
+            "name_ja": "食欲不振（非特異的）"
+          },
+          {
+            "id": "lizard_0204",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（トカゲ）"
+          },
+          {
+            "id": "lizard_0245",
+            "name": "Anorexia (Stress-Related)",
+            "name_ja": "ストレス性拒食（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bite",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0066",
+            "name": "Trauma / Bite Wounds",
+            "name_ja": "外傷・咬傷"
+          },
+          {
+            "id": "lizard_0159",
+            "name": "Cricket Bite Injury",
+            "name_ja": "コオロギ咬傷（トカゲ）"
+          },
+          {
+            "id": "lizard_0184",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "burn",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0032",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷"
+          },
+          {
+            "id": "lizard_0134",
+            "name": "Burns (Chemical)",
+            "name_ja": "化学熱傷"
+          },
+          {
+            "id": "lizard_0240",
+            "name": "Burns",
+            "name_ja": "熱傷（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0059",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "lizard_0061",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "lizard_0106",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cloaca",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0048",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "lizard_0113",
+            "name": "Cloacal Calculi",
+            "name_ja": "総排泄腔結石"
+          },
+          {
+            "id": "lizard_0205",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coelom",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0069",
+            "name": "Peritonitis / Coelomitis",
+            "name_ja": "腹膜炎・体腔炎"
+          },
+          {
+            "id": "lizard_0110",
+            "name": "Egg-related Coelomitis",
+            "name_ja": "卵関連体腔炎"
+          },
+          {
+            "id": "lizard_0193",
+            "name": "Egg Yolk Coelomitis",
+            "name_ja": "卵黄体腔炎（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "failur",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0052",
+            "name": "Renal Failure (Chronic Kidney Disease)",
+            "name_ja": "腎不全"
+          },
+          {
+            "id": "lizard_0062",
+            "name": "Liver Failure (Hepatopathy)",
+            "name_ja": "肝不全"
+          },
+          {
+            "id": "lizard_0189",
+            "name": "Renal Failure",
+            "name_ja": "腎不全（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fungu",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0014",
+            "name": "Yellow Fungus Disease (CANV - Chrysosporium anamorph of Nannizziopsis vriesii)",
+            "name_ja": "黄色真菌症（CANV）"
+          },
+          {
+            "id": "lizard_0142",
+            "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
+            "name_ja": "黄色真菌症（CANV感染症）"
+          },
+          {
+            "id": "lizard_0145",
+            "name": "Yellow Fungus Disease",
+            "name_ja": "黄色真菌病（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemipe",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0049",
+            "name": "Hemipenal Prolapse",
+            "name_ja": "半陰茎脱出"
+          },
+          {
+            "id": "lizard_0112",
+            "name": "Hemipenal Necrosis",
+            "name_ja": "半陰茎壊死"
+          },
+          {
+            "id": "lizard_0194",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hyperp",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0001",
+            "name": "Nutritional Secondary Hyperparathyroidism (NSHP)",
+            "name_ja": "栄養性二次性副甲状腺機能亢進症"
+          },
+          {
+            "id": "lizard_0150",
+            "name": "Nutritional Secondary Hyperparathyroidism",
+            "name_ja": "栄養性二次性副甲状腺機能亢進症（トカゲ）"
+          },
+          {
+            "id": "lizard_0235",
+            "name": "Hyperphosphatemia",
+            "name_ja": "高リン血症（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0126",
+            "name": "Intestinal Volvulus / Intussusception",
+            "name_ja": "腸捻転・腸重積"
+          },
+          {
+            "id": "lizard_0200",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（トカゲ）"
+          },
+          {
+            "id": "lizard_0201",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lipido",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0040",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "lizard_0128",
+            "name": "Corneal Lipidosis",
+            "name_ja": "角膜脂質沈着症"
+          },
+          {
+            "id": "lizard_0197",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mite",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0024",
+            "name": "Mite Infestation (Ectoparasites)",
+            "name_ja": "ダニ寄生（外部寄生虫）"
+          },
+          {
+            "id": "lizard_0099",
+            "name": "Chigger Mite Infestation (Trombiculidae)",
+            "name_ja": "ツツガムシ寄生症"
+          },
+          {
+            "id": "lizard_0170",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "protoz",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0091",
+            "name": "Flagellate Protozoal Infection",
+            "name_ja": "鞭毛虫感染症"
+          },
+          {
+            "id": "lizard_0092",
+            "name": "Ciliate Protozoal Overgrowth",
+            "name_ja": "繊毛虫過増殖症"
+          },
+          {
+            "id": "lizard_0176",
+            "name": "Flagellate Protozoan Infection",
+            "name_ja": "鞭毛虫感染（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0052",
+            "name": "Renal Failure (Chronic Kidney Disease)",
+            "name_ja": "腎不全"
+          },
+          {
+            "id": "lizard_0106",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          },
+          {
+            "id": "lizard_0189",
+            "name": "Renal Failure",
+            "name_ja": "腎不全（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spinal",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0058",
+            "name": "Spinal Osteopathy / Spondylosis",
+            "name_ja": "脊椎骨症/脊椎症"
+          },
+          {
+            "id": "lizard_0108",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "lizard_0220",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stasi",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0047",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "lizard_0111",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          },
+          {
+            "id": "lizard_0192",
+            "name": "Post-Ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stomat",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0019",
+            "name": "Infectious Stomatitis (Mouth Rot)",
+            "name_ja": "感染性口内炎（マウスロット）"
+          },
+          {
+            "id": "lizard_0141",
+            "name": "Infectious Stomatitis (Mouth Rot)",
+            "name_ja": "感染性口内炎（マウスロット）"
+          },
+          {
+            "id": "lizard_0161",
+            "name": "Stomatitis (Mouth Rot)",
+            "name_ja": "口内炎（マウスロット）（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0002",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "lizard_0003",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "lizard_0233",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wound",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0066",
+            "name": "Trauma / Bite Wounds",
+            "name_ja": "外傷・咬傷"
+          },
+          {
+            "id": "lizard_0184",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（トカゲ）"
+          },
+          {
+            "id": "lizard_0239",
+            "name": "Wound Infection",
+            "name_ja": "創傷感染（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "yellow",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0014",
+            "name": "Yellow Fungus Disease (CANV - Chrysosporium anamorph of Nannizziopsis vriesii)",
+            "name_ja": "黄色真菌症（CANV）"
+          },
+          {
+            "id": "lizard_0142",
+            "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
+            "name_ja": "黄色真菌症（CANV感染症）"
+          },
+          {
+            "id": "lizard_0145",
+            "name": "Yellow Fungus Disease",
+            "name_ja": "黄色真菌病（トカゲ）"
+          }
+        ]
+      }
+    ]
+  }
+}

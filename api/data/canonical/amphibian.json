@@ -1,0 +1,1295 @@
+{
+  "species": "amphibian",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 258,
+    "merge_clusters": 4,
+    "records_merged_away": 4,
+    "archived": 0,
+    "served_after": 254
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "amphibian_0076",
+        "slug": "myxozoan-infection",
+        "name": "Myxozoan Infection",
+        "name_ja": "粘液胞子虫感染症"
+      },
+      "merged": [
+        {
+          "id": "amphibian_0016",
+          "slug": "myxosporean-infection",
+          "name": "Myxosporean Infection",
+          "name_ja": "粘液胞子虫感染症"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "amphibian_0021",
+        "slug": "hypovitaminosis-a",
+        "name": "Hypovitaminosis A",
+        "name_ja": "ビタミンA欠乏症"
+      },
+      "merged": [
+        {
+          "id": "amphibian_0253",
+          "slug": "vitamin-a-deficiency",
+          "name": "Vitamin A Deficiency",
+          "name_ja": "ビタミンA欠乏症（両生類）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "amphibian_0025",
+        "slug": "ammonia-poisoning",
+        "name": "Ammonia Poisoning",
+        "name_ja": "アンモニア中毒"
+      },
+      "merged": [
+        {
+          "id": "amphibian_0165",
+          "slug": "ammonia-toxicosis",
+          "name": "Ammonia Toxicosis",
+          "name_ja": "アンモニア中毒（両生類）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "amphibian_0050",
+        "slug": "dysecdysis-abnormal-shedding",
+        "name": "Dysecdysis (Abnormal Shedding)",
+        "name_ja": "脱皮不全"
+      },
+      "merged": [
+        {
+          "id": "amphibian_0197",
+          "slug": "dysecdysis-retained-shed",
+          "name": "Dysecdysis (Retained Shed)",
+          "name_ja": "脱皮不全（両生類）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Chytridiomycosis (Bd)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0000",
+            "slug": "chytridiomycosis-bd",
+            "name": "Chytridiomycosis (Bd)",
+            "name_ja": "ツボカビ症（Bd）"
+          },
+          {
+            "id": "amphibian_0001",
+            "slug": "chytridiomycosis-bsal",
+            "name": "Chytridiomycosis (Bsal)",
+            "name_ja": "ツボカビ症（Bsal）"
+          }
+        ]
+      },
+      {
+        "base": "Nematode Infection",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0013",
+            "slug": "nematode-infection",
+            "name": "Nematode Infection",
+            "name_ja": "線虫感染症"
+          },
+          {
+            "id": "amphibian_0163",
+            "slug": "nematode-infection-rhabdias",
+            "name": "Nematode Infection (Rhabdias)",
+            "name_ja": "線虫感染（ラブディアス）（両生類）"
+          }
+        ]
+      },
+      {
+        "base": "Metabolic Bone Disease",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0020",
+            "slug": "metabolic-bone-disease",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患"
+          },
+          {
+            "id": "amphibian_0178",
+            "slug": "metabolic-bone-disease-mbd",
+            "name": "Metabolic Bone Disease (MBD)",
+            "name_ja": "代謝性骨疾患（MBD）（両生類）"
+          }
+        ]
+      },
+      {
+        "base": "Calcium Deficiency (Hypocalcemia)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0022",
+            "slug": "calcium-deficiency-hypocalcemia",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
+          },
+          {
+            "id": "amphibian_0254",
+            "slug": "calcium-deficiency",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（両生類）"
+          }
+        ]
+      },
+      {
+        "base": "Thermal Stress (Hyperthermia)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0030",
+            "slug": "thermal-stress-hyperthermia",
+            "name": "Thermal Stress (Hyperthermia)",
+            "name_ja": "温熱ストレス（高体温症）"
+          },
+          {
+            "id": "amphibian_0031",
+            "slug": "thermal-stress-hypothermia",
+            "name": "Thermal Stress (Hypothermia)",
+            "name_ja": "低温ストレス（低体温症）"
+          }
+        ]
+      },
+      {
+        "base": "Intestinal Impaction",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0036",
+            "slug": "intestinal-impaction",
+            "name": "Intestinal Impaction",
+            "name_ja": "腸閉塞（腸インパクション）"
+          },
+          {
+            "id": "amphibian_0220",
+            "slug": "intestinal-obstruction",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（両生類）"
+          }
+        ]
+      },
+      {
+        "base": "Anorexia (Multifactorial)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0052",
+            "slug": "anorexia-multifactorial",
+            "name": "Anorexia (Multifactorial)",
+            "name_ja": "食欲不振（多因子性）"
+          },
+          {
+            "id": "amphibian_0223",
+            "slug": "anorexia-behavioral",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（両生類）"
+          }
+        ]
+      },
+      {
+        "base": "Mite Infestation (Hannemania)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0082",
+            "slug": "mite-infestation-hannemania",
+            "name": "Mite Infestation (Hannemania)",
+            "name_ja": "ダニ寄生症（ハンネマニア）"
+          },
+          {
+            "id": "amphibian_0084",
+            "slug": "tick-infestation",
+            "name": "Tick Infestation",
+            "name_ja": "ダニ寄生症（マダニ）"
+          },
+          {
+            "id": "amphibian_0191",
+            "slug": "mite-infestation-ophionyssus",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（両生類）"
+          }
+        ]
+      },
+      {
+        "base": "Thermal Burn (Heat Lamp)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0130",
+            "slug": "thermal-burn-heat-lamp",
+            "name": "Thermal Burn (Heat Lamp)",
+            "name_ja": "熱傷（ヒートランプ）"
+          },
+          {
+            "id": "amphibian_0198",
+            "slug": "thermal-burns",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷（両生類）"
+          }
+        ]
+      },
+      {
+        "base": "Gout (Visceral)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0207",
+            "slug": "gout-visceral",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（両生類）"
+          },
+          {
+            "id": "amphibian_0208",
+            "slug": "gout-articular",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（両生類）"
+          }
+        ]
+      },
+      {
+        "base": "Fracture (Limb)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "amphibian_0235",
+            "slug": "fracture-limb",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（両生類）"
+          },
+          {
+            "id": "amphibian_0236",
+            "slug": "fracture-shell-carapace",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（両生類）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "defici",
+        "size": 11,
+        "members": [
+          {
+            "id": "amphibian_0022",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
+          },
+          {
+            "id": "amphibian_0023",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "amphibian_0024",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン（ビタミンB1）欠乏症"
+          },
+          {
+            "id": "amphibian_0095",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症"
+          },
+          {
+            "id": "amphibian_0096",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "amphibian_0097",
+            "name": "Iodine Deficiency (Goiter)",
+            "name_ja": "ヨウ素欠乏症（甲状腺腫）"
+          },
+          {
+            "id": "amphibian_0098",
+            "name": "Protein Deficiency",
+            "name_ja": "タンパク質欠乏症"
+          },
+          {
+            "id": "amphibian_0100",
+            "name": "UV Light Deficiency",
+            "name_ja": "紫外線不足症"
+          },
+          {
+            "id": "amphibian_0149",
+            "name": "Newt Iodine Deficiency Goiter",
+            "name_ja": "イモリヨウ素欠乏性甲状腺腫"
+          },
+          {
+            "id": "amphibian_0253",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（両生類）"
+          },
+          {
+            "id": "amphibian_0254",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "amphib",
+        "size": 9,
+        "members": [
+          {
+            "id": "amphibian_0147",
+            "name": "Amphibian Collagenoma",
+            "name_ja": "両生類コラゲノーマ（膠原線維腫）"
+          },
+          {
+            "id": "amphibian_0150",
+            "name": "Amphibian Chromomycosis (Pigmented Fungal Infection)",
+            "name_ja": "両生類クロモミコーシス（色素性真菌感染症）"
+          },
+          {
+            "id": "amphibian_0151",
+            "name": "Amphibian Rhabdias Pulmonary Nematodiasis",
+            "name_ja": "両生類ラブジアス肺線虫症"
+          },
+          {
+            "id": "amphibian_0152",
+            "name": "Amphibian Elizabethkingia Meningoencephalitis",
+            "name_ja": "両生類エリザベスキンギア髄膜脳炎"
+          },
+          {
+            "id": "amphibian_0153",
+            "name": "Amphibian Chlamydiosis",
+            "name_ja": "両生類クラミジア症"
+          },
+          {
+            "id": "amphibian_0154",
+            "name": "Amphibian Ventral Dermal Scald (Husbandry)",
+            "name_ja": "両生類腹側皮膚熱傷（飼育管理）"
+          },
+          {
+            "id": "amphibian_0155",
+            "name": "Amphibian Ozone / Chloramine Toxicity (Water Treatment)",
+            "name_ja": "両生類オゾン・クロラミン中毒（水処理）"
+          },
+          {
+            "id": "amphibian_0159",
+            "name": "Amphibian Mycobacteriosis (Chronic Wasting)",
+            "name_ja": "両生類マイコバクテリウム症（慢性消耗性）"
+          },
+          {
+            "id": "amphibian_0160",
+            "name": "Amphibian Metabolic Bone Disease (NSHP)",
+            "name_ja": "両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "frog",
+        "size": 9,
+        "members": [
+          {
+            "id": "amphibian_0059",
+            "name": "Frog Virus 3 (FV3)",
+            "name_ja": "カエルウイルス3型（FV3）"
+          },
+          {
+            "id": "amphibian_0134",
+            "name": "Goliath Frog Stress Syndrome",
+            "name_ja": "ゴライアスガエルストレス症候群"
+          },
+          {
+            "id": "amphibian_0135",
+            "name": "Goliath Frog Filariasis",
+            "name_ja": "ゴライアスガエルフィラリア症"
+          },
+          {
+            "id": "amphibian_0136",
+            "name": "Pacman Frog Water Edema Syndrome",
+            "name_ja": "パックマンフロッグ水浮腫症候群"
+          },
+          {
+            "id": "amphibian_0137",
+            "name": "Pacman Frog Gastric Overload Syndrome",
+            "name_ja": "パックマンフロッグ胃過負荷症候群"
+          },
+          {
+            "id": "amphibian_0138",
+            "name": "Pacman Frog Substrate Impaction (Ceratophrys)",
+            "name_ja": "パックマンフロッグ床材誤飲性閉塞"
+          },
+          {
+            "id": "amphibian_0140",
+            "name": "Dart Frog Spindly Leg Syndrome (SLS)",
+            "name_ja": "ヤドクガエルスピンドリーレッグ症候群"
+          },
+          {
+            "id": "amphibian_0141",
+            "name": "Dart Frog Enteric Protozoal Infection",
+            "name_ja": "ヤドクガエル腸管原虫感染症"
+          },
+          {
+            "id": "amphibian_0146",
+            "name": "Tree Frog Bacterial Pneumonia",
+            "name_ja": "アマガエル細菌性肺炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 7,
+        "members": [
+          {
+            "id": "amphibian_0039",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "amphibian_0040",
+            "name": "Gastric Prolapse",
+            "name_ja": "胃脱"
+          },
+          {
+            "id": "amphibian_0041",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱"
+          },
+          {
+            "id": "amphibian_0119",
+            "name": "Organ Prolapse (Gastric/Intestinal/Cloacal)",
+            "name_ja": "臓器脱（胃・腸・総排泄腔）"
+          },
+          {
+            "id": "amphibian_0174",
+            "name": "Prolapse (Gastric/Intestinal)",
+            "name_ja": "胃/腸脱出（両生類）"
+          },
+          {
+            "id": "amphibian_0215",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（両生類）"
+          },
+          {
+            "id": "amphibian_0224",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "edema",
+        "size": 6,
+        "members": [
+          {
+            "id": "amphibian_0034",
+            "name": "Edema / Hydrops (Dropsy)",
+            "name_ja": "浮腫・水腫（腹水症）"
+          },
+          {
+            "id": "amphibian_0047",
+            "name": "Periorbital Edema",
+            "name_ja": "眼窩周囲浮腫"
+          },
+          {
+            "id": "amphibian_0136",
+            "name": "Pacman Frog Water Edema Syndrome",
+            "name_ja": "パックマンフロッグ水浮腫症候群"
+          },
+          {
+            "id": "amphibian_0172",
+            "name": "Lymph Sac Edema",
+            "name_ja": "リンパ嚢浮腫（両生類）"
+          },
+          {
+            "id": "amphibian_0175",
+            "name": "Edema Syndrome",
+            "name_ja": "浮腫症候群（両生類）"
+          },
+          {
+            "id": "amphibian_0228",
+            "name": "Pulmonary Edema",
+            "name_ja": "肺水腫（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 6,
+        "members": [
+          {
+            "id": "amphibian_0019",
+            "name": "Leech Infestation",
+            "name_ja": "ヒル寄生症"
+          },
+          {
+            "id": "amphibian_0082",
+            "name": "Mite Infestation (Hannemania)",
+            "name_ja": "ダニ寄生症（ハンネマニア）"
+          },
+          {
+            "id": "amphibian_0084",
+            "name": "Tick Infestation",
+            "name_ja": "ダニ寄生症（マダニ）"
+          },
+          {
+            "id": "amphibian_0110",
+            "name": "Vorticella Infestation",
+            "name_ja": "ツリガネムシ寄生症"
+          },
+          {
+            "id": "amphibian_0111",
+            "name": "Planarian Infestation",
+            "name_ja": "プラナリア寄生"
+          },
+          {
+            "id": "amphibian_0191",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 6,
+        "members": [
+          {
+            "id": "amphibian_0101",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "amphibian_0102",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "amphibian_0103",
+            "name": "Copper Toxicosis",
+            "name_ja": "銅中毒"
+          },
+          {
+            "id": "amphibian_0165",
+            "name": "Ammonia Toxicosis",
+            "name_ja": "アンモニア中毒（両生類）"
+          },
+          {
+            "id": "amphibian_0166",
+            "name": "Nitrite/Nitrate Toxicosis",
+            "name_ja": "亜硝酸/硝酸中毒（両生類）"
+          },
+          {
+            "id": "amphibian_0167",
+            "name": "Chlorine/Chloramine Toxicosis",
+            "name_ja": "塩素/クロラミン中毒（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "salama",
+        "size": 5,
+        "members": [
+          {
+            "id": "amphibian_0056",
+            "name": "Batrachochytrium salamandrivorans (Bsal) - Systemic",
+            "name_ja": "バトラコキトリウム・サラマンドリボランス全身型"
+          },
+          {
+            "id": "amphibian_0131",
+            "name": "Giant Salamander Skin Ulcer Disease",
+            "name_ja": "オオサンショウウオ皮膚潰瘍病"
+          },
+          {
+            "id": "amphibian_0132",
+            "name": "Giant Salamander Iridovirus Disease",
+            "name_ja": "オオサンショウウオイリドウイルス病"
+          },
+          {
+            "id": "amphibian_0156",
+            "name": "Giant Salamander Fungal Granuloma",
+            "name_ja": "オオサンショウウオ真菌性肉芽腫"
+          },
+          {
+            "id": "amphibian_0161",
+            "name": "Batrachochytrium salamandrivorans (Bsal)",
+            "name_ja": "Bsal感染症（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "therma",
+        "size": 5,
+        "members": [
+          {
+            "id": "amphibian_0030",
+            "name": "Thermal Stress (Hyperthermia)",
+            "name_ja": "温熱ストレス（高体温症）"
+          },
+          {
+            "id": "amphibian_0031",
+            "name": "Thermal Stress (Hypothermia)",
+            "name_ja": "低温ストレス（低体温症）"
+          },
+          {
+            "id": "amphibian_0130",
+            "name": "Thermal Burn (Heat Lamp)",
+            "name_ja": "熱傷（ヒートランプ）"
+          },
+          {
+            "id": "amphibian_0170",
+            "name": "Thermal Shock",
+            "name_ja": "温度ショック（両生類）"
+          },
+          {
+            "id": "amphibian_0198",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "body",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0037",
+            "name": "Foreign Body Ingestion",
+            "name_ja": "異物摂取"
+          },
+          {
+            "id": "amphibian_0043",
+            "name": "Short Body Syndrome (SBS)",
+            "name_ja": "ショートボディ症候群"
+          },
+          {
+            "id": "amphibian_0171",
+            "name": "Short Body Disease",
+            "name_ja": "短体病（両生類）"
+          },
+          {
+            "id": "amphibian_0181",
+            "name": "Inclusion Body Disease (IBD)",
+            "name_ja": "封入体病（IBD）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0006",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "amphibian_0054",
+            "name": "Tail Rot / Necrotic Dermatitis",
+            "name_ja": "尾腐れ・壊死性皮膚炎"
+          },
+          {
+            "id": "amphibian_0188",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（両生類）"
+          },
+          {
+            "id": "amphibian_0206",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "failur",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0048",
+            "name": "Renal Failure",
+            "name_ja": "腎不全"
+          },
+          {
+            "id": "amphibian_0114",
+            "name": "Reproductive Failure / Egg Retention",
+            "name_ja": "繁殖障害・卵停滞"
+          },
+          {
+            "id": "amphibian_0120",
+            "name": "Congestive Heart Failure",
+            "name_ja": "うっ血性心不全"
+          },
+          {
+            "id": "amphibian_0129",
+            "name": "Metamorphosis Failure (Neoteny Complications)",
+            "name_ja": "変態障害（幼形成熟合併症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0092",
+            "name": "Limb Fractures / Trauma",
+            "name_ja": "四肢骨折・外傷"
+          },
+          {
+            "id": "amphibian_0093",
+            "name": "Spinal Injury / Vertebral Fracture",
+            "name_ja": "脊椎損傷・椎体骨折"
+          },
+          {
+            "id": "amphibian_0235",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（両生類）"
+          },
+          {
+            "id": "amphibian_0236",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastri",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0038",
+            "name": "Gastric Overload",
+            "name_ja": "胃過負荷"
+          },
+          {
+            "id": "amphibian_0040",
+            "name": "Gastric Prolapse",
+            "name_ja": "胃脱"
+          },
+          {
+            "id": "amphibian_0113",
+            "name": "Gastric Torsion",
+            "name_ja": "胃捻転"
+          },
+          {
+            "id": "amphibian_0137",
+            "name": "Pacman Frog Gastric Overload Syndrome",
+            "name_ja": "パックマンフロッグ胃過負荷症候群"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxici",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0027",
+            "name": "Chlorine / Chloramine Toxicity",
+            "name_ja": "塩素・クロラミン中毒"
+          },
+          {
+            "id": "amphibian_0028",
+            "name": "Chemical Toxicity (Pesticides/Metals)",
+            "name_ja": "化学物質中毒（農薬・重金属）"
+          },
+          {
+            "id": "amphibian_0106",
+            "name": "High Nitrate Toxicity",
+            "name_ja": "高硝酸塩毒性"
+          },
+          {
+            "id": "amphibian_0155",
+            "name": "Amphibian Ozone / Chloramine Toxicity (Water Treatment)",
+            "name_ja": "両生類オゾン・クロラミン中毒（水処理）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0044",
+            "name": "Neoplasia / Tumors",
+            "name_ja": "腫瘍性疾患"
+          },
+          {
+            "id": "amphibian_0058",
+            "name": "Lucke Tumor Herpesvirus (Renal Carcinoma)",
+            "name_ja": "ルッケ腫瘍ヘルペスウイルス（腎癌）"
+          },
+          {
+            "id": "amphibian_0216",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍（両生類）"
+          },
+          {
+            "id": "amphibian_0217",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "aeromo",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0064",
+            "name": "Aeromonas hydrophila Infection (Acute)",
+            "name_ja": "エロモナス・ハイドロフィラ急性感染症"
+          },
+          {
+            "id": "amphibian_0108",
+            "name": "Aeromonas Chronic Infection",
+            "name_ja": "エロモナス慢性感染症"
+          },
+          {
+            "id": "amphibian_0187",
+            "name": "Aeromonas Infection",
+            "name_ja": "エロモナス感染（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ammoni",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0025",
+            "name": "Ammonia Poisoning",
+            "name_ja": "アンモニア中毒"
+          },
+          {
+            "id": "amphibian_0029",
+            "name": "Ammonia Burn",
+            "name_ja": "アンモニア熱傷"
+          },
+          {
+            "id": "amphibian_0165",
+            "name": "Ammonia Toxicosis",
+            "name_ja": "アンモニア中毒（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bone",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0020",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患"
+          },
+          {
+            "id": "amphibian_0160",
+            "name": "Amphibian Metabolic Bone Disease (NSHP)",
+            "name_ja": "両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）"
+          },
+          {
+            "id": "amphibian_0178",
+            "name": "Metabolic Bone Disease (MBD)",
+            "name_ja": "代謝性骨疾患（MBD）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "burn",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0029",
+            "name": "Ammonia Burn",
+            "name_ja": "アンモニア熱傷"
+          },
+          {
+            "id": "amphibian_0130",
+            "name": "Thermal Burn (Heat Lamp)",
+            "name_ja": "熱傷（ヒートランプ）"
+          },
+          {
+            "id": "amphibian_0198",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "chlora",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0027",
+            "name": "Chlorine / Chloramine Toxicity",
+            "name_ja": "塩素・クロラミン中毒"
+          },
+          {
+            "id": "amphibian_0155",
+            "name": "Amphibian Ozone / Chloramine Toxicity (Water Treatment)",
+            "name_ja": "両生類オゾン・クロラミン中毒（水処理）"
+          },
+          {
+            "id": "amphibian_0167",
+            "name": "Chlorine/Chloramine Toxicosis",
+            "name_ja": "塩素/クロラミン中毒（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "chytri",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0000",
+            "name": "Chytridiomycosis (Bd)",
+            "name_ja": "ツボカビ症（Bd）"
+          },
+          {
+            "id": "amphibian_0001",
+            "name": "Chytridiomycosis (Bsal)",
+            "name_ja": "ツボカビ症（Bsal）"
+          },
+          {
+            "id": "amphibian_0139",
+            "name": "Dendrobatid Chytridiomycosis (Bd - Dart Frog)",
+            "name_ja": "ヤドクガエルツボカビ症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "giant",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0131",
+            "name": "Giant Salamander Skin Ulcer Disease",
+            "name_ja": "オオサンショウウオ皮膚潰瘍病"
+          },
+          {
+            "id": "amphibian_0132",
+            "name": "Giant Salamander Iridovirus Disease",
+            "name_ja": "オオサンショウウオイリドウイルス病"
+          },
+          {
+            "id": "amphibian_0156",
+            "name": "Giant Salamander Fungal Granuloma",
+            "name_ja": "オオサンショウウオ真菌性肉芽腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gill",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0055",
+            "name": "Gill Necrosis (Larval)",
+            "name_ja": "鰓壊死（幼生期）"
+          },
+          {
+            "id": "amphibian_0123",
+            "name": "Axolotl Gill Curl",
+            "name_ja": "アホロートル鰓カール"
+          },
+          {
+            "id": "amphibian_0133",
+            "name": "Cryptobranchid Gill Disease (Larval)",
+            "name_ja": "サンショウウオ科幼生鰓疾患"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0049",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "amphibian_0121",
+            "name": "Hepatitis",
+            "name_ja": "肝炎"
+          },
+          {
+            "id": "amphibian_0218",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "impact",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0036",
+            "name": "Intestinal Impaction",
+            "name_ja": "腸閉塞（腸インパクション）"
+          },
+          {
+            "id": "amphibian_0128",
+            "name": "Substrate Impaction",
+            "name_ja": "床材インパクション"
+          },
+          {
+            "id": "amphibian_0138",
+            "name": "Pacman Frog Substrate Impaction (Ceratophrys)",
+            "name_ja": "パックマンフロッグ床材誤飲性閉塞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0036",
+            "name": "Intestinal Impaction",
+            "name_ja": "腸閉塞（腸インパクション）"
+          },
+          {
+            "id": "amphibian_0041",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱"
+          },
+          {
+            "id": "amphibian_0220",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "iridov",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0011",
+            "name": "Iridovirus Infection (non-Ranavirus)",
+            "name_ja": "イリドウイルス感染症（ラナウイルス以外）"
+          },
+          {
+            "id": "amphibian_0132",
+            "name": "Giant Salamander Iridovirus Disease",
+            "name_ja": "オオサンショウウオイリドウイルス病"
+          },
+          {
+            "id": "amphibian_0185",
+            "name": "Iridovirus (Ranavirus)",
+            "name_ja": "イリドウイルス（ラナウイルス）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "metabo",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0020",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患"
+          },
+          {
+            "id": "amphibian_0160",
+            "name": "Amphibian Metabolic Bone Disease (NSHP)",
+            "name_ja": "両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）"
+          },
+          {
+            "id": "amphibian_0178",
+            "name": "Metabolic Bone Disease (MBD)",
+            "name_ja": "代謝性骨疾患（MBD）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nemato",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0013",
+            "name": "Nematode Infection",
+            "name_ja": "線虫感染症"
+          },
+          {
+            "id": "amphibian_0151",
+            "name": "Amphibian Rhabdias Pulmonary Nematodiasis",
+            "name_ja": "両生類ラブジアス肺線虫症"
+          },
+          {
+            "id": "amphibian_0163",
+            "name": "Nematode Infection (Rhabdias)",
+            "name_ja": "線虫感染（ラブディアス）（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0044",
+            "name": "Neoplasia / Tumors",
+            "name_ja": "腫瘍性疾患"
+          },
+          {
+            "id": "amphibian_0173",
+            "name": "Chromatophore Neoplasia",
+            "name_ja": "色素胞腫瘍（両生類）"
+          },
+          {
+            "id": "amphibian_0218",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pacman",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0136",
+            "name": "Pacman Frog Water Edema Syndrome",
+            "name_ja": "パックマンフロッグ水浮腫症候群"
+          },
+          {
+            "id": "amphibian_0137",
+            "name": "Pacman Frog Gastric Overload Syndrome",
+            "name_ja": "パックマンフロッグ胃過負荷症候群"
+          },
+          {
+            "id": "amphibian_0138",
+            "name": "Pacman Frog Substrate Impaction (Ceratophrys)",
+            "name_ja": "パックマンフロッグ床材誤飲性閉塞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "short",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0043",
+            "name": "Short Body Syndrome (SBS)",
+            "name_ja": "ショートボディ症候群"
+          },
+          {
+            "id": "amphibian_0142",
+            "name": "Short Tongue Syndrome (Hypovitaminosis A - Anuran)",
+            "name_ja": "短舌症候群（低ビタミンA症）"
+          },
+          {
+            "id": "amphibian_0171",
+            "name": "Short Body Disease",
+            "name_ja": "短体病（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "skin",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0131",
+            "name": "Giant Salamander Skin Ulcer Disease",
+            "name_ja": "オオサンショウウオ皮膚潰瘍病"
+          },
+          {
+            "id": "amphibian_0145",
+            "name": "Xenopus Pseudocapillaroides Skin Infection",
+            "name_ja": "アフリカツメガエル皮膚線虫症"
+          },
+          {
+            "id": "amphibian_0148",
+            "name": "Bsal Ulcerative Skin Disease (Fire Salamander)",
+            "name_ja": "Bsal潰瘍性皮膚疾患（ファイアサラマンダー）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stres",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0030",
+            "name": "Thermal Stress (Hyperthermia)",
+            "name_ja": "温熱ストレス（高体温症）"
+          },
+          {
+            "id": "amphibian_0031",
+            "name": "Thermal Stress (Hypothermia)",
+            "name_ja": "低温ストレス（低体温症）"
+          },
+          {
+            "id": "amphibian_0134",
+            "name": "Goliath Frog Stress Syndrome",
+            "name_ja": "ゴライアスガエルストレス症候群"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tail",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0054",
+            "name": "Tail Rot / Necrotic Dermatitis",
+            "name_ja": "尾腐れ・壊死性皮膚炎"
+          },
+          {
+            "id": "amphibian_0204",
+            "name": "Tail Necrosis",
+            "name_ja": "尾壊死（両生類）"
+          },
+          {
+            "id": "amphibian_0242",
+            "name": "Tail Amputation",
+            "name_ja": "尾切断（両生類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0023",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "amphibian_0095",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症"
+          },
+          {
+            "id": "amphibian_0253",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（両生類）"
+          }
+        ]
+      }
+    ]
+  }
+}

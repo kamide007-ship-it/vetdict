@@ -121,39 +121,77 @@ def build(species: str) -> dict:
         rich = _richness(r)
         return (has_species_tag, len(ja) + len(en), -rich[0], -rich[1])
 
-    # --- merges: exact orthographic duplicate clusters ---
-    # detect.py emits each cluster as {"members": [{"id","name","name_ja"}, ...]}.
+    # STRICT safe-merge key: identity AFTER removing only the species tag
+    # "（<species>）"/"(<species>)" (other qualifiers kept). detect.py clusters on
+    # parenthesis-STRIPPED names, which conflates clinical subtypes
+    # (e.g. "パスツレラ症（結膜型）" vs "（敗血症型）"). Only entries that are the same
+    # disease modulo the species tag are auto-merged; the rest go to review.
+    def _mergekey(rid: str) -> str:
+        r = by_id[rid]
+        ja = str(r.get("name_ja") or "")
+        en = str(r.get("name") or r.get("name_en") or "")
+        for t in _species_tags:
+            ja = ja.replace(t, "")
+            en = en.replace(t, "")
+        base = ja.strip() or en.strip().lower()
+        return re.sub(r"[\s・、,，。.\-ー―－]", "", base)
+
+    # --- merges: STRICT — only species-tag / identical duplicates auto-apply ---
     # The canonical keeps the CLEANEST name; the loader inherits the richest
     # content from all merged siblings (non-destructive, at load time).
     merges = []
+    review_oversplit = []
     for cluster in dup.get("exact_duplicate_clusters", []):
         ids = [m["id"] for m in cluster.get("members", []) if m.get("id") in by_id]
         if len(ids) < 2:
             continue
-        canonical_id = min(ids, key=_cleanliness)
-        merged = [rid for rid in ids if rid != canonical_id]
-        merges.append(
-            {
-                "canonical": ident(canonical_id),
-                "merged": [ident(rid) for rid in merged],
-                "reason": "orthographic duplicate (species/qualifier suffix); same disease",
-                "inherit_content": True,
-            }
-        )
+        # Sub-group cluster members by the strict safe-merge key.
+        groups: dict[str, list[str]] = {}
+        for rid in ids:
+            groups.setdefault(_mergekey(rid), []).append(rid)
+        safe_groups = [g for g in groups.values() if len(g) >= 2]
+        for g in safe_groups:
+            canonical_id = min(g, key=_cleanliness)
+            merged = [rid for rid in g if rid != canonical_id]
+            merges.append(
+                {
+                    "canonical": ident(canonical_id),
+                    "merged": [ident(rid) for rid in merged],
+                    "reason": "same disease modulo species tag / identical name",
+                    "inherit_content": True,
+                }
+            )
+        # Members that are NOT safe-mergeable but detect grouped them (differ by a
+        # non-species qualifier = possible over-split subtype) → review, not applied.
+        if len(groups) > 1:
+            review_oversplit.append(
+                {
+                    "base": cluster.get("members", [{}])[0].get("name"),
+                    "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+                    "members": [ident(rid) for rid in ids],
+                }
+            )
 
     # --- archives: unambiguous non-clinical (research models) ---
-    # detect.py flags carry {"category","term"} in "matches"; research_model
-    # category is safe to auto-archive, human_medicine_transplant is review-only.
+    # detect.py flags research_model / human_medicine_transplant by keyword, but
+    # a keyword alone is unsafe (e.g. "Equine Parkinsonism" is a real toxicosis,
+    # not a model). Auto-archive ONLY when the NAME itself declares a model
+    # ("様疾患", "-like disease", "model"/"モデル"). Everything else → review.
+    def _is_declared_model(rid: str) -> bool:
+        r = by_id[rid]
+        ja = str(r.get("name_ja") or "")
+        en = str(r.get("name") or r.get("name_en") or "").lower()
+        return ("様疾患" in ja) or ("モデル" in ja) or ("-like" in en) or ("model" in en)
+
     archives = []
     review_nonclinical = []
     for f in nonclin.get("flags", []):
-        categories = {m.get("category") for m in f.get("matches", [])}
         entry = ident(f["id"]) | {"matches": f.get("matches", [])}
-        if "research_model" in categories:
-            archives.append(entry | {"reason": "research model, not a spontaneous companion-animal disease"})
+        if _is_declared_model(f["id"]):
+            archives.append(entry | {"reason": "declared research model (name says model/様疾患/-like)"})
         else:
             review_nonclinical.append(
-                entry | {"note": "human-medicine transplant — review whether to merge into parent or archive"}
+                entry | {"note": "keyword-flagged non-clinical — review (may be a real toxicosis/transplant)"}
             )
 
     # --- review: over-split families (NOT applied) ---
@@ -179,6 +217,7 @@ def build(species: str) -> dict:
         "archives": archives,
         "review": {
             "nonclinical_transplants": review_nonclinical,
+            "oversplit_subtypes": review_oversplit,
             "split_families": review_families,
         },
     }
