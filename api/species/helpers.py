@@ -591,7 +591,15 @@ def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[s
             pass
     # Collapse any duplicates introduced by the module list or the supplementary
     # append above (same English name or same name_ja) before returning.
-    return dedupe_disease_list(diseases)
+    result = dedupe_disease_list(diseases)
+    # Apply the non-destructive canonical consolidation map (T103), if any.
+    try:
+        from api.species.canonical import apply_canonical_map
+
+        result = apply_canonical_map(result, species)
+    except ImportError:
+        pass
+    return result
 
 
 # Import gender risk data

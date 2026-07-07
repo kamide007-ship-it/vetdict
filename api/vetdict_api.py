@@ -17,7 +17,7 @@ import secrets
 from functools import wraps
 from pathlib import Path
 
-from flask import Flask, Response, g, jsonify, render_template, request, send_from_directory
+from flask import Flask, Response, g, jsonify, redirect, render_template, request, send_from_directory, url_for
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound as WerkzeugNotFound
 
@@ -602,9 +602,17 @@ def _load_diseases(species_key: str) -> list:
         try:
             from api.species.helpers import dedupe_disease_list
 
-            return dedupe_disease_list(raw)
+            result = dedupe_disease_list(raw)
         except ImportError:
             return raw
+        # Apply the non-destructive canonical consolidation map (T103), if any.
+        try:
+            from api.species.canonical import apply_canonical_map
+
+            result = apply_canonical_map(result, species_key)
+        except ImportError:
+            pass
+        return result
     except ImportError:
         return []
 
@@ -1069,6 +1077,17 @@ def disease_detail(species: str, disease_slug: str):
             break
 
     if not disease:
+        # A merged/archived (old) slug 301-redirects to its canonical page so
+        # existing URLs never break after non-destructive consolidation (T103).
+        try:
+            from api.species.canonical import resolve_redirect
+
+            canonical_slug = resolve_redirect(species_key, disease_slug)
+        except ImportError:
+            canonical_slug = None
+        if canonical_slug and canonical_slug != disease_slug:
+            return redirect(url_for("disease_detail", species=species, disease_slug=canonical_slug), code=301)
+
         logger.info(
             "disease_detail: slug not found species=%s slug=%s (total=%d)",
             species_key,

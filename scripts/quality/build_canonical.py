@@ -1,0 +1,221 @@
+"""Build the canonical consolidation map for a species (T103 groundwork).
+
+READ-MOSTLY: reads the served records via the read-only detector, computes a
+NON-DESTRUCTIVE consolidation plan, and writes a reviewable data artifact
+``api/data/canonical/<species>.json``. It does NOT modify any disease source
+module or overlay. The map is applied at load time by ``api/species/canonical.py``.
+
+Conservative, safe-by-default policy (only unambiguous actions are auto-applied;
+everything requiring clinical judgement is emitted under ``review`` and left
+inactive):
+
+- ``merges``  : exact orthographic duplicate clusters (e.g. "熱中症" vs
+  "熱中症（呼吸器型）（デグー）") — same disease, differing only by a species/suffix
+  tag. The richest entry becomes canonical; the rest redirect to it.
+- ``archives``: entries that are research models, not spontaneous companion-animal
+  diseases (e.g. "アルツハイマー様疾患" — degus are an Alzheimer research model).
+- ``review``  : over-split disease families and human-medicine-transplant
+  complications. Emitted for veterinarian review; NOT applied.
+
+Each entry carries a stable ``slug`` (URL identity) so redirects can be resolved
+after merged/archived records are dropped from the served list.
+
+Idempotent: re-running reproduces the same file. Backs up any existing map to
+``backups/<UTC>/``.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import shutil
+from datetime import datetime, timezone
+from pathlib import Path
+
+import scripts.quality.detect as detect  # reuse the read-only loaders + clustering
+
+ROOT = Path(__file__).resolve().parents[2]
+CANON_DIR = ROOT / "api" / "data" / "canonical"
+
+# Japanese species tags used as the "（<species>）" duplicate marker.
+_SPECIES_JA = {
+    "dog": "犬",
+    "cat": "猫",
+    "horse": "馬",
+    "rabbit": "うさぎ",
+    "ferret": "フェレット",
+    "hamster": "ハムスター",
+    "guinea_pig": "モルモット",
+    "chinchilla": "チンチラ",
+    "hedgehog": "ハリネズミ",
+    "sugar_glider": "フクロモモンガ",
+    "degu": "デグー",
+    "bird": "鳥",
+    "parakeet": "インコ",
+    "parrot": "オウム",
+    "reptile": "爬虫類",
+    "tortoise": "リクガメ",
+    "snake": "ヘビ",
+    "lizard": "トカゲ",
+    "amphibian": "両生類",
+    "fish": "魚",
+    "exotic_other": "その他",
+}
+
+
+def _slug(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-")
+
+
+def _richness(rec: dict) -> tuple[int, int]:
+    """Mirror dedupe_disease_list's richness: (#non-empty content fields, total len)."""
+    fields = (
+        "description",
+        "description_ja",
+        "causes",
+        "causes_ja",
+        "pathophysiology",
+        "pathophysiology_ja",
+        "treatment",
+        "treatment_ja",
+        "prevention",
+        "prevention_ja",
+        "prognosis",
+        "prognosis_ja",
+    )
+    non_empty = sum(1 for f in fields if str(rec.get(f, "") or "").strip())
+    total = sum(len(str(rec.get(f, "") or "")) for f in fields)
+    return (non_empty, total)
+
+
+def build(species: str) -> dict:
+    records = detect.load_species_records(species)
+    by_id = {r["id"]: r for r in records}
+    dup = detect.detect_duplicates(records)
+    nonclin = detect.detect_nonclinical(records)
+
+    def ident(rid: str) -> dict:
+        r = by_id.get(rid, {})
+        return {
+            "id": rid,
+            "slug": _slug(r.get("name") or r.get("name_en") or ""),
+            "name": r.get("name") or r.get("name_en"),
+            "name_ja": r.get("name_ja"),
+        }
+
+    # The species tag "（デグー）" / "(Degu)" marks the auto-added duplicate; the
+    # clean base entry should win as canonical. Demote that tag specifically
+    # rather than penalising all parentheses (informative qualifiers like
+    # "Ringworm (Dermatophytosis)" must not be demoted).
+    sp_ja = _SPECIES_JA.get(species, species)
+    _species_tags = [f"（{sp_ja}）", f"({species})", f"({species.title()})"]
+
+    def _cleanliness(rid: str) -> tuple:
+        """Lower is cleaner: prefer names without the species tag, then shorter
+        name, then richer content."""
+        r = by_id[rid]
+        ja = str(r.get("name_ja") or "")
+        en = str(r.get("name") or r.get("name_en") or "")
+        has_species_tag = int(any(t in ja or t in en for t in _species_tags))
+        rich = _richness(r)
+        return (has_species_tag, len(ja) + len(en), -rich[0], -rich[1])
+
+    # --- merges: exact orthographic duplicate clusters ---
+    # detect.py emits each cluster as {"members": [{"id","name","name_ja"}, ...]}.
+    # The canonical keeps the CLEANEST name; the loader inherits the richest
+    # content from all merged siblings (non-destructive, at load time).
+    merges = []
+    for cluster in dup.get("exact_duplicate_clusters", []):
+        ids = [m["id"] for m in cluster.get("members", []) if m.get("id") in by_id]
+        if len(ids) < 2:
+            continue
+        canonical_id = min(ids, key=_cleanliness)
+        merged = [rid for rid in ids if rid != canonical_id]
+        merges.append(
+            {
+                "canonical": ident(canonical_id),
+                "merged": [ident(rid) for rid in merged],
+                "reason": "orthographic duplicate (species/qualifier suffix); same disease",
+                "inherit_content": True,
+            }
+        )
+
+    # --- archives: unambiguous non-clinical (research models) ---
+    # detect.py flags carry {"category","term"} in "matches"; research_model
+    # category is safe to auto-archive, human_medicine_transplant is review-only.
+    archives = []
+    review_nonclinical = []
+    for f in nonclin.get("flags", []):
+        categories = {m.get("category") for m in f.get("matches", [])}
+        entry = ident(f["id"]) | {"matches": f.get("matches", [])}
+        if "research_model" in categories:
+            archives.append(entry | {"reason": "research model, not a spontaneous companion-animal disease"})
+        else:
+            review_nonclinical.append(
+                entry | {"note": "human-medicine transplant — review whether to merge into parent or archive"}
+            )
+
+    # --- review: over-split families (NOT applied) ---
+    review_families = []
+    for fam in dup.get("family_clusters", []):
+        review_families.append(fam)
+
+    merged_slugs = {m["slug"] for grp in merges for m in grp["merged"]}
+    archived_slugs = {a["slug"] for a in archives}
+
+    return {
+        "species": species,
+        "schema_version": 1,
+        "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+        "counts": {
+            "records": len(records),
+            "merge_clusters": len(merges),
+            "records_merged_away": len(merged_slugs),
+            "archived": len(archived_slugs),
+            "served_after": len(records) - len(merged_slugs) - len(archived_slugs),
+        },
+        "merges": merges,
+        "archives": archives,
+        "review": {
+            "nonclinical_transplants": review_nonclinical,
+            "split_families": review_families,
+        },
+    }
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("species", nargs="?", default="degu")
+    ap.add_argument("--apply", action="store_true", help="write the map file (otherwise dry-run to stdout)")
+    args = ap.parse_args()
+
+    result = build(args.species)
+    counts = result["counts"]
+    print(
+        f"[{args.species}] records={counts['records']} "
+        f"merge_clusters={counts['merge_clusters']} "
+        f"merged_away={counts['records_merged_away']} "
+        f"archived={counts['archived']} -> served_after={counts['served_after']}"
+    )
+
+    if not args.apply:
+        print("(dry-run — pass --apply to write the map)")
+        print(json.dumps(result, ensure_ascii=False, indent=2)[:2000])
+        return 0
+
+    CANON_DIR.mkdir(parents=True, exist_ok=True)
+    out = CANON_DIR / f"{args.species}.json"
+    if out.exists():
+        stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d-%H%M")
+        bak = ROOT / "backups" / stamp
+        bak.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(out, bak / out.name)
+        print(f"backed up existing map -> {bak / out.name}")
+    out.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"wrote {out.relative_to(ROOT)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
