@@ -4280,6 +4280,14 @@ def get_diseases():
     except ImportError:
         pass
 
+    # Apply the non-destructive canonical consolidation map (T103), if any.
+    try:
+        from api.species.canonical import apply_canonical_map
+
+        output = apply_canonical_map(output, species)
+    except ImportError:
+        pass
+
     # Inject hiragana reading for あいうえお sorting
     for item in output:
         name_ja = item.get("name_ja", "")

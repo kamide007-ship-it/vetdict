@@ -17,3 +17,4 @@ qa_report_phase*.json
 diseases_all_species_backup_*.json
 *.backup_*.json
 *.json.backup_*
+backups/
