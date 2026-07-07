@@ -2029,6 +2029,43 @@ def regenerate_named_pathogen_etiology(conn) -> dict[str, int]:
     return counts
 
 
+def ground_english_causes_to_category(conn) -> int:
+    """Bring generic English ``causes`` up to Japanese category parity.
+
+    The English ``causes`` field historically carried a single contentless
+    catch-all ("Multifactorial etiology depending on disease type.") or English
+    category templates out of sync with the (correct) Japanese category. This
+    served-DB safety net replaces those generic English templates with
+    ``gen_causes`` (EN) resolved to the same category the reviewed Japanese
+    ``causes_ja`` already uses. Named-agent diseases and curated English causes
+    are left untouched. Runs AFTER the named-pathogen / re-categorisation passes
+    so it reads the final Japanese category and only touches the residual generic
+    English text.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.generic_english_causes import (
+        upgrade_english_causes,
+    )
+
+    rows = conn.execute("SELECT id, species, name, name_ja, causes_ja, causes FROM diseases").fetchall()
+    changed = 0
+    for row in rows:
+        new = upgrade_english_causes(
+            (row["species"] or "").lower(),
+            row["name_ja"] or "",
+            row["name"] or "",
+            row["causes_ja"] or "",
+            row["causes"] or "",
+        )
+        if new is not None:
+            conn.execute(
+                "UPDATE diseases SET causes = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new, row["id"]),
+            )
+            changed += 1
+    return changed
+
+
 def regenerate_english_category_causes(conn) -> int:
     """Bring the English ``causes`` field to parity with the Japanese one.
 
@@ -2341,6 +2378,16 @@ def main(db_path: str | None = None):
         print("\n[enrichment] removing cross-species breed contamination...")
         breed_fix = fix_cross_species_breed_clauses_in_served_db(conn)
         print(f"  → breed clauses cleaned: {breed_fix['breed']}, frozen organ fixed: {breed_fix['organ']}")
+
+        # Bring generic English `causes` up to Japanese category parity: replace
+        # the contentless "Multifactorial etiology depending on disease type"
+        # catch-all (and out-of-sync English category templates) with gen_causes
+        # (EN) resolved to the same category the reviewed causes_ja already uses.
+        # Runs LAST so it reads the final Japanese category; named-agent diseases
+        # are left to the named-pathogen pass.
+        print("\n[enrichment] grounding English causes to Japanese category parity...")
+        en_causes = ground_english_causes_to_category(conn)
+        print(f"  → English causes upgraded to category parity: {en_causes}")
 
         # Drugs
         print("\n[drugs] migrating drug dictionary...")
