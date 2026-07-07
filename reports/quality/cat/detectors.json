@@ -1,0 +1,5136 @@
+{
+  "species": "cat",
+  "record_count": 550,
+  "T101": {
+    "detector": "T101",
+    "total_records": 550,
+    "exact_duplicate_clusters": [
+      {
+        "members": [
+          {
+            "id": "cat_0034",
+            "name": "Chronic Kidney Disease (CKD)",
+            "name_ja": "慢性腎臓病"
+          },
+          {
+            "id": "cat_0531",
+            "name": "Chronic Kidney Disease",
+            "name_ja": "慢性腎臓病（CKD）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "cat_0040",
+            "name": "Feline Idiopathic Cystitis (FIC)",
+            "name_ja": "猫特発性膀胱炎"
+          },
+          {
+            "id": "cat_0218",
+            "name": "Feline Idiopathic Cystitis (FIC)",
+            "name_ja": "猫特発性膀胱炎（FIC）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "cat_0054",
+            "name": "Feline Infectious Peritonitis (FIP) - Wet Form",
+            "name_ja": "猫伝染性腹膜炎（ウェット型）"
+          },
+          {
+            "id": "cat_0055",
+            "name": "Feline Infectious Peritonitis (FIP) - Dry Form",
+            "name_ja": "猫伝染性腹膜炎（ドライ型）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "cat_0068",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "cat_0177",
+            "name": "Dermatophilosis",
+            "name_ja": "皮膚糸状菌症（デルマトフィルス症）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "cat_0070",
+            "name": "Eosinophilic Granuloma Complex - Eosinophilic Ulcer",
+            "name_ja": "好酸球性肉芽腫症候群（好酸球性潰瘍）"
+          },
+          {
+            "id": "cat_0071",
+            "name": "Eosinophilic Granuloma Complex - Eosinophilic Plaque",
+            "name_ja": "好酸球性肉芽腫症候群（好酸球性プラーク）"
+          },
+          {
+            "id": "cat_0072",
+            "name": "Eosinophilic Granuloma Complex - Linear Granuloma",
+            "name_ja": "好酸球性肉芽腫症候群（線状肉芽腫）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "cat_0083",
+            "name": "Meningioma",
+            "name_ja": "髄膜腫"
+          },
+          {
+            "id": "cat_0459",
+            "name": "Meningioma (Convexity Type)",
+            "name_ja": "髄膜腫（円蓋部型）"
+          },
+          {
+            "id": "cat_0460",
+            "name": "Meningioma (Skull Base Type)",
+            "name_ja": "髄膜腫（頭蓋底型）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "cat_0111",
+            "name": "Squamous Cell Carcinoma (Oral)",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "cat_0112",
+            "name": "Squamous Cell Carcinoma (Cutaneous)",
+            "name_ja": "皮膚扁平上皮癌"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "cat_0115",
+            "name": "Mast Cell Tumor (Cutaneous)",
+            "name_ja": "肥満細胞腫（皮膚型）"
+          },
+          {
+            "id": "cat_0116",
+            "name": "Mast Cell Tumor (Visceral/Splenic)",
+            "name_ja": "肥満細胞腫（内臓/脾臓型）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "cat_0198",
+            "name": "Acetaminophen (Paracetamol) Toxicosis",
+            "name_ja": "アセトアミノフェン中毒"
+          },
+          {
+            "id": "cat_0465",
+            "name": "Acetaminophen Toxicosis (Acute)",
+            "name_ja": "アセトアミノフェン中毒（急性）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "cat_0257",
+            "name": "Feline Hypervitaminosis A",
+            "name_ja": "猫ビタミンA過剰症"
+          },
+          {
+            "id": "cat_0484",
+            "name": "Feline Hypervitaminosis A (Chronic)",
+            "name_ja": "猫慢性ビタミンA過剰症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "cat_0352",
+            "name": "Feline Congenital Portosystemic Shunt",
+            "name_ja": "猫先天性門脈体循環シャント"
+          },
+          {
+            "id": "cat_0474",
+            "name": "Feline Congenital Portosystemic Shunt (Extrahepatic)",
+            "name_ja": "猫先天性門脈体循環シャント（肝外型）"
+          }
+        ]
+      }
+    ],
+    "exact_duplicate_cluster_count": 11,
+    "redundant_record_count": 13,
+    "family_clusters": [
+      {
+        "shared_stem": "feline",
+        "size": 314,
+        "members": [
+          {
+            "id": "cat_0000",
+            "name": "Feline Upper Respiratory Infection",
+            "name_ja": "猫上部呼吸器感染症"
+          },
+          {
+            "id": "cat_0001",
+            "name": "Feline Asthma",
+            "name_ja": "猫喘息"
+          },
+          {
+            "id": "cat_0002",
+            "name": "Feline Pneumonia",
+            "name_ja": "猫肺炎"
+          },
+          {
+            "id": "cat_0021",
+            "name": "Feline Pancreatitis",
+            "name_ja": "猫の膵炎"
+          },
+          {
+            "id": "cat_0036",
+            "name": "Feline Lower Urinary Tract Disease (FLUTD)",
+            "name_ja": "猫下部尿路疾患"
+          },
+          {
+            "id": "cat_0040",
+            "name": "Feline Idiopathic Cystitis (FIC)",
+            "name_ja": "猫特発性膀胱炎"
+          },
+          {
+            "id": "cat_0052",
+            "name": "Feline Immunodeficiency Virus (FIV)",
+            "name_ja": "猫免疫不全ウイルス感染症"
+          },
+          {
+            "id": "cat_0053",
+            "name": "Feline Leukemia Virus (FeLV)",
+            "name_ja": "猫白血病ウイルス感染症"
+          },
+          {
+            "id": "cat_0054",
+            "name": "Feline Infectious Peritonitis (FIP) - Wet Form",
+            "name_ja": "猫伝染性腹膜炎（ウェット型）"
+          },
+          {
+            "id": "cat_0055",
+            "name": "Feline Infectious Peritonitis (FIP) - Dry Form",
+            "name_ja": "猫伝染性腹膜炎（ドライ型）"
+          },
+          {
+            "id": "cat_0056",
+            "name": "Feline Calicivirus Infection",
+            "name_ja": "猫カリシウイルス感染症"
+          },
+          {
+            "id": "cat_0057",
+            "name": "Feline Herpesvirus (FHV-1) Infection",
+            "name_ja": "猫ヘルペスウイルス感染症"
+          },
+          {
+            "id": "cat_0059",
+            "name": "Feline Panleukopenia (Feline Distemper)",
+            "name_ja": "猫汎白血球減少症"
+          },
+          {
+            "id": "cat_0060",
+            "name": "Feline Chlamydiosis",
+            "name_ja": "猫クラミジア感染症"
+          },
+          {
+            "id": "cat_0061",
+            "name": "Feline Bordetellosis",
+            "name_ja": "猫ボルデテラ感染症"
+          },
+          {
+            "id": "cat_0065",
+            "name": "Feline Coronavirus Enteritis",
+            "name_ja": "猫コロナウイルス腸炎"
+          },
+          {
+            "id": "cat_0067",
+            "name": "Feline Cowpox",
+            "name_ja": "猫牛痘"
+          },
+          {
+            "id": "cat_0074",
+            "name": "Feline Acne",
+            "name_ja": "猫のにきび"
+          },
+          {
+            "id": "cat_0081",
+            "name": "Feline Epilepsy",
+            "name_ja": "猫のてんかん"
+          },
+          {
+            "id": "cat_0086",
+            "name": "Feline Hyperesthesia Syndrome",
+            "name_ja": "猫知覚過敏症候群"
+          },
+          {
+            "id": "cat_0123",
+            "name": "Feline Infectious Anemia (Hemoplasma)",
+            "name_ja": "猫伝染性貧血（ヘモプラズマ症）"
+          },
+          {
+            "id": "cat_0131",
+            "name": "Feline Tooth Resorption (FORL)",
+            "name_ja": "猫の歯の吸収病変"
+          },
+          {
+            "id": "cat_0132",
+            "name": "Feline Chronic Gingivostomatitis",
+            "name_ja": "猫慢性歯肉口内炎"
+          },
+          {
+            "id": "cat_0135",
+            "name": "Feline Anxiety Disorder",
+            "name_ja": "猫の不安障害"
+          },
+          {
+            "id": "cat_0136",
+            "name": "Feline Cognitive Dysfunction Syndrome",
+            "name_ja": "猫の認知機能障害症候群"
+          },
+          {
+            "id": "cat_0137",
+            "name": "Feline Compulsive Disorder",
+            "name_ja": "猫の強迫性障害"
+          },
+          {
+            "id": "cat_0144",
+            "name": "Feline Heartworm Disease",
+            "name_ja": "猫フィラリア症"
+          },
+          {
+            "id": "cat_0157",
+            "name": "Feline Norovirus Infection",
+            "name_ja": "猫ノロウイルス感染症"
+          },
+          {
+            "id": "cat_0169",
+            "name": "Feline Bordetella Pneumonia",
+            "name_ja": "猫ボルデテラ肺炎"
+          },
+          {
+            "id": "cat_0172",
+            "name": "Feline Ischemic Myelopathy (Fibrocartilaginous Embolism)",
+            "name_ja": "猫虚血性脊髄症"
+          },
+          {
+            "id": "cat_0178",
+            "name": "Feline Symmetric Alopecia",
+            "name_ja": "猫対称性脱毛症"
+          },
+          {
+            "id": "cat_0180",
+            "name": "Feline Herpesviral Keratitis",
+            "name_ja": "猫ヘルペスウイルス性角膜炎"
+          },
+          {
+            "id": "cat_0216",
+            "name": "Feline Idiopathic Aggression",
+            "name_ja": "猫特発性攻撃行動"
+          },
+          {
+            "id": "cat_0217",
+            "name": "Feline Obesity",
+            "name_ja": "猫の肥満"
+          },
+          {
+            "id": "cat_0218",
+            "name": "Feline Idiopathic Cystitis (FIC)",
+            "name_ja": "猫特発性膀胱炎（FIC）"
+          },
+          {
+            "id": "cat_0222",
+            "name": "Feline Orofacial Pain Syndrome",
+            "name_ja": "猫口顔面疼痛症候群"
+          },
+          {
+            "id": "cat_0225",
+            "name": "Feline Eosinophilic Keratoconjunctivitis",
+            "name_ja": "猫好酸球性角結膜炎"
+          },
+          {
+            "id": "cat_0226",
+            "name": "Feline Paraneoplastic Alopecia",
+            "name_ja": "猫傍腫瘍性脱毛症"
+          },
+          {
+            "id": "cat_0227",
+            "name": "Feline Aseptic Meningitis",
+            "name_ja": "猫無菌性髄膜炎"
+          },
+          {
+            "id": "cat_0228",
+            "name": "Feline Cutaneous Herpesvirus Dermatitis",
+            "name_ja": "猫ヘルペスウイルス性皮膚炎"
+          },
+          {
+            "id": "cat_0229",
+            "name": "Feline Hypertrophic Osteodystrophy",
+            "name_ja": "猫肥大性骨異栄養症"
+          },
+          {
+            "id": "cat_0230",
+            "name": "Feline Cholecystitis",
+            "name_ja": "猫胆嚢炎"
+          },
+          {
+            "id": "cat_0231",
+            "name": "Feline Aortic Stenosis",
+            "name_ja": "猫大動脈狭窄症"
+          },
+          {
+            "id": "cat_0232",
+            "name": "Feline Mitral Valve Disease",
+            "name_ja": "猫僧帽弁疾患"
+          },
+          {
+            "id": "cat_0233",
+            "name": "Feline Mesenteric Lymphadenitis",
+            "name_ja": "猫腸間膜リンパ節炎"
+          },
+          {
+            "id": "cat_0234",
+            "name": "Feline Otitis Media",
+            "name_ja": "猫中耳炎"
+          },
+          {
+            "id": "cat_0235",
+            "name": "Feline Otitis Externa",
+            "name_ja": "猫外耳炎"
+          },
+          {
+            "id": "cat_0236",
+            "name": "Feline Splenomegaly",
+            "name_ja": "猫脾腫"
+          },
+          {
+            "id": "cat_0237",
+            "name": "Feline Cholesteatoma",
+            "name_ja": "猫真珠腫"
+          },
+          {
+            "id": "cat_0238",
+            "name": "Feline Anal Sac Disease",
+            "name_ja": "猫肛門嚢疾患"
+          },
+          {
+            "id": "cat_0239",
+            "name": "Feline Tracheal Foreign Body",
+            "name_ja": "猫気管内異物"
+          },
+          {
+            "id": "cat_0240",
+            "name": "Feline Hepatitis",
+            "name_ja": "猫肝炎"
+          },
+          {
+            "id": "cat_0241",
+            "name": "Feline Peritonitis (Septic)",
+            "name_ja": "猫腹膜炎（化膿性）"
+          },
+          {
+            "id": "cat_0242",
+            "name": "Feline Laryngitis",
+            "name_ja": "猫喉頭炎"
+          },
+          {
+            "id": "cat_0243",
+            "name": "Feline Megaesophagus",
+            "name_ja": "猫巨大食道症"
+          },
+          {
+            "id": "cat_0244",
+            "name": "Feline Gastric Dilatation",
+            "name_ja": "猫胃拡張"
+          },
+          {
+            "id": "cat_0245",
+            "name": "Feline Rectal Polyp",
+            "name_ja": "猫直腸ポリープ"
+          },
+          {
+            "id": "cat_0246",
+            "name": "Feline Exocrine Pancreatic Insufficiency (EPI)",
+            "name_ja": "猫膵外分泌不全"
+          },
+          {
+            "id": "cat_0247",
+            "name": "Feline Gallbladder Mucocele",
+            "name_ja": "猫胆嚢粘液嚢腫"
+          },
+          {
+            "id": "cat_0248",
+            "name": "Feline Protein-Losing Enteropathy",
+            "name_ja": "猫蛋白漏出性腸症"
+          },
+          {
+            "id": "cat_0249",
+            "name": "Feline Meningoencephalitis",
+            "name_ja": "猫髄膜脳炎"
+          },
+          {
+            "id": "cat_0250",
+            "name": "Feline Trigeminal Neuritis",
+            "name_ja": "猫三叉神経炎"
+          },
+          {
+            "id": "cat_0251",
+            "name": "Feline Facial Nerve Paralysis",
+            "name_ja": "猫顔面神経麻痺"
+          },
+          {
+            "id": "cat_0252",
+            "name": "Feline Autonomic Neuropathy",
+            "name_ja": "猫自律神経障害"
+          },
+          {
+            "id": "cat_0253",
+            "name": "Feline Botulism",
+            "name_ja": "猫ボツリヌス中毒"
+          },
+          {
+            "id": "cat_0254",
+            "name": "Feline Tetanus",
+            "name_ja": "猫破傷風"
+          },
+          {
+            "id": "cat_0255",
+            "name": "Feline Myocarditis",
+            "name_ja": "猫心筋炎"
+          },
+          {
+            "id": "cat_0256",
+            "name": "Feline Pansteatitis (Yellow Fat Disease)",
+            "name_ja": "猫汎脂肪織炎（黄色脂肪症）"
+          },
+          {
+            "id": "cat_0257",
+            "name": "Feline Hypervitaminosis A",
+            "name_ja": "猫ビタミンA過剰症"
+          },
+          {
+            "id": "cat_0258",
+            "name": "Feline Niacin Deficiency (Pellagra)",
+            "name_ja": "猫ナイアシン欠乏症"
+          },
+          {
+            "id": "cat_0259",
+            "name": "Feline Taurine Deficiency Cardiomyopathy",
+            "name_ja": "猫タウリン欠乏性心筋症"
+          },
+          {
+            "id": "cat_0260",
+            "name": "Feline Calcium Oxalate Urolithiasis",
+            "name_ja": "猫シュウ酸カルシウム尿路結石症"
+          },
+          {
+            "id": "cat_0261",
+            "name": "Feline Struvite Urolithiasis",
+            "name_ja": "猫ストルバイト尿路結石症"
+          },
+          {
+            "id": "cat_0262",
+            "name": "Feline Cystine Urolithiasis",
+            "name_ja": "猫シスチン尿石症"
+          },
+          {
+            "id": "cat_0263",
+            "name": "Feline Urate Urolithiasis",
+            "name_ja": "猫尿酸アンモニウム尿石症"
+          },
+          {
+            "id": "cat_0264",
+            "name": "Feline Ureteral Obstruction",
+            "name_ja": "猫尿管閉塞"
+          },
+          {
+            "id": "cat_0265",
+            "name": "Feline Glomerulonephritis",
+            "name_ja": "猫糸球体腎炎"
+          },
+          {
+            "id": "cat_0266",
+            "name": "Feline Nephrogenic Diabetes Insipidus",
+            "name_ja": "猫腎性尿崩症"
+          },
+          {
+            "id": "cat_0267",
+            "name": "Feline Interstitial Nephritis",
+            "name_ja": "猫間質性腎炎"
+          },
+          {
+            "id": "cat_0268",
+            "name": "Feline Dermatophilosis",
+            "name_ja": "猫皮膚糸状菌症"
+          },
+          {
+            "id": "cat_0269",
+            "name": "Feline Malassezia Dermatitis",
+            "name_ja": "猫マラセチア皮膚炎"
+          },
+          {
+            "id": "cat_0270",
+            "name": "Feline Cutaneous Lymphoma",
+            "name_ja": "猫皮膚型リンパ腫"
+          },
+          {
+            "id": "cat_0271",
+            "name": "Feline Fibrosarcoma (Non-Injection Site)",
+            "name_ja": "猫線維肉腫（非注射部位）"
+          },
+          {
+            "id": "cat_0272",
+            "name": "Feline Thyroid Carcinoma",
+            "name_ja": "猫甲状腺癌"
+          },
+          {
+            "id": "cat_0273",
+            "name": "Feline Adrenal Tumor",
+            "name_ja": "猫副腎腫瘍"
+          },
+          {
+            "id": "cat_0274",
+            "name": "Feline Pancreatic Adenocarcinoma",
+            "name_ja": "猫膵腺癌"
+          },
+          {
+            "id": "cat_0275",
+            "name": "Feline Pheochromocytoma",
+            "name_ja": "猫褐色細胞腫"
+          },
+          {
+            "id": "cat_0276",
+            "name": "Feline Orbital Tumor",
+            "name_ja": "猫眼窩腫瘍"
+          },
+          {
+            "id": "cat_0277",
+            "name": "Feline Ceruminous Gland Adenoma",
+            "name_ja": "猫耳垢腺腫"
+          },
+          {
+            "id": "cat_0278",
+            "name": "Feline Chronic Colitis",
+            "name_ja": "猫慢性大腸炎"
+          },
+          {
+            "id": "cat_0279",
+            "name": "Feline Chronic Bronchitis",
+            "name_ja": "猫慢性気管支炎"
+          },
+          {
+            "id": "cat_0280",
+            "name": "Feline Pulmonary Thromboembolism",
+            "name_ja": "猫肺血栓塞栓症"
+          },
+          {
+            "id": "cat_0281",
+            "name": "Feline Pneumothorax",
+            "name_ja": "猫気胸"
+          },
+          {
+            "id": "cat_0282",
+            "name": "Feline Pulmonary Fibrosis",
+            "name_ja": "猫肺線維症"
+          },
+          {
+            "id": "cat_0283",
+            "name": "Feline Allergic Bronchopulmonary Disease",
+            "name_ja": "猫アレルギー性気管支肺疾患"
+          },
+          {
+            "id": "cat_0284",
+            "name": "Feline Nasal Polyp",
+            "name_ja": "猫鼻腔ポリープ"
+          },
+          {
+            "id": "cat_0285",
+            "name": "Feline Sinonasal Aspergillosis",
+            "name_ja": "猫副鼻腔アスペルギルス症"
+          },
+          {
+            "id": "cat_0286",
+            "name": "Feline Diabetes Insipidus (Central)",
+            "name_ja": "猫中枢性尿崩症"
+          },
+          {
+            "id": "cat_0287",
+            "name": "Feline Hyperparathyroidism (Primary)",
+            "name_ja": "猫原発性副甲状腺機能亢進症"
+          },
+          {
+            "id": "cat_0288",
+            "name": "Feline Hypoparathyroidism",
+            "name_ja": "猫副甲状腺機能低下症"
+          },
+          {
+            "id": "cat_0289",
+            "name": "Feline Pituitary Dwarfism",
+            "name_ja": "猫下垂体性矮小症"
+          },
+          {
+            "id": "cat_0290",
+            "name": "Feline Hypermagnesemia",
+            "name_ja": "猫高マグネシウム血症"
+          },
+          {
+            "id": "cat_0291",
+            "name": "Feline Hyperphosphatemia",
+            "name_ja": "猫高リン血症"
+          },
+          {
+            "id": "cat_0292",
+            "name": "Feline Hepatic Abscess",
+            "name_ja": "猫肝膿瘍"
+          },
+          {
+            "id": "cat_0293",
+            "name": "Feline Bile Duct Obstruction",
+            "name_ja": "猫胆管閉塞"
+          },
+          {
+            "id": "cat_0294",
+            "name": "Feline Gastric Hairball Obstruction",
+            "name_ja": "猫毛球閉塞症"
+          },
+          {
+            "id": "cat_0295",
+            "name": "Feline Intussusception",
+            "name_ja": "猫腸重積"
+          },
+          {
+            "id": "cat_0296",
+            "name": "Feline Colonic Neoplasia",
+            "name_ja": "猫結腸腫瘍"
+          },
+          {
+            "id": "cat_0297",
+            "name": "Feline Perianal Fistula",
+            "name_ja": "猫肛門周囲瘻"
+          },
+          {
+            "id": "cat_0298",
+            "name": "Feline Histoplasmosis",
+            "name_ja": "猫ヒストプラズマ症"
+          },
+          {
+            "id": "cat_0299",
+            "name": "Feline Blastomycosis",
+            "name_ja": "猫ブラストミセス症"
+          },
+          {
+            "id": "cat_0300",
+            "name": "Feline Coccidioidomycosis",
+            "name_ja": "猫コクシジオイデス症"
+          },
+          {
+            "id": "cat_0301",
+            "name": "Feline Phaeohyphomycosis",
+            "name_ja": "猫暗色真菌症"
+          },
+          {
+            "id": "cat_0302",
+            "name": "Feline Pythiosis",
+            "name_ja": "猫ピシウム症"
+          },
+          {
+            "id": "cat_0303",
+            "name": "Feline Mycetoma",
+            "name_ja": "猫菌腫"
+          },
+          {
+            "id": "cat_0304",
+            "name": "Feline Haemobartonellosis",
+            "name_ja": "猫ヘモバルトネラ症"
+          },
+          {
+            "id": "cat_0305",
+            "name": "Feline Hemoplasmosis (Candidatus Mycoplasma turicensis)",
+            "name_ja": "猫ヘモプラズマ症（Candidatus M. turicensis）"
+          },
+          {
+            "id": "cat_0306",
+            "name": "Feline Anaplasma Infection",
+            "name_ja": "猫アナプラズマ感染症"
+          },
+          {
+            "id": "cat_0307",
+            "name": "Feline Ehrlichiosis",
+            "name_ja": "猫エーリキア症"
+          },
+          {
+            "id": "cat_0308",
+            "name": "Feline Babesiosis",
+            "name_ja": "猫バベシア症"
+          },
+          {
+            "id": "cat_0309",
+            "name": "Feline Leishmaniasis",
+            "name_ja": "猫リーシュマニア症"
+          },
+          {
+            "id": "cat_0310",
+            "name": "Feline Hepatozoonosis",
+            "name_ja": "猫ヘパトゾーン症"
+          },
+          {
+            "id": "cat_0311",
+            "name": "Feline Tritrichomonas Infection",
+            "name_ja": "猫トリトリコモナス感染症"
+          },
+          {
+            "id": "cat_0312",
+            "name": "Feline Strongyloides Infection",
+            "name_ja": "猫糞線虫症"
+          },
+          {
+            "id": "cat_0313",
+            "name": "Feline Liver Fluke Infection (Opisthorchis)",
+            "name_ja": "猫肝吸虫症"
+          },
+          {
+            "id": "cat_0314",
+            "name": "Feline Cheyletiellosis (Walking Dandruff)",
+            "name_ja": "猫ツメダニ症"
+          },
+          {
+            "id": "cat_0315",
+            "name": "Feline Trombiculiasis (Chigger Mite)",
+            "name_ja": "猫ツツガムシ症"
+          },
+          {
+            "id": "cat_0316",
+            "name": "Feline Myiasis (Fly Strike)",
+            "name_ja": "猫蠅蛆症"
+          },
+          {
+            "id": "cat_0317",
+            "name": "Feline Demodex gatoi Infection",
+            "name_ja": "猫ニキビダニ（D. gatoi）症"
+          },
+          {
+            "id": "cat_0318",
+            "name": "Feline Dry Eye (Keratoconjunctivitis Sicca)",
+            "name_ja": "猫乾性角結膜炎"
+          },
+          {
+            "id": "cat_0319",
+            "name": "Feline Anterior Uveitis",
+            "name_ja": "猫前部ぶどう膜炎"
+          },
+          {
+            "id": "cat_0320",
+            "name": "Feline Posterior Synechia",
+            "name_ja": "猫後部癒着"
+          },
+          {
+            "id": "cat_0321",
+            "name": "Feline Eyelid Tumor",
+            "name_ja": "猫眼瞼腫瘍"
+          },
+          {
+            "id": "cat_0322",
+            "name": "Feline Progressive Retinal Atrophy",
+            "name_ja": "猫進行性網膜萎縮症"
+          },
+          {
+            "id": "cat_0323",
+            "name": "Feline Hyphema",
+            "name_ja": "猫前房出血"
+          },
+          {
+            "id": "cat_0324",
+            "name": "Feline Keratitis (Non-Herpetic)",
+            "name_ja": "猫角膜炎（非ヘルペス性）"
+          },
+          {
+            "id": "cat_0325",
+            "name": "Feline Symblepharon",
+            "name_ja": "猫癒着性角結膜炎"
+          },
+          {
+            "id": "cat_0326",
+            "name": "Feline Stomatitis (Non-Lymphoplasmacytic)",
+            "name_ja": "猫口内炎（非リンパ形質細胞性）"
+          },
+          {
+            "id": "cat_0327",
+            "name": "Feline Salivary Gland Mucocele",
+            "name_ja": "猫唾液腺嚢腫"
+          },
+          {
+            "id": "cat_0328",
+            "name": "Feline Eosinophilic Pneumonia",
+            "name_ja": "猫好酸球性肺炎"
+          },
+          {
+            "id": "cat_0329",
+            "name": "Feline Lipoma",
+            "name_ja": "猫脂肪腫"
+          },
+          {
+            "id": "cat_0330",
+            "name": "Feline Liposarcoma",
+            "name_ja": "猫脂肪肉腫"
+          },
+          {
+            "id": "cat_0331",
+            "name": "Feline Melanoma",
+            "name_ja": "猫悪性黒色腫"
+          },
+          {
+            "id": "cat_0332",
+            "name": "Feline Apocrine Gland Cyst",
+            "name_ja": "猫アポクリン腺嚢胞"
+          },
+          {
+            "id": "cat_0333",
+            "name": "Feline Squamous Cell Carcinoma (Nasal Planum)",
+            "name_ja": "猫扁平上皮癌（鼻平面）"
+          },
+          {
+            "id": "cat_0334",
+            "name": "Feline Paraneoplastic Syndrome",
+            "name_ja": "猫傍腫瘍性症候群"
+          },
+          {
+            "id": "cat_0335",
+            "name": "Feline Methemoglobinemia",
+            "name_ja": "猫メトヘモグロビン血症"
+          },
+          {
+            "id": "cat_0336",
+            "name": "Feline Transfusion Reaction",
+            "name_ja": "猫輸血反応"
+          },
+          {
+            "id": "cat_0337",
+            "name": "Feline von Willebrand Disease",
+            "name_ja": "猫フォンヴィレブランド病"
+          },
+          {
+            "id": "cat_0338",
+            "name": "Feline Hemophilia A",
+            "name_ja": "猫血友病A"
+          },
+          {
+            "id": "cat_0339",
+            "name": "Feline Evans Syndrome",
+            "name_ja": "猫エヴァンス症候群"
+          },
+          {
+            "id": "cat_0340",
+            "name": "Feline Pure Red Cell Aplasia",
+            "name_ja": "猫赤芽球癆"
+          },
+          {
+            "id": "cat_0341",
+            "name": "Feline Myelodysplastic Syndrome",
+            "name_ja": "猫骨髄異形成症候群"
+          },
+          {
+            "id": "cat_0342",
+            "name": "Feline Multiple Myeloma",
+            "name_ja": "猫多発性骨髄腫"
+          },
+          {
+            "id": "cat_0343",
+            "name": "Feline Histiocytic Sarcoma",
+            "name_ja": "猫組織球性肉腫"
+          },
+          {
+            "id": "cat_0344",
+            "name": "Feline Leiomyosarcoma",
+            "name_ja": "猫平滑筋肉腫"
+          },
+          {
+            "id": "cat_0345",
+            "name": "Feline Gastrointestinal Stromal Tumor (GIST)",
+            "name_ja": "猫消化管間質腫瘍"
+          },
+          {
+            "id": "cat_0346",
+            "name": "Feline Choroid Plexus Tumor",
+            "name_ja": "猫脈絡叢腫瘍"
+          },
+          {
+            "id": "cat_0347",
+            "name": "Feline Osteochondroma",
+            "name_ja": "猫骨軟骨腫"
+          },
+          {
+            "id": "cat_0348",
+            "name": "Feline Chondrosarcoma",
+            "name_ja": "猫軟骨肉腫"
+          },
+          {
+            "id": "cat_0349",
+            "name": "Feline Angiomatosis",
+            "name_ja": "猫血管腫症"
+          },
+          {
+            "id": "cat_0350",
+            "name": "Feline Hemangiopericytoma",
+            "name_ja": "猫血管周皮腫"
+          },
+          {
+            "id": "cat_0351",
+            "name": "Feline Insulinoma-Related Hypoglycemia",
+            "name_ja": "猫インスリノーマ関連低血糖"
+          },
+          {
+            "id": "cat_0352",
+            "name": "Feline Congenital Portosystemic Shunt",
+            "name_ja": "猫先天性門脈体循環シャント"
+          },
+          {
+            "id": "cat_0353",
+            "name": "Feline Acquired Myasthenia Gravis",
+            "name_ja": "猫後天性重症筋無力症"
+          },
+          {
+            "id": "cat_0354",
+            "name": "Feline Dermatomyositis",
+            "name_ja": "猫皮膚筋炎"
+          },
+          {
+            "id": "cat_0355",
+            "name": "Feline Polymyositis",
+            "name_ja": "猫多発性筋炎"
+          },
+          {
+            "id": "cat_0356",
+            "name": "Feline Masticatory Muscle Myositis",
+            "name_ja": "猫咀嚼筋筋炎"
+          },
+          {
+            "id": "cat_0357",
+            "name": "Feline Immune-Mediated Meningitis",
+            "name_ja": "猫免疫介在性髄膜炎"
+          },
+          {
+            "id": "cat_0358",
+            "name": "Feline Discospondylitis",
+            "name_ja": "猫椎間板脊椎炎"
+          },
+          {
+            "id": "cat_0359",
+            "name": "Feline Sacrocaudal Dysgenesis",
+            "name_ja": "猫仙尾部異形成"
+          },
+          {
+            "id": "cat_0360",
+            "name": "Feline Atlantoaxial Instability",
+            "name_ja": "猫環軸椎不安定症"
+          },
+          {
+            "id": "cat_0361",
+            "name": "Feline Tail Pull Injury",
+            "name_ja": "猫尾牽引損傷"
+          },
+          {
+            "id": "cat_0362",
+            "name": "Feline Hyperkalemia",
+            "name_ja": "猫高カリウム血症"
+          },
+          {
+            "id": "cat_0363",
+            "name": "Feline Hyponatremia",
+            "name_ja": "猫低ナトリウム血症"
+          },
+          {
+            "id": "cat_0364",
+            "name": "Feline Heat Stroke",
+            "name_ja": "猫熱中症"
+          },
+          {
+            "id": "cat_0365",
+            "name": "Feline Smoke Inhalation Injury",
+            "name_ja": "猫煙吸入障害"
+          },
+          {
+            "id": "cat_0366",
+            "name": "Feline Near-Drowning",
+            "name_ja": "猫溺水（ニアドローニング）"
+          },
+          {
+            "id": "cat_0367",
+            "name": "Feline Electric Cord Bite Injury",
+            "name_ja": "猫電気コード咬傷"
+          },
+          {
+            "id": "cat_0368",
+            "name": "Feline Chocolate Toxicosis",
+            "name_ja": "猫チョコレート中毒"
+          },
+          {
+            "id": "cat_0369",
+            "name": "Feline Onion/Garlic Toxicosis",
+            "name_ja": "猫タマネギ・ニンニク中毒"
+          },
+          {
+            "id": "cat_0370",
+            "name": "Feline Xylitol Toxicosis",
+            "name_ja": "猫キシリトール中毒"
+          },
+          {
+            "id": "cat_0371",
+            "name": "Feline Marijuana Toxicosis",
+            "name_ja": "猫大麻中毒"
+          },
+          {
+            "id": "cat_0372",
+            "name": "Feline Salt Toxicosis",
+            "name_ja": "猫塩分中毒"
+          },
+          {
+            "id": "cat_0373",
+            "name": "Feline Zinc Toxicosis",
+            "name_ja": "猫亜鉛中毒"
+          },
+          {
+            "id": "cat_0374",
+            "name": "Feline Lead Toxicosis",
+            "name_ja": "猫鉛中毒"
+          },
+          {
+            "id": "cat_0375",
+            "name": "Feline Organophosphate Toxicosis",
+            "name_ja": "猫有機リン中毒"
+          },
+          {
+            "id": "cat_0376",
+            "name": "Feline Pyrethroid Toxicosis (Topical)",
+            "name_ja": "猫ピレスロイド中毒（外用）"
+          },
+          {
+            "id": "cat_0377",
+            "name": "Feline Metaldehyde Toxicosis (Slug Bait)",
+            "name_ja": "猫メタアルデヒド中毒"
+          },
+          {
+            "id": "cat_0378",
+            "name": "Feline Vitamin D Toxicosis",
+            "name_ja": "猫ビタミンD中毒"
+          },
+          {
+            "id": "cat_0379",
+            "name": "Feline Bromethalin Toxicosis",
+            "name_ja": "猫ブロメタリン中毒"
+          },
+          {
+            "id": "cat_0380",
+            "name": "Feline Ivermectin Toxicosis",
+            "name_ja": "猫イベルメクチン中毒"
+          },
+          {
+            "id": "cat_0381",
+            "name": "Feline Toxic Epidermal Necrolysis",
+            "name_ja": "猫中毒性表皮壊死症"
+          },
+          {
+            "id": "cat_0382",
+            "name": "Feline Erythema Multiforme",
+            "name_ja": "猫多形性紅斑"
+          },
+          {
+            "id": "cat_0383",
+            "name": "Feline Panniculitis",
+            "name_ja": "猫脂肪織炎"
+          },
+          {
+            "id": "cat_0384",
+            "name": "Feline Vasculitis",
+            "name_ja": "猫血管炎"
+          },
+          {
+            "id": "cat_0385",
+            "name": "Feline Alopecia Areata",
+            "name_ja": "猫円形脱毛症"
+          },
+          {
+            "id": "cat_0386",
+            "name": "Feline Tail Gland Hyperplasia (Stud Tail)",
+            "name_ja": "猫尾腺過形成（スタッドテイル）"
+          },
+          {
+            "id": "cat_0387",
+            "name": "Feline Idiopathic Facial Dermatitis (Persian Face Fold)",
+            "name_ja": "猫特発性顔面皮膚炎"
+          },
+          {
+            "id": "cat_0388",
+            "name": "Feline Bowen Disease (Multicentric SCC in situ)",
+            "name_ja": "猫ボーエン病（多中心性上皮内扁平上皮癌）"
+          },
+          {
+            "id": "cat_0389",
+            "name": "Feline Pulmonary Hypertension",
+            "name_ja": "猫肺高血圧症"
+          },
+          {
+            "id": "cat_0390",
+            "name": "Feline Tricuspid Valve Dysplasia",
+            "name_ja": "猫三尖弁異形成"
+          },
+          {
+            "id": "cat_0391",
+            "name": "Feline Infective Endocarditis",
+            "name_ja": "猫感染性心内膜炎"
+          },
+          {
+            "id": "cat_0392",
+            "name": "Feline Myocardial Contusion",
+            "name_ja": "猫心筋挫傷"
+          },
+          {
+            "id": "cat_0393",
+            "name": "Feline Supraventricular Tachycardia",
+            "name_ja": "猫上室性頻拍"
+          },
+          {
+            "id": "cat_0394",
+            "name": "Feline Third-Degree Atrioventricular Block",
+            "name_ja": "猫第3度房室ブロック"
+          },
+          {
+            "id": "cat_0395",
+            "name": "Feline Sick Sinus Syndrome",
+            "name_ja": "猫洞不全症候群"
+          },
+          {
+            "id": "cat_0396",
+            "name": "Feline Congestive Heart Failure",
+            "name_ja": "猫うっ血性心不全"
+          },
+          {
+            "id": "cat_0397",
+            "name": "Feline Arterial Hypertension (Secondary)",
+            "name_ja": "猫二次性動脈性高血圧"
+          },
+          {
+            "id": "cat_0398",
+            "name": "Feline Perineal Hernia",
+            "name_ja": "猫会陰ヘルニア"
+          },
+          {
+            "id": "cat_0399",
+            "name": "Feline Inguinal Hernia",
+            "name_ja": "猫鼠径ヘルニア"
+          },
+          {
+            "id": "cat_0400",
+            "name": "Feline Umbilical Hernia",
+            "name_ja": "猫臍ヘルニア"
+          },
+          {
+            "id": "cat_0401",
+            "name": "Feline Gastric Foreign Body",
+            "name_ja": "猫胃内異物"
+          },
+          {
+            "id": "cat_0402",
+            "name": "Feline Linear Foreign Body",
+            "name_ja": "猫線状異物"
+          },
+          {
+            "id": "cat_0403",
+            "name": "Feline Acute Hemorrhagic Diarrhea Syndrome",
+            "name_ja": "猫急性出血性下痢症候群"
+          },
+          {
+            "id": "cat_0404",
+            "name": "Feline Chronic Vomiting (Idiopathic)",
+            "name_ja": "猫慢性嘔吐（特発性）"
+          },
+          {
+            "id": "cat_0405",
+            "name": "Feline Eosinophilic Enteritis",
+            "name_ja": "猫好酸球性腸炎"
+          },
+          {
+            "id": "cat_0406",
+            "name": "Feline Chronic Hepatopathy",
+            "name_ja": "猫慢性肝疾患"
+          },
+          {
+            "id": "cat_0407",
+            "name": "Feline Splenic Torsion",
+            "name_ja": "猫脾捻転"
+          },
+          {
+            "id": "cat_0408",
+            "name": "Feline Mesenteric Volvulus",
+            "name_ja": "猫腸間膜軸捻転"
+          },
+          {
+            "id": "cat_0409",
+            "name": "Feline Focal Seizure Disorder",
+            "name_ja": "猫焦点性発作障害"
+          },
+          {
+            "id": "cat_0410",
+            "name": "Feline Status Epilepticus",
+            "name_ja": "猫てんかん重積状態"
+          },
+          {
+            "id": "cat_0411",
+            "name": "Feline Brachial Plexus Avulsion",
+            "name_ja": "猫腕神経叢離断"
+          },
+          {
+            "id": "cat_0412",
+            "name": "Feline Horner Syndrome",
+            "name_ja": "猫ホルネル症候群"
+          },
+          {
+            "id": "cat_0413",
+            "name": "Feline Spinal Cord Trauma",
+            "name_ja": "猫脊髄外傷"
+          },
+          {
+            "id": "cat_0414",
+            "name": "Feline Degenerative Myelopathy",
+            "name_ja": "猫変性性脊髄症"
+          },
+          {
+            "id": "cat_0415",
+            "name": "Feline Syringomyelia",
+            "name_ja": "猫脊髄空洞症"
+          },
+          {
+            "id": "cat_0416",
+            "name": "Feline Chronic Pain Syndrome",
+            "name_ja": "猫慢性疼痛症候群"
+          },
+          {
+            "id": "cat_0417",
+            "name": "Feline Night Vocalization Syndrome",
+            "name_ja": "猫夜間発声症候群"
+          },
+          {
+            "id": "cat_0418",
+            "name": "Feline Litter Box Aversion",
+            "name_ja": "猫トイレ回避症"
+          },
+          {
+            "id": "cat_0419",
+            "name": "Feline Noise Phobia",
+            "name_ja": "猫騒音恐怖症"
+          },
+          {
+            "id": "cat_0420",
+            "name": "Feline Psychogenic Polydipsia",
+            "name_ja": "猫心因性多飲"
+          },
+          {
+            "id": "cat_0421",
+            "name": "Feline Feline Infectious Anemia (Candidatus M. haemominutum)",
+            "name_ja": "猫感染性貧血（Candidatus M. haemominutum）"
+          },
+          {
+            "id": "cat_0422",
+            "name": "Feline Listeriosis",
+            "name_ja": "猫リステリア症"
+          },
+          {
+            "id": "cat_0423",
+            "name": "Feline Leptospirosis",
+            "name_ja": "猫レプトスピラ症"
+          },
+          {
+            "id": "cat_0424",
+            "name": "Feline Feline Papillomatosis",
+            "name_ja": "猫パピローマウイルス感染症"
+          },
+          {
+            "id": "cat_0425",
+            "name": "Feline Subcutaneous Abscess (Non-Bite)",
+            "name_ja": "猫皮下膿瘍（非咬傷性）"
+          },
+          {
+            "id": "cat_0426",
+            "name": "Feline Necrotizing Fasciitis",
+            "name_ja": "猫壊死性筋膜炎"
+          },
+          {
+            "id": "cat_0427",
+            "name": "Feline Dental Malocclusion",
+            "name_ja": "猫歯列不正"
+          },
+          {
+            "id": "cat_0428",
+            "name": "Feline Oral Squamous Cell Carcinoma (Sublingual)",
+            "name_ja": "猫口腔扁平上皮癌（舌下）"
+          },
+          {
+            "id": "cat_0429",
+            "name": "Feline Enamel Hypoplasia",
+            "name_ja": "猫エナメル質形成不全"
+          },
+          {
+            "id": "cat_0430",
+            "name": "Feline Oronasal Fistula",
+            "name_ja": "猫口鼻瘻"
+          },
+          {
+            "id": "cat_0431",
+            "name": "Feline Chronic Rhinitis (Non-Infectious)",
+            "name_ja": "猫慢性鼻炎（非感染性）"
+          },
+          {
+            "id": "cat_0432",
+            "name": "Feline Aural Hematoma",
+            "name_ja": "猫耳血腫"
+          },
+          {
+            "id": "cat_0433",
+            "name": "Feline Nasopharyngeal Stenosis",
+            "name_ja": "猫鼻咽頭狭窄"
+          },
+          {
+            "id": "cat_0434",
+            "name": "Feline Idiopathic Chylothorax",
+            "name_ja": "猫特発性乳び胸"
+          },
+          {
+            "id": "cat_0435",
+            "name": "Feline Fungal Rhinitis",
+            "name_ja": "猫真菌性鼻炎"
+          },
+          {
+            "id": "cat_0436",
+            "name": "Feline Idiopathic Vestibular Disease",
+            "name_ja": "猫特発性前庭疾患"
+          },
+          {
+            "id": "cat_0437",
+            "name": "Feline Nasal Foreign Body",
+            "name_ja": "猫鼻腔内異物"
+          },
+          {
+            "id": "cat_0438",
+            "name": "Feline Esophageal Stricture",
+            "name_ja": "猫食道狭窄"
+          },
+          {
+            "id": "cat_0439",
+            "name": "Feline Gastric Motility Disorder",
+            "name_ja": "猫胃運動障害"
+          },
+          {
+            "id": "cat_0450",
+            "name": "Feline Enteric Coronavirus (Non-FIP)",
+            "name_ja": "猫腸管コロナウイルス（非FIP）"
+          },
+          {
+            "id": "cat_0458",
+            "name": "Feline Ischemic Encephalopathy",
+            "name_ja": "猫虚血性脳症"
+          },
+          {
+            "id": "cat_0461",
+            "name": "Feline Audiogenic Reflex Seizures (FARS)",
+            "name_ja": "猫聴覚性反射てんかん（FARS）"
+          },
+          {
+            "id": "cat_0463",
+            "name": "Feline Dysautonomia (Key-Gaskell Syndrome) - Acute",
+            "name_ja": "猫自律神経障害（キー・ガスケル症候群）急性型"
+          },
+          {
+            "id": "cat_0467",
+            "name": "Feline Acquired Cutaneous Fragility Syndrome",
+            "name_ja": "猫後天性皮膚脆弱症候群"
+          },
+          {
+            "id": "cat_0468",
+            "name": "Feline Polycystic Liver Disease",
+            "name_ja": "猫多嚢胞性肝疾患"
+          },
+          {
+            "id": "cat_0469",
+            "name": "Feline Hepatic Amyloidosis",
+            "name_ja": "猫肝アミロイドーシス"
+          },
+          {
+            "id": "cat_0470",
+            "name": "Feline Bronchial Mineralization",
+            "name_ja": "猫気管支石灰化"
+          },
+          {
+            "id": "cat_0471",
+            "name": "Feline Gallbladder Infarction",
+            "name_ja": "猫胆嚢梗塞"
+          },
+          {
+            "id": "cat_0472",
+            "name": "Feline Idiopathic Megacolon",
+            "name_ja": "猫特発性巨大結腸症"
+          },
+          {
+            "id": "cat_0473",
+            "name": "Feline Renal Tubular Acidosis",
+            "name_ja": "猫尿細管性アシドーシス"
+          },
+          {
+            "id": "cat_0474",
+            "name": "Feline Congenital Portosystemic Shunt (Extrahepatic)",
+            "name_ja": "猫先天性門脈体循環シャント（肝外型）"
+          },
+          {
+            "id": "cat_0475",
+            "name": "Feline Lymphocytic Cholangitis",
+            "name_ja": "猫リンパ球性胆管炎"
+          },
+          {
+            "id": "cat_0476",
+            "name": "Feline Neutrophilic Cholangitis",
+            "name_ja": "猫好中球性胆管炎"
+          },
+          {
+            "id": "cat_0477",
+            "name": "Feline Hypertrophic Cardiomyopathy (Obstructive)",
+            "name_ja": "猫閉塞性肥大型心筋症"
+          },
+          {
+            "id": "cat_0478",
+            "name": "Feline Right-Sided Congestive Heart Failure",
+            "name_ja": "猫右心不全"
+          },
+          {
+            "id": "cat_0479",
+            "name": "Feline Iris Melanosis",
+            "name_ja": "猫虹彩メラノーシス"
+          },
+          {
+            "id": "cat_0480",
+            "name": "Feline Chronic Progressive Polyarthritis",
+            "name_ja": "猫慢性進行性多発性関節炎"
+          },
+          {
+            "id": "cat_0481",
+            "name": "Feline Nasopharyngeal Cryptococcosis",
+            "name_ja": "猫鼻咽頭クリプトコッカス症"
+          },
+          {
+            "id": "cat_0482",
+            "name": "Feline High-Rise Syndrome (Thoracic Trauma)",
+            "name_ja": "猫高所落下症候群（胸部外傷）"
+          },
+          {
+            "id": "cat_0483",
+            "name": "Feline Vaccine-Associated Sarcoma (Non-Injection Site)",
+            "name_ja": "猫ワクチン関連肉腫（非注射部位）"
+          },
+          {
+            "id": "cat_0484",
+            "name": "Feline Hypervitaminosis A (Chronic)",
+            "name_ja": "猫慢性ビタミンA過剰症"
+          },
+          {
+            "id": "cat_0485",
+            "name": "Feline Neonatal Isoerythrolysis (Type B Queen x Type A Kitten)",
+            "name_ja": "猫新生児同種赤血球溶解症（B型母猫×A型子猫）"
+          },
+          {
+            "id": "cat_0486",
+            "name": "Feline Proliferative and Necrotizing Otitis Externa",
+            "name_ja": "猫増殖性壊死性外耳炎"
+          },
+          {
+            "id": "cat_0487",
+            "name": "Feline Oral Eosinophilic Granuloma",
+            "name_ja": "猫口腔好酸球性肉芽腫"
+          },
+          {
+            "id": "cat_0488",
+            "name": "Feline Retroperitoneal Lymphoma",
+            "name_ja": "猫後腹膜リンパ腫"
+          },
+          {
+            "id": "cat_0489",
+            "name": "Feline Cerebellar Infarction",
+            "name_ja": "猫小脳梗塞"
+          },
+          {
+            "id": "cat_0490",
+            "name": "Feline Tracheal Avulsion",
+            "name_ja": "猫気管断裂"
+          },
+          {
+            "id": "cat_0491",
+            "name": "Feline Ureteral Stricture",
+            "name_ja": "猫尿管狭窄"
+          },
+          {
+            "id": "cat_0492",
+            "name": "Feline Penile Urethral Obstruction",
+            "name_ja": "猫陰茎尿道閉塞"
+          },
+          {
+            "id": "cat_0493",
+            "name": "Feline Cutaneous Horn",
+            "name_ja": "猫皮角"
+          },
+          {
+            "id": "cat_0494",
+            "name": "Feline Mediastinal Cyst",
+            "name_ja": "猫縦隔嚢胞"
+          },
+          {
+            "id": "cat_0495",
+            "name": "Feline Aortic Thromboembolism (Partial)",
+            "name_ja": "猫大動脈血栓塞栓症（部分型）"
+          },
+          {
+            "id": "cat_0496",
+            "name": "Feline Renal Secondary Hyperparathyroidism",
+            "name_ja": "猫腎性二次性副甲状腺機能亢進症"
+          },
+          {
+            "id": "cat_0497",
+            "name": "Feline Chronic Pancreatitis",
+            "name_ja": "猫慢性膵炎"
+          },
+          {
+            "id": "cat_0498",
+            "name": "Feline Hereditary Myopathy (Devon Rex)",
+            "name_ja": "猫遺伝性筋障害（デボンレックス）"
+          },
+          {
+            "id": "cat_0499",
+            "name": "Feline Spinal Arachnoid Cyst",
+            "name_ja": "猫脊髄くも膜嚢胞"
+          },
+          {
+            "id": "cat_0500",
+            "name": "Feline Cholesterol Granuloma (Middle Ear)",
+            "name_ja": "猫コレステロール肉芽腫（中耳）"
+          },
+          {
+            "id": "cat_0501",
+            "name": "Feline Congenital Diaphragmatic Hernia (Peritoneopericardial)",
+            "name_ja": "猫先天性横隔膜ヘルニア（腹膜心膜型）"
+          },
+          {
+            "id": "cat_0502",
+            "name": "Feline Mandibular Symphysis Fracture",
+            "name_ja": "猫下顎結合部骨折"
+          },
+          {
+            "id": "cat_0503",
+            "name": "Feline Metabolic Epidermal Necrosis (Superficial Necrolytic Dermatitis)",
+            "name_ja": "猫代謝性表皮壊死（表在性壊死性皮膚炎）"
+          },
+          {
+            "id": "cat_0504",
+            "name": "Feline Splenic Lymphoma",
+            "name_ja": "猫脾臓リンパ腫"
+          },
+          {
+            "id": "cat_0505",
+            "name": "Feline Nasal Bridge Swelling (Cryptococcal Granuloma)",
+            "name_ja": "猫鼻梁腫脹（クリプトコッカス肉芽腫）"
+          },
+          {
+            "id": "cat_0506",
+            "name": "Feline Urethral Plug",
+            "name_ja": "猫尿道栓子"
+          },
+          {
+            "id": "cat_0507",
+            "name": "Feline Mammary Fibroepithelial Hyperplasia (Progesterone-Induced)",
+            "name_ja": "猫乳腺線維上皮性過形成（プロゲステロン誘発性）"
+          },
+          {
+            "id": "cat_0508",
+            "name": "Feline Hepatocutaneous Syndrome",
+            "name_ja": "猫肝皮症候群"
+          },
+          {
+            "id": "cat_0509",
+            "name": "Feline Toxic Megacolon",
+            "name_ja": "猫中毒性巨大結腸症"
+          },
+          {
+            "id": "cat_0510",
+            "name": "Feline Primary Hyperaldosteronism (Conn's Syndrome)",
+            "name_ja": "猫原発性高アルドステロン症（コン症候群）"
+          },
+          {
+            "id": "cat_0511",
+            "name": "Feline Tracheobronchial Foreign Body",
+            "name_ja": "猫気管支異物"
+          },
+          {
+            "id": "cat_0512",
+            "name": "Feline Trichobezoar-Induced Obstruction",
+            "name_ja": "猫毛球閉塞"
+          },
+          {
+            "id": "cat_0513",
+            "name": "Feline Ectopic Ureter",
+            "name_ja": "猫異所性尿管"
+          },
+          {
+            "id": "cat_0514",
+            "name": "Feline Chronic Kidney Disease Stage IV (IRIS)",
+            "name_ja": "猫慢性腎臓病ステージIV（IRIS）"
+          },
+          {
+            "id": "cat_0515",
+            "name": "Feline Myasthenic Crisis",
+            "name_ja": "猫筋無力症クリーゼ"
+          },
+          {
+            "id": "cat_0516",
+            "name": "Feline Mammary Carcinoma (Triple Negative)",
+            "name_ja": "猫乳腺癌（トリプルネガティブ）"
+          },
+          {
+            "id": "cat_0517",
+            "name": "Feline Hyperthyroid Cardiomyopathy",
+            "name_ja": "猫甲状腺機能亢進性心筋症"
+          },
+          {
+            "id": "cat_0522",
+            "name": "Feline Sepsis and Septic Shock",
+            "name_ja": "猫の敗血症・敗血症性ショック"
+          },
+          {
+            "id": "cat_0523",
+            "name": "Feline Anaphylaxis",
+            "name_ja": "猫のアナフィラキシー"
+          },
+          {
+            "id": "cat_0524",
+            "name": "Feline Mamushi Pit Viper Envenomation (Japan)",
+            "name_ja": "猫のマムシ咬傷（日本特異的）"
+          },
+          {
+            "id": "cat_0525",
+            "name": "Feline Cholecalciferol Rodenticide Toxicosis",
+            "name_ja": "猫のコレカルシフェロール中毒（ビタミンD3殺鼠剤）"
+          },
+          {
+            "id": "cat_0527",
+            "name": "Feline Mosquito Bite Hypersensitivity",
+            "name_ja": "猫の蚊刺過敏症（蚊刺症）"
+          },
+          {
+            "id": "cat_0528",
+            "name": "Feline Injection Site Sarcoma (FISS / Vaccine-Associated Sarcoma)",
+            "name_ja": "猫注射部位肉腫（FISS・ワクチン関連肉腫）"
+          },
+          {
+            "id": "cat_0529",
+            "name": "Feline Small Cell Intestinal Lymphoma",
+            "name_ja": "猫小細胞性腸リンパ腫"
+          },
+          {
+            "id": "cat_0530",
+            "name": "Feline Patellar Luxation",
+            "name_ja": "猫の膝蓋骨脱臼"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cardio",
+        "size": 21,
+        "members": [
+          {
+            "id": "cat_0010",
+            "name": "Hypertrophic Cardiomyopathy (HCM)",
+            "name_ja": "肥大型心筋症"
+          },
+          {
+            "id": "cat_0011",
+            "name": "Dilated Cardiomyopathy (DCM)",
+            "name_ja": "拡張型心筋症"
+          },
+          {
+            "id": "cat_0012",
+            "name": "Restrictive Cardiomyopathy",
+            "name_ja": "拘束型心筋症"
+          },
+          {
+            "id": "cat_0259",
+            "name": "Feline Taurine Deficiency Cardiomyopathy",
+            "name_ja": "猫タウリン欠乏性心筋症"
+          },
+          {
+            "id": "cat_0477",
+            "name": "Feline Hypertrophic Cardiomyopathy (Obstructive)",
+            "name_ja": "猫閉塞性肥大型心筋症"
+          },
+          {
+            "id": "cat_0517",
+            "name": "Feline Hyperthyroid Cardiomyopathy",
+            "name_ja": "猫甲状腺機能亢進性心筋症"
+          },
+          {
+            "id": "cat_0535",
+            "name": "Cardiovascular Infection (Cat)",
+            "name_ja": "心血管系感染症（猫）"
+          },
+          {
+            "id": "cat_0536",
+            "name": "Cardiovascular Inflammation (Cat)",
+            "name_ja": "心血管系炎症（猫）"
+          },
+          {
+            "id": "cat_0537",
+            "name": "Cardiovascular Neoplasia (Cat)",
+            "name_ja": "心血管系腫瘍（猫）"
+          },
+          {
+            "id": "cat_0538",
+            "name": "Cardiovascular Metabolic Disease (Cat)",
+            "name_ja": "心血管系代謝性疾患（猫）"
+          },
+          {
+            "id": "cat_0539",
+            "name": "Cardiovascular Nutritional Deficiency (Cat)",
+            "name_ja": "心血管系栄養欠乏症（猫）"
+          },
+          {
+            "id": "cat_0540",
+            "name": "Cardiovascular Genetic Disorder (Cat)",
+            "name_ja": "心血管系遺伝性疾患（猫）"
+          },
+          {
+            "id": "cat_0541",
+            "name": "Cardiovascular Autoimmune Disease (Cat)",
+            "name_ja": "心血管系自己免疫疾患（猫）"
+          },
+          {
+            "id": "cat_0542",
+            "name": "Cardiovascular Degenerative Disease (Cat)",
+            "name_ja": "心血管系変性疾患（猫）"
+          },
+          {
+            "id": "cat_0543",
+            "name": "Cardiovascular Traumatic Injury (Cat)",
+            "name_ja": "心血管系外傷（猫）"
+          },
+          {
+            "id": "cat_0544",
+            "name": "Cardiovascular Behavioral Disorder (Cat)",
+            "name_ja": "心血管系行動障害（猫）"
+          },
+          {
+            "id": "cat_0545",
+            "name": "Cardiovascular Infectious Disease (Cat)",
+            "name_ja": "心血管系感染性疾患（猫）"
+          },
+          {
+            "id": "cat_0546",
+            "name": "Cardiovascular Parasitic Disease (Cat)",
+            "name_ja": "心血管系寄生虫感染症（猫）"
+          },
+          {
+            "id": "cat_0547",
+            "name": "Cardiovascular Viral Disease (Cat)",
+            "name_ja": "心血管系ウイルス性疾患（猫）"
+          },
+          {
+            "id": "cat_0548",
+            "name": "Cardiovascular Bacterial Disease (Cat)",
+            "name_ja": "心血管系細菌性疾患（猫）"
+          },
+          {
+            "id": "cat_0549",
+            "name": "Cardiovascular Fungal Disease (Cat)",
+            "name_ja": "心血管系真菌性疾患（猫）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 21,
+        "members": [
+          {
+            "id": "cat_0197",
+            "name": "Lily Toxicosis",
+            "name_ja": "ユリ中毒"
+          },
+          {
+            "id": "cat_0198",
+            "name": "Acetaminophen (Paracetamol) Toxicosis",
+            "name_ja": "アセトアミノフェン中毒"
+          },
+          {
+            "id": "cat_0199",
+            "name": "Permethrin Toxicosis",
+            "name_ja": "ペルメトリン中毒"
+          },
+          {
+            "id": "cat_0200",
+            "name": "NSAID Toxicosis",
+            "name_ja": "NSAID中毒"
+          },
+          {
+            "id": "cat_0203",
+            "name": "Essential Oil Toxicosis",
+            "name_ja": "エッセンシャルオイル中毒"
+          },
+          {
+            "id": "cat_0368",
+            "name": "Feline Chocolate Toxicosis",
+            "name_ja": "猫チョコレート中毒"
+          },
+          {
+            "id": "cat_0369",
+            "name": "Feline Onion/Garlic Toxicosis",
+            "name_ja": "猫タマネギ・ニンニク中毒"
+          },
+          {
+            "id": "cat_0370",
+            "name": "Feline Xylitol Toxicosis",
+            "name_ja": "猫キシリトール中毒"
+          },
+          {
+            "id": "cat_0371",
+            "name": "Feline Marijuana Toxicosis",
+            "name_ja": "猫大麻中毒"
+          },
+          {
+            "id": "cat_0372",
+            "name": "Feline Salt Toxicosis",
+            "name_ja": "猫塩分中毒"
+          },
+          {
+            "id": "cat_0373",
+            "name": "Feline Zinc Toxicosis",
+            "name_ja": "猫亜鉛中毒"
+          },
+          {
+            "id": "cat_0374",
+            "name": "Feline Lead Toxicosis",
+            "name_ja": "猫鉛中毒"
+          },
+          {
+            "id": "cat_0375",
+            "name": "Feline Organophosphate Toxicosis",
+            "name_ja": "猫有機リン中毒"
+          },
+          {
+            "id": "cat_0376",
+            "name": "Feline Pyrethroid Toxicosis (Topical)",
+            "name_ja": "猫ピレスロイド中毒（外用）"
+          },
+          {
+            "id": "cat_0377",
+            "name": "Feline Metaldehyde Toxicosis (Slug Bait)",
+            "name_ja": "猫メタアルデヒド中毒"
+          },
+          {
+            "id": "cat_0378",
+            "name": "Feline Vitamin D Toxicosis",
+            "name_ja": "猫ビタミンD中毒"
+          },
+          {
+            "id": "cat_0379",
+            "name": "Feline Bromethalin Toxicosis",
+            "name_ja": "猫ブロメタリン中毒"
+          },
+          {
+            "id": "cat_0380",
+            "name": "Feline Ivermectin Toxicosis",
+            "name_ja": "猫イベルメクチン中毒"
+          },
+          {
+            "id": "cat_0465",
+            "name": "Acetaminophen Toxicosis (Acute)",
+            "name_ja": "アセトアミノフェン中毒（急性）"
+          },
+          {
+            "id": "cat_0466",
+            "name": "Tea Tree Oil Toxicosis",
+            "name_ja": "ティーツリーオイル中毒"
+          },
+          {
+            "id": "cat_0525",
+            "name": "Feline Cholecalciferol Rodenticide Toxicosis",
+            "name_ja": "猫のコレカルシフェロール中毒（ビタミンD3殺鼠剤）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lympho",
+        "size": 15,
+        "members": [
+          {
+            "id": "cat_0024",
+            "name": "Gastrointestinal Lymphoma",
+            "name_ja": "消化管リンパ腫"
+          },
+          {
+            "id": "cat_0041",
+            "name": "Renal Lymphoma",
+            "name_ja": "腎リンパ腫"
+          },
+          {
+            "id": "cat_0088",
+            "name": "Spinal Cord Lymphoma",
+            "name_ja": "脊髄リンパ腫"
+          },
+          {
+            "id": "cat_0108",
+            "name": "Alimentary Lymphoma",
+            "name_ja": "消化器型リンパ腫"
+          },
+          {
+            "id": "cat_0109",
+            "name": "Mediastinal Lymphoma",
+            "name_ja": "縦隔型リンパ腫"
+          },
+          {
+            "id": "cat_0110",
+            "name": "Multicentric Lymphoma",
+            "name_ja": "多中心型リンパ腫"
+          },
+          {
+            "id": "cat_0270",
+            "name": "Feline Cutaneous Lymphoma",
+            "name_ja": "猫皮膚型リンパ腫"
+          },
+          {
+            "id": "cat_0440",
+            "name": "Nasal Lymphoma",
+            "name_ja": "鼻腔リンパ腫"
+          },
+          {
+            "id": "cat_0441",
+            "name": "Large Granular Lymphocyte Lymphoma",
+            "name_ja": "大顆粒リンパ球リンパ腫"
+          },
+          {
+            "id": "cat_0445",
+            "name": "Thymic Lymphoma",
+            "name_ja": "胸腺リンパ腫"
+          },
+          {
+            "id": "cat_0447",
+            "name": "Hepatic Lymphoma",
+            "name_ja": "肝臓リンパ腫"
+          },
+          {
+            "id": "cat_0475",
+            "name": "Feline Lymphocytic Cholangitis",
+            "name_ja": "猫リンパ球性胆管炎"
+          },
+          {
+            "id": "cat_0488",
+            "name": "Feline Retroperitoneal Lymphoma",
+            "name_ja": "猫後腹膜リンパ腫"
+          },
+          {
+            "id": "cat_0504",
+            "name": "Feline Splenic Lymphoma",
+            "name_ja": "猫脾臓リンパ腫"
+          },
+          {
+            "id": "cat_0529",
+            "name": "Feline Small Cell Intestinal Lymphoma",
+            "name_ja": "猫小細胞性腸リンパ腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cell",
+        "size": 14,
+        "members": [
+          {
+            "id": "cat_0079",
+            "name": "Solar Dermatitis / Squamous Cell Carcinoma in situ",
+            "name_ja": "日光性皮膚炎"
+          },
+          {
+            "id": "cat_0111",
+            "name": "Squamous Cell Carcinoma (Oral)",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "cat_0112",
+            "name": "Squamous Cell Carcinoma (Cutaneous)",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "cat_0115",
+            "name": "Mast Cell Tumor (Cutaneous)",
+            "name_ja": "肥満細胞腫（皮膚型）"
+          },
+          {
+            "id": "cat_0116",
+            "name": "Mast Cell Tumor (Visceral/Splenic)",
+            "name_ja": "肥満細胞腫（内臓/脾臓型）"
+          },
+          {
+            "id": "cat_0120",
+            "name": "Basal Cell Tumor",
+            "name_ja": "基底細胞腫"
+          },
+          {
+            "id": "cat_0121",
+            "name": "Transitional Cell Carcinoma (Bladder)",
+            "name_ja": "移行上皮癌（膀胱）"
+          },
+          {
+            "id": "cat_0176",
+            "name": "Plasma Cell Pododermatitis (Pillow Foot)",
+            "name_ja": "形質細胞性足底皮膚炎"
+          },
+          {
+            "id": "cat_0333",
+            "name": "Feline Squamous Cell Carcinoma (Nasal Planum)",
+            "name_ja": "猫扁平上皮癌（鼻平面）"
+          },
+          {
+            "id": "cat_0340",
+            "name": "Feline Pure Red Cell Aplasia",
+            "name_ja": "猫赤芽球癆"
+          },
+          {
+            "id": "cat_0428",
+            "name": "Feline Oral Squamous Cell Carcinoma (Sublingual)",
+            "name_ja": "猫口腔扁平上皮癌（舌下）"
+          },
+          {
+            "id": "cat_0448",
+            "name": "Splenic Mast Cell Tumor",
+            "name_ja": "脾臓肥満細胞腫"
+          },
+          {
+            "id": "cat_0449",
+            "name": "Intestinal Mast Cell Tumor",
+            "name_ja": "腸管肥満細胞腫"
+          },
+          {
+            "id": "cat_0529",
+            "name": "Feline Small Cell Intestinal Lymphoma",
+            "name_ja": "猫小細胞性腸リンパ腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 13,
+        "members": [
+          {
+            "id": "cat_0113",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "cat_0115",
+            "name": "Mast Cell Tumor (Cutaneous)",
+            "name_ja": "肥満細胞腫（皮膚型）"
+          },
+          {
+            "id": "cat_0116",
+            "name": "Mast Cell Tumor (Visceral/Splenic)",
+            "name_ja": "肥満細胞腫（内臓/脾臓型）"
+          },
+          {
+            "id": "cat_0117",
+            "name": "Nasal Tumor (Adenocarcinoma/Lymphoma)",
+            "name_ja": "鼻腔腫瘍"
+          },
+          {
+            "id": "cat_0120",
+            "name": "Basal Cell Tumor",
+            "name_ja": "基底細胞腫"
+          },
+          {
+            "id": "cat_0214",
+            "name": "Pituitary Tumor",
+            "name_ja": "下垂体腫瘍"
+          },
+          {
+            "id": "cat_0273",
+            "name": "Feline Adrenal Tumor",
+            "name_ja": "猫副腎腫瘍"
+          },
+          {
+            "id": "cat_0276",
+            "name": "Feline Orbital Tumor",
+            "name_ja": "猫眼窩腫瘍"
+          },
+          {
+            "id": "cat_0321",
+            "name": "Feline Eyelid Tumor",
+            "name_ja": "猫眼瞼腫瘍"
+          },
+          {
+            "id": "cat_0345",
+            "name": "Feline Gastrointestinal Stromal Tumor (GIST)",
+            "name_ja": "猫消化管間質腫瘍"
+          },
+          {
+            "id": "cat_0346",
+            "name": "Feline Choroid Plexus Tumor",
+            "name_ja": "猫脈絡叢腫瘍"
+          },
+          {
+            "id": "cat_0448",
+            "name": "Splenic Mast Cell Tumor",
+            "name_ja": "脾臓肥満細胞腫"
+          },
+          {
+            "id": "cat_0449",
+            "name": "Intestinal Mast Cell Tumor",
+            "name_ja": "腸管肥満細胞腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 12,
+        "members": [
+          {
+            "id": "cat_0079",
+            "name": "Solar Dermatitis / Squamous Cell Carcinoma in situ",
+            "name_ja": "日光性皮膚炎"
+          },
+          {
+            "id": "cat_0111",
+            "name": "Squamous Cell Carcinoma (Oral)",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "cat_0112",
+            "name": "Squamous Cell Carcinoma (Cutaneous)",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "cat_0118",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "cat_0119",
+            "name": "Pulmonary Carcinoma",
+            "name_ja": "肺癌"
+          },
+          {
+            "id": "cat_0121",
+            "name": "Transitional Cell Carcinoma (Bladder)",
+            "name_ja": "移行上皮癌（膀胱）"
+          },
+          {
+            "id": "cat_0272",
+            "name": "Feline Thyroid Carcinoma",
+            "name_ja": "猫甲状腺癌"
+          },
+          {
+            "id": "cat_0333",
+            "name": "Feline Squamous Cell Carcinoma (Nasal Planum)",
+            "name_ja": "猫扁平上皮癌（鼻平面）"
+          },
+          {
+            "id": "cat_0428",
+            "name": "Feline Oral Squamous Cell Carcinoma (Sublingual)",
+            "name_ja": "猫口腔扁平上皮癌（舌下）"
+          },
+          {
+            "id": "cat_0444",
+            "name": "Bronchogenic Carcinoma",
+            "name_ja": "気管支原発性癌"
+          },
+          {
+            "id": "cat_0446",
+            "name": "Thymic Carcinoma",
+            "name_ja": "胸腺癌"
+          },
+          {
+            "id": "cat_0516",
+            "name": "Feline Mammary Carcinoma (Triple Negative)",
+            "name_ja": "猫乳腺癌（トリプルネガティブ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 12,
+        "members": [
+          {
+            "id": "cat_0068",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "cat_0069",
+            "name": "Flea Allergy Dermatitis",
+            "name_ja": "ノミアレルギー性皮膚炎"
+          },
+          {
+            "id": "cat_0075",
+            "name": "Atopic Dermatitis",
+            "name_ja": "アトピー性皮膚炎"
+          },
+          {
+            "id": "cat_0076",
+            "name": "Food Allergy Dermatitis",
+            "name_ja": "食物アレルギー性皮膚炎"
+          },
+          {
+            "id": "cat_0078",
+            "name": "Miliary Dermatitis",
+            "name_ja": "粟粒性皮膚炎"
+          },
+          {
+            "id": "cat_0079",
+            "name": "Solar Dermatitis / Squamous Cell Carcinoma in situ",
+            "name_ja": "日光性皮膚炎"
+          },
+          {
+            "id": "cat_0177",
+            "name": "Dermatophilosis",
+            "name_ja": "皮膚糸状菌症（デルマトフィルス症）"
+          },
+          {
+            "id": "cat_0228",
+            "name": "Feline Cutaneous Herpesvirus Dermatitis",
+            "name_ja": "猫ヘルペスウイルス性皮膚炎"
+          },
+          {
+            "id": "cat_0268",
+            "name": "Feline Dermatophilosis",
+            "name_ja": "猫皮膚糸状菌症"
+          },
+          {
+            "id": "cat_0269",
+            "name": "Feline Malassezia Dermatitis",
+            "name_ja": "猫マラセチア皮膚炎"
+          },
+          {
+            "id": "cat_0354",
+            "name": "Feline Dermatomyositis",
+            "name_ja": "猫皮膚筋炎"
+          },
+          {
+            "id": "cat_0387",
+            "name": "Feline Idiopathic Facial Dermatitis (Persian Face Fold)",
+            "name_ja": "猫特発性顔面皮膚炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypert",
+        "size": 9,
+        "members": [
+          {
+            "id": "cat_0010",
+            "name": "Hypertrophic Cardiomyopathy (HCM)",
+            "name_ja": "肥大型心筋症"
+          },
+          {
+            "id": "cat_0019",
+            "name": "Systemic Hypertension",
+            "name_ja": "全身性高血圧"
+          },
+          {
+            "id": "cat_0044",
+            "name": "Hyperthyroidism",
+            "name_ja": "甲状腺機能亢進症"
+          },
+          {
+            "id": "cat_0182",
+            "name": "Hypertensive Retinopathy",
+            "name_ja": "高血圧性網膜症"
+          },
+          {
+            "id": "cat_0229",
+            "name": "Feline Hypertrophic Osteodystrophy",
+            "name_ja": "猫肥大性骨異栄養症"
+          },
+          {
+            "id": "cat_0389",
+            "name": "Feline Pulmonary Hypertension",
+            "name_ja": "猫肺高血圧症"
+          },
+          {
+            "id": "cat_0397",
+            "name": "Feline Arterial Hypertension (Secondary)",
+            "name_ja": "猫二次性動脈性高血圧"
+          },
+          {
+            "id": "cat_0477",
+            "name": "Feline Hypertrophic Cardiomyopathy (Obstructive)",
+            "name_ja": "猫閉塞性肥大型心筋症"
+          },
+          {
+            "id": "cat_0517",
+            "name": "Feline Hyperthyroid Cardiomyopathy",
+            "name_ja": "猫甲状腺機能亢進性心筋症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "eosino",
+        "size": 7,
+        "members": [
+          {
+            "id": "cat_0070",
+            "name": "Eosinophilic Granuloma Complex - Eosinophilic Ulcer",
+            "name_ja": "好酸球性肉芽腫症候群（好酸球性潰瘍）"
+          },
+          {
+            "id": "cat_0071",
+            "name": "Eosinophilic Granuloma Complex - Eosinophilic Plaque",
+            "name_ja": "好酸球性肉芽腫症候群（好酸球性プラーク）"
+          },
+          {
+            "id": "cat_0072",
+            "name": "Eosinophilic Granuloma Complex - Linear Granuloma",
+            "name_ja": "好酸球性肉芽腫症候群（線状肉芽腫）"
+          },
+          {
+            "id": "cat_0225",
+            "name": "Feline Eosinophilic Keratoconjunctivitis",
+            "name_ja": "猫好酸球性角結膜炎"
+          },
+          {
+            "id": "cat_0328",
+            "name": "Feline Eosinophilic Pneumonia",
+            "name_ja": "猫好酸球性肺炎"
+          },
+          {
+            "id": "cat_0405",
+            "name": "Feline Eosinophilic Enteritis",
+            "name_ja": "猫好酸球性腸炎"
+          },
+          {
+            "id": "cat_0487",
+            "name": "Feline Oral Eosinophilic Granuloma",
+            "name_ja": "猫口腔好酸球性肉芽腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hyperp",
+        "size": 7,
+        "members": [
+          {
+            "id": "cat_0186",
+            "name": "Nutritional Secondary Hyperparathyroidism",
+            "name_ja": "栄養性二次性副甲状腺機能亢進症"
+          },
+          {
+            "id": "cat_0191",
+            "name": "Mammary Hyperplasia (Fibroadenomatous Change)",
+            "name_ja": "乳腺過形成"
+          },
+          {
+            "id": "cat_0287",
+            "name": "Feline Hyperparathyroidism (Primary)",
+            "name_ja": "猫原発性副甲状腺機能亢進症"
+          },
+          {
+            "id": "cat_0291",
+            "name": "Feline Hyperphosphatemia",
+            "name_ja": "猫高リン血症"
+          },
+          {
+            "id": "cat_0386",
+            "name": "Feline Tail Gland Hyperplasia (Stud Tail)",
+            "name_ja": "猫尾腺過形成（スタッドテイル）"
+          },
+          {
+            "id": "cat_0496",
+            "name": "Feline Renal Secondary Hyperparathyroidism",
+            "name_ja": "猫腎性二次性副甲状腺機能亢進症"
+          },
+          {
+            "id": "cat_0507",
+            "name": "Feline Mammary Fibroepithelial Hyperplasia (Progesterone-Induced)",
+            "name_ja": "猫乳腺線維上皮性過形成（プロゲステロン誘発性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "idiopa",
+        "size": 7,
+        "members": [
+          {
+            "id": "cat_0040",
+            "name": "Feline Idiopathic Cystitis (FIC)",
+            "name_ja": "猫特発性膀胱炎"
+          },
+          {
+            "id": "cat_0216",
+            "name": "Feline Idiopathic Aggression",
+            "name_ja": "猫特発性攻撃行動"
+          },
+          {
+            "id": "cat_0218",
+            "name": "Feline Idiopathic Cystitis (FIC)",
+            "name_ja": "猫特発性膀胱炎（FIC）"
+          },
+          {
+            "id": "cat_0387",
+            "name": "Feline Idiopathic Facial Dermatitis (Persian Face Fold)",
+            "name_ja": "猫特発性顔面皮膚炎"
+          },
+          {
+            "id": "cat_0434",
+            "name": "Feline Idiopathic Chylothorax",
+            "name_ja": "猫特発性乳び胸"
+          },
+          {
+            "id": "cat_0436",
+            "name": "Feline Idiopathic Vestibular Disease",
+            "name_ja": "猫特発性前庭疾患"
+          },
+          {
+            "id": "cat_0472",
+            "name": "Feline Idiopathic Megacolon",
+            "name_ja": "猫特発性巨大結腸症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mening",
+        "size": 7,
+        "members": [
+          {
+            "id": "cat_0083",
+            "name": "Meningioma",
+            "name_ja": "髄膜腫"
+          },
+          {
+            "id": "cat_0227",
+            "name": "Feline Aseptic Meningitis",
+            "name_ja": "猫無菌性髄膜炎"
+          },
+          {
+            "id": "cat_0249",
+            "name": "Feline Meningoencephalitis",
+            "name_ja": "猫髄膜脳炎"
+          },
+          {
+            "id": "cat_0357",
+            "name": "Feline Immune-Mediated Meningitis",
+            "name_ja": "猫免疫介在性髄膜炎"
+          },
+          {
+            "id": "cat_0453",
+            "name": "Cryptococcus neoformans Meningitis",
+            "name_ja": "クリプトコッカス・ネオフォルマンス髄膜炎"
+          },
+          {
+            "id": "cat_0459",
+            "name": "Meningioma (Convexity Type)",
+            "name_ja": "髄膜腫（円蓋部型）"
+          },
+          {
+            "id": "cat_0460",
+            "name": "Meningioma (Skull Base Type)",
+            "name_ja": "髄膜腫（頭蓋底型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "obstru",
+        "size": 7,
+        "members": [
+          {
+            "id": "cat_0026",
+            "name": "Foreign Body Obstruction",
+            "name_ja": "消化管異物閉塞"
+          },
+          {
+            "id": "cat_0037",
+            "name": "Urinary Obstruction (Blocked Cat)",
+            "name_ja": "尿道閉塞"
+          },
+          {
+            "id": "cat_0264",
+            "name": "Feline Ureteral Obstruction",
+            "name_ja": "猫尿管閉塞"
+          },
+          {
+            "id": "cat_0293",
+            "name": "Feline Bile Duct Obstruction",
+            "name_ja": "猫胆管閉塞"
+          },
+          {
+            "id": "cat_0294",
+            "name": "Feline Gastric Hairball Obstruction",
+            "name_ja": "猫毛球閉塞症"
+          },
+          {
+            "id": "cat_0492",
+            "name": "Feline Penile Urethral Obstruction",
+            "name_ja": "猫陰茎尿道閉塞"
+          },
+          {
+            "id": "cat_0512",
+            "name": "Feline Trichobezoar-Induced Obstruction",
+            "name_ja": "猫毛球閉塞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "body",
+        "size": 6,
+        "members": [
+          {
+            "id": "cat_0026",
+            "name": "Foreign Body Obstruction",
+            "name_ja": "消化管異物閉塞"
+          },
+          {
+            "id": "cat_0239",
+            "name": "Feline Tracheal Foreign Body",
+            "name_ja": "猫気管内異物"
+          },
+          {
+            "id": "cat_0401",
+            "name": "Feline Gastric Foreign Body",
+            "name_ja": "猫胃内異物"
+          },
+          {
+            "id": "cat_0402",
+            "name": "Feline Linear Foreign Body",
+            "name_ja": "猫線状異物"
+          },
+          {
+            "id": "cat_0437",
+            "name": "Feline Nasal Foreign Body",
+            "name_ja": "猫鼻腔内異物"
+          },
+          {
+            "id": "cat_0511",
+            "name": "Feline Tracheobronchial Foreign Body",
+            "name_ja": "猫気管支異物"
+          }
+        ]
+      },
+      {
+        "shared_stem": "foreig",
+        "size": 6,
+        "members": [
+          {
+            "id": "cat_0026",
+            "name": "Foreign Body Obstruction",
+            "name_ja": "消化管異物閉塞"
+          },
+          {
+            "id": "cat_0239",
+            "name": "Feline Tracheal Foreign Body",
+            "name_ja": "猫気管内異物"
+          },
+          {
+            "id": "cat_0401",
+            "name": "Feline Gastric Foreign Body",
+            "name_ja": "猫胃内異物"
+          },
+          {
+            "id": "cat_0402",
+            "name": "Feline Linear Foreign Body",
+            "name_ja": "猫線状異物"
+          },
+          {
+            "id": "cat_0437",
+            "name": "Feline Nasal Foreign Body",
+            "name_ja": "猫鼻腔内異物"
+          },
+          {
+            "id": "cat_0511",
+            "name": "Feline Tracheobronchial Foreign Body",
+            "name_ja": "猫気管支異物"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gland",
+        "size": 6,
+        "members": [
+          {
+            "id": "cat_0213",
+            "name": "Ceruminous Gland Adenocarcinoma",
+            "name_ja": "耳垢腺腺癌"
+          },
+          {
+            "id": "cat_0277",
+            "name": "Feline Ceruminous Gland Adenoma",
+            "name_ja": "猫耳垢腺腫"
+          },
+          {
+            "id": "cat_0327",
+            "name": "Feline Salivary Gland Mucocele",
+            "name_ja": "猫唾液腺嚢腫"
+          },
+          {
+            "id": "cat_0332",
+            "name": "Feline Apocrine Gland Cyst",
+            "name_ja": "猫アポクリン腺嚢胞"
+          },
+          {
+            "id": "cat_0386",
+            "name": "Feline Tail Gland Hyperplasia (Stud Tail)",
+            "name_ja": "猫尾腺過形成（スタッドテイル）"
+          },
+          {
+            "id": "cat_0443",
+            "name": "Apocrine Gland Adenocarcinoma",
+            "name_ja": "アポクリン腺癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "granul",
+        "size": 6,
+        "members": [
+          {
+            "id": "cat_0070",
+            "name": "Eosinophilic Granuloma Complex - Eosinophilic Ulcer",
+            "name_ja": "好酸球性肉芽腫症候群（好酸球性潰瘍）"
+          },
+          {
+            "id": "cat_0071",
+            "name": "Eosinophilic Granuloma Complex - Eosinophilic Plaque",
+            "name_ja": "好酸球性肉芽腫症候群（好酸球性プラーク）"
+          },
+          {
+            "id": "cat_0072",
+            "name": "Eosinophilic Granuloma Complex - Linear Granuloma",
+            "name_ja": "好酸球性肉芽腫症候群（線状肉芽腫）"
+          },
+          {
+            "id": "cat_0441",
+            "name": "Large Granular Lymphocyte Lymphoma",
+            "name_ja": "大顆粒リンパ球リンパ腫"
+          },
+          {
+            "id": "cat_0487",
+            "name": "Feline Oral Eosinophilic Granuloma",
+            "name_ja": "猫口腔好酸球性肉芽腫"
+          },
+          {
+            "id": "cat_0500",
+            "name": "Feline Cholesterol Granuloma (Middle Ear)",
+            "name_ja": "猫コレステロール肉芽腫（中耳）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 6,
+        "members": [
+          {
+            "id": "cat_0022",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "cat_0165",
+            "name": "Hepatic Encephalopathy",
+            "name_ja": "肝性脳症"
+          },
+          {
+            "id": "cat_0240",
+            "name": "Feline Hepatitis",
+            "name_ja": "猫肝炎"
+          },
+          {
+            "id": "cat_0292",
+            "name": "Feline Hepatic Abscess",
+            "name_ja": "猫肝膿瘍"
+          },
+          {
+            "id": "cat_0447",
+            "name": "Hepatic Lymphoma",
+            "name_ja": "肝臓リンパ腫"
+          },
+          {
+            "id": "cat_0469",
+            "name": "Feline Hepatic Amyloidosis",
+            "name_ja": "猫肝アミロイドーシス"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infect",
+        "size": 6,
+        "members": [
+          {
+            "id": "cat_0054",
+            "name": "Feline Infectious Peritonitis (FIP) - Wet Form",
+            "name_ja": "猫伝染性腹膜炎（ウェット型）"
+          },
+          {
+            "id": "cat_0055",
+            "name": "Feline Infectious Peritonitis (FIP) - Dry Form",
+            "name_ja": "猫伝染性腹膜炎（ドライ型）"
+          },
+          {
+            "id": "cat_0123",
+            "name": "Feline Infectious Anemia (Hemoplasma)",
+            "name_ja": "猫伝染性貧血（ヘモプラズマ症）"
+          },
+          {
+            "id": "cat_0391",
+            "name": "Feline Infective Endocarditis",
+            "name_ja": "猫感染性心内膜炎"
+          },
+          {
+            "id": "cat_0421",
+            "name": "Feline Feline Infectious Anemia (Candidatus M. haemominutum)",
+            "name_ja": "猫感染性貧血（Candidatus M. haemominutum）"
+          },
+          {
+            "id": "cat_0545",
+            "name": "Cardiovascular Infectious Disease (Cat)",
+            "name_ja": "心血管系感染性疾患（猫）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "congen",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0014",
+            "name": "Congenital Heart Defect - Ventricular Septal Defect",
+            "name_ja": "先天性心室中隔欠損症"
+          },
+          {
+            "id": "cat_0015",
+            "name": "Congenital Heart Defect - Patent Ductus Arteriosus",
+            "name_ja": "動脈管開存症"
+          },
+          {
+            "id": "cat_0352",
+            "name": "Feline Congenital Portosystemic Shunt",
+            "name_ja": "猫先天性門脈体循環シャント"
+          },
+          {
+            "id": "cat_0474",
+            "name": "Feline Congenital Portosystemic Shunt (Extrahepatic)",
+            "name_ja": "猫先天性門脈体循環シャント（肝外型）"
+          },
+          {
+            "id": "cat_0501",
+            "name": "Feline Congenital Diaphragmatic Hernia (Peritoneopericardial)",
+            "name_ja": "猫先天性横隔膜ヘルニア（腹膜心膜型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0085",
+            "name": "Thiamine Deficiency (Vitamin B1)",
+            "name_ja": "チアミン欠乏症"
+          },
+          {
+            "id": "cat_0258",
+            "name": "Feline Niacin Deficiency (Pellagra)",
+            "name_ja": "猫ナイアシン欠乏症"
+          },
+          {
+            "id": "cat_0259",
+            "name": "Feline Taurine Deficiency Cardiomyopathy",
+            "name_ja": "猫タウリン欠乏性心筋症"
+          },
+          {
+            "id": "cat_0462",
+            "name": "Thiamine Deficiency Encephalopathy",
+            "name_ja": "チアミン欠乏性脳症"
+          },
+          {
+            "id": "cat_0539",
+            "name": "Cardiovascular Nutritional Deficiency (Cat)",
+            "name_ja": "心血管系栄養欠乏症（猫）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastri",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0027",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "cat_0244",
+            "name": "Feline Gastric Dilatation",
+            "name_ja": "猫胃拡張"
+          },
+          {
+            "id": "cat_0294",
+            "name": "Feline Gastric Hairball Obstruction",
+            "name_ja": "猫毛球閉塞症"
+          },
+          {
+            "id": "cat_0401",
+            "name": "Feline Gastric Foreign Body",
+            "name_ja": "猫胃内異物"
+          },
+          {
+            "id": "cat_0439",
+            "name": "Feline Gastric Motility Disorder",
+            "name_ja": "猫胃運動障害"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepato",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0118",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "cat_0310",
+            "name": "Feline Hepatozoonosis",
+            "name_ja": "猫ヘパトゾーン症"
+          },
+          {
+            "id": "cat_0406",
+            "name": "Feline Chronic Hepatopathy",
+            "name_ja": "猫慢性肝疾患"
+          },
+          {
+            "id": "cat_0457",
+            "name": "Hepatozoon felis Infection",
+            "name_ja": "ヘパトゾーン・フェリス感染症"
+          },
+          {
+            "id": "cat_0508",
+            "name": "Feline Hepatocutaneous Syndrome",
+            "name_ja": "猫肝皮症候群"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hernia",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0171",
+            "name": "Diaphragmatic Hernia",
+            "name_ja": "横隔膜ヘルニア"
+          },
+          {
+            "id": "cat_0398",
+            "name": "Feline Perineal Hernia",
+            "name_ja": "猫会陰ヘルニア"
+          },
+          {
+            "id": "cat_0399",
+            "name": "Feline Inguinal Hernia",
+            "name_ja": "猫鼠径ヘルニア"
+          },
+          {
+            "id": "cat_0400",
+            "name": "Feline Umbilical Hernia",
+            "name_ja": "猫臍ヘルニア"
+          },
+          {
+            "id": "cat_0501",
+            "name": "Feline Congenital Diaphragmatic Hernia (Peritoneopericardial)",
+            "name_ja": "猫先天性横隔膜ヘルニア（腹膜心膜型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "immune",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0122",
+            "name": "Immune-Mediated Hemolytic Anemia (IMHA)",
+            "name_ja": "免疫介在性溶血性貧血"
+          },
+          {
+            "id": "cat_0207",
+            "name": "Immune-Mediated Thrombocytopenia (ITP)",
+            "name_ja": "免疫介在性血小板減少症"
+          },
+          {
+            "id": "cat_0209",
+            "name": "Immune-Mediated Polyarthritis",
+            "name_ja": "免疫介在性多発性関節炎"
+          },
+          {
+            "id": "cat_0224",
+            "name": "Immune-Mediated Neutropenia",
+            "name_ja": "免疫介在性好中球減少症"
+          },
+          {
+            "id": "cat_0357",
+            "name": "Feline Immune-Mediated Meningitis",
+            "name_ja": "猫免疫介在性髄膜炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "injury",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0035",
+            "name": "Acute Kidney Injury (AKI)",
+            "name_ja": "急性腎障害"
+          },
+          {
+            "id": "cat_0361",
+            "name": "Feline Tail Pull Injury",
+            "name_ja": "猫尾牽引損傷"
+          },
+          {
+            "id": "cat_0365",
+            "name": "Feline Smoke Inhalation Injury",
+            "name_ja": "猫煙吸入障害"
+          },
+          {
+            "id": "cat_0367",
+            "name": "Feline Electric Cord Bite Injury",
+            "name_ja": "猫電気コード咬傷"
+          },
+          {
+            "id": "cat_0543",
+            "name": "Cardiovascular Traumatic Injury (Cat)",
+            "name_ja": "心血管系外傷（猫）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "kidney",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0034",
+            "name": "Chronic Kidney Disease (CKD)",
+            "name_ja": "慢性腎臓病"
+          },
+          {
+            "id": "cat_0035",
+            "name": "Acute Kidney Injury (AKI)",
+            "name_ja": "急性腎障害"
+          },
+          {
+            "id": "cat_0042",
+            "name": "Polycystic Kidney Disease (PKD)",
+            "name_ja": "多発性嚢胞腎"
+          },
+          {
+            "id": "cat_0514",
+            "name": "Feline Chronic Kidney Disease Stage IV (IRIS)",
+            "name_ja": "猫慢性腎臓病ステージIV（IRIS）"
+          },
+          {
+            "id": "cat_0531",
+            "name": "Chronic Kidney Disease",
+            "name_ja": "慢性腎臓病（CKD）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mediat",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0122",
+            "name": "Immune-Mediated Hemolytic Anemia (IMHA)",
+            "name_ja": "免疫介在性溶血性貧血"
+          },
+          {
+            "id": "cat_0207",
+            "name": "Immune-Mediated Thrombocytopenia (ITP)",
+            "name_ja": "免疫介在性血小板減少症"
+          },
+          {
+            "id": "cat_0209",
+            "name": "Immune-Mediated Polyarthritis",
+            "name_ja": "免疫介在性多発性関節炎"
+          },
+          {
+            "id": "cat_0224",
+            "name": "Immune-Mediated Neutropenia",
+            "name_ja": "免疫介在性好中球減少症"
+          },
+          {
+            "id": "cat_0357",
+            "name": "Feline Immune-Mediated Meningitis",
+            "name_ja": "猫免疫介在性髄膜炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nasal",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0117",
+            "name": "Nasal Tumor (Adenocarcinoma/Lymphoma)",
+            "name_ja": "鼻腔腫瘍"
+          },
+          {
+            "id": "cat_0284",
+            "name": "Feline Nasal Polyp",
+            "name_ja": "猫鼻腔ポリープ"
+          },
+          {
+            "id": "cat_0437",
+            "name": "Feline Nasal Foreign Body",
+            "name_ja": "猫鼻腔内異物"
+          },
+          {
+            "id": "cat_0440",
+            "name": "Nasal Lymphoma",
+            "name_ja": "鼻腔リンパ腫"
+          },
+          {
+            "id": "cat_0505",
+            "name": "Feline Nasal Bridge Swelling (Cryptococcal Granuloma)",
+            "name_ja": "猫鼻梁腫脹（クリプトコッカス肉芽腫）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pulmon",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0119",
+            "name": "Pulmonary Carcinoma",
+            "name_ja": "肺癌"
+          },
+          {
+            "id": "cat_0170",
+            "name": "Pulmonary Edema",
+            "name_ja": "肺水腫"
+          },
+          {
+            "id": "cat_0280",
+            "name": "Feline Pulmonary Thromboembolism",
+            "name_ja": "猫肺血栓塞栓症"
+          },
+          {
+            "id": "cat_0282",
+            "name": "Feline Pulmonary Fibrosis",
+            "name_ja": "猫肺線維症"
+          },
+          {
+            "id": "cat_0389",
+            "name": "Feline Pulmonary Hypertension",
+            "name_ja": "猫肺高血圧症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "squamo",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0079",
+            "name": "Solar Dermatitis / Squamous Cell Carcinoma in situ",
+            "name_ja": "日光性皮膚炎"
+          },
+          {
+            "id": "cat_0111",
+            "name": "Squamous Cell Carcinoma (Oral)",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "cat_0112",
+            "name": "Squamous Cell Carcinoma (Cutaneous)",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "cat_0333",
+            "name": "Feline Squamous Cell Carcinoma (Nasal Planum)",
+            "name_ja": "猫扁平上皮癌（鼻平面）"
+          },
+          {
+            "id": "cat_0428",
+            "name": "Feline Oral Squamous Cell Carcinoma (Sublingual)",
+            "name_ja": "猫口腔扁平上皮癌（舌下）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "thromb",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0013",
+            "name": "Aortic Thromboembolism (Saddle Thrombus)",
+            "name_ja": "大動脈血栓塞栓症"
+          },
+          {
+            "id": "cat_0125",
+            "name": "Thrombocytopenia",
+            "name_ja": "血小板減少症"
+          },
+          {
+            "id": "cat_0207",
+            "name": "Immune-Mediated Thrombocytopenia (ITP)",
+            "name_ja": "免疫介在性血小板減少症"
+          },
+          {
+            "id": "cat_0280",
+            "name": "Feline Pulmonary Thromboembolism",
+            "name_ja": "猫肺血栓塞栓症"
+          },
+          {
+            "id": "cat_0495",
+            "name": "Feline Aortic Thromboembolism (Partial)",
+            "name_ja": "猫大動脈血栓塞栓症（部分型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "urolit",
+        "size": 5,
+        "members": [
+          {
+            "id": "cat_0038",
+            "name": "Urolithiasis (Bladder Stones)",
+            "name_ja": "尿路結石症"
+          },
+          {
+            "id": "cat_0260",
+            "name": "Feline Calcium Oxalate Urolithiasis",
+            "name_ja": "猫シュウ酸カルシウム尿路結石症"
+          },
+          {
+            "id": "cat_0261",
+            "name": "Feline Struvite Urolithiasis",
+            "name_ja": "猫ストルバイト尿路結石症"
+          },
+          {
+            "id": "cat_0262",
+            "name": "Feline Cystine Urolithiasis",
+            "name_ja": "猫シスチン尿石症"
+          },
+          {
+            "id": "cat_0263",
+            "name": "Feline Urate Urolithiasis",
+            "name_ja": "猫尿酸アンモニウム尿石症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0134",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "cat_0219",
+            "name": "Cat Bite Abscess",
+            "name_ja": "猫咬傷膿瘍"
+          },
+          {
+            "id": "cat_0292",
+            "name": "Feline Hepatic Abscess",
+            "name_ja": "猫肝膿瘍"
+          },
+          {
+            "id": "cat_0425",
+            "name": "Feline Subcutaneous Abscess (Non-Bite)",
+            "name_ja": "猫皮下膿瘍（非咬傷性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adenoc",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0210",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸管腺癌"
+          },
+          {
+            "id": "cat_0213",
+            "name": "Ceruminous Gland Adenocarcinoma",
+            "name_ja": "耳垢腺腺癌"
+          },
+          {
+            "id": "cat_0274",
+            "name": "Feline Pancreatic Adenocarcinoma",
+            "name_ja": "猫膵腺癌"
+          },
+          {
+            "id": "cat_0443",
+            "name": "Apocrine Gland Adenocarcinoma",
+            "name_ja": "アポクリン腺癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "alopec",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0077",
+            "name": "Psychogenic Alopecia",
+            "name_ja": "心因性脱毛症"
+          },
+          {
+            "id": "cat_0178",
+            "name": "Feline Symmetric Alopecia",
+            "name_ja": "猫対称性脱毛症"
+          },
+          {
+            "id": "cat_0226",
+            "name": "Feline Paraneoplastic Alopecia",
+            "name_ja": "猫傍腫瘍性脱毛症"
+          },
+          {
+            "id": "cat_0385",
+            "name": "Feline Alopecia Areata",
+            "name_ja": "猫円形脱毛症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anemia",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0122",
+            "name": "Immune-Mediated Hemolytic Anemia (IMHA)",
+            "name_ja": "免疫介在性溶血性貧血"
+          },
+          {
+            "id": "cat_0123",
+            "name": "Feline Infectious Anemia (Hemoplasma)",
+            "name_ja": "猫伝染性貧血（ヘモプラズマ症）"
+          },
+          {
+            "id": "cat_0126",
+            "name": "Non-Regenerative Anemia",
+            "name_ja": "非再生性貧血"
+          },
+          {
+            "id": "cat_0421",
+            "name": "Feline Feline Infectious Anemia (Candidatus M. haemominutum)",
+            "name_ja": "猫感染性貧血（Candidatus M. haemominutum）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bronch",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0279",
+            "name": "Feline Chronic Bronchitis",
+            "name_ja": "猫慢性気管支炎"
+          },
+          {
+            "id": "cat_0283",
+            "name": "Feline Allergic Bronchopulmonary Disease",
+            "name_ja": "猫アレルギー性気管支肺疾患"
+          },
+          {
+            "id": "cat_0444",
+            "name": "Bronchogenic Carcinoma",
+            "name_ja": "気管支原発性癌"
+          },
+          {
+            "id": "cat_0470",
+            "name": "Feline Bronchial Mineralization",
+            "name_ja": "猫気管支石灰化"
+          }
+        ]
+      },
+      {
+        "shared_stem": "comple",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0070",
+            "name": "Eosinophilic Granuloma Complex - Eosinophilic Ulcer",
+            "name_ja": "好酸球性肉芽腫症候群（好酸球性潰瘍）"
+          },
+          {
+            "id": "cat_0071",
+            "name": "Eosinophilic Granuloma Complex - Eosinophilic Plaque",
+            "name_ja": "好酸球性肉芽腫症候群（好酸球性プラーク）"
+          },
+          {
+            "id": "cat_0072",
+            "name": "Eosinophilic Granuloma Complex - Linear Granuloma",
+            "name_ja": "好酸球性肉芽腫症候群（線状肉芽腫）"
+          },
+          {
+            "id": "cat_0452",
+            "name": "Mycobacterium avium Complex Infection",
+            "name_ja": "マイコバクテリウム・アビウム複合感染症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "crypto",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0066",
+            "name": "Cryptococcosis",
+            "name_ja": "クリプトコッカス症"
+          },
+          {
+            "id": "cat_0190",
+            "name": "Cryptorchidism",
+            "name_ja": "停留精巣"
+          },
+          {
+            "id": "cat_0453",
+            "name": "Cryptococcus neoformans Meningitis",
+            "name_ja": "クリプトコッカス・ネオフォルマンス髄膜炎"
+          },
+          {
+            "id": "cat_0481",
+            "name": "Feline Nasopharyngeal Cryptococcosis",
+            "name_ja": "猫鼻咽頭クリプトコッカス症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cutane",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0228",
+            "name": "Feline Cutaneous Herpesvirus Dermatitis",
+            "name_ja": "猫ヘルペスウイルス性皮膚炎"
+          },
+          {
+            "id": "cat_0270",
+            "name": "Feline Cutaneous Lymphoma",
+            "name_ja": "猫皮膚型リンパ腫"
+          },
+          {
+            "id": "cat_0467",
+            "name": "Feline Acquired Cutaneous Fragility Syndrome",
+            "name_ja": "猫後天性皮膚脆弱症候群"
+          },
+          {
+            "id": "cat_0493",
+            "name": "Feline Cutaneous Horn",
+            "name_ja": "猫皮角"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cyst",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0332",
+            "name": "Feline Apocrine Gland Cyst",
+            "name_ja": "猫アポクリン腺嚢胞"
+          },
+          {
+            "id": "cat_0494",
+            "name": "Feline Mediastinal Cyst",
+            "name_ja": "猫縦隔嚢胞"
+          },
+          {
+            "id": "cat_0499",
+            "name": "Feline Spinal Arachnoid Cyst",
+            "name_ja": "猫脊髄くも膜嚢胞"
+          },
+          {
+            "id": "cat_0519",
+            "name": "Ovarian Cysts (Feline)",
+            "name_ja": "猫の卵巣嚢胞（持続性発情）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "diabet",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0045",
+            "name": "Diabetes Mellitus",
+            "name_ja": "糖尿病"
+          },
+          {
+            "id": "cat_0046",
+            "name": "Diabetic Ketoacidosis (DKA)",
+            "name_ja": "糖尿病性ケトアシドーシス"
+          },
+          {
+            "id": "cat_0266",
+            "name": "Feline Nephrogenic Diabetes Insipidus",
+            "name_ja": "猫腎性尿崩症"
+          },
+          {
+            "id": "cat_0286",
+            "name": "Feline Diabetes Insipidus (Central)",
+            "name_ja": "猫中枢性尿崩症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enceph",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0090",
+            "name": "Cerebral Ischemic Encephalopathy (Stroke)",
+            "name_ja": "脳虚血性脳症（脳卒中）"
+          },
+          {
+            "id": "cat_0165",
+            "name": "Hepatic Encephalopathy",
+            "name_ja": "肝性脳症"
+          },
+          {
+            "id": "cat_0458",
+            "name": "Feline Ischemic Encephalopathy",
+            "name_ja": "猫虚血性脳症"
+          },
+          {
+            "id": "cat_0462",
+            "name": "Thiamine Deficiency Encephalopathy",
+            "name_ja": "チアミン欠乏性脳症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "heart",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0014",
+            "name": "Congenital Heart Defect - Ventricular Septal Defect",
+            "name_ja": "先天性心室中隔欠損症"
+          },
+          {
+            "id": "cat_0015",
+            "name": "Congenital Heart Defect - Patent Ductus Arteriosus",
+            "name_ja": "動脈管開存症"
+          },
+          {
+            "id": "cat_0396",
+            "name": "Feline Congestive Heart Failure",
+            "name_ja": "猫うっ血性心不全"
+          },
+          {
+            "id": "cat_0478",
+            "name": "Feline Right-Sided Congestive Heart Failure",
+            "name_ja": "猫右心不全"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0030",
+            "name": "Intestinal Parasitism",
+            "name_ja": "腸管寄生虫症"
+          },
+          {
+            "id": "cat_0210",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸管腺癌"
+          },
+          {
+            "id": "cat_0449",
+            "name": "Intestinal Mast Cell Tumor",
+            "name_ja": "腸管肥満細胞腫"
+          },
+          {
+            "id": "cat_0529",
+            "name": "Feline Small Cell Intestinal Lymphoma",
+            "name_ja": "猫小細胞性腸リンパ腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mammar",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0113",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "cat_0191",
+            "name": "Mammary Hyperplasia (Fibroadenomatous Change)",
+            "name_ja": "乳腺過形成"
+          },
+          {
+            "id": "cat_0507",
+            "name": "Feline Mammary Fibroepithelial Hyperplasia (Progesterone-Induced)",
+            "name_ja": "猫乳腺線維上皮性過形成（プロゲステロン誘発性）"
+          },
+          {
+            "id": "cat_0516",
+            "name": "Feline Mammary Carcinoma (Triple Negative)",
+            "name_ja": "猫乳腺癌（トリプルネガティブ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mast",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0115",
+            "name": "Mast Cell Tumor (Cutaneous)",
+            "name_ja": "肥満細胞腫（皮膚型）"
+          },
+          {
+            "id": "cat_0116",
+            "name": "Mast Cell Tumor (Visceral/Splenic)",
+            "name_ja": "肥満細胞腫（内臓/脾臓型）"
+          },
+          {
+            "id": "cat_0448",
+            "name": "Splenic Mast Cell Tumor",
+            "name_ja": "脾臓肥満細胞腫"
+          },
+          {
+            "id": "cat_0449",
+            "name": "Intestinal Mast Cell Tumor",
+            "name_ja": "腸管肥満細胞腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "melano",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0103",
+            "name": "Iris Melanoma",
+            "name_ja": "虹彩黒色腫"
+          },
+          {
+            "id": "cat_0331",
+            "name": "Feline Melanoma",
+            "name_ja": "猫悪性黒色腫"
+          },
+          {
+            "id": "cat_0442",
+            "name": "Oral Melanoma",
+            "name_ja": "口腔メラノーマ"
+          },
+          {
+            "id": "cat_0479",
+            "name": "Feline Iris Melanosis",
+            "name_ja": "猫虹彩メラノーシス"
+          }
+        ]
+      },
+      {
+        "shared_stem": "oral",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0133",
+            "name": "Oral Mass / Epulis",
+            "name_ja": "口腔腫瘤・エプリス"
+          },
+          {
+            "id": "cat_0428",
+            "name": "Feline Oral Squamous Cell Carcinoma (Sublingual)",
+            "name_ja": "猫口腔扁平上皮癌（舌下）"
+          },
+          {
+            "id": "cat_0442",
+            "name": "Oral Melanoma",
+            "name_ja": "口腔メラノーマ"
+          },
+          {
+            "id": "cat_0487",
+            "name": "Feline Oral Eosinophilic Granuloma",
+            "name_ja": "猫口腔好酸球性肉芽腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pancre",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0021",
+            "name": "Feline Pancreatitis",
+            "name_ja": "猫の膵炎"
+          },
+          {
+            "id": "cat_0246",
+            "name": "Feline Exocrine Pancreatic Insufficiency (EPI)",
+            "name_ja": "猫膵外分泌不全"
+          },
+          {
+            "id": "cat_0274",
+            "name": "Feline Pancreatic Adenocarcinoma",
+            "name_ja": "猫膵腺癌"
+          },
+          {
+            "id": "cat_0497",
+            "name": "Feline Chronic Pancreatitis",
+            "name_ja": "猫慢性膵炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0002",
+            "name": "Feline Pneumonia",
+            "name_ja": "猫肺炎"
+          },
+          {
+            "id": "cat_0169",
+            "name": "Feline Bordetella Pneumonia",
+            "name_ja": "猫ボルデテラ肺炎"
+          },
+          {
+            "id": "cat_0281",
+            "name": "Feline Pneumothorax",
+            "name_ja": "猫気胸"
+          },
+          {
+            "id": "cat_0328",
+            "name": "Feline Eosinophilic Pneumonia",
+            "name_ja": "猫好酸球性肺炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "sarcom",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0114",
+            "name": "Injection-Site Sarcoma (Fibrosarcoma)",
+            "name_ja": "注射部位肉腫（線維肉腫）"
+          },
+          {
+            "id": "cat_0343",
+            "name": "Feline Histiocytic Sarcoma",
+            "name_ja": "猫組織球性肉腫"
+          },
+          {
+            "id": "cat_0483",
+            "name": "Feline Vaccine-Associated Sarcoma (Non-Injection Site)",
+            "name_ja": "猫ワクチン関連肉腫（非注射部位）"
+          },
+          {
+            "id": "cat_0528",
+            "name": "Feline Injection Site Sarcoma (FISS / Vaccine-Associated Sarcoma)",
+            "name_ja": "猫注射部位肉腫（FISS・ワクチン関連肉腫）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "trache",
+        "size": 4,
+        "members": [
+          {
+            "id": "cat_0009",
+            "name": "Tracheal Collapse",
+            "name_ja": "気管虚脱"
+          },
+          {
+            "id": "cat_0239",
+            "name": "Feline Tracheal Foreign Body",
+            "name_ja": "猫気管内異物"
+          },
+          {
+            "id": "cat_0490",
+            "name": "Feline Tracheal Avulsion",
+            "name_ja": "猫気管断裂"
+          },
+          {
+            "id": "cat_0511",
+            "name": "Feline Tracheobronchial Foreign Body",
+            "name_ja": "猫気管支異物"
+          }
+        ]
+      },
+      {
+        "shared_stem": "allerg",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0069",
+            "name": "Flea Allergy Dermatitis",
+            "name_ja": "ノミアレルギー性皮膚炎"
+          },
+          {
+            "id": "cat_0076",
+            "name": "Food Allergy Dermatitis",
+            "name_ja": "食物アレルギー性皮膚炎"
+          },
+          {
+            "id": "cat_0283",
+            "name": "Feline Allergic Bronchopulmonary Disease",
+            "name_ja": "猫アレルギー性気管支肺疾患"
+          }
+        ]
+      },
+      {
+        "shared_stem": "aortic",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0013",
+            "name": "Aortic Thromboembolism (Saddle Thrombus)",
+            "name_ja": "大動脈血栓塞栓症"
+          },
+          {
+            "id": "cat_0231",
+            "name": "Feline Aortic Stenosis",
+            "name_ja": "猫大動脈狭窄症"
+          },
+          {
+            "id": "cat_0495",
+            "name": "Feline Aortic Thromboembolism (Partial)",
+            "name_ja": "猫大動脈血栓塞栓症（部分型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bite",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0219",
+            "name": "Cat Bite Abscess",
+            "name_ja": "猫咬傷膿瘍"
+          },
+          {
+            "id": "cat_0367",
+            "name": "Feline Electric Cord Bite Injury",
+            "name_ja": "猫電気コード咬傷"
+          },
+          {
+            "id": "cat_0527",
+            "name": "Feline Mosquito Bite Hypersensitivity",
+            "name_ja": "猫の蚊刺過敏症（蚊刺症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cholan",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0023",
+            "name": "Cholangitis / Cholangiohepatitis",
+            "name_ja": "胆管炎・胆管肝炎"
+          },
+          {
+            "id": "cat_0475",
+            "name": "Feline Lymphocytic Cholangitis",
+            "name_ja": "猫リンパ球性胆管炎"
+          },
+          {
+            "id": "cat_0476",
+            "name": "Feline Neutrophilic Cholangitis",
+            "name_ja": "猫好中球性胆管炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cord",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0088",
+            "name": "Spinal Cord Lymphoma",
+            "name_ja": "脊髄リンパ腫"
+          },
+          {
+            "id": "cat_0367",
+            "name": "Feline Electric Cord Bite Injury",
+            "name_ja": "猫電気コード咬傷"
+          },
+          {
+            "id": "cat_0413",
+            "name": "Feline Spinal Cord Trauma",
+            "name_ja": "猫脊髄外傷"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enteri",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0065",
+            "name": "Feline Coronavirus Enteritis",
+            "name_ja": "猫コロナウイルス腸炎"
+          },
+          {
+            "id": "cat_0405",
+            "name": "Feline Eosinophilic Enteritis",
+            "name_ja": "猫好酸球性腸炎"
+          },
+          {
+            "id": "cat_0450",
+            "name": "Feline Enteric Coronavirus (Non-FIP)",
+            "name_ja": "猫腸管コロナウイルス（非FIP）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "form",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0054",
+            "name": "Feline Infectious Peritonitis (FIP) - Wet Form",
+            "name_ja": "猫伝染性腹膜炎（ウェット型）"
+          },
+          {
+            "id": "cat_0055",
+            "name": "Feline Infectious Peritonitis (FIP) - Dry Form",
+            "name_ja": "猫伝染性腹膜炎（ドライ型）"
+          },
+          {
+            "id": "cat_0084",
+            "name": "FIP Neurological Form",
+            "name_ja": "FIP神経型"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0092",
+            "name": "Fracture",
+            "name_ja": "骨折"
+          },
+          {
+            "id": "cat_0205",
+            "name": "Jaw Fracture",
+            "name_ja": "顎骨折"
+          },
+          {
+            "id": "cat_0502",
+            "name": "Feline Mandibular Symphysis Fracture",
+            "name_ja": "猫下顎結合部骨折"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastro",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0024",
+            "name": "Gastrointestinal Lymphoma",
+            "name_ja": "消化管リンパ腫"
+          },
+          {
+            "id": "cat_0029",
+            "name": "Gastroenteritis",
+            "name_ja": "胃腸炎"
+          },
+          {
+            "id": "cat_0345",
+            "name": "Feline Gastrointestinal Stromal Tumor (GIST)",
+            "name_ja": "猫消化管間質腫瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "heartw",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0144",
+            "name": "Feline Heartworm Disease",
+            "name_ja": "猫フィラリア症"
+          },
+          {
+            "id": "cat_0168",
+            "name": "Heartworm-Associated Respiratory Disease (HARD)",
+            "name_ja": "フィラリア関連呼吸器疾患"
+          },
+          {
+            "id": "cat_0532",
+            "name": "Heartworm Disease",
+            "name_ja": "心糸状虫症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "herpes",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0057",
+            "name": "Feline Herpesvirus (FHV-1) Infection",
+            "name_ja": "猫ヘルペスウイルス感染症"
+          },
+          {
+            "id": "cat_0180",
+            "name": "Feline Herpesviral Keratitis",
+            "name_ja": "猫ヘルペスウイルス性角膜炎"
+          },
+          {
+            "id": "cat_0228",
+            "name": "Feline Cutaneous Herpesvirus Dermatitis",
+            "name_ja": "猫ヘルペスウイルス性皮膚炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypera",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0047",
+            "name": "Hyperaldosteronism (Conn's Syndrome)",
+            "name_ja": "高アルドステロン症"
+          },
+          {
+            "id": "cat_0050",
+            "name": "Hyperadrenocorticism (Cushing's Disease)",
+            "name_ja": "副腎皮質機能亢進症"
+          },
+          {
+            "id": "cat_0510",
+            "name": "Feline Primary Hyperaldosteronism (Conn's Syndrome)",
+            "name_ja": "猫原発性高アルドステロン症（コン症候群）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0143",
+            "name": "Ear Mite Infestation (Otodectes cynotis)",
+            "name_ja": "耳ダニ症"
+          },
+          {
+            "id": "cat_0149",
+            "name": "Flea Infestation",
+            "name_ja": "ノミ寄生症"
+          },
+          {
+            "id": "cat_0151",
+            "name": "Cuterebra Infestation",
+            "name_ja": "ウマバエ幼虫症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ischem",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0090",
+            "name": "Cerebral Ischemic Encephalopathy (Stroke)",
+            "name_ja": "脳虚血性脳症（脳卒中）"
+          },
+          {
+            "id": "cat_0172",
+            "name": "Feline Ischemic Myelopathy (Fibrocartilaginous Embolism)",
+            "name_ja": "猫虚血性脊髄症"
+          },
+          {
+            "id": "cat_0458",
+            "name": "Feline Ischemic Encephalopathy",
+            "name_ja": "猫虚血性脳症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "luxati",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0093",
+            "name": "Luxating Patella",
+            "name_ja": "膝蓋骨脱臼"
+          },
+          {
+            "id": "cat_0181",
+            "name": "Lens Luxation",
+            "name_ja": "水晶体脱臼"
+          },
+          {
+            "id": "cat_0530",
+            "name": "Feline Patellar Luxation",
+            "name_ja": "猫の膝蓋骨脱臼"
+          }
+        ]
+      },
+      {
+        "shared_stem": "megaco",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0025",
+            "name": "Megacolon",
+            "name_ja": "巨大結腸症"
+          },
+          {
+            "id": "cat_0472",
+            "name": "Feline Idiopathic Megacolon",
+            "name_ja": "猫特発性巨大結腸症"
+          },
+          {
+            "id": "cat_0509",
+            "name": "Feline Toxic Megacolon",
+            "name_ja": "猫中毒性巨大結腸症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "myasth",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0098",
+            "name": "Myasthenia Gravis",
+            "name_ja": "重症筋無力症"
+          },
+          {
+            "id": "cat_0353",
+            "name": "Feline Acquired Myasthenia Gravis",
+            "name_ja": "猫後天性重症筋無力症"
+          },
+          {
+            "id": "cat_0515",
+            "name": "Feline Myasthenic Crisis",
+            "name_ja": "猫筋無力症クリーゼ"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mycoba",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0160",
+            "name": "Mycobacterial Infection (Feline Tuberculosis)",
+            "name_ja": "猫マイコバクテリウム感染症"
+          },
+          {
+            "id": "cat_0451",
+            "name": "Mycobacterium bovis Infection",
+            "name_ja": "ウシ型結核菌感染症"
+          },
+          {
+            "id": "cat_0452",
+            "name": "Mycobacterium avium Complex Infection",
+            "name_ja": "マイコバクテリウム・アビウム複合感染症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nasoph",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0005",
+            "name": "Nasopharyngeal Polyp",
+            "name_ja": "鼻咽頭ポリープ"
+          },
+          {
+            "id": "cat_0433",
+            "name": "Feline Nasopharyngeal Stenosis",
+            "name_ja": "猫鼻咽頭狭窄"
+          },
+          {
+            "id": "cat_0481",
+            "name": "Feline Nasopharyngeal Cryptococcosis",
+            "name_ja": "猫鼻咽頭クリプトコッカス症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "otiti",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0234",
+            "name": "Feline Otitis Media",
+            "name_ja": "猫中耳炎"
+          },
+          {
+            "id": "cat_0235",
+            "name": "Feline Otitis Externa",
+            "name_ja": "猫外耳炎"
+          },
+          {
+            "id": "cat_0486",
+            "name": "Feline Proliferative and Necrotizing Otitis Externa",
+            "name_ja": "猫増殖性壊死性外耳炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "perito",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0054",
+            "name": "Feline Infectious Peritonitis (FIP) - Wet Form",
+            "name_ja": "猫伝染性腹膜炎（ウェット型）"
+          },
+          {
+            "id": "cat_0055",
+            "name": "Feline Infectious Peritonitis (FIP) - Dry Form",
+            "name_ja": "猫伝染性腹膜炎（ドライ型）"
+          },
+          {
+            "id": "cat_0241",
+            "name": "Feline Peritonitis (Septic)",
+            "name_ja": "猫腹膜炎（化膿性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "polycy",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0042",
+            "name": "Polycystic Kidney Disease (PKD)",
+            "name_ja": "多発性嚢胞腎"
+          },
+          {
+            "id": "cat_0127",
+            "name": "Polycythemia",
+            "name_ja": "赤血球増多症"
+          },
+          {
+            "id": "cat_0468",
+            "name": "Feline Polycystic Liver Disease",
+            "name_ja": "猫多嚢胞性肝疾患"
+          }
+        ]
+      },
+      {
+        "shared_stem": "polyp",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0005",
+            "name": "Nasopharyngeal Polyp",
+            "name_ja": "鼻咽頭ポリープ"
+          },
+          {
+            "id": "cat_0245",
+            "name": "Feline Rectal Polyp",
+            "name_ja": "猫直腸ポリープ"
+          },
+          {
+            "id": "cat_0284",
+            "name": "Feline Nasal Polyp",
+            "name_ja": "猫鼻腔ポリープ"
+          }
+        ]
+      },
+      {
+        "shared_stem": "portos",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0166",
+            "name": "Portosystemic Shunt",
+            "name_ja": "門脈体循環シャント"
+          },
+          {
+            "id": "cat_0352",
+            "name": "Feline Congenital Portosystemic Shunt",
+            "name_ja": "猫先天性門脈体循環シャント"
+          },
+          {
+            "id": "cat_0474",
+            "name": "Feline Congenital Portosystemic Shunt (Extrahepatic)",
+            "name_ja": "猫先天性門脈体循環シャント（肝外型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0041",
+            "name": "Renal Lymphoma",
+            "name_ja": "腎リンパ腫"
+          },
+          {
+            "id": "cat_0473",
+            "name": "Feline Renal Tubular Acidosis",
+            "name_ja": "猫尿細管性アシドーシス"
+          },
+          {
+            "id": "cat_0496",
+            "name": "Feline Renal Secondary Hyperparathyroidism",
+            "name_ja": "猫腎性二次性副甲状腺機能亢進症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "shunt",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0166",
+            "name": "Portosystemic Shunt",
+            "name_ja": "門脈体循環シャント"
+          },
+          {
+            "id": "cat_0352",
+            "name": "Feline Congenital Portosystemic Shunt",
+            "name_ja": "猫先天性門脈体循環シャント"
+          },
+          {
+            "id": "cat_0474",
+            "name": "Feline Congenital Portosystemic Shunt (Extrahepatic)",
+            "name_ja": "猫先天性門脈体循環シャント（肝外型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spinal",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0088",
+            "name": "Spinal Cord Lymphoma",
+            "name_ja": "脊髄リンパ腫"
+          },
+          {
+            "id": "cat_0413",
+            "name": "Feline Spinal Cord Trauma",
+            "name_ja": "猫脊髄外傷"
+          },
+          {
+            "id": "cat_0499",
+            "name": "Feline Spinal Arachnoid Cyst",
+            "name_ja": "猫脊髄くも膜嚢胞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spleni",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0407",
+            "name": "Feline Splenic Torsion",
+            "name_ja": "猫脾捻転"
+          },
+          {
+            "id": "cat_0448",
+            "name": "Splenic Mast Cell Tumor",
+            "name_ja": "脾臓肥満細胞腫"
+          },
+          {
+            "id": "cat_0504",
+            "name": "Feline Splenic Lymphoma",
+            "name_ja": "猫脾臓リンパ腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ulcer",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0027",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "cat_0070",
+            "name": "Eosinophilic Granuloma Complex - Eosinophilic Ulcer",
+            "name_ja": "好酸球性肉芽腫症候群（好酸球性潰瘍）"
+          },
+          {
+            "id": "cat_0101",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ureter",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0264",
+            "name": "Feline Ureteral Obstruction",
+            "name_ja": "猫尿管閉塞"
+          },
+          {
+            "id": "cat_0491",
+            "name": "Feline Ureteral Stricture",
+            "name_ja": "猫尿管狭窄"
+          },
+          {
+            "id": "cat_0513",
+            "name": "Feline Ectopic Ureter",
+            "name_ja": "猫異所性尿管"
+          }
+        ]
+      },
+      {
+        "shared_stem": "urinar",
+        "size": 3,
+        "members": [
+          {
+            "id": "cat_0036",
+            "name": "Feline Lower Urinary Tract Disease (FLUTD)",
+            "name_ja": "猫下部尿路疾患"
+          },
+          {
+            "id": "cat_0037",
+            "name": "Urinary Obstruction (Blocked Cat)",
+            "name_ja": "尿道閉塞"
+          },
+          {
+            "id": "cat_0043",
+            "name": "Urinary Tract Infection (UTI)",
+            "name_ja": "尿路感染症"
+          }
+        ]
+      }
+    ],
+    "family_cluster_count": 86
+  },
+  "T102": {
+    "detector": "T102",
+    "total_records": 550,
+    "flagged_count": 0,
+    "flags": []
+  },
+  "T104": {
+    "detector": "T104",
+    "total_records": 550,
+    "empty_count": 0,
+    "heading_only_count": 78,
+    "with_dosage_count": 472,
+    "empty": [],
+    "heading_only": [
+      {
+        "id": "cat_0002",
+        "name": "Feline Pneumonia",
+        "name_ja": "猫肺炎",
+        "treatment_ja_len": 333,
+        "treatment_len": 389,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0043",
+        "name": "Urinary Tract Infection (UTI)",
+        "name_ja": "尿路感染症",
+        "treatment_ja_len": 395,
+        "treatment_len": 347,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0076",
+        "name": "Food Allergy Dermatitis",
+        "name_ja": "食物アレルギー性皮膚炎",
+        "treatment_ja_len": 657,
+        "treatment_len": 549,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0103",
+        "name": "Iris Melanoma",
+        "name_ja": "虹彩黒色腫",
+        "treatment_ja_len": 249,
+        "treatment_len": 706,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0112",
+        "name": "Squamous Cell Carcinoma (Cutaneous)",
+        "name_ja": "皮膚扁平上皮癌",
+        "treatment_ja_len": 318,
+        "treatment_len": 495,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0120",
+        "name": "Basal Cell Tumor",
+        "name_ja": "基底細胞腫",
+        "treatment_ja_len": 63,
+        "treatment_len": 183,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0133",
+        "name": "Oral Mass / Epulis",
+        "name_ja": "口腔腫瘤・エプリス",
+        "treatment_ja_len": 74,
+        "treatment_len": 155,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0134",
+        "name": "Tooth Root Abscess",
+        "name_ja": "歯根膿瘍",
+        "treatment_ja_len": 158,
+        "treatment_len": 137,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0149",
+        "name": "Flea Infestation",
+        "name_ja": "ノミ寄生症",
+        "treatment_ja_len": 162,
+        "treatment_len": 144,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0151",
+        "name": "Cuterebra Infestation",
+        "name_ja": "ウマバエ幼虫症",
+        "treatment_ja_len": 164,
+        "treatment_len": 196,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0168",
+        "name": "Heartworm-Associated Respiratory Disease (HARD)",
+        "name_ja": "フィラリア関連呼吸器疾患",
+        "treatment_ja_len": 169,
+        "treatment_len": 203,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0181",
+        "name": "Lens Luxation",
+        "name_ja": "水晶体脱臼",
+        "treatment_ja_len": 602,
+        "treatment_len": 573,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0190",
+        "name": "Cryptorchidism",
+        "name_ja": "停留精巣",
+        "treatment_ja_len": 69,
+        "treatment_len": 144,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0197",
+        "name": "Lily Toxicosis",
+        "name_ja": "ユリ中毒",
+        "treatment_ja_len": 594,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0198",
+        "name": "Acetaminophen (Paracetamol) Toxicosis",
+        "name_ja": "アセトアミノフェン中毒",
+        "treatment_ja_len": 601,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0199",
+        "name": "Permethrin Toxicosis",
+        "name_ja": "ペルメトリン中毒",
+        "treatment_ja_len": 565,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0200",
+        "name": "NSAID Toxicosis",
+        "name_ja": "NSAID中毒",
+        "treatment_ja_len": 597,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0201",
+        "name": "Ethylene Glycol (Antifreeze) Poisoning",
+        "name_ja": "エチレングリコール中毒",
+        "treatment_ja_len": 773,
+        "treatment_len": 705,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0202",
+        "name": "Rodenticide Poisoning (Anticoagulant)",
+        "name_ja": "殺鼠剤中毒（抗凝固剤）",
+        "treatment_ja_len": 601,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0204",
+        "name": "Retained Deciduous Teeth",
+        "name_ja": "乳歯遺残",
+        "treatment_ja_len": 173,
+        "treatment_len": 126,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0214",
+        "name": "Pituitary Tumor",
+        "name_ja": "下垂体腫瘍",
+        "treatment_ja_len": 87,
+        "treatment_len": 209,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0219",
+        "name": "Cat Bite Abscess",
+        "name_ja": "猫咬傷膿瘍",
+        "treatment_ja_len": 559,
+        "treatment_len": 472,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0234",
+        "name": "Feline Otitis Media",
+        "name_ja": "猫中耳炎",
+        "treatment_ja_len": 558,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0235",
+        "name": "Feline Otitis Externa",
+        "name_ja": "猫外耳炎",
+        "treatment_ja_len": 158,
+        "treatment_len": 159,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0250",
+        "name": "Feline Trigeminal Neuritis",
+        "name_ja": "猫三叉神経炎",
+        "treatment_ja_len": 175,
+        "treatment_len": 150,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0253",
+        "name": "Feline Botulism",
+        "name_ja": "猫ボツリヌス中毒",
+        "treatment_ja_len": 562,
+        "treatment_len": 532,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0260",
+        "name": "Feline Calcium Oxalate Urolithiasis",
+        "name_ja": "猫シュウ酸カルシウム尿路結石症",
+        "treatment_ja_len": 609,
+        "treatment_len": 445,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0261",
+        "name": "Feline Struvite Urolithiasis",
+        "name_ja": "猫ストルバイト尿路結石症",
+        "treatment_ja_len": 443,
+        "treatment_len": 300,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0262",
+        "name": "Feline Cystine Urolithiasis",
+        "name_ja": "猫シスチン尿石症",
+        "treatment_ja_len": 375,
+        "treatment_len": 340,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0263",
+        "name": "Feline Urate Urolithiasis",
+        "name_ja": "猫尿酸アンモニウム尿石症",
+        "treatment_ja_len": 875,
+        "treatment_len": 794,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0277",
+        "name": "Feline Ceruminous Gland Adenoma",
+        "name_ja": "猫耳垢腺腫",
+        "treatment_ja_len": 103,
+        "treatment_len": 145,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0281",
+        "name": "Feline Pneumothorax",
+        "name_ja": "猫気胸",
+        "treatment_ja_len": 433,
+        "treatment_len": 473,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0283",
+        "name": "Feline Allergic Bronchopulmonary Disease",
+        "name_ja": "猫アレルギー性気管支肺疾患",
+        "treatment_ja_len": 230,
+        "treatment_len": 151,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0315",
+        "name": "Feline Trombiculiasis (Chigger Mite)",
+        "name_ja": "猫ツツガムシ症",
+        "treatment_ja_len": 164,
+        "treatment_len": 193,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0327",
+        "name": "Feline Salivary Gland Mucocele",
+        "name_ja": "猫唾液腺嚢腫",
+        "treatment_ja_len": 192,
+        "treatment_len": 134,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0328",
+        "name": "Feline Eosinophilic Pneumonia",
+        "name_ja": "猫好酸球性肺炎",
+        "treatment_ja_len": 164,
+        "treatment_len": 186,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0334",
+        "name": "Feline Paraneoplastic Syndrome",
+        "name_ja": "猫傍腫瘍性症候群",
+        "treatment_ja_len": 106,
+        "treatment_len": 188,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0350",
+        "name": "Feline Hemangiopericytoma",
+        "name_ja": "猫血管周皮腫",
+        "treatment_ja_len": 71,
+        "treatment_len": 158,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0364",
+        "name": "Feline Heat Stroke",
+        "name_ja": "猫熱中症",
+        "treatment_ja_len": 190,
+        "treatment_len": 158,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0366",
+        "name": "Feline Near-Drowning",
+        "name_ja": "猫溺水（ニアドローニング）",
+        "treatment_ja_len": 199,
+        "treatment_len": 237,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0368",
+        "name": "Feline Chocolate Toxicosis",
+        "name_ja": "猫チョコレート中毒",
+        "treatment_ja_len": 599,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0369",
+        "name": "Feline Onion/Garlic Toxicosis",
+        "name_ja": "猫タマネギ・ニンニク中毒",
+        "treatment_ja_len": 777,
+        "treatment_len": 626,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0371",
+        "name": "Feline Marijuana Toxicosis",
+        "name_ja": "猫大麻中毒",
+        "treatment_ja_len": 595,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0372",
+        "name": "Feline Salt Toxicosis",
+        "name_ja": "猫塩分中毒",
+        "treatment_ja_len": 595,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0373",
+        "name": "Feline Zinc Toxicosis",
+        "name_ja": "猫亜鉛中毒",
+        "treatment_ja_len": 770,
+        "treatment_len": 626,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0374",
+        "name": "Feline Lead Toxicosis",
+        "name_ja": "猫鉛中毒",
+        "treatment_ja_len": 594,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0375",
+        "name": "Feline Organophosphate Toxicosis",
+        "name_ja": "猫有機リン中毒",
+        "treatment_ja_len": 597,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0376",
+        "name": "Feline Pyrethroid Toxicosis (Topical)",
+        "name_ja": "猫ピレスロイド中毒（外用）",
+        "treatment_ja_len": 570,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0377",
+        "name": "Feline Metaldehyde Toxicosis (Slug Bait)",
+        "name_ja": "猫メタアルデヒド中毒",
+        "treatment_ja_len": 600,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0379",
+        "name": "Feline Bromethalin Toxicosis",
+        "name_ja": "猫ブロメタリン中毒",
+        "treatment_ja_len": 599,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0380",
+        "name": "Feline Ivermectin Toxicosis",
+        "name_ja": "猫イベルメクチン中毒",
+        "treatment_ja_len": 600,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0381",
+        "name": "Feline Toxic Epidermal Necrolysis",
+        "name_ja": "猫中毒性表皮壊死症",
+        "treatment_ja_len": 599,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0385",
+        "name": "Feline Alopecia Areata",
+        "name_ja": "猫円形脱毛症",
+        "treatment_ja_len": 459,
+        "treatment_len": 336,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0402",
+        "name": "Feline Linear Foreign Body",
+        "name_ja": "猫線状異物",
+        "treatment_ja_len": 191,
+        "treatment_len": 227,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0408",
+        "name": "Feline Mesenteric Volvulus",
+        "name_ja": "猫腸間膜軸捻転",
+        "treatment_ja_len": 193,
+        "treatment_len": 177,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0425",
+        "name": "Feline Subcutaneous Abscess (Non-Bite)",
+        "name_ja": "猫皮下膿瘍（非咬傷性）",
+        "treatment_ja_len": 565,
+        "treatment_len": 472,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0426",
+        "name": "Feline Necrotizing Fasciitis",
+        "name_ja": "猫壊死性筋膜炎",
+        "treatment_ja_len": 597,
+        "treatment_len": 527,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0427",
+        "name": "Feline Dental Malocclusion",
+        "name_ja": "猫歯列不正",
+        "treatment_ja_len": 174,
+        "treatment_len": 158,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0430",
+        "name": "Feline Oronasal Fistula",
+        "name_ja": "猫口鼻瘻",
+        "treatment_ja_len": 173,
+        "treatment_len": 145,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0437",
+        "name": "Feline Nasal Foreign Body",
+        "name_ja": "猫鼻腔内異物",
+        "treatment_ja_len": 192,
+        "treatment_len": 160,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0457",
+        "name": "Hepatozoon felis Infection",
+        "name_ja": "ヘパトゾーン・フェリス感染症",
+        "treatment_ja_len": 171,
+        "treatment_len": 160,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0459",
+        "name": "Meningioma (Convexity Type)",
+        "name_ja": "髄膜腫（円蓋部型）",
+        "treatment_ja_len": 78,
+        "treatment_len": 182,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0464",
+        "name": "Lily Nephrotoxicosis (Acute)",
+        "name_ja": "ユリ腎毒性（急性）",
+        "treatment_ja_len": 771,
+        "treatment_len": 705,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0465",
+        "name": "Acetaminophen Toxicosis (Acute)",
+        "name_ja": "アセトアミノフェン中毒（急性）",
+        "treatment_ja_len": 605,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0466",
+        "name": "Tea Tree Oil Toxicosis",
+        "name_ja": "ティーツリーオイル中毒",
+        "treatment_ja_len": 601,
+        "treatment_len": 494,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0470",
+        "name": "Feline Bronchial Mineralization",
+        "name_ja": "猫気管支石灰化",
+        "treatment_ja_len": 176,
+        "treatment_len": 160,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0471",
+        "name": "Feline Gallbladder Infarction",
+        "name_ja": "猫胆嚢梗塞",
+        "treatment_ja_len": 591,
+        "treatment_len": 474,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0479",
+        "name": "Feline Iris Melanosis",
+        "name_ja": "猫虹彩メラノーシス",
+        "treatment_ja_len": 69,
+        "treatment_len": 160,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0480",
+        "name": "Feline Chronic Progressive Polyarthritis",
+        "name_ja": "猫慢性進行性多発性関節炎",
+        "treatment_ja_len": 948,
+        "treatment_len": 851,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0482",
+        "name": "Feline High-Rise Syndrome (Thoracic Trauma)",
+        "name_ja": "猫高所落下症候群（胸部外傷）",
+        "treatment_ja_len": 444,
+        "treatment_len": 452,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0486",
+        "name": "Feline Proliferative and Necrotizing Otitis Externa",
+        "name_ja": "猫増殖性壊死性外耳炎",
+        "treatment_ja_len": 164,
+        "treatment_len": 159,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0487",
+        "name": "Feline Oral Eosinophilic Granuloma",
+        "name_ja": "猫口腔好酸球性肉芽腫",
+        "treatment_ja_len": 75,
+        "treatment_len": 160,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0489",
+        "name": "Feline Cerebellar Infarction",
+        "name_ja": "猫小脳梗塞",
+        "treatment_ja_len": 463,
+        "treatment_len": 487,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0490",
+        "name": "Feline Tracheal Avulsion",
+        "name_ja": "猫気管断裂",
+        "treatment_ja_len": 435,
+        "treatment_len": 460,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0492",
+        "name": "Feline Penile Urethral Obstruction",
+        "name_ja": "猫陰茎尿道閉塞",
+        "treatment_ja_len": 500,
+        "treatment_len": 594,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0511",
+        "name": "Feline Tracheobronchial Foreign Body",
+        "name_ja": "猫気管支異物",
+        "treatment_ja_len": 192,
+        "treatment_len": 205,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0515",
+        "name": "Feline Myasthenic Crisis",
+        "name_ja": "猫筋無力症クリーゼ",
+        "treatment_ja_len": 226,
+        "treatment_len": 530,
+        "has_dosage": false
+      },
+      {
+        "id": "cat_0519",
+        "name": "Ovarian Cysts (Feline)",
+        "name_ja": "猫の卵巣嚢胞（持続性発情）",
+        "treatment_ja_len": 104,
+        "treatment_len": 1433,
+        "has_dosage": false
+      }
+    ]
+  },
+  "T108": {
+    "detector": "T108",
+    "total_records": 550,
+    "drug_available": 610,
+    "ref_keys_available": 30,
+    "drug_mismatch_count": 3,
+    "citation_mismatch_count": 0,
+    "drug_mismatches": [
+      {
+        "id": "cat_0080",
+        "name": "Demodicosis",
+        "name_ja": "毛包虫症（ニキビダニ症）",
+        "drugs": [
+          {
+            "drug": "Doramectin",
+            "drug_ja": "ドラメクチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cat_0335",
+        "name": "Feline Methemoglobinemia",
+        "name_ja": "猫メトヘモグロビン血症",
+        "drugs": [
+          {
+            "drug": "Methylene Blue",
+            "drug_ja": "メチレンブルー",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cat_0523",
+        "name": "Feline Anaphylaxis",
+        "name_ja": "猫のアナフィラキシー",
+        "drugs": [
+          {
+            "drug": "Codeine",
+            "drug_ja": "コデイン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      }
+    ],
+    "citation_mismatches": []
+  },
+  "T109": {
+    "detector": "T109",
+    "total_records": 550,
+    "hit_count": 0,
+    "safe_occurrences": 0,
+    "review_occurrences": 0,
+    "term_counts": {},
+    "hits": []
+  }
+}

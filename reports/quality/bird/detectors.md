@@ -1,0 +1,352 @@
+# VetDict 品質検出レポート — bird
+
+- 総レコード数: **551**
+
+## T101 重複 / 過分割
+- 完全一致重複クラスタ: **50** （冗長レコード 54 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **97**
+
+### 完全一致重複（上位20）
+- 嘴羽毛病（PBFD）（Psittacine Beak and Feather Disease (PBFD)）[bird_0000] / 嘴羽毛病（サーコウイルス）（鳥）（Beak and Feather Disease (Circovirus)）[bird_0341]
+- 腺胃拡張症（PDD／ボルナウイルス）（Proventricular Dilatation Disease (PDD / Bornavirus)）[bird_0001] / 前胃拡張症（PDD）（鳥）（Proventricular Dilatation Disease (PDD)）[bird_0400]
+- 鳥痘（Avian Poxvirus）[bird_0003] / 鳥痘（鳥）（Avian Pox）[bird_0402]
+- パチェコ病（オウム目ヘルペスウイルス）（Pacheco's Disease (Psittacid Herpesvirus)）[bird_0006] / パチェコ病（鳥）（Pacheco's Disease）[bird_0403]
+- パラミクソウイルス感染症（Paramyxovirus Infection (PMV-1/2/3)）[bird_0007] / パラミクソウイルス感染（鳥）（Paramyxovirus Infection）[bird_0343]
+- オウム病（クラミジア症）（Psittacosis / Chlamydiosis）[bird_0010] / オウム病（クラミジア症）（鳥）（Psittacosis (Chlamydiosis)）[bird_0398]
+- 大腸菌感染症（E. coli Infection (Colibacillosis)）[bird_0013] / 大腸菌感染（鳥）（E. coli Infection）[bird_0437]
+- カンジダ症（Candidiasis）[bird_0023] / カンジダ症（そのう真菌症）（Candidiasis (Crop Mycosis)）[bird_0308]
+- メガバクテリア症（AGY）（Megabacteriosis (Avian Gastric Yeast / AGY)）[bird_0024] / メガバクテリア症（マクロラブダス症）（Megabacteriosis (Macrorhabdus ornithogaster)）[bird_0307] / メガバクテリア症（AGY）（鳥）（Megabacteriosis (AGY)）[bird_0410]
+- ムコール症（Mucormycosis (Zygomycosis)）[bird_0026] / ムコール症（鳥）（Mucormycosis）[bird_0347]
+- 肺炎（Pneumonia）[bird_0031] / 細菌性肺炎（鳥）（Pneumonia (Bacterial)）[bird_0417]
+- 嗉嚢停滞（Crop Stasis (Crop Slowdown)）[bird_0033] / そ嚢うっ滞（鳥）（Crop Stasis）[bird_0408]
+- 嗉嚢火傷（Crop Burn (Thermal Ingluvitis)）[bird_0034] / そ嚢火傷（鳥）（Crop Burns）[bird_0409]
+- 筋胃炎（Ventriculitis (Gizzard Inflammation)）[bird_0038] / 筋胃炎（鳥）（Ventriculitis）[bird_0324]
+- 総排泄腔脱（Cloacal Prolapse）[bird_0039] / 総排泄腔脱（鳥）（Prolapse of Cloaca）[bird_0326]
+- 腎不全（急性／慢性）（Renal Failure (Acute / Chronic)）[bird_0048] / 急性腎不全（鳥）（Renal Failure (Acute)）[bird_0445]
+- 腎腫瘍（腎腺癌）（Renal Tumor (Renal Adenocarcinoma)）[bird_0052] / 腎腫瘍（鳥）（Renal Tumor）[bird_0444]
+- 甲状腺腫（Thyroid Goiter (Thyroid Hyperplasia)）[bird_0053] / 甲状腺腫（鳥）（Goiter (Thyroid Enlargement)）[bird_0313]
+- ビタミンA欠乏症（Vitamin A Deficiency (Hypovitaminosis A)）[bird_0055] / ビタミンA欠乏症（鳥）（Vitamin A Deficiency）[bird_0413]
+- ヨウ素欠乏症（Iodine Deficiency）[bird_0058] / ヨウ素欠乏症（甲状腺過形成）（鳥）（Iodine Deficiency (Thyroid Hyperplasia)）[bird_0414]
+
+### 疾患ファミリー候補（上位15）
+- stem=`avian` × 46件
+    - 鳥ポリオーマウイルス感染症（Avian Polyomavirus）[bird_0002]
+    - 鳥痘（Avian Poxvirus）[bird_0003]
+    - 鳥インフルエンザ（Avian Influenza）[bird_0005]
+    - 鳥レオウイルス感染症（Avian Reovirus Infection）[bird_0008]
+    - 鳥アデノウイルス感染症（Avian Adenovirus Infection）[bird_0009]
+    - 鳥結核（抗酸菌症）（Avian Tuberculosis (Mycobacteriosis)）[bird_0011]
+    - 鳥クラミジア性結膜炎（Avian Chlamydial Conjunctivitis）[bird_0123]
+    - 鳥サーコウイルス感染症（非PBFD型）（Avian Circovirus (Non-PBFD)）[bird_0124]
+    - 鳥赤芽球症（白血病）（Avian Erythroblastosis (Leukosis)）[bird_0125]
+    - 鳥脳脊髄炎（Avian Encephalomyelitis）[bird_0126]
+    - 鳥メタニューモウイルス感染症（Avian Metapneumovirus Infection）[bird_0128]
+    - 鳥スピロヘータ症（Avian Spirochetosis）[bird_0133]
+    - 鳥マラリア（Avian Malaria）[bird_0134]
+    - 鳥ヘモプロテウス症（Avian Haemoproteosis）[bird_0135]
+    - 鳥コレラ（家禽コレラ）（Avian Cholera (Fowl Cholera)）[bird_0137]
+    - 鳥胃酵母（マクロラブダス）難治性（Avian Gastric Yeast (Macrorhabdus ornithogaster) Refractory）[bird_0141]
+    - 鳥腎症（Avian Nephropathy）[bird_0177]
+    - 鳥類腎腫瘍（Avian Renal Tumor）[bird_0206]
+    - 鳥類甲状腺過形成（Avian Thyroid Hyperplasia）[bird_0207]
+    - 鳥アデノウイルス性肝炎（Avian Adenovirus Hepatitis）[bird_0209]
+    - 鳥パラミクソウイルス3型（Avian Paramyxovirus-3 (PMV-3)）[bird_0210]
+    - 鳥類丹毒（Avian Erysipelas）[bird_0214]
+    - 鳥類パスツレラ症（家禽コレラ変異型）（Avian Pasteurellosis (Fowl Cholera Variant)）[bird_0215]
+    - 鳥類サルモネラ症（パラチフス）（Avian Salmonellosis (Paratyphoid)）[bird_0216]
+    - 鳥類大腸菌敗血症（Avian E. coli Septicemia）[bird_0217]
+    - 鳥類リステリア症（Avian Listeriosis）[bird_0218]
+    - 鳥類コクシジウム症（アイメリア属）（Avian Coccidiosis (Eimeria)）[bird_0219]
+    - 鳥類住血吸虫症（Avian Schistosomiasis）[bird_0221]
+    - 鳥類フィラリア感染症（Avian Filarial Infection）[bird_0222]
+    - 鳥類白血病（Avian Leukosis）[bird_0223]
+    - 鳥腎炎ウイルス感染症（Avian Nephritis Virus Infection）[bird_0226]
+    - 鳥類脳脊髄炎（流行性振戦）（Avian Encephalomyelitis (Epidemic Tremor)）[bird_0227]
+    - 鳥類E型肝炎ウイルス（Avian Hepatitis E Virus）[bird_0228]
+    - 鳥類スピロヘータ症（ボレリア属）（Avian Spirochetosis (Borrelia)）[bird_0235]
+    - 鳥メタニューモウイルス性鼻気管炎（Avian Metapneumovirus Rhinotracheitis）[bird_0236]
+    - 鳥ボルナウイルス（ABV）無症候性キャリア（Avian Bornavirus (ABV) – Asymptomatic Carrier）[bird_0237]
+    - 鳥マラリア急性型（Avian Malaria – Acute Form）[bird_0254]
+    - 鳥ロイコチトゾーン症（Avian Leucocytozoonosis）[bird_0255]
+    - 鳥ヘルペスウイルス内部乳頭腫症（Avian Herpesvirus – Internal Papillomatosis）[bird_0268]
+    - 鳥ポリオーマウイルス慢性キャリア（Avian Polyomavirus – Chronic Carrier）[bird_0294]
+    - 鳥コロナウイルス感染症（Avian Coronavirus Infection）[bird_0298]
+    - 鳥ロタウイルス感染症（Avian Rotavirus Infection）[bird_0299]
+    - 鳥類敗血症（Avian Sepsis (Septicemia)）[bird_0309]
+    - 鳥胃酵母菌症（マクロラブダス）（鳥）（Avian Gastric Yeast (Macrorhabdus)）[bird_0310]
+    - 鳥ボルナウイルス（鳥）（Avian Bornavirus (ABV)）[bird_0401]
+    - 鳥痘（鳥）（Avian Pox）[bird_0402]
+- stem=`defici` × 20件
+    - ビタミンA欠乏症（Vitamin A Deficiency (Hypovitaminosis A)）[bird_0055]
+    - カルシウム欠乏症（低カルシウム血症）（Calcium Deficiency (Hypocalcemia)）[bird_0056]
+    - ビタミンD欠乏症（Vitamin D Deficiency）[bird_0057]
+    - ヨウ素欠乏症（Iodine Deficiency）[bird_0058]
+    - ビタミンE／セレン欠乏症（Vitamin E / Selenium Deficiency）[bird_0062]
+    - ビオチン欠乏症（Biotin Deficiency）[bird_0182]
+    - ナイアシン欠乏症（ペラグラ）（Niacin Deficiency (Pellagra)）[bird_0183]
+    - リボフラビン欠乏症（Riboflavin Deficiency）[bird_0184]
+    - チアミン欠乏症（スターゲイジング）（Thiamine Deficiency (Star-Gazing)）[bird_0185]
+    - ビタミンK欠乏症（Vitamin K Deficiency）[bird_0186]
+    - タンパク質欠乏症（Protein Deficiency）[bird_0187]
+    - ビタミンA欠乏症口腔膿瘍型（Vitamin A Deficiency – Oral Abscesses）[bird_0273]
+    - カルシウム欠乏症繁殖型（産卵鳥）（Calcium Deficiency – Reproductive (Laying Hens)）[bird_0274]
+    - ビタミンE欠乏症（鳥）（Vitamin E Deficiency）[bird_0314]
+    - ビタミンB欠乏症（鳥）（Vitamin B Deficiency）[bird_0315]
+    - 栄養欠乏症（一般）（鳥）（Nutritional Deficiency (General)）[bird_0407]
+    - ビタミンA欠乏症（鳥）（Vitamin A Deficiency）[bird_0413]
+    - ヨウ素欠乏症（甲状腺過形成）（鳥）（Iodine Deficiency (Thyroid Hyperplasia)）[bird_0414]
+    - 筋骨格系栄養欠乏（鳥）（Musculoskeletal Nutritional Deficiency）[bird_0532]
+    - 血液栄養欠乏（鳥）（Hematological Nutritional Deficiency）[bird_0543]
+- stem=`feathe` × 16件
+    - 嘴羽毛病（PBFD）（Psittacine Beak and Feather Disease (PBFD)）[bird_0000]
+    - 毛引き症（羽毛破壊行動）（Feather Plucking (Feather Destructive Behavior)）[bird_0063]
+    - 羽毛嚢胞（Feather Cysts）[bird_0067]
+    - 羽毛ダニ（Feather Mites）[bird_0095]
+    - 羽毛破壊行動（Feather Destructive Behavior (FDB)）[bird_0115]
+    - 慢性羽包嚢胞（Feather Follicle Cyst (Chronic)）[bird_0179]
+    - ホルモン性毛引き症（Hormonal Feather Plucking）[bird_0201]
+    - 嘴羽毛病（PBFD）超急性新生児型（Psittacine Beak and Feather Disease – Peracute Neonatal Form）[bird_0250]
+    - 嘴羽毛病（PBFD）慢性成鳥型（Psittacine Beak and Feather Disease – Chronic Adult Form）[bird_0251]
+    - 毛包腫瘍（毛包腫）（Feather Follicle Tumor (Feather Folliculoma)）[bird_0257]
+    - 羽毛破壊行動ホルモン型（Feather Destructive Behavior – Hormonal）[bird_0263]
+    - 羽毛破壊行動（鳥）（Feather Destructive Behavior）[bird_0329]
+    - 嘴羽毛病（サーコウイルス）（鳥）（Beak and Feather Disease (Circovirus)）[bird_0341]
+    - 羽毛毛包感染（鳥）（Feather Follicle Infection）[bird_0385]
+    - 毛引き（鳥）（Feather Plucking）[bird_0404]
+    - 羽毛嚢胞（鳥）（Feather Cyst）[bird_0454]
+- stem=`hepati` × 15件
+    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[bird_0043]
+    - 肝炎（Hepatitis）[bird_0044]
+    - 肝アミロイドーシス（Hepatic Amyloidosis）[bird_0047]
+    - アヒルウイルス性肝炎（Duck Viral Hepatitis）[bird_0129]
+    - 鳥アデノウイルス性肝炎（Avian Adenovirus Hepatitis）[bird_0209]
+    - 鳥類E型肝炎ウイルス（Avian Hepatitis E Virus）[bird_0228]
+    - クラミジア症肝型（Chlamydiosis – Hepatic Form）[bird_0241]
+    - アミロイドーシス肝型（Amyloidosis – Hepatic）[bird_0302]
+    - 肝膿瘍（鳥）（Hepatic Abscess）[bird_0371]
+    - 肝細菌感染症（鳥）（Hepatic Bacterial Infection）[bird_0476]
+    - 肝ウイルス感染症（鳥）（Hepatic Viral Infection）[bird_0477]
+    - 肝寄生虫疾患（鳥）（Hepatic Parasitic Disease）[bird_0478]
+    - 肝線維症（鳥）（Hepatic Fibrosis）[bird_0479]
+    - 肝腫瘍性疾患（鳥）（Hepatic Neoplasia）[bird_0480]
+    - 肝代謝障害（鳥）（Hepatic Metabolic Disorder）[bird_0481]
+- stem=`form` × 14件
+    - PDD神経型（PDD Neurological Form）[bird_0078]
+    - オウム目ヘルペスウイルス粘膜型（Psittacine Herpesvirus – Mucosal Form）[bird_0238]
+    - クラミジア症慢性潜伏型（Chlamydiosis – Chronic Latent Form）[bird_0239]
+    - クラミジア症眼型（Chlamydiosis – Ocular Form）[bird_0240]
+    - クラミジア症肝型（Chlamydiosis – Hepatic Form）[bird_0241]
+    - アスペルギルス症急性劇症型（Aspergillosis – Acute Fulminant Form）[bird_0245]
+    - アスペルギルス症慢性肉芽腫型（Aspergillosis – Chronic Granulomatous Form）[bird_0246]
+    - アスペルギルス症鳴管型（Aspergillosis – Syringeal Form）[bird_0247]
+    - 嘴羽毛病（PBFD）超急性新生児型（Psittacine Beak and Feather Disease – Peracute Neonatal Form）[bird_0250]
+    - 嘴羽毛病（PBFD）慢性成鳥型（Psittacine Beak and Feather Disease – Chronic Adult Form）[bird_0251]
+    - 鳥マラリア急性型（Avian Malaria – Acute Form）[bird_0254]
+    - 卵黄性腹膜炎慢性型（Egg Peritonitis – Chronic Form）[bird_0266]
+    - 乳頭腫症口腔型（Papillomatosis – Oral Form）[bird_0267]
+    - 内臓痛風急性型（Visceral Gout – Acute Form）[bird_0286]
+- stem=`dermat` × 13件
+    - 皮膚炎（Dermatitis）[bird_0070]
+    - 皮膚糸状菌症（白癬）（Dermatophytosis (Ringworm)）[bird_0143]
+    - 接触性皮膚炎（Contact Dermatitis）[bird_0202]
+    - 亜鉛反応性皮膚症（Zinc-Responsive Dermatosis）[bird_0301]
+    - 潰瘍性皮膚炎（鳥）（Ulcerative Dermatitis）[bird_0386]
+    - 皮膚細菌感染（鳥）（Dermatological Bacterial Infection）[bird_0497]
+    - 皮膚ウイルス感染（鳥）（Dermatological Viral Infection）[bird_0498]
+    - 皮膚真菌感染（鳥）（Dermatological Fungal Infection）[bird_0499]
+    - 皮膚寄生虫寄生（鳥）（Dermatological Parasitic Infestation）[bird_0500]
+    - 皮膚腫瘍性疾患（鳥）（Dermatological Neoplasia）[bird_0501]
+    - 皮膚自己免疫疾患（鳥）（Dermatological Autoimmune Disease）[bird_0502]
+    - 皮膚アレルギー疾患（鳥）（Dermatological Allergic Disease）[bird_0503]
+    - 慢性皮膚炎（鳥）（Chronic Dermatitis）[bird_0504]
+- stem=`bacter` × 12件
+    - 肝細菌感染症（鳥）（Hepatic Bacterial Infection）[bird_0476]
+    - 消化管細菌感染（鳥）（Gastrointestinal Bacterial Infection）[bird_0482]
+    - 呼吸器細菌感染（鳥）（Respiratory Bacterial Infection）[bird_0489]
+    - 皮膚細菌感染（鳥）（Dermatological Bacterial Infection）[bird_0497]
+    - 泌尿生殖器細菌感染（鳥）（Urogenital Bacterial Infection）[bird_0505]
+    - 神経系細菌感染（鳥）（Neurological Bacterial Infection）[bird_0509]
+    - 眼科細菌感染（鳥）（Ophthalmological Bacterial Infection）[bird_0517]
+    - 心血管細菌感染（鳥）（Cardiovascular Bacterial Infection）[bird_0522]
+    - 筋骨格系細菌感染（鳥）（Musculoskeletal Bacterial Infection）[bird_0527]
+    - 内分泌細菌感染（鳥）（Endocrine Bacterial Infection）[bird_0533]
+    - 生殖器細菌感染（鳥）（Reproductive Bacterial Infection）[bird_0544]
+    - 全身性細菌感染（鳥）（Systemic Bacterial Infection）[bird_0549]
+- stem=`neopla` × 12件
+    - 生殖器腫瘍（鳥）（Reproductive Neoplasia）[bird_0442]
+    - 肝腫瘍性疾患（鳥）（Hepatic Neoplasia）[bird_0480]
+    - 消化管腫瘍（鳥）（Gastrointestinal Neoplasia）[bird_0486]
+    - 呼吸器腫瘍（鳥）（Respiratory Neoplasia）[bird_0493]
+    - 皮膚腫瘍性疾患（鳥）（Dermatological Neoplasia）[bird_0501]
+    - 泌尿生殖器腫瘍（鳥）（Urogenital Neoplasia）[bird_0506]
+    - 神経系腫瘍（鳥）（Neurological Neoplasia）[bird_0512]
+    - 眼科腫瘍（鳥）（Ophthalmological Neoplasia）[bird_0519]
+    - 心血管腫瘍（鳥）（Cardiovascular Neoplasia）[bird_0523]
+    - 筋骨格系腫瘍（鳥）（Musculoskeletal Neoplasia）[bird_0528]
+    - 内分泌腫瘍（鳥）（Endocrine Neoplasia）[bird_0534]
+    - 血液腫瘍性疾患（鳥）（Hematological Neoplasia）[bird_0539]
+- stem=`beak` × 10件
+    - 嘴羽毛病（PBFD）（Psittacine Beak and Feather Disease (PBFD)）[bird_0000]
+    - 嘴の不正咬合（シザービーク）（Beak Malocclusion (Scissor Beak)）[bird_0197]
+    - 嘴過長症（Beak Overgrowth）[bird_0198]
+    - 嘴羽毛病（PBFD）超急性新生児型（Psittacine Beak and Feather Disease – Peracute Neonatal Form）[bird_0250]
+    - 嘴羽毛病（PBFD）慢性成鳥型（Psittacine Beak and Feather Disease – Chronic Adult Form）[bird_0251]
+    - 嘴不正咬合側方偏位型（シザービーク）（Beak Malocclusion – Lateral Deviation (Scissor Beak)）[bird_0264]
+    - 嘴不正咬合下顎前突型（Beak Malocclusion – Mandibular Prognathism）[bird_0265]
+    - 嘴羽毛病（サーコウイルス）（鳥）（Beak and Feather Disease (Circovirus)）[bird_0341]
+    - 嘴変形（シザービーク）（鳥）（Beak Deformity (Scissor Beak)）[bird_0433]
+    - 嘴骨折（鳥）（Beak Fracture）[bird_0434]
+- stem=`crop` × 10件
+    - 嗉嚢停滞（Crop Stasis (Crop Slowdown)）[bird_0033]
+    - 嗉嚢火傷（Crop Burn (Thermal Ingluvitis)）[bird_0034]
+    - 嗉嚢内異物（Crop Foreign Body）[bird_0035]
+    - 素嚢真菌症（Crop Mycosis）[bird_0159]
+    - 酸敗嗉嚢（発酵性嗉嚢炎）（Sour Crop (Fermentative Ingluvitis)）[bird_0242]
+    - 嗉嚢瘻（Crop Fistula）[bird_0243]
+    - 嗉嚢閉塞（Crop Impaction）[bird_0276]
+    - そ嚢腺癌（鳥）（Crop Adenocarcinoma）[bird_0323]
+    - そ嚢うっ滞（鳥）（Crop Stasis）[bird_0408]
+    - そ嚢火傷（鳥）（Crop Burns）[bird_0409]
+- stem=`tumor` × 10件
+    - 腎腫瘍（腎腺癌）（Renal Tumor (Renal Adenocarcinoma)）[bird_0052]
+    - 精巣腫瘍（Testicular Tumor）[bird_0086]
+    - 卵巣腫瘍（Ovarian Tumor）[bird_0087]
+    - 鳥類腎腫瘍（Avian Renal Tumor）[bird_0206]
+    - 毛包腫瘍（毛包腫）（Feather Follicle Tumor (Feather Folliculoma)）[bird_0257]
+    - 副腎腫瘍（鳥）（Adrenal Tumor）[bird_0318]
+    - 甲状腺腫瘍（鳥）（Thyroid Tumor）[bird_0319]
+    - 下垂体腫瘍（鳥）（Pituitary Tumor）[bird_0320]
+    - セルトリ細胞腫（鳥）（Sertoli Cell Tumor）[bird_0443]
+    - 腎腫瘍（鳥）（Renal Tumor）[bird_0444]
+- stem=`carcin` × 9件
+    - 扁平上皮癌（皮膚）（Squamous Cell Carcinoma (Skin)）[bird_0069]
+    - 胆管癌（Bile Duct Carcinoma (Cholangiocarcinoma)）[bird_0094]
+    - 甲状腺癌（Thyroid Carcinoma）[bird_0168]
+    - 胆管細胞癌（Cholangiocellular Carcinoma）[bird_0173]
+    - 尾脂腺腺腫・癌（Preen Gland Adenoma/Carcinoma）[bird_0204]
+    - 肝細胞癌（Hepatocellular Carcinoma）[bird_0259]
+    - 尾脂腺癌（Preen Gland Carcinoma）[bird_0281]
+    - 胆管癌（鳥）（Bile Duct Carcinoma）[bird_0317]
+    - 扁平上皮癌（鳥）（Squamous Cell Carcinoma）[bird_0452]
+- stem=`gastro` × 9件
+    - 消化管異物（Gastrointestinal Foreign Body）[bird_0042]
+    - 消化管運動障害（Gastrointestinal Motility Disorder）[bird_0293]
+    - 消化管細菌感染（鳥）（Gastrointestinal Bacterial Infection）[bird_0482]
+    - 消化管ウイルス感染（鳥）（Gastrointestinal Viral Infection）[bird_0483]
+    - 消化管真菌感染（鳥）（Gastrointestinal Fungal Infection）[bird_0484]
+    - 消化管寄生虫疾患（鳥）（Gastrointestinal Parasitic Disease）[bird_0485]
+    - 消化管腫瘍（鳥）（Gastrointestinal Neoplasia）[bird_0486]
+    - 消化管炎症性疾患（鳥）（Gastrointestinal Inflammatory Disease）[bird_0487]
+    - 消化管部分閉塞（鳥）（Gastrointestinal Obstruction (Partial)）[bird_0488]
+- stem=`neurol` × 9件
+    - PDD神経型（PDD Neurological Form）[bird_0078]
+    - 神経系細菌感染（鳥）（Neurological Bacterial Infection）[bird_0509]
+    - 神経系ウイルス感染（鳥）（Neurological Viral Infection）[bird_0510]
+    - 神経系寄生虫疾患（鳥）（Neurological Parasitic Disease）[bird_0511]
+    - 神経系腫瘍（鳥）（Neurological Neoplasia）[bird_0512]
+    - 神経変性疾患（鳥）（Neurological Degenerative Disease）[bird_0513]
+    - 神経炎症性疾患（鳥）（Neurological Inflammatory Disease）[bird_0514]
+    - 神経外傷性損傷（鳥）（Neurological Traumatic Injury）[bird_0515]
+    - 神経代謝疾患（鳥）（Neurological Metabolic Disease）[bird_0516]
+- stem=`respir` × 9件
+    - 急性呼吸器アスペルギルス症（鳥）（Respiratory Aspergillosis (Acute)）[bird_0311]
+    - 呼吸器細菌感染（鳥）（Respiratory Bacterial Infection）[bird_0489]
+    - 呼吸器ウイルス感染（鳥）（Respiratory Viral Infection）[bird_0490]
+    - 呼吸器真菌感染（鳥）（Respiratory Fungal Infection）[bird_0491]
+    - 呼吸器寄生虫疾患（鳥）（Respiratory Parasitic Disease）[bird_0492]
+    - 呼吸器腫瘍（鳥）（Respiratory Neoplasia）[bird_0493]
+    - 呼吸器炎症性疾患（鳥）（Respiratory Inflammatory Disease）[bird_0494]
+    - 下部気道感染（鳥）（Lower Respiratory Tract Infection）[bird_0495]
+    - 慢性呼吸器疾患（鳥）（Chronic Respiratory Disease）[bird_0496]
+
+## T102 非臨床エントリ
+- フラグ数: **0**
+
+## T104 空 / 見出しのみ治療セクション
+- 完全に空: **0**
+- 投与量なし（見出しのみ）: **68**
+- 投与量あり: **483**
+
+### 投与量なし（上位30）
+- ボルデテラ感染症（Bordetella Infection）[bird_0020] — ja:161字 / en:137字
+- シトロバクター感染症（Citrobacter Infection）[bird_0021] — ja:164字 / en:137字
+- 鼻炎（Rhinitis）[bird_0028] — ja:67字 / en:193字
+- 気管閉塞（Tracheal Obstruction）[bird_0030] — ja:158字 / en:210字
+- 嗉嚢炎（Ingluvitis (Crop Infection)）[bird_0036] — ja:157字 / en:137字
+- 腎不全（急性／慢性）（Renal Failure (Acute / Chronic)）[bird_0048] — ja:473字 / en:609字
+- ビタミンD欠乏症（Vitamin D Deficiency）[bird_0057] — ja:73字 / en:193字
+- ヨウ素欠乏症（Iodine Deficiency）[bird_0058] — ja:147字 / en:193字
+- 肥満（Obesity）[bird_0060] — ja:67字 / en:460字
+- 絞扼趾症候群（Constricted Toe Syndrome）[bird_0077] — ja:71字 / en:186字
+- 下垂体腺腫（Pituitary Adenoma）[bird_0093] — ja:103字 / en:107字
+- 羽毛ダニ（Feather Mites）[bird_0095] — ja:78字 / en:172字
+- 条虫症（Tapeworms (Cestodes)）[bird_0099] — ja:160字 / en:477字
+- 毛細線虫症（キャピラリア）（Capillaria (Hairworm)）[bird_0100] — ja:170字 / en:193字
+- コクシジウム症（Coccidia）[bird_0101] — ja:333字 / en:422字
+- うっ血性心不全（Congestive Heart Failure）[bird_0107] — ja:96字 / en:203字
+- PTFE／テフロン中毒（PTFE / Teflon Toxicosis）[bird_0109] — ja:437字 / en:369字
+- アボカド中毒（Avocado Toxicity）[bird_0110] — ja:331字 / en:369字
+- 亜鉛中毒（Zinc Poisoning）[bird_0112] — ja:430字 / en:743字
+- チョコレート中毒（Chocolate Toxicity）[bird_0114] — ja:333字 / en:369字
+- 恐怖症行動（Phobic Behavior）[bird_0118] — ja:70字 / en:193字
+- 白内障（Cataracts）[bird_0120] — ja:620字 / en:933字
+- 鳥ヘモプロテウス症（Avian Haemoproteosis）[bird_0135] — ja:166字 / en:193字
+- オルニトバクテリウム・リノトラケアーレ感染症（Ornithobacterium rhinotracheale (ORT) Infection）[bird_0140] — ja:176字 / en:137字
+- 微胞子虫症（Microsporidiosis）[bird_0146] — ja:162字 / en:193字
+- コクロソーマ感染症（Cochlosoma Infection）[bird_0150] — ja:428字 / en:387字
+- 気管虫症（シンガムス）（Syngamus (Gapeworm)）[bird_0151] — ja:168字 / en:193字
+- 鉤頭虫感染症（Acanthocephalan Infection (Thorny-Headed Worms)）[bird_0152] — ja:163字 / en:204字
+- 穿孔ヒゼンダニ症（脚疥癬）（Cnemidocoptes pilae (Scaly Leg Mite)）[bird_0154] — ja:170字 / en:493字
+- ダニ寄生症（Tick Infestation）[bird_0156] — ja:162字 / en:193字
+
+## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
+- 種別投与量なしの薬品リンク: **94** 疾患
+- 犬猫論文の他種への自動紐付け: **17** 疾患
+
+### 種に投与量データが無い薬品リンク（上位20）
+- 緑膿菌感染症（Pseudomonas Infection）[bird_0014] → シプロフロキサシン
+- クレブシエラ感染症（Klebsiella Infection）[bird_0015] → メロペネム
+- レンサ球菌感染症（Streptococcal Infection）[bird_0018] → ペニシリンG
+- 関節炎（Arthritis）[bird_0075] → トラマドール
+- 痙攣性疾患（Seizure Disorder）[bird_0081] → フェノバルビタール
+- 胆管癌（Bile Duct Carcinoma (Cholangiocarcinoma)）[bird_0094] → ラクツロース
+- 結膜炎（Conjunctivitis）[bird_0119] → シプロフロキサシン
+- アヒルウイルス性肝炎（Duck Viral Hepatitis）[bird_0129] → ラクツロース
+- 鳥スピロヘータ症（Avian Spirochetosis）[bird_0133] → ペニシリンG
+- 丹毒（Erysipelas）[bird_0138] → ペニシリンG
+- 皮膚糸状菌症（白癬）（Dermatophytosis (Ringworm)）[bird_0143] → ミコナゾール
+- 骨肉腫（Osteosarcoma）[bird_0172] → トラマドール
+- 胆管細胞癌（Cholangiocellular Carcinoma）[bird_0173] → ラクツロース
+- 総排泄腔炎（ベントグリート）（Cloacitis (Vent Gleet)）[bird_0174] → スルファジアジン, スルファジアジン銀
+- 鳥類丹毒（Avian Erysipelas）[bird_0214] → ペニシリンG
+- 鳥類E型肝炎ウイルス（Avian Hepatitis E Virus）[bird_0228] → ラクツロース
+- リーメレラ・アナティペスティファー感染症（Riemerella anatipestifer Infection）[bird_0229] → ペニシリンG
+- 鳥類スピロヘータ症（ボレリア属）（Avian Spirochetosis (Borrelia)）[bird_0235] → ペニシリンG
+- クラミジア症眼型（Chlamydiosis – Ocular Form）[bird_0240] → シプロフロキサシン, シプロフロキサシン点眼0.3%
+- 肝細胞癌（Hepatocellular Carcinoma）[bird_0259] → ラクツロース
+
+### 犬猫論文が他種に自動紐付け（上位20）
+- パスツレラ症（Pasteurellosis）[bird_0019] → key: pasteurellosis
+- 糖尿病（Diabetes Mellitus）[bird_0054] → key: diabetes mellitus
+- 皮膚炎（Dermatitis）[bird_0070] → key: atopic dermatitis
+- リンパ腫（Lymphoma）[bird_0092] → key: lymphoma
+- 皮膚糸状菌症（白癬）（Dermatophytosis (Ringworm)）[bird_0143] → key: dermatophytosis
+- 心筋症（Cardiomyopathy）[bird_0164] → key: hypertrophic cardiomyopathy (hcm)
+- 膵炎（Pancreatitis）[bird_0166] → key: feline pancreatitis
+- 嘴の不正咬合（シザービーク）（Beak Malocclusion (Scissor Beak)）[bird_0197] → key: malocclusion
+- 鳥類パスツレラ症（家禽コレラ変異型）（Avian Pasteurellosis (Fowl Cholera Variant)）[bird_0215] → key: pasteurellosis
+- 嘴不正咬合側方偏位型（シザービーク）（Beak Malocclusion – Lateral Deviation (Scissor Beak)）[bird_0264] → key: malocclusion
+- 嘴不正咬合下顎前突型（Beak Malocclusion – Mandibular Prognathism）[bird_0265] → key: malocclusion
+- 膀胱炎（鳥）（Cystitis）[bird_0373] → key: feline idiopathic cystitis (fic)
+- 血栓塞栓症（鳥）（Thromboembolism）[bird_0375] → key: aortic thromboembolism (saddle thrombus)
+- 慢性腎臓病（鳥）（Chronic Kidney Disease）[bird_0446] → key: chronic kidney disease
+- 尿路結石症（鳥）（Urolithiasis）[bird_0447] → key: urolithiasis
+- 白血病（鳥）（Leukemia）[bird_0450] → key: feline leukemia virus
+- 貧血（鳥）（Anemia）[bird_0451] → key: immune-mediated hemolytic anemia
+
+## T109 機械翻訳臭（置換辞書）
+- ヒット総数: **0**（safe 0 / review 0）
+
+### 用語別ヒット数
+
+### 出現箇所（上位30）

@@ -1,0 +1,5130 @@
+{
+  "species": "dog",
+  "record_count": 623,
+  "T101": {
+    "detector": "T101",
+    "total_records": 623,
+    "exact_duplicate_clusters": [
+      {
+        "members": [
+          {
+            "id": "dog_0019",
+            "name": "Allergic Dermatitis",
+            "name_ja": "犬アトピー性皮膚炎（CAD）"
+          },
+          {
+            "id": "dog_0297",
+            "name": "Canine Atopic Dermatitis",
+            "name_ja": "犬アトピー性皮膚炎"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0027",
+            "name": "Epilepsy",
+            "name_ja": "特発性てんかん"
+          },
+          {
+            "id": "dog_0495",
+            "name": "Idiopathic Epilepsy",
+            "name_ja": "特発性てんかん"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0037",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血（IMHA）"
+          },
+          {
+            "id": "dog_0491",
+            "name": "Immune-Mediated Hemolytic Anemia (IMHA)",
+            "name_ja": "免疫介在性溶血性貧血（IMHA）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0040",
+            "name": "Canine Influenza (CIV)",
+            "name_ja": "犬インフルエンザ"
+          },
+          {
+            "id": "dog_0499",
+            "name": "Canine Influenza",
+            "name_ja": "犬インフルエンザ"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0055",
+            "name": "Portosystemic Shunt (Liver Shunt)",
+            "name_ja": "門脈体循環シャント（肝シャント）"
+          },
+          {
+            "id": "dog_0252",
+            "name": "Portosystemic Shunt (Congenital)",
+            "name_ja": "先天性門脈体循環シャント"
+          },
+          {
+            "id": "dog_0349",
+            "name": "Portosystemic Shunt (Acquired)",
+            "name_ja": "後天性門脈体循環シャント"
+          },
+          {
+            "id": "dog_0484",
+            "name": "Portosystemic Shunt (PSS)",
+            "name_ja": "門脈体循環シャント"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0065",
+            "name": "Acral Lick Dermatitis",
+            "name_ja": "肢端舐性皮膚炎"
+          },
+          {
+            "id": "dog_0619",
+            "name": "Acral Lick Dermatitis (Lick Granuloma)",
+            "name_ja": "肢端舐性皮膚炎（舐性肉芽腫）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0077",
+            "name": "Hypertrophic Osteodystrophy (HOD)",
+            "name_ja": "肥大性骨異栄養症（HOD）"
+          },
+          {
+            "id": "dog_0273",
+            "name": "Hypertrophic Osteodystrophy (HOD) - Severe",
+            "name_ja": "肥大性骨異栄養症（重症型）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0080",
+            "name": "Syringomyelia (Chiari Malformation)",
+            "name_ja": "脊髄空洞症（キアリ様奇形）"
+          },
+          {
+            "id": "dog_0456",
+            "name": "Syringomyelia",
+            "name_ja": "脊髄空洞症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0085",
+            "name": "Mastitis",
+            "name_ja": "乳腺炎"
+          },
+          {
+            "id": "dog_0600",
+            "name": "Mastitis (Lactational and Non-lactational)",
+            "name_ja": "乳腺炎（哺乳期・非哺乳期）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0087",
+            "name": "Benign Prostatic Hyperplasia (BPH)",
+            "name_ja": "良性前立腺肥大症"
+          },
+          {
+            "id": "dog_0475",
+            "name": "Benign Prostatic Hyperplasia",
+            "name_ja": "前立腺肥大症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0099",
+            "name": "Degenerative Myelopathy (DM)",
+            "name_ja": "変性性脊髄症（DM）"
+          },
+          {
+            "id": "dog_0454",
+            "name": "Degenerative Myelopathy",
+            "name_ja": "変性性脊髄症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0103",
+            "name": "Hemangiosarcoma",
+            "name_ja": "血管肉腫（HSA）"
+          },
+          {
+            "id": "dog_0459",
+            "name": "Hemangiosarcoma (Splenic)",
+            "name_ja": "血管肉腫（脾臓型）"
+          },
+          {
+            "id": "dog_0460",
+            "name": "Hemangiosarcoma (Cardiac)",
+            "name_ja": "血管肉腫（心臓型）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0113",
+            "name": "Autoimmune Thrombocytopenia (ITP)",
+            "name_ja": "免疫介在性血小板減少症（ITP）"
+          },
+          {
+            "id": "dog_0490",
+            "name": "Immune-Mediated Thrombocytopenia (ITP)",
+            "name_ja": "免疫介在性血小板減少症（ITP）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0116",
+            "name": "Insulinoma",
+            "name_ja": "インスリノーマ"
+          },
+          {
+            "id": "dog_0228",
+            "name": "Insulinoma (Pancreatic Beta Cell Tumor)",
+            "name_ja": "膵臓β細胞腫瘍"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0121",
+            "name": "Canine Herpesvirus (CHV)",
+            "name_ja": "犬ヘルペスウイルス感染症"
+          },
+          {
+            "id": "dog_0479",
+            "name": "Canine Herpesvirus",
+            "name_ja": "犬ヘルペスウイルス"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0132",
+            "name": "Aspergillosis",
+            "name_ja": "アスペルギルス症"
+          },
+          {
+            "id": "dog_0500",
+            "name": "Aspergillosis (Nasal)",
+            "name_ja": "鼻アスペルギルス症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0134",
+            "name": "Leishmaniasis",
+            "name_ja": "リーシュマニア症"
+          },
+          {
+            "id": "dog_0481",
+            "name": "Leishmaniosis",
+            "name_ja": "リーシュマニア症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0173",
+            "name": "Immune-Mediated Polyarthritis (IMPA)",
+            "name_ja": "免疫介在性多発性関節炎"
+          },
+          {
+            "id": "dog_0488",
+            "name": "Immune-Mediated Polyarthritis",
+            "name_ja": "免疫介在性多発性関節炎"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0176",
+            "name": "Discoid Lupus Erythematosus (DLE)",
+            "name_ja": "円板状エリテマトーデス"
+          },
+          {
+            "id": "dog_0463",
+            "name": "Discoid Lupus Erythematosus",
+            "name_ja": "円板状エリテマトーデス"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0184",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "dog_0472",
+            "name": "Gastric Ulceration",
+            "name_ja": "胃潰瘍"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0204",
+            "name": "Postpartum Metritis (Acute Postpartum Uterine Infection)",
+            "name_ja": "産後子宮炎（急性産褥子宮炎）"
+          },
+          {
+            "id": "dog_0599",
+            "name": "Postpartum Metritis",
+            "name_ja": "産後子宮炎（分娩後子宮内膜炎）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0209",
+            "name": "Grape/Raisin Toxicosis",
+            "name_ja": "ブドウ・レーズン中毒"
+          },
+          {
+            "id": "dog_0467",
+            "name": "Grape and Raisin Toxicosis",
+            "name_ja": "ブドウ・レーズン中毒"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0210",
+            "name": "Xylitol Poisoning",
+            "name_ja": "キシリトール中毒"
+          },
+          {
+            "id": "dog_0466",
+            "name": "Xylitol Toxicosis",
+            "name_ja": "キシリトール中毒"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0215",
+            "name": "Ethylene Glycol Poisoning (Antifreeze)",
+            "name_ja": "エチレングリコール中毒（不凍液）"
+          },
+          {
+            "id": "dog_0469",
+            "name": "Ethylene Glycol Toxicosis",
+            "name_ja": "エチレングリコール中毒"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0231",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞がん"
+          },
+          {
+            "id": "dog_0514",
+            "name": "Hepatocellular Carcinoma (Massive)",
+            "name_ja": "肝細胞癌（巨大型）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0238",
+            "name": "Compulsive Disorder (Canine OCD)",
+            "name_ja": "強迫性障害"
+          },
+          {
+            "id": "dog_0483",
+            "name": "Compulsive Disorder",
+            "name_ja": "強迫性障害"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0263",
+            "name": "Megacolon",
+            "name_ja": "巨大結腸症"
+          },
+          {
+            "id": "dog_0425",
+            "name": "Megacolon (Acquired)",
+            "name_ja": "後天性巨大結腸症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0277",
+            "name": "Necrotizing Meningoencephalitis (NME)",
+            "name_ja": "壊死性髄膜脳炎（NME）"
+          },
+          {
+            "id": "dog_0452",
+            "name": "Necrotizing Meningoencephalitis (Pug Dog Encephalitis)",
+            "name_ja": "壊死性髄膜脳炎（パグ脳炎）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0350",
+            "name": "Ciliary Dyskinesia (Primary)",
+            "name_ja": "原発性線毛機能不全症"
+          },
+          {
+            "id": "dog_0482",
+            "name": "Primary Ciliary Dyskinesia",
+            "name_ja": "原発性線毛機能不全症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0367",
+            "name": "Pulmonary Thromboembolism (PTE)",
+            "name_ja": "肺血栓塞栓症 (PTE)"
+          },
+          {
+            "id": "dog_0458",
+            "name": "Pulmonary Thromboembolism",
+            "name_ja": "肺血栓塞栓症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0398",
+            "name": "Salivary Mucocele (Sialocele)",
+            "name_ja": "唾液腺嚢胞"
+          },
+          {
+            "id": "dog_0487",
+            "name": "Salivary Mucocele",
+            "name_ja": "唾液腺嚢腫"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0416",
+            "name": "Central Diabetes Insipidus",
+            "name_ja": "中枢性尿崩症"
+          },
+          {
+            "id": "dog_0418",
+            "name": "Central (Cranial) Diabetes Insipidus",
+            "name_ja": "中枢性（頭蓋性）尿崩症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0419",
+            "name": "Cervical Spondylomyelopathy (Wobbler - Disc Associated)",
+            "name_ja": "頸椎脊椎脊髄症（椎間板関連型）"
+          },
+          {
+            "id": "dog_0449",
+            "name": "Cervical Spondylomyelopathy (Wobbler Syndrome)",
+            "name_ja": "頸部脊椎脊髄症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0434",
+            "name": "Canine Brucellosis (Reproductive)",
+            "name_ja": "犬ブルセラ症（生殖器型）"
+          },
+          {
+            "id": "dog_0477",
+            "name": "Canine Brucellosis",
+            "name_ja": "犬ブルセラ症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dog_0527",
+            "name": "Shoulder Osteochondritis Dissecans (OCD)",
+            "name_ja": "肩関節離断性骨軟骨炎"
+          },
+          {
+            "id": "dog_0620",
+            "name": "Osteochondritis Dissecans - Shoulder (OCD)",
+            "name_ja": "肩関節離断性骨軟骨炎（OCD）"
+          }
+        ]
+      }
+    ],
+    "exact_duplicate_cluster_count": 35,
+    "redundant_record_count": 38,
+    "family_clusters": [
+      {
+        "shared_stem": "canine",
+        "size": 49,
+        "members": [
+          {
+            "id": "dog_0000",
+            "name": "Canine Parvovirus",
+            "name_ja": "犬パルボウイルス感染症"
+          },
+          {
+            "id": "dog_0001",
+            "name": "Canine Distemper",
+            "name_ja": "犬ジステンパー"
+          },
+          {
+            "id": "dog_0040",
+            "name": "Canine Influenza (CIV)",
+            "name_ja": "犬インフルエンザ"
+          },
+          {
+            "id": "dog_0042",
+            "name": "Canine Infectious Hepatitis",
+            "name_ja": "犬感染性肝炎"
+          },
+          {
+            "id": "dog_0048",
+            "name": "Canine Coronavirus (Enteric)",
+            "name_ja": "犬コロナウイルス腸炎"
+          },
+          {
+            "id": "dog_0121",
+            "name": "Canine Herpesvirus (CHV)",
+            "name_ja": "犬ヘルペスウイルス感染症"
+          },
+          {
+            "id": "dog_0122",
+            "name": "Canine Papillomatosis",
+            "name_ja": "犬乳頭腫症（パピローマ）"
+          },
+          {
+            "id": "dog_0166",
+            "name": "Canine Distemper Encephalitis",
+            "name_ja": "ジステンパー脳炎"
+          },
+          {
+            "id": "dog_0281",
+            "name": "Canine Spinal Muscular Atrophy",
+            "name_ja": "犬脊髄性筋萎縮症"
+          },
+          {
+            "id": "dog_0297",
+            "name": "Canine Atopic Dermatitis",
+            "name_ja": "犬アトピー性皮膚炎"
+          },
+          {
+            "id": "dog_0300",
+            "name": "Canine Pattern Baldness",
+            "name_ja": "犬パターン脱毛症"
+          },
+          {
+            "id": "dog_0310",
+            "name": "Canine Chronic Ulcerative Stomatitis (CCUS)",
+            "name_ja": "犬慢性潰瘍性口内炎"
+          },
+          {
+            "id": "dog_0348",
+            "name": "Canine Schistosomiasis",
+            "name_ja": "犬住血吸虫症"
+          },
+          {
+            "id": "dog_0383",
+            "name": "Canine Fly-Snapping Syndrome",
+            "name_ja": "犬ハエ追い症候群"
+          },
+          {
+            "id": "dog_0386",
+            "name": "Canine Adenovirus Type 1 (CAV-1)",
+            "name_ja": "犬アデノウイルス1型"
+          },
+          {
+            "id": "dog_0387",
+            "name": "Canine Parainfluenza Virus",
+            "name_ja": "犬パラインフルエンザウイルス"
+          },
+          {
+            "id": "dog_0388",
+            "name": "Canine Respiratory Coronavirus",
+            "name_ja": "犬呼吸器コロナウイルス"
+          },
+          {
+            "id": "dog_0405",
+            "name": "Canine Hemotropic Mycoplasmosis",
+            "name_ja": "犬ヘモトロピックマイコプラズマ症"
+          },
+          {
+            "id": "dog_0434",
+            "name": "Canine Brucellosis (Reproductive)",
+            "name_ja": "犬ブルセラ症（生殖器型）"
+          },
+          {
+            "id": "dog_0436",
+            "name": "Canine Familial Nephropathy",
+            "name_ja": "犬家族性腎症"
+          },
+          {
+            "id": "dog_0441",
+            "name": "Canine Leproid Granuloma",
+            "name_ja": "犬ハンセン病様肉芽腫"
+          },
+          {
+            "id": "dog_0442",
+            "name": "Canine Distemper - Hardpad Disease",
+            "name_ja": "犬ジステンパー硬蹠症"
+          },
+          {
+            "id": "dog_0455",
+            "name": "Canine Cognitive Dysfunction Syndrome",
+            "name_ja": "犬認知機能不全症候群"
+          },
+          {
+            "id": "dog_0477",
+            "name": "Canine Brucellosis",
+            "name_ja": "犬ブルセラ症"
+          },
+          {
+            "id": "dog_0478",
+            "name": "Canine Leptospirosis",
+            "name_ja": "犬レプトスピラ症"
+          },
+          {
+            "id": "dog_0479",
+            "name": "Canine Herpesvirus",
+            "name_ja": "犬ヘルペスウイルス"
+          },
+          {
+            "id": "dog_0492",
+            "name": "Canine Chronic Hepatitis",
+            "name_ja": "犬慢性肝炎"
+          },
+          {
+            "id": "dog_0499",
+            "name": "Canine Influenza",
+            "name_ja": "犬インフルエンザ"
+          },
+          {
+            "id": "dog_0506",
+            "name": "Canine Monocytic Ehrlichiosis",
+            "name_ja": "犬モノサイティック・エーリキア症"
+          },
+          {
+            "id": "dog_0507",
+            "name": "Canine Granulocytic Anaplasmosis",
+            "name_ja": "犬顆粒球性アナプラズマ症"
+          },
+          {
+            "id": "dog_0578",
+            "name": "Canine Compulsive Flank Sucking (Doberman)",
+            "name_ja": "ドーベルマン強迫性わき腹吸引"
+          },
+          {
+            "id": "dog_0579",
+            "name": "Canine Thyroid Storm",
+            "name_ja": "犬甲状腺クリーゼ"
+          },
+          {
+            "id": "dog_0580",
+            "name": "Canine Hemophilia B",
+            "name_ja": "犬血友病B"
+          },
+          {
+            "id": "dog_0582",
+            "name": "Canine Chronic Enteropathy (Non-IBD)",
+            "name_ja": "犬慢性腸症（非IBD）"
+          },
+          {
+            "id": "dog_0584",
+            "name": "Canine Idiopathic Polyradiculoneuritis (Acute)",
+            "name_ja": "犬急性特発性多発性神経根炎"
+          },
+          {
+            "id": "dog_0585",
+            "name": "Canine Hemangiopericytoma",
+            "name_ja": "犬血管周皮腫"
+          },
+          {
+            "id": "dog_0586",
+            "name": "Canine Retroperitoneal Fibrosis",
+            "name_ja": "犬後腹膜線維症"
+          },
+          {
+            "id": "dog_0587",
+            "name": "Canine Splenic Nodular Hyperplasia",
+            "name_ja": "犬脾臓結節性過形成"
+          },
+          {
+            "id": "dog_0588",
+            "name": "Canine Necrotizing Sialometaplasia",
+            "name_ja": "犬壊死性唾液腺化生"
+          },
+          {
+            "id": "dog_0589",
+            "name": "Canine Myocardial Contusion",
+            "name_ja": "犬心筋挫傷"
+          },
+          {
+            "id": "dog_0590",
+            "name": "Canine Bronchoesophageal Fistula (Congenital)",
+            "name_ja": "犬先天性気管支食道瘻"
+          },
+          {
+            "id": "dog_0591",
+            "name": "Canine Spinal Arachnoid Cyst",
+            "name_ja": "犬脊髄くも膜嚢胞"
+          },
+          {
+            "id": "dog_0592",
+            "name": "Canine Cricopharyngeal Dysphagia",
+            "name_ja": "犬輪状咽頭嚥下障害"
+          },
+          {
+            "id": "dog_0593",
+            "name": "Canine Pulmonary Alveolar Proteinosis",
+            "name_ja": "犬肺胞蛋白症"
+          },
+          {
+            "id": "dog_0594",
+            "name": "Canine Primary Ciliary Dyskinesia (Breed-Specific)",
+            "name_ja": "犬原発性繊毛運動不全症（犬種特異性）"
+          },
+          {
+            "id": "dog_0595",
+            "name": "Canine Chronic Superficial Keratitis (Pannus) - Severe",
+            "name_ja": "犬慢性表在性角膜炎（パンヌス）重症型"
+          },
+          {
+            "id": "dog_0596",
+            "name": "Canine Megaesophagus (Congenital)",
+            "name_ja": "犬先天性巨大食道症"
+          },
+          {
+            "id": "dog_0601",
+            "name": "Female Canine Infertility",
+            "name_ja": "雌犬不妊症（受胎困難・不妊症）"
+          },
+          {
+            "id": "dog_0612",
+            "name": "Canine Ehrlichiosis",
+            "name_ja": "犬エールリヒア症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 29,
+        "members": [
+          {
+            "id": "dog_0208",
+            "name": "Chocolate Toxicosis",
+            "name_ja": "チョコレート中毒"
+          },
+          {
+            "id": "dog_0209",
+            "name": "Grape/Raisin Toxicosis",
+            "name_ja": "ブドウ・レーズン中毒"
+          },
+          {
+            "id": "dog_0211",
+            "name": "Nicotine Toxicosis",
+            "name_ja": "ニコチン中毒"
+          },
+          {
+            "id": "dog_0212",
+            "name": "NSAID Toxicosis",
+            "name_ja": "鎮痛剤中毒（NSAID）"
+          },
+          {
+            "id": "dog_0214",
+            "name": "Onion/Garlic Toxicosis",
+            "name_ja": "タマネギ・ニンニク中毒"
+          },
+          {
+            "id": "dog_0216",
+            "name": "Marijuana Toxicosis",
+            "name_ja": "大麻中毒"
+          },
+          {
+            "id": "dog_0332",
+            "name": "Macadamia Nut Toxicosis",
+            "name_ja": "マカデミアナッツ中毒"
+          },
+          {
+            "id": "dog_0333",
+            "name": "Ibuprofen Toxicosis",
+            "name_ja": "イブプロフェン中毒"
+          },
+          {
+            "id": "dog_0334",
+            "name": "Acetaminophen Toxicosis",
+            "name_ja": "アセトアミノフェン中毒"
+          },
+          {
+            "id": "dog_0335",
+            "name": "Mushroom Toxicosis",
+            "name_ja": "キノコ中毒"
+          },
+          {
+            "id": "dog_0337",
+            "name": "Lily Toxicosis",
+            "name_ja": "ユリ中毒"
+          },
+          {
+            "id": "dog_0338",
+            "name": "Sago Palm Toxicosis",
+            "name_ja": "ソテツ中毒"
+          },
+          {
+            "id": "dog_0339",
+            "name": "Blue-Green Algae (Cyanobacteria) Toxicosis",
+            "name_ja": "藍藻（シアノバクテリア）中毒"
+          },
+          {
+            "id": "dog_0340",
+            "name": "Permethrin Toxicosis",
+            "name_ja": "ペルメトリン中毒"
+          },
+          {
+            "id": "dog_0341",
+            "name": "Caffeine Toxicosis",
+            "name_ja": "カフェイン中毒"
+          },
+          {
+            "id": "dog_0466",
+            "name": "Xylitol Toxicosis",
+            "name_ja": "キシリトール中毒"
+          },
+          {
+            "id": "dog_0467",
+            "name": "Grape and Raisin Toxicosis",
+            "name_ja": "ブドウ・レーズン中毒"
+          },
+          {
+            "id": "dog_0468",
+            "name": "Anticoagulant Rodenticide Toxicosis",
+            "name_ja": "抗凝固性殺鼠剤中毒"
+          },
+          {
+            "id": "dog_0469",
+            "name": "Ethylene Glycol Toxicosis",
+            "name_ja": "エチレングリコール中毒"
+          },
+          {
+            "id": "dog_0470",
+            "name": "Metaldehyde Toxicosis",
+            "name_ja": "メタアルデヒド中毒（ナメクジ忌避剤）"
+          },
+          {
+            "id": "dog_0537",
+            "name": "Ethanol Toxicosis",
+            "name_ja": "エタノール中毒"
+          },
+          {
+            "id": "dog_0538",
+            "name": "Organophosphate Toxicosis",
+            "name_ja": "有機リン中毒"
+          },
+          {
+            "id": "dog_0539",
+            "name": "Pyrethrin/Permethrin Toxicosis (Canine)",
+            "name_ja": "ピレトリン・ペルメトリン中毒（犬）"
+          },
+          {
+            "id": "dog_0540",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "dog_0542",
+            "name": "Iron Toxicosis",
+            "name_ja": "鉄中毒"
+          },
+          {
+            "id": "dog_0543",
+            "name": "Vitamin D Toxicosis",
+            "name_ja": "ビタミンD中毒"
+          },
+          {
+            "id": "dog_0605",
+            "name": "Bromethalin Rodenticide Toxicosis",
+            "name_ja": "ブロメタリン中毒（殺鼠剤）"
+          },
+          {
+            "id": "dog_0606",
+            "name": "Cholecalciferol Rodenticide Toxicosis",
+            "name_ja": "コレカルシフェロール中毒（ビタミンD3殺鼠剤）"
+          },
+          {
+            "id": "dog_0608",
+            "name": "Ivermectin Toxicosis (MDR1 Mutation)",
+            "name_ja": "イベルメクチン中毒（MDR1変異関連）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 15,
+        "members": [
+          {
+            "id": "dog_0108",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮がん（SCC）"
+          },
+          {
+            "id": "dog_0110",
+            "name": "Transitional Cell Carcinoma",
+            "name_ja": "移行上皮がん（膀胱がん）"
+          },
+          {
+            "id": "dog_0229",
+            "name": "Thyroid Carcinoma",
+            "name_ja": "甲状腺がん"
+          },
+          {
+            "id": "dog_0231",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞がん"
+          },
+          {
+            "id": "dog_0317",
+            "name": "Anal Gland Carcinoma",
+            "name_ja": "肛門腺癌"
+          },
+          {
+            "id": "dog_0355",
+            "name": "Gastric Carcinoma",
+            "name_ja": "胃癌"
+          },
+          {
+            "id": "dog_0423",
+            "name": "Digital Squamous Cell Carcinoma",
+            "name_ja": "指趾部扁平上皮癌"
+          },
+          {
+            "id": "dog_0465",
+            "name": "Pulmonary Carcinoma",
+            "name_ja": "肺癌"
+          },
+          {
+            "id": "dog_0512",
+            "name": "Bronchogenic Carcinoma",
+            "name_ja": "気管支原性癌"
+          },
+          {
+            "id": "dog_0513",
+            "name": "Bladder Transitional Cell Carcinoma",
+            "name_ja": "膀胱移行上皮癌"
+          },
+          {
+            "id": "dog_0514",
+            "name": "Hepatocellular Carcinoma (Massive)",
+            "name_ja": "肝細胞癌（巨大型）"
+          },
+          {
+            "id": "dog_0515",
+            "name": "Biliary Carcinoma",
+            "name_ja": "胆管癌（肝外）"
+          },
+          {
+            "id": "dog_0516",
+            "name": "Cholangiocellular Carcinoma",
+            "name_ja": "胆管細胞癌（肝内）"
+          },
+          {
+            "id": "dog_0517",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌"
+          },
+          {
+            "id": "dog_0518",
+            "name": "Adrenal Cortical Carcinoma",
+            "name_ja": "副腎皮質癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 11,
+        "members": [
+          {
+            "id": "dog_0019",
+            "name": "Allergic Dermatitis",
+            "name_ja": "犬アトピー性皮膚炎（CAD）"
+          },
+          {
+            "id": "dog_0065",
+            "name": "Acral Lick Dermatitis",
+            "name_ja": "肢端舐性皮膚炎"
+          },
+          {
+            "id": "dog_0143",
+            "name": "Flea Allergy Dermatitis",
+            "name_ja": "ノミアレルギー性皮膚炎"
+          },
+          {
+            "id": "dog_0179",
+            "name": "Zinc-Responsive Dermatosis",
+            "name_ja": "亜鉛反応性皮膚症"
+          },
+          {
+            "id": "dog_0180",
+            "name": "Malassezia Dermatitis",
+            "name_ja": "マラセチア皮膚炎"
+          },
+          {
+            "id": "dog_0193",
+            "name": "Growth Hormone-Responsive Dermatosis",
+            "name_ja": "成長ホルモン反応性皮膚症"
+          },
+          {
+            "id": "dog_0297",
+            "name": "Canine Atopic Dermatitis",
+            "name_ja": "犬アトピー性皮膚炎"
+          },
+          {
+            "id": "dog_0298",
+            "name": "Zinc-Responsive Dermatosis - Syndrome I",
+            "name_ja": "亜鉛反応性皮膚症候群I型"
+          },
+          {
+            "id": "dog_0299",
+            "name": "Dermatomyositis",
+            "name_ja": "皮膚筋炎"
+          },
+          {
+            "id": "dog_0556",
+            "name": "Shetland Sheepdog Dermatomyositis",
+            "name_ja": "シェットランド・シープドッグ皮膚筋炎"
+          },
+          {
+            "id": "dog_0619",
+            "name": "Acral Lick Dermatitis (Lick Granuloma)",
+            "name_ja": "肢端舐性皮膚炎（舐性肉芽腫）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dyspla",
+        "size": 11,
+        "members": [
+          {
+            "id": "dog_0025",
+            "name": "Hip Dysplasia",
+            "name_ja": "股関節形成不全"
+          },
+          {
+            "id": "dog_0073",
+            "name": "Elbow Dysplasia",
+            "name_ja": "肘関節形成不全"
+          },
+          {
+            "id": "dog_0149",
+            "name": "Retinal Dysplasia",
+            "name_ja": "網膜形成異常"
+          },
+          {
+            "id": "dog_0177",
+            "name": "Follicular Dysplasia",
+            "name_ja": "毛包形成異常"
+          },
+          {
+            "id": "dog_0271",
+            "name": "Temporomandibular Joint (TMJ) Dysplasia",
+            "name_ja": "顎関節形成不全"
+          },
+          {
+            "id": "dog_0285",
+            "name": "Tricuspid Valve Dysplasia",
+            "name_ja": "三尖弁形成不全"
+          },
+          {
+            "id": "dog_0351",
+            "name": "Pulmonic Valve Dysplasia",
+            "name_ja": "肺動脈弁形成不全"
+          },
+          {
+            "id": "dog_0352",
+            "name": "Mitral Valve Dysplasia",
+            "name_ja": "僧帽弁形成不全"
+          },
+          {
+            "id": "dog_0373",
+            "name": "Renal Dysplasia",
+            "name_ja": "腎形成不全"
+          },
+          {
+            "id": "dog_0577",
+            "name": "Shih Tzu Renal Dysplasia",
+            "name_ja": "シー・ズー腎異形成"
+          },
+          {
+            "id": "dog_0583",
+            "name": "Hepatic Microvascular Dysplasia",
+            "name_ja": "肝微小血管異形成（MVD）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pulmon",
+        "size": 11,
+        "members": [
+          {
+            "id": "dog_0059",
+            "name": "Pulmonic Stenosis",
+            "name_ja": "肺動脈弁狭窄症"
+          },
+          {
+            "id": "dog_0093",
+            "name": "Pulmonary Hypertension",
+            "name_ja": "肺高血圧症"
+          },
+          {
+            "id": "dog_0160",
+            "name": "Pulmonary Fibrosis",
+            "name_ja": "肺線維症"
+          },
+          {
+            "id": "dog_0288",
+            "name": "Cor Pulmonale",
+            "name_ja": "肺性心"
+          },
+          {
+            "id": "dog_0319",
+            "name": "Pulmonary Adenocarcinoma",
+            "name_ja": "肺腺癌"
+          },
+          {
+            "id": "dog_0351",
+            "name": "Pulmonic Valve Dysplasia",
+            "name_ja": "肺動脈弁形成不全"
+          },
+          {
+            "id": "dog_0367",
+            "name": "Pulmonary Thromboembolism (PTE)",
+            "name_ja": "肺血栓塞栓症 (PTE)"
+          },
+          {
+            "id": "dog_0458",
+            "name": "Pulmonary Thromboembolism",
+            "name_ja": "肺血栓塞栓症"
+          },
+          {
+            "id": "dog_0465",
+            "name": "Pulmonary Carcinoma",
+            "name_ja": "肺癌"
+          },
+          {
+            "id": "dog_0554",
+            "name": "West Highland White Terrier Pulmonary Fibrosis",
+            "name_ja": "ウェストハイランドホワイトテリア肺線維症"
+          },
+          {
+            "id": "dog_0593",
+            "name": "Canine Pulmonary Alveolar Proteinosis",
+            "name_ja": "犬肺胞蛋白症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "immune",
+        "size": 10,
+        "members": [
+          {
+            "id": "dog_0037",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血（IMHA）"
+          },
+          {
+            "id": "dog_0173",
+            "name": "Immune-Mediated Polyarthritis (IMPA)",
+            "name_ja": "免疫介在性多発性関節炎"
+          },
+          {
+            "id": "dog_0327",
+            "name": "Immune-Mediated Neutropenia",
+            "name_ja": "免疫介在性好中球減少症"
+          },
+          {
+            "id": "dog_0329",
+            "name": "Immune-Mediated Meningitis",
+            "name_ja": "免疫介在性髄膜炎"
+          },
+          {
+            "id": "dog_0488",
+            "name": "Immune-Mediated Polyarthritis",
+            "name_ja": "免疫介在性多発性関節炎"
+          },
+          {
+            "id": "dog_0490",
+            "name": "Immune-Mediated Thrombocytopenia (ITP)",
+            "name_ja": "免疫介在性血小板減少症（ITP）"
+          },
+          {
+            "id": "dog_0491",
+            "name": "Immune-Mediated Hemolytic Anemia (IMHA)",
+            "name_ja": "免疫介在性溶血性貧血（IMHA）"
+          },
+          {
+            "id": "dog_0564",
+            "name": "Cocker Spaniel Immune-Mediated Hemolytic Anemia",
+            "name_ja": "コッカースパニエル免疫介在性溶血性貧血"
+          },
+          {
+            "id": "dog_0574",
+            "name": "Akita Immune-Mediated Polyarthritis",
+            "name_ja": "秋田犬免疫介在性多発性関節炎"
+          },
+          {
+            "id": "dog_0581",
+            "name": "Idiopathic Immune-Mediated Myositis",
+            "name_ja": "特発性免疫介在性筋炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mediat",
+        "size": 10,
+        "members": [
+          {
+            "id": "dog_0037",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血（IMHA）"
+          },
+          {
+            "id": "dog_0173",
+            "name": "Immune-Mediated Polyarthritis (IMPA)",
+            "name_ja": "免疫介在性多発性関節炎"
+          },
+          {
+            "id": "dog_0327",
+            "name": "Immune-Mediated Neutropenia",
+            "name_ja": "免疫介在性好中球減少症"
+          },
+          {
+            "id": "dog_0329",
+            "name": "Immune-Mediated Meningitis",
+            "name_ja": "免疫介在性髄膜炎"
+          },
+          {
+            "id": "dog_0488",
+            "name": "Immune-Mediated Polyarthritis",
+            "name_ja": "免疫介在性多発性関節炎"
+          },
+          {
+            "id": "dog_0490",
+            "name": "Immune-Mediated Thrombocytopenia (ITP)",
+            "name_ja": "免疫介在性血小板減少症（ITP）"
+          },
+          {
+            "id": "dog_0491",
+            "name": "Immune-Mediated Hemolytic Anemia (IMHA)",
+            "name_ja": "免疫介在性溶血性貧血（IMHA）"
+          },
+          {
+            "id": "dog_0564",
+            "name": "Cocker Spaniel Immune-Mediated Hemolytic Anemia",
+            "name_ja": "コッカースパニエル免疫介在性溶血性貧血"
+          },
+          {
+            "id": "dog_0574",
+            "name": "Akita Immune-Mediated Polyarthritis",
+            "name_ja": "秋田犬免疫介在性多発性関節炎"
+          },
+          {
+            "id": "dog_0581",
+            "name": "Idiopathic Immune-Mediated Myositis",
+            "name_ja": "特発性免疫介在性筋炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 10,
+        "members": [
+          {
+            "id": "dog_0106",
+            "name": "Mast Cell Tumor",
+            "name_ja": "肥満細胞腫（MCT）"
+          },
+          {
+            "id": "dog_0109",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "dog_0161",
+            "name": "Nasal Tumor",
+            "name_ja": "鼻腔腫瘍"
+          },
+          {
+            "id": "dog_0169",
+            "name": "Brain Tumor",
+            "name_ja": "脳腫瘍"
+          },
+          {
+            "id": "dog_0195",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "dog_0283",
+            "name": "Peripheral Nerve Sheath Tumor",
+            "name_ja": "末梢神経鞘腫瘍"
+          },
+          {
+            "id": "dog_0379",
+            "name": "Penile/Preputial Tumor",
+            "name_ja": "陰茎/包皮腫瘍"
+          },
+          {
+            "id": "dog_0402",
+            "name": "Urinary Bladder Tumor (TCC)",
+            "name_ja": "膀胱腫瘍（移行上皮癌）"
+          },
+          {
+            "id": "dog_0404",
+            "name": "Adrenal Gland Tumor",
+            "name_ja": "副腎腫瘍"
+          },
+          {
+            "id": "dog_0519",
+            "name": "Glomus Tumor",
+            "name_ja": "グロムス腫瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastri",
+        "size": 8,
+        "members": [
+          {
+            "id": "dog_0003",
+            "name": "Gastric Dilatation-Volvulus (GDV/Bloat)",
+            "name_ja": "胃拡張胃捻転症候群（GDV）"
+          },
+          {
+            "id": "dog_0184",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "dog_0224",
+            "name": "Gastric Foreign Body",
+            "name_ja": "胃内異物"
+          },
+          {
+            "id": "dog_0355",
+            "name": "Gastric Carcinoma",
+            "name_ja": "胃癌"
+          },
+          {
+            "id": "dog_0424",
+            "name": "Gastric Polyps",
+            "name_ja": "胃ポリープ"
+          },
+          {
+            "id": "dog_0472",
+            "name": "Gastric Ulceration",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "dog_0561",
+            "name": "Great Dane Gastric Dilatation-Volvulus Predisposition",
+            "name_ja": "グレートデーン胃拡張捻転症候群素因"
+          },
+          {
+            "id": "dog_0610",
+            "name": "Gastrinoma (Zollinger-Ellison Syndrome)",
+            "name_ja": "ガストリノーマ（ゾリンジャー・エリソン症候群）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 8,
+        "members": [
+          {
+            "id": "dog_0042",
+            "name": "Canine Infectious Hepatitis",
+            "name_ja": "犬感染性肝炎"
+          },
+          {
+            "id": "dog_0316",
+            "name": "Hepatic Lymphoma",
+            "name_ja": "肝臓リンパ腫"
+          },
+          {
+            "id": "dog_0360",
+            "name": "Chronic Hepatitis",
+            "name_ja": "慢性肝炎"
+          },
+          {
+            "id": "dog_0361",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス"
+          },
+          {
+            "id": "dog_0392",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍"
+          },
+          {
+            "id": "dog_0492",
+            "name": "Canine Chronic Hepatitis",
+            "name_ja": "犬慢性肝炎"
+          },
+          {
+            "id": "dog_0544",
+            "name": "Copper-Associated Chronic Hepatitis (Breed-Specific)",
+            "name_ja": "銅関連慢性肝炎（犬種特異的）"
+          },
+          {
+            "id": "dog_0583",
+            "name": "Hepatic Microvascular Dysplasia",
+            "name_ja": "肝微小血管異形成（MVD）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypert",
+        "size": 8,
+        "members": [
+          {
+            "id": "dog_0007",
+            "name": "Hyperthyroidism",
+            "name_ja": "甲状腺機能亢進症"
+          },
+          {
+            "id": "dog_0077",
+            "name": "Hypertrophic Osteodystrophy (HOD)",
+            "name_ja": "肥大性骨異栄養症（HOD）"
+          },
+          {
+            "id": "dog_0093",
+            "name": "Pulmonary Hypertension",
+            "name_ja": "肺高血圧症"
+          },
+          {
+            "id": "dog_0175",
+            "name": "Hypertrophic Osteopathy",
+            "name_ja": "肥大性骨症"
+          },
+          {
+            "id": "dog_0260",
+            "name": "Malignant Hyperthermia",
+            "name_ja": "悪性高体温症"
+          },
+          {
+            "id": "dog_0273",
+            "name": "Hypertrophic Osteodystrophy (HOD) - Severe",
+            "name_ja": "肥大性骨異栄養症（重症型）"
+          },
+          {
+            "id": "dog_0408",
+            "name": "Hypertensive Retinopathy",
+            "name_ja": "高血圧性網膜症"
+          },
+          {
+            "id": "dog_0571",
+            "name": "Weimaraner Hypertrophic Osteodystrophy (Breed-Specific)",
+            "name_ja": "ワイマラナー肥大性骨異栄養症（犬種特異性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adenoc",
+        "size": 7,
+        "members": [
+          {
+            "id": "dog_0227",
+            "name": "Anal Sac Adenocarcinoma",
+            "name_ja": "肛門嚢腺癌"
+          },
+          {
+            "id": "dog_0233",
+            "name": "Nasal Adenocarcinoma",
+            "name_ja": "鼻腔腺がん"
+          },
+          {
+            "id": "dog_0319",
+            "name": "Pulmonary Adenocarcinoma",
+            "name_ja": "肺腺癌"
+          },
+          {
+            "id": "dog_0323",
+            "name": "Perianal Gland Adenocarcinoma",
+            "name_ja": "肛門周囲腺癌"
+          },
+          {
+            "id": "dog_0356",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸腺癌"
+          },
+          {
+            "id": "dog_0403",
+            "name": "Pancreatic Adenocarcinoma",
+            "name_ja": "膵腺癌"
+          },
+          {
+            "id": "dog_0427",
+            "name": "Apocrine Gland Adenocarcinoma",
+            "name_ja": "アポクリン腺癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mening",
+        "size": 7,
+        "members": [
+          {
+            "id": "dog_0083",
+            "name": "Granulomatous Meningoencephalitis (GME)",
+            "name_ja": "肉芽腫性髄膜脳炎（GME）"
+          },
+          {
+            "id": "dog_0277",
+            "name": "Necrotizing Meningoencephalitis (NME)",
+            "name_ja": "壊死性髄膜脳炎（NME）"
+          },
+          {
+            "id": "dog_0280",
+            "name": "Steroid-Responsive Meningitis-Arteritis (SRMA)",
+            "name_ja": "ステロイド反応性髄膜炎-動脈炎"
+          },
+          {
+            "id": "dog_0322",
+            "name": "Meningioma",
+            "name_ja": "髄膜腫"
+          },
+          {
+            "id": "dog_0329",
+            "name": "Immune-Mediated Meningitis",
+            "name_ja": "免疫介在性髄膜炎"
+          },
+          {
+            "id": "dog_0451",
+            "name": "Granulomatous Meningoencephalomyelitis (GME)",
+            "name_ja": "肉芽腫性髄膜脳脊髄炎"
+          },
+          {
+            "id": "dog_0452",
+            "name": "Necrotizing Meningoencephalitis (Pug Dog Encephalitis)",
+            "name_ja": "壊死性髄膜脳炎（パグ脳炎）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "poison",
+        "size": 7,
+        "members": [
+          {
+            "id": "dog_0210",
+            "name": "Xylitol Poisoning",
+            "name_ja": "キシリトール中毒"
+          },
+          {
+            "id": "dog_0213",
+            "name": "Rodenticide Poisoning",
+            "name_ja": "殺鼠剤中毒"
+          },
+          {
+            "id": "dog_0215",
+            "name": "Ethylene Glycol Poisoning (Antifreeze)",
+            "name_ja": "エチレングリコール中毒（不凍液）"
+          },
+          {
+            "id": "dog_0217",
+            "name": "Lead Poisoning",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "dog_0336",
+            "name": "Snail Bait (Metaldehyde) Poisoning",
+            "name_ja": "ナメクジ駆除剤（メタアルデヒド）中毒"
+          },
+          {
+            "id": "dog_0480",
+            "name": "Salmon Poisoning Disease",
+            "name_ja": "サーモン中毒（サケ中毒症）"
+          },
+          {
+            "id": "dog_0541",
+            "name": "Strychnine Poisoning",
+            "name_ja": "ストリキニーネ中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "body",
+        "size": 6,
+        "members": [
+          {
+            "id": "dog_0052",
+            "name": "Foreign Body Obstruction",
+            "name_ja": "消化管異物閉塞"
+          },
+          {
+            "id": "dog_0223",
+            "name": "Foreign Body in Ear",
+            "name_ja": "耳内異物（草の実等）"
+          },
+          {
+            "id": "dog_0224",
+            "name": "Gastric Foreign Body",
+            "name_ja": "胃内異物"
+          },
+          {
+            "id": "dog_0342",
+            "name": "Corn Cob Foreign Body",
+            "name_ja": "とうもろこし芯異物"
+          },
+          {
+            "id": "dog_0372",
+            "name": "Tracheal Foreign Body",
+            "name_ja": "気管異物"
+          },
+          {
+            "id": "dog_0471",
+            "name": "Esophageal Foreign Body",
+            "name_ja": "食道異物"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bronch",
+        "size": 6,
+        "members": [
+          {
+            "id": "dog_0368",
+            "name": "Eosinophilic Bronchopneumopathy",
+            "name_ja": "好酸球性気管支肺症"
+          },
+          {
+            "id": "dog_0431",
+            "name": "Chronic Bronchitis",
+            "name_ja": "慢性気管支炎"
+          },
+          {
+            "id": "dog_0432",
+            "name": "Bronchiectasis",
+            "name_ja": "気管支拡張症"
+          },
+          {
+            "id": "dog_0501",
+            "name": "Bronchoesophageal Fistula",
+            "name_ja": "気管支食道瘻"
+          },
+          {
+            "id": "dog_0512",
+            "name": "Bronchogenic Carcinoma",
+            "name_ja": "気管支原性癌"
+          },
+          {
+            "id": "dog_0590",
+            "name": "Canine Bronchoesophageal Fistula (Congenital)",
+            "name_ja": "犬先天性気管支食道瘻"
+          }
+        ]
+      },
+      {
+        "shared_stem": "diabet",
+        "size": 6,
+        "members": [
+          {
+            "id": "dog_0010",
+            "name": "Diabetes Mellitus",
+            "name_ja": "糖尿病"
+          },
+          {
+            "id": "dog_0191",
+            "name": "Diabetes Insipidus",
+            "name_ja": "尿崩症"
+          },
+          {
+            "id": "dog_0294",
+            "name": "Diabetic Ketoacidosis (DKA)",
+            "name_ja": "糖尿病性ケトアシドーシス"
+          },
+          {
+            "id": "dog_0416",
+            "name": "Central Diabetes Insipidus",
+            "name_ja": "中枢性尿崩症"
+          },
+          {
+            "id": "dog_0417",
+            "name": "Nephrogenic Diabetes Insipidus",
+            "name_ja": "腎性尿崩症"
+          },
+          {
+            "id": "dog_0418",
+            "name": "Central (Cranial) Diabetes Insipidus",
+            "name_ja": "中枢性（頭蓋性）尿崩症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "foreig",
+        "size": 6,
+        "members": [
+          {
+            "id": "dog_0052",
+            "name": "Foreign Body Obstruction",
+            "name_ja": "消化管異物閉塞"
+          },
+          {
+            "id": "dog_0223",
+            "name": "Foreign Body in Ear",
+            "name_ja": "耳内異物（草の実等）"
+          },
+          {
+            "id": "dog_0224",
+            "name": "Gastric Foreign Body",
+            "name_ja": "胃内異物"
+          },
+          {
+            "id": "dog_0342",
+            "name": "Corn Cob Foreign Body",
+            "name_ja": "とうもろこし芯異物"
+          },
+          {
+            "id": "dog_0372",
+            "name": "Tracheal Foreign Body",
+            "name_ja": "気管異物"
+          },
+          {
+            "id": "dog_0471",
+            "name": "Esophageal Foreign Body",
+            "name_ja": "食道異物"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemang",
+        "size": 6,
+        "members": [
+          {
+            "id": "dog_0103",
+            "name": "Hemangiosarcoma",
+            "name_ja": "血管肉腫（HSA）"
+          },
+          {
+            "id": "dog_0325",
+            "name": "Splenic Hemangiosarcoma",
+            "name_ja": "脾臓血管肉腫"
+          },
+          {
+            "id": "dog_0326",
+            "name": "Cardiac Hemangiosarcoma",
+            "name_ja": "心臓血管肉腫"
+          },
+          {
+            "id": "dog_0459",
+            "name": "Hemangiosarcoma (Splenic)",
+            "name_ja": "血管肉腫（脾臓型）"
+          },
+          {
+            "id": "dog_0460",
+            "name": "Hemangiosarcoma (Cardiac)",
+            "name_ja": "血管肉腫（心臓型）"
+          },
+          {
+            "id": "dog_0585",
+            "name": "Canine Hemangiopericytoma",
+            "name_ja": "犬血管周皮腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hyperp",
+        "size": 6,
+        "members": [
+          {
+            "id": "dog_0087",
+            "name": "Benign Prostatic Hyperplasia (BPH)",
+            "name_ja": "良性前立腺肥大症"
+          },
+          {
+            "id": "dog_0117",
+            "name": "Hyperparathyroidism",
+            "name_ja": "副甲状腺機能亢進症"
+          },
+          {
+            "id": "dog_0255",
+            "name": "Persistent Hyperplastic Primary Vitreous (PHPV / PHTVL)",
+            "name_ja": "原始硝子体過形成遺残（PHPV/PHTVL）"
+          },
+          {
+            "id": "dog_0461",
+            "name": "Primary Hyperparathyroidism",
+            "name_ja": "原発性副甲状腺機能亢進症"
+          },
+          {
+            "id": "dog_0475",
+            "name": "Benign Prostatic Hyperplasia",
+            "name_ja": "前立腺肥大症"
+          },
+          {
+            "id": "dog_0587",
+            "name": "Canine Splenic Nodular Hyperplasia",
+            "name_ja": "犬脾臓結節性過形成"
+          }
+        ]
+      },
+      {
+        "shared_stem": "idiopa",
+        "size": 6,
+        "members": [
+          {
+            "id": "dog_0439",
+            "name": "Idiopathic Head Tremor Syndrome",
+            "name_ja": "特発性頭部振戦症候群"
+          },
+          {
+            "id": "dog_0440",
+            "name": "Idiopathic Chylothorax",
+            "name_ja": "特発性乳び胸"
+          },
+          {
+            "id": "dog_0495",
+            "name": "Idiopathic Epilepsy",
+            "name_ja": "特発性てんかん"
+          },
+          {
+            "id": "dog_0581",
+            "name": "Idiopathic Immune-Mediated Myositis",
+            "name_ja": "特発性免疫介在性筋炎"
+          },
+          {
+            "id": "dog_0584",
+            "name": "Canine Idiopathic Polyradiculoneuritis (Acute)",
+            "name_ja": "犬急性特発性多発性神経根炎"
+          },
+          {
+            "id": "dog_0618",
+            "name": "Idiopathic Vestibular Disease (Old Dog Vestibular)",
+            "name_ja": "特発性前庭疾患（老犬前庭症候群）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stenos",
+        "size": 6,
+        "members": [
+          {
+            "id": "dog_0058",
+            "name": "Aortic Stenosis",
+            "name_ja": "大動脈弁狭窄症"
+          },
+          {
+            "id": "dog_0059",
+            "name": "Pulmonic Stenosis",
+            "name_ja": "肺動脈弁狭窄症"
+          },
+          {
+            "id": "dog_0286",
+            "name": "Subaortic Stenosis (SAS)",
+            "name_ja": "大動脈弁下狭窄症"
+          },
+          {
+            "id": "dog_0357",
+            "name": "Pyloric Stenosis",
+            "name_ja": "幽門狭窄症"
+          },
+          {
+            "id": "dog_0450",
+            "name": "Lumbosacral Stenosis",
+            "name_ja": "腰仙部狭窄症"
+          },
+          {
+            "id": "dog_0562",
+            "name": "Newfoundland Subvalvular Aortic Stenosis",
+            "name_ja": "ニューファンドランド大動脈弁下狭窄症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "thromb",
+        "size": 6,
+        "members": [
+          {
+            "id": "dog_0111",
+            "name": "Thrombocytopenia",
+            "name_ja": "血小板減少症"
+          },
+          {
+            "id": "dog_0113",
+            "name": "Autoimmune Thrombocytopenia (ITP)",
+            "name_ja": "免疫介在性血小板減少症（ITP）"
+          },
+          {
+            "id": "dog_0367",
+            "name": "Pulmonary Thromboembolism (PTE)",
+            "name_ja": "肺血栓塞栓症 (PTE)"
+          },
+          {
+            "id": "dog_0458",
+            "name": "Pulmonary Thromboembolism",
+            "name_ja": "肺血栓塞栓症"
+          },
+          {
+            "id": "dog_0490",
+            "name": "Immune-Mediated Thrombocytopenia (ITP)",
+            "name_ja": "免疫介在性血小板減少症（ITP）"
+          },
+          {
+            "id": "dog_0497",
+            "name": "Aortic Thromboembolism",
+            "name_ja": "大動脈血栓塞栓症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "valve",
+        "size": 6,
+        "members": [
+          {
+            "id": "dog_0098",
+            "name": "Mitral Valve Disease (MMVD)",
+            "name_ja": "僧帽弁閉鎖不全症（MMVD）"
+          },
+          {
+            "id": "dog_0285",
+            "name": "Tricuspid Valve Dysplasia",
+            "name_ja": "三尖弁形成不全"
+          },
+          {
+            "id": "dog_0351",
+            "name": "Pulmonic Valve Dysplasia",
+            "name_ja": "肺動脈弁形成不全"
+          },
+          {
+            "id": "dog_0352",
+            "name": "Mitral Valve Dysplasia",
+            "name_ja": "僧帽弁形成不全"
+          },
+          {
+            "id": "dog_0433",
+            "name": "Myxomatous Mitral Valve Degeneration (Early Stage)",
+            "name_ja": "粘液腫様僧帽弁変性症（初期）"
+          },
+          {
+            "id": "dog_0547",
+            "name": "Cavalier King Charles Spaniel Mitral Valve Disease (Early-Onset)",
+            "name_ja": "キャバリア僧帽弁疾患（早期発症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cell",
+        "size": 5,
+        "members": [
+          {
+            "id": "dog_0106",
+            "name": "Mast Cell Tumor",
+            "name_ja": "肥満細胞腫（MCT）"
+          },
+          {
+            "id": "dog_0108",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮がん（SCC）"
+          },
+          {
+            "id": "dog_0110",
+            "name": "Transitional Cell Carcinoma",
+            "name_ja": "移行上皮がん（膀胱がん）"
+          },
+          {
+            "id": "dog_0423",
+            "name": "Digital Squamous Cell Carcinoma",
+            "name_ja": "指趾部扁平上皮癌"
+          },
+          {
+            "id": "dog_0513",
+            "name": "Bladder Transitional Cell Carcinoma",
+            "name_ja": "膀胱移行上皮癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "degene",
+        "size": 5,
+        "members": [
+          {
+            "id": "dog_0099",
+            "name": "Degenerative Myelopathy (DM)",
+            "name_ja": "変性性脊髄症（DM）"
+          },
+          {
+            "id": "dog_0155",
+            "name": "Sudden Acquired Retinal Degeneration (SARDS)",
+            "name_ja": "突発性後天性網膜変性症（SARDS）"
+          },
+          {
+            "id": "dog_0433",
+            "name": "Myxomatous Mitral Valve Degeneration (Early Stage)",
+            "name_ja": "粘液腫様僧帽弁変性症（初期）"
+          },
+          {
+            "id": "dog_0454",
+            "name": "Degenerative Myelopathy",
+            "name_ja": "変性性脊髄症"
+          },
+          {
+            "id": "dog_0558",
+            "name": "Chinese Crested Dog Multisystem Degeneration",
+            "name_ja": "チャイニーズ・クレステッド多臓器変性症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fistul",
+        "size": 5,
+        "members": [
+          {
+            "id": "dog_0407",
+            "name": "Oronasal Fistula",
+            "name_ja": "口腔鼻腔瘻"
+          },
+          {
+            "id": "dog_0494",
+            "name": "Perianal Fistula",
+            "name_ja": "肛門周囲瘻"
+          },
+          {
+            "id": "dog_0501",
+            "name": "Bronchoesophageal Fistula",
+            "name_ja": "気管支食道瘻"
+          },
+          {
+            "id": "dog_0568",
+            "name": "German Shepherd Dog Perianal Fistula (Breed-Specific)",
+            "name_ja": "ジャーマン・シェパード肛門周囲瘻（犬種特異性）"
+          },
+          {
+            "id": "dog_0590",
+            "name": "Canine Bronchoesophageal Fistula (Congenital)",
+            "name_ja": "犬先天性気管支食道瘻"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gland",
+        "size": 5,
+        "members": [
+          {
+            "id": "dog_0317",
+            "name": "Anal Gland Carcinoma",
+            "name_ja": "肛門腺癌"
+          },
+          {
+            "id": "dog_0323",
+            "name": "Perianal Gland Adenocarcinoma",
+            "name_ja": "肛門周囲腺癌"
+          },
+          {
+            "id": "dog_0404",
+            "name": "Adrenal Gland Tumor",
+            "name_ja": "副腎腫瘍"
+          },
+          {
+            "id": "dog_0427",
+            "name": "Apocrine Gland Adenocarcinoma",
+            "name_ja": "アポクリン腺癌"
+          },
+          {
+            "id": "dog_0476",
+            "name": "Nictitans Gland Prolapse (Cherry Eye)",
+            "name_ja": "瞬膜腺突出"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepato",
+        "size": 5,
+        "members": [
+          {
+            "id": "dog_0137",
+            "name": "Hepatozoonosis",
+            "name_ja": "ヘパトゾーン症"
+          },
+          {
+            "id": "dog_0231",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞がん"
+          },
+          {
+            "id": "dog_0438",
+            "name": "Hepatocutaneous Syndrome (SND)",
+            "name_ja": "肝皮症候群"
+          },
+          {
+            "id": "dog_0493",
+            "name": "Copper Storage Hepatopathy",
+            "name_ja": "銅蓄積性肝症"
+          },
+          {
+            "id": "dog_0514",
+            "name": "Hepatocellular Carcinoma (Massive)",
+            "name_ja": "肝細胞癌（巨大型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 5,
+        "members": [
+          {
+            "id": "dog_0029",
+            "name": "Intestinal Parasites",
+            "name_ja": "腸内寄生虫症"
+          },
+          {
+            "id": "dog_0190",
+            "name": "Intestinal Intussusception",
+            "name_ja": "腸重積"
+          },
+          {
+            "id": "dog_0356",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸腺癌"
+          },
+          {
+            "id": "dog_0362",
+            "name": "Small Intestinal Bacterial Overgrowth (SIBO)",
+            "name_ja": "小腸細菌過増殖症"
+          },
+          {
+            "id": "dog_0473",
+            "name": "Intestinal Lymphangiectasia",
+            "name_ja": "腸リンパ管拡張症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "luxati",
+        "size": 5,
+        "members": [
+          {
+            "id": "dog_0071",
+            "name": "Lens Luxation",
+            "name_ja": "水晶体脱臼"
+          },
+          {
+            "id": "dog_0097",
+            "name": "Patellar Luxation",
+            "name_ja": "膝蓋骨脱臼（パテラ）"
+          },
+          {
+            "id": "dog_0174",
+            "name": "Luxating Shoulder",
+            "name_ja": "肩関節脱臼"
+          },
+          {
+            "id": "dog_0306",
+            "name": "Anterior Lens Luxation",
+            "name_ja": "前方水晶体脱臼"
+          },
+          {
+            "id": "dog_0444",
+            "name": "Medial Patellar Luxation",
+            "name_ja": "膝蓋骨内方脱臼"
+          }
+        ]
+      },
+      {
+        "shared_stem": "respon",
+        "size": 5,
+        "members": [
+          {
+            "id": "dog_0179",
+            "name": "Zinc-Responsive Dermatosis",
+            "name_ja": "亜鉛反応性皮膚症"
+          },
+          {
+            "id": "dog_0193",
+            "name": "Growth Hormone-Responsive Dermatosis",
+            "name_ja": "成長ホルモン反応性皮膚症"
+          },
+          {
+            "id": "dog_0280",
+            "name": "Steroid-Responsive Meningitis-Arteritis (SRMA)",
+            "name_ja": "ステロイド反応性髄膜炎-動脈炎"
+          },
+          {
+            "id": "dog_0298",
+            "name": "Zinc-Responsive Dermatosis - Syndrome I",
+            "name_ja": "亜鉛反応性皮膚症候群I型"
+          },
+          {
+            "id": "dog_0363",
+            "name": "Antibiotic-Responsive Diarrhea",
+            "name_ja": "抗生物質反応性下痢"
+          }
+        ]
+      },
+      {
+        "shared_stem": "trache",
+        "size": 5,
+        "members": [
+          {
+            "id": "dog_0088",
+            "name": "Tracheal Collapse",
+            "name_ja": "気管虚脱"
+          },
+          {
+            "id": "dog_0372",
+            "name": "Tracheal Foreign Body",
+            "name_ja": "気管異物"
+          },
+          {
+            "id": "dog_0412",
+            "name": "Tracheal Perforation",
+            "name_ja": "気管穿孔"
+          },
+          {
+            "id": "dog_0502",
+            "name": "Tracheal Hypoplasia",
+            "name_ja": "気管低形成"
+          },
+          {
+            "id": "dog_0505",
+            "name": "Hypoplastic Trachea",
+            "name_ja": "低形成気管"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anemia",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0037",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血（IMHA）"
+          },
+          {
+            "id": "dog_0242",
+            "name": "Anemia of Chronic Disease",
+            "name_ja": "慢性疾患に伴う貧血"
+          },
+          {
+            "id": "dog_0491",
+            "name": "Immune-Mediated Hemolytic Anemia (IMHA)",
+            "name_ja": "免疫介在性溶血性貧血（IMHA）"
+          },
+          {
+            "id": "dog_0564",
+            "name": "Cocker Spaniel Immune-Mediated Hemolytic Anemia",
+            "name_ja": "コッカースパニエル免疫介在性溶血性貧血"
+          }
+        ]
+      },
+      {
+        "shared_stem": "aortic",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0058",
+            "name": "Aortic Stenosis",
+            "name_ja": "大動脈弁狭窄症"
+          },
+          {
+            "id": "dog_0257",
+            "name": "Persistent Right Aortic Arch (PRAA)",
+            "name_ja": "右大動脈弓遺残"
+          },
+          {
+            "id": "dog_0497",
+            "name": "Aortic Thromboembolism",
+            "name_ja": "大動脈血栓塞栓症"
+          },
+          {
+            "id": "dog_0562",
+            "name": "Newfoundland Subvalvular Aortic Stenosis",
+            "name_ja": "ニューファンドランド大動脈弁下狭窄症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bladde",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0012",
+            "name": "Bladder Stones",
+            "name_ja": "膀胱結石"
+          },
+          {
+            "id": "dog_0402",
+            "name": "Urinary Bladder Tumor (TCC)",
+            "name_ja": "膀胱腫瘍（移行上皮癌）"
+          },
+          {
+            "id": "dog_0513",
+            "name": "Bladder Transitional Cell Carcinoma",
+            "name_ja": "膀胱移行上皮癌"
+          },
+          {
+            "id": "dog_0569",
+            "name": "Scottish Terrier Bladder Cancer Predisposition",
+            "name_ja": "スコティッシュ・テリア膀胱癌素因"
+          }
+        ]
+      },
+      {
+        "shared_stem": "brucel",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0123",
+            "name": "Brucellosis",
+            "name_ja": "ブルセラ症"
+          },
+          {
+            "id": "dog_0434",
+            "name": "Canine Brucellosis (Reproductive)",
+            "name_ja": "犬ブルセラ症（生殖器型）"
+          },
+          {
+            "id": "dog_0477",
+            "name": "Canine Brucellosis",
+            "name_ja": "犬ブルセラ症"
+          },
+          {
+            "id": "dog_0510",
+            "name": "Brucella canis Infection",
+            "name_ja": "ブルセラ・カニス感染症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cardio",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0056",
+            "name": "Dilated Cardiomyopathy (DCM)",
+            "name_ja": "拡張型心筋症（DCM）"
+          },
+          {
+            "id": "dog_0549",
+            "name": "Boxer Arrhythmogenic Right Ventricular Cardiomyopathy",
+            "name_ja": "ボクサー不整脈原性右室心筋症"
+          },
+          {
+            "id": "dog_0552",
+            "name": "Doberman Dilated Cardiomyopathy (Occult)",
+            "name_ja": "ドーベルマン拡張型心筋症（潜伏期）"
+          },
+          {
+            "id": "dog_0563",
+            "name": "Irish Wolfhound Dilated Cardiomyopathy",
+            "name_ja": "アイリッシュ・ウルフハウンド拡張型心筋症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cyst",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0182",
+            "name": "Interdigital Cyst (Furuncle)",
+            "name_ja": "趾間嚢胞（フルンクル）"
+          },
+          {
+            "id": "dog_0314",
+            "name": "Dentigerous Cyst",
+            "name_ja": "含歯性嚢胞"
+          },
+          {
+            "id": "dog_0430",
+            "name": "Bone Cyst (Aneurysmal)",
+            "name_ja": "骨嚢腫（動脈瘤様）"
+          },
+          {
+            "id": "dog_0591",
+            "name": "Canine Spinal Arachnoid Cyst",
+            "name_ja": "犬脊髄くも膜嚢胞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dissec",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0075",
+            "name": "Osteochondritis Dissecans (OCD)",
+            "name_ja": "離断性骨軟骨症（OCD）"
+          },
+          {
+            "id": "dog_0526",
+            "name": "Tarsal Osteochondritis Dissecans (OCD)",
+            "name_ja": "足根関節離断性骨軟骨炎"
+          },
+          {
+            "id": "dog_0527",
+            "name": "Shoulder Osteochondritis Dissecans (OCD)",
+            "name_ja": "肩関節離断性骨軟骨炎"
+          },
+          {
+            "id": "dog_0620",
+            "name": "Osteochondritis Dissecans - Shoulder (OCD)",
+            "name_ja": "肩関節離断性骨軟骨炎（OCD）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fibros",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0160",
+            "name": "Pulmonary Fibrosis",
+            "name_ja": "肺線維症"
+          },
+          {
+            "id": "dog_0226",
+            "name": "Fibrosarcoma",
+            "name_ja": "線維肉腫"
+          },
+          {
+            "id": "dog_0554",
+            "name": "West Highland White Terrier Pulmonary Fibrosis",
+            "name_ja": "ウェストハイランドホワイトテリア肺線維症"
+          },
+          {
+            "id": "dog_0586",
+            "name": "Canine Retroperitoneal Fibrosis",
+            "name_ja": "犬後腹膜線維症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0247",
+            "name": "Tooth Fracture",
+            "name_ja": "歯の破折"
+          },
+          {
+            "id": "dog_0311",
+            "name": "Mandibular Fracture",
+            "name_ja": "下顎骨折"
+          },
+          {
+            "id": "dog_0447",
+            "name": "Physeal Fracture (Salter-Harris)",
+            "name_ja": "骨端線骨折（サルター・ハリス骨折）"
+          },
+          {
+            "id": "dog_0530",
+            "name": "Metacarpal/Metatarsal Fracture",
+            "name_ja": "中手骨/中足骨骨折"
+          }
+        ]
+      },
+      {
+        "shared_stem": "granul",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0083",
+            "name": "Granulomatous Meningoencephalitis (GME)",
+            "name_ja": "肉芽腫性髄膜脳炎（GME）"
+          },
+          {
+            "id": "dog_0441",
+            "name": "Canine Leproid Granuloma",
+            "name_ja": "犬ハンセン病様肉芽腫"
+          },
+          {
+            "id": "dog_0451",
+            "name": "Granulomatous Meningoencephalomyelitis (GME)",
+            "name_ja": "肉芽腫性髄膜脳脊髄炎"
+          },
+          {
+            "id": "dog_0507",
+            "name": "Canine Granulocytic Anaplasmosis",
+            "name_ja": "犬顆粒球性アナプラズマ症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemoly",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0037",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血（IMHA）"
+          },
+          {
+            "id": "dog_0266",
+            "name": "Hemolytic Uremic Syndrome",
+            "name_ja": "溶血性尿毒症症候群"
+          },
+          {
+            "id": "dog_0491",
+            "name": "Immune-Mediated Hemolytic Anemia (IMHA)",
+            "name_ja": "免疫介在性溶血性貧血（IMHA）"
+          },
+          {
+            "id": "dog_0564",
+            "name": "Cocker Spaniel Immune-Mediated Hemolytic Anemia",
+            "name_ja": "コッカースパニエル免疫介在性溶血性貧血"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hernia",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0394",
+            "name": "Diaphragmatic Hernia",
+            "name_ja": "横隔膜ヘルニア"
+          },
+          {
+            "id": "dog_0395",
+            "name": "Perineal Hernia",
+            "name_ja": "会陰ヘルニア"
+          },
+          {
+            "id": "dog_0396",
+            "name": "Inguinal Hernia",
+            "name_ja": "鼠径ヘルニア"
+          },
+          {
+            "id": "dog_0397",
+            "name": "Umbilical Hernia",
+            "name_ja": "臍ヘルニア"
+          }
+        ]
+      },
+      {
+        "shared_stem": "histio",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0225",
+            "name": "Histiocytic Sarcoma",
+            "name_ja": "組織球肉腫"
+          },
+          {
+            "id": "dog_0264",
+            "name": "Cutaneous Histiocytoma",
+            "name_ja": "皮膚組織球腫"
+          },
+          {
+            "id": "dog_0560",
+            "name": "Bernese Mountain Dog Histiocytic Sarcoma Complex",
+            "name_ja": "バーニーズマウンテンドッグ組織球性肉腫複合"
+          },
+          {
+            "id": "dog_0570",
+            "name": "Flat-Coated Retriever Histiocytic Sarcoma",
+            "name_ja": "フラットコーテッド・レトリーバー組織球肉腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypopl",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0163",
+            "name": "Cerebellar Hypoplasia",
+            "name_ja": "小脳低形成"
+          },
+          {
+            "id": "dog_0313",
+            "name": "Enamel Hypoplasia",
+            "name_ja": "エナメル質形成不全"
+          },
+          {
+            "id": "dog_0502",
+            "name": "Tracheal Hypoplasia",
+            "name_ja": "気管低形成"
+          },
+          {
+            "id": "dog_0505",
+            "name": "Hypoplastic Trachea",
+            "name_ja": "低形成気管"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypoth",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0005",
+            "name": "Hypothyroidism",
+            "name_ja": "甲状腺機能低下症"
+          },
+          {
+            "id": "dog_0006",
+            "name": "Congenital Hypothyroidism (Cretinism)",
+            "name_ja": "先天性甲状腺機能低下症（クレチン症）"
+          },
+          {
+            "id": "dog_0206",
+            "name": "Neonatal Hypothermia (Puppy)",
+            "name_ja": "新生子犬低体温症"
+          },
+          {
+            "id": "dog_0219",
+            "name": "Hypothermia",
+            "name_ja": "低体温症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "insipi",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0191",
+            "name": "Diabetes Insipidus",
+            "name_ja": "尿崩症"
+          },
+          {
+            "id": "dog_0416",
+            "name": "Central Diabetes Insipidus",
+            "name_ja": "中枢性尿崩症"
+          },
+          {
+            "id": "dog_0417",
+            "name": "Nephrogenic Diabetes Insipidus",
+            "name_ja": "腎性尿崩症"
+          },
+          {
+            "id": "dog_0418",
+            "name": "Central (Cranial) Diabetes Insipidus",
+            "name_ja": "中枢性（頭蓋性）尿崩症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lympho",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0104",
+            "name": "Lymphoma",
+            "name_ja": "リンパ腫"
+          },
+          {
+            "id": "dog_0316",
+            "name": "Hepatic Lymphoma",
+            "name_ja": "肝臓リンパ腫"
+          },
+          {
+            "id": "dog_0324",
+            "name": "Nasal Lymphoma",
+            "name_ja": "鼻腔リンパ腫"
+          },
+          {
+            "id": "dog_0422",
+            "name": "Cutaneous Lymphoma (Epitheliotropic)",
+            "name_ja": "皮膚リンパ腫（上皮向性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mitral",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0098",
+            "name": "Mitral Valve Disease (MMVD)",
+            "name_ja": "僧帽弁閉鎖不全症（MMVD）"
+          },
+          {
+            "id": "dog_0352",
+            "name": "Mitral Valve Dysplasia",
+            "name_ja": "僧帽弁形成不全"
+          },
+          {
+            "id": "dog_0433",
+            "name": "Myxomatous Mitral Valve Degeneration (Early Stage)",
+            "name_ja": "粘液腫様僧帽弁変性症（初期）"
+          },
+          {
+            "id": "dog_0547",
+            "name": "Cavalier King Charles Spaniel Mitral Valve Disease (Early-Onset)",
+            "name_ja": "キャバリア僧帽弁疾患（早期発症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "myosit",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0171",
+            "name": "Masticatory Muscle Myositis",
+            "name_ja": "咀嚼筋炎"
+          },
+          {
+            "id": "dog_0413",
+            "name": "Masticatory Myositis (Acute)",
+            "name_ja": "急性咀嚼筋炎"
+          },
+          {
+            "id": "dog_0489",
+            "name": "Extraocular Myositis",
+            "name_ja": "外眼筋炎"
+          },
+          {
+            "id": "dog_0581",
+            "name": "Idiopathic Immune-Mediated Myositis",
+            "name_ja": "特発性免疫介在性筋炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nasal",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0161",
+            "name": "Nasal Tumor",
+            "name_ja": "鼻腔腫瘍"
+          },
+          {
+            "id": "dog_0233",
+            "name": "Nasal Adenocarcinoma",
+            "name_ja": "鼻腔腺がん"
+          },
+          {
+            "id": "dog_0302",
+            "name": "Nasal Hyperkeratosis",
+            "name_ja": "鼻鏡角化症"
+          },
+          {
+            "id": "dog_0324",
+            "name": "Nasal Lymphoma",
+            "name_ja": "鼻腔リンパ腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "necrot",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0277",
+            "name": "Necrotizing Meningoencephalitis (NME)",
+            "name_ja": "壊死性髄膜脳炎（NME）"
+          },
+          {
+            "id": "dog_0278",
+            "name": "Necrotizing Leukoencephalitis (NLE)",
+            "name_ja": "壊死性白質脳炎（NLE）"
+          },
+          {
+            "id": "dog_0452",
+            "name": "Necrotizing Meningoencephalitis (Pug Dog Encephalitis)",
+            "name_ja": "壊死性髄膜脳炎（パグ脳炎）"
+          },
+          {
+            "id": "dog_0588",
+            "name": "Canine Necrotizing Sialometaplasia",
+            "name_ja": "犬壊死性唾液腺化生"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neonat",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0202",
+            "name": "Neonatal Puppy Mortality / Perinatal Death",
+            "name_ja": "新生子犬死亡・周産期死亡"
+          },
+          {
+            "id": "dog_0205",
+            "name": "Neonatal Hypoglycemia (Puppy)",
+            "name_ja": "新生子犬低血糖症"
+          },
+          {
+            "id": "dog_0206",
+            "name": "Neonatal Hypothermia (Puppy)",
+            "name_ja": "新生子犬低体温症"
+          },
+          {
+            "id": "dog_0207",
+            "name": "Omphalophlebitis / Neonatal Septicemia",
+            "name_ja": "臍帯炎・新生子敗血症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nephro",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0375",
+            "name": "Nephrolithiasis (Kidney Stones)",
+            "name_ja": "腎結石症"
+          },
+          {
+            "id": "dog_0417",
+            "name": "Nephrogenic Diabetes Insipidus",
+            "name_ja": "腎性尿崩症"
+          },
+          {
+            "id": "dog_0436",
+            "name": "Canine Familial Nephropathy",
+            "name_ja": "犬家族性腎症"
+          },
+          {
+            "id": "dog_0498",
+            "name": "Protein-Losing Nephropathy",
+            "name_ja": "蛋白漏出性腎症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "osteoc",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0075",
+            "name": "Osteochondritis Dissecans (OCD)",
+            "name_ja": "離断性骨軟骨症（OCD）"
+          },
+          {
+            "id": "dog_0526",
+            "name": "Tarsal Osteochondritis Dissecans (OCD)",
+            "name_ja": "足根関節離断性骨軟骨炎"
+          },
+          {
+            "id": "dog_0527",
+            "name": "Shoulder Osteochondritis Dissecans (OCD)",
+            "name_ja": "肩関節離断性骨軟骨炎"
+          },
+          {
+            "id": "dog_0620",
+            "name": "Osteochondritis Dissecans - Shoulder (OCD)",
+            "name_ja": "肩関節離断性骨軟骨炎（OCD）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pancre",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0004",
+            "name": "Pancreatitis",
+            "name_ja": "膵炎"
+          },
+          {
+            "id": "dog_0051",
+            "name": "Exocrine Pancreatic Insufficiency (EPI)",
+            "name_ja": "膵外分泌不全症（EPI）"
+          },
+          {
+            "id": "dog_0403",
+            "name": "Pancreatic Adenocarcinoma",
+            "name_ja": "膵腺癌"
+          },
+          {
+            "id": "dog_0548",
+            "name": "German Shepherd Dog Exocrine Pancreatic Insufficiency",
+            "name_ja": "ジャーマン・シェパード膵外分泌不全"
+          }
+        ]
+      },
+      {
+        "shared_stem": "paraly",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0089",
+            "name": "Laryngeal Paralysis",
+            "name_ja": "喉頭麻痺"
+          },
+          {
+            "id": "dog_0164",
+            "name": "Tick Paralysis",
+            "name_ja": "マダニ麻痺"
+          },
+          {
+            "id": "dog_0533",
+            "name": "Laryngeal Paralysis-Polyneuropathy Complex (GOLPP)",
+            "name_ja": "喉頭麻痺-多発神経障害複合（GOLPP）"
+          },
+          {
+            "id": "dog_0535",
+            "name": "Facial Nerve Paralysis",
+            "name_ja": "顔面神経麻痺"
+          }
+        ]
+      },
+      {
+        "shared_stem": "perian",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0230",
+            "name": "Perianal Adenoma",
+            "name_ja": "肛門周囲腺腫"
+          },
+          {
+            "id": "dog_0323",
+            "name": "Perianal Gland Adenocarcinoma",
+            "name_ja": "肛門周囲腺癌"
+          },
+          {
+            "id": "dog_0494",
+            "name": "Perianal Fistula",
+            "name_ja": "肛門周囲瘻"
+          },
+          {
+            "id": "dog_0568",
+            "name": "German Shepherd Dog Perianal Fistula (Breed-Specific)",
+            "name_ja": "ジャーマン・シェパード肛門周囲瘻（犬種特異性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "portos",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0055",
+            "name": "Portosystemic Shunt (Liver Shunt)",
+            "name_ja": "門脈体循環シャント（肝シャント）"
+          },
+          {
+            "id": "dog_0252",
+            "name": "Portosystemic Shunt (Congenital)",
+            "name_ja": "先天性門脈体循環シャント"
+          },
+          {
+            "id": "dog_0349",
+            "name": "Portosystemic Shunt (Acquired)",
+            "name_ja": "後天性門脈体循環シャント"
+          },
+          {
+            "id": "dog_0484",
+            "name": "Portosystemic Shunt (PSS)",
+            "name_ja": "門脈体循環シャント"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prosta",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0033",
+            "name": "Prostate Disease",
+            "name_ja": "前立腺疾患"
+          },
+          {
+            "id": "dog_0087",
+            "name": "Benign Prostatic Hyperplasia (BPH)",
+            "name_ja": "良性前立腺肥大症"
+          },
+          {
+            "id": "dog_0474",
+            "name": "Prostatic Abscess",
+            "name_ja": "前立腺膿瘍"
+          },
+          {
+            "id": "dog_0475",
+            "name": "Benign Prostatic Hyperplasia",
+            "name_ja": "前立腺肥大症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0373",
+            "name": "Renal Dysplasia",
+            "name_ja": "腎形成不全"
+          },
+          {
+            "id": "dog_0374",
+            "name": "Renal Amyloidosis",
+            "name_ja": "腎アミロイドーシス"
+          },
+          {
+            "id": "dog_0517",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌"
+          },
+          {
+            "id": "dog_0577",
+            "name": "Shih Tzu Renal Dysplasia",
+            "name_ja": "シー・ズー腎異形成"
+          }
+        ]
+      },
+      {
+        "shared_stem": "retina",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0072",
+            "name": "Retinal Detachment",
+            "name_ja": "網膜剥離"
+          },
+          {
+            "id": "dog_0095",
+            "name": "Progressive Retinal Atrophy (PRA)",
+            "name_ja": "進行性網膜萎縮症（PRA）"
+          },
+          {
+            "id": "dog_0149",
+            "name": "Retinal Dysplasia",
+            "name_ja": "網膜形成異常"
+          },
+          {
+            "id": "dog_0155",
+            "name": "Sudden Acquired Retinal Degeneration (SARDS)",
+            "name_ja": "突発性後天性網膜変性症（SARDS）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "rodent",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0213",
+            "name": "Rodenticide Poisoning",
+            "name_ja": "殺鼠剤中毒"
+          },
+          {
+            "id": "dog_0468",
+            "name": "Anticoagulant Rodenticide Toxicosis",
+            "name_ja": "抗凝固性殺鼠剤中毒"
+          },
+          {
+            "id": "dog_0605",
+            "name": "Bromethalin Rodenticide Toxicosis",
+            "name_ja": "ブロメタリン中毒（殺鼠剤）"
+          },
+          {
+            "id": "dog_0606",
+            "name": "Cholecalciferol Rodenticide Toxicosis",
+            "name_ja": "コレカルシフェロール中毒（ビタミンD3殺鼠剤）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "sarcom",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0225",
+            "name": "Histiocytic Sarcoma",
+            "name_ja": "組織球肉腫"
+          },
+          {
+            "id": "dog_0234",
+            "name": "Soft Tissue Sarcoma",
+            "name_ja": "軟部組織肉腫"
+          },
+          {
+            "id": "dog_0560",
+            "name": "Bernese Mountain Dog Histiocytic Sarcoma Complex",
+            "name_ja": "バーニーズマウンテンドッグ組織球性肉腫複合"
+          },
+          {
+            "id": "dog_0570",
+            "name": "Flat-Coated Retriever Histiocytic Sarcoma",
+            "name_ja": "フラットコーテッド・レトリーバー組織球肉腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "shunt",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0055",
+            "name": "Portosystemic Shunt (Liver Shunt)",
+            "name_ja": "門脈体循環シャント（肝シャント）"
+          },
+          {
+            "id": "dog_0252",
+            "name": "Portosystemic Shunt (Congenital)",
+            "name_ja": "先天性門脈体循環シャント"
+          },
+          {
+            "id": "dog_0349",
+            "name": "Portosystemic Shunt (Acquired)",
+            "name_ja": "後天性門脈体循環シャント"
+          },
+          {
+            "id": "dog_0484",
+            "name": "Portosystemic Shunt (PSS)",
+            "name_ja": "門脈体循環シャント"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ventri",
+        "size": 4,
+        "members": [
+          {
+            "id": "dog_0157",
+            "name": "Ventricular Septal Defect (VSD)",
+            "name_ja": "心室中隔欠損症（VSD）"
+          },
+          {
+            "id": "dog_0289",
+            "name": "Ventricular Tachycardia",
+            "name_ja": "心室頻拍"
+          },
+          {
+            "id": "dog_0496",
+            "name": "Ventricular Premature Complexes",
+            "name_ja": "心室性期外収縮"
+          },
+          {
+            "id": "dog_0549",
+            "name": "Boxer Arrhythmogenic Right Ventricular Cardiomyopathy",
+            "name_ja": "ボクサー不整脈原性右室心筋症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0115",
+            "name": "Tooth Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "dog_0392",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍"
+          },
+          {
+            "id": "dog_0474",
+            "name": "Prostatic Abscess",
+            "name_ja": "前立腺膿瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "allerg",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0019",
+            "name": "Allergic Dermatitis",
+            "name_ja": "犬アトピー性皮膚炎（CAD）"
+          },
+          {
+            "id": "dog_0143",
+            "name": "Flea Allergy Dermatitis",
+            "name_ja": "ノミアレルギー性皮膚炎"
+          },
+          {
+            "id": "dog_0371",
+            "name": "Allergic Rhinitis",
+            "name_ja": "アレルギー性鼻炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "alopec",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0064",
+            "name": "Alopecia X",
+            "name_ja": "脱毛症X"
+          },
+          {
+            "id": "dog_0464",
+            "name": "Color Dilution Alopecia",
+            "name_ja": "希釈色脱毛症"
+          },
+          {
+            "id": "dog_0622",
+            "name": "Seasonal Flank Alopecia (Cyclic Follicular Dysplasia)",
+            "name_ja": "季節性側腹部脱毛症（周期性毛包異形成）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anal",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0189",
+            "name": "Anal Sac Disease",
+            "name_ja": "肛門嚢疾患"
+          },
+          {
+            "id": "dog_0227",
+            "name": "Anal Sac Adenocarcinoma",
+            "name_ja": "肛門嚢腺癌"
+          },
+          {
+            "id": "dog_0317",
+            "name": "Anal Gland Carcinoma",
+            "name_ja": "肛門腺癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "asperg",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0132",
+            "name": "Aspergillosis",
+            "name_ja": "アスペルギルス症"
+          },
+          {
+            "id": "dog_0399",
+            "name": "Sinonasal Aspergillosis",
+            "name_ja": "鼻腔アスペルギルス症"
+          },
+          {
+            "id": "dog_0500",
+            "name": "Aspergillosis (Nasal)",
+            "name_ja": "鼻アスペルギルス症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "atroph",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0095",
+            "name": "Progressive Retinal Atrophy (PRA)",
+            "name_ja": "進行性網膜萎縮症（PRA）"
+          },
+          {
+            "id": "dog_0281",
+            "name": "Canine Spinal Muscular Atrophy",
+            "name_ja": "犬脊髄性筋萎縮症"
+          },
+          {
+            "id": "dog_0305",
+            "name": "Iris Atrophy",
+            "name_ja": "虹彩萎縮"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ciliar",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0350",
+            "name": "Ciliary Dyskinesia (Primary)",
+            "name_ja": "原発性線毛機能不全症"
+          },
+          {
+            "id": "dog_0482",
+            "name": "Primary Ciliary Dyskinesia",
+            "name_ja": "原発性線毛機能不全症"
+          },
+          {
+            "id": "dog_0594",
+            "name": "Canine Primary Ciliary Dyskinesia (Breed-Specific)",
+            "name_ja": "犬原発性繊毛運動不全症（犬種特異性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "collap",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0088",
+            "name": "Tracheal Collapse",
+            "name_ja": "気管虚脱"
+          },
+          {
+            "id": "dog_0101",
+            "name": "Exercise-Induced Collapse (EIC)",
+            "name_ja": "運動誘発性虚脱（EIC）"
+          },
+          {
+            "id": "dog_0566",
+            "name": "Labrador Retriever Exercise-Induced Collapse",
+            "name_ja": "ラブラドール・レトリーバー運動誘発性虚脱"
+          }
+        ]
+      },
+      {
+        "shared_stem": "comple",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0496",
+            "name": "Ventricular Premature Complexes",
+            "name_ja": "心室性期外収縮"
+          },
+          {
+            "id": "dog_0533",
+            "name": "Laryngeal Paralysis-Polyneuropathy Complex (GOLPP)",
+            "name_ja": "喉頭麻痺-多発神経障害複合（GOLPP）"
+          },
+          {
+            "id": "dog_0560",
+            "name": "Bernese Mountain Dog Histiocytic Sarcoma Complex",
+            "name_ja": "バーニーズマウンテンドッグ組織球性肉腫複合"
+          }
+        ]
+      },
+      {
+        "shared_stem": "compul",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0238",
+            "name": "Compulsive Disorder (Canine OCD)",
+            "name_ja": "強迫性障害"
+          },
+          {
+            "id": "dog_0483",
+            "name": "Compulsive Disorder",
+            "name_ja": "強迫性障害"
+          },
+          {
+            "id": "dog_0578",
+            "name": "Canine Compulsive Flank Sucking (Doberman)",
+            "name_ja": "ドーベルマン強迫性わき腹吸引"
+          }
+        ]
+      },
+      {
+        "shared_stem": "copper",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0100",
+            "name": "Copper Storage Disease",
+            "name_ja": "銅蓄積症"
+          },
+          {
+            "id": "dog_0493",
+            "name": "Copper Storage Hepatopathy",
+            "name_ja": "銅蓄積性肝症"
+          },
+          {
+            "id": "dog_0544",
+            "name": "Copper-Associated Chronic Hepatitis (Breed-Specific)",
+            "name_ja": "銅関連慢性肝炎（犬種特異的）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cornea",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0070",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍"
+          },
+          {
+            "id": "dog_0152",
+            "name": "Corneal Dystrophy",
+            "name_ja": "角膜ジストロフィー"
+          },
+          {
+            "id": "dog_0617",
+            "name": "Indolent Corneal Ulcer (SCCED)",
+            "name_ja": "難治性角膜潰瘍（SCCED）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "crucia",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0024",
+            "name": "Cruciate Ligament Injury",
+            "name_ja": "前十字靴帯断裂"
+          },
+          {
+            "id": "dog_0428",
+            "name": "Cranial Cruciate Ligament Disease (Partial Tear)",
+            "name_ja": "前十字靭帯部分断裂"
+          },
+          {
+            "id": "dog_0443",
+            "name": "Cranial Cruciate Ligament Rupture",
+            "name_ja": "前十字靭帯断裂"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cutane",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0264",
+            "name": "Cutaneous Histiocytoma",
+            "name_ja": "皮膚組織球腫"
+          },
+          {
+            "id": "dog_0301",
+            "name": "Cutaneous Vasculitis",
+            "name_ja": "皮膚血管炎"
+          },
+          {
+            "id": "dog_0422",
+            "name": "Cutaneous Lymphoma (Epitheliotropic)",
+            "name_ja": "皮膚リンパ腫（上皮向性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dilate",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0056",
+            "name": "Dilated Cardiomyopathy (DCM)",
+            "name_ja": "拡張型心筋症（DCM）"
+          },
+          {
+            "id": "dog_0552",
+            "name": "Doberman Dilated Cardiomyopathy (Occult)",
+            "name_ja": "ドーベルマン拡張型心筋症（潜伏期）"
+          },
+          {
+            "id": "dog_0563",
+            "name": "Irish Wolfhound Dilated Cardiomyopathy",
+            "name_ja": "アイリッシュ・ウルフハウンド拡張型心筋症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "distem",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0001",
+            "name": "Canine Distemper",
+            "name_ja": "犬ジステンパー"
+          },
+          {
+            "id": "dog_0166",
+            "name": "Canine Distemper Encephalitis",
+            "name_ja": "ジステンパー脳炎"
+          },
+          {
+            "id": "dog_0442",
+            "name": "Canine Distemper - Hardpad Disease",
+            "name_ja": "犬ジステンパー硬蹠症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dyskin",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0350",
+            "name": "Ciliary Dyskinesia (Primary)",
+            "name_ja": "原発性線毛機能不全症"
+          },
+          {
+            "id": "dog_0482",
+            "name": "Primary Ciliary Dyskinesia",
+            "name_ja": "原発性線毛機能不全症"
+          },
+          {
+            "id": "dog_0594",
+            "name": "Canine Primary Ciliary Dyskinesia (Breed-Specific)",
+            "name_ja": "犬原発性繊毛運動不全症（犬種特異性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ehrlic",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0044",
+            "name": "Ehrlichiosis",
+            "name_ja": "エールリヒア症"
+          },
+          {
+            "id": "dog_0506",
+            "name": "Canine Monocytic Ehrlichiosis",
+            "name_ja": "犬モノサイティック・エーリキア症"
+          },
+          {
+            "id": "dog_0612",
+            "name": "Canine Ehrlichiosis",
+            "name_ja": "犬エールリヒア症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "epilep",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0027",
+            "name": "Epilepsy",
+            "name_ja": "特発性てんかん"
+          },
+          {
+            "id": "dog_0495",
+            "name": "Idiopathic Epilepsy",
+            "name_ja": "特発性てんかん"
+          },
+          {
+            "id": "dog_0559",
+            "name": "Lagotto Romagnolo Juvenile Epilepsy",
+            "name_ja": "ラゴット・ロマニョーロ若年性てんかん"
+          }
+        ]
+      },
+      {
+        "shared_stem": "erythe",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0176",
+            "name": "Discoid Lupus Erythematosus (DLE)",
+            "name_ja": "円板状エリテマトーデス"
+          },
+          {
+            "id": "dog_0181",
+            "name": "Systemic Lupus Erythematosus (SLE)",
+            "name_ja": "全身性エリテマトーデス（SLE）"
+          },
+          {
+            "id": "dog_0463",
+            "name": "Discoid Lupus Erythematosus",
+            "name_ja": "円板状エリテマトーデス"
+          }
+        ]
+      },
+      {
+        "shared_stem": "esopha",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0185",
+            "name": "Esophagitis",
+            "name_ja": "食道炎"
+          },
+          {
+            "id": "dog_0365",
+            "name": "Esophageal Stricture",
+            "name_ja": "食道狭窄"
+          },
+          {
+            "id": "dog_0471",
+            "name": "Esophageal Foreign Body",
+            "name_ja": "食道異物"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fever",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0124",
+            "name": "Rocky Mountain Spotted Fever",
+            "name_ja": "ロッキー山紅斑熱"
+          },
+          {
+            "id": "dog_0509",
+            "name": "Q Fever (Coxiellosis)",
+            "name_ja": "Q熱（コクシエラ症）"
+          },
+          {
+            "id": "dog_0551",
+            "name": "Shar-Pei Fever (Familial Shar-Pei Fever)",
+            "name_ja": "シャーペイ熱（家族性シャーペイ熱）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastro",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0038",
+            "name": "Gastroenteritis",
+            "name_ja": "急性胃腸炎"
+          },
+          {
+            "id": "dog_0053",
+            "name": "Hemorrhagic Gastroenteritis (HGE)",
+            "name_ja": "急性出血性下痢症候群（AHDS/HGE）"
+          },
+          {
+            "id": "dog_0366",
+            "name": "Gastroesophageal Reflux Disease (GERD)",
+            "name_ja": "胃食道逆流症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "insuff",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0051",
+            "name": "Exocrine Pancreatic Insufficiency (EPI)",
+            "name_ja": "膵外分泌不全症（EPI）"
+          },
+          {
+            "id": "dog_0199",
+            "name": "Intrauterine Growth Restriction (IUGR) / Placental Insufficiency",
+            "name_ja": "胎児発育不全（IUGR）・胎盤機能低下症"
+          },
+          {
+            "id": "dog_0548",
+            "name": "German Shepherd Dog Exocrine Pancreatic Insufficiency",
+            "name_ja": "ジャーマン・シェパード膵外分泌不全"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ligame",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0024",
+            "name": "Cruciate Ligament Injury",
+            "name_ja": "前十字靴帯断裂"
+          },
+          {
+            "id": "dog_0428",
+            "name": "Cranial Cruciate Ligament Disease (Partial Tear)",
+            "name_ja": "前十字靭帯部分断裂"
+          },
+          {
+            "id": "dog_0443",
+            "name": "Cranial Cruciate Ligament Rupture",
+            "name_ja": "前十字靭帯断裂"
+          }
+        ]
+      },
+      {
+        "shared_stem": "like",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0330",
+            "name": "Vogt-Koyanagi-Harada-like Syndrome (VKH)",
+            "name_ja": "フォークト・小柳・原田様症候群"
+          },
+          {
+            "id": "dog_0536",
+            "name": "Chiari-like Malformation",
+            "name_ja": "キアリ様奇形"
+          },
+          {
+            "id": "dog_0545",
+            "name": "Basenji Fanconi-like Syndrome",
+            "name_ja": "バセンジー型ファンコニ症候群"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lupu",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0176",
+            "name": "Discoid Lupus Erythematosus (DLE)",
+            "name_ja": "円板状エリテマトーデス"
+          },
+          {
+            "id": "dog_0181",
+            "name": "Systemic Lupus Erythematosus (SLE)",
+            "name_ja": "全身性エリテマトーデス（SLE）"
+          },
+          {
+            "id": "dog_0463",
+            "name": "Discoid Lupus Erythematosus",
+            "name_ja": "円板状エリテマトーデス"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mucoce",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0358",
+            "name": "Gallbladder Mucocele",
+            "name_ja": "胆嚢粘液嚢腫"
+          },
+          {
+            "id": "dog_0398",
+            "name": "Salivary Mucocele (Sialocele)",
+            "name_ja": "唾液腺嚢胞"
+          },
+          {
+            "id": "dog_0487",
+            "name": "Salivary Mucocele",
+            "name_ja": "唾液腺嚢腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "myelop",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0099",
+            "name": "Degenerative Myelopathy (DM)",
+            "name_ja": "変性性脊髄症（DM）"
+          },
+          {
+            "id": "dog_0453",
+            "name": "Fibrocartilaginous Embolic Myelopathy",
+            "name_ja": "線維軟骨塞栓性脊髄症"
+          },
+          {
+            "id": "dog_0454",
+            "name": "Degenerative Myelopathy",
+            "name_ja": "変性性脊髄症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "osteod",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0077",
+            "name": "Hypertrophic Osteodystrophy (HOD)",
+            "name_ja": "肥大性骨異栄養症（HOD）"
+          },
+          {
+            "id": "dog_0273",
+            "name": "Hypertrophic Osteodystrophy (HOD) - Severe",
+            "name_ja": "肥大性骨異栄養症（重症型）"
+          },
+          {
+            "id": "dog_0571",
+            "name": "Weimaraner Hypertrophic Osteodystrophy (Breed-Specific)",
+            "name_ja": "ワイマラナー肥大性骨異栄養症（犬種特異性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pemphi",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0063",
+            "name": "Pemphigus",
+            "name_ja": "天疱瘡"
+          },
+          {
+            "id": "dog_0328",
+            "name": "Bullous Pemphigoid",
+            "name_ja": "水疱性類天疱瘡"
+          },
+          {
+            "id": "dog_0462",
+            "name": "Pemphigus Foliaceus",
+            "name_ja": "落葉状天疱瘡"
+          }
+        ]
+      },
+      {
+        "shared_stem": "persis",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0254",
+            "name": "Persistent Pupillary Membrane (PPM)",
+            "name_ja": "瞳孔膜遺残"
+          },
+          {
+            "id": "dog_0255",
+            "name": "Persistent Hyperplastic Primary Vitreous (PHPV / PHTVL)",
+            "name_ja": "原始硝子体過形成遺残（PHPV/PHTVL）"
+          },
+          {
+            "id": "dog_0257",
+            "name": "Persistent Right Aortic Arch (PRAA)",
+            "name_ja": "右大動脈弓遺残"
+          }
+        ]
+      },
+      {
+        "shared_stem": "polyar",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0173",
+            "name": "Immune-Mediated Polyarthritis (IMPA)",
+            "name_ja": "免疫介在性多発性関節炎"
+          },
+          {
+            "id": "dog_0488",
+            "name": "Immune-Mediated Polyarthritis",
+            "name_ja": "免疫介在性多発性関節炎"
+          },
+          {
+            "id": "dog_0574",
+            "name": "Akita Immune-Mediated Polyarthritis",
+            "name_ja": "秋田犬免疫介在性多発性関節炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "proces",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0269",
+            "name": "Fragmented Medial Coronoid Process (FMCP)",
+            "name_ja": "内側鉤状突起分離症"
+          },
+          {
+            "id": "dog_0270",
+            "name": "Ununited Anconeal Process (UAP)",
+            "name_ja": "肘突起癒合不全"
+          },
+          {
+            "id": "dog_0446",
+            "name": "Fragmented Coronoid Process",
+            "name_ja": "肘突起分離症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0188",
+            "name": "Rectal Prolapse",
+            "name_ja": "直腸脱"
+          },
+          {
+            "id": "dog_0376",
+            "name": "Urethral Prolapse",
+            "name_ja": "尿道脱"
+          },
+          {
+            "id": "dog_0476",
+            "name": "Nictitans Gland Prolapse (Cherry Eye)",
+            "name_ja": "瞬膜腺突出"
+          }
+        ]
+      },
+      {
+        "shared_stem": "protei",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0186",
+            "name": "Protein-Losing Enteropathy (PLE)",
+            "name_ja": "蛋白漏出性腸症（PLE）"
+          },
+          {
+            "id": "dog_0498",
+            "name": "Protein-Losing Nephropathy",
+            "name_ja": "蛋白漏出性腎症"
+          },
+          {
+            "id": "dog_0593",
+            "name": "Canine Pulmonary Alveolar Proteinosis",
+            "name_ja": "犬肺胞蛋白症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "retrie",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0553",
+            "name": "Golden Retriever Pigmentary Uveitis",
+            "name_ja": "ゴールデン・レトリーバー色素性ぶどう膜炎"
+          },
+          {
+            "id": "dog_0566",
+            "name": "Labrador Retriever Exercise-Induced Collapse",
+            "name_ja": "ラブラドール・レトリーバー運動誘発性虚脱"
+          },
+          {
+            "id": "dog_0570",
+            "name": "Flat-Coated Retriever Histiocytic Sarcoma",
+            "name_ja": "フラットコーテッド・レトリーバー組織球肉腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "should",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0174",
+            "name": "Luxating Shoulder",
+            "name_ja": "肩関節脱臼"
+          },
+          {
+            "id": "dog_0527",
+            "name": "Shoulder Osteochondritis Dissecans (OCD)",
+            "name_ja": "肩関節離断性骨軟骨炎"
+          },
+          {
+            "id": "dog_0620",
+            "name": "Osteochondritis Dissecans - Shoulder (OCD)",
+            "name_ja": "肩関節離断性骨軟骨炎（OCD）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spanie",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0547",
+            "name": "Cavalier King Charles Spaniel Mitral Valve Disease (Early-Onset)",
+            "name_ja": "キャバリア僧帽弁疾患（早期発症）"
+          },
+          {
+            "id": "dog_0564",
+            "name": "Cocker Spaniel Immune-Mediated Hemolytic Anemia",
+            "name_ja": "コッカースパニエル免疫介在性溶血性貧血"
+          },
+          {
+            "id": "dog_0573",
+            "name": "English Springer Spaniel Rage Syndrome",
+            "name_ja": "イングリッシュ・スプリンガー・スパニエル激昂症候群"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spinal",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0279",
+            "name": "Spinal Arachnoid Diverticulum",
+            "name_ja": "脊髄くも膜憩室"
+          },
+          {
+            "id": "dog_0281",
+            "name": "Canine Spinal Muscular Atrophy",
+            "name_ja": "犬脊髄性筋萎縮症"
+          },
+          {
+            "id": "dog_0591",
+            "name": "Canine Spinal Arachnoid Cyst",
+            "name_ja": "犬脊髄くも膜嚢胞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spleni",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0325",
+            "name": "Splenic Hemangiosarcoma",
+            "name_ja": "脾臓血管肉腫"
+          },
+          {
+            "id": "dog_0393",
+            "name": "Splenic Torsion",
+            "name_ja": "脾捻転"
+          },
+          {
+            "id": "dog_0587",
+            "name": "Canine Splenic Nodular Hyperplasia",
+            "name_ja": "犬脾臓結節性過形成"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spondy",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0170",
+            "name": "Spondylosis Deformans",
+            "name_ja": "変形性脊椎症"
+          },
+          {
+            "id": "dog_0419",
+            "name": "Cervical Spondylomyelopathy (Wobbler - Disc Associated)",
+            "name_ja": "頸椎脊椎脊髄症（椎間板関連型）"
+          },
+          {
+            "id": "dog_0449",
+            "name": "Cervical Spondylomyelopathy (Wobbler Syndrome)",
+            "name_ja": "頸部脊椎脊髄症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "storag",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0100",
+            "name": "Copper Storage Disease",
+            "name_ja": "銅蓄積症"
+          },
+          {
+            "id": "dog_0259",
+            "name": "Glycogen Storage Disease",
+            "name_ja": "グリコーゲン蓄積症"
+          },
+          {
+            "id": "dog_0493",
+            "name": "Copper Storage Hepatopathy",
+            "name_ja": "銅蓄積性肝症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "terrie",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0554",
+            "name": "West Highland White Terrier Pulmonary Fibrosis",
+            "name_ja": "ウェストハイランドホワイトテリア肺線維症"
+          },
+          {
+            "id": "dog_0555",
+            "name": "Bull Terrier Lethal Acrodermatitis",
+            "name_ja": "ブルテリア致死的先端皮膚炎"
+          },
+          {
+            "id": "dog_0569",
+            "name": "Scottish Terrier Bladder Cancer Predisposition",
+            "name_ja": "スコティッシュ・テリア膀胱癌素因"
+          }
+        ]
+      },
+      {
+        "shared_stem": "thyroi",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0229",
+            "name": "Thyroid Carcinoma",
+            "name_ja": "甲状腺がん"
+          },
+          {
+            "id": "dog_0315",
+            "name": "Thyroid Adenoma (Benign)",
+            "name_ja": "甲状腺腺腫（良性）"
+          },
+          {
+            "id": "dog_0579",
+            "name": "Canine Thyroid Storm",
+            "name_ja": "犬甲状腺クリーゼ"
+          }
+        ]
+      },
+      {
+        "shared_stem": "torsio",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0162",
+            "name": "Lung Lobe Torsion",
+            "name_ja": "肺葉捻転"
+          },
+          {
+            "id": "dog_0378",
+            "name": "Testicular Torsion",
+            "name_ja": "精巣捻転"
+          },
+          {
+            "id": "dog_0393",
+            "name": "Splenic Torsion",
+            "name_ja": "脾捻転"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ulcer",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0070",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍"
+          },
+          {
+            "id": "dog_0184",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "dog_0617",
+            "name": "Indolent Corneal Ulcer (SCCED)",
+            "name_ja": "難治性角膜潰瘍（SCCED）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "urolit",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0013",
+            "name": "Struvite Urolithiasis",
+            "name_ja": "ストラバイト尿石症（リン酸マグネシウムアンモニウム結石）"
+          },
+          {
+            "id": "dog_0014",
+            "name": "Calcium Oxalate Urolithiasis",
+            "name_ja": "シュウ酸カルシウム尿石症"
+          },
+          {
+            "id": "dog_0015",
+            "name": "Urate Urolithiasis",
+            "name_ja": "尿酸アンモニウム尿石症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "volvul",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0003",
+            "name": "Gastric Dilatation-Volvulus (GDV/Bloat)",
+            "name_ja": "胃拡張胃捻転症候群（GDV）"
+          },
+          {
+            "id": "dog_0187",
+            "name": "Mesenteric Volvulus",
+            "name_ja": "腸間膜捻転"
+          },
+          {
+            "id": "dog_0561",
+            "name": "Great Dane Gastric Dilatation-Volvulus Predisposition",
+            "name_ja": "グレートデーン胃拡張捻転症候群素因"
+          }
+        ]
+      },
+      {
+        "shared_stem": "zinc",
+        "size": 3,
+        "members": [
+          {
+            "id": "dog_0179",
+            "name": "Zinc-Responsive Dermatosis",
+            "name_ja": "亜鉛反応性皮膚症"
+          },
+          {
+            "id": "dog_0298",
+            "name": "Zinc-Responsive Dermatosis - Syndrome I",
+            "name_ja": "亜鉛反応性皮膚症候群I型"
+          },
+          {
+            "id": "dog_0540",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          }
+        ]
+      }
+    ],
+    "family_cluster_count": 119
+  },
+  "T102": {
+    "detector": "T102",
+    "total_records": 623,
+    "flagged_count": 0,
+    "flags": []
+  },
+  "T104": {
+    "detector": "T104",
+    "total_records": 623,
+    "empty_count": 0,
+    "heading_only_count": 38,
+    "with_dosage_count": 585,
+    "empty": [],
+    "heading_only": [
+      {
+        "id": "dog_0007",
+        "name": "Hyperthyroidism",
+        "name_ja": "甲状腺機能亢進症",
+        "treatment_ja_len": 422,
+        "treatment_len": 570,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0095",
+        "name": "Progressive Retinal Atrophy (PRA)",
+        "name_ja": "進行性網膜萎縮症（PRA）",
+        "treatment_ja_len": 454,
+        "treatment_len": 786,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0099",
+        "name": "Degenerative Myelopathy (DM)",
+        "name_ja": "変性性脊髄症（DM）",
+        "treatment_ja_len": 976,
+        "treatment_len": 1245,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0101",
+        "name": "Exercise-Induced Collapse (EIC)",
+        "name_ja": "運動誘発性虚脱（EIC）",
+        "treatment_ja_len": 534,
+        "treatment_len": 1152,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0148",
+        "name": "Nuclear Sclerosis",
+        "name_ja": "核硬化症",
+        "treatment_ja_len": 691,
+        "treatment_len": 645,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0149",
+        "name": "Retinal Dysplasia",
+        "name_ja": "網膜形成異常",
+        "treatment_ja_len": 376,
+        "treatment_len": 487,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0153",
+        "name": "Collie Eye Anomaly (CEA)",
+        "name_ja": "コリー眼異常（CEA）",
+        "treatment_ja_len": 346,
+        "treatment_len": 602,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0162",
+        "name": "Lung Lobe Torsion",
+        "name_ja": "肺葉捻転",
+        "treatment_ja_len": 159,
+        "treatment_len": 661,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0165",
+        "name": "Fibrocartilaginous Embolism (FCE)",
+        "name_ja": "線維軟骨塞栓症（FCE）",
+        "treatment_ja_len": 666,
+        "treatment_len": 1200,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0196",
+        "name": "Paraphimosis",
+        "name_ja": "包皮嵌頓",
+        "treatment_ja_len": 306,
+        "treatment_len": 1131,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0199",
+        "name": "Intrauterine Growth Restriction (IUGR) / Placental Insufficiency",
+        "name_ja": "胎児発育不全（IUGR）・胎盤機能低下症",
+        "treatment_ja_len": 1048,
+        "treatment_len": 2496,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0253",
+        "name": "Congenital Deafness",
+        "name_ja": "先天性聴覚障害",
+        "treatment_ja_len": 163,
+        "treatment_len": 626,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0257",
+        "name": "Persistent Right Aortic Arch (PRAA)",
+        "name_ja": "右大動脈弓遺残",
+        "treatment_ja_len": 449,
+        "treatment_len": 572,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0268",
+        "name": "Carpal Hyperextension Injury",
+        "name_ja": "手根関節過伸展損傷",
+        "treatment_ja_len": 579,
+        "treatment_len": 1016,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0270",
+        "name": "Ununited Anconeal Process (UAP)",
+        "name_ja": "肘突起癒合不全",
+        "treatment_ja_len": 956,
+        "treatment_len": 1068,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0272",
+        "name": "Infraspinatus Contracture",
+        "name_ja": "棘下筋拘縮",
+        "treatment_ja_len": 632,
+        "treatment_len": 414,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0287",
+        "name": "Cardiac Tamponade",
+        "name_ja": "心タンポナーデ",
+        "treatment_ja_len": 181,
+        "treatment_len": 646,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0305",
+        "name": "Iris Atrophy",
+        "name_ja": "虹彩萎縮",
+        "treatment_ja_len": 634,
+        "treatment_len": 588,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0314",
+        "name": "Dentigerous Cyst",
+        "name_ja": "含歯性嚢胞",
+        "treatment_ja_len": 174,
+        "treatment_len": 405,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0354",
+        "name": "Pyruvate Kinase Deficiency",
+        "name_ja": "ピルビン酸キナーゼ欠損症",
+        "treatment_ja_len": 442,
+        "treatment_len": 699,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0370",
+        "name": "Nasopharyngeal Polyp",
+        "name_ja": "鼻咽頭ポリープ",
+        "treatment_ja_len": 157,
+        "treatment_len": 370,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0376",
+        "name": "Urethral Prolapse",
+        "name_ja": "尿道脱",
+        "treatment_ja_len": 167,
+        "treatment_len": 377,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0394",
+        "name": "Diaphragmatic Hernia",
+        "name_ja": "横隔膜ヘルニア",
+        "treatment_ja_len": 401,
+        "treatment_len": 1007,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0395",
+        "name": "Perineal Hernia",
+        "name_ja": "会陰ヘルニア",
+        "treatment_ja_len": 596,
+        "treatment_len": 986,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0396",
+        "name": "Inguinal Hernia",
+        "name_ja": "鼠径ヘルニア",
+        "treatment_ja_len": 467,
+        "treatment_len": 372,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0397",
+        "name": "Umbilical Hernia",
+        "name_ja": "臍ヘルニア",
+        "treatment_ja_len": 824,
+        "treatment_len": 305,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0398",
+        "name": "Salivary Mucocele (Sialocele)",
+        "name_ja": "唾液腺嚢胞",
+        "treatment_ja_len": 431,
+        "treatment_len": 543,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0439",
+        "name": "Idiopathic Head Tremor Syndrome",
+        "name_ja": "特発性頭部振戦症候群",
+        "treatment_ja_len": 442,
+        "treatment_len": 545,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0487",
+        "name": "Salivary Mucocele",
+        "name_ja": "唾液腺嚢腫",
+        "treatment_ja_len": 173,
+        "treatment_len": 616,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0504",
+        "name": "Stenotic Nares",
+        "name_ja": "鼻孔狭窄",
+        "treatment_ja_len": 266,
+        "treatment_len": 607,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0528",
+        "name": "Elbow Incongruity",
+        "name_ja": "肘関節不適合",
+        "treatment_ja_len": 872,
+        "treatment_len": 1371,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0529",
+        "name": "Pes Varus",
+        "name_ja": "内反足",
+        "treatment_ja_len": 152,
+        "treatment_len": 522,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0531",
+        "name": "Cerebellar Abiotrophy",
+        "name_ja": "小脳変性症",
+        "treatment_ja_len": 339,
+        "treatment_len": 744,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0534",
+        "name": "Trigeminal Neuritis",
+        "name_ja": "三叉神経炎",
+        "treatment_ja_len": 174,
+        "treatment_len": 532,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0545",
+        "name": "Basenji Fanconi-like Syndrome",
+        "name_ja": "バセンジー型ファンコニ症候群",
+        "treatment_ja_len": 351,
+        "treatment_len": 819,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0548",
+        "name": "German Shepherd Dog Exocrine Pancreatic Insufficiency",
+        "name_ja": "ジャーマン・シェパード膵外分泌不全",
+        "treatment_ja_len": 202,
+        "treatment_len": 331,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0566",
+        "name": "Labrador Retriever Exercise-Induced Collapse",
+        "name_ja": "ラブラドール・レトリーバー運動誘発性虚脱",
+        "treatment_ja_len": 345,
+        "treatment_len": 774,
+        "has_dosage": false
+      },
+      {
+        "id": "dog_0592",
+        "name": "Canine Cricopharyngeal Dysphagia",
+        "name_ja": "犬輪状咽頭嚥下障害",
+        "treatment_ja_len": 557,
+        "treatment_len": 616,
+        "has_dosage": false
+      }
+    ]
+  },
+  "T108": {
+    "detector": "T108",
+    "total_records": 623,
+    "drug_available": 610,
+    "ref_keys_available": 30,
+    "drug_mismatch_count": 45,
+    "citation_mismatch_count": 0,
+    "drug_mismatches": [
+      {
+        "id": "dog_0000",
+        "name": "Canine Parvovirus",
+        "name_ja": "犬パルボウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0004",
+        "name": "Pancreatitis",
+        "name_ja": "膵炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0017",
+        "name": "Liver Disease",
+        "name_ja": "肝臓病（肝障害）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0032",
+        "name": "Pyometra",
+        "name_ja": "子宮蓄膿症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0038",
+        "name": "Gastroenteritis",
+        "name_ja": "急性胃腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0042",
+        "name": "Canine Infectious Hepatitis",
+        "name_ja": "犬感染性肝炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0043",
+        "name": "Giardiasis",
+        "name_ja": "ジアルジア症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0048",
+        "name": "Canine Coronavirus (Enteric)",
+        "name_ja": "犬コロナウイルス腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0049",
+        "name": "Inflammatory Bowel Disease (IBD)",
+        "name_ja": "炎症性腸疾患（IBD）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0051",
+        "name": "Exocrine Pancreatic Insufficiency (EPI)",
+        "name_ja": "膵外分泌不全症（EPI）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0052",
+        "name": "Foreign Body Obstruction",
+        "name_ja": "消化管異物閉塞",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0053",
+        "name": "Hemorrhagic Gastroenteritis (HGE)",
+        "name_ja": "急性出血性下痢症候群（AHDS/HGE）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0054",
+        "name": "Colitis",
+        "name_ja": "大腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0055",
+        "name": "Portosystemic Shunt (Liver Shunt)",
+        "name_ja": "門脈体循環シャント（肝シャント）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0068",
+        "name": "Epiphora (Watery Eyes)",
+        "name_ja": "流涙症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0090",
+        "name": "Pneumonia",
+        "name_ja": "肺炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0091",
+        "name": "Aspiration Pneumonia",
+        "name_ja": "誤嚥性肺炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0092",
+        "name": "Pleural Effusion",
+        "name_ja": "胸水貯留",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0125",
+        "name": "Tetanus",
+        "name_ja": "破傷風",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0166",
+        "name": "Canine Distemper Encephalitis",
+        "name_ja": "ジステンパー脳炎",
+        "drugs": [
+          {
+            "drug": "Acyclovir (Aciclovir)",
+            "drug_ja": "アシクロビル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0187",
+        "name": "Mesenteric Volvulus",
+        "name_ja": "腸間膜捻転",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0201",
+        "name": "Fading Puppy Syndrome",
+        "name_ja": "フェーディングパピー症候群（新生子犬急速衰弱症）",
+        "drugs": [
+          {
+            "drug": "Acyclovir (Aciclovir)",
+            "drug_ja": "アシクロビル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0204",
+        "name": "Postpartum Metritis (Acute Postpartum Uterine Infection)",
+        "name_ja": "産後子宮炎（急性産褥子宮炎）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0252",
+        "name": "Portosystemic Shunt (Congenital)",
+        "name_ja": "先天性門脈体循環シャント",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0333",
+        "name": "Ibuprofen Toxicosis",
+        "name_ja": "イブプロフェン中毒",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0338",
+        "name": "Sago Palm Toxicosis",
+        "name_ja": "ソテツ中毒",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0349",
+        "name": "Portosystemic Shunt (Acquired)",
+        "name_ja": "後天性門脈体循環シャント",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0358",
+        "name": "Gallbladder Mucocele",
+        "name_ja": "胆嚢粘液嚢腫",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0359",
+        "name": "Cholangitis/Cholangiohepatitis",
+        "name_ja": "胆管炎/胆管肝炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0360",
+        "name": "Chronic Hepatitis",
+        "name_ja": "慢性肝炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0362",
+        "name": "Small Intestinal Bacterial Overgrowth (SIBO)",
+        "name_ja": "小腸細菌過増殖症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0363",
+        "name": "Antibiotic-Responsive Diarrhea",
+        "name_ja": "抗生物質反応性下痢",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0369",
+        "name": "Lung Lobe Consolidation",
+        "name_ja": "肺葉硬化",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0392",
+        "name": "Hepatic Abscess",
+        "name_ja": "肝膿瘍",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0400",
+        "name": "Peritonitis",
+        "name_ja": "腹膜炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0410",
+        "name": "Inner Ear Infection (Otitis Interna)",
+        "name_ja": "内耳炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0424",
+        "name": "Gastric Polyps",
+        "name_ja": "胃ポリープ",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0442",
+        "name": "Canine Distemper - Hardpad Disease",
+        "name_ja": "犬ジステンパー硬蹠症",
+        "drugs": [
+          {
+            "drug": "Acyclovir (Aciclovir)",
+            "drug_ja": "アシクロビル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0472",
+        "name": "Gastric Ulceration",
+        "name_ja": "胃潰瘍",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0480",
+        "name": "Salmon Poisoning Disease",
+        "name_ja": "サーモン中毒（サケ中毒症）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0484",
+        "name": "Portosystemic Shunt (PSS)",
+        "name_ja": "門脈体循環シャント",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0494",
+        "name": "Perianal Fistula",
+        "name_ja": "肛門周囲瘻",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0582",
+        "name": "Canine Chronic Enteropathy (Non-IBD)",
+        "name_ja": "犬慢性腸症（非IBD）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0590",
+        "name": "Canine Bronchoesophageal Fistula (Congenital)",
+        "name_ja": "犬先天性気管支食道瘻",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dog_0603",
+        "name": "Sepsis and SIRS",
+        "name_ja": "敗血症・SIRS（全身性炎症反応症候群）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      }
+    ],
+    "citation_mismatches": []
+  },
+  "T109": {
+    "detector": "T109",
+    "total_records": 623,
+    "hit_count": 3,
+    "safe_occurrences": 0,
+    "review_occurrences": 3,
+    "term_counts": {
+      "遺伝学的": 3
+    },
+    "hits": [
+      {
+        "id": "dog_0254",
+        "name_ja": "瞳孔膜遺残",
+        "field": "causes_ja",
+        "term": "遺伝学的",
+        "suggest": "遺伝性 / 遺伝的",
+        "category": "review",
+        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
+        "count": 1,
+        "context": "の原因なし—純粋にTVL退縮の発生学的・遺伝学的異常。母体ビタミンA低下は歴史的に示唆さ"
+      },
+      {
+        "id": "dog_0255",
+        "name_ja": "原始硝子体過形成遺残（PHPV/PHTVL）",
+        "field": "causes_ja",
+        "term": "遺伝学的",
+        "suggest": "遺伝性 / 遺伝的",
+        "category": "review",
+        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
+        "count": 1,
+        "context": "なし—純粋に硝子体血管系退縮の発生学的・遺伝学的異常。妊娠中の母体感染（CHV-1等）は"
+      },
+      {
+        "id": "dog_0551",
+        "name_ja": "シャーペイ熱（家族性シャーペイ熱）",
+        "field": "diagnosis_ja",
+        "term": "遺伝学的",
+        "suggest": "遺伝性 / 遺伝的",
+        "category": "review",
+        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
+        "count": 1,
+        "context": "ニン比でアミロイド腎症のスクリーニング。遺伝学的にはHAS2遺伝子過剰発現によるヒアルロ"
+      }
+    ]
+  }
+}
