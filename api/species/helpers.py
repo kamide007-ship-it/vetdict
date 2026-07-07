@@ -599,6 +599,13 @@ def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[s
         result = apply_canonical_map(result, species)
     except ImportError:
         pass
+    # Overlay ONLY veterinarian-published dosage protocols (T106 publish gate).
+    try:
+        from api.species.treatment_overrides import apply_treatment_overrides
+
+        result = apply_treatment_overrides(result, species)
+    except ImportError:
+        pass
     return result
 
 

@@ -612,6 +612,13 @@ def _load_diseases(species_key: str) -> list:
             result = apply_canonical_map(result, species_key)
         except ImportError:
             pass
+        # Overlay ONLY veterinarian-published dosage protocols (T106 publish gate).
+        try:
+            from api.species.treatment_overrides import apply_treatment_overrides
+
+            result = apply_treatment_overrides(result, species_key)
+        except ImportError:
+            pass
         return result
     except ImportError:
         return []

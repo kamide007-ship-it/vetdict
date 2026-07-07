@@ -4288,6 +4288,14 @@ def get_diseases():
     except ImportError:
         pass
 
+    # Overlay ONLY veterinarian-published dosage protocols (T106 publish gate).
+    try:
+        from api.species.treatment_overrides import apply_treatment_overrides
+
+        output = apply_treatment_overrides(output, species)
+    except ImportError:
+        pass
+
     # Inject hiragana reading for あいうえお sorting
     for item in output:
         name_ja = item.get("name_ja", "")
