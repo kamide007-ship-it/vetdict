@@ -63,7 +63,32 @@
 - 出典フィールドが repo に存在しない ＝ 現データからは **①以外の全件で「出典付き投与量」を自動生成できない**。
 - よって **自動生成を実行せず、以下の承認を求める**。
 
-## 承認を求める事項（生成前）
+## 推奨（あなたの確認で確定）— 「進めてください」への回答
+
+出典基準を私の推奨として提示します。**異論がなければこれで確定**し、あなたが用量記入する枠組みにします:
+
+1. **Source-of-truth（推奨）**: **Carpenter *Exotic Animal Formulary* 6th ed.** を第一典拠に。
+   理由: エキゾ用量の事実上の標準で、既存 drug DB の degu 用量（praziquantel 5-10 mg/kg 等）と整合。
+   補助典拠: Quesenberry & Carpenter *Ferrets, Rabbits, and Rodents* 4th、種特異的 peer-reviewed（PubMed）。
+2. **evidence_grade（推奨スケール）**:
+   - **A** = degu/近縁齧歯類の PK/臨床データに基づく
+   - **B** = 他エキゾ齧歯類からの外挿（formulary 記載）
+   - **C** = 犬猫/一般からの外挿（degu 心疾患2件が該当見込み）
+3. **T105 データモデル**: `treatment_draft` / `dosage_sources`(JSON) / `evidence_grade` / `review_status`（`draft`→`approved`→`published`、既定 draft・**自動公開しない**）。main の `treatment_overrides/degu.json` 枠を使用。
+
+### 私が用量を自動記入 *しない* 理由（重要・安全）
+- リポジトリに **Carpenter 本体テキストは無く**、drug DB の degu 用量は**無出典**。
+  これに「Carpenter」と付けるのは**出典の捏造**であり、SPEC「投与量は必ず出典付き」に反します。
+- したがって用量値の記入は、**Carpenter を参照できるあなた（獣医師）**が行う工程として残します（T105 は draft 生成が🟡ですが、
+  *出典付き* を満たせない自動生成は行いません）。私は上記②③の枠組みと薬物要否トリアージ（本書②の14件）まで整備しました。
+
+### あなたの次の1アクション
+- 上記1–3で **OK** ／ **修正** をひとことください。OK なら degu 14件（薬物必要）の worklist に
+  `evidence_grade` 空欄・`dosage_sources` 空欄・`review_status=draft` の記入枠を整備します（用量は空のまま＝あなたが Carpenter を見て記入 → approved → published）。
+
+---
+
+## （参考）当初の承認要求メモ
 
 1. **出典の source-of-truth を指定してください**（例: *Carpenter Exotic Animal Formulary 6th ed*／
    *Plumb's Veterinary Drug Handbook*／peer-reviewed）。DB の既存 degu 用量は多くが Carpenter 系の値と
