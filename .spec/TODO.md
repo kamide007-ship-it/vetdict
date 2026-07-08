@@ -52,7 +52,10 @@
 - [x] **(D) 予防文の異種汚染修正（EN）**: 英語版 種クラス対応 prevention 生成器を新設
       （`_PREVENT_CLASS_CORE_EN`/`_prevention_overlay_en`/`gen_prevention_en_noncompanion`）。
       EN 汚染 387→0。回帰テスト追加。`test_no_template_disease_content` 178 pass。
-- [ ] T109 機械翻訳臭の置換適用（`scripts/quality/apply_mt_smell.py` を段階適用、臨床用語は要レビュー）
+- [x] T109 機械翻訳臭の置換適用: safe 語（葡萄糖→ブドウ糖等）は適用済み。
+      文脈依存の誤フレーズ（遺伝学的インスリン抵抗→遺伝的等6種12件）を `apply_mt_smell_phrases.py` で
+      フレーズ単位に安全修正（正当な 遺伝学的スクリーニング/背景/異常 は温存）。degu review 17→8。
+- [ ] 残る T109 review 語（易感受性・貧弱な等の文体項目）は獣医レビューで置換要否を判断
 
 ## いま承認を求める項目
 1. **(B) degu 統合判断**（`.spec/DEGU_CONSOLIDATION_REVIEW.md` を1件ずつ ✅/❌/✏️）→ 承認行のみ canonical 反映
