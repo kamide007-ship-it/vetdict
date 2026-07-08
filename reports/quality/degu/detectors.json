@@ -2221,28 +2221,15 @@
   "T109": {
     "detector": "T109",
     "total_records": 201,
-    "hit_count": 13,
+    "hit_count": 8,
     "safe_occurrences": 0,
-    "review_occurrences": 16,
+    "review_occurrences": 8,
     "term_counts": {
-      "遺伝学的": 7,
       "易感受性": 6,
       "貧弱な": 1,
-      "細胞失敗": 1,
-      "可遺伝": 1
+      "遺伝学的": 1
     },
     "hits": [
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "description_ja",
-        "term": "遺伝学的",
-        "suggest": "遺伝性 / 遺伝的",
-        "category": "review",
-        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
-        "count": 1,
-        "context": "抵抗、続発性ベータ細胞失敗）として提示、遺伝学的素因と食事炭水化物曝露による。早期検出を"
-      },
       {
         "id": "degu_0000",
         "name_ja": "糖尿病",
@@ -2268,57 +2255,13 @@
       {
         "id": "degu_0000",
         "name_ja": "糖尿病",
-        "field": "description_ja",
-        "term": "細胞失敗",
-        "suggest": "細胞不全",
-        "category": "review",
-        "note": "β細胞失敗→β細胞不全（failure の誤訳）",
-        "count": 1,
-        "context": " 2糖尿病（インスリン抵抗、続発性ベータ細胞失敗）として提示、遺伝学的素因と食事炭水化物"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "causes_ja",
-        "term": "遺伝学的",
-        "suggest": "遺伝性 / 遺伝的",
-        "category": "review",
-        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
-        "count": 3,
-        "context": "デグー特異的遺伝学的素因：デグーは糖を効率的に代謝するための"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
         "field": "causes_ja",
         "term": "易感受性",
         "suggest": "感受性が高い / 罹患しやすい",
         "category": "review",
         "note": "機械翻訳調",
         "count": 1,
-        "context": "伝成分を示唆）。食事リスク要因（遺伝学的易感受性デグーの主要トリガー）：(1) 直接糖含"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "causes_ja",
-        "term": "可遺伝",
-        "suggest": "遺伝性 / 遺伝的",
-        "category": "review",
-        "note": "機械翻訳調",
-        "count": 1,
-        "context": "0%生涯糖尿病有病率対他の20-30%、可遺伝成分を示唆）。食事リスク要因（遺伝学的易"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "pathophysiology_ja",
-        "term": "遺伝学的",
-        "suggest": "遺伝性 / 遺伝的",
-        "category": "review",
-        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
-        "count": 1,
-        "context": "の種の典型的なタイプ2と異なる：(1) 遺伝学的インスリン抵抗相（出生時から存在、無症候"
+        "context": "伝性成分を示唆）。食事リスク要因（遺伝的易感受性デグーの主要トリガー）：(1) 直接糖含"
       },
       {
         "id": "degu_0000",
@@ -2339,8 +2282,8 @@
         "suggest": "遺伝性 / 遺伝的",
         "category": "review",
         "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
-        "count": 2,
-        "context": "デグーの重大予防（積極的食事管理で遺伝学的易感受性動物の50-70%で糖尿病を防止"
+        "count": 1,
+        "context": "体重管理。(3) ストレス低減。(4) 遺伝学的スクリーニング。(5) 日常的健康スクリ"
       },
       {
         "id": "degu_0000",
@@ -2351,7 +2294,7 @@
         "category": "review",
         "note": "機械翻訳調",
         "count": 1,
-        "context": "グーの重大予防（積極的食事管理で遺伝学的易感受性動物の50-70%で糖尿病を防止可能）："
+        "context": "デグーの重大予防（積極的食事管理で遺伝的易感受性動物の50-70%で糖尿病を防止可能）："
       },
       {
         "id": "degu_0091",
