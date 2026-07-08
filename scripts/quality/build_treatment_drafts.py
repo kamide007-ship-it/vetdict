@@ -39,6 +39,34 @@ def _slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-")
 
 
+# Authoritative dosing sources per species group (formularies are the real
+# source of exotic clinical doses; PubMed exotic-dosing coverage is thin).
+_FORMULARY_HINT = {
+    "small_mammal": "Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed",
+    "bird": "Carpenter『Exotic Animal Formulary』6th ed / Harrison & Lightfoot『Clinical Avian Medicine』",
+    "reptile": "Carpenter『Exotic Animal Formulary』6th ed / Mader『Reptile Medicine and Surgery』3rd ed",
+    "amphibian_fish": "Carpenter『Exotic Animal Formulary』6th ed / Stoskopf『Fish Medicine』",
+    "dog_cat": "Plumb『Veterinary Drug Handbook』/ BSAVA Formulary",
+    "horse": "Plumb『Veterinary Drug Handbook』/ Bertone & Horspool『Equine Clinical Pharmacology』",
+}
+_SPECIES_GROUP = {
+    "dog": "dog_cat", "cat": "dog_cat", "horse": "horse",
+    "rabbit": "small_mammal", "ferret": "small_mammal", "hamster": "small_mammal",
+    "guinea_pig": "small_mammal", "chinchilla": "small_mammal", "hedgehog": "small_mammal",
+    "sugar_glider": "small_mammal", "degu": "small_mammal", "exotic_other": "small_mammal",
+    "bird": "bird", "parakeet": "bird", "parrot": "bird",
+    "reptile": "reptile", "tortoise": "reptile", "snake": "reptile", "lizard": "reptile",
+    "amphibian": "amphibian_fish", "fish": "amphibian_fish",
+}
+
+
+def _sourcing_guidance(name_en: str, species: str) -> str:
+    grp = _SPECIES_GROUP.get(species, "small_mammal")
+    formulary = _FORMULARY_HINT.get(grp, _FORMULARY_HINT["small_mammal"])
+    query = f"{name_en} {species} OR exotic OR rodent treatment".strip()
+    return f"推奨情報源: {formulary}。PubMed候補検索: 「{query}」。"
+
+
 def build(species: str) -> dict:
     records = apply_canonical_map(detect.load_species_records(species), species)
     et = detect.detect_empty_treatment(records)
@@ -68,6 +96,7 @@ def build(species: str) -> dict:
                 "current_treatment_ja": ja_tx,
                 "treatment_ja": "",  # to be filled by veterinarian
                 "sources": [],  # required before publish
+                "sourcing_guidance": _sourcing_guidance(r.get("name") or r.get("name_en") or "", species),
             }
         )
 
@@ -99,7 +128,7 @@ def _merge_preserving_human_edits(existing: dict, fresh: dict) -> dict:
         if prev and (prev.get("review_status") != "draft" or prev.get("treatment_ja") or prev.get("sources")):
             out_entries.append(prev)  # preserve human edits
         else:
-            out_entries.append(prev or e)
+            out_entries.append(e)  # pristine draft -> take fresh (propagates new fields)
         seen.add(e["slug"])
     # keep any human entries no longer flagged (do not drop reviewed work)
     for slug, prev in by_slug.items():

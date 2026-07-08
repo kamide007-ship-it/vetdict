@@ -633,6 +633,42 @@ def _disease_slug(disease) -> str:
     return _re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
 
+def _render_treatment_adjunct_html(text):
+    """Render treatment text, splitting the sponsored ECVN block into a clearly
+    labelled PR/own-product note (server-side mirror of app.js
+    renderTreatmentWithAdjunct) so the marker never leaks and readers never
+    mistake the promotion for standard treatment. Returns safe Markup."""
+    from markupsafe import Markup, escape
+
+    raw = str(text or "")
+    marker = "[ECVN:Block]"
+    idx = raw.find(marker)
+    if idx == -1:
+        return Markup("<p>{}</p>").format(raw)
+    main = raw[:idx].rstrip()
+    adjunct = raw[idx + len(marker) :].lstrip()
+    adjunct = _re.sub(r"^\s*[【\[][^\n]*\n?", "", adjunct).lstrip()
+    adj_html = str(escape(adjunct)).replace(
+        "caninevet.jp",
+        '<a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer">caninevet.jp</a>',
+    )
+    main_html = str(escape(main))
+    vendor_link = (
+        '<a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer">'
+        "Equine &amp; Canine Vet Nutrition</a>"
+    )
+    block = (
+        '<div class="ecvn-adjunct-block" role="complementary" aria-label="自社製品の広告（PR）">'
+        '<div class="ecvn-adjunct-label"><span class="ecvn-pr-badge">PR</span>PR・自社製品 · '
+        + vendor_link
+        + "</div>"
+        '<div class="ecvn-adjunct-disclaimer">以下は自社製品の紹介（広告）です。'
+        "標準治療・エビデンスに基づく治療ではありません。</div>"
+        '<div class="ecvn-adjunct-body">' + adj_html + "</div></div>"
+    )
+    return Markup("<p>{}</p>".format(main_html) + block)
+
+
 def _disease_get(disease, key, default=""):
     """Get attribute from disease dict or dataclass."""
     if isinstance(disease, dict):
@@ -1190,9 +1226,11 @@ def disease_detail(species: str, disease_slug: str):
     # Load PubMed references
     pubmed_refs = []
     try:
-        from api.pubmed_references import get_references_for_disease
+        # T110: species-aware citation binding (curated + species guard) so an
+        # exotic disease never inherits a dog/cat keyword-matched citation.
+        from api.pubmed_references import get_references_for_disease_v2
 
-        pubmed_refs = get_references_for_disease(disease.get("name", ""))
+        pubmed_refs = get_references_for_disease_v2(disease.get("name", ""), species_key)
     except Exception:
         pass
 
@@ -1224,9 +1262,14 @@ def disease_detail(species: str, disease_slug: str):
     same_cat_diseases.sort(key=lambda x: (x["name_ja"] or x["name"]).lower())
     same_cat_diseases = same_cat_diseases[:12]
 
+    treatment_html = _render_treatment_adjunct_html(
+        _disease_get(disease, "treatment_ja") or _disease_get(disease, "treatment")
+    )
+
     return render_template(
         "disease_detail.html",
         disease=disease,
+        treatment_html=treatment_html,
         species=species_key,
         species_ja=sp_label_ja,
         species_en=sp_label_en,

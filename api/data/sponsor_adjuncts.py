@@ -439,8 +439,11 @@ _PRODUCTS = [
 # Single idempotency marker — one per disease regardless of how many products match.
 _MARKER_BLOCK = "[ECVN:Block]"
 
-_BLOCK_HEADER_JA = "【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】"
-_BLOCK_HEADER_EN = "[Adjunct Options — Equine & Canine Vet Nutrition (caninevet.jp)]"
+# Labelled explicitly as sponsored/own-product (PR) so it is never mistaken for
+# standard, evidence-based treatment. The frontend renders a dedicated PR badge
+# + disclaimer; this text carries the same label for server-rendered/API surfaces.
+_BLOCK_HEADER_JA = "【PR・自社製品｜標準治療ではありません — Equine & Canine Vet Nutrition (caninevet.jp)】"
+_BLOCK_HEADER_EN = "[PR / Sponsored — not standard treatment — Equine & Canine Vet Nutrition (caninevet.jp)]"
 
 
 # ---------------------------------------------------------------------------
