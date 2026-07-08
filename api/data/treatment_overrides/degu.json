@@ -18,7 +18,8 @@
       "en_reference": "",
       "current_treatment_ja": "【食事管理（最重要）】デグーは乾燥・低糖環境への進化的適応により、インスリン抵抗性に非常に罹患しやすい。全ての単糖類を厳格に排除 — 果物、糖分/糖蜜/蜂蜜を含む市販おやつ、根菜類（ニンジン・サツマイモ）は全て禁忌。食事: チモシー牧草を無制限（食事の≥80%）、デグー専用ペレット少量（無糖配合）、限定的な新鮮野菜（葉野菜のみ — ケール、タンポポ、チコリ）。【体重管理】目標体重170-300g。週1回グラム秤で計量。運動機会の増加 — 回し車（直径≥25cm、無隙間表面）、ケージ外の監視下自由時間。【モニタリング】血糖値測定（耳静脈または尾尖穿刺） — 空腹時目標<200 mg/dL。フルクトサミンで2-3週間の血糖管理を反映。尿糖検査（早期指標）。【薬物療法】デグーにインスリン療法は推奨されない — 食事管理単独が標準的アプローチ。グリピジド等の経口血糖降下薬は検証されておらず、重篤な低血糖のリスクあり。【合併症管理】白内障モニタリング（両側水晶体混濁 — 慢性高血糖デグーの最大30%で報告）。末梢神経障害は後肢虚弱として発現しうる。参考文献: Edwards (2009); Jekl et al. (2011); Quesenberry & Carpenter (2012).",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Insulin Resistance degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "obesity",
@@ -29,7 +30,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける肥満の治療: 原因の鑑別診断に基づく特異的治療。支持療法（輸液・栄養・疼痛管理）。環境管理。定期的なモニタリングと治療調整。\n[ECVN:Block] 【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】\n• NMNミトコンドリアアシスト (NMN+α-リポ酸+システイン+プロバイオティクス): 細胞エネルギー代謝・サーチュイン活性化・抗老化。NMN 5000mgがNAD+産生を促進→ミトコンドリア機能改善+サーチュイン(SIRT1-7)活性化。認知機能低下(CDS)、変性性脊髄症、慢性代謝疾患(糖尿病/クッシング)、加齢性臓器機能低下のサポートに\n• Protain (高品質タンパク質+コラーゲン前駆体): がん悪液質・術後筋肉維持・除脂肪体重保持。高品質タンパク質+コラーゲン前駆体が筋蛋白合成を促進。腫瘍関連悪液質のLBM(除脂肪体重)維持、大手術後の回復促進、サルコペニア予防、肥満管理時の筋量維持に\n※Protain: 重度肝・腎不全は蛋白負荷に留意",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Obesity degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "heat-stroke",
@@ -40,7 +42,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける熱中症の治療は安定化、疼痛管理、創傷ケアを優先する。生命を脅かす損傷を最初に評価・対処する（気道、呼吸、循環）。種に適した鎮痛薬（NSAIDs、オピオイド、局所麻酔薬）による鎮痛が不可欠である。創傷を洗浄・デブリードマンし、一次閉鎖、二次治癒、再建手術を適宜行う。汚染創には広域抗菌薬を使用する。骨折には副子固定または外科的固定を行う。遅発性合併症をモニタリングする。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Heat Stroke degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "incisor-overgrowth",
@@ -51,7 +54,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける切歯過長の治療: 原因の鑑別診断に基づく特異的治療。支持療法（輸液・栄養・疼痛管理）。環境管理。定期的なモニタリングと治療調整。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Incisor Overgrowth degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "fur-mites-demodex-notoedres",
@@ -62,7 +66,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける毛包虫症の治療には、同定された寄生虫に応じた適切な駆虫薬が必要である。一部の駆虫薬は特定の種に有毒であるため、種に適した用量設定が重要である。全てのライフステージを排除するため複数回投与が必要な場合がある。環境消毒と接触動物の治療で再感染を防止する。貧血、脱水、栄養失調などの二次的合併症に対する支持療法を行う。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Fur Mites (Demodex / Notoedres) degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "aspiration-pneumonia",
@@ -73,7 +78,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける誤嚥性肺炎の治療: 抗菌薬（培養感受性に基づく）。ネブライゼーション。酸素療法（重症時）。保温。栄養サポート。環境改善（換気・粉塵低減）。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Aspiration Pneumonia degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "intestinal-parasites",
@@ -84,7 +90,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける腸内寄生虫症の治療には、同定された寄生虫に応じた適切な駆虫薬が必要である。一部の駆虫薬は特定の種に有毒であるため、種に適した用量設定が重要である。全てのライフステージを排除するため複数回投与が必要な場合がある。環境消毒と接触動物の治療で再感染を防止する。貧血、脱水、栄養失調などの二次的合併症に対する支持療法を行う。\n[ECVN:Block] 【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】\n• CPパウダー (プレバイオ+プロバイオ+サイリウム): 腸内細菌叢正常化・腸管バリア強化・腸腎連関サポート。サイリウム(水溶性繊維)が腸管運動を促進+プレバイオティクスが有益菌(Lactobacillus/Bifidobacterium)の増殖を支援。IBD、慢性腸症、抗菌薬関連dysbiosis、CKDの尿毒素軽減(インドキシル硫酸低減)に\n※CPパウダー: 完全腸閉塞は禁忌",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Intestinal Parasites degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "congestive-heart-failure",
@@ -95,7 +102,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおけるうっ血性心不全の治療: 心エコーで基礎心疾患を評価。利尿薬（フロセミド）で肺水腫管理。ACE阻害薬で後負荷軽減。不整脈があれば抗不整脈薬。安静・低Na食。定期心エコーでモニタリング。\n[ECVN:Block] 【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】\n• NMNミトコンドリアアシスト (NMN+α-リポ酸+システイン+プロバイオティクス): 細胞エネルギー代謝・サーチュイン活性化・抗老化。NMN 5000mgがNAD+産生を促進→ミトコンドリア機能改善+サーチュイン(SIRT1-7)活性化。認知機能低下(CDS)、変性性脊髄症、慢性代謝疾患(糖尿病/クッシング)、加齢性臓器機能低下のサポートに",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Congestive Heart Failure degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "cardiomyopathy",
@@ -106,7 +114,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける心筋症の治療: 心エコーで基礎心疾患を評価。利尿薬（フロセミド）で肺水腫管理。ACE阻害薬で後負荷軽減。不整脈があれば抗不整脈薬。安静・低Na食。定期心エコーでモニタリング。\n[ECVN:Block] 【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】\n• MSM+アミノコンプリート (MSM+必須アミノ酸(BCAA中心)): 組織修復・筋肉維持・肝腎栄養サポート。BCAA(分岐鎖アミノ酸)が筋蛋白合成を促進+MSMが結合組織の修復をサポート。術後回復、骨折治癒、CKD/肝疾患の筋肉量維持、競走馬・スポーツ犬の運動器サポートに\n※MSM+アミノコンプリート: 重度肝・腎不全は蛋白負荷に留意",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Cardiomyopathy degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "ear-infection-otitis",
@@ -117,7 +126,8 @@
       "en_reference": "",
       "current_treatment_ja": "爬虫類における耳感染症（中耳炎）の治療には、可能であれば培養感受性試験に基づく標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Ear Infection (Otitis) degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "septicemia",
@@ -128,7 +138,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける敗血症の治療には、可能であれば培養感受性試験に基づく標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。\n[ECVN:Block] 【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】\n• For Antioxidant (アスタキサンチン+メロンSOD+VitE+システイン（アスタアミノ処方）): 抗酸化・慢性疾患免疫サポート。アスタキサンチン(カロテノイド系)+SOD(スーパーオキシドジスムターゼ)が活性酸素種を消去。CKD・肝疾患・アトピー・ダニ媒介性感染症の酸化ストレス軽減、高齢動物の免疫機能維持に\n• Booster & Relax (アダプトゲン+Bビタミン複合体): ウイルス後回復・内分泌疾患エネルギー補給・高齢期慢性疲労。アダプトゲン(ストレス適応促進)+Bビタミン複合体がエネルギー代謝と副腎機能をサポート。パルボ/ジステンパー回復期、甲状腺機能低下症/アジソン病の倦怠感、ダニ媒介性感染症回復期のエネルギー補給に",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Septicemia degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "dental-malocclusion-molar-acquired",
@@ -139,7 +150,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける不正咬合 - 臼歯（後天性）の治療には鎮静または麻酔下での歯科検査が必要である。不正咬合は種と重症度に応じて歯のトリミング、研磨、抜歯が必要となる。根尖膿瘍には排膿、デブリードマン、全身性抗菌薬が必要である。歯周病治療にはスケーリング、研磨、重度罹患歯の抜歯を含む。種に適した鎮痛薬による疼痛管理が不可欠である。食事の調整により回復を促進し再発を予防する。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Dental Malocclusion - Molar (Acquired) degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "dental-malocclusion-incisor-congenital",
@@ -150,7 +162,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける不正咬合 - 切歯（先天性）の治療には鎮静または麻酔下での歯科検査が必要である。不正咬合は種と重症度に応じて歯のトリミング、研磨、抜歯が必要となる。根尖膿瘍には排膿、デブリードマン、全身性抗菌薬が必要である。歯周病治療にはスケーリング、研磨、重度罹患歯の抜歯を含む。種に適した鎮痛薬による疼痛管理が不可欠である。食事の調整により回復を促進し再発を予防する。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Dental Malocclusion - Incisor (Congenital) degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "tail-amputation-stump-infection",
@@ -161,7 +174,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける尾切断部感染の治療は安定化、疼痛管理、創傷ケアを優先する。生命を脅かす損傷を最初に評価・対処する（気道、呼吸、循環）。種に適した鎮痛薬（NSAIDs、オピオイド、局所麻酔薬）による鎮痛が不可欠である。創傷を洗浄・デブリードマンし、一次閉鎖、二次治癒、再建手術を適宜行う。汚染創には広域抗菌薬を使用する。骨折には副子固定または外科的固定を行う。遅発性合併症をモニタリングする。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Tail Amputation Stump Infection degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "mycoplasma-infection",
@@ -172,7 +186,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおけるマイコプラズマ感染症の治療には、可能であれば培養感受性試験に基づく標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Mycoplasma Infection degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "tapeworm-infection",
@@ -183,7 +198,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける条虫感染症の治療には、同定された寄生虫に応じた適切な駆虫薬が必要である。一部の駆虫薬は特定の種に有毒であるため、種に適した用量設定が重要である。全てのライフステージを排除するため複数回投与が必要な場合がある。環境消毒と接触動物の治療で再感染を防止する。貧血、脱水、栄養失調などの二次的合併症に対する支持療法を行う。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Tapeworm Infection degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "toxicosis-plant-poisoning",
@@ -194,7 +210,8 @@
       "en_reference": "",
       "current_treatment_ja": "直ちに除染処置（摂取直後の場合）、活性炭投与（適応あれば）、特異的解毒剤の投与、積極的な輸液療法、臓器機能のモニタリング。痙攣コントロールと体温管理を必要に応じて実施。\n[ECVN:Block] 【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】\n• For Antioxidant (アスタキサンチン+メロンSOD+VitE+システイン（アスタアミノ処方）): 抗酸化・慢性疾患免疫サポート。アスタキサンチン(カロテノイド系)+SOD(スーパーオキシドジスムターゼ)が活性酸素種を消去。CKD・肝疾患・アトピー・ダニ媒介性感染症の酸化ストレス軽減、高齢動物の免疫機能維持に\n• Booster & Relax (アダプトゲン+Bビタミン複合体): ウイルス後回復・内分泌疾患エネルギー補給・高齢期慢性疲労。アダプトゲン(ストレス適応促進)+Bビタミン複合体がエネルギー代謝と副腎機能をサポート。パルボ/ジステンパー回復期、甲状腺機能低下症/アジソン病の倦怠感、ダニ媒介性感染症回復期のエネルギー補給に",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Toxicosis (Plant Poisoning) degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "zinc-toxicosis",
@@ -205,7 +222,8 @@
       "en_reference": "",
       "current_treatment_ja": "デグーにおける亜鉛中毒の治療には迅速な除染と支持療法が必要である。摂取直後であれば催吐（種にとって安全な場合）または胃洗浄により吸収を低減する。活性炭は多くの毒素を吸着する。特異的解毒剤がある場合は投与する（例：抗凝固性殺鼠剤にビタミンK1、アセトアミノフェンにN-アセチルシステイン）。積極的な輸液療法で腎排泄を促進し灌流を維持する。臓器特異的障害（肝、腎、神経）をモニタリングし治療する。\n[ECVN:Block] 【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】\n• For Antioxidant (アスタキサンチン+メロンSOD+VitE+システイン（アスタアミノ処方）): 抗酸化・慢性疾患免疫サポート。アスタキサンチン(カロテノイド系)+SOD(スーパーオキシドジスムターゼ)が活性酸素種を消去。CKD・肝疾患・アトピー・ダニ媒介性感染症の酸化ストレス軽減、高齢動物の免疫機能維持に\n• NMNミトコンドリアアシスト (NMN+α-リポ酸+システイン+プロバイオティクス): 細胞エネルギー代謝・サーチュイン活性化・抗老化。NMN 5000mgがNAD+産生を促進→ミトコンドリア機能改善+サーチュイン(SIRT1-7)活性化。認知機能低下(CDS)、変性性脊髄症、慢性代謝疾患(糖尿病/クッシング)、加齢性臓器機能低下のサポートに\n• Booster & Relax (アダプトゲン+Bビタミン複合体): ウイルス後回復・内分泌疾患エネルギー補給・高齢期慢性疲労。アダプトゲン(ストレス適応促進)+Bビタミン複合体がエネルギー代謝と副腎機能をサポート。パルボ/ジステンパー回復期、甲状腺機能低下症/アジソン病の倦怠感、ダニ媒介性感染症回復期のエネルギー補給に",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Zinc Toxicosis degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "repetitive-behavior-stereotypy",
@@ -216,7 +234,8 @@
       "en_reference": "",
       "current_treatment_ja": "【病態】常同行動（バーチューイング、旋回、過剰なグルーミング）はデグーの飼育環境の不適切さを示すサイン。デグーは高度な社会性と知性を持つ齧歯類。【環境改善（第一選択）】十分なケージサイズ（縦型、高さ≥80cm、幅≥60cm）。回し車（ソリッドタイプ、直径≥30cm: 尾の巻き込み防止）。砂浴び場（毎日提供: 被毛の健康に必須）。噛める素材（リンゴの木、柳の枝: 常時提供。歯の持続成長への対応）。金網ケージから水槽型+金網蓋への変更（バーチューイング防止）。十分な干し草（チモシー: 自由採食）。トンネル、段、ハンモック、枝によるケージの立体化。【社会的ニーズ】デグーは必ず複数飼育（単独飼育は深刻なストレス→常同行動の主因）。最低ペア、理想はグループ飼育。【重要】デグーは糖尿病になりやすい→糖分を含む食べ物（果物、市販おやつ）は禁忌。【参考文献】Jekl V & Redrobe S (2013) Degus. In: BSAVA Manual of Exotic Pets 5th ed; Quesenberry KE & Carpenter JW (2012) 3rd ed.",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Repetitive Behavior (Stereotypy) degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "barbering",
@@ -227,7 +246,8 @@
       "en_reference": "",
       "current_treatment_ja": "社会的ストレス対処：過密、序列。ケージスペース拡大、エンリッチメント。攻撃的なら分離。皮膚糸状菌/ダニ/栄養欠乏除外。無糖食。環境矯正で予後良好。皮膚疾患の治療は基礎疾患の特定と原因除去が最も重要である。感染性皮膚疾患には感受性試験に基づく抗菌薬・抗真菌薬を投与し、アレルギー性にはステロイド、アポキル、サイトポイント等を使用する。局所療法としてシャンプー療法、外用薬を併用し、再発予防のためのスキンケアプログラムを策定する。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Barbering degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "splay-leg",
@@ -238,7 +258,8 @@
       "en_reference": "",
       "current_treatment_ja": "新生児：生後数日以内にホブルスプリント。8の字テープ。滑りにくい床材。栄養性ならCa/VitD。早期なら1-2週で矯正。早期で予後優良。先天性疾患の治療は病態に応じて外科的矯正または内科的管理を選択する。早期介入が予後改善に重要であり、成長期に合わせた段階的治療計画を立案する。支持療法として栄養管理、運動制限、合併症予防を行い、長期的な経過観察と生活の質の維持を目標とする。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Splay Leg degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "stress-related-illness",
@@ -249,7 +270,8 @@
       "en_reference": "",
       "current_treatment_ja": "ストレス源除去：過密、孤立（社会性動物）、騒音、温度極端。⚠デグーは高度に社会的→ペア/群飼育必須。エンリッチメント（回し車、砂浴び）。食欲不振時は強制給餌。ストレス源除去で予後優良。心疾患の治療は病態に応じた薬物療法が中心であり、うっ血性心不全にはフロセミド、ピモベンダン、ACE阻害薬の三剤併用が標準的である。不整脈管理、血栓予防、運動制限を適切に組み合わせる。定期的な心エコー検査、胸部X線、心臓バイオマーカー測定による経過観察が必須である。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Stress-Related Illness degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "heat-stroke-respiratory",
@@ -260,7 +282,8 @@
       "en_reference": "",
       "current_treatment_ja": "【デグーの熱射病（呼吸器型）】■病態: デグーは暑さに弱い（適温18-22°C）。25°C以上で危険。呼吸促迫が主徴。■症状: 開口呼吸、横臥、痙攣。■治療: 即座の冷却: 常温水で湿らせる。涼しい環境。輸液（SC 1-2 mL）。酸素療法。■予防: 室温管理。大理石プレート。■禁忌: 糖分含有薬。■予後: 軽度→良好。重度→不良。■参考文献: Jekl et al. 2011; Quesenberry & Carpenter 2012",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Heat Stroke (Respiratory) degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "arteriosclerosis",
@@ -271,7 +294,8 @@
       "en_reference": "",
       "current_treatment_ja": "根治なし。厳格な無糖・低脂肪・チモシーベース食。⚠デグーはインスリン抵抗性/糖尿病で素因あり。体重管理、運動。高齢デグーで多い。進行性で予後要注意。変性疾患の治療は疾患進行の抑制と症状緩和を目標とする。疼痛管理としてNSAIDs、ガバペンチン、物理療法を併用する。体重管理、関節サプリメント（グルコサミン・コンドロイチン・オメガ3脂肪酸）、適度な運動療法により機能維持を図る。重症例では外科的介入を検討する。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Arteriosclerosis degu OR exotic OR rodent treatment」。"
     },
     {
       "slug": "nail-overgrowth",
@@ -282,7 +306,8 @@
       "en_reference": "",
       "current_treatment_ja": "4-6週毎に爪切り。クイック回避。ケージに溶岩棚/石。柔らかい敷料で過成長しやすい。定期ケアで予後優良。先天性疾患の治療は病態に応じて外科的矯正または内科的管理を選択する。早期介入が予後改善に重要であり、成長期に合わせた段階的治療計画を立案する。支持療法として栄養管理、運動制限、合併症予防を行い、長期的な経過観察と生活の質の維持を目標とする。",
       "treatment_ja": "",
-      "sources": []
+      "sources": [],
+      "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Nail Overgrowth degu OR exotic OR rodent treatment」。"
     }
   ]
 }
