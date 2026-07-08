@@ -4,10 +4,10 @@
  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
  "counts": {
   "records": 201,
-  "merge_clusters": 12,
-  "records_merged_away": 17,
+  "merge_clusters": 14,
+  "records_merged_away": 20,
   "archived": 3,
-  "served_after": 183,
+  "served_after": 180,
   "served_after_note": "actual applied count via apply_canonical_map (slug-dedup aware)"
  },
  "merges": [
@@ -255,6 +255,48 @@
     }
    ],
    "reason": "same disease (bite wounds)",
+   "inherit_content": true
+  },
+  {
+   "canonical": {
+    "id": "degu_0000",
+    "slug": "diabetes-mellitus",
+    "name": "Diabetes Mellitus",
+    "name_ja": "糖尿病"
+   },
+   "merged": [
+    {
+     "id": "degu_0057",
+     "slug": "diabetes-mellitus-type-1-juvenile-onset",
+     "name": "Diabetes Mellitus - Type 1 (Juvenile Onset)",
+     "name_ja": "糖尿病 - 1型（若年発症）"
+    },
+    {
+     "id": "degu_0058",
+     "slug": "diabetes-mellitus-type-2-diet-induced",
+     "name": "Diabetes Mellitus - Type 2 (Diet-Induced)",
+     "name_ja": "糖尿病 - 2型（食事誘発性）"
+    }
+   ],
+   "reason": "etiologic subtypes of one disease (diabetes mellitus) — de-split per over-fragmentation review; DKA/cataract/nephropathy kept separate as distinct complications",
+   "inherit_content": true
+  },
+  {
+   "canonical": {
+    "id": "degu_0056",
+    "slug": "diabetes-related-neuropathy",
+    "name": "Diabetes-related Neuropathy",
+    "name_ja": "糖尿病性神経障害"
+   },
+   "merged": [
+    {
+     "id": "degu_0107",
+     "slug": "peripheral-neuropathy-diabetic",
+     "name": "Peripheral Neuropathy (Diabetic)",
+     "name_ja": "末梢神経障害（糖尿病性）"
+    }
+   ],
+   "reason": "same complication (diabetic peripheral neuropathy) — duplicate",
    "inherit_content": true
   }
  ],
