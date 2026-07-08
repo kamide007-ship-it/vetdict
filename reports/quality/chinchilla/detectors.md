@@ -145,38 +145,38 @@
 ### 投与量なし（上位30）
 - ファースリップ（脱毛）（Fur Slip）[chinchilla_0012] — ja:464字 / en:1134字
 - 陰茎毛輪（Penile Fur Ring）[chinchilla_0027] — ja:193字 / en:166字
-- ケージ外傷（Cage Injuries）[chinchilla_0032] — ja:438字 / en:808字
-- 鉛中毒（Lead Poisoning）[chinchilla_0035] — ja:467字 / en:494字
-- 熱中症（神経症状）（Heat Stroke (Neurological)）[chinchilla_0038] — ja:328字 / en:442字
-- 心筋症（Cardiomyopathy）[chinchilla_0042] — ja:339字 / en:492字
-- うっ血性心不全（Congestive Heart Failure）[chinchilla_0044] — ja:346字 / en:413字
-- コクシジウム症（Coccidia Infection）[chinchilla_0054] — ja:432字 / en:454字
+- ケージ外傷（Cage Injuries）[chinchilla_0032] — ja:448字 / en:832字
+- 鉛中毒（Lead Poisoning）[chinchilla_0035] — ja:477字 / en:518字
+- 熱中症（神経症状）（Heat Stroke (Neurological)）[chinchilla_0038] — ja:338字 / en:466字
+- 心筋症（Cardiomyopathy）[chinchilla_0042] — ja:349字 / en:516字
+- うっ血性心不全（Congestive Heart Failure）[chinchilla_0044] — ja:356字 / en:437字
+- コクシジウム症（Coccidia Infection）[chinchilla_0054] — ja:442字 / en:478字
 - 毛ダニ症（Fur Mites）[chinchilla_0055] — ja:164字 / en:172字
-- 乳腺腫瘍（Mammary Tumors）[chinchilla_0060] — ja:282字 / en:412字
-- 肥満（Obesity）[chinchilla_0066] — ja:797字 / en:994字
+- 乳腺腫瘍（Mammary Tumors）[chinchilla_0060] — ja:292字 / en:436字
+- 肥満（Obesity）[chinchilla_0066] — ja:807字 / en:1018字
 - 誤嚥性肺炎（Aspiration Pneumonia）[chinchilla_0069] — ja:77字 / en:186字
-- 熱中症 - 慢性後遺症（Heat Stroke - Chronic Sequelae）[chinchilla_0072] — ja:444字 / en:447字
+- 熱中症 - 慢性後遺症（Heat Stroke - Chronic Sequelae）[chinchilla_0072] — ja:454字 / en:471字
 - 不正咬合 - 臼歯スパー（Dental Malocclusion - Molar Spurs）[chinchilla_0073] — ja:184字 / en:158字
 - 不正咬合 - 切歯（Dental Malocclusion - Incisor）[chinchilla_0074] — ja:181字 / en:158字
 - 歯の吸収（Dental Resorption）[chinchilla_0076] — ja:176字 / en:158字
 - ファースリップ - 広範囲型（Fur Slip - Extensive）[chinchilla_0078] — ja:578字 / en:1340字
-- 角膜ジストロフィー（Corneal Dystrophy）[chinchilla_0107] — ja:308字 / en:686字
-- 細菌性皮膚感染（膿皮症）（Bacterial Skin Infection (Pyoderma)）[chinchilla_0111] — ja:741字 / en:683字
-- 中毒症（植物中毒）（Toxicosis (Plant Poisoning)）[chinchilla_0122] — ja:484字 / en:590字
-- 盲腸内細菌叢異常（Cecal Dysbiosis）[chinchilla_0124] — ja:465字 / en:790字
-- 創傷感染（Wound Infection）[chinchilla_0128] — ja:437字 / en:810字
-- 抗生物質関連腸内細菌叢異常（Antibiotic-Associated Dysbiosis）[chinchilla_0131] — ja:471字 / en:806字
+- 角膜ジストロフィー（Corneal Dystrophy）[chinchilla_0107] — ja:318字 / en:710字
+- 細菌性皮膚感染（膿皮症）（Bacterial Skin Infection (Pyoderma)）[chinchilla_0111] — ja:751字 / en:707字
+- 中毒症（植物中毒）（Toxicosis (Plant Poisoning)）[chinchilla_0122] — ja:494字 / en:614字
+- 盲腸内細菌叢異常（Cecal Dysbiosis）[chinchilla_0124] — ja:475字 / en:814字
+- 創傷感染（Wound Infection）[chinchilla_0128] — ja:447字 / en:834字
+- 抗生物質関連腸内細菌叢異常（Antibiotic-Associated Dysbiosis）[chinchilla_0131] — ja:481字 / en:830字
 - エンセファリトゾーン・クニクリ感染症（Encephalitozoon cuniculi Infection）[chinchilla_0138] — ja:178字 / en:204字
-- 亜鉛中毒（Zinc Toxicosis）[chinchilla_0139] — ja:647字 / en:626字
+- 亜鉛中毒（Zinc Toxicosis）[chinchilla_0139] — ja:657字 / en:650字
 - 歯科疾患（切歯不正咬合）（Dental Disease - Incisor Malocclusion）[chinchilla_0140] — ja:184字 / en:158字
 - 歯科疾患（臼歯歯根感染）（Dental Disease - Molar Root Infection）[chinchilla_0141] — ja:184字 / en:204字
 - 歯科疾患（歯根吸収性病変）（Dental Disease - Resorptive Lesions）[chinchilla_0142] — ja:185字 / en:158字
-- 鼓脹症（急性盲腸鼓腸）（Bloat - Acute Cecal Tympany）[chinchilla_0144] — ja:469字 / en:440字
+- 鼓脹症（急性盲腸鼓腸）（Bloat - Acute Cecal Tympany）[chinchilla_0144] — ja:479字 / en:464字
 - 外耳炎（Otitis Externa - Chinchilla）[chinchilla_0154] — ja:160字 / en:159字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **100** 疾患
-- 犬猫論文の他種への自動紐付け: **25** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **100** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **19** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 臼歯過長症（Molar Elongation）[chinchilla_0001] → リンコマイシン
@@ -201,7 +201,6 @@
 - 接触性・アレルギー性皮膚炎（Dermatitis (Contact / Allergic)）[chinchilla_0064] → ヒドロキシジン, リンコマイシン
 
 ### 犬猫論文が他種に自動紐付け（上位20）
-- 不正咬合（Malocclusion）[chinchilla_0000] → key: malocclusion
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[chinchilla_0014] → key: dermatophytosis
 - 尿路結石症（Urolithiasis (Bladder Stones)）[chinchilla_0021] → key: urolithiasis
 - 慢性腎臓病（Chronic Kidney Disease）[chinchilla_0022] → key: chronic kidney disease
@@ -209,18 +208,18 @@
 - 心筋症（Cardiomyopathy）[chinchilla_0042] → key: hypertrophic cardiomyopathy (hcm)
 - 糖尿病（Diabetes Mellitus）[chinchilla_0045] → key: diabetes mellitus
 - リンパ腫（Lymphoma）[chinchilla_0058] → key: lymphoma
-- 不正咬合 - 臼歯スパー（Dental Malocclusion - Molar Spurs）[chinchilla_0073] → key: malocclusion
-- 不正咬合 - 切歯（Dental Malocclusion - Incisor）[chinchilla_0074] → key: malocclusion
 - エンセファリトゾーン・クニクリ感染症（Encephalitozoon cuniculi Infection）[chinchilla_0138] → key: encephalitozoon cuniculi
-- 歯科疾患（切歯不正咬合）（Dental Disease - Incisor Malocclusion）[chinchilla_0140] → key: malocclusion
 - 糖尿病（Diabetes Mellitus - Chinchilla）[chinchilla_0155] → key: diabetes mellitus
 - 子宮蓄膿症（Pyometra - Chinchilla）[chinchilla_0157] → key: pyometra
-- 不正咬合（進行性）（Malocclusion - Progressive）[chinchilla_0163] → key: malocclusion
 - 膀胱炎（チンチラ）（Cystitis）[chinchilla_0188] → key: feline idiopathic cystitis (fic)
 - 白血病（チンチラ）（Leukemia）[chinchilla_0212] → key: feline leukemia virus
 - 皮膚糸状菌症（ミクロスポルム）（チンチラ）（Dermatophytosis (Microsporum)）[chinchilla_0226] → key: dermatophytosis
 - 膵炎（チンチラ）（Pancreatitis）[chinchilla_0229] → key: feline pancreatitis
 - 腹膜炎（チンチラ）（Peritonitis）[chinchilla_0230] → key: feline infectious peritonitis
+- 血栓塞栓症（チンチラ）（Thromboembolism）[chinchilla_0243] → key: aortic thromboembolism (saddle thrombus)
+- 皮膚糸状菌症（チンチラ）（Dermatophytosis (Ringworm)）[chinchilla_0251] → key: dermatophytosis
+- 尿路結石症（チンチラ）（Urolithiasis）[chinchilla_0273] → key: urolithiasis
+- 貧血（チンチラ）（Anemia）[chinchilla_0276] → key: immune-mediated hemolytic anemia
 
 ## T109 機械翻訳臭（置換辞書）
 - ヒット総数: **0**（safe 0 / review 0）

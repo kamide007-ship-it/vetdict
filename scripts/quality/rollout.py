@@ -58,6 +58,8 @@ def main() -> int:
             "heading_only_tx": t4["heading_only_count"],
             "drug_mismatch": t8["drug_mismatch_count"],
             "citation_mismatch": t8["citation_mismatch_count"],
+            "drug_mismatch_residual": t8.get("drug_mismatch_residual_count", 0),
+            "citation_mismatch_residual": t8.get("citation_mismatch_residual_count", 0),
             "mt_hits": t9["hit_count"],
             "mt_safe": t9["safe_occurrences"],
             "mt_review": t9["review_occurrences"],
@@ -85,6 +87,7 @@ def main() -> int:
         for k in (
             "records", "dup_clusters", "redundant", "families", "nonclinical",
             "empty_tx", "heading_only_tx", "drug_mismatch", "citation_mismatch",
+            "drug_mismatch_residual", "citation_mismatch_residual",
             "mt_hits", "mt_safe", "mt_review",
         )
     }  # fmt: skip
@@ -100,6 +103,11 @@ def main() -> int:
         f"/ 非臨床計: **{totals['nonclinical']}** / 投与量なし治療計: **{totals['heading_only_tx']}** "
         f"/ 薬品誤リンク計: **{totals['drug_mismatch']}** / 犬猫論文誤紐付け計: **{totals['citation_mismatch']}** "
         f"/ 機械翻訳臭計: **{totals['mt_hits']}**",
+        "",
+        f"> **T108 種ガード適用済み**（`api/pubmed_references.py` + `api/vetdict_api.py`）。"
+        f"上記の薬品誤リンク・論文誤紐付けは *未ガード時の問題規模*。"
+        f"出荷済みガード適用後の残存: 薬品 **{totals['drug_mismatch_residual']}** / "
+        f"論文 **{totals['citation_mismatch_residual']}**（目標0＝本番では表示されない）。",
         "",
         "| 種 | 疾患 | 重複ｸﾗｽﾀ | 冗長 | ﾌｧﾐﾘｰ候補 | 非臨床 | 空治療 | 投与量無 | 薬品誤 | 論文誤 | MT臭(safe/rev) |",
         "|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|",

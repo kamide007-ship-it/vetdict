@@ -4362,8 +4362,8 @@
         "id": "bird_0048",
         "name": "Renal Failure (Acute / Chronic)",
         "name_ja": "腎不全（急性／慢性）",
-        "treatment_ja_len": 473,
-        "treatment_len": 609,
+        "treatment_ja_len": 483,
+        "treatment_len": 633,
         "has_dosage": false
       },
       {
@@ -4434,8 +4434,8 @@
         "id": "bird_0101",
         "name": "Coccidia",
         "name_ja": "コクシジウム症",
-        "treatment_ja_len": 333,
-        "treatment_len": 422,
+        "treatment_ja_len": 343,
+        "treatment_len": 446,
         "has_dosage": false
       },
       {
@@ -4450,32 +4450,32 @@
         "id": "bird_0109",
         "name": "PTFE / Teflon Toxicosis",
         "name_ja": "PTFE／テフロン中毒",
-        "treatment_ja_len": 437,
-        "treatment_len": 369,
+        "treatment_ja_len": 447,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "bird_0110",
         "name": "Avocado Toxicity",
         "name_ja": "アボカド中毒",
-        "treatment_ja_len": 331,
-        "treatment_len": 369,
+        "treatment_ja_len": 341,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "bird_0112",
         "name": "Zinc Poisoning",
         "name_ja": "亜鉛中毒",
-        "treatment_ja_len": 430,
-        "treatment_len": 743,
+        "treatment_ja_len": 440,
+        "treatment_len": 767,
         "has_dosage": false
       },
       {
         "id": "bird_0114",
         "name": "Chocolate Toxicity",
         "name_ja": "チョコレート中毒",
-        "treatment_ja_len": 333,
-        "treatment_len": 369,
+        "treatment_ja_len": 343,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
@@ -4490,8 +4490,8 @@
         "id": "bird_0120",
         "name": "Cataracts",
         "name_ja": "白内障",
-        "treatment_ja_len": 620,
-        "treatment_len": 933,
+        "treatment_ja_len": 630,
+        "treatment_len": 957,
         "has_dosage": false
       },
       {
@@ -4522,8 +4522,8 @@
         "id": "bird_0150",
         "name": "Cochlosoma Infection",
         "name_ja": "コクロソーマ感染症",
-        "treatment_ja_len": 428,
-        "treatment_len": 387,
+        "treatment_ja_len": 438,
+        "treatment_len": 411,
         "has_dosage": false
       },
       {
@@ -4594,8 +4594,8 @@
         "id": "bird_0175",
         "name": "Proventricular Ulceration",
         "name_ja": "腺胃潰瘍",
-        "treatment_ja_len": 623,
-        "treatment_len": 926,
+        "treatment_ja_len": 633,
+        "treatment_len": 950,
         "has_dosage": false
       },
       {
@@ -4610,56 +4610,56 @@
         "id": "bird_0190",
         "name": "Pesticide Poisoning",
         "name_ja": "農薬中毒",
-        "treatment_ja_len": 309,
-        "treatment_len": 369,
+        "treatment_ja_len": 319,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "bird_0191",
         "name": "Plant Toxicity",
         "name_ja": "植物中毒",
-        "treatment_ja_len": 430,
-        "treatment_len": 369,
+        "treatment_ja_len": 440,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "bird_0192",
         "name": "Rodenticide Poisoning",
         "name_ja": "殺鼠剤中毒",
-        "treatment_ja_len": 431,
-        "treatment_len": 369,
+        "treatment_ja_len": 441,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "bird_0194",
         "name": "Essential Oil Toxicity",
         "name_ja": "エッセンシャルオイル中毒",
-        "treatment_ja_len": 438,
-        "treatment_len": 369,
+        "treatment_ja_len": 448,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "bird_0196",
         "name": "Air Sac Rupture",
         "name_ja": "気嚢破裂",
-        "treatment_ja_len": 434,
-        "treatment_len": 459,
+        "treatment_ja_len": 444,
+        "treatment_len": 483,
         "has_dosage": false
       },
       {
         "id": "bird_0198",
         "name": "Beak Overgrowth",
         "name_ja": "嘴過長症",
-        "treatment_ja_len": 581,
-        "treatment_len": 947,
+        "treatment_ja_len": 591,
+        "treatment_len": 971,
         "has_dosage": false
       },
       {
         "id": "bird_0199",
         "name": "Nail Overgrowth / Nail Injury",
         "name_ja": "爪過長症・爪損傷",
-        "treatment_ja_len": 438,
-        "treatment_len": 482,
+        "treatment_ja_len": 448,
+        "treatment_len": 506,
         "has_dosage": false
       },
       {
@@ -4674,8 +4674,8 @@
         "id": "bird_0205",
         "name": "Subcutaneous Emphysema",
         "name_ja": "皮下気腫",
-        "treatment_ja_len": 434,
-        "treatment_len": 454,
+        "treatment_ja_len": 444,
+        "treatment_len": 478,
         "has_dosage": false
       },
       {
@@ -4706,16 +4706,16 @@
         "id": "bird_0270",
         "name": "Lead Toxicosis – Chronic",
         "name_ja": "鉛中毒慢性型",
-        "treatment_ja_len": 432,
-        "treatment_len": 753,
+        "treatment_ja_len": 442,
+        "treatment_len": 777,
         "has_dosage": false
       },
       {
         "id": "bird_0271",
         "name": "Heavy Metal Poisoning – Mixed (Lead and Zinc)",
         "name_ja": "混合重金属中毒（鉛・亜鉛）",
-        "treatment_ja_len": 439,
-        "treatment_len": 369,
+        "treatment_ja_len": 449,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
@@ -4738,8 +4738,8 @@
         "id": "bird_0301",
         "name": "Zinc-Responsive Dermatosis",
         "name_ja": "亜鉛反応性皮膚症",
-        "treatment_ja_len": 434,
-        "treatment_len": 403,
+        "treatment_ja_len": 444,
+        "treatment_len": 427,
         "has_dosage": false
       },
       {
@@ -4871,6 +4871,8 @@
     "ref_keys_available": 30,
     "drug_mismatch_count": 94,
     "citation_mismatch_count": 17,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
       {
         "id": "bird_0014",

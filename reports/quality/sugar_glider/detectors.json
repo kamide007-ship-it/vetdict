@@ -1383,8 +1383,8 @@
         "id": "sugar_glider_0003",
         "name": "Obesity",
         "name_ja": "肥満",
-        "treatment_ja_len": 454,
-        "treatment_len": 573,
+        "treatment_ja_len": 464,
+        "treatment_len": 597,
         "has_dosage": false
       },
       {
@@ -1439,16 +1439,16 @@
         "id": "sugar_glider_0038",
         "name": "Proptosis (Eye Prolapse)",
         "name_ja": "眼球突出",
-        "treatment_ja_len": 405,
-        "treatment_len": 495,
+        "treatment_ja_len": 415,
+        "treatment_len": 519,
         "has_dosage": false
       },
       {
         "id": "sugar_glider_0052",
         "name": "Aflatoxicosis",
         "name_ja": "アフラトキシン中毒",
-        "treatment_ja_len": 476,
-        "treatment_len": 494,
+        "treatment_ja_len": 486,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
@@ -1463,8 +1463,8 @@
         "id": "sugar_glider_0062",
         "name": "Septicemia",
         "name_ja": "敗血症",
-        "treatment_ja_len": 563,
-        "treatment_len": 568,
+        "treatment_ja_len": 573,
+        "treatment_len": 592,
         "has_dosage": false
       },
       {
@@ -1479,16 +1479,16 @@
         "id": "sugar_glider_0071",
         "name": "Patagium Laceration (Severe)",
         "name_ja": "飛膜裂傷（重症型）",
-        "treatment_ja_len": 445,
-        "treatment_len": 825,
+        "treatment_ja_len": 455,
+        "treatment_len": 849,
         "has_dosage": false
       },
       {
         "id": "sugar_glider_0072",
         "name": "Patagium Abscess",
         "name_ja": "飛膜膿瘍",
-        "treatment_ja_len": 564,
-        "treatment_len": 472,
+        "treatment_ja_len": 574,
+        "treatment_len": 496,
         "has_dosage": false
       },
       {
@@ -1527,8 +1527,8 @@
         "id": "sugar_glider_0102",
         "name": "Dilated Cardiomyopathy",
         "name_ja": "拡張型心筋症",
-        "treatment_ja_len": 520,
-        "treatment_len": 606,
+        "treatment_ja_len": 530,
+        "treatment_len": 630,
         "has_dosage": false
       },
       {
@@ -1543,24 +1543,24 @@
         "id": "sugar_glider_0124",
         "name": "Lead Poisoning",
         "name_ja": "鉛中毒",
-        "treatment_ja_len": 470,
-        "treatment_len": 494,
+        "treatment_ja_len": 480,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "sugar_glider_0125",
         "name": "Zinc Toxicosis",
         "name_ja": "亜鉛中毒",
-        "treatment_ja_len": 650,
-        "treatment_len": 626,
+        "treatment_ja_len": 660,
+        "treatment_len": 650,
         "has_dosage": false
       },
       {
         "id": "sugar_glider_0131",
         "name": "Aflatoxicosis",
         "name_ja": "アフラトキシン中毒",
-        "treatment_ja_len": 813,
-        "treatment_len": 741,
+        "treatment_ja_len": 823,
+        "treatment_len": 765,
         "has_dosage": false
       },
       {
@@ -1583,8 +1583,8 @@
         "id": "sugar_glider_0165",
         "name": "Proptosis",
         "name_ja": "眼球脱出（フクロモモンガ）",
-        "treatment_ja_len": 484,
-        "treatment_len": 846,
+        "treatment_ja_len": 494,
+        "treatment_len": 870,
         "has_dosage": false
       },
       {
@@ -1612,6 +1612,8 @@
     "ref_keys_available": 30,
     "drug_mismatch_count": 108,
     "citation_mismatch_count": 16,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
       {
         "id": "sugar_glider_0000",

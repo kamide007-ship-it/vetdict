@@ -1276,8 +1276,8 @@
         "id": "hedgehog_0007",
         "name": "Oral Squamous Cell Carcinoma",
         "name_ja": "口腔扁平上皮癌",
-        "treatment_ja_len": 338,
-        "treatment_len": 762,
+        "treatment_ja_len": 348,
+        "treatment_len": 786,
         "has_dosage": false
       },
       {
@@ -1292,16 +1292,16 @@
         "id": "hedgehog_0033",
         "name": "Dilated Cardiomyopathy",
         "name_ja": "拡張型心筋症",
-        "treatment_ja_len": 518,
-        "treatment_len": 606,
+        "treatment_ja_len": 528,
+        "treatment_len": 630,
         "has_dosage": false
       },
       {
         "id": "hedgehog_0034",
         "name": "Cardiomyopathy (General)",
         "name_ja": "心筋症",
-        "treatment_ja_len": 488,
-        "treatment_len": 606,
+        "treatment_ja_len": 498,
+        "treatment_len": 630,
         "has_dosage": false
       },
       {
@@ -1324,8 +1324,8 @@
         "id": "hedgehog_0063",
         "name": "Coccidia Infection",
         "name_ja": "コクシジウム感染症",
-        "treatment_ja_len": 435,
-        "treatment_len": 454,
+        "treatment_ja_len": 445,
+        "treatment_len": 478,
         "has_dosage": false
       },
       {
@@ -1364,8 +1364,8 @@
         "id": "hedgehog_0080",
         "name": "Mammary Adenocarcinoma",
         "name_ja": "乳腺腺癌",
-        "treatment_ja_len": 335,
-        "treatment_len": 756,
+        "treatment_ja_len": 345,
+        "treatment_len": 780,
         "has_dosage": false
       },
       {
@@ -1396,8 +1396,8 @@
         "id": "hedgehog_0095",
         "name": "Allergic Dermatitis",
         "name_ja": "アレルギー性皮膚炎",
-        "treatment_ja_len": 659,
-        "treatment_len": 912,
+        "treatment_ja_len": 669,
+        "treatment_len": 936,
         "has_dosage": false
       },
       {
@@ -1412,8 +1412,8 @@
         "id": "hedgehog_0102",
         "name": "Capillaria Hepatica Infection",
         "name_ja": "カピラリア・ヘパティカ感染",
-        "treatment_ja_len": 757,
-        "treatment_len": 757,
+        "treatment_ja_len": 767,
+        "treatment_len": 781,
         "has_dosage": false
       },
       {
@@ -1436,8 +1436,8 @@
         "id": "hedgehog_0166",
         "name": "Proptosis",
         "name_ja": "眼球脱出（ハリネズミ）",
-        "treatment_ja_len": 484,
-        "treatment_len": 846,
+        "treatment_ja_len": 494,
+        "treatment_len": 870,
         "has_dosage": false
       },
       {
@@ -1456,7 +1456,9 @@
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 127,
-    "citation_mismatch_count": 20,
+    "citation_mismatch_count": 17,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
       {
         "id": "hedgehog_0002",
@@ -3578,15 +3580,6 @@
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
       {
-        "id": "hedgehog_0029",
-        "name": "Wobbly Hedgehog Syndrome (WHS)",
-        "name_ja": "ふらつき症候群（WHS）",
-        "matched_keys": [
-          "wobbly hedgehog syndrome (whs)"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
         "id": "hedgehog_0045",
         "name": "Chronic Kidney Disease",
         "name_ja": "慢性腎臓病",
@@ -3637,24 +3630,6 @@
         "name_ja": "貧血",
         "matched_keys": [
           "immune-mediated hemolytic anemia"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "hedgehog_0077",
-        "name": "Wobbly Hedgehog Syndrome (WHS) - Early Stage",
-        "name_ja": "ふらつきハリネズミ症候群（WHS）- 初期段階",
-        "matched_keys": [
-          "wobbly hedgehog syndrome (whs)"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "hedgehog_0078",
-        "name": "Wobbly Hedgehog Syndrome (WHS) - Advanced",
-        "name_ja": "ふらつきハリネズミ症候群（WHS）- 進行期",
-        "matched_keys": [
-          "wobbly hedgehog syndrome (whs)"
         ],
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },

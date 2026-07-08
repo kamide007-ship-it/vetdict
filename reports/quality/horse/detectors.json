@@ -4129,7 +4129,7 @@
         "id": "on_lymphoma",
         "name": "Equine Lymphoma",
         "name_ja": "馬リンパ腫",
-        "treatment_ja_len": 408,
+        "treatment_ja_len": 418,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4145,7 +4145,7 @@
         "id": "on_scc",
         "name": "Squamous Cell Carcinoma (Non-Ocular)",
         "name_ja": "扁平上皮癌(非眼性)",
-        "treatment_ja_len": 408,
+        "treatment_ja_len": 418,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4153,7 +4153,7 @@
         "id": "ur_urolithiasis",
         "name": "Equine Urolithiasis",
         "name_ja": "馬尿石症",
-        "treatment_ja_len": 451,
+        "treatment_ja_len": 461,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4201,7 +4201,7 @@
         "id": "ey_squamous_cell_carcinoma_eye",
         "name": "Ocular Squamous Cell Carcinoma",
         "name_ja": "眼部扁平上皮癌",
-        "treatment_ja_len": 1324,
+        "treatment_ja_len": 1334,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4209,7 +4209,7 @@
         "id": "on_squamous_cell_carcinoma",
         "name": "Squamous Cell Carcinoma (Cutaneous)",
         "name_ja": "扁平上皮癌(皮膚)",
-        "treatment_ja_len": 408,
+        "treatment_ja_len": 418,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4225,7 +4225,7 @@
         "id": "on_hemangiosarcoma",
         "name": "Hemangiosarcoma",
         "name_ja": "血管肉腫",
-        "treatment_ja_len": 408,
+        "treatment_ja_len": 418,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4233,7 +4233,7 @@
         "id": "on_lipoma_pedunculated",
         "name": "Pedunculated Lipoma",
         "name_ja": "有茎脂肪腫",
-        "treatment_ja_len": 415,
+        "treatment_ja_len": 425,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4241,7 +4241,7 @@
         "id": "on_gastric_scc",
         "name": "Gastric Squamous Cell Carcinoma",
         "name_ja": "胃扁平上皮癌",
-        "treatment_ja_len": 601,
+        "treatment_ja_len": 611,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4257,7 +4257,7 @@
         "id": "ur_acute_renal_failure",
         "name": "Acute Renal Failure",
         "name_ja": "急性腎不全",
-        "treatment_ja_len": 430,
+        "treatment_ja_len": 440,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4265,7 +4265,7 @@
         "id": "ur_chronic_renal_failure",
         "name": "Chronic Renal Failure",
         "name_ja": "慢性腎不全",
-        "treatment_ja_len": 430,
+        "treatment_ja_len": 440,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4273,7 +4273,7 @@
         "id": "ur_cystitis",
         "name": "Cystitis",
         "name_ja": "膀胱炎",
-        "treatment_ja_len": 451,
+        "treatment_ja_len": 461,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4289,7 +4289,7 @@
         "id": "ur_nephrolithiasis",
         "name": "Nephrolithiasis",
         "name_ja": "腎結石",
-        "treatment_ja_len": 430,
+        "treatment_ja_len": 440,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4297,7 +4297,7 @@
         "id": "ur_sabulous_cystitis",
         "name": "Sabulous Cystitis",
         "name_ja": "砂状膀胱炎",
-        "treatment_ja_len": 451,
+        "treatment_ja_len": 461,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4337,7 +4337,7 @@
         "id": "ur_hemolytic_uremic_syndrome",
         "name": "Hemolytic Uremic Syndrome",
         "name_ja": "溶血性尿毒症症候群",
-        "treatment_ja_len": 951,
+        "treatment_ja_len": 961,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4345,7 +4345,7 @@
         "id": "on_intestinal_lymphoma",
         "name": "Intestinal Lymphoma",
         "name_ja": "腸管リンパ腫",
-        "treatment_ja_len": 408,
+        "treatment_ja_len": 418,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4353,7 +4353,7 @@
         "id": "dg_cecal_rupture",
         "name": "Cecal Rupture",
         "name_ja": "盲腸破裂",
-        "treatment_ja_len": 1095,
+        "treatment_ja_len": 1105,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4361,7 +4361,7 @@
         "id": "ey_periorbital_scc",
         "name": "Periorbital Squamous Cell Carcinoma",
         "name_ja": "眼窩周囲扁平上皮癌",
-        "treatment_ja_len": 1488,
+        "treatment_ja_len": 1498,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4377,7 +4377,7 @@
         "id": "ur_pyelonephritis2",
         "name": "Pyelonephritis",
         "name_ja": "腎盂腎炎",
-        "treatment_ja_len": 430,
+        "treatment_ja_len": 440,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4385,7 +4385,7 @@
         "id": "ur_urolithiasis_bladder",
         "name": "Cystic Urolithiasis (Bladder Stones)",
         "name_ja": "膀胱結石症",
-        "treatment_ja_len": 451,
+        "treatment_ja_len": 461,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4409,7 +4409,7 @@
         "id": "ur_toxic_nephrosis",
         "name": "Toxic Nephrosis",
         "name_ja": "中毒性腎症",
-        "treatment_ja_len": 758,
+        "treatment_ja_len": 768,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4417,7 +4417,7 @@
         "id": "ur_renal_dysplasia",
         "name": "Renal Dysplasia",
         "name_ja": "腎異形成",
-        "treatment_ja_len": 430,
+        "treatment_ja_len": 440,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4425,7 +4425,7 @@
         "id": "ur_glomerulonephritis",
         "name": "Glomerulonephritis",
         "name_ja": "糸球体腎炎",
-        "treatment_ja_len": 430,
+        "treatment_ja_len": 440,
         "treatment_len": 0,
         "has_dosage": false
       },
@@ -4433,7 +4433,7 @@
         "id": "ur_bladder_neoplasia2",
         "name": "Bladder Neoplasia",
         "name_ja": "膀胱腫瘍",
-        "treatment_ja_len": 415,
+        "treatment_ja_len": 425,
         "treatment_len": 0,
         "has_dosage": false
       }
@@ -4446,6 +4446,8 @@
     "ref_keys_available": 30,
     "drug_mismatch_count": 170,
     "citation_mismatch_count": 12,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
       {
         "id": "rp_iah",

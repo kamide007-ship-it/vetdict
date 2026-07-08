@@ -174,23 +174,23 @@
 ### 投与量なし（上位30）
 - 皮下膿瘍（Subcutaneous Abscess）[rabbit_0035] — ja:160字 / en:137字
 - 外耳炎（Otitis Externa）[rabbit_0045] — ja:159字 / en:159字
-- 心筋症（Cardiomyopathy）[rabbit_0062] — ja:513字 / en:606字
-- 肥満（Obesity）[rabbit_0068] — ja:1789字 / en:2989字
+- 心筋症（Cardiomyopathy）[rabbit_0062] — ja:523字 / en:630字
+- 肥満（Obesity）[rabbit_0068] — ja:1799字 / en:3013字
 - ボルデテラ感染症（Bordetella Infection）[rabbit_0079] — ja:164字 / en:137字
-- 膀胱炎（Cystitis）[rabbit_0088] — ja:424字 / en:386字
+- 膀胱炎（Cystitis）[rabbit_0088] — ja:434字 / en:410字
 - 赤色尿（非病的）（Red Urine (Non-pathological)）[rabbit_0089] — ja:441字 / en:1453字
 - カルシウム欠乏症（Calcium Deficiency）[rabbit_0105] — ja:75字 / en:146字
-- 眼球突出（眼球脱出）（Proptosis (Globe Prolapse)）[rabbit_0136] — ja:302字 / en:495字
+- 眼球突出（眼球脱出）（Proptosis (Globe Prolapse)）[rabbit_0136] — ja:312字 / en:519字
 - ローソニア細胞内感染症（Lawsonia Intracellular Infection）[rabbit_0147] — ja:167字 / en:137字
 - 麻痺性イレウス（Ileus (Paralytic)）[rabbit_0202] — ja:56字 / en:154字
 - 歯瘻（Dental Fistula）[rabbit_0207] — ja:173字 / en:527字
 - 熱中症（重度）（Heat Stroke - Severe）[rabbit_0230] — ja:195字 / en:522字
 - ロップ種耳道狭窄（Lop Ear Canal Stenosis）[rabbit_0237] — ja:164字 / en:159字
-- 多発性腎嚢胞（Renal Cysts (Polycystic)）[rabbit_0255] — ja:309字 / en:425字
-- 肝葉捻転（急性型）（Hepatic Torsion (Acute)）[rabbit_0261] — ja:780字 / en:1078字
+- 多発性腎嚢胞（Renal Cysts (Polycystic)）[rabbit_0255] — ja:319字 / en:449字
+- 肝葉捻転（急性型）（Hepatic Torsion (Acute)）[rabbit_0261] — ja:790字 / en:1102字
 - 粘液腫症（ミクソマトーシス）（Myxomatosis）[rabbit_0270] — ja:91字 / en:66字
 - ウサギ出血病（RHD）（ウサギ）（Rabbit Hemorrhagic Disease (RHD)）[rabbit_0274] — ja:168字 / en:531字
-- 胃拡張捻転（ウサギ）（Gastric Dilation-Volvulus）[rabbit_0329] — ja:431字 / en:651字
+- 胃拡張捻転（ウサギ）（Gastric Dilation-Volvulus）[rabbit_0329] — ja:441字 / en:675字
 - 小脳低形成（ウサギ）（Cerebellar Hypoplasia）[rabbit_0356] — ja:232字 / en:506字
 - チェリーアイ（瞬膜腺脱出）（ウサギ）（Cherry Eye (Nictitating Membrane Prolapse)）[rabbit_0365] — ja:160字 / en:345字
 - 高リン血症（ウサギ）（Hyperphosphatemia）[rabbit_0386] — ja:30字 / en:190字
@@ -199,8 +199,8 @@
 - 破壊的咀嚼行動（ウサギ）（Destructive Chewing Behavior）[rabbit_0446] — ja:371字 / en:853字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **132** 疾患
-- 犬猫論文の他種への自動紐付け: **27** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **132** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **19** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 胃拡張（鼓脹症）（Gastric Dilation (Bloat)）[rabbit_0001] → ロニダゾール
@@ -225,11 +225,7 @@
 - 後肢不全麻痺・麻痺（Hind Limb Paresis / Paralysis）[rabbit_0046] → デキサメタゾン
 
 ### 犬猫論文が他種に自動紐付け（上位20）
-- 消化管うっ滞（Gastrointestinal Stasis）[rabbit_0000] → key: gastrointestinal stasis
-- 歯の不正咬合（Dental Malocclusion）[rabbit_0009] → key: malocclusion
-- パスツレラ症（スナッフル）（Pasteurellosis (Snuffles)）[rabbit_0014] → key: pasteurellosis
 - 尿路結石症（Urolithiasis (Bladder Stones)）[rabbit_0020] → key: urolithiasis
-- エンセファリトゾーン・クニクリ感染症（Encephalitozoon cuniculi (E. cuniculi)）[rabbit_0023] → key: encephalitozoon cuniculi
 - 皮膚糸状菌症（白癬）（Ringworm (Dermatophytosis)）[rabbit_0033] → key: dermatophytosis
 - 子宮蓄膿症（Pyometra）[rabbit_0048] → key: pyometra
 - 心筋症（Cardiomyopathy）[rabbit_0062] → key: hypertrophic cardiomyopathy (hcm)
@@ -238,21 +234,22 @@
 - 腹膜炎（Peritonitis）[rabbit_0120] → key: feline infectious peritonitis
 - 副腎疾患（Adrenal Disease）[rabbit_0125] → key: adrenal disease
 - 糖尿病（Diabetes Mellitus）[rabbit_0138] → key: diabetes mellitus
-- パスツレラ症（結膜型）（Pasteurellosis - Conjunctival Form）[rabbit_0224] → key: pasteurellosis
-- パスツレラ症（生殖器型）（Pasteurellosis - Genital Form）[rabbit_0225] → key: pasteurellosis
-- パスツレラ症（敗血症型）（Pasteurellosis - Septicaemic Form）[rabbit_0226] → key: pasteurellosis
-- ウサギ出血病（RHD）（ウサギ）（Rabbit Hemorrhagic Disease (RHD)）[rabbit_0274] → key: rabbit hemorrhagic disease
 - 皮膚糸状菌症（白癬）（ウサギ）（Dermatophytosis (Ringworm)）[rabbit_0302] → key: dermatophytosis
 - 縦隔リンパ腫（ウサギ）（Mediastinal Lymphoma）[rabbit_0337] → key: lymphoma
 - 尿路結石症（ウサギ）（Urolithiasis）[rabbit_0339] → key: urolithiasis
+- 慢性腎臓病（ウサギ）（Chronic Kidney Disease）[rabbit_0342] → key: chronic kidney disease
+- 心臓リンパ腫（ウサギ）（Cardiac Lymphoma）[rabbit_0371] → key: lymphoma
+- 血栓塞栓症（ウサギ）（Thromboembolism）[rabbit_0372] → key: aortic thromboembolism (saddle thrombus)
+- 貧血（ウサギ）（Anemia）[rabbit_0388] → key: immune-mediated hemolytic anemia
+- 腸リンパ腫（ウサギ）（Intestinal Lymphoma）[rabbit_0415] → key: lymphoma
+- 肝リンパ腫（ウサギ）（Hepatic Lymphoma）[rabbit_0416] → key: lymphoma
+- 白血病（ウサギ）（Leukemia）[rabbit_0432] → key: feline leukemia virus
 
 ## T109 機械翻訳臭（置換辞書）
-- ヒット総数: **2**（safe 1 / review 1）
+- ヒット総数: **1**（safe 0 / review 1）
 
 ### 用語別ヒット数
-- `並発` × 1
 - `遺伝学的` × 1
 
 ### 出現箇所（上位30）
-- [safe] `並発`→併発 @ causes_ja [rabbit_0023] …：(1) 免疫不全—ストレス、栄養不足、並発感染、年齢極端。(2) 寄生虫負荷。(3…
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ causes_ja [rabbit_0023] …、年齢極端。(2) 寄生虫負荷。(3) 遺伝学的素因。(4) 曝露時年齢。(5) 環境要…

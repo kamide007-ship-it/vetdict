@@ -253,36 +253,36 @@
 - 喉頭片麻痺(喘鳴症)（Laryngeal Hemiplegia）[rp_laryngeal] — ja:1483字 / en:0字
 - ヘンドラウイルス感染症（Hendra Virus）[if_hendra] — ja:1283字 / en:0字
 - 豪州コウモリリッサウイルス感染症（Australian Bat Lyssavirus）[if_abl] — ja:721字 / en:0字
-- 馬リンパ腫（Equine Lymphoma）[on_lymphoma] — ja:408字 / en:0字
+- 馬リンパ腫（Equine Lymphoma）[on_lymphoma] — ja:418字 / en:0字
 - 白血病（Leukemia）[on_leukemia] — ja:179字 / en:0字
-- 扁平上皮癌(非眼性)（Squamous Cell Carcinoma (Non-Ocular)）[on_scc] — ja:408字 / en:0字
-- 馬尿石症（Equine Urolithiasis）[ur_urolithiasis] — ja:451字 / en:0字
+- 扁平上皮癌(非眼性)（Squamous Cell Carcinoma (Non-Ocular)）[on_scc] — ja:418字 / en:0字
+- 馬尿石症（Equine Urolithiasis）[ur_urolithiasis] — ja:461字 / en:0字
 - 繋留性下肢浮腫(ストッキングアップ)（Stocking Up）[mc_stocking_up] — ja:369字 / en:0字
 - リノスポリジウム症（Equine Rhinosporidiosis）[mc_rhinosporidiosis] — ja:425字 / en:0字
 - 結節性壊死症（Equine Nodular Necrosis）[mc_nodular_necrosis] — ja:245字 / en:0字
 - 馬ペギウイルス感染症（Equine Pegivirus）[mc_pegivirus] — ja:378字 / en:0字
 - ベネズエラ馬脳炎（Venezuelan Equine Encephalomyelitis）[if_vee] — ja:369字 / en:0字
-- 眼部扁平上皮癌（Ocular Squamous Cell Carcinoma）[ey_squamous_cell_carcinoma_eye] — ja:1324字 / en:0字
-- 扁平上皮癌(皮膚)（Squamous Cell Carcinoma (Cutaneous)）[on_squamous_cell_carcinoma] — ja:408字 / en:0字
+- 眼部扁平上皮癌（Ocular Squamous Cell Carcinoma）[ey_squamous_cell_carcinoma_eye] — ja:1334字 / en:0字
+- 扁平上皮癌(皮膚)（Squamous Cell Carcinoma (Cutaneous)）[on_squamous_cell_carcinoma] — ja:418字 / en:0字
 - 線維肉腫（Fibrosarcoma）[on_fibrosarcoma] — ja:179字 / en:0字
-- 血管肉腫（Hemangiosarcoma）[on_hemangiosarcoma] — ja:408字 / en:0字
-- 有茎脂肪腫（Pedunculated Lipoma）[on_lipoma_pedunculated] — ja:415字 / en:0字
-- 胃扁平上皮癌（Gastric Squamous Cell Carcinoma）[on_gastric_scc] — ja:601字 / en:0字
+- 血管肉腫（Hemangiosarcoma）[on_hemangiosarcoma] — ja:418字 / en:0字
+- 有茎脂肪腫（Pedunculated Lipoma）[on_lipoma_pedunculated] — ja:425字 / en:0字
+- 胃扁平上皮癌（Gastric Squamous Cell Carcinoma）[on_gastric_scc] — ja:611字 / en:0字
 - 篩骨癌（Ethmoid Carcinoma）[on_ethmoid_carcinoma] — ja:179字 / en:0字
-- 急性腎不全（Acute Renal Failure）[ur_acute_renal_failure] — ja:430字 / en:0字
-- 慢性腎不全（Chronic Renal Failure）[ur_chronic_renal_failure] — ja:430字 / en:0字
-- 膀胱炎（Cystitis）[ur_cystitis] — ja:451字 / en:0字
+- 急性腎不全（Acute Renal Failure）[ur_acute_renal_failure] — ja:440字 / en:0字
+- 慢性腎不全（Chronic Renal Failure）[ur_chronic_renal_failure] — ja:440字 / en:0字
+- 膀胱炎（Cystitis）[ur_cystitis] — ja:461字 / en:0字
 - 膀胱破裂（Bladder Rupture）[ur_bladder_rupture] — ja:186字 / en:0字
-- 腎結石（Nephrolithiasis）[ur_nephrolithiasis] — ja:430字 / en:0字
-- 砂状膀胱炎（Sabulous Cystitis）[ur_sabulous_cystitis] — ja:451字 / en:0字
+- 腎結石（Nephrolithiasis）[ur_nephrolithiasis] — ja:440字 / en:0字
+- 砂状膀胱炎（Sabulous Cystitis）[ur_sabulous_cystitis] — ja:461字 / en:0字
 - 腎尿細管性アシドーシス（Renal Tubular Acidosis）[ur_renal_tubular_acidosis] — ja:186字 / en:0字
 - 異所性尿管（Ectopic Ureter）[ur_ectopic_ureter] — ja:186字 / en:0字
 - 血管腫（Hemangioma）[on_hemangioma] — ja:179字 / en:0字
 - 神経線維腫（Neurofibroma）[on_neurofibroma] — ja:179字 / en:0字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **170** 疾患
-- 犬猫論文の他種への自動紐付け: **12** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **170** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **12** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 馬喘息 (IAD/RAO)（Equine Asthma (IAD/RAO)）[rp_iah] → ブデソニド

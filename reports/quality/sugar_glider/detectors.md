@@ -139,38 +139,38 @@
 - 投与量あり: **193**
 
 ### 投与量なし（上位30）
-- 肥満（Obesity）[sugar_glider_0003] — ja:454字 / en:573字
+- 肥満（Obesity）[sugar_glider_0003] — ja:464字 / en:597字
 - 臭腺感染症（Scent Gland Infection）[sugar_glider_0016] — ja:165字 / en:137字
 - ノミ寄生症（Flea Infestation）[sugar_glider_0020] — ja:85字 / en:477字
 - 誤嚥性肺炎（Aspiration Pneumonia）[sugar_glider_0025] — ja:80字 / en:186字
 - 消化管閉塞（Gastrointestinal Obstruction）[sugar_glider_0029] — ja:74字 / en:210字
 - 歯科疾患・歯石蓄積（Dental Disease / Tartar Buildup）[sugar_glider_0032] — ja:184字 / en:158字
 - 不正咬合（Malocclusion）[sugar_glider_0034] — ja:179字 / en:158字
-- 眼球突出（Proptosis (Eye Prolapse)）[sugar_glider_0038] — ja:405字 / en:495字
-- アフラトキシン中毒（Aflatoxicosis）[sugar_glider_0052] — ja:476字 / en:494字
+- 眼球突出（Proptosis (Eye Prolapse)）[sugar_glider_0038] — ja:415字 / en:519字
+- アフラトキシン中毒（Aflatoxicosis）[sugar_glider_0052] — ja:486字 / en:518字
 - 熱中症（Heat Stroke）[sugar_glider_0061] — ja:195字 / en:158字
-- 敗血症（Septicemia）[sugar_glider_0062] — ja:563字 / en:568字
+- 敗血症（Septicemia）[sugar_glider_0062] — ja:573字 / en:592字
 - 耳感染症（外耳炎）（Ear Infection (Otitis)）[sugar_glider_0063] — ja:169字 / en:137字
-- 飛膜裂傷（重症型）（Patagium Laceration (Severe)）[sugar_glider_0071] — ja:445字 / en:825字
-- 飛膜膿瘍（Patagium Abscess）[sugar_glider_0072] — ja:564字 / en:472字
+- 飛膜裂傷（重症型）（Patagium Laceration (Severe)）[sugar_glider_0071] — ja:455字 / en:849字
+- 飛膜膿瘍（Patagium Abscess）[sugar_glider_0072] — ja:574字 / en:496字
 - 子の拒絶（Joey Rejection）[sugar_glider_0074] — ja:86字 / en:475字
 - 難産（有袋類）（Dystocia (Marsupial)）[sugar_glider_0075] — ja:63字 / en:185字
 - クロアカ感染（Cloacal Infection）[sugar_glider_0076] — ja:166字 / en:137字
 - マイコプラズマ肺炎（Mycoplasma Pneumonia）[sugar_glider_0095] — ja:169字 / en:196字
-- 拡張型心筋症（Dilated Cardiomyopathy）[sugar_glider_0102] — ja:520字 / en:606字
+- 拡張型心筋症（Dilated Cardiomyopathy）[sugar_glider_0102] — ja:530字 / en:630字
 - 歯周病（Periodontal Disease）[sugar_glider_0110] — ja:178字 / en:538字
-- 鉛中毒（Lead Poisoning）[sugar_glider_0124] — ja:470字 / en:494字
-- 亜鉛中毒（Zinc Toxicosis）[sugar_glider_0125] — ja:650字 / en:626字
-- アフラトキシン中毒（Aflatoxicosis）[sugar_glider_0131] — ja:813字 / en:741字
+- 鉛中毒（Lead Poisoning）[sugar_glider_0124] — ja:480字 / en:518字
+- 亜鉛中毒（Zinc Toxicosis）[sugar_glider_0125] — ja:660字 / en:650字
+- アフラトキシン中毒（Aflatoxicosis）[sugar_glider_0131] — ja:823字 / en:765字
 - ビタミンD欠乏症（フクロモモンガ）（Vitamin D Deficiency）[sugar_glider_0136] — ja:46字 / en:123字
 - 歯のう蝕（フクロモモンガ）（Dental Caries）[sugar_glider_0145] — ja:188字 / en:229字
-- 眼球脱出（フクロモモンガ）（Proptosis）[sugar_glider_0165] — ja:484字 / en:846字
+- 眼球脱出（フクロモモンガ）（Proptosis）[sugar_glider_0165] — ja:494字 / en:870字
 - 熱中症（呼吸器型）（フクロモモンガ）（Heat Stroke (Respiratory)）[sugar_glider_0180] — ja:204字 / en:464字
 - 動脈硬化症（フクロモモンガ）（Arteriosclerosis）[sugar_glider_0198] — ja:40字 / en:144字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **108** 疾患
-- 犬猫論文の他種への自動紐付け: **16** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **108** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **16** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 代謝性骨疾患（MBD）（Metabolic Bone Disease (MBD)）[sugar_glider_0000] → グルコン酸カルシウム

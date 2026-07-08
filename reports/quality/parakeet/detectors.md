@@ -232,36 +232,36 @@
 - うっ血性心不全（Congestive Heart Failure）[parakeet_0122] — ja:98字 / en:203字
 - 慢性羽包嚢胞（Feather Follicle Cyst (Chronic)）[parakeet_0133] — ja:50字 / en:136字
 - タンパク質欠乏症（Protein Deficiency）[parakeet_0147] — ja:512字 / en:1155字
-- 農薬中毒（Pesticide Poisoning）[parakeet_0148] — ja:311字 / en:369字
-- 植物中毒（Plant Toxicity）[parakeet_0149] — ja:432字 / en:369字
-- 殺鼠剤中毒（Rodenticide Poisoning）[parakeet_0150] — ja:433字 / en:369字
-- エッセンシャルオイル中毒（Essential Oil Toxicity）[parakeet_0151] — ja:440字 / en:369字
-- 皮下気腫（Subcutaneous Emphysema）[parakeet_0160] — ja:436字 / en:815字
+- 農薬中毒（Pesticide Poisoning）[parakeet_0148] — ja:321字 / en:393字
+- 植物中毒（Plant Toxicity）[parakeet_0149] — ja:442字 / en:393字
+- 殺鼠剤中毒（Rodenticide Poisoning）[parakeet_0150] — ja:443字 / en:393字
+- エッセンシャルオイル中毒（Essential Oil Toxicity）[parakeet_0151] — ja:450字 / en:393字
+- 皮下気腫（Subcutaneous Emphysema）[parakeet_0160] — ja:446字 / en:839字
 - 大動脈破裂（Aortic Rupture）[parakeet_0162] — ja:432字 / en:1053字
 - 腺胃腫瘍（Proventricular Neoplasia）[parakeet_0173] — ja:104字 / en:482字
 - 右心不全（インコ）（Right-Sided Heart Failure (Parakeet)）[parakeet_0179] — ja:56字 / en:185字
 - 細菌性気嚢炎（Bacterial Airsacculitis）[parakeet_0180] — ja:162字 / en:196字
 - 疥癬ダニ（鱗状顔面 進行型）（Cnemidocoptes (Scaly Face Advanced)）[parakeet_0189] — ja:173字 / en:496字
 - 下顎前突症（インコ）（Mandibular Prognathism (Parakeet)）[parakeet_0191] — ja:181字 / en:548字
-- 亜鉛中毒（進行型）（Zinc Toxicosis (Advanced)）[parakeet_0195] — ja:664字 / en:847字
-- アボカド中毒（インコ）（Avocado Toxicosis (Parakeet)）[parakeet_0197] — ja:439字 / en:369字
-- 開脚症（新生児型）（Splayed Legs (Neonatal)）[parakeet_0203] — ja:609字 / en:1392字
+- 亜鉛中毒（進行型）（Zinc Toxicosis (Advanced)）[parakeet_0195] — ja:674字 / en:871字
+- アボカド中毒（インコ）（Avocado Toxicosis (Parakeet)）[parakeet_0197] — ja:449字 / en:393字
+- 開脚症（新生児型）（Splayed Legs (Neonatal)）[parakeet_0203] — ja:619字 / en:1416字
 - 卵巣嚢胞（Ovarian Cyst）[parakeet_0205] — ja:53字 / en:136字
-- 嗉嚢閉塞（異物）（Crop Impaction (Foreign Body)）[parakeet_0206] — ja:339字 / en:393字
-- 夜間パニック外傷（Night Fright Injuries）[parakeet_0207] — ja:440字 / en:814字
+- 嗉嚢閉塞（異物）（Crop Impaction (Foreign Body)）[parakeet_0206] — ja:349字 / en:417字
+- 夜間パニック外傷（Night Fright Injuries）[parakeet_0207] — ja:450字 / en:838字
 - 反復性羽嚢腫（Feather Cysts – Recurrent）[parakeet_0213] — ja:50字 / en:136字
 - 蝋膜肥大（褐色肥大症）（Cere Hypertrophy (Brown Hypertrophy)）[parakeet_0235] — ja:457字 / en:1159字
-- 亜鉛中毒（Zinc Toxicosis）[parakeet_0241] — ja:303字 / en:369字
-- 鉛中毒（Lead Toxicosis）[parakeet_0242] — ja:431字 / en:369字
-- 開脚（新生児）（インコ）（Splayed Leg (Neonatal)）[parakeet_0254] — ja:461字 / en:807字
+- 亜鉛中毒（Zinc Toxicosis）[parakeet_0241] — ja:313字 / en:393字
+- 鉛中毒（Lead Toxicosis）[parakeet_0242] — ja:441字 / en:393字
+- 開脚（新生児）（インコ）（Splayed Leg (Neonatal)）[parakeet_0254] — ja:471字 / en:831字
 - 英国セキセイ病（インコ）（English Budgerigar Disease）[parakeet_0255] — ja:256字 / en:460字
 - ヨウ素欠乏症（甲状腺過形成）（インコ）（Iodine Deficiency (Thyroid Hyperplasia)）[parakeet_0276] — ja:245字 / en:481字
 - 嘴変形（シザービーク）（インコ）（Beak Deformity (Scissor Beak)）[parakeet_0295] — ja:236字 / en:528字
 - 動脈硬化症（インコ）（Arteriosclerosis）[parakeet_0311] — ja:255字 / en:510字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **74** 疾患
-- 犬猫論文の他種への自動紐付け: **14** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **74** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **14** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 鳥痘（Avian Pox）[parakeet_0004] → シプロフロキサシン, スルファジアジン, スルファジアジン銀

@@ -255,30 +255,30 @@
 - 投与量あり: **585**
 
 ### 投与量なし（上位30）
-- 甲状腺機能亢進症（Hyperthyroidism）[dog_0007] — ja:422字 / en:570字
-- 進行性網膜萎縮症（PRA）（Progressive Retinal Atrophy (PRA)）[dog_0095] — ja:454字 / en:786字
-- 変性性脊髄症（DM）（Degenerative Myelopathy (DM)）[dog_0099] — ja:976字 / en:1245字
+- 甲状腺機能亢進症（Hyperthyroidism）[dog_0007] — ja:432字 / en:594字
+- 進行性網膜萎縮症（PRA）（Progressive Retinal Atrophy (PRA)）[dog_0095] — ja:464字 / en:810字
+- 変性性脊髄症（DM）（Degenerative Myelopathy (DM)）[dog_0099] — ja:986字 / en:1269字
 - 運動誘発性虚脱（EIC）（Exercise-Induced Collapse (EIC)）[dog_0101] — ja:534字 / en:1152字
-- 核硬化症（Nuclear Sclerosis）[dog_0148] — ja:691字 / en:645字
+- 核硬化症（Nuclear Sclerosis）[dog_0148] — ja:701字 / en:669字
 - 網膜形成異常（Retinal Dysplasia）[dog_0149] — ja:376字 / en:487字
 - コリー眼異常（CEA）（Collie Eye Anomaly (CEA)）[dog_0153] — ja:346字 / en:602字
 - 肺葉捻転（Lung Lobe Torsion）[dog_0162] — ja:159字 / en:661字
-- 線維軟骨塞栓症（FCE）（Fibrocartilaginous Embolism (FCE)）[dog_0165] — ja:666字 / en:1200字
+- 線維軟骨塞栓症（FCE）（Fibrocartilaginous Embolism (FCE)）[dog_0165] — ja:676字 / en:1224字
 - 包皮嵌頓（Paraphimosis）[dog_0196] — ja:306字 / en:1131字
-- 胎児発育不全（IUGR）・胎盤機能低下症（Intrauterine Growth Restriction (IUGR) / Placental Insufficiency）[dog_0199] — ja:1048字 / en:2496字
+- 胎児発育不全（IUGR）・胎盤機能低下症（Intrauterine Growth Restriction (IUGR) / Placental Insufficiency）[dog_0199] — ja:1058字 / en:2520字
 - 先天性聴覚障害（Congenital Deafness）[dog_0253] — ja:163字 / en:626字
 - 右大動脈弓遺残（Persistent Right Aortic Arch (PRAA)）[dog_0257] — ja:449字 / en:572字
-- 手根関節過伸展損傷（Carpal Hyperextension Injury）[dog_0268] — ja:579字 / en:1016字
-- 肘突起癒合不全（Ununited Anconeal Process (UAP)）[dog_0270] — ja:956字 / en:1068字
+- 手根関節過伸展損傷（Carpal Hyperextension Injury）[dog_0268] — ja:589字 / en:1040字
+- 肘突起癒合不全（Ununited Anconeal Process (UAP)）[dog_0270] — ja:966字 / en:1092字
 - 棘下筋拘縮（Infraspinatus Contracture）[dog_0272] — ja:632字 / en:414字
 - 心タンポナーデ（Cardiac Tamponade）[dog_0287] — ja:181字 / en:646字
-- 虹彩萎縮（Iris Atrophy）[dog_0305] — ja:634字 / en:588字
+- 虹彩萎縮（Iris Atrophy）[dog_0305] — ja:644字 / en:612字
 - 含歯性嚢胞（Dentigerous Cyst）[dog_0314] — ja:174字 / en:405字
-- ピルビン酸キナーゼ欠損症（Pyruvate Kinase Deficiency）[dog_0354] — ja:442字 / en:699字
+- ピルビン酸キナーゼ欠損症（Pyruvate Kinase Deficiency）[dog_0354] — ja:452字 / en:723字
 - 鼻咽頭ポリープ（Nasopharyngeal Polyp）[dog_0370] — ja:157字 / en:370字
 - 尿道脱（Urethral Prolapse）[dog_0376] — ja:167字 / en:377字
-- 横隔膜ヘルニア（Diaphragmatic Hernia）[dog_0394] — ja:401字 / en:1007字
-- 会陰ヘルニア（Perineal Hernia）[dog_0395] — ja:596字 / en:986字
+- 横隔膜ヘルニア（Diaphragmatic Hernia）[dog_0394] — ja:411字 / en:1031字
+- 会陰ヘルニア（Perineal Hernia）[dog_0395] — ja:606字 / en:1010字
 - 鼠径ヘルニア（Inguinal Hernia）[dog_0396] — ja:467字 / en:372字
 - 臍ヘルニア（Umbilical Hernia）[dog_0397] — ja:824字 / en:305字
 - 唾液腺嚢胞（Salivary Mucocele (Sialocele)）[dog_0398] — ja:431字 / en:543字
@@ -287,8 +287,8 @@
 - 鼻孔狭窄（Stenotic Nares）[dog_0504] — ja:266字 / en:607字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **45** 疾患
-- 犬猫論文の他種への自動紐付け: **0** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **45** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **0** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 犬パルボウイルス感染症（Canine Parvovirus）[dog_0000] → ロニダゾール

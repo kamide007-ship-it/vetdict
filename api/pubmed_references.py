@@ -331,7 +331,11 @@ DISEASE_REFERENCES: dict[str, list[dict]] = {
 
 
 def get_references_for_disease(disease_name: str) -> list[dict]:
-    """Return PubMed references for a disease name (case-insensitive partial match)."""
+    """Return PubMed references for a disease name (case-insensitive partial match).
+
+    Legacy v1: keyword match with NO species guard. Kept for compatibility.
+    Production uses the species-aware ``get_references_for_disease_v2`` (T110).
+    """
     name_lower = disease_name.lower()
     for key, refs in DISEASE_REFERENCES.items():
         if key in name_lower or name_lower in key:

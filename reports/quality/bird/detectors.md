@@ -273,7 +273,7 @@
 - 鼻炎（Rhinitis）[bird_0028] — ja:67字 / en:193字
 - 気管閉塞（Tracheal Obstruction）[bird_0030] — ja:158字 / en:210字
 - 嗉嚢炎（Ingluvitis (Crop Infection)）[bird_0036] — ja:157字 / en:137字
-- 腎不全（急性／慢性）（Renal Failure (Acute / Chronic)）[bird_0048] — ja:473字 / en:609字
+- 腎不全（急性／慢性）（Renal Failure (Acute / Chronic)）[bird_0048] — ja:483字 / en:633字
 - ビタミンD欠乏症（Vitamin D Deficiency）[bird_0057] — ja:73字 / en:193字
 - ヨウ素欠乏症（Iodine Deficiency）[bird_0058] — ja:147字 / en:193字
 - 肥満（Obesity）[bird_0060] — ja:67字 / en:460字
@@ -282,26 +282,26 @@
 - 羽毛ダニ（Feather Mites）[bird_0095] — ja:78字 / en:172字
 - 条虫症（Tapeworms (Cestodes)）[bird_0099] — ja:160字 / en:477字
 - 毛細線虫症（キャピラリア）（Capillaria (Hairworm)）[bird_0100] — ja:170字 / en:193字
-- コクシジウム症（Coccidia）[bird_0101] — ja:333字 / en:422字
+- コクシジウム症（Coccidia）[bird_0101] — ja:343字 / en:446字
 - うっ血性心不全（Congestive Heart Failure）[bird_0107] — ja:96字 / en:203字
-- PTFE／テフロン中毒（PTFE / Teflon Toxicosis）[bird_0109] — ja:437字 / en:369字
-- アボカド中毒（Avocado Toxicity）[bird_0110] — ja:331字 / en:369字
-- 亜鉛中毒（Zinc Poisoning）[bird_0112] — ja:430字 / en:743字
-- チョコレート中毒（Chocolate Toxicity）[bird_0114] — ja:333字 / en:369字
+- PTFE／テフロン中毒（PTFE / Teflon Toxicosis）[bird_0109] — ja:447字 / en:393字
+- アボカド中毒（Avocado Toxicity）[bird_0110] — ja:341字 / en:393字
+- 亜鉛中毒（Zinc Poisoning）[bird_0112] — ja:440字 / en:767字
+- チョコレート中毒（Chocolate Toxicity）[bird_0114] — ja:343字 / en:393字
 - 恐怖症行動（Phobic Behavior）[bird_0118] — ja:70字 / en:193字
-- 白内障（Cataracts）[bird_0120] — ja:620字 / en:933字
+- 白内障（Cataracts）[bird_0120] — ja:630字 / en:957字
 - 鳥ヘモプロテウス症（Avian Haemoproteosis）[bird_0135] — ja:166字 / en:193字
 - オルニトバクテリウム・リノトラケアーレ感染症（Ornithobacterium rhinotracheale (ORT) Infection）[bird_0140] — ja:176字 / en:137字
 - 微胞子虫症（Microsporidiosis）[bird_0146] — ja:162字 / en:193字
-- コクロソーマ感染症（Cochlosoma Infection）[bird_0150] — ja:428字 / en:387字
+- コクロソーマ感染症（Cochlosoma Infection）[bird_0150] — ja:438字 / en:411字
 - 気管虫症（シンガムス）（Syngamus (Gapeworm)）[bird_0151] — ja:168字 / en:193字
 - 鉤頭虫感染症（Acanthocephalan Infection (Thorny-Headed Worms)）[bird_0152] — ja:163字 / en:204字
 - 穿孔ヒゼンダニ症（脚疥癬）（Cnemidocoptes pilae (Scaly Leg Mite)）[bird_0154] — ja:170字 / en:493字
 - ダニ寄生症（Tick Infestation）[bird_0156] — ja:162字 / en:193字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **94** 疾患
-- 犬猫論文の他種への自動紐付け: **17** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **94** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **17** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 緑膿菌感染症（Pseudomonas Infection）[bird_0014] → シプロフロキサシン

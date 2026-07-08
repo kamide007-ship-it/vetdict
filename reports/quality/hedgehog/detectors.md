@@ -139,32 +139,32 @@
 - 投与量あり: **222**
 
 ### 投与量なし（上位30）
-- 口腔扁平上皮癌（Oral Squamous Cell Carcinoma）[hedgehog_0007] — ja:338字 / en:762字
+- 口腔扁平上皮癌（Oral Squamous Cell Carcinoma）[hedgehog_0007] — ja:348字 / en:786字
 - 歯石（Dental Tartar）[hedgehog_0025] — ja:175字 / en:158字
-- 拡張型心筋症（Dilated Cardiomyopathy）[hedgehog_0033] — ja:518字 / en:606字
-- 心筋症（Cardiomyopathy (General)）[hedgehog_0034] — ja:488字 / en:606字
+- 拡張型心筋症（Dilated Cardiomyopathy）[hedgehog_0033] — ja:528字 / en:630字
+- 心筋症（Cardiomyopathy (General)）[hedgehog_0034] — ja:498字 / en:630字
 - 腸内寄生虫症（Internal Parasites (Intestinal Worms)）[hedgehog_0061] — ja:167字 / en:172字
 - 肺虫感染症（Lungworm Infection）[hedgehog_0062] — ja:166字 / en:204字
-- コクシジウム感染症（Coccidia Infection）[hedgehog_0063] — ja:435字 / en:454字
+- コクシジウム感染症（Coccidia Infection）[hedgehog_0063] — ja:445字 / en:478字
 - 耳ダニ症（Ear Mites）[hedgehog_0064] — ja:165字 / en:172字
 - 唾液塗布行動（正常行動）（Self-anointing (Normal Behavior)）[hedgehog_0068] — ja:590字 / en:1400字
 - 耳感染症（外耳炎）（Ear Infection (Otitis)）[hedgehog_0070] — ja:167字 / en:137字
 - 副腎疾患（Adrenal Disease）[hedgehog_0071] — ja:106字 / en:196字
-- 乳腺腺癌（Mammary Adenocarcinoma）[hedgehog_0080] — ja:335字 / en:756字
+- 乳腺腺癌（Mammary Adenocarcinoma）[hedgehog_0080] — ja:345字 / en:780字
 - 腸管平滑筋肉腫（Intestinal Leiomyosarcoma）[hedgehog_0085] — ja:109字 / en:483字
 - 下垂体腺腫（Pituitary Adenoma）[hedgehog_0088] — ja:107字 / en:475字
 - 針ダニ（コリオプテス）（Quill Mites (Chorioptes)）[hedgehog_0091] — ja:172字 / en:172字
-- アレルギー性皮膚炎（Allergic Dermatitis）[hedgehog_0095] — ja:659字 / en:912字
+- アレルギー性皮膚炎（Allergic Dermatitis）[hedgehog_0095] — ja:669字 / en:936字
 - 虫性肺炎（クレノソーマ）（Verminous Pneumonia (Crenosoma)）[hedgehog_0101] — ja:173字 / en:186字
-- カピラリア・ヘパティカ感染（Capillaria Hepatica Infection）[hedgehog_0102] — ja:757字 / en:757字
+- カピラリア・ヘパティカ感染（Capillaria Hepatica Infection）[hedgehog_0102] — ja:767字 / en:781字
 - 鉤頭虫感染（Thorny-Headed Worm Infection）[hedgehog_0104] — ja:166字 / en:204字
 - 眼膿瘍（後眼窩）（Eye Abscess (Retrobulbar)）[hedgehog_0127] — ja:166字 / en:196字
-- 眼球脱出（ハリネズミ）（Proptosis）[hedgehog_0166] — ja:484字 / en:846字
+- 眼球脱出（ハリネズミ）（Proptosis）[hedgehog_0166] — ja:494字 / en:870字
 - 自己塗布行動（ハリネズミ）（Self-Anointing Behavior）[hedgehog_0193] — ja:526字 / en:867字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **127** 疾患
-- 犬猫論文の他種への自動紐付け: **20** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **127** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **17** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[hedgehog_0002] → グリセオフルビン, クロトリマゾール, グリセオフルビン
@@ -191,15 +191,12 @@
 ### 犬猫論文が他種に自動紐付け（上位20）
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[hedgehog_0002] → key: dermatophytosis
 - リンパ腫（Lymphoma）[hedgehog_0009] → key: lymphoma
-- ふらつき症候群（WHS）（Wobbly Hedgehog Syndrome (WHS)）[hedgehog_0029] → key: wobbly hedgehog syndrome (whs)
 - 慢性腎臓病（Chronic Kidney Disease）[hedgehog_0045] → key: chronic kidney disease
 - 膀胱炎（Cystitis）[hedgehog_0046] → key: feline idiopathic cystitis (fic)
 - 尿路結石症（Urolithiasis (Bladder Stones)）[hedgehog_0047] → key: urolithiasis
 - 子宮蓄膿症（Pyometra）[hedgehog_0049] → key: pyometra
 - 副腎疾患（Adrenal Disease）[hedgehog_0071] → key: adrenal disease
 - 貧血（Anemia）[hedgehog_0074] → key: immune-mediated hemolytic anemia
-- ふらつきハリネズミ症候群（WHS）- 初期段階（Wobbly Hedgehog Syndrome (WHS) - Early Stage）[hedgehog_0077] → key: wobbly hedgehog syndrome (whs)
-- ふらつきハリネズミ症候群（WHS）- 進行期（Wobbly Hedgehog Syndrome (WHS) - Advanced）[hedgehog_0078] → key: wobbly hedgehog syndrome (whs)
 - 皮膚糸状菌症（重症型）（Dermatophytosis (Severe)）[hedgehog_0093] → key: dermatophytosis
 - 糖尿病（Diabetes Mellitus）[hedgehog_0119] → key: diabetes mellitus
 - 膵炎（Pancreatitis）[hedgehog_0125] → key: feline pancreatitis

@@ -4455,24 +4455,24 @@
         "id": "cat_0002",
         "name": "Feline Pneumonia",
         "name_ja": "猫肺炎",
-        "treatment_ja_len": 333,
-        "treatment_len": 389,
+        "treatment_ja_len": 343,
+        "treatment_len": 413,
         "has_dosage": false
       },
       {
         "id": "cat_0043",
         "name": "Urinary Tract Infection (UTI)",
         "name_ja": "尿路感染症",
-        "treatment_ja_len": 395,
-        "treatment_len": 347,
+        "treatment_ja_len": 405,
+        "treatment_len": 371,
         "has_dosage": false
       },
       {
         "id": "cat_0076",
         "name": "Food Allergy Dermatitis",
         "name_ja": "食物アレルギー性皮膚炎",
-        "treatment_ja_len": 657,
-        "treatment_len": 549,
+        "treatment_ja_len": 667,
+        "treatment_len": 573,
         "has_dosage": false
       },
       {
@@ -4487,8 +4487,8 @@
         "id": "cat_0112",
         "name": "Squamous Cell Carcinoma (Cutaneous)",
         "name_ja": "皮膚扁平上皮癌",
-        "treatment_ja_len": 318,
-        "treatment_len": 495,
+        "treatment_ja_len": 328,
+        "treatment_len": 519,
         "has_dosage": false
       },
       {
@@ -4543,8 +4543,8 @@
         "id": "cat_0181",
         "name": "Lens Luxation",
         "name_ja": "水晶体脱臼",
-        "treatment_ja_len": 602,
-        "treatment_len": 573,
+        "treatment_ja_len": 612,
+        "treatment_len": 597,
         "has_dosage": false
       },
       {
@@ -4559,48 +4559,48 @@
         "id": "cat_0197",
         "name": "Lily Toxicosis",
         "name_ja": "ユリ中毒",
-        "treatment_ja_len": 594,
-        "treatment_len": 494,
+        "treatment_ja_len": 604,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0198",
         "name": "Acetaminophen (Paracetamol) Toxicosis",
         "name_ja": "アセトアミノフェン中毒",
-        "treatment_ja_len": 601,
-        "treatment_len": 494,
+        "treatment_ja_len": 611,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0199",
         "name": "Permethrin Toxicosis",
         "name_ja": "ペルメトリン中毒",
-        "treatment_ja_len": 565,
-        "treatment_len": 494,
+        "treatment_ja_len": 575,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0200",
         "name": "NSAID Toxicosis",
         "name_ja": "NSAID中毒",
-        "treatment_ja_len": 597,
-        "treatment_len": 494,
+        "treatment_ja_len": 607,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0201",
         "name": "Ethylene Glycol (Antifreeze) Poisoning",
         "name_ja": "エチレングリコール中毒",
-        "treatment_ja_len": 773,
-        "treatment_len": 705,
+        "treatment_ja_len": 783,
+        "treatment_len": 729,
         "has_dosage": false
       },
       {
         "id": "cat_0202",
         "name": "Rodenticide Poisoning (Anticoagulant)",
         "name_ja": "殺鼠剤中毒（抗凝固剤）",
-        "treatment_ja_len": 601,
-        "treatment_len": 494,
+        "treatment_ja_len": 611,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
@@ -4623,16 +4623,16 @@
         "id": "cat_0219",
         "name": "Cat Bite Abscess",
         "name_ja": "猫咬傷膿瘍",
-        "treatment_ja_len": 559,
-        "treatment_len": 472,
+        "treatment_ja_len": 569,
+        "treatment_len": 496,
         "has_dosage": false
       },
       {
         "id": "cat_0234",
         "name": "Feline Otitis Media",
         "name_ja": "猫中耳炎",
-        "treatment_ja_len": 558,
-        "treatment_len": 494,
+        "treatment_ja_len": 568,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
@@ -4655,40 +4655,40 @@
         "id": "cat_0253",
         "name": "Feline Botulism",
         "name_ja": "猫ボツリヌス中毒",
-        "treatment_ja_len": 562,
-        "treatment_len": 532,
+        "treatment_ja_len": 572,
+        "treatment_len": 556,
         "has_dosage": false
       },
       {
         "id": "cat_0260",
         "name": "Feline Calcium Oxalate Urolithiasis",
         "name_ja": "猫シュウ酸カルシウム尿路結石症",
-        "treatment_ja_len": 609,
-        "treatment_len": 445,
+        "treatment_ja_len": 619,
+        "treatment_len": 469,
         "has_dosage": false
       },
       {
         "id": "cat_0261",
         "name": "Feline Struvite Urolithiasis",
         "name_ja": "猫ストルバイト尿路結石症",
-        "treatment_ja_len": 443,
-        "treatment_len": 300,
+        "treatment_ja_len": 453,
+        "treatment_len": 324,
         "has_dosage": false
       },
       {
         "id": "cat_0262",
         "name": "Feline Cystine Urolithiasis",
         "name_ja": "猫シスチン尿石症",
-        "treatment_ja_len": 375,
-        "treatment_len": 340,
+        "treatment_ja_len": 385,
+        "treatment_len": 364,
         "has_dosage": false
       },
       {
         "id": "cat_0263",
         "name": "Feline Urate Urolithiasis",
         "name_ja": "猫尿酸アンモニウム尿石症",
-        "treatment_ja_len": 875,
-        "treatment_len": 794,
+        "treatment_ja_len": 885,
+        "treatment_len": 818,
         "has_dosage": false
       },
       {
@@ -4703,8 +4703,8 @@
         "id": "cat_0281",
         "name": "Feline Pneumothorax",
         "name_ja": "猫気胸",
-        "treatment_ja_len": 433,
-        "treatment_len": 473,
+        "treatment_ja_len": 443,
+        "treatment_len": 497,
         "has_dosage": false
       },
       {
@@ -4775,104 +4775,104 @@
         "id": "cat_0368",
         "name": "Feline Chocolate Toxicosis",
         "name_ja": "猫チョコレート中毒",
-        "treatment_ja_len": 599,
-        "treatment_len": 494,
+        "treatment_ja_len": 609,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0369",
         "name": "Feline Onion/Garlic Toxicosis",
         "name_ja": "猫タマネギ・ニンニク中毒",
-        "treatment_ja_len": 777,
-        "treatment_len": 626,
+        "treatment_ja_len": 787,
+        "treatment_len": 650,
         "has_dosage": false
       },
       {
         "id": "cat_0371",
         "name": "Feline Marijuana Toxicosis",
         "name_ja": "猫大麻中毒",
-        "treatment_ja_len": 595,
-        "treatment_len": 494,
+        "treatment_ja_len": 605,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0372",
         "name": "Feline Salt Toxicosis",
         "name_ja": "猫塩分中毒",
-        "treatment_ja_len": 595,
-        "treatment_len": 494,
+        "treatment_ja_len": 605,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0373",
         "name": "Feline Zinc Toxicosis",
         "name_ja": "猫亜鉛中毒",
-        "treatment_ja_len": 770,
-        "treatment_len": 626,
+        "treatment_ja_len": 780,
+        "treatment_len": 650,
         "has_dosage": false
       },
       {
         "id": "cat_0374",
         "name": "Feline Lead Toxicosis",
         "name_ja": "猫鉛中毒",
-        "treatment_ja_len": 594,
-        "treatment_len": 494,
+        "treatment_ja_len": 604,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0375",
         "name": "Feline Organophosphate Toxicosis",
         "name_ja": "猫有機リン中毒",
-        "treatment_ja_len": 597,
-        "treatment_len": 494,
+        "treatment_ja_len": 607,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0376",
         "name": "Feline Pyrethroid Toxicosis (Topical)",
         "name_ja": "猫ピレスロイド中毒（外用）",
-        "treatment_ja_len": 570,
-        "treatment_len": 494,
+        "treatment_ja_len": 580,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0377",
         "name": "Feline Metaldehyde Toxicosis (Slug Bait)",
         "name_ja": "猫メタアルデヒド中毒",
-        "treatment_ja_len": 600,
-        "treatment_len": 494,
+        "treatment_ja_len": 610,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0379",
         "name": "Feline Bromethalin Toxicosis",
         "name_ja": "猫ブロメタリン中毒",
-        "treatment_ja_len": 599,
-        "treatment_len": 494,
+        "treatment_ja_len": 609,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0380",
         "name": "Feline Ivermectin Toxicosis",
         "name_ja": "猫イベルメクチン中毒",
-        "treatment_ja_len": 600,
-        "treatment_len": 494,
+        "treatment_ja_len": 610,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0381",
         "name": "Feline Toxic Epidermal Necrolysis",
         "name_ja": "猫中毒性表皮壊死症",
-        "treatment_ja_len": 599,
-        "treatment_len": 494,
+        "treatment_ja_len": 609,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0385",
         "name": "Feline Alopecia Areata",
         "name_ja": "猫円形脱毛症",
-        "treatment_ja_len": 459,
-        "treatment_len": 336,
+        "treatment_ja_len": 469,
+        "treatment_len": 360,
         "has_dosage": false
       },
       {
@@ -4895,16 +4895,16 @@
         "id": "cat_0425",
         "name": "Feline Subcutaneous Abscess (Non-Bite)",
         "name_ja": "猫皮下膿瘍（非咬傷性）",
-        "treatment_ja_len": 565,
-        "treatment_len": 472,
+        "treatment_ja_len": 575,
+        "treatment_len": 496,
         "has_dosage": false
       },
       {
         "id": "cat_0426",
         "name": "Feline Necrotizing Fasciitis",
         "name_ja": "猫壊死性筋膜炎",
-        "treatment_ja_len": 597,
-        "treatment_len": 527,
+        "treatment_ja_len": 607,
+        "treatment_len": 551,
         "has_dosage": false
       },
       {
@@ -4951,24 +4951,24 @@
         "id": "cat_0464",
         "name": "Lily Nephrotoxicosis (Acute)",
         "name_ja": "ユリ腎毒性（急性）",
-        "treatment_ja_len": 771,
-        "treatment_len": 705,
+        "treatment_ja_len": 781,
+        "treatment_len": 729,
         "has_dosage": false
       },
       {
         "id": "cat_0465",
         "name": "Acetaminophen Toxicosis (Acute)",
         "name_ja": "アセトアミノフェン中毒（急性）",
-        "treatment_ja_len": 605,
-        "treatment_len": 494,
+        "treatment_ja_len": 615,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "cat_0466",
         "name": "Tea Tree Oil Toxicosis",
         "name_ja": "ティーツリーオイル中毒",
-        "treatment_ja_len": 601,
-        "treatment_len": 494,
+        "treatment_ja_len": 611,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
@@ -4983,8 +4983,8 @@
         "id": "cat_0471",
         "name": "Feline Gallbladder Infarction",
         "name_ja": "猫胆嚢梗塞",
-        "treatment_ja_len": 591,
-        "treatment_len": 474,
+        "treatment_ja_len": 601,
+        "treatment_len": 498,
         "has_dosage": false
       },
       {
@@ -4999,16 +4999,16 @@
         "id": "cat_0480",
         "name": "Feline Chronic Progressive Polyarthritis",
         "name_ja": "猫慢性進行性多発性関節炎",
-        "treatment_ja_len": 948,
-        "treatment_len": 851,
+        "treatment_ja_len": 958,
+        "treatment_len": 875,
         "has_dosage": false
       },
       {
         "id": "cat_0482",
         "name": "Feline High-Rise Syndrome (Thoracic Trauma)",
         "name_ja": "猫高所落下症候群（胸部外傷）",
-        "treatment_ja_len": 444,
-        "treatment_len": 452,
+        "treatment_ja_len": 454,
+        "treatment_len": 476,
         "has_dosage": false
       },
       {
@@ -5031,24 +5031,24 @@
         "id": "cat_0489",
         "name": "Feline Cerebellar Infarction",
         "name_ja": "猫小脳梗塞",
-        "treatment_ja_len": 463,
-        "treatment_len": 487,
+        "treatment_ja_len": 473,
+        "treatment_len": 511,
         "has_dosage": false
       },
       {
         "id": "cat_0490",
         "name": "Feline Tracheal Avulsion",
         "name_ja": "猫気管断裂",
-        "treatment_ja_len": 435,
-        "treatment_len": 460,
+        "treatment_ja_len": 445,
+        "treatment_len": 484,
         "has_dosage": false
       },
       {
         "id": "cat_0492",
         "name": "Feline Penile Urethral Obstruction",
         "name_ja": "猫陰茎尿道閉塞",
-        "treatment_ja_len": 500,
-        "treatment_len": 594,
+        "treatment_ja_len": 510,
+        "treatment_len": 618,
         "has_dosage": false
       },
       {
@@ -5084,6 +5084,8 @@
     "ref_keys_available": 30,
     "drug_mismatch_count": 3,
     "citation_mismatch_count": 0,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
       {
         "id": "cat_0080",
