@@ -27,23 +27,31 @@
 - [ ] 全疾患エントリへ **不変 `id`（スラッグ）を付与**するマイグレーション（位置依存ID脱却）
       ※ 旧位置ID → 新IDの `aliases` を記録し、既存URLを保全
 
-## フェーズ3：論理統合（🔴 承認必須）
-- [x] degu 統合レビューワークシート提示 → `.spec/DEGU_CONSOLIDATION_REVIEW.md`（**承認待ち**）
-- [ ] **T103** `canonical_id`+`status(active/merged/archived)` で非破壊統合（承認行のみ適用）
-- [ ] 旧URL → canonical へのリダイレクト
-- [ ] **提示単位：1動物種/1カテゴリのバッチ**で Kentaro 承認 → 実行
+## フェーズ3：論理統合（承認済み・degu 適用）
+- [x] degu 統合レビューワークシート → `.spec/DEGU_CONSOLIDATION_REVIEW.md`
+- [x] **T103 degu 適用**（承認「BC」）: 同一疾患重複＋糖尿病サブタイプを非破壊サイドカーに統合
+      （白内障×4/尾脱皮×4/歯科膿瘍×3/咬傷×2/糖尿病サブタイプ2/神経障害重複1＋ヒト移植2アーカイブ）。
+      **201→180 served**、301リダイレクト、別疾患は分離維持、即ロールバック可。canonical/dedup テスト29 pass。
+- [ ] 他20種への横展開（degu と同じ手順、獣医レビュー前提）
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**
 - [x] **T105/T106 fail-closed 公開ゲート＋ワークリスト**（main, merged）→ `.spec/T105_T106_DOSAGE_GATE.md`
       `api/species/treatment_overrides.py` + `api/data/treatment_overrides/<species>.json`
       （`review_status=published` かつ `sources` 有りの行のみ配信・**自動公開は構造的に不可能**）
-- [x] degu 26件トリアージ（薬物要否分類）→ `.spec/DEGU_DOSAGE_DRAFT_TRIAGE.md`（main の worklist を補完）
-- [ ] **獣医の人手作業待ち**: `treatment_overrides/degu.json` の各エントリに出典付き用量を記入 → `published`
-- [ ] 出典 source-of-truth（Carpenter 6th 等）の指定 + evidence_grade 定義
+- [x] degu 26件トリアージ（薬物要否分類）→ `.spec/DEGU_DOSAGE_DRAFT_TRIAGE.md`
+- [x] **出典基準確定（承認「BC」）**: Carpenter 6th を source-of-truth に、evidence_grade A/B/C。
+      `treatment_overrides/degu.json` に記入枠（`pharmacologic`/`evidence_grade`/`dosage_sources`）＋ `source_of_truth` を整備
+      （薬物12・非薬物13、用量は空・`review_status=draft`・公開ゲート維持）。
+- [ ] **獣医の人手作業待ち**: 薬物12件に Carpenter 参照で用量＋出典を記入 → `approved` → `published`（🔴・自動公開しない）
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
 - [x] **T110** 出典紐付けv2（疾患単位キュレーション＋種ガード、v1は残す）（main, merged）→ `.spec/T110_CITATION_BINDING_V2.md`
+- [x] **(D) 予防文の異種汚染修正（JA）**: 非companion 544件の prevention_ja に犬猫助言（リード散歩/短頭種/FLUTD等）
+      が焼き込まれていた既存バグを修正。`_is_contaminated` をマーカー語検出で補強し種クラス対応版で再生成。544→0。
+- [x] **(D) 予防文の異種汚染修正（EN）**: 英語版 種クラス対応 prevention 生成器を新設
+      （`_PREVENT_CLASS_CORE_EN`/`_prevention_overlay_en`/`gen_prevention_en_noncompanion`）。
+      EN 汚染 387→0。回帰テスト追加。`test_no_template_disease_content` 178 pass。
 - [ ] T109 機械翻訳臭の置換適用（`scripts/quality/apply_mt_smell.py` を段階適用、臨床用語は要レビュー）
 
 ## いま承認を求める項目

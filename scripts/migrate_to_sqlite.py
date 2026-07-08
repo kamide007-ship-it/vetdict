@@ -1199,6 +1199,7 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
         "causes_ja",
         "pathophysiology_ja",
         "prevention_ja",
+        "prevention",
         "clinical_signs_ja",
         "clinical_signs",
         "transmission_ja",
@@ -1270,10 +1271,63 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
         if len(body) >= 25
     }
 
+    # Full-body matching only catches contamination produced by the CURRENT
+    # generator. Older generator versions left slightly different wording baked
+    # into the data (e.g. "発達性疾患予防: 成長期の…" vs the current
+    # "発達性疾患（HD・ED・OCD・FCP）予防: 大型犬の…"), so a body substring
+    # match misses them. These dog/cat-only marker phrases are stable across
+    # versions and flag such drift-contaminated entries robustly. Keep in sync
+    # with tests/test_no_template_disease_content.py::_COMPANION_ONLY_PHRASES.
+    _COMPANION_MARKERS = (
+        "子犬子猫",
+        "ドーベルマン",
+        "コッカースパニエル",
+        "メインクーン",
+        "ラグドール",
+        "猫の屋内飼育",
+        "リード散歩",
+        "短頭種",
+        "グレインフリー",
+        "蚤予防薬",
+        "蚤アレルギー",
+        "DCM/HCM素因品種",
+        "FLUTD",
+        "BCS 4-5/9",
+        "缶詰食のBPA",
+        "HD・ED・OCD・FCP",
+        "デンタルガム",
+    )
+
     def _is_contaminated(species: str, val: str) -> bool:
         if (species or "").lower() in _COMPANION:
             return False
-        return any(body in val for body in _COMPANION_BODIES)
+        return any(body in val for body in _COMPANION_BODIES) or any(m in val for m in _COMPANION_MARKERS)
+
+    # English companion-only marker phrases (mirror of _COMPANION_MARKERS) that
+    # must never sit on a non-companion species' English prevention.
+    _COMPANION_MARKERS_EN = (
+        "leash walk",
+        "leash-walk",
+        "brachycephalic",
+        "puppies and kittens",
+        "puppy and kitten",
+        "grain-free",
+        "indoor-cat",
+        "indoor cat confinement",
+        "harness (avoiding collars)",
+        "Doberman",
+        "Maine Coon",
+        "dental chew",
+        "flea allergy",
+        "BCS 4-5/9",
+        "FLUTD",
+    )
+
+    def _is_contaminated_en(species: str, val: str) -> bool:
+        if (species or "").lower() in _COMPANION:
+            return False
+        low = val.lower()
+        return any(m.lower() in low for m in _COMPANION_MARKERS_EN)
 
     counts: dict[str, int] = {f: 0 for f in fields}
     rows = conn.execute("SELECT id, species, name, name_ja, " + ", ".join(fields) + " FROM diseases").fetchall()
@@ -1299,6 +1353,11 @@ def regenerate_cross_disease_templates(conn) -> dict[str, int]:
             for row in rows:
                 val = (row[field] or "").strip()
                 if val and _is_contaminated(row["species"], val):
+                    targets[row["id"]] = row
+        if field == "prevention":
+            for row in rows:
+                val = (row[field] or "").strip()
+                if val and _is_contaminated_en(row["species"], val):
                     targets[row["id"]] = row
 
         for row in targets.values():

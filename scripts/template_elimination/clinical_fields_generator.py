@@ -2707,6 +2707,246 @@ def gen_prevention_ja(category: str, name_ja: str, species: str) -> str:
     )
 
 
+# English mirror of _PREVENT_CLASS_CORE — husbandry prevention core per species
+# class, free of dog/cat-specific advice. Used to regenerate contaminated
+# non-companion English prevention (see gen_prevention_en_noncompanion).
+_PREVENT_CLASS_CORE_EN = {
+    "equine": (
+        "feeding built around good-quality forage with gradual ration changes, adequate water and turnout, "
+        "a planned deworming programme guided by faecal egg counts, regular farriery and dental care, "
+        "core vaccination (tetanus, Japanese encephalitis, equine influenza) and a clean stable environment"
+    ),
+    "exotic_mammal": (
+        "a species-appropriate enclosure (cage size, temperature and humidity, substrate, hiding places), "
+        "species-specific nutrition, minimised stress, quarantine of new arrivals and regular health checks"
+    ),
+    "avian": (
+        "an appropriate enclosure (cage size, perches, temperature, ventilation), a balanced pellet-based diet "
+        "rather than an all-seed diet, avoidance of airway irritants (tobacco smoke, cooking fumes, aerosols), "
+        "quarantine of new birds and regular health checks"
+    ),
+    "reptile": (
+        "a species-specific preferred optimum temperature zone (POTZ) with a thermal gradient, appropriate UV-B "
+        "for diurnal species, adequate humidity, substrate and hides, calcium/vitamin-D3-conscious feeding, "
+        "and quarantine of new animals"
+    ),
+    "amphibian": (
+        "clean water quality (dechlorinated, appropriate pH and temperature), an adequately humid environment "
+        "with hiding places, use of wet clean gloves when handling, and quarantine of new animals"
+    ),
+    "fish": (
+        "good water-quality management (regular testing of ammonia, nitrite, nitrate, pH and temperature), "
+        "adequate filtration and planned water changes, quarantine and treatment of new fish, and avoidance of "
+        "overstocking and overfeeding"
+    ),
+}
+
+
+def _prevention_overlay_en(category: str, sp_class: str) -> str:
+    """English mirror of _prevention_overlay — class-appropriate category concern."""
+    if category in ("viral_infection", "bacterial_infection", "respiratory_infection"):
+        base = (
+            " Avoiding contact with infected animals, disinfecting equipment and the environment, observing "
+            "quarantine periods, and improving crowding and ventilation are key to limiting spread."
+        )
+        if sp_class == "avian":
+            return base + " Screen new birds for chlamydiosis, polyomavirus and PBFD before introducing them."
+        if sp_class == "equine":
+            return (
+                base
+                + " Note transport- and competition-related stress and nasal-secretion spread, and isolate affected horses promptly."
+            )
+        return base
+    if category == "fungal_infection":
+        return (
+            " Maintaining a clean, dry environment free of excess moisture and condensation, isolating affected "
+            "animals, and replacing and disinfecting contaminated bedding and equipment are central."
+        )
+    if category == "parasitic":
+        if sp_class == "fish":
+            return (
+                " Quarantine and, where appropriate, prophylactic baths for new fish, plants and live food, together "
+                "with good water quality, prevent introduction of external and internal parasites."
+            )
+        if sp_class == "amphibian":
+            return (
+                " Quarantine of new animals and feeder insects, clean water and substrate, and frequent faecal checks "
+                "keep parasite burdens low."
+            )
+        return (
+            " Regular faecal and skin examinations with treatment guided by the results, control of vectors and "
+            "intermediate hosts, and frequent environmental cleaning are the three pillars."
+        )
+    if category == "neoplasia":
+        return (
+            " Established primary prevention is limited, but avoiding carcinogens and excess UV exposure and "
+            "detecting tumours early through regular health checks are central."
+        )
+    if category in ("endocrine_metabolic", "nutritional"):
+        if sp_class == "reptile":
+            return (
+                " Preventing metabolic bone disease and nutritional disorders requires a species-appropriate "
+                "calcium/phosphorus ratio and vitamin D3, adequate UV-B, and a varied diet."
+            )
+        if sp_class == "avian":
+            return (
+                " Avoid seed-heavy diets that cause nutritional disease and obesity, transitioning gradually to a "
+                "pelleted diet with appropriate vitamin A and calcium."
+            )
+        if sp_class == "fish":
+            return (
+                " Prevention rests on a good species-appropriate formulated feed, avoidance of overfeeding and "
+                "selective feeding, and proper feed storage to preserve vitamins."
+            )
+        if sp_class == "equine":
+            return (
+                " Prevention rests on maintaining an appropriate body weight, restricting excess grain and sugar, and "
+                "managing pasture (to prevent laminitis and equine metabolic syndrome)."
+            )
+        return (
+            " Feeding to meet species-specific nutritional requirements is central (herbivorous small mammals on "
+            "mostly high-fibre timothy hay, guinea pigs with continuous vitamin C, avoiding excess sugar)."
+        )
+    if category == "musculoskeletal":
+        if sp_class == "reptile":
+            return (
+                " Preventing metabolic bone disease is central: appropriate UV-B, calcium/D3 supplementation and a "
+                "correct thermal range support skeletal health."
+            )
+        if sp_class == "equine":
+            return (
+                " Appropriate farriery and hoof care, avoidance of hard footing and excessive workloads, and planned "
+                "warm-up are important for preventing musculoskeletal disease."
+            )
+        if sp_class == "avian":
+            return (
+                " Appropriate perch diameter and material, adequate flight exercise and calcium sufficiency prevent "
+                "bumblefoot, fractures and skeletal abnormalities."
+            )
+        return (
+            " A safe enclosure (preventing falls and entrapment), maintenance of appropriate body weight, and "
+            "species-appropriate calcium and vitamin-D nutrition are the basis of prevention."
+        )
+    if category == "dental":
+        if sp_class == "exotic_mammal":
+            return (
+                " In herbivorous small mammals, a mostly high-fibre timothy-hay diet promotes natural tooth wear, and "
+                "regular dental checks detect malocclusion and overgrowth early."
+            )
+        if sp_class == "avian":
+            return " Providing hard foods and a cuttlebone for proper beak wear and regular beak inspection help prevention."
+        return " Appropriate diet composition and regular oral and occlusal inspection limit progression of dental disease."
+    if category == "gastrointestinal":
+        if sp_class == "exotic_mammal":
+            return (
+                " In herbivorous small mammals, a high-fibre diet and adequate water intake prevent gastrointestinal "
+                "stasis; avoid abrupt diet changes, fasting and stress."
+            )
+        if sp_class == "equine":
+            return (
+                " Colic prevention rests on regular feeding and adequate water, avoiding abrupt feed changes, planned "
+                "deworming, and preventing sand ingestion."
+            )
+        if sp_class == "fish":
+            return (
+                " Prevention of digestive disease rests on appropriate water temperature and quality, feeding a good "
+                "diet in appropriate amounts, and avoiding overfeeding and abrupt diet changes."
+            )
+        return (
+            " Feeding a high-quality diet, avoiding abrupt diet changes, preventing foreign-body ingestion, and "
+            "maintaining a clean feeding environment are central."
+        )
+    if category == "renal_urinary":
+        return (
+            " Ensuring adequate water intake, an appropriate mineral balance in the diet, and early evaluation of "
+            "renal function and urine quality through regular health checks aid prevention."
+        )
+    if category == "cardiac":
+        return (
+            " Established primary prevention is limited, but maintaining appropriate body weight, early detection "
+            "through regular health checks, and proper management of underlying disease are important."
+        )
+    if category in ("respiratory_other",):
+        if sp_class == "avian":
+            return (
+                " Strict avoidance of airway irritants (tobacco smoke, overheated PTFE fumes, aerosols, dust) and "
+                "appropriate ventilation and humidity are the keys to prevention."
+            )
+        return (
+            " Reducing exposure to dust, irritant gases and allergens, appropriate ventilation and humidity control, "
+            "and maintaining appropriate body weight are important for prevention."
+        )
+    if category == "neurological":
+        return (
+            " Preventing trauma, restricting access to toxic substances, controlling infectious disease, and "
+            "appropriate nutrition reduce the risk of neurological disease."
+        )
+    if category == "ophthalmic":
+        return (
+            " Protecting the eyes from trauma and irritants, maintaining a clean enclosure, and seeking early care "
+            "for initial ocular signs aid prevention."
+        )
+    if category == "dermatological":
+        if sp_class == "fish":
+            return (
+                " Prevention of skin and fin disease rests on good water quality, gentle handling, avoidance of "
+                "overstocking, and quarantine of new animals."
+            )
+        return (
+            " Appropriate substrate and humidity management, a clean coat, feathers or skin, ectoparasite control, and "
+            "prevention of trauma are the basis of prevention."
+        )
+    if category == "hematological":
+        return (
+            " Avoiding infectious and toxic causes, managing underlying disease, and early detection through regular "
+            "health checks aid prevention."
+        )
+    if category == "reproductive":
+        return (
+            " Planned breeding management, appropriate nutrition and a suitable birthing environment, early detection "
+            "of reproductive disease, and neutering where appropriate contribute to prevention."
+        )
+    if category == "toxicity":
+        return (
+            " Preventing access to toxic substances (plants, chemicals, heavy metals, medicines) with safe storage, "
+            "and removing species-specific toxic foods, are the most effective preventive measures."
+        )
+    if category == "trauma":
+        return (
+            " A safe enclosure (removing sharp objects, fall and entrapment hazards), managing conflict between "
+            "cohabiting animals, and appropriate handling are central to preventing trauma."
+        )
+    if category == "autoimmune":
+        return (
+            " There is no established prevention, but managing suspected triggers (infection, drugs, stress) and "
+            "early detection and intervention are important."
+        )
+    if category == "behavioral":
+        return (
+            " Appropriate environmental enrichment, adequate exercise and foraging opportunities, a suitable social "
+            "environment with cohabitants, and removal of stressors are important for prevention."
+        )
+    return ""
+
+
+def gen_prevention_en_noncompanion(category: str, name_en: str, species: str) -> str:
+    """Species-class-appropriate English prevention for non-companion species.
+
+    English mirror of the non-companion path of gen_prevention_ja. Used only to
+    regenerate contaminated non-companion English prevention in the served-DB
+    build; the dog/cat (companion) English path is untouched.
+    """
+    sp_en = SPECIES_EN.get(species, species)
+    prefix = _disease_prefix_en(name_en, sp_en)
+    sp_class = _species_class(species)
+    core = _PREVENT_CLASS_CORE_EN.get(sp_class, _PREVENT_CLASS_CORE_EN["exotic_mammal"])
+    text = f"Prevention of {prefix} rests on {core}."
+    overlay = _prevention_overlay_en(category, sp_class)
+    if overlay:
+        text += overlay
+    return text
+
+
 def _neoplasia_subtype(name_ja: str) -> str:
     """Classify a tumour from its Japanese name into a prognostic subtype.
 
@@ -5181,6 +5421,13 @@ def generate_clinical_fields(
         # English prognosis embeds the English disease name and is disease-specific.
         if field == "prognosis":
             result[field] = gen_prognosis_en(category, name_en, species)
+            continue
+        # English prevention: only non-companion species have a class-aware
+        # generator (mirroring gen_prevention_ja). The dog/cat companion English
+        # prevention has no generator here, so leave it untouched.
+        if field == "prevention":
+            if _species_class(species) != "companion":
+                result[field] = gen_prevention_en_noncompanion(category, name_en, species)
             continue
         gen = GENERATORS.get(field)
         if gen is None:
