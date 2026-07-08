@@ -1226,9 +1226,11 @@ def disease_detail(species: str, disease_slug: str):
     # Load PubMed references
     pubmed_refs = []
     try:
-        from api.pubmed_references import get_references_for_disease
+        # T110: species-aware citation binding (curated + species guard) so an
+        # exotic disease never inherits a dog/cat keyword-matched citation.
+        from api.pubmed_references import get_references_for_disease_v2
 
-        pubmed_refs = get_references_for_disease(disease.get("name", ""))
+        pubmed_refs = get_references_for_disease_v2(disease.get("name", ""), species_key)
     except Exception:
         pass
 
