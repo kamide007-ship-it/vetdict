@@ -659,9 +659,7 @@ def _render_treatment_adjunct_html(text):
     )
     block = (
         '<div class="ecvn-adjunct-block" role="complementary" aria-label="自社製品の広告（PR）">'
-        '<div class="ecvn-adjunct-label"><span class="ecvn-pr-badge">PR</span>PR・自社製品 · '
-        + vendor_link
-        + "</div>"
+        '<div class="ecvn-adjunct-label"><span class="ecvn-pr-badge">PR</span>PR・自社製品 · ' + vendor_link + "</div>"
         '<div class="ecvn-adjunct-disclaimer">以下は自社製品の紹介（広告）です。'
         "標準治療・エビデンスに基づく治療ではありません。</div>"
         '<div class="ecvn-adjunct-body">' + adj_html + "</div></div>"
@@ -1217,7 +1215,9 @@ def disease_detail(species: str, disease_slug: str):
             for dr in _ALL_DRUGS:
                 dr_name = dr.get("name", "")
                 dr_name_ja = dr.get("name_ja", "")
-                if not ((dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text)):
+                if not (
+                    (dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text)
+                ):
                     continue
                 # Species guard (T108): only surface a drug link when the drug
                 # has dosing data for this species. Otherwise an exotic page
