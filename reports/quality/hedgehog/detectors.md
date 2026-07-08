@@ -163,8 +163,8 @@
 - 自己塗布行動（ハリネズミ）（Self-Anointing Behavior）[hedgehog_0193] — ja:526字 / en:867字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **127** 疾患
-- 犬猫論文の他種への自動紐付け: **20** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **127** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **17** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[hedgehog_0002] → グリセオフルビン, クロトリマゾール, グリセオフルビン
@@ -191,15 +191,12 @@
 ### 犬猫論文が他種に自動紐付け（上位20）
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[hedgehog_0002] → key: dermatophytosis
 - リンパ腫（Lymphoma）[hedgehog_0009] → key: lymphoma
-- ふらつき症候群（WHS）（Wobbly Hedgehog Syndrome (WHS)）[hedgehog_0029] → key: wobbly hedgehog syndrome (whs)
 - 慢性腎臓病（Chronic Kidney Disease）[hedgehog_0045] → key: chronic kidney disease
 - 膀胱炎（Cystitis）[hedgehog_0046] → key: feline idiopathic cystitis (fic)
 - 尿路結石症（Urolithiasis (Bladder Stones)）[hedgehog_0047] → key: urolithiasis
 - 子宮蓄膿症（Pyometra）[hedgehog_0049] → key: pyometra
 - 副腎疾患（Adrenal Disease）[hedgehog_0071] → key: adrenal disease
 - 貧血（Anemia）[hedgehog_0074] → key: immune-mediated hemolytic anemia
-- ふらつきハリネズミ症候群（WHS）- 初期段階（Wobbly Hedgehog Syndrome (WHS) - Early Stage）[hedgehog_0077] → key: wobbly hedgehog syndrome (whs)
-- ふらつきハリネズミ症候群（WHS）- 進行期（Wobbly Hedgehog Syndrome (WHS) - Advanced）[hedgehog_0078] → key: wobbly hedgehog syndrome (whs)
 - 皮膚糸状菌症（重症型）（Dermatophytosis (Severe)）[hedgehog_0093] → key: dermatophytosis
 - 糖尿病（Diabetes Mellitus）[hedgehog_0119] → key: diabetes mellitus
 - 膵炎（Pancreatitis）[hedgehog_0125] → key: feline pancreatitis

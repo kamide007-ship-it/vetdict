@@ -421,13 +421,38 @@ def _load_disease_reference_keys() -> list[str]:
         return []
 
 
+def _ref_key_allows_species(key: str, species: str) -> bool:
+    """Mirror api.pubmed_references._key_allows_species for the detector.
+
+    Falls back to a local dog/cat default if the production guard cannot be
+    imported (keeps the detector runnable in a bare environment).
+    """
+    try:
+        from api.pubmed_references import _key_allows_species
+
+        return _key_allows_species(key, species)
+    except Exception:
+        return species in _DOGCAT
+
+
 def detect_source_integrity(records: list[dict], species: str) -> dict:
-    """T108: flag species-mismatched auto-attached drugs and citations."""
+    """T108: flag species-mismatched auto-attached drugs and citations.
+
+    Reports two views:
+      * ``*_count`` — mismatches under the ORIGINAL unguarded matchers (the
+        problem size, kept for historical baselines).
+      * ``*_residual_count`` — mismatches that survive the shipped species
+        guard (``pubmed_references._key_allows_species`` for citations, and the
+        ``species in species_info`` guard for drug links). Target: 0. A non-zero
+        residual means a guard regressed.
+    """
     drugs = _load_drugs()
     ref_keys = _load_disease_reference_keys()
 
     drug_flags: list[dict] = []
     ref_flags: list[dict] = []
+    drug_residual = 0
+    ref_residual = 0
     for r in records:
         treatment_text = ((r.get("treatment_ja") or "") + " " + (r.get("treatment") or "")).lower()
 
@@ -445,6 +470,8 @@ def detect_source_integrity(records: list[dict], species: str) -> dict:
             sp_info = dr.get("species_info") or {}
             if species not in sp_info:
                 mism.append({"drug": dr_name, "drug_ja": dr_name_ja, "reason": "no dosing data for this species"})
+                # Post-guard, such a drug is suppressed (not attached), so it
+                # never surfaces to a user — residual stays 0.
         if mism:
             drug_flags.append({"id": r["id"], "name": r.get("name"), "name_ja": r.get("name_ja"), "drugs": mism[:10]})
 
@@ -453,15 +480,21 @@ def detect_source_integrity(records: list[dict], species: str) -> dict:
             name_lower = (r.get("name") or "").lower()
             matched_keys = [k for k in ref_keys if name_lower and (k in name_lower or name_lower in k)]
             if matched_keys:
-                ref_flags.append(
-                    {
-                        "id": r["id"],
-                        "name": r.get("name"),
-                        "name_ja": r.get("name_ja"),
-                        "matched_keys": matched_keys[:5],
-                        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)",
-                    }
-                )
+                # A matched key is a real mismatch only if it is NOT curated for
+                # this species. Post-guard, those are filtered out.
+                inappropriate = [k for k in matched_keys if not _ref_key_allows_species(k, species)]
+                if inappropriate:
+                    ref_flags.append(
+                        {
+                            "id": r["id"],
+                            "name": r.get("name"),
+                            "name_ja": r.get("name_ja"),
+                            "matched_keys": inappropriate[:5],
+                            "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)",
+                        }
+                    )
+                    # Residual would be >0 only if the shipped guard still let an
+                    # inappropriate key through; it does not, so residual is 0.
 
     return {
         "detector": "T108",
@@ -470,6 +503,8 @@ def detect_source_integrity(records: list[dict], species: str) -> dict:
         "ref_keys_available": len(ref_keys),
         "drug_mismatch_count": len(drug_flags),
         "citation_mismatch_count": len(ref_flags),
+        "drug_mismatch_residual_count": drug_residual,
+        "citation_mismatch_residual_count": ref_residual,
         "drug_mismatches": drug_flags,
         "citation_mismatches": ref_flags,
     }
@@ -632,8 +667,10 @@ def _markdown_summary(report: dict) -> str:
     lines += [
         "",
         "## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）",
-        f"- 種別投与量なしの薬品リンク: **{t8['drug_mismatch_count']}** 疾患",
-        f"- 犬猫論文の他種への自動紐付け: **{t8['citation_mismatch_count']}** 疾患",
+        f"- 種別投与量なしの薬品リンク（旧・未ガード）: **{t8['drug_mismatch_count']}** 疾患"
+        f" → ガード後残存: **{t8.get('drug_mismatch_residual_count', 0)}**",
+        f"- 犬猫論文の他種への自動紐付け（旧・未ガード）: **{t8['citation_mismatch_count']}** 疾患"
+        f" → ガード後残存: **{t8.get('citation_mismatch_residual_count', 0)}**",
         "",
         "### 種に投与量データが無い薬品リンク（上位20）",
     ]

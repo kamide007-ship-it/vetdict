@@ -2891,6 +2891,8 @@
     "ref_keys_available": 30,
     "drug_mismatch_count": 216,
     "citation_mismatch_count": 24,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
       {
         "id": "exotic_other_0000",

@@ -1174,8 +1174,15 @@ def disease_detail(species: str, disease_slug: str):
             for dr in _ALL_DRUGS:
                 dr_name = dr.get("name", "")
                 dr_name_ja = dr.get("name_ja", "")
-                if (dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text):
-                    mentioned_drugs.append({"id": dr.get("id", ""), "name": dr_name, "name_ja": dr_name_ja})
+                if not ((dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text)):
+                    continue
+                # Species guard (T108): only surface a drug link when the drug
+                # has dosing data for this species. Otherwise an exotic page
+                # would link a dog/cat-only drug with no species-appropriate
+                # dose — a clinical-safety hazard.
+                if species_key not in (dr.get("species_info") or {}):
+                    continue
+                mentioned_drugs.append({"id": dr.get("id", ""), "name": dr_name, "name_ja": dr_name_ja})
             mentioned_drugs = mentioned_drugs[:10]
         except Exception:
             pass
@@ -1185,7 +1192,7 @@ def disease_detail(species: str, disease_slug: str):
     try:
         from api.pubmed_references import get_references_for_disease
 
-        pubmed_refs = get_references_for_disease(disease.get("name", ""))
+        pubmed_refs = get_references_for_disease(disease.get("name", ""), species_key)
     except Exception:
         pass
 
@@ -2368,19 +2375,24 @@ def _attach_mentioned_drugs(result, species):
                     (dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text)
                 ):
                     continue
+                # Species guard (T108): only surface a drug link when the drug
+                # has dosing data for this species. Otherwise the disease would
+                # link a drug with no species-appropriate dose — a clinical
+                # safety hazard on exotic-species pages.
+                si = (dr.get("species_info") or {}).get(species)
+                if not si:
+                    continue
                 entry = {
                     "id": dr.get("id", ""),
                     "name": dr_name,
                     "name_ja": dr_name_ja,
                     "category": dr.get("category", ""),
+                    "dosage": si.get("dosage", ""),
+                    "dosage_ja": si.get("dosage_ja", ""),
+                    "safe": si.get("safe", True),
+                    "notes": si.get("notes", ""),
+                    "notes_ja": si.get("notes_ja", ""),
                 }
-                si = (dr.get("species_info") or {}).get(species)
-                if si:
-                    entry["dosage"] = si.get("dosage", "")
-                    entry["dosage_ja"] = si.get("dosage_ja", "")
-                    entry["safe"] = si.get("safe", True)
-                    entry["notes"] = si.get("notes", "")
-                    entry["notes_ja"] = si.get("notes_ja", "")
                 matched.append(entry)
                 if len(matched) >= 10:
                     break

@@ -11,6 +11,8 @@
       "heading_only_tx": 38,
       "drug_mismatch": 45,
       "citation_mismatch": 0,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 3,
       "mt_safe": 0,
       "mt_review": 3
@@ -26,6 +28,8 @@
       "heading_only_tx": 78,
       "drug_mismatch": 3,
       "citation_mismatch": 0,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -41,6 +45,8 @@
       "heading_only_tx": 43,
       "drug_mismatch": 170,
       "citation_mismatch": 12,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 5,
       "mt_safe": 0,
       "mt_review": 5
@@ -55,7 +61,9 @@
       "empty_tx": 0,
       "heading_only_tx": 25,
       "drug_mismatch": 132,
-      "citation_mismatch": 27,
+      "citation_mismatch": 19,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 2,
       "mt_safe": 1,
       "mt_review": 1
@@ -71,6 +79,8 @@
       "heading_only_tx": 30,
       "drug_mismatch": 104,
       "citation_mismatch": 19,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 1,
       "mt_safe": 0,
       "mt_review": 1
@@ -85,7 +95,9 @@
       "empty_tx": 0,
       "heading_only_tx": 42,
       "drug_mismatch": 137,
-      "citation_mismatch": 17,
+      "citation_mismatch": 15,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 6,
       "mt_safe": 5,
       "mt_review": 3
@@ -100,7 +112,9 @@
       "empty_tx": 0,
       "heading_only_tx": 36,
       "drug_mismatch": 100,
-      "citation_mismatch": 25,
+      "citation_mismatch": 16,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -115,7 +129,9 @@
       "empty_tx": 0,
       "heading_only_tx": 25,
       "drug_mismatch": 126,
-      "citation_mismatch": 36,
+      "citation_mismatch": 20,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 1,
       "mt_safe": 0,
       "mt_review": 1
@@ -130,7 +146,9 @@
       "empty_tx": 0,
       "heading_only_tx": 22,
       "drug_mismatch": 127,
-      "citation_mismatch": 20,
+      "citation_mismatch": 17,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 2,
       "mt_safe": 0,
       "mt_review": 2
@@ -146,6 +164,8 @@
       "heading_only_tx": 28,
       "drug_mismatch": 108,
       "citation_mismatch": 16,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 1,
       "mt_safe": 0,
       "mt_review": 1
@@ -160,7 +180,9 @@
       "empty_tx": 0,
       "heading_only_tx": 26,
       "drug_mismatch": 57,
-      "citation_mismatch": 19,
+      "citation_mismatch": 14,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 17,
       "mt_safe": 4,
       "mt_review": 16
@@ -176,6 +198,8 @@
       "heading_only_tx": 68,
       "drug_mismatch": 94,
       "citation_mismatch": 17,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -191,6 +215,8 @@
       "heading_only_tx": 43,
       "drug_mismatch": 74,
       "citation_mismatch": 14,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 1,
       "mt_safe": 0,
       "mt_review": 1
@@ -206,6 +232,8 @@
       "heading_only_tx": 76,
       "drug_mismatch": 33,
       "citation_mismatch": 14,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -221,6 +249,8 @@
       "heading_only_tx": 39,
       "drug_mismatch": 113,
       "citation_mismatch": 10,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -236,6 +266,8 @@
       "heading_only_tx": 69,
       "drug_mismatch": 91,
       "citation_mismatch": 12,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -251,6 +283,8 @@
       "heading_only_tx": 50,
       "drug_mismatch": 84,
       "citation_mismatch": 9,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -266,6 +300,8 @@
       "heading_only_tx": 55,
       "drug_mismatch": 91,
       "citation_mismatch": 11,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -281,6 +317,8 @@
       "heading_only_tx": 30,
       "drug_mismatch": 220,
       "citation_mismatch": 7,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -296,6 +334,8 @@
       "heading_only_tx": 31,
       "drug_mismatch": 14,
       "citation_mismatch": 0,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -311,6 +351,8 @@
       "heading_only_tx": 100,
       "drug_mismatch": 216,
       "citation_mismatch": 24,
+      "drug_mismatch_residual": 0,
+      "citation_mismatch_residual": 0,
       "mt_hits": 0,
       "mt_safe": 0,
       "mt_review": 0
@@ -325,7 +367,9 @@
     "empty_tx": 0,
     "heading_only_tx": 954,
     "drug_mismatch": 2139,
-    "citation_mismatch": 309,
+    "citation_mismatch": 266,
+    "drug_mismatch_residual": 0,
+    "citation_mismatch_residual": 0,
     "mt_hits": 39,
     "mt_safe": 10,
     "mt_review": 34

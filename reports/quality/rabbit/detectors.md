@@ -199,8 +199,8 @@
 - 破壊的咀嚼行動（ウサギ）（Destructive Chewing Behavior）[rabbit_0446] — ja:371字 / en:853字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **132** 疾患
-- 犬猫論文の他種への自動紐付け: **27** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **132** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **19** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 胃拡張（鼓脹症）（Gastric Dilation (Bloat)）[rabbit_0001] → ロニダゾール
@@ -225,11 +225,7 @@
 - 後肢不全麻痺・麻痺（Hind Limb Paresis / Paralysis）[rabbit_0046] → デキサメタゾン
 
 ### 犬猫論文が他種に自動紐付け（上位20）
-- 消化管うっ滞（Gastrointestinal Stasis）[rabbit_0000] → key: gastrointestinal stasis
-- 歯の不正咬合（Dental Malocclusion）[rabbit_0009] → key: malocclusion
-- パスツレラ症（スナッフル）（Pasteurellosis (Snuffles)）[rabbit_0014] → key: pasteurellosis
 - 尿路結石症（Urolithiasis (Bladder Stones)）[rabbit_0020] → key: urolithiasis
-- エンセファリトゾーン・クニクリ感染症（Encephalitozoon cuniculi (E. cuniculi)）[rabbit_0023] → key: encephalitozoon cuniculi
 - 皮膚糸状菌症（白癬）（Ringworm (Dermatophytosis)）[rabbit_0033] → key: dermatophytosis
 - 子宮蓄膿症（Pyometra）[rabbit_0048] → key: pyometra
 - 心筋症（Cardiomyopathy）[rabbit_0062] → key: hypertrophic cardiomyopathy (hcm)
@@ -238,13 +234,16 @@
 - 腹膜炎（Peritonitis）[rabbit_0120] → key: feline infectious peritonitis
 - 副腎疾患（Adrenal Disease）[rabbit_0125] → key: adrenal disease
 - 糖尿病（Diabetes Mellitus）[rabbit_0138] → key: diabetes mellitus
-- パスツレラ症（結膜型）（Pasteurellosis - Conjunctival Form）[rabbit_0224] → key: pasteurellosis
-- パスツレラ症（生殖器型）（Pasteurellosis - Genital Form）[rabbit_0225] → key: pasteurellosis
-- パスツレラ症（敗血症型）（Pasteurellosis - Septicaemic Form）[rabbit_0226] → key: pasteurellosis
-- ウサギ出血病（RHD）（ウサギ）（Rabbit Hemorrhagic Disease (RHD)）[rabbit_0274] → key: rabbit hemorrhagic disease
 - 皮膚糸状菌症（白癬）（ウサギ）（Dermatophytosis (Ringworm)）[rabbit_0302] → key: dermatophytosis
 - 縦隔リンパ腫（ウサギ）（Mediastinal Lymphoma）[rabbit_0337] → key: lymphoma
 - 尿路結石症（ウサギ）（Urolithiasis）[rabbit_0339] → key: urolithiasis
+- 慢性腎臓病（ウサギ）（Chronic Kidney Disease）[rabbit_0342] → key: chronic kidney disease
+- 心臓リンパ腫（ウサギ）（Cardiac Lymphoma）[rabbit_0371] → key: lymphoma
+- 血栓塞栓症（ウサギ）（Thromboembolism）[rabbit_0372] → key: aortic thromboembolism (saddle thrombus)
+- 貧血（ウサギ）（Anemia）[rabbit_0388] → key: immune-mediated hemolytic anemia
+- 腸リンパ腫（ウサギ）（Intestinal Lymphoma）[rabbit_0415] → key: lymphoma
+- 肝リンパ腫（ウサギ）（Hepatic Lymphoma）[rabbit_0416] → key: lymphoma
+- 白血病（ウサギ）（Leukemia）[rabbit_0432] → key: feline leukemia virus
 
 ## T109 機械翻訳臭（置換辞書）
 - ヒット総数: **2**（safe 1 / review 1）

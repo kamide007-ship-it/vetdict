@@ -4446,6 +4446,8 @@
     "ref_keys_available": 30,
     "drug_mismatch_count": 170,
     "citation_mismatch_count": 12,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
       {
         "id": "rp_iah",

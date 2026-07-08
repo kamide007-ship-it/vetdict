@@ -2079,7 +2079,9 @@
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 126,
-    "citation_mismatch_count": 36,
+    "citation_mismatch_count": 20,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
       {
         "id": "ferret_0000",
@@ -3951,24 +3953,6 @@
     ],
     "citation_mismatches": [
       {
-        "id": "ferret_0000",
-        "name": "Insulinoma",
-        "name_ja": "インスリノーマ",
-        "matched_keys": [
-          "insulinoma"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0001",
-        "name": "Adrenal Disease",
-        "name_ja": "副腎疾患",
-        "matched_keys": [
-          "adrenal disease"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
         "id": "ferret_0002",
         "name": "Diabetes Mellitus",
         "name_ja": "糖尿病",
@@ -3992,15 +3976,6 @@
         "name_ja": "フィラリア症",
         "matched_keys": [
           "heartworm disease"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0022",
-        "name": "Lymphoma",
-        "name_ja": "リンパ腫",
-        "matched_keys": [
-          "lymphoma"
         ],
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
@@ -4041,87 +4016,6 @@
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
       {
-        "id": "ferret_0066",
-        "name": "Hypoglycemia (Insulinoma-related)",
-        "name_ja": "低血糖症（インスリノーマ関連）",
-        "matched_keys": [
-          "insulinoma"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0089",
-        "name": "Insulinoma - Advanced",
-        "name_ja": "インスリノーマ - 進行型",
-        "matched_keys": [
-          "insulinoma"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0090",
-        "name": "Adrenal Disease - Left Gland",
-        "name_ja": "副腎疾患 - 左腺",
-        "matched_keys": [
-          "adrenal disease"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0091",
-        "name": "Adrenal Disease - Right Gland",
-        "name_ja": "副腎疾患 - 右腺",
-        "matched_keys": [
-          "adrenal disease"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0092",
-        "name": "Bilateral Adrenal Disease",
-        "name_ja": "両側副腎疾患",
-        "matched_keys": [
-          "adrenal disease"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0100",
-        "name": "Intestinal Lymphoma",
-        "name_ja": "腸管リンパ腫",
-        "matched_keys": [
-          "lymphoma"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0101",
-        "name": "Multicentric Lymphoma",
-        "name_ja": "多中心性リンパ腫",
-        "matched_keys": [
-          "lymphoma"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0102",
-        "name": "Mediastinal Lymphoma",
-        "name_ja": "縦隔リンパ腫",
-        "matched_keys": [
-          "lymphoma"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0103",
-        "name": "Cutaneous Lymphoma",
-        "name_ja": "皮膚リンパ腫",
-        "matched_keys": [
-          "lymphoma"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
         "id": "ferret_0110",
         "name": "Heartworm Disease - Caval Syndrome",
         "name_ja": "フィラリア症 - 大静脈症候群",
@@ -4131,29 +4025,11 @@
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
       {
-        "id": "ferret_0113",
-        "name": "Splenic Lymphoma",
-        "name_ja": "脾臓リンパ腫",
-        "matched_keys": [
-          "lymphoma"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
         "id": "ferret_0152",
         "name": "Pancreatitis",
         "name_ja": "膵炎",
         "matched_keys": [
           "feline pancreatitis"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0153",
-        "name": "Adrenal Disease - GnRH Agonist Response",
-        "name_ja": "副腎疾患 - GnRHアゴニスト反応",
-        "matched_keys": [
-          "adrenal disease"
         ],
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
@@ -4212,15 +4088,6 @@
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
       {
-        "id": "ferret_0194",
-        "name": "Hypoglycemia (Insulinoma)",
-        "name_ja": "低血糖症（インスリノーマ）（フェレット）",
-        "matched_keys": [
-          "insulinoma"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
         "id": "ferret_0214",
         "name": "Anemia",
         "name_ja": "貧血（フェレット）",
@@ -4235,15 +4102,6 @@
         "name_ja": "白血病（フェレット）",
         "matched_keys": [
           "feline leukemia virus"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "ferret_0223",
-        "name": "Ferret Adrenal Disease (FAD)",
-        "name_ja": "フェレット副腎疾患（フェレット）",
-        "matched_keys": [
-          "adrenal disease"
         ],
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },

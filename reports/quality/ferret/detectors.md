@@ -186,8 +186,8 @@
 - 動脈硬化症（フェレット）（Arteriosclerosis）[ferret_0233] — ja:57字 / en:260字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **126** 疾患
-- 犬猫論文の他種への自動紐付け: **36** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **126** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **20** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - インスリノーマ（Insulinoma）[ferret_0000] → ブプレノルフィン, ロニダゾール
@@ -212,26 +212,26 @@
 - フェレット全身性コロナウイルス感染症（Ferret Systemic Coronavirus (FRSCV)）[ferret_0054] → クロルヘキシジン
 
 ### 犬猫論文が他種に自動紐付け（上位20）
-- インスリノーマ（Insulinoma）[ferret_0000] → key: insulinoma
-- 副腎疾患（Adrenal Disease）[ferret_0001] → key: adrenal disease
 - 糖尿病（Diabetes Mellitus）[ferret_0002] → key: diabetes mellitus
 - 肥大型心筋症（HCM）（Hypertrophic Cardiomyopathy (HCM)）[ferret_0015] → key: hypertrophic cardiomyopathy (hcm)
 - フィラリア症（Heartworm Disease）[ferret_0017] → key: heartworm disease
-- リンパ腫（Lymphoma）[ferret_0022] → key: lymphoma
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[ferret_0032] → key: dermatophytosis
 - 尿路結石症（Urolithiasis (Bladder Stones)）[ferret_0036] → key: urolithiasis
 - 慢性腎臓病（Chronic Kidney Disease）[ferret_0038] → key: chronic kidney disease
 - 子宮蓄膿症（Pyometra）[ferret_0044] → key: pyometra
-- 低血糖症（インスリノーマ関連）（Hypoglycemia (Insulinoma-related)）[ferret_0066] → key: insulinoma
-- インスリノーマ - 進行型（Insulinoma - Advanced）[ferret_0089] → key: insulinoma
-- 副腎疾患 - 左腺（Adrenal Disease - Left Gland）[ferret_0090] → key: adrenal disease
-- 副腎疾患 - 右腺（Adrenal Disease - Right Gland）[ferret_0091] → key: adrenal disease
-- 両側副腎疾患（Bilateral Adrenal Disease）[ferret_0092] → key: adrenal disease
-- 腸管リンパ腫（Intestinal Lymphoma）[ferret_0100] → key: lymphoma
-- 多中心性リンパ腫（Multicentric Lymphoma）[ferret_0101] → key: lymphoma
-- 縦隔リンパ腫（Mediastinal Lymphoma）[ferret_0102] → key: lymphoma
-- 皮膚リンパ腫（Cutaneous Lymphoma）[ferret_0103] → key: lymphoma
 - フィラリア症 - 大静脈症候群（Heartworm Disease - Caval Syndrome）[ferret_0110] → key: heartworm disease
+- 膵炎（Pancreatitis）[ferret_0152] → key: feline pancreatitis
+- 断端子宮蓄膿症（Stump Pyometra）[ferret_0154] → key: pyometra
+- 皮膚糸状菌症（フェレット）（Dermatophytosis）[ferret_0177] → key: dermatophytosis
+- 心筋症（フェレット）（Cardiomyopathy）[ferret_0182] → key: hypertrophic cardiomyopathy (hcm)
+- 肥大型心筋症（フェレット）（Hypertrophic Cardiomyopathy）[ferret_0184] → key: hypertrophic cardiomyopathy (hcm)
+- 尿路結石症（フェレット）（Urolithiasis）[ferret_0189] → key: urolithiasis
+- 膀胱炎（フェレット）（Cystitis）[ferret_0191] → key: feline idiopathic cystitis (fic)
+- 貧血（フェレット）（Anemia）[ferret_0214] → key: immune-mediated hemolytic anemia
+- 白血病（フェレット）（Leukemia）[ferret_0215] → key: feline leukemia virus
+- 腹膜炎（フェレット）（Peritonitis）[ferret_0230] → key: feline infectious peritonitis
+- 溶血性貧血（フェレット）（Hemolytic Anemia）[ferret_0271] → key: immune-mediated hemolytic anemia
+- 皮膚糸状菌症（ミクロスポルム）（フェレット）（Dermatophytosis (Microsporum)）[ferret_0274] → key: dermatophytosis
 
 ## T109 機械翻訳臭（置換辞書）
 - ヒット総数: **1**（safe 0 / review 1）

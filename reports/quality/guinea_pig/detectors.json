@@ -2379,7 +2379,9 @@
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 137,
-    "citation_mismatch_count": 17,
+    "citation_mismatch_count": 15,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
       {
         "id": "guinea_pig_0003",
@@ -4669,15 +4671,6 @@
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
       {
-        "id": "guinea_pig_0055",
-        "name": "Dental Malocclusion",
-        "name_ja": "不正咬合",
-        "matched_keys": [
-          "malocclusion"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
         "id": "guinea_pig_0061",
         "name": "Lymphoma",
         "name_ja": "リンパ腫",
@@ -4719,15 +4712,6 @@
         "name_ja": "エンセファリトゾーン・クニクリ感染症",
         "matched_keys": [
           "encephalitozoon cuniculi"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "guinea_pig_0196",
-        "name": "Malocclusion",
-        "name_ja": "不正咬合（モルモット）",
-        "matched_keys": [
-          "malocclusion"
         ],
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },

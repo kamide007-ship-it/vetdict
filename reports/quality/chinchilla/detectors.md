@@ -175,8 +175,8 @@
 - 外耳炎（Otitis Externa - Chinchilla）[chinchilla_0154] — ja:160字 / en:159字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **100** 疾患
-- 犬猫論文の他種への自動紐付け: **25** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **100** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **16** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 臼歯過長症（Molar Elongation）[chinchilla_0001] → リンコマイシン
@@ -201,26 +201,22 @@
 - 接触性・アレルギー性皮膚炎（Dermatitis (Contact / Allergic)）[chinchilla_0064] → ヒドロキシジン, リンコマイシン
 
 ### 犬猫論文が他種に自動紐付け（上位20）
-- 不正咬合（Malocclusion）[chinchilla_0000] → key: malocclusion
-- 皮膚糸状菌症（Ringworm (Dermatophytosis)）[chinchilla_0014] → key: dermatophytosis
 - 尿路結石症（Urolithiasis (Bladder Stones)）[chinchilla_0021] → key: urolithiasis
 - 慢性腎臓病（Chronic Kidney Disease）[chinchilla_0022] → key: chronic kidney disease
 - 子宮蓄膿症（Pyometra）[chinchilla_0026] → key: pyometra
 - 心筋症（Cardiomyopathy）[chinchilla_0042] → key: hypertrophic cardiomyopathy (hcm)
 - 糖尿病（Diabetes Mellitus）[chinchilla_0045] → key: diabetes mellitus
 - リンパ腫（Lymphoma）[chinchilla_0058] → key: lymphoma
-- 不正咬合 - 臼歯スパー（Dental Malocclusion - Molar Spurs）[chinchilla_0073] → key: malocclusion
-- 不正咬合 - 切歯（Dental Malocclusion - Incisor）[chinchilla_0074] → key: malocclusion
 - エンセファリトゾーン・クニクリ感染症（Encephalitozoon cuniculi Infection）[chinchilla_0138] → key: encephalitozoon cuniculi
-- 歯科疾患（切歯不正咬合）（Dental Disease - Incisor Malocclusion）[chinchilla_0140] → key: malocclusion
 - 糖尿病（Diabetes Mellitus - Chinchilla）[chinchilla_0155] → key: diabetes mellitus
 - 子宮蓄膿症（Pyometra - Chinchilla）[chinchilla_0157] → key: pyometra
-- 不正咬合（進行性）（Malocclusion - Progressive）[chinchilla_0163] → key: malocclusion
 - 膀胱炎（チンチラ）（Cystitis）[chinchilla_0188] → key: feline idiopathic cystitis (fic)
 - 白血病（チンチラ）（Leukemia）[chinchilla_0212] → key: feline leukemia virus
-- 皮膚糸状菌症（ミクロスポルム）（チンチラ）（Dermatophytosis (Microsporum)）[chinchilla_0226] → key: dermatophytosis
 - 膵炎（チンチラ）（Pancreatitis）[chinchilla_0229] → key: feline pancreatitis
 - 腹膜炎（チンチラ）（Peritonitis）[chinchilla_0230] → key: feline infectious peritonitis
+- 血栓塞栓症（チンチラ）（Thromboembolism）[chinchilla_0243] → key: aortic thromboembolism (saddle thrombus)
+- 尿路結石症（チンチラ）（Urolithiasis）[chinchilla_0273] → key: urolithiasis
+- 貧血（チンチラ）（Anemia）[chinchilla_0276] → key: immune-mediated hemolytic anemia
 
 ## T109 機械翻訳臭（置換辞書）
 - ヒット総数: **0**（safe 0 / review 0）

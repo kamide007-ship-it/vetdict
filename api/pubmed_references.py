@@ -330,10 +330,72 @@ DISEASE_REFERENCES: dict[str, list[dict]] = {
 }
 
 
-def get_references_for_disease(disease_name: str) -> list[dict]:
-    """Return PubMed references for a disease name (case-insensitive partial match)."""
+# Species allow-list per reference key (T110/T108 fix).
+#
+# The curated citations above were sourced from species-specific literature.
+# Without this guard, get_references_for_disease() attached them by loose
+# name substring match to ANY species — e.g. the "diabetes mellitus" (dogs &
+# cats) paper was attached to a degu diabetes page, and dog/cat guidelines
+# leaked onto exotic pages. Each key below is scoped to the species its cited
+# study actually covers. Keys absent from this map fall back to dog/cat, since
+# every legacy citation was small-animal (dog/cat) literature.
+_REFERENCE_SPECIES: dict[str, set[str]] = {
+    "hypertrophic cardiomyopathy (hcm)": {"cat"},
+    "aortic thromboembolism (saddle thrombus)": {"cat"},
+    "malocclusion": {"chinchilla", "degu", "guinea_pig", "rabbit"},
+    "insulinoma": {"ferret"},
+    "wobbly hedgehog syndrome (whs)": {"hedgehog"},
+    "urinary obstruction (blocked cat)": {"cat"},
+    "feline lower urinary tract disease (flutd)": {"cat"},
+    "feline idiopathic cystitis (fic)": {"cat"},
+    "feline pancreatitis": {"cat"},
+    "gastric dilatation-volvulus (gdv/bloat)": {"dog"},
+    "gastrointestinal stasis": {"rabbit", "guinea_pig", "chinchilla", "degu"},
+    "adrenal disease": {"ferret"},
+    "pasteurellosis": {"rabbit"},
+    "dermatophytosis": {"chinchilla"},
+    "canine parvovirus": {"dog"},
+    "chronic kidney disease": {"dog", "cat"},
+    "feline infectious peritonitis": {"cat"},
+    "encephalitozoon cuniculi": {"rabbit"},
+    "diabetes mellitus": {"dog", "cat"},
+    "feline asthma": {"cat"},
+    "immune-mediated hemolytic anemia": {"dog", "cat"},
+    "atopic dermatitis": {"dog", "cat"},
+    "feline herpesvirus": {"cat"},
+    "urolithiasis": {"dog", "cat"},
+    "pyometra": {"dog", "cat"},
+    "lymphoma": {"dog", "cat", "ferret"},
+    "feline leukemia virus": {"cat"},
+    "feline immunodeficiency virus": {"cat"},
+    "heartworm disease": {"dog", "cat"},
+    "rabbit hemorrhagic disease": {"rabbit"},
+}
+
+_DEFAULT_REFERENCE_SPECIES: frozenset[str] = frozenset({"dog", "cat"})
+
+
+def _key_allows_species(key: str, species: str | None) -> bool:
+    """Whether a reference key is appropriate for the given species.
+
+    species=None preserves the legacy (unguarded) behaviour for any caller
+    that does not know the species.
+    """
+    if species is None:
+        return True
+    allowed = _REFERENCE_SPECIES.get(key, _DEFAULT_REFERENCE_SPECIES)
+    return species in allowed
+
+
+def get_references_for_disease(disease_name: str, species: str | None = None) -> list[dict]:
+    """Return PubMed references for a disease name (case-insensitive partial match).
+
+    When ``species`` is provided, references are only returned if the matched
+    key is curated for that species (see ``_REFERENCE_SPECIES``). This prevents
+    dog/cat-oriented citations from leaking onto exotic-species disease pages.
+    """
     name_lower = disease_name.lower()
     for key, refs in DISEASE_REFERENCES.items():
-        if key in name_lower or name_lower in key:
+        if (key in name_lower or name_lower in key) and _key_allows_species(key, species):
             return refs
     return []

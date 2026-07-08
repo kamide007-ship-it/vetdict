@@ -153,8 +153,8 @@
 - 爪過成長（デグー）（Nail Overgrowth）[degu_0199] — ja:172字 / en:209字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **57** 疾患
-- 犬猫論文の他種への自動紐付け: **19** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **57** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **14** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - インスリン抵抗性（Insulin Resistance）[degu_0002] → グリピジド
@@ -180,19 +180,14 @@
 
 ### 犬猫論文が他種に自動紐付け（上位20）
 - 糖尿病（Diabetes Mellitus）[degu_0000] → key: diabetes mellitus
-- 不正咬合（Dental Malocclusion）[degu_0010] → key: malocclusion
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[degu_0014] → key: dermatophytosis
-- 消化管うっ滞（Gastrointestinal Stasis）[degu_0027] → key: gastrointestinal stasis
 - 慢性腎臓病（Chronic Kidney Disease）[degu_0036] → key: chronic kidney disease
 - 尿路結石症（Urolithiasis (Bladder Stones)）[degu_0037] → key: urolithiasis
 - 子宮蓄膿症（Pyometra）[degu_0042] → key: pyometra
 - 心筋症（Cardiomyopathy）[degu_0050] → key: hypertrophic cardiomyopathy (hcm)
 - 糖尿病 - 1型（若年発症）（Diabetes Mellitus - Type 1 (Juvenile Onset)）[degu_0057] → key: diabetes mellitus
 - 糖尿病 - 2型（食事誘発性）（Diabetes Mellitus - Type 2 (Diet-Induced)）[degu_0058] → key: diabetes mellitus
-- 不正咬合 - 臼歯（後天性）（Dental Malocclusion - Molar (Acquired)）[degu_0062] → key: malocclusion
-- 不正咬合 - 切歯（先天性）（Dental Malocclusion - Incisor (Congenital)）[degu_0063] → key: malocclusion
 - リンパ腫（Lymphoma）[degu_0098] → key: lymphoma
-- 不正咬合（デグー）（Malocclusion）[degu_0129] → key: malocclusion
 - 皮膚糸状菌症（デグー）（Dermatophytosis）[degu_0139] → key: dermatophytosis
 - 尿路結石症（デグー）（Urolithiasis）[degu_0150] → key: urolithiasis
 - 貧血（デグー）（Anemia）[degu_0155] → key: immune-mediated hemolytic anemia

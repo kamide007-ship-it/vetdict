@@ -176,8 +176,8 @@
 - 拡張型心筋症（Dilated Cardiomyopathy）[guinea_pig_0137] — ja:518字 / en:624字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク: **137** 疾患
-- 犬猫論文の他種への自動紐付け: **17** 疾患
+- 種別投与量なしの薬品リンク（旧・未ガード）: **137** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **15** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 肺炎球菌感染症（Streptococcus pneumoniae Infection）[guinea_pig_0003] → セフトリアキソン
@@ -206,13 +206,11 @@
 - 慢性腎臓病（Chronic Kidney Disease）[guinea_pig_0025] → key: chronic kidney disease
 - 子宮蓄膿症（Pyometra）[guinea_pig_0030] → key: pyometra
 - 糖尿病（Diabetes Mellitus）[guinea_pig_0052] → key: diabetes mellitus
-- 不正咬合（Dental Malocclusion）[guinea_pig_0055] → key: malocclusion
 - リンパ腫（Lymphoma）[guinea_pig_0061] → key: lymphoma
 - 白血病（Leukemia）[guinea_pig_0066] → key: feline leukemia virus
 - 膀胱炎（Cystitis）[guinea_pig_0081] → key: feline idiopathic cystitis (fic)
 - 副腎疾患（Adrenal Disease）[guinea_pig_0083] → key: adrenal disease
 - エンセファリトゾーン・クニクリ感染症（Encephalitozoon cuniculi Infection）[guinea_pig_0113] → key: encephalitozoon cuniculi
-- 不正咬合（モルモット）（Malocclusion）[guinea_pig_0196] → key: malocclusion
 - 尿路結石症（モルモット）（Urolithiasis）[guinea_pig_0198] → key: urolithiasis
 - 腹膜炎（モルモット）（Peritonitis）[guinea_pig_0217] → key: feline infectious peritonitis
 - 皮膚糸状菌症（モルモット）（Dermatophytosis (Ringworm)）[guinea_pig_0235] → key: dermatophytosis
