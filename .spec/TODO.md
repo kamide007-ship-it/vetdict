@@ -15,20 +15,28 @@
 - [x] **T109** 機械翻訳臭 検出器（curated lexicon: safe/review 2区分）
 - [x] 全21種へ検出器を横展開（`scripts/quality/rollout.py` → `reports/quality/_rollout_summary.md`）
 
+## フェーズ1.5：T108 種ガード修正（🟡 可逆・データ非改変）— **完了・PR #709**
+- [x] `pubmed_references`: `_REFERENCE_SPECIES` 許可リスト + `get_references_for_disease(name, species)`
+- [x] `vetdict_api`: 2つの薬品マッチャを「その種の投与量を持つ薬のみ」に
+- [x] 検出器 T108 にガード後残存カウント（目標0）を追加 + rollout 再生成
+- [x] 回帰テスト8件 + 既存257件 pass、ruff clean
+
 ## フェーズ2：スキーマ/不変ID（🟡 前提整備）
 - [ ] `schema_migrations` テーブル + 冪等 ADD COLUMN（canonical_id, status, …）
 - [ ] 全疾患エントリへ **不変 `id`（スラッグ）を付与**するマイグレーション（位置依存ID脱却）
       ※ 旧位置ID → 新IDの `aliases` を記録し、既存URLを保全
 
 ## フェーズ3：論理統合（🔴 承認必須）
-- [ ] **T103** `canonical_id`+`status(active/merged/archived)` で非破壊統合
+- [x] degu 統合レビューワークシート提示 → `.spec/DEGU_CONSOLIDATION_REVIEW.md`（**承認待ち**）
+- [ ] **T103** `canonical_id`+`status(active/merged/archived)` で非破壊統合（承認行のみ適用）
 - [ ] 旧URL → canonical へのリダイレクト
 - [ ] **提示単位：1動物種/1カテゴリのバッチ**で Kentaro 承認 → 実行
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）
+- [x] degu 26件トリアージ提示 → `.spec/DEGU_DOSAGE_DRAFT_TRIAGE.md`（**停止して報告済み**）
+- [ ] **出典 source-of-truth の指定待ち**（repo に出典フィールドが無く「出典付き」を自動生成不可）
 - [ ] **T105** 出典付き投与量ドラフト生成（`review_status=draft`・**公開しない**）
 - [ ] **T106** 獣医師承認後のみ `published`（🔴・自動公開禁止）
-- [ ] 出典が過半引けないバッチは停止して報告
 
 ## フェーズ5：付随品質（🟡）
 - [ ] **T107** NMNブロックを「自社製品・PR」枠へラベル分離（残置・エビデンス治療と分離）
