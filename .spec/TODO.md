@@ -44,10 +44,11 @@
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
 - [x] **T110** 出典紐付けv2（疾患単位キュレーション＋種ガード、v1は残す）（main, merged）→ `.spec/T110_CITATION_BINDING_V2.md`
-- [x] **(D) 予防文の異種汚染修正**: 非companion 544件の prevention_ja に犬猫助言（リード散歩/短頭種/FLUTD等）
-      が焼き込まれていた既存バグを修正。`_is_contaminated` をマーカー語検出で補強し種クラス対応版で再生成。
-      544→0、`test_no_template_disease_content` 177 pass。
-- [ ] **EN 予防文の残汚染**（'leash walk' 191件・非dogcat）: EN 種クラス別 base 生成器が未整備（follow-up）
+- [x] **(D) 予防文の異種汚染修正（JA）**: 非companion 544件の prevention_ja に犬猫助言（リード散歩/短頭種/FLUTD等）
+      が焼き込まれていた既存バグを修正。`_is_contaminated` をマーカー語検出で補強し種クラス対応版で再生成。544→0。
+- [x] **(D) 予防文の異種汚染修正（EN）**: 英語版 種クラス対応 prevention 生成器を新設
+      （`_PREVENT_CLASS_CORE_EN`/`_prevention_overlay_en`/`gen_prevention_en_noncompanion`）。
+      EN 汚染 387→0。回帰テスト追加。`test_no_template_disease_content` 178 pass。
 - [ ] T109 機械翻訳臭の置換適用（`scripts/quality/apply_mt_smell.py` を段階適用、臨床用語は要レビュー）
 
 ## いま承認を求める項目
