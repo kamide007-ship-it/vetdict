@@ -2463,13 +2463,25 @@ function renderTreatmentWithAdjunct(text){
   const idx=raw.indexOf(marker);
   if(idx===-1) return escapeHtml(raw);
   const main=raw.slice(0,idx).replace(/\s+$/,"");
-  const adjunct=raw.slice(idx+marker.length).replace(/^\s+/,"");
+  let adjunct=raw.slice(idx+marker.length).replace(/^\s+/,"");
+  // Drop the data-side header line (【…】 / […]) — the UI supplies its own PR label.
+  adjunct=adjunct.replace(/^\s*[【\[][^\n]*\n?/,"").replace(/^\s+/,"");
   const adjHtml=escapeHtml(adjunct).replace(
     /caninevet\.jp/g,
     '<a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer">caninevet.jp</a>'
   );
   const mainHtml=main?escapeHtml(main):"";
-  return `${mainHtml}<div class="ecvn-adjunct-block" role="note" aria-label="ECVN adjunct options">${adjHtml}</div>`;
+  const en=(typeof currentLang!=="undefined"&&currentLang==="en");
+  const labelTxt=en?"PR · Sponsored (own product)":"PR・自社製品";
+  const disclaimer=en
+    ?"The following is a manufacturer's product promotion, not standard evidence-based treatment."
+    :"以下は自社製品の紹介（広告）です。標準治療・エビデンスに基づく治療ではありません。";
+  const aria=en?"Sponsored product information (advertisement)":"自社製品の広告（PR）";
+  const vendorLink='<a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer">Equine &amp; Canine Vet Nutrition</a>';
+  return `${mainHtml}<div class="ecvn-adjunct-block" role="complementary" aria-label="${aria}">`
+    +`<div class="ecvn-adjunct-label"><span class="ecvn-pr-badge">PR</span>${escapeHtml(labelTxt)} · ${vendorLink}</div>`
+    +`<div class="ecvn-adjunct-disclaimer">${escapeHtml(disclaimer)}</div>`
+    +`<div class="ecvn-adjunct-body">${adjHtml}</div></div>`;
 }
 
 // Cache of fetched drug-disease results keyed by `${species}::${diseaseName}::${lang}`

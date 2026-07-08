@@ -134,7 +134,7 @@
   {% if disease.treatment_ja or disease.treatment %}
   <section>
     <h2>治療</h2>
-    <p>{{ disease.treatment_ja or disease.treatment }}</p>
+    {{ treatment_html }}
   </section>
   {% endif %}
 
