@@ -1653,6 +1653,49 @@ def test_served_db_prevention_no_cross_species_contamination():
     )
 
 
+# Dog/cat-specific English phrases that must never reach another species'
+# English prevention (mirror of _COMPANION_ONLY_PHRASES for the EN field).
+_COMPANION_ONLY_PHRASES_EN = [
+    "leash walk",
+    "brachycephalic",
+    "grain-free",
+    "puppies and kittens",
+    "puppy and kitten",
+    "indoor-cat",
+    "doberman",
+    "maine coon",
+    "dental chew",
+    "flutd",
+]
+
+
+def test_served_db_prevention_en_no_cross_species_contamination():
+    """The served DB must carry no dog/cat English prevention advice on other species."""
+    import sqlite3
+
+    db = _served_db_path()
+    if db is None:
+        pytest.skip("served vetdict.db not present (run scripts/migrate_to_sqlite.py)")
+    conn = sqlite3.connect(str(db))
+    try:
+        rows = conn.execute(
+            "SELECT species, name, prevention FROM diseases "
+            "WHERE species NOT IN ('dog','cat') AND prevention IS NOT NULL"
+        ).fetchall()
+    finally:
+        conn.close()
+    failures = []
+    for species, name, prevention in rows:
+        low = (prevention or "").lower()
+        for phrase in _COMPANION_ONLY_PHRASES_EN:
+            if phrase in low:
+                failures.append(f"[{species}] {name}: '{phrase}'")
+                break
+    assert not failures, f"Found {len(failures)} contaminated EN prevention entries. First 10:\n" + "\n".join(
+        failures[:10]
+    )
+
+
 def test_served_db_prevention_not_cross_disease_template():
     """No prevention_ja text may be shared by >=4 distinct disease base names."""
     import sqlite3
