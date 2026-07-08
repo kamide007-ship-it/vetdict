@@ -1207,19 +1207,18 @@ def disease_detail(species: str, disease_slug: str):
         related.sort(key=lambda x: -x["shared"])
         related = related[:8]
 
-    # Extract mentioned drugs from treatment text
+    # Extract mentioned drugs from treatment text (T111: word-boundary matcher,
+    # sponsor/ECVN products excluded — see api.drug_dictionary.find_drugs_in_text).
     mentioned_drugs = []
     treatment_text = (disease.get("treatment_ja", "") + " " + disease.get("treatment", "")).lower()
     if treatment_text.strip():
         try:
-            from api.drug_dictionary import DRUGS as _ALL_DRUGS
+            from api.drug_dictionary import find_drugs_in_text
 
-            for dr in _ALL_DRUGS:
-                dr_name = dr.get("name", "")
-                dr_name_ja = dr.get("name_ja", "")
-                if (dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text):
-                    mentioned_drugs.append({"id": dr.get("id", ""), "name": dr_name, "name_ja": dr_name_ja})
-            mentioned_drugs = mentioned_drugs[:10]
+            mentioned_drugs = [
+                {"id": d.get("id", ""), "name": d.get("name", ""), "name_ja": d.get("name_ja", "")}
+                for d in find_drugs_in_text(treatment_text, max_results=10)
+            ]
         except Exception:
             pass
 
@@ -2388,9 +2387,13 @@ def _attach_recommended_tests_display(result, species):
 
 
 def _attach_mentioned_drugs(result, species):
-    """Attach mentioned_drugs with species-specific dosage to each disease."""
+    """Attach mentioned_drugs with species-specific dosage to each disease.
+
+    T111: uses the guarded word-boundary matcher (find_drugs_in_text), which
+    excludes sponsor/ECVN products and avoids substring false positives.
+    """
     try:
-        from api.drug_dictionary import DRUGS as _ALL_DRUGS
+        from api.drug_dictionary import _drug_index, find_drugs_in_text
     except Exception:
         return
 
@@ -2411,19 +2414,14 @@ def _attach_mentioned_drugs(result, species):
             if not treatment_text.strip():
                 continue
             matched = []
-            for dr in _ALL_DRUGS:
-                dr_name = dr.get("name", "")
-                dr_name_ja = dr.get("name_ja", "")
-                if not (
-                    (dr_name and dr_name.lower() in treatment_text) or (dr_name_ja and dr_name_ja in treatment_text)
-                ):
-                    continue
+            for d in find_drugs_in_text(treatment_text, max_results=10):
                 entry = {
-                    "id": dr.get("id", ""),
-                    "name": dr_name,
-                    "name_ja": dr_name_ja,
-                    "category": dr.get("category", ""),
+                    "id": d.get("id", ""),
+                    "name": d.get("name", ""),
+                    "name_ja": d.get("name_ja", ""),
+                    "category": d.get("category", ""),
                 }
+                dr = _drug_index.get(d.get("id", "")) or {}
                 si = (dr.get("species_info") or {}).get(species)
                 if si:
                     entry["dosage"] = si.get("dosage", "")
@@ -2432,8 +2430,6 @@ def _attach_mentioned_drugs(result, species):
                     entry["notes"] = si.get("notes", "")
                     entry["notes_ja"] = si.get("notes_ja", "")
                 matched.append(entry)
-                if len(matched) >= 10:
-                    break
             if matched:
                 disease["mentioned_drugs"] = matched
 

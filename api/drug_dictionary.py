@@ -10691,6 +10691,14 @@ for _d in DRUGS:
 # Drug name index for fast lookup (built once at module load).
 # Each entry: lowercase keyword → drug ID
 _DRUG_KEYWORD_INDEX: dict[str, str] = {}
+# Parallel matchers for find_drugs_in_text: (matcher, drug_id) where matcher is a
+# compiled word-boundary regex (Latin keywords) or a plain lowercased string
+# (Japanese keywords). Built alongside the index, insertion-ordered.
+_DRUG_KEYWORD_MATCHERS: list = []
+
+
+def _is_latin(s: str) -> bool:
+    return all(ord(c) < 128 for c in s)
 
 
 def _build_drug_keyword_index() -> None:
@@ -10700,10 +10708,16 @@ def _build_drug_keyword_index() -> None:
       - English name (e.g., "amoxicillin")
       - Japanese name (e.g., "アモキシシリン")
       - First word of multi-word names (e.g., "Toceranib" from "Toceranib Phosphate")
+
+    T111: sponsor/own-product (ECVN) entries are EXCLUDED — they are promotional
+    products surfaced by the T107 PR block, not evidence-based drugs, and their
+    generic first-words (canine, amino, kamide) polluted the "related drugs"
+    list. Latin keywords match on word boundaries so short names never match
+    inside unrelated words (e.g. "iron" must not match "environment").
     """
     for d in DRUGS:
         drug_id = d.get("id")
-        if not drug_id:
+        if not drug_id or str(drug_id).startswith("ecvn"):
             continue
         for key in (d.get("name", ""), d.get("name_ja", "")):
             if not key or len(key) < 4:
@@ -10716,6 +10730,14 @@ def _build_drug_keyword_index() -> None:
             if first_word != k and len(first_word) >= 4 and first_word not in _DRUG_KEYWORD_INDEX:
                 _DRUG_KEYWORD_INDEX[first_word] = drug_id
 
+    _DRUG_KEYWORD_MATCHERS.clear()
+    for keyword, drug_id in _DRUG_KEYWORD_INDEX.items():
+        if _is_latin(keyword):
+            pat = re.compile(r"(?<![a-z0-9])" + re.escape(keyword) + r"(?![a-z0-9])")
+            _DRUG_KEYWORD_MATCHERS.append((pat, drug_id))
+        else:
+            _DRUG_KEYWORD_MATCHERS.append((keyword, drug_id))
+
 
 _build_drug_keyword_index()
 
@@ -10725,16 +10747,18 @@ def find_drugs_in_text(text: str, max_results: int = 25) -> List[Dict]:
 
     Returns a list of compact drug dicts {id, name, name_ja, category} in
     order of first occurrence. Duplicates and near-duplicates are de-duplicated.
+    Latin drug names match on word boundaries; sponsor/ECVN products are excluded.
     """
     if not text:
         return []
     text_lower = text.lower()
     found_ids: list[str] = []
     seen: set[str] = set()
-    for keyword, drug_id in _DRUG_KEYWORD_INDEX.items():
+    for matcher, drug_id in _DRUG_KEYWORD_MATCHERS:
         if drug_id in seen:
             continue
-        if keyword in text_lower:
+        hit = matcher.search(text_lower) if hasattr(matcher, "search") else (matcher in text_lower)
+        if hit:
             found_ids.append(drug_id)
             seen.add(drug_id)
             if len(found_ids) >= max_results:
