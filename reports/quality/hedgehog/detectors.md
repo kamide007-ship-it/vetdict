@@ -139,27 +139,27 @@
 - 投与量あり: **222**
 
 ### 投与量なし（上位30）
-- 口腔扁平上皮癌（Oral Squamous Cell Carcinoma）[hedgehog_0007] — ja:338字 / en:762字
+- 口腔扁平上皮癌（Oral Squamous Cell Carcinoma）[hedgehog_0007] — ja:348字 / en:786字
 - 歯石（Dental Tartar）[hedgehog_0025] — ja:175字 / en:158字
-- 拡張型心筋症（Dilated Cardiomyopathy）[hedgehog_0033] — ja:518字 / en:606字
-- 心筋症（Cardiomyopathy (General)）[hedgehog_0034] — ja:488字 / en:606字
+- 拡張型心筋症（Dilated Cardiomyopathy）[hedgehog_0033] — ja:528字 / en:630字
+- 心筋症（Cardiomyopathy (General)）[hedgehog_0034] — ja:498字 / en:630字
 - 腸内寄生虫症（Internal Parasites (Intestinal Worms)）[hedgehog_0061] — ja:167字 / en:172字
 - 肺虫感染症（Lungworm Infection）[hedgehog_0062] — ja:166字 / en:204字
-- コクシジウム感染症（Coccidia Infection）[hedgehog_0063] — ja:435字 / en:454字
+- コクシジウム感染症（Coccidia Infection）[hedgehog_0063] — ja:445字 / en:478字
 - 耳ダニ症（Ear Mites）[hedgehog_0064] — ja:165字 / en:172字
 - 唾液塗布行動（正常行動）（Self-anointing (Normal Behavior)）[hedgehog_0068] — ja:590字 / en:1400字
 - 耳感染症（外耳炎）（Ear Infection (Otitis)）[hedgehog_0070] — ja:167字 / en:137字
 - 副腎疾患（Adrenal Disease）[hedgehog_0071] — ja:106字 / en:196字
-- 乳腺腺癌（Mammary Adenocarcinoma）[hedgehog_0080] — ja:335字 / en:756字
+- 乳腺腺癌（Mammary Adenocarcinoma）[hedgehog_0080] — ja:345字 / en:780字
 - 腸管平滑筋肉腫（Intestinal Leiomyosarcoma）[hedgehog_0085] — ja:109字 / en:483字
 - 下垂体腺腫（Pituitary Adenoma）[hedgehog_0088] — ja:107字 / en:475字
 - 針ダニ（コリオプテス）（Quill Mites (Chorioptes)）[hedgehog_0091] — ja:172字 / en:172字
-- アレルギー性皮膚炎（Allergic Dermatitis）[hedgehog_0095] — ja:659字 / en:912字
+- アレルギー性皮膚炎（Allergic Dermatitis）[hedgehog_0095] — ja:669字 / en:936字
 - 虫性肺炎（クレノソーマ）（Verminous Pneumonia (Crenosoma)）[hedgehog_0101] — ja:173字 / en:186字
-- カピラリア・ヘパティカ感染（Capillaria Hepatica Infection）[hedgehog_0102] — ja:757字 / en:757字
+- カピラリア・ヘパティカ感染（Capillaria Hepatica Infection）[hedgehog_0102] — ja:767字 / en:781字
 - 鉤頭虫感染（Thorny-Headed Worm Infection）[hedgehog_0104] — ja:166字 / en:204字
 - 眼膿瘍（後眼窩）（Eye Abscess (Retrobulbar)）[hedgehog_0127] — ja:166字 / en:196字
-- 眼球脱出（ハリネズミ）（Proptosis）[hedgehog_0166] — ja:484字 / en:846字
+- 眼球脱出（ハリネズミ）（Proptosis）[hedgehog_0166] — ja:494字 / en:870字
 - 自己塗布行動（ハリネズミ）（Self-Anointing Behavior）[hedgehog_0193] — ja:526字 / en:867字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）

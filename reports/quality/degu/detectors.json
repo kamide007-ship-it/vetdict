@@ -1086,8 +1086,8 @@
         "id": "degu_0003",
         "name": "Obesity",
         "name_ja": "肥満",
-        "treatment_ja_len": 473,
-        "treatment_len": 573,
+        "treatment_ja_len": 483,
+        "treatment_len": 597,
         "has_dosage": false
       },
       {
@@ -1134,24 +1134,24 @@
         "id": "degu_0031",
         "name": "Intestinal Parasites",
         "name_ja": "腸内寄生虫症",
-        "treatment_ja_len": 430,
-        "treatment_len": 422,
+        "treatment_ja_len": 440,
+        "treatment_len": 446,
         "has_dosage": false
       },
       {
         "id": "degu_0049",
         "name": "Congestive Heart Failure",
         "name_ja": "うっ血性心不全",
-        "treatment_ja_len": 345,
-        "treatment_len": 413,
+        "treatment_ja_len": 355,
+        "treatment_len": 437,
         "has_dosage": false
       },
       {
         "id": "degu_0050",
         "name": "Cardiomyopathy",
         "name_ja": "心筋症",
-        "treatment_ja_len": 338,
-        "treatment_len": 492,
+        "treatment_ja_len": 348,
+        "treatment_len": 516,
         "has_dosage": false
       },
       {
@@ -1166,8 +1166,8 @@
         "id": "degu_0053",
         "name": "Septicemia",
         "name_ja": "敗血症",
-        "treatment_ja_len": 559,
-        "treatment_len": 568,
+        "treatment_ja_len": 569,
+        "treatment_len": 592,
         "has_dosage": false
       },
       {
@@ -1214,16 +1214,16 @@
         "id": "degu_0112",
         "name": "Toxicosis (Plant Poisoning)",
         "name_ja": "中毒症（植物中毒）",
-        "treatment_ja_len": 484,
-        "treatment_len": 590,
+        "treatment_ja_len": 494,
+        "treatment_len": 614,
         "has_dosage": false
       },
       {
         "id": "degu_0113",
         "name": "Zinc Toxicosis",
         "name_ja": "亜鉛中毒",
-        "treatment_ja_len": 771,
-        "treatment_len": 1000,
+        "treatment_ja_len": 781,
+        "treatment_len": 1024,
         "has_dosage": false
       },
       {
@@ -2221,18 +2221,15 @@
   "T109": {
     "detector": "T109",
     "total_records": 201,
-    "hit_count": 17,
-    "safe_occurrences": 4,
+    "hit_count": 13,
+    "safe_occurrences": 0,
     "review_occurrences": 16,
     "term_counts": {
       "遺伝学的": 7,
       "易感受性": 6,
-      "並発": 2,
       "貧弱な": 1,
       "細胞失敗": 1,
-      "可遺伝": 1,
-      "葡萄糖": 1,
-      "疲出": 1
+      "可遺伝": 1
     },
     "hits": [
       {
@@ -2283,17 +2280,6 @@
         "id": "degu_0000",
         "name_ja": "糖尿病",
         "field": "causes_ja",
-        "term": "並発",
-        "suggest": "併発",
-        "category": "safe",
-        "note": "誤字",
-        "count": 1,
-        "context": "(2) 加齢。(3) ストレス。(4) 並発疾患。(5) 先行ケトアシドーシス。"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "causes_ja",
         "term": "遺伝学的",
         "suggest": "遺伝性 / 遺伝的",
         "category": "review",
@@ -2327,28 +2313,6 @@
         "id": "degu_0000",
         "name_ja": "糖尿病",
         "field": "pathophysiology_ja",
-        "term": "葡萄糖",
-        "suggest": "ブドウ糖",
-        "category": "safe",
-        "note": "表記ゆれ（医学表記はブドウ糖）",
-        "count": 1,
-        "context": "ら存在、無症候）—膵ベータ細胞は先天的に葡萄糖刺激への反応性低下。基礎空腹時インスリン"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "pathophysiology_ja",
-        "term": "疲出",
-        "suggest": "疲弊",
-        "category": "safe",
-        "note": "誤字（β細胞疲弊が標準）",
-        "count": 1,
-        "context": "ピソード発生、繰り返しエピソードでβ細胞疲出。(3) 明白な糖尿病への進行（持続糖曝"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "pathophysiology_ja",
         "term": "遺伝学的",
         "suggest": "遺伝性 / 遺伝的",
         "category": "review",
@@ -2366,17 +2330,6 @@
         "note": "機械翻訳調",
         "count": 1,
         "context": "ース耐性は重症傷害：経口グルコース負荷で易感受性デグーで血糖250 mg/dL以上で30"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "prevention_ja",
-        "term": "並発",
-        "suggest": "併発",
-        "category": "safe",
-        "note": "誤字",
-        "count": 1,
-        "context": "(7) 水質。(8) 生殖管理。(9) 並発疾患予防。(10) 診断後予防。"
       },
       {
         "id": "degu_0000",

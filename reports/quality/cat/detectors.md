@@ -517,36 +517,36 @@
 - 投与量あり: **472**
 
 ### 投与量なし（上位30）
-- 猫肺炎（Feline Pneumonia）[cat_0002] — ja:333字 / en:389字
-- 尿路感染症（Urinary Tract Infection (UTI)）[cat_0043] — ja:395字 / en:347字
-- 食物アレルギー性皮膚炎（Food Allergy Dermatitis）[cat_0076] — ja:657字 / en:549字
+- 猫肺炎（Feline Pneumonia）[cat_0002] — ja:343字 / en:413字
+- 尿路感染症（Urinary Tract Infection (UTI)）[cat_0043] — ja:405字 / en:371字
+- 食物アレルギー性皮膚炎（Food Allergy Dermatitis）[cat_0076] — ja:667字 / en:573字
 - 虹彩黒色腫（Iris Melanoma）[cat_0103] — ja:249字 / en:706字
-- 皮膚扁平上皮癌（Squamous Cell Carcinoma (Cutaneous)）[cat_0112] — ja:318字 / en:495字
+- 皮膚扁平上皮癌（Squamous Cell Carcinoma (Cutaneous)）[cat_0112] — ja:328字 / en:519字
 - 基底細胞腫（Basal Cell Tumor）[cat_0120] — ja:63字 / en:183字
 - 口腔腫瘤・エプリス（Oral Mass / Epulis）[cat_0133] — ja:74字 / en:155字
 - 歯根膿瘍（Tooth Root Abscess）[cat_0134] — ja:158字 / en:137字
 - ノミ寄生症（Flea Infestation）[cat_0149] — ja:162字 / en:144字
 - ウマバエ幼虫症（Cuterebra Infestation）[cat_0151] — ja:164字 / en:196字
 - フィラリア関連呼吸器疾患（Heartworm-Associated Respiratory Disease (HARD)）[cat_0168] — ja:169字 / en:203字
-- 水晶体脱臼（Lens Luxation）[cat_0181] — ja:602字 / en:573字
+- 水晶体脱臼（Lens Luxation）[cat_0181] — ja:612字 / en:597字
 - 停留精巣（Cryptorchidism）[cat_0190] — ja:69字 / en:144字
-- ユリ中毒（Lily Toxicosis）[cat_0197] — ja:594字 / en:494字
-- アセトアミノフェン中毒（Acetaminophen (Paracetamol) Toxicosis）[cat_0198] — ja:601字 / en:494字
-- ペルメトリン中毒（Permethrin Toxicosis）[cat_0199] — ja:565字 / en:494字
-- NSAID中毒（NSAID Toxicosis）[cat_0200] — ja:597字 / en:494字
-- エチレングリコール中毒（Ethylene Glycol (Antifreeze) Poisoning）[cat_0201] — ja:773字 / en:705字
-- 殺鼠剤中毒（抗凝固剤）（Rodenticide Poisoning (Anticoagulant)）[cat_0202] — ja:601字 / en:494字
+- ユリ中毒（Lily Toxicosis）[cat_0197] — ja:604字 / en:518字
+- アセトアミノフェン中毒（Acetaminophen (Paracetamol) Toxicosis）[cat_0198] — ja:611字 / en:518字
+- ペルメトリン中毒（Permethrin Toxicosis）[cat_0199] — ja:575字 / en:518字
+- NSAID中毒（NSAID Toxicosis）[cat_0200] — ja:607字 / en:518字
+- エチレングリコール中毒（Ethylene Glycol (Antifreeze) Poisoning）[cat_0201] — ja:783字 / en:729字
+- 殺鼠剤中毒（抗凝固剤）（Rodenticide Poisoning (Anticoagulant)）[cat_0202] — ja:611字 / en:518字
 - 乳歯遺残（Retained Deciduous Teeth）[cat_0204] — ja:173字 / en:126字
 - 下垂体腫瘍（Pituitary Tumor）[cat_0214] — ja:87字 / en:209字
-- 猫咬傷膿瘍（Cat Bite Abscess）[cat_0219] — ja:559字 / en:472字
-- 猫中耳炎（Feline Otitis Media）[cat_0234] — ja:558字 / en:494字
+- 猫咬傷膿瘍（Cat Bite Abscess）[cat_0219] — ja:569字 / en:496字
+- 猫中耳炎（Feline Otitis Media）[cat_0234] — ja:568字 / en:518字
 - 猫外耳炎（Feline Otitis Externa）[cat_0235] — ja:158字 / en:159字
 - 猫三叉神経炎（Feline Trigeminal Neuritis）[cat_0250] — ja:175字 / en:150字
-- 猫ボツリヌス中毒（Feline Botulism）[cat_0253] — ja:562字 / en:532字
-- 猫シュウ酸カルシウム尿路結石症（Feline Calcium Oxalate Urolithiasis）[cat_0260] — ja:609字 / en:445字
-- 猫ストルバイト尿路結石症（Feline Struvite Urolithiasis）[cat_0261] — ja:443字 / en:300字
-- 猫シスチン尿石症（Feline Cystine Urolithiasis）[cat_0262] — ja:375字 / en:340字
-- 猫尿酸アンモニウム尿石症（Feline Urate Urolithiasis）[cat_0263] — ja:875字 / en:794字
+- 猫ボツリヌス中毒（Feline Botulism）[cat_0253] — ja:572字 / en:556字
+- 猫シュウ酸カルシウム尿路結石症（Feline Calcium Oxalate Urolithiasis）[cat_0260] — ja:619字 / en:469字
+- 猫ストルバイト尿路結石症（Feline Struvite Urolithiasis）[cat_0261] — ja:453字 / en:324字
+- 猫シスチン尿石症（Feline Cystine Urolithiasis）[cat_0262] — ja:385字 / en:364字
+- 猫尿酸アンモニウム尿石症（Feline Urate Urolithiasis）[cat_0263] — ja:885字 / en:818字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
 - 種別投与量なしの薬品リンク（旧・未ガード）: **3** 疾患 → ガード後残存: **0**

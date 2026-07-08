@@ -4,30 +4,12 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 201,
-    "merge_clusters": 17,
-    "records_merged_away": 17,
+    "merge_clusters": 8,
+    "records_merged_away": 8,
     "archived": 1,
-    "served_after": 183
+    "served_after": 192
   },
   "merges": [
-    {
-      "canonical": {
-        "id": "degu_0004",
-        "slug": "heat-stroke",
-        "name": "Heat Stroke",
-        "name_ja": "熱中症"
-      },
-      "merged": [
-        {
-          "id": "degu_0181",
-          "slug": "heat-stroke-respiratory",
-          "name": "Heat Stroke (Respiratory)",
-          "name_ja": "熱中症（呼吸器型）（デグー）"
-        }
-      ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
-      "inherit_content": true
-    },
     {
       "canonical": {
         "id": "degu_0010",
@@ -43,7 +25,7 @@
           "name_ja": "不正咬合（デグー）"
         }
       ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
+      "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
     },
     {
@@ -61,43 +43,7 @@
           "name_ja": "皮膚糸状菌症（デグー）"
         }
       ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "degu_0016",
-        "slug": "tail-degloving-injury",
-        "name": "Tail Degloving Injury",
-        "name_ja": "尾部脱皮損傷"
-      },
-      "merged": [
-        {
-          "id": "degu_0121",
-          "slug": "tail-degloving-injury",
-          "name": "Tail Degloving Injury",
-          "name_ja": "尾部皮膚剥脱損傷（テイルスリップ）"
-        }
-      ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "degu_0017",
-        "slug": "barbering-over-grooming",
-        "name": "Barbering (Over-grooming)",
-        "name_ja": "バーバリング（過剰毛繕い）"
-      },
-      "merged": [
-        {
-          "id": "degu_0142",
-          "slug": "barbering",
-          "name": "Barbering",
-          "name_ja": "毛引き（デグー）"
-        }
-      ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
+      "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
     },
     {
@@ -115,7 +61,7 @@
           "name_ja": "趾瘤症（バンブルフット）"
         }
       ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
+      "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
     },
     {
@@ -133,43 +79,7 @@
           "name_ja": "消化管うっ滞（デグー）"
         }
       ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "degu_0029",
-        "slug": "diarrhea-non-specific",
-        "name": "Diarrhea (Non-specific)",
-        "name_ja": "下痢（非特異的）"
-      },
-      "merged": [
-        {
-          "id": "degu_0135",
-          "slug": "diarrhea",
-          "name": "Diarrhea",
-          "name_ja": "下痢（デグー）"
-        }
-      ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "degu_0034",
-        "slug": "hepatic-lipidosis-fatty-liver-disease",
-        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-        "name_ja": "肝リピドーシス（脂肪肝）"
-      },
-      "merged": [
-        {
-          "id": "degu_0138",
-          "slug": "hepatic-lipidosis",
-          "name": "Hepatic Lipidosis",
-          "name_ja": "肝リピドーシス（デグー）"
-        }
-      ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
+      "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
     },
     {
@@ -187,25 +97,7 @@
           "name_ja": "尿路結石症（デグー）"
         }
       ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "degu_0045",
-        "slug": "seizures-epilepsy",
-        "name": "Seizures (Epilepsy)",
-        "name_ja": "てんかん発作"
-      },
-      "merged": [
-        {
-          "id": "degu_0147",
-          "slug": "seizures",
-          "name": "Seizures",
-          "name_ja": "痙攣発作（デグー）"
-        }
-      ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
+      "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
     },
     {
@@ -223,25 +115,7 @@
           "name_ja": "後肢麻痺（デグー）"
         }
       ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "degu_0051",
-        "slug": "ear-infection-otitis",
-        "name": "Ear Infection (Otitis)",
-        "name_ja": "耳感染症（外耳炎）"
-      },
-      "merged": [
-        {
-          "id": "degu_0170",
-          "slug": "ear-infection",
-          "name": "Ear Infection",
-          "name_ja": "耳感染症（デグー）"
-        }
-      ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
+      "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
     },
     {
@@ -259,25 +133,7 @@
           "name_ja": "胃潰瘍（デグー）"
         }
       ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "degu_0085",
-        "slug": "pinworm-infection-syphacia",
-        "name": "Pinworm Infection (Syphacia)",
-        "name_ja": "蟯虫感染（シファシア）"
-      },
-      "merged": [
-        {
-          "id": "degu_0137",
-          "slug": "pinworm-infection",
-          "name": "Pinworm Infection",
-          "name_ja": "蟯虫症（デグー）"
-        }
-      ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
+      "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
     },
     {
@@ -295,25 +151,7 @@
           "name_ja": "卵巣嚢胞（デグー）"
         }
       ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "degu_0118",
-        "slug": "cage-aggression-territorial",
-        "name": "Cage Aggression (Territorial)",
-        "name_ja": "ケージ攻撃性（縄張り）"
-      },
-      "merged": [
-        {
-          "id": "degu_0165",
-          "slug": "cage-aggression",
-          "name": "Cage Aggression",
-          "name_ja": "ケージ内攻撃行動（デグー）"
-        }
-      ],
-      "reason": "orthographic duplicate (species/qualifier suffix); same disease",
+      "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
     }
   ],
@@ -333,7 +171,7 @@
           "term": "アルツハイマー"
         }
       ],
-      "reason": "research model, not a spontaneous companion-animal disease"
+      "reason": "declared research model (name says model/様疾患/-like)"
     }
   ],
   "review": {
@@ -353,7 +191,7 @@
             "term": "糖尿病性網膜症"
           }
         ],
-        "note": "human-medicine transplant — review whether to merge into parent or archive"
+        "note": "keyword-flagged non-clinical — review (may be a real toxicosis/transplant)"
       },
       {
         "id": "degu_0061",
@@ -374,7 +212,171 @@
             "term": "足潰瘍"
           }
         ],
-        "note": "human-medicine transplant — review whether to merge into parent or archive"
+        "note": "keyword-flagged non-clinical — review (may be a real toxicosis/transplant)"
+      }
+    ],
+    "oversplit_subtypes": [
+      {
+        "base": "Heat Stroke",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "degu_0004",
+            "slug": "heat-stroke",
+            "name": "Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "degu_0181",
+            "slug": "heat-stroke-respiratory",
+            "name": "Heat Stroke (Respiratory)",
+            "name_ja": "熱中症（呼吸器型）（デグー）"
+          }
+        ]
+      },
+      {
+        "base": "Tail Degloving Injury",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "degu_0016",
+            "slug": "tail-degloving-injury",
+            "name": "Tail Degloving Injury",
+            "name_ja": "尾部脱皮損傷"
+          },
+          {
+            "id": "degu_0121",
+            "slug": "tail-degloving-injury",
+            "name": "Tail Degloving Injury",
+            "name_ja": "尾部皮膚剥脱損傷（テイルスリップ）"
+          }
+        ]
+      },
+      {
+        "base": "Barbering (Over-grooming)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "degu_0017",
+            "slug": "barbering-over-grooming",
+            "name": "Barbering (Over-grooming)",
+            "name_ja": "バーバリング（過剰毛繕い）"
+          },
+          {
+            "id": "degu_0142",
+            "slug": "barbering",
+            "name": "Barbering",
+            "name_ja": "毛引き（デグー）"
+          }
+        ]
+      },
+      {
+        "base": "Diarrhea (Non-specific)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "degu_0029",
+            "slug": "diarrhea-non-specific",
+            "name": "Diarrhea (Non-specific)",
+            "name_ja": "下痢（非特異的）"
+          },
+          {
+            "id": "degu_0135",
+            "slug": "diarrhea",
+            "name": "Diarrhea",
+            "name_ja": "下痢（デグー）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "degu_0034",
+            "slug": "hepatic-lipidosis-fatty-liver-disease",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "degu_0138",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（デグー）"
+          }
+        ]
+      },
+      {
+        "base": "Seizures (Epilepsy)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "degu_0045",
+            "slug": "seizures-epilepsy",
+            "name": "Seizures (Epilepsy)",
+            "name_ja": "てんかん発作"
+          },
+          {
+            "id": "degu_0147",
+            "slug": "seizures",
+            "name": "Seizures",
+            "name_ja": "痙攣発作（デグー）"
+          }
+        ]
+      },
+      {
+        "base": "Ear Infection (Otitis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "degu_0051",
+            "slug": "ear-infection-otitis",
+            "name": "Ear Infection (Otitis)",
+            "name_ja": "耳感染症（外耳炎）"
+          },
+          {
+            "id": "degu_0170",
+            "slug": "ear-infection",
+            "name": "Ear Infection",
+            "name_ja": "耳感染症（デグー）"
+          }
+        ]
+      },
+      {
+        "base": "Pinworm Infection (Syphacia)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "degu_0085",
+            "slug": "pinworm-infection-syphacia",
+            "name": "Pinworm Infection (Syphacia)",
+            "name_ja": "蟯虫感染（シファシア）"
+          },
+          {
+            "id": "degu_0137",
+            "slug": "pinworm-infection",
+            "name": "Pinworm Infection",
+            "name_ja": "蟯虫症（デグー）"
+          }
+        ]
+      },
+      {
+        "base": "Cage Aggression (Territorial)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "degu_0118",
+            "slug": "cage-aggression-territorial",
+            "name": "Cage Aggression (Territorial)",
+            "name_ja": "ケージ攻撃性（縄張り）"
+          },
+          {
+            "id": "degu_0165",
+            "slug": "cage-aggression",
+            "name": "Cage Aggression",
+            "name_ja": "ケージ内攻撃行動（デグー）"
+          }
+        ]
       }
     ],
     "split_families": [

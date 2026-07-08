@@ -422,15 +422,20 @@ def _load_disease_reference_keys() -> list[str]:
 
 
 def _ref_key_allows_species(key: str, species: str) -> bool:
-    """Mirror api.pubmed_references._key_allows_species for the detector.
+    """Mirror the shipped T110 citation species guard for the detector.
 
-    Falls back to a local dog/cat default if the production guard cannot be
-    imported (keeps the detector runnable in a bare environment).
+    Uses api.pubmed_references.REFERENCE_SPECIES (the map behind
+    get_references_for_disease_v2). A key with no entry defaults to dog/cat,
+    matching the legacy citation domain. Falls back to a local dog/cat default
+    if the production map cannot be imported (bare environment).
     """
     try:
-        from api.pubmed_references import _key_allows_species
+        from api.pubmed_references import REFERENCE_SPECIES
 
-        return _key_allows_species(key, species)
+        allowed = REFERENCE_SPECIES.get(key)
+        if allowed is None:
+            return species in _DOGCAT
+        return species in allowed
     except Exception:
         return species in _DOGCAT
 

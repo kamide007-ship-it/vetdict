@@ -1,0 +1,1371 @@
+{
+  "species": "hedgehog",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 244,
+    "merge_clusters": 7,
+    "records_merged_away": 7,
+    "archived": 0,
+    "served_after": 237
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "hedgehog_0002",
+        "slug": "ringworm-dermatophytosis",
+        "name": "Ringworm (Dermatophytosis)",
+        "name_ja": "皮膚糸状菌症"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0243",
+          "slug": "dermatophytosis-ringworm",
+          "name": "Dermatophytosis (Ringworm)",
+          "name_ja": "皮膚糸状菌症（ハリネズミ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0007",
+        "slug": "oral-squamous-cell-carcinoma",
+        "name": "Oral Squamous Cell Carcinoma",
+        "name_ja": "口腔扁平上皮癌"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0141",
+          "slug": "oral-squamous-cell-carcinoma",
+          "name": "Oral Squamous Cell Carcinoma",
+          "name_ja": "口腔扁平上皮癌"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0034",
+        "slug": "cardiomyopathy-general",
+        "name": "Cardiomyopathy (General)",
+        "name_ja": "心筋症"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0163",
+          "slug": "cardiomyopathy",
+          "name": "Cardiomyopathy",
+          "name_ja": "心筋症（ハリネズミ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0040",
+        "slug": "proptosis-eye-protrusion",
+        "name": "Proptosis (Eye Protrusion)",
+        "name_ja": "眼球突出"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0218",
+          "slug": "exophthalmos",
+          "name": "Exophthalmos",
+          "name_ja": "眼球突出（ハリネズミ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0047",
+        "slug": "urolithiasis-bladder-stones",
+        "name": "Urolithiasis (Bladder Stones)",
+        "name_ja": "尿路結石症"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0207",
+          "slug": "urolithiasis",
+          "name": "Urolithiasis",
+          "name_ja": "尿路結石症（ハリネズミ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0054",
+        "slug": "heatstroke",
+        "name": "Heatstroke",
+        "name_ja": "熱中症"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0178",
+          "slug": "heat-stroke",
+          "name": "Heat Stroke",
+          "name_ja": "熱中症（ハリネズミ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0114",
+        "slug": "testicular-neoplasia",
+        "name": "Testicular Neoplasia",
+        "name_ja": "精巣腫瘍"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0159",
+          "slug": "testicular-tumor",
+          "name": "Testicular Tumor",
+          "name_ja": "精巣腫瘍（ハリネズミ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Ringworm (Dermatophytosis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0002",
+            "slug": "ringworm-dermatophytosis",
+            "name": "Ringworm (Dermatophytosis)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "hedgehog_0093",
+            "slug": "dermatophytosis-severe",
+            "name": "Dermatophytosis (Severe)",
+            "name_ja": "皮膚糸状菌症（重症型）"
+          },
+          {
+            "id": "hedgehog_0149",
+            "slug": "dermatophytosis-trichophyton",
+            "name": "Dermatophytosis (Trichophyton)",
+            "name_ja": "皮膚糸状菌症（トリコフィトン）（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0243",
+            "slug": "dermatophytosis-ringworm",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "base": "Obesity",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0015",
+            "slug": "obesity",
+            "name": "Obesity",
+            "name_ja": "肥満"
+          },
+          {
+            "id": "hedgehog_0121",
+            "slug": "obesity-severe-morbid",
+            "name": "Obesity (Severe / Morbid)",
+            "name_ja": "肥満（重度/病的）"
+          }
+        ]
+      },
+      {
+        "base": "Diarrhea (Non-specific)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0016",
+            "slug": "diarrhea-non-specific",
+            "name": "Diarrhea (Non-specific)",
+            "name_ja": "下痢（非特異的）"
+          },
+          {
+            "id": "hedgehog_0174",
+            "slug": "diarrhea",
+            "name": "Diarrhea",
+            "name_ja": "下痢（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "base": "Gastrointestinal Foreign Body",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0017",
+            "slug": "gastrointestinal-foreign-body",
+            "name": "Gastrointestinal Foreign Body",
+            "name_ja": "消化管内異物"
+          },
+          {
+            "id": "hedgehog_0143",
+            "slug": "gastrointestinal-foreign-body",
+            "name": "Gastrointestinal Foreign Body",
+            "name_ja": "消化管異物"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0018",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "hedgehog_0118",
+            "slug": "hepatic-lipidosis-obesity-related",
+            "name": "Hepatic Lipidosis (Obesity-Related)",
+            "name_ja": "肝リピドーシス（肥満関連）"
+          }
+        ]
+      },
+      {
+        "base": "Pneumonia",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0026",
+            "slug": "pneumonia",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
+          },
+          {
+            "id": "hedgehog_0241",
+            "slug": "pneumonia-bacterial",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "base": "Mycobacteriosis (Pulmonary)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0028",
+            "slug": "mycobacteriosis-pulmonary",
+            "name": "Mycobacteriosis (Pulmonary)",
+            "name_ja": "マイコバクテリア症（肺型）"
+          },
+          {
+            "id": "hedgehog_0057",
+            "slug": "mycobacteriosis-disseminated",
+            "name": "Mycobacteriosis (Disseminated)",
+            "name_ja": "マイコバクテリア症（播種型）"
+          }
+        ]
+      },
+      {
+        "base": "Proptosis (Eye Protrusion)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0040",
+            "slug": "proptosis-eye-protrusion",
+            "name": "Proptosis (Eye Protrusion)",
+            "name_ja": "眼球突出"
+          },
+          {
+            "id": "hedgehog_0166",
+            "slug": "proptosis",
+            "name": "Proptosis",
+            "name_ja": "眼球脱出（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0218",
+            "slug": "exophthalmos",
+            "name": "Exophthalmos",
+            "name_ja": "眼球突出（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "base": "Fatty Liver Disease (Non-obese)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0055",
+            "slug": "fatty-liver-disease-non-obese",
+            "name": "Fatty Liver Disease (Non-obese)",
+            "name_ja": "脂肪肝（非肥満型）"
+          },
+          {
+            "id": "hedgehog_0164",
+            "slug": "fatty-liver-disease",
+            "name": "Fatty Liver Disease",
+            "name_ja": "脂肪肝（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "base": "Balloon Syndrome",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0069",
+            "slug": "balloon-syndrome",
+            "name": "Balloon Syndrome",
+            "name_ja": "バルーン症候群"
+          },
+          {
+            "id": "hedgehog_0140",
+            "slug": "balloon-syndrome-subcutaneous-emphysema",
+            "name": "Balloon Syndrome (Subcutaneous Emphysema)",
+            "name_ja": "バルーン症候群（皮下気腫）"
+          }
+        ]
+      },
+      {
+        "base": "Caparinia Mange (Severe)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "hedgehog_0090",
+            "slug": "caparinia-mange-severe",
+            "name": "Caparinia Mange (Severe)",
+            "name_ja": "カパリニアダニ症（重症型）"
+          },
+          {
+            "id": "hedgehog_0150",
+            "slug": "caparinia-mite-infestation",
+            "name": "Caparinia Mite Infestation",
+            "name_ja": "カパリニアダニ症（ハリネズミ）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "tumor",
+        "size": 10,
+        "members": [
+          {
+            "id": "hedgehog_0008",
+            "name": "Mammary Gland Tumor",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "hedgehog_0012",
+            "name": "Mast Cell Tumor",
+            "name_ja": "肥満細胞腫"
+          },
+          {
+            "id": "hedgehog_0032",
+            "name": "Brain Tumor",
+            "name_ja": "脳腫瘍"
+          },
+          {
+            "id": "hedgehog_0067",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "hedgehog_0082",
+            "name": "Ovarian Granulosa Cell Tumor",
+            "name_ja": "卵巣顆粒膜細胞腫"
+          },
+          {
+            "id": "hedgehog_0084",
+            "name": "Cutaneous Mast Cell Tumor",
+            "name_ja": "皮膚肥満細胞腫"
+          },
+          {
+            "id": "hedgehog_0135",
+            "name": "Adrenal Cortical Tumor",
+            "name_ja": "副腎皮質腫瘍"
+          },
+          {
+            "id": "hedgehog_0146",
+            "name": "Uterine Tumor",
+            "name_ja": "子宮腫瘍（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0158",
+            "name": "Adrenal Tumor",
+            "name_ja": "副腎腫瘍（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0159",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 8,
+        "members": [
+          {
+            "id": "hedgehog_0005",
+            "name": "Cutaneous Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0007",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0066",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "hedgehog_0079",
+            "name": "Squamous Cell Carcinoma (Oral) - Advanced",
+            "name_ja": "扁平上皮癌（口腔）- 進行型"
+          },
+          {
+            "id": "hedgehog_0141",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0160",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0161",
+            "name": "Lung Carcinoma",
+            "name_ja": "肺癌（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0187",
+            "name": "Squamous Cell Carcinoma (Skin)",
+            "name_ja": "扁平上皮癌（皮膚）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cell",
+        "size": 8,
+        "members": [
+          {
+            "id": "hedgehog_0005",
+            "name": "Cutaneous Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0007",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0012",
+            "name": "Mast Cell Tumor",
+            "name_ja": "肥満細胞腫"
+          },
+          {
+            "id": "hedgehog_0079",
+            "name": "Squamous Cell Carcinoma (Oral) - Advanced",
+            "name_ja": "扁平上皮癌（口腔）- 進行型"
+          },
+          {
+            "id": "hedgehog_0082",
+            "name": "Ovarian Granulosa Cell Tumor",
+            "name_ja": "卵巣顆粒膜細胞腫"
+          },
+          {
+            "id": "hedgehog_0084",
+            "name": "Cutaneous Mast Cell Tumor",
+            "name_ja": "皮膚肥満細胞腫"
+          },
+          {
+            "id": "hedgehog_0141",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0187",
+            "name": "Squamous Cell Carcinoma (Skin)",
+            "name_ja": "扁平上皮癌（皮膚）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 7,
+        "members": [
+          {
+            "id": "hedgehog_0006",
+            "name": "Dermatitis (Bacterial)",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "hedgehog_0093",
+            "name": "Dermatophytosis (Severe)",
+            "name_ja": "皮膚糸状菌症（重症型）"
+          },
+          {
+            "id": "hedgehog_0095",
+            "name": "Allergic Dermatitis",
+            "name_ja": "アレルギー性皮膚炎"
+          },
+          {
+            "id": "hedgehog_0098",
+            "name": "Staphylococcal Dermatitis",
+            "name_ja": "ブドウ球菌性皮膚炎"
+          },
+          {
+            "id": "hedgehog_0149",
+            "name": "Dermatophytosis (Trichophyton)",
+            "name_ja": "皮膚糸状菌症（トリコフィトン）（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0185",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0243",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 6,
+        "members": [
+          {
+            "id": "hedgehog_0004",
+            "name": "Skin Abscess",
+            "name_ja": "皮膚膿瘍"
+          },
+          {
+            "id": "hedgehog_0024",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "hedgehog_0043",
+            "name": "Retrobulbar Abscess",
+            "name_ja": "眼球後膿瘍"
+          },
+          {
+            "id": "hedgehog_0127",
+            "name": "Eye Abscess (Retrobulbar)",
+            "name_ja": "眼膿瘍（後眼窩）"
+          },
+          {
+            "id": "hedgehog_0210",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0221",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 6,
+        "members": [
+          {
+            "id": "hedgehog_0018",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "hedgehog_0087",
+            "name": "Hepatic Hemangiosarcoma",
+            "name_ja": "肝臓血管肉腫"
+          },
+          {
+            "id": "hedgehog_0102",
+            "name": "Capillaria Hepatica Infection",
+            "name_ja": "カピラリア・ヘパティカ感染"
+          },
+          {
+            "id": "hedgehog_0118",
+            "name": "Hepatic Lipidosis (Obesity-Related)",
+            "name_ja": "肝リピドーシス（肥満関連）"
+          },
+          {
+            "id": "hedgehog_0134",
+            "name": "Hepatic Neoplasia (General)",
+            "name_ja": "肝臓腫瘍（一般）"
+          },
+          {
+            "id": "hedgehog_0221",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 6,
+        "members": [
+          {
+            "id": "hedgehog_0065",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸腺癌"
+          },
+          {
+            "id": "hedgehog_0085",
+            "name": "Intestinal Leiomyosarcoma",
+            "name_ja": "腸管平滑筋肉腫"
+          },
+          {
+            "id": "hedgehog_0123",
+            "name": "Intestinal Intussusception",
+            "name_ja": "腸重積症"
+          },
+          {
+            "id": "hedgehog_0124",
+            "name": "Intestinal Foreign Body",
+            "name_ja": "腸管異物"
+          },
+          {
+            "id": "hedgehog_0154",
+            "name": "Intestinal Parasitism",
+            "name_ja": "腸管寄生虫症（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0176",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cardio",
+        "size": 5,
+        "members": [
+          {
+            "id": "hedgehog_0033",
+            "name": "Dilated Cardiomyopathy",
+            "name_ja": "拡張型心筋症"
+          },
+          {
+            "id": "hedgehog_0034",
+            "name": "Cardiomyopathy (General)",
+            "name_ja": "心筋症"
+          },
+          {
+            "id": "hedgehog_0116",
+            "name": "Dilated Cardiomyopathy - Advanced",
+            "name_ja": "拡張型心筋症 - 進行型"
+          },
+          {
+            "id": "hedgehog_0144",
+            "name": "Hedgehog Dilated Cardiomyopathy (DCM)",
+            "name_ja": "ハリネズミ拡張型心筋症"
+          },
+          {
+            "id": "hedgehog_0163",
+            "name": "Cardiomyopathy",
+            "name_ja": "心筋症（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 5,
+        "members": [
+          {
+            "id": "hedgehog_0036",
+            "name": "Limb Fracture",
+            "name_ja": "四肢骨折"
+          },
+          {
+            "id": "hedgehog_0126",
+            "name": "Dental Fracture",
+            "name_ja": "歯の骨折"
+          },
+          {
+            "id": "hedgehog_0131",
+            "name": "Spinal Fracture",
+            "name_ja": "脊椎骨折"
+          },
+          {
+            "id": "hedgehog_0170",
+            "name": "Fracture",
+            "name_ja": "骨折（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0223",
+            "name": "Pelvic Fracture",
+            "name_ja": "骨盤骨折（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hedgeh",
+        "size": 5,
+        "members": [
+          {
+            "id": "hedgehog_0029",
+            "name": "Wobbly Hedgehog Syndrome (WHS)",
+            "name_ja": "ふらつき症候群（WHS）"
+          },
+          {
+            "id": "hedgehog_0077",
+            "name": "Wobbly Hedgehog Syndrome (WHS) - Early Stage",
+            "name_ja": "ふらつきハリネズミ症候群（WHS）- 初期段階"
+          },
+          {
+            "id": "hedgehog_0078",
+            "name": "Wobbly Hedgehog Syndrome (WHS) - Advanced",
+            "name_ja": "ふらつきハリネズミ症候群（WHS）- 進行期"
+          },
+          {
+            "id": "hedgehog_0144",
+            "name": "Hedgehog Dilated Cardiomyopathy (DCM)",
+            "name_ja": "ハリネズミ拡張型心筋症"
+          },
+          {
+            "id": "hedgehog_0145",
+            "name": "Hedgehog Balloon Syndrome",
+            "name_ja": "ハリネズミ風船症候群（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 5,
+        "members": [
+          {
+            "id": "hedgehog_0000",
+            "name": "Mite Infestation (Caparinia)",
+            "name_ja": "疥癬ダニ感染症（カパリニア）"
+          },
+          {
+            "id": "hedgehog_0059",
+            "name": "Tick Infestation",
+            "name_ja": "マダニ寄生"
+          },
+          {
+            "id": "hedgehog_0060",
+            "name": "Flea Infestation",
+            "name_ja": "ノミ寄生"
+          },
+          {
+            "id": "hedgehog_0150",
+            "name": "Caparinia Mite Infestation",
+            "name_ja": "カパリニアダニ症（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0152",
+            "name": "Ear Mite Infestation",
+            "name_ja": "耳ダニ寄生（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 5,
+        "members": [
+          {
+            "id": "hedgehog_0026",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
+          },
+          {
+            "id": "hedgehog_0100",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎"
+          },
+          {
+            "id": "hedgehog_0101",
+            "name": "Verminous Pneumonia (Crenosoma)",
+            "name_ja": "虫性肺炎（クレノソーマ）"
+          },
+          {
+            "id": "hedgehog_0137",
+            "name": "Pneumothorax",
+            "name_ja": "気胸"
+          },
+          {
+            "id": "hedgehog_0241",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "squamo",
+        "size": 5,
+        "members": [
+          {
+            "id": "hedgehog_0005",
+            "name": "Cutaneous Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0007",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0079",
+            "name": "Squamous Cell Carcinoma (Oral) - Advanced",
+            "name_ja": "扁平上皮癌（口腔）- 進行型"
+          },
+          {
+            "id": "hedgehog_0141",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0187",
+            "name": "Squamous Cell Carcinoma (Skin)",
+            "name_ja": "扁平上皮癌（皮膚）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adenoc",
+        "size": 4,
+        "members": [
+          {
+            "id": "hedgehog_0010",
+            "name": "Uterine Adenocarcinoma",
+            "name_ja": "子宮腺癌"
+          },
+          {
+            "id": "hedgehog_0065",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸腺癌"
+          },
+          {
+            "id": "hedgehog_0080",
+            "name": "Mammary Adenocarcinoma",
+            "name_ja": "乳腺腺癌"
+          },
+          {
+            "id": "hedgehog_0081",
+            "name": "Uterine Adenocarcinoma - Metastatic",
+            "name_ja": "子宮腺癌 - 転移性"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dental",
+        "size": 4,
+        "members": [
+          {
+            "id": "hedgehog_0025",
+            "name": "Dental Tartar",
+            "name_ja": "歯石"
+          },
+          {
+            "id": "hedgehog_0126",
+            "name": "Dental Fracture",
+            "name_ja": "歯の骨折"
+          },
+          {
+            "id": "hedgehog_0156",
+            "name": "Dental Disease",
+            "name_ja": "歯科疾患（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0210",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "quill",
+        "size": 4,
+        "members": [
+          {
+            "id": "hedgehog_0091",
+            "name": "Quill Mites (Chorioptes)",
+            "name_ja": "針ダニ（コリオプテス）"
+          },
+          {
+            "id": "hedgehog_0094",
+            "name": "Bacterial Quill Folliculitis",
+            "name_ja": "細菌性針毛包炎"
+          },
+          {
+            "id": "hedgehog_0148",
+            "name": "Quill Loss (Non-specific)",
+            "name_ja": "針脱落（非特異的）（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0235",
+            "name": "Quill Folliculitis",
+            "name_ja": "針毛包炎（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "uterin",
+        "size": 4,
+        "members": [
+          {
+            "id": "hedgehog_0010",
+            "name": "Uterine Adenocarcinoma",
+            "name_ja": "子宮腺癌"
+          },
+          {
+            "id": "hedgehog_0052",
+            "name": "Uterine Polyps",
+            "name_ja": "子宮ポリープ"
+          },
+          {
+            "id": "hedgehog_0081",
+            "name": "Uterine Adenocarcinoma - Metastatic",
+            "name_ja": "子宮腺癌 - 転移性"
+          },
+          {
+            "id": "hedgehog_0146",
+            "name": "Uterine Tumor",
+            "name_ja": "子宮腫瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adrena",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0071",
+            "name": "Adrenal Disease",
+            "name_ja": "副腎疾患"
+          },
+          {
+            "id": "hedgehog_0135",
+            "name": "Adrenal Cortical Tumor",
+            "name_ja": "副腎皮質腫瘍"
+          },
+          {
+            "id": "hedgehog_0158",
+            "name": "Adrenal Tumor",
+            "name_ja": "副腎腫瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "advanc",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0078",
+            "name": "Wobbly Hedgehog Syndrome (WHS) - Advanced",
+            "name_ja": "ふらつきハリネズミ症候群（WHS）- 進行期"
+          },
+          {
+            "id": "hedgehog_0079",
+            "name": "Squamous Cell Carcinoma (Oral) - Advanced",
+            "name_ja": "扁平上皮癌（口腔）- 進行型"
+          },
+          {
+            "id": "hedgehog_0116",
+            "name": "Dilated Cardiomyopathy - Advanced",
+            "name_ja": "拡張型心筋症 - 進行型"
+          }
+        ]
+      },
+      {
+        "shared_stem": "attemp",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0053",
+            "name": "Hypothermia / Hibernation Attempt",
+            "name_ja": "低体温症・冬眠兆候"
+          },
+          {
+            "id": "hedgehog_0089",
+            "name": "Hibernation Attempt - Severe",
+            "name_ja": "冬眠試行 - 重症型"
+          },
+          {
+            "id": "hedgehog_0147",
+            "name": "Hibernation Attempt (Torpor)",
+            "name_ja": "冬眠企図（休眠）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "balloo",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0069",
+            "name": "Balloon Syndrome",
+            "name_ja": "バルーン症候群"
+          },
+          {
+            "id": "hedgehog_0140",
+            "name": "Balloon Syndrome (Subcutaneous Emphysema)",
+            "name_ja": "バルーン症候群（皮下気腫）"
+          },
+          {
+            "id": "hedgehog_0145",
+            "name": "Hedgehog Balloon Syndrome",
+            "name_ja": "ハリネズミ風船症候群（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "body",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0017",
+            "name": "Gastrointestinal Foreign Body",
+            "name_ja": "消化管内異物"
+          },
+          {
+            "id": "hedgehog_0124",
+            "name": "Intestinal Foreign Body",
+            "name_ja": "腸管異物"
+          },
+          {
+            "id": "hedgehog_0143",
+            "name": "Gastrointestinal Foreign Body",
+            "name_ja": "消化管異物"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0225",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0226",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0227",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dilate",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0033",
+            "name": "Dilated Cardiomyopathy",
+            "name_ja": "拡張型心筋症"
+          },
+          {
+            "id": "hedgehog_0116",
+            "name": "Dilated Cardiomyopathy - Advanced",
+            "name_ja": "拡張型心筋症 - 進行型"
+          },
+          {
+            "id": "hedgehog_0144",
+            "name": "Hedgehog Dilated Cardiomyopathy (DCM)",
+            "name_ja": "ハリネズミ拡張型心筋症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "foreig",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0017",
+            "name": "Gastrointestinal Foreign Body",
+            "name_ja": "消化管内異物"
+          },
+          {
+            "id": "hedgehog_0124",
+            "name": "Intestinal Foreign Body",
+            "name_ja": "腸管異物"
+          },
+          {
+            "id": "hedgehog_0143",
+            "name": "Gastrointestinal Foreign Body",
+            "name_ja": "消化管異物"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemang",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0013",
+            "name": "Hemangiosarcoma",
+            "name_ja": "血管肉腫"
+          },
+          {
+            "id": "hedgehog_0086",
+            "name": "Splenic Hemangiosarcoma",
+            "name_ja": "脾臓血管肉腫"
+          },
+          {
+            "id": "hedgehog_0087",
+            "name": "Hepatic Hemangiosarcoma",
+            "name_ja": "肝臓血管肉腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hibern",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0053",
+            "name": "Hypothermia / Hibernation Attempt",
+            "name_ja": "低体温症・冬眠兆候"
+          },
+          {
+            "id": "hedgehog_0089",
+            "name": "Hibernation Attempt - Severe",
+            "name_ja": "冬眠試行 - 重症型"
+          },
+          {
+            "id": "hedgehog_0147",
+            "name": "Hibernation Attempt (Torpor)",
+            "name_ja": "冬眠企図（休眠）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypoth",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0053",
+            "name": "Hypothermia / Hibernation Attempt",
+            "name_ja": "低体温症・冬眠兆候"
+          },
+          {
+            "id": "hedgehog_0120",
+            "name": "Hypothyroidism",
+            "name_ja": "甲状腺機能低下症"
+          },
+          {
+            "id": "hedgehog_0179",
+            "name": "Hypothermia",
+            "name_ja": "低体温症（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mange",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0090",
+            "name": "Caparinia Mange (Severe)",
+            "name_ja": "カパリニアダニ症（重症型）"
+          },
+          {
+            "id": "hedgehog_0092",
+            "name": "Demodex Mange",
+            "name_ja": "ニキビダニ症"
+          },
+          {
+            "id": "hedgehog_0151",
+            "name": "Sarcoptic Mange",
+            "name_ja": "疥癬（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mite",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0000",
+            "name": "Mite Infestation (Caparinia)",
+            "name_ja": "疥癬ダニ感染症（カパリニア）"
+          },
+          {
+            "id": "hedgehog_0150",
+            "name": "Caparinia Mite Infestation",
+            "name_ja": "カパリニアダニ症（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0152",
+            "name": "Ear Mite Infestation",
+            "name_ja": "耳ダニ寄生（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mycoba",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0028",
+            "name": "Mycobacteriosis (Pulmonary)",
+            "name_ja": "マイコバクテリア症（肺型）"
+          },
+          {
+            "id": "hedgehog_0057",
+            "name": "Mycobacteriosis (Disseminated)",
+            "name_ja": "マイコバクテリア症（播種型）"
+          },
+          {
+            "id": "hedgehog_0096",
+            "name": "Mycobacterium avium Infection",
+            "name_ja": "マイコバクテリウム・アビウム感染症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0114",
+            "name": "Testicular Neoplasia",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "hedgehog_0134",
+            "name": "Hepatic Neoplasia (General)",
+            "name_ja": "肝臓腫瘍（一般）"
+          },
+          {
+            "id": "hedgehog_0238",
+            "name": "Pulmonary Neoplasia",
+            "name_ja": "肺腫瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "oral",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0007",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0141",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0162",
+            "name": "Oral Fibrosarcoma",
+            "name_ja": "口腔線維肉腫（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ovaria",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0067",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "hedgehog_0082",
+            "name": "Ovarian Granulosa Cell Tumor",
+            "name_ja": "卵巣顆粒膜細胞腫"
+          },
+          {
+            "id": "hedgehog_0208",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0106",
+            "name": "Renal Amyloidosis",
+            "name_ja": "腎アミロイドーシス"
+          },
+          {
+            "id": "hedgehog_0160",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0206",
+            "name": "Acute Renal Failure",
+            "name_ja": "急性腎不全（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0130",
+            "name": "Toxicosis (Cleaning Products)",
+            "name_ja": "中毒症（洗浄剤）"
+          },
+          {
+            "id": "hedgehog_0228",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0229",
+            "name": "Plant Toxicosis",
+            "name_ja": "植物中毒（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wobbly",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0029",
+            "name": "Wobbly Hedgehog Syndrome (WHS)",
+            "name_ja": "ふらつき症候群（WHS）"
+          },
+          {
+            "id": "hedgehog_0077",
+            "name": "Wobbly Hedgehog Syndrome (WHS) - Early Stage",
+            "name_ja": "ふらつきハリネズミ症候群（WHS）- 初期段階"
+          },
+          {
+            "id": "hedgehog_0078",
+            "name": "Wobbly Hedgehog Syndrome (WHS) - Advanced",
+            "name_ja": "ふらつきハリネズミ症候群（WHS）- 進行期"
+          }
+        ]
+      }
+    ]
+  }
+}

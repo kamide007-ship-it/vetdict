@@ -2102,8 +2102,8 @@
         "id": "exotic_other_0006",
         "name": "Porcine Obesity",
         "name_ja": "豚の肥満症",
-        "treatment_ja_len": 989,
-        "treatment_len": 879,
+        "treatment_ja_len": 999,
+        "treatment_len": 903,
         "has_dosage": false
       },
       {
@@ -2126,16 +2126,16 @@
         "id": "exotic_other_0015",
         "name": "Metabolic Bone Disease (Exotic Mammal)",
         "name_ja": "代謝性骨疾患（エキゾチック哺乳類）",
-        "treatment_ja_len": 592,
-        "treatment_len": 478,
+        "treatment_ja_len": 602,
+        "treatment_len": 502,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0017",
         "name": "Diabetes Mellitus (Exotic Mammal)",
         "name_ja": "糖尿病（エキゾチック哺乳類）",
-        "treatment_ja_len": 457,
-        "treatment_len": 596,
+        "treatment_ja_len": 467,
+        "treatment_len": 620,
         "has_dosage": false
       },
       {
@@ -2150,16 +2150,16 @@
         "id": "exotic_other_0021",
         "name": "Gastrointestinal Stasis",
         "name_ja": "消化管うっ滞",
-        "treatment_ja_len": 518,
-        "treatment_len": 812,
+        "treatment_ja_len": 528,
+        "treatment_len": 836,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0025",
         "name": "Rectal Prolapse (Exotic Mammal)",
         "name_ja": "直腸脱（エキゾチック哺乳類）",
-        "treatment_ja_len": 323,
-        "treatment_len": 394,
+        "treatment_ja_len": 333,
+        "treatment_len": 418,
         "has_dosage": false
       },
       {
@@ -2174,16 +2174,16 @@
         "id": "exotic_other_0030",
         "name": "Mammary Tumors (Exotic Mammal)",
         "name_ja": "乳腺腫瘍（エキゾチック哺乳類）",
-        "treatment_ja_len": 282,
-        "treatment_len": 412,
+        "treatment_ja_len": 292,
+        "treatment_len": 436,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0032",
         "name": "Canine Distemper (Raccoon/Skunk)",
         "name_ja": "犬ジステンパー（アライグマ・スカンク）",
-        "treatment_ja_len": 708,
-        "treatment_len": 571,
+        "treatment_ja_len": 718,
+        "treatment_len": 595,
         "has_dosage": false
       },
       {
@@ -2198,16 +2198,16 @@
         "id": "exotic_other_0034",
         "name": "Vestibular Disease (Exotic Mammal)",
         "name_ja": "前庭疾患（エキゾチック哺乳類）",
-        "treatment_ja_len": 885,
-        "treatment_len": 670,
+        "treatment_ja_len": 895,
+        "treatment_len": 694,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0037",
         "name": "Subcutaneous Abscess (Exotic Mammal)",
         "name_ja": "皮下膿瘍（エキゾチック哺乳類）",
-        "treatment_ja_len": 580,
-        "treatment_len": 472,
+        "treatment_ja_len": 590,
+        "treatment_len": 496,
         "has_dosage": false
       },
       {
@@ -2238,32 +2238,32 @@
         "id": "exotic_other_0043",
         "name": "Hypothermia / Cold Stress",
         "name_ja": "低温ストレス・低体温症",
-        "treatment_ja_len": 713,
-        "treatment_len": 534,
+        "treatment_ja_len": 723,
+        "treatment_len": 558,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0044",
         "name": "Obesity (Exotic Mammal)",
         "name_ja": "肥満症（エキゾチック哺乳類）",
-        "treatment_ja_len": 715,
-        "treatment_len": 572,
+        "treatment_ja_len": 725,
+        "treatment_len": 596,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0051",
         "name": "Stress Myopathy (Capture Myopathy)",
         "name_ja": "ストレス性ミオパチー（捕獲ミオパチー）",
-        "treatment_ja_len": 316,
-        "treatment_len": 472,
+        "treatment_ja_len": 326,
+        "treatment_len": 496,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0054",
         "name": "Renal Disease (Exotic Mammal)",
         "name_ja": "腎疾患（エキゾチック哺乳類）",
-        "treatment_ja_len": 711,
-        "treatment_len": 523,
+        "treatment_ja_len": 721,
+        "treatment_len": 547,
         "has_dosage": false
       },
       {
@@ -2278,8 +2278,8 @@
         "id": "exotic_other_0057",
         "name": "Heart Disease (Exotic Mammal)",
         "name_ja": "心疾患（エキゾチック哺乳類）",
-        "treatment_ja_len": 311,
-        "treatment_len": 395,
+        "treatment_ja_len": 321,
+        "treatment_len": 419,
         "has_dosage": false
       },
       {
@@ -2302,32 +2302,32 @@
         "id": "exotic_other_0062",
         "name": "Obesity (Prairie Dog)",
         "name_ja": "肥満症（プレーリードッグ）",
-        "treatment_ja_len": 713,
-        "treatment_len": 572,
+        "treatment_ja_len": 723,
+        "treatment_len": 596,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0063",
         "name": "Heart Disease (Prairie Dog)",
         "name_ja": "心疾患（プレーリードッグ）",
-        "treatment_ja_len": 467,
-        "treatment_len": 593,
+        "treatment_ja_len": 477,
+        "treatment_len": 617,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0064",
         "name": "Skunk Obesity",
         "name_ja": "スカンクの肥満症",
-        "treatment_ja_len": 703,
-        "treatment_len": 572,
+        "treatment_ja_len": 713,
+        "treatment_len": 596,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0065",
         "name": "Metabolic Bone Disease (Skunk)",
         "name_ja": "代謝性骨疾患（スカンク）",
-        "treatment_ja_len": 582,
-        "treatment_len": 478,
+        "treatment_ja_len": 592,
+        "treatment_len": 502,
         "has_dosage": false
       },
       {
@@ -2350,16 +2350,16 @@
         "id": "exotic_other_0068",
         "name": "Dyskinetic Syndrome (Tarantula)",
         "name_ja": "運動障害症候群（タランチュラ）",
-        "treatment_ja_len": 462,
-        "treatment_len": 443,
+        "treatment_ja_len": 472,
+        "treatment_len": 467,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0070",
         "name": "Mite Infestation (Tarantula)",
         "name_ja": "ダニ寄生症（タランチュラ）",
-        "treatment_ja_len": 545,
-        "treatment_len": 578,
+        "treatment_ja_len": 555,
+        "treatment_len": 602,
         "has_dosage": false
       },
       {
@@ -2374,8 +2374,8 @@
         "id": "exotic_other_0072",
         "name": "Post-Purchase Syndrome (Hermit Crab)",
         "name_ja": "購入後症候群（ヤドカリ）",
-        "treatment_ja_len": 785,
-        "treatment_len": 693,
+        "treatment_ja_len": 795,
+        "treatment_len": 717,
         "has_dosage": false
       },
       {
@@ -2430,8 +2430,8 @@
         "id": "exotic_other_0094",
         "name": "Porcine Dermatitis / Nephropathy Syndrome (PDNS)",
         "name_ja": "豚皮膚炎腎症症候群",
-        "treatment_ja_len": 645,
-        "treatment_len": 984,
+        "treatment_ja_len": 655,
+        "treatment_len": 1008,
         "has_dosage": false
       },
       {
@@ -2446,8 +2446,8 @@
         "id": "exotic_other_0099",
         "name": "Salt Poisoning / Water Deprivation (Porcine)",
         "name_ja": "食塩中毒・水分欠乏（ブタ）",
-        "treatment_ja_len": 614,
-        "treatment_len": 494,
+        "treatment_ja_len": 624,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
@@ -2478,8 +2478,8 @@
         "id": "exotic_other_0106",
         "name": "Johne's Disease (Paratuberculosis)",
         "name_ja": "ヨーネ病（パラ結核）",
-        "treatment_ja_len": 568,
-        "treatment_len": 349,
+        "treatment_ja_len": 578,
+        "treatment_len": 373,
         "has_dosage": false
       },
       {
@@ -2502,8 +2502,8 @@
         "id": "exotic_other_0118",
         "name": "Hedgehog Skin Mites (Caparinia tripilis)",
         "name_ja": "ハリネズミダニ症（カパリニア）",
-        "treatment_ja_len": 419,
-        "treatment_len": 715,
+        "treatment_ja_len": 429,
+        "treatment_len": 739,
         "has_dosage": false
       },
       {
@@ -2518,32 +2518,32 @@
         "id": "exotic_other_0120",
         "name": "Hedgehog Obesity",
         "name_ja": "ハリネズミ肥満症",
-        "treatment_ja_len": 703,
-        "treatment_len": 572,
+        "treatment_ja_len": 713,
+        "treatment_len": 596,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0121",
         "name": "Hedgehog Hepatic Lipidosis",
         "name_ja": "ハリネズミ肝脂肪症",
-        "treatment_ja_len": 1192,
-        "treatment_len": 1125,
+        "treatment_ja_len": 1202,
+        "treatment_len": 1149,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0122",
         "name": "Hedgehog Cardiomyopathy",
         "name_ja": "ハリネズミ心筋症",
-        "treatment_ja_len": 477,
-        "treatment_len": 606,
+        "treatment_ja_len": 487,
+        "treatment_len": 630,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0125",
         "name": "Sugar Glider Aflatoxicosis",
         "name_ja": "フクロモモンガアフラトキシン中毒",
-        "treatment_ja_len": 617,
-        "treatment_len": 494,
+        "treatment_ja_len": 627,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
@@ -2558,8 +2558,8 @@
         "id": "exotic_other_0130",
         "name": "Ferret Aplastic Anemia (Estrogen Toxicity)",
         "name_ja": "フェレット再生不良性貧血（エストロゲン中毒）",
-        "treatment_ja_len": 623,
-        "treatment_len": 494,
+        "treatment_ja_len": 633,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
@@ -2574,8 +2574,8 @@
         "id": "exotic_other_0138",
         "name": "Ferret Heart Disease (Cardiomyopathy)",
         "name_ja": "フェレット心疾患（心筋症）",
-        "treatment_ja_len": 499,
-        "treatment_len": 606,
+        "treatment_ja_len": 509,
+        "treatment_len": 630,
         "has_dosage": false
       },
       {
@@ -2598,8 +2598,8 @@
         "id": "exotic_other_0144",
         "name": "Canine Distemper",
         "name_ja": "犬ジステンパー（その他）",
-        "treatment_ja_len": 551,
-        "treatment_len": 661,
+        "treatment_ja_len": 561,
+        "treatment_len": 685,
         "has_dosage": false
       },
       {
@@ -2654,16 +2654,16 @@
         "id": "exotic_other_0171",
         "name": "Obesity (Exotic)",
         "name_ja": "肥満（エキゾチック）（その他）",
-        "treatment_ja_len": 644,
-        "treatment_len": 979,
+        "treatment_ja_len": 654,
+        "treatment_len": 1003,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0172",
         "name": "Diabetes Mellitus",
         "name_ja": "糖尿病（その他）",
-        "treatment_ja_len": 295,
-        "treatment_len": 396,
+        "treatment_ja_len": 305,
+        "treatment_len": 420,
         "has_dosage": false
       },
       {
@@ -2694,8 +2694,8 @@
         "id": "exotic_other_0192",
         "name": "Squamous Cell Carcinoma",
         "name_ja": "扁平上皮癌（その他）",
-        "treatment_ja_len": 657,
-        "treatment_len": 457,
+        "treatment_ja_len": 667,
+        "treatment_len": 481,
         "has_dosage": false
       },
       {
@@ -2726,40 +2726,40 @@
         "id": "exotic_other_0197",
         "name": "Intestinal Obstruction",
         "name_ja": "腸閉塞（その他）",
-        "treatment_ja_len": 553,
-        "treatment_len": 552,
+        "treatment_ja_len": 563,
+        "treatment_len": 576,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0199",
         "name": "Rectal Prolapse",
         "name_ja": "直腸脱（その他）",
-        "treatment_ja_len": 553,
-        "treatment_len": 509,
+        "treatment_ja_len": 563,
+        "treatment_len": 533,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0224",
         "name": "Spinal Injury",
         "name_ja": "脊髄損傷（その他）",
-        "treatment_ja_len": 555,
-        "treatment_len": 448,
+        "treatment_ja_len": 565,
+        "treatment_len": 472,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0226",
         "name": "Congestive Heart Failure",
         "name_ja": "うっ血性心不全（その他）",
-        "treatment_ja_len": 564,
-        "treatment_len": 360,
+        "treatment_ja_len": 574,
+        "treatment_len": 384,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0229",
         "name": "Obesity",
         "name_ja": "肥満（その他）",
-        "treatment_ja_len": 640,
-        "treatment_len": 909,
+        "treatment_ja_len": 650,
+        "treatment_len": 933,
         "has_dosage": false
       },
       {
@@ -2774,16 +2774,16 @@
         "id": "exotic_other_0237",
         "name": "Mammary Tumor",
         "name_ja": "乳腺腫瘍（その他）",
-        "treatment_ja_len": 655,
-        "treatment_len": 457,
+        "treatment_ja_len": 665,
+        "treatment_len": 481,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0238",
         "name": "Lymphoma",
         "name_ja": "リンパ腫（その他）",
-        "treatment_ja_len": 655,
-        "treatment_len": 457,
+        "treatment_ja_len": 665,
+        "treatment_len": 481,
         "has_dosage": false
       },
       {
@@ -2806,16 +2806,16 @@
         "id": "exotic_other_0250",
         "name": "Hepatic Neoplasia",
         "name_ja": "肝腫瘍性疾患（その他）",
-        "treatment_ja_len": 1013,
-        "treatment_len": 734,
+        "treatment_ja_len": 1023,
+        "treatment_len": 758,
         "has_dosage": false
       },
       {
         "id": "exotic_other_0251",
         "name": "Hepatic Metabolic Disorder",
         "name_ja": "肝代謝障害（その他）",
-        "treatment_ja_len": 927,
-        "treatment_len": 1203,
+        "treatment_ja_len": 937,
+        "treatment_len": 1227,
         "has_dosage": false
       },
       {
@@ -2830,8 +2830,8 @@
         "id": "exotic_other_0259",
         "name": "Gastrointestinal Obstruction (Partial)",
         "name_ja": "消化管部分閉塞（その他）",
-        "treatment_ja_len": 561,
-        "treatment_len": 956,
+        "treatment_ja_len": 571,
+        "treatment_len": 980,
         "has_dosage": false
       },
       {

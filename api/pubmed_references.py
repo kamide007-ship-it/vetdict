@@ -330,72 +330,118 @@ DISEASE_REFERENCES: dict[str, list[dict]] = {
 }
 
 
-# Species allow-list per reference key (T110/T108 fix).
-#
-# The curated citations above were sourced from species-specific literature.
-# Without this guard, get_references_for_disease() attached them by loose
-# name substring match to ANY species — e.g. the "diabetes mellitus" (dogs &
-# cats) paper was attached to a degu diabetes page, and dog/cat guidelines
-# leaked onto exotic pages. Each key below is scoped to the species its cited
-# study actually covers. Keys absent from this map fall back to dog/cat, since
-# every legacy citation was small-animal (dog/cat) literature.
-_REFERENCE_SPECIES: dict[str, set[str]] = {
-    "hypertrophic cardiomyopathy (hcm)": {"cat"},
-    "aortic thromboembolism (saddle thrombus)": {"cat"},
-    "malocclusion": {"chinchilla", "degu", "guinea_pig", "rabbit"},
-    "insulinoma": {"ferret"},
-    "wobbly hedgehog syndrome (whs)": {"hedgehog"},
-    "urinary obstruction (blocked cat)": {"cat"},
-    "feline lower urinary tract disease (flutd)": {"cat"},
-    "feline idiopathic cystitis (fic)": {"cat"},
-    "feline pancreatitis": {"cat"},
-    "gastric dilatation-volvulus (gdv/bloat)": {"dog"},
-    "gastrointestinal stasis": {"rabbit", "guinea_pig", "chinchilla", "degu"},
-    "adrenal disease": {"ferret"},
-    "pasteurellosis": {"rabbit"},
-    "dermatophytosis": {"chinchilla"},
-    "canine parvovirus": {"dog"},
-    "chronic kidney disease": {"dog", "cat"},
-    "feline infectious peritonitis": {"cat"},
-    "encephalitozoon cuniculi": {"rabbit"},
-    "diabetes mellitus": {"dog", "cat"},
-    "feline asthma": {"cat"},
-    "immune-mediated hemolytic anemia": {"dog", "cat"},
-    "atopic dermatitis": {"dog", "cat"},
-    "feline herpesvirus": {"cat"},
-    "urolithiasis": {"dog", "cat"},
-    "pyometra": {"dog", "cat"},
-    "lymphoma": {"dog", "cat", "ferret"},
-    "feline leukemia virus": {"cat"},
-    "feline immunodeficiency virus": {"cat"},
-    "heartworm disease": {"dog", "cat"},
-    "rabbit hemorrhagic disease": {"rabbit"},
-}
-
-_DEFAULT_REFERENCE_SPECIES: frozenset[str] = frozenset({"dog", "cat"})
-
-
-def _key_allows_species(key: str, species: str | None) -> bool:
-    """Whether a reference key is appropriate for the given species.
-
-    species=None preserves the legacy (unguarded) behaviour for any caller
-    that does not know the species.
-    """
-    if species is None:
-        return True
-    allowed = _REFERENCE_SPECIES.get(key, _DEFAULT_REFERENCE_SPECIES)
-    return species in allowed
-
-
-def get_references_for_disease(disease_name: str, species: str | None = None) -> list[dict]:
+def get_references_for_disease(disease_name: str) -> list[dict]:
     """Return PubMed references for a disease name (case-insensitive partial match).
 
-    When ``species`` is provided, references are only returned if the matched
-    key is curated for that species (see ``_REFERENCE_SPECIES``). This prevents
-    dog/cat-oriented citations from leaking onto exotic-species disease pages.
+    Legacy v1: keyword match with NO species guard. Kept for compatibility.
+    Production uses the species-aware ``get_references_for_disease_v2`` (T110).
     """
     name_lower = disease_name.lower()
     for key, refs in DISEASE_REFERENCES.items():
-        if (key in name_lower or name_lower in key) and _key_allows_species(key, species):
+        if key in name_lower or name_lower in key:
+            return refs
+    return []
+
+
+# ---------------------------------------------------------------------------
+# T110 — citation binding v2: disease-unit curation + species guard
+# ---------------------------------------------------------------------------
+#
+# v1 (`get_references_for_disease`) keyword-matches a disease NAME against
+# DISEASE_REFERENCES with NO species awareness, so exotic diseases pick up
+# dog/cat papers (e.g. a degu "Cardiomyopathy" gets the feline HCM ACVIM paper).
+# v2 fixes this WITHOUT deleting v1:
+#   1. Species guard — a keyword-matched citation is returned only if the
+#      disease's species is among the species that citation actually pertains to.
+#   2. Disease-unit curation — an optional per-species sidecar
+#      (api/data/citations_v2/<species>.json: {disease_slug: [refs]}) takes
+#      precedence, letting a veterinarian bind the correct references per disease.
+
+import json as _json
+import re as _re2
+from functools import lru_cache as _lru_cache
+from pathlib import Path as _Path
+
+_CITATIONS_V2_DIR = _Path(__file__).resolve().parent / "data" / "citations_v2"
+
+# Species each keyword citation legitimately pertains to (literature domain).
+# A disease whose species is NOT listed here will NOT receive that citation.
+_CAT = frozenset({"cat"})
+_DOG = frozenset({"dog"})
+_DOGCAT = frozenset({"dog", "cat"})
+_FERRET = frozenset({"ferret"})
+_HERB_EXOTIC = frozenset({"rabbit", "guinea_pig", "chinchilla", "degu", "hamster"})
+
+REFERENCE_SPECIES: dict[str, frozenset] = {
+    "hypertrophic cardiomyopathy (hcm)": _CAT,
+    "aortic thromboembolism (saddle thrombus)": _CAT,
+    "malocclusion": _HERB_EXOTIC,
+    "insulinoma": _FERRET,
+    "wobbly hedgehog syndrome (whs)": frozenset({"hedgehog"}),
+    "urinary obstruction (blocked cat)": _CAT,
+    "feline lower urinary tract disease (flutd)": _CAT,
+    "feline idiopathic cystitis (fic)": _CAT,
+    "feline pancreatitis": _CAT,
+    "gastric dilatation-volvulus (gdv/bloat)": _DOG,
+    "gastrointestinal stasis": _HERB_EXOTIC,
+    "adrenal disease": _FERRET,
+    "pasteurellosis": frozenset({"rabbit"}),
+    "dermatophytosis": _DOGCAT,
+    "canine parvovirus": _DOG,
+    "chronic kidney disease": _DOGCAT,
+    "feline infectious peritonitis": _CAT,
+    "encephalitozoon cuniculi": frozenset({"rabbit"}),
+    "diabetes mellitus": _DOGCAT,
+    "feline asthma": _CAT,
+    "immune-mediated hemolytic anemia": _DOGCAT,
+    "atopic dermatitis": _DOGCAT,
+    "feline herpesvirus": _CAT,
+    "urolithiasis": _DOGCAT,
+    "pyometra": _DOGCAT,
+    "lymphoma": _DOGCAT,
+    "feline leukemia virus": _CAT,
+    "feline immunodeficiency virus": _CAT,
+    "heartworm disease": frozenset({"dog", "cat", "ferret"}),
+    "rabbit hemorrhagic disease": frozenset({"rabbit"}),
+}
+
+
+def _slug(name: str) -> str:
+    return _re2.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-")
+
+
+@_lru_cache(maxsize=32)
+def _curated_v2(species: str) -> dict:
+    path = _CITATIONS_V2_DIR / f"{species}.json"
+    if not path.exists():
+        return {}
+    try:
+        data = _json.loads(path.read_text(encoding="utf-8"))
+        return data.get("bindings", {}) if isinstance(data, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def get_references_for_disease_v2(disease_name: str, species: str | None = None) -> list[dict]:
+    """Species-aware citation binding (T110).
+
+    Order of precedence:
+      1. Disease-unit curated binding for (species, disease) — the v2 curation.
+      2. Keyword match against DISEASE_REFERENCES, but ONLY when the disease's
+         species is among the species that citation pertains to (species guard).
+         This suppresses the cross-species keyword leaks v1 produced.
+    Passing species=None reproduces v1 behaviour (no guard) for compatibility.
+    """
+    if species:
+        curated = _curated_v2(species).get(_slug(disease_name))
+        if curated is not None:
+            return curated
+
+    name_lower = disease_name.lower()
+    for key, refs in DISEASE_REFERENCES.items():
+        if key in name_lower or name_lower in key:
+            allowed = REFERENCE_SPECIES.get(key)
+            if species and allowed and species not in allowed:
+                continue  # species guard: do not attach a wrong-species citation
             return refs
     return []

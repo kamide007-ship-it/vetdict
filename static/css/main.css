@@ -325,8 +325,15 @@ a:hover{text-decoration:underline}
 .detail-section-header{font-weight:700;font-size:.78rem;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:5px}
 .detail-icon{font-size:.9rem}
 .detail-section-body{font-size:.8rem;color:var(--gray-700);line-height:1.6;white-space:pre-wrap}
-.ecvn-adjunct-block{margin-top:10px;padding:8px 12px;background:rgba(34,168,79,.06);border-left:3px solid var(--green);border-radius:6px;font-size:.76rem;color:var(--gray-700);white-space:pre-wrap;line-height:1.5}
-.ecvn-adjunct-block a{color:var(--green);text-decoration:underline;font-weight:600}
+/* Sponsored/own-product (PR) block — deliberately styled as an advertisement,
+   amber-accented and set apart from the green evidence-based treatment text so
+   readers never mistake it for standard treatment. */
+.ecvn-adjunct-block{margin-top:12px;padding:8px 12px;background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.28);border-left:3px solid #d97706;border-radius:6px;font-size:.76rem;color:var(--gray-700);white-space:pre-wrap;line-height:1.5}
+.ecvn-adjunct-label{display:flex;align-items:center;gap:6px;font-weight:700;color:#b45309;font-size:.72rem;letter-spacing:.02em;margin-bottom:2px}
+.ecvn-pr-badge{display:inline-block;background:#d97706;color:#fff;font-weight:800;font-size:.64rem;line-height:1;padding:3px 6px;border-radius:4px;letter-spacing:.05em}
+.ecvn-adjunct-disclaimer{font-size:.7rem;color:var(--gray-600,#4b5563);margin-bottom:6px;font-style:italic}
+.ecvn-adjunct-body{white-space:pre-wrap}
+.ecvn-adjunct-block a{color:#b45309;text-decoration:underline;font-weight:600}
 .treatment-drugs-section{margin-top:10px;padding:8px 12px;background:rgba(26,48,104,.04);border-left:3px solid var(--navy);border-radius:6px}
 .treatment-drugs-heading{font-size:.72rem;font-weight:700;color:var(--navy);margin-bottom:6px;letter-spacing:.02em}
 .treatment-drugs-list{display:flex;flex-wrap:wrap;gap:6px}

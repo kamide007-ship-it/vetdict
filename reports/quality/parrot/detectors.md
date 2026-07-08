@@ -169,19 +169,19 @@
 - 気嚢炎（Air Sacculitis）[parrot_0010] — ja:159字 / en:190字
 - 副鼻腔炎（Sinusitis）[parrot_0011] — ja:53字 / en:149字
 - 総排泄腔炎（Cloacitis）[parrot_0012] — ja:55字 / en:149字
-- グラム陰性菌感染症（Gram-negative Bacterial Infection）[parrot_0014] — ja:430字 / en:387字
+- グラム陰性菌感染症（Gram-negative Bacterial Infection）[parrot_0014] — ja:440字 / en:411字
 - サルコシスティス症（Sarcocystosis）[parrot_0020] — ja:168字 / en:193字
 - 腸内寄生虫症（回虫・条虫）（Intestinal Parasites (Roundworms/Tapeworms)）[parrot_0022] — ja:172字 / en:172字
-- 重金属中毒（鉛・亜鉛）（Heavy Metal Poisoning (Lead/Zinc)）[parrot_0024] — ja:439字 / en:465字
-- PTFE中毒（テフロン中毒）（PTFE Toxicosis (Teflon Poisoning)）[parrot_0025] — ja:320字 / en:465字
-- アボカド中毒（Avocado Toxicity）[parrot_0026] — ja:333字 / en:369字
-- チョコレート中毒（Chocolate Toxicity）[parrot_0027] — ja:436字 / en:369字
-- 煙・ガス吸入中毒（Smoke/Fume Inhalation Toxicosis）[parrot_0028] — ja:436字 / en:369字
-- 植物中毒（Plant Toxicity）[parrot_0029] — ja:432字 / en:369字
-- 肥満（Obesity）[parrot_0034] — ja:468字 / en:664字
-- 腎疾患（Renal Disease）[parrot_0038] — ja:280字 / en:398字
-- 膵炎（Pancreatitis）[parrot_0042] — ja:468字 / en:650字
-- 卵黄性腹膜炎（Egg Yolk Peritonitis）[parrot_0045] — ja:398字 / en:406字
+- 重金属中毒（鉛・亜鉛）（Heavy Metal Poisoning (Lead/Zinc)）[parrot_0024] — ja:449字 / en:489字
+- PTFE中毒（テフロン中毒）（PTFE Toxicosis (Teflon Poisoning)）[parrot_0025] — ja:330字 / en:489字
+- アボカド中毒（Avocado Toxicity）[parrot_0026] — ja:343字 / en:393字
+- チョコレート中毒（Chocolate Toxicity）[parrot_0027] — ja:446字 / en:393字
+- 煙・ガス吸入中毒（Smoke/Fume Inhalation Toxicosis）[parrot_0028] — ja:446字 / en:393字
+- 植物中毒（Plant Toxicity）[parrot_0029] — ja:442字 / en:393字
+- 肥満（Obesity）[parrot_0034] — ja:478字 / en:688字
+- 腎疾患（Renal Disease）[parrot_0038] — ja:290字 / en:422字
+- 膵炎（Pancreatitis）[parrot_0042] — ja:478字 / en:674字
+- 卵黄性腹膜炎（Egg Yolk Peritonitis）[parrot_0045] — ja:408字 / en:430字
 - 総排泄腔脱（Cloacal Prolapse）[parrot_0046] — ja:72字 / en:193字
 - 嗉嚢火傷（Crop Burns）[parrot_0048] — ja:80字 / en:465字
 - 異物摂取（Foreign Body Ingestion）[parrot_0049] — ja:192字 / en:193字
@@ -189,10 +189,10 @@
 - 自咬症（自傷行為）（Self-Mutilation）[parrot_0053] — ja:87字 / en:470字
 - オウム目ストレス症候群（Psittacine Stress Syndrome）[parrot_0054] — ja:61字 / en:149字
 - 嘴不正咬合（Beak Malocclusion）[parrot_0057] — ja:176字 / en:530字
-- 嘴過長症（Beak Overgrowth）[parrot_0058] — ja:583字 / en:614字
+- 嘴過長症（Beak Overgrowth）[parrot_0058] — ja:593字 / en:638字
 - 趾絞扼症候群（Constricted Toe Syndrome）[parrot_0059] — ja:82字 / en:193字
-- 翼外傷・軟部組織損傷（Wing Trauma / Soft Tissue Injury）[parrot_0060] — ja:442字 / en:482字
-- 白内障（Cataracts）[parrot_0061] — ja:473字 / en:614字
+- 翼外傷・軟部組織損傷（Wing Trauma / Soft Tissue Injury）[parrot_0060] — ja:452字 / en:506字
+- 白内障（Cataracts）[parrot_0061] — ja:483字 / en:638字
 - 結膜炎（Conjunctivitis）[parrot_0062] — ja:47字 / en:170字
 - 眼窩周囲膿瘍（Periorbital Abscess）[parrot_0063] — ja:162字 / en:196字
 

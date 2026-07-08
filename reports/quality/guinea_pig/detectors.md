@@ -146,34 +146,34 @@
 ### 投与量なし（上位30）
 - シラミ寄生症（Static Lice (Gliricola porcelli)）[guinea_pig_0015] — ja:167字 / en:495字
 - 毛引き（バーバリング）（Barbering）[guinea_pig_0016] — ja:80字 / en:193字
-- 変形性関節症（Osteoarthritis）[guinea_pig_0035] — ja:935字 / en:1040字
-- 白内障（Cataracts）[guinea_pig_0041] — ja:478字 / en:810字
+- 変形性関節症（Osteoarthritis）[guinea_pig_0035] — ja:945字 / en:1064字
+- 白内障（Cataracts）[guinea_pig_0041] — ja:488字 / en:834字
 - 眼瞼内反症（Entropion）[guinea_pig_0042] — ja:69字 / en:193字
-- 心疾患（心筋症）（Heart Disease (Cardiomyopathy)）[guinea_pig_0047] — ja:499字 / en:606字
-- うっ血性心不全（Congestive Heart Failure）[guinea_pig_0049] — ja:347字 / en:413字
-- 肥満（Obesity）[guinea_pig_0051] — ja:803字 / en:830字
+- 心疾患（心筋症）（Heart Disease (Cardiomyopathy)）[guinea_pig_0047] — ja:509字 / en:630字
+- うっ血性心不全（Congestive Heart Failure）[guinea_pig_0049] — ja:357字 / en:437字
+- 肥満（Obesity）[guinea_pig_0051] — ja:813字 / en:854字
 - 熱中症（Heat Stroke）[guinea_pig_0053] — ja:193字 / en:158字
 - 切歯過成長（Incisor Overgrowth）[guinea_pig_0058] — ja:74字 / en:193字
 - 毛包腫（Trichofolliculoma）[guinea_pig_0062] — ja:81字 / en:193字
-- 肺腺腫（Pulmonary Adenoma）[guinea_pig_0065] — ja:341字 / en:687字
+- 肺腺腫（Pulmonary Adenoma）[guinea_pig_0065] — ja:351字 / en:711字
 - コクシジウム症（Coccidia）[guinea_pig_0072] — ja:168字 / en:471字
 - ニキビダニ症（Demodex Mites）[guinea_pig_0073] — ja:167字 / en:172字
 - 蟯虫症（Pinworms (Paraspidodera uncinata)）[guinea_pig_0075] — ja:164字 / en:496字
 - 外耳炎（Otitis Externa (Outer Ear Infection)）[guinea_pig_0078] — ja:161字 / en:137字
-- 肛門脱（Anal Prolapse）[guinea_pig_0086] — ja:337字 / en:443字
-- 牧草による刺傷（Hay Poke Injury）[guinea_pig_0092] — ja:441字 / en:482字
-- トリキサカルス疥癬 - 重症型（Trixacarus caviae (Sarcoptic Mange) - Severe）[guinea_pig_0101] — ja:423字 / en:403字
+- 肛門脱（Anal Prolapse）[guinea_pig_0086] — ja:347字 / en:467字
+- 牧草による刺傷（Hay Poke Injury）[guinea_pig_0092] — ja:451字 / en:506字
+- トリキサカルス疥癬 - 重症型（Trixacarus caviae (Sarcoptic Mange) - Severe）[guinea_pig_0101] — ja:433字 / en:427字
 - ボルデテラ肺炎（Bordetella Pneumonia）[guinea_pig_0103] — ja:165字 / en:196字
 - 肺炎球菌性肺炎（Streptococcus pneumoniae Pneumonia）[guinea_pig_0104] — ja:165字 / en:196字
 - エンセファリトゾーン・クニクリ感染症（Encephalitozoon cuniculi Infection）[guinea_pig_0113] — ja:179字 / en:204字
-- 線維肉腫（Fibrosarcoma）[guinea_pig_0115] — ja:350字 / en:761字
+- 線維肉腫（Fibrosarcoma）[guinea_pig_0115] — ja:360字 / en:785字
 - 卵巣奇形腫（Ovarian Teratoma）[guinea_pig_0118] — ja:74字 / en:193字
-- 骨肉腫（Osteosarcoma）[guinea_pig_0120] — ja:334字 / en:748字
+- 骨肉腫（Osteosarcoma）[guinea_pig_0120] — ja:344字 / en:772字
 - 脂腺感染（Grease Gland Infection）[guinea_pig_0125] — ja:162字 / en:137字
 - キロディスコイデス・カビエ寄生（Chirodiscoides caviae Infestation）[guinea_pig_0127] — ja:176字 / en:496字
 - マイコプラズマ感染症（Mycoplasma Infection）[guinea_pig_0130] — ja:168字 / en:137字
-- 腎盂腎炎（Pyelonephritis）[guinea_pig_0133] — ja:406字 / en:479字
-- 拡張型心筋症（Dilated Cardiomyopathy）[guinea_pig_0137] — ja:518字 / en:624字
+- 腎盂腎炎（Pyelonephritis）[guinea_pig_0133] — ja:416字 / en:503字
+- 拡張型心筋症（Dilated Cardiomyopathy）[guinea_pig_0137] — ja:528字 / en:648字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
 - 種別投与量なしの薬品リンク（旧・未ガード）: **137** 疾患 → ガード後残存: **0**
@@ -219,16 +219,12 @@
 - 血栓塞栓症（モルモット）（Thromboembolism）[guinea_pig_0321] → key: aortic thromboembolism (saddle thrombus)
 
 ## T109 機械翻訳臭（置換辞書）
-- ヒット総数: **6**（safe 5 / review 3）
+- ヒット総数: **3**（safe 0 / review 3）
 
 ### 用語別ヒット数
-- `並発` × 5
 - `遺伝学的` × 3
 
 ### 出現箇所（上位30）
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ prevention_ja [guinea_pig_0000] …。(9) 無症候キャリア治療。(10) 遺伝学的考慮。…
-- [safe] `並発`→併発 @ causes_ja [guinea_pig_0050] …0-50%破壊）。(4) 薬物相互作用：並発抗菌薬（特にスルフォンアミド）でビタミン…
-- [safe] `並発`→併発 @ treatment_ja [guinea_pig_0050] …12h × 3-5日重症血関節症疼痛時。並発感染（免疫抑制から一般的）：エンロフロキ…
-- [safe] `並発`→併発 @ prognosis_ja [guinea_pig_0050] …関節腫脹2-4週で段階的改善。免疫回復は並発感染解決で示唆。良好（80-90%回復）…
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ causes_ja [guinea_pig_0055] …モルモット不正咬合—主要原因：(1) 遺伝学的素因（~症例の30-40%）—一部のモル…
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ prevention_ja [guinea_pig_0055] …4) 口腔衛生監視—重大な予防。(5) 遺伝学的選択。(6) 環境要因。(7) 歯周衛生…

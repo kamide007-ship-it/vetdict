@@ -1875,8 +1875,8 @@
         "id": "ferret_0003",
         "name": "Hyperadrenocorticism (Cushing's)",
         "name_ja": "副腎皮質機能亢進症（クッシング症候群）",
-        "treatment_ja_len": 311,
-        "treatment_len": 382,
+        "treatment_ja_len": 321,
+        "treatment_len": 406,
         "has_dosage": false
       },
       {
@@ -1899,32 +1899,32 @@
         "id": "ferret_0020",
         "name": "Upper Respiratory Infection (URI)",
         "name_ja": "上部気道感染症",
-        "treatment_ja_len": 303,
-        "treatment_len": 340,
+        "treatment_ja_len": 313,
+        "treatment_len": 364,
         "has_dosage": false
       },
       {
         "id": "ferret_0025",
         "name": "Mast Cell Tumor (Cutaneous)",
         "name_ja": "肥満細胞腫（皮膚型）",
-        "treatment_ja_len": 523,
-        "treatment_len": 544,
+        "treatment_ja_len": 533,
+        "treatment_len": 568,
         "has_dosage": false
       },
       {
         "id": "ferret_0026",
         "name": "Skin Squamous Cell Carcinoma",
         "name_ja": "扁平上皮癌",
-        "treatment_ja_len": 282,
-        "treatment_len": 429,
+        "treatment_ja_len": 292,
+        "treatment_len": 453,
         "has_dosage": false
       },
       {
         "id": "ferret_0027",
         "name": "Sebaceous Gland Tumor",
         "name_ja": "皮脂腺腫瘍",
-        "treatment_ja_len": 343,
-        "treatment_len": 687,
+        "treatment_ja_len": 353,
+        "treatment_len": 711,
         "has_dosage": false
       },
       {
@@ -1963,8 +1963,8 @@
         "id": "ferret_0060",
         "name": "Broken / Fractured Teeth",
         "name_ja": "歯の破折",
-        "treatment_ja_len": 438,
-        "treatment_len": 473,
+        "treatment_ja_len": 448,
+        "treatment_len": 497,
         "has_dosage": false
       },
       {
@@ -1995,16 +1995,16 @@
         "id": "ferret_0083",
         "name": "Hepatomegaly",
         "name_ja": "肝腫大",
-        "treatment_ja_len": 688,
-        "treatment_len": 1021,
+        "treatment_ja_len": 698,
+        "treatment_len": 1045,
         "has_dosage": false
       },
       {
         "id": "ferret_0086",
         "name": "Obesity",
         "name_ja": "肥満",
-        "treatment_ja_len": 475,
-        "treatment_len": 573,
+        "treatment_ja_len": 485,
+        "treatment_len": 597,
         "has_dosage": false
       },
       {
@@ -2027,24 +2027,24 @@
         "id": "ferret_0136",
         "name": "Zinc Toxicosis",
         "name_ja": "亜鉛中毒",
-        "treatment_ja_len": 648,
-        "treatment_len": 626,
+        "treatment_ja_len": 658,
+        "treatment_len": 650,
         "has_dosage": false
       },
       {
         "id": "ferret_0137",
         "name": "Lead Poisoning",
         "name_ja": "鉛中毒",
-        "treatment_ja_len": 468,
-        "treatment_len": 494,
+        "treatment_ja_len": 478,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
         "id": "ferret_0138",
         "name": "Ibuprofen Toxicosis",
         "name_ja": "イブプロフェン中毒",
-        "treatment_ja_len": 968,
-        "treatment_len": 877,
+        "treatment_ja_len": 978,
+        "treatment_len": 901,
         "has_dosage": false
       },
       {
@@ -2079,7 +2079,7 @@
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 126,
-    "citation_mismatch_count": 20,
+    "citation_mismatch_count": 24,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
@@ -3971,11 +3971,11 @@
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
       {
-        "id": "ferret_0017",
-        "name": "Heartworm Disease",
-        "name_ja": "フィラリア症",
+        "id": "ferret_0022",
+        "name": "Lymphoma",
+        "name_ja": "リンパ腫",
         "matched_keys": [
-          "heartworm disease"
+          "lymphoma"
         ],
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
@@ -4016,11 +4016,47 @@
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
       {
-        "id": "ferret_0110",
-        "name": "Heartworm Disease - Caval Syndrome",
-        "name_ja": "フィラリア症 - 大静脈症候群",
+        "id": "ferret_0100",
+        "name": "Intestinal Lymphoma",
+        "name_ja": "腸管リンパ腫",
         "matched_keys": [
-          "heartworm disease"
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "ferret_0101",
+        "name": "Multicentric Lymphoma",
+        "name_ja": "多中心性リンパ腫",
+        "matched_keys": [
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "ferret_0102",
+        "name": "Mediastinal Lymphoma",
+        "name_ja": "縦隔リンパ腫",
+        "matched_keys": [
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "ferret_0103",
+        "name": "Cutaneous Lymphoma",
+        "name_ja": "皮膚リンパ腫",
+        "matched_keys": [
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "ferret_0113",
+        "name": "Splenic Lymphoma",
+        "name_ja": "脾臓リンパ腫",
+        "matched_keys": [
+          "lymphoma"
         ],
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },

@@ -12,37 +12,39 @@ drugs to a disease purely by name/text substring match, with no species guard:
 These tests lock in the guarded behaviour.
 """
 
-from api.pubmed_references import get_references_for_disease
+from api.pubmed_references import get_references_for_disease_v2
 
 
 class TestCitationSpeciesGuard:
+    """Species guard on the shipped citation binder (T110 v2)."""
+
     def test_dogcat_citation_not_leaked_to_exotic(self):
         # The "diabetes mellitus" citation is dogs-and-cats literature.
-        assert get_references_for_disease("Diabetes Mellitus", "degu") == []
-        assert get_references_for_disease("Diabetes Mellitus", "hamster") == []
+        assert get_references_for_disease_v2("Diabetes Mellitus", "degu") == []
+        assert get_references_for_disease_v2("Diabetes Mellitus", "hamster") == []
 
     def test_dogcat_citation_kept_for_dogcat(self):
-        assert len(get_references_for_disease("Diabetes Mellitus", "cat")) >= 1
-        assert len(get_references_for_disease("Diabetes Mellitus", "dog")) >= 1
+        assert len(get_references_for_disease_v2("Diabetes Mellitus", "cat")) >= 1
+        assert len(get_references_for_disease_v2("Diabetes Mellitus", "dog")) >= 1
 
     def test_exotic_citation_kept_for_correct_exotic(self):
         # Malocclusion refs are exotic-herbivore dental literature.
-        assert len(get_references_for_disease("Malocclusion", "degu")) >= 1
-        assert len(get_references_for_disease("Malocclusion", "chinchilla")) >= 1
+        assert len(get_references_for_disease_v2("Malocclusion", "degu")) >= 1
+        assert len(get_references_for_disease_v2("Malocclusion", "chinchilla")) >= 1
         # ...and not offered to a cat (the cited studies are not feline).
-        assert get_references_for_disease("Malocclusion", "cat") == []
+        assert get_references_for_disease_v2("Malocclusion", "cat") == []
 
     def test_gi_stasis_scoped_to_herbivores(self):
-        assert len(get_references_for_disease("Gastrointestinal Stasis", "rabbit")) >= 1
-        assert get_references_for_disease("Gastrointestinal Stasis", "dog") == []
+        assert len(get_references_for_disease_v2("Gastrointestinal Stasis", "rabbit")) >= 1
+        assert get_references_for_disease_v2("Gastrointestinal Stasis", "dog") == []
 
     def test_ferret_scoped_citations(self):
-        assert len(get_references_for_disease("Insulinoma", "ferret")) >= 1
-        assert get_references_for_disease("Insulinoma", "dog") == []
+        assert len(get_references_for_disease_v2("Insulinoma", "ferret")) >= 1
+        assert get_references_for_disease_v2("Insulinoma", "dog") == []
 
     def test_no_species_preserves_legacy_behaviour(self):
         # Backward compatibility: species=None keeps the unguarded match.
-        assert len(get_references_for_disease("Diabetes Mellitus")) >= 1
+        assert len(get_references_for_disease_v2("Diabetes Mellitus")) >= 1
 
 
 class TestDrugLinkSpeciesGuard:

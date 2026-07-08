@@ -2055,16 +2055,16 @@
         "id": "guinea_pig_0035",
         "name": "Osteoarthritis",
         "name_ja": "変形性関節症",
-        "treatment_ja_len": 935,
-        "treatment_len": 1040,
+        "treatment_ja_len": 945,
+        "treatment_len": 1064,
         "has_dosage": false
       },
       {
         "id": "guinea_pig_0041",
         "name": "Cataracts",
         "name_ja": "白内障",
-        "treatment_ja_len": 478,
-        "treatment_len": 810,
+        "treatment_ja_len": 488,
+        "treatment_len": 834,
         "has_dosage": false
       },
       {
@@ -2079,24 +2079,24 @@
         "id": "guinea_pig_0047",
         "name": "Heart Disease (Cardiomyopathy)",
         "name_ja": "心疾患（心筋症）",
-        "treatment_ja_len": 499,
-        "treatment_len": 606,
+        "treatment_ja_len": 509,
+        "treatment_len": 630,
         "has_dosage": false
       },
       {
         "id": "guinea_pig_0049",
         "name": "Congestive Heart Failure",
         "name_ja": "うっ血性心不全",
-        "treatment_ja_len": 347,
-        "treatment_len": 413,
+        "treatment_ja_len": 357,
+        "treatment_len": 437,
         "has_dosage": false
       },
       {
         "id": "guinea_pig_0051",
         "name": "Obesity",
         "name_ja": "肥満",
-        "treatment_ja_len": 803,
-        "treatment_len": 830,
+        "treatment_ja_len": 813,
+        "treatment_len": 854,
         "has_dosage": false
       },
       {
@@ -2127,8 +2127,8 @@
         "id": "guinea_pig_0065",
         "name": "Pulmonary Adenoma",
         "name_ja": "肺腺腫",
-        "treatment_ja_len": 341,
-        "treatment_len": 687,
+        "treatment_ja_len": 351,
+        "treatment_len": 711,
         "has_dosage": false
       },
       {
@@ -2167,24 +2167,24 @@
         "id": "guinea_pig_0086",
         "name": "Anal Prolapse",
         "name_ja": "肛門脱",
-        "treatment_ja_len": 337,
-        "treatment_len": 443,
+        "treatment_ja_len": 347,
+        "treatment_len": 467,
         "has_dosage": false
       },
       {
         "id": "guinea_pig_0092",
         "name": "Hay Poke Injury",
         "name_ja": "牧草による刺傷",
-        "treatment_ja_len": 441,
-        "treatment_len": 482,
+        "treatment_ja_len": 451,
+        "treatment_len": 506,
         "has_dosage": false
       },
       {
         "id": "guinea_pig_0101",
         "name": "Trixacarus caviae (Sarcoptic Mange) - Severe",
         "name_ja": "トリキサカルス疥癬 - 重症型",
-        "treatment_ja_len": 423,
-        "treatment_len": 403,
+        "treatment_ja_len": 433,
+        "treatment_len": 427,
         "has_dosage": false
       },
       {
@@ -2215,8 +2215,8 @@
         "id": "guinea_pig_0115",
         "name": "Fibrosarcoma",
         "name_ja": "線維肉腫",
-        "treatment_ja_len": 350,
-        "treatment_len": 761,
+        "treatment_ja_len": 360,
+        "treatment_len": 785,
         "has_dosage": false
       },
       {
@@ -2231,8 +2231,8 @@
         "id": "guinea_pig_0120",
         "name": "Osteosarcoma",
         "name_ja": "骨肉腫",
-        "treatment_ja_len": 334,
-        "treatment_len": 748,
+        "treatment_ja_len": 344,
+        "treatment_len": 772,
         "has_dosage": false
       },
       {
@@ -2263,24 +2263,24 @@
         "id": "guinea_pig_0133",
         "name": "Pyelonephritis",
         "name_ja": "腎盂腎炎",
-        "treatment_ja_len": 406,
-        "treatment_len": 479,
+        "treatment_ja_len": 416,
+        "treatment_len": 503,
         "has_dosage": false
       },
       {
         "id": "guinea_pig_0137",
         "name": "Dilated Cardiomyopathy",
         "name_ja": "拡張型心筋症",
-        "treatment_ja_len": 518,
-        "treatment_len": 624,
+        "treatment_ja_len": 528,
+        "treatment_len": 648,
         "has_dosage": false
       },
       {
         "id": "guinea_pig_0139",
         "name": "Hepatic Cyst",
         "name_ja": "肝嚢胞",
-        "treatment_ja_len": 759,
-        "treatment_len": 746,
+        "treatment_ja_len": 769,
+        "treatment_len": 770,
         "has_dosage": false
       },
       {
@@ -2359,8 +2359,8 @@
         "id": "guinea_pig_0313",
         "name": "Diaphragmatic Hernia",
         "name_ja": "横隔膜ヘルニア（モルモット）",
-        "treatment_ja_len": 465,
-        "treatment_len": 663,
+        "treatment_ja_len": 475,
+        "treatment_len": 687,
         "has_dosage": false
       },
       {
@@ -4774,11 +4774,10 @@
   "T109": {
     "detector": "T109",
     "total_records": 346,
-    "hit_count": 6,
-    "safe_occurrences": 5,
+    "hit_count": 3,
+    "safe_occurrences": 0,
     "review_occurrences": 3,
     "term_counts": {
-      "並発": 5,
       "遺伝学的": 3
     },
     "hits": [
@@ -4792,39 +4791,6 @@
         "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
         "count": 1,
         "context": "。(9) 無症候キャリア治療。(10) 遺伝学的考慮。"
-      },
-      {
-        "id": "guinea_pig_0050",
-        "name_ja": "壊血病（ビタミンC欠乏症）",
-        "field": "causes_ja",
-        "term": "並発",
-        "suggest": "併発",
-        "category": "safe",
-        "note": "誤字",
-        "count": 2,
-        "context": "0-50%破壊）。(4) 薬物相互作用：並発抗菌薬（特にスルフォンアミド）でビタミン"
-      },
-      {
-        "id": "guinea_pig_0050",
-        "name_ja": "壊血病（ビタミンC欠乏症）",
-        "field": "treatment_ja",
-        "term": "並発",
-        "suggest": "併発",
-        "category": "safe",
-        "note": "誤字",
-        "count": 1,
-        "context": "12h × 3-5日重症血関節症疼痛時。並発感染（免疫抑制から一般的）：エンロフロキ"
-      },
-      {
-        "id": "guinea_pig_0050",
-        "name_ja": "壊血病（ビタミンC欠乏症）",
-        "field": "prognosis_ja",
-        "term": "並発",
-        "suggest": "併発",
-        "category": "safe",
-        "note": "誤字",
-        "count": 2,
-        "context": "関節腫脹2-4週で段階的改善。免疫回復は並発感染解決で示唆。良好（80-90%回復）"
       },
       {
         "id": "guinea_pig_0055",

@@ -1,0 +1,2006 @@
+{
+  "species": "ferret",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 277,
+    "merge_clusters": 10,
+    "records_merged_away": 10,
+    "archived": 0,
+    "served_after": 267
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "ferret_0001",
+        "slug": "adrenal-disease",
+        "name": "Adrenal Disease",
+        "name_ja": "副腎疾患"
+      },
+      "merged": [
+        {
+          "id": "ferret_0163",
+          "slug": "adrenal-gland-disease",
+          "name": "Adrenal Gland Disease",
+          "name_ja": "副腎疾患（フェレット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0005",
+        "slug": "helicobacter-mustelae-gastritis",
+        "name": "Helicobacter Mustelae Gastritis",
+        "name_ja": "ヘリコバクター胃炎"
+      },
+      "merged": [
+        {
+          "id": "ferret_0172",
+          "slug": "helicobacter-gastritis",
+          "name": "Helicobacter Gastritis",
+          "name_ja": "ヘリコバクター胃炎（フェレット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0020",
+        "slug": "upper-respiratory-infection-uri",
+        "name": "Upper Respiratory Infection (URI)",
+        "name_ja": "上部気道感染症"
+      },
+      "merged": [
+        {
+          "id": "ferret_0200",
+          "slug": "upper-respiratory-infection",
+          "name": "Upper Respiratory Infection",
+          "name_ja": "上部気道感染症（フェレット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0026",
+        "slug": "skin-squamous-cell-carcinoma",
+        "name": "Skin Squamous Cell Carcinoma",
+        "name_ja": "扁平上皮癌"
+      },
+      "merged": [
+        {
+          "id": "ferret_0180",
+          "slug": "squamous-cell-carcinoma",
+          "name": "Squamous Cell Carcinoma",
+          "name_ja": "扁平上皮癌（フェレット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0032",
+        "slug": "ringworm-dermatophytosis",
+        "name": "Ringworm (Dermatophytosis)",
+        "name_ja": "皮膚糸状菌症"
+      },
+      "merged": [
+        {
+          "id": "ferret_0177",
+          "slug": "dermatophytosis",
+          "name": "Dermatophytosis",
+          "name_ja": "皮膚糸状菌症（フェレット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0036",
+        "slug": "urolithiasis-bladder-stones",
+        "name": "Urolithiasis (Bladder Stones)",
+        "name_ja": "尿路結石症"
+      },
+      "merged": [
+        {
+          "id": "ferret_0189",
+          "slug": "urolithiasis",
+          "name": "Urolithiasis",
+          "name_ja": "尿路結石症（フェレット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0039",
+        "slug": "urinary-tract-infection-uti",
+        "name": "Urinary Tract Infection (UTI)",
+        "name_ja": "尿路感染症"
+      },
+      "merged": [
+        {
+          "id": "ferret_0188",
+          "slug": "urinary-tract-infection",
+          "name": "Urinary Tract Infection",
+          "name_ja": "尿路感染症（フェレット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0040",
+        "slug": "renal-cysts",
+        "name": "Renal Cysts",
+        "name_ja": "腎嚢胞"
+      },
+      "merged": [
+        {
+          "id": "ferret_0243",
+          "slug": "renal-cyst",
+          "name": "Renal Cyst",
+          "name_ja": "腎嚢胞（フェレット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0045",
+        "slug": "posterior-paresis-hind-leg-weakness",
+        "name": "Posterior Paresis / Hind Leg Weakness",
+        "name_ja": "後肢不全麻痺"
+      },
+      "merged": [
+        {
+          "id": "ferret_0208",
+          "slug": "posterior-paresis",
+          "name": "Posterior Paresis",
+          "name_ja": "後肢不全麻痺（フェレット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0046",
+        "slug": "fractures",
+        "name": "Fractures",
+        "name_ja": "骨折"
+      },
+      "merged": [
+        {
+          "id": "ferret_0210",
+          "slug": "fracture",
+          "name": "Fracture",
+          "name_ja": "骨折（フェレット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Hyperadrenocorticism (Cushing's)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0003",
+            "slug": "hyperadrenocorticism-cushing-s",
+            "name": "Hyperadrenocorticism (Cushing's)",
+            "name_ja": "副腎皮質機能亢進症（クッシング症候群）"
+          },
+          {
+            "id": "ferret_0193",
+            "slug": "hyperadrenocorticism",
+            "name": "Hyperadrenocorticism",
+            "name_ja": "副腎皮質機能亢進症（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "GI Foreign Body",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0004",
+            "slug": "gi-foreign-body",
+            "name": "GI Foreign Body",
+            "name_ja": "消化管異物"
+          },
+          {
+            "id": "ferret_0147",
+            "slug": "gastrointestinal-foreign-body-linear",
+            "name": "Gastrointestinal Foreign Body (Linear)",
+            "name_ja": "消化管異物（線状）"
+          }
+        ]
+      },
+      {
+        "base": "Inflammatory Bowel Disease (IBD)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0006",
+            "slug": "inflammatory-bowel-disease-ibd",
+            "name": "Inflammatory Bowel Disease (IBD)",
+            "name_ja": "炎症性腸疾患（IBD）"
+          },
+          {
+            "id": "ferret_0170",
+            "slug": "inflammatory-bowel-disease",
+            "name": "Inflammatory Bowel Disease",
+            "name_ja": "炎症性腸疾患（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0010",
+            "slug": "hepatic-lipidosis-fatty-liver-disease",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "ferret_0174",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0012",
+            "slug": "epizootic-catarrhal-enteritis-ece-green-slime-disease",
+            "name": "Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)",
+            "name_ja": "流行性カタル性腸炎（ECE）"
+          },
+          {
+            "id": "ferret_0166",
+            "slug": "epizootic-catarrhal-enteritis-ece",
+            "name": "Epizootic Catarrhal Enteritis (ECE)",
+            "name_ja": "流行性カタル性腸炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Dilated Cardiomyopathy (DCM)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0014",
+            "slug": "dilated-cardiomyopathy-dcm",
+            "name": "Dilated Cardiomyopathy (DCM)",
+            "name_ja": "拡張型心筋症（DCM）"
+          },
+          {
+            "id": "ferret_0183",
+            "slug": "dilated-cardiomyopathy",
+            "name": "Dilated Cardiomyopathy",
+            "name_ja": "拡張型心筋症（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Hypertrophic Cardiomyopathy (HCM)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0015",
+            "slug": "hypertrophic-cardiomyopathy-hcm",
+            "name": "Hypertrophic Cardiomyopathy (HCM)",
+            "name_ja": "肥大型心筋症（HCM）"
+          },
+          {
+            "id": "ferret_0184",
+            "slug": "hypertrophic-cardiomyopathy",
+            "name": "Hypertrophic Cardiomyopathy",
+            "name_ja": "肥大型心筋症（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Influenza (Human Flu)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0018",
+            "slug": "influenza-human-flu",
+            "name": "Influenza (Human Flu)",
+            "name_ja": "インフルエンザ"
+          },
+          {
+            "id": "ferret_0164",
+            "slug": "influenza-human-influenza",
+            "name": "Influenza (Human Influenza)",
+            "name_ja": "インフルエンザ（ヒトインフルエンザ）（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Mast Cell Tumor (Cutaneous)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0025",
+            "slug": "mast-cell-tumor-cutaneous",
+            "name": "Mast Cell Tumor (Cutaneous)",
+            "name_ja": "肥満細胞腫（皮膚型）"
+          },
+          {
+            "id": "ferret_0179",
+            "slug": "mast-cell-tumor",
+            "name": "Mast Cell Tumor",
+            "name_ja": "肥満細胞腫（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Ear Mites (Otodectes cynotis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0031",
+            "slug": "ear-mites-otodectes-cynotis",
+            "name": "Ear Mites (Otodectes cynotis)",
+            "name_ja": "耳ダニ症"
+          },
+          {
+            "id": "ferret_0176",
+            "slug": "ear-mites-otodectes",
+            "name": "Ear Mites (Otodectes)",
+            "name_ja": "耳ダニ（ミミヒゼンダニ）（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Ringworm (Dermatophytosis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0032",
+            "slug": "ringworm-dermatophytosis",
+            "name": "Ringworm (Dermatophytosis)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "ferret_0177",
+            "slug": "dermatophytosis",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（フェレット）"
+          },
+          {
+            "id": "ferret_0274",
+            "slug": "dermatophytosis-microsporum",
+            "name": "Dermatophytosis (Microsporum)",
+            "name_ja": "皮膚糸状菌症（ミクロスポルム）（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Tail Alopecia (Rat Tail)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0034",
+            "slug": "tail-alopecia-rat-tail",
+            "name": "Tail Alopecia (Rat Tail)",
+            "name_ja": "尾部脱毛（ラットテイル）"
+          },
+          {
+            "id": "ferret_0178",
+            "slug": "tail-alopecia-adrenal",
+            "name": "Tail Alopecia (Adrenal)",
+            "name_ja": "尾部脱毛（副腎性）（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Prostatic Cysts (Adrenal-related)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0037",
+            "slug": "prostatic-cysts-adrenal-related",
+            "name": "Prostatic Cysts (Adrenal-related)",
+            "name_ja": "前立腺嚢胞（副腎関連）"
+          },
+          {
+            "id": "ferret_0195",
+            "slug": "prostatic-cyst",
+            "name": "Prostatic Cyst",
+            "name_ja": "前立腺嚢胞（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Vulvar Swelling (Adrenal-related)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0042",
+            "slug": "vulvar-swelling-adrenal-related",
+            "name": "Vulvar Swelling (Adrenal-related)",
+            "name_ja": "陰門腫脹（副腎関連）"
+          },
+          {
+            "id": "ferret_0196",
+            "slug": "vulvar-swelling-adrenal",
+            "name": "Vulvar Swelling (Adrenal)",
+            "name_ja": "外陰部腫脹（副腎性）（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Prostatic Disease (Adrenal-related)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0043",
+            "slug": "prostatic-disease-adrenal-related",
+            "name": "Prostatic Disease (Adrenal-related)",
+            "name_ja": "前立腺疾患（副腎関連）"
+          },
+          {
+            "id": "ferret_0190",
+            "slug": "prostatic-disease",
+            "name": "Prostatic Disease",
+            "name_ja": "前立腺疾患（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Aleutian Disease (ADV)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0050",
+            "slug": "aleutian-disease-adv",
+            "name": "Aleutian Disease (ADV)",
+            "name_ja": "アリューシャン病（ADV）"
+          },
+          {
+            "id": "ferret_0165",
+            "slug": "aleutian-disease",
+            "name": "Aleutian Disease",
+            "name_ja": "アリューシャン病（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Ferret Systemic Coronavirus (FRSCV)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0054",
+            "slug": "ferret-systemic-coronavirus-frscv",
+            "name": "Ferret Systemic Coronavirus (FRSCV)",
+            "name_ja": "フェレット全身性コロナウイルス感染症"
+          },
+          {
+            "id": "ferret_0167",
+            "slug": "ferret-systemic-coronavirus",
+            "name": "Ferret Systemic Coronavirus",
+            "name_ja": "フェレット全身性コロナウイルス（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Hypoglycemia (Insulinoma-related)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0066",
+            "slug": "hypoglycemia-insulinoma-related",
+            "name": "Hypoglycemia (Insulinoma-related)",
+            "name_ja": "低血糖症（インスリノーマ関連）"
+          },
+          {
+            "id": "ferret_0194",
+            "slug": "hypoglycemia-insulinoma",
+            "name": "Hypoglycemia (Insulinoma)",
+            "name_ja": "低血糖症（インスリノーマ）（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Proliferative Colitis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0078",
+            "slug": "proliferative-colitis",
+            "name": "Proliferative Colitis",
+            "name_ja": "増殖性大腸炎"
+          },
+          {
+            "id": "ferret_0129",
+            "slug": "proliferative-colitis-desulfovibrio",
+            "name": "Proliferative Colitis (Desulfovibrio)",
+            "name_ja": "増殖性大腸炎（デスルフォビブリオ）"
+          }
+        ]
+      },
+      {
+        "base": "Disseminated Idiopathic Myofasciitis (DIM)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0082",
+            "slug": "disseminated-idiopathic-myofasciitis-dim",
+            "name": "Disseminated Idiopathic Myofasciitis (DIM)",
+            "name_ja": "播種性特発性筋膜炎（DIM）"
+          },
+          {
+            "id": "ferret_0213",
+            "slug": "disseminated-idiopathic-myofasciitis",
+            "name": "Disseminated Idiopathic Myofasciitis",
+            "name_ja": "播種性特発性筋膜炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "base": "Osteoma",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "ferret_0088",
+            "slug": "osteoma",
+            "name": "Osteoma",
+            "name_ja": "骨腫"
+          },
+          {
+            "id": "ferret_0143",
+            "slug": "osteoma-skull",
+            "name": "Osteoma (Skull)",
+            "name_ja": "骨腫（頭蓋骨）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "adrena",
+        "size": 12,
+        "members": [
+          {
+            "id": "ferret_0001",
+            "name": "Adrenal Disease",
+            "name_ja": "副腎疾患"
+          },
+          {
+            "id": "ferret_0023",
+            "name": "Adrenal Tumor (Adenoma / Adenocarcinoma)",
+            "name_ja": "副腎腫瘍（腺腫・腺癌）"
+          },
+          {
+            "id": "ferret_0030",
+            "name": "Adrenal Alopecia",
+            "name_ja": "副腎性脱毛"
+          },
+          {
+            "id": "ferret_0084",
+            "name": "Adrenal Cyst",
+            "name_ja": "副腎嚢胞"
+          },
+          {
+            "id": "ferret_0090",
+            "name": "Adrenal Disease - Left Gland",
+            "name_ja": "副腎疾患 - 左腺"
+          },
+          {
+            "id": "ferret_0091",
+            "name": "Adrenal Disease - Right Gland",
+            "name_ja": "副腎疾患 - 右腺"
+          },
+          {
+            "id": "ferret_0092",
+            "name": "Bilateral Adrenal Disease",
+            "name_ja": "両側副腎疾患"
+          },
+          {
+            "id": "ferret_0121",
+            "name": "Adrenal Cortical Carcinoma",
+            "name_ja": "副腎皮質癌"
+          },
+          {
+            "id": "ferret_0153",
+            "name": "Adrenal Disease - GnRH Agonist Response",
+            "name_ja": "副腎疾患 - GnRHアゴニスト反応"
+          },
+          {
+            "id": "ferret_0163",
+            "name": "Adrenal Gland Disease",
+            "name_ja": "副腎疾患（フェレット）"
+          },
+          {
+            "id": "ferret_0222",
+            "name": "Adrenal-Associated Alopecia",
+            "name_ja": "副腎関連脱毛（フェレット）"
+          },
+          {
+            "id": "ferret_0223",
+            "name": "Ferret Adrenal Disease (FAD)",
+            "name_ja": "フェレット副腎疾患（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 10,
+        "members": [
+          {
+            "id": "ferret_0023",
+            "name": "Adrenal Tumor (Adenoma / Adenocarcinoma)",
+            "name_ja": "副腎腫瘍（腺腫・腺癌）"
+          },
+          {
+            "id": "ferret_0025",
+            "name": "Mast Cell Tumor (Cutaneous)",
+            "name_ja": "肥満細胞腫（皮膚型）"
+          },
+          {
+            "id": "ferret_0027",
+            "name": "Sebaceous Gland Tumor",
+            "name_ja": "皮脂腺腫瘍"
+          },
+          {
+            "id": "ferret_0028",
+            "name": "Basal Cell Tumor",
+            "name_ja": "基底細胞腫"
+          },
+          {
+            "id": "ferret_0126",
+            "name": "Preputial Gland Tumor",
+            "name_ja": "包皮腺腫瘍"
+          },
+          {
+            "id": "ferret_0179",
+            "name": "Mast Cell Tumor",
+            "name_ja": "肥満細胞腫（フェレット）"
+          },
+          {
+            "id": "ferret_0192",
+            "name": "Pancreatic Islet Cell Tumor",
+            "name_ja": "膵島細胞腫瘍（フェレット）"
+          },
+          {
+            "id": "ferret_0198",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍（フェレット）"
+          },
+          {
+            "id": "ferret_0244",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍（フェレット）"
+          },
+          {
+            "id": "ferret_0245",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cell",
+        "size": 9,
+        "members": [
+          {
+            "id": "ferret_0025",
+            "name": "Mast Cell Tumor (Cutaneous)",
+            "name_ja": "肥満細胞腫（皮膚型）"
+          },
+          {
+            "id": "ferret_0026",
+            "name": "Skin Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "ferret_0028",
+            "name": "Basal Cell Tumor",
+            "name_ja": "基底細胞腫"
+          },
+          {
+            "id": "ferret_0122",
+            "name": "Islet Cell Carcinoma",
+            "name_ja": "膵島細胞癌"
+          },
+          {
+            "id": "ferret_0124",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          },
+          {
+            "id": "ferret_0125",
+            "name": "Transitional Cell Carcinoma (Bladder)",
+            "name_ja": "移行上皮癌（膀胱）"
+          },
+          {
+            "id": "ferret_0179",
+            "name": "Mast Cell Tumor",
+            "name_ja": "肥満細胞腫（フェレット）"
+          },
+          {
+            "id": "ferret_0180",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌（フェレット）"
+          },
+          {
+            "id": "ferret_0192",
+            "name": "Pancreatic Islet Cell Tumor",
+            "name_ja": "膵島細胞腫瘍（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastri",
+        "size": 9,
+        "members": [
+          {
+            "id": "ferret_0005",
+            "name": "Helicobacter Mustelae Gastritis",
+            "name_ja": "ヘリコバクター胃炎"
+          },
+          {
+            "id": "ferret_0013",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "ferret_0075",
+            "name": "Gastric Dilation / Bloat",
+            "name_ja": "胃拡張・鼓腸"
+          },
+          {
+            "id": "ferret_0099",
+            "name": "Helicobacter Mustelae Gastric Ulcer",
+            "name_ja": "ヘリコバクター・ムステレ胃潰瘍"
+          },
+          {
+            "id": "ferret_0155",
+            "name": "Gastric Hairball Obstruction",
+            "name_ja": "胃毛球閉塞"
+          },
+          {
+            "id": "ferret_0168",
+            "name": "Gastric Foreign Body",
+            "name_ja": "胃内異物（フェレット）"
+          },
+          {
+            "id": "ferret_0172",
+            "name": "Helicobacter Gastritis",
+            "name_ja": "ヘリコバクター胃炎（フェレット）"
+          },
+          {
+            "id": "ferret_0225",
+            "name": "Gastric Helicobacter Ulceration",
+            "name_ja": "ヘリコバクター胃潰瘍（フェレット）"
+          },
+          {
+            "id": "ferret_0227",
+            "name": "Gastric Adenocarcinoma",
+            "name_ja": "胃腺癌（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 7,
+        "members": [
+          {
+            "id": "ferret_0026",
+            "name": "Skin Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "ferret_0121",
+            "name": "Adrenal Cortical Carcinoma",
+            "name_ja": "副腎皮質癌"
+          },
+          {
+            "id": "ferret_0122",
+            "name": "Islet Cell Carcinoma",
+            "name_ja": "膵島細胞癌"
+          },
+          {
+            "id": "ferret_0123",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "ferret_0124",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          },
+          {
+            "id": "ferret_0125",
+            "name": "Transitional Cell Carcinoma (Bladder)",
+            "name_ja": "移行上皮癌（膀胱）"
+          },
+          {
+            "id": "ferret_0180",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enteri",
+        "size": 7,
+        "members": [
+          {
+            "id": "ferret_0007",
+            "name": "Eosinophilic Enteritis",
+            "name_ja": "好酸球性腸炎"
+          },
+          {
+            "id": "ferret_0012",
+            "name": "Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)",
+            "name_ja": "流行性カタル性腸炎（ECE）"
+          },
+          {
+            "id": "ferret_0093",
+            "name": "Epizootic Catarrhal Enteritis (ECE) - Chronic",
+            "name_ja": "流行性カタル性腸炎（ECE）- 慢性型"
+          },
+          {
+            "id": "ferret_0116",
+            "name": "Clostridial Enteritis",
+            "name_ja": "クロストリジウム腸炎"
+          },
+          {
+            "id": "ferret_0117",
+            "name": "Rotavirus Enteritis",
+            "name_ja": "ロタウイルス性腸炎"
+          },
+          {
+            "id": "ferret_0130",
+            "name": "Parvovirus Enteritis",
+            "name_ja": "パルボウイルス腸炎"
+          },
+          {
+            "id": "ferret_0166",
+            "name": "Epizootic Catarrhal Enteritis (ECE)",
+            "name_ja": "流行性カタル性腸炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lympho",
+        "size": 7,
+        "members": [
+          {
+            "id": "ferret_0022",
+            "name": "Lymphoma",
+            "name_ja": "リンパ腫"
+          },
+          {
+            "id": "ferret_0071",
+            "name": "Lymphocytosis / Leukemia",
+            "name_ja": "リンパ球増多症・白血病"
+          },
+          {
+            "id": "ferret_0100",
+            "name": "Intestinal Lymphoma",
+            "name_ja": "腸管リンパ腫"
+          },
+          {
+            "id": "ferret_0101",
+            "name": "Multicentric Lymphoma",
+            "name_ja": "多中心性リンパ腫"
+          },
+          {
+            "id": "ferret_0102",
+            "name": "Mediastinal Lymphoma",
+            "name_ja": "縦隔リンパ腫"
+          },
+          {
+            "id": "ferret_0103",
+            "name": "Cutaneous Lymphoma",
+            "name_ja": "皮膚リンパ腫"
+          },
+          {
+            "id": "ferret_0113",
+            "name": "Splenic Lymphoma",
+            "name_ja": "脾臓リンパ腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 6,
+        "members": [
+          {
+            "id": "ferret_0055",
+            "name": "Bacterial Skin Abscess",
+            "name_ja": "細菌性皮膚膿瘍"
+          },
+          {
+            "id": "ferret_0061",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "ferret_0104",
+            "name": "Prostatic Abscess",
+            "name_ja": "前立腺膿瘍"
+          },
+          {
+            "id": "ferret_0119",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍"
+          },
+          {
+            "id": "ferret_0146",
+            "name": "Anal Gland Abscess",
+            "name_ja": "肛門腺膿瘍"
+          },
+          {
+            "id": "ferret_0218",
+            "name": "Skin Abscess",
+            "name_ja": "皮膚膿瘍（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cyst",
+        "size": 6,
+        "members": [
+          {
+            "id": "ferret_0037",
+            "name": "Prostatic Cysts (Adrenal-related)",
+            "name_ja": "前立腺嚢胞（副腎関連）"
+          },
+          {
+            "id": "ferret_0040",
+            "name": "Renal Cysts",
+            "name_ja": "腎嚢胞"
+          },
+          {
+            "id": "ferret_0084",
+            "name": "Adrenal Cyst",
+            "name_ja": "副腎嚢胞"
+          },
+          {
+            "id": "ferret_0157",
+            "name": "Dermoid Cyst",
+            "name_ja": "類皮嚢胞"
+          },
+          {
+            "id": "ferret_0195",
+            "name": "Prostatic Cyst",
+            "name_ja": "前立腺嚢胞（フェレット）"
+          },
+          {
+            "id": "ferret_0243",
+            "name": "Renal Cyst",
+            "name_ja": "腎嚢胞（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 6,
+        "members": [
+          {
+            "id": "ferret_0046",
+            "name": "Fractures",
+            "name_ja": "骨折"
+          },
+          {
+            "id": "ferret_0060",
+            "name": "Broken / Fractured Teeth",
+            "name_ja": "歯の破折"
+          },
+          {
+            "id": "ferret_0210",
+            "name": "Fracture",
+            "name_ja": "骨折（フェレット）"
+          },
+          {
+            "id": "ferret_0259",
+            "name": "Incisor Fracture",
+            "name_ja": "切歯破折（フェレット）"
+          },
+          {
+            "id": "ferret_0260",
+            "name": "Spinal Fracture",
+            "name_ja": "脊椎骨折（フェレット）"
+          },
+          {
+            "id": "ferret_0261",
+            "name": "Pelvic Fracture",
+            "name_ja": "骨盤骨折（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gland",
+        "size": 6,
+        "members": [
+          {
+            "id": "ferret_0027",
+            "name": "Sebaceous Gland Tumor",
+            "name_ja": "皮脂腺腫瘍"
+          },
+          {
+            "id": "ferret_0090",
+            "name": "Adrenal Disease - Left Gland",
+            "name_ja": "副腎疾患 - 左腺"
+          },
+          {
+            "id": "ferret_0091",
+            "name": "Adrenal Disease - Right Gland",
+            "name_ja": "副腎疾患 - 右腺"
+          },
+          {
+            "id": "ferret_0126",
+            "name": "Preputial Gland Tumor",
+            "name_ja": "包皮腺腫瘍"
+          },
+          {
+            "id": "ferret_0146",
+            "name": "Anal Gland Abscess",
+            "name_ja": "肛門腺膿瘍"
+          },
+          {
+            "id": "ferret_0163",
+            "name": "Adrenal Gland Disease",
+            "name_ja": "副腎疾患（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cardio",
+        "size": 5,
+        "members": [
+          {
+            "id": "ferret_0014",
+            "name": "Dilated Cardiomyopathy (DCM)",
+            "name_ja": "拡張型心筋症（DCM）"
+          },
+          {
+            "id": "ferret_0015",
+            "name": "Hypertrophic Cardiomyopathy (HCM)",
+            "name_ja": "肥大型心筋症（HCM）"
+          },
+          {
+            "id": "ferret_0182",
+            "name": "Cardiomyopathy",
+            "name_ja": "心筋症（フェレット）"
+          },
+          {
+            "id": "ferret_0183",
+            "name": "Dilated Cardiomyopathy",
+            "name_ja": "拡張型心筋症（フェレット）"
+          },
+          {
+            "id": "ferret_0184",
+            "name": "Hypertrophic Cardiomyopathy",
+            "name_ja": "肥大型心筋症（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ferret",
+        "size": 5,
+        "members": [
+          {
+            "id": "ferret_0054",
+            "name": "Ferret Systemic Coronavirus (FRSCV)",
+            "name_ja": "フェレット全身性コロナウイルス感染症"
+          },
+          {
+            "id": "ferret_0094",
+            "name": "Ferret Systemic Coronavirus (FRSCV) - Granulomatous",
+            "name_ja": "フェレット全身性コロナウイルス - 肉芽腫型"
+          },
+          {
+            "id": "ferret_0162",
+            "name": "Ferret Sepsis",
+            "name_ja": "フェレットの敗血症"
+          },
+          {
+            "id": "ferret_0167",
+            "name": "Ferret Systemic Coronavirus",
+            "name_ja": "フェレット全身性コロナウイルス（フェレット）"
+          },
+          {
+            "id": "ferret_0223",
+            "name": "Ferret Adrenal Disease (FAD)",
+            "name_ja": "フェレット副腎疾患（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 5,
+        "members": [
+          {
+            "id": "ferret_0010",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "ferret_0119",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍"
+          },
+          {
+            "id": "ferret_0151",
+            "name": "Chronic Active Hepatitis",
+            "name_ja": "慢性活動性肝炎"
+          },
+          {
+            "id": "ferret_0174",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（フェレット）"
+          },
+          {
+            "id": "ferret_0175",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prosta",
+        "size": 5,
+        "members": [
+          {
+            "id": "ferret_0037",
+            "name": "Prostatic Cysts (Adrenal-related)",
+            "name_ja": "前立腺嚢胞（副腎関連）"
+          },
+          {
+            "id": "ferret_0043",
+            "name": "Prostatic Disease (Adrenal-related)",
+            "name_ja": "前立腺疾患（副腎関連）"
+          },
+          {
+            "id": "ferret_0104",
+            "name": "Prostatic Abscess",
+            "name_ja": "前立腺膿瘍"
+          },
+          {
+            "id": "ferret_0190",
+            "name": "Prostatic Disease",
+            "name_ja": "前立腺疾患（フェレット）"
+          },
+          {
+            "id": "ferret_0195",
+            "name": "Prostatic Cyst",
+            "name_ja": "前立腺嚢胞（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "alopec",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0030",
+            "name": "Adrenal Alopecia",
+            "name_ja": "副腎性脱毛"
+          },
+          {
+            "id": "ferret_0034",
+            "name": "Tail Alopecia (Rat Tail)",
+            "name_ja": "尾部脱毛（ラットテイル）"
+          },
+          {
+            "id": "ferret_0178",
+            "name": "Tail Alopecia (Adrenal)",
+            "name_ja": "尾部脱毛（副腎性）（フェレット）"
+          },
+          {
+            "id": "ferret_0222",
+            "name": "Adrenal-Associated Alopecia",
+            "name_ja": "副腎関連脱毛（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anemia",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0041",
+            "name": "Aplastic Anemia (Estrogen Toxicity)",
+            "name_ja": "再生不良性貧血（エストロゲン中毒）"
+          },
+          {
+            "id": "ferret_0070",
+            "name": "Hyperestrogenism-induced Anemia",
+            "name_ja": "高エストロゲン血症性貧血"
+          },
+          {
+            "id": "ferret_0214",
+            "name": "Anemia",
+            "name_ja": "貧血（フェレット）"
+          },
+          {
+            "id": "ferret_0271",
+            "name": "Hemolytic Anemia",
+            "name_ja": "溶血性貧血（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "body",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0004",
+            "name": "GI Foreign Body",
+            "name_ja": "消化管異物"
+          },
+          {
+            "id": "ferret_0147",
+            "name": "Gastrointestinal Foreign Body (Linear)",
+            "name_ja": "消化管異物（線状）"
+          },
+          {
+            "id": "ferret_0168",
+            "name": "Gastric Foreign Body",
+            "name_ja": "胃内異物（フェレット）"
+          },
+          {
+            "id": "ferret_0169",
+            "name": "Intestinal Foreign Body",
+            "name_ja": "腸内異物（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bowel",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0006",
+            "name": "Inflammatory Bowel Disease (IBD)",
+            "name_ja": "炎症性腸疾患（IBD）"
+          },
+          {
+            "id": "ferret_0170",
+            "name": "Inflammatory Bowel Disease",
+            "name_ja": "炎症性腸疾患（フェレット）"
+          },
+          {
+            "id": "ferret_0173",
+            "name": "Proliferative Bowel Disease",
+            "name_ja": "増殖性腸疾患（フェレット）"
+          },
+          {
+            "id": "ferret_0228",
+            "name": "Bowel Obstruction (Rubber/Foam)",
+            "name_ja": "腸閉塞（ゴム/スポンジ）（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dental",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0058",
+            "name": "Dental Disease / Periodontal Disease",
+            "name_ja": "歯科疾患・歯周病"
+          },
+          {
+            "id": "ferret_0059",
+            "name": "Dental Tartar / Calculus",
+            "name_ja": "歯石"
+          },
+          {
+            "id": "ferret_0203",
+            "name": "Dental Tartar/Gingivitis",
+            "name_ja": "歯石/歯肉炎（フェレット）"
+          },
+          {
+            "id": "ferret_0258",
+            "name": "Dental Caries",
+            "name_ja": "歯のう蝕（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0033",
+            "name": "Flea Dermatitis",
+            "name_ja": "ノミ性皮膚炎"
+          },
+          {
+            "id": "ferret_0144",
+            "name": "Flea Allergy Dermatitis",
+            "name_ja": "ノミアレルギー性皮膚炎"
+          },
+          {
+            "id": "ferret_0177",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（フェレット）"
+          },
+          {
+            "id": "ferret_0274",
+            "name": "Dermatophytosis (Microsporum)",
+            "name_ja": "皮膚糸状菌症（ミクロスポルム）（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dissem",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0082",
+            "name": "Disseminated Idiopathic Myofasciitis (DIM)",
+            "name_ja": "播種性特発性筋膜炎（DIM）"
+          },
+          {
+            "id": "ferret_0115",
+            "name": "Disseminated Idiopathic Myofasciitis (DIM) - Acute",
+            "name_ja": "播種性特発性筋筋膜炎（DIM）- 急性型"
+          },
+          {
+            "id": "ferret_0213",
+            "name": "Disseminated Idiopathic Myofasciitis",
+            "name_ja": "播種性特発性筋膜炎（フェレット）"
+          },
+          {
+            "id": "ferret_0270",
+            "name": "Disseminated Intravascular Coagulation",
+            "name_ja": "播種性血管内凝固（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "foreig",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0004",
+            "name": "GI Foreign Body",
+            "name_ja": "消化管異物"
+          },
+          {
+            "id": "ferret_0147",
+            "name": "Gastrointestinal Foreign Body (Linear)",
+            "name_ja": "消化管異物（線状）"
+          },
+          {
+            "id": "ferret_0168",
+            "name": "Gastric Foreign Body",
+            "name_ja": "胃内異物（フェレット）"
+          },
+          {
+            "id": "ferret_0169",
+            "name": "Intestinal Foreign Body",
+            "name_ja": "腸内異物（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "helico",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0005",
+            "name": "Helicobacter Mustelae Gastritis",
+            "name_ja": "ヘリコバクター胃炎"
+          },
+          {
+            "id": "ferret_0099",
+            "name": "Helicobacter Mustelae Gastric Ulcer",
+            "name_ja": "ヘリコバクター・ムステレ胃潰瘍"
+          },
+          {
+            "id": "ferret_0172",
+            "name": "Helicobacter Gastritis",
+            "name_ja": "ヘリコバクター胃炎（フェレット）"
+          },
+          {
+            "id": "ferret_0225",
+            "name": "Gastric Helicobacter Ulceration",
+            "name_ja": "ヘリコバクター胃潰瘍（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0063",
+            "name": "Intestinal Parasites (Roundworm / Hookworm)",
+            "name_ja": "腸管寄生虫症（回虫・鉤虫）"
+          },
+          {
+            "id": "ferret_0100",
+            "name": "Intestinal Lymphoma",
+            "name_ja": "腸管リンパ腫"
+          },
+          {
+            "id": "ferret_0169",
+            "name": "Intestinal Foreign Body",
+            "name_ja": "腸内異物（フェレット）"
+          },
+          {
+            "id": "ferret_0231",
+            "name": "Intestinal Coccidiosis",
+            "name_ja": "腸管コクシジウム症（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "osteom",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0088",
+            "name": "Osteoma",
+            "name_ja": "骨腫"
+          },
+          {
+            "id": "ferret_0143",
+            "name": "Osteoma (Skull)",
+            "name_ja": "骨腫（頭蓋骨）"
+          },
+          {
+            "id": "ferret_0156",
+            "name": "Jaw Osteoma",
+            "name_ja": "顎骨腫"
+          },
+          {
+            "id": "ferret_0262",
+            "name": "Osteomyelitis",
+            "name_ja": "骨髄炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pancre",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0080",
+            "name": "Pancreatic Exocrine Insufficiency",
+            "name_ja": "膵外分泌不全"
+          },
+          {
+            "id": "ferret_0152",
+            "name": "Pancreatitis",
+            "name_ja": "膵炎"
+          },
+          {
+            "id": "ferret_0192",
+            "name": "Pancreatic Islet Cell Tumor",
+            "name_ja": "膵島細胞腫瘍（フェレット）"
+          },
+          {
+            "id": "ferret_0226",
+            "name": "Pancreatic Adenocarcinoma",
+            "name_ja": "膵腺癌（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0019",
+            "name": "Bacterial Pneumonia",
+            "name_ja": "細菌性肺炎"
+          },
+          {
+            "id": "ferret_0158",
+            "name": "Pneumocystis Pneumonia",
+            "name_ja": "ニューモシスチス肺炎"
+          },
+          {
+            "id": "ferret_0199",
+            "name": "Pneumonia",
+            "name_ja": "肺炎（フェレット）"
+          },
+          {
+            "id": "ferret_0202",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 4,
+        "members": [
+          {
+            "id": "ferret_0040",
+            "name": "Renal Cysts",
+            "name_ja": "腎嚢胞"
+          },
+          {
+            "id": "ferret_0124",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          },
+          {
+            "id": "ferret_0240",
+            "name": "Acute Renal Failure",
+            "name_ja": "急性腎不全（フェレット）"
+          },
+          {
+            "id": "ferret_0243",
+            "name": "Renal Cyst",
+            "name_ja": "腎嚢胞（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "aleuti",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0050",
+            "name": "Aleutian Disease (ADV)",
+            "name_ja": "アリューシャン病（ADV）"
+          },
+          {
+            "id": "ferret_0096",
+            "name": "Aleutian Disease - Chronic Wasting",
+            "name_ja": "アリューシャン病 - 慢性消耗型"
+          },
+          {
+            "id": "ferret_0165",
+            "name": "Aleutian Disease",
+            "name_ja": "アリューシャン病（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "catarr",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0012",
+            "name": "Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)",
+            "name_ja": "流行性カタル性腸炎（ECE）"
+          },
+          {
+            "id": "ferret_0093",
+            "name": "Epizootic Catarrhal Enteritis (ECE) - Chronic",
+            "name_ja": "流行性カタル性腸炎（ECE）- 慢性型"
+          },
+          {
+            "id": "ferret_0166",
+            "name": "Epizootic Catarrhal Enteritis (ECE)",
+            "name_ja": "流行性カタル性腸炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coliti",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0078",
+            "name": "Proliferative Colitis",
+            "name_ja": "増殖性大腸炎"
+          },
+          {
+            "id": "ferret_0129",
+            "name": "Proliferative Colitis (Desulfovibrio)",
+            "name_ja": "増殖性大腸炎（デスルフォビブリオ）"
+          },
+          {
+            "id": "ferret_0229",
+            "name": "Colitis",
+            "name_ja": "大腸炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "corona",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0054",
+            "name": "Ferret Systemic Coronavirus (FRSCV)",
+            "name_ja": "フェレット全身性コロナウイルス感染症"
+          },
+          {
+            "id": "ferret_0094",
+            "name": "Ferret Systemic Coronavirus (FRSCV) - Granulomatous",
+            "name_ja": "フェレット全身性コロナウイルス - 肉芽腫型"
+          },
+          {
+            "id": "ferret_0167",
+            "name": "Ferret Systemic Coronavirus",
+            "name_ja": "フェレット全身性コロナウイルス（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "crypto",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0065",
+            "name": "Cryptosporidiosis",
+            "name_ja": "クリプトスポリジウム症"
+          },
+          {
+            "id": "ferret_0132",
+            "name": "Cryptococcosis",
+            "name_ja": "クリプトコッカス症"
+          },
+          {
+            "id": "ferret_0197",
+            "name": "Cryptorchidism",
+            "name_ja": "潜在精巣（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0265",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（フェレット）"
+          },
+          {
+            "id": "ferret_0266",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（フェレット）"
+          },
+          {
+            "id": "ferret_0267",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "epizoo",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0012",
+            "name": "Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)",
+            "name_ja": "流行性カタル性腸炎（ECE）"
+          },
+          {
+            "id": "ferret_0093",
+            "name": "Epizootic Catarrhal Enteritis (ECE) - Chronic",
+            "name_ja": "流行性カタル性腸炎（ECE）- 慢性型"
+          },
+          {
+            "id": "ferret_0166",
+            "name": "Epizootic Catarrhal Enteritis (ECE)",
+            "name_ja": "流行性カタル性腸炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "flea",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0033",
+            "name": "Flea Dermatitis",
+            "name_ja": "ノミ性皮膚炎"
+          },
+          {
+            "id": "ferret_0062",
+            "name": "Flea Infestation",
+            "name_ja": "ノミ寄生症"
+          },
+          {
+            "id": "ferret_0144",
+            "name": "Flea Allergy Dermatitis",
+            "name_ja": "ノミアレルギー性皮膚炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "heart",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0016",
+            "name": "Valvular Heart Disease",
+            "name_ja": "弁膜症"
+          },
+          {
+            "id": "ferret_0112",
+            "name": "Third-Degree Heart Block",
+            "name_ja": "第三度房室ブロック"
+          },
+          {
+            "id": "ferret_0185",
+            "name": "Congestive Heart Failure",
+            "name_ja": "うっ血性心不全（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "heartw",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0017",
+            "name": "Heartworm Disease",
+            "name_ja": "フィラリア症"
+          },
+          {
+            "id": "ferret_0110",
+            "name": "Heartworm Disease - Caval Syndrome",
+            "name_ja": "フィラリア症 - 大静脈症候群"
+          },
+          {
+            "id": "ferret_0232",
+            "name": "Heartworm (Dirofilaria)",
+            "name_ja": "犬糸状虫症（ジロフィラリア）（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepato",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0083",
+            "name": "Hepatomegaly",
+            "name_ja": "肝腫大"
+          },
+          {
+            "id": "ferret_0123",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "ferret_0272",
+            "name": "Hepatocellular Adenoma",
+            "name_ja": "肝細胞腺腫（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "idiopa",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0082",
+            "name": "Disseminated Idiopathic Myofasciitis (DIM)",
+            "name_ja": "播種性特発性筋膜炎（DIM）"
+          },
+          {
+            "id": "ferret_0115",
+            "name": "Disseminated Idiopathic Myofasciitis (DIM) - Acute",
+            "name_ja": "播種性特発性筋筋膜炎（DIM）- 急性型"
+          },
+          {
+            "id": "ferret_0213",
+            "name": "Disseminated Idiopathic Myofasciitis",
+            "name_ja": "播種性特発性筋膜炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "influe",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0018",
+            "name": "Influenza (Human Flu)",
+            "name_ja": "インフルエンザ"
+          },
+          {
+            "id": "ferret_0097",
+            "name": "Influenza A (Severe)",
+            "name_ja": "インフルエンザA型（重症）"
+          },
+          {
+            "id": "ferret_0164",
+            "name": "Influenza (Human Influenza)",
+            "name_ja": "インフルエンザ（ヒトインフルエンザ）（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "myofas",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0082",
+            "name": "Disseminated Idiopathic Myofasciitis (DIM)",
+            "name_ja": "播種性特発性筋膜炎（DIM）"
+          },
+          {
+            "id": "ferret_0115",
+            "name": "Disseminated Idiopathic Myofasciitis (DIM) - Acute",
+            "name_ja": "播種性特発性筋筋膜炎（DIM）- 急性型"
+          },
+          {
+            "id": "ferret_0213",
+            "name": "Disseminated Idiopathic Myofasciitis",
+            "name_ja": "播種性特発性筋膜炎（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "obstru",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0105",
+            "name": "Urethral Obstruction (Prostatic)",
+            "name_ja": "尿道閉塞（前立腺性）"
+          },
+          {
+            "id": "ferret_0155",
+            "name": "Gastric Hairball Obstruction",
+            "name_ja": "胃毛球閉塞"
+          },
+          {
+            "id": "ferret_0228",
+            "name": "Bowel Obstruction (Rubber/Foam)",
+            "name_ja": "腸閉塞（ゴム/スポンジ）（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolif",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0078",
+            "name": "Proliferative Colitis",
+            "name_ja": "増殖性大腸炎"
+          },
+          {
+            "id": "ferret_0129",
+            "name": "Proliferative Colitis (Desulfovibrio)",
+            "name_ja": "増殖性大腸炎（デスルフォビブリオ）"
+          },
+          {
+            "id": "ferret_0173",
+            "name": "Proliferative Bowel Disease",
+            "name_ja": "増殖性腸疾患（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "seizur",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0053",
+            "name": "Seizure Disorder (Epilepsy)",
+            "name_ja": "てんかん（痙攣性疾患）"
+          },
+          {
+            "id": "ferret_0209",
+            "name": "Seizures",
+            "name_ja": "痙攣発作（フェレット）"
+          },
+          {
+            "id": "ferret_0238",
+            "name": "Toxin-Induced Seizures",
+            "name_ja": "中毒性痙攣（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "skin",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0026",
+            "name": "Skin Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "ferret_0055",
+            "name": "Bacterial Skin Abscess",
+            "name_ja": "細菌性皮膚膿瘍"
+          },
+          {
+            "id": "ferret_0218",
+            "name": "Skin Abscess",
+            "name_ja": "皮膚膿瘍（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spinal",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0141",
+            "name": "Spinal Cord Compression",
+            "name_ja": "脊髄圧迫"
+          },
+          {
+            "id": "ferret_0239",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（フェレット）"
+          },
+          {
+            "id": "ferret_0260",
+            "name": "Spinal Fracture",
+            "name_ja": "脊椎骨折（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "system",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0054",
+            "name": "Ferret Systemic Coronavirus (FRSCV)",
+            "name_ja": "フェレット全身性コロナウイルス感染症"
+          },
+          {
+            "id": "ferret_0094",
+            "name": "Ferret Systemic Coronavirus (FRSCV) - Granulomatous",
+            "name_ja": "フェレット全身性コロナウイルス - 肉芽腫型"
+          },
+          {
+            "id": "ferret_0167",
+            "name": "Ferret Systemic Coronavirus",
+            "name_ja": "フェレット全身性コロナウイルス（フェレット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ulcer",
+        "size": 3,
+        "members": [
+          {
+            "id": "ferret_0013",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "ferret_0077",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍"
+          },
+          {
+            "id": "ferret_0099",
+            "name": "Helicobacter Mustelae Gastric Ulcer",
+            "name_ja": "ヘリコバクター・ムステレ胃潰瘍"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -2148,8 +2148,8 @@
         "id": "hamster_0012",
         "name": "Cheek Pouch Impaction",
         "name_ja": "頬袋閉塞",
-        "treatment_ja_len": 338,
-        "treatment_len": 381,
+        "treatment_ja_len": 348,
+        "treatment_len": 405,
         "has_dosage": false
       },
       {
@@ -2180,8 +2180,8 @@
         "id": "hamster_0039",
         "name": "Obesity",
         "name_ja": "肥満",
-        "treatment_ja_len": 475,
-        "treatment_len": 573,
+        "treatment_ja_len": 485,
+        "treatment_len": 597,
         "has_dosage": false
       },
       {
@@ -2196,40 +2196,40 @@
         "id": "hamster_0043",
         "name": "Cardiomyopathy",
         "name_ja": "心筋症",
-        "treatment_ja_len": 504,
-        "treatment_len": 624,
+        "treatment_ja_len": 514,
+        "treatment_len": 648,
         "has_dosage": false
       },
       {
         "id": "hamster_0044",
         "name": "Congestive Heart Failure",
         "name_ja": "うっ血性心不全",
-        "treatment_ja_len": 347,
-        "treatment_len": 413,
+        "treatment_ja_len": 357,
+        "treatment_len": 437,
         "has_dosage": false
       },
       {
         "id": "hamster_0053",
         "name": "Cataracts",
         "name_ja": "白内障",
-        "treatment_ja_len": 478,
-        "treatment_len": 502,
+        "treatment_ja_len": 488,
+        "treatment_len": 526,
         "has_dosage": false
       },
       {
         "id": "hamster_0062",
         "name": "Septicemia",
         "name_ja": "敗血症",
-        "treatment_ja_len": 561,
-        "treatment_len": 568,
+        "treatment_ja_len": 571,
+        "treatment_len": 592,
         "has_dosage": false
       },
       {
         "id": "hamster_0071",
         "name": "Antibiotic Toxicity",
         "name_ja": "抗生物質中毒",
-        "treatment_ja_len": 471,
-        "treatment_len": 494,
+        "treatment_ja_len": 481,
+        "treatment_len": 518,
         "has_dosage": false
       },
       {
@@ -2268,8 +2268,8 @@
         "id": "hamster_0116",
         "name": "Pneumothorax",
         "name_ja": "気胸",
-        "treatment_ja_len": 436,
-        "treatment_len": 439,
+        "treatment_ja_len": 446,
+        "treatment_len": 463,
         "has_dosage": false
       },
       {
@@ -2284,8 +2284,8 @@
         "id": "hamster_0143",
         "name": "Bite Wound Abscess",
         "name_ja": "咬傷膿瘍",
-        "treatment_ja_len": 734,
-        "treatment_len": 683,
+        "treatment_ja_len": 744,
+        "treatment_len": 707,
         "has_dosage": false
       },
       {
@@ -2300,8 +2300,8 @@
         "id": "hamster_0147",
         "name": "Fur Mites (Demodex criceti)",
         "name_ja": "毛包虫症（デモデックス・クリセティ）",
-        "treatment_ja_len": 415,
-        "treatment_len": 697,
+        "treatment_ja_len": 425,
+        "treatment_len": 721,
         "has_dosage": false
       },
       {
@@ -2316,8 +2316,8 @@
         "id": "hamster_0152",
         "name": "Zinc Toxicosis",
         "name_ja": "亜鉛中毒",
-        "treatment_ja_len": 648,
-        "treatment_len": 626,
+        "treatment_ja_len": 658,
+        "treatment_len": 650,
         "has_dosage": false
       },
       {
@@ -2380,8 +2380,8 @@
         "id": "hamster_0314",
         "name": "Protein Malnutrition",
         "name_ja": "蛋白質栄養不良（ハムスター）",
-        "treatment_ja_len": 675,
-        "treatment_len": 1364,
+        "treatment_ja_len": 685,
+        "treatment_len": 1388,
         "has_dosage": false
       }
     ]
@@ -2392,7 +2392,7 @@
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 104,
-    "citation_mismatch_count": 19,
+    "citation_mismatch_count": 16,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
@@ -4037,15 +4037,6 @@
     ],
     "citation_mismatches": [
       {
-        "id": "hamster_0015",
-        "name": "Dental Malocclusion",
-        "name_ja": "不正咬合",
-        "matched_keys": [
-          "malocclusion"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
         "id": "hamster_0023",
         "name": "Ringworm (Dermatophytosis)",
         "name_ja": "皮膚糸状菌症",
@@ -4163,29 +4154,11 @@
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
       {
-        "id": "hamster_0249",
-        "name": "Incisor Malocclusion",
-        "name_ja": "切歯不正咬合（ハムスター）",
-        "matched_keys": [
-          "malocclusion"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
         "id": "hamster_0280",
         "name": "Anemia",
         "name_ja": "貧血（ハムスター）",
         "matched_keys": [
           "immune-mediated hemolytic anemia"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "hamster_0298",
-        "name": "Molar Malocclusion",
-        "name_ja": "臼歯不正咬合（ハムスター）",
-        "matched_keys": [
-          "malocclusion"
         ],
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },

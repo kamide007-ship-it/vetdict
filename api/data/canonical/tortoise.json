@@ -1,0 +1,1745 @@
+{
+  "species": "tortoise",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 288,
+    "merge_clusters": 9,
+    "records_merged_away": 9,
+    "archived": 0,
+    "served_after": 279
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "tortoise_0015",
+        "slug": "pinworm-oxyurid-infection",
+        "name": "Pinworm (Oxyurid) Infection",
+        "name_ja": "蟯虫感染"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0173",
+          "slug": "oxyurid-infection",
+          "name": "Oxyurid Infection",
+          "name_ja": "蟯虫感染（リクガメ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0023",
+        "slug": "vitamin-a-deficiency-hypovitaminosis-a",
+        "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+        "name_ja": "ビタミンA欠乏症"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0249",
+          "slug": "vitamin-a-deficiency",
+          "name": "Vitamin A Deficiency",
+          "name_ja": "ビタミンA欠乏症（リクガメ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0039",
+        "slug": "renal-failure-chronic-kidney-disease",
+        "name": "Renal Failure (Chronic Kidney Disease)",
+        "name_ja": "腎不全"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0207",
+          "slug": "renal-failure",
+          "name": "Renal Failure",
+          "name_ja": "腎不全（リクガメ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0040",
+        "slug": "bladder-stones-urolithiasis",
+        "name": "Bladder Stones (Urolithiasis)",
+        "name_ja": "膀胱結石"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0209",
+          "slug": "bladder-stone",
+          "name": "Bladder Stone",
+          "name_ja": "膀胱結石（リクガメ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0046",
+        "slug": "thermal-burns",
+        "name": "Thermal Burns",
+        "name_ja": "熱傷"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0257",
+          "slug": "burns",
+          "name": "Burns",
+          "name_ja": "熱傷（リクガメ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0051",
+        "slug": "aural-abscess-ear-abscess",
+        "name": "Aural Abscess (Ear Abscess)",
+        "name_ja": "耳膿瘍"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0169",
+          "slug": "ear-abscess-aural-abscess",
+          "name": "Ear Abscess (Aural Abscess)",
+          "name_ja": "耳膿瘍（リクガメ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0092",
+        "slug": "bone-fracture-limb",
+        "name": "Bone Fracture (Limb)",
+        "name_ja": "四肢骨折"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0232",
+          "slug": "fracture-limb",
+          "name": "Fracture (Limb)",
+          "name_ja": "四肢骨折（リクガメ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0124",
+        "slug": "ovarian-neoplasia",
+        "name": "Ovarian Neoplasia",
+        "name_ja": "卵巣腫瘍"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0214",
+          "slug": "ovarian-tumor",
+          "name": "Ovarian Tumor",
+          "name_ja": "卵巣腫瘍（リクガメ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0126",
+        "slug": "lead-toxicosis",
+        "name": "Lead Toxicosis",
+        "name_ja": "鉛中毒"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0254",
+          "slug": "lead-poisoning",
+          "name": "Lead Poisoning",
+          "name_ja": "鉛中毒（リクガメ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Shell Rot (Ulcerative Shell Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0000",
+            "slug": "shell-rot-ulcerative-shell-disease",
+            "name": "Shell Rot (Ulcerative Shell Disease)",
+            "name_ja": "甲羅腐敗症"
+          },
+          {
+            "id": "tortoise_0167",
+            "slug": "shell-rot",
+            "name": "Shell Rot",
+            "name_ja": "甲羅腐敗（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Pneumonia (Lower Respiratory Infection)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0006",
+            "slug": "pneumonia-lower-respiratory-infection",
+            "name": "Pneumonia (Lower Respiratory Infection)",
+            "name_ja": "肺炎（下部呼吸器感染症）"
+          },
+          {
+            "id": "tortoise_0224",
+            "slug": "pneumonia",
+            "name": "Pneumonia",
+            "name_ja": "肺炎（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0032",
+            "slug": "hepatic-lipidosis-fatty-liver-disease",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "tortoise_0215",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Bladder Stones (Urolithiasis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0040",
+            "slug": "bladder-stones-urolithiasis",
+            "name": "Bladder Stones (Urolithiasis)",
+            "name_ja": "膀胱結石"
+          },
+          {
+            "id": "tortoise_0158",
+            "slug": "cystic-calculi-bladder-stones-urate",
+            "name": "Cystic Calculi (Bladder Stones) - Urate",
+            "name_ja": "膀胱結石（尿酸塩型）"
+          },
+          {
+            "id": "tortoise_0176",
+            "slug": "bladder-stone-urate",
+            "name": "Bladder Stone (Urate)",
+            "name_ja": "膀胱結石（尿酸塩）（リクガメ）"
+          },
+          {
+            "id": "tortoise_0209",
+            "slug": "bladder-stone",
+            "name": "Bladder Stone",
+            "name_ja": "膀胱結石（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Egg Binding (Dystocia)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0043",
+            "slug": "egg-binding-dystocia",
+            "name": "Egg Binding (Dystocia)",
+            "name_ja": "卵塞（難産）"
+          },
+          {
+            "id": "tortoise_0162",
+            "slug": "egg-binding-dystocia",
+            "name": "Egg Binding (Dystocia)",
+            "name_ja": "卵塞（卵詰まり）"
+          }
+        ]
+      },
+      {
+        "base": "Abscess (Subcutaneous)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0050",
+            "slug": "abscess-subcutaneous",
+            "name": "Abscess (Subcutaneous)",
+            "name_ja": "皮下膿瘍"
+          },
+          {
+            "id": "tortoise_0201",
+            "slug": "abscess",
+            "name": "Abscess",
+            "name_ja": "膿瘍（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Hyperthermia (Heat Stroke)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0063",
+            "slug": "hyperthermia-heat-stroke",
+            "name": "Hyperthermia (Heat Stroke)",
+            "name_ja": "高体温症（熱中症）"
+          },
+          {
+            "id": "tortoise_0253",
+            "slug": "hyperthermia",
+            "name": "Hyperthermia",
+            "name_ja": "高体温症（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Calcium Deficiency (Dietary Hypocalcemia)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0072",
+            "slug": "calcium-deficiency-dietary-hypocalcemia",
+            "name": "Calcium Deficiency (Dietary Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（食事性低カルシウム血症）"
+          },
+          {
+            "id": "tortoise_0250",
+            "slug": "calcium-deficiency",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Eye Infection (Infectious Ophthalmitis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0075",
+            "slug": "eye-infection-infectious-ophthalmitis",
+            "name": "Eye Infection (Infectious Ophthalmitis)",
+            "name_ja": "眼感染症（感染性眼炎）"
+          },
+          {
+            "id": "tortoise_0231",
+            "slug": "eye-infection",
+            "name": "Eye Infection",
+            "name_ja": "眼感染症（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Mite Infestation",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0079",
+            "slug": "mite-infestation",
+            "name": "Mite Infestation",
+            "name_ja": "ダニ寄生"
+          },
+          {
+            "id": "tortoise_0190",
+            "slug": "mite-infestation-ophionyssus",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Bone Fracture (Limb)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0092",
+            "slug": "bone-fracture-limb",
+            "name": "Bone Fracture (Limb)",
+            "name_ja": "四肢骨折"
+          },
+          {
+            "id": "tortoise_0232",
+            "slug": "fracture-limb",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（リクガメ）"
+          },
+          {
+            "id": "tortoise_0233",
+            "slug": "fracture-shell-carapace",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Mycobacteriosis (Turtle Tuberculosis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0097",
+            "slug": "mycobacteriosis-turtle-tuberculosis",
+            "name": "Mycobacteriosis (Turtle Tuberculosis)",
+            "name_ja": "マイコバクテリア症（カメ結核）"
+          },
+          {
+            "id": "tortoise_0186",
+            "slug": "mycobacteriosis",
+            "name": "Mycobacteriosis",
+            "name_ja": "マイコバクテリウム症（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Follicular Stasis (Chronic)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0116",
+            "slug": "follicular-stasis-chronic",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          },
+          {
+            "id": "tortoise_0178",
+            "slug": "follicular-stasis",
+            "name": "Follicular Stasis",
+            "name_ja": "卵胞停滞（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Gout (Visceral)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0205",
+            "slug": "gout-visceral",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（リクガメ）"
+          },
+          {
+            "id": "tortoise_0206",
+            "slug": "gout-articular",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（リクガメ）"
+          }
+        ]
+      },
+      {
+        "base": "Anorexia (Behavioral)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "tortoise_0221",
+            "slug": "anorexia-behavioral",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（リクガメ）"
+          },
+          {
+            "id": "tortoise_0262",
+            "slug": "anorexia-stress-related",
+            "name": "Anorexia (Stress-Related)",
+            "name_ja": "ストレス性拒食（リクガメ）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "respir",
+        "size": 12,
+        "members": [
+          {
+            "id": "tortoise_0005",
+            "name": "Upper Respiratory Tract Infection (URTI)",
+            "name_ja": "上部呼吸器感染症"
+          },
+          {
+            "id": "tortoise_0145",
+            "name": "Chronic Respiratory Disease Complex",
+            "name_ja": "慢性呼吸器疾患複合"
+          },
+          {
+            "id": "tortoise_0179",
+            "name": "Respiratory Infection",
+            "name_ja": "呼吸器感染症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0225",
+            "name": "Upper Respiratory Tract Disease",
+            "name_ja": "上部気道疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0276",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0277",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0278",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0279",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0280",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（リクガメ）"
+          },
+          {
+            "id": "tortoise_0281",
+            "name": "Respiratory Inflammatory Disease",
+            "name_ja": "呼吸器炎症性疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0282",
+            "name": "Lower Respiratory Tract Infection",
+            "name_ja": "下部気道感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0283",
+            "name": "Chronic Respiratory Disease",
+            "name_ja": "慢性呼吸器疾患（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastro",
+        "size": 10,
+        "members": [
+          {
+            "id": "tortoise_0029",
+            "name": "Gastrointestinal Impaction (Constipation)",
+            "name_ja": "消化管閉塞（便秘）"
+          },
+          {
+            "id": "tortoise_0031",
+            "name": "Gastroenteritis",
+            "name_ja": "胃腸炎"
+          },
+          {
+            "id": "tortoise_0268",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0269",
+            "name": "Gastrointestinal Viral Infection",
+            "name_ja": "消化管ウイルス感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0270",
+            "name": "Gastrointestinal Fungal Infection",
+            "name_ja": "消化管真菌感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0271",
+            "name": "Gastrointestinal Parasitic Disease",
+            "name_ja": "消化管寄生虫疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0272",
+            "name": "Gastrointestinal Neoplasia",
+            "name_ja": "消化管腫瘍（リクガメ）"
+          },
+          {
+            "id": "tortoise_0273",
+            "name": "Gastrointestinal Inflammatory Disease",
+            "name_ja": "消化管炎症性疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0274",
+            "name": "Gastrointestinal Motility Disorder",
+            "name_ja": "消化管運動障害（リクガメ）"
+          },
+          {
+            "id": "tortoise_0275",
+            "name": "Gastrointestinal Obstruction (Partial)",
+            "name_ja": "消化管部分閉塞（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "shell",
+        "size": 10,
+        "members": [
+          {
+            "id": "tortoise_0000",
+            "name": "Shell Rot (Ulcerative Shell Disease)",
+            "name_ja": "甲羅腐敗症"
+          },
+          {
+            "id": "tortoise_0002",
+            "name": "Shell Fracture / Trauma",
+            "name_ja": "甲羅骨折・外傷"
+          },
+          {
+            "id": "tortoise_0004",
+            "name": "Soft Shell (Metabolic Bone Disease in Chelonians)",
+            "name_ja": "甲羅軟化（カメの代謝性骨疾患）"
+          },
+          {
+            "id": "tortoise_0054",
+            "name": "Fungal Shell Disease",
+            "name_ja": "真菌性甲羅疾患"
+          },
+          {
+            "id": "tortoise_0055",
+            "name": "Algae Growth on Shell",
+            "name_ja": "甲羅の藻類付着"
+          },
+          {
+            "id": "tortoise_0104",
+            "name": "Fusarium Shell Infection",
+            "name_ja": "フザリウム甲羅感染症"
+          },
+          {
+            "id": "tortoise_0112",
+            "name": "Shell Abscess",
+            "name_ja": "甲羅膿瘍"
+          },
+          {
+            "id": "tortoise_0113",
+            "name": "Shell Deformity (Congenital)",
+            "name_ja": "甲羅奇形（先天性）"
+          },
+          {
+            "id": "tortoise_0161",
+            "name": "Shell Pyramiding",
+            "name_ja": "甲羅のピラミッド化（甲板隆起）"
+          },
+          {
+            "id": "tortoise_0167",
+            "name": "Shell Rot",
+            "name_ja": "甲羅腐敗（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 9,
+        "members": [
+          {
+            "id": "tortoise_0023",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "tortoise_0025",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "tortoise_0072",
+            "name": "Calcium Deficiency (Dietary Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（食事性低カルシウム血症）"
+          },
+          {
+            "id": "tortoise_0134",
+            "name": "UV Light Deficiency",
+            "name_ja": "紫外線不足症"
+          },
+          {
+            "id": "tortoise_0135",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "tortoise_0136",
+            "name": "Protein Deficiency",
+            "name_ja": "タンパク質欠乏・栄養不良"
+          },
+          {
+            "id": "tortoise_0151",
+            "name": "Vitamin C Deficiency",
+            "name_ja": "ビタミンC欠乏症"
+          },
+          {
+            "id": "tortoise_0249",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0250",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 9,
+        "members": [
+          {
+            "id": "tortoise_0032",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "tortoise_0215",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（リクガメ）"
+          },
+          {
+            "id": "tortoise_0216",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（リクガメ）"
+          },
+          {
+            "id": "tortoise_0217",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（リクガメ）"
+          },
+          {
+            "id": "tortoise_0263",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0264",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0265",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0266",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0267",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 8,
+        "members": [
+          {
+            "id": "tortoise_0053",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "tortoise_0155",
+            "name": "Photosensitization Dermatitis",
+            "name_ja": "光線過敏性皮膚炎"
+          },
+          {
+            "id": "tortoise_0187",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0203",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（リクガメ）"
+          },
+          {
+            "id": "tortoise_0284",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0285",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0286",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0287",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 7,
+        "members": [
+          {
+            "id": "tortoise_0037",
+            "name": "Periocular Abscess",
+            "name_ja": "眼周囲膿瘍"
+          },
+          {
+            "id": "tortoise_0050",
+            "name": "Abscess (Subcutaneous)",
+            "name_ja": "皮下膿瘍"
+          },
+          {
+            "id": "tortoise_0051",
+            "name": "Aural Abscess (Ear Abscess)",
+            "name_ja": "耳膿瘍"
+          },
+          {
+            "id": "tortoise_0112",
+            "name": "Shell Abscess",
+            "name_ja": "甲羅膿瘍"
+          },
+          {
+            "id": "tortoise_0169",
+            "name": "Ear Abscess (Aural Abscess)",
+            "name_ja": "耳膿瘍（リクガメ）"
+          },
+          {
+            "id": "tortoise_0201",
+            "name": "Abscess",
+            "name_ja": "膿瘍（リクガメ）"
+          },
+          {
+            "id": "tortoise_0228",
+            "name": "Subspectacular Abscess",
+            "name_ja": "眼鏡鱗下膿瘍（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 6,
+        "members": [
+          {
+            "id": "tortoise_0056",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "tortoise_0057",
+            "name": "Penile Prolapse",
+            "name_ja": "陰茎脱出"
+          },
+          {
+            "id": "tortoise_0078",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱出"
+          },
+          {
+            "id": "tortoise_0157",
+            "name": "Prolapsed Bladder",
+            "name_ja": "膀胱脱"
+          },
+          {
+            "id": "tortoise_0212",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（リクガメ）"
+          },
+          {
+            "id": "tortoise_0222",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tortoi",
+        "size": 6,
+        "members": [
+          {
+            "id": "tortoise_0013",
+            "name": "Tortoise Intranuclear Coccidia (TINC)",
+            "name_ja": "リクガメ核内コクシジウム症"
+          },
+          {
+            "id": "tortoise_0163",
+            "name": "Tortoise Urolithiasis (Bladder Stone)",
+            "name_ja": "リクガメ尿石症（膀胱結石）"
+          },
+          {
+            "id": "tortoise_0164",
+            "name": "Tortoise Hexamita parva Infection",
+            "name_ja": "リクガメヘキサミタ症（Hexamita parva感染症）"
+          },
+          {
+            "id": "tortoise_0165",
+            "name": "Tortoise Herpesvirus",
+            "name_ja": "リクガメヘルペスウイルス（リクガメ）"
+          },
+          {
+            "id": "tortoise_0168",
+            "name": "Tortoise Ranavirus",
+            "name_ja": "リクガメラナウイルス（リクガメ）"
+          },
+          {
+            "id": "tortoise_0175",
+            "name": "Horsfield's Tortoise Runny Nose Syndrome",
+            "name_ja": "ホルスフィールドリクガメ鼻汁症候群（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bacter",
+        "size": 5,
+        "members": [
+          {
+            "id": "tortoise_0053",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "tortoise_0263",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0268",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0276",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0284",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 5,
+        "members": [
+          {
+            "id": "tortoise_0002",
+            "name": "Shell Fracture / Trauma",
+            "name_ja": "甲羅骨折・外傷"
+          },
+          {
+            "id": "tortoise_0092",
+            "name": "Bone Fracture (Limb)",
+            "name_ja": "四肢骨折"
+          },
+          {
+            "id": "tortoise_0139",
+            "name": "Spinal Trauma / Vertebral Fracture",
+            "name_ja": "脊椎外傷・椎体骨折"
+          },
+          {
+            "id": "tortoise_0232",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（リクガメ）"
+          },
+          {
+            "id": "tortoise_0233",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 5,
+        "members": [
+          {
+            "id": "tortoise_0020",
+            "name": "Tick Infestation",
+            "name_ja": "マダニ寄生"
+          },
+          {
+            "id": "tortoise_0079",
+            "name": "Mite Infestation",
+            "name_ja": "ダニ寄生"
+          },
+          {
+            "id": "tortoise_0080",
+            "name": "Leech Infestation",
+            "name_ja": "ヒル寄生"
+          },
+          {
+            "id": "tortoise_0190",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（リクガメ）"
+          },
+          {
+            "id": "tortoise_0287",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stasi",
+        "size": 5,
+        "members": [
+          {
+            "id": "tortoise_0044",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "tortoise_0116",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          },
+          {
+            "id": "tortoise_0177",
+            "name": "Reproductive Stasis",
+            "name_ja": "生殖停滞（リクガメ）"
+          },
+          {
+            "id": "tortoise_0178",
+            "name": "Follicular Stasis",
+            "name_ja": "卵胞停滞（リクガメ）"
+          },
+          {
+            "id": "tortoise_0210",
+            "name": "Post-Ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 5,
+        "members": [
+          {
+            "id": "tortoise_0066",
+            "name": "Toxicosis (Poisoning)",
+            "name_ja": "中毒症"
+          },
+          {
+            "id": "tortoise_0125",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "tortoise_0126",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "tortoise_0127",
+            "name": "Ivermectin Toxicosis",
+            "name_ja": "イベルメクチン中毒"
+          },
+          {
+            "id": "tortoise_0128",
+            "name": "Metronidazole Toxicosis",
+            "name_ja": "メトロニダゾール中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anorex",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0076",
+            "name": "Chronic Anorexia Syndrome",
+            "name_ja": "慢性食欲不振症候群"
+          },
+          {
+            "id": "tortoise_0087",
+            "name": "Post-hibernation Anorexia",
+            "name_ja": "冬眠後食欲不振"
+          },
+          {
+            "id": "tortoise_0221",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（リクガメ）"
+          },
+          {
+            "id": "tortoise_0262",
+            "name": "Anorexia (Stress-Related)",
+            "name_ja": "ストレス性拒食（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bladde",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0040",
+            "name": "Bladder Stones (Urolithiasis)",
+            "name_ja": "膀胱結石"
+          },
+          {
+            "id": "tortoise_0157",
+            "name": "Prolapsed Bladder",
+            "name_ja": "膀胱脱"
+          },
+          {
+            "id": "tortoise_0176",
+            "name": "Bladder Stone (Urate)",
+            "name_ja": "膀胱結石（尿酸塩）（リクガメ）"
+          },
+          {
+            "id": "tortoise_0209",
+            "name": "Bladder Stone",
+            "name_ja": "膀胱結石（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coelom",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0067",
+            "name": "Peritonitis / Coelomitis",
+            "name_ja": "腹膜炎・体腔炎"
+          },
+          {
+            "id": "tortoise_0088",
+            "name": "Coelomic Effusion (Ascites)",
+            "name_ja": "体腔液貯留（腹水）"
+          },
+          {
+            "id": "tortoise_0115",
+            "name": "Egg-related Coelomitis",
+            "name_ja": "卵関連体腔炎"
+          },
+          {
+            "id": "tortoise_0211",
+            "name": "Egg Yolk Coelomitis",
+            "name_ja": "卵黄体腔炎（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fungal",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0054",
+            "name": "Fungal Shell Disease",
+            "name_ja": "真菌性甲羅疾患"
+          },
+          {
+            "id": "tortoise_0270",
+            "name": "Gastrointestinal Fungal Infection",
+            "name_ja": "消化管真菌感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0278",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0286",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gout",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0041",
+            "name": "Articular Gout",
+            "name_ja": "関節痛風"
+          },
+          {
+            "id": "tortoise_0042",
+            "name": "Visceral Gout",
+            "name_ja": "内臓痛風"
+          },
+          {
+            "id": "tortoise_0205",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（リクガメ）"
+          },
+          {
+            "id": "tortoise_0206",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "herpes",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0010",
+            "name": "Herpesvirus Infection",
+            "name_ja": "ヘルペスウイルス感染症"
+          },
+          {
+            "id": "tortoise_0095",
+            "name": "Chelonian Herpesvirus Type 1",
+            "name_ja": "カメヘルペスウイルス1型"
+          },
+          {
+            "id": "tortoise_0096",
+            "name": "Chelonian Herpesvirus Type 2",
+            "name_ja": "カメヘルペスウイルス2型"
+          },
+          {
+            "id": "tortoise_0165",
+            "name": "Tortoise Herpesvirus",
+            "name_ja": "リクガメヘルペスウイルス（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0014",
+            "name": "Intestinal Nematodes (Roundworms)",
+            "name_ja": "腸管線虫（回虫）感染"
+          },
+          {
+            "id": "tortoise_0078",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱出"
+          },
+          {
+            "id": "tortoise_0144",
+            "name": "Intestinal Volvulus",
+            "name_ja": "腸捻転"
+          },
+          {
+            "id": "tortoise_0218",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nemato",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0014",
+            "name": "Intestinal Nematodes (Roundworms)",
+            "name_ja": "腸管線虫（回虫）感染"
+          },
+          {
+            "id": "tortoise_0081",
+            "name": "Nematode Lung Infection",
+            "name_ja": "線虫性肺感染症"
+          },
+          {
+            "id": "tortoise_0107",
+            "name": "Nematode Gastritis (Atractis / Alaeuris)",
+            "name_ja": "線虫性胃炎（アトラクティス・アラエウリス）"
+          },
+          {
+            "id": "tortoise_0191",
+            "name": "Nematode Infection",
+            "name_ja": "線虫感染（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0124",
+            "name": "Ovarian Neoplasia",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "tortoise_0217",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（リクガメ）"
+          },
+          {
+            "id": "tortoise_0272",
+            "name": "Gastrointestinal Neoplasia",
+            "name_ja": "消化管腫瘍（リクガメ）"
+          },
+          {
+            "id": "tortoise_0280",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "parasi",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0265",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0271",
+            "name": "Gastrointestinal Parasitic Disease",
+            "name_ja": "消化管寄生虫疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0279",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0287",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "protoz",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0017",
+            "name": "Flagellate Protozoa Infection",
+            "name_ja": "鞭毛虫感染症"
+          },
+          {
+            "id": "tortoise_0109",
+            "name": "Protozoan Colitis",
+            "name_ja": "原虫性大腸炎"
+          },
+          {
+            "id": "tortoise_0172",
+            "name": "Flagellate Protozoal Infection",
+            "name_ja": "鞭毛虫原虫感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0196",
+            "name": "Flagellate Protozoan Infection",
+            "name_ja": "鞭毛虫感染（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tract",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0005",
+            "name": "Upper Respiratory Tract Infection (URTI)",
+            "name_ja": "上部呼吸器感染症"
+          },
+          {
+            "id": "tortoise_0089",
+            "name": "Urinary Tract Infection",
+            "name_ja": "尿路感染症"
+          },
+          {
+            "id": "tortoise_0225",
+            "name": "Upper Respiratory Tract Disease",
+            "name_ja": "上部気道疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0282",
+            "name": "Lower Respiratory Tract Infection",
+            "name_ja": "下部気道感染（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "viral",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0264",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0269",
+            "name": "Gastrointestinal Viral Infection",
+            "name_ja": "消化管ウイルス感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0277",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0285",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0023",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "tortoise_0025",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "tortoise_0151",
+            "name": "Vitamin C Deficiency",
+            "name_ja": "ビタミンC欠乏症"
+          },
+          {
+            "id": "tortoise_0249",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0058",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "tortoise_0118",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "tortoise_0119",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cloaca",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0056",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "tortoise_0117",
+            "name": "Cloacal Calculi",
+            "name_ja": "総排泄腔結石"
+          },
+          {
+            "id": "tortoise_0222",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coccid",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0013",
+            "name": "Tortoise Intranuclear Coccidia (TINC)",
+            "name_ja": "リクガメ核内コクシジウム症"
+          },
+          {
+            "id": "tortoise_0018",
+            "name": "Coccidia Infection",
+            "name_ja": "コクシジウム症"
+          },
+          {
+            "id": "tortoise_0195",
+            "name": "Coccidia",
+            "name_ja": "コクシジウム（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "failur",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0039",
+            "name": "Renal Failure (Chronic Kidney Disease)",
+            "name_ja": "腎不全"
+          },
+          {
+            "id": "tortoise_0061",
+            "name": "Liver Failure (Hepatopathy)",
+            "name_ja": "肝不全"
+          },
+          {
+            "id": "tortoise_0207",
+            "name": "Renal Failure",
+            "name_ja": "腎不全（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "flagel",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0017",
+            "name": "Flagellate Protozoa Infection",
+            "name_ja": "鞭毛虫感染症"
+          },
+          {
+            "id": "tortoise_0172",
+            "name": "Flagellate Protozoal Infection",
+            "name_ja": "鞭毛虫原虫感染（リクガメ）"
+          },
+          {
+            "id": "tortoise_0196",
+            "name": "Flagellate Protozoan Infection",
+            "name_ja": "鞭毛虫感染（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "follic",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0044",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "tortoise_0116",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          },
+          {
+            "id": "tortoise_0178",
+            "name": "Follicular Stasis",
+            "name_ja": "卵胞停滞（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "impact",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0029",
+            "name": "Gastrointestinal Impaction (Constipation)",
+            "name_ja": "消化管閉塞（便秘）"
+          },
+          {
+            "id": "tortoise_0114",
+            "name": "Substrate Impaction",
+            "name_ja": "床材インパクション"
+          },
+          {
+            "id": "tortoise_0156",
+            "name": "Cecal Impaction",
+            "name_ja": "盲腸インパクション"
+          }
+        ]
+      },
+      {
+        "shared_stem": "injury",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0047",
+            "name": "Frostbite / Cold Injury",
+            "name_ja": "凍傷・低温障害"
+          },
+          {
+            "id": "tortoise_0141",
+            "name": "Lawnmower Injury",
+            "name_ja": "芝刈り機による損傷"
+          },
+          {
+            "id": "tortoise_0236",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lipido",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0032",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "tortoise_0142",
+            "name": "Corneal Lipidosis",
+            "name_ja": "角膜脂質沈着症"
+          },
+          {
+            "id": "tortoise_0215",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mycopl",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0008",
+            "name": "Mycoplasmosis (Mycoplasma agassizii / testudineum)",
+            "name_ja": "マイコプラズマ症"
+          },
+          {
+            "id": "tortoise_0166",
+            "name": "Mycoplasma agassizii (URTD)",
+            "name_ja": "マイコプラズマ上部気道疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0185",
+            "name": "Mycoplasma Infection",
+            "name_ja": "マイコプラズマ感染（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "overgr",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0035",
+            "name": "Beak Overgrowth / Malocclusion",
+            "name_ja": "嘴の過成長・不正咬合"
+          },
+          {
+            "id": "tortoise_0170",
+            "name": "Beak Overgrowth",
+            "name_ja": "嘴過成長（リクガメ）"
+          },
+          {
+            "id": "tortoise_0171",
+            "name": "Nail Overgrowth",
+            "name_ja": "爪過成長（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "penile",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0057",
+            "name": "Penile Prolapse",
+            "name_ja": "陰茎脱出"
+          },
+          {
+            "id": "tortoise_0111",
+            "name": "Hemipenal/Penile Necrosis",
+            "name_ja": "陰茎壊死"
+          },
+          {
+            "id": "tortoise_0212",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0039",
+            "name": "Renal Failure (Chronic Kidney Disease)",
+            "name_ja": "腎不全"
+          },
+          {
+            "id": "tortoise_0119",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          },
+          {
+            "id": "tortoise_0207",
+            "name": "Renal Failure",
+            "name_ja": "腎不全（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "trauma",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0002",
+            "name": "Shell Fracture / Trauma",
+            "name_ja": "甲羅骨折・外傷"
+          },
+          {
+            "id": "tortoise_0065",
+            "name": "Trauma / Bite Wounds",
+            "name_ja": "外傷・咬傷"
+          },
+          {
+            "id": "tortoise_0139",
+            "name": "Spinal Trauma / Vertebral Fracture",
+            "name_ja": "脊椎外傷・椎体骨折"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wound",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0065",
+            "name": "Trauma / Bite Wounds",
+            "name_ja": "外傷・咬傷"
+          },
+          {
+            "id": "tortoise_0202",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（リクガメ）"
+          },
+          {
+            "id": "tortoise_0256",
+            "name": "Wound Infection",
+            "name_ja": "創傷感染（リクガメ）"
+          }
+        ]
+      }
+    ]
+  }
+}

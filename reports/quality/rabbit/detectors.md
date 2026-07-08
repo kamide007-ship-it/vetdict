@@ -174,23 +174,23 @@
 ### 投与量なし（上位30）
 - 皮下膿瘍（Subcutaneous Abscess）[rabbit_0035] — ja:160字 / en:137字
 - 外耳炎（Otitis Externa）[rabbit_0045] — ja:159字 / en:159字
-- 心筋症（Cardiomyopathy）[rabbit_0062] — ja:513字 / en:606字
-- 肥満（Obesity）[rabbit_0068] — ja:1789字 / en:2989字
+- 心筋症（Cardiomyopathy）[rabbit_0062] — ja:523字 / en:630字
+- 肥満（Obesity）[rabbit_0068] — ja:1799字 / en:3013字
 - ボルデテラ感染症（Bordetella Infection）[rabbit_0079] — ja:164字 / en:137字
-- 膀胱炎（Cystitis）[rabbit_0088] — ja:424字 / en:386字
+- 膀胱炎（Cystitis）[rabbit_0088] — ja:434字 / en:410字
 - 赤色尿（非病的）（Red Urine (Non-pathological)）[rabbit_0089] — ja:441字 / en:1453字
 - カルシウム欠乏症（Calcium Deficiency）[rabbit_0105] — ja:75字 / en:146字
-- 眼球突出（眼球脱出）（Proptosis (Globe Prolapse)）[rabbit_0136] — ja:302字 / en:495字
+- 眼球突出（眼球脱出）（Proptosis (Globe Prolapse)）[rabbit_0136] — ja:312字 / en:519字
 - ローソニア細胞内感染症（Lawsonia Intracellular Infection）[rabbit_0147] — ja:167字 / en:137字
 - 麻痺性イレウス（Ileus (Paralytic)）[rabbit_0202] — ja:56字 / en:154字
 - 歯瘻（Dental Fistula）[rabbit_0207] — ja:173字 / en:527字
 - 熱中症（重度）（Heat Stroke - Severe）[rabbit_0230] — ja:195字 / en:522字
 - ロップ種耳道狭窄（Lop Ear Canal Stenosis）[rabbit_0237] — ja:164字 / en:159字
-- 多発性腎嚢胞（Renal Cysts (Polycystic)）[rabbit_0255] — ja:309字 / en:425字
-- 肝葉捻転（急性型）（Hepatic Torsion (Acute)）[rabbit_0261] — ja:780字 / en:1078字
+- 多発性腎嚢胞（Renal Cysts (Polycystic)）[rabbit_0255] — ja:319字 / en:449字
+- 肝葉捻転（急性型）（Hepatic Torsion (Acute)）[rabbit_0261] — ja:790字 / en:1102字
 - 粘液腫症（ミクソマトーシス）（Myxomatosis）[rabbit_0270] — ja:91字 / en:66字
 - ウサギ出血病（RHD）（ウサギ）（Rabbit Hemorrhagic Disease (RHD)）[rabbit_0274] — ja:168字 / en:531字
-- 胃拡張捻転（ウサギ）（Gastric Dilation-Volvulus）[rabbit_0329] — ja:431字 / en:651字
+- 胃拡張捻転（ウサギ）（Gastric Dilation-Volvulus）[rabbit_0329] — ja:441字 / en:675字
 - 小脳低形成（ウサギ）（Cerebellar Hypoplasia）[rabbit_0356] — ja:232字 / en:506字
 - チェリーアイ（瞬膜腺脱出）（ウサギ）（Cherry Eye (Nictitating Membrane Prolapse)）[rabbit_0365] — ja:160字 / en:345字
 - 高リン血症（ウサギ）（Hyperphosphatemia）[rabbit_0386] — ja:30字 / en:190字
@@ -246,12 +246,10 @@
 - 白血病（ウサギ）（Leukemia）[rabbit_0432] → key: feline leukemia virus
 
 ## T109 機械翻訳臭（置換辞書）
-- ヒット総数: **2**（safe 1 / review 1）
+- ヒット総数: **1**（safe 0 / review 1）
 
 ### 用語別ヒット数
-- `並発` × 1
 - `遺伝学的` × 1
 
 ### 出現箇所（上位30）
-- [safe] `並発`→併発 @ causes_ja [rabbit_0023] …：(1) 免疫不全—ストレス、栄養不足、並発感染、年齢極端。(2) 寄生虫負荷。(3…
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ causes_ja [rabbit_0023] …、年齢極端。(2) 寄生虫負荷。(3) 遺伝学的素因。(4) 曝露時年齢。(5) 環境要…

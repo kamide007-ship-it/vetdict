@@ -197,34 +197,34 @@
 ### 投与量なし（上位30）
 - ディッピーピッグ症候群（Dippity Pig Syndrome）[exotic_other_0002] — ja:58字 / en:115字
 - 豚ストレス症候群（悪性高熱症）（Porcine Stress Syndrome (Malignant Hyperthermia)）[exotic_other_0003] — ja:85字 / en:158字
-- 豚の肥満症（Porcine Obesity）[exotic_other_0006] — ja:989字 / en:879字
+- 豚の肥満症（Porcine Obesity）[exotic_other_0006] — ja:999字 / en:903字
 - 日焼け（豚）（Sunburn (Porcine)）[exotic_other_0007] — ja:203字 / en:107字
 - 蹄過成長・蹄裂（豚）（Hoof Overgrowth / Cracks (Porcine)）[exotic_other_0008] — ja:190字 / en:126字
-- 代謝性骨疾患（エキゾチック哺乳類）（Metabolic Bone Disease (Exotic Mammal)）[exotic_other_0015] — ja:592字 / en:478字
-- 糖尿病（エキゾチック哺乳類）（Diabetes Mellitus (Exotic Mammal)）[exotic_other_0017] — ja:457字 / en:596字
+- 代謝性骨疾患（エキゾチック哺乳類）（Metabolic Bone Disease (Exotic Mammal)）[exotic_other_0015] — ja:602字 / en:502字
+- 糖尿病（エキゾチック哺乳類）（Diabetes Mellitus (Exotic Mammal)）[exotic_other_0017] — ja:467字 / en:620字
 - 低カルシウム血症（エキゾチック哺乳類）（Hypocalcemia (Exotic Mammal)）[exotic_other_0018] — ja:321字 / en:189字
-- 消化管うっ滞（Gastrointestinal Stasis）[exotic_other_0021] — ja:518字 / en:812字
-- 直腸脱（エキゾチック哺乳類）（Rectal Prolapse (Exotic Mammal)）[exotic_other_0025] — ja:323字 / en:394字
+- 消化管うっ滞（Gastrointestinal Stasis）[exotic_other_0021] — ja:528字 / en:836字
+- 直腸脱（エキゾチック哺乳類）（Rectal Prolapse (Exotic Mammal)）[exotic_other_0025] — ja:333字 / en:418字
 - 不正咬合（エキゾチック哺乳類）（Dental Malocclusion (Exotic Mammal)）[exotic_other_0026] — ja:195字 / en:158字
-- 乳腺腫瘍（エキゾチック哺乳類）（Mammary Tumors (Exotic Mammal)）[exotic_other_0030] — ja:282字 / en:412字
-- 犬ジステンパー（アライグマ・スカンク）（Canine Distemper (Raccoon/Skunk)）[exotic_other_0032] — ja:708字 / en:571字
+- 乳腺腫瘍（エキゾチック哺乳類）（Mammary Tumors (Exotic Mammal)）[exotic_other_0030] — ja:292字 / en:436字
+- 犬ジステンパー（アライグマ・スカンク）（Canine Distemper (Raccoon/Skunk)）[exotic_other_0032] — ja:718字 / en:595字
 - 狂犬病（エキゾチック哺乳類）（Rabies (Exotic Mammal)）[exotic_other_0033] — ja:311字 / en:95字
-- 前庭疾患（エキゾチック哺乳類）（Vestibular Disease (Exotic Mammal)）[exotic_other_0034] — ja:885字 / en:670字
-- 皮下膿瘍（エキゾチック哺乳類）（Subcutaneous Abscess (Exotic Mammal)）[exotic_other_0037] — ja:580字 / en:472字
+- 前庭疾患（エキゾチック哺乳類）（Vestibular Disease (Exotic Mammal)）[exotic_other_0034] — ja:895字 / en:694字
+- 皮下膿瘍（エキゾチック哺乳類）（Subcutaneous Abscess (Exotic Mammal)）[exotic_other_0037] — ja:590字 / en:496字
 - ビタミンC欠乏症（Vitamin C Deficiency (Scurvy-like)）[exotic_other_0039] — ja:410字 / en:535字
 - ビタミンA欠乏症（エキゾチック哺乳類）（Vitamin A Deficiency (Exotic Mammal)）[exotic_other_0040] — ja:432字 / en:156字
 - 熱中症（Heat Stress / Heat Stroke）[exotic_other_0042] — ja:81字 / en:232字
-- 低温ストレス・低体温症（Hypothermia / Cold Stress）[exotic_other_0043] — ja:713字 / en:534字
-- 肥満症（エキゾチック哺乳類）（Obesity (Exotic Mammal)）[exotic_other_0044] — ja:715字 / en:572字
-- ストレス性ミオパチー（捕獲ミオパチー）（Stress Myopathy (Capture Myopathy)）[exotic_other_0051] — ja:316字 / en:472字
-- 腎疾患（エキゾチック哺乳類）（Renal Disease (Exotic Mammal)）[exotic_other_0054] — ja:711字 / en:523字
+- 低温ストレス・低体温症（Hypothermia / Cold Stress）[exotic_other_0043] — ja:723字 / en:558字
+- 肥満症（エキゾチック哺乳類）（Obesity (Exotic Mammal)）[exotic_other_0044] — ja:725字 / en:596字
+- ストレス性ミオパチー（捕獲ミオパチー）（Stress Myopathy (Capture Myopathy)）[exotic_other_0051] — ja:326字 / en:496字
+- 腎疾患（エキゾチック哺乳類）（Renal Disease (Exotic Mammal)）[exotic_other_0054] — ja:721字 / en:547字
 - 副腎疾患（エキゾチック哺乳類）（Adrenal Disease (Exotic Mammal)）[exotic_other_0056] — ja:344字 / en:154字
-- 心疾患（エキゾチック哺乳類）（Heart Disease (Exotic Mammal)）[exotic_other_0057] — ja:311字 / en:395字
+- 心疾患（エキゾチック哺乳類）（Heart Disease (Exotic Mammal)）[exotic_other_0057] — ja:321字 / en:419字
 - 牙の問題（ミニブタ）（Tusk Problems (Mini Pig)）[exotic_other_0059] — ja:175字 / en:160字
 - 歯牙腫（プレーリードッグ）（Odontoma (Prairie Dog)）[exotic_other_0060] — ja:116字 / en:147字
-- 肥満症（プレーリードッグ）（Obesity (Prairie Dog)）[exotic_other_0062] — ja:713字 / en:572字
-- 心疾患（プレーリードッグ）（Heart Disease (Prairie Dog)）[exotic_other_0063] — ja:467字 / en:593字
-- スカンクの肥満症（Skunk Obesity）[exotic_other_0064] — ja:703字 / en:572字
+- 肥満症（プレーリードッグ）（Obesity (Prairie Dog)）[exotic_other_0062] — ja:723字 / en:596字
+- 心疾患（プレーリードッグ）（Heart Disease (Prairie Dog)）[exotic_other_0063] — ja:477字 / en:617字
+- スカンクの肥満症（Skunk Obesity）[exotic_other_0064] — ja:713字 / en:596字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
 - 種別投与量なしの薬品リンク（旧・未ガード）: **216** 疾患 → ガード後残存: **0**

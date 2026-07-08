@@ -126,24 +126,24 @@
 
 ### 投与量なし（上位30）
 - インスリン抵抗性（Insulin Resistance）[degu_0002] — ja:549字 / en:1560字
-- 肥満（Obesity）[degu_0003] — ja:473字 / en:573字
+- 肥満（Obesity）[degu_0003] — ja:483字 / en:597字
 - 熱中症（Heat Stroke）[degu_0004] — ja:191字 / en:158字
 - 不正咬合（Dental Malocclusion）[degu_0010] — ja:183字 / en:175字
 - 切歯過長（Incisor Overgrowth）[degu_0011] — ja:71字 / en:178字
 - 毛包虫症（Fur Mites (Demodex / Notoedres)）[degu_0015] — ja:163字 / en:488字
 - 誤嚥性肺炎（Aspiration Pneumonia）[degu_0026] — ja:76字 / en:186字
-- 腸内寄生虫症（Intestinal Parasites）[degu_0031] — ja:430字 / en:422字
-- うっ血性心不全（Congestive Heart Failure）[degu_0049] — ja:345字 / en:413字
-- 心筋症（Cardiomyopathy）[degu_0050] — ja:338字 / en:492字
+- 腸内寄生虫症（Intestinal Parasites）[degu_0031] — ja:440字 / en:446字
+- うっ血性心不全（Congestive Heart Failure）[degu_0049] — ja:355字 / en:437字
+- 心筋症（Cardiomyopathy）[degu_0050] — ja:348字 / en:516字
 - 耳感染症（外耳炎）（Ear Infection (Otitis)）[degu_0051] — ja:165字 / en:137字
-- 敗血症（Septicemia）[degu_0053] — ja:559字 / en:568字
+- 敗血症（Septicemia）[degu_0053] — ja:569字 / en:592字
 - 不正咬合 - 臼歯（後天性）（Dental Malocclusion - Molar (Acquired)）[degu_0062] — ja:185字 / en:158字
 - 不正咬合 - 切歯（先天性）（Dental Malocclusion - Incisor (Congenital)）[degu_0063] — ja:185字 / en:158字
 - 尾切断部感染（Tail Amputation Stump Infection）[degu_0069] — ja:194字 / en:204字
 - マイコプラズマ感染症（Mycoplasma Infection）[degu_0075] — ja:166字 / en:137字
 - 条虫感染症（Tapeworm Infection）[degu_0086] — ja:164字 / en:204字
-- 中毒症（植物中毒）（Toxicosis (Plant Poisoning)）[degu_0112] — ja:484字 / en:590字
-- 亜鉛中毒（Zinc Toxicosis）[degu_0113] — ja:771字 / en:1000字
+- 中毒症（植物中毒）（Toxicosis (Plant Poisoning)）[degu_0112] — ja:494字 / en:614字
+- 亜鉛中毒（Zinc Toxicosis）[degu_0113] — ja:781字 / en:1024字
 - 常同行動（デグー）（Repetitive Behavior (Stereotypy)）[degu_0126] — ja:493字 / en:1004字
 - 毛引き（デグー）（Barbering）[degu_0142] — ja:213字 / en:298字
 - 開脚症（デグー）（Splay Leg）[degu_0154] — ja:188字 / en:228字
@@ -195,32 +195,25 @@
 - 白血病（デグー）（Leukemia）[degu_0197] → key: feline leukemia virus
 
 ## T109 機械翻訳臭（置換辞書）
-- ヒット総数: **17**（safe 4 / review 16）
+- ヒット総数: **13**（safe 0 / review 16）
 
 ### 用語別ヒット数
 - `遺伝学的` × 7
 - `易感受性` × 6
-- `並発` × 2
 - `貧弱な` × 1
 - `細胞失敗` × 1
 - `可遺伝` × 1
-- `葡萄糖` × 1
-- `疲出` × 1
 
 ### 出現箇所（上位30）
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ description_ja [degu_0000] …抵抗、続発性ベータ細胞失敗）として提示、遺伝学的素因と食事炭水化物曝露による。早期検出を…
 - [review] `易感受性`→感受性が高い / 罹患しやすい @ description_ja [degu_0000] …る。早期検出を通じた検査と厳格食事管理は易感受性動物の発症を防止または遅延可能。…
 - [review] `貧弱な`→乏しい / 不十分な @ description_ja [degu_0000] …な代謝疾患。重大：デグーは食事糖に対する貧弱な耐性—ほとんどげっ歯類と異なり、デグーは…
 - [review] `細胞失敗`→細胞不全 @ description_ja [degu_0000] … 2糖尿病（インスリン抵抗、続発性ベータ細胞失敗）として提示、遺伝学的素因と食事炭水化物…
-- [safe] `並発`→併発 @ causes_ja [degu_0000] …(2) 加齢。(3) ストレス。(4) 並発疾患。(5) 先行ケトアシドーシス。…
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ causes_ja [degu_0000] …デグー特異的遺伝学的素因：デグーは糖を効率的に代謝するための…
 - [review] `易感受性`→感受性が高い / 罹患しやすい @ causes_ja [degu_0000] …伝成分を示唆）。食事リスク要因（遺伝学的易感受性デグーの主要トリガー）：(1) 直接糖含…
 - [review] `可遺伝`→遺伝性 / 遺伝的 @ causes_ja [degu_0000] …0%生涯糖尿病有病率対他の20-30%、可遺伝成分を示唆）。食事リスク要因（遺伝学的易…
-- [safe] `葡萄糖`→ブドウ糖 @ pathophysiology_ja [degu_0000] …ら存在、無症候）—膵ベータ細胞は先天的に葡萄糖刺激への反応性低下。基礎空腹時インスリン…
-- [safe] `疲出`→疲弊 @ pathophysiology_ja [degu_0000] …ピソード発生、繰り返しエピソードでβ細胞疲出。(3) 明白な糖尿病への進行（持続糖曝…
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ pathophysiology_ja [degu_0000] …の種の典型的なタイプ2と異なる：(1) 遺伝学的インスリン抵抗相（出生時から存在、無症候…
 - [review] `易感受性`→感受性が高い / 罹患しやすい @ pathophysiology_ja [degu_0000] …ース耐性は重症傷害：経口グルコース負荷で易感受性デグーで血糖250 mg/dL以上で30…
-- [safe] `並発`→併発 @ prevention_ja [degu_0000] …(7) 水質。(8) 生殖管理。(9) 並発疾患予防。(10) 診断後予防。…
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ prevention_ja [degu_0000] …デグーの重大予防（積極的食事管理で遺伝学的易感受性動物の50-70%で糖尿病を防止…
 - [review] `易感受性`→感受性が高い / 罹患しやすい @ prevention_ja [degu_0000] …グーの重大予防（積極的食事管理で遺伝学的易感受性動物の50-70%で糖尿病を防止可能）：…
 - [review] `易感受性`→感受性が高い / 罹患しやすい @ pathophysiology_ja [degu_0091] …進行→爆発的敗血症。デグーは産科ショック易感受性を示す（難産でも治療時20-30%死亡率…

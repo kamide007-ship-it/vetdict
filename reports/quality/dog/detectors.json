@@ -4229,24 +4229,24 @@
         "id": "dog_0007",
         "name": "Hyperthyroidism",
         "name_ja": "甲状腺機能亢進症",
-        "treatment_ja_len": 422,
-        "treatment_len": 570,
+        "treatment_ja_len": 432,
+        "treatment_len": 594,
         "has_dosage": false
       },
       {
         "id": "dog_0095",
         "name": "Progressive Retinal Atrophy (PRA)",
         "name_ja": "進行性網膜萎縮症（PRA）",
-        "treatment_ja_len": 454,
-        "treatment_len": 786,
+        "treatment_ja_len": 464,
+        "treatment_len": 810,
         "has_dosage": false
       },
       {
         "id": "dog_0099",
         "name": "Degenerative Myelopathy (DM)",
         "name_ja": "変性性脊髄症（DM）",
-        "treatment_ja_len": 976,
-        "treatment_len": 1245,
+        "treatment_ja_len": 986,
+        "treatment_len": 1269,
         "has_dosage": false
       },
       {
@@ -4261,8 +4261,8 @@
         "id": "dog_0148",
         "name": "Nuclear Sclerosis",
         "name_ja": "核硬化症",
-        "treatment_ja_len": 691,
-        "treatment_len": 645,
+        "treatment_ja_len": 701,
+        "treatment_len": 669,
         "has_dosage": false
       },
       {
@@ -4293,8 +4293,8 @@
         "id": "dog_0165",
         "name": "Fibrocartilaginous Embolism (FCE)",
         "name_ja": "線維軟骨塞栓症（FCE）",
-        "treatment_ja_len": 666,
-        "treatment_len": 1200,
+        "treatment_ja_len": 676,
+        "treatment_len": 1224,
         "has_dosage": false
       },
       {
@@ -4309,8 +4309,8 @@
         "id": "dog_0199",
         "name": "Intrauterine Growth Restriction (IUGR) / Placental Insufficiency",
         "name_ja": "胎児発育不全（IUGR）・胎盤機能低下症",
-        "treatment_ja_len": 1048,
-        "treatment_len": 2496,
+        "treatment_ja_len": 1058,
+        "treatment_len": 2520,
         "has_dosage": false
       },
       {
@@ -4333,16 +4333,16 @@
         "id": "dog_0268",
         "name": "Carpal Hyperextension Injury",
         "name_ja": "手根関節過伸展損傷",
-        "treatment_ja_len": 579,
-        "treatment_len": 1016,
+        "treatment_ja_len": 589,
+        "treatment_len": 1040,
         "has_dosage": false
       },
       {
         "id": "dog_0270",
         "name": "Ununited Anconeal Process (UAP)",
         "name_ja": "肘突起癒合不全",
-        "treatment_ja_len": 956,
-        "treatment_len": 1068,
+        "treatment_ja_len": 966,
+        "treatment_len": 1092,
         "has_dosage": false
       },
       {
@@ -4365,8 +4365,8 @@
         "id": "dog_0305",
         "name": "Iris Atrophy",
         "name_ja": "虹彩萎縮",
-        "treatment_ja_len": 634,
-        "treatment_len": 588,
+        "treatment_ja_len": 644,
+        "treatment_len": 612,
         "has_dosage": false
       },
       {
@@ -4381,8 +4381,8 @@
         "id": "dog_0354",
         "name": "Pyruvate Kinase Deficiency",
         "name_ja": "ピルビン酸キナーゼ欠損症",
-        "treatment_ja_len": 442,
-        "treatment_len": 699,
+        "treatment_ja_len": 452,
+        "treatment_len": 723,
         "has_dosage": false
       },
       {
@@ -4405,16 +4405,16 @@
         "id": "dog_0394",
         "name": "Diaphragmatic Hernia",
         "name_ja": "横隔膜ヘルニア",
-        "treatment_ja_len": 401,
-        "treatment_len": 1007,
+        "treatment_ja_len": 411,
+        "treatment_len": 1031,
         "has_dosage": false
       },
       {
         "id": "dog_0395",
         "name": "Perineal Hernia",
         "name_ja": "会陰ヘルニア",
-        "treatment_ja_len": 596,
-        "treatment_len": 986,
+        "treatment_ja_len": 606,
+        "treatment_len": 1010,
         "has_dosage": false
       },
       {
@@ -4469,8 +4469,8 @@
         "id": "dog_0528",
         "name": "Elbow Incongruity",
         "name_ja": "肘関節不適合",
-        "treatment_ja_len": 872,
-        "treatment_len": 1371,
+        "treatment_ja_len": 882,
+        "treatment_len": 1395,
         "has_dosage": false
       },
       {

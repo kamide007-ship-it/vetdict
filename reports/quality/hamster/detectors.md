@@ -163,28 +163,28 @@
 - 投与量あり: **291**
 
 ### 投与量なし（上位30）
-- 頬袋閉塞（Cheek Pouch Impaction）[hamster_0012] — ja:338字 / en:381字
+- 頬袋閉塞（Cheek Pouch Impaction）[hamster_0012] — ja:348字 / en:405字
 - 不正咬合（Dental Malocclusion）[hamster_0015] — ja:177字 / en:158字
 - 皮膚腫瘍（Skin Tumor (General)）[hamster_0030] — ja:53字 / en:136字
 - 副腎腫瘍（Adrenal Tumor）[hamster_0031] — ja:106字 / en:470字
-- 肥満（Obesity）[hamster_0039] — ja:475字 / en:573字
+- 肥満（Obesity）[hamster_0039] — ja:485字 / en:597字
 - アミロイドーシス（Amyloidosis）[hamster_0041] — ja:77字 / en:182字
-- 心筋症（Cardiomyopathy）[hamster_0043] — ja:504字 / en:624字
-- うっ血性心不全（Congestive Heart Failure）[hamster_0044] — ja:347字 / en:413字
-- 白内障（Cataracts）[hamster_0053] — ja:478字 / en:502字
-- 敗血症（Septicemia）[hamster_0062] — ja:561字 / en:568字
-- 抗生物質中毒（Antibiotic Toxicity）[hamster_0071] — ja:471字 / en:494字
+- 心筋症（Cardiomyopathy）[hamster_0043] — ja:514字 / en:648字
+- うっ血性心不全（Congestive Heart Failure）[hamster_0044] — ja:357字 / en:437字
+- 白内障（Cataracts）[hamster_0053] — ja:488字 / en:526字
+- 敗血症（Septicemia）[hamster_0062] — ja:571字 / en:592字
+- 抗生物質中毒（Antibiotic Toxicity）[hamster_0071] — ja:481字 / en:518字
 - 毛引き（Barbering）[hamster_0074] — ja:81字 / en:139字
 - 多嚢胞性疾患（Polycystic Disease）[hamster_0076] — ja:75字 / en:159字
 - 腸捻転（Intestinal Torsion）[hamster_0091] — ja:193字 / en:139字
 - 甲状腺癌（Thyroid Carcinoma）[hamster_0112] — ja:106字 / en:474字
-- 気胸（Pneumothorax）[hamster_0116] — ja:436字 / en:439字
+- 気胸（Pneumothorax）[hamster_0116] — ja:446字 / en:463字
 - マイコプラズマ感染症（Mycoplasma Infection）[hamster_0117] — ja:168字 / en:137字
-- 咬傷膿瘍（Bite Wound Abscess）[hamster_0143] — ja:734字 / en:683字
+- 咬傷膿瘍（Bite Wound Abscess）[hamster_0143] — ja:744字 / en:707字
 - 常同行動（バーチューイング）（Stereotypic Behavior (Bar Chewing)）[hamster_0145] — ja:94字 / en:490字
-- 毛包虫症（デモデックス・クリセティ）（Fur Mites (Demodex criceti)）[hamster_0147] — ja:415字 / en:697字
+- 毛包虫症（デモデックス・クリセティ）（Fur Mites (Demodex criceti)）[hamster_0147] — ja:425字 / en:721字
 - 内部寄生虫症（混合感染）（Endoparasites (Mixed Infection)）[hamster_0149] — ja:173字 / en:204字
-- 亜鉛中毒（Zinc Toxicosis）[hamster_0152] — ja:648字 / en:626字
+- 亜鉛中毒（Zinc Toxicosis）[hamster_0152] — ja:658字 / en:650字
 - ニキビダニ症（局所型）（Demodex Mange - Localized）[hamster_0160] — ja:172字 / en:485字
 - 多発性嚢胞性疾患（腎型）（Polycystic Disease - Renal）[hamster_0169] — ja:65字 / en:136字
 - 冬眠症候群（軽度）（Hibernation Syndrome - Mild）[hamster_0170] — ja:913字 / en:2360字
@@ -192,11 +192,11 @@
 - 臼歯過長（Dental Overgrowth (Molar)）[hamster_0175] — ja:177字 / en:158字
 - 冬眠企図（休眠）（ハムスター）（Hibernation Attempt (Torpor)）[hamster_0189] — ja:295字 / en:690字
 - 共食い（ハムスター）（Cannibalism）[hamster_0256] — ja:245字 / en:576字
-- 蛋白質栄養不良（ハムスター）（Protein Malnutrition）[hamster_0314] — ja:675字 / en:1364字
+- 蛋白質栄養不良（ハムスター）（Protein Malnutrition）[hamster_0314] — ja:685字 / en:1388字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
 - 種別投与量なしの薬品リンク（旧・未ガード）: **104** 疾患 → ガード後残存: **0**
-- 犬猫論文の他種への自動紐付け（旧・未ガード）: **19** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **16** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - ウェットテイル（増殖性回腸炎）（Wet Tail (Proliferative Ileitis)）[hamster_0000] → ロニダゾール
@@ -221,7 +221,6 @@
 - 脾腫（Splenomegaly）[hamster_0078] → ドキソルビシン
 
 ### 犬猫論文が他種に自動紐付け（上位20）
-- 不正咬合（Dental Malocclusion）[hamster_0015] → key: malocclusion
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[hamster_0023] → key: dermatophytosis
 - リンパ腫（Lymphoma）[hamster_0029] → key: lymphoma
 - 糖尿病（Diabetes Mellitus）[hamster_0037] → key: diabetes mellitus
@@ -235,9 +234,7 @@
 - 腹膜炎（ハムスター）（Peritonitis）[hamster_0209] → key: feline infectious peritonitis
 - 慢性腎臓病（ハムスター）（Chronic Kidney Disease）[hamster_0233] → key: chronic kidney disease
 - T細胞リンパ腫（ハムスター）（T-Cell Lymphoma）[hamster_0246] → key: lymphoma
-- 切歯不正咬合（ハムスター）（Incisor Malocclusion）[hamster_0249] → key: malocclusion
 - 貧血（ハムスター）（Anemia）[hamster_0280] → key: immune-mediated hemolytic anemia
-- 臼歯不正咬合（ハムスター）（Molar Malocclusion）[hamster_0298] → key: malocclusion
 - 血栓塞栓症（ハムスター）（Thromboembolism）[hamster_0304] → key: aortic thromboembolism (saddle thrombus)
 - 白血病（ハムスター）（Leukemia）[hamster_0316] → key: feline leukemia virus
 

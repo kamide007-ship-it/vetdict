@@ -3891,40 +3891,40 @@
         "id": "parakeet_0148",
         "name": "Pesticide Poisoning",
         "name_ja": "農薬中毒",
-        "treatment_ja_len": 311,
-        "treatment_len": 369,
+        "treatment_ja_len": 321,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "parakeet_0149",
         "name": "Plant Toxicity",
         "name_ja": "植物中毒",
-        "treatment_ja_len": 432,
-        "treatment_len": 369,
+        "treatment_ja_len": 442,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "parakeet_0150",
         "name": "Rodenticide Poisoning",
         "name_ja": "殺鼠剤中毒",
-        "treatment_ja_len": 433,
-        "treatment_len": 369,
+        "treatment_ja_len": 443,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "parakeet_0151",
         "name": "Essential Oil Toxicity",
         "name_ja": "エッセンシャルオイル中毒",
-        "treatment_ja_len": 440,
-        "treatment_len": 369,
+        "treatment_ja_len": 450,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "parakeet_0160",
         "name": "Subcutaneous Emphysema",
         "name_ja": "皮下気腫",
-        "treatment_ja_len": 436,
-        "treatment_len": 815,
+        "treatment_ja_len": 446,
+        "treatment_len": 839,
         "has_dosage": false
       },
       {
@@ -3979,24 +3979,24 @@
         "id": "parakeet_0195",
         "name": "Zinc Toxicosis (Advanced)",
         "name_ja": "亜鉛中毒（進行型）",
-        "treatment_ja_len": 664,
-        "treatment_len": 847,
+        "treatment_ja_len": 674,
+        "treatment_len": 871,
         "has_dosage": false
       },
       {
         "id": "parakeet_0197",
         "name": "Avocado Toxicosis (Parakeet)",
         "name_ja": "アボカド中毒（インコ）",
-        "treatment_ja_len": 439,
-        "treatment_len": 369,
+        "treatment_ja_len": 449,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "parakeet_0203",
         "name": "Splayed Legs (Neonatal)",
         "name_ja": "開脚症（新生児型）",
-        "treatment_ja_len": 609,
-        "treatment_len": 1392,
+        "treatment_ja_len": 619,
+        "treatment_len": 1416,
         "has_dosage": false
       },
       {
@@ -4011,16 +4011,16 @@
         "id": "parakeet_0206",
         "name": "Crop Impaction (Foreign Body)",
         "name_ja": "嗉嚢閉塞（異物）",
-        "treatment_ja_len": 339,
-        "treatment_len": 393,
+        "treatment_ja_len": 349,
+        "treatment_len": 417,
         "has_dosage": false
       },
       {
         "id": "parakeet_0207",
         "name": "Night Fright Injuries",
         "name_ja": "夜間パニック外傷",
-        "treatment_ja_len": 440,
-        "treatment_len": 814,
+        "treatment_ja_len": 450,
+        "treatment_len": 838,
         "has_dosage": false
       },
       {
@@ -4043,24 +4043,24 @@
         "id": "parakeet_0241",
         "name": "Zinc Toxicosis",
         "name_ja": "亜鉛中毒",
-        "treatment_ja_len": 303,
-        "treatment_len": 369,
+        "treatment_ja_len": 313,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "parakeet_0242",
         "name": "Lead Toxicosis",
         "name_ja": "鉛中毒",
-        "treatment_ja_len": 431,
-        "treatment_len": 369,
+        "treatment_ja_len": 441,
+        "treatment_len": 393,
         "has_dosage": false
       },
       {
         "id": "parakeet_0254",
         "name": "Splayed Leg (Neonatal)",
         "name_ja": "開脚（新生児）（インコ）",
-        "treatment_ja_len": 461,
-        "treatment_len": 807,
+        "treatment_ja_len": 471,
+        "treatment_len": 831,
         "has_dosage": false
       },
       {
@@ -4163,8 +4163,8 @@
         "id": "parakeet_0428",
         "name": "Iatrogenic Disease",
         "name_ja": "医原性疾患（インコ）",
-        "treatment_ja_len": 487,
-        "treatment_len": 689,
+        "treatment_ja_len": 497,
+        "treatment_len": 713,
         "has_dosage": false
       },
       {
