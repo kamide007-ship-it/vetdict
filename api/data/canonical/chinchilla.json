@@ -1,0 +1,1828 @@
+{
+  "species": "chinchilla",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 278,
+    "merge_clusters": 17,
+    "records_merged_away": 19,
+    "archived": 0,
+    "served_after": 259
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "chinchilla_0002",
+        "slug": "dental-abscess",
+        "name": "Dental Abscess",
+        "name_ja": "歯根膿瘍"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0075",
+          "slug": "tooth-root-abscess",
+          "name": "Tooth Root Abscess",
+          "name_ja": "歯根膿瘍"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0010",
+        "slug": "rectal-prolapse",
+        "name": "Rectal Prolapse",
+        "name_ja": "直腸脱"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0132",
+          "slug": "prolapsed-rectum",
+          "name": "Prolapsed Rectum",
+          "name_ja": "直腸脱"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0014",
+        "slug": "ringworm-dermatophytosis",
+        "name": "Ringworm (Dermatophytosis)",
+        "name_ja": "皮膚糸状菌症"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0251",
+          "slug": "dermatophytosis-ringworm",
+          "name": "Dermatophytosis (Ringworm)",
+          "name_ja": "皮膚糸状菌症（チンチラ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0020",
+        "slug": "heat-stroke",
+        "name": "Heat Stroke",
+        "name_ja": "熱中症"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0149",
+          "slug": "heat-stroke-chinchilla",
+          "name": "Heat Stroke - Chinchilla",
+          "name_ja": "熱中症"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0021",
+        "slug": "urolithiasis-bladder-stones",
+        "name": "Urolithiasis (Bladder Stones)",
+        "name_ja": "尿路結石症"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0273",
+          "slug": "urolithiasis",
+          "name": "Urolithiasis",
+          "name_ja": "尿路結石症（チンチラ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0025",
+        "slug": "dystocia",
+        "name": "Dystocia",
+        "name_ja": "難産"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0156",
+          "slug": "dystocia-chinchilla",
+          "name": "Dystocia - Chinchilla",
+          "name_ja": "難産"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0026",
+        "slug": "pyometra",
+        "name": "Pyometra",
+        "name_ja": "子宮蓄膿症"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0157",
+          "slug": "pyometra-chinchilla",
+          "name": "Pyometra - Chinchilla",
+          "name_ja": "子宮蓄膿症"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0027",
+        "slug": "penile-fur-ring",
+        "name": "Penile Fur Ring",
+        "name_ja": "陰茎毛輪"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0148",
+          "slug": "penile-hair-ring-chinchilla",
+          "name": "Penile Hair Ring - Chinchilla",
+          "name_ja": "陰茎毛輪"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0037",
+        "slug": "listeriosis",
+        "name": "Listeriosis",
+        "name_ja": "リステリア症"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0146",
+          "slug": "listeriosis-chinchilla",
+          "name": "Listeriosis - Chinchilla",
+          "name_ja": "リステリア症"
+        },
+        {
+          "id": "chinchilla_0169",
+          "slug": "listeriosis",
+          "name": "Listeriosis",
+          "name_ja": "リステリア症"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0039",
+        "slug": "conjunctivitis",
+        "name": "Conjunctivitis",
+        "name_ja": "結膜炎"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0153",
+          "slug": "conjunctivitis-chinchilla",
+          "name": "Conjunctivitis - Chinchilla",
+          "name_ja": "結膜炎"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0045",
+        "slug": "diabetes-mellitus",
+        "name": "Diabetes Mellitus",
+        "name_ja": "糖尿病"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0155",
+          "slug": "diabetes-mellitus-chinchilla",
+          "name": "Diabetes Mellitus - Chinchilla",
+          "name_ja": "糖尿病"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0054",
+        "slug": "coccidia-infection",
+        "name": "Coccidia Infection",
+        "name_ja": "コクシジウム症"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0258",
+          "slug": "coccidiosis",
+          "name": "Coccidiosis",
+          "name_ja": "コクシジウム症（チンチラ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0060",
+        "slug": "mammary-tumors",
+        "name": "Mammary Tumors",
+        "name_ja": "乳腺腫瘍"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0275",
+          "slug": "mammary-tumor",
+          "name": "Mammary Tumor",
+          "name_ja": "乳腺腫瘍（チンチラ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0062",
+        "slug": "intussusception",
+        "name": "Intussusception",
+        "name_ja": "腸重積"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0145",
+          "slug": "intussusception-chinchilla",
+          "name": "Intussusception - Chinchilla",
+          "name_ja": "腸重積"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0088",
+        "slug": "gastric-ulceration",
+        "name": "Gastric Ulceration",
+        "name_ja": "胃潰瘍"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0158",
+          "slug": "gastric-ulceration-chinchilla",
+          "name": "Gastric Ulceration - Chinchilla",
+          "name_ja": "胃潰瘍"
+        },
+        {
+          "id": "chinchilla_0257",
+          "slug": "gastric-ulcer",
+          "name": "Gastric Ulcer",
+          "name_ja": "胃潰瘍（チンチラ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0099",
+        "slug": "ovarian-cysts",
+        "name": "Ovarian Cysts",
+        "name_ja": "卵巣嚢胞"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0274",
+          "slug": "ovarian-cyst",
+          "name": "Ovarian Cyst",
+          "name_ja": "卵巣嚢胞（チンチラ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0123",
+        "slug": "eye-proptosis",
+        "name": "Eye Proptosis",
+        "name_ja": "眼球突出"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0265",
+          "slug": "exophthalmos",
+          "name": "Exophthalmos",
+          "name_ja": "眼球突出（チンチラ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Malocclusion",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0000",
+            "slug": "malocclusion",
+            "name": "Malocclusion",
+            "name_ja": "不正咬合"
+          },
+          {
+            "id": "chinchilla_0163",
+            "slug": "malocclusion-progressive",
+            "name": "Malocclusion - Progressive",
+            "name_ja": "不正咬合（進行性）"
+          }
+        ]
+      },
+      {
+        "base": "Slobbers (Ptyalism)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0003",
+            "slug": "slobbers-ptyalism",
+            "name": "Slobbers (Ptyalism)",
+            "name_ja": "流涎症"
+          },
+          {
+            "id": "chinchilla_0143",
+            "slug": "slobbers-severe-with-dermatitis",
+            "name": "Slobbers - Severe (with Dermatitis)",
+            "name_ja": "流涎症（重度・皮膚炎合併）"
+          },
+          {
+            "id": "chinchilla_0174",
+            "slug": "slobbers-dental-related",
+            "name": "Slobbers (Dental-Related)",
+            "name_ja": "流涎（歯科関連）（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Constipation",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0006",
+            "slug": "constipation",
+            "name": "Constipation",
+            "name_ja": "便秘"
+          },
+          {
+            "id": "chinchilla_0150",
+            "slug": "constipation-chronic",
+            "name": "Constipation - Chronic",
+            "name_ja": "便秘（慢性）"
+          },
+          {
+            "id": "chinchilla_0175",
+            "slug": "constipation-megacolon",
+            "name": "Constipation (Megacolon)",
+            "name_ja": "便秘（巨大結腸症）（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Diarrhea",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0007",
+            "slug": "diarrhea",
+            "name": "Diarrhea",
+            "name_ja": "下痢"
+          },
+          {
+            "id": "chinchilla_0255",
+            "slug": "diarrhea-non-specific",
+            "name": "Diarrhea (Non-specific)",
+            "name_ja": "非特異的下痢（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0009",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス"
+          },
+          {
+            "id": "chinchilla_0130",
+            "slug": "hepatic-lipidosis-severe",
+            "name": "Hepatic Lipidosis (Severe)",
+            "name_ja": "肝リピドーシス（重症型）"
+          }
+        ]
+      },
+      {
+        "base": "Fur Ring",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0013",
+            "slug": "fur-ring",
+            "name": "Fur Ring",
+            "name_ja": "ファーリング（陰茎毛輪）"
+          },
+          {
+            "id": "chinchilla_0167",
+            "slug": "fur-ring-paraphimosis",
+            "name": "Fur Ring (Paraphimosis)",
+            "name_ja": "ファーリング（包皮嵌頓）"
+          },
+          {
+            "id": "chinchilla_0171",
+            "slug": "fur-ring-penile",
+            "name": "Fur Ring (Penile)",
+            "name_ja": "ペニス毛環（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Ringworm (Dermatophytosis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0014",
+            "slug": "ringworm-dermatophytosis",
+            "name": "Ringworm (Dermatophytosis)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "chinchilla_0226",
+            "slug": "dermatophytosis-microsporum",
+            "name": "Dermatophytosis (Microsporum)",
+            "name_ja": "皮膚糸状菌症（ミクロスポルム）（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0251",
+            "slug": "dermatophytosis-ringworm",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Fur Chewing (Barbering)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0015",
+            "slug": "fur-chewing-barbering",
+            "name": "Fur Chewing (Barbering)",
+            "name_ja": "毛噛み（バーバリング）"
+          },
+          {
+            "id": "chinchilla_0077",
+            "slug": "fur-chewing-self-barbering-stress-related",
+            "name": "Fur Chewing (Self-Barbering) - Stress-Related",
+            "name_ja": "毛噛み（自己バーバリング）- ストレス関連"
+          },
+          {
+            "id": "chinchilla_0151",
+            "slug": "fur-chewing-stress-related",
+            "name": "Fur Chewing - Stress-Related",
+            "name_ja": "毛噛み（ストレス関連）"
+          },
+          {
+            "id": "chinchilla_0152",
+            "slug": "fur-chewing-nutritional",
+            "name": "Fur Chewing - Nutritional",
+            "name_ja": "毛噛み（栄養性）"
+          },
+          {
+            "id": "chinchilla_0172",
+            "slug": "fur-chewing",
+            "name": "Fur Chewing",
+            "name_ja": "毛噛み（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Pneumonia",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0018",
+            "slug": "pneumonia",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
+          },
+          {
+            "id": "chinchilla_0248",
+            "slug": "pneumonia-bacterial",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Heat Stroke",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0020",
+            "slug": "heat-stroke",
+            "name": "Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "chinchilla_0038",
+            "slug": "heat-stroke-neurological",
+            "name": "Heat Stroke (Neurological)",
+            "name_ja": "熱中症（神経症状）"
+          },
+          {
+            "id": "chinchilla_0149",
+            "slug": "heat-stroke-chinchilla",
+            "name": "Heat Stroke - Chinchilla",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "chinchilla_0168",
+            "slug": "heat-stroke-hyperthermia",
+            "name": "Heat Stroke (Hyperthermia)",
+            "name_ja": "熱中症（高体温症）"
+          }
+        ]
+      },
+      {
+        "base": "Mastitis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0028",
+            "slug": "mastitis",
+            "name": "Mastitis",
+            "name_ja": "乳腺炎"
+          },
+          {
+            "id": "chinchilla_0104",
+            "slug": "mastitis-acute",
+            "name": "Mastitis (Acute)",
+            "name_ja": "乳腺炎（急性）"
+          }
+        ]
+      },
+      {
+        "base": "Limb Fracture (General)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0031",
+            "slug": "limb-fracture-general",
+            "name": "Limb Fracture (General)",
+            "name_ja": "四肢骨折（一般）"
+          },
+          {
+            "id": "chinchilla_0270",
+            "slug": "fracture-limb",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Ketosis (Pregnancy Toxemia)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0048",
+            "slug": "ketosis-pregnancy-toxemia",
+            "name": "Ketosis (Pregnancy Toxemia)",
+            "name_ja": "ケトーシス（妊娠中毒症）"
+          },
+          {
+            "id": "chinchilla_0237",
+            "slug": "ketosis",
+            "name": "Ketosis",
+            "name_ja": "ケトーシス（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Otitis Media / Interna",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0061",
+            "slug": "otitis-media-interna",
+            "name": "Otitis Media / Interna",
+            "name_ja": "中耳炎・内耳炎"
+          },
+          {
+            "id": "chinchilla_0198",
+            "slug": "otitis-media-interna",
+            "name": "Otitis Media/Interna",
+            "name_ja": "中耳/内耳炎（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Pregnancy Toxemia (Early)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0103",
+            "slug": "pregnancy-toxemia-early",
+            "name": "Pregnancy Toxemia (Early)",
+            "name_ja": "妊娠中毒症（早期）"
+          },
+          {
+            "id": "chinchilla_0190",
+            "slug": "pregnancy-toxemia",
+            "name": "Pregnancy Toxemia",
+            "name_ja": "妊娠中毒症（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Ear Infection (Otitis Externa)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0106",
+            "slug": "ear-infection-otitis-externa",
+            "name": "Ear Infection (Otitis Externa)",
+            "name_ja": "耳感染症（外耳炎）"
+          },
+          {
+            "id": "chinchilla_0177",
+            "slug": "ear-infection-otitis",
+            "name": "Ear Infection (Otitis)",
+            "name_ja": "耳感染症（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Osteoarthritis (Degenerative Joint Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0115",
+            "slug": "osteoarthritis-degenerative-joint-disease",
+            "name": "Osteoarthritis (Degenerative Joint Disease)",
+            "name_ja": "変形性関節症（変性性関節疾患）"
+          },
+          {
+            "id": "chinchilla_0271",
+            "slug": "osteoarthritis",
+            "name": "Osteoarthritis",
+            "name_ja": "変形性関節症（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Anemia (Non-specific)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0127",
+            "slug": "anemia-non-specific",
+            "name": "Anemia (Non-specific)",
+            "name_ja": "貧血（非特異的）"
+          },
+          {
+            "id": "chinchilla_0276",
+            "slug": "anemia",
+            "name": "Anemia",
+            "name_ja": "貧血（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Dental Disease - Incisor Malocclusion",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "chinchilla_0140",
+            "slug": "dental-disease-incisor-malocclusion",
+            "name": "Dental Disease - Incisor Malocclusion",
+            "name_ja": "歯科疾患（切歯不正咬合）"
+          },
+          {
+            "id": "chinchilla_0141",
+            "slug": "dental-disease-molar-root-infection",
+            "name": "Dental Disease - Molar Root Infection",
+            "name_ja": "歯科疾患（臼歯歯根感染）"
+          },
+          {
+            "id": "chinchilla_0142",
+            "slug": "dental-disease-resorptive-lesions",
+            "name": "Dental Disease - Resorptive Lesions",
+            "name_ja": "歯科疾患（歯根吸収性病変）"
+          },
+          {
+            "id": "chinchilla_0173",
+            "slug": "dental-disease-molar-elongation",
+            "name": "Dental Disease (Molar Elongation)",
+            "name_ja": "歯科疾患（臼歯伸長）（チンチラ）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "chinch",
+        "size": 13,
+        "members": [
+          {
+            "id": "chinchilla_0145",
+            "name": "Intussusception - Chinchilla",
+            "name_ja": "腸重積"
+          },
+          {
+            "id": "chinchilla_0146",
+            "name": "Listeriosis - Chinchilla",
+            "name_ja": "リステリア症"
+          },
+          {
+            "id": "chinchilla_0148",
+            "name": "Penile Hair Ring - Chinchilla",
+            "name_ja": "陰茎毛輪"
+          },
+          {
+            "id": "chinchilla_0149",
+            "name": "Heat Stroke - Chinchilla",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "chinchilla_0153",
+            "name": "Conjunctivitis - Chinchilla",
+            "name_ja": "結膜炎"
+          },
+          {
+            "id": "chinchilla_0154",
+            "name": "Otitis Externa - Chinchilla",
+            "name_ja": "外耳炎"
+          },
+          {
+            "id": "chinchilla_0155",
+            "name": "Diabetes Mellitus - Chinchilla",
+            "name_ja": "糖尿病"
+          },
+          {
+            "id": "chinchilla_0156",
+            "name": "Dystocia - Chinchilla",
+            "name_ja": "難産"
+          },
+          {
+            "id": "chinchilla_0157",
+            "name": "Pyometra - Chinchilla",
+            "name_ja": "子宮蓄膿症"
+          },
+          {
+            "id": "chinchilla_0158",
+            "name": "Gastric Ulceration - Chinchilla",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "chinchilla_0159",
+            "name": "Fungal Pneumonia - Chinchilla",
+            "name_ja": "真菌性肺炎"
+          },
+          {
+            "id": "chinchilla_0161",
+            "name": "Paraphimosis - Chinchilla",
+            "name_ja": "嵌頓包茎"
+          },
+          {
+            "id": "chinchilla_0170",
+            "name": "Chinchilla Penile Hair Ring (Hair Ring Paraphimosis)",
+            "name_ja": "チンチラ陰茎毛輪（毛輪パラフィモーシス）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dental",
+        "size": 8,
+        "members": [
+          {
+            "id": "chinchilla_0002",
+            "name": "Dental Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "chinchilla_0073",
+            "name": "Dental Malocclusion - Molar Spurs",
+            "name_ja": "不正咬合 - 臼歯スパー"
+          },
+          {
+            "id": "chinchilla_0074",
+            "name": "Dental Malocclusion - Incisor",
+            "name_ja": "不正咬合 - 切歯"
+          },
+          {
+            "id": "chinchilla_0076",
+            "name": "Dental Resorption",
+            "name_ja": "歯の吸収"
+          },
+          {
+            "id": "chinchilla_0140",
+            "name": "Dental Disease - Incisor Malocclusion",
+            "name_ja": "歯科疾患（切歯不正咬合）"
+          },
+          {
+            "id": "chinchilla_0141",
+            "name": "Dental Disease - Molar Root Infection",
+            "name_ja": "歯科疾患（臼歯歯根感染）"
+          },
+          {
+            "id": "chinchilla_0142",
+            "name": "Dental Disease - Resorptive Lesions",
+            "name_ja": "歯科疾患（歯根吸収性病変）"
+          },
+          {
+            "id": "chinchilla_0173",
+            "name": "Dental Disease (Molar Elongation)",
+            "name_ja": "歯科疾患（臼歯伸長）（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 7,
+        "members": [
+          {
+            "id": "chinchilla_0016",
+            "name": "Ear Dermatitis",
+            "name_ja": "耳介皮膚炎"
+          },
+          {
+            "id": "chinchilla_0064",
+            "name": "Dermatitis (Contact / Allergic)",
+            "name_ja": "接触性・アレルギー性皮膚炎"
+          },
+          {
+            "id": "chinchilla_0110",
+            "name": "Dust Bath Dermatitis",
+            "name_ja": "砂浴び皮膚炎"
+          },
+          {
+            "id": "chinchilla_0162",
+            "name": "Trichophyton Dermatitis (Severe)",
+            "name_ja": "トリコフィトン皮膚炎（重度）"
+          },
+          {
+            "id": "chinchilla_0226",
+            "name": "Dermatophytosis (Microsporum)",
+            "name_ja": "皮膚糸状菌症（ミクロスポルム）（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0251",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0253",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ring",
+        "size": 7,
+        "members": [
+          {
+            "id": "chinchilla_0013",
+            "name": "Fur Ring",
+            "name_ja": "ファーリング（陰茎毛輪）"
+          },
+          {
+            "id": "chinchilla_0027",
+            "name": "Penile Fur Ring",
+            "name_ja": "陰茎毛輪"
+          },
+          {
+            "id": "chinchilla_0071",
+            "name": "Fur Ring (Penile) - Acute",
+            "name_ja": "ファーリング（陰茎）- 急性型"
+          },
+          {
+            "id": "chinchilla_0148",
+            "name": "Penile Hair Ring - Chinchilla",
+            "name_ja": "陰茎毛輪"
+          },
+          {
+            "id": "chinchilla_0167",
+            "name": "Fur Ring (Paraphimosis)",
+            "name_ja": "ファーリング（包皮嵌頓）"
+          },
+          {
+            "id": "chinchilla_0170",
+            "name": "Chinchilla Penile Hair Ring (Hair Ring Paraphimosis)",
+            "name_ja": "チンチラ陰茎毛輪（毛輪パラフィモーシス）"
+          },
+          {
+            "id": "chinchilla_0171",
+            "name": "Fur Ring (Penile)",
+            "name_ja": "ペニス毛環（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 6,
+        "members": [
+          {
+            "id": "chinchilla_0030",
+            "name": "Tibial Fracture",
+            "name_ja": "脛骨骨折"
+          },
+          {
+            "id": "chinchilla_0031",
+            "name": "Limb Fracture (General)",
+            "name_ja": "四肢骨折（一般）"
+          },
+          {
+            "id": "chinchilla_0113",
+            "name": "Femoral Fracture",
+            "name_ja": "大腿骨骨折"
+          },
+          {
+            "id": "chinchilla_0204",
+            "name": "Spinal Fracture",
+            "name_ja": "脊椎骨折（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0205",
+            "name": "Pelvic Fracture",
+            "name_ja": "骨盤骨折（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0270",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "malocc",
+        "size": 6,
+        "members": [
+          {
+            "id": "chinchilla_0000",
+            "name": "Malocclusion",
+            "name_ja": "不正咬合"
+          },
+          {
+            "id": "chinchilla_0073",
+            "name": "Dental Malocclusion - Molar Spurs",
+            "name_ja": "不正咬合 - 臼歯スパー"
+          },
+          {
+            "id": "chinchilla_0074",
+            "name": "Dental Malocclusion - Incisor",
+            "name_ja": "不正咬合 - 切歯"
+          },
+          {
+            "id": "chinchilla_0140",
+            "name": "Dental Disease - Incisor Malocclusion",
+            "name_ja": "歯科疾患（切歯不正咬合）"
+          },
+          {
+            "id": "chinchilla_0163",
+            "name": "Malocclusion - Progressive",
+            "name_ja": "不正咬合（進行性）"
+          },
+          {
+            "id": "chinchilla_0260",
+            "name": "Incisor Malocclusion",
+            "name_ja": "切歯不正咬合（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "chewin",
+        "size": 5,
+        "members": [
+          {
+            "id": "chinchilla_0015",
+            "name": "Fur Chewing (Barbering)",
+            "name_ja": "毛噛み（バーバリング）"
+          },
+          {
+            "id": "chinchilla_0077",
+            "name": "Fur Chewing (Self-Barbering) - Stress-Related",
+            "name_ja": "毛噛み（自己バーバリング）- ストレス関連"
+          },
+          {
+            "id": "chinchilla_0151",
+            "name": "Fur Chewing - Stress-Related",
+            "name_ja": "毛噛み（ストレス関連）"
+          },
+          {
+            "id": "chinchilla_0152",
+            "name": "Fur Chewing - Nutritional",
+            "name_ja": "毛噛み（栄養性）"
+          },
+          {
+            "id": "chinchilla_0172",
+            "name": "Fur Chewing",
+            "name_ja": "毛噛み（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 5,
+        "members": [
+          {
+            "id": "chinchilla_0046",
+            "name": "Vitamin Deficiency",
+            "name_ja": "ビタミン欠乏症"
+          },
+          {
+            "id": "chinchilla_0179",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0180",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0181",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン欠乏症（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0236",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "heat",
+        "size": 5,
+        "members": [
+          {
+            "id": "chinchilla_0020",
+            "name": "Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "chinchilla_0038",
+            "name": "Heat Stroke (Neurological)",
+            "name_ja": "熱中症（神経症状）"
+          },
+          {
+            "id": "chinchilla_0072",
+            "name": "Heat Stroke - Chronic Sequelae",
+            "name_ja": "熱中症 - 慢性後遺症"
+          },
+          {
+            "id": "chinchilla_0149",
+            "name": "Heat Stroke - Chinchilla",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "chinchilla_0168",
+            "name": "Heat Stroke (Hyperthermia)",
+            "name_ja": "熱中症（高体温症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 5,
+        "members": [
+          {
+            "id": "chinchilla_0018",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
+          },
+          {
+            "id": "chinchilla_0069",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎"
+          },
+          {
+            "id": "chinchilla_0159",
+            "name": "Fungal Pneumonia - Chinchilla",
+            "name_ja": "真菌性肺炎"
+          },
+          {
+            "id": "chinchilla_0191",
+            "name": "Pneumothorax",
+            "name_ja": "気胸（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0248",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stroke",
+        "size": 5,
+        "members": [
+          {
+            "id": "chinchilla_0020",
+            "name": "Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "chinchilla_0038",
+            "name": "Heat Stroke (Neurological)",
+            "name_ja": "熱中症（神経症状）"
+          },
+          {
+            "id": "chinchilla_0072",
+            "name": "Heat Stroke - Chronic Sequelae",
+            "name_ja": "熱中症 - 慢性後遺症"
+          },
+          {
+            "id": "chinchilla_0149",
+            "name": "Heat Stroke - Chinchilla",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "chinchilla_0168",
+            "name": "Heat Stroke (Hyperthermia)",
+            "name_ja": "熱中症（高体温症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 5,
+        "members": [
+          {
+            "id": "chinchilla_0059",
+            "name": "Ovarian Tumors",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "chinchilla_0060",
+            "name": "Mammary Tumors",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "chinchilla_0185",
+            "name": "Adrenal Tumor",
+            "name_ja": "副腎腫瘍（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0214",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0275",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 4,
+        "members": [
+          {
+            "id": "chinchilla_0002",
+            "name": "Dental Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "chinchilla_0070",
+            "name": "Skin Abscess",
+            "name_ja": "皮膚膿瘍"
+          },
+          {
+            "id": "chinchilla_0075",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "chinchilla_0227",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cecal",
+        "size": 4,
+        "members": [
+          {
+            "id": "chinchilla_0011",
+            "name": "Cecal Torsion",
+            "name_ja": "盲腸捻転"
+          },
+          {
+            "id": "chinchilla_0087",
+            "name": "Cecal Impaction",
+            "name_ja": "盲腸嵌頓"
+          },
+          {
+            "id": "chinchilla_0124",
+            "name": "Cecal Dysbiosis",
+            "name_ja": "盲腸内細菌叢異常"
+          },
+          {
+            "id": "chinchilla_0144",
+            "name": "Bloat - Acute Cecal Tympany",
+            "name_ja": "鼓脹症（急性盲腸鼓腸）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 4,
+        "members": [
+          {
+            "id": "chinchilla_0009",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス"
+          },
+          {
+            "id": "chinchilla_0089",
+            "name": "Hepatic Coccidiosis",
+            "name_ja": "肝コクシジウム症"
+          },
+          {
+            "id": "chinchilla_0130",
+            "name": "Hepatic Lipidosis (Severe)",
+            "name_ja": "肝リピドーシス（重症型）"
+          },
+          {
+            "id": "chinchilla_0227",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hyperp",
+        "size": 4,
+        "members": [
+          {
+            "id": "chinchilla_0098",
+            "name": "Adrenal Hyperplasia",
+            "name_ja": "副腎過形成"
+          },
+          {
+            "id": "chinchilla_0116",
+            "name": "Nutritional Secondary Hyperparathyroidism",
+            "name_ja": "栄養性二次性副甲状腺機能亢進症"
+          },
+          {
+            "id": "chinchilla_0186",
+            "name": "Thyroid Hyperplasia",
+            "name_ja": "甲状腺過形成（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0238",
+            "name": "Hyperphosphatemia",
+            "name_ja": "高リン血症（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lister",
+        "size": 4,
+        "members": [
+          {
+            "id": "chinchilla_0037",
+            "name": "Listeriosis",
+            "name_ja": "リステリア症"
+          },
+          {
+            "id": "chinchilla_0051",
+            "name": "Listeria Infection",
+            "name_ja": "リステリア感染症"
+          },
+          {
+            "id": "chinchilla_0146",
+            "name": "Listeriosis - Chinchilla",
+            "name_ja": "リステリア症"
+          },
+          {
+            "id": "chinchilla_0169",
+            "name": "Listeriosis",
+            "name_ja": "リステリア症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "otiti",
+        "size": 4,
+        "members": [
+          {
+            "id": "chinchilla_0061",
+            "name": "Otitis Media / Interna",
+            "name_ja": "中耳炎・内耳炎"
+          },
+          {
+            "id": "chinchilla_0147",
+            "name": "Pseudomonas Otitis",
+            "name_ja": "緑膿菌性外耳炎"
+          },
+          {
+            "id": "chinchilla_0154",
+            "name": "Otitis Externa - Chinchilla",
+            "name_ja": "外耳炎"
+          },
+          {
+            "id": "chinchilla_0198",
+            "name": "Otitis Media/Interna",
+            "name_ja": "中耳/内耳炎（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stres",
+        "size": 4,
+        "members": [
+          {
+            "id": "chinchilla_0077",
+            "name": "Fur Chewing (Self-Barbering) - Stress-Related",
+            "name_ja": "毛噛み（自己バーバリング）- ストレス関連"
+          },
+          {
+            "id": "chinchilla_0129",
+            "name": "Stress Syndrome (Chronic)",
+            "name_ja": "ストレス症候群（慢性）"
+          },
+          {
+            "id": "chinchilla_0151",
+            "name": "Fur Chewing - Stress-Related",
+            "name_ja": "毛噛み（ストレス関連）"
+          },
+          {
+            "id": "chinchilla_0217",
+            "name": "Stress-Related Illness",
+            "name_ja": "ストレス関連疾患（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0118",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "chinchilla_0120",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "chinchilla_0216",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coccid",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0054",
+            "name": "Coccidia Infection",
+            "name_ja": "コクシジウム症"
+          },
+          {
+            "id": "chinchilla_0089",
+            "name": "Hepatic Coccidiosis",
+            "name_ja": "肝コクシジウム症"
+          },
+          {
+            "id": "chinchilla_0258",
+            "name": "Coccidiosis",
+            "name_ja": "コクシジウム症（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "consti",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0006",
+            "name": "Constipation",
+            "name_ja": "便秘"
+          },
+          {
+            "id": "chinchilla_0150",
+            "name": "Constipation - Chronic",
+            "name_ja": "便秘（慢性）"
+          },
+          {
+            "id": "chinchilla_0175",
+            "name": "Constipation (Megacolon)",
+            "name_ja": "便秘（巨大結腸症）（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cyst",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0099",
+            "name": "Ovarian Cysts",
+            "name_ja": "卵巣嚢胞"
+          },
+          {
+            "id": "chinchilla_0187",
+            "name": "Renal Cyst",
+            "name_ja": "腎嚢胞（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0274",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enteri",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0008",
+            "name": "Enteritis",
+            "name_ja": "腸炎"
+          },
+          {
+            "id": "chinchilla_0082",
+            "name": "Bacterial Enteritis (Clostridial)",
+            "name_ja": "細菌性腸炎（クロストリジウム性）"
+          },
+          {
+            "id": "chinchilla_0083",
+            "name": "E. coli Enteritis",
+            "name_ja": "大腸菌性腸炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastri",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0088",
+            "name": "Gastric Ulceration",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "chinchilla_0158",
+            "name": "Gastric Ulceration - Chinchilla",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "chinchilla_0257",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "inciso",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0074",
+            "name": "Dental Malocclusion - Incisor",
+            "name_ja": "不正咬合 - 切歯"
+          },
+          {
+            "id": "chinchilla_0140",
+            "name": "Dental Disease - Incisor Malocclusion",
+            "name_ja": "歯科疾患（切歯不正咬合）"
+          },
+          {
+            "id": "chinchilla_0260",
+            "name": "Incisor Malocclusion",
+            "name_ja": "切歯不正咬合（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0086",
+            "name": "Intestinal Parasites (Giardia)",
+            "name_ja": "腸管寄生虫症（ジアルジア）"
+          },
+          {
+            "id": "chinchilla_0183",
+            "name": "Intestinal Volvulus",
+            "name_ja": "腸捻転（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0256",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "molar",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0001",
+            "name": "Molar Elongation",
+            "name_ja": "臼歯過長症"
+          },
+          {
+            "id": "chinchilla_0073",
+            "name": "Dental Malocclusion - Molar Spurs",
+            "name_ja": "不正咬合 - 臼歯スパー"
+          },
+          {
+            "id": "chinchilla_0141",
+            "name": "Dental Disease - Molar Root Infection",
+            "name_ja": "歯科疾患（臼歯歯根感染）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ovaria",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0059",
+            "name": "Ovarian Tumors",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "chinchilla_0099",
+            "name": "Ovarian Cysts",
+            "name_ja": "卵巣嚢胞"
+          },
+          {
+            "id": "chinchilla_0274",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "penile",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0027",
+            "name": "Penile Fur Ring",
+            "name_ja": "陰茎毛輪"
+          },
+          {
+            "id": "chinchilla_0148",
+            "name": "Penile Hair Ring - Chinchilla",
+            "name_ja": "陰茎毛輪"
+          },
+          {
+            "id": "chinchilla_0170",
+            "name": "Chinchilla Penile Hair Ring (Hair Ring Paraphimosis)",
+            "name_ja": "チンチラ陰茎毛輪（毛輪パラフィモーシス）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0010",
+            "name": "Rectal Prolapse",
+            "name_ja": "直腸脱"
+          },
+          {
+            "id": "chinchilla_0132",
+            "name": "Prolapsed Rectum",
+            "name_ja": "直腸脱"
+          },
+          {
+            "id": "chinchilla_0231",
+            "name": "Anal Prolapse",
+            "name_ja": "肛門脱（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pseudo",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0049",
+            "name": "Pseudomonas Infection",
+            "name_ja": "緑膿菌感染症"
+          },
+          {
+            "id": "chinchilla_0147",
+            "name": "Pseudomonas Otitis",
+            "name_ja": "緑膿菌性外耳炎"
+          },
+          {
+            "id": "chinchilla_0247",
+            "name": "Pseudopregnancy",
+            "name_ja": "偽妊娠（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pulmon",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0121",
+            "name": "Pulmonary Adenocarcinoma",
+            "name_ja": "肺腺癌"
+          },
+          {
+            "id": "chinchilla_0194",
+            "name": "Pulmonary Neoplasia",
+            "name_ja": "肺腫瘍（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0250",
+            "name": "Pulmonary Edema",
+            "name_ja": "肺水腫（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "relate",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0077",
+            "name": "Fur Chewing (Self-Barbering) - Stress-Related",
+            "name_ja": "毛噛み（自己バーバリング）- ストレス関連"
+          },
+          {
+            "id": "chinchilla_0151",
+            "name": "Fur Chewing - Stress-Related",
+            "name_ja": "毛噛み（ストレス関連）"
+          },
+          {
+            "id": "chinchilla_0217",
+            "name": "Stress-Related Illness",
+            "name_ja": "ストレス関連疾患（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0094",
+            "name": "Acute Renal Failure",
+            "name_ja": "急性腎不全"
+          },
+          {
+            "id": "chinchilla_0187",
+            "name": "Renal Cyst",
+            "name_ja": "腎嚢胞（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0216",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "slobbe",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0003",
+            "name": "Slobbers (Ptyalism)",
+            "name_ja": "流涎症"
+          },
+          {
+            "id": "chinchilla_0143",
+            "name": "Slobbers - Severe (with Dermatitis)",
+            "name_ja": "流涎症（重度・皮膚炎合併）"
+          },
+          {
+            "id": "chinchilla_0174",
+            "name": "Slobbers (Dental-Related)",
+            "name_ja": "流涎（歯科関連）（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spinal",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0063",
+            "name": "Spinal Injury",
+            "name_ja": "脊椎損傷"
+          },
+          {
+            "id": "chinchilla_0160",
+            "name": "Spinal Trauma",
+            "name_ja": "脊椎外傷"
+          },
+          {
+            "id": "chinchilla_0204",
+            "name": "Spinal Fracture",
+            "name_ja": "脊椎骨折（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0122",
+            "name": "Toxicosis (Plant Poisoning)",
+            "name_ja": "中毒症（植物中毒）"
+          },
+          {
+            "id": "chinchilla_0139",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "chinchilla_0221",
+            "name": "Plant Toxicosis",
+            "name_ja": "植物中毒（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tricho",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0080",
+            "name": "Trichophyton mentagrophytes (Ringworm)",
+            "name_ja": "白癬菌感染（皮膚糸状菌症）"
+          },
+          {
+            "id": "chinchilla_0162",
+            "name": "Trichophyton Dermatitis (Severe)",
+            "name_ja": "トリコフィトン皮膚炎（重度）"
+          },
+          {
+            "id": "chinchilla_0184",
+            "name": "Trichobezoar",
+            "name_ja": "毛球症（チンチラ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0046",
+            "name": "Vitamin Deficiency",
+            "name_ja": "ビタミン欠乏症"
+          },
+          {
+            "id": "chinchilla_0179",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（チンチラ）"
+          },
+          {
+            "id": "chinchilla_0236",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（チンチラ）"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1504 @@
+{
+  "species": "sugar_glider",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 221,
+    "merge_clusters": 7,
+    "records_merged_away": 7,
+    "archived": 0,
+    "served_after": 214
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "sugar_glider_0011",
+        "slug": "stress-related-alopecia",
+        "name": "Stress-related Alopecia",
+        "name_ja": "ストレス性脱毛"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0140",
+          "slug": "stress-induced-alopecia",
+          "name": "Stress-Induced Alopecia",
+          "name_ja": "ストレス性脱毛（フクロモモンガ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0015",
+        "slug": "ringworm-dermatophytosis",
+        "name": "Ringworm (Dermatophytosis)",
+        "name_ja": "皮膚糸状菌症"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0220",
+          "slug": "dermatophytosis-ringworm",
+          "name": "Dermatophytosis (Ringworm)",
+          "name_ja": "皮膚糸状菌症（フクロモモンガ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0038",
+        "slug": "proptosis-eye-prolapse",
+        "name": "Proptosis (Eye Prolapse)",
+        "name_ja": "眼球突出"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0188",
+          "slug": "exophthalmos",
+          "name": "Exophthalmos",
+          "name_ja": "眼球突出（フクロモモンガ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0045",
+        "slug": "hind-leg-paralysis",
+        "name": "Hind Leg Paralysis",
+        "name_ja": "後肢麻痺"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0167",
+          "slug": "posterior-paralysis",
+          "name": "Posterior Paralysis",
+          "name_ja": "後肢麻痺（フクロモモンガ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0050",
+        "slug": "urolithiasis-bladder-stones",
+        "name": "Urolithiasis (Bladder Stones)",
+        "name_ja": "尿路結石症"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0169",
+          "slug": "urolithiasis",
+          "name": "Urolithiasis",
+          "name_ja": "尿路結石症（フクロモモンガ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0052",
+        "slug": "aflatoxicosis",
+        "name": "Aflatoxicosis",
+        "name_ja": "アフラトキシン中毒"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0131",
+          "slug": "aflatoxicosis",
+          "name": "Aflatoxicosis",
+          "name_ja": "アフラトキシン中毒"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0128",
+        "slug": "ovarian-cysts",
+        "name": "Ovarian Cysts",
+        "name_ja": "卵巣嚢胞"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0202",
+          "slug": "ovarian-cyst",
+          "name": "Ovarian Cyst",
+          "name_ja": "卵巣嚢胞（フクロモモンガ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Calcium Deficiency (Hypocalcemia)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0001",
+            "slug": "calcium-deficiency-hypocalcemia",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
+          },
+          {
+            "id": "sugar_glider_0135",
+            "slug": "calcium-deficiency",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Hypoglycemia",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0006",
+            "slug": "hypoglycemia",
+            "name": "Hypoglycemia",
+            "name_ja": "低血糖症"
+          },
+          {
+            "id": "sugar_glider_0088",
+            "slug": "hypoglycemia-neonatal",
+            "name": "Hypoglycemia (Neonatal)",
+            "name_ja": "低血糖症（新生児）"
+          }
+        ]
+      },
+      {
+        "base": "Iron Storage Disease (Hemochromatosis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0008",
+            "slug": "iron-storage-disease-hemochromatosis",
+            "name": "Iron Storage Disease (Hemochromatosis)",
+            "name_ja": "鉄過剰症（ヘモクロマトーシス）"
+          },
+          {
+            "id": "sugar_glider_0080",
+            "slug": "iron-storage-disease-hepatic",
+            "name": "Iron Storage Disease (Hepatic)",
+            "name_ja": "鉄蓄積症（肝臓型）"
+          }
+        ]
+      },
+      {
+        "base": "Mite Infestation (Sarcoptic / Demodex)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0019",
+            "slug": "mite-infestation-sarcoptic-demodex",
+            "name": "Mite Infestation (Sarcoptic / Demodex)",
+            "name_ja": "ダニ感染症"
+          },
+          {
+            "id": "sugar_glider_0155",
+            "slug": "mite-infestation",
+            "name": "Mite Infestation",
+            "name_ja": "ダニ症（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Toxoplasmosis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0022",
+            "slug": "toxoplasmosis",
+            "name": "Toxoplasmosis",
+            "name_ja": "トキソプラズマ症"
+          },
+          {
+            "id": "sugar_glider_0097",
+            "slug": "toxoplasmosis-acute",
+            "name": "Toxoplasmosis (Acute)",
+            "name_ja": "トキソプラズマ症（急性）"
+          }
+        ]
+      },
+      {
+        "base": "Pneumonia",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0024",
+            "slug": "pneumonia",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
+          },
+          {
+            "id": "sugar_glider_0219",
+            "slug": "pneumonia-bacterial",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Diarrhea (Non-specific)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0026",
+            "slug": "diarrhea-non-specific",
+            "name": "Diarrhea (Non-specific)",
+            "name_ja": "下痢（非特異的）"
+          },
+          {
+            "id": "sugar_glider_0147",
+            "slug": "diarrhea",
+            "name": "Diarrhea",
+            "name_ja": "下痢（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Proptosis (Eye Prolapse)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0038",
+            "slug": "proptosis-eye-prolapse",
+            "name": "Proptosis (Eye Prolapse)",
+            "name_ja": "眼球突出"
+          },
+          {
+            "id": "sugar_glider_0165",
+            "slug": "proptosis",
+            "name": "Proptosis",
+            "name_ja": "眼球脱出（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0188",
+            "slug": "exophthalmos",
+            "name": "Exophthalmos",
+            "name_ja": "眼球突出（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Pouch Infection (Joeyitis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0043",
+            "slug": "pouch-infection-joeyitis",
+            "name": "Pouch Infection (Joeyitis)",
+            "name_ja": "育児嚢感染症"
+          },
+          {
+            "id": "sugar_glider_0073",
+            "slug": "pouch-infection-marsupitis",
+            "name": "Pouch Infection (Marsupitis)",
+            "name_ja": "育児嚢感染（マーシュピティス）"
+          },
+          {
+            "id": "sugar_glider_0193",
+            "slug": "pouch-infection-marsupial",
+            "name": "Pouch Infection (Marsupial)",
+            "name_ja": "育児嚢感染（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Seizures (MBD-related)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0044",
+            "slug": "seizures-mbd-related",
+            "name": "Seizures (MBD-related)",
+            "name_ja": "てんかん発作（MBD関連）"
+          },
+          {
+            "id": "sugar_glider_0166",
+            "slug": "seizures",
+            "name": "Seizures",
+            "name_ja": "痙攣発作（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis (Fatty Liver)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0051",
+            "slug": "hepatic-lipidosis-fatty-liver",
+            "name": "Hepatic Lipidosis (Fatty Liver)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "sugar_glider_0153",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Patagium Tear (Membrane Injury)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0059",
+            "slug": "patagium-tear-membrane-injury",
+            "name": "Patagium Tear (Membrane Injury)",
+            "name_ja": "飛膜損傷"
+          },
+          {
+            "id": "sugar_glider_0071",
+            "slug": "patagium-laceration-severe",
+            "name": "Patagium Laceration (Severe)",
+            "name_ja": "飛膜裂傷（重症型）"
+          },
+          {
+            "id": "sugar_glider_0138",
+            "slug": "patagium-tear",
+            "name": "Patagium Tear",
+            "name_ja": "飛膜裂傷（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Heat Stroke",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0061",
+            "slug": "heat-stroke",
+            "name": "Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "sugar_glider_0180",
+            "slug": "heat-stroke-respiratory",
+            "name": "Heat Stroke (Respiratory)",
+            "name_ja": "熱中症（呼吸器型）（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Nutritional Osteodystrophy",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0069",
+            "slug": "nutritional-osteodystrophy",
+            "name": "Nutritional Osteodystrophy",
+            "name_ja": "栄養性骨異栄養症"
+          },
+          {
+            "id": "sugar_glider_0133",
+            "slug": "nutritional-osteodystrophy-mbd",
+            "name": "Nutritional Osteodystrophy (MBD)",
+            "name_ja": "栄養性骨異栄養症（MBD）（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Ick (Bacterial Skin Infection)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0070",
+            "slug": "ick-bacterial-skin-infection",
+            "name": "Ick (Bacterial Skin Infection)",
+            "name_ja": "イック（細菌性皮膚感染症）"
+          },
+          {
+            "id": "sugar_glider_0134",
+            "slug": "ick-stress-related-dermatitis",
+            "name": "Ick (Stress-Related Dermatitis)",
+            "name_ja": "ストレス性皮膚炎（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Dystocia (Marsupial)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0075",
+            "slug": "dystocia-marsupial",
+            "name": "Dystocia (Marsupial)",
+            "name_ja": "難産（有袋類）"
+          },
+          {
+            "id": "sugar_glider_0170",
+            "slug": "dystocia",
+            "name": "Dystocia",
+            "name_ja": "難産（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Cystitis (Bacterial)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0101",
+            "slug": "cystitis-bacterial",
+            "name": "Cystitis (Bacterial)",
+            "name_ja": "膀胱炎（細菌性）"
+          },
+          {
+            "id": "sugar_glider_0200",
+            "slug": "cystitis",
+            "name": "Cystitis",
+            "name_ja": "膀胱炎（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Dental Abscess (Molar)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0109",
+            "slug": "dental-abscess-molar",
+            "name": "Dental Abscess (Molar)",
+            "name_ja": "歯の膿瘍（臼歯）"
+          },
+          {
+            "id": "sugar_glider_0144",
+            "slug": "dental-abscess",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Encephalitis (Viral)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0119",
+            "slug": "encephalitis-viral",
+            "name": "Encephalitis (Viral)",
+            "name_ja": "脳炎（ウイルス性）"
+          },
+          {
+            "id": "sugar_glider_0191",
+            "slug": "encephalitis",
+            "name": "Encephalitis",
+            "name_ja": "脳炎（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Penile Prolapse (Non-paraphimosis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0129",
+            "slug": "penile-prolapse-non-paraphimosis",
+            "name": "Penile Prolapse (Non-paraphimosis)",
+            "name_ja": "陰茎脱出（非嵌頓包茎）"
+          },
+          {
+            "id": "sugar_glider_0137",
+            "slug": "penile-prolapse",
+            "name": "Penile Prolapse",
+            "name_ja": "陰茎脱（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Fracture",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "sugar_glider_0171",
+            "slug": "fracture",
+            "name": "Fracture",
+            "name_ja": "骨折（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0174",
+            "slug": "fracture-patagium-related",
+            "name": "Fracture (Patagium-related)",
+            "name_ja": "骨折（飛膜関連）（フクロモモンガ）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "defici",
+        "size": 10,
+        "members": [
+          {
+            "id": "sugar_glider_0001",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
+          },
+          {
+            "id": "sugar_glider_0002",
+            "name": "Malnutrition / Nutritional Deficiency",
+            "name_ja": "栄養不良・栄養欠乏症"
+          },
+          {
+            "id": "sugar_glider_0004",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "sugar_glider_0005",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "sugar_glider_0007",
+            "name": "Protein Deficiency",
+            "name_ja": "タンパク質欠乏症"
+          },
+          {
+            "id": "sugar_glider_0091",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン欠乏症"
+          },
+          {
+            "id": "sugar_glider_0092",
+            "name": "Zinc Deficiency",
+            "name_ja": "亜鉛欠乏症"
+          },
+          {
+            "id": "sugar_glider_0135",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0136",
+            "name": "Vitamin D Deficiency",
+            "name_ja": "ビタミンD欠乏症（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0192",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 8,
+        "members": [
+          {
+            "id": "sugar_glider_0057",
+            "name": "Limb Fracture",
+            "name_ja": "四肢骨折"
+          },
+          {
+            "id": "sugar_glider_0058",
+            "name": "Pathological Fracture (MBD-related)",
+            "name_ja": "病的骨折（MBD関連）"
+          },
+          {
+            "id": "sugar_glider_0104",
+            "name": "Vertebral Fracture",
+            "name_ja": "椎骨骨折"
+          },
+          {
+            "id": "sugar_glider_0105",
+            "name": "Pelvic Fracture",
+            "name_ja": "骨盤骨折"
+          },
+          {
+            "id": "sugar_glider_0106",
+            "name": "Digit Fracture / Avulsion",
+            "name_ja": "指骨折/剥離"
+          },
+          {
+            "id": "sugar_glider_0111",
+            "name": "Incisor Fracture",
+            "name_ja": "切歯骨折"
+          },
+          {
+            "id": "sugar_glider_0171",
+            "name": "Fracture",
+            "name_ja": "骨折（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0174",
+            "name": "Fracture (Patagium-related)",
+            "name_ja": "骨折（飛膜関連）（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 6,
+        "members": [
+          {
+            "id": "sugar_glider_0013",
+            "name": "Skin Abscess",
+            "name_ja": "皮膚膿瘍"
+          },
+          {
+            "id": "sugar_glider_0033",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "sugar_glider_0072",
+            "name": "Patagium Abscess",
+            "name_ja": "飛膜膿瘍"
+          },
+          {
+            "id": "sugar_glider_0109",
+            "name": "Dental Abscess (Molar)",
+            "name_ja": "歯の膿瘍（臼歯）"
+          },
+          {
+            "id": "sugar_glider_0144",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0206",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 6,
+        "members": [
+          {
+            "id": "sugar_glider_0051",
+            "name": "Hepatic Lipidosis (Fatty Liver)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "sugar_glider_0081",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝臓腫瘍"
+          },
+          {
+            "id": "sugar_glider_0116",
+            "name": "Obesity-Related Hepatic Lipidosis",
+            "name_ja": "肥満関連肝リピドーシス"
+          },
+          {
+            "id": "sugar_glider_0153",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0154",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0206",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mutila",
+        "size": 6,
+        "members": [
+          {
+            "id": "sugar_glider_0010",
+            "name": "Self-mutilation",
+            "name_ja": "自傷行為"
+          },
+          {
+            "id": "sugar_glider_0065",
+            "name": "Self-Mutilation - Penile",
+            "name_ja": "自己損傷 - 陰茎"
+          },
+          {
+            "id": "sugar_glider_0066",
+            "name": "Self-Mutilation - Tail",
+            "name_ja": "自己損傷 - 尾"
+          },
+          {
+            "id": "sugar_glider_0067",
+            "name": "Self-Mutilation - Patagium",
+            "name_ja": "自己損傷 - 飛膜"
+          },
+          {
+            "id": "sugar_glider_0068",
+            "name": "Self-Mutilation - Stress-Induced",
+            "name_ja": "自己損傷 - ストレス誘発性"
+          },
+          {
+            "id": "sugar_glider_0130",
+            "name": "Self-Mutilation Syndrome",
+            "name_ja": "自咬症（セルフミューティレーション）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "self",
+        "size": 6,
+        "members": [
+          {
+            "id": "sugar_glider_0010",
+            "name": "Self-mutilation",
+            "name_ja": "自傷行為"
+          },
+          {
+            "id": "sugar_glider_0065",
+            "name": "Self-Mutilation - Penile",
+            "name_ja": "自己損傷 - 陰茎"
+          },
+          {
+            "id": "sugar_glider_0066",
+            "name": "Self-Mutilation - Tail",
+            "name_ja": "自己損傷 - 尾"
+          },
+          {
+            "id": "sugar_glider_0067",
+            "name": "Self-Mutilation - Patagium",
+            "name_ja": "自己損傷 - 飛膜"
+          },
+          {
+            "id": "sugar_glider_0068",
+            "name": "Self-Mutilation - Stress-Induced",
+            "name_ja": "自己損傷 - ストレス誘発性"
+          },
+          {
+            "id": "sugar_glider_0130",
+            "name": "Self-Mutilation Syndrome",
+            "name_ja": "自咬症（セルフミューティレーション）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 6,
+        "members": [
+          {
+            "id": "sugar_glider_0054",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "sugar_glider_0055",
+            "name": "Skin Tumor",
+            "name_ja": "皮膚腫瘍"
+          },
+          {
+            "id": "sugar_glider_0079",
+            "name": "Scent Gland Tumor",
+            "name_ja": "臭腺腫瘍"
+          },
+          {
+            "id": "sugar_glider_0160",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0161",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0197",
+            "name": "Adrenal Tumor",
+            "name_ja": "副腎腫瘍（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 5,
+        "members": [
+          {
+            "id": "sugar_glider_0021",
+            "name": "Intestinal Worms (Helminths)",
+            "name_ja": "腸内寄生虫症"
+          },
+          {
+            "id": "sugar_glider_0113",
+            "name": "Intestinal Candidiasis",
+            "name_ja": "腸管カンジダ症"
+          },
+          {
+            "id": "sugar_glider_0123",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞"
+          },
+          {
+            "id": "sugar_glider_0152",
+            "name": "Intestinal Parasitism",
+            "name_ja": "腸管寄生虫症（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0215",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸腺癌（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 5,
+        "members": [
+          {
+            "id": "sugar_glider_0056",
+            "name": "Abdominal Neoplasia",
+            "name_ja": "腹腔内腫瘍"
+          },
+          {
+            "id": "sugar_glider_0077",
+            "name": "Cloacal Neoplasia",
+            "name_ja": "クロアカ腫瘍"
+          },
+          {
+            "id": "sugar_glider_0081",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝臓腫瘍"
+          },
+          {
+            "id": "sugar_glider_0083",
+            "name": "Renal Neoplasia",
+            "name_ja": "腎臓腫瘍"
+          },
+          {
+            "id": "sugar_glider_0127",
+            "name": "Uterine Neoplasia",
+            "name_ja": "子宮腫瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "patagi",
+        "size": 5,
+        "members": [
+          {
+            "id": "sugar_glider_0059",
+            "name": "Patagium Tear (Membrane Injury)",
+            "name_ja": "飛膜損傷"
+          },
+          {
+            "id": "sugar_glider_0067",
+            "name": "Self-Mutilation - Patagium",
+            "name_ja": "自己損傷 - 飛膜"
+          },
+          {
+            "id": "sugar_glider_0071",
+            "name": "Patagium Laceration (Severe)",
+            "name_ja": "飛膜裂傷（重症型）"
+          },
+          {
+            "id": "sugar_glider_0072",
+            "name": "Patagium Abscess",
+            "name_ja": "飛膜膿瘍"
+          },
+          {
+            "id": "sugar_glider_0138",
+            "name": "Patagium Tear",
+            "name_ja": "飛膜裂傷（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stres",
+        "size": 5,
+        "members": [
+          {
+            "id": "sugar_glider_0011",
+            "name": "Stress-related Alopecia",
+            "name_ja": "ストレス性脱毛"
+          },
+          {
+            "id": "sugar_glider_0012",
+            "name": "Depression / Stress Syndrome",
+            "name_ja": "うつ・ストレス症候群"
+          },
+          {
+            "id": "sugar_glider_0068",
+            "name": "Self-Mutilation - Stress-Induced",
+            "name_ja": "自己損傷 - ストレス誘発性"
+          },
+          {
+            "id": "sugar_glider_0114",
+            "name": "Stress-Induced Immunosuppression",
+            "name_ja": "ストレス誘発性免疫抑制"
+          },
+          {
+            "id": "sugar_glider_0140",
+            "name": "Stress-Induced Alopecia",
+            "name_ja": "ストレス性脱毛（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 5,
+        "members": [
+          {
+            "id": "sugar_glider_0004",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "sugar_glider_0005",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "sugar_glider_0089",
+            "name": "Vitamin A Toxicity",
+            "name_ja": "ビタミンA中毒"
+          },
+          {
+            "id": "sugar_glider_0136",
+            "name": "Vitamin D Deficiency",
+            "name_ja": "ビタミンD欠乏症（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0192",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dental",
+        "size": 4,
+        "members": [
+          {
+            "id": "sugar_glider_0032",
+            "name": "Dental Disease / Tartar Buildup",
+            "name_ja": "歯科疾患・歯石蓄積"
+          },
+          {
+            "id": "sugar_glider_0109",
+            "name": "Dental Abscess (Molar)",
+            "name_ja": "歯の膿瘍（臼歯）"
+          },
+          {
+            "id": "sugar_glider_0144",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0145",
+            "name": "Dental Caries",
+            "name_ja": "歯のう蝕（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 4,
+        "members": [
+          {
+            "id": "sugar_glider_0014",
+            "name": "Dermatitis (Bacterial Skin Infection)",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "sugar_glider_0157",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0214",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0220",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "induce",
+        "size": 4,
+        "members": [
+          {
+            "id": "sugar_glider_0068",
+            "name": "Self-Mutilation - Stress-Induced",
+            "name_ja": "自己損傷 - ストレス誘発性"
+          },
+          {
+            "id": "sugar_glider_0114",
+            "name": "Stress-Induced Immunosuppression",
+            "name_ja": "ストレス誘発性免疫抑制"
+          },
+          {
+            "id": "sugar_glider_0140",
+            "name": "Stress-Induced Alopecia",
+            "name_ja": "ストレス性脱毛（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0168",
+            "name": "Toxin-Induced Seizures",
+            "name_ja": "中毒性痙攣（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nutrit",
+        "size": 4,
+        "members": [
+          {
+            "id": "sugar_glider_0002",
+            "name": "Malnutrition / Nutritional Deficiency",
+            "name_ja": "栄養不良・栄養欠乏症"
+          },
+          {
+            "id": "sugar_glider_0064",
+            "name": "Nutritional Secondary Hyperparathyroidism (NSHP)",
+            "name_ja": "栄養性二次性副甲状腺機能亢進症（NSHP）"
+          },
+          {
+            "id": "sugar_glider_0069",
+            "name": "Nutritional Osteodystrophy",
+            "name_ja": "栄養性骨異栄養症"
+          },
+          {
+            "id": "sugar_glider_0133",
+            "name": "Nutritional Osteodystrophy (MBD)",
+            "name_ja": "栄養性骨異栄養症（MBD）（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "penile",
+        "size": 4,
+        "members": [
+          {
+            "id": "sugar_glider_0039",
+            "name": "Penile Paraphimosis",
+            "name_ja": "嵌頓包茎（陰茎嵌頓）"
+          },
+          {
+            "id": "sugar_glider_0065",
+            "name": "Self-Mutilation - Penile",
+            "name_ja": "自己損傷 - 陰茎"
+          },
+          {
+            "id": "sugar_glider_0129",
+            "name": "Penile Prolapse (Non-paraphimosis)",
+            "name_ja": "陰茎脱出（非嵌頓包茎）"
+          },
+          {
+            "id": "sugar_glider_0137",
+            "name": "Penile Prolapse",
+            "name_ja": "陰茎脱（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 4,
+        "members": [
+          {
+            "id": "sugar_glider_0024",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
+          },
+          {
+            "id": "sugar_glider_0025",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎"
+          },
+          {
+            "id": "sugar_glider_0095",
+            "name": "Mycoplasma Pneumonia",
+            "name_ja": "マイコプラズマ肺炎"
+          },
+          {
+            "id": "sugar_glider_0219",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 4,
+        "members": [
+          {
+            "id": "sugar_glider_0031",
+            "name": "Rectal Prolapse",
+            "name_ja": "直腸脱"
+          },
+          {
+            "id": "sugar_glider_0040",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "sugar_glider_0129",
+            "name": "Penile Prolapse (Non-paraphimosis)",
+            "name_ja": "陰茎脱出（非嵌頓包茎）"
+          },
+          {
+            "id": "sugar_glider_0137",
+            "name": "Penile Prolapse",
+            "name_ja": "陰茎脱（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 4,
+        "members": [
+          {
+            "id": "sugar_glider_0083",
+            "name": "Renal Neoplasia",
+            "name_ja": "腎臓腫瘍"
+          },
+          {
+            "id": "sugar_glider_0100",
+            "name": "Renal Amyloidosis",
+            "name_ja": "腎アミロイドーシス"
+          },
+          {
+            "id": "sugar_glider_0163",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0208",
+            "name": "Acute Renal Failure",
+            "name_ja": "急性腎不全（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "alopec",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0011",
+            "name": "Stress-related Alopecia",
+            "name_ja": "ストレス性脱毛"
+          },
+          {
+            "id": "sugar_glider_0140",
+            "name": "Stress-Induced Alopecia",
+            "name_ja": "ストレス性脱毛（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0158",
+            "name": "Alopecia",
+            "name_ja": "脱毛症（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "candid",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0093",
+            "name": "Gastrointestinal Candidiasis",
+            "name_ja": "消化管カンジダ症"
+          },
+          {
+            "id": "sugar_glider_0113",
+            "name": "Intestinal Candidiasis",
+            "name_ja": "腸管カンジダ症"
+          },
+          {
+            "id": "sugar_glider_0204",
+            "name": "Candidiasis",
+            "name_ja": "カンジダ症（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0085",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "sugar_glider_0162",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0163",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cloaca",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0040",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "sugar_glider_0076",
+            "name": "Cloacal Infection",
+            "name_ja": "クロアカ感染"
+          },
+          {
+            "id": "sugar_glider_0077",
+            "name": "Cloacal Neoplasia",
+            "name_ja": "クロアカ腫瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enteri",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0027",
+            "name": "Bacterial Enteritis",
+            "name_ja": "細菌性腸炎"
+          },
+          {
+            "id": "sugar_glider_0149",
+            "name": "E. coli Enteritis",
+            "name_ja": "大腸菌性腸炎（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0150",
+            "name": "Clostridial Enteritis",
+            "name_ja": "クロストリジウム腸炎（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gland",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0016",
+            "name": "Scent Gland Infection",
+            "name_ja": "臭腺感染症"
+          },
+          {
+            "id": "sugar_glider_0078",
+            "name": "Scent Gland Hyperplasia",
+            "name_ja": "臭腺過形成"
+          },
+          {
+            "id": "sugar_glider_0079",
+            "name": "Scent Gland Tumor",
+            "name_ja": "臭腺腫瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0019",
+            "name": "Mite Infestation (Sarcoptic / Demodex)",
+            "name_ja": "ダニ感染症"
+          },
+          {
+            "id": "sugar_glider_0020",
+            "name": "Flea Infestation",
+            "name_ja": "ノミ寄生症"
+          },
+          {
+            "id": "sugar_glider_0155",
+            "name": "Mite Infestation",
+            "name_ja": "ダニ症（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lipido",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0051",
+            "name": "Hepatic Lipidosis (Fatty Liver)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "sugar_glider_0116",
+            "name": "Obesity-Related Hepatic Lipidosis",
+            "name_ja": "肥満関連肝リピドーシス"
+          },
+          {
+            "id": "sugar_glider_0153",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ovaria",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0128",
+            "name": "Ovarian Cysts",
+            "name_ja": "卵巣嚢胞"
+          },
+          {
+            "id": "sugar_glider_0161",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0202",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "paraly",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0045",
+            "name": "Hind Leg Paralysis",
+            "name_ja": "後肢麻痺"
+          },
+          {
+            "id": "sugar_glider_0132",
+            "name": "Sugar Glider Hindlimb Paralysis (HLP)",
+            "name_ja": "フクロモモンガ後肢麻痺（HLP）"
+          },
+          {
+            "id": "sugar_glider_0167",
+            "name": "Posterior Paralysis",
+            "name_ja": "後肢麻痺（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pouch",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0043",
+            "name": "Pouch Infection (Joeyitis)",
+            "name_ja": "育児嚢感染症"
+          },
+          {
+            "id": "sugar_glider_0073",
+            "name": "Pouch Infection (Marsupitis)",
+            "name_ja": "育児嚢感染（マーシュピティス）"
+          },
+          {
+            "id": "sugar_glider_0193",
+            "name": "Pouch Infection (Marsupial)",
+            "name_ja": "育児嚢感染（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "relate",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0011",
+            "name": "Stress-related Alopecia",
+            "name_ja": "ストレス性脱毛"
+          },
+          {
+            "id": "sugar_glider_0116",
+            "name": "Obesity-Related Hepatic Lipidosis",
+            "name_ja": "肥満関連肝リピドーシス"
+          },
+          {
+            "id": "sugar_glider_0142",
+            "name": "Loneliness-Related Illness",
+            "name_ja": "孤独関連疾患（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "scent",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0016",
+            "name": "Scent Gland Infection",
+            "name_ja": "臭腺感染症"
+          },
+          {
+            "id": "sugar_glider_0078",
+            "name": "Scent Gland Hyperplasia",
+            "name_ja": "臭腺過形成"
+          },
+          {
+            "id": "sugar_glider_0079",
+            "name": "Scent Gland Tumor",
+            "name_ja": "臭腺腫瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "seizur",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0044",
+            "name": "Seizures (MBD-related)",
+            "name_ja": "てんかん発作（MBD関連）"
+          },
+          {
+            "id": "sugar_glider_0166",
+            "name": "Seizures",
+            "name_ja": "痙攣発作（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0168",
+            "name": "Toxin-Induced Seizures",
+            "name_ja": "中毒性痙攣（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wound",
+        "size": 3,
+        "members": [
+          {
+            "id": "sugar_glider_0108",
+            "name": "Glider Bite Wounds",
+            "name_ja": "フクロモモンガ咬傷"
+          },
+          {
+            "id": "sugar_glider_0156",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0176",
+            "name": "Wound Infection",
+            "name_ja": "創傷感染（フクロモモンガ）"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1659 @@
+{
+  "species": "parrot",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 283,
+    "merge_clusters": 8,
+    "records_merged_away": 8,
+    "archived": 0,
+    "served_after": 275
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "parrot_0005",
+        "slug": "avian-poxvirus",
+        "name": "Avian Poxvirus",
+        "name_ja": "鳥痘"
+      },
+      "merged": [
+        {
+          "id": "parrot_0179",
+          "slug": "avian-pox",
+          "name": "Avian Pox",
+          "name_ja": "鳥痘（オウム）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0009",
+        "slug": "bacterial-pneumonia",
+        "name": "Bacterial Pneumonia",
+        "name_ja": "細菌性肺炎"
+      },
+      "merged": [
+        {
+          "id": "parrot_0191",
+          "slug": "pneumonia-bacterial",
+          "name": "Pneumonia (Bacterial)",
+          "name_ja": "細菌性肺炎（オウム）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0012",
+        "slug": "cloacitis",
+        "name": "Cloacitis",
+        "name_ja": "総排泄腔炎"
+      },
+      "merged": [
+        {
+          "id": "parrot_0138",
+          "slug": "cloacitis-vent-gleet",
+          "name": "Cloacitis (Vent Gleet)",
+          "name_ja": "総排泄腔炎"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0015",
+        "slug": "mycobacteriosis-avian-tuberculosis",
+        "name": "Mycobacteriosis (Avian Tuberculosis)",
+        "name_ja": "マイコバクテリウム症（鳥結核）"
+      },
+      "merged": [
+        {
+          "id": "parrot_0216",
+          "slug": "mycobacteriosis-avian-tb",
+          "name": "Mycobacteriosis (Avian TB)",
+          "name_ja": "マイコバクテリウム症（鳥結核）（オウム）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0030",
+        "slug": "vitamin-a-deficiency-hypovitaminosis-a",
+        "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+        "name_ja": "ビタミンA欠乏症"
+      },
+      "merged": [
+        {
+          "id": "parrot_0188",
+          "slug": "vitamin-a-deficiency",
+          "name": "Vitamin A Deficiency",
+          "name_ja": "ビタミンA欠乏症（オウム）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0040",
+        "slug": "atherosclerosis",
+        "name": "Atherosclerosis",
+        "name_ja": "動脈硬化症"
+      },
+      "merged": [
+        {
+          "id": "parrot_0228",
+          "slug": "arteriosclerosis",
+          "name": "Arteriosclerosis",
+          "name_ja": "動脈硬化症（オウム）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0045",
+        "slug": "egg-yolk-peritonitis",
+        "name": "Egg Yolk Peritonitis",
+        "name_ja": "卵黄性腹膜炎"
+      },
+      "merged": [
+        {
+          "id": "parrot_0218",
+          "slug": "egg-peritonitis",
+          "name": "Egg Peritonitis",
+          "name_ja": "卵黄性腹膜炎（オウム）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0104",
+        "slug": "capillariasis-hairworm",
+        "name": "Capillariasis (Hairworm)",
+        "name_ja": "毛細線虫症"
+      },
+      "merged": [
+        {
+          "id": "parrot_0200",
+          "slug": "capillaria-infection",
+          "name": "Capillaria Infection",
+          "name_ja": "毛細線虫症（オウム）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Psittacine Beak and Feather Disease (PBFD)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0000",
+            "slug": "psittacine-beak-and-feather-disease-pbfd",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "オウム類嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "parrot_0162",
+            "slug": "psittacine-beak-and-feather-disease",
+            "name": "Psittacine Beak and Feather Disease",
+            "name_ja": "嘴羽毛病（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Papillomatosis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0006",
+            "slug": "papillomatosis",
+            "name": "Papillomatosis",
+            "name_ja": "乳頭腫症"
+          },
+          {
+            "id": "parrot_0167",
+            "slug": "papillomatosis-bile-duct",
+            "name": "Papillomatosis (Bile Duct)",
+            "name_ja": "乳頭腫症（胆管）（オウム）"
+          },
+          {
+            "id": "parrot_0251",
+            "slug": "papillomatosis-internal",
+            "name": "Papillomatosis (Internal)",
+            "name_ja": "内臓乳頭腫症（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Candidiasis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0017",
+            "slug": "candidiasis",
+            "name": "Candidiasis",
+            "name_ja": "カンジダ症"
+          },
+          {
+            "id": "parrot_0184",
+            "slug": "candidiasis-crop-mycosis",
+            "name": "Candidiasis (Crop Mycosis)",
+            "name_ja": "カンジダ症（そ嚢真菌症）（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Heavy Metal Poisoning (Lead/Zinc)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0024",
+            "slug": "heavy-metal-poisoning-lead-zinc",
+            "name": "Heavy Metal Poisoning (Lead/Zinc)",
+            "name_ja": "重金属中毒（鉛・亜鉛）"
+          },
+          {
+            "id": "parrot_0169",
+            "slug": "heavy-metal-poisoning",
+            "name": "Heavy Metal Poisoning",
+            "name_ja": "重金属中毒（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Liver Disease (Hepatitis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0037",
+            "slug": "liver-disease-hepatitis",
+            "name": "Liver Disease (Hepatitis)",
+            "name_ja": "肝疾患（肝炎）"
+          },
+          {
+            "id": "parrot_0186",
+            "slug": "liver-disease-hepatic-lipidosis",
+            "name": "Liver Disease (Hepatic Lipidosis)",
+            "name_ja": "肝疾患（肝リピドーシス）（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Gout (Articular and Visceral)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0039",
+            "slug": "gout-articular-and-visceral",
+            "name": "Gout (Articular and Visceral)",
+            "name_ja": "痛風（関節型・内臓型）"
+          },
+          {
+            "id": "parrot_0187",
+            "slug": "gout-visceral-articular",
+            "name": "Gout (Visceral/Articular)",
+            "name_ja": "痛風（内臓型/関節型）（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Atherosclerosis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0040",
+            "slug": "atherosclerosis",
+            "name": "Atherosclerosis",
+            "name_ja": "動脈硬化症"
+          },
+          {
+            "id": "parrot_0166",
+            "slug": "atherosclerosis-parrot-specific",
+            "name": "Atherosclerosis (Parrot-Specific)",
+            "name_ja": "動脈硬化症（オウム特異的）（オウム）"
+          },
+          {
+            "id": "parrot_0228",
+            "slug": "arteriosclerosis",
+            "name": "Arteriosclerosis",
+            "name_ja": "動脈硬化症（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Egg Binding (Dystocia)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0043",
+            "slug": "egg-binding-dystocia",
+            "name": "Egg Binding (Dystocia)",
+            "name_ja": "卵塞（卵詰まり）"
+          },
+          {
+            "id": "parrot_0181",
+            "slug": "egg-binding",
+            "name": "Egg Binding",
+            "name_ja": "卵詰まり（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Crop Stasis (Slow Crop / Crop Impaction)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0047",
+            "slug": "crop-stasis-slow-crop-crop-impaction",
+            "name": "Crop Stasis (Slow Crop / Crop Impaction)",
+            "name_ja": "嗉嚢停滞（嗉嚢うっ滞）"
+          },
+          {
+            "id": "parrot_0183",
+            "slug": "crop-stasis",
+            "name": "Crop Stasis",
+            "name_ja": "そ嚢うっ滞（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Heat Stroke (Hyperthermia)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0079",
+            "slug": "heat-stroke-hyperthermia",
+            "name": "Heat Stroke (Hyperthermia)",
+            "name_ja": "熱中症（高体温症）"
+          },
+          {
+            "id": "parrot_0242",
+            "slug": "heat-stroke",
+            "name": "Heat Stroke",
+            "name_ja": "熱中症（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "E. coli Infection (Colibacillosis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0108",
+            "slug": "e-coli-infection-colibacillosis",
+            "name": "E. coli Infection (Colibacillosis)",
+            "name_ja": "大腸菌感染症"
+          },
+          {
+            "id": "parrot_0215",
+            "slug": "e-coli-infection",
+            "name": "E. coli Infection",
+            "name_ja": "大腸菌感染（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Gastrointestinal Obstruction",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0125",
+            "slug": "gastrointestinal-obstruction",
+            "name": "Gastrointestinal Obstruction",
+            "name_ja": "消化管閉塞"
+          },
+          {
+            "id": "parrot_0270",
+            "slug": "gastrointestinal-obstruction-partial",
+            "name": "Gastrointestinal Obstruction (Partial)",
+            "name_ja": "消化管部分閉塞（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0160",
+            "slug": "proventricular-dilatation-disease-pdd-avian-bornavirus",
+            "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
+            "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）"
+          },
+          {
+            "id": "parrot_0161",
+            "slug": "proventricular-dilatation-disease",
+            "name": "Proventricular Dilatation Disease",
+            "name_ja": "前胃拡張症（オウム）"
+          },
+          {
+            "id": "parrot_0177",
+            "slug": "proventricular-dilatation-disease-pdd",
+            "name": "Proventricular Dilatation Disease (PDD)",
+            "name_ja": "前胃拡張症（PDD）（オウム）"
+          }
+        ]
+      },
+      {
+        "base": "Fracture (Wing)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "parrot_0207",
+            "slug": "fracture-wing",
+            "name": "Fracture (Wing)",
+            "name_ja": "翼骨折（オウム）"
+          },
+          {
+            "id": "parrot_0208",
+            "slug": "fracture-leg",
+            "name": "Fracture (Leg)",
+            "name_ja": "脚骨折（オウム）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "defici",
+        "size": 11,
+        "members": [
+          {
+            "id": "parrot_0030",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "parrot_0032",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "parrot_0035",
+            "name": "Iodine Deficiency (Thyroid Hyperplasia)",
+            "name_ja": "ヨウ素欠乏症（甲状腺過形成）"
+          },
+          {
+            "id": "parrot_0141",
+            "name": "Vitamin E / Selenium Deficiency",
+            "name_ja": "ビタミンE・セレン欠乏症"
+          },
+          {
+            "id": "parrot_0142",
+            "name": "Vitamin K Deficiency",
+            "name_ja": "ビタミンK欠乏症"
+          },
+          {
+            "id": "parrot_0143",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン欠乏症"
+          },
+          {
+            "id": "parrot_0144",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "parrot_0146",
+            "name": "Protein Deficiency",
+            "name_ja": "タンパク質欠乏症"
+          },
+          {
+            "id": "parrot_0182",
+            "name": "Nutritional Deficiency (General)",
+            "name_ja": "栄養欠乏症（一般）（オウム）"
+          },
+          {
+            "id": "parrot_0188",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（オウム）"
+          },
+          {
+            "id": "parrot_0189",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "feathe",
+        "size": 11,
+        "members": [
+          {
+            "id": "parrot_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "オウム類嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "parrot_0052",
+            "name": "Feather Destructive Behavior (Feather Plucking)",
+            "name_ja": "羽毛破壊行動（毛引き症）"
+          },
+          {
+            "id": "parrot_0077",
+            "name": "Feather Cyst",
+            "name_ja": "羽嚢腫"
+          },
+          {
+            "id": "parrot_0090",
+            "name": "Feather Folliculitis",
+            "name_ja": "羽毛毛包炎"
+          },
+          {
+            "id": "parrot_0139",
+            "name": "Feather Follicle Cyst (Chronic)",
+            "name_ja": "慢性羽包嚢胞"
+          },
+          {
+            "id": "parrot_0150",
+            "name": "Hormonal Feather Plucking",
+            "name_ja": "ホルモン性毛引き症"
+          },
+          {
+            "id": "parrot_0162",
+            "name": "Psittacine Beak and Feather Disease",
+            "name_ja": "嘴羽毛病（オウム）"
+          },
+          {
+            "id": "parrot_0165",
+            "name": "Eclectus Feather Disease",
+            "name_ja": "オオハナインコ羽毛疾患（オウム）"
+          },
+          {
+            "id": "parrot_0170",
+            "name": "Behavioral Feather Destructive Disorder",
+            "name_ja": "行動性羽毛破壊障害（オウム）"
+          },
+          {
+            "id": "parrot_0180",
+            "name": "Feather Plucking",
+            "name_ja": "毛引き（オウム）"
+          },
+          {
+            "id": "parrot_0196",
+            "name": "Feather Mites",
+            "name_ja": "羽毛ダニ（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "avian",
+        "size": 9,
+        "members": [
+          {
+            "id": "parrot_0003",
+            "name": "Avian Polyomavirus",
+            "name_ja": "鳥ポリオーマウイルス感染症"
+          },
+          {
+            "id": "parrot_0005",
+            "name": "Avian Poxvirus",
+            "name_ja": "鳥痘"
+          },
+          {
+            "id": "parrot_0007",
+            "name": "Avian Influenza",
+            "name_ja": "鳥インフルエンザ"
+          },
+          {
+            "id": "parrot_0073",
+            "name": "Avian Ganglioneuritis",
+            "name_ja": "鳥類神経節炎"
+          },
+          {
+            "id": "parrot_0095",
+            "name": "Avian Herpesvirus (Non-Pacheco's)",
+            "name_ja": "鳥ヘルペスウイルス（非パチェコ型）"
+          },
+          {
+            "id": "parrot_0098",
+            "name": "Avian Malaria (Plasmodium spp.)",
+            "name_ja": "鳥マラリア"
+          },
+          {
+            "id": "parrot_0159",
+            "name": "Avian Nephropathy",
+            "name_ja": "鳥腎症"
+          },
+          {
+            "id": "parrot_0178",
+            "name": "Avian Bornavirus (ABV)",
+            "name_ja": "鳥ボルナウイルス（オウム）"
+          },
+          {
+            "id": "parrot_0179",
+            "name": "Avian Pox",
+            "name_ja": "鳥痘（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastro",
+        "size": 9,
+        "members": [
+          {
+            "id": "parrot_0125",
+            "name": "Gastrointestinal Obstruction",
+            "name_ja": "消化管閉塞"
+          },
+          {
+            "id": "parrot_0263",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（オウム）"
+          },
+          {
+            "id": "parrot_0264",
+            "name": "Gastrointestinal Viral Infection",
+            "name_ja": "消化管ウイルス感染（オウム）"
+          },
+          {
+            "id": "parrot_0265",
+            "name": "Gastrointestinal Fungal Infection",
+            "name_ja": "消化管真菌感染（オウム）"
+          },
+          {
+            "id": "parrot_0266",
+            "name": "Gastrointestinal Parasitic Disease",
+            "name_ja": "消化管寄生虫疾患（オウム）"
+          },
+          {
+            "id": "parrot_0267",
+            "name": "Gastrointestinal Neoplasia",
+            "name_ja": "消化管腫瘍（オウム）"
+          },
+          {
+            "id": "parrot_0268",
+            "name": "Gastrointestinal Inflammatory Disease",
+            "name_ja": "消化管炎症性疾患（オウム）"
+          },
+          {
+            "id": "parrot_0269",
+            "name": "Gastrointestinal Motility Disorder",
+            "name_ja": "消化管運動障害（オウム）"
+          },
+          {
+            "id": "parrot_0270",
+            "name": "Gastrointestinal Obstruction (Partial)",
+            "name_ja": "消化管部分閉塞（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 9,
+        "members": [
+          {
+            "id": "parrot_0036",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "parrot_0122",
+            "name": "Hepatic Amyloidosis",
+            "name_ja": "肝アミロイドーシス"
+          },
+          {
+            "id": "parrot_0252",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（オウム）"
+          },
+          {
+            "id": "parrot_0257",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（オウム）"
+          },
+          {
+            "id": "parrot_0258",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（オウム）"
+          },
+          {
+            "id": "parrot_0259",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（オウム）"
+          },
+          {
+            "id": "parrot_0260",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（オウム）"
+          },
+          {
+            "id": "parrot_0261",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍性疾患（オウム）"
+          },
+          {
+            "id": "parrot_0262",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "respir",
+        "size": 9,
+        "members": [
+          {
+            "id": "parrot_0086",
+            "name": "Allergic Respiratory Disease",
+            "name_ja": "アレルギー性呼吸器疾患"
+          },
+          {
+            "id": "parrot_0271",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（オウム）"
+          },
+          {
+            "id": "parrot_0272",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（オウム）"
+          },
+          {
+            "id": "parrot_0273",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（オウム）"
+          },
+          {
+            "id": "parrot_0274",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（オウム）"
+          },
+          {
+            "id": "parrot_0275",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（オウム）"
+          },
+          {
+            "id": "parrot_0276",
+            "name": "Respiratory Inflammatory Disease",
+            "name_ja": "呼吸器炎症性疾患（オウム）"
+          },
+          {
+            "id": "parrot_0277",
+            "name": "Lower Respiratory Tract Infection",
+            "name_ja": "下部気道感染（オウム）"
+          },
+          {
+            "id": "parrot_0278",
+            "name": "Chronic Respiratory Disease",
+            "name_ja": "慢性呼吸器疾患（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 7,
+        "members": [
+          {
+            "id": "parrot_0055",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎"
+          },
+          {
+            "id": "parrot_0115",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "parrot_0255",
+            "name": "Dermatitis",
+            "name_ja": "皮膚炎（オウム）"
+          },
+          {
+            "id": "parrot_0279",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（オウム）"
+          },
+          {
+            "id": "parrot_0280",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（オウム）"
+          },
+          {
+            "id": "parrot_0281",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（オウム）"
+          },
+          {
+            "id": "parrot_0282",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "proven",
+        "size": 7,
+        "members": [
+          {
+            "id": "parrot_0001",
+            "name": "Proventricular Dilatation Disease (PDD) / Bornavirus",
+            "name_ja": "腺胃拡張症（PDD）／ボルナウイルス感染症"
+          },
+          {
+            "id": "parrot_0078",
+            "name": "Proventricular Dilatation (non-PDD causes)",
+            "name_ja": "前胃拡張（PDD以外の原因）"
+          },
+          {
+            "id": "parrot_0089",
+            "name": "Psittacine Proventricular Worm (Spirurids)",
+            "name_ja": "オウム目前胃寄生虫（旋尾線虫類）"
+          },
+          {
+            "id": "parrot_0123",
+            "name": "Proventricular Ulceration",
+            "name_ja": "腺胃潰瘍"
+          },
+          {
+            "id": "parrot_0160",
+            "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
+            "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）"
+          },
+          {
+            "id": "parrot_0161",
+            "name": "Proventricular Dilatation Disease",
+            "name_ja": "前胃拡張症（オウム）"
+          },
+          {
+            "id": "parrot_0177",
+            "name": "Proventricular Dilatation Disease (PDD)",
+            "name_ja": "前胃拡張症（PDD）（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bacter",
+        "size": 6,
+        "members": [
+          {
+            "id": "parrot_0009",
+            "name": "Bacterial Pneumonia",
+            "name_ja": "細菌性肺炎"
+          },
+          {
+            "id": "parrot_0014",
+            "name": "Gram-negative Bacterial Infection",
+            "name_ja": "グラム陰性菌感染症"
+          },
+          {
+            "id": "parrot_0257",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（オウム）"
+          },
+          {
+            "id": "parrot_0263",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（オウム）"
+          },
+          {
+            "id": "parrot_0271",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（オウム）"
+          },
+          {
+            "id": "parrot_0279",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "beak",
+        "size": 6,
+        "members": [
+          {
+            "id": "parrot_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "オウム類嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "parrot_0057",
+            "name": "Beak Malocclusion",
+            "name_ja": "嘴不正咬合"
+          },
+          {
+            "id": "parrot_0058",
+            "name": "Beak Overgrowth",
+            "name_ja": "嘴過長症"
+          },
+          {
+            "id": "parrot_0162",
+            "name": "Psittacine Beak and Feather Disease",
+            "name_ja": "嘴羽毛病（オウム）"
+          },
+          {
+            "id": "parrot_0211",
+            "name": "Beak Deformity (Scissor Beak)",
+            "name_ja": "嘴変形（シザービーク）（オウム）"
+          },
+          {
+            "id": "parrot_0212",
+            "name": "Beak Fracture",
+            "name_ja": "嘴骨折（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "papill",
+        "size": 6,
+        "members": [
+          {
+            "id": "parrot_0006",
+            "name": "Papillomatosis",
+            "name_ja": "乳頭腫症"
+          },
+          {
+            "id": "parrot_0050",
+            "name": "Cloacal Papilloma",
+            "name_ja": "総排泄腔乳頭腫"
+          },
+          {
+            "id": "parrot_0167",
+            "name": "Papillomatosis (Bile Duct)",
+            "name_ja": "乳頭腫症（胆管）（オウム）"
+          },
+          {
+            "id": "parrot_0168",
+            "name": "Cloacal Papillomatosis",
+            "name_ja": "総排泄腔乳頭腫症（オウム）"
+          },
+          {
+            "id": "parrot_0232",
+            "name": "Papilloma",
+            "name_ja": "乳頭腫（オウム）"
+          },
+          {
+            "id": "parrot_0251",
+            "name": "Papillomatosis (Internal)",
+            "name_ja": "内臓乳頭腫症（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "poison",
+        "size": 6,
+        "members": [
+          {
+            "id": "parrot_0024",
+            "name": "Heavy Metal Poisoning (Lead/Zinc)",
+            "name_ja": "重金属中毒（鉛・亜鉛）"
+          },
+          {
+            "id": "parrot_0147",
+            "name": "Pesticide Poisoning",
+            "name_ja": "農薬中毒"
+          },
+          {
+            "id": "parrot_0148",
+            "name": "Rodenticide Poisoning",
+            "name_ja": "殺鼠剤中毒"
+          },
+          {
+            "id": "parrot_0156",
+            "name": "Copper Poisoning",
+            "name_ja": "銅中毒"
+          },
+          {
+            "id": "parrot_0169",
+            "name": "Heavy Metal Poisoning",
+            "name_ja": "重金属中毒（オウム）"
+          },
+          {
+            "id": "parrot_0240",
+            "name": "Lead Poisoning",
+            "name_ja": "鉛中毒（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "crop",
+        "size": 5,
+        "members": [
+          {
+            "id": "parrot_0047",
+            "name": "Crop Stasis (Slow Crop / Crop Impaction)",
+            "name_ja": "嗉嚢停滞（嗉嚢うっ滞）"
+          },
+          {
+            "id": "parrot_0048",
+            "name": "Crop Burns",
+            "name_ja": "嗉嚢火傷"
+          },
+          {
+            "id": "parrot_0124",
+            "name": "Crop Mycosis",
+            "name_ja": "素嚢真菌症"
+          },
+          {
+            "id": "parrot_0183",
+            "name": "Crop Stasis",
+            "name_ja": "そ嚢うっ滞（オウム）"
+          },
+          {
+            "id": "parrot_0249",
+            "name": "Crop Impaction",
+            "name_ja": "そ嚢停滞（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dilata",
+        "size": 5,
+        "members": [
+          {
+            "id": "parrot_0001",
+            "name": "Proventricular Dilatation Disease (PDD) / Bornavirus",
+            "name_ja": "腺胃拡張症（PDD）／ボルナウイルス感染症"
+          },
+          {
+            "id": "parrot_0078",
+            "name": "Proventricular Dilatation (non-PDD causes)",
+            "name_ja": "前胃拡張（PDD以外の原因）"
+          },
+          {
+            "id": "parrot_0160",
+            "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
+            "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）"
+          },
+          {
+            "id": "parrot_0161",
+            "name": "Proventricular Dilatation Disease",
+            "name_ja": "前胃拡張症（オウム）"
+          },
+          {
+            "id": "parrot_0177",
+            "name": "Proventricular Dilatation Disease (PDD)",
+            "name_ja": "前胃拡張症（PDD）（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "injury",
+        "size": 5,
+        "members": [
+          {
+            "id": "parrot_0060",
+            "name": "Wing Trauma / Soft Tissue Injury",
+            "name_ja": "翼外傷・軟部組織損傷"
+          },
+          {
+            "id": "parrot_0157",
+            "name": "Nail Overgrowth / Injury",
+            "name_ja": "爪過長・損傷"
+          },
+          {
+            "id": "parrot_0246",
+            "name": "Predator Attack Injury",
+            "name_ja": "捕食者攻撃損傷（オウム）"
+          },
+          {
+            "id": "parrot_0247",
+            "name": "Window Collision Injury",
+            "name_ja": "窓衝突損傷（オウム）"
+          },
+          {
+            "id": "parrot_0248",
+            "name": "Night Fright Injury",
+            "name_ja": "夜間パニック損傷（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 5,
+        "members": [
+          {
+            "id": "parrot_0087",
+            "name": "Gonadal Neoplasia",
+            "name_ja": "生殖腺腫瘍"
+          },
+          {
+            "id": "parrot_0220",
+            "name": "Reproductive Neoplasia",
+            "name_ja": "生殖器腫瘍（オウム）"
+          },
+          {
+            "id": "parrot_0261",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍性疾患（オウム）"
+          },
+          {
+            "id": "parrot_0267",
+            "name": "Gastrointestinal Neoplasia",
+            "name_ja": "消化管腫瘍（オウム）"
+          },
+          {
+            "id": "parrot_0275",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "parasi",
+        "size": 5,
+        "members": [
+          {
+            "id": "parrot_0022",
+            "name": "Intestinal Parasites (Roundworms/Tapeworms)",
+            "name_ja": "腸内寄生虫症（回虫・条虫）"
+          },
+          {
+            "id": "parrot_0259",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（オウム）"
+          },
+          {
+            "id": "parrot_0266",
+            "name": "Gastrointestinal Parasitic Disease",
+            "name_ja": "消化管寄生虫疾患（オウム）"
+          },
+          {
+            "id": "parrot_0274",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（オウム）"
+          },
+          {
+            "id": "parrot_0282",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "psitta",
+        "size": 5,
+        "members": [
+          {
+            "id": "parrot_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "オウム類嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "parrot_0002",
+            "name": "Psittacosis (Chlamydiosis)",
+            "name_ja": "オウム病（クラミジア症）"
+          },
+          {
+            "id": "parrot_0054",
+            "name": "Psittacine Stress Syndrome",
+            "name_ja": "オウム目ストレス症候群"
+          },
+          {
+            "id": "parrot_0089",
+            "name": "Psittacine Proventricular Worm (Spirurids)",
+            "name_ja": "オウム目前胃寄生虫（旋尾線虫類）"
+          },
+          {
+            "id": "parrot_0162",
+            "name": "Psittacine Beak and Feather Disease",
+            "name_ja": "嘴羽毛病（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 5,
+        "members": [
+          {
+            "id": "parrot_0065",
+            "name": "Internal Tumors (Neoplasia)",
+            "name_ja": "内部腫瘍（腫瘍性疾患）"
+          },
+          {
+            "id": "parrot_0136",
+            "name": "Preen Gland Tumor",
+            "name_ja": "尾脂腺腫瘍"
+          },
+          {
+            "id": "parrot_0222",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍（オウム）"
+          },
+          {
+            "id": "parrot_0223",
+            "name": "Sertoli Cell Tumor",
+            "name_ja": "セルトリ細胞腫（オウム）"
+          },
+          {
+            "id": "parrot_0224",
+            "name": "Renal Tumor",
+            "name_ja": "腎腫瘍（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 5,
+        "members": [
+          {
+            "id": "parrot_0030",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "parrot_0032",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "parrot_0141",
+            "name": "Vitamin E / Selenium Deficiency",
+            "name_ja": "ビタミンE・セレン欠乏症"
+          },
+          {
+            "id": "parrot_0142",
+            "name": "Vitamin K Deficiency",
+            "name_ja": "ビタミンK欠乏症"
+          },
+          {
+            "id": "parrot_0188",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "behavi",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0052",
+            "name": "Feather Destructive Behavior (Feather Plucking)",
+            "name_ja": "羽毛破壊行動（毛引き症）"
+          },
+          {
+            "id": "parrot_0151",
+            "name": "Phobic Behavior Disorder",
+            "name_ja": "恐怖行動障害"
+          },
+          {
+            "id": "parrot_0170",
+            "name": "Behavioral Feather Destructive Disorder",
+            "name_ja": "行動性羽毛破壊障害（オウム）"
+          },
+          {
+            "id": "parrot_0234",
+            "name": "Phobic Behavior",
+            "name_ja": "恐怖症行動（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0056",
+            "name": "Fractures",
+            "name_ja": "骨折"
+          },
+          {
+            "id": "parrot_0207",
+            "name": "Fracture (Wing)",
+            "name_ja": "翼骨折（オウム）"
+          },
+          {
+            "id": "parrot_0208",
+            "name": "Fracture (Leg)",
+            "name_ja": "脚骨折（オウム）"
+          },
+          {
+            "id": "parrot_0212",
+            "name": "Beak Fracture",
+            "name_ja": "嘴骨折（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0023",
+            "name": "Knemidocoptes Mite Infestation (Scaly Face/Leg)",
+            "name_ja": "疥癬ダニ症（鱗状顔面・脚疾患）"
+          },
+          {
+            "id": "parrot_0153",
+            "name": "Tick Infestation",
+            "name_ja": "ダニ寄生症"
+          },
+          {
+            "id": "parrot_0198",
+            "name": "Lice Infestation",
+            "name_ja": "シラミ寄生（オウム）"
+          },
+          {
+            "id": "parrot_0282",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mite",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0023",
+            "name": "Knemidocoptes Mite Infestation (Scaly Face/Leg)",
+            "name_ja": "疥癬ダニ症（鱗状顔面・脚疾患）"
+          },
+          {
+            "id": "parrot_0193",
+            "name": "Tracheal Mite (Sternostoma)",
+            "name_ja": "気管ダニ（Sternostoma）（オウム）"
+          },
+          {
+            "id": "parrot_0194",
+            "name": "Air Sac Mite",
+            "name_ja": "気嚢ダニ（オウム）"
+          },
+          {
+            "id": "parrot_0197",
+            "name": "Red Mite (Dermanyssus)",
+            "name_ja": "ワクモ（Dermanyssus）（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0009",
+            "name": "Bacterial Pneumonia",
+            "name_ja": "細菌性肺炎"
+          },
+          {
+            "id": "parrot_0070",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎"
+          },
+          {
+            "id": "parrot_0117",
+            "name": "Mycotic Pneumonia",
+            "name_ja": "真菌性肺炎"
+          },
+          {
+            "id": "parrot_0191",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxici",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0026",
+            "name": "Avocado Toxicity",
+            "name_ja": "アボカド中毒"
+          },
+          {
+            "id": "parrot_0027",
+            "name": "Chocolate Toxicity",
+            "name_ja": "チョコレート中毒"
+          },
+          {
+            "id": "parrot_0029",
+            "name": "Plant Toxicity",
+            "name_ja": "植物中毒"
+          },
+          {
+            "id": "parrot_0149",
+            "name": "Essential Oil Toxicity",
+            "name_ja": "エッセンシャルオイル中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0025",
+            "name": "PTFE Toxicosis (Teflon Poisoning)",
+            "name_ja": "PTFE中毒（テフロン中毒）"
+          },
+          {
+            "id": "parrot_0028",
+            "name": "Smoke/Fume Inhalation Toxicosis",
+            "name_ja": "煙・ガス吸入中毒"
+          },
+          {
+            "id": "parrot_0084",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "parrot_0241",
+            "name": "Teflon/PTFE Toxicosis",
+            "name_ja": "テフロン/PTFE中毒（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "trache",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0069",
+            "name": "Tracheal Obstruction",
+            "name_ja": "気管閉塞"
+          },
+          {
+            "id": "parrot_0126",
+            "name": "Tracheal Stenosis",
+            "name_ja": "気管狭窄症"
+          },
+          {
+            "id": "parrot_0164",
+            "name": "Amazon Tracheitis",
+            "name_ja": "アマゾン気管炎（オウム）"
+          },
+          {
+            "id": "parrot_0193",
+            "name": "Tracheal Mite (Sternostoma)",
+            "name_ja": "気管ダニ（Sternostoma）（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "viral",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0258",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（オウム）"
+          },
+          {
+            "id": "parrot_0264",
+            "name": "Gastrointestinal Viral Infection",
+            "name_ja": "消化管ウイルス感染（オウム）"
+          },
+          {
+            "id": "parrot_0272",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（オウム）"
+          },
+          {
+            "id": "parrot_0280",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "aggres",
+        "size": 3,
+        "members": [
+          {
+            "id": "parrot_0172",
+            "name": "Mate-Directed Aggression",
+            "name_ja": "つがい攻撃行動（オウム）"
+          },
+          {
+            "id": "parrot_0175",
+            "name": "Hormonal Aggression",
+            "name_ja": "ホルモン性攻撃行動（オウム）"
+          },
+          {
+            "id": "parrot_0235",
+            "name": "Aggression",
+            "name_ja": "攻撃行動（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 3,
+        "members": [
+          {
+            "id": "parrot_0068",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "parrot_0134",
+            "name": "Cholangiocellular Carcinoma",
+            "name_ja": "胆管細胞癌"
+          },
+          {
+            "id": "parrot_0135",
+            "name": "Thyroid Carcinoma",
+            "name_ja": "甲状腺癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cloaca",
+        "size": 3,
+        "members": [
+          {
+            "id": "parrot_0046",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "parrot_0050",
+            "name": "Cloacal Papilloma",
+            "name_ja": "総排泄腔乳頭腫"
+          },
+          {
+            "id": "parrot_0168",
+            "name": "Cloacal Papillomatosis",
+            "name_ja": "総排泄腔乳頭腫症（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cyst",
+        "size": 3,
+        "members": [
+          {
+            "id": "parrot_0077",
+            "name": "Feather Cyst",
+            "name_ja": "羽嚢腫"
+          },
+          {
+            "id": "parrot_0139",
+            "name": "Feather Follicle Cyst (Chronic)",
+            "name_ja": "慢性羽包嚢胞"
+          },
+          {
+            "id": "parrot_0221",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fungal",
+        "size": 3,
+        "members": [
+          {
+            "id": "parrot_0265",
+            "name": "Gastrointestinal Fungal Infection",
+            "name_ja": "消化管真菌感染（オウム）"
+          },
+          {
+            "id": "parrot_0273",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（オウム）"
+          },
+          {
+            "id": "parrot_0281",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "liver",
+        "size": 3,
+        "members": [
+          {
+            "id": "parrot_0037",
+            "name": "Liver Disease (Hepatitis)",
+            "name_ja": "肝疾患（肝炎）"
+          },
+          {
+            "id": "parrot_0186",
+            "name": "Liver Disease (Hepatic Lipidosis)",
+            "name_ja": "肝疾患（肝リピドーシス）（オウム）"
+          },
+          {
+            "id": "parrot_0190",
+            "name": "Fatty Liver Disease",
+            "name_ja": "脂肪肝（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "obstru",
+        "size": 3,
+        "members": [
+          {
+            "id": "parrot_0069",
+            "name": "Tracheal Obstruction",
+            "name_ja": "気管閉塞"
+          },
+          {
+            "id": "parrot_0125",
+            "name": "Gastrointestinal Obstruction",
+            "name_ja": "消化管閉塞"
+          },
+          {
+            "id": "parrot_0270",
+            "name": "Gastrointestinal Obstruction (Partial)",
+            "name_ja": "消化管部分閉塞（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "phobic",
+        "size": 3,
+        "members": [
+          {
+            "id": "parrot_0151",
+            "name": "Phobic Behavior Disorder",
+            "name_ja": "恐怖行動障害"
+          },
+          {
+            "id": "parrot_0174",
+            "name": "Phobic Disorder",
+            "name_ja": "恐怖症（オウム）"
+          },
+          {
+            "id": "parrot_0234",
+            "name": "Phobic Behavior",
+            "name_ja": "恐怖症行動（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 3,
+        "members": [
+          {
+            "id": "parrot_0038",
+            "name": "Renal Disease",
+            "name_ja": "腎疾患"
+          },
+          {
+            "id": "parrot_0224",
+            "name": "Renal Tumor",
+            "name_ja": "腎腫瘍（オウム）"
+          },
+          {
+            "id": "parrot_0225",
+            "name": "Renal Failure (Acute)",
+            "name_ja": "急性腎不全（オウム）"
+          }
+        ]
+      }
+    ]
+  }
+}

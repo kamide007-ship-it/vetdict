@@ -1,0 +1,2190 @@
+{
+  "species": "guinea_pig",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 346,
+    "merge_clusters": 16,
+    "records_merged_away": 16,
+    "archived": 0,
+    "served_after": 330
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "guinea_pig_0000",
+        "slug": "upper-respiratory-infection-uri",
+        "name": "Upper Respiratory Infection (URI)",
+        "name_ja": "上部気道感染症"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0222",
+          "slug": "upper-respiratory-infection",
+          "name": "Upper Respiratory Infection",
+          "name_ja": "上部気道感染症（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0001",
+        "slug": "bacterial-pneumonia",
+        "name": "Bacterial Pneumonia",
+        "name_ja": "細菌性肺炎"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0195",
+          "slug": "pneumonia-bacterial",
+          "name": "Pneumonia (Bacterial)",
+          "name_ja": "細菌性肺炎（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0012",
+        "slug": "gastric-ulcers",
+        "name": "Gastric Ulcers",
+        "name_ja": "胃潰瘍"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0213",
+          "slug": "gastric-ulcer",
+          "name": "Gastric Ulcer",
+          "name_ja": "胃潰瘍（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0021",
+        "slug": "abscess-subcutaneous",
+        "name": "Abscess (Subcutaneous)",
+        "name_ja": "皮下膿瘍"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0242",
+          "slug": "subcutaneous-abscess",
+          "name": "Subcutaneous Abscess",
+          "name_ja": "皮下膿瘍（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0022",
+        "slug": "urolithiasis-bladder-stones",
+        "name": "Urolithiasis (Bladder Stones)",
+        "name_ja": "尿路結石症"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0198",
+          "slug": "urolithiasis",
+          "name": "Urolithiasis",
+          "name_ja": "尿路結石症（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0023",
+        "slug": "urinary-tract-infection-uti",
+        "name": "Urinary Tract Infection (UTI)",
+        "name_ja": "尿路感染症"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0249",
+          "slug": "urinary-tract-infection",
+          "name": "Urinary Tract Infection",
+          "name_ja": "尿路感染症（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0043",
+        "slug": "head-tilt-torticollis",
+        "name": "Head Tilt (Torticollis)",
+        "name_ja": "斜頸"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0304",
+          "slug": "torticollis",
+          "name": "Torticollis",
+          "name_ja": "斜頸（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0055",
+        "slug": "dental-malocclusion",
+        "name": "Dental Malocclusion",
+        "name_ja": "不正咬合"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0196",
+          "slug": "malocclusion",
+          "name": "Malocclusion",
+          "name_ja": "不正咬合（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0060",
+        "slug": "mammary-tumors",
+        "name": "Mammary Tumors",
+        "name_ja": "乳腺腫瘍"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0257",
+          "slug": "mammary-tumor",
+          "name": "Mammary Tumor",
+          "name_ja": "乳腺腫瘍（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0072",
+        "slug": "coccidia",
+        "name": "Coccidia",
+        "name_ja": "コクシジウム症"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0207",
+          "slug": "coccidiosis",
+          "name": "Coccidiosis",
+          "name_ja": "コクシジウム症（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0073",
+        "slug": "demodex-mites",
+        "name": "Demodex Mites",
+        "name_ja": "ニキビダニ症"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0238",
+          "slug": "demodex-mange",
+          "name": "Demodex Mange",
+          "name_ja": "ニキビダニ症（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0075",
+        "slug": "pinworms-paraspidodera-uncinata",
+        "name": "Pinworms (Paraspidodera uncinata)",
+        "name_ja": "蟯虫症"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0208",
+          "slug": "pinworm-infection",
+          "name": "Pinworm Infection",
+          "name_ja": "蟯虫症（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0084",
+        "slug": "cervical-lymphadenitis",
+        "name": "Cervical Lymphadenitis",
+        "name_ja": "頸部リンパ節炎"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0246",
+          "slug": "cervical-lymphadenitis-lumps",
+          "name": "Cervical Lymphadenitis (Lumps)",
+          "name_ja": "頸部リンパ節炎（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0085",
+        "slug": "ileus",
+        "name": "Ileus",
+        "name_ja": "腸閉塞"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0209",
+          "slug": "intestinal-obstruction",
+          "name": "Intestinal Obstruction",
+          "name_ja": "腸閉塞（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0093",
+        "slug": "testicular-tumors",
+        "name": "Testicular Tumors",
+        "name_ja": "精巣腫瘍"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0258",
+          "slug": "testicular-tumor",
+          "name": "Testicular Tumor",
+          "name_ja": "精巣腫瘍（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0188",
+        "slug": "gastric-dilation-volvulus",
+        "name": "Gastric Dilation Volvulus",
+        "name_ja": "胃拡張捻転"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0310",
+          "slug": "gastric-dilation-volvulus",
+          "name": "Gastric Dilation-Volvulus",
+          "name_ja": "胃拡張捻転（モルモット）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Bloat (Gastric Dilation)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0006",
+            "slug": "bloat-gastric-dilation",
+            "name": "Bloat (Gastric Dilation)",
+            "name_ja": "鼓脹症（胃拡張）"
+          },
+          {
+            "id": "guinea_pig_0201",
+            "slug": "bloat-gastric-tympany",
+            "name": "Bloat (Gastric Tympany)",
+            "name_ja": "鼓脹症（胃鼓脹）（モルモット）"
+          }
+        ]
+      },
+      {
+        "base": "Fungal Dermatitis (Ringworm)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0013",
+            "slug": "fungal-dermatitis-ringworm",
+            "name": "Fungal Dermatitis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（白癬）"
+          },
+          {
+            "id": "guinea_pig_0126",
+            "slug": "ringworm-trichophyton-mentagrophytes",
+            "name": "Ringworm (Trichophyton mentagrophytes)",
+            "name_ja": "皮膚糸状菌症（トリコフィトン・メンタグロフィテス）"
+          },
+          {
+            "id": "guinea_pig_0235",
+            "slug": "dermatophytosis-ringworm",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（モルモット）"
+          }
+        ]
+      },
+      {
+        "base": "Pododermatitis (Bumblefoot)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0017",
+            "slug": "pododermatitis-bumblefoot",
+            "name": "Pododermatitis (Bumblefoot)",
+            "name_ja": "足底皮膚炎（バンブルフット）"
+          },
+          {
+            "id": "guinea_pig_0168",
+            "slug": "pododermatitis-grade-i-early",
+            "name": "Pododermatitis - Grade I (Early)",
+            "name_ja": "足底皮膚炎（グレードI・初期）"
+          },
+          {
+            "id": "guinea_pig_0169",
+            "slug": "pododermatitis-grade-iii-severe",
+            "name": "Pododermatitis - Grade III (Severe)",
+            "name_ja": "足底皮膚炎（グレードIII・重度）"
+          }
+        ]
+      },
+      {
+        "base": "Dystocia",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0028",
+            "slug": "dystocia",
+            "name": "Dystocia",
+            "name_ja": "難産"
+          },
+          {
+            "id": "guinea_pig_0166",
+            "slug": "dystocia-fetal-oversize",
+            "name": "Dystocia - Fetal Oversize",
+            "name_ja": "難産（胎子過大）"
+          }
+        ]
+      },
+      {
+        "base": "Pregnancy Toxemia (Ketosis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0029",
+            "slug": "pregnancy-toxemia-ketosis",
+            "name": "Pregnancy Toxemia (Ketosis)",
+            "name_ja": "妊娠中毒症（ケトーシス）"
+          },
+          {
+            "id": "guinea_pig_0150",
+            "slug": "toxemia-of-pregnancy-late-gestation",
+            "name": "Toxemia of Pregnancy (Late Gestation)",
+            "name_ja": "妊娠中毒症（妊娠後期）"
+          },
+          {
+            "id": "guinea_pig_0164",
+            "slug": "pregnancy-toxemia-pre-partum",
+            "name": "Pregnancy Toxemia - Pre-partum",
+            "name_ja": "妊娠中毒症（分娩前）"
+          },
+          {
+            "id": "guinea_pig_0165",
+            "slug": "pregnancy-toxemia-post-partum",
+            "name": "Pregnancy Toxemia - Post-partum",
+            "name_ja": "妊娠中毒症（分娩後）"
+          }
+        ]
+      },
+      {
+        "base": "Scurvy (Vitamin C Deficiency)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0050",
+            "slug": "scurvy-vitamin-c-deficiency",
+            "name": "Scurvy (Vitamin C Deficiency)",
+            "name_ja": "壊血病（ビタミンC欠乏症）"
+          },
+          {
+            "id": "guinea_pig_0157",
+            "slug": "scurvy-subclinical",
+            "name": "Scurvy - Subclinical",
+            "name_ja": "壊血病（不顕性）"
+          },
+          {
+            "id": "guinea_pig_0158",
+            "slug": "scurvy-musculoskeletal-form",
+            "name": "Scurvy - Musculoskeletal Form",
+            "name_ja": "壊血病（筋骨格型）"
+          },
+          {
+            "id": "guinea_pig_0159",
+            "slug": "scurvy-hemorrhagic-form",
+            "name": "Scurvy - Hemorrhagic Form",
+            "name_ja": "壊血病（出血型）"
+          }
+        ]
+      },
+      {
+        "base": "Trichofolliculoma",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0062",
+            "slug": "trichofolliculoma",
+            "name": "Trichofolliculoma",
+            "name_ja": "毛包腫"
+          },
+          {
+            "id": "guinea_pig_0114",
+            "slug": "trichofolliculoma-basal-cell-tumor",
+            "name": "Trichofolliculoma (Basal Cell Tumor)",
+            "name_ja": "毛包腫（基底細胞腫）"
+          }
+        ]
+      },
+      {
+        "base": "Leukemia",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0066",
+            "slug": "leukemia",
+            "name": "Leukemia",
+            "name_ja": "白血病"
+          },
+          {
+            "id": "guinea_pig_0119",
+            "slug": "leukemia-lymphocytic",
+            "name": "Leukemia (Lymphocytic)",
+            "name_ja": "白血病（リンパ球性）"
+          }
+        ]
+      },
+      {
+        "base": "Fur Mites (Chirodiscoides caviae)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0074",
+            "slug": "fur-mites-chirodiscoides-caviae",
+            "name": "Fur Mites (Chirodiscoides caviae)",
+            "name_ja": "毛ダニ症"
+          },
+          {
+            "id": "guinea_pig_0172",
+            "slug": "fur-mites-heavy-infestation",
+            "name": "Fur Mites - Heavy Infestation",
+            "name_ja": "毛ダニ症（重度感染）"
+          }
+        ]
+      },
+      {
+        "base": "Otitis Media/Interna (Middle/Inner Ear Infection)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0077",
+            "slug": "otitis-media-interna-middle-inner-ear-infection",
+            "name": "Otitis Media/Interna (Middle/Inner Ear Infection)",
+            "name_ja": "中耳炎・内耳炎"
+          },
+          {
+            "id": "guinea_pig_0260",
+            "slug": "otitis-media-interna",
+            "name": "Otitis Media/Interna",
+            "name_ja": "中耳/内耳炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis (Fatty Liver)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0082",
+            "slug": "hepatic-lipidosis-fatty-liver",
+            "name": "Hepatic Lipidosis (Fatty Liver)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "guinea_pig_0214",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（モルモット）"
+          }
+        ]
+      },
+      {
+        "base": "Cervical Lymphadenitis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0084",
+            "slug": "cervical-lymphadenitis",
+            "name": "Cervical Lymphadenitis",
+            "name_ja": "頸部リンパ節炎"
+          },
+          {
+            "id": "guinea_pig_0102",
+            "slug": "cervical-lymphadenitis-streptococcus-zooepidemicus",
+            "name": "Cervical Lymphadenitis (Streptococcus zooepidemicus)",
+            "name_ja": "頸部リンパ節炎（ストレプトコッカス・ズーエピデミカス）"
+          },
+          {
+            "id": "guinea_pig_0160",
+            "slug": "cervical-lymphadenitis-streptobacillus",
+            "name": "Cervical Lymphadenitis (Streptobacillus)",
+            "name_ja": "頸部リンパ節炎（ストレプトバチルス）"
+          },
+          {
+            "id": "guinea_pig_0246",
+            "slug": "cervical-lymphadenitis-lumps",
+            "name": "Cervical Lymphadenitis (Lumps)",
+            "name_ja": "頸部リンパ節炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "base": "Alopecia (Non-specific Hair Loss)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0087",
+            "slug": "alopecia-non-specific-hair-loss",
+            "name": "Alopecia (Non-specific Hair Loss)",
+            "name_ja": "脱毛症（非特異性）"
+          },
+          {
+            "id": "guinea_pig_0241",
+            "slug": "alopecia",
+            "name": "Alopecia",
+            "name_ja": "脱毛症（モルモット）"
+          }
+        ]
+      },
+      {
+        "base": "Ketosis (Non-pregnant)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0121",
+            "slug": "ketosis-non-pregnant",
+            "name": "Ketosis (Non-pregnant)",
+            "name_ja": "ケトーシス（非妊娠）"
+          },
+          {
+            "id": "guinea_pig_0336",
+            "slug": "ketosis",
+            "name": "Ketosis",
+            "name_ja": "ケトーシス（モルモット）"
+          }
+        ]
+      },
+      {
+        "base": "Hypovitaminosis A",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0123",
+            "slug": "hypovitaminosis-a",
+            "name": "Hypovitaminosis A",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "guinea_pig_0175",
+            "slug": "vitamin-a-deficiency-ocular",
+            "name": "Vitamin A Deficiency - Ocular",
+            "name_ja": "ビタミンA欠乏症（眼型）"
+          }
+        ]
+      },
+      {
+        "base": "Hay Poke (Corneal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0155",
+            "slug": "hay-poke-corneal",
+            "name": "Hay Poke (Corneal)",
+            "name_ja": "干し草による角膜刺傷"
+          },
+          {
+            "id": "guinea_pig_0156",
+            "slug": "hay-poke-nasal",
+            "name": "Hay Poke (Nasal)",
+            "name_ja": "干し草による鼻腔内刺入"
+          }
+        ]
+      },
+      {
+        "base": "Antibiotic Toxicity (Penicillin-class)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0162",
+            "slug": "antibiotic-toxicity-penicillin-class",
+            "name": "Antibiotic Toxicity (Penicillin-class)",
+            "name_ja": "抗生物質毒性（ペニシリン系）"
+          },
+          {
+            "id": "guinea_pig_0163",
+            "slug": "antibiotic-toxicity-lincosamide-macrolide",
+            "name": "Antibiotic Toxicity (Lincosamide/Macrolide)",
+            "name_ja": "抗生物質毒性（リンコサミド/マクロライド系）"
+          },
+          {
+            "id": "guinea_pig_0290",
+            "slug": "antibiotic-toxicity",
+            "name": "Antibiotic Toxicity",
+            "name_ja": "抗生物質毒性（モルモット）"
+          }
+        ]
+      },
+      {
+        "base": "Cecal Dysbiosis (Antibiotic-induced)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "guinea_pig_0191",
+            "slug": "cecal-dysbiosis-antibiotic-induced",
+            "name": "Cecal Dysbiosis (Antibiotic-induced)",
+            "name_ja": "盲腸内細菌叢異常（抗生物質誘発性）"
+          },
+          {
+            "id": "guinea_pig_0200",
+            "slug": "cecal-dysbiosis",
+            "name": "Cecal Dysbiosis",
+            "name_ja": "盲腸細菌叢異常（モルモット）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "pneumo",
+        "size": 11,
+        "members": [
+          {
+            "id": "guinea_pig_0001",
+            "name": "Bacterial Pneumonia",
+            "name_ja": "細菌性肺炎"
+          },
+          {
+            "id": "guinea_pig_0003",
+            "name": "Streptococcus pneumoniae Infection",
+            "name_ja": "肺炎球菌感染症"
+          },
+          {
+            "id": "guinea_pig_0091",
+            "name": "Fungal Pneumonia (Aspergillosis)",
+            "name_ja": "真菌性肺炎（アスペルギルス症）"
+          },
+          {
+            "id": "guinea_pig_0103",
+            "name": "Bordetella Pneumonia",
+            "name_ja": "ボルデテラ肺炎"
+          },
+          {
+            "id": "guinea_pig_0104",
+            "name": "Streptococcus pneumoniae Pneumonia",
+            "name_ja": "肺炎球菌性肺炎"
+          },
+          {
+            "id": "guinea_pig_0129",
+            "name": "Klebsiella Pneumonia",
+            "name_ja": "クレブシエラ肺炎"
+          },
+          {
+            "id": "guinea_pig_0147",
+            "name": "Interstitial Pneumonia",
+            "name_ja": "間質性肺炎"
+          },
+          {
+            "id": "guinea_pig_0195",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0219",
+            "name": "Adenovirus Pneumonia",
+            "name_ja": "アデノウイルス肺炎（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0221",
+            "name": "Mycoplasma Pneumonia",
+            "name_ja": "マイコプラズマ肺炎（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0225",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 9,
+        "members": [
+          {
+            "id": "guinea_pig_0032",
+            "name": "Uterine Tumors",
+            "name_ja": "子宮腫瘍"
+          },
+          {
+            "id": "guinea_pig_0060",
+            "name": "Mammary Tumors",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "guinea_pig_0093",
+            "name": "Testicular Tumors",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "guinea_pig_0140",
+            "name": "Pancreatic Islet Cell Tumor",
+            "name_ja": "膵島細胞腫瘍"
+          },
+          {
+            "id": "guinea_pig_0228",
+            "name": "Lung Tumor",
+            "name_ja": "肺腫瘍（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0257",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0258",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0280",
+            "name": "Thyroid Tumor",
+            "name_ja": "甲状腺腫瘍（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0281",
+            "name": "Adrenal Tumor",
+            "name_ja": "副腎腫瘍（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cyst",
+        "size": 8,
+        "members": [
+          {
+            "id": "guinea_pig_0018",
+            "name": "Sebaceous Cyst",
+            "name_ja": "皮脂嚢胞"
+          },
+          {
+            "id": "guinea_pig_0027",
+            "name": "Ovarian Cysts",
+            "name_ja": "卵巣嚢腫"
+          },
+          {
+            "id": "guinea_pig_0097",
+            "name": "Ovarian Cysts - Serous",
+            "name_ja": "卵巣嚢胞 - 漿液性"
+          },
+          {
+            "id": "guinea_pig_0098",
+            "name": "Ovarian Cysts - Follicular",
+            "name_ja": "卵巣嚢胞 - 濾胞性"
+          },
+          {
+            "id": "guinea_pig_0139",
+            "name": "Hepatic Cyst",
+            "name_ja": "肝嚢胞"
+          },
+          {
+            "id": "guinea_pig_0148",
+            "name": "Follicular Cyst",
+            "name_ja": "毛包嚢胞"
+          },
+          {
+            "id": "guinea_pig_0167",
+            "name": "Ovarian Cysts - Functional",
+            "name_ja": "卵巣嚢胞（機能性）"
+          },
+          {
+            "id": "guinea_pig_0254",
+            "name": "Renal Cyst",
+            "name_ja": "腎嚢胞（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 7,
+        "members": [
+          {
+            "id": "guinea_pig_0021",
+            "name": "Abscess (Subcutaneous)",
+            "name_ja": "皮下膿瘍"
+          },
+          {
+            "id": "guinea_pig_0057",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍"
+          },
+          {
+            "id": "guinea_pig_0192",
+            "name": "Preputial Gland Abscess",
+            "name_ja": "包皮腺膿瘍"
+          },
+          {
+            "id": "guinea_pig_0230",
+            "name": "Periapical Abscess",
+            "name_ja": "根尖膿瘍（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0242",
+            "name": "Subcutaneous Abscess",
+            "name_ja": "皮下膿瘍（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0297",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0303",
+            "name": "Pedal Abscess",
+            "name_ja": "足底膿瘍（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "scurvy",
+        "size": 7,
+        "members": [
+          {
+            "id": "guinea_pig_0034",
+            "name": "Scurvy-Related Arthritis",
+            "name_ja": "壊血病関連関節炎"
+          },
+          {
+            "id": "guinea_pig_0050",
+            "name": "Scurvy (Vitamin C Deficiency)",
+            "name_ja": "壊血病（ビタミンC欠乏症）"
+          },
+          {
+            "id": "guinea_pig_0095",
+            "name": "Scurvy - Acute Form",
+            "name_ja": "壊血病 - 急性型"
+          },
+          {
+            "id": "guinea_pig_0096",
+            "name": "Scurvy-Related Gum Disease",
+            "name_ja": "壊血病関連歯肉疾患"
+          },
+          {
+            "id": "guinea_pig_0157",
+            "name": "Scurvy - Subclinical",
+            "name_ja": "壊血病（不顕性）"
+          },
+          {
+            "id": "guinea_pig_0158",
+            "name": "Scurvy - Musculoskeletal Form",
+            "name_ja": "壊血病（筋骨格型）"
+          },
+          {
+            "id": "guinea_pig_0159",
+            "name": "Scurvy - Hemorrhagic Form",
+            "name_ja": "壊血病（出血型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "impact",
+        "size": 6,
+        "members": [
+          {
+            "id": "guinea_pig_0010",
+            "name": "Cecal Impaction",
+            "name_ja": "盲腸閉塞"
+          },
+          {
+            "id": "guinea_pig_0079",
+            "name": "Impaction (Perineal Sac)",
+            "name_ja": "肛門嚢閉塞"
+          },
+          {
+            "id": "guinea_pig_0090",
+            "name": "Rectal Impaction",
+            "name_ja": "直腸閉塞"
+          },
+          {
+            "id": "guinea_pig_0135",
+            "name": "Perineal Sac Impaction",
+            "name_ja": "肛門嚢嵌頓"
+          },
+          {
+            "id": "guinea_pig_0173",
+            "name": "Impaction (Perineal Sac) - Chronic",
+            "name_ja": "会陰嚢詰まり（慢性）"
+          },
+          {
+            "id": "guinea_pig_0180",
+            "name": "Anal Sac Impaction",
+            "name_ja": "肛門嚢詰まり"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 6,
+        "members": [
+          {
+            "id": "guinea_pig_0127",
+            "name": "Chirodiscoides caviae Infestation",
+            "name_ja": "キロディスコイデス・カビエ寄生"
+          },
+          {
+            "id": "guinea_pig_0171",
+            "name": "Static Lice - Heavy Infestation",
+            "name_ja": "シラミ症（重度感染）"
+          },
+          {
+            "id": "guinea_pig_0172",
+            "name": "Fur Mites - Heavy Infestation",
+            "name_ja": "毛ダニ症（重度感染）"
+          },
+          {
+            "id": "guinea_pig_0239",
+            "name": "Flea Infestation",
+            "name_ja": "ノミ寄生（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0240",
+            "name": "Lice Infestation (Gliricola/Gyropus)",
+            "name_ja": "シラミ寄生（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0248",
+            "name": "Ear Mite Infestation",
+            "name_ja": "耳ダニ寄生（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "antibi",
+        "size": 5,
+        "members": [
+          {
+            "id": "guinea_pig_0009",
+            "name": "Antibiotic-Associated Enterotoxemia",
+            "name_ja": "抗生物質関連腸毒素血症"
+          },
+          {
+            "id": "guinea_pig_0162",
+            "name": "Antibiotic Toxicity (Penicillin-class)",
+            "name_ja": "抗生物質毒性（ペニシリン系）"
+          },
+          {
+            "id": "guinea_pig_0163",
+            "name": "Antibiotic Toxicity (Lincosamide/Macrolide)",
+            "name_ja": "抗生物質毒性（リンコサミド/マクロライド系）"
+          },
+          {
+            "id": "guinea_pig_0202",
+            "name": "Antibiotic-Associated Diarrhea",
+            "name_ja": "抗生物質関連下痢（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0290",
+            "name": "Antibiotic Toxicity",
+            "name_ja": "抗生物質毒性（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 5,
+        "members": [
+          {
+            "id": "guinea_pig_0033",
+            "name": "Fractures",
+            "name_ja": "骨折"
+          },
+          {
+            "id": "guinea_pig_0144",
+            "name": "Tibial Fracture",
+            "name_ja": "脛骨骨折"
+          },
+          {
+            "id": "guinea_pig_0271",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0272",
+            "name": "Spinal Fracture",
+            "name_ja": "脊椎骨折（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0326",
+            "name": "Pelvic Fracture",
+            "name_ja": "骨盤骨折（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lympha",
+        "size": 5,
+        "members": [
+          {
+            "id": "guinea_pig_0071",
+            "name": "Streptococcal Lymphadenitis (Lumps)",
+            "name_ja": "連鎖球菌性リンパ節炎"
+          },
+          {
+            "id": "guinea_pig_0084",
+            "name": "Cervical Lymphadenitis",
+            "name_ja": "頸部リンパ節炎"
+          },
+          {
+            "id": "guinea_pig_0102",
+            "name": "Cervical Lymphadenitis (Streptococcus zooepidemicus)",
+            "name_ja": "頸部リンパ節炎（ストレプトコッカス・ズーエピデミカス）"
+          },
+          {
+            "id": "guinea_pig_0160",
+            "name": "Cervical Lymphadenitis (Streptobacillus)",
+            "name_ja": "頸部リンパ節炎（ストレプトバチルス）"
+          },
+          {
+            "id": "guinea_pig_0246",
+            "name": "Cervical Lymphadenitis (Lumps)",
+            "name_ja": "頸部リンパ節炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ovaria",
+        "size": 5,
+        "members": [
+          {
+            "id": "guinea_pig_0027",
+            "name": "Ovarian Cysts",
+            "name_ja": "卵巣嚢腫"
+          },
+          {
+            "id": "guinea_pig_0097",
+            "name": "Ovarian Cysts - Serous",
+            "name_ja": "卵巣嚢胞 - 漿液性"
+          },
+          {
+            "id": "guinea_pig_0098",
+            "name": "Ovarian Cysts - Follicular",
+            "name_ja": "卵巣嚢胞 - 濾胞性"
+          },
+          {
+            "id": "guinea_pig_0118",
+            "name": "Ovarian Teratoma",
+            "name_ja": "卵巣奇形腫"
+          },
+          {
+            "id": "guinea_pig_0167",
+            "name": "Ovarian Cysts - Functional",
+            "name_ja": "卵巣嚢胞（機能性）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adenoc",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0116",
+            "name": "Lung Adenocarcinoma",
+            "name_ja": "肺腺癌"
+          },
+          {
+            "id": "guinea_pig_0117",
+            "name": "Uterine Adenocarcinoma",
+            "name_ja": "子宮腺癌"
+          },
+          {
+            "id": "guinea_pig_0181",
+            "name": "Mammary Adenocarcinoma",
+            "name_ja": "乳腺腺癌"
+          },
+          {
+            "id": "guinea_pig_0216",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸腺癌（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0064",
+            "name": "Skin Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "guinea_pig_0245",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0275",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0276",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "caviae",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0101",
+            "name": "Trixacarus caviae (Sarcoptic Mange) - Severe",
+            "name_ja": "トリキサカルス疥癬 - 重症型"
+          },
+          {
+            "id": "guinea_pig_0127",
+            "name": "Chirodiscoides caviae Infestation",
+            "name_ja": "キロディスコイデス・カビエ寄生"
+          },
+          {
+            "id": "guinea_pig_0236",
+            "name": "Trixacarus caviae Mange",
+            "name_ja": "モルモット疥癬（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0237",
+            "name": "Chirodiscoides caviae Mite",
+            "name_ja": "モルモット毛ダニ（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cervic",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0084",
+            "name": "Cervical Lymphadenitis",
+            "name_ja": "頸部リンパ節炎"
+          },
+          {
+            "id": "guinea_pig_0102",
+            "name": "Cervical Lymphadenitis (Streptococcus zooepidemicus)",
+            "name_ja": "頸部リンパ節炎（ストレプトコッカス・ズーエピデミカス）"
+          },
+          {
+            "id": "guinea_pig_0160",
+            "name": "Cervical Lymphadenitis (Streptobacillus)",
+            "name_ja": "頸部リンパ節炎（ストレプトバチルス）"
+          },
+          {
+            "id": "guinea_pig_0246",
+            "name": "Cervical Lymphadenitis (Lumps)",
+            "name_ja": "頸部リンパ節炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0124",
+            "name": "Vitamin E / Selenium Deficiency",
+            "name_ja": "ビタミンE/セレン欠乏症"
+          },
+          {
+            "id": "guinea_pig_0175",
+            "name": "Vitamin A Deficiency - Ocular",
+            "name_ja": "ビタミンA欠乏症（眼型）"
+          },
+          {
+            "id": "guinea_pig_0283",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0284",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0013",
+            "name": "Fungal Dermatitis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（白癬）"
+          },
+          {
+            "id": "guinea_pig_0020",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎"
+          },
+          {
+            "id": "guinea_pig_0235",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0247",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "elonga",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0056",
+            "name": "Elongated Tooth Roots",
+            "name_ja": "歯根伸長"
+          },
+          {
+            "id": "guinea_pig_0141",
+            "name": "Mandibular Elongation",
+            "name_ja": "下顎歯根伸長"
+          },
+          {
+            "id": "guinea_pig_0142",
+            "name": "Maxillary Tooth Root Elongation",
+            "name_ja": "上顎歯根伸長"
+          },
+          {
+            "id": "guinea_pig_0229",
+            "name": "Molar Elongation",
+            "name_ja": "臼歯伸長（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastri",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0012",
+            "name": "Gastric Ulcers",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "guinea_pig_0188",
+            "name": "Gastric Dilation Volvulus",
+            "name_ja": "胃拡張捻転"
+          },
+          {
+            "id": "guinea_pig_0213",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0310",
+            "name": "Gastric Dilation-Volvulus",
+            "name_ja": "胃拡張捻転（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "grade",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0099",
+            "name": "Bumblefoot - Grade I",
+            "name_ja": "趾瘤症 - グレードI"
+          },
+          {
+            "id": "guinea_pig_0100",
+            "name": "Bumblefoot - Grade III-IV",
+            "name_ja": "趾瘤症 - グレードIII-IV"
+          },
+          {
+            "id": "guinea_pig_0168",
+            "name": "Pododermatitis - Grade I (Early)",
+            "name_ja": "足底皮膚炎（グレードI・初期）"
+          },
+          {
+            "id": "guinea_pig_0169",
+            "name": "Pododermatitis - Grade III (Severe)",
+            "name_ja": "足底皮膚炎（グレードIII・重度）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0082",
+            "name": "Hepatic Lipidosis (Fatty Liver)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "guinea_pig_0139",
+            "name": "Hepatic Cyst",
+            "name_ja": "肝嚢胞"
+          },
+          {
+            "id": "guinea_pig_0214",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0297",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "injury",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0092",
+            "name": "Hay Poke Injury",
+            "name_ja": "牧草による刺傷"
+          },
+          {
+            "id": "guinea_pig_0189",
+            "name": "Hay Poke Injury - Oral",
+            "name_ja": "干し草刺傷（口腔）"
+          },
+          {
+            "id": "guinea_pig_0264",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0302",
+            "name": "Toenail Injury",
+            "name_ja": "爪損傷（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mange",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0014",
+            "name": "Sarcoptic Mange (Trixacarus caviae)",
+            "name_ja": "疥癬（トリキサカルスダニ）"
+          },
+          {
+            "id": "guinea_pig_0174",
+            "name": "Trixacarus Mange - Chronic",
+            "name_ja": "トリキサカルスダニ症（慢性型）"
+          },
+          {
+            "id": "guinea_pig_0236",
+            "name": "Trixacarus caviae Mange",
+            "name_ja": "モルモット疥癬（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0238",
+            "name": "Demodex Mange",
+            "name_ja": "ニキビダニ症（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "otiti",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0077",
+            "name": "Otitis Media/Interna (Middle/Inner Ear Infection)",
+            "name_ja": "中耳炎・内耳炎"
+          },
+          {
+            "id": "guinea_pig_0078",
+            "name": "Otitis Externa (Outer Ear Infection)",
+            "name_ja": "外耳炎"
+          },
+          {
+            "id": "guinea_pig_0178",
+            "name": "Otitis Media (Middle Ear Infection)",
+            "name_ja": "中耳炎"
+          },
+          {
+            "id": "guinea_pig_0260",
+            "name": "Otitis Media/Interna",
+            "name_ja": "中耳/内耳炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "overgr",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0058",
+            "name": "Incisor Overgrowth",
+            "name_ja": "切歯過成長"
+          },
+          {
+            "id": "guinea_pig_0146",
+            "name": "Toe Nail Overgrowth / Curling",
+            "name_ja": "爪の過長/巻き爪"
+          },
+          {
+            "id": "guinea_pig_0295",
+            "name": "Overgrooming",
+            "name_ja": "過剰グルーミング（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0329",
+            "name": "Nail Overgrowth",
+            "name_ja": "爪過成長（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "podode",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0017",
+            "name": "Pododermatitis (Bumblefoot)",
+            "name_ja": "足底皮膚炎（バンブルフット）"
+          },
+          {
+            "id": "guinea_pig_0168",
+            "name": "Pododermatitis - Grade I (Early)",
+            "name_ja": "足底皮膚炎（グレードI・初期）"
+          },
+          {
+            "id": "guinea_pig_0169",
+            "name": "Pododermatitis - Grade III (Severe)",
+            "name_ja": "足底皮膚炎（グレードIII・重度）"
+          },
+          {
+            "id": "guinea_pig_0183",
+            "name": "Staphylococcal Pododermatitis",
+            "name_ja": "ブドウ球菌性足底皮膚炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "poke",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0092",
+            "name": "Hay Poke Injury",
+            "name_ja": "牧草による刺傷"
+          },
+          {
+            "id": "guinea_pig_0155",
+            "name": "Hay Poke (Corneal)",
+            "name_ja": "干し草による角膜刺傷"
+          },
+          {
+            "id": "guinea_pig_0156",
+            "name": "Hay Poke (Nasal)",
+            "name_ja": "干し草による鼻腔内刺入"
+          },
+          {
+            "id": "guinea_pig_0189",
+            "name": "Hay Poke Injury - Oral",
+            "name_ja": "干し草刺傷（口腔）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pregna",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0029",
+            "name": "Pregnancy Toxemia (Ketosis)",
+            "name_ja": "妊娠中毒症（ケトーシス）"
+          },
+          {
+            "id": "guinea_pig_0150",
+            "name": "Toxemia of Pregnancy (Late Gestation)",
+            "name_ja": "妊娠中毒症（妊娠後期）"
+          },
+          {
+            "id": "guinea_pig_0164",
+            "name": "Pregnancy Toxemia - Pre-partum",
+            "name_ja": "妊娠中毒症（分娩前）"
+          },
+          {
+            "id": "guinea_pig_0165",
+            "name": "Pregnancy Toxemia - Post-partum",
+            "name_ja": "妊娠中毒症（分娩後）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0131",
+            "name": "Renal Calculi",
+            "name_ja": "腎結石"
+          },
+          {
+            "id": "guinea_pig_0250",
+            "name": "Acute Renal Failure",
+            "name_ja": "急性腎不全（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0254",
+            "name": "Renal Cyst",
+            "name_ja": "腎嚢胞（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0276",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxemi",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0029",
+            "name": "Pregnancy Toxemia (Ketosis)",
+            "name_ja": "妊娠中毒症（ケトーシス）"
+          },
+          {
+            "id": "guinea_pig_0150",
+            "name": "Toxemia of Pregnancy (Late Gestation)",
+            "name_ja": "妊娠中毒症（妊娠後期）"
+          },
+          {
+            "id": "guinea_pig_0164",
+            "name": "Pregnancy Toxemia - Pre-partum",
+            "name_ja": "妊娠中毒症（分娩前）"
+          },
+          {
+            "id": "guinea_pig_0165",
+            "name": "Pregnancy Toxemia - Post-partum",
+            "name_ja": "妊娠中毒症（分娩後）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tricho",
+        "size": 4,
+        "members": [
+          {
+            "id": "guinea_pig_0062",
+            "name": "Trichofolliculoma",
+            "name_ja": "毛包腫"
+          },
+          {
+            "id": "guinea_pig_0114",
+            "name": "Trichofolliculoma (Basal Cell Tumor)",
+            "name_ja": "毛包腫（基底細胞腫）"
+          },
+          {
+            "id": "guinea_pig_0278",
+            "name": "Trichoepithelioma",
+            "name_ja": "毛包上皮腫（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0312",
+            "name": "Trichobezoar",
+            "name_ja": "毛球症（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bordet",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0002",
+            "name": "Bordetella bronchiseptica Infection",
+            "name_ja": "ボルデテラ感染症"
+          },
+          {
+            "id": "guinea_pig_0103",
+            "name": "Bordetella Pneumonia",
+            "name_ja": "ボルデテラ肺炎"
+          },
+          {
+            "id": "guinea_pig_0161",
+            "name": "Bordetella - Subclinical Carrier",
+            "name_ja": "ボルデテラ不顕性キャリア"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bumble",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0099",
+            "name": "Bumblefoot - Grade I",
+            "name_ja": "趾瘤症 - グレードI"
+          },
+          {
+            "id": "guinea_pig_0100",
+            "name": "Bumblefoot - Grade III-IV",
+            "name_ja": "趾瘤症 - グレードIII-IV"
+          },
+          {
+            "id": "guinea_pig_0197",
+            "name": "Bumblefoot (Pododermatitis)",
+            "name_ja": "バンブルフット（足底皮膚炎）（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "calcif",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0088",
+            "name": "Calcification of Soft Tissues (Metastatic Calcification)",
+            "name_ja": "軟部組織石灰化"
+          },
+          {
+            "id": "guinea_pig_0136",
+            "name": "Aortic Calcification",
+            "name_ja": "大動脈石灰化"
+          },
+          {
+            "id": "guinea_pig_0177",
+            "name": "Metastatic Calcification - Soft Tissue",
+            "name_ja": "転移性石灰化（軟部組織）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cecal",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0010",
+            "name": "Cecal Impaction",
+            "name_ja": "盲腸閉塞"
+          },
+          {
+            "id": "guinea_pig_0191",
+            "name": "Cecal Dysbiosis (Antibiotic-induced)",
+            "name_ja": "盲腸内細菌叢異常（抗生物質誘発性）"
+          },
+          {
+            "id": "guinea_pig_0200",
+            "name": "Cecal Dysbiosis",
+            "name_ja": "盲腸細菌叢異常（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cell",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0064",
+            "name": "Skin Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "guinea_pig_0140",
+            "name": "Pancreatic Islet Cell Tumor",
+            "name_ja": "膵島細胞腫瘍"
+          },
+          {
+            "id": "guinea_pig_0245",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dental",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0055",
+            "name": "Dental Malocclusion",
+            "name_ja": "不正咬合"
+          },
+          {
+            "id": "guinea_pig_0057",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍"
+          },
+          {
+            "id": "guinea_pig_0190",
+            "name": "Hypovitaminosis C - Dental",
+            "name_ja": "ビタミンC欠乏症（歯科型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enteri",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0008",
+            "name": "Bacterial Enteritis",
+            "name_ja": "細菌性腸炎"
+          },
+          {
+            "id": "guinea_pig_0108",
+            "name": "Rotavirus Enteritis",
+            "name_ja": "ロタウイルス性腸炎"
+          },
+          {
+            "id": "guinea_pig_0205",
+            "name": "E. coli Enteritis",
+            "name_ja": "大腸菌性腸炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fetal",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0153",
+            "name": "Fetal Macrosomia",
+            "name_ja": "胎児巨大症"
+          },
+          {
+            "id": "guinea_pig_0166",
+            "name": "Dystocia - Fetal Oversize",
+            "name_ja": "難産（胎子過大）"
+          },
+          {
+            "id": "guinea_pig_0193",
+            "name": "Fetal Resorption",
+            "name_ja": "胎子吸収"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fibros",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0115",
+            "name": "Fibrosarcoma",
+            "name_ja": "線維肉腫"
+          },
+          {
+            "id": "guinea_pig_0187",
+            "name": "Osteodystrophia Fibrosa",
+            "name_ja": "線維性骨異栄養症"
+          },
+          {
+            "id": "guinea_pig_0319",
+            "name": "Pulmonary Fibrosis",
+            "name_ja": "肺線維症（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "form",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0095",
+            "name": "Scurvy - Acute Form",
+            "name_ja": "壊血病 - 急性型"
+          },
+          {
+            "id": "guinea_pig_0158",
+            "name": "Scurvy - Musculoskeletal Form",
+            "name_ja": "壊血病（筋骨格型）"
+          },
+          {
+            "id": "guinea_pig_0159",
+            "name": "Scurvy - Hemorrhagic Form",
+            "name_ja": "壊血病（出血型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0011",
+            "name": "Intestinal Parasites",
+            "name_ja": "腸内寄生虫症"
+          },
+          {
+            "id": "guinea_pig_0209",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0216",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸腺癌（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lice",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0015",
+            "name": "Static Lice (Gliricola porcelli)",
+            "name_ja": "シラミ寄生症"
+          },
+          {
+            "id": "guinea_pig_0171",
+            "name": "Static Lice - Heavy Infestation",
+            "name_ja": "シラミ症（重度感染）"
+          },
+          {
+            "id": "guinea_pig_0240",
+            "name": "Lice Infestation (Gliricola/Gyropus)",
+            "name_ja": "シラミ寄生（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lympho",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0061",
+            "name": "Lymphoma",
+            "name_ja": "リンパ腫"
+          },
+          {
+            "id": "guinea_pig_0069",
+            "name": "Lymphocytic Choriomeningitis Virus (LCMV)",
+            "name_ja": "リンパ球性脈絡髄膜炎ウイルス"
+          },
+          {
+            "id": "guinea_pig_0199",
+            "name": "Lymphocytic Choriomeningitis (LCMV)",
+            "name_ja": "リンパ球性脈絡髄膜炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mammar",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0060",
+            "name": "Mammary Tumors",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "guinea_pig_0181",
+            "name": "Mammary Adenocarcinoma",
+            "name_ja": "乳腺腺癌"
+          },
+          {
+            "id": "guinea_pig_0257",
+            "name": "Mammary Tumor",
+            "name_ja": "乳腺腫瘍（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "media",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0077",
+            "name": "Otitis Media/Interna (Middle/Inner Ear Infection)",
+            "name_ja": "中耳炎・内耳炎"
+          },
+          {
+            "id": "guinea_pig_0178",
+            "name": "Otitis Media (Middle Ear Infection)",
+            "name_ja": "中耳炎"
+          },
+          {
+            "id": "guinea_pig_0260",
+            "name": "Otitis Media/Interna",
+            "name_ja": "中耳/内耳炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "obstru",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0026",
+            "name": "Urethral Obstruction",
+            "name_ja": "尿道閉塞"
+          },
+          {
+            "id": "guinea_pig_0134",
+            "name": "Preputial Obstruction",
+            "name_ja": "包皮閉塞"
+          },
+          {
+            "id": "guinea_pig_0209",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "oral",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0143",
+            "name": "Oral Papilloma",
+            "name_ja": "口腔パピローマ"
+          },
+          {
+            "id": "guinea_pig_0189",
+            "name": "Hay Poke Injury - Oral",
+            "name_ja": "干し草刺傷（口腔）"
+          },
+          {
+            "id": "guinea_pig_0342",
+            "name": "Oral Candidiasis",
+            "name_ja": "口腔カンジダ症（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pulmon",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0065",
+            "name": "Pulmonary Adenoma",
+            "name_ja": "肺腺腫"
+          },
+          {
+            "id": "guinea_pig_0226",
+            "name": "Pulmonary Edema",
+            "name_ja": "肺水腫（モルモット）"
+          },
+          {
+            "id": "guinea_pig_0319",
+            "name": "Pulmonary Fibrosis",
+            "name_ja": "肺線維症（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "relate",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0034",
+            "name": "Scurvy-Related Arthritis",
+            "name_ja": "壊血病関連関節炎"
+          },
+          {
+            "id": "guinea_pig_0096",
+            "name": "Scurvy-Related Gum Disease",
+            "name_ja": "壊血病関連歯肉疾患"
+          },
+          {
+            "id": "guinea_pig_0293",
+            "name": "Stress-Related Illness",
+            "name_ja": "ストレス関連疾患（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "strept",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0003",
+            "name": "Streptococcus pneumoniae Infection",
+            "name_ja": "肺炎球菌感染症"
+          },
+          {
+            "id": "guinea_pig_0071",
+            "name": "Streptococcal Lymphadenitis (Lumps)",
+            "name_ja": "連鎖球菌性リンパ節炎"
+          },
+          {
+            "id": "guinea_pig_0104",
+            "name": "Streptococcus pneumoniae Pneumonia",
+            "name_ja": "肺炎球菌性肺炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tooth",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0056",
+            "name": "Elongated Tooth Roots",
+            "name_ja": "歯根伸長"
+          },
+          {
+            "id": "guinea_pig_0142",
+            "name": "Maxillary Tooth Root Elongation",
+            "name_ja": "上顎歯根伸長"
+          },
+          {
+            "id": "guinea_pig_0232",
+            "name": "Broken Tooth",
+            "name_ja": "歯牙破折（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxici",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0162",
+            "name": "Antibiotic Toxicity (Penicillin-class)",
+            "name_ja": "抗生物質毒性（ペニシリン系）"
+          },
+          {
+            "id": "guinea_pig_0163",
+            "name": "Antibiotic Toxicity (Lincosamide/Macrolide)",
+            "name_ja": "抗生物質毒性（リンコサミド/マクロライド系）"
+          },
+          {
+            "id": "guinea_pig_0290",
+            "name": "Antibiotic Toxicity",
+            "name_ja": "抗生物質毒性（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "trixac",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0101",
+            "name": "Trixacarus caviae (Sarcoptic Mange) - Severe",
+            "name_ja": "トリキサカルス疥癬 - 重症型"
+          },
+          {
+            "id": "guinea_pig_0174",
+            "name": "Trixacarus Mange - Chronic",
+            "name_ja": "トリキサカルスダニ症（慢性型）"
+          },
+          {
+            "id": "guinea_pig_0236",
+            "name": "Trixacarus caviae Mange",
+            "name_ja": "モルモット疥癬（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ulcer",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0012",
+            "name": "Gastric Ulcers",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "guinea_pig_0038",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍"
+          },
+          {
+            "id": "guinea_pig_0213",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "urinar",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0023",
+            "name": "Urinary Tract Infection (UTI)",
+            "name_ja": "尿路感染症"
+          },
+          {
+            "id": "guinea_pig_0176",
+            "name": "Urinary Sludge (Calcium Deposits)",
+            "name_ja": "尿泥（カルシウム沈着）"
+          },
+          {
+            "id": "guinea_pig_0249",
+            "name": "Urinary Tract Infection",
+            "name_ja": "尿路感染症（モルモット）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0124",
+            "name": "Vitamin E / Selenium Deficiency",
+            "name_ja": "ビタミンE/セレン欠乏症"
+          },
+          {
+            "id": "guinea_pig_0175",
+            "name": "Vitamin A Deficiency - Ocular",
+            "name_ja": "ビタミンA欠乏症（眼型）"
+          },
+          {
+            "id": "guinea_pig_0284",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（モルモット）"
+          }
+        ]
+      }
+    ]
+  }
+}

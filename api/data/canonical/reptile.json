@@ -1,0 +1,1683 @@
+{
+  "species": "reptile",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 286,
+    "merge_clusters": 6,
+    "records_merged_away": 6,
+    "archived": 0,
+    "served_after": 280
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "reptile_0002",
+        "slug": "vitamin-a-deficiency-hypovitaminosis-a",
+        "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+        "name_ja": "ビタミンA欠乏症"
+      },
+      "merged": [
+        {
+          "id": "reptile_0241",
+          "slug": "vitamin-a-deficiency",
+          "name": "Vitamin A Deficiency",
+          "name_ja": "ビタミンA欠乏症（爬虫類）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0029",
+        "slug": "thermal-burns",
+        "name": "Thermal Burns",
+        "name_ja": "熱傷"
+      },
+      "merged": [
+        {
+          "id": "reptile_0249",
+          "slug": "burns",
+          "name": "Burns",
+          "name_ja": "熱傷（爬虫類）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0030",
+        "slug": "dermatophytosis-fungal-skin-infection",
+        "name": "Dermatophytosis (Fungal Skin Infection)",
+        "name_ja": "皮膚糸状菌症"
+      },
+      "merged": [
+        {
+          "id": "reptile_0178",
+          "slug": "dermatophytosis",
+          "name": "Dermatophytosis",
+          "name_ja": "皮膚糸状菌症（爬虫類）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0052",
+        "slug": "septicemia-blood-poisoning",
+        "name": "Septicemia (Blood Poisoning)",
+        "name_ja": "敗血症"
+      },
+      "merged": [
+        {
+          "id": "reptile_0247",
+          "slug": "septicemia",
+          "name": "Septicemia",
+          "name_ja": "敗血症（爬虫類）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0111",
+        "slug": "ovarian-neoplasia",
+        "name": "Ovarian Neoplasia",
+        "name_ja": "卵巣腫瘍"
+      },
+      "merged": [
+        {
+          "id": "reptile_0204",
+          "slug": "ovarian-tumor",
+          "name": "Ovarian Tumor",
+          "name_ja": "卵巣腫瘍（爬虫類）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0120",
+        "slug": "lead-toxicosis",
+        "name": "Lead Toxicosis",
+        "name_ja": "鉛中毒"
+      },
+      "merged": [
+        {
+          "id": "reptile_0245",
+          "slug": "lead-poisoning",
+          "name": "Lead Poisoning",
+          "name_ja": "鉛中毒（爬虫類）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Thiamine (Vitamin B1) Deficiency",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0007",
+            "slug": "thiamine-vitamin-b1-deficiency",
+            "name": "Thiamine (Vitamin B1) Deficiency",
+            "name_ja": "チアミン（ビタミンB1）欠乏症"
+          },
+          {
+            "id": "reptile_0170",
+            "slug": "thiamine-deficiency",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン欠乏症（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Amoebic Infection (Entamoeba)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0020",
+            "slug": "amoebic-infection-entamoeba",
+            "name": "Amoebic Infection (Entamoeba)",
+            "name_ja": "アメーバ感染症"
+          },
+          {
+            "id": "reptile_0187",
+            "slug": "amoebic-infection",
+            "name": "Amoebic Infection",
+            "name_ja": "アメーバ感染（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Scale Rot (Ulcerative Dermatitis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0027",
+            "slug": "scale-rot-ulcerative-dermatitis",
+            "name": "Scale Rot (Ulcerative Dermatitis)",
+            "name_ja": "スケイルロット（潰瘍性皮膚炎）"
+          },
+          {
+            "id": "reptile_0190",
+            "slug": "scale-rot",
+            "name": "Scale Rot",
+            "name_ja": "鱗腐敗（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Rostral Abrasion (Nose Rub)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0033",
+            "slug": "rostral-abrasion-nose-rub",
+            "name": "Rostral Abrasion (Nose Rub)",
+            "name_ja": "吻部擦過傷（ノーズラブ）"
+          },
+          {
+            "id": "reptile_0188",
+            "slug": "rostral-abrasion",
+            "name": "Rostral Abrasion",
+            "name_ja": "吻端擦過傷（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Shell Rot (Ulcerative Shell Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0034",
+            "slug": "shell-rot-ulcerative-shell-disease",
+            "name": "Shell Rot (Ulcerative Shell Disease)",
+            "name_ja": "甲羅腐敗症"
+          },
+          {
+            "id": "reptile_0189",
+            "slug": "shell-rot",
+            "name": "Shell Rot",
+            "name_ja": "甲羅腐敗（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0040",
+            "slug": "hepatic-lipidosis-fatty-liver-disease",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "reptile_0205",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Anorexia (Non-specific)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0043",
+            "slug": "anorexia-non-specific",
+            "name": "Anorexia (Non-specific)",
+            "name_ja": "食欲不振（非特異的）"
+          },
+          {
+            "id": "reptile_0212",
+            "slug": "anorexia-behavioral",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（爬虫類）"
+          },
+          {
+            "id": "reptile_0254",
+            "slug": "anorexia-stress-related",
+            "name": "Anorexia (Stress-Related)",
+            "name_ja": "ストレス性拒食（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Pre-ovulatory Follicular Stasis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0058",
+            "slug": "pre-ovulatory-follicular-stasis",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "reptile_0161",
+            "slug": "preovulatory-follicular-stasis-yolk-coelomitis",
+            "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
+            "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）"
+          }
+        ]
+      },
+      {
+        "base": "Renal Failure (Chronic Kidney Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0063",
+            "slug": "renal-failure-chronic-kidney-disease",
+            "name": "Renal Failure (Chronic Kidney Disease)",
+            "name_ja": "腎不全（慢性腎疾患）"
+          },
+          {
+            "id": "reptile_0198",
+            "slug": "renal-failure",
+            "name": "Renal Failure",
+            "name_ja": "腎不全（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Bladder Stones (Urolithiasis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0064",
+            "slug": "bladder-stones-urolithiasis",
+            "name": "Bladder Stones (Urolithiasis)",
+            "name_ja": "膀胱結石（尿路結石症）"
+          },
+          {
+            "id": "reptile_0200",
+            "slug": "bladder-stone",
+            "name": "Bladder Stone",
+            "name_ja": "膀胱結石（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Hyperthermia (Heat Stroke)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0074",
+            "slug": "hyperthermia-heat-stroke",
+            "name": "Hyperthermia (Heat Stroke)",
+            "name_ja": "高体温症（熱中症）"
+          },
+          {
+            "id": "reptile_0244",
+            "slug": "hyperthermia",
+            "name": "Hyperthermia",
+            "name_ja": "高体温症（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0081",
+            "slug": "yellow-fungus-disease-chrysosporium-anamorph-of-nannizziopsis-vriesii-canv",
+            "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
+            "name_ja": "黄色真菌症（CANV）"
+          },
+          {
+            "id": "reptile_0164",
+            "slug": "yellow-fungus-disease-chrysosporium",
+            "name": "Yellow Fungus Disease (Chrysosporium)",
+            "name_ja": "黄色真菌病（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Osteomyelitis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0082",
+            "slug": "osteomyelitis",
+            "name": "Osteomyelitis",
+            "name_ja": "骨髄炎"
+          },
+          {
+            "id": "reptile_0112",
+            "slug": "osteomyelitis-jaw",
+            "name": "Osteomyelitis (Jaw)",
+            "name_ja": "顎骨骨髄炎"
+          }
+        ]
+      },
+      {
+        "base": "Necrotic Dermatitis (Vesicular Dermatitis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0153",
+            "slug": "necrotic-dermatitis-vesicular-dermatitis",
+            "name": "Necrotic Dermatitis (Vesicular Dermatitis)",
+            "name_ja": "壊死性皮膚炎（水疱性皮膚炎）"
+          },
+          {
+            "id": "reptile_0168",
+            "slug": "necrotic-dermatitis",
+            "name": "Necrotic Dermatitis",
+            "name_ja": "壊死性皮膚炎（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0162",
+            "slug": "septicemic-cutaneous-ulcerative-disease-scud",
+            "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
+            "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）"
+          },
+          {
+            "id": "reptile_0167",
+            "slug": "septicemic-cutaneous-ulcerative-disease",
+            "name": "Septicemic Cutaneous Ulcerative Disease",
+            "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Gout (Visceral)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0196",
+            "slug": "gout-visceral",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（爬虫類）"
+          },
+          {
+            "id": "reptile_0197",
+            "slug": "gout-articular",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（爬虫類）"
+          }
+        ]
+      },
+      {
+        "base": "Fracture (Limb)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "reptile_0223",
+            "slug": "fracture-limb",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（爬虫類）"
+          },
+          {
+            "id": "reptile_0224",
+            "slug": "fracture-shell-carapace",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（爬虫類）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "dermat",
+        "size": 15,
+        "members": [
+          {
+            "id": "reptile_0030",
+            "name": "Dermatophytosis (Fungal Skin Infection)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "reptile_0031",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "reptile_0146",
+            "name": "Photosensitization Dermatitis",
+            "name_ja": "光線過敏性皮膚炎"
+          },
+          {
+            "id": "reptile_0153",
+            "name": "Necrotic Dermatitis (Vesicular Dermatitis)",
+            "name_ja": "壊死性皮膚炎（水疱性皮膚炎）"
+          },
+          {
+            "id": "reptile_0168",
+            "name": "Necrotic Dermatitis",
+            "name_ja": "壊死性皮膚炎（爬虫類）"
+          },
+          {
+            "id": "reptile_0178",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（爬虫類）"
+          },
+          {
+            "id": "reptile_0194",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（爬虫類）"
+          },
+          {
+            "id": "reptile_0276",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0277",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0278",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0279",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（爬虫類）"
+          },
+          {
+            "id": "reptile_0280",
+            "name": "Dermatological Neoplasia",
+            "name_ja": "皮膚腫瘍性疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0281",
+            "name": "Dermatological Autoimmune Disease",
+            "name_ja": "皮膚自己免疫疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0282",
+            "name": "Dermatological Allergic Disease",
+            "name_ja": "皮膚アレルギー疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0283",
+            "name": "Chronic Dermatitis",
+            "name_ja": "慢性皮膚炎（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "respir",
+        "size": 14,
+        "members": [
+          {
+            "id": "reptile_0011",
+            "name": "Upper Respiratory Infection (URI)",
+            "name_ja": "上部呼吸器感染症"
+          },
+          {
+            "id": "reptile_0012",
+            "name": "Lower Respiratory Infection (Pneumonia)",
+            "name_ja": "下部呼吸器感染症（肺炎）"
+          },
+          {
+            "id": "reptile_0013",
+            "name": "Mycoplasma Respiratory Infection",
+            "name_ja": "マイコプラズマ呼吸器感染症"
+          },
+          {
+            "id": "reptile_0143",
+            "name": "Chronic Respiratory Disease Complex",
+            "name_ja": "慢性呼吸器疾患複合"
+          },
+          {
+            "id": "reptile_0171",
+            "name": "Respiratory Infection",
+            "name_ja": "呼吸器感染症（爬虫類）"
+          },
+          {
+            "id": "reptile_0216",
+            "name": "Upper Respiratory Tract Disease",
+            "name_ja": "上部気道疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0268",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0269",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0270",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0271",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0272",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（爬虫類）"
+          },
+          {
+            "id": "reptile_0273",
+            "name": "Respiratory Inflammatory Disease",
+            "name_ja": "呼吸器炎症性疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0274",
+            "name": "Lower Respiratory Tract Infection",
+            "name_ja": "下部気道感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0275",
+            "name": "Chronic Respiratory Disease",
+            "name_ja": "慢性呼吸器疾患（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 11,
+        "members": [
+          {
+            "id": "reptile_0040",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "reptile_0155",
+            "name": "Hepatic Coccidiosis",
+            "name_ja": "肝コクシジウム症"
+          },
+          {
+            "id": "reptile_0158",
+            "name": "Adenoviral Hepatitis",
+            "name_ja": "アデノウイルス性肝炎"
+          },
+          {
+            "id": "reptile_0205",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（爬虫類）"
+          },
+          {
+            "id": "reptile_0206",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（爬虫類）"
+          },
+          {
+            "id": "reptile_0207",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（爬虫類）"
+          },
+          {
+            "id": "reptile_0255",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（爬虫類）"
+          },
+          {
+            "id": "reptile_0256",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（爬虫類）"
+          },
+          {
+            "id": "reptile_0257",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0258",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（爬虫類）"
+          },
+          {
+            "id": "reptile_0259",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 10,
+        "members": [
+          {
+            "id": "reptile_0002",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "reptile_0003",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "reptile_0007",
+            "name": "Thiamine (Vitamin B1) Deficiency",
+            "name_ja": "チアミン（ビタミンB1）欠乏症"
+          },
+          {
+            "id": "reptile_0125",
+            "name": "Protein Deficiency / Malnutrition",
+            "name_ja": "タンパク質欠乏・栄養不良"
+          },
+          {
+            "id": "reptile_0126",
+            "name": "Vitamin C Deficiency (Scurvy)",
+            "name_ja": "ビタミンC欠乏症（壊血病）"
+          },
+          {
+            "id": "reptile_0127",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "reptile_0142",
+            "name": "UV Light Deficiency",
+            "name_ja": "紫外線不足症"
+          },
+          {
+            "id": "reptile_0170",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン欠乏症（爬虫類）"
+          },
+          {
+            "id": "reptile_0241",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（爬虫類）"
+          },
+          {
+            "id": "reptile_0242",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastro",
+        "size": 10,
+        "members": [
+          {
+            "id": "reptile_0037",
+            "name": "Gastrointestinal Impaction",
+            "name_ja": "消化管閉塞（インパクション）"
+          },
+          {
+            "id": "reptile_0038",
+            "name": "Gastroenteritis",
+            "name_ja": "胃腸炎"
+          },
+          {
+            "id": "reptile_0260",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0261",
+            "name": "Gastrointestinal Viral Infection",
+            "name_ja": "消化管ウイルス感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0262",
+            "name": "Gastrointestinal Fungal Infection",
+            "name_ja": "消化管真菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0263",
+            "name": "Gastrointestinal Parasitic Disease",
+            "name_ja": "消化管寄生虫疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0264",
+            "name": "Gastrointestinal Neoplasia",
+            "name_ja": "消化管腫瘍（爬虫類）"
+          },
+          {
+            "id": "reptile_0265",
+            "name": "Gastrointestinal Inflammatory Disease",
+            "name_ja": "消化管炎症性疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0266",
+            "name": "Gastrointestinal Motility Disorder",
+            "name_ja": "消化管運動障害（爬虫類）"
+          },
+          {
+            "id": "reptile_0267",
+            "name": "Gastrointestinal Obstruction (Partial)",
+            "name_ja": "消化管部分閉塞（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 8,
+        "members": [
+          {
+            "id": "reptile_0060",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "reptile_0061",
+            "name": "Hemipenal Prolapse",
+            "name_ja": "半陰茎脱出"
+          },
+          {
+            "id": "reptile_0062",
+            "name": "Gastric/Intestinal Prolapse",
+            "name_ja": "胃・腸管脱出"
+          },
+          {
+            "id": "reptile_0129",
+            "name": "Phallus Prolapse (Paraphimosis)",
+            "name_ja": "陰茎脱出（嵌頓包茎）"
+          },
+          {
+            "id": "reptile_0147",
+            "name": "Organ Prolapse (Gastric/Intestinal/Oviductal)",
+            "name_ja": "臓器脱（胃・腸・卵管）"
+          },
+          {
+            "id": "reptile_0202",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（爬虫類）"
+          },
+          {
+            "id": "reptile_0209",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱（爬虫類）"
+          },
+          {
+            "id": "reptile_0213",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bacter",
+        "size": 7,
+        "members": [
+          {
+            "id": "reptile_0031",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "reptile_0137",
+            "name": "Bacterial Pneumonia (Chronic)",
+            "name_ja": "慢性細菌性肺炎"
+          },
+          {
+            "id": "reptile_0255",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（爬虫類）"
+          },
+          {
+            "id": "reptile_0260",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0268",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0276",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0284",
+            "name": "Urogenital Bacterial Infection",
+            "name_ja": "泌尿生殖器細菌感染（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 6,
+        "members": [
+          {
+            "id": "reptile_0023",
+            "name": "Tick Infestation",
+            "name_ja": "マダニ寄生"
+          },
+          {
+            "id": "reptile_0104",
+            "name": "Snake Mite Infestation (Ophionyssus natricis) - Severe",
+            "name_ja": "ヘビダニ重度寄生症"
+          },
+          {
+            "id": "reptile_0105",
+            "name": "Chigger Mite Infestation (Trombiculidae)",
+            "name_ja": "ツツガムシ寄生症"
+          },
+          {
+            "id": "reptile_0106",
+            "name": "Leech Infestation",
+            "name_ja": "ヒル寄生症"
+          },
+          {
+            "id": "reptile_0181",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（爬虫類）"
+          },
+          {
+            "id": "reptile_0279",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 6,
+        "members": [
+          {
+            "id": "reptile_0111",
+            "name": "Ovarian Neoplasia",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "reptile_0207",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（爬虫類）"
+          },
+          {
+            "id": "reptile_0264",
+            "name": "Gastrointestinal Neoplasia",
+            "name_ja": "消化管腫瘍（爬虫類）"
+          },
+          {
+            "id": "reptile_0272",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（爬虫類）"
+          },
+          {
+            "id": "reptile_0280",
+            "name": "Dermatological Neoplasia",
+            "name_ja": "皮膚腫瘍性疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0285",
+            "name": "Urogenital Neoplasia",
+            "name_ja": "泌尿生殖器腫瘍（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 5,
+        "members": [
+          {
+            "id": "reptile_0016",
+            "name": "Oral Abscess",
+            "name_ja": "口腔膿瘍"
+          },
+          {
+            "id": "reptile_0032",
+            "name": "Subcutaneous Abscess",
+            "name_ja": "皮下膿瘍"
+          },
+          {
+            "id": "reptile_0055",
+            "name": "Subspectacular Abscess",
+            "name_ja": "スペクタクル下膿瘍"
+          },
+          {
+            "id": "reptile_0113",
+            "name": "Aural Abscess (Ear Abscess)",
+            "name_ja": "耳膿瘍（中耳膿瘍）"
+          },
+          {
+            "id": "reptile_0191",
+            "name": "Abscess",
+            "name_ja": "膿瘍（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "parasi",
+        "size": 5,
+        "members": [
+          {
+            "id": "reptile_0017",
+            "name": "Internal Parasites (Nematodes)",
+            "name_ja": "内部寄生虫（線虫）"
+          },
+          {
+            "id": "reptile_0257",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0263",
+            "name": "Gastrointestinal Parasitic Disease",
+            "name_ja": "消化管寄生虫疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0271",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0279",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 5,
+        "members": [
+          {
+            "id": "reptile_0079",
+            "name": "Toxicosis (Poisoning)",
+            "name_ja": "中毒症"
+          },
+          {
+            "id": "reptile_0119",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "reptile_0120",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "reptile_0121",
+            "name": "Ivermectin Toxicosis",
+            "name_ja": "イベルメクチン中毒"
+          },
+          {
+            "id": "reptile_0122",
+            "name": "Metronidazole Toxicosis",
+            "name_ja": "メトロニダゾール中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coccid",
+        "size": 4,
+        "members": [
+          {
+            "id": "reptile_0019",
+            "name": "Coccidia Infection",
+            "name_ja": "コクシジウム症"
+          },
+          {
+            "id": "reptile_0089",
+            "name": "Tortoise Intranuclear Coccidia (TINC)",
+            "name_ja": "カメ核内コクシジウム症"
+          },
+          {
+            "id": "reptile_0155",
+            "name": "Hepatic Coccidiosis",
+            "name_ja": "肝コクシジウム症"
+          },
+          {
+            "id": "reptile_0185",
+            "name": "Coccidia",
+            "name_ja": "コクシジウム（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 4,
+        "members": [
+          {
+            "id": "reptile_0035",
+            "name": "Shell Fracture / Trauma",
+            "name_ja": "甲羅骨折・外傷"
+          },
+          {
+            "id": "reptile_0139",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "reptile_0223",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（爬虫類）"
+          },
+          {
+            "id": "reptile_0224",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gout",
+        "size": 4,
+        "members": [
+          {
+            "id": "reptile_0009",
+            "name": "Articular Gout",
+            "name_ja": "関節痛風"
+          },
+          {
+            "id": "reptile_0010",
+            "name": "Visceral Gout",
+            "name_ja": "内臓痛風"
+          },
+          {
+            "id": "reptile_0196",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（爬虫類）"
+          },
+          {
+            "id": "reptile_0197",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hyperp",
+        "size": 4,
+        "members": [
+          {
+            "id": "reptile_0001",
+            "name": "Nutritional Secondary Hyperparathyroidism",
+            "name_ja": "栄養性二次性副甲状腺機能亢進症"
+          },
+          {
+            "id": "reptile_0116",
+            "name": "Hyperparathyroidism (Primary)",
+            "name_ja": "原発性上皮小体機能亢進症"
+          },
+          {
+            "id": "reptile_0169",
+            "name": "Renal Secondary Hyperparathyroidism",
+            "name_ja": "腎性二次性副甲状腺機能亢進症（爬虫類）"
+          },
+          {
+            "id": "reptile_0243",
+            "name": "Hyperphosphatemia",
+            "name_ja": "高リン血症（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 4,
+        "members": [
+          {
+            "id": "reptile_0062",
+            "name": "Gastric/Intestinal Prolapse",
+            "name_ja": "胃・腸管脱出"
+          },
+          {
+            "id": "reptile_0154",
+            "name": "Intestinal Volvulus / Intussusception",
+            "name_ja": "腸捻転・腸重積"
+          },
+          {
+            "id": "reptile_0208",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（爬虫類）"
+          },
+          {
+            "id": "reptile_0209",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 4,
+        "members": [
+          {
+            "id": "reptile_0063",
+            "name": "Renal Failure (Chronic Kidney Disease)",
+            "name_ja": "腎不全（慢性腎疾患）"
+          },
+          {
+            "id": "reptile_0108",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          },
+          {
+            "id": "reptile_0169",
+            "name": "Renal Secondary Hyperparathyroidism",
+            "name_ja": "腎性二次性副甲状腺機能亢進症（爬虫類）"
+          },
+          {
+            "id": "reptile_0198",
+            "name": "Renal Failure",
+            "name_ja": "腎不全（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "septic",
+        "size": 4,
+        "members": [
+          {
+            "id": "reptile_0052",
+            "name": "Septicemia (Blood Poisoning)",
+            "name_ja": "敗血症"
+          },
+          {
+            "id": "reptile_0162",
+            "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
+            "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）"
+          },
+          {
+            "id": "reptile_0167",
+            "name": "Septicemic Cutaneous Ulcerative Disease",
+            "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0247",
+            "name": "Septicemia",
+            "name_ja": "敗血症（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stasi",
+        "size": 4,
+        "members": [
+          {
+            "id": "reptile_0058",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "reptile_0059",
+            "name": "Post-ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞"
+          },
+          {
+            "id": "reptile_0130",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          },
+          {
+            "id": "reptile_0161",
+            "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
+            "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "viral",
+        "size": 4,
+        "members": [
+          {
+            "id": "reptile_0256",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（爬虫類）"
+          },
+          {
+            "id": "reptile_0261",
+            "name": "Gastrointestinal Viral Infection",
+            "name_ja": "消化管ウイルス感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0269",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0277",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 4,
+        "members": [
+          {
+            "id": "reptile_0002",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "reptile_0003",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "reptile_0126",
+            "name": "Vitamin C Deficiency (Scurvy)",
+            "name_ja": "ビタミンC欠乏症（壊血病）"
+          },
+          {
+            "id": "reptile_0241",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adenov",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0046",
+            "name": "Adenovirus Infection",
+            "name_ja": "アデノウイルス感染症"
+          },
+          {
+            "id": "reptile_0090",
+            "name": "Agamid Adenovirus Infection",
+            "name_ja": "アガマ科アデノウイルス感染症"
+          },
+          {
+            "id": "reptile_0158",
+            "name": "Adenoviral Hepatitis",
+            "name_ja": "アデノウイルス性肝炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anorex",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0043",
+            "name": "Anorexia (Non-specific)",
+            "name_ja": "食欲不振（非特異的）"
+          },
+          {
+            "id": "reptile_0212",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（爬虫類）"
+          },
+          {
+            "id": "reptile_0254",
+            "name": "Anorexia (Stress-Related)",
+            "name_ja": "ストレス性拒食（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0067",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "reptile_0107",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "reptile_0108",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cloaca",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0060",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "reptile_0128",
+            "name": "Cloacal Calculi (Cloacoliths)",
+            "name_ja": "総排泄腔結石"
+          },
+          {
+            "id": "reptile_0213",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coelom",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0083",
+            "name": "Peritonitis / Coelomitis",
+            "name_ja": "腹膜炎・体腔炎"
+          },
+          {
+            "id": "reptile_0131",
+            "name": "Egg-related Coelomitis (Egg Peritonitis)",
+            "name_ja": "卵関連体腔炎（卵性腹膜炎）"
+          },
+          {
+            "id": "reptile_0201",
+            "name": "Egg Yolk Coelomitis",
+            "name_ja": "卵黄体腔炎（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cutane",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0159",
+            "name": "Cutaneous Papilloma",
+            "name_ja": "皮膚乳頭腫"
+          },
+          {
+            "id": "reptile_0162",
+            "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
+            "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）"
+          },
+          {
+            "id": "reptile_0167",
+            "name": "Septicemic Cutaneous Ulcerative Disease",
+            "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "failur",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0063",
+            "name": "Renal Failure (Chronic Kidney Disease)",
+            "name_ja": "腎不全（慢性腎疾患）"
+          },
+          {
+            "id": "reptile_0071",
+            "name": "Liver Failure (Hepatopathy)",
+            "name_ja": "肝不全（肝疾患）"
+          },
+          {
+            "id": "reptile_0198",
+            "name": "Renal Failure",
+            "name_ja": "腎不全（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "follic",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0058",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "reptile_0130",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          },
+          {
+            "id": "reptile_0161",
+            "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
+            "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fungal",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0262",
+            "name": "Gastrointestinal Fungal Infection",
+            "name_ja": "消化管真菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0270",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（爬虫類）"
+          },
+          {
+            "id": "reptile_0278",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemipe",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0061",
+            "name": "Hemipenal Prolapse",
+            "name_ja": "半陰茎脱出"
+          },
+          {
+            "id": "reptile_0132",
+            "name": "Retained Hemipenes",
+            "name_ja": "半陰茎残留"
+          },
+          {
+            "id": "reptile_0202",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypert",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0074",
+            "name": "Hyperthermia (Heat Stroke)",
+            "name_ja": "高体温症（熱中症）"
+          },
+          {
+            "id": "reptile_0114",
+            "name": "Hyperthyroidism",
+            "name_ja": "甲状腺機能亢進症"
+          },
+          {
+            "id": "reptile_0244",
+            "name": "Hyperthermia",
+            "name_ja": "高体温症（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "impact",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0037",
+            "name": "Gastrointestinal Impaction",
+            "name_ja": "消化管閉塞（インパクション）"
+          },
+          {
+            "id": "reptile_0123",
+            "name": "Substrate Impaction",
+            "name_ja": "床材インパクション"
+          },
+          {
+            "id": "reptile_0145",
+            "name": "Cecal Impaction / Colonic Impaction",
+            "name_ja": "盲腸・結腸インパクション"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mite",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0104",
+            "name": "Snake Mite Infestation (Ophionyssus natricis) - Severe",
+            "name_ja": "ヘビダニ重度寄生症"
+          },
+          {
+            "id": "reptile_0105",
+            "name": "Chigger Mite Infestation (Trombiculidae)",
+            "name_ja": "ツツガムシ寄生症"
+          },
+          {
+            "id": "reptile_0181",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "protoz",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0097",
+            "name": "Flagellate Protozoal Infection",
+            "name_ja": "鞭毛虫原虫感染症"
+          },
+          {
+            "id": "reptile_0098",
+            "name": "Ciliate Protozoal Infection (Balantidium / Nyctotherus)",
+            "name_ja": "繊毛虫原虫感染症"
+          },
+          {
+            "id": "reptile_0186",
+            "name": "Flagellate Protozoan Infection",
+            "name_ja": "鞭毛虫感染（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "shell",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0034",
+            "name": "Shell Rot (Ulcerative Shell Disease)",
+            "name_ja": "甲羅腐敗症"
+          },
+          {
+            "id": "reptile_0035",
+            "name": "Shell Fracture / Trauma",
+            "name_ja": "甲羅骨折・外傷"
+          },
+          {
+            "id": "reptile_0189",
+            "name": "Shell Rot",
+            "name_ja": "甲羅腐敗（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spinal",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0066",
+            "name": "Spinal Osteopathy / Spondylosis",
+            "name_ja": "脊椎骨症/脊椎症"
+          },
+          {
+            "id": "reptile_0139",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "reptile_0227",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tail",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0140",
+            "name": "Tail Necrosis / Autotomy Complications",
+            "name_ja": "尾壊死・自切合併症"
+          },
+          {
+            "id": "reptile_0192",
+            "name": "Tail Necrosis",
+            "name_ja": "尾壊死（爬虫類）"
+          },
+          {
+            "id": "reptile_0229",
+            "name": "Tail Amputation",
+            "name_ja": "尾切断（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ulcera",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0162",
+            "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
+            "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）"
+          },
+          {
+            "id": "reptile_0167",
+            "name": "Septicemic Cutaneous Ulcerative Disease",
+            "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0194",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（爬虫類）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wound",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0076",
+            "name": "Trauma / Bite Wounds",
+            "name_ja": "外傷・咬傷"
+          },
+          {
+            "id": "reptile_0193",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（爬虫類）"
+          },
+          {
+            "id": "reptile_0248",
+            "name": "Wound Infection",
+            "name_ja": "創傷感染（爬虫類）"
+          }
+        ]
+      }
+    ]
+  }
+}

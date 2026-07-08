@@ -1,0 +1,1302 @@
+{
+  "species": "snake",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 248,
+    "merge_clusters": 5,
+    "records_merged_away": 5,
+    "archived": 0,
+    "served_after": 243
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "snake_0023",
+        "slug": "thermal-burns",
+        "name": "Thermal Burns",
+        "name_ja": "熱傷"
+      },
+      "merged": [
+        {
+          "id": "snake_0236",
+          "slug": "burns",
+          "name": "Burns",
+          "name_ja": "熱傷（ヘビ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0024",
+        "slug": "dermatophytosis-fungal-skin-infection",
+        "name": "Dermatophytosis (Fungal Skin Infection)",
+        "name_ja": "皮膚糸状菌症"
+      },
+      "merged": [
+        {
+          "id": "snake_0160",
+          "slug": "dermatophytosis",
+          "name": "Dermatophytosis",
+          "name_ja": "皮膚糸状菌症（ヘビ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0037",
+        "slug": "septicemia-blood-poisoning",
+        "name": "Septicemia (Blood Poisoning)",
+        "name_ja": "敗血症"
+      },
+      "merged": [
+        {
+          "id": "snake_0234",
+          "slug": "septicemia",
+          "name": "Septicemia",
+          "name_ja": "敗血症（ヘビ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0062",
+        "slug": "hyperthermia-heat-stroke",
+        "name": "Hyperthermia (Heat Stroke)",
+        "name_ja": "高体温症"
+      },
+      "merged": [
+        {
+          "id": "snake_0231",
+          "slug": "hyperthermia",
+          "name": "Hyperthermia",
+          "name_ja": "高体温症（ヘビ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0108",
+        "slug": "lead-toxicosis",
+        "name": "Lead Toxicosis",
+        "name_ja": "鉛中毒"
+      },
+      "merged": [
+        {
+          "id": "snake_0232",
+          "slug": "lead-poisoning",
+          "name": "Lead Poisoning",
+          "name_ja": "鉛中毒（ヘビ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Sunshine Virus (Reptile Sunshinevirus)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0005",
+            "slug": "sunshine-virus-reptile-sunshinevirus",
+            "name": "Sunshine Virus (Reptile Sunshinevirus)",
+            "name_ja": "サンシャインウイルス感染症"
+          },
+          {
+            "id": "snake_0147",
+            "slug": "sunshine-virus-reptarenavirus",
+            "name": "Sunshine Virus (Reptarenavirus)",
+            "name_ja": "サンシャインウイルス（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Pneumonia (Lower Respiratory Infection)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0008",
+            "slug": "pneumonia-lower-respiratory-infection",
+            "name": "Pneumonia (Lower Respiratory Infection)",
+            "name_ja": "肺炎（下部呼吸器感染症）"
+          },
+          {
+            "id": "snake_0201",
+            "slug": "pneumonia",
+            "name": "Pneumonia",
+            "name_ja": "肺炎（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Snake Mites (Ophionyssus natricis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0012",
+            "slug": "snake-mites-ophionyssus-natricis",
+            "name": "Snake Mites (Ophionyssus natricis)",
+            "name_ja": "ヘビダニ（オフィオニッスス）"
+          },
+          {
+            "id": "snake_0148",
+            "slug": "snake-mite-ophionyssus-natricis",
+            "name": "Snake Mite (Ophionyssus natricis)",
+            "name_ja": "ヘビダニ（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Amoebic Infection (Entamoeba invadens)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0014",
+            "slug": "amoebic-infection-entamoeba-invadens",
+            "name": "Amoebic Infection (Entamoeba invadens)",
+            "name_ja": "アメーバ感染症"
+          },
+          {
+            "id": "snake_0170",
+            "slug": "amoebic-infection",
+            "name": "Amoebic Infection",
+            "name_ja": "アメーバ感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Pentastomid Infection (Tongue Worms)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0016",
+            "slug": "pentastomid-infection-tongue-worms",
+            "name": "Pentastomid Infection (Tongue Worms)",
+            "name_ja": "舌虫症"
+          },
+          {
+            "id": "snake_0167",
+            "slug": "pentastomid-infection",
+            "name": "Pentastomid Infection",
+            "name_ja": "舌虫感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Blister Disease (Vesicular Dermatitis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0019",
+            "slug": "blister-disease-vesicular-dermatitis",
+            "name": "Blister Disease (Vesicular Dermatitis)",
+            "name_ja": "水疱症（水疱性皮膚炎）"
+          },
+          {
+            "id": "snake_0172",
+            "slug": "blister-disease",
+            "name": "Blister Disease",
+            "name_ja": "水疱病（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Scale Rot (Ulcerative Dermatitis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0020",
+            "slug": "scale-rot-ulcerative-dermatitis",
+            "name": "Scale Rot (Ulcerative Dermatitis)",
+            "name_ja": "スケイルロット（潰瘍性皮膚炎）"
+          },
+          {
+            "id": "snake_0174",
+            "slug": "scale-rot",
+            "name": "Scale Rot",
+            "name_ja": "鱗腐敗（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Thermal Burns",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0023",
+            "slug": "thermal-burns",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷"
+          },
+          {
+            "id": "snake_0131",
+            "slug": "burns-chemical",
+            "name": "Burns (Chemical)",
+            "name_ja": "化学熱傷"
+          },
+          {
+            "id": "snake_0236",
+            "slug": "burns",
+            "name": "Burns",
+            "name_ja": "熱傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Rostral Abrasion (Nose Rub)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0026",
+            "slug": "rostral-abrasion-nose-rub",
+            "name": "Rostral Abrasion (Nose Rub)",
+            "name_ja": "吻部擦過傷（ノーズラブ）"
+          },
+          {
+            "id": "snake_0171",
+            "slug": "rostral-abrasion",
+            "name": "Rostral Abrasion",
+            "name_ja": "吻端擦過傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0030",
+            "slug": "hepatic-lipidosis-fatty-liver-disease",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "snake_0190",
+            "slug": "hepatic-lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Anorexia (Non-specific)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0033",
+            "slug": "anorexia-non-specific",
+            "name": "Anorexia (Non-specific)",
+            "name_ja": "食欲不振（非特異的）"
+          },
+          {
+            "id": "snake_0197",
+            "slug": "anorexia-behavioral",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（ヘビ）"
+          },
+          {
+            "id": "snake_0241",
+            "slug": "anorexia-stress-related",
+            "name": "Anorexia (Stress-Related)",
+            "name_ja": "ストレス性拒食（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Post-ovulatory Egg Stasis (Slug Retention)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0044",
+            "slug": "post-ovulatory-egg-stasis-slug-retention",
+            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
+            "name_ja": "排卵後卵停滞（スラグ残留）"
+          },
+          {
+            "id": "snake_0185",
+            "slug": "post-ovulatory-egg-stasis",
+            "name": "Post-Ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Ophidiomyces ophiodiicola (Snake Fungal Disease - SFD)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0082",
+            "slug": "ophidiomyces-ophiodiicola-snake-fungal-disease-sfd",
+            "name": "Ophidiomyces ophiodiicola (Snake Fungal Disease - SFD)",
+            "name_ja": "ヘビ真菌症（SFD）"
+          },
+          {
+            "id": "snake_0142",
+            "slug": "snake-fungal-disease-ophidiomycosis-sfd",
+            "name": "Snake Fungal Disease (Ophidiomycosis / SFD)",
+            "name_ja": "ヘビ真菌症（オフィディオミセス症・SFD）"
+          },
+          {
+            "id": "snake_0143",
+            "slug": "snake-fungal-disease-ophidiomyces",
+            "name": "Snake Fungal Disease (Ophidiomyces)",
+            "name_ja": "蛇真菌病（オフィディオミセス）（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Cestode (Tapeworm) Infection",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0088",
+            "slug": "cestode-tapeworm-infection",
+            "name": "Cestode (Tapeworm) Infection",
+            "name_ja": "条虫感染症"
+          },
+          {
+            "id": "snake_0165",
+            "slug": "cestode-infection",
+            "name": "Cestode Infection",
+            "name_ja": "条虫感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Gout (Visceral)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0180",
+            "slug": "gout-visceral",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（ヘビ）"
+          },
+          {
+            "id": "snake_0181",
+            "slug": "gout-articular",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（ヘビ）"
+          }
+        ]
+      },
+      {
+        "base": "Fracture (Limb)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "snake_0211",
+            "slug": "fracture-limb",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（ヘビ）"
+          },
+          {
+            "id": "snake_0212",
+            "slug": "fracture-shell-carapace",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（ヘビ）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "defici",
+        "size": 9,
+        "members": [
+          {
+            "id": "snake_0035",
+            "name": "Vitamin Deficiency (General)",
+            "name_ja": "ビタミン欠乏症（一般）"
+          },
+          {
+            "id": "snake_0114",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "snake_0115",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "snake_0116",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン欠乏症"
+          },
+          {
+            "id": "snake_0117",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "snake_0120",
+            "name": "Protein Deficiency / Malnutrition",
+            "name_ja": "タンパク質欠乏・栄養不良"
+          },
+          {
+            "id": "snake_0122",
+            "name": "UV Light Deficiency",
+            "name_ja": "紫外線不足症"
+          },
+          {
+            "id": "snake_0150",
+            "name": "Thermal Gradient Deficiency Disease",
+            "name_ja": "温度勾配欠乏症（ヘビ）"
+          },
+          {
+            "id": "snake_0229",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 9,
+        "members": [
+          {
+            "id": "snake_0030",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "snake_0190",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（ヘビ）"
+          },
+          {
+            "id": "snake_0191",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（ヘビ）"
+          },
+          {
+            "id": "snake_0192",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（ヘビ）"
+          },
+          {
+            "id": "snake_0242",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（ヘビ）"
+          },
+          {
+            "id": "snake_0243",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（ヘビ）"
+          },
+          {
+            "id": "snake_0244",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（ヘビ）"
+          },
+          {
+            "id": "snake_0245",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（ヘビ）"
+          },
+          {
+            "id": "snake_0246",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 6,
+        "members": [
+          {
+            "id": "snake_0011",
+            "name": "Oral Abscess",
+            "name_ja": "口腔膿瘍"
+          },
+          {
+            "id": "snake_0038",
+            "name": "Subcutaneous Abscess",
+            "name_ja": "皮下膿瘍"
+          },
+          {
+            "id": "snake_0039",
+            "name": "Subspectacular Abscess",
+            "name_ja": "スペクタクル下膿瘍"
+          },
+          {
+            "id": "snake_0057",
+            "name": "Venom Gland Infection / Abscess",
+            "name_ja": "毒腺感染・膿瘍"
+          },
+          {
+            "id": "snake_0133",
+            "name": "Aural Abscess (Ear Infection)",
+            "name_ja": "耳膿瘍"
+          },
+          {
+            "id": "snake_0175",
+            "name": "Abscess",
+            "name_ja": "膿瘍（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 6,
+        "members": [
+          {
+            "id": "snake_0045",
+            "name": "Hemipenal Prolapse",
+            "name_ja": "半陰茎脱出"
+          },
+          {
+            "id": "snake_0046",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "snake_0130",
+            "name": "Organ Prolapse (Gastric/Intestinal)",
+            "name_ja": "臓器脱（胃・腸）"
+          },
+          {
+            "id": "snake_0187",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（ヘビ）"
+          },
+          {
+            "id": "snake_0194",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱（ヘビ）"
+          },
+          {
+            "id": "snake_0199",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 5,
+        "members": [
+          {
+            "id": "snake_0024",
+            "name": "Dermatophytosis (Fungal Skin Infection)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "snake_0025",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "snake_0136",
+            "name": "Photosensitization Dermatitis",
+            "name_ja": "光線過敏性皮膚炎"
+          },
+          {
+            "id": "snake_0160",
+            "name": "Dermatophytosis",
+            "name_ja": "皮膚糸状菌症（ヘビ）"
+          },
+          {
+            "id": "snake_0178",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gout",
+        "size": 5,
+        "members": [
+          {
+            "id": "snake_0048",
+            "name": "Articular Gout",
+            "name_ja": "関節痛風"
+          },
+          {
+            "id": "snake_0049",
+            "name": "Visceral Gout",
+            "name_ja": "内臓痛風"
+          },
+          {
+            "id": "snake_0111",
+            "name": "Hyperuricemia / Pre-gout",
+            "name_ja": "高尿酸血症・痛風前状態"
+          },
+          {
+            "id": "snake_0180",
+            "name": "Gout (Visceral)",
+            "name_ja": "痛風（内臓型）（ヘビ）"
+          },
+          {
+            "id": "snake_0181",
+            "name": "Gout (Articular)",
+            "name_ja": "痛風（関節型）（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "respir",
+        "size": 5,
+        "members": [
+          {
+            "id": "snake_0007",
+            "name": "Upper Respiratory Infection (URI)",
+            "name_ja": "上部呼吸器感染症"
+          },
+          {
+            "id": "snake_0124",
+            "name": "Chronic Respiratory Disease Complex",
+            "name_ja": "慢性呼吸器疾患複合"
+          },
+          {
+            "id": "snake_0144",
+            "name": "Nidovirus Respiratory Disease",
+            "name_ja": "ニドウイルス呼吸器疾患（ヘビ）"
+          },
+          {
+            "id": "snake_0154",
+            "name": "Respiratory Infection",
+            "name_ja": "呼吸器感染症（ヘビ）"
+          },
+          {
+            "id": "snake_0202",
+            "name": "Upper Respiratory Tract Disease",
+            "name_ja": "上部気道疾患（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 5,
+        "members": [
+          {
+            "id": "snake_0061",
+            "name": "Toxicosis (Poisoning)",
+            "name_ja": "中毒症"
+          },
+          {
+            "id": "snake_0107",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "snake_0108",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "snake_0109",
+            "name": "Ivermectin Toxicosis",
+            "name_ja": "イベルメクチン中毒"
+          },
+          {
+            "id": "snake_0110",
+            "name": "Metronidazole Toxicosis",
+            "name_ja": "メトロニダゾール中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bacter",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0025",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "snake_0139",
+            "name": "Bacterial Pneumonia (Chronic)",
+            "name_ja": "慢性細菌性肺炎"
+          },
+          {
+            "id": "snake_0242",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（ヘビ）"
+          },
+          {
+            "id": "snake_0247",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0100",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "snake_0101",
+            "name": "Rib Fractures",
+            "name_ja": "肋骨骨折"
+          },
+          {
+            "id": "snake_0211",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（ヘビ）"
+          },
+          {
+            "id": "snake_0212",
+            "name": "Fracture (Shell/Carapace)",
+            "name_ja": "甲羅骨折（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0017",
+            "name": "Tick Infestation",
+            "name_ja": "マダニ寄生"
+          },
+          {
+            "id": "snake_0092",
+            "name": "Chigger Mite Infestation (Trombiculidae)",
+            "name_ja": "ツツガムシ寄生症"
+          },
+          {
+            "id": "snake_0093",
+            "name": "Leech Infestation",
+            "name_ja": "ヒル寄生症"
+          },
+          {
+            "id": "snake_0163",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "injury",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0040",
+            "name": "Corneal Opacity / Injury",
+            "name_ja": "角膜混濁・損傷"
+          },
+          {
+            "id": "snake_0059",
+            "name": "Prey Bite Injury",
+            "name_ja": "餌動物による咬傷"
+          },
+          {
+            "id": "snake_0149",
+            "name": "Prey-Related Injury",
+            "name_ja": "餌関連損傷（ヘビ）"
+          },
+          {
+            "id": "snake_0215",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0008",
+            "name": "Pneumonia (Lower Respiratory Infection)",
+            "name_ja": "肺炎（下部呼吸器感染症）"
+          },
+          {
+            "id": "snake_0139",
+            "name": "Bacterial Pneumonia (Chronic)",
+            "name_ja": "慢性細菌性肺炎"
+          },
+          {
+            "id": "snake_0145",
+            "name": "Paramyxovirus Pneumonia",
+            "name_ja": "パラミクソウイルス肺炎（ヘビ）"
+          },
+          {
+            "id": "snake_0201",
+            "name": "Pneumonia",
+            "name_ja": "肺炎（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "snake",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0012",
+            "name": "Snake Mites (Ophionyssus natricis)",
+            "name_ja": "ヘビダニ（オフィオニッスス）"
+          },
+          {
+            "id": "snake_0142",
+            "name": "Snake Fungal Disease (Ophidiomycosis / SFD)",
+            "name_ja": "ヘビ真菌症（オフィディオミセス症・SFD）"
+          },
+          {
+            "id": "snake_0143",
+            "name": "Snake Fungal Disease (Ophidiomyces)",
+            "name_ja": "蛇真菌病（オフィディオミセス）（ヘビ）"
+          },
+          {
+            "id": "snake_0148",
+            "name": "Snake Mite (Ophionyssus natricis)",
+            "name_ja": "ヘビダニ（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spinal",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0051",
+            "name": "Spinal Osteopathy / Spondylosis",
+            "name_ja": "脊椎骨症/脊椎症"
+          },
+          {
+            "id": "snake_0100",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "snake_0151",
+            "name": "Spinal Osteopathy",
+            "name_ja": "脊椎骨症（ヘビ）"
+          },
+          {
+            "id": "snake_0215",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stasi",
+        "size": 4,
+        "members": [
+          {
+            "id": "snake_0043",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "snake_0044",
+            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
+            "name_ja": "排卵後卵停滞（スラグ残留）"
+          },
+          {
+            "id": "snake_0105",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          },
+          {
+            "id": "snake_0185",
+            "name": "Post-Ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anorex",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0033",
+            "name": "Anorexia (Non-specific)",
+            "name_ja": "食欲不振（非特異的）"
+          },
+          {
+            "id": "snake_0197",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（ヘビ）"
+          },
+          {
+            "id": "snake_0241",
+            "name": "Anorexia (Stress-Related)",
+            "name_ja": "ストレス性拒食（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bite",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0058",
+            "name": "Trauma / Bite Wounds",
+            "name_ja": "外傷・咬傷"
+          },
+          {
+            "id": "snake_0059",
+            "name": "Prey Bite Injury",
+            "name_ja": "餌動物による咬傷"
+          },
+          {
+            "id": "snake_0177",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "burn",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0023",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷"
+          },
+          {
+            "id": "snake_0131",
+            "name": "Burns (Chemical)",
+            "name_ja": "化学熱傷"
+          },
+          {
+            "id": "snake_0236",
+            "name": "Burns",
+            "name_ja": "熱傷（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0052",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "snake_0094",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "snake_0095",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cloaca",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0046",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "snake_0106",
+            "name": "Cloacal Calculi",
+            "name_ja": "総排泄腔結石"
+          },
+          {
+            "id": "snake_0199",
+            "name": "Rectal/Cloacal Prolapse",
+            "name_ja": "直腸/総排泄腔脱（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coelom",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0064",
+            "name": "Peritonitis / Coelomitis",
+            "name_ja": "腹膜炎・体腔炎"
+          },
+          {
+            "id": "snake_0104",
+            "name": "Egg-related Coelomitis",
+            "name_ja": "卵関連体腔炎"
+          },
+          {
+            "id": "snake_0186",
+            "name": "Egg Yolk Coelomitis",
+            "name_ja": "卵黄体腔炎（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cornea",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0040",
+            "name": "Corneal Opacity / Injury",
+            "name_ja": "角膜混濁・損傷"
+          },
+          {
+            "id": "snake_0134",
+            "name": "Corneal Disease",
+            "name_ja": "角膜疾患"
+          },
+          {
+            "id": "snake_0206",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastro",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0028",
+            "name": "Gastrointestinal Impaction",
+            "name_ja": "消化管閉塞"
+          },
+          {
+            "id": "snake_0029",
+            "name": "Gastroenteritis",
+            "name_ja": "胃腸炎"
+          },
+          {
+            "id": "snake_0247",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemipe",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0045",
+            "name": "Hemipenal Prolapse",
+            "name_ja": "半陰茎脱出"
+          },
+          {
+            "id": "snake_0153",
+            "name": "Retained Hemipenes",
+            "name_ja": "半陰茎停滞（ヘビ）"
+          },
+          {
+            "id": "snake_0187",
+            "name": "Penile/Hemipenal Prolapse",
+            "name_ja": "陰茎/半陰茎脱（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0103",
+            "name": "Intestinal Volvulus / Intussusception",
+            "name_ja": "腸捻転・腸重積"
+          },
+          {
+            "id": "snake_0193",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（ヘビ）"
+          },
+          {
+            "id": "snake_0194",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mite",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0092",
+            "name": "Chigger Mite Infestation (Trombiculidae)",
+            "name_ja": "ツツガムシ寄生症"
+          },
+          {
+            "id": "snake_0148",
+            "name": "Snake Mite (Ophionyssus natricis)",
+            "name_ja": "ヘビダニ（ヘビ）"
+          },
+          {
+            "id": "snake_0163",
+            "name": "Mite Infestation (Ophionyssus)",
+            "name_ja": "ダニ症（Ophionyssus）（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nidovi",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0002",
+            "name": "Nidovirus Infection",
+            "name_ja": "ニドウイルス感染症"
+          },
+          {
+            "id": "snake_0070",
+            "name": "Boid Nidovirus (Ball Python Nidovirus)",
+            "name_ja": "ボア科ニドウイルス（ボールパイソンニドウイルス）"
+          },
+          {
+            "id": "snake_0144",
+            "name": "Nidovirus Respiratory Disease",
+            "name_ja": "ニドウイルス呼吸器疾患（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ovulat",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0043",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "snake_0044",
+            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
+            "name_ja": "排卵後卵停滞（スラグ残留）"
+          },
+          {
+            "id": "snake_0185",
+            "name": "Post-Ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "paramy",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0001",
+            "name": "Paramyxovirus Infection",
+            "name_ja": "パラミクソウイルス感染症"
+          },
+          {
+            "id": "snake_0145",
+            "name": "Paramyxovirus Pneumonia",
+            "name_ja": "パラミクソウイルス肺炎（ヘビ）"
+          },
+          {
+            "id": "snake_0156",
+            "name": "Paramyxovirus",
+            "name_ja": "パラミクソウイルス（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "protoz",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0089",
+            "name": "Flagellate Protozoal Infection",
+            "name_ja": "鞭毛虫感染症"
+          },
+          {
+            "id": "snake_0090",
+            "name": "Ciliate Protozoal Overgrowth",
+            "name_ja": "繊毛虫過増殖症"
+          },
+          {
+            "id": "snake_0169",
+            "name": "Flagellate Protozoan Infection",
+            "name_ja": "鞭毛虫感染（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "relate",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0104",
+            "name": "Egg-related Coelomitis",
+            "name_ja": "卵関連体腔炎"
+          },
+          {
+            "id": "snake_0149",
+            "name": "Prey-Related Injury",
+            "name_ja": "餌関連損傷（ヘビ）"
+          },
+          {
+            "id": "snake_0239",
+            "name": "Stress-Related Illness",
+            "name_ja": "ストレス関連疾患（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0035",
+            "name": "Vitamin Deficiency (General)",
+            "name_ja": "ビタミン欠乏症（一般）"
+          },
+          {
+            "id": "snake_0114",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "snake_0115",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wound",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0058",
+            "name": "Trauma / Bite Wounds",
+            "name_ja": "外傷・咬傷"
+          },
+          {
+            "id": "snake_0177",
+            "name": "Bite Wounds",
+            "name_ja": "咬傷（ヘビ）"
+          },
+          {
+            "id": "snake_0235",
+            "name": "Wound Infection",
+            "name_ja": "創傷感染（ヘビ）"
+          }
+        ]
+      }
+    ]
+  }
+}
