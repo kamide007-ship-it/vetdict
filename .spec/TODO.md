@@ -24,14 +24,27 @@
 
 ## フェーズ1.6：カテゴリ分類改善（🟡 表示ロジック・データ非改変）— 完了
 - [x] `_DISEASE_CAT_PATTERNS` にスコープ付きキーワード追加（感染/循環/消化/腎/皮膚/神経/運動器/歯科/生殖/行動）。
-      全21種で「その他」**1925→1573（352再分類）**、有害な回帰0（カンジダ症→感染症の2件のみ＝妥当）。
-      衝突を実測監査で発見・修正（嵌頓→盲腸嵌頓、新生児→新生児死亡、脳卒中は熱中症衝突回避）。degu その他 39→11。
-- [ ] 栄養欠乏・環境（熱中症/脱水）用カテゴリの新設は将来課題（現状は正直に「その他」）
+      衝突を実測監査で発見・修正（嵌頓→盲腸嵌頓、新生児→新生児死亡、脳卒中は熱中症衝突回避）。
+- [x] **栄養・環境カテゴリ新設**（末尾フォールバック位置）＋落ちた正当エントリ回収（大網孔嵌頓→消化器等）。
+      全21種で「その他」**1925→1255（670件・約35%再分類）**、有害な回帰0。**degu その他 39→3**、
+      栄養5・環境3。実機描画で確認（栄養/環境チップ表示・その他3）。ruff clean・test_vetdict_api 145 pass。
 
-## フェーズ2：スキーマ/不変ID（🟡 前提整備）
-- [ ] `schema_migrations` テーブル + 冪等 ADD COLUMN（canonical_id, status, …）
-- [ ] 全疾患エントリへ **不変 `id`（スラッグ）を付与**するマイグレーション（位置依存ID脱却）
-      ※ 旧位置ID → 新IDの `aliases` を記録し、既存URLを保全
+## フェーズ2：スキーマ/不変ID（🟡 前提整備）— **完了（main, PR #711）**
+- [x] `schema_migrations` テーブル + 冪等 ADD COLUMN（canonical_id, status, merged_into,
+      merged_reason, aliases, evidence_grade, review_status）→ `api/database.py`
+      （stdlib sqlite3 で冪等・列存在・ledger 記録を検証済み。データ非改変）
+- [x] 全疾患エントリへ **不変 `id` を凍結**（位置依存ID脱却）
+      - `api/data/id_locks/<species>.json`（20種・6,434件）= `name→現行id` の凍結マップ（append-only）
+      - `api/species/id_locks.py::stable_id_for()`（純関数・read-only・キャッシュ）
+      - `scripts/quality/build_id_locks.py`（生成器・冪等・バックアップ不要=新規サイドカーのみ）
+      - `scripts/migrate_to_sqlite.py` の id 採番2箇所（generic+dog）を `stable_id_for` 経由に
+      - **馬は既に明示 `id` 保持のため対象外**
+      - 検証: ①今日のidは**バイト同一**（URL不変） ②リスト逆順でも **198/199 が pin**（本来なら全変動）
+        ③再生成で0件new（冪等） ④全種で凍結id重複0
+      - `tests/test_id_locks.py`（純Python・flask不要の回帰テスト5件）
+      - **可逆**: `api/data/id_locks/` を削除すれば位置依存idにフォールバック
+      ※ `aliases` 列は用意済み（統合時の旧名/旧id記録用）。今回のid凍結は**現行idの保存**なので
+        リダイレクト不要（idが変わらない）。
 
 ## フェーズ3：論理統合（承認済み・degu 適用）
 - [x] degu 統合レビューワークシート → `.spec/DEGU_CONSOLIDATION_REVIEW.md`
