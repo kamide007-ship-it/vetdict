@@ -64,9 +64,9 @@
       "citation_mismatch": 19,
       "drug_mismatch_residual": 0,
       "citation_mismatch_residual": 0,
-      "mt_hits": 1,
+      "mt_hits": 0,
       "mt_safe": 0,
-      "mt_review": 1
+      "mt_review": 0
     },
     {
       "species": "hamster",
@@ -98,9 +98,9 @@
       "citation_mismatch": 15,
       "drug_mismatch_residual": 0,
       "citation_mismatch_residual": 0,
-      "mt_hits": 3,
+      "mt_hits": 2,
       "mt_safe": 0,
-      "mt_review": 3
+      "mt_review": 2
     },
     {
       "species": "chinchilla",
@@ -166,9 +166,9 @@
       "citation_mismatch": 16,
       "drug_mismatch_residual": 0,
       "citation_mismatch_residual": 0,
-      "mt_hits": 1,
+      "mt_hits": 0,
       "mt_safe": 0,
-      "mt_review": 1
+      "mt_review": 0
     },
     {
       "species": "degu",
@@ -183,9 +183,9 @@
       "citation_mismatch": 14,
       "drug_mismatch_residual": 0,
       "citation_mismatch_residual": 0,
-      "mt_hits": 13,
+      "mt_hits": 8,
       "mt_safe": 0,
-      "mt_review": 16
+      "mt_review": 8
     },
     {
       "species": "bird",
@@ -370,9 +370,9 @@
     "citation_mismatch": 270,
     "drug_mismatch_residual": 0,
     "citation_mismatch_residual": 0,
-    "mt_hits": 31,
+    "mt_hits": 23,
     "mt_safe": 0,
-    "mt_review": 34
+    "mt_review": 23
   },
   "guard_warnings": [
     "amphibian: drug_mismatch=220 exceeds guard ceiling 200",

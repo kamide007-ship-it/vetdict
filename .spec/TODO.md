@@ -22,7 +22,14 @@
 - 備考: **出典（citation）の種ガードは main の T110 v2 に統合**（`get_references_for_disease_v2`）。
   当初の v1 パッチは撤回し、検出器はガード判定に T110 の `REFERENCE_SPECIES` を参照。
 
-## フェーズ2：スキーマ/不変ID（🟡 前提整備）— **完了（このブランチ）**
+## フェーズ1.6：カテゴリ分類改善（🟡 表示ロジック・データ非改変）— 完了
+- [x] `_DISEASE_CAT_PATTERNS` にスコープ付きキーワード追加（感染/循環/消化/腎/皮膚/神経/運動器/歯科/生殖/行動）。
+      衝突を実測監査で発見・修正（嵌頓→盲腸嵌頓、新生児→新生児死亡、脳卒中は熱中症衝突回避）。
+- [x] **栄養・環境カテゴリ新設**（末尾フォールバック位置）＋落ちた正当エントリ回収（大網孔嵌頓→消化器等）。
+      全21種で「その他」**1925→1255（670件・約35%再分類）**、有害な回帰0。**degu その他 39→3**、
+      栄養5・環境3。実機描画で確認（栄養/環境チップ表示・その他3）。ruff clean・test_vetdict_api 145 pass。
+
+## フェーズ2：スキーマ/不変ID（🟡 前提整備）— **完了（main, PR #711）**
 - [x] `schema_migrations` テーブル + 冪等 ADD COLUMN（canonical_id, status, merged_into,
       merged_reason, aliases, evidence_grade, review_status）→ `api/database.py`
       （stdlib sqlite3 で冪等・列存在・ledger 記録を検証済み。データ非改変）
@@ -64,7 +71,10 @@
 - [x] **(D) 予防文の異種汚染修正（EN）**: 英語版 種クラス対応 prevention 生成器を新設
       （`_PREVENT_CLASS_CORE_EN`/`_prevention_overlay_en`/`gen_prevention_en_noncompanion`）。
       EN 汚染 387→0。回帰テスト追加。`test_no_template_disease_content` 178 pass。
-- [ ] T109 機械翻訳臭の置換適用（`scripts/quality/apply_mt_smell.py` を段階適用、臨床用語は要レビュー）
+- [x] T109 機械翻訳臭の置換適用: safe 語（葡萄糖→ブドウ糖等）は適用済み。
+      文脈依存の誤フレーズ（遺伝学的インスリン抵抗→遺伝的等6種12件）を `apply_mt_smell_phrases.py` で
+      フレーズ単位に安全修正（正当な 遺伝学的スクリーニング/背景/異常 は温存）。degu review 17→8。
+- [ ] 残る T109 review 語（易感受性・貧弱な等の文体項目）は獣医レビューで置換要否を判断
 
 ## いま承認を求める項目
 1. **(B) degu 統合判断**（`.spec/DEGU_CONSOLIDATION_REVIEW.md` を1件ずつ ✅/❌/✏️）→ 承認行のみ canonical 反映

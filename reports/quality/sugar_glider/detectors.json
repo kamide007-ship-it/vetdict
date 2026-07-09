@@ -3432,24 +3432,10 @@
   "T109": {
     "detector": "T109",
     "total_records": 221,
-    "hit_count": 1,
+    "hit_count": 0,
     "safe_occurrences": 0,
-    "review_occurrences": 1,
-    "term_counts": {
-      "遺伝学的": 1
-    },
-    "hits": [
-      {
-        "id": "sugar_glider_0010",
-        "name_ja": "自傷行為",
-        "field": "causes_ja",
-        "term": "遺伝学的",
-        "suggest": "遺伝性 / 遺伝的",
-        "category": "review",
-        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
-        "count": 1,
-        "context": "タミンD3）、光ストレス、環境ストレス、遺伝学的素因、発達トラウマ。"
-      }
-    ]
+    "review_occurrences": 0,
+    "term_counts": {},
+    "hits": []
   }
 }

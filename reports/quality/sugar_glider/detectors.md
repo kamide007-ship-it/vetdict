@@ -213,10 +213,8 @@
 - 皮膚糸状菌症（フクロモモンガ）（Dermatophytosis (Ringworm)）[sugar_glider_0220] → key: dermatophytosis
 
 ## T109 機械翻訳臭（置換辞書）
-- ヒット総数: **1**（safe 0 / review 1）
+- ヒット総数: **0**（safe 0 / review 0）
 
 ### 用語別ヒット数
-- `遺伝学的` × 1
 
 ### 出現箇所（上位30）
-- [review] `遺伝学的`→遺伝性 / 遺伝的 @ causes_ja [sugar_glider_0010] …タミンD3）、光ストレス、環境ストレス、遺伝学的素因、発達トラウマ。…

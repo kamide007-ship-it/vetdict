@@ -4774,11 +4774,11 @@
   "T109": {
     "detector": "T109",
     "total_records": 346,
-    "hit_count": 3,
+    "hit_count": 2,
     "safe_occurrences": 0,
-    "review_occurrences": 3,
+    "review_occurrences": 2,
     "term_counts": {
-      "遺伝学的": 3
+      "遺伝学的": 2
     },
     "hits": [
       {
@@ -4791,17 +4791,6 @@
         "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
         "count": 1,
         "context": "。(9) 無症候キャリア治療。(10) 遺伝学的考慮。"
-      },
-      {
-        "id": "guinea_pig_0055",
-        "name_ja": "不正咬合",
-        "field": "causes_ja",
-        "term": "遺伝学的",
-        "suggest": "遺伝性 / 遺伝的",
-        "category": "review",
-        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
-        "count": 1,
-        "context": "モルモット不正咬合—主要原因：(1) 遺伝学的素因（~症例の30-40%）—一部のモル"
       },
       {
         "id": "guinea_pig_0055",

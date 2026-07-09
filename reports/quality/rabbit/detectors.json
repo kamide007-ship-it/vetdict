@@ -5162,24 +5162,10 @@
   "T109": {
     "detector": "T109",
     "total_records": 452,
-    "hit_count": 1,
+    "hit_count": 0,
     "safe_occurrences": 0,
-    "review_occurrences": 1,
-    "term_counts": {
-      "遺伝学的": 1
-    },
-    "hits": [
-      {
-        "id": "rabbit_0023",
-        "name_ja": "エンセファリトゾーン・クニクリ感染症",
-        "field": "causes_ja",
-        "term": "遺伝学的",
-        "suggest": "遺伝性 / 遺伝的",
-        "category": "review",
-        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
-        "count": 1,
-        "context": "、年齢極端。(2) 寄生虫負荷。(3) 遺伝学的素因。(4) 曝露時年齢。(5) 環境要"
-      }
-    ]
+    "review_occurrences": 0,
+    "term_counts": {},
+    "hits": []
   }
 }

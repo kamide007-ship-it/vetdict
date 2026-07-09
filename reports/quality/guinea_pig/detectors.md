@@ -219,12 +219,11 @@
 - 血栓塞栓症（モルモット）（Thromboembolism）[guinea_pig_0321] → key: aortic thromboembolism (saddle thrombus)
 
 ## T109 機械翻訳臭（置換辞書）
-- ヒット総数: **3**（safe 0 / review 3）
+- ヒット総数: **2**（safe 0 / review 2）
 
 ### 用語別ヒット数
-- `遺伝学的` × 3
+- `遺伝学的` × 2
 
 ### 出現箇所（上位30）
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ prevention_ja [guinea_pig_0000] …。(9) 無症候キャリア治療。(10) 遺伝学的考慮。…
-- [review] `遺伝学的`→遺伝性 / 遺伝的 @ causes_ja [guinea_pig_0055] …モルモット不正咬合—主要原因：(1) 遺伝学的素因（~症例の30-40%）—一部のモル…
 - [review] `遺伝学的`→遺伝性 / 遺伝的 @ prevention_ja [guinea_pig_0055] …4) 口腔衛生監視—重大な予防。(5) 遺伝学的選択。(6) 環境要因。(7) 歯周衛生…
