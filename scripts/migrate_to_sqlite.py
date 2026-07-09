@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from api.database import DB_PATH, get_connection, init_db, upsert_disease, upsert_drug, upsert_symptom
+from api.species.id_locks import stable_id_for
 
 # ---------------------------------------------------------------------------
 # Species module mapping: species_key → module path
@@ -78,7 +79,9 @@ def migrate_species_diseases(conn, species_key: str, module_path: str) -> int:
 
     for d in diseases:
         i = orig_index.get(id(d), 0)
-        disease_id = d.get("id") or f"{species_key}_{i:04d}"
+        # Stable-id freeze (Phase 2): pin the id even if the list is later
+        # re-ordered. No lock file → position-derived id (unchanged behaviour).
+        disease_id = d.get("id") or stable_id_for(species_key, d, f"{species_key}_{i:04d}")
 
         # Extract ja/en from fields that might be dicts
         treatment_ja, treatment_en = _extract_ja_en(d.get("treatment"))
@@ -151,7 +154,8 @@ def migrate_dog_diseases(conn) -> int:
     count = 0
     for d in diseases:
         i = orig_index.get(id(d), 0)
-        disease_id = d.get("id") or f"dog_{i:04d}"
+        # Stable-id freeze (Phase 2) — see migrate_species_diseases.
+        disease_id = d.get("id") or stable_id_for("dog", d, f"dog_{i:04d}")
 
         # Handle fields that might be dict with 'ja'/'en' keys
         def _extract_ja_en(field_val):

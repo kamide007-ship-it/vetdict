@@ -155,6 +155,15 @@ CREATE TABLE IF NOT EXISTS drug_species_info (
 );
 
 CREATE INDEX IF NOT EXISTS idx_drug_species ON drug_species_info(drug_id, species);
+
+-- Schema migration ledger (Phase 2 quality program).
+-- Records which incremental migrations have been applied. Idempotent:
+-- INSERT OR IGNORE keeps re-runs a no-op.
+CREATE TABLE IF NOT EXISTS schema_migrations (
+    id TEXT PRIMARY KEY,
+    note TEXT,
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 """
 
 
@@ -197,17 +206,45 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
         ("mortality_rate", "REAL"),
     ]
 
+    # Migration 2: Quality program tracking columns (Phase 2).
+    # Non-destructive ADD COLUMN only. Supports non-destructive logical
+    # consolidation (canonical_id/status/merged_into/…) and the dosage
+    # review gate (evidence_grade/review_status). All default NULL so
+    # existing rows are unaffected.
+    quality_cols = [
+        ("canonical_id", "TEXT"),  # representative id (self or merge target)
+        ("status", "TEXT"),  # active / merged / archived
+        ("merged_into", "TEXT"),  # target id when status=merged
+        ("merged_reason", "TEXT"),  # audit trail for a merge/archive
+        ("aliases", "TEXT"),  # JSON: prior names/ids for redirect resolution
+        ("evidence_grade", "TEXT"),  # dosage sourcing grade (A/B/C)
+        ("review_status", "TEXT"),  # draft / approved / published
+    ]
+
     added = 0
-    for col_name, col_type in diagnostic_cols + enrichment_cols:
+    for col_name, col_type in diagnostic_cols + enrichment_cols + quality_cols:
         if col_name not in columns:
             try:
                 cursor.execute(f"ALTER TABLE diseases ADD COLUMN {col_name} {col_type}")
                 added += 1
             except sqlite3.OperationalError as e:
                 logger.warning("Column %s already exists: %s", col_name, e)
+
+    # Record migrations in the ledger (idempotent).
+    cursor.execute(
+        "INSERT OR IGNORE INTO schema_migrations (id, note) VALUES (?, ?)",
+        ("0001_diagnostic_enrichment_cols", "diagnostic + enrichment columns"),
+    )
+    cursor.execute(
+        "INSERT OR IGNORE INTO schema_migrations (id, note) VALUES (?, ?)",
+        ("0002_quality_tracking_cols", "canonical_id/status/merged_into/aliases/evidence_grade/review_status"),
+    )
+
     if added:
         conn.commit()
         logger.info("Migration complete: added %d columns", added)
+    else:
+        conn.commit()
 
 
 # ---------------------------------------------------------------------------

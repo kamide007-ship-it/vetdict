@@ -22,10 +22,22 @@
 - 備考: **出典（citation）の種ガードは main の T110 v2 に統合**（`get_references_for_disease_v2`）。
   当初の v1 パッチは撤回し、検出器はガード判定に T110 の `REFERENCE_SPECIES` を参照。
 
-## フェーズ2：スキーマ/不変ID（🟡 前提整備）
-- [ ] `schema_migrations` テーブル + 冪等 ADD COLUMN（canonical_id, status, …）
-- [ ] 全疾患エントリへ **不変 `id`（スラッグ）を付与**するマイグレーション（位置依存ID脱却）
-      ※ 旧位置ID → 新IDの `aliases` を記録し、既存URLを保全
+## フェーズ2：スキーマ/不変ID（🟡 前提整備）— **完了（このブランチ）**
+- [x] `schema_migrations` テーブル + 冪等 ADD COLUMN（canonical_id, status, merged_into,
+      merged_reason, aliases, evidence_grade, review_status）→ `api/database.py`
+      （stdlib sqlite3 で冪等・列存在・ledger 記録を検証済み。データ非改変）
+- [x] 全疾患エントリへ **不変 `id` を凍結**（位置依存ID脱却）
+      - `api/data/id_locks/<species>.json`（20種・6,434件）= `name→現行id` の凍結マップ（append-only）
+      - `api/species/id_locks.py::stable_id_for()`（純関数・read-only・キャッシュ）
+      - `scripts/quality/build_id_locks.py`（生成器・冪等・バックアップ不要=新規サイドカーのみ）
+      - `scripts/migrate_to_sqlite.py` の id 採番2箇所（generic+dog）を `stable_id_for` 経由に
+      - **馬は既に明示 `id` 保持のため対象外**
+      - 検証: ①今日のidは**バイト同一**（URL不変） ②リスト逆順でも **198/199 が pin**（本来なら全変動）
+        ③再生成で0件new（冪等） ④全種で凍結id重複0
+      - `tests/test_id_locks.py`（純Python・flask不要の回帰テスト5件）
+      - **可逆**: `api/data/id_locks/` を削除すれば位置依存idにフォールバック
+      ※ `aliases` 列は用意済み（統合時の旧名/旧id記録用）。今回のid凍結は**現行idの保存**なので
+        リダイレクト不要（idが変わらない）。
 
 ## フェーズ3：論理統合（承認済み・degu 適用）
 - [x] degu 統合レビューワークシート → `.spec/DEGU_CONSOLIDATION_REVIEW.md`
