@@ -920,6 +920,8 @@ _DISEASE_CAT_ORDER = [
     "behavioral",
     "congenital",
     "immune",
+    "nutritional",
+    "environmental",
 ]
 _DISEASE_CAT_PATTERNS = {
     "infectious": _re.compile(
@@ -935,11 +937,11 @@ _DISEASE_CAT_PATTERNS = {
         _re.IGNORECASE,
     ),
     "respiratory": _re.compile(
-        r"respir|pulmonar|lung|bronch|trache|laryn|pleural|pneumothorax|asthma|rhinit|nasal.*polyp|brachycephal.*airway|collaps.*trache|pyothorax|chylothorax|diaphragm",
+        r"respir|pulmonar|lung|bronch|trache|laryn|pleural|pneumothorax|asthma|rhinit|nasal.*polyp|brachycephal.*airway|collaps.*trache|pyothorax|chylothorax|diaphragm|喉頭蓋|epiglottic",
         _re.IGNORECASE,
     ),
     "gastrointestinal": _re.compile(
-        r"gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit|diarrh|下痢|gastric.*ulcer|胃潰瘍|rectal.*prolaps|直腸脱|cecal|caecal|盲腸|dysbiosis|盲腸嵌頓|腸嵌頓|(cecal|caecal|fecal|faecal|crop|sand|gastric)\s*.{0,4}impact",
+        r"gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit|diarrh|下痢|gastric.*ulcer|胃潰瘍|rectal.*prolaps|直腸脱|cecal|caecal|盲腸|dysbiosis|盲腸嵌頓|腸嵌頓|大網孔|epiploic|網嚢孔|肛門嚢|anal\s*sac|(cecal|caecal|fecal|faecal|crop|sand|gastric)\s*.{0,4}impact",
         _re.IGNORECASE,
     ),
     "renal": _re.compile(
@@ -967,7 +969,7 @@ _DISEASE_CAT_PATTERNS = {
         _re.IGNORECASE,
     ),
     "hematological": _re.compile(
-        r"hematolog|anemia|anaemia|thrombocytopen|pancytopen|coagulopath|hemolyt|polycythem|von\s*willebrand|hemophilia|dic\b|disseminat.*intravas|immune.*mediat.*anemia|imha\b|itp\b|blood.*parasit",
+        r"hematolog|anemia|anaemia|thrombocytopen|pancytopen|coagulopath|hemolyt|polycythem|von\s*willebrand|hemophilia|dic\b|disseminat.*intravas|immune.*mediat.*anemia|imha\b|itp\b|blood.*parasit|貧血|溶血|isoerythrolys|同種赤血球",
         _re.IGNORECASE,
     ),
     "dental": _re.compile(
@@ -987,7 +989,7 @@ _DISEASE_CAT_PATTERNS = {
         _re.IGNORECASE,
     ),
     "behavioral": _re.compile(
-        r"behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia|barber|バーバリング|毛引き|グルーミング|over.?groom|過剰.*グルーミング|social\s*.{0,4}stress|社会的ストレス|stress.?related|ストレス関連|stereotyp|常同|self.?mutilat|自傷|pica\b|異食",
+        r"behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia|barber|バーバリング|毛引き|グルーミング|over.?groom|過剰.*グルーミング|social\s*.{0,4}stress|社会的ストレス|stress.?related|ストレス関連|stereotyp|常同|self.?mutilat|自傷|pica\b|異食|食殺|共食い|cannibal|infanticide",
         _re.IGNORECASE,
     ),
     "congenital": _re.compile(
@@ -995,6 +997,17 @@ _DISEASE_CAT_PATTERNS = {
     ),
     "immune": _re.compile(
         r"immune.*mediat|auto.*immune|sle\b|systemic.*lupus|pemphig|polyarthrit.*immune|vasculit|eosinophil.*granulom",
+        _re.IGNORECASE,
+    ),
+    # Placed after the organ-specific categories so they only catch what those
+    # miss (e.g. rickets already resolves to musculoskeletal, burns to
+    # dermatological); pure deficiency / thermal / hydration conditions land here.
+    "nutritional": _re.compile(
+        r"欠乏|deficiency|deficien|ビタミン|vitamin|栄養失調|栄養性|malnutrit|hypovitaminos|scurvy|壊血病|肥満|obesity|obese|悪液質|cachexia|thiamine|taurine|ミネラル|微量元素|過剰症|hypervitaminos",
+        _re.IGNORECASE,
+    ),
+    "environmental": _re.compile(
+        r"heat\s*stroke|熱中症|熱射病|hyperthermi|hypothermi|低体温症|dehydration|脱水症|drowning|溺水|near.?drown|electrocut|感電|電撃傷|smoke\s*inhalat|heat\s*stress|熱ストレス",
         _re.IGNORECASE,
     ),
 }
@@ -1018,6 +1031,8 @@ _DISEASE_CAT_LABELS = {
     "behavioral": ("行動", "Behavioral"),
     "congenital": ("先天性", "Congenital"),
     "immune": ("免疫", "Immune-mediated"),
+    "nutritional": ("栄養", "Nutritional"),
+    "environmental": ("環境", "Environmental"),
     "other": ("その他", "Other"),
 }
 
