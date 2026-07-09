@@ -923,7 +923,7 @@ _DISEASE_CAT_ORDER = [
 ]
 _DISEASE_CAT_PATTERNS = {
     "infectious": _re.compile(
-        r"infect|viral|virus|bacter|feline\s+(herpes|calici|immuno|leuk|panleuk)|parvovir|distemper|leptospir|bordetella|chlamyd|mycoplasm|fungal|aspergill|crypto|blastomyc|histoplasm|fip\b|fiv\b|felv\b|septice|abscess|pyometra|peritonitis|pneumonia|ehrlich|anaplasm|babesi|leishman|borreli|bartonell|neorick|hemoplasm|mycobact|nocardia|actinomyc|pythio|coccidio|dermatophyt|ringworm|sporotrich",
+        r"infect|viral|virus|bacter|feline\s+(herpes|calici|immuno|leuk|panleuk)|parvovir|distemper|leptospir|bordetella|chlamyd|mycoplasm|fungal|aspergill|crypto|blastomyc|histoplasm|fip\b|fiv\b|felv\b|septice|abscess|pyometra|peritonitis|pneumonia|ehrlich|anaplasm|babesi|leishman|borreli|bartonell|neorick|hemoplasm|mycobact|nocardia|actinomyc|pythio|coccidio|dermatophyt|ringworm|sporotrich|salmonell|candid|カンジダ|サルモネラ",
         _re.IGNORECASE,
     ),
     "neoplastic": _re.compile(
@@ -931,7 +931,7 @@ _DISEASE_CAT_PATTERNS = {
         _re.IGNORECASE,
     ),
     "cardiovascular": _re.compile(
-        r"cardi|heart|arrhythm|murmur|endocardi|myocardi|pericard|thromboembol|aortic|hypertens|dcm\b|hcm\b|valve|congesti.*heart|patent\s*ductus|tetralogy|atrial|ventricul|tachy|brady|fibrillat",
+        r"cardi|heart|arrhythm|murmur|endocardi|myocardi|pericard|thromboembol|aortic|hypertens|dcm\b|hcm\b|valve|congesti.*heart|patent\s*ductus|tetralogy|atrial|ventricul|tachy|brady|fibrillat|arterioscler|atheroscler|動脈硬化",
         _re.IGNORECASE,
     ),
     "respiratory": _re.compile(
@@ -939,11 +939,11 @@ _DISEASE_CAT_PATTERNS = {
         _re.IGNORECASE,
     ),
     "gastrointestinal": _re.compile(
-        r"gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit",
+        r"gastro|intestin|digest|bowel|colitis|enterit|pancrea|hepat|liver|cholang|esophag|megaesoph|bloat|gastric.*dilat|volvulus|obstruct|foreign\s*body|ibd\b|exocrine|lipidos|cirrhos|portosystem|intussuscept|megacolon|constipat|ileus|stomatit|gingivit|diarrh|下痢|gastric.*ulcer|胃潰瘍|rectal.*prolaps|直腸脱|cecal|caecal|盲腸|dysbiosis|盲腸嵌頓|腸嵌頓|(cecal|caecal|fecal|faecal|crop|sand|gastric)\s*.{0,4}impact",
         _re.IGNORECASE,
     ),
     "renal": _re.compile(
-        r"renal|kidney|urinar|urolithi|cystit|bladder|ureter|urethr|nephro|glomerul|polycyst|azotemi|ckd\b|akut.*kidney|flutd|fus\b|hydronephros",
+        r"renal|kidney|urinar|urolithi|cystit|bladder|ureter|urethr|nephro|glomerul|polycyst|azotemi|ckd\b|akut.*kidney|flutd|fus\b|hydronephros|pyelonephr|腎盂|腎炎",
         _re.IGNORECASE,
     ),
     "endocrine": _re.compile(
@@ -951,15 +951,15 @@ _DISEASE_CAT_PATTERNS = {
         _re.IGNORECASE,
     ),
     "dermatological": _re.compile(
-        r"dermat|skin|cutane|alopecia|pyoderma|atop|allerg.*dermat|hot\s*spot|mange|demodex|scabies|flea.*allerg|pemphig|lupus.*erythematos|sebace|follicul|acne|interdig|pododermat|erythem|pruritus|urticar",
+        r"dermat|skin|cutane|alopecia|pyoderma|atop|allerg.*dermat|hot\s*spot|mange|demodex|scabies|flea.*allerg|pemphig|lupus.*erythematos|sebace|follicul|acne|interdig|pododermat|erythem|pruritus|urticar|bumblefoot|趾瘤|degloving|剥脱損傷|burn|frostbite|熱傷|凍傷|nail\s*.{0,3}overgrow|爪過|claw\s*.{0,3}overgrow",
         _re.IGNORECASE,
     ),
     "neurological": _re.compile(
-        r"neurolog|brain|spinal|seizure|epilep|vestibul|mening|encephal|myelop|disc\s*disease|ivdd|paralys|paresis|neuropath|polyneuropath|myasthenia|degenerat.*myelop|cerebell|hydrocephal|cognit.*dysfunction|wobbler|syringomyel|narcolep|head\s*tilt|ataxia",
+        r"neurolog|brain|spinal|seizure|epilep|vestibul|mening|encephal|myelop|disc\s*disease|ivdd|paralys|paresis|neuropath|polyneuropath|myasthenia|degenerat.*myelop|cerebell|hydrocephal|cognit.*dysfunction|wobbler|syringomyel|narcolep|head\s*tilt|ataxia|脳卒中|cerebrovascul|apoplexy",
         _re.IGNORECASE,
     ),
     "musculoskeletal": _re.compile(
-        r"musculoskelet|orthop|fractur|luxat|cruciat|ligament|arthrit|dysplasia|osteochondr|spondyl|myosit|polymyosit|rhabdomyol|tendon|patella|elbow|hip\s*dysplasia|legg.*calve|hypertrophic.*osteodystro",
+        r"musculoskelet|orthop|fractur|luxat|cruciat|ligament|arthrit|dysplasia|osteochondr|spondyl|myosit|polymyosit|rhabdomyol|tendon|patella|elbow|hip\s*dysplasia|legg.*calve|hypertrophic.*osteodystro|rickets|くる病|splay\s*.{0,3}leg|開脚|muscle\s*.{0,4}wast|筋萎縮|osteomyel|骨髄炎",
         _re.IGNORECASE,
     ),
     "ophthalmological": _re.compile(
@@ -971,7 +971,7 @@ _DISEASE_CAT_PATTERNS = {
         _re.IGNORECASE,
     ),
     "dental": _re.compile(
-        r"dental|tooth|teeth|periodon|oral.*mass|epulis|oral.*tumor|gingiv|stomatit|resorptive.*lesion|odontoclast",
+        r"dental|tooth|teeth|periodon|oral.*mass|epulis|oral.*tumor|gingiv|stomatit|resorptive.*lesion|odontoclast|enamel|エナメル|molar|臼歯|incisor|切歯|malocclus|不正咬合",
         _re.IGNORECASE,
     ),
     "parasitic": _re.compile(
@@ -979,7 +979,7 @@ _DISEASE_CAT_PATTERNS = {
         _re.IGNORECASE,
     ),
     "reproductive": _re.compile(
-        r"reproduct|uterine|ovarian|testicular|prostat|mammary(?!.*neoplas)|dystocia|eclampsia|mastitis|cryptorchid|vaginal|vulvar|penile|balanoposthit",
+        r"reproduct|uterine|ovarian|testicular|prostat|mammary(?!.*neoplas)|dystocia|eclampsia|mastitis|cryptorchid|vaginal|vulvar|penile|balanoposthit|包皮|包茎|陰茎|fetus|foetus|fetal|foetal|胎児|新生児死亡|neonatal\s*.{0,4}(death|mortalit|loss)|retained\s*.{0,4}(fetus|placenta)|胎盤停滞|卵塞|egg\s*bind",
         _re.IGNORECASE,
     ),
     "toxicological": _re.compile(
@@ -987,7 +987,8 @@ _DISEASE_CAT_PATTERNS = {
         _re.IGNORECASE,
     ),
     "behavioral": _re.compile(
-        r"behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia", _re.IGNORECASE
+        r"behavio|anxiety|aggress|compulsive|phobia|cognit.*dysfunct|separ.*anxiety|noise.*phobia|barber|バーバリング|毛引き|グルーミング|over.?groom|過剰.*グルーミング|social\s*.{0,4}stress|社会的ストレス|stress.?related|ストレス関連|stereotyp|常同|self.?mutilat|自傷|pica\b|異食",
+        _re.IGNORECASE,
     ),
     "congenital": _re.compile(
         r"congenit|develop|heredit|portosystem.*shunt|cleft.*palate|megaesoph.*congenit|atresia", _re.IGNORECASE
