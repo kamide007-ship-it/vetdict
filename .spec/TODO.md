@@ -85,6 +85,14 @@
       **curated 同一疾患ペア（略称・修飾語違い）の掘り起こし**が可能（獣医レビュー前提）。
       - **✅ 追認（承認「3」）**: 既存16種の重複ティア auto-dedup（安全ティア＝種タグ/同一名重複）を **ratify**。
         監査で有害マージ0（Proptosis/Ileus の2種は「1・2分離」で既に是正済み）。物理削除なし・301・即ロールバック可。
+- [x] **curated 掘り起こし: dog/ferret/bird/parakeet/parrot（承認「2」）**: review 保留クラスタから
+      同一疾患ペア（略称/修飾語/種タグ違い）を curated 統合。keep-separate 厳守（dog: PSS先天/後天・HSA脾/心・
+      鼻アスペルギルス・後天性巨大結腸／ bird・parrot: 翼骨折 vs 脚骨折／ parakeet: 内臓 vs 関節痛風・肝炎 vs 肝リピドーシス・
+      そ嚢異物閉塞 vs stasis）。loader で keep-separate 維持を全種確認。
+      統合数: dog 32(591)・ferret 30(247)・bird 49(501)・parakeet 40(414)・parrot 19(262)。
+      ⚠️ **pre-existing slug衝突1件**（bird Psittacosis bird_0010/bird_0398: "/" vs "()" で同一slug→loader統合不可、
+      name_ja も （鳥）差で dedup 非対象）。**私の変更前から存在**の真の重複。id対応loader化 or 片方リネームで解消可（follow-up）。
+- [ ] **残り: reptile/tortoise/snake/lizard/amphibian/exotic_other の curated 掘り起こし**（同手順・獣医レビュー前提）。
 - [x] **cat 誤ラベル rename + 治療修正（承認「1」）**: `cat_0177 Dermatophilosis`・`cat_0268 Feline Dermatophilosis` の
       name_ja（皮膚糸状菌症＝真菌白癬と誤）→ **デルマトフィルス症 / 猫デルマトフィルス症**（causes/patho/prevention/prognosis の
       ラベルも修正、内容は既に細菌 Dermatophilus で整合）。**⚠ 発見: 両者の treatment_ja が抗真菌薬（Microsporum/イトラコナゾール）＝

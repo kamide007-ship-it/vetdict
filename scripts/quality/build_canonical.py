@@ -192,6 +192,80 @@ _CURATED_MERGE: dict[str, list[list[str]]] = {
         ["ferret_0082", "ferret_0213"],  # 播種性特発性筋膜炎 (DIM)
         ["ferret_0088", "ferret_0143"],  # 骨腫
     ],
+    # bird: same-disease synonym / species-tag / severity pairs. Kept SEPARATE:
+    # 翼骨折 vs 脚骨折 (different bones).
+    "bird": [
+        ["bird_0000", "bird_0341"],  # PBFD
+        ["bird_0001", "bird_0400"],  # 前胃拡張症 (PDD)
+        ["bird_0006", "bird_0403"],  # パチェコ病
+        ["bird_0007", "bird_0343"],  # パラミクソウイルス
+        ["bird_0013", "bird_0437"],  # 大腸菌感染症
+        ["bird_0023", "bird_0308"],  # カンジダ症
+        ["bird_0024", "bird_0307", "bird_0410"],  # メガバクテリア症
+        ["bird_0031", "bird_0417"],  # 細菌性肺炎
+        ["bird_0033", "bird_0408"],  # そ嚢うっ滞
+        ["bird_0034", "bird_0409"],  # そ嚢火傷
+        ["bird_0048", "bird_0445"],  # 腎不全
+        ["bird_0052", "bird_0444"],  # 腎腫瘍
+        ["bird_0058", "bird_0414"],  # ヨウ素欠乏症
+        ["bird_0059", "bird_0415"],  # 鉄蓄積症
+        ["bird_0063", "bird_0404"],  # 毛引き症
+        ["bird_0069", "bird_0452"],  # 扁平上皮癌
+        ["bird_0071", "bird_0431"],  # 代謝性骨疾患
+        ["bird_0073", "bird_0405"],  # 卵詰まり
+        ["bird_0079", "bird_0111", "bird_0460"],  # 鉛中毒
+        ["bird_0096", "bird_0421"],  # ワクモ
+        ["bird_0098", "bird_0423"],  # 回虫症
+        ["bird_0100", "bird_0232", "bird_0424"],  # 毛細線虫症
+        ["bird_0112", "bird_0387", "bird_0461"],  # 亜鉛中毒
+        ["bird_0126", "bird_0227"],  # 鳥脳脊髄炎
+        ["bird_0127", "bird_0224"],  # マレック病
+        ["bird_0130", "bird_0233"],  # 伝染性喉頭気管炎
+        ["bird_0133", "bird_0235"],  # 鳥スピロヘータ症
+        ["bird_0174", "bird_0439"],  # 総排泄腔炎
+        ["bird_0176", "bird_0292"],  # そ嚢結石
+        ["bird_0295", "bird_0383"],  # 卵停滞
+        ["bird_0349", "bird_0406"],  # バンブルフット
+    ],
+    # parakeet: Kept SEPARATE: 内臓痛風 vs 関節痛風 (distinct forms), 肝炎 vs
+    # 肝リピドーシス, そ嚢異物閉塞 (obstruction) vs stasis.
+    "parakeet": [
+        ["parakeet_0011", "parakeet_0300"],  # 鳥結核症
+        ["parakeet_0023", "parakeet_0186"],  # 条虫症
+        ["parakeet_0024", "parakeet_0155"],  # ダニ寄生症
+        ["parakeet_0027", "parakeet_0252", "parakeet_0272"],  # メガバクテリア症
+        ["parakeet_0034", "parakeet_0257"],  # 肝リピドーシス
+        ["parakeet_0038", "parakeet_0196"],  # テフロン中毒
+        ["parakeet_0042", "parakeet_0256", "parakeet_0305"],  # 精巣腫瘍
+        ["parakeet_0043", "parakeet_0177", "parakeet_0263", "parakeet_0317"],  # 黄色腫
+        ["parakeet_0053", "parakeet_0203", "parakeet_0254"],  # 開脚症
+        ["parakeet_0058", "parakeet_0264"],  # 羽嚢腫
+        ["parakeet_0059", "parakeet_0268"],  # 毛引き症
+        ["parakeet_0067", "parakeet_0265", "parakeet_0270", "parakeet_0334"],  # そ嚢停滞 (keep 0206 異物閉塞 separate)
+        ["parakeet_0070", "parakeet_0335"],  # 乳頭腫症
+        ["parakeet_0082", "parakeet_0330"],  # 熱傷
+        ["parakeet_0113", "parakeet_0299"],  # 大腸菌感染症
+        ["parakeet_0127", "parakeet_0226"],  # 腺胃潰瘍
+        ["parakeet_0133", "parakeet_0455"],  # 羽包嚢胞
+        ["parakeet_0195", "parakeet_0241"],  # 亜鉛中毒
+        ["parakeet_0228", "parakeet_0362"],  # 慢性呼吸器疾患
+        ["parakeet_0235", "parakeet_0262"],  # 蝋膜肥大
+    ],
+    # parrot: Kept SEPARATE: 翼骨折 vs 脚骨折, 肝炎 vs 肝リピドーシス.
+    "parrot": [
+        ["parrot_0000", "parrot_0162"],  # PBFD
+        ["parrot_0006", "parrot_0167", "parrot_0251"],  # 乳頭腫症
+        ["parrot_0017", "parrot_0184"],  # カンジダ症
+        ["parrot_0024", "parrot_0169"],  # 重金属中毒
+        ["parrot_0039", "parrot_0187"],  # 痛風 (両型ラベル)
+        ["parrot_0040", "parrot_0166", "parrot_0228"],  # 動脈硬化症
+        ["parrot_0043", "parrot_0181"],  # 卵塞
+        ["parrot_0047", "parrot_0183"],  # そ嚢うっ滞
+        ["parrot_0079", "parrot_0242"],  # 熱中症
+        ["parrot_0108", "parrot_0215"],  # 大腸菌感染症
+        ["parrot_0125", "parrot_0270"],  # 消化管閉塞
+        ["parrot_0160", "parrot_0161", "parrot_0177"],  # 前胃拡張症 (PDD)
+    ],
 }
 
 

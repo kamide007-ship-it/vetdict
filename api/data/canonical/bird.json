@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 551,
-    "merge_clusters": 21,
-    "records_merged_away": 21,
+    "merge_clusters": 49,
+    "records_merged_away": 50,
     "archived": 0,
-    "served_after": 530
+    "served_after": 501
   },
   "merges": [
     {
@@ -387,120 +387,550 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0000",
+        "slug": "psittacine-beak-and-feather-disease-pbfd",
+        "name": "Psittacine Beak and Feather Disease (PBFD)",
+        "name_ja": "嘴羽毛病（PBFD）"
+      },
+      "merged": [
+        {
+          "id": "bird_0341",
+          "slug": "beak-and-feather-disease-circovirus",
+          "name": "Beak and Feather Disease (Circovirus)",
+          "name_ja": "嘴羽毛病（サーコウイルス）（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0001",
+        "slug": "proventricular-dilatation-disease-pdd-bornavirus",
+        "name": "Proventricular Dilatation Disease (PDD / Bornavirus)",
+        "name_ja": "腺胃拡張症（PDD／ボルナウイルス）"
+      },
+      "merged": [
+        {
+          "id": "bird_0400",
+          "slug": "proventricular-dilatation-disease-pdd",
+          "name": "Proventricular Dilatation Disease (PDD)",
+          "name_ja": "前胃拡張症（PDD）（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0006",
+        "slug": "pacheco-s-disease-psittacid-herpesvirus",
+        "name": "Pacheco's Disease (Psittacid Herpesvirus)",
+        "name_ja": "パチェコ病（オウム目ヘルペスウイルス）"
+      },
+      "merged": [
+        {
+          "id": "bird_0403",
+          "slug": "pacheco-s-disease",
+          "name": "Pacheco's Disease",
+          "name_ja": "パチェコ病（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0007",
+        "slug": "paramyxovirus-infection-pmv-1-2-3",
+        "name": "Paramyxovirus Infection (PMV-1/2/3)",
+        "name_ja": "パラミクソウイルス感染症"
+      },
+      "merged": [
+        {
+          "id": "bird_0343",
+          "slug": "paramyxovirus-infection",
+          "name": "Paramyxovirus Infection",
+          "name_ja": "パラミクソウイルス感染（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0013",
+        "slug": "e-coli-infection-colibacillosis",
+        "name": "E. coli Infection (Colibacillosis)",
+        "name_ja": "大腸菌感染症"
+      },
+      "merged": [
+        {
+          "id": "bird_0437",
+          "slug": "e-coli-infection",
+          "name": "E. coli Infection",
+          "name_ja": "大腸菌感染（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0023",
+        "slug": "candidiasis",
+        "name": "Candidiasis",
+        "name_ja": "カンジダ症"
+      },
+      "merged": [
+        {
+          "id": "bird_0308",
+          "slug": "candidiasis-crop-mycosis",
+          "name": "Candidiasis (Crop Mycosis)",
+          "name_ja": "カンジダ症（そのう真菌症）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0031",
+        "slug": "pneumonia",
+        "name": "Pneumonia",
+        "name_ja": "肺炎"
+      },
+      "merged": [
+        {
+          "id": "bird_0417",
+          "slug": "pneumonia-bacterial",
+          "name": "Pneumonia (Bacterial)",
+          "name_ja": "細菌性肺炎（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0033",
+        "slug": "crop-stasis-crop-slowdown",
+        "name": "Crop Stasis (Crop Slowdown)",
+        "name_ja": "嗉嚢停滞"
+      },
+      "merged": [
+        {
+          "id": "bird_0408",
+          "slug": "crop-stasis",
+          "name": "Crop Stasis",
+          "name_ja": "そ嚢うっ滞（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0034",
+        "slug": "crop-burn-thermal-ingluvitis",
+        "name": "Crop Burn (Thermal Ingluvitis)",
+        "name_ja": "嗉嚢火傷"
+      },
+      "merged": [
+        {
+          "id": "bird_0409",
+          "slug": "crop-burns",
+          "name": "Crop Burns",
+          "name_ja": "そ嚢火傷（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0048",
+        "slug": "renal-failure-acute-chronic",
+        "name": "Renal Failure (Acute / Chronic)",
+        "name_ja": "腎不全（急性／慢性）"
+      },
+      "merged": [
+        {
+          "id": "bird_0445",
+          "slug": "renal-failure-acute",
+          "name": "Renal Failure (Acute)",
+          "name_ja": "急性腎不全（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0052",
+        "slug": "renal-tumor-renal-adenocarcinoma",
+        "name": "Renal Tumor (Renal Adenocarcinoma)",
+        "name_ja": "腎腫瘍（腎腺癌）"
+      },
+      "merged": [
+        {
+          "id": "bird_0444",
+          "slug": "renal-tumor",
+          "name": "Renal Tumor",
+          "name_ja": "腎腫瘍（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0058",
+        "slug": "iodine-deficiency",
+        "name": "Iodine Deficiency",
+        "name_ja": "ヨウ素欠乏症"
+      },
+      "merged": [
+        {
+          "id": "bird_0414",
+          "slug": "iodine-deficiency-thyroid-hyperplasia",
+          "name": "Iodine Deficiency (Thyroid Hyperplasia)",
+          "name_ja": "ヨウ素欠乏症（甲状腺過形成）（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0059",
+        "slug": "iron-storage-disease-non-hemochromatosis",
+        "name": "Iron Storage Disease (non-hemochromatosis)",
+        "name_ja": "鉄蓄積症"
+      },
+      "merged": [
+        {
+          "id": "bird_0415",
+          "slug": "iron-storage-disease-hemochromatosis",
+          "name": "Iron Storage Disease (Hemochromatosis)",
+          "name_ja": "鉄蓄積症（ヘモクロマトーシス）（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0063",
+        "slug": "feather-plucking-feather-destructive-behavior",
+        "name": "Feather Plucking (Feather Destructive Behavior)",
+        "name_ja": "毛引き症（羽毛破壊行動）"
+      },
+      "merged": [
+        {
+          "id": "bird_0404",
+          "slug": "feather-plucking",
+          "name": "Feather Plucking",
+          "name_ja": "毛引き（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0069",
+        "slug": "squamous-cell-carcinoma-skin",
+        "name": "Squamous Cell Carcinoma (Skin)",
+        "name_ja": "扁平上皮癌（皮膚）"
+      },
+      "merged": [
+        {
+          "id": "bird_0452",
+          "slug": "squamous-cell-carcinoma",
+          "name": "Squamous Cell Carcinoma",
+          "name_ja": "扁平上皮癌（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0071",
+        "slug": "metabolic-bone-disease-mbd-rickets",
+        "name": "Metabolic Bone Disease (MBD / Rickets)",
+        "name_ja": "代謝性骨疾患（くる病）"
+      },
+      "merged": [
+        {
+          "id": "bird_0431",
+          "slug": "metabolic-bone-disease",
+          "name": "Metabolic Bone Disease",
+          "name_ja": "代謝性骨疾患（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0073",
+        "slug": "egg-binding-dystocia",
+        "name": "Egg Binding (Dystocia)",
+        "name_ja": "卵詰まり（難産）"
+      },
+      "merged": [
+        {
+          "id": "bird_0405",
+          "slug": "egg-binding",
+          "name": "Egg Binding",
+          "name_ja": "卵詰まり（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0096",
+        "slug": "red-mites-dermanyssus-gallinae",
+        "name": "Red Mites (Dermanyssus gallinae)",
+        "name_ja": "ワクモ（赤ダニ）"
+      },
+      "merged": [
+        {
+          "id": "bird_0421",
+          "slug": "red-mite-dermanyssus",
+          "name": "Red Mite (Dermanyssus)",
+          "name_ja": "ワクモ（Dermanyssus）（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0098",
+        "slug": "roundworms-ascaridia",
+        "name": "Roundworms (Ascaridia)",
+        "name_ja": "回虫症（アスカリディア）"
+      },
+      "merged": [
+        {
+          "id": "bird_0423",
+          "slug": "roundworm-ascaridia",
+          "name": "Roundworm (Ascaridia)",
+          "name_ja": "回虫（アスカリジア）（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0100",
+        "slug": "capillaria-hairworm",
+        "name": "Capillaria (Hairworm)",
+        "name_ja": "毛細線虫症（キャピラリア）"
+      },
+      "merged": [
+        {
+          "id": "bird_0232",
+          "slug": "capillaria-infection-hairworm-severe",
+          "name": "Capillaria Infection (Hairworm, Severe)",
+          "name_ja": "毛頭虫感染症（重度）"
+        },
+        {
+          "id": "bird_0424",
+          "slug": "capillaria-infection",
+          "name": "Capillaria Infection",
+          "name_ja": "毛細線虫症（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0126",
+        "slug": "avian-encephalomyelitis",
+        "name": "Avian Encephalomyelitis",
+        "name_ja": "鳥脳脊髄炎"
+      },
+      "merged": [
+        {
+          "id": "bird_0227",
+          "slug": "avian-encephalomyelitis-epidemic-tremor",
+          "name": "Avian Encephalomyelitis (Epidemic Tremor)",
+          "name_ja": "鳥類脳脊髄炎（流行性振戦）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0127",
+        "slug": "marek-s-disease",
+        "name": "Marek's Disease",
+        "name_ja": "マレック病"
+      },
+      "merged": [
+        {
+          "id": "bird_0224",
+          "slug": "marek-s-disease-avian",
+          "name": "Marek's Disease (Avian)",
+          "name_ja": "マレック病（鳥類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0130",
+        "slug": "infectious-laryngotracheitis-ilt",
+        "name": "Infectious Laryngotracheitis (ILT)",
+        "name_ja": "伝染性喉頭気管炎"
+      },
+      "merged": [
+        {
+          "id": "bird_0233",
+          "slug": "infectious-laryngotracheitis-ilt-advanced",
+          "name": "Infectious Laryngotracheitis (ILT) Advanced",
+          "name_ja": "伝染性喉頭気管炎（重度）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0133",
+        "slug": "avian-spirochetosis",
+        "name": "Avian Spirochetosis",
+        "name_ja": "鳥スピロヘータ症"
+      },
+      "merged": [
+        {
+          "id": "bird_0235",
+          "slug": "avian-spirochetosis-borrelia",
+          "name": "Avian Spirochetosis (Borrelia)",
+          "name_ja": "鳥類スピロヘータ症（ボレリア属）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0174",
+        "slug": "cloacitis-vent-gleet",
+        "name": "Cloacitis (Vent Gleet)",
+        "name_ja": "総排泄腔炎（ベントグリート）"
+      },
+      "merged": [
+        {
+          "id": "bird_0439",
+          "slug": "cloacitis",
+          "name": "Cloacitis",
+          "name_ja": "総排泄腔炎（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0176",
+        "slug": "ingluvoliths-crop-stones",
+        "name": "Ingluvoliths (Crop Stones)",
+        "name_ja": "素嚢結石"
+      },
+      "merged": [
+        {
+          "id": "bird_0292",
+          "slug": "ingluvoliths-crop-concretions",
+          "name": "Ingluvoliths (Crop Concretions)",
+          "name_ja": "嗉嚢結石"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0295",
+        "slug": "egg-retention-pre-laying",
+        "name": "Egg Retention (Pre-laying)",
+        "name_ja": "卵停滞（産卵前）"
+      },
+      "merged": [
+        {
+          "id": "bird_0383",
+          "slug": "retained-egg",
+          "name": "Retained Egg",
+          "name_ja": "卵停滞（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0349",
+        "slug": "bumblefoot-advanced-surgical",
+        "name": "Bumblefoot (Advanced/Surgical)",
+        "name_ja": "バンブルフット（進行/外科）（鳥）"
+      },
+      "merged": [
+        {
+          "id": "bird_0406",
+          "slug": "bumblefoot-pododermatitis",
+          "name": "Bumblefoot (Pododermatitis)",
+          "name_ja": "バンブルフット（足底皮膚炎）（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Psittacine Beak and Feather Disease (PBFD)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0000",
-            "slug": "psittacine-beak-and-feather-disease-pbfd",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "嘴羽毛病（PBFD）"
-          },
-          {
-            "id": "bird_0341",
-            "slug": "beak-and-feather-disease-circovirus",
-            "name": "Beak and Feather Disease (Circovirus)",
-            "name_ja": "嘴羽毛病（サーコウイルス）（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Proventricular Dilatation Disease (PDD / Bornavirus)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0001",
-            "slug": "proventricular-dilatation-disease-pdd-bornavirus",
-            "name": "Proventricular Dilatation Disease (PDD / Bornavirus)",
-            "name_ja": "腺胃拡張症（PDD／ボルナウイルス）"
-          },
-          {
-            "id": "bird_0400",
-            "slug": "proventricular-dilatation-disease-pdd",
-            "name": "Proventricular Dilatation Disease (PDD)",
-            "name_ja": "前胃拡張症（PDD）（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Pacheco's Disease (Psittacid Herpesvirus)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0006",
-            "slug": "pacheco-s-disease-psittacid-herpesvirus",
-            "name": "Pacheco's Disease (Psittacid Herpesvirus)",
-            "name_ja": "パチェコ病（オウム目ヘルペスウイルス）"
-          },
-          {
-            "id": "bird_0403",
-            "slug": "pacheco-s-disease",
-            "name": "Pacheco's Disease",
-            "name_ja": "パチェコ病（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Paramyxovirus Infection (PMV-1/2/3)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0007",
-            "slug": "paramyxovirus-infection-pmv-1-2-3",
-            "name": "Paramyxovirus Infection (PMV-1/2/3)",
-            "name_ja": "パラミクソウイルス感染症"
-          },
-          {
-            "id": "bird_0343",
-            "slug": "paramyxovirus-infection",
-            "name": "Paramyxovirus Infection",
-            "name_ja": "パラミクソウイルス感染（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "E. coli Infection (Colibacillosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0013",
-            "slug": "e-coli-infection-colibacillosis",
-            "name": "E. coli Infection (Colibacillosis)",
-            "name_ja": "大腸菌感染症"
-          },
-          {
-            "id": "bird_0437",
-            "slug": "e-coli-infection",
-            "name": "E. coli Infection",
-            "name_ja": "大腸菌感染（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Candidiasis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0023",
-            "slug": "candidiasis",
-            "name": "Candidiasis",
-            "name_ja": "カンジダ症"
-          },
-          {
-            "id": "bird_0308",
-            "slug": "candidiasis-crop-mycosis",
-            "name": "Candidiasis (Crop Mycosis)",
-            "name_ja": "カンジダ症（そのう真菌症）"
-          }
-        ]
-      },
       {
         "base": "Megabacteriosis (Avian Gastric Yeast / AGY)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -522,204 +952,6 @@
             "slug": "megabacteriosis-agy",
             "name": "Megabacteriosis (AGY)",
             "name_ja": "メガバクテリア症（AGY）（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Pneumonia",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0031",
-            "slug": "pneumonia",
-            "name": "Pneumonia",
-            "name_ja": "肺炎"
-          },
-          {
-            "id": "bird_0417",
-            "slug": "pneumonia-bacterial",
-            "name": "Pneumonia (Bacterial)",
-            "name_ja": "細菌性肺炎（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Crop Stasis (Crop Slowdown)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0033",
-            "slug": "crop-stasis-crop-slowdown",
-            "name": "Crop Stasis (Crop Slowdown)",
-            "name_ja": "嗉嚢停滞"
-          },
-          {
-            "id": "bird_0408",
-            "slug": "crop-stasis",
-            "name": "Crop Stasis",
-            "name_ja": "そ嚢うっ滞（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Crop Burn (Thermal Ingluvitis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0034",
-            "slug": "crop-burn-thermal-ingluvitis",
-            "name": "Crop Burn (Thermal Ingluvitis)",
-            "name_ja": "嗉嚢火傷"
-          },
-          {
-            "id": "bird_0409",
-            "slug": "crop-burns",
-            "name": "Crop Burns",
-            "name_ja": "そ嚢火傷（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Renal Failure (Acute / Chronic)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0048",
-            "slug": "renal-failure-acute-chronic",
-            "name": "Renal Failure (Acute / Chronic)",
-            "name_ja": "腎不全（急性／慢性）"
-          },
-          {
-            "id": "bird_0445",
-            "slug": "renal-failure-acute",
-            "name": "Renal Failure (Acute)",
-            "name_ja": "急性腎不全（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Renal Tumor (Renal Adenocarcinoma)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0052",
-            "slug": "renal-tumor-renal-adenocarcinoma",
-            "name": "Renal Tumor (Renal Adenocarcinoma)",
-            "name_ja": "腎腫瘍（腎腺癌）"
-          },
-          {
-            "id": "bird_0444",
-            "slug": "renal-tumor",
-            "name": "Renal Tumor",
-            "name_ja": "腎腫瘍（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Iodine Deficiency",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0058",
-            "slug": "iodine-deficiency",
-            "name": "Iodine Deficiency",
-            "name_ja": "ヨウ素欠乏症"
-          },
-          {
-            "id": "bird_0414",
-            "slug": "iodine-deficiency-thyroid-hyperplasia",
-            "name": "Iodine Deficiency (Thyroid Hyperplasia)",
-            "name_ja": "ヨウ素欠乏症（甲状腺過形成）（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Iron Storage Disease (non-hemochromatosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0059",
-            "slug": "iron-storage-disease-non-hemochromatosis",
-            "name": "Iron Storage Disease (non-hemochromatosis)",
-            "name_ja": "鉄蓄積症"
-          },
-          {
-            "id": "bird_0415",
-            "slug": "iron-storage-disease-hemochromatosis",
-            "name": "Iron Storage Disease (Hemochromatosis)",
-            "name_ja": "鉄蓄積症（ヘモクロマトーシス）（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Feather Plucking (Feather Destructive Behavior)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0063",
-            "slug": "feather-plucking-feather-destructive-behavior",
-            "name": "Feather Plucking (Feather Destructive Behavior)",
-            "name_ja": "毛引き症（羽毛破壊行動）"
-          },
-          {
-            "id": "bird_0404",
-            "slug": "feather-plucking",
-            "name": "Feather Plucking",
-            "name_ja": "毛引き（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Squamous Cell Carcinoma (Skin)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0069",
-            "slug": "squamous-cell-carcinoma-skin",
-            "name": "Squamous Cell Carcinoma (Skin)",
-            "name_ja": "扁平上皮癌（皮膚）"
-          },
-          {
-            "id": "bird_0452",
-            "slug": "squamous-cell-carcinoma",
-            "name": "Squamous Cell Carcinoma",
-            "name_ja": "扁平上皮癌（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Metabolic Bone Disease (MBD / Rickets)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0071",
-            "slug": "metabolic-bone-disease-mbd-rickets",
-            "name": "Metabolic Bone Disease (MBD / Rickets)",
-            "name_ja": "代謝性骨疾患（くる病）"
-          },
-          {
-            "id": "bird_0431",
-            "slug": "metabolic-bone-disease",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Egg Binding (Dystocia)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0073",
-            "slug": "egg-binding-dystocia",
-            "name": "Egg Binding (Dystocia)",
-            "name_ja": "卵詰まり（難産）"
-          },
-          {
-            "id": "bird_0405",
-            "slug": "egg-binding",
-            "name": "Egg Binding",
-            "name_ja": "卵詰まり（鳥）"
           }
         ]
       },
@@ -748,66 +980,6 @@
         ]
       },
       {
-        "base": "Red Mites (Dermanyssus gallinae)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0096",
-            "slug": "red-mites-dermanyssus-gallinae",
-            "name": "Red Mites (Dermanyssus gallinae)",
-            "name_ja": "ワクモ（赤ダニ）"
-          },
-          {
-            "id": "bird_0421",
-            "slug": "red-mite-dermanyssus",
-            "name": "Red Mite (Dermanyssus)",
-            "name_ja": "ワクモ（Dermanyssus）（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Roundworms (Ascaridia)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0098",
-            "slug": "roundworms-ascaridia",
-            "name": "Roundworms (Ascaridia)",
-            "name_ja": "回虫症（アスカリディア）"
-          },
-          {
-            "id": "bird_0423",
-            "slug": "roundworm-ascaridia",
-            "name": "Roundworm (Ascaridia)",
-            "name_ja": "回虫（アスカリジア）（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Capillaria (Hairworm)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0100",
-            "slug": "capillaria-hairworm",
-            "name": "Capillaria (Hairworm)",
-            "name_ja": "毛細線虫症（キャピラリア）"
-          },
-          {
-            "id": "bird_0232",
-            "slug": "capillaria-infection-hairworm-severe",
-            "name": "Capillaria Infection (Hairworm, Severe)",
-            "name_ja": "毛頭虫感染症（重度）"
-          },
-          {
-            "id": "bird_0424",
-            "slug": "capillaria-infection",
-            "name": "Capillaria Infection",
-            "name_ja": "毛細線虫症（鳥）"
-          }
-        ]
-      },
-      {
         "base": "Zinc Poisoning",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -828,150 +1000,6 @@
             "slug": "zinc-toxicosis",
             "name": "Zinc Toxicosis",
             "name_ja": "亜鉛中毒（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Avian Encephalomyelitis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0126",
-            "slug": "avian-encephalomyelitis",
-            "name": "Avian Encephalomyelitis",
-            "name_ja": "鳥脳脊髄炎"
-          },
-          {
-            "id": "bird_0227",
-            "slug": "avian-encephalomyelitis-epidemic-tremor",
-            "name": "Avian Encephalomyelitis (Epidemic Tremor)",
-            "name_ja": "鳥類脳脊髄炎（流行性振戦）"
-          }
-        ]
-      },
-      {
-        "base": "Marek's Disease",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0127",
-            "slug": "marek-s-disease",
-            "name": "Marek's Disease",
-            "name_ja": "マレック病"
-          },
-          {
-            "id": "bird_0224",
-            "slug": "marek-s-disease-avian",
-            "name": "Marek's Disease (Avian)",
-            "name_ja": "マレック病（鳥類）"
-          }
-        ]
-      },
-      {
-        "base": "Infectious Laryngotracheitis (ILT)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0130",
-            "slug": "infectious-laryngotracheitis-ilt",
-            "name": "Infectious Laryngotracheitis (ILT)",
-            "name_ja": "伝染性喉頭気管炎"
-          },
-          {
-            "id": "bird_0233",
-            "slug": "infectious-laryngotracheitis-ilt-advanced",
-            "name": "Infectious Laryngotracheitis (ILT) Advanced",
-            "name_ja": "伝染性喉頭気管炎（重度）"
-          }
-        ]
-      },
-      {
-        "base": "Avian Spirochetosis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0133",
-            "slug": "avian-spirochetosis",
-            "name": "Avian Spirochetosis",
-            "name_ja": "鳥スピロヘータ症"
-          },
-          {
-            "id": "bird_0235",
-            "slug": "avian-spirochetosis-borrelia",
-            "name": "Avian Spirochetosis (Borrelia)",
-            "name_ja": "鳥類スピロヘータ症（ボレリア属）"
-          }
-        ]
-      },
-      {
-        "base": "Cloacitis (Vent Gleet)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0174",
-            "slug": "cloacitis-vent-gleet",
-            "name": "Cloacitis (Vent Gleet)",
-            "name_ja": "総排泄腔炎（ベントグリート）"
-          },
-          {
-            "id": "bird_0439",
-            "slug": "cloacitis",
-            "name": "Cloacitis",
-            "name_ja": "総排泄腔炎（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Ingluvoliths (Crop Stones)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0176",
-            "slug": "ingluvoliths-crop-stones",
-            "name": "Ingluvoliths (Crop Stones)",
-            "name_ja": "素嚢結石"
-          },
-          {
-            "id": "bird_0292",
-            "slug": "ingluvoliths-crop-concretions",
-            "name": "Ingluvoliths (Crop Concretions)",
-            "name_ja": "嗉嚢結石"
-          }
-        ]
-      },
-      {
-        "base": "Egg Retention (Pre-laying)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0295",
-            "slug": "egg-retention-pre-laying",
-            "name": "Egg Retention (Pre-laying)",
-            "name_ja": "卵停滞（産卵前）"
-          },
-          {
-            "id": "bird_0383",
-            "slug": "retained-egg",
-            "name": "Retained Egg",
-            "name_ja": "卵停滞（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Bumblefoot (Advanced/Surgical)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0349",
-            "slug": "bumblefoot-advanced-surgical",
-            "name": "Bumblefoot (Advanced/Surgical)",
-            "name_ja": "バンブルフット（進行/外科）（鳥）"
-          },
-          {
-            "id": "bird_0406",
-            "slug": "bumblefoot-pododermatitis",
-            "name": "Bumblefoot (Pododermatitis)",
-            "name_ja": "バンブルフット（足底皮膚炎）（鳥）"
           }
         ]
       },

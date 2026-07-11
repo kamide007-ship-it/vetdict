@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 283,
-    "merge_clusters": 8,
-    "records_merged_away": 8,
+    "merge_clusters": 19,
+    "records_merged_away": 21,
     "archived": 0,
-    "served_after": 275
+    "served_after": 262
   },
   "merges": [
     {
@@ -153,90 +153,233 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0000",
+        "slug": "psittacine-beak-and-feather-disease-pbfd",
+        "name": "Psittacine Beak and Feather Disease (PBFD)",
+        "name_ja": "オウム類嘴羽毛病（PBFD）"
+      },
+      "merged": [
+        {
+          "id": "parrot_0162",
+          "slug": "psittacine-beak-and-feather-disease",
+          "name": "Psittacine Beak and Feather Disease",
+          "name_ja": "嘴羽毛病（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0006",
+        "slug": "papillomatosis",
+        "name": "Papillomatosis",
+        "name_ja": "乳頭腫症"
+      },
+      "merged": [
+        {
+          "id": "parrot_0167",
+          "slug": "papillomatosis-bile-duct",
+          "name": "Papillomatosis (Bile Duct)",
+          "name_ja": "乳頭腫症（胆管）（オウム）"
+        },
+        {
+          "id": "parrot_0251",
+          "slug": "papillomatosis-internal",
+          "name": "Papillomatosis (Internal)",
+          "name_ja": "内臓乳頭腫症（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0017",
+        "slug": "candidiasis",
+        "name": "Candidiasis",
+        "name_ja": "カンジダ症"
+      },
+      "merged": [
+        {
+          "id": "parrot_0184",
+          "slug": "candidiasis-crop-mycosis",
+          "name": "Candidiasis (Crop Mycosis)",
+          "name_ja": "カンジダ症（そ嚢真菌症）（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0024",
+        "slug": "heavy-metal-poisoning-lead-zinc",
+        "name": "Heavy Metal Poisoning (Lead/Zinc)",
+        "name_ja": "重金属中毒（鉛・亜鉛）"
+      },
+      "merged": [
+        {
+          "id": "parrot_0169",
+          "slug": "heavy-metal-poisoning",
+          "name": "Heavy Metal Poisoning",
+          "name_ja": "重金属中毒（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0039",
+        "slug": "gout-articular-and-visceral",
+        "name": "Gout (Articular and Visceral)",
+        "name_ja": "痛風（関節型・内臓型）"
+      },
+      "merged": [
+        {
+          "id": "parrot_0187",
+          "slug": "gout-visceral-articular",
+          "name": "Gout (Visceral/Articular)",
+          "name_ja": "痛風（内臓型/関節型）（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0043",
+        "slug": "egg-binding-dystocia",
+        "name": "Egg Binding (Dystocia)",
+        "name_ja": "卵塞（卵詰まり）"
+      },
+      "merged": [
+        {
+          "id": "parrot_0181",
+          "slug": "egg-binding",
+          "name": "Egg Binding",
+          "name_ja": "卵詰まり（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0047",
+        "slug": "crop-stasis-slow-crop-crop-impaction",
+        "name": "Crop Stasis (Slow Crop / Crop Impaction)",
+        "name_ja": "嗉嚢停滞（嗉嚢うっ滞）"
+      },
+      "merged": [
+        {
+          "id": "parrot_0183",
+          "slug": "crop-stasis",
+          "name": "Crop Stasis",
+          "name_ja": "そ嚢うっ滞（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0079",
+        "slug": "heat-stroke-hyperthermia",
+        "name": "Heat Stroke (Hyperthermia)",
+        "name_ja": "熱中症（高体温症）"
+      },
+      "merged": [
+        {
+          "id": "parrot_0242",
+          "slug": "heat-stroke",
+          "name": "Heat Stroke",
+          "name_ja": "熱中症（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0108",
+        "slug": "e-coli-infection-colibacillosis",
+        "name": "E. coli Infection (Colibacillosis)",
+        "name_ja": "大腸菌感染症"
+      },
+      "merged": [
+        {
+          "id": "parrot_0215",
+          "slug": "e-coli-infection",
+          "name": "E. coli Infection",
+          "name_ja": "大腸菌感染（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0125",
+        "slug": "gastrointestinal-obstruction",
+        "name": "Gastrointestinal Obstruction",
+        "name_ja": "消化管閉塞"
+      },
+      "merged": [
+        {
+          "id": "parrot_0270",
+          "slug": "gastrointestinal-obstruction-partial",
+          "name": "Gastrointestinal Obstruction (Partial)",
+          "name_ja": "消化管部分閉塞（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0160",
+        "slug": "proventricular-dilatation-disease-pdd-avian-bornavirus",
+        "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
+        "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）"
+      },
+      "merged": [
+        {
+          "id": "parrot_0161",
+          "slug": "proventricular-dilatation-disease",
+          "name": "Proventricular Dilatation Disease",
+          "name_ja": "前胃拡張症（オウム）"
+        },
+        {
+          "id": "parrot_0177",
+          "slug": "proventricular-dilatation-disease-pdd",
+          "name": "Proventricular Dilatation Disease (PDD)",
+          "name_ja": "前胃拡張症（PDD）（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Psittacine Beak and Feather Disease (PBFD)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0000",
-            "slug": "psittacine-beak-and-feather-disease-pbfd",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "オウム類嘴羽毛病（PBFD）"
-          },
-          {
-            "id": "parrot_0162",
-            "slug": "psittacine-beak-and-feather-disease",
-            "name": "Psittacine Beak and Feather Disease",
-            "name_ja": "嘴羽毛病（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "Papillomatosis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0006",
-            "slug": "papillomatosis",
-            "name": "Papillomatosis",
-            "name_ja": "乳頭腫症"
-          },
-          {
-            "id": "parrot_0167",
-            "slug": "papillomatosis-bile-duct",
-            "name": "Papillomatosis (Bile Duct)",
-            "name_ja": "乳頭腫症（胆管）（オウム）"
-          },
-          {
-            "id": "parrot_0251",
-            "slug": "papillomatosis-internal",
-            "name": "Papillomatosis (Internal)",
-            "name_ja": "内臓乳頭腫症（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "Candidiasis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0017",
-            "slug": "candidiasis",
-            "name": "Candidiasis",
-            "name_ja": "カンジダ症"
-          },
-          {
-            "id": "parrot_0184",
-            "slug": "candidiasis-crop-mycosis",
-            "name": "Candidiasis (Crop Mycosis)",
-            "name_ja": "カンジダ症（そ嚢真菌症）（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "Heavy Metal Poisoning (Lead/Zinc)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0024",
-            "slug": "heavy-metal-poisoning-lead-zinc",
-            "name": "Heavy Metal Poisoning (Lead/Zinc)",
-            "name_ja": "重金属中毒（鉛・亜鉛）"
-          },
-          {
-            "id": "parrot_0169",
-            "slug": "heavy-metal-poisoning",
-            "name": "Heavy Metal Poisoning",
-            "name_ja": "重金属中毒（オウム）"
-          }
-        ]
-      },
       {
         "base": "Liver Disease (Hepatitis)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -252,24 +395,6 @@
             "slug": "liver-disease-hepatic-lipidosis",
             "name": "Liver Disease (Hepatic Lipidosis)",
             "name_ja": "肝疾患（肝リピドーシス）（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "Gout (Articular and Visceral)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0039",
-            "slug": "gout-articular-and-visceral",
-            "name": "Gout (Articular and Visceral)",
-            "name_ja": "痛風（関節型・内臓型）"
-          },
-          {
-            "id": "parrot_0187",
-            "slug": "gout-visceral-articular",
-            "name": "Gout (Visceral/Articular)",
-            "name_ja": "痛風（内臓型/関節型）（オウム）"
           }
         ]
       },
@@ -294,120 +419,6 @@
             "slug": "arteriosclerosis",
             "name": "Arteriosclerosis",
             "name_ja": "動脈硬化症（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "Egg Binding (Dystocia)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0043",
-            "slug": "egg-binding-dystocia",
-            "name": "Egg Binding (Dystocia)",
-            "name_ja": "卵塞（卵詰まり）"
-          },
-          {
-            "id": "parrot_0181",
-            "slug": "egg-binding",
-            "name": "Egg Binding",
-            "name_ja": "卵詰まり（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "Crop Stasis (Slow Crop / Crop Impaction)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0047",
-            "slug": "crop-stasis-slow-crop-crop-impaction",
-            "name": "Crop Stasis (Slow Crop / Crop Impaction)",
-            "name_ja": "嗉嚢停滞（嗉嚢うっ滞）"
-          },
-          {
-            "id": "parrot_0183",
-            "slug": "crop-stasis",
-            "name": "Crop Stasis",
-            "name_ja": "そ嚢うっ滞（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "Heat Stroke (Hyperthermia)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0079",
-            "slug": "heat-stroke-hyperthermia",
-            "name": "Heat Stroke (Hyperthermia)",
-            "name_ja": "熱中症（高体温症）"
-          },
-          {
-            "id": "parrot_0242",
-            "slug": "heat-stroke",
-            "name": "Heat Stroke",
-            "name_ja": "熱中症（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "E. coli Infection (Colibacillosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0108",
-            "slug": "e-coli-infection-colibacillosis",
-            "name": "E. coli Infection (Colibacillosis)",
-            "name_ja": "大腸菌感染症"
-          },
-          {
-            "id": "parrot_0215",
-            "slug": "e-coli-infection",
-            "name": "E. coli Infection",
-            "name_ja": "大腸菌感染（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "Gastrointestinal Obstruction",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0125",
-            "slug": "gastrointestinal-obstruction",
-            "name": "Gastrointestinal Obstruction",
-            "name_ja": "消化管閉塞"
-          },
-          {
-            "id": "parrot_0270",
-            "slug": "gastrointestinal-obstruction-partial",
-            "name": "Gastrointestinal Obstruction (Partial)",
-            "name_ja": "消化管部分閉塞（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0160",
-            "slug": "proventricular-dilatation-disease-pdd-avian-bornavirus",
-            "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
-            "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）"
-          },
-          {
-            "id": "parrot_0161",
-            "slug": "proventricular-dilatation-disease",
-            "name": "Proventricular Dilatation Disease",
-            "name_ja": "前胃拡張症（オウム）"
-          },
-          {
-            "id": "parrot_0177",
-            "slug": "proventricular-dilatation-disease-pdd",
-            "name": "Proventricular Dilatation Disease (PDD)",
-            "name_ja": "前胃拡張症（PDD）（オウム）"
           }
         ]
       },
