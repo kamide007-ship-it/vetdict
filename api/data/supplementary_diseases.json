@@ -1385,7 +1385,7 @@
   },
   {
     "name": "Cuterebra (Bot Fly Larva)",
-    "name_ja": "ウマバエ幼虫症（ウサギ）",
+    "name_ja": "クテレブラ症（ウサギ）",
     "species": "Rabbit",
     "symptoms": [
       "appetite_loss",
@@ -1398,7 +1398,7 @@
       "weight_loss"
     ],
     "description": "Cuterebra (Bot Fly Larva) in Rabbit",
-    "description_ja": "ウサギにおける寄生虫性の皮膚疾患。ウマバエ幼虫症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
+    "description_ja": "ウサギにおける寄生虫性の皮膚疾患。クテレブラ症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
     "urgency": "moderate",
     "recommended_tests": [
       "糞便検査 (Fecal Examination)",
@@ -1411,9 +1411,9 @@
     "clinical_signs": "Pruritus, skin lesions, hair/feather loss, diarrhea, weight loss, anemia, poor coat/feather condition, visible parasites or eggs, pot-bellied appearance in heavy infestations.",
     "clinical_signs_ja": "掻痒、皮膚病変、脱毛・脱羽、下痢、体重減少、貧血、被毛・羽毛の悪化、寄生虫・虫卵の目視、重度寄生では腹部膨満が見られる。",
     "diagnosis": "Diagnosis of cuterebra (bot fly larva) is based on clinical signs, thorough history, and physical examination. Recommended diagnostics include: 糞便検査 (Fecal Examination), 糞便浮遊法 (Fecal Flotation), 全血球計算 (CBC), 皮膚掻爬検査 (Skin Scraping). Differential diagnosis should consider other conditions presenting with similar clinical signs in rabbit.",
-    "diagnosis_ja": "ウマバエ幼虫症（ウサギ）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 糞便検査 (Fecal Examination), 糞便浮遊法 (Fecal Flotation), 全血球計算 (CBC), 皮膚掻爬検査 (Skin Scraping)。ウサギにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
-    "pathophysiology_ja": "ウサギにおける寄生虫性の皮膚疾患。ウマバエ幼虫症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
-    "causes_ja": "ウサギにおける寄生虫性の皮膚疾患。ウマバエ幼虫症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
+    "diagnosis_ja": "クテレブラ症（ウサギ）の診断は臨床徴候、詳細な病歴、身体検査に基づく。推奨される検査: 糞便検査 (Fecal Examination), 糞便浮遊法 (Fecal Flotation), 全血球計算 (CBC), 皮膚掻爬検査 (Skin Scraping)。ウサギにおける類似の臨床徴候を呈する他疾患との鑑別が必要である。",
+    "pathophysiology_ja": "ウサギにおける寄生虫性の皮膚疾患。クテレブラ症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
+    "causes_ja": "ウサギにおける寄生虫性の皮膚疾患。クテレブラ症は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。"
   },
   {
     "name": "Toxoplasmosis",

@@ -58,8 +58,13 @@
       - **curated 同一疾患統合**: strict key が保留した vet 承認済み11ペア（胃拡張/涙嚢炎/DIC/増殖性腸症 等）を idempotent に反映
       - パスツレラ症/粘液腫症/妊娠中毒症のサブタイプ・全ファミリー79は review（未適用）
       - 純Python で loader 検証済み（452→421、31リダイレクト解決、Cuterebra/Warble 両方 served 維持）
-- [ ] **誤ラベル rename（承認済み・別バッチ）**: `rabbit_0162 Dermatophilosis`（name_ja 皮膚糸状菌症＝真菌白癬と誤）→ デルマトフィルス症、
-      `rabbit_0298 Cuterebra`（name_ja ウマバエ幼虫症）→ クテレブラ症。stable-id/URL 保全を検証の上で実施。
+- [x] **誤ラベル rename（承認済み・適用）**: `rabbit_0162 Dermatophilosis` name_ja 皮膚糸状菌症（＝真菌白癬と誤）→ **デルマトフィルス症**（7フィールド、entry自身の causes/treatment は既に細菌 Dermatophilus と正記載＝整合）、
+      `rabbit_0298 Cuterebra` name_ja ウマバエ幼虫症（ウサギ）→ **クテレブラ症（ウサギ）**（5フィールド）。
+      - **英語 `name` は不変**（slug/SEO URL 保全）、`name_ja` のみ変更。
+      - **id 保全**: `id_locks/rabbit.json` に新キー→同id（rabbit_0162/0298）を追加。`stable_id_for` でid不変を検証。
+      - 真の白癬エントリ（皮膚糸状菌症（白癬））は無改変、rabbit_0212 Warble Fly も無改変。
+      - `disease_search_index.json` 再生成（差分＝当該2件のみ）。canonical 再ビルドで Cuterebra は自然に分離（31統合維持）。
+      - バックアップ: `backups/2026-07-11-1138/`（改変前3ファイル）。
 - [ ] 他19種への横展開（rabbit と同手順、獣医レビュー前提）
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**

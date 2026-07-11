@@ -687,30 +687,6 @@
         ]
       },
       {
-        "base": "Ringworm (Dermatophytosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "rabbit_0033",
-            "slug": "ringworm-dermatophytosis",
-            "name": "Ringworm (Dermatophytosis)",
-            "name_ja": "皮膚糸状菌症（白癬）"
-          },
-          {
-            "id": "rabbit_0162",
-            "slug": "dermatophilosis",
-            "name": "Dermatophilosis",
-            "name_ja": "皮膚糸状菌症"
-          },
-          {
-            "id": "rabbit_0302",
-            "slug": "dermatophytosis-ringworm",
-            "name": "Dermatophytosis (Ringworm)",
-            "name_ja": "皮膚糸状菌症（白癬）（ウサギ）"
-          }
-        ]
-      },
-      {
         "base": "Pregnancy Toxemia (Ketosis)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -869,24 +845,6 @@
             "slug": "renal-cysts-polycystic",
             "name": "Renal Cysts (Polycystic)",
             "name_ja": "多発性腎嚢胞"
-          }
-        ]
-      },
-      {
-        "base": "Warble Fly Larvae (Hypoderma)",
-        "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
-        "members": [
-          {
-            "id": "rabbit_0212",
-            "slug": "warble-fly-larvae-hypoderma",
-            "name": "Warble Fly Larvae (Hypoderma)",
-            "name_ja": "ウマバエ幼虫症"
-          },
-          {
-            "id": "rabbit_0298",
-            "slug": "cuterebra-bot-fly-larva",
-            "name": "Cuterebra (Bot Fly Larva)",
-            "name_ja": "ウマバエ幼虫症（ウサギ）"
           }
         ]
       },
@@ -1133,7 +1091,7 @@
           {
             "id": "rabbit_0162",
             "name": "Dermatophilosis",
-            "name_ja": "皮膚糸状菌症"
+            "name_ja": "デルマトフィルス症"
           },
           {
             "id": "rabbit_0233",
