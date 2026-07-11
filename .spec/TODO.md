@@ -76,8 +76,13 @@
       - **Ileus(機能性) vs Intestinal Obstruction(機械性)** が guinea_pig で**統合済み**（腸閉塞 name_ja 共有）。要指示。
 - [ ] **horse T103**（23クラスタ・別スキーマ・明示id保持）: 大半が略称/別名の同一疾患（Strangles/DDSP/ERU/EPM/EMS/PPID等）。
       curated 統合の worksheet 化が次バッチ候補。fish は重複0のため対象外。
-- [ ] 残り species（ferret/bird/parakeet 等17種）は既存auto canonical に加え、rabbit/cat 同様の
-      curated 同一疾患ペア（略称・修飾語違い）の掘り起こしが可能（獣医レビュー前提）。
+- [~] 残り species（ferret/bird/parakeet 等）の既存 auto canonical（**17種がライブ＝`apply_canonical_map`で
+      serve時適用済み**、全ライブ統合175件中173件が `same disease modulo species tag / identical name` の安全ティア。
+      サブタイプ/病型の不確実クラスタは各サイドカーの `review` に未適用退避）に加え、rabbit/cat 同様の
+      **curated 同一疾患ペア（略称・修飾語違い）の掘り起こし**が可能（獣医レビュー前提）。
+      - **要判断（Kentaro）**: 既存16種の重複ティア dedup を **(a)追認 / (b)ロールバック / (c)種別に再レビュー** のいずれにするか。
+        物理削除なし・301・サイドカー編集で即ロールバック可。
+      - 上記「全canonical監査」で surface した **Proptosis/Exophthalmos・Ileus/腸閉塞** の要判断マージも同枠。
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**
 - [x] **T105/T106 fail-closed 公開ゲート＋ワークリスト**（main, merged）→ `.spec/T105_T106_DOSAGE_GATE.md`
