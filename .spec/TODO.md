@@ -65,7 +65,19 @@
       - 真の白癬エントリ（皮膚糸状菌症（白癬））は無改変、rabbit_0212 Warble Fly も無改変。
       - `disease_search_index.json` 再生成（差分＝当該2件のみ）。canonical 再ビルドで Cuterebra は自然に分離（31統合維持）。
       - バックアップ: `backups/2026-07-11-1138/`（改変前3ファイル）。
-- [ ] 他19種への横展開（rabbit と同手順、獣医レビュー前提）
+- [x] **cat 適用**（「続けてください」）→ `.spec/CAT_CONSOLIDATION_REVIEW.md`
+      `api/data/canonical/cat.json`（**550→547 served**、curated統合3＝CKD/アセトアミノフェン/ビタミンA過剰症）。
+      - FIP/EGC/SCC/MCT/髄膜腫サブタイプは分離維持（review）。**FIC は英語名一致→dedup層で既に解消**（canonical不要・実測確認）。
+      - ⚠️ **cat も Dermatophytosis(真菌)/Dermatophilosis(細菌) 誤ラベル**あり（builder は非統合）。rename は別バッチ推奨。
+- [x] **全canonical 監査（read-only）**: 既存17種のauto統合を「英語名乖離」で検査。大半は正当なsynonym統合だが、
+      **要判断の既適用マージ**を surface（獣医の可否確認待ち・自動変更しない）:
+      - **Proptosis(眼球脱出・急性) vs Exophthalmos(球後性・慢性)** が hamster/chinchilla/hedgehog/sugar_glider の
+        既存canonicalで**統合済み**（rabbit では分離維持と判断した区別）。統合維持か分離か要指示。
+      - **Ileus(機能性) vs Intestinal Obstruction(機械性)** が guinea_pig で**統合済み**（腸閉塞 name_ja 共有）。要指示。
+- [ ] **horse T103**（23クラスタ・別スキーマ・明示id保持）: 大半が略称/別名の同一疾患（Strangles/DDSP/ERU/EPM/EMS/PPID等）。
+      curated 統合の worksheet 化が次バッチ候補。fish は重複0のため対象外。
+- [ ] 残り species（ferret/bird/parakeet 等17種）は既存auto canonical に加え、rabbit/cat 同様の
+      curated 同一疾患ペア（略称・修飾語違い）の掘り起こしが可能（獣医レビュー前提）。
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**
 - [x] **T105/T106 fail-closed 公開ゲート＋ワークリスト**（main, merged）→ `.spec/T105_T106_DOSAGE_GATE.md`

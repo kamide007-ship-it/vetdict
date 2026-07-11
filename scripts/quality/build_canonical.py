@@ -98,6 +98,15 @@ _CURATED_MERGE: dict[str, list[list[str]]] = {
         ["rabbit_0234", "rabbit_0402"],  # ハッチバーン (Hutch Burn)
         ["rabbit_0252", "rabbit_0352"],  # 脊椎骨折（胸腰椎） = 脊椎骨折
     ],
+    "cat": [
+        # NB: pairs with IDENTICAL English names (→ identical slug) are already
+        # collapsed by dedupe_disease_list in the served path; the slug-based
+        # canonical loader cannot merge them, so they are NOT listed here
+        # (e.g. Feline Idiopathic Cystitis (FIC) cat_0040/cat_0218).
+        ["cat_0034", "cat_0531"],  # 慢性腎臓病 (CKD)
+        ["cat_0198", "cat_0465"],  # アセトアミノフェン中毒 = 急性型
+        ["cat_0257", "cat_0484"],  # 猫ビタミンA過剰症 = 慢性型
+    ],
 }
 
 
