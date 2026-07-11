@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 250,
-    "merge_clusters": 9,
-    "records_merged_away": 9,
+    "merge_clusters": 12,
+    "records_merged_away": 12,
     "archived": 0,
-    "served_after": 241
+    "served_after": 238
   },
   "merges": [
     {
@@ -171,6 +171,63 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0018",
+        "slug": "pneumonia-lower-respiratory-infection",
+        "name": "Pneumonia (Lower Respiratory Infection)",
+        "name_ja": "肺炎（下部呼吸器感染症）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0207",
+          "slug": "pneumonia",
+          "name": "Pneumonia",
+          "name_ja": "肺炎（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0040",
+        "slug": "hepatic-lipidosis-fatty-liver-disease",
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0197",
+          "slug": "hepatic-lipidosis",
+          "name": "Hepatic Lipidosis",
+          "name_ja": "肝リピドーシス（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0064",
+        "slug": "hyperthermia-heat-stroke",
+        "name": "Hyperthermia (Heat Stroke)",
+        "name_ja": "高体温症（熱中症）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0236",
+          "slug": "hyperthermia",
+          "name": "Hyperthermia",
+          "name_ja": "高体温症（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
@@ -252,24 +309,6 @@
             "slug": "yellow-fungus-disease",
             "name": "Yellow Fungus Disease",
             "name_ja": "黄色真菌病（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Pneumonia (Lower Respiratory Infection)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0018",
-            "slug": "pneumonia-lower-respiratory-infection",
-            "name": "Pneumonia (Lower Respiratory Infection)",
-            "name_ja": "肺炎（下部呼吸器感染症）"
-          },
-          {
-            "id": "lizard_0207",
-            "slug": "pneumonia",
-            "name": "Pneumonia",
-            "name_ja": "肺炎（トカゲ）"
           }
         ]
       },
@@ -370,24 +409,6 @@
         ]
       },
       {
-        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0040",
-            "slug": "hepatic-lipidosis-fatty-liver-disease",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "lizard_0197",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（トカゲ）"
-          }
-        ]
-      },
-      {
         "base": "Anorexia (Non-specific)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -408,24 +429,6 @@
             "slug": "anorexia-stress-related",
             "name": "Anorexia (Stress-Related)",
             "name_ja": "ストレス性拒食（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Hyperthermia (Heat Stroke)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0064",
-            "slug": "hyperthermia-heat-stroke",
-            "name": "Hyperthermia (Heat Stroke)",
-            "name_ja": "高体温症（熱中症）"
-          },
-          {
-            "id": "lizard_0236",
-            "slug": "hyperthermia",
-            "name": "Hyperthermia",
-            "name_ja": "高体温症（トカゲ）"
           }
         ]
       },

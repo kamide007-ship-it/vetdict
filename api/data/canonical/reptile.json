@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 286,
-    "merge_clusters": 6,
-    "records_merged_away": 6,
+    "merge_clusters": 13,
+    "records_merged_away": 13,
     "archived": 0,
-    "served_after": 280
+    "served_after": 273
   },
   "merges": [
     {
@@ -117,30 +117,145 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0007",
+        "slug": "thiamine-vitamin-b1-deficiency",
+        "name": "Thiamine (Vitamin B1) Deficiency",
+        "name_ja": "チアミン（ビタミンB1）欠乏症"
+      },
+      "merged": [
+        {
+          "id": "reptile_0170",
+          "slug": "thiamine-deficiency",
+          "name": "Thiamine Deficiency",
+          "name_ja": "チアミン欠乏症（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0040",
+        "slug": "hepatic-lipidosis-fatty-liver-disease",
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0205",
+          "slug": "hepatic-lipidosis",
+          "name": "Hepatic Lipidosis",
+          "name_ja": "肝リピドーシス（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0058",
+        "slug": "pre-ovulatory-follicular-stasis",
+        "name": "Pre-ovulatory Follicular Stasis",
+        "name_ja": "排卵前卵胞停滞"
+      },
+      "merged": [
+        {
+          "id": "reptile_0161",
+          "slug": "preovulatory-follicular-stasis-yolk-coelomitis",
+          "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
+          "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0063",
+        "slug": "renal-failure-chronic-kidney-disease",
+        "name": "Renal Failure (Chronic Kidney Disease)",
+        "name_ja": "腎不全（慢性腎疾患）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0198",
+          "slug": "renal-failure",
+          "name": "Renal Failure",
+          "name_ja": "腎不全（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0064",
+        "slug": "bladder-stones-urolithiasis",
+        "name": "Bladder Stones (Urolithiasis)",
+        "name_ja": "膀胱結石（尿路結石症）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0200",
+          "slug": "bladder-stone",
+          "name": "Bladder Stone",
+          "name_ja": "膀胱結石（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0074",
+        "slug": "hyperthermia-heat-stroke",
+        "name": "Hyperthermia (Heat Stroke)",
+        "name_ja": "高体温症（熱中症）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0244",
+          "slug": "hyperthermia",
+          "name": "Hyperthermia",
+          "name_ja": "高体温症（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0153",
+        "slug": "necrotic-dermatitis-vesicular-dermatitis",
+        "name": "Necrotic Dermatitis (Vesicular Dermatitis)",
+        "name_ja": "壊死性皮膚炎（水疱性皮膚炎）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0168",
+          "slug": "necrotic-dermatitis",
+          "name": "Necrotic Dermatitis",
+          "name_ja": "壊死性皮膚炎（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Thiamine (Vitamin B1) Deficiency",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0007",
-            "slug": "thiamine-vitamin-b1-deficiency",
-            "name": "Thiamine (Vitamin B1) Deficiency",
-            "name_ja": "チアミン（ビタミンB1）欠乏症"
-          },
-          {
-            "id": "reptile_0170",
-            "slug": "thiamine-deficiency",
-            "name": "Thiamine Deficiency",
-            "name_ja": "チアミン欠乏症（爬虫類）"
-          }
-        ]
-      },
       {
         "base": "Amoebic Infection (Entamoeba)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -214,24 +329,6 @@
         ]
       },
       {
-        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0040",
-            "slug": "hepatic-lipidosis-fatty-liver-disease",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "reptile_0205",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（爬虫類）"
-          }
-        ]
-      },
-      {
         "base": "Anorexia (Non-specific)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -252,78 +349,6 @@
             "slug": "anorexia-stress-related",
             "name": "Anorexia (Stress-Related)",
             "name_ja": "ストレス性拒食（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Pre-ovulatory Follicular Stasis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0058",
-            "slug": "pre-ovulatory-follicular-stasis",
-            "name": "Pre-ovulatory Follicular Stasis",
-            "name_ja": "排卵前卵胞停滞"
-          },
-          {
-            "id": "reptile_0161",
-            "slug": "preovulatory-follicular-stasis-yolk-coelomitis",
-            "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
-            "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）"
-          }
-        ]
-      },
-      {
-        "base": "Renal Failure (Chronic Kidney Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0063",
-            "slug": "renal-failure-chronic-kidney-disease",
-            "name": "Renal Failure (Chronic Kidney Disease)",
-            "name_ja": "腎不全（慢性腎疾患）"
-          },
-          {
-            "id": "reptile_0198",
-            "slug": "renal-failure",
-            "name": "Renal Failure",
-            "name_ja": "腎不全（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Bladder Stones (Urolithiasis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0064",
-            "slug": "bladder-stones-urolithiasis",
-            "name": "Bladder Stones (Urolithiasis)",
-            "name_ja": "膀胱結石（尿路結石症）"
-          },
-          {
-            "id": "reptile_0200",
-            "slug": "bladder-stone",
-            "name": "Bladder Stone",
-            "name_ja": "膀胱結石（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Hyperthermia (Heat Stroke)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0074",
-            "slug": "hyperthermia-heat-stroke",
-            "name": "Hyperthermia (Heat Stroke)",
-            "name_ja": "高体温症（熱中症）"
-          },
-          {
-            "id": "reptile_0244",
-            "slug": "hyperthermia",
-            "name": "Hyperthermia",
-            "name_ja": "高体温症（爬虫類）"
           }
         ]
       },
@@ -360,24 +385,6 @@
             "slug": "osteomyelitis-jaw",
             "name": "Osteomyelitis (Jaw)",
             "name_ja": "顎骨骨髄炎"
-          }
-        ]
-      },
-      {
-        "base": "Necrotic Dermatitis (Vesicular Dermatitis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0153",
-            "slug": "necrotic-dermatitis-vesicular-dermatitis",
-            "name": "Necrotic Dermatitis (Vesicular Dermatitis)",
-            "name_ja": "壊死性皮膚炎（水疱性皮膚炎）"
-          },
-          {
-            "id": "reptile_0168",
-            "slug": "necrotic-dermatitis",
-            "name": "Necrotic Dermatitis",
-            "name_ja": "壊死性皮膚炎（爬虫類）"
           }
         ]
       },

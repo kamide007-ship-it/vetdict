@@ -92,7 +92,14 @@
       統合数: dog 32(591)・ferret 30(247)・bird 49(501)・parakeet 40(414)・parrot 19(262)。
       ⚠️ **pre-existing slug衝突1件**（bird Psittacosis bird_0010/bird_0398: "/" vs "()" で同一slug→loader統合不可、
       name_ja も （鳥）差で dedup 非対象）。**私の変更前から存在**の真の重複。id対応loader化 or 片方リネームで解消可（follow-up）。
-- [ ] **残り: reptile/tortoise/snake/lizard/amphibian/exotic_other の curated 掘り起こし**（同手順・獣医レビュー前提）。
+- [x] **curated 掘り起こし: reptile/tortoise/snake/lizard/amphibian/exotic_other（承認「2」完了）**:
+      base+種タグの完全一致ペアのみ自動生成（51ペア）＋keep-separate 厳守（内臓/関節痛風・四肢/甲羅骨折・熱傷/化学熱傷・
+      温熱/低温ストレス・ツボカビ Bd/Bsal・食欲不振/拒食・混在ダニクラスタは review 保留）。synonym ペア（スケイルロット/鱗腐敗 等）も
+      安全側で review 保留。loader で全種 keep-separate 維持を確認。
+      reptile 13(273)・tortoise 15(273)・snake 9(239)・lizard 12(238)・amphibian 8(250)・exotic_other 29(259)。
+      - 既存 pre-existing slug衝突（lizard Infectious Stomatitis・exotic_other PED）は dedup が集約するため無害（実測1件）。
+      - **#2 完了**: 全20種に canonical サイドカー（fish は重複0で対象外）。**計377統合・約400レコード論理集約**。
+      - **残る review 保留**（獣医レビューで統合可否判断）: 各種の synonym ペア・多病型クラスタ（痛風型/骨折部位/熱傷病因 等）。
 - [x] **cat 誤ラベル rename + 治療修正（承認「1」）**: `cat_0177 Dermatophilosis`・`cat_0268 Feline Dermatophilosis` の
       name_ja（皮膚糸状菌症＝真菌白癬と誤）→ **デルマトフィルス症 / 猫デルマトフィルス症**（causes/patho/prevention/prognosis の
       ラベルも修正、内容は既に細菌 Dermatophilus で整合）。**⚠ 発見: 両者の treatment_ja が抗真菌薬（Microsporum/イトラコナゾール）＝

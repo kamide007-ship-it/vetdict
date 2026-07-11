@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 288,
-    "merge_clusters": 9,
-    "records_merged_away": 9,
+    "merge_clusters": 15,
+    "records_merged_away": 15,
     "archived": 0,
-    "served_after": 279
+    "served_after": 273
   },
   "merges": [
     {
@@ -171,6 +171,120 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0006",
+        "slug": "pneumonia-lower-respiratory-infection",
+        "name": "Pneumonia (Lower Respiratory Infection)",
+        "name_ja": "肺炎（下部呼吸器感染症）"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0224",
+          "slug": "pneumonia",
+          "name": "Pneumonia",
+          "name_ja": "肺炎（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0032",
+        "slug": "hepatic-lipidosis-fatty-liver-disease",
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0215",
+          "slug": "hepatic-lipidosis",
+          "name": "Hepatic Lipidosis",
+          "name_ja": "肝リピドーシス（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0158",
+        "slug": "cystic-calculi-bladder-stones-urate",
+        "name": "Cystic Calculi (Bladder Stones) - Urate",
+        "name_ja": "膀胱結石（尿酸塩型）"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0176",
+          "slug": "bladder-stone-urate",
+          "name": "Bladder Stone (Urate)",
+          "name_ja": "膀胱結石（尿酸塩）（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0063",
+        "slug": "hyperthermia-heat-stroke",
+        "name": "Hyperthermia (Heat Stroke)",
+        "name_ja": "高体温症（熱中症）"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0253",
+          "slug": "hyperthermia",
+          "name": "Hyperthermia",
+          "name_ja": "高体温症（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0072",
+        "slug": "calcium-deficiency-dietary-hypocalcemia",
+        "name": "Calcium Deficiency (Dietary Hypocalcemia)",
+        "name_ja": "カルシウム欠乏症（食事性低カルシウム血症）"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0250",
+          "slug": "calcium-deficiency",
+          "name": "Calcium Deficiency",
+          "name_ja": "カルシウム欠乏症（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0075",
+        "slug": "eye-infection-infectious-ophthalmitis",
+        "name": "Eye Infection (Infectious Ophthalmitis)",
+        "name_ja": "眼感染症（感染性眼炎）"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0231",
+          "slug": "eye-infection",
+          "name": "Eye Infection",
+          "name_ja": "眼感染症（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
@@ -192,72 +306,6 @@
             "slug": "shell-rot",
             "name": "Shell Rot",
             "name_ja": "甲羅腐敗（リクガメ）"
-          }
-        ]
-      },
-      {
-        "base": "Pneumonia (Lower Respiratory Infection)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "tortoise_0006",
-            "slug": "pneumonia-lower-respiratory-infection",
-            "name": "Pneumonia (Lower Respiratory Infection)",
-            "name_ja": "肺炎（下部呼吸器感染症）"
-          },
-          {
-            "id": "tortoise_0224",
-            "slug": "pneumonia",
-            "name": "Pneumonia",
-            "name_ja": "肺炎（リクガメ）"
-          }
-        ]
-      },
-      {
-        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "tortoise_0032",
-            "slug": "hepatic-lipidosis-fatty-liver-disease",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "tortoise_0215",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（リクガメ）"
-          }
-        ]
-      },
-      {
-        "base": "Bladder Stones (Urolithiasis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "tortoise_0040",
-            "slug": "bladder-stones-urolithiasis",
-            "name": "Bladder Stones (Urolithiasis)",
-            "name_ja": "膀胱結石"
-          },
-          {
-            "id": "tortoise_0158",
-            "slug": "cystic-calculi-bladder-stones-urate",
-            "name": "Cystic Calculi (Bladder Stones) - Urate",
-            "name_ja": "膀胱結石（尿酸塩型）"
-          },
-          {
-            "id": "tortoise_0176",
-            "slug": "bladder-stone-urate",
-            "name": "Bladder Stone (Urate)",
-            "name_ja": "膀胱結石（尿酸塩）（リクガメ）"
-          },
-          {
-            "id": "tortoise_0209",
-            "slug": "bladder-stone",
-            "name": "Bladder Stone",
-            "name_ja": "膀胱結石（リクガメ）"
           }
         ]
       },
@@ -294,60 +342,6 @@
             "slug": "abscess",
             "name": "Abscess",
             "name_ja": "膿瘍（リクガメ）"
-          }
-        ]
-      },
-      {
-        "base": "Hyperthermia (Heat Stroke)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "tortoise_0063",
-            "slug": "hyperthermia-heat-stroke",
-            "name": "Hyperthermia (Heat Stroke)",
-            "name_ja": "高体温症（熱中症）"
-          },
-          {
-            "id": "tortoise_0253",
-            "slug": "hyperthermia",
-            "name": "Hyperthermia",
-            "name_ja": "高体温症（リクガメ）"
-          }
-        ]
-      },
-      {
-        "base": "Calcium Deficiency (Dietary Hypocalcemia)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "tortoise_0072",
-            "slug": "calcium-deficiency-dietary-hypocalcemia",
-            "name": "Calcium Deficiency (Dietary Hypocalcemia)",
-            "name_ja": "カルシウム欠乏症（食事性低カルシウム血症）"
-          },
-          {
-            "id": "tortoise_0250",
-            "slug": "calcium-deficiency",
-            "name": "Calcium Deficiency",
-            "name_ja": "カルシウム欠乏症（リクガメ）"
-          }
-        ]
-      },
-      {
-        "base": "Eye Infection (Infectious Ophthalmitis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "tortoise_0075",
-            "slug": "eye-infection-infectious-ophthalmitis",
-            "name": "Eye Infection (Infectious Ophthalmitis)",
-            "name_ja": "眼感染症（感染性眼炎）"
-          },
-          {
-            "id": "tortoise_0231",
-            "slug": "eye-infection",
-            "name": "Eye Infection",
-            "name_ja": "眼感染症（リクガメ）"
           }
         ]
       },

@@ -266,6 +266,75 @@ _CURATED_MERGE: dict[str, list[list[str]]] = {
         ["parrot_0125", "parrot_0270"],  # 消化管閉塞
         ["parrot_0160", "parrot_0161", "parrot_0177"],  # 前胃拡張症 (PDD)
     ],
+    # reptile group + exotic_other: same-disease base+species-tag pairs
+    # (exact base-name match only; synonym pairs like スケイルロット/鱗腐敗 and
+    # multi-form clusters — 内臓/関節痛風, 四肢/甲羅骨折, 熱傷/化学熱傷, 温熱/低温,
+    # Bd/Bsal ツボカビ, 食欲不振/拒食 — deliberately left in review).
+    "reptile": [
+        ["reptile_0007", "reptile_0170"],
+        ["reptile_0040", "reptile_0205"],
+        ["reptile_0058", "reptile_0161"],
+        ["reptile_0063", "reptile_0198"],
+        ["reptile_0064", "reptile_0200"],
+        ["reptile_0074", "reptile_0244"],
+        ["reptile_0153", "reptile_0168"],
+    ],
+    "tortoise": [
+        ["tortoise_0006", "tortoise_0224"],
+        ["tortoise_0032", "tortoise_0215"],
+        ["tortoise_0040", "tortoise_0158", "tortoise_0176", "tortoise_0209"],
+        # NB: Egg Binding (Dystocia) tortoise_0043/0162 share an identical English
+        # name (→ identical slug); dedupe_disease_list already collapses them, so
+        # not listed here (the slug-based loader cannot merge same-slug entries).
+        ["tortoise_0063", "tortoise_0253"],
+        ["tortoise_0072", "tortoise_0250"],
+        ["tortoise_0075", "tortoise_0231"],
+    ],
+    "snake": [
+        ["snake_0008", "snake_0201"],
+        ["snake_0012", "snake_0148"],
+        ["snake_0030", "snake_0190"],
+        ["snake_0044", "snake_0185"],
+    ],
+    "lizard": [
+        ["lizard_0018", "lizard_0207"],
+        ["lizard_0040", "lizard_0197"],
+        ["lizard_0064", "lizard_0236"],
+    ],
+    "amphibian": [
+        ["amphibian_0020", "amphibian_0178"],
+        ["amphibian_0022", "amphibian_0254"],
+        ["amphibian_0036", "amphibian_0220"],
+        ["amphibian_0130", "amphibian_0198"],
+    ],
+    "exotic_other": [
+        ["exotic_other_0005", "exotic_other_0202"],
+        ["exotic_other_0012", "exotic_other_0149"],
+        ["exotic_other_0013", "exotic_other_0024", "exotic_other_0066", "exotic_other_0147"],
+        ["exotic_other_0015", "exotic_other_0065", "exotic_other_0163"],
+        ["exotic_other_0016", "exotic_other_0164"],
+        ["exotic_other_0017", "exotic_other_0172"],
+        ["exotic_other_0019", "exotic_other_0182"],
+        ["exotic_other_0025", "exotic_other_0199"],
+        ["exotic_other_0028", "exotic_other_0234"],
+        ["exotic_other_0029", "exotic_other_0236"],
+        ["exotic_other_0030", "exotic_other_0237"],
+        ["exotic_other_0032", "exotic_other_0144"],
+        ["exotic_other_0033", "exotic_other_0143"],
+        ["exotic_other_0034", "exotic_other_0220"],
+        ["exotic_other_0035", "exotic_other_0187"],
+        ["exotic_other_0038", "exotic_other_0191"],
+        ["exotic_other_0045", "exotic_other_0238"],
+        ["exotic_other_0046", "exotic_other_0167"],
+        ["exotic_other_0047", "exotic_other_0155"],
+        ["exotic_other_0048", "exotic_other_0154"],
+        ["exotic_other_0049", "exotic_other_0203"],
+        ["exotic_other_0052", "exotic_other_0150"],
+        ["exotic_other_0054", "exotic_other_0165"],
+        ["exotic_other_0056", "exotic_other_0173"],
+        ["exotic_other_0057", "exotic_other_0063", "exotic_other_0174"],
+        ["exotic_other_0067", "exotic_other_0240"],
+    ],
 }
 
 
