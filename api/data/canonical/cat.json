@@ -109,24 +109,6 @@
         ]
       },
       {
-        "base": "Dermatophytosis (Ringworm)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "cat_0068",
-            "slug": "dermatophytosis-ringworm",
-            "name": "Dermatophytosis (Ringworm)",
-            "name_ja": "皮膚糸状菌症"
-          },
-          {
-            "id": "cat_0177",
-            "slug": "dermatophilosis",
-            "name": "Dermatophilosis",
-            "name_ja": "皮膚糸状菌症（デルマトフィルス症）"
-          }
-        ]
-      },
-      {
         "base": "Eosinophilic Granuloma Complex - Eosinophilic Ulcer",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -632,7 +614,7 @@
           {
             "id": "cat_0268",
             "name": "Feline Dermatophilosis",
-            "name_ja": "猫皮膚糸状菌症"
+            "name_ja": "猫デルマトフィルス症"
           },
           {
             "id": "cat_0269",
@@ -2359,7 +2341,7 @@
           {
             "id": "cat_0177",
             "name": "Dermatophilosis",
-            "name_ja": "皮膚糸状菌症（デルマトフィルス症）"
+            "name_ja": "デルマトフィルス症"
           },
           {
             "id": "cat_0228",
@@ -2369,7 +2351,7 @@
           {
             "id": "cat_0268",
             "name": "Feline Dermatophilosis",
-            "name_ja": "猫皮膚糸状菌症"
+            "name_ja": "猫デルマトフィルス症"
           },
           {
             "id": "cat_0269",

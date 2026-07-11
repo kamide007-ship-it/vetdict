@@ -83,9 +83,14 @@
       serve時適用済み**、全ライブ統合175件中173件が `same disease modulo species tag / identical name` の安全ティア。
       サブタイプ/病型の不確実クラスタは各サイドカーの `review` に未適用退避）に加え、rabbit/cat 同様の
       **curated 同一疾患ペア（略称・修飾語違い）の掘り起こし**が可能（獣医レビュー前提）。
-      - **要判断（Kentaro）**: 既存16種の重複ティア dedup を **(a)追認 / (b)ロールバック / (c)種別に再レビュー** のいずれにするか。
-        物理削除なし・301・サイドカー編集で即ロールバック可。
-      - 上記「全canonical監査」で surface した **Proptosis/Exophthalmos・Ileus/腸閉塞** の要判断マージも同枠。
+      - **✅ 追認（承認「3」）**: 既存16種の重複ティア auto-dedup（安全ティア＝種タグ/同一名重複）を **ratify**。
+        監査で有害マージ0（Proptosis/Ileus の2種は「1・2分離」で既に是正済み）。物理削除なし・301・即ロールバック可。
+- [x] **cat 誤ラベル rename + 治療修正（承認「1」）**: `cat_0177 Dermatophilosis`・`cat_0268 Feline Dermatophilosis` の
+      name_ja（皮膚糸状菌症＝真菌白癬と誤）→ **デルマトフィルス症 / 猫デルマトフィルス症**（causes/patho/prevention/prognosis の
+      ラベルも修正、内容は既に細菌 Dermatophilus で整合）。**⚠ 発見: 両者の treatment_ja が抗真菌薬（Microsporum/イトラコナゾール）＝
+      細菌性疾患に誤処方**だったため、細菌管理の原則に修正（具体的用量は T106 ゲートで獣医レビュー）。
+      id 保全（lock 追加）・英語 name 不変・真の白癬 cat_0068 は無改変・検索索引再生成。
+      - 補足: cat_0177 と cat_0268 は同一疾患（Dermatophilosis）の near-dup → 将来の curated 統合候補（別バッチ）。
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**
 - [x] **T105/T106 fail-closed 公開ゲート＋ワークリスト**（main, merged）→ `.spec/T105_T106_DOSAGE_GATE.md`
