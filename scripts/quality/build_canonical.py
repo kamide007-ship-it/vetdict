@@ -143,6 +143,55 @@ _CURATED_MERGE: dict[str, list[list[str]]] = {
         ["mt_hypocalcemia", "mt_hypocalcemia2"],  # 低カルシウム血症 (Transport Tetany)
         ["fl_perinatal_asphyxia", "fl_perinatal_asphyxia2"],  # 周産期仮死 (Dummy Foal)
     ],
+    # dog: same-disease synonym/acronym/qualifier pairs. Kept SEPARATE in review
+    # (distinct): PSS congenital vs acquired, HSA splenic vs cardiac, nasal
+    # aspergillosis, acquired megacolon.
+    "dog": [
+        ["dog_0019", "dog_0297"],  # 犬アトピー性皮膚炎 (CAD)
+        ["dog_0055", "dog_0484"],  # 門脈体循環シャント (generic; keep 先天性/後天性)
+        ["dog_0065", "dog_0619"],  # 肢端舐性皮膚炎 (舐性肉芽腫)
+        ["dog_0077", "dog_0273"],  # 肥大性骨異栄養症 (HOD)
+        ["dog_0080", "dog_0456"],  # 脊髄空洞症
+        ["dog_0085", "dog_0600"],  # 乳腺炎
+        ["dog_0087", "dog_0475"],  # 前立腺肥大症 (BPH)
+        ["dog_0099", "dog_0454"],  # 変性性脊髄症 (DM)
+        ["dog_0116", "dog_0228"],  # インスリノーマ = 膵β細胞腫瘍
+        ["dog_0121", "dog_0479"],  # 犬ヘルペスウイルス感染症
+        ["dog_0204", "dog_0599"],  # 産後子宮炎
+        ["dog_0215", "dog_0469"],  # エチレングリコール中毒
+        ["dog_0231", "dog_0514"],  # 肝細胞癌
+        ["dog_0277", "dog_0452"],  # 壊死性髄膜脳炎 (NME/パグ脳炎)
+        ["dog_0367", "dog_0458"],  # 肺血栓塞栓症 (PTE)
+        ["dog_0398", "dog_0487"],  # 唾液腺嚢胞/嚢腫
+        ["dog_0416", "dog_0418"],  # 中枢性尿崩症
+        ["dog_0419", "dog_0449"],  # 頸部脊椎脊髄症 (CSM/Wobbler)
+        ["dog_0434", "dog_0477"],  # 犬ブルセラ症
+        ["dog_0527", "dog_0620"],  # 肩関節離断性骨軟骨炎 (OCD)
+    ],
+    # ferret: base+qualifier vs species-tag duplicates (all same disease).
+    "ferret": [
+        ["ferret_0003", "ferret_0193"],  # 副腎皮質機能亢進症
+        ["ferret_0004", "ferret_0147"],  # 消化管異物
+        ["ferret_0006", "ferret_0170"],  # 炎症性腸疾患 (IBD)
+        ["ferret_0010", "ferret_0174"],  # 肝リピドーシス
+        ["ferret_0012", "ferret_0166"],  # 流行性カタル性腸炎 (ECE)
+        ["ferret_0014", "ferret_0183"],  # 拡張型心筋症 (DCM)
+        ["ferret_0015", "ferret_0184"],  # 肥大型心筋症 (HCM)
+        ["ferret_0018", "ferret_0164"],  # インフルエンザ
+        ["ferret_0025", "ferret_0179"],  # 肥満細胞腫
+        ["ferret_0031", "ferret_0176"],  # 耳ダニ症
+        ["ferret_0032", "ferret_0177", "ferret_0274"],  # 皮膚糸状菌症 (Microsporum)
+        ["ferret_0034", "ferret_0178"],  # 尾部脱毛 (副腎性)
+        ["ferret_0037", "ferret_0195"],  # 前立腺嚢胞
+        ["ferret_0042", "ferret_0196"],  # 陰門/外陰部腫脹
+        ["ferret_0043", "ferret_0190"],  # 前立腺疾患
+        ["ferret_0050", "ferret_0165"],  # アリューシャン病
+        ["ferret_0054", "ferret_0167"],  # 全身性コロナウイルス感染症
+        ["ferret_0066", "ferret_0194"],  # 低血糖症 (インスリノーマ)
+        ["ferret_0078", "ferret_0129"],  # 増殖性大腸炎
+        ["ferret_0082", "ferret_0213"],  # 播種性特発性筋膜炎 (DIM)
+        ["ferret_0088", "ferret_0143"],  # 骨腫
+    ],
 }
 
 

@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 277,
-    "merge_clusters": 10,
-    "records_merged_away": 10,
+    "merge_clusters": 30,
+    "records_merged_away": 30,
     "archived": 0,
-    "served_after": 267
+    "served_after": 247
   },
   "merges": [
     {
@@ -189,192 +189,392 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0003",
+        "slug": "hyperadrenocorticism-cushing-s",
+        "name": "Hyperadrenocorticism (Cushing's)",
+        "name_ja": "副腎皮質機能亢進症（クッシング症候群）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0193",
+          "slug": "hyperadrenocorticism",
+          "name": "Hyperadrenocorticism",
+          "name_ja": "副腎皮質機能亢進症（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0004",
+        "slug": "gi-foreign-body",
+        "name": "GI Foreign Body",
+        "name_ja": "消化管異物"
+      },
+      "merged": [
+        {
+          "id": "ferret_0147",
+          "slug": "gastrointestinal-foreign-body-linear",
+          "name": "Gastrointestinal Foreign Body (Linear)",
+          "name_ja": "消化管異物（線状）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0006",
+        "slug": "inflammatory-bowel-disease-ibd",
+        "name": "Inflammatory Bowel Disease (IBD)",
+        "name_ja": "炎症性腸疾患（IBD）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0170",
+          "slug": "inflammatory-bowel-disease",
+          "name": "Inflammatory Bowel Disease",
+          "name_ja": "炎症性腸疾患（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0010",
+        "slug": "hepatic-lipidosis-fatty-liver-disease",
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0174",
+          "slug": "hepatic-lipidosis",
+          "name": "Hepatic Lipidosis",
+          "name_ja": "肝リピドーシス（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0012",
+        "slug": "epizootic-catarrhal-enteritis-ece-green-slime-disease",
+        "name": "Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)",
+        "name_ja": "流行性カタル性腸炎（ECE）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0166",
+          "slug": "epizootic-catarrhal-enteritis-ece",
+          "name": "Epizootic Catarrhal Enteritis (ECE)",
+          "name_ja": "流行性カタル性腸炎（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0014",
+        "slug": "dilated-cardiomyopathy-dcm",
+        "name": "Dilated Cardiomyopathy (DCM)",
+        "name_ja": "拡張型心筋症（DCM）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0183",
+          "slug": "dilated-cardiomyopathy",
+          "name": "Dilated Cardiomyopathy",
+          "name_ja": "拡張型心筋症（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0015",
+        "slug": "hypertrophic-cardiomyopathy-hcm",
+        "name": "Hypertrophic Cardiomyopathy (HCM)",
+        "name_ja": "肥大型心筋症（HCM）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0184",
+          "slug": "hypertrophic-cardiomyopathy",
+          "name": "Hypertrophic Cardiomyopathy",
+          "name_ja": "肥大型心筋症（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0018",
+        "slug": "influenza-human-flu",
+        "name": "Influenza (Human Flu)",
+        "name_ja": "インフルエンザ"
+      },
+      "merged": [
+        {
+          "id": "ferret_0164",
+          "slug": "influenza-human-influenza",
+          "name": "Influenza (Human Influenza)",
+          "name_ja": "インフルエンザ（ヒトインフルエンザ）（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0025",
+        "slug": "mast-cell-tumor-cutaneous",
+        "name": "Mast Cell Tumor (Cutaneous)",
+        "name_ja": "肥満細胞腫（皮膚型）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0179",
+          "slug": "mast-cell-tumor",
+          "name": "Mast Cell Tumor",
+          "name_ja": "肥満細胞腫（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0031",
+        "slug": "ear-mites-otodectes-cynotis",
+        "name": "Ear Mites (Otodectes cynotis)",
+        "name_ja": "耳ダニ症"
+      },
+      "merged": [
+        {
+          "id": "ferret_0176",
+          "slug": "ear-mites-otodectes",
+          "name": "Ear Mites (Otodectes)",
+          "name_ja": "耳ダニ（ミミヒゼンダニ）（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0034",
+        "slug": "tail-alopecia-rat-tail",
+        "name": "Tail Alopecia (Rat Tail)",
+        "name_ja": "尾部脱毛（ラットテイル）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0178",
+          "slug": "tail-alopecia-adrenal",
+          "name": "Tail Alopecia (Adrenal)",
+          "name_ja": "尾部脱毛（副腎性）（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0037",
+        "slug": "prostatic-cysts-adrenal-related",
+        "name": "Prostatic Cysts (Adrenal-related)",
+        "name_ja": "前立腺嚢胞（副腎関連）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0195",
+          "slug": "prostatic-cyst",
+          "name": "Prostatic Cyst",
+          "name_ja": "前立腺嚢胞（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0042",
+        "slug": "vulvar-swelling-adrenal-related",
+        "name": "Vulvar Swelling (Adrenal-related)",
+        "name_ja": "陰門腫脹（副腎関連）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0196",
+          "slug": "vulvar-swelling-adrenal",
+          "name": "Vulvar Swelling (Adrenal)",
+          "name_ja": "外陰部腫脹（副腎性）（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0043",
+        "slug": "prostatic-disease-adrenal-related",
+        "name": "Prostatic Disease (Adrenal-related)",
+        "name_ja": "前立腺疾患（副腎関連）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0190",
+          "slug": "prostatic-disease",
+          "name": "Prostatic Disease",
+          "name_ja": "前立腺疾患（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0050",
+        "slug": "aleutian-disease-adv",
+        "name": "Aleutian Disease (ADV)",
+        "name_ja": "アリューシャン病（ADV）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0165",
+          "slug": "aleutian-disease",
+          "name": "Aleutian Disease",
+          "name_ja": "アリューシャン病（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0054",
+        "slug": "ferret-systemic-coronavirus-frscv",
+        "name": "Ferret Systemic Coronavirus (FRSCV)",
+        "name_ja": "フェレット全身性コロナウイルス感染症"
+      },
+      "merged": [
+        {
+          "id": "ferret_0167",
+          "slug": "ferret-systemic-coronavirus",
+          "name": "Ferret Systemic Coronavirus",
+          "name_ja": "フェレット全身性コロナウイルス（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0066",
+        "slug": "hypoglycemia-insulinoma-related",
+        "name": "Hypoglycemia (Insulinoma-related)",
+        "name_ja": "低血糖症（インスリノーマ関連）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0194",
+          "slug": "hypoglycemia-insulinoma",
+          "name": "Hypoglycemia (Insulinoma)",
+          "name_ja": "低血糖症（インスリノーマ）（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0078",
+        "slug": "proliferative-colitis",
+        "name": "Proliferative Colitis",
+        "name_ja": "増殖性大腸炎"
+      },
+      "merged": [
+        {
+          "id": "ferret_0129",
+          "slug": "proliferative-colitis-desulfovibrio",
+          "name": "Proliferative Colitis (Desulfovibrio)",
+          "name_ja": "増殖性大腸炎（デスルフォビブリオ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0082",
+        "slug": "disseminated-idiopathic-myofasciitis-dim",
+        "name": "Disseminated Idiopathic Myofasciitis (DIM)",
+        "name_ja": "播種性特発性筋膜炎（DIM）"
+      },
+      "merged": [
+        {
+          "id": "ferret_0213",
+          "slug": "disseminated-idiopathic-myofasciitis",
+          "name": "Disseminated Idiopathic Myofasciitis",
+          "name_ja": "播種性特発性筋膜炎（フェレット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "ferret_0088",
+        "slug": "osteoma",
+        "name": "Osteoma",
+        "name_ja": "骨腫"
+      },
+      "merged": [
+        {
+          "id": "ferret_0143",
+          "slug": "osteoma-skull",
+          "name": "Osteoma (Skull)",
+          "name_ja": "骨腫（頭蓋骨）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Hyperadrenocorticism (Cushing's)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0003",
-            "slug": "hyperadrenocorticism-cushing-s",
-            "name": "Hyperadrenocorticism (Cushing's)",
-            "name_ja": "副腎皮質機能亢進症（クッシング症候群）"
-          },
-          {
-            "id": "ferret_0193",
-            "slug": "hyperadrenocorticism",
-            "name": "Hyperadrenocorticism",
-            "name_ja": "副腎皮質機能亢進症（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "GI Foreign Body",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0004",
-            "slug": "gi-foreign-body",
-            "name": "GI Foreign Body",
-            "name_ja": "消化管異物"
-          },
-          {
-            "id": "ferret_0147",
-            "slug": "gastrointestinal-foreign-body-linear",
-            "name": "Gastrointestinal Foreign Body (Linear)",
-            "name_ja": "消化管異物（線状）"
-          }
-        ]
-      },
-      {
-        "base": "Inflammatory Bowel Disease (IBD)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0006",
-            "slug": "inflammatory-bowel-disease-ibd",
-            "name": "Inflammatory Bowel Disease (IBD)",
-            "name_ja": "炎症性腸疾患（IBD）"
-          },
-          {
-            "id": "ferret_0170",
-            "slug": "inflammatory-bowel-disease",
-            "name": "Inflammatory Bowel Disease",
-            "name_ja": "炎症性腸疾患（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0010",
-            "slug": "hepatic-lipidosis-fatty-liver-disease",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "ferret_0174",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0012",
-            "slug": "epizootic-catarrhal-enteritis-ece-green-slime-disease",
-            "name": "Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)",
-            "name_ja": "流行性カタル性腸炎（ECE）"
-          },
-          {
-            "id": "ferret_0166",
-            "slug": "epizootic-catarrhal-enteritis-ece",
-            "name": "Epizootic Catarrhal Enteritis (ECE)",
-            "name_ja": "流行性カタル性腸炎（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Dilated Cardiomyopathy (DCM)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0014",
-            "slug": "dilated-cardiomyopathy-dcm",
-            "name": "Dilated Cardiomyopathy (DCM)",
-            "name_ja": "拡張型心筋症（DCM）"
-          },
-          {
-            "id": "ferret_0183",
-            "slug": "dilated-cardiomyopathy",
-            "name": "Dilated Cardiomyopathy",
-            "name_ja": "拡張型心筋症（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Hypertrophic Cardiomyopathy (HCM)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0015",
-            "slug": "hypertrophic-cardiomyopathy-hcm",
-            "name": "Hypertrophic Cardiomyopathy (HCM)",
-            "name_ja": "肥大型心筋症（HCM）"
-          },
-          {
-            "id": "ferret_0184",
-            "slug": "hypertrophic-cardiomyopathy",
-            "name": "Hypertrophic Cardiomyopathy",
-            "name_ja": "肥大型心筋症（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Influenza (Human Flu)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0018",
-            "slug": "influenza-human-flu",
-            "name": "Influenza (Human Flu)",
-            "name_ja": "インフルエンザ"
-          },
-          {
-            "id": "ferret_0164",
-            "slug": "influenza-human-influenza",
-            "name": "Influenza (Human Influenza)",
-            "name_ja": "インフルエンザ（ヒトインフルエンザ）（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Mast Cell Tumor (Cutaneous)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0025",
-            "slug": "mast-cell-tumor-cutaneous",
-            "name": "Mast Cell Tumor (Cutaneous)",
-            "name_ja": "肥満細胞腫（皮膚型）"
-          },
-          {
-            "id": "ferret_0179",
-            "slug": "mast-cell-tumor",
-            "name": "Mast Cell Tumor",
-            "name_ja": "肥満細胞腫（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Ear Mites (Otodectes cynotis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0031",
-            "slug": "ear-mites-otodectes-cynotis",
-            "name": "Ear Mites (Otodectes cynotis)",
-            "name_ja": "耳ダニ症"
-          },
-          {
-            "id": "ferret_0176",
-            "slug": "ear-mites-otodectes",
-            "name": "Ear Mites (Otodectes)",
-            "name_ja": "耳ダニ（ミミヒゼンダニ）（フェレット）"
-          }
-        ]
-      },
       {
         "base": "Ringworm (Dermatophytosis)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -396,186 +596,6 @@
             "slug": "dermatophytosis-microsporum",
             "name": "Dermatophytosis (Microsporum)",
             "name_ja": "皮膚糸状菌症（ミクロスポルム）（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Tail Alopecia (Rat Tail)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0034",
-            "slug": "tail-alopecia-rat-tail",
-            "name": "Tail Alopecia (Rat Tail)",
-            "name_ja": "尾部脱毛（ラットテイル）"
-          },
-          {
-            "id": "ferret_0178",
-            "slug": "tail-alopecia-adrenal",
-            "name": "Tail Alopecia (Adrenal)",
-            "name_ja": "尾部脱毛（副腎性）（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Prostatic Cysts (Adrenal-related)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0037",
-            "slug": "prostatic-cysts-adrenal-related",
-            "name": "Prostatic Cysts (Adrenal-related)",
-            "name_ja": "前立腺嚢胞（副腎関連）"
-          },
-          {
-            "id": "ferret_0195",
-            "slug": "prostatic-cyst",
-            "name": "Prostatic Cyst",
-            "name_ja": "前立腺嚢胞（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Vulvar Swelling (Adrenal-related)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0042",
-            "slug": "vulvar-swelling-adrenal-related",
-            "name": "Vulvar Swelling (Adrenal-related)",
-            "name_ja": "陰門腫脹（副腎関連）"
-          },
-          {
-            "id": "ferret_0196",
-            "slug": "vulvar-swelling-adrenal",
-            "name": "Vulvar Swelling (Adrenal)",
-            "name_ja": "外陰部腫脹（副腎性）（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Prostatic Disease (Adrenal-related)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0043",
-            "slug": "prostatic-disease-adrenal-related",
-            "name": "Prostatic Disease (Adrenal-related)",
-            "name_ja": "前立腺疾患（副腎関連）"
-          },
-          {
-            "id": "ferret_0190",
-            "slug": "prostatic-disease",
-            "name": "Prostatic Disease",
-            "name_ja": "前立腺疾患（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Aleutian Disease (ADV)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0050",
-            "slug": "aleutian-disease-adv",
-            "name": "Aleutian Disease (ADV)",
-            "name_ja": "アリューシャン病（ADV）"
-          },
-          {
-            "id": "ferret_0165",
-            "slug": "aleutian-disease",
-            "name": "Aleutian Disease",
-            "name_ja": "アリューシャン病（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Ferret Systemic Coronavirus (FRSCV)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0054",
-            "slug": "ferret-systemic-coronavirus-frscv",
-            "name": "Ferret Systemic Coronavirus (FRSCV)",
-            "name_ja": "フェレット全身性コロナウイルス感染症"
-          },
-          {
-            "id": "ferret_0167",
-            "slug": "ferret-systemic-coronavirus",
-            "name": "Ferret Systemic Coronavirus",
-            "name_ja": "フェレット全身性コロナウイルス（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Hypoglycemia (Insulinoma-related)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0066",
-            "slug": "hypoglycemia-insulinoma-related",
-            "name": "Hypoglycemia (Insulinoma-related)",
-            "name_ja": "低血糖症（インスリノーマ関連）"
-          },
-          {
-            "id": "ferret_0194",
-            "slug": "hypoglycemia-insulinoma",
-            "name": "Hypoglycemia (Insulinoma)",
-            "name_ja": "低血糖症（インスリノーマ）（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Proliferative Colitis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0078",
-            "slug": "proliferative-colitis",
-            "name": "Proliferative Colitis",
-            "name_ja": "増殖性大腸炎"
-          },
-          {
-            "id": "ferret_0129",
-            "slug": "proliferative-colitis-desulfovibrio",
-            "name": "Proliferative Colitis (Desulfovibrio)",
-            "name_ja": "増殖性大腸炎（デスルフォビブリオ）"
-          }
-        ]
-      },
-      {
-        "base": "Disseminated Idiopathic Myofasciitis (DIM)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0082",
-            "slug": "disseminated-idiopathic-myofasciitis-dim",
-            "name": "Disseminated Idiopathic Myofasciitis (DIM)",
-            "name_ja": "播種性特発性筋膜炎（DIM）"
-          },
-          {
-            "id": "ferret_0213",
-            "slug": "disseminated-idiopathic-myofasciitis",
-            "name": "Disseminated Idiopathic Myofasciitis",
-            "name_ja": "播種性特発性筋膜炎（フェレット）"
-          }
-        ]
-      },
-      {
-        "base": "Osteoma",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "ferret_0088",
-            "slug": "osteoma",
-            "name": "Osteoma",
-            "name_ja": "骨腫"
-          },
-          {
-            "id": "ferret_0143",
-            "slug": "osteoma-skull",
-            "name": "Osteoma (Skull)",
-            "name_ja": "骨腫（頭蓋骨）"
           }
         ]
       }

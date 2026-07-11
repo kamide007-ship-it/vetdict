@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 623,
-    "merge_clusters": 12,
-    "records_merged_away": 12,
+    "merge_clusters": 32,
+    "records_merged_away": 32,
     "archived": 0,
-    "served_after": 611
+    "served_after": 591
   },
   "merges": [
     {
@@ -225,30 +225,392 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0019",
+        "slug": "allergic-dermatitis",
+        "name": "Allergic Dermatitis",
+        "name_ja": "犬アトピー性皮膚炎（CAD）"
+      },
+      "merged": [
+        {
+          "id": "dog_0297",
+          "slug": "canine-atopic-dermatitis",
+          "name": "Canine Atopic Dermatitis",
+          "name_ja": "犬アトピー性皮膚炎"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0055",
+        "slug": "portosystemic-shunt-liver-shunt",
+        "name": "Portosystemic Shunt (Liver Shunt)",
+        "name_ja": "門脈体循環シャント（肝シャント）"
+      },
+      "merged": [
+        {
+          "id": "dog_0484",
+          "slug": "portosystemic-shunt-pss",
+          "name": "Portosystemic Shunt (PSS)",
+          "name_ja": "門脈体循環シャント"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0065",
+        "slug": "acral-lick-dermatitis",
+        "name": "Acral Lick Dermatitis",
+        "name_ja": "肢端舐性皮膚炎"
+      },
+      "merged": [
+        {
+          "id": "dog_0619",
+          "slug": "acral-lick-dermatitis-lick-granuloma",
+          "name": "Acral Lick Dermatitis (Lick Granuloma)",
+          "name_ja": "肢端舐性皮膚炎（舐性肉芽腫）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0077",
+        "slug": "hypertrophic-osteodystrophy-hod",
+        "name": "Hypertrophic Osteodystrophy (HOD)",
+        "name_ja": "肥大性骨異栄養症（HOD）"
+      },
+      "merged": [
+        {
+          "id": "dog_0273",
+          "slug": "hypertrophic-osteodystrophy-hod-severe",
+          "name": "Hypertrophic Osteodystrophy (HOD) - Severe",
+          "name_ja": "肥大性骨異栄養症（重症型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0080",
+        "slug": "syringomyelia-chiari-malformation",
+        "name": "Syringomyelia (Chiari Malformation)",
+        "name_ja": "脊髄空洞症（キアリ様奇形）"
+      },
+      "merged": [
+        {
+          "id": "dog_0456",
+          "slug": "syringomyelia",
+          "name": "Syringomyelia",
+          "name_ja": "脊髄空洞症"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0085",
+        "slug": "mastitis",
+        "name": "Mastitis",
+        "name_ja": "乳腺炎"
+      },
+      "merged": [
+        {
+          "id": "dog_0600",
+          "slug": "mastitis-lactational-and-non-lactational",
+          "name": "Mastitis (Lactational and Non-lactational)",
+          "name_ja": "乳腺炎（哺乳期・非哺乳期）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0087",
+        "slug": "benign-prostatic-hyperplasia-bph",
+        "name": "Benign Prostatic Hyperplasia (BPH)",
+        "name_ja": "良性前立腺肥大症"
+      },
+      "merged": [
+        {
+          "id": "dog_0475",
+          "slug": "benign-prostatic-hyperplasia",
+          "name": "Benign Prostatic Hyperplasia",
+          "name_ja": "前立腺肥大症"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0099",
+        "slug": "degenerative-myelopathy-dm",
+        "name": "Degenerative Myelopathy (DM)",
+        "name_ja": "変性性脊髄症（DM）"
+      },
+      "merged": [
+        {
+          "id": "dog_0454",
+          "slug": "degenerative-myelopathy",
+          "name": "Degenerative Myelopathy",
+          "name_ja": "変性性脊髄症"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0116",
+        "slug": "insulinoma",
+        "name": "Insulinoma",
+        "name_ja": "インスリノーマ"
+      },
+      "merged": [
+        {
+          "id": "dog_0228",
+          "slug": "insulinoma-pancreatic-beta-cell-tumor",
+          "name": "Insulinoma (Pancreatic Beta Cell Tumor)",
+          "name_ja": "膵臓β細胞腫瘍"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0121",
+        "slug": "canine-herpesvirus-chv",
+        "name": "Canine Herpesvirus (CHV)",
+        "name_ja": "犬ヘルペスウイルス感染症"
+      },
+      "merged": [
+        {
+          "id": "dog_0479",
+          "slug": "canine-herpesvirus",
+          "name": "Canine Herpesvirus",
+          "name_ja": "犬ヘルペスウイルス"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0204",
+        "slug": "postpartum-metritis-acute-postpartum-uterine-infection",
+        "name": "Postpartum Metritis (Acute Postpartum Uterine Infection)",
+        "name_ja": "産後子宮炎（急性産褥子宮炎）"
+      },
+      "merged": [
+        {
+          "id": "dog_0599",
+          "slug": "postpartum-metritis",
+          "name": "Postpartum Metritis",
+          "name_ja": "産後子宮炎（分娩後子宮内膜炎）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0215",
+        "slug": "ethylene-glycol-poisoning-antifreeze",
+        "name": "Ethylene Glycol Poisoning (Antifreeze)",
+        "name_ja": "エチレングリコール中毒（不凍液）"
+      },
+      "merged": [
+        {
+          "id": "dog_0469",
+          "slug": "ethylene-glycol-toxicosis",
+          "name": "Ethylene Glycol Toxicosis",
+          "name_ja": "エチレングリコール中毒"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0231",
+        "slug": "hepatocellular-carcinoma",
+        "name": "Hepatocellular Carcinoma",
+        "name_ja": "肝細胞がん"
+      },
+      "merged": [
+        {
+          "id": "dog_0514",
+          "slug": "hepatocellular-carcinoma-massive",
+          "name": "Hepatocellular Carcinoma (Massive)",
+          "name_ja": "肝細胞癌（巨大型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0277",
+        "slug": "necrotizing-meningoencephalitis-nme",
+        "name": "Necrotizing Meningoencephalitis (NME)",
+        "name_ja": "壊死性髄膜脳炎（NME）"
+      },
+      "merged": [
+        {
+          "id": "dog_0452",
+          "slug": "necrotizing-meningoencephalitis-pug-dog-encephalitis",
+          "name": "Necrotizing Meningoencephalitis (Pug Dog Encephalitis)",
+          "name_ja": "壊死性髄膜脳炎（パグ脳炎）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0367",
+        "slug": "pulmonary-thromboembolism-pte",
+        "name": "Pulmonary Thromboembolism (PTE)",
+        "name_ja": "肺血栓塞栓症 (PTE)"
+      },
+      "merged": [
+        {
+          "id": "dog_0458",
+          "slug": "pulmonary-thromboembolism",
+          "name": "Pulmonary Thromboembolism",
+          "name_ja": "肺血栓塞栓症"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0398",
+        "slug": "salivary-mucocele-sialocele",
+        "name": "Salivary Mucocele (Sialocele)",
+        "name_ja": "唾液腺嚢胞"
+      },
+      "merged": [
+        {
+          "id": "dog_0487",
+          "slug": "salivary-mucocele",
+          "name": "Salivary Mucocele",
+          "name_ja": "唾液腺嚢腫"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0416",
+        "slug": "central-diabetes-insipidus",
+        "name": "Central Diabetes Insipidus",
+        "name_ja": "中枢性尿崩症"
+      },
+      "merged": [
+        {
+          "id": "dog_0418",
+          "slug": "central-cranial-diabetes-insipidus",
+          "name": "Central (Cranial) Diabetes Insipidus",
+          "name_ja": "中枢性（頭蓋性）尿崩症"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0419",
+        "slug": "cervical-spondylomyelopathy-wobbler-disc-associated",
+        "name": "Cervical Spondylomyelopathy (Wobbler - Disc Associated)",
+        "name_ja": "頸椎脊椎脊髄症（椎間板関連型）"
+      },
+      "merged": [
+        {
+          "id": "dog_0449",
+          "slug": "cervical-spondylomyelopathy-wobbler-syndrome",
+          "name": "Cervical Spondylomyelopathy (Wobbler Syndrome)",
+          "name_ja": "頸部脊椎脊髄症"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0434",
+        "slug": "canine-brucellosis-reproductive",
+        "name": "Canine Brucellosis (Reproductive)",
+        "name_ja": "犬ブルセラ症（生殖器型）"
+      },
+      "merged": [
+        {
+          "id": "dog_0477",
+          "slug": "canine-brucellosis",
+          "name": "Canine Brucellosis",
+          "name_ja": "犬ブルセラ症"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "dog_0527",
+        "slug": "shoulder-osteochondritis-dissecans-ocd",
+        "name": "Shoulder Osteochondritis Dissecans (OCD)",
+        "name_ja": "肩関節離断性骨軟骨炎"
+      },
+      "merged": [
+        {
+          "id": "dog_0620",
+          "slug": "osteochondritis-dissecans-shoulder-ocd",
+          "name": "Osteochondritis Dissecans - Shoulder (OCD)",
+          "name_ja": "肩関節離断性骨軟骨炎（OCD）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Allergic Dermatitis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0019",
-            "slug": "allergic-dermatitis",
-            "name": "Allergic Dermatitis",
-            "name_ja": "犬アトピー性皮膚炎（CAD）"
-          },
-          {
-            "id": "dog_0297",
-            "slug": "canine-atopic-dermatitis",
-            "name": "Canine Atopic Dermatitis",
-            "name_ja": "犬アトピー性皮膚炎"
-          }
-        ]
-      },
       {
         "base": "Portosystemic Shunt (Liver Shunt)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -280,114 +642,6 @@
         ]
       },
       {
-        "base": "Acral Lick Dermatitis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0065",
-            "slug": "acral-lick-dermatitis",
-            "name": "Acral Lick Dermatitis",
-            "name_ja": "肢端舐性皮膚炎"
-          },
-          {
-            "id": "dog_0619",
-            "slug": "acral-lick-dermatitis-lick-granuloma",
-            "name": "Acral Lick Dermatitis (Lick Granuloma)",
-            "name_ja": "肢端舐性皮膚炎（舐性肉芽腫）"
-          }
-        ]
-      },
-      {
-        "base": "Hypertrophic Osteodystrophy (HOD)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0077",
-            "slug": "hypertrophic-osteodystrophy-hod",
-            "name": "Hypertrophic Osteodystrophy (HOD)",
-            "name_ja": "肥大性骨異栄養症（HOD）"
-          },
-          {
-            "id": "dog_0273",
-            "slug": "hypertrophic-osteodystrophy-hod-severe",
-            "name": "Hypertrophic Osteodystrophy (HOD) - Severe",
-            "name_ja": "肥大性骨異栄養症（重症型）"
-          }
-        ]
-      },
-      {
-        "base": "Syringomyelia (Chiari Malformation)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0080",
-            "slug": "syringomyelia-chiari-malformation",
-            "name": "Syringomyelia (Chiari Malformation)",
-            "name_ja": "脊髄空洞症（キアリ様奇形）"
-          },
-          {
-            "id": "dog_0456",
-            "slug": "syringomyelia",
-            "name": "Syringomyelia",
-            "name_ja": "脊髄空洞症"
-          }
-        ]
-      },
-      {
-        "base": "Mastitis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0085",
-            "slug": "mastitis",
-            "name": "Mastitis",
-            "name_ja": "乳腺炎"
-          },
-          {
-            "id": "dog_0600",
-            "slug": "mastitis-lactational-and-non-lactational",
-            "name": "Mastitis (Lactational and Non-lactational)",
-            "name_ja": "乳腺炎（哺乳期・非哺乳期）"
-          }
-        ]
-      },
-      {
-        "base": "Benign Prostatic Hyperplasia (BPH)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0087",
-            "slug": "benign-prostatic-hyperplasia-bph",
-            "name": "Benign Prostatic Hyperplasia (BPH)",
-            "name_ja": "良性前立腺肥大症"
-          },
-          {
-            "id": "dog_0475",
-            "slug": "benign-prostatic-hyperplasia",
-            "name": "Benign Prostatic Hyperplasia",
-            "name_ja": "前立腺肥大症"
-          }
-        ]
-      },
-      {
-        "base": "Degenerative Myelopathy (DM)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0099",
-            "slug": "degenerative-myelopathy-dm",
-            "name": "Degenerative Myelopathy (DM)",
-            "name_ja": "変性性脊髄症（DM）"
-          },
-          {
-            "id": "dog_0454",
-            "slug": "degenerative-myelopathy",
-            "name": "Degenerative Myelopathy",
-            "name_ja": "変性性脊髄症"
-          }
-        ]
-      },
-      {
         "base": "Hemangiosarcoma",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -412,42 +666,6 @@
         ]
       },
       {
-        "base": "Insulinoma",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0116",
-            "slug": "insulinoma",
-            "name": "Insulinoma",
-            "name_ja": "インスリノーマ"
-          },
-          {
-            "id": "dog_0228",
-            "slug": "insulinoma-pancreatic-beta-cell-tumor",
-            "name": "Insulinoma (Pancreatic Beta Cell Tumor)",
-            "name_ja": "膵臓β細胞腫瘍"
-          }
-        ]
-      },
-      {
-        "base": "Canine Herpesvirus (CHV)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0121",
-            "slug": "canine-herpesvirus-chv",
-            "name": "Canine Herpesvirus (CHV)",
-            "name_ja": "犬ヘルペスウイルス感染症"
-          },
-          {
-            "id": "dog_0479",
-            "slug": "canine-herpesvirus",
-            "name": "Canine Herpesvirus",
-            "name_ja": "犬ヘルペスウイルス"
-          }
-        ]
-      },
-      {
         "base": "Aspergillosis",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -466,60 +684,6 @@
         ]
       },
       {
-        "base": "Postpartum Metritis (Acute Postpartum Uterine Infection)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0204",
-            "slug": "postpartum-metritis-acute-postpartum-uterine-infection",
-            "name": "Postpartum Metritis (Acute Postpartum Uterine Infection)",
-            "name_ja": "産後子宮炎（急性産褥子宮炎）"
-          },
-          {
-            "id": "dog_0599",
-            "slug": "postpartum-metritis",
-            "name": "Postpartum Metritis",
-            "name_ja": "産後子宮炎（分娩後子宮内膜炎）"
-          }
-        ]
-      },
-      {
-        "base": "Ethylene Glycol Poisoning (Antifreeze)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0215",
-            "slug": "ethylene-glycol-poisoning-antifreeze",
-            "name": "Ethylene Glycol Poisoning (Antifreeze)",
-            "name_ja": "エチレングリコール中毒（不凍液）"
-          },
-          {
-            "id": "dog_0469",
-            "slug": "ethylene-glycol-toxicosis",
-            "name": "Ethylene Glycol Toxicosis",
-            "name_ja": "エチレングリコール中毒"
-          }
-        ]
-      },
-      {
-        "base": "Hepatocellular Carcinoma",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0231",
-            "slug": "hepatocellular-carcinoma",
-            "name": "Hepatocellular Carcinoma",
-            "name_ja": "肝細胞がん"
-          },
-          {
-            "id": "dog_0514",
-            "slug": "hepatocellular-carcinoma-massive",
-            "name": "Hepatocellular Carcinoma (Massive)",
-            "name_ja": "肝細胞癌（巨大型）"
-          }
-        ]
-      },
-      {
         "base": "Megacolon",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -534,132 +698,6 @@
             "slug": "megacolon-acquired",
             "name": "Megacolon (Acquired)",
             "name_ja": "後天性巨大結腸症"
-          }
-        ]
-      },
-      {
-        "base": "Necrotizing Meningoencephalitis (NME)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0277",
-            "slug": "necrotizing-meningoencephalitis-nme",
-            "name": "Necrotizing Meningoencephalitis (NME)",
-            "name_ja": "壊死性髄膜脳炎（NME）"
-          },
-          {
-            "id": "dog_0452",
-            "slug": "necrotizing-meningoencephalitis-pug-dog-encephalitis",
-            "name": "Necrotizing Meningoencephalitis (Pug Dog Encephalitis)",
-            "name_ja": "壊死性髄膜脳炎（パグ脳炎）"
-          }
-        ]
-      },
-      {
-        "base": "Pulmonary Thromboembolism (PTE)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0367",
-            "slug": "pulmonary-thromboembolism-pte",
-            "name": "Pulmonary Thromboembolism (PTE)",
-            "name_ja": "肺血栓塞栓症 (PTE)"
-          },
-          {
-            "id": "dog_0458",
-            "slug": "pulmonary-thromboembolism",
-            "name": "Pulmonary Thromboembolism",
-            "name_ja": "肺血栓塞栓症"
-          }
-        ]
-      },
-      {
-        "base": "Salivary Mucocele (Sialocele)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0398",
-            "slug": "salivary-mucocele-sialocele",
-            "name": "Salivary Mucocele (Sialocele)",
-            "name_ja": "唾液腺嚢胞"
-          },
-          {
-            "id": "dog_0487",
-            "slug": "salivary-mucocele",
-            "name": "Salivary Mucocele",
-            "name_ja": "唾液腺嚢腫"
-          }
-        ]
-      },
-      {
-        "base": "Central Diabetes Insipidus",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0416",
-            "slug": "central-diabetes-insipidus",
-            "name": "Central Diabetes Insipidus",
-            "name_ja": "中枢性尿崩症"
-          },
-          {
-            "id": "dog_0418",
-            "slug": "central-cranial-diabetes-insipidus",
-            "name": "Central (Cranial) Diabetes Insipidus",
-            "name_ja": "中枢性（頭蓋性）尿崩症"
-          }
-        ]
-      },
-      {
-        "base": "Cervical Spondylomyelopathy (Wobbler - Disc Associated)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0419",
-            "slug": "cervical-spondylomyelopathy-wobbler-disc-associated",
-            "name": "Cervical Spondylomyelopathy (Wobbler - Disc Associated)",
-            "name_ja": "頸椎脊椎脊髄症（椎間板関連型）"
-          },
-          {
-            "id": "dog_0449",
-            "slug": "cervical-spondylomyelopathy-wobbler-syndrome",
-            "name": "Cervical Spondylomyelopathy (Wobbler Syndrome)",
-            "name_ja": "頸部脊椎脊髄症"
-          }
-        ]
-      },
-      {
-        "base": "Canine Brucellosis (Reproductive)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0434",
-            "slug": "canine-brucellosis-reproductive",
-            "name": "Canine Brucellosis (Reproductive)",
-            "name_ja": "犬ブルセラ症（生殖器型）"
-          },
-          {
-            "id": "dog_0477",
-            "slug": "canine-brucellosis",
-            "name": "Canine Brucellosis",
-            "name_ja": "犬ブルセラ症"
-          }
-        ]
-      },
-      {
-        "base": "Shoulder Osteochondritis Dissecans (OCD)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "dog_0527",
-            "slug": "shoulder-osteochondritis-dissecans-ocd",
-            "name": "Shoulder Osteochondritis Dissecans (OCD)",
-            "name_ja": "肩関節離断性骨軟骨炎"
-          },
-          {
-            "id": "dog_0620",
-            "slug": "osteochondritis-dissecans-shoulder-ocd",
-            "name": "Osteochondritis Dissecans - Shoulder (OCD)",
-            "name_ja": "肩関節離断性骨軟骨炎（OCD）"
           }
         ]
       }
