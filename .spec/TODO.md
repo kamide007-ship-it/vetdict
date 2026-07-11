@@ -69,13 +69,16 @@
       `api/data/canonical/cat.json`（**550→547 served**、curated統合3＝CKD/アセトアミノフェン/ビタミンA過剰症）。
       - FIP/EGC/SCC/MCT/髄膜腫サブタイプは分離維持（review）。**FIC は英語名一致→dedup層で既に解消**（canonical不要・実測確認）。
       - ⚠️ **cat も Dermatophytosis(真菌)/Dermatophilosis(細菌) 誤ラベル**あり（builder は非統合）。rename は別バッチ推奨。
-- [x] **全canonical 監査（read-only）**: 既存17種のauto統合を「英語名乖離」で検査。大半は正当なsynonym統合だが、
-      **要判断の既適用マージ**を surface（獣医の可否確認待ち・自動変更しない）:
-      - **Proptosis(眼球脱出・急性) vs Exophthalmos(球後性・慢性)** が hamster/chinchilla/hedgehog/sugar_glider の
-        既存canonicalで**統合済み**（rabbit では分離維持と判断した区別）。統合維持か分離か要指示。
-      - **Ileus(機能性) vs Intestinal Obstruction(機械性)** が guinea_pig で**統合済み**（腸閉塞 name_ja 共有）。要指示。
-- [ ] **horse T103**（23クラスタ・別スキーマ・明示id保持）: 大半が略称/別名の同一疾患（Strangles/DDSP/ERU/EPM/EMS/PPID等）。
-      curated 統合の worksheet 化が次バッチ候補。fish は重複0のため対象外。
+- [x] **全canonical 監査（read-only）** + **要判断マージの分離適用（承認「1・2分離」）**:
+      既存17種のauto統合を「英語名乖離」で検査→大半は正当なsynonym統合。要判断2種を分離:
+      - **① Proptosis vs Exophthalmos**（別病態）→ hamster/chinchilla/hedgehog/sugar_glider の統合を **do-not-merge ガードで分離**、
+        review へ退避（各種 merges −1、両疾患を個別 served）。実測で分離確認。
+      - **② Ileus(機能性) vs Intestinal Obstruction(機械性)**（別病態）→ guinea_pig を同様に**分離**。
+      - 注: 分離後は両者とも name_ja 基底が「眼球突出」「腸閉塞」で表示が近い。将来的な relabel（眼球突出/眼球脱出、機能性/機械性）が UX 上望ましい（follow-up）。
+- [x] **horse T103 適用**（「T103をその後に続ける」）→ `.spec/HORSE_CONSOLIDATION_REVIEW.md`
+      `api/data/canonical/horse.json`（**621→598 served**、curated統合21＝略称/別名の同一疾患）。
+      Strangles/DDSP/ERU/EPM/EMS/PPID/Piroplasmosis(3件)/Fescue(3件)/EHV-1/低Ca 等。明示slug id保持でURL安定・loader実測一致。
+      **分離維持（review）**: 扁平上皮癌(非眼性/皮膚)・鼠径ヘルニア(一般/種馬)。fish は重複0で対象外。
 - [~] 残り species（ferret/bird/parakeet 等）の既存 auto canonical（**17種がライブ＝`apply_canonical_map`で
       serve時適用済み**、全ライブ統合175件中173件が `same disease modulo species tag / identical name` の安全ティア。
       サブタイプ/病型の不確実クラスタは各サイドカーの `review` に未適用退避）に加え、rabbit/cat 同様の

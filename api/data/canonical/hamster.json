@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 321,
-    "merge_clusters": 10,
-    "records_merged_away": 10,
+    "merge_clusters": 9,
+    "records_merged_away": 9,
     "archived": 0,
-    "served_after": 311
+    "served_after": 312
   },
   "merges": [
     {
@@ -77,24 +77,6 @@
           "slug": "intestinal-neoplasia",
           "name": "Intestinal Neoplasia",
           "name_ja": "腸管腫瘍（ハムスター）"
-        }
-      ],
-      "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "hamster_0056",
-        "slug": "eye-proptosis",
-        "name": "Eye Proptosis",
-        "name_ja": "眼球突出"
-      },
-      "merged": [
-        {
-          "id": "hamster_0228",
-          "slug": "exophthalmos",
-          "name": "Exophthalmos",
-          "name_ja": "眼球突出（ハムスター）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
@@ -462,6 +444,24 @@
             "slug": "cage-paralysis-vitamin-e-selenium-deficiency",
             "name": "Cage Paralysis (Vitamin E/Selenium Deficiency)",
             "name_ja": "ケージ麻痺（VE/Se欠乏）（ハムスター）"
+          }
+        ]
+      },
+      {
+        "base": "Eye Proptosis",
+        "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
+        "members": [
+          {
+            "id": "hamster_0056",
+            "slug": "eye-proptosis",
+            "name": "Eye Proptosis",
+            "name_ja": "眼球突出"
+          },
+          {
+            "id": "hamster_0228",
+            "slug": "exophthalmos",
+            "name": "Exophthalmos",
+            "name_ja": "眼球突出（ハムスター）"
           }
         ]
       },

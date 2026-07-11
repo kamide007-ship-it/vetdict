@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 346,
-    "merge_clusters": 16,
-    "records_merged_away": 16,
+    "merge_clusters": 15,
+    "records_merged_away": 15,
     "archived": 0,
-    "served_after": 330
+    "served_after": 331
   },
   "merges": [
     {
@@ -239,24 +239,6 @@
           "slug": "cervical-lymphadenitis-lumps",
           "name": "Cervical Lymphadenitis (Lumps)",
           "name_ja": "頸部リンパ節炎（モルモット）"
-        }
-      ],
-      "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "guinea_pig_0085",
-        "slug": "ileus",
-        "name": "Ileus",
-        "name_ja": "腸閉塞"
-      },
-      "merged": [
-        {
-          "id": "guinea_pig_0209",
-          "slug": "intestinal-obstruction",
-          "name": "Intestinal Obstruction",
-          "name_ja": "腸閉塞（モルモット）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
@@ -564,6 +546,24 @@
             "slug": "cervical-lymphadenitis-lumps",
             "name": "Cervical Lymphadenitis (Lumps)",
             "name_ja": "頸部リンパ節炎（モルモット）"
+          }
+        ]
+      },
+      {
+        "base": "Ileus",
+        "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
+        "members": [
+          {
+            "id": "guinea_pig_0085",
+            "slug": "ileus",
+            "name": "Ileus",
+            "name_ja": "腸閉塞"
+          },
+          {
+            "id": "guinea_pig_0209",
+            "slug": "intestinal-obstruction",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（モルモット）"
           }
         ]
       },

@@ -72,6 +72,16 @@ _DO_NOT_MERGE: dict[str, list[set[str]]] = {
     # Warble Fly (Hypoderma) vs Cuterebra bot fly — different parasites sharing
     # the mislabeled name_ja "ウマバエ幼虫症".
     "rabbit": [{"rabbit_0212", "rabbit_0298"}],
+    # Proptosis (acute traumatic globe prolapse) vs Exophthalmos (chronic
+    # retrobulbar protrusion) — clinically distinct; vet decision to keep apart
+    # (both share the base name_ja 眼球突出).
+    "hamster": [{"hamster_0056", "hamster_0228"}],
+    "chinchilla": [{"chinchilla_0123", "chinchilla_0265"}],
+    "hedgehog": [{"hedgehog_0040", "hedgehog_0218"}],
+    "sugar_glider": [{"sugar_glider_0038", "sugar_glider_0188"}],
+    # Ileus (functional/paralytic) vs Intestinal Obstruction (mechanical) —
+    # distinct pathophysiology; vet decision to keep apart (base name_ja 腸閉塞).
+    "guinea_pig": [{"guinea_pig_0085", "guinea_pig_0209"}],
 }
 
 
@@ -106,6 +116,32 @@ _CURATED_MERGE: dict[str, list[list[str]]] = {
         ["cat_0034", "cat_0531"],  # 慢性腎臓病 (CKD)
         ["cat_0198", "cat_0465"],  # アセトアミノフェン中毒 = 急性型
         ["cat_0257", "cat_0484"],  # 猫ビタミンA過剰症 = 慢性型
+    ],
+    # horse: acronym / synonym pairs of the SAME disease (explicit slug ids).
+    # Kept separate in review (distinct): SCC non-ocular vs cutaneous,
+    # Inguinal Hernia general vs stallion.
+    "horse": [
+        ["rp_laryngeal", "rp_laryngeal_hemiplegia"],  # 喉頭片麻痺 (Roaring)
+        ["rp_ddsp", "rp_ddsp2"],  # 軟口蓋背方変位 (DDSP)
+        ["rp_strangles", "if_strangles"],  # 腺疫 (S. equi)
+        ["if_piroplamosis", "if_equine_piroplasmosis", "if_piroplasmosis"],  # ピロプラズマ症
+        ["eye_uveitis_signs", "ey_recurrent_uveitis"],  # 馬再発性ぶどう膜炎 (ERU)
+        ["nr_epm", "nr_epm_extended"],  # 馬原虫性脊髄脳炎 (EPM)
+        ["mt_ems", "mt_ems2"],  # 馬メタボリック症候群 (EMS)
+        ["mt_ppid", "mt_ppid2"],  # 下垂体中葉機能障害 (PPID)
+        ["mt_rhabdomyolysis", "mt_rhabdomyolysis2"],  # 横紋筋融解症 (Tying Up)
+        ["ms_bucked_shin", "ms_bucked_shins"],  # バックドシン
+        ["if_rhodococcus", "fl_rhodococcus_pneumonia"],  # ロドコッカス肺炎(子馬)
+        ["if_eve", "if_equine_viral_arteritis"],  # 馬ウイルス性動脈炎 (EVA)
+        ["tx_acorn", "tx_acorn2"],  # ドングリ中毒 (Tannin)
+        ["tx_fescue", "tx_endophyte_fescue", "rp_fescue_toxicosis_repro"],  # フェスク中毒
+        ["ms_angular_limb", "fl_angular_limb_deformity"],  # 肢軸異常 (ALD)
+        ["ms_capped_elbow", "ms_elbow_hygroma"],  # 肘腫 (Shoe Boil)
+        ["ms_sdft", "mc_tendinitis_sdft"],  # 浅指屈腱炎 (Bowed Tendon)
+        ["sk_ulcerative_lymph", "if_corynebacterium2"],  # 潰瘍性リンパ管炎
+        ["if_ehv1_myeloencephalopathy", "if_ehv1_neuro"],  # EHV-1 脊髄脳症 (EHM)
+        ["mt_hypocalcemia", "mt_hypocalcemia2"],  # 低カルシウム血症 (Transport Tetany)
+        ["fl_perinatal_asphyxia", "fl_perinatal_asphyxia2"],  # 周産期仮死 (Dummy Foal)
     ],
 }
 
@@ -228,9 +264,7 @@ def build(species: str) -> dict:
             )
 
     # --- curated vet-approved same-disease merges (held back by the strict key) ---
-    _auto_ids = {m["canonical"]["id"] for m in merges} | {
-        mm["id"] for m in merges for mm in m["merged"]
-    }
+    _auto_ids = {m["canonical"]["id"] for m in merges} | {mm["id"] for m in merges for mm in m["merged"]}
     for group in _CURATED_MERGE.get(species, []):
         present = [rid for rid in group if rid in by_id and rid not in _auto_ids]
         if len(present) < 2:
@@ -249,11 +283,7 @@ def build(species: str) -> dict:
         _auto_ids.update(present)
     # Drop review-oversplit entries whose members are now FULLY resolved by a
     # merge (keep entries that still contain an unmerged subtype).
-    review_oversplit = [
-        o
-        for o in review_oversplit
-        if not all(m["id"] in _auto_ids for m in o.get("members", []))
-    ]
+    review_oversplit = [o for o in review_oversplit if not all(m["id"] in _auto_ids for m in o.get("members", []))]
 
     # --- archives: unambiguous non-clinical (research models) ---
     # detect.py flags research_model / human_medicine_transplant by keyword, but

@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 221,
-    "merge_clusters": 7,
-    "records_merged_away": 7,
+    "merge_clusters": 6,
+    "records_merged_away": 6,
     "archived": 0,
-    "served_after": 214
+    "served_after": 215
   },
   "merges": [
     {
@@ -41,24 +41,6 @@
           "slug": "dermatophytosis-ringworm",
           "name": "Dermatophytosis (Ringworm)",
           "name_ja": "皮膚糸状菌症（フクロモモンガ）"
-        }
-      ],
-      "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "sugar_glider_0038",
-        "slug": "proptosis-eye-prolapse",
-        "name": "Proptosis (Eye Prolapse)",
-        "name_ja": "眼球突出"
-      },
-      "merged": [
-        {
-          "id": "sugar_glider_0188",
-          "slug": "exophthalmos",
-          "name": "Exophthalmos",
-          "name_ja": "眼球突出（フクロモモンガ）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
@@ -264,6 +246,24 @@
             "slug": "diarrhea",
             "name": "Diarrhea",
             "name_ja": "下痢（フクロモモンガ）"
+          }
+        ]
+      },
+      {
+        "base": "Proptosis (Eye Prolapse)",
+        "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
+        "members": [
+          {
+            "id": "sugar_glider_0038",
+            "slug": "proptosis-eye-prolapse",
+            "name": "Proptosis (Eye Prolapse)",
+            "name_ja": "眼球突出"
+          },
+          {
+            "id": "sugar_glider_0188",
+            "slug": "exophthalmos",
+            "name": "Exophthalmos",
+            "name_ja": "眼球突出（フクロモモンガ）"
           }
         ]
       },
