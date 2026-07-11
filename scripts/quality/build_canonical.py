@@ -43,7 +43,7 @@ _SPECIES_JA = {
     "dog": "犬",
     "cat": "猫",
     "horse": "馬",
-    "rabbit": "うさぎ",
+    "rabbit": "ウサギ",
     "ferret": "フェレット",
     "hamster": "ハムスター",
     "guinea_pig": "モルモット",
@@ -61,6 +61,88 @@ _SPECIES_JA = {
     "amphibian": "両生類",
     "fish": "魚",
     "exotic_other": "その他",
+}
+
+
+# Curated do-NOT-merge guards: entries that the strict key would auto-merge
+# because they share a name_ja, but are clinically DISTINCT diseases (mislabeled
+# name_ja). Vet-reviewed. Keeps them as separate served records. The underlying
+# name_ja rename is tracked separately (touches stable-id/URL resolution).
+_DO_NOT_MERGE: dict[str, list[set[str]]] = {
+    # Warble Fly (Hypoderma) vs Cuterebra bot fly — different parasites sharing
+    # the mislabeled name_ja "ウマバエ幼虫症".
+    "rabbit": [{"rabbit_0212", "rabbit_0298"}],
+    # Proptosis (acute traumatic globe prolapse) vs Exophthalmos (chronic
+    # retrobulbar protrusion) — clinically distinct; vet decision to keep apart
+    # (both share the base name_ja 眼球突出).
+    "hamster": [{"hamster_0056", "hamster_0228"}],
+    "chinchilla": [{"chinchilla_0123", "chinchilla_0265"}],
+    "hedgehog": [{"hedgehog_0040", "hedgehog_0218"}],
+    "sugar_glider": [{"sugar_glider_0038", "sugar_glider_0188"}],
+    # Ileus (functional/paralytic) vs Intestinal Obstruction (mechanical) —
+    # distinct pathophysiology; vet decision to keep apart (base name_ja 腸閉塞).
+    "guinea_pig": [{"guinea_pig_0085", "guinea_pig_0209"}],
+}
+
+
+def _is_forbidden_pair(species: str, ids: list[str]) -> bool:
+    idset = set(ids)
+    return any(len(pair & idset) >= 2 for pair in _DO_NOT_MERGE.get(species, []))
+
+
+# Curated vet-approved same-disease merges that the STRICT auto key holds back
+# because BOTH members carry an informative qualifier (so they differ by more
+# than the species tag) yet are the same disease. First id = canonical (kept).
+# Vet-reviewed and approved (see .spec/<species>_CONSOLIDATION_REVIEW.md).
+_CURATED_MERGE: dict[str, list[list[str]]] = {
+    "rabbit": [
+        ["rabbit_0001", "rabbit_0314"],  # 胃拡張（鼓脹症） = 胃拡張
+        ["rabbit_0026", "rabbit_0294"],  # ツメダニ症 (Cheyletiella)
+        ["rabbit_0027", "rabbit_0295"],  # ハエウジ症 (Myiasis/Flystrike)
+        ["rabbit_0030", "rabbit_0274"],  # ウサギ出血病 RHDV = RHD
+        ["rabbit_0056", "rabbit_0360"],  # 涙嚢炎 (Dacryocystitis)
+        ["rabbit_0105", "rabbit_0385"],  # カルシウム欠乏症
+        ["rabbit_0194", "rabbit_0389"],  # 播種性血管内凝固 (DIC)
+        ["rabbit_0202", "rabbit_0320"],  # 麻痺性イレウス = イレウス
+        ["rabbit_0206", "rabbit_0289"],  # 増殖性腸症 (Lawsonia = cause)
+        ["rabbit_0234", "rabbit_0402"],  # ハッチバーン (Hutch Burn)
+        ["rabbit_0252", "rabbit_0352"],  # 脊椎骨折（胸腰椎） = 脊椎骨折
+    ],
+    "cat": [
+        # NB: pairs with IDENTICAL English names (→ identical slug) are already
+        # collapsed by dedupe_disease_list in the served path; the slug-based
+        # canonical loader cannot merge them, so they are NOT listed here
+        # (e.g. Feline Idiopathic Cystitis (FIC) cat_0040/cat_0218).
+        ["cat_0034", "cat_0531"],  # 慢性腎臓病 (CKD)
+        ["cat_0198", "cat_0465"],  # アセトアミノフェン中毒 = 急性型
+        ["cat_0257", "cat_0484"],  # 猫ビタミンA過剰症 = 慢性型
+    ],
+    # horse: acronym / synonym pairs of the SAME disease (explicit slug ids).
+    # Kept separate in review (distinct): SCC non-ocular vs cutaneous,
+    # Inguinal Hernia general vs stallion.
+    "horse": [
+        ["rp_laryngeal", "rp_laryngeal_hemiplegia"],  # 喉頭片麻痺 (Roaring)
+        ["rp_ddsp", "rp_ddsp2"],  # 軟口蓋背方変位 (DDSP)
+        ["rp_strangles", "if_strangles"],  # 腺疫 (S. equi)
+        ["if_piroplamosis", "if_equine_piroplasmosis", "if_piroplasmosis"],  # ピロプラズマ症
+        ["eye_uveitis_signs", "ey_recurrent_uveitis"],  # 馬再発性ぶどう膜炎 (ERU)
+        ["nr_epm", "nr_epm_extended"],  # 馬原虫性脊髄脳炎 (EPM)
+        ["mt_ems", "mt_ems2"],  # 馬メタボリック症候群 (EMS)
+        ["mt_ppid", "mt_ppid2"],  # 下垂体中葉機能障害 (PPID)
+        ["mt_rhabdomyolysis", "mt_rhabdomyolysis2"],  # 横紋筋融解症 (Tying Up)
+        ["ms_bucked_shin", "ms_bucked_shins"],  # バックドシン
+        ["if_rhodococcus", "fl_rhodococcus_pneumonia"],  # ロドコッカス肺炎(子馬)
+        ["if_eve", "if_equine_viral_arteritis"],  # 馬ウイルス性動脈炎 (EVA)
+        ["tx_acorn", "tx_acorn2"],  # ドングリ中毒 (Tannin)
+        ["tx_fescue", "tx_endophyte_fescue", "rp_fescue_toxicosis_repro"],  # フェスク中毒
+        ["ms_angular_limb", "fl_angular_limb_deformity"],  # 肢軸異常 (ALD)
+        ["ms_capped_elbow", "ms_elbow_hygroma"],  # 肘腫 (Shoe Boil)
+        ["ms_sdft", "mc_tendinitis_sdft"],  # 浅指屈腱炎 (Bowed Tendon)
+        ["sk_ulcerative_lymph", "if_corynebacterium2"],  # 潰瘍性リンパ管炎
+        ["if_ehv1_myeloencephalopathy", "if_ehv1_neuro"],  # EHV-1 脊髄脳症 (EHM)
+        ["mt_hypocalcemia", "mt_hypocalcemia2"],  # 低カルシウム血症 (Transport Tetany)
+        ["fl_perinatal_asphyxia", "fl_perinatal_asphyxia2"],  # 周産期仮死 (Dummy Foal)
+    ],
 }
 
 
@@ -151,6 +233,15 @@ def build(species: str) -> dict:
             groups.setdefault(_mergekey(rid), []).append(rid)
         safe_groups = [g for g in groups.values() if len(g) >= 2]
         for g in safe_groups:
+            if _is_forbidden_pair(species, g):
+                review_oversplit.append(
+                    {
+                        "base": by_id[g[0]].get("name"),
+                        "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
+                        "members": [ident(rid) for rid in g],
+                    }
+                )
+                continue
             canonical_id = min(g, key=_cleanliness)
             merged = [rid for rid in g if rid != canonical_id]
             merges.append(
@@ -171,6 +262,28 @@ def build(species: str) -> dict:
                     "members": [ident(rid) for rid in ids],
                 }
             )
+
+    # --- curated vet-approved same-disease merges (held back by the strict key) ---
+    _auto_ids = {m["canonical"]["id"] for m in merges} | {mm["id"] for m in merges for mm in m["merged"]}
+    for group in _CURATED_MERGE.get(species, []):
+        present = [rid for rid in group if rid in by_id and rid not in _auto_ids]
+        if len(present) < 2:
+            continue  # already handled by auto-merge or ids absent → skip (idempotent)
+        canonical_id = present[0]
+        merged = present[1:]
+        merges.append(
+            {
+                "canonical": ident(canonical_id),
+                "merged": [ident(rid) for rid in merged],
+                "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+                "inherit_content": True,
+                "curated": True,
+            }
+        )
+        _auto_ids.update(present)
+    # Drop review-oversplit entries whose members are now FULLY resolved by a
+    # merge (keep entries that still contain an unmerged subtype).
+    review_oversplit = [o for o in review_oversplit if not all(m["id"] in _auto_ids for m in o.get("members", []))]
 
     # --- archives: unambiguous non-clinical (research models) ---
     # detect.py flags research_model / human_medicine_transplant by keyword, but

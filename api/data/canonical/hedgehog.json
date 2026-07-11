@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 244,
-    "merge_clusters": 7,
-    "records_merged_away": 7,
+    "merge_clusters": 6,
+    "records_merged_away": 6,
     "archived": 0,
-    "served_after": 237
+    "served_after": 238
   },
   "merges": [
     {
@@ -59,24 +59,6 @@
           "slug": "cardiomyopathy",
           "name": "Cardiomyopathy",
           "name_ja": "心筋症（ハリネズミ）"
-        }
-      ],
-      "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "hedgehog_0040",
-        "slug": "proptosis-eye-protrusion",
-        "name": "Proptosis (Eye Protrusion)",
-        "name_ja": "眼球突出"
-      },
-      "merged": [
-        {
-          "id": "hedgehog_0218",
-          "slug": "exophthalmos",
-          "name": "Exophthalmos",
-          "name_ja": "眼球突出（ハリネズミ）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
@@ -276,6 +258,24 @@
             "slug": "mycobacteriosis-disseminated",
             "name": "Mycobacteriosis (Disseminated)",
             "name_ja": "マイコバクテリア症（播種型）"
+          }
+        ]
+      },
+      {
+        "base": "Proptosis (Eye Protrusion)",
+        "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
+        "members": [
+          {
+            "id": "hedgehog_0040",
+            "slug": "proptosis-eye-protrusion",
+            "name": "Proptosis (Eye Protrusion)",
+            "name_ja": "眼球突出"
+          },
+          {
+            "id": "hedgehog_0218",
+            "slug": "exophthalmos",
+            "name": "Exophthalmos",
+            "name_ja": "眼球突出（ハリネズミ）"
           }
         ]
       },

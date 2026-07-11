@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 278,
-    "merge_clusters": 17,
-    "records_merged_away": 19,
+    "merge_clusters": 16,
+    "records_merged_away": 18,
     "archived": 0,
-    "served_after": 259
+    "served_after": 260
   },
   "merges": [
     {
@@ -305,24 +305,6 @@
           "slug": "ovarian-cyst",
           "name": "Ovarian Cyst",
           "name_ja": "卵巣嚢胞（チンチラ）"
-        }
-      ],
-      "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
-    },
-    {
-      "canonical": {
-        "id": "chinchilla_0123",
-        "slug": "eye-proptosis",
-        "name": "Eye Proptosis",
-        "name_ja": "眼球突出"
-      },
-      "merged": [
-        {
-          "id": "chinchilla_0265",
-          "slug": "exophthalmos",
-          "name": "Exophthalmos",
-          "name_ja": "眼球突出（チンチラ）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
@@ -690,6 +672,24 @@
             "slug": "osteoarthritis",
             "name": "Osteoarthritis",
             "name_ja": "変形性関節症（チンチラ）"
+          }
+        ]
+      },
+      {
+        "base": "Eye Proptosis",
+        "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
+        "members": [
+          {
+            "id": "chinchilla_0123",
+            "slug": "eye-proptosis",
+            "name": "Eye Proptosis",
+            "name_ja": "眼球突出"
+          },
+          {
+            "id": "chinchilla_0265",
+            "slug": "exophthalmos",
+            "name": "Exophthalmos",
+            "name_ja": "眼球突出（チンチラ）"
           }
         ]
       },

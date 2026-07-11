@@ -1,0 +1,3150 @@
+{
+  "species": "rabbit",
+  "schema_version": 1,
+  "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
+  "counts": {
+    "records": 452,
+    "merge_clusters": 31,
+    "records_merged_away": 31,
+    "archived": 0,
+    "served_after": 421
+  },
+  "merges": [
+    {
+      "canonical": {
+        "id": "rabbit_0010",
+        "slug": "molar-spurs",
+        "name": "Molar Spurs",
+        "name_ja": "臼歯棘状突起"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0305",
+          "slug": "molar-spurs-cheek-teeth-points",
+          "name": "Molar Spurs (Cheek Teeth Points)",
+          "name_ja": "臼歯棘状突起（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0015",
+        "slug": "bacterial-pneumonia",
+        "name": "Bacterial Pneumonia",
+        "name_ja": "細菌性肺炎"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0330",
+          "slug": "pneumonia-bacterial",
+          "name": "Pneumonia (Bacterial)",
+          "name_ja": "細菌性肺炎（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0020",
+        "slug": "urolithiasis-bladder-stones",
+        "name": "Urolithiasis (Bladder Stones)",
+        "name_ja": "尿路結石症"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0339",
+          "slug": "urolithiasis",
+          "name": "Urolithiasis",
+          "name_ja": "尿路結石症（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0024",
+        "slug": "pinworms-passalurus-ambiguus",
+        "name": "Pinworms (Passalurus ambiguus)",
+        "name_ja": "蟯虫症"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0296",
+          "slug": "pinworm-infection-passalurus-ambiguus",
+          "name": "Pinworm Infection (Passalurus ambiguus)",
+          "name_ja": "蟯虫症（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0033",
+        "slug": "ringworm-dermatophytosis",
+        "name": "Ringworm (Dermatophytosis)",
+        "name_ja": "皮膚糸状菌症（白癬）"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0302",
+          "slug": "dermatophytosis-ringworm",
+          "name": "Dermatophytosis (Ringworm)",
+          "name_ja": "皮膚糸状菌症（白癬）（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0064",
+        "slug": "atherosclerosis",
+        "name": "Atherosclerosis",
+        "name_ja": "動脈硬化症"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0367",
+          "slug": "arteriosclerosis",
+          "name": "Arteriosclerosis",
+          "name_ja": "動脈硬化症（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0066",
+        "slug": "mammary-gland-tumour",
+        "name": "Mammary Gland Tumour",
+        "name_ja": "乳腺腫瘍"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0348",
+          "slug": "mammary-gland-tumor",
+          "name": "Mammary Gland Tumor",
+          "name_ja": "乳腺腫瘍（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0067",
+        "slug": "testicular-tumour",
+        "name": "Testicular Tumour",
+        "name_ja": "精巣腫瘍"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0345",
+          "slug": "testicular-neoplasia",
+          "name": "Testicular Neoplasia",
+          "name_ja": "精巣腫瘍（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0072",
+        "slug": "trichobezoar-hairball",
+        "name": "Trichobezoar (Hairball)",
+        "name_ja": "毛球症"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0316",
+          "slug": "trichobezoar-hairball-obstruction",
+          "name": "Trichobezoar (Hairball Obstruction)",
+          "name_ja": "毛球症（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0074",
+        "slug": "gastric-ulceration",
+        "name": "Gastric Ulceration",
+        "name_ja": "胃潰瘍"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0317",
+          "slug": "gastric-ulcer",
+          "name": "Gastric Ulcer",
+          "name_ja": "胃潰瘍（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0077",
+        "slug": "tyzzer-disease",
+        "name": "Tyzzer Disease",
+        "name_ja": "ティザー病"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0281",
+          "slug": "tyzzer-s-disease",
+          "name": "Tyzzer's Disease",
+          "name_ja": "ティザー病（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0093",
+        "slug": "pulmonary-abscess",
+        "name": "Pulmonary Abscess",
+        "name_ja": "肺膿瘍"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0331",
+          "slug": "lung-abscess",
+          "name": "Lung Abscess",
+          "name_ja": "肺膿瘍（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0099",
+        "slug": "ovarian-cysts",
+        "name": "Ovarian Cysts",
+        "name_ja": "卵巣嚢胞"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0344",
+          "slug": "ovarian-cyst",
+          "name": "Ovarian Cyst",
+          "name_ja": "卵巣嚢胞（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0104",
+        "slug": "vitamin-d-toxicity",
+        "name": "Vitamin D Toxicity",
+        "name_ja": "ビタミンD中毒"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0384",
+          "slug": "vitamin-d-toxicosis",
+          "name": "Vitamin D Toxicosis",
+          "name_ja": "ビタミンD中毒（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0119",
+        "slug": "hepatic-lobe-torsion",
+        "name": "Hepatic Lobe Torsion",
+        "name_ja": "肝葉捻転"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0318",
+          "slug": "liver-lobe-torsion",
+          "name": "Liver Lobe Torsion",
+          "name_ja": "肝葉捻転（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0126",
+        "slug": "hypoglycaemia",
+        "name": "Hypoglycaemia",
+        "name_ja": "低血糖症"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0382",
+          "slug": "hypoglycemia",
+          "name": "Hypoglycemia",
+          "name_ja": "低血糖症（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0161",
+        "slug": "tularaemia",
+        "name": "Tularaemia",
+        "name_ja": "野兎病"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0286",
+          "slug": "tularemia",
+          "name": "Tularemia",
+          "name_ja": "野兎病（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0183",
+        "slug": "cherry-eye-nictitans-gland-prolapse",
+        "name": "Cherry Eye (Nictitans Gland Prolapse)",
+        "name_ja": "チェリーアイ（瞬膜腺脱出）"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0365",
+          "slug": "cherry-eye-nictitating-membrane-prolapse",
+          "name": "Cherry Eye (Nictitating Membrane Prolapse)",
+          "name_ja": "チェリーアイ（瞬膜腺脱出）（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0214",
+        "slug": "pulmonary-oedema",
+        "name": "Pulmonary Oedema",
+        "name_ja": "肺水腫"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0332",
+          "slug": "pulmonary-edema",
+          "name": "Pulmonary Edema",
+          "name_ja": "肺水腫（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0222",
+        "slug": "patellar-luxation",
+        "name": "Patellar Luxation",
+        "name_ja": "膝蓋骨脱臼"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0375",
+          "slug": "luxating-patella",
+          "name": "Luxating Patella",
+          "name_ja": "膝蓋骨脱臼（ウサギ）"
+        }
+      ],
+      "reason": "same disease modulo species tag / identical name",
+      "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0001",
+        "slug": "gastric-dilation-bloat",
+        "name": "Gastric Dilation (Bloat)",
+        "name_ja": "胃拡張（鼓脹症）"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0314",
+          "slug": "gastric-dilation",
+          "name": "Gastric Dilation",
+          "name_ja": "胃拡張（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0026",
+        "slug": "fur-mites-cheyletiella-parasitovorax",
+        "name": "Fur Mites (Cheyletiella parasitovorax)",
+        "name_ja": "ツメダニ症"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0294",
+          "slug": "cheyletiella-mange-fur-mites",
+          "name": "Cheyletiella Mange (Fur Mites)",
+          "name_ja": "ツメダニ症（毛ダニ）（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0027",
+        "slug": "myiasis-flystrike",
+        "name": "Myiasis (Flystrike)",
+        "name_ja": "ハエウジ症（フライストライク）"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0295",
+          "slug": "flystrike-myiasis",
+          "name": "Flystrike (Myiasis)",
+          "name_ja": "ハエウジ症（蠅蛆症）（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0030",
+        "slug": "rabbit-haemorrhagic-disease-rhdv-vhd",
+        "name": "Rabbit Haemorrhagic Disease (RHDV/VHD)",
+        "name_ja": "ウサギ出血病（RHDV/VHD）"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0274",
+          "slug": "rabbit-hemorrhagic-disease-rhd",
+          "name": "Rabbit Hemorrhagic Disease (RHD)",
+          "name_ja": "ウサギ出血病（RHD）（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0056",
+        "slug": "dacryocystitis",
+        "name": "Dacryocystitis",
+        "name_ja": "涙嚢炎"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0360",
+          "slug": "dacryocystitis-tear-duct-obstruction",
+          "name": "Dacryocystitis (Tear Duct Obstruction)",
+          "name_ja": "涙嚢炎（鼻涙管閉塞）（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0105",
+        "slug": "calcium-deficiency",
+        "name": "Calcium Deficiency",
+        "name_ja": "カルシウム欠乏症"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0385",
+          "slug": "calcium-deficiency-hypocalcemia",
+          "name": "Calcium Deficiency (Hypocalcemia)",
+          "name_ja": "カルシウム欠乏症（低カルシウム血症）（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0194",
+        "slug": "disseminated-intravascular-coagulation-dic",
+        "name": "Disseminated Intravascular Coagulation (DIC)",
+        "name_ja": "播種性血管内凝固症候群（DIC）"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0389",
+          "slug": "disseminated-intravascular-coagulation",
+          "name": "Disseminated Intravascular Coagulation",
+          "name_ja": "播種性血管内凝固（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0202",
+        "slug": "ileus-paralytic",
+        "name": "Ileus (Paralytic)",
+        "name_ja": "麻痺性イレウス"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0320",
+          "slug": "ileus",
+          "name": "Ileus",
+          "name_ja": "イレウス（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0206",
+        "slug": "proliferative-enteropathy",
+        "name": "Proliferative Enteropathy",
+        "name_ja": "増殖性腸症"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0289",
+          "slug": "proliferative-enteropathy-lawsonia",
+          "name": "Proliferative Enteropathy (Lawsonia)",
+          "name_ja": "増殖性腸症（ローソニア）（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0234",
+        "slug": "hutch-burn-urine-scald-perineal",
+        "name": "Hutch Burn (Urine Scald - Perineal)",
+        "name_ja": "ハッチバーン（会陰部尿やけ）"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0402",
+          "slug": "hutch-burn",
+          "name": "Hutch Burn",
+          "name_ja": "ハッチバーン（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "rabbit_0252",
+        "slug": "spinal-fracture-thoracolumbar",
+        "name": "Spinal Fracture (Thoracolumbar)",
+        "name_ja": "脊椎骨折（胸腰椎）"
+      },
+      "merged": [
+        {
+          "id": "rabbit_0352",
+          "slug": "spinal-fracture",
+          "name": "Spinal Fracture",
+          "name_ja": "脊椎骨折（ウサギ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    }
+  ],
+  "archives": [],
+  "review": {
+    "nonclinical_transplants": [],
+    "oversplit_subtypes": [
+      {
+        "base": "Pasteurellosis (Snuffles)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0014",
+            "slug": "pasteurellosis-snuffles",
+            "name": "Pasteurellosis (Snuffles)",
+            "name_ja": "パスツレラ症（スナッフル）"
+          },
+          {
+            "id": "rabbit_0224",
+            "slug": "pasteurellosis-conjunctival-form",
+            "name": "Pasteurellosis - Conjunctival Form",
+            "name_ja": "パスツレラ症（結膜型）"
+          },
+          {
+            "id": "rabbit_0225",
+            "slug": "pasteurellosis-genital-form",
+            "name": "Pasteurellosis - Genital Form",
+            "name_ja": "パスツレラ症（生殖器型）"
+          },
+          {
+            "id": "rabbit_0226",
+            "slug": "pasteurellosis-septicaemic-form",
+            "name": "Pasteurellosis - Septicaemic Form",
+            "name_ja": "パスツレラ症（敗血症型）"
+          }
+        ]
+      },
+      {
+        "base": "Heat Stroke",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0018",
+            "slug": "heat-stroke",
+            "name": "Heat Stroke",
+            "name_ja": "熱中症"
+          },
+          {
+            "id": "rabbit_0230",
+            "slug": "heat-stroke-severe",
+            "name": "Heat Stroke - Severe",
+            "name_ja": "熱中症（重度）"
+          }
+        ]
+      },
+      {
+        "base": "Pinworms (Passalurus ambiguus)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0024",
+            "slug": "pinworms-passalurus-ambiguus",
+            "name": "Pinworms (Passalurus ambiguus)",
+            "name_ja": "蟯虫症"
+          },
+          {
+            "id": "rabbit_0244",
+            "slug": "pinworm-infestation-heavy",
+            "name": "Pinworm Infestation - Heavy",
+            "name_ja": "蟯虫症（重度感染）"
+          },
+          {
+            "id": "rabbit_0296",
+            "slug": "pinworm-infection-passalurus-ambiguus",
+            "name": "Pinworm Infection (Passalurus ambiguus)",
+            "name_ja": "蟯虫症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "base": "Myxomatosis",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0029",
+            "slug": "myxomatosis",
+            "name": "Myxomatosis",
+            "name_ja": "粘液腫症"
+          },
+          {
+            "id": "rabbit_0238",
+            "slug": "myxomatosis-amyxomatous-form",
+            "name": "Myxomatosis - Amyxomatous Form",
+            "name_ja": "粘液腫症（無粘液腫型）"
+          },
+          {
+            "id": "rabbit_0246",
+            "slug": "myxomatosis-respiratory-form",
+            "name": "Myxomatosis - Respiratory Form",
+            "name_ja": "粘液腫症（呼吸器型）"
+          },
+          {
+            "id": "rabbit_0270",
+            "slug": "myxomatosis",
+            "name": "Myxomatosis",
+            "name_ja": "粘液腫症（ミクソマトーシス）"
+          }
+        ]
+      },
+      {
+        "base": "Pregnancy Toxemia (Ketosis)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0051",
+            "slug": "pregnancy-toxemia-ketosis",
+            "name": "Pregnancy Toxemia (Ketosis)",
+            "name_ja": "妊娠中毒症（ケトーシス）"
+          },
+          {
+            "id": "rabbit_0228",
+            "slug": "pregnancy-toxemia-early",
+            "name": "Pregnancy Toxemia - Early",
+            "name_ja": "妊娠中毒症（初期）"
+          },
+          {
+            "id": "rabbit_0229",
+            "slug": "pregnancy-toxemia-advanced",
+            "name": "Pregnancy Toxemia - Advanced",
+            "name_ja": "妊娠中毒症（進行期）"
+          },
+          {
+            "id": "rabbit_0346",
+            "slug": "pregnancy-toxemia",
+            "name": "Pregnancy Toxemia",
+            "name_ja": "妊娠中毒症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "base": "Mammary Gland Tumour",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0066",
+            "slug": "mammary-gland-tumour",
+            "name": "Mammary Gland Tumour",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "rabbit_0259",
+            "slug": "mammary-gland-tumor-malignant",
+            "name": "Mammary Gland Tumor (Malignant)",
+            "name_ja": "乳腺腫瘍（悪性型）"
+          },
+          {
+            "id": "rabbit_0348",
+            "slug": "mammary-gland-tumor",
+            "name": "Mammary Gland Tumor",
+            "name_ja": "乳腺腫瘍（ウサギ）"
+          }
+        ]
+      },
+      {
+        "base": "Encephalitozoonosis - Renal Form",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0080",
+            "slug": "encephalitozoonosis-renal-form",
+            "name": "Encephalitozoonosis - Renal Form",
+            "name_ja": "エンセファリトゾーン症（腎型）"
+          },
+          {
+            "id": "rabbit_0227",
+            "slug": "encephalitozoonosis-neurological-form",
+            "name": "Encephalitozoonosis - Neurological Form",
+            "name_ja": "エンセファリトゾーン症（神経型）"
+          },
+          {
+            "id": "rabbit_0291",
+            "slug": "encephalitozoonosis",
+            "name": "Encephalitozoonosis",
+            "name_ja": "エンセファリトゾーン症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "base": "Lead Poisoning",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0102",
+            "slug": "lead-poisoning",
+            "name": "Lead Poisoning",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "rabbit_0254",
+            "slug": "lead-toxicosis-chronic",
+            "name": "Lead Toxicosis (Chronic)",
+            "name_ja": "鉛中毒（慢性型）"
+          }
+        ]
+      },
+      {
+        "base": "Hepatic Lobe Torsion",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0119",
+            "slug": "hepatic-lobe-torsion",
+            "name": "Hepatic Lobe Torsion",
+            "name_ja": "肝葉捻転"
+          },
+          {
+            "id": "rabbit_0261",
+            "slug": "hepatic-torsion-acute",
+            "name": "Hepatic Torsion (Acute)",
+            "name_ja": "肝葉捻転（急性型）"
+          },
+          {
+            "id": "rabbit_0318",
+            "slug": "liver-lobe-torsion",
+            "name": "Liver Lobe Torsion",
+            "name_ja": "肝葉捻転（ウサギ）"
+          }
+        ]
+      },
+      {
+        "base": "Proptosis (Globe Prolapse)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0136",
+            "slug": "proptosis-globe-prolapse",
+            "name": "Proptosis (Globe Prolapse)",
+            "name_ja": "眼球突出（眼球脱出）"
+          },
+          {
+            "id": "rabbit_0361",
+            "slug": "exophthalmos",
+            "name": "Exophthalmos",
+            "name_ja": "眼球突出（ウサギ）"
+          },
+          {
+            "id": "rabbit_0364",
+            "slug": "proptosis",
+            "name": "Proptosis",
+            "name_ja": "眼球脱出（ウサギ）"
+          }
+        ]
+      },
+      {
+        "base": "Renal Cyst",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0199",
+            "slug": "renal-cyst",
+            "name": "Renal Cyst",
+            "name_ja": "腎嚢胞"
+          },
+          {
+            "id": "rabbit_0255",
+            "slug": "renal-cysts-polycystic",
+            "name": "Renal Cysts (Polycystic)",
+            "name_ja": "多発性腎嚢胞"
+          }
+        ]
+      },
+      {
+        "base": "Ulcerative Pododermatitis - Grade I",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0235",
+            "slug": "ulcerative-pododermatitis-grade-i",
+            "name": "Ulcerative Pododermatitis - Grade I",
+            "name_ja": "潰瘍性足底皮膚炎（グレードI）"
+          },
+          {
+            "id": "rabbit_0236",
+            "slug": "ulcerative-pododermatitis-grade-iv-v",
+            "name": "Ulcerative Pododermatitis - Grade IV-V",
+            "name_ja": "潰瘍性足底皮膚炎（グレードIV-V）"
+          }
+        ]
+      },
+      {
+        "base": "Coccidiosis (Intestinal)",
+        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
+        "members": [
+          {
+            "id": "rabbit_0292",
+            "slug": "coccidiosis-intestinal",
+            "name": "Coccidiosis (Intestinal)",
+            "name_ja": "コクシジウム症（腸管型）（ウサギ）"
+          },
+          {
+            "id": "rabbit_0293",
+            "slug": "coccidiosis-hepatic",
+            "name": "Coccidiosis (Hepatic)",
+            "name_ja": "コクシジウム症（肝臓型）（ウサギ）"
+          }
+        ]
+      }
+    ],
+    "split_families": [
+      {
+        "shared_stem": "absces",
+        "size": 15,
+        "members": [
+          {
+            "id": "rabbit_0012",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "rabbit_0035",
+            "name": "Subcutaneous Abscess",
+            "name_ja": "皮下膿瘍"
+          },
+          {
+            "id": "rabbit_0036",
+            "name": "Retrobulbar Abscess",
+            "name_ja": "球後膿瘍"
+          },
+          {
+            "id": "rabbit_0037",
+            "name": "Mandibular Abscess",
+            "name_ja": "下顎膿瘍"
+          },
+          {
+            "id": "rabbit_0093",
+            "name": "Pulmonary Abscess",
+            "name_ja": "肺膿瘍"
+          },
+          {
+            "id": "rabbit_0240",
+            "name": "Testicular Abscess",
+            "name_ja": "精巣膿瘍"
+          },
+          {
+            "id": "rabbit_0243",
+            "name": "Corneal Abscess (Stromal)",
+            "name_ja": "角膜膿瘍（実質性）"
+          },
+          {
+            "id": "rabbit_0306",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0307",
+            "name": "Retrobulbar Dental Abscess",
+            "name_ja": "後眼窩歯科膿瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0328",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0331",
+            "name": "Lung Abscess",
+            "name_ja": "肺膿瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0357",
+            "name": "Spinal Abscess",
+            "name_ja": "脊髄膿瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0420",
+            "name": "Facial Abscess",
+            "name_ja": "顔面膿瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0427",
+            "name": "Laryngeal Abscess",
+            "name_ja": "喉頭膿瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0450",
+            "name": "Spleen Abscess",
+            "name_ja": "脾臓膿瘍（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "rabbit",
+        "size": 10,
+        "members": [
+          {
+            "id": "rabbit_0030",
+            "name": "Rabbit Haemorrhagic Disease (RHDV/VHD)",
+            "name_ja": "ウサギ出血病（RHDV/VHD）"
+          },
+          {
+            "id": "rabbit_0268",
+            "name": "Floppy Rabbit Syndrome",
+            "name_ja": "フロッピーラビット症候群"
+          },
+          {
+            "id": "rabbit_0271",
+            "name": "Rabbit Syphilis (Treponematosis)",
+            "name_ja": "ウサギ梅毒（トレポネーマ症）"
+          },
+          {
+            "id": "rabbit_0272",
+            "name": "Rabbit Sepsis",
+            "name_ja": "ウサギの敗血症"
+          },
+          {
+            "id": "rabbit_0273",
+            "name": "Epizootic Rabbit Enteropathy (ERE)",
+            "name_ja": "流行性ウサギ腸症（ERE）"
+          },
+          {
+            "id": "rabbit_0274",
+            "name": "Rabbit Hemorrhagic Disease (RHD)",
+            "name_ja": "ウサギ出血病（RHD）（ウサギ）"
+          },
+          {
+            "id": "rabbit_0275",
+            "name": "Rabbit Papillomatosis",
+            "name_ja": "ウサギ乳頭腫症（ウサギ）"
+          },
+          {
+            "id": "rabbit_0276",
+            "name": "Rabbit Coronavirus Enteritis",
+            "name_ja": "ウサギコロナウイルス腸炎（ウサギ）"
+          },
+          {
+            "id": "rabbit_0277",
+            "name": "Rabbit Poxvirus Infection",
+            "name_ja": "ウサギポックスウイルス感染症（ウサギ）"
+          },
+          {
+            "id": "rabbit_0278",
+            "name": "Rabbit Oral Papilloma",
+            "name_ja": "ウサギ口腔乳頭腫（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 9,
+        "members": [
+          {
+            "id": "rabbit_0039",
+            "name": "Spinal Fracture / Luxation",
+            "name_ja": "脊椎骨折・脱臼"
+          },
+          {
+            "id": "rabbit_0041",
+            "name": "Fracture (Long Bone)",
+            "name_ja": "長管骨骨折"
+          },
+          {
+            "id": "rabbit_0221",
+            "name": "Tibial Fracture",
+            "name_ja": "脛骨骨折"
+          },
+          {
+            "id": "rabbit_0252",
+            "name": "Spinal Fracture (Thoracolumbar)",
+            "name_ja": "脊椎骨折（胸腰椎）"
+          },
+          {
+            "id": "rabbit_0352",
+            "name": "Spinal Fracture",
+            "name_ja": "脊椎骨折（ウサギ）"
+          },
+          {
+            "id": "rabbit_0373",
+            "name": "Limb Fracture",
+            "name_ja": "四肢骨折（ウサギ）"
+          },
+          {
+            "id": "rabbit_0374",
+            "name": "Vertebral Fracture",
+            "name_ja": "椎骨骨折（ウサギ）"
+          },
+          {
+            "id": "rabbit_0378",
+            "name": "Pelvic Fracture",
+            "name_ja": "骨盤骨折（ウサギ）"
+          },
+          {
+            "id": "rabbit_0441",
+            "name": "Mandibular Fracture",
+            "name_ja": "下顎骨折（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 8,
+        "members": [
+          {
+            "id": "rabbit_0082",
+            "name": "Dermatitis (Non-specific)",
+            "name_ja": "皮膚炎（非特異的）"
+          },
+          {
+            "id": "rabbit_0096",
+            "name": "Perineal Dermatitis",
+            "name_ja": "会陰部皮膚炎"
+          },
+          {
+            "id": "rabbit_0162",
+            "name": "Dermatophilosis",
+            "name_ja": "デルマトフィルス症"
+          },
+          {
+            "id": "rabbit_0233",
+            "name": "Dewlap Fold Dermatitis",
+            "name_ja": "肉垂皮膚炎"
+          },
+          {
+            "id": "rabbit_0280",
+            "name": "Staphylococcal Dermatitis",
+            "name_ja": "ブドウ球菌性皮膚炎（ウサギ）"
+          },
+          {
+            "id": "rabbit_0302",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（白癬）（ウサギ）"
+          },
+          {
+            "id": "rabbit_0412",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎（ウサギ）"
+          },
+          {
+            "id": "rabbit_0418",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enceph",
+        "size": 8,
+        "members": [
+          {
+            "id": "rabbit_0023",
+            "name": "Encephalitozoon cuniculi (E. cuniculi)",
+            "name_ja": "エンセファリトゾーン・クニクリ感染症"
+          },
+          {
+            "id": "rabbit_0080",
+            "name": "Encephalitozoonosis - Renal Form",
+            "name_ja": "エンセファリトゾーン症（腎型）"
+          },
+          {
+            "id": "rabbit_0150",
+            "name": "Encephalitozoonosis - Ocular Form",
+            "name_ja": "エンセファリトゾーン症 - 眼型"
+          },
+          {
+            "id": "rabbit_0219",
+            "name": "Hepatic Encephalopathy",
+            "name_ja": "肝性脳症"
+          },
+          {
+            "id": "rabbit_0227",
+            "name": "Encephalitozoonosis - Neurological Form",
+            "name_ja": "エンセファリトゾーン症（神経型）"
+          },
+          {
+            "id": "rabbit_0291",
+            "name": "Encephalitozoonosis",
+            "name_ja": "エンセファリトゾーン症（ウサギ）"
+          },
+          {
+            "id": "rabbit_0358",
+            "name": "Lead Encephalopathy",
+            "name_ja": "鉛脳症（ウサギ）"
+          },
+          {
+            "id": "rabbit_0451",
+            "name": "Encephalitozoon Intestinalis Infection",
+            "name_ja": "エンセファリトゾーンインテスティナリス感染（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "form",
+        "size": 8,
+        "members": [
+          {
+            "id": "rabbit_0080",
+            "name": "Encephalitozoonosis - Renal Form",
+            "name_ja": "エンセファリトゾーン症（腎型）"
+          },
+          {
+            "id": "rabbit_0150",
+            "name": "Encephalitozoonosis - Ocular Form",
+            "name_ja": "エンセファリトゾーン症 - 眼型"
+          },
+          {
+            "id": "rabbit_0224",
+            "name": "Pasteurellosis - Conjunctival Form",
+            "name_ja": "パスツレラ症（結膜型）"
+          },
+          {
+            "id": "rabbit_0225",
+            "name": "Pasteurellosis - Genital Form",
+            "name_ja": "パスツレラ症（生殖器型）"
+          },
+          {
+            "id": "rabbit_0226",
+            "name": "Pasteurellosis - Septicaemic Form",
+            "name_ja": "パスツレラ症（敗血症型）"
+          },
+          {
+            "id": "rabbit_0227",
+            "name": "Encephalitozoonosis - Neurological Form",
+            "name_ja": "エンセファリトゾーン症（神経型）"
+          },
+          {
+            "id": "rabbit_0238",
+            "name": "Myxomatosis - Amyxomatous Form",
+            "name_ja": "粘液腫症（無粘液腫型）"
+          },
+          {
+            "id": "rabbit_0246",
+            "name": "Myxomatosis - Respiratory Form",
+            "name_ja": "粘液腫症（呼吸器型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 8,
+        "members": [
+          {
+            "id": "rabbit_0007",
+            "name": "Hepatic Coccidiosis",
+            "name_ja": "肝コクシジウム症"
+          },
+          {
+            "id": "rabbit_0069",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "rabbit_0119",
+            "name": "Hepatic Lobe Torsion",
+            "name_ja": "肝葉捻転"
+          },
+          {
+            "id": "rabbit_0124",
+            "name": "Hepatic Cyst",
+            "name_ja": "肝嚢胞"
+          },
+          {
+            "id": "rabbit_0219",
+            "name": "Hepatic Encephalopathy",
+            "name_ja": "肝性脳症"
+          },
+          {
+            "id": "rabbit_0261",
+            "name": "Hepatic Torsion (Acute)",
+            "name_ja": "肝葉捻転（急性型）"
+          },
+          {
+            "id": "rabbit_0328",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0416",
+            "name": "Hepatic Lymphoma",
+            "name_ja": "肝リンパ腫（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "torsio",
+        "size": 8,
+        "members": [
+          {
+            "id": "rabbit_0118",
+            "name": "Splenic Torsion",
+            "name_ja": "脾臓捻転"
+          },
+          {
+            "id": "rabbit_0119",
+            "name": "Hepatic Lobe Torsion",
+            "name_ja": "肝葉捻転"
+          },
+          {
+            "id": "rabbit_0191",
+            "name": "Uterine Torsion",
+            "name_ja": "子宮捻転"
+          },
+          {
+            "id": "rabbit_0261",
+            "name": "Hepatic Torsion (Acute)",
+            "name_ja": "肝葉捻転（急性型）"
+          },
+          {
+            "id": "rabbit_0262",
+            "name": "Intestinal Torsion",
+            "name_ja": "腸捻転"
+          },
+          {
+            "id": "rabbit_0318",
+            "name": "Liver Lobe Torsion",
+            "name_ja": "肝葉捻転（ウサギ）"
+          },
+          {
+            "id": "rabbit_0425",
+            "name": "Mesenteric Torsion",
+            "name_ja": "腸間膜捻転（ウサギ）"
+          },
+          {
+            "id": "rabbit_0428",
+            "name": "Lung Lobe Torsion",
+            "name_ja": "肺葉捻転（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "entero",
+        "size": 7,
+        "members": [
+          {
+            "id": "rabbit_0002",
+            "name": "Mucoid Enteropathy",
+            "name_ja": "粘液性腸症"
+          },
+          {
+            "id": "rabbit_0005",
+            "name": "Enterotoxemia",
+            "name_ja": "腸管毒素血症"
+          },
+          {
+            "id": "rabbit_0101",
+            "name": "Antibiotic-Associated Enterotoxemia",
+            "name_ja": "抗生物質関連腸管毒素血症"
+          },
+          {
+            "id": "rabbit_0206",
+            "name": "Proliferative Enteropathy",
+            "name_ja": "増殖性腸症"
+          },
+          {
+            "id": "rabbit_0273",
+            "name": "Epizootic Rabbit Enteropathy (ERE)",
+            "name_ja": "流行性ウサギ腸症（ERE）"
+          },
+          {
+            "id": "rabbit_0282",
+            "name": "Clostridial Enterotoxemia",
+            "name_ja": "クロストリジウム性腸毒血症（ウサギ）"
+          },
+          {
+            "id": "rabbit_0289",
+            "name": "Proliferative Enteropathy (Lawsonia)",
+            "name_ja": "増殖性腸症（ローソニア）（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 7,
+        "members": [
+          {
+            "id": "rabbit_0021",
+            "name": "Chronic Renal Failure",
+            "name_ja": "慢性腎不全"
+          },
+          {
+            "id": "rabbit_0022",
+            "name": "Acute Renal Failure",
+            "name_ja": "急性腎不全"
+          },
+          {
+            "id": "rabbit_0080",
+            "name": "Encephalitozoonosis - Renal Form",
+            "name_ja": "エンセファリトゾーン症（腎型）"
+          },
+          {
+            "id": "rabbit_0199",
+            "name": "Renal Cyst",
+            "name_ja": "腎嚢胞"
+          },
+          {
+            "id": "rabbit_0255",
+            "name": "Renal Cysts (Polycystic)",
+            "name_ja": "多発性腎嚢胞"
+          },
+          {
+            "id": "rabbit_0256",
+            "name": "Renal Agenesis",
+            "name_ja": "腎無形成"
+          },
+          {
+            "id": "rabbit_0435",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cyst",
+        "size": 6,
+        "members": [
+          {
+            "id": "rabbit_0099",
+            "name": "Ovarian Cysts",
+            "name_ja": "卵巣嚢胞"
+          },
+          {
+            "id": "rabbit_0124",
+            "name": "Hepatic Cyst",
+            "name_ja": "肝嚢胞"
+          },
+          {
+            "id": "rabbit_0199",
+            "name": "Renal Cyst",
+            "name_ja": "腎嚢胞"
+          },
+          {
+            "id": "rabbit_0239",
+            "name": "Mammary Cyst",
+            "name_ja": "乳腺嚢胞"
+          },
+          {
+            "id": "rabbit_0255",
+            "name": "Renal Cysts (Polycystic)",
+            "name_ja": "多発性腎嚢胞"
+          },
+          {
+            "id": "rabbit_0344",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 6,
+        "members": [
+          {
+            "id": "rabbit_0103",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "rabbit_0105",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症"
+          },
+          {
+            "id": "rabbit_0231",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症"
+          },
+          {
+            "id": "rabbit_0232",
+            "name": "Vitamin B Complex Deficiency",
+            "name_ja": "ビタミンB群欠乏症"
+          },
+          {
+            "id": "rabbit_0253",
+            "name": "Zinc Deficiency",
+            "name_ja": "亜鉛欠乏症"
+          },
+          {
+            "id": "rabbit_0385",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（低カルシウム血症）（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enteri",
+        "size": 6,
+        "members": [
+          {
+            "id": "rabbit_0004",
+            "name": "Acute Enteritis",
+            "name_ja": "急性腸炎"
+          },
+          {
+            "id": "rabbit_0145",
+            "name": "Clostridial Enteritis",
+            "name_ja": "クロストリジウム腸炎"
+          },
+          {
+            "id": "rabbit_0146",
+            "name": "E. coli Enteritis",
+            "name_ja": "大腸菌性腸炎"
+          },
+          {
+            "id": "rabbit_0167",
+            "name": "Rotavirus Enteritis",
+            "name_ja": "ロタウイルス性腸炎"
+          },
+          {
+            "id": "rabbit_0168",
+            "name": "Coronavirus Enteritis",
+            "name_ja": "コロナウイルス性腸炎"
+          },
+          {
+            "id": "rabbit_0276",
+            "name": "Rabbit Coronavirus Enteritis",
+            "name_ja": "ウサギコロナウイルス腸炎（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastri",
+        "size": 6,
+        "members": [
+          {
+            "id": "rabbit_0001",
+            "name": "Gastric Dilation (Bloat)",
+            "name_ja": "胃拡張（鼓脹症）"
+          },
+          {
+            "id": "rabbit_0074",
+            "name": "Gastric Ulceration",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "rabbit_0204",
+            "name": "Gastric Foreign Body",
+            "name_ja": "胃内異物"
+          },
+          {
+            "id": "rabbit_0314",
+            "name": "Gastric Dilation",
+            "name_ja": "胃拡張（ウサギ）"
+          },
+          {
+            "id": "rabbit_0317",
+            "name": "Gastric Ulcer",
+            "name_ja": "胃潰瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0329",
+            "name": "Gastric Dilation-Volvulus",
+            "name_ja": "胃拡張捻転（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gland",
+        "size": 6,
+        "members": [
+          {
+            "id": "rabbit_0066",
+            "name": "Mammary Gland Tumour",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "rabbit_0121",
+            "name": "Anal Gland Impaction",
+            "name_ja": "肛門腺貯留"
+          },
+          {
+            "id": "rabbit_0241",
+            "name": "Scent Gland Impaction",
+            "name_ja": "臭腺詰まり"
+          },
+          {
+            "id": "rabbit_0259",
+            "name": "Mammary Gland Tumor (Malignant)",
+            "name_ja": "乳腺腫瘍（悪性型）"
+          },
+          {
+            "id": "rabbit_0348",
+            "name": "Mammary Gland Tumor",
+            "name_ja": "乳腺腫瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0426",
+            "name": "Anal Gland Disease",
+            "name_ja": "肛門腺疾患（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 6,
+        "members": [
+          {
+            "id": "rabbit_0122",
+            "name": "Flea Infestation",
+            "name_ja": "ノミ寄生症"
+          },
+          {
+            "id": "rabbit_0129",
+            "name": "Tick Infestation",
+            "name_ja": "ダニ寄生症（マダニ）"
+          },
+          {
+            "id": "rabbit_0130",
+            "name": "Cuterebra Infestation",
+            "name_ja": "ウマバエ幼虫寄生症"
+          },
+          {
+            "id": "rabbit_0211",
+            "name": "Lice Infestation (Haemodipsus)",
+            "name_ja": "シラミ寄生症"
+          },
+          {
+            "id": "rabbit_0244",
+            "name": "Pinworm Infestation - Heavy",
+            "name_ja": "蟯虫症（重度感染）"
+          },
+          {
+            "id": "rabbit_0297",
+            "name": "Demodex Infestation",
+            "name_ja": "ニキビダニ症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 6,
+        "members": [
+          {
+            "id": "rabbit_0006",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞"
+          },
+          {
+            "id": "rabbit_0008",
+            "name": "Intestinal Coccidiosis",
+            "name_ja": "腸コクシジウム症"
+          },
+          {
+            "id": "rabbit_0262",
+            "name": "Intestinal Torsion",
+            "name_ja": "腸捻転"
+          },
+          {
+            "id": "rabbit_0324",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸腺癌（ウサギ）"
+          },
+          {
+            "id": "rabbit_0415",
+            "name": "Intestinal Lymphoma",
+            "name_ja": "腸リンパ腫（ウサギ）"
+          },
+          {
+            "id": "rabbit_0451",
+            "name": "Encephalitozoon Intestinalis Infection",
+            "name_ja": "エンセファリトゾーンインテスティナリス感染（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pregna",
+        "size": 6,
+        "members": [
+          {
+            "id": "rabbit_0051",
+            "name": "Pregnancy Toxemia (Ketosis)",
+            "name_ja": "妊娠中毒症（ケトーシス）"
+          },
+          {
+            "id": "rabbit_0192",
+            "name": "Ectopic Pregnancy",
+            "name_ja": "子宮外妊娠"
+          },
+          {
+            "id": "rabbit_0228",
+            "name": "Pregnancy Toxemia - Early",
+            "name_ja": "妊娠中毒症（初期）"
+          },
+          {
+            "id": "rabbit_0229",
+            "name": "Pregnancy Toxemia - Advanced",
+            "name_ja": "妊娠中毒症（進行期）"
+          },
+          {
+            "id": "rabbit_0264",
+            "name": "Pregnancy Ketosis (Severe)",
+            "name_ja": "妊娠ケトーシス（重症型）"
+          },
+          {
+            "id": "rabbit_0346",
+            "name": "Pregnancy Toxemia",
+            "name_ja": "妊娠中毒症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pulmon",
+        "size": 6,
+        "members": [
+          {
+            "id": "rabbit_0093",
+            "name": "Pulmonary Abscess",
+            "name_ja": "肺膿瘍"
+          },
+          {
+            "id": "rabbit_0214",
+            "name": "Pulmonary Oedema",
+            "name_ja": "肺水腫"
+          },
+          {
+            "id": "rabbit_0332",
+            "name": "Pulmonary Edema",
+            "name_ja": "肺水腫（ウサギ）"
+          },
+          {
+            "id": "rabbit_0334",
+            "name": "Pulmonary Fibrosis",
+            "name_ja": "肺線維症（ウサギ）"
+          },
+          {
+            "id": "rabbit_0335",
+            "name": "Pulmonary Neoplasia",
+            "name_ja": "肺腫瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0430",
+            "name": "Cor Pulmonale",
+            "name_ja": "肺性心（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spinal",
+        "size": 6,
+        "members": [
+          {
+            "id": "rabbit_0039",
+            "name": "Spinal Fracture / Luxation",
+            "name_ja": "脊椎骨折・脱臼"
+          },
+          {
+            "id": "rabbit_0151",
+            "name": "Spinal Cord Compression",
+            "name_ja": "脊髄圧迫"
+          },
+          {
+            "id": "rabbit_0252",
+            "name": "Spinal Fracture (Thoracolumbar)",
+            "name_ja": "脊椎骨折（胸腰椎）"
+          },
+          {
+            "id": "rabbit_0352",
+            "name": "Spinal Fracture",
+            "name_ja": "脊椎骨折（ウサギ）"
+          },
+          {
+            "id": "rabbit_0357",
+            "name": "Spinal Abscess",
+            "name_ja": "脊髄膿瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0381",
+            "name": "Spinal Cord Injury",
+            "name_ja": "脊髄損傷（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 5,
+        "members": [
+          {
+            "id": "rabbit_0113",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "rabbit_0325",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌（ウサギ）"
+          },
+          {
+            "id": "rabbit_0326",
+            "name": "Bile Duct Carcinoma",
+            "name_ja": "胆管癌（ウサギ）"
+          },
+          {
+            "id": "rabbit_0414",
+            "name": "Cecal Carcinoma",
+            "name_ja": "盲腸癌（ウサギ）"
+          },
+          {
+            "id": "rabbit_0435",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lympho",
+        "size": 5,
+        "members": [
+          {
+            "id": "rabbit_0065",
+            "name": "Lymphoma",
+            "name_ja": "リンパ腫"
+          },
+          {
+            "id": "rabbit_0337",
+            "name": "Mediastinal Lymphoma",
+            "name_ja": "縦隔リンパ腫（ウサギ）"
+          },
+          {
+            "id": "rabbit_0371",
+            "name": "Cardiac Lymphoma",
+            "name_ja": "心臓リンパ腫（ウサギ）"
+          },
+          {
+            "id": "rabbit_0415",
+            "name": "Intestinal Lymphoma",
+            "name_ja": "腸リンパ腫（ウサギ）"
+          },
+          {
+            "id": "rabbit_0416",
+            "name": "Hepatic Lymphoma",
+            "name_ja": "肝リンパ腫（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "overgr",
+        "size": 5,
+        "members": [
+          {
+            "id": "rabbit_0011",
+            "name": "Incisor Overgrowth",
+            "name_ja": "切歯過長"
+          },
+          {
+            "id": "rabbit_0135",
+            "name": "Conjunctival Overgrowth (Pseudopterygium)",
+            "name_ja": "結膜過成長（偽翼状片）"
+          },
+          {
+            "id": "rabbit_0155",
+            "name": "Cheek Tooth Overgrowth",
+            "name_ja": "臼歯過長症"
+          },
+          {
+            "id": "rabbit_0401",
+            "name": "Nail Overgrowth",
+            "name_ja": "爪過成長（ウサギ）"
+          },
+          {
+            "id": "rabbit_0448",
+            "name": "Overgrooming",
+            "name_ja": "過剰グルーミング（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "papill",
+        "size": 5,
+        "members": [
+          {
+            "id": "rabbit_0081",
+            "name": "Viral Papillomatosis",
+            "name_ja": "ウイルス性乳頭腫症"
+          },
+          {
+            "id": "rabbit_0166",
+            "name": "Papilloma Virus Infection",
+            "name_ja": "パピローマウイルス感染症"
+          },
+          {
+            "id": "rabbit_0251",
+            "name": "Shope Papilloma Virus",
+            "name_ja": "ショープパピローマウイルス"
+          },
+          {
+            "id": "rabbit_0275",
+            "name": "Rabbit Papillomatosis",
+            "name_ja": "ウサギ乳頭腫症（ウサギ）"
+          },
+          {
+            "id": "rabbit_0278",
+            "name": "Rabbit Oral Papilloma",
+            "name_ja": "ウサギ口腔乳頭腫（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 5,
+        "members": [
+          {
+            "id": "rabbit_0015",
+            "name": "Bacterial Pneumonia",
+            "name_ja": "細菌性肺炎"
+          },
+          {
+            "id": "rabbit_0091",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎"
+          },
+          {
+            "id": "rabbit_0285",
+            "name": "Klebsiella Pneumonia",
+            "name_ja": "クレブシエラ肺炎（ウサギ）"
+          },
+          {
+            "id": "rabbit_0290",
+            "name": "Staphylococcal Pneumonia",
+            "name_ja": "ブドウ球菌性肺炎（ウサギ）"
+          },
+          {
+            "id": "rabbit_0330",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ulcera",
+        "size": 5,
+        "members": [
+          {
+            "id": "rabbit_0074",
+            "name": "Gastric Ulceration",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "rabbit_0235",
+            "name": "Ulcerative Pododermatitis - Grade I",
+            "name_ja": "潰瘍性足底皮膚炎（グレードI）"
+          },
+          {
+            "id": "rabbit_0236",
+            "name": "Ulcerative Pododermatitis - Grade IV-V",
+            "name_ja": "潰瘍性足底皮膚炎（グレードIV-V）"
+          },
+          {
+            "id": "rabbit_0418",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（ウサギ）"
+          },
+          {
+            "id": "rabbit_0421",
+            "name": "Buccal Spur Ulceration",
+            "name_ja": "頬棘状突起潰瘍（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 5,
+        "members": [
+          {
+            "id": "rabbit_0103",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "rabbit_0104",
+            "name": "Vitamin D Toxicity",
+            "name_ja": "ビタミンD中毒"
+          },
+          {
+            "id": "rabbit_0231",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症"
+          },
+          {
+            "id": "rabbit_0232",
+            "name": "Vitamin B Complex Deficiency",
+            "name_ja": "ビタミンB群欠乏症"
+          },
+          {
+            "id": "rabbit_0384",
+            "name": "Vitamin D Toxicosis",
+            "name_ja": "ビタミンD中毒（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cecal",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0003",
+            "name": "Cecal Dysbiosis",
+            "name_ja": "盲腸内細菌叢異常"
+          },
+          {
+            "id": "rabbit_0075",
+            "name": "Cecal Impaction",
+            "name_ja": "盲腸閉塞"
+          },
+          {
+            "id": "rabbit_0140",
+            "name": "Cecal Tympany",
+            "name_ja": "盲腸鼓脹症"
+          },
+          {
+            "id": "rabbit_0414",
+            "name": "Cecal Carcinoma",
+            "name_ja": "盲腸癌（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coccid",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0007",
+            "name": "Hepatic Coccidiosis",
+            "name_ja": "肝コクシジウム症"
+          },
+          {
+            "id": "rabbit_0008",
+            "name": "Intestinal Coccidiosis",
+            "name_ja": "腸コクシジウム症"
+          },
+          {
+            "id": "rabbit_0292",
+            "name": "Coccidiosis (Intestinal)",
+            "name_ja": "コクシジウム症（腸管型）（ウサギ）"
+          },
+          {
+            "id": "rabbit_0293",
+            "name": "Coccidiosis (Hepatic)",
+            "name_ja": "コクシジウム症（肝臓型）（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dental",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0009",
+            "name": "Dental Malocclusion",
+            "name_ja": "歯の不正咬合"
+          },
+          {
+            "id": "rabbit_0207",
+            "name": "Dental Fistula",
+            "name_ja": "歯瘻"
+          },
+          {
+            "id": "rabbit_0306",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0307",
+            "name": "Retrobulbar Dental Abscess",
+            "name_ja": "後眼窩歯科膿瘍（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hernia",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0185",
+            "name": "Inguinal Hernia",
+            "name_ja": "鼠径ヘルニア"
+          },
+          {
+            "id": "rabbit_0186",
+            "name": "Diaphragmatic Hernia",
+            "name_ja": "横隔膜ヘルニア"
+          },
+          {
+            "id": "rabbit_0187",
+            "name": "Perineal Hernia",
+            "name_ja": "会陰ヘルニア"
+          },
+          {
+            "id": "rabbit_0321",
+            "name": "Umbilical Hernia",
+            "name_ja": "臍ヘルニア（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hyperp",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0050",
+            "name": "Endometrial Hyperplasia",
+            "name_ja": "子宮内膜過形成"
+          },
+          {
+            "id": "rabbit_0177",
+            "name": "Adrenal Hyperplasia",
+            "name_ja": "副腎過形成"
+          },
+          {
+            "id": "rabbit_0189",
+            "name": "Vaginal Hyperplasia",
+            "name_ja": "膣過形成"
+          },
+          {
+            "id": "rabbit_0386",
+            "name": "Hyperphosphatemia",
+            "name_ja": "高リン血症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "impact",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0075",
+            "name": "Cecal Impaction",
+            "name_ja": "盲腸閉塞"
+          },
+          {
+            "id": "rabbit_0121",
+            "name": "Anal Gland Impaction",
+            "name_ja": "肛門腺貯留"
+          },
+          {
+            "id": "rabbit_0203",
+            "name": "Colonic Impaction",
+            "name_ja": "結腸閉塞"
+          },
+          {
+            "id": "rabbit_0241",
+            "name": "Scent Gland Impaction",
+            "name_ja": "臭腺詰まり"
+          }
+        ]
+      },
+      {
+        "shared_stem": "luxati",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0039",
+            "name": "Spinal Fracture / Luxation",
+            "name_ja": "脊椎骨折・脱臼"
+          },
+          {
+            "id": "rabbit_0061",
+            "name": "Lens Luxation",
+            "name_ja": "水晶体脱臼"
+          },
+          {
+            "id": "rabbit_0222",
+            "name": "Patellar Luxation",
+            "name_ja": "膝蓋骨脱臼"
+          },
+          {
+            "id": "rabbit_0375",
+            "name": "Luxating Patella",
+            "name_ja": "膝蓋骨脱臼（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mammar",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0066",
+            "name": "Mammary Gland Tumour",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "rabbit_0239",
+            "name": "Mammary Cyst",
+            "name_ja": "乳腺嚢胞"
+          },
+          {
+            "id": "rabbit_0259",
+            "name": "Mammary Gland Tumor (Malignant)",
+            "name_ja": "乳腺腫瘍（悪性型）"
+          },
+          {
+            "id": "rabbit_0348",
+            "name": "Mammary Gland Tumor",
+            "name_ja": "乳腺腫瘍（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "molar",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0010",
+            "name": "Molar Spurs",
+            "name_ja": "臼歯棘状突起"
+          },
+          {
+            "id": "rabbit_0154",
+            "name": "Molar Root Infection",
+            "name_ja": "臼歯歯根感染"
+          },
+          {
+            "id": "rabbit_0305",
+            "name": "Molar Spurs (Cheek Teeth Points)",
+            "name_ja": "臼歯棘状突起（ウサギ）"
+          },
+          {
+            "id": "rabbit_0308",
+            "name": "Molar Root Elongation",
+            "name_ja": "臼歯根伸長（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "myxoma",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0029",
+            "name": "Myxomatosis",
+            "name_ja": "粘液腫症"
+          },
+          {
+            "id": "rabbit_0238",
+            "name": "Myxomatosis - Amyxomatous Form",
+            "name_ja": "粘液腫症（無粘液腫型）"
+          },
+          {
+            "id": "rabbit_0246",
+            "name": "Myxomatosis - Respiratory Form",
+            "name_ja": "粘液腫症（呼吸器型）"
+          },
+          {
+            "id": "rabbit_0270",
+            "name": "Myxomatosis",
+            "name_ja": "粘液腫症（ミクソマトーシス）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0178",
+            "name": "Thyroid Neoplasia",
+            "name_ja": "甲状腺腫瘍"
+          },
+          {
+            "id": "rabbit_0193",
+            "name": "Ovarian Neoplasia",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "rabbit_0335",
+            "name": "Pulmonary Neoplasia",
+            "name_ja": "肺腫瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0345",
+            "name": "Testicular Neoplasia",
+            "name_ja": "精巣腫瘍（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pasteu",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0014",
+            "name": "Pasteurellosis (Snuffles)",
+            "name_ja": "パスツレラ症（スナッフル）"
+          },
+          {
+            "id": "rabbit_0224",
+            "name": "Pasteurellosis - Conjunctival Form",
+            "name_ja": "パスツレラ症（結膜型）"
+          },
+          {
+            "id": "rabbit_0225",
+            "name": "Pasteurellosis - Genital Form",
+            "name_ja": "パスツレラ症（生殖器型）"
+          },
+          {
+            "id": "rabbit_0226",
+            "name": "Pasteurellosis - Septicaemic Form",
+            "name_ja": "パスツレラ症（敗血症型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "podode",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0034",
+            "name": "Pododermatitis (Sore Hocks)",
+            "name_ja": "足底皮膚炎（ソアホック）"
+          },
+          {
+            "id": "rabbit_0235",
+            "name": "Ulcerative Pododermatitis - Grade I",
+            "name_ja": "潰瘍性足底皮膚炎（グレードI）"
+          },
+          {
+            "id": "rabbit_0236",
+            "name": "Ulcerative Pododermatitis - Grade IV-V",
+            "name_ja": "潰瘍性足底皮膚炎（グレードIV-V）"
+          },
+          {
+            "id": "rabbit_0258",
+            "name": "Pododermatitis - Advanced (Grade IV-V)",
+            "name_ja": "飛節びらん（進行期 グレードIV-V）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0076",
+            "name": "Rectal Prolapse",
+            "name_ja": "直腸脱"
+          },
+          {
+            "id": "rabbit_0132",
+            "name": "Vaginal Prolapse",
+            "name_ja": "膣脱"
+          },
+          {
+            "id": "rabbit_0184",
+            "name": "Iris Prolapse",
+            "name_ja": "虹彩脱出"
+          },
+          {
+            "id": "rabbit_0347",
+            "name": "Uterine Prolapse",
+            "name_ja": "子宮脱（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "root",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0012",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "rabbit_0013",
+            "name": "Tooth Root Elongation",
+            "name_ja": "歯根伸長"
+          },
+          {
+            "id": "rabbit_0154",
+            "name": "Molar Root Infection",
+            "name_ja": "臼歯歯根感染"
+          },
+          {
+            "id": "rabbit_0308",
+            "name": "Molar Root Elongation",
+            "name_ja": "臼歯根伸長（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "testic",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0067",
+            "name": "Testicular Tumour",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "rabbit_0240",
+            "name": "Testicular Abscess",
+            "name_ja": "精巣膿瘍"
+          },
+          {
+            "id": "rabbit_0345",
+            "name": "Testicular Neoplasia",
+            "name_ja": "精巣腫瘍（ウサギ）"
+          },
+          {
+            "id": "rabbit_0438",
+            "name": "Testicular Seminoma",
+            "name_ja": "精巣セミノーマ（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxemi",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0051",
+            "name": "Pregnancy Toxemia (Ketosis)",
+            "name_ja": "妊娠中毒症（ケトーシス）"
+          },
+          {
+            "id": "rabbit_0228",
+            "name": "Pregnancy Toxemia - Early",
+            "name_ja": "妊娠中毒症（初期）"
+          },
+          {
+            "id": "rabbit_0229",
+            "name": "Pregnancy Toxemia - Advanced",
+            "name_ja": "妊娠中毒症（進行期）"
+          },
+          {
+            "id": "rabbit_0346",
+            "name": "Pregnancy Toxemia",
+            "name_ja": "妊娠中毒症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 4,
+        "members": [
+          {
+            "id": "rabbit_0100",
+            "name": "Toxicosis - Plant Poisoning",
+            "name_ja": "植物中毒"
+          },
+          {
+            "id": "rabbit_0254",
+            "name": "Lead Toxicosis (Chronic)",
+            "name_ja": "鉛中毒（慢性型）"
+          },
+          {
+            "id": "rabbit_0384",
+            "name": "Vitamin D Toxicosis",
+            "name_ja": "ビタミンD中毒（ウサギ）"
+          },
+          {
+            "id": "rabbit_0387",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adrena",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0125",
+            "name": "Adrenal Disease",
+            "name_ja": "副腎疾患"
+          },
+          {
+            "id": "rabbit_0177",
+            "name": "Adrenal Hyperplasia",
+            "name_ja": "副腎過形成"
+          },
+          {
+            "id": "rabbit_0393",
+            "name": "Adrenal Cortical Adenoma",
+            "name_ja": "副腎皮質腺腫（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "body",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0159",
+            "name": "Nasal Foreign Body",
+            "name_ja": "鼻腔内異物"
+          },
+          {
+            "id": "rabbit_0204",
+            "name": "Gastric Foreign Body",
+            "name_ja": "胃内異物"
+          },
+          {
+            "id": "rabbit_0423",
+            "name": "Esophageal Foreign Body",
+            "name_ja": "食道異物（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "burn",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0234",
+            "name": "Hutch Burn (Urine Scald - Perineal)",
+            "name_ja": "ハッチバーン（会陰部尿やけ）"
+          },
+          {
+            "id": "rabbit_0399",
+            "name": "Thermal Burns",
+            "name_ja": "熱傷（ウサギ）"
+          },
+          {
+            "id": "rabbit_0402",
+            "name": "Hutch Burn",
+            "name_ja": "ハッチバーン（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "conjun",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0055",
+            "name": "Conjunctivitis",
+            "name_ja": "結膜炎"
+          },
+          {
+            "id": "rabbit_0135",
+            "name": "Conjunctival Overgrowth (Pseudopterygium)",
+            "name_ja": "結膜過成長（偽翼状片）"
+          },
+          {
+            "id": "rabbit_0224",
+            "name": "Pasteurellosis - Conjunctival Form",
+            "name_ja": "パスツレラ症（結膜型）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cornea",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0057",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍"
+          },
+          {
+            "id": "rabbit_0243",
+            "name": "Corneal Abscess (Stromal)",
+            "name_ja": "角膜膿瘍（実質性）"
+          },
+          {
+            "id": "rabbit_0266",
+            "name": "Corneal Dystrophy",
+            "name_ja": "角膜ジストロフィー"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dacryo",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0056",
+            "name": "Dacryocystitis",
+            "name_ja": "涙嚢炎"
+          },
+          {
+            "id": "rabbit_0242",
+            "name": "Chronic Dacryocystitis",
+            "name_ja": "慢性涙嚢炎"
+          },
+          {
+            "id": "rabbit_0360",
+            "name": "Dacryocystitis (Tear Duct Obstruction)",
+            "name_ja": "涙嚢炎（鼻涙管閉塞）（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dilati",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0001",
+            "name": "Gastric Dilation (Bloat)",
+            "name_ja": "胃拡張（鼓脹症）"
+          },
+          {
+            "id": "rabbit_0314",
+            "name": "Gastric Dilation",
+            "name_ja": "胃拡張（ウサギ）"
+          },
+          {
+            "id": "rabbit_0329",
+            "name": "Gastric Dilation-Volvulus",
+            "name_ja": "胃拡張捻転（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "duct",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0267",
+            "name": "Nasolacrimal Duct Obstruction",
+            "name_ja": "鼻涙管閉塞"
+          },
+          {
+            "id": "rabbit_0326",
+            "name": "Bile Duct Carcinoma",
+            "name_ja": "胆管癌（ウサギ）"
+          },
+          {
+            "id": "rabbit_0436",
+            "name": "Bile Duct Adenoma",
+            "name_ja": "胆管腺腫（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "failur",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0021",
+            "name": "Chronic Renal Failure",
+            "name_ja": "慢性腎不全"
+          },
+          {
+            "id": "rabbit_0022",
+            "name": "Acute Renal Failure",
+            "name_ja": "急性腎不全"
+          },
+          {
+            "id": "rabbit_0063",
+            "name": "Congestive Heart Failure",
+            "name_ja": "うっ血性心不全"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fibros",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0114",
+            "name": "Fibrosarcoma",
+            "name_ja": "線維肉腫"
+          },
+          {
+            "id": "rabbit_0334",
+            "name": "Pulmonary Fibrosis",
+            "name_ja": "肺線維症（ウサギ）"
+          },
+          {
+            "id": "rabbit_0417",
+            "name": "Myocardial Fibrosis",
+            "name_ja": "心筋線維症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "foreig",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0159",
+            "name": "Nasal Foreign Body",
+            "name_ja": "鼻腔内異物"
+          },
+          {
+            "id": "rabbit_0204",
+            "name": "Gastric Foreign Body",
+            "name_ja": "胃内異物"
+          },
+          {
+            "id": "rabbit_0423",
+            "name": "Esophageal Foreign Body",
+            "name_ja": "食道異物（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ileu",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0202",
+            "name": "Ileus (Paralytic)",
+            "name_ja": "麻痺性イレウス"
+          },
+          {
+            "id": "rabbit_0320",
+            "name": "Ileus",
+            "name_ja": "イレウス（ウサギ）"
+          },
+          {
+            "id": "rabbit_0405",
+            "name": "Post-Operative Ileus",
+            "name_ja": "術後イレウス（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lead",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0102",
+            "name": "Lead Poisoning",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "rabbit_0254",
+            "name": "Lead Toxicosis (Chronic)",
+            "name_ja": "鉛中毒（慢性型）"
+          },
+          {
+            "id": "rabbit_0358",
+            "name": "Lead Encephalopathy",
+            "name_ja": "鉛脳症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lobe",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0119",
+            "name": "Hepatic Lobe Torsion",
+            "name_ja": "肝葉捻転"
+          },
+          {
+            "id": "rabbit_0318",
+            "name": "Liver Lobe Torsion",
+            "name_ja": "肝葉捻転（ウサギ）"
+          },
+          {
+            "id": "rabbit_0428",
+            "name": "Lung Lobe Torsion",
+            "name_ja": "肺葉捻転（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mandib",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0037",
+            "name": "Mandibular Abscess",
+            "name_ja": "下顎膿瘍"
+          },
+          {
+            "id": "rabbit_0156",
+            "name": "Mandibular Osteomyelitis",
+            "name_ja": "下顎骨骨髄炎"
+          },
+          {
+            "id": "rabbit_0441",
+            "name": "Mandibular Fracture",
+            "name_ja": "下顎骨折（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mange",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0028",
+            "name": "Sarcoptic Mange",
+            "name_ja": "疥癬"
+          },
+          {
+            "id": "rabbit_0085",
+            "name": "Demodex Mange",
+            "name_ja": "毛包虫症（ニキビダニ症）"
+          },
+          {
+            "id": "rabbit_0294",
+            "name": "Cheyletiella Mange (Fur Mites)",
+            "name_ja": "ツメダニ症（毛ダニ）（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "obstru",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0006",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞"
+          },
+          {
+            "id": "rabbit_0087",
+            "name": "Urethral Obstruction",
+            "name_ja": "尿道閉塞"
+          },
+          {
+            "id": "rabbit_0267",
+            "name": "Nasolacrimal Duct Obstruction",
+            "name_ja": "鼻涙管閉塞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "osteom",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0156",
+            "name": "Mandibular Osteomyelitis",
+            "name_ja": "下顎骨骨髄炎"
+          },
+          {
+            "id": "rabbit_0311",
+            "name": "Jaw Osteomyelitis",
+            "name_ja": "顎骨髄炎（ウサギ）"
+          },
+          {
+            "id": "rabbit_0376",
+            "name": "Osteomyelitis",
+            "name_ja": "骨髄炎（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ovaria",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0099",
+            "name": "Ovarian Cysts",
+            "name_ja": "卵巣嚢胞"
+          },
+          {
+            "id": "rabbit_0193",
+            "name": "Ovarian Neoplasia",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "rabbit_0344",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "paraly",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0046",
+            "name": "Hind Limb Paresis / Paralysis",
+            "name_ja": "後肢不全麻痺・麻痺"
+          },
+          {
+            "id": "rabbit_0095",
+            "name": "Facial Nerve Paralysis",
+            "name_ja": "顔面神経麻痺"
+          },
+          {
+            "id": "rabbit_0350",
+            "name": "Posterior Paresis/Paralysis",
+            "name_ja": "後肢不全麻痺/麻痺（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pinwor",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0024",
+            "name": "Pinworms (Passalurus ambiguus)",
+            "name_ja": "蟯虫症"
+          },
+          {
+            "id": "rabbit_0244",
+            "name": "Pinworm Infestation - Heavy",
+            "name_ja": "蟯虫症（重度感染）"
+          },
+          {
+            "id": "rabbit_0296",
+            "name": "Pinworm Infection (Passalurus ambiguus)",
+            "name_ja": "蟯虫症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "respir",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0016",
+            "name": "Upper Respiratory Infection",
+            "name_ja": "上部呼吸器感染症"
+          },
+          {
+            "id": "rabbit_0246",
+            "name": "Myxomatosis - Respiratory Form",
+            "name_ja": "粘液腫症（呼吸器型）"
+          },
+          {
+            "id": "rabbit_0338",
+            "name": "Mycoplasma Respiratory Infection",
+            "name_ja": "マイコプラズマ呼吸器感染症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "seizur",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0047",
+            "name": "Seizures / Epilepsy",
+            "name_ja": "てんかん・痙攣発作"
+          },
+          {
+            "id": "rabbit_0349",
+            "name": "Seizures (Epilepsy)",
+            "name_ja": "てんかん発作（ウサギ）"
+          },
+          {
+            "id": "rabbit_0354",
+            "name": "Toxin-Induced Seizures",
+            "name_ja": "中毒性痙攣（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "septic",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0134",
+            "name": "Septicaemia",
+            "name_ja": "敗血症"
+          },
+          {
+            "id": "rabbit_0226",
+            "name": "Pasteurellosis - Septicaemic Form",
+            "name_ja": "パスツレラ症（敗血症型）"
+          },
+          {
+            "id": "rabbit_0440",
+            "name": "Septic Arthritis",
+            "name_ja": "化膿性関節炎（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spur",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0010",
+            "name": "Molar Spurs",
+            "name_ja": "臼歯棘状突起"
+          },
+          {
+            "id": "rabbit_0305",
+            "name": "Molar Spurs (Cheek Teeth Points)",
+            "name_ja": "臼歯棘状突起（ウサギ）"
+          },
+          {
+            "id": "rabbit_0421",
+            "name": "Buccal Spur Ulceration",
+            "name_ja": "頬棘状突起潰瘍（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "staphy",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0078",
+            "name": "Staphylococcal Infection",
+            "name_ja": "ブドウ球菌感染症"
+          },
+          {
+            "id": "rabbit_0280",
+            "name": "Staphylococcal Dermatitis",
+            "name_ja": "ブドウ球菌性皮膚炎（ウサギ）"
+          },
+          {
+            "id": "rabbit_0290",
+            "name": "Staphylococcal Pneumonia",
+            "name_ja": "ブドウ球菌性肺炎（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tooth",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0012",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "rabbit_0013",
+            "name": "Tooth Root Elongation",
+            "name_ja": "歯根伸長"
+          },
+          {
+            "id": "rabbit_0155",
+            "name": "Cheek Tooth Overgrowth",
+            "name_ja": "臼歯過長症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tricho",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0072",
+            "name": "Trichobezoar (Hairball)",
+            "name_ja": "毛球症"
+          },
+          {
+            "id": "rabbit_0316",
+            "name": "Trichobezoar (Hairball Obstruction)",
+            "name_ja": "毛球症（ウサギ）"
+          },
+          {
+            "id": "rabbit_0391",
+            "name": "Trichoblastoma",
+            "name_ja": "毛芽腫（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumour",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0066",
+            "name": "Mammary Gland Tumour",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "rabbit_0067",
+            "name": "Testicular Tumour",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "rabbit_0116",
+            "name": "Basal Cell Tumour",
+            "name_ja": "基底細胞腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "urinar",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0019",
+            "name": "Urinary Sludge",
+            "name_ja": "尿路スラッジ（砂状尿）"
+          },
+          {
+            "id": "rabbit_0257",
+            "name": "Urinary Calculi (Ureteral)",
+            "name_ja": "尿管結石"
+          },
+          {
+            "id": "rabbit_0341",
+            "name": "Urinary Tract Infection",
+            "name_ja": "尿路感染症（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "urine",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0083",
+            "name": "Urine Scald",
+            "name_ja": "尿やけ（尿性皮膚炎）"
+          },
+          {
+            "id": "rabbit_0089",
+            "name": "Red Urine (Non-pathological)",
+            "name_ja": "赤色尿（非病的）"
+          },
+          {
+            "id": "rabbit_0396",
+            "name": "Urine Spraying",
+            "name_ja": "尿スプレー行動（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "uterin",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0049",
+            "name": "Uterine Adenocarcinoma",
+            "name_ja": "子宮腺癌"
+          },
+          {
+            "id": "rabbit_0191",
+            "name": "Uterine Torsion",
+            "name_ja": "子宮捻転"
+          },
+          {
+            "id": "rabbit_0347",
+            "name": "Uterine Prolapse",
+            "name_ja": "子宮脱（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "verteb",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0042",
+            "name": "Vertebral Spondylosis",
+            "name_ja": "脊椎変形性脊椎症"
+          },
+          {
+            "id": "rabbit_0269",
+            "name": "Vertebral Subluxation",
+            "name_ja": "脊椎亜脱臼"
+          },
+          {
+            "id": "rabbit_0374",
+            "name": "Vertebral Fracture",
+            "name_ja": "椎骨骨折（ウサギ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "viru",
+        "size": 3,
+        "members": [
+          {
+            "id": "rabbit_0166",
+            "name": "Papilloma Virus Infection",
+            "name_ja": "パピローマウイルス感染症"
+          },
+          {
+            "id": "rabbit_0250",
+            "name": "Shope Fibroma Virus",
+            "name_ja": "ショープ線維腫ウイルス"
+          },
+          {
+            "id": "rabbit_0251",
+            "name": "Shope Papilloma Virus",
+            "name_ja": "ショープパピローマウイルス"
+          }
+        ]
+      }
+    ]
+  }
+}

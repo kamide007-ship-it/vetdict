@@ -2221,59 +2221,13 @@
   "T109": {
     "detector": "T109",
     "total_records": 201,
-    "hit_count": 8,
+    "hit_count": 1,
     "safe_occurrences": 0,
-    "review_occurrences": 8,
+    "review_occurrences": 1,
     "term_counts": {
-      "易感受性": 6,
-      "貧弱な": 1,
       "遺伝学的": 1
     },
     "hits": [
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "description_ja",
-        "term": "易感受性",
-        "suggest": "感受性が高い / 罹患しやすい",
-        "category": "review",
-        "note": "機械翻訳調",
-        "count": 1,
-        "context": "る。早期検出を通じた検査と厳格食事管理は易感受性動物の発症を防止または遅延可能。"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "description_ja",
-        "term": "貧弱な",
-        "suggest": "乏しい / 不十分な",
-        "category": "review",
-        "note": "『貧弱な耐性』等は機械翻訳調",
-        "count": 1,
-        "context": "な代謝疾患。重大：デグーは食事糖に対する貧弱な耐性—ほとんどげっ歯類と異なり、デグーは"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "causes_ja",
-        "term": "易感受性",
-        "suggest": "感受性が高い / 罹患しやすい",
-        "category": "review",
-        "note": "機械翻訳調",
-        "count": 1,
-        "context": "伝性成分を示唆）。食事リスク要因（遺伝的易感受性デグーの主要トリガー）：(1) 直接糖含"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "pathophysiology_ja",
-        "term": "易感受性",
-        "suggest": "感受性が高い / 罹患しやすい",
-        "category": "review",
-        "note": "機械翻訳調",
-        "count": 1,
-        "context": "ース耐性は重症傷害：経口グルコース負荷で易感受性デグーで血糖250 mg/dL以上で30"
-      },
       {
         "id": "degu_0000",
         "name_ja": "糖尿病",
@@ -2284,39 +2238,6 @@
         "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
         "count": 1,
         "context": "体重管理。(3) ストレス低減。(4) 遺伝学的スクリーニング。(5) 日常的健康スクリ"
-      },
-      {
-        "id": "degu_0000",
-        "name_ja": "糖尿病",
-        "field": "prevention_ja",
-        "term": "易感受性",
-        "suggest": "感受性が高い / 罹患しやすい",
-        "category": "review",
-        "note": "機械翻訳調",
-        "count": 1,
-        "context": "デグーの重大予防（積極的食事管理で遺伝的易感受性動物の50-70%で糖尿病を防止可能）："
-      },
-      {
-        "id": "degu_0091",
-        "name_ja": "子宮内膜炎",
-        "field": "pathophysiology_ja",
-        "term": "易感受性",
-        "suggest": "感受性が高い / 罹患しやすい",
-        "category": "review",
-        "note": "機械翻訳調",
-        "count": 1,
-        "context": "進行→爆発的敗血症。デグーは産科ショック易感受性を示す（難産でも治療時20-30%死亡率"
-      },
-      {
-        "id": "degu_0092",
-        "name_ja": "妊娠中毒症",
-        "field": "description_ja",
-        "term": "易感受性",
-        "suggest": "感受性が高い / 罹患しやすい",
-        "category": "review",
-        "note": "機械翻訳調",
-        "count": 1,
-        "context": "妊娠毒血症が不顕性糖尿病を顕性化させたり易感受性個体で顕性高血糖を誘発しうる。"
       }
     ]
   }
