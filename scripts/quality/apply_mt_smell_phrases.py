@@ -48,6 +48,16 @@ _PHRASE_FIXES: list[tuple[str, str]] = [
     ("遺伝学的疾患", "遺伝性疾患"),
     ("細胞失敗", "細胞不全"),
     ("可遺伝", "遺伝性"),
+    # Vet-approved stylistic MT-smell fixes (T109 review terms, degu 糖尿病).
+    # Ordered: the 遺伝的 compound is fixed before the bare 易感受性 cases, and
+    # the 産科ショック idiom before the generic ones. 遺伝学的スクリーニング /
+    # 検査 / 背景 / 異常 are legitimate terms and are never matched here.
+    ("遺伝的易感受性", "遺伝的に感受性が高い"),
+    ("産科ショック易感受性を示す", "産科ショックへの高い感受性を示す"),
+    ("易感受性動物", "感受性が高い動物"),
+    ("易感受性デグー", "感受性が高いデグー"),
+    ("易感受性個体", "感受性が高い個体"),
+    ("貧弱な耐性", "乏しい耐性"),
 ]
 
 

@@ -43,7 +43,7 @@ _SPECIES_JA = {
     "dog": "犬",
     "cat": "猫",
     "horse": "馬",
-    "rabbit": "うさぎ",
+    "rabbit": "ウサギ",
     "ferret": "フェレット",
     "hamster": "ハムスター",
     "guinea_pig": "モルモット",
@@ -61,6 +61,43 @@ _SPECIES_JA = {
     "amphibian": "両生類",
     "fish": "魚",
     "exotic_other": "その他",
+}
+
+
+# Curated do-NOT-merge guards: entries that the strict key would auto-merge
+# because they share a name_ja, but are clinically DISTINCT diseases (mislabeled
+# name_ja). Vet-reviewed. Keeps them as separate served records. The underlying
+# name_ja rename is tracked separately (touches stable-id/URL resolution).
+_DO_NOT_MERGE: dict[str, list[set[str]]] = {
+    # Warble Fly (Hypoderma) vs Cuterebra bot fly — different parasites sharing
+    # the mislabeled name_ja "ウマバエ幼虫症".
+    "rabbit": [{"rabbit_0212", "rabbit_0298"}],
+}
+
+
+def _is_forbidden_pair(species: str, ids: list[str]) -> bool:
+    idset = set(ids)
+    return any(len(pair & idset) >= 2 for pair in _DO_NOT_MERGE.get(species, []))
+
+
+# Curated vet-approved same-disease merges that the STRICT auto key holds back
+# because BOTH members carry an informative qualifier (so they differ by more
+# than the species tag) yet are the same disease. First id = canonical (kept).
+# Vet-reviewed and approved (see .spec/<species>_CONSOLIDATION_REVIEW.md).
+_CURATED_MERGE: dict[str, list[list[str]]] = {
+    "rabbit": [
+        ["rabbit_0001", "rabbit_0314"],  # 胃拡張（鼓脹症） = 胃拡張
+        ["rabbit_0026", "rabbit_0294"],  # ツメダニ症 (Cheyletiella)
+        ["rabbit_0027", "rabbit_0295"],  # ハエウジ症 (Myiasis/Flystrike)
+        ["rabbit_0030", "rabbit_0274"],  # ウサギ出血病 RHDV = RHD
+        ["rabbit_0056", "rabbit_0360"],  # 涙嚢炎 (Dacryocystitis)
+        ["rabbit_0105", "rabbit_0385"],  # カルシウム欠乏症
+        ["rabbit_0194", "rabbit_0389"],  # 播種性血管内凝固 (DIC)
+        ["rabbit_0202", "rabbit_0320"],  # 麻痺性イレウス = イレウス
+        ["rabbit_0206", "rabbit_0289"],  # 増殖性腸症 (Lawsonia = cause)
+        ["rabbit_0234", "rabbit_0402"],  # ハッチバーン (Hutch Burn)
+        ["rabbit_0252", "rabbit_0352"],  # 脊椎骨折（胸腰椎） = 脊椎骨折
+    ],
 }
 
 
@@ -151,6 +188,15 @@ def build(species: str) -> dict:
             groups.setdefault(_mergekey(rid), []).append(rid)
         safe_groups = [g for g in groups.values() if len(g) >= 2]
         for g in safe_groups:
+            if _is_forbidden_pair(species, g):
+                review_oversplit.append(
+                    {
+                        "base": by_id[g[0]].get("name"),
+                        "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
+                        "members": [ident(rid) for rid in g],
+                    }
+                )
+                continue
             canonical_id = min(g, key=_cleanliness)
             merged = [rid for rid in g if rid != canonical_id]
             merges.append(
@@ -171,6 +217,34 @@ def build(species: str) -> dict:
                     "members": [ident(rid) for rid in ids],
                 }
             )
+
+    # --- curated vet-approved same-disease merges (held back by the strict key) ---
+    _auto_ids = {m["canonical"]["id"] for m in merges} | {
+        mm["id"] for m in merges for mm in m["merged"]
+    }
+    for group in _CURATED_MERGE.get(species, []):
+        present = [rid for rid in group if rid in by_id and rid not in _auto_ids]
+        if len(present) < 2:
+            continue  # already handled by auto-merge or ids absent → skip (idempotent)
+        canonical_id = present[0]
+        merged = present[1:]
+        merges.append(
+            {
+                "canonical": ident(canonical_id),
+                "merged": [ident(rid) for rid in merged],
+                "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+                "inherit_content": True,
+                "curated": True,
+            }
+        )
+        _auto_ids.update(present)
+    # Drop review-oversplit entries whose members are now FULLY resolved by a
+    # merge (keep entries that still contain an unmerged subtype).
+    review_oversplit = [
+        o
+        for o in review_oversplit
+        if not all(m["id"] in _auto_ids for m in o.get("members", []))
+    ]
 
     # --- archives: unambiguous non-clinical (research models) ---
     # detect.py flags research_model / human_medicine_transplant by keyword, but

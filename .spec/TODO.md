@@ -51,7 +51,16 @@
 - [x] **T103 degu 適用**（承認「BC」）: 同一疾患重複＋糖尿病サブタイプを非破壊サイドカーに統合
       （白内障×4/尾脱皮×4/歯科膿瘍×3/咬傷×2/糖尿病サブタイプ2/神経障害重複1＋ヒト移植2アーカイブ）。
       **201→180 served**、301リダイレクト、別疾患は分離維持、即ロールバック可。canonical/dedup テスト29 pass。
-- [ ] 他20種への横展開（degu と同じ手順、獣医レビュー前提）
+- [x] **rabbit 適用**（承認「A一括・Bは表記のみ・D分離維持」）→ `.spec/RABBIT_CONSOLIDATION_REVIEW.md`
+      `api/data/canonical/rabbit.json`（**452→421 served**、31統合＝auto 20＋curated 11、301リダイレクト、即ロールバック可）。
+      - builder の kana バグ修正（`_SPECIES_JA["rabbit"]` うさぎ→ウサギ、（ウサギ）タグ未認識で0統合だった）
+      - **do-not-merge ガード**: ウマバエ幼虫症(Hypoderma) と Cuterebra は name_ja 共有だが別寄生虫→誤統合を阻止（review へ退避）
+      - **curated 同一疾患統合**: strict key が保留した vet 承認済み11ペア（胃拡張/涙嚢炎/DIC/増殖性腸症 等）を idempotent に反映
+      - パスツレラ症/粘液腫症/妊娠中毒症のサブタイプ・全ファミリー79は review（未適用）
+      - 純Python で loader 検証済み（452→421、31リダイレクト解決、Cuterebra/Warble 両方 served 維持）
+- [ ] **誤ラベル rename（承認済み・別バッチ）**: `rabbit_0162 Dermatophilosis`（name_ja 皮膚糸状菌症＝真菌白癬と誤）→ デルマトフィルス症、
+      `rabbit_0298 Cuterebra`（name_ja ウマバエ幼虫症）→ クテレブラ症。stable-id/URL 保全を検証の上で実施。
+- [ ] 他19種への横展開（rabbit と同手順、獣医レビュー前提）
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**
 - [x] **T105/T106 fail-closed 公開ゲート＋ワークリスト**（main, merged）→ `.spec/T105_T106_DOSAGE_GATE.md`
@@ -74,7 +83,9 @@
 - [x] T109 機械翻訳臭の置換適用: safe 語（葡萄糖→ブドウ糖等）は適用済み。
       文脈依存の誤フレーズ（遺伝学的インスリン抵抗→遺伝的等6種12件）を `apply_mt_smell_phrases.py` で
       フレーズ単位に安全修正（正当な 遺伝学的スクリーニング/背景/異常 は温存）。degu review 17→8。
-- [ ] 残る T109 review 語（易感受性・貧弱な等の文体項目）は獣医レビューで置換要否を判断
+- [x] 残る T109 review 語適用（承認済み）: `易感受性`×6→「感受性が高い/罹患しやすい」、`貧弱な耐性`→「乏しい耐性」を
+      `apply_mt_smell_phrases.py` にフレーズ単位で追加・適用（degu_diseases.py 7件、文脈別に正しい助詞処理）。
+      `遺伝学的スクリーニング`は正当用語のため温存。**degu T109 8→1**。
 
 ## いま承認を求める項目
 1. **(B) degu 統合判断**（`.spec/DEGU_CONSOLIDATION_REVIEW.md` を1件ずつ ✅/❌/✏️）→ 承認行のみ canonical 反映
