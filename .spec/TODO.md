@@ -93,6 +93,9 @@
       - **要判断（Kentaro）**: 既存16種の重複ティア dedup を **(a)追認 / (b)ロールバック / (c)種別に再レビュー** のいずれにするか。
         物理削除なし・301・サイドカー編集で即ロールバック可。
       - 上記「全canonical監査」で surface した **Proptosis/Exophthalmos・Ileus/腸閉塞** の要判断マージも同枠。
+- [x] **ferret curated レビューワークシート（提示のみ・未適用）** → `.spec/FERRET_CONSOLIDATION_REVIEW.md`
+      auto tier 10（追認可否）＋ curated 同一疾患候補19（（フェレット）タグ二重登録が大半・承認で ≈248 served）
+      ＋分離維持2（消化管異物 線状/一般・骨腫 頭蓋/一般）。**未適用**＝承認後に `_CURATED_MERGES["ferret"]` へ追記して apply。
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**
 - [x] **T105/T106 fail-closed 公開ゲート＋ワークリスト**（main, merged）→ `.spec/T105_T106_DOSAGE_GATE.md`
