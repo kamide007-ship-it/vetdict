@@ -3,7 +3,7 @@
 - 総レコード数: **452**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **42** （冗長レコード 54 件）
+- 完全一致重複クラスタ: **41** （冗長レコード 52 件）
 - 疾患ファミリー候補（過分割の疑い, ≥3件）: **79**
 
 ### 完全一致重複（上位20）
@@ -18,7 +18,7 @@
 - ハエウジ症（フライストライク）（Myiasis (Flystrike)）[rabbit_0027] / ハエウジ症（蠅蛆症）（ウサギ）（Flystrike (Myiasis)）[rabbit_0295]
 - 粘液腫症（Myxomatosis）[rabbit_0029] / 粘液腫症（無粘液腫型）（Myxomatosis - Amyxomatous Form）[rabbit_0238] / 粘液腫症（呼吸器型）（Myxomatosis - Respiratory Form）[rabbit_0246] / 粘液腫症（ミクソマトーシス）（Myxomatosis）[rabbit_0270]
 - ウサギ出血病（RHDV/VHD）（Rabbit Haemorrhagic Disease (RHDV/VHD)）[rabbit_0030] / ウサギ出血病（RHD）（ウサギ）（Rabbit Hemorrhagic Disease (RHD)）[rabbit_0274]
-- 皮膚糸状菌症（白癬）（Ringworm (Dermatophytosis)）[rabbit_0033] / 皮膚糸状菌症（Dermatophilosis）[rabbit_0162] / 皮膚糸状菌症（白癬）（ウサギ）（Dermatophytosis (Ringworm)）[rabbit_0302]
+- 皮膚糸状菌症（白癬）（Ringworm (Dermatophytosis)）[rabbit_0033] / 皮膚糸状菌症（白癬）（ウサギ）（Dermatophytosis (Ringworm)）[rabbit_0302]
 - 妊娠中毒症（ケトーシス）（Pregnancy Toxemia (Ketosis)）[rabbit_0051] / 妊娠中毒症（初期）（Pregnancy Toxemia - Early）[rabbit_0228] / 妊娠中毒症（進行期）（Pregnancy Toxemia - Advanced）[rabbit_0229] / 妊娠中毒症（ウサギ）（Pregnancy Toxemia）[rabbit_0346]
 - 涙嚢炎（Dacryocystitis）[rabbit_0056] / 涙嚢炎（鼻涙管閉塞）（ウサギ）（Dacryocystitis (Tear Duct Obstruction)）[rabbit_0360]
 - 動脈硬化症（Atherosclerosis）[rabbit_0064] / 動脈硬化症（ウサギ）（Arteriosclerosis）[rabbit_0367]
@@ -69,7 +69,7 @@
 - stem=`dermat` × 8件
     - 皮膚炎（非特異的）（Dermatitis (Non-specific)）[rabbit_0082]
     - 会陰部皮膚炎（Perineal Dermatitis）[rabbit_0096]
-    - 皮膚糸状菌症（Dermatophilosis）[rabbit_0162]
+    - デルマトフィルス症（Dermatophilosis）[rabbit_0162]
     - 肉垂皮膚炎（Dewlap Fold Dermatitis）[rabbit_0233]
     - ブドウ球菌性皮膚炎（ウサギ）（Staphylococcal Dermatitis）[rabbit_0280]
     - 皮膚糸状菌症（白癬）（ウサギ）（Dermatophytosis (Ringworm)）[rabbit_0302]

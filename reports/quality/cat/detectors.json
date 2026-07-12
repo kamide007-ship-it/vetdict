@@ -1,5 +1,6 @@
 {
   "species": "cat",
+  "view": "raw",
   "record_count": 550,
   "T101": {
     "detector": "T101",

@@ -14,6 +14,13 @@
 - [x] **T108** 出典/薬品リンク整合性 検出器（request-time マッチャを再現し種不整合を検出）
 - [x] **T109** 機械翻訳臭 検出器（curated lexicon: safe/review 2区分）
 - [x] 全21種へ検出器を横展開（`scripts/quality/rollout.py` → `reports/quality/_rollout_summary.md`）
+- [x] **検出器の「配信ビュー」モード**（`--served`）: 生ソースだけでなく統合適用後（dedup + canonical map =
+      T103 適用済み＝サイトが実配信する状態）でも検出可能に。`load_species_records(species, served=True)` が
+      本番の `dedupe_disease_list` + `apply_canonical_map` を再利用（再実装せず）。
+      `scripts/quality/rollout.py --served` → `reports/quality/_rollout_summary_served.md`（生ベースラインは温存）。
+      **成果（統合の実効果が可視化）**: 総疾患 7094→**6836 served**、完全重複クラスタ 545→**338**
+      （horse 23→2 / rabbit 42→13 / degu 17→8 / dog 35→23）、非臨床 4→**1**（degu ヒト移植3件 archived）。
+      詳細は `.spec/SERVED_VIEW_ROLLOUT.md`。回帰テスト `tests/test_detect_served_view.py`（5件）。read-only・データ非改変。
 
 ## フェーズ1.5：T108 薬品リンク種ガード（🟡 可逆・データ非改変）— **完了・PR #709**
 - [x] `vetdict_api`: 2つの薬品マッチャを「その種の投与量(`species_info`)を持つ薬のみ」に（net-new）

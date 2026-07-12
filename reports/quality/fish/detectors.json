@@ -1,5 +1,6 @@
 {
   "species": "fish",
+  "view": "raw",
   "record_count": 45,
   "T101": {
     "detector": "T101",

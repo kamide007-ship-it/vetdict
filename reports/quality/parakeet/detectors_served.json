@@ -1,0 +1,4740 @@
+{
+  "species": "parakeet",
+  "view": "served",
+  "record_count": 435,
+  "T101": {
+    "detector": "T101",
+    "total_records": 435,
+    "exact_duplicate_clusters": [
+      {
+        "members": [
+          {
+            "id": "parakeet_0011",
+            "name": "Mycobacteriosis (Avian Tuberculosis)",
+            "name_ja": "鳥型結核症"
+          },
+          {
+            "id": "parakeet_0300",
+            "name": "Mycobacteriosis (Avian TB)",
+            "name_ja": "マイコバクテリウム症（鳥結核）（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0023",
+            "name": "Tapeworm Infection",
+            "name_ja": "条虫症"
+          },
+          {
+            "id": "parakeet_0186",
+            "name": "Tapeworm Infection (Parakeet)",
+            "name_ja": "条虫感染症（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0024",
+            "name": "Mite Infestation (Red Mites / Feather Mites)",
+            "name_ja": "ダニ寄生症（ワクモ・羽ダニ）"
+          },
+          {
+            "id": "parakeet_0155",
+            "name": "Tick Infestation",
+            "name_ja": "ダニ寄生症"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0027",
+            "name": "Megabacteriosis (AGY / Macrorhabdus)",
+            "name_ja": "メガバクテリア症（AGY・マクロラブダス症）"
+          },
+          {
+            "id": "parakeet_0252",
+            "name": "Megabacteriosis",
+            "name_ja": "メガバクテリア症（インコ）"
+          },
+          {
+            "id": "parakeet_0272",
+            "name": "Megabacteriosis (AGY)",
+            "name_ja": "メガバクテリア症（AGY）（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0029",
+            "name": "Gout (Visceral)",
+            "name_ja": "内臓痛風"
+          },
+          {
+            "id": "parakeet_0030",
+            "name": "Gout (Articular)",
+            "name_ja": "関節痛風"
+          },
+          {
+            "id": "parakeet_0274",
+            "name": "Gout (Visceral/Articular)",
+            "name_ja": "痛風（内臓型/関節型）（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0034",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "parakeet_0257",
+            "name": "Hepatic Lipidosis (Seed Diet)",
+            "name_ja": "肝リピドーシス（種子食）（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0038",
+            "name": "Teflon (PTFE) Toxicosis",
+            "name_ja": "テフロン中毒（PTFE中毒）"
+          },
+          {
+            "id": "parakeet_0196",
+            "name": "Teflon Toxicosis (Parakeet)",
+            "name_ja": "テフロン中毒（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0042",
+            "name": "Testicular Tumors",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "parakeet_0256",
+            "name": "Testicular Tumor (Cere Color Change)",
+            "name_ja": "精巣腫瘍（ろう膜変色）（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0043",
+            "name": "Xanthomas",
+            "name_ja": "黄色腫"
+          },
+          {
+            "id": "parakeet_0177",
+            "name": "Xanthoma (Advanced)",
+            "name_ja": "黄色腫（進行型）"
+          },
+          {
+            "id": "parakeet_0263",
+            "name": "Xanthoma (Wing)",
+            "name_ja": "黄色腫（翼）（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0053",
+            "name": "Splay Leg",
+            "name_ja": "開脚症"
+          },
+          {
+            "id": "parakeet_0203",
+            "name": "Splayed Legs (Neonatal)",
+            "name_ja": "開脚症（新生児型）"
+          },
+          {
+            "id": "parakeet_0254",
+            "name": "Splayed Leg (Neonatal)",
+            "name_ja": "開脚（新生児）（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0058",
+            "name": "Feather Cysts",
+            "name_ja": "羽嚢腫"
+          },
+          {
+            "id": "parakeet_0264",
+            "name": "Feather Cyst",
+            "name_ja": "羽毛嚢胞（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0059",
+            "name": "Feather Plucking (Feather Destructive Behavior)",
+            "name_ja": "毛引き症（羽毛損傷行動）"
+          },
+          {
+            "id": "parakeet_0268",
+            "name": "Feather Plucking",
+            "name_ja": "毛引き（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0067",
+            "name": "Crop Stasis (Sour Crop)",
+            "name_ja": "そ嚢停滞（サワークロップ）"
+          },
+          {
+            "id": "parakeet_0206",
+            "name": "Crop Impaction (Foreign Body)",
+            "name_ja": "嗉嚢閉塞（異物）"
+          },
+          {
+            "id": "parakeet_0265",
+            "name": "Crop Stasis (Neonatal)",
+            "name_ja": "そ嚢うっ滞（新生児）（インコ）"
+          },
+          {
+            "id": "parakeet_0270",
+            "name": "Crop Stasis",
+            "name_ja": "そ嚢うっ滞（インコ）"
+          },
+          {
+            "id": "parakeet_0334",
+            "name": "Crop Impaction",
+            "name_ja": "そ嚢停滞（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0070",
+            "name": "Papillomatosis",
+            "name_ja": "乳頭腫症"
+          },
+          {
+            "id": "parakeet_0335",
+            "name": "Papillomatosis (Internal)",
+            "name_ja": "内臓乳頭腫症（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0072",
+            "name": "Liver Disease (Hepatitis)",
+            "name_ja": "肝疾患（肝炎）"
+          },
+          {
+            "id": "parakeet_0273",
+            "name": "Liver Disease (Hepatic Lipidosis)",
+            "name_ja": "肝疾患（肝リピドーシス）（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0082",
+            "name": "Burns (Thermal / Chemical)",
+            "name_ja": "熱傷・化学熱傷"
+          },
+          {
+            "id": "parakeet_0330",
+            "name": "Burns",
+            "name_ja": "熱傷（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0113",
+            "name": "E. coli Infection (Colibacillosis)",
+            "name_ja": "大腸菌感染症"
+          },
+          {
+            "id": "parakeet_0299",
+            "name": "E. coli Infection",
+            "name_ja": "大腸菌感染（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0127",
+            "name": "Proventricular Ulceration",
+            "name_ja": "腺胃潰瘍"
+          },
+          {
+            "id": "parakeet_0226",
+            "name": "Proventricular Ulceration (Budgerigar)",
+            "name_ja": "前胃潰瘍（セキセイインコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0133",
+            "name": "Feather Follicle Cyst (Chronic)",
+            "name_ja": "慢性羽包嚢胞"
+          },
+          {
+            "id": "parakeet_0455",
+            "name": "Feather Follicle Cyst",
+            "name_ja": "羽毛毛包嚢胞（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0195",
+            "name": "Zinc Toxicosis (Advanced)",
+            "name_ja": "亜鉛中毒（進行型）"
+          },
+          {
+            "id": "parakeet_0241",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0228",
+            "name": "Chronic Respiratory Disease (CRD)",
+            "name_ja": "慢性呼吸器疾患（CRD）"
+          },
+          {
+            "id": "parakeet_0362",
+            "name": "Chronic Respiratory Disease",
+            "name_ja": "慢性呼吸器疾患（インコ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "parakeet_0235",
+            "name": "Cere Hypertrophy (Brown Hypertrophy)",
+            "name_ja": "蝋膜肥大（褐色肥大症）"
+          },
+          {
+            "id": "parakeet_0262",
+            "name": "Cere Hypertrophy",
+            "name_ja": "ろう膜肥大（インコ）"
+          }
+        ]
+      }
+    ],
+    "exact_duplicate_cluster_count": 22,
+    "redundant_record_count": 29,
+    "family_clusters": [
+      {
+        "shared_stem": "defici",
+        "size": 18,
+        "members": [
+          {
+            "id": "parakeet_0031",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "parakeet_0032",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
+          },
+          {
+            "id": "parakeet_0036",
+            "name": "Vitamin D Deficiency",
+            "name_ja": "ビタミンD欠乏症"
+          },
+          {
+            "id": "parakeet_0141",
+            "name": "Vitamin E / Selenium Deficiency",
+            "name_ja": "ビタミンE・セレン欠乏症"
+          },
+          {
+            "id": "parakeet_0142",
+            "name": "Vitamin K Deficiency",
+            "name_ja": "ビタミンK欠乏症"
+          },
+          {
+            "id": "parakeet_0143",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン欠乏症"
+          },
+          {
+            "id": "parakeet_0144",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "parakeet_0147",
+            "name": "Protein Deficiency",
+            "name_ja": "タンパク質欠乏症"
+          },
+          {
+            "id": "parakeet_0164",
+            "name": "Niacin Deficiency",
+            "name_ja": "ナイアシン欠乏症"
+          },
+          {
+            "id": "parakeet_0165",
+            "name": "Riboflavin Deficiency",
+            "name_ja": "リボフラビン欠乏症"
+          },
+          {
+            "id": "parakeet_0193",
+            "name": "Vitamin E Deficiency (Parakeet)",
+            "name_ja": "ビタミンE欠乏症（インコ）"
+          },
+          {
+            "id": "parakeet_0194",
+            "name": "Pantothenic Acid Deficiency",
+            "name_ja": "パントテン酸欠乏症"
+          },
+          {
+            "id": "parakeet_0244",
+            "name": "Vitamin A Deficiency – Respiratory",
+            "name_ja": "ビタミンA欠乏症呼吸器型"
+          },
+          {
+            "id": "parakeet_0269",
+            "name": "Nutritional Deficiency (General)",
+            "name_ja": "栄養欠乏症（一般）（インコ）"
+          },
+          {
+            "id": "parakeet_0276",
+            "name": "Iodine Deficiency (Thyroid Hyperplasia)",
+            "name_ja": "ヨウ素欠乏症（甲状腺過形成）（インコ）"
+          },
+          {
+            "id": "parakeet_0398",
+            "name": "Musculoskeletal Nutritional Deficiency",
+            "name_ja": "筋骨格系栄養欠乏（インコ）"
+          },
+          {
+            "id": "parakeet_0409",
+            "name": "Hematological Nutritional Deficiency",
+            "name_ja": "血液栄養欠乏（インコ）"
+          },
+          {
+            "id": "parakeet_0450",
+            "name": "Selenium Deficiency",
+            "name_ja": "セレン欠乏症（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "feathe",
+        "size": 15,
+        "members": [
+          {
+            "id": "parakeet_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "parakeet_0058",
+            "name": "Feather Cysts",
+            "name_ja": "羽嚢腫"
+          },
+          {
+            "id": "parakeet_0059",
+            "name": "Feather Plucking (Feather Destructive Behavior)",
+            "name_ja": "毛引き症（羽毛損傷行動）"
+          },
+          {
+            "id": "parakeet_0060",
+            "name": "Psittacine Feather Stress Bars",
+            "name_ja": "ストレスバー（ストレス線）"
+          },
+          {
+            "id": "parakeet_0089",
+            "name": "Feather Folliculitis",
+            "name_ja": "毛包炎"
+          },
+          {
+            "id": "parakeet_0133",
+            "name": "Feather Follicle Cyst (Chronic)",
+            "name_ja": "慢性羽包嚢胞"
+          },
+          {
+            "id": "parakeet_0159",
+            "name": "Hormonal Feather Plucking",
+            "name_ja": "ホルモン性毛引き症"
+          },
+          {
+            "id": "parakeet_0213",
+            "name": "Feather Cysts – Recurrent",
+            "name_ja": "反復性羽嚢腫"
+          },
+          {
+            "id": "parakeet_0220",
+            "name": "Psittacine Beak and Feather Disease – Early Stage",
+            "name_ja": "嘴羽毛病（PBFD）初期段階"
+          },
+          {
+            "id": "parakeet_0245",
+            "name": "Mite Infestation – Feather Mites",
+            "name_ja": "羽ダニ寄生症"
+          },
+          {
+            "id": "parakeet_0264",
+            "name": "Feather Cyst",
+            "name_ja": "羽毛嚢胞（インコ）"
+          },
+          {
+            "id": "parakeet_0268",
+            "name": "Feather Plucking",
+            "name_ja": "毛引き（インコ）"
+          },
+          {
+            "id": "parakeet_0282",
+            "name": "Feather Mites",
+            "name_ja": "羽毛ダニ（インコ）"
+          },
+          {
+            "id": "parakeet_0455",
+            "name": "Feather Follicle Cyst",
+            "name_ja": "羽毛毛包嚢胞（インコ）"
+          },
+          {
+            "id": "parakeet_0457",
+            "name": "Tail Feather Loss",
+            "name_ja": "尾羽脱落（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bacter",
+        "size": 14,
+        "members": [
+          {
+            "id": "parakeet_0010",
+            "name": "Bacterial Enteritis",
+            "name_ja": "細菌性腸炎"
+          },
+          {
+            "id": "parakeet_0180",
+            "name": "Bacterial Airsacculitis",
+            "name_ja": "細菌性気嚢炎"
+          },
+          {
+            "id": "parakeet_0341",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（インコ）"
+          },
+          {
+            "id": "parakeet_0347",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0355",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0363",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0371",
+            "name": "Urogenital Bacterial Infection",
+            "name_ja": "泌尿生殖器細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0375",
+            "name": "Neurological Bacterial Infection",
+            "name_ja": "神経系細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0383",
+            "name": "Ophthalmological Bacterial Infection",
+            "name_ja": "眼科細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0388",
+            "name": "Cardiovascular Bacterial Infection",
+            "name_ja": "心血管細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0393",
+            "name": "Musculoskeletal Bacterial Infection",
+            "name_ja": "筋骨格系細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0399",
+            "name": "Endocrine Bacterial Infection",
+            "name_ja": "内分泌細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0410",
+            "name": "Reproductive Bacterial Infection",
+            "name_ja": "生殖器細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0415",
+            "name": "Systemic Bacterial Infection",
+            "name_ja": "全身性細菌感染（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 14,
+        "members": [
+          {
+            "id": "parakeet_0173",
+            "name": "Proventricular Neoplasia",
+            "name_ja": "腺胃腫瘍"
+          },
+          {
+            "id": "parakeet_0304",
+            "name": "Reproductive Neoplasia",
+            "name_ja": "生殖器腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0345",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0351",
+            "name": "Gastrointestinal Neoplasia",
+            "name_ja": "消化管腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0359",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0367",
+            "name": "Dermatological Neoplasia",
+            "name_ja": "皮膚腫瘍性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0372",
+            "name": "Urogenital Neoplasia",
+            "name_ja": "泌尿生殖器腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0378",
+            "name": "Neurological Neoplasia",
+            "name_ja": "神経系腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0385",
+            "name": "Ophthalmological Neoplasia",
+            "name_ja": "眼科腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0389",
+            "name": "Cardiovascular Neoplasia",
+            "name_ja": "心血管腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0394",
+            "name": "Musculoskeletal Neoplasia",
+            "name_ja": "筋骨格系腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0400",
+            "name": "Endocrine Neoplasia",
+            "name_ja": "内分泌腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0405",
+            "name": "Hematological Neoplasia",
+            "name_ja": "血液腫瘍性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0419",
+            "name": "Systemic Neoplasia (Metastatic)",
+            "name_ja": "全身性腫瘍（転移性）（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "respir",
+        "size": 13,
+        "members": [
+          {
+            "id": "parakeet_0062",
+            "name": "Upper Respiratory Infection",
+            "name_ja": "上部気道感染症"
+          },
+          {
+            "id": "parakeet_0063",
+            "name": "Lower Respiratory Infection (Pneumonia)",
+            "name_ja": "下部気道感染症（肺炎）"
+          },
+          {
+            "id": "parakeet_0210",
+            "name": "Psittacosis – Respiratory Form",
+            "name_ja": "オウム病呼吸器型"
+          },
+          {
+            "id": "parakeet_0228",
+            "name": "Chronic Respiratory Disease (CRD)",
+            "name_ja": "慢性呼吸器疾患（CRD）"
+          },
+          {
+            "id": "parakeet_0244",
+            "name": "Vitamin A Deficiency – Respiratory",
+            "name_ja": "ビタミンA欠乏症呼吸器型"
+          },
+          {
+            "id": "parakeet_0355",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0356",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0357",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0358",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0359",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0360",
+            "name": "Respiratory Inflammatory Disease",
+            "name_ja": "呼吸器炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0361",
+            "name": "Lower Respiratory Tract Infection",
+            "name_ja": "下部気道感染（インコ）"
+          },
+          {
+            "id": "parakeet_0362",
+            "name": "Chronic Respiratory Disease",
+            "name_ja": "慢性呼吸器疾患（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "crop",
+        "size": 12,
+        "members": [
+          {
+            "id": "parakeet_0017",
+            "name": "Crop Candidiasis",
+            "name_ja": "そ嚢カンジダ症"
+          },
+          {
+            "id": "parakeet_0067",
+            "name": "Crop Stasis (Sour Crop)",
+            "name_ja": "そ嚢停滞（サワークロップ）"
+          },
+          {
+            "id": "parakeet_0083",
+            "name": "Crop Burns",
+            "name_ja": "そ嚢熱傷"
+          },
+          {
+            "id": "parakeet_0163",
+            "name": "Crop Mycosis",
+            "name_ja": "素嚢真菌症"
+          },
+          {
+            "id": "parakeet_0206",
+            "name": "Crop Impaction (Foreign Body)",
+            "name_ja": "嗉嚢閉塞（異物）"
+          },
+          {
+            "id": "parakeet_0221",
+            "name": "Crop Candidiasis – Neonatal",
+            "name_ja": "新生児そ嚢カンジダ症"
+          },
+          {
+            "id": "parakeet_0222",
+            "name": "Trichomoniasis – Crop Form",
+            "name_ja": "トリコモナス症嗉嚢型"
+          },
+          {
+            "id": "parakeet_0229",
+            "name": "Sour Crop",
+            "name_ja": "酸敗嗉嚢"
+          },
+          {
+            "id": "parakeet_0265",
+            "name": "Crop Stasis (Neonatal)",
+            "name_ja": "そ嚢うっ滞（新生児）（インコ）"
+          },
+          {
+            "id": "parakeet_0270",
+            "name": "Crop Stasis",
+            "name_ja": "そ嚢うっ滞（インコ）"
+          },
+          {
+            "id": "parakeet_0334",
+            "name": "Crop Impaction",
+            "name_ja": "そ嚢停滞（インコ）"
+          },
+          {
+            "id": "parakeet_0453",
+            "name": "Neonatal Crop Burn",
+            "name_ja": "新生児そ嚢火傷（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 11,
+        "members": [
+          {
+            "id": "parakeet_0110",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症（白癬）"
+          },
+          {
+            "id": "parakeet_0153",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎"
+          },
+          {
+            "id": "parakeet_0339",
+            "name": "Dermatitis",
+            "name_ja": "皮膚炎（インコ）"
+          },
+          {
+            "id": "parakeet_0363",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0364",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0365",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0366",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（インコ）"
+          },
+          {
+            "id": "parakeet_0367",
+            "name": "Dermatological Neoplasia",
+            "name_ja": "皮膚腫瘍性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0368",
+            "name": "Dermatological Autoimmune Disease",
+            "name_ja": "皮膚自己免疫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0369",
+            "name": "Dermatological Allergic Disease",
+            "name_ja": "皮膚アレルギー疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0370",
+            "name": "Chronic Dermatitis",
+            "name_ja": "慢性皮膚炎（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 11,
+        "members": [
+          {
+            "id": "parakeet_0034",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "parakeet_0125",
+            "name": "Hepatic Amyloidosis",
+            "name_ja": "肝アミロイドーシス"
+          },
+          {
+            "id": "parakeet_0202",
+            "name": "Budgerigar Hepatic Lipidosis",
+            "name_ja": "セキセイインコ肝リピドーシス"
+          },
+          {
+            "id": "parakeet_0257",
+            "name": "Hepatic Lipidosis (Seed Diet)",
+            "name_ja": "肝リピドーシス（種子食）（インコ）"
+          },
+          {
+            "id": "parakeet_0336",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（インコ）"
+          },
+          {
+            "id": "parakeet_0341",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（インコ）"
+          },
+          {
+            "id": "parakeet_0342",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（インコ）"
+          },
+          {
+            "id": "parakeet_0343",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0344",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（インコ）"
+          },
+          {
+            "id": "parakeet_0345",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0346",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "avian",
+        "size": 9,
+        "members": [
+          {
+            "id": "parakeet_0004",
+            "name": "Avian Pox",
+            "name_ja": "鳥痘"
+          },
+          {
+            "id": "parakeet_0007",
+            "name": "Avian Influenza",
+            "name_ja": "鳥インフルエンザ"
+          },
+          {
+            "id": "parakeet_0093",
+            "name": "Avian Bornavirus (ABV) Infection",
+            "name_ja": "鳥ボルナウイルス感染症"
+          },
+          {
+            "id": "parakeet_0096",
+            "name": "Avian Herpesvirus Infection",
+            "name_ja": "鳥ヘルペスウイルス感染症"
+          },
+          {
+            "id": "parakeet_0099",
+            "name": "Avian Malaria (Plasmodium spp.)",
+            "name_ja": "鳥マラリア"
+          },
+          {
+            "id": "parakeet_0172",
+            "name": "Avian Bornavirus (PDD) - Parakeet",
+            "name_ja": "鳥ボルナウイルス（PDD）- インコ"
+          },
+          {
+            "id": "parakeet_0185",
+            "name": "Avian Gastric Yeast (AGY) Advanced",
+            "name_ja": "鳥胃酵母（AGY）進行型"
+          },
+          {
+            "id": "parakeet_0211",
+            "name": "Avian Gastric Yeast – Refractory",
+            "name_ja": "鳥胃酵母症難治型"
+          },
+          {
+            "id": "parakeet_0267",
+            "name": "Avian Bornavirus (ABV)",
+            "name_ja": "鳥ボルナウイルス（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastro",
+        "size": 9,
+        "members": [
+          {
+            "id": "parakeet_0128",
+            "name": "Gastrointestinal Foreign Body",
+            "name_ja": "消化管異物"
+          },
+          {
+            "id": "parakeet_0347",
+            "name": "Gastrointestinal Bacterial Infection",
+            "name_ja": "消化管細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0348",
+            "name": "Gastrointestinal Viral Infection",
+            "name_ja": "消化管ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0349",
+            "name": "Gastrointestinal Fungal Infection",
+            "name_ja": "消化管真菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0350",
+            "name": "Gastrointestinal Parasitic Disease",
+            "name_ja": "消化管寄生虫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0351",
+            "name": "Gastrointestinal Neoplasia",
+            "name_ja": "消化管腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0352",
+            "name": "Gastrointestinal Inflammatory Disease",
+            "name_ja": "消化管炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0353",
+            "name": "Gastrointestinal Motility Disorder",
+            "name_ja": "消化管運動障害（インコ）"
+          },
+          {
+            "id": "parakeet_0354",
+            "name": "Gastrointestinal Obstruction (Partial)",
+            "name_ja": "消化管部分閉塞（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "inflam",
+        "size": 9,
+        "members": [
+          {
+            "id": "parakeet_0352",
+            "name": "Gastrointestinal Inflammatory Disease",
+            "name_ja": "消化管炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0360",
+            "name": "Respiratory Inflammatory Disease",
+            "name_ja": "呼吸器炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0373",
+            "name": "Urogenital Inflammatory Disease",
+            "name_ja": "泌尿生殖器炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0380",
+            "name": "Neurological Inflammatory Disease",
+            "name_ja": "神経炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0391",
+            "name": "Cardiovascular Inflammatory Disease",
+            "name_ja": "心血管炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0397",
+            "name": "Musculoskeletal Inflammatory Disease",
+            "name_ja": "筋骨格系炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0414",
+            "name": "Reproductive Inflammatory Disease",
+            "name_ja": "生殖器炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0421",
+            "name": "Systemic Inflammatory Response",
+            "name_ja": "全身性炎症反応（インコ）"
+          },
+          {
+            "id": "parakeet_0432",
+            "name": "Idiopathic Inflammatory Disease",
+            "name_ja": "特発性炎症性疾患（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "metabo",
+        "size": 9,
+        "members": [
+          {
+            "id": "parakeet_0057",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患"
+          },
+          {
+            "id": "parakeet_0243",
+            "name": "Metabolic Bone Disease – Neonatal",
+            "name_ja": "代謝性骨疾患新生児型"
+          },
+          {
+            "id": "parakeet_0346",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（インコ）"
+          },
+          {
+            "id": "parakeet_0382",
+            "name": "Neurological Metabolic Disease",
+            "name_ja": "神経代謝疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0401",
+            "name": "Endocrine Metabolic Disorder",
+            "name_ja": "内分泌代謝障害（インコ）"
+          },
+          {
+            "id": "parakeet_0408",
+            "name": "Hematological Metabolic Disease",
+            "name_ja": "血液代謝疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0412",
+            "name": "Reproductive Metabolic Disease",
+            "name_ja": "生殖器代謝疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0441",
+            "name": "Metabolic Acidosis",
+            "name_ja": "代謝性アシドーシス（インコ）"
+          },
+          {
+            "id": "parakeet_0442",
+            "name": "Metabolic Alkalosis",
+            "name_ja": "代謝性アルカローシス（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neurol",
+        "size": 9,
+        "members": [
+          {
+            "id": "parakeet_0209",
+            "name": "Proventricular Dilatation Disease – Neurological Form",
+            "name_ja": "前胃拡張症神経型"
+          },
+          {
+            "id": "parakeet_0375",
+            "name": "Neurological Bacterial Infection",
+            "name_ja": "神経系細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0376",
+            "name": "Neurological Viral Infection",
+            "name_ja": "神経系ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0377",
+            "name": "Neurological Parasitic Disease",
+            "name_ja": "神経系寄生虫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0378",
+            "name": "Neurological Neoplasia",
+            "name_ja": "神経系腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0379",
+            "name": "Neurological Degenerative Disease",
+            "name_ja": "神経変性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0380",
+            "name": "Neurological Inflammatory Disease",
+            "name_ja": "神経炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0381",
+            "name": "Neurological Traumatic Injury",
+            "name_ja": "神経外傷性損傷（インコ）"
+          },
+          {
+            "id": "parakeet_0382",
+            "name": "Neurological Metabolic Disease",
+            "name_ja": "神経代謝疾患（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "beak",
+        "size": 8,
+        "members": [
+          {
+            "id": "parakeet_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "parakeet_0073",
+            "name": "Beak Overgrowth",
+            "name_ja": "嘴過長症"
+          },
+          {
+            "id": "parakeet_0074",
+            "name": "Beak Trauma",
+            "name_ja": "嘴外傷"
+          },
+          {
+            "id": "parakeet_0132",
+            "name": "Beak Malocclusion (Scissor Beak)",
+            "name_ja": "嘴不正咬合（シザービーク）"
+          },
+          {
+            "id": "parakeet_0219",
+            "name": "Beak Injury – Fracture",
+            "name_ja": "嘴損傷骨折型"
+          },
+          {
+            "id": "parakeet_0220",
+            "name": "Psittacine Beak and Feather Disease – Early Stage",
+            "name_ja": "嘴羽毛病（PBFD）初期段階"
+          },
+          {
+            "id": "parakeet_0295",
+            "name": "Beak Deformity (Scissor Beak)",
+            "name_ja": "嘴変形（シザービーク）（インコ）"
+          },
+          {
+            "id": "parakeet_0454",
+            "name": "Beak Rot",
+            "name_ja": "嘴腐敗（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "papill",
+        "size": 8,
+        "members": [
+          {
+            "id": "parakeet_0070",
+            "name": "Papillomatosis",
+            "name_ja": "乳頭腫症"
+          },
+          {
+            "id": "parakeet_0169",
+            "name": "Papillomavirus Infection",
+            "name_ja": "パピローマウイルス感染症"
+          },
+          {
+            "id": "parakeet_0170",
+            "name": "Internal Papillomatosis",
+            "name_ja": "内部乳頭腫症"
+          },
+          {
+            "id": "parakeet_0171",
+            "name": "Cloacal Papillomatosis (Parakeet)",
+            "name_ja": "総排泄腔乳頭腫症（インコ）"
+          },
+          {
+            "id": "parakeet_0231",
+            "name": "Choanal Papilloma",
+            "name_ja": "後鼻孔乳頭腫"
+          },
+          {
+            "id": "parakeet_0236",
+            "name": "Cloacal Papilloma",
+            "name_ja": "総排泄腔乳頭腫"
+          },
+          {
+            "id": "parakeet_0316",
+            "name": "Papilloma",
+            "name_ja": "乳頭腫（インコ）"
+          },
+          {
+            "id": "parakeet_0335",
+            "name": "Papillomatosis (Internal)",
+            "name_ja": "内臓乳頭腫症（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "psitta",
+        "size": 8,
+        "members": [
+          {
+            "id": "parakeet_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "parakeet_0009",
+            "name": "Psittacosis (Chlamydiosis)",
+            "name_ja": "オウム病（クラミジア症）"
+          },
+          {
+            "id": "parakeet_0060",
+            "name": "Psittacine Feather Stress Bars",
+            "name_ja": "ストレスバー（ストレス線）"
+          },
+          {
+            "id": "parakeet_0087",
+            "name": "Psittacine Proventricular Impaction",
+            "name_ja": "前胃閉塞"
+          },
+          {
+            "id": "parakeet_0168",
+            "name": "Psittacine Poxvirus (Parakeet)",
+            "name_ja": "オウム目痘瘡ウイルス（インコ）"
+          },
+          {
+            "id": "parakeet_0210",
+            "name": "Psittacosis – Respiratory Form",
+            "name_ja": "オウム病呼吸器型"
+          },
+          {
+            "id": "parakeet_0220",
+            "name": "Psittacine Beak and Feather Disease – Early Stage",
+            "name_ja": "嘴羽毛病（PBFD）初期段階"
+          },
+          {
+            "id": "parakeet_0237",
+            "name": "Psittacine Proventricular Nematodes",
+            "name_ja": "オウム目前胃線虫症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "reprod",
+        "size": 8,
+        "members": [
+          {
+            "id": "parakeet_0157",
+            "name": "Reproductive Tract Infection (Salpingitis)",
+            "name_ja": "生殖器感染症（卵管炎）"
+          },
+          {
+            "id": "parakeet_0204",
+            "name": "Reproductive Tract Prolapse",
+            "name_ja": "生殖器脱出"
+          },
+          {
+            "id": "parakeet_0304",
+            "name": "Reproductive Neoplasia",
+            "name_ja": "生殖器腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0410",
+            "name": "Reproductive Bacterial Infection",
+            "name_ja": "生殖器細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0411",
+            "name": "Reproductive Viral Infection",
+            "name_ja": "生殖器ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0412",
+            "name": "Reproductive Metabolic Disease",
+            "name_ja": "生殖器代謝疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0413",
+            "name": "Reproductive Congenital Anomaly",
+            "name_ja": "生殖器先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0414",
+            "name": "Reproductive Inflammatory Disease",
+            "name_ja": "生殖器炎症性疾患（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "system",
+        "size": 8,
+        "members": [
+          {
+            "id": "parakeet_0415",
+            "name": "Systemic Bacterial Infection",
+            "name_ja": "全身性細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0416",
+            "name": "Systemic Viral Infection",
+            "name_ja": "全身性ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0417",
+            "name": "Systemic Fungal Infection",
+            "name_ja": "全身性真菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0418",
+            "name": "Systemic Parasitic Disease",
+            "name_ja": "全身性寄生虫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0419",
+            "name": "Systemic Neoplasia (Metastatic)",
+            "name_ja": "全身性腫瘍（転移性）（インコ）"
+          },
+          {
+            "id": "parakeet_0420",
+            "name": "Systemic Autoimmune Disease",
+            "name_ja": "全身性自己免疫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0421",
+            "name": "Systemic Inflammatory Response",
+            "name_ja": "全身性炎症反応（インコ）"
+          },
+          {
+            "id": "parakeet_0422",
+            "name": "Systemic Toxic Exposure",
+            "name_ja": "全身性中毒（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "viral",
+        "size": 8,
+        "members": [
+          {
+            "id": "parakeet_0342",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（インコ）"
+          },
+          {
+            "id": "parakeet_0348",
+            "name": "Gastrointestinal Viral Infection",
+            "name_ja": "消化管ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0356",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0364",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0376",
+            "name": "Neurological Viral Infection",
+            "name_ja": "神経系ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0384",
+            "name": "Ophthalmological Viral Infection",
+            "name_ja": "眼科ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0411",
+            "name": "Reproductive Viral Infection",
+            "name_ja": "生殖器ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0416",
+            "name": "Systemic Viral Infection",
+            "name_ja": "全身性ウイルス感染（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "budger",
+        "size": 7,
+        "members": [
+          {
+            "id": "parakeet_0002",
+            "name": "Budgerigar Fledgling Disease",
+            "name_ja": "セキセイインコ幼鳥病"
+          },
+          {
+            "id": "parakeet_0202",
+            "name": "Budgerigar Hepatic Lipidosis",
+            "name_ja": "セキセイインコ肝リピドーシス"
+          },
+          {
+            "id": "parakeet_0223",
+            "name": "Budgerigar Pituitary Adenoma",
+            "name_ja": "セキセイインコ下垂体腺腫"
+          },
+          {
+            "id": "parakeet_0238",
+            "name": "Budgerigar Amyloidosis",
+            "name_ja": "セキセイインコアミロイドーシス"
+          },
+          {
+            "id": "parakeet_0255",
+            "name": "English Budgerigar Disease",
+            "name_ja": "英国セキセイ病（インコ）"
+          },
+          {
+            "id": "parakeet_0258",
+            "name": "Budgerigar Herpesvirus",
+            "name_ja": "セキセイインコヘルペスウイルス（インコ）"
+          },
+          {
+            "id": "parakeet_0449",
+            "name": "Budgerigar Circovirus",
+            "name_ja": "セキセイインコサーコウイルス（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 7,
+        "members": [
+          {
+            "id": "parakeet_0024",
+            "name": "Mite Infestation (Red Mites / Feather Mites)",
+            "name_ja": "ダニ寄生症（ワクモ・羽ダニ）"
+          },
+          {
+            "id": "parakeet_0155",
+            "name": "Tick Infestation",
+            "name_ja": "ダニ寄生症"
+          },
+          {
+            "id": "parakeet_0156",
+            "name": "Hippoboscid Fly Infestation",
+            "name_ja": "シラミバエ寄生症"
+          },
+          {
+            "id": "parakeet_0227",
+            "name": "Air Sac Mite – Chronic Infestation",
+            "name_ja": "気嚢ダニ慢性寄生型"
+          },
+          {
+            "id": "parakeet_0245",
+            "name": "Mite Infestation – Feather Mites",
+            "name_ja": "羽ダニ寄生症"
+          },
+          {
+            "id": "parakeet_0284",
+            "name": "Lice Infestation",
+            "name_ja": "シラミ寄生（インコ）"
+          },
+          {
+            "id": "parakeet_0366",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "proven",
+        "size": 7,
+        "members": [
+          {
+            "id": "parakeet_0006",
+            "name": "Proventricular Dilatation Disease (PDD)",
+            "name_ja": "前胃拡張症（PDD）"
+          },
+          {
+            "id": "parakeet_0087",
+            "name": "Psittacine Proventricular Impaction",
+            "name_ja": "前胃閉塞"
+          },
+          {
+            "id": "parakeet_0127",
+            "name": "Proventricular Ulceration",
+            "name_ja": "腺胃潰瘍"
+          },
+          {
+            "id": "parakeet_0173",
+            "name": "Proventricular Neoplasia",
+            "name_ja": "腺胃腫瘍"
+          },
+          {
+            "id": "parakeet_0209",
+            "name": "Proventricular Dilatation Disease – Neurological Form",
+            "name_ja": "前胃拡張症神経型"
+          },
+          {
+            "id": "parakeet_0226",
+            "name": "Proventricular Ulceration (Budgerigar)",
+            "name_ja": "前胃潰瘍（セキセイインコ）"
+          },
+          {
+            "id": "parakeet_0237",
+            "name": "Psittacine Proventricular Nematodes",
+            "name_ja": "オウム目前胃線虫症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 7,
+        "members": [
+          {
+            "id": "parakeet_0038",
+            "name": "Teflon (PTFE) Toxicosis",
+            "name_ja": "テフロン中毒（PTFE中毒）"
+          },
+          {
+            "id": "parakeet_0039",
+            "name": "Avocado Toxicosis",
+            "name_ja": "アボカド中毒"
+          },
+          {
+            "id": "parakeet_0195",
+            "name": "Zinc Toxicosis (Advanced)",
+            "name_ja": "亜鉛中毒（進行型）"
+          },
+          {
+            "id": "parakeet_0196",
+            "name": "Teflon Toxicosis (Parakeet)",
+            "name_ja": "テフロン中毒（インコ）"
+          },
+          {
+            "id": "parakeet_0241",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "parakeet_0242",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "parakeet_0325",
+            "name": "Teflon/PTFE Toxicosis",
+            "name_ja": "テフロン/PTFE中毒（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 7,
+        "members": [
+          {
+            "id": "parakeet_0040",
+            "name": "Renal Tumors",
+            "name_ja": "腎腫瘍"
+          },
+          {
+            "id": "parakeet_0042",
+            "name": "Testicular Tumors",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "parakeet_0044",
+            "name": "Ovarian Tumors",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "parakeet_0134",
+            "name": "Preen Gland Tumor (Uropygial Gland)",
+            "name_ja": "尾脂腺腫瘍"
+          },
+          {
+            "id": "parakeet_0214",
+            "name": "Testicular Tumor – Sertoli Cell",
+            "name_ja": "精巣腫瘍セルトリ細胞型"
+          },
+          {
+            "id": "parakeet_0256",
+            "name": "Testicular Tumor (Cere Color Change)",
+            "name_ja": "精巣腫瘍（ろう膜変色）（インコ）"
+          },
+          {
+            "id": "parakeet_0306",
+            "name": "Sertoli Cell Tumor",
+            "name_ja": "セルトリ細胞腫（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cardio",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0121",
+            "name": "Cardiomyopathy",
+            "name_ja": "心筋症"
+          },
+          {
+            "id": "parakeet_0388",
+            "name": "Cardiovascular Bacterial Infection",
+            "name_ja": "心血管細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0389",
+            "name": "Cardiovascular Neoplasia",
+            "name_ja": "心血管腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0390",
+            "name": "Cardiovascular Degenerative Disease",
+            "name_ja": "心血管変性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0391",
+            "name": "Cardiovascular Inflammatory Disease",
+            "name_ja": "心血管炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0392",
+            "name": "Cardiovascular Congenital Anomaly",
+            "name_ja": "心血管先天異常（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "congen",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0374",
+            "name": "Urogenital Congenital Anomaly",
+            "name_ja": "泌尿生殖器先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0387",
+            "name": "Ophthalmological Congenital Anomaly",
+            "name_ja": "眼科先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0392",
+            "name": "Cardiovascular Congenital Anomaly",
+            "name_ja": "心血管先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0396",
+            "name": "Musculoskeletal Congenital Anomaly",
+            "name_ja": "筋骨格系先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0413",
+            "name": "Reproductive Congenital Anomaly",
+            "name_ja": "生殖器先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0431",
+            "name": "Congenital Malformation",
+            "name_ja": "先天性奇形（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cyst",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0058",
+            "name": "Feather Cysts",
+            "name_ja": "羽嚢腫"
+          },
+          {
+            "id": "parakeet_0133",
+            "name": "Feather Follicle Cyst (Chronic)",
+            "name_ja": "慢性羽包嚢胞"
+          },
+          {
+            "id": "parakeet_0205",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞"
+          },
+          {
+            "id": "parakeet_0213",
+            "name": "Feather Cysts – Recurrent",
+            "name_ja": "反復性羽嚢腫"
+          },
+          {
+            "id": "parakeet_0264",
+            "name": "Feather Cyst",
+            "name_ja": "羽毛嚢胞（インコ）"
+          },
+          {
+            "id": "parakeet_0455",
+            "name": "Feather Follicle Cyst",
+            "name_ja": "羽毛毛包嚢胞（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "degene",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0379",
+            "name": "Neurological Degenerative Disease",
+            "name_ja": "神経変性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0386",
+            "name": "Ophthalmological Degenerative Disease",
+            "name_ja": "眼科変性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0390",
+            "name": "Cardiovascular Degenerative Disease",
+            "name_ja": "心血管変性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0395",
+            "name": "Musculoskeletal Degenerative Disease",
+            "name_ja": "筋骨格系変性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0404",
+            "name": "Endocrine Degenerative Disease",
+            "name_ja": "内分泌変性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0430",
+            "name": "Age-Related Degenerative Disease",
+            "name_ja": "加齢性変性疾患（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "endocr",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0399",
+            "name": "Endocrine Bacterial Infection",
+            "name_ja": "内分泌細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0400",
+            "name": "Endocrine Neoplasia",
+            "name_ja": "内分泌腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0401",
+            "name": "Endocrine Metabolic Disorder",
+            "name_ja": "内分泌代謝障害（インコ）"
+          },
+          {
+            "id": "parakeet_0402",
+            "name": "Endocrine Autoimmune Disease",
+            "name_ja": "内分泌自己免疫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0403",
+            "name": "Endocrine Nutritional Disorder",
+            "name_ja": "内分泌栄養障害（インコ）"
+          },
+          {
+            "id": "parakeet_0404",
+            "name": "Endocrine Degenerative Disease",
+            "name_ja": "内分泌変性疾患（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mite",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0024",
+            "name": "Mite Infestation (Red Mites / Feather Mites)",
+            "name_ja": "ダニ寄生症（ワクモ・羽ダニ）"
+          },
+          {
+            "id": "parakeet_0227",
+            "name": "Air Sac Mite – Chronic Infestation",
+            "name_ja": "気嚢ダニ慢性寄生型"
+          },
+          {
+            "id": "parakeet_0245",
+            "name": "Mite Infestation – Feather Mites",
+            "name_ja": "羽ダニ寄生症"
+          },
+          {
+            "id": "parakeet_0259",
+            "name": "Tracheal Mite (Sternostoma)",
+            "name_ja": "気管ダニ（インコ）"
+          },
+          {
+            "id": "parakeet_0280",
+            "name": "Air Sac Mite",
+            "name_ja": "気嚢ダニ（インコ）"
+          },
+          {
+            "id": "parakeet_0283",
+            "name": "Red Mite (Dermanyssus)",
+            "name_ja": "ワクモ（Dermanyssus）（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "muscul",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0393",
+            "name": "Musculoskeletal Bacterial Infection",
+            "name_ja": "筋骨格系細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0394",
+            "name": "Musculoskeletal Neoplasia",
+            "name_ja": "筋骨格系腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0395",
+            "name": "Musculoskeletal Degenerative Disease",
+            "name_ja": "筋骨格系変性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0396",
+            "name": "Musculoskeletal Congenital Anomaly",
+            "name_ja": "筋骨格系先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0397",
+            "name": "Musculoskeletal Inflammatory Disease",
+            "name_ja": "筋骨格系炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0398",
+            "name": "Musculoskeletal Nutritional Deficiency",
+            "name_ja": "筋骨格系栄養欠乏（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nutrit",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0145",
+            "name": "Nutritional Secondary Hyperparathyroidism",
+            "name_ja": "栄養性二次性上皮小体機能亢進症"
+          },
+          {
+            "id": "parakeet_0269",
+            "name": "Nutritional Deficiency (General)",
+            "name_ja": "栄養欠乏症（一般）（インコ）"
+          },
+          {
+            "id": "parakeet_0398",
+            "name": "Musculoskeletal Nutritional Deficiency",
+            "name_ja": "筋骨格系栄養欠乏（インコ）"
+          },
+          {
+            "id": "parakeet_0403",
+            "name": "Endocrine Nutritional Disorder",
+            "name_ja": "内分泌栄養障害（インコ）"
+          },
+          {
+            "id": "parakeet_0409",
+            "name": "Hematological Nutritional Deficiency",
+            "name_ja": "血液栄養欠乏（インコ）"
+          },
+          {
+            "id": "parakeet_0426",
+            "name": "Nutritional Imbalance Syndrome",
+            "name_ja": "栄養不均衡症候群（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "parasi",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0343",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0350",
+            "name": "Gastrointestinal Parasitic Disease",
+            "name_ja": "消化管寄生虫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0358",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0366",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（インコ）"
+          },
+          {
+            "id": "parakeet_0377",
+            "name": "Neurological Parasitic Disease",
+            "name_ja": "神経系寄生虫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0418",
+            "name": "Systemic Parasitic Disease",
+            "name_ja": "全身性寄生虫疾患（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "vitami",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0031",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "parakeet_0036",
+            "name": "Vitamin D Deficiency",
+            "name_ja": "ビタミンD欠乏症"
+          },
+          {
+            "id": "parakeet_0141",
+            "name": "Vitamin E / Selenium Deficiency",
+            "name_ja": "ビタミンE・セレン欠乏症"
+          },
+          {
+            "id": "parakeet_0142",
+            "name": "Vitamin K Deficiency",
+            "name_ja": "ビタミンK欠乏症"
+          },
+          {
+            "id": "parakeet_0193",
+            "name": "Vitamin E Deficiency (Parakeet)",
+            "name_ja": "ビタミンE欠乏症（インコ）"
+          },
+          {
+            "id": "parakeet_0244",
+            "name": "Vitamin A Deficiency – Respiratory",
+            "name_ja": "ビタミンA欠乏症呼吸器型"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anomal",
+        "size": 5,
+        "members": [
+          {
+            "id": "parakeet_0374",
+            "name": "Urogenital Congenital Anomaly",
+            "name_ja": "泌尿生殖器先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0387",
+            "name": "Ophthalmological Congenital Anomaly",
+            "name_ja": "眼科先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0392",
+            "name": "Cardiovascular Congenital Anomaly",
+            "name_ja": "心血管先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0396",
+            "name": "Musculoskeletal Congenital Anomaly",
+            "name_ja": "筋骨格系先天異常（インコ）"
+          },
+          {
+            "id": "parakeet_0413",
+            "name": "Reproductive Congenital Anomaly",
+            "name_ja": "生殖器先天異常（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "candid",
+        "size": 5,
+        "members": [
+          {
+            "id": "parakeet_0017",
+            "name": "Crop Candidiasis",
+            "name_ja": "そ嚢カンジダ症"
+          },
+          {
+            "id": "parakeet_0018",
+            "name": "Oral Candidiasis (Thrush)",
+            "name_ja": "口腔カンジダ症"
+          },
+          {
+            "id": "parakeet_0183",
+            "name": "Candidal Ingluvitis",
+            "name_ja": "カンジダ性嗉嚢炎"
+          },
+          {
+            "id": "parakeet_0221",
+            "name": "Crop Candidiasis – Neonatal",
+            "name_ja": "新生児そ嚢カンジダ症"
+          },
+          {
+            "id": "parakeet_0271",
+            "name": "Candidiasis (Crop Mycosis)",
+            "name_ja": "カンジダ症（そ嚢真菌症）（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 5,
+        "members": [
+          {
+            "id": "parakeet_0136",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "parakeet_0217",
+            "name": "Squamous Cell Carcinoma – Oral",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "parakeet_0224",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "parakeet_0225",
+            "name": "Bile Duct Carcinoma",
+            "name_ja": "胆管癌"
+          },
+          {
+            "id": "parakeet_0230",
+            "name": "Thyroid Carcinoma",
+            "name_ja": "甲状腺癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "failur",
+        "size": 5,
+        "members": [
+          {
+            "id": "parakeet_0122",
+            "name": "Congestive Heart Failure",
+            "name_ja": "うっ血性心不全"
+          },
+          {
+            "id": "parakeet_0179",
+            "name": "Right-Sided Heart Failure (Parakeet)",
+            "name_ja": "右心不全（インコ）"
+          },
+          {
+            "id": "parakeet_0308",
+            "name": "Renal Failure (Acute)",
+            "name_ja": "急性腎不全（インコ）"
+          },
+          {
+            "id": "parakeet_0423",
+            "name": "Multi-Organ Failure",
+            "name_ja": "多臓器不全（インコ）"
+          },
+          {
+            "id": "parakeet_0446",
+            "name": "Failure to Thrive",
+            "name_ja": "発育不全（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemato",
+        "size": 5,
+        "members": [
+          {
+            "id": "parakeet_0405",
+            "name": "Hematological Neoplasia",
+            "name_ja": "血液腫瘍性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0406",
+            "name": "Hematological Infectious Disease",
+            "name_ja": "血液感染性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0407",
+            "name": "Hematological Autoimmune Disease",
+            "name_ja": "血液自己免疫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0408",
+            "name": "Hematological Metabolic Disease",
+            "name_ja": "血液代謝疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0409",
+            "name": "Hematological Nutritional Deficiency",
+            "name_ja": "血液栄養欠乏（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "injury",
+        "size": 5,
+        "members": [
+          {
+            "id": "parakeet_0219",
+            "name": "Beak Injury – Fracture",
+            "name_ja": "嘴損傷骨折型"
+          },
+          {
+            "id": "parakeet_0331",
+            "name": "Predator Attack Injury",
+            "name_ja": "捕食者攻撃損傷（インコ）"
+          },
+          {
+            "id": "parakeet_0332",
+            "name": "Window Collision Injury",
+            "name_ja": "窓衝突損傷（インコ）"
+          },
+          {
+            "id": "parakeet_0333",
+            "name": "Night Fright Injury",
+            "name_ja": "夜間パニック損傷（インコ）"
+          },
+          {
+            "id": "parakeet_0381",
+            "name": "Neurological Traumatic Injury",
+            "name_ja": "神経外傷性損傷（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ophtha",
+        "size": 5,
+        "members": [
+          {
+            "id": "parakeet_0383",
+            "name": "Ophthalmological Bacterial Infection",
+            "name_ja": "眼科細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0384",
+            "name": "Ophthalmological Viral Infection",
+            "name_ja": "眼科ウイルス感染（インコ）"
+          },
+          {
+            "id": "parakeet_0385",
+            "name": "Ophthalmological Neoplasia",
+            "name_ja": "眼科腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0386",
+            "name": "Ophthalmological Degenerative Disease",
+            "name_ja": "眼科変性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0387",
+            "name": "Ophthalmological Congenital Anomaly",
+            "name_ja": "眼科先天異常（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "trache",
+        "size": 5,
+        "members": [
+          {
+            "id": "parakeet_0129",
+            "name": "Tracheal Stenosis",
+            "name_ja": "気管狭窄症"
+          },
+          {
+            "id": "parakeet_0182",
+            "name": "Tracheal Aspergillosis",
+            "name_ja": "気管アスペルギルス症"
+          },
+          {
+            "id": "parakeet_0200",
+            "name": "Tracheal Mites (Sternostoma)",
+            "name_ja": "気管ダニ症（ステルノストマ）"
+          },
+          {
+            "id": "parakeet_0201",
+            "name": "Goiter – Severe Tracheal Compression",
+            "name_ja": "甲状腺腫重度気管圧迫型"
+          },
+          {
+            "id": "parakeet_0259",
+            "name": "Tracheal Mite (Sternostoma)",
+            "name_ja": "気管ダニ（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "autoim",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0368",
+            "name": "Dermatological Autoimmune Disease",
+            "name_ja": "皮膚自己免疫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0402",
+            "name": "Endocrine Autoimmune Disease",
+            "name_ja": "内分泌自己免疫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0407",
+            "name": "Hematological Autoimmune Disease",
+            "name_ja": "血液自己免疫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0420",
+            "name": "Systemic Autoimmune Disease",
+            "name_ja": "全身性自己免疫疾患（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "burn",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0082",
+            "name": "Burns (Thermal / Chemical)",
+            "name_ja": "熱傷・化学熱傷"
+          },
+          {
+            "id": "parakeet_0083",
+            "name": "Crop Burns",
+            "name_ja": "そ嚢熱傷"
+          },
+          {
+            "id": "parakeet_0330",
+            "name": "Burns",
+            "name_ja": "熱傷（インコ）"
+          },
+          {
+            "id": "parakeet_0453",
+            "name": "Neonatal Crop Burn",
+            "name_ja": "新生児そ嚢火傷（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cell",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0136",
+            "name": "Squamous Cell Carcinoma",
+            "name_ja": "扁平上皮癌"
+          },
+          {
+            "id": "parakeet_0214",
+            "name": "Testicular Tumor – Sertoli Cell",
+            "name_ja": "精巣腫瘍セルトリ細胞型"
+          },
+          {
+            "id": "parakeet_0217",
+            "name": "Squamous Cell Carcinoma – Oral",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "parakeet_0306",
+            "name": "Sertoli Cell Tumor",
+            "name_ja": "セルトリ細胞腫（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cloaca",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0049",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "parakeet_0171",
+            "name": "Cloacal Papillomatosis (Parakeet)",
+            "name_ja": "総排泄腔乳頭腫症（インコ）"
+          },
+          {
+            "id": "parakeet_0236",
+            "name": "Cloacal Papilloma",
+            "name_ja": "総排泄腔乳頭腫"
+          },
+          {
+            "id": "parakeet_0249",
+            "name": "Cloacal Calculus",
+            "name_ja": "総排泄腔結石"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0051",
+            "name": "Leg Fractures",
+            "name_ja": "脚骨折"
+          },
+          {
+            "id": "parakeet_0052",
+            "name": "Wing Fractures",
+            "name_ja": "翼骨折"
+          },
+          {
+            "id": "parakeet_0218",
+            "name": "Wing Fracture – Humerus",
+            "name_ja": "翼骨折上腕骨型"
+          },
+          {
+            "id": "parakeet_0219",
+            "name": "Beak Injury – Fracture",
+            "name_ja": "嘴損傷骨折型"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fungal",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0349",
+            "name": "Gastrointestinal Fungal Infection",
+            "name_ja": "消化管真菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0357",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0365",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0417",
+            "name": "Systemic Fungal Infection",
+            "name_ja": "全身性真菌感染（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "impact",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0087",
+            "name": "Psittacine Proventricular Impaction",
+            "name_ja": "前胃閉塞"
+          },
+          {
+            "id": "parakeet_0206",
+            "name": "Crop Impaction (Foreign Body)",
+            "name_ja": "嗉嚢閉塞（異物）"
+          },
+          {
+            "id": "parakeet_0234",
+            "name": "Oviductal Impaction",
+            "name_ja": "卵管閉塞"
+          },
+          {
+            "id": "parakeet_0334",
+            "name": "Crop Impaction",
+            "name_ja": "そ嚢停滞（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neonat",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0221",
+            "name": "Crop Candidiasis – Neonatal",
+            "name_ja": "新生児そ嚢カンジダ症"
+          },
+          {
+            "id": "parakeet_0243",
+            "name": "Metabolic Bone Disease – Neonatal",
+            "name_ja": "代謝性骨疾患新生児型"
+          },
+          {
+            "id": "parakeet_0447",
+            "name": "Neonatal Infection",
+            "name_ja": "新生児感染症（インコ）"
+          },
+          {
+            "id": "parakeet_0453",
+            "name": "Neonatal Crop Burn",
+            "name_ja": "新生児そ嚢火傷（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "poison",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0037",
+            "name": "Heavy Metal Poisoning (Lead/Zinc)",
+            "name_ja": "重金属中毒（鉛・亜鉛）"
+          },
+          {
+            "id": "parakeet_0148",
+            "name": "Pesticide Poisoning",
+            "name_ja": "農薬中毒"
+          },
+          {
+            "id": "parakeet_0150",
+            "name": "Rodenticide Poisoning",
+            "name_ja": "殺鼠剤中毒"
+          },
+          {
+            "id": "parakeet_0166",
+            "name": "Copper Poisoning",
+            "name_ja": "銅中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0049",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
+          },
+          {
+            "id": "parakeet_0158",
+            "name": "Phallus Prolapse",
+            "name_ja": "陰茎脱出"
+          },
+          {
+            "id": "parakeet_0204",
+            "name": "Reproductive Tract Prolapse",
+            "name_ja": "生殖器脱出"
+          },
+          {
+            "id": "parakeet_0303",
+            "name": "Oviduct Prolapse",
+            "name_ja": "卵管脱出（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0040",
+            "name": "Renal Tumors",
+            "name_ja": "腎腫瘍"
+          },
+          {
+            "id": "parakeet_0071",
+            "name": "Renal Disease (Nephritis)",
+            "name_ja": "腎疾患（腎炎）"
+          },
+          {
+            "id": "parakeet_0216",
+            "name": "Renal Adenocarcinoma",
+            "name_ja": "腎腺癌"
+          },
+          {
+            "id": "parakeet_0308",
+            "name": "Renal Failure (Acute)",
+            "name_ja": "急性腎不全（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "urogen",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0371",
+            "name": "Urogenital Bacterial Infection",
+            "name_ja": "泌尿生殖器細菌感染（インコ）"
+          },
+          {
+            "id": "parakeet_0372",
+            "name": "Urogenital Neoplasia",
+            "name_ja": "泌尿生殖器腫瘍（インコ）"
+          },
+          {
+            "id": "parakeet_0373",
+            "name": "Urogenital Inflammatory Disease",
+            "name_ja": "泌尿生殖器炎症性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0374",
+            "name": "Urogenital Congenital Anomaly",
+            "name_ja": "泌尿生殖器先天異常（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wing",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0052",
+            "name": "Wing Fractures",
+            "name_ja": "翼骨折"
+          },
+          {
+            "id": "parakeet_0090",
+            "name": "Wing Clipping Complications",
+            "name_ja": "翼切り合併症"
+          },
+          {
+            "id": "parakeet_0218",
+            "name": "Wing Fracture – Humerus",
+            "name_ja": "翼骨折上腕骨型"
+          },
+          {
+            "id": "parakeet_0456",
+            "name": "Wing Droop",
+            "name_ja": "翼下垂（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "asperg",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0016",
+            "name": "Aspergillosis",
+            "name_ja": "アスペルギルス症"
+          },
+          {
+            "id": "parakeet_0181",
+            "name": "Sinus Aspergillosis",
+            "name_ja": "副鼻腔アスペルギルス症"
+          },
+          {
+            "id": "parakeet_0182",
+            "name": "Tracheal Aspergillosis",
+            "name_ja": "気管アスペルギルス症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bone",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0057",
+            "name": "Metabolic Bone Disease",
+            "name_ja": "代謝性骨疾患"
+          },
+          {
+            "id": "parakeet_0243",
+            "name": "Metabolic Bone Disease – Neonatal",
+            "name_ja": "代謝性骨疾患新生児型"
+          },
+          {
+            "id": "parakeet_0294",
+            "name": "Keel Bone Deformity",
+            "name_ja": "竜骨変形（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bornav",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0093",
+            "name": "Avian Bornavirus (ABV) Infection",
+            "name_ja": "鳥ボルナウイルス感染症"
+          },
+          {
+            "id": "parakeet_0172",
+            "name": "Avian Bornavirus (PDD) - Parakeet",
+            "name_ja": "鳥ボルナウイルス（PDD）- インコ"
+          },
+          {
+            "id": "parakeet_0267",
+            "name": "Avian Bornavirus (ABV)",
+            "name_ja": "鳥ボルナウイルス（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "compli",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0090",
+            "name": "Wing Clipping Complications",
+            "name_ja": "翼切り合併症"
+          },
+          {
+            "id": "parakeet_0338",
+            "name": "Anesthetic Complication",
+            "name_ja": "麻酔合併症（インコ）"
+          },
+          {
+            "id": "parakeet_0429",
+            "name": "Post-Surgical Complication",
+            "name_ja": "術後合併症（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "follic",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0089",
+            "name": "Feather Folliculitis",
+            "name_ja": "毛包炎"
+          },
+          {
+            "id": "parakeet_0133",
+            "name": "Feather Follicle Cyst (Chronic)",
+            "name_ja": "慢性羽包嚢胞"
+          },
+          {
+            "id": "parakeet_0455",
+            "name": "Feather Follicle Cyst",
+            "name_ja": "羽毛毛包嚢胞（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "form",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0209",
+            "name": "Proventricular Dilatation Disease – Neurological Form",
+            "name_ja": "前胃拡張症神経型"
+          },
+          {
+            "id": "parakeet_0210",
+            "name": "Psittacosis – Respiratory Form",
+            "name_ja": "オウム病呼吸器型"
+          },
+          {
+            "id": "parakeet_0222",
+            "name": "Trichomoniasis – Crop Form",
+            "name_ja": "トリコモナス症嗉嚢型"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fright",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0081",
+            "name": "Night Frights",
+            "name_ja": "夜間パニック（ナイトフライト）"
+          },
+          {
+            "id": "parakeet_0207",
+            "name": "Night Fright Injuries",
+            "name_ja": "夜間パニック外傷"
+          },
+          {
+            "id": "parakeet_0333",
+            "name": "Night Fright Injury",
+            "name_ja": "夜間パニック損傷（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "goiter",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0028",
+            "name": "Goiter (Thyroid Hyperplasia)",
+            "name_ja": "甲状腺腫"
+          },
+          {
+            "id": "parakeet_0201",
+            "name": "Goiter – Severe Tracheal Compression",
+            "name_ja": "甲状腺腫重度気管圧迫型"
+          },
+          {
+            "id": "parakeet_0251",
+            "name": "Budgie Goiter (Iodine Deficiency)",
+            "name_ja": "セキセイインコ甲状腺腫（ヨウ素欠乏症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gout",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0029",
+            "name": "Gout (Visceral)",
+            "name_ja": "内臓痛風"
+          },
+          {
+            "id": "parakeet_0030",
+            "name": "Gout (Articular)",
+            "name_ja": "関節痛風"
+          },
+          {
+            "id": "parakeet_0274",
+            "name": "Gout (Visceral/Articular)",
+            "name_ja": "痛風（内臓型/関節型）（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypert",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0235",
+            "name": "Cere Hypertrophy (Brown Hypertrophy)",
+            "name_ja": "蝋膜肥大（褐色肥大症）"
+          },
+          {
+            "id": "parakeet_0262",
+            "name": "Cere Hypertrophy",
+            "name_ja": "ろう膜肥大（インコ）"
+          },
+          {
+            "id": "parakeet_0443",
+            "name": "Hyperthermia",
+            "name_ja": "高体温症（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "immune",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0424",
+            "name": "Immune-Mediated Disease",
+            "name_ja": "免疫介在性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0435",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血（インコ）"
+          },
+          {
+            "id": "parakeet_0436",
+            "name": "Immune-Mediated Thrombocytopenia",
+            "name_ja": "免疫介在性血小板減少症（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lipido",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0034",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "parakeet_0202",
+            "name": "Budgerigar Hepatic Lipidosis",
+            "name_ja": "セキセイインコ肝リピドーシス"
+          },
+          {
+            "id": "parakeet_0257",
+            "name": "Hepatic Lipidosis (Seed Diet)",
+            "name_ja": "肝リピドーシス（種子食）（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "liver",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0072",
+            "name": "Liver Disease (Hepatitis)",
+            "name_ja": "肝疾患（肝炎）"
+          },
+          {
+            "id": "parakeet_0273",
+            "name": "Liver Disease (Hepatic Lipidosis)",
+            "name_ja": "肝疾患（肝リピドーシス）（インコ）"
+          },
+          {
+            "id": "parakeet_0277",
+            "name": "Fatty Liver Disease",
+            "name_ja": "脂肪肝（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mediat",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0424",
+            "name": "Immune-Mediated Disease",
+            "name_ja": "免疫介在性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0435",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血（インコ）"
+          },
+          {
+            "id": "parakeet_0436",
+            "name": "Immune-Mediated Thrombocytopenia",
+            "name_ja": "免疫介在性血小板減少症（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "megaba",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0027",
+            "name": "Megabacteriosis (AGY / Macrorhabdus)",
+            "name_ja": "メガバクテリア症（AGY・マクロラブダス症）"
+          },
+          {
+            "id": "parakeet_0252",
+            "name": "Megabacteriosis",
+            "name_ja": "メガバクテリア症（インコ）"
+          },
+          {
+            "id": "parakeet_0272",
+            "name": "Megabacteriosis (AGY)",
+            "name_ja": "メガバクテリア症（AGY）（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "night",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0081",
+            "name": "Night Frights",
+            "name_ja": "夜間パニック（ナイトフライト）"
+          },
+          {
+            "id": "parakeet_0207",
+            "name": "Night Fright Injuries",
+            "name_ja": "夜間パニック外傷"
+          },
+          {
+            "id": "parakeet_0333",
+            "name": "Night Fright Injury",
+            "name_ja": "夜間パニック損傷（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "oral",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0018",
+            "name": "Oral Candidiasis (Thrush)",
+            "name_ja": "口腔カンジダ症"
+          },
+          {
+            "id": "parakeet_0217",
+            "name": "Squamous Cell Carcinoma – Oral",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "parakeet_0297",
+            "name": "Oral Abscess",
+            "name_ja": "口腔膿瘍（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ovaria",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0044",
+            "name": "Ovarian Tumors",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "parakeet_0205",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞"
+          },
+          {
+            "id": "parakeet_0215",
+            "name": "Ovarian Adenocarcinoma",
+            "name_ja": "卵巣腺癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "parake",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0172",
+            "name": "Avian Bornavirus (PDD) - Parakeet",
+            "name_ja": "鳥ボルナウイルス（PDD）- インコ"
+          },
+          {
+            "id": "parakeet_0187",
+            "name": "Roundworm (Ascaridia) - Parakeet",
+            "name_ja": "回虫症（アスカリジア属）- インコ"
+          },
+          {
+            "id": "parakeet_0188",
+            "name": "Air Sac Mites (Sternostoma) - Parakeet",
+            "name_ja": "気嚢ダニ（ステルノストマ属）- インコ"
+          }
+        ]
+      },
+      {
+        "shared_stem": "perito",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0048",
+            "name": "Egg Yolk Peritonitis",
+            "name_ja": "卵黄性腹膜炎"
+          },
+          {
+            "id": "parakeet_0233",
+            "name": "Egg Yolk Peritonitis – Chronic",
+            "name_ja": "卵黄性腹膜炎慢性型"
+          },
+          {
+            "id": "parakeet_0250",
+            "name": "Egg Peritonitis – Acute Septic",
+            "name_ja": "卵黄性腹膜炎急性敗血症型"
+          }
+        ]
+      },
+      {
+        "shared_stem": "plucki",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0059",
+            "name": "Feather Plucking (Feather Destructive Behavior)",
+            "name_ja": "毛引き症（羽毛損傷行動）"
+          },
+          {
+            "id": "parakeet_0159",
+            "name": "Hormonal Feather Plucking",
+            "name_ja": "ホルモン性毛引き症"
+          },
+          {
+            "id": "parakeet_0268",
+            "name": "Feather Plucking",
+            "name_ja": "毛引き（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "protei",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0147",
+            "name": "Protein Deficiency",
+            "name_ja": "タンパク質欠乏症"
+          },
+          {
+            "id": "parakeet_0433",
+            "name": "Protein-Losing Enteropathy",
+            "name_ja": "蛋白漏出性腸症（インコ）"
+          },
+          {
+            "id": "parakeet_0434",
+            "name": "Protein-Losing Nephropathy",
+            "name_ja": "蛋白漏出性腎症（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "roundw",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0022",
+            "name": "Roundworm Infection (Ascaridiasis)",
+            "name_ja": "回虫症"
+          },
+          {
+            "id": "parakeet_0187",
+            "name": "Roundworm (Ascaridia) - Parakeet",
+            "name_ja": "回虫症（アスカリジア属）- インコ"
+          },
+          {
+            "id": "parakeet_0285",
+            "name": "Roundworm (Ascaridia)",
+            "name_ja": "回虫（アスカリジア）（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "severe",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0199",
+            "name": "Knemidocoptic Mange – Severe",
+            "name_ja": "重度疥癬ダニ症"
+          },
+          {
+            "id": "parakeet_0201",
+            "name": "Goiter – Severe Tracheal Compression",
+            "name_ja": "甲状腺腫重度気管圧迫型"
+          },
+          {
+            "id": "parakeet_0212",
+            "name": "French Moult – Severe",
+            "name_ja": "フレンチモールト重症型"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stasi",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0067",
+            "name": "Crop Stasis (Sour Crop)",
+            "name_ja": "そ嚢停滞（サワークロップ）"
+          },
+          {
+            "id": "parakeet_0265",
+            "name": "Crop Stasis (Neonatal)",
+            "name_ja": "そ嚢うっ滞（新生児）（インコ）"
+          },
+          {
+            "id": "parakeet_0270",
+            "name": "Crop Stasis",
+            "name_ja": "そ嚢うっ滞（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "teflon",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0038",
+            "name": "Teflon (PTFE) Toxicosis",
+            "name_ja": "テフロン中毒（PTFE中毒）"
+          },
+          {
+            "id": "parakeet_0196",
+            "name": "Teflon Toxicosis (Parakeet)",
+            "name_ja": "テフロン中毒（インコ）"
+          },
+          {
+            "id": "parakeet_0325",
+            "name": "Teflon/PTFE Toxicosis",
+            "name_ja": "テフロン/PTFE中毒（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "testic",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0042",
+            "name": "Testicular Tumors",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "parakeet_0214",
+            "name": "Testicular Tumor – Sertoli Cell",
+            "name_ja": "精巣腫瘍セルトリ細胞型"
+          },
+          {
+            "id": "parakeet_0256",
+            "name": "Testicular Tumor (Cere Color Change)",
+            "name_ja": "精巣腫瘍（ろう膜変色）（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tract",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0157",
+            "name": "Reproductive Tract Infection (Salpingitis)",
+            "name_ja": "生殖器感染症（卵管炎）"
+          },
+          {
+            "id": "parakeet_0204",
+            "name": "Reproductive Tract Prolapse",
+            "name_ja": "生殖器脱出"
+          },
+          {
+            "id": "parakeet_0361",
+            "name": "Lower Respiratory Tract Infection",
+            "name_ja": "下部気道感染（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "trauma",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0074",
+            "name": "Beak Trauma",
+            "name_ja": "嘴外傷"
+          },
+          {
+            "id": "parakeet_0077",
+            "name": "Head Trauma / Concussion",
+            "name_ja": "頭部外傷・脳震盪"
+          },
+          {
+            "id": "parakeet_0381",
+            "name": "Neurological Traumatic Injury",
+            "name_ja": "神経外傷性損傷（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "xantho",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0043",
+            "name": "Xanthomas",
+            "name_ja": "黄色腫"
+          },
+          {
+            "id": "parakeet_0177",
+            "name": "Xanthoma (Advanced)",
+            "name_ja": "黄色腫（進行型）"
+          },
+          {
+            "id": "parakeet_0263",
+            "name": "Xanthoma (Wing)",
+            "name_ja": "黄色腫（翼）（インコ）"
+          }
+        ]
+      }
+    ],
+    "family_cluster_count": 85
+  },
+  "T102": {
+    "detector": "T102",
+    "total_records": 435,
+    "flagged_count": 0,
+    "flags": []
+  },
+  "T104": {
+    "detector": "T104",
+    "total_records": 435,
+    "empty_count": 0,
+    "heading_only_count": 40,
+    "with_dosage_count": 395,
+    "empty": [],
+    "heading_only": [
+      {
+        "id": "parakeet_0060",
+        "name": "Psittacine Feather Stress Bars",
+        "name_ja": "ストレスバー（ストレス線）",
+        "treatment_ja_len": 833,
+        "treatment_len": 2218,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0122",
+        "name": "Congestive Heart Failure",
+        "name_ja": "うっ血性心不全",
+        "treatment_ja_len": 98,
+        "treatment_len": 203,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0133",
+        "name": "Feather Follicle Cyst (Chronic)",
+        "name_ja": "慢性羽包嚢胞",
+        "treatment_ja_len": 50,
+        "treatment_len": 136,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0147",
+        "name": "Protein Deficiency",
+        "name_ja": "タンパク質欠乏症",
+        "treatment_ja_len": 512,
+        "treatment_len": 1155,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0148",
+        "name": "Pesticide Poisoning",
+        "name_ja": "農薬中毒",
+        "treatment_ja_len": 321,
+        "treatment_len": 393,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0149",
+        "name": "Plant Toxicity",
+        "name_ja": "植物中毒",
+        "treatment_ja_len": 442,
+        "treatment_len": 393,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0150",
+        "name": "Rodenticide Poisoning",
+        "name_ja": "殺鼠剤中毒",
+        "treatment_ja_len": 443,
+        "treatment_len": 393,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0151",
+        "name": "Essential Oil Toxicity",
+        "name_ja": "エッセンシャルオイル中毒",
+        "treatment_ja_len": 450,
+        "treatment_len": 393,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0160",
+        "name": "Subcutaneous Emphysema",
+        "name_ja": "皮下気腫",
+        "treatment_ja_len": 446,
+        "treatment_len": 839,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0162",
+        "name": "Aortic Rupture",
+        "name_ja": "大動脈破裂",
+        "treatment_ja_len": 432,
+        "treatment_len": 1053,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0173",
+        "name": "Proventricular Neoplasia",
+        "name_ja": "腺胃腫瘍",
+        "treatment_ja_len": 104,
+        "treatment_len": 482,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0179",
+        "name": "Right-Sided Heart Failure (Parakeet)",
+        "name_ja": "右心不全（インコ）",
+        "treatment_ja_len": 56,
+        "treatment_len": 185,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0180",
+        "name": "Bacterial Airsacculitis",
+        "name_ja": "細菌性気嚢炎",
+        "treatment_ja_len": 162,
+        "treatment_len": 196,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0189",
+        "name": "Cnemidocoptes (Scaly Face Advanced)",
+        "name_ja": "疥癬ダニ（鱗状顔面 進行型）",
+        "treatment_ja_len": 173,
+        "treatment_len": 496,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0191",
+        "name": "Mandibular Prognathism (Parakeet)",
+        "name_ja": "下顎前突症（インコ）",
+        "treatment_ja_len": 181,
+        "treatment_len": 548,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0195",
+        "name": "Zinc Toxicosis (Advanced)",
+        "name_ja": "亜鉛中毒（進行型）",
+        "treatment_ja_len": 674,
+        "treatment_len": 871,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0203",
+        "name": "Splayed Legs (Neonatal)",
+        "name_ja": "開脚症（新生児型）",
+        "treatment_ja_len": 619,
+        "treatment_len": 1416,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0205",
+        "name": "Ovarian Cyst",
+        "name_ja": "卵巣嚢胞",
+        "treatment_ja_len": 53,
+        "treatment_len": 136,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0206",
+        "name": "Crop Impaction (Foreign Body)",
+        "name_ja": "嗉嚢閉塞（異物）",
+        "treatment_ja_len": 349,
+        "treatment_len": 417,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0207",
+        "name": "Night Fright Injuries",
+        "name_ja": "夜間パニック外傷",
+        "treatment_ja_len": 450,
+        "treatment_len": 838,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0213",
+        "name": "Feather Cysts – Recurrent",
+        "name_ja": "反復性羽嚢腫",
+        "treatment_ja_len": 50,
+        "treatment_len": 136,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0235",
+        "name": "Cere Hypertrophy (Brown Hypertrophy)",
+        "name_ja": "蝋膜肥大（褐色肥大症）",
+        "treatment_ja_len": 457,
+        "treatment_len": 1159,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0241",
+        "name": "Zinc Toxicosis",
+        "name_ja": "亜鉛中毒",
+        "treatment_ja_len": 313,
+        "treatment_len": 393,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0254",
+        "name": "Splayed Leg (Neonatal)",
+        "name_ja": "開脚（新生児）（インコ）",
+        "treatment_ja_len": 471,
+        "treatment_len": 831,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0255",
+        "name": "English Budgerigar Disease",
+        "name_ja": "英国セキセイ病（インコ）",
+        "treatment_ja_len": 256,
+        "treatment_len": 460,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0276",
+        "name": "Iodine Deficiency (Thyroid Hyperplasia)",
+        "name_ja": "ヨウ素欠乏症（甲状腺過形成）（インコ）",
+        "treatment_ja_len": 245,
+        "treatment_len": 481,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0295",
+        "name": "Beak Deformity (Scissor Beak)",
+        "name_ja": "嘴変形（シザービーク）（インコ）",
+        "treatment_ja_len": 236,
+        "treatment_len": 528,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0316",
+        "name": "Papilloma",
+        "name_ja": "乳頭腫（インコ）",
+        "treatment_ja_len": 175,
+        "treatment_len": 186,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0328",
+        "name": "Hypothermia",
+        "name_ja": "低体温症（インコ）",
+        "treatment_ja_len": 214,
+        "treatment_len": 608,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0374",
+        "name": "Urogenital Congenital Anomaly",
+        "name_ja": "泌尿生殖器先天異常（インコ）",
+        "treatment_ja_len": 213,
+        "treatment_len": 408,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0387",
+        "name": "Ophthalmological Congenital Anomaly",
+        "name_ja": "眼科先天異常（インコ）",
+        "treatment_ja_len": 220,
+        "treatment_len": 405,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0396",
+        "name": "Musculoskeletal Congenital Anomaly",
+        "name_ja": "筋骨格系先天異常（インコ）",
+        "treatment_ja_len": 226,
+        "treatment_len": 407,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0413",
+        "name": "Reproductive Congenital Anomaly",
+        "name_ja": "生殖器先天異常（インコ）",
+        "treatment_ja_len": 219,
+        "treatment_len": 381,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0426",
+        "name": "Nutritional Imbalance Syndrome",
+        "name_ja": "栄養不均衡症候群（インコ）",
+        "treatment_ja_len": 201,
+        "treatment_len": 496,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0427",
+        "name": "Environmental Stress Syndrome",
+        "name_ja": "環境ストレス症候群（インコ）",
+        "treatment_ja_len": 248,
+        "treatment_len": 502,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0428",
+        "name": "Iatrogenic Disease",
+        "name_ja": "医原性疾患（インコ）",
+        "treatment_ja_len": 497,
+        "treatment_len": 713,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0431",
+        "name": "Congenital Malformation",
+        "name_ja": "先天性奇形（インコ）",
+        "treatment_ja_len": 215,
+        "treatment_len": 402,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0449",
+        "name": "Budgerigar Circovirus",
+        "name_ja": "セキセイインコサーコウイルス（インコ）",
+        "treatment_ja_len": 306,
+        "treatment_len": 177,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0455",
+        "name": "Feather Follicle Cyst",
+        "name_ja": "羽毛毛包嚢胞（インコ）",
+        "treatment_ja_len": 210,
+        "treatment_len": 307,
+        "has_dosage": false
+      },
+      {
+        "id": "parakeet_0457",
+        "name": "Tail Feather Loss",
+        "name_ja": "尾羽脱落（インコ）",
+        "treatment_ja_len": 255,
+        "treatment_len": 477,
+        "has_dosage": false
+      }
+    ]
+  },
+  "T108": {
+    "detector": "T108",
+    "total_records": 435,
+    "drug_available": 610,
+    "ref_keys_available": 30,
+    "drug_mismatch_count": 71,
+    "citation_mismatch_count": 14,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
+    "drug_mismatches": [
+      {
+        "id": "parakeet_0004",
+        "name": "Avian Pox",
+        "name_ja": "鳥痘",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0008",
+        "name": "Pacheco's Disease",
+        "name_ja": "パチェコ病",
+        "drugs": [
+          {
+            "drug": "S-Adenosylmethionine (SAMe)",
+            "drug_ja": "S-アデノシルメチオニン（SAMe）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0015",
+        "name": "Staphylococcal Infection",
+        "name_ja": "ブドウ球菌感染症",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0017",
+        "name": "Crop Candidiasis",
+        "name_ja": "そ嚢カンジダ症",
+        "drugs": [
+          {
+            "drug": "Miconazole",
+            "drug_ja": "ミコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0018",
+        "name": "Oral Candidiasis (Thrush)",
+        "name_ja": "口腔カンジダ症",
+        "drugs": [
+          {
+            "drug": "Miconazole",
+            "drug_ja": "ミコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0026",
+        "name": "Air Sac Mites",
+        "name_ja": "気嚢ダニ症",
+        "drugs": [
+          {
+            "drug": "Selamectin (Revolution/Stronghold)",
+            "drug_ja": "セラメクチン（レボリューション）",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0034",
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0035",
+        "name": "Iron Storage Disease (Hemochromatosis)",
+        "name_ja": "鉄貯蔵病（ヘモクロマトーシス）",
+        "drugs": [
+          {
+            "drug": "Deferoxamine (Desferal)",
+            "drug_ja": "デフェロキサミン（デスフェラール）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0043",
+        "name": "Xanthomas",
+        "name_ja": "黄色腫",
+        "drugs": [
+          {
+            "drug": "Cholestyramine",
+            "drug_ja": "コレスチラミン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0054",
+        "name": "Constricted Toe Syndrome",
+        "name_ja": "趾締付け症候群",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0055",
+        "name": "Arthritis",
+        "name_ja": "関節炎",
+        "drugs": [
+          {
+            "drug": "Tramadol",
+            "drug_ja": "トラマドール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0056",
+        "name": "Bumblefoot (Pododermatitis)",
+        "name_ja": "趾瘤症（足底皮膚炎）",
+        "drugs": [
+          {
+            "drug": "Mupirocin",
+            "drug_ja": "ムピロシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0064",
+        "name": "Conjunctivitis",
+        "name_ja": "結膜炎",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0066",
+        "name": "Periorbital Abscess",
+        "name_ja": "眼窩周囲膿瘍",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0067",
+        "name": "Crop Stasis (Sour Crop)",
+        "name_ja": "そ嚢停滞（サワークロップ）",
+        "drugs": [
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0069",
+        "name": "Cloacitis (Vent Infection)",
+        "name_ja": "総排泄腔炎",
+        "drugs": [
+          {
+            "drug": "Mupirocin",
+            "drug_ja": "ムピロシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0072",
+        "name": "Liver Disease (Hepatitis)",
+        "name_ja": "肝疾患（肝炎）",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0073",
+        "name": "Beak Overgrowth",
+        "name_ja": "嘴過長症",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0075",
+        "name": "Self-Mutilation",
+        "name_ja": "自咬症",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0076",
+        "name": "Epilepsy / Idiopathic Seizures",
+        "name_ja": "てんかん・特発性痙攣",
+        "drugs": [
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0081",
+        "name": "Night Frights",
+        "name_ja": "夜間パニック（ナイトフライト）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0082",
+        "name": "Burns (Thermal / Chemical)",
+        "name_ja": "熱傷・化学熱傷",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0086",
+        "name": "Frostbite",
+        "name_ja": "凍傷",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0087",
+        "name": "Psittacine Proventricular Impaction",
+        "name_ja": "前胃閉塞",
+        "drugs": [
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0089",
+        "name": "Feather Folliculitis",
+        "name_ja": "毛包炎",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0093",
+        "name": "Avian Bornavirus (ABV) Infection",
+        "name_ja": "鳥ボルナウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0096",
+        "name": "Avian Herpesvirus Infection",
+        "name_ja": "鳥ヘルペスウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0106",
+        "name": "Sarcocystosis",
+        "name_ja": "住肉胞子虫症",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0110",
+        "name": "Dermatophytosis (Ringworm)",
+        "name_ja": "皮膚糸状菌症（白癬）",
+        "drugs": [
+          {
+            "drug": "Miconazole",
+            "drug_ja": "ミコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0112",
+        "name": "Pseudomonas Infection",
+        "name_ja": "緑膿菌感染症",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0115",
+        "name": "Pasteurellosis",
+        "name_ja": "パスツレラ症",
+        "drugs": [
+          {
+            "drug": "Penicillin G",
+            "drug_ja": "ペニシリンG",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0118",
+        "name": "Erysipelas",
+        "name_ja": "丹毒",
+        "drugs": [
+          {
+            "drug": "Penicillin G",
+            "drug_ja": "ペニシリンG",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Vancomycin",
+            "drug_ja": "バンコマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0126",
+        "name": "Coelomic Effusion (Ascites)",
+        "name_ja": "体腔液貯留（腹水）",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0135",
+        "name": "Lymphoma",
+        "name_ja": "リンパ腫",
+        "drugs": [
+          {
+            "drug": "L-Asparaginase",
+            "drug_ja": "L-アスパラギナーゼ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0153",
+        "name": "Contact Dermatitis",
+        "name_ja": "接触性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Cetirizine",
+            "drug_ja": "セチリジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0167",
+        "name": "Toxoplasmosis",
+        "name_ja": "トキソプラズマ症",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0202",
+        "name": "Budgerigar Hepatic Lipidosis",
+        "name_ja": "セキセイインコ肝リピドーシス",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0223",
+        "name": "Budgerigar Pituitary Adenoma",
+        "name_ja": "セキセイインコ下垂体腺腫",
+        "drugs": [
+          {
+            "drug": "Dopamine",
+            "drug_ja": "ドパミン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0232",
+        "name": "Intestinal Lymphoma",
+        "name_ja": "腸リンパ腫",
+        "drugs": [
+          {
+            "drug": "L-Asparaginase",
+            "drug_ja": "L-アスパラギナーゼ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0242",
+        "name": "Lead Toxicosis",
+        "name_ja": "鉛中毒",
+        "drugs": [
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0259",
+        "name": "Tracheal Mite (Sternostoma)",
+        "name_ja": "気管ダニ（インコ）",
+        "drugs": [
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0280",
+        "name": "Air Sac Mite",
+        "name_ja": "気嚢ダニ（インコ）",
+        "drugs": [
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0281",
+        "name": "Knemidocoptes Mange (Scaly Face)",
+        "name_ja": "疥癬（鱗状顔面）（インコ）",
+        "drugs": [
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0282",
+        "name": "Feather Mites",
+        "name_ja": "羽毛ダニ（インコ）",
+        "drugs": [
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0283",
+        "name": "Red Mite (Dermanyssus)",
+        "name_ja": "ワクモ（Dermanyssus）（インコ）",
+        "drugs": [
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0288",
+        "name": "Corneal Ulcer",
+        "name_ja": "角膜潰瘍（インコ）",
+        "drugs": [
+          {
+            "drug": "Atropine 1% Ophthalmic",
+            "drug_ja": "アトロピン1%点眼",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0289",
+        "name": "Uveitis",
+        "name_ja": "ぶどう膜炎（インコ）",
+        "drugs": [
+          {
+            "drug": "Atropine 1% Ophthalmic",
+            "drug_ja": "アトロピン1%点眼",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0293",
+        "name": "Osteoarthritis",
+        "name_ja": "変形性関節症（インコ）",
+        "drugs": [
+          {
+            "drug": "Glucosamine/Chondroitin",
+            "drug_ja": "グルコサミン・コンドロイチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0308",
+        "name": "Renal Failure (Acute)",
+        "name_ja": "急性腎不全（インコ）",
+        "drugs": [
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0309",
+        "name": "Chronic Kidney Disease",
+        "name_ja": "慢性腎臓病（インコ）",
+        "drugs": [
+          {
+            "drug": "Amlodipine",
+            "drug_ja": "アムロジピン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0313",
+        "name": "Leukemia",
+        "name_ja": "白血病（インコ）",
+        "drugs": [
+          {
+            "drug": "L-Asparaginase",
+            "drug_ja": "L-アスパラギナーゼ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0321",
+        "name": "Seizures",
+        "name_ja": "痙攣発作（インコ）",
+        "drugs": [
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Zonisamide",
+            "drug_ja": "ゾニサミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0325",
+        "name": "Teflon/PTFE Toxicosis",
+        "name_ja": "テフロン/PTFE中毒（インコ）",
+        "drugs": [
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0330",
+        "name": "Burns",
+        "name_ja": "熱傷（インコ）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0336",
+        "name": "Hepatitis",
+        "name_ja": "肝炎（インコ）",
+        "drugs": [
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0340",
+        "name": "Alopecia",
+        "name_ja": "脱毛症（インコ）",
+        "drugs": [
+          {
+            "drug": "Miconazole",
+            "drug_ja": "ミコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0341",
+        "name": "Hepatic Bacterial Infection",
+        "name_ja": "肝細菌感染症（インコ）",
+        "drugs": [
+          {
+            "drug": "Miconazole",
+            "drug_ja": "ミコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0344",
+        "name": "Hepatic Fibrosis",
+        "name_ja": "肝線維症（インコ）",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Spironolactone",
+            "drug_ja": "スピロノラクトン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0357",
+        "name": "Respiratory Fungal Infection",
+        "name_ja": "呼吸器真菌感染（インコ）",
+        "drugs": [
+          {
+            "drug": "Theophylline",
+            "drug_ja": "テオフィリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0363",
+        "name": "Dermatological Bacterial Infection",
+        "name_ja": "皮膚細菌感染（インコ）",
+        "drugs": [
+          {
+            "drug": "Mupirocin",
+            "drug_ja": "ムピロシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0365",
+        "name": "Dermatological Fungal Infection",
+        "name_ja": "皮膚真菌感染（インコ）",
+        "drugs": [
+          {
+            "drug": "Miconazole",
+            "drug_ja": "ミコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0369",
+        "name": "Dermatological Allergic Disease",
+        "name_ja": "皮膚アレルギー疾患（インコ）",
+        "drugs": [
+          {
+            "drug": "Cetirizine",
+            "drug_ja": "セチリジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0370",
+        "name": "Chronic Dermatitis",
+        "name_ja": "慢性皮膚炎（インコ）",
+        "drugs": [
+          {
+            "drug": "Cetirizine",
+            "drug_ja": "セチリジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0375",
+        "name": "Neurological Bacterial Infection",
+        "name_ja": "神経系細菌感染（インコ）",
+        "drugs": [
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0386",
+        "name": "Ophthalmological Degenerative Disease",
+        "name_ja": "眼科変性疾患（インコ）",
+        "drugs": [
+          {
+            "drug": "Glucosamine/Chondroitin",
+            "drug_ja": "グルコサミン・コンドロイチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0395",
+        "name": "Musculoskeletal Degenerative Disease",
+        "name_ja": "筋骨格系変性疾患（インコ）",
+        "drugs": [
+          {
+            "drug": "Tramadol",
+            "drug_ja": "トラマドール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Glucosamine/Chondroitin",
+            "drug_ja": "グルコサミン・コンドロイチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0415",
+        "name": "Systemic Bacterial Infection",
+        "name_ja": "全身性細菌感染（インコ）",
+        "drugs": [
+          {
+            "drug": "Dopamine",
+            "drug_ja": "ドパミン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0422",
+        "name": "Systemic Toxic Exposure",
+        "name_ja": "全身性中毒（インコ）",
+        "drugs": [
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0423",
+        "name": "Multi-Organ Failure",
+        "name_ja": "多臓器不全（インコ）",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0430",
+        "name": "Age-Related Degenerative Disease",
+        "name_ja": "加齢性変性疾患（インコ）",
+        "drugs": [
+          {
+            "drug": "Tramadol",
+            "drug_ja": "トラマドール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Glucosamine/Chondroitin",
+            "drug_ja": "グルコサミン・コンドロイチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parakeet_0448",
+        "name": "Geriatric Syndrome",
+        "name_ja": "老齢症候群（インコ）",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Glucosamine/Chondroitin",
+            "drug_ja": "グルコサミン・コンドロイチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      }
+    ],
+    "citation_mismatches": [
+      {
+        "id": "parakeet_0079",
+        "name": "Diabetes Mellitus",
+        "name_ja": "糖尿病",
+        "matched_keys": [
+          "diabetes mellitus"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0110",
+        "name": "Dermatophytosis (Ringworm)",
+        "name_ja": "皮膚糸状菌症（白癬）",
+        "matched_keys": [
+          "dermatophytosis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0115",
+        "name": "Pasteurellosis",
+        "name_ja": "パスツレラ症",
+        "matched_keys": [
+          "pasteurellosis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0121",
+        "name": "Cardiomyopathy",
+        "name_ja": "心筋症",
+        "matched_keys": [
+          "hypertrophic cardiomyopathy (hcm)"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0124",
+        "name": "Pancreatitis",
+        "name_ja": "膵炎",
+        "matched_keys": [
+          "feline pancreatitis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0132",
+        "name": "Beak Malocclusion (Scissor Beak)",
+        "name_ja": "嘴不正咬合（シザービーク）",
+        "matched_keys": [
+          "malocclusion"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0135",
+        "name": "Lymphoma",
+        "name_ja": "リンパ腫",
+        "matched_keys": [
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0232",
+        "name": "Intestinal Lymphoma",
+        "name_ja": "腸リンパ腫",
+        "matched_keys": [
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0309",
+        "name": "Chronic Kidney Disease",
+        "name_ja": "慢性腎臓病（インコ）",
+        "matched_keys": [
+          "chronic kidney disease"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0310",
+        "name": "Urolithiasis",
+        "name_ja": "尿路結石症（インコ）",
+        "matched_keys": [
+          "urolithiasis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0313",
+        "name": "Leukemia",
+        "name_ja": "白血病（インコ）",
+        "matched_keys": [
+          "feline leukemia virus"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0314",
+        "name": "Anemia",
+        "name_ja": "貧血（インコ）",
+        "matched_keys": [
+          "immune-mediated hemolytic anemia"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0339",
+        "name": "Dermatitis",
+        "name_ja": "皮膚炎（インコ）",
+        "matched_keys": [
+          "atopic dermatitis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "parakeet_0435",
+        "name": "Immune-Mediated Hemolytic Anemia",
+        "name_ja": "免疫介在性溶血性貧血（インコ）",
+        "matched_keys": [
+          "immune-mediated hemolytic anemia"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      }
+    ]
+  },
+  "T109": {
+    "detector": "T109",
+    "total_records": 435,
+    "hit_count": 1,
+    "safe_occurrences": 0,
+    "review_occurrences": 1,
+    "term_counts": {
+      "易感受性": 1
+    },
+    "hits": [
+      {
+        "id": "parakeet_0449",
+        "name_ja": "セキセイインコサーコウイルス（インコ）",
+        "field": "treatment_ja",
+        "term": "易感受性",
+        "suggest": "感受性が高い / 罹患しやすい",
+        "category": "review",
+        "note": "機械翻訳調",
+        "count": 1,
+        "context": "こす。■臨床症状: 免疫抑制（二次感染に易感受性）、  羽毛異常（軽度 — PBFDほど"
+      }
+    ]
+  }
+}

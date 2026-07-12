@@ -1,0 +1,308 @@
+# VetDict 品質検出レポート — horse
+
+- 総レコード数: **598**
+
+## T101 重複 / 過分割
+- 完全一致重複クラスタ: **2** （冗長レコード 2 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **111**
+
+### 完全一致重複（上位20）
+- 扁平上皮癌(非眼性)（Squamous Cell Carcinoma (Non-Ocular)）[on_scc] / 扁平上皮癌(皮膚)（Squamous Cell Carcinoma (Cutaneous)）[on_squamous_cell_carcinoma]
+- 鼠径ヘルニア（Inguinal Hernia）[dg_inguinal_hernia] / 種馬鼠径ヘルニア（Inguinal Hernia (Stallion)）[rp_inguinal_hernia_stallion]
+
+### 疾患ファミリー候補（上位15）
+- stem=`equine` × 48件
+    - 馬喘息 (IAD/RAO)（Equine Asthma (IAD/RAO)）[rp_iah]
+    - 馬インフルエンザ（Equine Influenza）[rp_influenza]
+    - 馬ヘルペスウイルス感染症 (EHV)（Equine Herpesvirus (EHV-1/4)）[if_ehv]
+    - サルコイド（Equine Sarcoid）[sk_sarcoid]
+    - 馬再発性ぶどう膜炎 (ERU)（Equine Recurrent Uveitis）[eye_uveitis_signs]
+    - 馬原虫性脊髄脳炎 (EPM)（Equine Protozoal Myeloencephalitis）[nr_epm]
+    - 馬メタボリック症候群 (EMS)（Equine Metabolic Syndrome）[mt_ems]
+    - 東部/西部馬脳炎（Eastern/Western Equine Encephalomyelitis）[if_eee_wee]
+    - 馬伝染性貧血 (EIA)（Equine Infectious Anemia）[if_eia]
+    - 馬ウイルス性動脈炎 (EVA)（Equine Viral Arteritis）[if_eve]
+    - 馬伝染性子宮炎 (CEM)（Contagious Equine Metritis）[if_cem]
+    - 馬コロナウイルス感染症（Equine Coronavirus）[if_coronavirus]
+    - 馬性器発疹（Equine Coital Exanthema）[if_coital_exanthema]
+    - 増殖性腸症（Equine Proliferative Enteropathy）[if_proliferative_enteropathy]
+    - 馬血清肝炎(セラー病)（Equine Serum Hepatitis）[if_serum_hepatitis]
+    - 馬草病（Equine Grass Sickness）[dg_grass_sickness]
+    - 高脂血症（Equine Hyperlipemia）[dg_hyperlipemia]
+    - 馬多結節性肺線維症（Equine Multinodular Pulmonary Fibrosis）[rp_empf]
+    - オンコセルカ症（Equine Onchocerciasis）[sk_onchocerciasis]
+    - ピシウム症（Equine Pythiosis）[sk_pythiosis]
+    - 後天性多発性ニューロパシー（Acquired Equine Polyneuropathy）[nr_polyneuropathy]
+    - 馬変性性脊髄脳症（Equine Degenerative Myeloencephalopathy）[nr_edm]
+    - 馬運動ニューロン病（Equine Motor Neuron Disease）[nr_emnd]
+    - 馬神経軸索ジストロフィー（Equine Neuroaxonal Dystrophy）[nr_ead]
+    - 馬パーキンソニズム（Equine Parkinsonism）[nr_parkinsonism]
+    - 馬甲状腺機能亢進症（Equine Hyperthyroidism）[mt_hyperthyroidism]
+    - 馬甲状腺機能低下症（Equine Hypothyroidism）[mt_hypothyroidism]
+    - 唾石症（Equine Sialolithiasis）[dn_sialolithiasis]
+    - 馬羊膜炎・胎子消失（Equine Amnionitis and Fetal Loss）[rp_amnionitis]
+    - 水疱性類天疱瘡（Equine Bullous Pemphigoid）[im_bullous_pemphigoid]
+    - 馬リンパ腫（Equine Lymphoma）[on_lymphoma]
+    - 馬尿石症（Equine Urolithiasis）[ur_urolithiasis]
+    - 自傷行為症候群（Equine Self-Mutilation Syndrome）[mc_self_mutilation]
+    - リノスポリジウム症（Equine Rhinosporidiosis）[mc_rhinosporidiosis]
+    - スポロトリコーシス（Equine Sporotrichosis）[mc_sporotrichosis]
+    - 結節性壊死症（Equine Nodular Necrosis）[mc_nodular_necrosis]
+    - 馬ペギウイルス感染症（Equine Pegivirus）[mc_pegivirus]
+    - 東部馬脳炎（Eastern Equine Encephalomyelitis）[if_eee]
+    - 西部馬脳炎（Western Equine Encephalomyelitis）[if_wee]
+    - ベネズエラ馬脳炎（Venezuelan Equine Encephalomyelitis）[if_vee]
+    - 馬顆粒球アナプラズマ症（Equine Granulocytic Anaplasmosis）[if_equine_granulocytic_anaplasmosis]
+    - 胃扁平上皮部潰瘍 (ESGD)（Equine Squamous Gastric Disease (ESGD)）[dg_gastric_ulcer_squamous]
+    - 胃腺部潰瘍 (EGGD)（Equine Glandular Gastric Disease (EGGD)）[dg_gastric_ulcer_glandular]
+    - 馬脳症ウイルス（Equine Encephalosis Virus）[if_equine_encephalosis]
+    - 馬ヘルペスウイルス4型感染症（Equine Herpesvirus Type 4 (EHV-4)）[if_ehv4]
+    - 馬アナプラズマ症（Equine Anaplasmosis (Anaplasma phagocytophilum)）[if_anaplasmosis2]
+    - 馬ロタウイルス感染症（Equine Rotavirus Infection）[if_equine_rotavirus]
+    - 馬歯破骨細胞性吸収・セメント質過形成(EOTRH)（Equine Odontoclastic Tooth Resorption and Hypercementosis (EOTRH)）[dn_equine_odontoclastic]
+- stem=`toxici` × 23件
+    - ドングリ中毒（Acorn Toxicity）[tx_acorn]
+    - ニセアカシア中毒（Black Locust Toxicity）[tx_black_locust]
+    - ブラックウォールナット中毒（Black Walnut Toxicity）[tx_black_walnut]
+    - ツチハンミョウ中毒（Blister Beetle Toxicity）[tx_blister_beetle]
+    - 藍藻中毒（Blue-Green Algae Toxicity）[tx_blue_green_algae]
+    - ワラビ中毒（Bracken Fern Toxicity）[tx_bracken_fern]
+    - 強心配糖体中毒（Cardiac Glycoside Toxicity）[tx_cardiac_glycoside]
+    - ヒマ中毒（Castor Bean Toxicity）[tx_castor_bean]
+    - クローバー中毒（Clover Toxicity）[tx_clover]
+    - シアン化物中毒（Cyanide Toxicity）[tx_cyanide]
+    - フェスク中毒（Fescue Toxicity）[tx_fescue]
+    - ホーリーアリッサム中毒（Hoary Alyssum Toxicity）[tx_hoary_alyssum]
+    - トチノキ中毒（Horse Chestnut Toxicity）[tx_horse_chestnut]
+    - 硝酸塩中毒（Nitrate Toxicity）[tx_nitrate]
+    - NSAID中毒(非ステロイド性抗炎症薬)（NSAID Toxicity）[tx_nsaid]
+    - キョウチクトウ中毒（Oleander Toxicity）[tx_oleander]
+    - ドクニンジン中毒（Poison Hemlock Toxicity）[tx_poison_hemlock]
+    - ヨウシュヤマゴボウ中毒（Pokeweed Toxicity）[tx_pokeweed]
+    - ピロリジジンアルカロイド中毒（Pyrrolizidine Alkaloid Toxicity）[tx_pyrrolizidine]
+    - セレン中毒（Selenium Toxicity）[tx_selenium_tox]
+    - ドクゼリ中毒（Water Hemlock Toxicity）[tx_water_hemlock]
+    - イチイ中毒（Yew Toxicity）[tx_yew]
+    - 殺鼠剤中毒（Anticoagulant Rodenticide Toxicity）[tx_rodenticide]
+- stem=`fractu` × 13件
+    - チップフラクチャー（Chip Fracture）[ms_chip]
+    - 骨折（Fracture）[ms_fracture]
+    - 疲労骨折（Stress Fracture）[ms_stress_fracture]
+    - 歯牙破折（Fractured Tooth）[dn_fractured_tooth]
+    - 下顎骨折（Mandibular Fracture）[dn_mandibular_fracture]
+    - 肋骨骨折（Rib Fracture）[mc_fractured_rib]
+    - 脊椎骨折（Vertebral Fracture）[mc_vertebral_fracture]
+    - 骨盤骨折（Pelvic Fracture）[mc_pelvic_fracture]
+    - 長管骨骨折（Long Bone Fracture）[mc_long_bone_fracture]
+    - 橈骨骨折（Radial Fracture）[ms_radial_fracture]
+    - 脛骨骨折（Tibial Fracture）[ms_tibial_fracture]
+    - 上腕骨骨折（Humeral Fracture）[ms_humeral_fracture]
+    - 歯科関連下顎骨折（Dental-Related Mandibular Fracture）[dn_mandibular_fracture_dental]
+- stem=`foal` × 12件
+    - シェーカー子馬症候群（子馬腸管内毒素産生型ボツリヌス症）（Shaker Foal Syndrome (Toxico-Infectious Botulism)）[fl_shaker_foal]
+    - 子馬免疫不全症候群（Foal Immunodeficiency Syndrome）[fl_fis]
+    - ラベンダー子馬症候群（Lavender Foal Syndrome）[fl_lavender]
+    - スリーピーフォール病(アクチノバチルス敗血症)（Sleepy Foal Disease）[fl_sleepy_foal]
+    - 未熟子馬（Premature/Dysmature Foal）[fl_premature_foal]
+    - 発情下痢（Foal Heat Diarrhea）[fl_foal_heat_diarrhea]
+    - 子馬ロタウイルス腸炎（Foal Rotavirus Enteritis）[fl_rotavirus]
+    - 子馬クロストリジウム腸炎（Foal Clostridial Enteritis）[fl_clostridial_enteritis]
+    - 子馬胃潰瘍症候群 (FGUS)（Foal Gastric Ulcer Syndrome (FGUS)）[fl_gastric_ulcer_foal]
+    - 子馬腸炎（Foal Enterocolitis）[fl_enterocolitis]
+    - 子馬化膿性関節炎（Foal Septic Arthritis / Osteomyelitis）[fl_septic_arthritis_foal]
+    - 子馬肺炎（Foal Pneumonia）[fl_pneumonia_foal]
+- stem=`enceph` × 11件
+    - ウエストナイル脳炎（West Nile Encephalitis）[if_wne]
+    - 東部/西部馬脳炎（Eastern/Western Equine Encephalomyelitis）[if_eee_wee]
+    - 日本脳炎（Japanese Encephalitis）[if_japanese_enc]
+    - 東部馬脳炎（Eastern Equine Encephalomyelitis）[if_eee]
+    - 西部馬脳炎（Western Equine Encephalomyelitis）[if_wee]
+    - ベネズエラ馬脳炎（Venezuelan Equine Encephalomyelitis）[if_vee]
+    - 寄生虫性脳炎（Verminous Encephalitis）[nr_verminous_encephalitis]
+    - 低酸素性虚血性脳症（Hypoxic-Ischemic Encephalopathy (Dummy Foal)）[fl_hypoxic_ischemic_encephalopathy]
+    - 馬脳症ウイルス（Equine Encephalosis Virus）[if_equine_encephalosis]
+    - 肝性脳症（Hepatic Encephalopathy）[dg_hepatic_encephalopathy]
+    - ウエストナイルウイルス脳炎（West Nile Virus Encephalitis）[nr_west_nile]
+- stem=`toxico` × 9件
+    - ファラリス中毒（Phalaris Toxicosis）[tx_phalaris]
+    - レッドメープル中毒（Red Maple Toxicosis）[tx_red_maple]
+    - 亜鉛中毒（Zinc Toxicosis）[tx_zinc_toxicosis]
+    - アボカド中毒（Avocado Toxicosis）[tx_avocado]
+    - ピロリジジンアルカロイド慢性中毒（Chronic Pyrrolizidine Alkaloid Toxicosis）[tx_pyrrolizidine_chronic]
+    - フモニシン中毒（Fumonisin Toxicosis (ELEM)）[tx_fumonisin]
+    - イオノフォア中毒（Ionophore Toxicosis (Monensin / Lasalocid)）[tx_ionophore]
+    - 有機リン中毒（Organophosphate Toxicosis）[tx_organophosphate2]
+    - NSAID過量投与中毒（NSAID Toxicosis (Phenylbutazone / Flunixin Overdose)）[tx_nsaid_overdose]
+- stem=`carcin` × 8件
+    - 扁平上皮癌(非眼性)（Squamous Cell Carcinoma (Non-Ocular)）[on_scc]
+    - 眼部扁平上皮癌（Ocular Squamous Cell Carcinoma）[ey_squamous_cell_carcinoma_eye]
+    - 扁平上皮癌(皮膚)（Squamous Cell Carcinoma (Cutaneous)）[on_squamous_cell_carcinoma]
+    - 胃扁平上皮癌（Gastric Squamous Cell Carcinoma）[on_gastric_scc]
+    - 篩骨癌（Ethmoid Carcinoma）[on_ethmoid_carcinoma]
+    - 皮膚扁平上皮癌（Cutaneous Squamous Cell Carcinoma）[sk_squamous_cell_ca_skin]
+    - 眼窩周囲扁平上皮癌（Periorbital Squamous Cell Carcinoma）[ey_periorbital_scc]
+    - 腎細胞癌（Renal Cell Carcinoma）[ur_renal_cell_carcinoma]
+- stem=`cell` × 8件
+    - 扁平上皮癌(非眼性)（Squamous Cell Carcinoma (Non-Ocular)）[on_scc]
+    - 眼部扁平上皮癌（Ocular Squamous Cell Carcinoma）[ey_squamous_cell_carcinoma_eye]
+    - 扁平上皮癌(皮膚)（Squamous Cell Carcinoma (Cutaneous)）[on_squamous_cell_carcinoma]
+    - 胃扁平上皮癌（Gastric Squamous Cell Carcinoma）[on_gastric_scc]
+    - 皮膚扁平上皮癌（Cutaneous Squamous Cell Carcinoma）[sk_squamous_cell_ca_skin]
+    - 肥満細胞腫（Mast Cell Tumor）[sk_mast_cell_tumor]
+    - 眼窩周囲扁平上皮癌（Periorbital Squamous Cell Carcinoma）[ey_periorbital_scc]
+    - 腎細胞癌（Renal Cell Carcinoma）[ur_renal_cell_carcinoma]
+- stem=`defici` × 8件
+    - セレン欠乏症（Selenium Deficiency）[mt_selenium_def]
+    - グリコーゲン分枝酵素欠損症（Glycogen Branching Enzyme Deficiency）[fl_gbed]
+    - 多種アシルCoA脱水素酵素欠損症（Multiple Acyl-CoA Dehydrogenase Deficiency）[fl_madd]
+    - ビタミンE欠乏症（Vitamin E Deficiency）[mt_vitamin_e_deficiency]
+    - ビタミンA欠乏症（Vitamin A Deficiency）[mt_vitamin_a_deficiency]
+    - ヨウ素欠乏症（Iodine Deficiency）[mt_iodine_deficiency]
+    - 鉄欠乏性貧血（Iron Deficiency Anemia）[mt_iron_deficiency_anemia]
+    - 選択的IgA欠乏症（Selective IgA Deficiency）[im_selective_iga_deficiency]
+- stem=`gastri` × 8件
+    - 胃潰瘍（Gastric Ulcers (EGUS)）[dg_gastric_ulcer]
+    - 胃扁平上皮部潰瘍 (ESGD)（Equine Squamous Gastric Disease (ESGD)）[dg_gastric_ulcer_squamous]
+    - 胃腺部潰瘍 (EGGD)（Equine Glandular Gastric Disease (EGGD)）[dg_gastric_ulcer_glandular]
+    - 胃破裂（Gastric Rupture）[dg_gastric_rupture]
+    - 胃扁平上皮癌（Gastric Squamous Cell Carcinoma）[on_gastric_scc]
+    - 柿渋胃閉塞(フィトベゾアール)（Persimmon (Phytobezoar) Gastric Impaction）[dg_gastric_impaction]
+    - 急性胃拡張（Acute Gastric Dilatation）[dg_gastric_dilatation]
+    - 子馬胃潰瘍症候群 (FGUS)（Foal Gastric Ulcer Syndrome (FGUS)）[fl_gastric_ulcer_foal]
+- stem=`injury` × 8件
+    - 深指屈腱損傷（Deep Digital Flexor Tendon Injury）[ms_ddft_injury]
+    - 仙腸関節損傷（Sacroiliac Joint Injury）[ms_sacroiliac_injury]
+    - 蹄冠損傷（Coronary Band Injury）[hf_coronary_band_injury]
+    - 熱傷（Burn Injury）[mc_burn_injury]
+    - 煙吸入傷害（Smoke Inhalation Injury）[mc_smoke_inhalation]
+    - 側副靱帯損傷（Collateral Ligament Injury）[mc_collateral_ligament_injury]
+    - 膝半月板損傷（Meniscal Injury）[ms_meniscal_injury]
+    - 膝十字靭帯損傷（Cruciate Ligament Injury）[ms_cruciate_injury]
+- stem=`osteoa` × 8件
+    - 関節炎(変形性)（Osteoarthritis）[ms_arthritis]
+    - 側頭舌骨骨症（Temporohyoid Osteoarthropathy）[nr_tho]
+    - 手根関節変形性関節症（Carpal Osteoarthritis）[ms_carpal_oa]
+    - 膝関節変形性関節症（Stifle Osteoarthritis）[ms_stifle_oa]
+    - 繋関節変形性関節症（Pastern Osteoarthritis）[ms_pastern_oa]
+    - 飛節変形性関節症（Tarsal Osteoarthritis (Bone Spavin)）[ms_tarsal_oa]
+    - 肩関節変形性関節症（Shoulder Osteoarthritis）[ms_shoulder_oa]
+    - 頚椎椎間関節症（Cervical Facet Osteoarthritis）[nr_cervical_facet_oa]
+- stem=`ruptur` × 8件
+    - 産後出血・子宮動脈破裂（Postpartum Hemorrhage / Uterine Artery Rupture）[rp_uterine_artery_rupture]
+    - 大動脈破裂（Aortic Rupture）[cv_aortic_rupture]
+    - 胃破裂（Gastric Rupture）[dg_gastric_rupture]
+    - 大動脈基部破裂（Aortic Root Rupture）[cv_aortic_root_rupture]
+    - 恥骨前腱断裂（Ruptured Prepubic Tendon）[rp_ruptured_prepubic_tendon]
+    - 膀胱破裂（Bladder Rupture）[ur_bladder_rupture]
+    - 盲腸破裂（Cecal Rupture）[dg_cecal_rupture]
+    - 子馬膀胱破裂（Ruptured Urinary Bladder (Foal)）[fl_ruptured_bladder_foal]
+- stem=`dermat` × 7件
+    - デルマトフィルス症（Rain Rot / Dermatophilosis）[sk_rain_rot]
+    - アトピー性皮膚炎（Atopic Dermatitis）[sk_atopic]
+    - 接触性皮膚炎（Contact Dermatitis）[sk_contact]
+    - 繋部皮膚炎（Pastern Dermatitis (Scratches)）[sk_pastern_dermatitis]
+    - 腹正中皮膚炎（Ventral Midline Dermatitis）[sk_ventral_midline_dermatitis]
+    - 皮膚糸状菌症(白癬)（Dermatophytosis (Ringworm)）[sk_dermatophytosis2]
+    - レインスカルド(皮膚フィルス症)（Dermatophilosis (Rain Scald)）[sk_dermatophilosis]
+- stem=`failur` × 7件
+    - 腎不全（Renal Failure）[mt_renal_failure]
+    - 心不全（Heart Failure）[cv_heart_failure]
+    - 乳汁分泌不全（Lactation Failure）[rp_lactation_failure]
+    - 肝不全（Hepatic Failure）[dg_liver_failure]
+    - 急性腎不全（Acute Renal Failure）[ur_acute_renal_failure]
+    - 慢性腎不全（Chronic Renal Failure）[ur_chronic_renal_failure]
+    - 受動免疫移行不全(FPT)（Failure of Passive Transfer）[fl_failure_passive_transfer_foal]
+
+## T102 非臨床エントリ
+- フラグ数: **1**
+- 馬パーキンソニズム（Equine Parkinsonism）[nr_parkinsonism] → parkinson(research_model)
+
+## T104 空 / 見出しのみ治療セクション
+- 完全に空: **0**
+- 投与量なし（見出しのみ）: **42**
+- 投与量あり: **556**
+
+### 投与量なし（上位30）
+- 蹄叉腐爛（Thrush）[hf_thrush] — ja:199字 / en:0字
+- ヘンドラウイルス感染症（Hendra Virus）[if_hendra] — ja:1283字 / en:0字
+- 豪州コウモリリッサウイルス感染症（Australian Bat Lyssavirus）[if_abl] — ja:721字 / en:0字
+- 肢軸異常(内反・外反)（Angular Limb Deformities）[ms_angular_limb] — ja:3386字 / en:0字
+- 馬リンパ腫（Equine Lymphoma）[on_lymphoma] — ja:418字 / en:0字
+- 白血病（Leukemia）[on_leukemia] — ja:179字 / en:0字
+- 扁平上皮癌(非眼性)（Squamous Cell Carcinoma (Non-Ocular)）[on_scc] — ja:418字 / en:0字
+- 馬尿石症（Equine Urolithiasis）[ur_urolithiasis] — ja:461字 / en:0字
+- 繋留性下肢浮腫(ストッキングアップ)（Stocking Up）[mc_stocking_up] — ja:369字 / en:0字
+- リノスポリジウム症（Equine Rhinosporidiosis）[mc_rhinosporidiosis] — ja:425字 / en:0字
+- 結節性壊死症（Equine Nodular Necrosis）[mc_nodular_necrosis] — ja:245字 / en:0字
+- 馬ペギウイルス感染症（Equine Pegivirus）[mc_pegivirus] — ja:378字 / en:0字
+- ベネズエラ馬脳炎（Venezuelan Equine Encephalomyelitis）[if_vee] — ja:369字 / en:0字
+- 眼部扁平上皮癌（Ocular Squamous Cell Carcinoma）[ey_squamous_cell_carcinoma_eye] — ja:1334字 / en:0字
+- 扁平上皮癌(皮膚)（Squamous Cell Carcinoma (Cutaneous)）[on_squamous_cell_carcinoma] — ja:418字 / en:0字
+- 線維肉腫（Fibrosarcoma）[on_fibrosarcoma] — ja:179字 / en:0字
+- 血管肉腫（Hemangiosarcoma）[on_hemangiosarcoma] — ja:418字 / en:0字
+- 有茎脂肪腫（Pedunculated Lipoma）[on_lipoma_pedunculated] — ja:425字 / en:0字
+- 胃扁平上皮癌（Gastric Squamous Cell Carcinoma）[on_gastric_scc] — ja:611字 / en:0字
+- 篩骨癌（Ethmoid Carcinoma）[on_ethmoid_carcinoma] — ja:179字 / en:0字
+- 急性腎不全（Acute Renal Failure）[ur_acute_renal_failure] — ja:440字 / en:0字
+- 慢性腎不全（Chronic Renal Failure）[ur_chronic_renal_failure] — ja:440字 / en:0字
+- 膀胱炎（Cystitis）[ur_cystitis] — ja:461字 / en:0字
+- 膀胱破裂（Bladder Rupture）[ur_bladder_rupture] — ja:186字 / en:0字
+- 腎結石（Nephrolithiasis）[ur_nephrolithiasis] — ja:440字 / en:0字
+- 砂状膀胱炎（Sabulous Cystitis）[ur_sabulous_cystitis] — ja:461字 / en:0字
+- 腎尿細管性アシドーシス（Renal Tubular Acidosis）[ur_renal_tubular_acidosis] — ja:186字 / en:0字
+- 異所性尿管（Ectopic Ureter）[ur_ectopic_ureter] — ja:186字 / en:0字
+- 血管腫（Hemangioma）[on_hemangioma] — ja:179字 / en:0字
+- 神経線維腫（Neurofibroma）[on_neurofibroma] — ja:179字 / en:0字
+
+## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
+- 種別投与量なしの薬品リンク（旧・未ガード）: **169** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **12** 疾患 → ガード後残存: **0**
+
+### 種に投与量データが無い薬品リンク（上位20）
+- 馬喘息 (IAD/RAO)（Equine Asthma (IAD/RAO)）[rp_iah] → ブデソニド
+- デルマトフィルス症（Rain Rot / Dermatophilosis）[sk_rain_rot] → ケトコナゾール, グリセオフルビン, ペルメトリン
+- サルコイド（Equine Sarcoid）[sk_sarcoid] → ケトコナゾール, グリセオフルビン, ペルメトリン
+- 光線過敏症（Photosensitization）[sk_photosensitization] → ケトコナゾール, グリセオフルビン, ペルメトリン
+- 夏癬(カリシン過敏症)（Sweet Itch (Culicoides Hypersensitivity)）[sk_sweet_itch] → ケトコナゾール, グリセオフルビン, ペルメトリン
+- 外傷感染（Wound Infection）[sk_wound_infection] → ケトコナゾール, グリセオフルビン, ペルメトリン
+- 角膜潰瘍（Corneal Ulcer）[ey_corneal_ulcer] → シプロフロキサシン
+- シェーカー子馬症候群（子馬腸管内毒素産生型ボツリヌス症）（Shaker Foal Syndrome (Toxico-Infectious Botulism)）[fl_shaker_foal] → ロニダゾール, テトラサイクリン
+- 歯の鋭利点(過長歯)（Sharp Enamel Points）[dn_sharp_points] → ロニダゾール
+- 波状歯（Wave Mouth）[dn_wave_mouth] → ロニダゾール
+- 歯根膿瘍（Periapical Abscess）[dn_periapical_abscess] → ロニダゾール
+- EOTRH(馬歯破歯細胞性吸収・過形成症)（EOTRH）[dn_eotrh] → ロニダゾール
+- 大腸炎（Colitis）[dg_colitis] → ロニダゾール, テトラサイクリン
+- 腸石症（Enterolithiasis）[dg_enterolithiasis] → ロニダゾール
+- 食道閉塞(チョーク)（Esophageal Obstruction (Choke)）[dg_choke] → ロニダゾール
+- ウエストナイル脳炎（West Nile Encephalitis）[if_wne] → ペルメトリン
+- 東部/西部馬脳炎（Eastern/Western Equine Encephalomyelitis）[if_eee_wee] → ペルメトリン
+- 馬伝染性貧血 (EIA)（Equine Infectious Anemia）[if_eia] → ペルメトリン
+- メラノーマ（Melanoma）[sk_melanoma] → ケトコナゾール, グリセオフルビン, ペルメトリン
+- 蜂窩織炎（Cellulitis）[sk_cellulitis] → ケトコナゾール, グリセオフルビン, ペルメトリン
+
+### 犬猫論文が他種に自動紐付け（上位20）
+- 腹膜炎（Peritonitis）[dg_peritonitis] → key: feline infectious peritonitis
+- アトピー性皮膚炎（Atopic Dermatitis）[sk_atopic] → key: atopic dermatitis
+- 馬リンパ腫（Equine Lymphoma）[on_lymphoma] → key: lymphoma
+- 白血病（Leukemia）[on_leukemia] → key: feline leukemia virus
+- 馬尿石症（Equine Urolithiasis）[ur_urolithiasis] → key: urolithiasis
+- 不正咬合（Malocclusion）[dn_malocclusion] → key: malocclusion
+- 免疫介在性溶血性貧血（Immune-Mediated Hemolytic Anemia）[im_immune_mediated_hemolytic_anemia] → key: immune-mediated hemolytic anemia
+- 膀胱炎（Cystitis）[ur_cystitis] → key: feline idiopathic cystitis (fic)
+- 腸管リンパ腫（Intestinal Lymphoma）[on_intestinal_lymphoma] → key: lymphoma
+- 皮膚糸状菌症(白癬)（Dermatophytosis (Ringworm)）[sk_dermatophytosis2] → key: dermatophytosis
+- 子宮蓄膿症（Pyometra）[rp_pyometra] → key: pyometra
+- 膀胱結石症（Cystic Urolithiasis (Bladder Stones)）[ur_urolithiasis_bladder] → key: urolithiasis
+
+## T109 機械翻訳臭（置換辞書）
+- ヒット総数: **5**（safe 0 / review 5）
+
+### 用語別ヒット数
+- `遺伝学的` × 5
+
+### 出現箇所（上位30）
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ treatment_ja [fl_fis] …血を発症し、生後4-16週で全例死亡。【遺伝学的背景】SLC5A3 c.G102C>A …
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ treatment_ja [fl_gbed] … Quarter Horse系で発生。【遺伝学的背景】Quarter Horse保因率約…
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ treatment_ja [fl_jeb] …1525delC)で別変異により発生。【遺伝学的背景】Belgian draft保因率約…
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ treatment_ja [fl_lavender] …重度神経症状、生後数時間-数日で致死。【遺伝学的背景】Egyptian Arabian保…
+- [review] `遺伝学的`→遺伝性 / 遺伝的 @ treatment_ja [fl_scid] …(2-5ヶ月)に必発感染症で全例死亡。【遺伝学的背景】Arabian純血種保因率約8-2…

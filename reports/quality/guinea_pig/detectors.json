@@ -1,5 +1,6 @@
 {
   "species": "guinea_pig",
+  "view": "raw",
   "record_count": 346,
   "T101": {
     "detector": "T101",

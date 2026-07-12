@@ -1,0 +1,3537 @@
+{
+  "species": "hedgehog",
+  "view": "served",
+  "record_count": 237,
+  "T101": {
+    "detector": "T101",
+    "total_records": 237,
+    "exact_duplicate_clusters": [
+      {
+        "members": [
+          {
+            "id": "hedgehog_0002",
+            "name": "Ringworm (Dermatophytosis)",
+            "name_ja": "皮膚糸状菌症"
+          },
+          {
+            "id": "hedgehog_0093",
+            "name": "Dermatophytosis (Severe)",
+            "name_ja": "皮膚糸状菌症（重症型）"
+          },
+          {
+            "id": "hedgehog_0149",
+            "name": "Dermatophytosis (Trichophyton)",
+            "name_ja": "皮膚糸状菌症（トリコフィトン）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "hedgehog_0015",
+            "name": "Obesity",
+            "name_ja": "肥満"
+          },
+          {
+            "id": "hedgehog_0121",
+            "name": "Obesity (Severe / Morbid)",
+            "name_ja": "肥満（重度/病的）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "hedgehog_0016",
+            "name": "Diarrhea (Non-specific)",
+            "name_ja": "下痢（非特異的）"
+          },
+          {
+            "id": "hedgehog_0174",
+            "name": "Diarrhea",
+            "name_ja": "下痢（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "hedgehog_0018",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "hedgehog_0118",
+            "name": "Hepatic Lipidosis (Obesity-Related)",
+            "name_ja": "肝リピドーシス（肥満関連）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "hedgehog_0026",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
+          },
+          {
+            "id": "hedgehog_0241",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "hedgehog_0028",
+            "name": "Mycobacteriosis (Pulmonary)",
+            "name_ja": "マイコバクテリア症（肺型）"
+          },
+          {
+            "id": "hedgehog_0057",
+            "name": "Mycobacteriosis (Disseminated)",
+            "name_ja": "マイコバクテリア症（播種型）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "hedgehog_0040",
+            "name": "Proptosis (Eye Protrusion)",
+            "name_ja": "眼球突出"
+          },
+          {
+            "id": "hedgehog_0166",
+            "name": "Proptosis",
+            "name_ja": "眼球脱出（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0218",
+            "name": "Exophthalmos",
+            "name_ja": "眼球突出（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "hedgehog_0055",
+            "name": "Fatty Liver Disease (Non-obese)",
+            "name_ja": "脂肪肝（非肥満型）"
+          },
+          {
+            "id": "hedgehog_0164",
+            "name": "Fatty Liver Disease",
+            "name_ja": "脂肪肝（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "hedgehog_0069",
+            "name": "Balloon Syndrome",
+            "name_ja": "バルーン症候群"
+          },
+          {
+            "id": "hedgehog_0140",
+            "name": "Balloon Syndrome (Subcutaneous Emphysema)",
+            "name_ja": "バルーン症候群（皮下気腫）"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "hedgehog_0090",
+            "name": "Caparinia Mange (Severe)",
+            "name_ja": "カパリニアダニ症（重症型）"
+          },
+          {
+            "id": "hedgehog_0150",
+            "name": "Caparinia Mite Infestation",
+            "name_ja": "カパリニアダニ症（ハリネズミ）"
+          }
+        ]
+      }
+    ],
+    "exact_duplicate_cluster_count": 10,
+    "redundant_record_count": 12,
+    "family_clusters": [
+      {
+        "shared_stem": "tumor",
+        "size": 9,
+        "members": [
+          {
+            "id": "hedgehog_0008",
+            "name": "Mammary Gland Tumor",
+            "name_ja": "乳腺腫瘍"
+          },
+          {
+            "id": "hedgehog_0012",
+            "name": "Mast Cell Tumor",
+            "name_ja": "肥満細胞腫"
+          },
+          {
+            "id": "hedgehog_0032",
+            "name": "Brain Tumor",
+            "name_ja": "脳腫瘍"
+          },
+          {
+            "id": "hedgehog_0067",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "hedgehog_0082",
+            "name": "Ovarian Granulosa Cell Tumor",
+            "name_ja": "卵巣顆粒膜細胞腫"
+          },
+          {
+            "id": "hedgehog_0084",
+            "name": "Cutaneous Mast Cell Tumor",
+            "name_ja": "皮膚肥満細胞腫"
+          },
+          {
+            "id": "hedgehog_0135",
+            "name": "Adrenal Cortical Tumor",
+            "name_ja": "副腎皮質腫瘍"
+          },
+          {
+            "id": "hedgehog_0146",
+            "name": "Uterine Tumor",
+            "name_ja": "子宮腫瘍（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0158",
+            "name": "Adrenal Tumor",
+            "name_ja": "副腎腫瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 7,
+        "members": [
+          {
+            "id": "hedgehog_0005",
+            "name": "Cutaneous Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0007",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0066",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "hedgehog_0079",
+            "name": "Squamous Cell Carcinoma (Oral) - Advanced",
+            "name_ja": "扁平上皮癌（口腔）- 進行型"
+          },
+          {
+            "id": "hedgehog_0160",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0161",
+            "name": "Lung Carcinoma",
+            "name_ja": "肺癌（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0187",
+            "name": "Squamous Cell Carcinoma (Skin)",
+            "name_ja": "扁平上皮癌（皮膚）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cell",
+        "size": 7,
+        "members": [
+          {
+            "id": "hedgehog_0005",
+            "name": "Cutaneous Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0007",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0012",
+            "name": "Mast Cell Tumor",
+            "name_ja": "肥満細胞腫"
+          },
+          {
+            "id": "hedgehog_0079",
+            "name": "Squamous Cell Carcinoma (Oral) - Advanced",
+            "name_ja": "扁平上皮癌（口腔）- 進行型"
+          },
+          {
+            "id": "hedgehog_0082",
+            "name": "Ovarian Granulosa Cell Tumor",
+            "name_ja": "卵巣顆粒膜細胞腫"
+          },
+          {
+            "id": "hedgehog_0084",
+            "name": "Cutaneous Mast Cell Tumor",
+            "name_ja": "皮膚肥満細胞腫"
+          },
+          {
+            "id": "hedgehog_0187",
+            "name": "Squamous Cell Carcinoma (Skin)",
+            "name_ja": "扁平上皮癌（皮膚）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 6,
+        "members": [
+          {
+            "id": "hedgehog_0004",
+            "name": "Skin Abscess",
+            "name_ja": "皮膚膿瘍"
+          },
+          {
+            "id": "hedgehog_0024",
+            "name": "Tooth Root Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "hedgehog_0043",
+            "name": "Retrobulbar Abscess",
+            "name_ja": "眼球後膿瘍"
+          },
+          {
+            "id": "hedgehog_0127",
+            "name": "Eye Abscess (Retrobulbar)",
+            "name_ja": "眼膿瘍（後眼窩）"
+          },
+          {
+            "id": "hedgehog_0210",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0221",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 6,
+        "members": [
+          {
+            "id": "hedgehog_0006",
+            "name": "Dermatitis (Bacterial)",
+            "name_ja": "細菌性皮膚炎"
+          },
+          {
+            "id": "hedgehog_0093",
+            "name": "Dermatophytosis (Severe)",
+            "name_ja": "皮膚糸状菌症（重症型）"
+          },
+          {
+            "id": "hedgehog_0095",
+            "name": "Allergic Dermatitis",
+            "name_ja": "アレルギー性皮膚炎"
+          },
+          {
+            "id": "hedgehog_0098",
+            "name": "Staphylococcal Dermatitis",
+            "name_ja": "ブドウ球菌性皮膚炎"
+          },
+          {
+            "id": "hedgehog_0149",
+            "name": "Dermatophytosis (Trichophyton)",
+            "name_ja": "皮膚糸状菌症（トリコフィトン）（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0185",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 6,
+        "members": [
+          {
+            "id": "hedgehog_0018",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "hedgehog_0087",
+            "name": "Hepatic Hemangiosarcoma",
+            "name_ja": "肝臓血管肉腫"
+          },
+          {
+            "id": "hedgehog_0102",
+            "name": "Capillaria Hepatica Infection",
+            "name_ja": "カピラリア・ヘパティカ感染"
+          },
+          {
+            "id": "hedgehog_0118",
+            "name": "Hepatic Lipidosis (Obesity-Related)",
+            "name_ja": "肝リピドーシス（肥満関連）"
+          },
+          {
+            "id": "hedgehog_0134",
+            "name": "Hepatic Neoplasia (General)",
+            "name_ja": "肝臓腫瘍（一般）"
+          },
+          {
+            "id": "hedgehog_0221",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 6,
+        "members": [
+          {
+            "id": "hedgehog_0065",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸腺癌"
+          },
+          {
+            "id": "hedgehog_0085",
+            "name": "Intestinal Leiomyosarcoma",
+            "name_ja": "腸管平滑筋肉腫"
+          },
+          {
+            "id": "hedgehog_0123",
+            "name": "Intestinal Intussusception",
+            "name_ja": "腸重積症"
+          },
+          {
+            "id": "hedgehog_0124",
+            "name": "Intestinal Foreign Body",
+            "name_ja": "腸管異物"
+          },
+          {
+            "id": "hedgehog_0154",
+            "name": "Intestinal Parasitism",
+            "name_ja": "腸管寄生虫症（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0176",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 5,
+        "members": [
+          {
+            "id": "hedgehog_0036",
+            "name": "Limb Fracture",
+            "name_ja": "四肢骨折"
+          },
+          {
+            "id": "hedgehog_0126",
+            "name": "Dental Fracture",
+            "name_ja": "歯の骨折"
+          },
+          {
+            "id": "hedgehog_0131",
+            "name": "Spinal Fracture",
+            "name_ja": "脊椎骨折"
+          },
+          {
+            "id": "hedgehog_0170",
+            "name": "Fracture",
+            "name_ja": "骨折（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0223",
+            "name": "Pelvic Fracture",
+            "name_ja": "骨盤骨折（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hedgeh",
+        "size": 5,
+        "members": [
+          {
+            "id": "hedgehog_0029",
+            "name": "Wobbly Hedgehog Syndrome (WHS)",
+            "name_ja": "ふらつき症候群（WHS）"
+          },
+          {
+            "id": "hedgehog_0077",
+            "name": "Wobbly Hedgehog Syndrome (WHS) - Early Stage",
+            "name_ja": "ふらつきハリネズミ症候群（WHS）- 初期段階"
+          },
+          {
+            "id": "hedgehog_0078",
+            "name": "Wobbly Hedgehog Syndrome (WHS) - Advanced",
+            "name_ja": "ふらつきハリネズミ症候群（WHS）- 進行期"
+          },
+          {
+            "id": "hedgehog_0144",
+            "name": "Hedgehog Dilated Cardiomyopathy (DCM)",
+            "name_ja": "ハリネズミ拡張型心筋症"
+          },
+          {
+            "id": "hedgehog_0145",
+            "name": "Hedgehog Balloon Syndrome",
+            "name_ja": "ハリネズミ風船症候群（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 5,
+        "members": [
+          {
+            "id": "hedgehog_0000",
+            "name": "Mite Infestation (Caparinia)",
+            "name_ja": "疥癬ダニ感染症（カパリニア）"
+          },
+          {
+            "id": "hedgehog_0059",
+            "name": "Tick Infestation",
+            "name_ja": "マダニ寄生"
+          },
+          {
+            "id": "hedgehog_0060",
+            "name": "Flea Infestation",
+            "name_ja": "ノミ寄生"
+          },
+          {
+            "id": "hedgehog_0150",
+            "name": "Caparinia Mite Infestation",
+            "name_ja": "カパリニアダニ症（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0152",
+            "name": "Ear Mite Infestation",
+            "name_ja": "耳ダニ寄生（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 5,
+        "members": [
+          {
+            "id": "hedgehog_0026",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
+          },
+          {
+            "id": "hedgehog_0100",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎"
+          },
+          {
+            "id": "hedgehog_0101",
+            "name": "Verminous Pneumonia (Crenosoma)",
+            "name_ja": "虫性肺炎（クレノソーマ）"
+          },
+          {
+            "id": "hedgehog_0137",
+            "name": "Pneumothorax",
+            "name_ja": "気胸"
+          },
+          {
+            "id": "hedgehog_0241",
+            "name": "Pneumonia (Bacterial)",
+            "name_ja": "細菌性肺炎（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adenoc",
+        "size": 4,
+        "members": [
+          {
+            "id": "hedgehog_0010",
+            "name": "Uterine Adenocarcinoma",
+            "name_ja": "子宮腺癌"
+          },
+          {
+            "id": "hedgehog_0065",
+            "name": "Intestinal Adenocarcinoma",
+            "name_ja": "腸腺癌"
+          },
+          {
+            "id": "hedgehog_0080",
+            "name": "Mammary Adenocarcinoma",
+            "name_ja": "乳腺腺癌"
+          },
+          {
+            "id": "hedgehog_0081",
+            "name": "Uterine Adenocarcinoma - Metastatic",
+            "name_ja": "子宮腺癌 - 転移性"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cardio",
+        "size": 4,
+        "members": [
+          {
+            "id": "hedgehog_0033",
+            "name": "Dilated Cardiomyopathy",
+            "name_ja": "拡張型心筋症"
+          },
+          {
+            "id": "hedgehog_0034",
+            "name": "Cardiomyopathy (General)",
+            "name_ja": "心筋症"
+          },
+          {
+            "id": "hedgehog_0116",
+            "name": "Dilated Cardiomyopathy - Advanced",
+            "name_ja": "拡張型心筋症 - 進行型"
+          },
+          {
+            "id": "hedgehog_0144",
+            "name": "Hedgehog Dilated Cardiomyopathy (DCM)",
+            "name_ja": "ハリネズミ拡張型心筋症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dental",
+        "size": 4,
+        "members": [
+          {
+            "id": "hedgehog_0025",
+            "name": "Dental Tartar",
+            "name_ja": "歯石"
+          },
+          {
+            "id": "hedgehog_0126",
+            "name": "Dental Fracture",
+            "name_ja": "歯の骨折"
+          },
+          {
+            "id": "hedgehog_0156",
+            "name": "Dental Disease",
+            "name_ja": "歯科疾患（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0210",
+            "name": "Dental Abscess",
+            "name_ja": "歯科膿瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "quill",
+        "size": 4,
+        "members": [
+          {
+            "id": "hedgehog_0091",
+            "name": "Quill Mites (Chorioptes)",
+            "name_ja": "針ダニ（コリオプテス）"
+          },
+          {
+            "id": "hedgehog_0094",
+            "name": "Bacterial Quill Folliculitis",
+            "name_ja": "細菌性針毛包炎"
+          },
+          {
+            "id": "hedgehog_0148",
+            "name": "Quill Loss (Non-specific)",
+            "name_ja": "針脱落（非特異的）（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0235",
+            "name": "Quill Folliculitis",
+            "name_ja": "針毛包炎（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "squamo",
+        "size": 4,
+        "members": [
+          {
+            "id": "hedgehog_0005",
+            "name": "Cutaneous Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0007",
+            "name": "Oral Squamous Cell Carcinoma",
+            "name_ja": "口腔扁平上皮癌"
+          },
+          {
+            "id": "hedgehog_0079",
+            "name": "Squamous Cell Carcinoma (Oral) - Advanced",
+            "name_ja": "扁平上皮癌（口腔）- 進行型"
+          },
+          {
+            "id": "hedgehog_0187",
+            "name": "Squamous Cell Carcinoma (Skin)",
+            "name_ja": "扁平上皮癌（皮膚）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "uterin",
+        "size": 4,
+        "members": [
+          {
+            "id": "hedgehog_0010",
+            "name": "Uterine Adenocarcinoma",
+            "name_ja": "子宮腺癌"
+          },
+          {
+            "id": "hedgehog_0052",
+            "name": "Uterine Polyps",
+            "name_ja": "子宮ポリープ"
+          },
+          {
+            "id": "hedgehog_0081",
+            "name": "Uterine Adenocarcinoma - Metastatic",
+            "name_ja": "子宮腺癌 - 転移性"
+          },
+          {
+            "id": "hedgehog_0146",
+            "name": "Uterine Tumor",
+            "name_ja": "子宮腫瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "adrena",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0071",
+            "name": "Adrenal Disease",
+            "name_ja": "副腎疾患"
+          },
+          {
+            "id": "hedgehog_0135",
+            "name": "Adrenal Cortical Tumor",
+            "name_ja": "副腎皮質腫瘍"
+          },
+          {
+            "id": "hedgehog_0158",
+            "name": "Adrenal Tumor",
+            "name_ja": "副腎腫瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "advanc",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0078",
+            "name": "Wobbly Hedgehog Syndrome (WHS) - Advanced",
+            "name_ja": "ふらつきハリネズミ症候群（WHS）- 進行期"
+          },
+          {
+            "id": "hedgehog_0079",
+            "name": "Squamous Cell Carcinoma (Oral) - Advanced",
+            "name_ja": "扁平上皮癌（口腔）- 進行型"
+          },
+          {
+            "id": "hedgehog_0116",
+            "name": "Dilated Cardiomyopathy - Advanced",
+            "name_ja": "拡張型心筋症 - 進行型"
+          }
+        ]
+      },
+      {
+        "shared_stem": "attemp",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0053",
+            "name": "Hypothermia / Hibernation Attempt",
+            "name_ja": "低体温症・冬眠兆候"
+          },
+          {
+            "id": "hedgehog_0089",
+            "name": "Hibernation Attempt - Severe",
+            "name_ja": "冬眠試行 - 重症型"
+          },
+          {
+            "id": "hedgehog_0147",
+            "name": "Hibernation Attempt (Torpor)",
+            "name_ja": "冬眠企図（休眠）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "balloo",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0069",
+            "name": "Balloon Syndrome",
+            "name_ja": "バルーン症候群"
+          },
+          {
+            "id": "hedgehog_0140",
+            "name": "Balloon Syndrome (Subcutaneous Emphysema)",
+            "name_ja": "バルーン症候群（皮下気腫）"
+          },
+          {
+            "id": "hedgehog_0145",
+            "name": "Hedgehog Balloon Syndrome",
+            "name_ja": "ハリネズミ風船症候群（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0225",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0226",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0227",
+            "name": "Calcium Deficiency",
+            "name_ja": "カルシウム欠乏症（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dilate",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0033",
+            "name": "Dilated Cardiomyopathy",
+            "name_ja": "拡張型心筋症"
+          },
+          {
+            "id": "hedgehog_0116",
+            "name": "Dilated Cardiomyopathy - Advanced",
+            "name_ja": "拡張型心筋症 - 進行型"
+          },
+          {
+            "id": "hedgehog_0144",
+            "name": "Hedgehog Dilated Cardiomyopathy (DCM)",
+            "name_ja": "ハリネズミ拡張型心筋症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemang",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0013",
+            "name": "Hemangiosarcoma",
+            "name_ja": "血管肉腫"
+          },
+          {
+            "id": "hedgehog_0086",
+            "name": "Splenic Hemangiosarcoma",
+            "name_ja": "脾臓血管肉腫"
+          },
+          {
+            "id": "hedgehog_0087",
+            "name": "Hepatic Hemangiosarcoma",
+            "name_ja": "肝臓血管肉腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hibern",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0053",
+            "name": "Hypothermia / Hibernation Attempt",
+            "name_ja": "低体温症・冬眠兆候"
+          },
+          {
+            "id": "hedgehog_0089",
+            "name": "Hibernation Attempt - Severe",
+            "name_ja": "冬眠試行 - 重症型"
+          },
+          {
+            "id": "hedgehog_0147",
+            "name": "Hibernation Attempt (Torpor)",
+            "name_ja": "冬眠企図（休眠）（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypoth",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0053",
+            "name": "Hypothermia / Hibernation Attempt",
+            "name_ja": "低体温症・冬眠兆候"
+          },
+          {
+            "id": "hedgehog_0120",
+            "name": "Hypothyroidism",
+            "name_ja": "甲状腺機能低下症"
+          },
+          {
+            "id": "hedgehog_0179",
+            "name": "Hypothermia",
+            "name_ja": "低体温症（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mange",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0090",
+            "name": "Caparinia Mange (Severe)",
+            "name_ja": "カパリニアダニ症（重症型）"
+          },
+          {
+            "id": "hedgehog_0092",
+            "name": "Demodex Mange",
+            "name_ja": "ニキビダニ症"
+          },
+          {
+            "id": "hedgehog_0151",
+            "name": "Sarcoptic Mange",
+            "name_ja": "疥癬（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mite",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0000",
+            "name": "Mite Infestation (Caparinia)",
+            "name_ja": "疥癬ダニ感染症（カパリニア）"
+          },
+          {
+            "id": "hedgehog_0150",
+            "name": "Caparinia Mite Infestation",
+            "name_ja": "カパリニアダニ症（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0152",
+            "name": "Ear Mite Infestation",
+            "name_ja": "耳ダニ寄生（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mycoba",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0028",
+            "name": "Mycobacteriosis (Pulmonary)",
+            "name_ja": "マイコバクテリア症（肺型）"
+          },
+          {
+            "id": "hedgehog_0057",
+            "name": "Mycobacteriosis (Disseminated)",
+            "name_ja": "マイコバクテリア症（播種型）"
+          },
+          {
+            "id": "hedgehog_0096",
+            "name": "Mycobacterium avium Infection",
+            "name_ja": "マイコバクテリウム・アビウム感染症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neopla",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0114",
+            "name": "Testicular Neoplasia",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "hedgehog_0134",
+            "name": "Hepatic Neoplasia (General)",
+            "name_ja": "肝臓腫瘍（一般）"
+          },
+          {
+            "id": "hedgehog_0238",
+            "name": "Pulmonary Neoplasia",
+            "name_ja": "肺腫瘍（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ovaria",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0067",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "hedgehog_0082",
+            "name": "Ovarian Granulosa Cell Tumor",
+            "name_ja": "卵巣顆粒膜細胞腫"
+          },
+          {
+            "id": "hedgehog_0208",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0106",
+            "name": "Renal Amyloidosis",
+            "name_ja": "腎アミロイドーシス"
+          },
+          {
+            "id": "hedgehog_0160",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0206",
+            "name": "Acute Renal Failure",
+            "name_ja": "急性腎不全（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0130",
+            "name": "Toxicosis (Cleaning Products)",
+            "name_ja": "中毒症（洗浄剤）"
+          },
+          {
+            "id": "hedgehog_0228",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒（ハリネズミ）"
+          },
+          {
+            "id": "hedgehog_0229",
+            "name": "Plant Toxicosis",
+            "name_ja": "植物中毒（ハリネズミ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "wobbly",
+        "size": 3,
+        "members": [
+          {
+            "id": "hedgehog_0029",
+            "name": "Wobbly Hedgehog Syndrome (WHS)",
+            "name_ja": "ふらつき症候群（WHS）"
+          },
+          {
+            "id": "hedgehog_0077",
+            "name": "Wobbly Hedgehog Syndrome (WHS) - Early Stage",
+            "name_ja": "ふらつきハリネズミ症候群（WHS）- 初期段階"
+          },
+          {
+            "id": "hedgehog_0078",
+            "name": "Wobbly Hedgehog Syndrome (WHS) - Advanced",
+            "name_ja": "ふらつきハリネズミ症候群（WHS）- 進行期"
+          }
+        ]
+      }
+    ],
+    "family_cluster_count": 34
+  },
+  "T102": {
+    "detector": "T102",
+    "total_records": 237,
+    "flagged_count": 0,
+    "flags": []
+  },
+  "T104": {
+    "detector": "T104",
+    "total_records": 237,
+    "empty_count": 0,
+    "heading_only_count": 21,
+    "with_dosage_count": 216,
+    "empty": [],
+    "heading_only": [
+      {
+        "id": "hedgehog_0007",
+        "name": "Oral Squamous Cell Carcinoma",
+        "name_ja": "口腔扁平上皮癌",
+        "treatment_ja_len": 348,
+        "treatment_len": 786,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0025",
+        "name": "Dental Tartar",
+        "name_ja": "歯石",
+        "treatment_ja_len": 175,
+        "treatment_len": 158,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0033",
+        "name": "Dilated Cardiomyopathy",
+        "name_ja": "拡張型心筋症",
+        "treatment_ja_len": 528,
+        "treatment_len": 630,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0061",
+        "name": "Internal Parasites (Intestinal Worms)",
+        "name_ja": "腸内寄生虫症",
+        "treatment_ja_len": 167,
+        "treatment_len": 172,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0062",
+        "name": "Lungworm Infection",
+        "name_ja": "肺虫感染症",
+        "treatment_ja_len": 166,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0063",
+        "name": "Coccidia Infection",
+        "name_ja": "コクシジウム感染症",
+        "treatment_ja_len": 445,
+        "treatment_len": 478,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0064",
+        "name": "Ear Mites",
+        "name_ja": "耳ダニ症",
+        "treatment_ja_len": 165,
+        "treatment_len": 172,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0068",
+        "name": "Self-anointing (Normal Behavior)",
+        "name_ja": "唾液塗布行動（正常行動）",
+        "treatment_ja_len": 590,
+        "treatment_len": 1400,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0070",
+        "name": "Ear Infection (Otitis)",
+        "name_ja": "耳感染症（外耳炎）",
+        "treatment_ja_len": 167,
+        "treatment_len": 137,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0071",
+        "name": "Adrenal Disease",
+        "name_ja": "副腎疾患",
+        "treatment_ja_len": 106,
+        "treatment_len": 196,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0080",
+        "name": "Mammary Adenocarcinoma",
+        "name_ja": "乳腺腺癌",
+        "treatment_ja_len": 345,
+        "treatment_len": 780,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0085",
+        "name": "Intestinal Leiomyosarcoma",
+        "name_ja": "腸管平滑筋肉腫",
+        "treatment_ja_len": 109,
+        "treatment_len": 483,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0088",
+        "name": "Pituitary Adenoma",
+        "name_ja": "下垂体腺腫",
+        "treatment_ja_len": 107,
+        "treatment_len": 475,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0091",
+        "name": "Quill Mites (Chorioptes)",
+        "name_ja": "針ダニ（コリオプテス）",
+        "treatment_ja_len": 172,
+        "treatment_len": 172,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0095",
+        "name": "Allergic Dermatitis",
+        "name_ja": "アレルギー性皮膚炎",
+        "treatment_ja_len": 669,
+        "treatment_len": 936,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0101",
+        "name": "Verminous Pneumonia (Crenosoma)",
+        "name_ja": "虫性肺炎（クレノソーマ）",
+        "treatment_ja_len": 173,
+        "treatment_len": 186,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0102",
+        "name": "Capillaria Hepatica Infection",
+        "name_ja": "カピラリア・ヘパティカ感染",
+        "treatment_ja_len": 767,
+        "treatment_len": 781,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0104",
+        "name": "Thorny-Headed Worm Infection",
+        "name_ja": "鉤頭虫感染",
+        "treatment_ja_len": 166,
+        "treatment_len": 204,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0127",
+        "name": "Eye Abscess (Retrobulbar)",
+        "name_ja": "眼膿瘍（後眼窩）",
+        "treatment_ja_len": 166,
+        "treatment_len": 196,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0166",
+        "name": "Proptosis",
+        "name_ja": "眼球脱出（ハリネズミ）",
+        "treatment_ja_len": 494,
+        "treatment_len": 870,
+        "has_dosage": false
+      },
+      {
+        "id": "hedgehog_0193",
+        "name": "Self-Anointing Behavior",
+        "name_ja": "自己塗布行動（ハリネズミ）",
+        "treatment_ja_len": 526,
+        "treatment_len": 867,
+        "has_dosage": false
+      }
+    ]
+  },
+  "T108": {
+    "detector": "T108",
+    "total_records": 237,
+    "drug_available": 610,
+    "ref_keys_available": 30,
+    "drug_mismatch_count": 127,
+    "citation_mismatch_count": 14,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
+    "drug_mismatches": [
+      {
+        "id": "hedgehog_0002",
+        "name": "Ringworm (Dermatophytosis)",
+        "name_ja": "皮膚糸状菌症",
+        "drugs": [
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clotrimazole",
+            "drug_ja": "クロトリマゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0003",
+        "name": "Dry Skin",
+        "name_ja": "乾燥性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0004",
+        "name": "Skin Abscess",
+        "name_ja": "皮膚膿瘍",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0005",
+        "name": "Cutaneous Squamous Cell Carcinoma",
+        "name_ja": "皮膚扁平上皮癌",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0006",
+        "name": "Dermatitis (Bacterial)",
+        "name_ja": "細菌性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0008",
+        "name": "Mammary Gland Tumor",
+        "name_ja": "乳腺腫瘍",
+        "drugs": [
+          {
+            "drug": "Doxorubicin",
+            "drug_ja": "ドキソルビシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0009",
+        "name": "Lymphoma",
+        "name_ja": "リンパ腫",
+        "drugs": [
+          {
+            "drug": "Vincristine",
+            "drug_ja": "ビンクリスチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Doxorubicin",
+            "drug_ja": "ドキソルビシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cyclophosphamide",
+            "drug_ja": "シクロホスファミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0010",
+        "name": "Uterine Adenocarcinoma",
+        "name_ja": "子宮腺癌",
+        "drugs": [
+          {
+            "drug": "Medetomidine",
+            "drug_ja": "メデトミジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Dexmedetomidine",
+            "drug_ja": "デクスメデトミジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Doxorubicin",
+            "drug_ja": "ドキソルビシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0011",
+        "name": "Fibrosarcoma",
+        "name_ja": "線維肉腫",
+        "drugs": [
+          {
+            "drug": "Doxorubicin",
+            "drug_ja": "ドキソルビシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0013",
+        "name": "Hemangiosarcoma",
+        "name_ja": "血管肉腫",
+        "drugs": [
+          {
+            "drug": "Toceranib Phosphate",
+            "drug_ja": "トセラニブリン酸塩",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Doxorubicin",
+            "drug_ja": "ドキソルビシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cyclophosphamide",
+            "drug_ja": "シクロホスファミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0015",
+        "name": "Obesity",
+        "name_ja": "肥満",
+        "drugs": [
+          {
+            "drug": "Glucosamine/Chondroitin",
+            "drug_ja": "グルコサミン・コンドロイチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0016",
+        "name": "Diarrhea (Non-specific)",
+        "name_ja": "下痢（非特異的）",
+        "drugs": [
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadimethoxine",
+            "drug_ja": "スルファジメトキシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Kaolin-Pectin",
+            "drug_ja": "カオリン-ペクチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0017",
+        "name": "Gastrointestinal Foreign Body",
+        "name_ja": "消化管内異物",
+        "drugs": [
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0018",
+        "name": "Hepatic Lipidosis",
+        "name_ja": "肝リピドーシス（脂肪肝）",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone",
+            "drug_ja": "セフトリアキソン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ursodiol (UDCA)",
+            "drug_ja": "ウルソデオキシコール酸",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "S-Adenosylmethionine (SAMe)",
+            "drug_ja": "S-アデノシルメチオニン（SAMe）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0019",
+        "name": "Enteritis",
+        "name_ja": "腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0020",
+        "name": "Colitis",
+        "name_ja": "大腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0022",
+        "name": "Periodontal Disease",
+        "name_ja": "歯周病",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Bupivacaine",
+            "drug_ja": "ブピバカイン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0023",
+        "name": "Gingivitis",
+        "name_ja": "歯肉炎",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0028",
+        "name": "Mycobacteriosis (Pulmonary)",
+        "name_ja": "マイコバクテリア症（肺型）",
+        "drugs": [
+          {
+            "drug": "Rifampin",
+            "drug_ja": "リファンピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clarithromycin",
+            "drug_ja": "クラリスロマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Theophylline",
+            "drug_ja": "テオフィリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0031",
+        "name": "Seizures",
+        "name_ja": "てんかん発作",
+        "drugs": [
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0032",
+        "name": "Brain Tumor",
+        "name_ja": "脳腫瘍",
+        "drugs": [
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0037",
+        "name": "Osteoarthritis",
+        "name_ja": "変形性関節症",
+        "drugs": [
+          {
+            "drug": "Glucosamine/Chondroitin",
+            "drug_ja": "グルコサミン・コンドロイチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0038",
+        "name": "Leg Injury (Soft Tissue)",
+        "name_ja": "脚の軟部組織損傷",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine 1% Cream",
+            "drug_ja": "スルファジアジン銀1%クリーム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0039",
+        "name": "Toe Loss / Necrosis",
+        "name_ja": "趾壊死・趾脱落",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0040",
+        "name": "Proptosis (Eye Protrusion)",
+        "name_ja": "眼球突出",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone",
+            "drug_ja": "セフトリアキソン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ofloxacin Ophthalmic",
+            "drug_ja": "オフロキサシン点眼",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0041",
+        "name": "Conjunctivitis",
+        "name_ja": "結膜炎",
+        "drugs": [
+          {
+            "drug": "Ofloxacin Ophthalmic",
+            "drug_ja": "オフロキサシン点眼",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0042",
+        "name": "Corneal Ulcer",
+        "name_ja": "角膜潰瘍",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0044",
+        "name": "Cataracts",
+        "name_ja": "白内障",
+        "drugs": [
+          {
+            "drug": "Atropine 1% Ophthalmic",
+            "drug_ja": "アトロピン1%点眼",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0045",
+        "name": "Chronic Kidney Disease",
+        "name_ja": "慢性腎臓病",
+        "drugs": [
+          {
+            "drug": "Amlodipine",
+            "drug_ja": "アムロジピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Aluminum Hydroxide",
+            "drug_ja": "水酸化アルミニウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0049",
+        "name": "Pyometra",
+        "name_ja": "子宮蓄膿症",
+        "drugs": [
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0050",
+        "name": "Dystocia",
+        "name_ja": "難産",
+        "drugs": [
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0051",
+        "name": "Mastitis",
+        "name_ja": "乳腺炎",
+        "drugs": [
+          {
+            "drug": "Linezolid",
+            "drug_ja": "リネゾリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0052",
+        "name": "Uterine Polyps",
+        "name_ja": "子宮ポリープ",
+        "drugs": [
+          {
+            "drug": "Deslorelin",
+            "drug_ja": "デスロレリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0057",
+        "name": "Mycobacteriosis (Disseminated)",
+        "name_ja": "マイコバクテリア症（播種型）",
+        "drugs": [
+          {
+            "drug": "Rifampin",
+            "drug_ja": "リファンピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clarithromycin",
+            "drug_ja": "クラリスロマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0059",
+        "name": "Tick Infestation",
+        "name_ja": "マダニ寄生",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Imidacloprid",
+            "drug_ja": "イミダクロプリド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Imidacloprid 10% Spot-on (Advantage)",
+            "drug_ja": "イミダクロプリド10%スポットオン（アドバンテージ）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0060",
+        "name": "Flea Infestation",
+        "name_ja": "ノミ寄生",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lufenuron",
+            "drug_ja": "ルフェヌロン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Imidacloprid",
+            "drug_ja": "イミダクロプリド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Nitenpyram (Capstar)",
+            "drug_ja": "ニテンピラム（キャプスター）",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Imidacloprid 10% Spot-on (Advantage)",
+            "drug_ja": "イミダクロプリド10%スポットオン（アドバンテージ）",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lufenuron (Program)",
+            "drug_ja": "ルフェヌロン（プログラム）",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Nitenpyram (Capstar)",
+            "drug_ja": "ニテンピラム（キャプスター）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0065",
+        "name": "Intestinal Adenocarcinoma",
+        "name_ja": "腸腺癌",
+        "drugs": [
+          {
+            "drug": "Cyclophosphamide",
+            "drug_ja": "シクロホスファミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0067",
+        "name": "Ovarian Tumor",
+        "name_ja": "卵巣腫瘍",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0069",
+        "name": "Balloon Syndrome",
+        "name_ja": "バルーン症候群",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone",
+            "drug_ja": "セフトリアキソン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0072",
+        "name": "Penile Prolapse / Paraphimosis",
+        "name_ja": "陰茎脱出・嵌頓包茎",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0073",
+        "name": "Green Stool (Stress/Diet)",
+        "name_ja": "緑色便（ストレス・食事性）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0074",
+        "name": "Anemia",
+        "name_ja": "貧血",
+        "drugs": [
+          {
+            "drug": "Erythropoietin (EPO)",
+            "drug_ja": "エリスロポエチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0076",
+        "name": "Splenic Disease",
+        "name_ja": "脾臓疾患",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0079",
+        "name": "Squamous Cell Carcinoma (Oral) - Advanced",
+        "name_ja": "扁平上皮癌（口腔）- 進行型",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0081",
+        "name": "Uterine Adenocarcinoma - Metastatic",
+        "name_ja": "子宮腺癌 - 転移性",
+        "drugs": [
+          {
+            "drug": "Cyclophosphamide",
+            "drug_ja": "シクロホスファミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0083",
+        "name": "Osteosarcoma",
+        "name_ja": "骨肉腫",
+        "drugs": [
+          {
+            "drug": "Doxorubicin",
+            "drug_ja": "ドキソルビシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0086",
+        "name": "Splenic Hemangiosarcoma",
+        "name_ja": "脾臓血管肉腫",
+        "drugs": [
+          {
+            "drug": "Doxorubicin",
+            "drug_ja": "ドキソルビシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0087",
+        "name": "Hepatic Hemangiosarcoma",
+        "name_ja": "肝臓血管肉腫",
+        "drugs": [
+          {
+            "drug": "Doxorubicin",
+            "drug_ja": "ドキソルビシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0089",
+        "name": "Hibernation Attempt - Severe",
+        "name_ja": "冬眠試行 - 重症型",
+        "drugs": [
+          {
+            "drug": "Dopamine",
+            "drug_ja": "ドパミン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0090",
+        "name": "Caparinia Mange (Severe)",
+        "name_ja": "カパリニアダニ症（重症型）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0092",
+        "name": "Demodex Mange",
+        "name_ja": "ニキビダニ症",
+        "drugs": [
+          {
+            "drug": "Moxidectin",
+            "drug_ja": "モキシデクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Benzoyl Peroxide",
+            "drug_ja": "過酸化ベンゾイル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0094",
+        "name": "Bacterial Quill Folliculitis",
+        "name_ja": "細菌性針毛包炎",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0095",
+        "name": "Allergic Dermatitis",
+        "name_ja": "アレルギー性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Azathioprine",
+            "drug_ja": "アザチオプリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mycophenolate Mofetil",
+            "drug_ja": "ミコフェノール酸モフェチル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0096",
+        "name": "Mycobacterium avium Infection",
+        "name_ja": "マイコバクテリウム・アビウム感染症",
+        "drugs": [
+          {
+            "drug": "Clarithromycin",
+            "drug_ja": "クラリスロマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0098",
+        "name": "Staphylococcal Dermatitis",
+        "name_ja": "ブドウ球菌性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Amikacin",
+            "drug_ja": "アミカシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0099",
+        "name": "Streptococcal Septicemia",
+        "name_ja": "レンサ球菌敗血症",
+        "drugs": [
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Dopamine",
+            "drug_ja": "ドパミン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0100",
+        "name": "Aspiration Pneumonia",
+        "name_ja": "誤嚥性肺炎",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone",
+            "drug_ja": "セフトリアキソン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Terbutaline",
+            "drug_ja": "テルブタリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Theophylline",
+            "drug_ja": "テオフィリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Terbutaline",
+            "drug_ja": "テルブタリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0105",
+        "name": "Giardiasis",
+        "name_ja": "ジアルジア症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0110",
+        "name": "Pregnancy Toxemia",
+        "name_ja": "妊娠中毒症",
+        "drugs": [
+          {
+            "drug": "Silymarin (Milk Thistle)",
+            "drug_ja": "シリマリン（マリアアザミ）",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Vitamin E (Alpha-tocopherol)",
+            "drug_ja": "ビタミンE（α-トコフェロール）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0111",
+        "name": "Retained Fetus",
+        "name_ja": "胎児残留",
+        "drugs": [
+          {
+            "drug": "Medetomidine",
+            "drug_ja": "メデトミジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Dexmedetomidine",
+            "drug_ja": "デクスメデトミジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0113",
+        "name": "Orchitis",
+        "name_ja": "精巣炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0115",
+        "name": "Penile Necrosis",
+        "name_ja": "陰茎壊死",
+        "drugs": [
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0116",
+        "name": "Dilated Cardiomyopathy - Advanced",
+        "name_ja": "拡張型心筋症 - 進行型",
+        "drugs": [
+          {
+            "drug": "Diltiazem",
+            "drug_ja": "ジルチアゼム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0118",
+        "name": "Hepatic Lipidosis (Obesity-Related)",
+        "name_ja": "肝リピドーシス（肥満関連）",
+        "drugs": [
+          {
+            "drug": "Ursodiol (UDCA)",
+            "drug_ja": "ウルソデオキシコール酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0119",
+        "name": "Diabetes Mellitus",
+        "name_ja": "糖尿病",
+        "drugs": [
+          {
+            "drug": "Glipizide",
+            "drug_ja": "グリピジド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0122",
+        "name": "Gastric Dilation / Bloat",
+        "name_ja": "胃拡張/鼓脹症",
+        "drugs": [
+          {
+            "drug": "Dopamine",
+            "drug_ja": "ドパミン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0123",
+        "name": "Intestinal Intussusception",
+        "name_ja": "腸重積症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0128",
+        "name": "Corneal Laceration",
+        "name_ja": "角膜裂傷",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atropine 1% Ophthalmic",
+            "drug_ja": "アトロピン1%点眼",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0129",
+        "name": "Glaucoma",
+        "name_ja": "緑内障",
+        "drugs": [
+          {
+            "drug": "Dorzolamide",
+            "drug_ja": "ドルゾラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Latanoprost",
+            "drug_ja": "ラタノプロスト",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atropine 1% Ophthalmic",
+            "drug_ja": "アトロピン1%点眼",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0130",
+        "name": "Toxicosis (Cleaning Products)",
+        "name_ja": "中毒症（洗浄剤）",
+        "drugs": [
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0132",
+        "name": "Digit Amputation Wound",
+        "name_ja": "指切断創",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0136",
+        "name": "Interstitial Nephritis",
+        "name_ja": "間質性腎炎",
+        "drugs": [
+          {
+            "drug": "Ondansetron",
+            "drug_ja": "オンダンセトロン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mirtazapine",
+            "drug_ja": "ミルタザピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Aluminum Hydroxide",
+            "drug_ja": "水酸化アルミニウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0137",
+        "name": "Pneumothorax",
+        "name_ja": "気胸",
+        "drugs": [
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0138",
+        "name": "Autoimmune Hemolytic Anemia",
+        "name_ja": "自己免疫性溶血性貧血",
+        "drugs": [
+          {
+            "drug": "Azathioprine",
+            "drug_ja": "アザチオプリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mycophenolate Mofetil",
+            "drug_ja": "ミコフェノール酸モフェチル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0142",
+        "name": "Metabolic Bone Disease (MBD)",
+        "name_ja": "代謝性骨疾患（MBD）",
+        "drugs": [
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0150",
+        "name": "Caparinia Mite Infestation",
+        "name_ja": "カパリニアダニ症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0151",
+        "name": "Sarcoptic Mange",
+        "name_ja": "疥癬（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Moxidectin",
+            "drug_ja": "モキシデクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Imidacloprid",
+            "drug_ja": "イミダクロプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0152",
+        "name": "Ear Mite Infestation",
+        "name_ja": "耳ダニ寄生（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Moxidectin",
+            "drug_ja": "モキシデクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Imidacloprid",
+            "drug_ja": "イミダクロプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0154",
+        "name": "Intestinal Parasitism",
+        "name_ja": "腸管寄生虫症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0155",
+        "name": "Clostridial Enteritis",
+        "name_ja": "クロストリジウム腸炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Vancomycin",
+            "drug_ja": "バンコマイシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0156",
+        "name": "Dental Disease",
+        "name_ja": "歯科疾患（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0165",
+        "name": "Endometritis",
+        "name_ja": "子宮内膜炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0168",
+        "name": "Encephalitis",
+        "name_ja": "脳炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mannitol",
+            "drug_ja": "マンニトール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mannitol",
+            "drug_ja": "マンニトール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0171",
+        "name": "Spondylosis",
+        "name_ja": "脊椎症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Glucosamine/Chondroitin",
+            "drug_ja": "グルコサミン・コンドロイチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0172",
+        "name": "Thrombocytopenia",
+        "name_ja": "血小板減少症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Mycophenolate Mofetil",
+            "drug_ja": "ミコフェノール酸モフェチル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Vincristine",
+            "drug_ja": "ビンクリスチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0173",
+        "name": "Leukemia",
+        "name_ja": "白血病（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "L-Asparaginase",
+            "drug_ja": "L-アスパラギナーゼ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0174",
+        "name": "Diarrhea",
+        "name_ja": "下痢（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0175",
+        "name": "GI Stasis",
+        "name_ja": "消化管うっ滞（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0182",
+        "name": "Lead Poisoning",
+        "name_ja": "鉛中毒（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atipamezole",
+            "drug_ja": "アチパメゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0183",
+        "name": "Wound Infection",
+        "name_ja": "創傷感染（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Methadone",
+            "drug_ja": "メサドン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0184",
+        "name": "Cellulitis",
+        "name_ja": "蜂窩織炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0185",
+        "name": "Contact Dermatitis",
+        "name_ja": "接触性皮膚炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Cetirizine",
+            "drug_ja": "セチリジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0186",
+        "name": "Alopecia",
+        "name_ja": "脱毛症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0190",
+        "name": "Septicemia",
+        "name_ja": "敗血症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0191",
+        "name": "Anesthetic Complication",
+        "name_ja": "麻酔合併症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Atipamezole",
+            "drug_ja": "アチパメゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Flumazenil",
+            "drug_ja": "フルマゼニル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ephedrine",
+            "drug_ja": "エフェドリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0196",
+        "name": "Pododermatitis",
+        "name_ja": "足底皮膚炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0198",
+        "name": "Myocarditis",
+        "name_ja": "心筋炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Lidocaine",
+            "drug_ja": "リドカイン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0199",
+        "name": "Endocarditis",
+        "name_ja": "心内膜炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0201",
+        "name": "Constipation",
+        "name_ja": "便秘（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0204",
+        "name": "Ileus",
+        "name_ja": "イレウス（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0205",
+        "name": "Nephrocalcinosis",
+        "name_ja": "腎石灰化症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Amlodipine",
+            "drug_ja": "アムロジピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Aluminum Hydroxide",
+            "drug_ja": "水酸化アルミニウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0206",
+        "name": "Acute Renal Failure",
+        "name_ja": "急性腎不全（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Amlodipine",
+            "drug_ja": "アムロジピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Aluminum Hydroxide",
+            "drug_ja": "水酸化アルミニウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0209",
+        "name": "Pseudopregnancy",
+        "name_ja": "偽妊娠（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Deslorelin",
+            "drug_ja": "デスロレリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0210",
+        "name": "Dental Abscess",
+        "name_ja": "歯科膿瘍（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0211",
+        "name": "Broken Tooth",
+        "name_ja": "歯牙破折（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0212",
+        "name": "Stomatitis",
+        "name_ja": "口内炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0213",
+        "name": "Toxin-Induced Seizures",
+        "name_ja": "中毒性痙攣（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Methocarbamol",
+            "drug_ja": "メトカルバモール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0214",
+        "name": "Peripheral Neuropathy",
+        "name_ja": "末梢神経障害（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Pregabalin",
+            "drug_ja": "プレガバリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0215",
+        "name": "Meningitis",
+        "name_ja": "髄膜炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Ampicillin",
+            "drug_ja": "アンピシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mannitol",
+            "drug_ja": "マンニトール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Mannitol",
+            "drug_ja": "マンニトール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0216",
+        "name": "Uveitis",
+        "name_ja": "ぶどう膜炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0217",
+        "name": "Keratitis",
+        "name_ja": "角膜炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0218",
+        "name": "Exophthalmos",
+        "name_ja": "眼球突出（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Atropine 1% Ophthalmic",
+            "drug_ja": "アトロピン1%点眼",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0219",
+        "name": "Disseminated Intravascular Coagulation",
+        "name_ja": "播種性血管内凝固（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Dopamine",
+            "drug_ja": "ドパミン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0220",
+        "name": "Polycythemia",
+        "name_ja": "赤血球増加症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Erythropoietin (EPO)",
+            "drug_ja": "エリスロポエチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0221",
+        "name": "Hepatic Abscess",
+        "name_ja": "肝膿瘍（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Amphotericin B",
+            "drug_ja": "アムホテリシンB",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0222",
+        "name": "Cholangiohepatitis",
+        "name_ja": "胆管肝炎（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Ursodiol (UDCA)",
+            "drug_ja": "ウルソデオキシコール酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0224",
+        "name": "Muscle Wasting",
+        "name_ja": "筋萎縮（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Mirtazapine",
+            "drug_ja": "ミルタザピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cyproheptadine",
+            "drug_ja": "シプロヘプタジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cyproheptadine",
+            "drug_ja": "シプロヘプタジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0227",
+        "name": "Calcium Deficiency",
+        "name_ja": "カルシウム欠乏症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Calcium Gluconate",
+            "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0228",
+        "name": "Zinc Toxicosis",
+        "name_ja": "亜鉛中毒（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atipamezole",
+            "drug_ja": "アチパメゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0229",
+        "name": "Plant Toxicosis",
+        "name_ja": "植物中毒（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atipamezole",
+            "drug_ja": "アチパメゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Digoxin",
+            "drug_ja": "ジゴキシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0230",
+        "name": "Antibiotic Toxicity",
+        "name_ja": "抗生物質毒性（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atipamezole",
+            "drug_ja": "アチパメゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0232",
+        "name": "Frostbite",
+        "name_ja": "凍傷（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Methadone",
+            "drug_ja": "メサドン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0233",
+        "name": "Thermal Burns",
+        "name_ja": "熱傷（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Methadone",
+            "drug_ja": "メサドン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0234",
+        "name": "Ear Laceration",
+        "name_ja": "耳裂傷（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0236",
+        "name": "Aspergillosis",
+        "name_ja": "アスペルギルス症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Voriconazole",
+            "drug_ja": "ボリコナゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0237",
+        "name": "Candidiasis",
+        "name_ja": "カンジダ症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Nystatin",
+            "drug_ja": "ナイスタチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Clotrimazole",
+            "drug_ja": "クロトリマゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hedgehog_0240",
+        "name": "Thromboembolism",
+        "name_ja": "血栓塞栓症（ハリネズミ）",
+        "drugs": [
+          {
+            "drug": "Clopidogrel",
+            "drug_ja": "クロピドグレル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Dalteparin",
+            "drug_ja": "ダルテパリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      }
+    ],
+    "citation_mismatches": [
+      {
+        "id": "hedgehog_0002",
+        "name": "Ringworm (Dermatophytosis)",
+        "name_ja": "皮膚糸状菌症",
+        "matched_keys": [
+          "dermatophytosis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0009",
+        "name": "Lymphoma",
+        "name_ja": "リンパ腫",
+        "matched_keys": [
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0045",
+        "name": "Chronic Kidney Disease",
+        "name_ja": "慢性腎臓病",
+        "matched_keys": [
+          "chronic kidney disease"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0046",
+        "name": "Cystitis",
+        "name_ja": "膀胱炎",
+        "matched_keys": [
+          "feline idiopathic cystitis (fic)"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0047",
+        "name": "Urolithiasis (Bladder Stones)",
+        "name_ja": "尿路結石症",
+        "matched_keys": [
+          "urolithiasis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0049",
+        "name": "Pyometra",
+        "name_ja": "子宮蓄膿症",
+        "matched_keys": [
+          "pyometra"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0071",
+        "name": "Adrenal Disease",
+        "name_ja": "副腎疾患",
+        "matched_keys": [
+          "adrenal disease"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0074",
+        "name": "Anemia",
+        "name_ja": "貧血",
+        "matched_keys": [
+          "immune-mediated hemolytic anemia"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0093",
+        "name": "Dermatophytosis (Severe)",
+        "name_ja": "皮膚糸状菌症（重症型）",
+        "matched_keys": [
+          "dermatophytosis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0119",
+        "name": "Diabetes Mellitus",
+        "name_ja": "糖尿病",
+        "matched_keys": [
+          "diabetes mellitus"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0125",
+        "name": "Pancreatitis",
+        "name_ja": "膵炎",
+        "matched_keys": [
+          "feline pancreatitis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0149",
+        "name": "Dermatophytosis (Trichophyton)",
+        "name_ja": "皮膚糸状菌症（トリコフィトン）（ハリネズミ）",
+        "matched_keys": [
+          "dermatophytosis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0173",
+        "name": "Leukemia",
+        "name_ja": "白血病（ハリネズミ）",
+        "matched_keys": [
+          "feline leukemia virus"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "hedgehog_0240",
+        "name": "Thromboembolism",
+        "name_ja": "血栓塞栓症（ハリネズミ）",
+        "matched_keys": [
+          "aortic thromboembolism (saddle thrombus)"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      }
+    ]
+  },
+  "T109": {
+    "detector": "T109",
+    "total_records": 237,
+    "hit_count": 2,
+    "safe_occurrences": 0,
+    "review_occurrences": 2,
+    "term_counts": {
+      "易感受性": 2
+    },
+    "hits": [
+      {
+        "id": "hedgehog_0050",
+        "name_ja": "難産",
+        "field": "pathophysiology_ja",
+        "term": "易感受性",
+        "suggest": "感受性が高い / 罹患しやすい",
+        "category": "review",
+        "note": "機械翻訳調",
+        "count": 1,
+        "context": "（25-40%）—ハリネズミ産科ショック易感受性。"
+      },
+      {
+        "id": "hedgehog_0050",
+        "name_ja": "難産",
+        "field": "prognosis_ja",
+        "term": "易感受性",
+        "suggest": "感受性が高い / 罹患しやすい",
+        "category": "review",
+        "note": "機械翻訳調",
+        "count": 1,
+        "context": " 25-40% （ハリネズミ産科ショック易感受性）。産仔生存は分娩時期依存；難産発症 >"
+      }
+    ]
+  }
+}

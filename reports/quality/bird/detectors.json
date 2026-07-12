@@ -1,5 +1,6 @@
 {
   "species": "bird",
+  "view": "raw",
   "record_count": 551,
   "T101": {
     "detector": "T101",

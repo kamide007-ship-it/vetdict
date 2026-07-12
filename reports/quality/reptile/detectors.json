@@ -1,5 +1,6 @@
 {
   "species": "reptile",
+  "view": "raw",
   "record_count": 286,
   "T101": {
     "detector": "T101",

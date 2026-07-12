@@ -1,0 +1,306 @@
+# VetDict 品質検出レポート — parakeet
+
+- 総レコード数: **435**
+
+## T101 重複 / 過分割
+- 完全一致重複クラスタ: **22** （冗長レコード 29 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **85**
+
+### 完全一致重複（上位20）
+- 鳥型結核症（Mycobacteriosis (Avian Tuberculosis)）[parakeet_0011] / マイコバクテリウム症（鳥結核）（インコ）（Mycobacteriosis (Avian TB)）[parakeet_0300]
+- 条虫症（Tapeworm Infection）[parakeet_0023] / 条虫感染症（インコ）（Tapeworm Infection (Parakeet)）[parakeet_0186]
+- ダニ寄生症（ワクモ・羽ダニ）（Mite Infestation (Red Mites / Feather Mites)）[parakeet_0024] / ダニ寄生症（Tick Infestation）[parakeet_0155]
+- メガバクテリア症（AGY・マクロラブダス症）（Megabacteriosis (AGY / Macrorhabdus)）[parakeet_0027] / メガバクテリア症（インコ）（Megabacteriosis）[parakeet_0252] / メガバクテリア症（AGY）（インコ）（Megabacteriosis (AGY)）[parakeet_0272]
+- 内臓痛風（Gout (Visceral)）[parakeet_0029] / 関節痛風（Gout (Articular)）[parakeet_0030] / 痛風（内臓型/関節型）（インコ）（Gout (Visceral/Articular)）[parakeet_0274]
+- 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[parakeet_0034] / 肝リピドーシス（種子食）（インコ）（Hepatic Lipidosis (Seed Diet)）[parakeet_0257]
+- テフロン中毒（PTFE中毒）（Teflon (PTFE) Toxicosis）[parakeet_0038] / テフロン中毒（インコ）（Teflon Toxicosis (Parakeet)）[parakeet_0196]
+- 精巣腫瘍（Testicular Tumors）[parakeet_0042] / 精巣腫瘍（ろう膜変色）（インコ）（Testicular Tumor (Cere Color Change)）[parakeet_0256]
+- 黄色腫（Xanthomas）[parakeet_0043] / 黄色腫（進行型）（Xanthoma (Advanced)）[parakeet_0177] / 黄色腫（翼）（インコ）（Xanthoma (Wing)）[parakeet_0263]
+- 開脚症（Splay Leg）[parakeet_0053] / 開脚症（新生児型）（Splayed Legs (Neonatal)）[parakeet_0203] / 開脚（新生児）（インコ）（Splayed Leg (Neonatal)）[parakeet_0254]
+- 羽嚢腫（Feather Cysts）[parakeet_0058] / 羽毛嚢胞（インコ）（Feather Cyst）[parakeet_0264]
+- 毛引き症（羽毛損傷行動）（Feather Plucking (Feather Destructive Behavior)）[parakeet_0059] / 毛引き（インコ）（Feather Plucking）[parakeet_0268]
+- そ嚢停滞（サワークロップ）（Crop Stasis (Sour Crop)）[parakeet_0067] / 嗉嚢閉塞（異物）（Crop Impaction (Foreign Body)）[parakeet_0206] / そ嚢うっ滞（新生児）（インコ）（Crop Stasis (Neonatal)）[parakeet_0265] / そ嚢うっ滞（インコ）（Crop Stasis）[parakeet_0270] / そ嚢停滞（インコ）（Crop Impaction）[parakeet_0334]
+- 乳頭腫症（Papillomatosis）[parakeet_0070] / 内臓乳頭腫症（インコ）（Papillomatosis (Internal)）[parakeet_0335]
+- 肝疾患（肝炎）（Liver Disease (Hepatitis)）[parakeet_0072] / 肝疾患（肝リピドーシス）（インコ）（Liver Disease (Hepatic Lipidosis)）[parakeet_0273]
+- 熱傷・化学熱傷（Burns (Thermal / Chemical)）[parakeet_0082] / 熱傷（インコ）（Burns）[parakeet_0330]
+- 大腸菌感染症（E. coli Infection (Colibacillosis)）[parakeet_0113] / 大腸菌感染（インコ）（E. coli Infection）[parakeet_0299]
+- 腺胃潰瘍（Proventricular Ulceration）[parakeet_0127] / 前胃潰瘍（セキセイインコ）（Proventricular Ulceration (Budgerigar)）[parakeet_0226]
+- 慢性羽包嚢胞（Feather Follicle Cyst (Chronic)）[parakeet_0133] / 羽毛毛包嚢胞（インコ）（Feather Follicle Cyst）[parakeet_0455]
+- 亜鉛中毒（進行型）（Zinc Toxicosis (Advanced)）[parakeet_0195] / 亜鉛中毒（Zinc Toxicosis）[parakeet_0241]
+
+### 疾患ファミリー候補（上位15）
+- stem=`defici` × 18件
+    - ビタミンA欠乏症（Vitamin A Deficiency (Hypovitaminosis A)）[parakeet_0031]
+    - カルシウム欠乏症（低カルシウム血症）（Calcium Deficiency (Hypocalcemia)）[parakeet_0032]
+    - ビタミンD欠乏症（Vitamin D Deficiency）[parakeet_0036]
+    - ビタミンE・セレン欠乏症（Vitamin E / Selenium Deficiency）[parakeet_0141]
+    - ビタミンK欠乏症（Vitamin K Deficiency）[parakeet_0142]
+    - チアミン欠乏症（Thiamine Deficiency）[parakeet_0143]
+    - ビオチン欠乏症（Biotin Deficiency）[parakeet_0144]
+    - タンパク質欠乏症（Protein Deficiency）[parakeet_0147]
+    - ナイアシン欠乏症（Niacin Deficiency）[parakeet_0164]
+    - リボフラビン欠乏症（Riboflavin Deficiency）[parakeet_0165]
+    - ビタミンE欠乏症（インコ）（Vitamin E Deficiency (Parakeet)）[parakeet_0193]
+    - パントテン酸欠乏症（Pantothenic Acid Deficiency）[parakeet_0194]
+    - ビタミンA欠乏症呼吸器型（Vitamin A Deficiency – Respiratory）[parakeet_0244]
+    - 栄養欠乏症（一般）（インコ）（Nutritional Deficiency (General)）[parakeet_0269]
+    - ヨウ素欠乏症（甲状腺過形成）（インコ）（Iodine Deficiency (Thyroid Hyperplasia)）[parakeet_0276]
+    - 筋骨格系栄養欠乏（インコ）（Musculoskeletal Nutritional Deficiency）[parakeet_0398]
+    - 血液栄養欠乏（インコ）（Hematological Nutritional Deficiency）[parakeet_0409]
+    - セレン欠乏症（インコ）（Selenium Deficiency）[parakeet_0450]
+- stem=`feathe` × 15件
+    - 嘴羽毛病（PBFD）（Psittacine Beak and Feather Disease (PBFD)）[parakeet_0000]
+    - 羽嚢腫（Feather Cysts）[parakeet_0058]
+    - 毛引き症（羽毛損傷行動）（Feather Plucking (Feather Destructive Behavior)）[parakeet_0059]
+    - ストレスバー（ストレス線）（Psittacine Feather Stress Bars）[parakeet_0060]
+    - 毛包炎（Feather Folliculitis）[parakeet_0089]
+    - 慢性羽包嚢胞（Feather Follicle Cyst (Chronic)）[parakeet_0133]
+    - ホルモン性毛引き症（Hormonal Feather Plucking）[parakeet_0159]
+    - 反復性羽嚢腫（Feather Cysts – Recurrent）[parakeet_0213]
+    - 嘴羽毛病（PBFD）初期段階（Psittacine Beak and Feather Disease – Early Stage）[parakeet_0220]
+    - 羽ダニ寄生症（Mite Infestation – Feather Mites）[parakeet_0245]
+    - 羽毛嚢胞（インコ）（Feather Cyst）[parakeet_0264]
+    - 毛引き（インコ）（Feather Plucking）[parakeet_0268]
+    - 羽毛ダニ（インコ）（Feather Mites）[parakeet_0282]
+    - 羽毛毛包嚢胞（インコ）（Feather Follicle Cyst）[parakeet_0455]
+    - 尾羽脱落（インコ）（Tail Feather Loss）[parakeet_0457]
+- stem=`bacter` × 14件
+    - 細菌性腸炎（Bacterial Enteritis）[parakeet_0010]
+    - 細菌性気嚢炎（Bacterial Airsacculitis）[parakeet_0180]
+    - 肝細菌感染症（インコ）（Hepatic Bacterial Infection）[parakeet_0341]
+    - 消化管細菌感染（インコ）（Gastrointestinal Bacterial Infection）[parakeet_0347]
+    - 呼吸器細菌感染（インコ）（Respiratory Bacterial Infection）[parakeet_0355]
+    - 皮膚細菌感染（インコ）（Dermatological Bacterial Infection）[parakeet_0363]
+    - 泌尿生殖器細菌感染（インコ）（Urogenital Bacterial Infection）[parakeet_0371]
+    - 神経系細菌感染（インコ）（Neurological Bacterial Infection）[parakeet_0375]
+    - 眼科細菌感染（インコ）（Ophthalmological Bacterial Infection）[parakeet_0383]
+    - 心血管細菌感染（インコ）（Cardiovascular Bacterial Infection）[parakeet_0388]
+    - 筋骨格系細菌感染（インコ）（Musculoskeletal Bacterial Infection）[parakeet_0393]
+    - 内分泌細菌感染（インコ）（Endocrine Bacterial Infection）[parakeet_0399]
+    - 生殖器細菌感染（インコ）（Reproductive Bacterial Infection）[parakeet_0410]
+    - 全身性細菌感染（インコ）（Systemic Bacterial Infection）[parakeet_0415]
+- stem=`neopla` × 14件
+    - 腺胃腫瘍（Proventricular Neoplasia）[parakeet_0173]
+    - 生殖器腫瘍（インコ）（Reproductive Neoplasia）[parakeet_0304]
+    - 肝腫瘍性疾患（インコ）（Hepatic Neoplasia）[parakeet_0345]
+    - 消化管腫瘍（インコ）（Gastrointestinal Neoplasia）[parakeet_0351]
+    - 呼吸器腫瘍（インコ）（Respiratory Neoplasia）[parakeet_0359]
+    - 皮膚腫瘍性疾患（インコ）（Dermatological Neoplasia）[parakeet_0367]
+    - 泌尿生殖器腫瘍（インコ）（Urogenital Neoplasia）[parakeet_0372]
+    - 神経系腫瘍（インコ）（Neurological Neoplasia）[parakeet_0378]
+    - 眼科腫瘍（インコ）（Ophthalmological Neoplasia）[parakeet_0385]
+    - 心血管腫瘍（インコ）（Cardiovascular Neoplasia）[parakeet_0389]
+    - 筋骨格系腫瘍（インコ）（Musculoskeletal Neoplasia）[parakeet_0394]
+    - 内分泌腫瘍（インコ）（Endocrine Neoplasia）[parakeet_0400]
+    - 血液腫瘍性疾患（インコ）（Hematological Neoplasia）[parakeet_0405]
+    - 全身性腫瘍（転移性）（インコ）（Systemic Neoplasia (Metastatic)）[parakeet_0419]
+- stem=`respir` × 13件
+    - 上部気道感染症（Upper Respiratory Infection）[parakeet_0062]
+    - 下部気道感染症（肺炎）（Lower Respiratory Infection (Pneumonia)）[parakeet_0063]
+    - オウム病呼吸器型（Psittacosis – Respiratory Form）[parakeet_0210]
+    - 慢性呼吸器疾患（CRD）（Chronic Respiratory Disease (CRD)）[parakeet_0228]
+    - ビタミンA欠乏症呼吸器型（Vitamin A Deficiency – Respiratory）[parakeet_0244]
+    - 呼吸器細菌感染（インコ）（Respiratory Bacterial Infection）[parakeet_0355]
+    - 呼吸器ウイルス感染（インコ）（Respiratory Viral Infection）[parakeet_0356]
+    - 呼吸器真菌感染（インコ）（Respiratory Fungal Infection）[parakeet_0357]
+    - 呼吸器寄生虫疾患（インコ）（Respiratory Parasitic Disease）[parakeet_0358]
+    - 呼吸器腫瘍（インコ）（Respiratory Neoplasia）[parakeet_0359]
+    - 呼吸器炎症性疾患（インコ）（Respiratory Inflammatory Disease）[parakeet_0360]
+    - 下部気道感染（インコ）（Lower Respiratory Tract Infection）[parakeet_0361]
+    - 慢性呼吸器疾患（インコ）（Chronic Respiratory Disease）[parakeet_0362]
+- stem=`crop` × 12件
+    - そ嚢カンジダ症（Crop Candidiasis）[parakeet_0017]
+    - そ嚢停滞（サワークロップ）（Crop Stasis (Sour Crop)）[parakeet_0067]
+    - そ嚢熱傷（Crop Burns）[parakeet_0083]
+    - 素嚢真菌症（Crop Mycosis）[parakeet_0163]
+    - 嗉嚢閉塞（異物）（Crop Impaction (Foreign Body)）[parakeet_0206]
+    - 新生児そ嚢カンジダ症（Crop Candidiasis – Neonatal）[parakeet_0221]
+    - トリコモナス症嗉嚢型（Trichomoniasis – Crop Form）[parakeet_0222]
+    - 酸敗嗉嚢（Sour Crop）[parakeet_0229]
+    - そ嚢うっ滞（新生児）（インコ）（Crop Stasis (Neonatal)）[parakeet_0265]
+    - そ嚢うっ滞（インコ）（Crop Stasis）[parakeet_0270]
+    - そ嚢停滞（インコ）（Crop Impaction）[parakeet_0334]
+    - 新生児そ嚢火傷（インコ）（Neonatal Crop Burn）[parakeet_0453]
+- stem=`dermat` × 11件
+    - 皮膚糸状菌症（白癬）（Dermatophytosis (Ringworm)）[parakeet_0110]
+    - 接触性皮膚炎（Contact Dermatitis）[parakeet_0153]
+    - 皮膚炎（インコ）（Dermatitis）[parakeet_0339]
+    - 皮膚細菌感染（インコ）（Dermatological Bacterial Infection）[parakeet_0363]
+    - 皮膚ウイルス感染（インコ）（Dermatological Viral Infection）[parakeet_0364]
+    - 皮膚真菌感染（インコ）（Dermatological Fungal Infection）[parakeet_0365]
+    - 皮膚寄生虫寄生（インコ）（Dermatological Parasitic Infestation）[parakeet_0366]
+    - 皮膚腫瘍性疾患（インコ）（Dermatological Neoplasia）[parakeet_0367]
+    - 皮膚自己免疫疾患（インコ）（Dermatological Autoimmune Disease）[parakeet_0368]
+    - 皮膚アレルギー疾患（インコ）（Dermatological Allergic Disease）[parakeet_0369]
+    - 慢性皮膚炎（インコ）（Chronic Dermatitis）[parakeet_0370]
+- stem=`hepati` × 11件
+    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[parakeet_0034]
+    - 肝アミロイドーシス（Hepatic Amyloidosis）[parakeet_0125]
+    - セキセイインコ肝リピドーシス（Budgerigar Hepatic Lipidosis）[parakeet_0202]
+    - 肝リピドーシス（種子食）（インコ）（Hepatic Lipidosis (Seed Diet)）[parakeet_0257]
+    - 肝炎（インコ）（Hepatitis）[parakeet_0336]
+    - 肝細菌感染症（インコ）（Hepatic Bacterial Infection）[parakeet_0341]
+    - 肝ウイルス感染症（インコ）（Hepatic Viral Infection）[parakeet_0342]
+    - 肝寄生虫疾患（インコ）（Hepatic Parasitic Disease）[parakeet_0343]
+    - 肝線維症（インコ）（Hepatic Fibrosis）[parakeet_0344]
+    - 肝腫瘍性疾患（インコ）（Hepatic Neoplasia）[parakeet_0345]
+    - 肝代謝障害（インコ）（Hepatic Metabolic Disorder）[parakeet_0346]
+- stem=`avian` × 9件
+    - 鳥痘（Avian Pox）[parakeet_0004]
+    - 鳥インフルエンザ（Avian Influenza）[parakeet_0007]
+    - 鳥ボルナウイルス感染症（Avian Bornavirus (ABV) Infection）[parakeet_0093]
+    - 鳥ヘルペスウイルス感染症（Avian Herpesvirus Infection）[parakeet_0096]
+    - 鳥マラリア（Avian Malaria (Plasmodium spp.)）[parakeet_0099]
+    - 鳥ボルナウイルス（PDD）- インコ（Avian Bornavirus (PDD) - Parakeet）[parakeet_0172]
+    - 鳥胃酵母（AGY）進行型（Avian Gastric Yeast (AGY) Advanced）[parakeet_0185]
+    - 鳥胃酵母症難治型（Avian Gastric Yeast – Refractory）[parakeet_0211]
+    - 鳥ボルナウイルス（インコ）（Avian Bornavirus (ABV)）[parakeet_0267]
+- stem=`gastro` × 9件
+    - 消化管異物（Gastrointestinal Foreign Body）[parakeet_0128]
+    - 消化管細菌感染（インコ）（Gastrointestinal Bacterial Infection）[parakeet_0347]
+    - 消化管ウイルス感染（インコ）（Gastrointestinal Viral Infection）[parakeet_0348]
+    - 消化管真菌感染（インコ）（Gastrointestinal Fungal Infection）[parakeet_0349]
+    - 消化管寄生虫疾患（インコ）（Gastrointestinal Parasitic Disease）[parakeet_0350]
+    - 消化管腫瘍（インコ）（Gastrointestinal Neoplasia）[parakeet_0351]
+    - 消化管炎症性疾患（インコ）（Gastrointestinal Inflammatory Disease）[parakeet_0352]
+    - 消化管運動障害（インコ）（Gastrointestinal Motility Disorder）[parakeet_0353]
+    - 消化管部分閉塞（インコ）（Gastrointestinal Obstruction (Partial)）[parakeet_0354]
+- stem=`inflam` × 9件
+    - 消化管炎症性疾患（インコ）（Gastrointestinal Inflammatory Disease）[parakeet_0352]
+    - 呼吸器炎症性疾患（インコ）（Respiratory Inflammatory Disease）[parakeet_0360]
+    - 泌尿生殖器炎症性疾患（インコ）（Urogenital Inflammatory Disease）[parakeet_0373]
+    - 神経炎症性疾患（インコ）（Neurological Inflammatory Disease）[parakeet_0380]
+    - 心血管炎症性疾患（インコ）（Cardiovascular Inflammatory Disease）[parakeet_0391]
+    - 筋骨格系炎症性疾患（インコ）（Musculoskeletal Inflammatory Disease）[parakeet_0397]
+    - 生殖器炎症性疾患（インコ）（Reproductive Inflammatory Disease）[parakeet_0414]
+    - 全身性炎症反応（インコ）（Systemic Inflammatory Response）[parakeet_0421]
+    - 特発性炎症性疾患（インコ）（Idiopathic Inflammatory Disease）[parakeet_0432]
+- stem=`metabo` × 9件
+    - 代謝性骨疾患（Metabolic Bone Disease）[parakeet_0057]
+    - 代謝性骨疾患新生児型（Metabolic Bone Disease – Neonatal）[parakeet_0243]
+    - 肝代謝障害（インコ）（Hepatic Metabolic Disorder）[parakeet_0346]
+    - 神経代謝疾患（インコ）（Neurological Metabolic Disease）[parakeet_0382]
+    - 内分泌代謝障害（インコ）（Endocrine Metabolic Disorder）[parakeet_0401]
+    - 血液代謝疾患（インコ）（Hematological Metabolic Disease）[parakeet_0408]
+    - 生殖器代謝疾患（インコ）（Reproductive Metabolic Disease）[parakeet_0412]
+    - 代謝性アシドーシス（インコ）（Metabolic Acidosis）[parakeet_0441]
+    - 代謝性アルカローシス（インコ）（Metabolic Alkalosis）[parakeet_0442]
+- stem=`neurol` × 9件
+    - 前胃拡張症神経型（Proventricular Dilatation Disease – Neurological Form）[parakeet_0209]
+    - 神経系細菌感染（インコ）（Neurological Bacterial Infection）[parakeet_0375]
+    - 神経系ウイルス感染（インコ）（Neurological Viral Infection）[parakeet_0376]
+    - 神経系寄生虫疾患（インコ）（Neurological Parasitic Disease）[parakeet_0377]
+    - 神経系腫瘍（インコ）（Neurological Neoplasia）[parakeet_0378]
+    - 神経変性疾患（インコ）（Neurological Degenerative Disease）[parakeet_0379]
+    - 神経炎症性疾患（インコ）（Neurological Inflammatory Disease）[parakeet_0380]
+    - 神経外傷性損傷（インコ）（Neurological Traumatic Injury）[parakeet_0381]
+    - 神経代謝疾患（インコ）（Neurological Metabolic Disease）[parakeet_0382]
+- stem=`beak` × 8件
+    - 嘴羽毛病（PBFD）（Psittacine Beak and Feather Disease (PBFD)）[parakeet_0000]
+    - 嘴過長症（Beak Overgrowth）[parakeet_0073]
+    - 嘴外傷（Beak Trauma）[parakeet_0074]
+    - 嘴不正咬合（シザービーク）（Beak Malocclusion (Scissor Beak)）[parakeet_0132]
+    - 嘴損傷骨折型（Beak Injury – Fracture）[parakeet_0219]
+    - 嘴羽毛病（PBFD）初期段階（Psittacine Beak and Feather Disease – Early Stage）[parakeet_0220]
+    - 嘴変形（シザービーク）（インコ）（Beak Deformity (Scissor Beak)）[parakeet_0295]
+    - 嘴腐敗（インコ）（Beak Rot）[parakeet_0454]
+- stem=`papill` × 8件
+    - 乳頭腫症（Papillomatosis）[parakeet_0070]
+    - パピローマウイルス感染症（Papillomavirus Infection）[parakeet_0169]
+    - 内部乳頭腫症（Internal Papillomatosis）[parakeet_0170]
+    - 総排泄腔乳頭腫症（インコ）（Cloacal Papillomatosis (Parakeet)）[parakeet_0171]
+    - 後鼻孔乳頭腫（Choanal Papilloma）[parakeet_0231]
+    - 総排泄腔乳頭腫（Cloacal Papilloma）[parakeet_0236]
+    - 乳頭腫（インコ）（Papilloma）[parakeet_0316]
+    - 内臓乳頭腫症（インコ）（Papillomatosis (Internal)）[parakeet_0335]
+
+## T102 非臨床エントリ
+- フラグ数: **0**
+
+## T104 空 / 見出しのみ治療セクション
+- 完全に空: **0**
+- 投与量なし（見出しのみ）: **40**
+- 投与量あり: **395**
+
+### 投与量なし（上位30）
+- ストレスバー（ストレス線）（Psittacine Feather Stress Bars）[parakeet_0060] — ja:833字 / en:2218字
+- うっ血性心不全（Congestive Heart Failure）[parakeet_0122] — ja:98字 / en:203字
+- 慢性羽包嚢胞（Feather Follicle Cyst (Chronic)）[parakeet_0133] — ja:50字 / en:136字
+- タンパク質欠乏症（Protein Deficiency）[parakeet_0147] — ja:512字 / en:1155字
+- 農薬中毒（Pesticide Poisoning）[parakeet_0148] — ja:321字 / en:393字
+- 植物中毒（Plant Toxicity）[parakeet_0149] — ja:442字 / en:393字
+- 殺鼠剤中毒（Rodenticide Poisoning）[parakeet_0150] — ja:443字 / en:393字
+- エッセンシャルオイル中毒（Essential Oil Toxicity）[parakeet_0151] — ja:450字 / en:393字
+- 皮下気腫（Subcutaneous Emphysema）[parakeet_0160] — ja:446字 / en:839字
+- 大動脈破裂（Aortic Rupture）[parakeet_0162] — ja:432字 / en:1053字
+- 腺胃腫瘍（Proventricular Neoplasia）[parakeet_0173] — ja:104字 / en:482字
+- 右心不全（インコ）（Right-Sided Heart Failure (Parakeet)）[parakeet_0179] — ja:56字 / en:185字
+- 細菌性気嚢炎（Bacterial Airsacculitis）[parakeet_0180] — ja:162字 / en:196字
+- 疥癬ダニ（鱗状顔面 進行型）（Cnemidocoptes (Scaly Face Advanced)）[parakeet_0189] — ja:173字 / en:496字
+- 下顎前突症（インコ）（Mandibular Prognathism (Parakeet)）[parakeet_0191] — ja:181字 / en:548字
+- 亜鉛中毒（進行型）（Zinc Toxicosis (Advanced)）[parakeet_0195] — ja:674字 / en:871字
+- 開脚症（新生児型）（Splayed Legs (Neonatal)）[parakeet_0203] — ja:619字 / en:1416字
+- 卵巣嚢胞（Ovarian Cyst）[parakeet_0205] — ja:53字 / en:136字
+- 嗉嚢閉塞（異物）（Crop Impaction (Foreign Body)）[parakeet_0206] — ja:349字 / en:417字
+- 夜間パニック外傷（Night Fright Injuries）[parakeet_0207] — ja:450字 / en:838字
+- 反復性羽嚢腫（Feather Cysts – Recurrent）[parakeet_0213] — ja:50字 / en:136字
+- 蝋膜肥大（褐色肥大症）（Cere Hypertrophy (Brown Hypertrophy)）[parakeet_0235] — ja:457字 / en:1159字
+- 亜鉛中毒（Zinc Toxicosis）[parakeet_0241] — ja:313字 / en:393字
+- 開脚（新生児）（インコ）（Splayed Leg (Neonatal)）[parakeet_0254] — ja:471字 / en:831字
+- 英国セキセイ病（インコ）（English Budgerigar Disease）[parakeet_0255] — ja:256字 / en:460字
+- ヨウ素欠乏症（甲状腺過形成）（インコ）（Iodine Deficiency (Thyroid Hyperplasia)）[parakeet_0276] — ja:245字 / en:481字
+- 嘴変形（シザービーク）（インコ）（Beak Deformity (Scissor Beak)）[parakeet_0295] — ja:236字 / en:528字
+- 乳頭腫（インコ）（Papilloma）[parakeet_0316] — ja:175字 / en:186字
+- 低体温症（インコ）（Hypothermia）[parakeet_0328] — ja:214字 / en:608字
+- 泌尿生殖器先天異常（インコ）（Urogenital Congenital Anomaly）[parakeet_0374] — ja:213字 / en:408字
+
+## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
+- 種別投与量なしの薬品リンク（旧・未ガード）: **71** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **14** 疾患 → ガード後残存: **0**
+
+### 種に投与量データが無い薬品リンク（上位20）
+- 鳥痘（Avian Pox）[parakeet_0004] → シプロフロキサシン, スルファジアジン, スルファジアジン銀
+- パチェコ病（Pacheco's Disease）[parakeet_0008] → S-アデノシルメチオニン（SAMe）
+- ブドウ球菌感染症（Staphylococcal Infection）[parakeet_0015] → スルファジアジン, スルファジアジン銀
+- そ嚢カンジダ症（Crop Candidiasis）[parakeet_0017] → ミコナゾール, シサプリド
+- 口腔カンジダ症（Oral Candidiasis (Thrush)）[parakeet_0018] → ミコナゾール
+- 気嚢ダニ症（Air Sac Mites）[parakeet_0026] → セラメクチン（レボリューション）, セラメクチン（レボリューション）
+- 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[parakeet_0034] → ラクツロース
+- 鉄貯蔵病（ヘモクロマトーシス）（Iron Storage Disease (Hemochromatosis)）[parakeet_0035] → デフェロキサミン（デスフェラール）
+- 黄色腫（Xanthomas）[parakeet_0043] → コレスチラミン
+- 趾締付け症候群（Constricted Toe Syndrome）[parakeet_0054] → スルファジアジン, スルファジアジン銀
+- 関節炎（Arthritis）[parakeet_0055] → トラマドール
+- 趾瘤症（足底皮膚炎）（Bumblefoot (Pododermatitis)）[parakeet_0056] → ムピロシン, スルファジアジン, スルファジアジン銀
+- 結膜炎（Conjunctivitis）[parakeet_0064] → シプロフロキサシン
+- 眼窩周囲膿瘍（Periorbital Abscess）[parakeet_0066] → シプロフロキサシン
+- そ嚢停滞（サワークロップ）（Crop Stasis (Sour Crop)）[parakeet_0067] → シサプリド
+- 総排泄腔炎（Cloacitis (Vent Infection)）[parakeet_0069] → ムピロシン, スルファジアジン, スルファジアジン銀
+- 肝疾患（肝炎）（Liver Disease (Hepatitis)）[parakeet_0072] → ラクツロース
+- 嘴過長症（Beak Overgrowth）[parakeet_0073] → ラクツロース
+- 自咬症（Self-Mutilation）[parakeet_0075] → スルファジアジン, スルファジアジン銀
+- てんかん・特発性痙攣（Epilepsy / Idiopathic Seizures）[parakeet_0076] → フェノバルビタール
+
+### 犬猫論文が他種に自動紐付け（上位20）
+- 糖尿病（Diabetes Mellitus）[parakeet_0079] → key: diabetes mellitus
+- 皮膚糸状菌症（白癬）（Dermatophytosis (Ringworm)）[parakeet_0110] → key: dermatophytosis
+- パスツレラ症（Pasteurellosis）[parakeet_0115] → key: pasteurellosis
+- 心筋症（Cardiomyopathy）[parakeet_0121] → key: hypertrophic cardiomyopathy (hcm)
+- 膵炎（Pancreatitis）[parakeet_0124] → key: feline pancreatitis
+- 嘴不正咬合（シザービーク）（Beak Malocclusion (Scissor Beak)）[parakeet_0132] → key: malocclusion
+- リンパ腫（Lymphoma）[parakeet_0135] → key: lymphoma
+- 腸リンパ腫（Intestinal Lymphoma）[parakeet_0232] → key: lymphoma
+- 慢性腎臓病（インコ）（Chronic Kidney Disease）[parakeet_0309] → key: chronic kidney disease
+- 尿路結石症（インコ）（Urolithiasis）[parakeet_0310] → key: urolithiasis
+- 白血病（インコ）（Leukemia）[parakeet_0313] → key: feline leukemia virus
+- 貧血（インコ）（Anemia）[parakeet_0314] → key: immune-mediated hemolytic anemia
+- 皮膚炎（インコ）（Dermatitis）[parakeet_0339] → key: atopic dermatitis
+- 免疫介在性溶血性貧血（インコ）（Immune-Mediated Hemolytic Anemia）[parakeet_0435] → key: immune-mediated hemolytic anemia
+
+## T109 機械翻訳臭（置換辞書）
+- ヒット総数: **1**（safe 0 / review 1）
+
+### 用語別ヒット数
+- `易感受性` × 1
+
+### 出現箇所（上位30）
+- [review] `易感受性`→感受性が高い / 罹患しやすい @ treatment_ja [parakeet_0449] …こす。■臨床症状: 免疫抑制（二次感染に易感受性）、  羽毛異常（軽度 — PBFDほど…

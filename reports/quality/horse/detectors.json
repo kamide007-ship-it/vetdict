@@ -1,5 +1,6 @@
 {
   "species": "horse",
+  "view": "raw",
   "record_count": 621,
   "T101": {
     "detector": "T101",

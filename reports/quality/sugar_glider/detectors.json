@@ -1,5 +1,6 @@
 {
   "species": "sugar_glider",
+  "view": "raw",
   "record_count": 221,
   "T101": {
     "detector": "T101",

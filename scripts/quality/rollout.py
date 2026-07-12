@@ -11,6 +11,7 @@ Usage:
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -36,15 +37,28 @@ _GUARD = {
 
 
 def main() -> int:
+    ap = argparse.ArgumentParser(description="Run VetDict read-only detectors across all species")
+    ap.add_argument(
+        "--served",
+        action="store_true",
+        help="report the post-consolidation served view (dedup + canonical) instead of raw source; "
+        "writes *_served reports so the raw baseline is preserved",
+    )
+    args = ap.parse_args()
+    served = args.served
+    suffix = "_served" if served else ""
+
     out_root = REPO_ROOT / "reports" / "quality"
     rows = []
     warnings = []
     for sp in ALL_SPECIES:
-        report = run(sp)
+        report = run(sp, served=served)
         sp_dir = out_root / sp
         sp_dir.mkdir(parents=True, exist_ok=True)
-        (sp_dir / "detectors.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-        (sp_dir / "detectors.md").write_text(_markdown_summary(report), encoding="utf-8")
+        (sp_dir / f"detectors{suffix}.json").write_text(
+            json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+        (sp_dir / f"detectors{suffix}.md").write_text(_markdown_summary(report), encoding="utf-8")
 
         t1, t2, t4, t8, t9 = (report["T101"], report["T102"], report["T104"], report["T108"], report["T109"])
         row = {
@@ -92,12 +106,21 @@ def main() -> int:
         )
     }  # fmt: skip
 
-    summary = {"species": rows, "totals": totals, "guard_warnings": warnings}
-    (out_root / "_rollout_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    summary = {"view": "served" if served else "raw", "species": rows, "totals": totals, "guard_warnings": warnings}
+    (out_root / f"_rollout_summary{suffix}.json").write_text(
+        json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
+    view_label = (
+        "統合適用後の**配信ビュー**（dedup + canonical map 適用済み＝サイトが実際に配信する状態）"
+        if served
+        else "**生ソース**ビュー（統合前の元データ＝問題の元規模）"
+    )
     # markdown table
     md = [
-        "# VetDict 品質検出 — 全21種横展開サマリー（read-only）",
+        f"# VetDict 品質検出 — 全21種横展開サマリー（read-only, {'served' if served else 'raw'}）",
+        "",
+        f"ビュー: {view_label}。",
         "",
         f"総疾患: **{totals['records']}** / 完全重複クラスタ計: **{totals['dup_clusters']}**（冗長 {totals['redundant']}） "
         f"/ 非臨床計: **{totals['nonclinical']}** / 投与量なし治療計: **{totals['heading_only_tx']}** "
@@ -122,7 +145,7 @@ def main() -> int:
         md += ["", "## ⚠️ 失敗ガード超過（要確認）", *[f"- {w}" for w in warnings]]
     else:
         md += ["", "失敗ガード（10倍相当のヒューリスティック上限）超過: **なし**"]
-    (out_root / "_rollout_summary.md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    (out_root / f"_rollout_summary{suffix}.md").write_text("\n".join(md) + "\n", encoding="utf-8")
 
     print(
         f"\nTOTAL diseases={totals['records']} dup_clusters={totals['dup_clusters']} "
@@ -134,7 +157,7 @@ def main() -> int:
         print("GUARD WARNINGS:")
         for w in warnings:
             print("  -", w)
-    print(f"summary -> {out_root}/_rollout_summary.md")
+    print(f"summary -> {out_root}/_rollout_summary{suffix}.md")
     return 0
 
 
