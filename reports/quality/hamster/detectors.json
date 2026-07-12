@@ -1,5 +1,6 @@
 {
   "species": "hamster",
+  "view": "raw",
   "record_count": 321,
   "T101": {
     "detector": "T101",

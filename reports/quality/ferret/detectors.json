@@ -1,5 +1,6 @@
 {
   "species": "ferret",
+  "view": "raw",
   "record_count": 277,
   "T101": {
     "detector": "T101",

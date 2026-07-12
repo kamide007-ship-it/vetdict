@@ -1,5 +1,6 @@
 {
   "species": "lizard",
+  "view": "raw",
   "record_count": 250,
   "T101": {
     "detector": "T101",

@@ -1,5 +1,6 @@
 {
   "species": "dog",
+  "view": "raw",
   "record_count": 623,
   "T101": {
     "detector": "T101",

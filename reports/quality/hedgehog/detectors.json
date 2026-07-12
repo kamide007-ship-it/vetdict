@@ -1,5 +1,6 @@
 {
   "species": "hedgehog",
+  "view": "raw",
   "record_count": 244,
   "T101": {
     "detector": "T101",

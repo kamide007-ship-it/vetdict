@@ -1,5 +1,6 @@
 {
   "species": "rabbit",
+  "view": "raw",
   "record_count": 452,
   "T101": {
     "detector": "T101",
@@ -190,11 +191,6 @@
             "id": "rabbit_0033",
             "name": "Ringworm (Dermatophytosis)",
             "name_ja": "皮膚糸状菌症（白癬）"
-          },
-          {
-            "id": "rabbit_0162",
-            "name": "Dermatophilosis",
-            "name_ja": "皮膚糸状菌症"
           },
           {
             "id": "rabbit_0302",
@@ -558,20 +554,6 @@
       {
         "members": [
           {
-            "id": "rabbit_0212",
-            "name": "Warble Fly Larvae (Hypoderma)",
-            "name_ja": "ウマバエ幼虫症"
-          },
-          {
-            "id": "rabbit_0298",
-            "name": "Cuterebra (Bot Fly Larva)",
-            "name_ja": "ウマバエ幼虫症（ウサギ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "rabbit_0214",
             "name": "Pulmonary Oedema",
             "name_ja": "肺水腫"
@@ -654,8 +636,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 42,
-    "redundant_record_count": 54,
+    "exact_duplicate_cluster_count": 41,
+    "redundant_record_count": 52,
     "family_clusters": [
       {
         "shared_stem": "absces",
@@ -862,7 +844,7 @@
           {
             "id": "rabbit_0162",
             "name": "Dermatophilosis",
-            "name_ja": "皮膚糸状菌症"
+            "name_ja": "デルマトフィルス症"
           },
           {
             "id": "rabbit_0233",
@@ -4522,7 +4504,7 @@
       {
         "id": "rabbit_0298",
         "name": "Cuterebra (Bot Fly Larva)",
-        "name_ja": "ウマバエ幼虫症（ウサギ）",
+        "name_ja": "クテレブラ症（ウサギ）",
         "drugs": [
           {
             "drug": "Dexamethasone",

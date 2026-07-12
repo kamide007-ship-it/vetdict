@@ -107,8 +107,29 @@ def _adapt_equine(rec: dict) -> dict:
     return rec
 
 
-def load_species_records(species: str) -> list[dict]:
-    """Load served disease records for a species (module + JSON overlay)."""
+def _apply_served_layer(records: list[dict], species: str) -> list[dict]:
+    """Apply the real serve-time consolidation (T103) so the report reflects
+    what users actually see: duplicate/dedup collapse + canonical merges +
+    archived entries hidden. Reuses the production functions rather than
+    reimplementing them, so counts match the served site. Read-only."""
+    try:
+        from api.species.canonical import apply_canonical_map
+        from api.species.helpers import dedupe_disease_list
+    except ImportError:
+        logger.warning("Served-layer functions unavailable; returning raw records", exc_info=True)
+        return records
+    served = dedupe_disease_list(list(records))
+    served = apply_canonical_map(served, species)
+    return served
+
+
+def load_species_records(species: str, served: bool = False) -> list[dict]:
+    """Load disease records for a species (module + JSON overlay).
+
+    When ``served=True``, additionally applies the serve-time consolidation
+    layer (dedup + canonical map) so the report reflects the post-T103 view
+    the site actually serves, rather than the raw pre-consolidation source.
+    """
     module_path, attr = _module_attr_for(species)
     mod = importlib.import_module(module_path)
     container = getattr(mod, attr, [])
@@ -133,6 +154,9 @@ def load_species_records(species: str) -> list[dict]:
     for i, rec in enumerate(records):
         rec.setdefault("_index", i)
         rec.setdefault("id", rec.get("id") or f"{species}_{i:04d}")
+
+    if served:
+        records = _apply_served_layer(records, species)
     return records
 
 
@@ -606,10 +630,11 @@ def detect_mt_smell(records: list[dict]) -> dict:
 # ---------------------------------------------------------------------------
 
 
-def run(species: str) -> dict:
-    records = load_species_records(species)
+def run(species: str, served: bool = False) -> dict:
+    records = load_species_records(species, served=served)
     return {
         "species": species,
+        "view": "served" if served else "raw",
         "record_count": len(records),
         "T101": detect_duplicates(records),
         "T102": detect_nonclinical(records),
@@ -708,16 +733,22 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="VetDict read-only quality detectors")
     ap.add_argument("species", help="species key, e.g. degu")
     ap.add_argument("--out", default="reports/quality", help="report output directory")
+    ap.add_argument(
+        "--served",
+        action="store_true",
+        help="report the post-consolidation served view (dedup + canonical) instead of raw source",
+    )
     args = ap.parse_args()
 
-    report = run(args.species)
+    report = run(args.species, served=args.served)
     out_dir = REPO_ROOT / args.out / args.species
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "detectors.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-    (out_dir / "detectors.md").write_text(_markdown_summary(report), encoding="utf-8")
+    suffix = "_served" if args.served else ""
+    (out_dir / f"detectors{suffix}.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    (out_dir / f"detectors{suffix}.md").write_text(_markdown_summary(report), encoding="utf-8")
 
     t1, t2, t4, t8, t9 = (report["T101"], report["T102"], report["T104"], report["T108"], report["T109"])
-    print(f"[{args.species}] records={report['record_count']}")
+    print(f"[{args.species}] view={report['view']} records={report['record_count']}")
     print(
         f"  T101 exact-dup clusters={t1['exact_duplicate_cluster_count']} "
         f"(redundant={t1['redundant_record_count']}) family-candidates={t1['family_cluster_count']}"
@@ -729,7 +760,7 @@ def main() -> int:
     )
     print(f"  T108 drug-mismatch={t8['drug_mismatch_count']} citation-mismatch={t8['citation_mismatch_count']}")
     print(f"  T109 mt-smell hits={t9['hit_count']} (safe={t9['safe_occurrences']} review={t9['review_occurrences']})")
-    print(f"  reports -> {out_dir}/detectors.json, detectors.md")
+    print(f"  reports -> {out_dir}/detectors{suffix}.json, detectors{suffix}.md")
     return 0
 
 

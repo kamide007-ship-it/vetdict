@@ -1,0 +1,6526 @@
+{
+  "species": "horse",
+  "view": "served",
+  "record_count": 598,
+  "T101": {
+    "detector": "T101",
+    "total_records": 598,
+    "exact_duplicate_clusters": [
+      {
+        "members": [
+          {
+            "id": "on_scc",
+            "name": "Squamous Cell Carcinoma (Non-Ocular)",
+            "name_ja": "扁平上皮癌(非眼性)"
+          },
+          {
+            "id": "on_squamous_cell_carcinoma",
+            "name": "Squamous Cell Carcinoma (Cutaneous)",
+            "name_ja": "扁平上皮癌(皮膚)"
+          }
+        ]
+      },
+      {
+        "members": [
+          {
+            "id": "dg_inguinal_hernia",
+            "name": "Inguinal Hernia",
+            "name_ja": "鼠径ヘルニア"
+          },
+          {
+            "id": "rp_inguinal_hernia_stallion",
+            "name": "Inguinal Hernia (Stallion)",
+            "name_ja": "種馬鼠径ヘルニア"
+          }
+        ]
+      }
+    ],
+    "exact_duplicate_cluster_count": 2,
+    "redundant_record_count": 2,
+    "family_clusters": [
+      {
+        "shared_stem": "equine",
+        "size": 48,
+        "members": [
+          {
+            "id": "rp_iah",
+            "name": "Equine Asthma (IAD/RAO)",
+            "name_ja": "馬喘息 (IAD/RAO)"
+          },
+          {
+            "id": "rp_influenza",
+            "name": "Equine Influenza",
+            "name_ja": "馬インフルエンザ"
+          },
+          {
+            "id": "if_ehv",
+            "name": "Equine Herpesvirus (EHV-1/4)",
+            "name_ja": "馬ヘルペスウイルス感染症 (EHV)"
+          },
+          {
+            "id": "sk_sarcoid",
+            "name": "Equine Sarcoid",
+            "name_ja": "サルコイド"
+          },
+          {
+            "id": "eye_uveitis_signs",
+            "name": "Equine Recurrent Uveitis",
+            "name_ja": "馬再発性ぶどう膜炎 (ERU)"
+          },
+          {
+            "id": "nr_epm",
+            "name": "Equine Protozoal Myeloencephalitis",
+            "name_ja": "馬原虫性脊髄脳炎 (EPM)"
+          },
+          {
+            "id": "mt_ems",
+            "name": "Equine Metabolic Syndrome",
+            "name_ja": "馬メタボリック症候群 (EMS)"
+          },
+          {
+            "id": "if_eee_wee",
+            "name": "Eastern/Western Equine Encephalomyelitis",
+            "name_ja": "東部/西部馬脳炎"
+          },
+          {
+            "id": "if_eia",
+            "name": "Equine Infectious Anemia",
+            "name_ja": "馬伝染性貧血 (EIA)"
+          },
+          {
+            "id": "if_eve",
+            "name": "Equine Viral Arteritis",
+            "name_ja": "馬ウイルス性動脈炎 (EVA)"
+          },
+          {
+            "id": "if_cem",
+            "name": "Contagious Equine Metritis",
+            "name_ja": "馬伝染性子宮炎 (CEM)"
+          },
+          {
+            "id": "if_coronavirus",
+            "name": "Equine Coronavirus",
+            "name_ja": "馬コロナウイルス感染症"
+          },
+          {
+            "id": "if_coital_exanthema",
+            "name": "Equine Coital Exanthema",
+            "name_ja": "馬性器発疹"
+          },
+          {
+            "id": "if_proliferative_enteropathy",
+            "name": "Equine Proliferative Enteropathy",
+            "name_ja": "増殖性腸症"
+          },
+          {
+            "id": "if_serum_hepatitis",
+            "name": "Equine Serum Hepatitis",
+            "name_ja": "馬血清肝炎(セラー病)"
+          },
+          {
+            "id": "dg_grass_sickness",
+            "name": "Equine Grass Sickness",
+            "name_ja": "馬草病"
+          },
+          {
+            "id": "dg_hyperlipemia",
+            "name": "Equine Hyperlipemia",
+            "name_ja": "高脂血症"
+          },
+          {
+            "id": "rp_empf",
+            "name": "Equine Multinodular Pulmonary Fibrosis",
+            "name_ja": "馬多結節性肺線維症"
+          },
+          {
+            "id": "sk_onchocerciasis",
+            "name": "Equine Onchocerciasis",
+            "name_ja": "オンコセルカ症"
+          },
+          {
+            "id": "sk_pythiosis",
+            "name": "Equine Pythiosis",
+            "name_ja": "ピシウム症"
+          },
+          {
+            "id": "nr_polyneuropathy",
+            "name": "Acquired Equine Polyneuropathy",
+            "name_ja": "後天性多発性ニューロパシー"
+          },
+          {
+            "id": "nr_edm",
+            "name": "Equine Degenerative Myeloencephalopathy",
+            "name_ja": "馬変性性脊髄脳症"
+          },
+          {
+            "id": "nr_emnd",
+            "name": "Equine Motor Neuron Disease",
+            "name_ja": "馬運動ニューロン病"
+          },
+          {
+            "id": "nr_ead",
+            "name": "Equine Neuroaxonal Dystrophy",
+            "name_ja": "馬神経軸索ジストロフィー"
+          },
+          {
+            "id": "nr_parkinsonism",
+            "name": "Equine Parkinsonism",
+            "name_ja": "馬パーキンソニズム"
+          },
+          {
+            "id": "mt_hyperthyroidism",
+            "name": "Equine Hyperthyroidism",
+            "name_ja": "馬甲状腺機能亢進症"
+          },
+          {
+            "id": "mt_hypothyroidism",
+            "name": "Equine Hypothyroidism",
+            "name_ja": "馬甲状腺機能低下症"
+          },
+          {
+            "id": "dn_sialolithiasis",
+            "name": "Equine Sialolithiasis",
+            "name_ja": "唾石症"
+          },
+          {
+            "id": "rp_amnionitis",
+            "name": "Equine Amnionitis and Fetal Loss",
+            "name_ja": "馬羊膜炎・胎子消失"
+          },
+          {
+            "id": "im_bullous_pemphigoid",
+            "name": "Equine Bullous Pemphigoid",
+            "name_ja": "水疱性類天疱瘡"
+          },
+          {
+            "id": "on_lymphoma",
+            "name": "Equine Lymphoma",
+            "name_ja": "馬リンパ腫"
+          },
+          {
+            "id": "ur_urolithiasis",
+            "name": "Equine Urolithiasis",
+            "name_ja": "馬尿石症"
+          },
+          {
+            "id": "mc_self_mutilation",
+            "name": "Equine Self-Mutilation Syndrome",
+            "name_ja": "自傷行為症候群"
+          },
+          {
+            "id": "mc_rhinosporidiosis",
+            "name": "Equine Rhinosporidiosis",
+            "name_ja": "リノスポリジウム症"
+          },
+          {
+            "id": "mc_sporotrichosis",
+            "name": "Equine Sporotrichosis",
+            "name_ja": "スポロトリコーシス"
+          },
+          {
+            "id": "mc_nodular_necrosis",
+            "name": "Equine Nodular Necrosis",
+            "name_ja": "結節性壊死症"
+          },
+          {
+            "id": "mc_pegivirus",
+            "name": "Equine Pegivirus",
+            "name_ja": "馬ペギウイルス感染症"
+          },
+          {
+            "id": "if_eee",
+            "name": "Eastern Equine Encephalomyelitis",
+            "name_ja": "東部馬脳炎"
+          },
+          {
+            "id": "if_wee",
+            "name": "Western Equine Encephalomyelitis",
+            "name_ja": "西部馬脳炎"
+          },
+          {
+            "id": "if_vee",
+            "name": "Venezuelan Equine Encephalomyelitis",
+            "name_ja": "ベネズエラ馬脳炎"
+          },
+          {
+            "id": "if_equine_granulocytic_anaplasmosis",
+            "name": "Equine Granulocytic Anaplasmosis",
+            "name_ja": "馬顆粒球アナプラズマ症"
+          },
+          {
+            "id": "dg_gastric_ulcer_squamous",
+            "name": "Equine Squamous Gastric Disease (ESGD)",
+            "name_ja": "胃扁平上皮部潰瘍 (ESGD)"
+          },
+          {
+            "id": "dg_gastric_ulcer_glandular",
+            "name": "Equine Glandular Gastric Disease (EGGD)",
+            "name_ja": "胃腺部潰瘍 (EGGD)"
+          },
+          {
+            "id": "if_equine_encephalosis",
+            "name": "Equine Encephalosis Virus",
+            "name_ja": "馬脳症ウイルス"
+          },
+          {
+            "id": "if_ehv4",
+            "name": "Equine Herpesvirus Type 4 (EHV-4)",
+            "name_ja": "馬ヘルペスウイルス4型感染症"
+          },
+          {
+            "id": "if_anaplasmosis2",
+            "name": "Equine Anaplasmosis (Anaplasma phagocytophilum)",
+            "name_ja": "馬アナプラズマ症"
+          },
+          {
+            "id": "if_equine_rotavirus",
+            "name": "Equine Rotavirus Infection",
+            "name_ja": "馬ロタウイルス感染症"
+          },
+          {
+            "id": "dn_equine_odontoclastic",
+            "name": "Equine Odontoclastic Tooth Resorption and Hypercementosis (EOTRH)",
+            "name_ja": "馬歯破骨細胞性吸収・セメント質過形成(EOTRH)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxici",
+        "size": 23,
+        "members": [
+          {
+            "id": "tx_acorn",
+            "name": "Acorn Toxicity",
+            "name_ja": "ドングリ中毒"
+          },
+          {
+            "id": "tx_black_locust",
+            "name": "Black Locust Toxicity",
+            "name_ja": "ニセアカシア中毒"
+          },
+          {
+            "id": "tx_black_walnut",
+            "name": "Black Walnut Toxicity",
+            "name_ja": "ブラックウォールナット中毒"
+          },
+          {
+            "id": "tx_blister_beetle",
+            "name": "Blister Beetle Toxicity",
+            "name_ja": "ツチハンミョウ中毒"
+          },
+          {
+            "id": "tx_blue_green_algae",
+            "name": "Blue-Green Algae Toxicity",
+            "name_ja": "藍藻中毒"
+          },
+          {
+            "id": "tx_bracken_fern",
+            "name": "Bracken Fern Toxicity",
+            "name_ja": "ワラビ中毒"
+          },
+          {
+            "id": "tx_cardiac_glycoside",
+            "name": "Cardiac Glycoside Toxicity",
+            "name_ja": "強心配糖体中毒"
+          },
+          {
+            "id": "tx_castor_bean",
+            "name": "Castor Bean Toxicity",
+            "name_ja": "ヒマ中毒"
+          },
+          {
+            "id": "tx_clover",
+            "name": "Clover Toxicity",
+            "name_ja": "クローバー中毒"
+          },
+          {
+            "id": "tx_cyanide",
+            "name": "Cyanide Toxicity",
+            "name_ja": "シアン化物中毒"
+          },
+          {
+            "id": "tx_fescue",
+            "name": "Fescue Toxicity",
+            "name_ja": "フェスク中毒"
+          },
+          {
+            "id": "tx_hoary_alyssum",
+            "name": "Hoary Alyssum Toxicity",
+            "name_ja": "ホーリーアリッサム中毒"
+          },
+          {
+            "id": "tx_horse_chestnut",
+            "name": "Horse Chestnut Toxicity",
+            "name_ja": "トチノキ中毒"
+          },
+          {
+            "id": "tx_nitrate",
+            "name": "Nitrate Toxicity",
+            "name_ja": "硝酸塩中毒"
+          },
+          {
+            "id": "tx_nsaid",
+            "name": "NSAID Toxicity",
+            "name_ja": "NSAID中毒(非ステロイド性抗炎症薬)"
+          },
+          {
+            "id": "tx_oleander",
+            "name": "Oleander Toxicity",
+            "name_ja": "キョウチクトウ中毒"
+          },
+          {
+            "id": "tx_poison_hemlock",
+            "name": "Poison Hemlock Toxicity",
+            "name_ja": "ドクニンジン中毒"
+          },
+          {
+            "id": "tx_pokeweed",
+            "name": "Pokeweed Toxicity",
+            "name_ja": "ヨウシュヤマゴボウ中毒"
+          },
+          {
+            "id": "tx_pyrrolizidine",
+            "name": "Pyrrolizidine Alkaloid Toxicity",
+            "name_ja": "ピロリジジンアルカロイド中毒"
+          },
+          {
+            "id": "tx_selenium_tox",
+            "name": "Selenium Toxicity",
+            "name_ja": "セレン中毒"
+          },
+          {
+            "id": "tx_water_hemlock",
+            "name": "Water Hemlock Toxicity",
+            "name_ja": "ドクゼリ中毒"
+          },
+          {
+            "id": "tx_yew",
+            "name": "Yew Toxicity",
+            "name_ja": "イチイ中毒"
+          },
+          {
+            "id": "tx_rodenticide",
+            "name": "Anticoagulant Rodenticide Toxicity",
+            "name_ja": "殺鼠剤中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 13,
+        "members": [
+          {
+            "id": "ms_chip",
+            "name": "Chip Fracture",
+            "name_ja": "チップフラクチャー"
+          },
+          {
+            "id": "ms_fracture",
+            "name": "Fracture",
+            "name_ja": "骨折"
+          },
+          {
+            "id": "ms_stress_fracture",
+            "name": "Stress Fracture",
+            "name_ja": "疲労骨折"
+          },
+          {
+            "id": "dn_fractured_tooth",
+            "name": "Fractured Tooth",
+            "name_ja": "歯牙破折"
+          },
+          {
+            "id": "dn_mandibular_fracture",
+            "name": "Mandibular Fracture",
+            "name_ja": "下顎骨折"
+          },
+          {
+            "id": "mc_fractured_rib",
+            "name": "Rib Fracture",
+            "name_ja": "肋骨骨折"
+          },
+          {
+            "id": "mc_vertebral_fracture",
+            "name": "Vertebral Fracture",
+            "name_ja": "脊椎骨折"
+          },
+          {
+            "id": "mc_pelvic_fracture",
+            "name": "Pelvic Fracture",
+            "name_ja": "骨盤骨折"
+          },
+          {
+            "id": "mc_long_bone_fracture",
+            "name": "Long Bone Fracture",
+            "name_ja": "長管骨骨折"
+          },
+          {
+            "id": "ms_radial_fracture",
+            "name": "Radial Fracture",
+            "name_ja": "橈骨骨折"
+          },
+          {
+            "id": "ms_tibial_fracture",
+            "name": "Tibial Fracture",
+            "name_ja": "脛骨骨折"
+          },
+          {
+            "id": "ms_humeral_fracture",
+            "name": "Humeral Fracture",
+            "name_ja": "上腕骨骨折"
+          },
+          {
+            "id": "dn_mandibular_fracture_dental",
+            "name": "Dental-Related Mandibular Fracture",
+            "name_ja": "歯科関連下顎骨折"
+          }
+        ]
+      },
+      {
+        "shared_stem": "foal",
+        "size": 12,
+        "members": [
+          {
+            "id": "fl_shaker_foal",
+            "name": "Shaker Foal Syndrome (Toxico-Infectious Botulism)",
+            "name_ja": "シェーカー子馬症候群（子馬腸管内毒素産生型ボツリヌス症）"
+          },
+          {
+            "id": "fl_fis",
+            "name": "Foal Immunodeficiency Syndrome",
+            "name_ja": "子馬免疫不全症候群"
+          },
+          {
+            "id": "fl_lavender",
+            "name": "Lavender Foal Syndrome",
+            "name_ja": "ラベンダー子馬症候群"
+          },
+          {
+            "id": "fl_sleepy_foal",
+            "name": "Sleepy Foal Disease",
+            "name_ja": "スリーピーフォール病(アクチノバチルス敗血症)"
+          },
+          {
+            "id": "fl_premature_foal",
+            "name": "Premature/Dysmature Foal",
+            "name_ja": "未熟子馬"
+          },
+          {
+            "id": "fl_foal_heat_diarrhea",
+            "name": "Foal Heat Diarrhea",
+            "name_ja": "発情下痢"
+          },
+          {
+            "id": "fl_rotavirus",
+            "name": "Foal Rotavirus Enteritis",
+            "name_ja": "子馬ロタウイルス腸炎"
+          },
+          {
+            "id": "fl_clostridial_enteritis",
+            "name": "Foal Clostridial Enteritis",
+            "name_ja": "子馬クロストリジウム腸炎"
+          },
+          {
+            "id": "fl_gastric_ulcer_foal",
+            "name": "Foal Gastric Ulcer Syndrome (FGUS)",
+            "name_ja": "子馬胃潰瘍症候群 (FGUS)"
+          },
+          {
+            "id": "fl_enterocolitis",
+            "name": "Foal Enterocolitis",
+            "name_ja": "子馬腸炎"
+          },
+          {
+            "id": "fl_septic_arthritis_foal",
+            "name": "Foal Septic Arthritis / Osteomyelitis",
+            "name_ja": "子馬化膿性関節炎"
+          },
+          {
+            "id": "fl_pneumonia_foal",
+            "name": "Foal Pneumonia",
+            "name_ja": "子馬肺炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enceph",
+        "size": 11,
+        "members": [
+          {
+            "id": "if_wne",
+            "name": "West Nile Encephalitis",
+            "name_ja": "ウエストナイル脳炎"
+          },
+          {
+            "id": "if_eee_wee",
+            "name": "Eastern/Western Equine Encephalomyelitis",
+            "name_ja": "東部/西部馬脳炎"
+          },
+          {
+            "id": "if_japanese_enc",
+            "name": "Japanese Encephalitis",
+            "name_ja": "日本脳炎"
+          },
+          {
+            "id": "if_eee",
+            "name": "Eastern Equine Encephalomyelitis",
+            "name_ja": "東部馬脳炎"
+          },
+          {
+            "id": "if_wee",
+            "name": "Western Equine Encephalomyelitis",
+            "name_ja": "西部馬脳炎"
+          },
+          {
+            "id": "if_vee",
+            "name": "Venezuelan Equine Encephalomyelitis",
+            "name_ja": "ベネズエラ馬脳炎"
+          },
+          {
+            "id": "nr_verminous_encephalitis",
+            "name": "Verminous Encephalitis",
+            "name_ja": "寄生虫性脳炎"
+          },
+          {
+            "id": "fl_hypoxic_ischemic_encephalopathy",
+            "name": "Hypoxic-Ischemic Encephalopathy (Dummy Foal)",
+            "name_ja": "低酸素性虚血性脳症"
+          },
+          {
+            "id": "if_equine_encephalosis",
+            "name": "Equine Encephalosis Virus",
+            "name_ja": "馬脳症ウイルス"
+          },
+          {
+            "id": "dg_hepatic_encephalopathy",
+            "name": "Hepatic Encephalopathy",
+            "name_ja": "肝性脳症"
+          },
+          {
+            "id": "nr_west_nile",
+            "name": "West Nile Virus Encephalitis",
+            "name_ja": "ウエストナイルウイルス脳炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 9,
+        "members": [
+          {
+            "id": "tx_phalaris",
+            "name": "Phalaris Toxicosis",
+            "name_ja": "ファラリス中毒"
+          },
+          {
+            "id": "tx_red_maple",
+            "name": "Red Maple Toxicosis",
+            "name_ja": "レッドメープル中毒"
+          },
+          {
+            "id": "tx_zinc_toxicosis",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "tx_avocado",
+            "name": "Avocado Toxicosis",
+            "name_ja": "アボカド中毒"
+          },
+          {
+            "id": "tx_pyrrolizidine_chronic",
+            "name": "Chronic Pyrrolizidine Alkaloid Toxicosis",
+            "name_ja": "ピロリジジンアルカロイド慢性中毒"
+          },
+          {
+            "id": "tx_fumonisin",
+            "name": "Fumonisin Toxicosis (ELEM)",
+            "name_ja": "フモニシン中毒"
+          },
+          {
+            "id": "tx_ionophore",
+            "name": "Ionophore Toxicosis (Monensin / Lasalocid)",
+            "name_ja": "イオノフォア中毒"
+          },
+          {
+            "id": "tx_organophosphate2",
+            "name": "Organophosphate Toxicosis",
+            "name_ja": "有機リン中毒"
+          },
+          {
+            "id": "tx_nsaid_overdose",
+            "name": "NSAID Toxicosis (Phenylbutazone / Flunixin Overdose)",
+            "name_ja": "NSAID過量投与中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "carcin",
+        "size": 8,
+        "members": [
+          {
+            "id": "on_scc",
+            "name": "Squamous Cell Carcinoma (Non-Ocular)",
+            "name_ja": "扁平上皮癌(非眼性)"
+          },
+          {
+            "id": "ey_squamous_cell_carcinoma_eye",
+            "name": "Ocular Squamous Cell Carcinoma",
+            "name_ja": "眼部扁平上皮癌"
+          },
+          {
+            "id": "on_squamous_cell_carcinoma",
+            "name": "Squamous Cell Carcinoma (Cutaneous)",
+            "name_ja": "扁平上皮癌(皮膚)"
+          },
+          {
+            "id": "on_gastric_scc",
+            "name": "Gastric Squamous Cell Carcinoma",
+            "name_ja": "胃扁平上皮癌"
+          },
+          {
+            "id": "on_ethmoid_carcinoma",
+            "name": "Ethmoid Carcinoma",
+            "name_ja": "篩骨癌"
+          },
+          {
+            "id": "sk_squamous_cell_ca_skin",
+            "name": "Cutaneous Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "ey_periorbital_scc",
+            "name": "Periorbital Squamous Cell Carcinoma",
+            "name_ja": "眼窩周囲扁平上皮癌"
+          },
+          {
+            "id": "ur_renal_cell_carcinoma",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cell",
+        "size": 8,
+        "members": [
+          {
+            "id": "on_scc",
+            "name": "Squamous Cell Carcinoma (Non-Ocular)",
+            "name_ja": "扁平上皮癌(非眼性)"
+          },
+          {
+            "id": "ey_squamous_cell_carcinoma_eye",
+            "name": "Ocular Squamous Cell Carcinoma",
+            "name_ja": "眼部扁平上皮癌"
+          },
+          {
+            "id": "on_squamous_cell_carcinoma",
+            "name": "Squamous Cell Carcinoma (Cutaneous)",
+            "name_ja": "扁平上皮癌(皮膚)"
+          },
+          {
+            "id": "on_gastric_scc",
+            "name": "Gastric Squamous Cell Carcinoma",
+            "name_ja": "胃扁平上皮癌"
+          },
+          {
+            "id": "sk_squamous_cell_ca_skin",
+            "name": "Cutaneous Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "sk_mast_cell_tumor",
+            "name": "Mast Cell Tumor",
+            "name_ja": "肥満細胞腫"
+          },
+          {
+            "id": "ey_periorbital_scc",
+            "name": "Periorbital Squamous Cell Carcinoma",
+            "name_ja": "眼窩周囲扁平上皮癌"
+          },
+          {
+            "id": "ur_renal_cell_carcinoma",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 8,
+        "members": [
+          {
+            "id": "mt_selenium_def",
+            "name": "Selenium Deficiency",
+            "name_ja": "セレン欠乏症"
+          },
+          {
+            "id": "fl_gbed",
+            "name": "Glycogen Branching Enzyme Deficiency",
+            "name_ja": "グリコーゲン分枝酵素欠損症"
+          },
+          {
+            "id": "fl_madd",
+            "name": "Multiple Acyl-CoA Dehydrogenase Deficiency",
+            "name_ja": "多種アシルCoA脱水素酵素欠損症"
+          },
+          {
+            "id": "mt_vitamin_e_deficiency",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症"
+          },
+          {
+            "id": "mt_vitamin_a_deficiency",
+            "name": "Vitamin A Deficiency",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "mt_iodine_deficiency",
+            "name": "Iodine Deficiency",
+            "name_ja": "ヨウ素欠乏症"
+          },
+          {
+            "id": "mt_iron_deficiency_anemia",
+            "name": "Iron Deficiency Anemia",
+            "name_ja": "鉄欠乏性貧血"
+          },
+          {
+            "id": "im_selective_iga_deficiency",
+            "name": "Selective IgA Deficiency",
+            "name_ja": "選択的IgA欠乏症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gastri",
+        "size": 8,
+        "members": [
+          {
+            "id": "dg_gastric_ulcer",
+            "name": "Gastric Ulcers (EGUS)",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "dg_gastric_ulcer_squamous",
+            "name": "Equine Squamous Gastric Disease (ESGD)",
+            "name_ja": "胃扁平上皮部潰瘍 (ESGD)"
+          },
+          {
+            "id": "dg_gastric_ulcer_glandular",
+            "name": "Equine Glandular Gastric Disease (EGGD)",
+            "name_ja": "胃腺部潰瘍 (EGGD)"
+          },
+          {
+            "id": "dg_gastric_rupture",
+            "name": "Gastric Rupture",
+            "name_ja": "胃破裂"
+          },
+          {
+            "id": "on_gastric_scc",
+            "name": "Gastric Squamous Cell Carcinoma",
+            "name_ja": "胃扁平上皮癌"
+          },
+          {
+            "id": "dg_gastric_impaction",
+            "name": "Persimmon (Phytobezoar) Gastric Impaction",
+            "name_ja": "柿渋胃閉塞(フィトベゾアール)"
+          },
+          {
+            "id": "dg_gastric_dilatation",
+            "name": "Acute Gastric Dilatation",
+            "name_ja": "急性胃拡張"
+          },
+          {
+            "id": "fl_gastric_ulcer_foal",
+            "name": "Foal Gastric Ulcer Syndrome (FGUS)",
+            "name_ja": "子馬胃潰瘍症候群 (FGUS)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "injury",
+        "size": 8,
+        "members": [
+          {
+            "id": "ms_ddft_injury",
+            "name": "Deep Digital Flexor Tendon Injury",
+            "name_ja": "深指屈腱損傷"
+          },
+          {
+            "id": "ms_sacroiliac_injury",
+            "name": "Sacroiliac Joint Injury",
+            "name_ja": "仙腸関節損傷"
+          },
+          {
+            "id": "hf_coronary_band_injury",
+            "name": "Coronary Band Injury",
+            "name_ja": "蹄冠損傷"
+          },
+          {
+            "id": "mc_burn_injury",
+            "name": "Burn Injury",
+            "name_ja": "熱傷"
+          },
+          {
+            "id": "mc_smoke_inhalation",
+            "name": "Smoke Inhalation Injury",
+            "name_ja": "煙吸入傷害"
+          },
+          {
+            "id": "mc_collateral_ligament_injury",
+            "name": "Collateral Ligament Injury",
+            "name_ja": "側副靱帯損傷"
+          },
+          {
+            "id": "ms_meniscal_injury",
+            "name": "Meniscal Injury",
+            "name_ja": "膝半月板損傷"
+          },
+          {
+            "id": "ms_cruciate_injury",
+            "name": "Cruciate Ligament Injury",
+            "name_ja": "膝十字靭帯損傷"
+          }
+        ]
+      },
+      {
+        "shared_stem": "osteoa",
+        "size": 8,
+        "members": [
+          {
+            "id": "ms_arthritis",
+            "name": "Osteoarthritis",
+            "name_ja": "関節炎(変形性)"
+          },
+          {
+            "id": "nr_tho",
+            "name": "Temporohyoid Osteoarthropathy",
+            "name_ja": "側頭舌骨骨症"
+          },
+          {
+            "id": "ms_carpal_oa",
+            "name": "Carpal Osteoarthritis",
+            "name_ja": "手根関節変形性関節症"
+          },
+          {
+            "id": "ms_stifle_oa",
+            "name": "Stifle Osteoarthritis",
+            "name_ja": "膝関節変形性関節症"
+          },
+          {
+            "id": "ms_pastern_oa",
+            "name": "Pastern Osteoarthritis",
+            "name_ja": "繋関節変形性関節症"
+          },
+          {
+            "id": "ms_tarsal_oa",
+            "name": "Tarsal Osteoarthritis (Bone Spavin)",
+            "name_ja": "飛節変形性関節症"
+          },
+          {
+            "id": "ms_shoulder_oa",
+            "name": "Shoulder Osteoarthritis",
+            "name_ja": "肩関節変形性関節症"
+          },
+          {
+            "id": "nr_cervical_facet_oa",
+            "name": "Cervical Facet Osteoarthritis",
+            "name_ja": "頚椎椎間関節症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ruptur",
+        "size": 8,
+        "members": [
+          {
+            "id": "rp_uterine_artery_rupture",
+            "name": "Postpartum Hemorrhage / Uterine Artery Rupture",
+            "name_ja": "産後出血・子宮動脈破裂"
+          },
+          {
+            "id": "cv_aortic_rupture",
+            "name": "Aortic Rupture",
+            "name_ja": "大動脈破裂"
+          },
+          {
+            "id": "dg_gastric_rupture",
+            "name": "Gastric Rupture",
+            "name_ja": "胃破裂"
+          },
+          {
+            "id": "cv_aortic_root_rupture",
+            "name": "Aortic Root Rupture",
+            "name_ja": "大動脈基部破裂"
+          },
+          {
+            "id": "rp_ruptured_prepubic_tendon",
+            "name": "Ruptured Prepubic Tendon",
+            "name_ja": "恥骨前腱断裂"
+          },
+          {
+            "id": "ur_bladder_rupture",
+            "name": "Bladder Rupture",
+            "name_ja": "膀胱破裂"
+          },
+          {
+            "id": "dg_cecal_rupture",
+            "name": "Cecal Rupture",
+            "name_ja": "盲腸破裂"
+          },
+          {
+            "id": "fl_ruptured_bladder_foal",
+            "name": "Ruptured Urinary Bladder (Foal)",
+            "name_ja": "子馬膀胱破裂"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dermat",
+        "size": 7,
+        "members": [
+          {
+            "id": "sk_rain_rot",
+            "name": "Rain Rot / Dermatophilosis",
+            "name_ja": "デルマトフィルス症"
+          },
+          {
+            "id": "sk_atopic",
+            "name": "Atopic Dermatitis",
+            "name_ja": "アトピー性皮膚炎"
+          },
+          {
+            "id": "sk_contact",
+            "name": "Contact Dermatitis",
+            "name_ja": "接触性皮膚炎"
+          },
+          {
+            "id": "sk_pastern_dermatitis",
+            "name": "Pastern Dermatitis (Scratches)",
+            "name_ja": "繋部皮膚炎"
+          },
+          {
+            "id": "sk_ventral_midline_dermatitis",
+            "name": "Ventral Midline Dermatitis",
+            "name_ja": "腹正中皮膚炎"
+          },
+          {
+            "id": "sk_dermatophytosis2",
+            "name": "Dermatophytosis (Ringworm)",
+            "name_ja": "皮膚糸状菌症(白癬)"
+          },
+          {
+            "id": "sk_dermatophilosis",
+            "name": "Dermatophilosis (Rain Scald)",
+            "name_ja": "レインスカルド(皮膚フィルス症)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "failur",
+        "size": 7,
+        "members": [
+          {
+            "id": "mt_renal_failure",
+            "name": "Renal Failure",
+            "name_ja": "腎不全"
+          },
+          {
+            "id": "cv_heart_failure",
+            "name": "Heart Failure",
+            "name_ja": "心不全"
+          },
+          {
+            "id": "rp_lactation_failure",
+            "name": "Lactation Failure",
+            "name_ja": "乳汁分泌不全"
+          },
+          {
+            "id": "dg_liver_failure",
+            "name": "Hepatic Failure",
+            "name_ja": "肝不全"
+          },
+          {
+            "id": "ur_acute_renal_failure",
+            "name": "Acute Renal Failure",
+            "name_ja": "急性腎不全"
+          },
+          {
+            "id": "ur_chronic_renal_failure",
+            "name": "Chronic Renal Failure",
+            "name_ja": "慢性腎不全"
+          },
+          {
+            "id": "fl_failure_passive_transfer_foal",
+            "name": "Failure of Passive Transfer",
+            "name_ja": "受動免疫移行不全(FPT)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "poison",
+        "size": 7,
+        "members": [
+          {
+            "id": "tx_lead",
+            "name": "Lead Poisoning",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "tx_monensin",
+            "name": "Monensin Poisoning",
+            "name_ja": "モネンシン中毒"
+          },
+          {
+            "id": "tx_nightshade",
+            "name": "Nightshade Poisoning",
+            "name_ja": "ナス科植物中毒"
+          },
+          {
+            "id": "tx_poison_hemlock",
+            "name": "Poison Hemlock Toxicity",
+            "name_ja": "ドクニンジン中毒"
+          },
+          {
+            "id": "tx_arsenic_poisoning",
+            "name": "Arsenic Poisoning",
+            "name_ja": "ヒ素中毒"
+          },
+          {
+            "id": "tx_mercury_poisoning",
+            "name": "Mercury Poisoning",
+            "name_ja": "水銀中毒"
+          },
+          {
+            "id": "tx_copper_poisoning",
+            "name": "Copper Poisoning",
+            "name_ja": "銅中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "squamo",
+        "size": 7,
+        "members": [
+          {
+            "id": "on_scc",
+            "name": "Squamous Cell Carcinoma (Non-Ocular)",
+            "name_ja": "扁平上皮癌(非眼性)"
+          },
+          {
+            "id": "dg_gastric_ulcer_squamous",
+            "name": "Equine Squamous Gastric Disease (ESGD)",
+            "name_ja": "胃扁平上皮部潰瘍 (ESGD)"
+          },
+          {
+            "id": "ey_squamous_cell_carcinoma_eye",
+            "name": "Ocular Squamous Cell Carcinoma",
+            "name_ja": "眼部扁平上皮癌"
+          },
+          {
+            "id": "on_squamous_cell_carcinoma",
+            "name": "Squamous Cell Carcinoma (Cutaneous)",
+            "name_ja": "扁平上皮癌(皮膚)"
+          },
+          {
+            "id": "on_gastric_scc",
+            "name": "Gastric Squamous Cell Carcinoma",
+            "name_ja": "胃扁平上皮癌"
+          },
+          {
+            "id": "sk_squamous_cell_ca_skin",
+            "name": "Cutaneous Squamous Cell Carcinoma",
+            "name_ja": "皮膚扁平上皮癌"
+          },
+          {
+            "id": "ey_periorbital_scc",
+            "name": "Periorbital Squamous Cell Carcinoma",
+            "name_ja": "眼窩周囲扁平上皮癌"
+          }
+        ]
+      },
+      {
+        "shared_stem": "desmit",
+        "size": 6,
+        "members": [
+          {
+            "id": "ms_proximal_susp",
+            "name": "Proximal Suspensory Desmitis",
+            "name_ja": "近位繋靭帯炎"
+          },
+          {
+            "id": "ms_susp_branch",
+            "name": "Suspensory Ligament Branch Desmitis",
+            "name_ja": "繋靭帯脚炎"
+          },
+          {
+            "id": "mc_desmitis_suspensory",
+            "name": "Suspensory Ligament Desmitis",
+            "name_ja": "繋靱帯炎"
+          },
+          {
+            "id": "ms_suspensory_desmitis_hind",
+            "name": "Hindlimb Suspensory Desmitis",
+            "name_ja": "後肢繋靭帯炎"
+          },
+          {
+            "id": "ms_inferior_check_desmitis",
+            "name": "Inferior Check Ligament Desmitis",
+            "name_ja": "下副手根靭帯炎"
+          },
+          {
+            "id": "ms_superior_check_desmitis",
+            "name": "Superior Check Ligament Desmitis",
+            "name_ja": "上副手根靭帯炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "impact",
+        "size": 6,
+        "members": [
+          {
+            "id": "dg_impaction",
+            "name": "Large Colon Impaction",
+            "name_ja": "結腸便秘疝"
+          },
+          {
+            "id": "dg_ileal_impaction",
+            "name": "Ileal Impaction",
+            "name_ja": "回腸閉塞"
+          },
+          {
+            "id": "dg_cecal_impaction",
+            "name": "Cecal Impaction",
+            "name_ja": "盲腸閉塞"
+          },
+          {
+            "id": "dg_gastric_impaction",
+            "name": "Persimmon (Phytobezoar) Gastric Impaction",
+            "name_ja": "柿渋胃閉塞(フィトベゾアール)"
+          },
+          {
+            "id": "dg_small_colon_impaction",
+            "name": "Small Colon Impaction",
+            "name_ja": "小結腸便秘疝"
+          },
+          {
+            "id": "fl_meconium_impaction_foal",
+            "name": "Meconium Impaction",
+            "name_ja": "胎便停滞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ligame",
+        "size": 6,
+        "members": [
+          {
+            "id": "ms_susp_branch",
+            "name": "Suspensory Ligament Branch Desmitis",
+            "name_ja": "繋靭帯脚炎"
+          },
+          {
+            "id": "mc_desmitis_suspensory",
+            "name": "Suspensory Ligament Desmitis",
+            "name_ja": "繋靱帯炎"
+          },
+          {
+            "id": "mc_collateral_ligament_injury",
+            "name": "Collateral Ligament Injury",
+            "name_ja": "側副靱帯損傷"
+          },
+          {
+            "id": "ms_inferior_check_desmitis",
+            "name": "Inferior Check Ligament Desmitis",
+            "name_ja": "下副手根靭帯炎"
+          },
+          {
+            "id": "ms_superior_check_desmitis",
+            "name": "Superior Check Ligament Desmitis",
+            "name_ja": "上副手根靭帯炎"
+          },
+          {
+            "id": "ms_cruciate_injury",
+            "name": "Cruciate Ligament Injury",
+            "name_ja": "膝十字靭帯損傷"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 6,
+        "members": [
+          {
+            "id": "if_rhodococcus",
+            "name": "Rhodococcus equi Pneumonia",
+            "name_ja": "ロドコッカス肺炎(子馬)"
+          },
+          {
+            "id": "rp_pneumonia_bacterial",
+            "name": "Bacterial Pneumonia",
+            "name_ja": "細菌性肺炎"
+          },
+          {
+            "id": "rp_fungal_pneumonia",
+            "name": "Fungal Pneumonia",
+            "name_ja": "真菌性肺炎"
+          },
+          {
+            "id": "rp_pneumothorax",
+            "name": "Pneumothorax",
+            "name_ja": "気胸"
+          },
+          {
+            "id": "rp_aspiration_pneumonia",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎"
+          },
+          {
+            "id": "fl_pneumonia_foal",
+            "name": "Foal Pneumonia",
+            "name_ja": "子馬肺炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 6,
+        "members": [
+          {
+            "id": "mt_renal_failure",
+            "name": "Renal Failure",
+            "name_ja": "腎不全"
+          },
+          {
+            "id": "ur_acute_renal_failure",
+            "name": "Acute Renal Failure",
+            "name_ja": "急性腎不全"
+          },
+          {
+            "id": "ur_chronic_renal_failure",
+            "name": "Chronic Renal Failure",
+            "name_ja": "慢性腎不全"
+          },
+          {
+            "id": "ur_renal_tubular_acidosis",
+            "name": "Renal Tubular Acidosis",
+            "name_ja": "腎尿細管性アシドーシス"
+          },
+          {
+            "id": "ur_renal_cell_carcinoma",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
+          },
+          {
+            "id": "ur_renal_dysplasia",
+            "name": "Renal Dysplasia",
+            "name_ja": "腎異形成"
+          }
+        ]
+      },
+      {
+        "shared_stem": "viru",
+        "size": 6,
+        "members": [
+          {
+            "id": "if_getah",
+            "name": "Getah Virus",
+            "name_ja": "ゲタウイルス感染症"
+          },
+          {
+            "id": "if_hendra",
+            "name": "Hendra Virus",
+            "name_ja": "ヘンドラウイルス感染症"
+          },
+          {
+            "id": "if_wnv",
+            "name": "West Nile Virus",
+            "name_ja": "ウエストナイル熱"
+          },
+          {
+            "id": "if_equine_encephalosis",
+            "name": "Equine Encephalosis Virus",
+            "name_ja": "馬脳症ウイルス"
+          },
+          {
+            "id": "if_nipah_virus",
+            "name": "Nipah Virus",
+            "name_ja": "ニパウイルス感染症"
+          },
+          {
+            "id": "nr_west_nile",
+            "name": "West Nile Virus Encephalitis",
+            "name_ja": "ウエストナイルウイルス脳炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "absces",
+        "size": 5,
+        "members": [
+          {
+            "id": "hf_abscess",
+            "name": "Hoof Abscess",
+            "name_ja": "蹄膿瘍"
+          },
+          {
+            "id": "dn_periapical_abscess",
+            "name": "Periapical Abscess",
+            "name_ja": "歯根膿瘍"
+          },
+          {
+            "id": "ey_stromal_abscess",
+            "name": "Stromal Abscess",
+            "name_ja": "角膜実質膿瘍"
+          },
+          {
+            "id": "hf_subsolar_abscess",
+            "name": "Subsolar Abscess",
+            "name_ja": "蹄底膿瘍"
+          },
+          {
+            "id": "rp_lung_abscess",
+            "name": "Lung Abscess",
+            "name_ja": "肺膿瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cervic",
+        "size": 5,
+        "members": [
+          {
+            "id": "nr_cervical_vertebral",
+            "name": "Cervical Vertebral Stenotic Myelopathy",
+            "name_ja": "頸椎不安定症(ウォブラー)—拡張"
+          },
+          {
+            "id": "nr_cervical_vertebral_malformation",
+            "name": "Cervical Vertebral Malformation",
+            "name_ja": "頸椎奇形"
+          },
+          {
+            "id": "rp_cervical_laceration",
+            "name": "Cervical Laceration",
+            "name_ja": "頸管裂傷"
+          },
+          {
+            "id": "nr_wobbler_type2",
+            "name": "Cervical Vertebral Stenotic Myelopathy Type II",
+            "name_ja": "頚椎椎間板疾患(2型ウォブラー)"
+          },
+          {
+            "id": "nr_cervical_facet_oa",
+            "name": "Cervical Facet Osteoarthritis",
+            "name_ja": "頚椎椎間関節症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "colon",
+        "size": 5,
+        "members": [
+          {
+            "id": "dg_displacement",
+            "name": "Large Colon Displacement",
+            "name_ja": "結腸変位"
+          },
+          {
+            "id": "dg_impaction",
+            "name": "Large Colon Impaction",
+            "name_ja": "結腸便秘疝"
+          },
+          {
+            "id": "dg_large_colon_volvulus",
+            "name": "Large Colon Volvulus",
+            "name_ja": "大結腸捻転"
+          },
+          {
+            "id": "dg_small_colon_impaction",
+            "name": "Small Colon Impaction",
+            "name_ja": "小結腸便秘疝"
+          },
+          {
+            "id": "dg_colonic_torsion",
+            "name": "Large Colon Torsion (>360°)",
+            "name_ja": "結腸捻転"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemorr",
+        "size": 5,
+        "members": [
+          {
+            "id": "rp_uterine_artery_rupture",
+            "name": "Postpartum Hemorrhage / Uterine Artery Rupture",
+            "name_ja": "産後出血・子宮動脈破裂"
+          },
+          {
+            "id": "im_purpura",
+            "name": "Purpura Hemorrhagica",
+            "name_ja": "紫斑病"
+          },
+          {
+            "id": "rp_eiah",
+            "name": "Exercise-Induced Pulmonary Hemorrhage",
+            "name_ja": "運動誘発性肺出血"
+          },
+          {
+            "id": "dg_gastric_squamous_ulcer",
+            "name": "Severe / Hemorrhagic ESGD (Grade 3-4)",
+            "name_ja": "出血性・重度ESGD(グレード3-4)"
+          },
+          {
+            "id": "rp_ovarian_hemorrhage",
+            "name": "Ovarian Hemorrhage",
+            "name_ja": "卵巣出血"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 5,
+        "members": [
+          {
+            "id": "dg_liver_disease",
+            "name": "Hepatic Disease",
+            "name_ja": "肝疾患"
+          },
+          {
+            "id": "if_serum_hepatitis",
+            "name": "Equine Serum Hepatitis",
+            "name_ja": "馬血清肝炎(セラー病)"
+          },
+          {
+            "id": "dg_liver_failure",
+            "name": "Hepatic Failure",
+            "name_ja": "肝不全"
+          },
+          {
+            "id": "dg_hepatic_lipidosis",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝脂肪症"
+          },
+          {
+            "id": "dg_hepatic_encephalopathy",
+            "name": "Hepatic Encephalopathy",
+            "name_ja": "肝性脳症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "immune",
+        "size": 5,
+        "members": [
+          {
+            "id": "ey_immune_keratitis",
+            "name": "Immune-Mediated Keratitis",
+            "name_ja": "免疫介在性角膜炎"
+          },
+          {
+            "id": "im_imm_myositis",
+            "name": "Immune-Mediated Myositis",
+            "name_ja": "免疫介在性筋炎"
+          },
+          {
+            "id": "im_immune_mediated_hemolytic_anemia",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血"
+          },
+          {
+            "id": "im_immune_mediated_thrombocytopenia2",
+            "name": "Immune-Mediated Thrombocytopenia",
+            "name_ja": "免疫介在性血小板減少症"
+          },
+          {
+            "id": "im_vasculitis",
+            "name": "Immune-Mediated Vasculitis",
+            "name_ja": "免疫介在性血管炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mediat",
+        "size": 5,
+        "members": [
+          {
+            "id": "ey_immune_keratitis",
+            "name": "Immune-Mediated Keratitis",
+            "name_ja": "免疫介在性角膜炎"
+          },
+          {
+            "id": "im_imm_myositis",
+            "name": "Immune-Mediated Myositis",
+            "name_ja": "免疫介在性筋炎"
+          },
+          {
+            "id": "im_immune_mediated_hemolytic_anemia",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血"
+          },
+          {
+            "id": "im_immune_mediated_thrombocytopenia2",
+            "name": "Immune-Mediated Thrombocytopenia",
+            "name_ja": "免疫介在性血小板減少症"
+          },
+          {
+            "id": "im_vasculitis",
+            "name": "Immune-Mediated Vasculitis",
+            "name_ja": "免疫介在性血管炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "myopat",
+        "size": 5,
+        "members": [
+          {
+            "id": "ms_fibrotic_myopathy",
+            "name": "Fibrotic Myopathy",
+            "name_ja": "線維性筋症"
+          },
+          {
+            "id": "mt_pssm2",
+            "name": "Polysaccharide Storage Myopathy Type 2",
+            "name_ja": "PSSM2型"
+          },
+          {
+            "id": "mt_mfm",
+            "name": "Myofibrillar Myopathy",
+            "name_ja": "筋線維性ミオパチー"
+          },
+          {
+            "id": "mt_polysaccharide_storage_myopathy",
+            "name": "Polysaccharide Storage Myopathy (PSSM)",
+            "name_ja": "多糖体蓄積性ミオパチー(PSSM)"
+          },
+          {
+            "id": "metabolic_atypical_myopathy",
+            "name": "Atypical Myopathy (Sycamore Maple Seedling Toxicosis)",
+            "name_ja": "非定型的ミオパチー（カエデ種子中毒）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pulmon",
+        "size": 5,
+        "members": [
+          {
+            "id": "rp_empf",
+            "name": "Equine Multinodular Pulmonary Fibrosis",
+            "name_ja": "馬多結節性肺線維症"
+          },
+          {
+            "id": "rp_eiah",
+            "name": "Exercise-Induced Pulmonary Hemorrhage",
+            "name_ja": "運動誘発性肺出血"
+          },
+          {
+            "id": "rp_summer_pasture_asthma",
+            "name": "Summer Pasture-Associated Obstructive Pulmonary Disease",
+            "name_ja": "夏季牧草喘息"
+          },
+          {
+            "id": "cv_pulmonary_hypertension",
+            "name": "Pulmonary Hypertension",
+            "name_ja": "肺高血圧症"
+          },
+          {
+            "id": "cv_cor_pulmonale",
+            "name": "Cor Pulmonale",
+            "name_ja": "肺性心"
+          }
+        ]
+      },
+      {
+        "shared_stem": "regurg",
+        "size": 5,
+        "members": [
+          {
+            "id": "cv_mitral",
+            "name": "Mitral Regurgitation",
+            "name_ja": "僧帽弁閉鎖不全症"
+          },
+          {
+            "id": "cv_tricuspid",
+            "name": "Tricuspid Regurgitation",
+            "name_ja": "三尖弁閉鎖不全症"
+          },
+          {
+            "id": "cv_mitral_regurgitation",
+            "name": "Mitral Valve Regurgitation",
+            "name_ja": "僧帽弁逆流"
+          },
+          {
+            "id": "cv_aortic_regurgitation",
+            "name": "Aortic Valve Regurgitation",
+            "name_ja": "大動脈弁逆流"
+          },
+          {
+            "id": "cv_tricuspid_regurgitation",
+            "name": "Tricuspid Valve Regurgitation",
+            "name_ja": "三尖弁逆流"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ulcer",
+        "size": 5,
+        "members": [
+          {
+            "id": "dg_gastric_ulcer",
+            "name": "Gastric Ulcers (EGUS)",
+            "name_ja": "胃潰瘍"
+          },
+          {
+            "id": "ey_corneal_ulcer",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍"
+          },
+          {
+            "id": "ey_corneal_ulcer_superficial",
+            "name": "Superficial Corneal Ulcer",
+            "name_ja": "表在性角膜潰瘍"
+          },
+          {
+            "id": "ey_corneal_ulcer_deep",
+            "name": "Deep / Melting Corneal Ulcer",
+            "name_ja": "深部角膜潰瘍(溶解性)"
+          },
+          {
+            "id": "fl_gastric_ulcer_foal",
+            "name": "Foal Gastric Ulcer Syndrome (FGUS)",
+            "name_ja": "子馬胃潰瘍症候群 (FGUS)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "valve",
+        "size": 5,
+        "members": [
+          {
+            "id": "cv_mitral_regurgitation",
+            "name": "Mitral Valve Regurgitation",
+            "name_ja": "僧帽弁逆流"
+          },
+          {
+            "id": "cv_aortic_regurgitation",
+            "name": "Aortic Valve Regurgitation",
+            "name_ja": "大動脈弁逆流"
+          },
+          {
+            "id": "cv_tricuspid_regurgitation",
+            "name": "Tricuspid Valve Regurgitation",
+            "name_ja": "三尖弁逆流"
+          },
+          {
+            "id": "cv_aortic_valve_disease",
+            "name": "Aortic Valve Disease",
+            "name_ja": "大動脈弁疾患"
+          },
+          {
+            "id": "cv_mitral_valve_prolapse",
+            "name": "Mitral Valve Prolapse",
+            "name_ja": "僧帽弁逸脱症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anemia",
+        "size": 4,
+        "members": [
+          {
+            "id": "if_eia",
+            "name": "Equine Infectious Anemia",
+            "name_ja": "馬伝染性貧血 (EIA)"
+          },
+          {
+            "id": "mt_iron_deficiency_anemia",
+            "name": "Iron Deficiency Anemia",
+            "name_ja": "鉄欠乏性貧血"
+          },
+          {
+            "id": "im_immune_mediated_hemolytic_anemia",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血"
+          },
+          {
+            "id": "im_autoimmune_hemolytic_anemia",
+            "name": "Autoimmune Hemolytic Anemia",
+            "name_ja": "自己免疫性溶血性貧血"
+          }
+        ]
+      },
+      {
+        "shared_stem": "aortic",
+        "size": 4,
+        "members": [
+          {
+            "id": "cv_aortic_rupture",
+            "name": "Aortic Rupture",
+            "name_ja": "大動脈破裂"
+          },
+          {
+            "id": "cv_aortic_regurgitation",
+            "name": "Aortic Valve Regurgitation",
+            "name_ja": "大動脈弁逆流"
+          },
+          {
+            "id": "cv_aortic_root_rupture",
+            "name": "Aortic Root Rupture",
+            "name_ja": "大動脈基部破裂"
+          },
+          {
+            "id": "cv_aortic_valve_disease",
+            "name": "Aortic Valve Disease",
+            "name_ja": "大動脈弁疾患"
+          }
+        ]
+      },
+      {
+        "shared_stem": "coliti",
+        "size": 4,
+        "members": [
+          {
+            "id": "dg_colitis",
+            "name": "Colitis",
+            "name_ja": "大腸炎"
+          },
+          {
+            "id": "dg_right_dorsal_colitis",
+            "name": "Right Dorsal Colitis (RDC)",
+            "name_ja": "右背側結腸炎"
+          },
+          {
+            "id": "dg_colitis_x",
+            "name": "Colitis-X (Peracute Idiopathic Colitis)",
+            "name_ja": "大腸炎X (原因不明劇症性大腸炎)"
+          },
+          {
+            "id": "dg_clostridial_colitis",
+            "name": "Clostridial Colitis",
+            "name_ja": "クロストリジウム性大腸炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defect",
+        "size": 4,
+        "members": [
+          {
+            "id": "cv_vsd",
+            "name": "Ventricular Septal Defect",
+            "name_ja": "心室中隔欠損 (VSD)"
+          },
+          {
+            "id": "cv_congenital",
+            "name": "Congenital Heart Defects",
+            "name_ja": "先天性心疾患"
+          },
+          {
+            "id": "rp_fourth_branchial_arch",
+            "name": "Fourth Branchial Arch Defect",
+            "name_ja": "第四鰓弓欠損"
+          },
+          {
+            "id": "cv_asd",
+            "name": "Atrial Septal Defect",
+            "name_ja": "心房中隔欠損"
+          }
+        ]
+      },
+      {
+        "shared_stem": "enteri",
+        "size": 4,
+        "members": [
+          {
+            "id": "dg_anterior_enteritis",
+            "name": "Anterior Enteritis (Proximal Enteritis)",
+            "name_ja": "前方腸炎"
+          },
+          {
+            "id": "fl_rotavirus",
+            "name": "Foal Rotavirus Enteritis",
+            "name_ja": "子馬ロタウイルス腸炎"
+          },
+          {
+            "id": "fl_clostridial_enteritis",
+            "name": "Foal Clostridial Enteritis",
+            "name_ja": "子馬クロストリジウム腸炎"
+          },
+          {
+            "id": "dg_anterior_enteritis_severe",
+            "name": "Severe Proximal Enteritis / Duodenitis",
+            "name_ja": "重度前方腸炎(デュオデニティス)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "entrap",
+        "size": 4,
+        "members": [
+          {
+            "id": "rp_epiglottal",
+            "name": "Epiglottal Entrapment",
+            "name_ja": "喉頭蓋嵌頓"
+          },
+          {
+            "id": "dg_epiploic_foramen_entrapment",
+            "name": "Epiploic Foramen Entrapment",
+            "name_ja": "大網孔嵌頓"
+          },
+          {
+            "id": "rp_epiglottic_entrapment",
+            "name": "Epiglottic Entrapment",
+            "name_ja": "喉頭蓋陥入"
+          },
+          {
+            "id": "dg_displacement_nephrosplenic",
+            "name": "Nephrosplenic Entrapment",
+            "name_ja": "腎脾間膜変位"
+          }
+        ]
+      },
+      {
+        "shared_stem": "guttur",
+        "size": 4,
+        "members": [
+          {
+            "id": "rp_guttural_pouch",
+            "name": "Guttural Pouch Disease",
+            "name_ja": "喉嚢疾患(喉嚢鼓脹・喉嚢真菌症)"
+          },
+          {
+            "id": "rp_guttural_pouch_empyema",
+            "name": "Guttural Pouch Empyema",
+            "name_ja": "喉嚢蓄膿症"
+          },
+          {
+            "id": "rp_guttural_pouch_mycosis",
+            "name": "Guttural Pouch Mycosis",
+            "name_ja": "喉嚢真菌症"
+          },
+          {
+            "id": "rp_guttural_pouch_tympany",
+            "name": "Guttural Pouch Tympany",
+            "name_ja": "喉嚢鼓脹"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hernia",
+        "size": 4,
+        "members": [
+          {
+            "id": "mc_hernia",
+            "name": "Hernia",
+            "name_ja": "ヘルニア"
+          },
+          {
+            "id": "dg_inguinal_hernia",
+            "name": "Inguinal Hernia",
+            "name_ja": "鼠径ヘルニア"
+          },
+          {
+            "id": "rp_inguinal_hernia_stallion",
+            "name": "Inguinal Hernia (Stallion)",
+            "name_ja": "種馬鼠径ヘルニア"
+          },
+          {
+            "id": "fl_hernia_umbilical",
+            "name": "Umbilical Hernia",
+            "name_ja": "臍ヘルニア"
+          }
+        ]
+      },
+      {
+        "shared_stem": "joint",
+        "size": 4,
+        "members": [
+          {
+            "id": "ms_sacroiliac",
+            "name": "Sacroiliac Joint Disease",
+            "name_ja": "仙腸関節疾患"
+          },
+          {
+            "id": "ms_tmj",
+            "name": "Temporomandibular Joint Disease",
+            "name_ja": "顎関節疾患"
+          },
+          {
+            "id": "ms_sacroiliac_injury",
+            "name": "Sacroiliac Joint Injury",
+            "name_ja": "仙腸関節損傷"
+          },
+          {
+            "id": "hf_coffin_joint_disease",
+            "name": "Coffin Joint Disease",
+            "name_ja": "蹄関節疾患"
+          }
+        ]
+      },
+      {
+        "shared_stem": "kerato",
+        "size": 4,
+        "members": [
+          {
+            "id": "hf_keratoma",
+            "name": "Keratoma",
+            "name_ja": "角化腫(ケラトーマ)"
+          },
+          {
+            "id": "ey_keratomycosis",
+            "name": "Keratomycosis",
+            "name_ja": "角膜真菌症"
+          },
+          {
+            "id": "sk_cannon_keratosis",
+            "name": "Cannon Keratosis",
+            "name_ja": "前脛骨角化症"
+          },
+          {
+            "id": "sk_linear_keratosis",
+            "name": "Linear Keratosis",
+            "name_ja": "線状角化症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lacera",
+        "size": 4,
+        "members": [
+          {
+            "id": "rp_cervical_laceration",
+            "name": "Cervical Laceration",
+            "name_ja": "頸管裂傷"
+          },
+          {
+            "id": "rp_perineal_laceration",
+            "name": "Perineal Laceration",
+            "name_ja": "会陰裂傷"
+          },
+          {
+            "id": "hf_heel_bulb_laceration",
+            "name": "Heel Bulb Laceration",
+            "name_ja": "蹄球裂傷"
+          },
+          {
+            "id": "ey_eyelid_laceration",
+            "name": "Eyelid Laceration",
+            "name_ja": "眼瞼裂傷"
+          }
+        ]
+      },
+      {
+        "shared_stem": "large",
+        "size": 4,
+        "members": [
+          {
+            "id": "dg_displacement",
+            "name": "Large Colon Displacement",
+            "name_ja": "結腸変位"
+          },
+          {
+            "id": "dg_impaction",
+            "name": "Large Colon Impaction",
+            "name_ja": "結腸便秘疝"
+          },
+          {
+            "id": "dg_large_colon_volvulus",
+            "name": "Large Colon Volvulus",
+            "name_ja": "大結腸捻転"
+          },
+          {
+            "id": "dg_colonic_torsion",
+            "name": "Large Colon Torsion (>360°)",
+            "name_ja": "結腸捻転"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nephro",
+        "size": 4,
+        "members": [
+          {
+            "id": "ur_nephrolithiasis",
+            "name": "Nephrolithiasis",
+            "name_ja": "腎結石"
+          },
+          {
+            "id": "dg_displacement_nephrosplenic",
+            "name": "Nephrosplenic Entrapment",
+            "name_ja": "腎脾間膜変位"
+          },
+          {
+            "id": "tx_aminoglycoside_nephrotoxicity",
+            "name": "Aminoglycoside Nephrotoxicity",
+            "name_ja": "アミノグリコシド腎毒性"
+          },
+          {
+            "id": "ur_toxic_nephrosis",
+            "name": "Toxic Nephrosis",
+            "name_ja": "中毒性腎症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "obstru",
+        "size": 4,
+        "members": [
+          {
+            "id": "dg_choke",
+            "name": "Esophageal Obstruction (Choke)",
+            "name_ja": "食道閉塞(チョーク)"
+          },
+          {
+            "id": "rp_summer_pasture_asthma",
+            "name": "Summer Pasture-Associated Obstructive Pulmonary Disease",
+            "name_ja": "夏季牧草喘息"
+          },
+          {
+            "id": "rp_heaves",
+            "name": "Recurrent Airway Obstruction (Heaves)",
+            "name_ja": "反復性気道閉塞(喘鳴症)"
+          },
+          {
+            "id": "ey_blocked_nasolacrimal",
+            "name": "Nasolacrimal Duct Obstruction",
+            "name_ja": "鼻涙管閉塞"
+          }
+        ]
+      },
+      {
+        "shared_stem": "paraly",
+        "size": 4,
+        "members": [
+          {
+            "id": "nr_suprascapular_nerve",
+            "name": "Suprascapular Nerve Paralysis (Sweeney)",
+            "name_ja": "肩甲上神経麻痺(スウィーニー)"
+          },
+          {
+            "id": "nr_radial_nerve_paralysis",
+            "name": "Radial Nerve Paralysis",
+            "name_ja": "橈骨神経麻痺"
+          },
+          {
+            "id": "nr_peroneal_nerve_paralysis",
+            "name": "Peroneal Nerve Paralysis",
+            "name_ja": "腓骨神経麻痺"
+          },
+          {
+            "id": "mt_hyperkalemic_periodic_paralysis",
+            "name": "Hyperkalemic Periodic Paralysis (HYPP)",
+            "name_ja": "高カリウム性周期性麻痺(HYPP)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pouch",
+        "size": 4,
+        "members": [
+          {
+            "id": "rp_guttural_pouch",
+            "name": "Guttural Pouch Disease",
+            "name_ja": "喉嚢疾患(喉嚢鼓脹・喉嚢真菌症)"
+          },
+          {
+            "id": "rp_guttural_pouch_empyema",
+            "name": "Guttural Pouch Empyema",
+            "name_ja": "喉嚢蓄膿症"
+          },
+          {
+            "id": "rp_guttural_pouch_mycosis",
+            "name": "Guttural Pouch Mycosis",
+            "name_ja": "喉嚢真菌症"
+          },
+          {
+            "id": "rp_guttural_pouch_tympany",
+            "name": "Guttural Pouch Tympany",
+            "name_ja": "喉嚢鼓脹"
+          }
+        ]
+      },
+      {
+        "shared_stem": "premat",
+        "size": 4,
+        "members": [
+          {
+            "id": "rp_red_bag",
+            "name": "Premature Placental Separation (Red Bag Delivery)",
+            "name_ja": "胎盤早期剥離（レッドバッグ分娩）"
+          },
+          {
+            "id": "fl_premature_foal",
+            "name": "Premature/Dysmature Foal",
+            "name_ja": "未熟子馬"
+          },
+          {
+            "id": "cv_premature_beats",
+            "name": "Premature Beats (APCs/VPCs)",
+            "name_ja": "期外収縮"
+          },
+          {
+            "id": "fl_prematurity",
+            "name": "Prematurity / Dysmaturity",
+            "name_ja": "未熟児"
+          }
+        ]
+      },
+      {
+        "shared_stem": "strang",
+        "size": 4,
+        "members": [
+          {
+            "id": "rp_strangles",
+            "name": "Strangles",
+            "name_ja": "腺疫"
+          },
+          {
+            "id": "dg_small_intestinal_strangulation",
+            "name": "Small Intestinal Strangulation",
+            "name_ja": "小腸絞扼"
+          },
+          {
+            "id": "dg_mesenteric_lipoma",
+            "name": "Pedunculated Lipoma Strangulation",
+            "name_ja": "腸間膜脂肪腫による絞扼"
+          },
+          {
+            "id": "if_bastard_strangles",
+            "name": "Bastard Strangles (Metastatic Strangles)",
+            "name_ja": "内臓型腺疫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "suspen",
+        "size": 4,
+        "members": [
+          {
+            "id": "ms_proximal_susp",
+            "name": "Proximal Suspensory Desmitis",
+            "name_ja": "近位繋靭帯炎"
+          },
+          {
+            "id": "ms_susp_branch",
+            "name": "Suspensory Ligament Branch Desmitis",
+            "name_ja": "繋靭帯脚炎"
+          },
+          {
+            "id": "mc_desmitis_suspensory",
+            "name": "Suspensory Ligament Desmitis",
+            "name_ja": "繋靱帯炎"
+          },
+          {
+            "id": "ms_suspensory_desmitis_hind",
+            "name": "Hindlimb Suspensory Desmitis",
+            "name_ja": "後肢繋靭帯炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "thromb",
+        "size": 4,
+        "members": [
+          {
+            "id": "cv_jugular_thrombophlebitis",
+            "name": "Jugular Thrombophlebitis",
+            "name_ja": "頸静脈血栓性静脈炎"
+          },
+          {
+            "id": "cv_thrombophlebitis",
+            "name": "Thrombophlebitis",
+            "name_ja": "静脈血栓症"
+          },
+          {
+            "id": "cv_aortic_iliac_thrombosis",
+            "name": "Aortoiliac Thrombosis",
+            "name_ja": "大動脈腸骨動脈血栓症"
+          },
+          {
+            "id": "im_immune_mediated_thrombocytopenia2",
+            "name": "Immune-Mediated Thrombocytopenia",
+            "name_ja": "免疫介在性血小板減少症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tooth",
+        "size": 4,
+        "members": [
+          {
+            "id": "dn_fractured_tooth",
+            "name": "Fractured Tooth",
+            "name_ja": "歯牙破折"
+          },
+          {
+            "id": "dn_equine_odontoclastic",
+            "name": "Equine Odontoclastic Tooth Resorption and Hypercementosis (EOTRH)",
+            "name_ja": "馬歯破骨細胞性吸収・セメント質過形成(EOTRH)"
+          },
+          {
+            "id": "dn_displaced_tooth",
+            "name": "Displaced / Malerupted Tooth",
+            "name_ja": "歯の変位"
+          },
+          {
+            "id": "dn_supernumerary",
+            "name": "Supernumerary Tooth",
+            "name_ja": "過剰歯"
+          }
+        ]
+      },
+      {
+        "shared_stem": "verteb",
+        "size": 4,
+        "members": [
+          {
+            "id": "nr_cervical_vertebral",
+            "name": "Cervical Vertebral Stenotic Myelopathy",
+            "name_ja": "頸椎不安定症(ウォブラー)—拡張"
+          },
+          {
+            "id": "nr_cervical_vertebral_malformation",
+            "name": "Cervical Vertebral Malformation",
+            "name_ja": "頸椎奇形"
+          },
+          {
+            "id": "mc_vertebral_fracture",
+            "name": "Vertebral Fracture",
+            "name_ja": "脊椎骨折"
+          },
+          {
+            "id": "nr_wobbler_type2",
+            "name": "Cervical Vertebral Stenotic Myelopathy Type II",
+            "name_ja": "頚椎椎間板疾患(2型ウォブラー)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "anapla",
+        "size": 3,
+        "members": [
+          {
+            "id": "if_anaplasmosis",
+            "name": "Anaplasmosis",
+            "name_ja": "アナプラズマ症"
+          },
+          {
+            "id": "if_equine_granulocytic_anaplasmosis",
+            "name": "Equine Granulocytic Anaplasmosis",
+            "name_ja": "馬顆粒球アナプラズマ症"
+          },
+          {
+            "id": "if_anaplasmosis2",
+            "name": "Equine Anaplasmosis (Anaplasma phagocytophilum)",
+            "name_ja": "馬アナプラズマ症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bite",
+        "size": 3,
+        "members": [
+          {
+            "id": "mc_snake_bite",
+            "name": "Snake Bite",
+            "name_ja": "蛇咬傷"
+          },
+          {
+            "id": "mc_spider_bite",
+            "name": "Spider Bite",
+            "name_ja": "蜘蛛咬傷"
+          },
+          {
+            "id": "mc_insect_hyper",
+            "name": "Insect Bite Hypersensitivity",
+            "name_ja": "虫刺過敏症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bladde",
+        "size": 3,
+        "members": [
+          {
+            "id": "ur_bladder_rupture",
+            "name": "Bladder Rupture",
+            "name_ja": "膀胱破裂"
+          },
+          {
+            "id": "fl_ruptured_bladder_foal",
+            "name": "Ruptured Urinary Bladder (Foal)",
+            "name_ja": "子馬膀胱破裂"
+          },
+          {
+            "id": "ur_bladder_neoplasia2",
+            "name": "Bladder Neoplasia",
+            "name_ja": "膀胱腫瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "bone",
+        "size": 3,
+        "members": [
+          {
+            "id": "ms_bone_spavin",
+            "name": "Bone Spavin",
+            "name_ja": "ボーンスパビン(飛節内腫)"
+          },
+          {
+            "id": "ms_subchondral_cyst",
+            "name": "Subchondral Bone Cyst",
+            "name_ja": "軟骨下骨嚢胞"
+          },
+          {
+            "id": "mc_long_bone_fracture",
+            "name": "Long Bone Fracture",
+            "name_ja": "長管骨骨折"
+          }
+        ]
+      },
+      {
+        "shared_stem": "branch",
+        "size": 3,
+        "members": [
+          {
+            "id": "ms_susp_branch",
+            "name": "Suspensory Ligament Branch Desmitis",
+            "name_ja": "繋靭帯脚炎"
+          },
+          {
+            "id": "fl_gbed",
+            "name": "Glycogen Branching Enzyme Deficiency",
+            "name_ja": "グリコーゲン分枝酵素欠損症"
+          },
+          {
+            "id": "rp_fourth_branchial_arch",
+            "name": "Fourth Branchial Arch Defect",
+            "name_ja": "第四鰓弓欠損"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cecal",
+        "size": 3,
+        "members": [
+          {
+            "id": "dg_cecal_impaction",
+            "name": "Cecal Impaction",
+            "name_ja": "盲腸閉塞"
+          },
+          {
+            "id": "dg_cecal_tympany",
+            "name": "Cecal Tympany",
+            "name_ja": "盲腸鼓脹"
+          },
+          {
+            "id": "dg_cecal_rupture",
+            "name": "Cecal Rupture",
+            "name_ja": "盲腸破裂"
+          }
+        ]
+      },
+      {
+        "shared_stem": "clostr",
+        "size": 3,
+        "members": [
+          {
+            "id": "if_clostridiosis",
+            "name": "Clostridiosis",
+            "name_ja": "クロストリジウム症"
+          },
+          {
+            "id": "fl_clostridial_enteritis",
+            "name": "Foal Clostridial Enteritis",
+            "name_ja": "子馬クロストリジウム腸炎"
+          },
+          {
+            "id": "dg_clostridial_colitis",
+            "name": "Clostridial Colitis",
+            "name_ja": "クロストリジウム性大腸炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cornea",
+        "size": 3,
+        "members": [
+          {
+            "id": "ey_corneal_ulcer",
+            "name": "Corneal Ulcer",
+            "name_ja": "角膜潰瘍"
+          },
+          {
+            "id": "ey_corneal_ulcer_superficial",
+            "name": "Superficial Corneal Ulcer",
+            "name_ja": "表在性角膜潰瘍"
+          },
+          {
+            "id": "ey_corneal_ulcer_deep",
+            "name": "Deep / Melting Corneal Ulcer",
+            "name_ja": "深部角膜潰瘍(溶解性)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "corona",
+        "size": 3,
+        "members": [
+          {
+            "id": "if_coronavirus",
+            "name": "Equine Coronavirus",
+            "name_ja": "馬コロナウイルス感染症"
+          },
+          {
+            "id": "hf_coronary_band_injury",
+            "name": "Coronary Band Injury",
+            "name_ja": "蹄冠損傷"
+          },
+          {
+            "id": "hf_coronary_band_dystrophy",
+            "name": "Coronary Band Dystrophy",
+            "name_ja": "蹄冠帯ジストロフィー"
+          }
+        ]
+      },
+      {
+        "shared_stem": "crack",
+        "size": 3,
+        "members": [
+          {
+            "id": "hf_hoof_crack",
+            "name": "Hoof Wall Crack",
+            "name_ja": "蹄裂"
+          },
+          {
+            "id": "hf_sand_crack",
+            "name": "Sand Crack",
+            "name_ja": "サンドクラック"
+          },
+          {
+            "id": "hf_grass_crack",
+            "name": "Grass Crack",
+            "name_ja": "グラスクラック"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cystit",
+        "size": 3,
+        "members": [
+          {
+            "id": "ur_cystitis",
+            "name": "Cystitis",
+            "name_ja": "膀胱炎"
+          },
+          {
+            "id": "ur_sabulous_cystitis",
+            "name": "Sabulous Cystitis",
+            "name_ja": "砂状膀胱炎"
+          },
+          {
+            "id": "tx_sorghum_cystitis",
+            "name": "Sorghum / Sudan Grass Cystitis-Ataxia Syndrome",
+            "name_ja": "ソルガム中毒性膀胱炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "deep",
+        "size": 3,
+        "members": [
+          {
+            "id": "ms_ddft_injury",
+            "name": "Deep Digital Flexor Tendon Injury",
+            "name_ja": "深指屈腱損傷"
+          },
+          {
+            "id": "mc_tendinitis_ddft",
+            "name": "Deep Digital Flexor Tendinitis",
+            "name_ja": "深趾屈腱炎"
+          },
+          {
+            "id": "ey_corneal_ulcer_deep",
+            "name": "Deep / Melting Corneal Ulcer",
+            "name_ja": "深部角膜潰瘍(溶解性)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "deform",
+        "size": 3,
+        "members": [
+          {
+            "id": "ms_angular_limb",
+            "name": "Angular Limb Deformities",
+            "name_ja": "肢軸異常(内反・外反)"
+          },
+          {
+            "id": "fl_flexural_deformity",
+            "name": "Flexural Deformity",
+            "name_ja": "屈腱拘縮"
+          },
+          {
+            "id": "fl_flexural_deformity_acquired",
+            "name": "Acquired Flexural Deformity",
+            "name_ja": "後天性屈腱拘縮"
+          }
+        ]
+      },
+      {
+        "shared_stem": "digita",
+        "size": 3,
+        "members": [
+          {
+            "id": "ms_ddft_injury",
+            "name": "Deep Digital Flexor Tendon Injury",
+            "name_ja": "深指屈腱損傷"
+          },
+          {
+            "id": "ms_sdft",
+            "name": "Superficial Digital Flexor Tendinitis",
+            "name_ja": "浅指屈腱炎"
+          },
+          {
+            "id": "mc_tendinitis_ddft",
+            "name": "Deep Digital Flexor Tendinitis",
+            "name_ja": "深趾屈腱炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "entero",
+        "size": 3,
+        "members": [
+          {
+            "id": "dg_enterolithiasis",
+            "name": "Enterolithiasis",
+            "name_ja": "腸石症"
+          },
+          {
+            "id": "if_proliferative_enteropathy",
+            "name": "Equine Proliferative Enteropathy",
+            "name_ja": "増殖性腸症"
+          },
+          {
+            "id": "fl_enterocolitis",
+            "name": "Foal Enterocolitis",
+            "name_ja": "子馬腸炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "esopha",
+        "size": 3,
+        "members": [
+          {
+            "id": "dg_choke",
+            "name": "Esophageal Obstruction (Choke)",
+            "name_ja": "食道閉塞(チョーク)"
+          },
+          {
+            "id": "dg_esophageal_stricture",
+            "name": "Esophageal Stricture",
+            "name_ja": "食道狭窄"
+          },
+          {
+            "id": "dg_esophageal_diverticulum",
+            "name": "Esophageal Diverticulum",
+            "name_ja": "食道憩室"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fever",
+        "size": 3,
+        "members": [
+          {
+            "id": "if_pigeon_fever",
+            "name": "Pigeon Fever",
+            "name_ja": "鳩熱(コリネバクテリウム膿瘍)"
+          },
+          {
+            "id": "dg_potomac_horse_fever",
+            "name": "Potomac Horse Fever (Neorickettsiosis)",
+            "name_ja": "ポトマック馬熱"
+          },
+          {
+            "id": "if_pigeon_fever_internal",
+            "name": "Internal Pigeon Fever (Internal Abscessation)",
+            "name_ja": "内臓型鳩熱"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fibros",
+        "size": 3,
+        "members": [
+          {
+            "id": "rp_empf",
+            "name": "Equine Multinodular Pulmonary Fibrosis",
+            "name_ja": "馬多結節性肺線維症"
+          },
+          {
+            "id": "on_fibrosarcoma",
+            "name": "Fibrosarcoma",
+            "name_ja": "線維肉腫"
+          },
+          {
+            "id": "rp_endometrial_fibrosis",
+            "name": "Endometrial Fibrosis",
+            "name_ja": "子宮内膜線維症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "flexor",
+        "size": 3,
+        "members": [
+          {
+            "id": "ms_ddft_injury",
+            "name": "Deep Digital Flexor Tendon Injury",
+            "name_ja": "深指屈腱損傷"
+          },
+          {
+            "id": "ms_sdft",
+            "name": "Superficial Digital Flexor Tendinitis",
+            "name_ja": "浅指屈腱炎"
+          },
+          {
+            "id": "mc_tendinitis_ddft",
+            "name": "Deep Digital Flexor Tendinitis",
+            "name_ja": "深趾屈腱炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "gras",
+        "size": 3,
+        "members": [
+          {
+            "id": "dg_grass_sickness",
+            "name": "Equine Grass Sickness",
+            "name_ja": "馬草病"
+          },
+          {
+            "id": "hf_grass_crack",
+            "name": "Grass Crack",
+            "name_ja": "グラスクラック"
+          },
+          {
+            "id": "tx_sorghum_cystitis",
+            "name": "Sorghum / Sudan Grass Cystitis-Ataxia Syndrome",
+            "name_ja": "ソルガム中毒性膀胱炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "heat",
+        "size": 3,
+        "members": [
+          {
+            "id": "mc_heat_stress",
+            "name": "Heat Stress",
+            "name_ja": "暑熱ストレス・熱射病"
+          },
+          {
+            "id": "fl_foal_heat_diarrhea",
+            "name": "Foal Heat Diarrhea",
+            "name_ja": "発情下痢"
+          },
+          {
+            "id": "mc_exertional_heat_illness",
+            "name": "Exertional Heat Illness",
+            "name_ja": "運動性熱中症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "heel",
+        "size": 3,
+        "members": [
+          {
+            "id": "hf_contracted_heels",
+            "name": "Contracted Heels",
+            "name_ja": "蹄踵狭窄"
+          },
+          {
+            "id": "hf_sheared_heels",
+            "name": "Sheared Heels",
+            "name_ja": "蹄踵剪断"
+          },
+          {
+            "id": "hf_heel_bulb_laceration",
+            "name": "Heel Bulb Laceration",
+            "name_ja": "蹄球裂傷"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hemoly",
+        "size": 3,
+        "members": [
+          {
+            "id": "im_immune_mediated_hemolytic_anemia",
+            "name": "Immune-Mediated Hemolytic Anemia",
+            "name_ja": "免疫介在性溶血性貧血"
+          },
+          {
+            "id": "ur_hemolytic_uremic_syndrome",
+            "name": "Hemolytic Uremic Syndrome",
+            "name_ja": "溶血性尿毒症症候群"
+          },
+          {
+            "id": "im_autoimmune_hemolytic_anemia",
+            "name": "Autoimmune Hemolytic Anemia",
+            "name_ja": "自己免疫性溶血性貧血"
+          }
+        ]
+      },
+      {
+        "shared_stem": "horse",
+        "size": 3,
+        "members": [
+          {
+            "id": "tx_horse_chestnut",
+            "name": "Horse Chestnut Toxicity",
+            "name_ja": "トチノキ中毒"
+          },
+          {
+            "id": "if_african_horse_sickness",
+            "name": "African Horse Sickness",
+            "name_ja": "アフリカ馬疫"
+          },
+          {
+            "id": "dg_potomac_horse_fever",
+            "name": "Potomac Horse Fever (Neorickettsiosis)",
+            "name_ja": "ポトマック馬熱"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypers",
+        "size": 3,
+        "members": [
+          {
+            "id": "mc_insect_hyper",
+            "name": "Insect Bite Hypersensitivity",
+            "name_ja": "虫刺過敏症"
+          },
+          {
+            "id": "sk_hypersensitivity_culicoides",
+            "name": "Culicoides Hypersensitivity (Sweet Itch)",
+            "name_ja": "ヌカカ過敏症"
+          },
+          {
+            "id": "im_drug_hypersensitivity",
+            "name": "Drug Hypersensitivity",
+            "name_ja": "薬剤過敏症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hypert",
+        "size": 3,
+        "members": [
+          {
+            "id": "mt_hyperthyroidism",
+            "name": "Equine Hyperthyroidism",
+            "name_ja": "馬甲状腺機能亢進症"
+          },
+          {
+            "id": "mt_malignant_hyp",
+            "name": "Malignant Hyperthermia",
+            "name_ja": "悪性高熱"
+          },
+          {
+            "id": "cv_pulmonary_hypertension",
+            "name": "Pulmonary Hypertension",
+            "name_ja": "肺高血圧症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "immuno",
+        "size": 3,
+        "members": [
+          {
+            "id": "fl_fis",
+            "name": "Foal Immunodeficiency Syndrome",
+            "name_ja": "子馬免疫不全症候群"
+          },
+          {
+            "id": "fl_scid",
+            "name": "Severe Combined Immunodeficiency Disease",
+            "name_ja": "重症複合免疫不全症"
+          },
+          {
+            "id": "im_combined_immunodeficiency",
+            "name": "Combined Immunodeficiency (CID)",
+            "name_ja": "複合免疫不全症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 3,
+        "members": [
+          {
+            "id": "dg_small_intestinal_strangulation",
+            "name": "Small Intestinal Strangulation",
+            "name_ja": "小腸絞扼"
+          },
+          {
+            "id": "on_intestinal_lymphoma",
+            "name": "Intestinal Lymphoma",
+            "name_ja": "腸管リンパ腫"
+          },
+          {
+            "id": "dg_small_intestinal_volvulus",
+            "name": "Small Intestinal Volvulus",
+            "name_ja": "小腸軸捻転"
+          }
+        ]
+      },
+      {
+        "shared_stem": "kerati",
+        "size": 3,
+        "members": [
+          {
+            "id": "ey_eosinophilic",
+            "name": "Eosinophilic Keratitis",
+            "name_ja": "好酸球性角膜炎"
+          },
+          {
+            "id": "ey_immune_keratitis",
+            "name": "Immune-Mediated Keratitis",
+            "name_ja": "免疫介在性角膜炎"
+          },
+          {
+            "id": "ey_fungal_keratitis",
+            "name": "Fungal Keratitis",
+            "name_ja": "真菌性角膜炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lamini",
+        "size": 3,
+        "members": [
+          {
+            "id": "hf_laminitis",
+            "name": "Laminitis",
+            "name_ja": "蹄葉炎"
+          },
+          {
+            "id": "hf_laminitis_acute",
+            "name": "Acute Laminitis",
+            "name_ja": "急性蹄葉炎"
+          },
+          {
+            "id": "hf_laminitis_chronic",
+            "name": "Chronic Laminitis",
+            "name_ja": "慢性蹄葉炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "lympho",
+        "size": 3,
+        "members": [
+          {
+            "id": "on_lymphoma",
+            "name": "Equine Lymphoma",
+            "name_ja": "馬リンパ腫"
+          },
+          {
+            "id": "rp_pharyngeal_lymphoid_hyperplasia",
+            "name": "Pharyngeal Lymphoid Hyperplasia",
+            "name_ja": "咽頭リンパ濾胞過形成"
+          },
+          {
+            "id": "on_intestinal_lymphoma",
+            "name": "Intestinal Lymphoma",
+            "name_ja": "腸管リンパ腫"
+          }
+        ]
+      },
+      {
+        "shared_stem": "mitral",
+        "size": 3,
+        "members": [
+          {
+            "id": "cv_mitral",
+            "name": "Mitral Regurgitation",
+            "name_ja": "僧帽弁閉鎖不全症"
+          },
+          {
+            "id": "cv_mitral_regurgitation",
+            "name": "Mitral Valve Regurgitation",
+            "name_ja": "僧帽弁逆流"
+          },
+          {
+            "id": "cv_mitral_valve_prolapse",
+            "name": "Mitral Valve Prolapse",
+            "name_ja": "僧帽弁逸脱症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "myeloe",
+        "size": 3,
+        "members": [
+          {
+            "id": "nr_epm",
+            "name": "Equine Protozoal Myeloencephalitis",
+            "name_ja": "馬原虫性脊髄脳炎 (EPM)"
+          },
+          {
+            "id": "nr_edm",
+            "name": "Equine Degenerative Myeloencephalopathy",
+            "name_ja": "馬変性性脊髄脳症"
+          },
+          {
+            "id": "if_ehv1_myeloencephalopathy",
+            "name": "EHV-1 Myeloencephalopathy",
+            "name_ja": "馬ヘルペス1型脊髄脳症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "neonat",
+        "size": 3,
+        "members": [
+          {
+            "id": "fl_nms",
+            "name": "Neonatal Maladjustment Syndrome",
+            "name_ja": "新生子不適応症候群(ダミーフォール)"
+          },
+          {
+            "id": "fl_septicemia",
+            "name": "Neonatal Septicemia",
+            "name_ja": "新生子敗血症"
+          },
+          {
+            "id": "fl_neonatal_isoerythrolysis2",
+            "name": "Neonatal Isoerythrolysis",
+            "name_ja": "新生子溶血性貧血(NI)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nerve",
+        "size": 3,
+        "members": [
+          {
+            "id": "nr_suprascapular_nerve",
+            "name": "Suprascapular Nerve Paralysis (Sweeney)",
+            "name_ja": "肩甲上神経麻痺(スウィーニー)"
+          },
+          {
+            "id": "nr_radial_nerve_paralysis",
+            "name": "Radial Nerve Paralysis",
+            "name_ja": "橈骨神経麻痺"
+          },
+          {
+            "id": "nr_peroneal_nerve_paralysis",
+            "name": "Peroneal Nerve Paralysis",
+            "name_ja": "腓骨神経麻痺"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nile",
+        "size": 3,
+        "members": [
+          {
+            "id": "if_wne",
+            "name": "West Nile Encephalitis",
+            "name_ja": "ウエストナイル脳炎"
+          },
+          {
+            "id": "if_wnv",
+            "name": "West Nile Virus",
+            "name_ja": "ウエストナイル熱"
+          },
+          {
+            "id": "nr_west_nile",
+            "name": "West Nile Virus Encephalitis",
+            "name_ja": "ウエストナイルウイルス脳炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "nsaid",
+        "size": 3,
+        "members": [
+          {
+            "id": "tx_nsaid",
+            "name": "NSAID Toxicity",
+            "name_ja": "NSAID中毒(非ステロイド性抗炎症薬)"
+          },
+          {
+            "id": "dg_right_dorsal_colitis_nsaid",
+            "name": "NSAID-Induced Gastroduodenal Ulceration",
+            "name_ja": "NSAID誘発性胃十二指腸潰瘍"
+          },
+          {
+            "id": "tx_nsaid_overdose",
+            "name": "NSAID Toxicosis (Phenylbutazone / Flunixin Overdose)",
+            "name_ja": "NSAID過量投与中毒"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ocular",
+        "size": 3,
+        "members": [
+          {
+            "id": "ey_mcoa",
+            "name": "Multiple Congenital Ocular Anomalies",
+            "name_ja": "多発性先天性眼異常"
+          },
+          {
+            "id": "ey_squamous_cell_carcinoma_eye",
+            "name": "Ocular Squamous Cell Carcinoma",
+            "name_ja": "眼部扁平上皮癌"
+          },
+          {
+            "id": "ey_habronema_ocular",
+            "name": "Ocular Habronemiasis",
+            "name_ja": "眼ハブロネマ症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ovaria",
+        "size": 3,
+        "members": [
+          {
+            "id": "rp_ovarian_tumor",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "rp_anestrus_ovarian_inactivity",
+            "name": "Anestrus / Ovarian Inactivity",
+            "name_ja": "卵巣機能停止（無発情）"
+          },
+          {
+            "id": "rp_ovarian_hemorrhage",
+            "name": "Ovarian Hemorrhage",
+            "name_ja": "卵巣出血"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pregna",
+        "size": 3,
+        "members": [
+          {
+            "id": "rp_early_embryonic_death",
+            "name": "Early Embryonic Death (EED) / Early Pregnancy Loss",
+            "name_ja": "早期胚死滅（EED）"
+          },
+          {
+            "id": "rp_pregnancy_luteal_insufficiency",
+            "name": "Pregnancy Luteal Insufficiency / Inadequate Progestogen during Gestation",
+            "name_ja": "妊娠期黄体機能不全（妊娠期卵巣機能低下）"
+          },
+          {
+            "id": "rp_twin_pregnancy",
+            "name": "Twin Pregnancy",
+            "name_ja": "双胎妊娠"
+          }
+        ]
+      },
+      {
+        "shared_stem": "prolap",
+        "size": 3,
+        "members": [
+          {
+            "id": "dg_rectal_prolapse",
+            "name": "Rectal Prolapse",
+            "name_ja": "直腸脱"
+          },
+          {
+            "id": "rp_uterine_prolapse",
+            "name": "Uterine Prolapse",
+            "name_ja": "子宮脱"
+          },
+          {
+            "id": "cv_mitral_valve_prolapse",
+            "name": "Mitral Valve Prolapse",
+            "name_ja": "僧帽弁逸脱症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ringbo",
+        "size": 3,
+        "members": [
+          {
+            "id": "ms_ringbone",
+            "name": "Ringbone",
+            "name_ja": "リングボーン(冠関節炎)"
+          },
+          {
+            "id": "ms_ringbone_high",
+            "name": "High Ringbone (Proximal Interphalangeal Osteoarthritis)",
+            "name_ja": "高冠関節リングボーン"
+          },
+          {
+            "id": "ms_ringbone_low",
+            "name": "Low Ringbone (Distal Interphalangeal Osteoarthritis)",
+            "name_ja": "低蹄関節リングボーン"
+          }
+        ]
+      },
+      {
+        "shared_stem": "rotavi",
+        "size": 3,
+        "members": [
+          {
+            "id": "if_rotavirus",
+            "name": "Rotavirus",
+            "name_ja": "ロタウイルス感染症"
+          },
+          {
+            "id": "fl_rotavirus",
+            "name": "Foal Rotavirus Enteritis",
+            "name_ja": "子馬ロタウイルス腸炎"
+          },
+          {
+            "id": "if_equine_rotavirus",
+            "name": "Equine Rotavirus Infection",
+            "name_ja": "馬ロタウイルス感染症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "septic",
+        "size": 3,
+        "members": [
+          {
+            "id": "ms_septic_arthritis",
+            "name": "Septic Arthritis",
+            "name_ja": "化膿性関節炎"
+          },
+          {
+            "id": "fl_septicemia",
+            "name": "Neonatal Septicemia",
+            "name_ja": "新生子敗血症"
+          },
+          {
+            "id": "fl_septic_arthritis_foal",
+            "name": "Foal Septic Arthritis / Osteomyelitis",
+            "name_ja": "子馬化膿性関節炎"
+          }
+        ]
+      },
+      {
+        "shared_stem": "severe",
+        "size": 3,
+        "members": [
+          {
+            "id": "fl_scid",
+            "name": "Severe Combined Immunodeficiency Disease",
+            "name_ja": "重症複合免疫不全症"
+          },
+          {
+            "id": "dg_gastric_squamous_ulcer",
+            "name": "Severe / Hemorrhagic ESGD (Grade 3-4)",
+            "name_ja": "出血性・重度ESGD(グレード3-4)"
+          },
+          {
+            "id": "dg_anterior_enteritis_severe",
+            "name": "Severe Proximal Enteritis / Duodenitis",
+            "name_ja": "重度前方腸炎(デュオデニティス)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "sinusi",
+        "size": 3,
+        "members": [
+          {
+            "id": "rp_sinusitis",
+            "name": "Sinusitis",
+            "name_ja": "副鼻腔炎"
+          },
+          {
+            "id": "rp_sinusitis_primary",
+            "name": "Primary Sinusitis",
+            "name_ja": "原発性副鼻腔炎"
+          },
+          {
+            "id": "rp_sinusitis_secondary",
+            "name": "Secondary Sinusitis (Dental Origin)",
+            "name_ja": "続発性副鼻腔炎(歯性)"
+          }
+        ]
+      },
+      {
+        "shared_stem": "small",
+        "size": 3,
+        "members": [
+          {
+            "id": "dg_small_intestinal_strangulation",
+            "name": "Small Intestinal Strangulation",
+            "name_ja": "小腸絞扼"
+          },
+          {
+            "id": "dg_small_colon_impaction",
+            "name": "Small Colon Impaction",
+            "name_ja": "小結腸便秘疝"
+          },
+          {
+            "id": "dg_small_intestinal_volvulus",
+            "name": "Small Intestinal Volvulus",
+            "name_ja": "小腸軸捻転"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tendon",
+        "size": 3,
+        "members": [
+          {
+            "id": "ms_tendonitis",
+            "name": "Tendonitis",
+            "name_ja": "屈腱炎"
+          },
+          {
+            "id": "ms_ddft_injury",
+            "name": "Deep Digital Flexor Tendon Injury",
+            "name_ja": "深指屈腱損傷"
+          },
+          {
+            "id": "rp_ruptured_prepubic_tendon",
+            "name": "Ruptured Prepubic Tendon",
+            "name_ja": "恥骨前腱断裂"
+          }
+        ]
+      },
+      {
+        "shared_stem": "torsio",
+        "size": 3,
+        "members": [
+          {
+            "id": "rp_torsion_uterine",
+            "name": "Uterine Torsion",
+            "name_ja": "子宮捻転"
+          },
+          {
+            "id": "rp_testicular_torsion",
+            "name": "Testicular Torsion",
+            "name_ja": "精巣捻転"
+          },
+          {
+            "id": "dg_colonic_torsion",
+            "name": "Large Colon Torsion (>360°)",
+            "name_ja": "結腸捻転"
+          }
+        ]
+      },
+      {
+        "shared_stem": "type",
+        "size": 3,
+        "members": [
+          {
+            "id": "mt_pssm2",
+            "name": "Polysaccharide Storage Myopathy Type 2",
+            "name_ja": "PSSM2型"
+          },
+          {
+            "id": "nr_wobbler_type2",
+            "name": "Cervical Vertebral Stenotic Myelopathy Type II",
+            "name_ja": "頚椎椎間板疾患(2型ウォブラー)"
+          },
+          {
+            "id": "if_ehv4",
+            "name": "Equine Herpesvirus Type 4 (EHV-4)",
+            "name_ja": "馬ヘルペスウイルス4型感染症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ulcera",
+        "size": 3,
+        "members": [
+          {
+            "id": "sk_ulcerative_lymph",
+            "name": "Ulcerative Lymphangitis",
+            "name_ja": "潰瘍性リンパ管炎"
+          },
+          {
+            "id": "dg_gastric_glandular_ulcer",
+            "name": "Pyloric Ulceration",
+            "name_ja": "幽門部潰瘍"
+          },
+          {
+            "id": "dg_right_dorsal_colitis_nsaid",
+            "name": "NSAID-Induced Gastroduodenal Ulceration",
+            "name_ja": "NSAID誘発性胃十二指腸潰瘍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "uterin",
+        "size": 3,
+        "members": [
+          {
+            "id": "rp_uterine_artery_rupture",
+            "name": "Postpartum Hemorrhage / Uterine Artery Rupture",
+            "name_ja": "産後出血・子宮動脈破裂"
+          },
+          {
+            "id": "rp_uterine_prolapse",
+            "name": "Uterine Prolapse",
+            "name_ja": "子宮脱"
+          },
+          {
+            "id": "rp_torsion_uterine",
+            "name": "Uterine Torsion",
+            "name_ja": "子宮捻転"
+          }
+        ]
+      },
+      {
+        "shared_stem": "ventri",
+        "size": 3,
+        "members": [
+          {
+            "id": "cv_vsd",
+            "name": "Ventricular Septal Defect",
+            "name_ja": "心室中隔欠損 (VSD)"
+          },
+          {
+            "id": "cv_ventricular_tachycardia",
+            "name": "Ventricular Tachycardia",
+            "name_ja": "心室頻拍"
+          },
+          {
+            "id": "cv_sustained_vtach",
+            "name": "Sustained Ventricular Tachycardia",
+            "name_ja": "持続性心室頻拍"
+          }
+        ]
+      },
+      {
+        "shared_stem": "west",
+        "size": 3,
+        "members": [
+          {
+            "id": "if_wne",
+            "name": "West Nile Encephalitis",
+            "name_ja": "ウエストナイル脳炎"
+          },
+          {
+            "id": "if_wnv",
+            "name": "West Nile Virus",
+            "name_ja": "ウエストナイル熱"
+          },
+          {
+            "id": "nr_west_nile",
+            "name": "West Nile Virus Encephalitis",
+            "name_ja": "ウエストナイルウイルス脳炎"
+          }
+        ]
+      }
+    ],
+    "family_cluster_count": 111
+  },
+  "T102": {
+    "detector": "T102",
+    "total_records": 598,
+    "flagged_count": 1,
+    "flags": [
+      {
+        "id": "nr_parkinsonism",
+        "name": "Equine Parkinsonism",
+        "name_ja": "馬パーキンソニズム",
+        "matches": [
+          {
+            "category": "research_model",
+            "term": "parkinson"
+          }
+        ]
+      }
+    ]
+  },
+  "T104": {
+    "detector": "T104",
+    "total_records": 598,
+    "empty_count": 0,
+    "heading_only_count": 42,
+    "with_dosage_count": 556,
+    "empty": [],
+    "heading_only": [
+      {
+        "id": "hf_thrush",
+        "name": "Thrush",
+        "name_ja": "蹄叉腐爛",
+        "treatment_ja_len": 199,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "if_hendra",
+        "name": "Hendra Virus",
+        "name_ja": "ヘンドラウイルス感染症",
+        "treatment_ja_len": 1283,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "if_abl",
+        "name": "Australian Bat Lyssavirus",
+        "name_ja": "豪州コウモリリッサウイルス感染症",
+        "treatment_ja_len": 721,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ms_angular_limb",
+        "name": "Angular Limb Deformities",
+        "name_ja": "肢軸異常(内反・外反)",
+        "treatment_ja_len": 3386,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_lymphoma",
+        "name": "Equine Lymphoma",
+        "name_ja": "馬リンパ腫",
+        "treatment_ja_len": 418,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_leukemia",
+        "name": "Leukemia",
+        "name_ja": "白血病",
+        "treatment_ja_len": 179,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_scc",
+        "name": "Squamous Cell Carcinoma (Non-Ocular)",
+        "name_ja": "扁平上皮癌(非眼性)",
+        "treatment_ja_len": 418,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_urolithiasis",
+        "name": "Equine Urolithiasis",
+        "name_ja": "馬尿石症",
+        "treatment_ja_len": 461,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "mc_stocking_up",
+        "name": "Stocking Up",
+        "name_ja": "繋留性下肢浮腫(ストッキングアップ)",
+        "treatment_ja_len": 369,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "mc_rhinosporidiosis",
+        "name": "Equine Rhinosporidiosis",
+        "name_ja": "リノスポリジウム症",
+        "treatment_ja_len": 425,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "mc_nodular_necrosis",
+        "name": "Equine Nodular Necrosis",
+        "name_ja": "結節性壊死症",
+        "treatment_ja_len": 245,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "mc_pegivirus",
+        "name": "Equine Pegivirus",
+        "name_ja": "馬ペギウイルス感染症",
+        "treatment_ja_len": 378,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "if_vee",
+        "name": "Venezuelan Equine Encephalomyelitis",
+        "name_ja": "ベネズエラ馬脳炎",
+        "treatment_ja_len": 369,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ey_squamous_cell_carcinoma_eye",
+        "name": "Ocular Squamous Cell Carcinoma",
+        "name_ja": "眼部扁平上皮癌",
+        "treatment_ja_len": 1334,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_squamous_cell_carcinoma",
+        "name": "Squamous Cell Carcinoma (Cutaneous)",
+        "name_ja": "扁平上皮癌(皮膚)",
+        "treatment_ja_len": 418,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_fibrosarcoma",
+        "name": "Fibrosarcoma",
+        "name_ja": "線維肉腫",
+        "treatment_ja_len": 179,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_hemangiosarcoma",
+        "name": "Hemangiosarcoma",
+        "name_ja": "血管肉腫",
+        "treatment_ja_len": 418,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_lipoma_pedunculated",
+        "name": "Pedunculated Lipoma",
+        "name_ja": "有茎脂肪腫",
+        "treatment_ja_len": 425,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_gastric_scc",
+        "name": "Gastric Squamous Cell Carcinoma",
+        "name_ja": "胃扁平上皮癌",
+        "treatment_ja_len": 611,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_ethmoid_carcinoma",
+        "name": "Ethmoid Carcinoma",
+        "name_ja": "篩骨癌",
+        "treatment_ja_len": 179,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_acute_renal_failure",
+        "name": "Acute Renal Failure",
+        "name_ja": "急性腎不全",
+        "treatment_ja_len": 440,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_chronic_renal_failure",
+        "name": "Chronic Renal Failure",
+        "name_ja": "慢性腎不全",
+        "treatment_ja_len": 440,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_cystitis",
+        "name": "Cystitis",
+        "name_ja": "膀胱炎",
+        "treatment_ja_len": 461,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_bladder_rupture",
+        "name": "Bladder Rupture",
+        "name_ja": "膀胱破裂",
+        "treatment_ja_len": 186,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_nephrolithiasis",
+        "name": "Nephrolithiasis",
+        "name_ja": "腎結石",
+        "treatment_ja_len": 440,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_sabulous_cystitis",
+        "name": "Sabulous Cystitis",
+        "name_ja": "砂状膀胱炎",
+        "treatment_ja_len": 461,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_renal_tubular_acidosis",
+        "name": "Renal Tubular Acidosis",
+        "name_ja": "腎尿細管性アシドーシス",
+        "treatment_ja_len": 186,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_ectopic_ureter",
+        "name": "Ectopic Ureter",
+        "name_ja": "異所性尿管",
+        "treatment_ja_len": 186,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_hemangioma",
+        "name": "Hemangioma",
+        "name_ja": "血管腫",
+        "treatment_ja_len": 179,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_neurofibroma",
+        "name": "Neurofibroma",
+        "name_ja": "神経線維腫",
+        "treatment_ja_len": 179,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_hemolytic_uremic_syndrome",
+        "name": "Hemolytic Uremic Syndrome",
+        "name_ja": "溶血性尿毒症症候群",
+        "treatment_ja_len": 961,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "on_intestinal_lymphoma",
+        "name": "Intestinal Lymphoma",
+        "name_ja": "腸管リンパ腫",
+        "treatment_ja_len": 418,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "dg_cecal_rupture",
+        "name": "Cecal Rupture",
+        "name_ja": "盲腸破裂",
+        "treatment_ja_len": 1105,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ey_periorbital_scc",
+        "name": "Periorbital Squamous Cell Carcinoma",
+        "name_ja": "眼窩周囲扁平上皮癌",
+        "treatment_ja_len": 1498,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_pyelonephritis2",
+        "name": "Pyelonephritis",
+        "name_ja": "腎盂腎炎",
+        "treatment_ja_len": 440,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_urolithiasis_bladder",
+        "name": "Cystic Urolithiasis (Bladder Stones)",
+        "name_ja": "膀胱結石症",
+        "treatment_ja_len": 461,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_urethral_calculus2",
+        "name": "Urethral Calculus",
+        "name_ja": "尿道結石",
+        "treatment_ja_len": 186,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_renal_cell_carcinoma",
+        "name": "Renal Cell Carcinoma",
+        "name_ja": "腎細胞癌",
+        "treatment_ja_len": 186,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_toxic_nephrosis",
+        "name": "Toxic Nephrosis",
+        "name_ja": "中毒性腎症",
+        "treatment_ja_len": 768,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_renal_dysplasia",
+        "name": "Renal Dysplasia",
+        "name_ja": "腎異形成",
+        "treatment_ja_len": 440,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_glomerulonephritis",
+        "name": "Glomerulonephritis",
+        "name_ja": "糸球体腎炎",
+        "treatment_ja_len": 440,
+        "treatment_len": 0,
+        "has_dosage": false
+      },
+      {
+        "id": "ur_bladder_neoplasia2",
+        "name": "Bladder Neoplasia",
+        "name_ja": "膀胱腫瘍",
+        "treatment_ja_len": 425,
+        "treatment_len": 0,
+        "has_dosage": false
+      }
+    ]
+  },
+  "T108": {
+    "detector": "T108",
+    "total_records": 598,
+    "drug_available": 610,
+    "ref_keys_available": 30,
+    "drug_mismatch_count": 169,
+    "citation_mismatch_count": 12,
+    "drug_mismatch_residual_count": 0,
+    "citation_mismatch_residual_count": 0,
+    "drug_mismatches": [
+      {
+        "id": "rp_iah",
+        "name": "Equine Asthma (IAD/RAO)",
+        "name_ja": "馬喘息 (IAD/RAO)",
+        "drugs": [
+          {
+            "drug": "Budesonide",
+            "drug_ja": "ブデソニド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_rain_rot",
+        "name": "Rain Rot / Dermatophilosis",
+        "name_ja": "デルマトフィルス症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_sarcoid",
+        "name": "Equine Sarcoid",
+        "name_ja": "サルコイド",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_photosensitization",
+        "name": "Photosensitization",
+        "name_ja": "光線過敏症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_sweet_itch",
+        "name": "Sweet Itch (Culicoides Hypersensitivity)",
+        "name_ja": "夏癬(カリシン過敏症)",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_wound_infection",
+        "name": "Wound Infection",
+        "name_ja": "外傷感染",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "ey_corneal_ulcer",
+        "name": "Corneal Ulcer",
+        "name_ja": "角膜潰瘍",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_shaker_foal",
+        "name": "Shaker Foal Syndrome (Toxico-Infectious Botulism)",
+        "name_ja": "シェーカー子馬症候群（子馬腸管内毒素産生型ボツリヌス症）",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_sharp_points",
+        "name": "Sharp Enamel Points",
+        "name_ja": "歯の鋭利点(過長歯)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_wave_mouth",
+        "name": "Wave Mouth",
+        "name_ja": "波状歯",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_periapical_abscess",
+        "name": "Periapical Abscess",
+        "name_ja": "歯根膿瘍",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_eotrh",
+        "name": "EOTRH",
+        "name_ja": "EOTRH(馬歯破歯細胞性吸収・過形成症)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_colitis",
+        "name": "Colitis",
+        "name_ja": "大腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_enterolithiasis",
+        "name": "Enterolithiasis",
+        "name_ja": "腸石症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_choke",
+        "name": "Esophageal Obstruction (Choke)",
+        "name_ja": "食道閉塞(チョーク)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_wne",
+        "name": "West Nile Encephalitis",
+        "name_ja": "ウエストナイル脳炎",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_eee_wee",
+        "name": "Eastern/Western Equine Encephalomyelitis",
+        "name_ja": "東部/西部馬脳炎",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_eia",
+        "name": "Equine Infectious Anemia",
+        "name_ja": "馬伝染性貧血 (EIA)",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_melanoma",
+        "name": "Melanoma",
+        "name_ja": "メラノーマ",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_cellulitis",
+        "name": "Cellulitis",
+        "name_ja": "蜂窩織炎",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_habronemiasis",
+        "name": "Habronemiasis (Summer Sores)",
+        "name_ja": "ハブロネマ症(夏癰)",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_pemphigus",
+        "name": "Pemphigus Foliaceus",
+        "name_ja": "天疱瘡",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_aortic_rupture",
+        "name": "Aortic Rupture",
+        "name_ja": "大動脈破裂",
+        "drugs": [
+          {
+            "drug": "Atenolol",
+            "drug_ja": "アテノロール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_anaplasmosis",
+        "name": "Anaplasmosis",
+        "name_ja": "アナプラズマ症",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_anthrax",
+        "name": "Anthrax",
+        "name_ja": "炭疽",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_botulism",
+        "name": "Botulism",
+        "name_ja": "ボツリヌス中毒",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_getah",
+        "name": "Getah Virus",
+        "name_ja": "ゲタウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_japanese_enc",
+        "name": "Japanese Encephalitis",
+        "name_ja": "日本脳炎",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_lyme",
+        "name": "Lyme Disease",
+        "name_ja": "ライム病",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_coital_exanthema",
+        "name": "Equine Coital Exanthema",
+        "name_ja": "馬性器発疹",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_proliferative_enteropathy",
+        "name": "Equine Proliferative Enteropathy",
+        "name_ja": "増殖性腸症",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_peritonitis",
+        "name": "Peritonitis",
+        "name_ja": "腹膜炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_rectal_prolapse",
+        "name": "Rectal Prolapse",
+        "name_ja": "直腸脱",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_nasopharyngeal",
+        "name": "Nasopharyngeal Cicatrix Syndrome",
+        "name_ja": "鼻咽頭瘢痕症候群",
+        "drugs": [
+          {
+            "drug": "Budesonide",
+            "drug_ja": "ブデソニド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_ards",
+        "name": "Acute Respiratory Distress Syndrome",
+        "name_ja": "急性呼吸窮迫症候群",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_atopic",
+        "name": "Atopic Dermatitis",
+        "name_ja": "アトピー性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_aural_plaques",
+        "name": "Aural Plaques",
+        "name_ja": "耳介乳頭腫症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_cpl",
+        "name": "Chronic Progressive Lymphedema",
+        "name_ja": "慢性進行性リンパ浮腫",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_contact",
+        "name": "Contact Dermatitis",
+        "name_ja": "接触性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_onchocerciasis",
+        "name": "Equine Onchocerciasis",
+        "name_ja": "オンコセルカ症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_pythiosis",
+        "name": "Equine Pythiosis",
+        "name_ja": "ピシウム症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_hyperelastosis",
+        "name": "Hyperelastosis Cutis",
+        "name_ja": "皮膚過弾性症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_lice",
+        "name": "Lice",
+        "name_ja": "シラミ寄生症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_mange",
+        "name": "Mange",
+        "name_ja": "疥癬",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_papillomatosis",
+        "name": "Papillomatosis",
+        "name_ja": "乳頭腫症(イボ)",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_proud_flesh",
+        "name": "Proud Flesh",
+        "name_ja": "肉芽組織過形成(プラウドフレッシュ)",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_saddle_sores",
+        "name": "Saddle Sores",
+        "name_ja": "鞍傷",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_scratches",
+        "name": "Scratches (Pastern Dermatitis)",
+        "name_ja": "繋皮膚炎(スクラッチズ)",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_sunburn",
+        "name": "Sunburn",
+        "name_ja": "日焼け",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_vasculitis",
+        "name": "Vasculitis",
+        "name_ja": "血管炎",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "ey_eyeworm",
+        "name": "Eyeworm Disease",
+        "name_ja": "眼虫症",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_heart_failure",
+        "name": "Heart Failure",
+        "name_ja": "心不全",
+        "drugs": [
+          {
+            "drug": "Spironolactone",
+            "drug_ja": "スピロノラクトン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_tricuspid",
+        "name": "Tricuspid Regurgitation",
+        "name_ja": "三尖弁閉鎖不全症",
+        "drugs": [
+          {
+            "drug": "Spironolactone",
+            "drug_ja": "スピロノラクトン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_sialolithiasis",
+        "name": "Equine Sialolithiasis",
+        "name_ja": "唾石症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_diastem",
+        "name": "Diastema",
+        "name_ja": "歯間隙(ジアステマ)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_amnionitis",
+        "name": "Equine Amnionitis and Fetal Loss",
+        "name_ja": "馬羊膜炎・胎子消失",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_scid",
+        "name": "Severe Combined Immunodeficiency Disease",
+        "name_ja": "重症複合免疫不全症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_lymphoma",
+        "name": "Equine Lymphoma",
+        "name_ja": "馬リンパ腫",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_leukemia",
+        "name": "Leukemia",
+        "name_ja": "白血病",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_scc",
+        "name": "Squamous Cell Carcinoma (Non-Ocular)",
+        "name_ja": "扁平上皮癌(非眼性)",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "mc_snake_bite",
+        "name": "Snake Bite",
+        "name_ja": "蛇咬傷",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "mc_insect_hyper",
+        "name": "Insect Bite Hypersensitivity",
+        "name_ja": "虫刺過敏症",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_clostridiosis",
+        "name": "Clostridiosis",
+        "name_ja": "クロストリジウム症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_lawsonia",
+        "name": "Lawsonia intracellularis Infection",
+        "name_ja": "ローソニア感染症",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_wee",
+        "name": "Western Equine Encephalomyelitis",
+        "name_ja": "西部馬脳炎",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_african_horse_sickness",
+        "name": "African Horse Sickness",
+        "name_ja": "アフリカ馬疫",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_equine_granulocytic_anaplasmosis",
+        "name": "Equine Granulocytic Anaplasmosis",
+        "name_ja": "馬顆粒球アナプラズマ症",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_right_dorsal_colitis",
+        "name": "Right Dorsal Colitis (RDC)",
+        "name_ja": "右背側結腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_anterior_enteritis",
+        "name": "Anterior Enteritis (Proximal Enteritis)",
+        "name_ja": "前方腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_colitis_x",
+        "name": "Colitis-X (Peracute Idiopathic Colitis)",
+        "name_ja": "大腸炎X (原因不明劇症性大腸炎)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_duodenitis",
+        "name": "Duodenitis",
+        "name_ja": "十二指腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_typhlocolitis",
+        "name": "Typhlocolitis",
+        "name_ja": "盲結腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_liver_failure",
+        "name": "Hepatic Failure",
+        "name_ja": "肝不全",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_eiah",
+        "name": "Exercise-Induced Pulmonary Hemorrhage",
+        "name_ja": "運動誘発性肺出血",
+        "drugs": [
+          {
+            "drug": "Budesonide",
+            "drug_ja": "ブデソニド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_fourth_branchial_arch",
+        "name": "Fourth Branchial Arch Defect",
+        "name_ja": "第四鰓弓欠損",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_guttural_pouch_mycosis",
+        "name": "Guttural Pouch Mycosis",
+        "name_ja": "喉嚢真菌症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_summer_pasture_asthma",
+        "name": "Summer Pasture-Associated Obstructive Pulmonary Disease",
+        "name_ja": "夏季牧草喘息",
+        "drugs": [
+          {
+            "drug": "Budesonide",
+            "drug_ja": "ブデソニド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_besnoitiosis",
+        "name": "Besnoitiosis",
+        "name_ja": "ベスノイチア症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_erythema_multiforme",
+        "name": "Erythema Multiforme",
+        "name_ja": "多形紅斑",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_pastern_dermatitis",
+        "name": "Pastern Dermatitis (Scratches)",
+        "name_ja": "繋部皮膚炎",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_cannon_keratosis",
+        "name": "Cannon Keratosis",
+        "name_ja": "前脛骨角化症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_linear_keratosis",
+        "name": "Linear Keratosis",
+        "name_ja": "線状角化症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_axillary_nodular_necrosis",
+        "name": "Axillary Nodular Necrosis",
+        "name_ja": "腋窩結節性壊死",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_bacterial_folliculitis",
+        "name": "Bacterial Folliculitis",
+        "name_ja": "細菌性毛嚢炎",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_hypersensitivity_culicoides",
+        "name": "Culicoides Hypersensitivity (Sweet Itch)",
+        "name_ja": "ヌカカ過敏症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "ey_conjunctivitis",
+        "name": "Conjunctivitis",
+        "name_ja": "結膜炎",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Bacitracin",
+            "drug_ja": "バシトラシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "ey_squamous_cell_carcinoma_eye",
+        "name": "Ocular Squamous Cell Carcinoma",
+        "name_ja": "眼部扁平上皮癌",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "ey_habronema_ocular",
+        "name": "Ocular Habronemiasis",
+        "name_ja": "眼ハブロネマ症",
+        "drugs": [
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_tricuspid_regurgitation",
+        "name": "Tricuspid Valve Regurgitation",
+        "name_ja": "三尖弁逆流",
+        "drugs": [
+          {
+            "drug": "Spironolactone",
+            "drug_ja": "スピロノラクトン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_aortic_root_rupture",
+        "name": "Aortic Root Rupture",
+        "name_ja": "大動脈基部破裂",
+        "drugs": [
+          {
+            "drug": "Atenolol",
+            "drug_ja": "アテノロール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_ventricular_tachycardia",
+        "name": "Ventricular Tachycardia",
+        "name_ja": "心室頻拍",
+        "drugs": [
+          {
+            "drug": "Sotalol",
+            "drug_ja": "ソタロール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amiodarone",
+            "drug_ja": "アミオダロン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_wolf_teeth",
+        "name": "Wolf Teeth",
+        "name_ja": "狼歯",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_fractured_tooth",
+        "name": "Fractured Tooth",
+        "name_ja": "歯牙破折",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_malocclusion",
+        "name": "Malocclusion",
+        "name_ja": "不正咬合",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_retained_deciduous",
+        "name": "Retained Deciduous Teeth (Caps)",
+        "name_ja": "乳歯遺残",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_mandibular_fracture",
+        "name": "Mandibular Fracture",
+        "name_ja": "下顎骨折",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_early_embryonic_death",
+        "name": "Early Embryonic Death (EED) / Early Pregnancy Loss",
+        "name_ja": "早期胚死滅（EED）",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_pregnancy_luteal_insufficiency",
+        "name": "Pregnancy Luteal Insufficiency / Inadequate Progestogen during Gestation",
+        "name_ja": "妊娠期黄体機能不全（妊娠期卵巣機能低下）",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_septicemia",
+        "name": "Neonatal Septicemia",
+        "name_ja": "新生子敗血症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_umbilical_infection",
+        "name": "Umbilical Infection (Omphalitis)",
+        "name_ja": "臍感染",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_rotavirus",
+        "name": "Foal Rotavirus Enteritis",
+        "name_ja": "子馬ロタウイルス腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_clostridial_enteritis",
+        "name": "Foal Clostridial Enteritis",
+        "name_ja": "子馬クロストリジウム腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_flexural_deformity",
+        "name": "Flexural Deformity",
+        "name_ja": "屈腱拘縮",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_squamous_cell_carcinoma",
+        "name": "Squamous Cell Carcinoma (Cutaneous)",
+        "name_ja": "扁平上皮癌(皮膚)",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_fibrosarcoma",
+        "name": "Fibrosarcoma",
+        "name_ja": "線維肉腫",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_hemangiosarcoma",
+        "name": "Hemangiosarcoma",
+        "name_ja": "血管肉腫",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_lipoma_pedunculated",
+        "name": "Pedunculated Lipoma",
+        "name_ja": "有茎脂肪腫",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_gastric_scc",
+        "name": "Gastric Squamous Cell Carcinoma",
+        "name_ja": "胃扁平上皮癌",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_ethmoid_carcinoma",
+        "name": "Ethmoid Carcinoma",
+        "name_ja": "篩骨癌",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "mc_foreign_body_foot",
+        "name": "Foreign Body in Foot",
+        "name_ja": "蹄異物",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_cholelithiasis",
+        "name": "Cholelithiasis",
+        "name_ja": "胆石症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_hereditary_equine_regional_dermal_asthenia",
+        "name": "HERDA",
+        "name_ja": "馬遺伝性局所皮膚無力症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_tetralogy_of_fallot",
+        "name": "Tetralogy of Fallot",
+        "name_ja": "ファロー四徴症",
+        "drugs": [
+          {
+            "drug": "Atenolol",
+            "drug_ja": "アテノロール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_parrot_mouth",
+        "name": "Overjet (Parrot Mouth)",
+        "name_ja": "アウ口(オウム口)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_hemangioma",
+        "name": "Hemangioma",
+        "name_ja": "血管腫",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_neurofibroma",
+        "name": "Neurofibroma",
+        "name_ja": "神経線維腫",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "on_intestinal_lymphoma",
+        "name": "Intestinal Lymphoma",
+        "name_ja": "腸管リンパ腫",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_ventral_midline_dermatitis",
+        "name": "Ventral Midline Dermatitis",
+        "name_ja": "腹正中皮膚炎",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_heaves",
+        "name": "Recurrent Airway Obstruction (Heaves)",
+        "name_ja": "反復性気道閉塞(喘鳴症)",
+        "drugs": [
+          {
+            "drug": "Budesonide",
+            "drug_ja": "ブデソニド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_pleuropneumonia2",
+        "name": "Pleuropneumonia",
+        "name_ja": "胸膜肺炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_pneumonia_bacterial",
+        "name": "Bacterial Pneumonia",
+        "name_ja": "細菌性肺炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_lung_abscess",
+        "name": "Lung Abscess",
+        "name_ja": "肺膿瘍",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_hemothorax",
+        "name": "Hemothorax",
+        "name_ja": "血胸",
+        "drugs": [
+          {
+            "drug": "Warfarin",
+            "drug_ja": "ワルファリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_sinusitis_secondary",
+        "name": "Secondary Sinusitis (Dental Origin)",
+        "name_ja": "続発性副鼻腔炎(歯性)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_aspiration_pneumonia",
+        "name": "Aspiration Pneumonia",
+        "name_ja": "誤嚥性肺炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_gastric_glandular_ulcer",
+        "name": "Pyloric Ulceration",
+        "name_ja": "幽門部潰瘍",
+        "drugs": [
+          {
+            "drug": "Bethanechol",
+            "drug_ja": "ベタネコール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_cecal_tympany",
+        "name": "Cecal Tympany",
+        "name_ja": "盲腸鼓脹",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_esophageal_stricture",
+        "name": "Esophageal Stricture",
+        "name_ja": "食道狭窄",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_megaesophagus",
+        "name": "Megaesophagus",
+        "name_ja": "巨大食道症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_hepatic_encephalopathy",
+        "name": "Hepatic Encephalopathy",
+        "name_ja": "肝性脳症",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_clostridial_colitis",
+        "name": "Clostridial Colitis",
+        "name_ja": "クロストリジウム性大腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_potomac_horse_fever",
+        "name": "Potomac Horse Fever (Neorickettsiosis)",
+        "name_ja": "ポトマック馬熱",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_anterior_enteritis_severe",
+        "name": "Severe Proximal Enteritis / Duodenitis",
+        "name_ja": "重度前方腸炎(デュオデニティス)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dg_rectal_tear",
+        "name": "Rectal Tear",
+        "name_ja": "直腸裂傷",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_dermatophytosis2",
+        "name": "Dermatophytosis (Ringworm)",
+        "name_ja": "皮膚糸状菌症(白癬)",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_squamous_cell_ca_skin",
+        "name": "Cutaneous Squamous Cell Carcinoma",
+        "name_ja": "皮膚扁平上皮癌",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_urticaria2",
+        "name": "Urticaria (Hives)",
+        "name_ja": "蕁麻疹",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_phytophotodermatitis2",
+        "name": "Phytophotodermatitis",
+        "name_ja": "光線過敏性皮膚炎",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_lymphangitis",
+        "name": "Lymphangitis",
+        "name_ja": "リンパ管炎",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_mast_cell_tumor",
+        "name": "Mast Cell Tumor",
+        "name_ja": "肥満細胞腫",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_dermatophilosis",
+        "name": "Dermatophilosis (Rain Scald)",
+        "name_ja": "レインスカルド(皮膚フィルス症)",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_seborrhea2",
+        "name": "Seborrhea",
+        "name_ja": "脂漏症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "sk_alopecia_areata",
+        "name": "Alopecia Areata",
+        "name_ja": "円形脱毛症",
+        "drugs": [
+          {
+            "drug": "Ketoconazole",
+            "drug_ja": "ケトコナゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Griseofulvin",
+            "drug_ja": "グリセオフルビン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Permethrin",
+            "drug_ja": "ペルメトリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "ey_corneal_ulcer_superficial",
+        "name": "Superficial Corneal Ulcer",
+        "name_ja": "表在性角膜潰瘍",
+        "drugs": [
+          {
+            "drug": "Bacitracin",
+            "drug_ja": "バシトラシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "ey_periorbital_scc",
+        "name": "Periorbital Squamous Cell Carcinoma",
+        "name_ja": "眼窩周囲扁平上皮癌",
+        "drugs": [
+          {
+            "drug": "Carboplatin",
+            "drug_ja": "カルボプラチン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_pulmonary_hypertension",
+        "name": "Pulmonary Hypertension",
+        "name_ja": "肺高血圧症",
+        "drugs": [
+          {
+            "drug": "Spironolactone",
+            "drug_ja": "スピロノラクトン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_aortic_valve_disease",
+        "name": "Aortic Valve Disease",
+        "name_ja": "大動脈弁疾患",
+        "drugs": [
+          {
+            "drug": "Atenolol",
+            "drug_ja": "アテノロール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_premature_beats",
+        "name": "Premature Beats (APCs/VPCs)",
+        "name_ja": "期外収縮",
+        "drugs": [
+          {
+            "drug": "Sotalol",
+            "drug_ja": "ソタロール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amiodarone",
+            "drug_ja": "アミオダロン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_sustained_vtach",
+        "name": "Sustained Ventricular Tachycardia",
+        "name_ja": "持続性心室頻拍",
+        "drugs": [
+          {
+            "drug": "Sotalol",
+            "drug_ja": "ソタロール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amiodarone",
+            "drug_ja": "アミオダロン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_mitral_valve_prolapse",
+        "name": "Mitral Valve Prolapse",
+        "name_ja": "僧帽弁逸脱症",
+        "drugs": [
+          {
+            "drug": "Hydralazine",
+            "drug_ja": "ヒドララジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "cv_cor_pulmonale",
+        "name": "Cor Pulmonale",
+        "name_ja": "肺性心",
+        "drugs": [
+          {
+            "drug": "Budesonide",
+            "drug_ja": "ブデソニド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Spironolactone",
+            "drug_ja": "スピロノラクトン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_placentitis2",
+        "name": "Placentitis",
+        "name_ja": "胎盤炎",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "rp_inguinal_hernia_stallion",
+        "name": "Inguinal Hernia (Stallion)",
+        "name_ja": "種馬鼠径ヘルニア",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "if_anaplasmosis2",
+        "name": "Equine Anaplasmosis (Anaplasma phagocytophilum)",
+        "name_ja": "馬アナプラズマ症",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_equine_odontoclastic",
+        "name": "Equine Odontoclastic Tooth Resorption and Hypercementosis (EOTRH)",
+        "name_ja": "馬歯破骨細胞性吸収・セメント質過形成(EOTRH)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_caries",
+        "name": "Dental Caries",
+        "name_ja": "歯の齲蝕(虫歯)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_brachygnathism",
+        "name": "Brachygnathism (Sow Mouth / Undershot Jaw)",
+        "name_ja": "下顎前突症(アンダーショット)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_prognathism",
+        "name": "Prognathism (Parrot Mouth / Overshot Jaw)",
+        "name_ja": "上顎前突症(パロットマウス)",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_displaced_tooth",
+        "name": "Displaced / Malerupted Tooth",
+        "name_ja": "歯の変位",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_mandibular_fracture_dental",
+        "name": "Dental-Related Mandibular Fracture",
+        "name_ja": "歯科関連下顎骨折",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_supernumerary",
+        "name": "Supernumerary Tooth",
+        "name_ja": "過剰歯",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "dn_periodontal_disease",
+        "name": "Periodontal Disease",
+        "name_ja": "歯周病",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_ruptured_bladder_foal",
+        "name": "Ruptured Urinary Bladder (Foal)",
+        "name_ja": "子馬膀胱破裂",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_flexural_deformity_acquired",
+        "name": "Acquired Flexural Deformity",
+        "name_ja": "後天性屈腱拘縮",
+        "drugs": [
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_enterocolitis",
+        "name": "Foal Enterocolitis",
+        "name_ja": "子馬腸炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_septic_arthritis_foal",
+        "name": "Foal Septic Arthritis / Osteomyelitis",
+        "name_ja": "子馬化膿性関節炎",
+        "drugs": [
+          {
+            "drug": "Clindamycin",
+            "drug_ja": "クリンダマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_pneumonia_foal",
+        "name": "Foal Pneumonia",
+        "name_ja": "子馬肺炎",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Codeine",
+            "drug_ja": "コデイン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_patent_urachus_foal",
+        "name": "Patent Urachus",
+        "name_ja": "尿膜管遺残",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "fl_tyzzers_disease",
+        "name": "Tyzzer's Disease (Clostridium piliforme)",
+        "name_ja": "ティザー病",
+        "drugs": [
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Tetracycline",
+            "drug_ja": "テトラサイクリン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      }
+    ],
+    "citation_mismatches": [
+      {
+        "id": "dg_peritonitis",
+        "name": "Peritonitis",
+        "name_ja": "腹膜炎",
+        "matched_keys": [
+          "feline infectious peritonitis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "sk_atopic",
+        "name": "Atopic Dermatitis",
+        "name_ja": "アトピー性皮膚炎",
+        "matched_keys": [
+          "atopic dermatitis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "on_lymphoma",
+        "name": "Equine Lymphoma",
+        "name_ja": "馬リンパ腫",
+        "matched_keys": [
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "on_leukemia",
+        "name": "Leukemia",
+        "name_ja": "白血病",
+        "matched_keys": [
+          "feline leukemia virus"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "ur_urolithiasis",
+        "name": "Equine Urolithiasis",
+        "name_ja": "馬尿石症",
+        "matched_keys": [
+          "urolithiasis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "dn_malocclusion",
+        "name": "Malocclusion",
+        "name_ja": "不正咬合",
+        "matched_keys": [
+          "malocclusion"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "im_immune_mediated_hemolytic_anemia",
+        "name": "Immune-Mediated Hemolytic Anemia",
+        "name_ja": "免疫介在性溶血性貧血",
+        "matched_keys": [
+          "immune-mediated hemolytic anemia"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "ur_cystitis",
+        "name": "Cystitis",
+        "name_ja": "膀胱炎",
+        "matched_keys": [
+          "feline idiopathic cystitis (fic)"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "on_intestinal_lymphoma",
+        "name": "Intestinal Lymphoma",
+        "name_ja": "腸管リンパ腫",
+        "matched_keys": [
+          "lymphoma"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "sk_dermatophytosis2",
+        "name": "Dermatophytosis (Ringworm)",
+        "name_ja": "皮膚糸状菌症(白癬)",
+        "matched_keys": [
+          "dermatophytosis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "rp_pyometra",
+        "name": "Pyometra",
+        "name_ja": "子宮蓄膿症",
+        "matched_keys": [
+          "pyometra"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      },
+      {
+        "id": "ur_urolithiasis_bladder",
+        "name": "Cystic Urolithiasis (Bladder Stones)",
+        "name_ja": "膀胱結石症",
+        "matched_keys": [
+          "urolithiasis"
+        ],
+        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
+      }
+    ]
+  },
+  "T109": {
+    "detector": "T109",
+    "total_records": 598,
+    "hit_count": 5,
+    "safe_occurrences": 0,
+    "review_occurrences": 5,
+    "term_counts": {
+      "遺伝学的": 5
+    },
+    "hits": [
+      {
+        "id": "fl_fis",
+        "name_ja": "子馬免疫不全症候群",
+        "field": "treatment_ja",
+        "term": "遺伝学的",
+        "suggest": "遺伝性 / 遺伝的",
+        "category": "review",
+        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
+        "count": 1,
+        "context": "血を発症し、生後4-16週で全例死亡。【遺伝学的背景】SLC5A3 c.G102C>A "
+      },
+      {
+        "id": "fl_gbed",
+        "name_ja": "グリコーゲン分枝酵素欠損症",
+        "field": "treatment_ja",
+        "term": "遺伝学的",
+        "suggest": "遺伝性 / 遺伝的",
+        "category": "review",
+        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
+        "count": 1,
+        "context": " Quarter Horse系で発生。【遺伝学的背景】Quarter Horse保因率約"
+      },
+      {
+        "id": "fl_jeb",
+        "name_ja": "接合部型表皮水疱症",
+        "field": "treatment_ja",
+        "term": "遺伝学的",
+        "suggest": "遺伝性 / 遺伝的",
+        "category": "review",
+        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
+        "count": 1,
+        "context": "1525delC)で別変異により発生。【遺伝学的背景】Belgian draft保因率約"
+      },
+      {
+        "id": "fl_lavender",
+        "name_ja": "ラベンダー子馬症候群",
+        "field": "treatment_ja",
+        "term": "遺伝学的",
+        "suggest": "遺伝性 / 遺伝的",
+        "category": "review",
+        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
+        "count": 1,
+        "context": "重度神経症状、生後数時間-数日で致死。【遺伝学的背景】Egyptian Arabian保"
+      },
+      {
+        "id": "fl_scid",
+        "name_ja": "重症複合免疫不全症",
+        "field": "treatment_ja",
+        "term": "遺伝学的",
+        "suggest": "遺伝性 / 遺伝的",
+        "category": "review",
+        "note": "『遺伝学的検査』は妥当だが『遺伝学的インスリン抵抗』は誤",
+        "count": 1,
+        "context": "(2-5ヶ月)に必発感染症で全例死亡。【遺伝学的背景】Arabian純血種保因率約8-2"
+      }
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 {
   "species": "parakeet",
+  "view": "raw",
   "record_count": 459,
   "T101": {
     "detector": "T101",

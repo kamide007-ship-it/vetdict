@@ -1,5 +1,6 @@
 {
   "species": "tortoise",
+  "view": "raw",
   "record_count": 288,
   "T101": {
     "detector": "T101",

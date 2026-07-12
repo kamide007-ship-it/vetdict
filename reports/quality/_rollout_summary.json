@@ -1,4 +1,5 @@
 {
+  "view": "raw",
   "species": [
     {
       "species": "dog",
@@ -54,8 +55,8 @@
     {
       "species": "rabbit",
       "records": 452,
-      "dup_clusters": 42,
-      "redundant": 54,
+      "dup_clusters": 41,
+      "redundant": 52,
       "families": 79,
       "nonclinical": 0,
       "empty_tx": 0,
@@ -183,9 +184,9 @@
       "citation_mismatch": 14,
       "drug_mismatch_residual": 0,
       "citation_mismatch_residual": 0,
-      "mt_hits": 8,
+      "mt_hits": 1,
       "mt_safe": 0,
-      "mt_review": 8
+      "mt_review": 1
     },
     {
       "species": "bird",
@@ -360,8 +361,8 @@
   ],
   "totals": {
     "records": 7094,
-    "dup_clusters": 546,
-    "redundant": 644,
+    "dup_clusters": 545,
+    "redundant": 642,
     "families": 1178,
     "nonclinical": 4,
     "empty_tx": 0,
@@ -370,9 +371,9 @@
     "citation_mismatch": 270,
     "drug_mismatch_residual": 0,
     "citation_mismatch_residual": 0,
-    "mt_hits": 23,
+    "mt_hits": 16,
     "mt_safe": 0,
-    "mt_review": 23
+    "mt_review": 16
   },
   "guard_warnings": [
     "amphibian: drug_mismatch=220 exceeds guard ceiling 200",

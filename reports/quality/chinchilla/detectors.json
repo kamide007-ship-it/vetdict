@@ -1,5 +1,6 @@
 {
   "species": "chinchilla",
+  "view": "raw",
   "record_count": 278,
   "T101": {
     "detector": "T101",

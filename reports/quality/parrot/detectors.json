@@ -1,5 +1,6 @@
 {
   "species": "parrot",
+  "view": "raw",
   "record_count": 283,
   "T101": {
     "detector": "T101",

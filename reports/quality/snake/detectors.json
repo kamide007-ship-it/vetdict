@@ -1,5 +1,6 @@
 {
   "species": "snake",
+  "view": "raw",
   "record_count": 248,
   "T101": {
     "detector": "T101",

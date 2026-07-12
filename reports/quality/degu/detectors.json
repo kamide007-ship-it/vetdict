@@ -1,5 +1,6 @@
 {
   "species": "degu",
+  "view": "raw",
   "record_count": 201,
   "T101": {
     "detector": "T101",
