@@ -143,6 +143,92 @@ _CURATED_MERGE: dict[str, list[list[str]]] = {
         ["mt_hypocalcemia", "mt_hypocalcemia2"],  # 低カルシウム血症 (Transport Tetany)
         ["fl_perinatal_asphyxia", "fl_perinatal_asphyxia2"],  # 周産期仮死 (Dummy Foal)
     ],
+    # Small exotic mammals: same disease split by stage / form / severity / organ
+    # / species-tag (the "水増し" pattern). Vet-approved clear same-disease merges
+    # only; "要確認/✏️" and separate-maintain (C) clusters left in review.
+    # See .spec/<SPECIES>_CONSOLIDATION_REVIEW.md. First id = canonical (kept).
+    "hamster": [
+        ["hamster_0000", "hamster_0155", "hamster_0156"],  # ウェットテイル（増殖性回腸炎）
+        ["hamster_0001", "hamster_0174"],  # ティザー病（+不顕性）
+        ["hamster_0007", "hamster_0148"],  # 条虫症 Hymenolepis=Rodentolepis nana
+        ["hamster_0017", "hamster_0210"],  # 肺炎（+細菌性）
+        ["hamster_0020", "hamster_0160", "hamster_0161"],  # ニキビダニ症（局所/全身）
+        ["hamster_0023", "hamster_0269"],  # 皮膚糸状菌症（+白癬 Trichophyton）
+        ["hamster_0026", "hamster_0196"],  # 脱毛症（非寄生虫性）
+        ["hamster_0030", "hamster_0283"],  # 皮膚腫瘍（+非特異的）
+        ["hamster_0038", "hamster_0162", "hamster_0163", "hamster_0191"],  # クッシング病（病期4件）
+        ["hamster_0045", "hamster_0164", "hamster_0165"],  # 心房血栓症（急性/慢性）
+        ["hamster_0049", "hamster_0172", "hamster_0173", "hamster_0238"],  # ケージ麻痺（病期4件）
+        ["hamster_0059", "hamster_0157", "hamster_0158"],  # ポリオーマウイルス（顕/不顕性）
+        ["hamster_0060", "hamster_0159"],  # LCMV（+急性型）
+        ["hamster_0068", "hamster_0221"],  # 熱中症（+神経型）
+        ["hamster_0123", "hamster_0318"],  # 趾瘤症（バンブルフット）
+    ],
+    "guinea_pig": [
+        ["guinea_pig_0006", "guinea_pig_0201"],  # 鼓脹症（+胃鼓脹）
+        ["guinea_pig_0013", "guinea_pig_0126", "guinea_pig_0235"],  # 皮膚糸状菌症
+        ["guinea_pig_0017", "guinea_pig_0168", "guinea_pig_0169"],  # 足底皮膚炎（グレード）
+        ["guinea_pig_0028", "guinea_pig_0166"],  # 難産（+胎子過大）
+        ["guinea_pig_0029", "guinea_pig_0150", "guinea_pig_0164", "guinea_pig_0165"],  # 妊娠中毒症（時期4件）
+        ["guinea_pig_0050", "guinea_pig_0157", "guinea_pig_0158", "guinea_pig_0159"],  # 壊血病（病型4件）
+        ["guinea_pig_0066", "guinea_pig_0119"],  # 白血病（+リンパ球性）
+        ["guinea_pig_0074", "guinea_pig_0172"],  # 毛ダニ症（+重度）
+        ["guinea_pig_0077", "guinea_pig_0260"],  # 中耳/内耳炎
+        ["guinea_pig_0082", "guinea_pig_0214"],  # 肝リピドーシス
+        ["guinea_pig_0084", "guinea_pig_0102", "guinea_pig_0160"],  # 頸部リンパ節炎（起因菌）
+        ["guinea_pig_0087", "guinea_pig_0241"],  # 脱毛症（非特異性）
+        ["guinea_pig_0121", "guinea_pig_0336"],  # ケトーシス（非妊娠）
+        ["guinea_pig_0123", "guinea_pig_0175"],  # ビタミンA欠乏症（+眼型）
+        ["guinea_pig_0191", "guinea_pig_0200"],  # 盲腸内細菌叢異常
+    ],
+    "chinchilla": [
+        ["chinchilla_0000", "chinchilla_0163"],  # 不正咬合（+進行性）
+        ["chinchilla_0003", "chinchilla_0143", "chinchilla_0174"],  # 流涎症
+        ["chinchilla_0009", "chinchilla_0130"],  # 肝リピドーシス（+重症型）
+        ["chinchilla_0013", "chinchilla_0167", "chinchilla_0171"],  # ファーリング（陰茎毛輪）
+        ["chinchilla_0014", "chinchilla_0226"],  # 皮膚糸状菌症（+ミクロスポルム）
+        ["chinchilla_0015", "chinchilla_0077", "chinchilla_0151", "chinchilla_0152", "chinchilla_0172"],  # 毛噛み5件
+        ["chinchilla_0018", "chinchilla_0248"],  # 肺炎（+細菌性）
+        ["chinchilla_0020", "chinchilla_0038", "chinchilla_0168"],  # 熱中症（病型）
+        ["chinchilla_0028", "chinchilla_0104"],  # 乳腺炎（+急性）
+        ["chinchilla_0031", "chinchilla_0270"],  # 四肢骨折
+        ["chinchilla_0048", "chinchilla_0237"],  # ケトーシス（妊娠中毒症）
+        ["chinchilla_0103", "chinchilla_0190"],  # 妊娠中毒症（早期）
+        ["chinchilla_0061", "chinchilla_0198"],  # 中耳/内耳炎
+        ["chinchilla_0106", "chinchilla_0177"],  # 耳感染症（外耳炎）
+        ["chinchilla_0115", "chinchilla_0271"],  # 変形性関節症
+        ["chinchilla_0127", "chinchilla_0276"],  # 貧血（非特異的）
+    ],
+    "sugar_glider": [
+        ["sugar_glider_0001", "sugar_glider_0135"],  # カルシウム欠乏症
+        ["sugar_glider_0006", "sugar_glider_0088"],  # 低血糖症（+新生児）
+        ["sugar_glider_0008", "sugar_glider_0080"],  # 鉄過剰症（肝臓型）
+        ["sugar_glider_0019", "sugar_glider_0155"],  # ダニ感染症
+        ["sugar_glider_0022", "sugar_glider_0097"],  # トキソプラズマ症（+急性）
+        ["sugar_glider_0024", "sugar_glider_0219"],  # 肺炎（+細菌性）
+        ["sugar_glider_0026", "sugar_glider_0147"],  # 下痢（非特異的）
+        ["sugar_glider_0043", "sugar_glider_0073", "sugar_glider_0193"],  # 育児嚢感染症
+        ["sugar_glider_0044", "sugar_glider_0166"],  # てんかん発作（MBD関連）
+        ["sugar_glider_0051", "sugar_glider_0153"],  # 肝リピドーシス
+        ["sugar_glider_0059", "sugar_glider_0071", "sugar_glider_0138"],  # 飛膜損傷
+        ["sugar_glider_0061", "sugar_glider_0180"],  # 熱中症（+呼吸器型）
+        ["sugar_glider_0069", "sugar_glider_0133"],  # 栄養性骨異栄養症（MBD）
+        ["sugar_glider_0075", "sugar_glider_0170"],  # 難産（有袋類）
+        ["sugar_glider_0038", "sugar_glider_0165"],  # 眼球突出 Proptosis（0188 Exophthalmos は分離維持）
+    ],
+    "hedgehog": [
+        ["hedgehog_0002", "hedgehog_0093", "hedgehog_0149"],  # 皮膚糸状菌症（重症/Trichophyton）
+        ["hedgehog_0015", "hedgehog_0121"],  # 肥満（+重度/病的）
+        ["hedgehog_0016", "hedgehog_0174"],  # 下痢（非特異的）
+        ["hedgehog_0017", "hedgehog_0143"],  # 消化管内異物
+        ["hedgehog_0018", "hedgehog_0118"],  # 肝リピドーシス（肥満関連）
+        ["hedgehog_0026", "hedgehog_0241"],  # 肺炎（+細菌性）
+        ["hedgehog_0028", "hedgehog_0057"],  # マイコバクテリア症（肺型/播種型）
+        ["hedgehog_0055", "hedgehog_0164"],  # 脂肪肝（非肥満型）
+        ["hedgehog_0069", "hedgehog_0140"],  # バルーン症候群（皮下気腫）
+        ["hedgehog_0090", "hedgehog_0150"],  # カパリニアダニ症
+        ["hedgehog_0040", "hedgehog_0166"],  # 眼球突出 Proptosis（0218 Exophthalmos は分離維持）
+    ],
 }
 
 
@@ -264,26 +350,46 @@ def build(species: str) -> dict:
             )
 
     # --- curated vet-approved same-disease merges (held back by the strict key) ---
-    _auto_ids = {m["canonical"]["id"] for m in merges} | {mm["id"] for m in merges for mm in m["merged"]}
+    # A curated group's canonical (group[0]) may ALSO be an existing auto-merge
+    # canonical (e.g. Ringworm 0002 already absorbed 0243): extend that cluster
+    # rather than dropping the canonical and forming a stray second cluster.
+    canon_index = {m["canonical"]["id"]: m for m in merges}  # canonical id -> merge dict
+    merged_away = {mm["id"] for m in merges for mm in m["merged"]}
     for group in _CURATED_MERGE.get(species, []):
-        present = [rid for rid in group if rid in by_id and rid not in _auto_ids]
-        if len(present) < 2:
-            continue  # already handled by auto-merge or ids absent → skip (idempotent)
-        canonical_id = present[0]
-        merged = present[1:]
-        merges.append(
-            {
+        # Members present in the data and not already merged away by another cluster.
+        members = [rid for rid in group if rid in by_id and rid not in merged_away]
+        if len(members) < 2:
+            continue  # nothing left to merge → skip (idempotent)
+        canonical_id = members[0]
+        add = [rid for rid in members[1:] if rid != canonical_id]
+        if not add:
+            continue
+        existing = canon_index.get(canonical_id)
+        if existing is not None:
+            # Extend the existing (auto or curated) cluster with the new members.
+            have = {mm["id"] for mm in existing["merged"]}
+            for rid in add:
+                if rid in have:
+                    continue
+                existing["merged"].append(ident(rid))
+                have.add(rid)
+                merged_away.add(rid)
+            existing["curated"] = True
+        else:
+            newm = {
                 "canonical": ident(canonical_id),
-                "merged": [ident(rid) for rid in merged],
+                "merged": [ident(rid) for rid in add],
                 "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
                 "inherit_content": True,
                 "curated": True,
             }
-        )
-        _auto_ids.update(present)
+            merges.append(newm)
+            canon_index[canonical_id] = newm
+            merged_away.update(add)
     # Drop review-oversplit entries whose members are now FULLY resolved by a
     # merge (keep entries that still contain an unmerged subtype).
-    review_oversplit = [o for o in review_oversplit if not all(m["id"] in _auto_ids for m in o.get("members", []))]
+    _resolved_ids = set(canon_index) | merged_away
+    review_oversplit = [o for o in review_oversplit if not all(m["id"] in _resolved_ids for m in o.get("members", []))]
 
     # --- archives: unambiguous non-clinical (research models) ---
     # detect.py flags research_model / human_medicine_transplant by keyword, but

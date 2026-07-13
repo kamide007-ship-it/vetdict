@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 346,
-    "merge_clusters": 15,
-    "records_merged_away": 15,
+    "merge_clusters": 29,
+    "records_merged_away": 37,
     "archived": 0,
-    "served_after": 331
+    "served_after": 309
   },
   "merges": [
     {
@@ -239,10 +239,23 @@
           "slug": "cervical-lymphadenitis-lumps",
           "name": "Cervical Lymphadenitis (Lumps)",
           "name_ja": "頸部リンパ節炎（モルモット）"
+        },
+        {
+          "id": "guinea_pig_0102",
+          "slug": "cervical-lymphadenitis-streptococcus-zooepidemicus",
+          "name": "Cervical Lymphadenitis (Streptococcus zooepidemicus)",
+          "name_ja": "頸部リンパ節炎（ストレプトコッカス・ズーエピデミカス）"
+        },
+        {
+          "id": "guinea_pig_0160",
+          "slug": "cervical-lymphadenitis-streptobacillus",
+          "name": "Cervical Lymphadenitis (Streptobacillus)",
+          "name_ja": "頸部リンパ節炎（ストレプトバチルス）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
+      "inherit_content": true,
+      "curated": true
     },
     {
       "canonical": {
@@ -279,156 +292,314 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0006",
+        "slug": "bloat-gastric-dilation",
+        "name": "Bloat (Gastric Dilation)",
+        "name_ja": "鼓脹症（胃拡張）"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0201",
+          "slug": "bloat-gastric-tympany",
+          "name": "Bloat (Gastric Tympany)",
+          "name_ja": "鼓脹症（胃鼓脹）（モルモット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0013",
+        "slug": "fungal-dermatitis-ringworm",
+        "name": "Fungal Dermatitis (Ringworm)",
+        "name_ja": "皮膚糸状菌症（白癬）"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0126",
+          "slug": "ringworm-trichophyton-mentagrophytes",
+          "name": "Ringworm (Trichophyton mentagrophytes)",
+          "name_ja": "皮膚糸状菌症（トリコフィトン・メンタグロフィテス）"
+        },
+        {
+          "id": "guinea_pig_0235",
+          "slug": "dermatophytosis-ringworm",
+          "name": "Dermatophytosis (Ringworm)",
+          "name_ja": "皮膚糸状菌症（モルモット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0017",
+        "slug": "pododermatitis-bumblefoot",
+        "name": "Pododermatitis (Bumblefoot)",
+        "name_ja": "足底皮膚炎（バンブルフット）"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0168",
+          "slug": "pododermatitis-grade-i-early",
+          "name": "Pododermatitis - Grade I (Early)",
+          "name_ja": "足底皮膚炎（グレードI・初期）"
+        },
+        {
+          "id": "guinea_pig_0169",
+          "slug": "pododermatitis-grade-iii-severe",
+          "name": "Pododermatitis - Grade III (Severe)",
+          "name_ja": "足底皮膚炎（グレードIII・重度）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0028",
+        "slug": "dystocia",
+        "name": "Dystocia",
+        "name_ja": "難産"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0166",
+          "slug": "dystocia-fetal-oversize",
+          "name": "Dystocia - Fetal Oversize",
+          "name_ja": "難産（胎子過大）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0029",
+        "slug": "pregnancy-toxemia-ketosis",
+        "name": "Pregnancy Toxemia (Ketosis)",
+        "name_ja": "妊娠中毒症（ケトーシス）"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0150",
+          "slug": "toxemia-of-pregnancy-late-gestation",
+          "name": "Toxemia of Pregnancy (Late Gestation)",
+          "name_ja": "妊娠中毒症（妊娠後期）"
+        },
+        {
+          "id": "guinea_pig_0164",
+          "slug": "pregnancy-toxemia-pre-partum",
+          "name": "Pregnancy Toxemia - Pre-partum",
+          "name_ja": "妊娠中毒症（分娩前）"
+        },
+        {
+          "id": "guinea_pig_0165",
+          "slug": "pregnancy-toxemia-post-partum",
+          "name": "Pregnancy Toxemia - Post-partum",
+          "name_ja": "妊娠中毒症（分娩後）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0050",
+        "slug": "scurvy-vitamin-c-deficiency",
+        "name": "Scurvy (Vitamin C Deficiency)",
+        "name_ja": "壊血病（ビタミンC欠乏症）"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0157",
+          "slug": "scurvy-subclinical",
+          "name": "Scurvy - Subclinical",
+          "name_ja": "壊血病（不顕性）"
+        },
+        {
+          "id": "guinea_pig_0158",
+          "slug": "scurvy-musculoskeletal-form",
+          "name": "Scurvy - Musculoskeletal Form",
+          "name_ja": "壊血病（筋骨格型）"
+        },
+        {
+          "id": "guinea_pig_0159",
+          "slug": "scurvy-hemorrhagic-form",
+          "name": "Scurvy - Hemorrhagic Form",
+          "name_ja": "壊血病（出血型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0066",
+        "slug": "leukemia",
+        "name": "Leukemia",
+        "name_ja": "白血病"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0119",
+          "slug": "leukemia-lymphocytic",
+          "name": "Leukemia (Lymphocytic)",
+          "name_ja": "白血病（リンパ球性）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0074",
+        "slug": "fur-mites-chirodiscoides-caviae",
+        "name": "Fur Mites (Chirodiscoides caviae)",
+        "name_ja": "毛ダニ症"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0172",
+          "slug": "fur-mites-heavy-infestation",
+          "name": "Fur Mites - Heavy Infestation",
+          "name_ja": "毛ダニ症（重度感染）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0077",
+        "slug": "otitis-media-interna-middle-inner-ear-infection",
+        "name": "Otitis Media/Interna (Middle/Inner Ear Infection)",
+        "name_ja": "中耳炎・内耳炎"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0260",
+          "slug": "otitis-media-interna",
+          "name": "Otitis Media/Interna",
+          "name_ja": "中耳/内耳炎（モルモット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0082",
+        "slug": "hepatic-lipidosis-fatty-liver",
+        "name": "Hepatic Lipidosis (Fatty Liver)",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0214",
+          "slug": "hepatic-lipidosis",
+          "name": "Hepatic Lipidosis",
+          "name_ja": "肝リピドーシス（モルモット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0087",
+        "slug": "alopecia-non-specific-hair-loss",
+        "name": "Alopecia (Non-specific Hair Loss)",
+        "name_ja": "脱毛症（非特異性）"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0241",
+          "slug": "alopecia",
+          "name": "Alopecia",
+          "name_ja": "脱毛症（モルモット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0121",
+        "slug": "ketosis-non-pregnant",
+        "name": "Ketosis (Non-pregnant)",
+        "name_ja": "ケトーシス（非妊娠）"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0336",
+          "slug": "ketosis",
+          "name": "Ketosis",
+          "name_ja": "ケトーシス（モルモット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0123",
+        "slug": "hypovitaminosis-a",
+        "name": "Hypovitaminosis A",
+        "name_ja": "ビタミンA欠乏症"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0175",
+          "slug": "vitamin-a-deficiency-ocular",
+          "name": "Vitamin A Deficiency - Ocular",
+          "name_ja": "ビタミンA欠乏症（眼型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0191",
+        "slug": "cecal-dysbiosis-antibiotic-induced",
+        "name": "Cecal Dysbiosis (Antibiotic-induced)",
+        "name_ja": "盲腸内細菌叢異常（抗生物質誘発性）"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0200",
+          "slug": "cecal-dysbiosis",
+          "name": "Cecal Dysbiosis",
+          "name_ja": "盲腸細菌叢異常（モルモット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Bloat (Gastric Dilation)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0006",
-            "slug": "bloat-gastric-dilation",
-            "name": "Bloat (Gastric Dilation)",
-            "name_ja": "鼓脹症（胃拡張）"
-          },
-          {
-            "id": "guinea_pig_0201",
-            "slug": "bloat-gastric-tympany",
-            "name": "Bloat (Gastric Tympany)",
-            "name_ja": "鼓脹症（胃鼓脹）（モルモット）"
-          }
-        ]
-      },
-      {
-        "base": "Fungal Dermatitis (Ringworm)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0013",
-            "slug": "fungal-dermatitis-ringworm",
-            "name": "Fungal Dermatitis (Ringworm)",
-            "name_ja": "皮膚糸状菌症（白癬）"
-          },
-          {
-            "id": "guinea_pig_0126",
-            "slug": "ringworm-trichophyton-mentagrophytes",
-            "name": "Ringworm (Trichophyton mentagrophytes)",
-            "name_ja": "皮膚糸状菌症（トリコフィトン・メンタグロフィテス）"
-          },
-          {
-            "id": "guinea_pig_0235",
-            "slug": "dermatophytosis-ringworm",
-            "name": "Dermatophytosis (Ringworm)",
-            "name_ja": "皮膚糸状菌症（モルモット）"
-          }
-        ]
-      },
-      {
-        "base": "Pododermatitis (Bumblefoot)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0017",
-            "slug": "pododermatitis-bumblefoot",
-            "name": "Pododermatitis (Bumblefoot)",
-            "name_ja": "足底皮膚炎（バンブルフット）"
-          },
-          {
-            "id": "guinea_pig_0168",
-            "slug": "pododermatitis-grade-i-early",
-            "name": "Pododermatitis - Grade I (Early)",
-            "name_ja": "足底皮膚炎（グレードI・初期）"
-          },
-          {
-            "id": "guinea_pig_0169",
-            "slug": "pododermatitis-grade-iii-severe",
-            "name": "Pododermatitis - Grade III (Severe)",
-            "name_ja": "足底皮膚炎（グレードIII・重度）"
-          }
-        ]
-      },
-      {
-        "base": "Dystocia",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0028",
-            "slug": "dystocia",
-            "name": "Dystocia",
-            "name_ja": "難産"
-          },
-          {
-            "id": "guinea_pig_0166",
-            "slug": "dystocia-fetal-oversize",
-            "name": "Dystocia - Fetal Oversize",
-            "name_ja": "難産（胎子過大）"
-          }
-        ]
-      },
-      {
-        "base": "Pregnancy Toxemia (Ketosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0029",
-            "slug": "pregnancy-toxemia-ketosis",
-            "name": "Pregnancy Toxemia (Ketosis)",
-            "name_ja": "妊娠中毒症（ケトーシス）"
-          },
-          {
-            "id": "guinea_pig_0150",
-            "slug": "toxemia-of-pregnancy-late-gestation",
-            "name": "Toxemia of Pregnancy (Late Gestation)",
-            "name_ja": "妊娠中毒症（妊娠後期）"
-          },
-          {
-            "id": "guinea_pig_0164",
-            "slug": "pregnancy-toxemia-pre-partum",
-            "name": "Pregnancy Toxemia - Pre-partum",
-            "name_ja": "妊娠中毒症（分娩前）"
-          },
-          {
-            "id": "guinea_pig_0165",
-            "slug": "pregnancy-toxemia-post-partum",
-            "name": "Pregnancy Toxemia - Post-partum",
-            "name_ja": "妊娠中毒症（分娩後）"
-          }
-        ]
-      },
-      {
-        "base": "Scurvy (Vitamin C Deficiency)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0050",
-            "slug": "scurvy-vitamin-c-deficiency",
-            "name": "Scurvy (Vitamin C Deficiency)",
-            "name_ja": "壊血病（ビタミンC欠乏症）"
-          },
-          {
-            "id": "guinea_pig_0157",
-            "slug": "scurvy-subclinical",
-            "name": "Scurvy - Subclinical",
-            "name_ja": "壊血病（不顕性）"
-          },
-          {
-            "id": "guinea_pig_0158",
-            "slug": "scurvy-musculoskeletal-form",
-            "name": "Scurvy - Musculoskeletal Form",
-            "name_ja": "壊血病（筋骨格型）"
-          },
-          {
-            "id": "guinea_pig_0159",
-            "slug": "scurvy-hemorrhagic-form",
-            "name": "Scurvy - Hemorrhagic Form",
-            "name_ja": "壊血病（出血型）"
-          }
-        ]
-      },
       {
         "base": "Trichofolliculoma",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -448,108 +619,6 @@
         ]
       },
       {
-        "base": "Leukemia",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0066",
-            "slug": "leukemia",
-            "name": "Leukemia",
-            "name_ja": "白血病"
-          },
-          {
-            "id": "guinea_pig_0119",
-            "slug": "leukemia-lymphocytic",
-            "name": "Leukemia (Lymphocytic)",
-            "name_ja": "白血病（リンパ球性）"
-          }
-        ]
-      },
-      {
-        "base": "Fur Mites (Chirodiscoides caviae)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0074",
-            "slug": "fur-mites-chirodiscoides-caviae",
-            "name": "Fur Mites (Chirodiscoides caviae)",
-            "name_ja": "毛ダニ症"
-          },
-          {
-            "id": "guinea_pig_0172",
-            "slug": "fur-mites-heavy-infestation",
-            "name": "Fur Mites - Heavy Infestation",
-            "name_ja": "毛ダニ症（重度感染）"
-          }
-        ]
-      },
-      {
-        "base": "Otitis Media/Interna (Middle/Inner Ear Infection)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0077",
-            "slug": "otitis-media-interna-middle-inner-ear-infection",
-            "name": "Otitis Media/Interna (Middle/Inner Ear Infection)",
-            "name_ja": "中耳炎・内耳炎"
-          },
-          {
-            "id": "guinea_pig_0260",
-            "slug": "otitis-media-interna",
-            "name": "Otitis Media/Interna",
-            "name_ja": "中耳/内耳炎（モルモット）"
-          }
-        ]
-      },
-      {
-        "base": "Hepatic Lipidosis (Fatty Liver)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0082",
-            "slug": "hepatic-lipidosis-fatty-liver",
-            "name": "Hepatic Lipidosis (Fatty Liver)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "guinea_pig_0214",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（モルモット）"
-          }
-        ]
-      },
-      {
-        "base": "Cervical Lymphadenitis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0084",
-            "slug": "cervical-lymphadenitis",
-            "name": "Cervical Lymphadenitis",
-            "name_ja": "頸部リンパ節炎"
-          },
-          {
-            "id": "guinea_pig_0102",
-            "slug": "cervical-lymphadenitis-streptococcus-zooepidemicus",
-            "name": "Cervical Lymphadenitis (Streptococcus zooepidemicus)",
-            "name_ja": "頸部リンパ節炎（ストレプトコッカス・ズーエピデミカス）"
-          },
-          {
-            "id": "guinea_pig_0160",
-            "slug": "cervical-lymphadenitis-streptobacillus",
-            "name": "Cervical Lymphadenitis (Streptobacillus)",
-            "name_ja": "頸部リンパ節炎（ストレプトバチルス）"
-          },
-          {
-            "id": "guinea_pig_0246",
-            "slug": "cervical-lymphadenitis-lumps",
-            "name": "Cervical Lymphadenitis (Lumps)",
-            "name_ja": "頸部リンパ節炎（モルモット）"
-          }
-        ]
-      },
-      {
         "base": "Ileus",
         "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
         "members": [
@@ -564,60 +633,6 @@
             "slug": "intestinal-obstruction",
             "name": "Intestinal Obstruction",
             "name_ja": "腸閉塞（モルモット）"
-          }
-        ]
-      },
-      {
-        "base": "Alopecia (Non-specific Hair Loss)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0087",
-            "slug": "alopecia-non-specific-hair-loss",
-            "name": "Alopecia (Non-specific Hair Loss)",
-            "name_ja": "脱毛症（非特異性）"
-          },
-          {
-            "id": "guinea_pig_0241",
-            "slug": "alopecia",
-            "name": "Alopecia",
-            "name_ja": "脱毛症（モルモット）"
-          }
-        ]
-      },
-      {
-        "base": "Ketosis (Non-pregnant)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0121",
-            "slug": "ketosis-non-pregnant",
-            "name": "Ketosis (Non-pregnant)",
-            "name_ja": "ケトーシス（非妊娠）"
-          },
-          {
-            "id": "guinea_pig_0336",
-            "slug": "ketosis",
-            "name": "Ketosis",
-            "name_ja": "ケトーシス（モルモット）"
-          }
-        ]
-      },
-      {
-        "base": "Hypovitaminosis A",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0123",
-            "slug": "hypovitaminosis-a",
-            "name": "Hypovitaminosis A",
-            "name_ja": "ビタミンA欠乏症"
-          },
-          {
-            "id": "guinea_pig_0175",
-            "slug": "vitamin-a-deficiency-ocular",
-            "name": "Vitamin A Deficiency - Ocular",
-            "name_ja": "ビタミンA欠乏症（眼型）"
           }
         ]
       },
@@ -660,24 +675,6 @@
             "slug": "antibiotic-toxicity",
             "name": "Antibiotic Toxicity",
             "name_ja": "抗生物質毒性（モルモット）"
-          }
-        ]
-      },
-      {
-        "base": "Cecal Dysbiosis (Antibiotic-induced)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0191",
-            "slug": "cecal-dysbiosis-antibiotic-induced",
-            "name": "Cecal Dysbiosis (Antibiotic-induced)",
-            "name_ja": "盲腸内細菌叢異常（抗生物質誘発性）"
-          },
-          {
-            "id": "guinea_pig_0200",
-            "slug": "cecal-dysbiosis",
-            "name": "Cecal Dysbiosis",
-            "name_ja": "盲腸細菌叢異常（モルモット）"
           }
         ]
       }

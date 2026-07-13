@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 221,
-    "merge_clusters": 6,
-    "records_merged_away": 6,
+    "merge_clusters": 21,
+    "records_merged_away": 23,
     "archived": 0,
-    "served_after": 215
+    "served_after": 198
   },
   "merges": [
     {
@@ -117,138 +117,309 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0001",
+        "slug": "calcium-deficiency-hypocalcemia",
+        "name": "Calcium Deficiency (Hypocalcemia)",
+        "name_ja": "カルシウム欠乏症（低カルシウム血症）"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0135",
+          "slug": "calcium-deficiency",
+          "name": "Calcium Deficiency",
+          "name_ja": "カルシウム欠乏症（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0006",
+        "slug": "hypoglycemia",
+        "name": "Hypoglycemia",
+        "name_ja": "低血糖症"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0088",
+          "slug": "hypoglycemia-neonatal",
+          "name": "Hypoglycemia (Neonatal)",
+          "name_ja": "低血糖症（新生児）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0008",
+        "slug": "iron-storage-disease-hemochromatosis",
+        "name": "Iron Storage Disease (Hemochromatosis)",
+        "name_ja": "鉄過剰症（ヘモクロマトーシス）"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0080",
+          "slug": "iron-storage-disease-hepatic",
+          "name": "Iron Storage Disease (Hepatic)",
+          "name_ja": "鉄蓄積症（肝臓型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0019",
+        "slug": "mite-infestation-sarcoptic-demodex",
+        "name": "Mite Infestation (Sarcoptic / Demodex)",
+        "name_ja": "ダニ感染症"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0155",
+          "slug": "mite-infestation",
+          "name": "Mite Infestation",
+          "name_ja": "ダニ症（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0022",
+        "slug": "toxoplasmosis",
+        "name": "Toxoplasmosis",
+        "name_ja": "トキソプラズマ症"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0097",
+          "slug": "toxoplasmosis-acute",
+          "name": "Toxoplasmosis (Acute)",
+          "name_ja": "トキソプラズマ症（急性）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0024",
+        "slug": "pneumonia",
+        "name": "Pneumonia",
+        "name_ja": "肺炎"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0219",
+          "slug": "pneumonia-bacterial",
+          "name": "Pneumonia (Bacterial)",
+          "name_ja": "細菌性肺炎（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0026",
+        "slug": "diarrhea-non-specific",
+        "name": "Diarrhea (Non-specific)",
+        "name_ja": "下痢（非特異的）"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0147",
+          "slug": "diarrhea",
+          "name": "Diarrhea",
+          "name_ja": "下痢（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0043",
+        "slug": "pouch-infection-joeyitis",
+        "name": "Pouch Infection (Joeyitis)",
+        "name_ja": "育児嚢感染症"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0073",
+          "slug": "pouch-infection-marsupitis",
+          "name": "Pouch Infection (Marsupitis)",
+          "name_ja": "育児嚢感染（マーシュピティス）"
+        },
+        {
+          "id": "sugar_glider_0193",
+          "slug": "pouch-infection-marsupial",
+          "name": "Pouch Infection (Marsupial)",
+          "name_ja": "育児嚢感染（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0044",
+        "slug": "seizures-mbd-related",
+        "name": "Seizures (MBD-related)",
+        "name_ja": "てんかん発作（MBD関連）"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0166",
+          "slug": "seizures",
+          "name": "Seizures",
+          "name_ja": "痙攣発作（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0051",
+        "slug": "hepatic-lipidosis-fatty-liver",
+        "name": "Hepatic Lipidosis (Fatty Liver)",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0153",
+          "slug": "hepatic-lipidosis",
+          "name": "Hepatic Lipidosis",
+          "name_ja": "肝リピドーシス（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0059",
+        "slug": "patagium-tear-membrane-injury",
+        "name": "Patagium Tear (Membrane Injury)",
+        "name_ja": "飛膜損傷"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0071",
+          "slug": "patagium-laceration-severe",
+          "name": "Patagium Laceration (Severe)",
+          "name_ja": "飛膜裂傷（重症型）"
+        },
+        {
+          "id": "sugar_glider_0138",
+          "slug": "patagium-tear",
+          "name": "Patagium Tear",
+          "name_ja": "飛膜裂傷（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0061",
+        "slug": "heat-stroke",
+        "name": "Heat Stroke",
+        "name_ja": "熱中症"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0180",
+          "slug": "heat-stroke-respiratory",
+          "name": "Heat Stroke (Respiratory)",
+          "name_ja": "熱中症（呼吸器型）（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0069",
+        "slug": "nutritional-osteodystrophy",
+        "name": "Nutritional Osteodystrophy",
+        "name_ja": "栄養性骨異栄養症"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0133",
+          "slug": "nutritional-osteodystrophy-mbd",
+          "name": "Nutritional Osteodystrophy (MBD)",
+          "name_ja": "栄養性骨異栄養症（MBD）（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0075",
+        "slug": "dystocia-marsupial",
+        "name": "Dystocia (Marsupial)",
+        "name_ja": "難産（有袋類）"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0170",
+          "slug": "dystocia",
+          "name": "Dystocia",
+          "name_ja": "難産（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "sugar_glider_0038",
+        "slug": "proptosis-eye-prolapse",
+        "name": "Proptosis (Eye Prolapse)",
+        "name_ja": "眼球突出"
+      },
+      "merged": [
+        {
+          "id": "sugar_glider_0165",
+          "slug": "proptosis",
+          "name": "Proptosis",
+          "name_ja": "眼球脱出（フクロモモンガ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Calcium Deficiency (Hypocalcemia)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0001",
-            "slug": "calcium-deficiency-hypocalcemia",
-            "name": "Calcium Deficiency (Hypocalcemia)",
-            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
-          },
-          {
-            "id": "sugar_glider_0135",
-            "slug": "calcium-deficiency",
-            "name": "Calcium Deficiency",
-            "name_ja": "カルシウム欠乏症（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "base": "Hypoglycemia",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0006",
-            "slug": "hypoglycemia",
-            "name": "Hypoglycemia",
-            "name_ja": "低血糖症"
-          },
-          {
-            "id": "sugar_glider_0088",
-            "slug": "hypoglycemia-neonatal",
-            "name": "Hypoglycemia (Neonatal)",
-            "name_ja": "低血糖症（新生児）"
-          }
-        ]
-      },
-      {
-        "base": "Iron Storage Disease (Hemochromatosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0008",
-            "slug": "iron-storage-disease-hemochromatosis",
-            "name": "Iron Storage Disease (Hemochromatosis)",
-            "name_ja": "鉄過剰症（ヘモクロマトーシス）"
-          },
-          {
-            "id": "sugar_glider_0080",
-            "slug": "iron-storage-disease-hepatic",
-            "name": "Iron Storage Disease (Hepatic)",
-            "name_ja": "鉄蓄積症（肝臓型）"
-          }
-        ]
-      },
-      {
-        "base": "Mite Infestation (Sarcoptic / Demodex)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0019",
-            "slug": "mite-infestation-sarcoptic-demodex",
-            "name": "Mite Infestation (Sarcoptic / Demodex)",
-            "name_ja": "ダニ感染症"
-          },
-          {
-            "id": "sugar_glider_0155",
-            "slug": "mite-infestation",
-            "name": "Mite Infestation",
-            "name_ja": "ダニ症（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "base": "Toxoplasmosis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0022",
-            "slug": "toxoplasmosis",
-            "name": "Toxoplasmosis",
-            "name_ja": "トキソプラズマ症"
-          },
-          {
-            "id": "sugar_glider_0097",
-            "slug": "toxoplasmosis-acute",
-            "name": "Toxoplasmosis (Acute)",
-            "name_ja": "トキソプラズマ症（急性）"
-          }
-        ]
-      },
-      {
-        "base": "Pneumonia",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0024",
-            "slug": "pneumonia",
-            "name": "Pneumonia",
-            "name_ja": "肺炎"
-          },
-          {
-            "id": "sugar_glider_0219",
-            "slug": "pneumonia-bacterial",
-            "name": "Pneumonia (Bacterial)",
-            "name_ja": "細菌性肺炎（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "base": "Diarrhea (Non-specific)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0026",
-            "slug": "diarrhea-non-specific",
-            "name": "Diarrhea (Non-specific)",
-            "name_ja": "下痢（非特異的）"
-          },
-          {
-            "id": "sugar_glider_0147",
-            "slug": "diarrhea",
-            "name": "Diarrhea",
-            "name_ja": "下痢（フクロモモンガ）"
-          }
-        ]
-      },
       {
         "base": "Proptosis (Eye Prolapse)",
         "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
@@ -292,126 +463,6 @@
         ]
       },
       {
-        "base": "Pouch Infection (Joeyitis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0043",
-            "slug": "pouch-infection-joeyitis",
-            "name": "Pouch Infection (Joeyitis)",
-            "name_ja": "育児嚢感染症"
-          },
-          {
-            "id": "sugar_glider_0073",
-            "slug": "pouch-infection-marsupitis",
-            "name": "Pouch Infection (Marsupitis)",
-            "name_ja": "育児嚢感染（マーシュピティス）"
-          },
-          {
-            "id": "sugar_glider_0193",
-            "slug": "pouch-infection-marsupial",
-            "name": "Pouch Infection (Marsupial)",
-            "name_ja": "育児嚢感染（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "base": "Seizures (MBD-related)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0044",
-            "slug": "seizures-mbd-related",
-            "name": "Seizures (MBD-related)",
-            "name_ja": "てんかん発作（MBD関連）"
-          },
-          {
-            "id": "sugar_glider_0166",
-            "slug": "seizures",
-            "name": "Seizures",
-            "name_ja": "痙攣発作（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "base": "Hepatic Lipidosis (Fatty Liver)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0051",
-            "slug": "hepatic-lipidosis-fatty-liver",
-            "name": "Hepatic Lipidosis (Fatty Liver)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "sugar_glider_0153",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "base": "Patagium Tear (Membrane Injury)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0059",
-            "slug": "patagium-tear-membrane-injury",
-            "name": "Patagium Tear (Membrane Injury)",
-            "name_ja": "飛膜損傷"
-          },
-          {
-            "id": "sugar_glider_0071",
-            "slug": "patagium-laceration-severe",
-            "name": "Patagium Laceration (Severe)",
-            "name_ja": "飛膜裂傷（重症型）"
-          },
-          {
-            "id": "sugar_glider_0138",
-            "slug": "patagium-tear",
-            "name": "Patagium Tear",
-            "name_ja": "飛膜裂傷（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "base": "Heat Stroke",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0061",
-            "slug": "heat-stroke",
-            "name": "Heat Stroke",
-            "name_ja": "熱中症"
-          },
-          {
-            "id": "sugar_glider_0180",
-            "slug": "heat-stroke-respiratory",
-            "name": "Heat Stroke (Respiratory)",
-            "name_ja": "熱中症（呼吸器型）（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "base": "Nutritional Osteodystrophy",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0069",
-            "slug": "nutritional-osteodystrophy",
-            "name": "Nutritional Osteodystrophy",
-            "name_ja": "栄養性骨異栄養症"
-          },
-          {
-            "id": "sugar_glider_0133",
-            "slug": "nutritional-osteodystrophy-mbd",
-            "name": "Nutritional Osteodystrophy (MBD)",
-            "name_ja": "栄養性骨異栄養症（MBD）（フクロモモンガ）"
-          }
-        ]
-      },
-      {
         "base": "Ick (Bacterial Skin Infection)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -426,24 +477,6 @@
             "slug": "ick-stress-related-dermatitis",
             "name": "Ick (Stress-Related Dermatitis)",
             "name_ja": "ストレス性皮膚炎（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "base": "Dystocia (Marsupial)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "sugar_glider_0075",
-            "slug": "dystocia-marsupial",
-            "name": "Dystocia (Marsupial)",
-            "name_ja": "難産（有袋類）"
-          },
-          {
-            "id": "sugar_glider_0170",
-            "slug": "dystocia",
-            "name": "Dystocia",
-            "name_ja": "難産（フクロモモンガ）"
           }
         ]
       },
