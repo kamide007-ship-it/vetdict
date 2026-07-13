@@ -96,6 +96,20 @@
 - [x] **ferret curated レビューワークシート（提示のみ・未適用）** → `.spec/FERRET_CONSOLIDATION_REVIEW.md`
       auto tier 10（追認可否）＋ curated 同一疾患候補19（（フェレット）タグ二重登録が大半・承認で ≈248 served）
       ＋分離維持2（消化管異物 線状/一般・骨腫 頭蓋/一般）。**未適用**＝承認後に `_CURATED_MERGES["ferret"]` へ追記して apply。
+- [x] **小型エキゾ哺乳類5種の curated レビューワークシート（提示のみ・未適用）** — degu/ferret/rabbit と同型の
+      「水増し（病期/病型/重症度/臓器/種タグ分割）」を builder dry-run から抽出し提示。**いずれも未適用**（✅/❌/✏️ 待ち）:
+      - `.spec/HAMSTER_CONSOLIDATION_REVIEW.md`（auto 9 / B 15+要確認4 / C 眼球突出ガード。承認で 312→≈286 served。
+        **クロス**: ウェットテイル＝増殖性回腸炎 計5件が同一疾患）
+      - `.spec/GUINEA_PIG_CONSOLIDATION_REVIEW.md`（auto 15 / B 15+要確認1 / C 腸閉塞ガード・毛包腫mislabel・干し草刺傷部位別。
+        承認で 331→≈310 served。妊娠中毒症4件・壊血病4件が同一）
+      - `.spec/CHINCHILLA_CONSOLIDATION_REVIEW.md`（auto 16 / B 16+要確認1 / C 眼球突出ガード・歯科4病変は別疾患。
+        承認で 260→≈240 served。毛噛み5件が同一。**クロス**: 陰茎毛輪/ファーリング、ケトーシス/妊娠中毒症）
+      - `.spec/SUGAR_GLIDER_CONSOLIDATION_REVIEW.md`（auto 6 / B 15+要確認1 / C 眼球突出ガード。承認で 215→≈198 served。
+        Proptosis3クラスタ＝0165統合/0188分離。MBD複合は相互参照推奨）
+      - `.spec/HEDGEHOG_CONSOLIDATION_REVIEW.md`（auto 6 / B 11 / C 眼球突出ガード。承認で 238→≈227 served。
+        皮膚糸状菌症4件が同一。**クロス**: 肝リピドーシス/脂肪肝が肥満/非肥満で分散）
+      - degu/ferret/rabbit と共通の設計: auto は追認可否のみ、B は承認後 `_CURATED_MERGE["<species>"]` に追記し
+        `build_canonical.py <species> --apply`（バックアップ・冪等・301・即ロールバック）。**このバッチでは未適用。**
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**
 - [x] **T105/T106 fail-closed 公開ゲート＋ワークリスト**（main, merged）→ `.spec/T105_T106_DOSAGE_GATE.md`
