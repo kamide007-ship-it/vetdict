@@ -110,6 +110,31 @@
         皮膚糸状菌症4件が同一。**クロス**: 肝リピドーシス/脂肪肝が肥満/非肥満で分散）
       - degu/ferret/rabbit と共通の設計: auto は追認可否のみ、B は承認後 `_CURATED_MERGE["<species>"]` に追記し
         `build_canonical.py <species> --apply`（バックアップ・冪等・301・即ロールバック）。**このバッチでは未適用。**
+- [x] **残り全11種の curated レビューワークシート（提示のみ・未適用）** — これで**全21種にワークシート完備**。
+      grounded data（builder auto-tier ＋ name_ja exact-dup クラスタ ＋ family クラスタ）から生成。全ワークシートで
+      **引用 id を実レコードと照合済み（invented id ゼロ）**。read-only・データ非改変（`.spec/*.md` のみ）。
+      - `.spec/DOG_CONSOLIDATION_REVIEW.md`（auto 12 / B 20〈firm 16+✏️4〉/ C 4。623→611 served、B全承認で ≈591。
+        ガード非該当。PSS 先天/後天・HSA 脾/心は分離）
+      - `.spec/BIRD_CONSOLIDATION_REVIEW.md`（auto 21 / B 30〈+✏️5〉/ C 2。551→530、B全承認で ≈499。
+        鉄蓄積症 name_ja 矛盾は**rename候補**、翼/脚骨折は分離）
+      - `.spec/PARAKEET_CONSOLIDATION_REVIEW.md`（auto 21 / B 18〈+✏️5〉/ C 5。459→437、B全承認で ≈415。
+        ダニ/マダニ mislabel は rename、Crop stasis/impaction は腸閉塞ガード）
+      - `.spec/PARROT_CONSOLIDATION_REVIEW.md`（auto 8 / B 11〈+✏️2〉/ C。283→275、B全承認で ≈263。PDD 4ラベル散在）
+      - `.spec/REPTILE_CONSOLIDATION_REVIEW.md`（auto 6 / B 14〈+✏️2〉/ C 3。286→280、B全承認で ≈265。
+        Shell Rot/SCUD は近似 name_ja だが別病態でクロス統合しない）
+      - `.spec/TORTOISE_CONSOLIDATION_REVIEW.md`（auto 9 / B 23〈firm 13+✏️11〉/ C。288→279、firm-only ≈266。
+        殻骨折 exact-dup 誤群を甲羅骨折へ訂正、痛風 内臓/関節は分離。臓器×病因テンプレ 0263-0287 はデータモデル課題）
+      - `.spec/SNAKE_CONSOLIDATION_REVIEW.md`（auto 5 / B 11〈+✏️5〉/ C 5。248→243、B全承認で ≈231。
+        SFD/Ophidiomycosis 3件統合、Sunshine Virus=Reptarenavirus/IBD mislabel、四肢/殻骨折は誤テンプレ→rename）
+      - `.spec/LIZARD_CONSOLIDATION_REVIEW.md`（auto 9 / B 21〈+✏️3〉/ C。250→241、B全承認で ≈219。
+        痛風二重登録・Yellow Fungus/CANV 3件、殻骨折 0217 は誤テンプレ→rename、5系統アデノは要獣医レビュー）
+      - `.spec/AMPHIBIAN_CONSOLIDATION_REVIEW.md`（auto 4 / B 3 / C 8。254→251。**脱皮不全≠ツボカビ**ガード遵守、
+        Bd/Bsal 別病原体で分離、殻骨折 mislabel→rename。Bsal 3ラベル散在は最有力の追加統合候補）
+      - `.spec/EXOTIC_OTHER_CONSOLIDATION_REVIEW.md`（**混在種バケツ**・auto 3 / B 24〈+✏️6〉/ C 13。292→289、
+        B全承認で ≈264。汎用タグ×汎用タグのみ統合、別宿主〈豚/ヤギ/プレーリードッグ等〉は分離、臓器×病因スタブは除外）
+      - `.spec/FISH_CONSOLIDATION_REVIEW.md`（**統合対象ゼロ**。45件・重複0・過分割0。T103対象外）
+      - 適用は全て未実行。auto は追認可否のみ、B は承認後 `_CURATED_MERGE["<species>"]` に追記し
+        `build_canonical.py <species> --apply`。**このバッチでは未適用（✅/❌/✏️ 待ち）。**
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**
 - [x] **T105/T106 fail-closed 公開ゲート＋ワークリスト**（main, merged）→ `.spec/T105_T106_DOSAGE_GATE.md`
