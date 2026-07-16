@@ -421,6 +421,74 @@ _CURATED_MERGE: dict[str, list[list[str]]] = {
 }
 
 
+# Second tier: worksheet ✏️要確認 rows that a veterinarian has since confirmed
+# are the SAME disease (staging/severity/species-tag/spelling/synonym/subset-of-
+# umbrella/complication-annotation). Kept SEPARATE from _CURATED_MERGE so the two
+# approval waves stay auditable and independently reversible. Rows that are rename
+# candidates (label errors = different entities), genuine parent/child, or require
+# taxonomic review are deliberately NOT here (they stay unmerged pending a rename
+# or an explicit keep-distinct decision).
+_CURATED_MERGE_VETFLAGGED: dict[str, list[list[str]]] = {
+    "hamster": [
+        ["hamster_0041", "hamster_0166", "hamster_0167"],  # 全身性アミロイドーシス（臓器優位型）
+        ["hamster_0086", "hamster_0170", "hamster_0171"],  # 冬眠症候群（重症度）
+        ["hamster_0092", "hamster_0202"],  # 腸閉塞（糞便嵌頓＝機械性）
+        ["hamster_0168", "hamster_0169"],  # 多発性嚢胞性疾患（臓器型）
+    ],
+    "guinea_pig": [
+        ["guinea_pig_0162", "guinea_pig_0163", "guinea_pig_0290"],  # 抗生物質関連腸性中毒（薬剤クラス別）
+    ],
+    "chinchilla": [
+        ["chinchilla_0006", "chinchilla_0150"],  # 便秘（慢性）※巨大結腸症 0175 は別疾患で分離維持
+    ],
+    "reptile": [
+        ["reptile_0043", "reptile_0212", "reptile_0254"],  # 食欲不振（非特異/行動性/ストレス性）
+        ["reptile_0058", "reptile_0161"],  # 排卵前卵胞停滞（卵黄性体腔炎の続発注記）
+    ],
+    "tortoise": [
+        ["tortoise_0050", "tortoise_0201"],  # 皮下膿瘍（一般膿瘍＝皮下）
+        ["tortoise_0079", "tortoise_0190"],  # ダニ寄生（Ophionyssus）
+        ["tortoise_0116", "tortoise_0178"],  # 慢性濾胞停滞
+        ["tortoise_0221", "tortoise_0262"],  # 拒食（行動性/ストレス性）
+        ["tortoise_0017", "tortoise_0172", "tortoise_0196"],  # 鞭毛虫感染症（綴り差）
+        ["tortoise_0008", "tortoise_0185"],  # マイコプラズマ症（0166 URTD は別）
+        ["tortoise_0018", "tortoise_0195"],  # コクシジウム症（TINC 0013 は別病原体で分離）
+        ["tortoise_0057", "tortoise_0212"],  # 陰茎/半陰茎脱出
+        ["tortoise_0056", "tortoise_0222"],  # 総排泄腔/直腸脱
+        ["tortoise_0115", "tortoise_0211"],  # 卵黄性体腔炎
+    ],
+    "snake": [
+        ["snake_0001", "snake_0156"],  # パラミクソウイルス感染症（種タグ）
+        ["snake_0051", "snake_0151"],  # 脊椎骨症（種タグ）
+        ["snake_0045", "snake_0187"],  # 半陰茎脱出（種タグ）
+        ["snake_0089", "snake_0169"],  # 鞭毛虫感染症（綴り差）
+        ["snake_0012", "snake_0163"],  # ヘビダニ（Ophionyssus 追加）
+        ["snake_0049", "snake_0180"],  # 内臓痛風（二重登録・同型）
+        ["snake_0048", "snake_0181"],  # 関節痛風（二重登録・同型）
+    ],
+    "lizard": [
+        ["lizard_0017", "lizard_0208"],  # 上部呼吸器感染症（URI/URTD）
+        ["lizard_0048", "lizard_0205"],  # 総排泄腔/直腸脱
+    ],
+    "parakeet": [
+        ["parakeet_0034", "parakeet_0257"],  # 肝リピドーシス（種子食）
+        ["parakeet_0038", "parakeet_0196"],  # テフロン中毒（PTFE）
+        ["parakeet_0042", "parakeet_0256"],  # 精巣腫瘍（ろう膜変色）
+        ["parakeet_0043", "parakeet_0177", "parakeet_0263"],  # 黄色腫（進行型/翼）
+        ["parakeet_0127", "parakeet_0226"],  # 腺胃潰瘍（セキセイ）
+    ],
+    "parrot": [
+        ["parrot_0001", "parrot_0160", "parrot_0161", "parrot_0177"],  # 腺胃拡張症 PDD を 0001 に一本化
+    ],
+    "bird": [
+        ["bird_0048", "bird_0445"],  # 腎不全（急性を急性/慢性 umbrella へ）
+        ["bird_0111", "bird_0079"],  # 鉛中毒（神経型は一発現）
+        ["bird_0295", "bird_0383"],  # 卵停滞（産卵前）
+        ["bird_0406", "bird_0349"],  # バンブルフット（外科ステージ）
+    ],
+}
+
+
 def _slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-")
 
@@ -551,7 +619,7 @@ def build(species: str) -> dict:
             _placed[mm["id"]] = cid
     _merge_by_canon = {m["canonical"]["id"]: m for m in merges}
 
-    for group in _CURATED_MERGE.get(species, []):
+    for group in _CURATED_MERGE.get(species, []) + _CURATED_MERGE_VETFLAGGED.get(species, []):
         present = [rid for rid in group if rid in by_id]
         if len(present) < 2:
             continue  # ids absent → skip (idempotent)

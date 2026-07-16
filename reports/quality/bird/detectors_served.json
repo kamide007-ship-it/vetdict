@@ -1,10 +1,10 @@
 {
   "species": "bird",
   "view": "served",
-  "record_count": 505,
+  "record_count": 501,
   "T101": {
     "detector": "T101",
-    "total_records": 505,
+    "total_records": 501,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -37,20 +37,6 @@
       {
         "members": [
           {
-            "id": "bird_0048",
-            "name": "Renal Failure (Acute / Chronic)",
-            "name_ja": "腎不全（急性／慢性）"
-          },
-          {
-            "id": "bird_0445",
-            "name": "Renal Failure (Acute)",
-            "name_ja": "急性腎不全（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "bird_0059",
             "name": "Iron Storage Disease (non-hemochromatosis)",
             "name_ja": "鉄蓄積症"
@@ -59,48 +45,6 @@
             "id": "bird_0415",
             "name": "Iron Storage Disease (Hemochromatosis)",
             "name_ja": "鉄蓄積症（ヘモクロマトーシス）（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0079",
-            "name": "Lead Poisoning (Neurological)",
-            "name_ja": "鉛中毒（神経型）"
-          },
-          {
-            "id": "bird_0111",
-            "name": "Lead Poisoning (Plumbism)",
-            "name_ja": "鉛中毒"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0295",
-            "name": "Egg Retention (Pre-laying)",
-            "name_ja": "卵停滞（産卵前）"
-          },
-          {
-            "id": "bird_0383",
-            "name": "Retained Egg",
-            "name_ja": "卵停滞（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0349",
-            "name": "Bumblefoot (Advanced/Surgical)",
-            "name_ja": "バンブルフット（進行/外科）（鳥）"
-          },
-          {
-            "id": "bird_0406",
-            "name": "Bumblefoot (Pododermatitis)",
-            "name_ja": "バンブルフット（足底皮膚炎）（鳥）"
           }
         ]
       },
@@ -119,8 +63,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 8,
-    "redundant_record_count": 8,
+    "exact_duplicate_cluster_count": 4,
+    "redundant_record_count": 4,
     "family_clusters": [
       {
         "shared_stem": "avian",
@@ -1581,88 +1525,6 @@
         ]
       },
       {
-        "shared_stem": "poison",
-        "size": 7,
-        "members": [
-          {
-            "id": "bird_0079",
-            "name": "Lead Poisoning (Neurological)",
-            "name_ja": "鉛中毒（神経型）"
-          },
-          {
-            "id": "bird_0111",
-            "name": "Lead Poisoning (Plumbism)",
-            "name_ja": "鉛中毒"
-          },
-          {
-            "id": "bird_0112",
-            "name": "Zinc Poisoning",
-            "name_ja": "亜鉛中毒"
-          },
-          {
-            "id": "bird_0113",
-            "name": "Copper Poisoning",
-            "name_ja": "銅中毒"
-          },
-          {
-            "id": "bird_0190",
-            "name": "Pesticide Poisoning",
-            "name_ja": "農薬中毒"
-          },
-          {
-            "id": "bird_0192",
-            "name": "Rodenticide Poisoning",
-            "name_ja": "殺鼠剤中毒"
-          },
-          {
-            "id": "bird_0271",
-            "name": "Heavy Metal Poisoning – Mixed (Lead and Zinc)",
-            "name_ja": "混合重金属中毒（鉛・亜鉛）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "renal",
-        "size": 7,
-        "members": [
-          {
-            "id": "bird_0048",
-            "name": "Renal Failure (Acute / Chronic)",
-            "name_ja": "腎不全（急性／慢性）"
-          },
-          {
-            "id": "bird_0052",
-            "name": "Renal Tumor (Renal Adenocarcinoma)",
-            "name_ja": "腎腫瘍（腎腺癌）"
-          },
-          {
-            "id": "bird_0206",
-            "name": "Avian Renal Tumor",
-            "name_ja": "鳥類腎腫瘍"
-          },
-          {
-            "id": "bird_0258",
-            "name": "Renal Cystadenocarcinoma",
-            "name_ja": "腎嚢胞腺癌"
-          },
-          {
-            "id": "bird_0303",
-            "name": "Amyloidosis – Renal",
-            "name_ja": "アミロイドーシス腎型"
-          },
-          {
-            "id": "bird_0321",
-            "name": "Renal Adenocarcinoma",
-            "name_ja": "腎腺癌（鳥）"
-          },
-          {
-            "id": "bird_0445",
-            "name": "Renal Failure (Acute)",
-            "name_ja": "急性腎不全（鳥）"
-          }
-        ]
-      },
-      {
         "shared_stem": "reprod",
         "size": 7,
         "members": [
@@ -1988,6 +1850,78 @@
             "id": "bird_0511",
             "name": "Neurological Parasitic Disease",
             "name_ja": "神経系寄生虫疾患（鳥）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "poison",
+        "size": 6,
+        "members": [
+          {
+            "id": "bird_0111",
+            "name": "Lead Poisoning (Plumbism)",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "bird_0112",
+            "name": "Zinc Poisoning",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "bird_0113",
+            "name": "Copper Poisoning",
+            "name_ja": "銅中毒"
+          },
+          {
+            "id": "bird_0190",
+            "name": "Pesticide Poisoning",
+            "name_ja": "農薬中毒"
+          },
+          {
+            "id": "bird_0192",
+            "name": "Rodenticide Poisoning",
+            "name_ja": "殺鼠剤中毒"
+          },
+          {
+            "id": "bird_0271",
+            "name": "Heavy Metal Poisoning – Mixed (Lead and Zinc)",
+            "name_ja": "混合重金属中毒（鉛・亜鉛）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 6,
+        "members": [
+          {
+            "id": "bird_0048",
+            "name": "Renal Failure (Acute / Chronic)",
+            "name_ja": "腎不全（急性／慢性）"
+          },
+          {
+            "id": "bird_0052",
+            "name": "Renal Tumor (Renal Adenocarcinoma)",
+            "name_ja": "腎腫瘍（腎腺癌）"
+          },
+          {
+            "id": "bird_0206",
+            "name": "Avian Renal Tumor",
+            "name_ja": "鳥類腎腫瘍"
+          },
+          {
+            "id": "bird_0258",
+            "name": "Renal Cystadenocarcinoma",
+            "name_ja": "腎嚢胞腺癌"
+          },
+          {
+            "id": "bird_0303",
+            "name": "Amyloidosis – Renal",
+            "name_ja": "アミロイドーシス腎型"
+          },
+          {
+            "id": "bird_0321",
+            "name": "Renal Adenocarcinoma",
+            "name_ja": "腎腺癌（鳥）"
           }
         ]
       },
@@ -2926,27 +2860,6 @@
         ]
       },
       {
-        "shared_stem": "failur",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0048",
-            "name": "Renal Failure (Acute / Chronic)",
-            "name_ja": "腎不全（急性／慢性）"
-          },
-          {
-            "id": "bird_0107",
-            "name": "Congestive Heart Failure",
-            "name_ja": "うっ血性心不全"
-          },
-          {
-            "id": "bird_0445",
-            "name": "Renal Failure (Acute)",
-            "name_ja": "急性腎不全（鳥）"
-          }
-        ]
-      },
-      {
         "shared_stem": "fungal",
         "size": 3,
         "members": [
@@ -2985,27 +2898,6 @@
             "id": "bird_0296",
             "name": "Uropygial Gland Impaction",
             "name_ja": "尾脂腺閉塞"
-          }
-        ]
-      },
-      {
-        "shared_stem": "lead",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0079",
-            "name": "Lead Poisoning (Neurological)",
-            "name_ja": "鉛中毒（神経型）"
-          },
-          {
-            "id": "bird_0111",
-            "name": "Lead Poisoning (Plumbism)",
-            "name_ja": "鉛中毒"
-          },
-          {
-            "id": "bird_0270",
-            "name": "Lead Toxicosis – Chronic",
-            "name_ja": "鉛中毒慢性型"
           }
         ]
       },
@@ -3199,20 +3091,20 @@
         ]
       }
     ],
-    "family_cluster_count": 81
+    "family_cluster_count": 79
   },
   "T102": {
     "detector": "T102",
-    "total_records": 505,
+    "total_records": 501,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 505,
+    "total_records": 501,
     "empty_count": 0,
     "heading_only_count": 61,
-    "with_dosage_count": 444,
+    "with_dosage_count": 440,
     "empty": [],
     "heading_only": [
       {
@@ -3260,7 +3152,7 @@
         "name": "Renal Failure (Acute / Chronic)",
         "name_ja": "腎不全（急性／慢性）",
         "treatment_ja_len": 483,
-        "treatment_len": 633,
+        "treatment_len": 970,
         "has_dosage": false
       },
       {
@@ -3707,10 +3599,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 505,
+    "total_records": 501,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 91,
+    "drug_mismatch_count": 90,
     "citation_mismatch_count": 17,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -3805,6 +3697,18 @@
           {
             "drug": "Silver Sulfadiazine",
             "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "bird_0048",
+        "name": "Renal Failure (Acute / Chronic)",
+        "name_ja": "腎不全（急性／慢性）",
+        "drugs": [
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -4180,23 +4084,6 @@
           {
             "drug": "Lactulose",
             "drug_ja": "ラクツロース",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "bird_0349",
-        "name": "Bumblefoot (Advanced/Surgical)",
-        "name_ja": "バンブルフット（進行/外科）（鳥）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Silver Sulfadiazine",
-            "drug_ja": "スルファジアジン銀",
             "reason": "no dosing data for this species"
           }
         ]
@@ -4579,6 +4466,16 @@
             "drug": "Mupirocin",
             "drug_ja": "ムピロシン",
             "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
           }
         ]
       },
@@ -4626,18 +4523,6 @@
           {
             "drug": "Clarithromycin",
             "drug_ja": "クラリスロマイシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "bird_0445",
-        "name": "Renal Failure (Acute)",
-        "name_ja": "急性腎不全（鳥）",
-        "drugs": [
-          {
-            "drug": "Apomorphine",
-            "drug_ja": "アポモルフィン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -5076,7 +4961,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 505,
+    "total_records": 501,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

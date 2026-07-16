@@ -1,13 +1,13 @@
 # VetDict 品質検出レポート — chinchilla
 
-- 総レコード数: **231**
+- 総レコード数: **230**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **5** （冗長レコード 8 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **26**
+- 完全一致重複クラスタ: **5** （冗長レコード 7 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **25**
 
 ### 完全一致重複（上位20）
-- 便秘（Constipation）[chinchilla_0006] / 便秘（慢性）（Constipation - Chronic）[chinchilla_0150] / 便秘（巨大結腸症）（チンチラ）（Constipation (Megacolon)）[chinchilla_0175]
+- 便秘（Constipation）[chinchilla_0006] / 便秘（巨大結腸症）（チンチラ）（Constipation (Megacolon)）[chinchilla_0175]
 - 下痢（Diarrhea）[chinchilla_0007] / 非特異的下痢（チンチラ）（Diarrhea (Non-specific)）[chinchilla_0255]
 - 中耳炎・内耳炎（Otitis Media / Interna）[chinchilla_0061] / 中耳/内耳炎（チンチラ）（Otitis Media/Interna）[chinchilla_0198]
 - 眼球突出（Eye Proptosis）[chinchilla_0123] / 眼球突出（チンチラ）（Exophthalmos）[chinchilla_0265]
@@ -80,10 +80,6 @@
     - 扁平上皮癌（Squamous Cell Carcinoma）[chinchilla_0118]
     - 肝細胞癌（Hepatocellular Carcinoma）[chinchilla_0120]
     - 腎癌（チンチラ）（Renal Carcinoma）[chinchilla_0216]
-- stem=`consti` × 3件
-    - 便秘（Constipation）[chinchilla_0006]
-    - 便秘（慢性）（Constipation - Chronic）[chinchilla_0150]
-    - 便秘（巨大結腸症）（チンチラ）（Constipation (Megacolon)）[chinchilla_0175]
 - stem=`enteri` × 3件
     - 腸炎（Enteritis）[chinchilla_0008]
     - 細菌性腸炎（クロストリジウム性）（Bacterial Enteritis (Clostridial)）[chinchilla_0082]
@@ -92,6 +88,10 @@
     - 肝リピドーシス（Hepatic Lipidosis）[chinchilla_0009]
     - 肝コクシジウム症（Hepatic Coccidiosis）[chinchilla_0089]
     - 肝膿瘍（チンチラ）（Hepatic Abscess）[chinchilla_0227]
+- stem=`inciso` × 3件
+    - 不正咬合 - 切歯（Dental Malocclusion - Incisor）[chinchilla_0074]
+    - 歯科疾患（切歯不正咬合）（Dental Disease - Incisor Malocclusion）[chinchilla_0140]
+    - 切歯不正咬合（チンチラ）（Incisor Malocclusion）[chinchilla_0260]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
@@ -99,7 +99,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **30**
-- 投与量あり: **201**
+- 投与量あり: **200**
 
 ### 投与量なし（上位30）
 - 不正咬合（Malocclusion）[chinchilla_0000] — ja:181字 / en:158字

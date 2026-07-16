@@ -1,19 +1,15 @@
 # VetDict 品質検出レポート — hamster
 
-- 総レコード数: **289**
+- 総レコード数: **283**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **7** （冗長レコード 9 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **46**
+- 完全一致重複クラスタ: **3** （冗長レコード 3 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **45**
 
 ### 完全一致重複（上位20）
-- アミロイドーシス（Amyloidosis）[hamster_0041] / アミロイドーシス（腎型）（Amyloidosis - Renal）[hamster_0166] / アミロイドーシス（肝型）（Amyloidosis - Hepatic）[hamster_0167]
 - 眼球突出（Eye Proptosis）[hamster_0056] / 眼球突出（ハムスター）（Exophthalmos）[hamster_0228]
 - 擬似冬眠（Hibernation / Torpor）[hamster_0069] / 擬似冬眠（寒冷誘発性休眠）（Pseudohibernation (Cold-Induced Torpor)）[hamster_0187]
-- 冬眠症候群（Hibernation Syndrome）[hamster_0086] / 冬眠症候群（軽度）（Hibernation Syndrome - Mild）[hamster_0170] / 冬眠症候群（重度）（Hibernation Syndrome - Severe）[hamster_0171]
 - 増殖性回腸炎（慢性型）（Proliferative Ileitis (Chronic Form)）[hamster_0087] / 増殖性回腸炎（ウェットテイル）（Proliferative Ileitis (Wet Tail)）[hamster_0186]
-- 腸閉塞（糞便嵌頓）（Intestinal Impaction）[hamster_0092] / 腸閉塞（ハムスター）（Intestinal Obstruction）[hamster_0202]
-- 多発性嚢胞性疾患（肝型）（Polycystic Disease - Hepatic）[hamster_0168] / 多発性嚢胞性疾患（腎型）（Polycystic Disease - Renal）[hamster_0169]
 
 ### 疾患ファミリー候補（上位15）
 - stem=`tumor` × 18件
@@ -61,13 +57,6 @@
     - 頬袋腫瘍（Cheek Pouch Tumor）[hamster_0084]
     - 頬袋真菌症（Cheek Pouch Mycosis）[hamster_0085]
     - 臼歯過成長（ハムスター）（Cheek Teeth Overgrowth）[hamster_0250]
-- stem=`amyloi` × 6件
-    - アミロイドーシス（Amyloidosis）[hamster_0041]
-    - 腎アミロイドーシス（Renal Amyloidosis）[hamster_0136]
-    - 肝アミロイドーシス（Hepatic Amyloidosis）[hamster_0137]
-    - 心アミロイドーシス（Cardiac Amyloidosis）[hamster_0138]
-    - アミロイドーシス（腎型）（Amyloidosis - Renal）[hamster_0166]
-    - アミロイドーシス（肝型）（Amyloidosis - Hepatic）[hamster_0167]
 - stem=`defici` × 6件
     - ビタミン欠乏症（Vitamin Deficiency）[hamster_0070]
     - ビタミンE欠乏症（Vitamin E Deficiency）[hamster_0115]
@@ -82,13 +71,6 @@
     - 胃毛球（ハムスター）（Gastric Trichobezoard）[hamster_0208]
     - 胃潰瘍（ハムスター）（Gastric Ulcer）[hamster_0274]
     - 胃拡張（ハムスター）（Gastric Dilation）[hamster_0294]
-- stem=`hepati` × 6件
-    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis）[hamster_0042]
-    - 肝臓腫瘍（Hepatic Tumor）[hamster_0093]
-    - 肝アミロイドーシス（Hepatic Amyloidosis）[hamster_0137]
-    - アミロイドーシス（肝型）（Amyloidosis - Hepatic）[hamster_0167]
-    - 多発性嚢胞性疾患（肝型）（Polycystic Disease - Hepatic）[hamster_0168]
-    - 肝嚢胞（ハムスター）（Hepatic Cyst）[hamster_0285]
 - stem=`pouch` × 6件
     - 頬袋閉塞（Cheek Pouch Impaction）[hamster_0012]
     - 頬袋脱（Cheek Pouch Prolapse）[hamster_0013]
@@ -108,18 +90,12 @@
     - 指骨骨折（Digit Fracture）[hamster_0140]
     - 四肢骨折（ハムスター）（Fracture (Limb)）[hamster_0237]
     - 脊椎骨折（ハムスター）（Spinal Fracture）[hamster_0239]
-- stem=`hibern` × 5件
-    - 擬似冬眠（Hibernation / Torpor）[hamster_0069]
-    - 冬眠症候群（Hibernation Syndrome）[hamster_0086]
-    - 冬眠症候群（軽度）（Hibernation Syndrome - Mild）[hamster_0170]
-    - 冬眠症候群（重度）（Hibernation Syndrome - Severe）[hamster_0171]
-    - 冬眠企図（休眠）（ハムスター）（Hibernation Attempt (Torpor)）[hamster_0189]
-- stem=`intest` × 5件
-    - 腸管腫瘍（Intestinal Tumor）[hamster_0033]
-    - 腸捻転（Intestinal Torsion）[hamster_0091]
-    - 腸閉塞（糞便嵌頓）（Intestinal Impaction）[hamster_0092]
-    - 腸閉塞（ハムスター）（Intestinal Obstruction）[hamster_0202]
-    - 腸管寄生虫症（一般）（ハムスター）（Intestinal Parasitism (General)）[hamster_0268]
+- stem=`hepati` × 5件
+    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis）[hamster_0042]
+    - 肝臓腫瘍（Hepatic Tumor）[hamster_0093]
+    - 肝アミロイドーシス（Hepatic Amyloidosis）[hamster_0137]
+    - 多発性嚢胞性疾患（肝型）（Polycystic Disease - Hepatic）[hamster_0168]
+    - 肝嚢胞（ハムスター）（Hepatic Cyst）[hamster_0285]
 - stem=`pneumo` × 5件
     - 肺炎（Pneumonia）[hamster_0017]
     - ニューモシスチス肺炎（Pneumocystis Pneumonia）[hamster_0082]
@@ -132,20 +108,35 @@
     - 子宮脱（Uterine Prolapse）[hamster_0104]
     - 肛門脱（ハムスター）（Anal Prolapse）[hamster_0267]
     - 総排泄腔脱（ハムスター）（Cloacal Prolapse）[hamster_0287]
+- stem=`uterin` × 5件
+    - 子宮腫瘍（Uterine Tumor）[hamster_0032]
+    - 子宮脱（Uterine Prolapse）[hamster_0104]
+    - 子宮内膜過形成（Uterine Endometrial Hyperplasia）[hamster_0180]
+    - 子宮平滑筋腫（ハムスター）（Uterine Leiomyoma）[hamster_0244]
+    - 子宮腺癌（ハムスター）（Uterine Adenocarcinoma）[hamster_0278]
+- stem=`amyloi` × 4件
+    - アミロイドーシス（Amyloidosis）[hamster_0041]
+    - 腎アミロイドーシス（Renal Amyloidosis）[hamster_0136]
+    - 肝アミロイドーシス（Hepatic Amyloidosis）[hamster_0137]
+    - 心アミロイドーシス（Cardiac Amyloidosis）[hamster_0138]
+- stem=`carcin` × 4件
+    - 扁平上皮癌（Squamous Cell Carcinoma）[hamster_0094]
+    - 甲状腺癌（Thyroid Carcinoma）[hamster_0112]
+    - 肝細胞癌（ハムスター）（Hepatocellular Carcinoma）[hamster_0242]
+    - 腎癌（ハムスター）（Renal Carcinoma）[hamster_0243]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **27**
-- 投与量あり: **262**
+- 投与量なし（見出しのみ）: **24**
+- 投与量あり: **259**
 
 ### 投与量なし（上位30）
 - 頬袋閉塞（Cheek Pouch Impaction）[hamster_0012] — ja:348字 / en:405字
 - 不正咬合（Dental Malocclusion）[hamster_0015] — ja:177字 / en:158字
 - 肥満（Obesity）[hamster_0039] — ja:485字 / en:597字
-- アミロイドーシス（Amyloidosis）[hamster_0041] — ja:77字 / en:182字
 - 心筋症（Cardiomyopathy）[hamster_0043] — ja:514字 / en:648字
 - うっ血性心不全（Congestive Heart Failure）[hamster_0044] — ja:357字 / en:437字
 - 白内障（Cataracts）[hamster_0053] — ja:488字 / en:526字
@@ -153,6 +144,7 @@
 - 抗生物質中毒（Antibiotic Toxicity）[hamster_0071] — ja:481字 / en:518字
 - 毛引き（Barbering）[hamster_0074] — ja:81字 / en:139字
 - 多嚢胞性疾患（Polycystic Disease）[hamster_0076] — ja:75字 / en:159字
+- 冬眠症候群（Hibernation Syndrome）[hamster_0086] — ja:913字 / en:2360字
 - 腸捻転（Intestinal Torsion）[hamster_0091] — ja:193字 / en:139字
 - 甲状腺癌（Thyroid Carcinoma）[hamster_0112] — ja:106字 / en:474字
 - 気胸（Pneumothorax）[hamster_0116] — ja:446字 / en:463字
@@ -162,16 +154,13 @@
 - 毛包虫症（デモデックス・クリセティ）（Fur Mites (Demodex criceti)）[hamster_0147] — ja:425字 / en:721字
 - 内部寄生虫症（混合感染）（Endoparasites (Mixed Infection)）[hamster_0149] — ja:173字 / en:204字
 - 亜鉛中毒（Zinc Toxicosis）[hamster_0152] — ja:658字 / en:650字
-- 多発性嚢胞性疾患（腎型）（Polycystic Disease - Renal）[hamster_0169] — ja:65字 / en:136字
-- 冬眠症候群（軽度）（Hibernation Syndrome - Mild）[hamster_0170] — ja:913字 / en:2360字
-- 冬眠症候群（重度）（Hibernation Syndrome - Severe）[hamster_0171] — ja:199字 / en:158字
 - 臼歯過長（Dental Overgrowth (Molar)）[hamster_0175] — ja:177字 / en:158字
 - 冬眠企図（休眠）（ハムスター）（Hibernation Attempt (Torpor)）[hamster_0189] — ja:295字 / en:690字
 - 共食い（ハムスター）（Cannibalism）[hamster_0256] — ja:245字 / en:576字
 - 蛋白質栄養不良（ハムスター）（Protein Malnutrition）[hamster_0314] — ja:685字 / en:1388字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **96** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **95** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **15** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）

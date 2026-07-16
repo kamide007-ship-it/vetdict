@@ -1,10 +1,10 @@
 {
   "species": "parrot",
   "view": "served",
-  "record_count": 265,
+  "record_count": 262,
   "T101": {
     "detector": "T101",
-    "total_records": 265,
+    "total_records": 262,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -56,25 +56,6 @@
       {
         "members": [
           {
-            "id": "parrot_0160",
-            "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
-            "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）"
-          },
-          {
-            "id": "parrot_0161",
-            "name": "Proventricular Dilatation Disease",
-            "name_ja": "前胃拡張症（オウム）"
-          },
-          {
-            "id": "parrot_0177",
-            "name": "Proventricular Dilatation Disease (PDD)",
-            "name_ja": "前胃拡張症（PDD）（オウム）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "parrot_0207",
             "name": "Fracture (Wing)",
             "name_ja": "翼骨折（オウム）"
@@ -87,8 +68,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 5,
-    "redundant_record_count": 7,
+    "exact_duplicate_cluster_count": 4,
+    "redundant_record_count": 5,
     "family_clusters": [
       {
         "shared_stem": "defici",
@@ -443,47 +424,6 @@
         ]
       },
       {
-        "shared_stem": "proven",
-        "size": 7,
-        "members": [
-          {
-            "id": "parrot_0001",
-            "name": "Proventricular Dilatation Disease (PDD) / Bornavirus",
-            "name_ja": "腺胃拡張症（PDD）／ボルナウイルス感染症"
-          },
-          {
-            "id": "parrot_0078",
-            "name": "Proventricular Dilatation (non-PDD causes)",
-            "name_ja": "前胃拡張（PDD以外の原因）"
-          },
-          {
-            "id": "parrot_0089",
-            "name": "Psittacine Proventricular Worm (Spirurids)",
-            "name_ja": "オウム目前胃寄生虫（旋尾線虫類）"
-          },
-          {
-            "id": "parrot_0123",
-            "name": "Proventricular Ulceration",
-            "name_ja": "腺胃潰瘍"
-          },
-          {
-            "id": "parrot_0160",
-            "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
-            "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）"
-          },
-          {
-            "id": "parrot_0161",
-            "name": "Proventricular Dilatation Disease",
-            "name_ja": "前胃拡張症（オウム）"
-          },
-          {
-            "id": "parrot_0177",
-            "name": "Proventricular Dilatation Disease (PDD)",
-            "name_ja": "前胃拡張症（PDD）（オウム）"
-          }
-        ]
-      },
-      {
         "shared_stem": "bacter",
         "size": 6,
         "members": [
@@ -583,37 +523,6 @@
             "id": "parrot_0212",
             "name": "Beak Fracture",
             "name_ja": "嘴骨折（オウム）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "dilata",
-        "size": 5,
-        "members": [
-          {
-            "id": "parrot_0001",
-            "name": "Proventricular Dilatation Disease (PDD) / Bornavirus",
-            "name_ja": "腺胃拡張症（PDD）／ボルナウイルス感染症"
-          },
-          {
-            "id": "parrot_0078",
-            "name": "Proventricular Dilatation (non-PDD causes)",
-            "name_ja": "前胃拡張（PDD以外の原因）"
-          },
-          {
-            "id": "parrot_0160",
-            "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
-            "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）"
-          },
-          {
-            "id": "parrot_0161",
-            "name": "Proventricular Dilatation Disease",
-            "name_ja": "前胃拡張症（オウム）"
-          },
-          {
-            "id": "parrot_0177",
-            "name": "Proventricular Dilatation Disease (PDD)",
-            "name_ja": "前胃拡張症（PDD）（オウム）"
           }
         ]
       },
@@ -899,6 +808,32 @@
             "id": "parrot_0197",
             "name": "Red Mite (Dermanyssus)",
             "name_ja": "ワクモ（Dermanyssus）（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "proven",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0001",
+            "name": "Proventricular Dilatation Disease (PDD) / Bornavirus",
+            "name_ja": "腺胃拡張症（PDD）／ボルナウイルス感染症"
+          },
+          {
+            "id": "parrot_0078",
+            "name": "Proventricular Dilatation (non-PDD causes)",
+            "name_ja": "前胃拡張（PDD以外の原因）"
+          },
+          {
+            "id": "parrot_0089",
+            "name": "Psittacine Proventricular Worm (Spirurids)",
+            "name_ja": "オウム目前胃寄生虫（旋尾線虫類）"
+          },
+          {
+            "id": "parrot_0123",
+            "name": "Proventricular Ulceration",
+            "name_ja": "腺胃潰瘍"
           }
         ]
       },
@@ -1269,20 +1204,20 @@
         ]
       }
     ],
-    "family_cluster_count": 38
+    "family_cluster_count": 37
   },
   "T102": {
     "detector": "T102",
-    "total_records": 265,
+    "total_records": 262,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 265,
+    "total_records": 262,
     "empty_count": 0,
     "heading_only_count": 69,
-    "with_dosage_count": 196,
+    "with_dosage_count": 193,
     "empty": [],
     "heading_only": [
       {
@@ -1841,7 +1776,7 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 265,
+    "total_records": 262,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 33,
@@ -1849,6 +1784,18 @@
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
+      {
+        "id": "parrot_0001",
+        "name": "Proventricular Dilatation Disease (PDD) / Bornavirus",
+        "name_ja": "腺胃拡張症（PDD）／ボルナウイルス感染症",
+        "drugs": [
+          {
+            "drug": "Cisapride",
+            "drug_ja": "シサプリド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
       {
         "id": "parrot_0013",
         "name": "Bumblefoot (Pododermatitis)",
@@ -1941,18 +1888,6 @@
           {
             "drug": "Tramadol",
             "drug_ja": "トラマドール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "parrot_0160",
-        "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
-        "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）",
-        "drugs": [
-          {
-            "drug": "Cisapride",
-            "drug_ja": "シサプリド",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2407,7 +2342,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 265,
+    "total_records": 262,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

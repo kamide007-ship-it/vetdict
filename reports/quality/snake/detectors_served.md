@@ -1,15 +1,14 @@
 # VetDict 品質検出レポート — snake
 
-- 総レコード数: **231**
+- 総レコード数: **224**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **4** （冗長レコード 5 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **30**
+- 完全一致重複クラスタ: **3** （冗長レコード 4 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **27**
 
 ### 完全一致重複（上位20）
 - サンシャインウイルス感染症（Sunshine Virus (Reptile Sunshinevirus)）[snake_0005] / サンシャインウイルス（ヘビ）（Sunshine Virus (Reptarenavirus)）[snake_0147]
 - 食欲不振（非特異的）（Anorexia (Non-specific)）[snake_0033] / 拒食（行動性）（ヘビ）（Anorexia (Behavioral)）[snake_0197] / ストレス性拒食（ヘビ）（Anorexia (Stress-Related)）[snake_0241]
-- 痛風（内臓型）（ヘビ）（Gout (Visceral)）[snake_0180] / 痛風（関節型）（ヘビ）（Gout (Articular)）[snake_0181]
 - 四肢骨折（ヘビ）（Fracture (Limb)）[snake_0211] / 甲羅骨折（ヘビ）（Fracture (Shell/Carapace)）[snake_0212]
 
 ### 疾患ファミリー候補（上位15）
@@ -39,19 +38,12 @@
     - 毒腺感染・膿瘍（Venom Gland Infection / Abscess）[snake_0057]
     - 耳膿瘍（Aural Abscess (Ear Infection)）[snake_0133]
     - 膿瘍（ヘビ）（Abscess）[snake_0175]
-- stem=`prolap` × 6件
+- stem=`prolap` × 5件
     - 半陰茎脱出（Hemipenal Prolapse）[snake_0045]
     - 総排泄腔脱（Cloacal Prolapse）[snake_0046]
     - 臓器脱（胃・腸）（Organ Prolapse (Gastric/Intestinal)）[snake_0130]
-    - 陰茎/半陰茎脱（ヘビ）（Penile/Hemipenal Prolapse）[snake_0187]
     - 腸脱（ヘビ）（Intestinal Prolapse）[snake_0194]
     - 直腸/総排泄腔脱（ヘビ）（Rectal/Cloacal Prolapse）[snake_0199]
-- stem=`gout` × 5件
-    - 関節痛風（Articular Gout）[snake_0048]
-    - 内臓痛風（Visceral Gout）[snake_0049]
-    - 高尿酸血症・痛風前状態（Hyperuricemia / Pre-gout）[snake_0111]
-    - 痛風（内臓型）（ヘビ）（Gout (Visceral)）[snake_0180]
-    - 痛風（関節型）（ヘビ）（Gout (Articular)）[snake_0181]
 - stem=`respir` × 5件
     - 上部呼吸器感染症（Upper Respiratory Infection (URI)）[snake_0007]
     - 慢性呼吸器疾患複合（Chronic Respiratory Disease Complex）[snake_0124]
@@ -79,20 +71,10 @@
     - 肋骨骨折（Rib Fractures）[snake_0101]
     - 四肢骨折（ヘビ）（Fracture (Limb)）[snake_0211]
     - 甲羅骨折（ヘビ）（Fracture (Shell/Carapace)）[snake_0212]
-- stem=`infest` × 4件
-    - マダニ寄生（Tick Infestation）[snake_0017]
-    - ツツガムシ寄生症（Chigger Mite Infestation (Trombiculidae)）[snake_0092]
-    - ヒル寄生症（Leech Infestation）[snake_0093]
-    - ダニ症（Ophionyssus）（ヘビ）（Mite Infestation (Ophionyssus)）[snake_0163]
 - stem=`injury` × 4件
     - 角膜混濁・損傷（Corneal Opacity / Injury）[snake_0040]
     - 餌動物による咬傷（Prey Bite Injury）[snake_0059]
     - 餌関連損傷（ヘビ）（Prey-Related Injury）[snake_0149]
-    - 脊髄損傷（ヘビ）（Spinal Injury）[snake_0215]
-- stem=`spinal` × 4件
-    - 脊椎骨症/脊椎症（Spinal Osteopathy / Spondylosis）[snake_0051]
-    - 脊椎骨折・椎体脱臼（Spinal Fracture / Vertebral Luxation）[snake_0100]
-    - 脊椎骨症（ヘビ）（Spinal Osteopathy）[snake_0151]
     - 脊髄損傷（ヘビ）（Spinal Injury）[snake_0215]
 - stem=`anorex` × 3件
     - 食欲不振（非特異的）（Anorexia (Non-specific)）[snake_0033]
@@ -102,14 +84,26 @@
     - 外傷・咬傷（Trauma / Bite Wounds）[snake_0058]
     - 餌動物による咬傷（Prey Bite Injury）[snake_0059]
     - 咬傷（ヘビ）（Bite Wounds）[snake_0177]
+- stem=`carcin` × 3件
+    - 扁平上皮癌（Squamous Cell Carcinoma）[snake_0052]
+    - 肝細胞癌（Hepatocellular Carcinoma）[snake_0094]
+    - 腎細胞癌（Renal Cell Carcinoma）[snake_0095]
+- stem=`cloaca` × 3件
+    - 総排泄腔脱（Cloacal Prolapse）[snake_0046]
+    - 総排泄腔結石（Cloacal Calculi）[snake_0106]
+    - 直腸/総排泄腔脱（ヘビ）（Rectal/Cloacal Prolapse）[snake_0199]
+- stem=`coelom` × 3件
+    - 腹膜炎・体腔炎（Peritonitis / Coelomitis）[snake_0064]
+    - 卵関連体腔炎（Egg-related Coelomitis）[snake_0104]
+    - 卵黄体腔炎（ヘビ）（Egg Yolk Coelomitis）[snake_0186]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **46**
-- 投与量あり: **185**
+- 投与量なし（見出しのみ）: **43**
+- 投与量あり: **181**
 
 ### 投与量なし（上位30）
 - 口腔膿瘍（Oral Abscess）[snake_0011] — ja:159字 / en:196字
@@ -123,10 +117,8 @@
 - 皮下膿瘍（Subcutaneous Abscess）[snake_0038] — ja:159字 / en:137字
 - スペクタクル下膿瘍（Subspectacular Abscess）[snake_0039] — ja:161字 / en:196字
 - 角膜混濁・損傷（Corneal Opacity / Injury）[snake_0040] — ja:194字 / en:193字
-- 半陰茎脱出（Hemipenal Prolapse）[snake_0045] — ja:71字 / en:190字
 - 総排泄腔脱（Cloacal Prolapse）[snake_0046] — ja:67字 / en:193字
 - 腎不全（Renal Failure）[snake_0047] — ja:43字 / en:188字
-- 脊椎骨症/脊椎症（Spinal Osteopathy / Spondylosis）[snake_0051] — ja:43字 / en:190字
 - 心疾患（Cardiac Disease）[snake_0056] — ja:49字 / en:185字
 - 餌動物による咬傷（Prey Bite Injury）[snake_0059] — ja:195字 / en:517字
 - 骨髄炎（Osteomyelitis）[snake_0065] — ja:52字 / en:190字
@@ -139,12 +131,14 @@
 - ラブディアス肺虫症（Rhabdias Lungworm）[snake_0085] — ja:167字 / en:193字
 - 糞線虫症（Strongyloides Infection）[snake_0086] — ja:162字 / en:204字
 - 鉤頭虫感染症（Acanthocephalan Infection）[snake_0087] — ja:164字 / en:204字
-- 鞭毛虫感染症（Flagellate Protozoal Infection）[snake_0089] — ja:161字 / en:137字
 - 住肉胞子虫症（Sarcocystosis）[snake_0091] — ja:164字 / en:193字
 - 色素細胞腫（Chromatophoroma）[snake_0097] — ja:104字 / en:193字
+- 腸捻転・腸重積（Intestinal Volvulus / Intussusception）[snake_0103] — ja:53字 / en:247字
+- 亜鉛中毒（Zinc Toxicosis）[snake_0107] — ja:66字 / en:159字
+- イベルメクチン中毒（Ivermectin Toxicosis）[snake_0109] — ja:200字 / en:159字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **77** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **76** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **8** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）

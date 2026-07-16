@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 250,
-    "merge_clusters": 26,
-    "records_merged_away": 28,
+    "merge_clusters": 28,
+    "records_merged_away": 30,
     "archived": 0,
-    "served_after": 222
+    "served_after": 220
   },
   "merges": [
     {
@@ -502,6 +502,44 @@
           "slug": "egg-yolk-coelomitis",
           "name": "Egg Yolk Coelomitis",
           "name_ja": "卵黄体腔炎（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0017",
+        "slug": "upper-respiratory-infection-uri",
+        "name": "Upper Respiratory Infection (URI)",
+        "name_ja": "上部呼吸器感染症"
+      },
+      "merged": [
+        {
+          "id": "lizard_0208",
+          "slug": "upper-respiratory-tract-disease",
+          "name": "Upper Respiratory Tract Disease",
+          "name_ja": "上部気道疾患（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0048",
+        "slug": "cloacal-prolapse",
+        "name": "Cloacal Prolapse",
+        "name_ja": "総排泄腔脱"
+      },
+      "merged": [
+        {
+          "id": "lizard_0205",
+          "slug": "rectal-cloacal-prolapse",
+          "name": "Rectal/Cloacal Prolapse",
+          "name_ja": "直腸/総排泄腔脱（トカゲ）"
         }
       ],
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",

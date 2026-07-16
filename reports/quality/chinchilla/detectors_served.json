@@ -1,10 +1,10 @@
 {
   "species": "chinchilla",
   "view": "served",
-  "record_count": 231,
+  "record_count": 230,
   "T101": {
     "detector": "T101",
-    "total_records": 231,
+    "total_records": 230,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -12,11 +12,6 @@
             "id": "chinchilla_0006",
             "name": "Constipation",
             "name_ja": "便秘"
-          },
-          {
-            "id": "chinchilla_0150",
-            "name": "Constipation - Chronic",
-            "name_ja": "便秘（慢性）"
           },
           {
             "id": "chinchilla_0175",
@@ -93,7 +88,7 @@
       }
     ],
     "exact_duplicate_cluster_count": 5,
-    "redundant_record_count": 8,
+    "redundant_record_count": 7,
     "family_clusters": [
       {
         "shared_stem": "dental",
@@ -438,27 +433,6 @@
         ]
       },
       {
-        "shared_stem": "consti",
-        "size": 3,
-        "members": [
-          {
-            "id": "chinchilla_0006",
-            "name": "Constipation",
-            "name_ja": "便秘"
-          },
-          {
-            "id": "chinchilla_0150",
-            "name": "Constipation - Chronic",
-            "name_ja": "便秘（慢性）"
-          },
-          {
-            "id": "chinchilla_0175",
-            "name": "Constipation (Megacolon)",
-            "name_ja": "便秘（巨大結腸症）（チンチラ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "enteri",
         "size": 3,
         "members": [
@@ -732,20 +706,20 @@
         ]
       }
     ],
-    "family_cluster_count": 26
+    "family_cluster_count": 25
   },
   "T102": {
     "detector": "T102",
-    "total_records": 231,
+    "total_records": 230,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 231,
+    "total_records": 230,
     "empty_count": 0,
     "heading_only_count": 30,
-    "with_dosage_count": 201,
+    "with_dosage_count": 200,
     "empty": [],
     "heading_only": [
       {
@@ -992,7 +966,7 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 231,
+    "total_records": 230,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 85,
@@ -2384,7 +2358,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 231,
+    "total_records": 230,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

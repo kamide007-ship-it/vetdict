@@ -1,16 +1,15 @@
 # VetDict 品質検出レポート — guinea_pig
 
-- 総レコード数: **310**
+- 総レコード数: **308**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **5** （冗長レコード 6 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **43**
+- 完全一致重複クラスタ: **4** （冗長レコード 4 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **42**
 
 ### 完全一致重複（上位20）
 - 毛包腫（Trichofolliculoma）[guinea_pig_0062] / 毛包腫（基底細胞腫）（Trichofolliculoma (Basal Cell Tumor)）[guinea_pig_0114]
 - 腸閉塞（Ileus）[guinea_pig_0085] / 腸閉塞（モルモット）（Intestinal Obstruction）[guinea_pig_0209]
 - 干し草による角膜刺傷（Hay Poke (Corneal)）[guinea_pig_0155] / 干し草による鼻腔内刺入（Hay Poke (Nasal)）[guinea_pig_0156]
-- 抗生物質毒性（ペニシリン系）（Antibiotic Toxicity (Penicillin-class)）[guinea_pig_0162] / 抗生物質毒性（リンコサミド/マクロライド系）（Antibiotic Toxicity (Lincosamide/Macrolide)）[guinea_pig_0163] / 抗生物質毒性（モルモット）（Antibiotic Toxicity）[guinea_pig_0290]
 - 胃拡張捻転（Gastric Dilation Volvulus）[guinea_pig_0188] / 胃拡張捻転（モルモット）（Gastric Dilation-Volvulus）[guinea_pig_0310]
 
 ### 疾患ファミリー候補（上位15）
@@ -56,12 +55,6 @@
     - 肛門嚢嵌頓（Perineal Sac Impaction）[guinea_pig_0135]
     - 会陰嚢詰まり（慢性）（Impaction (Perineal Sac) - Chronic）[guinea_pig_0173]
     - 肛門嚢詰まり（Anal Sac Impaction）[guinea_pig_0180]
-- stem=`antibi` × 5件
-    - 抗生物質関連腸毒素血症（Antibiotic-Associated Enterotoxemia）[guinea_pig_0009]
-    - 抗生物質毒性（ペニシリン系）（Antibiotic Toxicity (Penicillin-class)）[guinea_pig_0162]
-    - 抗生物質毒性（リンコサミド/マクロライド系）（Antibiotic Toxicity (Lincosamide/Macrolide)）[guinea_pig_0163]
-    - 抗生物質関連下痢（モルモット）（Antibiotic-Associated Diarrhea）[guinea_pig_0202]
-    - 抗生物質毒性（モルモット）（Antibiotic Toxicity）[guinea_pig_0290]
 - stem=`fractu` × 5件
     - 骨折（Fractures）[guinea_pig_0033]
     - 脛骨骨折（Tibial Fracture）[guinea_pig_0144]
@@ -110,6 +103,11 @@
     - 爪の過長/巻き爪（Toe Nail Overgrowth / Curling）[guinea_pig_0146]
     - 過剰グルーミング（モルモット）（Overgrooming）[guinea_pig_0295]
     - 爪過成長（モルモット）（Nail Overgrowth）[guinea_pig_0329]
+- stem=`poke` × 4件
+    - 牧草による刺傷（Hay Poke Injury）[guinea_pig_0092]
+    - 干し草による角膜刺傷（Hay Poke (Corneal)）[guinea_pig_0155]
+    - 干し草による鼻腔内刺入（Hay Poke (Nasal)）[guinea_pig_0156]
+    - 干し草刺傷（口腔）（Hay Poke Injury - Oral）[guinea_pig_0189]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
@@ -117,7 +115,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **38**
-- 投与量あり: **272**
+- 投与量あり: **270**
 
 ### 投与量なし（上位30）
 - シラミ寄生症（Static Lice (Gliricola porcelli)）[guinea_pig_0015] — ja:167字 / en:495字
@@ -152,7 +150,7 @@
 - 上顎歯根伸長（Maxillary Tooth Root Elongation）[guinea_pig_0142] — ja:179字 / en:193字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **126** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **124** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **13** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）

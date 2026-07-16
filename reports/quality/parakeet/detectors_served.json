@@ -1,10 +1,10 @@
 {
   "species": "parakeet",
   "view": "served",
-  "record_count": 419,
+  "record_count": 413,
   "T101": {
     "detector": "T101",
-    "total_records": 419,
+    "total_records": 413,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -36,67 +36,6 @@
             "id": "parakeet_0274",
             "name": "Gout (Visceral/Articular)",
             "name_ja": "痛風（内臓型/関節型）（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0034",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "parakeet_0257",
-            "name": "Hepatic Lipidosis (Seed Diet)",
-            "name_ja": "肝リピドーシス（種子食）（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0038",
-            "name": "Teflon (PTFE) Toxicosis",
-            "name_ja": "テフロン中毒（PTFE中毒）"
-          },
-          {
-            "id": "parakeet_0196",
-            "name": "Teflon Toxicosis (Parakeet)",
-            "name_ja": "テフロン中毒（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0042",
-            "name": "Testicular Tumors",
-            "name_ja": "精巣腫瘍"
-          },
-          {
-            "id": "parakeet_0256",
-            "name": "Testicular Tumor (Cere Color Change)",
-            "name_ja": "精巣腫瘍（ろう膜変色）（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0043",
-            "name": "Xanthomas",
-            "name_ja": "黄色腫"
-          },
-          {
-            "id": "parakeet_0177",
-            "name": "Xanthoma (Advanced)",
-            "name_ja": "黄色腫（進行型）"
-          },
-          {
-            "id": "parakeet_0263",
-            "name": "Xanthoma (Wing)",
-            "name_ja": "黄色腫（翼）（インコ）"
           }
         ]
       },
@@ -146,24 +85,10 @@
             "name_ja": "肝疾患（肝リピドーシス）（インコ）"
           }
         ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0127",
-            "name": "Proventricular Ulceration",
-            "name_ja": "腺胃潰瘍"
-          },
-          {
-            "id": "parakeet_0226",
-            "name": "Proventricular Ulceration (Budgerigar)",
-            "name_ja": "前胃潰瘍（セキセイインコ）"
-          }
-        ]
       }
     ],
-    "exact_duplicate_cluster_count": 10,
-    "redundant_record_count": 13,
+    "exact_duplicate_cluster_count": 5,
+    "redundant_record_count": 7,
     "family_clusters": [
       {
         "shared_stem": "defici",
@@ -607,67 +532,6 @@
         ]
       },
       {
-        "shared_stem": "hepati",
-        "size": 11,
-        "members": [
-          {
-            "id": "parakeet_0034",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "parakeet_0125",
-            "name": "Hepatic Amyloidosis",
-            "name_ja": "肝アミロイドーシス"
-          },
-          {
-            "id": "parakeet_0202",
-            "name": "Budgerigar Hepatic Lipidosis",
-            "name_ja": "セキセイインコ肝リピドーシス"
-          },
-          {
-            "id": "parakeet_0257",
-            "name": "Hepatic Lipidosis (Seed Diet)",
-            "name_ja": "肝リピドーシス（種子食）（インコ）"
-          },
-          {
-            "id": "parakeet_0336",
-            "name": "Hepatitis",
-            "name_ja": "肝炎（インコ）"
-          },
-          {
-            "id": "parakeet_0341",
-            "name": "Hepatic Bacterial Infection",
-            "name_ja": "肝細菌感染症（インコ）"
-          },
-          {
-            "id": "parakeet_0342",
-            "name": "Hepatic Viral Infection",
-            "name_ja": "肝ウイルス感染症（インコ）"
-          },
-          {
-            "id": "parakeet_0343",
-            "name": "Hepatic Parasitic Disease",
-            "name_ja": "肝寄生虫疾患（インコ）"
-          },
-          {
-            "id": "parakeet_0344",
-            "name": "Hepatic Fibrosis",
-            "name_ja": "肝線維症（インコ）"
-          },
-          {
-            "id": "parakeet_0345",
-            "name": "Hepatic Neoplasia",
-            "name_ja": "肝腫瘍性疾患（インコ）"
-          },
-          {
-            "id": "parakeet_0346",
-            "name": "Hepatic Metabolic Disorder",
-            "name_ja": "肝代謝障害（インコ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "crop",
         "size": 10,
         "members": [
@@ -720,6 +584,62 @@
             "id": "parakeet_0453",
             "name": "Neonatal Crop Burn",
             "name_ja": "新生児そ嚢火傷（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 10,
+        "members": [
+          {
+            "id": "parakeet_0034",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "parakeet_0125",
+            "name": "Hepatic Amyloidosis",
+            "name_ja": "肝アミロイドーシス"
+          },
+          {
+            "id": "parakeet_0202",
+            "name": "Budgerigar Hepatic Lipidosis",
+            "name_ja": "セキセイインコ肝リピドーシス"
+          },
+          {
+            "id": "parakeet_0336",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（インコ）"
+          },
+          {
+            "id": "parakeet_0341",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（インコ）"
+          },
+          {
+            "id": "parakeet_0342",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（インコ）"
+          },
+          {
+            "id": "parakeet_0343",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0344",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（インコ）"
+          },
+          {
+            "id": "parakeet_0345",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍性疾患（インコ）"
+          },
+          {
+            "id": "parakeet_0346",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（インコ）"
           }
         ]
       },
@@ -1337,88 +1257,6 @@
         ]
       },
       {
-        "shared_stem": "proven",
-        "size": 7,
-        "members": [
-          {
-            "id": "parakeet_0006",
-            "name": "Proventricular Dilatation Disease (PDD)",
-            "name_ja": "前胃拡張症（PDD）"
-          },
-          {
-            "id": "parakeet_0087",
-            "name": "Psittacine Proventricular Impaction",
-            "name_ja": "前胃閉塞"
-          },
-          {
-            "id": "parakeet_0127",
-            "name": "Proventricular Ulceration",
-            "name_ja": "腺胃潰瘍"
-          },
-          {
-            "id": "parakeet_0173",
-            "name": "Proventricular Neoplasia",
-            "name_ja": "腺胃腫瘍"
-          },
-          {
-            "id": "parakeet_0209",
-            "name": "Proventricular Dilatation Disease – Neurological Form",
-            "name_ja": "前胃拡張症神経型"
-          },
-          {
-            "id": "parakeet_0226",
-            "name": "Proventricular Ulceration (Budgerigar)",
-            "name_ja": "前胃潰瘍（セキセイインコ）"
-          },
-          {
-            "id": "parakeet_0237",
-            "name": "Psittacine Proventricular Nematodes",
-            "name_ja": "オウム目前胃線虫症"
-          }
-        ]
-      },
-      {
-        "shared_stem": "tumor",
-        "size": 7,
-        "members": [
-          {
-            "id": "parakeet_0040",
-            "name": "Renal Tumors",
-            "name_ja": "腎腫瘍"
-          },
-          {
-            "id": "parakeet_0042",
-            "name": "Testicular Tumors",
-            "name_ja": "精巣腫瘍"
-          },
-          {
-            "id": "parakeet_0044",
-            "name": "Ovarian Tumors",
-            "name_ja": "卵巣腫瘍"
-          },
-          {
-            "id": "parakeet_0134",
-            "name": "Preen Gland Tumor (Uropygial Gland)",
-            "name_ja": "尾脂腺腫瘍"
-          },
-          {
-            "id": "parakeet_0214",
-            "name": "Testicular Tumor – Sertoli Cell",
-            "name_ja": "精巣腫瘍セルトリ細胞型"
-          },
-          {
-            "id": "parakeet_0256",
-            "name": "Testicular Tumor (Cere Color Change)",
-            "name_ja": "精巣腫瘍（ろう膜変色）（インコ）"
-          },
-          {
-            "id": "parakeet_0306",
-            "name": "Sertoli Cell Tumor",
-            "name_ja": "セルトリ細胞腫（インコ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "cardio",
         "size": 6,
         "members": [
@@ -1707,38 +1545,74 @@
         ]
       },
       {
-        "shared_stem": "toxico",
+        "shared_stem": "proven",
         "size": 6,
         "members": [
           {
-            "id": "parakeet_0038",
-            "name": "Teflon (PTFE) Toxicosis",
-            "name_ja": "テフロン中毒（PTFE中毒）"
+            "id": "parakeet_0006",
+            "name": "Proventricular Dilatation Disease (PDD)",
+            "name_ja": "前胃拡張症（PDD）"
           },
           {
-            "id": "parakeet_0039",
-            "name": "Avocado Toxicosis",
-            "name_ja": "アボカド中毒"
+            "id": "parakeet_0087",
+            "name": "Psittacine Proventricular Impaction",
+            "name_ja": "前胃閉塞"
           },
           {
-            "id": "parakeet_0196",
-            "name": "Teflon Toxicosis (Parakeet)",
-            "name_ja": "テフロン中毒（インコ）"
+            "id": "parakeet_0127",
+            "name": "Proventricular Ulceration",
+            "name_ja": "腺胃潰瘍"
           },
           {
-            "id": "parakeet_0241",
-            "name": "Zinc Toxicosis",
-            "name_ja": "亜鉛中毒"
+            "id": "parakeet_0173",
+            "name": "Proventricular Neoplasia",
+            "name_ja": "腺胃腫瘍"
           },
           {
-            "id": "parakeet_0242",
-            "name": "Lead Toxicosis",
-            "name_ja": "鉛中毒"
+            "id": "parakeet_0209",
+            "name": "Proventricular Dilatation Disease – Neurological Form",
+            "name_ja": "前胃拡張症神経型"
           },
           {
-            "id": "parakeet_0325",
-            "name": "Teflon/PTFE Toxicosis",
-            "name_ja": "テフロン/PTFE中毒（インコ）"
+            "id": "parakeet_0237",
+            "name": "Psittacine Proventricular Nematodes",
+            "name_ja": "オウム目前胃線虫症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tumor",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0040",
+            "name": "Renal Tumors",
+            "name_ja": "腎腫瘍"
+          },
+          {
+            "id": "parakeet_0042",
+            "name": "Testicular Tumors",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "parakeet_0044",
+            "name": "Ovarian Tumors",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "parakeet_0134",
+            "name": "Preen Gland Tumor (Uropygial Gland)",
+            "name_ja": "尾脂腺腫瘍"
+          },
+          {
+            "id": "parakeet_0214",
+            "name": "Testicular Tumor – Sertoli Cell",
+            "name_ja": "精巣腫瘍セルトリ細胞型"
+          },
+          {
+            "id": "parakeet_0306",
+            "name": "Sertoli Cell Tumor",
+            "name_ja": "セルトリ細胞腫（インコ）"
           }
         ]
       },
@@ -1992,6 +1866,37 @@
             "id": "parakeet_0387",
             "name": "Ophthalmological Congenital Anomaly",
             "name_ja": "眼科先天異常（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 5,
+        "members": [
+          {
+            "id": "parakeet_0038",
+            "name": "Teflon (PTFE) Toxicosis",
+            "name_ja": "テフロン中毒（PTFE中毒）"
+          },
+          {
+            "id": "parakeet_0039",
+            "name": "Avocado Toxicosis",
+            "name_ja": "アボカド中毒"
+          },
+          {
+            "id": "parakeet_0241",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "parakeet_0242",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "parakeet_0325",
+            "name": "Teflon/PTFE Toxicosis",
+            "name_ja": "テフロン/PTFE中毒（インコ）"
           }
         ]
       },
@@ -2575,27 +2480,6 @@
         ]
       },
       {
-        "shared_stem": "lipido",
-        "size": 3,
-        "members": [
-          {
-            "id": "parakeet_0034",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "parakeet_0202",
-            "name": "Budgerigar Hepatic Lipidosis",
-            "name_ja": "セキセイインコ肝リピドーシス"
-          },
-          {
-            "id": "parakeet_0257",
-            "name": "Hepatic Lipidosis (Seed Diet)",
-            "name_ja": "肝リピドーシス（種子食）（インコ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "liver",
         "size": 3,
         "members": [
@@ -2806,48 +2690,6 @@
         ]
       },
       {
-        "shared_stem": "teflon",
-        "size": 3,
-        "members": [
-          {
-            "id": "parakeet_0038",
-            "name": "Teflon (PTFE) Toxicosis",
-            "name_ja": "テフロン中毒（PTFE中毒）"
-          },
-          {
-            "id": "parakeet_0196",
-            "name": "Teflon Toxicosis (Parakeet)",
-            "name_ja": "テフロン中毒（インコ）"
-          },
-          {
-            "id": "parakeet_0325",
-            "name": "Teflon/PTFE Toxicosis",
-            "name_ja": "テフロン/PTFE中毒（インコ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "testic",
-        "size": 3,
-        "members": [
-          {
-            "id": "parakeet_0042",
-            "name": "Testicular Tumors",
-            "name_ja": "精巣腫瘍"
-          },
-          {
-            "id": "parakeet_0214",
-            "name": "Testicular Tumor – Sertoli Cell",
-            "name_ja": "精巣腫瘍セルトリ細胞型"
-          },
-          {
-            "id": "parakeet_0256",
-            "name": "Testicular Tumor (Cere Color Change)",
-            "name_ja": "精巣腫瘍（ろう膜変色）（インコ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "tract",
         "size": 3,
         "members": [
@@ -2888,43 +2730,22 @@
             "name_ja": "神経外傷性損傷（インコ）"
           }
         ]
-      },
-      {
-        "shared_stem": "xantho",
-        "size": 3,
-        "members": [
-          {
-            "id": "parakeet_0043",
-            "name": "Xanthomas",
-            "name_ja": "黄色腫"
-          },
-          {
-            "id": "parakeet_0177",
-            "name": "Xanthoma (Advanced)",
-            "name_ja": "黄色腫（進行型）"
-          },
-          {
-            "id": "parakeet_0263",
-            "name": "Xanthoma (Wing)",
-            "name_ja": "黄色腫（翼）（インコ）"
-          }
-        ]
       }
     ],
-    "family_cluster_count": 80
+    "family_cluster_count": 76
   },
   "T102": {
     "detector": "T102",
-    "total_records": 419,
+    "total_records": 413,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 419,
+    "total_records": 413,
     "empty_count": 0,
     "heading_only_count": 36,
-    "with_dosage_count": 383,
+    "with_dosage_count": 377,
     "empty": [],
     "heading_only": [
       {
@@ -3219,10 +3040,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 419,
+    "total_records": 413,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 70,
+    "drug_mismatch_count": 68,
     "citation_mismatch_count": 14,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -3344,18 +3165,6 @@
           {
             "drug": "Deferoxamine (Desferal)",
             "drug_ja": "デフェロキサミン（デスフェラール）",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "parakeet_0043",
-        "name": "Xanthomas",
-        "name_ja": "黄色腫",
-        "drugs": [
-          {
-            "drug": "Cholestyramine",
-            "drug_ja": "コレスチラミン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3947,18 +3756,6 @@
         ]
       },
       {
-        "id": "parakeet_0325",
-        "name": "Teflon/PTFE Toxicosis",
-        "name_ja": "テフロン/PTFE中毒（インコ）",
-        "drugs": [
-          {
-            "drug": "Apomorphine",
-            "drug_ja": "アポモルフィン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "parakeet_0336",
         "name": "Hepatitis",
         "name_ja": "肝炎（インコ）",
@@ -4324,7 +4121,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 419,
+    "total_records": 413,
     "hit_count": 1,
     "safe_occurrences": 0,
     "review_occurrences": 1,

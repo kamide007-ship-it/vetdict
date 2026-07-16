@@ -1,44 +1,11 @@
 {
   "species": "reptile",
   "view": "served",
-  "record_count": 268,
+  "record_count": 265,
   "T101": {
     "detector": "T101",
-    "total_records": 268,
+    "total_records": 265,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "reptile_0043",
-            "name": "Anorexia (Non-specific)",
-            "name_ja": "食欲不振（非特異的）"
-          },
-          {
-            "id": "reptile_0212",
-            "name": "Anorexia (Behavioral)",
-            "name_ja": "拒食（行動性）（爬虫類）"
-          },
-          {
-            "id": "reptile_0254",
-            "name": "Anorexia (Stress-Related)",
-            "name_ja": "ストレス性拒食（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0058",
-            "name": "Pre-ovulatory Follicular Stasis",
-            "name_ja": "排卵前卵胞停滞"
-          },
-          {
-            "id": "reptile_0161",
-            "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
-            "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -82,8 +49,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 5,
-    "redundant_record_count": 6,
+    "exact_duplicate_cluster_count": 3,
+    "redundant_record_count": 3,
     "family_clusters": [
       {
         "shared_stem": "respir",
@@ -773,32 +740,6 @@
         ]
       },
       {
-        "shared_stem": "stasi",
-        "size": 4,
-        "members": [
-          {
-            "id": "reptile_0058",
-            "name": "Pre-ovulatory Follicular Stasis",
-            "name_ja": "排卵前卵胞停滞"
-          },
-          {
-            "id": "reptile_0059",
-            "name": "Post-ovulatory Egg Stasis",
-            "name_ja": "排卵後卵停滞"
-          },
-          {
-            "id": "reptile_0130",
-            "name": "Follicular Stasis (Chronic)",
-            "name_ja": "慢性濾胞停滞"
-          },
-          {
-            "id": "reptile_0161",
-            "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
-            "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）"
-          }
-        ]
-      },
-      {
         "shared_stem": "viral",
         "size": 4,
         "members": [
@@ -842,27 +783,6 @@
             "id": "reptile_0158",
             "name": "Adenoviral Hepatitis",
             "name_ja": "アデノウイルス性肝炎"
-          }
-        ]
-      },
-      {
-        "shared_stem": "anorex",
-        "size": 3,
-        "members": [
-          {
-            "id": "reptile_0043",
-            "name": "Anorexia (Non-specific)",
-            "name_ja": "食欲不振（非特異的）"
-          },
-          {
-            "id": "reptile_0212",
-            "name": "Anorexia (Behavioral)",
-            "name_ja": "拒食（行動性）（爬虫類）"
-          },
-          {
-            "id": "reptile_0254",
-            "name": "Anorexia (Stress-Related)",
-            "name_ja": "ストレス性拒食（爬虫類）"
           }
         ]
       },
@@ -926,27 +846,6 @@
             "id": "reptile_0201",
             "name": "Egg Yolk Coelomitis",
             "name_ja": "卵黄体腔炎（爬虫類）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "follic",
-        "size": 3,
-        "members": [
-          {
-            "id": "reptile_0058",
-            "name": "Pre-ovulatory Follicular Stasis",
-            "name_ja": "排卵前卵胞停滞"
-          },
-          {
-            "id": "reptile_0130",
-            "name": "Follicular Stasis (Chronic)",
-            "name_ja": "慢性濾胞停滞"
-          },
-          {
-            "id": "reptile_0161",
-            "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
-            "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）"
           }
         ]
       },
@@ -1098,6 +997,27 @@
         ]
       },
       {
+        "shared_stem": "stasi",
+        "size": 3,
+        "members": [
+          {
+            "id": "reptile_0058",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "reptile_0059",
+            "name": "Post-ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞"
+          },
+          {
+            "id": "reptile_0130",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          }
+        ]
+      },
+      {
         "shared_stem": "tail",
         "size": 3,
         "members": [
@@ -1161,20 +1081,20 @@
         ]
       }
     ],
-    "family_cluster_count": 35
+    "family_cluster_count": 33
   },
   "T102": {
     "detector": "T102",
-    "total_records": 268,
+    "total_records": 265,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 268,
+    "total_records": 265,
     "empty_count": 0,
-    "heading_only_count": 37,
-    "with_dosage_count": 231,
+    "heading_only_count": 36,
+    "with_dosage_count": 229,
     "empty": [],
     "heading_only": [
       {
@@ -1222,14 +1142,6 @@
         "name": "Pyramiding",
         "name_ja": "ピラミッディング（甲羅の隆起異常）",
         "treatment_ja_len": 122,
-        "treatment_len": 193,
-        "has_dosage": false
-      },
-      {
-        "id": "reptile_0043",
-        "name": "Anorexia (Non-specific)",
-        "name_ja": "食欲不振（非特異的）",
-        "treatment_ja_len": 159,
         "treatment_len": 193,
         "has_dosage": false
       },
@@ -1477,10 +1389,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 268,
+    "total_records": 265,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 102,
+    "drug_mismatch_count": 101,
     "citation_mismatch_count": 9,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -1761,6 +1673,18 @@
         ]
       },
       {
+        "id": "reptile_0043",
+        "name": "Anorexia (Non-specific)",
+        "name_ja": "食欲不振（非特異的）",
+        "drugs": [
+          {
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
         "id": "reptile_0052",
         "name": "Septicemia (Blood Poisoning)",
         "name_ja": "敗血症",
@@ -1829,6 +1753,18 @@
           {
             "drug": "Propofol",
             "drug_ja": "プロポフォール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "reptile_0058",
+        "name": "Pre-ovulatory Follicular Stasis",
+        "name_ja": "排卵前卵胞停滞",
+        "drugs": [
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2252,18 +2188,6 @@
         ]
       },
       {
-        "id": "reptile_0161",
-        "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
-        "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）",
-        "drugs": [
-          {
-            "drug": "Oxytocin",
-            "drug_ja": "オキシトシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "reptile_0162",
         "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
         "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）",
@@ -2489,18 +2413,6 @@
         "id": "reptile_0211",
         "name": "Regurgitation",
         "name_ja": "吐出（爬虫類）",
-        "drugs": [
-          {
-            "drug": "Metoclopramide",
-            "drug_ja": "メトクロプラミド",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "reptile_0212",
-        "name": "Anorexia (Behavioral)",
-        "name_ja": "拒食（行動性）（爬虫類）",
         "drugs": [
           {
             "drug": "Metoclopramide",
@@ -2835,18 +2747,6 @@
         ]
       },
       {
-        "id": "reptile_0254",
-        "name": "Anorexia (Stress-Related)",
-        "name_ja": "ストレス性拒食（爬虫類）",
-        "drugs": [
-          {
-            "drug": "Metoclopramide",
-            "drug_ja": "メトクロプラミド",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "reptile_0255",
         "name": "Hepatic Bacterial Infection",
         "name_ja": "肝細菌感染症（爬虫類）",
@@ -3061,7 +2961,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 268,
+    "total_records": 265,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

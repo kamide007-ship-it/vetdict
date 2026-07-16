@@ -1,17 +1,13 @@
 # VetDict 品質検出レポート — tortoise
 
-- 総レコード数: **266**
+- 総レコード数: **255**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **5** （冗長レコード 5 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **37**
+- 完全一致重複クラスタ: **1** （冗長レコード 1 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **30**
 
 ### 完全一致重複（上位20）
 - 膀胱結石（Bladder Stones (Urolithiasis)）[tortoise_0040] / 膀胱結石（尿酸塩型）（Cystic Calculi (Bladder Stones) - Urate）[tortoise_0158]
-- 皮下膿瘍（Abscess (Subcutaneous)）[tortoise_0050] / 膿瘍（リクガメ）（Abscess）[tortoise_0201]
-- ダニ寄生（Mite Infestation）[tortoise_0079] / ダニ症（Ophionyssus）（リクガメ）（Mite Infestation (Ophionyssus)）[tortoise_0190]
-- 慢性濾胞停滞（Follicular Stasis (Chronic)）[tortoise_0116] / 卵胞停滞（リクガメ）（Follicular Stasis）[tortoise_0178]
-- 拒食（行動性）（リクガメ）（Anorexia (Behavioral)）[tortoise_0221] / ストレス性拒食（リクガメ）（Anorexia (Stress-Related)）[tortoise_0262]
 
 ### 疾患ファミリー候補（上位15）
 - stem=`respir` × 12件
@@ -74,20 +70,6 @@
     - ビオチン欠乏症（Biotin Deficiency）[tortoise_0135]
     - タンパク質欠乏・栄養不良（Protein Deficiency）[tortoise_0136]
     - ビタミンC欠乏症（Vitamin C Deficiency）[tortoise_0151]
-- stem=`absces` × 6件
-    - 眼周囲膿瘍（Periocular Abscess）[tortoise_0037]
-    - 皮下膿瘍（Abscess (Subcutaneous)）[tortoise_0050]
-    - 耳膿瘍（Aural Abscess (Ear Abscess)）[tortoise_0051]
-    - 甲羅膿瘍（Shell Abscess）[tortoise_0112]
-    - 膿瘍（リクガメ）（Abscess）[tortoise_0201]
-    - 眼鏡鱗下膿瘍（リクガメ）（Subspectacular Abscess）[tortoise_0228]
-- stem=`prolap` × 6件
-    - 総排泄腔脱（Cloacal Prolapse）[tortoise_0056]
-    - 陰茎脱出（Penile Prolapse）[tortoise_0057]
-    - 腸脱出（Intestinal Prolapse）[tortoise_0078]
-    - 膀胱脱（Prolapsed Bladder）[tortoise_0157]
-    - 陰茎/半陰茎脱（リクガメ）（Penile/Hemipenal Prolapse）[tortoise_0212]
-    - 直腸/総排泄腔脱（リクガメ）（Rectal/Cloacal Prolapse）[tortoise_0222]
 - stem=`tortoi` × 6件
     - リクガメ核内コクシジウム症（Tortoise Intranuclear Coccidia (TINC)）[tortoise_0013]
     - リクガメ尿石症（膀胱結石）（Tortoise Urolithiasis (Bladder Stone)）[tortoise_0163]
@@ -95,57 +77,63 @@
     - リクガメヘルペスウイルス（リクガメ）（Tortoise Herpesvirus）[tortoise_0165]
     - リクガメラナウイルス（リクガメ）（Tortoise Ranavirus）[tortoise_0168]
     - ホルスフィールドリクガメ鼻汁症候群（リクガメ）（Horsfield's Tortoise Runny Nose Syndrome）[tortoise_0175]
+- stem=`absces` × 5件
+    - 眼周囲膿瘍（Periocular Abscess）[tortoise_0037]
+    - 皮下膿瘍（Abscess (Subcutaneous)）[tortoise_0050]
+    - 耳膿瘍（Aural Abscess (Ear Abscess)）[tortoise_0051]
+    - 甲羅膿瘍（Shell Abscess）[tortoise_0112]
+    - 眼鏡鱗下膿瘍（リクガメ）（Subspectacular Abscess）[tortoise_0228]
 - stem=`bacter` × 5件
     - 細菌性皮膚炎（Bacterial Dermatitis）[tortoise_0053]
     - 肝細菌感染症（リクガメ）（Hepatic Bacterial Infection）[tortoise_0263]
     - 消化管細菌感染（リクガメ）（Gastrointestinal Bacterial Infection）[tortoise_0268]
     - 呼吸器細菌感染（リクガメ）（Respiratory Bacterial Infection）[tortoise_0276]
     - 皮膚細菌感染（リクガメ）（Dermatological Bacterial Infection）[tortoise_0284]
-- stem=`infest` × 5件
-    - マダニ寄生（Tick Infestation）[tortoise_0020]
-    - ダニ寄生（Mite Infestation）[tortoise_0079]
-    - ヒル寄生（Leech Infestation）[tortoise_0080]
-    - ダニ症（Ophionyssus）（リクガメ）（Mite Infestation (Ophionyssus)）[tortoise_0190]
-    - 皮膚寄生虫寄生（リクガメ）（Dermatological Parasitic Infestation）[tortoise_0287]
-- stem=`stasi` × 5件
-    - 排卵前卵胞停滞（Pre-ovulatory Follicular Stasis）[tortoise_0044]
-    - 慢性濾胞停滞（Follicular Stasis (Chronic)）[tortoise_0116]
-    - 生殖停滞（リクガメ）（Reproductive Stasis）[tortoise_0177]
-    - 卵胞停滞（リクガメ）（Follicular Stasis）[tortoise_0178]
-    - 排卵後卵停滞（リクガメ）（Post-Ovulatory Egg Stasis）[tortoise_0210]
 - stem=`toxico` × 5件
     - 中毒症（Toxicosis (Poisoning)）[tortoise_0066]
     - 亜鉛中毒（Zinc Toxicosis）[tortoise_0125]
     - 鉛中毒（Lead Toxicosis）[tortoise_0126]
     - イベルメクチン中毒（Ivermectin Toxicosis）[tortoise_0127]
     - メトロニダゾール中毒（Metronidazole Toxicosis）[tortoise_0128]
-- stem=`anorex` × 4件
-    - 慢性食欲不振症候群（Chronic Anorexia Syndrome）[tortoise_0076]
-    - 冬眠後食欲不振（Post-hibernation Anorexia）[tortoise_0087]
-    - 拒食（行動性）（リクガメ）（Anorexia (Behavioral)）[tortoise_0221]
-    - ストレス性拒食（リクガメ）（Anorexia (Stress-Related)）[tortoise_0262]
-- stem=`coelom` × 4件
-    - 腹膜炎・体腔炎（Peritonitis / Coelomitis）[tortoise_0067]
-    - 体腔液貯留（腹水）（Coelomic Effusion (Ascites)）[tortoise_0088]
-    - 卵関連体腔炎（Egg-related Coelomitis）[tortoise_0115]
-    - 卵黄体腔炎（リクガメ）（Egg Yolk Coelomitis）[tortoise_0211]
+- stem=`fungal` × 4件
+    - 真菌性甲羅疾患（Fungal Shell Disease）[tortoise_0054]
+    - 消化管真菌感染（リクガメ）（Gastrointestinal Fungal Infection）[tortoise_0270]
+    - 呼吸器真菌感染（リクガメ）（Respiratory Fungal Infection）[tortoise_0278]
+    - 皮膚真菌感染（リクガメ）（Dermatological Fungal Infection）[tortoise_0286]
+- stem=`herpes` × 4件
+    - ヘルペスウイルス感染症（Herpesvirus Infection）[tortoise_0010]
+    - カメヘルペスウイルス1型（Chelonian Herpesvirus Type 1）[tortoise_0095]
+    - カメヘルペスウイルス2型（Chelonian Herpesvirus Type 2）[tortoise_0096]
+    - リクガメヘルペスウイルス（リクガメ）（Tortoise Herpesvirus）[tortoise_0165]
+- stem=`infest` × 4件
+    - マダニ寄生（Tick Infestation）[tortoise_0020]
+    - ダニ寄生（Mite Infestation）[tortoise_0079]
+    - ヒル寄生（Leech Infestation）[tortoise_0080]
+    - 皮膚寄生虫寄生（リクガメ）（Dermatological Parasitic Infestation）[tortoise_0287]
+- stem=`intest` × 4件
+    - 腸管線虫（回虫）感染（Intestinal Nematodes (Roundworms)）[tortoise_0014]
+    - 腸脱出（Intestinal Prolapse）[tortoise_0078]
+    - 腸捻転（Intestinal Volvulus）[tortoise_0144]
+    - 腸閉塞（リクガメ）（Intestinal Obstruction）[tortoise_0218]
+- stem=`nemato` × 4件
+    - 腸管線虫（回虫）感染（Intestinal Nematodes (Roundworms)）[tortoise_0014]
+    - 線虫性肺感染症（Nematode Lung Infection）[tortoise_0081]
+    - 線虫性胃炎（アトラクティス・アラエウリス）（Nematode Gastritis (Atractis / Alaeuris)）[tortoise_0107]
+    - 線虫感染（リクガメ）（Nematode Infection）[tortoise_0191]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **61**
-- 投与量あり: **205**
+- 投与量なし（見出しのみ）: **55**
+- 投与量あり: **200**
 
 ### 投与量なし（上位30）
 - 敗血症性皮膚潰瘍症（SCUD）（Septicemic Cutaneous Ulcerative Disease (SCUD)）[tortoise_0001] — ja:172字 / en:196字
 - ピラミッディング（Pyramiding）[tortoise_0003] — ja:59字 / en:149字
-- マイコプラズマ症（Mycoplasmosis (Mycoplasma agassizii / testudineum)）[tortoise_0008] — ja:165字 / en:149字
 - リクガメ核内コクシジウム症（Tortoise Intranuclear Coccidia (TINC)）[tortoise_0013] — ja:173字 / en:172字
 - 腸管線虫（回虫）感染（Intestinal Nematodes (Roundworms)）[tortoise_0014] — ja:170字 / en:193字
-- 鞭毛虫感染症（Flagellate Protozoa Infection）[tortoise_0017] — ja:163字 / en:137字
-- コクシジウム症（Coccidia Infection）[tortoise_0018] — ja:167字 / en:204字
 - マダニ寄生（Tick Infestation）[tortoise_0020] — ja:82字 / en:193字
 - ビタミンD3欠乏症（Vitamin D3 Deficiency）[tortoise_0025] — ja:77字 / en:193字
 - 肥満（Obesity）[tortoise_0028] — ja:70字 / en:165字
@@ -156,22 +144,25 @@
 - 敗血症（Septicemia）[tortoise_0049] — ja:160字 / en:233字
 - 脱皮不全（Dysecdysis (Retained Shed)）[tortoise_0052] — ja:193字 / en:193字
 - 甲羅の藻類付着（Algae Growth on Shell）[tortoise_0055] — ja:52字 / en:149字
-- 総排泄腔脱（Cloacal Prolapse）[tortoise_0056] — ja:84字 / en:193字
-- 陰茎脱出（Penile Prolapse）[tortoise_0057] — ja:193字 / en:193字
 - 心疾患（Cardiac Disease）[tortoise_0062] — ja:51字 / en:185字
 - 中毒症（Toxicosis (Poisoning)）[tortoise_0066] — ja:84字 / en:255字
 - 骨髄炎（Osteomyelitis）[tortoise_0069] — ja:54字 / en:190字
 - 鼻炎（Rhinitis）[tortoise_0070] — ja:65字 / en:193字
 - 慢性下痢（Chronic Diarrhea）[tortoise_0077] — ja:161字 / en:149字
 - 腸脱出（Intestinal Prolapse）[tortoise_0078] — ja:67字 / en:193字
-- ダニ寄生（Mite Infestation）[tortoise_0079] — ja:81字 / en:126字
 - 線虫性肺感染症（Nematode Lung Infection）[tortoise_0081] — ja:167字 / en:204字
 - 総排泄腔炎（Cloacitis）[tortoise_0086] — ja:162字 / en:149字
 - 体腔液貯留（腹水）（Coelomic Effusion (Ascites)）[tortoise_0088] — ja:101字 / en:193字
 - 尿路感染症（Urinary Tract Infection）[tortoise_0089] — ja:162字 / en:137字
+- 気管狭窄（Tracheal Stricture）[tortoise_0090] — ja:54字 / en:190字
+- 血液寄生虫症（Hemoparasitism）[tortoise_0091] — ja:166字 / en:172字
+- 尾壊死（Tail Necrosis）[tortoise_0093] — ja:192字 / en:517字
+- 甲板脱落異常（Scute Shedding Disorder）[tortoise_0094] — ja:195字 / en:193字
+- クラミジア症（Chlamydiosis）[tortoise_0098] — ja:163字 / en:190字
+- シトロバクター感染症（Citrobacter Infection）[tortoise_0101] — ja:55字 / en:196字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **83** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **81** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **12** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
@@ -189,12 +180,12 @@
 - 凍傷・低温障害（Frostbite / Cold Injury）[tortoise_0047] → メサドン
 - 皮下膿瘍（Abscess (Subcutaneous)）[tortoise_0050] → アモキシシリン・クラブラン酸
 - 細菌性皮膚炎（Bacterial Dermatitis）[tortoise_0053] → セファレキシン, クリンダマイシン, ムピロシン
+- 総排泄腔脱（Cloacal Prolapse）[tortoise_0056] → オキシトシン
 - 扁平上皮癌（Squamous Cell Carcinoma）[tortoise_0058] → カルボプラチン
 - 線維肉腫（Fibrosarcoma）[tortoise_0059] → カルボプラチン
 - 外傷・咬傷（Trauma / Bite Wounds）[tortoise_0065] → メサドン
 - 中毒症（Toxicosis (Poisoning)）[tortoise_0066] → 活性炭
 - 腹膜炎・体腔炎（Peritonitis / Coelomitis）[tortoise_0067] → モルヒネ
-- 眼感染症（感染性眼炎）（Eye Infection (Infectious Ophthalmitis)）[tortoise_0075] → アモキシシリン・クラブラン酸, シプロフロキサシン
 
 ### 犬猫論文が他種に自動紐付け（上位20）
 - 嘴の過成長・不正咬合（Beak Overgrowth / Malocclusion）[tortoise_0035] → key: malocclusion

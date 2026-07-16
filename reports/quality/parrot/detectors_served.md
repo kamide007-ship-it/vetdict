@@ -1,16 +1,15 @@
 # VetDict 品質検出レポート — parrot
 
-- 総レコード数: **265**
+- 総レコード数: **262**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **5** （冗長レコード 7 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **38**
+- 完全一致重複クラスタ: **4** （冗長レコード 5 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **37**
 
 ### 完全一致重複（上位20）
 - 乳頭腫症（Papillomatosis）[parrot_0006] / 乳頭腫症（胆管）（オウム）（Papillomatosis (Bile Duct)）[parrot_0167] / 内臓乳頭腫症（オウム）（Papillomatosis (Internal)）[parrot_0251]
 - 肝疾患（肝炎）（Liver Disease (Hepatitis)）[parrot_0037] / 肝疾患（肝リピドーシス）（オウム）（Liver Disease (Hepatic Lipidosis)）[parrot_0186]
 - 消化管閉塞（Gastrointestinal Obstruction）[parrot_0125] / 消化管部分閉塞（オウム）（Gastrointestinal Obstruction (Partial)）[parrot_0270]
-- 腺胃拡張症（PDD・トリボルナウイルス）（Proventricular Dilatation Disease (PDD / Avian Bornavirus)）[parrot_0160] / 前胃拡張症（オウム）（Proventricular Dilatation Disease）[parrot_0161] / 前胃拡張症（PDD）（オウム）（Proventricular Dilatation Disease (PDD)）[parrot_0177]
 - 翼骨折（オウム）（Fracture (Wing)）[parrot_0207] / 脚骨折（オウム）（Fracture (Leg)）[parrot_0208]
 
 ### 疾患ファミリー候補（上位15）
@@ -83,14 +82,6 @@
     - 皮膚ウイルス感染（オウム）（Dermatological Viral Infection）[parrot_0280]
     - 皮膚真菌感染（オウム）（Dermatological Fungal Infection）[parrot_0281]
     - 皮膚寄生虫寄生（オウム）（Dermatological Parasitic Infestation）[parrot_0282]
-- stem=`proven` × 7件
-    - 腺胃拡張症（PDD）／ボルナウイルス感染症（Proventricular Dilatation Disease (PDD) / Bornavirus）[parrot_0001]
-    - 前胃拡張（PDD以外の原因）（Proventricular Dilatation (non-PDD causes)）[parrot_0078]
-    - オウム目前胃寄生虫（旋尾線虫類）（Psittacine Proventricular Worm (Spirurids)）[parrot_0089]
-    - 腺胃潰瘍（Proventricular Ulceration）[parrot_0123]
-    - 腺胃拡張症（PDD・トリボルナウイルス）（Proventricular Dilatation Disease (PDD / Avian Bornavirus)）[parrot_0160]
-    - 前胃拡張症（オウム）（Proventricular Dilatation Disease）[parrot_0161]
-    - 前胃拡張症（PDD）（オウム）（Proventricular Dilatation Disease (PDD)）[parrot_0177]
 - stem=`bacter` × 6件
     - 細菌性肺炎（Bacterial Pneumonia）[parrot_0009]
     - グラム陰性菌感染症（Gram-negative Bacterial Infection）[parrot_0014]
@@ -111,12 +102,6 @@
     - 嘴過長症（Beak Overgrowth）[parrot_0058]
     - 嘴変形（シザービーク）（オウム）（Beak Deformity (Scissor Beak)）[parrot_0211]
     - 嘴骨折（オウム）（Beak Fracture）[parrot_0212]
-- stem=`dilata` × 5件
-    - 腺胃拡張症（PDD）／ボルナウイルス感染症（Proventricular Dilatation Disease (PDD) / Bornavirus）[parrot_0001]
-    - 前胃拡張（PDD以外の原因）（Proventricular Dilatation (non-PDD causes)）[parrot_0078]
-    - 腺胃拡張症（PDD・トリボルナウイルス）（Proventricular Dilatation Disease (PDD / Avian Bornavirus)）[parrot_0160]
-    - 前胃拡張症（オウム）（Proventricular Dilatation Disease）[parrot_0161]
-    - 前胃拡張症（PDD）（オウム）（Proventricular Dilatation Disease (PDD)）[parrot_0177]
 - stem=`injury` × 5件
     - 翼外傷・軟部組織損傷（Wing Trauma / Soft Tissue Injury）[parrot_0060]
     - 爪過長・損傷（Nail Overgrowth / Injury）[parrot_0157]
@@ -135,6 +120,18 @@
     - 消化管寄生虫疾患（オウム）（Gastrointestinal Parasitic Disease）[parrot_0266]
     - 呼吸器寄生虫疾患（オウム）（Respiratory Parasitic Disease）[parrot_0274]
     - 皮膚寄生虫寄生（オウム）（Dermatological Parasitic Infestation）[parrot_0282]
+- stem=`poison` × 5件
+    - 重金属中毒（鉛・亜鉛）（Heavy Metal Poisoning (Lead/Zinc)）[parrot_0024]
+    - 農薬中毒（Pesticide Poisoning）[parrot_0147]
+    - 殺鼠剤中毒（Rodenticide Poisoning）[parrot_0148]
+    - 銅中毒（Copper Poisoning）[parrot_0156]
+    - 鉛中毒（オウム）（Lead Poisoning）[parrot_0240]
+- stem=`tumor` × 5件
+    - 内部腫瘍（腫瘍性疾患）（Internal Tumors (Neoplasia)）[parrot_0065]
+    - 尾脂腺腫瘍（Preen Gland Tumor）[parrot_0136]
+    - 精巣腫瘍（オウム）（Testicular Tumor）[parrot_0222]
+    - セルトリ細胞腫（オウム）（Sertoli Cell Tumor）[parrot_0223]
+    - 腎腫瘍（オウム）（Renal Tumor）[parrot_0224]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
@@ -142,7 +139,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **69**
-- 投与量あり: **196**
+- 投与量あり: **193**
 
 ### 投与量なし（上位30）
 - 気嚢炎（Air Sacculitis）[parrot_0010] — ja:159字 / en:190字
@@ -181,6 +178,7 @@
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **14** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
+- 腺胃拡張症（PDD）／ボルナウイルス感染症（Proventricular Dilatation Disease (PDD) / Bornavirus）[parrot_0001] → シサプリド
 - 趾瘤症（バンブルフット）（Bumblefoot (Pododermatitis)）[parrot_0013] → スルファジアジン
 - 重金属中毒（鉛・亜鉛）（Heavy Metal Poisoning (Lead/Zinc)）[parrot_0024] → アポモルフィン
 - 接触性皮膚炎（Contact Dermatitis）[parrot_0055] → セチリジン
@@ -189,7 +187,6 @@
 - クレブシエラ感染症（Klebsiella Infection）[parrot_0110] → メロペネム
 - 皮膚糸状菌症（Dermatophytosis (Ringworm)）[parrot_0115] → ミコナゾール
 - 骨肉腫（Osteosarcoma）[parrot_0132] → トラマドール
-- 腺胃拡張症（PDD・トリボルナウイルス）（Proventricular Dilatation Disease (PDD / Avian Bornavirus)）[parrot_0160] → シサプリド
 - 気管ダニ（Sternostoma）（オウム）（Tracheal Mite (Sternostoma)）[parrot_0193] → セラメクチン（レボリューション）
 - 気嚢ダニ（オウム）（Air Sac Mite）[parrot_0194] → セラメクチン（レボリューション）
 - 疥癬（鱗状顔面）（オウム）（Knemidocoptes Mange (Scaly Face)）[parrot_0195] → セラメクチン（レボリューション）
