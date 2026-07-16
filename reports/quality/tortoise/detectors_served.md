@@ -1,24 +1,16 @@
 # VetDict 品質検出レポート — tortoise
 
-- 総レコード数: **278**
+- 総レコード数: **266**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **13** （冗長レコード 14 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **41**
+- 完全一致重複クラスタ: **5** （冗長レコード 5 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **37**
 
 ### 完全一致重複（上位20）
-- 甲羅腐敗症（Shell Rot (Ulcerative Shell Disease)）[tortoise_0000] / 甲羅腐敗（リクガメ）（Shell Rot）[tortoise_0167]
-- 肺炎（下部呼吸器感染症）（Pneumonia (Lower Respiratory Infection)）[tortoise_0006] / 肺炎（リクガメ）（Pneumonia）[tortoise_0224]
-- 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[tortoise_0032] / 肝リピドーシス（リクガメ）（Hepatic Lipidosis）[tortoise_0215]
-- 膀胱結石（Bladder Stones (Urolithiasis)）[tortoise_0040] / 膀胱結石（尿酸塩型）（Cystic Calculi (Bladder Stones) - Urate）[tortoise_0158] / 膀胱結石（尿酸塩）（リクガメ）（Bladder Stone (Urate)）[tortoise_0176]
+- 膀胱結石（Bladder Stones (Urolithiasis)）[tortoise_0040] / 膀胱結石（尿酸塩型）（Cystic Calculi (Bladder Stones) - Urate）[tortoise_0158]
 - 皮下膿瘍（Abscess (Subcutaneous)）[tortoise_0050] / 膿瘍（リクガメ）（Abscess）[tortoise_0201]
-- 高体温症（熱中症）（Hyperthermia (Heat Stroke)）[tortoise_0063] / 高体温症（リクガメ）（Hyperthermia）[tortoise_0253]
-- カルシウム欠乏症（食事性低カルシウム血症）（Calcium Deficiency (Dietary Hypocalcemia)）[tortoise_0072] / カルシウム欠乏症（リクガメ）（Calcium Deficiency）[tortoise_0250]
-- 眼感染症（感染性眼炎）（Eye Infection (Infectious Ophthalmitis)）[tortoise_0075] / 眼感染症（リクガメ）（Eye Infection）[tortoise_0231]
 - ダニ寄生（Mite Infestation）[tortoise_0079] / ダニ症（Ophionyssus）（リクガメ）（Mite Infestation (Ophionyssus)）[tortoise_0190]
-- マイコバクテリア症（カメ結核）（Mycobacteriosis (Turtle Tuberculosis)）[tortoise_0097] / マイコバクテリウム症（リクガメ）（Mycobacteriosis）[tortoise_0186]
 - 慢性濾胞停滞（Follicular Stasis (Chronic)）[tortoise_0116] / 卵胞停滞（リクガメ）（Follicular Stasis）[tortoise_0178]
-- 痛風（内臓型）（リクガメ）（Gout (Visceral)）[tortoise_0205] / 痛風（関節型）（リクガメ）（Gout (Articular)）[tortoise_0206]
 - 拒食（行動性）（リクガメ）（Anorexia (Behavioral)）[tortoise_0221] / ストレス性拒食（リクガメ）（Anorexia (Stress-Related)）[tortoise_0262]
 
 ### 疾患ファミリー候補（上位15）
@@ -46,7 +38,7 @@
     - 消化管炎症性疾患（リクガメ）（Gastrointestinal Inflammatory Disease）[tortoise_0273]
     - 消化管運動障害（リクガメ）（Gastrointestinal Motility Disorder）[tortoise_0274]
     - 消化管部分閉塞（リクガメ）（Gastrointestinal Obstruction (Partial)）[tortoise_0275]
-- stem=`shell` × 10件
+- stem=`shell` × 9件
     - 甲羅腐敗症（Shell Rot (Ulcerative Shell Disease)）[tortoise_0000]
     - 甲羅骨折・外傷（Shell Fracture / Trauma）[tortoise_0002]
     - 甲羅軟化（カメの代謝性骨疾患）（Soft Shell (Metabolic Bone Disease in Chelonians)）[tortoise_0004]
@@ -56,26 +48,6 @@
     - 甲羅膿瘍（Shell Abscess）[tortoise_0112]
     - 甲羅奇形（先天性）（Shell Deformity (Congenital)）[tortoise_0113]
     - 甲羅のピラミッド化（甲板隆起）（Shell Pyramiding）[tortoise_0161]
-    - 甲羅腐敗（リクガメ）（Shell Rot）[tortoise_0167]
-- stem=`hepati` × 9件
-    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[tortoise_0032]
-    - 肝リピドーシス（リクガメ）（Hepatic Lipidosis）[tortoise_0215]
-    - 肝炎（リクガメ）（Hepatitis）[tortoise_0216]
-    - 肝腫瘍（リクガメ）（Hepatic Neoplasia）[tortoise_0217]
-    - 肝細菌感染症（リクガメ）（Hepatic Bacterial Infection）[tortoise_0263]
-    - 肝ウイルス感染症（リクガメ）（Hepatic Viral Infection）[tortoise_0264]
-    - 肝寄生虫疾患（リクガメ）（Hepatic Parasitic Disease）[tortoise_0265]
-    - 肝線維症（リクガメ）（Hepatic Fibrosis）[tortoise_0266]
-    - 肝代謝障害（リクガメ）（Hepatic Metabolic Disorder）[tortoise_0267]
-- stem=`defici` × 8件
-    - ビタミンA欠乏症（Vitamin A Deficiency (Hypovitaminosis A)）[tortoise_0023]
-    - ビタミンD3欠乏症（Vitamin D3 Deficiency）[tortoise_0025]
-    - カルシウム欠乏症（食事性低カルシウム血症）（Calcium Deficiency (Dietary Hypocalcemia)）[tortoise_0072]
-    - 紫外線不足症（UV Light Deficiency）[tortoise_0134]
-    - ビオチン欠乏症（Biotin Deficiency）[tortoise_0135]
-    - タンパク質欠乏・栄養不良（Protein Deficiency）[tortoise_0136]
-    - ビタミンC欠乏症（Vitamin C Deficiency）[tortoise_0151]
-    - カルシウム欠乏症（リクガメ）（Calcium Deficiency）[tortoise_0250]
 - stem=`dermat` × 8件
     - 細菌性皮膚炎（Bacterial Dermatitis）[tortoise_0053]
     - 光線過敏性皮膚炎（Photosensitization Dermatitis）[tortoise_0155]
@@ -85,6 +57,23 @@
     - 皮膚ウイルス感染（リクガメ）（Dermatological Viral Infection）[tortoise_0285]
     - 皮膚真菌感染（リクガメ）（Dermatological Fungal Infection）[tortoise_0286]
     - 皮膚寄生虫寄生（リクガメ）（Dermatological Parasitic Infestation）[tortoise_0287]
+- stem=`hepati` × 8件
+    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[tortoise_0032]
+    - 肝炎（リクガメ）（Hepatitis）[tortoise_0216]
+    - 肝腫瘍（リクガメ）（Hepatic Neoplasia）[tortoise_0217]
+    - 肝細菌感染症（リクガメ）（Hepatic Bacterial Infection）[tortoise_0263]
+    - 肝ウイルス感染症（リクガメ）（Hepatic Viral Infection）[tortoise_0264]
+    - 肝寄生虫疾患（リクガメ）（Hepatic Parasitic Disease）[tortoise_0265]
+    - 肝線維症（リクガメ）（Hepatic Fibrosis）[tortoise_0266]
+    - 肝代謝障害（リクガメ）（Hepatic Metabolic Disorder）[tortoise_0267]
+- stem=`defici` × 7件
+    - ビタミンA欠乏症（Vitamin A Deficiency (Hypovitaminosis A)）[tortoise_0023]
+    - ビタミンD3欠乏症（Vitamin D3 Deficiency）[tortoise_0025]
+    - カルシウム欠乏症（食事性低カルシウム血症）（Calcium Deficiency (Dietary Hypocalcemia)）[tortoise_0072]
+    - 紫外線不足症（UV Light Deficiency）[tortoise_0134]
+    - ビオチン欠乏症（Biotin Deficiency）[tortoise_0135]
+    - タンパク質欠乏・栄養不良（Protein Deficiency）[tortoise_0136]
+    - ビタミンC欠乏症（Vitamin C Deficiency）[tortoise_0151]
 - stem=`absces` × 6件
     - 眼周囲膿瘍（Periocular Abscess）[tortoise_0037]
     - 皮下膿瘍（Abscess (Subcutaneous)）[tortoise_0050]
@@ -146,13 +135,12 @@
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **64**
-- 投与量あり: **214**
+- 投与量なし（見出しのみ）: **61**
+- 投与量あり: **205**
 
 ### 投与量なし（上位30）
 - 敗血症性皮膚潰瘍症（SCUD）（Septicemic Cutaneous Ulcerative Disease (SCUD)）[tortoise_0001] — ja:172字 / en:196字
 - ピラミッディング（Pyramiding）[tortoise_0003] — ja:59字 / en:149字
-- 肺炎（下部呼吸器感染症）（Pneumonia (Lower Respiratory Infection)）[tortoise_0006] — ja:67字 / en:196字
 - マイコプラズマ症（Mycoplasmosis (Mycoplasma agassizii / testudineum)）[tortoise_0008] — ja:165字 / en:149字
 - リクガメ核内コクシジウム症（Tortoise Intranuclear Coccidia (TINC)）[tortoise_0013] — ja:173字 / en:172字
 - 腸管線虫（回虫）感染（Intestinal Nematodes (Roundworms)）[tortoise_0014] — ja:170字 / en:193字
@@ -171,7 +159,6 @@
 - 総排泄腔脱（Cloacal Prolapse）[tortoise_0056] — ja:84字 / en:193字
 - 陰茎脱出（Penile Prolapse）[tortoise_0057] — ja:193字 / en:193字
 - 心疾患（Cardiac Disease）[tortoise_0062] — ja:51字 / en:185字
-- 高体温症（熱中症）（Hyperthermia (Heat Stroke)）[tortoise_0063] — ja:81字 / en:232字
 - 中毒症（Toxicosis (Poisoning)）[tortoise_0066] — ja:84字 / en:255字
 - 骨髄炎（Osteomyelitis）[tortoise_0069] — ja:54字 / en:190字
 - 鼻炎（Rhinitis）[tortoise_0070] — ja:65字 / en:193字
@@ -180,13 +167,16 @@
 - ダニ寄生（Mite Infestation）[tortoise_0079] — ja:81字 / en:126字
 - 線虫性肺感染症（Nematode Lung Infection）[tortoise_0081] — ja:167字 / en:204字
 - 総排泄腔炎（Cloacitis）[tortoise_0086] — ja:162字 / en:149字
+- 体腔液貯留（腹水）（Coelomic Effusion (Ascites)）[tortoise_0088] — ja:101字 / en:193字
+- 尿路感染症（Urinary Tract Infection）[tortoise_0089] — ja:162字 / en:137字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **87** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **83** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **12** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
-- 甲羅骨折・外傷（Shell Fracture / Trauma）[tortoise_0002] → モルヒネ
+- 甲羅腐敗症（Shell Rot (Ulcerative Shell Disease)）[tortoise_0000] → スルファジアジン
+- 肺炎（下部呼吸器感染症）（Pneumonia (Lower Respiratory Infection)）[tortoise_0006] → アモキシシリン・クラブラン酸
 - アスペルギルス症（Aspergillosis）[tortoise_0009] → ボリコナゾール, クロトリマゾール
 - 蝿蛆症（Myiasis (Fly Strike)）[tortoise_0021] → スルファジアジン
 - 消化管閉塞（便秘）（Gastrointestinal Impaction (Constipation)）[tortoise_0029] → メトクロプラミド, ラクツロース, シサプリド
@@ -204,8 +194,7 @@
 - 外傷・咬傷（Trauma / Bite Wounds）[tortoise_0065] → メサドン
 - 中毒症（Toxicosis (Poisoning)）[tortoise_0066] → 活性炭
 - 腹膜炎・体腔炎（Peritonitis / Coelomitis）[tortoise_0067] → モルヒネ
-- 眼感染症（感染性眼炎）（Eye Infection (Infectious Ophthalmitis)）[tortoise_0075] → アモキシシリン・クラブラン酸
-- ヒル寄生（Leech Infestation）[tortoise_0080] → スルファジアジン
+- 眼感染症（感染性眼炎）（Eye Infection (Infectious Ophthalmitis)）[tortoise_0075] → アモキシシリン・クラブラン酸, シプロフロキサシン
 
 ### 犬猫論文が他種に自動紐付け（上位20）
 - 嘴の過成長・不正咬合（Beak Overgrowth / Malocclusion）[tortoise_0035] → key: malocclusion

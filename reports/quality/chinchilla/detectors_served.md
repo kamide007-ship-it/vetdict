@@ -1,31 +1,16 @@
 # VetDict 品質検出レポート — chinchilla
 
-- 総レコード数: **252**
+- 総レコード数: **231**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **20** （冗長レコード 29 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **32**
+- 完全一致重複クラスタ: **5** （冗長レコード 8 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **26**
 
 ### 完全一致重複（上位20）
-- 不正咬合（Malocclusion）[chinchilla_0000] / 不正咬合（進行性）（Malocclusion - Progressive）[chinchilla_0163]
-- 流涎症（Slobbers (Ptyalism)）[chinchilla_0003] / 流涎症（重度・皮膚炎合併）（Slobbers - Severe (with Dermatitis)）[chinchilla_0143] / 流涎（歯科関連）（チンチラ）（Slobbers (Dental-Related)）[chinchilla_0174]
 - 便秘（Constipation）[chinchilla_0006] / 便秘（慢性）（Constipation - Chronic）[chinchilla_0150] / 便秘（巨大結腸症）（チンチラ）（Constipation (Megacolon)）[chinchilla_0175]
 - 下痢（Diarrhea）[chinchilla_0007] / 非特異的下痢（チンチラ）（Diarrhea (Non-specific)）[chinchilla_0255]
-- 肝リピドーシス（Hepatic Lipidosis）[chinchilla_0009] / 肝リピドーシス（重症型）（Hepatic Lipidosis (Severe)）[chinchilla_0130]
-- ファーリング（陰茎毛輪）（Fur Ring）[chinchilla_0013] / ファーリング（包皮嵌頓）（Fur Ring (Paraphimosis)）[chinchilla_0167] / ペニス毛環（チンチラ）（Fur Ring (Penile)）[chinchilla_0171]
-- 皮膚糸状菌症（Ringworm (Dermatophytosis)）[chinchilla_0014] / 皮膚糸状菌症（ミクロスポルム）（チンチラ）（Dermatophytosis (Microsporum)）[chinchilla_0226]
-- 毛噛み（バーバリング）（Fur Chewing (Barbering)）[chinchilla_0015] / 毛噛み（自己バーバリング）- ストレス関連（Fur Chewing (Self-Barbering) - Stress-Related）[chinchilla_0077] / 毛噛み（ストレス関連）（Fur Chewing - Stress-Related）[chinchilla_0151] / 毛噛み（栄養性）（Fur Chewing - Nutritional）[chinchilla_0152] / 毛噛み（チンチラ）（Fur Chewing）[chinchilla_0172]
-- 肺炎（Pneumonia）[chinchilla_0018] / 細菌性肺炎（チンチラ）（Pneumonia (Bacterial)）[chinchilla_0248]
-- 熱中症（Heat Stroke）[chinchilla_0020] / 熱中症（神経症状）（Heat Stroke (Neurological)）[chinchilla_0038] / 熱中症（高体温症）（Heat Stroke (Hyperthermia)）[chinchilla_0168]
-- 乳腺炎（Mastitis）[chinchilla_0028] / 乳腺炎（急性）（Mastitis (Acute)）[chinchilla_0104]
-- 四肢骨折（一般）（Limb Fracture (General)）[chinchilla_0031] / 四肢骨折（チンチラ）（Fracture (Limb)）[chinchilla_0270]
-- ケトーシス（妊娠中毒症）（Ketosis (Pregnancy Toxemia)）[chinchilla_0048] / ケトーシス（チンチラ）（Ketosis）[chinchilla_0237]
 - 中耳炎・内耳炎（Otitis Media / Interna）[chinchilla_0061] / 中耳/内耳炎（チンチラ）（Otitis Media/Interna）[chinchilla_0198]
-- 妊娠中毒症（早期）（Pregnancy Toxemia (Early)）[chinchilla_0103] / 妊娠中毒症（チンチラ）（Pregnancy Toxemia）[chinchilla_0190]
-- 耳感染症（外耳炎）（Ear Infection (Otitis Externa)）[chinchilla_0106] / 耳感染症（チンチラ）（Ear Infection (Otitis)）[chinchilla_0177]
-- 変形性関節症（変性性関節疾患）（Osteoarthritis (Degenerative Joint Disease)）[chinchilla_0115] / 変形性関節症（チンチラ）（Osteoarthritis）[chinchilla_0271]
 - 眼球突出（Eye Proptosis）[chinchilla_0123] / 眼球突出（チンチラ）（Exophthalmos）[chinchilla_0265]
-- 貧血（非特異的）（Anemia (Non-specific)）[chinchilla_0127] / 貧血（チンチラ）（Anemia）[chinchilla_0276]
 - 歯科疾患（切歯不正咬合）（Dental Disease - Incisor Malocclusion）[chinchilla_0140] / 歯科疾患（臼歯歯根感染）（Dental Disease - Molar Root Infection）[chinchilla_0141] / 歯科疾患（歯根吸収性病変）（Dental Disease - Resorptive Lesions）[chinchilla_0142] / 歯科疾患（臼歯伸長）（チンチラ）（Dental Disease (Molar Elongation)）[chinchilla_0173]
 
 ### 疾患ファミリー候補（上位15）
@@ -37,51 +22,30 @@
     - 歯科疾患（臼歯歯根感染）（Dental Disease - Molar Root Infection）[chinchilla_0141]
     - 歯科疾患（歯根吸収性病変）（Dental Disease - Resorptive Lesions）[chinchilla_0142]
     - 歯科疾患（臼歯伸長）（チンチラ）（Dental Disease (Molar Elongation)）[chinchilla_0173]
-- stem=`dermat` × 6件
-    - 耳介皮膚炎（Ear Dermatitis）[chinchilla_0016]
-    - 接触性・アレルギー性皮膚炎（Dermatitis (Contact / Allergic)）[chinchilla_0064]
-    - 砂浴び皮膚炎（Dust Bath Dermatitis）[chinchilla_0110]
-    - トリコフィトン皮膚炎（重度）（Trichophyton Dermatitis (Severe)）[chinchilla_0162]
-    - 皮膚糸状菌症（ミクロスポルム）（チンチラ）（Dermatophytosis (Microsporum)）[chinchilla_0226]
-    - 接触性皮膚炎（チンチラ）（Contact Dermatitis）[chinchilla_0253]
-- stem=`fractu` × 6件
-    - 脛骨骨折（Tibial Fracture）[chinchilla_0030]
-    - 四肢骨折（一般）（Limb Fracture (General)）[chinchilla_0031]
-    - 大腿骨骨折（Femoral Fracture）[chinchilla_0113]
-    - 脊椎骨折（チンチラ）（Spinal Fracture）[chinchilla_0204]
-    - 骨盤骨折（チンチラ）（Pelvic Fracture）[chinchilla_0205]
-    - 四肢骨折（チンチラ）（Fracture (Limb)）[chinchilla_0270]
-- stem=`malocc` × 6件
-    - 不正咬合（Malocclusion）[chinchilla_0000]
-    - 不正咬合 - 臼歯スパー（Dental Malocclusion - Molar Spurs）[chinchilla_0073]
-    - 不正咬合 - 切歯（Dental Malocclusion - Incisor）[chinchilla_0074]
-    - 歯科疾患（切歯不正咬合）（Dental Disease - Incisor Malocclusion）[chinchilla_0140]
-    - 不正咬合（進行性）（Malocclusion - Progressive）[chinchilla_0163]
-    - 切歯不正咬合（チンチラ）（Incisor Malocclusion）[chinchilla_0260]
-- stem=`chewin` × 5件
-    - 毛噛み（バーバリング）（Fur Chewing (Barbering)）[chinchilla_0015]
-    - 毛噛み（自己バーバリング）- ストレス関連（Fur Chewing (Self-Barbering) - Stress-Related）[chinchilla_0077]
-    - 毛噛み（ストレス関連）（Fur Chewing - Stress-Related）[chinchilla_0151]
-    - 毛噛み（栄養性）（Fur Chewing - Nutritional）[chinchilla_0152]
-    - 毛噛み（チンチラ）（Fur Chewing）[chinchilla_0172]
 - stem=`defici` × 5件
     - ビタミン欠乏症（Vitamin Deficiency）[chinchilla_0046]
     - ビタミンA欠乏症（チンチラ）（Vitamin A Deficiency）[chinchilla_0179]
     - カルシウム欠乏症（チンチラ）（Calcium Deficiency）[chinchilla_0180]
     - チアミン欠乏症（チンチラ）（Thiamine Deficiency）[chinchilla_0181]
     - ビタミンE欠乏症（チンチラ）（Vitamin E Deficiency）[chinchilla_0236]
-- stem=`pneumo` × 5件
-    - 肺炎（Pneumonia）[chinchilla_0018]
-    - 誤嚥性肺炎（Aspiration Pneumonia）[chinchilla_0069]
-    - 真菌性肺炎（Fungal Pneumonia - Chinchilla）[chinchilla_0159]
-    - 気胸（チンチラ）（Pneumothorax）[chinchilla_0191]
-    - 細菌性肺炎（チンチラ）（Pneumonia (Bacterial)）[chinchilla_0248]
-- stem=`ring` × 5件
-    - ファーリング（陰茎毛輪）（Fur Ring）[chinchilla_0013]
-    - ファーリング（陰茎）- 急性型（Fur Ring (Penile) - Acute）[chinchilla_0071]
-    - ファーリング（包皮嵌頓）（Fur Ring (Paraphimosis)）[chinchilla_0167]
-    - チンチラ陰茎毛輪（毛輪パラフィモーシス）（Chinchilla Penile Hair Ring (Hair Ring Paraphimosis)）[chinchilla_0170]
-    - ペニス毛環（チンチラ）（Fur Ring (Penile)）[chinchilla_0171]
+- stem=`dermat` × 5件
+    - 耳介皮膚炎（Ear Dermatitis）[chinchilla_0016]
+    - 接触性・アレルギー性皮膚炎（Dermatitis (Contact / Allergic)）[chinchilla_0064]
+    - 砂浴び皮膚炎（Dust Bath Dermatitis）[chinchilla_0110]
+    - トリコフィトン皮膚炎（重度）（Trichophyton Dermatitis (Severe)）[chinchilla_0162]
+    - 接触性皮膚炎（チンチラ）（Contact Dermatitis）[chinchilla_0253]
+- stem=`fractu` × 5件
+    - 脛骨骨折（Tibial Fracture）[chinchilla_0030]
+    - 四肢骨折（一般）（Limb Fracture (General)）[chinchilla_0031]
+    - 大腿骨骨折（Femoral Fracture）[chinchilla_0113]
+    - 脊椎骨折（チンチラ）（Spinal Fracture）[chinchilla_0204]
+    - 骨盤骨折（チンチラ）（Pelvic Fracture）[chinchilla_0205]
+- stem=`malocc` × 5件
+    - 不正咬合（Malocclusion）[chinchilla_0000]
+    - 不正咬合 - 臼歯スパー（Dental Malocclusion - Molar Spurs）[chinchilla_0073]
+    - 不正咬合 - 切歯（Dental Malocclusion - Incisor）[chinchilla_0074]
+    - 歯科疾患（切歯不正咬合）（Dental Disease - Incisor Malocclusion）[chinchilla_0140]
+    - 切歯不正咬合（チンチラ）（Incisor Malocclusion）[chinchilla_0260]
 - stem=`cecal` × 4件
     - 盲腸捻転（Cecal Torsion）[chinchilla_0011]
     - 盲腸嵌頓（Cecal Impaction）[chinchilla_0087]
@@ -92,16 +56,6 @@
     - 真菌性肺炎（Fungal Pneumonia - Chinchilla）[chinchilla_0159]
     - 嵌頓包茎（Paraphimosis - Chinchilla）[chinchilla_0161]
     - チンチラ陰茎毛輪（毛輪パラフィモーシス）（Chinchilla Penile Hair Ring (Hair Ring Paraphimosis)）[chinchilla_0170]
-- stem=`heat` × 4件
-    - 熱中症（Heat Stroke）[chinchilla_0020]
-    - 熱中症（神経症状）（Heat Stroke (Neurological)）[chinchilla_0038]
-    - 熱中症 - 慢性後遺症（Heat Stroke - Chronic Sequelae）[chinchilla_0072]
-    - 熱中症（高体温症）（Heat Stroke (Hyperthermia)）[chinchilla_0168]
-- stem=`hepati` × 4件
-    - 肝リピドーシス（Hepatic Lipidosis）[chinchilla_0009]
-    - 肝コクシジウム症（Hepatic Coccidiosis）[chinchilla_0089]
-    - 肝リピドーシス（重症型）（Hepatic Lipidosis (Severe)）[chinchilla_0130]
-    - 肝膿瘍（チンチラ）（Hepatic Abscess）[chinchilla_0227]
 - stem=`hyperp` × 4件
     - 副腎過形成（Adrenal Hyperplasia）[chinchilla_0098]
     - 栄養性二次性副甲状腺機能亢進症（Nutritional Secondary Hyperparathyroidism）[chinchilla_0116]
@@ -112,25 +66,46 @@
     - 緑膿菌性外耳炎（Pseudomonas Otitis）[chinchilla_0147]
     - 外耳炎（Otitis Externa - Chinchilla）[chinchilla_0154]
     - 中耳/内耳炎（チンチラ）（Otitis Media/Interna）[chinchilla_0198]
-- stem=`stres` × 4件
-    - 毛噛み（自己バーバリング）- ストレス関連（Fur Chewing (Self-Barbering) - Stress-Related）[chinchilla_0077]
-    - ストレス症候群（慢性）（Stress Syndrome (Chronic)）[chinchilla_0129]
-    - 毛噛み（ストレス関連）（Fur Chewing - Stress-Related）[chinchilla_0151]
-    - ストレス関連疾患（チンチラ）（Stress-Related Illness）[chinchilla_0217]
+- stem=`pneumo` × 4件
+    - 肺炎（Pneumonia）[chinchilla_0018]
+    - 誤嚥性肺炎（Aspiration Pneumonia）[chinchilla_0069]
+    - 真菌性肺炎（Fungal Pneumonia - Chinchilla）[chinchilla_0159]
+    - 気胸（チンチラ）（Pneumothorax）[chinchilla_0191]
+- stem=`tumor` × 4件
+    - 卵巣腫瘍（Ovarian Tumors）[chinchilla_0059]
+    - 乳腺腫瘍（Mammary Tumors）[chinchilla_0060]
+    - 副腎腫瘍（チンチラ）（Adrenal Tumor）[chinchilla_0185]
+    - 精巣腫瘍（チンチラ）（Testicular Tumor）[chinchilla_0214]
+- stem=`carcin` × 3件
+    - 扁平上皮癌（Squamous Cell Carcinoma）[chinchilla_0118]
+    - 肝細胞癌（Hepatocellular Carcinoma）[chinchilla_0120]
+    - 腎癌（チンチラ）（Renal Carcinoma）[chinchilla_0216]
+- stem=`consti` × 3件
+    - 便秘（Constipation）[chinchilla_0006]
+    - 便秘（慢性）（Constipation - Chronic）[chinchilla_0150]
+    - 便秘（巨大結腸症）（チンチラ）（Constipation (Megacolon)）[chinchilla_0175]
+- stem=`enteri` × 3件
+    - 腸炎（Enteritis）[chinchilla_0008]
+    - 細菌性腸炎（クロストリジウム性）（Bacterial Enteritis (Clostridial)）[chinchilla_0082]
+    - 大腸菌性腸炎（E. coli Enteritis）[chinchilla_0083]
+- stem=`hepati` × 3件
+    - 肝リピドーシス（Hepatic Lipidosis）[chinchilla_0009]
+    - 肝コクシジウム症（Hepatic Coccidiosis）[chinchilla_0089]
+    - 肝膿瘍（チンチラ）（Hepatic Abscess）[chinchilla_0227]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **34**
-- 投与量あり: **218**
+- 投与量なし（見出しのみ）: **30**
+- 投与量あり: **201**
 
 ### 投与量なし（上位30）
+- 不正咬合（Malocclusion）[chinchilla_0000] — ja:181字 / en:158字
 - ファースリップ（脱毛）（Fur Slip）[chinchilla_0012] — ja:464字 / en:1134字
 - ケージ外傷（Cage Injuries）[chinchilla_0032] — ja:448字 / en:832字
 - 鉛中毒（Lead Poisoning）[chinchilla_0035] — ja:477字 / en:518字
-- 熱中症（神経症状）（Heat Stroke (Neurological)）[chinchilla_0038] — ja:338字 / en:466字
 - 心筋症（Cardiomyopathy）[chinchilla_0042] — ja:349字 / en:516字
 - うっ血性心不全（Congestive Heart Failure）[chinchilla_0044] — ja:356字 / en:437字
 - コクシジウム症（Coccidia Infection）[chinchilla_0054] — ja:442字 / en:478字
@@ -155,12 +130,12 @@
 - 歯科疾患（歯根吸収性病変）（Dental Disease - Resorptive Lesions）[chinchilla_0142] — ja:185字 / en:158字
 - 鼓脹症（急性盲腸鼓腸）（Bloat - Acute Cecal Tympany）[chinchilla_0144] — ja:479字 / en:464字
 - 外耳炎（Otitis Externa - Chinchilla）[chinchilla_0154] — ja:160字 / en:159字
-- 不正咬合（進行性）（Malocclusion - Progressive）[chinchilla_0163] — ja:181字 / en:158字
-- ファーリング（包皮嵌頓）（Fur Ring (Paraphimosis)）[chinchilla_0167] — ja:108字 / en:69字
+- 開脚症（チンチラ）（Splay Leg）[chinchilla_0208] — ja:180字 / en:284字
+- 高リン血症（チンチラ）（Hyperphosphatemia）[chinchilla_0238] — ja:30字 / en:190字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **89** 疾患 → ガード後残存: **0**
-- 犬猫論文の他種への自動紐付け（旧・未ガード）: **14** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **85** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **12** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 臼歯過長症（Molar Elongation）[chinchilla_0001] → リンコマイシン
@@ -173,6 +148,7 @@
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[chinchilla_0014] → ミコナゾール
 - 耳介皮膚炎（Ear Dermatitis）[chinchilla_0016] → アムホテリシンB
 - 子宮蓄膿症（Pyometra）[chinchilla_0026] → メデトミジン, ドパミン, ブピバカイン, ラニチジン, プロポフォール
+- 乳腺炎（Mastitis）[chinchilla_0028] → ブピバカイン
 - 子宮炎（Metritis）[chinchilla_0029] → ブピバカイン
 - 角膜潰瘍（Corneal Ulcer）[chinchilla_0040] → シプロフロキサシン
 - 白内障（Cataracts）[chinchilla_0041] → アトロピン1%点眼
@@ -182,7 +158,6 @@
 - クリプトスポリジウム症（Cryptosporidiosis）[chinchilla_0056] → リンコマイシン
 - 卵巣腫瘍（Ovarian Tumors）[chinchilla_0059] → デスロレリン
 - 接触性・アレルギー性皮膚炎（Dermatitis (Contact / Allergic)）[chinchilla_0064] → ヒドロキシジン, リンコマイシン
-- 咬傷（Bite Wounds）[chinchilla_0065] → リンコマイシン
 
 ### 犬猫論文が他種に自動紐付け（上位20）
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[chinchilla_0014] → key: dermatophytosis
@@ -194,11 +169,9 @@
 - エンセファリトゾーン・クニクリ感染症（Encephalitozoon cuniculi Infection）[chinchilla_0138] → key: encephalitozoon cuniculi
 - 膀胱炎（チンチラ）（Cystitis）[chinchilla_0188] → key: feline idiopathic cystitis (fic)
 - 白血病（チンチラ）（Leukemia）[chinchilla_0212] → key: feline leukemia virus
-- 皮膚糸状菌症（ミクロスポルム）（チンチラ）（Dermatophytosis (Microsporum)）[chinchilla_0226] → key: dermatophytosis
 - 膵炎（チンチラ）（Pancreatitis）[chinchilla_0229] → key: feline pancreatitis
 - 腹膜炎（チンチラ）（Peritonitis）[chinchilla_0230] → key: feline infectious peritonitis
 - 血栓塞栓症（チンチラ）（Thromboembolism）[chinchilla_0243] → key: aortic thromboembolism (saddle thrombus)
-- 貧血（チンチラ）（Anemia）[chinchilla_0276] → key: immune-mediated hemolytic anemia
 
 ## T109 機械翻訳臭（置換辞書）
 - ヒット総数: **0**（safe 0 / review 0）

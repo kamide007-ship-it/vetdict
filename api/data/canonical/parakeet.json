@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 459,
-    "merge_clusters": 21,
-    "records_merged_away": 22,
+    "merge_clusters": 34,
+    "records_merged_away": 38,
     "archived": 0,
-    "served_after": 437
+    "served_after": 421
   },
   "merges": [
     {
@@ -393,48 +393,277 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0011",
+        "slug": "mycobacteriosis-avian-tuberculosis",
+        "name": "Mycobacteriosis (Avian Tuberculosis)",
+        "name_ja": "鳥型結核症"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0300",
+          "slug": "mycobacteriosis-avian-tb",
+          "name": "Mycobacteriosis (Avian TB)",
+          "name_ja": "マイコバクテリウム症（鳥結核）（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0023",
+        "slug": "tapeworm-infection",
+        "name": "Tapeworm Infection",
+        "name_ja": "条虫症"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0186",
+          "slug": "tapeworm-infection-parakeet",
+          "name": "Tapeworm Infection (Parakeet)",
+          "name_ja": "条虫感染症（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0027",
+        "slug": "megabacteriosis-agy-macrorhabdus",
+        "name": "Megabacteriosis (AGY / Macrorhabdus)",
+        "name_ja": "メガバクテリア症（AGY・マクロラブダス症）"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0252",
+          "slug": "megabacteriosis",
+          "name": "Megabacteriosis",
+          "name_ja": "メガバクテリア症（インコ）"
+        },
+        {
+          "id": "parakeet_0272",
+          "slug": "megabacteriosis-agy",
+          "name": "Megabacteriosis (AGY)",
+          "name_ja": "メガバクテリア症（AGY）（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0053",
+        "slug": "splay-leg",
+        "name": "Splay Leg",
+        "name_ja": "開脚症"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0203",
+          "slug": "splayed-legs-neonatal",
+          "name": "Splayed Legs (Neonatal)",
+          "name_ja": "開脚症（新生児型）"
+        },
+        {
+          "id": "parakeet_0254",
+          "slug": "splayed-leg-neonatal",
+          "name": "Splayed Leg (Neonatal)",
+          "name_ja": "開脚（新生児）（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0058",
+        "slug": "feather-cysts",
+        "name": "Feather Cysts",
+        "name_ja": "羽嚢腫"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0264",
+          "slug": "feather-cyst",
+          "name": "Feather Cyst",
+          "name_ja": "羽毛嚢胞（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0059",
+        "slug": "feather-plucking-feather-destructive-behavior",
+        "name": "Feather Plucking (Feather Destructive Behavior)",
+        "name_ja": "毛引き症（羽毛損傷行動）"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0268",
+          "slug": "feather-plucking",
+          "name": "Feather Plucking",
+          "name_ja": "毛引き（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0067",
+        "slug": "crop-stasis-sour-crop",
+        "name": "Crop Stasis (Sour Crop)",
+        "name_ja": "そ嚢停滞（サワークロップ）"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0265",
+          "slug": "crop-stasis-neonatal",
+          "name": "Crop Stasis (Neonatal)",
+          "name_ja": "そ嚢うっ滞（新生児）（インコ）"
+        },
+        {
+          "id": "parakeet_0270",
+          "slug": "crop-stasis",
+          "name": "Crop Stasis",
+          "name_ja": "そ嚢うっ滞（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0082",
+        "slug": "burns-thermal-chemical",
+        "name": "Burns (Thermal / Chemical)",
+        "name_ja": "熱傷・化学熱傷"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0330",
+          "slug": "burns",
+          "name": "Burns",
+          "name_ja": "熱傷（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0113",
+        "slug": "e-coli-infection-colibacillosis",
+        "name": "E. coli Infection (Colibacillosis)",
+        "name_ja": "大腸菌感染症"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0299",
+          "slug": "e-coli-infection",
+          "name": "E. coli Infection",
+          "name_ja": "大腸菌感染（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0133",
+        "slug": "feather-follicle-cyst-chronic",
+        "name": "Feather Follicle Cyst (Chronic)",
+        "name_ja": "慢性羽包嚢胞"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0455",
+          "slug": "feather-follicle-cyst",
+          "name": "Feather Follicle Cyst",
+          "name_ja": "羽毛毛包嚢胞（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0241",
+        "slug": "zinc-toxicosis",
+        "name": "Zinc Toxicosis",
+        "name_ja": "亜鉛中毒"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0195",
+          "slug": "zinc-toxicosis-advanced",
+          "name": "Zinc Toxicosis (Advanced)",
+          "name_ja": "亜鉛中毒（進行型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0228",
+        "slug": "chronic-respiratory-disease-crd",
+        "name": "Chronic Respiratory Disease (CRD)",
+        "name_ja": "慢性呼吸器疾患（CRD）"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0362",
+          "slug": "chronic-respiratory-disease",
+          "name": "Chronic Respiratory Disease",
+          "name_ja": "慢性呼吸器疾患（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0235",
+        "slug": "cere-hypertrophy-brown-hypertrophy",
+        "name": "Cere Hypertrophy (Brown Hypertrophy)",
+        "name_ja": "蝋膜肥大（褐色肥大症）"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0262",
+          "slug": "cere-hypertrophy",
+          "name": "Cere Hypertrophy",
+          "name_ja": "ろう膜肥大（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Mycobacteriosis (Avian Tuberculosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0011",
-            "slug": "mycobacteriosis-avian-tuberculosis",
-            "name": "Mycobacteriosis (Avian Tuberculosis)",
-            "name_ja": "鳥型結核症"
-          },
-          {
-            "id": "parakeet_0300",
-            "slug": "mycobacteriosis-avian-tb",
-            "name": "Mycobacteriosis (Avian TB)",
-            "name_ja": "マイコバクテリウム症（鳥結核）（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Tapeworm Infection",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0023",
-            "slug": "tapeworm-infection",
-            "name": "Tapeworm Infection",
-            "name_ja": "条虫症"
-          },
-          {
-            "id": "parakeet_0186",
-            "slug": "tapeworm-infection-parakeet",
-            "name": "Tapeworm Infection (Parakeet)",
-            "name_ja": "条虫感染症（インコ）"
-          }
-        ]
-      },
       {
         "base": "Mite Infestation (Red Mites / Feather Mites)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -450,30 +679,6 @@
             "slug": "tick-infestation",
             "name": "Tick Infestation",
             "name_ja": "ダニ寄生症"
-          }
-        ]
-      },
-      {
-        "base": "Megabacteriosis (AGY / Macrorhabdus)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0027",
-            "slug": "megabacteriosis-agy-macrorhabdus",
-            "name": "Megabacteriosis (AGY / Macrorhabdus)",
-            "name_ja": "メガバクテリア症（AGY・マクロラブダス症）"
-          },
-          {
-            "id": "parakeet_0252",
-            "slug": "megabacteriosis",
-            "name": "Megabacteriosis",
-            "name_ja": "メガバクテリア症（インコ）"
-          },
-          {
-            "id": "parakeet_0272",
-            "slug": "megabacteriosis-agy",
-            "name": "Megabacteriosis (AGY)",
-            "name_ja": "メガバクテリア症（AGY）（インコ）"
           }
         ]
       },
@@ -592,96 +797,6 @@
         ]
       },
       {
-        "base": "Leg Fractures",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0051",
-            "slug": "leg-fractures",
-            "name": "Leg Fractures",
-            "name_ja": "脚骨折"
-          },
-          {
-            "id": "parakeet_0052",
-            "slug": "wing-fractures",
-            "name": "Wing Fractures",
-            "name_ja": "翼骨折"
-          },
-          {
-            "id": "parakeet_0291",
-            "slug": "fracture-wing",
-            "name": "Fracture (Wing)",
-            "name_ja": "翼骨折（インコ）"
-          },
-          {
-            "id": "parakeet_0292",
-            "slug": "fracture-leg",
-            "name": "Fracture (Leg)",
-            "name_ja": "脚骨折（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Splay Leg",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0053",
-            "slug": "splay-leg",
-            "name": "Splay Leg",
-            "name_ja": "開脚症"
-          },
-          {
-            "id": "parakeet_0203",
-            "slug": "splayed-legs-neonatal",
-            "name": "Splayed Legs (Neonatal)",
-            "name_ja": "開脚症（新生児型）"
-          },
-          {
-            "id": "parakeet_0254",
-            "slug": "splayed-leg-neonatal",
-            "name": "Splayed Leg (Neonatal)",
-            "name_ja": "開脚（新生児）（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Feather Cysts",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0058",
-            "slug": "feather-cysts",
-            "name": "Feather Cysts",
-            "name_ja": "羽嚢腫"
-          },
-          {
-            "id": "parakeet_0264",
-            "slug": "feather-cyst",
-            "name": "Feather Cyst",
-            "name_ja": "羽毛嚢胞（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Feather Plucking (Feather Destructive Behavior)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0059",
-            "slug": "feather-plucking-feather-destructive-behavior",
-            "name": "Feather Plucking (Feather Destructive Behavior)",
-            "name_ja": "毛引き症（羽毛損傷行動）"
-          },
-          {
-            "id": "parakeet_0268",
-            "slug": "feather-plucking",
-            "name": "Feather Plucking",
-            "name_ja": "毛引き（インコ）"
-          }
-        ]
-      },
-      {
         "base": "Crop Stasis (Sour Crop)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -754,42 +869,6 @@
         ]
       },
       {
-        "base": "Burns (Thermal / Chemical)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0082",
-            "slug": "burns-thermal-chemical",
-            "name": "Burns (Thermal / Chemical)",
-            "name_ja": "熱傷・化学熱傷"
-          },
-          {
-            "id": "parakeet_0330",
-            "slug": "burns",
-            "name": "Burns",
-            "name_ja": "熱傷（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "E. coli Infection (Colibacillosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0113",
-            "slug": "e-coli-infection-colibacillosis",
-            "name": "E. coli Infection (Colibacillosis)",
-            "name_ja": "大腸菌感染症"
-          },
-          {
-            "id": "parakeet_0299",
-            "slug": "e-coli-infection",
-            "name": "E. coli Infection",
-            "name_ja": "大腸菌感染（インコ）"
-          }
-        ]
-      },
-      {
         "base": "Proventricular Ulceration",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -804,78 +883,6 @@
             "slug": "proventricular-ulceration-budgerigar",
             "name": "Proventricular Ulceration (Budgerigar)",
             "name_ja": "前胃潰瘍（セキセイインコ）"
-          }
-        ]
-      },
-      {
-        "base": "Feather Follicle Cyst (Chronic)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0133",
-            "slug": "feather-follicle-cyst-chronic",
-            "name": "Feather Follicle Cyst (Chronic)",
-            "name_ja": "慢性羽包嚢胞"
-          },
-          {
-            "id": "parakeet_0455",
-            "slug": "feather-follicle-cyst",
-            "name": "Feather Follicle Cyst",
-            "name_ja": "羽毛毛包嚢胞（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Zinc Toxicosis (Advanced)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0195",
-            "slug": "zinc-toxicosis-advanced",
-            "name": "Zinc Toxicosis (Advanced)",
-            "name_ja": "亜鉛中毒（進行型）"
-          },
-          {
-            "id": "parakeet_0241",
-            "slug": "zinc-toxicosis",
-            "name": "Zinc Toxicosis",
-            "name_ja": "亜鉛中毒"
-          }
-        ]
-      },
-      {
-        "base": "Chronic Respiratory Disease (CRD)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0228",
-            "slug": "chronic-respiratory-disease-crd",
-            "name": "Chronic Respiratory Disease (CRD)",
-            "name_ja": "慢性呼吸器疾患（CRD）"
-          },
-          {
-            "id": "parakeet_0362",
-            "slug": "chronic-respiratory-disease",
-            "name": "Chronic Respiratory Disease",
-            "name_ja": "慢性呼吸器疾患（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Cere Hypertrophy (Brown Hypertrophy)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0235",
-            "slug": "cere-hypertrophy-brown-hypertrophy",
-            "name": "Cere Hypertrophy (Brown Hypertrophy)",
-            "name_ja": "蝋膜肥大（褐色肥大症）"
-          },
-          {
-            "id": "parakeet_0262",
-            "slug": "cere-hypertrophy",
-            "name": "Cere Hypertrophy",
-            "name_ja": "ろう膜肥大（インコ）"
           }
         ]
       }

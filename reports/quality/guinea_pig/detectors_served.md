@@ -1,32 +1,17 @@
 # VetDict 品質検出レポート — guinea_pig
 
-- 総レコード数: **332**
+- 総レコード数: **310**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **20** （冗長レコード 28 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **54**
+- 完全一致重複クラスタ: **5** （冗長レコード 6 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **43**
 
 ### 完全一致重複（上位20）
-- 鼓脹症（胃拡張）（Bloat (Gastric Dilation)）[guinea_pig_0006] / 鼓脹症（胃鼓脹）（モルモット）（Bloat (Gastric Tympany)）[guinea_pig_0201]
-- 皮膚糸状菌症（白癬）（Fungal Dermatitis (Ringworm)）[guinea_pig_0013] / 皮膚糸状菌症（トリコフィトン・メンタグロフィテス）（Ringworm (Trichophyton mentagrophytes)）[guinea_pig_0126] / 皮膚糸状菌症（モルモット）（Dermatophytosis (Ringworm)）[guinea_pig_0235]
-- 足底皮膚炎（バンブルフット）（Pododermatitis (Bumblefoot)）[guinea_pig_0017] / 足底皮膚炎（グレードI・初期）（Pododermatitis - Grade I (Early)）[guinea_pig_0168] / 足底皮膚炎（グレードIII・重度）（Pododermatitis - Grade III (Severe)）[guinea_pig_0169]
-- 難産（Dystocia）[guinea_pig_0028] / 難産（胎子過大）（Dystocia - Fetal Oversize）[guinea_pig_0166]
-- 妊娠中毒症（ケトーシス）（Pregnancy Toxemia (Ketosis)）[guinea_pig_0029] / 妊娠中毒症（妊娠後期）（Toxemia of Pregnancy (Late Gestation)）[guinea_pig_0150] / 妊娠中毒症（分娩前）（Pregnancy Toxemia - Pre-partum）[guinea_pig_0164] / 妊娠中毒症（分娩後）（Pregnancy Toxemia - Post-partum）[guinea_pig_0165]
-- 壊血病（ビタミンC欠乏症）（Scurvy (Vitamin C Deficiency)）[guinea_pig_0050] / 壊血病（不顕性）（Scurvy - Subclinical）[guinea_pig_0157] / 壊血病（筋骨格型）（Scurvy - Musculoskeletal Form）[guinea_pig_0158] / 壊血病（出血型）（Scurvy - Hemorrhagic Form）[guinea_pig_0159]
 - 毛包腫（Trichofolliculoma）[guinea_pig_0062] / 毛包腫（基底細胞腫）（Trichofolliculoma (Basal Cell Tumor)）[guinea_pig_0114]
-- 白血病（Leukemia）[guinea_pig_0066] / 白血病（リンパ球性）（Leukemia (Lymphocytic)）[guinea_pig_0119]
-- 毛ダニ症（Fur Mites (Chirodiscoides caviae)）[guinea_pig_0074] / 毛ダニ症（重度感染）（Fur Mites - Heavy Infestation）[guinea_pig_0172]
-- 中耳炎・内耳炎（Otitis Media/Interna (Middle/Inner Ear Infection)）[guinea_pig_0077] / 中耳/内耳炎（モルモット）（Otitis Media/Interna）[guinea_pig_0260]
-- 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver)）[guinea_pig_0082] / 肝リピドーシス（モルモット）（Hepatic Lipidosis）[guinea_pig_0214]
-- 頸部リンパ節炎（Cervical Lymphadenitis）[guinea_pig_0084] / 頸部リンパ節炎（ストレプトコッカス・ズーエピデミカス）（Cervical Lymphadenitis (Streptococcus zooepidemicus)）[guinea_pig_0102] / 頸部リンパ節炎（ストレプトバチルス）（Cervical Lymphadenitis (Streptobacillus)）[guinea_pig_0160]
 - 腸閉塞（Ileus）[guinea_pig_0085] / 腸閉塞（モルモット）（Intestinal Obstruction）[guinea_pig_0209]
-- 脱毛症（非特異性）（Alopecia (Non-specific Hair Loss)）[guinea_pig_0087] / 脱毛症（モルモット）（Alopecia）[guinea_pig_0241]
-- ケトーシス（非妊娠）（Ketosis (Non-pregnant)）[guinea_pig_0121] / ケトーシス（モルモット）（Ketosis）[guinea_pig_0336]
-- ビタミンA欠乏症（Hypovitaminosis A）[guinea_pig_0123] / ビタミンA欠乏症（眼型）（Vitamin A Deficiency - Ocular）[guinea_pig_0175]
 - 干し草による角膜刺傷（Hay Poke (Corneal)）[guinea_pig_0155] / 干し草による鼻腔内刺入（Hay Poke (Nasal)）[guinea_pig_0156]
 - 抗生物質毒性（ペニシリン系）（Antibiotic Toxicity (Penicillin-class)）[guinea_pig_0162] / 抗生物質毒性（リンコサミド/マクロライド系）（Antibiotic Toxicity (Lincosamide/Macrolide)）[guinea_pig_0163] / 抗生物質毒性（モルモット）（Antibiotic Toxicity）[guinea_pig_0290]
 - 胃拡張捻転（Gastric Dilation Volvulus）[guinea_pig_0188] / 胃拡張捻転（モルモット）（Gastric Dilation-Volvulus）[guinea_pig_0310]
-- 盲腸内細菌叢異常（抗生物質誘発性）（Cecal Dysbiosis (Antibiotic-induced)）[guinea_pig_0191] / 盲腸細菌叢異常（モルモット）（Cecal Dysbiosis）[guinea_pig_0200]
 
 ### 疾患ファミリー候補（上位15）
 - stem=`pneumo` × 10件
@@ -49,14 +34,6 @@
     - 毛包嚢胞（Follicular Cyst）[guinea_pig_0148]
     - 卵巣嚢胞（機能性）（Ovarian Cysts - Functional）[guinea_pig_0167]
     - 腎嚢胞（モルモット）（Renal Cyst）[guinea_pig_0254]
-- stem=`scurvy` × 7件
-    - 壊血病関連関節炎（Scurvy-Related Arthritis）[guinea_pig_0034]
-    - 壊血病（ビタミンC欠乏症）（Scurvy (Vitamin C Deficiency)）[guinea_pig_0050]
-    - 壊血病 - 急性型（Scurvy - Acute Form）[guinea_pig_0095]
-    - 壊血病関連歯肉疾患（Scurvy-Related Gum Disease）[guinea_pig_0096]
-    - 壊血病（不顕性）（Scurvy - Subclinical）[guinea_pig_0157]
-    - 壊血病（筋骨格型）（Scurvy - Musculoskeletal Form）[guinea_pig_0158]
-    - 壊血病（出血型）（Scurvy - Hemorrhagic Form）[guinea_pig_0159]
 - stem=`tumor` × 7件
     - 子宮腫瘍（Uterine Tumors）[guinea_pig_0032]
     - 乳腺腫瘍（Mammary Tumors）[guinea_pig_0060]
@@ -79,13 +56,6 @@
     - 肛門嚢嵌頓（Perineal Sac Impaction）[guinea_pig_0135]
     - 会陰嚢詰まり（慢性）（Impaction (Perineal Sac) - Chronic）[guinea_pig_0173]
     - 肛門嚢詰まり（Anal Sac Impaction）[guinea_pig_0180]
-- stem=`infest` × 6件
-    - キロディスコイデス・カビエ寄生（Chirodiscoides caviae Infestation）[guinea_pig_0127]
-    - シラミ症（重度感染）（Static Lice - Heavy Infestation）[guinea_pig_0171]
-    - 毛ダニ症（重度感染）（Fur Mites - Heavy Infestation）[guinea_pig_0172]
-    - ノミ寄生（モルモット）（Flea Infestation）[guinea_pig_0239]
-    - シラミ寄生（モルモット）（Lice Infestation (Gliricola/Gyropus)）[guinea_pig_0240]
-    - 耳ダニ寄生（モルモット）（Ear Mite Infestation）[guinea_pig_0248]
 - stem=`antibi` × 5件
     - 抗生物質関連腸毒素血症（Antibiotic-Associated Enterotoxemia）[guinea_pig_0009]
     - 抗生物質毒性（ペニシリン系）（Antibiotic Toxicity (Penicillin-class)）[guinea_pig_0162]
@@ -98,6 +68,12 @@
     - 四肢骨折（モルモット）（Fracture (Limb)）[guinea_pig_0271]
     - 脊椎骨折（モルモット）（Spinal Fracture）[guinea_pig_0272]
     - 骨盤骨折（モルモット）（Pelvic Fracture）[guinea_pig_0326]
+- stem=`infest` × 5件
+    - キロディスコイデス・カビエ寄生（Chirodiscoides caviae Infestation）[guinea_pig_0127]
+    - シラミ症（重度感染）（Static Lice - Heavy Infestation）[guinea_pig_0171]
+    - ノミ寄生（モルモット）（Flea Infestation）[guinea_pig_0239]
+    - シラミ寄生（モルモット）（Lice Infestation (Gliricola/Gyropus)）[guinea_pig_0240]
+    - 耳ダニ寄生（モルモット）（Ear Mite Infestation）[guinea_pig_0248]
 - stem=`ovaria` × 5件
     - 卵巣嚢腫（Ovarian Cysts）[guinea_pig_0027]
     - 卵巣嚢胞 - 漿液性（Ovarian Cysts - Serous）[guinea_pig_0097]
@@ -119,24 +95,29 @@
     - キロディスコイデス・カビエ寄生（Chirodiscoides caviae Infestation）[guinea_pig_0127]
     - モルモット疥癬（モルモット）（Trixacarus caviae Mange）[guinea_pig_0236]
     - モルモット毛ダニ（モルモット）（Chirodiscoides caviae Mite）[guinea_pig_0237]
-- stem=`defici` × 4件
-    - ビタミンE/セレン欠乏症（Vitamin E / Selenium Deficiency）[guinea_pig_0124]
-    - ビタミンA欠乏症（眼型）（Vitamin A Deficiency - Ocular）[guinea_pig_0175]
-    - カルシウム欠乏症（モルモット）（Calcium Deficiency (Hypocalcemia)）[guinea_pig_0283]
-    - ビタミンE欠乏症（モルモット）（Vitamin E Deficiency）[guinea_pig_0284]
-- stem=`dermat` × 4件
-    - 皮膚糸状菌症（白癬）（Fungal Dermatitis (Ringworm)）[guinea_pig_0013]
-    - 接触性皮膚炎（Contact Dermatitis）[guinea_pig_0020]
-    - 皮膚糸状菌症（モルモット）（Dermatophytosis (Ringworm)）[guinea_pig_0235]
-    - 潰瘍性皮膚炎（モルモット）（Ulcerative Dermatitis）[guinea_pig_0247]
+- stem=`elonga` × 4件
+    - 歯根伸長（Elongated Tooth Roots）[guinea_pig_0056]
+    - 下顎歯根伸長（Mandibular Elongation）[guinea_pig_0141]
+    - 上顎歯根伸長（Maxillary Tooth Root Elongation）[guinea_pig_0142]
+    - 臼歯伸長（モルモット）（Molar Elongation）[guinea_pig_0229]
+- stem=`injury` × 4件
+    - 牧草による刺傷（Hay Poke Injury）[guinea_pig_0092]
+    - 干し草刺傷（口腔）（Hay Poke Injury - Oral）[guinea_pig_0189]
+    - 脊髄損傷（モルモット）（Spinal Injury）[guinea_pig_0264]
+    - 爪損傷（モルモット）（Toenail Injury）[guinea_pig_0302]
+- stem=`overgr` × 4件
+    - 切歯過成長（Incisor Overgrowth）[guinea_pig_0058]
+    - 爪の過長/巻き爪（Toe Nail Overgrowth / Curling）[guinea_pig_0146]
+    - 過剰グルーミング（モルモット）（Overgrooming）[guinea_pig_0295]
+    - 爪過成長（モルモット）（Nail Overgrowth）[guinea_pig_0329]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **39**
-- 投与量あり: **293**
+- 投与量なし（見出しのみ）: **38**
+- 投与量あり: **272**
 
 ### 投与量なし（上位30）
 - シラミ寄生症（Static Lice (Gliricola porcelli)）[guinea_pig_0015] — ja:167字 / en:495字
@@ -171,8 +152,8 @@
 - 上顎歯根伸長（Maxillary Tooth Root Elongation）[guinea_pig_0142] — ja:179字 / en:193字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **135** 疾患 → ガード後残存: **0**
-- 犬猫論文の他種への自動紐付け（旧・未ガード）: **14** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **126** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **13** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 肺炎球菌感染症（Streptococcus pneumoniae Infection）[guinea_pig_0003] → セフトリアキソン
@@ -186,6 +167,7 @@
 - 皮下膿瘍（Abscess (Subcutaneous)）[guinea_pig_0021] → クロルヘキシジン
 - 慢性腎臓病（Chronic Kidney Disease）[guinea_pig_0025] → 水酸化アルミニウム
 - 卵巣嚢腫（Ovarian Cysts）[guinea_pig_0027] → メデトミジン, デクスメデトミジン, デスロレリン, ロニダゾール
+- 難産（Dystocia）[guinea_pig_0028] → メデトミジン, デクスメデトミジン, ロニダゾール
 - 妊娠中毒症（ケトーシス）（Pregnancy Toxemia (Ketosis)）[guinea_pig_0029] → フェンタニル, モルヒネ, メデトミジン, デクスメデトミジン, アチパメゾール, ブピバカイン, プロポフォール
 - 子宮蓄膿症（Pyometra）[guinea_pig_0030] → メデトミジン, デクスメデトミジン, ドパミン, ブピバカイン, プロポフォール
 - 子宮腫瘍（Uterine Tumors）[guinea_pig_0032] → リドカイン, メデトミジン, デクスメデトミジン, デスロレリン, プロポフォール
@@ -194,7 +176,6 @@
 - 結膜炎（Conjunctivitis）[guinea_pig_0037] → オフロキサシン点眼
 - 角膜潰瘍（Corneal Ulcer）[guinea_pig_0038] → シプロフロキサシン
 - 不正咬合（Dental Malocclusion）[guinea_pig_0055] → メデトミジン, デクスメデトミジン
-- リンパ腫（Lymphoma）[guinea_pig_0061] → L-アスパラギナーゼ
 
 ### 犬猫論文が他種に自動紐付け（上位20）
 - 尿路結石症（Urolithiasis (Bladder Stones)）[guinea_pig_0022] → key: urolithiasis
@@ -207,7 +188,6 @@
 - 副腎疾患（Adrenal Disease）[guinea_pig_0083] → key: adrenal disease
 - エンセファリトゾーン・クニクリ感染症（Encephalitozoon cuniculi Infection）[guinea_pig_0113] → key: encephalitozoon cuniculi
 - 腹膜炎（モルモット）（Peritonitis）[guinea_pig_0217] → key: feline infectious peritonitis
-- 皮膚糸状菌症（モルモット）（Dermatophytosis (Ringworm)）[guinea_pig_0235] → key: dermatophytosis
 - 貧血（モルモット）（Anemia）[guinea_pig_0285] → key: immune-mediated hemolytic anemia
 - 膵炎（モルモット）（Pancreatitis）[guinea_pig_0309] → key: feline pancreatitis
 - 血栓塞栓症（モルモット）（Thromboembolism）[guinea_pig_0321] → key: aortic thromboembolism (saddle thrombus)

@@ -1,40 +1,19 @@
 # VetDict 品質検出レポート — parrot
 
-- 総レコード数: **274**
+- 総レコード数: **265**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **14** （冗長レコード 16 件）
+- 完全一致重複クラスタ: **5** （冗長レコード 7 件）
 - 疾患ファミリー候補（過分割の疑い, ≥3件）: **38**
 
 ### 完全一致重複（上位20）
-- オウム類嘴羽毛病（PBFD）（Psittacine Beak and Feather Disease (PBFD)）[parrot_0000] / 嘴羽毛病（オウム）（Psittacine Beak and Feather Disease）[parrot_0162]
 - 乳頭腫症（Papillomatosis）[parrot_0006] / 乳頭腫症（胆管）（オウム）（Papillomatosis (Bile Duct)）[parrot_0167] / 内臓乳頭腫症（オウム）（Papillomatosis (Internal)）[parrot_0251]
-- カンジダ症（Candidiasis）[parrot_0017] / カンジダ症（そ嚢真菌症）（オウム）（Candidiasis (Crop Mycosis)）[parrot_0184]
-- 重金属中毒（鉛・亜鉛）（Heavy Metal Poisoning (Lead/Zinc)）[parrot_0024] / 重金属中毒（オウム）（Heavy Metal Poisoning）[parrot_0169]
 - 肝疾患（肝炎）（Liver Disease (Hepatitis)）[parrot_0037] / 肝疾患（肝リピドーシス）（オウム）（Liver Disease (Hepatic Lipidosis)）[parrot_0186]
-- 痛風（関節型・内臓型）（Gout (Articular and Visceral)）[parrot_0039] / 痛風（内臓型/関節型）（オウム）（Gout (Visceral/Articular)）[parrot_0187]
-- 動脈硬化症（Atherosclerosis）[parrot_0040] / 動脈硬化症（オウム特異的）（オウム）（Atherosclerosis (Parrot-Specific)）[parrot_0166]
-- 卵塞（卵詰まり）（Egg Binding (Dystocia)）[parrot_0043] / 卵詰まり（オウム）（Egg Binding）[parrot_0181]
-- 嗉嚢停滞（嗉嚢うっ滞）（Crop Stasis (Slow Crop / Crop Impaction)）[parrot_0047] / そ嚢うっ滞（オウム）（Crop Stasis）[parrot_0183]
-- 熱中症（高体温症）（Heat Stroke (Hyperthermia)）[parrot_0079] / 熱中症（オウム）（Heat Stroke）[parrot_0242]
-- 大腸菌感染症（E. coli Infection (Colibacillosis)）[parrot_0108] / 大腸菌感染（オウム）（E. coli Infection）[parrot_0215]
 - 消化管閉塞（Gastrointestinal Obstruction）[parrot_0125] / 消化管部分閉塞（オウム）（Gastrointestinal Obstruction (Partial)）[parrot_0270]
 - 腺胃拡張症（PDD・トリボルナウイルス）（Proventricular Dilatation Disease (PDD / Avian Bornavirus)）[parrot_0160] / 前胃拡張症（オウム）（Proventricular Dilatation Disease）[parrot_0161] / 前胃拡張症（PDD）（オウム）（Proventricular Dilatation Disease (PDD)）[parrot_0177]
 - 翼骨折（オウム）（Fracture (Wing)）[parrot_0207] / 脚骨折（オウム）（Fracture (Leg)）[parrot_0208]
 
 ### 疾患ファミリー候補（上位15）
-- stem=`feathe` × 11件
-    - オウム類嘴羽毛病（PBFD）（Psittacine Beak and Feather Disease (PBFD)）[parrot_0000]
-    - 羽毛破壊行動（毛引き症）（Feather Destructive Behavior (Feather Plucking)）[parrot_0052]
-    - 羽嚢腫（Feather Cyst）[parrot_0077]
-    - 羽毛毛包炎（Feather Folliculitis）[parrot_0090]
-    - 慢性羽包嚢胞（Feather Follicle Cyst (Chronic)）[parrot_0139]
-    - ホルモン性毛引き症（Hormonal Feather Plucking）[parrot_0150]
-    - 嘴羽毛病（オウム）（Psittacine Beak and Feather Disease）[parrot_0162]
-    - オオハナインコ羽毛疾患（オウム）（Eclectus Feather Disease）[parrot_0165]
-    - 行動性羽毛破壊障害（オウム）（Behavioral Feather Destructive Disorder）[parrot_0170]
-    - 毛引き（オウム）（Feather Plucking）[parrot_0180]
-    - 羽毛ダニ（オウム）（Feather Mites）[parrot_0196]
 - stem=`defici` × 10件
     - ビタミンA欠乏症（Vitamin A Deficiency (Hypovitaminosis A)）[parrot_0030]
     - ビタミンD3欠乏症（Vitamin D3 Deficiency）[parrot_0032]
@@ -46,6 +25,17 @@
     - タンパク質欠乏症（Protein Deficiency）[parrot_0146]
     - 栄養欠乏症（一般）（オウム）（Nutritional Deficiency (General)）[parrot_0182]
     - カルシウム欠乏症（オウム）（Calcium Deficiency (Hypocalcemia)）[parrot_0189]
+- stem=`feathe` × 10件
+    - オウム類嘴羽毛病（PBFD）（Psittacine Beak and Feather Disease (PBFD)）[parrot_0000]
+    - 羽毛破壊行動（毛引き症）（Feather Destructive Behavior (Feather Plucking)）[parrot_0052]
+    - 羽嚢腫（Feather Cyst）[parrot_0077]
+    - 羽毛毛包炎（Feather Folliculitis）[parrot_0090]
+    - 慢性羽包嚢胞（Feather Follicle Cyst (Chronic)）[parrot_0139]
+    - ホルモン性毛引き症（Hormonal Feather Plucking）[parrot_0150]
+    - オオハナインコ羽毛疾患（オウム）（Eclectus Feather Disease）[parrot_0165]
+    - 行動性羽毛破壊障害（オウム）（Behavioral Feather Destructive Disorder）[parrot_0170]
+    - 毛引き（オウム）（Feather Plucking）[parrot_0180]
+    - 羽毛ダニ（オウム）（Feather Mites）[parrot_0196]
 - stem=`gastro` × 9件
     - 消化管閉塞（Gastrointestinal Obstruction）[parrot_0125]
     - 消化管細菌感染（オウム）（Gastrointestinal Bacterial Infection）[parrot_0263]
@@ -108,13 +98,6 @@
     - 消化管細菌感染（オウム）（Gastrointestinal Bacterial Infection）[parrot_0263]
     - 呼吸器細菌感染（オウム）（Respiratory Bacterial Infection）[parrot_0271]
     - 皮膚細菌感染（オウム）（Dermatological Bacterial Infection）[parrot_0279]
-- stem=`beak` × 6件
-    - オウム類嘴羽毛病（PBFD）（Psittacine Beak and Feather Disease (PBFD)）[parrot_0000]
-    - 嘴不正咬合（Beak Malocclusion）[parrot_0057]
-    - 嘴過長症（Beak Overgrowth）[parrot_0058]
-    - 嘴羽毛病（オウム）（Psittacine Beak and Feather Disease）[parrot_0162]
-    - 嘴変形（シザービーク）（オウム）（Beak Deformity (Scissor Beak)）[parrot_0211]
-    - 嘴骨折（オウム）（Beak Fracture）[parrot_0212]
 - stem=`papill` × 6件
     - 乳頭腫症（Papillomatosis）[parrot_0006]
     - 総排泄腔乳頭腫（Cloacal Papilloma）[parrot_0050]
@@ -122,19 +105,12 @@
     - 総排泄腔乳頭腫症（オウム）（Cloacal Papillomatosis）[parrot_0168]
     - 乳頭腫（オウム）（Papilloma）[parrot_0232]
     - 内臓乳頭腫症（オウム）（Papillomatosis (Internal)）[parrot_0251]
-- stem=`poison` × 6件
-    - 重金属中毒（鉛・亜鉛）（Heavy Metal Poisoning (Lead/Zinc)）[parrot_0024]
-    - 農薬中毒（Pesticide Poisoning）[parrot_0147]
-    - 殺鼠剤中毒（Rodenticide Poisoning）[parrot_0148]
-    - 銅中毒（Copper Poisoning）[parrot_0156]
-    - 重金属中毒（オウム）（Heavy Metal Poisoning）[parrot_0169]
-    - 鉛中毒（オウム）（Lead Poisoning）[parrot_0240]
-- stem=`crop` × 5件
-    - 嗉嚢停滞（嗉嚢うっ滞）（Crop Stasis (Slow Crop / Crop Impaction)）[parrot_0047]
-    - 嗉嚢火傷（Crop Burns）[parrot_0048]
-    - 素嚢真菌症（Crop Mycosis）[parrot_0124]
-    - そ嚢うっ滞（オウム）（Crop Stasis）[parrot_0183]
-    - そ嚢停滞（オウム）（Crop Impaction）[parrot_0249]
+- stem=`beak` × 5件
+    - オウム類嘴羽毛病（PBFD）（Psittacine Beak and Feather Disease (PBFD)）[parrot_0000]
+    - 嘴不正咬合（Beak Malocclusion）[parrot_0057]
+    - 嘴過長症（Beak Overgrowth）[parrot_0058]
+    - 嘴変形（シザービーク）（オウム）（Beak Deformity (Scissor Beak)）[parrot_0211]
+    - 嘴骨折（オウム）（Beak Fracture）[parrot_0212]
 - stem=`dilata` × 5件
     - 腺胃拡張症（PDD）／ボルナウイルス感染症（Proventricular Dilatation Disease (PDD) / Bornavirus）[parrot_0001]
     - 前胃拡張（PDD以外の原因）（Proventricular Dilatation (non-PDD causes)）[parrot_0078]
@@ -147,14 +123,26 @@
     - 捕食者攻撃損傷（オウム）（Predator Attack Injury）[parrot_0246]
     - 窓衝突損傷（オウム）（Window Collision Injury）[parrot_0247]
     - 夜間パニック損傷（オウム）（Night Fright Injury）[parrot_0248]
+- stem=`neopla` × 5件
+    - 生殖腺腫瘍（Gonadal Neoplasia）[parrot_0087]
+    - 生殖器腫瘍（オウム）（Reproductive Neoplasia）[parrot_0220]
+    - 肝腫瘍性疾患（オウム）（Hepatic Neoplasia）[parrot_0261]
+    - 消化管腫瘍（オウム）（Gastrointestinal Neoplasia）[parrot_0267]
+    - 呼吸器腫瘍（オウム）（Respiratory Neoplasia）[parrot_0275]
+- stem=`parasi` × 5件
+    - 腸内寄生虫症（回虫・条虫）（Intestinal Parasites (Roundworms/Tapeworms)）[parrot_0022]
+    - 肝寄生虫疾患（オウム）（Hepatic Parasitic Disease）[parrot_0259]
+    - 消化管寄生虫疾患（オウム）（Gastrointestinal Parasitic Disease）[parrot_0266]
+    - 呼吸器寄生虫疾患（オウム）（Respiratory Parasitic Disease）[parrot_0274]
+    - 皮膚寄生虫寄生（オウム）（Dermatological Parasitic Infestation）[parrot_0282]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **72**
-- 投与量あり: **202**
+- 投与量なし（見出しのみ）: **69**
+- 投与量あり: **196**
 
 ### 投与量なし（上位30）
 - 気嚢炎（Air Sacculitis）[parrot_0010] — ja:159字 / en:190字
@@ -162,7 +150,6 @@
 - グラム陰性菌感染症（Gram-negative Bacterial Infection）[parrot_0014] — ja:440字 / en:411字
 - サルコシスティス症（Sarcocystosis）[parrot_0020] — ja:168字 / en:193字
 - 腸内寄生虫症（回虫・条虫）（Intestinal Parasites (Roundworms/Tapeworms)）[parrot_0022] — ja:172字 / en:172字
-- 重金属中毒（鉛・亜鉛）（Heavy Metal Poisoning (Lead/Zinc)）[parrot_0024] — ja:449字 / en:489字
 - PTFE中毒（テフロン中毒）（PTFE Toxicosis (Teflon Poisoning)）[parrot_0025] — ja:330字 / en:489字
 - アボカド中毒（Avocado Toxicity）[parrot_0026] — ja:343字 / en:393字
 - チョコレート中毒（Chocolate Toxicity）[parrot_0027] — ja:446字 / en:393字
@@ -187,6 +174,7 @@
 - 黄色腫（Xanthoma）[parrot_0066] — ja:47字 / en:149字
 - 気管閉塞（Tracheal Obstruction）[parrot_0069] — ja:192字 / en:193字
 - 誤嚥性肺炎（Aspiration Pneumonia）[parrot_0070] — ja:54字 / en:196字
+- うっ血性心不全（Congestive Heart Failure）[parrot_0075] — ja:344字 / en:437字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
 - 種別投与量なしの薬品リンク（旧・未ガード）: **33** 疾患 → ガード後残存: **0**
@@ -194,6 +182,7 @@
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 趾瘤症（バンブルフット）（Bumblefoot (Pododermatitis)）[parrot_0013] → スルファジアジン
+- 重金属中毒（鉛・亜鉛）（Heavy Metal Poisoning (Lead/Zinc)）[parrot_0024] → アポモルフィン
 - 接触性皮膚炎（Contact Dermatitis）[parrot_0055] → セチリジン
 - てんかん・特発性けいれん（Epilepsy / Idiopathic Seizures）[parrot_0074] → フェノバルビタール
 - 緑膿菌感染症（Pseudomonas Infection）[parrot_0107] → シプロフロキサシン
@@ -201,7 +190,6 @@
 - 皮膚糸状菌症（Dermatophytosis (Ringworm)）[parrot_0115] → ミコナゾール
 - 骨肉腫（Osteosarcoma）[parrot_0132] → トラマドール
 - 腺胃拡張症（PDD・トリボルナウイルス）（Proventricular Dilatation Disease (PDD / Avian Bornavirus)）[parrot_0160] → シサプリド
-- 重金属中毒（オウム）（Heavy Metal Poisoning）[parrot_0169] → アポモルフィン
 - 気管ダニ（Sternostoma）（オウム）（Tracheal Mite (Sternostoma)）[parrot_0193] → セラメクチン（レボリューション）
 - 気嚢ダニ（オウム）（Air Sac Mite）[parrot_0194] → セラメクチン（レボリューション）
 - 疥癬（鱗状顔面）（オウム）（Knemidocoptes Mange (Scaly Face)）[parrot_0195] → セラメクチン（レボリューション）

@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 321,
-    "merge_clusters": 9,
-    "records_merged_away": 9,
+    "merge_clusters": 22,
+    "records_merged_away": 32,
     "archived": 0,
-    "served_after": 312
+    "served_after": 289
   },
   "merges": [
     {
@@ -23,10 +23,17 @@
           "slug": "dermatophytosis-ringworm",
           "name": "Dermatophytosis (Ringworm)",
           "name_ja": "皮膚糸状菌症（ハムスター）"
+        },
+        {
+          "id": "hamster_0269",
+          "slug": "ringworm-trichophyton",
+          "name": "Ringworm (Trichophyton)",
+          "name_ja": "白癬（トリコフィトン）（ハムスター）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
+      "inherit_content": true,
+      "curated": true
     },
     {
       "canonical": {
@@ -95,10 +102,17 @@
           "slug": "heat-stroke",
           "name": "Heat Stroke",
           "name_ja": "熱中症（ハムスター）"
+        },
+        {
+          "id": "hamster_0221",
+          "slug": "heatstroke-neurological",
+          "name": "Heatstroke (Neurological)",
+          "name_ja": "熱射病（神経型）（ハムスター）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
+      "inherit_content": true,
+      "curated": true
     },
     {
       "canonical": {
@@ -171,204 +185,307 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0000",
+        "slug": "wet-tail-proliferative-ileitis",
+        "name": "Wet Tail (Proliferative Ileitis)",
+        "name_ja": "ウェットテイル（増殖性回腸炎）"
+      },
+      "merged": [
+        {
+          "id": "hamster_0155",
+          "slug": "wet-tail-chronic-form",
+          "name": "Wet Tail - Chronic Form",
+          "name_ja": "ウェットテイル（慢性型）"
+        },
+        {
+          "id": "hamster_0156",
+          "slug": "wet-tail-neonatal-form",
+          "name": "Wet Tail - Neonatal Form",
+          "name_ja": "ウェットテイル（新生児型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0001",
+        "slug": "tyzzer-s-disease",
+        "name": "Tyzzer's Disease",
+        "name_ja": "ティザー病"
+      },
+      "merged": [
+        {
+          "id": "hamster_0174",
+          "slug": "tyzzer-s-disease-subclinical",
+          "name": "Tyzzer's Disease - Subclinical",
+          "name_ja": "ティザー病（不顕性）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0007",
+        "slug": "tapeworm-infection-hymenolepis",
+        "name": "Tapeworm Infection (Hymenolepis)",
+        "name_ja": "条虫症（膜様条虫）"
+      },
+      "merged": [
+        {
+          "id": "hamster_0148",
+          "slug": "tapeworm-rodentolepis-nana",
+          "name": "Tapeworm (Rodentolepis nana)",
+          "name_ja": "条虫症（ロデントレピス・ナナ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0017",
+        "slug": "pneumonia",
+        "name": "Pneumonia",
+        "name_ja": "肺炎"
+      },
+      "merged": [
+        {
+          "id": "hamster_0210",
+          "slug": "pneumonia-bacterial",
+          "name": "Pneumonia (Bacterial)",
+          "name_ja": "細菌性肺炎（ハムスター）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0020",
+        "slug": "demodex-mange",
+        "name": "Demodex Mange",
+        "name_ja": "ニキビダニ症"
+      },
+      "merged": [
+        {
+          "id": "hamster_0160",
+          "slug": "demodex-mange-localized",
+          "name": "Demodex Mange - Localized",
+          "name_ja": "ニキビダニ症（局所型）"
+        },
+        {
+          "id": "hamster_0161",
+          "slug": "demodex-mange-generalized",
+          "name": "Demodex Mange - Generalized",
+          "name_ja": "ニキビダニ症（全身型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0026",
+        "slug": "alopecia-non-parasitic",
+        "name": "Alopecia (Non-parasitic)",
+        "name_ja": "脱毛症（非寄生虫性）"
+      },
+      "merged": [
+        {
+          "id": "hamster_0196",
+          "slug": "alopecia",
+          "name": "Alopecia",
+          "name_ja": "脱毛症（ハムスター）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0030",
+        "slug": "skin-tumor-general",
+        "name": "Skin Tumor (General)",
+        "name_ja": "皮膚腫瘍"
+      },
+      "merged": [
+        {
+          "id": "hamster_0283",
+          "slug": "skin-tumor-non-specific",
+          "name": "Skin Tumor (Non-specific)",
+          "name_ja": "皮膚腫瘍（非特異的）（ハムスター）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0038",
+        "slug": "cushing-s-disease",
+        "name": "Cushing's Disease",
+        "name_ja": "クッシング病"
+      },
+      "merged": [
+        {
+          "id": "hamster_0162",
+          "slug": "cushing-s-disease-early-stage",
+          "name": "Cushing's Disease - Early Stage",
+          "name_ja": "クッシング病（初期）"
+        },
+        {
+          "id": "hamster_0163",
+          "slug": "cushing-s-disease-advanced",
+          "name": "Cushing's Disease - Advanced",
+          "name_ja": "クッシング病（進行期）"
+        },
+        {
+          "id": "hamster_0191",
+          "slug": "cushing-s-disease-hyperadrenocorticism",
+          "name": "Cushing's Disease (Hyperadrenocorticism)",
+          "name_ja": "クッシング病（副腎皮質機能亢進症）（ハムスター）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0045",
+        "slug": "atrial-thrombosis",
+        "name": "Atrial Thrombosis",
+        "name_ja": "心房血栓症"
+      },
+      "merged": [
+        {
+          "id": "hamster_0164",
+          "slug": "atrial-thrombosis-acute",
+          "name": "Atrial Thrombosis - Acute",
+          "name_ja": "心房血栓症（急性）"
+        },
+        {
+          "id": "hamster_0165",
+          "slug": "atrial-thrombosis-chronic",
+          "name": "Atrial Thrombosis - Chronic",
+          "name_ja": "心房血栓症（慢性）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0049",
+        "slug": "cage-paralysis",
+        "name": "Cage Paralysis",
+        "name_ja": "ケージ麻痺"
+      },
+      "merged": [
+        {
+          "id": "hamster_0172",
+          "slug": "cage-paralysis-early",
+          "name": "Cage Paralysis - Early",
+          "name_ja": "ケージ麻痺（初期）"
+        },
+        {
+          "id": "hamster_0173",
+          "slug": "cage-paralysis-advanced",
+          "name": "Cage Paralysis - Advanced",
+          "name_ja": "ケージ麻痺（進行期）"
+        },
+        {
+          "id": "hamster_0238",
+          "slug": "cage-paralysis-vitamin-e-selenium-deficiency",
+          "name": "Cage Paralysis (Vitamin E/Selenium Deficiency)",
+          "name_ja": "ケージ麻痺（VE/Se欠乏）（ハムスター）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0059",
+        "slug": "hamster-polyomavirus",
+        "name": "Hamster Polyomavirus",
+        "name_ja": "ハムスターポリオーマウイルス"
+      },
+      "merged": [
+        {
+          "id": "hamster_0157",
+          "slug": "hamster-polyomavirus-clinical-form",
+          "name": "Hamster Polyomavirus - Clinical Form",
+          "name_ja": "ハムスターポリオーマウイルス（臨床型）"
+        },
+        {
+          "id": "hamster_0158",
+          "slug": "hamster-polyomavirus-subclinical-carrier",
+          "name": "Hamster Polyomavirus - Subclinical Carrier",
+          "name_ja": "ハムスターポリオーマウイルス（不顕性キャリア）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0060",
+        "slug": "lymphocytic-choriomeningitis-lcmv",
+        "name": "Lymphocytic Choriomeningitis (LCMV)",
+        "name_ja": "リンパ球性脈絡髄膜炎"
+      },
+      "merged": [
+        {
+          "id": "hamster_0159",
+          "slug": "lymphocytic-choriomeningitis-lcmv-acute",
+          "name": "Lymphocytic Choriomeningitis (LCMV) - Acute",
+          "name_ja": "リンパ球性脈絡髄膜炎（急性型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0123",
+        "slug": "pododermatitis-bumblefoot",
+        "name": "Pododermatitis (Bumblefoot)",
+        "name_ja": "趾瘤症（バンブルフット）"
+      },
+      "merged": [
+        {
+          "id": "hamster_0318",
+          "slug": "pododermatitis",
+          "name": "Pododermatitis",
+          "name_ja": "足底皮膚炎（ハムスター）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Wet Tail (Proliferative Ileitis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0000",
-            "slug": "wet-tail-proliferative-ileitis",
-            "name": "Wet Tail (Proliferative Ileitis)",
-            "name_ja": "ウェットテイル（増殖性回腸炎）"
-          },
-          {
-            "id": "hamster_0155",
-            "slug": "wet-tail-chronic-form",
-            "name": "Wet Tail - Chronic Form",
-            "name_ja": "ウェットテイル（慢性型）"
-          },
-          {
-            "id": "hamster_0156",
-            "slug": "wet-tail-neonatal-form",
-            "name": "Wet Tail - Neonatal Form",
-            "name_ja": "ウェットテイル（新生児型）"
-          }
-        ]
-      },
-      {
-        "base": "Tyzzer's Disease",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0001",
-            "slug": "tyzzer-s-disease",
-            "name": "Tyzzer's Disease",
-            "name_ja": "ティザー病"
-          },
-          {
-            "id": "hamster_0174",
-            "slug": "tyzzer-s-disease-subclinical",
-            "name": "Tyzzer's Disease - Subclinical",
-            "name_ja": "ティザー病（不顕性）"
-          }
-        ]
-      },
-      {
-        "base": "Tapeworm Infection (Hymenolepis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0007",
-            "slug": "tapeworm-infection-hymenolepis",
-            "name": "Tapeworm Infection (Hymenolepis)",
-            "name_ja": "条虫症（膜様条虫）"
-          },
-          {
-            "id": "hamster_0148",
-            "slug": "tapeworm-rodentolepis-nana",
-            "name": "Tapeworm (Rodentolepis nana)",
-            "name_ja": "条虫症（ロデントレピス・ナナ）"
-          }
-        ]
-      },
-      {
-        "base": "Pneumonia",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0017",
-            "slug": "pneumonia",
-            "name": "Pneumonia",
-            "name_ja": "肺炎"
-          },
-          {
-            "id": "hamster_0210",
-            "slug": "pneumonia-bacterial",
-            "name": "Pneumonia (Bacterial)",
-            "name_ja": "細菌性肺炎（ハムスター）"
-          }
-        ]
-      },
-      {
-        "base": "Demodex Mange",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0020",
-            "slug": "demodex-mange",
-            "name": "Demodex Mange",
-            "name_ja": "ニキビダニ症"
-          },
-          {
-            "id": "hamster_0160",
-            "slug": "demodex-mange-localized",
-            "name": "Demodex Mange - Localized",
-            "name_ja": "ニキビダニ症（局所型）"
-          },
-          {
-            "id": "hamster_0161",
-            "slug": "demodex-mange-generalized",
-            "name": "Demodex Mange - Generalized",
-            "name_ja": "ニキビダニ症（全身型）"
-          }
-        ]
-      },
-      {
-        "base": "Ringworm (Dermatophytosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0023",
-            "slug": "ringworm-dermatophytosis",
-            "name": "Ringworm (Dermatophytosis)",
-            "name_ja": "皮膚糸状菌症"
-          },
-          {
-            "id": "hamster_0192",
-            "slug": "dermatophytosis-ringworm",
-            "name": "Dermatophytosis (Ringworm)",
-            "name_ja": "皮膚糸状菌症（ハムスター）"
-          },
-          {
-            "id": "hamster_0269",
-            "slug": "ringworm-trichophyton",
-            "name": "Ringworm (Trichophyton)",
-            "name_ja": "白癬（トリコフィトン）（ハムスター）"
-          }
-        ]
-      },
-      {
-        "base": "Alopecia (Non-parasitic)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0026",
-            "slug": "alopecia-non-parasitic",
-            "name": "Alopecia (Non-parasitic)",
-            "name_ja": "脱毛症（非寄生虫性）"
-          },
-          {
-            "id": "hamster_0196",
-            "slug": "alopecia",
-            "name": "Alopecia",
-            "name_ja": "脱毛症（ハムスター）"
-          }
-        ]
-      },
-      {
-        "base": "Skin Tumor (General)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0030",
-            "slug": "skin-tumor-general",
-            "name": "Skin Tumor (General)",
-            "name_ja": "皮膚腫瘍"
-          },
-          {
-            "id": "hamster_0283",
-            "slug": "skin-tumor-non-specific",
-            "name": "Skin Tumor (Non-specific)",
-            "name_ja": "皮膚腫瘍（非特異的）（ハムスター）"
-          }
-        ]
-      },
-      {
-        "base": "Cushing's Disease",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0038",
-            "slug": "cushing-s-disease",
-            "name": "Cushing's Disease",
-            "name_ja": "クッシング病"
-          },
-          {
-            "id": "hamster_0162",
-            "slug": "cushing-s-disease-early-stage",
-            "name": "Cushing's Disease - Early Stage",
-            "name_ja": "クッシング病（初期）"
-          },
-          {
-            "id": "hamster_0163",
-            "slug": "cushing-s-disease-advanced",
-            "name": "Cushing's Disease - Advanced",
-            "name_ja": "クッシング病（進行期）"
-          },
-          {
-            "id": "hamster_0191",
-            "slug": "cushing-s-disease-hyperadrenocorticism",
-            "name": "Cushing's Disease (Hyperadrenocorticism)",
-            "name_ja": "クッシング病（副腎皮質機能亢進症）（ハムスター）"
-          }
-        ]
-      },
       {
         "base": "Amyloidosis",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -394,60 +511,6 @@
         ]
       },
       {
-        "base": "Atrial Thrombosis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0045",
-            "slug": "atrial-thrombosis",
-            "name": "Atrial Thrombosis",
-            "name_ja": "心房血栓症"
-          },
-          {
-            "id": "hamster_0164",
-            "slug": "atrial-thrombosis-acute",
-            "name": "Atrial Thrombosis - Acute",
-            "name_ja": "心房血栓症（急性）"
-          },
-          {
-            "id": "hamster_0165",
-            "slug": "atrial-thrombosis-chronic",
-            "name": "Atrial Thrombosis - Chronic",
-            "name_ja": "心房血栓症（慢性）"
-          }
-        ]
-      },
-      {
-        "base": "Cage Paralysis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0049",
-            "slug": "cage-paralysis",
-            "name": "Cage Paralysis",
-            "name_ja": "ケージ麻痺"
-          },
-          {
-            "id": "hamster_0172",
-            "slug": "cage-paralysis-early",
-            "name": "Cage Paralysis - Early",
-            "name_ja": "ケージ麻痺（初期）"
-          },
-          {
-            "id": "hamster_0173",
-            "slug": "cage-paralysis-advanced",
-            "name": "Cage Paralysis - Advanced",
-            "name_ja": "ケージ麻痺（進行期）"
-          },
-          {
-            "id": "hamster_0238",
-            "slug": "cage-paralysis-vitamin-e-selenium-deficiency",
-            "name": "Cage Paralysis (Vitamin E/Selenium Deficiency)",
-            "name_ja": "ケージ麻痺（VE/Se欠乏）（ハムスター）"
-          }
-        ]
-      },
-      {
         "base": "Eye Proptosis",
         "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
         "members": [
@@ -462,72 +525,6 @@
             "slug": "exophthalmos",
             "name": "Exophthalmos",
             "name_ja": "眼球突出（ハムスター）"
-          }
-        ]
-      },
-      {
-        "base": "Hamster Polyomavirus",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0059",
-            "slug": "hamster-polyomavirus",
-            "name": "Hamster Polyomavirus",
-            "name_ja": "ハムスターポリオーマウイルス"
-          },
-          {
-            "id": "hamster_0157",
-            "slug": "hamster-polyomavirus-clinical-form",
-            "name": "Hamster Polyomavirus - Clinical Form",
-            "name_ja": "ハムスターポリオーマウイルス（臨床型）"
-          },
-          {
-            "id": "hamster_0158",
-            "slug": "hamster-polyomavirus-subclinical-carrier",
-            "name": "Hamster Polyomavirus - Subclinical Carrier",
-            "name_ja": "ハムスターポリオーマウイルス（不顕性キャリア）"
-          }
-        ]
-      },
-      {
-        "base": "Lymphocytic Choriomeningitis (LCMV)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0060",
-            "slug": "lymphocytic-choriomeningitis-lcmv",
-            "name": "Lymphocytic Choriomeningitis (LCMV)",
-            "name_ja": "リンパ球性脈絡髄膜炎"
-          },
-          {
-            "id": "hamster_0159",
-            "slug": "lymphocytic-choriomeningitis-lcmv-acute",
-            "name": "Lymphocytic Choriomeningitis (LCMV) - Acute",
-            "name_ja": "リンパ球性脈絡髄膜炎（急性型）"
-          }
-        ]
-      },
-      {
-        "base": "Heatstroke",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0068",
-            "slug": "heatstroke",
-            "name": "Heatstroke",
-            "name_ja": "熱中症"
-          },
-          {
-            "id": "hamster_0217",
-            "slug": "heat-stroke",
-            "name": "Heat Stroke",
-            "name_ja": "熱中症（ハムスター）"
-          },
-          {
-            "id": "hamster_0221",
-            "slug": "heatstroke-neurological",
-            "name": "Heatstroke (Neurological)",
-            "name_ja": "熱射病（神経型）（ハムスター）"
           }
         ]
       },
@@ -606,24 +603,6 @@
             "slug": "intestinal-obstruction",
             "name": "Intestinal Obstruction",
             "name_ja": "腸閉塞（ハムスター）"
-          }
-        ]
-      },
-      {
-        "base": "Pododermatitis (Bumblefoot)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0123",
-            "slug": "pododermatitis-bumblefoot",
-            "name": "Pododermatitis (Bumblefoot)",
-            "name_ja": "趾瘤症（バンブルフット）"
-          },
-          {
-            "id": "hamster_0318",
-            "slug": "pododermatitis",
-            "name": "Pododermatitis",
-            "name_ja": "足底皮膚炎（ハムスター）"
           }
         ]
       },

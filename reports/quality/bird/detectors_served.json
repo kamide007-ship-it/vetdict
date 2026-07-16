@@ -1,67 +1,11 @@
 {
   "species": "bird",
   "view": "served",
-  "record_count": 531,
+  "record_count": 505,
   "T101": {
     "detector": "T101",
-    "total_records": 531,
+    "total_records": 505,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "bird_0000",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "嘴羽毛病（PBFD）"
-          },
-          {
-            "id": "bird_0341",
-            "name": "Beak and Feather Disease (Circovirus)",
-            "name_ja": "嘴羽毛病（サーコウイルス）（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0001",
-            "name": "Proventricular Dilatation Disease (PDD / Bornavirus)",
-            "name_ja": "腺胃拡張症（PDD／ボルナウイルス）"
-          },
-          {
-            "id": "bird_0400",
-            "name": "Proventricular Dilatation Disease (PDD)",
-            "name_ja": "前胃拡張症（PDD）（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0006",
-            "name": "Pacheco's Disease (Psittacid Herpesvirus)",
-            "name_ja": "パチェコ病（オウム目ヘルペスウイルス）"
-          },
-          {
-            "id": "bird_0403",
-            "name": "Pacheco's Disease",
-            "name_ja": "パチェコ病（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0007",
-            "name": "Paramyxovirus Infection (PMV-1/2/3)",
-            "name_ja": "パラミクソウイルス感染症"
-          },
-          {
-            "id": "bird_0343",
-            "name": "Paramyxovirus Infection",
-            "name_ja": "パラミクソウイルス感染（鳥）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -73,48 +17,6 @@
             "id": "bird_0398",
             "name": "Psittacosis (Chlamydiosis)",
             "name_ja": "オウム病（クラミジア症）（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0013",
-            "name": "E. coli Infection (Colibacillosis)",
-            "name_ja": "大腸菌感染症"
-          },
-          {
-            "id": "bird_0437",
-            "name": "E. coli Infection",
-            "name_ja": "大腸菌感染（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0023",
-            "name": "Candidiasis",
-            "name_ja": "カンジダ症"
-          },
-          {
-            "id": "bird_0308",
-            "name": "Candidiasis (Crop Mycosis)",
-            "name_ja": "カンジダ症（そのう真菌症）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0024",
-            "name": "Megabacteriosis (Avian Gastric Yeast / AGY)",
-            "name_ja": "メガバクテリア症（AGY）"
-          },
-          {
-            "id": "bird_0307",
-            "name": "Megabacteriosis (Macrorhabdus ornithogaster)",
-            "name_ja": "メガバクテリア症（マクロラブダス症）"
           }
         ]
       },
@@ -135,34 +37,6 @@
       {
         "members": [
           {
-            "id": "bird_0033",
-            "name": "Crop Stasis (Crop Slowdown)",
-            "name_ja": "嗉嚢停滞"
-          },
-          {
-            "id": "bird_0408",
-            "name": "Crop Stasis",
-            "name_ja": "そ嚢うっ滞（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0034",
-            "name": "Crop Burn (Thermal Ingluvitis)",
-            "name_ja": "嗉嚢火傷"
-          },
-          {
-            "id": "bird_0409",
-            "name": "Crop Burns",
-            "name_ja": "そ嚢火傷（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "bird_0048",
             "name": "Renal Failure (Acute / Chronic)",
             "name_ja": "腎不全（急性／慢性）"
@@ -171,34 +45,6 @@
             "id": "bird_0445",
             "name": "Renal Failure (Acute)",
             "name_ja": "急性腎不全（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0052",
-            "name": "Renal Tumor (Renal Adenocarcinoma)",
-            "name_ja": "腎腫瘍（腎腺癌）"
-          },
-          {
-            "id": "bird_0444",
-            "name": "Renal Tumor",
-            "name_ja": "腎腫瘍（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0058",
-            "name": "Iodine Deficiency",
-            "name_ja": "ヨウ素欠乏症"
-          },
-          {
-            "id": "bird_0414",
-            "name": "Iodine Deficiency (Thyroid Hyperplasia)",
-            "name_ja": "ヨウ素欠乏症（甲状腺過形成）（鳥）"
           }
         ]
       },
@@ -219,62 +65,6 @@
       {
         "members": [
           {
-            "id": "bird_0063",
-            "name": "Feather Plucking (Feather Destructive Behavior)",
-            "name_ja": "毛引き症（羽毛破壊行動）"
-          },
-          {
-            "id": "bird_0404",
-            "name": "Feather Plucking",
-            "name_ja": "毛引き（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0069",
-            "name": "Squamous Cell Carcinoma (Skin)",
-            "name_ja": "扁平上皮癌（皮膚）"
-          },
-          {
-            "id": "bird_0452",
-            "name": "Squamous Cell Carcinoma",
-            "name_ja": "扁平上皮癌（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0071",
-            "name": "Metabolic Bone Disease (MBD / Rickets)",
-            "name_ja": "代謝性骨疾患（くる病）"
-          },
-          {
-            "id": "bird_0431",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0073",
-            "name": "Egg Binding (Dystocia)",
-            "name_ja": "卵詰まり（難産）"
-          },
-          {
-            "id": "bird_0405",
-            "name": "Egg Binding",
-            "name_ja": "卵詰まり（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "bird_0079",
             "name": "Lead Poisoning (Neurological)",
             "name_ja": "鉛中毒（神経型）"
@@ -283,151 +73,6 @@
             "id": "bird_0111",
             "name": "Lead Poisoning (Plumbism)",
             "name_ja": "鉛中毒"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0096",
-            "name": "Red Mites (Dermanyssus gallinae)",
-            "name_ja": "ワクモ（赤ダニ）"
-          },
-          {
-            "id": "bird_0421",
-            "name": "Red Mite (Dermanyssus)",
-            "name_ja": "ワクモ（Dermanyssus）（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0098",
-            "name": "Roundworms (Ascaridia)",
-            "name_ja": "回虫症（アスカリディア）"
-          },
-          {
-            "id": "bird_0423",
-            "name": "Roundworm (Ascaridia)",
-            "name_ja": "回虫（アスカリジア）（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0100",
-            "name": "Capillaria (Hairworm)",
-            "name_ja": "毛細線虫症（キャピラリア）"
-          },
-          {
-            "id": "bird_0232",
-            "name": "Capillaria Infection (Hairworm, Severe)",
-            "name_ja": "毛頭虫感染症（重度）"
-          },
-          {
-            "id": "bird_0424",
-            "name": "Capillaria Infection",
-            "name_ja": "毛細線虫症（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0112",
-            "name": "Zinc Poisoning",
-            "name_ja": "亜鉛中毒"
-          },
-          {
-            "id": "bird_0387",
-            "name": "Zinc Toxicosis (Hardware Disease)",
-            "name_ja": "亜鉛中毒（金属中毒）（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0126",
-            "name": "Avian Encephalomyelitis",
-            "name_ja": "鳥脳脊髄炎"
-          },
-          {
-            "id": "bird_0227",
-            "name": "Avian Encephalomyelitis (Epidemic Tremor)",
-            "name_ja": "鳥類脳脊髄炎（流行性振戦）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0127",
-            "name": "Marek's Disease",
-            "name_ja": "マレック病"
-          },
-          {
-            "id": "bird_0224",
-            "name": "Marek's Disease (Avian)",
-            "name_ja": "マレック病（鳥類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0130",
-            "name": "Infectious Laryngotracheitis (ILT)",
-            "name_ja": "伝染性喉頭気管炎"
-          },
-          {
-            "id": "bird_0233",
-            "name": "Infectious Laryngotracheitis (ILT) Advanced",
-            "name_ja": "伝染性喉頭気管炎（重度）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0133",
-            "name": "Avian Spirochetosis",
-            "name_ja": "鳥スピロヘータ症"
-          },
-          {
-            "id": "bird_0235",
-            "name": "Avian Spirochetosis (Borrelia)",
-            "name_ja": "鳥類スピロヘータ症（ボレリア属）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0174",
-            "name": "Cloacitis (Vent Gleet)",
-            "name_ja": "総排泄腔炎（ベントグリート）"
-          },
-          {
-            "id": "bird_0439",
-            "name": "Cloacitis",
-            "name_ja": "総排泄腔炎（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0176",
-            "name": "Ingluvoliths (Crop Stones)",
-            "name_ja": "素嚢結石"
-          },
-          {
-            "id": "bird_0292",
-            "name": "Ingluvoliths (Crop Concretions)",
-            "name_ja": "嗉嚢結石"
           }
         ]
       },
@@ -474,12 +119,12 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 33,
-    "redundant_record_count": 34,
+    "exact_duplicate_cluster_count": 8,
+    "redundant_record_count": 8,
     "family_clusters": [
       {
         "shared_stem": "avian",
-        "size": 45,
+        "size": 43,
         "members": [
           {
             "id": "bird_0002",
@@ -637,19 +282,9 @@
             "name_ja": "鳥腎炎ウイルス感染症"
           },
           {
-            "id": "bird_0227",
-            "name": "Avian Encephalomyelitis (Epidemic Tremor)",
-            "name_ja": "鳥類脳脊髄炎（流行性振戦）"
-          },
-          {
             "id": "bird_0228",
             "name": "Avian Hepatitis E Virus",
             "name_ja": "鳥類E型肝炎ウイルス"
-          },
-          {
-            "id": "bird_0235",
-            "name": "Avian Spirochetosis (Borrelia)",
-            "name_ja": "鳥類スピロヘータ症（ボレリア属）"
           },
           {
             "id": "bird_0236",
@@ -710,7 +345,7 @@
       },
       {
         "shared_stem": "defici",
-        "size": 19,
+        "size": 18,
         "members": [
           {
             "id": "bird_0055",
@@ -791,11 +426,6 @@
             "id": "bird_0407",
             "name": "Nutritional Deficiency (General)",
             "name_ja": "栄養欠乏症（一般）（鳥）"
-          },
-          {
-            "id": "bird_0414",
-            "name": "Iodine Deficiency (Thyroid Hyperplasia)",
-            "name_ja": "ヨウ素欠乏症（甲状腺過形成）（鳥）"
           },
           {
             "id": "bird_0532",
@@ -887,82 +517,6 @@
             "id": "bird_0481",
             "name": "Hepatic Metabolic Disorder",
             "name_ja": "肝代謝障害（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "feathe",
-        "size": 14,
-        "members": [
-          {
-            "id": "bird_0000",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "嘴羽毛病（PBFD）"
-          },
-          {
-            "id": "bird_0063",
-            "name": "Feather Plucking (Feather Destructive Behavior)",
-            "name_ja": "毛引き症（羽毛破壊行動）"
-          },
-          {
-            "id": "bird_0067",
-            "name": "Feather Cysts",
-            "name_ja": "羽毛嚢胞"
-          },
-          {
-            "id": "bird_0095",
-            "name": "Feather Mites",
-            "name_ja": "羽毛ダニ"
-          },
-          {
-            "id": "bird_0115",
-            "name": "Feather Destructive Behavior (FDB)",
-            "name_ja": "羽毛破壊行動"
-          },
-          {
-            "id": "bird_0179",
-            "name": "Feather Follicle Cyst (Chronic)",
-            "name_ja": "慢性羽包嚢胞"
-          },
-          {
-            "id": "bird_0201",
-            "name": "Hormonal Feather Plucking",
-            "name_ja": "ホルモン性毛引き症"
-          },
-          {
-            "id": "bird_0250",
-            "name": "Psittacine Beak and Feather Disease – Peracute Neonatal Form",
-            "name_ja": "嘴羽毛病（PBFD）超急性新生児型"
-          },
-          {
-            "id": "bird_0251",
-            "name": "Psittacine Beak and Feather Disease – Chronic Adult Form",
-            "name_ja": "嘴羽毛病（PBFD）慢性成鳥型"
-          },
-          {
-            "id": "bird_0257",
-            "name": "Feather Follicle Tumor (Feather Folliculoma)",
-            "name_ja": "毛包腫瘍（毛包腫）"
-          },
-          {
-            "id": "bird_0263",
-            "name": "Feather Destructive Behavior – Hormonal",
-            "name_ja": "羽毛破壊行動ホルモン型"
-          },
-          {
-            "id": "bird_0341",
-            "name": "Beak and Feather Disease (Circovirus)",
-            "name_ja": "嘴羽毛病（サーコウイルス）（鳥）"
-          },
-          {
-            "id": "bird_0385",
-            "name": "Feather Follicle Infection",
-            "name_ja": "羽毛毛包感染（鳥）"
-          },
-          {
-            "id": "bird_0404",
-            "name": "Feather Plucking",
-            "name_ja": "毛引き（鳥）"
           }
         ]
       },
@@ -1180,6 +734,72 @@
         ]
       },
       {
+        "shared_stem": "feathe",
+        "size": 12,
+        "members": [
+          {
+            "id": "bird_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "bird_0063",
+            "name": "Feather Plucking (Feather Destructive Behavior)",
+            "name_ja": "毛引き症（羽毛破壊行動）"
+          },
+          {
+            "id": "bird_0067",
+            "name": "Feather Cysts",
+            "name_ja": "羽毛嚢胞"
+          },
+          {
+            "id": "bird_0095",
+            "name": "Feather Mites",
+            "name_ja": "羽毛ダニ"
+          },
+          {
+            "id": "bird_0115",
+            "name": "Feather Destructive Behavior (FDB)",
+            "name_ja": "羽毛破壊行動"
+          },
+          {
+            "id": "bird_0179",
+            "name": "Feather Follicle Cyst (Chronic)",
+            "name_ja": "慢性羽包嚢胞"
+          },
+          {
+            "id": "bird_0201",
+            "name": "Hormonal Feather Plucking",
+            "name_ja": "ホルモン性毛引き症"
+          },
+          {
+            "id": "bird_0250",
+            "name": "Psittacine Beak and Feather Disease – Peracute Neonatal Form",
+            "name_ja": "嘴羽毛病（PBFD）超急性新生児型"
+          },
+          {
+            "id": "bird_0251",
+            "name": "Psittacine Beak and Feather Disease – Chronic Adult Form",
+            "name_ja": "嘴羽毛病（PBFD）慢性成鳥型"
+          },
+          {
+            "id": "bird_0257",
+            "name": "Feather Follicle Tumor (Feather Folliculoma)",
+            "name_ja": "毛包腫瘍（毛包腫）"
+          },
+          {
+            "id": "bird_0263",
+            "name": "Feather Destructive Behavior – Hormonal",
+            "name_ja": "羽毛破壊行動ホルモン型"
+          },
+          {
+            "id": "bird_0385",
+            "name": "Feather Follicle Infection",
+            "name_ja": "羽毛毛包感染（鳥）"
+          }
+        ]
+      },
+      {
         "shared_stem": "neopla",
         "size": 12,
         "members": [
@@ -1247,7 +867,7 @@
       },
       {
         "shared_stem": "beak",
-        "size": 10,
+        "size": 9,
         "members": [
           {
             "id": "bird_0000",
@@ -1285,11 +905,6 @@
             "name_ja": "嘴不正咬合下顎前突型"
           },
           {
-            "id": "bird_0341",
-            "name": "Beak and Feather Disease (Circovirus)",
-            "name_ja": "嘴羽毛病（サーコウイルス）（鳥）"
-          },
-          {
             "id": "bird_0433",
             "name": "Beak Deformity (Scissor Beak)",
             "name_ja": "嘴変形（シザービーク）（鳥）"
@@ -1298,118 +913,6 @@
             "id": "bird_0434",
             "name": "Beak Fracture",
             "name_ja": "嘴骨折（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "crop",
-        "size": 10,
-        "members": [
-          {
-            "id": "bird_0033",
-            "name": "Crop Stasis (Crop Slowdown)",
-            "name_ja": "嗉嚢停滞"
-          },
-          {
-            "id": "bird_0034",
-            "name": "Crop Burn (Thermal Ingluvitis)",
-            "name_ja": "嗉嚢火傷"
-          },
-          {
-            "id": "bird_0035",
-            "name": "Crop Foreign Body",
-            "name_ja": "嗉嚢内異物"
-          },
-          {
-            "id": "bird_0159",
-            "name": "Crop Mycosis",
-            "name_ja": "素嚢真菌症"
-          },
-          {
-            "id": "bird_0242",
-            "name": "Sour Crop (Fermentative Ingluvitis)",
-            "name_ja": "酸敗嗉嚢（発酵性嗉嚢炎）"
-          },
-          {
-            "id": "bird_0243",
-            "name": "Crop Fistula",
-            "name_ja": "嗉嚢瘻"
-          },
-          {
-            "id": "bird_0276",
-            "name": "Crop Impaction",
-            "name_ja": "嗉嚢閉塞"
-          },
-          {
-            "id": "bird_0323",
-            "name": "Crop Adenocarcinoma",
-            "name_ja": "そ嚢腺癌（鳥）"
-          },
-          {
-            "id": "bird_0408",
-            "name": "Crop Stasis",
-            "name_ja": "そ嚢うっ滞（鳥）"
-          },
-          {
-            "id": "bird_0409",
-            "name": "Crop Burns",
-            "name_ja": "そ嚢火傷（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "tumor",
-        "size": 10,
-        "members": [
-          {
-            "id": "bird_0052",
-            "name": "Renal Tumor (Renal Adenocarcinoma)",
-            "name_ja": "腎腫瘍（腎腺癌）"
-          },
-          {
-            "id": "bird_0086",
-            "name": "Testicular Tumor",
-            "name_ja": "精巣腫瘍"
-          },
-          {
-            "id": "bird_0087",
-            "name": "Ovarian Tumor",
-            "name_ja": "卵巣腫瘍"
-          },
-          {
-            "id": "bird_0206",
-            "name": "Avian Renal Tumor",
-            "name_ja": "鳥類腎腫瘍"
-          },
-          {
-            "id": "bird_0257",
-            "name": "Feather Follicle Tumor (Feather Folliculoma)",
-            "name_ja": "毛包腫瘍（毛包腫）"
-          },
-          {
-            "id": "bird_0318",
-            "name": "Adrenal Tumor",
-            "name_ja": "副腎腫瘍（鳥）"
-          },
-          {
-            "id": "bird_0319",
-            "name": "Thyroid Tumor",
-            "name_ja": "甲状腺腫瘍（鳥）"
-          },
-          {
-            "id": "bird_0320",
-            "name": "Pituitary Tumor",
-            "name_ja": "下垂体腫瘍（鳥）"
-          },
-          {
-            "id": "bird_0443",
-            "name": "Sertoli Cell Tumor",
-            "name_ja": "セルトリ細胞腫（鳥）"
-          },
-          {
-            "id": "bird_0444",
-            "name": "Renal Tumor",
-            "name_ja": "腎腫瘍（鳥）"
           }
         ]
       },
@@ -1618,6 +1121,57 @@
         ]
       },
       {
+        "shared_stem": "tumor",
+        "size": 9,
+        "members": [
+          {
+            "id": "bird_0052",
+            "name": "Renal Tumor (Renal Adenocarcinoma)",
+            "name_ja": "腎腫瘍（腎腺癌）"
+          },
+          {
+            "id": "bird_0086",
+            "name": "Testicular Tumor",
+            "name_ja": "精巣腫瘍"
+          },
+          {
+            "id": "bird_0087",
+            "name": "Ovarian Tumor",
+            "name_ja": "卵巣腫瘍"
+          },
+          {
+            "id": "bird_0206",
+            "name": "Avian Renal Tumor",
+            "name_ja": "鳥類腎腫瘍"
+          },
+          {
+            "id": "bird_0257",
+            "name": "Feather Follicle Tumor (Feather Folliculoma)",
+            "name_ja": "毛包腫瘍（毛包腫）"
+          },
+          {
+            "id": "bird_0318",
+            "name": "Adrenal Tumor",
+            "name_ja": "副腎腫瘍（鳥）"
+          },
+          {
+            "id": "bird_0319",
+            "name": "Thyroid Tumor",
+            "name_ja": "甲状腺腫瘍（鳥）"
+          },
+          {
+            "id": "bird_0320",
+            "name": "Pituitary Tumor",
+            "name_ja": "下垂体腫瘍（鳥）"
+          },
+          {
+            "id": "bird_0443",
+            "name": "Sertoli Cell Tumor",
+            "name_ja": "セルトリ細胞腫（鳥）"
+          }
+        ]
+      },
+      {
         "shared_stem": "viral",
         "size": 9,
         "members": [
@@ -1669,48 +1223,48 @@
         ]
       },
       {
-        "shared_stem": "carcin",
+        "shared_stem": "crop",
         "size": 8,
         "members": [
           {
-            "id": "bird_0069",
-            "name": "Squamous Cell Carcinoma (Skin)",
-            "name_ja": "扁平上皮癌（皮膚）"
+            "id": "bird_0033",
+            "name": "Crop Stasis (Crop Slowdown)",
+            "name_ja": "嗉嚢停滞"
           },
           {
-            "id": "bird_0094",
-            "name": "Bile Duct Carcinoma (Cholangiocarcinoma)",
-            "name_ja": "胆管癌"
+            "id": "bird_0034",
+            "name": "Crop Burn (Thermal Ingluvitis)",
+            "name_ja": "嗉嚢火傷"
           },
           {
-            "id": "bird_0168",
-            "name": "Thyroid Carcinoma",
-            "name_ja": "甲状腺癌"
+            "id": "bird_0035",
+            "name": "Crop Foreign Body",
+            "name_ja": "嗉嚢内異物"
           },
           {
-            "id": "bird_0173",
-            "name": "Cholangiocellular Carcinoma",
-            "name_ja": "胆管細胞癌"
+            "id": "bird_0159",
+            "name": "Crop Mycosis",
+            "name_ja": "素嚢真菌症"
           },
           {
-            "id": "bird_0204",
-            "name": "Preen Gland Adenoma/Carcinoma",
-            "name_ja": "尾脂腺腺腫・癌"
+            "id": "bird_0242",
+            "name": "Sour Crop (Fermentative Ingluvitis)",
+            "name_ja": "酸敗嗉嚢（発酵性嗉嚢炎）"
           },
           {
-            "id": "bird_0259",
-            "name": "Hepatocellular Carcinoma",
-            "name_ja": "肝細胞癌"
+            "id": "bird_0243",
+            "name": "Crop Fistula",
+            "name_ja": "嗉嚢瘻"
           },
           {
-            "id": "bird_0281",
-            "name": "Preen Gland Carcinoma",
-            "name_ja": "尾脂腺癌"
+            "id": "bird_0276",
+            "name": "Crop Impaction",
+            "name_ja": "嗉嚢閉塞"
           },
           {
-            "id": "bird_0452",
-            "name": "Squamous Cell Carcinoma",
-            "name_ja": "扁平上皮癌（鳥）"
+            "id": "bird_0323",
+            "name": "Crop Adenocarcinoma",
+            "name_ja": "そ嚢腺癌（鳥）"
           }
         ]
       },
@@ -1853,52 +1407,6 @@
         ]
       },
       {
-        "shared_stem": "renal",
-        "size": 8,
-        "members": [
-          {
-            "id": "bird_0048",
-            "name": "Renal Failure (Acute / Chronic)",
-            "name_ja": "腎不全（急性／慢性）"
-          },
-          {
-            "id": "bird_0052",
-            "name": "Renal Tumor (Renal Adenocarcinoma)",
-            "name_ja": "腎腫瘍（腎腺癌）"
-          },
-          {
-            "id": "bird_0206",
-            "name": "Avian Renal Tumor",
-            "name_ja": "鳥類腎腫瘍"
-          },
-          {
-            "id": "bird_0258",
-            "name": "Renal Cystadenocarcinoma",
-            "name_ja": "腎嚢胞腺癌"
-          },
-          {
-            "id": "bird_0303",
-            "name": "Amyloidosis – Renal",
-            "name_ja": "アミロイドーシス腎型"
-          },
-          {
-            "id": "bird_0321",
-            "name": "Renal Adenocarcinoma",
-            "name_ja": "腎腺癌（鳥）"
-          },
-          {
-            "id": "bird_0444",
-            "name": "Renal Tumor",
-            "name_ja": "腎腫瘍（鳥）"
-          },
-          {
-            "id": "bird_0445",
-            "name": "Renal Failure (Acute)",
-            "name_ja": "急性腎不全（鳥）"
-          }
-        ]
-      },
-      {
         "shared_stem": "toxici",
         "size": 8,
         "members": [
@@ -1991,6 +1499,47 @@
         ]
       },
       {
+        "shared_stem": "carcin",
+        "size": 7,
+        "members": [
+          {
+            "id": "bird_0069",
+            "name": "Squamous Cell Carcinoma (Skin)",
+            "name_ja": "扁平上皮癌（皮膚）"
+          },
+          {
+            "id": "bird_0094",
+            "name": "Bile Duct Carcinoma (Cholangiocarcinoma)",
+            "name_ja": "胆管癌"
+          },
+          {
+            "id": "bird_0168",
+            "name": "Thyroid Carcinoma",
+            "name_ja": "甲状腺癌"
+          },
+          {
+            "id": "bird_0173",
+            "name": "Cholangiocellular Carcinoma",
+            "name_ja": "胆管細胞癌"
+          },
+          {
+            "id": "bird_0204",
+            "name": "Preen Gland Adenoma/Carcinoma",
+            "name_ja": "尾脂腺腺腫・癌"
+          },
+          {
+            "id": "bird_0259",
+            "name": "Hepatocellular Carcinoma",
+            "name_ja": "肝細胞癌"
+          },
+          {
+            "id": "bird_0281",
+            "name": "Preen Gland Carcinoma",
+            "name_ja": "尾脂腺癌"
+          }
+        ]
+      },
+      {
         "shared_stem": "inflam",
         "size": 7,
         "members": [
@@ -2032,47 +1581,6 @@
         ]
       },
       {
-        "shared_stem": "metabo",
-        "size": 7,
-        "members": [
-          {
-            "id": "bird_0071",
-            "name": "Metabolic Bone Disease (MBD / Rickets)",
-            "name_ja": "代謝性骨疾患（くる病）"
-          },
-          {
-            "id": "bird_0431",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患（鳥）"
-          },
-          {
-            "id": "bird_0481",
-            "name": "Hepatic Metabolic Disorder",
-            "name_ja": "肝代謝障害（鳥）"
-          },
-          {
-            "id": "bird_0516",
-            "name": "Neurological Metabolic Disease",
-            "name_ja": "神経代謝疾患（鳥）"
-          },
-          {
-            "id": "bird_0535",
-            "name": "Endocrine Metabolic Disorder",
-            "name_ja": "内分泌代謝障害（鳥）"
-          },
-          {
-            "id": "bird_0542",
-            "name": "Hematological Metabolic Disease",
-            "name_ja": "血液代謝疾患（鳥）"
-          },
-          {
-            "id": "bird_0546",
-            "name": "Reproductive Metabolic Disease",
-            "name_ja": "生殖器代謝疾患（鳥）"
-          }
-        ]
-      },
-      {
         "shared_stem": "poison",
         "size": 7,
         "members": [
@@ -2110,6 +1618,47 @@
             "id": "bird_0271",
             "name": "Heavy Metal Poisoning – Mixed (Lead and Zinc)",
             "name_ja": "混合重金属中毒（鉛・亜鉛）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 7,
+        "members": [
+          {
+            "id": "bird_0048",
+            "name": "Renal Failure (Acute / Chronic)",
+            "name_ja": "腎不全（急性／慢性）"
+          },
+          {
+            "id": "bird_0052",
+            "name": "Renal Tumor (Renal Adenocarcinoma)",
+            "name_ja": "腎腫瘍（腎腺癌）"
+          },
+          {
+            "id": "bird_0206",
+            "name": "Avian Renal Tumor",
+            "name_ja": "鳥類腎腫瘍"
+          },
+          {
+            "id": "bird_0258",
+            "name": "Renal Cystadenocarcinoma",
+            "name_ja": "腎嚢胞腺癌"
+          },
+          {
+            "id": "bird_0303",
+            "name": "Amyloidosis – Renal",
+            "name_ja": "アミロイドーシス腎型"
+          },
+          {
+            "id": "bird_0321",
+            "name": "Renal Adenocarcinoma",
+            "name_ja": "腎腺癌（鳥）"
+          },
+          {
+            "id": "bird_0445",
+            "name": "Renal Failure (Acute)",
+            "name_ja": "急性腎不全（鳥）"
           }
         ]
       },
@@ -2299,6 +1848,42 @@
         ]
       },
       {
+        "shared_stem": "metabo",
+        "size": 6,
+        "members": [
+          {
+            "id": "bird_0071",
+            "name": "Metabolic Bone Disease (MBD / Rickets)",
+            "name_ja": "代謝性骨疾患（くる病）"
+          },
+          {
+            "id": "bird_0481",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（鳥）"
+          },
+          {
+            "id": "bird_0516",
+            "name": "Neurological Metabolic Disease",
+            "name_ja": "神経代謝疾患（鳥）"
+          },
+          {
+            "id": "bird_0535",
+            "name": "Endocrine Metabolic Disorder",
+            "name_ja": "内分泌代謝障害（鳥）"
+          },
+          {
+            "id": "bird_0542",
+            "name": "Hematological Metabolic Disease",
+            "name_ja": "血液代謝疾患（鳥）"
+          },
+          {
+            "id": "bird_0546",
+            "name": "Reproductive Metabolic Disease",
+            "name_ja": "生殖器代謝疾患（鳥）"
+          }
+        ]
+      },
+      {
         "shared_stem": "muscul",
         "size": 6,
         "members": [
@@ -2403,78 +1988,6 @@
             "id": "bird_0511",
             "name": "Neurological Parasitic Disease",
             "name_ja": "神経系寄生虫疾患（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "proven",
-        "size": 6,
-        "members": [
-          {
-            "id": "bird_0001",
-            "name": "Proventricular Dilatation Disease (PDD / Bornavirus)",
-            "name_ja": "腺胃拡張症（PDD／ボルナウイルス）"
-          },
-          {
-            "id": "bird_0037",
-            "name": "Proventriculitis",
-            "name_ja": "腺胃炎"
-          },
-          {
-            "id": "bird_0158",
-            "name": "Proventricular Nematodes",
-            "name_ja": "腺胃線虫症"
-          },
-          {
-            "id": "bird_0175",
-            "name": "Proventricular Ulceration",
-            "name_ja": "腺胃潰瘍"
-          },
-          {
-            "id": "bird_0275",
-            "name": "Proventricular Impaction",
-            "name_ja": "腺胃閉塞"
-          },
-          {
-            "id": "bird_0400",
-            "name": "Proventricular Dilatation Disease (PDD)",
-            "name_ja": "前胃拡張症（PDD）（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "toxico",
-        "size": 6,
-        "members": [
-          {
-            "id": "bird_0109",
-            "name": "PTFE / Teflon Toxicosis",
-            "name_ja": "PTFE／テフロン中毒"
-          },
-          {
-            "id": "bird_0248",
-            "name": "Vitamin D Toxicosis (Hypervitaminosis D – Renal Form)",
-            "name_ja": "ビタミンD中毒（腎型）"
-          },
-          {
-            "id": "bird_0269",
-            "name": "Zinc Toxicosis – Acute",
-            "name_ja": "亜鉛中毒急性型"
-          },
-          {
-            "id": "bird_0270",
-            "name": "Lead Toxicosis – Chronic",
-            "name_ja": "鉛中毒慢性型"
-          },
-          {
-            "id": "bird_0387",
-            "name": "Zinc Toxicosis (Hardware Disease)",
-            "name_ja": "亜鉛中毒（金属中毒）（鳥）"
-          },
-          {
-            "id": "bird_0462",
-            "name": "Teflon/PTFE Toxicosis",
-            "name_ja": "テフロン/PTFE中毒（鳥）"
           }
         ]
       },
@@ -2820,37 +2333,6 @@
         ]
       },
       {
-        "shared_stem": "infect",
-        "size": 5,
-        "members": [
-          {
-            "id": "bird_0130",
-            "name": "Infectious Laryngotracheitis (ILT)",
-            "name_ja": "伝染性喉頭気管炎"
-          },
-          {
-            "id": "bird_0131",
-            "name": "Infectious Bronchitis",
-            "name_ja": "伝染性気管支炎"
-          },
-          {
-            "id": "bird_0132",
-            "name": "Infectious Bursal Disease (Gumboro)",
-            "name_ja": "伝染性ファブリキウス嚢病（ガンボロ病）"
-          },
-          {
-            "id": "bird_0233",
-            "name": "Infectious Laryngotracheitis (ILT) Advanced",
-            "name_ja": "伝染性喉頭気管炎（重度）"
-          },
-          {
-            "id": "bird_0540",
-            "name": "Hematological Infectious Disease",
-            "name_ja": "血液感染性疾患（鳥）"
-          }
-        ]
-      },
-      {
         "shared_stem": "ophtha",
         "size": 5,
         "members": [
@@ -2913,6 +2395,37 @@
         ]
       },
       {
+        "shared_stem": "proven",
+        "size": 5,
+        "members": [
+          {
+            "id": "bird_0001",
+            "name": "Proventricular Dilatation Disease (PDD / Bornavirus)",
+            "name_ja": "腺胃拡張症（PDD／ボルナウイルス）"
+          },
+          {
+            "id": "bird_0037",
+            "name": "Proventriculitis",
+            "name_ja": "腺胃炎"
+          },
+          {
+            "id": "bird_0158",
+            "name": "Proventricular Nematodes",
+            "name_ja": "腺胃線虫症"
+          },
+          {
+            "id": "bird_0175",
+            "name": "Proventricular Ulceration",
+            "name_ja": "腺胃潰瘍"
+          },
+          {
+            "id": "bird_0275",
+            "name": "Proventricular Impaction",
+            "name_ja": "腺胃閉塞"
+          }
+        ]
+      },
+      {
         "shared_stem": "thyroi",
         "size": 5,
         "members": [
@@ -2940,6 +2453,37 @@
             "id": "bird_0319",
             "name": "Thyroid Tumor",
             "name_ja": "甲状腺腫瘍（鳥）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 5,
+        "members": [
+          {
+            "id": "bird_0109",
+            "name": "PTFE / Teflon Toxicosis",
+            "name_ja": "PTFE／テフロン中毒"
+          },
+          {
+            "id": "bird_0248",
+            "name": "Vitamin D Toxicosis (Hypervitaminosis D – Renal Form)",
+            "name_ja": "ビタミンD中毒（腎型）"
+          },
+          {
+            "id": "bird_0269",
+            "name": "Zinc Toxicosis – Acute",
+            "name_ja": "亜鉛中毒急性型"
+          },
+          {
+            "id": "bird_0270",
+            "name": "Lead Toxicosis – Chronic",
+            "name_ja": "鉛中毒慢性型"
+          },
+          {
+            "id": "bird_0462",
+            "name": "Teflon/PTFE Toxicosis",
+            "name_ja": "テフロン/PTFE中毒（鳥）"
           }
         ]
       },
@@ -3152,6 +2696,32 @@
         ]
       },
       {
+        "shared_stem": "infect",
+        "size": 4,
+        "members": [
+          {
+            "id": "bird_0130",
+            "name": "Infectious Laryngotracheitis (ILT)",
+            "name_ja": "伝染性喉頭気管炎"
+          },
+          {
+            "id": "bird_0131",
+            "name": "Infectious Bronchitis",
+            "name_ja": "伝染性気管支炎"
+          },
+          {
+            "id": "bird_0132",
+            "name": "Infectious Bursal Disease (Gumboro)",
+            "name_ja": "伝染性ファブリキウス嚢病（ガンボロ病）"
+          },
+          {
+            "id": "bird_0540",
+            "name": "Hematological Infectious Disease",
+            "name_ja": "血液感染性疾患（鳥）"
+          }
+        ]
+      },
+      {
         "shared_stem": "infest",
         "size": 4,
         "members": [
@@ -3226,32 +2796,6 @@
             "id": "bird_0508",
             "name": "Urogenital Congenital Anomaly",
             "name_ja": "泌尿生殖器先天異常（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "zinc",
-        "size": 4,
-        "members": [
-          {
-            "id": "bird_0112",
-            "name": "Zinc Poisoning",
-            "name_ja": "亜鉛中毒"
-          },
-          {
-            "id": "bird_0269",
-            "name": "Zinc Toxicosis – Acute",
-            "name_ja": "亜鉛中毒急性型"
-          },
-          {
-            "id": "bird_0301",
-            "name": "Zinc-Responsive Dermatosis",
-            "name_ja": "亜鉛反応性皮膚症"
-          },
-          {
-            "id": "bird_0387",
-            "name": "Zinc Toxicosis (Hardware Disease)",
-            "name_ja": "亜鉛中毒（金属中毒）（鳥）"
           }
         ]
       },
@@ -3340,111 +2884,6 @@
         ]
       },
       {
-        "shared_stem": "bone",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0071",
-            "name": "Metabolic Bone Disease (MBD / Rickets)",
-            "name_ja": "代謝性骨疾患（くる病）"
-          },
-          {
-            "id": "bird_0431",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患（鳥）"
-          },
-          {
-            "id": "bird_0432",
-            "name": "Keel Bone Deformity",
-            "name_ja": "竜骨変形（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "burn",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0034",
-            "name": "Crop Burn (Thermal Ingluvitis)",
-            "name_ja": "嗉嚢火傷"
-          },
-          {
-            "id": "bird_0409",
-            "name": "Crop Burns",
-            "name_ja": "そ嚢火傷（鳥）"
-          },
-          {
-            "id": "bird_0467",
-            "name": "Burns",
-            "name_ja": "熱傷（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "capill",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0100",
-            "name": "Capillaria (Hairworm)",
-            "name_ja": "毛細線虫症（キャピラリア）"
-          },
-          {
-            "id": "bird_0232",
-            "name": "Capillaria Infection (Hairworm, Severe)",
-            "name_ja": "毛頭虫感染症（重度）"
-          },
-          {
-            "id": "bird_0424",
-            "name": "Capillaria Infection",
-            "name_ja": "毛細線虫症（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "cell",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0069",
-            "name": "Squamous Cell Carcinoma (Skin)",
-            "name_ja": "扁平上皮癌（皮膚）"
-          },
-          {
-            "id": "bird_0443",
-            "name": "Sertoli Cell Tumor",
-            "name_ja": "セルトリ細胞腫（鳥）"
-          },
-          {
-            "id": "bird_0452",
-            "name": "Squamous Cell Carcinoma",
-            "name_ja": "扁平上皮癌（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "coli",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0013",
-            "name": "E. coli Infection (Colibacillosis)",
-            "name_ja": "大腸菌感染症"
-          },
-          {
-            "id": "bird_0217",
-            "name": "Avian E. coli Septicemia",
-            "name_ja": "鳥類大腸菌敗血症"
-          },
-          {
-            "id": "bird_0437",
-            "name": "E. coli Infection",
-            "name_ja": "大腸菌感染（鳥）"
-          }
-        ]
-      },
-      {
         "shared_stem": "deform",
         "size": 3,
         "members": [
@@ -3466,27 +2905,6 @@
         ]
       },
       {
-        "shared_stem": "dilata",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0001",
-            "name": "Proventricular Dilatation Disease (PDD / Bornavirus)",
-            "name_ja": "腺胃拡張症（PDD／ボルナウイルス）"
-          },
-          {
-            "id": "bird_0277",
-            "name": "Gastric Dilatation (Non-PDD)",
-            "name_ja": "胃拡張（PDD以外）"
-          },
-          {
-            "id": "bird_0400",
-            "name": "Proventricular Dilatation Disease (PDD)",
-            "name_ja": "前胃拡張症（PDD）（鳥）"
-          }
-        ]
-      },
-      {
         "shared_stem": "effusi",
         "size": 3,
         "members": [
@@ -3504,27 +2922,6 @@
             "id": "bird_0355",
             "name": "Pleural Effusion",
             "name_ja": "胸水（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "enceph",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0126",
-            "name": "Avian Encephalomyelitis",
-            "name_ja": "鳥脳脊髄炎"
-          },
-          {
-            "id": "bird_0227",
-            "name": "Avian Encephalomyelitis (Epidemic Tremor)",
-            "name_ja": "鳥類脳脊髄炎（流行性振戦）"
-          },
-          {
-            "id": "bird_0459",
-            "name": "Encephalitis",
-            "name_ja": "脳炎（鳥）"
           }
         ]
       },
@@ -3592,27 +2989,6 @@
         ]
       },
       {
-        "shared_stem": "ingluv",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0036",
-            "name": "Ingluvitis (Crop Infection)",
-            "name_ja": "嗉嚢炎"
-          },
-          {
-            "id": "bird_0176",
-            "name": "Ingluvoliths (Crop Stones)",
-            "name_ja": "素嚢結石"
-          },
-          {
-            "id": "bird_0292",
-            "name": "Ingluvoliths (Crop Concretions)",
-            "name_ja": "嗉嚢結石"
-          }
-        ]
-      },
-      {
         "shared_stem": "lead",
         "size": 3,
         "members": [
@@ -3651,27 +3027,6 @@
             "id": "bird_0265",
             "name": "Beak Malocclusion – Mandibular Prognathism",
             "name_ja": "嘴不正咬合下顎前突型"
-          }
-        ]
-      },
-      {
-        "shared_stem": "mite",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0418",
-            "name": "Tracheal Mite (Sternostoma)",
-            "name_ja": "気管ダニ（Sternostoma）（鳥）"
-          },
-          {
-            "id": "bird_0419",
-            "name": "Air Sac Mite",
-            "name_ja": "気嚢ダニ（鳥）"
-          },
-          {
-            "id": "bird_0421",
-            "name": "Red Mite (Dermanyssus)",
-            "name_ja": "ワクモ（Dermanyssus）（鳥）"
           }
         ]
       },
@@ -3735,48 +3090,6 @@
             "id": "bird_0282",
             "name": "Ovarian Cyst",
             "name_ja": "卵巣嚢胞"
-          }
-        ]
-      },
-      {
-        "shared_stem": "paramy",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0007",
-            "name": "Paramyxovirus Infection (PMV-1/2/3)",
-            "name_ja": "パラミクソウイルス感染症"
-          },
-          {
-            "id": "bird_0210",
-            "name": "Avian Paramyxovirus-3 (PMV-3)",
-            "name_ja": "鳥パラミクソウイルス3型"
-          },
-          {
-            "id": "bird_0343",
-            "name": "Paramyxovirus Infection",
-            "name_ja": "パラミクソウイルス感染（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "plucki",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0063",
-            "name": "Feather Plucking (Feather Destructive Behavior)",
-            "name_ja": "毛引き症（羽毛破壊行動）"
-          },
-          {
-            "id": "bird_0201",
-            "name": "Hormonal Feather Plucking",
-            "name_ja": "ホルモン性毛引き症"
-          },
-          {
-            "id": "bird_0404",
-            "name": "Feather Plucking",
-            "name_ja": "毛引き（鳥）"
           }
         ]
       },
@@ -3863,22 +3176,43 @@
             "name_ja": "痙攣発作（鳥）"
           }
         ]
+      },
+      {
+        "shared_stem": "zinc",
+        "size": 3,
+        "members": [
+          {
+            "id": "bird_0112",
+            "name": "Zinc Poisoning",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "bird_0269",
+            "name": "Zinc Toxicosis – Acute",
+            "name_ja": "亜鉛中毒急性型"
+          },
+          {
+            "id": "bird_0301",
+            "name": "Zinc-Responsive Dermatosis",
+            "name_ja": "亜鉛反応性皮膚症"
+          }
+        ]
       }
     ],
-    "family_cluster_count": 92
+    "family_cluster_count": 81
   },
   "T102": {
     "detector": "T102",
-    "total_records": 531,
+    "total_records": 505,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 531,
+    "total_records": 505,
     "empty_count": 0,
-    "heading_only_count": 64,
-    "with_dosage_count": 467,
+    "heading_only_count": 61,
+    "with_dosage_count": 444,
     "empty": [],
     "heading_only": [
       {
@@ -3941,8 +3275,8 @@
         "id": "bird_0058",
         "name": "Iodine Deficiency",
         "name_ja": "ヨウ素欠乏症",
-        "treatment_ja_len": 147,
-        "treatment_len": 193,
+        "treatment_ja_len": 220,
+        "treatment_len": 419,
         "has_dosage": false
       },
       {
@@ -3978,14 +3312,6 @@
         "has_dosage": false
       },
       {
-        "id": "bird_0100",
-        "name": "Capillaria (Hairworm)",
-        "name_ja": "毛細線虫症（キャピラリア）",
-        "treatment_ja_len": 170,
-        "treatment_len": 193,
-        "has_dosage": false
-      },
-      {
         "id": "bird_0101",
         "name": "Coccidia",
         "name_ja": "コクシジウム症",
@@ -4015,14 +3341,6 @@
         "name_ja": "アボカド中毒",
         "treatment_ja_len": 341,
         "treatment_len": 393,
-        "has_dosage": false
-      },
-      {
-        "id": "bird_0112",
-        "name": "Zinc Poisoning",
-        "name_ja": "亜鉛中毒",
-        "treatment_ja_len": 440,
-        "treatment_len": 891,
         "has_dosage": false
       },
       {
@@ -4298,14 +3616,6 @@
         "has_dosage": false
       },
       {
-        "id": "bird_0414",
-        "name": "Iodine Deficiency (Thyroid Hyperplasia)",
-        "name_ja": "ヨウ素欠乏症（甲状腺過形成）（鳥）",
-        "treatment_ja_len": 220,
-        "treatment_len": 419,
-        "has_dosage": false
-      },
-      {
         "id": "bird_0433",
         "name": "Beak Deformity (Scissor Beak)",
         "name_ja": "嘴変形（シザービーク）（鳥）",
@@ -4397,14 +3707,26 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 531,
+    "total_records": 505,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 93,
+    "drug_mismatch_count": 91,
     "citation_mismatch_count": 17,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
+      {
+        "id": "bird_0001",
+        "name": "Proventricular Dilatation Disease (PDD / Bornavirus)",
+        "name_ja": "腺胃拡張症（PDD／ボルナウイルス）",
+        "drugs": [
+          {
+            "drug": "Phenobarbital",
+            "drug_ja": "フェノバルビタール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
       {
         "id": "bird_0003",
         "name": "Avian Poxvirus",
@@ -4418,6 +3740,18 @@
           {
             "drug": "Silver Sulfadiazine",
             "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "bird_0006",
+        "name": "Pacheco's Disease (Psittacid Herpesvirus)",
+        "name_ja": "パチェコ病（オウム目ヘルペスウイルス）",
+        "drugs": [
+          {
+            "drug": "Lactulose",
+            "drug_ja": "ラクツロース",
             "reason": "no dosing data for this species"
           }
         ]
@@ -4454,6 +3788,23 @@
           {
             "drug": "Penicillin G",
             "drug_ja": "ペニシリンG",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "bird_0034",
+        "name": "Crop Burn (Thermal Ingluvitis)",
+        "name_ja": "嗉嚢火傷",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
             "reason": "no dosing data for this species"
           }
         ]
@@ -4498,18 +3849,6 @@
         "id": "bird_0111",
         "name": "Lead Poisoning (Plumbism)",
         "name_ja": "鉛中毒",
-        "drugs": [
-          {
-            "drug": "Apomorphine",
-            "drug_ja": "アポモルフィン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "bird_0112",
-        "name": "Zinc Poisoning",
-        "name_ja": "亜鉛中毒",
         "drugs": [
           {
             "drug": "Apomorphine",
@@ -4671,18 +4010,6 @@
         "id": "bird_0229",
         "name": "Riemerella anatipestifer Infection",
         "name_ja": "リーメレラ・アナティペスティファー感染症",
-        "drugs": [
-          {
-            "drug": "Penicillin G",
-            "drug_ja": "ペニシリンG",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "bird_0235",
-        "name": "Avian Spirochetosis (Borrelia)",
-        "name_ja": "鳥類スピロヘータ症（ボレリア属）",
         "drugs": [
           {
             "drug": "Penicillin G",
@@ -5232,18 +4559,6 @@
         ]
       },
       {
-        "id": "bird_0400",
-        "name": "Proventricular Dilatation Disease (PDD)",
-        "name_ja": "前胃拡張症（PDD）（鳥）",
-        "drugs": [
-          {
-            "drug": "Phenobarbital",
-            "drug_ja": "フェノバルビタール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "bird_0401",
         "name": "Avian Bornavirus (ABV)",
         "name_ja": "鳥ボルナウイルス（鳥）",
@@ -5256,18 +4571,6 @@
         ]
       },
       {
-        "id": "bird_0403",
-        "name": "Pacheco's Disease",
-        "name_ja": "パチェコ病（鳥）",
-        "drugs": [
-          {
-            "drug": "Lactulose",
-            "drug_ja": "ラクツロース",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "bird_0406",
         "name": "Bumblefoot (Pododermatitis)",
         "name_ja": "バンブルフット（足底皮膚炎）（鳥）",
@@ -5275,23 +4578,6 @@
           {
             "drug": "Mupirocin",
             "drug_ja": "ムピロシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "bird_0409",
-        "name": "Crop Burns",
-        "name_ja": "そ嚢火傷（鳥）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Silver Sulfadiazine",
-            "drug_ja": "スルファジアジン銀",
             "reason": "no dosing data for this species"
           }
         ]
@@ -5790,7 +5076,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 531,
+    "total_records": 505,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

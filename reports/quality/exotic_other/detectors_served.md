@@ -1,49 +1,28 @@
 # VetDict 品質検出レポート — exotic_other
 
-- 総レコード数: **289**
+- 総レコード数: **265**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **32** （冗長レコード 39 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **45**
+- 完全一致重複クラスタ: **14** （冗長レコード 15 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **38**
 
 ### 完全一致重複（上位20）
 - 胃潰瘍（豚）（Gastric Ulcers (Porcine)）[exotic_other_0005] / 胃潰瘍（その他）（Gastric Ulcer）[exotic_other_0202]
 - 破傷風（豚）（Tetanus (Porcine)）[exotic_other_0011] / ヤギ破傷風（Tetanus (Goat)）[exotic_other_0115]
 - レプトスピラ症（豚）（Leptospirosis (Porcine)）[exotic_other_0012] / レプトスピラ症（その他）（Leptospirosis）[exotic_other_0149]
-- 腸管寄生虫症（豚）（Intestinal Parasitism (Porcine)）[exotic_other_0013] / 腸管寄生虫症（エキゾチック哺乳類）（Intestinal Parasitism (Exotic Mammal)）[exotic_other_0024] / 腸管寄生虫症（スカンク）（Intestinal Parasitism (Skunk)）[exotic_other_0066] / 腸管寄生虫症（その他）（Intestinal Parasitism）[exotic_other_0147]
-- 代謝性骨疾患（エキゾチック哺乳類）（Metabolic Bone Disease (Exotic Mammal)）[exotic_other_0015] / 代謝性骨疾患（スカンク）（Metabolic Bone Disease (Skunk)）[exotic_other_0065] / 代謝性骨疾患（その他）（Metabolic Bone Disease）[exotic_other_0163]
-- 肝リピドーシス（エキゾチック哺乳類）（Hepatic Lipidosis (Exotic Mammal)）[exotic_other_0016] / 肝リピドーシス（その他）（Hepatic Lipidosis）[exotic_other_0164]
-- 糖尿病（エキゾチック哺乳類）（Diabetes Mellitus (Exotic Mammal)）[exotic_other_0017] / 糖尿病（その他）（Diabetes Mellitus）[exotic_other_0172]
-- 上部気道感染症（エキゾチック哺乳類）（Upper Respiratory Infection (Exotic Mammal)）[exotic_other_0019] / 上部気道感染症（その他）（Upper Respiratory Infection）[exotic_other_0182]
+- 腸管寄生虫症（豚）（Intestinal Parasitism (Porcine)）[exotic_other_0013] / 腸管寄生虫症（エキゾチック哺乳類）（Intestinal Parasitism (Exotic Mammal)）[exotic_other_0024] / 腸管寄生虫症（スカンク）（Intestinal Parasitism (Skunk)）[exotic_other_0066]
+- 代謝性骨疾患（エキゾチック哺乳類）（Metabolic Bone Disease (Exotic Mammal)）[exotic_other_0015] / 代謝性骨疾患（スカンク）（Metabolic Bone Disease (Skunk)）[exotic_other_0065]
 - 肺炎（エキゾチック哺乳類）（Pneumonia (Exotic Mammal)）[exotic_other_0020] / 細菌性肺炎（その他）（Pneumonia (Bacterial)）[exotic_other_0181]
-- 直腸脱（エキゾチック哺乳類）（Rectal Prolapse (Exotic Mammal)）[exotic_other_0025] / 直腸脱（その他）（Rectal Prolapse）[exotic_other_0199]
-- 歯根膿瘍（エキゾチック哺乳類）（Dental Abscess (Exotic Mammal)）[exotic_other_0027] / 歯科膿瘍（その他）（Dental Abscess）[exotic_other_0211]
-- 子宮蓄膿症（エキゾチック哺乳類）（Pyometra (Exotic Mammal)）[exotic_other_0028] / 子宮蓄膿症（その他）（Pyometra）[exotic_other_0234]
-- 難産（エキゾチック哺乳類）（Dystocia (Exotic Mammal)）[exotic_other_0029] / 難産（その他）（Dystocia）[exotic_other_0236]
-- 乳腺腫瘍（エキゾチック哺乳類）（Mammary Tumors (Exotic Mammal)）[exotic_other_0030] / 乳腺腫瘍（その他）（Mammary Tumor）[exotic_other_0237]
 - 犬ジステンパー（アライグマ・スカンク）（Canine Distemper (Raccoon/Skunk)）[exotic_other_0032] / 犬ジステンパー（その他）（Canine Distemper）[exotic_other_0144]
-- 狂犬病（エキゾチック哺乳類）（Rabies (Exotic Mammal)）[exotic_other_0033] / 狂犬病（その他）（Rabies）[exotic_other_0143]
-- 前庭疾患（エキゾチック哺乳類）（Vestibular Disease (Exotic Mammal)）[exotic_other_0034] / 前庭疾患（その他）（Vestibular Disease）[exotic_other_0220]
-- 皮膚糸状菌症（エキゾチック哺乳類）（Dermatophytosis / Ringworm (Exotic Mammal)）[exotic_other_0035] / 皮膚糸状菌症（その他）（Dermatophytosis (Ringworm)）[exotic_other_0187]
-- 接触性皮膚炎（エキゾチック哺乳類）（Contact Dermatitis (Exotic Mammal)）[exotic_other_0038] / 接触性皮膚炎（その他）（Contact Dermatitis）[exotic_other_0191]
-- 肥満症（エキゾチック哺乳類）（Obesity (Exotic Mammal)）[exotic_other_0044] / 肥満症（プレーリードッグ）（Obesity (Prairie Dog)）[exotic_other_0062] / 肥満（エキゾチック）（その他）（Obesity (Exotic)）[exotic_other_0171] / 肥満（その他）（Obesity）[exotic_other_0229]
+- 肥満症（エキゾチック哺乳類）（Obesity (Exotic Mammal)）[exotic_other_0044] / 肥満症（プレーリードッグ）（Obesity (Prairie Dog)）[exotic_other_0062]
+- ペスト（プレーリードッグ）（Plague (Prairie Dog)）[exotic_other_0047] / ペスト（その他）（Plague (Yersinia pestis)）[exotic_other_0155]
+- トキソプラズマ症（有袋類）（Toxoplasmosis (Wallaby/Marsupial)）[exotic_other_0052] / トキソプラズマ症（その他）（Toxoplasmosis）[exotic_other_0150]
+- 尿路結石症（エキゾチック哺乳類）（Urolithiasis (Exotic Mammal)）[exotic_other_0053] / ヤギ尿路結石症（Urolithiasis (Goat)）[exotic_other_0109]
+- 心疾患（エキゾチック哺乳類）（Heart Disease (Exotic Mammal)）[exotic_other_0057] / 心疾患（プレーリードッグ）（Heart Disease (Prairie Dog)）[exotic_other_0063]
+- 脱水（タランチュラ）（Dehydration (Tarantula)）[exotic_other_0067] / 脱水（その他）（Dehydration）[exotic_other_0240]
+- ヤギコクシジウム症（Coccidiosis (Goat)）[exotic_other_0112] / コクシジウム症（その他）（Coccidiosis）[exotic_other_0207]
 
 ### 疾患ファミリー候補（上位15）
-- stem=`dermat` × 14件
-    - 皮膚糸状菌症（エキゾチック哺乳類）（Dermatophytosis / Ringworm (Exotic Mammal)）[exotic_other_0035]
-    - 接触性皮膚炎（エキゾチック哺乳類）（Contact Dermatitis (Exotic Mammal)）[exotic_other_0038]
-    - 寄生虫性皮膚炎（一般エキゾチック）（Parasitic Dermatitis (General Exotic)）[exotic_other_0079]
-    - 豚皮膚炎腎症症候群（Porcine Dermatitis / Nephropathy Syndrome (PDNS)）[exotic_other_0094]
-    - 皮膚糸状菌症（その他）（Dermatophytosis (Ringworm)）[exotic_other_0187]
-    - 接触性皮膚炎（その他）（Contact Dermatitis）[exotic_other_0191]
-    - 皮膚細菌感染（その他）（Dermatological Bacterial Infection）[exotic_other_0268]
-    - 皮膚ウイルス感染（その他）（Dermatological Viral Infection）[exotic_other_0269]
-    - 皮膚真菌感染（その他）（Dermatological Fungal Infection）[exotic_other_0270]
-    - 皮膚寄生虫寄生（その他）（Dermatological Parasitic Infestation）[exotic_other_0271]
-    - 皮膚腫瘍性疾患（その他）（Dermatological Neoplasia）[exotic_other_0272]
-    - 皮膚自己免疫疾患（その他）（Dermatological Autoimmune Disease）[exotic_other_0273]
-    - 皮膚アレルギー疾患（その他）（Dermatological Allergic Disease）[exotic_other_0274]
-    - 慢性皮膚炎（その他）（Chronic Dermatitis）[exotic_other_0275]
 - stem=`porcin` × 14件
     - 豚ストレス症候群（悪性高熱症）（Porcine Stress Syndrome (Malignant Hyperthermia)）[exotic_other_0003]
     - 豚の肥満症（Porcine Obesity）[exotic_other_0006]
@@ -59,6 +38,19 @@
     - ブタ子宮感染症（子宮炎）（Porcine Uterine Infection (Metritis)）[exotic_other_0098]
     - ブタメラノーマ（Porcine Melanoma）[exotic_other_0100]
     - 豚流行性下痢（PED）（Porcine Epidemic Diarrhea (PED)）[exotic_other_0140]
+- stem=`dermat` × 12件
+    - 皮膚糸状菌症（エキゾチック哺乳類）（Dermatophytosis / Ringworm (Exotic Mammal)）[exotic_other_0035]
+    - 接触性皮膚炎（エキゾチック哺乳類）（Contact Dermatitis (Exotic Mammal)）[exotic_other_0038]
+    - 寄生虫性皮膚炎（一般エキゾチック）（Parasitic Dermatitis (General Exotic)）[exotic_other_0079]
+    - 豚皮膚炎腎症症候群（Porcine Dermatitis / Nephropathy Syndrome (PDNS)）[exotic_other_0094]
+    - 皮膚細菌感染（その他）（Dermatological Bacterial Infection）[exotic_other_0268]
+    - 皮膚ウイルス感染（その他）（Dermatological Viral Infection）[exotic_other_0269]
+    - 皮膚真菌感染（その他）（Dermatological Fungal Infection）[exotic_other_0270]
+    - 皮膚寄生虫寄生（その他）（Dermatological Parasitic Infestation）[exotic_other_0271]
+    - 皮膚腫瘍性疾患（その他）（Dermatological Neoplasia）[exotic_other_0272]
+    - 皮膚自己免疫疾患（その他）（Dermatological Autoimmune Disease）[exotic_other_0273]
+    - 皮膚アレルギー疾患（その他）（Dermatological Allergic Disease）[exotic_other_0274]
+    - 慢性皮膚炎（その他）（Chronic Dermatitis）[exotic_other_0275]
 - stem=`ferret` × 12件
     - フェレット副腎疾患（Ferret Adrenal Gland Disease）[exotic_other_0127]
     - フェレットインスリノーマ（Ferret Insulinoma）[exotic_other_0128]
@@ -72,19 +64,6 @@
     - フェレットヘリコバクター胃炎（Ferret Helicobacter Gastritis）[exotic_other_0136]
     - フェレット増殖性腸疾患（Ferret Proliferative Bowel Disease）[exotic_other_0137]
     - フェレット心疾患（心筋症）（Ferret Heart Disease (Cardiomyopathy)）[exotic_other_0138]
-- stem=`respir` × 12件
-    - 上部気道感染症（エキゾチック哺乳類）（Upper Respiratory Infection (Exotic Mammal)）[exotic_other_0019]
-    - 呼吸器感染症（プレーリードッグ）（Respiratory Infection (Prairie Dog)）[exotic_other_0061]
-    - 呼吸器疾患（その他）（Respiratory Disease）[exotic_other_0175]
-    - 上部気道感染症（その他）（Upper Respiratory Infection）[exotic_other_0182]
-    - 呼吸器細菌感染（その他）（Respiratory Bacterial Infection）[exotic_other_0260]
-    - 呼吸器ウイルス感染（その他）（Respiratory Viral Infection）[exotic_other_0261]
-    - 呼吸器真菌感染（その他）（Respiratory Fungal Infection）[exotic_other_0262]
-    - 呼吸器寄生虫疾患（その他）（Respiratory Parasitic Disease）[exotic_other_0263]
-    - 呼吸器腫瘍（その他）（Respiratory Neoplasia）[exotic_other_0264]
-    - 呼吸器炎症性疾患（その他）（Respiratory Inflammatory Disease）[exotic_other_0265]
-    - 下部気道感染（その他）（Lower Respiratory Tract Infection）[exotic_other_0266]
-    - 慢性呼吸器疾患（その他）（Chronic Respiratory Disease）[exotic_other_0267]
 - stem=`gastro` × 11件
     - 消化管うっ滞（Gastrointestinal Stasis）[exotic_other_0021]
     - 伝染性胃腸炎（TGE）（Transmissible Gastroenteritis (TGE)）[exotic_other_0084]
@@ -97,28 +76,29 @@
     - 消化管炎症性疾患（その他）（Gastrointestinal Inflammatory Disease）[exotic_other_0257]
     - 消化管運動障害（その他）（Gastrointestinal Motility Disorder）[exotic_other_0258]
     - 消化管部分閉塞（その他）（Gastrointestinal Obstruction (Partial)）[exotic_other_0259]
-- stem=`parasi` × 11件
+- stem=`respir` × 11件
+    - 上部気道感染症（エキゾチック哺乳類）（Upper Respiratory Infection (Exotic Mammal)）[exotic_other_0019]
+    - 呼吸器感染症（プレーリードッグ）（Respiratory Infection (Prairie Dog)）[exotic_other_0061]
+    - 呼吸器疾患（その他）（Respiratory Disease）[exotic_other_0175]
+    - 呼吸器細菌感染（その他）（Respiratory Bacterial Infection）[exotic_other_0260]
+    - 呼吸器ウイルス感染（その他）（Respiratory Viral Infection）[exotic_other_0261]
+    - 呼吸器真菌感染（その他）（Respiratory Fungal Infection）[exotic_other_0262]
+    - 呼吸器寄生虫疾患（その他）（Respiratory Parasitic Disease）[exotic_other_0263]
+    - 呼吸器腫瘍（その他）（Respiratory Neoplasia）[exotic_other_0264]
+    - 呼吸器炎症性疾患（その他）（Respiratory Inflammatory Disease）[exotic_other_0265]
+    - 下部気道感染（その他）（Lower Respiratory Tract Infection）[exotic_other_0266]
+    - 慢性呼吸器疾患（その他）（Chronic Respiratory Disease）[exotic_other_0267]
+- stem=`parasi` × 10件
     - 腸管寄生虫症（豚）（Intestinal Parasitism (Porcine)）[exotic_other_0013]
     - 腸管寄生虫症（エキゾチック哺乳類）（Intestinal Parasitism (Exotic Mammal)）[exotic_other_0024]
     - 外部寄生虫（ダニ・ノミ・マダニ）（External Parasites (Mites/Fleas/Ticks)）[exotic_other_0036]
     - 腸管寄生虫症（スカンク）（Intestinal Parasitism (Skunk)）[exotic_other_0066]
     - 寄生虫性皮膚炎（一般エキゾチック）（Parasitic Dermatitis (General Exotic)）[exotic_other_0079]
-    - 腸管寄生虫症（その他）（Intestinal Parasitism）[exotic_other_0147]
     - 肝寄生虫疾患（その他）（Hepatic Parasitic Disease）[exotic_other_0248]
     - 消化管寄生虫疾患（その他）（Gastrointestinal Parasitic Disease）[exotic_other_0255]
     - 呼吸器寄生虫疾患（その他）（Respiratory Parasitic Disease）[exotic_other_0263]
     - 皮膚寄生虫寄生（その他）（Dermatological Parasitic Infestation）[exotic_other_0271]
     - 神経系寄生虫疾患（その他）（Neurological Parasitic Disease）[exotic_other_0282]
-- stem=`hepati` × 9件
-    - 肝リピドーシス（エキゾチック哺乳類）（Hepatic Lipidosis (Exotic Mammal)）[exotic_other_0016]
-    - ハリネズミ肝脂肪症（Hedgehog Hepatic Lipidosis）[exotic_other_0121]
-    - 肝リピドーシス（その他）（Hepatic Lipidosis）[exotic_other_0164]
-    - 肝細菌感染症（その他）（Hepatic Bacterial Infection）[exotic_other_0246]
-    - 肝ウイルス感染症（その他）（Hepatic Viral Infection）[exotic_other_0247]
-    - 肝寄生虫疾患（その他）（Hepatic Parasitic Disease）[exotic_other_0248]
-    - 肝線維症（その他）（Hepatic Fibrosis）[exotic_other_0249]
-    - 肝腫瘍性疾患（その他）（Hepatic Neoplasia）[exotic_other_0250]
-    - 肝代謝障害（その他）（Hepatic Metabolic Disorder）[exotic_other_0251]
 - stem=`neopla` × 9件
     - 皮膚腫瘍（エキゾチック哺乳類）（Cutaneous Neoplasia (Exotic Mammal)）[exotic_other_0046]
     - 内臓腫瘍（その他）（Internal Neoplasia）[exotic_other_0168]
@@ -148,6 +128,15 @@
     - 泌尿生殖器細菌感染（その他）（Urogenital Bacterial Infection）[exotic_other_0276]
     - 神経系細菌感染（その他）（Neurological Bacterial Infection）[exotic_other_0280]
     - 眼科細菌感染（その他）（Ophthalmological Bacterial Infection）[exotic_other_0288]
+- stem=`hepati` × 8件
+    - 肝リピドーシス（エキゾチック哺乳類）（Hepatic Lipidosis (Exotic Mammal)）[exotic_other_0016]
+    - ハリネズミ肝脂肪症（Hedgehog Hepatic Lipidosis）[exotic_other_0121]
+    - 肝細菌感染症（その他）（Hepatic Bacterial Infection）[exotic_other_0246]
+    - 肝ウイルス感染症（その他）（Hepatic Viral Infection）[exotic_other_0247]
+    - 肝寄生虫疾患（その他）（Hepatic Parasitic Disease）[exotic_other_0248]
+    - 肝線維症（その他）（Hepatic Fibrosis）[exotic_other_0249]
+    - 肝腫瘍性疾患（その他）（Hepatic Neoplasia）[exotic_other_0250]
+    - 肝代謝障害（その他）（Hepatic Metabolic Disorder）[exotic_other_0251]
 - stem=`hedgeh` × 7件
     - ハリネズミふらつき症候群（WHS）（Hedgehog Wobbly Hedgehog Syndrome (WHS)）[exotic_other_0116]
     - ハリネズミ口腔扁平上皮癌（Hedgehog Oral Squamous Cell Carcinoma）[exotic_other_0117]
@@ -156,14 +145,6 @@
     - ハリネズミ肥満症（Hedgehog Obesity）[exotic_other_0120]
     - ハリネズミ肝脂肪症（Hedgehog Hepatic Lipidosis）[exotic_other_0121]
     - ハリネズミ心筋症（Hedgehog Cardiomyopathy）[exotic_other_0122]
-- stem=`obesit` × 7件
-    - 豚の肥満症（Porcine Obesity）[exotic_other_0006]
-    - 肥満症（エキゾチック哺乳類）（Obesity (Exotic Mammal)）[exotic_other_0044]
-    - 肥満症（プレーリードッグ）（Obesity (Prairie Dog)）[exotic_other_0062]
-    - スカンクの肥満症（Skunk Obesity）[exotic_other_0064]
-    - ハリネズミ肥満症（Hedgehog Obesity）[exotic_other_0120]
-    - 肥満（エキゾチック）（その他）（Obesity (Exotic)）[exotic_other_0171]
-    - 肥満（その他）（Obesity）[exotic_other_0229]
 - stem=`stres` × 6件
     - 豚ストレス症候群（悪性高熱症）（Porcine Stress Syndrome (Malignant Hyperthermia)）[exotic_other_0003]
     - 熱中症（Heat Stress / Heat Stroke）[exotic_other_0042]
@@ -184,14 +165,20 @@
     - フェレット胃異物（Ferret Gastric Foreign Body）[exotic_other_0135]
     - フェレットヘリコバクター胃炎（Ferret Helicobacter Gastritis）[exotic_other_0136]
     - 胃潰瘍（その他）（Gastric Ulcer）[exotic_other_0202]
+- stem=`heart` × 5件
+    - 心疾患（エキゾチック哺乳類）（Heart Disease (Exotic Mammal)）[exotic_other_0057]
+    - 心疾患（プレーリードッグ）（Heart Disease (Prairie Dog)）[exotic_other_0063]
+    - フェレット心疾患（心筋症）（Ferret Heart Disease (Cardiomyopathy)）[exotic_other_0138]
+    - 桑実心臓病（ビタミンE/セレン欠乏症）（Mulberry Heart Disease (Vitamin E/Selenium Deficiency)）[exotic_other_0141]
+    - うっ血性心不全（その他）（Congestive Heart Failure）[exotic_other_0226]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **98**
-- 投与量あり: **191**
+- 投与量なし（見出しのみ）: **88**
+- 投与量あり: **177**
 
 ### 投与量なし（上位30）
 - ディッピーピッグ症候群（Dippity Pig Syndrome）[exotic_other_0002] — ja:58字 / en:115字
@@ -202,20 +189,20 @@
 - 代謝性骨疾患（エキゾチック哺乳類）（Metabolic Bone Disease (Exotic Mammal)）[exotic_other_0015] — ja:602字 / en:502字
 - 糖尿病（エキゾチック哺乳類）（Diabetes Mellitus (Exotic Mammal)）[exotic_other_0017] — ja:467字 / en:620字
 - 低カルシウム血症（エキゾチック哺乳類）（Hypocalcemia (Exotic Mammal)）[exotic_other_0018] — ja:321字 / en:189字
-- 直腸脱（エキゾチック哺乳類）（Rectal Prolapse (Exotic Mammal)）[exotic_other_0025] — ja:333字 / en:418字
+- 直腸脱（エキゾチック哺乳類）（Rectal Prolapse (Exotic Mammal)）[exotic_other_0025] — ja:563字 / en:533字
 - 不正咬合（エキゾチック哺乳類）（Dental Malocclusion (Exotic Mammal)）[exotic_other_0026] — ja:195字 / en:158字
-- 乳腺腫瘍（エキゾチック哺乳類）（Mammary Tumors (Exotic Mammal)）[exotic_other_0030] — ja:292字 / en:436字
+- 乳腺腫瘍（エキゾチック哺乳類）（Mammary Tumors (Exotic Mammal)）[exotic_other_0030] — ja:665字 / en:481字
 - 犬ジステンパー（アライグマ・スカンク）（Canine Distemper (Raccoon/Skunk)）[exotic_other_0032] — ja:718字 / en:595字
-- 狂犬病（エキゾチック哺乳類）（Rabies (Exotic Mammal)）[exotic_other_0033] — ja:311字 / en:95字
-- 前庭疾患（エキゾチック哺乳類）（Vestibular Disease (Exotic Mammal)）[exotic_other_0034] — ja:895字 / en:694字
+- 狂犬病（エキゾチック哺乳類）（Rabies (Exotic Mammal)）[exotic_other_0033] — ja:311字 / en:238字
 - 皮下膿瘍（エキゾチック哺乳類）（Subcutaneous Abscess (Exotic Mammal)）[exotic_other_0037] — ja:590字 / en:496字
 - ビタミンC欠乏症（Vitamin C Deficiency (Scurvy-like)）[exotic_other_0039] — ja:410字 / en:535字
 - ビタミンA欠乏症（エキゾチック哺乳類）（Vitamin A Deficiency (Exotic Mammal)）[exotic_other_0040] — ja:432字 / en:156字
 - 低温ストレス・低体温症（Hypothermia / Cold Stress）[exotic_other_0043] — ja:723字 / en:558字
-- 肥満症（エキゾチック哺乳類）（Obesity (Exotic Mammal)）[exotic_other_0044] — ja:725字 / en:596字
+- 肥満症（エキゾチック哺乳類）（Obesity (Exotic Mammal)）[exotic_other_0044] — ja:725字 / en:1003字
+- リンパ腫（エキゾチック哺乳類）（Lymphoma (Exotic Mammal)）[exotic_other_0045] — ja:665字 / en:481字
 - ストレス性ミオパチー（捕獲ミオパチー）（Stress Myopathy (Capture Myopathy)）[exotic_other_0051] — ja:326字 / en:496字
 - 腎疾患（エキゾチック哺乳類）（Renal Disease (Exotic Mammal)）[exotic_other_0054] — ja:721字 / en:547字
-- 副腎疾患（エキゾチック哺乳類）（Adrenal Disease (Exotic Mammal)）[exotic_other_0056] — ja:344字 / en:154字
+- 副腎疾患（エキゾチック哺乳類）（Adrenal Disease (Exotic Mammal)）[exotic_other_0056] — ja:344字 / en:650字
 - 心疾患（エキゾチック哺乳類）（Heart Disease (Exotic Mammal)）[exotic_other_0057] — ja:321字 / en:419字
 - 牙の問題（ミニブタ）（Tusk Problems (Mini Pig)）[exotic_other_0059] — ja:175字 / en:160字
 - 歯牙腫（プレーリードッグ）（Odontoma (Prairie Dog)）[exotic_other_0060] — ja:116字 / en:147字
@@ -226,8 +213,8 @@
 - 腸管寄生虫症（スカンク）（Intestinal Parasitism (Skunk)）[exotic_other_0066] — ja:307字 / en:193字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **215** 疾患 → ガード後残存: **0**
-- 犬猫論文の他種への自動紐付け（旧・未ガード）: **24** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **198** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **17** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 豚丹毒（Erysipelas）[exotic_other_0000] → ペニシリンG, グルコサミン・コンドロイチン
@@ -266,12 +253,9 @@
 - ハリネズミふらつき症候群（WHS）（Hedgehog Wobbly Hedgehog Syndrome (WHS)）[exotic_other_0116] → key: wobbly hedgehog syndrome (whs)
 - フェレットインスリノーマ（Ferret Insulinoma）[exotic_other_0128] → key: insulinoma
 - フェレットリンパ腫（Ferret Lymphoma）[exotic_other_0129] → key: lymphoma
-- 腎疾患（その他）（Renal Disease）[exotic_other_0165] → key: adrenal disease
-- 糖尿病（その他）（Diabetes Mellitus）[exotic_other_0172] → key: diabetes mellitus
-- 副腎疾患（その他）（Adrenal Disease）[exotic_other_0173] → key: adrenal disease
-- 皮膚糸状菌症（その他）（Dermatophytosis (Ringworm)）[exotic_other_0187] → key: dermatophytosis
 - 切歯不正咬合（その他）（Incisor Malocclusion）[exotic_other_0209] → key: malocclusion
 - 慢性腎臓病（その他）（Chronic Kidney Disease）[exotic_other_0232] → key: chronic kidney disease
+- 貧血（その他）（Anemia）[exotic_other_0239] → key: immune-mediated hemolytic anemia
 
 ## T109 機械翻訳臭（置換辞書）
 - ヒット総数: **0**（safe 0 / review 0）

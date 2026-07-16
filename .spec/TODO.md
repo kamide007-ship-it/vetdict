@@ -135,6 +135,19 @@
       - `.spec/FISH_CONSOLIDATION_REVIEW.md`（**統合対象ゼロ**。45件・重複0・過分割0。T103対象外）
       - 適用は全て未実行。auto は追認可否のみ、B は承認後 `_CURATED_MERGE["<species>"]` に追記し
         `build_canonical.py <species> --apply`。**このバッチでは未適用（✅/❌/✏️ 待ち）。**
+- [x] **残り16種の firm-B 統合を一括適用（承認「全て承認」）** — degu/rabbit/cat/horse に続き、
+      ferret/hamster/guinea_pig/chinchilla/sugar_glider/hedgehog/dog/bird/parakeet/parrot/
+      reptile/tortoise/snake/lizard/amphibian/exotic_other の**各ワークシートの firm 行のみ**を
+      `_CURATED_MERGE` に追記し `build_canonical.py <sp> --apply`。全21種で T103 適用完了。
+      - **配信ビュー実測: 7,094 → 6,574 served**（16種で −262、完全重複クラスタ served 338→**125**）。
+      - builder 拡張: curated グループが auto クラスタを**延長**できるよう修正（例 `0002←0093,0149`。
+        既適用 rabbit/cat/horse はバイト同一で回帰なし＝挙動保存を検証）。冪等（連続適用でバイト同一）。
+      - 物理削除ゼロ・301リダイレクト・サイドカー編集で即ロールバック可。dedup+canonical 適用後の
+        重複スラッグ 0（全種）。回帰スイート 280 pass・ruff clean。
+      - **明示的に保留（✏️要確認 / C分離維持）**: 親子・形態病型・umbrella×病因・別病態の各行は
+        **未統合のまま**（例 dog アトピー⊂アレルギー性・Wobbler病型・HCC massive、chinchilla 巨大結腸症、
+        parrot/exotic 肺炎 umbrella、bird 鉛神経型/卵停滞境界、snake Sunshine/Reptarena・四肢/甲羅骨折の
+        リネーム、tortoise/lizard の✏️群）。獣医の1件ずつの ✅ で追加適用可。
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**
 - [x] **T105/T106 fail-closed 公開ゲート＋ワークリスト**（main, merged）→ `.spec/T105_T106_DOSAGE_GATE.md`

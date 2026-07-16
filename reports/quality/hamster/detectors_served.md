@@ -1,35 +1,22 @@
 # VetDict 品質検出レポート — hamster
 
-- 総レコード数: **312**
+- 総レコード数: **289**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **22** （冗長レコード 32 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **54**
+- 完全一致重複クラスタ: **7** （冗長レコード 9 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **46**
 
 ### 完全一致重複（上位20）
-- ウェットテイル（増殖性回腸炎）（Wet Tail (Proliferative Ileitis)）[hamster_0000] / ウェットテイル（慢性型）（Wet Tail - Chronic Form）[hamster_0155] / ウェットテイル（新生児型）（Wet Tail - Neonatal Form）[hamster_0156]
-- ティザー病（Tyzzer's Disease）[hamster_0001] / ティザー病（不顕性）（Tyzzer's Disease - Subclinical）[hamster_0174]
-- 条虫症（膜様条虫）（Tapeworm Infection (Hymenolepis)）[hamster_0007] / 条虫症（ロデントレピス・ナナ）（Tapeworm (Rodentolepis nana)）[hamster_0148]
-- 肺炎（Pneumonia）[hamster_0017] / 細菌性肺炎（ハムスター）（Pneumonia (Bacterial)）[hamster_0210]
-- ニキビダニ症（Demodex Mange）[hamster_0020] / ニキビダニ症（局所型）（Demodex Mange - Localized）[hamster_0160] / ニキビダニ症（全身型）（Demodex Mange - Generalized）[hamster_0161]
-- 皮膚糸状菌症（Ringworm (Dermatophytosis)）[hamster_0023] / 白癬（トリコフィトン）（ハムスター）（Ringworm (Trichophyton)）[hamster_0269]
-- 脱毛症（非寄生虫性）（Alopecia (Non-parasitic)）[hamster_0026] / 脱毛症（ハムスター）（Alopecia）[hamster_0196]
-- 皮膚腫瘍（Skin Tumor (General)）[hamster_0030] / 皮膚腫瘍（非特異的）（ハムスター）（Skin Tumor (Non-specific)）[hamster_0283]
-- クッシング病（Cushing's Disease）[hamster_0038] / クッシング病（初期）（Cushing's Disease - Early Stage）[hamster_0162] / クッシング病（進行期）（Cushing's Disease - Advanced）[hamster_0163] / クッシング病（副腎皮質機能亢進症）（ハムスター）（Cushing's Disease (Hyperadrenocorticism)）[hamster_0191]
 - アミロイドーシス（Amyloidosis）[hamster_0041] / アミロイドーシス（腎型）（Amyloidosis - Renal）[hamster_0166] / アミロイドーシス（肝型）（Amyloidosis - Hepatic）[hamster_0167]
-- 心房血栓症（Atrial Thrombosis）[hamster_0045] / 心房血栓症（急性）（Atrial Thrombosis - Acute）[hamster_0164] / 心房血栓症（慢性）（Atrial Thrombosis - Chronic）[hamster_0165]
-- ケージ麻痺（Cage Paralysis）[hamster_0049] / ケージ麻痺（初期）（Cage Paralysis - Early）[hamster_0172] / ケージ麻痺（進行期）（Cage Paralysis - Advanced）[hamster_0173] / ケージ麻痺（VE/Se欠乏）（ハムスター）（Cage Paralysis (Vitamin E/Selenium Deficiency)）[hamster_0238]
 - 眼球突出（Eye Proptosis）[hamster_0056] / 眼球突出（ハムスター）（Exophthalmos）[hamster_0228]
-- ハムスターポリオーマウイルス（Hamster Polyomavirus）[hamster_0059] / ハムスターポリオーマウイルス（臨床型）（Hamster Polyomavirus - Clinical Form）[hamster_0157] / ハムスターポリオーマウイルス（不顕性キャリア）（Hamster Polyomavirus - Subclinical Carrier）[hamster_0158]
-- リンパ球性脈絡髄膜炎（Lymphocytic Choriomeningitis (LCMV)）[hamster_0060] / リンパ球性脈絡髄膜炎（急性型）（Lymphocytic Choriomeningitis (LCMV) - Acute）[hamster_0159]
-- 熱中症（Heatstroke）[hamster_0068] / 熱射病（神経型）（ハムスター）（Heatstroke (Neurological)）[hamster_0221]
 - 擬似冬眠（Hibernation / Torpor）[hamster_0069] / 擬似冬眠（寒冷誘発性休眠）（Pseudohibernation (Cold-Induced Torpor)）[hamster_0187]
 - 冬眠症候群（Hibernation Syndrome）[hamster_0086] / 冬眠症候群（軽度）（Hibernation Syndrome - Mild）[hamster_0170] / 冬眠症候群（重度）（Hibernation Syndrome - Severe）[hamster_0171]
 - 増殖性回腸炎（慢性型）（Proliferative Ileitis (Chronic Form)）[hamster_0087] / 増殖性回腸炎（ウェットテイル）（Proliferative Ileitis (Wet Tail)）[hamster_0186]
 - 腸閉塞（糞便嵌頓）（Intestinal Impaction）[hamster_0092] / 腸閉塞（ハムスター）（Intestinal Obstruction）[hamster_0202]
+- 多発性嚢胞性疾患（肝型）（Polycystic Disease - Hepatic）[hamster_0168] / 多発性嚢胞性疾患（腎型）（Polycystic Disease - Renal）[hamster_0169]
 
 ### 疾患ファミリー候補（上位15）
-- stem=`tumor` × 19件
+- stem=`tumor` × 18件
     - 乳腺腫瘍（Mammary Tumor）[hamster_0028]
     - 皮膚腫瘍（Skin Tumor (General)）[hamster_0030]
     - 副腎腫瘍（Adrenal Tumor）[hamster_0031]
@@ -48,7 +35,6 @@
     - 側腹腺腫瘍（ハムスター）（Flank Gland Tumor）[hamster_0193]
     - 甲状腺腫瘍（ハムスター）（Thyroid Tumor）[hamster_0241]
     - 膵臓腫瘍（ハムスター）（Pancreatic Tumor）[hamster_0281]
-    - 皮膚腫瘍（非特異的）（ハムスター）（Skin Tumor (Non-specific)）[hamster_0283]
 - stem=`absces` × 8件
     - 頬袋膿瘍（Cheek Pouch Abscess）[hamster_0014]
     - 歯根膿瘍（Dental Abscess）[hamster_0016]
@@ -82,13 +68,6 @@
     - 心アミロイドーシス（Cardiac Amyloidosis）[hamster_0138]
     - アミロイドーシス（腎型）（Amyloidosis - Renal）[hamster_0166]
     - アミロイドーシス（肝型）（Amyloidosis - Hepatic）[hamster_0167]
-- stem=`cage` × 6件
-    - ケージ麻痺（Cage Paralysis）[hamster_0049]
-    - ケージ攻撃症候群（Cage Aggression Syndrome）[hamster_0144]
-    - ケージ麻痺（初期）（Cage Paralysis - Early）[hamster_0172]
-    - ケージ麻痺（進行期）（Cage Paralysis - Advanced）[hamster_0173]
-    - ケージ麻痺（VE/Se欠乏）（ハムスター）（Cage Paralysis (Vitamin E/Selenium Deficiency)）[hamster_0238]
-    - ケージ内攻撃行動（ハムスター）（Cage Aggression）[hamster_0255]
 - stem=`defici` × 6件
     - ビタミン欠乏症（Vitamin Deficiency）[hamster_0070]
     - ビタミンE欠乏症（Vitamin E Deficiency）[hamster_0115]
@@ -110,13 +89,6 @@
     - アミロイドーシス（肝型）（Amyloidosis - Hepatic）[hamster_0167]
     - 多発性嚢胞性疾患（肝型）（Polycystic Disease - Hepatic）[hamster_0168]
     - 肝嚢胞（ハムスター）（Hepatic Cyst）[hamster_0285]
-- stem=`pneumo` × 6件
-    - 肺炎（Pneumonia）[hamster_0017]
-    - ニューモシスチス肺炎（Pneumocystis Pneumonia）[hamster_0082]
-    - 気胸（Pneumothorax）[hamster_0116]
-    - 細菌性肺炎（ハムスター）（Pneumonia (Bacterial)）[hamster_0210]
-    - 誤嚥性肺炎（ハムスター）（Aspiration Pneumonia）[hamster_0215]
-    - ニューモシスチス感染（ハムスター）（Pneumocystis Infection）[hamster_0270]
 - stem=`pouch` × 6件
     - 頬袋閉塞（Cheek Pouch Impaction）[hamster_0012]
     - 頬袋脱（Cheek Pouch Prolapse）[hamster_0013]
@@ -136,31 +108,42 @@
     - 指骨骨折（Digit Fracture）[hamster_0140]
     - 四肢骨折（ハムスター）（Fracture (Limb)）[hamster_0237]
     - 脊椎骨折（ハムスター）（Spinal Fracture）[hamster_0239]
-- stem=`hamste` × 5件
-    - ハムスターポリオーマウイルス（Hamster Polyomavirus）[hamster_0059]
-    - ハムスターポリオーマウイルス（臨床型）（Hamster Polyomavirus - Clinical Form）[hamster_0157]
-    - ハムスターポリオーマウイルス（不顕性キャリア）（Hamster Polyomavirus - Subclinical Carrier）[hamster_0158]
-    - ハムスター心房血栓症・うっ血性心不全（Hamster Atrial Thrombosis / Congestive Heart Failure）[hamster_0188]
-    - ハムスター糖尿病（ハムスター）（Hamster Diabetes Mellitus）[hamster_0190]
 - stem=`hibern` × 5件
     - 擬似冬眠（Hibernation / Torpor）[hamster_0069]
     - 冬眠症候群（Hibernation Syndrome）[hamster_0086]
     - 冬眠症候群（軽度）（Hibernation Syndrome - Mild）[hamster_0170]
     - 冬眠症候群（重度）（Hibernation Syndrome - Severe）[hamster_0171]
     - 冬眠企図（休眠）（ハムスター）（Hibernation Attempt (Torpor)）[hamster_0189]
+- stem=`intest` × 5件
+    - 腸管腫瘍（Intestinal Tumor）[hamster_0033]
+    - 腸捻転（Intestinal Torsion）[hamster_0091]
+    - 腸閉塞（糞便嵌頓）（Intestinal Impaction）[hamster_0092]
+    - 腸閉塞（ハムスター）（Intestinal Obstruction）[hamster_0202]
+    - 腸管寄生虫症（一般）（ハムスター）（Intestinal Parasitism (General)）[hamster_0268]
+- stem=`pneumo` × 5件
+    - 肺炎（Pneumonia）[hamster_0017]
+    - ニューモシスチス肺炎（Pneumocystis Pneumonia）[hamster_0082]
+    - 気胸（Pneumothorax）[hamster_0116]
+    - 誤嚥性肺炎（ハムスター）（Aspiration Pneumonia）[hamster_0215]
+    - ニューモシスチス感染（ハムスター）（Pneumocystis Infection）[hamster_0270]
+- stem=`prolap` × 5件
+    - 直腸脱（Rectal Prolapse）[hamster_0004]
+    - 頬袋脱（Cheek Pouch Prolapse）[hamster_0013]
+    - 子宮脱（Uterine Prolapse）[hamster_0104]
+    - 肛門脱（ハムスター）（Anal Prolapse）[hamster_0267]
+    - 総排泄腔脱（ハムスター）（Cloacal Prolapse）[hamster_0287]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **29**
-- 投与量あり: **283**
+- 投与量なし（見出しのみ）: **27**
+- 投与量あり: **262**
 
 ### 投与量なし（上位30）
 - 頬袋閉塞（Cheek Pouch Impaction）[hamster_0012] — ja:348字 / en:405字
 - 不正咬合（Dental Malocclusion）[hamster_0015] — ja:177字 / en:158字
-- 皮膚腫瘍（Skin Tumor (General)）[hamster_0030] — ja:53字 / en:136字
 - 肥満（Obesity）[hamster_0039] — ja:485字 / en:597字
 - アミロイドーシス（Amyloidosis）[hamster_0041] — ja:77字 / en:182字
 - 心筋症（Cardiomyopathy）[hamster_0043] — ja:514字 / en:648字
@@ -179,7 +162,6 @@
 - 毛包虫症（デモデックス・クリセティ）（Fur Mites (Demodex criceti)）[hamster_0147] — ja:425字 / en:721字
 - 内部寄生虫症（混合感染）（Endoparasites (Mixed Infection)）[hamster_0149] — ja:173字 / en:204字
 - 亜鉛中毒（Zinc Toxicosis）[hamster_0152] — ja:658字 / en:650字
-- ニキビダニ症（局所型）（Demodex Mange - Localized）[hamster_0160] — ja:172字 / en:485字
 - 多発性嚢胞性疾患（腎型）（Polycystic Disease - Renal）[hamster_0169] — ja:65字 / en:136字
 - 冬眠症候群（軽度）（Hibernation Syndrome - Mild）[hamster_0170] — ja:913字 / en:2360字
 - 冬眠症候群（重度）（Hibernation Syndrome - Severe）[hamster_0171] — ja:199字 / en:158字
@@ -189,7 +171,7 @@
 - 蛋白質栄養不良（ハムスター）（Protein Malnutrition）[hamster_0314] — ja:685字 / en:1388字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **101** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **96** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **15** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
@@ -198,6 +180,7 @@
 - 下痢（非特異的）（Diarrhea (Non-specific)）[hamster_0002] → ロニダゾール
 - クロストリジウム感染症（Clostridiosis）[hamster_0009] → ロニダゾール, バンコマイシン
 - 頬袋膿瘍（Cheek Pouch Abscess）[hamster_0014] → クロルヘキシジン
+- ニキビダニ症（Demodex Mange）[hamster_0020] → クロルヘキシジン, セラメクチン（レボリューション）
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[hamster_0023] → グリセオフルビン, ミコナゾール, グリセオフルビン
 - 皮膚膿瘍（Skin Abscess）[hamster_0024] → クロルヘキシジン
 - ノミ寄生（Flea Infestation）[hamster_0027] → ペルメトリン
@@ -208,11 +191,10 @@
 - 緑内障（Glaucoma）[hamster_0054] → ドルゾラミド
 - 結膜炎（Conjunctivitis）[hamster_0055] → オフロキサシン点眼
 - 外耳炎・中耳炎（Otitis）[hamster_0058] → クロルヘキシジン
+- リンパ球性脈絡髄膜炎（Lymphocytic Choriomeningitis (LCMV)）[hamster_0060] → クロルヘキシジン
 - 変形性関節症（Osteoarthritis）[hamster_0064] → グルコサミン・コンドロイチン
 - 子宮蓄膿症（Pyometra）[hamster_0065] → メデトミジン, デクスメデトミジン, ロニダゾール
 - 難産（Dystocia）[hamster_0066] → オキシトシン, グルコン酸カルシウム
-- 臭腺炎（Scent Gland Inflammation）[hamster_0075] → ムピロシン, クロルヘキシジン, フシジン酸
-- 脾腫（Splenomegaly）[hamster_0078] → ドキソルビシン
 
 ### 犬猫論文が他種に自動紐付け（上位20）
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[hamster_0023] → key: dermatophytosis

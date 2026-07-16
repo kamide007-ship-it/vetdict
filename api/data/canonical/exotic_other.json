@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 292,
-    "merge_clusters": 3,
-    "records_merged_away": 3,
+    "merge_clusters": 26,
+    "records_merged_away": 27,
     "archived": 0,
-    "served_after": 289
+    "served_after": 265
   },
   "merges": [
     {
@@ -63,6 +63,449 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0016",
+        "slug": "hepatic-lipidosis-exotic-mammal",
+        "name": "Hepatic Lipidosis (Exotic Mammal)",
+        "name_ja": "肝リピドーシス（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0164",
+          "slug": "hepatic-lipidosis",
+          "name": "Hepatic Lipidosis",
+          "name_ja": "肝リピドーシス（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0017",
+        "slug": "diabetes-mellitus-exotic-mammal",
+        "name": "Diabetes Mellitus (Exotic Mammal)",
+        "name_ja": "糖尿病（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0172",
+          "slug": "diabetes-mellitus",
+          "name": "Diabetes Mellitus",
+          "name_ja": "糖尿病（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0019",
+        "slug": "upper-respiratory-infection-exotic-mammal",
+        "name": "Upper Respiratory Infection (Exotic Mammal)",
+        "name_ja": "上部気道感染症（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0182",
+          "slug": "upper-respiratory-infection",
+          "name": "Upper Respiratory Infection",
+          "name_ja": "上部気道感染症（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0025",
+        "slug": "rectal-prolapse-exotic-mammal",
+        "name": "Rectal Prolapse (Exotic Mammal)",
+        "name_ja": "直腸脱（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0199",
+          "slug": "rectal-prolapse",
+          "name": "Rectal Prolapse",
+          "name_ja": "直腸脱（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0027",
+        "slug": "dental-abscess-exotic-mammal",
+        "name": "Dental Abscess (Exotic Mammal)",
+        "name_ja": "歯根膿瘍（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0211",
+          "slug": "dental-abscess",
+          "name": "Dental Abscess",
+          "name_ja": "歯科膿瘍（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0028",
+        "slug": "pyometra-exotic-mammal",
+        "name": "Pyometra (Exotic Mammal)",
+        "name_ja": "子宮蓄膿症（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0234",
+          "slug": "pyometra",
+          "name": "Pyometra",
+          "name_ja": "子宮蓄膿症（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0029",
+        "slug": "dystocia-exotic-mammal",
+        "name": "Dystocia (Exotic Mammal)",
+        "name_ja": "難産（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0236",
+          "slug": "dystocia",
+          "name": "Dystocia",
+          "name_ja": "難産（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0030",
+        "slug": "mammary-tumors-exotic-mammal",
+        "name": "Mammary Tumors (Exotic Mammal)",
+        "name_ja": "乳腺腫瘍（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0237",
+          "slug": "mammary-tumor",
+          "name": "Mammary Tumor",
+          "name_ja": "乳腺腫瘍（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0033",
+        "slug": "rabies-exotic-mammal",
+        "name": "Rabies (Exotic Mammal)",
+        "name_ja": "狂犬病（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0143",
+          "slug": "rabies",
+          "name": "Rabies",
+          "name_ja": "狂犬病（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0034",
+        "slug": "vestibular-disease-exotic-mammal",
+        "name": "Vestibular Disease (Exotic Mammal)",
+        "name_ja": "前庭疾患（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0220",
+          "slug": "vestibular-disease",
+          "name": "Vestibular Disease",
+          "name_ja": "前庭疾患（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0035",
+        "slug": "dermatophytosis-ringworm-exotic-mammal",
+        "name": "Dermatophytosis / Ringworm (Exotic Mammal)",
+        "name_ja": "皮膚糸状菌症（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0187",
+          "slug": "dermatophytosis-ringworm",
+          "name": "Dermatophytosis (Ringworm)",
+          "name_ja": "皮膚糸状菌症（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0038",
+        "slug": "contact-dermatitis-exotic-mammal",
+        "name": "Contact Dermatitis (Exotic Mammal)",
+        "name_ja": "接触性皮膚炎（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0191",
+          "slug": "contact-dermatitis",
+          "name": "Contact Dermatitis",
+          "name_ja": "接触性皮膚炎（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0045",
+        "slug": "lymphoma-exotic-mammal",
+        "name": "Lymphoma (Exotic Mammal)",
+        "name_ja": "リンパ腫（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0238",
+          "slug": "lymphoma",
+          "name": "Lymphoma",
+          "name_ja": "リンパ腫（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0046",
+        "slug": "cutaneous-neoplasia-exotic-mammal",
+        "name": "Cutaneous Neoplasia (Exotic Mammal)",
+        "name_ja": "皮膚腫瘍（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0167",
+          "slug": "skin-tumor",
+          "name": "Skin Tumor",
+          "name_ja": "皮膚腫瘍（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0048",
+        "slug": "tularemia-exotic-mammal",
+        "name": "Tularemia (Exotic Mammal)",
+        "name_ja": "野兎病（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0154",
+          "slug": "tularemia",
+          "name": "Tularemia",
+          "name_ja": "野兎病（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0049",
+        "slug": "salmonellosis-exotic-mammal",
+        "name": "Salmonellosis (Exotic Mammal)",
+        "name_ja": "サルモネラ症（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0203",
+          "slug": "salmonellosis",
+          "name": "Salmonellosis",
+          "name_ja": "サルモネラ症（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0054",
+        "slug": "renal-disease-exotic-mammal",
+        "name": "Renal Disease (Exotic Mammal)",
+        "name_ja": "腎疾患（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0165",
+          "slug": "renal-disease",
+          "name": "Renal Disease",
+          "name_ja": "腎疾患（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0056",
+        "slug": "adrenal-disease-exotic-mammal",
+        "name": "Adrenal Disease (Exotic Mammal)",
+        "name_ja": "副腎疾患（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0173",
+          "slug": "adrenal-disease",
+          "name": "Adrenal Disease",
+          "name_ja": "副腎疾患（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0024",
+        "slug": "intestinal-parasitism-exotic-mammal",
+        "name": "Intestinal Parasitism (Exotic Mammal)",
+        "name_ja": "腸管寄生虫症（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0147",
+          "slug": "intestinal-parasitism",
+          "name": "Intestinal Parasitism",
+          "name_ja": "腸管寄生虫症（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0015",
+        "slug": "metabolic-bone-disease-exotic-mammal",
+        "name": "Metabolic Bone Disease (Exotic Mammal)",
+        "name_ja": "代謝性骨疾患（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0163",
+          "slug": "metabolic-bone-disease",
+          "name": "Metabolic Bone Disease",
+          "name_ja": "代謝性骨疾患（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0053",
+        "slug": "urolithiasis-exotic-mammal",
+        "name": "Urolithiasis (Exotic Mammal)",
+        "name_ja": "尿路結石症（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0233",
+          "slug": "urolithiasis",
+          "name": "Urolithiasis",
+          "name_ja": "尿路結石症（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0057",
+        "slug": "heart-disease-exotic-mammal",
+        "name": "Heart Disease (Exotic Mammal)",
+        "name_ja": "心疾患（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0174",
+          "slug": "cardiac-disease",
+          "name": "Cardiac Disease",
+          "name_ja": "心疾患（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "exotic_other_0044",
+        "slug": "obesity-exotic-mammal",
+        "name": "Obesity (Exotic Mammal)",
+        "name_ja": "肥満症（エキゾチック哺乳類）"
+      },
+      "merged": [
+        {
+          "id": "exotic_other_0171",
+          "slug": "obesity-exotic",
+          "name": "Obesity (Exotic)",
+          "name_ja": "肥満（エキゾチック）（その他）"
+        },
+        {
+          "id": "exotic_other_0229",
+          "slug": "obesity",
+          "name": "Obesity",
+          "name_ja": "肥満（その他）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
@@ -178,60 +621,6 @@
         ]
       },
       {
-        "base": "Hepatic Lipidosis (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0016",
-            "slug": "hepatic-lipidosis-exotic-mammal",
-            "name": "Hepatic Lipidosis (Exotic Mammal)",
-            "name_ja": "肝リピドーシス（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0164",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Diabetes Mellitus (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0017",
-            "slug": "diabetes-mellitus-exotic-mammal",
-            "name": "Diabetes Mellitus (Exotic Mammal)",
-            "name_ja": "糖尿病（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0172",
-            "slug": "diabetes-mellitus",
-            "name": "Diabetes Mellitus",
-            "name_ja": "糖尿病（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Upper Respiratory Infection (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0019",
-            "slug": "upper-respiratory-infection-exotic-mammal",
-            "name": "Upper Respiratory Infection (Exotic Mammal)",
-            "name_ja": "上部気道感染症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0182",
-            "slug": "upper-respiratory-infection",
-            "name": "Upper Respiratory Infection",
-            "name_ja": "上部気道感染症（その他）"
-          }
-        ]
-      },
-      {
         "base": "Pneumonia (Exotic Mammal)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -250,96 +639,6 @@
         ]
       },
       {
-        "base": "Rectal Prolapse (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0025",
-            "slug": "rectal-prolapse-exotic-mammal",
-            "name": "Rectal Prolapse (Exotic Mammal)",
-            "name_ja": "直腸脱（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0199",
-            "slug": "rectal-prolapse",
-            "name": "Rectal Prolapse",
-            "name_ja": "直腸脱（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Dental Abscess (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0027",
-            "slug": "dental-abscess-exotic-mammal",
-            "name": "Dental Abscess (Exotic Mammal)",
-            "name_ja": "歯根膿瘍（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0211",
-            "slug": "dental-abscess",
-            "name": "Dental Abscess",
-            "name_ja": "歯科膿瘍（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Pyometra (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0028",
-            "slug": "pyometra-exotic-mammal",
-            "name": "Pyometra (Exotic Mammal)",
-            "name_ja": "子宮蓄膿症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0234",
-            "slug": "pyometra",
-            "name": "Pyometra",
-            "name_ja": "子宮蓄膿症（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Dystocia (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0029",
-            "slug": "dystocia-exotic-mammal",
-            "name": "Dystocia (Exotic Mammal)",
-            "name_ja": "難産（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0236",
-            "slug": "dystocia",
-            "name": "Dystocia",
-            "name_ja": "難産（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Mammary Tumors (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0030",
-            "slug": "mammary-tumors-exotic-mammal",
-            "name": "Mammary Tumors (Exotic Mammal)",
-            "name_ja": "乳腺腫瘍（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0237",
-            "slug": "mammary-tumor",
-            "name": "Mammary Tumor",
-            "name_ja": "乳腺腫瘍（その他）"
-          }
-        ]
-      },
-      {
         "base": "Canine Distemper (Raccoon/Skunk)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -354,78 +653,6 @@
             "slug": "canine-distemper",
             "name": "Canine Distemper",
             "name_ja": "犬ジステンパー（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Rabies (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0033",
-            "slug": "rabies-exotic-mammal",
-            "name": "Rabies (Exotic Mammal)",
-            "name_ja": "狂犬病（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0143",
-            "slug": "rabies",
-            "name": "Rabies",
-            "name_ja": "狂犬病（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Vestibular Disease (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0034",
-            "slug": "vestibular-disease-exotic-mammal",
-            "name": "Vestibular Disease (Exotic Mammal)",
-            "name_ja": "前庭疾患（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0220",
-            "slug": "vestibular-disease",
-            "name": "Vestibular Disease",
-            "name_ja": "前庭疾患（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Dermatophytosis / Ringworm (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0035",
-            "slug": "dermatophytosis-ringworm-exotic-mammal",
-            "name": "Dermatophytosis / Ringworm (Exotic Mammal)",
-            "name_ja": "皮膚糸状菌症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0187",
-            "slug": "dermatophytosis-ringworm",
-            "name": "Dermatophytosis (Ringworm)",
-            "name_ja": "皮膚糸状菌症（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Contact Dermatitis (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0038",
-            "slug": "contact-dermatitis-exotic-mammal",
-            "name": "Contact Dermatitis (Exotic Mammal)",
-            "name_ja": "接触性皮膚炎（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0191",
-            "slug": "contact-dermatitis",
-            "name": "Contact Dermatitis",
-            "name_ja": "接触性皮膚炎（その他）"
           }
         ]
       },
@@ -460,42 +687,6 @@
         ]
       },
       {
-        "base": "Lymphoma (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0045",
-            "slug": "lymphoma-exotic-mammal",
-            "name": "Lymphoma (Exotic Mammal)",
-            "name_ja": "リンパ腫（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0238",
-            "slug": "lymphoma",
-            "name": "Lymphoma",
-            "name_ja": "リンパ腫（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Cutaneous Neoplasia (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0046",
-            "slug": "cutaneous-neoplasia-exotic-mammal",
-            "name": "Cutaneous Neoplasia (Exotic Mammal)",
-            "name_ja": "皮膚腫瘍（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0167",
-            "slug": "skin-tumor",
-            "name": "Skin Tumor",
-            "name_ja": "皮膚腫瘍（その他）"
-          }
-        ]
-      },
-      {
         "base": "Plague (Prairie Dog)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -510,42 +701,6 @@
             "slug": "plague-yersinia-pestis",
             "name": "Plague (Yersinia pestis)",
             "name_ja": "ペスト（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Tularemia (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0048",
-            "slug": "tularemia-exotic-mammal",
-            "name": "Tularemia (Exotic Mammal)",
-            "name_ja": "野兎病（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0154",
-            "slug": "tularemia",
-            "name": "Tularemia",
-            "name_ja": "野兎病（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Salmonellosis (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0049",
-            "slug": "salmonellosis-exotic-mammal",
-            "name": "Salmonellosis (Exotic Mammal)",
-            "name_ja": "サルモネラ症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0203",
-            "slug": "salmonellosis",
-            "name": "Salmonellosis",
-            "name_ja": "サルモネラ症（その他）"
           }
         ]
       },
@@ -588,42 +743,6 @@
             "slug": "urolithiasis",
             "name": "Urolithiasis",
             "name_ja": "尿路結石症（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Renal Disease (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0054",
-            "slug": "renal-disease-exotic-mammal",
-            "name": "Renal Disease (Exotic Mammal)",
-            "name_ja": "腎疾患（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0165",
-            "slug": "renal-disease",
-            "name": "Renal Disease",
-            "name_ja": "腎疾患（その他）"
-          }
-        ]
-      },
-      {
-        "base": "Adrenal Disease (Exotic Mammal)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "exotic_other_0056",
-            "slug": "adrenal-disease-exotic-mammal",
-            "name": "Adrenal Disease (Exotic Mammal)",
-            "name_ja": "副腎疾患（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0173",
-            "slug": "adrenal-disease",
-            "name": "Adrenal Disease",
-            "name_ja": "副腎疾患（その他）"
           }
         ]
       },

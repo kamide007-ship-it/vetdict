@@ -1,36 +1,22 @@
 # VetDict 品質検出レポート — amphibian
 
-- 総レコード数: **254**
+- 総レコード数: **251**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **11** （冗長レコード 12 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **35**
+- 完全一致重複クラスタ: **8** （冗長レコード 9 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **32**
 
 ### 完全一致重複（上位20）
 - ツボカビ症（Bd）（Chytridiomycosis (Bd)）[amphibian_0000] / ツボカビ症（Bsal）（Chytridiomycosis (Bsal)）[amphibian_0001]
 - 線虫感染症（Nematode Infection）[amphibian_0013] / 線虫感染（ラブディアス）（両生類）（Nematode Infection (Rhabdias)）[amphibian_0163]
-- 代謝性骨疾患（Metabolic Bone Disease）[amphibian_0020] / 代謝性骨疾患（MBD）（両生類）（Metabolic Bone Disease (MBD)）[amphibian_0178]
-- カルシウム欠乏症（低カルシウム血症）（Calcium Deficiency (Hypocalcemia)）[amphibian_0022] / カルシウム欠乏症（両生類）（Calcium Deficiency）[amphibian_0254]
 - 温熱ストレス（高体温症）（Thermal Stress (Hyperthermia)）[amphibian_0030] / 低温ストレス（低体温症）（Thermal Stress (Hypothermia)）[amphibian_0031]
 - 腸閉塞（腸インパクション）（Intestinal Impaction）[amphibian_0036] / 腸閉塞（両生類）（Intestinal Obstruction）[amphibian_0220]
 - 食欲不振（多因子性）（Anorexia (Multifactorial)）[amphibian_0052] / 拒食（行動性）（両生類）（Anorexia (Behavioral)）[amphibian_0223]
 - ダニ寄生症（ハンネマニア）（Mite Infestation (Hannemania)）[amphibian_0082] / ダニ寄生症（マダニ）（Tick Infestation）[amphibian_0084] / ダニ症（Ophionyssus）（両生類）（Mite Infestation (Ophionyssus)）[amphibian_0191]
-- 熱傷（ヒートランプ）（Thermal Burn (Heat Lamp)）[amphibian_0130] / 熱傷（両生類）（Thermal Burns）[amphibian_0198]
 - 痛風（内臓型）（両生類）（Gout (Visceral)）[amphibian_0207] / 痛風（関節型）（両生類）（Gout (Articular)）[amphibian_0208]
 - 四肢骨折（両生類）（Fracture (Limb)）[amphibian_0235] / 甲羅骨折（両生類）（Fracture (Shell/Carapace)）[amphibian_0236]
 
 ### 疾患ファミリー候補（上位15）
-- stem=`defici` × 10件
-    - カルシウム欠乏症（低カルシウム血症）（Calcium Deficiency (Hypocalcemia)）[amphibian_0022]
-    - ビタミンD3欠乏症（Vitamin D3 Deficiency）[amphibian_0023]
-    - チアミン（ビタミンB1）欠乏症（Thiamine Deficiency）[amphibian_0024]
-    - ビタミンE欠乏症（Vitamin E Deficiency）[amphibian_0095]
-    - ビオチン欠乏症（Biotin Deficiency）[amphibian_0096]
-    - ヨウ素欠乏症（甲状腺腫）（Iodine Deficiency (Goiter)）[amphibian_0097]
-    - タンパク質欠乏症（Protein Deficiency）[amphibian_0098]
-    - 紫外線不足症（UV Light Deficiency）[amphibian_0100]
-    - イモリヨウ素欠乏性甲状腺腫（Newt Iodine Deficiency Goiter）[amphibian_0149]
-    - カルシウム欠乏症（両生類）（Calcium Deficiency）[amphibian_0254]
 - stem=`amphib` × 9件
     - 両生類コラゲノーマ（膠原線維腫）（Amphibian Collagenoma）[amphibian_0147]
     - 両生類クロモミコーシス（色素性真菌感染症）（Amphibian Chromomycosis (Pigmented Fungal Infection)）[amphibian_0150]
@@ -41,6 +27,16 @@
     - 両生類オゾン・クロラミン中毒（水処理）（Amphibian Ozone / Chloramine Toxicity (Water Treatment)）[amphibian_0155]
     - 両生類マイコバクテリウム症（慢性消耗性）（Amphibian Mycobacteriosis (Chronic Wasting)）[amphibian_0159]
     - 両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）（Amphibian Metabolic Bone Disease (NSHP)）[amphibian_0160]
+- stem=`defici` × 9件
+    - カルシウム欠乏症（低カルシウム血症）（Calcium Deficiency (Hypocalcemia)）[amphibian_0022]
+    - ビタミンD3欠乏症（Vitamin D3 Deficiency）[amphibian_0023]
+    - チアミン（ビタミンB1）欠乏症（Thiamine Deficiency）[amphibian_0024]
+    - ビタミンE欠乏症（Vitamin E Deficiency）[amphibian_0095]
+    - ビオチン欠乏症（Biotin Deficiency）[amphibian_0096]
+    - ヨウ素欠乏症（甲状腺腫）（Iodine Deficiency (Goiter)）[amphibian_0097]
+    - タンパク質欠乏症（Protein Deficiency）[amphibian_0098]
+    - 紫外線不足症（UV Light Deficiency）[amphibian_0100]
+    - イモリヨウ素欠乏性甲状腺腫（Newt Iodine Deficiency Goiter）[amphibian_0149]
 - stem=`frog` × 9件
     - カエルウイルス3型（FV3）（Frog Virus 3 (FV3)）[amphibian_0059]
     - ゴライアスガエルストレス症候群（Goliath Frog Stress Syndrome）[amphibian_0134]
@@ -79,12 +75,6 @@
     - オオサンショウウオイリドウイルス病（Giant Salamander Iridovirus Disease）[amphibian_0132]
     - オオサンショウウオ真菌性肉芽腫（Giant Salamander Fungal Granuloma）[amphibian_0156]
     - Bsal感染症（両生類）（Batrachochytrium salamandrivorans (Bsal)）[amphibian_0161]
-- stem=`therma` × 5件
-    - 温熱ストレス（高体温症）（Thermal Stress (Hyperthermia)）[amphibian_0030]
-    - 低温ストレス（低体温症）（Thermal Stress (Hypothermia)）[amphibian_0031]
-    - 熱傷（ヒートランプ）（Thermal Burn (Heat Lamp)）[amphibian_0130]
-    - 温度ショック（両生類）（Thermal Shock）[amphibian_0170]
-    - 熱傷（両生類）（Thermal Burns）[amphibian_0198]
 - stem=`toxico` × 5件
     - 鉛中毒（Lead Toxicosis）[amphibian_0101]
     - 亜鉛中毒（Zinc Toxicosis）[amphibian_0102]
@@ -116,6 +106,11 @@
     - 胃脱（Gastric Prolapse）[amphibian_0040]
     - 胃捻転（Gastric Torsion）[amphibian_0113]
     - パックマンフロッグ胃過負荷症候群（Pacman Frog Gastric Overload Syndrome）[amphibian_0137]
+- stem=`therma` × 4件
+    - 温熱ストレス（高体温症）（Thermal Stress (Hyperthermia)）[amphibian_0030]
+    - 低温ストレス（低体温症）（Thermal Stress (Hypothermia)）[amphibian_0031]
+    - 熱傷（ヒートランプ）（Thermal Burn (Heat Lamp)）[amphibian_0130]
+    - 温度ショック（両生類）（Thermal Shock）[amphibian_0170]
 - stem=`toxici` × 4件
     - 塩素・クロラミン中毒（Chlorine / Chloramine Toxicity）[amphibian_0027]
     - 化学物質中毒（農薬・重金属）（Chemical Toxicity (Pesticides/Metals)）[amphibian_0028]
@@ -128,7 +123,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **28**
-- 投与量あり: **226**
+- 投与量あり: **223**
 
 ### 投与量なし（上位30）
 - スピンドリーレッグ症候群（Spindly Leg Syndrome）[amphibian_0042] — ja:888字 / en:2170字
@@ -161,7 +156,7 @@
 - 拒食（行動性）（両生類）（Anorexia (Behavioral)）[amphibian_0223] — ja:477字 / en:1139字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **218** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **215** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **7** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）

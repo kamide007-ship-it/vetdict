@@ -1,10 +1,10 @@
 {
   "species": "exotic_other",
   "view": "served",
-  "record_count": 289,
+  "record_count": 265,
   "T101": {
     "detector": "T101",
-    "total_records": 289,
+    "total_records": 265,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -64,11 +64,6 @@
             "id": "exotic_other_0066",
             "name": "Intestinal Parasitism (Skunk)",
             "name_ja": "腸管寄生虫症（スカンク）"
-          },
-          {
-            "id": "exotic_other_0147",
-            "name": "Intestinal Parasitism",
-            "name_ja": "腸管寄生虫症（その他）"
           }
         ]
       },
@@ -83,53 +78,6 @@
             "id": "exotic_other_0065",
             "name": "Metabolic Bone Disease (Skunk)",
             "name_ja": "代謝性骨疾患（スカンク）"
-          },
-          {
-            "id": "exotic_other_0163",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0016",
-            "name": "Hepatic Lipidosis (Exotic Mammal)",
-            "name_ja": "肝リピドーシス（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0164",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0017",
-            "name": "Diabetes Mellitus (Exotic Mammal)",
-            "name_ja": "糖尿病（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0172",
-            "name": "Diabetes Mellitus",
-            "name_ja": "糖尿病（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0019",
-            "name": "Upper Respiratory Infection (Exotic Mammal)",
-            "name_ja": "上部気道感染症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0182",
-            "name": "Upper Respiratory Infection",
-            "name_ja": "上部気道感染症（その他）"
           }
         ]
       },
@@ -150,76 +98,6 @@
       {
         "members": [
           {
-            "id": "exotic_other_0025",
-            "name": "Rectal Prolapse (Exotic Mammal)",
-            "name_ja": "直腸脱（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0199",
-            "name": "Rectal Prolapse",
-            "name_ja": "直腸脱（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0027",
-            "name": "Dental Abscess (Exotic Mammal)",
-            "name_ja": "歯根膿瘍（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0211",
-            "name": "Dental Abscess",
-            "name_ja": "歯科膿瘍（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0028",
-            "name": "Pyometra (Exotic Mammal)",
-            "name_ja": "子宮蓄膿症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0234",
-            "name": "Pyometra",
-            "name_ja": "子宮蓄膿症（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0029",
-            "name": "Dystocia (Exotic Mammal)",
-            "name_ja": "難産（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0236",
-            "name": "Dystocia",
-            "name_ja": "難産（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0030",
-            "name": "Mammary Tumors (Exotic Mammal)",
-            "name_ja": "乳腺腫瘍（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0237",
-            "name": "Mammary Tumor",
-            "name_ja": "乳腺腫瘍（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "exotic_other_0032",
             "name": "Canine Distemper (Raccoon/Skunk)",
             "name_ja": "犬ジステンパー（アライグマ・スカンク）"
@@ -234,62 +112,6 @@
       {
         "members": [
           {
-            "id": "exotic_other_0033",
-            "name": "Rabies (Exotic Mammal)",
-            "name_ja": "狂犬病（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0143",
-            "name": "Rabies",
-            "name_ja": "狂犬病（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0034",
-            "name": "Vestibular Disease (Exotic Mammal)",
-            "name_ja": "前庭疾患（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0220",
-            "name": "Vestibular Disease",
-            "name_ja": "前庭疾患（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0035",
-            "name": "Dermatophytosis / Ringworm (Exotic Mammal)",
-            "name_ja": "皮膚糸状菌症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0187",
-            "name": "Dermatophytosis (Ringworm)",
-            "name_ja": "皮膚糸状菌症（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0038",
-            "name": "Contact Dermatitis (Exotic Mammal)",
-            "name_ja": "接触性皮膚炎（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0191",
-            "name": "Contact Dermatitis",
-            "name_ja": "接触性皮膚炎（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "exotic_other_0044",
             "name": "Obesity (Exotic Mammal)",
             "name_ja": "肥満症（エキゾチック哺乳類）"
@@ -298,44 +120,6 @@
             "id": "exotic_other_0062",
             "name": "Obesity (Prairie Dog)",
             "name_ja": "肥満症（プレーリードッグ）"
-          },
-          {
-            "id": "exotic_other_0171",
-            "name": "Obesity (Exotic)",
-            "name_ja": "肥満（エキゾチック）（その他）"
-          },
-          {
-            "id": "exotic_other_0229",
-            "name": "Obesity",
-            "name_ja": "肥満（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0045",
-            "name": "Lymphoma (Exotic Mammal)",
-            "name_ja": "リンパ腫（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0238",
-            "name": "Lymphoma",
-            "name_ja": "リンパ腫（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0046",
-            "name": "Cutaneous Neoplasia (Exotic Mammal)",
-            "name_ja": "皮膚腫瘍（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0167",
-            "name": "Skin Tumor",
-            "name_ja": "皮膚腫瘍（その他）"
           }
         ]
       },
@@ -350,34 +134,6 @@
             "id": "exotic_other_0155",
             "name": "Plague (Yersinia pestis)",
             "name_ja": "ペスト（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0048",
-            "name": "Tularemia (Exotic Mammal)",
-            "name_ja": "野兎病（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0154",
-            "name": "Tularemia",
-            "name_ja": "野兎病（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0049",
-            "name": "Salmonellosis (Exotic Mammal)",
-            "name_ja": "サルモネラ症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0203",
-            "name": "Salmonellosis",
-            "name_ja": "サルモネラ症（その他）"
           }
         ]
       },
@@ -406,39 +162,6 @@
             "id": "exotic_other_0109",
             "name": "Urolithiasis (Goat)",
             "name_ja": "ヤギ尿路結石症"
-          },
-          {
-            "id": "exotic_other_0233",
-            "name": "Urolithiasis",
-            "name_ja": "尿路結石症（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0054",
-            "name": "Renal Disease (Exotic Mammal)",
-            "name_ja": "腎疾患（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0165",
-            "name": "Renal Disease",
-            "name_ja": "腎疾患（その他）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "exotic_other_0056",
-            "name": "Adrenal Disease (Exotic Mammal)",
-            "name_ja": "副腎疾患（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0173",
-            "name": "Adrenal Disease",
-            "name_ja": "副腎疾患（その他）"
           }
         ]
       },
@@ -453,11 +176,6 @@
             "id": "exotic_other_0063",
             "name": "Heart Disease (Prairie Dog)",
             "name_ja": "心疾患（プレーリードッグ）"
-          },
-          {
-            "id": "exotic_other_0174",
-            "name": "Cardiac Disease",
-            "name_ja": "心疾患（その他）"
           }
         ]
       },
@@ -490,85 +208,9 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 32,
-    "redundant_record_count": 39,
+    "exact_duplicate_cluster_count": 14,
+    "redundant_record_count": 15,
     "family_clusters": [
-      {
-        "shared_stem": "dermat",
-        "size": 14,
-        "members": [
-          {
-            "id": "exotic_other_0035",
-            "name": "Dermatophytosis / Ringworm (Exotic Mammal)",
-            "name_ja": "皮膚糸状菌症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0038",
-            "name": "Contact Dermatitis (Exotic Mammal)",
-            "name_ja": "接触性皮膚炎（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0079",
-            "name": "Parasitic Dermatitis (General Exotic)",
-            "name_ja": "寄生虫性皮膚炎（一般エキゾチック）"
-          },
-          {
-            "id": "exotic_other_0094",
-            "name": "Porcine Dermatitis / Nephropathy Syndrome (PDNS)",
-            "name_ja": "豚皮膚炎腎症症候群"
-          },
-          {
-            "id": "exotic_other_0187",
-            "name": "Dermatophytosis (Ringworm)",
-            "name_ja": "皮膚糸状菌症（その他）"
-          },
-          {
-            "id": "exotic_other_0191",
-            "name": "Contact Dermatitis",
-            "name_ja": "接触性皮膚炎（その他）"
-          },
-          {
-            "id": "exotic_other_0268",
-            "name": "Dermatological Bacterial Infection",
-            "name_ja": "皮膚細菌感染（その他）"
-          },
-          {
-            "id": "exotic_other_0269",
-            "name": "Dermatological Viral Infection",
-            "name_ja": "皮膚ウイルス感染（その他）"
-          },
-          {
-            "id": "exotic_other_0270",
-            "name": "Dermatological Fungal Infection",
-            "name_ja": "皮膚真菌感染（その他）"
-          },
-          {
-            "id": "exotic_other_0271",
-            "name": "Dermatological Parasitic Infestation",
-            "name_ja": "皮膚寄生虫寄生（その他）"
-          },
-          {
-            "id": "exotic_other_0272",
-            "name": "Dermatological Neoplasia",
-            "name_ja": "皮膚腫瘍性疾患（その他）"
-          },
-          {
-            "id": "exotic_other_0273",
-            "name": "Dermatological Autoimmune Disease",
-            "name_ja": "皮膚自己免疫疾患（その他）"
-          },
-          {
-            "id": "exotic_other_0274",
-            "name": "Dermatological Allergic Disease",
-            "name_ja": "皮膚アレルギー疾患（その他）"
-          },
-          {
-            "id": "exotic_other_0275",
-            "name": "Chronic Dermatitis",
-            "name_ja": "慢性皮膚炎（その他）"
-          }
-        ]
-      },
       {
         "shared_stem": "porcin",
         "size": 14,
@@ -646,6 +288,72 @@
         ]
       },
       {
+        "shared_stem": "dermat",
+        "size": 12,
+        "members": [
+          {
+            "id": "exotic_other_0035",
+            "name": "Dermatophytosis / Ringworm (Exotic Mammal)",
+            "name_ja": "皮膚糸状菌症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0038",
+            "name": "Contact Dermatitis (Exotic Mammal)",
+            "name_ja": "接触性皮膚炎（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0079",
+            "name": "Parasitic Dermatitis (General Exotic)",
+            "name_ja": "寄生虫性皮膚炎（一般エキゾチック）"
+          },
+          {
+            "id": "exotic_other_0094",
+            "name": "Porcine Dermatitis / Nephropathy Syndrome (PDNS)",
+            "name_ja": "豚皮膚炎腎症症候群"
+          },
+          {
+            "id": "exotic_other_0268",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0269",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0270",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0271",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（その他）"
+          },
+          {
+            "id": "exotic_other_0272",
+            "name": "Dermatological Neoplasia",
+            "name_ja": "皮膚腫瘍性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0273",
+            "name": "Dermatological Autoimmune Disease",
+            "name_ja": "皮膚自己免疫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0274",
+            "name": "Dermatological Allergic Disease",
+            "name_ja": "皮膚アレルギー疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0275",
+            "name": "Chronic Dermatitis",
+            "name_ja": "慢性皮膚炎（その他）"
+          }
+        ]
+      },
+      {
         "shared_stem": "ferret",
         "size": 12,
         "members": [
@@ -712,72 +420,6 @@
         ]
       },
       {
-        "shared_stem": "respir",
-        "size": 12,
-        "members": [
-          {
-            "id": "exotic_other_0019",
-            "name": "Upper Respiratory Infection (Exotic Mammal)",
-            "name_ja": "上部気道感染症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0061",
-            "name": "Respiratory Infection (Prairie Dog)",
-            "name_ja": "呼吸器感染症（プレーリードッグ）"
-          },
-          {
-            "id": "exotic_other_0175",
-            "name": "Respiratory Disease",
-            "name_ja": "呼吸器疾患（その他）"
-          },
-          {
-            "id": "exotic_other_0182",
-            "name": "Upper Respiratory Infection",
-            "name_ja": "上部気道感染症（その他）"
-          },
-          {
-            "id": "exotic_other_0260",
-            "name": "Respiratory Bacterial Infection",
-            "name_ja": "呼吸器細菌感染（その他）"
-          },
-          {
-            "id": "exotic_other_0261",
-            "name": "Respiratory Viral Infection",
-            "name_ja": "呼吸器ウイルス感染（その他）"
-          },
-          {
-            "id": "exotic_other_0262",
-            "name": "Respiratory Fungal Infection",
-            "name_ja": "呼吸器真菌感染（その他）"
-          },
-          {
-            "id": "exotic_other_0263",
-            "name": "Respiratory Parasitic Disease",
-            "name_ja": "呼吸器寄生虫疾患（その他）"
-          },
-          {
-            "id": "exotic_other_0264",
-            "name": "Respiratory Neoplasia",
-            "name_ja": "呼吸器腫瘍（その他）"
-          },
-          {
-            "id": "exotic_other_0265",
-            "name": "Respiratory Inflammatory Disease",
-            "name_ja": "呼吸器炎症性疾患（その他）"
-          },
-          {
-            "id": "exotic_other_0266",
-            "name": "Lower Respiratory Tract Infection",
-            "name_ja": "下部気道感染（その他）"
-          },
-          {
-            "id": "exotic_other_0267",
-            "name": "Chronic Respiratory Disease",
-            "name_ja": "慢性呼吸器疾患（その他）"
-          }
-        ]
-      },
-      {
         "shared_stem": "gastro",
         "size": 11,
         "members": [
@@ -839,8 +481,69 @@
         ]
       },
       {
-        "shared_stem": "parasi",
+        "shared_stem": "respir",
         "size": 11,
+        "members": [
+          {
+            "id": "exotic_other_0019",
+            "name": "Upper Respiratory Infection (Exotic Mammal)",
+            "name_ja": "上部気道感染症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0061",
+            "name": "Respiratory Infection (Prairie Dog)",
+            "name_ja": "呼吸器感染症（プレーリードッグ）"
+          },
+          {
+            "id": "exotic_other_0175",
+            "name": "Respiratory Disease",
+            "name_ja": "呼吸器疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0260",
+            "name": "Respiratory Bacterial Infection",
+            "name_ja": "呼吸器細菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0261",
+            "name": "Respiratory Viral Infection",
+            "name_ja": "呼吸器ウイルス感染（その他）"
+          },
+          {
+            "id": "exotic_other_0262",
+            "name": "Respiratory Fungal Infection",
+            "name_ja": "呼吸器真菌感染（その他）"
+          },
+          {
+            "id": "exotic_other_0263",
+            "name": "Respiratory Parasitic Disease",
+            "name_ja": "呼吸器寄生虫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0264",
+            "name": "Respiratory Neoplasia",
+            "name_ja": "呼吸器腫瘍（その他）"
+          },
+          {
+            "id": "exotic_other_0265",
+            "name": "Respiratory Inflammatory Disease",
+            "name_ja": "呼吸器炎症性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0266",
+            "name": "Lower Respiratory Tract Infection",
+            "name_ja": "下部気道感染（その他）"
+          },
+          {
+            "id": "exotic_other_0267",
+            "name": "Chronic Respiratory Disease",
+            "name_ja": "慢性呼吸器疾患（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "parasi",
+        "size": 10,
         "members": [
           {
             "id": "exotic_other_0013",
@@ -868,11 +571,6 @@
             "name_ja": "寄生虫性皮膚炎（一般エキゾチック）"
           },
           {
-            "id": "exotic_other_0147",
-            "name": "Intestinal Parasitism",
-            "name_ja": "腸管寄生虫症（その他）"
-          },
-          {
             "id": "exotic_other_0248",
             "name": "Hepatic Parasitic Disease",
             "name_ja": "肝寄生虫疾患（その他）"
@@ -896,57 +594,6 @@
             "id": "exotic_other_0282",
             "name": "Neurological Parasitic Disease",
             "name_ja": "神経系寄生虫疾患（その他）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "hepati",
-        "size": 9,
-        "members": [
-          {
-            "id": "exotic_other_0016",
-            "name": "Hepatic Lipidosis (Exotic Mammal)",
-            "name_ja": "肝リピドーシス（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0121",
-            "name": "Hedgehog Hepatic Lipidosis",
-            "name_ja": "ハリネズミ肝脂肪症"
-          },
-          {
-            "id": "exotic_other_0164",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（その他）"
-          },
-          {
-            "id": "exotic_other_0246",
-            "name": "Hepatic Bacterial Infection",
-            "name_ja": "肝細菌感染症（その他）"
-          },
-          {
-            "id": "exotic_other_0247",
-            "name": "Hepatic Viral Infection",
-            "name_ja": "肝ウイルス感染症（その他）"
-          },
-          {
-            "id": "exotic_other_0248",
-            "name": "Hepatic Parasitic Disease",
-            "name_ja": "肝寄生虫疾患（その他）"
-          },
-          {
-            "id": "exotic_other_0249",
-            "name": "Hepatic Fibrosis",
-            "name_ja": "肝線維症（その他）"
-          },
-          {
-            "id": "exotic_other_0250",
-            "name": "Hepatic Neoplasia",
-            "name_ja": "肝腫瘍性疾患（その他）"
-          },
-          {
-            "id": "exotic_other_0251",
-            "name": "Hepatic Metabolic Disorder",
-            "name_ja": "肝代謝障害（その他）"
           }
         ]
       },
@@ -1099,6 +746,52 @@
         ]
       },
       {
+        "shared_stem": "hepati",
+        "size": 8,
+        "members": [
+          {
+            "id": "exotic_other_0016",
+            "name": "Hepatic Lipidosis (Exotic Mammal)",
+            "name_ja": "肝リピドーシス（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0121",
+            "name": "Hedgehog Hepatic Lipidosis",
+            "name_ja": "ハリネズミ肝脂肪症"
+          },
+          {
+            "id": "exotic_other_0246",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（その他）"
+          },
+          {
+            "id": "exotic_other_0247",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（その他）"
+          },
+          {
+            "id": "exotic_other_0248",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0249",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（その他）"
+          },
+          {
+            "id": "exotic_other_0250",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍性疾患（その他）"
+          },
+          {
+            "id": "exotic_other_0251",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（その他）"
+          }
+        ]
+      },
+      {
         "shared_stem": "hedgeh",
         "size": 7,
         "members": [
@@ -1136,47 +829,6 @@
             "id": "exotic_other_0122",
             "name": "Hedgehog Cardiomyopathy",
             "name_ja": "ハリネズミ心筋症"
-          }
-        ]
-      },
-      {
-        "shared_stem": "obesit",
-        "size": 7,
-        "members": [
-          {
-            "id": "exotic_other_0006",
-            "name": "Porcine Obesity",
-            "name_ja": "豚の肥満症"
-          },
-          {
-            "id": "exotic_other_0044",
-            "name": "Obesity (Exotic Mammal)",
-            "name_ja": "肥満症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0062",
-            "name": "Obesity (Prairie Dog)",
-            "name_ja": "肥満症（プレーリードッグ）"
-          },
-          {
-            "id": "exotic_other_0064",
-            "name": "Skunk Obesity",
-            "name_ja": "スカンクの肥満症"
-          },
-          {
-            "id": "exotic_other_0120",
-            "name": "Hedgehog Obesity",
-            "name_ja": "ハリネズミ肥満症"
-          },
-          {
-            "id": "exotic_other_0171",
-            "name": "Obesity (Exotic)",
-            "name_ja": "肥満（エキゾチック）（その他）"
-          },
-          {
-            "id": "exotic_other_0229",
-            "name": "Obesity",
-            "name_ja": "肥満（その他）"
           }
         ]
       },
@@ -1315,64 +967,33 @@
         ]
       },
       {
-        "shared_stem": "intest",
+        "shared_stem": "obesit",
         "size": 5,
         "members": [
           {
-            "id": "exotic_other_0013",
-            "name": "Intestinal Parasitism (Porcine)",
-            "name_ja": "腸管寄生虫症（豚）"
+            "id": "exotic_other_0006",
+            "name": "Porcine Obesity",
+            "name_ja": "豚の肥満症"
           },
           {
-            "id": "exotic_other_0024",
-            "name": "Intestinal Parasitism (Exotic Mammal)",
-            "name_ja": "腸管寄生虫症（エキゾチック哺乳類）"
+            "id": "exotic_other_0044",
+            "name": "Obesity (Exotic Mammal)",
+            "name_ja": "肥満症（エキゾチック哺乳類）"
           },
           {
-            "id": "exotic_other_0066",
-            "name": "Intestinal Parasitism (Skunk)",
-            "name_ja": "腸管寄生虫症（スカンク）"
+            "id": "exotic_other_0062",
+            "name": "Obesity (Prairie Dog)",
+            "name_ja": "肥満症（プレーリードッグ）"
           },
           {
-            "id": "exotic_other_0147",
-            "name": "Intestinal Parasitism",
-            "name_ja": "腸管寄生虫症（その他）"
+            "id": "exotic_other_0064",
+            "name": "Skunk Obesity",
+            "name_ja": "スカンクの肥満症"
           },
           {
-            "id": "exotic_other_0197",
-            "name": "Intestinal Obstruction",
-            "name_ja": "腸閉塞（その他）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "metabo",
-        "size": 5,
-        "members": [
-          {
-            "id": "exotic_other_0015",
-            "name": "Metabolic Bone Disease (Exotic Mammal)",
-            "name_ja": "代謝性骨疾患（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0065",
-            "name": "Metabolic Bone Disease (Skunk)",
-            "name_ja": "代謝性骨疾患（スカンク）"
-          },
-          {
-            "id": "exotic_other_0163",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患（その他）"
-          },
-          {
-            "id": "exotic_other_0251",
-            "name": "Hepatic Metabolic Disorder",
-            "name_ja": "肝代謝障害（その他）"
-          },
-          {
-            "id": "exotic_other_0287",
-            "name": "Neurological Metabolic Disease",
-            "name_ja": "神経代謝疾患（その他）"
+            "id": "exotic_other_0120",
+            "name": "Hedgehog Obesity",
+            "name_ja": "ハリネズミ肥満症"
           }
         ]
       },
@@ -1439,32 +1060,6 @@
         ]
       },
       {
-        "shared_stem": "absces",
-        "size": 4,
-        "members": [
-          {
-            "id": "exotic_other_0027",
-            "name": "Dental Abscess (Exotic Mammal)",
-            "name_ja": "歯根膿瘍（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0037",
-            "name": "Subcutaneous Abscess (Exotic Mammal)",
-            "name_ja": "皮下膿瘍（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0189",
-            "name": "Skin Abscess",
-            "name_ja": "皮膚膿瘍（その他）"
-          },
-          {
-            "id": "exotic_other_0211",
-            "name": "Dental Abscess",
-            "name_ja": "歯科膿瘍（その他）"
-          }
-        ]
-      },
-      {
         "shared_stem": "caprin",
         "size": 4,
         "members": [
@@ -1487,32 +1082,6 @@
             "id": "exotic_other_0113",
             "name": "Caprine Mastitis",
             "name_ja": "ヤギ乳房炎"
-          }
-        ]
-      },
-      {
-        "shared_stem": "dental",
-        "size": 4,
-        "members": [
-          {
-            "id": "exotic_other_0026",
-            "name": "Dental Malocclusion (Exotic Mammal)",
-            "name_ja": "不正咬合（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0027",
-            "name": "Dental Abscess (Exotic Mammal)",
-            "name_ja": "歯根膿瘍（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0161",
-            "name": "Dental Disease (Exotic)",
-            "name_ja": "歯科疾患（エキゾチック）（その他）"
-          },
-          {
-            "id": "exotic_other_0211",
-            "name": "Dental Abscess",
-            "name_ja": "歯科膿瘍（その他）"
           }
         ]
       },
@@ -1569,6 +1138,58 @@
         ]
       },
       {
+        "shared_stem": "intest",
+        "size": 4,
+        "members": [
+          {
+            "id": "exotic_other_0013",
+            "name": "Intestinal Parasitism (Porcine)",
+            "name_ja": "腸管寄生虫症（豚）"
+          },
+          {
+            "id": "exotic_other_0024",
+            "name": "Intestinal Parasitism (Exotic Mammal)",
+            "name_ja": "腸管寄生虫症（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0066",
+            "name": "Intestinal Parasitism (Skunk)",
+            "name_ja": "腸管寄生虫症（スカンク）"
+          },
+          {
+            "id": "exotic_other_0197",
+            "name": "Intestinal Obstruction",
+            "name_ja": "腸閉塞（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "metabo",
+        "size": 4,
+        "members": [
+          {
+            "id": "exotic_other_0015",
+            "name": "Metabolic Bone Disease (Exotic Mammal)",
+            "name_ja": "代謝性骨疾患（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0065",
+            "name": "Metabolic Bone Disease (Skunk)",
+            "name_ja": "代謝性骨疾患（スカンク）"
+          },
+          {
+            "id": "exotic_other_0251",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（その他）"
+          },
+          {
+            "id": "exotic_other_0287",
+            "name": "Neurological Metabolic Disease",
+            "name_ja": "神経代謝疾患（その他）"
+          }
+        ]
+      },
+      {
         "shared_stem": "sugar",
         "size": 4,
         "members": [
@@ -1621,44 +1242,23 @@
         ]
       },
       {
-        "shared_stem": "adrena",
+        "shared_stem": "absces",
         "size": 3,
         "members": [
           {
-            "id": "exotic_other_0056",
-            "name": "Adrenal Disease (Exotic Mammal)",
-            "name_ja": "副腎疾患（エキゾチック哺乳類）"
+            "id": "exotic_other_0027",
+            "name": "Dental Abscess (Exotic Mammal)",
+            "name_ja": "歯根膿瘍（エキゾチック哺乳類）"
           },
           {
-            "id": "exotic_other_0127",
-            "name": "Ferret Adrenal Gland Disease",
-            "name_ja": "フェレット副腎疾患"
+            "id": "exotic_other_0037",
+            "name": "Subcutaneous Abscess (Exotic Mammal)",
+            "name_ja": "皮下膿瘍（エキゾチック哺乳類）"
           },
           {
-            "id": "exotic_other_0173",
-            "name": "Adrenal Disease",
-            "name_ja": "副腎疾患（その他）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "bone",
-        "size": 3,
-        "members": [
-          {
-            "id": "exotic_other_0015",
-            "name": "Metabolic Bone Disease (Exotic Mammal)",
-            "name_ja": "代謝性骨疾患（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0065",
-            "name": "Metabolic Bone Disease (Skunk)",
-            "name_ja": "代謝性骨疾患（スカンク）"
-          },
-          {
-            "id": "exotic_other_0163",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患（その他）"
+            "id": "exotic_other_0189",
+            "name": "Skin Abscess",
+            "name_ja": "皮膚膿瘍（その他）"
           }
         ]
       },
@@ -1701,6 +1301,27 @@
             "id": "exotic_other_0162",
             "name": "Nutritional Deficiency",
             "name_ja": "栄養欠乏症（その他）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "dental",
+        "size": 3,
+        "members": [
+          {
+            "id": "exotic_other_0026",
+            "name": "Dental Malocclusion (Exotic Mammal)",
+            "name_ja": "不正咬合（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0027",
+            "name": "Dental Abscess (Exotic Mammal)",
+            "name_ja": "歯根膿瘍（エキゾチック哺乳類）"
+          },
+          {
+            "id": "exotic_other_0161",
+            "name": "Dental Disease (Exotic)",
+            "name_ja": "歯科疾患（エキゾチック）（その他）"
           }
         ]
       },
@@ -1789,48 +1410,6 @@
         ]
       },
       {
-        "shared_stem": "lipido",
-        "size": 3,
-        "members": [
-          {
-            "id": "exotic_other_0016",
-            "name": "Hepatic Lipidosis (Exotic Mammal)",
-            "name_ja": "肝リピドーシス（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0121",
-            "name": "Hedgehog Hepatic Lipidosis",
-            "name_ja": "ハリネズミ肝脂肪症"
-          },
-          {
-            "id": "exotic_other_0164",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（その他）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "lympho",
-        "size": 3,
-        "members": [
-          {
-            "id": "exotic_other_0045",
-            "name": "Lymphoma (Exotic Mammal)",
-            "name_ja": "リンパ腫（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0129",
-            "name": "Ferret Lymphoma",
-            "name_ja": "フェレットリンパ腫"
-          },
-          {
-            "id": "exotic_other_0238",
-            "name": "Lymphoma",
-            "name_ja": "リンパ腫（その他）"
-          }
-        ]
-      },
-      {
         "shared_stem": "nutrit",
         "size": 3,
         "members": [
@@ -1848,27 +1427,6 @@
             "id": "exotic_other_0162",
             "name": "Nutritional Deficiency",
             "name_ja": "栄養欠乏症（その他）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "skin",
-        "size": 3,
-        "members": [
-          {
-            "id": "exotic_other_0118",
-            "name": "Hedgehog Skin Mites (Caparinia tripilis)",
-            "name_ja": "ハリネズミダニ症（カパリニア）"
-          },
-          {
-            "id": "exotic_other_0167",
-            "name": "Skin Tumor",
-            "name_ja": "皮膚腫瘍（その他）"
-          },
-          {
-            "id": "exotic_other_0189",
-            "name": "Skin Abscess",
-            "name_ja": "皮膚膿瘍（その他）"
           }
         ]
       },
@@ -1915,27 +1473,6 @@
         ]
       },
       {
-        "shared_stem": "tumor",
-        "size": 3,
-        "members": [
-          {
-            "id": "exotic_other_0030",
-            "name": "Mammary Tumors (Exotic Mammal)",
-            "name_ja": "乳腺腫瘍（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0167",
-            "name": "Skin Tumor",
-            "name_ja": "皮膚腫瘍（その他）"
-          },
-          {
-            "id": "exotic_other_0237",
-            "name": "Mammary Tumor",
-            "name_ja": "乳腺腫瘍（その他）"
-          }
-        ]
-      },
-      {
         "shared_stem": "ulcer",
         "size": 3,
         "members": [
@@ -1953,27 +1490,6 @@
             "id": "exotic_other_0215",
             "name": "Corneal Ulcer",
             "name_ja": "角膜潰瘍（その他）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "urolit",
-        "size": 3,
-        "members": [
-          {
-            "id": "exotic_other_0053",
-            "name": "Urolithiasis (Exotic Mammal)",
-            "name_ja": "尿路結石症（エキゾチック哺乳類）"
-          },
-          {
-            "id": "exotic_other_0109",
-            "name": "Urolithiasis (Goat)",
-            "name_ja": "ヤギ尿路結石症"
-          },
-          {
-            "id": "exotic_other_0233",
-            "name": "Urolithiasis",
-            "name_ja": "尿路結石症（その他）"
           }
         ]
       },
@@ -1999,20 +1515,20 @@
         ]
       }
     ],
-    "family_cluster_count": 45
+    "family_cluster_count": 38
   },
   "T102": {
     "detector": "T102",
-    "total_records": 289,
+    "total_records": 265,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 289,
+    "total_records": 265,
     "empty_count": 0,
-    "heading_only_count": 98,
-    "with_dosage_count": 191,
+    "heading_only_count": 88,
+    "with_dosage_count": 177,
     "empty": [],
     "heading_only": [
       {
@@ -2083,8 +1599,8 @@
         "id": "exotic_other_0025",
         "name": "Rectal Prolapse (Exotic Mammal)",
         "name_ja": "直腸脱（エキゾチック哺乳類）",
-        "treatment_ja_len": 333,
-        "treatment_len": 418,
+        "treatment_ja_len": 563,
+        "treatment_len": 533,
         "has_dosage": false
       },
       {
@@ -2099,8 +1615,8 @@
         "id": "exotic_other_0030",
         "name": "Mammary Tumors (Exotic Mammal)",
         "name_ja": "乳腺腫瘍（エキゾチック哺乳類）",
-        "treatment_ja_len": 292,
-        "treatment_len": 436,
+        "treatment_ja_len": 665,
+        "treatment_len": 481,
         "has_dosage": false
       },
       {
@@ -2116,15 +1632,7 @@
         "name": "Rabies (Exotic Mammal)",
         "name_ja": "狂犬病（エキゾチック哺乳類）",
         "treatment_ja_len": 311,
-        "treatment_len": 95,
-        "has_dosage": false
-      },
-      {
-        "id": "exotic_other_0034",
-        "name": "Vestibular Disease (Exotic Mammal)",
-        "name_ja": "前庭疾患（エキゾチック哺乳類）",
-        "treatment_ja_len": 895,
-        "treatment_len": 694,
+        "treatment_len": 238,
         "has_dosage": false
       },
       {
@@ -2164,7 +1672,15 @@
         "name": "Obesity (Exotic Mammal)",
         "name_ja": "肥満症（エキゾチック哺乳類）",
         "treatment_ja_len": 725,
-        "treatment_len": 596,
+        "treatment_len": 1003,
+        "has_dosage": false
+      },
+      {
+        "id": "exotic_other_0045",
+        "name": "Lymphoma (Exotic Mammal)",
+        "name_ja": "リンパ腫（エキゾチック哺乳類）",
+        "treatment_ja_len": 665,
+        "treatment_len": 481,
         "has_dosage": false
       },
       {
@@ -2188,7 +1704,7 @@
         "name": "Adrenal Disease (Exotic Mammal)",
         "name_ja": "副腎疾患（エキゾチック哺乳類）",
         "treatment_ja_len": 344,
-        "treatment_len": 154,
+        "treatment_len": 650,
         "has_dosage": false
       },
       {
@@ -2504,14 +2020,6 @@
         "has_dosage": false
       },
       {
-        "id": "exotic_other_0143",
-        "name": "Rabies",
-        "name_ja": "狂犬病（その他）",
-        "treatment_ja_len": 158,
-        "treatment_len": 238,
-        "has_dosage": false
-      },
-      {
         "id": "exotic_other_0144",
         "name": "Canine Distemper",
         "name_ja": "犬ジステンパー（その他）",
@@ -2552,51 +2060,11 @@
         "has_dosage": false
       },
       {
-        "id": "exotic_other_0167",
-        "name": "Skin Tumor",
-        "name_ja": "皮膚腫瘍（その他）",
-        "treatment_ja_len": 426,
-        "treatment_len": 181,
-        "has_dosage": false
-      },
-      {
         "id": "exotic_other_0168",
         "name": "Internal Neoplasia",
         "name_ja": "内臓腫瘍（その他）",
         "treatment_ja_len": 426,
         "treatment_len": 181,
-        "has_dosage": false
-      },
-      {
-        "id": "exotic_other_0171",
-        "name": "Obesity (Exotic)",
-        "name_ja": "肥満（エキゾチック）（その他）",
-        "treatment_ja_len": 654,
-        "treatment_len": 1003,
-        "has_dosage": false
-      },
-      {
-        "id": "exotic_other_0172",
-        "name": "Diabetes Mellitus",
-        "name_ja": "糖尿病（その他）",
-        "treatment_ja_len": 305,
-        "treatment_len": 420,
-        "has_dosage": false
-      },
-      {
-        "id": "exotic_other_0173",
-        "name": "Adrenal Disease",
-        "name_ja": "副腎疾患（その他）",
-        "treatment_ja_len": 342,
-        "treatment_len": 650,
-        "has_dosage": false
-      },
-      {
-        "id": "exotic_other_0174",
-        "name": "Cardiac Disease",
-        "name_ja": "心疾患（その他）",
-        "treatment_ja_len": 309,
-        "treatment_len": 150,
         "has_dosage": false
       },
       {
@@ -2648,14 +2116,6 @@
         "has_dosage": false
       },
       {
-        "id": "exotic_other_0199",
-        "name": "Rectal Prolapse",
-        "name_ja": "直腸脱（その他）",
-        "treatment_ja_len": 563,
-        "treatment_len": 533,
-        "has_dosage": false
-      },
-      {
         "id": "exotic_other_0224",
         "name": "Spinal Injury",
         "name_ja": "脊髄損傷（その他）",
@@ -2672,35 +2132,11 @@
         "has_dosage": false
       },
       {
-        "id": "exotic_other_0229",
-        "name": "Obesity",
-        "name_ja": "肥満（その他）",
-        "treatment_ja_len": 650,
-        "treatment_len": 933,
-        "has_dosage": false
-      },
-      {
         "id": "exotic_other_0230",
         "name": "Hypoglycemia",
         "name_ja": "低血糖症（その他）",
         "treatment_ja_len": 311,
         "treatment_len": 232,
-        "has_dosage": false
-      },
-      {
-        "id": "exotic_other_0237",
-        "name": "Mammary Tumor",
-        "name_ja": "乳腺腫瘍（その他）",
-        "treatment_ja_len": 665,
-        "treatment_len": 481,
-        "has_dosage": false
-      },
-      {
-        "id": "exotic_other_0238",
-        "name": "Lymphoma",
-        "name_ja": "リンパ腫（その他）",
-        "treatment_ja_len": 665,
-        "treatment_len": 481,
         "has_dosage": false
       },
       {
@@ -2803,11 +2239,11 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 289,
+    "total_records": 265,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 215,
-    "citation_mismatch_count": 24,
+    "drug_mismatch_count": 198,
+    "citation_mismatch_count": 17,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
@@ -3257,17 +2693,10 @@
             "drug": "Praziquantel",
             "drug_ja": "プラジカンテル",
             "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0025",
-        "name": "Rectal Prolapse (Exotic Mammal)",
-        "name_ja": "直腸脱（エキゾチック哺乳類）",
-        "drugs": [
+          },
           {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3293,18 +2722,23 @@
             "reason": "no dosing data for this species"
           },
           {
+            "drug": "Metronidazole",
+            "drug_ja": "メトロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
             "drug": "Meloxicam",
             "drug_ja": "メロキシカム",
             "reason": "no dosing data for this species"
           },
           {
-            "drug": "Isoflurane",
-            "drug_ja": "イソフルラン",
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
             "reason": "no dosing data for this species"
           },
           {
-            "drug": "Chlorhexidine",
-            "drug_ja": "クロルヘキシジン",
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3315,8 +2749,23 @@
         "name_ja": "子宮蓄膿症（エキゾチック哺乳類）",
         "drugs": [
           {
+            "drug": "Amoxicillin",
+            "drug_ja": "アモキシシリン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          },
+          {
             "drug": "Enrofloxacin",
             "drug_ja": "エンロフロキサシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Metronidazole",
+            "drug_ja": "メトロニダゾール",
             "reason": "no dosing data for this species"
           },
           {
@@ -3325,8 +2774,13 @@
             "reason": "no dosing data for this species"
           },
           {
-            "drug": "Isoflurane",
-            "drug_ja": "イソフルラン",
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3337,11 +2791,6 @@
         "name_ja": "難産（エキゾチック哺乳類）",
         "drugs": [
           {
-            "drug": "Isoflurane",
-            "drug_ja": "イソフルラン",
-            "reason": "no dosing data for this species"
-          },
-          {
             "drug": "Oxytocin",
             "drug_ja": "オキシトシン",
             "reason": "no dosing data for this species"
@@ -3349,6 +2798,18 @@
           {
             "drug": "Calcium Gluconate",
             "drug_ja": "グルコン酸カルシウム",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "exotic_other_0030",
+        "name": "Mammary Tumors (Exotic Mammal)",
+        "name_ja": "乳腺腫瘍（エキゾチック哺乳類）",
+        "drugs": [
+          {
+            "drug": "Prednisolone",
+            "drug_ja": "プレドニゾロン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3376,13 +2837,55 @@
         "name_ja": "前庭疾患（エキゾチック哺乳類）",
         "drugs": [
           {
+            "drug": "Enrofloxacin",
+            "drug_ja": "エンロフロキサシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Metronidazole",
+            "drug_ja": "メトロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
             "drug": "Fenbendazole",
             "drug_ja": "フェンベンダゾール",
             "reason": "no dosing data for this species"
           },
           {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
+            "drug": "Metoclopramide",
+            "drug_ja": "メトクロプラミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "exotic_other_0035",
+        "name": "Dermatophytosis / Ringworm (Exotic Mammal)",
+        "name_ja": "皮膚糸状菌症（エキゾチック哺乳類）",
+        "drugs": [
+          {
+            "drug": "Ivermectin",
+            "drug_ja": "イベルメクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Fenbendazole",
+            "drug_ja": "フェンベンダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Praziquantel",
+            "drug_ja": "プラジカンテル",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Toltrazuril",
+            "drug_ja": "トルトラズリル",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3404,6 +2907,16 @@
         "name": "Contact Dermatitis (Exotic Mammal)",
         "name_ja": "接触性皮膚炎（エキゾチック哺乳類）",
         "drugs": [
+          {
+            "drug": "Enrofloxacin",
+            "drug_ja": "エンロフロキサシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Itraconazole",
+            "drug_ja": "イトラコナゾール",
+            "reason": "no dosing data for this species"
+          },
           {
             "drug": "Meloxicam",
             "drug_ja": "メロキシカム",
@@ -3431,11 +2944,6 @@
         "name": "Lymphoma (Exotic Mammal)",
         "name_ja": "リンパ腫（エキゾチック哺乳類）",
         "drugs": [
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          },
           {
             "drug": "Prednisolone",
             "drug_ja": "プレドニゾロン",
@@ -3498,8 +3006,28 @@
             "reason": "no dosing data for this species"
           },
           {
+            "drug": "Doxycycline",
+            "drug_ja": "ドキシサイクリン",
+            "reason": "no dosing data for this species"
+          },
+          {
             "drug": "Gentamicin",
             "drug_ja": "ゲンタマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Meloxicam",
+            "drug_ja": "メロキシカム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Prednisolone",
+            "drug_ja": "プレドニゾロン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3551,11 +3079,6 @@
           {
             "drug": "Meloxicam",
             "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Isoflurane",
-            "drug_ja": "イソフルラン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -4777,43 +4300,6 @@
         ]
       },
       {
-        "id": "exotic_other_0147",
-        "name": "Intestinal Parasitism",
-        "name_ja": "腸管寄生虫症（その他）",
-        "drugs": [
-          {
-            "drug": "Metronidazole",
-            "drug_ja": "メトロニダゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ivermectin",
-            "drug_ja": "イベルメクチン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Fenbendazole",
-            "drug_ja": "フェンベンダゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Praziquantel",
-            "drug_ja": "プラジカンテル",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Toltrazuril",
-            "drug_ja": "トルトラズリル",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ronidazole",
-            "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "exotic_other_0148",
         "name": "Rickettsial Disease",
         "name_ja": "リケッチア症（その他）",
@@ -4981,43 +4467,6 @@
         ]
       },
       {
-        "id": "exotic_other_0154",
-        "name": "Tularemia",
-        "name_ja": "野兎病（その他）",
-        "drugs": [
-          {
-            "drug": "Enrofloxacin",
-            "drug_ja": "エンロフロキサシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Doxycycline",
-            "drug_ja": "ドキシサイクリン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Gentamicin",
-            "drug_ja": "ゲンタマイシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Prednisolone",
-            "drug_ja": "プレドニゾロン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ciprofloxacin",
-            "drug_ja": "シプロフロキサシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "exotic_other_0155",
         "name": "Plague (Yersinia pestis)",
         "name_ja": "ペスト（その他）",
@@ -5116,57 +4565,6 @@
         ]
       },
       {
-        "id": "exotic_other_0163",
-        "name": "Metabolic Bone Disease",
-        "name_ja": "代謝性骨疾患（その他）",
-        "drugs": [
-          {
-            "drug": "Calcium Gluconate",
-            "drug_ja": "グルコン酸カルシウム",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0164",
-        "name": "Hepatic Lipidosis",
-        "name_ja": "肝リピドーシス（その他）",
-        "drugs": [
-          {
-            "drug": "Prednisolone",
-            "drug_ja": "プレドニゾロン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ursodiol (UDCA)",
-            "drug_ja": "ウルソデオキシコール酸",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0165",
-        "name": "Renal Disease",
-        "name_ja": "腎疾患（その他）",
-        "drugs": [
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Amlodipine",
-            "drug_ja": "アムロジピン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Aluminum Hydroxide",
-            "drug_ja": "水酸化アルミニウム",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "exotic_other_0166",
         "name": "Reproductive Disorder",
         "name_ja": "繁殖障害（その他）",
@@ -5199,18 +4597,6 @@
           {
             "drug": "Ronidazole",
             "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0167",
-        "name": "Skin Tumor",
-        "name_ja": "皮膚腫瘍（その他）",
-        "drugs": [
-          {
-            "drug": "Prednisolone",
-            "drug_ja": "プレドニゾロン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -5359,18 +4745,6 @@
         ]
       },
       {
-        "id": "exotic_other_0182",
-        "name": "Upper Respiratory Infection",
-        "name_ja": "上部気道感染症（その他）",
-        "drugs": [
-          {
-            "drug": "Enrofloxacin",
-            "drug_ja": "エンロフロキサシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "exotic_other_0183",
         "name": "Rhinitis",
         "name_ja": "鼻炎（その他）",
@@ -5395,33 +4769,6 @@
           {
             "drug": "Enrofloxacin",
             "drug_ja": "エンロフロキサシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0187",
-        "name": "Dermatophytosis (Ringworm)",
-        "name_ja": "皮膚糸状菌症（その他）",
-        "drugs": [
-          {
-            "drug": "Ivermectin",
-            "drug_ja": "イベルメクチン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Fenbendazole",
-            "drug_ja": "フェンベンダゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Praziquantel",
-            "drug_ja": "プラジカンテル",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Toltrazuril",
-            "drug_ja": "トルトラズリル",
             "reason": "no dosing data for this species"
           }
         ]
@@ -5543,43 +4890,6 @@
           {
             "drug": "Ronidazole",
             "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0191",
-        "name": "Contact Dermatitis",
-        "name_ja": "接触性皮膚炎（その他）",
-        "drugs": [
-          {
-            "drug": "Enrofloxacin",
-            "drug_ja": "エンロフロキサシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Itraconazole",
-            "drug_ja": "イトラコナゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Prednisolone",
-            "drug_ja": "プレドニゾロン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Cetirizine",
-            "drug_ja": "セチリジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Chlorhexidine",
-            "drug_ja": "クロルヘキシジン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -5714,38 +5024,6 @@
           {
             "drug": "Sucralfate",
             "drug_ja": "スクラルファート",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ronidazole",
-            "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0203",
-        "name": "Salmonellosis",
-        "name_ja": "サルモネラ症（その他）",
-        "drugs": [
-          {
-            "drug": "Enrofloxacin",
-            "drug_ja": "エンロフロキサシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Metronidazole",
-            "drug_ja": "メトロニダゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ceftazidime",
-            "drug_ja": "セフタジジム",
             "reason": "no dosing data for this species"
           },
           {
@@ -5902,38 +5180,6 @@
         "name": "Cheek Teeth Overgrowth",
         "name_ja": "臼歯過成長（その他）",
         "drugs": [
-          {
-            "drug": "Enrofloxacin",
-            "drug_ja": "エンロフロキサシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Metronidazole",
-            "drug_ja": "メトロニダゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ronidazole",
-            "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0211",
-        "name": "Dental Abscess",
-        "name_ja": "歯科膿瘍（その他）",
-        "drugs": [
-          {
-            "drug": "Amoxicillin",
-            "drug_ja": "アモキシシリン",
-            "reason": "no dosing data for this species"
-          },
           {
             "drug": "Enrofloxacin",
             "drug_ja": "エンロフロキサシン",
@@ -6136,38 +5382,6 @@
         ]
       },
       {
-        "id": "exotic_other_0220",
-        "name": "Vestibular Disease",
-        "name_ja": "前庭疾患（その他）",
-        "drugs": [
-          {
-            "drug": "Enrofloxacin",
-            "drug_ja": "エンロフロキサシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Metronidazole",
-            "drug_ja": "メトロニダゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Fenbendazole",
-            "drug_ja": "フェンベンダゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Metoclopramide",
-            "drug_ja": "メトクロプラミド",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ronidazole",
-            "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "exotic_other_0221",
         "name": "Seizures",
         "name_ja": "痙攣発作（その他）",
@@ -6288,18 +5502,6 @@
         ]
       },
       {
-        "id": "exotic_other_0229",
-        "name": "Obesity",
-        "name_ja": "肥満（その他）",
-        "drugs": [
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "exotic_other_0231",
         "name": "Urinary Tract Infection",
         "name_ja": "尿路感染症（その他）",
@@ -6334,70 +5536,6 @@
         ]
       },
       {
-        "id": "exotic_other_0233",
-        "name": "Urolithiasis",
-        "name_ja": "尿路結石症（その他）",
-        "drugs": [
-          {
-            "drug": "Amoxicillin",
-            "drug_ja": "アモキシシリン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Enrofloxacin",
-            "drug_ja": "エンロフロキサシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0234",
-        "name": "Pyometra",
-        "name_ja": "子宮蓄膿症（その他）",
-        "drugs": [
-          {
-            "drug": "Amoxicillin",
-            "drug_ja": "アモキシシリン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Amoxicillin-Clavulanate",
-            "drug_ja": "アモキシシリン・クラブラン酸",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Enrofloxacin",
-            "drug_ja": "エンロフロキサシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Metronidazole",
-            "drug_ja": "メトロニダゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Chlorhexidine",
-            "drug_ja": "クロルヘキシジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ronidazole",
-            "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "exotic_other_0235",
         "name": "Ovarian Cyst",
         "name_ja": "卵巣嚢胞（その他）",
@@ -6405,47 +5543,6 @@
           {
             "drug": "Meloxicam",
             "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0236",
-        "name": "Dystocia",
-        "name_ja": "難産（その他）",
-        "drugs": [
-          {
-            "drug": "Oxytocin",
-            "drug_ja": "オキシトシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Calcium Gluconate",
-            "drug_ja": "グルコン酸カルシウム",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0237",
-        "name": "Mammary Tumor",
-        "name_ja": "乳腺腫瘍（その他）",
-        "drugs": [
-          {
-            "drug": "Prednisolone",
-            "drug_ja": "プレドニゾロン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "exotic_other_0238",
-        "name": "Lymphoma",
-        "name_ja": "リンパ腫（その他）",
-        "drugs": [
-          {
-            "drug": "Prednisolone",
-            "drug_ja": "プレドニゾロン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -7815,42 +6912,6 @@
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
       {
-        "id": "exotic_other_0165",
-        "name": "Renal Disease",
-        "name_ja": "腎疾患（その他）",
-        "matched_keys": [
-          "adrenal disease"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "exotic_other_0172",
-        "name": "Diabetes Mellitus",
-        "name_ja": "糖尿病（その他）",
-        "matched_keys": [
-          "diabetes mellitus"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "exotic_other_0173",
-        "name": "Adrenal Disease",
-        "name_ja": "副腎疾患（その他）",
-        "matched_keys": [
-          "adrenal disease"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "exotic_other_0187",
-        "name": "Dermatophytosis (Ringworm)",
-        "name_ja": "皮膚糸状菌症（その他）",
-        "matched_keys": [
-          "dermatophytosis"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
         "id": "exotic_other_0209",
         "name": "Incisor Malocclusion",
         "name_ja": "切歯不正咬合（その他）",
@@ -7869,33 +6930,6 @@
         "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
       },
       {
-        "id": "exotic_other_0233",
-        "name": "Urolithiasis",
-        "name_ja": "尿路結石症（その他）",
-        "matched_keys": [
-          "urolithiasis"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "exotic_other_0234",
-        "name": "Pyometra",
-        "name_ja": "子宮蓄膿症（その他）",
-        "matched_keys": [
-          "pyometra"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
-        "id": "exotic_other_0238",
-        "name": "Lymphoma",
-        "name_ja": "リンパ腫（その他）",
-        "matched_keys": [
-          "lymphoma"
-        ],
-        "reason": "dog/cat-oriented citation matched on non-dog/cat species (no species guard)"
-      },
-      {
         "id": "exotic_other_0239",
         "name": "Anemia",
         "name_ja": "貧血（その他）",
@@ -7908,7 +6942,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 289,
+    "total_records": 265,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

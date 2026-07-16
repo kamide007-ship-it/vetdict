@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 244,
-    "merge_clusters": 6,
-    "records_merged_away": 6,
+    "merge_clusters": 16,
+    "records_merged_away": 18,
     "archived": 0,
-    "served_after": 238
+    "served_after": 226
   },
   "merges": [
     {
@@ -23,10 +23,23 @@
           "slug": "dermatophytosis-ringworm",
           "name": "Dermatophytosis (Ringworm)",
           "name_ja": "皮膚糸状菌症（ハリネズミ）"
+        },
+        {
+          "id": "hedgehog_0093",
+          "slug": "dermatophytosis-severe",
+          "name": "Dermatophytosis (Severe)",
+          "name_ja": "皮膚糸状菌症（重症型）"
+        },
+        {
+          "id": "hedgehog_0149",
+          "slug": "dermatophytosis-trichophyton",
+          "name": "Dermatophytosis (Trichophyton)",
+          "name_ja": "皮膚糸状菌症（トリコフィトン）（ハリネズミ）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
+      "inherit_content": true,
+      "curated": true
     },
     {
       "canonical": {
@@ -117,150 +130,202 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0015",
+        "slug": "obesity",
+        "name": "Obesity",
+        "name_ja": "肥満"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0121",
+          "slug": "obesity-severe-morbid",
+          "name": "Obesity (Severe / Morbid)",
+          "name_ja": "肥満（重度/病的）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0016",
+        "slug": "diarrhea-non-specific",
+        "name": "Diarrhea (Non-specific)",
+        "name_ja": "下痢（非特異的）"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0174",
+          "slug": "diarrhea",
+          "name": "Diarrhea",
+          "name_ja": "下痢（ハリネズミ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0017",
+        "slug": "gastrointestinal-foreign-body",
+        "name": "Gastrointestinal Foreign Body",
+        "name_ja": "消化管内異物"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0143",
+          "slug": "gastrointestinal-foreign-body",
+          "name": "Gastrointestinal Foreign Body",
+          "name_ja": "消化管異物"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0018",
+        "slug": "hepatic-lipidosis",
+        "name": "Hepatic Lipidosis",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0118",
+          "slug": "hepatic-lipidosis-obesity-related",
+          "name": "Hepatic Lipidosis (Obesity-Related)",
+          "name_ja": "肝リピドーシス（肥満関連）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0026",
+        "slug": "pneumonia",
+        "name": "Pneumonia",
+        "name_ja": "肺炎"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0241",
+          "slug": "pneumonia-bacterial",
+          "name": "Pneumonia (Bacterial)",
+          "name_ja": "細菌性肺炎（ハリネズミ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0028",
+        "slug": "mycobacteriosis-pulmonary",
+        "name": "Mycobacteriosis (Pulmonary)",
+        "name_ja": "マイコバクテリア症（肺型）"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0057",
+          "slug": "mycobacteriosis-disseminated",
+          "name": "Mycobacteriosis (Disseminated)",
+          "name_ja": "マイコバクテリア症（播種型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0040",
+        "slug": "proptosis-eye-protrusion",
+        "name": "Proptosis (Eye Protrusion)",
+        "name_ja": "眼球突出"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0166",
+          "slug": "proptosis",
+          "name": "Proptosis",
+          "name_ja": "眼球脱出（ハリネズミ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0055",
+        "slug": "fatty-liver-disease-non-obese",
+        "name": "Fatty Liver Disease (Non-obese)",
+        "name_ja": "脂肪肝（非肥満型）"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0164",
+          "slug": "fatty-liver-disease",
+          "name": "Fatty Liver Disease",
+          "name_ja": "脂肪肝（ハリネズミ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0069",
+        "slug": "balloon-syndrome",
+        "name": "Balloon Syndrome",
+        "name_ja": "バルーン症候群"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0140",
+          "slug": "balloon-syndrome-subcutaneous-emphysema",
+          "name": "Balloon Syndrome (Subcutaneous Emphysema)",
+          "name_ja": "バルーン症候群（皮下気腫）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hedgehog_0090",
+        "slug": "caparinia-mange-severe",
+        "name": "Caparinia Mange (Severe)",
+        "name_ja": "カパリニアダニ症（重症型）"
+      },
+      "merged": [
+        {
+          "id": "hedgehog_0150",
+          "slug": "caparinia-mite-infestation",
+          "name": "Caparinia Mite Infestation",
+          "name_ja": "カパリニアダニ症（ハリネズミ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Ringworm (Dermatophytosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hedgehog_0002",
-            "slug": "ringworm-dermatophytosis",
-            "name": "Ringworm (Dermatophytosis)",
-            "name_ja": "皮膚糸状菌症"
-          },
-          {
-            "id": "hedgehog_0093",
-            "slug": "dermatophytosis-severe",
-            "name": "Dermatophytosis (Severe)",
-            "name_ja": "皮膚糸状菌症（重症型）"
-          },
-          {
-            "id": "hedgehog_0149",
-            "slug": "dermatophytosis-trichophyton",
-            "name": "Dermatophytosis (Trichophyton)",
-            "name_ja": "皮膚糸状菌症（トリコフィトン）（ハリネズミ）"
-          },
-          {
-            "id": "hedgehog_0243",
-            "slug": "dermatophytosis-ringworm",
-            "name": "Dermatophytosis (Ringworm)",
-            "name_ja": "皮膚糸状菌症（ハリネズミ）"
-          }
-        ]
-      },
-      {
-        "base": "Obesity",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hedgehog_0015",
-            "slug": "obesity",
-            "name": "Obesity",
-            "name_ja": "肥満"
-          },
-          {
-            "id": "hedgehog_0121",
-            "slug": "obesity-severe-morbid",
-            "name": "Obesity (Severe / Morbid)",
-            "name_ja": "肥満（重度/病的）"
-          }
-        ]
-      },
-      {
-        "base": "Diarrhea (Non-specific)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hedgehog_0016",
-            "slug": "diarrhea-non-specific",
-            "name": "Diarrhea (Non-specific)",
-            "name_ja": "下痢（非特異的）"
-          },
-          {
-            "id": "hedgehog_0174",
-            "slug": "diarrhea",
-            "name": "Diarrhea",
-            "name_ja": "下痢（ハリネズミ）"
-          }
-        ]
-      },
-      {
-        "base": "Gastrointestinal Foreign Body",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hedgehog_0017",
-            "slug": "gastrointestinal-foreign-body",
-            "name": "Gastrointestinal Foreign Body",
-            "name_ja": "消化管内異物"
-          },
-          {
-            "id": "hedgehog_0143",
-            "slug": "gastrointestinal-foreign-body",
-            "name": "Gastrointestinal Foreign Body",
-            "name_ja": "消化管異物"
-          }
-        ]
-      },
-      {
-        "base": "Hepatic Lipidosis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hedgehog_0018",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "hedgehog_0118",
-            "slug": "hepatic-lipidosis-obesity-related",
-            "name": "Hepatic Lipidosis (Obesity-Related)",
-            "name_ja": "肝リピドーシス（肥満関連）"
-          }
-        ]
-      },
-      {
-        "base": "Pneumonia",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hedgehog_0026",
-            "slug": "pneumonia",
-            "name": "Pneumonia",
-            "name_ja": "肺炎"
-          },
-          {
-            "id": "hedgehog_0241",
-            "slug": "pneumonia-bacterial",
-            "name": "Pneumonia (Bacterial)",
-            "name_ja": "細菌性肺炎（ハリネズミ）"
-          }
-        ]
-      },
-      {
-        "base": "Mycobacteriosis (Pulmonary)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hedgehog_0028",
-            "slug": "mycobacteriosis-pulmonary",
-            "name": "Mycobacteriosis (Pulmonary)",
-            "name_ja": "マイコバクテリア症（肺型）"
-          },
-          {
-            "id": "hedgehog_0057",
-            "slug": "mycobacteriosis-disseminated",
-            "name": "Mycobacteriosis (Disseminated)",
-            "name_ja": "マイコバクテリア症（播種型）"
-          }
-        ]
-      },
       {
         "base": "Proptosis (Eye Protrusion)",
         "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
@@ -300,60 +365,6 @@
             "slug": "exophthalmos",
             "name": "Exophthalmos",
             "name_ja": "眼球突出（ハリネズミ）"
-          }
-        ]
-      },
-      {
-        "base": "Fatty Liver Disease (Non-obese)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hedgehog_0055",
-            "slug": "fatty-liver-disease-non-obese",
-            "name": "Fatty Liver Disease (Non-obese)",
-            "name_ja": "脂肪肝（非肥満型）"
-          },
-          {
-            "id": "hedgehog_0164",
-            "slug": "fatty-liver-disease",
-            "name": "Fatty Liver Disease",
-            "name_ja": "脂肪肝（ハリネズミ）"
-          }
-        ]
-      },
-      {
-        "base": "Balloon Syndrome",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hedgehog_0069",
-            "slug": "balloon-syndrome",
-            "name": "Balloon Syndrome",
-            "name_ja": "バルーン症候群"
-          },
-          {
-            "id": "hedgehog_0140",
-            "slug": "balloon-syndrome-subcutaneous-emphysema",
-            "name": "Balloon Syndrome (Subcutaneous Emphysema)",
-            "name_ja": "バルーン症候群（皮下気腫）"
-          }
-        ]
-      },
-      {
-        "base": "Caparinia Mange (Severe)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hedgehog_0090",
-            "slug": "caparinia-mange-severe",
-            "name": "Caparinia Mange (Severe)",
-            "name_ja": "カパリニアダニ症（重症型）"
-          },
-          {
-            "id": "hedgehog_0150",
-            "slug": "caparinia-mite-infestation",
-            "name": "Caparinia Mite Infestation",
-            "name_ja": "カパリニアダニ症（ハリネズミ）"
           }
         ]
       }

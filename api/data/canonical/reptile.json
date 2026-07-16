@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 286,
-    "merge_clusters": 6,
-    "records_merged_away": 6,
+    "merge_clusters": 18,
+    "records_merged_away": 18,
     "archived": 0,
-    "served_after": 280
+    "served_after": 268
   },
   "merges": [
     {
@@ -117,120 +117,240 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0007",
+        "slug": "thiamine-vitamin-b1-deficiency",
+        "name": "Thiamine (Vitamin B1) Deficiency",
+        "name_ja": "チアミン（ビタミンB1）欠乏症"
+      },
+      "merged": [
+        {
+          "id": "reptile_0170",
+          "slug": "thiamine-deficiency",
+          "name": "Thiamine Deficiency",
+          "name_ja": "チアミン欠乏症（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0020",
+        "slug": "amoebic-infection-entamoeba",
+        "name": "Amoebic Infection (Entamoeba)",
+        "name_ja": "アメーバ感染症"
+      },
+      "merged": [
+        {
+          "id": "reptile_0187",
+          "slug": "amoebic-infection",
+          "name": "Amoebic Infection",
+          "name_ja": "アメーバ感染（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0027",
+        "slug": "scale-rot-ulcerative-dermatitis",
+        "name": "Scale Rot (Ulcerative Dermatitis)",
+        "name_ja": "スケイルロット（潰瘍性皮膚炎）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0190",
+          "slug": "scale-rot",
+          "name": "Scale Rot",
+          "name_ja": "鱗腐敗（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0033",
+        "slug": "rostral-abrasion-nose-rub",
+        "name": "Rostral Abrasion (Nose Rub)",
+        "name_ja": "吻部擦過傷（ノーズラブ）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0188",
+          "slug": "rostral-abrasion",
+          "name": "Rostral Abrasion",
+          "name_ja": "吻端擦過傷（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0034",
+        "slug": "shell-rot-ulcerative-shell-disease",
+        "name": "Shell Rot (Ulcerative Shell Disease)",
+        "name_ja": "甲羅腐敗症"
+      },
+      "merged": [
+        {
+          "id": "reptile_0189",
+          "slug": "shell-rot",
+          "name": "Shell Rot",
+          "name_ja": "甲羅腐敗（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0040",
+        "slug": "hepatic-lipidosis-fatty-liver-disease",
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0205",
+          "slug": "hepatic-lipidosis",
+          "name": "Hepatic Lipidosis",
+          "name_ja": "肝リピドーシス（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0063",
+        "slug": "renal-failure-chronic-kidney-disease",
+        "name": "Renal Failure (Chronic Kidney Disease)",
+        "name_ja": "腎不全（慢性腎疾患）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0198",
+          "slug": "renal-failure",
+          "name": "Renal Failure",
+          "name_ja": "腎不全（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0064",
+        "slug": "bladder-stones-urolithiasis",
+        "name": "Bladder Stones (Urolithiasis)",
+        "name_ja": "膀胱結石（尿路結石症）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0200",
+          "slug": "bladder-stone",
+          "name": "Bladder Stone",
+          "name_ja": "膀胱結石（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0074",
+        "slug": "hyperthermia-heat-stroke",
+        "name": "Hyperthermia (Heat Stroke)",
+        "name_ja": "高体温症（熱中症）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0244",
+          "slug": "hyperthermia",
+          "name": "Hyperthermia",
+          "name_ja": "高体温症（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0081",
+        "slug": "yellow-fungus-disease-chrysosporium-anamorph-of-nannizziopsis-vriesii-canv",
+        "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
+        "name_ja": "黄色真菌症（CANV）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0164",
+          "slug": "yellow-fungus-disease-chrysosporium",
+          "name": "Yellow Fungus Disease (Chrysosporium)",
+          "name_ja": "黄色真菌病（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0153",
+        "slug": "necrotic-dermatitis-vesicular-dermatitis",
+        "name": "Necrotic Dermatitis (Vesicular Dermatitis)",
+        "name_ja": "壊死性皮膚炎（水疱性皮膚炎）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0168",
+          "slug": "necrotic-dermatitis",
+          "name": "Necrotic Dermatitis",
+          "name_ja": "壊死性皮膚炎（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0162",
+        "slug": "septicemic-cutaneous-ulcerative-disease-scud",
+        "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
+        "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0167",
+          "slug": "septicemic-cutaneous-ulcerative-disease",
+          "name": "Septicemic Cutaneous Ulcerative Disease",
+          "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Thiamine (Vitamin B1) Deficiency",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0007",
-            "slug": "thiamine-vitamin-b1-deficiency",
-            "name": "Thiamine (Vitamin B1) Deficiency",
-            "name_ja": "チアミン（ビタミンB1）欠乏症"
-          },
-          {
-            "id": "reptile_0170",
-            "slug": "thiamine-deficiency",
-            "name": "Thiamine Deficiency",
-            "name_ja": "チアミン欠乏症（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Amoebic Infection (Entamoeba)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0020",
-            "slug": "amoebic-infection-entamoeba",
-            "name": "Amoebic Infection (Entamoeba)",
-            "name_ja": "アメーバ感染症"
-          },
-          {
-            "id": "reptile_0187",
-            "slug": "amoebic-infection",
-            "name": "Amoebic Infection",
-            "name_ja": "アメーバ感染（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Scale Rot (Ulcerative Dermatitis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0027",
-            "slug": "scale-rot-ulcerative-dermatitis",
-            "name": "Scale Rot (Ulcerative Dermatitis)",
-            "name_ja": "スケイルロット（潰瘍性皮膚炎）"
-          },
-          {
-            "id": "reptile_0190",
-            "slug": "scale-rot",
-            "name": "Scale Rot",
-            "name_ja": "鱗腐敗（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Rostral Abrasion (Nose Rub)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0033",
-            "slug": "rostral-abrasion-nose-rub",
-            "name": "Rostral Abrasion (Nose Rub)",
-            "name_ja": "吻部擦過傷（ノーズラブ）"
-          },
-          {
-            "id": "reptile_0188",
-            "slug": "rostral-abrasion",
-            "name": "Rostral Abrasion",
-            "name_ja": "吻端擦過傷（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Shell Rot (Ulcerative Shell Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0034",
-            "slug": "shell-rot-ulcerative-shell-disease",
-            "name": "Shell Rot (Ulcerative Shell Disease)",
-            "name_ja": "甲羅腐敗症"
-          },
-          {
-            "id": "reptile_0189",
-            "slug": "shell-rot",
-            "name": "Shell Rot",
-            "name_ja": "甲羅腐敗（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0040",
-            "slug": "hepatic-lipidosis-fatty-liver-disease",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "reptile_0205",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（爬虫類）"
-          }
-        ]
-      },
       {
         "base": "Anorexia (Non-specific)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -274,78 +394,6 @@
         ]
       },
       {
-        "base": "Renal Failure (Chronic Kidney Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0063",
-            "slug": "renal-failure-chronic-kidney-disease",
-            "name": "Renal Failure (Chronic Kidney Disease)",
-            "name_ja": "腎不全（慢性腎疾患）"
-          },
-          {
-            "id": "reptile_0198",
-            "slug": "renal-failure",
-            "name": "Renal Failure",
-            "name_ja": "腎不全（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Bladder Stones (Urolithiasis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0064",
-            "slug": "bladder-stones-urolithiasis",
-            "name": "Bladder Stones (Urolithiasis)",
-            "name_ja": "膀胱結石（尿路結石症）"
-          },
-          {
-            "id": "reptile_0200",
-            "slug": "bladder-stone",
-            "name": "Bladder Stone",
-            "name_ja": "膀胱結石（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Hyperthermia (Heat Stroke)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0074",
-            "slug": "hyperthermia-heat-stroke",
-            "name": "Hyperthermia (Heat Stroke)",
-            "name_ja": "高体温症（熱中症）"
-          },
-          {
-            "id": "reptile_0244",
-            "slug": "hyperthermia",
-            "name": "Hyperthermia",
-            "name_ja": "高体温症（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0081",
-            "slug": "yellow-fungus-disease-chrysosporium-anamorph-of-nannizziopsis-vriesii-canv",
-            "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
-            "name_ja": "黄色真菌症（CANV）"
-          },
-          {
-            "id": "reptile_0164",
-            "slug": "yellow-fungus-disease-chrysosporium",
-            "name": "Yellow Fungus Disease (Chrysosporium)",
-            "name_ja": "黄色真菌病（爬虫類）"
-          }
-        ]
-      },
-      {
         "base": "Osteomyelitis",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -360,42 +408,6 @@
             "slug": "osteomyelitis-jaw",
             "name": "Osteomyelitis (Jaw)",
             "name_ja": "顎骨骨髄炎"
-          }
-        ]
-      },
-      {
-        "base": "Necrotic Dermatitis (Vesicular Dermatitis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0153",
-            "slug": "necrotic-dermatitis-vesicular-dermatitis",
-            "name": "Necrotic Dermatitis (Vesicular Dermatitis)",
-            "name_ja": "壊死性皮膚炎（水疱性皮膚炎）"
-          },
-          {
-            "id": "reptile_0168",
-            "slug": "necrotic-dermatitis",
-            "name": "Necrotic Dermatitis",
-            "name_ja": "壊死性皮膚炎（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0162",
-            "slug": "septicemic-cutaneous-ulcerative-disease-scud",
-            "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
-            "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）"
-          },
-          {
-            "id": "reptile_0167",
-            "slug": "septicemic-cutaneous-ulcerative-disease",
-            "name": "Septicemic Cutaneous Ulcerative Disease",
-            "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）"
           }
         ]
       },

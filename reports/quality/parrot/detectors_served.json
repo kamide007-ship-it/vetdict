@@ -1,25 +1,11 @@
 {
   "species": "parrot",
   "view": "served",
-  "record_count": 274,
+  "record_count": 265,
   "T101": {
     "detector": "T101",
-    "total_records": 274,
+    "total_records": 265,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "parrot_0000",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "オウム類嘴羽毛病（PBFD）"
-          },
-          {
-            "id": "parrot_0162",
-            "name": "Psittacine Beak and Feather Disease",
-            "name_ja": "嘴羽毛病（オウム）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -42,34 +28,6 @@
       {
         "members": [
           {
-            "id": "parrot_0017",
-            "name": "Candidiasis",
-            "name_ja": "カンジダ症"
-          },
-          {
-            "id": "parrot_0184",
-            "name": "Candidiasis (Crop Mycosis)",
-            "name_ja": "カンジダ症（そ嚢真菌症）（オウム）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parrot_0024",
-            "name": "Heavy Metal Poisoning (Lead/Zinc)",
-            "name_ja": "重金属中毒（鉛・亜鉛）"
-          },
-          {
-            "id": "parrot_0169",
-            "name": "Heavy Metal Poisoning",
-            "name_ja": "重金属中毒（オウム）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "parrot_0037",
             "name": "Liver Disease (Hepatitis)",
             "name_ja": "肝疾患（肝炎）"
@@ -78,90 +36,6 @@
             "id": "parrot_0186",
             "name": "Liver Disease (Hepatic Lipidosis)",
             "name_ja": "肝疾患（肝リピドーシス）（オウム）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parrot_0039",
-            "name": "Gout (Articular and Visceral)",
-            "name_ja": "痛風（関節型・内臓型）"
-          },
-          {
-            "id": "parrot_0187",
-            "name": "Gout (Visceral/Articular)",
-            "name_ja": "痛風（内臓型/関節型）（オウム）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parrot_0040",
-            "name": "Atherosclerosis",
-            "name_ja": "動脈硬化症"
-          },
-          {
-            "id": "parrot_0166",
-            "name": "Atherosclerosis (Parrot-Specific)",
-            "name_ja": "動脈硬化症（オウム特異的）（オウム）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parrot_0043",
-            "name": "Egg Binding (Dystocia)",
-            "name_ja": "卵塞（卵詰まり）"
-          },
-          {
-            "id": "parrot_0181",
-            "name": "Egg Binding",
-            "name_ja": "卵詰まり（オウム）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parrot_0047",
-            "name": "Crop Stasis (Slow Crop / Crop Impaction)",
-            "name_ja": "嗉嚢停滞（嗉嚢うっ滞）"
-          },
-          {
-            "id": "parrot_0183",
-            "name": "Crop Stasis",
-            "name_ja": "そ嚢うっ滞（オウム）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parrot_0079",
-            "name": "Heat Stroke (Hyperthermia)",
-            "name_ja": "熱中症（高体温症）"
-          },
-          {
-            "id": "parrot_0242",
-            "name": "Heat Stroke",
-            "name_ja": "熱中症（オウム）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parrot_0108",
-            "name": "E. coli Infection (Colibacillosis)",
-            "name_ja": "大腸菌感染症"
-          },
-          {
-            "id": "parrot_0215",
-            "name": "E. coli Infection",
-            "name_ja": "大腸菌感染（オウム）"
           }
         ]
       },
@@ -213,70 +87,9 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 14,
-    "redundant_record_count": 16,
+    "exact_duplicate_cluster_count": 5,
+    "redundant_record_count": 7,
     "family_clusters": [
-      {
-        "shared_stem": "feathe",
-        "size": 11,
-        "members": [
-          {
-            "id": "parrot_0000",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "オウム類嘴羽毛病（PBFD）"
-          },
-          {
-            "id": "parrot_0052",
-            "name": "Feather Destructive Behavior (Feather Plucking)",
-            "name_ja": "羽毛破壊行動（毛引き症）"
-          },
-          {
-            "id": "parrot_0077",
-            "name": "Feather Cyst",
-            "name_ja": "羽嚢腫"
-          },
-          {
-            "id": "parrot_0090",
-            "name": "Feather Folliculitis",
-            "name_ja": "羽毛毛包炎"
-          },
-          {
-            "id": "parrot_0139",
-            "name": "Feather Follicle Cyst (Chronic)",
-            "name_ja": "慢性羽包嚢胞"
-          },
-          {
-            "id": "parrot_0150",
-            "name": "Hormonal Feather Plucking",
-            "name_ja": "ホルモン性毛引き症"
-          },
-          {
-            "id": "parrot_0162",
-            "name": "Psittacine Beak and Feather Disease",
-            "name_ja": "嘴羽毛病（オウム）"
-          },
-          {
-            "id": "parrot_0165",
-            "name": "Eclectus Feather Disease",
-            "name_ja": "オオハナインコ羽毛疾患（オウム）"
-          },
-          {
-            "id": "parrot_0170",
-            "name": "Behavioral Feather Destructive Disorder",
-            "name_ja": "行動性羽毛破壊障害（オウム）"
-          },
-          {
-            "id": "parrot_0180",
-            "name": "Feather Plucking",
-            "name_ja": "毛引き（オウム）"
-          },
-          {
-            "id": "parrot_0196",
-            "name": "Feather Mites",
-            "name_ja": "羽毛ダニ（オウム）"
-          }
-        ]
-      },
       {
         "shared_stem": "defici",
         "size": 10,
@@ -330,6 +143,62 @@
             "id": "parrot_0189",
             "name": "Calcium Deficiency (Hypocalcemia)",
             "name_ja": "カルシウム欠乏症（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "feathe",
+        "size": 10,
+        "members": [
+          {
+            "id": "parrot_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "オウム類嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "parrot_0052",
+            "name": "Feather Destructive Behavior (Feather Plucking)",
+            "name_ja": "羽毛破壊行動（毛引き症）"
+          },
+          {
+            "id": "parrot_0077",
+            "name": "Feather Cyst",
+            "name_ja": "羽嚢腫"
+          },
+          {
+            "id": "parrot_0090",
+            "name": "Feather Folliculitis",
+            "name_ja": "羽毛毛包炎"
+          },
+          {
+            "id": "parrot_0139",
+            "name": "Feather Follicle Cyst (Chronic)",
+            "name_ja": "慢性羽包嚢胞"
+          },
+          {
+            "id": "parrot_0150",
+            "name": "Hormonal Feather Plucking",
+            "name_ja": "ホルモン性毛引き症"
+          },
+          {
+            "id": "parrot_0165",
+            "name": "Eclectus Feather Disease",
+            "name_ja": "オオハナインコ羽毛疾患（オウム）"
+          },
+          {
+            "id": "parrot_0170",
+            "name": "Behavioral Feather Destructive Disorder",
+            "name_ja": "行動性羽毛破壊障害（オウム）"
+          },
+          {
+            "id": "parrot_0180",
+            "name": "Feather Plucking",
+            "name_ja": "毛引き（オウム）"
+          },
+          {
+            "id": "parrot_0196",
+            "name": "Feather Mites",
+            "name_ja": "羽毛ダニ（オウム）"
           }
         ]
       },
@@ -651,42 +520,6 @@
         ]
       },
       {
-        "shared_stem": "beak",
-        "size": 6,
-        "members": [
-          {
-            "id": "parrot_0000",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "オウム類嘴羽毛病（PBFD）"
-          },
-          {
-            "id": "parrot_0057",
-            "name": "Beak Malocclusion",
-            "name_ja": "嘴不正咬合"
-          },
-          {
-            "id": "parrot_0058",
-            "name": "Beak Overgrowth",
-            "name_ja": "嘴過長症"
-          },
-          {
-            "id": "parrot_0162",
-            "name": "Psittacine Beak and Feather Disease",
-            "name_ja": "嘴羽毛病（オウム）"
-          },
-          {
-            "id": "parrot_0211",
-            "name": "Beak Deformity (Scissor Beak)",
-            "name_ja": "嘴変形（シザービーク）（オウム）"
-          },
-          {
-            "id": "parrot_0212",
-            "name": "Beak Fracture",
-            "name_ja": "嘴骨折（オウム）"
-          }
-        ]
-      },
-      {
         "shared_stem": "papill",
         "size": 6,
         "members": [
@@ -723,69 +556,33 @@
         ]
       },
       {
-        "shared_stem": "poison",
-        "size": 6,
-        "members": [
-          {
-            "id": "parrot_0024",
-            "name": "Heavy Metal Poisoning (Lead/Zinc)",
-            "name_ja": "重金属中毒（鉛・亜鉛）"
-          },
-          {
-            "id": "parrot_0147",
-            "name": "Pesticide Poisoning",
-            "name_ja": "農薬中毒"
-          },
-          {
-            "id": "parrot_0148",
-            "name": "Rodenticide Poisoning",
-            "name_ja": "殺鼠剤中毒"
-          },
-          {
-            "id": "parrot_0156",
-            "name": "Copper Poisoning",
-            "name_ja": "銅中毒"
-          },
-          {
-            "id": "parrot_0169",
-            "name": "Heavy Metal Poisoning",
-            "name_ja": "重金属中毒（オウム）"
-          },
-          {
-            "id": "parrot_0240",
-            "name": "Lead Poisoning",
-            "name_ja": "鉛中毒（オウム）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "crop",
+        "shared_stem": "beak",
         "size": 5,
         "members": [
           {
-            "id": "parrot_0047",
-            "name": "Crop Stasis (Slow Crop / Crop Impaction)",
-            "name_ja": "嗉嚢停滞（嗉嚢うっ滞）"
+            "id": "parrot_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "オウム類嘴羽毛病（PBFD）"
           },
           {
-            "id": "parrot_0048",
-            "name": "Crop Burns",
-            "name_ja": "嗉嚢火傷"
+            "id": "parrot_0057",
+            "name": "Beak Malocclusion",
+            "name_ja": "嘴不正咬合"
           },
           {
-            "id": "parrot_0124",
-            "name": "Crop Mycosis",
-            "name_ja": "素嚢真菌症"
+            "id": "parrot_0058",
+            "name": "Beak Overgrowth",
+            "name_ja": "嘴過長症"
           },
           {
-            "id": "parrot_0183",
-            "name": "Crop Stasis",
-            "name_ja": "そ嚢うっ滞（オウム）"
+            "id": "parrot_0211",
+            "name": "Beak Deformity (Scissor Beak)",
+            "name_ja": "嘴変形（シザービーク）（オウム）"
           },
           {
-            "id": "parrot_0249",
-            "name": "Crop Impaction",
-            "name_ja": "そ嚢停滞（オウム）"
+            "id": "parrot_0212",
+            "name": "Beak Fracture",
+            "name_ja": "嘴骨折（オウム）"
           }
         ]
       },
@@ -914,33 +711,33 @@
         ]
       },
       {
-        "shared_stem": "psitta",
+        "shared_stem": "poison",
         "size": 5,
         "members": [
           {
-            "id": "parrot_0000",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "オウム類嘴羽毛病（PBFD）"
+            "id": "parrot_0024",
+            "name": "Heavy Metal Poisoning (Lead/Zinc)",
+            "name_ja": "重金属中毒（鉛・亜鉛）"
           },
           {
-            "id": "parrot_0002",
-            "name": "Psittacosis (Chlamydiosis)",
-            "name_ja": "オウム病（クラミジア症）"
+            "id": "parrot_0147",
+            "name": "Pesticide Poisoning",
+            "name_ja": "農薬中毒"
           },
           {
-            "id": "parrot_0054",
-            "name": "Psittacine Stress Syndrome",
-            "name_ja": "オウム目ストレス症候群"
+            "id": "parrot_0148",
+            "name": "Rodenticide Poisoning",
+            "name_ja": "殺鼠剤中毒"
           },
           {
-            "id": "parrot_0089",
-            "name": "Psittacine Proventricular Worm (Spirurids)",
-            "name_ja": "オウム目前胃寄生虫（旋尾線虫類）"
+            "id": "parrot_0156",
+            "name": "Copper Poisoning",
+            "name_ja": "銅中毒"
           },
           {
-            "id": "parrot_0162",
-            "name": "Psittacine Beak and Feather Disease",
-            "name_ja": "嘴羽毛病（オウム）"
+            "id": "parrot_0240",
+            "name": "Lead Poisoning",
+            "name_ja": "鉛中毒（オウム）"
           }
         ]
       },
@@ -998,6 +795,32 @@
             "id": "parrot_0234",
             "name": "Phobic Behavior",
             "name_ja": "恐怖症行動（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "crop",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0047",
+            "name": "Crop Stasis (Slow Crop / Crop Impaction)",
+            "name_ja": "嗉嚢停滞（嗉嚢うっ滞）"
+          },
+          {
+            "id": "parrot_0048",
+            "name": "Crop Burns",
+            "name_ja": "嗉嚢火傷"
+          },
+          {
+            "id": "parrot_0124",
+            "name": "Crop Mycosis",
+            "name_ja": "素嚢真菌症"
+          },
+          {
+            "id": "parrot_0249",
+            "name": "Crop Impaction",
+            "name_ja": "そ嚢停滞（オウム）"
           }
         ]
       },
@@ -1076,6 +899,32 @@
             "id": "parrot_0197",
             "name": "Red Mite (Dermanyssus)",
             "name_ja": "ワクモ（Dermanyssus）（オウム）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "psitta",
+        "size": 4,
+        "members": [
+          {
+            "id": "parrot_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "オウム類嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "parrot_0002",
+            "name": "Psittacosis (Chlamydiosis)",
+            "name_ja": "オウム病（クラミジア症）"
+          },
+          {
+            "id": "parrot_0054",
+            "name": "Psittacine Stress Syndrome",
+            "name_ja": "オウム目ストレス症候群"
+          },
+          {
+            "id": "parrot_0089",
+            "name": "Psittacine Proventricular Worm (Spirurids)",
+            "name_ja": "オウム目前胃寄生虫（旋尾線虫類）"
           }
         ]
       },
@@ -1424,16 +1273,16 @@
   },
   "T102": {
     "detector": "T102",
-    "total_records": 274,
+    "total_records": 265,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 274,
+    "total_records": 265,
     "empty_count": 0,
-    "heading_only_count": 72,
-    "with_dosage_count": 202,
+    "heading_only_count": 69,
+    "with_dosage_count": 196,
     "empty": [],
     "heading_only": [
       {
@@ -1474,14 +1323,6 @@
         "name_ja": "腸内寄生虫症（回虫・条虫）",
         "treatment_ja_len": 172,
         "treatment_len": 172,
-        "has_dosage": false
-      },
-      {
-        "id": "parrot_0024",
-        "name": "Heavy Metal Poisoning (Lead/Zinc)",
-        "name_ja": "重金属中毒（鉛・亜鉛）",
-        "treatment_ja_len": 449,
-        "treatment_len": 489,
         "has_dosage": false
       },
       {
@@ -1698,14 +1539,6 @@
         "name_ja": "羽嚢腫",
         "treatment_ja_len": 79,
         "treatment_len": 193,
-        "has_dosage": false
-      },
-      {
-        "id": "parrot_0079",
-        "name": "Heat Stroke (Hyperthermia)",
-        "name_ja": "熱中症（高体温症）",
-        "treatment_ja_len": 81,
-        "treatment_len": 232,
         "has_dosage": false
       },
       {
@@ -1981,14 +1814,6 @@
         "has_dosage": false
       },
       {
-        "id": "parrot_0162",
-        "name": "Psittacine Beak and Feather Disease",
-        "name_ja": "嘴羽毛病（オウム）",
-        "treatment_ja_len": 341,
-        "treatment_len": 224,
-        "has_dosage": false
-      },
-      {
         "id": "parrot_0168",
         "name": "Cloacal Papillomatosis",
         "name_ja": "総排泄腔乳頭腫症（オウム）",
@@ -2016,7 +1841,7 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 274,
+    "total_records": 265,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 33,
@@ -2032,6 +1857,18 @@
           {
             "drug": "Sulfadiazine",
             "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "parrot_0024",
+        "name": "Heavy Metal Poisoning (Lead/Zinc)",
+        "name_ja": "重金属中毒（鉛・亜鉛）",
+        "drugs": [
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2116,18 +1953,6 @@
           {
             "drug": "Cisapride",
             "drug_ja": "シサプリド",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "parrot_0169",
-        "name": "Heavy Metal Poisoning",
-        "name_ja": "重金属中毒（オウム）",
-        "drugs": [
-          {
-            "drug": "Apomorphine",
-            "drug_ja": "アポモルフィン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2582,7 +2407,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 274,
+    "total_records": 265,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,
