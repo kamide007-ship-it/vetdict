@@ -1,46 +1,19 @@
 # VetDict 品質検出レポート — reptile
 
-- 総レコード数: **280**
+- 総レコード数: **268**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **17** （冗長レコード 18 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **41**
+- 完全一致重複クラスタ: **5** （冗長レコード 6 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **35**
 
 ### 完全一致重複（上位20）
-- チアミン（ビタミンB1）欠乏症（Thiamine (Vitamin B1) Deficiency）[reptile_0007] / チアミン欠乏症（爬虫類）（Thiamine Deficiency）[reptile_0170]
-- アメーバ感染症（Amoebic Infection (Entamoeba)）[reptile_0020] / アメーバ感染（爬虫類）（Amoebic Infection）[reptile_0187]
-- スケイルロット（潰瘍性皮膚炎）（Scale Rot (Ulcerative Dermatitis)）[reptile_0027] / 鱗腐敗（爬虫類）（Scale Rot）[reptile_0190]
-- 吻部擦過傷（ノーズラブ）（Rostral Abrasion (Nose Rub)）[reptile_0033] / 吻端擦過傷（爬虫類）（Rostral Abrasion）[reptile_0188]
-- 甲羅腐敗症（Shell Rot (Ulcerative Shell Disease)）[reptile_0034] / 甲羅腐敗（爬虫類）（Shell Rot）[reptile_0189]
-- 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[reptile_0040] / 肝リピドーシス（爬虫類）（Hepatic Lipidosis）[reptile_0205]
 - 食欲不振（非特異的）（Anorexia (Non-specific)）[reptile_0043] / 拒食（行動性）（爬虫類）（Anorexia (Behavioral)）[reptile_0212] / ストレス性拒食（爬虫類）（Anorexia (Stress-Related)）[reptile_0254]
 - 排卵前卵胞停滞（Pre-ovulatory Follicular Stasis）[reptile_0058] / 排卵前卵胞停滞（卵黄性体腔炎）（Preovulatory Follicular Stasis (Yolk Coelomitis)）[reptile_0161]
-- 腎不全（慢性腎疾患）（Renal Failure (Chronic Kidney Disease)）[reptile_0063] / 腎不全（爬虫類）（Renal Failure）[reptile_0198]
-- 膀胱結石（尿路結石症）（Bladder Stones (Urolithiasis)）[reptile_0064] / 膀胱結石（爬虫類）（Bladder Stone）[reptile_0200]
-- 高体温症（熱中症）（Hyperthermia (Heat Stroke)）[reptile_0074] / 高体温症（爬虫類）（Hyperthermia）[reptile_0244]
-- 黄色真菌症（CANV）（Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)）[reptile_0081] / 黄色真菌病（爬虫類）（Yellow Fungus Disease (Chrysosporium)）[reptile_0164]
 - 骨髄炎（Osteomyelitis）[reptile_0082] / 顎骨骨髄炎（Osteomyelitis (Jaw)）[reptile_0112]
-- 壊死性皮膚炎（水疱性皮膚炎）（Necrotic Dermatitis (Vesicular Dermatitis)）[reptile_0153] / 壊死性皮膚炎（爬虫類）（Necrotic Dermatitis）[reptile_0168]
-- 敗血症性皮膚潰瘍症（SCUD、シェル腐れ）（Septicemic Cutaneous Ulcerative Disease (SCUD)）[reptile_0162] / 敗血性皮膚潰瘍性疾患（爬虫類）（Septicemic Cutaneous Ulcerative Disease）[reptile_0167]
 - 痛風（内臓型）（爬虫類）（Gout (Visceral)）[reptile_0196] / 痛風（関節型）（爬虫類）（Gout (Articular)）[reptile_0197]
 - 四肢骨折（爬虫類）（Fracture (Limb)）[reptile_0223] / 甲羅骨折（爬虫類）（Fracture (Shell/Carapace)）[reptile_0224]
 
 ### 疾患ファミリー候補（上位15）
-- stem=`dermat` × 14件
-    - 皮膚糸状菌症（Dermatophytosis (Fungal Skin Infection)）[reptile_0030]
-    - 細菌性皮膚炎（Bacterial Dermatitis）[reptile_0031]
-    - 光線過敏性皮膚炎（Photosensitization Dermatitis）[reptile_0146]
-    - 壊死性皮膚炎（水疱性皮膚炎）（Necrotic Dermatitis (Vesicular Dermatitis)）[reptile_0153]
-    - 壊死性皮膚炎（爬虫類）（Necrotic Dermatitis）[reptile_0168]
-    - 潰瘍性皮膚炎（爬虫類）（Ulcerative Dermatitis）[reptile_0194]
-    - 皮膚細菌感染（爬虫類）（Dermatological Bacterial Infection）[reptile_0276]
-    - 皮膚ウイルス感染（爬虫類）（Dermatological Viral Infection）[reptile_0277]
-    - 皮膚真菌感染（爬虫類）（Dermatological Fungal Infection）[reptile_0278]
-    - 皮膚寄生虫寄生（爬虫類）（Dermatological Parasitic Infestation）[reptile_0279]
-    - 皮膚腫瘍性疾患（爬虫類）（Dermatological Neoplasia）[reptile_0280]
-    - 皮膚自己免疫疾患（爬虫類）（Dermatological Autoimmune Disease）[reptile_0281]
-    - 皮膚アレルギー疾患（爬虫類）（Dermatological Allergic Disease）[reptile_0282]
-    - 慢性皮膚炎（爬虫類）（Chronic Dermatitis）[reptile_0283]
 - stem=`respir` × 14件
     - 上部呼吸器感染症（Upper Respiratory Infection (URI)）[reptile_0011]
     - 下部呼吸器感染症（肺炎）（Lower Respiratory Infection (Pneumonia)）[reptile_0012]
@@ -56,18 +29,20 @@
     - 呼吸器炎症性疾患（爬虫類）（Respiratory Inflammatory Disease）[reptile_0273]
     - 下部気道感染（爬虫類）（Lower Respiratory Tract Infection）[reptile_0274]
     - 慢性呼吸器疾患（爬虫類）（Chronic Respiratory Disease）[reptile_0275]
-- stem=`hepati` × 11件
-    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[reptile_0040]
-    - 肝コクシジウム症（Hepatic Coccidiosis）[reptile_0155]
-    - アデノウイルス性肝炎（Adenoviral Hepatitis）[reptile_0158]
-    - 肝リピドーシス（爬虫類）（Hepatic Lipidosis）[reptile_0205]
-    - 肝炎（爬虫類）（Hepatitis）[reptile_0206]
-    - 肝腫瘍（爬虫類）（Hepatic Neoplasia）[reptile_0207]
-    - 肝細菌感染症（爬虫類）（Hepatic Bacterial Infection）[reptile_0255]
-    - 肝ウイルス感染症（爬虫類）（Hepatic Viral Infection）[reptile_0256]
-    - 肝寄生虫疾患（爬虫類）（Hepatic Parasitic Disease）[reptile_0257]
-    - 肝線維症（爬虫類）（Hepatic Fibrosis）[reptile_0258]
-    - 肝代謝障害（爬虫類）（Hepatic Metabolic Disorder）[reptile_0259]
+- stem=`dermat` × 13件
+    - 皮膚糸状菌症（Dermatophytosis (Fungal Skin Infection)）[reptile_0030]
+    - 細菌性皮膚炎（Bacterial Dermatitis）[reptile_0031]
+    - 光線過敏性皮膚炎（Photosensitization Dermatitis）[reptile_0146]
+    - 壊死性皮膚炎（水疱性皮膚炎）（Necrotic Dermatitis (Vesicular Dermatitis)）[reptile_0153]
+    - 潰瘍性皮膚炎（爬虫類）（Ulcerative Dermatitis）[reptile_0194]
+    - 皮膚細菌感染（爬虫類）（Dermatological Bacterial Infection）[reptile_0276]
+    - 皮膚ウイルス感染（爬虫類）（Dermatological Viral Infection）[reptile_0277]
+    - 皮膚真菌感染（爬虫類）（Dermatological Fungal Infection）[reptile_0278]
+    - 皮膚寄生虫寄生（爬虫類）（Dermatological Parasitic Infestation）[reptile_0279]
+    - 皮膚腫瘍性疾患（爬虫類）（Dermatological Neoplasia）[reptile_0280]
+    - 皮膚自己免疫疾患（爬虫類）（Dermatological Autoimmune Disease）[reptile_0281]
+    - 皮膚アレルギー疾患（爬虫類）（Dermatological Allergic Disease）[reptile_0282]
+    - 慢性皮膚炎（爬虫類）（Chronic Dermatitis）[reptile_0283]
 - stem=`gastro` × 10件
     - 消化管閉塞（インパクション）（Gastrointestinal Impaction）[reptile_0037]
     - 胃腸炎（Gastroenteritis）[reptile_0038]
@@ -79,7 +54,18 @@
     - 消化管炎症性疾患（爬虫類）（Gastrointestinal Inflammatory Disease）[reptile_0265]
     - 消化管運動障害（爬虫類）（Gastrointestinal Motility Disorder）[reptile_0266]
     - 消化管部分閉塞（爬虫類）（Gastrointestinal Obstruction (Partial)）[reptile_0267]
-- stem=`defici` × 9件
+- stem=`hepati` × 10件
+    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[reptile_0040]
+    - 肝コクシジウム症（Hepatic Coccidiosis）[reptile_0155]
+    - アデノウイルス性肝炎（Adenoviral Hepatitis）[reptile_0158]
+    - 肝炎（爬虫類）（Hepatitis）[reptile_0206]
+    - 肝腫瘍（爬虫類）（Hepatic Neoplasia）[reptile_0207]
+    - 肝細菌感染症（爬虫類）（Hepatic Bacterial Infection）[reptile_0255]
+    - 肝ウイルス感染症（爬虫類）（Hepatic Viral Infection）[reptile_0256]
+    - 肝寄生虫疾患（爬虫類）（Hepatic Parasitic Disease）[reptile_0257]
+    - 肝線維症（爬虫類）（Hepatic Fibrosis）[reptile_0258]
+    - 肝代謝障害（爬虫類）（Hepatic Metabolic Disorder）[reptile_0259]
+- stem=`defici` × 8件
     - ビタミンA欠乏症（Vitamin A Deficiency (Hypovitaminosis A)）[reptile_0002]
     - ビタミンD3欠乏症（Vitamin D3 Deficiency）[reptile_0003]
     - チアミン（ビタミンB1）欠乏症（Thiamine (Vitamin B1) Deficiency）[reptile_0007]
@@ -87,7 +73,6 @@
     - ビタミンC欠乏症（壊血病）（Vitamin C Deficiency (Scurvy)）[reptile_0126]
     - ビオチン欠乏症（Biotin Deficiency）[reptile_0127]
     - 紫外線不足症（UV Light Deficiency）[reptile_0142]
-    - チアミン欠乏症（爬虫類）（Thiamine Deficiency）[reptile_0170]
     - カルシウム欠乏症（爬虫類）（Calcium Deficiency）[reptile_0242]
 - stem=`prolap` × 8件
     - 総排泄腔脱（Cloacal Prolapse）[reptile_0060]
@@ -159,8 +144,8 @@
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **39**
-- 投与量あり: **241**
+- 投与量なし（見出しのみ）: **37**
+- 投与量あり: **231**
 
 ### 投与量なし（上位30）
 - 口腔膿瘍（Oral Abscess）[reptile_0016] — ja:110字 / en:204字
@@ -168,7 +153,6 @@
 - 脱皮不全（Dysecdysis (Retained Shed)）[reptile_0026] — ja:140字 / en:717字
 - 水疱症（Blister Disease）[reptile_0028] — ja:108字 / en:193字
 - 皮下膿瘍（Subcutaneous Abscess）[reptile_0032] — ja:127字 / en:204字
-- 吻部擦過傷（ノーズラブ）（Rostral Abrasion (Nose Rub)）[reptile_0033] — ja:114字 / en:193字
 - ピラミッディング（甲羅の隆起異常）（Pyramiding）[reptile_0036] — ja:122字 / en:193字
 - 食欲不振（非特異的）（Anorexia (Non-specific)）[reptile_0043] — ja:159字 / en:193字
 - 肥満（Obesity）[reptile_0044] — ja:111字 / en:165字
@@ -177,7 +161,6 @@
 - 半陰茎脱出（Hemipenal Prolapse）[reptile_0061] — ja:90字 / en:193字
 - 胃・腸管脱出（Gastric/Intestinal Prolapse）[reptile_0062] — ja:99字 / en:193字
 - 脊椎骨症/脊椎症（Spinal Osteopathy / Spondylosis）[reptile_0066] — ja:128字 / en:193字
-- 高体温症（熱中症）（Hyperthermia (Heat Stroke)）[reptile_0074] — ja:125字 / en:158字
 - 全眼球炎（Panophthalmitis）[reptile_0084] — ja:98字 / en:193字
 - ボア科ニドウイルス（呼吸器型）（Boid Nidovirus (Respiratory)）[reptile_0096] — ja:101字 / en:176字
 - 色素細胞腫（Chromatophoroma）[reptile_0109] — ja:62字 / en:193字
@@ -193,9 +176,11 @@
 - 慢性細菌性肺炎（Bacterial Pneumonia (Chronic)）[reptile_0137] — ja:163字 / en:196字
 - 耳感染症（中耳炎）（Ear Infection (Otitis)）[reptile_0141] — ja:165字 / en:137字
 - 慢性呼吸器疾患複合（Chronic Respiratory Disease Complex）[reptile_0143] — ja:58字 / en:190字
+- 盲腸・結腸インパクション（Cecal Impaction / Colonic Impaction）[reptile_0145] — ja:62字 / en:190字
+- 臓器脱（胃・腸・卵管）（Organ Prolapse (Gastric/Intestinal/Oviductal)）[reptile_0147] — ja:199字 / en:548字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **110** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **102** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **9** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）

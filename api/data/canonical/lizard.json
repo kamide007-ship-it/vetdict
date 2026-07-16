@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 250,
-    "merge_clusters": 9,
-    "records_merged_away": 9,
+    "merge_clusters": 26,
+    "records_merged_away": 28,
     "archived": 0,
-    "served_after": 241
+    "served_after": 222
   },
   "merges": [
     {
@@ -77,10 +77,17 @@
           "slug": "infectious-stomatitis-mouth-rot",
           "name": "Infectious Stomatitis (Mouth Rot)",
           "name_ja": "感染性口内炎（マウスロット）"
+        },
+        {
+          "id": "lizard_0161",
+          "slug": "stomatitis-mouth-rot",
+          "name": "Stomatitis (Mouth Rot)",
+          "name_ja": "口内炎（マウスロット）（トカゲ）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
+      "inherit_content": true,
+      "curated": true
     },
     {
       "canonical": {
@@ -171,48 +178,341 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0000",
+        "slug": "metabolic-bone-disease-mbd",
+        "name": "Metabolic Bone Disease (MBD)",
+        "name_ja": "代謝性骨疾患（MBD）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0149",
+          "slug": "metabolic-bone-disease-severe",
+          "name": "Metabolic Bone Disease (Severe)",
+          "name_ja": "重度代謝性骨疾患（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0009",
+        "slug": "atadenovirus-infection-adv",
+        "name": "Atadenovirus Infection (ADV)",
+        "name_ja": "アタデノウイルス感染症（ADV）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0144",
+          "slug": "atadenovirus-infection",
+          "name": "Atadenovirus Infection",
+          "name_ja": "アタデノウイルス感染（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0014",
+        "slug": "yellow-fungus-disease-canv-chrysosporium-anamorph-of-nannizziopsis-vriesii",
+        "name": "Yellow Fungus Disease (CANV - Chrysosporium anamorph of Nannizziopsis vriesii)",
+        "name_ja": "黄色真菌症（CANV）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0142",
+          "slug": "yellow-fungus-disease-chrysosporium-anamorph-of-nannizziopsis-vriesii-canv",
+          "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
+          "name_ja": "黄色真菌症（CANV感染症）"
+        },
+        {
+          "id": "lizard_0145",
+          "slug": "yellow-fungus-disease",
+          "name": "Yellow Fungus Disease",
+          "name_ja": "黄色真菌病（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0018",
+        "slug": "pneumonia-lower-respiratory-infection",
+        "name": "Pneumonia (Lower Respiratory Infection)",
+        "name_ja": "肺炎（下部呼吸器感染症）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0207",
+          "slug": "pneumonia",
+          "name": "Pneumonia",
+          "name_ja": "肺炎（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0024",
+        "slug": "mite-infestation-ectoparasites",
+        "name": "Mite Infestation (Ectoparasites)",
+        "name_ja": "ダニ寄生（外部寄生虫）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0170",
+          "slug": "mite-infestation-ophionyssus",
+          "name": "Mite Infestation (Ophionyssus)",
+          "name_ja": "ダニ症（Ophionyssus）（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0026",
+        "slug": "amoebic-infection-entamoeba",
+        "name": "Amoebic Infection (Entamoeba)",
+        "name_ja": "アメーバ感染症"
+      },
+      "merged": [
+        {
+          "id": "lizard_0177",
+          "slug": "amoebic-infection",
+          "name": "Amoebic Infection",
+          "name_ja": "アメーバ感染（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0033",
+        "slug": "scale-rot-ulcerative-dermatitis",
+        "name": "Scale Rot (Ulcerative Dermatitis)",
+        "name_ja": "スケイルロット（潰瘍性皮膚炎）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0181",
+          "slug": "scale-rot",
+          "name": "Scale Rot",
+          "name_ja": "鱗腐敗（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0036",
+        "slug": "rostral-abrasion-nose-rub",
+        "name": "Rostral Abrasion (Nose Rub)",
+        "name_ja": "吻部擦過傷（ノーズラブ）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0178",
+          "slug": "rostral-abrasion",
+          "name": "Rostral Abrasion",
+          "name_ja": "吻端擦過傷（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0040",
+        "slug": "hepatic-lipidosis-fatty-liver-disease",
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0197",
+          "slug": "hepatic-lipidosis",
+          "name": "Hepatic Lipidosis",
+          "name_ja": "肝リピドーシス（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0064",
+        "slug": "hyperthermia-heat-stroke",
+        "name": "Hyperthermia (Heat Stroke)",
+        "name_ja": "高体温症（熱中症）"
+      },
+      "merged": [
+        {
+          "id": "lizard_0236",
+          "slug": "hyperthermia",
+          "name": "Hyperthermia",
+          "name_ja": "高体温症（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0096",
+        "slug": "cestode-tapeworm-infection",
+        "name": "Cestode (Tapeworm) Infection",
+        "name_ja": "条虫感染症"
+      },
+      "merged": [
+        {
+          "id": "lizard_0172",
+          "slug": "cestode-infection",
+          "name": "Cestode Infection",
+          "name_ja": "条虫感染（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0050",
+        "slug": "articular-gout",
+        "name": "Articular Gout",
+        "name_ja": "関節痛風"
+      },
+      "merged": [
+        {
+          "id": "lizard_0188",
+          "slug": "gout-articular",
+          "name": "Gout (Articular)",
+          "name_ja": "痛風（関節型）（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0051",
+        "slug": "visceral-gout",
+        "name": "Visceral Gout",
+        "name_ja": "内臓痛風"
+      },
+      "merged": [
+        {
+          "id": "lizard_0187",
+          "slug": "gout-visceral",
+          "name": "Gout (Visceral)",
+          "name_ja": "痛風（内臓型）（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0091",
+        "slug": "flagellate-protozoal-infection",
+        "name": "Flagellate Protozoal Infection",
+        "name_ja": "鞭毛虫感染症"
+      },
+      "merged": [
+        {
+          "id": "lizard_0176",
+          "slug": "flagellate-protozoan-infection",
+          "name": "Flagellate Protozoan Infection",
+          "name_ja": "鞭毛虫感染（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0030",
+        "slug": "toe-necrosis-from-retained-shed",
+        "name": "Toe Necrosis from Retained Shed",
+        "name_ja": "脱皮残りによる趾壊死"
+      },
+      "merged": [
+        {
+          "id": "lizard_0151",
+          "slug": "toe-necrosis-retained-shed",
+          "name": "Toe Necrosis (Retained Shed)",
+          "name_ja": "趾壊死（脱皮不全）（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0049",
+        "slug": "hemipenal-prolapse",
+        "name": "Hemipenal Prolapse",
+        "name_ja": "半陰茎脱出"
+      },
+      "merged": [
+        {
+          "id": "lizard_0194",
+          "slug": "penile-hemipenal-prolapse",
+          "name": "Penile/Hemipenal Prolapse",
+          "name_ja": "陰茎/半陰茎脱（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0110",
+        "slug": "egg-related-coelomitis",
+        "name": "Egg-related Coelomitis",
+        "name_ja": "卵関連体腔炎"
+      },
+      "merged": [
+        {
+          "id": "lizard_0193",
+          "slug": "egg-yolk-coelomitis",
+          "name": "Egg Yolk Coelomitis",
+          "name_ja": "卵黄体腔炎（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Metabolic Bone Disease (MBD)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0000",
-            "slug": "metabolic-bone-disease-mbd",
-            "name": "Metabolic Bone Disease (MBD)",
-            "name_ja": "代謝性骨疾患（MBD）"
-          },
-          {
-            "id": "lizard_0149",
-            "slug": "metabolic-bone-disease-severe",
-            "name": "Metabolic Bone Disease (Severe)",
-            "name_ja": "重度代謝性骨疾患（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Atadenovirus Infection (ADV)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0009",
-            "slug": "atadenovirus-infection-adv",
-            "name": "Atadenovirus Infection (ADV)",
-            "name_ja": "アタデノウイルス感染症（ADV）"
-          },
-          {
-            "id": "lizard_0144",
-            "slug": "atadenovirus-infection",
-            "name": "Atadenovirus Infection",
-            "name_ja": "アタデノウイルス感染（トカゲ）"
-          }
-        ]
-      },
       {
         "base": "Adenovirus Infection (Non-Atadenovirus)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -228,84 +528,6 @@
             "slug": "adenovirus-infection",
             "name": "Adenovirus Infection",
             "name_ja": "アデノウイルス感染（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Yellow Fungus Disease (CANV - Chrysosporium anamorph of Nannizziopsis vriesii)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0014",
-            "slug": "yellow-fungus-disease-canv-chrysosporium-anamorph-of-nannizziopsis-vriesii",
-            "name": "Yellow Fungus Disease (CANV - Chrysosporium anamorph of Nannizziopsis vriesii)",
-            "name_ja": "黄色真菌症（CANV）"
-          },
-          {
-            "id": "lizard_0142",
-            "slug": "yellow-fungus-disease-chrysosporium-anamorph-of-nannizziopsis-vriesii-canv",
-            "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
-            "name_ja": "黄色真菌症（CANV感染症）"
-          },
-          {
-            "id": "lizard_0145",
-            "slug": "yellow-fungus-disease",
-            "name": "Yellow Fungus Disease",
-            "name_ja": "黄色真菌病（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Pneumonia (Lower Respiratory Infection)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0018",
-            "slug": "pneumonia-lower-respiratory-infection",
-            "name": "Pneumonia (Lower Respiratory Infection)",
-            "name_ja": "肺炎（下部呼吸器感染症）"
-          },
-          {
-            "id": "lizard_0207",
-            "slug": "pneumonia",
-            "name": "Pneumonia",
-            "name_ja": "肺炎（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Mite Infestation (Ectoparasites)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0024",
-            "slug": "mite-infestation-ectoparasites",
-            "name": "Mite Infestation (Ectoparasites)",
-            "name_ja": "ダニ寄生（外部寄生虫）"
-          },
-          {
-            "id": "lizard_0170",
-            "slug": "mite-infestation-ophionyssus",
-            "name": "Mite Infestation (Ophionyssus)",
-            "name_ja": "ダニ症（Ophionyssus）（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Amoebic Infection (Entamoeba)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0026",
-            "slug": "amoebic-infection-entamoeba",
-            "name": "Amoebic Infection (Entamoeba)",
-            "name_ja": "アメーバ感染症"
-          },
-          {
-            "id": "lizard_0177",
-            "slug": "amoebic-infection",
-            "name": "Amoebic Infection",
-            "name_ja": "アメーバ感染（トカゲ）"
           }
         ]
       },
@@ -334,60 +556,6 @@
         ]
       },
       {
-        "base": "Scale Rot (Ulcerative Dermatitis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0033",
-            "slug": "scale-rot-ulcerative-dermatitis",
-            "name": "Scale Rot (Ulcerative Dermatitis)",
-            "name_ja": "スケイルロット（潰瘍性皮膚炎）"
-          },
-          {
-            "id": "lizard_0181",
-            "slug": "scale-rot",
-            "name": "Scale Rot",
-            "name_ja": "鱗腐敗（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Rostral Abrasion (Nose Rub)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0036",
-            "slug": "rostral-abrasion-nose-rub",
-            "name": "Rostral Abrasion (Nose Rub)",
-            "name_ja": "吻部擦過傷（ノーズラブ）"
-          },
-          {
-            "id": "lizard_0178",
-            "slug": "rostral-abrasion",
-            "name": "Rostral Abrasion",
-            "name_ja": "吻端擦過傷（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0040",
-            "slug": "hepatic-lipidosis-fatty-liver-disease",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "lizard_0197",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（トカゲ）"
-          }
-        ]
-      },
-      {
         "base": "Anorexia (Non-specific)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -412,42 +580,6 @@
         ]
       },
       {
-        "base": "Hyperthermia (Heat Stroke)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0064",
-            "slug": "hyperthermia-heat-stroke",
-            "name": "Hyperthermia (Heat Stroke)",
-            "name_ja": "高体温症（熱中症）"
-          },
-          {
-            "id": "lizard_0236",
-            "slug": "hyperthermia",
-            "name": "Hyperthermia",
-            "name_ja": "高体温症（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Cestode (Tapeworm) Infection",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0096",
-            "slug": "cestode-tapeworm-infection",
-            "name": "Cestode (Tapeworm) Infection",
-            "name_ja": "条虫感染症"
-          },
-          {
-            "id": "lizard_0172",
-            "slug": "cestode-infection",
-            "name": "Cestode Infection",
-            "name_ja": "条虫感染（トカゲ）"
-          }
-        ]
-      },
-      {
         "base": "Limb Fractures",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -468,24 +600,6 @@
             "slug": "fracture-shell-carapace",
             "name": "Fracture (Shell/Carapace)",
             "name_ja": "甲羅骨折（トカゲ）"
-          }
-        ]
-      },
-      {
-        "base": "Gout (Visceral)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "lizard_0187",
-            "slug": "gout-visceral",
-            "name": "Gout (Visceral)",
-            "name_ja": "痛風（内臓型）（トカゲ）"
-          },
-          {
-            "id": "lizard_0188",
-            "slug": "gout-articular",
-            "name": "Gout (Articular)",
-            "name_ja": "痛風（関節型）（トカゲ）"
           }
         ]
       }

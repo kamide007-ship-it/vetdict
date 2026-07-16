@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 278,
-    "merge_clusters": 16,
-    "records_merged_away": 18,
+    "merge_clusters": 30,
+    "records_merged_away": 40,
     "archived": 0,
-    "served_after": 260
+    "served_after": 238
   },
   "merges": [
     {
@@ -59,10 +59,17 @@
           "slug": "dermatophytosis-ringworm",
           "name": "Dermatophytosis (Ringworm)",
           "name_ja": "皮膚糸状菌症（チンチラ）"
+        },
+        {
+          "id": "chinchilla_0226",
+          "slug": "dermatophytosis-microsporum",
+          "name": "Dermatophytosis (Microsporum)",
+          "name_ja": "皮膚糸状菌症（ミクロスポルム）（チンチラ）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
+      "inherit_content": true,
+      "curated": true
     },
     {
       "canonical": {
@@ -77,10 +84,23 @@
           "slug": "heat-stroke-chinchilla",
           "name": "Heat Stroke - Chinchilla",
           "name_ja": "熱中症"
+        },
+        {
+          "id": "chinchilla_0038",
+          "slug": "heat-stroke-neurological",
+          "name": "Heat Stroke (Neurological)",
+          "name_ja": "熱中症（神経症状）"
+        },
+        {
+          "id": "chinchilla_0168",
+          "slug": "heat-stroke-hyperthermia",
+          "name": "Heat Stroke (Hyperthermia)",
+          "name_ja": "熱中症（高体温症）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
+      "inherit_content": true,
+      "curated": true
     },
     {
       "canonical": {
@@ -309,54 +329,308 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0000",
+        "slug": "malocclusion",
+        "name": "Malocclusion",
+        "name_ja": "不正咬合"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0163",
+          "slug": "malocclusion-progressive",
+          "name": "Malocclusion - Progressive",
+          "name_ja": "不正咬合（進行性）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0003",
+        "slug": "slobbers-ptyalism",
+        "name": "Slobbers (Ptyalism)",
+        "name_ja": "流涎症"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0143",
+          "slug": "slobbers-severe-with-dermatitis",
+          "name": "Slobbers - Severe (with Dermatitis)",
+          "name_ja": "流涎症（重度・皮膚炎合併）"
+        },
+        {
+          "id": "chinchilla_0174",
+          "slug": "slobbers-dental-related",
+          "name": "Slobbers (Dental-Related)",
+          "name_ja": "流涎（歯科関連）（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0009",
+        "slug": "hepatic-lipidosis",
+        "name": "Hepatic Lipidosis",
+        "name_ja": "肝リピドーシス"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0130",
+          "slug": "hepatic-lipidosis-severe",
+          "name": "Hepatic Lipidosis (Severe)",
+          "name_ja": "肝リピドーシス（重症型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0013",
+        "slug": "fur-ring",
+        "name": "Fur Ring",
+        "name_ja": "ファーリング（陰茎毛輪）"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0167",
+          "slug": "fur-ring-paraphimosis",
+          "name": "Fur Ring (Paraphimosis)",
+          "name_ja": "ファーリング（包皮嵌頓）"
+        },
+        {
+          "id": "chinchilla_0171",
+          "slug": "fur-ring-penile",
+          "name": "Fur Ring (Penile)",
+          "name_ja": "ペニス毛環（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0015",
+        "slug": "fur-chewing-barbering",
+        "name": "Fur Chewing (Barbering)",
+        "name_ja": "毛噛み（バーバリング）"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0077",
+          "slug": "fur-chewing-self-barbering-stress-related",
+          "name": "Fur Chewing (Self-Barbering) - Stress-Related",
+          "name_ja": "毛噛み（自己バーバリング）- ストレス関連"
+        },
+        {
+          "id": "chinchilla_0151",
+          "slug": "fur-chewing-stress-related",
+          "name": "Fur Chewing - Stress-Related",
+          "name_ja": "毛噛み（ストレス関連）"
+        },
+        {
+          "id": "chinchilla_0152",
+          "slug": "fur-chewing-nutritional",
+          "name": "Fur Chewing - Nutritional",
+          "name_ja": "毛噛み（栄養性）"
+        },
+        {
+          "id": "chinchilla_0172",
+          "slug": "fur-chewing",
+          "name": "Fur Chewing",
+          "name_ja": "毛噛み（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0018",
+        "slug": "pneumonia",
+        "name": "Pneumonia",
+        "name_ja": "肺炎"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0248",
+          "slug": "pneumonia-bacterial",
+          "name": "Pneumonia (Bacterial)",
+          "name_ja": "細菌性肺炎（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0028",
+        "slug": "mastitis",
+        "name": "Mastitis",
+        "name_ja": "乳腺炎"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0104",
+          "slug": "mastitis-acute",
+          "name": "Mastitis (Acute)",
+          "name_ja": "乳腺炎（急性）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0031",
+        "slug": "limb-fracture-general",
+        "name": "Limb Fracture (General)",
+        "name_ja": "四肢骨折（一般）"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0270",
+          "slug": "fracture-limb",
+          "name": "Fracture (Limb)",
+          "name_ja": "四肢骨折（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0048",
+        "slug": "ketosis-pregnancy-toxemia",
+        "name": "Ketosis (Pregnancy Toxemia)",
+        "name_ja": "ケトーシス（妊娠中毒症）"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0237",
+          "slug": "ketosis",
+          "name": "Ketosis",
+          "name_ja": "ケトーシス（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0103",
+        "slug": "pregnancy-toxemia-early",
+        "name": "Pregnancy Toxemia (Early)",
+        "name_ja": "妊娠中毒症（早期）"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0190",
+          "slug": "pregnancy-toxemia",
+          "name": "Pregnancy Toxemia",
+          "name_ja": "妊娠中毒症（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0061",
+        "slug": "otitis-media-interna",
+        "name": "Otitis Media / Interna",
+        "name_ja": "中耳炎・内耳炎"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0198",
+          "slug": "otitis-media-interna",
+          "name": "Otitis Media/Interna",
+          "name_ja": "中耳/内耳炎（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0106",
+        "slug": "ear-infection-otitis-externa",
+        "name": "Ear Infection (Otitis Externa)",
+        "name_ja": "耳感染症（外耳炎）"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0177",
+          "slug": "ear-infection-otitis",
+          "name": "Ear Infection (Otitis)",
+          "name_ja": "耳感染症（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0115",
+        "slug": "osteoarthritis-degenerative-joint-disease",
+        "name": "Osteoarthritis (Degenerative Joint Disease)",
+        "name_ja": "変形性関節症（変性性関節疾患）"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0271",
+          "slug": "osteoarthritis",
+          "name": "Osteoarthritis",
+          "name_ja": "変形性関節症（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0127",
+        "slug": "anemia-non-specific",
+        "name": "Anemia (Non-specific)",
+        "name_ja": "貧血（非特異的）"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0276",
+          "slug": "anemia",
+          "name": "Anemia",
+          "name_ja": "貧血（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Malocclusion",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0000",
-            "slug": "malocclusion",
-            "name": "Malocclusion",
-            "name_ja": "不正咬合"
-          },
-          {
-            "id": "chinchilla_0163",
-            "slug": "malocclusion-progressive",
-            "name": "Malocclusion - Progressive",
-            "name_ja": "不正咬合（進行性）"
-          }
-        ]
-      },
-      {
-        "base": "Slobbers (Ptyalism)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0003",
-            "slug": "slobbers-ptyalism",
-            "name": "Slobbers (Ptyalism)",
-            "name_ja": "流涎症"
-          },
-          {
-            "id": "chinchilla_0143",
-            "slug": "slobbers-severe-with-dermatitis",
-            "name": "Slobbers - Severe (with Dermatitis)",
-            "name_ja": "流涎症（重度・皮膚炎合併）"
-          },
-          {
-            "id": "chinchilla_0174",
-            "slug": "slobbers-dental-related",
-            "name": "Slobbers (Dental-Related)",
-            "name_ja": "流涎（歯科関連）（チンチラ）"
-          }
-        ]
-      },
       {
         "base": "Constipation",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
@@ -400,282 +674,6 @@
         ]
       },
       {
-        "base": "Hepatic Lipidosis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0009",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス"
-          },
-          {
-            "id": "chinchilla_0130",
-            "slug": "hepatic-lipidosis-severe",
-            "name": "Hepatic Lipidosis (Severe)",
-            "name_ja": "肝リピドーシス（重症型）"
-          }
-        ]
-      },
-      {
-        "base": "Fur Ring",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0013",
-            "slug": "fur-ring",
-            "name": "Fur Ring",
-            "name_ja": "ファーリング（陰茎毛輪）"
-          },
-          {
-            "id": "chinchilla_0167",
-            "slug": "fur-ring-paraphimosis",
-            "name": "Fur Ring (Paraphimosis)",
-            "name_ja": "ファーリング（包皮嵌頓）"
-          },
-          {
-            "id": "chinchilla_0171",
-            "slug": "fur-ring-penile",
-            "name": "Fur Ring (Penile)",
-            "name_ja": "ペニス毛環（チンチラ）"
-          }
-        ]
-      },
-      {
-        "base": "Ringworm (Dermatophytosis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0014",
-            "slug": "ringworm-dermatophytosis",
-            "name": "Ringworm (Dermatophytosis)",
-            "name_ja": "皮膚糸状菌症"
-          },
-          {
-            "id": "chinchilla_0226",
-            "slug": "dermatophytosis-microsporum",
-            "name": "Dermatophytosis (Microsporum)",
-            "name_ja": "皮膚糸状菌症（ミクロスポルム）（チンチラ）"
-          },
-          {
-            "id": "chinchilla_0251",
-            "slug": "dermatophytosis-ringworm",
-            "name": "Dermatophytosis (Ringworm)",
-            "name_ja": "皮膚糸状菌症（チンチラ）"
-          }
-        ]
-      },
-      {
-        "base": "Fur Chewing (Barbering)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0015",
-            "slug": "fur-chewing-barbering",
-            "name": "Fur Chewing (Barbering)",
-            "name_ja": "毛噛み（バーバリング）"
-          },
-          {
-            "id": "chinchilla_0077",
-            "slug": "fur-chewing-self-barbering-stress-related",
-            "name": "Fur Chewing (Self-Barbering) - Stress-Related",
-            "name_ja": "毛噛み（自己バーバリング）- ストレス関連"
-          },
-          {
-            "id": "chinchilla_0151",
-            "slug": "fur-chewing-stress-related",
-            "name": "Fur Chewing - Stress-Related",
-            "name_ja": "毛噛み（ストレス関連）"
-          },
-          {
-            "id": "chinchilla_0152",
-            "slug": "fur-chewing-nutritional",
-            "name": "Fur Chewing - Nutritional",
-            "name_ja": "毛噛み（栄養性）"
-          },
-          {
-            "id": "chinchilla_0172",
-            "slug": "fur-chewing",
-            "name": "Fur Chewing",
-            "name_ja": "毛噛み（チンチラ）"
-          }
-        ]
-      },
-      {
-        "base": "Pneumonia",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0018",
-            "slug": "pneumonia",
-            "name": "Pneumonia",
-            "name_ja": "肺炎"
-          },
-          {
-            "id": "chinchilla_0248",
-            "slug": "pneumonia-bacterial",
-            "name": "Pneumonia (Bacterial)",
-            "name_ja": "細菌性肺炎（チンチラ）"
-          }
-        ]
-      },
-      {
-        "base": "Heat Stroke",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0020",
-            "slug": "heat-stroke",
-            "name": "Heat Stroke",
-            "name_ja": "熱中症"
-          },
-          {
-            "id": "chinchilla_0038",
-            "slug": "heat-stroke-neurological",
-            "name": "Heat Stroke (Neurological)",
-            "name_ja": "熱中症（神経症状）"
-          },
-          {
-            "id": "chinchilla_0149",
-            "slug": "heat-stroke-chinchilla",
-            "name": "Heat Stroke - Chinchilla",
-            "name_ja": "熱中症"
-          },
-          {
-            "id": "chinchilla_0168",
-            "slug": "heat-stroke-hyperthermia",
-            "name": "Heat Stroke (Hyperthermia)",
-            "name_ja": "熱中症（高体温症）"
-          }
-        ]
-      },
-      {
-        "base": "Mastitis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0028",
-            "slug": "mastitis",
-            "name": "Mastitis",
-            "name_ja": "乳腺炎"
-          },
-          {
-            "id": "chinchilla_0104",
-            "slug": "mastitis-acute",
-            "name": "Mastitis (Acute)",
-            "name_ja": "乳腺炎（急性）"
-          }
-        ]
-      },
-      {
-        "base": "Limb Fracture (General)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0031",
-            "slug": "limb-fracture-general",
-            "name": "Limb Fracture (General)",
-            "name_ja": "四肢骨折（一般）"
-          },
-          {
-            "id": "chinchilla_0270",
-            "slug": "fracture-limb",
-            "name": "Fracture (Limb)",
-            "name_ja": "四肢骨折（チンチラ）"
-          }
-        ]
-      },
-      {
-        "base": "Ketosis (Pregnancy Toxemia)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0048",
-            "slug": "ketosis-pregnancy-toxemia",
-            "name": "Ketosis (Pregnancy Toxemia)",
-            "name_ja": "ケトーシス（妊娠中毒症）"
-          },
-          {
-            "id": "chinchilla_0237",
-            "slug": "ketosis",
-            "name": "Ketosis",
-            "name_ja": "ケトーシス（チンチラ）"
-          }
-        ]
-      },
-      {
-        "base": "Otitis Media / Interna",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0061",
-            "slug": "otitis-media-interna",
-            "name": "Otitis Media / Interna",
-            "name_ja": "中耳炎・内耳炎"
-          },
-          {
-            "id": "chinchilla_0198",
-            "slug": "otitis-media-interna",
-            "name": "Otitis Media/Interna",
-            "name_ja": "中耳/内耳炎（チンチラ）"
-          }
-        ]
-      },
-      {
-        "base": "Pregnancy Toxemia (Early)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0103",
-            "slug": "pregnancy-toxemia-early",
-            "name": "Pregnancy Toxemia (Early)",
-            "name_ja": "妊娠中毒症（早期）"
-          },
-          {
-            "id": "chinchilla_0190",
-            "slug": "pregnancy-toxemia",
-            "name": "Pregnancy Toxemia",
-            "name_ja": "妊娠中毒症（チンチラ）"
-          }
-        ]
-      },
-      {
-        "base": "Ear Infection (Otitis Externa)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0106",
-            "slug": "ear-infection-otitis-externa",
-            "name": "Ear Infection (Otitis Externa)",
-            "name_ja": "耳感染症（外耳炎）"
-          },
-          {
-            "id": "chinchilla_0177",
-            "slug": "ear-infection-otitis",
-            "name": "Ear Infection (Otitis)",
-            "name_ja": "耳感染症（チンチラ）"
-          }
-        ]
-      },
-      {
-        "base": "Osteoarthritis (Degenerative Joint Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0115",
-            "slug": "osteoarthritis-degenerative-joint-disease",
-            "name": "Osteoarthritis (Degenerative Joint Disease)",
-            "name_ja": "変形性関節症（変性性関節疾患）"
-          },
-          {
-            "id": "chinchilla_0271",
-            "slug": "osteoarthritis",
-            "name": "Osteoarthritis",
-            "name_ja": "変形性関節症（チンチラ）"
-          }
-        ]
-      },
-      {
         "base": "Eye Proptosis",
         "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
         "members": [
@@ -690,24 +688,6 @@
             "slug": "exophthalmos",
             "name": "Exophthalmos",
             "name_ja": "眼球突出（チンチラ）"
-          }
-        ]
-      },
-      {
-        "base": "Anemia (Non-specific)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "chinchilla_0127",
-            "slug": "anemia-non-specific",
-            "name": "Anemia (Non-specific)",
-            "name_ja": "貧血（非特異的）"
-          },
-          {
-            "id": "chinchilla_0276",
-            "slug": "anemia",
-            "name": "Anemia",
-            "name_ja": "貧血（チンチラ）"
           }
         ]
       },

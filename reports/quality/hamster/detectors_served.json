@@ -1,157 +1,11 @@
 {
   "species": "hamster",
   "view": "served",
-  "record_count": 312,
+  "record_count": 289,
   "T101": {
     "detector": "T101",
-    "total_records": 312,
+    "total_records": 289,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "hamster_0000",
-            "name": "Wet Tail (Proliferative Ileitis)",
-            "name_ja": "ウェットテイル（増殖性回腸炎）"
-          },
-          {
-            "id": "hamster_0155",
-            "name": "Wet Tail - Chronic Form",
-            "name_ja": "ウェットテイル（慢性型）"
-          },
-          {
-            "id": "hamster_0156",
-            "name": "Wet Tail - Neonatal Form",
-            "name_ja": "ウェットテイル（新生児型）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0001",
-            "name": "Tyzzer's Disease",
-            "name_ja": "ティザー病"
-          },
-          {
-            "id": "hamster_0174",
-            "name": "Tyzzer's Disease - Subclinical",
-            "name_ja": "ティザー病（不顕性）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0007",
-            "name": "Tapeworm Infection (Hymenolepis)",
-            "name_ja": "条虫症（膜様条虫）"
-          },
-          {
-            "id": "hamster_0148",
-            "name": "Tapeworm (Rodentolepis nana)",
-            "name_ja": "条虫症（ロデントレピス・ナナ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0017",
-            "name": "Pneumonia",
-            "name_ja": "肺炎"
-          },
-          {
-            "id": "hamster_0210",
-            "name": "Pneumonia (Bacterial)",
-            "name_ja": "細菌性肺炎（ハムスター）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0020",
-            "name": "Demodex Mange",
-            "name_ja": "ニキビダニ症"
-          },
-          {
-            "id": "hamster_0160",
-            "name": "Demodex Mange - Localized",
-            "name_ja": "ニキビダニ症（局所型）"
-          },
-          {
-            "id": "hamster_0161",
-            "name": "Demodex Mange - Generalized",
-            "name_ja": "ニキビダニ症（全身型）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0023",
-            "name": "Ringworm (Dermatophytosis)",
-            "name_ja": "皮膚糸状菌症"
-          },
-          {
-            "id": "hamster_0269",
-            "name": "Ringworm (Trichophyton)",
-            "name_ja": "白癬（トリコフィトン）（ハムスター）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0026",
-            "name": "Alopecia (Non-parasitic)",
-            "name_ja": "脱毛症（非寄生虫性）"
-          },
-          {
-            "id": "hamster_0196",
-            "name": "Alopecia",
-            "name_ja": "脱毛症（ハムスター）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0030",
-            "name": "Skin Tumor (General)",
-            "name_ja": "皮膚腫瘍"
-          },
-          {
-            "id": "hamster_0283",
-            "name": "Skin Tumor (Non-specific)",
-            "name_ja": "皮膚腫瘍（非特異的）（ハムスター）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0038",
-            "name": "Cushing's Disease",
-            "name_ja": "クッシング病"
-          },
-          {
-            "id": "hamster_0162",
-            "name": "Cushing's Disease - Early Stage",
-            "name_ja": "クッシング病（初期）"
-          },
-          {
-            "id": "hamster_0163",
-            "name": "Cushing's Disease - Advanced",
-            "name_ja": "クッシング病（進行期）"
-          },
-          {
-            "id": "hamster_0191",
-            "name": "Cushing's Disease (Hyperadrenocorticism)",
-            "name_ja": "クッシング病（副腎皮質機能亢進症）（ハムスター）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -174,49 +28,6 @@
       {
         "members": [
           {
-            "id": "hamster_0045",
-            "name": "Atrial Thrombosis",
-            "name_ja": "心房血栓症"
-          },
-          {
-            "id": "hamster_0164",
-            "name": "Atrial Thrombosis - Acute",
-            "name_ja": "心房血栓症（急性）"
-          },
-          {
-            "id": "hamster_0165",
-            "name": "Atrial Thrombosis - Chronic",
-            "name_ja": "心房血栓症（慢性）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0049",
-            "name": "Cage Paralysis",
-            "name_ja": "ケージ麻痺"
-          },
-          {
-            "id": "hamster_0172",
-            "name": "Cage Paralysis - Early",
-            "name_ja": "ケージ麻痺（初期）"
-          },
-          {
-            "id": "hamster_0173",
-            "name": "Cage Paralysis - Advanced",
-            "name_ja": "ケージ麻痺（進行期）"
-          },
-          {
-            "id": "hamster_0238",
-            "name": "Cage Paralysis (Vitamin E/Selenium Deficiency)",
-            "name_ja": "ケージ麻痺（VE/Se欠乏）（ハムスター）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "hamster_0056",
             "name": "Eye Proptosis",
             "name_ja": "眼球突出"
@@ -225,53 +36,6 @@
             "id": "hamster_0228",
             "name": "Exophthalmos",
             "name_ja": "眼球突出（ハムスター）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0059",
-            "name": "Hamster Polyomavirus",
-            "name_ja": "ハムスターポリオーマウイルス"
-          },
-          {
-            "id": "hamster_0157",
-            "name": "Hamster Polyomavirus - Clinical Form",
-            "name_ja": "ハムスターポリオーマウイルス（臨床型）"
-          },
-          {
-            "id": "hamster_0158",
-            "name": "Hamster Polyomavirus - Subclinical Carrier",
-            "name_ja": "ハムスターポリオーマウイルス（不顕性キャリア）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0060",
-            "name": "Lymphocytic Choriomeningitis (LCMV)",
-            "name_ja": "リンパ球性脈絡髄膜炎"
-          },
-          {
-            "id": "hamster_0159",
-            "name": "Lymphocytic Choriomeningitis (LCMV) - Acute",
-            "name_ja": "リンパ球性脈絡髄膜炎（急性型）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0068",
-            "name": "Heatstroke",
-            "name_ja": "熱中症"
-          },
-          {
-            "id": "hamster_0221",
-            "name": "Heatstroke (Neurological)",
-            "name_ja": "熱射病（神経型）（ハムスター）"
           }
         ]
       },
@@ -339,20 +103,6 @@
       {
         "members": [
           {
-            "id": "hamster_0123",
-            "name": "Pododermatitis (Bumblefoot)",
-            "name_ja": "趾瘤症（バンブルフット）"
-          },
-          {
-            "id": "hamster_0318",
-            "name": "Pododermatitis",
-            "name_ja": "足底皮膚炎（ハムスター）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "hamster_0168",
             "name": "Polycystic Disease - Hepatic",
             "name_ja": "多発性嚢胞性疾患（肝型）"
@@ -365,12 +115,12 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 22,
-    "redundant_record_count": 32,
+    "exact_duplicate_cluster_count": 7,
+    "redundant_record_count": 9,
     "family_clusters": [
       {
         "shared_stem": "tumor",
-        "size": 19,
+        "size": 18,
         "members": [
           {
             "id": "hamster_0028",
@@ -461,11 +211,6 @@
             "id": "hamster_0281",
             "name": "Pancreatic Tumor",
             "name_ja": "膵臓腫瘍（ハムスター）"
-          },
-          {
-            "id": "hamster_0283",
-            "name": "Skin Tumor (Non-specific)",
-            "name_ja": "皮膚腫瘍（非特異的）（ハムスター）"
           }
         ]
       },
@@ -639,42 +384,6 @@
         ]
       },
       {
-        "shared_stem": "cage",
-        "size": 6,
-        "members": [
-          {
-            "id": "hamster_0049",
-            "name": "Cage Paralysis",
-            "name_ja": "ケージ麻痺"
-          },
-          {
-            "id": "hamster_0144",
-            "name": "Cage Aggression Syndrome",
-            "name_ja": "ケージ攻撃症候群"
-          },
-          {
-            "id": "hamster_0172",
-            "name": "Cage Paralysis - Early",
-            "name_ja": "ケージ麻痺（初期）"
-          },
-          {
-            "id": "hamster_0173",
-            "name": "Cage Paralysis - Advanced",
-            "name_ja": "ケージ麻痺（進行期）"
-          },
-          {
-            "id": "hamster_0238",
-            "name": "Cage Paralysis (Vitamin E/Selenium Deficiency)",
-            "name_ja": "ケージ麻痺（VE/Se欠乏）（ハムスター）"
-          },
-          {
-            "id": "hamster_0255",
-            "name": "Cage Aggression",
-            "name_ja": "ケージ内攻撃行動（ハムスター）"
-          }
-        ]
-      },
-      {
         "shared_stem": "defici",
         "size": 6,
         "members": [
@@ -783,42 +492,6 @@
         ]
       },
       {
-        "shared_stem": "pneumo",
-        "size": 6,
-        "members": [
-          {
-            "id": "hamster_0017",
-            "name": "Pneumonia",
-            "name_ja": "肺炎"
-          },
-          {
-            "id": "hamster_0082",
-            "name": "Pneumocystis Pneumonia",
-            "name_ja": "ニューモシスチス肺炎"
-          },
-          {
-            "id": "hamster_0116",
-            "name": "Pneumothorax",
-            "name_ja": "気胸"
-          },
-          {
-            "id": "hamster_0210",
-            "name": "Pneumonia (Bacterial)",
-            "name_ja": "細菌性肺炎（ハムスター）"
-          },
-          {
-            "id": "hamster_0215",
-            "name": "Aspiration Pneumonia",
-            "name_ja": "誤嚥性肺炎（ハムスター）"
-          },
-          {
-            "id": "hamster_0270",
-            "name": "Pneumocystis Infection",
-            "name_ja": "ニューモシスチス感染（ハムスター）"
-          }
-        ]
-      },
-      {
         "shared_stem": "pouch",
         "size": 6,
         "members": [
@@ -917,37 +590,6 @@
         ]
       },
       {
-        "shared_stem": "hamste",
-        "size": 5,
-        "members": [
-          {
-            "id": "hamster_0059",
-            "name": "Hamster Polyomavirus",
-            "name_ja": "ハムスターポリオーマウイルス"
-          },
-          {
-            "id": "hamster_0157",
-            "name": "Hamster Polyomavirus - Clinical Form",
-            "name_ja": "ハムスターポリオーマウイルス（臨床型）"
-          },
-          {
-            "id": "hamster_0158",
-            "name": "Hamster Polyomavirus - Subclinical Carrier",
-            "name_ja": "ハムスターポリオーマウイルス（不顕性キャリア）"
-          },
-          {
-            "id": "hamster_0188",
-            "name": "Hamster Atrial Thrombosis / Congestive Heart Failure",
-            "name_ja": "ハムスター心房血栓症・うっ血性心不全"
-          },
-          {
-            "id": "hamster_0190",
-            "name": "Hamster Diabetes Mellitus",
-            "name_ja": "ハムスター糖尿病（ハムスター）"
-          }
-        ]
-      },
-      {
         "shared_stem": "hibern",
         "size": 5,
         "members": [
@@ -1010,64 +652,33 @@
         ]
       },
       {
-        "shared_stem": "mange",
+        "shared_stem": "pneumo",
         "size": 5,
         "members": [
           {
-            "id": "hamster_0020",
-            "name": "Demodex Mange",
-            "name_ja": "ニキビダニ症"
+            "id": "hamster_0017",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
           },
           {
-            "id": "hamster_0021",
-            "name": "Sarcoptic Mange",
-            "name_ja": "疥癬"
+            "id": "hamster_0082",
+            "name": "Pneumocystis Pneumonia",
+            "name_ja": "ニューモシスチス肺炎"
           },
           {
-            "id": "hamster_0022",
-            "name": "Notoedres Mange",
-            "name_ja": "ノトエドレス症"
+            "id": "hamster_0116",
+            "name": "Pneumothorax",
+            "name_ja": "気胸"
           },
           {
-            "id": "hamster_0160",
-            "name": "Demodex Mange - Localized",
-            "name_ja": "ニキビダニ症（局所型）"
+            "id": "hamster_0215",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎（ハムスター）"
           },
           {
-            "id": "hamster_0161",
-            "name": "Demodex Mange - Generalized",
-            "name_ja": "ニキビダニ症（全身型）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "paraly",
-        "size": 5,
-        "members": [
-          {
-            "id": "hamster_0049",
-            "name": "Cage Paralysis",
-            "name_ja": "ケージ麻痺"
-          },
-          {
-            "id": "hamster_0172",
-            "name": "Cage Paralysis - Early",
-            "name_ja": "ケージ麻痺（初期）"
-          },
-          {
-            "id": "hamster_0173",
-            "name": "Cage Paralysis - Advanced",
-            "name_ja": "ケージ麻痺（進行期）"
-          },
-          {
-            "id": "hamster_0220",
-            "name": "Posterior Paralysis",
-            "name_ja": "後肢麻痺（ハムスター）"
-          },
-          {
-            "id": "hamster_0238",
-            "name": "Cage Paralysis (Vitamin E/Selenium Deficiency)",
-            "name_ja": "ケージ麻痺（VE/Se欠乏）（ハムスター）"
+            "id": "hamster_0270",
+            "name": "Pneumocystis Infection",
+            "name_ja": "ニューモシスチス感染（ハムスター）"
           }
         ]
       },
@@ -1134,68 +745,6 @@
         ]
       },
       {
-        "shared_stem": "tail",
-        "size": 5,
-        "members": [
-          {
-            "id": "hamster_0000",
-            "name": "Wet Tail (Proliferative Ileitis)",
-            "name_ja": "ウェットテイル（増殖性回腸炎）"
-          },
-          {
-            "id": "hamster_0080",
-            "name": "Tail Slip (Degloving)",
-            "name_ja": "テイルスリップ"
-          },
-          {
-            "id": "hamster_0155",
-            "name": "Wet Tail - Chronic Form",
-            "name_ja": "ウェットテイル（慢性型）"
-          },
-          {
-            "id": "hamster_0156",
-            "name": "Wet Tail - Neonatal Form",
-            "name_ja": "ウェットテイル（新生児型）"
-          },
-          {
-            "id": "hamster_0263",
-            "name": "Tail Necrosis",
-            "name_ja": "尾壊死（ハムスター）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "thromb",
-        "size": 5,
-        "members": [
-          {
-            "id": "hamster_0045",
-            "name": "Atrial Thrombosis",
-            "name_ja": "心房血栓症"
-          },
-          {
-            "id": "hamster_0164",
-            "name": "Atrial Thrombosis - Acute",
-            "name_ja": "心房血栓症（急性）"
-          },
-          {
-            "id": "hamster_0165",
-            "name": "Atrial Thrombosis - Chronic",
-            "name_ja": "心房血栓症（慢性）"
-          },
-          {
-            "id": "hamster_0188",
-            "name": "Hamster Atrial Thrombosis / Congestive Heart Failure",
-            "name_ja": "ハムスター心房血栓症・うっ血性心不全"
-          },
-          {
-            "id": "hamster_0304",
-            "name": "Thromboembolism",
-            "name_ja": "血栓塞栓症（ハムスター）"
-          }
-        ]
-      },
-      {
         "shared_stem": "uterin",
         "size": 5,
         "members": [
@@ -1223,32 +772,6 @@
             "id": "hamster_0278",
             "name": "Uterine Adenocarcinoma",
             "name_ja": "子宮腺癌（ハムスター）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "atrial",
-        "size": 4,
-        "members": [
-          {
-            "id": "hamster_0045",
-            "name": "Atrial Thrombosis",
-            "name_ja": "心房血栓症"
-          },
-          {
-            "id": "hamster_0164",
-            "name": "Atrial Thrombosis - Acute",
-            "name_ja": "心房血栓症（急性）"
-          },
-          {
-            "id": "hamster_0165",
-            "name": "Atrial Thrombosis - Chronic",
-            "name_ja": "心房血栓症（慢性）"
-          },
-          {
-            "id": "hamster_0188",
-            "name": "Hamster Atrial Thrombosis / Congestive Heart Failure",
-            "name_ja": "ハムスター心房血栓症・うっ血性心不全"
           }
         ]
       },
@@ -1305,32 +828,6 @@
         ]
       },
       {
-        "shared_stem": "cushin",
-        "size": 4,
-        "members": [
-          {
-            "id": "hamster_0038",
-            "name": "Cushing's Disease",
-            "name_ja": "クッシング病"
-          },
-          {
-            "id": "hamster_0162",
-            "name": "Cushing's Disease - Early Stage",
-            "name_ja": "クッシング病（初期）"
-          },
-          {
-            "id": "hamster_0163",
-            "name": "Cushing's Disease - Advanced",
-            "name_ja": "クッシング病（進行期）"
-          },
-          {
-            "id": "hamster_0191",
-            "name": "Cushing's Disease (Hyperadrenocorticism)",
-            "name_ja": "クッシング病（副腎皮質機能亢進症）（ハムスター）"
-          }
-        ]
-      },
-      {
         "shared_stem": "hyperp",
         "size": 4,
         "members": [
@@ -1353,32 +850,6 @@
             "id": "hamster_0288",
             "name": "Adrenal Hyperplasia",
             "name_ja": "副腎過形成（ハムスター）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "lympho",
-        "size": 4,
-        "members": [
-          {
-            "id": "hamster_0029",
-            "name": "Lymphoma",
-            "name_ja": "リンパ腫"
-          },
-          {
-            "id": "hamster_0060",
-            "name": "Lymphocytic Choriomeningitis (LCMV)",
-            "name_ja": "リンパ球性脈絡髄膜炎"
-          },
-          {
-            "id": "hamster_0159",
-            "name": "Lymphocytic Choriomeningitis (LCMV) - Acute",
-            "name_ja": "リンパ球性脈絡髄膜炎（急性型）"
-          },
-          {
-            "id": "hamster_0246",
-            "name": "T-Cell Lymphoma",
-            "name_ja": "T細胞リンパ腫（ハムスター）"
           }
         ]
       },
@@ -1435,23 +906,23 @@
         ]
       },
       {
-        "shared_stem": "demode",
+        "shared_stem": "cage",
         "size": 3,
         "members": [
           {
-            "id": "hamster_0020",
-            "name": "Demodex Mange",
-            "name_ja": "ニキビダニ症"
+            "id": "hamster_0049",
+            "name": "Cage Paralysis",
+            "name_ja": "ケージ麻痺"
           },
           {
-            "id": "hamster_0160",
-            "name": "Demodex Mange - Localized",
-            "name_ja": "ニキビダニ症（局所型）"
+            "id": "hamster_0144",
+            "name": "Cage Aggression Syndrome",
+            "name_ja": "ケージ攻撃症候群"
           },
           {
-            "id": "hamster_0161",
-            "name": "Demodex Mange - Generalized",
-            "name_ja": "ニキビダニ症（全身型）"
+            "id": "hamster_0255",
+            "name": "Cage Aggression",
+            "name_ja": "ケージ内攻撃行動（ハムスター）"
           }
         ]
       },
@@ -1561,23 +1032,23 @@
         ]
       },
       {
-        "shared_stem": "form",
+        "shared_stem": "hamste",
         "size": 3,
         "members": [
           {
-            "id": "hamster_0155",
-            "name": "Wet Tail - Chronic Form",
-            "name_ja": "ウェットテイル（慢性型）"
+            "id": "hamster_0059",
+            "name": "Hamster Polyomavirus",
+            "name_ja": "ハムスターポリオーマウイルス"
           },
           {
-            "id": "hamster_0156",
-            "name": "Wet Tail - Neonatal Form",
-            "name_ja": "ウェットテイル（新生児型）"
+            "id": "hamster_0188",
+            "name": "Hamster Atrial Thrombosis / Congestive Heart Failure",
+            "name_ja": "ハムスター心房血栓症・うっ血性心不全"
           },
           {
-            "id": "hamster_0157",
-            "name": "Hamster Polyomavirus - Clinical Form",
-            "name_ja": "ハムスターポリオーマウイルス（臨床型）"
+            "id": "hamster_0190",
+            "name": "Hamster Diabetes Mellitus",
+            "name_ja": "ハムスター糖尿病（ハムスター）"
           }
         ]
       },
@@ -1624,6 +1095,27 @@
         ]
       },
       {
+        "shared_stem": "lympho",
+        "size": 3,
+        "members": [
+          {
+            "id": "hamster_0029",
+            "name": "Lymphoma",
+            "name_ja": "リンパ腫"
+          },
+          {
+            "id": "hamster_0060",
+            "name": "Lymphocytic Choriomeningitis (LCMV)",
+            "name_ja": "リンパ球性脈絡髄膜炎"
+          },
+          {
+            "id": "hamster_0246",
+            "name": "T-Cell Lymphoma",
+            "name_ja": "T細胞リンパ腫（ハムスター）"
+          }
+        ]
+      },
+      {
         "shared_stem": "malocc",
         "size": 3,
         "members": [
@@ -1666,6 +1158,27 @@
         ]
       },
       {
+        "shared_stem": "mange",
+        "size": 3,
+        "members": [
+          {
+            "id": "hamster_0020",
+            "name": "Demodex Mange",
+            "name_ja": "ニキビダニ症"
+          },
+          {
+            "id": "hamster_0021",
+            "name": "Sarcoptic Mange",
+            "name_ja": "疥癬"
+          },
+          {
+            "id": "hamster_0022",
+            "name": "Notoedres Mange",
+            "name_ja": "ノトエドレス症"
+          }
+        ]
+      },
+      {
         "shared_stem": "melano",
         "size": 3,
         "members": [
@@ -1683,27 +1196,6 @@
             "id": "hamster_0178",
             "name": "Melanocytoma",
             "name_ja": "メラノサイトーマ"
-          }
-        ]
-      },
-      {
-        "shared_stem": "neonat",
-        "size": 3,
-        "members": [
-          {
-            "id": "hamster_0102",
-            "name": "Neonatal Cannibalism",
-            "name_ja": "新生児食殺"
-          },
-          {
-            "id": "hamster_0156",
-            "name": "Wet Tail - Neonatal Form",
-            "name_ja": "ウェットテイル（新生児型）"
-          },
-          {
-            "id": "hamster_0286",
-            "name": "Neonatal Mortality",
-            "name_ja": "新生児死亡（ハムスター）"
           }
         ]
       },
@@ -1746,27 +1238,6 @@
             "id": "hamster_0169",
             "name": "Polycystic Disease - Renal",
             "name_ja": "多発性嚢胞性疾患（腎型）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "polyom",
-        "size": 3,
-        "members": [
-          {
-            "id": "hamster_0059",
-            "name": "Hamster Polyomavirus",
-            "name_ja": "ハムスターポリオーマウイルス"
-          },
-          {
-            "id": "hamster_0157",
-            "name": "Hamster Polyomavirus - Clinical Form",
-            "name_ja": "ハムスターポリオーマウイルス（臨床型）"
-          },
-          {
-            "id": "hamster_0158",
-            "name": "Hamster Polyomavirus - Subclinical Carrier",
-            "name_ja": "ハムスターポリオーマウイルス（不顕性キャリア）"
           }
         ]
       },
@@ -1855,27 +1326,6 @@
         ]
       },
       {
-        "shared_stem": "skin",
-        "size": 3,
-        "members": [
-          {
-            "id": "hamster_0024",
-            "name": "Skin Abscess",
-            "name_ja": "皮膚膿瘍"
-          },
-          {
-            "id": "hamster_0030",
-            "name": "Skin Tumor (General)",
-            "name_ja": "皮膚腫瘍"
-          },
-          {
-            "id": "hamster_0283",
-            "name": "Skin Tumor (Non-specific)",
-            "name_ja": "皮膚腫瘍（非特異的）（ハムスター）"
-          }
-        ]
-      },
-      {
         "shared_stem": "spinal",
         "size": 3,
         "members": [
@@ -1893,6 +1343,48 @@
             "id": "hamster_0319",
             "name": "Spinal Cord Compression",
             "name_ja": "脊髄圧迫（ハムスター）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "tail",
+        "size": 3,
+        "members": [
+          {
+            "id": "hamster_0000",
+            "name": "Wet Tail (Proliferative Ileitis)",
+            "name_ja": "ウェットテイル（増殖性回腸炎）"
+          },
+          {
+            "id": "hamster_0080",
+            "name": "Tail Slip (Degloving)",
+            "name_ja": "テイルスリップ"
+          },
+          {
+            "id": "hamster_0263",
+            "name": "Tail Necrosis",
+            "name_ja": "尾壊死（ハムスター）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "thromb",
+        "size": 3,
+        "members": [
+          {
+            "id": "hamster_0045",
+            "name": "Atrial Thrombosis",
+            "name_ja": "心房血栓症"
+          },
+          {
+            "id": "hamster_0188",
+            "name": "Hamster Atrial Thrombosis / Congestive Heart Failure",
+            "name_ja": "ハムスター心房血栓症・うっ血性心不全"
+          },
+          {
+            "id": "hamster_0304",
+            "name": "Thromboembolism",
+            "name_ja": "血栓塞栓症（ハムスター）"
           }
         ]
       },
@@ -1918,20 +1410,20 @@
         ]
       }
     ],
-    "family_cluster_count": 54
+    "family_cluster_count": 46
   },
   "T102": {
     "detector": "T102",
-    "total_records": 312,
+    "total_records": 289,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 312,
+    "total_records": 289,
     "empty_count": 0,
-    "heading_only_count": 29,
-    "with_dosage_count": 283,
+    "heading_only_count": 27,
+    "with_dosage_count": 262,
     "empty": [],
     "heading_only": [
       {
@@ -1948,14 +1440,6 @@
         "name_ja": "不正咬合",
         "treatment_ja_len": 177,
         "treatment_len": 158,
-        "has_dosage": false
-      },
-      {
-        "id": "hamster_0030",
-        "name": "Skin Tumor (General)",
-        "name_ja": "皮膚腫瘍",
-        "treatment_ja_len": 53,
-        "treatment_len": 136,
         "has_dosage": false
       },
       {
@@ -2103,14 +1587,6 @@
         "has_dosage": false
       },
       {
-        "id": "hamster_0160",
-        "name": "Demodex Mange - Localized",
-        "name_ja": "ニキビダニ症（局所型）",
-        "treatment_ja_len": 172,
-        "treatment_len": 485,
-        "has_dosage": false
-      },
-      {
         "id": "hamster_0169",
         "name": "Polycystic Disease - Renal",
         "name_ja": "多発性嚢胞性疾患（腎型）",
@@ -2170,10 +1646,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 312,
+    "total_records": 289,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 101,
+    "drug_mismatch_count": 96,
     "citation_mismatch_count": 15,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -2244,6 +1720,23 @@
           {
             "drug": "Chlorhexidine",
             "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hamster_0020",
+        "name": "Demodex Mange",
+        "name_ja": "ニキビダニ症",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2380,6 +1873,18 @@
         "id": "hamster_0058",
         "name": "Otitis",
         "name_ja": "外耳炎・中耳炎",
+        "drugs": [
+          {
+            "drug": "Chlorhexidine",
+            "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "hamster_0060",
+        "name": "Lymphocytic Choriomeningitis (LCMV)",
+        "name_ja": "リンパ球性脈絡髄膜炎",
         "drugs": [
           {
             "drug": "Chlorhexidine",
@@ -2880,47 +2385,6 @@
         ]
       },
       {
-        "id": "hamster_0155",
-        "name": "Wet Tail - Chronic Form",
-        "name_ja": "ウェットテイル（慢性型）",
-        "drugs": [
-          {
-            "drug": "Ronidazole",
-            "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "hamster_0159",
-        "name": "Lymphocytic Choriomeningitis (LCMV) - Acute",
-        "name_ja": "リンパ球性脈絡髄膜炎（急性型）",
-        "drugs": [
-          {
-            "drug": "Chlorhexidine",
-            "drug_ja": "クロルヘキシジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "hamster_0161",
-        "name": "Demodex Mange - Generalized",
-        "name_ja": "ニキビダニ症（全身型）",
-        "drugs": [
-          {
-            "drug": "Chlorhexidine",
-            "drug_ja": "クロルヘキシジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Selamectin (Revolution)",
-            "drug_ja": "セラメクチン（レボリューション）",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "hamster_0169",
         "name": "Polycystic Disease - Renal",
         "name_ja": "多発性嚢胞性疾患（腎型）",
@@ -2928,35 +2392,6 @@
           {
             "drug": "Erythropoietin (EPO)",
             "drug_ja": "エリスロポエチン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "hamster_0172",
-        "name": "Cage Paralysis - Early",
-        "name_ja": "ケージ麻痺（初期）",
-        "drugs": [
-          {
-            "drug": "Glucosamine/Chondroitin",
-            "drug_ja": "グルコサミン・コンドロイチン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "hamster_0174",
-        "name": "Tyzzer's Disease - Subclinical",
-        "name_ja": "ティザー病（不顕性）",
-        "drugs": [
-          {
-            "drug": "Ronidazole",
-            "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Tetracycline",
-            "drug_ja": "テトラサイクリン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3415,23 +2850,6 @@
         ]
       },
       {
-        "id": "hamster_0269",
-        "name": "Ringworm (Trichophyton)",
-        "name_ja": "白癬（トリコフィトン）（ハムスター）",
-        "drugs": [
-          {
-            "drug": "Miconazole",
-            "drug_ja": "ミコナゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Clotrimazole",
-            "drug_ja": "クロトリマゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "hamster_0272",
         "name": "Cystic Ovary Disease",
         "name_ja": "嚢胞性卵巣疾患（ハムスター）",
@@ -3757,28 +3175,6 @@
             "reason": "no dosing data for this species"
           }
         ]
-      },
-      {
-        "id": "hamster_0318",
-        "name": "Pododermatitis",
-        "name_ja": "足底皮膚炎（ハムスター）",
-        "drugs": [
-          {
-            "drug": "Mupirocin",
-            "drug_ja": "ムピロシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Chlorhexidine",
-            "drug_ja": "クロルヘキシジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
       }
     ],
     "citation_mismatches": [
@@ -3921,7 +3317,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 312,
+    "total_records": 289,
     "hit_count": 1,
     "safe_occurrences": 0,
     "review_occurrences": 1,

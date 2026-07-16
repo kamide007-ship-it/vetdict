@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 248,
-    "merge_clusters": 5,
-    "records_merged_away": 5,
+    "merge_clusters": 16,
+    "records_merged_away": 17,
     "archived": 0,
-    "served_after": 243
+    "served_after": 231
   },
   "merges": [
     {
@@ -99,6 +99,221 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0008",
+        "slug": "pneumonia-lower-respiratory-infection",
+        "name": "Pneumonia (Lower Respiratory Infection)",
+        "name_ja": "肺炎（下部呼吸器感染症）"
+      },
+      "merged": [
+        {
+          "id": "snake_0201",
+          "slug": "pneumonia",
+          "name": "Pneumonia",
+          "name_ja": "肺炎（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0012",
+        "slug": "snake-mites-ophionyssus-natricis",
+        "name": "Snake Mites (Ophionyssus natricis)",
+        "name_ja": "ヘビダニ（オフィオニッスス）"
+      },
+      "merged": [
+        {
+          "id": "snake_0148",
+          "slug": "snake-mite-ophionyssus-natricis",
+          "name": "Snake Mite (Ophionyssus natricis)",
+          "name_ja": "ヘビダニ（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0014",
+        "slug": "amoebic-infection-entamoeba-invadens",
+        "name": "Amoebic Infection (Entamoeba invadens)",
+        "name_ja": "アメーバ感染症"
+      },
+      "merged": [
+        {
+          "id": "snake_0170",
+          "slug": "amoebic-infection",
+          "name": "Amoebic Infection",
+          "name_ja": "アメーバ感染（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0016",
+        "slug": "pentastomid-infection-tongue-worms",
+        "name": "Pentastomid Infection (Tongue Worms)",
+        "name_ja": "舌虫症"
+      },
+      "merged": [
+        {
+          "id": "snake_0167",
+          "slug": "pentastomid-infection",
+          "name": "Pentastomid Infection",
+          "name_ja": "舌虫感染（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0019",
+        "slug": "blister-disease-vesicular-dermatitis",
+        "name": "Blister Disease (Vesicular Dermatitis)",
+        "name_ja": "水疱症（水疱性皮膚炎）"
+      },
+      "merged": [
+        {
+          "id": "snake_0172",
+          "slug": "blister-disease",
+          "name": "Blister Disease",
+          "name_ja": "水疱病（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0020",
+        "slug": "scale-rot-ulcerative-dermatitis",
+        "name": "Scale Rot (Ulcerative Dermatitis)",
+        "name_ja": "スケイルロット（潰瘍性皮膚炎）"
+      },
+      "merged": [
+        {
+          "id": "snake_0174",
+          "slug": "scale-rot",
+          "name": "Scale Rot",
+          "name_ja": "鱗腐敗（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0026",
+        "slug": "rostral-abrasion-nose-rub",
+        "name": "Rostral Abrasion (Nose Rub)",
+        "name_ja": "吻部擦過傷（ノーズラブ）"
+      },
+      "merged": [
+        {
+          "id": "snake_0171",
+          "slug": "rostral-abrasion",
+          "name": "Rostral Abrasion",
+          "name_ja": "吻端擦過傷（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0030",
+        "slug": "hepatic-lipidosis-fatty-liver-disease",
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "snake_0190",
+          "slug": "hepatic-lipidosis",
+          "name": "Hepatic Lipidosis",
+          "name_ja": "肝リピドーシス（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0044",
+        "slug": "post-ovulatory-egg-stasis-slug-retention",
+        "name": "Post-ovulatory Egg Stasis (Slug Retention)",
+        "name_ja": "排卵後卵停滞（スラグ残留）"
+      },
+      "merged": [
+        {
+          "id": "snake_0185",
+          "slug": "post-ovulatory-egg-stasis",
+          "name": "Post-Ovulatory Egg Stasis",
+          "name_ja": "排卵後卵停滞（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0082",
+        "slug": "ophidiomyces-ophiodiicola-snake-fungal-disease-sfd",
+        "name": "Ophidiomyces ophiodiicola (Snake Fungal Disease - SFD)",
+        "name_ja": "ヘビ真菌症（SFD）"
+      },
+      "merged": [
+        {
+          "id": "snake_0142",
+          "slug": "snake-fungal-disease-ophidiomycosis-sfd",
+          "name": "Snake Fungal Disease (Ophidiomycosis / SFD)",
+          "name_ja": "ヘビ真菌症（オフィディオミセス症・SFD）"
+        },
+        {
+          "id": "snake_0143",
+          "slug": "snake-fungal-disease-ophidiomyces",
+          "name": "Snake Fungal Disease (Ophidiomyces)",
+          "name_ja": "蛇真菌病（オフィディオミセス）（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0088",
+        "slug": "cestode-tapeworm-infection",
+        "name": "Cestode (Tapeworm) Infection",
+        "name_ja": "条虫感染症"
+      },
+      "merged": [
+        {
+          "id": "snake_0165",
+          "slug": "cestode-infection",
+          "name": "Cestode Infection",
+          "name_ja": "条虫感染（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
@@ -120,114 +335,6 @@
             "slug": "sunshine-virus-reptarenavirus",
             "name": "Sunshine Virus (Reptarenavirus)",
             "name_ja": "サンシャインウイルス（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Pneumonia (Lower Respiratory Infection)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0008",
-            "slug": "pneumonia-lower-respiratory-infection",
-            "name": "Pneumonia (Lower Respiratory Infection)",
-            "name_ja": "肺炎（下部呼吸器感染症）"
-          },
-          {
-            "id": "snake_0201",
-            "slug": "pneumonia",
-            "name": "Pneumonia",
-            "name_ja": "肺炎（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Snake Mites (Ophionyssus natricis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0012",
-            "slug": "snake-mites-ophionyssus-natricis",
-            "name": "Snake Mites (Ophionyssus natricis)",
-            "name_ja": "ヘビダニ（オフィオニッスス）"
-          },
-          {
-            "id": "snake_0148",
-            "slug": "snake-mite-ophionyssus-natricis",
-            "name": "Snake Mite (Ophionyssus natricis)",
-            "name_ja": "ヘビダニ（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Amoebic Infection (Entamoeba invadens)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0014",
-            "slug": "amoebic-infection-entamoeba-invadens",
-            "name": "Amoebic Infection (Entamoeba invadens)",
-            "name_ja": "アメーバ感染症"
-          },
-          {
-            "id": "snake_0170",
-            "slug": "amoebic-infection",
-            "name": "Amoebic Infection",
-            "name_ja": "アメーバ感染（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Pentastomid Infection (Tongue Worms)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0016",
-            "slug": "pentastomid-infection-tongue-worms",
-            "name": "Pentastomid Infection (Tongue Worms)",
-            "name_ja": "舌虫症"
-          },
-          {
-            "id": "snake_0167",
-            "slug": "pentastomid-infection",
-            "name": "Pentastomid Infection",
-            "name_ja": "舌虫感染（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Blister Disease (Vesicular Dermatitis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0019",
-            "slug": "blister-disease-vesicular-dermatitis",
-            "name": "Blister Disease (Vesicular Dermatitis)",
-            "name_ja": "水疱症（水疱性皮膚炎）"
-          },
-          {
-            "id": "snake_0172",
-            "slug": "blister-disease",
-            "name": "Blister Disease",
-            "name_ja": "水疱病（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Scale Rot (Ulcerative Dermatitis)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0020",
-            "slug": "scale-rot-ulcerative-dermatitis",
-            "name": "Scale Rot (Ulcerative Dermatitis)",
-            "name_ja": "スケイルロット（潰瘍性皮膚炎）"
-          },
-          {
-            "id": "snake_0174",
-            "slug": "scale-rot",
-            "name": "Scale Rot",
-            "name_ja": "鱗腐敗（ヘビ）"
           }
         ]
       },
@@ -256,42 +363,6 @@
         ]
       },
       {
-        "base": "Rostral Abrasion (Nose Rub)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0026",
-            "slug": "rostral-abrasion-nose-rub",
-            "name": "Rostral Abrasion (Nose Rub)",
-            "name_ja": "吻部擦過傷（ノーズラブ）"
-          },
-          {
-            "id": "snake_0171",
-            "slug": "rostral-abrasion",
-            "name": "Rostral Abrasion",
-            "name_ja": "吻端擦過傷（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0030",
-            "slug": "hepatic-lipidosis-fatty-liver-disease",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "snake_0190",
-            "slug": "hepatic-lipidosis",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（ヘビ）"
-          }
-        ]
-      },
-      {
         "base": "Anorexia (Non-specific)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -312,66 +383,6 @@
             "slug": "anorexia-stress-related",
             "name": "Anorexia (Stress-Related)",
             "name_ja": "ストレス性拒食（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Post-ovulatory Egg Stasis (Slug Retention)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0044",
-            "slug": "post-ovulatory-egg-stasis-slug-retention",
-            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
-            "name_ja": "排卵後卵停滞（スラグ残留）"
-          },
-          {
-            "id": "snake_0185",
-            "slug": "post-ovulatory-egg-stasis",
-            "name": "Post-Ovulatory Egg Stasis",
-            "name_ja": "排卵後卵停滞（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Ophidiomyces ophiodiicola (Snake Fungal Disease - SFD)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0082",
-            "slug": "ophidiomyces-ophiodiicola-snake-fungal-disease-sfd",
-            "name": "Ophidiomyces ophiodiicola (Snake Fungal Disease - SFD)",
-            "name_ja": "ヘビ真菌症（SFD）"
-          },
-          {
-            "id": "snake_0142",
-            "slug": "snake-fungal-disease-ophidiomycosis-sfd",
-            "name": "Snake Fungal Disease (Ophidiomycosis / SFD)",
-            "name_ja": "ヘビ真菌症（オフィディオミセス症・SFD）"
-          },
-          {
-            "id": "snake_0143",
-            "slug": "snake-fungal-disease-ophidiomyces",
-            "name": "Snake Fungal Disease (Ophidiomyces)",
-            "name_ja": "蛇真菌病（オフィディオミセス）（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Cestode (Tapeworm) Infection",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0088",
-            "slug": "cestode-tapeworm-infection",
-            "name": "Cestode (Tapeworm) Infection",
-            "name_ja": "条虫感染症"
-          },
-          {
-            "id": "snake_0165",
-            "slug": "cestode-infection",
-            "name": "Cestode Infection",
-            "name_ja": "条虫感染（ヘビ）"
           }
         ]
       },

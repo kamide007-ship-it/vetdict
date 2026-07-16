@@ -1,10 +1,10 @@
 {
   "species": "snake",
   "view": "served",
-  "record_count": 243,
+  "record_count": 231,
   "T101": {
     "detector": "T101",
-    "total_records": 243,
+    "total_records": 231,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -17,118 +17,6 @@
             "id": "snake_0147",
             "name": "Sunshine Virus (Reptarenavirus)",
             "name_ja": "サンシャインウイルス（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0008",
-            "name": "Pneumonia (Lower Respiratory Infection)",
-            "name_ja": "肺炎（下部呼吸器感染症）"
-          },
-          {
-            "id": "snake_0201",
-            "name": "Pneumonia",
-            "name_ja": "肺炎（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0012",
-            "name": "Snake Mites (Ophionyssus natricis)",
-            "name_ja": "ヘビダニ（オフィオニッスス）"
-          },
-          {
-            "id": "snake_0148",
-            "name": "Snake Mite (Ophionyssus natricis)",
-            "name_ja": "ヘビダニ（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0014",
-            "name": "Amoebic Infection (Entamoeba invadens)",
-            "name_ja": "アメーバ感染症"
-          },
-          {
-            "id": "snake_0170",
-            "name": "Amoebic Infection",
-            "name_ja": "アメーバ感染（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0016",
-            "name": "Pentastomid Infection (Tongue Worms)",
-            "name_ja": "舌虫症"
-          },
-          {
-            "id": "snake_0167",
-            "name": "Pentastomid Infection",
-            "name_ja": "舌虫感染（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0019",
-            "name": "Blister Disease (Vesicular Dermatitis)",
-            "name_ja": "水疱症（水疱性皮膚炎）"
-          },
-          {
-            "id": "snake_0172",
-            "name": "Blister Disease",
-            "name_ja": "水疱病（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0020",
-            "name": "Scale Rot (Ulcerative Dermatitis)",
-            "name_ja": "スケイルロット（潰瘍性皮膚炎）"
-          },
-          {
-            "id": "snake_0174",
-            "name": "Scale Rot",
-            "name_ja": "鱗腐敗（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0026",
-            "name": "Rostral Abrasion (Nose Rub)",
-            "name_ja": "吻部擦過傷（ノーズラブ）"
-          },
-          {
-            "id": "snake_0171",
-            "name": "Rostral Abrasion",
-            "name_ja": "吻端擦過傷（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0030",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "snake_0190",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（ヘビ）"
           }
         ]
       },
@@ -148,53 +36,6 @@
             "id": "snake_0241",
             "name": "Anorexia (Stress-Related)",
             "name_ja": "ストレス性拒食（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0044",
-            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
-            "name_ja": "排卵後卵停滞（スラグ残留）"
-          },
-          {
-            "id": "snake_0185",
-            "name": "Post-Ovulatory Egg Stasis",
-            "name_ja": "排卵後卵停滞（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0082",
-            "name": "Ophidiomyces ophiodiicola (Snake Fungal Disease - SFD)",
-            "name_ja": "ヘビ真菌症（SFD）"
-          },
-          {
-            "id": "snake_0142",
-            "name": "Snake Fungal Disease (Ophidiomycosis / SFD)",
-            "name_ja": "ヘビ真菌症（オフィディオミセス症・SFD）"
-          },
-          {
-            "id": "snake_0143",
-            "name": "Snake Fungal Disease (Ophidiomyces)",
-            "name_ja": "蛇真菌病（オフィディオミセス）（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0088",
-            "name": "Cestode (Tapeworm) Infection",
-            "name_ja": "条虫感染症"
-          },
-          {
-            "id": "snake_0165",
-            "name": "Cestode Infection",
-            "name_ja": "条虫感染（ヘビ）"
           }
         ]
       },
@@ -227,8 +68,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 15,
-    "redundant_record_count": 17,
+    "exact_duplicate_cluster_count": 4,
+    "redundant_record_count": 5,
     "family_clusters": [
       {
         "shared_stem": "defici",
@@ -283,17 +124,12 @@
       },
       {
         "shared_stem": "hepati",
-        "size": 9,
+        "size": 8,
         "members": [
           {
             "id": "snake_0030",
             "name": "Hepatic Lipidosis (Fatty Liver Disease)",
             "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "snake_0190",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（ヘビ）"
           },
           {
             "id": "snake_0191",
@@ -628,58 +464,6 @@
         ]
       },
       {
-        "shared_stem": "pneumo",
-        "size": 4,
-        "members": [
-          {
-            "id": "snake_0008",
-            "name": "Pneumonia (Lower Respiratory Infection)",
-            "name_ja": "肺炎（下部呼吸器感染症）"
-          },
-          {
-            "id": "snake_0139",
-            "name": "Bacterial Pneumonia (Chronic)",
-            "name_ja": "慢性細菌性肺炎"
-          },
-          {
-            "id": "snake_0145",
-            "name": "Paramyxovirus Pneumonia",
-            "name_ja": "パラミクソウイルス肺炎（ヘビ）"
-          },
-          {
-            "id": "snake_0201",
-            "name": "Pneumonia",
-            "name_ja": "肺炎（ヘビ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "snake",
-        "size": 4,
-        "members": [
-          {
-            "id": "snake_0012",
-            "name": "Snake Mites (Ophionyssus natricis)",
-            "name_ja": "ヘビダニ（オフィオニッスス）"
-          },
-          {
-            "id": "snake_0142",
-            "name": "Snake Fungal Disease (Ophidiomycosis / SFD)",
-            "name_ja": "ヘビ真菌症（オフィディオミセス症・SFD）"
-          },
-          {
-            "id": "snake_0143",
-            "name": "Snake Fungal Disease (Ophidiomyces)",
-            "name_ja": "蛇真菌病（オフィディオミセス）（ヘビ）"
-          },
-          {
-            "id": "snake_0148",
-            "name": "Snake Mite (Ophionyssus natricis)",
-            "name_ja": "ヘビダニ（ヘビ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "spinal",
         "size": 4,
         "members": [
@@ -702,32 +486,6 @@
             "id": "snake_0215",
             "name": "Spinal Injury",
             "name_ja": "脊髄損傷（ヘビ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "stasi",
-        "size": 4,
-        "members": [
-          {
-            "id": "snake_0043",
-            "name": "Pre-ovulatory Follicular Stasis",
-            "name_ja": "排卵前卵胞停滞"
-          },
-          {
-            "id": "snake_0044",
-            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
-            "name_ja": "排卵後卵停滞（スラグ残留）"
-          },
-          {
-            "id": "snake_0105",
-            "name": "Follicular Stasis (Chronic)",
-            "name_ja": "慢性濾胞停滞"
-          },
-          {
-            "id": "snake_0185",
-            "name": "Post-Ovulatory Egg Stasis",
-            "name_ja": "排卵後卵停滞（ヘビ）"
           }
         ]
       },
@@ -921,27 +679,6 @@
         ]
       },
       {
-        "shared_stem": "mite",
-        "size": 3,
-        "members": [
-          {
-            "id": "snake_0092",
-            "name": "Chigger Mite Infestation (Trombiculidae)",
-            "name_ja": "ツツガムシ寄生症"
-          },
-          {
-            "id": "snake_0148",
-            "name": "Snake Mite (Ophionyssus natricis)",
-            "name_ja": "ヘビダニ（ヘビ）"
-          },
-          {
-            "id": "snake_0163",
-            "name": "Mite Infestation (Ophionyssus)",
-            "name_ja": "ダニ症（Ophionyssus）（ヘビ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "nidovi",
         "size": 3,
         "members": [
@@ -963,27 +700,6 @@
         ]
       },
       {
-        "shared_stem": "ovulat",
-        "size": 3,
-        "members": [
-          {
-            "id": "snake_0043",
-            "name": "Pre-ovulatory Follicular Stasis",
-            "name_ja": "排卵前卵胞停滞"
-          },
-          {
-            "id": "snake_0044",
-            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
-            "name_ja": "排卵後卵停滞（スラグ残留）"
-          },
-          {
-            "id": "snake_0185",
-            "name": "Post-Ovulatory Egg Stasis",
-            "name_ja": "排卵後卵停滞（ヘビ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "paramy",
         "size": 3,
         "members": [
@@ -1001,6 +717,27 @@
             "id": "snake_0156",
             "name": "Paramyxovirus",
             "name_ja": "パラミクソウイルス（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "pneumo",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0008",
+            "name": "Pneumonia (Lower Respiratory Infection)",
+            "name_ja": "肺炎（下部呼吸器感染症）"
+          },
+          {
+            "id": "snake_0139",
+            "name": "Bacterial Pneumonia (Chronic)",
+            "name_ja": "慢性細菌性肺炎"
+          },
+          {
+            "id": "snake_0145",
+            "name": "Paramyxovirus Pneumonia",
+            "name_ja": "パラミクソウイルス肺炎（ヘビ）"
           }
         ]
       },
@@ -1047,6 +784,27 @@
         ]
       },
       {
+        "shared_stem": "stasi",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0043",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "snake_0044",
+            "name": "Post-ovulatory Egg Stasis (Slug Retention)",
+            "name_ja": "排卵後卵停滞（スラグ残留）"
+          },
+          {
+            "id": "snake_0105",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          }
+        ]
+      },
+      {
         "shared_stem": "vitami",
         "size": 3,
         "members": [
@@ -1089,20 +847,20 @@
         ]
       }
     ],
-    "family_cluster_count": 33
+    "family_cluster_count": 30
   },
   "T102": {
     "detector": "T102",
-    "total_records": 243,
+    "total_records": 231,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 243,
+    "total_records": 231,
     "empty_count": 0,
-    "heading_only_count": 47,
-    "with_dosage_count": 196,
+    "heading_only_count": 46,
+    "with_dosage_count": 185,
     "empty": [],
     "heading_only": [
       {
@@ -1151,14 +909,6 @@
         "name_ja": "スペクタクル脱皮不全",
         "treatment_ja_len": 53,
         "treatment_len": 170,
-        "has_dosage": false
-      },
-      {
-        "id": "snake_0026",
-        "name": "Rostral Abrasion (Nose Rub)",
-        "name_ja": "吻部擦過傷（ノーズラブ）",
-        "treatment_ja_len": 87,
-        "treatment_len": 193,
         "has_dosage": false
       },
       {
@@ -1485,10 +1235,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 243,
+    "total_records": 231,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 82,
+    "drug_mismatch_count": 77,
     "citation_mismatch_count": 8,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -1566,6 +1316,28 @@
         ]
       },
       {
+        "id": "snake_0012",
+        "name": "Snake Mites (Ophionyssus natricis)",
+        "name_ja": "ヘビダニ（オフィオニッスス）",
+        "drugs": [
+          {
+            "drug": "Moxidectin",
+            "drug_ja": "モキシデクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Imidacloprid",
+            "drug_ja": "イミダクロプリド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
         "id": "snake_0014",
         "name": "Amoebic Infection (Entamoeba invadens)",
         "name_ja": "アメーバ感染症",
@@ -1573,6 +1345,18 @@
           {
             "drug": "Amoxicillin-Clavulanate",
             "drug_ja": "アモキシシリン・クラブラン酸",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0019",
+        "name": "Blister Disease (Vesicular Dermatitis)",
+        "name_ja": "水疱症（水疱性皮膚炎）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -1629,6 +1413,18 @@
           {
             "drug": "Mupirocin",
             "drug_ja": "ムピロシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "snake_0026",
+        "name": "Rostral Abrasion (Nose Rub)",
+        "name_ja": "吻部擦過傷（ノーズラブ）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -1844,6 +1640,18 @@
         ]
       },
       {
+        "id": "snake_0082",
+        "name": "Ophidiomyces ophiodiicola (Snake Fungal Disease - SFD)",
+        "name_ja": "ヘビ真菌症（SFD）",
+        "drugs": [
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
         "id": "snake_0083",
         "name": "Mucormycosis (Zygomycosis)",
         "name_ja": "ムコール症",
@@ -1851,18 +1659,6 @@
           {
             "drug": "Posaconazole",
             "drug_ja": "ポサコナゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "snake_0088",
-        "name": "Cestode (Tapeworm) Infection",
-        "name_ja": "条虫感染症",
-        "drugs": [
-          {
-            "drug": "Amoxicillin-Clavulanate",
-            "drug_ja": "アモキシシリン・クラブラン酸",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2020,40 +1816,6 @@
         ]
       },
       {
-        "id": "snake_0142",
-        "name": "Snake Fungal Disease (Ophidiomycosis / SFD)",
-        "name_ja": "ヘビ真菌症（オフィディオミセス症・SFD）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "snake_0148",
-        "name": "Snake Mite (Ophionyssus natricis)",
-        "name_ja": "ヘビダニ（ヘビ）",
-        "drugs": [
-          {
-            "drug": "Moxidectin",
-            "drug_ja": "モキシデクチン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Imidacloprid",
-            "drug_ja": "イミダクロプリド",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Selamectin (Revolution)",
-            "drug_ja": "セラメクチン（レボリューション）",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "snake_0149",
         "name": "Prey-Related Injury",
         "name_ja": "餌関連損傷（ヘビ）",
@@ -2117,45 +1879,9 @@
         ]
       },
       {
-        "id": "snake_0171",
-        "name": "Rostral Abrasion",
-        "name_ja": "吻端擦過傷（ヘビ）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "snake_0172",
-        "name": "Blister Disease",
-        "name_ja": "水疱病（ヘビ）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "snake_0173",
         "name": "Shell Rot",
         "name_ja": "甲羅腐敗（ヘビ）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "snake_0174",
-        "name": "Scale Rot",
-        "name_ja": "鱗腐敗（ヘビ）",
         "drugs": [
           {
             "drug": "Sulfadiazine",
@@ -2201,18 +1927,6 @@
         ]
       },
       {
-        "id": "snake_0185",
-        "name": "Post-Ovulatory Egg Stasis",
-        "name_ja": "排卵後卵停滞（ヘビ）",
-        "drugs": [
-          {
-            "drug": "Oxytocin",
-            "drug_ja": "オキシトシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "snake_0186",
         "name": "Egg Yolk Coelomitis",
         "name_ja": "卵黄体腔炎（ヘビ）",
@@ -2220,18 +1934,6 @@
           {
             "drug": "Amoxicillin-Clavulanate",
             "drug_ja": "アモキシシリン・クラブラン酸",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "snake_0190",
-        "name": "Hepatic Lipidosis",
-        "name_ja": "肝リピドーシス（ヘビ）",
-        "drugs": [
-          {
-            "drug": "Ursodiol (UDCA)",
-            "drug_ja": "ウルソデオキシコール酸",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2310,18 +2012,6 @@
         "id": "snake_0200",
         "name": "Pancreatitis",
         "name_ja": "膵炎（ヘビ）",
-        "drugs": [
-          {
-            "drug": "Amoxicillin-Clavulanate",
-            "drug_ja": "アモキシシリン・クラブラン酸",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "snake_0201",
-        "name": "Pneumonia",
-        "name_ja": "肺炎（ヘビ）",
         "drugs": [
           {
             "drug": "Amoxicillin-Clavulanate",
@@ -2715,7 +2405,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 243,
+    "total_records": 231,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

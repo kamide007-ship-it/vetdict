@@ -1,53 +1,11 @@
 {
   "species": "tortoise",
   "view": "served",
-  "record_count": 278,
+  "record_count": 266,
   "T101": {
     "detector": "T101",
-    "total_records": 278,
+    "total_records": 266,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "tortoise_0000",
-            "name": "Shell Rot (Ulcerative Shell Disease)",
-            "name_ja": "甲羅腐敗症"
-          },
-          {
-            "id": "tortoise_0167",
-            "name": "Shell Rot",
-            "name_ja": "甲羅腐敗（リクガメ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "tortoise_0006",
-            "name": "Pneumonia (Lower Respiratory Infection)",
-            "name_ja": "肺炎（下部呼吸器感染症）"
-          },
-          {
-            "id": "tortoise_0224",
-            "name": "Pneumonia",
-            "name_ja": "肺炎（リクガメ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "tortoise_0032",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "tortoise_0215",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（リクガメ）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -59,11 +17,6 @@
             "id": "tortoise_0158",
             "name": "Cystic Calculi (Bladder Stones) - Urate",
             "name_ja": "膀胱結石（尿酸塩型）"
-          },
-          {
-            "id": "tortoise_0176",
-            "name": "Bladder Stone (Urate)",
-            "name_ja": "膀胱結石（尿酸塩）（リクガメ）"
           }
         ]
       },
@@ -84,48 +37,6 @@
       {
         "members": [
           {
-            "id": "tortoise_0063",
-            "name": "Hyperthermia (Heat Stroke)",
-            "name_ja": "高体温症（熱中症）"
-          },
-          {
-            "id": "tortoise_0253",
-            "name": "Hyperthermia",
-            "name_ja": "高体温症（リクガメ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "tortoise_0072",
-            "name": "Calcium Deficiency (Dietary Hypocalcemia)",
-            "name_ja": "カルシウム欠乏症（食事性低カルシウム血症）"
-          },
-          {
-            "id": "tortoise_0250",
-            "name": "Calcium Deficiency",
-            "name_ja": "カルシウム欠乏症（リクガメ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "tortoise_0075",
-            "name": "Eye Infection (Infectious Ophthalmitis)",
-            "name_ja": "眼感染症（感染性眼炎）"
-          },
-          {
-            "id": "tortoise_0231",
-            "name": "Eye Infection",
-            "name_ja": "眼感染症（リクガメ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "tortoise_0079",
             "name": "Mite Infestation",
             "name_ja": "ダニ寄生"
@@ -134,20 +45,6 @@
             "id": "tortoise_0190",
             "name": "Mite Infestation (Ophionyssus)",
             "name_ja": "ダニ症（Ophionyssus）（リクガメ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "tortoise_0097",
-            "name": "Mycobacteriosis (Turtle Tuberculosis)",
-            "name_ja": "マイコバクテリア症（カメ結核）"
-          },
-          {
-            "id": "tortoise_0186",
-            "name": "Mycobacteriosis",
-            "name_ja": "マイコバクテリウム症（リクガメ）"
           }
         ]
       },
@@ -168,20 +65,6 @@
       {
         "members": [
           {
-            "id": "tortoise_0205",
-            "name": "Gout (Visceral)",
-            "name_ja": "痛風（内臓型）（リクガメ）"
-          },
-          {
-            "id": "tortoise_0206",
-            "name": "Gout (Articular)",
-            "name_ja": "痛風（関節型）（リクガメ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "tortoise_0221",
             "name": "Anorexia (Behavioral)",
             "name_ja": "拒食（行動性）（リクガメ）"
@@ -194,8 +77,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 13,
-    "redundant_record_count": 14,
+    "exact_duplicate_cluster_count": 5,
+    "redundant_record_count": 5,
     "family_clusters": [
       {
         "shared_stem": "respir",
@@ -321,7 +204,7 @@
       },
       {
         "shared_stem": "shell",
-        "size": 10,
+        "size": 9,
         "members": [
           {
             "id": "tortoise_0000",
@@ -367,108 +250,6 @@
             "id": "tortoise_0161",
             "name": "Shell Pyramiding",
             "name_ja": "甲羅のピラミッド化（甲板隆起）"
-          },
-          {
-            "id": "tortoise_0167",
-            "name": "Shell Rot",
-            "name_ja": "甲羅腐敗（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "hepati",
-        "size": 9,
-        "members": [
-          {
-            "id": "tortoise_0032",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "tortoise_0215",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（リクガメ）"
-          },
-          {
-            "id": "tortoise_0216",
-            "name": "Hepatitis",
-            "name_ja": "肝炎（リクガメ）"
-          },
-          {
-            "id": "tortoise_0217",
-            "name": "Hepatic Neoplasia",
-            "name_ja": "肝腫瘍（リクガメ）"
-          },
-          {
-            "id": "tortoise_0263",
-            "name": "Hepatic Bacterial Infection",
-            "name_ja": "肝細菌感染症（リクガメ）"
-          },
-          {
-            "id": "tortoise_0264",
-            "name": "Hepatic Viral Infection",
-            "name_ja": "肝ウイルス感染症（リクガメ）"
-          },
-          {
-            "id": "tortoise_0265",
-            "name": "Hepatic Parasitic Disease",
-            "name_ja": "肝寄生虫疾患（リクガメ）"
-          },
-          {
-            "id": "tortoise_0266",
-            "name": "Hepatic Fibrosis",
-            "name_ja": "肝線維症（リクガメ）"
-          },
-          {
-            "id": "tortoise_0267",
-            "name": "Hepatic Metabolic Disorder",
-            "name_ja": "肝代謝障害（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "defici",
-        "size": 8,
-        "members": [
-          {
-            "id": "tortoise_0023",
-            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
-            "name_ja": "ビタミンA欠乏症"
-          },
-          {
-            "id": "tortoise_0025",
-            "name": "Vitamin D3 Deficiency",
-            "name_ja": "ビタミンD3欠乏症"
-          },
-          {
-            "id": "tortoise_0072",
-            "name": "Calcium Deficiency (Dietary Hypocalcemia)",
-            "name_ja": "カルシウム欠乏症（食事性低カルシウム血症）"
-          },
-          {
-            "id": "tortoise_0134",
-            "name": "UV Light Deficiency",
-            "name_ja": "紫外線不足症"
-          },
-          {
-            "id": "tortoise_0135",
-            "name": "Biotin Deficiency",
-            "name_ja": "ビオチン欠乏症"
-          },
-          {
-            "id": "tortoise_0136",
-            "name": "Protein Deficiency",
-            "name_ja": "タンパク質欠乏・栄養不良"
-          },
-          {
-            "id": "tortoise_0151",
-            "name": "Vitamin C Deficiency",
-            "name_ja": "ビタミンC欠乏症"
-          },
-          {
-            "id": "tortoise_0250",
-            "name": "Calcium Deficiency",
-            "name_ja": "カルシウム欠乏症（リクガメ）"
           }
         ]
       },
@@ -515,6 +296,93 @@
             "id": "tortoise_0287",
             "name": "Dermatological Parasitic Infestation",
             "name_ja": "皮膚寄生虫寄生（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "hepati",
+        "size": 8,
+        "members": [
+          {
+            "id": "tortoise_0032",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "tortoise_0216",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（リクガメ）"
+          },
+          {
+            "id": "tortoise_0217",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（リクガメ）"
+          },
+          {
+            "id": "tortoise_0263",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0264",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0265",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（リクガメ）"
+          },
+          {
+            "id": "tortoise_0266",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（リクガメ）"
+          },
+          {
+            "id": "tortoise_0267",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 7,
+        "members": [
+          {
+            "id": "tortoise_0023",
+            "name": "Vitamin A Deficiency (Hypovitaminosis A)",
+            "name_ja": "ビタミンA欠乏症"
+          },
+          {
+            "id": "tortoise_0025",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "tortoise_0072",
+            "name": "Calcium Deficiency (Dietary Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（食事性低カルシウム血症）"
+          },
+          {
+            "id": "tortoise_0134",
+            "name": "UV Light Deficiency",
+            "name_ja": "紫外線不足症"
+          },
+          {
+            "id": "tortoise_0135",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "tortoise_0136",
+            "name": "Protein Deficiency",
+            "name_ja": "タンパク質欠乏・栄養不良"
+          },
+          {
+            "id": "tortoise_0151",
+            "name": "Vitamin C Deficiency",
+            "name_ja": "ビタミンC欠乏症"
           }
         ]
       },
@@ -803,32 +671,6 @@
         ]
       },
       {
-        "shared_stem": "fractu",
-        "size": 4,
-        "members": [
-          {
-            "id": "tortoise_0002",
-            "name": "Shell Fracture / Trauma",
-            "name_ja": "甲羅骨折・外傷"
-          },
-          {
-            "id": "tortoise_0092",
-            "name": "Bone Fracture (Limb)",
-            "name_ja": "四肢骨折"
-          },
-          {
-            "id": "tortoise_0139",
-            "name": "Spinal Trauma / Vertebral Fracture",
-            "name_ja": "脊椎外傷・椎体骨折"
-          },
-          {
-            "id": "tortoise_0233",
-            "name": "Fracture (Shell/Carapace)",
-            "name_ja": "甲羅骨折（リクガメ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "fungal",
         "size": 4,
         "members": [
@@ -851,32 +693,6 @@
             "id": "tortoise_0286",
             "name": "Dermatological Fungal Infection",
             "name_ja": "皮膚真菌感染（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "gout",
-        "size": 4,
-        "members": [
-          {
-            "id": "tortoise_0041",
-            "name": "Articular Gout",
-            "name_ja": "関節痛風"
-          },
-          {
-            "id": "tortoise_0042",
-            "name": "Visceral Gout",
-            "name_ja": "内臓痛風"
-          },
-          {
-            "id": "tortoise_0205",
-            "name": "Gout (Visceral)",
-            "name_ja": "痛風（内臓型）（リクガメ）"
-          },
-          {
-            "id": "tortoise_0206",
-            "name": "Gout (Articular)",
-            "name_ja": "痛風（関節型）（リクガメ）"
           }
         ]
       },
@@ -1089,27 +905,6 @@
         ]
       },
       {
-        "shared_stem": "bladde",
-        "size": 3,
-        "members": [
-          {
-            "id": "tortoise_0040",
-            "name": "Bladder Stones (Urolithiasis)",
-            "name_ja": "膀胱結石"
-          },
-          {
-            "id": "tortoise_0157",
-            "name": "Prolapsed Bladder",
-            "name_ja": "膀胱脱"
-          },
-          {
-            "id": "tortoise_0176",
-            "name": "Bladder Stone (Urate)",
-            "name_ja": "膀胱結石（尿酸塩）（リクガメ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "carcin",
         "size": 3,
         "members": [
@@ -1215,6 +1010,27 @@
         ]
       },
       {
+        "shared_stem": "fractu",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0002",
+            "name": "Shell Fracture / Trauma",
+            "name_ja": "甲羅骨折・外傷"
+          },
+          {
+            "id": "tortoise_0092",
+            "name": "Bone Fracture (Limb)",
+            "name_ja": "四肢骨折"
+          },
+          {
+            "id": "tortoise_0139",
+            "name": "Spinal Trauma / Vertebral Fracture",
+            "name_ja": "脊椎外傷・椎体骨折"
+          }
+        ]
+      },
+      {
         "shared_stem": "impact",
         "size": 3,
         "members": [
@@ -1257,27 +1073,6 @@
         ]
       },
       {
-        "shared_stem": "lipido",
-        "size": 3,
-        "members": [
-          {
-            "id": "tortoise_0032",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "tortoise_0142",
-            "name": "Corneal Lipidosis",
-            "name_ja": "角膜脂質沈着症"
-          },
-          {
-            "id": "tortoise_0215",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（リクガメ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "mycopl",
         "size": 3,
         "members": [
@@ -1295,27 +1090,6 @@
             "id": "tortoise_0185",
             "name": "Mycoplasma Infection",
             "name_ja": "マイコプラズマ感染（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "overgr",
-        "size": 3,
-        "members": [
-          {
-            "id": "tortoise_0035",
-            "name": "Beak Overgrowth / Malocclusion",
-            "name_ja": "嘴の過成長・不正咬合"
-          },
-          {
-            "id": "tortoise_0170",
-            "name": "Beak Overgrowth",
-            "name_ja": "嘴過成長（リクガメ）"
-          },
-          {
-            "id": "tortoise_0171",
-            "name": "Nail Overgrowth",
-            "name_ja": "爪過成長（リクガメ）"
           }
         ]
       },
@@ -1404,20 +1178,20 @@
         ]
       }
     ],
-    "family_cluster_count": 41
+    "family_cluster_count": 37
   },
   "T102": {
     "detector": "T102",
-    "total_records": 278,
+    "total_records": 266,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 278,
+    "total_records": 266,
     "empty_count": 0,
-    "heading_only_count": 64,
-    "with_dosage_count": 214,
+    "heading_only_count": 61,
+    "with_dosage_count": 205,
     "empty": [],
     "heading_only": [
       {
@@ -1434,14 +1208,6 @@
         "name_ja": "ピラミッディング",
         "treatment_ja_len": 59,
         "treatment_len": 149,
-        "has_dosage": false
-      },
-      {
-        "id": "tortoise_0006",
-        "name": "Pneumonia (Lower Respiratory Infection)",
-        "name_ja": "肺炎（下部呼吸器感染症）",
-        "treatment_ja_len": 67,
-        "treatment_len": 196,
         "has_dosage": false
       },
       {
@@ -1586,14 +1352,6 @@
         "name_ja": "心疾患",
         "treatment_ja_len": 51,
         "treatment_len": 185,
-        "has_dosage": false
-      },
-      {
-        "id": "tortoise_0063",
-        "name": "Hyperthermia (Heat Stroke)",
-        "name_ja": "高体温症（熱中症）",
-        "treatment_ja_len": 81,
-        "treatment_len": 232,
         "has_dosage": false
       },
       {
@@ -1909,14 +1667,6 @@
         "has_dosage": false
       },
       {
-        "id": "tortoise_0170",
-        "name": "Beak Overgrowth",
-        "name_ja": "嘴過成長（リクガメ）",
-        "treatment_ja_len": 182,
-        "treatment_len": 347,
-        "has_dosage": false
-      },
-      {
         "id": "tortoise_0171",
         "name": "Nail Overgrowth",
         "name_ja": "爪過成長（リクガメ）",
@@ -1936,22 +1686,34 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 278,
+    "total_records": 266,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 87,
+    "drug_mismatch_count": 83,
     "citation_mismatch_count": 12,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
     "drug_mismatches": [
       {
-        "id": "tortoise_0002",
-        "name": "Shell Fracture / Trauma",
-        "name_ja": "甲羅骨折・外傷",
+        "id": "tortoise_0000",
+        "name": "Shell Rot (Ulcerative Shell Disease)",
+        "name_ja": "甲羅腐敗症",
         "drugs": [
           {
-            "drug": "Morphine",
-            "drug_ja": "モルヒネ",
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "tortoise_0006",
+        "name": "Pneumonia (Lower Respiratory Infection)",
+        "name_ja": "肺炎（下部呼吸器感染症）",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-Clavulanate",
+            "drug_ja": "アモキシシリン・クラブラン酸",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2219,6 +1981,11 @@
             "drug": "Amoxicillin-Clavulanate",
             "drug_ja": "アモキシシリン・クラブラン酸",
             "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ciprofloxacin",
+            "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
           }
         ]
       },
@@ -2239,6 +2006,11 @@
         "name": "Mycobacteriosis (Turtle Tuberculosis)",
         "name_ja": "マイコバクテリア症（カメ結核）",
         "drugs": [
+          {
+            "drug": "Rifampin",
+            "drug_ja": "リファンピン",
+            "reason": "no dosing data for this species"
+          },
           {
             "drug": "Clarithromycin",
             "drug_ja": "クラリスロマイシン",
@@ -2541,18 +2313,6 @@
         ]
       },
       {
-        "id": "tortoise_0167",
-        "name": "Shell Rot",
-        "name_ja": "甲羅腐敗（リクガメ）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "tortoise_0177",
         "name": "Reproductive Stasis",
         "name_ja": "生殖停滞（リクガメ）",
@@ -2572,23 +2332,6 @@
           {
             "drug": "Deslorelin",
             "drug_ja": "デスロレリン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "tortoise_0186",
-        "name": "Mycobacteriosis",
-        "name_ja": "マイコバクテリウム症（リクガメ）",
-        "drugs": [
-          {
-            "drug": "Rifampin",
-            "drug_ja": "リファンピン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Clarithromycin",
-            "drug_ja": "クラリスロマイシン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2717,18 +2460,6 @@
         ]
       },
       {
-        "id": "tortoise_0215",
-        "name": "Hepatic Lipidosis",
-        "name_ja": "肝リピドーシス（リクガメ）",
-        "drugs": [
-          {
-            "drug": "Ursodiol (UDCA)",
-            "drug_ja": "ウルソデオキシコール酸",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "tortoise_0216",
         "name": "Hepatitis",
         "name_ja": "肝炎（リクガメ）",
@@ -2811,18 +2542,6 @@
         ]
       },
       {
-        "id": "tortoise_0224",
-        "name": "Pneumonia",
-        "name_ja": "肺炎（リクガメ）",
-        "drugs": [
-          {
-            "drug": "Amoxicillin-Clavulanate",
-            "drug_ja": "アモキシシリン・クラブラン酸",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "tortoise_0226",
         "name": "Pulmonary Edema",
         "name_ja": "肺水腫（リクガメ）",
@@ -2842,23 +2561,6 @@
           {
             "drug": "Amoxicillin-Clavulanate",
             "drug_ja": "アモキシシリン・クラブラン酸",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "tortoise_0231",
-        "name": "Eye Infection",
-        "name_ja": "眼感染症（リクガメ）",
-        "drugs": [
-          {
-            "drug": "Amoxicillin-Clavulanate",
-            "drug_ja": "アモキシシリン・クラブラン酸",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ciprofloxacin",
-            "drug_ja": "シプロフロキサシン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3272,7 +2974,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 278,
+    "total_records": 266,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

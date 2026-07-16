@@ -1,25 +1,14 @@
 # VetDict 品質検出レポート — snake
 
-- 総レコード数: **243**
+- 総レコード数: **231**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **15** （冗長レコード 17 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **33**
+- 完全一致重複クラスタ: **4** （冗長レコード 5 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **30**
 
 ### 完全一致重複（上位20）
 - サンシャインウイルス感染症（Sunshine Virus (Reptile Sunshinevirus)）[snake_0005] / サンシャインウイルス（ヘビ）（Sunshine Virus (Reptarenavirus)）[snake_0147]
-- 肺炎（下部呼吸器感染症）（Pneumonia (Lower Respiratory Infection)）[snake_0008] / 肺炎（ヘビ）（Pneumonia）[snake_0201]
-- ヘビダニ（オフィオニッスス）（Snake Mites (Ophionyssus natricis)）[snake_0012] / ヘビダニ（ヘビ）（Snake Mite (Ophionyssus natricis)）[snake_0148]
-- アメーバ感染症（Amoebic Infection (Entamoeba invadens)）[snake_0014] / アメーバ感染（ヘビ）（Amoebic Infection）[snake_0170]
-- 舌虫症（Pentastomid Infection (Tongue Worms)）[snake_0016] / 舌虫感染（ヘビ）（Pentastomid Infection）[snake_0167]
-- 水疱症（水疱性皮膚炎）（Blister Disease (Vesicular Dermatitis)）[snake_0019] / 水疱病（ヘビ）（Blister Disease）[snake_0172]
-- スケイルロット（潰瘍性皮膚炎）（Scale Rot (Ulcerative Dermatitis)）[snake_0020] / 鱗腐敗（ヘビ）（Scale Rot）[snake_0174]
-- 吻部擦過傷（ノーズラブ）（Rostral Abrasion (Nose Rub)）[snake_0026] / 吻端擦過傷（ヘビ）（Rostral Abrasion）[snake_0171]
-- 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[snake_0030] / 肝リピドーシス（ヘビ）（Hepatic Lipidosis）[snake_0190]
 - 食欲不振（非特異的）（Anorexia (Non-specific)）[snake_0033] / 拒食（行動性）（ヘビ）（Anorexia (Behavioral)）[snake_0197] / ストレス性拒食（ヘビ）（Anorexia (Stress-Related)）[snake_0241]
-- 排卵後卵停滞（スラグ残留）（Post-ovulatory Egg Stasis (Slug Retention)）[snake_0044] / 排卵後卵停滞（ヘビ）（Post-Ovulatory Egg Stasis）[snake_0185]
-- ヘビ真菌症（SFD）（Ophidiomyces ophiodiicola (Snake Fungal Disease - SFD)）[snake_0082] / ヘビ真菌症（オフィディオミセス症・SFD）（Snake Fungal Disease (Ophidiomycosis / SFD)）[snake_0142] / 蛇真菌病（オフィディオミセス）（ヘビ）（Snake Fungal Disease (Ophidiomyces)）[snake_0143]
-- 条虫感染症（Cestode (Tapeworm) Infection）[snake_0088] / 条虫感染（ヘビ）（Cestode Infection）[snake_0165]
 - 痛風（内臓型）（ヘビ）（Gout (Visceral)）[snake_0180] / 痛風（関節型）（ヘビ）（Gout (Articular)）[snake_0181]
 - 四肢骨折（ヘビ）（Fracture (Limb)）[snake_0211] / 甲羅骨折（ヘビ）（Fracture (Shell/Carapace)）[snake_0212]
 
@@ -34,9 +23,8 @@
     - 紫外線不足症（UV Light Deficiency）[snake_0122]
     - 温度勾配欠乏症（ヘビ）（Thermal Gradient Deficiency Disease）[snake_0150]
     - カルシウム欠乏症（ヘビ）（Calcium Deficiency）[snake_0229]
-- stem=`hepati` × 9件
+- stem=`hepati` × 8件
     - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[snake_0030]
-    - 肝リピドーシス（ヘビ）（Hepatic Lipidosis）[snake_0190]
     - 肝炎（ヘビ）（Hepatitis）[snake_0191]
     - 肝腫瘍（ヘビ）（Hepatic Neoplasia）[snake_0192]
     - 肝細菌感染症（ヘビ）（Hepatic Bacterial Infection）[snake_0242]
@@ -101,29 +89,27 @@
     - 餌動物による咬傷（Prey Bite Injury）[snake_0059]
     - 餌関連損傷（ヘビ）（Prey-Related Injury）[snake_0149]
     - 脊髄損傷（ヘビ）（Spinal Injury）[snake_0215]
-- stem=`pneumo` × 4件
-    - 肺炎（下部呼吸器感染症）（Pneumonia (Lower Respiratory Infection)）[snake_0008]
-    - 慢性細菌性肺炎（Bacterial Pneumonia (Chronic)）[snake_0139]
-    - パラミクソウイルス肺炎（ヘビ）（Paramyxovirus Pneumonia）[snake_0145]
-    - 肺炎（ヘビ）（Pneumonia）[snake_0201]
-- stem=`snake` × 4件
-    - ヘビダニ（オフィオニッスス）（Snake Mites (Ophionyssus natricis)）[snake_0012]
-    - ヘビ真菌症（オフィディオミセス症・SFD）（Snake Fungal Disease (Ophidiomycosis / SFD)）[snake_0142]
-    - 蛇真菌病（オフィディオミセス）（ヘビ）（Snake Fungal Disease (Ophidiomyces)）[snake_0143]
-    - ヘビダニ（ヘビ）（Snake Mite (Ophionyssus natricis)）[snake_0148]
 - stem=`spinal` × 4件
     - 脊椎骨症/脊椎症（Spinal Osteopathy / Spondylosis）[snake_0051]
     - 脊椎骨折・椎体脱臼（Spinal Fracture / Vertebral Luxation）[snake_0100]
     - 脊椎骨症（ヘビ）（Spinal Osteopathy）[snake_0151]
     - 脊髄損傷（ヘビ）（Spinal Injury）[snake_0215]
+- stem=`anorex` × 3件
+    - 食欲不振（非特異的）（Anorexia (Non-specific)）[snake_0033]
+    - 拒食（行動性）（ヘビ）（Anorexia (Behavioral)）[snake_0197]
+    - ストレス性拒食（ヘビ）（Anorexia (Stress-Related)）[snake_0241]
+- stem=`bite` × 3件
+    - 外傷・咬傷（Trauma / Bite Wounds）[snake_0058]
+    - 餌動物による咬傷（Prey Bite Injury）[snake_0059]
+    - 咬傷（ヘビ）（Bite Wounds）[snake_0177]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **47**
-- 投与量あり: **196**
+- 投与量なし（見出しのみ）: **46**
+- 投与量あり: **185**
 
 ### 投与量なし（上位30）
 - 口腔膿瘍（Oral Abscess）[snake_0011] — ja:159字 / en:196字
@@ -132,7 +118,6 @@
 - コクシジウム症（Coccidia Infection）[snake_0018] — ja:165字 / en:204字
 - 脱皮不全（Dysecdysis (Retained Shed)）[snake_0021] — ja:191字 / en:527字
 - スペクタクル脱皮不全（Retained Spectacle (Retained Eye Cap)）[snake_0022] — ja:53字 / en:170字
-- 吻部擦過傷（ノーズラブ）（Rostral Abrasion (Nose Rub)）[snake_0026] — ja:87字 / en:193字
 - 吐出症候群（Regurgitation Syndrome）[snake_0027] — ja:54字 / en:142字
 - 肥満（Obesity）[snake_0032] — ja:68字 / en:165字
 - 皮下膿瘍（Subcutaneous Abscess）[snake_0038] — ja:159字 / en:137字
@@ -156,9 +141,10 @@
 - 鉤頭虫感染症（Acanthocephalan Infection）[snake_0087] — ja:164字 / en:204字
 - 鞭毛虫感染症（Flagellate Protozoal Infection）[snake_0089] — ja:161字 / en:137字
 - 住肉胞子虫症（Sarcocystosis）[snake_0091] — ja:164字 / en:193字
+- 色素細胞腫（Chromatophoroma）[snake_0097] — ja:104字 / en:193字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **82** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **77** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **8** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
@@ -168,10 +154,13 @@
 - 肺炎（下部呼吸器感染症）（Pneumonia (Lower Respiratory Infection)）[snake_0008] → アモキシシリン・クラブラン酸
 - アスペルギルス症（Aspergillosis）[snake_0009] → クロトリマゾール
 - 感染性口内炎（マウスロット）（Infectious Stomatitis (Mouth Rot)）[snake_0010] → アモキシシリン・クラブラン酸
+- ヘビダニ（オフィオニッスス）（Snake Mites (Ophionyssus natricis)）[snake_0012] → モキシデクチン, イミダクロプリド, セラメクチン（レボリューション）
 - アメーバ感染症（Amoebic Infection (Entamoeba invadens)）[snake_0014] → アモキシシリン・クラブラン酸
+- 水疱症（水疱性皮膚炎）（Blister Disease (Vesicular Dermatitis)）[snake_0019] → スルファジアジン
 - スケイルロット（潰瘍性皮膚炎）（Scale Rot (Ulcerative Dermatitis)）[snake_0020] → ムピロシン, スルファジアジン
 - 熱傷（Thermal Burns）[snake_0023] → メサドン, スルファジアジン
 - 細菌性皮膚炎（Bacterial Dermatitis）[snake_0025] → セファレキシン, クリンダマイシン, ムピロシン
+- 吻部擦過傷（ノーズラブ）（Rostral Abrasion (Nose Rub)）[snake_0026] → スルファジアジン
 - 消化管閉塞（Gastrointestinal Impaction）[snake_0028] → メトクロプラミド, ラクツロース, シサプリド
 - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[snake_0030] → ウルソデオキシコール酸
 - 敗血症（Septicemia (Blood Poisoning)）[snake_0037] → アモキシシリン・クラブラン酸, ドパミン, ノルエピネフリン（ノルアドレナリン）
@@ -179,9 +168,6 @@
 - 卵塞・難産（Egg Binding / Dystocia）[snake_0042] → オキシトシン, プロポフォール
 - 排卵前卵胞停滞（Pre-ovulatory Follicular Stasis）[snake_0043] → オキシトシン
 - 排卵後卵停滞（スラグ残留）（Post-ovulatory Egg Stasis (Slug Retention)）[snake_0044] → オキシトシン
-- 扁平上皮癌（Squamous Cell Carcinoma）[snake_0052] → カルボプラチン
-- 線維肉腫（Fibrosarcoma）[snake_0054] → ドキソルビシン, カルボプラチン
-- 毒腺感染・膿瘍（Venom Gland Infection / Abscess）[snake_0057] → アモキシシリン・クラブラン酸
 
 ### 犬猫論文が他種に自動紐付け（上位20）
 - 皮膚糸状菌症（Dermatophytosis (Fungal Skin Infection)）[snake_0024] → key: dermatophytosis

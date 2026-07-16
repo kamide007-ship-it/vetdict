@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 258,
-    "merge_clusters": 4,
-    "records_merged_away": 4,
+    "merge_clusters": 7,
+    "records_merged_away": 7,
     "archived": 0,
-    "served_after": 254
+    "served_after": 251
   },
   "merges": [
     {
@@ -81,6 +81,63 @@
       ],
       "reason": "same disease modulo species tag / identical name",
       "inherit_content": true
+    },
+    {
+      "canonical": {
+        "id": "amphibian_0020",
+        "slug": "metabolic-bone-disease",
+        "name": "Metabolic Bone Disease",
+        "name_ja": "代謝性骨疾患"
+      },
+      "merged": [
+        {
+          "id": "amphibian_0178",
+          "slug": "metabolic-bone-disease-mbd",
+          "name": "Metabolic Bone Disease (MBD)",
+          "name_ja": "代謝性骨疾患（MBD）（両生類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "amphibian_0022",
+        "slug": "calcium-deficiency-hypocalcemia",
+        "name": "Calcium Deficiency (Hypocalcemia)",
+        "name_ja": "カルシウム欠乏症（低カルシウム血症）"
+      },
+      "merged": [
+        {
+          "id": "amphibian_0254",
+          "slug": "calcium-deficiency",
+          "name": "Calcium Deficiency",
+          "name_ja": "カルシウム欠乏症（両生類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "amphibian_0130",
+        "slug": "thermal-burn-heat-lamp",
+        "name": "Thermal Burn (Heat Lamp)",
+        "name_ja": "熱傷（ヒートランプ）"
+      },
+      "merged": [
+        {
+          "id": "amphibian_0198",
+          "slug": "thermal-burns",
+          "name": "Thermal Burns",
+          "name_ja": "熱傷（両生類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
@@ -120,42 +177,6 @@
             "slug": "nematode-infection-rhabdias",
             "name": "Nematode Infection (Rhabdias)",
             "name_ja": "線虫感染（ラブディアス）（両生類）"
-          }
-        ]
-      },
-      {
-        "base": "Metabolic Bone Disease",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "amphibian_0020",
-            "slug": "metabolic-bone-disease",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患"
-          },
-          {
-            "id": "amphibian_0178",
-            "slug": "metabolic-bone-disease-mbd",
-            "name": "Metabolic Bone Disease (MBD)",
-            "name_ja": "代謝性骨疾患（MBD）（両生類）"
-          }
-        ]
-      },
-      {
-        "base": "Calcium Deficiency (Hypocalcemia)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "amphibian_0022",
-            "slug": "calcium-deficiency-hypocalcemia",
-            "name": "Calcium Deficiency (Hypocalcemia)",
-            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
-          },
-          {
-            "id": "amphibian_0254",
-            "slug": "calcium-deficiency",
-            "name": "Calcium Deficiency",
-            "name_ja": "カルシウム欠乏症（両生類）"
           }
         ]
       },
@@ -234,24 +255,6 @@
             "slug": "mite-infestation-ophionyssus",
             "name": "Mite Infestation (Ophionyssus)",
             "name_ja": "ダニ症（Ophionyssus）（両生類）"
-          }
-        ]
-      },
-      {
-        "base": "Thermal Burn (Heat Lamp)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "amphibian_0130",
-            "slug": "thermal-burn-heat-lamp",
-            "name": "Thermal Burn (Heat Lamp)",
-            "name_ja": "熱傷（ヒートランプ）"
-          },
-          {
-            "id": "amphibian_0198",
-            "slug": "thermal-burns",
-            "name": "Thermal Burns",
-            "name_ja": "熱傷（両生類）"
           }
         ]
       },

@@ -1,109 +1,11 @@
 {
   "species": "sugar_glider",
   "view": "served",
-  "record_count": 215,
+  "record_count": 198,
   "T101": {
     "detector": "T101",
-    "total_records": 215,
+    "total_records": 198,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0001",
-            "name": "Calcium Deficiency (Hypocalcemia)",
-            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
-          },
-          {
-            "id": "sugar_glider_0135",
-            "name": "Calcium Deficiency",
-            "name_ja": "カルシウム欠乏症（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0006",
-            "name": "Hypoglycemia",
-            "name_ja": "低血糖症"
-          },
-          {
-            "id": "sugar_glider_0088",
-            "name": "Hypoglycemia (Neonatal)",
-            "name_ja": "低血糖症（新生児）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0008",
-            "name": "Iron Storage Disease (Hemochromatosis)",
-            "name_ja": "鉄過剰症（ヘモクロマトーシス）"
-          },
-          {
-            "id": "sugar_glider_0080",
-            "name": "Iron Storage Disease (Hepatic)",
-            "name_ja": "鉄蓄積症（肝臓型）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0019",
-            "name": "Mite Infestation (Sarcoptic / Demodex)",
-            "name_ja": "ダニ感染症"
-          },
-          {
-            "id": "sugar_glider_0155",
-            "name": "Mite Infestation",
-            "name_ja": "ダニ症（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0022",
-            "name": "Toxoplasmosis",
-            "name_ja": "トキソプラズマ症"
-          },
-          {
-            "id": "sugar_glider_0097",
-            "name": "Toxoplasmosis (Acute)",
-            "name_ja": "トキソプラズマ症（急性）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0024",
-            "name": "Pneumonia",
-            "name_ja": "肺炎"
-          },
-          {
-            "id": "sugar_glider_0219",
-            "name": "Pneumonia (Bacterial)",
-            "name_ja": "細菌性肺炎（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0026",
-            "name": "Diarrhea (Non-specific)",
-            "name_ja": "下痢（非特異的）"
-          },
-          {
-            "id": "sugar_glider_0147",
-            "name": "Diarrhea",
-            "name_ja": "下痢（フクロモモンガ）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -112,108 +14,9 @@
             "name_ja": "眼球突出"
           },
           {
-            "id": "sugar_glider_0165",
-            "name": "Proptosis",
-            "name_ja": "眼球脱出（フクロモモンガ）"
-          },
-          {
             "id": "sugar_glider_0188",
             "name": "Exophthalmos",
             "name_ja": "眼球突出（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0043",
-            "name": "Pouch Infection (Joeyitis)",
-            "name_ja": "育児嚢感染症"
-          },
-          {
-            "id": "sugar_glider_0073",
-            "name": "Pouch Infection (Marsupitis)",
-            "name_ja": "育児嚢感染（マーシュピティス）"
-          },
-          {
-            "id": "sugar_glider_0193",
-            "name": "Pouch Infection (Marsupial)",
-            "name_ja": "育児嚢感染（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0044",
-            "name": "Seizures (MBD-related)",
-            "name_ja": "てんかん発作（MBD関連）"
-          },
-          {
-            "id": "sugar_glider_0166",
-            "name": "Seizures",
-            "name_ja": "痙攣発作（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0051",
-            "name": "Hepatic Lipidosis (Fatty Liver)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "sugar_glider_0153",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0059",
-            "name": "Patagium Tear (Membrane Injury)",
-            "name_ja": "飛膜損傷"
-          },
-          {
-            "id": "sugar_glider_0071",
-            "name": "Patagium Laceration (Severe)",
-            "name_ja": "飛膜裂傷（重症型）"
-          },
-          {
-            "id": "sugar_glider_0138",
-            "name": "Patagium Tear",
-            "name_ja": "飛膜裂傷（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0061",
-            "name": "Heat Stroke",
-            "name_ja": "熱中症"
-          },
-          {
-            "id": "sugar_glider_0180",
-            "name": "Heat Stroke (Respiratory)",
-            "name_ja": "熱中症（呼吸器型）（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0069",
-            "name": "Nutritional Osteodystrophy",
-            "name_ja": "栄養性骨異栄養症"
-          },
-          {
-            "id": "sugar_glider_0133",
-            "name": "Nutritional Osteodystrophy (MBD)",
-            "name_ja": "栄養性骨異栄養症（MBD）（フクロモモンガ）"
           }
         ]
       },
@@ -228,20 +31,6 @@
             "id": "sugar_glider_0134",
             "name": "Ick (Stress-Related Dermatitis)",
             "name_ja": "ストレス性皮膚炎（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "sugar_glider_0075",
-            "name": "Dystocia (Marsupial)",
-            "name_ja": "難産（有袋類）"
-          },
-          {
-            "id": "sugar_glider_0170",
-            "name": "Dystocia",
-            "name_ja": "難産（フクロモモンガ）"
           }
         ]
       },
@@ -316,12 +105,12 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 21,
-    "redundant_record_count": 24,
+    "exact_duplicate_cluster_count": 7,
+    "redundant_record_count": 7,
     "family_clusters": [
       {
         "shared_stem": "defici",
-        "size": 10,
+        "size": 9,
         "members": [
           {
             "id": "sugar_glider_0001",
@@ -357,11 +146,6 @@
             "id": "sugar_glider_0092",
             "name": "Zinc Deficiency",
             "name_ja": "亜鉛欠乏症"
-          },
-          {
-            "id": "sugar_glider_0135",
-            "name": "Calcium Deficiency",
-            "name_ja": "カルシウム欠乏症（フクロモモンガ）"
           },
           {
             "id": "sugar_glider_0136",
@@ -449,42 +233,6 @@
             "id": "sugar_glider_0144",
             "name": "Dental Abscess",
             "name_ja": "歯科膿瘍（フクロモモンガ）"
-          },
-          {
-            "id": "sugar_glider_0206",
-            "name": "Hepatic Abscess",
-            "name_ja": "肝膿瘍（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "hepati",
-        "size": 6,
-        "members": [
-          {
-            "id": "sugar_glider_0051",
-            "name": "Hepatic Lipidosis (Fatty Liver)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "sugar_glider_0081",
-            "name": "Hepatic Neoplasia",
-            "name_ja": "肝臓腫瘍"
-          },
-          {
-            "id": "sugar_glider_0116",
-            "name": "Obesity-Related Hepatic Lipidosis",
-            "name_ja": "肥満関連肝リピドーシス"
-          },
-          {
-            "id": "sugar_glider_0153",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（フクロモモンガ）"
-          },
-          {
-            "id": "sugar_glider_0154",
-            "name": "Hepatitis",
-            "name_ja": "肝炎（フクロモモンガ）"
           },
           {
             "id": "sugar_glider_0206",
@@ -602,6 +350,37 @@
         ]
       },
       {
+        "shared_stem": "hepati",
+        "size": 5,
+        "members": [
+          {
+            "id": "sugar_glider_0051",
+            "name": "Hepatic Lipidosis (Fatty Liver)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "sugar_glider_0081",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝臓腫瘍"
+          },
+          {
+            "id": "sugar_glider_0116",
+            "name": "Obesity-Related Hepatic Lipidosis",
+            "name_ja": "肥満関連肝リピドーシス"
+          },
+          {
+            "id": "sugar_glider_0154",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（フクロモモンガ）"
+          },
+          {
+            "id": "sugar_glider_0206",
+            "name": "Hepatic Abscess",
+            "name_ja": "肝膿瘍（フクロモモンガ）"
+          }
+        ]
+      },
+      {
         "shared_stem": "intest",
         "size": 5,
         "members": [
@@ -664,37 +443,6 @@
         ]
       },
       {
-        "shared_stem": "patagi",
-        "size": 5,
-        "members": [
-          {
-            "id": "sugar_glider_0059",
-            "name": "Patagium Tear (Membrane Injury)",
-            "name_ja": "飛膜損傷"
-          },
-          {
-            "id": "sugar_glider_0067",
-            "name": "Self-Mutilation - Patagium",
-            "name_ja": "自己損傷 - 飛膜"
-          },
-          {
-            "id": "sugar_glider_0071",
-            "name": "Patagium Laceration (Severe)",
-            "name_ja": "飛膜裂傷（重症型）"
-          },
-          {
-            "id": "sugar_glider_0072",
-            "name": "Patagium Abscess",
-            "name_ja": "飛膜膿瘍"
-          },
-          {
-            "id": "sugar_glider_0138",
-            "name": "Patagium Tear",
-            "name_ja": "飛膜裂傷（フクロモモンガ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "vitami",
         "size": 5,
         "members": [
@@ -752,32 +500,6 @@
         ]
       },
       {
-        "shared_stem": "nutrit",
-        "size": 4,
-        "members": [
-          {
-            "id": "sugar_glider_0002",
-            "name": "Malnutrition / Nutritional Deficiency",
-            "name_ja": "栄養不良・栄養欠乏症"
-          },
-          {
-            "id": "sugar_glider_0064",
-            "name": "Nutritional Secondary Hyperparathyroidism (NSHP)",
-            "name_ja": "栄養性二次性副甲状腺機能亢進症（NSHP）"
-          },
-          {
-            "id": "sugar_glider_0069",
-            "name": "Nutritional Osteodystrophy",
-            "name_ja": "栄養性骨異栄養症"
-          },
-          {
-            "id": "sugar_glider_0133",
-            "name": "Nutritional Osteodystrophy (MBD)",
-            "name_ja": "栄養性骨異栄養症（MBD）（フクロモモンガ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "penile",
         "size": 4,
         "members": [
@@ -800,32 +522,6 @@
             "id": "sugar_glider_0137",
             "name": "Penile Prolapse",
             "name_ja": "陰茎脱（フクロモモンガ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "pneumo",
-        "size": 4,
-        "members": [
-          {
-            "id": "sugar_glider_0024",
-            "name": "Pneumonia",
-            "name_ja": "肺炎"
-          },
-          {
-            "id": "sugar_glider_0025",
-            "name": "Aspiration Pneumonia",
-            "name_ja": "誤嚥性肺炎"
-          },
-          {
-            "id": "sugar_glider_0095",
-            "name": "Mycoplasma Pneumonia",
-            "name_ja": "マイコプラズマ肺炎"
-          },
-          {
-            "id": "sugar_glider_0219",
-            "name": "Pneumonia (Bacterial)",
-            "name_ja": "細菌性肺炎（フクロモモンガ）"
           }
         ]
       },
@@ -1055,65 +751,65 @@
         ]
       },
       {
-        "shared_stem": "infest",
+        "shared_stem": "nutrit",
         "size": 3,
         "members": [
           {
-            "id": "sugar_glider_0019",
-            "name": "Mite Infestation (Sarcoptic / Demodex)",
-            "name_ja": "ダニ感染症"
+            "id": "sugar_glider_0002",
+            "name": "Malnutrition / Nutritional Deficiency",
+            "name_ja": "栄養不良・栄養欠乏症"
           },
           {
-            "id": "sugar_glider_0020",
-            "name": "Flea Infestation",
-            "name_ja": "ノミ寄生症"
+            "id": "sugar_glider_0064",
+            "name": "Nutritional Secondary Hyperparathyroidism (NSHP)",
+            "name_ja": "栄養性二次性副甲状腺機能亢進症（NSHP）"
           },
           {
-            "id": "sugar_glider_0155",
-            "name": "Mite Infestation",
-            "name_ja": "ダニ症（フクロモモンガ）"
+            "id": "sugar_glider_0069",
+            "name": "Nutritional Osteodystrophy",
+            "name_ja": "栄養性骨異栄養症"
           }
         ]
       },
       {
-        "shared_stem": "lipido",
+        "shared_stem": "patagi",
         "size": 3,
         "members": [
           {
-            "id": "sugar_glider_0051",
-            "name": "Hepatic Lipidosis (Fatty Liver)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
+            "id": "sugar_glider_0059",
+            "name": "Patagium Tear (Membrane Injury)",
+            "name_ja": "飛膜損傷"
           },
           {
-            "id": "sugar_glider_0116",
-            "name": "Obesity-Related Hepatic Lipidosis",
-            "name_ja": "肥満関連肝リピドーシス"
+            "id": "sugar_glider_0067",
+            "name": "Self-Mutilation - Patagium",
+            "name_ja": "自己損傷 - 飛膜"
           },
           {
-            "id": "sugar_glider_0153",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（フクロモモンガ）"
+            "id": "sugar_glider_0072",
+            "name": "Patagium Abscess",
+            "name_ja": "飛膜膿瘍"
           }
         ]
       },
       {
-        "shared_stem": "pouch",
+        "shared_stem": "pneumo",
         "size": 3,
         "members": [
           {
-            "id": "sugar_glider_0043",
-            "name": "Pouch Infection (Joeyitis)",
-            "name_ja": "育児嚢感染症"
+            "id": "sugar_glider_0024",
+            "name": "Pneumonia",
+            "name_ja": "肺炎"
           },
           {
-            "id": "sugar_glider_0073",
-            "name": "Pouch Infection (Marsupitis)",
-            "name_ja": "育児嚢感染（マーシュピティス）"
+            "id": "sugar_glider_0025",
+            "name": "Aspiration Pneumonia",
+            "name_ja": "誤嚥性肺炎"
           },
           {
-            "id": "sugar_glider_0193",
-            "name": "Pouch Infection (Marsupial)",
-            "name_ja": "育児嚢感染（フクロモモンガ）"
+            "id": "sugar_glider_0095",
+            "name": "Mycoplasma Pneumonia",
+            "name_ja": "マイコプラズマ肺炎"
           }
         ]
       },
@@ -1160,27 +856,6 @@
         ]
       },
       {
-        "shared_stem": "seizur",
-        "size": 3,
-        "members": [
-          {
-            "id": "sugar_glider_0044",
-            "name": "Seizures (MBD-related)",
-            "name_ja": "てんかん発作（MBD関連）"
-          },
-          {
-            "id": "sugar_glider_0166",
-            "name": "Seizures",
-            "name_ja": "痙攣発作（フクロモモンガ）"
-          },
-          {
-            "id": "sugar_glider_0168",
-            "name": "Toxin-Induced Seizures",
-            "name_ja": "中毒性痙攣（フクロモモンガ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "wound",
         "size": 3,
         "members": [
@@ -1202,20 +877,20 @@
         ]
       }
     ],
-    "family_cluster_count": 32
+    "family_cluster_count": 28
   },
   "T102": {
     "detector": "T102",
-    "total_records": 215,
+    "total_records": 198,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 215,
+    "total_records": 198,
     "empty_count": 0,
-    "heading_only_count": 27,
-    "with_dosage_count": 188,
+    "heading_only_count": 23,
+    "with_dosage_count": 175,
     "empty": [],
     "heading_only": [
       {
@@ -1278,8 +953,8 @@
         "id": "sugar_glider_0038",
         "name": "Proptosis (Eye Prolapse)",
         "name_ja": "眼球突出",
-        "treatment_ja_len": 415,
-        "treatment_len": 519,
+        "treatment_ja_len": 494,
+        "treatment_len": 870,
         "has_dosage": false
       },
       {
@@ -1294,8 +969,8 @@
         "id": "sugar_glider_0061",
         "name": "Heat Stroke",
         "name_ja": "熱中症",
-        "treatment_ja_len": 195,
-        "treatment_len": 158,
+        "treatment_ja_len": 204,
+        "treatment_len": 464,
         "has_dosage": false
       },
       {
@@ -1315,14 +990,6 @@
         "has_dosage": false
       },
       {
-        "id": "sugar_glider_0071",
-        "name": "Patagium Laceration (Severe)",
-        "name_ja": "飛膜裂傷（重症型）",
-        "treatment_ja_len": 455,
-        "treatment_len": 849,
-        "has_dosage": false
-      },
-      {
         "id": "sugar_glider_0072",
         "name": "Patagium Abscess",
         "name_ja": "飛膜膿瘍",
@@ -1336,14 +1003,6 @@
         "name_ja": "子の拒絶",
         "treatment_ja_len": 86,
         "treatment_len": 475,
-        "has_dosage": false
-      },
-      {
-        "id": "sugar_glider_0075",
-        "name": "Dystocia (Marsupial)",
-        "name_ja": "難産（有袋類）",
-        "treatment_ja_len": 63,
-        "treatment_len": 185,
         "has_dosage": false
       },
       {
@@ -1411,22 +1070,6 @@
         "has_dosage": false
       },
       {
-        "id": "sugar_glider_0165",
-        "name": "Proptosis",
-        "name_ja": "眼球脱出（フクロモモンガ）",
-        "treatment_ja_len": 494,
-        "treatment_len": 870,
-        "has_dosage": false
-      },
-      {
-        "id": "sugar_glider_0180",
-        "name": "Heat Stroke (Respiratory)",
-        "name_ja": "熱中症（呼吸器型）（フクロモモンガ）",
-        "treatment_ja_len": 204,
-        "treatment_len": 464,
-        "has_dosage": false
-      },
-      {
         "id": "sugar_glider_0198",
         "name": "Arteriosclerosis",
         "name_ja": "動脈硬化症（フクロモモンガ）",
@@ -1438,10 +1081,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 215,
+    "total_records": 198,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 106,
+    "drug_mismatch_count": 99,
     "citation_mismatch_count": 14,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -1611,8 +1254,18 @@
         "name_ja": "ダニ感染症",
         "drugs": [
           {
+            "drug": "Imidacloprid",
+            "drug_ja": "イミダクロプリド",
+            "reason": "no dosing data for this species"
+          },
+          {
             "drug": "Chlorhexidine",
             "drug_ja": "クロルヘキシジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
             "reason": "no dosing data for this species"
           }
         ]
@@ -1720,6 +1373,16 @@
             "drug": "Phenobarbital",
             "drug_ja": "フェノバルビタール",
             "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Zonisamide",
+            "drug_ja": "ゾニサミド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Zonisamide",
+            "drug_ja": "ゾニサミド",
+            "reason": "no dosing data for this species"
           }
         ]
       },
@@ -1789,6 +1452,23 @@
         ]
       },
       {
+        "id": "sugar_glider_0059",
+        "name": "Patagium Tear (Membrane Injury)",
+        "name_ja": "飛膜損傷",
+        "drugs": [
+          {
+            "drug": "Methadone",
+            "drug_ja": "メサドン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
         "id": "sugar_glider_0064",
         "name": "Nutritional Secondary Hyperparathyroidism (NSHP)",
         "name_ja": "栄養性二次性副甲状腺機能亢進症（NSHP）",
@@ -1832,23 +1512,6 @@
           {
             "drug": "Chlorhexidine",
             "drug_ja": "クロルヘキシジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "sugar_glider_0075",
-        "name": "Dystocia (Marsupial)",
-        "name_ja": "難産（有袋類）",
-        "drugs": [
-          {
-            "drug": "Oxytocin",
-            "drug_ja": "オキシトシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Calcium Gluconate",
-            "drug_ja": "グルコン酸カルシウム",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2288,40 +1951,6 @@
         ]
       },
       {
-        "id": "sugar_glider_0135",
-        "name": "Calcium Deficiency",
-        "name_ja": "カルシウム欠乏症（フクロモモンガ）",
-        "drugs": [
-          {
-            "drug": "Calcium Gluconate",
-            "drug_ja": "グルコン酸カルシウム",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "sugar_glider_0138",
-        "name": "Patagium Tear",
-        "name_ja": "飛膜裂傷（フクロモモンガ）",
-        "drugs": [
-          {
-            "drug": "Methadone",
-            "drug_ja": "メサドン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Chlorhexidine",
-            "drug_ja": "クロルヘキシジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ronidazole",
-            "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "sugar_glider_0141",
         "name": "Cage Mate Aggression",
         "name_ja": "同居個体攻撃（フクロモモンガ）",
@@ -2375,18 +2004,6 @@
         ]
       },
       {
-        "id": "sugar_glider_0147",
-        "name": "Diarrhea",
-        "name_ja": "下痢（フクロモモンガ）",
-        "drugs": [
-          {
-            "drug": "Ronidazole",
-            "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "sugar_glider_0149",
         "name": "E. coli Enteritis",
         "name_ja": "大腸菌性腸炎（フクロモモンガ）",
@@ -2433,18 +2050,6 @@
         ]
       },
       {
-        "id": "sugar_glider_0153",
-        "name": "Hepatic Lipidosis",
-        "name_ja": "肝リピドーシス（フクロモモンガ）",
-        "drugs": [
-          {
-            "drug": "Ursodiol (UDCA)",
-            "drug_ja": "ウルソデオキシコール酸",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "sugar_glider_0154",
         "name": "Hepatitis",
         "name_ja": "肝炎（フクロモモンガ）",
@@ -2467,23 +2072,6 @@
           {
             "drug": "Apomorphine",
             "drug_ja": "アポモルフィン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "sugar_glider_0155",
-        "name": "Mite Infestation",
-        "name_ja": "ダニ症（フクロモモンガ）",
-        "drugs": [
-          {
-            "drug": "Imidacloprid",
-            "drug_ja": "イミダクロプリド",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Selamectin (Revolution)",
-            "drug_ja": "セラメクチン（レボリューション）",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2535,33 +2123,6 @@
           {
             "drug": "Chlorhexidine",
             "drug_ja": "クロルヘキシジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "sugar_glider_0166",
-        "name": "Seizures",
-        "name_ja": "痙攣発作（フクロモモンガ）",
-        "drugs": [
-          {
-            "drug": "Lactulose",
-            "drug_ja": "ラクツロース",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Phenobarbital",
-            "drug_ja": "フェノバルビタール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Zonisamide",
-            "drug_ja": "ゾニサミド",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Zonisamide",
-            "drug_ja": "ゾニサミド",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2812,18 +2373,6 @@
           {
             "drug": "Mannitol",
             "drug_ja": "マンニトール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "sugar_glider_0193",
-        "name": "Pouch Infection (Marsupial)",
-        "name_ja": "育児嚢感染（フクロモモンガ）",
-        "drugs": [
-          {
-            "drug": "Chlorhexidine",
-            "drug_ja": "クロルヘキシジン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3220,7 +2769,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 215,
+    "total_records": 198,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

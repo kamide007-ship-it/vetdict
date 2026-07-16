@@ -1,39 +1,11 @@
 {
   "species": "parakeet",
   "view": "served",
-  "record_count": 435,
+  "record_count": 419,
   "T101": {
     "detector": "T101",
-    "total_records": 435,
+    "total_records": 419,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "parakeet_0011",
-            "name": "Mycobacteriosis (Avian Tuberculosis)",
-            "name_ja": "鳥型結核症"
-          },
-          {
-            "id": "parakeet_0300",
-            "name": "Mycobacteriosis (Avian TB)",
-            "name_ja": "マイコバクテリウム症（鳥結核）（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0023",
-            "name": "Tapeworm Infection",
-            "name_ja": "条虫症"
-          },
-          {
-            "id": "parakeet_0186",
-            "name": "Tapeworm Infection (Parakeet)",
-            "name_ja": "条虫感染症（インコ）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -45,25 +17,6 @@
             "id": "parakeet_0155",
             "name": "Tick Infestation",
             "name_ja": "ダニ寄生症"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0027",
-            "name": "Megabacteriosis (AGY / Macrorhabdus)",
-            "name_ja": "メガバクテリア症（AGY・マクロラブダス症）"
-          },
-          {
-            "id": "parakeet_0252",
-            "name": "Megabacteriosis",
-            "name_ja": "メガバクテリア症（インコ）"
-          },
-          {
-            "id": "parakeet_0272",
-            "name": "Megabacteriosis (AGY)",
-            "name_ja": "メガバクテリア症（AGY）（インコ）"
           }
         ]
       },
@@ -150,53 +103,6 @@
       {
         "members": [
           {
-            "id": "parakeet_0053",
-            "name": "Splay Leg",
-            "name_ja": "開脚症"
-          },
-          {
-            "id": "parakeet_0203",
-            "name": "Splayed Legs (Neonatal)",
-            "name_ja": "開脚症（新生児型）"
-          },
-          {
-            "id": "parakeet_0254",
-            "name": "Splayed Leg (Neonatal)",
-            "name_ja": "開脚（新生児）（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0058",
-            "name": "Feather Cysts",
-            "name_ja": "羽嚢腫"
-          },
-          {
-            "id": "parakeet_0264",
-            "name": "Feather Cyst",
-            "name_ja": "羽毛嚢胞（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0059",
-            "name": "Feather Plucking (Feather Destructive Behavior)",
-            "name_ja": "毛引き症（羽毛損傷行動）"
-          },
-          {
-            "id": "parakeet_0268",
-            "name": "Feather Plucking",
-            "name_ja": "毛引き（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "parakeet_0067",
             "name": "Crop Stasis (Sour Crop)",
             "name_ja": "そ嚢停滞（サワークロップ）"
@@ -205,16 +111,6 @@
             "id": "parakeet_0206",
             "name": "Crop Impaction (Foreign Body)",
             "name_ja": "嗉嚢閉塞（異物）"
-          },
-          {
-            "id": "parakeet_0265",
-            "name": "Crop Stasis (Neonatal)",
-            "name_ja": "そ嚢うっ滞（新生児）（インコ）"
-          },
-          {
-            "id": "parakeet_0270",
-            "name": "Crop Stasis",
-            "name_ja": "そ嚢うっ滞（インコ）"
           },
           {
             "id": "parakeet_0334",
@@ -254,34 +150,6 @@
       {
         "members": [
           {
-            "id": "parakeet_0082",
-            "name": "Burns (Thermal / Chemical)",
-            "name_ja": "熱傷・化学熱傷"
-          },
-          {
-            "id": "parakeet_0330",
-            "name": "Burns",
-            "name_ja": "熱傷（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0113",
-            "name": "E. coli Infection (Colibacillosis)",
-            "name_ja": "大腸菌感染症"
-          },
-          {
-            "id": "parakeet_0299",
-            "name": "E. coli Infection",
-            "name_ja": "大腸菌感染（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "parakeet_0127",
             "name": "Proventricular Ulceration",
             "name_ja": "腺胃潰瘍"
@@ -292,66 +160,10 @@
             "name_ja": "前胃潰瘍（セキセイインコ）"
           }
         ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0133",
-            "name": "Feather Follicle Cyst (Chronic)",
-            "name_ja": "慢性羽包嚢胞"
-          },
-          {
-            "id": "parakeet_0455",
-            "name": "Feather Follicle Cyst",
-            "name_ja": "羽毛毛包嚢胞（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0195",
-            "name": "Zinc Toxicosis (Advanced)",
-            "name_ja": "亜鉛中毒（進行型）"
-          },
-          {
-            "id": "parakeet_0241",
-            "name": "Zinc Toxicosis",
-            "name_ja": "亜鉛中毒"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0228",
-            "name": "Chronic Respiratory Disease (CRD)",
-            "name_ja": "慢性呼吸器疾患（CRD）"
-          },
-          {
-            "id": "parakeet_0362",
-            "name": "Chronic Respiratory Disease",
-            "name_ja": "慢性呼吸器疾患（インコ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "parakeet_0235",
-            "name": "Cere Hypertrophy (Brown Hypertrophy)",
-            "name_ja": "蝋膜肥大（褐色肥大症）"
-          },
-          {
-            "id": "parakeet_0262",
-            "name": "Cere Hypertrophy",
-            "name_ja": "ろう膜肥大（インコ）"
-          }
-        ]
       }
     ],
-    "exact_duplicate_cluster_count": 22,
-    "redundant_record_count": 29,
+    "exact_duplicate_cluster_count": 10,
+    "redundant_record_count": 13,
     "family_clusters": [
       {
         "shared_stem": "defici",
@@ -446,87 +258,6 @@
             "id": "parakeet_0450",
             "name": "Selenium Deficiency",
             "name_ja": "セレン欠乏症（インコ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "feathe",
-        "size": 15,
-        "members": [
-          {
-            "id": "parakeet_0000",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "嘴羽毛病（PBFD）"
-          },
-          {
-            "id": "parakeet_0058",
-            "name": "Feather Cysts",
-            "name_ja": "羽嚢腫"
-          },
-          {
-            "id": "parakeet_0059",
-            "name": "Feather Plucking (Feather Destructive Behavior)",
-            "name_ja": "毛引き症（羽毛損傷行動）"
-          },
-          {
-            "id": "parakeet_0060",
-            "name": "Psittacine Feather Stress Bars",
-            "name_ja": "ストレスバー（ストレス線）"
-          },
-          {
-            "id": "parakeet_0089",
-            "name": "Feather Folliculitis",
-            "name_ja": "毛包炎"
-          },
-          {
-            "id": "parakeet_0133",
-            "name": "Feather Follicle Cyst (Chronic)",
-            "name_ja": "慢性羽包嚢胞"
-          },
-          {
-            "id": "parakeet_0159",
-            "name": "Hormonal Feather Plucking",
-            "name_ja": "ホルモン性毛引き症"
-          },
-          {
-            "id": "parakeet_0213",
-            "name": "Feather Cysts – Recurrent",
-            "name_ja": "反復性羽嚢腫"
-          },
-          {
-            "id": "parakeet_0220",
-            "name": "Psittacine Beak and Feather Disease – Early Stage",
-            "name_ja": "嘴羽毛病（PBFD）初期段階"
-          },
-          {
-            "id": "parakeet_0245",
-            "name": "Mite Infestation – Feather Mites",
-            "name_ja": "羽ダニ寄生症"
-          },
-          {
-            "id": "parakeet_0264",
-            "name": "Feather Cyst",
-            "name_ja": "羽毛嚢胞（インコ）"
-          },
-          {
-            "id": "parakeet_0268",
-            "name": "Feather Plucking",
-            "name_ja": "毛引き（インコ）"
-          },
-          {
-            "id": "parakeet_0282",
-            "name": "Feather Mites",
-            "name_ja": "羽毛ダニ（インコ）"
-          },
-          {
-            "id": "parakeet_0455",
-            "name": "Feather Follicle Cyst",
-            "name_ja": "羽毛毛包嚢胞（インコ）"
-          },
-          {
-            "id": "parakeet_0457",
-            "name": "Tail Feather Loss",
-            "name_ja": "尾羽脱落（インコ）"
           }
         ]
       },
@@ -683,8 +414,74 @@
         ]
       },
       {
+        "shared_stem": "feathe",
+        "size": 12,
+        "members": [
+          {
+            "id": "parakeet_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "parakeet_0058",
+            "name": "Feather Cysts",
+            "name_ja": "羽嚢腫"
+          },
+          {
+            "id": "parakeet_0059",
+            "name": "Feather Plucking (Feather Destructive Behavior)",
+            "name_ja": "毛引き症（羽毛損傷行動）"
+          },
+          {
+            "id": "parakeet_0060",
+            "name": "Psittacine Feather Stress Bars",
+            "name_ja": "ストレスバー（ストレス線）"
+          },
+          {
+            "id": "parakeet_0089",
+            "name": "Feather Folliculitis",
+            "name_ja": "毛包炎"
+          },
+          {
+            "id": "parakeet_0133",
+            "name": "Feather Follicle Cyst (Chronic)",
+            "name_ja": "慢性羽包嚢胞"
+          },
+          {
+            "id": "parakeet_0159",
+            "name": "Hormonal Feather Plucking",
+            "name_ja": "ホルモン性毛引き症"
+          },
+          {
+            "id": "parakeet_0213",
+            "name": "Feather Cysts – Recurrent",
+            "name_ja": "反復性羽嚢腫"
+          },
+          {
+            "id": "parakeet_0220",
+            "name": "Psittacine Beak and Feather Disease – Early Stage",
+            "name_ja": "嘴羽毛病（PBFD）初期段階"
+          },
+          {
+            "id": "parakeet_0245",
+            "name": "Mite Infestation – Feather Mites",
+            "name_ja": "羽ダニ寄生症"
+          },
+          {
+            "id": "parakeet_0282",
+            "name": "Feather Mites",
+            "name_ja": "羽毛ダニ（インコ）"
+          },
+          {
+            "id": "parakeet_0457",
+            "name": "Tail Feather Loss",
+            "name_ja": "尾羽脱落（インコ）"
+          }
+        ]
+      },
+      {
         "shared_stem": "respir",
-        "size": 13,
+        "size": 12,
         "members": [
           {
             "id": "parakeet_0062",
@@ -745,77 +542,6 @@
             "id": "parakeet_0361",
             "name": "Lower Respiratory Tract Infection",
             "name_ja": "下部気道感染（インコ）"
-          },
-          {
-            "id": "parakeet_0362",
-            "name": "Chronic Respiratory Disease",
-            "name_ja": "慢性呼吸器疾患（インコ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "crop",
-        "size": 12,
-        "members": [
-          {
-            "id": "parakeet_0017",
-            "name": "Crop Candidiasis",
-            "name_ja": "そ嚢カンジダ症"
-          },
-          {
-            "id": "parakeet_0067",
-            "name": "Crop Stasis (Sour Crop)",
-            "name_ja": "そ嚢停滞（サワークロップ）"
-          },
-          {
-            "id": "parakeet_0083",
-            "name": "Crop Burns",
-            "name_ja": "そ嚢熱傷"
-          },
-          {
-            "id": "parakeet_0163",
-            "name": "Crop Mycosis",
-            "name_ja": "素嚢真菌症"
-          },
-          {
-            "id": "parakeet_0206",
-            "name": "Crop Impaction (Foreign Body)",
-            "name_ja": "嗉嚢閉塞（異物）"
-          },
-          {
-            "id": "parakeet_0221",
-            "name": "Crop Candidiasis – Neonatal",
-            "name_ja": "新生児そ嚢カンジダ症"
-          },
-          {
-            "id": "parakeet_0222",
-            "name": "Trichomoniasis – Crop Form",
-            "name_ja": "トリコモナス症嗉嚢型"
-          },
-          {
-            "id": "parakeet_0229",
-            "name": "Sour Crop",
-            "name_ja": "酸敗嗉嚢"
-          },
-          {
-            "id": "parakeet_0265",
-            "name": "Crop Stasis (Neonatal)",
-            "name_ja": "そ嚢うっ滞（新生児）（インコ）"
-          },
-          {
-            "id": "parakeet_0270",
-            "name": "Crop Stasis",
-            "name_ja": "そ嚢うっ滞（インコ）"
-          },
-          {
-            "id": "parakeet_0334",
-            "name": "Crop Impaction",
-            "name_ja": "そ嚢停滞（インコ）"
-          },
-          {
-            "id": "parakeet_0453",
-            "name": "Neonatal Crop Burn",
-            "name_ja": "新生児そ嚢火傷（インコ）"
           }
         ]
       },
@@ -938,6 +664,62 @@
             "id": "parakeet_0346",
             "name": "Hepatic Metabolic Disorder",
             "name_ja": "肝代謝障害（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "crop",
+        "size": 10,
+        "members": [
+          {
+            "id": "parakeet_0017",
+            "name": "Crop Candidiasis",
+            "name_ja": "そ嚢カンジダ症"
+          },
+          {
+            "id": "parakeet_0067",
+            "name": "Crop Stasis (Sour Crop)",
+            "name_ja": "そ嚢停滞（サワークロップ）"
+          },
+          {
+            "id": "parakeet_0083",
+            "name": "Crop Burns",
+            "name_ja": "そ嚢熱傷"
+          },
+          {
+            "id": "parakeet_0163",
+            "name": "Crop Mycosis",
+            "name_ja": "素嚢真菌症"
+          },
+          {
+            "id": "parakeet_0206",
+            "name": "Crop Impaction (Foreign Body)",
+            "name_ja": "嗉嚢閉塞（異物）"
+          },
+          {
+            "id": "parakeet_0221",
+            "name": "Crop Candidiasis – Neonatal",
+            "name_ja": "新生児そ嚢カンジダ症"
+          },
+          {
+            "id": "parakeet_0222",
+            "name": "Trichomoniasis – Crop Form",
+            "name_ja": "トリコモナス症嗉嚢型"
+          },
+          {
+            "id": "parakeet_0229",
+            "name": "Sour Crop",
+            "name_ja": "酸敗嗉嚢"
+          },
+          {
+            "id": "parakeet_0334",
+            "name": "Crop Impaction",
+            "name_ja": "そ嚢停滞（インコ）"
+          },
+          {
+            "id": "parakeet_0453",
+            "name": "Neonatal Crop Burn",
+            "name_ja": "新生児そ嚢火傷（インコ）"
           }
         ]
       },
@@ -1596,47 +1378,6 @@
         ]
       },
       {
-        "shared_stem": "toxico",
-        "size": 7,
-        "members": [
-          {
-            "id": "parakeet_0038",
-            "name": "Teflon (PTFE) Toxicosis",
-            "name_ja": "テフロン中毒（PTFE中毒）"
-          },
-          {
-            "id": "parakeet_0039",
-            "name": "Avocado Toxicosis",
-            "name_ja": "アボカド中毒"
-          },
-          {
-            "id": "parakeet_0195",
-            "name": "Zinc Toxicosis (Advanced)",
-            "name_ja": "亜鉛中毒（進行型）"
-          },
-          {
-            "id": "parakeet_0196",
-            "name": "Teflon Toxicosis (Parakeet)",
-            "name_ja": "テフロン中毒（インコ）"
-          },
-          {
-            "id": "parakeet_0241",
-            "name": "Zinc Toxicosis",
-            "name_ja": "亜鉛中毒"
-          },
-          {
-            "id": "parakeet_0242",
-            "name": "Lead Toxicosis",
-            "name_ja": "鉛中毒"
-          },
-          {
-            "id": "parakeet_0325",
-            "name": "Teflon/PTFE Toxicosis",
-            "name_ja": "テフロン/PTFE中毒（インコ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "tumor",
         "size": 7,
         "members": [
@@ -1746,42 +1487,6 @@
             "id": "parakeet_0431",
             "name": "Congenital Malformation",
             "name_ja": "先天性奇形（インコ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "cyst",
-        "size": 6,
-        "members": [
-          {
-            "id": "parakeet_0058",
-            "name": "Feather Cysts",
-            "name_ja": "羽嚢腫"
-          },
-          {
-            "id": "parakeet_0133",
-            "name": "Feather Follicle Cyst (Chronic)",
-            "name_ja": "慢性羽包嚢胞"
-          },
-          {
-            "id": "parakeet_0205",
-            "name": "Ovarian Cyst",
-            "name_ja": "卵巣嚢胞"
-          },
-          {
-            "id": "parakeet_0213",
-            "name": "Feather Cysts – Recurrent",
-            "name_ja": "反復性羽嚢腫"
-          },
-          {
-            "id": "parakeet_0264",
-            "name": "Feather Cyst",
-            "name_ja": "羽毛嚢胞（インコ）"
-          },
-          {
-            "id": "parakeet_0455",
-            "name": "Feather Follicle Cyst",
-            "name_ja": "羽毛毛包嚢胞（インコ）"
           }
         ]
       },
@@ -1998,6 +1703,42 @@
             "id": "parakeet_0418",
             "name": "Systemic Parasitic Disease",
             "name_ja": "全身性寄生虫疾患（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 6,
+        "members": [
+          {
+            "id": "parakeet_0038",
+            "name": "Teflon (PTFE) Toxicosis",
+            "name_ja": "テフロン中毒（PTFE中毒）"
+          },
+          {
+            "id": "parakeet_0039",
+            "name": "Avocado Toxicosis",
+            "name_ja": "アボカド中毒"
+          },
+          {
+            "id": "parakeet_0196",
+            "name": "Teflon Toxicosis (Parakeet)",
+            "name_ja": "テフロン中毒（インコ）"
+          },
+          {
+            "id": "parakeet_0241",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "parakeet_0242",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "parakeet_0325",
+            "name": "Teflon/PTFE Toxicosis",
+            "name_ja": "テフロン/PTFE中毒（インコ）"
           }
         ]
       },
@@ -2312,32 +2053,6 @@
         ]
       },
       {
-        "shared_stem": "burn",
-        "size": 4,
-        "members": [
-          {
-            "id": "parakeet_0082",
-            "name": "Burns (Thermal / Chemical)",
-            "name_ja": "熱傷・化学熱傷"
-          },
-          {
-            "id": "parakeet_0083",
-            "name": "Crop Burns",
-            "name_ja": "そ嚢熱傷"
-          },
-          {
-            "id": "parakeet_0330",
-            "name": "Burns",
-            "name_ja": "熱傷（インコ）"
-          },
-          {
-            "id": "parakeet_0453",
-            "name": "Neonatal Crop Burn",
-            "name_ja": "新生児そ嚢火傷（インコ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "cell",
         "size": 4,
         "members": [
@@ -2386,6 +2101,32 @@
             "id": "parakeet_0249",
             "name": "Cloacal Calculus",
             "name_ja": "総排泄腔結石"
+          }
+        ]
+      },
+      {
+        "shared_stem": "cyst",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0058",
+            "name": "Feather Cysts",
+            "name_ja": "羽嚢腫"
+          },
+          {
+            "id": "parakeet_0133",
+            "name": "Feather Follicle Cyst (Chronic)",
+            "name_ja": "慢性羽包嚢胞"
+          },
+          {
+            "id": "parakeet_0205",
+            "name": "Ovarian Cyst",
+            "name_ja": "卵巣嚢胞"
+          },
+          {
+            "id": "parakeet_0213",
+            "name": "Feather Cysts – Recurrent",
+            "name_ja": "反復性羽嚢腫"
           }
         ]
       },
@@ -2687,6 +2428,27 @@
         ]
       },
       {
+        "shared_stem": "burn",
+        "size": 3,
+        "members": [
+          {
+            "id": "parakeet_0082",
+            "name": "Burns (Thermal / Chemical)",
+            "name_ja": "熱傷・化学熱傷"
+          },
+          {
+            "id": "parakeet_0083",
+            "name": "Crop Burns",
+            "name_ja": "そ嚢熱傷"
+          },
+          {
+            "id": "parakeet_0453",
+            "name": "Neonatal Crop Burn",
+            "name_ja": "新生児そ嚢火傷（インコ）"
+          }
+        ]
+      },
+      {
         "shared_stem": "compli",
         "size": 3,
         "members": [
@@ -2704,27 +2466,6 @@
             "id": "parakeet_0429",
             "name": "Post-Surgical Complication",
             "name_ja": "術後合併症（インコ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "follic",
-        "size": 3,
-        "members": [
-          {
-            "id": "parakeet_0089",
-            "name": "Feather Folliculitis",
-            "name_ja": "毛包炎"
-          },
-          {
-            "id": "parakeet_0133",
-            "name": "Feather Follicle Cyst (Chronic)",
-            "name_ja": "慢性羽包嚢胞"
-          },
-          {
-            "id": "parakeet_0455",
-            "name": "Feather Follicle Cyst",
-            "name_ja": "羽毛毛包嚢胞（インコ）"
           }
         ]
       },
@@ -2813,27 +2554,6 @@
         ]
       },
       {
-        "shared_stem": "hypert",
-        "size": 3,
-        "members": [
-          {
-            "id": "parakeet_0235",
-            "name": "Cere Hypertrophy (Brown Hypertrophy)",
-            "name_ja": "蝋膜肥大（褐色肥大症）"
-          },
-          {
-            "id": "parakeet_0262",
-            "name": "Cere Hypertrophy",
-            "name_ja": "ろう膜肥大（インコ）"
-          },
-          {
-            "id": "parakeet_0443",
-            "name": "Hyperthermia",
-            "name_ja": "高体温症（インコ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "immune",
         "size": 3,
         "members": [
@@ -2914,27 +2634,6 @@
             "id": "parakeet_0436",
             "name": "Immune-Mediated Thrombocytopenia",
             "name_ja": "免疫介在性血小板減少症（インコ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "megaba",
-        "size": 3,
-        "members": [
-          {
-            "id": "parakeet_0027",
-            "name": "Megabacteriosis (AGY / Macrorhabdus)",
-            "name_ja": "メガバクテリア症（AGY・マクロラブダス症）"
-          },
-          {
-            "id": "parakeet_0252",
-            "name": "Megabacteriosis",
-            "name_ja": "メガバクテリア症（インコ）"
-          },
-          {
-            "id": "parakeet_0272",
-            "name": "Megabacteriosis (AGY)",
-            "name_ja": "メガバクテリア症（AGY）（インコ）"
           }
         ]
       },
@@ -3044,27 +2743,6 @@
         ]
       },
       {
-        "shared_stem": "plucki",
-        "size": 3,
-        "members": [
-          {
-            "id": "parakeet_0059",
-            "name": "Feather Plucking (Feather Destructive Behavior)",
-            "name_ja": "毛引き症（羽毛損傷行動）"
-          },
-          {
-            "id": "parakeet_0159",
-            "name": "Hormonal Feather Plucking",
-            "name_ja": "ホルモン性毛引き症"
-          },
-          {
-            "id": "parakeet_0268",
-            "name": "Feather Plucking",
-            "name_ja": "毛引き（インコ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "protei",
         "size": 3,
         "members": [
@@ -3124,27 +2802,6 @@
             "id": "parakeet_0212",
             "name": "French Moult – Severe",
             "name_ja": "フレンチモールト重症型"
-          }
-        ]
-      },
-      {
-        "shared_stem": "stasi",
-        "size": 3,
-        "members": [
-          {
-            "id": "parakeet_0067",
-            "name": "Crop Stasis (Sour Crop)",
-            "name_ja": "そ嚢停滞（サワークロップ）"
-          },
-          {
-            "id": "parakeet_0265",
-            "name": "Crop Stasis (Neonatal)",
-            "name_ja": "そ嚢うっ滞（新生児）（インコ）"
-          },
-          {
-            "id": "parakeet_0270",
-            "name": "Crop Stasis",
-            "name_ja": "そ嚢うっ滞（インコ）"
           }
         ]
       },
@@ -3254,20 +2911,20 @@
         ]
       }
     ],
-    "family_cluster_count": 85
+    "family_cluster_count": 80
   },
   "T102": {
     "detector": "T102",
-    "total_records": 435,
+    "total_records": 419,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 435,
+    "total_records": 419,
     "empty_count": 0,
-    "heading_only_count": 40,
-    "with_dosage_count": 395,
+    "heading_only_count": 36,
+    "with_dosage_count": 383,
     "empty": [],
     "heading_only": [
       {
@@ -3290,8 +2947,8 @@
         "id": "parakeet_0133",
         "name": "Feather Follicle Cyst (Chronic)",
         "name_ja": "慢性羽包嚢胞",
-        "treatment_ja_len": 50,
-        "treatment_len": 136,
+        "treatment_ja_len": 210,
+        "treatment_len": 307,
         "has_dosage": false
       },
       {
@@ -3391,22 +3048,6 @@
         "has_dosage": false
       },
       {
-        "id": "parakeet_0195",
-        "name": "Zinc Toxicosis (Advanced)",
-        "name_ja": "亜鉛中毒（進行型）",
-        "treatment_ja_len": 674,
-        "treatment_len": 871,
-        "has_dosage": false
-      },
-      {
-        "id": "parakeet_0203",
-        "name": "Splayed Legs (Neonatal)",
-        "name_ja": "開脚症（新生児型）",
-        "treatment_ja_len": 619,
-        "treatment_len": 1416,
-        "has_dosage": false
-      },
-      {
         "id": "parakeet_0205",
         "name": "Ovarian Cyst",
         "name_ja": "卵巣嚢胞",
@@ -3450,16 +3091,8 @@
         "id": "parakeet_0241",
         "name": "Zinc Toxicosis",
         "name_ja": "亜鉛中毒",
-        "treatment_ja_len": 313,
-        "treatment_len": 393,
-        "has_dosage": false
-      },
-      {
-        "id": "parakeet_0254",
-        "name": "Splayed Leg (Neonatal)",
-        "name_ja": "開脚（新生児）（インコ）",
-        "treatment_ja_len": 471,
-        "treatment_len": 831,
+        "treatment_ja_len": 674,
+        "treatment_len": 871,
         "has_dosage": false
       },
       {
@@ -3575,14 +3208,6 @@
         "has_dosage": false
       },
       {
-        "id": "parakeet_0455",
-        "name": "Feather Follicle Cyst",
-        "name_ja": "羽毛毛包嚢胞（インコ）",
-        "treatment_ja_len": 210,
-        "treatment_len": 307,
-        "has_dosage": false
-      },
-      {
         "id": "parakeet_0457",
         "name": "Tail Feather Loss",
         "name_ja": "尾羽脱落（インコ）",
@@ -3594,10 +3219,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 435,
+    "total_records": 419,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 71,
+    "drug_mismatch_count": 70,
     "citation_mismatch_count": 14,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -4334,23 +3959,6 @@
         ]
       },
       {
-        "id": "parakeet_0330",
-        "name": "Burns",
-        "name_ja": "熱傷（インコ）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Silver Sulfadiazine",
-            "drug_ja": "スルファジアジン銀",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "parakeet_0336",
         "name": "Hepatitis",
         "name_ja": "肝炎（インコ）",
@@ -4716,7 +4324,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 435,
+    "total_records": 419,
     "hit_count": 1,
     "safe_occurrences": 0,
     "review_occurrences": 1,

@@ -1,10 +1,10 @@
 {
   "species": "amphibian",
   "view": "served",
-  "record_count": 254,
+  "record_count": 251,
   "T101": {
     "detector": "T101",
-    "total_records": 254,
+    "total_records": 251,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -31,34 +31,6 @@
             "id": "amphibian_0163",
             "name": "Nematode Infection (Rhabdias)",
             "name_ja": "線虫感染（ラブディアス）（両生類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "amphibian_0020",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患"
-          },
-          {
-            "id": "amphibian_0178",
-            "name": "Metabolic Bone Disease (MBD)",
-            "name_ja": "代謝性骨疾患（MBD）（両生類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "amphibian_0022",
-            "name": "Calcium Deficiency (Hypocalcemia)",
-            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
-          },
-          {
-            "id": "amphibian_0254",
-            "name": "Calcium Deficiency",
-            "name_ja": "カルシウム欠乏症（両生類）"
           }
         ]
       },
@@ -126,20 +98,6 @@
       {
         "members": [
           {
-            "id": "amphibian_0130",
-            "name": "Thermal Burn (Heat Lamp)",
-            "name_ja": "熱傷（ヒートランプ）"
-          },
-          {
-            "id": "amphibian_0198",
-            "name": "Thermal Burns",
-            "name_ja": "熱傷（両生類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "amphibian_0207",
             "name": "Gout (Visceral)",
             "name_ja": "痛風（内臓型）（両生類）"
@@ -166,65 +124,9 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 11,
-    "redundant_record_count": 12,
+    "exact_duplicate_cluster_count": 8,
+    "redundant_record_count": 9,
     "family_clusters": [
-      {
-        "shared_stem": "defici",
-        "size": 10,
-        "members": [
-          {
-            "id": "amphibian_0022",
-            "name": "Calcium Deficiency (Hypocalcemia)",
-            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
-          },
-          {
-            "id": "amphibian_0023",
-            "name": "Vitamin D3 Deficiency",
-            "name_ja": "ビタミンD3欠乏症"
-          },
-          {
-            "id": "amphibian_0024",
-            "name": "Thiamine Deficiency",
-            "name_ja": "チアミン（ビタミンB1）欠乏症"
-          },
-          {
-            "id": "amphibian_0095",
-            "name": "Vitamin E Deficiency",
-            "name_ja": "ビタミンE欠乏症"
-          },
-          {
-            "id": "amphibian_0096",
-            "name": "Biotin Deficiency",
-            "name_ja": "ビオチン欠乏症"
-          },
-          {
-            "id": "amphibian_0097",
-            "name": "Iodine Deficiency (Goiter)",
-            "name_ja": "ヨウ素欠乏症（甲状腺腫）"
-          },
-          {
-            "id": "amphibian_0098",
-            "name": "Protein Deficiency",
-            "name_ja": "タンパク質欠乏症"
-          },
-          {
-            "id": "amphibian_0100",
-            "name": "UV Light Deficiency",
-            "name_ja": "紫外線不足症"
-          },
-          {
-            "id": "amphibian_0149",
-            "name": "Newt Iodine Deficiency Goiter",
-            "name_ja": "イモリヨウ素欠乏性甲状腺腫"
-          },
-          {
-            "id": "amphibian_0254",
-            "name": "Calcium Deficiency",
-            "name_ja": "カルシウム欠乏症（両生類）"
-          }
-        ]
-      },
       {
         "shared_stem": "amphib",
         "size": 9,
@@ -273,6 +175,57 @@
             "id": "amphibian_0160",
             "name": "Amphibian Metabolic Bone Disease (NSHP)",
             "name_ja": "両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "defici",
+        "size": 9,
+        "members": [
+          {
+            "id": "amphibian_0022",
+            "name": "Calcium Deficiency (Hypocalcemia)",
+            "name_ja": "カルシウム欠乏症（低カルシウム血症）"
+          },
+          {
+            "id": "amphibian_0023",
+            "name": "Vitamin D3 Deficiency",
+            "name_ja": "ビタミンD3欠乏症"
+          },
+          {
+            "id": "amphibian_0024",
+            "name": "Thiamine Deficiency",
+            "name_ja": "チアミン（ビタミンB1）欠乏症"
+          },
+          {
+            "id": "amphibian_0095",
+            "name": "Vitamin E Deficiency",
+            "name_ja": "ビタミンE欠乏症"
+          },
+          {
+            "id": "amphibian_0096",
+            "name": "Biotin Deficiency",
+            "name_ja": "ビオチン欠乏症"
+          },
+          {
+            "id": "amphibian_0097",
+            "name": "Iodine Deficiency (Goiter)",
+            "name_ja": "ヨウ素欠乏症（甲状腺腫）"
+          },
+          {
+            "id": "amphibian_0098",
+            "name": "Protein Deficiency",
+            "name_ja": "タンパク質欠乏症"
+          },
+          {
+            "id": "amphibian_0100",
+            "name": "UV Light Deficiency",
+            "name_ja": "紫外線不足症"
+          },
+          {
+            "id": "amphibian_0149",
+            "name": "Newt Iodine Deficiency Goiter",
+            "name_ja": "イモリヨウ素欠乏性甲状腺腫"
           }
         ]
       },
@@ -472,37 +425,6 @@
         ]
       },
       {
-        "shared_stem": "therma",
-        "size": 5,
-        "members": [
-          {
-            "id": "amphibian_0030",
-            "name": "Thermal Stress (Hyperthermia)",
-            "name_ja": "温熱ストレス（高体温症）"
-          },
-          {
-            "id": "amphibian_0031",
-            "name": "Thermal Stress (Hypothermia)",
-            "name_ja": "低温ストレス（低体温症）"
-          },
-          {
-            "id": "amphibian_0130",
-            "name": "Thermal Burn (Heat Lamp)",
-            "name_ja": "熱傷（ヒートランプ）"
-          },
-          {
-            "id": "amphibian_0170",
-            "name": "Thermal Shock",
-            "name_ja": "温度ショック（両生類）"
-          },
-          {
-            "id": "amphibian_0198",
-            "name": "Thermal Burns",
-            "name_ja": "熱傷（両生類）"
-          }
-        ]
-      },
-      {
         "shared_stem": "toxico",
         "size": 5,
         "members": [
@@ -664,6 +586,32 @@
         ]
       },
       {
+        "shared_stem": "therma",
+        "size": 4,
+        "members": [
+          {
+            "id": "amphibian_0030",
+            "name": "Thermal Stress (Hyperthermia)",
+            "name_ja": "温熱ストレス（高体温症）"
+          },
+          {
+            "id": "amphibian_0031",
+            "name": "Thermal Stress (Hypothermia)",
+            "name_ja": "低温ストレス（低体温症）"
+          },
+          {
+            "id": "amphibian_0130",
+            "name": "Thermal Burn (Heat Lamp)",
+            "name_ja": "熱傷（ヒートランプ）"
+          },
+          {
+            "id": "amphibian_0170",
+            "name": "Thermal Shock",
+            "name_ja": "温度ショック（両生類）"
+          }
+        ]
+      },
+      {
         "shared_stem": "toxici",
         "size": 4,
         "members": [
@@ -733,48 +681,6 @@
             "id": "amphibian_0187",
             "name": "Aeromonas Infection",
             "name_ja": "エロモナス感染（両生類）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "bone",
-        "size": 3,
-        "members": [
-          {
-            "id": "amphibian_0020",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患"
-          },
-          {
-            "id": "amphibian_0160",
-            "name": "Amphibian Metabolic Bone Disease (NSHP)",
-            "name_ja": "両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）"
-          },
-          {
-            "id": "amphibian_0178",
-            "name": "Metabolic Bone Disease (MBD)",
-            "name_ja": "代謝性骨疾患（MBD）（両生類）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "burn",
-        "size": 3,
-        "members": [
-          {
-            "id": "amphibian_0029",
-            "name": "Ammonia Burn",
-            "name_ja": "アンモニア熱傷"
-          },
-          {
-            "id": "amphibian_0130",
-            "name": "Thermal Burn (Heat Lamp)",
-            "name_ja": "熱傷（ヒートランプ）"
-          },
-          {
-            "id": "amphibian_0198",
-            "name": "Thermal Burns",
-            "name_ja": "熱傷（両生類）"
           }
         ]
       },
@@ -947,27 +853,6 @@
         ]
       },
       {
-        "shared_stem": "metabo",
-        "size": 3,
-        "members": [
-          {
-            "id": "amphibian_0020",
-            "name": "Metabolic Bone Disease",
-            "name_ja": "代謝性骨疾患"
-          },
-          {
-            "id": "amphibian_0160",
-            "name": "Amphibian Metabolic Bone Disease (NSHP)",
-            "name_ja": "両生類代謝性骨疾患（栄養性二次性副甲状腺機能亢進症）"
-          },
-          {
-            "id": "amphibian_0178",
-            "name": "Metabolic Bone Disease (MBD)",
-            "name_ja": "代謝性骨疾患（MBD）（両生類）"
-          }
-        ]
-      },
-      {
         "shared_stem": "nemato",
         "size": 3,
         "members": [
@@ -1115,20 +1000,20 @@
         ]
       }
     ],
-    "family_cluster_count": 35
+    "family_cluster_count": 32
   },
   "T102": {
     "detector": "T102",
-    "total_records": 254,
+    "total_records": 251,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 254,
+    "total_records": 251,
     "empty_count": 0,
     "heading_only_count": 28,
-    "with_dosage_count": 226,
+    "with_dosage_count": 223,
     "empty": [],
     "heading_only": [
       {
@@ -1359,10 +1244,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 254,
+    "total_records": 251,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 218,
+    "drug_mismatch_count": 215,
     "citation_mismatch_count": 7,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -5282,18 +5167,6 @@
         ]
       },
       {
-        "id": "amphibian_0178",
-        "name": "Metabolic Bone Disease (MBD)",
-        "name_ja": "代謝性骨疾患（MBD）（両生類）",
-        "drugs": [
-          {
-            "drug": "Calcium Gluconate",
-            "drug_ja": "グルコン酸カルシウム",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "amphibian_0179",
         "name": "Respiratory Infection",
         "name_ja": "呼吸器感染症（両生類）",
@@ -5685,48 +5558,6 @@
           {
             "drug": "Ronidazole",
             "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "amphibian_0198",
-        "name": "Thermal Burns",
-        "name_ja": "熱傷（両生類）",
-        "drugs": [
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Gabapentin",
-            "drug_ja": "ガバペンチン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Buprenorphine",
-            "drug_ja": "ブプレノルフィン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Methadone",
-            "drug_ja": "メサドン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Chlorhexidine",
-            "drug_ja": "クロルヘキシジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Silver Sulfadiazine",
-            "drug_ja": "スルファジアジン銀",
             "reason": "no dosing data for this species"
           }
         ]
@@ -6711,18 +6542,6 @@
         ]
       },
       {
-        "id": "amphibian_0254",
-        "name": "Calcium Deficiency",
-        "name_ja": "カルシウム欠乏症（両生類）",
-        "drugs": [
-          {
-            "drug": "Calcium Gluconate",
-            "drug_ja": "グルコン酸カルシウム",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "amphibian_0255",
         "name": "Hypocalcemia",
         "name_ja": "低カルシウム血症（両生類）",
@@ -6832,7 +6651,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 254,
+    "total_records": 251,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

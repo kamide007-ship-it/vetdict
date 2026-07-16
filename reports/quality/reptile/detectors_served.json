@@ -1,95 +1,11 @@
 {
   "species": "reptile",
   "view": "served",
-  "record_count": 280,
+  "record_count": 268,
   "T101": {
     "detector": "T101",
-    "total_records": 280,
+    "total_records": 268,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "reptile_0007",
-            "name": "Thiamine (Vitamin B1) Deficiency",
-            "name_ja": "チアミン（ビタミンB1）欠乏症"
-          },
-          {
-            "id": "reptile_0170",
-            "name": "Thiamine Deficiency",
-            "name_ja": "チアミン欠乏症（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0020",
-            "name": "Amoebic Infection (Entamoeba)",
-            "name_ja": "アメーバ感染症"
-          },
-          {
-            "id": "reptile_0187",
-            "name": "Amoebic Infection",
-            "name_ja": "アメーバ感染（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0027",
-            "name": "Scale Rot (Ulcerative Dermatitis)",
-            "name_ja": "スケイルロット（潰瘍性皮膚炎）"
-          },
-          {
-            "id": "reptile_0190",
-            "name": "Scale Rot",
-            "name_ja": "鱗腐敗（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0033",
-            "name": "Rostral Abrasion (Nose Rub)",
-            "name_ja": "吻部擦過傷（ノーズラブ）"
-          },
-          {
-            "id": "reptile_0188",
-            "name": "Rostral Abrasion",
-            "name_ja": "吻端擦過傷（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0034",
-            "name": "Shell Rot (Ulcerative Shell Disease)",
-            "name_ja": "甲羅腐敗症"
-          },
-          {
-            "id": "reptile_0189",
-            "name": "Shell Rot",
-            "name_ja": "甲羅腐敗（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0040",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "reptile_0205",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（爬虫類）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -126,62 +42,6 @@
       {
         "members": [
           {
-            "id": "reptile_0063",
-            "name": "Renal Failure (Chronic Kidney Disease)",
-            "name_ja": "腎不全（慢性腎疾患）"
-          },
-          {
-            "id": "reptile_0198",
-            "name": "Renal Failure",
-            "name_ja": "腎不全（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0064",
-            "name": "Bladder Stones (Urolithiasis)",
-            "name_ja": "膀胱結石（尿路結石症）"
-          },
-          {
-            "id": "reptile_0200",
-            "name": "Bladder Stone",
-            "name_ja": "膀胱結石（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0074",
-            "name": "Hyperthermia (Heat Stroke)",
-            "name_ja": "高体温症（熱中症）"
-          },
-          {
-            "id": "reptile_0244",
-            "name": "Hyperthermia",
-            "name_ja": "高体温症（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0081",
-            "name": "Yellow Fungus Disease (Chrysosporium anamorph of Nannizziopsis vriesii - CANV)",
-            "name_ja": "黄色真菌症（CANV）"
-          },
-          {
-            "id": "reptile_0164",
-            "name": "Yellow Fungus Disease (Chrysosporium)",
-            "name_ja": "黄色真菌病（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "reptile_0082",
             "name": "Osteomyelitis",
             "name_ja": "骨髄炎"
@@ -190,34 +50,6 @@
             "id": "reptile_0112",
             "name": "Osteomyelitis (Jaw)",
             "name_ja": "顎骨骨髄炎"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0153",
-            "name": "Necrotic Dermatitis (Vesicular Dermatitis)",
-            "name_ja": "壊死性皮膚炎（水疱性皮膚炎）"
-          },
-          {
-            "id": "reptile_0168",
-            "name": "Necrotic Dermatitis",
-            "name_ja": "壊死性皮膚炎（爬虫類）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "reptile_0162",
-            "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
-            "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）"
-          },
-          {
-            "id": "reptile_0167",
-            "name": "Septicemic Cutaneous Ulcerative Disease",
-            "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）"
           }
         ]
       },
@@ -250,85 +82,9 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 17,
-    "redundant_record_count": 18,
+    "exact_duplicate_cluster_count": 5,
+    "redundant_record_count": 6,
     "family_clusters": [
-      {
-        "shared_stem": "dermat",
-        "size": 14,
-        "members": [
-          {
-            "id": "reptile_0030",
-            "name": "Dermatophytosis (Fungal Skin Infection)",
-            "name_ja": "皮膚糸状菌症"
-          },
-          {
-            "id": "reptile_0031",
-            "name": "Bacterial Dermatitis",
-            "name_ja": "細菌性皮膚炎"
-          },
-          {
-            "id": "reptile_0146",
-            "name": "Photosensitization Dermatitis",
-            "name_ja": "光線過敏性皮膚炎"
-          },
-          {
-            "id": "reptile_0153",
-            "name": "Necrotic Dermatitis (Vesicular Dermatitis)",
-            "name_ja": "壊死性皮膚炎（水疱性皮膚炎）"
-          },
-          {
-            "id": "reptile_0168",
-            "name": "Necrotic Dermatitis",
-            "name_ja": "壊死性皮膚炎（爬虫類）"
-          },
-          {
-            "id": "reptile_0194",
-            "name": "Ulcerative Dermatitis",
-            "name_ja": "潰瘍性皮膚炎（爬虫類）"
-          },
-          {
-            "id": "reptile_0276",
-            "name": "Dermatological Bacterial Infection",
-            "name_ja": "皮膚細菌感染（爬虫類）"
-          },
-          {
-            "id": "reptile_0277",
-            "name": "Dermatological Viral Infection",
-            "name_ja": "皮膚ウイルス感染（爬虫類）"
-          },
-          {
-            "id": "reptile_0278",
-            "name": "Dermatological Fungal Infection",
-            "name_ja": "皮膚真菌感染（爬虫類）"
-          },
-          {
-            "id": "reptile_0279",
-            "name": "Dermatological Parasitic Infestation",
-            "name_ja": "皮膚寄生虫寄生（爬虫類）"
-          },
-          {
-            "id": "reptile_0280",
-            "name": "Dermatological Neoplasia",
-            "name_ja": "皮膚腫瘍性疾患（爬虫類）"
-          },
-          {
-            "id": "reptile_0281",
-            "name": "Dermatological Autoimmune Disease",
-            "name_ja": "皮膚自己免疫疾患（爬虫類）"
-          },
-          {
-            "id": "reptile_0282",
-            "name": "Dermatological Allergic Disease",
-            "name_ja": "皮膚アレルギー疾患（爬虫類）"
-          },
-          {
-            "id": "reptile_0283",
-            "name": "Chronic Dermatitis",
-            "name_ja": "慢性皮膚炎（爬虫類）"
-          }
-        ]
-      },
       {
         "shared_stem": "respir",
         "size": 14,
@@ -406,63 +162,73 @@
         ]
       },
       {
-        "shared_stem": "hepati",
-        "size": 11,
+        "shared_stem": "dermat",
+        "size": 13,
         "members": [
           {
-            "id": "reptile_0040",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
+            "id": "reptile_0030",
+            "name": "Dermatophytosis (Fungal Skin Infection)",
+            "name_ja": "皮膚糸状菌症"
           },
           {
-            "id": "reptile_0155",
-            "name": "Hepatic Coccidiosis",
-            "name_ja": "肝コクシジウム症"
+            "id": "reptile_0031",
+            "name": "Bacterial Dermatitis",
+            "name_ja": "細菌性皮膚炎"
           },
           {
-            "id": "reptile_0158",
-            "name": "Adenoviral Hepatitis",
-            "name_ja": "アデノウイルス性肝炎"
+            "id": "reptile_0146",
+            "name": "Photosensitization Dermatitis",
+            "name_ja": "光線過敏性皮膚炎"
           },
           {
-            "id": "reptile_0205",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（爬虫類）"
+            "id": "reptile_0153",
+            "name": "Necrotic Dermatitis (Vesicular Dermatitis)",
+            "name_ja": "壊死性皮膚炎（水疱性皮膚炎）"
           },
           {
-            "id": "reptile_0206",
-            "name": "Hepatitis",
-            "name_ja": "肝炎（爬虫類）"
+            "id": "reptile_0194",
+            "name": "Ulcerative Dermatitis",
+            "name_ja": "潰瘍性皮膚炎（爬虫類）"
           },
           {
-            "id": "reptile_0207",
-            "name": "Hepatic Neoplasia",
-            "name_ja": "肝腫瘍（爬虫類）"
+            "id": "reptile_0276",
+            "name": "Dermatological Bacterial Infection",
+            "name_ja": "皮膚細菌感染（爬虫類）"
           },
           {
-            "id": "reptile_0255",
-            "name": "Hepatic Bacterial Infection",
-            "name_ja": "肝細菌感染症（爬虫類）"
+            "id": "reptile_0277",
+            "name": "Dermatological Viral Infection",
+            "name_ja": "皮膚ウイルス感染（爬虫類）"
           },
           {
-            "id": "reptile_0256",
-            "name": "Hepatic Viral Infection",
-            "name_ja": "肝ウイルス感染症（爬虫類）"
+            "id": "reptile_0278",
+            "name": "Dermatological Fungal Infection",
+            "name_ja": "皮膚真菌感染（爬虫類）"
           },
           {
-            "id": "reptile_0257",
-            "name": "Hepatic Parasitic Disease",
-            "name_ja": "肝寄生虫疾患（爬虫類）"
+            "id": "reptile_0279",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（爬虫類）"
           },
           {
-            "id": "reptile_0258",
-            "name": "Hepatic Fibrosis",
-            "name_ja": "肝線維症（爬虫類）"
+            "id": "reptile_0280",
+            "name": "Dermatological Neoplasia",
+            "name_ja": "皮膚腫瘍性疾患（爬虫類）"
           },
           {
-            "id": "reptile_0259",
-            "name": "Hepatic Metabolic Disorder",
-            "name_ja": "肝代謝障害（爬虫類）"
+            "id": "reptile_0281",
+            "name": "Dermatological Autoimmune Disease",
+            "name_ja": "皮膚自己免疫疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0282",
+            "name": "Dermatological Allergic Disease",
+            "name_ja": "皮膚アレルギー疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0283",
+            "name": "Chronic Dermatitis",
+            "name_ja": "慢性皮膚炎（爬虫類）"
           }
         ]
       },
@@ -523,8 +289,64 @@
         ]
       },
       {
+        "shared_stem": "hepati",
+        "size": 10,
+        "members": [
+          {
+            "id": "reptile_0040",
+            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+            "name_ja": "肝リピドーシス（脂肪肝）"
+          },
+          {
+            "id": "reptile_0155",
+            "name": "Hepatic Coccidiosis",
+            "name_ja": "肝コクシジウム症"
+          },
+          {
+            "id": "reptile_0158",
+            "name": "Adenoviral Hepatitis",
+            "name_ja": "アデノウイルス性肝炎"
+          },
+          {
+            "id": "reptile_0206",
+            "name": "Hepatitis",
+            "name_ja": "肝炎（爬虫類）"
+          },
+          {
+            "id": "reptile_0207",
+            "name": "Hepatic Neoplasia",
+            "name_ja": "肝腫瘍（爬虫類）"
+          },
+          {
+            "id": "reptile_0255",
+            "name": "Hepatic Bacterial Infection",
+            "name_ja": "肝細菌感染症（爬虫類）"
+          },
+          {
+            "id": "reptile_0256",
+            "name": "Hepatic Viral Infection",
+            "name_ja": "肝ウイルス感染症（爬虫類）"
+          },
+          {
+            "id": "reptile_0257",
+            "name": "Hepatic Parasitic Disease",
+            "name_ja": "肝寄生虫疾患（爬虫類）"
+          },
+          {
+            "id": "reptile_0258",
+            "name": "Hepatic Fibrosis",
+            "name_ja": "肝線維症（爬虫類）"
+          },
+          {
+            "id": "reptile_0259",
+            "name": "Hepatic Metabolic Disorder",
+            "name_ja": "肝代謝障害（爬虫類）"
+          }
+        ]
+      },
+      {
         "shared_stem": "defici",
-        "size": 9,
+        "size": 8,
         "members": [
           {
             "id": "reptile_0002",
@@ -560,11 +382,6 @@
             "id": "reptile_0142",
             "name": "UV Light Deficiency",
             "name_ja": "紫外線不足症"
-          },
-          {
-            "id": "reptile_0170",
-            "name": "Thiamine Deficiency",
-            "name_ja": "チアミン欠乏症（爬虫類）"
           },
           {
             "id": "reptile_0242",
@@ -956,32 +773,6 @@
         ]
       },
       {
-        "shared_stem": "renal",
-        "size": 4,
-        "members": [
-          {
-            "id": "reptile_0063",
-            "name": "Renal Failure (Chronic Kidney Disease)",
-            "name_ja": "腎不全（慢性腎疾患）"
-          },
-          {
-            "id": "reptile_0108",
-            "name": "Renal Cell Carcinoma",
-            "name_ja": "腎細胞癌"
-          },
-          {
-            "id": "reptile_0169",
-            "name": "Renal Secondary Hyperparathyroidism",
-            "name_ja": "腎性二次性副甲状腺機能亢進症（爬虫類）"
-          },
-          {
-            "id": "reptile_0198",
-            "name": "Renal Failure",
-            "name_ja": "腎不全（爬虫類）"
-          }
-        ]
-      },
-      {
         "shared_stem": "stasi",
         "size": 4,
         "members": [
@@ -1139,48 +930,6 @@
         ]
       },
       {
-        "shared_stem": "cutane",
-        "size": 3,
-        "members": [
-          {
-            "id": "reptile_0159",
-            "name": "Cutaneous Papilloma",
-            "name_ja": "皮膚乳頭腫"
-          },
-          {
-            "id": "reptile_0162",
-            "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
-            "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）"
-          },
-          {
-            "id": "reptile_0167",
-            "name": "Septicemic Cutaneous Ulcerative Disease",
-            "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "failur",
-        "size": 3,
-        "members": [
-          {
-            "id": "reptile_0063",
-            "name": "Renal Failure (Chronic Kidney Disease)",
-            "name_ja": "腎不全（慢性腎疾患）"
-          },
-          {
-            "id": "reptile_0071",
-            "name": "Liver Failure (Hepatopathy)",
-            "name_ja": "肝不全（肝疾患）"
-          },
-          {
-            "id": "reptile_0198",
-            "name": "Renal Failure",
-            "name_ja": "腎不全（爬虫類）"
-          }
-        ]
-      },
-      {
         "shared_stem": "follic",
         "size": 3,
         "members": [
@@ -1240,27 +989,6 @@
             "id": "reptile_0202",
             "name": "Penile/Hemipenal Prolapse",
             "name_ja": "陰茎/半陰茎脱（爬虫類）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "hypert",
-        "size": 3,
-        "members": [
-          {
-            "id": "reptile_0074",
-            "name": "Hyperthermia (Heat Stroke)",
-            "name_ja": "高体温症（熱中症）"
-          },
-          {
-            "id": "reptile_0114",
-            "name": "Hyperthyroidism",
-            "name_ja": "甲状腺機能亢進症"
-          },
-          {
-            "id": "reptile_0244",
-            "name": "Hyperthermia",
-            "name_ja": "高体温症（爬虫類）"
           }
         ]
       },
@@ -1328,44 +1056,23 @@
         ]
       },
       {
-        "shared_stem": "septic",
+        "shared_stem": "renal",
         "size": 3,
         "members": [
           {
-            "id": "reptile_0052",
-            "name": "Septicemia (Blood Poisoning)",
-            "name_ja": "敗血症"
+            "id": "reptile_0063",
+            "name": "Renal Failure (Chronic Kidney Disease)",
+            "name_ja": "腎不全（慢性腎疾患）"
           },
           {
-            "id": "reptile_0162",
-            "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
-            "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）"
+            "id": "reptile_0108",
+            "name": "Renal Cell Carcinoma",
+            "name_ja": "腎細胞癌"
           },
           {
-            "id": "reptile_0167",
-            "name": "Septicemic Cutaneous Ulcerative Disease",
-            "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "shell",
-        "size": 3,
-        "members": [
-          {
-            "id": "reptile_0034",
-            "name": "Shell Rot (Ulcerative Shell Disease)",
-            "name_ja": "甲羅腐敗症"
-          },
-          {
-            "id": "reptile_0035",
-            "name": "Shell Fracture / Trauma",
-            "name_ja": "甲羅骨折・外傷"
-          },
-          {
-            "id": "reptile_0189",
-            "name": "Shell Rot",
-            "name_ja": "甲羅腐敗（爬虫類）"
+            "id": "reptile_0169",
+            "name": "Renal Secondary Hyperparathyroidism",
+            "name_ja": "腎性二次性副甲状腺機能亢進症（爬虫類）"
           }
         ]
       },
@@ -1412,27 +1119,6 @@
         ]
       },
       {
-        "shared_stem": "ulcera",
-        "size": 3,
-        "members": [
-          {
-            "id": "reptile_0162",
-            "name": "Septicemic Cutaneous Ulcerative Disease (SCUD)",
-            "name_ja": "敗血症性皮膚潰瘍症（SCUD、シェル腐れ）"
-          },
-          {
-            "id": "reptile_0167",
-            "name": "Septicemic Cutaneous Ulcerative Disease",
-            "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）"
-          },
-          {
-            "id": "reptile_0194",
-            "name": "Ulcerative Dermatitis",
-            "name_ja": "潰瘍性皮膚炎（爬虫類）"
-          }
-        ]
-      },
-      {
         "shared_stem": "vitami",
         "size": 3,
         "members": [
@@ -1475,20 +1161,20 @@
         ]
       }
     ],
-    "family_cluster_count": 41
+    "family_cluster_count": 35
   },
   "T102": {
     "detector": "T102",
-    "total_records": 280,
+    "total_records": 268,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 280,
+    "total_records": 268,
     "empty_count": 0,
-    "heading_only_count": 39,
-    "with_dosage_count": 241,
+    "heading_only_count": 37,
+    "with_dosage_count": 231,
     "empty": [],
     "heading_only": [
       {
@@ -1529,14 +1215,6 @@
         "name_ja": "皮下膿瘍",
         "treatment_ja_len": 127,
         "treatment_len": 204,
-        "has_dosage": false
-      },
-      {
-        "id": "reptile_0033",
-        "name": "Rostral Abrasion (Nose Rub)",
-        "name_ja": "吻部擦過傷（ノーズラブ）",
-        "treatment_ja_len": 114,
-        "treatment_len": 193,
         "has_dosage": false
       },
       {
@@ -1601,14 +1279,6 @@
         "name_ja": "脊椎骨症/脊椎症",
         "treatment_ja_len": 128,
         "treatment_len": 193,
-        "has_dosage": false
-      },
-      {
-        "id": "reptile_0074",
-        "name": "Hyperthermia (Heat Stroke)",
-        "name_ja": "高体温症（熱中症）",
-        "treatment_ja_len": 125,
-        "treatment_len": 158,
         "has_dosage": false
       },
       {
@@ -1807,10 +1477,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 280,
+    "total_records": 268,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 110,
+    "drug_mismatch_count": 102,
     "citation_mismatch_count": 9,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -2203,6 +1873,38 @@
         ]
       },
       {
+        "id": "reptile_0063",
+        "name": "Renal Failure (Chronic Kidney Disease)",
+        "name_ja": "腎不全（慢性腎疾患）",
+        "drugs": [
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Atropine",
+            "drug_ja": "アトロピン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Aluminum Hydroxide",
+            "drug_ja": "水酸化アルミニウム",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Activated Charcoal",
+            "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
         "id": "reptile_0065",
         "name": "Neurological Syndrome (Non-specific)",
         "name_ja": "神経学的症候群（非特異的）",
@@ -2275,18 +1977,6 @@
           {
             "drug": "Lactulose",
             "drug_ja": "ラクツロース",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "reptile_0074",
-        "name": "Hyperthermia (Heat Stroke)",
-        "name_ja": "高体温症（熱中症）",
-        "drugs": [
-          {
-            "drug": "Midazolam",
-            "drug_ja": "ミダゾラム",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2586,18 +2276,6 @@
         ]
       },
       {
-        "id": "reptile_0164",
-        "name": "Yellow Fungus Disease (Chrysosporium)",
-        "name_ja": "黄色真菌病（爬虫類）",
-        "drugs": [
-          {
-            "drug": "Voriconazole",
-            "drug_ja": "ボリコナゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "reptile_0165",
         "name": "Nannizziopsis Infection",
         "name_ja": "ナンニジオプシス感染（爬虫類）",
@@ -2617,30 +2295,6 @@
           {
             "drug": "Voriconazole",
             "drug_ja": "ボリコナゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "reptile_0167",
-        "name": "Septicemic Cutaneous Ulcerative Disease",
-        "name_ja": "敗血性皮膚潰瘍性疾患（爬虫類）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "reptile_0168",
-        "name": "Necrotic Dermatitis",
-        "name_ja": "壊死性皮膚炎（爬虫類）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2738,42 +2392,6 @@
         ]
       },
       {
-        "id": "reptile_0188",
-        "name": "Rostral Abrasion",
-        "name_ja": "吻端擦過傷（爬虫類）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "reptile_0189",
-        "name": "Shell Rot",
-        "name_ja": "甲羅腐敗（爬虫類）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "reptile_0190",
-        "name": "Scale Rot",
-        "name_ja": "鱗腐敗（爬虫類）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "reptile_0192",
         "name": "Tail Necrosis",
         "name_ja": "尾壊死（爬虫類）",
@@ -2822,38 +2440,6 @@
         ]
       },
       {
-        "id": "reptile_0198",
-        "name": "Renal Failure",
-        "name_ja": "腎不全（爬虫類）",
-        "drugs": [
-          {
-            "drug": "Morphine",
-            "drug_ja": "モルヒネ",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Atropine",
-            "drug_ja": "アトロピン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Aluminum Hydroxide",
-            "drug_ja": "水酸化アルミニウム",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Activated Charcoal",
-            "drug_ja": "活性炭",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Apomorphine",
-            "drug_ja": "アポモルフィン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "reptile_0201",
         "name": "Egg Yolk Coelomitis",
         "name_ja": "卵黄体腔炎（爬虫類）",
@@ -2861,18 +2447,6 @@
           {
             "drug": "Amoxicillin-Clavulanate",
             "drug_ja": "アモキシシリン・クラブラン酸",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "reptile_0205",
-        "name": "Hepatic Lipidosis",
-        "name_ja": "肝リピドーシス（爬虫類）",
-        "drugs": [
-          {
-            "drug": "Ursodiol (UDCA)",
-            "drug_ja": "ウルソデオキシコール酸",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3487,7 +3061,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 280,
+    "total_records": 268,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

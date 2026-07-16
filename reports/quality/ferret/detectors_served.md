@@ -1,32 +1,14 @@
 # VetDict 品質検出レポート — ferret
 
-- 総レコード数: **267**
+- 総レコード数: **248**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **21** （冗長レコード 21 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **50**
+- 完全一致重複クラスタ: **2** （冗長レコード 2 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **39**
 
 ### 完全一致重複（上位20）
-- 副腎皮質機能亢進症（クッシング症候群）（Hyperadrenocorticism (Cushing's)）[ferret_0003] / 副腎皮質機能亢進症（フェレット）（Hyperadrenocorticism）[ferret_0193]
 - 消化管異物（GI Foreign Body）[ferret_0004] / 消化管異物（線状）（Gastrointestinal Foreign Body (Linear)）[ferret_0147]
-- 炎症性腸疾患（IBD）（Inflammatory Bowel Disease (IBD)）[ferret_0006] / 炎症性腸疾患（フェレット）（Inflammatory Bowel Disease）[ferret_0170]
-- 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[ferret_0010] / 肝リピドーシス（フェレット）（Hepatic Lipidosis）[ferret_0174]
-- 流行性カタル性腸炎（ECE）（Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)）[ferret_0012] / 流行性カタル性腸炎（フェレット）（Epizootic Catarrhal Enteritis (ECE)）[ferret_0166]
-- 拡張型心筋症（DCM）（Dilated Cardiomyopathy (DCM)）[ferret_0014] / 拡張型心筋症（フェレット）（Dilated Cardiomyopathy）[ferret_0183]
-- 肥大型心筋症（HCM）（Hypertrophic Cardiomyopathy (HCM)）[ferret_0015] / 肥大型心筋症（フェレット）（Hypertrophic Cardiomyopathy）[ferret_0184]
-- インフルエンザ（Influenza (Human Flu)）[ferret_0018] / インフルエンザ（ヒトインフルエンザ）（フェレット）（Influenza (Human Influenza)）[ferret_0164]
-- 肥満細胞腫（皮膚型）（Mast Cell Tumor (Cutaneous)）[ferret_0025] / 肥満細胞腫（フェレット）（Mast Cell Tumor）[ferret_0179]
-- 耳ダニ症（Ear Mites (Otodectes cynotis)）[ferret_0031] / 耳ダニ（ミミヒゼンダニ）（フェレット）（Ear Mites (Otodectes)）[ferret_0176]
-- 皮膚糸状菌症（Ringworm (Dermatophytosis)）[ferret_0032] / 皮膚糸状菌症（ミクロスポルム）（フェレット）（Dermatophytosis (Microsporum)）[ferret_0274]
-- 尾部脱毛（ラットテイル）（Tail Alopecia (Rat Tail)）[ferret_0034] / 尾部脱毛（副腎性）（フェレット）（Tail Alopecia (Adrenal)）[ferret_0178]
-- 前立腺嚢胞（副腎関連）（Prostatic Cysts (Adrenal-related)）[ferret_0037] / 前立腺嚢胞（フェレット）（Prostatic Cyst）[ferret_0195]
-- 陰門腫脹（副腎関連）（Vulvar Swelling (Adrenal-related)）[ferret_0042] / 外陰部腫脹（副腎性）（フェレット）（Vulvar Swelling (Adrenal)）[ferret_0196]
-- 前立腺疾患（副腎関連）（Prostatic Disease (Adrenal-related)）[ferret_0043] / 前立腺疾患（フェレット）（Prostatic Disease）[ferret_0190]
-- アリューシャン病（ADV）（Aleutian Disease (ADV)）[ferret_0050] / アリューシャン病（フェレット）（Aleutian Disease）[ferret_0165]
-- フェレット全身性コロナウイルス感染症（Ferret Systemic Coronavirus (FRSCV)）[ferret_0054] / フェレット全身性コロナウイルス（フェレット）（Ferret Systemic Coronavirus）[ferret_0167]
-- 低血糖症（インスリノーマ関連）（Hypoglycemia (Insulinoma-related)）[ferret_0066] / 低血糖症（インスリノーマ）（フェレット）（Hypoglycemia (Insulinoma)）[ferret_0194]
-- 増殖性大腸炎（Proliferative Colitis）[ferret_0078] / 増殖性大腸炎（デスルフォビブリオ）（Proliferative Colitis (Desulfovibrio)）[ferret_0129]
-- 播種性特発性筋膜炎（DIM）（Disseminated Idiopathic Myofasciitis (DIM)）[ferret_0082] / 播種性特発性筋膜炎（フェレット）（Disseminated Idiopathic Myofasciitis）[ferret_0213]
+- 骨腫（Osteoma）[ferret_0088] / 骨腫（頭蓋骨）（Osteoma (Skull)）[ferret_0143]
 
 ### 疾患ファミリー候補（上位15）
 - stem=`adrena` × 11件
@@ -41,26 +23,16 @@
     - 副腎疾患 - GnRHアゴニスト反応（Adrenal Disease - GnRH Agonist Response）[ferret_0153]
     - 副腎関連脱毛（フェレット）（Adrenal-Associated Alopecia）[ferret_0222]
     - フェレット副腎疾患（フェレット）（Ferret Adrenal Disease (FAD)）[ferret_0223]
-- stem=`tumor` × 10件
+- stem=`tumor` × 9件
     - 副腎腫瘍（腺腫・腺癌）（Adrenal Tumor (Adenoma / Adenocarcinoma)）[ferret_0023]
     - 肥満細胞腫（皮膚型）（Mast Cell Tumor (Cutaneous)）[ferret_0025]
     - 皮脂腺腫瘍（Sebaceous Gland Tumor）[ferret_0027]
     - 基底細胞腫（Basal Cell Tumor）[ferret_0028]
     - 包皮腺腫瘍（Preputial Gland Tumor）[ferret_0126]
-    - 肥満細胞腫（フェレット）（Mast Cell Tumor）[ferret_0179]
     - 膵島細胞腫瘍（フェレット）（Pancreatic Islet Cell Tumor）[ferret_0192]
     - 乳腺腫瘍（フェレット）（Mammary Tumor）[ferret_0198]
     - 卵巣腫瘍（フェレット）（Ovarian Tumor）[ferret_0244]
     - 精巣腫瘍（フェレット）（Testicular Tumor）[ferret_0245]
-- stem=`cell` × 8件
-    - 肥満細胞腫（皮膚型）（Mast Cell Tumor (Cutaneous)）[ferret_0025]
-    - 扁平上皮癌（Skin Squamous Cell Carcinoma）[ferret_0026]
-    - 基底細胞腫（Basal Cell Tumor）[ferret_0028]
-    - 膵島細胞癌（Islet Cell Carcinoma）[ferret_0122]
-    - 腎細胞癌（Renal Cell Carcinoma）[ferret_0124]
-    - 移行上皮癌（膀胱）（Transitional Cell Carcinoma (Bladder)）[ferret_0125]
-    - 肥満細胞腫（フェレット）（Mast Cell Tumor）[ferret_0179]
-    - 膵島細胞腫瘍（フェレット）（Pancreatic Islet Cell Tumor）[ferret_0192]
 - stem=`gastri` × 8件
     - ヘリコバクター胃炎（Helicobacter Mustelae Gastritis）[ferret_0005]
     - 胃潰瘍（Gastric Ulcer）[ferret_0013]
@@ -70,14 +42,14 @@
     - 胃内異物（フェレット）（Gastric Foreign Body）[ferret_0168]
     - ヘリコバクター胃潰瘍（フェレット）（Gastric Helicobacter Ulceration）[ferret_0225]
     - 胃腺癌（フェレット）（Gastric Adenocarcinoma）[ferret_0227]
-- stem=`enteri` × 7件
-    - 好酸球性腸炎（Eosinophilic Enteritis）[ferret_0007]
-    - 流行性カタル性腸炎（ECE）（Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)）[ferret_0012]
-    - 流行性カタル性腸炎（ECE）- 慢性型（Epizootic Catarrhal Enteritis (ECE) - Chronic）[ferret_0093]
-    - クロストリジウム腸炎（Clostridial Enteritis）[ferret_0116]
-    - ロタウイルス性腸炎（Rotavirus Enteritis）[ferret_0117]
-    - パルボウイルス腸炎（Parvovirus Enteritis）[ferret_0130]
-    - 流行性カタル性腸炎（フェレット）（Epizootic Catarrhal Enteritis (ECE)）[ferret_0166]
+- stem=`cell` × 7件
+    - 肥満細胞腫（皮膚型）（Mast Cell Tumor (Cutaneous)）[ferret_0025]
+    - 扁平上皮癌（Skin Squamous Cell Carcinoma）[ferret_0026]
+    - 基底細胞腫（Basal Cell Tumor）[ferret_0028]
+    - 膵島細胞癌（Islet Cell Carcinoma）[ferret_0122]
+    - 腎細胞癌（Renal Cell Carcinoma）[ferret_0124]
+    - 移行上皮癌（膀胱）（Transitional Cell Carcinoma (Bladder)）[ferret_0125]
+    - 膵島細胞腫瘍（フェレット）（Pancreatic Islet Cell Tumor）[ferret_0192]
 - stem=`lympho` × 7件
     - リンパ腫（Lymphoma）[ferret_0022]
     - リンパ球増多症・白血病（Lymphocytosis / Leukemia）[ferret_0071]
@@ -100,24 +72,13 @@
     - 肝細胞癌（Hepatocellular Carcinoma）[ferret_0123]
     - 腎細胞癌（Renal Cell Carcinoma）[ferret_0124]
     - 移行上皮癌（膀胱）（Transitional Cell Carcinoma (Bladder)）[ferret_0125]
-- stem=`cardio` × 5件
-    - 拡張型心筋症（DCM）（Dilated Cardiomyopathy (DCM)）[ferret_0014]
-    - 肥大型心筋症（HCM）（Hypertrophic Cardiomyopathy (HCM)）[ferret_0015]
-    - 心筋症（フェレット）（Cardiomyopathy）[ferret_0182]
-    - 拡張型心筋症（フェレット）（Dilated Cardiomyopathy）[ferret_0183]
-    - 肥大型心筋症（フェレット）（Hypertrophic Cardiomyopathy）[ferret_0184]
-- stem=`cyst` × 5件
-    - 前立腺嚢胞（副腎関連）（Prostatic Cysts (Adrenal-related)）[ferret_0037]
-    - 腎嚢胞（Renal Cysts）[ferret_0040]
-    - 副腎嚢胞（Adrenal Cyst）[ferret_0084]
-    - 類皮嚢胞（Dermoid Cyst）[ferret_0157]
-    - 前立腺嚢胞（フェレット）（Prostatic Cyst）[ferret_0195]
-- stem=`ferret` × 5件
-    - フェレット全身性コロナウイルス感染症（Ferret Systemic Coronavirus (FRSCV)）[ferret_0054]
-    - フェレット全身性コロナウイルス - 肉芽腫型（Ferret Systemic Coronavirus (FRSCV) - Granulomatous）[ferret_0094]
-    - フェレットの敗血症（Ferret Sepsis）[ferret_0162]
-    - フェレット全身性コロナウイルス（フェレット）（Ferret Systemic Coronavirus）[ferret_0167]
-    - フェレット副腎疾患（フェレット）（Ferret Adrenal Disease (FAD)）[ferret_0223]
+- stem=`enteri` × 6件
+    - 好酸球性腸炎（Eosinophilic Enteritis）[ferret_0007]
+    - 流行性カタル性腸炎（ECE）（Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)）[ferret_0012]
+    - 流行性カタル性腸炎（ECE）- 慢性型（Epizootic Catarrhal Enteritis (ECE) - Chronic）[ferret_0093]
+    - クロストリジウム腸炎（Clostridial Enteritis）[ferret_0116]
+    - ロタウイルス性腸炎（Rotavirus Enteritis）[ferret_0117]
+    - パルボウイルス腸炎（Parvovirus Enteritis）[ferret_0130]
 - stem=`fractu` × 5件
     - 骨折（Fractures）[ferret_0046]
     - 歯の破折（Broken / Fractured Teeth）[ferret_0060]
@@ -130,32 +91,43 @@
     - 副腎疾患 - 右腺（Adrenal Disease - Right Gland）[ferret_0091]
     - 包皮腺腫瘍（Preputial Gland Tumor）[ferret_0126]
     - 肛門腺膿瘍（Anal Gland Abscess）[ferret_0146]
-- stem=`hepati` × 5件
-    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[ferret_0010]
-    - 肝膿瘍（Hepatic Abscess）[ferret_0119]
-    - 慢性活動性肝炎（Chronic Active Hepatitis）[ferret_0151]
-    - 肝リピドーシス（フェレット）（Hepatic Lipidosis）[ferret_0174]
-    - 肝炎（フェレット）（Hepatitis）[ferret_0175]
-- stem=`prosta` × 5件
+- stem=`anemia` × 4件
+    - 再生不良性貧血（エストロゲン中毒）（Aplastic Anemia (Estrogen Toxicity)）[ferret_0041]
+    - 高エストロゲン血症性貧血（Hyperestrogenism-induced Anemia）[ferret_0070]
+    - 貧血（フェレット）（Anemia）[ferret_0214]
+    - 溶血性貧血（フェレット）（Hemolytic Anemia）[ferret_0271]
+- stem=`body` × 4件
+    - 消化管異物（GI Foreign Body）[ferret_0004]
+    - 消化管異物（線状）（Gastrointestinal Foreign Body (Linear)）[ferret_0147]
+    - 胃内異物（フェレット）（Gastric Foreign Body）[ferret_0168]
+    - 腸内異物（フェレット）（Intestinal Foreign Body）[ferret_0169]
+- stem=`cyst` × 4件
     - 前立腺嚢胞（副腎関連）（Prostatic Cysts (Adrenal-related)）[ferret_0037]
-    - 前立腺疾患（副腎関連）（Prostatic Disease (Adrenal-related)）[ferret_0043]
-    - 前立腺膿瘍（Prostatic Abscess）[ferret_0104]
-    - 前立腺疾患（フェレット）（Prostatic Disease）[ferret_0190]
-    - 前立腺嚢胞（フェレット）（Prostatic Cyst）[ferret_0195]
+    - 腎嚢胞（Renal Cysts）[ferret_0040]
+    - 副腎嚢胞（Adrenal Cyst）[ferret_0084]
+    - 類皮嚢胞（Dermoid Cyst）[ferret_0157]
+- stem=`dental` × 4件
+    - 歯科疾患・歯周病（Dental Disease / Periodontal Disease）[ferret_0058]
+    - 歯石（Dental Tartar / Calculus）[ferret_0059]
+    - 歯石/歯肉炎（フェレット）（Dental Tartar/Gingivitis）[ferret_0203]
+    - 歯のう蝕（フェレット）（Dental Caries）[ferret_0258]
+- stem=`ferret` × 4件
+    - フェレット全身性コロナウイルス感染症（Ferret Systemic Coronavirus (FRSCV)）[ferret_0054]
+    - フェレット全身性コロナウイルス - 肉芽腫型（Ferret Systemic Coronavirus (FRSCV) - Granulomatous）[ferret_0094]
+    - フェレットの敗血症（Ferret Sepsis）[ferret_0162]
+    - フェレット副腎疾患（フェレット）（Ferret Adrenal Disease (FAD)）[ferret_0223]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **22**
-- 投与量あり: **245**
+- 投与量なし（見出しのみ）: **20**
+- 投与量あり: **228**
 
 ### 投与量なし（上位30）
-- 副腎皮質機能亢進症（クッシング症候群）（Hyperadrenocorticism (Cushing's)）[ferret_0003] — ja:321字 / en:406字
 - コクシジウム症（Coccidia (GI)）[ferret_0011] — ja:168字 / en:172字
 - フィラリア症（Heartworm Disease）[ferret_0017] — ja:99字 / en:203字
-- 肥満細胞腫（皮膚型）（Mast Cell Tumor (Cutaneous)）[ferret_0025] — ja:533字 / en:568字
 - 皮脂腺腫瘍（Sebaceous Gland Tumor）[ferret_0027] — ja:353字 / en:711字
 - 疥癬（Sarcoptic Mange）[ferret_0035] — ja:80字 / en:470字
 - 歯科疾患・歯周病（Dental Disease / Periodontal Disease）[ferret_0058] — ja:181字 / en:158字
@@ -176,14 +148,14 @@
 - 動脈硬化症（フェレット）（Arteriosclerosis）[ferret_0233] — ja:57字 / en:260字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **122** 疾患 → ガード後残存: **0**
-- 犬猫論文の他種への自動紐付け（旧・未ガード）: **22** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **115** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **20** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - インスリノーマ（Insulinoma）[ferret_0000] → ブプレノルフィン, ロニダゾール
 - 消化管異物（GI Foreign Body）[ferret_0004] → イソフルラン
 - ヘリコバクター胃炎（Helicobacter Mustelae Gastritis）[ferret_0005] → ブプレノルフィン, ロニダゾール
-- 炎症性腸疾患（IBD）（Inflammatory Bowel Disease (IBD)）[ferret_0006] → フェンベンダゾール
+- 炎症性腸疾患（IBD）（Inflammatory Bowel Disease (IBD)）[ferret_0006] → フェンベンダゾール, クロルヘキシジン, ロニダゾール
 - 好酸球性腸炎（Eosinophilic Enteritis）[ferret_0007] → フェンベンダゾール
 - 直腸脱（Rectal Prolapse）[ferret_0009] → イソフルラン
 - 胃潰瘍（Gastric Ulcer）[ferret_0013] → ロニダゾール
@@ -217,11 +189,11 @@
 - 膵炎（Pancreatitis）[ferret_0152] → key: feline pancreatitis
 - 断端子宮蓄膿症（Stump Pyometra）[ferret_0154] → key: pyometra
 - 心筋症（フェレット）（Cardiomyopathy）[ferret_0182] → key: hypertrophic cardiomyopathy (hcm)
-- 肥大型心筋症（フェレット）（Hypertrophic Cardiomyopathy）[ferret_0184] → key: hypertrophic cardiomyopathy (hcm)
 - 膀胱炎（フェレット）（Cystitis）[ferret_0191] → key: feline idiopathic cystitis (fic)
 - 貧血（フェレット）（Anemia）[ferret_0214] → key: immune-mediated hemolytic anemia
 - 白血病（フェレット）（Leukemia）[ferret_0215] → key: feline leukemia virus
 - 腹膜炎（フェレット）（Peritonitis）[ferret_0230] → key: feline infectious peritonitis
+- 溶血性貧血（フェレット）（Hemolytic Anemia）[ferret_0271] → key: immune-mediated hemolytic anemia
 
 ## T109 機械翻訳臭（置換辞書）
 - ヒット総数: **1**（safe 0 / review 1）

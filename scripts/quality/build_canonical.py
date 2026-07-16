@@ -143,6 +143,281 @@ _CURATED_MERGE: dict[str, list[list[str]]] = {
         ["mt_hypocalcemia", "mt_hypocalcemia2"],  # 低カルシウム血症 (Transport Tetany)
         ["fl_perinatal_asphyxia", "fl_perinatal_asphyxia2"],  # 周産期仮死 (Dummy Foal)
     ],
+    # The remaining species below encode ONLY the "firm" same-disease rows from
+    # each .spec/<SPECIES>_CONSOLIDATION_REVIEW.md worksheet (species-tag / synonym
+    # / abbreviation / staging / severity duplicates). Rows the worksheets flag as
+    # ✏️要確認 (parent/child, morphotype, umbrella-vs-etiology, distinct-disease) and
+    # all C-tier "分離維持" pairs are intentionally NOT included — they await an
+    # explicit per-item veterinarian decision. A group may extend an auto cluster
+    # (the loop attaches the extra members to the existing auto canonical).
+    "ferret": [
+        ["ferret_0003", "ferret_0193"],  # 副腎皮質機能亢進症
+        ["ferret_0006", "ferret_0170"],  # 炎症性腸疾患 (IBD)
+        ["ferret_0010", "ferret_0174"],  # 肝リピドーシス
+        ["ferret_0012", "ferret_0166"],  # 流行性カタル性腸炎 (ECE)
+        ["ferret_0014", "ferret_0183"],  # 拡張型心筋症 (DCM)
+        ["ferret_0015", "ferret_0184"],  # 肥大型心筋症 (HCM)
+        ["ferret_0018", "ferret_0164"],  # インフルエンザ
+        ["ferret_0025", "ferret_0179"],  # 肥満細胞腫（皮膚型）
+        ["ferret_0031", "ferret_0176"],  # 耳ダニ症
+        ["ferret_0032", "ferret_0274"],  # 皮膚糸状菌症（auto 0177 に追加）
+        ["ferret_0034", "ferret_0178"],  # 尾部脱毛（ラットテイル）
+        ["ferret_0037", "ferret_0195"],  # 前立腺嚢胞
+        ["ferret_0042", "ferret_0196"],  # 陰門腫脹
+        ["ferret_0043", "ferret_0190"],  # 前立腺疾患
+        ["ferret_0050", "ferret_0165"],  # アリューシャン病 (ADV)
+        ["ferret_0054", "ferret_0167"],  # フェレット全身性コロナ (FRSCV)
+        ["ferret_0066", "ferret_0194"],  # 低血糖症（インスリノーマ）
+        ["ferret_0078", "ferret_0129"],  # 増殖性大腸炎
+        ["ferret_0082", "ferret_0213"],  # 播種性特発性筋膜炎 (DIM)
+    ],
+    "hamster": [
+        ["hamster_0000", "hamster_0155", "hamster_0156"],  # ウェットテイル（増殖性回腸炎）
+        ["hamster_0001", "hamster_0174"],  # ティザー病
+        ["hamster_0007", "hamster_0148"],  # 条虫症（Rodentolepis = Hymenolepis）
+        ["hamster_0017", "hamster_0210"],  # 肺炎
+        ["hamster_0020", "hamster_0160", "hamster_0161"],  # ニキビダニ症
+        ["hamster_0023", "hamster_0269"],  # 皮膚糸状菌症（auto 0192 に追加）
+        ["hamster_0026", "hamster_0196"],  # 脱毛症（非寄生虫性）
+        ["hamster_0030", "hamster_0283"],  # 皮膚腫瘍
+        ["hamster_0038", "hamster_0162", "hamster_0163", "hamster_0191"],  # クッシング病
+        ["hamster_0045", "hamster_0164", "hamster_0165"],  # 心房血栓症
+        ["hamster_0049", "hamster_0172", "hamster_0173", "hamster_0238"],  # ケージ麻痺
+        ["hamster_0059", "hamster_0157", "hamster_0158"],  # ポリオーマウイルス
+        ["hamster_0060", "hamster_0159"],  # リンパ球性脈絡髄膜炎 (LCMV)
+        ["hamster_0068", "hamster_0221"],  # 熱中症（auto 0217 に追加）
+        ["hamster_0123", "hamster_0318"],  # 趾瘤症（バンブルフット）
+    ],
+    "guinea_pig": [
+        ["guinea_pig_0006", "guinea_pig_0201"],  # 鼓脹症（胃拡張）
+        ["guinea_pig_0013", "guinea_pig_0126", "guinea_pig_0235"],  # 皮膚糸状菌症
+        ["guinea_pig_0017", "guinea_pig_0168", "guinea_pig_0169"],  # 足底皮膚炎（バンブルフット）
+        ["guinea_pig_0028", "guinea_pig_0166"],  # 難産
+        ["guinea_pig_0029", "guinea_pig_0150", "guinea_pig_0164", "guinea_pig_0165"],  # 妊娠中毒症
+        ["guinea_pig_0050", "guinea_pig_0157", "guinea_pig_0158", "guinea_pig_0159"],  # 壊血病
+        ["guinea_pig_0066", "guinea_pig_0119"],  # 白血病（リンパ球性）
+        ["guinea_pig_0074", "guinea_pig_0172"],  # 毛ダニ症
+        ["guinea_pig_0077", "guinea_pig_0260"],  # 中耳炎・内耳炎
+        ["guinea_pig_0082", "guinea_pig_0214"],  # 肝リピドーシス
+        ["guinea_pig_0084", "guinea_pig_0102", "guinea_pig_0160"],  # 頸部リンパ節炎（auto 0246 に追加）
+        ["guinea_pig_0087", "guinea_pig_0241"],  # 脱毛症
+        ["guinea_pig_0121", "guinea_pig_0336"],  # ケトーシス（非妊娠）
+        ["guinea_pig_0123", "guinea_pig_0175"],  # ビタミンA欠乏症
+        ["guinea_pig_0191", "guinea_pig_0200"],  # 盲腸内細菌叢異常
+    ],
+    "chinchilla": [
+        ["chinchilla_0000", "chinchilla_0163"],  # 不正咬合
+        ["chinchilla_0003", "chinchilla_0143", "chinchilla_0174"],  # 流涎症
+        ["chinchilla_0009", "chinchilla_0130"],  # 肝リピドーシス
+        ["chinchilla_0013", "chinchilla_0167", "chinchilla_0171"],  # ファーリング（陰茎毛輪）
+        ["chinchilla_0014", "chinchilla_0226"],  # 皮膚糸状菌症（auto 0251 に追加）
+        ["chinchilla_0015", "chinchilla_0077", "chinchilla_0151", "chinchilla_0152", "chinchilla_0172"],  # 毛噛み
+        ["chinchilla_0018", "chinchilla_0248"],  # 肺炎
+        ["chinchilla_0020", "chinchilla_0038", "chinchilla_0168"],  # 熱中症（auto 0149 に追加）
+        ["chinchilla_0028", "chinchilla_0104"],  # 乳腺炎
+        ["chinchilla_0031", "chinchilla_0270"],  # 四肢骨折
+        ["chinchilla_0048", "chinchilla_0237"],  # ケトーシス（妊娠中毒症）
+        ["chinchilla_0103", "chinchilla_0190"],  # 妊娠中毒症
+        ["chinchilla_0061", "chinchilla_0198"],  # 中耳炎・内耳炎
+        ["chinchilla_0106", "chinchilla_0177"],  # 耳感染症（外耳炎）
+        ["chinchilla_0115", "chinchilla_0271"],  # 変形性関節症
+        ["chinchilla_0127", "chinchilla_0276"],  # 貧血
+    ],
+    "sugar_glider": [
+        ["sugar_glider_0001", "sugar_glider_0135"],  # カルシウム欠乏症
+        ["sugar_glider_0006", "sugar_glider_0088"],  # 低血糖症
+        ["sugar_glider_0008", "sugar_glider_0080"],  # 鉄過剰症
+        ["sugar_glider_0019", "sugar_glider_0155"],  # ダニ感染症
+        ["sugar_glider_0022", "sugar_glider_0097"],  # トキソプラズマ症
+        ["sugar_glider_0024", "sugar_glider_0219"],  # 肺炎
+        ["sugar_glider_0026", "sugar_glider_0147"],  # 下痢
+        ["sugar_glider_0043", "sugar_glider_0073", "sugar_glider_0193"],  # 育児嚢感染症（Joeyitis）
+        ["sugar_glider_0044", "sugar_glider_0166"],  # てんかん発作（MBD関連）
+        ["sugar_glider_0051", "sugar_glider_0153"],  # 肝リピドーシス
+        ["sugar_glider_0059", "sugar_glider_0071", "sugar_glider_0138"],  # 飛膜損傷
+        ["sugar_glider_0061", "sugar_glider_0180"],  # 熱中症
+        ["sugar_glider_0069", "sugar_glider_0133"],  # 栄養性骨異栄養症（MBD）
+        ["sugar_glider_0075", "sugar_glider_0170"],  # 難産
+        ["sugar_glider_0038", "sugar_glider_0165"],  # 眼球突出 Proptosis（0188 Exophthalmos は分離）
+    ],
+    "hedgehog": [
+        ["hedgehog_0002", "hedgehog_0093", "hedgehog_0149"],  # 皮膚糸状菌症（auto 0243 に追加）
+        ["hedgehog_0015", "hedgehog_0121"],  # 肥満
+        ["hedgehog_0016", "hedgehog_0174"],  # 下痢
+        ["hedgehog_0017", "hedgehog_0143"],  # 消化管内異物
+        ["hedgehog_0018", "hedgehog_0118"],  # 肝リピドーシス
+        ["hedgehog_0026", "hedgehog_0241"],  # 肺炎
+        ["hedgehog_0028", "hedgehog_0057"],  # マイコバクテリア症
+        ["hedgehog_0040", "hedgehog_0166"],  # 眼球突出 Proptosis（0218 Exophthalmos は分離）
+        ["hedgehog_0055", "hedgehog_0164"],  # 脂肪肝
+        ["hedgehog_0069", "hedgehog_0140"],  # バルーン症候群
+        ["hedgehog_0090", "hedgehog_0150"],  # カパリニアダニ症
+    ],
+    "dog": [
+        ["dog_0065", "dog_0619"],  # 肢端舐性皮膚炎（舐性肉芽腫）
+        ["dog_0077", "dog_0273"],  # 肥大性骨異栄養症 HOD
+        ["dog_0080", "dog_0456"],  # 脊髄空洞症
+        ["dog_0085", "dog_0600"],  # 乳腺炎
+        ["dog_0087", "dog_0475"],  # 良性前立腺肥大症 BPH
+        ["dog_0099", "dog_0454"],  # 変性性脊髄症 DM
+        ["dog_0116", "dog_0228"],  # インスリノーマ
+        ["dog_0121", "dog_0479"],  # 犬ヘルペスウイルス感染症 CHV
+        ["dog_0204", "dog_0599"],  # 産後子宮炎
+        ["dog_0215", "dog_0469"],  # エチレングリコール中毒
+        ["dog_0277", "dog_0452"],  # 壊死性髄膜脳炎 NME（パグ脳炎）
+        ["dog_0367", "dog_0458"],  # 肺血栓塞栓症 PTE
+        ["dog_0398", "dog_0487"],  # 唾液腺嚢胞
+        ["dog_0416", "dog_0418"],  # 中枢性尿崩症
+        ["dog_0434", "dog_0477"],  # 犬ブルセラ症
+        ["dog_0527", "dog_0620"],  # 肩関節離断性骨軟骨炎 OCD
+    ],
+    "bird": [
+        ["bird_0000", "bird_0341"],  # 嘴羽毛病（PBFD）
+        ["bird_0001", "bird_0400"],  # 腺胃拡張症（PDD）
+        ["bird_0006", "bird_0403"],  # パチェコ病
+        ["bird_0007", "bird_0343"],  # パラミクソウイルス感染症
+        ["bird_0013", "bird_0437"],  # 大腸菌感染症
+        ["bird_0023", "bird_0308"],  # カンジダ症
+        ["bird_0024", "bird_0307"],  # メガバクテリア症（auto 0410 に追加）
+        ["bird_0033", "bird_0408"],  # 嗉嚢停滞
+        ["bird_0034", "bird_0409"],  # 嗉嚢火傷
+        ["bird_0052", "bird_0444"],  # 腎腫瘍
+        ["bird_0058", "bird_0414"],  # ヨウ素欠乏症
+        ["bird_0063", "bird_0404"],  # 毛引き症
+        ["bird_0069", "bird_0452"],  # 扁平上皮癌（皮膚）
+        ["bird_0071", "bird_0431"],  # 代謝性骨疾患（MBD）
+        ["bird_0073", "bird_0405"],  # 卵詰まり（難産）
+        ["bird_0096", "bird_0421"],  # ワクモ（赤ダニ）
+        ["bird_0098", "bird_0423"],  # 回虫症
+        ["bird_0100", "bird_0232", "bird_0424"],  # 毛細線虫症
+        ["bird_0112", "bird_0387"],  # 亜鉛中毒（auto 0461 に追加）
+        ["bird_0126", "bird_0227"],  # 鳥脳脊髄炎
+        ["bird_0127", "bird_0224"],  # マレック病
+        ["bird_0130", "bird_0233"],  # 伝染性喉頭気管炎 ILT
+        ["bird_0133", "bird_0235"],  # 鳥スピロヘータ症
+        ["bird_0174", "bird_0439"],  # 総排泄腔炎
+        ["bird_0176", "bird_0292"],  # 素嚢結石
+    ],
+    "parakeet": [
+        ["parakeet_0011", "parakeet_0300"],  # マイコバクテリア症（鳥結核）
+        ["parakeet_0023", "parakeet_0186"],  # 条虫症
+        ["parakeet_0027", "parakeet_0252", "parakeet_0272"],  # メガバクテリア症
+        ["parakeet_0053", "parakeet_0203", "parakeet_0254"],  # 開脚症
+        ["parakeet_0058", "parakeet_0264"],  # 羽嚢腫
+        ["parakeet_0059", "parakeet_0268"],  # 毛引き症
+        ["parakeet_0067", "parakeet_0265", "parakeet_0270"],  # そ嚢停滞（サワークロップ）
+        ["parakeet_0082", "parakeet_0330"],  # 熱傷・化学熱傷
+        ["parakeet_0113", "parakeet_0299"],  # 大腸菌感染症
+        ["parakeet_0133", "parakeet_0455"],  # 慢性羽包嚢胞
+        ["parakeet_0241", "parakeet_0195"],  # 亜鉛中毒
+        ["parakeet_0228", "parakeet_0362"],  # 慢性呼吸器疾患 CRD
+        ["parakeet_0235", "parakeet_0262"],  # 蝋膜肥大
+    ],
+    "parrot": [
+        ["parrot_0000", "parrot_0162"],  # 嘴羽毛病 PBFD
+        ["parrot_0017", "parrot_0184"],  # カンジダ症
+        ["parrot_0024", "parrot_0169"],  # 重金属中毒（鉛・亜鉛）
+        ["parrot_0039", "parrot_0187"],  # 痛風（関節型・内臓型）
+        ["parrot_0040", "parrot_0166"],  # 動脈硬化症（auto 0228 に追加）
+        ["parrot_0043", "parrot_0181"],  # 卵塞（卵詰まり）
+        ["parrot_0047", "parrot_0183"],  # 嗉嚢停滞
+        ["parrot_0079", "parrot_0242"],  # 熱中症
+        ["parrot_0108", "parrot_0215"],  # 大腸菌感染症
+    ],
+    "reptile": [
+        ["reptile_0007", "reptile_0170"],  # チアミン欠乏症
+        ["reptile_0020", "reptile_0187"],  # アメーバ感染症
+        ["reptile_0027", "reptile_0190"],  # スケイルロット
+        ["reptile_0033", "reptile_0188"],  # 吻部擦過傷
+        ["reptile_0034", "reptile_0189"],  # 甲羅腐敗症（Shell Rot）
+        ["reptile_0040", "reptile_0205"],  # 肝リピドーシス
+        ["reptile_0063", "reptile_0198"],  # 腎不全
+        ["reptile_0064", "reptile_0200"],  # 膀胱結石
+        ["reptile_0074", "reptile_0244"],  # 高体温症
+        ["reptile_0081", "reptile_0164"],  # 黄色真菌症（CANV）
+        ["reptile_0153", "reptile_0168"],  # 壊死性皮膚炎
+        ["reptile_0162", "reptile_0167"],  # 敗血症性皮膚潰瘍症（SCUD）
+    ],
+    "tortoise": [
+        ["tortoise_0000", "tortoise_0167"],  # 甲羅腐敗症
+        ["tortoise_0006", "tortoise_0224"],  # 肺炎
+        ["tortoise_0032", "tortoise_0215"],  # 肝リピドーシス
+        ["tortoise_0043", "tortoise_0162"],  # 卵塞
+        ["tortoise_0063", "tortoise_0253"],  # 高体温症
+        ["tortoise_0072", "tortoise_0250"],  # カルシウム欠乏症
+        ["tortoise_0075", "tortoise_0231"],  # 眼感染症
+        ["tortoise_0097", "tortoise_0186"],  # マイコバクテリア症
+        ["tortoise_0041", "tortoise_0206"],  # 関節痛風（関節型どうし）
+        ["tortoise_0042", "tortoise_0205"],  # 内臓痛風（内臓型どうし）
+        ["tortoise_0158", "tortoise_0176"],  # 膀胱結石（尿酸塩型どうし）
+        ["tortoise_0002", "tortoise_0233"],  # 甲羅骨折（甲羅どうし）
+        ["tortoise_0035", "tortoise_0170"],  # 嘴の過成長・不正咬合
+    ],
+    "snake": [
+        ["snake_0008", "snake_0201"],  # 肺炎
+        ["snake_0012", "snake_0148"],  # ヘビダニ
+        ["snake_0014", "snake_0170"],  # アメーバ感染症
+        ["snake_0016", "snake_0167"],  # 舌虫症
+        ["snake_0019", "snake_0172"],  # 水疱症
+        ["snake_0020", "snake_0174"],  # スケイルロット
+        ["snake_0026", "snake_0171"],  # 吻部擦過傷
+        ["snake_0030", "snake_0190"],  # 肝リピドーシス
+        ["snake_0044", "snake_0185"],  # 排卵後卵停滞
+        ["snake_0082", "snake_0142", "snake_0143"],  # ヘビ真菌症（SFD）
+        ["snake_0088", "snake_0165"],  # 条虫感染症
+    ],
+    "lizard": [
+        ["lizard_0000", "lizard_0149"],  # 代謝性骨疾患（MBD）（NSHP 0001 は分離）
+        ["lizard_0009", "lizard_0144"],  # アタデノウイルス感染症
+        ["lizard_0014", "lizard_0142", "lizard_0145"],  # 黄色真菌症（CANV）
+        ["lizard_0018", "lizard_0207"],  # 肺炎
+        ["lizard_0024", "lizard_0170"],  # ダニ寄生（Ophionyssus）
+        ["lizard_0026", "lizard_0177"],  # アメーバ感染症
+        ["lizard_0033", "lizard_0181"],  # スケイルロット
+        ["lizard_0036", "lizard_0178"],  # 吻部擦過傷
+        ["lizard_0040", "lizard_0197"],  # 肝リピドーシス
+        ["lizard_0064", "lizard_0236"],  # 高体温症
+        ["lizard_0096", "lizard_0172"],  # 条虫感染症
+        ["lizard_0019", "lizard_0161"],  # 感染性口内炎（auto 0141 に追加）
+        ["lizard_0050", "lizard_0188"],  # 関節痛風（関節型どうし）
+        ["lizard_0051", "lizard_0187"],  # 内臓痛風（内臓型どうし）
+        ["lizard_0091", "lizard_0176"],  # 鞭毛虫感染症
+        ["lizard_0030", "lizard_0151"],  # 脱皮残りによる趾壊死
+        ["lizard_0049", "lizard_0194"],  # 半陰茎脱出
+        ["lizard_0110", "lizard_0193"],  # 卵関連体腔炎
+    ],
+    "amphibian": [
+        ["amphibian_0020", "amphibian_0178"],  # 代謝性骨疾患
+        ["amphibian_0022", "amphibian_0254"],  # カルシウム欠乏症
+        ["amphibian_0130", "amphibian_0198"],  # 熱傷（ヒートランプ）
+    ],
+    "exotic_other": [
+        # generic-tag × generic-tag same-name merges only; specific-animal tags
+        # (豚/ヤギ/スカンク/プレーリードッグ/有袋類/タランチュラ 等) stay separate (C-tier).
+        ["exotic_other_0016", "exotic_other_0164"],  # 肝リピドーシス
+        ["exotic_other_0017", "exotic_other_0172"],  # 糖尿病
+        ["exotic_other_0019", "exotic_other_0182"],  # 上部気道感染症
+        ["exotic_other_0025", "exotic_other_0199"],  # 直腸脱
+        ["exotic_other_0027", "exotic_other_0211"],  # 歯根膿瘍
+        ["exotic_other_0028", "exotic_other_0234"],  # 子宮蓄膿症
+        ["exotic_other_0029", "exotic_other_0236"],  # 難産
+        ["exotic_other_0030", "exotic_other_0237"],  # 乳腺腫瘍
+        ["exotic_other_0033", "exotic_other_0143"],  # 狂犬病
+        ["exotic_other_0034", "exotic_other_0220"],  # 前庭疾患
+        ["exotic_other_0035", "exotic_other_0187"],  # 皮膚糸状菌症
+        ["exotic_other_0038", "exotic_other_0191"],  # 接触性皮膚炎
+        ["exotic_other_0045", "exotic_other_0238"],  # リンパ腫
+        ["exotic_other_0046", "exotic_other_0167"],  # 皮膚腫瘍
+        ["exotic_other_0048", "exotic_other_0154"],  # 野兎病
+        ["exotic_other_0049", "exotic_other_0203"],  # サルモネラ症
+        ["exotic_other_0054", "exotic_other_0165"],  # 腎疾患
+        ["exotic_other_0056", "exotic_other_0173"],  # 副腎疾患
+        ["exotic_other_0024", "exotic_other_0147"],  # 腸管寄生虫症（汎用のみ）
+        ["exotic_other_0015", "exotic_other_0163"],  # 代謝性骨疾患（汎用のみ）
+        ["exotic_other_0053", "exotic_other_0233"],  # 尿路結石症（汎用のみ）
+        ["exotic_other_0057", "exotic_other_0174"],  # 心疾患（汎用のみ）
+        ["exotic_other_0044", "exotic_other_0171", "exotic_other_0229"],  # 肥満症（汎用のみ）
+    ],
 }
 
 
@@ -264,23 +539,47 @@ def build(species: str) -> dict:
             )
 
     # --- curated vet-approved same-disease merges (held back by the strict key) ---
-    _auto_ids = {m["canonical"]["id"] for m in merges} | {mm["id"] for m in merges for mm in m["merged"]}
+    # A curated group may either stand alone OR extend a cluster the strict auto
+    # key already merged (e.g. worksheet "0002 ← 0093, 0149" where 0002 is the
+    # auto canonical). Track where each id has been placed so curated members
+    # attach to the existing canonical instead of forming a wrong split cluster.
+    _placed: dict[str, str] = {}
+    for m in merges:
+        cid = m["canonical"]["id"]
+        _placed[cid] = cid
+        for mm in m["merged"]:
+            _placed[mm["id"]] = cid
+    _merge_by_canon = {m["canonical"]["id"]: m for m in merges}
+
     for group in _CURATED_MERGE.get(species, []):
-        present = [rid for rid in group if rid in by_id and rid not in _auto_ids]
+        present = [rid for rid in group if rid in by_id]
         if len(present) < 2:
-            continue  # already handled by auto-merge or ids absent → skip (idempotent)
-        canonical_id = present[0]
-        merged = present[1:]
-        merges.append(
-            {
+            continue  # ids absent → skip (idempotent)
+        # If any member already belongs to a cluster, attach the rest to it.
+        existing = next((_placed[rid] for rid in present if rid in _placed), None)
+        if existing is not None:
+            new_members = [rid for rid in present if rid not in _placed]
+            if not new_members:
+                continue  # everything already merged here (idempotent re-run)
+            target = _merge_by_canon[existing]
+            for rid in new_members:
+                target["merged"].append(ident(rid))
+                _placed[rid] = existing
+            target["curated"] = True
+        else:
+            canonical_id = present[0]
+            entry = {
                 "canonical": ident(canonical_id),
-                "merged": [ident(rid) for rid in merged],
+                "merged": [ident(rid) for rid in present[1:]],
                 "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
                 "inherit_content": True,
                 "curated": True,
             }
-        )
-        _auto_ids.update(present)
+            merges.append(entry)
+            _merge_by_canon[canonical_id] = entry
+            for rid in present:
+                _placed[rid] = canonical_id
+    _auto_ids = set(_placed)
     # Drop review-oversplit entries whose members are now FULLY resolved by a
     # merge (keep entries that still contain an unmerged subtype).
     review_oversplit = [o for o in review_oversplit if not all(m["id"] in _auto_ids for m in o.get("members", []))]

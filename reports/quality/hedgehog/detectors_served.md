@@ -1,22 +1,13 @@
 # VetDict 品質検出レポート — hedgehog
 
-- 総レコード数: **237**
+- 総レコード数: **226**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **10** （冗長レコード 12 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **34**
+- 完全一致重複クラスタ: **1** （冗長レコード 1 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **31**
 
 ### 完全一致重複（上位20）
-- 皮膚糸状菌症（Ringworm (Dermatophytosis)）[hedgehog_0002] / 皮膚糸状菌症（重症型）（Dermatophytosis (Severe)）[hedgehog_0093] / 皮膚糸状菌症（トリコフィトン）（ハリネズミ）（Dermatophytosis (Trichophyton)）[hedgehog_0149]
-- 肥満（Obesity）[hedgehog_0015] / 肥満（重度/病的）（Obesity (Severe / Morbid)）[hedgehog_0121]
-- 下痢（非特異的）（Diarrhea (Non-specific)）[hedgehog_0016] / 下痢（ハリネズミ）（Diarrhea）[hedgehog_0174]
-- 肝リピドーシス（脂肪肝）（Hepatic Lipidosis）[hedgehog_0018] / 肝リピドーシス（肥満関連）（Hepatic Lipidosis (Obesity-Related)）[hedgehog_0118]
-- 肺炎（Pneumonia）[hedgehog_0026] / 細菌性肺炎（ハリネズミ）（Pneumonia (Bacterial)）[hedgehog_0241]
-- マイコバクテリア症（肺型）（Mycobacteriosis (Pulmonary)）[hedgehog_0028] / マイコバクテリア症（播種型）（Mycobacteriosis (Disseminated)）[hedgehog_0057]
-- 眼球突出（Proptosis (Eye Protrusion)）[hedgehog_0040] / 眼球脱出（ハリネズミ）（Proptosis）[hedgehog_0166] / 眼球突出（ハリネズミ）（Exophthalmos）[hedgehog_0218]
-- 脂肪肝（非肥満型）（Fatty Liver Disease (Non-obese)）[hedgehog_0055] / 脂肪肝（ハリネズミ）（Fatty Liver Disease）[hedgehog_0164]
-- バルーン症候群（Balloon Syndrome）[hedgehog_0069] / バルーン症候群（皮下気腫）（Balloon Syndrome (Subcutaneous Emphysema)）[hedgehog_0140]
-- カパリニアダニ症（重症型）（Caparinia Mange (Severe)）[hedgehog_0090] / カパリニアダニ症（ハリネズミ）（Caparinia Mite Infestation）[hedgehog_0150]
+- 眼球突出（Proptosis (Eye Protrusion)）[hedgehog_0040] / 眼球突出（ハリネズミ）（Exophthalmos）[hedgehog_0218]
 
 ### 疾患ファミリー候補（上位15）
 - stem=`tumor` × 9件
@@ -52,20 +43,6 @@
     - 眼膿瘍（後眼窩）（Eye Abscess (Retrobulbar)）[hedgehog_0127]
     - 歯科膿瘍（ハリネズミ）（Dental Abscess）[hedgehog_0210]
     - 肝膿瘍（ハリネズミ）（Hepatic Abscess）[hedgehog_0221]
-- stem=`dermat` × 6件
-    - 細菌性皮膚炎（Dermatitis (Bacterial)）[hedgehog_0006]
-    - 皮膚糸状菌症（重症型）（Dermatophytosis (Severe)）[hedgehog_0093]
-    - アレルギー性皮膚炎（Allergic Dermatitis）[hedgehog_0095]
-    - ブドウ球菌性皮膚炎（Staphylococcal Dermatitis）[hedgehog_0098]
-    - 皮膚糸状菌症（トリコフィトン）（ハリネズミ）（Dermatophytosis (Trichophyton)）[hedgehog_0149]
-    - 接触性皮膚炎（ハリネズミ）（Contact Dermatitis）[hedgehog_0185]
-- stem=`hepati` × 6件
-    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis）[hedgehog_0018]
-    - 肝臓血管肉腫（Hepatic Hemangiosarcoma）[hedgehog_0087]
-    - カピラリア・ヘパティカ感染（Capillaria Hepatica Infection）[hedgehog_0102]
-    - 肝リピドーシス（肥満関連）（Hepatic Lipidosis (Obesity-Related)）[hedgehog_0118]
-    - 肝臓腫瘍（一般）（Hepatic Neoplasia (General)）[hedgehog_0134]
-    - 肝膿瘍（ハリネズミ）（Hepatic Abscess）[hedgehog_0221]
 - stem=`intest` × 6件
     - 腸腺癌（Intestinal Adenocarcinoma）[hedgehog_0065]
     - 腸管平滑筋肉腫（Intestinal Leiomyosarcoma）[hedgehog_0085]
@@ -85,18 +62,12 @@
     - ふらつきハリネズミ症候群（WHS）- 進行期（Wobbly Hedgehog Syndrome (WHS) - Advanced）[hedgehog_0078]
     - ハリネズミ拡張型心筋症（Hedgehog Dilated Cardiomyopathy (DCM)）[hedgehog_0144]
     - ハリネズミ風船症候群（ハリネズミ）（Hedgehog Balloon Syndrome）[hedgehog_0145]
-- stem=`infest` × 5件
-    - 疥癬ダニ感染症（カパリニア）（Mite Infestation (Caparinia)）[hedgehog_0000]
-    - マダニ寄生（Tick Infestation）[hedgehog_0059]
-    - ノミ寄生（Flea Infestation）[hedgehog_0060]
-    - カパリニアダニ症（ハリネズミ）（Caparinia Mite Infestation）[hedgehog_0150]
-    - 耳ダニ寄生（ハリネズミ）（Ear Mite Infestation）[hedgehog_0152]
-- stem=`pneumo` × 5件
-    - 肺炎（Pneumonia）[hedgehog_0026]
-    - 誤嚥性肺炎（Aspiration Pneumonia）[hedgehog_0100]
-    - 虫性肺炎（クレノソーマ）（Verminous Pneumonia (Crenosoma)）[hedgehog_0101]
-    - 気胸（Pneumothorax）[hedgehog_0137]
-    - 細菌性肺炎（ハリネズミ）（Pneumonia (Bacterial)）[hedgehog_0241]
+- stem=`hepati` × 5件
+    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis）[hedgehog_0018]
+    - 肝臓血管肉腫（Hepatic Hemangiosarcoma）[hedgehog_0087]
+    - カピラリア・ヘパティカ感染（Capillaria Hepatica Infection）[hedgehog_0102]
+    - 肝臓腫瘍（一般）（Hepatic Neoplasia (General)）[hedgehog_0134]
+    - 肝膿瘍（ハリネズミ）（Hepatic Abscess）[hedgehog_0221]
 - stem=`adenoc` × 4件
     - 子宮腺癌（Uterine Adenocarcinoma）[hedgehog_0010]
     - 腸腺癌（Intestinal Adenocarcinoma）[hedgehog_0065]
@@ -112,6 +83,21 @@
     - 歯の骨折（Dental Fracture）[hedgehog_0126]
     - 歯科疾患（ハリネズミ）（Dental Disease）[hedgehog_0156]
     - 歯科膿瘍（ハリネズミ）（Dental Abscess）[hedgehog_0210]
+- stem=`dermat` × 4件
+    - 細菌性皮膚炎（Dermatitis (Bacterial)）[hedgehog_0006]
+    - アレルギー性皮膚炎（Allergic Dermatitis）[hedgehog_0095]
+    - ブドウ球菌性皮膚炎（Staphylococcal Dermatitis）[hedgehog_0098]
+    - 接触性皮膚炎（ハリネズミ）（Contact Dermatitis）[hedgehog_0185]
+- stem=`infest` × 4件
+    - 疥癬ダニ感染症（カパリニア）（Mite Infestation (Caparinia)）[hedgehog_0000]
+    - マダニ寄生（Tick Infestation）[hedgehog_0059]
+    - ノミ寄生（Flea Infestation）[hedgehog_0060]
+    - 耳ダニ寄生（ハリネズミ）（Ear Mite Infestation）[hedgehog_0152]
+- stem=`pneumo` × 4件
+    - 肺炎（Pneumonia）[hedgehog_0026]
+    - 誤嚥性肺炎（Aspiration Pneumonia）[hedgehog_0100]
+    - 虫性肺炎（クレノソーマ）（Verminous Pneumonia (Crenosoma)）[hedgehog_0101]
+    - 気胸（Pneumothorax）[hedgehog_0137]
 - stem=`quill` × 4件
     - 針ダニ（コリオプテス）（Quill Mites (Chorioptes)）[hedgehog_0091]
     - 細菌性針毛包炎（Bacterial Quill Folliculitis）[hedgehog_0094]
@@ -123,8 +109,8 @@
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **21**
-- 投与量あり: **216**
+- 投与量なし（見出しのみ）: **20**
+- 投与量あり: **206**
 
 ### 投与量なし（上位30）
 - 口腔扁平上皮癌（Oral Squamous Cell Carcinoma）[hedgehog_0007] — ja:348字 / en:786字
@@ -146,12 +132,11 @@
 - カピラリア・ヘパティカ感染（Capillaria Hepatica Infection）[hedgehog_0102] — ja:767字 / en:781字
 - 鉤頭虫感染（Thorny-Headed Worm Infection）[hedgehog_0104] — ja:166字 / en:204字
 - 眼膿瘍（後眼窩）（Eye Abscess (Retrobulbar)）[hedgehog_0127] — ja:166字 / en:196字
-- 眼球脱出（ハリネズミ）（Proptosis）[hedgehog_0166] — ja:494字 / en:870字
 - 自己塗布行動（ハリネズミ）（Self-Anointing Behavior）[hedgehog_0193] — ja:526字 / en:867字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **127** 疾患 → ガード後残存: **0**
-- 犬猫論文の他種への自動紐付け（旧・未ガード）: **14** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **123** 疾患 → ガード後残存: **0**
+- 犬猫論文の他種への自動紐付け（旧・未ガード）: **12** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
 - 皮膚糸状菌症（Ringworm (Dermatophytosis)）[hedgehog_0002] → グリセオフルビン, クロトリマゾール, グリセオフルビン
@@ -172,7 +157,7 @@
 - 大腸炎（Colitis）[hedgehog_0020] → ロニダゾール
 - 歯周病（Periodontal Disease）[hedgehog_0022] → クロルヘキシジン, ロニダゾール, ブピバカイン
 - 歯肉炎（Gingivitis）[hedgehog_0023] → クロルヘキシジン, ロニダゾール
-- マイコバクテリア症（肺型）（Mycobacteriosis (Pulmonary)）[hedgehog_0028] → リファンピン, クラリスロマイシン, テオフィリン
+- マイコバクテリア症（肺型）（Mycobacteriosis (Pulmonary)）[hedgehog_0028] → リファンピン, クラリスロマイシン
 - てんかん発作（Seizures）[hedgehog_0031] → フェノバルビタール
 
 ### 犬猫論文が他種に自動紐付け（上位20）
@@ -184,10 +169,8 @@
 - 子宮蓄膿症（Pyometra）[hedgehog_0049] → key: pyometra
 - 副腎疾患（Adrenal Disease）[hedgehog_0071] → key: adrenal disease
 - 貧血（Anemia）[hedgehog_0074] → key: immune-mediated hemolytic anemia
-- 皮膚糸状菌症（重症型）（Dermatophytosis (Severe)）[hedgehog_0093] → key: dermatophytosis
 - 糖尿病（Diabetes Mellitus）[hedgehog_0119] → key: diabetes mellitus
 - 膵炎（Pancreatitis）[hedgehog_0125] → key: feline pancreatitis
-- 皮膚糸状菌症（トリコフィトン）（ハリネズミ）（Dermatophytosis (Trichophyton)）[hedgehog_0149] → key: dermatophytosis
 - 白血病（ハリネズミ）（Leukemia）[hedgehog_0173] → key: feline leukemia virus
 - 血栓塞栓症（ハリネズミ）（Thromboembolism）[hedgehog_0240] → key: aortic thromboembolism (saddle thrombus)
 
