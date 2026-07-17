@@ -1,15 +1,14 @@
 # VetDict 品質検出レポート — chinchilla
 
-- 総レコード数: **230**
+- 総レコード数: **229**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **5** （冗長レコード 7 件）
+- 完全一致重複クラスタ: **4** （冗長レコード 6 件）
 - 疾患ファミリー候補（過分割の疑い, ≥3件）: **25**
 
 ### 完全一致重複（上位20）
 - 便秘（Constipation）[chinchilla_0006] / 便秘（巨大結腸症）（チンチラ）（Constipation (Megacolon)）[chinchilla_0175]
 - 下痢（Diarrhea）[chinchilla_0007] / 非特異的下痢（チンチラ）（Diarrhea (Non-specific)）[chinchilla_0255]
-- 中耳炎・内耳炎（Otitis Media / Interna）[chinchilla_0061] / 中耳/内耳炎（チンチラ）（Otitis Media/Interna）[chinchilla_0198]
 - 眼球突出（Eye Proptosis）[chinchilla_0123] / 眼球突出（チンチラ）（Exophthalmos）[chinchilla_0265]
 - 歯科疾患（切歯不正咬合）（Dental Disease - Incisor Malocclusion）[chinchilla_0140] / 歯科疾患（臼歯歯根感染）（Dental Disease - Molar Root Infection）[chinchilla_0141] / 歯科疾患（歯根吸収性病変）（Dental Disease - Resorptive Lesions）[chinchilla_0142] / 歯科疾患（臼歯伸長）（チンチラ）（Dental Disease (Molar Elongation)）[chinchilla_0173]
 
@@ -61,11 +60,6 @@
     - 栄養性二次性副甲状腺機能亢進症（Nutritional Secondary Hyperparathyroidism）[chinchilla_0116]
     - 甲状腺過形成（チンチラ）（Thyroid Hyperplasia）[chinchilla_0186]
     - 高リン血症（チンチラ）（Hyperphosphatemia）[chinchilla_0238]
-- stem=`otiti` × 4件
-    - 中耳炎・内耳炎（Otitis Media / Interna）[chinchilla_0061]
-    - 緑膿菌性外耳炎（Pseudomonas Otitis）[chinchilla_0147]
-    - 外耳炎（Otitis Externa - Chinchilla）[chinchilla_0154]
-    - 中耳/内耳炎（チンチラ）（Otitis Media/Interna）[chinchilla_0198]
 - stem=`pneumo` × 4件
     - 肺炎（Pneumonia）[chinchilla_0018]
     - 誤嚥性肺炎（Aspiration Pneumonia）[chinchilla_0069]
@@ -92,6 +86,10 @@
     - 不正咬合 - 切歯（Dental Malocclusion - Incisor）[chinchilla_0074]
     - 歯科疾患（切歯不正咬合）（Dental Disease - Incisor Malocclusion）[chinchilla_0140]
     - 切歯不正咬合（チンチラ）（Incisor Malocclusion）[chinchilla_0260]
+- stem=`intest` × 3件
+    - 腸管寄生虫症（ジアルジア）（Intestinal Parasites (Giardia)）[chinchilla_0086]
+    - 腸捻転（チンチラ）（Intestinal Volvulus）[chinchilla_0183]
+    - 腸閉塞（チンチラ）（Intestinal Obstruction）[chinchilla_0256]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
@@ -99,7 +97,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **30**
-- 投与量あり: **200**
+- 投与量あり: **199**
 
 ### 投与量なし（上位30）
 - 不正咬合（Malocclusion）[chinchilla_0000] — ja:181字 / en:158字

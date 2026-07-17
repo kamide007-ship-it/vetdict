@@ -1,10 +1,10 @@
 {
   "species": "lizard",
   "view": "served",
-  "record_count": 220,
+  "record_count": 219,
   "T101": {
     "detector": "T101",
-    "total_records": 220,
+    "total_records": 219,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -432,27 +432,6 @@
         ]
       },
       {
-        "shared_stem": "fractu",
-        "size": 3,
-        "members": [
-          {
-            "id": "lizard_0108",
-            "name": "Spinal Fracture / Vertebral Luxation",
-            "name_ja": "脊椎骨折・椎体脱臼"
-          },
-          {
-            "id": "lizard_0109",
-            "name": "Limb Fractures",
-            "name_ja": "四肢骨折"
-          },
-          {
-            "id": "lizard_0217",
-            "name": "Fracture (Shell/Carapace)",
-            "name_ja": "甲羅骨折（トカゲ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "gout",
         "size": 3,
         "members": [
@@ -600,20 +579,20 @@
         ]
       }
     ],
-    "family_cluster_count": 21
+    "family_cluster_count": 20
   },
   "T102": {
     "detector": "T102",
-    "total_records": 220,
+    "total_records": 219,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 220,
+    "total_records": 219,
     "empty_count": 0,
     "heading_only_count": 46,
-    "with_dosage_count": 174,
+    "with_dosage_count": 173,
     "empty": [],
     "heading_only": [
       {
@@ -988,7 +967,7 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 220,
+    "total_records": 219,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 79,
@@ -2275,7 +2254,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 220,
+    "total_records": 219,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

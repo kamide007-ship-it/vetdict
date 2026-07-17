@@ -1,10 +1,10 @@
 # VetDict 品質検出レポート — lizard
 
-- 総レコード数: **220**
+- 総レコード数: **219**
 
 ## T101 重複 / 過分割
 - 完全一致重複クラスタ: **2** （冗長レコード 3 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **21**
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **20**
 
 ### 完全一致重複（上位20）
 - アデノウイルス感染症（非アタデノ）（Adenovirus Infection (Non-Atadenovirus)）[lizard_0010] / アデノウイルス感染（トカゲ）（Adenovirus Infection）[lizard_0164]
@@ -86,14 +86,14 @@
     - 扁平上皮癌（Squamous Cell Carcinoma）[lizard_0059]
     - 肝細胞癌（Hepatocellular Carcinoma）[lizard_0061]
     - 腎細胞癌（Renal Cell Carcinoma）[lizard_0106]
-- stem=`fractu` × 3件
-    - 脊椎骨折・椎体脱臼（Spinal Fracture / Vertebral Luxation）[lizard_0108]
-    - 四肢骨折（Limb Fractures）[lizard_0109]
-    - 甲羅骨折（トカゲ）（Fracture (Shell/Carapace)）[lizard_0217]
 - stem=`gout` × 3件
     - 関節痛風（Articular Gout）[lizard_0050]
     - 内臓痛風（Visceral Gout）[lizard_0051]
     - 高尿酸血症（Hyperuricemia / Pre-gout）[lizard_0118]
+- stem=`intest` × 3件
+    - 腸捻転・腸重積（Intestinal Volvulus / Intussusception）[lizard_0126]
+    - 腸閉塞（トカゲ）（Intestinal Obstruction）[lizard_0200]
+    - 腸脱（トカゲ）（Intestinal Prolapse）[lizard_0201]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
@@ -101,7 +101,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **46**
-- 投与量あり: **174**
+- 投与量あり: **173**
 
 ### 投与量なし（上位30）
 - ビタミンD3欠乏症（Vitamin D3 Deficiency）[lizard_0003] — ja:76字 / en:476字

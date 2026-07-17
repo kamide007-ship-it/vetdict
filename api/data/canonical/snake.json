@@ -6,8 +6,8 @@
     "records": 248,
     "merge_clusters": 22,
     "records_merged_away": 24,
-    "archived": 0,
-    "served_after": 224
+    "archived": 1,
+    "served_after": 223
   },
   "merges": [
     {
@@ -436,7 +436,15 @@
       "curated": true
     }
   ],
-  "archives": [],
+  "archives": [
+    {
+      "id": "snake_0212",
+      "slug": "fracture-shell-carapace",
+      "name": "Fracture (Shell/Carapace)",
+      "name_ja": "甲羅骨折（ヘビ）",
+      "reason": "spurious template contamination — disease impossible in this species (vet review)"
+    }
+  ],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [

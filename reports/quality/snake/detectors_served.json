@@ -1,13 +1,18 @@
 {
   "species": "snake",
   "view": "served",
-  "record_count": 224,
+  "record_count": 222,
   "T101": {
     "detector": "T101",
-    "total_records": 224,
+    "total_records": 222,
     "exact_duplicate_clusters": [
       {
         "members": [
+          {
+            "id": "snake_0000",
+            "name": "Inclusion Body Disease (IBD)",
+            "name_ja": "封入体病（IBD）"
+          },
           {
             "id": "snake_0005",
             "name": "Sunshine Virus (Reptile Sunshinevirus)",
@@ -16,7 +21,7 @@
           {
             "id": "snake_0147",
             "name": "Sunshine Virus (Reptarenavirus)",
-            "name_ja": "サンシャインウイルス（ヘビ）"
+            "name_ja": "封入体病（レプタレナウイルス）（ヘビ）"
           }
         ]
       },
@@ -38,23 +43,9 @@
             "name_ja": "ストレス性拒食（ヘビ）"
           }
         ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0211",
-            "name": "Fracture (Limb)",
-            "name_ja": "四肢骨折（ヘビ）"
-          },
-          {
-            "id": "snake_0212",
-            "name": "Fracture (Shell/Carapace)",
-            "name_ja": "甲羅骨折（ヘビ）"
-          }
-        ]
       }
     ],
-    "exact_duplicate_cluster_count": 3,
+    "exact_duplicate_cluster_count": 2,
     "redundant_record_count": 4,
     "family_clusters": [
       {
@@ -336,32 +327,6 @@
         ]
       },
       {
-        "shared_stem": "fractu",
-        "size": 4,
-        "members": [
-          {
-            "id": "snake_0100",
-            "name": "Spinal Fracture / Vertebral Luxation",
-            "name_ja": "脊椎骨折・椎体脱臼"
-          },
-          {
-            "id": "snake_0101",
-            "name": "Rib Fractures",
-            "name_ja": "肋骨骨折"
-          },
-          {
-            "id": "snake_0211",
-            "name": "Fracture (Limb)",
-            "name_ja": "四肢骨折（ヘビ）"
-          },
-          {
-            "id": "snake_0212",
-            "name": "Fracture (Shell/Carapace)",
-            "name_ja": "甲羅骨折（ヘビ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "injury",
         "size": 4,
         "members": [
@@ -510,6 +475,27 @@
             "id": "snake_0206",
             "name": "Corneal Ulcer",
             "name_ja": "角膜潰瘍（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0100",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "snake_0101",
+            "name": "Rib Fractures",
+            "name_ja": "肋骨骨折"
+          },
+          {
+            "id": "snake_0211",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（ヘビ）"
           }
         ]
       },
@@ -749,16 +735,16 @@
   },
   "T102": {
     "detector": "T102",
-    "total_records": 224,
+    "total_records": 222,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 224,
+    "total_records": 222,
     "empty_count": 0,
     "heading_only_count": 43,
-    "with_dosage_count": 181,
+    "with_dosage_count": 179,
     "empty": [],
     "heading_only": [
       {
@@ -1092,7 +1078,7 @@
       {
         "id": "snake_0147",
         "name": "Sunshine Virus (Reptarenavirus)",
-        "name_ja": "サンシャインウイルス（ヘビ）",
+        "name_ja": "封入体病（レプタレナウイルス）（ヘビ）",
         "treatment_ja_len": 293,
         "treatment_len": 682,
         "has_dosage": false
@@ -1109,10 +1095,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 224,
+    "total_records": 222,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 76,
+    "drug_mismatch_count": 75,
     "citation_mismatch_count": 8,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -1767,18 +1753,6 @@
         ]
       },
       {
-        "id": "snake_0184",
-        "name": "Egg Binding (Dystocia)",
-        "name_ja": "卵詰まり（難産）（ヘビ）",
-        "drugs": [
-          {
-            "drug": "Oxytocin",
-            "drug_ja": "オキシトシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "snake_0186",
         "name": "Egg Yolk Coelomitis",
         "name_ja": "卵黄体腔炎（ヘビ）",
@@ -2257,7 +2231,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 224,
+    "total_records": 222,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

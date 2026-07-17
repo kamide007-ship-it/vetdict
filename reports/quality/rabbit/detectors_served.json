@@ -1,10 +1,10 @@
 {
   "species": "rabbit",
   "view": "served",
-  "record_count": 420,
+  "record_count": 419,
   "T101": {
     "detector": "T101",
-    "total_records": 420,
+    "total_records": 419,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -1915,27 +1915,6 @@
         ]
       },
       {
-        "shared_stem": "seizur",
-        "size": 3,
-        "members": [
-          {
-            "id": "rabbit_0047",
-            "name": "Seizures / Epilepsy",
-            "name_ja": "てんかん・痙攣発作"
-          },
-          {
-            "id": "rabbit_0349",
-            "name": "Seizures (Epilepsy)",
-            "name_ja": "てんかん発作（ウサギ）"
-          },
-          {
-            "id": "rabbit_0354",
-            "name": "Toxin-Induced Seizures",
-            "name_ja": "中毒性痙攣（ウサギ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "septic",
         "size": 3,
         "members": [
@@ -2167,20 +2146,20 @@
         ]
       }
     ],
-    "family_cluster_count": 69
+    "family_cluster_count": 68
   },
   "T102": {
     "detector": "T102",
-    "total_records": 420,
+    "total_records": 419,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 420,
+    "total_records": 419,
     "empty_count": 0,
     "heading_only_count": 20,
-    "with_dosage_count": 400,
+    "with_dosage_count": 399,
     "empty": [],
     "heading_only": [
       {
@@ -2347,10 +2326,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 420,
+    "total_records": 419,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 124,
+    "drug_mismatch_count": 123,
     "citation_mismatch_count": 17,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -3860,18 +3839,6 @@
         ]
       },
       {
-        "id": "rabbit_0349",
-        "name": "Seizures (Epilepsy)",
-        "name_ja": "てんかん発作（ウサギ）",
-        "drugs": [
-          {
-            "drug": "Zonisamide",
-            "drug_ja": "ゾニサミド",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "rabbit_0355",
         "name": "Meningitis",
         "name_ja": "髄膜炎（ウサギ）",
@@ -4242,7 +4209,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 420,
+    "total_records": 419,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

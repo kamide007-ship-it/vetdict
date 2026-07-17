@@ -1,13 +1,12 @@
 # VetDict 品質検出レポート — bird
 
-- 総レコード数: **501**
+- 総レコード数: **500**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **4** （冗長レコード 4 件）
+- 完全一致重複クラスタ: **3** （冗長レコード 3 件）
 - 疾患ファミリー候補（過分割の疑い, ≥3件）: **79**
 
 ### 完全一致重複（上位20）
-- オウム病（クラミジア症）（Psittacosis / Chlamydiosis）[bird_0010] / オウム病（クラミジア症）（鳥）（Psittacosis (Chlamydiosis)）[bird_0398]
 - 肺炎（Pneumonia）[bird_0031] / 細菌性肺炎（鳥）（Pneumonia (Bacterial)）[bird_0417]
 - 鉄蓄積症（Iron Storage Disease (non-hemochromatosis)）[bird_0059] / 鉄蓄積症（ヘモクロマトーシス）（鳥）（Iron Storage Disease (Hemochromatosis)）[bird_0415]
 - 翼骨折（鳥）（Fracture (Wing)）[bird_0428] / 脚骨折（鳥）（Fracture (Leg)）[bird_0429]
@@ -237,7 +236,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **61**
-- 投与量あり: **440**
+- 投与量あり: **439**
 
 ### 投与量なし（上位30）
 - ボルデテラ感染症（Bordetella Infection）[bird_0020] — ja:161字 / en:137字

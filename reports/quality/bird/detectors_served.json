@@ -1,25 +1,11 @@
 {
   "species": "bird",
   "view": "served",
-  "record_count": 501,
+  "record_count": 500,
   "T101": {
     "detector": "T101",
-    "total_records": 501,
+    "total_records": 500,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "bird_0010",
-            "name": "Psittacosis / Chlamydiosis",
-            "name_ja": "オウム病（クラミジア症）"
-          },
-          {
-            "id": "bird_0398",
-            "name": "Psittacosis (Chlamydiosis)",
-            "name_ja": "オウム病（クラミジア症）（鳥）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -63,8 +49,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 4,
-    "redundant_record_count": 4,
+    "exact_duplicate_cluster_count": 3,
+    "redundant_record_count": 3,
     "family_clusters": [
       {
         "shared_stem": "avian",
@@ -1305,52 +1291,6 @@
         ]
       },
       {
-        "shared_stem": "psitta",
-        "size": 8,
-        "members": [
-          {
-            "id": "bird_0000",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "嘴羽毛病（PBFD）"
-          },
-          {
-            "id": "bird_0010",
-            "name": "Psittacosis / Chlamydiosis",
-            "name_ja": "オウム病（クラミジア症）"
-          },
-          {
-            "id": "bird_0208",
-            "name": "Psittacine Poxvirus (Canarypox Variant)",
-            "name_ja": "オウム目痘瘡ウイルス（カナリア痘変異型）"
-          },
-          {
-            "id": "bird_0238",
-            "name": "Psittacine Herpesvirus – Mucosal Form",
-            "name_ja": "オウム目ヘルペスウイルス粘膜型"
-          },
-          {
-            "id": "bird_0250",
-            "name": "Psittacine Beak and Feather Disease – Peracute Neonatal Form",
-            "name_ja": "嘴羽毛病（PBFD）超急性新生児型"
-          },
-          {
-            "id": "bird_0251",
-            "name": "Psittacine Beak and Feather Disease – Chronic Adult Form",
-            "name_ja": "嘴羽毛病（PBFD）慢性成鳥型"
-          },
-          {
-            "id": "bird_0348",
-            "name": "Chlamydia psittaci (Zoonotic)",
-            "name_ja": "クラミジア・プシッタシ（人獣共通）（鳥）"
-          },
-          {
-            "id": "bird_0398",
-            "name": "Psittacosis (Chlamydiosis)",
-            "name_ja": "オウム病（クラミジア症）（鳥）"
-          }
-        ]
-      },
-      {
         "shared_stem": "toxici",
         "size": 8,
         "members": [
@@ -1525,6 +1465,47 @@
         ]
       },
       {
+        "shared_stem": "psitta",
+        "size": 7,
+        "members": [
+          {
+            "id": "bird_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "嘴羽毛病（PBFD）"
+          },
+          {
+            "id": "bird_0208",
+            "name": "Psittacine Poxvirus (Canarypox Variant)",
+            "name_ja": "オウム目痘瘡ウイルス（カナリア痘変異型）"
+          },
+          {
+            "id": "bird_0238",
+            "name": "Psittacine Herpesvirus – Mucosal Form",
+            "name_ja": "オウム目ヘルペスウイルス粘膜型"
+          },
+          {
+            "id": "bird_0250",
+            "name": "Psittacine Beak and Feather Disease – Peracute Neonatal Form",
+            "name_ja": "嘴羽毛病（PBFD）超急性新生児型"
+          },
+          {
+            "id": "bird_0251",
+            "name": "Psittacine Beak and Feather Disease – Chronic Adult Form",
+            "name_ja": "嘴羽毛病（PBFD）慢性成鳥型"
+          },
+          {
+            "id": "bird_0348",
+            "name": "Chlamydia psittaci (Zoonotic)",
+            "name_ja": "クラミジア・プシッタシ（人獣共通）（鳥）"
+          },
+          {
+            "id": "bird_0398",
+            "name": "Psittacosis (Chlamydiosis)",
+            "name_ja": "オウム病（クラミジア症）（鳥）"
+          }
+        ]
+      },
+      {
         "shared_stem": "reprod",
         "size": 7,
         "members": [
@@ -1598,42 +1579,6 @@
             "id": "bird_0526",
             "name": "Cardiovascular Congenital Anomaly",
             "name_ja": "心血管先天異常（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "chlamy",
-        "size": 6,
-        "members": [
-          {
-            "id": "bird_0010",
-            "name": "Psittacosis / Chlamydiosis",
-            "name_ja": "オウム病（クラミジア症）"
-          },
-          {
-            "id": "bird_0123",
-            "name": "Avian Chlamydial Conjunctivitis",
-            "name_ja": "鳥クラミジア性結膜炎"
-          },
-          {
-            "id": "bird_0239",
-            "name": "Chlamydiosis – Chronic Latent Form",
-            "name_ja": "クラミジア症慢性潜伏型"
-          },
-          {
-            "id": "bird_0240",
-            "name": "Chlamydiosis – Ocular Form",
-            "name_ja": "クラミジア症眼型"
-          },
-          {
-            "id": "bird_0241",
-            "name": "Chlamydiosis – Hepatic Form",
-            "name_ja": "クラミジア症肝型"
-          },
-          {
-            "id": "bird_0348",
-            "name": "Chlamydia psittaci (Zoonotic)",
-            "name_ja": "クラミジア・プシッタシ（人獣共通）（鳥）"
           }
         ]
       },
@@ -2046,6 +1991,37 @@
             "id": "bird_0381",
             "name": "Gastric Foreign Body",
             "name_ja": "胃内異物（鳥）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "chlamy",
+        "size": 5,
+        "members": [
+          {
+            "id": "bird_0123",
+            "name": "Avian Chlamydial Conjunctivitis",
+            "name_ja": "鳥クラミジア性結膜炎"
+          },
+          {
+            "id": "bird_0239",
+            "name": "Chlamydiosis – Chronic Latent Form",
+            "name_ja": "クラミジア症慢性潜伏型"
+          },
+          {
+            "id": "bird_0240",
+            "name": "Chlamydiosis – Ocular Form",
+            "name_ja": "クラミジア症眼型"
+          },
+          {
+            "id": "bird_0241",
+            "name": "Chlamydiosis – Hepatic Form",
+            "name_ja": "クラミジア症肝型"
+          },
+          {
+            "id": "bird_0348",
+            "name": "Chlamydia psittaci (Zoonotic)",
+            "name_ja": "クラミジア・プシッタシ（人獣共通）（鳥）"
           }
         ]
       },
@@ -3095,16 +3071,16 @@
   },
   "T102": {
     "detector": "T102",
-    "total_records": 501,
+    "total_records": 500,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 501,
+    "total_records": 500,
     "empty_count": 0,
     "heading_only_count": 61,
-    "with_dosage_count": 440,
+    "with_dosage_count": 439,
     "empty": [],
     "heading_only": [
       {
@@ -3599,7 +3575,7 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 501,
+    "total_records": 500,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 90,
@@ -4961,7 +4937,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 501,
+    "total_records": 500,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

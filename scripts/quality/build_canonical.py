@@ -489,6 +489,17 @@ _CURATED_MERGE_VETFLAGGED: dict[str, list[list[str]]] = {
 }
 
 
+# Vet-flagged spurious entries to archive (remove from served, non-destructive).
+# "甲羅骨折 / Fracture (Shell/Carapace)" was template-copied onto species with no
+# shell; the concept is impossible for them (reptile/tortoise keep it — they have
+# shells). Archived (not merged) since there is no correct disease to redirect to.
+_CURATED_ARCHIVE: dict[str, list[str]] = {
+    "snake": ["snake_0212"],
+    "lizard": ["lizard_0217"],
+    "amphibian": ["amphibian_0236"],
+}
+
+
 def _slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-")
 
@@ -673,6 +684,16 @@ def build(species: str) -> dict:
             review_nonclinical.append(
                 entry | {"note": "keyword-flagged non-clinical — review (may be a real toxicosis/transplant)"}
             )
+
+    # --- curated archives: vet-flagged spurious template-contamination entries ---
+    _archived_ids = {a["id"] for a in archives}
+    for rid in _CURATED_ARCHIVE.get(species, []):
+        if rid in by_id and rid not in _archived_ids:
+            archives.append(
+                ident(rid)
+                | {"reason": "spurious template contamination — disease impossible in this species (vet review)"}
+            )
+            _archived_ids.add(rid)
 
     # --- review: over-split families (NOT applied) ---
     review_families = []

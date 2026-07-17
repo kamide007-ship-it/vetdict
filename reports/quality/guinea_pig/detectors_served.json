@@ -1,10 +1,10 @@
 {
   "species": "guinea_pig",
   "view": "served",
-  "record_count": 308,
+  "record_count": 307,
   "T101": {
     "detector": "T101",
-    "total_records": 308,
+    "total_records": 307,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -47,24 +47,10 @@
             "name_ja": "干し草による鼻腔内刺入"
           }
         ]
-      },
-      {
-        "members": [
-          {
-            "id": "guinea_pig_0188",
-            "name": "Gastric Dilation Volvulus",
-            "name_ja": "胃拡張捻転"
-          },
-          {
-            "id": "guinea_pig_0310",
-            "name": "Gastric Dilation-Volvulus",
-            "name_ja": "胃拡張捻転（モルモット）"
-          }
-        ]
       }
     ],
-    "exact_duplicate_cluster_count": 4,
-    "redundant_record_count": 4,
+    "exact_duplicate_cluster_count": 3,
+    "redundant_record_count": 3,
     "family_clusters": [
       {
         "shared_stem": "pneumo",
@@ -845,27 +831,6 @@
         ]
       },
       {
-        "shared_stem": "gastri",
-        "size": 3,
-        "members": [
-          {
-            "id": "guinea_pig_0012",
-            "name": "Gastric Ulcers",
-            "name_ja": "胃潰瘍"
-          },
-          {
-            "id": "guinea_pig_0188",
-            "name": "Gastric Dilation Volvulus",
-            "name_ja": "胃拡張捻転"
-          },
-          {
-            "id": "guinea_pig_0310",
-            "name": "Gastric Dilation-Volvulus",
-            "name_ja": "胃拡張捻転（モルモット）"
-          }
-        ]
-      },
-      {
         "shared_stem": "hepati",
         "size": 3,
         "members": [
@@ -1139,20 +1104,20 @@
         ]
       }
     ],
-    "family_cluster_count": 42
+    "family_cluster_count": 41
   },
   "T102": {
     "detector": "T102",
-    "total_records": 308,
+    "total_records": 307,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 308,
+    "total_records": 307,
     "empty_count": 0,
     "heading_only_count": 38,
-    "with_dosage_count": 270,
+    "with_dosage_count": 269,
     "empty": [],
     "heading_only": [
       {
@@ -1463,7 +1428,7 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 308,
+    "total_records": 307,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 124,
@@ -3672,7 +3637,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 308,
+    "total_records": 307,
     "hit_count": 1,
     "safe_occurrences": 0,
     "review_occurrences": 1,

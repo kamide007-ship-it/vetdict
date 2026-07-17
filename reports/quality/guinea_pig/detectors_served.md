@@ -1,16 +1,15 @@
 # VetDict 品質検出レポート — guinea_pig
 
-- 総レコード数: **308**
+- 総レコード数: **307**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **4** （冗長レコード 4 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **42**
+- 完全一致重複クラスタ: **3** （冗長レコード 3 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **41**
 
 ### 完全一致重複（上位20）
 - 毛包腫（Trichofolliculoma）[guinea_pig_0062] / 毛包腫（基底細胞腫）（Trichofolliculoma (Basal Cell Tumor)）[guinea_pig_0114]
 - 腸閉塞（Ileus）[guinea_pig_0085] / 腸閉塞（モルモット）（Intestinal Obstruction）[guinea_pig_0209]
 - 干し草による角膜刺傷（Hay Poke (Corneal)）[guinea_pig_0155] / 干し草による鼻腔内刺入（Hay Poke (Nasal)）[guinea_pig_0156]
-- 胃拡張捻転（Gastric Dilation Volvulus）[guinea_pig_0188] / 胃拡張捻転（モルモット）（Gastric Dilation-Volvulus）[guinea_pig_0310]
 
 ### 疾患ファミリー候補（上位15）
 - stem=`pneumo` × 10件
@@ -115,7 +114,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **38**
-- 投与量あり: **270**
+- 投与量あり: **269**
 
 ### 投与量なし（上位30）
 - シラミ寄生症（Static Lice (Gliricola porcelli)）[guinea_pig_0015] — ja:167字 / en:495字

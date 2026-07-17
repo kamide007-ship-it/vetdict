@@ -1,10 +1,10 @@
 {
   "species": "chinchilla",
   "view": "served",
-  "record_count": 230,
+  "record_count": 229,
   "T101": {
     "detector": "T101",
-    "total_records": 230,
+    "total_records": 229,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -31,20 +31,6 @@
             "id": "chinchilla_0255",
             "name": "Diarrhea (Non-specific)",
             "name_ja": "非特異的下痢（チンチラ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "chinchilla_0061",
-            "name": "Otitis Media / Interna",
-            "name_ja": "中耳炎・内耳炎"
-          },
-          {
-            "id": "chinchilla_0198",
-            "name": "Otitis Media/Interna",
-            "name_ja": "中耳/内耳炎（チンチラ）"
           }
         ]
       },
@@ -87,8 +73,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 5,
-    "redundant_record_count": 7,
+    "exact_duplicate_cluster_count": 4,
+    "redundant_record_count": 6,
     "family_clusters": [
       {
         "shared_stem": "dental",
@@ -334,32 +320,6 @@
         ]
       },
       {
-        "shared_stem": "otiti",
-        "size": 4,
-        "members": [
-          {
-            "id": "chinchilla_0061",
-            "name": "Otitis Media / Interna",
-            "name_ja": "中耳炎・内耳炎"
-          },
-          {
-            "id": "chinchilla_0147",
-            "name": "Pseudomonas Otitis",
-            "name_ja": "緑膿菌性外耳炎"
-          },
-          {
-            "id": "chinchilla_0154",
-            "name": "Otitis Externa - Chinchilla",
-            "name_ja": "外耳炎"
-          },
-          {
-            "id": "chinchilla_0198",
-            "name": "Otitis Media/Interna",
-            "name_ja": "中耳/内耳炎（チンチラ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "pneumo",
         "size": 4,
         "members": [
@@ -538,6 +498,27 @@
         ]
       },
       {
+        "shared_stem": "otiti",
+        "size": 3,
+        "members": [
+          {
+            "id": "chinchilla_0147",
+            "name": "Pseudomonas Otitis",
+            "name_ja": "緑膿菌性外耳炎"
+          },
+          {
+            "id": "chinchilla_0154",
+            "name": "Otitis Externa - Chinchilla",
+            "name_ja": "外耳炎"
+          },
+          {
+            "id": "chinchilla_0198",
+            "name": "Otitis Media/Interna",
+            "name_ja": "中耳/内耳炎（チンチラ）"
+          }
+        ]
+      },
+      {
         "shared_stem": "pseudo",
         "size": 3,
         "members": [
@@ -710,16 +691,16 @@
   },
   "T102": {
     "detector": "T102",
-    "total_records": 230,
+    "total_records": 229,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 230,
+    "total_records": 229,
     "empty_count": 0,
     "heading_only_count": 30,
-    "with_dosage_count": 200,
+    "with_dosage_count": 199,
     "empty": [],
     "heading_only": [
       {
@@ -966,7 +947,7 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 230,
+    "total_records": 229,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 85,
@@ -2358,7 +2339,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 230,
+    "total_records": 229,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

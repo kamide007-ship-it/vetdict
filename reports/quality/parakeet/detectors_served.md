@@ -1,13 +1,12 @@
 # VetDict 品質検出レポート — parakeet
 
-- 総レコード数: **413**
+- 総レコード数: **412**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **5** （冗長レコード 7 件）
+- 完全一致重複クラスタ: **4** （冗長レコード 6 件）
 - 疾患ファミリー候補（過分割の疑い, ≥3件）: **76**
 
 ### 完全一致重複（上位20）
-- ダニ寄生症（ワクモ・羽ダニ）（Mite Infestation (Red Mites / Feather Mites)）[parakeet_0024] / ダニ寄生症（Tick Infestation）[parakeet_0155]
 - 内臓痛風（Gout (Visceral)）[parakeet_0029] / 関節痛風（Gout (Articular)）[parakeet_0030] / 痛風（内臓型/関節型）（インコ）（Gout (Visceral/Articular)）[parakeet_0274]
 - そ嚢停滞（サワークロップ）（Crop Stasis (Sour Crop)）[parakeet_0067] / 嗉嚢閉塞（異物）（Crop Impaction (Foreign Body)）[parakeet_0206] / そ嚢停滞（インコ）（Crop Impaction）[parakeet_0334]
 - 乳頭腫症（Papillomatosis）[parakeet_0070] / 内臓乳頭腫症（インコ）（Papillomatosis (Internal)）[parakeet_0335]
@@ -198,7 +197,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **36**
-- 投与量あり: **377**
+- 投与量あり: **376**
 
 ### 投与量なし（上位30）
 - ストレスバー（ストレス線）（Psittacine Feather Stress Bars）[parakeet_0060] — ja:833字 / en:2218字

@@ -1,25 +1,11 @@
 {
   "species": "parakeet",
   "view": "served",
-  "record_count": 413,
+  "record_count": 412,
   "T101": {
     "detector": "T101",
-    "total_records": 413,
+    "total_records": 412,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "parakeet_0024",
-            "name": "Mite Infestation (Red Mites / Feather Mites)",
-            "name_ja": "ダニ寄生症（ワクモ・羽ダニ）"
-          },
-          {
-            "id": "parakeet_0155",
-            "name": "Tick Infestation",
-            "name_ja": "ダニ寄生症"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -87,8 +73,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 5,
-    "redundant_record_count": 7,
+    "exact_duplicate_cluster_count": 4,
+    "redundant_record_count": 6,
     "family_clusters": [
       {
         "shared_stem": "defici",
@@ -1227,7 +1213,7 @@
           {
             "id": "parakeet_0155",
             "name": "Tick Infestation",
-            "name_ja": "ダニ寄生症"
+            "name_ja": "マダニ寄生症"
           },
           {
             "id": "parakeet_0156",
@@ -1870,37 +1856,6 @@
         ]
       },
       {
-        "shared_stem": "toxico",
-        "size": 5,
-        "members": [
-          {
-            "id": "parakeet_0038",
-            "name": "Teflon (PTFE) Toxicosis",
-            "name_ja": "テフロン中毒（PTFE中毒）"
-          },
-          {
-            "id": "parakeet_0039",
-            "name": "Avocado Toxicosis",
-            "name_ja": "アボカド中毒"
-          },
-          {
-            "id": "parakeet_0241",
-            "name": "Zinc Toxicosis",
-            "name_ja": "亜鉛中毒"
-          },
-          {
-            "id": "parakeet_0242",
-            "name": "Lead Toxicosis",
-            "name_ja": "鉛中毒"
-          },
-          {
-            "id": "parakeet_0325",
-            "name": "Teflon/PTFE Toxicosis",
-            "name_ja": "テフロン/PTFE中毒（インコ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "trache",
         "size": 5,
         "members": [
@@ -2214,6 +2169,32 @@
             "id": "parakeet_0308",
             "name": "Renal Failure (Acute)",
             "name_ja": "急性腎不全（インコ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "toxico",
+        "size": 4,
+        "members": [
+          {
+            "id": "parakeet_0038",
+            "name": "Teflon (PTFE) Toxicosis",
+            "name_ja": "テフロン中毒（PTFE中毒）"
+          },
+          {
+            "id": "parakeet_0039",
+            "name": "Avocado Toxicosis",
+            "name_ja": "アボカド中毒"
+          },
+          {
+            "id": "parakeet_0241",
+            "name": "Zinc Toxicosis",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "parakeet_0242",
+            "name": "Lead Toxicosis",
+            "name_ja": "鉛中毒"
           }
         ]
       },
@@ -2736,16 +2717,16 @@
   },
   "T102": {
     "detector": "T102",
-    "total_records": 413,
+    "total_records": 412,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 413,
+    "total_records": 412,
     "empty_count": 0,
     "heading_only_count": 36,
-    "with_dosage_count": 377,
+    "with_dosage_count": 376,
     "empty": [],
     "heading_only": [
       {
@@ -3040,7 +3021,7 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 413,
+    "total_records": 412,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_mismatch_count": 68,
@@ -4121,7 +4102,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 413,
+    "total_records": 412,
     "hit_count": 1,
     "safe_occurrences": 0,
     "review_occurrences": 1,

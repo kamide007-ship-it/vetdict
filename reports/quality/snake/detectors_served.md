@@ -1,15 +1,14 @@
 # VetDict 品質検出レポート — snake
 
-- 総レコード数: **224**
+- 総レコード数: **222**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **3** （冗長レコード 4 件）
+- 完全一致重複クラスタ: **2** （冗長レコード 4 件）
 - 疾患ファミリー候補（過分割の疑い, ≥3件）: **27**
 
 ### 完全一致重複（上位20）
-- サンシャインウイルス感染症（Sunshine Virus (Reptile Sunshinevirus)）[snake_0005] / サンシャインウイルス（ヘビ）（Sunshine Virus (Reptarenavirus)）[snake_0147]
+- 封入体病（IBD）（Inclusion Body Disease (IBD)）[snake_0000] / サンシャインウイルス感染症（Sunshine Virus (Reptile Sunshinevirus)）[snake_0005] / 封入体病（レプタレナウイルス）（ヘビ）（Sunshine Virus (Reptarenavirus)）[snake_0147]
 - 食欲不振（非特異的）（Anorexia (Non-specific)）[snake_0033] / 拒食（行動性）（ヘビ）（Anorexia (Behavioral)）[snake_0197] / ストレス性拒食（ヘビ）（Anorexia (Stress-Related)）[snake_0241]
-- 四肢骨折（ヘビ）（Fracture (Limb)）[snake_0211] / 甲羅骨折（ヘビ）（Fracture (Shell/Carapace)）[snake_0212]
 
 ### 疾患ファミリー候補（上位15）
 - stem=`defici` × 9件
@@ -66,11 +65,6 @@
     - 細菌性皮膚炎（Bacterial Dermatitis）[snake_0025]
     - 光線過敏性皮膚炎（Photosensitization Dermatitis）[snake_0136]
     - 潰瘍性皮膚炎（ヘビ）（Ulcerative Dermatitis）[snake_0178]
-- stem=`fractu` × 4件
-    - 脊椎骨折・椎体脱臼（Spinal Fracture / Vertebral Luxation）[snake_0100]
-    - 肋骨骨折（Rib Fractures）[snake_0101]
-    - 四肢骨折（ヘビ）（Fracture (Limb)）[snake_0211]
-    - 甲羅骨折（ヘビ）（Fracture (Shell/Carapace)）[snake_0212]
 - stem=`injury` × 4件
     - 角膜混濁・損傷（Corneal Opacity / Injury）[snake_0040]
     - 餌動物による咬傷（Prey Bite Injury）[snake_0059]
@@ -96,6 +90,10 @@
     - 腹膜炎・体腔炎（Peritonitis / Coelomitis）[snake_0064]
     - 卵関連体腔炎（Egg-related Coelomitis）[snake_0104]
     - 卵黄体腔炎（ヘビ）（Egg Yolk Coelomitis）[snake_0186]
+- stem=`cornea` × 3件
+    - 角膜混濁・損傷（Corneal Opacity / Injury）[snake_0040]
+    - 角膜疾患（Corneal Disease）[snake_0134]
+    - 角膜潰瘍（ヘビ）（Corneal Ulcer）[snake_0206]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
@@ -103,7 +101,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **43**
-- 投与量あり: **181**
+- 投与量あり: **179**
 
 ### 投与量なし（上位30）
 - 口腔膿瘍（Oral Abscess）[snake_0011] — ja:159字 / en:196字
@@ -138,7 +136,7 @@
 - イベルメクチン中毒（Ivermectin Toxicosis）[snake_0109] — ja:200字 / en:159字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **76** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **75** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **8** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
