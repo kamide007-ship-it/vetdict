@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 346,
-    "merge_clusters": 29,
-    "records_merged_away": 37,
+    "merge_clusters": 30,
+    "records_merged_away": 39,
     "archived": 0,
-    "served_after": 309
+    "served_after": 307
   },
   "merges": [
     {
@@ -594,6 +594,31 @@
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
       "inherit_content": true,
       "curated": true
+    },
+    {
+      "canonical": {
+        "id": "guinea_pig_0162",
+        "slug": "antibiotic-toxicity-penicillin-class",
+        "name": "Antibiotic Toxicity (Penicillin-class)",
+        "name_ja": "抗生物質毒性（ペニシリン系）"
+      },
+      "merged": [
+        {
+          "id": "guinea_pig_0163",
+          "slug": "antibiotic-toxicity-lincosamide-macrolide",
+          "name": "Antibiotic Toxicity (Lincosamide/Macrolide)",
+          "name_ja": "抗生物質毒性（リンコサミド/マクロライド系）"
+        },
+        {
+          "id": "guinea_pig_0290",
+          "slug": "antibiotic-toxicity",
+          "name": "Antibiotic Toxicity",
+          "name_ja": "抗生物質毒性（モルモット）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
@@ -651,30 +676,6 @@
             "slug": "hay-poke-nasal",
             "name": "Hay Poke (Nasal)",
             "name_ja": "干し草による鼻腔内刺入"
-          }
-        ]
-      },
-      {
-        "base": "Antibiotic Toxicity (Penicillin-class)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "guinea_pig_0162",
-            "slug": "antibiotic-toxicity-penicillin-class",
-            "name": "Antibiotic Toxicity (Penicillin-class)",
-            "name_ja": "抗生物質毒性（ペニシリン系）"
-          },
-          {
-            "id": "guinea_pig_0163",
-            "slug": "antibiotic-toxicity-lincosamide-macrolide",
-            "name": "Antibiotic Toxicity (Lincosamide/Macrolide)",
-            "name_ja": "抗生物質毒性（リンコサミド/マクロライド系）"
-          },
-          {
-            "id": "guinea_pig_0290",
-            "slug": "antibiotic-toxicity",
-            "name": "Antibiotic Toxicity",
-            "name_ja": "抗生物質毒性（モルモット）"
           }
         ]
       }

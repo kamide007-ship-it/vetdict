@@ -1,22 +1,16 @@
 # VetDict 品質検出レポート — parakeet
 
-- 総レコード数: **419**
+- 総レコード数: **412**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **10** （冗長レコード 13 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **80**
+- 完全一致重複クラスタ: **4** （冗長レコード 6 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **76**
 
 ### 完全一致重複（上位20）
-- ダニ寄生症（ワクモ・羽ダニ）（Mite Infestation (Red Mites / Feather Mites)）[parakeet_0024] / ダニ寄生症（Tick Infestation）[parakeet_0155]
 - 内臓痛風（Gout (Visceral)）[parakeet_0029] / 関節痛風（Gout (Articular)）[parakeet_0030] / 痛風（内臓型/関節型）（インコ）（Gout (Visceral/Articular)）[parakeet_0274]
-- 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[parakeet_0034] / 肝リピドーシス（種子食）（インコ）（Hepatic Lipidosis (Seed Diet)）[parakeet_0257]
-- テフロン中毒（PTFE中毒）（Teflon (PTFE) Toxicosis）[parakeet_0038] / テフロン中毒（インコ）（Teflon Toxicosis (Parakeet)）[parakeet_0196]
-- 精巣腫瘍（Testicular Tumors）[parakeet_0042] / 精巣腫瘍（ろう膜変色）（インコ）（Testicular Tumor (Cere Color Change)）[parakeet_0256]
-- 黄色腫（Xanthomas）[parakeet_0043] / 黄色腫（進行型）（Xanthoma (Advanced)）[parakeet_0177] / 黄色腫（翼）（インコ）（Xanthoma (Wing)）[parakeet_0263]
 - そ嚢停滞（サワークロップ）（Crop Stasis (Sour Crop)）[parakeet_0067] / 嗉嚢閉塞（異物）（Crop Impaction (Foreign Body)）[parakeet_0206] / そ嚢停滞（インコ）（Crop Impaction）[parakeet_0334]
 - 乳頭腫症（Papillomatosis）[parakeet_0070] / 内臓乳頭腫症（インコ）（Papillomatosis (Internal)）[parakeet_0335]
 - 肝疾患（肝炎）（Liver Disease (Hepatitis)）[parakeet_0072] / 肝疾患（肝リピドーシス）（インコ）（Liver Disease (Hepatic Lipidosis)）[parakeet_0273]
-- 腺胃潰瘍（Proventricular Ulceration）[parakeet_0127] / 前胃潰瘍（セキセイインコ）（Proventricular Ulceration (Budgerigar)）[parakeet_0226]
 
 ### 疾患ファミリー候補（上位15）
 - stem=`defici` × 18件
@@ -106,18 +100,6 @@
     - 皮膚自己免疫疾患（インコ）（Dermatological Autoimmune Disease）[parakeet_0368]
     - 皮膚アレルギー疾患（インコ）（Dermatological Allergic Disease）[parakeet_0369]
     - 慢性皮膚炎（インコ）（Chronic Dermatitis）[parakeet_0370]
-- stem=`hepati` × 11件
-    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[parakeet_0034]
-    - 肝アミロイドーシス（Hepatic Amyloidosis）[parakeet_0125]
-    - セキセイインコ肝リピドーシス（Budgerigar Hepatic Lipidosis）[parakeet_0202]
-    - 肝リピドーシス（種子食）（インコ）（Hepatic Lipidosis (Seed Diet)）[parakeet_0257]
-    - 肝炎（インコ）（Hepatitis）[parakeet_0336]
-    - 肝細菌感染症（インコ）（Hepatic Bacterial Infection）[parakeet_0341]
-    - 肝ウイルス感染症（インコ）（Hepatic Viral Infection）[parakeet_0342]
-    - 肝寄生虫疾患（インコ）（Hepatic Parasitic Disease）[parakeet_0343]
-    - 肝線維症（インコ）（Hepatic Fibrosis）[parakeet_0344]
-    - 肝腫瘍性疾患（インコ）（Hepatic Neoplasia）[parakeet_0345]
-    - 肝代謝障害（インコ）（Hepatic Metabolic Disorder）[parakeet_0346]
 - stem=`crop` × 10件
     - そ嚢カンジダ症（Crop Candidiasis）[parakeet_0017]
     - そ嚢停滞（サワークロップ）（Crop Stasis (Sour Crop)）[parakeet_0067]
@@ -129,6 +111,17 @@
     - 酸敗嗉嚢（Sour Crop）[parakeet_0229]
     - そ嚢停滞（インコ）（Crop Impaction）[parakeet_0334]
     - 新生児そ嚢火傷（インコ）（Neonatal Crop Burn）[parakeet_0453]
+- stem=`hepati` × 10件
+    - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[parakeet_0034]
+    - 肝アミロイドーシス（Hepatic Amyloidosis）[parakeet_0125]
+    - セキセイインコ肝リピドーシス（Budgerigar Hepatic Lipidosis）[parakeet_0202]
+    - 肝炎（インコ）（Hepatitis）[parakeet_0336]
+    - 肝細菌感染症（インコ）（Hepatic Bacterial Infection）[parakeet_0341]
+    - 肝ウイルス感染症（インコ）（Hepatic Viral Infection）[parakeet_0342]
+    - 肝寄生虫疾患（インコ）（Hepatic Parasitic Disease）[parakeet_0343]
+    - 肝線維症（インコ）（Hepatic Fibrosis）[parakeet_0344]
+    - 肝腫瘍性疾患（インコ）（Hepatic Neoplasia）[parakeet_0345]
+    - 肝代謝障害（インコ）（Hepatic Metabolic Disorder）[parakeet_0346]
 - stem=`avian` × 9件
     - 鳥痘（Avian Pox）[parakeet_0004]
     - 鳥インフルエンザ（Avian Influenza）[parakeet_0007]
@@ -204,7 +197,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **36**
-- 投与量あり: **383**
+- 投与量あり: **376**
 
 ### 投与量なし（上位30）
 - ストレスバー（ストレス線）（Psittacine Feather Stress Bars）[parakeet_0060] — ja:833字 / en:2218字
@@ -239,7 +232,7 @@
 - 生殖器先天異常（インコ）（Reproductive Congenital Anomaly）[parakeet_0413] — ja:219字 / en:381字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **70** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **68** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **14** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
@@ -251,7 +244,6 @@
 - 気嚢ダニ症（Air Sac Mites）[parakeet_0026] → セラメクチン（レボリューション）, セラメクチン（レボリューション）
 - 肝リピドーシス（脂肪肝）（Hepatic Lipidosis (Fatty Liver Disease)）[parakeet_0034] → ラクツロース
 - 鉄貯蔵病（ヘモクロマトーシス）（Iron Storage Disease (Hemochromatosis)）[parakeet_0035] → デフェロキサミン（デスフェラール）
-- 黄色腫（Xanthomas）[parakeet_0043] → コレスチラミン
 - 趾締付け症候群（Constricted Toe Syndrome）[parakeet_0054] → スルファジアジン, スルファジアジン銀
 - 関節炎（Arthritis）[parakeet_0055] → トラマドール
 - 趾瘤症（足底皮膚炎）（Bumblefoot (Pododermatitis)）[parakeet_0056] → ムピロシン, スルファジアジン, スルファジアジン銀
@@ -263,6 +255,7 @@
 - 嘴過長症（Beak Overgrowth）[parakeet_0073] → ラクツロース
 - 自咬症（Self-Mutilation）[parakeet_0075] → スルファジアジン, スルファジアジン銀
 - てんかん・特発性痙攣（Epilepsy / Idiopathic Seizures）[parakeet_0076] → フェノバルビタール
+- 夜間パニック（ナイトフライト）（Night Frights）[parakeet_0081] → スルファジアジン, スルファジアジン銀
 
 ### 犬猫論文が他種に自動紐付け（上位20）
 - 糖尿病（Diabetes Mellitus）[parakeet_0079] → key: diabetes mellitus

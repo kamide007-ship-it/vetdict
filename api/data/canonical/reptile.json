@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 286,
-    "merge_clusters": 18,
-    "records_merged_away": 18,
+    "merge_clusters": 20,
+    "records_merged_away": 21,
     "archived": 0,
-    "served_after": 268
+    "served_after": 265
   },
   "merges": [
     {
@@ -345,54 +345,56 @@
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
       "inherit_content": true,
       "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0043",
+        "slug": "anorexia-non-specific",
+        "name": "Anorexia (Non-specific)",
+        "name_ja": "食欲不振（非特異的）"
+      },
+      "merged": [
+        {
+          "id": "reptile_0212",
+          "slug": "anorexia-behavioral",
+          "name": "Anorexia (Behavioral)",
+          "name_ja": "拒食（行動性）（爬虫類）"
+        },
+        {
+          "id": "reptile_0254",
+          "slug": "anorexia-stress-related",
+          "name": "Anorexia (Stress-Related)",
+          "name_ja": "ストレス性拒食（爬虫類）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "reptile_0058",
+        "slug": "pre-ovulatory-follicular-stasis",
+        "name": "Pre-ovulatory Follicular Stasis",
+        "name_ja": "排卵前卵胞停滞"
+      },
+      "merged": [
+        {
+          "id": "reptile_0161",
+          "slug": "preovulatory-follicular-stasis-yolk-coelomitis",
+          "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
+          "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Anorexia (Non-specific)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0043",
-            "slug": "anorexia-non-specific",
-            "name": "Anorexia (Non-specific)",
-            "name_ja": "食欲不振（非特異的）"
-          },
-          {
-            "id": "reptile_0212",
-            "slug": "anorexia-behavioral",
-            "name": "Anorexia (Behavioral)",
-            "name_ja": "拒食（行動性）（爬虫類）"
-          },
-          {
-            "id": "reptile_0254",
-            "slug": "anorexia-stress-related",
-            "name": "Anorexia (Stress-Related)",
-            "name_ja": "ストレス性拒食（爬虫類）"
-          }
-        ]
-      },
-      {
-        "base": "Pre-ovulatory Follicular Stasis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "reptile_0058",
-            "slug": "pre-ovulatory-follicular-stasis",
-            "name": "Pre-ovulatory Follicular Stasis",
-            "name_ja": "排卵前卵胞停滞"
-          },
-          {
-            "id": "reptile_0161",
-            "slug": "preovulatory-follicular-stasis-yolk-coelomitis",
-            "name": "Preovulatory Follicular Stasis (Yolk Coelomitis)",
-            "name_ja": "排卵前卵胞停滞（卵黄性体腔炎）"
-          }
-        ]
-      },
       {
         "base": "Osteomyelitis",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",

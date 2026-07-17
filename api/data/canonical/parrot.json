@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 283,
-    "merge_clusters": 16,
-    "records_merged_away": 17,
+    "merge_clusters": 17,
+    "records_merged_away": 20,
     "archived": 0,
-    "served_after": 266
+    "served_after": 263
   },
   "merges": [
     {
@@ -312,6 +312,37 @@
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
       "inherit_content": true,
       "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parrot_0001",
+        "slug": "proventricular-dilatation-disease-pdd-bornavirus",
+        "name": "Proventricular Dilatation Disease (PDD) / Bornavirus",
+        "name_ja": "腺胃拡張症（PDD）／ボルナウイルス感染症"
+      },
+      "merged": [
+        {
+          "id": "parrot_0160",
+          "slug": "proventricular-dilatation-disease-pdd-avian-bornavirus",
+          "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
+          "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）"
+        },
+        {
+          "id": "parrot_0161",
+          "slug": "proventricular-dilatation-disease",
+          "name": "Proventricular Dilatation Disease",
+          "name_ja": "前胃拡張症（オウム）"
+        },
+        {
+          "id": "parrot_0177",
+          "slug": "proventricular-dilatation-disease-pdd",
+          "name": "Proventricular Dilatation Disease (PDD)",
+          "name_ja": "前胃拡張症（PDD）（オウム）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
@@ -375,30 +406,6 @@
             "slug": "gastrointestinal-obstruction-partial",
             "name": "Gastrointestinal Obstruction (Partial)",
             "name_ja": "消化管部分閉塞（オウム）"
-          }
-        ]
-      },
-      {
-        "base": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parrot_0160",
-            "slug": "proventricular-dilatation-disease-pdd-avian-bornavirus",
-            "name": "Proventricular Dilatation Disease (PDD / Avian Bornavirus)",
-            "name_ja": "腺胃拡張症（PDD・トリボルナウイルス）"
-          },
-          {
-            "id": "parrot_0161",
-            "slug": "proventricular-dilatation-disease",
-            "name": "Proventricular Dilatation Disease",
-            "name_ja": "前胃拡張症（オウム）"
-          },
-          {
-            "id": "parrot_0177",
-            "slug": "proventricular-dilatation-disease-pdd",
-            "name": "Proventricular Dilatation Disease (PDD)",
-            "name_ja": "前胃拡張症（PDD）（オウム）"
           }
         ]
       },

@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 288,
-    "merge_clusters": 22,
-    "records_merged_away": 22,
+    "merge_clusters": 32,
+    "records_merged_away": 33,
     "archived": 0,
-    "served_after": 266
+    "served_after": 255
   },
   "merges": [
     {
@@ -418,85 +418,208 @@
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
       "inherit_content": true,
       "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0050",
+        "slug": "abscess-subcutaneous",
+        "name": "Abscess (Subcutaneous)",
+        "name_ja": "皮下膿瘍"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0201",
+          "slug": "abscess",
+          "name": "Abscess",
+          "name_ja": "膿瘍（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0079",
+        "slug": "mite-infestation",
+        "name": "Mite Infestation",
+        "name_ja": "ダニ寄生"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0190",
+          "slug": "mite-infestation-ophionyssus",
+          "name": "Mite Infestation (Ophionyssus)",
+          "name_ja": "ダニ症（Ophionyssus）（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0116",
+        "slug": "follicular-stasis-chronic",
+        "name": "Follicular Stasis (Chronic)",
+        "name_ja": "慢性濾胞停滞"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0178",
+          "slug": "follicular-stasis",
+          "name": "Follicular Stasis",
+          "name_ja": "卵胞停滞（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0221",
+        "slug": "anorexia-behavioral",
+        "name": "Anorexia (Behavioral)",
+        "name_ja": "拒食（行動性）（リクガメ）"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0262",
+          "slug": "anorexia-stress-related",
+          "name": "Anorexia (Stress-Related)",
+          "name_ja": "ストレス性拒食（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0017",
+        "slug": "flagellate-protozoa-infection",
+        "name": "Flagellate Protozoa Infection",
+        "name_ja": "鞭毛虫感染症"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0172",
+          "slug": "flagellate-protozoal-infection",
+          "name": "Flagellate Protozoal Infection",
+          "name_ja": "鞭毛虫原虫感染（リクガメ）"
+        },
+        {
+          "id": "tortoise_0196",
+          "slug": "flagellate-protozoan-infection",
+          "name": "Flagellate Protozoan Infection",
+          "name_ja": "鞭毛虫感染（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0008",
+        "slug": "mycoplasmosis-mycoplasma-agassizii-testudineum",
+        "name": "Mycoplasmosis (Mycoplasma agassizii / testudineum)",
+        "name_ja": "マイコプラズマ症"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0185",
+          "slug": "mycoplasma-infection",
+          "name": "Mycoplasma Infection",
+          "name_ja": "マイコプラズマ感染（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0018",
+        "slug": "coccidia-infection",
+        "name": "Coccidia Infection",
+        "name_ja": "コクシジウム症"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0195",
+          "slug": "coccidia",
+          "name": "Coccidia",
+          "name_ja": "コクシジウム（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0057",
+        "slug": "penile-prolapse",
+        "name": "Penile Prolapse",
+        "name_ja": "陰茎脱出"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0212",
+          "slug": "penile-hemipenal-prolapse",
+          "name": "Penile/Hemipenal Prolapse",
+          "name_ja": "陰茎/半陰茎脱（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0056",
+        "slug": "cloacal-prolapse",
+        "name": "Cloacal Prolapse",
+        "name_ja": "総排泄腔脱"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0222",
+          "slug": "rectal-cloacal-prolapse",
+          "name": "Rectal/Cloacal Prolapse",
+          "name_ja": "直腸/総排泄腔脱（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "tortoise_0115",
+        "slug": "egg-related-coelomitis",
+        "name": "Egg-related Coelomitis",
+        "name_ja": "卵関連体腔炎"
+      },
+      "merged": [
+        {
+          "id": "tortoise_0211",
+          "slug": "egg-yolk-coelomitis",
+          "name": "Egg Yolk Coelomitis",
+          "name_ja": "卵黄体腔炎（リクガメ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
-    "oversplit_subtypes": [
-      {
-        "base": "Abscess (Subcutaneous)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "tortoise_0050",
-            "slug": "abscess-subcutaneous",
-            "name": "Abscess (Subcutaneous)",
-            "name_ja": "皮下膿瘍"
-          },
-          {
-            "id": "tortoise_0201",
-            "slug": "abscess",
-            "name": "Abscess",
-            "name_ja": "膿瘍（リクガメ）"
-          }
-        ]
-      },
-      {
-        "base": "Mite Infestation",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "tortoise_0079",
-            "slug": "mite-infestation",
-            "name": "Mite Infestation",
-            "name_ja": "ダニ寄生"
-          },
-          {
-            "id": "tortoise_0190",
-            "slug": "mite-infestation-ophionyssus",
-            "name": "Mite Infestation (Ophionyssus)",
-            "name_ja": "ダニ症（Ophionyssus）（リクガメ）"
-          }
-        ]
-      },
-      {
-        "base": "Follicular Stasis (Chronic)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "tortoise_0116",
-            "slug": "follicular-stasis-chronic",
-            "name": "Follicular Stasis (Chronic)",
-            "name_ja": "慢性濾胞停滞"
-          },
-          {
-            "id": "tortoise_0178",
-            "slug": "follicular-stasis",
-            "name": "Follicular Stasis",
-            "name_ja": "卵胞停滞（リクガメ）"
-          }
-        ]
-      },
-      {
-        "base": "Anorexia (Behavioral)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "tortoise_0221",
-            "slug": "anorexia-behavioral",
-            "name": "Anorexia (Behavioral)",
-            "name_ja": "拒食（行動性）（リクガメ）"
-          },
-          {
-            "id": "tortoise_0262",
-            "slug": "anorexia-stress-related",
-            "name": "Anorexia (Stress-Related)",
-            "name_ja": "ストレス性拒食（リクガメ）"
-          }
-        ]
-      }
-    ],
+    "oversplit_subtypes": [],
     "split_families": [
       {
         "shared_stem": "respir",

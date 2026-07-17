@@ -1,10 +1,10 @@
 {
   "species": "guinea_pig",
   "view": "served",
-  "record_count": 310,
+  "record_count": 307,
   "T101": {
     "detector": "T101",
-    "total_records": 310,
+    "total_records": 307,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -47,43 +47,10 @@
             "name_ja": "干し草による鼻腔内刺入"
           }
         ]
-      },
-      {
-        "members": [
-          {
-            "id": "guinea_pig_0162",
-            "name": "Antibiotic Toxicity (Penicillin-class)",
-            "name_ja": "抗生物質毒性（ペニシリン系）"
-          },
-          {
-            "id": "guinea_pig_0163",
-            "name": "Antibiotic Toxicity (Lincosamide/Macrolide)",
-            "name_ja": "抗生物質毒性（リンコサミド/マクロライド系）"
-          },
-          {
-            "id": "guinea_pig_0290",
-            "name": "Antibiotic Toxicity",
-            "name_ja": "抗生物質毒性（モルモット）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "guinea_pig_0188",
-            "name": "Gastric Dilation Volvulus",
-            "name_ja": "胃拡張捻転"
-          },
-          {
-            "id": "guinea_pig_0310",
-            "name": "Gastric Dilation-Volvulus",
-            "name_ja": "胃拡張捻転（モルモット）"
-          }
-        ]
       }
     ],
-    "exact_duplicate_cluster_count": 5,
-    "redundant_record_count": 6,
+    "exact_duplicate_cluster_count": 3,
+    "redundant_record_count": 3,
     "family_clusters": [
       {
         "shared_stem": "pneumo",
@@ -297,37 +264,6 @@
             "id": "guinea_pig_0180",
             "name": "Anal Sac Impaction",
             "name_ja": "肛門嚢詰まり"
-          }
-        ]
-      },
-      {
-        "shared_stem": "antibi",
-        "size": 5,
-        "members": [
-          {
-            "id": "guinea_pig_0009",
-            "name": "Antibiotic-Associated Enterotoxemia",
-            "name_ja": "抗生物質関連腸毒素血症"
-          },
-          {
-            "id": "guinea_pig_0162",
-            "name": "Antibiotic Toxicity (Penicillin-class)",
-            "name_ja": "抗生物質毒性（ペニシリン系）"
-          },
-          {
-            "id": "guinea_pig_0163",
-            "name": "Antibiotic Toxicity (Lincosamide/Macrolide)",
-            "name_ja": "抗生物質毒性（リンコサミド/マクロライド系）"
-          },
-          {
-            "id": "guinea_pig_0202",
-            "name": "Antibiotic-Associated Diarrhea",
-            "name_ja": "抗生物質関連下痢（モルモット）"
-          },
-          {
-            "id": "guinea_pig_0290",
-            "name": "Antibiotic Toxicity",
-            "name_ja": "抗生物質毒性（モルモット）"
           }
         ]
       },
@@ -685,6 +621,27 @@
         ]
       },
       {
+        "shared_stem": "antibi",
+        "size": 3,
+        "members": [
+          {
+            "id": "guinea_pig_0009",
+            "name": "Antibiotic-Associated Enterotoxemia",
+            "name_ja": "抗生物質関連腸毒素血症"
+          },
+          {
+            "id": "guinea_pig_0162",
+            "name": "Antibiotic Toxicity (Penicillin-class)",
+            "name_ja": "抗生物質毒性（ペニシリン系）"
+          },
+          {
+            "id": "guinea_pig_0202",
+            "name": "Antibiotic-Associated Diarrhea",
+            "name_ja": "抗生物質関連下痢（モルモット）"
+          }
+        ]
+      },
+      {
         "shared_stem": "bordet",
         "size": 3,
         "members": [
@@ -870,27 +827,6 @@
             "id": "guinea_pig_0319",
             "name": "Pulmonary Fibrosis",
             "name_ja": "肺線維症（モルモット）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "gastri",
-        "size": 3,
-        "members": [
-          {
-            "id": "guinea_pig_0012",
-            "name": "Gastric Ulcers",
-            "name_ja": "胃潰瘍"
-          },
-          {
-            "id": "guinea_pig_0188",
-            "name": "Gastric Dilation Volvulus",
-            "name_ja": "胃拡張捻転"
-          },
-          {
-            "id": "guinea_pig_0310",
-            "name": "Gastric Dilation-Volvulus",
-            "name_ja": "胃拡張捻転（モルモット）"
           }
         ]
       },
@@ -1147,27 +1083,6 @@
         ]
       },
       {
-        "shared_stem": "toxici",
-        "size": 3,
-        "members": [
-          {
-            "id": "guinea_pig_0162",
-            "name": "Antibiotic Toxicity (Penicillin-class)",
-            "name_ja": "抗生物質毒性（ペニシリン系）"
-          },
-          {
-            "id": "guinea_pig_0163",
-            "name": "Antibiotic Toxicity (Lincosamide/Macrolide)",
-            "name_ja": "抗生物質毒性（リンコサミド/マクロライド系）"
-          },
-          {
-            "id": "guinea_pig_0290",
-            "name": "Antibiotic Toxicity",
-            "name_ja": "抗生物質毒性（モルモット）"
-          }
-        ]
-      },
-      {
         "shared_stem": "trixac",
         "size": 3,
         "members": [
@@ -1189,20 +1104,20 @@
         ]
       }
     ],
-    "family_cluster_count": 43
+    "family_cluster_count": 41
   },
   "T102": {
     "detector": "T102",
-    "total_records": 310,
+    "total_records": 307,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 310,
+    "total_records": 307,
     "empty_count": 0,
     "heading_only_count": 38,
-    "with_dosage_count": 272,
+    "with_dosage_count": 269,
     "empty": [],
     "heading_only": [
       {
@@ -1513,10 +1428,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 310,
+    "total_records": 307,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 126,
+    "drug_mismatch_count": 124,
     "citation_mismatch_count": 13,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -2399,20 +2314,43 @@
         "name_ja": "抗生物質毒性（ペニシリン系）",
         "drugs": [
           {
-            "drug": "Activated Charcoal",
-            "drug_ja": "活性炭",
+            "drug": "Erythromycin",
+            "drug_ja": "エリスロマイシン",
             "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "guinea_pig_0163",
-        "name": "Antibiotic Toxicity (Lincosamide/Macrolide)",
-        "name_ja": "抗生物質毒性（リンコサミド/マクロライド系）",
-        "drugs": [
+          },
+          {
+            "drug": "Morphine",
+            "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Ronidazole",
+            "drug_ja": "ロニダゾール",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Vancomycin",
+            "drug_ja": "バンコマイシン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Cholestyramine",
+            "drug_ja": "コレスチラミン",
+            "reason": "no dosing data for this species"
+          },
           {
             "drug": "Activated Charcoal",
             "drug_ja": "活性炭",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Lincomycin",
+            "drug_ja": "リンコマイシン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3070,53 +3008,6 @@
         ]
       },
       {
-        "id": "guinea_pig_0290",
-        "name": "Antibiotic Toxicity",
-        "name_ja": "抗生物質毒性（モルモット）",
-        "drugs": [
-          {
-            "drug": "Erythromycin",
-            "drug_ja": "エリスロマイシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Morphine",
-            "drug_ja": "モルヒネ",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ronidazole",
-            "drug_ja": "ロニダゾール",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Vancomycin",
-            "drug_ja": "バンコマイシン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Cholestyramine",
-            "drug_ja": "コレスチラミン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Activated Charcoal",
-            "drug_ja": "活性炭",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Apomorphine",
-            "drug_ja": "アポモルフィン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Lincomycin",
-            "drug_ja": "リンコマイシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "guinea_pig_0291",
         "name": "Wound Infection",
         "name_ja": "創傷感染（モルモット）",
@@ -3746,7 +3637,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 310,
+    "total_records": 307,
     "hit_count": 1,
     "safe_occurrences": 0,
     "review_occurrences": 1,

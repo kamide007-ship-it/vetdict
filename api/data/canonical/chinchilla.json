@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 278,
-    "merge_clusters": 30,
-    "records_merged_away": 40,
+    "merge_clusters": 31,
+    "records_merged_away": 41,
     "archived": 0,
-    "served_after": 238
+    "served_after": 237
   },
   "merges": [
     {
@@ -620,6 +620,25 @@
           "slug": "anemia",
           "name": "Anemia",
           "name_ja": "貧血（チンチラ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "chinchilla_0006",
+        "slug": "constipation",
+        "name": "Constipation",
+        "name_ja": "便秘"
+      },
+      "merged": [
+        {
+          "id": "chinchilla_0150",
+          "slug": "constipation-chronic",
+          "name": "Constipation - Chronic",
+          "name_ja": "便秘（慢性）"
         }
       ],
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",

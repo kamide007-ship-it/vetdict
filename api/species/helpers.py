@@ -119,9 +119,12 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
     """Remove duplicate disease entries within a single species list.
 
     Two entries are treated as the same disease when they share the same
-    case-insensitive English ``name`` OR the same non-empty ``name_ja``. Because
-    the UI renders ``name_ja`` (JA mode) or ``name`` (EN mode), any two entries
-    that collide on either would appear as identical cards to the user.
+    case-insensitive English ``name`` OR the same non-empty ``name_ja`` OR the
+    same English-name *slug* (so punctuation/spacing-only variants such as
+    "Egg Binding / Dystocia" vs "Egg Binding (Dystocia)" — which render as
+    identical URL slugs — collapse too). Because the UI renders ``name_ja`` (JA
+    mode) or ``name`` (EN mode), any two entries that collide on any of these
+    would appear as identical cards to the user.
 
     The richest entry (most non-empty content fields, then longest total
     content) is kept; ties resolve to the earliest entry. The relative order of
@@ -146,9 +149,12 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
 
     by_name: Dict[str, int] = {}
     by_ja: Dict[str, int] = {}
+    by_slug: Dict[str, int] = {}
     for i, e in enumerate(diseases):
-        nm = (_disease_field(e, "name", "") or _disease_field(e, "name_en", "") or "").strip().lower()
+        raw_nm = _disease_field(e, "name", "") or _disease_field(e, "name_en", "") or ""
+        nm = raw_nm.strip().lower()
         ja = (_disease_field(e, "name_ja", "") or "").strip()
+        slug = _re.sub(r"[^a-z0-9]+", "-", nm).strip("-")
         if nm:
             if nm in by_name:
                 union(i, by_name[nm])
@@ -159,6 +165,13 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
                 union(i, by_ja[ja])
             else:
                 by_ja[ja] = i
+        # Punctuation/spacing-only English variants share a slug (identical URL
+        # and identical rendered card) though their exact strings differ.
+        if slug:
+            if slug in by_slug:
+                union(i, by_slug[slug])
+            else:
+                by_slug[slug] = i
 
     groups: Dict[int, List[int]] = {}
     for i in range(len(diseases)):

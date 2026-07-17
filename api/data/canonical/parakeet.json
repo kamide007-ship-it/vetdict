@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 459,
-    "merge_clusters": 34,
-    "records_merged_away": 38,
+    "merge_clusters": 37,
+    "records_merged_away": 44,
     "archived": 0,
-    "served_after": 421
+    "served_after": 415
   },
   "merges": [
     {
@@ -119,10 +119,17 @@
           "slug": "testicular-tumor",
           "name": "Testicular Tumor",
           "name_ja": "精巣腫瘍（インコ）"
+        },
+        {
+          "id": "parakeet_0256",
+          "slug": "testicular-tumor-cere-color-change",
+          "name": "Testicular Tumor (Cere Color Change)",
+          "name_ja": "精巣腫瘍（ろう膜変色）（インコ）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
+      "inherit_content": true,
+      "curated": true
     },
     {
       "canonical": {
@@ -137,10 +144,23 @@
           "slug": "xanthoma",
           "name": "Xanthoma",
           "name_ja": "黄色腫（インコ）"
+        },
+        {
+          "id": "parakeet_0177",
+          "slug": "xanthoma-advanced",
+          "name": "Xanthoma (Advanced)",
+          "name_ja": "黄色腫（進行型）"
+        },
+        {
+          "id": "parakeet_0263",
+          "slug": "xanthoma-wing",
+          "name": "Xanthoma (Wing)",
+          "name_ja": "黄色腫（翼）（インコ）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
+      "inherit_content": true,
+      "curated": true
     },
     {
       "canonical": {
@@ -658,6 +678,63 @@
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
       "inherit_content": true,
       "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0034",
+        "slug": "hepatic-lipidosis-fatty-liver-disease",
+        "name": "Hepatic Lipidosis (Fatty Liver Disease)",
+        "name_ja": "肝リピドーシス（脂肪肝）"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0257",
+          "slug": "hepatic-lipidosis-seed-diet",
+          "name": "Hepatic Lipidosis (Seed Diet)",
+          "name_ja": "肝リピドーシス（種子食）（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0038",
+        "slug": "teflon-ptfe-toxicosis",
+        "name": "Teflon (PTFE) Toxicosis",
+        "name_ja": "テフロン中毒（PTFE中毒）"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0196",
+          "slug": "teflon-toxicosis-parakeet",
+          "name": "Teflon Toxicosis (Parakeet)",
+          "name_ja": "テフロン中毒（インコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "parakeet_0127",
+        "slug": "proventricular-ulceration",
+        "name": "Proventricular Ulceration",
+        "name_ja": "腺胃潰瘍"
+      },
+      "merged": [
+        {
+          "id": "parakeet_0226",
+          "slug": "proventricular-ulceration-budgerigar",
+          "name": "Proventricular Ulceration (Budgerigar)",
+          "name_ja": "前胃潰瘍（セキセイインコ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
@@ -703,96 +780,6 @@
             "slug": "gout-visceral-articular",
             "name": "Gout (Visceral/Articular)",
             "name_ja": "痛風（内臓型/関節型）（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Hepatic Lipidosis (Fatty Liver Disease)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0034",
-            "slug": "hepatic-lipidosis-fatty-liver-disease",
-            "name": "Hepatic Lipidosis (Fatty Liver Disease)",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "parakeet_0257",
-            "slug": "hepatic-lipidosis-seed-diet",
-            "name": "Hepatic Lipidosis (Seed Diet)",
-            "name_ja": "肝リピドーシス（種子食）（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Teflon (PTFE) Toxicosis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0038",
-            "slug": "teflon-ptfe-toxicosis",
-            "name": "Teflon (PTFE) Toxicosis",
-            "name_ja": "テフロン中毒（PTFE中毒）"
-          },
-          {
-            "id": "parakeet_0196",
-            "slug": "teflon-toxicosis-parakeet",
-            "name": "Teflon Toxicosis (Parakeet)",
-            "name_ja": "テフロン中毒（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Testicular Tumors",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0042",
-            "slug": "testicular-tumors",
-            "name": "Testicular Tumors",
-            "name_ja": "精巣腫瘍"
-          },
-          {
-            "id": "parakeet_0256",
-            "slug": "testicular-tumor-cere-color-change",
-            "name": "Testicular Tumor (Cere Color Change)",
-            "name_ja": "精巣腫瘍（ろう膜変色）（インコ）"
-          },
-          {
-            "id": "parakeet_0305",
-            "slug": "testicular-tumor",
-            "name": "Testicular Tumor",
-            "name_ja": "精巣腫瘍（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Xanthomas",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0043",
-            "slug": "xanthomas",
-            "name": "Xanthomas",
-            "name_ja": "黄色腫"
-          },
-          {
-            "id": "parakeet_0177",
-            "slug": "xanthoma-advanced",
-            "name": "Xanthoma (Advanced)",
-            "name_ja": "黄色腫（進行型）"
-          },
-          {
-            "id": "parakeet_0263",
-            "slug": "xanthoma-wing",
-            "name": "Xanthoma (Wing)",
-            "name_ja": "黄色腫（翼）（インコ）"
-          },
-          {
-            "id": "parakeet_0317",
-            "slug": "xanthoma",
-            "name": "Xanthoma",
-            "name_ja": "黄色腫（インコ）"
           }
         ]
       },
@@ -865,24 +852,6 @@
             "slug": "liver-disease-hepatic-lipidosis",
             "name": "Liver Disease (Hepatic Lipidosis)",
             "name_ja": "肝疾患（肝リピドーシス）（インコ）"
-          }
-        ]
-      },
-      {
-        "base": "Proventricular Ulceration",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "parakeet_0127",
-            "slug": "proventricular-ulceration",
-            "name": "Proventricular Ulceration",
-            "name_ja": "腺胃潰瘍"
-          },
-          {
-            "id": "parakeet_0226",
-            "slug": "proventricular-ulceration-budgerigar",
-            "name": "Proventricular Ulceration (Budgerigar)",
-            "name_ja": "前胃潰瘍（セキセイインコ）"
           }
         ]
       }

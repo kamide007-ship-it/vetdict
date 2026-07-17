@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 321,
-    "merge_clusters": 22,
-    "records_merged_away": 32,
+    "merge_clusters": 26,
+    "records_merged_away": 38,
     "archived": 0,
-    "served_after": 289
+    "served_after": 283
   },
   "merges": [
     {
@@ -480,36 +480,100 @@
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
       "inherit_content": true,
       "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0041",
+        "slug": "amyloidosis",
+        "name": "Amyloidosis",
+        "name_ja": "アミロイドーシス"
+      },
+      "merged": [
+        {
+          "id": "hamster_0166",
+          "slug": "amyloidosis-renal",
+          "name": "Amyloidosis - Renal",
+          "name_ja": "アミロイドーシス（腎型）"
+        },
+        {
+          "id": "hamster_0167",
+          "slug": "amyloidosis-hepatic",
+          "name": "Amyloidosis - Hepatic",
+          "name_ja": "アミロイドーシス（肝型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0086",
+        "slug": "hibernation-syndrome",
+        "name": "Hibernation Syndrome",
+        "name_ja": "冬眠症候群"
+      },
+      "merged": [
+        {
+          "id": "hamster_0170",
+          "slug": "hibernation-syndrome-mild",
+          "name": "Hibernation Syndrome - Mild",
+          "name_ja": "冬眠症候群（軽度）"
+        },
+        {
+          "id": "hamster_0171",
+          "slug": "hibernation-syndrome-severe",
+          "name": "Hibernation Syndrome - Severe",
+          "name_ja": "冬眠症候群（重度）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0092",
+        "slug": "intestinal-impaction",
+        "name": "Intestinal Impaction",
+        "name_ja": "腸閉塞（糞便嵌頓）"
+      },
+      "merged": [
+        {
+          "id": "hamster_0202",
+          "slug": "intestinal-obstruction",
+          "name": "Intestinal Obstruction",
+          "name_ja": "腸閉塞（ハムスター）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "hamster_0168",
+        "slug": "polycystic-disease-hepatic",
+        "name": "Polycystic Disease - Hepatic",
+        "name_ja": "多発性嚢胞性疾患（肝型）"
+      },
+      "merged": [
+        {
+          "id": "hamster_0169",
+          "slug": "polycystic-disease-renal",
+          "name": "Polycystic Disease - Renal",
+          "name_ja": "多発性嚢胞性疾患（腎型）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
-      {
-        "base": "Amyloidosis",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0041",
-            "slug": "amyloidosis",
-            "name": "Amyloidosis",
-            "name_ja": "アミロイドーシス"
-          },
-          {
-            "id": "hamster_0166",
-            "slug": "amyloidosis-renal",
-            "name": "Amyloidosis - Renal",
-            "name_ja": "アミロイドーシス（腎型）"
-          },
-          {
-            "id": "hamster_0167",
-            "slug": "amyloidosis-hepatic",
-            "name": "Amyloidosis - Hepatic",
-            "name_ja": "アミロイドーシス（肝型）"
-          }
-        ]
-      },
       {
         "base": "Eye Proptosis",
         "note": "mislabeled name_ja shared by clinically DISTINCT diseases — do NOT merge (rename pending)",
@@ -547,30 +611,6 @@
         ]
       },
       {
-        "base": "Hibernation Syndrome",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0086",
-            "slug": "hibernation-syndrome",
-            "name": "Hibernation Syndrome",
-            "name_ja": "冬眠症候群"
-          },
-          {
-            "id": "hamster_0170",
-            "slug": "hibernation-syndrome-mild",
-            "name": "Hibernation Syndrome - Mild",
-            "name_ja": "冬眠症候群（軽度）"
-          },
-          {
-            "id": "hamster_0171",
-            "slug": "hibernation-syndrome-severe",
-            "name": "Hibernation Syndrome - Severe",
-            "name_ja": "冬眠症候群（重度）"
-          }
-        ]
-      },
-      {
         "base": "Proliferative Ileitis (Chronic Form)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -585,42 +625,6 @@
             "slug": "proliferative-ileitis-wet-tail",
             "name": "Proliferative Ileitis (Wet Tail)",
             "name_ja": "増殖性回腸炎（ウェットテイル）"
-          }
-        ]
-      },
-      {
-        "base": "Intestinal Impaction",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0092",
-            "slug": "intestinal-impaction",
-            "name": "Intestinal Impaction",
-            "name_ja": "腸閉塞（糞便嵌頓）"
-          },
-          {
-            "id": "hamster_0202",
-            "slug": "intestinal-obstruction",
-            "name": "Intestinal Obstruction",
-            "name_ja": "腸閉塞（ハムスター）"
-          }
-        ]
-      },
-      {
-        "base": "Polycystic Disease - Hepatic",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "hamster_0168",
-            "slug": "polycystic-disease-hepatic",
-            "name": "Polycystic Disease - Hepatic",
-            "name_ja": "多発性嚢胞性疾患（肝型）"
-          },
-          {
-            "id": "hamster_0169",
-            "slug": "polycystic-disease-renal",
-            "name": "Polycystic Disease - Renal",
-            "name_ja": "多発性嚢胞性疾患（腎型）"
           }
         ]
       }

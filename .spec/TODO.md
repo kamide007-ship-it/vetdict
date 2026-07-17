@@ -148,6 +148,22 @@
         **未統合のまま**（例 dog アトピー⊂アレルギー性・Wobbler病型・HCC massive、chinchilla 巨大結腸症、
         parrot/exotic 肺炎 umbrella、bird 鉛神経型/卵停滞境界、snake Sunshine/Reptarena・四肢/甲羅骨折の
         リネーム、tortoise/lizard の✏️群）。獣医の1件ずつの ✅ で追加適用可。
+- [x] **第2波: ✏️同一疾患行の追加適用（承認「進みます」）** — `_CURATED_MERGE_VETFLAGGED`（独立tier）で
+      hamster/guinea_pig/chinchilla/reptile/tortoise/snake/lizard/parakeet/parrot/bird の
+      病期・重症度・種タグ・綴り・umbrella包含・合併症注記＝同一疾患の✏️行のみを適用。served 6,574→6,529。
+- [x] **(a) リネーム/アーカイブ（承認「a」）**:
+      - name_ja リネーム（rabbit方式・id保全・slug/URL不変）: parakeet_0155 ダニ寄生症→**マダニ寄生症**（マダニ≠ワクモ/羽ダニ 0024）、
+        snake_0147 サンシャインウイルス（ヘビ）→**封入体病（レプタレナウイルス）（ヘビ）**（真のSunshine 0005 と区別）。
+        supplementary/module のソース修正＋id_locks 新キー＋検索インデックス再生成。バックアップ済み。
+      - **アーカイブ**（`_CURATED_ARCHIVE`・配信から除外・非破壊）: 甲羅の無い種の「甲羅骨折」テンプレ汚染
+        snake_0212 / lizard_0217 / amphibian_0236（reptile/tortoise は甲羅ありで温存）。
+      - **保留**: bird 鉄蓄積症 0059/0415（non-hemochromatosis vs Hemochromatosis の英名矛盾＝獣医の命名整合が必要）。
+- [x] **(b) 同一スラッグ重複の解消（承認「b」）**: `dedupe_disease_list` に英名スラッグ一致キーを追加
+      （「A / B」vs「A (B)」など句読点/空白差で同一URLになる対を畳む）。全21種で重複スラッグ **0**。
+      served 総数 −約6件のみ（過剰畳み無し）。
+- [x] **(c) 親子/病型・umbrella の✏️（承認「c」）**: 臨床的に**別管理/別粒度**のため全て**分離維持**を推奨・現状維持
+      （dog アトピー⊂アレルギー性・Wobbler 椎間板/骨性・HCC massive型、parrot/exotic/bird 肺炎 umbrella vs 病因、
+      parrot GI閉塞 部分/完全）。統合すると「別疾患を1件に潰す」問題の再発になるため未統合。獣医の指示で個別に上書き可。
 
 ## フェーズ4：治療投与量（🟡ドラフト / 🔴公開）— **基盤完了（main）**
 - [x] **T105/T106 fail-closed 公開ゲート＋ワークリスト**（main, merged）→ `.spec/T105_T106_DOSAGE_GATE.md`

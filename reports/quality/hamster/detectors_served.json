@@ -1,30 +1,11 @@
 {
   "species": "hamster",
   "view": "served",
-  "record_count": 289,
+  "record_count": 283,
   "T101": {
     "detector": "T101",
-    "total_records": 289,
+    "total_records": 283,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "hamster_0041",
-            "name": "Amyloidosis",
-            "name_ja": "アミロイドーシス"
-          },
-          {
-            "id": "hamster_0166",
-            "name": "Amyloidosis - Renal",
-            "name_ja": "アミロイドーシス（腎型）"
-          },
-          {
-            "id": "hamster_0167",
-            "name": "Amyloidosis - Hepatic",
-            "name_ja": "アミロイドーシス（肝型）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -56,25 +37,6 @@
       {
         "members": [
           {
-            "id": "hamster_0086",
-            "name": "Hibernation Syndrome",
-            "name_ja": "冬眠症候群"
-          },
-          {
-            "id": "hamster_0170",
-            "name": "Hibernation Syndrome - Mild",
-            "name_ja": "冬眠症候群（軽度）"
-          },
-          {
-            "id": "hamster_0171",
-            "name": "Hibernation Syndrome - Severe",
-            "name_ja": "冬眠症候群（重度）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "hamster_0087",
             "name": "Proliferative Ileitis (Chronic Form)",
             "name_ja": "増殖性回腸炎（慢性型）"
@@ -85,38 +47,10 @@
             "name_ja": "増殖性回腸炎（ウェットテイル）"
           }
         ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0092",
-            "name": "Intestinal Impaction",
-            "name_ja": "腸閉塞（糞便嵌頓）"
-          },
-          {
-            "id": "hamster_0202",
-            "name": "Intestinal Obstruction",
-            "name_ja": "腸閉塞（ハムスター）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "hamster_0168",
-            "name": "Polycystic Disease - Hepatic",
-            "name_ja": "多発性嚢胞性疾患（肝型）"
-          },
-          {
-            "id": "hamster_0169",
-            "name": "Polycystic Disease - Renal",
-            "name_ja": "多発性嚢胞性疾患（腎型）"
-          }
-        ]
       }
     ],
-    "exact_duplicate_cluster_count": 7,
-    "redundant_record_count": 9,
+    "exact_duplicate_cluster_count": 3,
+    "redundant_record_count": 3,
     "family_clusters": [
       {
         "shared_stem": "tumor",
@@ -348,42 +282,6 @@
         ]
       },
       {
-        "shared_stem": "amyloi",
-        "size": 6,
-        "members": [
-          {
-            "id": "hamster_0041",
-            "name": "Amyloidosis",
-            "name_ja": "アミロイドーシス"
-          },
-          {
-            "id": "hamster_0136",
-            "name": "Renal Amyloidosis",
-            "name_ja": "腎アミロイドーシス"
-          },
-          {
-            "id": "hamster_0137",
-            "name": "Hepatic Amyloidosis",
-            "name_ja": "肝アミロイドーシス"
-          },
-          {
-            "id": "hamster_0138",
-            "name": "Cardiac Amyloidosis",
-            "name_ja": "心アミロイドーシス"
-          },
-          {
-            "id": "hamster_0166",
-            "name": "Amyloidosis - Renal",
-            "name_ja": "アミロイドーシス（腎型）"
-          },
-          {
-            "id": "hamster_0167",
-            "name": "Amyloidosis - Hepatic",
-            "name_ja": "アミロイドーシス（肝型）"
-          }
-        ]
-      },
-      {
         "shared_stem": "defici",
         "size": 6,
         "members": [
@@ -452,42 +350,6 @@
             "id": "hamster_0294",
             "name": "Gastric Dilation",
             "name_ja": "胃拡張（ハムスター）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "hepati",
-        "size": 6,
-        "members": [
-          {
-            "id": "hamster_0042",
-            "name": "Hepatic Lipidosis",
-            "name_ja": "肝リピドーシス（脂肪肝）"
-          },
-          {
-            "id": "hamster_0093",
-            "name": "Hepatic Tumor",
-            "name_ja": "肝臓腫瘍"
-          },
-          {
-            "id": "hamster_0137",
-            "name": "Hepatic Amyloidosis",
-            "name_ja": "肝アミロイドーシス"
-          },
-          {
-            "id": "hamster_0167",
-            "name": "Amyloidosis - Hepatic",
-            "name_ja": "アミロイドーシス（肝型）"
-          },
-          {
-            "id": "hamster_0168",
-            "name": "Polycystic Disease - Hepatic",
-            "name_ja": "多発性嚢胞性疾患（肝型）"
-          },
-          {
-            "id": "hamster_0285",
-            "name": "Hepatic Cyst",
-            "name_ja": "肝嚢胞（ハムスター）"
           }
         ]
       },
@@ -590,64 +452,33 @@
         ]
       },
       {
-        "shared_stem": "hibern",
+        "shared_stem": "hepati",
         "size": 5,
         "members": [
           {
-            "id": "hamster_0069",
-            "name": "Hibernation / Torpor",
-            "name_ja": "擬似冬眠"
+            "id": "hamster_0042",
+            "name": "Hepatic Lipidosis",
+            "name_ja": "肝リピドーシス（脂肪肝）"
           },
           {
-            "id": "hamster_0086",
-            "name": "Hibernation Syndrome",
-            "name_ja": "冬眠症候群"
+            "id": "hamster_0093",
+            "name": "Hepatic Tumor",
+            "name_ja": "肝臓腫瘍"
           },
           {
-            "id": "hamster_0170",
-            "name": "Hibernation Syndrome - Mild",
-            "name_ja": "冬眠症候群（軽度）"
+            "id": "hamster_0137",
+            "name": "Hepatic Amyloidosis",
+            "name_ja": "肝アミロイドーシス"
           },
           {
-            "id": "hamster_0171",
-            "name": "Hibernation Syndrome - Severe",
-            "name_ja": "冬眠症候群（重度）"
+            "id": "hamster_0168",
+            "name": "Polycystic Disease - Hepatic",
+            "name_ja": "多発性嚢胞性疾患（肝型）"
           },
           {
-            "id": "hamster_0189",
-            "name": "Hibernation Attempt (Torpor)",
-            "name_ja": "冬眠企図（休眠）（ハムスター）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "intest",
-        "size": 5,
-        "members": [
-          {
-            "id": "hamster_0033",
-            "name": "Intestinal Tumor",
-            "name_ja": "腸管腫瘍"
-          },
-          {
-            "id": "hamster_0091",
-            "name": "Intestinal Torsion",
-            "name_ja": "腸捻転"
-          },
-          {
-            "id": "hamster_0092",
-            "name": "Intestinal Impaction",
-            "name_ja": "腸閉塞（糞便嵌頓）"
-          },
-          {
-            "id": "hamster_0202",
-            "name": "Intestinal Obstruction",
-            "name_ja": "腸閉塞（ハムスター）"
-          },
-          {
-            "id": "hamster_0268",
-            "name": "Intestinal Parasitism (General)",
-            "name_ja": "腸管寄生虫症（一般）（ハムスター）"
+            "id": "hamster_0285",
+            "name": "Hepatic Cyst",
+            "name_ja": "肝嚢胞（ハムスター）"
           }
         ]
       },
@@ -714,37 +545,6 @@
         ]
       },
       {
-        "shared_stem": "renal",
-        "size": 5,
-        "members": [
-          {
-            "id": "hamster_0046",
-            "name": "Chronic Renal Failure",
-            "name_ja": "慢性腎不全"
-          },
-          {
-            "id": "hamster_0136",
-            "name": "Renal Amyloidosis",
-            "name_ja": "腎アミロイドーシス"
-          },
-          {
-            "id": "hamster_0166",
-            "name": "Amyloidosis - Renal",
-            "name_ja": "アミロイドーシス（腎型）"
-          },
-          {
-            "id": "hamster_0169",
-            "name": "Polycystic Disease - Renal",
-            "name_ja": "多発性嚢胞性疾患（腎型）"
-          },
-          {
-            "id": "hamster_0243",
-            "name": "Renal Carcinoma",
-            "name_ja": "腎癌（ハムスター）"
-          }
-        ]
-      },
-      {
         "shared_stem": "uterin",
         "size": 5,
         "members": [
@@ -772,6 +572,32 @@
             "id": "hamster_0278",
             "name": "Uterine Adenocarcinoma",
             "name_ja": "子宮腺癌（ハムスター）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "amyloi",
+        "size": 4,
+        "members": [
+          {
+            "id": "hamster_0041",
+            "name": "Amyloidosis",
+            "name_ja": "アミロイドーシス"
+          },
+          {
+            "id": "hamster_0136",
+            "name": "Renal Amyloidosis",
+            "name_ja": "腎アミロイドーシス"
+          },
+          {
+            "id": "hamster_0137",
+            "name": "Hepatic Amyloidosis",
+            "name_ja": "肝アミロイドーシス"
+          },
+          {
+            "id": "hamster_0138",
+            "name": "Cardiac Amyloidosis",
+            "name_ja": "心アミロイドーシス"
           }
         ]
       },
@@ -850,6 +676,32 @@
             "id": "hamster_0288",
             "name": "Adrenal Hyperplasia",
             "name_ja": "副腎過形成（ハムスター）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "intest",
+        "size": 4,
+        "members": [
+          {
+            "id": "hamster_0033",
+            "name": "Intestinal Tumor",
+            "name_ja": "腸管腫瘍"
+          },
+          {
+            "id": "hamster_0091",
+            "name": "Intestinal Torsion",
+            "name_ja": "腸捻転"
+          },
+          {
+            "id": "hamster_0092",
+            "name": "Intestinal Impaction",
+            "name_ja": "腸閉塞（糞便嵌頓）"
+          },
+          {
+            "id": "hamster_0268",
+            "name": "Intestinal Parasitism (General)",
+            "name_ja": "腸管寄生虫症（一般）（ハムスター）"
           }
         ]
       },
@@ -1053,6 +905,27 @@
         ]
       },
       {
+        "shared_stem": "hibern",
+        "size": 3,
+        "members": [
+          {
+            "id": "hamster_0069",
+            "name": "Hibernation / Torpor",
+            "name_ja": "擬似冬眠"
+          },
+          {
+            "id": "hamster_0086",
+            "name": "Hibernation Syndrome",
+            "name_ja": "冬眠症候群"
+          },
+          {
+            "id": "hamster_0189",
+            "name": "Hibernation Attempt (Torpor)",
+            "name_ja": "冬眠企図（休眠）（ハムスター）"
+          }
+        ]
+      },
+      {
         "shared_stem": "impact",
         "size": 3,
         "members": [
@@ -1221,27 +1094,6 @@
         ]
       },
       {
-        "shared_stem": "polycy",
-        "size": 3,
-        "members": [
-          {
-            "id": "hamster_0076",
-            "name": "Polycystic Disease",
-            "name_ja": "多嚢胞性疾患"
-          },
-          {
-            "id": "hamster_0168",
-            "name": "Polycystic Disease - Hepatic",
-            "name_ja": "多発性嚢胞性疾患（肝型）"
-          },
-          {
-            "id": "hamster_0169",
-            "name": "Polycystic Disease - Renal",
-            "name_ja": "多発性嚢胞性疾患（腎型）"
-          }
-        ]
-      },
-      {
         "shared_stem": "prolif",
         "size": 3,
         "members": [
@@ -1280,6 +1132,27 @@
             "id": "hamster_0301",
             "name": "Pulmonary Abscess",
             "name_ja": "肺膿瘍（ハムスター）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 3,
+        "members": [
+          {
+            "id": "hamster_0046",
+            "name": "Chronic Renal Failure",
+            "name_ja": "慢性腎不全"
+          },
+          {
+            "id": "hamster_0136",
+            "name": "Renal Amyloidosis",
+            "name_ja": "腎アミロイドーシス"
+          },
+          {
+            "id": "hamster_0243",
+            "name": "Renal Carcinoma",
+            "name_ja": "腎癌（ハムスター）"
           }
         ]
       },
@@ -1410,20 +1283,20 @@
         ]
       }
     ],
-    "family_cluster_count": 46
+    "family_cluster_count": 45
   },
   "T102": {
     "detector": "T102",
-    "total_records": 289,
+    "total_records": 283,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 289,
+    "total_records": 283,
     "empty_count": 0,
-    "heading_only_count": 27,
-    "with_dosage_count": 262,
+    "heading_only_count": 24,
+    "with_dosage_count": 259,
     "empty": [],
     "heading_only": [
       {
@@ -1448,14 +1321,6 @@
         "name_ja": "肥満",
         "treatment_ja_len": 485,
         "treatment_len": 597,
-        "has_dosage": false
-      },
-      {
-        "id": "hamster_0041",
-        "name": "Amyloidosis",
-        "name_ja": "アミロイドーシス",
-        "treatment_ja_len": 77,
-        "treatment_len": 182,
         "has_dosage": false
       },
       {
@@ -1512,6 +1377,14 @@
         "name_ja": "多嚢胞性疾患",
         "treatment_ja_len": 75,
         "treatment_len": 159,
+        "has_dosage": false
+      },
+      {
+        "id": "hamster_0086",
+        "name": "Hibernation Syndrome",
+        "name_ja": "冬眠症候群",
+        "treatment_ja_len": 913,
+        "treatment_len": 2360,
         "has_dosage": false
       },
       {
@@ -1587,30 +1460,6 @@
         "has_dosage": false
       },
       {
-        "id": "hamster_0169",
-        "name": "Polycystic Disease - Renal",
-        "name_ja": "多発性嚢胞性疾患（腎型）",
-        "treatment_ja_len": 65,
-        "treatment_len": 136,
-        "has_dosage": false
-      },
-      {
-        "id": "hamster_0170",
-        "name": "Hibernation Syndrome - Mild",
-        "name_ja": "冬眠症候群（軽度）",
-        "treatment_ja_len": 913,
-        "treatment_len": 2360,
-        "has_dosage": false
-      },
-      {
-        "id": "hamster_0171",
-        "name": "Hibernation Syndrome - Severe",
-        "name_ja": "冬眠症候群（重度）",
-        "treatment_ja_len": 199,
-        "treatment_len": 158,
-        "has_dosage": false
-      },
-      {
         "id": "hamster_0175",
         "name": "Dental Overgrowth (Molar)",
         "name_ja": "臼歯過長",
@@ -1646,10 +1495,10 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 289,
+    "total_records": 283,
     "drug_available": 610,
     "ref_keys_available": 30,
-    "drug_mismatch_count": 96,
+    "drug_mismatch_count": 95,
     "citation_mismatch_count": 15,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -2380,18 +2229,6 @@
           {
             "drug": "Activated Charcoal",
             "drug_ja": "活性炭",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "hamster_0169",
-        "name": "Polycystic Disease - Renal",
-        "name_ja": "多発性嚢胞性疾患（腎型）",
-        "drugs": [
-          {
-            "drug": "Erythropoietin (EPO)",
-            "drug_ja": "エリスロポエチン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -3317,7 +3154,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 289,
+    "total_records": 283,
     "hit_count": 1,
     "safe_occurrences": 0,
     "review_occurrences": 1,

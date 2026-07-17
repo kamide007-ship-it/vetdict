@@ -1,9 +1,9 @@
 # VetDict 品質検出レポート — amphibian
 
-- 総レコード数: **251**
+- 総レコード数: **250**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **8** （冗長レコード 9 件）
+- 完全一致重複クラスタ: **7** （冗長レコード 8 件）
 - 疾患ファミリー候補（過分割の疑い, ≥3件）: **32**
 
 ### 完全一致重複（上位20）
@@ -14,7 +14,6 @@
 - 食欲不振（多因子性）（Anorexia (Multifactorial)）[amphibian_0052] / 拒食（行動性）（両生類）（Anorexia (Behavioral)）[amphibian_0223]
 - ダニ寄生症（ハンネマニア）（Mite Infestation (Hannemania)）[amphibian_0082] / ダニ寄生症（マダニ）（Tick Infestation）[amphibian_0084] / ダニ症（Ophionyssus）（両生類）（Mite Infestation (Ophionyssus)）[amphibian_0191]
 - 痛風（内臓型）（両生類）（Gout (Visceral)）[amphibian_0207] / 痛風（関節型）（両生類）（Gout (Articular)）[amphibian_0208]
-- 四肢骨折（両生類）（Fracture (Limb)）[amphibian_0235] / 甲羅骨折（両生類）（Fracture (Shell/Carapace)）[amphibian_0236]
 
 ### 疾患ファミリー候補（上位15）
 - stem=`amphib` × 9件
@@ -96,11 +95,6 @@
     - 繁殖障害・卵停滞（Reproductive Failure / Egg Retention）[amphibian_0114]
     - うっ血性心不全（Congestive Heart Failure）[amphibian_0120]
     - 変態障害（幼形成熟合併症）（Metamorphosis Failure (Neoteny Complications)）[amphibian_0129]
-- stem=`fractu` × 4件
-    - 四肢骨折・外傷（Limb Fractures / Trauma）[amphibian_0092]
-    - 脊椎損傷・椎体骨折（Spinal Injury / Vertebral Fracture）[amphibian_0093]
-    - 四肢骨折（両生類）（Fracture (Limb)）[amphibian_0235]
-    - 甲羅骨折（両生類）（Fracture (Shell/Carapace)）[amphibian_0236]
 - stem=`gastri` × 4件
     - 胃過負荷（Gastric Overload）[amphibian_0038]
     - 胃脱（Gastric Prolapse）[amphibian_0040]
@@ -116,6 +110,11 @@
     - 化学物質中毒（農薬・重金属）（Chemical Toxicity (Pesticides/Metals)）[amphibian_0028]
     - 高硝酸塩毒性（High Nitrate Toxicity）[amphibian_0106]
     - 両生類オゾン・クロラミン中毒（水処理）（Amphibian Ozone / Chloramine Toxicity (Water Treatment)）[amphibian_0155]
+- stem=`tumor` × 4件
+    - 腫瘍性疾患（Neoplasia / Tumors）[amphibian_0044]
+    - ルッケ腫瘍ヘルペスウイルス（腎癌）（Lucke Tumor Herpesvirus (Renal Carcinoma)）[amphibian_0058]
+    - 精巣腫瘍（両生類）（Testicular Tumor）[amphibian_0216]
+    - 卵巣腫瘍（両生類）（Ovarian Tumor）[amphibian_0217]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
@@ -123,7 +122,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **28**
-- 投与量あり: **223**
+- 投与量あり: **222**
 
 ### 投与量なし（上位30）
 - スピンドリーレッグ症候群（Spindly Leg Syndrome）[amphibian_0042] — ja:888字 / en:2170字
@@ -156,7 +155,7 @@
 - 拒食（行動性）（両生類）（Anorexia (Behavioral)）[amphibian_0223] — ja:477字 / en:1139字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **215** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **214** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **7** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）

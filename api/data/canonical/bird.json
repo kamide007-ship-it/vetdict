@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 551,
-    "merge_clusters": 44,
-    "records_merged_away": 47,
+    "merge_clusters": 47,
+    "records_merged_away": 51,
     "archived": 0,
-    "served_after": 504
+    "served_after": 500
   },
   "merges": [
     {
@@ -228,10 +228,17 @@
           "slug": "lead-poisoning",
           "name": "Lead Poisoning",
           "name_ja": "鉛中毒（鳥）"
+        },
+        {
+          "id": "bird_0079",
+          "slug": "lead-poisoning-neurological",
+          "name": "Lead Poisoning (Neurological)",
+          "name_ja": "鉛中毒（神経型）"
         }
       ],
       "reason": "same disease modulo species tag / identical name",
-      "inherit_content": true
+      "inherit_content": true,
+      "curated": true
     },
     {
       "canonical": {
@@ -844,6 +851,63 @@
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
       "inherit_content": true,
       "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0048",
+        "slug": "renal-failure-acute-chronic",
+        "name": "Renal Failure (Acute / Chronic)",
+        "name_ja": "腎不全（急性／慢性）"
+      },
+      "merged": [
+        {
+          "id": "bird_0445",
+          "slug": "renal-failure-acute",
+          "name": "Renal Failure (Acute)",
+          "name_ja": "急性腎不全（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0295",
+        "slug": "egg-retention-pre-laying",
+        "name": "Egg Retention (Pre-laying)",
+        "name_ja": "卵停滞（産卵前）"
+      },
+      "merged": [
+        {
+          "id": "bird_0383",
+          "slug": "retained-egg",
+          "name": "Retained Egg",
+          "name_ja": "卵停滞（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "bird_0406",
+        "slug": "bumblefoot-pododermatitis",
+        "name": "Bumblefoot (Pododermatitis)",
+        "name_ja": "バンブルフット（足底皮膚炎）（鳥）"
+      },
+      "merged": [
+        {
+          "id": "bird_0349",
+          "slug": "bumblefoot-advanced-surgical",
+          "name": "Bumblefoot (Advanced/Surgical)",
+          "name_ja": "バンブルフット（進行/外科）（鳥）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
   "archives": [],
@@ -869,24 +933,6 @@
         ]
       },
       {
-        "base": "Renal Failure (Acute / Chronic)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0048",
-            "slug": "renal-failure-acute-chronic",
-            "name": "Renal Failure (Acute / Chronic)",
-            "name_ja": "腎不全（急性／慢性）"
-          },
-          {
-            "id": "bird_0445",
-            "slug": "renal-failure-acute",
-            "name": "Renal Failure (Acute)",
-            "name_ja": "急性腎不全（鳥）"
-          }
-        ]
-      },
-      {
         "base": "Iron Storage Disease (non-hemochromatosis)",
         "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
         "members": [
@@ -901,66 +947,6 @@
             "slug": "iron-storage-disease-hemochromatosis",
             "name": "Iron Storage Disease (Hemochromatosis)",
             "name_ja": "鉄蓄積症（ヘモクロマトーシス）（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Lead Poisoning (Neurological)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0079",
-            "slug": "lead-poisoning-neurological",
-            "name": "Lead Poisoning (Neurological)",
-            "name_ja": "鉛中毒（神経型）"
-          },
-          {
-            "id": "bird_0111",
-            "slug": "lead-poisoning-plumbism",
-            "name": "Lead Poisoning (Plumbism)",
-            "name_ja": "鉛中毒"
-          },
-          {
-            "id": "bird_0460",
-            "slug": "lead-poisoning",
-            "name": "Lead Poisoning",
-            "name_ja": "鉛中毒（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Egg Retention (Pre-laying)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0295",
-            "slug": "egg-retention-pre-laying",
-            "name": "Egg Retention (Pre-laying)",
-            "name_ja": "卵停滞（産卵前）"
-          },
-          {
-            "id": "bird_0383",
-            "slug": "retained-egg",
-            "name": "Retained Egg",
-            "name_ja": "卵停滞（鳥）"
-          }
-        ]
-      },
-      {
-        "base": "Bumblefoot (Advanced/Surgical)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "bird_0349",
-            "slug": "bumblefoot-advanced-surgical",
-            "name": "Bumblefoot (Advanced/Surgical)",
-            "name_ja": "バンブルフット（進行/外科）（鳥）"
-          },
-          {
-            "id": "bird_0406",
-            "slug": "bumblefoot-pododermatitis",
-            "name": "Bumblefoot (Pododermatitis)",
-            "name_ja": "バンブルフット（足底皮膚炎）（鳥）"
           }
         ]
       },

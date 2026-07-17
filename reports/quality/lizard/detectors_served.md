@@ -1,10 +1,10 @@
 # VetDict 品質検出レポート — lizard
 
-- 総レコード数: **222**
+- 総レコード数: **219**
 
 ## T101 重複 / 過分割
 - 完全一致重複クラスタ: **2** （冗長レコード 3 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **22**
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **20**
 
 ### 完全一致重複（上位20）
 - アデノウイルス感染症（非アタデノ）（Adenovirus Infection (Non-Atadenovirus)）[lizard_0010] / アデノウイルス感染（トカゲ）（Adenovirus Infection）[lizard_0164]
@@ -47,12 +47,6 @@
     - 床材インパクション（消化管外型）（Substrate Impaction (Non-GI)）[lizard_0125]
     - 砂停滞（トカゲ）（Sand Impaction）[lizard_0155]
     - 大腿腺閉塞（トカゲ）（Femoral Pore Impaction）[lizard_0158]
-- stem=`prolap` × 5件
-    - 総排泄腔脱（Cloacal Prolapse）[lizard_0048]
-    - 半陰茎脱出（Hemipenal Prolapse）[lizard_0049]
-    - 臓器脱（胃・腸）（Organ Prolapse (Gastric/Intestinal)）[lizard_0133]
-    - 腸脱（トカゲ）（Intestinal Prolapse）[lizard_0201]
-    - 直腸/総排泄腔脱（トカゲ）（Rectal/Cloacal Prolapse）[lizard_0205]
 - stem=`tail` × 5件
     - 自切部位感染（Tail Autotomy Infection）[lizard_0031]
     - 自切合併症（トカゲ）（Tail Autotomy Complication）[lizard_0147]
@@ -75,11 +69,11 @@
     - マダニ寄生（Tick Infestation）[lizard_0027]
     - ツツガムシ寄生症（Chigger Mite Infestation (Trombiculidae)）[lizard_0099]
     - ヒル寄生症（Leech Infestation）[lizard_0100]
-- stem=`respir` × 4件
-    - 上部呼吸器感染症（Upper Respiratory Infection (URI)）[lizard_0017]
-    - 慢性呼吸器疾患複合（Chronic Respiratory Disease Complex）[lizard_0132]
-    - 呼吸器感染症（トカゲ）（Respiratory Infection）[lizard_0160]
-    - 上部気道疾患（トカゲ）（Upper Respiratory Tract Disease）[lizard_0208]
+- stem=`prolap` × 4件
+    - 総排泄腔脱（Cloacal Prolapse）[lizard_0048]
+    - 半陰茎脱出（Hemipenal Prolapse）[lizard_0049]
+    - 臓器脱（胃・腸）（Organ Prolapse (Gastric/Intestinal)）[lizard_0133]
+    - 腸脱（トカゲ）（Intestinal Prolapse）[lizard_0201]
 - stem=`anorex` × 3件
     - 食欲不振（非特異的）（Anorexia (Non-specific)）[lizard_0055]
     - 拒食（行動性）（トカゲ）（Anorexia (Behavioral)）[lizard_0204]
@@ -92,10 +86,14 @@
     - 扁平上皮癌（Squamous Cell Carcinoma）[lizard_0059]
     - 肝細胞癌（Hepatocellular Carcinoma）[lizard_0061]
     - 腎細胞癌（Renal Cell Carcinoma）[lizard_0106]
-- stem=`cloaca` × 3件
-    - 総排泄腔脱（Cloacal Prolapse）[lizard_0048]
-    - 総排泄腔結石（Cloacal Calculi）[lizard_0113]
-    - 直腸/総排泄腔脱（トカゲ）（Rectal/Cloacal Prolapse）[lizard_0205]
+- stem=`gout` × 3件
+    - 関節痛風（Articular Gout）[lizard_0050]
+    - 内臓痛風（Visceral Gout）[lizard_0051]
+    - 高尿酸血症（Hyperuricemia / Pre-gout）[lizard_0118]
+- stem=`intest` × 3件
+    - 腸捻転・腸重積（Intestinal Volvulus / Intussusception）[lizard_0126]
+    - 腸閉塞（トカゲ）（Intestinal Obstruction）[lizard_0200]
+    - 腸脱（トカゲ）（Intestinal Prolapse）[lizard_0201]
 
 ## T102 非臨床エントリ
 - フラグ数: **0**
@@ -103,7 +101,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **46**
-- 投与量あり: **176**
+- 投与量あり: **173**
 
 ### 投与量なし（上位30）
 - ビタミンD3欠乏症（Vitamin D3 Deficiency）[lizard_0003] — ja:76字 / en:476字
@@ -138,7 +136,7 @@
 - ラブディアス肺虫症（Rhabdias Lungworm）[lizard_0094] — ja:168字 / en:193字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **80** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **79** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **10** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
