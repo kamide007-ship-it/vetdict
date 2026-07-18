@@ -193,8 +193,11 @@
       - 副産物（用量ではない degu 特異的参照）: Helicobacter 心筋炎（Mack 2025）・Trichuris 鞭虫（Babero 1975）＝
         病因の出典候補。麻酔 MAC iso1.75%/sevo2.25%（Ikai 2024）＝麻酔モジュール向け。
       - fail-closed ゲート維持（`test_treatment_publish_gate` 6 pass、served 公開0件）。
-- [ ] **獣医の人手作業待ち**: 毛包虫症ドラフト（grade A）をレビュー→ `published`；残り11件は Carpenter 参照で
-      用量＋出典を記入 → `approved` → `published`（🔴・自動公開しない）
+- [x] **毛包虫症 grade-A 用量を公開（獣医承認「承認します」）**: `treatment_overrides/degu.json` の
+      fur-mites を `review_status=published` に。ゲート実測で degu 配信は**この1件のみ**（sources 付き・
+      用量 mg/kg 記載を検証）。`test_treatment_publish_gate` を「degu は vet 承認済みの sourced 用量のみ公開」に更新（6 pass）。
+      **これが T106 公開ゲートの初の実公開**（人間の獣医が review→published、fail-closed 維持）。
+- [ ] **獣医の人手作業待ち**: 残り11件は Carpenter 参照で用量＋出典を記入 → `approved` → `published`（🔴・自動公開しない）
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`

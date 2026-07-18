@@ -80,7 +80,14 @@ def test_no_map_is_noop():
     assert to.apply_treatment_overrides(recs, "no_such_species") is recs
 
 
-def test_degu_worklist_publishes_nothing():
-    # The generated degu worklist is all drafts -> nothing is served.
+def test_degu_publishes_only_vet_approved_sourced_doses():
+    # Fur mites is the one vet-approved, PubMed-sourced grade-A dose (published).
+    # Every other degu entry stays draft and must NOT be served. Fail-closed:
+    # any served entry must carry sources and a real dose.
+    to.load_overrides.cache_clear()
+    to._published_index.cache_clear()
     idx = to._published_index("degu")
-    assert idx == {}
+    assert set(idx) == {"fur-mites-demodex-notoedres"}, idx
+    entry = idx["fur-mites-demodex-notoedres"]
+    assert entry["sources"], "published dose must be cited (fail-closed)"
+    assert "mg/kg" in entry["treatment_ja"], "published entry must carry an actual dose"
