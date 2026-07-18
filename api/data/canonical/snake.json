@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 248,
-    "merge_clusters": 16,
-    "records_merged_away": 17,
-    "archived": 0,
-    "served_after": 231
+    "merge_clusters": 22,
+    "records_merged_away": 24,
+    "archived": 1,
+    "served_after": 223
   },
   "merges": [
     {
@@ -132,6 +132,12 @@
           "slug": "snake-mite-ophionyssus-natricis",
           "name": "Snake Mite (Ophionyssus natricis)",
           "name_ja": "ヘビダニ（ヘビ）"
+        },
+        {
+          "id": "snake_0163",
+          "slug": "mite-infestation-ophionyssus",
+          "name": "Mite Infestation (Ophionyssus)",
+          "name_ja": "ダニ症（Ophionyssus）（ヘビ）"
         }
       ],
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
@@ -314,9 +320,131 @@
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
       "inherit_content": true,
       "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0001",
+        "slug": "paramyxovirus-infection",
+        "name": "Paramyxovirus Infection",
+        "name_ja": "パラミクソウイルス感染症"
+      },
+      "merged": [
+        {
+          "id": "snake_0156",
+          "slug": "paramyxovirus",
+          "name": "Paramyxovirus",
+          "name_ja": "パラミクソウイルス（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0051",
+        "slug": "spinal-osteopathy-spondylosis",
+        "name": "Spinal Osteopathy / Spondylosis",
+        "name_ja": "脊椎骨症/脊椎症"
+      },
+      "merged": [
+        {
+          "id": "snake_0151",
+          "slug": "spinal-osteopathy",
+          "name": "Spinal Osteopathy",
+          "name_ja": "脊椎骨症（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0045",
+        "slug": "hemipenal-prolapse",
+        "name": "Hemipenal Prolapse",
+        "name_ja": "半陰茎脱出"
+      },
+      "merged": [
+        {
+          "id": "snake_0187",
+          "slug": "penile-hemipenal-prolapse",
+          "name": "Penile/Hemipenal Prolapse",
+          "name_ja": "陰茎/半陰茎脱（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0089",
+        "slug": "flagellate-protozoal-infection",
+        "name": "Flagellate Protozoal Infection",
+        "name_ja": "鞭毛虫感染症"
+      },
+      "merged": [
+        {
+          "id": "snake_0169",
+          "slug": "flagellate-protozoan-infection",
+          "name": "Flagellate Protozoan Infection",
+          "name_ja": "鞭毛虫感染（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0049",
+        "slug": "visceral-gout",
+        "name": "Visceral Gout",
+        "name_ja": "内臓痛風"
+      },
+      "merged": [
+        {
+          "id": "snake_0180",
+          "slug": "gout-visceral",
+          "name": "Gout (Visceral)",
+          "name_ja": "痛風（内臓型）（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "snake_0048",
+        "slug": "articular-gout",
+        "name": "Articular Gout",
+        "name_ja": "関節痛風"
+      },
+      "merged": [
+        {
+          "id": "snake_0181",
+          "slug": "gout-articular",
+          "name": "Gout (Articular)",
+          "name_ja": "痛風（関節型）（ヘビ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
-  "archives": [],
+  "archives": [
+    {
+      "id": "snake_0212",
+      "slug": "fracture-shell-carapace",
+      "name": "Fracture (Shell/Carapace)",
+      "name_ja": "甲羅骨折（ヘビ）",
+      "reason": "spurious template contamination — disease impossible in this species (vet review)"
+    }
+  ],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [
@@ -383,24 +511,6 @@
             "slug": "anorexia-stress-related",
             "name": "Anorexia (Stress-Related)",
             "name_ja": "ストレス性拒食（ヘビ）"
-          }
-        ]
-      },
-      {
-        "base": "Gout (Visceral)",
-        "note": "detect grouped these by base name; differ by qualifier — review whether subtypes or duplicates",
-        "members": [
-          {
-            "id": "snake_0180",
-            "slug": "gout-visceral",
-            "name": "Gout (Visceral)",
-            "name_ja": "痛風（内臓型）（ヘビ）"
-          },
-          {
-            "id": "snake_0181",
-            "slug": "gout-articular",
-            "name": "Gout (Articular)",
-            "name_ja": "痛風（関節型）（ヘビ）"
           }
         ]
       },

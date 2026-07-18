@@ -1,10 +1,10 @@
 {
   "species": "amphibian",
   "view": "served",
-  "record_count": 251,
+  "record_count": 250,
   "T101": {
     "detector": "T101",
-    "total_records": 251,
+    "total_records": 250,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -108,24 +108,10 @@
             "name_ja": "痛風（関節型）（両生類）"
           }
         ]
-      },
-      {
-        "members": [
-          {
-            "id": "amphibian_0235",
-            "name": "Fracture (Limb)",
-            "name_ja": "四肢骨折（両生類）"
-          },
-          {
-            "id": "amphibian_0236",
-            "name": "Fracture (Shell/Carapace)",
-            "name_ja": "甲羅骨折（両生類）"
-          }
-        ]
       }
     ],
-    "exact_duplicate_cluster_count": 8,
-    "redundant_record_count": 9,
+    "exact_duplicate_cluster_count": 7,
+    "redundant_record_count": 8,
     "family_clusters": [
       {
         "shared_stem": "amphib",
@@ -534,32 +520,6 @@
         ]
       },
       {
-        "shared_stem": "fractu",
-        "size": 4,
-        "members": [
-          {
-            "id": "amphibian_0092",
-            "name": "Limb Fractures / Trauma",
-            "name_ja": "四肢骨折・外傷"
-          },
-          {
-            "id": "amphibian_0093",
-            "name": "Spinal Injury / Vertebral Fracture",
-            "name_ja": "脊椎損傷・椎体骨折"
-          },
-          {
-            "id": "amphibian_0235",
-            "name": "Fracture (Limb)",
-            "name_ja": "四肢骨折（両生類）"
-          },
-          {
-            "id": "amphibian_0236",
-            "name": "Fracture (Shell/Carapace)",
-            "name_ja": "甲羅骨折（両生類）"
-          }
-        ]
-      },
-      {
         "shared_stem": "gastri",
         "size": 4,
         "members": [
@@ -723,6 +683,27 @@
             "id": "amphibian_0139",
             "name": "Dendrobatid Chytridiomycosis (Bd - Dart Frog)",
             "name_ja": "ヤドクガエルツボカビ症"
+          }
+        ]
+      },
+      {
+        "shared_stem": "fractu",
+        "size": 3,
+        "members": [
+          {
+            "id": "amphibian_0092",
+            "name": "Limb Fractures / Trauma",
+            "name_ja": "四肢骨折・外傷"
+          },
+          {
+            "id": "amphibian_0093",
+            "name": "Spinal Injury / Vertebral Fracture",
+            "name_ja": "脊椎損傷・椎体骨折"
+          },
+          {
+            "id": "amphibian_0235",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（両生類）"
           }
         ]
       },
@@ -1004,16 +985,16 @@
   },
   "T102": {
     "detector": "T102",
-    "total_records": 251,
+    "total_records": 250,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 251,
+    "total_records": 250,
     "empty_count": 0,
     "heading_only_count": 28,
-    "with_dosage_count": 223,
+    "with_dosage_count": 222,
     "empty": [],
     "heading_only": [
       {
@@ -1244,14 +1225,14 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 251,
+    "total_records": 250,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_corpus_loaded": true,
     "citation_corpus_loaded": true,
     "corpus_incomplete": false,
     "corpus_warning": null,
-    "drug_mismatch_count": 215,
+    "drug_mismatch_count": 214,
     "citation_mismatch_count": 7,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -6179,28 +6160,6 @@
         ]
       },
       {
-        "id": "amphibian_0236",
-        "name": "Fracture (Shell/Carapace)",
-        "name_ja": "甲羅骨折（両生類）",
-        "drugs": [
-          {
-            "drug": "Meloxicam",
-            "drug_ja": "メロキシカム",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Chlorhexidine",
-            "drug_ja": "クロルヘキシジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Ceftazidime",
-            "drug_ja": "セフタジジム",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "amphibian_0237",
         "name": "Osteoarthritis",
         "name_ja": "変形性関節症（両生類）",
@@ -6655,7 +6614,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 251,
+    "total_records": 250,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

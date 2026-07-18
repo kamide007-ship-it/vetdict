@@ -1,10 +1,10 @@
 {
   "species": "lizard",
   "view": "served",
-  "record_count": 222,
+  "record_count": 219,
   "T101": {
     "detector": "T101",
-    "total_records": 222,
+    "total_records": 219,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -229,37 +229,6 @@
         ]
       },
       {
-        "shared_stem": "prolap",
-        "size": 5,
-        "members": [
-          {
-            "id": "lizard_0048",
-            "name": "Cloacal Prolapse",
-            "name_ja": "総排泄腔脱"
-          },
-          {
-            "id": "lizard_0049",
-            "name": "Hemipenal Prolapse",
-            "name_ja": "半陰茎脱出"
-          },
-          {
-            "id": "lizard_0133",
-            "name": "Organ Prolapse (Gastric/Intestinal)",
-            "name_ja": "臓器脱（胃・腸）"
-          },
-          {
-            "id": "lizard_0201",
-            "name": "Intestinal Prolapse",
-            "name_ja": "腸脱（トカゲ）"
-          },
-          {
-            "id": "lizard_0205",
-            "name": "Rectal/Cloacal Prolapse",
-            "name_ja": "直腸/総排泄腔脱（トカゲ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "tail",
         "size": 5,
         "members": [
@@ -374,28 +343,28 @@
         ]
       },
       {
-        "shared_stem": "respir",
+        "shared_stem": "prolap",
         "size": 4,
         "members": [
           {
-            "id": "lizard_0017",
-            "name": "Upper Respiratory Infection (URI)",
-            "name_ja": "上部呼吸器感染症"
+            "id": "lizard_0048",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
           },
           {
-            "id": "lizard_0132",
-            "name": "Chronic Respiratory Disease Complex",
-            "name_ja": "慢性呼吸器疾患複合"
+            "id": "lizard_0049",
+            "name": "Hemipenal Prolapse",
+            "name_ja": "半陰茎脱出"
           },
           {
-            "id": "lizard_0160",
-            "name": "Respiratory Infection",
-            "name_ja": "呼吸器感染症（トカゲ）"
+            "id": "lizard_0133",
+            "name": "Organ Prolapse (Gastric/Intestinal)",
+            "name_ja": "臓器脱（胃・腸）"
           },
           {
-            "id": "lizard_0208",
-            "name": "Upper Respiratory Tract Disease",
-            "name_ja": "上部気道疾患（トカゲ）"
+            "id": "lizard_0201",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱（トカゲ）"
           }
         ]
       },
@@ -463,48 +432,6 @@
         ]
       },
       {
-        "shared_stem": "cloaca",
-        "size": 3,
-        "members": [
-          {
-            "id": "lizard_0048",
-            "name": "Cloacal Prolapse",
-            "name_ja": "総排泄腔脱"
-          },
-          {
-            "id": "lizard_0113",
-            "name": "Cloacal Calculi",
-            "name_ja": "総排泄腔結石"
-          },
-          {
-            "id": "lizard_0205",
-            "name": "Rectal/Cloacal Prolapse",
-            "name_ja": "直腸/総排泄腔脱（トカゲ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "fractu",
-        "size": 3,
-        "members": [
-          {
-            "id": "lizard_0108",
-            "name": "Spinal Fracture / Vertebral Luxation",
-            "name_ja": "脊椎骨折・椎体脱臼"
-          },
-          {
-            "id": "lizard_0109",
-            "name": "Limb Fractures",
-            "name_ja": "四肢骨折"
-          },
-          {
-            "id": "lizard_0217",
-            "name": "Fracture (Shell/Carapace)",
-            "name_ja": "甲羅骨折（トカゲ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "gout",
         "size": 3,
         "members": [
@@ -564,6 +491,27 @@
             "id": "lizard_0183",
             "name": "Tail Necrosis",
             "name_ja": "尾壊死（トカゲ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "respir",
+        "size": 3,
+        "members": [
+          {
+            "id": "lizard_0017",
+            "name": "Upper Respiratory Infection (URI)",
+            "name_ja": "上部呼吸器感染症"
+          },
+          {
+            "id": "lizard_0132",
+            "name": "Chronic Respiratory Disease Complex",
+            "name_ja": "慢性呼吸器疾患複合"
+          },
+          {
+            "id": "lizard_0160",
+            "name": "Respiratory Infection",
+            "name_ja": "呼吸器感染症（トカゲ）"
           }
         ]
       },
@@ -631,20 +579,20 @@
         ]
       }
     ],
-    "family_cluster_count": 22
+    "family_cluster_count": 20
   },
   "T102": {
     "detector": "T102",
-    "total_records": 222,
+    "total_records": 219,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 222,
+    "total_records": 219,
     "empty_count": 0,
     "heading_only_count": 46,
-    "with_dosage_count": 176,
+    "with_dosage_count": 173,
     "empty": [],
     "heading_only": [
       {
@@ -1019,14 +967,14 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 222,
+    "total_records": 219,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_corpus_loaded": true,
     "citation_corpus_loaded": true,
     "corpus_incomplete": false,
     "corpus_warning": null,
-    "drug_mismatch_count": 80,
+    "drug_mismatch_count": 79,
     "citation_mismatch_count": 10,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -1856,18 +1804,6 @@
         ]
       },
       {
-        "id": "lizard_0205",
-        "name": "Rectal/Cloacal Prolapse",
-        "name_ja": "直腸/総排泄腔脱（トカゲ）",
-        "drugs": [
-          {
-            "drug": "Oxytocin",
-            "drug_ja": "オキシトシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "lizard_0206",
         "name": "Pancreatitis",
         "name_ja": "膵炎（トカゲ）",
@@ -2322,7 +2258,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 222,
+    "total_records": 219,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

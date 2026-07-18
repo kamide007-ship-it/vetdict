@@ -1,14 +1,12 @@
 # VetDict 品質検出レポート — reptile
 
-- 総レコード数: **268**
+- 総レコード数: **265**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **5** （冗長レコード 6 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **35**
+- 完全一致重複クラスタ: **3** （冗長レコード 3 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **33**
 
 ### 完全一致重複（上位20）
-- 食欲不振（非特異的）（Anorexia (Non-specific)）[reptile_0043] / 拒食（行動性）（爬虫類）（Anorexia (Behavioral)）[reptile_0212] / ストレス性拒食（爬虫類）（Anorexia (Stress-Related)）[reptile_0254]
-- 排卵前卵胞停滞（Pre-ovulatory Follicular Stasis）[reptile_0058] / 排卵前卵胞停滞（卵黄性体腔炎）（Preovulatory Follicular Stasis (Yolk Coelomitis)）[reptile_0161]
 - 骨髄炎（Osteomyelitis）[reptile_0082] / 顎骨骨髄炎（Osteomyelitis (Jaw)）[reptile_0112]
 - 痛風（内臓型）（爬虫類）（Gout (Visceral)）[reptile_0196] / 痛風（関節型）（爬虫類）（Gout (Articular)）[reptile_0197]
 - 四肢骨折（爬虫類）（Fracture (Limb)）[reptile_0223] / 甲羅骨折（爬虫類）（Fracture (Shell/Carapace)）[reptile_0224]
@@ -144,8 +142,8 @@
 
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
-- 投与量なし（見出しのみ）: **37**
-- 投与量あり: **231**
+- 投与量なし（見出しのみ）: **36**
+- 投与量あり: **229**
 
 ### 投与量なし（上位30）
 - 口腔膿瘍（Oral Abscess）[reptile_0016] — ja:110字 / en:204字
@@ -154,7 +152,6 @@
 - 水疱症（Blister Disease）[reptile_0028] — ja:108字 / en:193字
 - 皮下膿瘍（Subcutaneous Abscess）[reptile_0032] — ja:127字 / en:204字
 - ピラミッディング（甲羅の隆起異常）（Pyramiding）[reptile_0036] — ja:122字 / en:193字
-- 食欲不振（非特異的）（Anorexia (Non-specific)）[reptile_0043] — ja:159字 / en:193字
 - 肥満（Obesity）[reptile_0044] — ja:111字 / en:165字
 - スペクタクル脱皮不全（アイキャップ残留）（Retained Spectacle (Retained Eye Cap)）[reptile_0054] — ja:119字 / en:193字
 - 角膜潰瘍（Corneal Ulcer）[reptile_0056] — ja:166字 / en:193字
@@ -178,10 +175,11 @@
 - 慢性呼吸器疾患複合（Chronic Respiratory Disease Complex）[reptile_0143] — ja:58字 / en:190字
 - 盲腸・結腸インパクション（Cecal Impaction / Colonic Impaction）[reptile_0145] — ja:62字 / en:190字
 - 臓器脱（胃・腸・卵管）（Organ Prolapse (Gastric/Intestinal/Oviductal)）[reptile_0147] — ja:199字 / en:548字
+- 溶血性貧血（Hemolytic Anemia）[reptile_0151] — ja:224字 / en:193字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
 - 参照コーパス: 薬品 **610** 件 / 出典キー **30** 件（薬品ロードOK・出典ロードOK）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **102** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **101** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **9** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）

@@ -3,11 +3,11 @@
 - 総レコード数: **248**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **20** （冗長レコード 23 件）
+- 完全一致重複クラスタ: **20** （冗長レコード 24 件）
 - 疾患ファミリー候補（過分割の疑い, ≥3件）: **34**
 
 ### 完全一致重複（上位20）
-- サンシャインウイルス感染症（Sunshine Virus (Reptile Sunshinevirus)）[snake_0005] / サンシャインウイルス（ヘビ）（Sunshine Virus (Reptarenavirus)）[snake_0147]
+- 封入体病（IBD）（Inclusion Body Disease (IBD)）[snake_0000] / サンシャインウイルス感染症（Sunshine Virus (Reptile Sunshinevirus)）[snake_0005] / 封入体病（レプタレナウイルス）（ヘビ）（Sunshine Virus (Reptarenavirus)）[snake_0147]
 - 肺炎（下部呼吸器感染症）（Pneumonia (Lower Respiratory Infection)）[snake_0008] / 肺炎（ヘビ）（Pneumonia）[snake_0201]
 - ヘビダニ（オフィオニッスス）（Snake Mites (Ophionyssus natricis)）[snake_0012] / ヘビダニ（ヘビ）（Snake Mite (Ophionyssus natricis)）[snake_0148]
 - アメーバ感染症（Amoebic Infection (Entamoeba invadens)）[snake_0014] / アメーバ感染（ヘビ）（Amoebic Infection）[snake_0170]

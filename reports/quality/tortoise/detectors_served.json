@@ -1,10 +1,10 @@
 {
   "species": "tortoise",
   "view": "served",
-  "record_count": 266,
+  "record_count": 255,
   "T101": {
     "detector": "T101",
-    "total_records": 266,
+    "total_records": 255,
     "exact_duplicate_clusters": [
       {
         "members": [
@@ -19,66 +19,10 @@
             "name_ja": "膀胱結石（尿酸塩型）"
           }
         ]
-      },
-      {
-        "members": [
-          {
-            "id": "tortoise_0050",
-            "name": "Abscess (Subcutaneous)",
-            "name_ja": "皮下膿瘍"
-          },
-          {
-            "id": "tortoise_0201",
-            "name": "Abscess",
-            "name_ja": "膿瘍（リクガメ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "tortoise_0079",
-            "name": "Mite Infestation",
-            "name_ja": "ダニ寄生"
-          },
-          {
-            "id": "tortoise_0190",
-            "name": "Mite Infestation (Ophionyssus)",
-            "name_ja": "ダニ症（Ophionyssus）（リクガメ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "tortoise_0116",
-            "name": "Follicular Stasis (Chronic)",
-            "name_ja": "慢性濾胞停滞"
-          },
-          {
-            "id": "tortoise_0178",
-            "name": "Follicular Stasis",
-            "name_ja": "卵胞停滞（リクガメ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "tortoise_0221",
-            "name": "Anorexia (Behavioral)",
-            "name_ja": "拒食（行動性）（リクガメ）"
-          },
-          {
-            "id": "tortoise_0262",
-            "name": "Anorexia (Stress-Related)",
-            "name_ja": "ストレス性拒食（リクガメ）"
-          }
-        ]
       }
     ],
-    "exact_duplicate_cluster_count": 5,
-    "redundant_record_count": 5,
+    "exact_duplicate_cluster_count": 1,
+    "redundant_record_count": 1,
     "family_clusters": [
       {
         "shared_stem": "respir",
@@ -387,78 +331,6 @@
         ]
       },
       {
-        "shared_stem": "absces",
-        "size": 6,
-        "members": [
-          {
-            "id": "tortoise_0037",
-            "name": "Periocular Abscess",
-            "name_ja": "眼周囲膿瘍"
-          },
-          {
-            "id": "tortoise_0050",
-            "name": "Abscess (Subcutaneous)",
-            "name_ja": "皮下膿瘍"
-          },
-          {
-            "id": "tortoise_0051",
-            "name": "Aural Abscess (Ear Abscess)",
-            "name_ja": "耳膿瘍"
-          },
-          {
-            "id": "tortoise_0112",
-            "name": "Shell Abscess",
-            "name_ja": "甲羅膿瘍"
-          },
-          {
-            "id": "tortoise_0201",
-            "name": "Abscess",
-            "name_ja": "膿瘍（リクガメ）"
-          },
-          {
-            "id": "tortoise_0228",
-            "name": "Subspectacular Abscess",
-            "name_ja": "眼鏡鱗下膿瘍（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "prolap",
-        "size": 6,
-        "members": [
-          {
-            "id": "tortoise_0056",
-            "name": "Cloacal Prolapse",
-            "name_ja": "総排泄腔脱"
-          },
-          {
-            "id": "tortoise_0057",
-            "name": "Penile Prolapse",
-            "name_ja": "陰茎脱出"
-          },
-          {
-            "id": "tortoise_0078",
-            "name": "Intestinal Prolapse",
-            "name_ja": "腸脱出"
-          },
-          {
-            "id": "tortoise_0157",
-            "name": "Prolapsed Bladder",
-            "name_ja": "膀胱脱"
-          },
-          {
-            "id": "tortoise_0212",
-            "name": "Penile/Hemipenal Prolapse",
-            "name_ja": "陰茎/半陰茎脱（リクガメ）"
-          },
-          {
-            "id": "tortoise_0222",
-            "name": "Rectal/Cloacal Prolapse",
-            "name_ja": "直腸/総排泄腔脱（リクガメ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "tortoi",
         "size": 6,
         "members": [
@@ -495,6 +367,37 @@
         ]
       },
       {
+        "shared_stem": "absces",
+        "size": 5,
+        "members": [
+          {
+            "id": "tortoise_0037",
+            "name": "Periocular Abscess",
+            "name_ja": "眼周囲膿瘍"
+          },
+          {
+            "id": "tortoise_0050",
+            "name": "Abscess (Subcutaneous)",
+            "name_ja": "皮下膿瘍"
+          },
+          {
+            "id": "tortoise_0051",
+            "name": "Aural Abscess (Ear Abscess)",
+            "name_ja": "耳膿瘍"
+          },
+          {
+            "id": "tortoise_0112",
+            "name": "Shell Abscess",
+            "name_ja": "甲羅膿瘍"
+          },
+          {
+            "id": "tortoise_0228",
+            "name": "Subspectacular Abscess",
+            "name_ja": "眼鏡鱗下膿瘍（リクガメ）"
+          }
+        ]
+      },
+      {
         "shared_stem": "bacter",
         "size": 5,
         "members": [
@@ -526,68 +429,6 @@
         ]
       },
       {
-        "shared_stem": "infest",
-        "size": 5,
-        "members": [
-          {
-            "id": "tortoise_0020",
-            "name": "Tick Infestation",
-            "name_ja": "マダニ寄生"
-          },
-          {
-            "id": "tortoise_0079",
-            "name": "Mite Infestation",
-            "name_ja": "ダニ寄生"
-          },
-          {
-            "id": "tortoise_0080",
-            "name": "Leech Infestation",
-            "name_ja": "ヒル寄生"
-          },
-          {
-            "id": "tortoise_0190",
-            "name": "Mite Infestation (Ophionyssus)",
-            "name_ja": "ダニ症（Ophionyssus）（リクガメ）"
-          },
-          {
-            "id": "tortoise_0287",
-            "name": "Dermatological Parasitic Infestation",
-            "name_ja": "皮膚寄生虫寄生（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "stasi",
-        "size": 5,
-        "members": [
-          {
-            "id": "tortoise_0044",
-            "name": "Pre-ovulatory Follicular Stasis",
-            "name_ja": "排卵前卵胞停滞"
-          },
-          {
-            "id": "tortoise_0116",
-            "name": "Follicular Stasis (Chronic)",
-            "name_ja": "慢性濾胞停滞"
-          },
-          {
-            "id": "tortoise_0177",
-            "name": "Reproductive Stasis",
-            "name_ja": "生殖停滞（リクガメ）"
-          },
-          {
-            "id": "tortoise_0178",
-            "name": "Follicular Stasis",
-            "name_ja": "卵胞停滞（リクガメ）"
-          },
-          {
-            "id": "tortoise_0210",
-            "name": "Post-Ovulatory Egg Stasis",
-            "name_ja": "排卵後卵停滞（リクガメ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "toxico",
         "size": 5,
         "members": [
@@ -615,58 +456,6 @@
             "id": "tortoise_0128",
             "name": "Metronidazole Toxicosis",
             "name_ja": "メトロニダゾール中毒"
-          }
-        ]
-      },
-      {
-        "shared_stem": "anorex",
-        "size": 4,
-        "members": [
-          {
-            "id": "tortoise_0076",
-            "name": "Chronic Anorexia Syndrome",
-            "name_ja": "慢性食欲不振症候群"
-          },
-          {
-            "id": "tortoise_0087",
-            "name": "Post-hibernation Anorexia",
-            "name_ja": "冬眠後食欲不振"
-          },
-          {
-            "id": "tortoise_0221",
-            "name": "Anorexia (Behavioral)",
-            "name_ja": "拒食（行動性）（リクガメ）"
-          },
-          {
-            "id": "tortoise_0262",
-            "name": "Anorexia (Stress-Related)",
-            "name_ja": "ストレス性拒食（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "coelom",
-        "size": 4,
-        "members": [
-          {
-            "id": "tortoise_0067",
-            "name": "Peritonitis / Coelomitis",
-            "name_ja": "腹膜炎・体腔炎"
-          },
-          {
-            "id": "tortoise_0088",
-            "name": "Coelomic Effusion (Ascites)",
-            "name_ja": "体腔液貯留（腹水）"
-          },
-          {
-            "id": "tortoise_0115",
-            "name": "Egg-related Coelomitis",
-            "name_ja": "卵関連体腔炎"
-          },
-          {
-            "id": "tortoise_0211",
-            "name": "Egg Yolk Coelomitis",
-            "name_ja": "卵黄体腔炎（リクガメ）"
           }
         ]
       },
@@ -719,6 +508,32 @@
             "id": "tortoise_0165",
             "name": "Tortoise Herpesvirus",
             "name_ja": "リクガメヘルペスウイルス（リクガメ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0020",
+            "name": "Tick Infestation",
+            "name_ja": "マダニ寄生"
+          },
+          {
+            "id": "tortoise_0079",
+            "name": "Mite Infestation",
+            "name_ja": "ダニ寄生"
+          },
+          {
+            "id": "tortoise_0080",
+            "name": "Leech Infestation",
+            "name_ja": "ヒル寄生"
+          },
+          {
+            "id": "tortoise_0287",
+            "name": "Dermatological Parasitic Infestation",
+            "name_ja": "皮膚寄生虫寄生（リクガメ）"
           }
         ]
       },
@@ -827,28 +642,54 @@
         ]
       },
       {
-        "shared_stem": "protoz",
+        "shared_stem": "prolap",
         "size": 4,
         "members": [
           {
-            "id": "tortoise_0017",
-            "name": "Flagellate Protozoa Infection",
-            "name_ja": "鞭毛虫感染症"
+            "id": "tortoise_0056",
+            "name": "Cloacal Prolapse",
+            "name_ja": "総排泄腔脱"
           },
           {
-            "id": "tortoise_0109",
-            "name": "Protozoan Colitis",
-            "name_ja": "原虫性大腸炎"
+            "id": "tortoise_0057",
+            "name": "Penile Prolapse",
+            "name_ja": "陰茎脱出"
           },
           {
-            "id": "tortoise_0172",
-            "name": "Flagellate Protozoal Infection",
-            "name_ja": "鞭毛虫原虫感染（リクガメ）"
+            "id": "tortoise_0078",
+            "name": "Intestinal Prolapse",
+            "name_ja": "腸脱出"
           },
           {
-            "id": "tortoise_0196",
-            "name": "Flagellate Protozoan Infection",
-            "name_ja": "鞭毛虫感染（リクガメ）"
+            "id": "tortoise_0157",
+            "name": "Prolapsed Bladder",
+            "name_ja": "膀胱脱"
+          }
+        ]
+      },
+      {
+        "shared_stem": "stasi",
+        "size": 4,
+        "members": [
+          {
+            "id": "tortoise_0044",
+            "name": "Pre-ovulatory Follicular Stasis",
+            "name_ja": "排卵前卵胞停滞"
+          },
+          {
+            "id": "tortoise_0116",
+            "name": "Follicular Stasis (Chronic)",
+            "name_ja": "慢性濾胞停滞"
+          },
+          {
+            "id": "tortoise_0177",
+            "name": "Reproductive Stasis",
+            "name_ja": "生殖停滞（リクガメ）"
+          },
+          {
+            "id": "tortoise_0210",
+            "name": "Post-Ovulatory Egg Stasis",
+            "name_ja": "排卵後卵停滞（リクガメ）"
           }
         ]
       },
@@ -905,6 +746,27 @@
         ]
       },
       {
+        "shared_stem": "anorex",
+        "size": 3,
+        "members": [
+          {
+            "id": "tortoise_0076",
+            "name": "Chronic Anorexia Syndrome",
+            "name_ja": "慢性食欲不振症候群"
+          },
+          {
+            "id": "tortoise_0087",
+            "name": "Post-hibernation Anorexia",
+            "name_ja": "冬眠後食欲不振"
+          },
+          {
+            "id": "tortoise_0221",
+            "name": "Anorexia (Behavioral)",
+            "name_ja": "拒食（行動性）（リクガメ）"
+          }
+        ]
+      },
+      {
         "shared_stem": "carcin",
         "size": 3,
         "members": [
@@ -926,86 +788,23 @@
         ]
       },
       {
-        "shared_stem": "cloaca",
+        "shared_stem": "coelom",
         "size": 3,
         "members": [
           {
-            "id": "tortoise_0056",
-            "name": "Cloacal Prolapse",
-            "name_ja": "総排泄腔脱"
+            "id": "tortoise_0067",
+            "name": "Peritonitis / Coelomitis",
+            "name_ja": "腹膜炎・体腔炎"
           },
           {
-            "id": "tortoise_0117",
-            "name": "Cloacal Calculi",
-            "name_ja": "総排泄腔結石"
+            "id": "tortoise_0088",
+            "name": "Coelomic Effusion (Ascites)",
+            "name_ja": "体腔液貯留（腹水）"
           },
           {
-            "id": "tortoise_0222",
-            "name": "Rectal/Cloacal Prolapse",
-            "name_ja": "直腸/総排泄腔脱（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "coccid",
-        "size": 3,
-        "members": [
-          {
-            "id": "tortoise_0013",
-            "name": "Tortoise Intranuclear Coccidia (TINC)",
-            "name_ja": "リクガメ核内コクシジウム症"
-          },
-          {
-            "id": "tortoise_0018",
-            "name": "Coccidia Infection",
-            "name_ja": "コクシジウム症"
-          },
-          {
-            "id": "tortoise_0195",
-            "name": "Coccidia",
-            "name_ja": "コクシジウム（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "flagel",
-        "size": 3,
-        "members": [
-          {
-            "id": "tortoise_0017",
-            "name": "Flagellate Protozoa Infection",
-            "name_ja": "鞭毛虫感染症"
-          },
-          {
-            "id": "tortoise_0172",
-            "name": "Flagellate Protozoal Infection",
-            "name_ja": "鞭毛虫原虫感染（リクガメ）"
-          },
-          {
-            "id": "tortoise_0196",
-            "name": "Flagellate Protozoan Infection",
-            "name_ja": "鞭毛虫感染（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "follic",
-        "size": 3,
-        "members": [
-          {
-            "id": "tortoise_0044",
-            "name": "Pre-ovulatory Follicular Stasis",
-            "name_ja": "排卵前卵胞停滞"
-          },
-          {
-            "id": "tortoise_0116",
-            "name": "Follicular Stasis (Chronic)",
-            "name_ja": "慢性濾胞停滞"
-          },
-          {
-            "id": "tortoise_0178",
-            "name": "Follicular Stasis",
-            "name_ja": "卵胞停滞（リクガメ）"
+            "id": "tortoise_0115",
+            "name": "Egg-related Coelomitis",
+            "name_ja": "卵関連体腔炎"
           }
         ]
       },
@@ -1073,48 +872,6 @@
         ]
       },
       {
-        "shared_stem": "mycopl",
-        "size": 3,
-        "members": [
-          {
-            "id": "tortoise_0008",
-            "name": "Mycoplasmosis (Mycoplasma agassizii / testudineum)",
-            "name_ja": "マイコプラズマ症"
-          },
-          {
-            "id": "tortoise_0166",
-            "name": "Mycoplasma agassizii (URTD)",
-            "name_ja": "マイコプラズマ上部気道疾患（リクガメ）"
-          },
-          {
-            "id": "tortoise_0185",
-            "name": "Mycoplasma Infection",
-            "name_ja": "マイコプラズマ感染（リクガメ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "penile",
-        "size": 3,
-        "members": [
-          {
-            "id": "tortoise_0057",
-            "name": "Penile Prolapse",
-            "name_ja": "陰茎脱出"
-          },
-          {
-            "id": "tortoise_0111",
-            "name": "Hemipenal/Penile Necrosis",
-            "name_ja": "陰茎壊死"
-          },
-          {
-            "id": "tortoise_0212",
-            "name": "Penile/Hemipenal Prolapse",
-            "name_ja": "陰茎/半陰茎脱（リクガメ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "trauma",
         "size": 3,
         "members": [
@@ -1178,20 +935,20 @@
         ]
       }
     ],
-    "family_cluster_count": 37
+    "family_cluster_count": 30
   },
   "T102": {
     "detector": "T102",
-    "total_records": 266,
+    "total_records": 255,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 266,
+    "total_records": 255,
     "empty_count": 0,
-    "heading_only_count": 61,
-    "with_dosage_count": 205,
+    "heading_only_count": 55,
+    "with_dosage_count": 200,
     "empty": [],
     "heading_only": [
       {
@@ -1211,14 +968,6 @@
         "has_dosage": false
       },
       {
-        "id": "tortoise_0008",
-        "name": "Mycoplasmosis (Mycoplasma agassizii / testudineum)",
-        "name_ja": "マイコプラズマ症",
-        "treatment_ja_len": 165,
-        "treatment_len": 149,
-        "has_dosage": false
-      },
-      {
         "id": "tortoise_0013",
         "name": "Tortoise Intranuclear Coccidia (TINC)",
         "name_ja": "リクガメ核内コクシジウム症",
@@ -1232,22 +981,6 @@
         "name_ja": "腸管線虫（回虫）感染",
         "treatment_ja_len": 170,
         "treatment_len": 193,
-        "has_dosage": false
-      },
-      {
-        "id": "tortoise_0017",
-        "name": "Flagellate Protozoa Infection",
-        "name_ja": "鞭毛虫感染症",
-        "treatment_ja_len": 163,
-        "treatment_len": 137,
-        "has_dosage": false
-      },
-      {
-        "id": "tortoise_0018",
-        "name": "Coccidia Infection",
-        "name_ja": "コクシジウム症",
-        "treatment_ja_len": 167,
-        "treatment_len": 204,
         "has_dosage": false
       },
       {
@@ -1331,22 +1064,6 @@
         "has_dosage": false
       },
       {
-        "id": "tortoise_0056",
-        "name": "Cloacal Prolapse",
-        "name_ja": "総排泄腔脱",
-        "treatment_ja_len": 84,
-        "treatment_len": 193,
-        "has_dosage": false
-      },
-      {
-        "id": "tortoise_0057",
-        "name": "Penile Prolapse",
-        "name_ja": "陰茎脱出",
-        "treatment_ja_len": 193,
-        "treatment_len": 193,
-        "has_dosage": false
-      },
-      {
         "id": "tortoise_0062",
         "name": "Cardiac Disease",
         "name_ja": "心疾患",
@@ -1392,14 +1109,6 @@
         "name_ja": "腸脱出",
         "treatment_ja_len": 67,
         "treatment_len": 193,
-        "has_dosage": false
-      },
-      {
-        "id": "tortoise_0079",
-        "name": "Mite Infestation",
-        "name_ja": "ダニ寄生",
-        "treatment_ja_len": 81,
-        "treatment_len": 126,
         "has_dosage": false
       },
       {
@@ -1686,14 +1395,14 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 266,
+    "total_records": 255,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_corpus_loaded": true,
     "citation_corpus_loaded": true,
     "corpus_incomplete": false,
     "corpus_warning": null,
-    "drug_mismatch_count": 83,
+    "drug_mismatch_count": 81,
     "citation_mismatch_count": 12,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -1917,6 +1626,18 @@
         ]
       },
       {
+        "id": "tortoise_0056",
+        "name": "Cloacal Prolapse",
+        "name_ja": "総排泄腔脱",
+        "drugs": [
+          {
+            "drug": "Oxytocin",
+            "drug_ja": "オキシトシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
         "id": "tortoise_0058",
         "name": "Squamous Cell Carcinoma",
         "name_ja": "扁平上皮癌",
@@ -1989,6 +1710,28 @@
           {
             "drug": "Ciprofloxacin",
             "drug_ja": "シプロフロキサシン",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "tortoise_0079",
+        "name": "Mite Infestation",
+        "name_ja": "ダニ寄生",
+        "drugs": [
+          {
+            "drug": "Moxidectin",
+            "drug_ja": "モキシデクチン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Imidacloprid",
+            "drug_ja": "イミダクロプリド",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Selamectin (Revolution)",
+            "drug_ja": "セラメクチン（レボリューション）",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2100,6 +1843,18 @@
           {
             "drug": "Morphine",
             "drug_ja": "モルヒネ",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "tortoise_0116",
+        "name": "Follicular Stasis (Chronic)",
+        "name_ja": "慢性濾胞停滞",
+        "drugs": [
+          {
+            "drug": "Deslorelin",
+            "drug_ja": "デスロレリン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2329,18 +2084,6 @@
         ]
       },
       {
-        "id": "tortoise_0178",
-        "name": "Follicular Stasis",
-        "name_ja": "卵胞停滞（リクガメ）",
-        "drugs": [
-          {
-            "drug": "Deslorelin",
-            "drug_ja": "デスロレリン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "tortoise_0188",
         "name": "Candidiasis",
         "name_ja": "カンジダ症（リクガメ）",
@@ -2365,28 +2108,6 @@
           {
             "drug": "Voriconazole",
             "drug_ja": "ボリコナゾール",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "tortoise_0190",
-        "name": "Mite Infestation (Ophionyssus)",
-        "name_ja": "ダニ症（Ophionyssus）（リクガメ）",
-        "drugs": [
-          {
-            "drug": "Moxidectin",
-            "drug_ja": "モキシデクチン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Imidacloprid",
-            "drug_ja": "イミダクロプリド",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Selamectin (Revolution)",
-            "drug_ja": "セラメクチン（レボリューション）",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2452,18 +2173,6 @@
         ]
       },
       {
-        "id": "tortoise_0211",
-        "name": "Egg Yolk Coelomitis",
-        "name_ja": "卵黄体腔炎（リクガメ）",
-        "drugs": [
-          {
-            "drug": "Amoxicillin-Clavulanate",
-            "drug_ja": "アモキシシリン・クラブラン酸",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "tortoise_0216",
         "name": "Hepatitis",
         "name_ja": "肝炎（リクガメ）",
@@ -2517,18 +2226,6 @@
           {
             "drug": "Metoclopramide",
             "drug_ja": "メトクロプラミド",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "tortoise_0222",
-        "name": "Rectal/Cloacal Prolapse",
-        "name_ja": "直腸/総排泄腔脱（リクガメ）",
-        "drugs": [
-          {
-            "drug": "Oxytocin",
-            "drug_ja": "オキシトシン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2737,18 +2434,6 @@
           {
             "drug": "Flumazenil",
             "drug_ja": "フルマゼニル",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "tortoise_0262",
-        "name": "Anorexia (Stress-Related)",
-        "name_ja": "ストレス性拒食（リクガメ）",
-        "drugs": [
-          {
-            "drug": "Metoclopramide",
-            "drug_ja": "メトクロプラミド",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2978,7 +2663,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 266,
+    "total_records": 255,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

@@ -4,10 +4,10 @@
   "generated_note": "Non-destructive consolidation map. Applied at load time; sources unchanged.",
   "counts": {
     "records": 250,
-    "merge_clusters": 26,
-    "records_merged_away": 28,
-    "archived": 0,
-    "served_after": 222
+    "merge_clusters": 28,
+    "records_merged_away": 30,
+    "archived": 1,
+    "served_after": 219
   },
   "merges": [
     {
@@ -507,9 +507,55 @@
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
       "inherit_content": true,
       "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0017",
+        "slug": "upper-respiratory-infection-uri",
+        "name": "Upper Respiratory Infection (URI)",
+        "name_ja": "上部呼吸器感染症"
+      },
+      "merged": [
+        {
+          "id": "lizard_0208",
+          "slug": "upper-respiratory-tract-disease",
+          "name": "Upper Respiratory Tract Disease",
+          "name_ja": "上部気道疾患（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
+    },
+    {
+      "canonical": {
+        "id": "lizard_0048",
+        "slug": "cloacal-prolapse",
+        "name": "Cloacal Prolapse",
+        "name_ja": "総排泄腔脱"
+      },
+      "merged": [
+        {
+          "id": "lizard_0205",
+          "slug": "rectal-cloacal-prolapse",
+          "name": "Rectal/Cloacal Prolapse",
+          "name_ja": "直腸/総排泄腔脱（トカゲ）"
+        }
+      ],
+      "reason": "vet-approved same disease (curated; differs by an informative qualifier)",
+      "inherit_content": true,
+      "curated": true
     }
   ],
-  "archives": [],
+  "archives": [
+    {
+      "id": "lizard_0217",
+      "slug": "fracture-shell-carapace",
+      "name": "Fracture (Shell/Carapace)",
+      "name_ja": "甲羅骨折（トカゲ）",
+      "reason": "spurious template contamination — disease impossible in this species (vet review)"
+    }
+  ],
   "review": {
     "nonclinical_transplants": [],
     "oversplit_subtypes": [

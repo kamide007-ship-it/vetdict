@@ -1,25 +1,11 @@
 {
   "species": "bird",
   "view": "served",
-  "record_count": 505,
+  "record_count": 500,
   "T101": {
     "detector": "T101",
-    "total_records": 505,
+    "total_records": 500,
     "exact_duplicate_clusters": [
-      {
-        "members": [
-          {
-            "id": "bird_0010",
-            "name": "Psittacosis / Chlamydiosis",
-            "name_ja": "オウム病（クラミジア症）"
-          },
-          {
-            "id": "bird_0398",
-            "name": "Psittacosis (Chlamydiosis)",
-            "name_ja": "オウム病（クラミジア症）（鳥）"
-          }
-        ]
-      },
       {
         "members": [
           {
@@ -31,20 +17,6 @@
             "id": "bird_0417",
             "name": "Pneumonia (Bacterial)",
             "name_ja": "細菌性肺炎（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0048",
-            "name": "Renal Failure (Acute / Chronic)",
-            "name_ja": "腎不全（急性／慢性）"
-          },
-          {
-            "id": "bird_0445",
-            "name": "Renal Failure (Acute)",
-            "name_ja": "急性腎不全（鳥）"
           }
         ]
       },
@@ -65,48 +37,6 @@
       {
         "members": [
           {
-            "id": "bird_0079",
-            "name": "Lead Poisoning (Neurological)",
-            "name_ja": "鉛中毒（神経型）"
-          },
-          {
-            "id": "bird_0111",
-            "name": "Lead Poisoning (Plumbism)",
-            "name_ja": "鉛中毒"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0295",
-            "name": "Egg Retention (Pre-laying)",
-            "name_ja": "卵停滞（産卵前）"
-          },
-          {
-            "id": "bird_0383",
-            "name": "Retained Egg",
-            "name_ja": "卵停滞（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "bird_0349",
-            "name": "Bumblefoot (Advanced/Surgical)",
-            "name_ja": "バンブルフット（進行/外科）（鳥）"
-          },
-          {
-            "id": "bird_0406",
-            "name": "Bumblefoot (Pododermatitis)",
-            "name_ja": "バンブルフット（足底皮膚炎）（鳥）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "bird_0428",
             "name": "Fracture (Wing)",
             "name_ja": "翼骨折（鳥）"
@@ -119,8 +49,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 8,
-    "redundant_record_count": 8,
+    "exact_duplicate_cluster_count": 3,
+    "redundant_record_count": 3,
     "family_clusters": [
       {
         "shared_stem": "avian",
@@ -1361,52 +1291,6 @@
         ]
       },
       {
-        "shared_stem": "psitta",
-        "size": 8,
-        "members": [
-          {
-            "id": "bird_0000",
-            "name": "Psittacine Beak and Feather Disease (PBFD)",
-            "name_ja": "嘴羽毛病（PBFD）"
-          },
-          {
-            "id": "bird_0010",
-            "name": "Psittacosis / Chlamydiosis",
-            "name_ja": "オウム病（クラミジア症）"
-          },
-          {
-            "id": "bird_0208",
-            "name": "Psittacine Poxvirus (Canarypox Variant)",
-            "name_ja": "オウム目痘瘡ウイルス（カナリア痘変異型）"
-          },
-          {
-            "id": "bird_0238",
-            "name": "Psittacine Herpesvirus – Mucosal Form",
-            "name_ja": "オウム目ヘルペスウイルス粘膜型"
-          },
-          {
-            "id": "bird_0250",
-            "name": "Psittacine Beak and Feather Disease – Peracute Neonatal Form",
-            "name_ja": "嘴羽毛病（PBFD）超急性新生児型"
-          },
-          {
-            "id": "bird_0251",
-            "name": "Psittacine Beak and Feather Disease – Chronic Adult Form",
-            "name_ja": "嘴羽毛病（PBFD）慢性成鳥型"
-          },
-          {
-            "id": "bird_0348",
-            "name": "Chlamydia psittaci (Zoonotic)",
-            "name_ja": "クラミジア・プシッタシ（人獣共通）（鳥）"
-          },
-          {
-            "id": "bird_0398",
-            "name": "Psittacosis (Chlamydiosis)",
-            "name_ja": "オウム病（クラミジア症）（鳥）"
-          }
-        ]
-      },
-      {
         "shared_stem": "toxici",
         "size": 8,
         "members": [
@@ -1581,84 +1465,43 @@
         ]
       },
       {
-        "shared_stem": "poison",
+        "shared_stem": "psitta",
         "size": 7,
         "members": [
           {
-            "id": "bird_0079",
-            "name": "Lead Poisoning (Neurological)",
-            "name_ja": "鉛中毒（神経型）"
+            "id": "bird_0000",
+            "name": "Psittacine Beak and Feather Disease (PBFD)",
+            "name_ja": "嘴羽毛病（PBFD）"
           },
           {
-            "id": "bird_0111",
-            "name": "Lead Poisoning (Plumbism)",
-            "name_ja": "鉛中毒"
+            "id": "bird_0208",
+            "name": "Psittacine Poxvirus (Canarypox Variant)",
+            "name_ja": "オウム目痘瘡ウイルス（カナリア痘変異型）"
           },
           {
-            "id": "bird_0112",
-            "name": "Zinc Poisoning",
-            "name_ja": "亜鉛中毒"
+            "id": "bird_0238",
+            "name": "Psittacine Herpesvirus – Mucosal Form",
+            "name_ja": "オウム目ヘルペスウイルス粘膜型"
           },
           {
-            "id": "bird_0113",
-            "name": "Copper Poisoning",
-            "name_ja": "銅中毒"
+            "id": "bird_0250",
+            "name": "Psittacine Beak and Feather Disease – Peracute Neonatal Form",
+            "name_ja": "嘴羽毛病（PBFD）超急性新生児型"
           },
           {
-            "id": "bird_0190",
-            "name": "Pesticide Poisoning",
-            "name_ja": "農薬中毒"
+            "id": "bird_0251",
+            "name": "Psittacine Beak and Feather Disease – Chronic Adult Form",
+            "name_ja": "嘴羽毛病（PBFD）慢性成鳥型"
           },
           {
-            "id": "bird_0192",
-            "name": "Rodenticide Poisoning",
-            "name_ja": "殺鼠剤中毒"
+            "id": "bird_0348",
+            "name": "Chlamydia psittaci (Zoonotic)",
+            "name_ja": "クラミジア・プシッタシ（人獣共通）（鳥）"
           },
           {
-            "id": "bird_0271",
-            "name": "Heavy Metal Poisoning – Mixed (Lead and Zinc)",
-            "name_ja": "混合重金属中毒（鉛・亜鉛）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "renal",
-        "size": 7,
-        "members": [
-          {
-            "id": "bird_0048",
-            "name": "Renal Failure (Acute / Chronic)",
-            "name_ja": "腎不全（急性／慢性）"
-          },
-          {
-            "id": "bird_0052",
-            "name": "Renal Tumor (Renal Adenocarcinoma)",
-            "name_ja": "腎腫瘍（腎腺癌）"
-          },
-          {
-            "id": "bird_0206",
-            "name": "Avian Renal Tumor",
-            "name_ja": "鳥類腎腫瘍"
-          },
-          {
-            "id": "bird_0258",
-            "name": "Renal Cystadenocarcinoma",
-            "name_ja": "腎嚢胞腺癌"
-          },
-          {
-            "id": "bird_0303",
-            "name": "Amyloidosis – Renal",
-            "name_ja": "アミロイドーシス腎型"
-          },
-          {
-            "id": "bird_0321",
-            "name": "Renal Adenocarcinoma",
-            "name_ja": "腎腺癌（鳥）"
-          },
-          {
-            "id": "bird_0445",
-            "name": "Renal Failure (Acute)",
-            "name_ja": "急性腎不全（鳥）"
+            "id": "bird_0398",
+            "name": "Psittacosis (Chlamydiosis)",
+            "name_ja": "オウム病（クラミジア症）（鳥）"
           }
         ]
       },
@@ -1736,42 +1579,6 @@
             "id": "bird_0526",
             "name": "Cardiovascular Congenital Anomaly",
             "name_ja": "心血管先天異常（鳥）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "chlamy",
-        "size": 6,
-        "members": [
-          {
-            "id": "bird_0010",
-            "name": "Psittacosis / Chlamydiosis",
-            "name_ja": "オウム病（クラミジア症）"
-          },
-          {
-            "id": "bird_0123",
-            "name": "Avian Chlamydial Conjunctivitis",
-            "name_ja": "鳥クラミジア性結膜炎"
-          },
-          {
-            "id": "bird_0239",
-            "name": "Chlamydiosis – Chronic Latent Form",
-            "name_ja": "クラミジア症慢性潜伏型"
-          },
-          {
-            "id": "bird_0240",
-            "name": "Chlamydiosis – Ocular Form",
-            "name_ja": "クラミジア症眼型"
-          },
-          {
-            "id": "bird_0241",
-            "name": "Chlamydiosis – Hepatic Form",
-            "name_ja": "クラミジア症肝型"
-          },
-          {
-            "id": "bird_0348",
-            "name": "Chlamydia psittaci (Zoonotic)",
-            "name_ja": "クラミジア・プシッタシ（人獣共通）（鳥）"
           }
         ]
       },
@@ -1992,6 +1799,78 @@
         ]
       },
       {
+        "shared_stem": "poison",
+        "size": 6,
+        "members": [
+          {
+            "id": "bird_0111",
+            "name": "Lead Poisoning (Plumbism)",
+            "name_ja": "鉛中毒"
+          },
+          {
+            "id": "bird_0112",
+            "name": "Zinc Poisoning",
+            "name_ja": "亜鉛中毒"
+          },
+          {
+            "id": "bird_0113",
+            "name": "Copper Poisoning",
+            "name_ja": "銅中毒"
+          },
+          {
+            "id": "bird_0190",
+            "name": "Pesticide Poisoning",
+            "name_ja": "農薬中毒"
+          },
+          {
+            "id": "bird_0192",
+            "name": "Rodenticide Poisoning",
+            "name_ja": "殺鼠剤中毒"
+          },
+          {
+            "id": "bird_0271",
+            "name": "Heavy Metal Poisoning – Mixed (Lead and Zinc)",
+            "name_ja": "混合重金属中毒（鉛・亜鉛）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "renal",
+        "size": 6,
+        "members": [
+          {
+            "id": "bird_0048",
+            "name": "Renal Failure (Acute / Chronic)",
+            "name_ja": "腎不全（急性／慢性）"
+          },
+          {
+            "id": "bird_0052",
+            "name": "Renal Tumor (Renal Adenocarcinoma)",
+            "name_ja": "腎腫瘍（腎腺癌）"
+          },
+          {
+            "id": "bird_0206",
+            "name": "Avian Renal Tumor",
+            "name_ja": "鳥類腎腫瘍"
+          },
+          {
+            "id": "bird_0258",
+            "name": "Renal Cystadenocarcinoma",
+            "name_ja": "腎嚢胞腺癌"
+          },
+          {
+            "id": "bird_0303",
+            "name": "Amyloidosis – Renal",
+            "name_ja": "アミロイドーシス腎型"
+          },
+          {
+            "id": "bird_0321",
+            "name": "Renal Adenocarcinoma",
+            "name_ja": "腎腺癌（鳥）"
+          }
+        ]
+      },
+      {
         "shared_stem": "absces",
         "size": 5,
         "members": [
@@ -2112,6 +1991,37 @@
             "id": "bird_0381",
             "name": "Gastric Foreign Body",
             "name_ja": "胃内異物（鳥）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "chlamy",
+        "size": 5,
+        "members": [
+          {
+            "id": "bird_0123",
+            "name": "Avian Chlamydial Conjunctivitis",
+            "name_ja": "鳥クラミジア性結膜炎"
+          },
+          {
+            "id": "bird_0239",
+            "name": "Chlamydiosis – Chronic Latent Form",
+            "name_ja": "クラミジア症慢性潜伏型"
+          },
+          {
+            "id": "bird_0240",
+            "name": "Chlamydiosis – Ocular Form",
+            "name_ja": "クラミジア症眼型"
+          },
+          {
+            "id": "bird_0241",
+            "name": "Chlamydiosis – Hepatic Form",
+            "name_ja": "クラミジア症肝型"
+          },
+          {
+            "id": "bird_0348",
+            "name": "Chlamydia psittaci (Zoonotic)",
+            "name_ja": "クラミジア・プシッタシ（人獣共通）（鳥）"
           }
         ]
       },
@@ -2926,27 +2836,6 @@
         ]
       },
       {
-        "shared_stem": "failur",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0048",
-            "name": "Renal Failure (Acute / Chronic)",
-            "name_ja": "腎不全（急性／慢性）"
-          },
-          {
-            "id": "bird_0107",
-            "name": "Congestive Heart Failure",
-            "name_ja": "うっ血性心不全"
-          },
-          {
-            "id": "bird_0445",
-            "name": "Renal Failure (Acute)",
-            "name_ja": "急性腎不全（鳥）"
-          }
-        ]
-      },
-      {
         "shared_stem": "fungal",
         "size": 3,
         "members": [
@@ -2985,27 +2874,6 @@
             "id": "bird_0296",
             "name": "Uropygial Gland Impaction",
             "name_ja": "尾脂腺閉塞"
-          }
-        ]
-      },
-      {
-        "shared_stem": "lead",
-        "size": 3,
-        "members": [
-          {
-            "id": "bird_0079",
-            "name": "Lead Poisoning (Neurological)",
-            "name_ja": "鉛中毒（神経型）"
-          },
-          {
-            "id": "bird_0111",
-            "name": "Lead Poisoning (Plumbism)",
-            "name_ja": "鉛中毒"
-          },
-          {
-            "id": "bird_0270",
-            "name": "Lead Toxicosis – Chronic",
-            "name_ja": "鉛中毒慢性型"
           }
         ]
       },
@@ -3199,20 +3067,20 @@
         ]
       }
     ],
-    "family_cluster_count": 81
+    "family_cluster_count": 79
   },
   "T102": {
     "detector": "T102",
-    "total_records": 505,
+    "total_records": 500,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 505,
+    "total_records": 500,
     "empty_count": 0,
     "heading_only_count": 61,
-    "with_dosage_count": 444,
+    "with_dosage_count": 439,
     "empty": [],
     "heading_only": [
       {
@@ -3260,7 +3128,7 @@
         "name": "Renal Failure (Acute / Chronic)",
         "name_ja": "腎不全（急性／慢性）",
         "treatment_ja_len": 483,
-        "treatment_len": 633,
+        "treatment_len": 970,
         "has_dosage": false
       },
       {
@@ -3707,14 +3575,14 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 505,
+    "total_records": 500,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_corpus_loaded": true,
     "citation_corpus_loaded": true,
     "corpus_incomplete": false,
     "corpus_warning": null,
-    "drug_mismatch_count": 91,
+    "drug_mismatch_count": 90,
     "citation_mismatch_count": 17,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -3809,6 +3677,18 @@
           {
             "drug": "Silver Sulfadiazine",
             "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
+          }
+        ]
+      },
+      {
+        "id": "bird_0048",
+        "name": "Renal Failure (Acute / Chronic)",
+        "name_ja": "腎不全（急性／慢性）",
+        "drugs": [
+          {
+            "drug": "Apomorphine",
+            "drug_ja": "アポモルフィン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -4184,23 +4064,6 @@
           {
             "drug": "Lactulose",
             "drug_ja": "ラクツロース",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "bird_0349",
-        "name": "Bumblefoot (Advanced/Surgical)",
-        "name_ja": "バンブルフット（進行/外科）（鳥）",
-        "drugs": [
-          {
-            "drug": "Sulfadiazine",
-            "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Silver Sulfadiazine",
-            "drug_ja": "スルファジアジン銀",
             "reason": "no dosing data for this species"
           }
         ]
@@ -4583,6 +4446,16 @@
             "drug": "Mupirocin",
             "drug_ja": "ムピロシン",
             "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Sulfadiazine",
+            "drug_ja": "スルファジアジン",
+            "reason": "no dosing data for this species"
+          },
+          {
+            "drug": "Silver Sulfadiazine",
+            "drug_ja": "スルファジアジン銀",
+            "reason": "no dosing data for this species"
           }
         ]
       },
@@ -4630,18 +4503,6 @@
           {
             "drug": "Clarithromycin",
             "drug_ja": "クラリスロマイシン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "bird_0445",
-        "name": "Renal Failure (Acute)",
-        "name_ja": "急性腎不全（鳥）",
-        "drugs": [
-          {
-            "drug": "Apomorphine",
-            "drug_ja": "アポモルフィン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -5080,7 +4941,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 505,
+    "total_records": 500,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,

@@ -1,19 +1,14 @@
 # VetDict 品質検出レポート — bird
 
-- 総レコード数: **505**
+- 総レコード数: **500**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **8** （冗長レコード 8 件）
-- 疾患ファミリー候補（過分割の疑い, ≥3件）: **81**
+- 完全一致重複クラスタ: **3** （冗長レコード 3 件）
+- 疾患ファミリー候補（過分割の疑い, ≥3件）: **79**
 
 ### 完全一致重複（上位20）
-- オウム病（クラミジア症）（Psittacosis / Chlamydiosis）[bird_0010] / オウム病（クラミジア症）（鳥）（Psittacosis (Chlamydiosis)）[bird_0398]
 - 肺炎（Pneumonia）[bird_0031] / 細菌性肺炎（鳥）（Pneumonia (Bacterial)）[bird_0417]
-- 腎不全（急性／慢性）（Renal Failure (Acute / Chronic)）[bird_0048] / 急性腎不全（鳥）（Renal Failure (Acute)）[bird_0445]
 - 鉄蓄積症（Iron Storage Disease (non-hemochromatosis)）[bird_0059] / 鉄蓄積症（ヘモクロマトーシス）（鳥）（Iron Storage Disease (Hemochromatosis)）[bird_0415]
-- 鉛中毒（神経型）（Lead Poisoning (Neurological)）[bird_0079] / 鉛中毒（Lead Poisoning (Plumbism)）[bird_0111]
-- 卵停滞（産卵前）（Egg Retention (Pre-laying)）[bird_0295] / 卵停滞（鳥）（Retained Egg）[bird_0383]
-- バンブルフット（進行/外科）（鳥）（Bumblefoot (Advanced/Surgical)）[bird_0349] / バンブルフット（足底皮膚炎）（鳥）（Bumblefoot (Pododermatitis)）[bird_0406]
 - 翼骨折（鳥）（Fracture (Wing)）[bird_0428] / 脚骨折（鳥）（Fracture (Leg)）[bird_0429]
 
 ### 疾患ファミリー候補（上位15）
@@ -241,7 +236,7 @@
 ## T104 空 / 見出しのみ治療セクション
 - 完全に空: **0**
 - 投与量なし（見出しのみ）: **61**
-- 投与量あり: **444**
+- 投与量あり: **439**
 
 ### 投与量なし（上位30）
 - ボルデテラ感染症（Bordetella Infection）[bird_0020] — ja:161字 / en:137字
@@ -249,7 +244,7 @@
 - 鼻炎（Rhinitis）[bird_0028] — ja:67字 / en:193字
 - 気管閉塞（Tracheal Obstruction）[bird_0030] — ja:158字 / en:210字
 - 嗉嚢炎（Ingluvitis (Crop Infection)）[bird_0036] — ja:157字 / en:137字
-- 腎不全（急性／慢性）（Renal Failure (Acute / Chronic)）[bird_0048] — ja:483字 / en:633字
+- 腎不全（急性／慢性）（Renal Failure (Acute / Chronic)）[bird_0048] — ja:483字 / en:970字
 - ビタミンD欠乏症（Vitamin D Deficiency）[bird_0057] — ja:73字 / en:193字
 - ヨウ素欠乏症（Iodine Deficiency）[bird_0058] — ja:220字 / en:419字
 - 肥満（Obesity）[bird_0060] — ja:67字 / en:460字
@@ -277,7 +272,7 @@
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
 - 参照コーパス: 薬品 **610** 件 / 出典キー **30** 件（薬品ロードOK・出典ロードOK）
-- 種別投与量なしの薬品リンク（旧・未ガード）: **91** 疾患 → ガード後残存: **0**
+- 種別投与量なしの薬品リンク（旧・未ガード）: **90** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **17** 疾患 → ガード後残存: **0**
 
 ### 種に投与量データが無い薬品リンク（上位20）
@@ -288,6 +283,7 @@
 - クレブシエラ感染症（Klebsiella Infection）[bird_0015] → メロペネム
 - レンサ球菌感染症（Streptococcal Infection）[bird_0018] → ペニシリンG
 - 嗉嚢火傷（Crop Burn (Thermal Ingluvitis)）[bird_0034] → スルファジアジン, スルファジアジン銀
+- 腎不全（急性／慢性）（Renal Failure (Acute / Chronic)）[bird_0048] → アポモルフィン
 - 関節炎（Arthritis）[bird_0075] → トラマドール
 - 痙攣性疾患（Seizure Disorder）[bird_0081] → フェノバルビタール
 - 胆管癌（Bile Duct Carcinoma (Cholangiocarcinoma)）[bird_0094] → ラクツロース
@@ -300,7 +296,6 @@
 - 皮膚糸状菌症（白癬）（Dermatophytosis (Ringworm)）[bird_0143] → ミコナゾール
 - 骨肉腫（Osteosarcoma）[bird_0172] → トラマドール
 - 胆管細胞癌（Cholangiocellular Carcinoma）[bird_0173] → ラクツロース
-- 総排泄腔炎（ベントグリート）（Cloacitis (Vent Gleet)）[bird_0174] → スルファジアジン, スルファジアジン銀
 
 ### 犬猫論文が他種に自動紐付け（上位20）
 - パスツレラ症（Pasteurellosis）[bird_0019] → key: pasteurellosis

@@ -37,20 +37,6 @@
       {
         "members": [
           {
-            "id": "parakeet_0024",
-            "name": "Mite Infestation (Red Mites / Feather Mites)",
-            "name_ja": "ダニ寄生症（ワクモ・羽ダニ）"
-          },
-          {
-            "id": "parakeet_0155",
-            "name": "Tick Infestation",
-            "name_ja": "ダニ寄生症"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
             "id": "parakeet_0027",
             "name": "Megabacteriosis (AGY / Macrorhabdus)",
             "name_ja": "メガバクテリア症（AGY・マクロラブダス症）"
@@ -627,8 +613,8 @@
         ]
       }
     ],
-    "exact_duplicate_cluster_count": 40,
-    "redundant_record_count": 52,
+    "exact_duplicate_cluster_count": 39,
+    "redundant_record_count": 51,
     "family_clusters": [
       {
         "shared_stem": "defici",
@@ -1970,7 +1956,7 @@
           {
             "id": "parakeet_0155",
             "name": "Tick Infestation",
-            "name_ja": "ダニ寄生症"
+            "name_ja": "マダニ寄生症"
           },
           {
             "id": "parakeet_0156",

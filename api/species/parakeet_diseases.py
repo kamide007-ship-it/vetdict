@@ -3162,7 +3162,7 @@ DISEASES: List[Dict[str, Any]] = [
     },
     {
         "name": "Tick Infestation",
-        "name_ja": "ダニ寄生症",
+        "name_ja": "マダニ寄生症",
         "symptoms": {"anemia", "lethargy", "skin_lesions", "weakness"},
         "description": "Tick Infestation is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "ダニ寄生による貧血と感染症伝播リスク。",

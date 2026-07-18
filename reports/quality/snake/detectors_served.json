@@ -1,13 +1,18 @@
 {
   "species": "snake",
   "view": "served",
-  "record_count": 231,
+  "record_count": 222,
   "T101": {
     "detector": "T101",
-    "total_records": 231,
+    "total_records": 222,
     "exact_duplicate_clusters": [
       {
         "members": [
+          {
+            "id": "snake_0000",
+            "name": "Inclusion Body Disease (IBD)",
+            "name_ja": "封入体病（IBD）"
+          },
           {
             "id": "snake_0005",
             "name": "Sunshine Virus (Reptile Sunshinevirus)",
@@ -16,7 +21,7 @@
           {
             "id": "snake_0147",
             "name": "Sunshine Virus (Reptarenavirus)",
-            "name_ja": "サンシャインウイルス（ヘビ）"
+            "name_ja": "封入体病（レプタレナウイルス）（ヘビ）"
           }
         ]
       },
@@ -38,38 +43,10 @@
             "name_ja": "ストレス性拒食（ヘビ）"
           }
         ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0180",
-            "name": "Gout (Visceral)",
-            "name_ja": "痛風（内臓型）（ヘビ）"
-          },
-          {
-            "id": "snake_0181",
-            "name": "Gout (Articular)",
-            "name_ja": "痛風（関節型）（ヘビ）"
-          }
-        ]
-      },
-      {
-        "members": [
-          {
-            "id": "snake_0211",
-            "name": "Fracture (Limb)",
-            "name_ja": "四肢骨折（ヘビ）"
-          },
-          {
-            "id": "snake_0212",
-            "name": "Fracture (Shell/Carapace)",
-            "name_ja": "甲羅骨折（ヘビ）"
-          }
-        ]
       }
     ],
-    "exact_duplicate_cluster_count": 4,
-    "redundant_record_count": 5,
+    "exact_duplicate_cluster_count": 2,
+    "redundant_record_count": 4,
     "family_clusters": [
       {
         "shared_stem": "defici",
@@ -206,7 +183,7 @@
       },
       {
         "shared_stem": "prolap",
-        "size": 6,
+        "size": 5,
         "members": [
           {
             "id": "snake_0045",
@@ -224,11 +201,6 @@
             "name_ja": "臓器脱（胃・腸）"
           },
           {
-            "id": "snake_0187",
-            "name": "Penile/Hemipenal Prolapse",
-            "name_ja": "陰茎/半陰茎脱（ヘビ）"
-          },
-          {
             "id": "snake_0194",
             "name": "Intestinal Prolapse",
             "name_ja": "腸脱（ヘビ）"
@@ -237,37 +209,6 @@
             "id": "snake_0199",
             "name": "Rectal/Cloacal Prolapse",
             "name_ja": "直腸/総排泄腔脱（ヘビ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "gout",
-        "size": 5,
-        "members": [
-          {
-            "id": "snake_0048",
-            "name": "Articular Gout",
-            "name_ja": "関節痛風"
-          },
-          {
-            "id": "snake_0049",
-            "name": "Visceral Gout",
-            "name_ja": "内臓痛風"
-          },
-          {
-            "id": "snake_0111",
-            "name": "Hyperuricemia / Pre-gout",
-            "name_ja": "高尿酸血症・痛風前状態"
-          },
-          {
-            "id": "snake_0180",
-            "name": "Gout (Visceral)",
-            "name_ja": "痛風（内臓型）（ヘビ）"
-          },
-          {
-            "id": "snake_0181",
-            "name": "Gout (Articular)",
-            "name_ja": "痛風（関節型）（ヘビ）"
           }
         ]
       },
@@ -386,58 +327,6 @@
         ]
       },
       {
-        "shared_stem": "fractu",
-        "size": 4,
-        "members": [
-          {
-            "id": "snake_0100",
-            "name": "Spinal Fracture / Vertebral Luxation",
-            "name_ja": "脊椎骨折・椎体脱臼"
-          },
-          {
-            "id": "snake_0101",
-            "name": "Rib Fractures",
-            "name_ja": "肋骨骨折"
-          },
-          {
-            "id": "snake_0211",
-            "name": "Fracture (Limb)",
-            "name_ja": "四肢骨折（ヘビ）"
-          },
-          {
-            "id": "snake_0212",
-            "name": "Fracture (Shell/Carapace)",
-            "name_ja": "甲羅骨折（ヘビ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "infest",
-        "size": 4,
-        "members": [
-          {
-            "id": "snake_0017",
-            "name": "Tick Infestation",
-            "name_ja": "マダニ寄生"
-          },
-          {
-            "id": "snake_0092",
-            "name": "Chigger Mite Infestation (Trombiculidae)",
-            "name_ja": "ツツガムシ寄生症"
-          },
-          {
-            "id": "snake_0093",
-            "name": "Leech Infestation",
-            "name_ja": "ヒル寄生症"
-          },
-          {
-            "id": "snake_0163",
-            "name": "Mite Infestation (Ophionyssus)",
-            "name_ja": "ダニ症（Ophionyssus）（ヘビ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "injury",
         "size": 4,
         "members": [
@@ -455,32 +344,6 @@
             "id": "snake_0149",
             "name": "Prey-Related Injury",
             "name_ja": "餌関連損傷（ヘビ）"
-          },
-          {
-            "id": "snake_0215",
-            "name": "Spinal Injury",
-            "name_ja": "脊髄損傷（ヘビ）"
-          }
-        ]
-      },
-      {
-        "shared_stem": "spinal",
-        "size": 4,
-        "members": [
-          {
-            "id": "snake_0051",
-            "name": "Spinal Osteopathy / Spondylosis",
-            "name_ja": "脊椎骨症/脊椎症"
-          },
-          {
-            "id": "snake_0100",
-            "name": "Spinal Fracture / Vertebral Luxation",
-            "name_ja": "脊椎骨折・椎体脱臼"
-          },
-          {
-            "id": "snake_0151",
-            "name": "Spinal Osteopathy",
-            "name_ja": "脊椎骨症（ヘビ）"
           },
           {
             "id": "snake_0215",
@@ -616,6 +479,27 @@
         ]
       },
       {
+        "shared_stem": "fractu",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0100",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "snake_0101",
+            "name": "Rib Fractures",
+            "name_ja": "肋骨骨折"
+          },
+          {
+            "id": "snake_0211",
+            "name": "Fracture (Limb)",
+            "name_ja": "四肢骨折（ヘビ）"
+          }
+        ]
+      },
+      {
         "shared_stem": "gastro",
         "size": 3,
         "members": [
@@ -637,23 +521,44 @@
         ]
       },
       {
-        "shared_stem": "hemipe",
+        "shared_stem": "gout",
         "size": 3,
         "members": [
           {
-            "id": "snake_0045",
-            "name": "Hemipenal Prolapse",
-            "name_ja": "半陰茎脱出"
+            "id": "snake_0048",
+            "name": "Articular Gout",
+            "name_ja": "関節痛風"
           },
           {
-            "id": "snake_0153",
-            "name": "Retained Hemipenes",
-            "name_ja": "半陰茎停滞（ヘビ）"
+            "id": "snake_0049",
+            "name": "Visceral Gout",
+            "name_ja": "内臓痛風"
           },
           {
-            "id": "snake_0187",
-            "name": "Penile/Hemipenal Prolapse",
-            "name_ja": "陰茎/半陰茎脱（ヘビ）"
+            "id": "snake_0111",
+            "name": "Hyperuricemia / Pre-gout",
+            "name_ja": "高尿酸血症・痛風前状態"
+          }
+        ]
+      },
+      {
+        "shared_stem": "infest",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0017",
+            "name": "Tick Infestation",
+            "name_ja": "マダニ寄生"
+          },
+          {
+            "id": "snake_0092",
+            "name": "Chigger Mite Infestation (Trombiculidae)",
+            "name_ja": "ツツガムシ寄生症"
+          },
+          {
+            "id": "snake_0093",
+            "name": "Leech Infestation",
+            "name_ja": "ヒル寄生症"
           }
         ]
       },
@@ -700,27 +605,6 @@
         ]
       },
       {
-        "shared_stem": "paramy",
-        "size": 3,
-        "members": [
-          {
-            "id": "snake_0001",
-            "name": "Paramyxovirus Infection",
-            "name_ja": "パラミクソウイルス感染症"
-          },
-          {
-            "id": "snake_0145",
-            "name": "Paramyxovirus Pneumonia",
-            "name_ja": "パラミクソウイルス肺炎（ヘビ）"
-          },
-          {
-            "id": "snake_0156",
-            "name": "Paramyxovirus",
-            "name_ja": "パラミクソウイルス（ヘビ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "pneumo",
         "size": 3,
         "members": [
@@ -742,27 +626,6 @@
         ]
       },
       {
-        "shared_stem": "protoz",
-        "size": 3,
-        "members": [
-          {
-            "id": "snake_0089",
-            "name": "Flagellate Protozoal Infection",
-            "name_ja": "鞭毛虫感染症"
-          },
-          {
-            "id": "snake_0090",
-            "name": "Ciliate Protozoal Overgrowth",
-            "name_ja": "繊毛虫過増殖症"
-          },
-          {
-            "id": "snake_0169",
-            "name": "Flagellate Protozoan Infection",
-            "name_ja": "鞭毛虫感染（ヘビ）"
-          }
-        ]
-      },
-      {
         "shared_stem": "relate",
         "size": 3,
         "members": [
@@ -780,6 +643,27 @@
             "id": "snake_0239",
             "name": "Stress-Related Illness",
             "name_ja": "ストレス関連疾患（ヘビ）"
+          }
+        ]
+      },
+      {
+        "shared_stem": "spinal",
+        "size": 3,
+        "members": [
+          {
+            "id": "snake_0051",
+            "name": "Spinal Osteopathy / Spondylosis",
+            "name_ja": "脊椎骨症/脊椎症"
+          },
+          {
+            "id": "snake_0100",
+            "name": "Spinal Fracture / Vertebral Luxation",
+            "name_ja": "脊椎骨折・椎体脱臼"
+          },
+          {
+            "id": "snake_0215",
+            "name": "Spinal Injury",
+            "name_ja": "脊髄損傷（ヘビ）"
           }
         ]
       },
@@ -847,20 +731,20 @@
         ]
       }
     ],
-    "family_cluster_count": 30
+    "family_cluster_count": 27
   },
   "T102": {
     "detector": "T102",
-    "total_records": 231,
+    "total_records": 222,
     "flagged_count": 0,
     "flags": []
   },
   "T104": {
     "detector": "T104",
-    "total_records": 231,
+    "total_records": 222,
     "empty_count": 0,
-    "heading_only_count": 46,
-    "with_dosage_count": 185,
+    "heading_only_count": 43,
+    "with_dosage_count": 179,
     "empty": [],
     "heading_only": [
       {
@@ -952,14 +836,6 @@
         "has_dosage": false
       },
       {
-        "id": "snake_0045",
-        "name": "Hemipenal Prolapse",
-        "name_ja": "半陰茎脱出",
-        "treatment_ja_len": 71,
-        "treatment_len": 190,
-        "has_dosage": false
-      },
-      {
         "id": "snake_0046",
         "name": "Cloacal Prolapse",
         "name_ja": "総排泄腔脱",
@@ -973,14 +849,6 @@
         "name_ja": "腎不全",
         "treatment_ja_len": 43,
         "treatment_len": 188,
-        "has_dosage": false
-      },
-      {
-        "id": "snake_0051",
-        "name": "Spinal Osteopathy / Spondylosis",
-        "name_ja": "脊椎骨症/脊椎症",
-        "treatment_ja_len": 43,
-        "treatment_len": 190,
         "has_dosage": false
       },
       {
@@ -1077,14 +945,6 @@
         "name_ja": "鉤頭虫感染症",
         "treatment_ja_len": 164,
         "treatment_len": 204,
-        "has_dosage": false
-      },
-      {
-        "id": "snake_0089",
-        "name": "Flagellate Protozoal Infection",
-        "name_ja": "鞭毛虫感染症",
-        "treatment_ja_len": 161,
-        "treatment_len": 137,
         "has_dosage": false
       },
       {
@@ -1218,7 +1078,7 @@
       {
         "id": "snake_0147",
         "name": "Sunshine Virus (Reptarenavirus)",
-        "name_ja": "サンシャインウイルス（ヘビ）",
+        "name_ja": "封入体病（レプタレナウイルス）（ヘビ）",
         "treatment_ja_len": 293,
         "treatment_len": 682,
         "has_dosage": false
@@ -1235,14 +1095,14 @@
   },
   "T108": {
     "detector": "T108",
-    "total_records": 231,
+    "total_records": 222,
     "drug_available": 610,
     "ref_keys_available": 30,
     "drug_corpus_loaded": true,
     "citation_corpus_loaded": true,
     "corpus_incomplete": false,
     "corpus_warning": null,
-    "drug_mismatch_count": 77,
+    "drug_mismatch_count": 75,
     "citation_mismatch_count": 8,
     "drug_mismatch_residual_count": 0,
     "citation_mismatch_residual_count": 0,
@@ -1861,28 +1721,6 @@
         ]
       },
       {
-        "id": "snake_0163",
-        "name": "Mite Infestation (Ophionyssus)",
-        "name_ja": "ダニ症（Ophionyssus）（ヘビ）",
-        "drugs": [
-          {
-            "drug": "Moxidectin",
-            "drug_ja": "モキシデクチン",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Imidacloprid",
-            "drug_ja": "イミダクロプリド",
-            "reason": "no dosing data for this species"
-          },
-          {
-            "drug": "Selamectin (Revolution)",
-            "drug_ja": "セラメクチン（レボリューション）",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
         "id": "snake_0173",
         "name": "Shell Rot",
         "name_ja": "甲羅腐敗（ヘビ）",
@@ -1914,18 +1752,6 @@
           {
             "drug": "Sulfadiazine",
             "drug_ja": "スルファジアジン",
-            "reason": "no dosing data for this species"
-          }
-        ]
-      },
-      {
-        "id": "snake_0184",
-        "name": "Egg Binding (Dystocia)",
-        "name_ja": "卵詰まり（難産）（ヘビ）",
-        "drugs": [
-          {
-            "drug": "Oxytocin",
-            "drug_ja": "オキシトシン",
             "reason": "no dosing data for this species"
           }
         ]
@@ -2409,7 +2235,7 @@
   },
   "T109": {
     "detector": "T109",
-    "total_records": 231,
+    "total_records": 222,
     "hit_count": 0,
     "safe_occurrences": 0,
     "review_occurrences": 0,
