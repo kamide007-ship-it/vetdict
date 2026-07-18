@@ -3,13 +3,12 @@
 - 総レコード数: **459**
 
 ## T101 重複 / 過分割
-- 完全一致重複クラスタ: **40** （冗長レコード 52 件）
+- 完全一致重複クラスタ: **39** （冗長レコード 51 件）
 - 疾患ファミリー候補（過分割の疑い, ≥3件）: **94**
 
 ### 完全一致重複（上位20）
 - 鳥型結核症（Mycobacteriosis (Avian Tuberculosis)）[parakeet_0011] / マイコバクテリウム症（鳥結核）（インコ）（Mycobacteriosis (Avian TB)）[parakeet_0300]
 - 条虫症（Tapeworm Infection）[parakeet_0023] / 条虫感染症（インコ）（Tapeworm Infection (Parakeet)）[parakeet_0186]
-- ダニ寄生症（ワクモ・羽ダニ）（Mite Infestation (Red Mites / Feather Mites)）[parakeet_0024] / ダニ寄生症（Tick Infestation）[parakeet_0155]
 - メガバクテリア症（AGY・マクロラブダス症）（Megabacteriosis (AGY / Macrorhabdus)）[parakeet_0027] / メガバクテリア症（インコ）（Megabacteriosis）[parakeet_0252] / メガバクテリア症（AGY）（インコ）（Megabacteriosis (AGY)）[parakeet_0272]
 - 甲状腺腫（Goiter (Thyroid Hyperplasia)）[parakeet_0028] / 甲状腺腫（インコ）（Goiter）[parakeet_0253]
 - 内臓痛風（Gout (Visceral)）[parakeet_0029] / 関節痛風（Gout (Articular)）[parakeet_0030] / 痛風（内臓型/関節型）（インコ）（Gout (Visceral/Articular)）[parakeet_0274]
@@ -27,6 +26,7 @@
 - 羽嚢腫（Feather Cysts）[parakeet_0058] / 羽毛嚢胞（インコ）（Feather Cyst）[parakeet_0264]
 - 毛引き症（羽毛損傷行動）（Feather Plucking (Feather Destructive Behavior)）[parakeet_0059] / 毛引き（インコ）（Feather Plucking）[parakeet_0268]
 - そ嚢停滞（サワークロップ）（Crop Stasis (Sour Crop)）[parakeet_0067] / 嗉嚢閉塞（異物）（Crop Impaction (Foreign Body)）[parakeet_0206] / そ嚢うっ滞（新生児）（インコ）（Crop Stasis (Neonatal)）[parakeet_0265] / そ嚢うっ滞（インコ）（Crop Stasis）[parakeet_0270] / そ嚢停滞（インコ）（Crop Impaction）[parakeet_0334]
+- 総排泄腔炎（Cloacitis (Vent Infection)）[parakeet_0069] / 総排泄腔炎（インコ）（Cloacitis）[parakeet_0301]
 
 ### 疾患ファミリー候補（上位15）
 - stem=`defici` × 19件
@@ -260,6 +260,7 @@
 - 動脈硬化症（インコ）（Arteriosclerosis）[parakeet_0311] — ja:255字 / en:510字
 
 ## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）
+- 参照コーパス: 薬品 **610** 件 / 出典キー **30** 件（薬品ロードOK・出典ロードOK）
 - 種別投与量なしの薬品リンク（旧・未ガード）: **74** 疾患 → ガード後残存: **0**
 - 犬猫論文の他種への自動紐付け（旧・未ガード）: **14** 疾患 → ガード後残存: **0**
 

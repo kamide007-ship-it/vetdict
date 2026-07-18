@@ -208,8 +208,8 @@
     {
       "species": "parakeet",
       "records": 459,
-      "dup_clusters": 40,
-      "redundant": 52,
+      "dup_clusters": 39,
+      "redundant": 51,
       "families": 94,
       "nonclinical": 0,
       "empty_tx": 0,
@@ -277,7 +277,7 @@
       "species": "snake",
       "records": 248,
       "dup_clusters": 20,
-      "redundant": 23,
+      "redundant": 24,
       "families": 34,
       "nonclinical": 0,
       "empty_tx": 0,
@@ -361,7 +361,7 @@
   ],
   "totals": {
     "records": 7094,
-    "dup_clusters": 545,
+    "dup_clusters": 544,
     "redundant": 642,
     "families": 1178,
     "nonclinical": 4,
@@ -378,5 +378,6 @@
   "guard_warnings": [
     "amphibian: drug_mismatch=220 exceeds guard ceiling 200",
     "exotic_other: drug_mismatch=216 exceeds guard ceiling 200"
-  ]
+  ],
+  "corpus_incomplete_species": []
 }

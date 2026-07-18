@@ -21,6 +21,16 @@
       **成果（統合の実効果が可視化）**: 総疾患 7094→**6836 served**、完全重複クラスタ 545→**338**
       （horse 23→2 / rabbit 42→13 / degu 17→8 / dog 35→23）、非臨床 4→**1**（degu ヒト移植3件 archived）。
       詳細は `.spec/SERVED_VIEW_ROLLOUT.md`。回帰テスト `tests/test_detect_served_view.py`（5件）。read-only・データ非改変。
+- [x] **検出器堅牢化：T108 コーパス未読み込みガード**（🟢 read-only・データ非改変）
+      薬品/出典コーパスの import 失敗時、旧検出器は `except: return []` で黙って空リストを返し、T108 の誤リンク
+      件数が 0 に落ちて「クリーン」と誤読される穴があった（依存未導入の新規コンテナで実際に発生を確認）。
+      - loader を `(items, loaded_ok)` に変更し「正当に空」と「ロード失敗」を区別（コーパスは本来~600薬品で空にならない）。
+      - `detect_source_integrity` に `drug_corpus_loaded/citation_corpus_loaded/corpus_incomplete/corpus_warning` を追加。
+      - レポート md に参照コーパス件数を常時表示＋未読み込み時は ⚠️ 明示バナー（「0件でも未計測＝クリーンではない」）。
+      - `detect.py`/`rollout.py` の `main()` はコーパス未読み込み時に **exit code 3**（自動実行が false-clean を検知可能に）。
+      - `rollout.py` サマリーに対象種バナー＋stderr 警告を追加（ceiling ガードの逆＝過少計測を検知）。
+      - 全21種×2ビューのレポート再生成（差分は純加算＝コーパス行/フィールドのみ、既存カウント不変を検証）。
+      - 回帰テスト `tests/test_detect_corpus_guard.py`（5件）。ruff clean。
 
 ## フェーズ1.5：T108 薬品リンク種ガード（🟡 可逆・データ非改変）— **完了・PR #709**
 - [x] `vetdict_api`: 2つの薬品マッチャを「その種の投与量(`species_info`)を持つ薬のみ」に（net-new）
