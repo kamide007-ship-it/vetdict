@@ -378,5 +378,6 @@
   "guard_warnings": [
     "amphibian: drug_mismatch=220 exceeds guard ceiling 200",
     "exotic_other: drug_mismatch=216 exceeds guard ceiling 200"
-  ]
+  ],
+  "corpus_incomplete_species": []
 }

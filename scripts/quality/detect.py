@@ -425,24 +425,33 @@ def detect_empty_treatment(records: list[dict]) -> dict:
 _DOGCAT = {"dog", "cat"}
 
 
-def _load_drugs() -> list[dict]:
+def _load_drugs() -> tuple[list[dict], bool]:
+    """Return (drugs, loaded_ok).
+
+    ``loaded_ok`` is False when the drug corpus could not be imported (e.g. a
+    bare environment missing Flask). The corpus is never legitimately empty
+    (~600 drugs ship), so an empty result signals a load failure, NOT a clean
+    dataset. Callers must not read a 0 mismatch count as "clean" when
+    ``loaded_ok`` is False.
+    """
     try:
         from api.drug_dictionary import DRUGS
 
-        return list(DRUGS)
+        return list(DRUGS), True
     except Exception:
         logger.warning("Could not import DRUGS for T108", exc_info=True)
-        return []
+        return [], False
 
 
-def _load_disease_reference_keys() -> list[str]:
+def _load_disease_reference_keys() -> tuple[list[str], bool]:
+    """Return (reference_keys, loaded_ok). See ``_load_drugs`` for semantics."""
     try:
         from api.pubmed_references import DISEASE_REFERENCES
 
-        return list(DISEASE_REFERENCES.keys())
+        return list(DISEASE_REFERENCES.keys()), True
     except Exception:
         logger.warning("Could not import DISEASE_REFERENCES for T108", exc_info=True)
-        return []
+        return [], False
 
 
 def _ref_key_allows_species(key: str, species: str) -> bool:
@@ -475,8 +484,8 @@ def detect_source_integrity(records: list[dict], species: str) -> dict:
         ``species in species_info`` guard for drug links). Target: 0. A non-zero
         residual means a guard regressed.
     """
-    drugs = _load_drugs()
-    ref_keys = _load_disease_reference_keys()
+    drugs, drug_corpus_loaded = _load_drugs()
+    ref_keys, citation_corpus_loaded = _load_disease_reference_keys()
 
     drug_flags: list[dict] = []
     ref_flags: list[dict] = []
@@ -525,11 +534,33 @@ def detect_source_integrity(records: list[dict], species: str) -> dict:
                     # Residual would be >0 only if the shipped guard still let an
                     # inappropriate key through; it does not, so residual is 0.
 
+    # A failed corpus load makes the mismatch counts meaningless (they collapse
+    # toward 0), which would otherwise read as a false "clean" baseline. Surface
+    # it explicitly so no reader or aggregate mistakes an unloaded corpus for a
+    # healthy dataset.
+    corpus_incomplete = not (drug_corpus_loaded and citation_corpus_loaded)
+    corpus_warning = None
+    if corpus_incomplete:
+        missing = []
+        if not drug_corpus_loaded:
+            missing.append("薬品辞書 (api.drug_dictionary.DRUGS)")
+        if not citation_corpus_loaded:
+            missing.append("出典キー (api.pubmed_references.DISEASE_REFERENCES)")
+        corpus_warning = (
+            "参照コーパスの読み込みに失敗: " + " / ".join(missing) + "。"
+            "該当する誤リンク件数は 0 に見えても実際には未計測（依存未導入の可能性）。"
+            "「クリーン」と誤読しないこと。"
+        )
+
     return {
         "detector": "T108",
         "total_records": len(records),
         "drug_available": len(drugs),
         "ref_keys_available": len(ref_keys),
+        "drug_corpus_loaded": drug_corpus_loaded,
+        "citation_corpus_loaded": citation_corpus_loaded,
+        "corpus_incomplete": corpus_incomplete,
+        "corpus_warning": corpus_warning,
         "drug_mismatch_count": len(drug_flags),
         "citation_mismatch_count": len(ref_flags),
         "drug_mismatch_residual_count": drug_residual,
@@ -697,6 +728,16 @@ def _markdown_summary(report: dict) -> str:
     lines += [
         "",
         "## T108 出典 / 薬品リンク整合性（キーワード自動マッチの誤紐付け）",
+    ]
+    if t8.get("corpus_incomplete"):
+        lines += [
+            f"> ⚠️ **参照コーパス未読み込み — 下記の誤リンク件数は信頼できません。** {t8.get('corpus_warning', '')}",
+            "",
+        ]
+    lines += [
+        f"- 参照コーパス: 薬品 **{t8['drug_available']}** 件 / 出典キー **{t8['ref_keys_available']}** 件"
+        f"（薬品ロード{'OK' if t8.get('drug_corpus_loaded', True) else '**失敗**'}・"
+        f"出典ロード{'OK' if t8.get('citation_corpus_loaded', True) else '**失敗**'}）",
         f"- 種別投与量なしの薬品リンク（旧・未ガード）: **{t8['drug_mismatch_count']}** 疾患"
         f" → ガード後残存: **{t8.get('drug_mismatch_residual_count', 0)}**",
         f"- 犬猫論文の他種への自動紐付け（旧・未ガード）: **{t8['citation_mismatch_count']}** 疾患"
@@ -758,9 +799,17 @@ def main() -> int:
         f"  T104 empty={t4['empty_count']} heading-only={t4['heading_only_count']} "
         f"with-dosage={t4['with_dosage_count']}"
     )
-    print(f"  T108 drug-mismatch={t8['drug_mismatch_count']} citation-mismatch={t8['citation_mismatch_count']}")
+    print(
+        f"  T108 drug-mismatch={t8['drug_mismatch_count']} citation-mismatch={t8['citation_mismatch_count']} "
+        f"(corpus: drugs={t8['drug_available']} refs={t8['ref_keys_available']})"
+    )
     print(f"  T109 mt-smell hits={t9['hit_count']} (safe={t9['safe_occurrences']} review={t9['review_occurrences']})")
     print(f"  reports -> {out_dir}/detectors{suffix}.json, detectors{suffix}.md")
+    if t8.get("corpus_incomplete"):
+        # Non-zero, distinct exit code so automated callers detect an unreliable
+        # (false-clean) T108 run instead of trusting a 0 mismatch count.
+        print(f"  ⚠️ CORPUS INCOMPLETE — T108 counts unreliable: {t8.get('corpus_warning', '')}", file=sys.stderr)
+        return 3
     return 0
 
 

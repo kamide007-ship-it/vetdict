@@ -51,6 +51,7 @@ def main() -> int:
     out_root = REPO_ROOT / "reports" / "quality"
     rows = []
     warnings = []
+    corpus_incomplete_species = []
     for sp in ALL_SPECIES:
         report = run(sp, served=served)
         sp_dir = out_root / sp
@@ -80,6 +81,12 @@ def main() -> int:
         }
         rows.append(row)
 
+        # Corpus-load guard: a failed drug/citation corpus import makes T108
+        # counts collapse to 0 (false "clean"). This is the opposite failure
+        # mode from the ceiling guards below and must never be silent.
+        if t8.get("corpus_incomplete"):
+            corpus_incomplete_species.append(sp)
+
         # failure-guard checks
         for key, ceiling in _GUARD.items():
             val = row.get(key) or row.get(
@@ -106,7 +113,13 @@ def main() -> int:
         )
     }  # fmt: skip
 
-    summary = {"view": "served" if served else "raw", "species": rows, "totals": totals, "guard_warnings": warnings}
+    summary = {
+        "view": "served" if served else "raw",
+        "species": rows,
+        "totals": totals,
+        "guard_warnings": warnings,
+        "corpus_incomplete_species": corpus_incomplete_species,
+    }
     (out_root / f"_rollout_summary{suffix}.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
     )
@@ -122,6 +135,16 @@ def main() -> int:
         "",
         f"ビュー: {view_label}。",
         "",
+    ]
+    if corpus_incomplete_species:
+        md += [
+            "> ⚠️ **T108 参照コーパス未読み込み — 薬品誤リンク・論文誤紐付けの件数は信頼できません。**",
+            f"> 対象種: {', '.join(corpus_incomplete_species)}。"
+            "薬品辞書/出典キーの import に失敗しており（依存未導入の可能性）、"
+            "0 件でも「クリーン」ではなく **未計測**。依存を導入して再実行すること。",
+            "",
+        ]
+    md += [
         f"総疾患: **{totals['records']}** / 完全重複クラスタ計: **{totals['dup_clusters']}**（冗長 {totals['redundant']}） "
         f"/ 非臨床計: **{totals['nonclinical']}** / 投与量なし治療計: **{totals['heading_only_tx']}** "
         f"/ 薬品誤リンク計: **{totals['drug_mismatch']}** / 犬猫論文誤紐付け計: **{totals['citation_mismatch']}** "
@@ -158,6 +181,14 @@ def main() -> int:
         for w in warnings:
             print("  -", w)
     print(f"summary -> {out_root}/_rollout_summary{suffix}.md")
+    if corpus_incomplete_species:
+        print(
+            "⚠️ CORPUS INCOMPLETE — T108 counts unreliable for: "
+            + ", ".join(corpus_incomplete_species)
+            + " (deps likely missing). NOT a clean result.",
+            file=sys.stderr,
+        )
+        return 3
     return 0
 
 
