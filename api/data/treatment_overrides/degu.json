@@ -76,15 +76,31 @@
    "name": "Fur Mites (Demodex / Notoedres)",
    "name_ja": "毛包虫症",
    "review_status": "draft",
-   "source_kind": "needs_sourcing",
+   "source_kind": "pubmed_sourced",
    "en_reference": "",
    "current_treatment_ja": "デグーにおける毛包虫症の治療には、同定された寄生虫に応じた適切な駆虫薬が必要である。一部の駆虫薬は特定の種に有毒であるため、種に適した用量設定が重要である。全てのライフステージを排除するため複数回投与が必要な場合がある。環境消毒と接触動物の治療で再感染を防止する。貧血、脱水、栄養失調などの二次的合併症に対する支持療法を行う。",
-   "treatment_ja": "",
-   "sources": [],
+   "treatment_ja": "セラメクチン 30 mg/kg ＋ サロラネル 5 mg/kg（Stronghold® Plus／Revolution® Plus）を背頸部にスポット局所投与、週1回。Demodex sp. は計6回、Ornithonyssus bacoti は計4回で駆虫（degu 臨床症例 n=9、良好な忍容性）。環境消毒と同居個体の同時治療で再感染を防止。二次的な貧血・脱水・低栄養には支持療法を併用。",
+   "sources": [
+    {
+     "citation": "Beck W, Hora F, Pantchev N. Case series: Efficacy of selamectin and sarolaner against naturally acquired mite infestations (Demodex sp., Ornithonyssus bacoti) in degus (Octodon degus). Vet Parasitol. 2021;293:109430.",
+     "pmid": "33901932",
+     "doi": "10.1016/j.vetpar.2021.109430",
+     "evidence_grade": "A",
+     "note": "degu-specific clinical case series (n=9); selamectin 30 mg/kg + sarolaner 5 mg/kg topical, weekly x4-6"
+    }
+   ],
    "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Fur Mites (Demodex / Notoedres) degu OR exotic OR rodent treatment」。",
    "pharmacologic": true,
-   "evidence_grade": "",
-   "dosage_sources": []
+   "evidence_grade": "A",
+   "dosage_sources": [
+    {
+     "citation": "Beck W, Hora F, Pantchev N. Case series: Efficacy of selamectin and sarolaner against naturally acquired mite infestations (Demodex sp., Ornithonyssus bacoti) in degus (Octodon degus). Vet Parasitol. 2021;293:109430.",
+     "pmid": "33901932",
+     "doi": "10.1016/j.vetpar.2021.109430",
+     "evidence_grade": "A",
+     "note": "degu-specific clinical case series (n=9); selamectin 30 mg/kg + sarolaner 5 mg/kg topical, weekly x4-6"
+    }
+   ]
   },
   {
    "slug": "aspiration-pneumonia",

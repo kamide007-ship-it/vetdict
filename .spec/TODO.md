@@ -183,7 +183,18 @@
 - [x] **出典基準確定（承認「BC」）**: Carpenter 6th を source-of-truth に、evidence_grade A/B/C。
       `treatment_overrides/degu.json` に記入枠（`pharmacologic`/`evidence_grade`/`dosage_sources`）＋ `source_of_truth` を整備
       （薬物12・非薬物13、用量は空・`review_status=draft`・公開ゲート維持）。
-- [ ] **獣医の人手作業待ち**: 薬物12件に Carpenter 参照で用量＋出典を記入 → `approved` → `published`（🔴・自動公開しない）
+- [x] **PubMed 用量調査（承認「用量はpubmedを調べて欲しい」）** → `.spec/DEGU_DOSAGE_PUBMED_CANDIDATES.md`
+      `Octodon degus` 横断検索。12薬物疾患のうち **degu 特異的用量が引けたのは 1件のみ**:
+      - **毛包虫症**: セラメクチン 30 mg/kg + サロラネル 5 mg/kg 局所・週1回×4-6（Beck 2021, Vet Parasitol,
+        DOI 10.1016/j.vetpar.2021.109430, PMID 33901932）= **grade A**。`treatment_overrides/degu.json` に
+        **draft で記入**（sources 付き・`review_status=draft` 維持＝**未配信**、獣医が publish で初めて配信）。
+      - 残り11件は PubMed に degu 特異的用量なし → Carpenter 6th 等のフォーミュラリ要（grade B・獣医記入）。
+        SPEC 停止条件「出典が過半引けない」に引き続き該当＝自動生成せず。
+      - 副産物（用量ではない degu 特異的参照）: Helicobacter 心筋炎（Mack 2025）・Trichuris 鞭虫（Babero 1975）＝
+        病因の出典候補。麻酔 MAC iso1.75%/sevo2.25%（Ikai 2024）＝麻酔モジュール向け。
+      - fail-closed ゲート維持（`test_treatment_publish_gate` 6 pass、served 公開0件）。
+- [ ] **獣医の人手作業待ち**: 毛包虫症ドラフト（grade A）をレビュー→ `published`；残り11件は Carpenter 参照で
+      用量＋出典を記入 → `approved` → `published`（🔴・自動公開しない）
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
