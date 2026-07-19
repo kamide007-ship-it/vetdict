@@ -167,15 +167,45 @@
    "name": "Ear Infection (Otitis)",
    "name_ja": "耳感染症（外耳炎）",
    "review_status": "draft",
-   "source_kind": "needs_sourcing",
+   "source_kind": "pubmed_sourced",
    "en_reference": "",
    "current_treatment_ja": "爬虫類における耳感染症（中耳炎）の治療には、可能であれば培養感受性試験に基づく標的抗菌薬療法が必要である。結果待ちの間は経験的広域抗菌薬を開始する。抗菌薬治療期間は感染の排除と耐性予防に十分な期間とする。膿瘍や壊死組織には外科的排膿またはデブリードマンが必要な場合がある。支持療法として輸液、鎮痛薬、抗炎症薬、栄養サポートを行う。",
-   "treatment_ja": "",
-   "sources": [],
+   "treatment_ja": "【補助鎮痛・抗炎症（grade B・モルモット PK からの外挿）】メロキシカム 1.5 mg/kg PO/IV（モルモット PK: 経口BA 54%・t½ 約3.7時間）。ただし至適臨床用量は未確立との報告あり（低用量寄りの調整を検討）。腎機能・脱水・消化管に注意し必要最小限で使用。※本項は疼痛管理の補助であり、一次治療である抗菌薬の選択・用量・期間は Carpenter 6th 等のフォーミュラリを参照して別途記入すること（本ドラフトには未収載）。",
+   "sources": [
+    {
+     "citation": "Moeremans I, Devreese M, De Baere S, Croubels S, Hermans K. Pharmacokinetics and absolute oral bioavailability of meloxicam in guinea pigs (Cavia porcellus). Vet Anaesth Analg. 2019;46(4):548-555.",
+     "pmid": "31153785",
+     "doi": "10.1016/j.vaa.2018.11.011",
+     "evidence_grade": "B",
+     "note": "guinea-pig (Cavia) meloxicam PK, 1.5 mg/kg PO/IV; extrapolated to degu (grade B)"
+    },
+    {
+     "citation": "Evans E, Benato L. Pain management in pet guinea pigs (Cavia porcellus): a review of limitations of current knowledge and practice. Vet Anaesth Analg. 2024;52(2):145-152.",
+     "pmid": "39924411",
+     "doi": "10.1016/j.vaa.2024.11.042",
+     "evidence_grade": "B",
+     "note": "review: guinea-pig analgesic doses extrapolated; optimal meloxicam dose unsettled"
+    }
+   ],
    "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Ear Infection (Otitis) degu OR exotic OR rodent treatment」。",
    "pharmacologic": true,
-   "evidence_grade": "",
-   "dosage_sources": []
+   "evidence_grade": "B",
+   "dosage_sources": [
+    {
+     "citation": "Moeremans I, Devreese M, De Baere S, Croubels S, Hermans K. Pharmacokinetics and absolute oral bioavailability of meloxicam in guinea pigs (Cavia porcellus). Vet Anaesth Analg. 2019;46(4):548-555.",
+     "pmid": "31153785",
+     "doi": "10.1016/j.vaa.2018.11.011",
+     "evidence_grade": "B",
+     "note": "guinea-pig (Cavia) meloxicam PK, 1.5 mg/kg PO/IV; extrapolated to degu (grade B)"
+    },
+    {
+     "citation": "Evans E, Benato L. Pain management in pet guinea pigs (Cavia porcellus): a review of limitations of current knowledge and practice. Vet Anaesth Analg. 2024;52(2):145-152.",
+     "pmid": "39924411",
+     "doi": "10.1016/j.vaa.2024.11.042",
+     "evidence_grade": "B",
+     "note": "review: guinea-pig analgesic doses extrapolated; optimal meloxicam dose unsettled"
+    }
+   ]
   },
   {
    "slug": "septicemia",
@@ -227,15 +257,45 @@
    "name": "Tail Amputation Stump Infection",
    "name_ja": "尾切断部感染",
    "review_status": "draft",
-   "source_kind": "needs_sourcing",
+   "source_kind": "pubmed_sourced",
    "en_reference": "",
    "current_treatment_ja": "デグーにおける尾切断部感染の治療は安定化、疼痛管理、創傷ケアを優先する。生命を脅かす損傷を最初に評価・対処する（気道、呼吸、循環）。種に適した鎮痛薬（NSAIDs、オピオイド、局所麻酔薬）による鎮痛が不可欠である。創傷を洗浄・デブリードマンし、一次閉鎖、二次治癒、再建手術を適宜行う。汚染創には広域抗菌薬を使用する。骨折には副子固定または外科的固定を行う。遅発性合併症をモニタリングする。",
-   "treatment_ja": "",
-   "sources": [],
+   "treatment_ja": "【補助鎮痛・抗炎症（grade B・モルモット PK からの外挿）】メロキシカム 1.5 mg/kg PO/IV（モルモット PK: 経口BA 54%・t½ 約3.7時間）。ただし至適臨床用量は未確立との報告あり（低用量寄りの調整を検討）。腎機能・脱水・消化管に注意し必要最小限で使用。※本項は疼痛管理の補助であり、一次治療である抗菌薬の選択・用量・期間は Carpenter 6th 等のフォーミュラリを参照して別途記入すること（本ドラフトには未収載）。",
+   "sources": [
+    {
+     "citation": "Moeremans I, Devreese M, De Baere S, Croubels S, Hermans K. Pharmacokinetics and absolute oral bioavailability of meloxicam in guinea pigs (Cavia porcellus). Vet Anaesth Analg. 2019;46(4):548-555.",
+     "pmid": "31153785",
+     "doi": "10.1016/j.vaa.2018.11.011",
+     "evidence_grade": "B",
+     "note": "guinea-pig (Cavia) meloxicam PK, 1.5 mg/kg PO/IV; extrapolated to degu (grade B)"
+    },
+    {
+     "citation": "Evans E, Benato L. Pain management in pet guinea pigs (Cavia porcellus): a review of limitations of current knowledge and practice. Vet Anaesth Analg. 2024;52(2):145-152.",
+     "pmid": "39924411",
+     "doi": "10.1016/j.vaa.2024.11.042",
+     "evidence_grade": "B",
+     "note": "review: guinea-pig analgesic doses extrapolated; optimal meloxicam dose unsettled"
+    }
+   ],
    "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Tail Amputation Stump Infection degu OR exotic OR rodent treatment」。",
    "pharmacologic": true,
-   "evidence_grade": "",
-   "dosage_sources": []
+   "evidence_grade": "B",
+   "dosage_sources": [
+    {
+     "citation": "Moeremans I, Devreese M, De Baere S, Croubels S, Hermans K. Pharmacokinetics and absolute oral bioavailability of meloxicam in guinea pigs (Cavia porcellus). Vet Anaesth Analg. 2019;46(4):548-555.",
+     "pmid": "31153785",
+     "doi": "10.1016/j.vaa.2018.11.011",
+     "evidence_grade": "B",
+     "note": "guinea-pig (Cavia) meloxicam PK, 1.5 mg/kg PO/IV; extrapolated to degu (grade B)"
+    },
+    {
+     "citation": "Evans E, Benato L. Pain management in pet guinea pigs (Cavia porcellus): a review of limitations of current knowledge and practice. Vet Anaesth Analg. 2024;52(2):145-152.",
+     "pmid": "39924411",
+     "doi": "10.1016/j.vaa.2024.11.042",
+     "evidence_grade": "B",
+     "note": "review: guinea-pig analgesic doses extrapolated; optimal meloxicam dose unsettled"
+    }
+   ]
   },
   {
    "slug": "mycoplasma-infection",

@@ -197,7 +197,15 @@
       fur-mites を `review_status=published` に。ゲート実測で degu 配信は**この1件のみ**（sources 付き・
       用量 mg/kg 記載を検証）。`test_treatment_publish_gate` を「degu は vet 承認済みの sourced 用量のみ公開」に更新（6 pass）。
       **これが T106 公開ゲートの初の実公開**（人間の獣医が review→published、fail-closed 維持）。
-- [ ] **獣医の人手作業待ち**: 残り11件は Carpenter 参照で用量＋出典を記入 → `approved` → `published`（🔴・自動公開しない）
+- [x] **grade-B 外挿候補の PubMed 調査（承認「拾ってください」）** → `.spec/DEGU_DOSAGE_PUBMED_CANDIDATES.md` 追補
+      チンチラ/モルモット published PK を横断検索。実在候補: メロキシカム（モルモット 1.5 mg/kg PO/IV, Moeremans 2019）、
+      イベルメクチン（モルモット疥癬 400 µg/kg SC, Nath 2015・毒性注意 Ebel 2022）、アフォキソラネル（2.5 mg/kg PO, Deak 2024）、
+      ILE（脂溶性中毒, Ebel 2022）。抗菌薬・強心薬・プラジカンテル・キレートは **exotic PK が PubMed に皆無→フォーミュラリ必須**。
+- [x] **メロキシカム補助鎮痛を draft 記入（承認）**: 外耳炎・尾切断部感染に grade-B 補助鎮痛（1.5 mg/kg PO/IV,
+      Moeremans 2019 + Evans 2024）を `review_status=draft` で記入。**一次抗菌薬はフォーミュラリ別途記入**と明記。
+      ゲート実測で served は依然 fur-mites の1件のみ（draft は未配信）。gate テスト6 pass。
+- [ ] **獣医の人手作業待ち**: 残り9件（＋外耳炎/尾部感染の一次抗菌薬）は Carpenter 参照で用量＋出典を記入 →
+      `approved` → `published`（🔴・自動公開しない）。メロキシカム draft は確認後 `published` 可。
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
