@@ -69,3 +69,44 @@ degu の PubMed 文献の大半は**疾患モデル**（自然発症糖尿病・
 1. **毛包虫症ドラフト**（`treatment_overrides/degu.json`、grade A）を確認 → 妥当なら `review_status` を `published` に。
 2. 残り11件は Carpenter 6th 等で用量＋出典を記入（grade B）→ `published`。雛形は同 JSON に整備済み。
 3. 病因参照（Helicobacter 心筋炎・Trichuris）は T110 出典キュレーションへ回す場合は指示を。
+
+---
+
+# 追補: grade-B 外挿候補（チンチラ/モルモット published PK・承認「拾ってください」）
+
+出典: すべて PubMed（According to PubMed）。**degu 特異ではないため grade B（外挿）**。実在論文に記載の用量のみ転記。
+degu 疾患エントリへは**未記入**（データ非改変）。獣医が Carpenter と照合の上で `treatment_overrides/degu.json` に記入する際の候補。
+
+## 実在する grade-B 候補（チンチラ/モルモットの獣医文献）
+| 薬剤 | 種 | 用量（論文記載） | 用途→degu疾患 | 出典 |
+|---|---|---|---|---|
+| **メロキシカム** | モルモット | 1.5 mg/kg PO/IV（PK: F=0.54, t½ 3.7h）※用量論争あり | 鎮痛・抗炎症**補助**（外耳炎/尾切断部感染 等の疼痛） | Moeremans 2019 / レビュー Evans 2024 |
+| **イベルメクチン** | モルモット | 400 µg/kg SC、10日毎×3（疥癬） | 外部寄生虫/線虫（**毒性注意↓**） | Nath 2015 |
+| イベルメクチン（忍容性） | チンチラ | SC 投与で腸内細菌叢への影響最小 | 上記の安全性補強 | Ma 2023 |
+| **アフォキソラネル** | モルモット | 2.5 mg/kg PO 単回（Trixacarus） | 外部寄生虫（イソキサゾリン系代替） | Deak 2024 |
+| **静注脂肪乳剤(ILE)** | モルモット | 脂溶性中毒に対する救命（イベルメクチン中毒） | 中毒症（植物・脂溶性毒）**支持療法** | Ebel 2022 |
+
+**引用（According to PubMed）**:
+- Moeremans I et al. *Pharmacokinetics and absolute oral bioavailability of meloxicam in guinea pigs.* Vet Anaesth Analg 2019;46(4):548-555. [DOI](https://doi.org/10.1016/j.vaa.2018.11.011) (PMID 31153785)
+- Evans E, Benato L. *Pain management in pet guinea pigs: review of limitations.* Vet Anaesth Analg 2024;52(2):145-152. [DOI](https://doi.org/10.1016/j.vaa.2024.11.042) (PMID 39924411)
+- Nath AJ. *Treatment and control of Trixacarus caviae in a guinea pig breeding colony.* J Parasit Dis 2015;40(4):1213-1216. [DOI](https://doi.org/10.1007/s12639-015-0652-6) (PMID 27876917)
+- Ma X et al. *Short term effect of ivermectin on the bacterial microbiota in chinchillas.* Vet Sci 2023;10(2):169. [DOI](https://doi.org/10.3390/vetsci10020169) (PMID 36851473)
+- Deak G et al. *Effective treatment with afoxolaner (NexGard) of Trixacarus caviae in a pet guinea pig.* Vet Med Sci 2024;10(5):e70039. [DOI](https://doi.org/10.1002/vms3.70039) (PMID 39239737)
+- Ebel JJ et al. *Intralipid emulsion therapy for status epilepticus in a guinea pig secondary to ivermectin toxicity.* J Vet Emerg Crit Care 2022;33(1):107-111. [DOI](https://doi.org/10.1111/vec.13254) (PMID 36082409)
+
+⚠️ **イベルメクチン安全性**: モルモットで経口イベルメクチン過量→てんかん重積（Ebel 2022）。用量厳守・体重精密測定・ILE 準備。
+
+## degu疾患11件への当てはめ
+| # | 疾患 | grade-B PubMed 候補 | 一次治療の状況 |
+|---|---|---|---|
+| 3 | 腸内寄生虫症 | イベルメクチン 400 µg/kg SC（疥癬用量からの外挿） | 線虫一次薬フェンベンダゾールは**exotic PK なし→フォーミュラリ** |
+| 6 | 耳感染症 | メロキシカム**補助鎮痛**のみ | 抗菌薬本体は**フォーミュラリ** |
+| 8 | 尾切断部感染 | メロキシカム**補助鎮痛**のみ | 抗菌薬本体は**フォーミュラリ** |
+| 11 | 中毒症（植物） | ILE（脂溶性）＋除染・支持療法 | grade-B/C 支持療法として妥当 |
+| 2,5,7,9,10,12 | 肺炎/心筋症/敗血症/マイコ/条虫/亜鉛 | **なし** | 抗菌薬・強心薬・プラジカンテル・キレート（CaEDTA）は exotic PK が PubMed に**皆無→フォーミュラリ必須** |
+
+## 結論
+- **degu 疾患データには未記入**（外挿の当てはめは stacked extrapolation を含み、獣医判断＋フォーミュラリ照合が必要なため）。
+- 一次治療の主軸（抗菌薬・強心薬・駆虫薬プラジカンテル・キレート）は **PubMed に exotic-rodent PK が存在せず**、Carpenter 6th 等の**フォーミュラリでのみ**引ける（grade B）。
+- 明確に有用な補助（メロキシカム鎮痛・ILE 中毒支持）と外部寄生虫オプション（イベルメクチン/アフォキソラネル、毒性注意付き）は上表の通り。
+- **次アクション（Kentaro）**: どの候補を draft 記入するか指定 → 私が `evidence_grade=B`＋出典付きで `review_status=draft` 記入（公開はあなたの承認後）。
