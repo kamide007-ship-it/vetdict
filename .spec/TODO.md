@@ -209,8 +209,21 @@
         **爬虫類テンプレート**（「爬虫類における…カメや一部のトカゲ」）だった→ degu 固有内容に是正（`degu_diseases.py`）。
       - degu 全体の cross-species スキャン実施: 実汚染は外耳炎のみ（他ヒットは「モルモットと異なりデグーは」等の正当な比較記述）。
       - served published は 3件（fur-mites + 外耳炎 + 尾部感染）、各 sources 付き・用量記載を検証。汚染トークン0。gate テスト6 pass。
-- [ ] **獣医の人手作業待ち**: 残り9件、および外耳炎/尾部感染の**一次抗菌薬の具体的用量**は Carpenter 参照で記入
-      （現状は「培養/広域・用量はフォーミュラリ確定」と明記）→ `published`（🔴・自動公開しない）。
+- [x] **grade-B 候補を draft 記入（承認）**: 植物中毒に ILE＋除染（⚠️齧歯類は催吐不可を明記, Ebel 2022）、
+      腸内寄生虫症にイベルメクチン 400 µg/kg SC（Nath 2015＋毒性注意 Ebel 2022）を `review_status=draft` で記入。
+      ゲート実測で served は依然3件のみ（draft 未配信）。gate テスト6 pass。
+- [ ] **獣医の人手作業待ち**: 残り7件、外耳炎/尾部感染の一次抗菌薬用量、および ILE/イベルメクチン draft の確認 →
+      `published`（🔴・自動公開しない）。
+
+## フェーズ5.5：cross-species 汚染スキャン（🟢 read-only 横展開）— **完了**
+- [x] **全21種スキャナ** `scripts/quality/scan_cross_species.py`（read-only・冪等）＋
+      `reports/quality/_cross_species_contamination.json` ＋ `.spec/CROSS_SPECIES_CONTAMINATION_SCAN.md`。
+      degu 外耳炎で見つけた「`<他種>における…`」テンプレ混入を横展開検出。
+      **結果: 9種・68フィールド汚染（cross-class 36＝高重症度）**。
+      顕著例: hamster 糖尿病=「オウムにおける」、bird/parrot Candidiasis=「両生類における」、
+      tortoise/snake/lizard 痛風=「鳥における」、lizard NSHP=「フクロモモンガにおける」、
+      sugar_glider 眼球突出=「トカゲにおける」。
+      修正は 🟡 種別バッチで承認後（degu 外耳炎と同手法）。推奨着手: lizard(cross 8) or hamster。
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`

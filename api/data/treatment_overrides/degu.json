@@ -122,15 +122,45 @@
    "name": "Intestinal Parasites",
    "name_ja": "腸内寄生虫症",
    "review_status": "draft",
-   "source_kind": "needs_sourcing",
+   "source_kind": "pubmed_sourced",
    "en_reference": "",
    "current_treatment_ja": "デグーにおける腸内寄生虫症の治療には、同定された寄生虫に応じた適切な駆虫薬が必要である。一部の駆虫薬は特定の種に有毒であるため、種に適した用量設定が重要である。全てのライフステージを排除するため複数回投与が必要な場合がある。環境消毒と接触動物の治療で再感染を防止する。貧血、脱水、栄養失調などの二次的合併症に対する支持療法を行う。\n[ECVN:Block] 【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】\n• CPパウダー (プレバイオ+プロバイオ+サイリウム): 腸内細菌叢正常化・腸管バリア強化・腸腎連関サポート。サイリウム(水溶性繊維)が腸管運動を促進+プレバイオティクスが有益菌(Lactobacillus/Bifidobacterium)の増殖を支援。IBD、慢性腸症、抗菌薬関連dysbiosis、CKDの尿毒素軽減(インドキシル硫酸低減)に\n※CPパウダー: 完全腸閉塞は禁忌",
-   "treatment_ja": "",
-   "sources": [],
+   "treatment_ja": "デグーにおける腸内寄生虫症の治療: 糞便検査で虫種を同定し標的駆虫。線虫にはイベルメクチン 400 µg/kg SC、10-14日毎×3回〔grade B・モルモット疥癬用量からの外挿: Nath 2015〕、またはフェンベンダゾール（exotic PK 不足のため用量はフォーミュラリで確定）。⚠️イベルメクチンは過量でてんかん重積のリスク〔Ebel 2022〕—用量厳守・体重精密測定・ILE準備。全ライフステージ排除のため反復投与、環境衛生で再感染を防止。原虫にはフォーミュラリを参照。",
+   "sources": [
+    {
+     "citation": "Nath AJ. Treatment and control of Trixacarus caviae infestation in a guinea pig breeding colony. J Parasit Dis. 2015;40(4):1213-1216.",
+     "pmid": "27876917",
+     "doi": "10.1007/s12639-015-0652-6",
+     "evidence_grade": "B",
+     "note": "guinea-pig: ivermectin 400 ug/kg SC, 3 doses 10 days apart"
+    },
+    {
+     "citation": "Ebel JJ, Gannon K, Kraenzlin M. Intralipid emulsion therapy to treat status epilepticus in a guinea pig (Cavia porcellus) secondary to severe ivermectin toxicity. J Vet Emerg Crit Care. 2022;33(1):107-111.",
+     "pmid": "36082409",
+     "doi": "10.1111/vec.13254",
+     "evidence_grade": "B",
+     "note": "guinea-pig: IV lipid emulsion rescued ivermectin-induced status epilepticus"
+    }
+   ],
    "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Intestinal Parasites degu OR exotic OR rodent treatment」。",
    "pharmacologic": true,
-   "evidence_grade": "",
-   "dosage_sources": []
+   "evidence_grade": "B",
+   "dosage_sources": [
+    {
+     "citation": "Nath AJ. Treatment and control of Trixacarus caviae infestation in a guinea pig breeding colony. J Parasit Dis. 2015;40(4):1213-1216.",
+     "pmid": "27876917",
+     "doi": "10.1007/s12639-015-0652-6",
+     "evidence_grade": "B",
+     "note": "guinea-pig: ivermectin 400 ug/kg SC, 3 doses 10 days apart"
+    },
+    {
+     "citation": "Ebel JJ, Gannon K, Kraenzlin M. Intralipid emulsion therapy to treat status epilepticus in a guinea pig (Cavia porcellus) secondary to severe ivermectin toxicity. J Vet Emerg Crit Care. 2022;33(1):107-111.",
+     "pmid": "36082409",
+     "doi": "10.1111/vec.13254",
+     "evidence_grade": "B",
+     "note": "guinea-pig: IV lipid emulsion rescued ivermectin-induced status epilepticus"
+    }
+   ]
   },
   {
    "slug": "congestive-heart-failure",
@@ -332,15 +362,31 @@
    "name": "Toxicosis (Plant Poisoning)",
    "name_ja": "中毒症（植物中毒）",
    "review_status": "draft",
-   "source_kind": "needs_sourcing",
+   "source_kind": "pubmed_sourced",
    "en_reference": "",
    "current_treatment_ja": "直ちに除染処置（摂取直後の場合）、活性炭投与（適応あれば）、特異的解毒剤の投与、積極的な輸液療法、臓器機能のモニタリング。痙攣コントロールと体温管理を必要に応じて実施。\n[ECVN:Block] 【補助療法オプション — Equine & Canine Vet Nutrition (caninevet.jp)】\n• For Antioxidant (アスタキサンチン+メロンSOD+VitE+システイン（アスタアミノ処方）): 抗酸化・慢性疾患免疫サポート。アスタキサンチン(カロテノイド系)+SOD(スーパーオキシドジスムターゼ)が活性酸素種を消去。CKD・肝疾患・アトピー・ダニ媒介性感染症の酸化ストレス軽減、高齢動物の免疫機能維持に\n• Booster & Relax (アダプトゲン+Bビタミン複合体): ウイルス後回復・内分泌疾患エネルギー補給・高齢期慢性疲労。アダプトゲン(ストレス適応促進)+Bビタミン複合体がエネルギー代謝と副腎機能をサポート。パルボ/ジステンパー回復期、甲状腺機能低下症/アジソン病の倦怠感、ダニ媒介性感染症回復期のエネルギー補給に",
-   "treatment_ja": "",
-   "sources": [],
+   "treatment_ja": "デグーにおける中毒（植物中毒）の治療: ⚠️齧歯類は嘔吐できないため催吐は禁忌・無効。除染は活性炭の経口投与（脂溶性毒素の吸着）と、必要に応じ麻酔下胃洗浄。大量輸液で利尿・排泄を促進し、体温・血糖・電解質を管理。脂溶性毒素による重症例（神経症状等）には静注脂肪乳剤（ILE）を検討〔grade B・モルモットでイベルメクチン中毒を ILE で救命: Ebel 2022〕。原因植物の特定・除去と対症支持療法を継続。※具体的解毒薬・用量は毒物に応じ Carpenter／中毒センター基準で確定すること。",
+   "sources": [
+    {
+     "citation": "Ebel JJ, Gannon K, Kraenzlin M. Intralipid emulsion therapy to treat status epilepticus in a guinea pig (Cavia porcellus) secondary to severe ivermectin toxicity. J Vet Emerg Crit Care. 2022;33(1):107-111.",
+     "pmid": "36082409",
+     "doi": "10.1111/vec.13254",
+     "evidence_grade": "B",
+     "note": "guinea-pig: IV lipid emulsion rescued ivermectin-induced status epilepticus"
+    }
+   ],
    "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Plumb『Veterinary Drug Handbook』/ Quesenberry & Carpenter『Ferrets, Rabbits, and Rodents』4th ed。PubMed候補検索: 「Toxicosis (Plant Poisoning) degu OR exotic OR rodent treatment」。",
    "pharmacologic": true,
-   "evidence_grade": "",
-   "dosage_sources": []
+   "evidence_grade": "B",
+   "dosage_sources": [
+    {
+     "citation": "Ebel JJ, Gannon K, Kraenzlin M. Intralipid emulsion therapy to treat status epilepticus in a guinea pig (Cavia porcellus) secondary to severe ivermectin toxicity. J Vet Emerg Crit Care. 2022;33(1):107-111.",
+     "pmid": "36082409",
+     "doi": "10.1111/vec.13254",
+     "evidence_grade": "B",
+     "note": "guinea-pig: IV lipid emulsion rescued ivermectin-induced status epilepticus"
+    }
+   ]
   },
   {
    "slug": "zinc-toxicosis",
