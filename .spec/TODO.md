@@ -201,11 +201,16 @@
       チンチラ/モルモット published PK を横断検索。実在候補: メロキシカム（モルモット 1.5 mg/kg PO/IV, Moeremans 2019）、
       イベルメクチン（モルモット疥癬 400 µg/kg SC, Nath 2015・毒性注意 Ebel 2022）、アフォキソラネル（2.5 mg/kg PO, Deak 2024）、
       ILE（脂溶性中毒, Ebel 2022）。抗菌薬・強心薬・プラジカンテル・キレートは **exotic PK が PubMed に皆無→フォーミュラリ必須**。
-- [x] **メロキシカム補助鎮痛を draft 記入（承認）**: 外耳炎・尾切断部感染に grade-B 補助鎮痛（1.5 mg/kg PO/IV,
-      Moeremans 2019 + Evans 2024）を `review_status=draft` で記入。**一次抗菌薬はフォーミュラリ別途記入**と明記。
-      ゲート実測で served は依然 fur-mites の1件のみ（draft は未配信）。gate テスト6 pass。
-- [ ] **獣医の人手作業待ち**: 残り9件（＋外耳炎/尾部感染の一次抗菌薬）は Carpenter 参照で用量＋出典を記入 →
-      `approved` → `published`（🔴・自動公開しない）。メロキシカム draft は確認後 `published` 可。
+- [x] **外耳炎・尾切断部感染を完全版で公開（承認・option A）**: メロキシカム補助鎮痛（grade B, 1.5 mg/kg PO/IV,
+      Moeremans 2019 + Evans 2024）を、ベースの抗菌薬・創傷ガイダンスと統合した**完全版** override として `published`。
+      公開前レビューで判明した2点を是正:
+      - **regression 回避**: メロキシカム単独公開だとベースの抗菌薬・創傷記載を丸ごと置換して後退するため、統合版に。
+      - **cross-species 汚染バグ修正**: degu 外耳炎のベース `causes_ja`/`pathophysiology_ja`/`treatment_ja` が
+        **爬虫類テンプレート**（「爬虫類における…カメや一部のトカゲ」）だった→ degu 固有内容に是正（`degu_diseases.py`）。
+      - degu 全体の cross-species スキャン実施: 実汚染は外耳炎のみ（他ヒットは「モルモットと異なりデグーは」等の正当な比較記述）。
+      - served published は 3件（fur-mites + 外耳炎 + 尾部感染）、各 sources 付き・用量記載を検証。汚染トークン0。gate テスト6 pass。
+- [ ] **獣医の人手作業待ち**: 残り9件、および外耳炎/尾部感染の**一次抗菌薬の具体的用量**は Carpenter 参照で記入
+      （現状は「培養/広域・用量はフォーミュラリ確定」と明記）→ `published`（🔴・自動公開しない）。
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`

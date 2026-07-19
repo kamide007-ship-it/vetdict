@@ -81,13 +81,20 @@ def test_no_map_is_noop():
 
 
 def test_degu_publishes_only_vet_approved_sourced_doses():
-    # Fur mites is the one vet-approved, PubMed-sourced grade-A dose (published).
-    # Every other degu entry stays draft and must NOT be served. Fail-closed:
-    # any served entry must carry sources and a real dose.
+    # Only vet-approved, cited entries are published: the grade-A fur-mite dose
+    # plus the otitis / tail-stump entries (grade-B meloxicam adjunct). Every
+    # other degu entry stays draft and must NOT be served. Fail-closed: each
+    # served entry carries sources and an actual dose.
     to.load_overrides.cache_clear()
     to._published_index.cache_clear()
     idx = to._published_index("degu")
-    assert set(idx) == {"fur-mites-demodex-notoedres"}, idx
-    entry = idx["fur-mites-demodex-notoedres"]
-    assert entry["sources"], "published dose must be cited (fail-closed)"
-    assert "mg/kg" in entry["treatment_ja"], "published entry must carry an actual dose"
+    assert set(idx) == {
+        "fur-mites-demodex-notoedres",
+        "ear-infection-otitis",
+        "tail-amputation-stump-infection",
+    }, idx
+    for slug, entry in idx.items():
+        assert entry["sources"], f"{slug}: published dose must be cited (fail-closed)"
+        assert "mg/kg" in entry["treatment_ja"], f"{slug}: published entry must carry an actual dose"
+    # De-contamination: no reptile template leaked into the served degu otitis.
+    assert "爬虫類" not in idx["ear-infection-otitis"]["treatment_ja"]
