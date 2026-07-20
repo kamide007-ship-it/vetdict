@@ -98,13 +98,18 @@ def scan() -> dict:
                     if lab in own or (lab + "における") not in v:
                         continue
                     idx = v.find(lab + "における")
-                    if any(x in v[max(0, idx - 6):idx] for x in COMPARATIVE):
+                    if any(x in v[max(0, idx - 6) : idx] for x in COMPARATIVE):
                         continue
                     foreign_cls = {_class_of(s) for s in _label_species(lab)}
                     severity = "within-class" if own_cls in foreign_cls else "cross-class"
                     out.setdefault(sp, []).append(
-                        {"name": r.get("name"), "field": f, "foreign_label": lab,
-                         "severity": severity, "snippet": v[idx:idx + 30]}
+                        {
+                            "name": r.get("name"),
+                            "field": f,
+                            "foreign_label": lab,
+                            "severity": severity,
+                            "snippet": v[idx : idx + 30],
+                        }
                     )
                     break
     return out
