@@ -183,7 +183,47 @@
 - [x] **出典基準確定（承認「BC」）**: Carpenter 6th を source-of-truth に、evidence_grade A/B/C。
       `treatment_overrides/degu.json` に記入枠（`pharmacologic`/`evidence_grade`/`dosage_sources`）＋ `source_of_truth` を整備
       （薬物12・非薬物13、用量は空・`review_status=draft`・公開ゲート維持）。
-- [ ] **獣医の人手作業待ち**: 薬物12件に Carpenter 参照で用量＋出典を記入 → `approved` → `published`（🔴・自動公開しない）
+- [x] **PubMed 用量調査（承認「用量はpubmedを調べて欲しい」）** → `.spec/DEGU_DOSAGE_PUBMED_CANDIDATES.md`
+      `Octodon degus` 横断検索。12薬物疾患のうち **degu 特異的用量が引けたのは 1件のみ**:
+      - **毛包虫症**: セラメクチン 30 mg/kg + サロラネル 5 mg/kg 局所・週1回×4-6（Beck 2021, Vet Parasitol,
+        DOI 10.1016/j.vetpar.2021.109430, PMID 33901932）= **grade A**。`treatment_overrides/degu.json` に
+        **draft で記入**（sources 付き・`review_status=draft` 維持＝**未配信**、獣医が publish で初めて配信）。
+      - 残り11件は PubMed に degu 特異的用量なし → Carpenter 6th 等のフォーミュラリ要（grade B・獣医記入）。
+        SPEC 停止条件「出典が過半引けない」に引き続き該当＝自動生成せず。
+      - 副産物（用量ではない degu 特異的参照）: Helicobacter 心筋炎（Mack 2025）・Trichuris 鞭虫（Babero 1975）＝
+        病因の出典候補。麻酔 MAC iso1.75%/sevo2.25%（Ikai 2024）＝麻酔モジュール向け。
+      - fail-closed ゲート維持（`test_treatment_publish_gate` 6 pass、served 公開0件）。
+- [x] **毛包虫症 grade-A 用量を公開（獣医承認「承認します」）**: `treatment_overrides/degu.json` の
+      fur-mites を `review_status=published` に。ゲート実測で degu 配信は**この1件のみ**（sources 付き・
+      用量 mg/kg 記載を検証）。`test_treatment_publish_gate` を「degu は vet 承認済みの sourced 用量のみ公開」に更新（6 pass）。
+      **これが T106 公開ゲートの初の実公開**（人間の獣医が review→published、fail-closed 維持）。
+- [x] **grade-B 外挿候補の PubMed 調査（承認「拾ってください」）** → `.spec/DEGU_DOSAGE_PUBMED_CANDIDATES.md` 追補
+      チンチラ/モルモット published PK を横断検索。実在候補: メロキシカム（モルモット 1.5 mg/kg PO/IV, Moeremans 2019）、
+      イベルメクチン（モルモット疥癬 400 µg/kg SC, Nath 2015・毒性注意 Ebel 2022）、アフォキソラネル（2.5 mg/kg PO, Deak 2024）、
+      ILE（脂溶性中毒, Ebel 2022）。抗菌薬・強心薬・プラジカンテル・キレートは **exotic PK が PubMed に皆無→フォーミュラリ必須**。
+- [x] **外耳炎・尾切断部感染を完全版で公開（承認・option A）**: メロキシカム補助鎮痛（grade B, 1.5 mg/kg PO/IV,
+      Moeremans 2019 + Evans 2024）を、ベースの抗菌薬・創傷ガイダンスと統合した**完全版** override として `published`。
+      公開前レビューで判明した2点を是正:
+      - **regression 回避**: メロキシカム単独公開だとベースの抗菌薬・創傷記載を丸ごと置換して後退するため、統合版に。
+      - **cross-species 汚染バグ修正**: degu 外耳炎のベース `causes_ja`/`pathophysiology_ja`/`treatment_ja` が
+        **爬虫類テンプレート**（「爬虫類における…カメや一部のトカゲ」）だった→ degu 固有内容に是正（`degu_diseases.py`）。
+      - degu 全体の cross-species スキャン実施: 実汚染は外耳炎のみ（他ヒットは「モルモットと異なりデグーは」等の正当な比較記述）。
+      - served published は 3件（fur-mites + 外耳炎 + 尾部感染）、各 sources 付き・用量記載を検証。汚染トークン0。gate テスト6 pass。
+- [x] **grade-B 候補を draft 記入（承認）**: 植物中毒に ILE＋除染（⚠️齧歯類は催吐不可を明記, Ebel 2022）、
+      腸内寄生虫症にイベルメクチン 400 µg/kg SC（Nath 2015＋毒性注意 Ebel 2022）を `review_status=draft` で記入。
+      ゲート実測で served は依然3件のみ（draft 未配信）。gate テスト6 pass。
+- [ ] **獣医の人手作業待ち**: 残り7件、外耳炎/尾部感染の一次抗菌薬用量、および ILE/イベルメクチン draft の確認 →
+      `published`（🔴・自動公開しない）。
+
+## フェーズ5.5：cross-species 汚染スキャン（🟢 read-only 横展開）— **完了**
+- [x] **全21種スキャナ** `scripts/quality/scan_cross_species.py`（read-only・冪等）＋
+      `reports/quality/_cross_species_contamination.json` ＋ `.spec/CROSS_SPECIES_CONTAMINATION_SCAN.md`。
+      degu 外耳炎で見つけた「`<他種>における…`」テンプレ混入を横展開検出。
+      **結果: 9種・68フィールド汚染（cross-class 36＝高重症度）**。
+      顕著例: hamster 糖尿病=「オウムにおける」、bird/parrot Candidiasis=「両生類における」、
+      tortoise/snake/lizard 痛風=「鳥における」、lizard NSHP=「フクロモモンガにおける」、
+      sugar_glider 眼球突出=「トカゲにおける」。
+      修正は 🟡 種別バッチで承認後（degu 外耳炎と同手法）。推奨着手: lizard(cross 8) or hamster。
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
