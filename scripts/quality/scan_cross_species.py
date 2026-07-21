@@ -100,6 +100,12 @@ def scan() -> dict:
                     idx = v.find(lab + "における")
                     if any(x in v[max(0, idx - 6) : idx] for x in COMPARATIVE):
                         continue
+                    # Skip compounds where the label is only a substring of a longer
+                    # generic word (幼鳥/新生鳥/成鳥/小型トカゲ …): a real species-label
+                    # framing is preceded by は/、/。 or sits at the start, never by a
+                    # CJK ideograph. A kanji immediately before the label ⇒ compound.
+                    if idx > 0 and "一" <= v[idx - 1] <= "鿿":
+                        continue
                     foreign_cls = {_class_of(s) for s in _label_species(lab)}
                     severity = "within-class" if own_cls in foreign_cls else "cross-class"
                     out.setdefault(sp, []).append(

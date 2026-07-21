@@ -246,6 +246,19 @@
       - **注（follow-up候補）**: lizard 痛風の JSON overlay causes は grounded 汎用文（「代謝性の筋骨格系疾患…」）のまま。
         より詳細な尿酸代謝の病因を配信したい場合は overlay 側の更新が別途必要（今回は汚染是正のみ）。
       - 残り7種（bird/parakeet/parrot/tortoise/snake/sugar_glider/reptile）の汚染は同手法でワークシート→承認→適用。
+- [x] **残り7種の汚染修正（獣医「進めやすい方法で」・🟡適用済み）** → `.spec/BATCH2_CONTAMINATION_FIX_REVIEW.md`
+      `scripts/quality/fix_cross_species_batch2.py`（冪等・バックアップ `backups/2026-07-21-1000/`）。
+      - **スキャナ改良（read-only）**: 「幼鳥／新生鳥／小型トカゲ」等、種名を部分文字列に含むだけの複合語
+        （直前が漢字）を除外する false-positive ガードを追加（53→49フィールドに精緻化）。
+      - **安全 relabel 45フィールドを自動適用**: bird/parakeet/parrot/tortoise/snake/sugar_glider/reptile の
+        「当該種で実際に起こる疾患＋汎用病因/病態テキスト」で種名ラベルのみ誤りだったものを当該種にスワップ
+        （純粋な訂正・新たな臨床主張なし）。JSONオーバーレイは該当0（module-only）＝source-species の正当エントリは無改変。
+      - **treatment_ja の ECVN 付加（import時エンリッチ）で全文一致しない問題**を、疾患固有の先頭スニペット
+        （ソースに verbatim・一意）スワップにフォールバックして解決（bird Atoxoplasmosis / parrot Heavy Metal）。
+      - **要獣医レビュー2件を退避（未適用）**: sugar_glider Proptosis（爬虫類の膿瘍内容→哺乳類の外傷性眼球脱出）、
+        parrot Atherosclerosis（セキセイインコ疫学＋病態が代謝内分泌テンプレ→循環器疾患）。ドラフト提示済み・✅待ち。
+      - 検証: `scan_cross_species.py` **9種→2種**（残り＝上記C-2件のみ）、冪等（再適用バイト同一）、
+        回帰テスト16 pass、ruff clean。**全21種の汚染撲滅まで残り2件（要獣医承認）。**
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
