@@ -224,6 +224,15 @@
       tortoise/snake/lizard 痛風=「鳥における」、lizard NSHP=「フクロモモンガにおける」、
       sugar_glider 眼球突出=「トカゲにおける」。
       修正は 🟡 種別バッチで承認後（degu 外耳炎と同手法）。推奨着手: lizard(cross 8) or hamster。
+- [x] **lizard/hamster 汚染修正ワークシート（提示のみ・🟡未適用・read-only）** →
+      `.spec/LIZARD_CONTAMINATION_FIX_REVIEW.md`（8フィールド）／`.spec/HAMSTER_CONTAMINATION_FIX_REVIEW.md`（7フィールド）。
+      実データから現在の汚染テキストを引用し、各フィールドを **L（機械的ラベル置換）/ T（generic テンプレ＋誤ラベル）/
+      C（臨床内容が誤り・要書き換え）** に分類。修正対象ファイル（JSONオーバーレイ vs module）も特定。
+      提案ドラフトは全て「要獣医レビュー」で **served データ非改変**。
+      - **最優先の危険例を surface**: `hamster_0068 熱中症` の `treatment_ja`/`pathophysiology_ja` が
+        「創傷洗浄・デブリードマン／外傷性・機械的疾患」＝別疾患（外傷）の記述で、熱中症として臨床的に誤り。
+        `hamster_0037 糖尿病 causes` の「稀だがオウム類で報告」も誤事実（実際はチャイニーズ/ドワーフで比較的多い）。
+      - L（機械的置換）3〜4件は一括承認可。T/C はフィールド単位の ✅/❌/✏️ 承認待ち → 承認後に 🟡 適用。
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
