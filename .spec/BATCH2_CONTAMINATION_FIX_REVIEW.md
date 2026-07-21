@@ -1,3 +1,5 @@
+> ✅ **2件とも適用済み（2026-07-21・獣医承認「☑️」）**: sugar_glider Proptosis・parrot Atherosclerosis の 臨床ドラフトを `scripts/quality/fix_cross_species_batch2_clinical.py` でモジュールに適用。バックアップ `backups/2026-07-21-1100/`。`scan_cross_species.py` は **全21種0件**（cross-species 汚染 撲滅完了）。
+
 # Batch-2 cross-species 汚染修正（残り7種）— 適用ログ＋要獣医レビュー2件
 
 ## サマリー

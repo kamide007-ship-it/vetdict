@@ -259,6 +259,14 @@
         parrot Atherosclerosis（セキセイインコ疫学＋病態が代謝内分泌テンプレ→循環器疾患）。ドラフト提示済み・✅待ち。
       - 検証: `scan_cross_species.py` **9種→2種**（残り＝上記C-2件のみ）、冪等（再適用バイト同一）、
         回帰テスト16 pass、ruff clean。**全21種の汚染撲滅まで残り2件（要獣医承認）。**
+- [x] **要獣医レビュー2件を適用（獣医承認「☑️」・🟡適用済み）** — `scripts/quality/fix_cross_species_batch2_clinical.py`
+      （冪等・バックアップ `backups/2026-07-21-1100/`）。sugar_glider Proptosis（爬虫類の膿瘍/抗菌薬内容→哺乳類の
+      外傷性眼球脱出の救急管理: 湿潤保護・整復・眼瞼縫合・摘出）、parrot Atherosclerosis（セキセイインコ疫学＋
+      代謝内分泌テンプレ→オウムの心血管疾患・アテローム病態）。両者 module-only のため module のみ修正。
+      - 補足: sugar_glider Proptosis の**配信 treatment は既に published override**（「小動物の眼球脱出…外傷…」）が
+        正しい哺乳類内容を配信済み。今回は raw/module フォールバックを整合。parrot Atherosclerosis は module が配信。
+      - **`scan_cross_species.py` 全21種 0件 ＝ cross-species 汚染 撲滅完了**。回帰テスト16 pass、ruff clean。
+      - **follow-up候補（獣医判断）**: `scan_cross_species.py` を rollout/CI に組み込み「〜における」混入の再発を回帰ガード化。
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
