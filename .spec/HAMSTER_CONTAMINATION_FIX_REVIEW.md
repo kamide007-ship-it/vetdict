@@ -1,3 +1,5 @@
+> ✅ **適用済み（2026-07-21・獣医承認「承認します」）**: 本ワークシートの提案は `scripts/quality/fix_cross_species_lizard_hamster.py` でモジュール `.py` に適用済み。バックアップ `backups/2026-07-21-0936/`。`scan_cross_species.py` で当該種0件を確認。
+
 # Hamster cross-species 汚染 修正ワークシート（提示のみ・🟡未適用）
 
 対象: `scan_cross_species.py` が検出した **hamster 7フィールド（cross-class 5）**。

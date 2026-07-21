@@ -233,6 +233,19 @@
         「創傷洗浄・デブリードマン／外傷性・機械的疾患」＝別疾患（外傷）の記述で、熱中症として臨床的に誤り。
         `hamster_0037 糖尿病 causes` の「稀だがオウム類で報告」も誤事実（実際はチャイニーズ/ドワーフで比較的多い）。
       - L（機械的置換）3〜4件は一括承認可。T/C はフィールド単位の ✅/❌/✏️ 承認待ち → 承認後に 🟡 適用。
+- [x] **lizard/hamster 汚染修正の適用（獣医承認「承認します」・🟡適用済み）** —
+      `scripts/quality/fix_cross_species_lizard_hamster.py`（冪等・バックアップ `backups/2026-07-21-0936/`）で
+      ワークシート通りに **モジュール `.py`（source-of-truth）を修正**。lizard 8フィールド＋hamster 7フィールド。
+      - **実際に配信されていた汚染（module-only＝served実体）を是正**: lizard NSHP（フクロモモンガ→トカゲ＋UVB/D3追記）、
+        lizard 紫外線不足症（両生類→トカゲ）、hamster 糖尿病（オウム→ハムスター＋疫学の誤事実是正）、
+        hamster 腎アミロイドーシス（フクロモモンガ→ハムスター）。
+      - **raw層のみ汚染だった記録も module を是正**（served は JSON overlay の正ラベル版が既に配信）:
+        lizard 痛風（鳥→トカゲ）、hamster 熱中症（インコ→ハムスター・外傷/創傷ケア記述→熱中症の冷却プロトコルに是正）。
+      - 検証: `scan_cross_species.py` で lizard/hamster **0件**（9種→7種）、sugar_glider/parrot の正当な source 記録は無改変、
+        served=True で全記録が正ラベル。回帰テスト 16 pass（served-view 5・corpus-guard 5・publish-gate 6）、ruff clean。
+      - **注（follow-up候補）**: lizard 痛風の JSON overlay causes は grounded 汎用文（「代謝性の筋骨格系疾患…」）のまま。
+        より詳細な尿酸代謝の病因を配信したい場合は overlay 側の更新が別途必要（今回は汚染是正のみ）。
+      - 残り7種（bird/parakeet/parrot/tortoise/snake/sugar_glider/reptile）の汚染は同手法でワークシート→承認→適用。
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
