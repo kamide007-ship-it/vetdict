@@ -2451,7 +2451,7 @@ DISEASES: List[Dict[str, Any]] = [
         "causes": "Caused by elevated blood uric acid levels secondary to renal disease, chronic dehydration, high-protein diet, or impaired uric acid excretion.",
         "causes_ja": "トカゲにおける高尿酸血症の原因: 腎疾患や脱水に伴う高尿酸血症。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "高尿酸血症はトカゲにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
+        "pathophysiology_ja": "高尿酸血症はトカゲにおける痛風の前段階である。尿酸の産生過剰ないし腎排泄低下により血中尿酸が上昇し、放置すると尿酸ナトリウム結晶が関節・内臓に沈着して痛風へ移行する。",
         "treatment": "Appropriate medical or surgical intervention based on diagnosis, supportive care with IV fluids as needed, pain management, nutritional support, and regular monitoring of treatment response.",
         "treatment_ja": "【トカゲにおける高尿酸血症】\n高尿酸血症はトカゲにおける正確な臨床評価（病歴、身体検査、CBC・生化学、画像）から治療方針を決定。\n基礎疾患の特定→特異的治療＋支持療法の組み合わせが原則。\n経過モニタリング: 主訴の改善、検査値の変化、QOLを2-4週毎に再評価。\n複雑症例はトカゲ専門医（ACZMまたはAVMAエキゾチック分科会等）に紹介を検討。\n支持療法（爬虫類）: 種別POTZ（preferred optimum temperature zone）維持が免疫機能回復の前提条件。輸液 25-30 mL/kg/日 SC/ICe（ノルモソルR、温熱）、強制給餌（Carnivore Care 等）、メロキシカム 0.2-0.5 mg/kg PO/IM q24-48h（NSAID持続投与時は腎機能をモニタ）。\n【鑑別と経過観察】類似症候を呈する疾患の除外と、治療4-8週後の再評価が予後改善の鍵。重症度・併発症によってはトカゲの専門医紹介を考慮する。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",

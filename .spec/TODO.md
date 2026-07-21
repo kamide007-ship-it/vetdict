@@ -267,6 +267,20 @@
         正しい哺乳類内容を配信済み。今回は raw/module フォールバックを整合。parrot Atherosclerosis は module が配信。
       - **`scan_cross_species.py` 全21種 0件 ＝ cross-species 汚染 撲滅完了**。回帰テスト16 pass、ruff clean。
       - **follow-up候補（獣医判断）**: `scan_cross_species.py` を rollout/CI に組み込み「〜における」混入の再発を回帰ガード化。
+- [x] **①CI回帰ガード（獣医「1」・🟢）**: `tests/test_no_cross_species_contamination.py`（2件）。
+      `scan_cross_species.scan()` を pytest に組み込み、**全種で「〜における」異種混入=0** を固定
+      （cross-class は別テストで明示）。将来のenrichment/import再発を CI で必ず検出。
+- [x] **②疾患固有化 第1グループ: 痛風＋卵胞停滞（獣医「2」・🟡適用済み）** →
+      `scripts/quality/fix_gout_follicular_content.py`（冪等・バックアップ `backups/2026-07-21-1200/`・
+      **generic-template マーカーに一致するフィールドのみ**上書き＝良質な既存内容は温存）。
+      - **痛風**: module 格納の generic 病態テンプレ（「代謝・内分泌疾患である」）を持つ bird/tortoise/snake の
+        関節/内臓/慢性/急性/前段階の各痛風に、**尿酸代謝ベースの病態**（尿酸排泄型→高尿酸血症→尿酸ナトリウム結晶の
+        関節/内臓沈着）を関節/内臓/pre-gout 別に付与（獣医承認済みの lizard 痛風と同型）。parakeet は causes も是正。
+      - **卵胞停滞**: 病態が「消化器疾患」と誤カテゴリだった reptile/tortoise/snake を**生殖器（卵巣）疾患**に是正。
+      - 計20フィールド（module格納分）。**umbrella重複エントリ**（"Gout (Visceral)" 等＝"Visceral Gout" の重複で
+        内容が serve時 grounding 生成）は**内容修正ではなく T103 統合の対象**のため今回対象外（別途承認制）。
+      - 検証: cross-species ガード0維持、`test_no_template_disease_content` 144 pass（テンプレ検出に非該当＝疾患固有）、
+        ruff clean、冪等。served で尿酸/生殖器の疾患固有内容を確認。
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
