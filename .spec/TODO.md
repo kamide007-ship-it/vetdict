@@ -233,6 +233,21 @@
         「創傷洗浄・デブリードマン／外傷性・機械的疾患」＝別疾患（外傷）の記述で、熱中症として臨床的に誤り。
         `hamster_0037 糖尿病 causes` の「稀だがオウム類で報告」も誤事実（実際はチャイニーズ/ドワーフで比較的多い）。
       - L（機械的置換）3〜4件は一括承認可。T/C はフィールド単位の ✅/❌/✏️ 承認待ち → 承認後に 🟡 適用。
+- [x] **残り7種の汚染修正ワークシート（提示のみ・🟡未適用・read-only）** — これで**汚染9種すべてに完備**。
+      各レコードの現行汚染テキストを実データから引用し L/T/C 分類、修正対象は全て module `.py`（overlay 無し）と特定:
+      - `SUGAR_GLIDER_CONTAMINATION_FIX_REVIEW.md`（4）: 眼球突出の treatment が**膿瘍治療テンプレ**（C）、栄養性骨異栄養症（L/T）
+      - `BIRD_CONTAMINATION_FIX_REVIEW.md`（13）: Candidiasis/Mucormycosis/Egg Binding の両生類/トカゲ枠（cross-class 5）＋鳥内 L/T 8
+      - `PARAKEET_CONTAMINATION_FIX_REVIEW.md`（8）: 痛風が**代謝・内分泌テンプレ**で尿酸病態欠落（C）＋羽包嚢胞/VitE-Se（L/T）
+      - `PARROT_CONTAMINATION_FIX_REVIEW.md`（8）: **重金属中毒 treatment＝VitK1/NAC の誤解毒剤**（C・正しくは CaEDTA）、動脈硬化＝セキセイ疫学混入＋循環器なのに内分泌テンプレ（C）
+      - `REPTILE_CONTAMINATION_FIX_REVIEW.md`（3）: 慢性呼吸器 L/T。イベルメクチン中毒は**正しい亜群記述＝❌現状維持推奨**
+      - `TORTOISE_CONTAMINATION_FIX_REVIEW.md`（8）: 痛風（C・尿酸）＋**濾胞停滞＝生殖器なのに消化器テンプレ**（C）
+      - `SNAKE_CONTAMINATION_FIX_REVIEW.md`（6）: 痛風（C・尿酸）＋脊椎症 L/T
+      - **cross-class 危険例を surface**: parrot 重金属中毒の解毒剤誤記、tortoise 濾胞停滞のカテゴリ誤り（生殖器→消化器）。
+      - L（ラベル置換）は種ごとに一括承認可。T/C はフィールド単位 ✅/❌/✏️ 承認待ち → 承認後に 🟡 適用。
+- [x] **スキャナ精度改善（🟢 read-only・偽陽性除去）**: 単字ラベル「鳥/犬/猫…」が複合名詞（幼鳥/成鳥/子犬）
+      の語尾で誤検出する穴を修正。直前が漢字/カタカナなら別種ラベルと見なさないガードを追加。
+      偽陽性3件除去（parakeet 幼鳥×2 / parrot 新生鳥×1）、真の別種ラベルは温存、cross-class 36 不変。
+      report 再生成（68→65）。回帰テスト `tests/test_scan_cross_species_guard.py`（4件）。ruff clean。
 
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`

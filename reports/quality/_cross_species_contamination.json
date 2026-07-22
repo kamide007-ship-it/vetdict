@@ -230,20 +230,6 @@
         "foreign_label": "オウム",
         "severity": "within-class",
         "snippet": "オウムにおける栄養障害である。特定の栄養素の不十分な摂取、吸"
-      },
-      {
-        "name": "Crop Candidiasis – Neonatal",
-        "field": "causes_ja",
-        "foreign_label": "鳥",
-        "severity": "within-class",
-        "snippet": "鳥におけるカンジダ過剰増殖で、嗉嚢排出遅延と発育不良を引き起"
-      },
-      {
-        "name": "Crop Candidiasis – Neonatal",
-        "field": "description_ja",
-        "foreign_label": "鳥",
-        "severity": "within-class",
-        "snippet": "鳥におけるカンジダ過剰増殖で、嗉嚢排出遅延と発育不良を引き起"
       }
     ],
     "parrot": [
@@ -302,13 +288,6 @@
         "foreign_label": "インコ",
         "severity": "within-class",
         "snippet": "インコにおける総排泄腔乳頭腫の原因: ヘルペスウイルス関連の"
-      },
-      {
-        "name": "Constricted Toe Syndrome",
-        "field": "description_ja",
-        "foreign_label": "鳥",
-        "severity": "within-class",
-        "snippet": "鳥における乾燥皮膚や繊維による趾の絞扼。血行が障害される。"
       }
     ],
     "reptile": [
@@ -495,6 +474,6 @@
       }
     ]
   },
-  "total": 68,
+  "total": 65,
   "cross_class": 36
 }
