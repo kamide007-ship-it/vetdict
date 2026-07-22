@@ -94,7 +94,7 @@ const I18N={
     cardEmergency:"🚨 緊急プロトコル / クイックリファレンス",emergencyImportant:"⚠ 重要:",emergencyDisclaimer:"緊急時は同時並行的に対応が必要です。本プロトコルは標準的な対応の参考ですが、実際の施行には熟練した獣医師の臨床判断が必須です。各薬品の用量・投与経路は処方前に必ず再確認してください。",
     emergencyTriggerSigns:"認識すべき徴候",emergencyKeyDrugs:"主要薬剤",emergencyMonitoring:"モニタリング指標",emergencyStepsTitle:"対応プロトコル",emergencyTimeTarget:"目標時間",
     landingChatTitle:"臨床症状から鑑別診断",
-    heroTrustRef:"190+学術文献に基づく",heroTrustTests:"3,000+自動テスト検証済み",heroTrustOss:"オープンソース開発",
+    heroTrustSpecies:"犬猫〜エキゾチック21動物種対応",heroTrustRef:"190+学術文献に基づく",heroTrustTests:"3,000+自動テスト検証済み",heroTrustOss:"オープンソース開発",
     landingChatHint:'臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span>',
     heroBadge:"現役獣医師が開発 — 臨床現場の鑑別診断を支援",
     heroAudience:"獣医師・獣医学生のための臨床支援ツール",
@@ -365,7 +365,7 @@ const I18N={
     cardEmergency:"🚨 Emergency Protocols / Quick Reference",emergencyImportant:"⚠ Important:",emergencyDisclaimer:"Emergencies require simultaneous parallel actions. These protocols are standard references; actual execution requires experienced clinical judgment. Always verify drug doses and routes before administration.",
     emergencyTriggerSigns:"Recognize",emergencyKeyDrugs:"Key drugs",emergencyMonitoring:"Monitoring",emergencyStepsTitle:"Protocol",emergencyTimeTarget:"Time target",
     landingChatTitle:"Differential Diagnosis from Clinical Signs",
-    heroTrustRef:"Based on 190+ academic references",heroTrustTests:"Verified by 3,000+ automated tests",heroTrustOss:"Open-source development",
+    heroTrustSpecies:"21 species — from dogs & cats to exotics",heroTrustRef:"Based on 190+ academic references",heroTrustTests:"Verified by 3,000+ automated tests",heroTrustOss:"Open-source development",
     landingChatHint:'Enter clinical signs to generate a differential diagnosis list.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "vomiting anorexia weight loss" "polyuria polydipsia lethargy"</span>',
     heroBadge:"Built by a practicing veterinarian — Clinical decision support",
     heroAudience:"A clinical tool for veterinarians and veterinary students",
@@ -721,29 +721,12 @@ function applyLanguage(){
   if(allDiseases.length){diseaseNavMode=currentLang==="ja"?"category":"az";diseaseFilter="";renderAzNav();renderDiseaseDb();}
   if(drugsLoaded)renderDrugList();
   if(anesthesiaLoaded)reloadAnesthesiaForSpecies();
-  if(document.getElementById("quickNavStrip"))renderQuickNav(currentSpecies||null);
   updateBreadcrumb();
   const mbn=document.getElementById("mobileBottomNav");
   if(mbn){
     mbn.setAttribute("aria-label",currentLang==="ja"?"メインナビゲーション":"Main navigation");
     const views=["checker","database","chat","drugs","anesthesia","emergency"];
     mbn.querySelectorAll("button[data-view]").forEach((btn,i)=>{const v=views[i];if(!v)return;const sp=btn.querySelector("span");if(sp)sp.textContent=t("mobileNav"+v.charAt(0).toUpperCase()+v.slice(1));});
-  }
-  const fab=document.getElementById("floatingNav");
-  if(fab){
-    const tgl=fab.querySelector(".floating-nav-toggle");
-    if(tgl)tgl.setAttribute("aria-label",currentLang==="ja"?"ナビゲーション":"Navigation");
-    /* Re-render the floating nav menu labels in the current language. */
-    const menu=fab.querySelector(".floating-nav-menu");
-    if(menu){
-      const labelMap=currentLang==="ja"
-        ?{top:"⬆️ トップへ",species:"🐾 動物種選択",checker:"☑️ 鑑別診断",database:"📖 疾患DB",drugs:"💊 薬品",anesthesia:"💉 麻酔",emergency:"🚨 緊急対応"}
-        :{top:"⬆️ Top",species:"🐾 Species",checker:"☑️ Checker",database:"📖 Disease DB",drugs:"💊 Drugs",anesthesia:"💉 Anesthesia",emergency:"🚨 Emergency"};
-      menu.querySelectorAll(".floating-nav-item").forEach(item=>{
-        const act=item.dataset.action;
-        if(act&&labelMap[act])item.textContent=labelMap[act];
-      });
-    }
   }
   const ob=document.getElementById("offlineBanner");
   if(ob)ob.textContent=t("offlineBanner");
@@ -898,16 +881,14 @@ document.addEventListener("DOMContentLoaded",async()=>{
     /* Help/Tour modal trigger */
     const helpBtn=document.getElementById("helpGuideBtn");
     if(helpBtn)helpBtn.addEventListener("click",openHelpGuide);
-    /* Always-visible quick-nav strip (shows default label pre-selection) */
-    renderQuickNav(null);
     /* Breadcrumb bar below header */
     updateBreadcrumb();
     /* Keyboard shortcuts for tab switching */
     setupKeyboardShortcuts();
-    /* Floating navigation button */
-    setupFloatingNav();
     /* Mobile bottom tab bar */
     setupMobileBottomNav();
+    /* First-visit nudge to select a species */
+    setupFirstVisitCoach();
     /* Swipe gesture for tab switching */
     setupSwipeGesture();
     /* Offline indicator */
@@ -971,47 +952,6 @@ function setupHeroStats(){
       if(e.key==="Enter"||e.key===" "){e.preventDefault();wrapper.click();}
     });
   });
-}
-
-function setupFloatingNav(){
-  const fab=document.createElement("div");
-  fab.id="floatingNav";
-  fab.className="floating-nav";
-  fab.innerHTML=`<button type="button" class="floating-nav-toggle" aria-label="${currentLang==="ja"?"ナビゲーション":"Navigation"}" aria-expanded="false" aria-haspopup="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button><div class="floating-nav-menu" style="display:none"><button type="button" data-action="top" class="floating-nav-item">\u2B06\uFE0F ${currentLang==="ja"?"トップへ":"Top"}</button><button type="button" data-action="species" class="floating-nav-item">\u{1F43E} ${currentLang==="ja"?"動物種選択":"Species"}</button><button type="button" data-action="checker" class="floating-nav-item">\u2611\uFE0F ${currentLang==="ja"?"鑑別診断":"Checker"}</button><button type="button" data-action="database" class="floating-nav-item">\u{1F4D6} ${currentLang==="ja"?"疾患DB":"Disease DB"}</button><button type="button" data-action="drugs" class="floating-nav-item">\u{1F48A} ${currentLang==="ja"?"薬品":"Drugs"}</button><button type="button" data-action="anesthesia" class="floating-nav-item">\u{1F489} ${currentLang==="ja"?"麻酔":"Anesthesia"}</button><button type="button" data-action="emergency" class="floating-nav-item">\u{1F6A8} ${currentLang==="ja"?"緊急対応":"Emergency"}</button></div>`;
-  document.body.appendChild(fab);
-  let fabOpen=false;
-  const toggle=fab.querySelector(".floating-nav-toggle");
-  const menu=fab.querySelector(".floating-nav-menu");
-  menu.setAttribute("role","menu");
-  menu.querySelectorAll(".floating-nav-item").forEach(b=>b.setAttribute("role","menuitem"));
-  function closeFab(returnFocus){
-    if(!fabOpen)return;
-    fabOpen=false;
-    menu.style.display="none";
-    toggle.setAttribute("aria-expanded","false");
-    if(returnFocus)toggle.focus();
-  }
-  toggle.addEventListener("click",()=>{
-    fabOpen=!fabOpen;
-    menu.style.display=fabOpen?"flex":"none";
-    toggle.setAttribute("aria-expanded",fabOpen);
-    if(fabOpen){const first=menu.querySelector(".floating-nav-item");if(first)first.focus();}
-  });
-  menu.addEventListener("click",e=>{
-    const btn=e.target.closest(".floating-nav-item");
-    if(!btn)return;
-    const action=btn.dataset.action;
-    if(action==="top")window.scrollTo({top:0,behavior:"smooth"});
-    else if(action==="species"){const s=document.getElementById("speciesSection");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});}
-    else{switchView(action);const p=document.getElementById("view"+action.charAt(0).toUpperCase()+action.slice(1));if(p)p.scrollIntoView({behavior:"smooth",block:"start"});}
-    closeFab(false);
-  });
-  document.addEventListener("click",e=>{if(fabOpen&&!fab.contains(e.target))closeFab(false);});
-  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&fabOpen)closeFab(true);});
-  let ticking=false;
-  window.addEventListener("scroll",()=>{
-    if(!ticking){requestAnimationFrame(()=>{fab.classList.toggle("visible",window.scrollY>400);ticking=false;});ticking=true;}
-  },{passive:true});
 }
 
 let globalSearchSpeciesFilter=null;
@@ -1549,9 +1489,17 @@ function selectSpecies(id){
   if(sp&&typeof showToast==="function"){const label=currentLang==="ja"?sp.name:sp.nameEn;showToast(currentLang==="ja"?`${label}を選択しました`:`${label} selected`,"success");}
   const resultsArea=document.getElementById("resultsArea");
   if(resultsArea){resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>${renderHistoryPanel()}`;attachHistoryHandlers(resultsArea);}
-  renderQuickNav(id);
   updateBreadcrumb();
   updateTabBadges(id);
+  /* Dismiss the first-visit coach once a species is chosen. */
+  const _coach=document.querySelector(".first-visit-coach");
+  if(_coach){_coach.remove();try{localStorage.setItem("vetdict-coach-seen","1");}catch(e){}}
+  /* Prefetch the drug dictionary on idle so the first drug-tab open is instant. */
+  if(!drugsLoaded){
+    const _pf=()=>{if(!drugsLoaded)loadDrugDictionary();};
+    if("requestIdleCallback" in window)requestIdleCallback(_pf,{timeout:2500});
+    else setTimeout(_pf,1200);
+  }
 }
 
 function updateTabBadges(speciesId){
@@ -1571,38 +1519,24 @@ function updateTabBadges(speciesId){
   });
 }
 
-function renderQuickNav(speciesId){
-  let strip=document.getElementById("quickNavStrip");
-  if(!strip){
-    strip=document.createElement("div");
-    strip.id="quickNavStrip";
-    strip.className="quick-nav-strip";
-    const speciesSection=document.getElementById("speciesSection");
-    if(speciesSection)speciesSection.after(strip);
-    else return;
-    strip.addEventListener("click",e=>{
-      const btn=e.target.closest(".quick-nav-btn");
-      if(btn&&btn.dataset.view){
-        switchView(btn.dataset.view);
-        const panel=document.getElementById("view"+btn.dataset.view.charAt(0).toUpperCase()+btn.dataset.view.slice(1));
-        if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
-      }
-    });
-  }
-  const sp=speciesId?SPECIES.find(s=>s.id===speciesId):null;
-  const labelHtml=sp
-    ?`<span class="quick-nav-species">${escapeHtml(currentLang==="ja"?sp.name:sp.nameEn)}</span> — ${t("quickNavPrompt")}`
-    :`${t("quickNavDefault")}`;
-  const items=[
-    {view:"checker",icon:"\u2611\uFE0F",label:t("quickNavChecker")},
-    {view:"database",icon:"\u{1F4D6}",label:t("quickNavDiseaseDb")},
-    {view:"drugs",icon:"\u{1F48A}",label:t("quickNavDrugs")},
-    {view:"chat",icon:"\u{1F4AC}",label:t("quickNavChat")},
-    {view:"anesthesia",icon:"\u{1F489}",label:t("quickNavAnesthesia")},
-    {view:"emergency",icon:"\u{1F6A8}",label:t("quickNavEmergency")},
-  ];
-  strip.innerHTML=`<div class="quick-nav-label">${labelHtml}</div><div class="quick-nav-buttons">${items.map(i=>`<button class="quick-nav-btn" data-view="${i.view}"><span class="quick-nav-icon" aria-hidden="true">${i.icon}</span><span>${i.label}</span></button>`).join("")}</div>`;
-  strip.classList.add("visible");
+/* First-visit coach: a single dismissible nudge to select a species. Shown once
+   (localStorage), only before any species is chosen. Auto-dismisses on selection
+   (handled in selectSpecies). */
+function setupFirstVisitCoach(){
+  try{if(localStorage.getItem("vetdict-coach-seen"))return;}catch(e){}
+  if(currentSpecies)return;
+  const anchor=document.getElementById("speciesSection");
+  if(!anchor||anchor.querySelector(".first-visit-coach"))return;
+  const tip=document.createElement("div");
+  tip.className="first-visit-coach";
+  tip.setAttribute("role","note");
+  const msg=currentLang==="ja"?"まず動物種を選択してください":"Start by selecting a species";
+  const closeLabel=currentLang==="ja"?"ヒントを閉じる":"Dismiss hint";
+  tip.innerHTML=`<span class="first-visit-coach-arrow" aria-hidden="true">\u{1F447}</span><span>${msg}</span><button type="button" class="first-visit-coach-close" aria-label="${closeLabel}">×</button>`;
+  anchor.insertBefore(tip,anchor.firstChild);
+  tip.querySelector(".first-visit-coach-close").addEventListener("click",()=>{
+    tip.remove();try{localStorage.setItem("vetdict-coach-seen","1");}catch(e){}
+  });
 }
 
 const VIEW_LABELS={

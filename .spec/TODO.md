@@ -249,6 +249,17 @@
       偽陽性3件除去（parakeet 幼鳥×2 / parrot 新生鳥×1）、真の別種ラベルは温存、cross-class 36 不変。
       report 再生成（68→65）。回帰テスト `tests/test_scan_cross_species_guard.py`（4件）。ruff clean。
 
+- [x] **cross-species 汚染修正の適用（🟡・獣医師承認「AB採用」・2026-07-22）** — 全9種の
+      A（ラベル置換35）+ B（臨床ドラフト30）= 計65フィールドを `scripts/quality/apply_cross_species_fix.py`
+      （冪等・可逆・バックアップ `backups/2026-07-22-0845/`）で当該モジュールに反映。全て overlay=False の
+      module 配信のため module `.py` のみ改変（JSON非改変）。**`scan_cross_species.py` 実測で全21種 0 件**。
+      - 是正した臨床的に危険な誤り: parrot 重金属中毒の解毒剤（VitK1/NAC→CaEDTA）、hamster 熱中症の
+        「創傷ケア／外傷性疾患」誤記→熱性疾患の冷却治療、tortoise 濾胞停滞（生殖器→消化器テンプレ是正）、
+        parakeet/tortoise/snake/lizard の痛風（内分泌テンプレ→尿酸病態）、parrot 動脈硬化（セキセイ疫学除去・循環器化）、
+        hamster 糖尿病（オウム疫学の誤事実→チャイニーズ/ドワーフ）、sugar_glider 眼球突出（膿瘍治療→proptosis治療）。
+      - anti-template 回帰 148 pass（痛風の種横断リライトは 1疾患名×複数種で閾値内）。ruff clean。
+      - **C（T106投与量公開）は承認外＝未実行**。ゲート維持。
+
 ## フェーズ5：付随品質（🟡）
 - [x] **T107** NMN/ECVN ブロックを「自社製品・PR」枠へラベル分離（main, merged）→ `.spec/T107_NMN_PR_LABEL.md`
 - [x] **T110** 出典紐付けv2（疾患単位キュレーション＋種ガード、v1は残す）（main, merged）→ `.spec/T110_CITATION_BINDING_V2.md`

@@ -40,12 +40,23 @@ def test_fledgling_compound_not_flagged():
     assert not _has(pa, "Constricted Toe Syndrome", "description_ja")
 
 
-def test_genuine_foreign_bird_label_still_caught():
-    """A real "鳥における…" framing on a reptile record is preserved."""
-    report = scan()
-    tort = report.get("tortoise", [])
-    assert _has(tort, "Articular Gout", "causes_ja")
-    assert _has(tort, "Visceral Gout", "causes_ja")
+def _guarded_as_compound(value: str, lab: str) -> bool:
+    """Mirror the scanner's single-char compound guard: a single-char label is
+    dropped only when the char immediately before "<lab>における" is a
+    kanji/katakana that binds it into a compound noun."""
+    idx = value.find(lab + "における")
+    return len(lab) == 1 and idx > 0 and bool(_COMPOUND_PREV.match(value[idx - 1]))
+
+
+def test_genuine_foreign_bird_label_preserved_by_guard():
+    """A real "鳥における…" framing (sentence start or particle-preceded) is NOT
+    guarded away, while compound-noun tails (幼鳥/成鳥…) are. Data-stable: tests
+    the guard logic directly rather than relying on unfixed live contamination
+    (the live gout records have since been corrected)."""
+    assert not _guarded_as_compound("鳥における関節痛風の原因: 尿酸結晶沈着。", "鳥")  # sentence start
+    assert not _guarded_as_compound("これは鳥における疾患である。", "鳥")  # particle-preceded
+    assert _guarded_as_compound("挿し餌中の幼鳥における過剰増殖。", "鳥")  # 幼鳥
+    assert _guarded_as_compound("成鳥における所見。", "鳥")  # 成鳥
 
 
 def test_no_single_char_compound_survives_in_report():

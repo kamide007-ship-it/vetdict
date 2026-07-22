@@ -1,5 +1,7 @@
 # Lizard cross-species 汚染 修正ワークシート（提示のみ・🟡未適用）
 
+> ✅ **適用済み（2026-07-22・獣医師承認「AB採用」）**: A（ラベル置換）+ B（臨床ドラフト）を scripts/quality/apply_cross_species_fix.py で当該モジュールに反映。scan_cross_species.py 実測で本種 0 件。バックアップ backups/2026-07-22-0845/。冪等・可逆。C（T106投与量公開）は承認外のため未実行。
+
 対象: `scan_cross_species.py` が検出した **lizard 8フィールド（cross-class 8＝全て高重症度）**。
 degu 外耳炎と同じ手法で種別1バッチ提示 → 承認 → 適用。**本ドキュメントは read-only・データ非改変。**
 承認（✅/❌/✏️）後にのみ 🟡 適用する。

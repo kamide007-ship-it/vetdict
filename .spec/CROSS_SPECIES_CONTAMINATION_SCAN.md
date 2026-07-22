@@ -1,5 +1,10 @@
 # Cross-species 汚染スキャン（全21種・read-only 横展開）
 
+> ✅ **全9種の修正を適用済み（2026-07-22・獣医師承認「AB採用」）**: A（ラベル置換35）+ B（臨床ドラフト30）=
+> 計65フィールドを `scripts/quality/apply_cross_species_fix.py`（冪等・可逆）で当該モジュールに反映。
+> **`scan_cross_species.py` 実測で全種 0 件**（下表は適用前のベースライン記録）。バックアップ `backups/2026-07-22-0845/`。
+> C（T106投与量公開）は承認外のため未実行。回帰テスト・anti-template 148 pass。
+
 degu 外耳炎で見つけた「`<他種>における…`」テンプレ混入を全種に横展開。
 スキャナ: `scripts/quality/scan_cross_species.py`（read-only・冪等）／
 機械可読: `reports/quality/_cross_species_contamination.json`。
