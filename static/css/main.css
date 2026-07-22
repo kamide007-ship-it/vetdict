@@ -1990,3 +1990,13 @@ button.combination-item:focus-visible {
 .results-error .retry-analyze-btn{align-self:flex-start;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem;font-weight:600;min-height:40px}
 .results-error .retry-analyze-btn:hover{background:var(--navy-dark)}
 .results-error .retry-analyze-btn:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+
+/* First-visit coach nudge (dismissible, shown once) */
+.first-visit-coach{display:flex;align-items:center;gap:8px;max-width:1200px;margin:0 auto 14px;padding:10px 14px;background:var(--navy);color:var(--white);border-radius:var(--radius-lg);font-size:.84rem;font-weight:600;box-shadow:var(--shadow-md);animation:fade-tab-in .3s ease-out}
+.first-visit-coach-arrow{font-size:1.05rem;animation:coach-bounce 1.4s ease-in-out infinite}
+.first-visit-coach-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.85);font-size:1.15rem;line-height:1;cursor:pointer;padding:2px 6px;border-radius:6px}
+.first-visit-coach-close:hover{background:rgba(255,255,255,.15);color:var(--white)}
+.first-visit-coach-close:focus-visible{outline:2px solid var(--white);outline-offset:1px}
+@keyframes coach-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+@media (prefers-reduced-motion: reduce){.first-visit-coach-arrow{animation:none}}
+@media (max-width:600px){.first-visit-coach{margin:0 12px 12px;font-size:.8rem;padding:9px 12px}}
