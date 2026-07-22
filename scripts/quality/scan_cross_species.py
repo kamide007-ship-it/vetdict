@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -60,6 +61,12 @@ ALL_LABELS = set(SP_JA.values()) | set(ALIAS)
 FIELDS = ("treatment_ja", "causes_ja", "pathophysiology_ja", "description_ja", "prevention_ja", "prognosis_ja")
 # comparative phrasing that legitimately names another species
 COMPARATIVE = ("異な", "同様", "比べ", "違い", "より", "以外")
+# Single-character labels (鳥/犬/猫/馬/魚) are the tail of many common compound
+# nouns (幼鳥/成鳥/雌鳥/子犬/野鳥…) that are NOT foreign species labels. A genuine
+# foreign label sits at a boundary (sentence start, or after は/、/。/newline), so
+# only treat a single-char label as foreign when the char before it is NOT a
+# kanji/katakana that would bind it into a compound word.
+_COMPOUND_PREV = re.compile(r"[㐀-䶿一-鿿゠-ヿ]")
 
 
 def _class_of(sp: str) -> str:
@@ -99,6 +106,9 @@ def scan() -> dict:
                         continue
                     idx = v.find(lab + "における")
                     if any(x in v[max(0, idx - 6) : idx] for x in COMPARATIVE):
+                        continue
+                    # single-char label bound into a compound noun (幼鳥/子犬…) → not a label
+                    if len(lab) == 1 and idx > 0 and _COMPOUND_PREV.match(v[idx - 1]):
                         continue
                     foreign_cls = {_class_of(s) for s in _label_species(lab)}
                     severity = "within-class" if own_cls in foreign_cls else "cross-class"
