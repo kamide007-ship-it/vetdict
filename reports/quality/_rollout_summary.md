@@ -30,6 +30,9 @@
 | fish | 45 | 0 | 0 | 0 | 0 | 0 | 31 | 14 | 0 | 0 (0/0) |
 | exotic_other | 292 | 35 | 42 | 46 | 0 | 0 | 100 | 216 | 24 | 0 (0/0) |
 
-## ⚠️ 失敗ガード超過（要確認）
-- amphibian: drug_mismatch=220 exceeds guard ceiling 200
-- exotic_other: drug_mismatch=216 exceeds guard ceiling 200
+失敗ガード（10倍相当のヒューリスティック上限）超過: **なし**
+
+### ℹ️ 参考: 生カウントは高いが出荷済みガードが吸収（benign・要対応なし）
+> 未ガード時の問題規模が上限を超えるが、T108 種ガード適用後の**本番残存は上限内**（＝サイトには出ない）。SPEC の自動停止条件には**該当しない**。
+- amphibian: drug_mismatch=220 exceeds ceiling 200 but shipped guard residual=0 → benign (production absorbs it)
+- exotic_other: drug_mismatch=216 exceeds ceiling 200 but shipped guard residual=0 → benign (production absorbs it)

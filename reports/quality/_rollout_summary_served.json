@@ -375,8 +375,9 @@
     "mt_safe": 0,
     "mt_review": 14
   },
-  "guard_warnings": [
-    "amphibian: drug_mismatch=214 exceeds guard ceiling 200"
+  "guard_warnings": [],
+  "guard_benign_notes": [
+    "amphibian: drug_mismatch=214 exceeds ceiling 200 but shipped guard residual=0 → benign (production absorbs it)"
   ],
   "corpus_incomplete_species": []
 }

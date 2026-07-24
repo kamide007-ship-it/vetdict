@@ -31,6 +31,25 @@
       - `rollout.py` サマリーに対象種バナー＋stderr 警告を追加（ceiling ガードの逆＝過少計測を検知）。
       - 全21種×2ビューのレポート再生成（差分は純加算＝コーパス行/フィールドのみ、既存カウント不変を検証）。
       - 回帰テスト `tests/test_detect_corpus_guard.py`（5件）。ruff clean。
+- [x] **検出器堅牢化：失敗ガードの誤警告・死んだガードを是正**（🟢 read-only・データ非改変・`scripts/quality/rollout.py`）
+      横展開レポートの「⚠️ 失敗ガード超過（要確認）」が **偽陽性**だった問題を修正。実地調査で判明した2つのバグ:
+      - **① 偽の halt-warning**: 薬品/出典誤リンクガードが T108 種ガード適用**前**の生カウントで判定していたため、
+        amphibian(220) / exotic_other(216) が上限200超で「要確認」警告 → だが**出荷済みガード適用後の本番残存は0**
+        （`drug_mismatch_residual=0`）＝サイトには出ない。SPEC の自動停止条件（10倍超）を非問題でトリップさせる穴。
+        → 種ガード対象検出器（drug/citation mismatch）は **本番残存(residual)** で上限判定するよう変更。生カウントが
+        上限超でも residual が上限内なら **benign 情報ノート**へ降格（halt-warning にしない）。residual 自体が上限超＝
+        ガード漏れ時のみ real warning。
+      - **② 死んだガード**: `_GUARD` のキーが detector 内部名（`exact_duplicate_cluster_count`/`family_cluster_count`/
+        `heading_only`）で、実際の row キー（`dup_clusters`/`families`/`heading_only_tx`）と**不一致→常に0読み**で
+        重複クラスタ/ファミリー爆発ガードが**沈黙**していた（横展開で horse families=123 等が上限80超なのに未検出）。
+        → row キーに統一。ファミリー候補は「独立疾患のレビュー対象」で corpus サイズに比例（dog119/horse123 は正常）
+        のため上限を 250 に（grossな爆発のみ検知・正常規模で誤発火しない）。重複クラスタ上限60は据置（実測 raw max 50）。
+      - 純関数 `_evaluate_guards(rows)→(warnings, benign_notes)` に切り出し。全21種×2ビュー レポート再生成:
+        raw/served とも **real warning 0**・benign ノート（amphibian・exotic_other の生規模を吸収）を明示。
+        データカウントは不変（raw drug_mismatch 総計 2139 で既存ベースライン一致）。副産物: 既マージのcross-species修正で
+        source が更新済みだった 8種の per-species レポートが最新化（degu 外耳炎 165→194字・parrot 重金属 449→380字 等）。
+      - 回帰テスト `tests/test_rollout_guard.py`（8件: キー整合・residual降格・ガード漏れ検知・死んだガード復活・
+        正常ファミリー非発火・gross爆発検知）。ruff clean。
 
 ## フェーズ1.5：T108 薬品リンク種ガード（🟡 可逆・データ非改変）— **完了・PR #709**
 - [x] `vetdict_api`: 2つの薬品マッチャを「その種の投与量(`species_info`)を持つ薬のみ」に（net-new）
