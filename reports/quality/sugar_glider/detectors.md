@@ -146,7 +146,7 @@
 - 消化管閉塞（Gastrointestinal Obstruction）[sugar_glider_0029] — ja:74字 / en:210字
 - 歯科疾患・歯石蓄積（Dental Disease / Tartar Buildup）[sugar_glider_0032] — ja:184字 / en:158字
 - 不正咬合（Malocclusion）[sugar_glider_0034] — ja:179字 / en:158字
-- 眼球突出（Proptosis (Eye Prolapse)）[sugar_glider_0038] — ja:415字 / en:519字
+- 眼球突出（Proptosis (Eye Prolapse)）[sugar_glider_0038] — ja:402字 / en:519字
 - アフラトキシン中毒（Aflatoxicosis）[sugar_glider_0052] — ja:486字 / en:518字
 - 熱中症（Heat Stroke）[sugar_glider_0061] — ja:195字 / en:158字
 - 敗血症（Septicemia）[sugar_glider_0062] — ja:573字 / en:592字

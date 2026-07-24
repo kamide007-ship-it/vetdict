@@ -172,7 +172,7 @@
 - グラム陰性菌感染症（Gram-negative Bacterial Infection）[parrot_0014] — ja:440字 / en:411字
 - サルコシスティス症（Sarcocystosis）[parrot_0020] — ja:168字 / en:193字
 - 腸内寄生虫症（回虫・条虫）（Intestinal Parasites (Roundworms/Tapeworms)）[parrot_0022] — ja:172字 / en:172字
-- 重金属中毒（鉛・亜鉛）（Heavy Metal Poisoning (Lead/Zinc)）[parrot_0024] — ja:449字 / en:489字
+- 重金属中毒（鉛・亜鉛）（Heavy Metal Poisoning (Lead/Zinc)）[parrot_0024] — ja:380字 / en:489字
 - PTFE中毒（テフロン中毒）（PTFE Toxicosis (Teflon Poisoning)）[parrot_0025] — ja:330字 / en:489字
 - アボカド中毒（Avocado Toxicity）[parrot_0026] — ja:343字 / en:393字
 - チョコレート中毒（Chocolate Toxicity）[parrot_0027] — ja:446字 / en:393字

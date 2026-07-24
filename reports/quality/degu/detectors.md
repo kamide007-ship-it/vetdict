@@ -135,7 +135,7 @@
 - 腸内寄生虫症（Intestinal Parasites）[degu_0031] — ja:440字 / en:446字
 - うっ血性心不全（Congestive Heart Failure）[degu_0049] — ja:355字 / en:437字
 - 心筋症（Cardiomyopathy）[degu_0050] — ja:348字 / en:516字
-- 耳感染症（外耳炎）（Ear Infection (Otitis)）[degu_0051] — ja:165字 / en:137字
+- 耳感染症（外耳炎）（Ear Infection (Otitis)）[degu_0051] — ja:194字 / en:137字
 - 敗血症（Septicemia）[degu_0053] — ja:569字 / en:592字
 - 不正咬合 - 臼歯（後天性）（Dental Malocclusion - Molar (Acquired)）[degu_0062] — ja:185字 / en:158字
 - 不正咬合 - 切歯（先天性）（Dental Malocclusion - Incisor (Congenital)）[degu_0063] — ja:185字 / en:158字

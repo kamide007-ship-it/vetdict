@@ -1619,7 +1619,7 @@
         "id": "parrot_0024",
         "name": "Heavy Metal Poisoning (Lead/Zinc)",
         "name_ja": "重金属中毒（鉛・亜鉛）",
-        "treatment_ja_len": 449,
+        "treatment_ja_len": 380,
         "treatment_len": 489,
         "has_dosage": false
       },
