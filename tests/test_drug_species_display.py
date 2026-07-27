@@ -49,8 +49,13 @@ def test_species_with_a_dose_is_not_marked_unsafe_by_omission():
     warning shown. Defaulting them to safe would invert the warning — the first
     attempt at this normalisation did exactly that to "hydrogen peroxide is
     CONTRAINDICATED in cats", which ``test_drug_safety`` caught.
+
+    The other exception is an entry whose "dose" is really a statement that no
+    dose is established ("not well established", "本種では確立されていない").
+    Marking those ✓ put a tick next to text saying the opposite, which reads as
+    "safe to use in this species".
     """
-    from api.drug_dictionary import _notes_flag_contraindication
+    from api.drug_dictionary import _dose_is_unestablished, _notes_flag_contraindication
 
     missing = [
         (d.get("id"), sp)
@@ -58,6 +63,7 @@ def test_species_with_a_dose_is_not_marked_unsafe_by_omission():
         if (info.get("dosage") or info.get("dosage_ja"))
         and info.get("safe") is None
         and not _notes_flag_contraindication(info)
+        and not _dose_is_unestablished(info)
     ]
     assert not missing, f"{len(missing)} species entries would render ✗ despite a dose, e.g. {missing[:5]}"
 

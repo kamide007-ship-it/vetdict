@@ -1,7 +1,7 @@
 {
   "name": "VetDict - Clinical Decision Support for Veterinarians",
   "short_name": "VetDict",
-  "description": "獣医師・獣医学生のための臨床意思決定支援ツール。6,500+疾患・570+薬品・21動物種・188麻酔プロトコル対応。",
+  "description": "獣医師・獣医学生のための臨床意思決定支援ツール。6,500+疾患・571+薬品・21動物種・188麻酔プロトコル対応。",
   "start_url": "/?utm_source=pwa",
   "scope": "/",
   "display": "standalone",
@@ -65,7 +65,7 @@
       "name": "薬品辞書 / Drug Dictionary",
       "short_name": "薬品",
       "url": "/?utm_source=pwa_shortcut#drugs",
-      "description": "570+薬品の種別投与量を検索 / Search 570+ drugs",
+      "description": "571+薬品の種別投与量を検索 / Search 571+ drugs",
       "icons": [{"src": "/static/icon-192.png", "sizes": "192x192"}]
     },
     {

@@ -45,6 +45,12 @@ from api.drug_batch_26 import DRUG_INTERACTIONS_PATCH_26
 from api.drug_batch_27 import DRUG_INTERACTIONS_PATCH_27, DRUG_INTERACTIONS_PATCH_27B
 from api.drug_batch_28 import SPECIES_INFO_PATCH_28
 from api.drug_batch_29 import SPECIES_INFO_PATCH_29
+from api.drug_batch_30 import (
+    DRUGS_BATCH_30,
+    METOCLOPRAMIDE_DOG_LACTATION_NOTE,
+    METOCLOPRAMIDE_DOG_LACTATION_NOTE_EN,
+    METOCLOPRAMIDE_LACTATION_PATCH_30,
+)
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -10516,6 +10522,29 @@ for _species_patch_batch in (SPECIES_INFO_PATCH_28, SPECIES_INFO_PATCH_29):
                 if _sp not in _target:
                     _target[_sp] = _info
 
+# バッチ30: D2拮抗系の催乳作用（スルピリド新規収載＋メトクロプラミドの欠落補完）
+for _drug30 in DRUGS_BATCH_30:
+    if _drug30["id"] not in _drug_index:
+        DRUGS.append(_drug30)
+        _drug_index[_drug30["id"]] = _drug30
+
+for _drug_id, _patch30 in METOCLOPRAMIDE_LACTATION_PATCH_30.items():
+    if _drug_id in _drug_index:
+        _drug_index[_drug_id].update(_patch30)
+
+# 犬の催乳用法は既存の消化管用量を上書きせず notes に併記する（用量欄の書き換えはしない）
+_metoc = _drug_index.get("metoclopramide")
+if _metoc:
+    _dog = (_metoc.get("species_info") or {}).get("dog")
+    if isinstance(_dog, dict):
+        for _key, _text in (
+            ("notes_ja", METOCLOPRAMIDE_DOG_LACTATION_NOTE),
+            ("notes", METOCLOPRAMIDE_DOG_LACTATION_NOTE_EN),
+        ):
+            _existing = _dog.get(_key) or ""
+            if "29359978" not in _existing:
+                _dog[_key] = f"{_existing} {_text}".strip()
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -10713,6 +10742,19 @@ _CONTRA_FALSE_POSITIVES = (
 )
 
 
+# 「本種では確立されていない」等は用量ではない。ここを safe=True にすると
+# 「✓ 確立されていない」という矛盾表示になり、使えると誤読される。
+_UNESTABLISHED_DOSE = re.compile(
+    r"not established|not well established|確立されていない|not commonly needed|通常は不要|unknown|不明|データなし|no data",
+    re.I,
+)
+
+
+def _dose_is_unestablished(info: Dict[str, Any]) -> bool:
+    text = f"{info.get('dosage', '') or ''} {info.get('dosage_ja', '') or ''}"
+    return bool(_UNESTABLISHED_DOSE.search(text))
+
+
 def _notes_flag_contraindication(info: Dict[str, Any]) -> bool:
     notes = f"{info.get('notes', '') or ''} {info.get('notes_ja', '') or ''}"
     if "CONTRAINDICATED" not in notes.upper() and "禁忌" not in notes:
@@ -10733,6 +10775,7 @@ for _drug in DRUGS:
             "safe" not in _info
             and (_info.get("dosage") or _info.get("dosage_ja"))
             and not _notes_flag_contraindication(_info)
+            and not _dose_is_unestablished(_info)
         ):
             _info["safe"] = True
 
