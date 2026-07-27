@@ -1,0 +1,233 @@
+{
+  "species": "fish",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 11,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "prednisolone",
+      "drug": "Prednisolone",
+      "species": "fish",
+      "current_dosage": "1-5 mg/kg IM/IP (large fish only) 1-5 mg/kg 筋注/腹腔内（大型魚のみ）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "28601540",
+        "40835685",
+        "2560358"
+      ],
+      "pubmed_hits": 67
+    },
+    {
+      "drug_id": "malachite_green",
+      "drug": "Malachite Green",
+      "species": "fish",
+      "current_dosage": "0.05-0.1 mg/L prolonged bath; 0.1-0.15 mg/L short bath (1h) 0.05-0.1 mg/L 長時間浴; 0.1-0.15 mg/L 短時間浴（1時間）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "15129773",
+        "36920616",
+        "39871486"
+      ],
+      "pubmed_hits": 73
+    },
+    {
+      "drug_id": "formalin_fish",
+      "drug": "Formalin (37% Formaldehyde)",
+      "species": "fish",
+      "current_dosage": "15-25 mg/L (ppm) prolonged bath; 150-250 mg/L short dip (30-60 min) 15-25 mg/L 長時間浴; 150-250 mg/L 短時間ディップ（30-60分）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "39010235",
+        "24163419",
+        "9270845"
+      ],
+      "pubmed_hits": 424
+    },
+    {
+      "drug_id": "copper_sulfate",
+      "drug": "Copper Sulfate",
+      "species": "fish",
+      "current_dosage": "0.15-0.20 mg/L free copper (marine); 0.15 mg/L (freshwater); maintain for 14-21 days 0.15-0.20 mg/L 遊離銅（海水）; 0.15 mg/L（淡水）; 14-21日間維持",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11991415",
+        "39075836",
+        "34918380"
+      ],
+      "pubmed_hits": 116
+    },
+    {
+      "drug_id": "acriflavine",
+      "drug": "Acriflavine",
+      "species": "fish",
+      "current_dosage": "3-10 mg/L prolonged bath 3-10 mg/L 長時間浴",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "9667083",
+        "31009810",
+        "9170648"
+      ],
+      "pubmed_hits": 5
+    },
+    {
+      "drug_id": "levamisole_fish",
+      "drug": "Levamisole (Fish)",
+      "species": "fish",
+      "current_dosage": "2-5 mg/L prolonged bath for 24h; or 10 mg/kg in medicated feed 2-5 mg/L 長時間浴 24時間; または 10 mg/kg 薬餌",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "32201965",
+        "37988113",
+        "1937280"
+      ],
+      "pubmed_hits": 37
+    },
+    {
+      "drug_id": "epsom_salt",
+      "drug": "Epsom Salt (Magnesium Sulfate)",
+      "species": "fish",
+      "current_dosage": "1-3 tablespoons per 20L (1-3 tsp/5 gal) prolonged bath 20Lあたり大さじ1-3杯 長時間浴",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "9068926",
+        "35478007",
+        "5352039"
+      ],
+      "pubmed_hits": 19
+    },
+    {
+      "drug_id": "aquarium_salt",
+      "drug": "Aquarium Salt (NaCl)",
+      "species": "fish",
+      "current_dosage": "1-3 g/L (0.1-0.3%) prophylactic; 5-10 g/L (0.5-1%) therapeutic dip 15-30 min; 10-30 g/L (1-3%) short dip 1-5 min 1-3 g/L (0.1-0.3%) 予防的; 5-10 g/L (0.5-1%) 治療的ディ",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11991415",
+        "21413505",
+        "15313482"
+      ],
+      "pubmed_hits": 8
+    },
+    {
+      "drug_id": "cimetidine",
+      "drug": "Cimetidine",
+      "species": "fish",
+      "current_dosage": "4 mg/kg PO or in feed",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "9068926",
+        "27475025",
+        "19375688"
+      ],
+      "pubmed_hits": 23
+    },
+    {
+      "drug_id": "ms222_fish",
+      "drug": "Tricaine Methanesulfonate (MS-222)",
+      "species": "fish",
+      "current_dosage": "鎮静: 50-100 mg/L; 麻酔: 100-200 mg/L; 安楽死: 250+ mg/L",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38123147",
+        "35659382",
+        "29889631"
+      ],
+      "pubmed_hits": 64
+    },
+    {
+      "drug_id": "eugenol_fish",
+      "drug": "Eugenol (Clove Oil)",
+      "species": "fish",
+      "current_dosage": "鎮静: 25-50 mg/L; 麻酔: 40-100 mg/L; 安楽死: 300+ mg/L",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "15246235",
+        "36139303",
+        "38668432"
+      ],
+      "pubmed_hits": 74
+    }
+  ]
+}

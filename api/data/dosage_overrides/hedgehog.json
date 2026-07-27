@@ -1,0 +1,69 @@
+{
+  "species": "hedgehog",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 3,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "hedgehog",
+      "current_dosage": "0.2-2 mg/kg IM/IV 0.2-2 mg/kg 筋注/静注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37317020",
+        "23303060",
+        "39064775"
+      ],
+      "pubmed_hits": 10
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "hedgehog",
+      "current_dosage": "6-18 mg/kg 局所 月1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "28691193"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "hedgehog",
+      "current_dosage": "200-400 μg/kg SC q14日×3回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38095075",
+        "42217373",
+        "28691193"
+      ],
+      "pubmed_hits": 3
+    }
+  ]
+}

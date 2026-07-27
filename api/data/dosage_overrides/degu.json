@@ -1,0 +1,227 @@
+{
+  "species": "degu",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 13,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "degu",
+      "current_dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "degu",
+      "current_dosage": "0.01 mg/kg SC/IM 0.01 mg/kg 皮下/筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "scopolamine_butylbromide",
+      "drug": "Scopolamine Butylbromide",
+      "species": "degu",
+      "current_dosage": "0.3-0.5 mg/kg SC/IM 0.3-0.5 mg/kg 皮下/筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "degu",
+      "current_dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "degu",
+      "current_dosage": "1 drop q12h 1滴 12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "degu",
+      "current_dosage": "Nebulized 0.5 mg/ml for 10-15 min",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "ipratropium",
+      "drug": "Ipratropium Bromide",
+      "species": "degu",
+      "current_dosage": "Nebulized: 250 μg q8h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "cromoglycate",
+      "drug": "Sodium Cromoglycate",
+      "species": "degu",
+      "current_dosage": "Nebulized: 10 mg q8h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "degu",
+      "current_dosage": "1/4-1/2 tsp per meal",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "degu",
+      "current_dosage": "5 mg/kg PO 1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "psyllium_husk",
+      "drug": "Psyllium Husk (Veterinary Fiber)",
+      "species": "degu",
+      "current_dosage": "少量を食事に混合",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "degu",
+      "current_dosage": "15-20 mg/kg 局所 月1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "33901932"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "critical_care_herbivore",
+      "drug": "Critical Care (Oxbow)",
+      "species": "degu",
+      "current_dosage": "少量ずつシリンジ給餌",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "41065001"
+      ],
+      "pubmed_hits": 1
+    }
+  ]
+}

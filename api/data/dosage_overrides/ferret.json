@@ -1,0 +1,330 @@
+{
+  "species": "ferret",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 18,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "emodepside",
+      "drug": "Emodepside",
+      "species": "ferret",
+      "current_dosage": "Cat dose topical off-label 猫用量を外用（適応外）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "scopolamine_butylbromide",
+      "drug": "Scopolamine Butylbromide",
+      "species": "ferret",
+      "current_dosage": "0.3-0.5 mg/kg SC/IM 0.3-0.5 mg/kg 皮下/筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "n_acetylcysteine",
+      "drug": "N-Acetylcysteine (NAC)",
+      "species": "ferret",
+      "current_dosage": "Same protocol as cats 猫と同じプロトコル",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "ferret",
+      "current_dosage": "4.7 mg implant SC 4.7 mg インプラント皮下",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26323800",
+        "24947865",
+        "29655478"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "ferret",
+      "current_dosage": "30 mg/kg PO with meals 30 mg/kg 経口 食事と共に",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "25799397",
+        "30740636",
+        "22192389"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "iron_dextran",
+      "drug": "Iron Dextran",
+      "species": "ferret",
+      "current_dosage": "10 mg/kg IM 10 mg/kg 筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "1529857",
+        "20839993"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "desmopressin",
+      "drug": "Desmopressin (DDAVP)",
+      "species": "ferret",
+      "current_dosage": "1 drop intranasally q12-24h 1滴 鼻腔内 12-24時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "7603015"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "cosyntropin",
+      "drug": "Cosyntropin (Cortrosyn/Synacthen)",
+      "species": "ferret",
+      "current_dosage": "1 µg/kg IV/IM; cortisol at 0 and 60 min 1 µg/kg 静注/筋注；投与前と投与後60分にコルチゾール測定",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "8427469",
+        "12679153"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "denamarin",
+      "drug": "SAMe + Silybin (Denamarin)",
+      "species": "ferret",
+      "current_dosage": "Cat dose formulation q24h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "l_asparaginase",
+      "drug": "L-Asparaginase",
+      "species": "ferret",
+      "current_dosage": "400 IU/kg IM",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "7768701"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "aglepristone",
+      "drug": "Aglepristone (Alizin)",
+      "species": "ferret",
+      "current_dosage": "10 mg/kg SC days 1, 2",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "cobalamin_injection",
+      "drug": "Cobalamin (Vitamin B12) Injectable",
+      "species": "ferret",
+      "current_dosage": "250 μg SC q7日",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "ferret",
+      "current_dosage": "4.4 mg/kg PO 1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "ferret",
+      "current_dosage": "6-18 mg/kg 局所 月1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "imidacloprid_topical",
+      "drug": "Imidacloprid 10% Spot-on (Advantage)",
+      "species": "ferret",
+      "current_dosage": "0.4 mL/ferret 局所 月1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11434557",
+        "18386063",
+        "21739384"
+      ],
+      "pubmed_hits": 3
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "ferret",
+      "current_dosage": "フィラリア予防: 55 μg/ferret PO 月1回; ダニ: 200-400 μg/kg SC",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "32470870",
+        "35638286",
+        "7051527"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "deslorelin_implant",
+      "drug": "Deslorelin Implant (Suprelorin)",
+      "species": "ferret",
+      "current_dosage": "4.7 mg インプラント SC",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26323800",
+        "29655478",
+        "24947865"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "emodepside_topical",
+      "drug": "Emodepside (Profender component)",
+      "species": "ferret",
+      "current_dosage": "Off-label topical at cat dose",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    }
+  ]
+}

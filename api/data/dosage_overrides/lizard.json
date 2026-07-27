@@ -1,0 +1,286 @@
+{
+  "species": "lizard",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 15,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "lizard",
+      "current_dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "8174928",
+        "29897574",
+        "33125169"
+      ],
+      "pubmed_hits": 5
+    },
+    {
+      "drug_id": "neomycin",
+      "drug": "Neomycin",
+      "species": "lizard",
+      "current_dosage": "Topical application 外用",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "663923",
+        "31608795"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "polymyxin_b",
+      "drug": "Polymyxin B",
+      "species": "lizard",
+      "current_dosage": "Topical application 外用",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "31608795"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "acetazolamide",
+      "drug": "Acetazolamide",
+      "species": "lizard",
+      "current_dosage": "Not established",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "lizard",
+      "current_dosage": "30-50 mg/kg PO with meals",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "25479609"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "lizard",
+      "current_dosage": "1 mEq/kg ICe slow",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2887386",
+        "20623801",
+        "19245747"
+      ],
+      "pubmed_hits": 3
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "lizard",
+      "current_dosage": "0.1-0.6 mg/kg IM/IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "vitamin_d3",
+      "drug": "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      "species": "lizard",
+      "current_dosage": "データ限定的; UVB照射が第一選択",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "20206712",
+        "24848550"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "lizard",
+      "current_dosage": "5 mg/kg PO 1回; 14日後繰返し",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37428690"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "lizard",
+      "current_dosage": "患部に塗布",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "lizard",
+      "current_dosage": "100 mg/kg IV/ICe",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38569538",
+        "38688326",
+        "3420784"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "vitamin_a_injectable",
+      "drug": "Vitamin A Injectable",
+      "species": "lizard",
+      "current_dosage": "1,000-5,000 IU/kg IM 1回; 2週後繰返し",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "31631512",
+        "16432891"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "lizard",
+      "current_dosage": "200 μg/kg PO/SC 1回; 14日後繰返し",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "35708909",
+        "35871281",
+        "37428690"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "lizard",
+      "current_dosage": "餌にダスティング（毎回）",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "uvb_therapy",
+      "drug": "UVB Phototherapy (Reptile Husbandry)",
+      "species": "lizard",
+      "current_dosage": "5.0-12.0% UVB（種による）",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    }
+  ]
+}

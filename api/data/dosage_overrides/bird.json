@@ -1,0 +1,629 @@
+{
+  "species": "bird",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 31,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "ivermectin",
+      "drug": "Ivermectin",
+      "species": "bird",
+      "current_dosage": "200 mcg/kg PO/topical; dilute for small birds 200 mcg/kg 経口/局所; 小鳥は希釈",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "29655473",
+        "38675934",
+        "26553292"
+      ],
+      "pubmed_hits": 82
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "bird",
+      "current_dosage": "2-4 mg/kg IM (emergency only) 2-4 mg/kg 筋注（緊急時のみ）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "32678530",
+        "10901209",
+        "37060915"
+      ],
+      "pubmed_hits": 283
+    },
+    {
+      "drug_id": "neomycin",
+      "drug": "Neomycin",
+      "species": "bird",
+      "current_dosage": "Topical application 外用",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6388140",
+        "26304689",
+        "34980101"
+      ],
+      "pubmed_hits": 63
+    },
+    {
+      "drug_id": "lufenuron",
+      "drug": "Lufenuron",
+      "species": "bird",
+      "current_dosage": "0.5 mg/mL in drinking water 0.5 mg/mL 飲水に添加",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "39988040",
+        "40138283",
+        "38393940"
+      ],
+      "pubmed_hits": 3
+    },
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "bird",
+      "current_dosage": "0.01 mg/kg IM 0.01 mg/kg 筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "21601813",
+        "8071181",
+        "27403604"
+      ],
+      "pubmed_hits": 10
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "bird",
+      "current_dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "24881152"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "bird",
+      "current_dosage": "4.7 mg implant SC/IM 4.7 mg インプラント皮下/筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34130384",
+        "29655478",
+        "35526163"
+      ],
+      "pubmed_hits": 17
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "bird",
+      "current_dosage": "30-50 mg/kg PO with meals 30-50 mg/kg 経口 食事と共に",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26098721",
+        "39261948",
+        "35316702"
+      ],
+      "pubmed_hits": 67
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "bird",
+      "current_dosage": "1 drop q12h 1滴 12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11037901",
+        "9477988"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "tetracycline",
+      "drug": "Tetracycline",
+      "species": "bird",
+      "current_dosage": "200-250 mg/kg medicated feed; or 200-400 mg/L water 薬餌200-250 mg/kg；または飲水200-400 mg/L",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34318509",
+        "32988509",
+        "1097931"
+      ],
+      "pubmed_hits": 558
+    },
+    {
+      "drug_id": "atracurium",
+      "drug": "Atracurium",
+      "species": "bird",
+      "current_dosage": "0.25-0.5 mg/kg IV 0.25-0.5 mg/kg 静注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6100317",
+        "1476319",
+        "6161627"
+      ],
+      "pubmed_hits": 3
+    },
+    {
+      "drug_id": "phenylephrine",
+      "drug": "Phenylephrine",
+      "species": "bird",
+      "current_dosage": "10-20 μg/kg IM/IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34032554",
+        "2845821",
+        "7903621"
+      ],
+      "pubmed_hits": 35
+    },
+    {
+      "drug_id": "norepinephrine",
+      "drug": "Norepinephrine",
+      "species": "bird",
+      "current_dosage": "Not established",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2676350",
+        "6151579",
+        "40985800"
+      ],
+      "pubmed_hits": 383
+    },
+    {
+      "drug_id": "propranolol",
+      "drug": "Propranolol",
+      "species": "bird",
+      "current_dosage": "Not established",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34112223",
+        "3681481",
+        "25405970"
+      ],
+      "pubmed_hits": 126
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "bird",
+      "current_dosage": "0.01-0.02 mg/kg nebulized",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "644539",
+        "8071181",
+        "23928328"
+      ],
+      "pubmed_hits": 20
+    },
+    {
+      "drug_id": "sildenafil_pulmonary",
+      "drug": "Sildenafil (Pulmonary Hypertension)",
+      "species": "bird",
+      "current_dosage": "Not established",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "40752686",
+        "17688073",
+        "18059529"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "vitamin_e",
+      "drug": "Vitamin E (Alpha-tocopherol)",
+      "species": "bird",
+      "current_dosage": "0.05-0.1 mg/kg IM; or 1 IU/30g body weight PO",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "9724884",
+        "30371860",
+        "1476405"
+      ],
+      "pubmed_hits": 647
+    },
+    {
+      "drug_id": "tropicamide",
+      "drug": "Tropicamide",
+      "species": "bird",
+      "current_dosage": "1%: 1 drop",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26878398"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "bird",
+      "current_dosage": "25-50 mg/kg PO with food",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26098721",
+        "39261948",
+        "35316702"
+      ],
+      "pubmed_hits": 67
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "bird",
+      "current_dosage": "1 mEq/kg IV slow",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "23636658",
+        "3521744",
+        "20510385"
+      ],
+      "pubmed_hits": 71
+    },
+    {
+      "drug_id": "activated_charcoal",
+      "drug": "Activated Charcoal",
+      "species": "bird",
+      "current_dosage": "1-2 g/kg PO via gavage",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "36343435",
+        "37088201",
+        "35495714"
+      ],
+      "pubmed_hits": 83
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "bird",
+      "current_dosage": "2-4 mg/kg IM",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "21112257",
+        "11798289",
+        "22835862"
+      ],
+      "pubmed_hits": 5
+    },
+    {
+      "drug_id": "omega_3_fatty_acids",
+      "drug": "Omega-3 Fatty Acids (EPA/DHA)",
+      "species": "bird",
+      "current_dosage": "フラキシードオイル 0.1-0.5 mL/kg/day",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "30415628",
+        "34710343",
+        "9724884"
+      ],
+      "pubmed_hits": 325
+    },
+    {
+      "drug_id": "vitamin_d3",
+      "drug": "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      "species": "bird",
+      "current_dosage": "データ限定的",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6387694",
+        "8744955",
+        "42185478"
+      ],
+      "pubmed_hits": 322
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "bird",
+      "current_dosage": "4.5 mg/kg PO 1回; 14日後繰返し",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "27098251",
+        "41521310"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "bird",
+      "current_dosage": "患部に薄く塗布",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "bird",
+      "current_dosage": "100 mg/kg IV/ICe",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3397524",
+        "4573716",
+        "33843357"
+      ],
+      "pubmed_hits": 204
+    },
+    {
+      "drug_id": "vitamin_a_injectable",
+      "drug": "Vitamin A Injectable",
+      "species": "bird",
+      "current_dosage": "10,000-25,000 IU/kg IM 1回; 必要に応じて繰返し",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6375154",
+        "37375657",
+        "35764970"
+      ],
+      "pubmed_hits": 30
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "bird",
+      "current_dosage": "200 μg/kg PO/IM 1回; 繰返し14日後",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "29655473",
+        "38675934",
+        "26553292"
+      ],
+      "pubmed_hits": 82
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "bird",
+      "current_dosage": "カトルボーン/ミネラルブロック; 卵塞時100-200 mg/kg PO",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "15018022",
+        "23911451",
+        "32616248"
+      ],
+      "pubmed_hits": 8
+    },
+    {
+      "drug_id": "amprolium",
+      "drug": "Amprolium (Corid)",
+      "species": "bird",
+      "current_dosage": "30 mL/gallon drinking water × 5-7 days (9.6% solution)",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3432190",
+        "10747238",
+        "3684868"
+      ],
+      "pubmed_hits": 63
+    }
+  ]
+}

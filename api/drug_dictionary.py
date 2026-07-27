@@ -10833,6 +10833,16 @@ def _consolidate_duplicate_drugs() -> Dict[str, str]:
 
 
 _DRUG_ALIAS_TO_ID: Dict[str, str] = _consolidate_duplicate_drugs()
+
+# 獣医師がフォーミュラリから記入し published にした用量のみを適用する
+# （api/drug_dosage_overrides.py の fail-closed ゲート）。未記入・出典なしは無視されるので、
+# 何も承認されていない現状では完全な no-op。
+try:
+    from api.drug_dosage_overrides import apply_dosage_overrides as _apply_dosage_overrides
+
+    _DOSAGE_OVERRIDES_APPLIED = _apply_dosage_overrides(DRUGS)
+except ImportError:  # pragma: no cover - optional module
+    _DOSAGE_OVERRIDES_APPLIED = 0
 # 統合後にインデックスを貼り直す（以降の参照は正規エントリのみを見る）
 _drug_index = {d["id"]: d for d in DRUGS if d.get("id")}
 

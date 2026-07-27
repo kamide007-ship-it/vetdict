@@ -1,0 +1,1549 @@
+{
+  "species": "horse",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 78,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "ivermectin",
+      "drug": "Ivermectin",
+      "species": "horse",
+      "current_dosage": "200 mcg/kg PO (paste) 200 mcg/kg 経口（ペースト）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "25516842",
+        "8346648",
+        "38603925"
+      ],
+      "pubmed_hits": 251
+    },
+    {
+      "drug_id": "moxidectin",
+      "drug": "Moxidectin",
+      "species": "horse",
+      "current_dosage": "400 mcg/kg PO (gel) 400 mcg/kg 経口（ジェル）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "25516842",
+        "8346648",
+        "38160526"
+      ],
+      "pubmed_hits": 89
+    },
+    {
+      "drug_id": "phenobarbital",
+      "drug": "Phenobarbital",
+      "species": "horse",
+      "current_dosage": "6.6-11 mg/kg IV loading; maintenance varies 6.6-11 mg/kg 静注ローディング; 維持量は可変",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3592381",
+        "32154280",
+        "1524295"
+      ],
+      "pubmed_hits": 19
+    },
+    {
+      "drug_id": "glucosamine",
+      "drug": "Glucosamine/Chondroitin",
+      "species": "horse",
+      "current_dosage": "Varies by product; typically 5-10 g/day PO 製品により異なる。通常5-10 g/日 経口",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "32968713",
+        "24011144"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "ecvn_amino_complete",
+      "drug": "Amino Complete (Equine & Canine Vet Nutrition)",
+      "species": "horse",
+      "current_dosage": "BCAA set at maximum evidence-based dose for horses. Administer before training or after high-intensity work. May dose twice daily. BCAAは馬のエビデンスに基づく最大量に設定。調教前または",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "24164202",
+        "26956662",
+        "22358258"
+      ],
+      "pubmed_hits": 53
+    },
+    {
+      "drug_id": "ecvn_cp_powder",
+      "drug": "CP Powder (Equine & Canine Vet Nutrition)",
+      "species": "horse",
+      "current_dosage": "50 g/day PO mixed with feed 50 g/日 経口 飼料に混合",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "31557509"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "ecvn_no_pain_quick_stop",
+      "drug": "No Pain Quick Stop (Equine & Canine Vet Nutrition)",
+      "species": "horse",
+      "current_dosage": "Apply directly to bleeding site 出血部位に直接塗布",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "polymyxin_b",
+      "drug": "Polymyxin B",
+      "species": "horse",
+      "current_dosage": "Topical/ophthalmic use 外用/点眼",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "35801274",
+        "15971817",
+        "37237756"
+      ],
+      "pubmed_hits": 24
+    },
+    {
+      "drug_id": "nystatin",
+      "drug": "Nystatin",
+      "species": "horse",
+      "current_dosage": "Topical application 外用",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "17916036",
+        "6497809"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "aminophylline",
+      "drug": "Aminophylline",
+      "species": "horse",
+      "current_dosage": "5-10 mg/kg IV slowly 5-10 mg/kg ゆっくり静注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6524719",
+        "2361508",
+        "6512916"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "horse",
+      "current_dosage": "0.02 mg/kg IV slowly 0.02 mg/kg ゆっくり静注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26174202",
+        "10895896",
+        "18684682"
+      ],
+      "pubmed_hits": 14
+    },
+    {
+      "drug_id": "scopolamine_butylbromide",
+      "drug": "Scopolamine Butylbromide",
+      "species": "horse",
+      "current_dosage": "0.3 mg/kg IV (max 5 mL of 20mg/mL) 0.3 mg/kg 静注（20mg/mL製剤で最大5mL）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37399909",
+        "1746114",
+        "7752300"
+      ],
+      "pubmed_hits": 18
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "horse",
+      "current_dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11940242",
+        "11341390",
+        "25522663"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "potassium_bromide",
+      "drug": "Potassium Bromide",
+      "species": "horse",
+      "current_dosage": "Not commonly used 一般的には使用されない",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "18454837",
+        "20836143",
+        "16035184"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "melatonin",
+      "drug": "Melatonin",
+      "species": "horse",
+      "current_dosage": "Not commonly used 一般的には使用されない",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "14962057",
+        "35780743",
+        "37969346"
+      ],
+      "pubmed_hits": 59
+    },
+    {
+      "drug_id": "vincristine",
+      "drug": "Vincristine",
+      "species": "horse",
+      "current_dosage": "Not commonly used 一般的には使用されない",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "41962605",
+        "3320307",
+        "2195722"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "methocarbamol",
+      "drug": "Methocarbamol",
+      "species": "horse",
+      "current_dosage": "4.4-44 mg/kg IV slowly 4.4-44 mg/kg ゆっくり静注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26924025",
+        "23859819",
+        "9109959"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "horse",
+      "current_dosage": "1 drop q12h 1滴 12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11940242",
+        "11763186",
+        "27791324"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "sotalol",
+      "drug": "Sotalol",
+      "species": "horse",
+      "current_dosage": "Not commonly used 一般的には使用されない",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "30871828",
+        "33468306",
+        "29023952"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "sulfasalazine",
+      "drug": "Sulfasalazine",
+      "species": "horse",
+      "current_dosage": "Not commonly used 一般的には使用されない",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "12000534"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "vitamin_b12",
+      "drug": "Vitamin B12 (Cobalamin)",
+      "species": "horse",
+      "current_dosage": "Not commonly supplemented 通常は補充不要",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "20657474",
+        "3042378",
+        "33593499"
+      ],
+      "pubmed_hits": 23
+    },
+    {
+      "drug_id": "iron_dextran",
+      "drug": "Iron Dextran",
+      "species": "horse",
+      "current_dosage": "1-2 g IM (foals); adults rarely needed 1-2 g 筋注（子馬）; 成馬ではまれに必要",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "7405570",
+        "1154347",
+        "39403825"
+      ],
+      "pubmed_hits": 5
+    },
+    {
+      "drug_id": "desmopressin",
+      "drug": "Desmopressin (DDAVP)",
+      "species": "horse",
+      "current_dosage": "0.25 mcg/kg IV (diagnostic) 0.25 mcg/kg 静注（診断用）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "8828563",
+        "23318763",
+        "31960998"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "calcitriol",
+      "drug": "Calcitriol",
+      "species": "horse",
+      "current_dosage": "Not commonly used 一般的には使用されない",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "7747666",
+        "37030152",
+        "9601149"
+      ],
+      "pubmed_hits": 19
+    },
+    {
+      "drug_id": "vasopressin",
+      "drug": "Vasopressin (ADH/Pitressin)",
+      "species": "horse",
+      "current_dosage": "0.25-0.5 U/kg IV (resuscitation) 0.25-0.5 U/kg 静注（蘇生）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "9079135",
+        "20017758",
+        "23781864"
+      ],
+      "pubmed_hits": 62
+    },
+    {
+      "drug_id": "cosyntropin",
+      "drug": "Cosyntropin (Cortrosyn/Synacthen)",
+      "species": "horse",
+      "current_dosage": "1 µg/kg IV or 100 µg/horse IV; cortisol at 0 and 30 min 1 µg/kg 静注 または 100 µg/頭 静注；投与前と投与後30分にコルチゾール測定",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "19496914",
+        "25240233",
+        "224737"
+      ],
+      "pubmed_hits": 16
+    },
+    {
+      "drug_id": "detomidine",
+      "drug": "Detomidine (Dormosedan)",
+      "species": "horse",
+      "current_dosage": "IV: 10-40 µg/kg; IM: 20-80 µg/kg; OTM gel: 40 µg/kg sublingual 静注: 10-40 µg/kg；筋注: 20-80 µg/kg；口腔ジェル: 40 µg/kg 舌下",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "4095895",
+        "16475998",
+        "3464183"
+      ],
+      "pubmed_hits": 265
+    },
+    {
+      "drug_id": "romifidine",
+      "drug": "Romifidine (Sedivet)",
+      "species": "horse",
+      "current_dosage": "40-120 µg/kg IV 40-120 µg/kg 静注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "16475998",
+        "38154415",
+        "36175293"
+      ],
+      "pubmed_hits": 115
+    },
+    {
+      "drug_id": "methylprednisolone",
+      "drug": "Methylprednisolone (Depo-Medrol/Medrol)",
+      "species": "horse",
+      "current_dosage": "Intra-articular: 40-120 mg per joint; Systemic: 0.5-1 mg/kg IM 関節内: 40-120 mg/関節；全身: 0.5-1 mg/kg 筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "22632284",
+        "25184310",
+        "26211421"
+      ],
+      "pubmed_hits": 95
+    },
+    {
+      "drug_id": "atracurium",
+      "drug": "Atracurium",
+      "species": "horse",
+      "current_dosage": "0.07-0.1 mg/kg IV 0.07-0.1 mg/kg 静注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "31415650",
+        "34402577",
+        "3421529"
+      ],
+      "pubmed_hits": 13
+    },
+    {
+      "drug_id": "telmisartan",
+      "drug": "Telmisartan",
+      "species": "horse",
+      "current_dosage": "Not established",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "27562117"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "nitroprusside",
+      "drug": "Sodium Nitroprusside",
+      "species": "horse",
+      "current_dosage": "0.5-5 μg/kg/min CRI",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38831839",
+        "2061869",
+        "2610441"
+      ],
+      "pubmed_hits": 28
+    },
+    {
+      "drug_id": "phenylephrine",
+      "drug": "Phenylephrine",
+      "species": "horse",
+      "current_dosage": "0.5-3 μg/kg/min CRI",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "33982406",
+        "7879981",
+        "23832627"
+      ],
+      "pubmed_hits": 75
+    },
+    {
+      "drug_id": "norepinephrine",
+      "drug": "Norepinephrine",
+      "species": "horse",
+      "current_dosage": "0.1-1 μg/kg/min CRI",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2692673",
+        "17882685",
+        "42322128"
+      ],
+      "pubmed_hits": 151
+    },
+    {
+      "drug_id": "procainamide",
+      "drug": "Procainamide",
+      "species": "horse",
+      "current_dosage": "1 mg/kg/min IV to 20 mg/kg total",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "984541",
+        "7525982",
+        "3878193"
+      ],
+      "pubmed_hits": 8
+    },
+    {
+      "drug_id": "propranolol",
+      "drug": "Propranolol",
+      "species": "horse",
+      "current_dosage": "0.03-0.15 mg/kg IV slowly",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11085362",
+        "3878193",
+        "27426730"
+      ],
+      "pubmed_hits": 37
+    },
+    {
+      "drug_id": "verapamil",
+      "drug": "Verapamil",
+      "species": "horse",
+      "current_dosage": "0.025-0.05 mg/kg slow IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3555730",
+        "35714923",
+        "8725818"
+      ],
+      "pubmed_hits": 15
+    },
+    {
+      "drug_id": "fluticasone",
+      "drug": "Fluticasone Propionate",
+      "species": "horse",
+      "current_dosage": "2000-3000 μg q12h via nebulizer/Flexineb",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "22640563",
+        "22514113",
+        "28568169"
+      ],
+      "pubmed_hits": 14
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "horse",
+      "current_dosage": "360-720 μg via Equine Aeromask or nebulized 5mg in 10ml",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34281643",
+        "25229326",
+        "28097668"
+      ],
+      "pubmed_hits": 52
+    },
+    {
+      "drug_id": "ipratropium",
+      "drug": "Ipratropium Bromide",
+      "species": "horse",
+      "current_dosage": "Nebulized: 1-3 mg q6-8h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "21989922",
+        "20597367",
+        "9308401"
+      ],
+      "pubmed_hits": 14
+    },
+    {
+      "drug_id": "cromoglycate",
+      "drug": "Sodium Cromoglycate",
+      "species": "horse",
+      "current_dosage": "Nebulized: 80-200 mg q8-12h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "4147191",
+        "6797824",
+        "9109952"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "metoclopramide_injectable",
+      "drug": "Metoclopramide CRI",
+      "species": "horse",
+      "current_dosage": "0.25 mg/kg/hr CRI",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38925540"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "benzoyl_peroxide",
+      "drug": "Benzoyl Peroxide",
+      "species": "horse",
+      "current_dosage": "5% shampoo for dermatophilosis/rain rot",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "22731400"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "vitamin_e",
+      "drug": "Vitamin E (Alpha-tocopherol)",
+      "species": "horse",
+      "current_dosage": "1000-5000 IU/day PO; 5000-10000 IU for NMD",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "7996280",
+        "20631534",
+        "38734404"
+      ],
+      "pubmed_hits": 103
+    },
+    {
+      "drug_id": "kaolin_pectin",
+      "drug": "Kaolin-Pectin",
+      "species": "horse",
+      "current_dosage": "2-4 L via nasogastric tube q6-12h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "pilocarpine",
+      "drug": "Pilocarpine",
+      "species": "horse",
+      "current_dosage": "1-4%: 1-2 drops q6-8h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34589599",
+        "9225432",
+        "19876524"
+      ],
+      "pubmed_hits": 6
+    },
+    {
+      "drug_id": "tropicamide",
+      "drug": "Tropicamide",
+      "species": "horse",
+      "current_dosage": "1%: 2-3 drops (difficult to dilate equine pupil)",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "17180451",
+        "23647634",
+        "19883467"
+      ],
+      "pubmed_hits": 3
+    },
+    {
+      "drug_id": "alendronate",
+      "drug": "Alendronate",
+      "species": "horse",
+      "current_dosage": "IV tiludronate (Tildren) preferred: 1 mg/kg IV over 30 min",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11988132",
+        "15545790",
+        "26143477"
+      ],
+      "pubmed_hits": 11
+    },
+    {
+      "drug_id": "pamidronate",
+      "drug": "Pamidronate",
+      "species": "horse",
+      "current_dosage": "1 mg/kg IV slowly",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11988132",
+        "12027590",
+        "16817751"
+      ],
+      "pubmed_hits": 5
+    },
+    {
+      "drug_id": "prazosin",
+      "drug": "Prazosin",
+      "species": "horse",
+      "current_dosage": "Not commonly used in horses",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "8725818",
+        "23438114",
+        "20148408"
+      ],
+      "pubmed_hits": 15
+    },
+    {
+      "drug_id": "rebamipide",
+      "drug": "Rebamipide (Mucosta)",
+      "species": "horse",
+      "current_dosage": "Not established for horses",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "eprinomectin",
+      "drug": "Eprinomectin",
+      "species": "horse",
+      "current_dosage": "0.2 mg/kg topical pour-on",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "27016093",
+        "18667276",
+        "10327539"
+      ],
+      "pubmed_hits": 5
+    },
+    {
+      "drug_id": "monepantel",
+      "drug": "Monepantel (Zolvix)",
+      "species": "horse",
+      "current_dosage": "Not approved for horses (sheep/goat product)",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34627787"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "ephedrine",
+      "drug": "Ephedrine",
+      "species": "horse",
+      "current_dosage": "0.01-0.05 mg/kg IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37104433",
+        "44381",
+        "2515301"
+      ],
+      "pubmed_hits": 12
+    },
+    {
+      "drug_id": "detomidine_gel",
+      "drug": "Detomidine Oromucosal Gel (Dormosedan Gel)",
+      "species": "horse",
+      "current_dosage": "0.04 mg/kg sublingually (apply under tongue, do NOT swallow)",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "23062724",
+        "21219348"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "horse",
+      "current_dosage": "1-2 mEq/kg IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2202493",
+        "8299017",
+        "30868640"
+      ],
+      "pubmed_hits": 99
+    },
+    {
+      "drug_id": "potassium_chloride",
+      "drug": "Potassium Chloride",
+      "species": "horse",
+      "current_dosage": "0.5 mEq/kg/hr IV; PO 40-80 g/day",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2202493",
+        "34243883",
+        "30868640"
+      ],
+      "pubmed_hits": 143
+    },
+    {
+      "drug_id": "hetastarch",
+      "drug": "Hetastarch (HES 6%)",
+      "species": "horse",
+      "current_dosage": "10 mL/kg IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "31228334",
+        "16955826",
+        "29853645"
+      ],
+      "pubmed_hits": 25
+    },
+    {
+      "drug_id": "activated_charcoal",
+      "drug": "Activated Charcoal",
+      "species": "horse",
+      "current_dosage": "1-3 g/kg via nasogastric tube",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "17512579",
+        "11744271",
+        "16102920"
+      ],
+      "pubmed_hits": 30
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "horse",
+      "current_dosage": "0.04-0.2 mg/kg IV/IM",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "25998273",
+        "33817859",
+        "28719014"
+      ],
+      "pubmed_hits": 14
+    },
+    {
+      "drug_id": "sab_antivenom",
+      "drug": "Snake Antivenom (Polyvalent)",
+      "species": "horse",
+      "current_dosage": "1-2バイアル IV slow",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "21745181",
+        "33968072",
+        "31974558"
+      ],
+      "pubmed_hits": 232
+    },
+    {
+      "drug_id": "omega_3_fatty_acids",
+      "drug": "Omega-3 Fatty Acids (EPA/DHA)",
+      "species": "horse",
+      "current_dosage": "フラキシードオイル 100-200 mL/day",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "41350304",
+        "29584640",
+        "22404506"
+      ],
+      "pubmed_hits": 52
+    },
+    {
+      "drug_id": "glucosamine_chondroitin",
+      "drug": "Glucosamine/Chondroitin Sulfate",
+      "species": "horse",
+      "current_dosage": "グルコサミン 10-20 mg/kg/day PO",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "32968713",
+        "24011144"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "eprinomectin_topical",
+      "drug": "Eprinomectin (Pour-on)",
+      "species": "horse",
+      "current_dosage": "0.5 mg/kg 経皮投与（背線上）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "27016093",
+        "18667276",
+        "10327539"
+      ],
+      "pubmed_hits": 5
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "horse",
+      "current_dosage": "6.6 mg/kg PO 1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37354849",
+        "16426178",
+        "7397601"
+      ],
+      "pubmed_hits": 51
+    },
+    {
+      "drug_id": "oxytetracycline_injectable",
+      "drug": "Oxytetracycline LA Injectable",
+      "species": "horse",
+      "current_dosage": "6.6 mg/kg IV slow or 20 mg/kg IM",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "osphos_equine",
+      "drug": "Clodronate (Osphos)",
+      "species": "horse",
+      "current_dosage": "1.14 mg/kg IM（頸部筋肉3-4箇所に分割注射）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "33870655",
+        "34918585",
+        "32003488"
+      ],
+      "pubmed_hits": 18
+    },
+    {
+      "drug_id": "pentosan_polysulfate",
+      "drug": "Pentosan Polysulfate (Cartrophen Vet)",
+      "species": "horse",
+      "current_dosage": "3 mg/kg IM 1回/週 × 4回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11822373",
+        "22533393",
+        "19200017"
+      ],
+      "pubmed_hits": 10
+    },
+    {
+      "drug_id": "adequan_equine",
+      "drug": "Polysulfated Glycosaminoglycan (Equine Adequan)",
+      "species": "horse",
+      "current_dosage": "500 mg IM q4日 × 7回; 関節内250 mg",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "41200294",
+        "7032840",
+        "19231952"
+      ],
+      "pubmed_hits": 28
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "horse",
+      "current_dosage": "患部に塗布",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "prostaglandin_f2a",
+      "drug": "Prostaglandin F2α (Dinoprost/Lutalyse)",
+      "species": "horse",
+      "current_dosage": "5-10 mg/horse IM 1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11940242",
+        "22460665",
+        "31982154"
+      ],
+      "pubmed_hits": 320
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "horse",
+      "current_dosage": "85 mg/kg IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "29286885",
+        "35490974",
+        "34478172"
+      ],
+      "pubmed_hits": 34
+    },
+    {
+      "drug_id": "alfaprostol",
+      "drug": "Alfaprostol (Alfavet)",
+      "species": "horse",
+      "current_dosage": "3 mg/horse IM 1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3137339"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "tranexamic_acid_iv",
+      "drug": "Tranexamic Acid (IV)",
+      "species": "horse",
+      "current_dosage": "10-25 mg/kg IV slow",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "23635706",
+        "24118238",
+        "37753811"
+      ],
+      "pubmed_hits": 8
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "horse",
+      "current_dosage": "200 μg/kg PO（ペースト）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "25516842",
+        "8346648",
+        "38603925"
+      ],
+      "pubmed_hits": 251
+    },
+    {
+      "drug_id": "methocarbamol_oral",
+      "drug": "Methocarbamol Oral",
+      "species": "horse",
+      "current_dosage": "4.4-22 mg/kg IV slow",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26924025",
+        "23859819",
+        "9109959"
+      ],
+      "pubmed_hits": 6
+    },
+    {
+      "drug_id": "latanoprost_ophthalmic",
+      "drug": "Latanoprost (Xalatan)",
+      "species": "horse",
+      "current_dosage": "Not recommended",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11940242",
+        "11763186",
+        "27791324"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "fluticasone_inhaler",
+      "drug": "Fluticasone (Flovent HFA)",
+      "species": "horse",
+      "current_dosage": "2000-3000 μg via equine spacer q12h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "22640563",
+        "22514113",
+        "28568169"
+      ],
+      "pubmed_hits": 14
+    }
+  ]
+}
