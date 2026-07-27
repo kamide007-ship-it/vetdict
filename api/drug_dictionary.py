@@ -10677,6 +10677,171 @@ for _fish_id, _patch in _FISH_DRUG_PATCHES.items():
             if _key not in _drug or not _drug[_key]:
                 _drug[_key] = _value
 
+# ---------------------------------------------------------------------------
+# species_info の正規化（表示層が読むキーに揃える）
+#
+# 背景: 後期バッチの species_info は用量キーに `dose`（および `dose_ja`）を使い、
+# `safe` を持たない。一方フロントは `dosage`/`dosage_ja` しか読まず、
+# `info.safe ? "✓" : "✗"` で可否を描画する。結果として **610薬品中336薬品(55%)**
+# で「用量が空欄のまま ✗」と表示されていた。獣医師には「その種には使えない」と
+# 読めてしまい、実際には用量が存在するため臨床的に危険な誤表示だった
+# （例: ガバペンチンが犬猫馬を含む全種で ✗）。
+#
+# 正規化の方針:
+#   - `dose`/`dose_ja` は `dosage`/`dosage_ja` が無いときだけ移送（既存値は不変）
+#   - `safe` が明示されていれば尊重する（意図的な safe=False 202件は ✗ のまま）
+#   - `safe` 未指定でその種の用量があるなら True。用量が載っている＝その種で
+#     使用される、という意味だから。
+#   - ただし **notes が禁忌を示す場合は絶対に True にしない**。ここを機械的に
+#     True にすると「過酸化水素（催吐）は猫に禁忌・重度出血性胃炎」のエントリが
+#     猫で ✓ になり、警告が推奨に反転する（実際に作り込んで安全テストが検出した）。
+#     禁忌が疑われる場合は `safe` を付けない＝✗ のまま notes を読ませる方に倒す。
+#     「NSAIDs が禁忌の症例に」等の他剤への言及は誤検出なので除外する。
+#   - 用量が無い場合も `safe` を作らない（不明を「安全」と偽らない）
+# ---------------------------------------------------------------------------
+
+# 他剤・他経路への言及であって、その種の禁忌ではないもの（tests/test_drug_safety.py と同一基準）
+_CONTRA_FALSE_POSITIVES = (
+    "where nsaids are contraindicated",
+    "nsaids are contraindicated",
+    "nsaids contraindicated",
+    "nsaids禁忌",
+    "nsaid禁忌",
+    "parenteral only",
+    "注射剤のみ",
+    "経口投与は絶対禁忌",
+)
+
+
+def _notes_flag_contraindication(info: Dict[str, Any]) -> bool:
+    notes = f"{info.get('notes', '') or ''} {info.get('notes_ja', '') or ''}"
+    if "CONTRAINDICATED" not in notes.upper() and "禁忌" not in notes:
+        return False
+    lowered = notes.lower()
+    return not any(fp in lowered for fp in _CONTRA_FALSE_POSITIVES)
+
+
+for _drug in DRUGS:
+    for _sp, _info in (_drug.get("species_info") or {}).items():
+        if not isinstance(_info, dict):
+            continue
+        if not _info.get("dosage") and _info.get("dose"):
+            _info["dosage"] = _info["dose"]
+        if not _info.get("dosage_ja") and _info.get("dose_ja"):
+            _info["dosage_ja"] = _info["dose_ja"]
+        if (
+            "safe" not in _info
+            and (_info.get("dosage") or _info.get("dosage_ja"))
+            and not _notes_flag_contraindication(_info)
+        ):
+            _info["safe"] = True
+
+# ---------------------------------------------------------------------------
+# 重複薬品の論理統合（物理削除しない）
+#
+# 疾患側の T103 と同じ問題が薬品辞書にもあった: 同一薬が複数エントリに分割され、
+# 610薬品中 95グループ・111件が重複していた（例: ガバペンチンが Gabapentin /
+# (Chronic Pain) / (Oral Analgesic) の3件）。利用者には同じ薬が別物として並び、
+# 種カバレッジも分散する。
+#
+# 統合の安全規則:
+#   - 正規エントリ（種数が最多＝最も情報量が多いもの）の用量は **絶対に上書きしない**。
+#     変種側からは「正規エントリが持っていない動物種」だけを取り込む＝カバレッジは
+#     増えるだけで、獣医レビュー済みの用量が書き換わることはない。
+#   - 統合対象は (a) name が完全一致する純粋な重複 と (b) 獣医の明示指示がある
+#     同一薬の別名エントリ のみ。投与経路や剤形で用量が本質的に異なりうる変種
+#     （例: 局所 vs IV）は自動統合しない。
+#   - ソースの .py は無改変。統合はロード時のみ＝サイドカーを消す感覚で即ロールバック可。
+#   - 旧 id は _DRUG_ALIAS_TO_ID で正規 id に解決する（既存URL・ブックマークは維持）。
+# ---------------------------------------------------------------------------
+
+# 獣医の明示指示による同一薬統合（canonical_id: [統合される id]）
+_DRUG_CURATED_MERGE: dict[str, list[str]] = {
+    # ガバペンチン: 適応名違いで3分割されていた（獣医指摘により統合）
+    "gabapentin": ["gabapentin_pain", "gabapentin_oral"],
+}
+
+
+def _merge_drug_into(canonical: Dict[str, Any], variant: Dict[str, Any]) -> None:
+    """変種を正規エントリへ非破壊的に取り込む（正規側の既存値は不変）。"""
+    c_si = canonical.setdefault("species_info", {})
+    for _sp, _info in (variant.get("species_info") or {}).items():
+        if _sp not in c_si and isinstance(_info, dict):
+            c_si[_sp] = _info
+    # 正規側が欠いているスカラー項目のみ補完
+    for _key in (
+        "mechanism",
+        "mechanism_ja",
+        "contraindications",
+        "contraindications_ja",
+        "side_effects",
+        "side_effects_ja",
+    ):
+        if not canonical.get(_key) and variant.get(_key):
+            canonical[_key] = variant[_key]
+    # 相互作用は和集合（薬剤名で重複排除）
+    if variant.get("drug_interactions"):
+        seen = {str(i.get("drug", "")).lower() for i in canonical.get("drug_interactions", []) if isinstance(i, dict)}
+        merged = list(canonical.get("drug_interactions") or [])
+        for _i in variant["drug_interactions"]:
+            if isinstance(_i, dict) and str(_i.get("drug", "")).lower() not in seen:
+                merged.append(_i)
+                seen.add(str(_i.get("drug", "")).lower())
+        canonical["drug_interactions"] = merged
+    aliases = canonical.setdefault("aliases", [])
+    for _a in (variant.get("id"), variant.get("name"), variant.get("name_ja")):
+        if _a and _a not in aliases:
+            aliases.append(_a)
+
+
+def _consolidate_duplicate_drugs() -> Dict[str, str]:
+    """同一薬の重複を論理統合し、旧 id → 正規 id の別名表を返す。"""
+    by_id = {d["id"]: d for d in DRUGS if d.get("id")}
+    merged_away: dict[str, str] = {}
+
+    groups: list[tuple[str, list[str]]] = []
+    # (a) name 完全一致の重複
+    _by_name: dict[str, list[Dict[str, Any]]] = {}
+    for _d in DRUGS:
+        _by_name.setdefault(str(_d.get("name", "")).strip().lower(), []).append(_d)
+    for _name, _entries in _by_name.items():
+        if len(_entries) < 2 or not _name:
+            continue
+        # 種数が最多のものを正規に（同数なら先勝ち＝定義順を尊重）
+        _ranked = sorted(_entries, key=lambda d: -len(d.get("species_info") or {}))
+        groups.append((_ranked[0]["id"], [e["id"] for e in _ranked[1:]]))
+    # (b) 獣医の明示指示
+    for _cid, _vids in _DRUG_CURATED_MERGE.items():
+        if _cid in by_id:
+            groups.append((_cid, [v for v in _vids if v in by_id]))
+
+    for _cid, _vids in groups:
+        canonical = by_id.get(_cid)
+        if canonical is None:
+            continue
+        for _vid in _vids:
+            variant = by_id.get(_vid)
+            if variant is None or _vid == _cid or _vid in merged_away:
+                continue
+            _merge_drug_into(canonical, variant)
+            merged_away[_vid] = _cid
+
+    if merged_away:
+        _keep = [d for d in DRUGS if d.get("id") not in merged_away]
+        DRUGS[:] = _keep
+    return merged_away
+
+
+_DRUG_ALIAS_TO_ID: Dict[str, str] = _consolidate_duplicate_drugs()
+# 統合後にインデックスを貼り直す（以降の参照は正規エントリのみを見る）
+_drug_index = {d["id"]: d for d in DRUGS if d.get("id")}
+
+
+def resolve_drug_id(drug_id: str) -> str:
+    """旧 id（統合された薬品）を正規 id に解決する。未知の id はそのまま返す。"""
+    return _DRUG_ALIAS_TO_ID.get(drug_id, drug_id)
+
+
 # Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
 _DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}
 for _d in DRUGS:
@@ -10984,9 +11149,15 @@ def get_drugs_by_species(species: str) -> List[Dict]:
 
 
 def get_drug_by_id(drug_id: str) -> Optional[Dict]:
-    """薬品IDで単一薬品を取得する。"""
+    """薬品IDで単一薬品を取得する。
+
+    統合された重複エントリの旧IDは正規IDへ解決するため、既存のURL・ブックマーク・
+    外部リンクは統合後も 404 にならない（疾患側の 301 リダイレクトと同じ考え方）。
+    詳細API・SEOページ・疾患リンクはすべてこの関数を通るので、ここ1箇所で足りる。
+    """
+    resolved = resolve_drug_id(drug_id)
     for drug in DRUGS:
-        if drug["id"] == drug_id:
+        if drug["id"] == resolved:
             return drug
     return None
 

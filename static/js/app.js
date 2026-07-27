@@ -311,7 +311,7 @@ const I18N={
     pricingPeriodOriginal:"¥980/月",
     pricingFeature1:"鑑別診断リスト生成（全21動物種）",
     pricingFeature2:"疾患データベース<strong>6,500+疾患</strong>閲覧",
-    pricingFeature3:"薬品辞書<strong>610+薬品</strong>・種別投与量",
+    pricingFeature3:"薬品辞書<strong>570+薬品</strong>・種別投与量",
     pricingFeature4:"臨床相談チャット<strong>無制限</strong>",
     pricingFeature5:"検査値入力・疼痛スケール対応",
     pricingFeature6:"エキゾチック含む全21動物種対応",
@@ -581,7 +581,7 @@ const I18N={
     pricingPeriodOriginal:"¥980/month",
     pricingFeature1:"Differential diagnosis list (all 21 species)",
     pricingFeature2:"Disease database <strong>6,500+ diseases</strong>",
-    pricingFeature3:"Drug dictionary <strong>610+ drugs</strong> with species-specific dosing",
+    pricingFeature3:"Drug dictionary <strong>570+ drugs</strong> with species-specific dosing",
     pricingFeature4:"Clinical chat <strong>unlimited</strong>",
     pricingFeature5:"Lab values & pain scale input",
     pricingFeature6:"All 21 species (incl. exotics)",
@@ -1527,7 +1527,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6520,
     species:21,
-    drugs:610,
+    drugs:570,
     symptoms:52,
     protocols:188
   };
@@ -3349,7 +3349,7 @@ function _renderHelpGuideContent(){
       tips:"💡 「3週間前」「2ヶ月前」等の時間表現を自動認識し急性/亜急性/慢性を判定",
     },
     {
-      title:"💊 3. 薬品辞書（610+薬品）",
+      title:"💊 3. 薬品辞書（570+薬品）",
       steps:[
         "薬品名（日英）・カテゴリ・動物種でフィルタ検索",
         "種別の安全性 ✓/✗ と用量（mg/kg）を表示",
@@ -3411,7 +3411,7 @@ function _renderHelpGuideContent(){
       tips:"💡 Auto-detects time expressions like \"3 weeks ago\" → acute/subacute/chronic",
     },
     {
-      title:"💊 3. Drug Dictionary (610+ drugs)",
+      title:"💊 3. Drug Dictionary (570+ drugs)",
       steps:[
         "Filter by name (JP/EN), category, or species",
         "Species-specific safety ✓/✗ and dosing (mg/kg) shown",

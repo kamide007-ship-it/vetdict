@@ -505,10 +505,16 @@ class TestApiListDrugs:
                     )
 
     def test_string_side_effects_split_into_list(self, client):
-        """A drug whose source side_effects is a comma string is split to tags."""
+        """A drug whose source side_effects is a comma string is split to tags.
+
+        Targets the canonical ``gabapentin`` id: the duplicate entries
+        (``gabapentin_oral`` / ``gabapentin_pain``) are now logically merged into
+        it, so they no longer appear as separate rows. Old ids still resolve via
+        ``resolve_drug_id`` — covered by ``test_merged_drug_id_still_resolves``.
+        """
         resp = client.get("/api/drugs?search=gabapentin")
         data = resp.get_json()
-        gaba = next((d for d in data["drugs"] if d["id"] == "gabapentin_oral"), None)
+        gaba = next((d for d in data["drugs"] if d["id"] == "gabapentin"), None)
         assert gaba is not None
         assert isinstance(gaba["side_effects"], list)
         assert len(gaba["side_effects"]) >= 2
