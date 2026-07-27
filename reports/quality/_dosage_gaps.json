@@ -1,0 +1,4734 @@
+{
+  "total_gaps": 481,
+  "missing_route": 183,
+  "missing_frequency": 410,
+  "excluded_by_class": {
+    "supplement (label-directed)": 88,
+    "single-dose agent (route given)": 256,
+    "inhalant / topical / local anaesthetic": 206
+  },
+  "unestablished_count": 41,
+  "unestablished": [
+    {
+      "drug": "Levothyroxine (Soloxine/Thyro-Tabs)",
+      "species": "rabbit",
+      "text": "Not commonly needed 通常は不要"
+    },
+    {
+      "drug": "Diltiazem",
+      "species": "bird",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Diltiazem",
+      "species": "parakeet",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Diltiazem",
+      "species": "parrot",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Sildenafil",
+      "species": "bird",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Sildenafil",
+      "species": "parakeet",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Sildenafil",
+      "species": "parrot",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Aminophylline",
+      "species": "reptile",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Aminophylline",
+      "species": "lizard",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Aminophylline",
+      "species": "snake",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Aminophylline",
+      "species": "tortoise",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Mycophenolate Mofetil",
+      "species": "horse",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Mycophenolate Mofetil",
+      "species": "rabbit",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Mycophenolate Mofetil",
+      "species": "ferret",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Zonisamide",
+      "species": "horse",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Zonisamide",
+      "species": "rabbit",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Zonisamide",
+      "species": "ferret",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Melatonin",
+      "species": "bird",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Melatonin",
+      "species": "parakeet",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Melatonin",
+      "species": "parrot",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Deslorelin",
+      "species": "horse",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Aluminum Hydroxide",
+      "species": "horse",
+      "text": "Not commonly needed 通常は不要"
+    },
+    {
+      "drug": "Methocarbamol",
+      "species": "rabbit",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Methocarbamol",
+      "species": "ferret",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Sotalol",
+      "species": "ferret",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Sotalol",
+      "species": "rabbit",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Clopidogrel",
+      "species": "horse",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Clopidogrel",
+      "species": "ferret",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Clopidogrel",
+      "species": "rabbit",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Erythropoietin (EPO)",
+      "species": "bird",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Erythropoietin (EPO)",
+      "species": "parakeet",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Erythropoietin (EPO)",
+      "species": "parrot",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Desmopressin (DDAVP)",
+      "species": "rabbit",
+      "text": "Not commonly needed 通常は不要"
+    },
+    {
+      "drug": "Desmopressin (DDAVP)",
+      "species": "bird",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Desmopressin (DDAVP)",
+      "species": "parakeet",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Desmopressin (DDAVP)",
+      "species": "parrot",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Calcitriol",
+      "species": "rabbit",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Calcitriol",
+      "species": "ferret",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Calcitriol",
+      "species": "bird",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Calcitriol",
+      "species": "parakeet",
+      "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Calcitriol",
+      "species": "parrot",
+      "text": "Not well established 十分に確立されていない"
+    }
+  ],
+  "gaps": [
+    {
+      "drug_id": "ivermectin",
+      "drug": "Ivermectin",
+      "species": "horse",
+      "dosage": "200 mcg/kg PO (paste) 200 mcg/kg 経口（ペースト）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin",
+      "drug": "Ivermectin",
+      "species": "bird",
+      "dosage": "200 mcg/kg PO/topical; dilute for small birds 200 mcg/kg 経口/局所; 小鳥は希釈",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin",
+      "drug": "Ivermectin",
+      "species": "parakeet",
+      "dosage": "200 mcg/kg PO/topical; dilute for small birds 200 mcg/kg 経口/局所; 小鳥は希釈",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin",
+      "drug": "Ivermectin",
+      "species": "parrot",
+      "dosage": "200 mcg/kg PO/topical; dilute for small birds 200 mcg/kg 経口/局所; 小鳥は希釈",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "praziquantel",
+      "drug": "Praziquantel",
+      "species": "amphibian",
+      "dosage": "8-24 mg/kg PO/ICe or 10 mg/L bath × 3h",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "moxidectin",
+      "drug": "Moxidectin",
+      "species": "horse",
+      "dosage": "400 mcg/kg PO (gel) 400 mcg/kg 経口（ジェル）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "prednisolone",
+      "drug": "Prednisolone",
+      "species": "fish",
+      "dosage": "1-5 mg/kg IM/IP (large fish only) 1-5 mg/kg 筋注/腹腔内（大型魚のみ）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "bird",
+      "dosage": "2-4 mg/kg IM (emergency only) 2-4 mg/kg 筋注（緊急時のみ）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "hamster",
+      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "hedgehog",
+      "dosage": "0.2-2 mg/kg IM/IV 0.2-2 mg/kg 筋注/静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "chinchilla",
+      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "snake",
+      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "tortoise",
+      "dosage": "0.5-2 mg/kg IM 0.5-2 mg/kg 筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "reptile",
+      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "parakeet",
+      "dosage": "2-4 mg/kg IM (emergency only) 2-4 mg/kg 筋注（緊急時のみ）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "parrot",
+      "dosage": "2-4 mg/kg IM (emergency only) 2-4 mg/kg 筋注（緊急時のみ）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "lizard",
+      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "degu",
+      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "sugar_glider",
+      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "methimazole",
+      "drug": "Methimazole (Tapazole/Felimazole)",
+      "species": "dog",
+      "dosage": "Rarely used; thyroid tumors in dogs usually require surgery ほとんど使用しない。犬の甲状腺腫瘍は通常手術が必要。",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "phenobarbital",
+      "drug": "Phenobarbital",
+      "species": "horse",
+      "dosage": "6.6-11 mg/kg IV loading; maintenance varies 6.6-11 mg/kg 静注ローディング; 維持量は可変",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "glucosamine",
+      "drug": "Glucosamine/Chondroitin",
+      "species": "horse",
+      "dosage": "Varies by product; typically 5-10 g/day PO 製品により異なる。通常5-10 g/日 経口",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ecvn_amino_complete",
+      "drug": "Amino Complete (Equine & Canine Vet Nutrition)",
+      "species": "horse",
+      "dosage": "BCAA set at maximum evidence-based dose for horses. Administer before training or after high-intensity work. May dose twice daily. BCAAは馬のエビデンスに基づく最大量に設定。調教前または",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "ecvn_cp_powder",
+      "drug": "CP Powder (Equine & Canine Vet Nutrition)",
+      "species": "horse",
+      "dosage": "50 g/day PO mixed with feed 50 g/日 経口 飼料に混合",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ecvn_no_pain_quick_stop",
+      "drug": "No Pain Quick Stop (Equine & Canine Vet Nutrition)",
+      "species": "dog",
+      "dosage": "Apply directly to bleeding site 出血部位に直接塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ecvn_no_pain_quick_stop",
+      "drug": "No Pain Quick Stop (Equine & Canine Vet Nutrition)",
+      "species": "cat",
+      "dosage": "Apply directly to bleeding site 出血部位に直接塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ecvn_no_pain_quick_stop",
+      "drug": "No Pain Quick Stop (Equine & Canine Vet Nutrition)",
+      "species": "horse",
+      "dosage": "Apply directly to bleeding site 出血部位に直接塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "neomycin",
+      "drug": "Neomycin",
+      "species": "bird",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "neomycin",
+      "drug": "Neomycin",
+      "species": "reptile",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "neomycin",
+      "drug": "Neomycin",
+      "species": "parakeet",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "neomycin",
+      "drug": "Neomycin",
+      "species": "parrot",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "neomycin",
+      "drug": "Neomycin",
+      "species": "lizard",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "neomycin",
+      "drug": "Neomycin",
+      "species": "snake",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "neomycin",
+      "drug": "Neomycin",
+      "species": "tortoise",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "polymyxin_b",
+      "drug": "Polymyxin B",
+      "species": "horse",
+      "dosage": "Topical/ophthalmic use 外用/点眼",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "polymyxin_b",
+      "drug": "Polymyxin B",
+      "species": "reptile",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "polymyxin_b",
+      "drug": "Polymyxin B",
+      "species": "lizard",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "polymyxin_b",
+      "drug": "Polymyxin B",
+      "species": "snake",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "polymyxin_b",
+      "drug": "Polymyxin B",
+      "species": "tortoise",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "nystatin",
+      "drug": "Nystatin",
+      "species": "horse",
+      "dosage": "Topical application 外用",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "lufenuron",
+      "drug": "Lufenuron",
+      "species": "bird",
+      "dosage": "0.5 mg/mL in drinking water 0.5 mg/mL 飲水に添加",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "lufenuron",
+      "drug": "Lufenuron",
+      "species": "parakeet",
+      "dosage": "0.5 mg/mL in drinking water 0.5 mg/mL 飲水に添加",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "lufenuron",
+      "drug": "Lufenuron",
+      "species": "parrot",
+      "dosage": "0.5 mg/mL in drinking water 0.5 mg/mL 飲水に添加",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "emodepside",
+      "drug": "Emodepside",
+      "species": "ferret",
+      "dosage": "Cat dose topical off-label 猫用量を外用（適応外）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aminophylline",
+      "drug": "Aminophylline",
+      "species": "horse",
+      "dosage": "5-10 mg/kg IV slowly 5-10 mg/kg ゆっくり静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "horse",
+      "dosage": "0.02 mg/kg IV slowly 0.02 mg/kg ゆっくり静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "guinea_pig",
+      "dosage": "0.01 mg/kg SC/IM 0.01 mg/kg 皮下/筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "rabbit",
+      "dosage": "0.01 mg/kg SC 0.01 mg/kg 皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "bird",
+      "dosage": "0.01 mg/kg IM 0.01 mg/kg 筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "parakeet",
+      "dosage": "0.01 mg/kg IM 0.01 mg/kg 筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "parrot",
+      "dosage": "0.01 mg/kg IM 0.01 mg/kg 筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "degu",
+      "dosage": "0.01 mg/kg SC/IM 0.01 mg/kg 皮下/筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "scopolamine_butylbromide",
+      "drug": "Scopolamine Butylbromide",
+      "species": "horse",
+      "dosage": "0.3 mg/kg IV (max 5 mL of 20mg/mL) 0.3 mg/kg 静注（20mg/mL製剤で最大5mL）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "scopolamine_butylbromide",
+      "drug": "Scopolamine Butylbromide",
+      "species": "rabbit",
+      "dosage": "0.3-0.5 mg/kg SC/IM 0.3-0.5 mg/kg 皮下/筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "scopolamine_butylbromide",
+      "drug": "Scopolamine Butylbromide",
+      "species": "guinea_pig",
+      "dosage": "0.3-0.5 mg/kg SC/IM 0.3-0.5 mg/kg 皮下/筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "scopolamine_butylbromide",
+      "drug": "Scopolamine Butylbromide",
+      "species": "ferret",
+      "dosage": "0.3-0.5 mg/kg SC/IM 0.3-0.5 mg/kg 皮下/筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "scopolamine_butylbromide",
+      "drug": "Scopolamine Butylbromide",
+      "species": "degu",
+      "dosage": "0.3-0.5 mg/kg SC/IM 0.3-0.5 mg/kg 皮下/筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "n_acetylcysteine",
+      "drug": "N-Acetylcysteine (NAC)",
+      "species": "rabbit",
+      "dosage": "140 mg/kg IV/PO loading 140 mg/kg 静注/経口初回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "n_acetylcysteine",
+      "drug": "N-Acetylcysteine (NAC)",
+      "species": "ferret",
+      "dosage": "Same protocol as cats 猫と同じプロトコル",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "dog",
+      "dosage": "1 drop q8h (alone) or q12h (with timolol) 1滴 8時間毎（単独）または12時間毎（チモロールと併用）",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "cat",
+      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "horse",
+      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "rabbit",
+      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "guinea_pig",
+      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "bird",
+      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "parakeet",
+      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "parrot",
+      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "degu",
+      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "potassium_bromide",
+      "drug": "Potassium Bromide",
+      "species": "horse",
+      "dosage": "Not commonly used 一般的には使用されない",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "melatonin",
+      "drug": "Melatonin",
+      "species": "horse",
+      "dosage": "Not commonly used 一般的には使用されない",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "dog",
+      "dosage": "4.7 mg or 9.4 mg implant SC 4.7 mg または 9.4 mg インプラント皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "cat",
+      "dosage": "4.7 mg implant SC 4.7 mg インプラント皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "ferret",
+      "dosage": "4.7 mg implant SC 4.7 mg インプラント皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "rabbit",
+      "dosage": "4.7 mg implant SC 4.7 mg インプラント皮下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "bird",
+      "dosage": "4.7 mg implant SC/IM 4.7 mg インプラント皮下/筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "parakeet",
+      "dosage": "4.7 mg implant SC/IM 4.7 mg インプラント皮下/筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "parrot",
+      "dosage": "4.7 mg implant SC/IM 4.7 mg インプラント皮下/筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pergolide",
+      "drug": "Pergolide",
+      "species": "dog",
+      "dosage": "Not commonly used (trilostane preferred) 一般的には使用されない（トリロスタンが好まれる）",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pergolide",
+      "drug": "Pergolide",
+      "species": "cat",
+      "dosage": "Not commonly used 一般的には使用されない",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vincristine",
+      "drug": "Vincristine",
+      "species": "horse",
+      "dosage": "Not commonly used 一般的には使用されない",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "dog",
+      "dosage": "30-90 mg/kg PO with meals 30-90 mg/kg 経口 食事と共に",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "cat",
+      "dosage": "30-90 mg/kg PO with meals 30-90 mg/kg 経口 食事と共に",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "rabbit",
+      "dosage": "30-90 mg/kg PO with meals 30-90 mg/kg 経口 食事と共に",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "ferret",
+      "dosage": "30 mg/kg PO with meals 30 mg/kg 経口 食事と共に",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "bird",
+      "dosage": "30-50 mg/kg PO with meals 30-50 mg/kg 経口 食事と共に",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "parakeet",
+      "dosage": "30-50 mg/kg PO with meals 30-50 mg/kg 経口 食事と共に",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "parrot",
+      "dosage": "30-50 mg/kg PO with meals 30-50 mg/kg 経口 食事と共に",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "methocarbamol",
+      "drug": "Methocarbamol",
+      "species": "horse",
+      "dosage": "4.4-44 mg/kg IV slowly 4.4-44 mg/kg ゆっくり静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "dog",
+      "dosage": "1 drop q12-24h 1滴 12-24時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "cat",
+      "dosage": "1 drop q12-24h 1滴 12-24時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "horse",
+      "dosage": "1 drop q12h 1滴 12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "rabbit",
+      "dosage": "1 drop q12h 1滴 12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "guinea_pig",
+      "dosage": "1 drop q12h 1滴 12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "bird",
+      "dosage": "1 drop q12h 1滴 12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "parakeet",
+      "dosage": "1 drop q12h 1滴 12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "parrot",
+      "dosage": "1 drop q12h 1滴 12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "degu",
+      "dosage": "1 drop q12h 1滴 12時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "sotalol",
+      "drug": "Sotalol",
+      "species": "horse",
+      "dosage": "Not commonly used 一般的には使用されない",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sulfasalazine",
+      "drug": "Sulfasalazine",
+      "species": "horse",
+      "dosage": "Not commonly used 一般的には使用されない",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_b12",
+      "drug": "Vitamin B12 (Cobalamin)",
+      "species": "horse",
+      "dosage": "Not commonly supplemented 通常は補充不要",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "iron_dextran",
+      "drug": "Iron Dextran",
+      "species": "cat",
+      "dosage": "10-20 mg/kg IM 10-20 mg/kg 筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "iron_dextran",
+      "drug": "Iron Dextran",
+      "species": "horse",
+      "dosage": "1-2 g IM (foals); adults rarely needed 1-2 g 筋注（子馬）; 成馬ではまれに必要",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "iron_dextran",
+      "drug": "Iron Dextran",
+      "species": "rabbit",
+      "dosage": "10 mg/kg IM 10 mg/kg 筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "iron_dextran",
+      "drug": "Iron Dextran",
+      "species": "ferret",
+      "dosage": "10 mg/kg IM 10 mg/kg 筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "desmopressin",
+      "drug": "Desmopressin (DDAVP)",
+      "species": "cat",
+      "dosage": "1-2 drops intranasally q12-24h 1-2滴 鼻腔内 12-24時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "desmopressin",
+      "drug": "Desmopressin (DDAVP)",
+      "species": "horse",
+      "dosage": "0.25 mcg/kg IV (diagnostic) 0.25 mcg/kg 静注（診断用）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "desmopressin",
+      "drug": "Desmopressin (DDAVP)",
+      "species": "ferret",
+      "dosage": "1 drop intranasally q12-24h 1滴 鼻腔内 12-24時間毎",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "calcitriol",
+      "drug": "Calcitriol",
+      "species": "horse",
+      "dosage": "Not commonly used 一般的には使用されない",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "malachite_green",
+      "drug": "Malachite Green",
+      "species": "fish",
+      "dosage": "0.05-0.1 mg/L prolonged bath; 0.1-0.15 mg/L short bath (1h) 0.05-0.1 mg/L 長時間浴; 0.1-0.15 mg/L 短時間浴（1時間）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "formalin_fish",
+      "drug": "Formalin (37% Formaldehyde)",
+      "species": "fish",
+      "dosage": "15-25 mg/L (ppm) prolonged bath; 150-250 mg/L short dip (30-60 min) 15-25 mg/L 長時間浴; 150-250 mg/L 短時間ディップ（30-60分）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "copper_sulfate",
+      "drug": "Copper Sulfate",
+      "species": "fish",
+      "dosage": "0.15-0.20 mg/L free copper (marine); 0.15 mg/L (freshwater); maintain for 14-21 days 0.15-0.20 mg/L 遊離銅（海水）; 0.15 mg/L（淡水）; 14-21日間維持",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "acriflavine",
+      "drug": "Acriflavine",
+      "species": "fish",
+      "dosage": "3-10 mg/L prolonged bath 3-10 mg/L 長時間浴",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "levamisole_fish",
+      "drug": "Levamisole (Fish)",
+      "species": "fish",
+      "dosage": "2-5 mg/L prolonged bath for 24h; or 10 mg/kg in medicated feed 2-5 mg/L 長時間浴 24時間; または 10 mg/kg 薬餌",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "epsom_salt",
+      "drug": "Epsom Salt (Magnesium Sulfate)",
+      "species": "fish",
+      "dosage": "1-3 tablespoons per 20L (1-3 tsp/5 gal) prolonged bath 20Lあたり大さじ1-3杯 長時間浴",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aquarium_salt",
+      "drug": "Aquarium Salt (NaCl)",
+      "species": "fish",
+      "dosage": "1-3 g/L (0.1-0.3%) prophylactic; 5-10 g/L (0.5-1%) therapeutic dip 15-30 min; 10-30 g/L (1-3%) short dip 1-5 min 1-3 g/L (0.1-0.3%) 予防的; 5-10 g/L (0.5-1%) 治療的ディ",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vasopressin",
+      "drug": "Vasopressin (ADH/Pitressin)",
+      "species": "horse",
+      "dosage": "0.25-0.5 U/kg IV (resuscitation) 0.25-0.5 U/kg 静注（蘇生）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cosyntropin",
+      "drug": "Cosyntropin (Cortrosyn/Synacthen)",
+      "species": "dog",
+      "dosage": "5 µg/kg IV/IM (max 250 µg); measure cortisol at 0 and 60 min post-injection 5 µg/kg 静注/筋注（最大250 µg）；投与前と投与後60分にコルチゾール測定",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cosyntropin",
+      "drug": "Cosyntropin (Cortrosyn/Synacthen)",
+      "species": "cat",
+      "dosage": "125 µg/cat IV/IM; measure cortisol at 0 and 60 min 125 µg/匹 静注/筋注；投与前と投与後60分にコルチゾール測定",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cosyntropin",
+      "drug": "Cosyntropin (Cortrosyn/Synacthen)",
+      "species": "horse",
+      "dosage": "1 µg/kg IV or 100 µg/horse IV; cortisol at 0 and 30 min 1 µg/kg 静注 または 100 µg/頭 静注；投与前と投与後30分にコルチゾール測定",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cosyntropin",
+      "drug": "Cosyntropin (Cortrosyn/Synacthen)",
+      "species": "ferret",
+      "dosage": "1 µg/kg IV/IM; cortisol at 0 and 60 min 1 µg/kg 静注/筋注；投与前と投与後60分にコルチゾール測定",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "detomidine",
+      "drug": "Detomidine (Dormosedan)",
+      "species": "horse",
+      "dosage": "IV: 10-40 µg/kg; IM: 20-80 µg/kg; OTM gel: 40 µg/kg sublingual 静注: 10-40 µg/kg；筋注: 20-80 µg/kg；口腔ジェル: 40 µg/kg 舌下",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "detomidine",
+      "drug": "Detomidine (Dormosedan)",
+      "species": "dog",
+      "dosage": "10-30 µg/kg IV/IM 10-30 µg/kg 静注/筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "romifidine",
+      "drug": "Romifidine (Sedivet)",
+      "species": "horse",
+      "dosage": "40-120 µg/kg IV 40-120 µg/kg 静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "methylprednisolone",
+      "drug": "Methylprednisolone (Depo-Medrol/Medrol)",
+      "species": "horse",
+      "dosage": "Intra-articular: 40-120 mg per joint; Systemic: 0.5-1 mg/kg IM 関節内: 40-120 mg/関節；全身: 0.5-1 mg/kg 筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "methylprednisolone",
+      "drug": "Methylprednisolone (Depo-Medrol/Medrol)",
+      "species": "rabbit",
+      "dosage": "0.5-2 mg/kg IM/SC (depot) 0.5-2 mg/kg 筋注/皮下（デポ）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cloprostenol",
+      "drug": "Cloprostenol (Estrumate)",
+      "species": "cat",
+      "dosage": "1-2.5 μg/kg IM 1-2.5 μg/kg 筋注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "selenium_vitamin_e",
+      "drug": "Selenium + Vitamin E (Periparturient Supplement)",
+      "species": "dog",
+      "dosage": "Se 0.1-0.3 mg/day PO; Vitamin E 200-400 IU/day PO Se 0.1-0.3 mg/日 経口；ビタミンE 200-400 IU/日 経口",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "selenium_vitamin_e",
+      "drug": "Selenium + Vitamin E (Periparturient Supplement)",
+      "species": "cat",
+      "dosage": "Se 0.05-0.1 mg/day PO; Vitamin E 50-100 IU/day PO Se 0.05-0.1 mg/日 経口；ビタミンE 50-100 IU/日 経口",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin_reproductive",
+      "drug": "Deslorelin (Suprelorin, GnRH Agonist Implant)",
+      "species": "dog",
+      "dosage": "4.7 mg SC implant 4.7 mg 皮下インプラント",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "tetracycline",
+      "drug": "Tetracycline",
+      "species": "bird",
+      "dosage": "200-250 mg/kg medicated feed; or 200-400 mg/L water 薬餌200-250 mg/kg；または飲水200-400 mg/L",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "tetracycline",
+      "drug": "Tetracycline",
+      "species": "parakeet",
+      "dosage": "200-250 mg/kg medicated feed; or 200-400 mg/L water 薬餌200-250 mg/kg；または飲水200-400 mg/L",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "tetracycline",
+      "drug": "Tetracycline",
+      "species": "parrot",
+      "dosage": "200-250 mg/kg medicated feed; or 200-400 mg/L water 薬餌200-250 mg/kg；または飲水200-400 mg/L",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "remifentanil",
+      "drug": "Remifentanil",
+      "species": "cat",
+      "dosage": "CRI: 5-30 μg/kg/hr CRI: 5-30 μg/kg/時",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "atracurium",
+      "drug": "Atracurium",
+      "species": "cat",
+      "dosage": "0.1-0.2 mg/kg IV 0.1-0.2 mg/kg 静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "atracurium",
+      "drug": "Atracurium",
+      "species": "horse",
+      "dosage": "0.07-0.1 mg/kg IV 0.07-0.1 mg/kg 静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "atracurium",
+      "drug": "Atracurium",
+      "species": "rabbit",
+      "dosage": "0.1-0.3 mg/kg IV 0.1-0.3 mg/kg 静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "atracurium",
+      "drug": "Atracurium",
+      "species": "bird",
+      "dosage": "0.25-0.5 mg/kg IV 0.25-0.5 mg/kg 静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "atracurium",
+      "drug": "Atracurium",
+      "species": "parakeet",
+      "dosage": "0.25-0.5 mg/kg IV 0.25-0.5 mg/kg 静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "atracurium",
+      "drug": "Atracurium",
+      "species": "parrot",
+      "dosage": "0.25-0.5 mg/kg IV 0.25-0.5 mg/kg 静注",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "telmisartan",
+      "drug": "Telmisartan",
+      "species": "horse",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "nitroprusside",
+      "drug": "Sodium Nitroprusside",
+      "species": "dog",
+      "dosage": "1-10 μg/kg/min CRI",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "nitroprusside",
+      "drug": "Sodium Nitroprusside",
+      "species": "cat",
+      "dosage": "0.5-5 μg/kg/min CRI",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "nitroprusside",
+      "drug": "Sodium Nitroprusside",
+      "species": "horse",
+      "dosage": "0.5-5 μg/kg/min CRI",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "nitroglycerin",
+      "drug": "Nitroglycerin",
+      "species": "dog",
+      "dosage": "2% ointment: 0.5-2 inch strip applied to inner pinna or groin q6-8h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "nitroglycerin",
+      "drug": "Nitroglycerin",
+      "species": "cat",
+      "dosage": "2% ointment: 0.25 inch strip to pinna q6-8h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "phenylephrine",
+      "drug": "Phenylephrine",
+      "species": "cat",
+      "dosage": "0.5-2 μg/kg/min CRI",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "phenylephrine",
+      "drug": "Phenylephrine",
+      "species": "horse",
+      "dosage": "0.5-3 μg/kg/min CRI",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "phenylephrine",
+      "drug": "Phenylephrine",
+      "species": "bird",
+      "dosage": "10-20 μg/kg IM/IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "phenylephrine",
+      "drug": "Phenylephrine",
+      "species": "parakeet",
+      "dosage": "10-20 μg/kg IM/IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "phenylephrine",
+      "drug": "Phenylephrine",
+      "species": "parrot",
+      "dosage": "10-20 μg/kg IM/IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "norepinephrine",
+      "drug": "Norepinephrine",
+      "species": "dog",
+      "dosage": "0.1-2 μg/kg/min CRI",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "norepinephrine",
+      "drug": "Norepinephrine",
+      "species": "cat",
+      "dosage": "0.05-1 μg/kg/min CRI",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "norepinephrine",
+      "drug": "Norepinephrine",
+      "species": "horse",
+      "dosage": "0.1-1 μg/kg/min CRI",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "norepinephrine",
+      "drug": "Norepinephrine",
+      "species": "bird",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "norepinephrine",
+      "drug": "Norepinephrine",
+      "species": "parakeet",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "norepinephrine",
+      "drug": "Norepinephrine",
+      "species": "parrot",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "procainamide",
+      "drug": "Procainamide",
+      "species": "horse",
+      "dosage": "1 mg/kg/min IV to 20 mg/kg total",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "amiodarone",
+      "drug": "Amiodarone",
+      "species": "cat",
+      "dosage": "Not recommended due to toxicity",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "propranolol",
+      "drug": "Propranolol",
+      "species": "horse",
+      "dosage": "0.03-0.15 mg/kg IV slowly",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "propranolol",
+      "drug": "Propranolol",
+      "species": "bird",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "propranolol",
+      "drug": "Propranolol",
+      "species": "parakeet",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "propranolol",
+      "drug": "Propranolol",
+      "species": "parrot",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "mexiletine",
+      "drug": "Mexiletine",
+      "species": "cat",
+      "dosage": "Not commonly used",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "verapamil",
+      "drug": "Verapamil",
+      "species": "cat",
+      "dosage": "0.025 mg/kg slow IV; rarely used PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "verapamil",
+      "drug": "Verapamil",
+      "species": "horse",
+      "dosage": "0.025-0.05 mg/kg slow IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivabradine",
+      "drug": "Ivabradine",
+      "species": "cat",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "acetazolamide",
+      "drug": "Acetazolamide",
+      "species": "reptile",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "acetazolamide",
+      "drug": "Acetazolamide",
+      "species": "lizard",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "acetazolamide",
+      "drug": "Acetazolamide",
+      "species": "snake",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "acetazolamide",
+      "drug": "Acetazolamide",
+      "species": "tortoise",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "fluticasone",
+      "drug": "Fluticasone Propionate",
+      "species": "dog",
+      "dosage": "110-220 μg/puff q12h via AeroKat/AeroDawg spacer",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "fluticasone",
+      "drug": "Fluticasone Propionate",
+      "species": "cat",
+      "dosage": "44-220 μg/puff q12h via spacer with mask",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "fluticasone",
+      "drug": "Fluticasone Propionate",
+      "species": "horse",
+      "dosage": "2000-3000 μg q12h via nebulizer/Flexineb",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "cat",
+      "dosage": "90 μg/puff: 1 puff via spacer q30min (acute) then q4-6h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "horse",
+      "dosage": "360-720 μg via Equine Aeromask or nebulized 5mg in 10ml",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "guinea_pig",
+      "dosage": "Nebulized 0.5 mg/ml for 10-15 min",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "bird",
+      "dosage": "0.01-0.02 mg/kg nebulized",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "parakeet",
+      "dosage": "0.01-0.02 mg/kg nebulized",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "parrot",
+      "dosage": "0.01-0.02 mg/kg nebulized",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "degu",
+      "dosage": "Nebulized 0.5 mg/ml for 10-15 min",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ipratropium",
+      "drug": "Ipratropium Bromide",
+      "species": "dog",
+      "dosage": "Nebulized: 250-500 μg q6-8h; MDI: 18-36 μg/puff q6h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "ipratropium",
+      "drug": "Ipratropium Bromide",
+      "species": "cat",
+      "dosage": "Nebulized: 250 μg q8h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "ipratropium",
+      "drug": "Ipratropium Bromide",
+      "species": "horse",
+      "dosage": "Nebulized: 1-3 mg q6-8h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "ipratropium",
+      "drug": "Ipratropium Bromide",
+      "species": "guinea_pig",
+      "dosage": "Nebulized: 250 μg q8h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "ipratropium",
+      "drug": "Ipratropium Bromide",
+      "species": "degu",
+      "dosage": "Nebulized: 250 μg q8h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "hydrocodone",
+      "drug": "Hydrocodone",
+      "species": "cat",
+      "dosage": "Not recommended",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "codeine",
+      "drug": "Codeine",
+      "species": "cat",
+      "dosage": "Not recommended",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sacubitril_valsartan",
+      "drug": "Sacubitril/Valsartan",
+      "species": "cat",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cromoglycate",
+      "drug": "Sodium Cromoglycate",
+      "species": "dog",
+      "dosage": "Nebulized: 20 mg q6-8h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "cromoglycate",
+      "drug": "Sodium Cromoglycate",
+      "species": "cat",
+      "dosage": "Nebulized: 20 mg q8-12h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "cromoglycate",
+      "drug": "Sodium Cromoglycate",
+      "species": "horse",
+      "dosage": "Nebulized: 80-200 mg q8-12h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "cromoglycate",
+      "drug": "Sodium Cromoglycate",
+      "species": "guinea_pig",
+      "dosage": "Nebulized: 10 mg q8h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "cromoglycate",
+      "drug": "Sodium Cromoglycate",
+      "species": "degu",
+      "dosage": "Nebulized: 10 mg q8h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "sildenafil_pulmonary",
+      "drug": "Sildenafil (Pulmonary Hypertension)",
+      "species": "bird",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sildenafil_pulmonary",
+      "drug": "Sildenafil (Pulmonary Hypertension)",
+      "species": "parakeet",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sildenafil_pulmonary",
+      "drug": "Sildenafil (Pulmonary Hypertension)",
+      "species": "parrot",
+      "dosage": "Not established",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "metoclopramide_injectable",
+      "drug": "Metoclopramide CRI",
+      "species": "horse",
+      "dosage": "0.25 mg/kg/hr CRI",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "dog",
+      "dosage": "1-4 tsp per meal mixed in food",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "cat",
+      "dosage": "1-4 tsp per meal",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "rabbit",
+      "dosage": "1/2-1 tsp per meal",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "guinea_pig",
+      "dosage": "1/4-1/2 tsp per meal",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "chinchilla",
+      "dosage": "1/4 tsp per meal",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "degu",
+      "dosage": "1/4-1/2 tsp per meal",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "benzoyl_peroxide",
+      "drug": "Benzoyl Peroxide",
+      "species": "dog",
+      "dosage": "2.5-5% shampoo: lather and leave 5-10 min; gel: apply to affected areas q24h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "benzoyl_peroxide",
+      "drug": "Benzoyl Peroxide",
+      "species": "cat",
+      "dosage": "2.5% gel to chin q24-48h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "benzoyl_peroxide",
+      "drug": "Benzoyl Peroxide",
+      "species": "horse",
+      "dosage": "5% shampoo for dermatophilosis/rain rot",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "denamarin",
+      "drug": "SAMe + Silybin (Denamarin)",
+      "species": "dog",
+      "dosage": "Dogs <5kg: 90mg SAMe+9mg silybin; 5-15kg: 225+24; 15-30kg: 425+35; >30kg: 425+100 (all q24h on empty stomach)",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "denamarin",
+      "drug": "SAMe + Silybin (Denamarin)",
+      "species": "cat",
+      "dosage": "Cat/small dog formulation: 90mg SAMe + 9mg silybin q24h on empty stomach",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "denamarin",
+      "drug": "SAMe + Silybin (Denamarin)",
+      "species": "ferret",
+      "dosage": "Cat dose formulation q24h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "cimetidine",
+      "drug": "Cimetidine",
+      "species": "fish",
+      "dosage": "4 mg/kg PO or in feed",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_e",
+      "drug": "Vitamin E (Alpha-tocopherol)",
+      "species": "cat",
+      "dosage": "100-400 IU/day PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_e",
+      "drug": "Vitamin E (Alpha-tocopherol)",
+      "species": "horse",
+      "dosage": "1000-5000 IU/day PO; 5000-10000 IU for NMD",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_e",
+      "drug": "Vitamin E (Alpha-tocopherol)",
+      "species": "bird",
+      "dosage": "0.05-0.1 mg/kg IM; or 1 IU/30g body weight PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_e",
+      "drug": "Vitamin E (Alpha-tocopherol)",
+      "species": "parakeet",
+      "dosage": "0.05-0.1 mg/kg IM; or 1 IU/30g body weight PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_e",
+      "drug": "Vitamin E (Alpha-tocopherol)",
+      "species": "parrot",
+      "dosage": "0.05-0.1 mg/kg IM; or 1 IU/30g body weight PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "kaolin_pectin",
+      "drug": "Kaolin-Pectin",
+      "species": "horse",
+      "dosage": "2-4 L via nasogastric tube q6-12h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "pilocarpine",
+      "drug": "Pilocarpine",
+      "species": "cat",
+      "dosage": "1-2%: 1 drop q8-12h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "pilocarpine",
+      "drug": "Pilocarpine",
+      "species": "horse",
+      "dosage": "1-4%: 1-2 drops q6-8h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "tropicamide",
+      "drug": "Tropicamide",
+      "species": "cat",
+      "dosage": "1%: 1 drop",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "tropicamide",
+      "drug": "Tropicamide",
+      "species": "horse",
+      "dosage": "1%: 2-3 drops (difficult to dilate equine pupil)",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "tropicamide",
+      "drug": "Tropicamide",
+      "species": "rabbit",
+      "dosage": "0.5-1%: 1 drop",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "tropicamide",
+      "drug": "Tropicamide",
+      "species": "bird",
+      "dosage": "1%: 1 drop",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "tropicamide",
+      "drug": "Tropicamide",
+      "species": "parakeet",
+      "dosage": "1%: 1 drop",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "tropicamide",
+      "drug": "Tropicamide",
+      "species": "parrot",
+      "dosage": "1%: 1 drop",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "hyaluronic_acid_ia",
+      "drug": "Hyaluronic Acid (Intra-articular)",
+      "species": "dog",
+      "dosage": "5-10 mg/joint IA q1-3 weeks × 3-5 injections",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "hyaluronic_acid_ia",
+      "drug": "Hyaluronic Acid (Intra-articular)",
+      "species": "cat",
+      "dosage": "2-5 mg/joint IA",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "hyaluronic_acid_ia",
+      "drug": "Hyaluronic Acid (Intra-articular)",
+      "species": "rabbit",
+      "dosage": "0.5-1 mg/joint IA",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "alendronate",
+      "drug": "Alendronate",
+      "species": "horse",
+      "dosage": "IV tiludronate (Tildren) preferred: 1 mg/kg IV over 30 min",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pamidronate",
+      "drug": "Pamidronate",
+      "species": "horse",
+      "dosage": "1 mg/kg IV slowly",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dantrolene",
+      "drug": "Dantrolene",
+      "species": "pig",
+      "dosage": "3.5 mg/kg IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "prazosin",
+      "drug": "Prazosin",
+      "species": "horse",
+      "dosage": "Not commonly used in horses",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "misoprostol_gi",
+      "drug": "Misoprostol (Gastroprotection)",
+      "species": "cat",
+      "dosage": "Not commonly used in cats",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "rebamipide",
+      "drug": "Rebamipide (Mucosta)",
+      "species": "horse",
+      "dosage": "Not established for horses",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "l_asparaginase",
+      "drug": "L-Asparaginase",
+      "species": "dog",
+      "dosage": "400 IU/kg IM or 10,000-20,000 IU/m² IM (never IV first dose)",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "l_asparaginase",
+      "drug": "L-Asparaginase",
+      "species": "cat",
+      "dosage": "400 IU/kg IM",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "l_asparaginase",
+      "drug": "L-Asparaginase",
+      "species": "ferret",
+      "dosage": "400 IU/kg IM",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "epofolaner",
+      "drug": "Epofolaner (Zenrelia)",
+      "species": "cat",
+      "dosage": "Not approved for cats",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "moxidectin_injectable",
+      "drug": "Moxidectin Injectable (ProHeart)",
+      "species": "dog",
+      "dosage": "ProHeart 6: 0.17 mg/kg SC q6months; ProHeart 12: 0.5 mg/kg SC q12months",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "moxidectin_injectable",
+      "drug": "Moxidectin Injectable (ProHeart)",
+      "species": "cat",
+      "dosage": "Not approved for cats",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "eprinomectin",
+      "drug": "Eprinomectin",
+      "species": "dog",
+      "dosage": "Not commonly used in dogs (other options preferred)",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "eprinomectin",
+      "drug": "Eprinomectin",
+      "species": "cat",
+      "dosage": "0.5 mg/kg topical (as component of Broadline)",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "eprinomectin",
+      "drug": "Eprinomectin",
+      "species": "horse",
+      "dosage": "0.2 mg/kg topical pour-on",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "monepantel",
+      "drug": "Monepantel (Zolvix)",
+      "species": "dog",
+      "dosage": "Not approved for companion animals",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "monepantel",
+      "drug": "Monepantel (Zolvix)",
+      "species": "horse",
+      "dosage": "Not approved for horses (sheep/goat product)",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "monepantel",
+      "drug": "Monepantel (Zolvix)",
+      "species": "others",
+      "dosage": "2.5 mg/kg PO (sheep); 3.75 mg/kg PO (goat)",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aglepristone",
+      "drug": "Aglepristone (Alizin)",
+      "species": "dog",
+      "dosage": "10 mg/kg SC on days 1, 2 (and day 8 if needed)",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aglepristone",
+      "drug": "Aglepristone (Alizin)",
+      "species": "cat",
+      "dosage": "10 mg/kg SC on days 1, 2 (repeat day 7 if needed)",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aglepristone",
+      "drug": "Aglepristone (Alizin)",
+      "species": "rabbit",
+      "dosage": "10 mg/kg SC days 1, 2",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aglepristone",
+      "drug": "Aglepristone (Alizin)",
+      "species": "ferret",
+      "dosage": "10 mg/kg SC days 1, 2",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dinoprost",
+      "drug": "Dinoprost (PGF2α)",
+      "species": "rabbit",
+      "dosage": "0.1-0.2 mg/kg SC",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "dog",
+      "dosage": "30-90 mg/kg/day PO divided with meals",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "cat",
+      "dosage": "30-90 mg/kg/day PO divided with meals",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "rabbit",
+      "dosage": "30 mg/kg PO with meals",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "bird",
+      "dosage": "25-50 mg/kg PO with food",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "reptile",
+      "dosage": "30-50 mg/kg PO with meals",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "parakeet",
+      "dosage": "25-50 mg/kg PO with food",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "parrot",
+      "dosage": "25-50 mg/kg PO with food",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "lizard",
+      "dosage": "30-50 mg/kg PO with meals",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "snake",
+      "dosage": "30-50 mg/kg PO with meals",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "tortoise",
+      "dosage": "30-50 mg/kg PO with meals",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "lanthanum_carbonate",
+      "drug": "Lanthanum Carbonate (Renalzin)",
+      "species": "dog",
+      "dosage": "25-50 mg/kg PO divided with meals (Renalzin)",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "lanthanum_carbonate",
+      "drug": "Lanthanum Carbonate (Renalzin)",
+      "species": "cat",
+      "dosage": "200 mg/cat/meal (Renalzin paste) or 25-50 mg/kg/day",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "selamectin_sarolaner_combo",
+      "drug": "Selamectin+Sarolaner (Revolution Plus)",
+      "species": "cat",
+      "dosage": "6 mg/kg selamectin + 1 mg/kg sarolaner topically monthly",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "imidacloprid_flumethrin",
+      "drug": "Imidacloprid+Flumethrin (Seresto)",
+      "species": "dog",
+      "dosage": "Large collar (4.5g imidacloprid + 2.03g flumethrin) or small collar for <8kg dogs",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "imidacloprid_flumethrin",
+      "drug": "Imidacloprid+Flumethrin (Seresto)",
+      "species": "cat",
+      "dosage": "Cat collar (1.25g imidacloprid + 0.56g flumethrin)",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "melarsomine",
+      "drug": "Melarsomine (Immiticide)",
+      "species": "dog",
+      "dosage": "Standard: 2.5 mg/kg deep IM × 1, then 30d rest, then 2.5 mg/kg × 2 (24h apart); AHS 3-injection protocol",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ephedrine",
+      "drug": "Ephedrine",
+      "species": "horse",
+      "dosage": "0.01-0.05 mg/kg IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "methimazole_transdermal",
+      "drug": "Methimazole Transdermal (PLO gel)",
+      "species": "cat",
+      "dosage": "2.5-5 mg/ear q12h (apply to inner pinna, alternate ears)",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "detomidine_gel",
+      "drug": "Detomidine Oromucosal Gel (Dormosedan Gel)",
+      "species": "horse",
+      "dosage": "0.04 mg/kg sublingually (apply under tongue, do NOT swallow)",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "dog",
+      "dosage": "1-2 mEq/kg IV slow（緊急）; 計算式: 0.3×BW×BE",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "cat",
+      "dosage": "0.5-1 mEq/kg IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "horse",
+      "dosage": "1-2 mEq/kg IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "rabbit",
+      "dosage": "1-2 mEq/kg IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "bird",
+      "dosage": "1 mEq/kg IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "reptile",
+      "dosage": "1 mEq/kg ICe slow",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "parakeet",
+      "dosage": "1 mEq/kg IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "parrot",
+      "dosage": "1 mEq/kg IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "lizard",
+      "dosage": "1 mEq/kg ICe slow",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "snake",
+      "dosage": "1 mEq/kg ICe slow",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "tortoise",
+      "dosage": "1 mEq/kg ICe slow",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "potassium_chloride",
+      "drug": "Potassium Chloride",
+      "species": "dog",
+      "dosage": "0.5 mEq/kg/hr IV max; 輸液中20-40 mEq/L",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "potassium_chloride",
+      "drug": "Potassium Chloride",
+      "species": "cat",
+      "dosage": "0.5 mEq/kg/hr IV max",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "potassium_chloride",
+      "drug": "Potassium Chloride",
+      "species": "horse",
+      "dosage": "0.5 mEq/kg/hr IV; PO 40-80 g/day",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "potassium_chloride",
+      "drug": "Potassium Chloride",
+      "species": "rabbit",
+      "dosage": "輸液中20-30 mEq/L",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "hetastarch",
+      "drug": "Hetastarch (HES 6%)",
+      "species": "dog",
+      "dosage": "5-20 mL/kg/day IV; ボーラス5 mL/kg over 15min",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "hetastarch",
+      "drug": "Hetastarch (HES 6%)",
+      "species": "cat",
+      "dosage": "5-10 mL/kg/day IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "hetastarch",
+      "drug": "Hetastarch (HES 6%)",
+      "species": "horse",
+      "dosage": "10 mL/kg IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "activated_charcoal",
+      "drug": "Activated Charcoal",
+      "species": "cat",
+      "dosage": "1-2 g/kg PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "activated_charcoal",
+      "drug": "Activated Charcoal",
+      "species": "horse",
+      "dosage": "1-3 g/kg via nasogastric tube",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "activated_charcoal",
+      "drug": "Activated Charcoal",
+      "species": "rabbit",
+      "dosage": "1 g/kg PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "activated_charcoal",
+      "drug": "Activated Charcoal",
+      "species": "bird",
+      "dosage": "1-2 g/kg PO via gavage",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "activated_charcoal",
+      "drug": "Activated Charcoal",
+      "species": "parakeet",
+      "dosage": "1-2 g/kg PO via gavage",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "activated_charcoal",
+      "drug": "Activated Charcoal",
+      "species": "parrot",
+      "dosage": "1-2 g/kg PO via gavage",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "apomorphine",
+      "drug": "Apomorphine",
+      "species": "cat",
+      "dosage": "使用しない",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "dog",
+      "dosage": "抗炎症: 0.1-0.2 mg/kg IV/IM; 免疫抑制: 0.2-0.5 mg/kg IV; ショック: 4-6 mg/kg IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "cat",
+      "dosage": "抗炎症: 0.1-0.2 mg/kg IV/IM",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "horse",
+      "dosage": "0.04-0.2 mg/kg IV/IM",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "rabbit",
+      "dosage": "0.1-0.2 mg/kg IV/SC",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "bird",
+      "dosage": "2-4 mg/kg IM",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "reptile",
+      "dosage": "0.1-0.6 mg/kg IM/IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "parakeet",
+      "dosage": "2-4 mg/kg IM",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "parrot",
+      "dosage": "2-4 mg/kg IM",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "lizard",
+      "dosage": "0.1-0.6 mg/kg IM/IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "snake",
+      "dosage": "0.1-0.6 mg/kg IM/IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "tortoise",
+      "dosage": "0.1-0.6 mg/kg IM/IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "hydrogen_peroxide_emetic",
+      "drug": "Hydrogen Peroxide 3% (Emetic)",
+      "species": "dog",
+      "dosage": "1-2 mL/kg PO（最大45 mL）; 15分後に1回のみ繰返し可",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "fomepizole",
+      "drug": "Fomepizole (4-MP)",
+      "species": "dog",
+      "dosage": "初回20 mg/kg IV, 12-24h後15 mg/kg, 24-36h後5 mg/kg",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sab_antivenom",
+      "drug": "Snake Antivenom (Polyvalent)",
+      "species": "dog",
+      "dosage": "1バイアル IV（20分以上かけて投与）; 重症例は追加投与",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sab_antivenom",
+      "drug": "Snake Antivenom (Polyvalent)",
+      "species": "cat",
+      "dosage": "1バイアル IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "sab_antivenom",
+      "drug": "Snake Antivenom (Polyvalent)",
+      "species": "horse",
+      "dosage": "1-2バイアル IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ciclosporin_oral",
+      "drug": "Ciclosporin (Modified Oral)",
+      "species": "rabbit",
+      "dosage": "データ限定",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "omega_3_fatty_acids",
+      "drug": "Omega-3 Fatty Acids (EPA/DHA)",
+      "species": "dog",
+      "dosage": "EPA 40-70 mg/kg/day + DHA 25-45 mg/kg/day",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "omega_3_fatty_acids",
+      "drug": "Omega-3 Fatty Acids (EPA/DHA)",
+      "species": "cat",
+      "dosage": "EPA 30-40 mg/kg/day + DHA 20-25 mg/kg/day",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "omega_3_fatty_acids",
+      "drug": "Omega-3 Fatty Acids (EPA/DHA)",
+      "species": "horse",
+      "dosage": "フラキシードオイル 100-200 mL/day",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "omega_3_fatty_acids",
+      "drug": "Omega-3 Fatty Acids (EPA/DHA)",
+      "species": "bird",
+      "dosage": "フラキシードオイル 0.1-0.5 mL/kg/day",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "omega_3_fatty_acids",
+      "drug": "Omega-3 Fatty Acids (EPA/DHA)",
+      "species": "parakeet",
+      "dosage": "フラキシードオイル 0.1-0.5 mL/kg/day",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "omega_3_fatty_acids",
+      "drug": "Omega-3 Fatty Acids (EPA/DHA)",
+      "species": "parrot",
+      "dosage": "フラキシードオイル 0.1-0.5 mL/kg/day",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "glucosamine_chondroitin",
+      "drug": "Glucosamine/Chondroitin Sulfate",
+      "species": "dog",
+      "dosage": "グルコサミン 20 mg/kg/day + コンドロイチン 15 mg/kg/day",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "glucosamine_chondroitin",
+      "drug": "Glucosamine/Chondroitin Sulfate",
+      "species": "cat",
+      "dosage": "グルコサミン 125-250 mg/cat/day",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "glucosamine_chondroitin",
+      "drug": "Glucosamine/Chondroitin Sulfate",
+      "species": "horse",
+      "dosage": "グルコサミン 10-20 mg/kg/day PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "glucosamine_chondroitin",
+      "drug": "Glucosamine/Chondroitin Sulfate",
+      "species": "rabbit",
+      "dosage": "グルコサミン 20 mg/kg/day",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cobalamin_injection",
+      "drug": "Cobalamin (Vitamin B12) Injectable",
+      "species": "dog",
+      "dosage": "250-1500 μg SC/IM q7日×6週、以後月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cobalamin_injection",
+      "drug": "Cobalamin (Vitamin B12) Injectable",
+      "species": "cat",
+      "dosage": "250 μg SC q7日×6週、以後月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cobalamin_injection",
+      "drug": "Cobalamin (Vitamin B12) Injectable",
+      "species": "rabbit",
+      "dosage": "250 μg SC q7日",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cobalamin_injection",
+      "drug": "Cobalamin (Vitamin B12) Injectable",
+      "species": "ferret",
+      "dosage": "250 μg SC q7日",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_d3",
+      "drug": "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      "species": "reptile",
+      "dosage": "データ限定的; UVB照射が第一選択",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_d3",
+      "drug": "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      "species": "bird",
+      "dosage": "データ限定的",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_d3",
+      "drug": "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      "species": "parakeet",
+      "dosage": "データ限定的",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_d3",
+      "drug": "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      "species": "parrot",
+      "dosage": "データ限定的",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_d3",
+      "drug": "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      "species": "lizard",
+      "dosage": "データ限定的; UVB照射が第一選択",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_d3",
+      "drug": "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      "species": "snake",
+      "dosage": "データ限定的; UVB照射が第一選択",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_d3",
+      "drug": "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      "species": "tortoise",
+      "dosage": "データ限定的; UVB照射が第一選択",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "eprinomectin_topical",
+      "drug": "Eprinomectin (Pour-on)",
+      "species": "cat",
+      "dosage": "0.5 mg/kg 局所（スポットオン）; ブロードライン配合",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "eprinomectin_topical",
+      "drug": "Eprinomectin (Pour-on)",
+      "species": "horse",
+      "dosage": "0.5 mg/kg 経皮投与（背線上）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "dog",
+      "dosage": "5-10 mg/kg PO 1回; 子犬: 2週齢から2週間隔で投与",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "cat",
+      "dosage": "5-10 mg/kg PO 1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "horse",
+      "dosage": "6.6 mg/kg PO 1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "rabbit",
+      "dosage": "5-10 mg/kg PO 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "bird",
+      "dosage": "4.5 mg/kg PO 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "ferret",
+      "dosage": "4.4 mg/kg PO 1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "hamster",
+      "dosage": "5 mg/kg PO 1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "guinea_pig",
+      "dosage": "5 mg/kg PO 1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "reptile",
+      "dosage": "5 mg/kg PO 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "parakeet",
+      "dosage": "4.5 mg/kg PO 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "parrot",
+      "dosage": "4.5 mg/kg PO 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "lizard",
+      "dosage": "5 mg/kg PO 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "snake",
+      "dosage": "5 mg/kg PO 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "tortoise",
+      "dosage": "5 mg/kg PO 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "degu",
+      "dosage": "5 mg/kg PO 1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "sugar_glider",
+      "dosage": "5 mg/kg PO 1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "oxytetracycline_injectable",
+      "drug": "Oxytetracycline LA Injectable",
+      "species": "horse",
+      "dosage": "6.6 mg/kg IV slow or 20 mg/kg IM",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "mavacoxib",
+      "drug": "Mavacoxib (Trocoxil)",
+      "species": "dog",
+      "dosage": "2 mg/kg PO; 初回→14日後→以後月1回（最大7回）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "osphos_equine",
+      "drug": "Clodronate (Osphos)",
+      "species": "horse",
+      "dosage": "1.14 mg/kg IM（頸部筋肉3-4箇所に分割注射）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentosan_polysulfate",
+      "drug": "Pentosan Polysulfate (Cartrophen Vet)",
+      "species": "dog",
+      "dosage": "3 mg/kg SC 1回/週 × 4回; 以後必要に応じて追加",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentosan_polysulfate",
+      "drug": "Pentosan Polysulfate (Cartrophen Vet)",
+      "species": "cat",
+      "dosage": "2-3 mg/kg SC 1回/週 × 4回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentosan_polysulfate",
+      "drug": "Pentosan Polysulfate (Cartrophen Vet)",
+      "species": "horse",
+      "dosage": "3 mg/kg IM 1回/週 × 4回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "adequan_equine",
+      "drug": "Polysulfated Glycosaminoglycan (Equine Adequan)",
+      "species": "horse",
+      "dosage": "500 mg IM q4日 × 7回; 関節内250 mg",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "fentanyl_patch",
+      "drug": "Fentanyl Transdermal Patch",
+      "species": "dog",
+      "dosage": "2-4 μg/kg/hr; 25μgパッチ(10-20kg), 50μg(20-30kg), 75μg(>30kg)",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "fentanyl_patch",
+      "drug": "Fentanyl Transdermal Patch",
+      "species": "cat",
+      "dosage": "25μgパッチ; 効果12-24h後",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "dog",
+      "dosage": "患部に5-10mm厚で塗布、包帯で被覆、q12-24h交換",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "cat",
+      "dosage": "患部に塗布、包帯で被覆",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "horse",
+      "dosage": "患部に塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "rabbit",
+      "dosage": "患部に塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "bird",
+      "dosage": "患部に薄く塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "reptile",
+      "dosage": "患部に塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "parakeet",
+      "dosage": "患部に薄く塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "parrot",
+      "dosage": "患部に薄く塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "lizard",
+      "dosage": "患部に塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "snake",
+      "dosage": "患部に塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "tortoise",
+      "dosage": "患部に塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "poloxamer_407",
+      "drug": "Poloxamer 407 Gel (Pluronic F127)",
+      "species": "cat",
+      "dosage": "経皮投与用基剤: 耳介内側に塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "poloxamer_407",
+      "drug": "Poloxamer 407 Gel (Pluronic F127)",
+      "species": "dog",
+      "dosage": "経皮投与用基剤: 耳介内側に塗布",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "psyllium_husk",
+      "drug": "Psyllium Husk (Veterinary Fiber)",
+      "species": "dog",
+      "dosage": "1-3 tsp/食事に混合",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "psyllium_husk",
+      "drug": "Psyllium Husk (Veterinary Fiber)",
+      "species": "cat",
+      "dosage": "0.5-1 tsp/食事に混合",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "psyllium_husk",
+      "drug": "Psyllium Husk (Veterinary Fiber)",
+      "species": "rabbit",
+      "dosage": "食事中の繊維量で調整",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "psyllium_husk",
+      "drug": "Psyllium Husk (Veterinary Fiber)",
+      "species": "guinea_pig",
+      "dosage": "少量を食事に混合",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "psyllium_husk",
+      "drug": "Psyllium Husk (Veterinary Fiber)",
+      "species": "degu",
+      "dosage": "少量を食事に混合",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "dog",
+      "dosage": "6-12 mg/kg 局所（スポットオン）月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "cat",
+      "dosage": "6-12 mg/kg 局所 月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "rabbit",
+      "dosage": "6-18 mg/kg 局所 月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "ferret",
+      "dosage": "6-18 mg/kg 局所 月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "guinea_pig",
+      "dosage": "15-20 mg/kg 局所 月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "hedgehog",
+      "dosage": "6-18 mg/kg 局所 月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "degu",
+      "dosage": "15-20 mg/kg 局所 月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "imidacloprid_topical",
+      "drug": "Imidacloprid 10% Spot-on (Advantage)",
+      "species": "dog",
+      "dosage": "10 mg/kg 局所 月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "imidacloprid_topical",
+      "drug": "Imidacloprid 10% Spot-on (Advantage)",
+      "species": "cat",
+      "dosage": "10 mg/kg 局所 月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "imidacloprid_topical",
+      "drug": "Imidacloprid 10% Spot-on (Advantage)",
+      "species": "rabbit",
+      "dosage": "10 mg/kg 局所 月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "imidacloprid_topical",
+      "drug": "Imidacloprid 10% Spot-on (Advantage)",
+      "species": "ferret",
+      "dosage": "0.4 mL/ferret 局所 月1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "prostaglandin_f2a",
+      "drug": "Prostaglandin F2α (Dinoprost/Lutalyse)",
+      "species": "horse",
+      "dosage": "5-10 mg/horse IM 1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "doxorubicin_injectable",
+      "drug": "Doxorubicin Injectable",
+      "species": "dog",
+      "dosage": "30 mg/m² IV q21日; 累積最大量 180-240 mg/m²",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "doxorubicin_injectable",
+      "drug": "Doxorubicin Injectable",
+      "species": "cat",
+      "dosage": "1 mg/kg IV q21日（最大20-25 mg/cat）; 累積6回まで",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cyclophosphamide_oral",
+      "drug": "Cyclophosphamide Oral",
+      "species": "cat",
+      "dosage": "200-250 mg/m² PO q21日",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "dog",
+      "dosage": "85-100 mg/kg IV（安楽死）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "cat",
+      "dosage": "85-100 mg/kg IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "horse",
+      "dosage": "85 mg/kg IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "rabbit",
+      "dosage": "85-100 mg/kg IV",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "bird",
+      "dosage": "100 mg/kg IV/ICe",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "reptile",
+      "dosage": "100 mg/kg IV/ICe",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "parakeet",
+      "dosage": "100 mg/kg IV/ICe",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "parrot",
+      "dosage": "100 mg/kg IV/ICe",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "lizard",
+      "dosage": "100 mg/kg IV/ICe",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "snake",
+      "dosage": "100 mg/kg IV/ICe",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "tortoise",
+      "dosage": "100 mg/kg IV/ICe",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ms222_fish",
+      "drug": "Tricaine Methanesulfonate (MS-222)",
+      "species": "fish",
+      "dosage": "鎮静: 50-100 mg/L; 麻酔: 100-200 mg/L; 安楽死: 250+ mg/L",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ms222_fish",
+      "drug": "Tricaine Methanesulfonate (MS-222)",
+      "species": "amphibian",
+      "dosage": "鎮静: 0.5-1 g/L 浸漬; 麻酔: 1-3 g/L",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "eugenol_fish",
+      "drug": "Eugenol (Clove Oil)",
+      "species": "fish",
+      "dosage": "鎮静: 25-50 mg/L; 麻酔: 40-100 mg/L; 安楽死: 300+ mg/L",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "eugenol_fish",
+      "drug": "Eugenol (Clove Oil)",
+      "species": "amphibian",
+      "dosage": "鎮静: 50-100 mg/L 浸漬",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "alfaprostol",
+      "drug": "Alfaprostol (Alfavet)",
+      "species": "horse",
+      "dosage": "3 mg/horse IM 1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "alfaprostol",
+      "drug": "Alfaprostol (Alfavet)",
+      "species": "dog",
+      "dosage": "データ限定的",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "oxyglobin",
+      "drug": "Oxyglobin (HBOC)",
+      "species": "dog",
+      "dosage": "10-30 mL/kg IV（最大速度10 mL/kg/hr）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "oxyglobin",
+      "drug": "Oxyglobin (HBOC)",
+      "species": "cat",
+      "dosage": "3-5 mL/kg IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "tranexamic_acid_iv",
+      "drug": "Tranexamic Acid (IV)",
+      "species": "horse",
+      "dosage": "10-25 mg/kg IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_a_injectable",
+      "drug": "Vitamin A Injectable",
+      "species": "reptile",
+      "dosage": "1,000-5,000 IU/kg IM 1回; 2週後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_a_injectable",
+      "drug": "Vitamin A Injectable",
+      "species": "tortoise",
+      "dosage": "1,000-2,000 IU/kg IM; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_a_injectable",
+      "drug": "Vitamin A Injectable",
+      "species": "bird",
+      "dosage": "10,000-25,000 IU/kg IM 1回; 必要に応じて繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_a_injectable",
+      "drug": "Vitamin A Injectable",
+      "species": "parakeet",
+      "dosage": "10,000-25,000 IU/kg IM 1回; 必要に応じて繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_a_injectable",
+      "drug": "Vitamin A Injectable",
+      "species": "parrot",
+      "dosage": "10,000-25,000 IU/kg IM 1回; 必要に応じて繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_a_injectable",
+      "drug": "Vitamin A Injectable",
+      "species": "lizard",
+      "dosage": "1,000-5,000 IU/kg IM 1回; 2週後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "vitamin_a_injectable",
+      "drug": "Vitamin A Injectable",
+      "species": "snake",
+      "dosage": "1,000-5,000 IU/kg IM 1回; 2週後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "desoxycorticosterone",
+      "drug": "Desoxycorticosterone Pivalate (DOCP/Percorten-V)",
+      "species": "dog",
+      "dosage": "2.2 mg/kg IM/SC q25日（初期）→電解質で間隔調整",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "critical_care_herbivore",
+      "drug": "Critical Care (Oxbow)",
+      "species": "hamster",
+      "dosage": "少量ずつシリンジ給餌",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "critical_care_herbivore",
+      "drug": "Critical Care (Oxbow)",
+      "species": "degu",
+      "dosage": "少量ずつシリンジ給餌",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "critical_care_herbivore",
+      "drug": "Critical Care (Oxbow)",
+      "species": "sugar_glider",
+      "dosage": "少量ずつシリンジ給餌",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "carnivore_care",
+      "drug": "Carnivore Care (Oxbow)",
+      "species": "sugar_glider",
+      "dosage": "少量ずつシリンジ給餌",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "cat",
+      "dosage": "フィラリア予防: 24 μg/kg PO 月1回; 耳ダニ: 200 μg/kg SC 1回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "horse",
+      "dosage": "200 μg/kg PO（ペースト）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "rabbit",
+      "dosage": "200-400 μg/kg SC q7-14日",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "guinea_pig",
+      "dosage": "200-500 μg/kg SC q7-14日",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "hedgehog",
+      "dosage": "200-400 μg/kg SC q14日×3回",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "bird",
+      "dosage": "200 μg/kg PO/IM 1回; 繰返し14日後",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "reptile",
+      "dosage": "200 μg/kg PO/SC 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "ferret",
+      "dosage": "フィラリア予防: 55 μg/ferret PO 月1回; ダニ: 200-400 μg/kg SC",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "parakeet",
+      "dosage": "200 μg/kg PO/IM 1回; 繰返し14日後",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "parrot",
+      "dosage": "200 μg/kg PO/IM 1回; 繰返し14日後",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "lizard",
+      "dosage": "200 μg/kg PO/SC 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "snake",
+      "dosage": "200 μg/kg PO/SC 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "tortoise",
+      "dosage": "200 μg/kg PO/SC 1回; 14日後繰返し",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "methocarbamol_oral",
+      "drug": "Methocarbamol Oral",
+      "species": "horse",
+      "dosage": "4.4-22 mg/kg IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cranberry_extract",
+      "drug": "Cranberry Extract (UTI Prevention)",
+      "species": "cat",
+      "dosage": "犬用製品の猫用量は確立されていない。獣医用サプリメント使用",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "dexmedetomidine_oromucosal",
+      "drug": "Dexmedetomidine Oromucosal Gel (Sileo)",
+      "species": "dog",
+      "dosage": "125 μg/m² 口腔粘膜（頬と歯茎の間）; 2時間後に再投与可",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "thyroxine_monitoring",
+      "drug": "Free T4 by Equilibrium Dialysis (Diagnostic)",
+      "species": "dog",
+      "dosage": "検査のみ（参考範囲: 7-28 pmol/L）",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "thyroxine_monitoring",
+      "drug": "Free T4 by Equilibrium Dialysis (Diagnostic)",
+      "species": "cat",
+      "dosage": "検査のみ（参考範囲: 12-33 pmol/L）",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deferoxamine",
+      "drug": "Deferoxamine (Desferal)",
+      "species": "cat",
+      "dosage": "10-40 mg/kg IM/IV slow",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "zinc_acetate",
+      "drug": "Zinc Acetate",
+      "species": "cat",
+      "dosage": "データ限定",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin_implant",
+      "drug": "Deslorelin Implant (Suprelorin)",
+      "species": "dog",
+      "dosage": "4.7 mg インプラント SC（効果6-12ヶ月）; 9.4 mg（12-24ヶ月）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin_implant",
+      "drug": "Deslorelin Implant (Suprelorin)",
+      "species": "cat",
+      "dosage": "4.7 mg インプラント SC",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "deslorelin_implant",
+      "drug": "Deslorelin Implant (Suprelorin)",
+      "species": "ferret",
+      "dosage": "4.7 mg インプラント SC",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "testosterone_cypionate",
+      "drug": "Testosterone Cypionate",
+      "species": "dog",
+      "dosage": "1-2 mg/kg IM q4-8週",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "cisplatin_injectable",
+      "drug": "Cisplatin Injectable",
+      "species": "dog",
+      "dosage": "60-70 mg/m² IV q21日（生理食塩水利尿と併用必須）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "lomustine_oral",
+      "drug": "Lomustine (CCNU) Oral",
+      "species": "dog",
+      "dosage": "60-90 mg/m² PO q3週; CBC必須（投与前好中球>3000）",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "lomustine_oral",
+      "drug": "Lomustine (CCNU) Oral",
+      "species": "cat",
+      "dosage": "50-60 mg/m² PO q3-6週",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "hydroxyurea",
+      "drug": "Hydroxyurea",
+      "species": "dog",
+      "dosage": "50 mg/kg PO 2-3回/週; 用量調整はCBCで",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "mirtazapine_transdermal",
+      "drug": "Mirtazapine Transdermal (Mirataz)",
+      "species": "cat",
+      "dosage": "1.5インチリボン 耳介内側 q48h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "reptile",
+      "dosage": "餌にダスティング（毎回の給餌時）",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "tortoise",
+      "dosage": "餌にダスティング q1-2日",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "lizard",
+      "dosage": "餌にダスティング（毎回）",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "amphibian",
+      "dosage": "餌の昆虫にダスティング",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "bird",
+      "dosage": "カトルボーン/ミネラルブロック; 卵塞時100-200 mg/kg PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "parakeet",
+      "dosage": "カトルボーン/ミネラルブロック; 卵塞時100-200 mg/kg PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "parrot",
+      "dosage": "カトルボーン/ミネラルブロック; 卵塞時100-200 mg/kg PO",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "snake",
+      "dosage": "餌にダスティング（毎回の給餌時）",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "uvb_therapy",
+      "drug": "UVB Phototherapy (Reptile Husbandry)",
+      "species": "reptile",
+      "dosage": "5.0-12.0% UVB（種による）; 10-12時間/日; 6ヶ月毎にバルブ交換",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "uvb_therapy",
+      "drug": "UVB Phototherapy (Reptile Husbandry)",
+      "species": "tortoise",
+      "dosage": "10.0-12.0% UVB; 10-12時間/日",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "uvb_therapy",
+      "drug": "UVB Phototherapy (Reptile Husbandry)",
+      "species": "lizard",
+      "dosage": "5.0-12.0% UVB（種による）",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "uvb_therapy",
+      "drug": "UVB Phototherapy (Reptile Husbandry)",
+      "species": "amphibian",
+      "dosage": "2.0-5.0% UVB; 一部種は不要",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "uvb_therapy",
+      "drug": "UVB Phototherapy (Reptile Husbandry)",
+      "species": "snake",
+      "dosage": "5.0-12.0% UVB（種による）; 10-12時間/日; 6ヶ月毎にバルブ交換",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "calcium_gluconate_oral",
+      "drug": "Calcium Gluconate (Oral)",
+      "species": "amphibian",
+      "dosage": "Dusted on prey items",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "calcium_gluconate_oral",
+      "drug": "Calcium Gluconate (Oral)",
+      "species": "sugar_glider",
+      "dosage": "Calcium-rich diet supplement",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "amprolium",
+      "drug": "Amprolium (Corid)",
+      "species": "bird",
+      "dosage": "30 mL/gallon drinking water × 5-7 days (9.6% solution)",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "amprolium",
+      "drug": "Amprolium (Corid)",
+      "species": "parakeet",
+      "dosage": "30 mL/gallon drinking water × 5-7 days (9.6% solution)",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "amprolium",
+      "drug": "Amprolium (Corid)",
+      "species": "parrot",
+      "dosage": "30 mL/gallon drinking water × 5-7 days (9.6% solution)",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "pergolide_oral",
+      "drug": "Pergolide (Prascend)",
+      "species": "dog",
+      "dosage": "Not routinely used",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "latanoprost_ophthalmic",
+      "drug": "Latanoprost (Xalatan)",
+      "species": "dog",
+      "dosage": "1 drop affected eye(s) q12-24h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "latanoprost_ophthalmic",
+      "drug": "Latanoprost (Xalatan)",
+      "species": "cat",
+      "dosage": "1 drop affected eye(s) q12-24h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "latanoprost_ophthalmic",
+      "drug": "Latanoprost (Xalatan)",
+      "species": "horse",
+      "dosage": "Not recommended",
+      "missing_route": true,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "fluticasone_inhaler",
+      "drug": "Fluticasone (Flovent HFA)",
+      "species": "cat",
+      "dosage": "44-220 μg/puff via AeroKat spacer q12h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "fluticasone_inhaler",
+      "drug": "Fluticasone (Flovent HFA)",
+      "species": "dog",
+      "dosage": "110-220 μg via spacer q12h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "fluticasone_inhaler",
+      "drug": "Fluticasone (Flovent HFA)",
+      "species": "horse",
+      "dosage": "2000-3000 μg via equine spacer q12h",
+      "missing_route": true,
+      "missing_frequency": false
+    },
+    {
+      "drug_id": "emodepside_topical",
+      "drug": "Emodepside (Profender component)",
+      "species": "cat",
+      "dosage": "3 mg/kg topical (spot-on with praziquantel)",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "emodepside_topical",
+      "drug": "Emodepside (Profender component)",
+      "species": "ferret",
+      "dosage": "Off-label topical at cat dose",
+      "missing_route": false,
+      "missing_frequency": true
+    },
+    {
+      "drug_id": "mitotane_oral",
+      "drug": "Mitotane (Lysodren)",
+      "species": "dog",
+      "dosage": "Loading: 25-50 mg/kg/day PO divided × 7-14 days; Maintenance: 25-50 mg/kg/week PO",
+      "missing_route": false,
+      "missing_frequency": true
+    }
+  ],
+  "by_drug": [
+    [
+      "Pyrantel Pamoate",
+      16
+    ],
+    [
+      "Ivermectin (Oral/Injectable)",
+      13
+    ],
+    [
+      "Dexamethasone",
+      12
+    ],
+    [
+      "Sodium Bicarbonate",
+      11
+    ],
+    [
+      "Dexamethasone Sodium Phosphate",
+      11
+    ],
+    [
+      "Medical Grade Manuka Honey",
+      11
+    ],
+    [
+      "Pentobarbital (Euthanasia Solution)",
+      11
+    ],
+    [
+      "Aluminum Hydroxide (Phosphate Binder)",
+      10
+    ],
+    [
+      "Dorzolamide",
+      9
+    ],
+    [
+      "Latanoprost",
+      9
+    ],
+    [
+      "Calcium Carbonate Powder (Reptile)",
+      8
+    ],
+    [
+      "Neomycin",
+      7
+    ],
+    [
+      "Terbutaline",
+      7
+    ],
+    [
+      "Deslorelin",
+      7
+    ],
+    [
+      "Aluminum Hydroxide",
+      7
+    ],
+    [
+      "Salbutamol (Albuterol)",
+      7
+    ],
+    [
+      "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      7
+    ],
+    [
+      "Selamectin (Revolution)",
+      7
+    ],
+    [
+      "Vitamin A Injectable",
+      7
+    ],
+    [
+      "Atracurium",
+      6
+    ],
+    [
+      "Norepinephrine",
+      6
+    ],
+    [
+      "Psyllium (Metamucil)",
+      6
+    ],
+    [
+      "Tropicamide",
+      6
+    ],
+    [
+      "Activated Charcoal",
+      6
+    ],
+    [
+      "Omega-3 Fatty Acids (EPA/DHA)",
+      6
+    ],
+    [
+      "Polymyxin B",
+      5
+    ],
+    [
+      "Scopolamine Butylbromide",
+      5
+    ],
+    [
+      "Phenylephrine",
+      5
+    ],
+    [
+      "Ipratropium Bromide",
+      5
+    ],
+    [
+      "Sodium Cromoglycate",
+      5
+    ],
+    [
+      "Vitamin E (Alpha-tocopherol)",
+      5
+    ],
+    [
+      "Psyllium Husk (Veterinary Fiber)",
+      5
+    ],
+    [
+      "UVB Phototherapy (Reptile Husbandry)",
+      5
+    ],
+    [
+      "Ivermectin",
+      4
+    ],
+    [
+      "Iron Dextran",
+      4
+    ],
+    [
+      "Cosyntropin (Cortrosyn/Synacthen)",
+      4
+    ],
+    [
+      "Propranolol",
+      4
+    ],
+    [
+      "Acetazolamide",
+      4
+    ],
+    [
+      "Aglepristone (Alizin)",
+      4
+    ],
+    [
+      "Potassium Chloride",
+      4
+    ],
+    [
+      "Glucosamine/Chondroitin Sulfate",
+      4
+    ],
+    [
+      "Cobalamin (Vitamin B12) Injectable",
+      4
+    ],
+    [
+      "Imidacloprid 10% Spot-on (Advantage)",
+      4
+    ],
+    [
+      "No Pain Quick Stop (Equine & Canine Vet Nutrition)",
+      3
+    ],
+    [
+      "Lufenuron",
+      3
+    ],
+    [
+      "Desmopressin (DDAVP)",
+      3
+    ],
+    [
+      "Tetracycline",
+      3
+    ],
+    [
+      "Sodium Nitroprusside",
+      3
+    ],
+    [
+      "Fluticasone Propionate",
+      3
+    ],
+    [
+      "Sildenafil (Pulmonary Hypertension)",
+      3
+    ],
+    [
+      "Benzoyl Peroxide",
+      3
+    ],
+    [
+      "SAMe + Silybin (Denamarin)",
+      3
+    ],
+    [
+      "Hyaluronic Acid (Intra-articular)",
+      3
+    ],
+    [
+      "L-Asparaginase",
+      3
+    ],
+    [
+      "Eprinomectin",
+      3
+    ],
+    [
+      "Monepantel (Zolvix)",
+      3
+    ],
+    [
+      "Hetastarch (HES 6%)",
+      3
+    ],
+    [
+      "Snake Antivenom (Polyvalent)",
+      3
+    ],
+    [
+      "Pentosan Polysulfate (Cartrophen Vet)",
+      3
+    ],
+    [
+      "Critical Care (Oxbow)",
+      3
+    ],
+    [
+      "Deslorelin Implant (Suprelorin)",
+      3
+    ],
+    [
+      "Amprolium (Corid)",
+      3
+    ],
+    [
+      "Latanoprost (Xalatan)",
+      3
+    ],
+    [
+      "Fluticasone (Flovent HFA)",
+      3
+    ],
+    [
+      "N-Acetylcysteine (NAC)",
+      2
+    ],
+    [
+      "Pergolide",
+      2
+    ],
+    [
+      "Detomidine (Dormosedan)",
+      2
+    ],
+    [
+      "Methylprednisolone (Depo-Medrol/Medrol)",
+      2
+    ],
+    [
+      "Selenium + Vitamin E (Periparturient Supplement)",
+      2
+    ],
+    [
+      "Nitroglycerin",
+      2
+    ],
+    [
+      "Verapamil",
+      2
+    ],
+    [
+      "Pilocarpine",
+      2
+    ],
+    [
+      "Moxidectin Injectable (ProHeart)",
+      2
+    ],
+    [
+      "Lanthanum Carbonate (Renalzin)",
+      2
+    ],
+    [
+      "Imidacloprid+Flumethrin (Seresto)",
+      2
+    ],
+    [
+      "Eprinomectin (Pour-on)",
+      2
+    ],
+    [
+      "Fentanyl Transdermal Patch",
+      2
+    ],
+    [
+      "Poloxamer 407 Gel (Pluronic F127)",
+      2
+    ],
+    [
+      "Doxorubicin Injectable",
+      2
+    ],
+    [
+      "Tricaine Methanesulfonate (MS-222)",
+      2
+    ],
+    [
+      "Eugenol (Clove Oil)",
+      2
+    ],
+    [
+      "Alfaprostol (Alfavet)",
+      2
+    ],
+    [
+      "Oxyglobin (HBOC)",
+      2
+    ],
+    [
+      "Free T4 by Equilibrium Dialysis (Diagnostic)",
+      2
+    ],
+    [
+      "Lomustine (CCNU) Oral",
+      2
+    ],
+    [
+      "Calcium Gluconate (Oral)",
+      2
+    ],
+    [
+      "Emodepside (Profender component)",
+      2
+    ],
+    [
+      "Praziquantel",
+      1
+    ],
+    [
+      "Moxidectin",
+      1
+    ],
+    [
+      "Prednisolone",
+      1
+    ],
+    [
+      "Methimazole (Tapazole/Felimazole)",
+      1
+    ],
+    [
+      "Phenobarbital",
+      1
+    ],
+    [
+      "Glucosamine/Chondroitin",
+      1
+    ],
+    [
+      "Amino Complete (Equine & Canine Vet Nutrition)",
+      1
+    ],
+    [
+      "CP Powder (Equine & Canine Vet Nutrition)",
+      1
+    ],
+    [
+      "Nystatin",
+      1
+    ],
+    [
+      "Emodepside",
+      1
+    ],
+    [
+      "Aminophylline",
+      1
+    ],
+    [
+      "Potassium Bromide",
+      1
+    ],
+    [
+      "Melatonin",
+      1
+    ],
+    [
+      "Vincristine",
+      1
+    ],
+    [
+      "Methocarbamol",
+      1
+    ],
+    [
+      "Sotalol",
+      1
+    ],
+    [
+      "Sulfasalazine",
+      1
+    ],
+    [
+      "Vitamin B12 (Cobalamin)",
+      1
+    ],
+    [
+      "Calcitriol",
+      1
+    ],
+    [
+      "Malachite Green",
+      1
+    ],
+    [
+      "Formalin (37% Formaldehyde)",
+      1
+    ],
+    [
+      "Copper Sulfate",
+      1
+    ],
+    [
+      "Acriflavine",
+      1
+    ],
+    [
+      "Levamisole (Fish)",
+      1
+    ],
+    [
+      "Epsom Salt (Magnesium Sulfate)",
+      1
+    ],
+    [
+      "Aquarium Salt (NaCl)",
+      1
+    ],
+    [
+      "Vasopressin (ADH/Pitressin)",
+      1
+    ],
+    [
+      "Romifidine (Sedivet)",
+      1
+    ],
+    [
+      "Cloprostenol (Estrumate)",
+      1
+    ],
+    [
+      "Deslorelin (Suprelorin, GnRH Agonist Implant)",
+      1
+    ],
+    [
+      "Remifentanil",
+      1
+    ],
+    [
+      "Telmisartan",
+      1
+    ],
+    [
+      "Procainamide",
+      1
+    ],
+    [
+      "Amiodarone",
+      1
+    ],
+    [
+      "Mexiletine",
+      1
+    ],
+    [
+      "Ivabradine",
+      1
+    ],
+    [
+      "Hydrocodone",
+      1
+    ],
+    [
+      "Codeine",
+      1
+    ],
+    [
+      "Sacubitril/Valsartan",
+      1
+    ],
+    [
+      "Metoclopramide CRI",
+      1
+    ],
+    [
+      "Cimetidine",
+      1
+    ],
+    [
+      "Kaolin-Pectin",
+      1
+    ],
+    [
+      "Alendronate",
+      1
+    ],
+    [
+      "Pamidronate",
+      1
+    ],
+    [
+      "Dantrolene",
+      1
+    ],
+    [
+      "Prazosin",
+      1
+    ],
+    [
+      "Misoprostol (Gastroprotection)",
+      1
+    ],
+    [
+      "Rebamipide (Mucosta)",
+      1
+    ],
+    [
+      "Epofolaner (Zenrelia)",
+      1
+    ],
+    [
+      "Dinoprost (PGF2α)",
+      1
+    ],
+    [
+      "Selamectin+Sarolaner (Revolution Plus)",
+      1
+    ],
+    [
+      "Melarsomine (Immiticide)",
+      1
+    ],
+    [
+      "Ephedrine",
+      1
+    ],
+    [
+      "Methimazole Transdermal (PLO gel)",
+      1
+    ],
+    [
+      "Detomidine Oromucosal Gel (Dormosedan Gel)",
+      1
+    ],
+    [
+      "Apomorphine",
+      1
+    ],
+    [
+      "Hydrogen Peroxide 3% (Emetic)",
+      1
+    ],
+    [
+      "Fomepizole (4-MP)",
+      1
+    ],
+    [
+      "Ciclosporin (Modified Oral)",
+      1
+    ],
+    [
+      "Oxytetracycline LA Injectable",
+      1
+    ],
+    [
+      "Mavacoxib (Trocoxil)",
+      1
+    ],
+    [
+      "Clodronate (Osphos)",
+      1
+    ],
+    [
+      "Polysulfated Glycosaminoglycan (Equine Adequan)",
+      1
+    ],
+    [
+      "Prostaglandin F2α (Dinoprost/Lutalyse)",
+      1
+    ],
+    [
+      "Cyclophosphamide Oral",
+      1
+    ],
+    [
+      "Tranexamic Acid (IV)",
+      1
+    ],
+    [
+      "Desoxycorticosterone Pivalate (DOCP/Percorten-V)",
+      1
+    ],
+    [
+      "Carnivore Care (Oxbow)",
+      1
+    ],
+    [
+      "Methocarbamol Oral",
+      1
+    ],
+    [
+      "Cranberry Extract (UTI Prevention)",
+      1
+    ],
+    [
+      "Dexmedetomidine Oromucosal Gel (Sileo)",
+      1
+    ],
+    [
+      "Deferoxamine (Desferal)",
+      1
+    ],
+    [
+      "Zinc Acetate",
+      1
+    ],
+    [
+      "Testosterone Cypionate",
+      1
+    ],
+    [
+      "Cisplatin Injectable",
+      1
+    ],
+    [
+      "Hydroxyurea",
+      1
+    ],
+    [
+      "Mirtazapine Transdermal (Mirataz)",
+      1
+    ],
+    [
+      "Pergolide (Prascend)",
+      1
+    ],
+    [
+      "Mitotane (Lysodren)",
+      1
+    ]
+  ]
+}
