@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import json
 import logging
+import textwrap
 import threading
 from functools import lru_cache
 from pathlib import Path
@@ -269,34 +270,64 @@ def _fallback_disease_counts() -> dict[str, int]:
     import subprocess
     import sys
 
-    script = (
-        "import json,sys,importlib;sys.path.insert(0,'.');"
-        "M={"
-        "'dog':('api.species.dog_diseases','DISEASES'),"
-        "'horse':('api.species.equine_diseases','DISEASE_DATABASE'),"
-        "'cat':('api.species.cat_diseases','DISEASES'),"
-        "'rabbit':('api.species.rabbit_diseases','DISEASES'),"
-        "'hamster':('api.species.hamster_diseases','DISEASES'),"
-        "'guinea_pig':('api.species.guinea_pig_diseases','DISEASES'),"
-        "'chinchilla':('api.species.chinchilla_diseases','DISEASES'),"
-        "'ferret':('api.species.ferret_diseases','DISEASES'),"
-        "'hedgehog':('api.species.hedgehog_diseases','DISEASES'),"
-        "'sugar_glider':('api.species.sugar_glider_diseases','DISEASES'),"
-        "'degu':('api.species.degu_diseases','DISEASES'),"
-        "'bird':('api.species.bird_diseases','DISEASES'),"
-        "'parakeet':('api.species.parakeet_diseases','DISEASES'),"
-        "'parrot':('api.species.parrot_diseases','DISEASES'),"
-        "'reptile':('api.species.reptile_diseases','DISEASES'),"
-        "'tortoise':('api.species.tortoise_diseases','DISEASES'),"
-        "'snake':('api.species.snake_diseases','DISEASES'),"
-        "'lizard':('api.species.lizard_diseases','DISEASES'),"
-        "'amphibian':('api.species.amphibian_diseases','DISEASES'),"
-        "'fish':('api.species.fish_diseases','DISEASES'),"
-        "'exotic_other':('api.species.exotic_other_diseases','DISEASES'),"
-        "};"
-        "c={};"
-        "[(c.__setitem__(s,len(getattr(importlib.import_module(m),a,[]))))for s,(m,a) in M.items()];"
-        "print(json.dumps(c))"
+    # Counts what the site actually SERVES, not the raw module length. The browse
+    # and detail paths apply dedupe_disease_list + apply_canonical_map, so a raw
+    # len() advertised 7,094 diseases while only 6,520 could actually be opened —
+    # the other 574 were deduplicated duplicates or T103 merged/archived entries
+    # that now 301-redirect to their canonical record. Applying the same two
+    # transforms here keeps the advertised total equal to the browsable total by
+    # construction, so the two cannot drift apart again.
+    script = textwrap.dedent(
+        """
+        import importlib
+        import json
+        import sys
+
+        sys.path.insert(0, '.')
+        from api.species.helpers import dedupe_disease_list as _dd
+
+        try:
+            from api.species.canonical import apply_canonical_map as _cm
+        except Exception:
+            _cm = None
+
+        M = {
+            'dog': ('api.species.dog_diseases', 'DISEASES'),
+            'horse': ('api.species.equine_diseases', 'DISEASE_DATABASE'),
+            'cat': ('api.species.cat_diseases', 'DISEASES'),
+            'rabbit': ('api.species.rabbit_diseases', 'DISEASES'),
+            'hamster': ('api.species.hamster_diseases', 'DISEASES'),
+            'guinea_pig': ('api.species.guinea_pig_diseases', 'DISEASES'),
+            'chinchilla': ('api.species.chinchilla_diseases', 'DISEASES'),
+            'ferret': ('api.species.ferret_diseases', 'DISEASES'),
+            'hedgehog': ('api.species.hedgehog_diseases', 'DISEASES'),
+            'sugar_glider': ('api.species.sugar_glider_diseases', 'DISEASES'),
+            'degu': ('api.species.degu_diseases', 'DISEASES'),
+            'bird': ('api.species.bird_diseases', 'DISEASES'),
+            'parakeet': ('api.species.parakeet_diseases', 'DISEASES'),
+            'parrot': ('api.species.parrot_diseases', 'DISEASES'),
+            'reptile': ('api.species.reptile_diseases', 'DISEASES'),
+            'tortoise': ('api.species.tortoise_diseases', 'DISEASES'),
+            'snake': ('api.species.snake_diseases', 'DISEASES'),
+            'lizard': ('api.species.lizard_diseases', 'DISEASES'),
+            'amphibian': ('api.species.amphibian_diseases', 'DISEASES'),
+            'fish': ('api.species.fish_diseases', 'DISEASES'),
+            'exotic_other': ('api.species.exotic_other_diseases', 'DISEASES'),
+        }
+
+        c = {}
+        for s, (m, a) in M.items():
+            mod = importlib.import_module(m)
+            ds = _dd(getattr(mod, a, []) or [])
+            if _cm:
+                ds = _cm(ds, s)
+            c[s] = len(ds)
+            # Release each species before loading the next so peak RSS stays at
+            # roughly one species (~50 MB) instead of all 21 at once.
+            sys.modules.pop(m, None)
+            del mod, ds
+        print(json.dumps(c))
+        """
     )
     try:
         result = subprocess.run(
@@ -316,27 +347,27 @@ def _fallback_disease_counts() -> dict[str, int]:
     # Last resort: hardcoded counts (updated 2026-05-07 from Python modules)
     logger.warning("Using hardcoded disease counts as last-resort fallback")
     return {
-        "dog": 611,
+        "dog": 593,
         "cat": 546,
-        "horse": 621,
-        "rabbit": 451,
-        "hamster": 321,
-        "guinea_pig": 346,
-        "chinchilla": 278,
-        "ferret": 277,
-        "hedgehog": 244,
-        "sugar_glider": 221,
-        "degu": 200,
-        "bird": 551,
-        "parakeet": 458,
-        "parrot": 283,
-        "reptile": 286,
-        "tortoise": 286,
-        "snake": 248,
-        "lizard": 250,
-        "amphibian": 257,
-        "fish": 36,
-        "exotic_other": 289,
+        "horse": 598,
+        "rabbit": 419,
+        "hamster": 283,
+        "guinea_pig": 307,
+        "chinchilla": 229,
+        "ferret": 248,
+        "hedgehog": 226,
+        "sugar_glider": 198,
+        "degu": 178,
+        "bird": 500,
+        "parakeet": 412,
+        "parrot": 262,
+        "reptile": 265,
+        "tortoise": 255,
+        "snake": 222,
+        "lizard": 219,
+        "amphibian": 250,
+        "fish": 45,
+        "exotic_other": 265,
     }
 
 
@@ -389,6 +420,25 @@ def get_species_stats() -> dict[str, Any]:
                 "SELECT species, COUNT(*) AS cnt FROM diseases GROUP BY species ORDER BY species"
             ).fetchall():
                 disease_counts[row["species"]] = row["cnt"]
+
+            # Migration stores every row (dedup applied, canonical NOT), but the
+            # served view hides T103 merged/archived entries — they 301-redirect
+            # to their canonical record and cannot be opened. Counting raw rows
+            # would advertise diseases a user can never reach, so subtract the
+            # hidden ones here exactly as apply_canonical_map does on read.
+            try:
+                from api.species.canonical import _slug, hidden_slugs
+
+                for sp in list(disease_counts):
+                    hidden = hidden_slugs(sp)
+                    if not hidden:
+                        continue
+                    names = conn.execute("SELECT name FROM diseases WHERE species = ?", (sp,)).fetchall()
+                    n_hidden = sum(1 for r in names if _slug(r["name"] or "") in hidden)
+                    if n_hidden:
+                        disease_counts[sp] = max(0, disease_counts[sp] - n_hidden)
+            except Exception:
+                logger.debug("Could not apply canonical map to SQLite disease counts", exc_info=True)
 
             for row in conn.execute(
                 "SELECT species, COUNT(*) AS cnt FROM drug_species_info GROUP BY species"

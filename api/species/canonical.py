@@ -110,6 +110,33 @@ def _inherit_content(canonical: dict, siblings: list[Any]) -> dict:
     return out
 
 
+def hidden_slugs(species: str) -> set[str]:
+    """Return the slugs the served view hides for ``species``.
+
+    These are the archived entries plus the merged-away side of each merge, minus
+    any slug that is itself a canonical target (an identical-name cluster can
+    list the same slug on both sides). This is the single definition of "not
+    served", shared by :func:`apply_canonical_map` (which drops the entries) and
+    by the dashboard disease counts (which must not advertise entries that no
+    longer resolve). Empty set when the species has no canonical map.
+    """
+    cm = load_canonical(species)
+    if not cm:
+        return set()
+    canonical_slugs: set[str] = set()
+    merged: set[str] = set()
+    for mg in cm.get("merges", []):
+        cslug = mg.get("canonical", {}).get("slug")
+        if not cslug:
+            continue
+        canonical_slugs.add(cslug)
+        for m in mg.get("merged", []):
+            if m.get("slug"):
+                merged.add(m["slug"])
+    archived = {a.get("slug") for a in cm.get("archives", []) if a.get("slug")}
+    return (archived | merged) - canonical_slugs
+
+
 def apply_canonical_map(diseases: list[Any], species: str) -> list[Any]:
     """Apply the canonical map to a served disease list.
 
@@ -121,14 +148,12 @@ def apply_canonical_map(diseases: list[Any], species: str) -> list[Any]:
     if not cm or not diseases:
         return diseases
 
-    canonical_slugs: set[str] = set()
     redirect: dict[str, str] = {}
     inherit: dict[str, list[str]] = {}
     for mg in cm.get("merges", []):
         cslug = mg.get("canonical", {}).get("slug")
         if not cslug:
             continue
-        canonical_slugs.add(cslug)
         for m in mg.get("merged", []):
             mslug = m.get("slug")
             if mslug:
@@ -143,9 +168,9 @@ def apply_canonical_map(diseases: list[Any], species: str) -> list[Any]:
     for d in diseases:
         by_slug.setdefault(_slug(_name_of(d)), d)
 
-    # Never drop a slug that is itself a canonical target — an identical-name
-    # cluster (dedup already collapsed) can list the same slug on both sides.
-    dropped = (archived | set(redirect)) - canonical_slugs
+    # Single definition of "not served" (also used by the dashboard counts), so
+    # the advertised disease total can never drift from what actually resolves.
+    dropped = hidden_slugs(species)
     out: list[Any] = []
     for d in diseases:
         s = _slug(_name_of(d))
