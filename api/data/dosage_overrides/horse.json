@@ -4,7 +4,7 @@
   "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
   "counts": {
     "total": 78,
-    "filled": 0
+    "filled": 3
   },
   "entries": [
     {
@@ -55,17 +55,18 @@
       "missing": [
         "frequency"
       ],
-      "dosage": "",
-      "dosage_ja": "",
-      "source": "",
-      "evidence_grade": "",
+      "dosage": "Loading 12 mg/kg IV over 20 min; maintenance 6.65 mg/kg IV over 20 min q12h",
+      "dosage_ja": "負荷 12 mg/kg 静注（20分かけて）; 維持 6.65 mg/kg 静注（20分かけて）12時間毎",
+      "source": "Duran SH, Ravis WR, Pedersoli WM, Schumacher J. Pharmacokinetics of phenobarbital in the horse. Am J Vet Res. 1987;48(5):807-810. PMID 3592381",
+      "evidence_grade": "A",
       "review_status": "draft",
       "pubmed_candidates": [
         "3592381",
         "32154280",
         "1524295"
       ],
-      "pubmed_hits": 19
+      "pubmed_hits": 19,
+      "note_ja": "馬6頭の一次PK試験。終末相半減期18.3時間。論文が明示した推奨regimen（peak約29 µg/mL・trough約15 µg/mL）。"
     },
     {
       "drug_id": "glucosamine",
@@ -268,17 +269,18 @@
         "route",
         "frequency"
       ],
-      "dosage": "",
-      "dosage_ja": "",
-      "source": "",
-      "evidence_grade": "",
+      "dosage": "Loading 120 mg/kg PO q24h for 5 days, then maintenance 90-100 mg/kg PO q24h",
+      "dosage_ja": "負荷 120 mg/kg 経口 24時間毎×5日間、以後 維持 90-100 mg/kg 経口 24時間毎",
+      "source": "Raidal SL, Edwards S. Pharmacokinetics of potassium bromide in adult horses. Aust Vet J. 2008;86(5):187-193. PMID 18454837",
+      "evidence_grade": "A",
       "review_status": "draft",
       "pubmed_candidates": [
         "18454837",
         "20836143",
         "16035184"
       ],
-      "pubmed_hits": 4
+      "pubmed_hits": 4,
+      "note_ja": "馬の一次PK試験。半減期75時間。⚠️論文は血中濃度が他種の治療域に達すると予測したもので、馬での抗痙攣効果は未検証（原著が further investigation を要すると明記）。現在の登録は「一般的には使用されない」で、この位置づけは維持すべき。"
     },
     {
       "drug_id": "melatonin",
@@ -771,17 +773,18 @@
       "missing": [
         "frequency"
       ],
-      "dosage": "",
-      "dosage_ja": "",
-      "source": "",
-      "evidence_grade": "",
+      "dosage": "0.5 mg by inhalation q4h during the day (study regimen: 2 days, total 4 mg)",
+      "dosage_ja": "0.5 mg 吸入 4時間毎（日中）（試験regimen: 2日間・総量4 mg）",
+      "source": "Detection and pharmacokinetics of salbutamol in thoroughbred racehorses following inhaled administration. J Vet Pharmacol Ther. 2015 Feb. PMID 25229326",
+      "evidence_grade": "A",
       "review_status": "draft",
       "pubmed_candidates": [
         "34281643",
         "25229326",
         "28097668"
       ],
-      "pubmed_hits": 52
+      "pubmed_hits": 52,
+      "note_ja": "⚠️原著は薬物規制（medication control）目的のPK試験であり、臨床効果試験ではない。投与間隔の根拠としては使えるが、適応・効果は別途フォーミュラリ確認が必要。"
     },
     {
       "drug_id": "ipratropium",
