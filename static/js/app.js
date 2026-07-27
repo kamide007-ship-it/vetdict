@@ -912,6 +912,32 @@ function scrollToAnchor(el,opts){
   raf=requestAnimationFrame(settle);
 }
 
+/* In-page anchor links (skip-link, "#speciesSection", reference jumps).
+   The browser's native jump uses html{scroll-padding-top}, which is only as
+   fresh as the last measurement — on a first click the breadcrumb bar has not
+   been shown yet, so the skip-link landed 38px under the header. Routing these
+   clicks through scrollToAnchor() re-measures at click time and re-anchors after
+   the layout settles, so anchor links land in the same correct place as tab
+   navigation. View hashes (#database, #chat, …) are deliberately left alone:
+   those are routed to switchView() by the hash router. */
+document.addEventListener("click",function(e){
+  const a=e.target.closest?e.target.closest('a[href^="#"]'):null;
+  if(!a)return;
+  const href=a.getAttribute("href")||"";
+  if(href==="#"||href.length<2)return;
+  const id=decodeURIComponent(href.slice(1));
+  if(["checker","database","chat","drugs","anesthesia","emergency"].includes(id))return;
+  const target=document.getElementById(id);
+  if(!target)return;
+  e.preventDefault();
+  /* Keep the URL bookmarkable, and move focus so the jump is announced to
+     screen readers rather than being a silent visual-only scroll. */
+  try{history.pushState(null,null,href);}catch(_){/* ignore */}
+  if(!target.hasAttribute("tabindex"))target.setAttribute("tabindex","-1");
+  try{target.focus({preventScroll:true});}catch(_){target.focus();}
+  scrollToAnchor(target);
+});
+
 /* Session engagement tracking */
 const _sessionStart=Date.now();
 let _maxScrollPct=0;
