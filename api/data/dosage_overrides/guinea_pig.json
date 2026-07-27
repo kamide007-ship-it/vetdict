@@ -1,0 +1,245 @@
+{
+  "species": "guinea_pig",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 12,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "guinea_pig",
+      "current_dosage": "0.01 mg/kg SC/IM 0.01 mg/kg 皮下/筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "9499574",
+        "1686529",
+        "3390659"
+      ],
+      "pubmed_hits": 106
+    },
+    {
+      "drug_id": "scopolamine_butylbromide",
+      "drug": "Scopolamine Butylbromide",
+      "species": "guinea_pig",
+      "current_dosage": "0.3-0.5 mg/kg SC/IM 0.3-0.5 mg/kg 皮下/筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "821493",
+        "6661345",
+        "8011004"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "guinea_pig",
+      "current_dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "guinea_pig",
+      "current_dosage": "1 drop q12h 1滴 12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "40380302",
+        "29847673",
+        "31330142"
+      ],
+      "pubmed_hits": 5
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "guinea_pig",
+      "current_dosage": "Nebulized 0.5 mg/ml for 10-15 min",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "1974668",
+        "9499574",
+        "26364938"
+      ],
+      "pubmed_hits": 328
+    },
+    {
+      "drug_id": "ipratropium",
+      "drug": "Ipratropium Bromide",
+      "species": "guinea_pig",
+      "current_dosage": "Nebulized: 250 μg q8h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "155286",
+        "20093184",
+        "16895843"
+      ],
+      "pubmed_hits": 49
+    },
+    {
+      "drug_id": "cromoglycate",
+      "drug": "Sodium Cromoglycate",
+      "species": "guinea_pig",
+      "current_dosage": "Nebulized: 10 mg q8h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "12412677",
+        "35850712",
+        "20359123"
+      ],
+      "pubmed_hits": 137
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "guinea_pig",
+      "current_dosage": "1/4-1/2 tsp per meal",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "23065836",
+        "7658161",
+        "15539279"
+      ],
+      "pubmed_hits": 15
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "guinea_pig",
+      "current_dosage": "5 mg/kg PO 1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "psyllium_husk",
+      "drug": "Psyllium Husk (Veterinary Fiber)",
+      "species": "guinea_pig",
+      "current_dosage": "少量を食事に混合",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "23065836",
+        "21082352",
+        "11951574"
+      ],
+      "pubmed_hits": 3
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "guinea_pig",
+      "current_dosage": "15-20 mg/kg 局所 月1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "23039980",
+        "21506831"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "guinea_pig",
+      "current_dosage": "200-500 μg/kg SC q7-14日",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "1609483",
+        "1553807",
+        "21178322"
+      ],
+      "pubmed_hits": 15
+    }
+  ]
+}

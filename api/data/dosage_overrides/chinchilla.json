@@ -1,0 +1,48 @@
+{
+  "species": "chinchilla",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 2,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "chinchilla",
+      "current_dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "19011676",
+        "8052083",
+        "21493267"
+      ],
+      "pubmed_hits": 11
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "chinchilla",
+      "current_dosage": "1/4 tsp per meal",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    }
+  ]
+}

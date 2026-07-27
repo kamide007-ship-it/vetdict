@@ -1,0 +1,286 @@
+{
+  "species": "tortoise",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 15,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "dexamethasone",
+      "drug": "Dexamethasone",
+      "species": "tortoise",
+      "current_dosage": "0.5-2 mg/kg IM 0.5-2 mg/kg 筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2864169",
+        "37505878",
+        "15521652"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "neomycin",
+      "drug": "Neomycin",
+      "species": "tortoise",
+      "current_dosage": "Topical application 外用",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38217353",
+        "663923",
+        "40431566"
+      ],
+      "pubmed_hits": 3
+    },
+    {
+      "drug_id": "polymyxin_b",
+      "drug": "Polymyxin B",
+      "species": "tortoise",
+      "current_dosage": "Topical application 外用",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "acetazolamide",
+      "drug": "Acetazolamide",
+      "species": "tortoise",
+      "current_dosage": "Not established",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2481401",
+        "6133903",
+        "2984451"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "tortoise",
+      "current_dosage": "30-50 mg/kg PO with meals",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11599439"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "tortoise",
+      "current_dosage": "1 mEq/kg ICe slow",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6930836",
+        "17431640",
+        "2984451"
+      ],
+      "pubmed_hits": 6
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "tortoise",
+      "current_dosage": "0.1-0.6 mg/kg IM/IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "vitamin_d3",
+      "drug": "Calcitriol (1,25-Dihydroxyvitamin D3)",
+      "species": "tortoise",
+      "current_dosage": "データ限定的; UVB照射が第一選択",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "tortoise",
+      "current_dosage": "5 mg/kg PO 1回; 14日後繰返し",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "32508422",
+        "27010285"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "tortoise",
+      "current_dosage": "患部に塗布",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "tortoise",
+      "current_dosage": "100 mg/kg IV/ICe",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "39730713",
+        "37142234",
+        "38688326"
+      ],
+      "pubmed_hits": 8
+    },
+    {
+      "drug_id": "vitamin_a_injectable",
+      "drug": "Vitamin A Injectable",
+      "species": "tortoise",
+      "current_dosage": "1,000-2,000 IU/kg IM; 14日後繰返し",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6438954"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "tortoise",
+      "current_dosage": "200 μg/kg PO/SC 1回; 14日後繰返し",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6689009",
+        "32615745"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "tortoise",
+      "current_dosage": "餌にダスティング q1-2日",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "uvb_therapy",
+      "drug": "UVB Phototherapy (Reptile Husbandry)",
+      "species": "tortoise",
+      "current_dosage": "10.0-12.0% UVB; 10-12時間/日",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    }
+  ]
+}

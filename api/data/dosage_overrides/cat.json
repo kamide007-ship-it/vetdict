@@ -1,0 +1,1615 @@
+{
+  "species": "cat",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 80,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "ecvn_no_pain_quick_stop",
+      "drug": "No Pain Quick Stop (Equine & Canine Vet Nutrition)",
+      "species": "cat",
+      "current_dosage": "Apply directly to bleeding site 出血部位に直接塗布",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "cat",
+      "current_dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11940242",
+        "17973840",
+        "12465823"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "cat",
+      "current_dosage": "4.7 mg implant SC 4.7 mg インプラント皮下",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "24947859",
+        "24947857",
+        "28025851"
+      ],
+      "pubmed_hits": 41
+    },
+    {
+      "drug_id": "pergolide",
+      "drug": "Pergolide",
+      "species": "cat",
+      "current_dosage": "Not commonly used 一般的には使用されない",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37346867",
+        "3503920",
+        "2987478"
+      ],
+      "pubmed_hits": 3
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "cat",
+      "current_dosage": "30-90 mg/kg PO with meals 30-90 mg/kg 経口 食事と共に",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34088322",
+        "36379396",
+        "31141523"
+      ],
+      "pubmed_hits": 22
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "cat",
+      "current_dosage": "1 drop q12-24h 1滴 12-24時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11940242",
+        "12465823",
+        "9154279"
+      ],
+      "pubmed_hits": 18
+    },
+    {
+      "drug_id": "iron_dextran",
+      "drug": "Iron Dextran",
+      "species": "cat",
+      "current_dosage": "10-20 mg/kg IM 10-20 mg/kg 筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "24120471",
+        "29766365",
+        "15550752"
+      ],
+      "pubmed_hits": 15
+    },
+    {
+      "drug_id": "desmopressin",
+      "drug": "Desmopressin (DDAVP)",
+      "species": "cat",
+      "current_dosage": "1-2 drops intranasally q12-24h 1-2滴 鼻腔内 12-24時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26815581",
+        "32619339",
+        "41443540"
+      ],
+      "pubmed_hits": 17
+    },
+    {
+      "drug_id": "cosyntropin",
+      "drug": "Cosyntropin (Cortrosyn/Synacthen)",
+      "species": "cat",
+      "current_dosage": "125 µg/cat IV/IM; measure cortisol at 0 and 60 min 125 µg/匹 静注/筋注；投与前と投与後60分にコルチゾール測定",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2829669",
+        "21235369",
+        "1510316"
+      ],
+      "pubmed_hits": 12
+    },
+    {
+      "drug_id": "cloprostenol",
+      "drug": "Cloprostenol (Estrumate)",
+      "species": "cat",
+      "current_dosage": "1-2.5 μg/kg IM 1-2.5 μg/kg 筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11434936",
+        "12606640",
+        "23884637"
+      ],
+      "pubmed_hits": 13
+    },
+    {
+      "drug_id": "selenium_vitamin_e",
+      "drug": "Selenium + Vitamin E (Periparturient Supplement)",
+      "species": "cat",
+      "current_dosage": "Se 0.05-0.1 mg/day PO; Vitamin E 50-100 IU/day PO Se 0.05-0.1 mg/日 経口；ビタミンE 50-100 IU/日 経口",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3927795",
+        "1379446",
+        "30987549"
+      ],
+      "pubmed_hits": 54
+    },
+    {
+      "drug_id": "remifentanil",
+      "drug": "Remifentanil",
+      "species": "cat",
+      "current_dosage": "CRI: 5-30 μg/kg/hr CRI: 5-30 μg/kg/時",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "28391757",
+        "18380586",
+        "36898954"
+      ],
+      "pubmed_hits": 24
+    },
+    {
+      "drug_id": "atracurium",
+      "drug": "Atracurium",
+      "species": "cat",
+      "current_dosage": "0.1-0.2 mg/kg IV 0.1-0.2 mg/kg 静注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6391530",
+        "6132564",
+        "6100317"
+      ],
+      "pubmed_hits": 36
+    },
+    {
+      "drug_id": "nitroprusside",
+      "drug": "Sodium Nitroprusside",
+      "species": "cat",
+      "current_dosage": "0.5-5 μg/kg/min CRI",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "1539722",
+        "38725382",
+        "8537146"
+      ],
+      "pubmed_hits": 145
+    },
+    {
+      "drug_id": "nitroglycerin",
+      "drug": "Nitroglycerin",
+      "species": "cat",
+      "current_dosage": "2% ointment: 0.25 inch strip to pinna q6-8h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3543356",
+        "2569265",
+        "6121616"
+      ],
+      "pubmed_hits": 80
+    },
+    {
+      "drug_id": "phenylephrine",
+      "drug": "Phenylephrine",
+      "species": "cat",
+      "current_dosage": "0.5-2 μg/kg/min CRI",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "30651655",
+        "41874620",
+        "10393477"
+      ],
+      "pubmed_hits": 180
+    },
+    {
+      "drug_id": "norepinephrine",
+      "drug": "Norepinephrine",
+      "species": "cat",
+      "current_dosage": "0.05-1 μg/kg/min CRI",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "14007730",
+        "2419691",
+        "4392814"
+      ],
+      "pubmed_hits": 1387
+    },
+    {
+      "drug_id": "amiodarone",
+      "drug": "Amiodarone",
+      "species": "cat",
+      "current_dosage": "Not recommended due to toxicity",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37597360",
+        "9493278",
+        "39897156"
+      ],
+      "pubmed_hits": 35
+    },
+    {
+      "drug_id": "mexiletine",
+      "drug": "Mexiletine",
+      "species": "cat",
+      "current_dosage": "Not commonly used",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3595441",
+        "30899300",
+        "3196380"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "verapamil",
+      "drug": "Verapamil",
+      "species": "cat",
+      "current_dosage": "0.025 mg/kg slow IV; rarely used PO",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2956861",
+        "26190674",
+        "30139544"
+      ],
+      "pubmed_hits": 143
+    },
+    {
+      "drug_id": "ivabradine",
+      "drug": "Ivabradine",
+      "species": "cat",
+      "current_dosage": "Not established",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "21418320",
+        "21118419",
+        "22056748"
+      ],
+      "pubmed_hits": 6
+    },
+    {
+      "drug_id": "fluticasone",
+      "drug": "Fluticasone Propionate",
+      "species": "cat",
+      "current_dosage": "44-220 μg/puff q12h via spacer with mask",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37675792",
+        "38729884",
+        "26730183"
+      ],
+      "pubmed_hits": 39
+    },
+    {
+      "drug_id": "salbutamol",
+      "drug": "Salbutamol (Albuterol)",
+      "species": "cat",
+      "current_dosage": "90 μg/puff: 1 puff via spacer q30min (acute) then q4-6h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37675792",
+        "1977520",
+        "31584145"
+      ],
+      "pubmed_hits": 75
+    },
+    {
+      "drug_id": "ipratropium",
+      "drug": "Ipratropium Bromide",
+      "species": "cat",
+      "current_dosage": "Nebulized: 250 μg q8h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2962077",
+        "19699123",
+        "6125398"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "hydrocodone",
+      "drug": "Hydrocodone",
+      "species": "cat",
+      "current_dosage": "Not recommended",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "40253741",
+        "20006596",
+        "30646207"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "codeine",
+      "drug": "Codeine",
+      "species": "cat",
+      "current_dosage": "Not recommended",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38756374",
+        "38938779",
+        "4390406"
+      ],
+      "pubmed_hits": 80
+    },
+    {
+      "drug_id": "sacubitril_valsartan",
+      "drug": "Sacubitril/Valsartan",
+      "species": "cat",
+      "current_dosage": "Not established",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "30820802",
+        "30172655",
+        "36654091"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "cromoglycate",
+      "drug": "Sodium Cromoglycate",
+      "species": "cat",
+      "current_dosage": "Nebulized: 20 mg q8-12h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "103368",
+        "6814787",
+        "6125398"
+      ],
+      "pubmed_hits": 8
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "cat",
+      "current_dosage": "1-4 tsp per meal",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "41631677",
+        "37630746",
+        "16625555"
+      ],
+      "pubmed_hits": 8
+    },
+    {
+      "drug_id": "benzoyl_peroxide",
+      "drug": "Benzoyl Peroxide",
+      "species": "cat",
+      "current_dosage": "2.5% gel to chin q24-48h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34644989",
+        "30695710",
+        "11809596"
+      ],
+      "pubmed_hits": 5
+    },
+    {
+      "drug_id": "denamarin",
+      "drug": "SAMe + Silybin (Denamarin)",
+      "species": "cat",
+      "current_dosage": "Cat/small dog formulation: 90mg SAMe + 9mg silybin q24h on empty stomach",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "39107467",
+        "29247771"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "vitamin_e",
+      "drug": "Vitamin E (Alpha-tocopherol)",
+      "species": "cat",
+      "current_dosage": "100-400 IU/day PO",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3927795",
+        "37200753",
+        "1379446"
+      ],
+      "pubmed_hits": 500
+    },
+    {
+      "drug_id": "pilocarpine",
+      "drug": "Pilocarpine",
+      "species": "cat",
+      "current_dosage": "1-2%: 1 drop q8-12h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "31672775",
+        "4868992",
+        "7410151"
+      ],
+      "pubmed_hits": 70
+    },
+    {
+      "drug_id": "tropicamide",
+      "drug": "Tropicamide",
+      "species": "cat",
+      "current_dosage": "1%: 1 drop",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "8873544",
+        "33847093",
+        "21923827"
+      ],
+      "pubmed_hits": 11
+    },
+    {
+      "drug_id": "hyaluronic_acid_ia",
+      "drug": "Hyaluronic Acid (Intra-articular)",
+      "species": "cat",
+      "current_dosage": "2-5 mg/joint IA",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "36420162",
+        "35386328",
+        "36902203"
+      ],
+      "pubmed_hits": 67
+    },
+    {
+      "drug_id": "misoprostol_gi",
+      "drug": "Misoprostol (Gastroprotection)",
+      "species": "cat",
+      "current_dosage": "Not commonly used in cats",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "30378711",
+        "8503156",
+        "3932042"
+      ],
+      "pubmed_hits": 14
+    },
+    {
+      "drug_id": "l_asparaginase",
+      "drug": "L-Asparaginase",
+      "species": "cat",
+      "current_dosage": "400 IU/kg IM",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38825481",
+        "38152842",
+        "3283998"
+      ],
+      "pubmed_hits": 29
+    },
+    {
+      "drug_id": "epofolaner",
+      "drug": "Epofolaner (Zenrelia)",
+      "species": "cat",
+      "current_dosage": "Not approved for cats",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "moxidectin_injectable",
+      "drug": "Moxidectin Injectable (ProHeart)",
+      "species": "cat",
+      "current_dosage": "Not approved for cats",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34717929",
+        "20349196",
+        "16198822"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "eprinomectin",
+      "drug": "Eprinomectin",
+      "species": "cat",
+      "current_dosage": "0.5 mg/kg topical (as component of Broadline)",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34717929",
+        "33812451",
+        "24703069"
+      ],
+      "pubmed_hits": 53
+    },
+    {
+      "drug_id": "aglepristone",
+      "drug": "Aglepristone (Alizin)",
+      "species": "cat",
+      "current_dosage": "10 mg/kg SC on days 1, 2 (repeat day 7 if needed)",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "29656772",
+        "29568542",
+        "12476814"
+      ],
+      "pubmed_hits": 17
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "cat",
+      "current_dosage": "30-90 mg/kg/day PO divided with meals",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34088322",
+        "36379396",
+        "31141523"
+      ],
+      "pubmed_hits": 22
+    },
+    {
+      "drug_id": "lanthanum_carbonate",
+      "drug": "Lanthanum Carbonate (Renalzin)",
+      "species": "cat",
+      "current_dosage": "200 mg/cat/meal (Renalzin paste) or 25-50 mg/kg/day",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "21069570",
+        "22305206",
+        "25363785"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "selamectin_sarolaner_combo",
+      "drug": "Selamectin+Sarolaner (Revolution Plus)",
+      "species": "cat",
+      "current_dosage": "6 mg/kg selamectin + 1 mg/kg sarolaner topically monthly",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "30470638",
+        "28395750",
+        "32593057"
+      ],
+      "pubmed_hits": 11
+    },
+    {
+      "drug_id": "imidacloprid_flumethrin",
+      "drug": "Imidacloprid+Flumethrin (Seresto)",
+      "species": "cat",
+      "current_dosage": "Cat collar (1.25g imidacloprid + 0.56g flumethrin)",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "22839305",
+        "22541037",
+        "22498105"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "methimazole_transdermal",
+      "drug": "Methimazole Transdermal (PLO gel)",
+      "species": "cat",
+      "current_dosage": "2.5-5 mg/ear q12h (apply to inner pinna, alternate ears)",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "16584027",
+        "17619011",
+        "12670432"
+      ],
+      "pubmed_hits": 18
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "cat",
+      "current_dosage": "0.5-1 mEq/kg IV slow",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2180186",
+        "40562375",
+        "9610496"
+      ],
+      "pubmed_hits": 65
+    },
+    {
+      "drug_id": "potassium_chloride",
+      "drug": "Potassium Chloride",
+      "species": "cat",
+      "current_dosage": "0.5 mEq/kg/hr IV max",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38589570",
+        "9842116",
+        "24930082"
+      ],
+      "pubmed_hits": 207
+    },
+    {
+      "drug_id": "hetastarch",
+      "drug": "Hetastarch (HES 6%)",
+      "species": "cat",
+      "current_dosage": "5-10 mL/kg/day IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "1282053",
+        "25158892",
+        "8923586"
+      ],
+      "pubmed_hits": 24
+    },
+    {
+      "drug_id": "activated_charcoal",
+      "drug": "Activated Charcoal",
+      "species": "cat",
+      "current_dosage": "1-2 g/kg PO",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "23796485",
+        "23796484",
+        "2180186"
+      ],
+      "pubmed_hits": 58
+    },
+    {
+      "drug_id": "apomorphine",
+      "drug": "Apomorphine",
+      "species": "cat",
+      "current_dosage": "使用しない",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "4040568",
+        "6213419",
+        "40326551"
+      ],
+      "pubmed_hits": 126
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "cat",
+      "current_dosage": "抗炎症: 0.1-0.2 mg/kg IV/IM",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34351657",
+        "1559550",
+        "2829669"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "sab_antivenom",
+      "drug": "Snake Antivenom (Polyvalent)",
+      "species": "cat",
+      "current_dosage": "1バイアル IV slow",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "17265901",
+        "37065246",
+        "29068247"
+      ],
+      "pubmed_hits": 25
+    },
+    {
+      "drug_id": "omega_3_fatty_acids",
+      "drug": "Omega-3 Fatty Acids (EPA/DHA)",
+      "species": "cat",
+      "current_dosage": "EPA 30-40 mg/kg/day + DHA 20-25 mg/kg/day",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "40495687",
+        "22087720",
+        "39827310"
+      ],
+      "pubmed_hits": 151
+    },
+    {
+      "drug_id": "glucosamine_chondroitin",
+      "drug": "Glucosamine/Chondroitin Sulfate",
+      "species": "cat",
+      "current_dosage": "グルコサミン 125-250 mg/cat/day",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34719996"
+      ],
+      "pubmed_hits": 1
+    },
+    {
+      "drug_id": "cobalamin_injection",
+      "drug": "Cobalamin (Vitamin B12) Injectable",
+      "species": "cat",
+      "current_dosage": "250 μg SC q7日×6週、以後月1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37174511",
+        "14738200",
+        "4864372"
+      ],
+      "pubmed_hits": 51
+    },
+    {
+      "drug_id": "eprinomectin_topical",
+      "drug": "Eprinomectin (Pour-on)",
+      "species": "cat",
+      "current_dosage": "0.5 mg/kg 局所（スポットオン）; ブロードライン配合",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "34717929",
+        "33812451",
+        "24703069"
+      ],
+      "pubmed_hits": 53
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "cat",
+      "current_dosage": "5-10 mg/kg PO 1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2368952",
+        "29017390",
+        "29099259"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "pentosan_polysulfate",
+      "drug": "Pentosan Polysulfate (Cartrophen Vet)",
+      "species": "cat",
+      "current_dosage": "2-3 mg/kg SC 1回/週 × 4回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26116618",
+        "10078353",
+        "19622059"
+      ],
+      "pubmed_hits": 5
+    },
+    {
+      "drug_id": "fentanyl_patch",
+      "drug": "Fentanyl Transdermal Patch",
+      "species": "cat",
+      "current_dosage": "25μgパッチ; 効果12-24h後",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "15533967",
+        "11500227",
+        "11443596"
+      ],
+      "pubmed_hits": 12
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "cat",
+      "current_dosage": "患部に塗布、包帯で被覆",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "poloxamer_407",
+      "drug": "Poloxamer 407 Gel (Pluronic F127)",
+      "species": "cat",
+      "current_dosage": "経皮投与用基剤: 耳介内側に塗布",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "29702483",
+        "15900936"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "psyllium_husk",
+      "drug": "Psyllium Husk (Veterinary Fiber)",
+      "species": "cat",
+      "current_dosage": "0.5-1 tsp/食事に混合",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "33923513",
+        "21571563"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "cat",
+      "current_dosage": "6-12 mg/kg 局所 月1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "10940537",
+        "31133493",
+        "19032763"
+      ],
+      "pubmed_hits": 91
+    },
+    {
+      "drug_id": "imidacloprid_topical",
+      "drug": "Imidacloprid 10% Spot-on (Advantage)",
+      "species": "cat",
+      "current_dosage": "10 mg/kg 局所 月1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "19575226",
+        "32051008",
+        "22782476"
+      ],
+      "pubmed_hits": 25
+    },
+    {
+      "drug_id": "doxorubicin_injectable",
+      "drug": "Doxorubicin Injectable",
+      "species": "cat",
+      "current_dosage": "1 mg/kg IV q21日（最大20-25 mg/cat）; 累積6回まで",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "30678671",
+        "35240890",
+        "34354422"
+      ],
+      "pubmed_hits": 84
+    },
+    {
+      "drug_id": "cyclophosphamide_oral",
+      "drug": "Cyclophosphamide Oral",
+      "species": "cat",
+      "current_dosage": "200-250 mg/m² PO q21日",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "31672775",
+        "38152842",
+        "32564869"
+      ],
+      "pubmed_hits": 35
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "cat",
+      "current_dosage": "85-100 mg/kg IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "8465493",
+        "4853259",
+        "4205268"
+      ],
+      "pubmed_hits": 524
+    },
+    {
+      "drug_id": "oxyglobin",
+      "drug": "Oxyglobin (HBOC)",
+      "species": "cat",
+      "current_dosage": "3-5 mL/kg IV slow",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "18455461",
+        "14664199",
+        "19569491"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "cat",
+      "current_dosage": "フィラリア予防: 24 μg/kg PO 月1回; 耳ダニ: 200 μg/kg SC 1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "8784535",
+        "28078983",
+        "36326478"
+      ],
+      "pubmed_hits": 211
+    },
+    {
+      "drug_id": "cranberry_extract",
+      "drug": "Cranberry Extract (UTI Prevention)",
+      "species": "cat",
+      "current_dosage": "犬用製品の猫用量は確立されていない。獣医用サプリメント使用",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "27299641",
+        "39720934",
+        "34346287"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "thyroxine_monitoring",
+      "drug": "Free T4 by Equilibrium Dialysis (Diagnostic)",
+      "species": "cat",
+      "current_dosage": "検査のみ（参考範囲: 12-33 pmol/L）",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38024778",
+        "29395158"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "deferoxamine",
+      "drug": "Deferoxamine (Desferal)",
+      "species": "cat",
+      "current_dosage": "10-40 mg/kg IM/IV slow",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38973337",
+        "24120471",
+        "7717033"
+      ],
+      "pubmed_hits": 33
+    },
+    {
+      "drug_id": "zinc_acetate",
+      "drug": "Zinc Acetate",
+      "species": "cat",
+      "current_dosage": "データ限定",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "38849601",
+        "6298164",
+        "40106486"
+      ],
+      "pubmed_hits": 10
+    },
+    {
+      "drug_id": "deslorelin_implant",
+      "drug": "Deslorelin Implant (Suprelorin)",
+      "species": "cat",
+      "current_dosage": "4.7 mg インプラント SC",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "24947859",
+        "24947857",
+        "26323800"
+      ],
+      "pubmed_hits": 36
+    },
+    {
+      "drug_id": "lomustine_oral",
+      "drug": "Lomustine (CCNU) Oral",
+      "species": "cat",
+      "current_dosage": "50-60 mg/m² PO q3-6週",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "27094020",
+        "41072475",
+        "34631850"
+      ],
+      "pubmed_hits": 26
+    },
+    {
+      "drug_id": "mirtazapine_transdermal",
+      "drug": "Mirtazapine Transdermal (Mirataz)",
+      "species": "cat",
+      "current_dosage": "1.5インチリボン 耳介内側 q48h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "30004120",
+        "35868201",
+        "38217071"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "latanoprost_ophthalmic",
+      "drug": "Latanoprost (Xalatan)",
+      "species": "cat",
+      "current_dosage": "1 drop affected eye(s) q12-24h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11940242",
+        "12465823",
+        "9154279"
+      ],
+      "pubmed_hits": 18
+    },
+    {
+      "drug_id": "fluticasone_inhaler",
+      "drug": "Fluticasone (Flovent HFA)",
+      "species": "cat",
+      "current_dosage": "44-220 μg/puff via AeroKat spacer q12h",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "37675792",
+        "38729884",
+        "26730183"
+      ],
+      "pubmed_hits": 39
+    },
+    {
+      "drug_id": "emodepside_topical",
+      "drug": "Emodepside (Profender component)",
+      "species": "cat",
+      "current_dosage": "3 mg/kg topical (spot-on with praziquantel)",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "39817180",
+        "34293063",
+        "35991087"
+      ],
+      "pubmed_hits": 35
+    }
+  ]
+}

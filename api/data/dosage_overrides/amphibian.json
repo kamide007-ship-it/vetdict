@@ -1,0 +1,126 @@
+{
+  "species": "amphibian",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 6,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "praziquantel",
+      "drug": "Praziquantel",
+      "species": "amphibian",
+      "current_dosage": "8-24 mg/kg PO/ICe or 10 mg/L bath × 3h",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3328390",
+        "26033021",
+        "26080526"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "ms222_fish",
+      "drug": "Tricaine Methanesulfonate (MS-222)",
+      "species": "amphibian",
+      "current_dosage": "鎮静: 0.5-1 g/L 浸漬; 麻酔: 1-3 g/L",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "17592187",
+        "10367638",
+        "35339154"
+      ],
+      "pubmed_hits": 18
+    },
+    {
+      "drug_id": "eugenol_fish",
+      "drug": "Eugenol (Clove Oil)",
+      "species": "amphibian",
+      "current_dosage": "鎮静: 50-100 mg/L 浸漬",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "40650895",
+        "16846463",
+        "23615302"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "calcium_supplement_reptile",
+      "drug": "Calcium Carbonate Powder (Reptile)",
+      "species": "amphibian",
+      "current_dosage": "餌の昆虫にダスティング",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "uvb_therapy",
+      "drug": "UVB Phototherapy (Reptile Husbandry)",
+      "species": "amphibian",
+      "current_dosage": "2.0-5.0% UVB; 一部種は不要",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "calcium_gluconate_oral",
+      "drug": "Calcium Gluconate (Oral)",
+      "species": "amphibian",
+      "current_dosage": "Dusted on prey items",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "27885969",
+        "38875201",
+        "6983618"
+      ],
+      "pubmed_hits": 10
+    }
+  ]
+}

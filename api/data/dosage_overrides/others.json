@@ -1,0 +1,29 @@
+{
+  "species": "others",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 1,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "monepantel",
+      "drug": "Monepantel (Zolvix)",
+      "species": "others",
+      "current_dosage": "2.5 mg/kg PO (sheep); 3.75 mg/kg PO (goat)",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26995725"
+      ],
+      "pubmed_hits": 1
+    }
+  ]
+}

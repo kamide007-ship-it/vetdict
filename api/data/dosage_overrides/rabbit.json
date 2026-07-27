@@ -1,0 +1,609 @@
+{
+  "species": "rabbit",
+  "schema_version": 1,
+  "note": "獣医師記入用。dosage と source を埋め、review_status を published にした行だけが配信される（api/drug_dosage_overrides.py の fail-closed ゲート）。source が空のまま published にしても配信されない。evidence_grade: A=当該種の一次文献 / B=近縁種からの外挿 / C=フォーミュラリの経験的用量。",
+  "counts": {
+    "total": 30,
+    "filled": 0
+  },
+  "entries": [
+    {
+      "drug_id": "terbutaline",
+      "drug": "Terbutaline",
+      "species": "rabbit",
+      "current_dosage": "0.01 mg/kg SC 0.01 mg/kg 皮下",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26854737",
+        "26545974",
+        "2865990"
+      ],
+      "pubmed_hits": 75
+    },
+    {
+      "drug_id": "scopolamine_butylbromide",
+      "drug": "Scopolamine Butylbromide",
+      "species": "rabbit",
+      "current_dosage": "0.3-0.5 mg/kg SC/IM 0.3-0.5 mg/kg 皮下/筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "821493",
+        "11490303",
+        "1238841"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "n_acetylcysteine",
+      "drug": "N-Acetylcysteine (NAC)",
+      "species": "rabbit",
+      "current_dosage": "140 mg/kg IV/PO loading 140 mg/kg 静注/経口初回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "35698331",
+        "39089892",
+        "37792044"
+      ],
+      "pubmed_hits": 173
+    },
+    {
+      "drug_id": "dorzolamide",
+      "drug": "Dorzolamide",
+      "species": "rabbit",
+      "current_dosage": "1 drop q8-12h 1滴 8-12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "10665514",
+        "28391041",
+        "33509004"
+      ],
+      "pubmed_hits": 81
+    },
+    {
+      "drug_id": "deslorelin",
+      "drug": "Deslorelin",
+      "species": "rabbit",
+      "current_dosage": "4.7 mg implant SC 4.7 mg インプラント皮下",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "33276392",
+        "29655478",
+        "24947865"
+      ],
+      "pubmed_hits": 9
+    },
+    {
+      "drug_id": "aluminum_hydroxide",
+      "drug": "Aluminum Hydroxide",
+      "species": "rabbit",
+      "current_dosage": "30-90 mg/kg PO with meals 30-90 mg/kg 経口 食事と共に",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "12184363",
+        "7565498",
+        "6886995"
+      ],
+      "pubmed_hits": 99
+    },
+    {
+      "drug_id": "latanoprost",
+      "drug": "Latanoprost",
+      "species": "rabbit",
+      "current_dosage": "1 drop q12h 1滴 12時間毎",
+      "missing": [
+        "route"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "16252016",
+        "37582270",
+        "27463221"
+      ],
+      "pubmed_hits": 112
+    },
+    {
+      "drug_id": "iron_dextran",
+      "drug": "Iron Dextran",
+      "species": "rabbit",
+      "current_dosage": "10 mg/kg IM 10 mg/kg 筋注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "5697365",
+        "38406599",
+        "9240581"
+      ],
+      "pubmed_hits": 51
+    },
+    {
+      "drug_id": "methylprednisolone",
+      "drug": "Methylprednisolone (Depo-Medrol/Medrol)",
+      "species": "rabbit",
+      "current_dosage": "0.5-2 mg/kg IM/SC (depot) 0.5-2 mg/kg 筋注/皮下（デポ）",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "35601954",
+        "17548927",
+        "5950689"
+      ],
+      "pubmed_hits": 387
+    },
+    {
+      "drug_id": "atracurium",
+      "drug": "Atracurium",
+      "species": "rabbit",
+      "current_dosage": "0.1-0.3 mg/kg IV 0.1-0.3 mg/kg 静注",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6688012",
+        "24827571",
+        "12027840"
+      ],
+      "pubmed_hits": 17
+    },
+    {
+      "drug_id": "psyllium",
+      "drug": "Psyllium (Metamucil)",
+      "species": "rabbit",
+      "current_dosage": "1/2-1 tsp per meal",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "11172796",
+        "39034726",
+        "25675337"
+      ],
+      "pubmed_hits": 7
+    },
+    {
+      "drug_id": "tropicamide",
+      "drug": "Tropicamide",
+      "species": "rabbit",
+      "current_dosage": "0.5-1%: 1 drop",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "1893772",
+        "32320311",
+        "6998899"
+      ],
+      "pubmed_hits": 40
+    },
+    {
+      "drug_id": "hyaluronic_acid_ia",
+      "drug": "Hyaluronic Acid (Intra-articular)",
+      "species": "rabbit",
+      "current_dosage": "0.5-1 mg/joint IA",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "18344225",
+        "40624007",
+        "31553572"
+      ],
+      "pubmed_hits": 682
+    },
+    {
+      "drug_id": "aglepristone",
+      "drug": "Aglepristone (Alizin)",
+      "species": "rabbit",
+      "current_dosage": "10 mg/kg SC days 1, 2",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "19019074",
+        "36634253",
+        "18377972"
+      ],
+      "pubmed_hits": 4
+    },
+    {
+      "drug_id": "dinoprost",
+      "drug": "Dinoprost (PGF2α)",
+      "species": "rabbit",
+      "current_dosage": "0.1-0.2 mg/kg SC",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "9645469",
+        "3164634",
+        "8207323"
+      ],
+      "pubmed_hits": 238
+    },
+    {
+      "drug_id": "aluminum_hydroxide_oral",
+      "drug": "Aluminum Hydroxide (Phosphate Binder)",
+      "species": "rabbit",
+      "current_dosage": "30 mg/kg PO with meals",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "12184363",
+        "7565498",
+        "6886995"
+      ],
+      "pubmed_hits": 99
+    },
+    {
+      "drug_id": "sodium_bicarbonate",
+      "drug": "Sodium Bicarbonate",
+      "species": "rabbit",
+      "current_dosage": "1-2 mEq/kg IV slow",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6331193",
+        "37975554",
+        "28428931"
+      ],
+      "pubmed_hits": 225
+    },
+    {
+      "drug_id": "potassium_chloride",
+      "drug": "Potassium Chloride",
+      "species": "rabbit",
+      "current_dosage": "輸液中20-30 mEq/L",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "6580522",
+        "34592322",
+        "16521861"
+      ],
+      "pubmed_hits": 665
+    },
+    {
+      "drug_id": "activated_charcoal",
+      "drug": "Activated Charcoal",
+      "species": "rabbit",
+      "current_dosage": "1 g/kg PO",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "9120872",
+        "15842825",
+        "109337"
+      ],
+      "pubmed_hits": 170
+    },
+    {
+      "drug_id": "dexamethasone_sp",
+      "drug": "Dexamethasone Sodium Phosphate",
+      "species": "rabbit",
+      "current_dosage": "0.1-0.2 mg/kg IV/SC",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "36432035",
+        "38072146",
+        "2783069"
+      ],
+      "pubmed_hits": 67
+    },
+    {
+      "drug_id": "ciclosporin_oral",
+      "drug": "Ciclosporin (Modified Oral)",
+      "species": "rabbit",
+      "current_dosage": "データ限定",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "3284117",
+        "21253494",
+        "15762768"
+      ],
+      "pubmed_hits": 729
+    },
+    {
+      "drug_id": "glucosamine_chondroitin",
+      "drug": "Glucosamine/Chondroitin Sulfate",
+      "species": "rabbit",
+      "current_dosage": "グルコサミン 20 mg/kg/day",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26165711",
+        "21117902"
+      ],
+      "pubmed_hits": 2
+    },
+    {
+      "drug_id": "cobalamin_injection",
+      "drug": "Cobalamin (Vitamin B12) Injectable",
+      "species": "rabbit",
+      "current_dosage": "250 μg SC q7日",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "26348637",
+        "34989638",
+        "38512020"
+      ],
+      "pubmed_hits": 90
+    },
+    {
+      "drug_id": "pyrantel_pamoate",
+      "drug": "Pyrantel Pamoate",
+      "species": "rabbit",
+      "current_dosage": "5-10 mg/kg PO 1回; 14日後繰返し",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "silver_honey",
+      "drug": "Medical Grade Manuka Honey",
+      "species": "rabbit",
+      "current_dosage": "患部に塗布",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [],
+      "pubmed_hits": 0
+    },
+    {
+      "drug_id": "psyllium_husk",
+      "drug": "Psyllium Husk (Veterinary Fiber)",
+      "species": "rabbit",
+      "current_dosage": "食事中の繊維量で調整",
+      "missing": [
+        "route",
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "39034726",
+        "25675337",
+        "21082352"
+      ],
+      "pubmed_hits": 6
+    },
+    {
+      "drug_id": "selamectin_topical",
+      "drug": "Selamectin (Revolution)",
+      "species": "rabbit",
+      "current_dosage": "6-18 mg/kg 局所 月1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "19930824",
+        "22452505",
+        "17222235"
+      ],
+      "pubmed_hits": 12
+    },
+    {
+      "drug_id": "imidacloprid_topical",
+      "drug": "Imidacloprid 10% Spot-on (Advantage)",
+      "species": "rabbit",
+      "current_dosage": "10 mg/kg 局所 月1回",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "24325409",
+        "27523947",
+        "15817208"
+      ],
+      "pubmed_hits": 3
+    },
+    {
+      "drug_id": "pentobarbital_euthanasia",
+      "drug": "Pentobarbital (Euthanasia Solution)",
+      "species": "rabbit",
+      "current_dosage": "85-100 mg/kg IV",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "2815248",
+        "4205268",
+        "35417816"
+      ],
+      "pubmed_hits": 449
+    },
+    {
+      "drug_id": "ivermectin_oral",
+      "drug": "Ivermectin (Oral/Injectable)",
+      "species": "rabbit",
+      "current_dosage": "200-400 μg/kg SC q7-14日",
+      "missing": [
+        "frequency"
+      ],
+      "dosage": "",
+      "dosage_ja": "",
+      "source": "",
+      "evidence_grade": "",
+      "review_status": "draft",
+      "pubmed_candidates": [
+        "8236738",
+        "33070345",
+        "40890376"
+      ],
+      "pubmed_hits": 96
+    }
+  ]
+}
