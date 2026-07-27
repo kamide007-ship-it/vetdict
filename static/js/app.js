@@ -310,7 +310,7 @@ const I18N={
     pricingHeader:"全機能無料",
     pricingPeriodOriginal:"¥980/月",
     pricingFeature1:"鑑別診断リスト生成（全21動物種）",
-    pricingFeature2:"疾患データベース<strong>7,000+疾患</strong>閲覧",
+    pricingFeature2:"疾患データベース<strong>6,500+疾患</strong>閲覧",
     pricingFeature3:"薬品辞書<strong>610+薬品</strong>・種別投与量",
     pricingFeature4:"臨床相談チャット<strong>無制限</strong>",
     pricingFeature5:"検査値入力・疼痛スケール対応",
@@ -580,7 +580,7 @@ const I18N={
     pricingHeader:"All features free",
     pricingPeriodOriginal:"¥980/month",
     pricingFeature1:"Differential diagnosis list (all 21 species)",
-    pricingFeature2:"Disease database <strong>7,000+ diseases</strong>",
+    pricingFeature2:"Disease database <strong>6,500+ diseases</strong>",
     pricingFeature3:"Drug dictionary <strong>610+ drugs</strong> with species-specific dosing",
     pricingFeature4:"Clinical chat <strong>unlimited</strong>",
     pricingFeature5:"Lab values & pain scale input",
@@ -781,6 +781,137 @@ let chatSpecies="";
 let symptomRequestId=0,diseaseRequestId=0,breedRequestId=0;
 let symptomSortMode="category";
 
+/* ---- Sticky-chrome scroll offset -----------------------------------------
+   Every in-page navigation (tabs, hamburger, mobile bottom nav, breadcrumbs,
+   deep links, keyboard shortcuts, skip-link, hash routing) ultimately scrolls a
+   target to the top of the scrollport. The sticky .header + .breadcrumb-bar
+   overlay that top edge, so without an offset the target's own heading and
+   search box land *underneath* the header and the view looks like it jumped to
+   the wrong place. CSS handles the offset via --sticky-offset (scroll-margin-top
+   on targets + scroll-padding-top for native anchors); the real height differs
+   per breakpoint (header 52/46px, breadcrumb 30/28px, breadcrumb sometimes
+   hidden), so measure it live instead of hardcoding. */
+function _syncStickyOffset(){
+  try{
+    let off=0;
+    for(const sel of [".header",".breadcrumb-bar"]){
+      const el=document.querySelector(sel);
+      if(!el)continue;
+      const cs=getComputedStyle(el);
+      /* Only chrome that actually overlays the scrollport counts. */
+      if(cs.display==="none"||cs.visibility==="hidden")continue;
+      if(cs.position!=="sticky"&&cs.position!=="fixed")continue;
+      off+=el.getBoundingClientRect().height;
+    }
+    /* +10px so the target does not sit flush against the header. */
+    const px=off>0?Math.round(off)+10:112;
+    document.documentElement.style.setProperty("--sticky-offset",px+"px");
+  }catch(_){/* keep the CSS fallback */}
+}
+window.addEventListener("resize",_syncStickyOffset,{passive:true});
+window.addEventListener("orientationchange",_syncStickyOffset,{passive:true});
+/* Measured again on first paint AND before each navigation scroll (see
+   switchView): the breadcrumb bar is display:none until a view becomes active,
+   so a DOMContentLoaded-only measurement misses its height permanently. */
+document.addEventListener("DOMContentLoaded",_syncStickyOffset);
+
+/* Scroll a navigation target to just below the sticky chrome.
+   Replaces bare el.scrollIntoView({block:"start"}) at every in-page navigation
+   site. Two failures made the old calls land in the wrong place:
+     1. No sticky-chrome offset — the target's heading/search box ended up behind
+        the header (measured 47-50px buried on both mobile and desktop).
+     2. Async clamping — panels fill in after the click (drug dictionary grows the
+        document to ~50,000px, anaesthesia ~20,000px). While the panel is still
+        empty the document is short, so the browser clamps the scroll to the old
+        scrollHeight; when the content arrives the target is far off-screen
+        (measured: drug panel 3,250px below the viewport on first open). So
+        re-assert the position while the document is still growing.
+   Uses window.scrollTo with an explicitly computed y (programmatic scrollTo is
+   not affected by scroll-padding-top, so the offset is applied once, not twice). */
+function scrollToAnchor(el,opts){
+  if(!el)return;
+  opts=opts||{};
+  _syncStickyOffset();
+  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const offset=()=>parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sticky-offset"),10)||112;
+  const wantY=()=>Math.max(0,Math.round(el.getBoundingClientRect().top+window.scrollY-offset()));
+  const first=wantY();
+  /* Distance-aware motion. The content panels sit ~3,400px below the landing
+     sections, so animating a tab switch smoothly meant a ~1.5s flight past the
+     hero, species grid and every other section — read as "it scrolled to a
+     random place / to the bottom". Worse, a long animation can be starved by the
+     panel's own render (the drug dictionary lays out ~600 rows) and stall
+     part-way. Jumps beyond ~1.2 viewports are therefore instant: predictable and
+     interruption-proof. Short, local moves keep smooth motion, which genuinely
+     helps orientation. */
+  const far=Math.abs(first-window.scrollY)>window.innerHeight*1.2;
+  const behavior=(reduced||opts.instant||far)?"auto":"smooth";
+  window.scrollTo({top:first,behavior:behavior});
+  if(opts.settle===false)return;
+  /* Re-anchor while the layout is still settling.
+     Two independent shifts move the target after the click, and both were
+     measured on the live page:
+       - content arriving INSIDE the panel (drug dictionary grows the document
+         from 7k to 50k px, and takes >1.5s to lay out ~600 rows), and
+       - the layout ABOVE the panel changing height (~28px), which silently
+         re-anchored every view about 18px behind the sticky header.
+     Watching the target's own document offset catches both causes without
+     having to know which element moved. Runs on rAF (cheap: one rect read per
+     frame), bounded, and yields immediately to the user's own scrolling. */
+  let cancelled=false,raf=0;
+  const evs=["wheel","touchstart","keydown"];
+  function release(){
+    if(cancelled)return;
+    cancelled=true;
+    if(raf)cancelAnimationFrame(raf);
+    evs.forEach(ev=>window.removeEventListener(ev,release));
+  }
+  evs.forEach(ev=>window.addEventListener(ev,release,{passive:true}));
+  const docTopOf=()=>el.getBoundingClientRect().top+window.scrollY;
+  const now=()=>(window.performance&&performance.now?performance.now():Date.now());
+  const doc=document.documentElement;
+  let lastDocTop=docTopOf(),lastY=null,lastH=doc.scrollHeight,stillFrames=0;
+  /* Generous window: a slow panel render (drug dictionary on a phone-class
+     device) can take several seconds to finish laying out, and the correction is
+     worthless if it expires first. The early-exit below keeps the common case to
+     a couple of frames. */
+  const started=now();
+  const deadline=started+12000;
+  /* An empty panel is trivially "settled" the frame after the scroll, so exiting
+     on convergence alone released the watcher before the panel's content had
+     even been fetched — the very shift it exists to absorb. Keep watching for at
+     least this long so an async render is always covered. */
+  const minWatchMs=2000;
+  const settle=()=>{
+    if(cancelled)return;
+    const y=Math.round(window.scrollY);
+    const docTop=docTopOf();
+    const want=Math.max(0,Math.round(docTop-offset()));
+    const moved=Math.abs(docTop-lastDocTop)>1;
+    const grew=doc.scrollHeight!==lastH;
+    /* "Still" = neither the scroll position nor the layout changed since the
+       last frame, i.e. any smooth animation has finished. Only then is an
+       off-target position a real error rather than an animation in progress —
+       correcting mid-animation would cancel the user's smooth scroll. */
+    const still=(lastY!==null&&y===lastY&&!moved&&!grew);
+    stillFrames=still?stillFrames+1:0;
+    if(Math.abs(want-y)>4&&(moved||stillFrames>=2)){
+      window.scrollTo({top:want,behavior:"auto"});
+      lastY=null;stillFrames=0;
+    }else{
+      lastY=y;
+    }
+    lastDocTop=docTop;lastH=doc.scrollHeight;
+    /* Done once we are on target, nothing has moved for a few frames, and the
+       minimum watch window has elapsed (so a late render cannot slip through). */
+    const elapsed=now()-started;
+    if(elapsed>=minWatchMs&&stillFrames>=6&&Math.abs(want-Math.round(window.scrollY))<=4)return release();
+    if(now()<deadline)raf=requestAnimationFrame(settle);
+    else release();
+  };
+  raf=requestAnimationFrame(settle);
+}
+
 /* Session engagement tracking */
 const _sessionStart=Date.now();
 let _maxScrollPct=0;
@@ -870,7 +1001,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
         e.preventDefault();
         switchView("database");
         const dbPanel=document.getElementById("viewDatabase");
-        if(dbPanel)dbPanel.scrollIntoView({behavior:"smooth",block:"start"});
+        if(dbPanel)scrollToAnchor(dbPanel);
       });
     }
     /* Hero stats: clickable navigation */
@@ -946,7 +1077,7 @@ function setupHeroStats(){
     wrapper.addEventListener("click",()=>{
       switchView(view);
       const panel=document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
-      if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+      if(panel)scrollToAnchor(panel);
     });
     wrapper.addEventListener("keydown",e=>{
       if(e.key==="Enter"||e.key===" "){e.preventDefault();wrapper.click();}
@@ -1345,30 +1476,30 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:611,drugs:551,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:549,drugs:524,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:621,drugs:340,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:451,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:321,drugs:68,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:346,drugs:137,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
-    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:266,drugs:90,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:277,drugs:198,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
-    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:242,drugs:67,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:220,drugs:74,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:199,drugs:155,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:551,drugs:222,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:456,drugs:222,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:282,drugs:222,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:286,drugs:96,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:287,drugs:103,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:248,drugs:103,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:249,drugs:98,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
-    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:257,drugs:17,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:593,drugs:551,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:546,drugs:524,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:598,drugs:340,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:283,drugs:68,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:307,drugs:137,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:229,drugs:90,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:198,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:226,drugs:67,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:198,drugs:74,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:178,drugs:155,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:222,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:412,drugs:222,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:222,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:265,drugs:96,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:255,drugs:103,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:222,drugs:103,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:219,drugs:98,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:250,drugs:17,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:26,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
-    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:291,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
+    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:0,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:7055,
+    diseases:6520,
     species:21,
     drugs:610,
     symptoms:52,
@@ -1583,7 +1714,7 @@ function breadcrumbClick(e){
     window.scrollTo({top:0,behavior:"smooth"});
   }else if(item.dataset.action==="species"){
     const sp=document.getElementById("speciesSection");
-    if(sp)sp.scrollIntoView({behavior:"smooth",block:"start"});
+    if(sp)scrollToAnchor(sp);
   }
 }
 
@@ -1597,7 +1728,7 @@ function setupKeyboardShortcuts(){
       e.preventDefault();
       switchView(viewMap[num-1]);
       const panel=document.getElementById("view"+viewMap[num-1].charAt(0).toUpperCase()+viewMap[num-1].slice(1));
-      if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+      if(panel)scrollToAnchor(panel);
     }
   });
 }
@@ -1632,7 +1763,7 @@ function setupMobileBottomNav(){
     haptic(10);
     switchView(btn.dataset.view,{focusSearch:true});
     const panel=document.getElementById("view"+btn.dataset.view.charAt(0).toUpperCase()+btn.dataset.view.slice(1));
-    if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+    if(panel)scrollToAnchor(panel);
   });
   document.body.appendChild(nav);
 }
@@ -1669,7 +1800,7 @@ function setupSwipeGesture(){
       haptic(15);
       switchView(views[nextIdx]);
       const panel=document.getElementById("view"+views[nextIdx].charAt(0).toUpperCase()+views[nextIdx].slice(1));
-      if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+      if(panel)scrollToAnchor(panel);
     }
   },{passive:true});
 }
@@ -1892,7 +2023,7 @@ function renderSymptomEmptyState(){
   if(!list||currentSpecies)return;
   list.innerHTML=`<div class="symptom-empty-state"><span class="symptom-empty-icon" aria-hidden="true">\u{1F43E}</span><p>${escapeHtml(t("selectSpeciesFirst"))}</p><button type="button" class="symptom-empty-btn">${escapeHtml(t("selectSpeciesFirstBtn"))}</button></div>`;
   const btn=list.querySelector(".symptom-empty-btn");
-  if(btn)btn.addEventListener("click",()=>{const s=document.getElementById("speciesSection");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});});
+  if(btn)btn.addEventListener("click",()=>{const s=document.getElementById("speciesSection");if(s)scrollToAnchor(s);});
 }
 
 function toggleSymptom(id){const adding=!selectedSymptoms.has(id);if(adding)selectedSymptoms.add(id);else selectedSymptoms.delete(id);haptic(adding?12:6);renderSelectedSymptoms();renderSymptomList(symptomData);if(adding)trackEvent("add_symptom",{species:currentSpecies,symptom:id,total:selectedSymptoms.size});}
@@ -2724,7 +2855,7 @@ function doAnalyze(){
   const slowTimer=setTimeout(()=>{btn.innerHTML=`<span class="spinner"></span> ${t("analyzeSearchingDb")}`;},3000);
   fetchWithTimeout("/api/analyze-symptoms",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}: ${r.statusText}`);return r.json();})
-  .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function"){const n=data.suspected_diseases?.length||0;if(n>0)showToast(t("diseasesFoundToast").replace("%n%",n),"success");else showToast(t("diseasesNoneFoundToast"),"warning");}const ra=document.getElementById("resultsArea");if(ra)ra.scrollIntoView({behavior:"smooth",block:"start"});})
+  .then(data=>{clearTimeout(slowTimer);renderResults(data);trackEvent("view_results",{species:currentSpecies,result_count:data.suspected_diseases?.length||0,symptom_count:selectedSymptoms.size});if(typeof showToast==="function"){const n=data.suspected_diseases?.length||0;if(n>0)showToast(t("diseasesFoundToast").replace("%n%",n),"success");else showToast(t("diseasesNoneFoundToast"),"warning");}const ra=document.getElementById("resultsArea");if(ra)scrollToAnchor(ra);})
   .catch(err=>{trackEvent("api_error",{endpoint:"analyze-symptoms",error:String(err.message||"unknown").substring(0,100),species:currentSpecies});const ra=document.getElementById("resultsArea");if(ra){const info=describeFetchError(err);const detailHtml=info.detail?`<div class="results-error-detail">${escapeHtml(t("networkErrorDetail")+info.detail)}</div>`:"";ra.innerHTML=`<div class="results-error" role="alert"><strong>${escapeHtml(info.title)}</strong>${detailHtml}<button class="retry-analyze-btn" type="button">${escapeHtml(t("retry"))}</button></div>`;const retryBtn=ra.querySelector(".retry-analyze-btn");if(retryBtn){retryBtn.addEventListener("click",doAnalyze);setTimeout(()=>retryBtn.focus(),50);}}})
   .finally(()=>{clearTimeout(slowTimer);if(btn){btn.disabled=false;btn.textContent=t("analyzeBtn");}if(progress)progress.classList.remove("active");});
 }
@@ -4104,7 +4235,7 @@ function openDiseaseAcrossSpecies(name,species){
   if(needSwitch&&typeof selectSpecies==="function")selectSpecies(species);
   switchView("database");
   const panel=document.getElementById("viewDatabase");
-  if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+  if(panel)scrollToAnchor(panel);
   let tries=0;
   const apply=()=>{
     /* 種切替後は loadDiseaseDb が非同期で allDiseases を更新する。対象疾患がロード済みになるまで待つ
@@ -4126,7 +4257,7 @@ document.addEventListener("click",function(e){
   const btn=e.target.closest('[data-action="scroll-to-species"]');
   if(!btn)return;
   const target=document.getElementById("speciesSection");
-  if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
+  if(target)scrollToAnchor(target);
 });
 
 /* --- Cross-view navigation history (shared by all views) --- */
@@ -4160,7 +4291,7 @@ function navigateToDrug(drugName){
   if(input){input.value=drugName;input.dispatchEvent(new Event("input"));}
   _showBackNav("drugBackNav","drugSearch");
   const panel=document.getElementById("viewDrugs");
-  if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+  if(panel)scrollToAnchor(panel);
   setTimeout(()=>{
     const list=document.getElementById("drugList");
     if(!list)return;
@@ -4175,7 +4306,7 @@ function navigateToDiseaseDb(query){
   if(input){input.value=query;input.dispatchEvent(new Event("input"));}
   _showBackNav("diseaseBackNav","diseaseSearch");
   const panel=document.getElementById("viewDatabase");
-  if(panel)panel.scrollIntoView({behavior:"smooth",block:"start"});
+  if(panel)scrollToAnchor(panel);
   setTimeout(()=>{
     const list=document.getElementById("diseaseDbList");
     if(!list)return;
@@ -4206,6 +4337,13 @@ function switchView(view,opts){
   history.replaceState(null,null,"#"+view);
   updateBreadcrumb();
   updateMobileBottomNav();
+  /* Re-measure the sticky chrome AFTER the breadcrumb is shown/updated: the
+     breadcrumb bar is display:none until a view becomes active, so it only
+     becomes measurable once this switch has happened. Measuring any earlier
+     (page load, or before the switch) undercounts it and the first navigation
+     lands with the panel heading tucked under the header. Callers scroll after
+     switchView returns, so the offset is correct by then. */
+  _syncStickyOffset();
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
   if(view==="anesthesia"&&!anesthesiaLoaded)loadAnesthesiaProtocols();
   if(view==="emergency"&&!emergencyLoaded)loadEmergencyProtocols();
@@ -4236,7 +4374,7 @@ function switchView(view,opts){
     nav.classList.remove("open");
     const hb=document.querySelector(".hamburger");
     if(hb)hb.setAttribute("aria-expanded","false");
-    if(activePanel)setTimeout(()=>activePanel.scrollIntoView({behavior:"smooth",block:"start"}),100);
+    if(activePanel)setTimeout(()=>scrollToAnchor(activePanel),100);
   }
 }
 
@@ -4257,7 +4395,7 @@ function setupNavigation(){
       const target=view==="checker"
         ?document.getElementById("speciesSection")
         :document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
-      if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
+      if(target)scrollToAnchor(target);
     }
   });
   // Keyboard navigation: arrow keys between tabs
@@ -4383,7 +4521,7 @@ function sendLandingChat(isRetry){
         mainMsgs.scrollTop=mainMsgs.scrollHeight;
       }
       const chatPanel=document.getElementById("viewChat");
-      if(chatPanel)chatPanel.scrollIntoView({behavior:"smooth",block:"start"});
+      if(chatPanel)scrollToAnchor(chatPanel);
     });
     msgs.appendChild(continueBtn);
     msgs.scrollTop=msgs.scrollHeight;
@@ -6173,7 +6311,7 @@ function _attachDbItemHandlers(container){
     const drugLink=e.target.closest(".drug-nav-link");
     if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
     const anesthLink=e.target.closest(".anesthesia-nav-link");
-    if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)p.scrollIntoView({behavior:"smooth",block:"start"});return;}
+    if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)scrollToAnchor(p);return;}
     if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);
   });
   container.addEventListener("keydown",function(e){
@@ -6231,7 +6369,7 @@ function toggleDbItem(el){
         detail.prepend(closeBtn);
       }
       requestAnimationFrame(()=>{
-        el.scrollIntoView({behavior:"smooth",block:"start"});
+        scrollToAnchor(el);
         const firstFocusable=detail.querySelector("a,button,[tabindex='0']");
         if(firstFocusable)setTimeout(()=>firstFocusable.focus(),300);
       });
