@@ -316,7 +316,7 @@
       "review_status": "draft",
       "source_kind": "needs_sourcing",
       "en_reference": "",
-      "current_treatment_ja": "ルゴール液1滴/30 mL飲水×2週、その後1滴/250 mLで維持。ヨウ素豊富な食品：ケルプサプリ（少量）。甲状腺腫誘発食品の除去。重度甲状腺腫+呼吸困難：甲状腺嚢胞の針穿刺。シードのみの食事のセキセイに多い。ヨウ素補給で予後優良。栄養性疾患の治療は不足している栄養素の特定と適切な補充が基本となる。急性欠乏症では非経口投与による迅速な補正を行い、慢性例では食事内容の段階的改善と経口サプリメント投与を実施する。基礎となる吸収障害の評価と治療、および長期的な栄養モニタリングが重要である。",
+      "current_treatment_ja": "ルゴール液1滴/30 mL飲水×2週、その後1滴/250 mLで維持。ヨウ素豊富な食品：ケルプサプリ（少量）。甲状腺腫誘発食品の除去。重度甲状腺腫+呼吸困難：甲状腺嚢胞の針穿刺。シードのみの食事のセキセイに多い。ヨウ素補給で予後優良。",
       "treatment_ja": "",
       "sources": [],
       "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Harrison & Lightfoot『Clinical Avian Medicine』。PubMed候補検索: 「Iodine Deficiency (Thyroid Hyperplasia) parakeet OR exotic OR rodent treatment」。"
@@ -424,7 +424,7 @@
       "review_status": "draft",
       "source_kind": "needs_sourcing",
       "en_reference": "",
-      "current_treatment_ja": "ストレス源除去：温度極端、騒音、過密、捕食者暴���、ケージ移動。静かで暖かい（28-30°C）薄暗い回復環境。輸液、栄養支持、ビタミン補給。取扱い最小化。段階的環境変更。ストレス源除去で予後優良。慢性ストレスは免疫抑制→二次疾患。心疾患の治療は病態に応じた薬物療法が中心であり、うっ血性心不全にはフロセミド、ピモベンダン、ACE阻害薬の三剤併用が標準的である。不整脈管理、血栓予防、運動制限を適切に組み合わせる。定期的な心エコー検査、胸部X線、心臓バイオマーカー測定による経過観察が必須である。",
+      "current_treatment_ja": "ストレス源除去：温度極端、騒音、過密、捕食者暴露、ケージ移動。静かで暖かい（28-30°C）薄暗い回復環境。輸液、栄養支持、ビタミン補給。取扱い最小化。段階的環境変更。ストレス源除去で予後優良。慢性ストレスは免疫抑制→二次疾患。",
       "treatment_ja": "",
       "sources": [],
       "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Harrison & Lightfoot『Clinical Avian Medicine』。PubMed候補検索: 「Environmental Stress Syndrome parakeet OR exotic OR rodent treatment」。"
@@ -472,7 +472,7 @@
       "review_status": "draft",
       "source_kind": "needs_sourcing",
       "en_reference": "",
-      "current_treatment_ja": "嚢胞+毛包全体の外科的切除（根治的）。単純切開排膿は高再発。毛包基部硝酸銀焼灼。二次感染時は抗菌薬。カナ���ア/セキセイに多い（遺伝的素因）。完全切除で予後良好。栄養性疾患の治療は不足している栄養素の特定と適切な補充が基本となる。急性欠乏症では非経口投与による迅速な補正を行い、慢性例では食事内容の段階的改善と経口サプリメント投与を実施する。基礎となる吸収障害の評価と治療、および長期的な栄養モニタリングが重要である。",
+      "current_treatment_ja": "嚢胞+毛包全体の外科的切除（根治的）。単純切開排膿は高再発。毛包基部硝酸銀焼灼。二次感染時は抗菌薬。カナリア/セキセイに多い（遺伝的素因）。完全切除で予後良好。",
       "treatment_ja": "",
       "sources": [],
       "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Harrison & Lightfoot『Clinical Avian Medicine』。PubMed候補検索: 「Feather Follicle Cyst parakeet OR exotic OR rodent treatment」。"
@@ -484,7 +484,7 @@
       "review_status": "draft",
       "source_kind": "needs_sourcing",
       "en_reference": "",
-      "current_treatment_ja": "原因同定：ストレス換羽、PBFD、毛引き（自己/同居鳥）、栄養欠乏、感染。PBFD：PCR検査、根治なし。ストレス：ストレス源除去���静かな環境。栄養：バランス食、ビタミン補給。毛包損傷は再生しない場合あり��ストレス関連は予後良好、PBFDは要注意。栄養性疾患の治療は不足している栄養素の特定と適切な補充が基本となる。急性欠乏症では非経口投与による迅速な補正を行い、慢性例では食事内容の段階的改善と経口サプリメント投与を実施する。基礎となる吸収障害の評価と治療、および長期的な栄養モニタリングが重要である。",
+      "current_treatment_ja": "原因同定：ストレス換羽、PBFD、毛引き（自己/同居鳥）、栄養欠乏、感染。PBFD：PCR検査、根治なし。ストレス：ストレス源除去。静かな環境。栄養：バランス食、ビタミン補給。毛包損傷は再生しない場合あり。ストレス関連は予後良好、PBFDは要注意。",
       "treatment_ja": "",
       "sources": [],
       "sourcing_guidance": "推奨情報源: Carpenter『Exotic Animal Formulary』6th ed / Harrison & Lightfoot『Clinical Avian Medicine』。PubMed候補検索: 「Tail Feather Loss parakeet OR exotic OR rodent treatment」。"
