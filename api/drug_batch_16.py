@@ -1,4 +1,4 @@
-"""Drug batch 16: Additional antibiotics, antifungals, antiparasitics & emergency drugs (40 drugs)."""
+"""Drug batch 16: Additional antibiotics, antifungals, antiparasitics & emergency drugs (24 drugs)."""
 
 DRUGS_BATCH_16: list[dict] = [
     {
@@ -7,7 +7,7 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "プラドフロキサシン（ベラフロックス経口）",
         "category": "antibiotics",
         "mechanism": "Third-generation veterinary fluoroquinolone; dual targeting of DNA gyrase and topoisomerase IV with potent anaerobic coverage. Uniquely effective against Bacteroides spp.",
-        "mechanism_ja": "第三世代獣医用��ルオロキノロン；DNAジャイレースとトポイソメラ���ゼIVの二重標的と強力な嫌気性菌カバレッジ。Bacteroides spp.に独自の効果",
+        "mechanism_ja": "第三世代獣医用フルオロキノロン；DNAジャイレースとトポイソメラーゼIVの二重標的と強力な嫌気性菌カバレッジ。Bacteroides spp.に独自の効果",
         "species_info": {
             "dog": {
                 "dose": "3-5 mg/kg PO q24h × 7-28d",
@@ -50,7 +50,7 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "ツラスロマイシン（ドラキシン）",
         "category": "antibiotics",
         "mechanism": "Triamilide (novel macrolide subclass); concentrates in lung tissue at 60x plasma levels. Single injection provides 7-10 days therapeutic concentration due to extensive tissue distribution",
-        "mechanism_ja": "トリアミライド（新規マクロライドサブクラス）；肺組織に血漿の60倍濃度で蓄積。広範な組織分布により単回注射で7-10��間の治療濃度を維持",
+        "mechanism_ja": "トリアミライド（新規マクロライドサブクラス）；肺組織に血漿の60倍濃度で蓄積。広範な組織分布により単回注射で7-10日間の治療濃度を維持",
         "species_info": {
             "horse": {
                 "dose": "2.5 mg/kg IM once (cattle dose; off-label equine)",
@@ -108,7 +108,7 @@ DRUGS_BATCH_16: list[dict] = [
         "side_effects": ["GI upset", "Allergic reaction", "Thrombophlebitis (IV)"],
         "side_effects_ja": ["消化器障害", "アレルギー反応", "血栓性静脈炎（IV）"],
         "contraindications": "Cephalosporin/penicillin allergy (10% cross-reactivity)",
-        "contraindications_ja": "セファロスポリン/ペニシリンアレ���ギー（10%交差反応）",
+        "contraindications_ja": "セファロスポリン/ペニシリンアレルギー（10%交差反応）",
         "drug_interactions": [
             {
                 "drug": "Aminoglycosides",
@@ -120,7 +120,7 @@ DRUGS_BATCH_16: list[dict] = [
                 "drug": "Probenecid",
                 "severity": "mild",
                 "description": "Delays cephalosporin excretion (higher levels)",
-                "description_ja": "セファロスポリン排泄���遅延（高濃度）",
+                "description_ja": "セファロスポリン排泄を遅延（高濃度）",
             },
         ],
     },
@@ -130,12 +130,12 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "ポリミキシンB/ネオマイシン/バシトラシン眼軟膏",
         "category": "ophthalmology",
         "mechanism": "Triple antibiotic ophthalmic; combines membrane disruptor (polymyxin B), protein synthesis inhibitor (neomycin), and cell wall inhibitor (bacitracin) for broad-spectrum coverage",
-        "mechanism_ja": "三重抗菌眼科用製剤；膜破壊薬（ポリミキシンB）、蛋白合成阻害薬（ネオマイシン）��細胞壁阻���薬（バシトラシン）の組合せで広域カバレッジ",
+        "mechanism_ja": "三重抗菌眼科用製剤；膜破壊薬（ポリミキシンB）、蛋白合成阻害薬（ネオマイシン）、細胞壁阻害薬（バシトラシン）の組合せで広域カバレッジ",
         "species_info": {
             "dog": {
                 "dose": "Apply 1cm ribbon to affected eye q6-8h",
                 "notes": "Bacterial conjunctivitis, corneal ulcer prophylaxis post-trauma; OTC availability",
-                "notes_ja": "細菌性結��炎、外傷後角膜潰瘍予防；OTCで入手可能",
+                "notes_ja": "細菌性結膜炎、外傷後角膜潰瘍予防；OTCで入手可能",
             },
             "cat": {
                 "dose": "Apply 0.5cm ribbon q6-8h",
@@ -159,9 +159,9 @@ DRUGS_BATCH_16: list[dict] = [
             "Corneal epithelial toxicity (prolonged use)",
             "Allergic conjunctivitis",
         ],
-        "side_effects_ja": ["接触感作（ネオマイ��ン）", "角膜上皮毒性（長期使用）", "アレルギー性結膜炎"],
+        "side_effects_ja": ["接触感作（ネオマイシン）", "角膜上皮毒性（長期使用）", "アレルギー性結膜炎"],
         "contraindications": "Aminoglycoside allergy, fungal/viral keratitis (without antifungal/antiviral)",
-        "contraindications_ja": "アミノグリコシドアレルギ��、真菌性/ウイルス性角膜炎（抗真菌/抗ウイルス薬なし）",
+        "contraindications_ja": "アミノグリコシドアレルギー、真菌性/ウイルス性角膜炎（抗真菌/抗ウイルス薬なし）",
         "drug_interactions": [
             {
                 "drug": "Topical corticosteroids",
@@ -177,12 +177,12 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "ポサコナゾール",
         "category": "antifungals",
         "mechanism": "Extended-spectrum triazole antifungal; inhibits 14-alpha-demethylase (CYP51) with broader activity than itraconazole/fluconazole including Mucorales and resistant Aspergillus",
-        "mechanism_ja": "拡張スペクトラムトリアゾール系抗真菌薬；イトラコナゾール/フルコナゾ��ルより広い活性でムコール目や耐性アスペルギルスを含む14α-デメチラーゼ（CYP51）を阻害",
+        "mechanism_ja": "拡張スペクトラムトリアゾール系抗真菌薬；イトラコナゾール/フルコナゾールより広い活性でムコール目や耐性アスペルギルスを含む14α-デメチラーゼ（CYP51）を阻害",
         "species_info": {
             "dog": {
                 "dose": "5-10 mg/kg PO q12-24h (with fatty meal)",
                 "notes": "Refractory aspergillosis, disseminated fungal infections; alternative when itraconazole fails",
-                "notes_ja": "難治性アスペルギルス症、播種性真菌感���；イトラコナゾール無効時の代替",
+                "notes_ja": "難治性アスペルギルス症、播種性真菌感染；イトラコナゾール無効時の代替",
             },
             "cat": {
                 "dose": "5-10 mg/kg PO q12-24h",
@@ -197,13 +197,13 @@ DRUGS_BATCH_16: list[dict] = [
             "bird": {
                 "dose": "10-15 mg/kg PO q12h",
                 "notes": "Avian aspergillosis (raptor, penguin); may be superior to itraconazole for pulmonary forms",
-                "notes_ja": "鳥類アスペルギルス症（猛禽類・ペンギン）；肺型ではイトラコナゾー���より優��る可能性",
+                "notes_ja": "鳥類アスペルギルス症（猛禽類・ペンギン）；肺型ではイトラコナゾールより優れる可能性",
             },
         },
         "side_effects": ["Hepatotoxicity", "GI upset", "QT prolongation", "Hypokalemia"],
         "side_effects_ja": ["肝毒性", "消化器障害", "QT延長", "低カリウム血症"],
         "contraindications": "Concurrent CYP3A4 substrates with narrow therapeutic index, severe hepatic disease, QT prolongation",
-        "contraindications_ja": "治療域の狭いCYP3A4基質の併用、重度肝��患、QT延長",
+        "contraindications_ja": "治療域の狭いCYP3A4基質の併用、重度肝疾患、QT延長",
         "drug_interactions": [
             {
                 "drug": "Cyclosporine",
@@ -215,7 +215,7 @@ DRUGS_BATCH_16: list[dict] = [
                 "drug": "Rifampin",
                 "severity": "major",
                 "description": "Reduces posaconazole levels by 80%; contraindicated",
-                "description_ja": "ポサコナゾ���ル濃度を80%低下；禁忌",
+                "description_ja": "ポサコナゾール濃度を80%低下；禁忌",
             },
         ],
     },
@@ -230,7 +230,7 @@ DRUGS_BATCH_16: list[dict] = [
             "dog": {
                 "dose": "1-4 mg/kg IV q24h",
                 "notes": "Invasive candidiasis, refractory aspergillosis; very well tolerated IV",
-                "notes_ja": "侵���性カンジダ症、難治性アスペルギルス症；IV忍容性非常に良好",
+                "notes_ja": "侵襲性カンジダ症、難治性アスペルギルス症；IV忍容性非常に良好",
             },
             "cat": {
                 "dose": "1-3 mg/kg IV q24h",
@@ -246,7 +246,7 @@ DRUGS_BATCH_16: list[dict] = [
         "side_effects": ["Phlebitis", "Hepatotoxicity (rare)", "Hemolytic anemia (rare, high dose)"],
         "side_effects_ja": ["静脈炎", "肝毒性（稀）", "溶血性貧血（稀、高用量）"],
         "contraindications": "Known echinocandin hypersensitivity; not effective against Cryptococcus or Mucorales",
-        "contraindications_ja": "エキノキャンデ���ン過敏症既知；クリプトコッカスやムコール目には無効",
+        "contraindications_ja": "エキノキャンディン過敏症既知；クリプトコッカスやムコール目には無効",
         "drug_interactions": [
             {
                 "drug": "Cyclosporine",
@@ -265,15 +265,15 @@ DRUGS_BATCH_16: list[dict] = [
     {
         "id": "afoxolaner_milbemycin",
         "name": "Afoxolaner+Milbemycin (NexGard Spectra)",
-        "name_ja": "アフォキソラネル+ミルベマイシン（ネクスガードスペクト��）",
+        "name_ja": "アフォキソラネル+ミルベマイシン（ネクスガードスペクトラ）",
         "category": "antiparasitic",
         "mechanism": "Combination endectocide; afoxolaner (isoxazoline) kills fleas/ticks via GABA/GluCl inhibition + milbemycin oxime prevents heartworm and treats GI nematodes via glutamate-gated Cl channel potentiation",
-        "mechanism_ja": "併用内外寄生虫駆除薬��アフォキソラネル（イソオキサゾリン）がGABA/GluCl阻害でノミ・ダニ駆除＋ミ���ベマイシンオキシムがグルタミン酸依存性Clチャネル増強でフィラリア予防・消化管線虫治療",
+        "mechanism_ja": "併用内外寄生虫駆除薬；アフォキソラネル（イソオキサゾリン）がGABA/GluCl阻害でノミ・ダニ駆除＋ミルベマイシンオキシムがグルタミン酸依存性Clチャネル増強でフィラリア予防・消化管線虫治療",
         "species_info": {
             "dog": {
                 "dose": "2.5 mg/kg afoxolaner + 0.5 mg/kg milbemycin PO monthly",
                 "notes": "All-in-one monthly: fleas, ticks, heartworm prevention, roundworm, hookworm; EMA/FDA approved",
-                "notes_ja": "月1回オールインワン：ノミ・ダニ・フ���ラリア予防・回虫・鉤虫；EMA/FDA承認",
+                "notes_ja": "月1回オールインワン：ノミ・ダニ・フィラリア予防・回虫・鉤虫；EMA/FDA承認",
             }
         },
         "side_effects": ["Vomiting", "Diarrhea", "Lethargy", "Seizures (rare, predisposed)"],
@@ -285,7 +285,7 @@ DRUGS_BATCH_16: list[dict] = [
                 "drug": "P-glycoprotein inhibitors",
                 "severity": "moderate",
                 "description": "Increased milbemycin CNS levels in MDR1 dogs",
-                "description_ja": "MDR1犬で��ルベマイシンCNS濃度増加",
+                "description_ja": "MDR1犬でミルベマイシンCNS濃度増加",
             }
         ],
     },
@@ -295,12 +295,12 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "セラメクチン+サロラネル（レボリューションプラス）",
         "category": "antiparasitic",
         "mechanism": "Topical combination for cats; selamectin (avermectin) prevents heartworm/ear mites/fleas + sarolaner (isoxazoline) adds tick kill and enhanced flea efficacy",
-        "mechanism_ja": "猫用外用併用薬；セラメクチン（アベルメクチ���）がフィラリア・耳ダニ・ノミ予防＋サロラネル（イソオキ���ゾリン）がダニ駆除と強化ノミ効果を追加",
+        "mechanism_ja": "猫用外用併用薬；セラメクチン（アベルメクチン）がフィラリア・耳ダニ・ノミ予防＋サロラネル（イソオキサゾリン）がダニ駆除と強化ノミ効果を追加",
         "species_info": {
             "cat": {
                 "dose": "6 mg/kg selamectin + 1 mg/kg sarolaner topically monthly",
                 "notes": "Comprehensive feline parasite prevention: fleas, ticks (Ixodes, Dermacentor), heartworm, ear mites, roundworms, hookworms; FDA approved",
-                "notes_ja": "包括的猫寄生虫予防：ノミ・ダニ・フィラリア・耳ダニ・���虫・鉤虫；FDA承認",
+                "notes_ja": "包括的猫寄生虫予防：ノミ・ダニ・フィラリア・耳ダニ・回虫・鉤虫；FDA承認",
             }
         },
         "side_effects": ["Hair loss at application site", "Lethargy", "Vomiting", "Seizures (very rare)"],
@@ -319,10 +319,10 @@ DRUGS_BATCH_16: list[dict] = [
     {
         "id": "imidacloprid_flumethrin",
         "name": "Imidacloprid+Flumethrin (Seresto)",
-        "name_ja": "イミダクロプリド+���ルメトリン（セレスト）",
+        "name_ja": "イミダクロプリド+フルメトリン（セレスト）",
         "category": "antiparasitic",
         "mechanism": "8-month slow-release collar; imidacloprid (neonicotinoid) kills fleas via nAChR agonism + flumethrin (pyrethroid) repels/kills ticks via sodium channel modulation. Released into lipid layer of skin/hair",
-        "mechanism_ja": "8ヶ月徐放性カラー；���ミダクロプリド（ネオニコチノイド）がnAChR作動でノミ駆除＋フルメトリン（ピレスロイド）がNaチャネル調節でダニ忌避・駆除。皮膚/被毛の脂質層に放出",
+        "mechanism_ja": "8ヶ月徐放性カラー；イミダクロプリド（ネオニコチノイド）がnAChR作動でノミ駆除＋フルメトリン（ピレスロイド）がNaチャネル調節でダニ忌避・駆除。皮膚/被毛の脂質層に放出",
         "species_info": {
             "dog": {
                 "dose": "Large collar (4.5g imidacloprid + 2.03g flumethrin) or small collar for <8kg dogs",
@@ -332,11 +332,11 @@ DRUGS_BATCH_16: list[dict] = [
             "cat": {
                 "dose": "Cat collar (1.25g imidacloprid + 0.56g flumethrin)",
                 "notes": "Cat-specific safety mechanism (breakaway); NO permethrin/flumethrin toxicity concern at collar dose",
-                "notes_ja": "猫用安全機構（外れるバックル）；カラー用量ではペルメトリン/フル���トリン毒性の懸念なし",
+                "notes_ja": "猫用安全機構（外れるバックル）；カラー用量ではペルメトリン/フルメトリン毒性の懸念なし",
             },
         },
         "side_effects": ["Local skin irritation", "Hair loss under collar", "Lethargy (first few days)"],
-        "side_effects_ja": ["局���皮膚刺激", "カラー下の脱毛", "嗜眠（初期数日）"],
+        "side_effects_ja": ["局所皮膚刺激", "カラー下の脱毛", "嗜眠（初期数日）"],
         "contraindications": "Puppies/kittens <7 weeks, sick/convalescent animals, known flea collar sensitivity",
         "contraindications_ja": "7週齢未満の子犬/子猫、病気/回復期動物、ノミ取りカラー過敏症既知",
         "drug_interactions": [
@@ -354,7 +354,7 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "ミルベマイシン+ルフェヌロン（センチネル）",
         "category": "antiparasitic",
         "mechanism": "Combination oral preventive; milbemycin oxime (macrocyclic lactone) prevents heartworm and treats GI nematodes + lufenuron (chitin synthesis inhibitor) prevents flea egg development",
-        "mechanism_ja": "経口併用予防薬；ミルベマイシンオキシム（大環状ラクトン）がフィラリア予防・消化管線虫治療＋ルフェヌロン（キチ���合成阻害薬）がノミ卵発生を阻害",
+        "mechanism_ja": "経口併用予防薬；ミルベマイシンオキシム（大環状ラクトン）がフィラリア予防・消化管線虫治療＋ルフェヌロン（キチン合成阻害薬）がノミ卵発生を阻害",
         "species_info": {
             "dog": {
                 "dose": "0.5 mg/kg milbemycin + 10 mg/kg lufenuron PO monthly (with meal)",
@@ -408,7 +408,7 @@ DRUGS_BATCH_16: list[dict] = [
                 "drug": "Other isoxazolines",
                 "severity": "moderate",
                 "description": "Do not stack isoxazoline products",
-                "description_ja": "イソオキ��ゾリン製品の重複回避",
+                "description_ja": "イソオキサゾリン製品の重複回避",
             }
         ],
     },
@@ -465,12 +465,12 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "メラルソミン（イミティサイド）",
         "category": "antiparasitic",
         "mechanism": "Organic arsenical adulticide; kills adult heartworms (Dirofilaria immitis) by disrupting metabolic pathways. Deep IM injection into epaxial lumbar muscles",
-        "mechanism_ja": "有機ヒ素系成虫駆除薬；代謝経路を破壊し成虫フィラリア（犬糸��虫）を殺滅。腰部背軸筋への深部IM注射",
+        "mechanism_ja": "有機ヒ素系成虫駆除薬；代謝経路を破壊し成虫フィラリア（犬糸状虫）を殺滅。腰部背軸筋への深部IM注射",
         "species_info": {
             "dog": {
                 "dose": "Standard: 2.5 mg/kg deep IM × 1, then 30d rest, then 2.5 mg/kg × 2 (24h apart); AHS 3-injection protocol",
                 "notes": "ONLY drug that kills adult heartworms; pre-treat with doxycycline + ivermectin × 60d. Strict exercise restriction critical",
-                "notes_ja": "成虫フィラリアを殺す唯一の薬；ドキシサイクリン+イベルメクチン60日前処置。厳格な���動制限が重要",
+                "notes_ja": "成虫フィラリアを殺す唯一の薬；ドキシサイクリン+イベルメクチン60日前処置。厳格な運動制限が重要",
             }
         },
         "side_effects": [
@@ -495,10 +495,10 @@ DRUGS_BATCH_16: list[dict] = [
     {
         "id": "benazepril_heartworm",
         "name": "Benazepril (Heartworm-associated PH)",
-        "name_ja": "ベナゼプリル���フィラリア関連肺高血圧症）",
+        "name_ja": "ベナゼプリル（フィラリア関連肺高血圧症）",
         "category": "cardiovascular",
         "mechanism": "ACE inhibitor used specifically for heartworm-associated pulmonary hypertension and right-sided heart failure. Reduces pulmonary vascular resistance and improves RV function",
-        "mechanism_ja": "フィラ��ア関連肺高血圧症と右心不全に特化して使用するACE阻害薬。肺血��抵抗を低下させ右心室機能を改善",
+        "mechanism_ja": "フィラリア関連肺高血圧症と右心不全に特化して使用するACE阻害薬。肺血管抵抗を低下させ右心室機能を改善",
         "species_info": {
             "dog": {
                 "dose": "0.5 mg/kg PO q12-24h",
@@ -530,7 +530,7 @@ DRUGS_BATCH_16: list[dict] = [
             "dog": {
                 "dose": "Hypotension: 0.03-0.1 mg/kg IV bolus; Urethral incompetence: 1-4 mg/kg PO q8-12h",
                 "notes": "Anesthetic hypotension (bolus), urethral sphincter incompetence (spayed females); tachyphylaxis develops",
-                "notes_ja": "麻酔中低血圧（ボーラス）、尿道括約筋��全（避妊雌）；頻脈耐性が発現",
+                "notes_ja": "麻酔中低血圧（ボーラス）、尿道括約筋不全（避妊雌）；頻脈耐性が発現",
             },
             "cat": {
                 "dose": "2-4 mg/cat PO q8-12h",
@@ -574,7 +574,7 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "フェニルプロパノールアミン（プロイン）",
         "category": "cardiovascular",
         "mechanism": "Alpha-adrenergic agonist; increases urethral sphincter tone by stimulating smooth muscle alpha-1 receptors. First-line medical treatment for urethral sphincter mechanism incompetence (USMI)",
-        "mechanism_ja": "α-アドレナリン作動薬；平滑筋α1受容体を刺激��尿道括約筋緊張を増加。尿道括約筋機能不���（USMI）の第一選択内科治療",
+        "mechanism_ja": "α-アドレナリン作動薬；平滑筋α1受容体を刺激し尿道括約筋緊張を増加。尿道括約筋機能不全（USMI）の第一選択内科治療",
         "species_info": {
             "dog": {
                 "dose": "1-2 mg/kg PO q8-12h (Proin ER: 2-4 mg/kg PO q24h)",
@@ -618,12 +618,12 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "エストリオール（インキュリン）",
         "category": "endocrine",
         "mechanism": "Short-acting estrogen; selectively sensitizes urethral smooth muscle alpha-receptors and increases mucosal coaptation. Unlike estradiol, minimal bone marrow suppression risk",
-        "mechanism_ja": "短時間作用型エストロゲン；尿道平滑筋α��容体を選択的に感作し粘膜密着を増加。エストラジオールと異なり骨髄抑制リスク最小限",
+        "mechanism_ja": "短時間作用型エストロゲン；尿道平滑筋α受容体を選択的に感作し粘膜密着を増加。エストラジオールと異なり骨髄抑制リスク最小限",
         "species_info": {
             "dog": {
                 "dose": "1-2 mg/dog PO q24h (reduce to minimum effective dose after 2 weeks)",
                 "notes": "USMI in spayed females (EMA-approved: Incurin); safer than DES. Can combine with PPA for refractory cases",
-                "notes_ja": "��妊雌のUSMI（EMA承認：インキュ���ン）；DESより安全。難治例ではPPA併用可",
+                "notes_ja": "避妊雌のUSMI（EMA承認：インキュリン）；DESより安全。難治例ではPPA併用可",
             }
         },
         "side_effects": [
@@ -634,7 +634,7 @@ DRUGS_BATCH_16: list[dict] = [
         ],
         "side_effects_ja": ["外陰部腫脹", "雄の誘引", "乳腺発達", "稀：骨髄抑制（DESよりはるかに少ない）"],
         "contraindications": "Estrogen-dependent tumors, intact females (endometrial hyperplasia), bone marrow suppression",
-        "contraindications_ja": "エス���ロゲン依存性腫瘍、未避妊雌（子宮内膜過形成）、骨髄抑制",
+        "contraindications_ja": "エストロゲン依存性腫瘍、未避妊雌（子宮内膜過形成）、骨髄抑制",
         "drug_interactions": [
             {
                 "drug": "Phenylpropanolamine",
@@ -646,7 +646,7 @@ DRUGS_BATCH_16: list[dict] = [
                 "drug": "Corticosteroids",
                 "severity": "moderate",
                 "description": "May antagonize estrogenic effects on urethral tone",
-                "description_ja": "尿道緊張へのエスト��ゲン効果を拮抗する可能性",
+                "description_ja": "尿道緊張へのエストロゲン効果を拮抗する可能性",
             },
         ],
     },
@@ -656,7 +656,7 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "トリロスタン（猫高アルドステロン症）",
         "category": "endocrine",
         "mechanism": "3-beta-hydroxysteroid dehydrogenase inhibitor; blocks cortisol AND aldosterone synthesis. In cats, used for primary hyperaldosteronism (Conn's syndrome) which causes severe hypokalemia",
-        "mechanism_ja": "3β-ヒドロキシステロイドデヒドロゲナーゼ阻害薬；コルチゾールとアルドステロン合成を遮断。猫���は重度低カリウム血症を惹起する原発性高アルドステロン症（コン症候群）に使用",
+        "mechanism_ja": "3β-ヒドロキシステロイドデヒドロゲナーゼ阻害薬；コルチゾールとアルドステロン合成を遮断。猫では重度低カリウム血症を惹起する原発性高アルドステロン症（コン症候群）に使用",
         "species_info": {
             "cat": {
                 "dose": "10-30 mg/cat PO q12-24h (start 10mg q24h, titrate based on K+ levels)",
@@ -674,7 +674,7 @@ DRUGS_BATCH_16: list[dict] = [
             "副腎皮質機能低下症（医原性アディソンクリーゼ）",
             "食欲不振",
             "嗜眠",
-            "高カ��ウム血症（過剰是正）",
+            "高カリウム血症（過剰是正）",
         ],
         "contraindications": "Primary hepatic disease, concurrent spironolactone (additive mineralocorticoid blockade)",
         "contraindications_ja": "原発性肝疾患、スピロノラクトン併用（相加的ミネラルコルチコイド遮断）",
@@ -683,7 +683,7 @@ DRUGS_BATCH_16: list[dict] = [
                 "drug": "Spironolactone",
                 "severity": "major",
                 "description": "Additive aldosterone blockade; potentially fatal hyperkalemia",
-                "description_ja": "相加的ア��ドステロン遮断；致死的高カリウム血症の可能性",
+                "description_ja": "相加的アルドステロン遮断；致死的高カリウム血症の可能性",
             },
             {
                 "drug": "ACE inhibitors",
@@ -699,7 +699,7 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "メチマゾール経皮（PLOゲル）",
         "category": "endocrine",
         "mechanism": "Antithyroid drug in transdermal pluronic-lecithin organogel (PLO); absorbed through ear pinna skin avoiding GI side effects. Inhibits thyroid peroxidase blocking T3/T4 synthesis",
-        "mechanism_ja": "経皮プルロニック-レシチンオルガノゲル（PLO）の抗甲状腺薬；耳介皮膚から吸収され消化器副作用を回避。甲���腺ペルオキシダーゼを阻害しT3/T4合成を遮断",
+        "mechanism_ja": "経皮プルロニック-レシチンオルガノゲル（PLO）の抗甲状腺薬；耳介皮膚から吸収され消化器副作用を回避。甲状腺ペルオキシダーゼを阻害しT3/T4合成を遮断",
         "species_info": {
             "cat": {
                 "dose": "2.5-5 mg/ear q12h (apply to inner pinna, alternate ears)",
@@ -713,7 +713,7 @@ DRUGS_BATCH_16: list[dict] = [
             "Same systemic effects as oral (hepatotoxicity, blood dyscrasias) but less GI upset",
         ],
         "side_effects_ja": [
-            "局所皮��刺激（耳）",
+            "局所皮膚刺激（耳）",
             "顔面掻痒",
             "経口と同じ全身性副作用（肝毒性・血液異常）だが消化器障害は少ない",
         ],
@@ -734,7 +734,7 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "フィロコキシブ馬用（エクイオックス）",
         "category": "nsaids",
         "mechanism": "COX-2 selective NSAID; provides anti-inflammatory and analgesic effects with reduced GI/renal toxicity compared to non-selective NSAIDs. Paste and injectable formulations for horses",
-        "mechanism_ja": "COX-2選択的NSAID；非選択的NSAIDsと比較し消化管/腎毒性を軽減しつつ抗炎症・鎮痛効���を提供。馬用ペーストおよび注射製剤",
+        "mechanism_ja": "COX-2選択的NSAID；非選択的NSAIDsと比較し消化管/腎毒性を軽減しつつ抗炎症・鎮痛効果を提供。馬用ペーストおよび注射製剤",
         "species_info": {
             "horse": {
                 "dose": "0.1 mg/kg PO q24h (Equioxx paste); 0.09 mg/kg IV once (Equioxx injection)",
@@ -748,15 +748,15 @@ DRUGS_BATCH_16: list[dict] = [
             "Oral mucosal erosion",
             "Right dorsal colitis",
         ],
-        "side_effects_ja": ["消化��潰瘍（ブートより少ない）", "腎乳頭壊死", "口腔粘膜びらん", "右背側結腸炎"],
+        "side_effects_ja": ["消化管潰瘍（ブートより少ない）", "腎乳頭壊死", "口腔粘膜びらん", "右背側結腸炎"],
         "contraindications": "Dehydration, concurrent NSAIDs/corticosteroids, renal/hepatic disease, foals <1 year",
-        "contraindications_ja": "脱水��NSAIDs/コルチコステロイド併用、腎/肝疾患、1歳未満の子馬",
+        "contraindications_ja": "脱水、NSAIDs/コルチコステロイド併用、腎/肝疾患、1歳未満の子馬",
         "drug_interactions": [
             {
                 "drug": "Other NSAIDs",
                 "severity": "major",
                 "description": "Never combine NSAIDs (phenylbutazone + firocoxib = severe GI ulceration)",
-                "description_ja": "NSAIDsの併用禁止（フェニルブタゾン+フ���ロコキシブ=重度消化管潰瘍）",
+                "description_ja": "NSAIDsの併用禁止（フェニルブタゾン+フィロコキシブ=重度消化管潰瘍）",
             },
             {
                 "drug": "Corticosteroids",
@@ -769,7 +769,7 @@ DRUGS_BATCH_16: list[dict] = [
     {
         "id": "omeprazole_equine",
         "name": "Omeprazole Equine (GastroGard)",
-        "name_ja": "オメプラ��ール馬用（ガストロガード）",
+        "name_ja": "オメプラゾール馬用（ガストロガード）",
         "category": "gastrointestinal",
         "mechanism": "Proton pump inhibitor specifically formulated for horses; inhibits H+/K+-ATPase in gastric parietal cells. Requires enteric protection for equine gastric acid environment",
         "mechanism_ja": "馬用に特別に製剤化されたプロトンポンプ阻害薬；胃壁細胞のH+/K+-ATPaseを阻害。馬の胃酸環境に対する腸溶性保護が必要",
@@ -777,7 +777,7 @@ DRUGS_BATCH_16: list[dict] = [
             "horse": {
                 "dose": "Treatment: 4 mg/kg PO q24h × 28d; Prevention: 1-2 mg/kg PO q24h",
                 "notes": "EGUS gold standard treatment (87% healing rate at 28d). Give on empty stomach 30-60min before feed. GastroGard paste",
-                "notes_ja": "EGUSゴールドスタンダード��療（28日で87%治癒率）。食前30-60分に空腹投与。ガストロガードペースト",
+                "notes_ja": "EGUSゴールドスタンダード治療（28日で87%治癒率）。食前30-60分に空腹投与。ガストロガードペースト",
             }
         },
         "side_effects": [
@@ -809,12 +809,12 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "サクシニルコリン（馬緊急）",
         "category": "anesthetics",
         "mechanism": "Depolarizing neuromuscular blocker; mimics acetylcholine causing persistent depolarization and phase II block. Ultra-rapid onset (30-60s), ultra-short duration (5-10 min in horses)",
-        "mechanism_ja": "脱分極性神経筋遮断薬；アセチルコリンを模倣し持続的��分極と第II相ブロックを惹起。超速効性（30-60秒）、超短時間作用（馬で5-10分）",
+        "mechanism_ja": "脱分極性神経筋遮断薬；アセチルコリンを模倣し持続的脱分極と第II相ブロックを惹起。超速効性（30-60秒）、超短時間作用（馬で5-10分）",
         "species_info": {
             "horse": {
                 "dose": "0.1 mg/kg IV (rapid recumbency for emergency procedures)",
                 "notes": "Chemical casting for field emergencies only; no analgesia/sedation (MUST combine with sedation). Ethical concerns limit use",
-                "notes_ja": "フィール��緊急時のケミカルキャスティングのみ；鎮痛/鎮静なし（鎮静と必ず併用）。倫���的懸念から使用制限",
+                "notes_ja": "フィールド緊急時のケミカルキャスティングのみ；鎮痛/鎮静なし（鎮静と必ず併用）。倫理的懸念から使用制限",
             }
         },
         "side_effects": [
@@ -824,9 +824,9 @@ DRUGS_BATCH_16: list[dict] = [
             "Masseter spasm",
             "Cardiac arrhythmias",
         ],
-        "side_effects_ja": ["悪性高熱症（���受性馬）", "高カリウム血症", "筋線維束攣縮", "咬筋痙攣", "心不整脈"],
+        "side_effects_ja": ["悪性高熱症（感受性馬）", "高カリウム血症", "筋線維束攣縮", "咬筋痙攣", "心不整脈"],
         "contraindications": "MH susceptibility, hyperkalemia, burns/crush injuries (K+ release), denervation atrophy, myopathies",
-        "contraindications_ja": "悪性高熱症感受性、高カ��ウム血症、熱傷/圧挫傷（K+放出）、除神経萎縮、ミオパチー",
+        "contraindications_ja": "悪性高熱症感受性、高カリウム血症、熱傷/圧挫傷（K+放出）、除神経萎縮、ミオパチー",
         "drug_interactions": [
             {
                 "drug": "Anticholinesterases",
@@ -853,7 +853,7 @@ DRUGS_BATCH_16: list[dict] = [
             "horse": {
                 "dose": "0.04 mg/kg sublingually (apply under tongue, do NOT swallow)",
                 "notes": "Standing sedation for farrier, clipping, minor wound care; owner can administer. FDA-approved. 40 min onset, 2-3h duration",
-                "notes_ja": "装蹄、クリッピング、軽微創傷処置の立位鎮静；飼��主が投与可能。FDA承認。発現40分、持続2-3��間",
+                "notes_ja": "装蹄、クリッピング、軽微創傷処置の立位鎮静；飼い主が投与可能。FDA承認。発現40分、持続2-3時間",
             }
         },
         "side_effects": ["Ataxia", "Sweating", "Bradycardia", "Penile prolapse (geldings)", "Reduced GI motility"],
@@ -881,12 +881,12 @@ DRUGS_BATCH_16: list[dict] = [
         "name_ja": "ペルゴリド（プラセンド）",
         "category": "endocrine",
         "mechanism": "D1/D2 dopamine receptor agonist; restores dopaminergic inhibition of pars intermedia melanotrophs in PPID. Reduces ACTH hypersecretion from dysfunctional pituitary",
-        "mechanism_ja": "D1/D2ドパミン受容体作動薬；PPIDの中間葉メラノトロフへのドパミン抑制を回復。機能不全下垂体から���ACTH過分泌を減少",
+        "mechanism_ja": "D1/D2ドパミン受容体作動薬；PPIDの中間葉メラノトロフへのドパミン抑制を回復。機能不全下垂体からのACTH過分泌を減少",
         "species_info": {
             "horse": {
                 "dose": "2 μg/kg PO q24h (start 0.5 mg/horse); titrate based on ACTH levels",
                 "notes": "PPID (Equine Cushing's) — FDA-approved (Prascend). Lifelong treatment; monitor ACTH q4-6 months. Seasonal ACTH rise (autumn) may need dose increase",
-                "notes_ja": "PPID（馬クッシング病）— FDA承認（プラセンド）。生涯治療；ACTH 4-6ヶ月毎モニタリング��季節性ACTH上昇（秋）で増量必要な場合あり",
+                "notes_ja": "PPID（馬クッシング病）— FDA承認（プラセンド）。生涯治療；ACTH 4-6ヶ月毎モニタリング。季節性ACTH上昇（秋）で増量必要な場合あり",
             }
         },
         "side_effects": [
@@ -897,7 +897,7 @@ DRUGS_BATCH_16: list[dict] = [
             "Laminitis exacerbation (rare, usually from inadequate control)",
         ],
         "side_effects_ja": [
-            "食欲不振（初期2-3日��",
+            "食欲不振（初期2-3日）",
             "嗜眠",
             "下痢",
             "発汗",

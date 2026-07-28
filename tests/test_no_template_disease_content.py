@@ -47,6 +47,15 @@ FORBIDDEN_TEMPLATES = [
     "代謝・内分泌疾患の治療はホルモン補充療法または過剰ホルモン抑制療法が基本となる。定期的な血中ホルモン濃度測定と臨床症状の評価に基づき投与量を調整する。食事管理、適度な運動、体重管理を併用し、合併症の予防と早期発見のための定期的なモニタリングを継続する。",
     # "診断による原因同定" variant
     "診断による原因同定。診断に基づく種適切な治療。支持療法：適切な温度・水分・栄養維持。疼痛管理：メロキシカム0.2-0.5 mg/kg q24-48h。治療反応モニタリング。診断と重症度次第で予後決定。",
+    # Generic disease-class paragraphs that were bolted onto specific (often
+    # mismatched) diseases as a suffix — cardiac CHF text on a stress syndrome,
+    # nutritional text on dermatologic/behavioral diseases, trauma ABCDE text on
+    # non-trauma entries. The disease-specific text always preceded them, so the
+    # bolt-on was pure copy-paste noise. Stripped 2026-07 (10 cardiac / 84
+    # nutritional / 24 trauma instances).
+    "心疾患の治療は病態に応じた薬物療法が中心であり、うっ血性心不全にはフロセミド、ピモベンダン、ACE阻害薬の三剤併用が標準的である。不整脈管理、血栓予防、運動制限を適切に組み合わせる。定期的な心エコー検査、胸部X線、心臓バイオマーカー測定による経過観察が必須である。",
+    "栄養性疾患の治療は不足している栄養素の特定と適切な補充が基本となる。急性欠乏症では非経口投与による迅速な補正を行い、慢性例では食事内容の段階的改善と経口サプリメント投与を実施する。基礎となる吸収障害の評価と治療、および長期的な栄養モニタリングが重要である。",
+    "外傷の治療は生命を脅かす損傷の即座の安定化から開始し、ABCDEアプローチに従い系統的に評価・処置する。疼痛管理として多剤併用鎮痛法を導入し、必要に応じて外科的修復を行う。創傷管理、骨折固定、軟部組織修復を実施し、リハビリテーションプログラムにより機能回復を図る。",
 ]
 
 

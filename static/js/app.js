@@ -1608,12 +1608,12 @@ function renderSpeciesGrid(){
   grid.dataset.bound="1";
   grid.addEventListener("click",e=>{
     const card=e.target.closest(".species-card");
-    if(card)selectSpecies(card.dataset.species);
+    if(card)selectSpecies(card.dataset.species,{scroll:true});
   });
   grid.addEventListener("keydown",e=>{
     const card=e.target.closest(".species-card");
     if(!card)return;
-    if(e.key==="Enter"||e.key===" "){e.preventDefault();selectSpecies(card.dataset.species);return;}
+    if(e.key==="Enter"||e.key===" "){e.preventDefault();selectSpecies(card.dataset.species,{scroll:true});return;}
     if(["ArrowRight","ArrowLeft","ArrowDown","ArrowUp"].includes(e.key)){
       e.preventDefault();
       const cards=[...grid.querySelectorAll('.species-card:not([style*="display: none"])')];
@@ -1629,7 +1629,7 @@ function renderSpeciesGrid(){
   });
 }
 
-function selectSpecies(id){
+function selectSpecies(id,opts){
   trackEvent("select_species",{species:id});
   currentSpecies=id;selectedSymptoms.clear();currentBreed="";
   document.querySelectorAll(".species-card").forEach(c=>{
@@ -1656,6 +1656,20 @@ function selectSpecies(id){
     const _pf=()=>{if(!drugsLoaded)loadDrugDictionary();};
     if("requestIdleCallback" in window)requestIdleCallback(_pf,{timeout:2500});
     else setTimeout(_pf,1200);
+  }
+  /* On a user tap of a species card, carry the viewport to the "select symptoms"
+     step so the next action is visible — on mobile the checker sits below the
+     species grid and the tap otherwise looks like nothing happened. Programmatic
+     calls (deep link, history restore, cross-view flows) pass no opts and never
+     move the page. Skip when the card is already comfortably in view (desktop). */
+  if(opts&&opts.scroll){
+    const target=document.querySelector("#viewChecker .panels");
+    if(target&&target.offsetParent!==null){
+      const top=target.getBoundingClientRect().top;
+      const stickyOffset=parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sticky-offset"),10)||112;
+      const comfy=top>=stickyOffset&&top<window.innerHeight*0.6;
+      if(!comfy)requestAnimationFrame(()=>scrollToAnchor(target));
+    }
   }
 }
 
