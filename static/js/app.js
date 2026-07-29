@@ -1016,7 +1016,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     /* Attach click/keyboard handlers to all DB list containers at init (event delegation).
        These containers exist in static HTML and never get replaced — only their innerHTML changes.
        Attaching once at init avoids timing issues with async data loading. */
-    ["diseaseDbList","drugList","anesthesiaList"].forEach(id=>{
+    ["diseaseDbList","drugList","anesthesiaList","emergencyList"].forEach(id=>{
       const el=document.getElementById(id);
       if(el&&!el.dataset.handlersAttached){el.dataset.handlersAttached="1";_attachDbItemHandlers(el);}
     });
@@ -5820,21 +5820,10 @@ function renderEmergencyList(){
   document.getElementById("emergencyCount").textContent=`${filtered.length} / ${emergencyData.length}`;
   if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${currentLang==="ja"?"該当するプロトコルがありません":"No matching protocols"}</div>`;return;}
   list.innerHTML=filtered.map(p=>renderEmergencyProtocol(p)).join("");
-  // Attach toggle handlers (using same expand/collapse pattern as drugs/anesthesia)
-  if(!list.dataset.handlersAttached){
-    list.dataset.handlersAttached="1";
-    list.addEventListener("click",e=>{
-      const item=e.target.closest(".disease-db-item");
-      if(!item)return;
-      // Don't toggle if click was inside the open detail
-      if(e.target.closest(".disease-detail.open"))return;
-      const detail=item.querySelector(".disease-detail");
-      if(detail){
-        const isOpen=detail.classList.toggle("open");
-        item.setAttribute("aria-expanded",String(isOpen));
-      }
-    });
-  }
+  /* Toggle/expand handlers are attached once at init via _attachDbItemHandlers
+     (see the ["diseaseDbList","drugList","anesthesiaList","emergencyList"] loop),
+     so an expanded protocol scrolls to a usable position, accordion-collapses
+     siblings and gets a close button — identical to the other DB lists. */
 }
 
 function renderEmergencyProtocol(p){
