@@ -103,6 +103,25 @@ def test_disease_search_input_pins_scroll_anchor():
 
 
 # ---------------------------------------------------------------------------
+# app.js — expanding a disease detail must not drift the mobile page
+# ---------------------------------------------------------------------------
+def test_disease_detail_expand_does_a_single_scroll():
+    """Expanding a disease/drug/anaesthesia detail scrolls it to a reading
+    position once. It must NOT run scrollToAnchor's 12s re-anchoring watcher
+    (which chased the async drug tables and drifted the page up and down on
+    mobile), and focus() must not scroll-into-view."""
+    js = _read("static/js/app.js")
+
+    match = re.search(r"function toggleDbItem\(el\)\{.*?\n\}", js, re.S)
+    assert match, "Could not locate toggleDbItem"
+    body = match.group(0)
+    assert "scrollToAnchor(el,{settle:false})" in body, (
+        "detail expansion must use a one-shot scroll (settle:false), not the 12s watcher"
+    )
+    assert "focus({preventScroll:true})" in body, "detail expansion focus() must not scroll-into-view"
+
+
+# ---------------------------------------------------------------------------
 # Service worker cache version
 # ---------------------------------------------------------------------------
 def test_service_worker_cache_name_is_versioned():

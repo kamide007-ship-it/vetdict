@@ -6426,9 +6426,18 @@ function toggleDbItem(el){
         detail.prepend(closeBtn);
       }
       requestAnimationFrame(()=>{
-        scrollToAnchor(el);
+        /* One clean scroll to a reading position — NOT the 12s re-anchoring
+           watcher. The detail's own markup renders synchronously (so the initial
+           target is reachable immediately); the only later growth is the async
+           drug tables, which append *below* the header and so never move it. On
+           mobile the page itself scrolls, and letting the settle watcher keep
+           re-anchoring as those tables streamed in made the page drift up and
+           down while the user was trying to read it. */
+        scrollToAnchor(el,{settle:false});
+        /* Move focus into the panel for screen readers, but never let focus()
+           scroll-into-view — that re-introduced the same vertical lurch. */
         const firstFocusable=detail.querySelector("a,button,[tabindex='0']");
-        if(firstFocusable)setTimeout(()=>firstFocusable.focus(),300);
+        if(firstFocusable)setTimeout(()=>{try{firstFocusable.focus({preventScroll:true});}catch(_){firstFocusable.focus();}},300);
       });
       if(!detail.dataset.drugsLoaded){
         detail.dataset.drugsLoaded="1";
