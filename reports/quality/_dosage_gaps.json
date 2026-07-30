@@ -1,14 +1,20 @@
 {
-  "total_gaps": 481,
-  "missing_route": 183,
-  "missing_frequency": 410,
+  "total_gaps": 396,
+  "missing_route": 108,
+  "missing_frequency": 363,
   "excluded_by_class": {
     "supplement (label-directed)": 88,
-    "single-dose agent (route given)": 256,
-    "inhalant / topical / local anaesthetic": 206
+    "single-dose agent (route given)": 257,
+    "inhalant / topical / local anaesthetic": 135,
+    "cross-referenced to another species": 4
   },
-  "unestablished_count": 41,
+  "unestablished_count": 95,
   "unestablished": [
+    {
+      "drug": "Methimazole (Tapazole/Felimazole)",
+      "species": "dog",
+      "text": "Rarely used; thyroid tumors in dogs usually require surgery ほとんど使用しない。犬の甲状腺腫瘍は通常手術が必要。"
+    },
     {
       "drug": "Levothyroxine (Soloxine/Thyro-Tabs)",
       "species": "rabbit",
@@ -95,6 +101,16 @@
       "text": "Not well established 十分に確立されていない"
     },
     {
+      "drug": "Potassium Bromide",
+      "species": "horse",
+      "text": "Not commonly used 一般的には使用されない"
+    },
+    {
+      "drug": "Melatonin",
+      "species": "horse",
+      "text": "Not commonly used 一般的には使用されない"
+    },
+    {
       "drug": "Melatonin",
       "species": "bird",
       "text": "Not well established 十分に確立されていない"
@@ -115,6 +131,21 @@
       "text": "Not well established 十分に確立されていない"
     },
     {
+      "drug": "Pergolide",
+      "species": "dog",
+      "text": "Not commonly used (trilostane preferred) 一般的には使用されない（トリロスタンが好まれる）"
+    },
+    {
+      "drug": "Pergolide",
+      "species": "cat",
+      "text": "Not commonly used 一般的には使用されない"
+    },
+    {
+      "drug": "Vincristine",
+      "species": "horse",
+      "text": "Not commonly used 一般的には使用されない"
+    },
+    {
       "drug": "Aluminum Hydroxide",
       "species": "horse",
       "text": "Not commonly needed 通常は不要"
@@ -131,6 +162,11 @@
     },
     {
       "drug": "Sotalol",
+      "species": "horse",
+      "text": "Not commonly used 一般的には使用されない"
+    },
+    {
+      "drug": "Sotalol",
       "species": "ferret",
       "text": "Not well established 十分に確立されていない"
     },
@@ -153,6 +189,16 @@
       "drug": "Clopidogrel",
       "species": "rabbit",
       "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Sulfasalazine",
+      "species": "horse",
+      "text": "Not commonly used 一般的には使用されない"
+    },
+    {
+      "drug": "Vitamin B12 (Cobalamin)",
+      "species": "horse",
+      "text": "Not commonly supplemented 通常は補充不要"
     },
     {
       "drug": "Erythropoietin (EPO)",
@@ -191,6 +237,11 @@
     },
     {
       "drug": "Calcitriol",
+      "species": "horse",
+      "text": "Not commonly used 一般的には使用されない"
+    },
+    {
+      "drug": "Calcitriol",
       "species": "rabbit",
       "text": "Not well established 十分に確立されていない"
     },
@@ -213,6 +264,226 @@
       "drug": "Calcitriol",
       "species": "parrot",
       "text": "Not well established 十分に確立されていない"
+    },
+    {
+      "drug": "Etomidate",
+      "species": "horse",
+      "text": "0.5-1 mg/kg IV (foals); 1-2 mg/kg IV (adults, rarely used) 子馬: 0.5-1 mg/kg 静注；成馬: 1-2 mg/kg（稀に使用）"
+    },
+    {
+      "drug": "Telmisartan",
+      "species": "horse",
+      "text": "Not established"
+    },
+    {
+      "drug": "Norepinephrine",
+      "species": "bird",
+      "text": "Not established"
+    },
+    {
+      "drug": "Norepinephrine",
+      "species": "parakeet",
+      "text": "Not established"
+    },
+    {
+      "drug": "Norepinephrine",
+      "species": "parrot",
+      "text": "Not established"
+    },
+    {
+      "drug": "Propranolol",
+      "species": "bird",
+      "text": "Not established"
+    },
+    {
+      "drug": "Propranolol",
+      "species": "parakeet",
+      "text": "Not established"
+    },
+    {
+      "drug": "Propranolol",
+      "species": "parrot",
+      "text": "Not established"
+    },
+    {
+      "drug": "Mexiletine",
+      "species": "cat",
+      "text": "Not commonly used"
+    },
+    {
+      "drug": "Verapamil",
+      "species": "cat",
+      "text": "0.025 mg/kg slow IV; rarely used PO"
+    },
+    {
+      "drug": "Ivabradine",
+      "species": "cat",
+      "text": "Not established"
+    },
+    {
+      "drug": "Acetazolamide",
+      "species": "reptile",
+      "text": "Not established"
+    },
+    {
+      "drug": "Acetazolamide",
+      "species": "lizard",
+      "text": "Not established"
+    },
+    {
+      "drug": "Acetazolamide",
+      "species": "snake",
+      "text": "Not established"
+    },
+    {
+      "drug": "Acetazolamide",
+      "species": "tortoise",
+      "text": "Not established"
+    },
+    {
+      "drug": "Sacubitril/Valsartan",
+      "species": "cat",
+      "text": "Not established"
+    },
+    {
+      "drug": "Sildenafil (Pulmonary Hypertension)",
+      "species": "bird",
+      "text": "Not established"
+    },
+    {
+      "drug": "Sildenafil (Pulmonary Hypertension)",
+      "species": "parakeet",
+      "text": "Not established"
+    },
+    {
+      "drug": "Sildenafil (Pulmonary Hypertension)",
+      "species": "parrot",
+      "text": "Not established"
+    },
+    {
+      "drug": "Prazosin",
+      "species": "horse",
+      "text": "Not commonly used in horses"
+    },
+    {
+      "drug": "Misoprostol (Gastroprotection)",
+      "species": "cat",
+      "text": "Not commonly used in cats"
+    },
+    {
+      "drug": "Rebamipide (Mucosta)",
+      "species": "horse",
+      "text": "Not established for horses"
+    },
+    {
+      "drug": "Eprinomectin",
+      "species": "dog",
+      "text": "Not commonly used in dogs (other options preferred)"
+    },
+    {
+      "drug": "Methocarbamol (Exotic/Equine)",
+      "species": "rabbit",
+      "text": "Not commonly used"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "dog",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "cat",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "rabbit",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "ferret",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "hamster",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "guinea_pig",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "chinchilla",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "degu",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "hedgehog",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "sugar_glider",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "bird",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "parakeet",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "parrot",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "reptile",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "snake",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "lizard",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "tortoise",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "amphibian",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "fish",
+      "text": "Not established in this species 本種では確立されていない"
+    },
+    {
+      "drug": "Sulpiride",
+      "species": "exotic_other",
+      "text": "Not established in this species 本種では確立されていない"
     }
   ],
   "gaps": [
@@ -269,110 +540,6 @@
       "drug": "Prednisolone",
       "species": "fish",
       "dosage": "1-5 mg/kg IM/IP (large fish only) 1-5 mg/kg 筋注/腹腔内（大型魚のみ）",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "bird",
-      "dosage": "2-4 mg/kg IM (emergency only) 2-4 mg/kg 筋注（緊急時のみ）",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "hamster",
-      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "hedgehog",
-      "dosage": "0.2-2 mg/kg IM/IV 0.2-2 mg/kg 筋注/静注",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "chinchilla",
-      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "snake",
-      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "tortoise",
-      "dosage": "0.5-2 mg/kg IM 0.5-2 mg/kg 筋注",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "reptile",
-      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "parakeet",
-      "dosage": "2-4 mg/kg IM (emergency only) 2-4 mg/kg 筋注（緊急時のみ）",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "parrot",
-      "dosage": "2-4 mg/kg IM (emergency only) 2-4 mg/kg 筋注（緊急時のみ）",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "lizard",
-      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "degu",
-      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dexamethasone",
-      "drug": "Dexamethasone",
-      "species": "sugar_glider",
-      "dosage": "0.5-2 mg/kg IM/SC 0.5-2 mg/kg 筋注/皮下",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "methimazole",
-      "drug": "Methimazole (Tapazole/Felimazole)",
-      "species": "dog",
-      "dosage": "Rarely used; thyroid tumors in dogs usually require surgery ほとんど使用しない。犬の甲状腺腫瘍は通常手術が必要。",
       "missing_route": false,
       "missing_frequency": true
     },
@@ -681,102 +848,6 @@
       "missing_frequency": true
     },
     {
-      "drug_id": "n_acetylcysteine",
-      "drug": "N-Acetylcysteine (NAC)",
-      "species": "ferret",
-      "dosage": "Same protocol as cats 猫と同じプロトコル",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "dorzolamide",
-      "drug": "Dorzolamide",
-      "species": "dog",
-      "dosage": "1 drop q8h (alone) or q12h (with timolol) 1滴 8時間毎（単独）または12時間毎（チモロールと併用）",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "dorzolamide",
-      "drug": "Dorzolamide",
-      "species": "cat",
-      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "dorzolamide",
-      "drug": "Dorzolamide",
-      "species": "horse",
-      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "dorzolamide",
-      "drug": "Dorzolamide",
-      "species": "rabbit",
-      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "dorzolamide",
-      "drug": "Dorzolamide",
-      "species": "guinea_pig",
-      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "dorzolamide",
-      "drug": "Dorzolamide",
-      "species": "bird",
-      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "dorzolamide",
-      "drug": "Dorzolamide",
-      "species": "parakeet",
-      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "dorzolamide",
-      "drug": "Dorzolamide",
-      "species": "parrot",
-      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "dorzolamide",
-      "drug": "Dorzolamide",
-      "species": "degu",
-      "dosage": "1 drop q8-12h 1滴 8-12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "potassium_bromide",
-      "drug": "Potassium Bromide",
-      "species": "horse",
-      "dosage": "Not commonly used 一般的には使用されない",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "melatonin",
-      "drug": "Melatonin",
-      "species": "horse",
-      "dosage": "Not commonly used 一般的には使用されない",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
       "drug_id": "deslorelin",
       "drug": "Deslorelin",
       "species": "dog",
@@ -830,30 +901,6 @@
       "species": "parrot",
       "dosage": "4.7 mg implant SC/IM 4.7 mg インプラント皮下/筋注",
       "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "pergolide",
-      "drug": "Pergolide",
-      "species": "dog",
-      "dosage": "Not commonly used (trilostane preferred) 一般的には使用されない（トリロスタンが好まれる）",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "pergolide",
-      "drug": "Pergolide",
-      "species": "cat",
-      "dosage": "Not commonly used 一般的には使用されない",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "vincristine",
-      "drug": "Vincristine",
-      "species": "horse",
-      "dosage": "Not commonly used 一般的には使用されない",
-      "missing_route": true,
       "missing_frequency": true
     },
     {
@@ -921,102 +968,6 @@
       "missing_frequency": true
     },
     {
-      "drug_id": "latanoprost",
-      "drug": "Latanoprost",
-      "species": "dog",
-      "dosage": "1 drop q12-24h 1滴 12-24時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "latanoprost",
-      "drug": "Latanoprost",
-      "species": "cat",
-      "dosage": "1 drop q12-24h 1滴 12-24時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "latanoprost",
-      "drug": "Latanoprost",
-      "species": "horse",
-      "dosage": "1 drop q12h 1滴 12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "latanoprost",
-      "drug": "Latanoprost",
-      "species": "rabbit",
-      "dosage": "1 drop q12h 1滴 12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "latanoprost",
-      "drug": "Latanoprost",
-      "species": "guinea_pig",
-      "dosage": "1 drop q12h 1滴 12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "latanoprost",
-      "drug": "Latanoprost",
-      "species": "bird",
-      "dosage": "1 drop q12h 1滴 12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "latanoprost",
-      "drug": "Latanoprost",
-      "species": "parakeet",
-      "dosage": "1 drop q12h 1滴 12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "latanoprost",
-      "drug": "Latanoprost",
-      "species": "parrot",
-      "dosage": "1 drop q12h 1滴 12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "latanoprost",
-      "drug": "Latanoprost",
-      "species": "degu",
-      "dosage": "1 drop q12h 1滴 12時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "sotalol",
-      "drug": "Sotalol",
-      "species": "horse",
-      "dosage": "Not commonly used 一般的には使用されない",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "sulfasalazine",
-      "drug": "Sulfasalazine",
-      "species": "horse",
-      "dosage": "Not commonly used 一般的には使用されない",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "vitamin_b12",
-      "drug": "Vitamin B12 (Cobalamin)",
-      "species": "horse",
-      "dosage": "Not commonly supplemented 通常は補充不要",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
       "drug_id": "iron_dextran",
       "drug": "Iron Dextran",
       "species": "cat",
@@ -1051,33 +1002,9 @@
     {
       "drug_id": "desmopressin",
       "drug": "Desmopressin (DDAVP)",
-      "species": "cat",
-      "dosage": "1-2 drops intranasally q12-24h 1-2滴 鼻腔内 12-24時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "desmopressin",
-      "drug": "Desmopressin (DDAVP)",
       "species": "horse",
       "dosage": "0.25 mcg/kg IV (diagnostic) 0.25 mcg/kg 静注（診断用）",
       "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "desmopressin",
-      "drug": "Desmopressin (DDAVP)",
-      "species": "ferret",
-      "dosage": "1 drop intranasally q12-24h 1滴 鼻腔内 12-24時間毎",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "calcitriol",
-      "drug": "Calcitriol",
-      "species": "horse",
-      "dosage": "Not commonly used 一般的には使用されない",
-      "missing_route": true,
       "missing_frequency": true
     },
     {
@@ -1273,14 +1200,6 @@
       "missing_frequency": true
     },
     {
-      "drug_id": "remifentanil",
-      "drug": "Remifentanil",
-      "species": "cat",
-      "dosage": "CRI: 5-30 μg/kg/hr CRI: 5-30 μg/kg/時",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
       "drug_id": "atracurium",
       "drug": "Atracurium",
       "species": "cat",
@@ -1329,70 +1248,6 @@
       "missing_frequency": true
     },
     {
-      "drug_id": "telmisartan",
-      "drug": "Telmisartan",
-      "species": "horse",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "nitroprusside",
-      "drug": "Sodium Nitroprusside",
-      "species": "dog",
-      "dosage": "1-10 μg/kg/min CRI",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "nitroprusside",
-      "drug": "Sodium Nitroprusside",
-      "species": "cat",
-      "dosage": "0.5-5 μg/kg/min CRI",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "nitroprusside",
-      "drug": "Sodium Nitroprusside",
-      "species": "horse",
-      "dosage": "0.5-5 μg/kg/min CRI",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "nitroglycerin",
-      "drug": "Nitroglycerin",
-      "species": "dog",
-      "dosage": "2% ointment: 0.5-2 inch strip applied to inner pinna or groin q6-8h",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "nitroglycerin",
-      "drug": "Nitroglycerin",
-      "species": "cat",
-      "dosage": "2% ointment: 0.25 inch strip to pinna q6-8h",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "phenylephrine",
-      "drug": "Phenylephrine",
-      "species": "cat",
-      "dosage": "0.5-2 μg/kg/min CRI",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "phenylephrine",
-      "drug": "Phenylephrine",
-      "species": "horse",
-      "dosage": "0.5-3 μg/kg/min CRI",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
       "drug_id": "phenylephrine",
       "drug": "Phenylephrine",
       "species": "bird",
@@ -1414,54 +1269,6 @@
       "species": "parrot",
       "dosage": "10-20 μg/kg IM/IV",
       "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "norepinephrine",
-      "drug": "Norepinephrine",
-      "species": "dog",
-      "dosage": "0.1-2 μg/kg/min CRI",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "norepinephrine",
-      "drug": "Norepinephrine",
-      "species": "cat",
-      "dosage": "0.05-1 μg/kg/min CRI",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "norepinephrine",
-      "drug": "Norepinephrine",
-      "species": "horse",
-      "dosage": "0.1-1 μg/kg/min CRI",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "norepinephrine",
-      "drug": "Norepinephrine",
-      "species": "bird",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "norepinephrine",
-      "drug": "Norepinephrine",
-      "species": "parakeet",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "norepinephrine",
-      "drug": "Norepinephrine",
-      "species": "parrot",
-      "dosage": "Not established",
-      "missing_route": true,
       "missing_frequency": true
     },
     {
@@ -1489,91 +1296,11 @@
       "missing_frequency": true
     },
     {
-      "drug_id": "propranolol",
-      "drug": "Propranolol",
-      "species": "bird",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "propranolol",
-      "drug": "Propranolol",
-      "species": "parakeet",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "propranolol",
-      "drug": "Propranolol",
-      "species": "parrot",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "mexiletine",
-      "drug": "Mexiletine",
-      "species": "cat",
-      "dosage": "Not commonly used",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "verapamil",
-      "drug": "Verapamil",
-      "species": "cat",
-      "dosage": "0.025 mg/kg slow IV; rarely used PO",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
       "drug_id": "verapamil",
       "drug": "Verapamil",
       "species": "horse",
       "dosage": "0.025-0.05 mg/kg slow IV",
       "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "ivabradine",
-      "drug": "Ivabradine",
-      "species": "cat",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "acetazolamide",
-      "drug": "Acetazolamide",
-      "species": "reptile",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "acetazolamide",
-      "drug": "Acetazolamide",
-      "species": "lizard",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "acetazolamide",
-      "drug": "Acetazolamide",
-      "species": "snake",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "acetazolamide",
-      "drug": "Acetazolamide",
-      "species": "tortoise",
-      "dosage": "Not established",
-      "missing_route": true,
       "missing_frequency": true
     },
     {
@@ -1713,14 +1440,6 @@
       "missing_frequency": true
     },
     {
-      "drug_id": "sacubitril_valsartan",
-      "drug": "Sacubitril/Valsartan",
-      "species": "cat",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
       "drug_id": "cromoglycate",
       "drug": "Sodium Cromoglycate",
       "species": "dog",
@@ -1757,38 +1476,6 @@
       "drug": "Sodium Cromoglycate",
       "species": "degu",
       "dosage": "Nebulized: 10 mg q8h",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "sildenafil_pulmonary",
-      "drug": "Sildenafil (Pulmonary Hypertension)",
-      "species": "bird",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "sildenafil_pulmonary",
-      "drug": "Sildenafil (Pulmonary Hypertension)",
-      "species": "parakeet",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "sildenafil_pulmonary",
-      "drug": "Sildenafil (Pulmonary Hypertension)",
-      "species": "parrot",
-      "dosage": "Not established",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "metoclopramide_injectable",
-      "drug": "Metoclopramide CRI",
-      "species": "horse",
-      "dosage": "0.25 mg/kg/hr CRI",
       "missing_route": true,
       "missing_frequency": false
     },
@@ -1839,14 +1526,6 @@
       "dosage": "1/4-1/2 tsp per meal",
       "missing_route": true,
       "missing_frequency": true
-    },
-    {
-      "drug_id": "benzoyl_peroxide",
-      "drug": "Benzoyl Peroxide",
-      "species": "dog",
-      "dosage": "2.5-5% shampoo: lather and leave 5-10 min; gel: apply to affected areas q24h",
-      "missing_route": true,
-      "missing_frequency": false
     },
     {
       "drug_id": "benzoyl_peroxide",
@@ -1945,27 +1624,11 @@
       "missing_frequency": false
     },
     {
-      "drug_id": "pilocarpine",
-      "drug": "Pilocarpine",
-      "species": "cat",
-      "dosage": "1-2%: 1 drop q8-12h",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "pilocarpine",
-      "drug": "Pilocarpine",
-      "species": "horse",
-      "dosage": "1-4%: 1-2 drops q6-8h",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
       "drug_id": "tropicamide",
       "drug": "Tropicamide",
       "species": "cat",
       "dosage": "1%: 1 drop",
-      "missing_route": true,
+      "missing_route": false,
       "missing_frequency": true
     },
     {
@@ -1973,7 +1636,7 @@
       "drug": "Tropicamide",
       "species": "horse",
       "dosage": "1%: 2-3 drops (difficult to dilate equine pupil)",
-      "missing_route": true,
+      "missing_route": false,
       "missing_frequency": true
     },
     {
@@ -1981,7 +1644,7 @@
       "drug": "Tropicamide",
       "species": "rabbit",
       "dosage": "0.5-1%: 1 drop",
-      "missing_route": true,
+      "missing_route": false,
       "missing_frequency": true
     },
     {
@@ -1989,7 +1652,7 @@
       "drug": "Tropicamide",
       "species": "bird",
       "dosage": "1%: 1 drop",
-      "missing_route": true,
+      "missing_route": false,
       "missing_frequency": true
     },
     {
@@ -1997,7 +1660,7 @@
       "drug": "Tropicamide",
       "species": "parakeet",
       "dosage": "1%: 1 drop",
-      "missing_route": true,
+      "missing_route": false,
       "missing_frequency": true
     },
     {
@@ -2005,7 +1668,7 @@
       "drug": "Tropicamide",
       "species": "parrot",
       "dosage": "1%: 1 drop",
-      "missing_route": true,
+      "missing_route": false,
       "missing_frequency": true
     },
     {
@@ -2057,30 +1720,6 @@
       "missing_frequency": true
     },
     {
-      "drug_id": "prazosin",
-      "drug": "Prazosin",
-      "species": "horse",
-      "dosage": "Not commonly used in horses",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "misoprostol_gi",
-      "drug": "Misoprostol (Gastroprotection)",
-      "species": "cat",
-      "dosage": "Not commonly used in cats",
-      "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "rebamipide",
-      "drug": "Rebamipide (Mucosta)",
-      "species": "horse",
-      "dosage": "Not established for horses",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
       "drug_id": "l_asparaginase",
       "drug": "L-Asparaginase",
       "species": "dog",
@@ -2126,14 +1765,6 @@
       "species": "cat",
       "dosage": "Not approved for cats",
       "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "eprinomectin",
-      "drug": "Eprinomectin",
-      "species": "dog",
-      "dosage": "Not commonly used in dogs (other options preferred)",
-      "missing_route": false,
       "missing_frequency": true
     },
     {
@@ -2353,19 +1984,11 @@
       "missing_frequency": true
     },
     {
-      "drug_id": "methimazole_transdermal",
-      "drug": "Methimazole Transdermal (PLO gel)",
-      "species": "cat",
-      "dosage": "2.5-5 mg/ear q12h (apply to inner pinna, alternate ears)",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
       "drug_id": "detomidine_gel",
       "drug": "Detomidine Oromucosal Gel (Dormosedan Gel)",
       "species": "horse",
       "dosage": "0.04 mg/kg sublingually (apply under tongue, do NOT swallow)",
-      "missing_route": true,
+      "missing_route": false,
       "missing_frequency": true
     },
     {
@@ -3070,22 +2693,6 @@
       "species": "horse",
       "dosage": "500 mg IM q4日 × 7回; 関節内250 mg",
       "missing_route": false,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "fentanyl_patch",
-      "drug": "Fentanyl Transdermal Patch",
-      "species": "dog",
-      "dosage": "2-4 μg/kg/hr; 25μgパッチ(10-20kg), 50μg(20-30kg), 75μg(>30kg)",
-      "missing_route": true,
-      "missing_frequency": true
-    },
-    {
-      "drug_id": "fentanyl_patch",
-      "drug": "Fentanyl Transdermal Patch",
-      "species": "cat",
-      "dosage": "25μgパッチ; 効果12-24h後",
-      "missing_route": true,
       "missing_frequency": true
     },
     {
@@ -3995,22 +3602,6 @@
     {
       "drug_id": "latanoprost_ophthalmic",
       "drug": "Latanoprost (Xalatan)",
-      "species": "dog",
-      "dosage": "1 drop affected eye(s) q12-24h",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "latanoprost_ophthalmic",
-      "drug": "Latanoprost (Xalatan)",
-      "species": "cat",
-      "dosage": "1 drop affected eye(s) q12-24h",
-      "missing_route": true,
-      "missing_frequency": false
-    },
-    {
-      "drug_id": "latanoprost_ophthalmic",
-      "drug": "Latanoprost (Xalatan)",
       "species": "horse",
       "dosage": "Not recommended",
       "missing_route": true,
@@ -4075,10 +3666,6 @@
       13
     ],
     [
-      "Dexamethasone",
-      12
-    ],
-    [
       "Sodium Bicarbonate",
       11
     ],
@@ -4097,14 +3684,6 @@
     [
       "Aluminum Hydroxide (Phosphate Binder)",
       10
-    ],
-    [
-      "Dorzolamide",
-      9
-    ],
-    [
-      "Latanoprost",
-      9
     ],
     [
       "Calcium Carbonate Powder (Reptile)",
@@ -4147,10 +3726,6 @@
       6
     ],
     [
-      "Norepinephrine",
-      6
-    ],
-    [
       "Psyllium (Metamucil)",
       6
     ],
@@ -4172,10 +3747,6 @@
     ],
     [
       "Scopolamine Butylbromide",
-      5
-    ],
-    [
-      "Phenylephrine",
       5
     ],
     [
@@ -4211,14 +3782,6 @@
       4
     ],
     [
-      "Propranolol",
-      4
-    ],
-    [
-      "Acetazolamide",
-      4
-    ],
-    [
       "Aglepristone (Alizin)",
       4
     ],
@@ -4247,27 +3810,15 @@
       3
     ],
     [
-      "Desmopressin (DDAVP)",
-      3
-    ],
-    [
       "Tetracycline",
       3
     ],
     [
-      "Sodium Nitroprusside",
+      "Phenylephrine",
       3
     ],
     [
       "Fluticasone Propionate",
-      3
-    ],
-    [
-      "Sildenafil (Pulmonary Hypertension)",
-      3
-    ],
-    [
-      "Benzoyl Peroxide",
       3
     ],
     [
@@ -4280,10 +3831,6 @@
     ],
     [
       "L-Asparaginase",
-      3
-    ],
-    [
-      "Eprinomectin",
       3
     ],
     [
@@ -4315,20 +3862,8 @@
       3
     ],
     [
-      "Latanoprost (Xalatan)",
-      3
-    ],
-    [
       "Fluticasone (Flovent HFA)",
       3
-    ],
-    [
-      "N-Acetylcysteine (NAC)",
-      2
-    ],
-    [
-      "Pergolide",
-      2
     ],
     [
       "Detomidine (Dormosedan)",
@@ -4343,19 +3878,15 @@
       2
     ],
     [
-      "Nitroglycerin",
-      2
-    ],
-    [
-      "Verapamil",
-      2
-    ],
-    [
-      "Pilocarpine",
+      "Benzoyl Peroxide",
       2
     ],
     [
       "Moxidectin Injectable (ProHeart)",
+      2
+    ],
+    [
+      "Eprinomectin",
       2
     ],
     [
@@ -4368,10 +3899,6 @@
     ],
     [
       "Eprinomectin (Pour-on)",
-      2
-    ],
-    [
-      "Fentanyl Transdermal Patch",
       2
     ],
     [
@@ -4427,10 +3954,6 @@
       1
     ],
     [
-      "Methimazole (Tapazole/Felimazole)",
-      1
-    ],
-    [
       "Phenobarbital",
       1
     ],
@@ -4459,15 +3982,7 @@
       1
     ],
     [
-      "Potassium Bromide",
-      1
-    ],
-    [
-      "Melatonin",
-      1
-    ],
-    [
-      "Vincristine",
+      "N-Acetylcysteine (NAC)",
       1
     ],
     [
@@ -4475,19 +3990,7 @@
       1
     ],
     [
-      "Sotalol",
-      1
-    ],
-    [
-      "Sulfasalazine",
-      1
-    ],
-    [
-      "Vitamin B12 (Cobalamin)",
-      1
-    ],
-    [
-      "Calcitriol",
+      "Desmopressin (DDAVP)",
       1
     ],
     [
@@ -4535,14 +4038,6 @@
       1
     ],
     [
-      "Remifentanil",
-      1
-    ],
-    [
-      "Telmisartan",
-      1
-    ],
-    [
       "Procainamide",
       1
     ],
@@ -4551,11 +4046,11 @@
       1
     ],
     [
-      "Mexiletine",
+      "Propranolol",
       1
     ],
     [
-      "Ivabradine",
+      "Verapamil",
       1
     ],
     [
@@ -4564,14 +4059,6 @@
     ],
     [
       "Codeine",
-      1
-    ],
-    [
-      "Sacubitril/Valsartan",
-      1
-    ],
-    [
-      "Metoclopramide CRI",
       1
     ],
     [
@@ -4595,18 +4082,6 @@
       1
     ],
     [
-      "Prazosin",
-      1
-    ],
-    [
-      "Misoprostol (Gastroprotection)",
-      1
-    ],
-    [
-      "Rebamipide (Mucosta)",
-      1
-    ],
-    [
       "Epofolaner (Zenrelia)",
       1
     ],
@@ -4624,10 +4099,6 @@
     ],
     [
       "Ephedrine",
-      1
-    ],
-    [
-      "Methimazole Transdermal (PLO gel)",
       1
     ],
     [
@@ -4724,6 +4195,10 @@
     ],
     [
       "Pergolide (Prascend)",
+      1
+    ],
+    [
+      "Latanoprost (Xalatan)",
       1
     ],
     [

@@ -2634,8 +2634,8 @@ DRUGS: List[Dict[str, Any]] = [
             },
             "bird": {
                 "safe": True,
-                "dosage": "2-4 mg/kg IM (emergency only)",
-                "dosage_ja": "2-4 mg/kg 筋注（緊急時のみ）",
+                "dosage": "2-4 mg/kg IM once (emergency only)",
+                "dosage_ja": "2-4 mg/kg 筋注 単回（緊急時のみ）",
                 "notes": "Emergency use only (shock, head trauma). Immunosuppression risk.",
                 "notes_ja": "緊急時のみ使用（ショック・頭部外傷）。免疫抑制リスク。",
             },
