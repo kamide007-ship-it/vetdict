@@ -11978,6 +11978,177 @@ DISEASE_DATABASE: list[Disease] = [
 
 
 # ---------------------------------------------------------------------------
+# Curated etiology / pathophysiology for module-only horse diseases.
+#
+# These entries carry rich Japanese treatment/prognosis/prevention text but were
+# added without an ``etiology`` or ``pathophysiology`` field, so _enrich_horse_
+# diseases() previously fell back to a generic "遺伝的素因・体型・運動負荷…" template
+# for both. The curated text below is disease-specific and grounded in the same
+# standard equine sources already cited in each record's description/treatment
+# (ECEIM gastric-disease consensus [Sykes et al. JVIM 2015], Reed/Bayly/Sellon
+# Equine Internal Medicine, Robinson's Current Therapy in Equine Medicine). It
+# describes causation and mechanism only — no drug doses (those stay in
+# treatment_protocol) — and takes priority over the generic fallback.
+# ---------------------------------------------------------------------------
+_CURATED_HORSE_ETIOLOGY_PATHO: dict[str, dict[str, str]] = {
+    "dg_gastric_ulcer_squamous": {
+        "etiology": (
+            "胃扁平上皮部は腺部と異なり粘液-重炭酸バリアを欠くため、胃酸（塩酸）・揮発性脂肪酸・胆汁酸への直接曝露が病因となる。"
+            "間欠的絶食（>6時間の空胃）、高強度運動（腹圧上昇で酸が扁平上皮部へスプラッシュ）、高穀類・低粗飼料給与、"
+            "輸送・社会的ストレスが酸曝露を増悪させる。NSAIDs併用は二次的にリスクを高める。"
+        ),
+        "pathophysiology": (
+            "空腹時や運動時に酸性胃内容が胃角切痕を越えて防御機構を欠く扁平上皮部に接触し、化学的にびらん・潰瘍を形成する。"
+            "粗飼料の咀嚼で得られる唾液重炭酸やアルファルファのカルシウム緩衝が低下すると胃内pHが下がり病態が進行する。"
+            "ESGDは本質的に酸誘発性であり、酸分泌抑制（オメプラゾール）に良好に反応する点で腺部病変（EGGD）と異なる。"
+        ),
+    },
+    "dg_gastric_ulcer_glandular": {
+        "etiology": (
+            "腺部粘膜は本来、粘液-重炭酸層とプロスタグランジン依存性の粘膜血流により酸から保護されているが、"
+            "EGGDではこの粘膜防御機構の破綻が病因である（酸過剰単独ではない）。週5日以上の運動ストレス、"
+            "NSAIDs（プロスタグランジン産生抑制）、社会的ストレスが関与し、Helicobacter様菌の役割は示唆されるが未確定である。"
+        ),
+        "pathophysiology": (
+            "防御因子（粘液・重炭酸分泌、粘膜血流、上皮再生能）の低下により腺粘膜が内因性の酸・胆汁に脆弱化し、"
+            "幽門洞・胃体部に炎症性・潰瘍性病変を形成する。ESGDより治癒が緩徐で、酸抑制単独では不十分なため"
+            "粘膜保護薬（スクラルファート等）の併用を要することが病態上の特徴である。"
+        ),
+    },
+    "dg_gastric_squamous_ulcer": {
+        "etiology": (
+            "長期未治療・反復性ESGDが重症化した進行形で、トレーニング継続下の慢性的な酸曝露、複数NSAIDsの併用、"
+            "併発する全身疾患（敗血症・重度炎症）、および不適切なオメプラゾール使用（食後投与・低用量）による"
+            "治療反応不良が背景となる。"
+        ),
+        "pathophysiology": (
+            "持続する酸傷害により扁平上皮部の病変が大きな多発潰瘍（ECEIMグレード3）から深部潰瘍・活動性出血（グレード4）へ進展する。"
+            "慢性失血による貧血・低蛋白血症、疼痛による採食低下から体重減少・運動能力低下を来し、"
+            "深部潰瘍は胃穿孔・敗血症性腹膜炎の危険を伴う。"
+        ),
+    },
+    "dg_gastric_glandular_ulcer": {
+        "etiology": (
+            "EGGDの局所重症型で、幽門部に限局した深い潰瘍と瘢痕形成を特徴とする。未治療・不適切治療のEGGD既往、"
+            "長期NSAIDs使用、慢性ストレスが背景にあり、Warmblood・Thoroughbredで素因が示唆される。"
+        ),
+        "pathophysiology": (
+            "幽門粘膜防御の破綻による深い潰瘍が治癒過程で線維性瘢痕・壁肥厚を形成し、胃流出路を狭窄させる。"
+            "胃排出遅延による食後疝痛・体重減少を来し、標準的EGGD治療に抵抗性で、狭窄が進行すれば幽門形成術を要する。"
+        ),
+    },
+    "dg_right_dorsal_colitis_nsaid": {
+        "etiology": (
+            "NSAIDs（特にフェニルブタゾン・フルニキシン）の過量・長期・脱水下・複数併用投与によるCOX-1阻害が病因である。"
+            "プロスタグランジン依存性の胃・十二指腸粘膜防御の低下が根底にあり、高齢馬・既存潰瘍・腎機能低下・"
+            "低アルブミン血症・絶食下投与が増悪因子となる。"
+        ),
+        "pathophysiology": (
+            "COX-1由来プロスタグランジン（PGE2・PGI2）の欠乏により粘液-重炭酸分泌・粘膜血流・上皮修復が障害され、"
+            "腺部・幽門・十二指腸に潰瘍が生じる（酸誘発性のESGDとは機序が異なる）。深部潰瘍は出血・穿孔・十二指腸狭窄を来し、"
+            "同一のCOX-1阻害機序で右背側結腸炎（RDC）を併発しうる。"
+        ),
+    },
+    "fl_gastric_ulcer_foal": {
+        "etiology": (
+            "子馬は生後2日から胃酸分泌を開始する一方で粘膜防御機構が未熟なため潰瘍を起こしやすい。"
+            "新生子敗血症・肺炎・下痢などの重篤疾患、入院・母子分離によるストレス、NSAIDs、ショック・低血圧、"
+            "哺乳不足・絶食が主因となる。"
+        ),
+        "pathophysiology": (
+            "ストレスや低灌流による粘膜血流低下と酸曝露により、扁平上皮部・腺部・十二指腸に潰瘍を形成する。"
+            "無症状（サイレント）型から、疝痛・流涎（十二指腸潰瘍による胃排出障害）、穿孔・腹膜炎、"
+            "十二指腸狭窄による胃食道逆流まで4型の臨床像を呈する。十二指腸狭窄は瘢痕治癒の後遺症である。"
+        ),
+    },
+    "dg_gastric_impaction": {
+        "etiology": (
+            "柿の果皮・種子・未熟果に含まれる可溶性タンニン（シブオール）が胃酸環境で重合し、食物繊維や胃内容と結合して"
+            "硬い凝固塊（フィトベゾアール）を形成することが病因である。秋季（9-12月）の柿樹への放牧アクセス・落果摂取、"
+            "空腹・脱水下での大量摂取が誘因となる。"
+        ),
+        "pathophysiology": (
+            "タンニンが胃内で蛋白・繊維を凝集させ、経時的に脱水・硬化した大きなフィトベゾアールが胃内腔を占拠して流出を閉塞する。"
+            "胃壁の圧迫・伸展が疝痛を惹起し、慢性化すると胃壁潰瘍・穿孔のリスクを伴う。内科的溶解に抵抗性で開腹除去を要することが多い。"
+        ),
+    },
+    "dg_right_dorsal_colitis": {
+        "etiology": (
+            "NSAIDs（特にフェニルブタゾン）の過量・長期・脱水下投与によるCOX-1阻害が主因である。右背側大結腸は"
+            "解剖学的に側副血流に乏しく、プロスタグランジン依存性の粘膜血流低下に対して特に脆弱な部位である。"
+        ),
+        "pathophysiology": (
+            "COX-1由来プロスタグランジンの欠乏により粘膜血流・粘液分泌・上皮修復が低下し、右背側結腸に潰瘍性・肉芽腫性炎症が生じる。"
+            "粘膜バリアの破綻により蛋白漏出（低アルブミン血症）・下痢・体重減少を来し、慢性化すると腸壁の線維化・狭窄へ進行する。"
+        ),
+    },
+    "dg_colitis_x": {
+        "etiology": (
+            "歴史的には原因不明の劇症性大腸炎症候群を指すが、現在は大半がClostridioides difficile／perfringens、Salmonella、"
+            "Neorickettsia risticii（ポトマック熱）などの特異的原因に再分類される。長距離輸送・手術・分娩・競走などの急性重度ストレス、"
+            "抗菌薬・NSAIDs、高炭水化物飼料による腸内細菌叢の破綻が引き金となる。"
+        ),
+        "pathophysiology": (
+            "病原体または毒素による重度の大腸粘膜傷害で腸管バリアが破綻し、大量のエンドトキシン（LPS）と炎症性メディエーターが吸収される。"
+            "数時間のうちに全身性炎症反応からエンドトキシン性ショック（血管拡張・DIC・多臓器不全）に至り、"
+            "体液の腸管腔への大量喪失が循環虚脱を加速する。"
+        ),
+    },
+    "dg_phytobezoar": {
+        "etiology": (
+            "咀嚼が不十分な長繊維粗飼料（茎の長い藁・刈草）が結腸・盲腸内で凝集・脱水して繊維性凝固塊を形成することが病因である。"
+            "歯科疾患による咀嚼不全、飲水不足（冬季の水源凍結）、運動不足、慢性便秘が素因となり、柿タンニン性の胃フィトベゾアールとは別病態である。"
+        ),
+        "pathophysiology": (
+            "未消化繊維が腸内容の脱水と腸運動低下により小結腸・下行結腸（管径の細い部位）で徐々に増大し、内腔を機械的に閉塞する。"
+            "閉塞近位の膨満・腸壁伸展が疝痛を惹起し、進行すると腸壁の虚血・破裂のリスクを伴う。"
+        ),
+    },
+    "rp_red_bag": {
+        "etiology": (
+            "上行性の胎盤炎（Streptococcus、Nocardioform放線菌、真菌など）による絨毛胎盤の肥厚・接着不全が最も多い原因で、"
+            "フェスク中毒（エルゴバリン産生Festuca arundinacea摂取による胎盤肥厚）、双子妊娠、過熟妊娠、子宮内膜瘢痕、EHV-1胎盤炎も原因となる。"
+            "これらが子宮内膜と絨毛膜尿膜の早期分離を引き起こす。"
+        ),
+        "pathophysiology": (
+            "通常は子宮頸部の星状部で破れる絨毛膜尿膜が、星状部以外で子宮壁から早期に剥離し、羊膜ではなく赤いビロード状の絨毛膜面が外陰部から露出する。"
+            "剥離により胎盤でのガス交換が途絶し胎仔は急性低酸素症に陥る。数分の無処置で胎仔死亡または重度の新生子仮死（低酸素性虚血性脳症）に至る。"
+        ),
+    },
+    "rp_uterine_artery_rupture": {
+        "etiology": (
+            "高齢経産牝馬（>15歳）における中子宮動脈・卵巣動脈・腸骨動脈の破裂が病態である。加齢性の血管壁弾性線維変性と、"
+            "銅欠乏によるlysyl oxidase活性低下（エラスチン架橋不全）が血管脆弱化の基盤となり、分娩遷延・難産・過大胎仔・強い牽引が破裂の誘因となる。"
+        ),
+        "pathophysiology": (
+            "妊娠子宮の重量負荷と分娩時の伸展により脆弱化した動脈が破綻し、広間膜内（被膜性血腫）または腹腔内（游離出血）へ出血する。"
+            "広間膜内に限局すれば圧迫止血によりショックは緩徐だが、腹腔内破裂では急速な出血性ショック・死に至る。分娩後72時間以内に多い。"
+        ),
+    },
+    "fl_shaker_foal": {
+        "etiology": (
+            "腸管内でClostridium botulinum（主にtype B）の芽胞が発芽・増殖し、腸管内でボツリヌス神経毒素を産生するトキシコインフェクション型である。"
+            "土壌芽胞密度の高い地域（米国Mid-Atlantic、日本では稀）で、腸内細菌叢が未成熟な2-8週齢の子馬に発生する。"
+        ),
+        "pathophysiology": (
+            "産生されたボツリヌス毒素が神経筋接合部のSNARE蛋白を切断してアセチルコリン放出を阻害し、進行性の対称性弛緩性麻痺を起こす。"
+            "起立時の筋振戦、嚥下困難、舌緊張低下から、最終的に呼吸筋麻痺で死亡する。毒素は不可逆的に結合するため、回復には神経終末の再生を要する。"
+        ),
+    },
+    "rp_lactation_failure": {
+        "etiology": (
+            "分娩前後の栄養不良、初産・高齢（>20歳）、微量元素欠乏（Se・Cu・Zn）、内分泌異常（甲状腺機能低下症・PPID）、"
+            "フェスク中毒（麦角アルカロイドによるプロラクチン抑制）、乳腺炎既往、ストレスなどが乳汁産生・射乳不全を引き起こす。"
+        ),
+        "pathophysiology": (
+            "プロラクチン分泌・乳腺発達・射乳（オキシトシン）のいずれかの障害により乳汁産生・分泌が不足する。"
+            "特に麦角アルカロイドはドパミン作動性にプロラクチンを抑制する。子馬は初乳（IgG）摂取不足から移行免疫不全（FPT）となり、敗血症リスクが上昇する。"
+        ),
+    },
+}
+
+
+# ---------------------------------------------------------------------------
 # Enrich horse diseases from diseases_all_species.json
 # ---------------------------------------------------------------------------
 def _enrich_horse_diseases() -> None:
@@ -12047,17 +12218,20 @@ def _enrich_horse_diseases() -> None:
                 val = enrichment.get("treatment_ja") or enrichment.get("treatment")
                 if val:
                     disease.general_management = val
-        # Fallback: generate content from existing description for unmatched diseases
+        # Fallback: generate content from existing description for unmatched diseases.
+        # Disease-specific curated etiology/pathophysiology (below) takes priority
+        # over the generic template so module-only records read as real clinical text.
         name = disease.name_en or disease.name_ja
         desc = disease.description_ja or disease.name_ja
         ja_name = disease.name_ja or name
+        curated = _CURATED_HORSE_ETIOLOGY_PATHO.get(disease.id, {})
         if not disease.pathophysiology or _is_horse_template(disease.pathophysiology):
-            disease.pathophysiology = (
+            disease.pathophysiology = curated.get("pathophysiology") or (
                 f"{ja_name}は馬の組織に病理学的変化を引き起こす疾患である。"
                 f"{desc} 未治療の場合、細胞障害、炎症反応、組織損傷の段階を経て進行しうる。"
             )
         if not disease.etiology:
-            disease.etiology = (
+            disease.etiology = curated.get("etiology") or (
                 f"馬における{ja_name}の原因には、遺伝的素因、体型、"
                 f"運動負荷、環境、飼養管理に関連する要因が含まれる。{desc}"
             )

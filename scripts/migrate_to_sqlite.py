@@ -1122,15 +1122,25 @@ def migrate_equine(conn) -> int:
     disease_db = getattr(mod, "DISEASE_DATABASE", [])
     count = 0
 
-    def _extract_ja_en(field_val):
+    def _ja_en(field_val):
+        # The equine Disease dataclass carries single-language *Japanese* narrative
+        # text (treatment_protocol, prognosis, prevention, etiology, …). A bare
+        # string is therefore the Japanese value, not English — routing it into the
+        # English column (the old behaviour) left the _ja column empty, so the
+        # Japanese-facing site showed a blank treatment/prognosis for every
+        # module-only horse disease that the JSON overlay never touches. The
+        # {ja,en} dict shape is still honoured defensively.
         if isinstance(field_val, dict):
             return field_val.get("ja"), field_val.get("en")
-        return None, field_val
+        return field_val, None
 
     for d in disease_db:
-        treatment_ja, treatment_en = _extract_ja_en(d.treatment_protocol)
-        prevention_ja, prevention_en = _extract_ja_en(d.prevention)
-        prognosis_ja, prognosis_en = _extract_ja_en(d.prognosis)
+        treatment_ja, treatment_en = _ja_en(d.treatment_protocol)
+        prevention_ja, prevention_en = _ja_en(d.prevention)
+        prognosis_ja, prognosis_en = _ja_en(d.prognosis)
+        pathophysiology_ja, pathophysiology_en = _ja_en(d.pathophysiology)
+        causes_ja, causes_en = _ja_en(d.etiology)
+        signs_ja, signs_en = _ja_en(getattr(d, "clinical_signs_detail", None))
 
         record = {
             "id": d.id,
@@ -1139,21 +1149,27 @@ def migrate_equine(conn) -> int:
             "name_ja": d.name_ja,
             "description": d.description_ja,
             "description_ja": d.description_ja,
-            "pathophysiology": d.pathophysiology,
-            "causes": d.etiology,
-            "treatment": treatment_en or d.treatment_protocol,
-            "treatment_ja": treatment_ja or getattr(d, "treatment_ja", None),
-            "prevention": prevention_en or d.prevention,
-            "prevention_ja": prevention_ja or getattr(d, "prevention_ja", None),
-            "prognosis": prognosis_en or d.prognosis,
-            "prognosis_ja": prognosis_ja or getattr(d, "prognosis_ja", None),
+            # English column falls back to the Japanese text (the frontend prefers
+            # `en || ja`, so an English viewer is no worse off than before); the
+            # JSON overlay later replaces the English column with a real English
+            # template where one exists.
+            "pathophysiology": pathophysiology_en or pathophysiology_ja,
+            "pathophysiology_ja": pathophysiology_ja,
+            "causes": causes_en or causes_ja,
+            "causes_ja": causes_ja,
+            "treatment": treatment_en or treatment_ja,
+            "treatment_ja": treatment_ja,
+            "prevention": prevention_en or prevention_ja,
+            "prevention_ja": prevention_ja,
+            "prognosis": prognosis_en or prognosis_ja,
+            "prognosis_ja": prognosis_ja,
             "urgency": d.urgency or d.severity,
             "symptoms": set(d.associated_findings),
             "recommended_tests": [(e[1] if len(e) > 1 else str(e)) for e in (d.recommended_exams or [])],
             "diagnosis": None,
             "diagnosis_ja": None,
-            "clinical_signs": getattr(d, "clinical_signs_detail", None),
-            "clinical_signs_ja": getattr(d, "clinical_signs_detail", None),
+            "clinical_signs": signs_en or signs_ja,
+            "clinical_signs_ja": signs_ja,
             "transmission": None,
             "transmission_ja": None,
             "differential_diagnosis": None,
