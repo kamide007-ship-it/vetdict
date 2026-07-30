@@ -2,8 +2,8 @@
  "species": "dog",
  "schema_version": 1,
  "note": "Frozen disease ids (name→id). Append-only: existing mappings are never changed. Delete to fall back to position-derived ids.",
- "generated_at": "2026-07-09T08:24:45Z",
- "count": 611,
+ "generated_at": "2026-07-30T11:11:11Z",
+ "count": 612,
  "locks": {
   "Acanthomatous Ameloblastoma␟棘細胞性エナメル上皮腫": "dog_0411",
   "Acetaminophen Toxicosis␟アセトアミノフェン中毒": "dog_0334",
@@ -607,6 +607,7 @@
   "Vitamin D Toxicosis␟ビタミンD中毒": "dog_0543",
   "Vitiligo␟白斑症": "dog_0304",
   "Vogt-Koyanagi-Harada-like Syndrome (VKH)␟フォークト・小柳・原田様症候群": "dog_0330",
+  "Water Intoxication (Dilutional Hyponatremia)␟水中毒（急性希釈性低ナトリウム血症）": "dog_xcafe9e72",
   "Weimaraner Hypertrophic Osteodystrophy (Breed-Specific)␟ワイマラナー肥大性骨異栄養症（犬種特異性）": "dog_0571",
   "West Highland White Terrier Pulmonary Fibrosis␟ウェストハイランドホワイトテリア肺線維症": "dog_0554",
   "Whipworm Infection (Trichuris)␟鞭虫症": "dog_0140",
