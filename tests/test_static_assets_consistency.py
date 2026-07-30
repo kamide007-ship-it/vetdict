@@ -82,6 +82,46 @@ def test_slash_shortcut_targets_existing_search_input_id():
 
 
 # ---------------------------------------------------------------------------
+# app.js — disease search must not lurch the mobile page while typing
+# ---------------------------------------------------------------------------
+def test_disease_search_input_pins_scroll_anchor():
+    """On mobile the disease list is in normal document flow (max-height:none),
+    so re-rendering it on each keystroke changed the document height and made the
+    page jump up and down. The debounced search handler must route its re-render
+    through _renderPinningAnchor so the search box stays put while typing."""
+    js = _read("static/js/app.js")
+
+    # The helper must exist and correct the scroll after the render.
+    assert "function _renderPinningAnchor(" in js, "scroll-pinning helper is missing"
+    assert "window.scrollBy(0, delta)" in js, "_renderPinningAnchor must restore scroll position with window.scrollBy"
+
+    # The disease search input handler must use it (not call renderDiseaseDb bare).
+    assert 'diseaseSearch.addEventListener("input"' in js, "Could not locate the disease search input handler"
+    assert "_renderPinningAnchor(diseaseSearch,renderDiseaseDb)" in js, (
+        "disease search handler must pin the scroll anchor while re-rendering"
+    )
+
+
+# ---------------------------------------------------------------------------
+# app.js — expanding a disease detail must not drift the mobile page
+# ---------------------------------------------------------------------------
+def test_disease_detail_expand_does_a_single_scroll():
+    """Expanding a disease/drug/anaesthesia detail scrolls it to a reading
+    position once. It must NOT run scrollToAnchor's 12s re-anchoring watcher
+    (which chased the async drug tables and drifted the page up and down on
+    mobile), and focus() must not scroll-into-view."""
+    js = _read("static/js/app.js")
+
+    match = re.search(r"function toggleDbItem\(el\)\{.*?\n\}", js, re.S)
+    assert match, "Could not locate toggleDbItem"
+    body = match.group(0)
+    assert "scrollToAnchor(el,{settle:false})" in body, (
+        "detail expansion must use a one-shot scroll (settle:false), not the 12s watcher"
+    )
+    assert "focus({preventScroll:true})" in body, "detail expansion focus() must not scroll-into-view"
+
+
+# ---------------------------------------------------------------------------
 # Service worker cache version
 # ---------------------------------------------------------------------------
 def test_service_worker_cache_name_is_versioned():
