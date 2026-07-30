@@ -6341,6 +6341,15 @@ function toggleDetail(head){
   const isOpen=detail.classList.toggle("open");
   head.setAttribute("aria-expanded",isOpen);
   if(icon)icon.classList.toggle("rotated",isOpen);
+  /* On open, bring the card to a useful reading position — just below the sticky
+     chrome — so the expanded content is not left below the fold. Mirrors
+     toggleDbItem(); the disease-DB list already does this and the differential
+     result cards should feel the same. Only on open, so collapsing never yanks
+     the page. rAF lets the panel expand first so the target rect is final. */
+  if(isOpen&&typeof scrollToAnchor==="function"){
+    const card=head.closest(".disease-result")||head;
+    requestAnimationFrame(()=>scrollToAnchor(card));
+  }
 }
 
 /* Attach click/keyboard handlers to .disease-db-item elements via event delegation */

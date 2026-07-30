@@ -45,8 +45,14 @@ if str(REPO_ROOT) not in sys.path:
 
 ROUTE = re.compile(
     r"\b(PO|IV|IM|SC|SQ|IO|IP|PR|IN|TD|transderm|topical|inhal|nebuli|ophthalmic|otic|oral|bath|dip"
-    r"|immersion|in\s*water|in\s*feed|per\s*os|epidural|intraarticular|intralesional|intranasal)\b"
-    r"|経口|静脈|筋肉|筋注|皮下|局所|外用|点眼|点耳|吸入|噴霧|薬浴|浸漬|経鼻|直腸|腹腔|飼料|飲水|塗布|経皮|硬膜外",
+    r"|immersion|in\s*water|in\s*feed|per\s*os|epidural|intraarticular|intralesional|intranasal"
+    # A dispensed "drop" is an ophthalmic/otic route; an ointment/patch/strip that
+    # is "applied" is topical; a rate-per-minute/hour (CRI) is by definition an
+    # intravenous infusion. Without these, ~75 eye-drop/topical/CRI entries that
+    # ARE complete were mis-flagged as "missing route".
+    r"|drops?|ointment|applied|apply|patch|strip|pinna|CRI|to\s*effect)\b"
+    r"|[/⁄]\s*kg\s*[/⁄]\s*(min|hr|hrs|hour|hours)"
+    r"|経口|静脈|筋肉|筋注|皮下|局所|外用|点眼|点耳|吸入|噴霧|薬浴|浸漬|経鼻|直腸|腹腔|飼料|飲水|塗布|経皮|硬膜外|軟膏|貼付|パッチ|滴",
     re.I,
 )
 FREQUENCY = re.compile(
@@ -59,11 +65,23 @@ FREQUENCY = re.compile(
 )
 # "no dose" is the correct content here, not a gap.
 NOT_APPLICABLE = re.compile(r"使用不可|禁忌|contraindicated|do not use|^\s*(N/?A|-|なし)\s*$", re.I)
-# An honest "we don't know" — a truthful blank that needs evidence, not a defect.
+# An honest "we don't know / we don't use this here" — a truthful blank that
+# reflects a clinical judgement, not a missing-data bug. "Not commonly used",
+# "rarely used" and "not established" are the same honest signal as "not well
+# established" and belong in this bucket, not on a vet's worklist.
 UNESTABLISHED = re.compile(
-    r"not well established|十分に確立されていない|not commonly needed|通常は不要|unknown|不明|データなし|no data", re.I
+    r"not (well )?established|not commonly (needed|used|supplemented|indicated)"
+    r"|(rarely|seldom) used|十分に確立されていない|not commonly needed|一般的には使用されない"
+    r"|通常は(不要|補充不要)|ほとんど使用しない|unknown|不明|データなし|no data",
+    re.I,
 )
 LABEL_DIRECTED = re.compile(r"refer to product label|製品ラベル|product label", re.I)
+# Dosing that is complete by pointing at another species' entry ("same protocol
+# as cats"). The route and frequency live in the referenced entry, so this is
+# not a defect to fill.
+CROSS_REFERENCED = re.compile(
+    r"same (protocol )?as (cats?|dogs?|above|for)|as (per|for) (cats?|dogs?)|に準じ|と同(じ|様)のプロトコル", re.I
+)
 # Classes whose dosing is not written as mg/kg + qNh.
 NON_WEIGHT_CLASS = re.compile(
     r"isoflurane|sevoflurane|desflurane|nitrous|halothane|chlorhexidine|ophthalmic|otic|shampoo|cream"
@@ -96,12 +114,19 @@ def scan() -> dict[str, Any]:
             text = " ".join(str(info.get(k, "") or "") for k in ("dosage", "dosage_ja")).strip()
             if not text or NOT_APPLICABLE.search(text):
                 continue
+            has_route = bool(ROUTE.search(text))
+            has_freq = bool(FREQUENCY.search(text))
+            # Completeness wins over every other label: an entry that carries both
+            # a route and a frequency is usable even when it is prefaced with a
+            # caveat like "Not established; empirical 10-30 mg/kg PO q24-48h". Test
+            # this first so those honest-but-usable doses are not mislabelled.
+            if has_route and has_freq:
+                continue
             if UNESTABLISHED.search(text):
                 unestablished.append({"drug": name, "species": species, "text": text[:120]})
                 continue
-            has_route = bool(ROUTE.search(text))
-            has_freq = bool(FREQUENCY.search(text))
-            if has_route and has_freq:
+            if CROSS_REFERENCED.search(text):
+                excluded["cross-referenced to another species"] += 1
                 continue
             if LABEL_DIRECTED.search(text):
                 excluded["supplement (label-directed)"] += 1

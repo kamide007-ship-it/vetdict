@@ -12,7 +12,14 @@ non-problems and bury the real ones, so the classification is pinned here.
 
 from __future__ import annotations
 
-from scripts.quality.detect_dosage_gaps import FREQUENCY, NOT_APPLICABLE, ROUTE, UNESTABLISHED, scan
+from scripts.quality.detect_dosage_gaps import (
+    CROSS_REFERENCED,
+    FREQUENCY,
+    NOT_APPLICABLE,
+    ROUTE,
+    UNESTABLISHED,
+    scan,
+)
 
 
 def test_frequency_accepts_real_world_notations():
@@ -34,6 +41,25 @@ def test_route_accepts_japanese_and_english():
         assert ROUTE.search(text), f"route not recognised in {text!r}"
 
 
+def test_route_accepts_topical_ophthalmic_and_infusion_notations():
+    """A dispensed drop, an applied ointment/patch and a per-minute/hour CRI all
+    imply a route. Missing these called ~75 complete entries "missing route"."""
+    for text in (
+        "1 drop q8h",  # ophthalmic
+        "1滴 8-12時間毎",  # ophthalmic (Japanese)
+        "2% ointment: 0.5 inch strip applied to inner pinna q6-8h",  # topical
+        "軟膏を1日2回",  # topical ointment (Japanese)
+        "1-10 μg/kg/min CRI",  # continuous infusion → intravenous
+        "5-30 μg/kg/hr",  # infusion rate without the letters "IV"
+    ):
+        assert ROUTE.search(text), f"route not recognised in {text!r}"
+
+
+def test_cross_referenced_dosing_is_not_a_gap():
+    for text in ("Same protocol as cats", "犬に準じる", "As per dogs"):
+        assert CROSS_REFERENCED.search(text), f"cross-reference not recognised in {text!r}"
+
+
 def test_contraindicated_entries_are_not_treated_as_gaps():
     for text in ("N/A 使用不可", "Contraindicated", "禁忌"):
         assert NOT_APPLICABLE.search(text)
@@ -42,6 +68,27 @@ def test_contraindicated_entries_are_not_treated_as_gaps():
 def test_unestablished_is_distinguished_from_a_defect():
     """ "Not well established" is a truthful blank, not a missing-data bug."""
     assert UNESTABLISHED.search("Not well established 十分に確立されていない")
+    # A clinician's "we don't use this here" is the same honest signal, not a gap.
+    for text in (
+        "Not established in this species",
+        "Not commonly used (trilostane preferred)",
+        "一般的には使用されない",
+        "rarely used",
+    ):
+        assert UNESTABLISHED.search(text), f"honest blank not recognised in {text!r}"
+
+
+def test_a_usable_dose_wins_over_a_caveat():
+    """"Not established; empirical 10-30 mg/kg PO q24-48h" carries a full route and
+    frequency — it is usable, so completeness must be judged before the caveat is
+    counted as a truthful blank."""
+    report = scan()
+    labels = {(u["drug"], u["species"]) for u in report["unestablished"]}
+    gap_labels = {(g["drug"], g["species"]) for g in report["gaps"]}
+    # Silymarin's reptile entry is "Not established; empirical ... PO q24-48h":
+    # complete, so it is neither a truthful blank nor a gap.
+    assert ("Silymarin (Milk Thistle)", "reptile") not in labels
+    assert ("Silymarin (Milk Thistle)", "reptile") not in gap_labels
 
 
 def test_scan_excludes_class_correct_entries_and_stays_bounded():
