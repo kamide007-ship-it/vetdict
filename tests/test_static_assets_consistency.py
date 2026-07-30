@@ -93,9 +93,7 @@ def test_disease_search_input_pins_scroll_anchor():
 
     # The helper must exist and correct the scroll after the render.
     assert "function _renderPinningAnchor(" in js, "scroll-pinning helper is missing"
-    assert "window.scrollBy(0, delta)" in js, (
-        "_renderPinningAnchor must restore scroll position with window.scrollBy"
-    )
+    assert "window.scrollBy(0, delta)" in js, "_renderPinningAnchor must restore scroll position with window.scrollBy"
 
     # The disease search input handler must use it (not call renderDiseaseDb bare).
     assert 'diseaseSearch.addEventListener("input"' in js, "Could not locate the disease search input handler"
