@@ -79,7 +79,7 @@ def test_unestablished_is_distinguished_from_a_defect():
 
 
 def test_a_usable_dose_wins_over_a_caveat():
-    """"Not established; empirical 10-30 mg/kg PO q24-48h" carries a full route and
+    """ "Not established; empirical 10-30 mg/kg PO q24-48h" carries a full route and
     frequency — it is usable, so completeness must be judged before the caveat is
     counted as a truthful blank."""
     report = scan()
