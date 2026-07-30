@@ -912,6 +912,33 @@ function scrollToAnchor(el,opts){
   raf=requestAnimationFrame(settle);
 }
 
+/* Keep a reference element pinned to its on-screen position across a DOM update
+   that changes document height.
+
+   The disease list re-renders on every debounced keystroke. On mobile the list is
+   in normal document flow (.disease-db-list is max-height:none / overflow:visible
+   below the tablet breakpoint), so the *page* scrolls, not the list. Filtering
+   from ~100 rows down to a handful therefore collapses the document by thousands
+   of pixels; the browser clamps scrollY, and the open soft keyboard re-scrolls to
+   the caret — so the page lurched up and down while typing ("いきなり上下"). On
+   desktop the list is its own scroll container (fixed max-height), so the height
+   never changes and delta is ~0 — this is a harmless no-op there.
+
+   Reading the rect after the synchronous render forces a layout, so the
+   correction lands in the same frame with no visible flash, and because it is a
+   single synchronous adjustment per render it cannot oscillate. */
+function _renderPinningAnchor(anchorEl, render) {
+  if (!anchorEl || !anchorEl.isConnected) {
+    render();
+    return;
+  }
+  const before = anchorEl.getBoundingClientRect().top;
+  render();
+  const after = anchorEl.getBoundingClientRect().top;
+  const delta = after - before;
+  if (Math.abs(delta) > 1) window.scrollBy(0, delta);
+}
+
 /* In-page anchor links (skip-link, "#speciesSection", reference jumps).
    The browser's native jump uses html{scroll-padding-top}, which is only as
    fresh as the last measurement — on a first click the breadcrumb bar has not
@@ -960,7 +987,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     const diseaseSearch=document.getElementById("diseaseSearch");
     if(symptomSearch)symptomSearch.addEventListener("input",debounce(()=>{renderSymptomList(symptomData);if(symptomSearch.value.length>=2)trackEvent("symptom_search",{species:currentSpecies,query:symptomSearch.value.substring(0,50)});},300));
     if(analyzeBtn)analyzeBtn.addEventListener("click",doAnalyze);
-    if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;renderDiseaseDb();},200));
+    if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;_renderPinningAnchor(diseaseSearch,renderDiseaseDb);},200));
     setupGlobalSearch();
     // Restore view from URL hash (silent: don't auto-focus inputs on initial load —
     // would pop the mobile keyboard for users landing on /#chat etc.)
@@ -4250,7 +4277,8 @@ function renderCrossSpeciesDiseaseSearch(query){
   fetchWithTimeout(`/api/diseases?q=${encodeURIComponent(query)}&limit=60`).then(r=>r.json()).then(data=>{
     if(reqId!==_xspeciesDiseaseReqId)return;
     const diseases=(data&&data.diseases)||[];
-    if(!diseases.length){list.innerHTML=`<div role="status" style="padding:20px;text-align:center;color:var(--gray-500)">${escapeHtml(t("noDiseaseMatch"))}</div>`;return;}
+    const _searchBox=document.getElementById("diseaseSearch");
+    if(!diseases.length){_renderPinningAnchor(_searchBox,()=>{list.innerHTML=`<div role="status" style="padding:20px;text-align:center;color:var(--gray-500)">${escapeHtml(t("noDiseaseMatch"))}</div>`;});return;}
     const items=diseases.map(d=>{
       const spId=d.species||"";
       const sp=SPECIES.find(s=>s.id===spId);
@@ -4260,7 +4288,7 @@ function renderCrossSpeciesDiseaseSearch(query){
       const sub=currentLang==="ja"?(d.name||""):(d.name_ja||"");
       return`<button type="button" class="xspecies-result" data-name="${escapeHtml(d.name||d.name_ja||"")}" data-species="${escapeHtml(spId)}"><span class="xspecies-result-sp"><span aria-hidden="true">${spIcon}</span> ${escapeHtml(spLabel)}</span><span class="xspecies-result-name">${escapeHtml(label)}${sub?`<span class="xspecies-result-sub">${escapeHtml(sub)}</span>`:""}</span></button>`;
     }).join("");
-    list.innerHTML=`<div class="xspecies-results-label">${escapeHtml(t("xspeciesResultsLabel"))}</div>${items}`;
+    _renderPinningAnchor(_searchBox,()=>{list.innerHTML=`<div class="xspecies-results-label">${escapeHtml(t("xspeciesResultsLabel"))}</div>${items}`;});
     if(dbCountEl)dbCountEl.textContent=t("diseaseCount").replace("%filtered%",diseases.length).replace("%total%",diseases.length);
   }).catch(err=>{
     if(reqId!==_xspeciesDiseaseReqId)return;
