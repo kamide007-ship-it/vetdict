@@ -4097,6 +4097,7 @@ function renderAzNav(){
           if(diseaseFilter===cat){diseaseFilter='';btn.classList.remove("active");}
           else{catGrid.querySelectorAll(".disease-cat-card").forEach(b=>b.classList.remove("active"));btn.classList.add("active");diseaseFilter=cat;}
           diseaseDisplayLimit=100;renderDiseaseDb();
+          _revealFilteredList("diseaseDbList");
         });
       }
     }
@@ -4120,6 +4121,29 @@ function filterDiseaseDb(letter){
   diseaseDisplayLimit=100;
   document.querySelectorAll(".az-nav button:not(.az-mode-toggle)").forEach(b=>b.classList.toggle("active",b.dataset.letter===letter));
   renderDiseaseDb();
+  _revealFilteredList("diseaseDbList");
+}
+
+/* Bring a freshly-filtered list to a usable reading position after an explicit
+   filter tap (category card / A-Z letter). Two layouts, both handled:
+     - Desktop: the list is its own scroll container (fixed max-height), so it
+       keeps its previous scrollTop after a re-render — the filtered results would
+       start part-way down. Reset it so they start at the top.
+     - Mobile: the list is in page flow below the filter chrome; if the user had
+       scrolled the results, the new top can sit above the sticky header. Re-anchor
+       it just below the sticky chrome. Skipped when already comfortably in view so
+       a tap on a filter that's already at the top never yanks the page.
+   Deliberately NOT called from the search-typing path, which uses
+   _renderPinningAnchor to hold position while the soft keyboard is open. */
+function _revealFilteredList(listId){
+  const list=document.getElementById(listId);
+  if(!list)return;
+  if(list.scrollTop>0)list.scrollTop=0;
+  if(list.offsetParent===null)return;
+  const top=list.getBoundingClientRect().top;
+  const stickyOffset=parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sticky-offset"),10)||112;
+  const comfy=top>=stickyOffset-4&&top<window.innerHeight*0.6;
+  if(!comfy)requestAnimationFrame(()=>scrollToAnchor(list,{settle:false}));
 }
 
 /* Emergency flag for disease-DB rows. Only the "emergency" severity is badged —
@@ -5457,8 +5481,8 @@ function loadDrugDictionary(){
   if(!list.dataset.drugListenersAttached){
     list.dataset.drugListenersAttached="1";
     document.getElementById("drugSearch").addEventListener("input",debounce(renderDrugList,200));
-    document.getElementById("drugCategoryFilter").addEventListener("change",renderDrugList);
-    document.getElementById("drugSpeciesFilter").addEventListener("change",renderDrugList);
+    document.getElementById("drugCategoryFilter").addEventListener("change",()=>{renderDrugList();_revealFilteredList("drugList");});
+    document.getElementById("drugSpeciesFilter").addEventListener("change",()=>{renderDrugList();_revealFilteredList("drugList");});
     const dwInput=document.getElementById("drugWeight");
     if(dwInput){
       const saved=localStorage.getItem("vetdict-drug-weight");
@@ -5913,7 +5937,7 @@ function loadAnesthesiaProtocols(){
     /* Fetch contraindication rules */
     fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(err=>{debugWarn("anesthesia/contraindications fetch failed:",err);});
     document.getElementById("anesthesiaSearch").addEventListener("input",debounce(renderAnesthesiaList,200));
-    document.getElementById("anesthesiaCategoryFilter").addEventListener("change",renderAnesthesiaList);
+    document.getElementById("anesthesiaCategoryFilter").addEventListener("change",()=>{renderAnesthesiaList();_revealFilteredList("anesthesiaList");});
     /* Weight-based dose calculator */
     const weightInput=document.getElementById("anesthesiaWeight");
     if(weightInput){
@@ -5934,7 +5958,7 @@ function loadAnesthesiaProtocols(){
     }
     /* ASA filter */
     const asaFilter=document.getElementById("anesthesiaAsaFilter");
-    if(asaFilter)asaFilter.addEventListener("change",renderAnesthesiaList);
+    if(asaFilter)asaFilter.addEventListener("change",()=>{renderAnesthesiaList();_revealFilteredList("anesthesiaList");});
     /* Print checklist */
     const printBtn=document.getElementById("anesthesiaPrintBtn");
     if(printBtn)printBtn.addEventListener("click",printAnesthesiaChecklist);

@@ -10886,6 +10886,17 @@ try:
     _DOSAGE_OVERRIDES_APPLIED = _apply_dosage_overrides(DRUGS)
 except ImportError:  # pragma: no cover - optional module
     _DOSAGE_OVERRIDES_APPLIED = 0
+
+# dosage はあるが dosage_ja が欠落した species_info エントリを決定論的に補完する。
+# 数値・単位は保持し、投与経路・投与間隔の英語略号のみ日本語化（自由文は変換しない）。
+# 日本語UIで英語略号（PO/q12h 等）が露出していた問題を解消する。
+try:
+    from api.drug_dosage_localizer import fill_missing_dosage_ja as _fill_missing_dosage_ja
+
+    _DOSAGE_JA_FILLED = _fill_missing_dosage_ja(DRUGS)
+except ImportError:  # pragma: no cover - optional module
+    _DOSAGE_JA_FILLED = 0
+
 # 統合後にインデックスを貼り直す（以降の参照は正規エントリのみを見る）
 _drug_index = {d["id"]: d for d in DRUGS if d.get("id")}
 
