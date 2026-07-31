@@ -69,21 +69,62 @@ def _attr(obj, key: str, default=""):
 
 
 def build_species_entries(species: str) -> list[dict]:
-    """Return compact index entries for a single species' disease module."""
+    """Return compact index entries for a single species' disease module.
+
+    The index must describe exactly what the browse/detail paths will serve,
+    because a search hit whose id or name is not servable is a dead link. The
+    served path applies three transforms that this builder previously skipped,
+    so the index listed 7,103 diseases against 6,529 browsable ones and 54 of
+    its ids resolved to nothing:
+
+    * ``dedupe_disease_list`` — collapses entries sharing an English name or a
+      name_ja (the survivor keeps its ORIGINAL index so ids stay stable);
+    * ``apply_canonical_map`` — hides archived / merged-away entries and lets
+      each canonical inherit from its merged siblings;
+    * ``stable_id_for`` — the frozen id sidecar. Position-derived ids drift the
+      moment a disease is inserted mid-list, so mirroring migrate_to_sqlite.py
+      means resolving the lock first and only then falling back to position.
+    """
     import importlib
 
     module_path, attr = SPECIES_MODULE_MAP[species]
     mod = importlib.import_module(module_path)
-    diseases = getattr(mod, attr, []) or []
+    raw = getattr(mod, attr, []) or []
+
+    # Keep each survivor's ORIGINAL index so the position fallback matches the
+    # id the migration would generate for the same entry.
+    try:
+        from api.species.helpers import dedupe_disease_list
+
+        diseases = dedupe_disease_list(raw)
+    except Exception:
+        diseases = raw
+    orig_index = {id(e): i for i, e in enumerate(raw)}
+
+    try:
+        from api.species.canonical import apply_canonical_map
+
+        diseases = apply_canonical_map(diseases, species)
+    except Exception:
+        pass
+
+    try:
+        from api.species.id_locks import stable_id_for
+    except Exception:  # pragma: no cover - sidecar is optional
+        stable_id_for = None
 
     entries: list[dict] = []
-    for i, d in enumerate(diseases):
+    for d in diseases:
         # Horse uses a dataclass with name_en/name_ja; other species use
         # dicts with name/name_ja.  Mirror migrate_to_sqlite.py's id scheme.
         name = _attr(d, "name_en", "") or _attr(d, "name", "")
         name_ja = _attr(d, "name_ja", "") or name
         urgency = _attr(d, "urgency", "") or _attr(d, "severity", "") or ""
-        disease_id = _attr(d, "id", "") or f"{species}_{i:04d}"
+        i = orig_index.get(id(d), 0)
+        disease_id = _attr(d, "id", "")
+        if not disease_id:
+            fallback = f"{species}_{i:04d}"
+            disease_id = stable_id_for(species, d, fallback) if stable_id_for else fallback
         if not name and not name_ja:
             continue
         entries.append(
