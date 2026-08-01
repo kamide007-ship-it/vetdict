@@ -814,6 +814,8 @@ a:hover{text-decoration:underline}
 .drug-interaction-tag.severity-moderate{background:#fff7ed;border-color:#fed7aa;border-left-color:#ea580c}
 .drug-interaction-tag.severity-minor{background:#fefce8;border-color:#fef08a;border-left-color:#ca8a04}
 .drug-interaction-tag .interaction-drug{font-weight:700;color:#991b1b}
+a.interaction-drug.drug-nav-link{cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+a.interaction-drug.drug-nav-link:hover,a.interaction-drug.drug-nav-link:focus-visible{color:#7f1d1d;text-decoration-style:solid}
 .drug-interaction-tag .interaction-effect{color:var(--gray-700)}
 .drug-interaction-tag .severity-badge{display:inline-block;font-size:.64rem;padding:1px 6px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;font-weight:700;background:rgba(0,0,0,.06);color:#444}
 .drug-interaction-tag.severity-major .severity-badge{background:#dc2626;color:#fff}

@@ -1873,3 +1873,24 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 ### 既知の残課題（次セッション候補）
 - 英語 causes/pathophysiology の category-generic は依然クラスタ化（causes は徴候グラウンディング不可のため named-agent/flagship キュレートの継続が本質的改善）。`curated_etiology`（JA専用100+疾患）の bilingual 化が英語ユニーク性の最大レバー
 - リゾルバ None の pre-existing patho 誤テンプレート（Erysipelas→toxicity 等、数十件）— 名前が category に解決しないため要キュレート
+
+## 2026-08セッション（エラーチェック + 薬用量マニュアルの欠落是正 + 相互作用参照のクリック導線）
+
+### 全域エラーチェック（結果: 既存データは健全）
+- ruff（変更ファイル）clean、フルテスト **3643 passed / 68 skipped**、カバレッジ 81.66%
+- 監査で確認した完全性（いずれも欠落0）:
+  - 薬用量: safe=true エントリで dosage 欠落 0（571→573薬品）
+  - 麻酔: 全21種 × 全8カテゴリ完備、全プロトコルに用量あり、緊急対応は RECOVER 準拠（エピネフリン 0.01 mg/kg IV 低用量、アトロピン 0.02-0.04 mg/kg）
+  - 疾患: 配信ビュー6529件・JSON6449件で主要臨床フィールド（治療/病因/予後/予防/病態/説明）の空欄 0
+  - 種致死薬の安全フラグ正常（猫ペルメトリン/アセトアミノフェン、ウサギフィプロニル = safe:False）
+
+### 薬用量マニュアルの欠落是正（自己参照的ギャップ2件）
+薬品辞書が「自分が収載する薬品」から参照する薬剤を収載していない欠落を is-referenced-but-absent 監査で検出し補完:
+- **ネオスチグミン**（新規, `drug_batch_11.py`）: アトラクリウム（収載済み・非脱分極性NMBA）の notes が「ネオスチグミン（＋グリコピロレート）で拮抗」と指示するのに本体が未収載だった。可逆的AChE阻害によるNMBA拮抗機序、犬猫馬ウサギの用量（0.02-0.05 mg/kg 緩徐静注＋抗コリン薬必須）、脱分極性遮断への非適応・機械的閉塞での禁忌を明記（Plumb's / Lumb & Jones 5th ed）
+- **アスピリン（アセチルサリチル酸）**（新規, `drug_batch_11.py`, category=cardiovascular）: 相互作用参照4回・獣医の主力薬（猫ATE予防・犬過凝固）なのに未収載だった。犬（抗血小板0.5-1 mg/kg q24h）・猫（低用量5 mg/頭 q72h、**毎日投与禁止**＝グルクロン酸抱合能低下による蓄積回避、クロピドグレルが第一選択 FATCAT 2015）・馬。COX不可逆アセチル化機序、消化管潰瘍・サリチル酸中毒の警告付き
+- 回帰テスト +2件（`test_nondepolarizing_nmba_reversal_agent_is_documented`, `test_aspirin_present_with_feline_dosing_caution` — 猫が q48-72h でありq24hでないことを検証）
+
+### UX: 相互作用参照のワンタップ導線
+薬品詳細の drug_interactions は参照薬剤名を素のテキスト表示していた。参照薬剤が辞書に収載されている場合のみ `.drug-nav-link` 化し、タップでその薬品へ移動・自動展開（既存の `navigateToDrug` + 委譲ハンドラを再利用）。「reverse with X」から X まで1タップ。薬品クラス参照（aminoglycosides 等）は解決せず素のテキストのまま（`_resolveInteractionDrug` が id/name 完全一致のみ解決）。
+- `static/css/main.css`: リンク化された `.interaction-drug` にドット下線＋ポインタのアフォーダンス
+- ServiceWorker: `CACHE_NAME` v99 → **v100**
