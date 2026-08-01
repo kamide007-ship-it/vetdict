@@ -94,3 +94,25 @@ def test_served_db_carries_the_product_block():
         assert (row["treatment_ja"] or "").count("【日本国内で入手可能な代表的製剤】") == 1, (
             f"{row['species']}/{row['name']}: product block duplicated"
         )
+
+
+def test_exotic_species_blocks_flag_their_lethal_drug():
+    """Exotics have almost nothing licensed, so the contraindication is the point."""
+    herb = jp_product_block("rabbit", "Ear Mite Infestation", "耳ダニ症", _BASE)
+    assert herb and "フィプロニル" in herb and "禁忌" in herb
+
+    bird = jp_product_block("parrot", "Knemidokoptes Mite", "トリヒゼンダニ症", _BASE)
+    assert bird and "イベルメクチン" in bird
+    assert "フィプロニル" in bird and "鳥に用いない" in bird
+
+    ferret = jp_product_block("ferret", "Flea Infestation", "ノミ寄生症", _BASE)
+    assert ferret and "セラメクチン" in ferret
+    assert "適応外" in ferret, "must be honest that these are off-label"
+    assert "フィラリア" in ferret, "ferrets are highly susceptible to heartworm"
+
+
+def test_added_products_are_present():
+    dog_worm = jp_product_block("dog", "Roundworm Infection", "回虫症", _BASE)
+    assert dog_worm and "カルドメック" in dog_worm and "シンパリカ®トリオ" in dog_worm
+    cat_flea = jp_product_block("cat", "Flea Infestation", "ノミ寄生症", _BASE)
+    assert cat_flea and "レボリューション®プラス" in cat_flea

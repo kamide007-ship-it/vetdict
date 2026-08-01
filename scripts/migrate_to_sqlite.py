@@ -1859,6 +1859,36 @@ def fix_dangerous_treatment_in_served_db(conn) -> dict[str, int]:
     return stats
 
 
+def apply_species_drug_caveats(conn) -> int:
+    """Apply drug caveats the corpus states on some records but not others.
+
+    Rabbit atropinesterase and African-grey itraconazole sensitivity are both
+    already written into this database, but only on a minority of the records
+    that name the drug — so whether a vet is warned depends on which page they
+    open. Appends the missing note; records that already make the point are
+    untouched.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.species_drug_caveats import species_drug_caveat
+
+    rows = conn.execute(
+        "SELECT id, species, name, name_ja, treatment_ja FROM diseases "
+        "WHERE species IN ('rabbit','guinea_pig','chinchilla','degu','bird','parakeet','parrot')"
+    ).fetchall()
+    n = 0
+    for row in rows:
+        new_tx = species_drug_caveat(
+            row["species"] or "", row["name"] or "", row["name_ja"] or "", row["treatment_ja"] or ""
+        )
+        if new_tx:
+            conn.execute(
+                "UPDATE diseases SET treatment_ja = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new_tx, row["id"]),
+            )
+            n += 1
+    return n
+
+
 def apply_jp_antiparasitic_products(conn) -> int:
     """Name the antiparasitic products a Japanese clinic can actually dispense.
 
@@ -1872,7 +1902,8 @@ def apply_jp_antiparasitic_products(conn) -> int:
     from scripts.template_elimination.jp_antiparasitic_products import apply_jp_products
 
     rows = conn.execute(
-        "SELECT id, species, name, name_ja, treatment_ja FROM diseases WHERE species IN ('dog','cat')"
+        "SELECT id, species, name, name_ja, treatment_ja FROM diseases "
+        "WHERE species IN ('dog','cat','ferret','rabbit','guinea_pig','chinchilla','degu','bird','parakeet','parrot')"
     ).fetchall()
     n = 0
     for row in rows:
@@ -2523,6 +2554,12 @@ def main(db_path: str | None = None):
         print("\n[enrichment] adding Japan-available antiparasitic products...")
         jp_n = apply_jp_antiparasitic_products(conn)
         print(f"  → {jp_n} records given a Japanese product block")
+
+        # Caveats the corpus states inconsistently (rabbit atropinesterase,
+        # African-grey itraconazole sensitivity).
+        print("\n[safety] applying species drug caveats...")
+        cav_n = apply_species_drug_caveats(conn)
+        print(f"  → {cav_n} records given a missing species caveat")
 
         # Replace the deworming template on protozoal diseases (babesiosis,
         # toxoplasmosis, cytauxzoonosis, coccidiosis, …) with evidence-based
