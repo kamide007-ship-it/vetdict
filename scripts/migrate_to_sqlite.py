@@ -1859,6 +1859,43 @@ def fix_dangerous_treatment_in_served_db(conn) -> dict[str, int]:
     return stats
 
 
+def make_hindgut_oral_antibiotics_safe(conn) -> int:
+    """Remove lethal oral antibiotic advice from hindgut-fermenter records.
+
+    Oral penicillins/amoxicillin/ampicillin/oral cephalosporins and
+    lincosamides/macrolides destroy the caecal flora of rabbits, guinea pigs,
+    chinchillas and degus, letting *Clostridium spiroforme* overgrow and kill the
+    animal by enterotoxaemia. The corpus nevertheless prescribed them by mouth,
+    with a dose, on 97 such records — many via a shared template whose own
+    parenthesis read "（小型哺乳類除く）" while sitting on the chinchilla page.
+
+    Runs as a served-DB sweep so it catches every source (species modules, the
+    JSON overlay, supplementary data and anything generated at build time),
+    mirroring ``apply_curated_dangerous_treatments``.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.hindgut_antibiotic_safety import (
+        HINDGUT_SPECIES,
+        make_oral_antibiotics_safe,
+    )
+
+    placeholders = ",".join("?" * len(HINDGUT_SPECIES))
+    rows = conn.execute(
+        f"SELECT id, species, treatment_ja FROM diseases WHERE species IN ({placeholders})",
+        tuple(sorted(HINDGUT_SPECIES)),
+    ).fetchall()
+    n = 0
+    for row in rows:
+        new_tx = make_oral_antibiotics_safe(row["species"] or "", row["treatment_ja"] or "")
+        if new_tx:
+            conn.execute(
+                "UPDATE diseases SET treatment_ja = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new_tx, row["id"]),
+            )
+            n += 1
+    return n
+
+
 def apply_curated_dangerous_treatments(conn) -> int:
     """Replace dangerous category-mismatched treatments with curated protocols.
 
@@ -2405,6 +2442,13 @@ def main(db_path: str | None = None):
         # condition-specific, species-appropriate protocols.
         cur_n = apply_curated_dangerous_treatments(conn)
         print(f"  → {cur_n} curated treatment replacements")
+
+        # Oral penicillins/lincosamides are fatal in hindgut fermenters. Run
+        # after the curated replacements so anything they introduce is screened
+        # too, and before the protozoal pass which does not touch these species.
+        print("\n[safety] removing oral beta-lactam/lincosamide advice from hindgut fermenters...")
+        hg_n = make_hindgut_oral_antibiotics_safe(conn)
+        print(f"  → {hg_n} hindgut-fermenter treatments made safe")
 
         # Replace the deworming template on protozoal diseases (babesiosis,
         # toxoplasmosis, cytauxzoonosis, coccidiosis, …) with evidence-based
