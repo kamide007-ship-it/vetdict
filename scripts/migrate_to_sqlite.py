@@ -1859,6 +1859,41 @@ def fix_dangerous_treatment_in_served_db(conn) -> dict[str, int]:
     return stats
 
 
+def make_chelonian_antiparasitics_safe_in_served_db(conn) -> int:
+    """Take ivermectin off tortoise/turtle treatment plans.
+
+    Ivermectin is lethal in chelonians, and this site's own drug dictionary marks
+    it ``safe=False`` / ``N/A`` for ``tortoise`` — yet the disease pages
+    prescribed it with a dose, so the drug tab and the treatment text disagreed
+    on a drug that kills the animal. One record even claimed 「カメでの安全性は
+    確立」, a truncation of 「確立されていない」 that asserted the opposite of the
+    truth. Runs as a served-DB sweep so every source is covered.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.chelonian_ivermectin_safety import (
+        CHELONIAN_SPECIES,
+        make_chelonian_antiparasitics_safe,
+    )
+
+    placeholders = ",".join("?" * len(CHELONIAN_SPECIES))
+    rows = conn.execute(
+        f"SELECT id, species, name, name_ja, treatment_ja FROM diseases WHERE species IN ({placeholders})",
+        tuple(sorted(CHELONIAN_SPECIES)),
+    ).fetchall()
+    n = 0
+    for row in rows:
+        new_tx = make_chelonian_antiparasitics_safe(
+            row["species"] or "", row["name"] or "", row["name_ja"] or "", row["treatment_ja"] or ""
+        )
+        if new_tx:
+            conn.execute(
+                "UPDATE diseases SET treatment_ja = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new_tx, row["id"]),
+            )
+            n += 1
+    return n
+
+
 def make_hindgut_oral_antibiotics_safe(conn) -> int:
     """Remove lethal oral antibiotic advice from hindgut-fermenter records.
 
@@ -2449,6 +2484,11 @@ def main(db_path: str | None = None):
         print("\n[safety] removing oral beta-lactam/lincosamide advice from hindgut fermenters...")
         hg_n = make_hindgut_oral_antibiotics_safe(conn)
         print(f"  → {hg_n} hindgut-fermenter treatments made safe")
+
+        # Ivermectin is fatal in chelonians; the drug dictionary already says so.
+        print("\n[safety] removing ivermectin from chelonian (tortoise) treatments...")
+        ch_n = make_chelonian_antiparasitics_safe_in_served_db(conn)
+        print(f"  → {ch_n} chelonian treatments made safe")
 
         # Replace the deworming template on protozoal diseases (babesiosis,
         # toxoplasmosis, cytauxzoonosis, coccidiosis, …) with evidence-based
