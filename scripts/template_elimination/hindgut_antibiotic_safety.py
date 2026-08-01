@@ -27,7 +27,14 @@ The transform is deliberately narrow:
   which is what the lincosamide was reaching for anaerobically). Deleting the
   clause outright left dangling conjunctive fragments such as
   "…は培養感受性試験を診療指針とし" and threw away the therapy the vet still
-  needs, so substitution preserves both grammar and clinical usefulness; and
+  needs, so substitution preserves both grammar and clinical usefulness;
+* the substitute's DOSE is read per species from the drug dictionary — the
+  vet-reviewed formulary this same site publishes on its drug tab — because the
+  figures genuinely differ across the group: trimethoprim-sulfa is 30 mg/kg PO
+  q12h in the rabbit and guinea pig but 15-30 mg/kg in the chinchilla and degu,
+  and metronidazole is 20 mg/kg except in the chinchilla (10-20 mg/kg). A single
+  hardcoded dose would have been wrong for half of them, and sourcing it from the
+  dictionary means the treatment text and the drug tab cannot drift apart; and
 * a single standard contraindication line is appended when the record does not
   already carry one.
 
@@ -76,8 +83,25 @@ _LINCOSAMIDE = re.compile(
 # Ampicillin is contraindicated in these species whatever the route, so an
 # "Ampicillin 20 mg/kg IV" line is no safer than an oral one.
 _ANY_ROUTE_BANNED = re.compile(r"(アンピシリン|ampicillin)", re.I)
-_SUB_BETA_LACTAM = "トリメトプリム・スルファ 30 mg/kg PO q12h"
-_SUB_ANAEROBE = "メトロニダゾール 20 mg/kg PO q12h"
+
+# The substitute's dose is read from the drug dictionary (api/drug_dictionary.py),
+# which carries the vet-reviewed, per-species figures shown on the drug tab, so a
+# rewritten treatment can never contradict the formulary the same site publishes.
+# The doses genuinely differ by species — trimethoprim-sulfa is 30 mg/kg PO q12h
+# in the rabbit and guinea pig but 15-30 mg/kg in the chinchilla and degu, and
+# metronidazole is 20 mg/kg except in the chinchilla (10-20 mg/kg) — so a single
+# hardcoded figure would have been wrong for half of them.
+_SUB_BETA_LACTAM_ID = "trimethoprim_sulfa"
+_SUB_BETA_LACTAM_JA = "トリメトプリム・スルファ"
+_SUB_ANAEROBE_ID = "metronidazole"
+_SUB_ANAEROBE_JA = "メトロニダゾール"
+
+# Used only if the dictionary cannot be imported (it is the single source of
+# truth; these mirror Carpenter, Exotic Animal Formulary for the widest species).
+_FALLBACK_DOSE = {
+    _SUB_BETA_LACTAM_ID: "15-30 mg/kg PO q12h",
+    _SUB_ANAEROBE_ID: "10-20 mg/kg PO q12h",
+}
 
 _SPECIES_JA = {
     "rabbit": "ウサギ",
@@ -85,6 +109,36 @@ _SPECIES_JA = {
     "chinchilla": "チンチラ",
     "degu": "デグー",
 }
+
+
+def _formulary_dose(drug_id: str, species: str) -> str:
+    """Return the curated oral dose for ``drug_id`` in ``species``.
+
+    Falls back to the conservative published range when the dictionary is
+    unavailable or the entry carries no dose for this species.
+    """
+    try:
+        from api.drug_dictionary import get_drug_by_id
+
+        entry = get_drug_by_id(drug_id) or {}
+        info = (entry.get("species_info") or {}).get(species) or {}
+        # Prefer the "30 mg/kg PO q12h" form over the localised
+        # "30 mg/kg 経口 12時間毎": the surrounding prescribing text uses the
+        # PO/q12h convention, so the substitute must read the same way.
+        dose = str(info.get("dosage") or info.get("dosage_ja") or "").strip()
+        if dose and "mg/kg" in dose:
+            return dose
+    except Exception:  # pragma: no cover - dictionary import is best-effort
+        pass
+    return _FALLBACK_DOSE[drug_id]
+
+
+def substitute_for(species: str, anaerobic: bool) -> str:
+    """The species-appropriate replacement drug + dose, straight from the formulary."""
+    if anaerobic:
+        return f"{_SUB_ANAEROBE_JA} {_formulary_dose(_SUB_ANAEROBE_ID, species)}"
+    return f"{_SUB_BETA_LACTAM_JA} {_formulary_dose(_SUB_BETA_LACTAM_ID, species)}"
+
 
 _WARNING_LINE = (
     "⚠{sp}では経口のペニシリン系・アモキシシリン（±クラブラン酸）・アンピシリン・経口セファロスポリン系・"
@@ -96,18 +150,7 @@ _WARNING_LINE = (
 )
 
 
-def _substitute(match: re.Match[str]) -> str:
-    """Swap one prescribing span for its species-safe equivalent."""
-    span = match.group(0)
-    # Ampicillin is contraindicated in these species by ANY route — parenteral
-    # dosing does not rescue it — so it is swapped even without an oral marker.
-    if not _HAS_ORAL.search(span) and not _ANY_ROUTE_BANNED.search(span):
-        # Parenteral-only span (e.g. penicillin G IM/SC) — clinically used, leave it.
-        return span
-    return _SUB_ANAEROBE if _LINCOSAMIDE.search(span) else _SUB_BETA_LACTAM
-
-
-def _rewrite_sentence(sentence: str) -> str | None:
+def _rewrite_sentence(sentence: str, species: str) -> str | None:
     """Substitute unsafe prescribing spans; ``None`` when nothing changed."""
     if _WARNING.search(sentence):
         return None
@@ -115,11 +158,22 @@ def _rewrite_sentence(sentence: str) -> str | None:
         return None
     if not (_HAS_ORAL.search(sentence) or _ANY_ROUTE_BANNED.search(sentence)):
         return None
+
+    def _substitute(match: re.Match[str]) -> str:
+        span = match.group(0)
+        # Ampicillin is contraindicated in these species by ANY route —
+        # parenteral dosing does not rescue it — so it is swapped even without
+        # an oral marker. Penicillin G IM/SC is left alone: it bypasses the gut
+        # and is used clinically.
+        if not _HAS_ORAL.search(span) and not _ANY_ROUTE_BANNED.search(span):
+            return span
+        return substitute_for(species, anaerobic=bool(_LINCOSAMIDE.search(span)))
+
     rewritten = _PRESCRIBING_SPAN.sub(_substitute, sentence)
     if rewritten == sentence:
         return None
     # Collapse a duplicate that appears when two unsafe drugs sat side by side.
-    for sub in (_SUB_BETA_LACTAM, _SUB_ANAEROBE):
+    for sub in (substitute_for(species, False), substitute_for(species, True)):
         dup = re.escape(sub) + r"(?:\s*[、,]\s*" + re.escape(sub) + r")+"
         rewritten = re.sub(dup, sub, rewritten)
     return rewritten
@@ -137,7 +191,7 @@ def make_oral_antibiotics_safe(species: str, treatment_ja: str) -> str | None:
     changed = False
     out: list[str] = []
     for s in sentences:
-        rewritten = _rewrite_sentence(s)
+        rewritten = _rewrite_sentence(s, species)
         if rewritten is not None:
             out.append(rewritten)
             changed = True
