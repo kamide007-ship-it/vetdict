@@ -3738,6 +3738,39 @@ function attachHistoryHandlers(container){
   if(jsonBtn)jsonBtn.addEventListener("click",e=>{e.stopPropagation();exportHistoryAsJSON();});
 }
 
+/* Resolve a prevalence name (e.g. "Gout (Articular)") to the actual browsable
+   disease name in the loaded DB list, so navigation opens the right entry even
+   when the prevalence label differs from the canonical name. Conservative — only
+   confident matches (exact, identical token set, or a unique substring either
+   way) are remapped; otherwise the original name is returned so we never open
+   the wrong disease. Returns the resolved name to search for. */
+function _resolveCommonDiseaseName(name){
+  const q=(name||"").trim();
+  if(!q||!Array.isArray(allDiseases)||!allDiseases.length)return q;
+  const norm=s=>(s||"").toLowerCase();
+  const tokset=s=>norm(s).split(/[^a-z0-9]+/).filter(Boolean).sort().join(" ");
+  const ql=norm(q),qt=tokset(q);
+  // 1. exact name / name_ja
+  let hit=allDiseases.find(d=>norm(d.name)===ql||norm(d.name_ja)===ql);
+  // 2. identical token set (handles word-order flips like "Gout (Articular)" ↔ "Articular Gout")
+  if(!hit&&qt)hit=allDiseases.find(d=>tokset(d.name)===qt);
+  // 3. unique substring match either direction (handles suffixes like "(CKD)"/"(BPH)")
+  if(!hit){
+    const cand=allDiseases.filter(d=>{const n=norm(d.name);return n&&(n.includes(ql)||ql.includes(n));});
+    if(cand.length===1)hit=cand[0];
+  }
+  return hit?hit.name:q;
+}
+/* Delegate clicks on common-disease chips to the disease DB detail. Attached
+   once per container (guard) so re-renders never stack listeners. */
+function _attachCommonDiseaseNav(container){
+  if(!container||container.dataset.cdNav)return;
+  container.dataset.cdNav="1";
+  container.addEventListener("click",function(e){
+    const btn=e.target.closest(".common-disease-tag");
+    if(btn&&btn.dataset.disease){e.preventDefault();navigateToDiseaseDb(_resolveCommonDiseaseName(btn.dataset.disease));}
+  });
+}
 function loadCommonDiseases(species){
   const area=document.getElementById("commonDiseasesArea");
   if(!area||!species)return;
@@ -3750,14 +3783,20 @@ function loadCommonDiseases(species){
     const renderList=(list,cls)=>list.map(d=>{
       const name=currentLang==="ja"?(d.name_ja||d.name):d.name;
       const sub=currentLang==="ja"?d.name:(d.name_ja||"");
-      return `<span class="common-disease-tag ${cls}">${escapeHtml(name)}${sub?` <span class="common-disease-sub">${escapeHtml(sub)}</span>`:""}</span>`;
+      const inner=`${escapeHtml(name)}${sub?` <span class="common-disease-sub">${escapeHtml(sub)}</span>`:""}`;
+      /* Each disease opens its full entry in the disease DB (species already
+         loaded there) — one tap from "common in this species" to the detail.
+         data-disease carries the canonical English name; the click handler
+         resolves it against the browsable list before navigating. */
+      return `<button type="button" class="common-disease-tag ${cls}" data-disease="${escapeHtml(d.name||name)}" title="${currentLang==="ja"?"疾患の詳細を開く":"Open disease details"}">${inner}</button>`;
     }).join("");
     area.innerHTML=`<div class="common-diseases-section">
       <div class="common-diseases-header">${currentLang==="ja"?"📋 この動物種でよくみられる疾患":"📋 Common diseases in this species"}</div>
       ${veryCommon.length?`<div class="common-diseases-group"><span class="common-diseases-tier tier-very-common">${currentLang==="ja"?"非常に多い":"Very Common"}</span>${renderList(veryCommon,"tag-very-common")}</div>`:""}
       ${common.length?`<div class="common-diseases-group"><span class="common-diseases-tier tier-common">${currentLang==="ja"?"多い":"Common"}</span>${renderList(common,"tag-common")}</div>`:""}
-      <div class="common-diseases-hint">${currentLang==="ja"?"※ 鑑別診断の参考としてご活用ください":"※ Use as reference for differential diagnosis"}</div>
+      <div class="common-diseases-hint">${currentLang==="ja"?"※ 疾患をタップすると詳細を表示。鑑別診断の参考としてご活用ください":"※ Tap a disease to view details. Use as reference for differential diagnosis"}</div>
     </div>`;
+    _attachCommonDiseaseNav(area);
   }).catch(()=>{if(area)area.innerHTML="";});
 }
 
@@ -4933,13 +4972,14 @@ function renderChatResult(container,data){
       const common=diseases.filter(d=>d.prevalence==="common");
       const renderTags=(list,cls)=>list.map(d=>{
         const n=currentLang==="ja"?(d.name_ja||d.name):d.name;
-        return `<span class="common-disease-tag ${cls}">${escapeHtml(n)}</span>`;
+        return `<button type="button" class="common-disease-tag ${cls}" data-disease="${escapeHtml(d.name||n)}" title="${currentLang==="ja"?"疾患の詳細を開く":"Open disease details"}">${escapeHtml(n)}</button>`;
       }).join("");
       chatRef.innerHTML=`<div class="common-diseases-section compact">
         <div class="common-diseases-header">${currentLang==="ja"?"📋 この動物種でよくみられる疾患":"📋 Common diseases in this species"}</div>
         ${veryCommon.length?`<div class="common-diseases-group">${renderTags(veryCommon,"tag-very-common")}</div>`:""}
         ${common.length?`<div class="common-diseases-group">${renderTags(common,"tag-common")}</div>`:""}
       </div>`;
+      _attachCommonDiseaseNav(chatRef);
     }).catch(err=>{debugWarn("common-diseases fetch failed:",err);});
   }
 
