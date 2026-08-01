@@ -24,6 +24,7 @@ import pytest
 from scripts.template_elimination.hindgut_antibiotic_safety import (
     HINDGUT_SPECIES,
     make_oral_antibiotics_safe,
+    substitute_for,
 )
 
 _DANGER = re.compile(
@@ -61,6 +62,35 @@ def test_rewrites_oral_beta_lactam_to_safe_alternative():
     assert "トリメトプリム・スルファ" in body
     assert "エンロフロキサシン" in body, "safe alternatives already present must be preserved"
     assert "Clostridium spiroforme" in out, "must explain why the drug was removed"
+
+
+def test_substitute_dose_comes_from_the_drug_dictionary():
+    """The replacement dose must be the vet-reviewed per-species formulary figure.
+
+    A single hardcoded dose would be wrong for half the group: trimethoprim-sulfa
+    is 30 mg/kg PO q12h in the rabbit and guinea pig but 15-30 mg/kg in the
+    chinchilla and degu, and metronidazole is 20 mg/kg except in the chinchilla
+    (10-20 mg/kg). Reading the dictionary keeps the rewritten treatment and the
+    published drug tab from ever disagreeing.
+    """
+    from api.drug_dictionary import get_drug_by_id
+
+    for species in sorted(HINDGUT_SPECIES):
+        for drug_id, anaerobic in (("trimethoprim_sulfa", False), ("metronidazole", True)):
+            expected = get_drug_by_id(drug_id)["species_info"][species]["dosage"]
+            out = substitute_for(species, anaerobic=anaerobic)
+            assert expected in out, f"{species}/{drug_id}: {out!r} does not carry formulary dose {expected!r}"
+            # The surrounding prescribing text uses the PO/q12h convention.
+            assert "mg/kg" in out and "PO" in out
+
+
+def test_substitute_dose_varies_by_species():
+    """Guard the specific figures that differ, so a regression is visible."""
+    assert substitute_for("rabbit", anaerobic=False) != substitute_for("chinchilla", anaerobic=False)
+    assert "30 mg/kg" in substitute_for("rabbit", anaerobic=False)
+    assert "15-30 mg/kg" in substitute_for("chinchilla", anaerobic=False)
+    assert "10-20 mg/kg" in substitute_for("chinchilla", anaerobic=True)
+    assert "20 mg/kg" in substitute_for("degu", anaerobic=True)
 
 
 def test_lincosamide_becomes_metronidazole():
