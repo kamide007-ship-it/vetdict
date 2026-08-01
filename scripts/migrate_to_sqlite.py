@@ -1859,6 +1859,35 @@ def fix_dangerous_treatment_in_served_db(conn) -> dict[str, int]:
     return stats
 
 
+def apply_jp_antiparasitic_products(conn) -> int:
+    """Name the antiparasitic products a Japanese clinic can actually dispense.
+
+    The parasitology records listed generic actives but rarely the product a vet
+    orders by name, so the advice stopped short of the decision being made.
+    Appends a per-parasite 【日本国内で入手可能な代表的製剤】 block. Weight-band
+    products (spot-ons, chewables) are described as such rather than given an
+    invented mg/kg. Idempotent: the block is skipped when already present.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.jp_antiparasitic_products import apply_jp_products
+
+    rows = conn.execute(
+        "SELECT id, species, name, name_ja, treatment_ja FROM diseases WHERE species IN ('dog','cat')"
+    ).fetchall()
+    n = 0
+    for row in rows:
+        new_tx = apply_jp_products(
+            row["species"] or "", row["name"] or "", row["name_ja"] or "", row["treatment_ja"] or ""
+        )
+        if new_tx:
+            conn.execute(
+                "UPDATE diseases SET treatment_ja = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new_tx, row["id"]),
+            )
+            n += 1
+    return n
+
+
 def make_chelonian_antiparasitics_safe_in_served_db(conn) -> int:
     """Take ivermectin off tortoise/turtle treatment plans.
 
@@ -2489,6 +2518,11 @@ def main(db_path: str | None = None):
         print("\n[safety] removing ivermectin from chelonian (tortoise) treatments...")
         ch_n = make_chelonian_antiparasitics_safe_in_served_db(conn)
         print(f"  → {ch_n} chelonian treatments made safe")
+
+        # Name the products a Japanese clinic can actually dispense.
+        print("\n[enrichment] adding Japan-available antiparasitic products...")
+        jp_n = apply_jp_antiparasitic_products(conn)
+        print(f"  → {jp_n} records given a Japanese product block")
 
         # Replace the deworming template on protozoal diseases (babesiosis,
         # toxoplasmosis, cytauxzoonosis, coccidiosis, …) with evidence-based
