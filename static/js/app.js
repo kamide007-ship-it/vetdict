@@ -3597,6 +3597,16 @@ function _classifyInteractionSeverity(di){
   return"minor";
 }
 
+/* Resolve a drug_interactions[].drug reference (a drug id or name) to a loaded
+   drug so the reference can be made navigable. Many references are drug classes
+   (e.g. "aminoglycosides") with no single entry — those return null and stay
+   plain text. */
+function _resolveInteractionDrug(ref){
+  if(!ref||typeof allDrugs==="undefined"||!Array.isArray(allDrugs)||!allDrugs.length)return null;
+  const key=String(ref).trim().toLowerCase();
+  if(!key)return null;
+  return allDrugs.find(d=>(d.id||"").toLowerCase()===key||(d.name||"").toLowerCase()===key||(d.name_ja||"").toLowerCase()===key)||null;
+}
 function renderDrugInteractionsList(interactions){
   if(!interactions||!interactions.length)return"";
   // Sort by severity: major > moderate > minor
@@ -3611,7 +3621,14 @@ function renderDrugInteractionsList(interactions){
       minor:currentLang==="ja"?"軽度":"MINOR",
     }[sev]||sev.toUpperCase();
     const icon={major:"⛔",moderate:"⚠️",minor:"ℹ️"}[sev]||"";
-    return `<span class="drug-interaction-tag severity-${sev}"><span class="severity-badge">${icon} ${sevLabel}</span><span class="interaction-drug">${escapeHtml(di.drug||"")}</span><span class="interaction-effect">${escapeHtml(label)}</span></span>`;
+    const ref=di.drug||"";
+    // When the referenced drug is itself in the manual, make it a click target
+    // that jumps to and expands that drug — one tap from "reverse with X" to X.
+    const match=_resolveInteractionDrug(ref);
+    const drugCell=match
+      ?`<a href="#drugs" class="interaction-drug drug-nav-link" data-drug="${escapeHtml(match.name||ref)}" title="${currentLang==="ja"?"この薬品の詳細を開く":"Open this drug"}">${escapeHtml(ref)}</a>`
+      :`<span class="interaction-drug">${escapeHtml(ref)}</span>`;
+    return `<span class="drug-interaction-tag severity-${sev}"><span class="severity-badge">${icon} ${sevLabel}</span>${drugCell}<span class="interaction-effect">${escapeHtml(label)}</span></span>`;
   }).join("");
 }
 
