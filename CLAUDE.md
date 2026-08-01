@@ -1894,3 +1894,9 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 薬品詳細の drug_interactions は参照薬剤名を素のテキスト表示していた。参照薬剤が辞書に収載されている場合のみ `.drug-nav-link` 化し、タップでその薬品へ移動・自動展開（既存の `navigateToDrug` + 委譲ハンドラを再利用）。「reverse with X」から X まで1タップ。薬品クラス参照（aminoglycosides 等）は解決せず素のテキストのまま（`_resolveInteractionDrug` が id/name 完全一致のみ解決）。
 - `static/css/main.css`: リンク化された `.interaction-drug` にドット下線＋ポインタのアフォーダンス
 - ServiceWorker: `CACHE_NAME` v99 → **v100**
+
+### UX: 「よくみられる疾患」チップから疾患詳細へのワンタップ導線
+`/api/species/<species>/common-diseases` が返す「この動物種でよくみられる疾患」チップ（種選択画面・チャット結果の両方）を素のテキスト表示からクリック可能な `<button>` 化。タップで疾患DBの該当詳細へ移動・自動展開（`navigateToDiseaseDb` 再利用）。
+- **安全なクリック時解決** `_resolveCommonDiseaseName()`: prevalence_data のラベルが正規疾患名と異なる場合でも、ロード済みの `allDiseases`（閲覧可能な実データ）に対して ①完全一致（name/name_ja）②トークン集合一致（"Gout (Articular)" ↔ "Articular Gout" のような語順違いを安全に解決、内臓型/関節型は区別）③一意な部分一致（"(CKD)"/"(BPH)" 等の接尾辞）で解決。曖昧・不一致時は生の名前で検索にフォールバックし、**誤った疾患を開かない**（獣医向けの安全性）。
+- カバレッジ実測: 全21種897件中843件（94%）が正しい疾患へ移動。残り54件（6%）は prevalence_data と疾患名の既存不整合（例: "Xylitol Toxicosis" vs "Xylitol Poisoning"、"GI Stasis" vs "Gastrointestinal Stasis"、"Snuffles (Bordetella)"=臨床的にも誤り→実際は Pasteurella）で、フィルタ検索に graceful フォールバック。→ **次セッション候補: prevalence_data の 199 dead key（疾患名不一致）の正規名への突合。これらは診断時の有病率補正でも現状 inert なため、突合すれば診断精度にも寄与**。
+- ServiceWorker: `CACHE_NAME` v100 → **v101**
