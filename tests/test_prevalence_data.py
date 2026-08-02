@@ -1,6 +1,5 @@
 """Tests for api/species/prevalence_data.py — Species prevalence tiers."""
 
-
 from api.species.prevalence_data import SPECIES_PREVALENCE
 
 VALID_TIERS = {"very_common", "common", "uncommon", "rare"}
@@ -14,15 +13,11 @@ class TestPrevalenceStructure:
     def test_all_tiers_are_valid(self):
         for species, diseases in SPECIES_PREVALENCE.items():
             for disease_name, tier in diseases.items():
-                assert tier in VALID_TIERS, (
-                    f"{species}/{disease_name}: invalid tier '{tier}'"
-                )
+                assert tier in VALID_TIERS, f"{species}/{disease_name}: invalid tier '{tier}'"
 
     def test_each_species_has_entries(self):
         for species, diseases in SPECIES_PREVALENCE.items():
-            assert len(diseases) >= 5, (
-                f"{species} has only {len(diseases)} entries"
-            )
+            assert len(diseases) >= 5, f"{species} has only {len(diseases)} entries"
 
     def test_total_entries_above_1000(self):
         total = sum(len(d) for d in SPECIES_PREVALENCE.values())
@@ -56,16 +51,12 @@ class TestTierDistribution:
     def test_each_species_has_very_common(self):
         for species, diseases in SPECIES_PREVALENCE.items():
             tiers = set(diseases.values())
-            assert "very_common" in tiers, (
-                f"{species} has no very_common diseases"
-            )
+            assert "very_common" in tiers, f"{species} has no very_common diseases"
 
     def test_disease_names_are_nonempty_strings(self):
         for species, diseases in SPECIES_PREVALENCE.items():
             for name in diseases:
-                assert isinstance(name, str) and len(name) > 0, (
-                    f"{species}: empty disease name"
-                )
+                assert isinstance(name, str) and len(name) > 0, f"{species}: empty disease name"
 
 
 class TestPrevalenceKeysResolveToDiseases:
@@ -109,9 +100,7 @@ class TestPrevalenceKeysResolveToDiseases:
             prev = SPECIES_PREVALENCE.get(species, {})
             for key in keys:
                 assert key in prev, f"{species}: expected prevalence key {key!r} missing"
-                assert key in names, (
-                    f"{species}: prevalence key {key!r} matches no disease name"
-                )
+                assert key in names, f"{species}: prevalence key {key!r} matches no disease name"
 
     def test_removed_duplicate_keys_stay_removed(self):
         # These dead keys duplicated an already-active canonical entry and were
