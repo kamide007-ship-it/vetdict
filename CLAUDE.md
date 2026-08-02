@@ -1900,3 +1900,36 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 - **安全なクリック時解決** `_resolveCommonDiseaseName()`: prevalence_data のラベルが正規疾患名と異なる場合でも、ロード済みの `allDiseases`（閲覧可能な実データ）に対して ①完全一致（name/name_ja）②トークン集合一致（"Gout (Articular)" ↔ "Articular Gout" のような語順違いを安全に解決、内臓型/関節型は区別）③一意な部分一致（"(CKD)"/"(BPH)" 等の接尾辞）で解決。曖昧・不一致時は生の名前で検索にフォールバックし、**誤った疾患を開かない**（獣医向けの安全性）。
 - カバレッジ実測: 全21種897件中843件（94%）が正しい疾患へ移動。残り54件（6%）は prevalence_data と疾患名の既存不整合（例: "Xylitol Toxicosis" vs "Xylitol Poisoning"、"GI Stasis" vs "Gastrointestinal Stasis"、"Snuffles (Bordetella)"=臨床的にも誤り→実際は Pasteurella）で、フィルタ検索に graceful フォールバック。→ **次セッション候補: prevalence_data の 199 dead key（疾患名不一致）の正規名への突合。これらは診断時の有病率補正でも現状 inert なため、突合すれば診断精度にも寄与**。
 - ServiceWorker: `CACHE_NAME` v100 → **v101**
+
+## 2026-08セッション（第2弾: prevalence_data の dead key 突合 — 診断有病率補正の活性化 + よくみられる疾患チップの正規化）
+
+### 背景: prevalence キーの疾患名不一致で有病率補正が inert だった
+`SPECIES_PREVALENCE`（種別の「よくみられる疾患」＝有病率ティア）のキーは、診断エンジン（`disease_matcher._match_species_symptoms_to_diseases`）でも `/api/species/<species>/common-diseases` エンドポイントでも**英語疾患名の完全一致**で照合される。キーが実際の疾患名と綴り違い（例 "Xylitol Toxicosis" vs 正規 "Xylitol Poisoning"）だと、そのエントリは**完全に inert**: 診断スコアの有病率補正が一切効かず、チップは name_ja 空欄で表示され、クリック時のみ fuzzy 解決にフォールバックしていた（前セッションで next-session 候補として明記）。
+
+### 監査と是正
+配信SQLite（7,058疾患）の実疾患名に対し全 prevalence キーを照合し、**85 dead key**（どの疾患名にも一致しない）を検出。臨床的に同一疾患と確信できるもののみを是正（有病率ティアは curated 判断なので不変、キー文字列だけを正規名に合わせる）:
+- **40 key を正規疾患名に rename**（inert だった有病率 prior を活性化）
+  例: dog "Xylitol Toxicosis"→"Xylitol Poisoning"、cat "Feline Pulmonary Edema"→"Pulmonary Edema"、bird "Trichomoniasis (Canker)"→"Trichomoniasis"、"Avian Mycobacteriosis"→"Mycobacteriosis (Avian TB)"、snake "Retained Spectacle"→"Retained Spectacle (Retained Eye Cap)"、chinchilla "Diabetes Mellitus"→"Diabetes Mellitus - Chinchilla" 等
+- **12 key を削除**（既に active な正規キーの重複＝二重の inert エントリ。壊れた重複チップの原因）
+  例: dog "Immune-Mediated Hemolytic Anemia (IMHA)"（"Immune-Mediated Hemolytic Anemia" が既に active）、rabbit "Snuffles (Bordetella)"（**臨床的にも誤り**＝スナッフルは Pasteurella。正規 "Pasteurellosis (Snuffles)"=very_common が既に active）、guinea_pig "Ovarian Cystic Disease"（"Ovarian Cysts"=very_common が既に active）
+- **合計52 key を是正、dead key 85→33**（総キー数 1,302→1,290）
+
+### 効果
+- **診断精度**: 是正した40疾患で有病率 prior（very_common ×1.20 〜 rare ×0.80）が診断ランキングに実効化（従来は乗数1.0のまま）。
+- **クリックUX**: `/common-diseases` チップの name_ja 空欄が主要種で解消（dog/cat/snake/reptile/hamster 等で残0）。チップ名が正規疾患名と一致するため、クリック時は fuzzy 解決を経ず**疾患DB詳細へ完全一致で移動・自動展開**。
+- 残33 dead key は当該種のDBに疾患エントリ自体が存在しないもの（例: `exotic_other` の観賞魚疾患 Ich/Fin Rot/KHV、chinchilla Fatty Liver Disease、bird Renal Disease、amphibian Parasitic Dermatitis 等）。強制マッピングせず温存（獣医向けの安全性 — 誤った疾患に紐付けない）。→ **次セッション候補: これら真の欠落疾患の DB エントリ新規追加（エビデンスベース、獣医監修前提）**。
+
+### エラーチェック（結果: 既存データは健全）
+- ruff（変更ファイル）clean、フルテスト全合格 + 新規回帰テスト3件
+- 完全性再監査（欠落0を再確認）:
+  - 薬用量: safe 薬品の dosage 欠落 0（573薬品、species_info 3,459エントリ全て dosage あり）
+  - 麻酔: 全21種×全8カテゴリ完備、薬剤行の用量欠落 0（monitoring/recovery はガイドライン記述で drugs 無しが設計通り）
+  - 疾患: treatment/prevention/prognosis 100%（配信7,058疾患）
+
+### 回帰テスト（tests/test_prevalence_data.py、+3件）
+- `test_previously_dead_keys_now_resolve` — 是正した主要キーが実疾患名に一致すること
+- `test_removed_duplicate_keys_stay_removed` — 削除した重複キーが復活しないこと
+- `test_dead_key_count_stays_capped` — dead key 総数を ≤40 に上限ガード（将来の inert キー再混入を検出）
+
+### 注記
+- 変更は Python データ（`api/species/prevalence_data.py`）のみ。static 資産は不変のため ServiceWorker `CACHE_NAME` は据え置き。
