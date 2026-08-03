@@ -4369,7 +4369,13 @@ function _showBackNav(containerId,searchInputId){
 }
 document.addEventListener("click",function(e){
   const bb=e.target.closest(".nav-back-btn");
-  if(bb){const si=bb.dataset.sid;if(si){const inp=document.getElementById(si);if(inp){inp.value="";inp.dispatchEvent(new Event("input"));}}const ci=document.getElementById(bb.dataset.cid);if(ci){ci.style.display="none";ci.innerHTML="";}if(_navHistory.length){const last=_navHistory.pop();switchView(last.from);}return;}
+  if(bb){const si=bb.dataset.sid;if(si){const inp=document.getElementById(si);if(inp){inp.value="";inp.dispatchEvent(new Event("input"));}}const ci=document.getElementById(bb.dataset.cid);if(ci){ci.style.display="none";ci.innerHTML="";}if(_navHistory.length){const last=_navHistory.pop();switchView(last.from);
+    /* switchView only auto-scrolls when the mobile menu was open, so a back tap on
+       desktop switched the tab but left the page at its previous scroll position —
+       the returned panel (which sits far below the landing sections) could be
+       off-screen. Carry the viewport to the returned view's useful entry point,
+       mirroring the tab-click and cross-link navigation. */
+    const rv=last.from;const target=rv==="checker"?document.getElementById("speciesSection"):document.getElementById("view"+rv.charAt(0).toUpperCase()+rv.slice(1));if(target)scrollToAnchor(target);}return;}
   const cb=e.target.closest(".nav-clear-btn");
   if(cb){const si=cb.dataset.sid;if(si){const inp=document.getElementById(si);if(inp){inp.value="";inp.dispatchEvent(new Event("input"));}}const ci=document.getElementById(cb.dataset.cid);if(ci){ci.style.display="none";ci.innerHTML="";}return;}
 });
