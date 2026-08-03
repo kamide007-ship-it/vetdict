@@ -1639,6 +1639,108 @@ def ground_stub_descriptions(conn) -> dict[str, int]:
     return counts
 
 
+def ground_missing_clinical_signs_and_diagnosis(conn) -> dict[str, int]:
+    """Fill empty ``clinical_signs`` / ``diagnosis`` sections from stored record data.
+
+    A batch of records (recently added dog/fish/amphibian/horse/cat entries) got
+    the six core fields but shipped with BOTH language variants of
+    ``clinical_signs`` and ``diagnosis`` empty, so those labelled sections silently
+    vanish from the disease detail while every sibling shows them. Each such record
+    still stores its own presenting signs (``symptoms``) and its own recommended
+    diagnostic tests (``recommended_tests``); the grounded composers rebuild the
+    two sections from exactly that data, so the result is disease-specific and
+    restates only stored facts (no new, unverified clinical claim). Records without
+    usable signs / tests are left empty rather than filled with boilerplate.
+
+    Only touches rows where the field is empty in BOTH languages — a record that
+    already has curated clinical-signs / diagnosis prose (in either language) is
+    never overwritten.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.clinical_fields_generator import (
+        compose_grounded_clinical_signs,
+        compose_grounded_clinical_signs_ja,
+        compose_grounded_diagnosis,
+        compose_grounded_diagnosis_ja,
+    )
+
+    try:
+        from api.health_checker import _build_recommended_tests_display, _get_species_symptom_names
+    except ImportError:
+        from health_checker import (  # type: ignore
+            _build_recommended_tests_display,
+            _get_species_symptom_names,
+        )
+
+    def _ids(raw):
+        try:
+            val = json.loads(raw) if raw else []
+        except (json.JSONDecodeError, TypeError):
+            return []
+        return [str(x) for x in val] if isinstance(val, list) else []
+
+    def _ascii(tok):  # keep Latin-only tokens out of English prose (no CJK leakage)
+        return bool(tok) and all(ord(c) < 0x3000 for c in tok)
+
+    def _short(label):
+        # Free-text test entries are full sentences ("Urine culture (cystocentesis):
+        # mandatory before …"); keep only the test-name clause before the first
+        # colon/semicolon so the grounded narrative stays a clean list.
+        for sep in (":", ";", " — ", " - "):
+            if sep in label:
+                label = label.split(sep, 1)[0]
+        return label.strip()
+
+    _sym_cache: dict[str, dict] = {}
+
+    def _syms(species):
+        if species not in _sym_cache:
+            try:
+                _sym_cache[species] = _get_species_symptom_names(species) or {}
+            except Exception:
+                _sym_cache[species] = {}
+        return _sym_cache[species]
+
+    rows = conn.execute(
+        "SELECT id, species, symptoms, recommended_tests, "
+        "clinical_signs, clinical_signs_ja, diagnosis, diagnosis_ja FROM diseases"
+    ).fetchall()
+    counts = {"clinical_signs": 0, "clinical_signs_ja": 0, "diagnosis": 0, "diagnosis_ja": 0}
+    for row in rows:
+        species = (row["species"] or "").lower()
+
+        cs_empty = not (row["clinical_signs"] or "").strip() and not (row["clinical_signs_ja"] or "").strip()
+        if cs_empty:
+            lookup = _syms(species)
+            sym_ids = _ids(row["symptoms"])
+            signs_en = [t for t in (lookup.get(s, {}).get("en") for s in sym_ids) if _ascii(t)]
+            signs_ja = [lookup.get(s, {}).get("ja") for s in sym_ids if lookup.get(s, {}).get("ja")]
+            new_en = compose_grounded_clinical_signs(signs_en)
+            new_ja = compose_grounded_clinical_signs_ja(signs_ja)
+            if new_en:
+                conn.execute("UPDATE diseases SET clinical_signs = ? WHERE id = ?", (new_en, row["id"]))
+                counts["clinical_signs"] += 1
+            if new_ja:
+                conn.execute("UPDATE diseases SET clinical_signs_ja = ? WHERE id = ?", (new_ja, row["id"]))
+                counts["clinical_signs_ja"] += 1
+
+        dx_empty = not (row["diagnosis"] or "").strip() and not (row["diagnosis_ja"] or "").strip()
+        if dx_empty:
+            test_ids = _ids(row["recommended_tests"])
+            display = _build_recommended_tests_display(test_ids, species)
+            tests_en = [t for t in (_short(d.get("name_en") or "") for d in display) if _ascii(t)]
+            tests_ja = [_short(d.get("name_ja") or "") for d in display if (d.get("name_ja") or "").strip()]
+            new_en = compose_grounded_diagnosis(tests_en)
+            new_ja = compose_grounded_diagnosis_ja(tests_ja)
+            if new_en:
+                conn.execute("UPDATE diseases SET diagnosis = ? WHERE id = ?", (new_en, row["id"]))
+                counts["diagnosis"] += 1
+            if new_ja:
+                conn.execute("UPDATE diseases SET diagnosis_ja = ? WHERE id = ?", (new_ja, row["id"]))
+                counts["diagnosis_ja"] += 1
+    return counts
+
+
 def localize_english_species_in_served_db(conn) -> int:
     """Replace English species placeholders that leaked into Japanese DB fields.
 
@@ -2506,6 +2608,13 @@ def main(db_path: str | None = None):
         desc_stats = ground_stub_descriptions(conn)
         for field, n in desc_stats.items():
             print(f"  → {field}: {n} stub descriptions grounded")
+
+        # Fill empty clinical-signs / diagnosis sections (both languages blank) from
+        # the record's own presenting signs and recommended tests, so no labelled
+        # section silently vanishes from the disease detail.
+        cs_stats = ground_missing_clinical_signs_and_diagnosis(conn)
+        for field, n in cs_stats.items():
+            print(f"  → {field}: {n} empty sections grounded")
 
         # Repair the "in <species>s's prognosis" double-possessive grammar bug
         # in any prognosis text materialised from module/supplementary sources.

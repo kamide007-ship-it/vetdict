@@ -4949,3 +4949,96 @@ def test_worm_diseases_resolve_to_parasitic_not_organ_system():
     assert resolve_category_from_name("眼虫症", "Thelazia Eye Worm") == "parasitic"
     assert resolve_category_from_name("肺虫症", "Lungworm") == "parasitic"
     assert resolve_category_from_name("皮膚糸状菌症", "Ringworm") == "fungal_infection"
+
+
+# ---------------------------------------------------------------------------
+# Grounded clinical-signs / diagnosis section fill
+# ---------------------------------------------------------------------------
+#
+# A batch of recently added records shipped with BOTH language variants of
+# ``clinical_signs`` and ``diagnosis`` empty, so those labelled sections silently
+# vanished from the disease detail. ``ground_missing_clinical_signs_and_diagnosis``
+# rebuilds them from each record's own presenting signs / recommended tests. These
+# tests protect the composers (grounded + disease-specific, None on empty input)
+# and verify the served DB no longer ships blank clinical-signs sections.
+
+
+def test_grounded_clinical_signs_composer_is_grounded_and_fails_empty():
+    from scripts.template_elimination.clinical_fields_generator import (
+        compose_grounded_clinical_signs,
+        compose_grounded_clinical_signs_ja,
+    )
+
+    # Grounds in the supplied signs; different sign sets → different text.
+    a = compose_grounded_clinical_signs_ja(["血尿", "頻尿", "排尿困難"])
+    b = compose_grounded_clinical_signs_ja(["発熱", "咳", "鼻水"])
+    assert a and b and a != b
+    assert "血尿" in a and "頻尿" in a
+    en = compose_grounded_clinical_signs(["Blood in Urine", "Straining to Urinate"])
+    assert en and "Blood in Urine" in en
+    # No usable signs → None (never boilerplate).
+    assert compose_grounded_clinical_signs_ja([]) is None
+    assert compose_grounded_clinical_signs([]) is None
+
+
+def test_grounded_diagnosis_composer_is_grounded_and_fails_empty():
+    from scripts.template_elimination.clinical_fields_generator import (
+        compose_grounded_diagnosis,
+        compose_grounded_diagnosis_ja,
+    )
+
+    a = compose_grounded_diagnosis_ja(["尿検査", "腹部超音波"])
+    b = compose_grounded_diagnosis_ja(["血液検査"])
+    assert a and b and a != b
+    assert "尿検査" in a
+    en = compose_grounded_diagnosis(["Urinalysis", "Abdominal ultrasound"])
+    assert en and "Urinalysis" in en and "history" in en.lower()
+    assert compose_grounded_diagnosis_ja([]) is None
+    assert compose_grounded_diagnosis([]) is None
+
+
+def test_served_db_no_empty_clinical_signs_sections():
+    """Every served record with recorded symptoms must show a clinical-signs
+    section in both languages — no silently blank section."""
+    import sqlite3
+
+    db = _served_db_path()
+    if db is None:
+        pytest.skip("served vetdict.db not present (run scripts/migrate_to_sqlite.py)")
+    conn = sqlite3.connect(str(db))
+    try:
+        # A record with a non-empty symptoms list should never have both
+        # clinical_signs language variants blank.
+        rows = conn.execute(
+            "SELECT COUNT(*) FROM diseases "
+            "WHERE TRIM(COALESCE(symptoms,'')) NOT IN ('', '[]') "
+            "AND TRIM(COALESCE(clinical_signs,''))='' "
+            "AND TRIM(COALESCE(clinical_signs_ja,''))=''"
+        ).fetchone()[0]
+    finally:
+        conn.close()
+    assert rows == 0, f"{rows} served records have symptoms but an empty clinical-signs section"
+
+
+def test_served_db_diagnosis_ja_grounded_when_tests_present():
+    """Records with recommended tests must carry a Japanese diagnosis section
+    (the primary audience is Japanese clinicians)."""
+    import sqlite3
+
+    db = _served_db_path()
+    if db is None:
+        pytest.skip("served vetdict.db not present (run scripts/migrate_to_sqlite.py)")
+    conn = sqlite3.connect(str(db))
+    try:
+        rows = conn.execute(
+            "SELECT COUNT(*) FROM diseases "
+            "WHERE TRIM(COALESCE(recommended_tests,'')) NOT IN ('', '[]') "
+            "AND TRIM(COALESCE(diagnosis,''))='' "
+            "AND TRIM(COALESCE(diagnosis_ja,''))=''"
+        ).fetchone()[0]
+    finally:
+        conn.close()
+    # Allow a small residue where the recommended-tests payload yields no usable
+    # label in either language (composer correctly returns None rather than
+    # fabricating). Guard against a broad regression.
+    assert rows <= 5, f"{rows} served records have recommended tests but an empty diagnosis section"

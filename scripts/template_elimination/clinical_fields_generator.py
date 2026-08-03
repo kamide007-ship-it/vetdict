@@ -4809,6 +4809,55 @@ def compose_grounded_description(
     return " ".join(parts)
 
 
+# ---------------------------------------------------------------------------
+# Grounded clinical-signs / diagnosis (fill empty supplementary sections)
+# ---------------------------------------------------------------------------
+#
+# A batch of recently added records (dog/fish/amphibian/… — see
+# ``ground_missing_clinical_signs_and_diagnosis`` in migrate_to_sqlite.py) got the
+# six core fields but shipped with *both* language variants of ``clinical_signs``
+# and ``diagnosis`` empty, so those labelled sections silently vanish from the
+# disease detail while every sibling shows them. These composers rebuild the two
+# sections from the data the record already stores — its own presenting signs and
+# its own recommended diagnostic tests — so the text is disease-specific (it
+# varies with each record's sign/test set) and restates only stored facts,
+# introducing no new (and therefore no unverified) clinical claim. When a record
+# has no usable signs / tests the composer returns ``None`` and the field is left
+# empty rather than filled with boilerplate.
+
+
+def compose_grounded_clinical_signs_ja(sign_names_ja: list[str]) -> str | None:
+    """Japanese clinical-signs section grounded in the record's own presenting signs."""
+    signs = _join_ja(sign_names_ja, 8)
+    if not signs:
+        return None
+    return f"本症で報告される主な臨床徴候には{signs}などがある。所見の種類と程度は症例や病期により異なる。"
+
+
+def compose_grounded_clinical_signs(sign_names_en: list[str]) -> str | None:
+    """English clinical-signs section grounded in the record's own presenting signs."""
+    signs = _join_en(sign_names_en, 8)
+    if not signs:
+        return None
+    return f"Clinical signs reported in this condition include {signs}. Their range and severity vary between cases."
+
+
+def compose_grounded_diagnosis_ja(test_names_ja: list[str]) -> str | None:
+    """Japanese diagnosis section grounded in the record's own recommended tests."""
+    tests = _join_ja(test_names_ja, 6)
+    if not tests:
+        return None
+    return f"診断は{tests}などの検査所見を、臨床徴候および病歴と併せて総合的に評価して行う。"
+
+
+def compose_grounded_diagnosis(test_names_en: list[str]) -> str | None:
+    """English diagnosis section grounded in the record's own recommended tests."""
+    tests = _join_en(test_names_en, 6)
+    if not tests:
+        return None
+    return f"Diagnosis is based on {tests}, interpreted together with the clinical signs and history."
+
+
 # The category prevention generators (``gen_prevention_ja`` / ``_prevention_*``)
 # produce husbandry + category guidance keyed only on (species, category), so
 # every disease of one category for a species shares a byte-identical paragraph
