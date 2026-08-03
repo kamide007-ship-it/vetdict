@@ -156,6 +156,39 @@ def test_amoxicillin_present_and_correct():
     assert drug["species_info"]["rabbit"]["safe"] is False
 
 
+def test_nondepolarizing_nmba_reversal_agent_is_documented():
+    """A non-depolarizing NMBA (atracurium) points clinicians to neostigmine for
+    reversal, so neostigmine must itself be a discoverable entry with dosing.
+    Guards the gap where the manual referenced a drug it did not document."""
+    atracurium = next((d for d in DRUGS if d["id"] == "atracurium"), None)
+    assert atracurium is not None
+    referenced = {i["drug"] for i in atracurium.get("drug_interactions", [])}
+    assert "neostigmine" in referenced
+
+    neostigmine = next((d for d in DRUGS if d["id"] == "neostigmine"), None)
+    assert neostigmine is not None, "neostigmine reversal agent missing from drug manual"
+    assert neostigmine["category"] in DRUG_CATEGORIES
+    for species in ("dog", "cat"):
+        info = neostigmine["species_info"][species]
+        assert info["dosage"].strip()
+        # Reversal must be paired with an anticholinergic to prevent muscarinic
+        # bradycardia — the dose string should name one.
+        assert "glycopyrrolate" in info["dosage"].lower() or "atropine" in info["dosage"].lower()
+
+
+def test_aspirin_present_with_feline_dosing_caution():
+    """Aspirin is a staple antiplatelet (feline ATE, canine hypercoagulability).
+    Cats eliminate salicylate slowly, so the entry must not imply daily dosing."""
+    aspirin = next((d for d in DRUGS if d["id"] == "aspirin"), None)
+    assert aspirin is not None, "aspirin missing from drug manual"
+    assert aspirin["category"] in DRUG_CATEGORIES
+    cat = aspirin["species_info"]["cat"]
+    assert cat["safe"] is True
+    # Feline dosing must be intermittent (q48-72h), never daily.
+    assert "q72h" in cat["dosage"].lower() or "q48" in cat["dosage"].lower()
+    assert "q24h" not in cat["dosage"].lower()
+
+
 def test_enrofloxacin_present_and_correct():
     drug = next((d for d in DRUGS if d["id"] == "enrofloxacin"), None)
     assert drug is not None

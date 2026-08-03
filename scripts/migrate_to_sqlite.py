@@ -1961,6 +1961,138 @@ def fix_dangerous_treatment_in_served_db(conn) -> dict[str, int]:
     return stats
 
 
+def apply_species_drug_caveats(conn) -> int:
+    """Apply drug caveats the corpus states on some records but not others.
+
+    Rabbit atropinesterase and African-grey itraconazole sensitivity are both
+    already written into this database, but only on a minority of the records
+    that name the drug — so whether a vet is warned depends on which page they
+    open. Appends the missing note; records that already make the point are
+    untouched.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.species_drug_caveats import species_drug_caveat
+
+    rows = conn.execute(
+        "SELECT id, species, name, name_ja, treatment_ja FROM diseases "
+        "WHERE species IN ('rabbit','guinea_pig','chinchilla','degu','bird','parakeet','parrot')"
+    ).fetchall()
+    n = 0
+    for row in rows:
+        new_tx = species_drug_caveat(
+            row["species"] or "", row["name"] or "", row["name_ja"] or "", row["treatment_ja"] or ""
+        )
+        if new_tx:
+            conn.execute(
+                "UPDATE diseases SET treatment_ja = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new_tx, row["id"]),
+            )
+            n += 1
+    return n
+
+
+def apply_jp_antiparasitic_products(conn) -> int:
+    """Name the antiparasitic products a Japanese clinic can actually dispense.
+
+    The parasitology records listed generic actives but rarely the product a vet
+    orders by name, so the advice stopped short of the decision being made.
+    Appends a per-parasite 【日本国内で入手可能な代表的製剤】 block. Weight-band
+    products (spot-ons, chewables) are described as such rather than given an
+    invented mg/kg. Idempotent: the block is skipped when already present.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.jp_antiparasitic_products import apply_jp_products
+
+    rows = conn.execute(
+        "SELECT id, species, name, name_ja, treatment_ja FROM diseases "
+        "WHERE species IN ('dog','cat','ferret','rabbit','guinea_pig','chinchilla','degu','bird','parakeet','parrot')"
+    ).fetchall()
+    n = 0
+    for row in rows:
+        new_tx = apply_jp_products(
+            row["species"] or "", row["name"] or "", row["name_ja"] or "", row["treatment_ja"] or ""
+        )
+        if new_tx:
+            conn.execute(
+                "UPDATE diseases SET treatment_ja = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new_tx, row["id"]),
+            )
+            n += 1
+    return n
+
+
+def make_chelonian_antiparasitics_safe_in_served_db(conn) -> int:
+    """Take ivermectin off tortoise/turtle treatment plans.
+
+    Ivermectin is lethal in chelonians, and this site's own drug dictionary marks
+    it ``safe=False`` / ``N/A`` for ``tortoise`` — yet the disease pages
+    prescribed it with a dose, so the drug tab and the treatment text disagreed
+    on a drug that kills the animal. One record even claimed 「カメでの安全性は
+    確立」, a truncation of 「確立されていない」 that asserted the opposite of the
+    truth. Runs as a served-DB sweep so every source is covered.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.chelonian_ivermectin_safety import (
+        CHELONIAN_SPECIES,
+        make_chelonian_antiparasitics_safe,
+    )
+
+    placeholders = ",".join("?" * len(CHELONIAN_SPECIES))
+    rows = conn.execute(
+        f"SELECT id, species, name, name_ja, treatment_ja FROM diseases WHERE species IN ({placeholders})",
+        tuple(sorted(CHELONIAN_SPECIES)),
+    ).fetchall()
+    n = 0
+    for row in rows:
+        new_tx = make_chelonian_antiparasitics_safe(
+            row["species"] or "", row["name"] or "", row["name_ja"] or "", row["treatment_ja"] or ""
+        )
+        if new_tx:
+            conn.execute(
+                "UPDATE diseases SET treatment_ja = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new_tx, row["id"]),
+            )
+            n += 1
+    return n
+
+
+def make_hindgut_oral_antibiotics_safe(conn) -> int:
+    """Remove lethal oral antibiotic advice from hindgut-fermenter records.
+
+    Oral penicillins/amoxicillin/ampicillin/oral cephalosporins and
+    lincosamides/macrolides destroy the caecal flora of rabbits, guinea pigs,
+    chinchillas and degus, letting *Clostridium spiroforme* overgrow and kill the
+    animal by enterotoxaemia. The corpus nevertheless prescribed them by mouth,
+    with a dose, on 97 such records — many via a shared template whose own
+    parenthesis read "（小型哺乳類除く）" while sitting on the chinchilla page.
+
+    Runs as a served-DB sweep so it catches every source (species modules, the
+    JSON overlay, supplementary data and anything generated at build time),
+    mirroring ``apply_curated_dangerous_treatments``.
+    """
+    sys.path.insert(0, str(ROOT))
+    from scripts.template_elimination.hindgut_antibiotic_safety import (
+        HINDGUT_SPECIES,
+        make_oral_antibiotics_safe,
+    )
+
+    placeholders = ",".join("?" * len(HINDGUT_SPECIES))
+    rows = conn.execute(
+        f"SELECT id, species, treatment_ja FROM diseases WHERE species IN ({placeholders})",
+        tuple(sorted(HINDGUT_SPECIES)),
+    ).fetchall()
+    n = 0
+    for row in rows:
+        new_tx = make_oral_antibiotics_safe(row["species"] or "", row["treatment_ja"] or "")
+        if new_tx:
+            conn.execute(
+                "UPDATE diseases SET treatment_ja = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+                (new_tx, row["id"]),
+            )
+            n += 1
+    return n
+
+
 def apply_curated_dangerous_treatments(conn) -> int:
     """Replace dangerous category-mismatched treatments with curated protocols.
 
@@ -2514,6 +2646,29 @@ def main(db_path: str | None = None):
         # condition-specific, species-appropriate protocols.
         cur_n = apply_curated_dangerous_treatments(conn)
         print(f"  → {cur_n} curated treatment replacements")
+
+        # Oral penicillins/lincosamides are fatal in hindgut fermenters. Run
+        # after the curated replacements so anything they introduce is screened
+        # too, and before the protozoal pass which does not touch these species.
+        print("\n[safety] removing oral beta-lactam/lincosamide advice from hindgut fermenters...")
+        hg_n = make_hindgut_oral_antibiotics_safe(conn)
+        print(f"  → {hg_n} hindgut-fermenter treatments made safe")
+
+        # Ivermectin is fatal in chelonians; the drug dictionary already says so.
+        print("\n[safety] removing ivermectin from chelonian (tortoise) treatments...")
+        ch_n = make_chelonian_antiparasitics_safe_in_served_db(conn)
+        print(f"  → {ch_n} chelonian treatments made safe")
+
+        # Name the products a Japanese clinic can actually dispense.
+        print("\n[enrichment] adding Japan-available antiparasitic products...")
+        jp_n = apply_jp_antiparasitic_products(conn)
+        print(f"  → {jp_n} records given a Japanese product block")
+
+        # Caveats the corpus states inconsistently (rabbit atropinesterase,
+        # African-grey itraconazole sensitivity).
+        print("\n[safety] applying species drug caveats...")
+        cav_n = apply_species_drug_caveats(conn)
+        print(f"  → {cav_n} records given a missing species caveat")
 
         # Replace the deworming template on protozoal diseases (babesiosis,
         # toxoplasmosis, cytauxzoonosis, coccidiosis, …) with evidence-based
