@@ -3602,6 +3602,14 @@ DISEASES: List[Dict[str, Any]] = [
 # Enrich DISEASES with content from diseases_all_species.json
 enrich_diseases(DISEASES, "Exotic Other")
 
+# Replace Japanese-first English narrative fields with curated English translations.
+try:
+    from .disease_english_overlay import apply_english_overlay as _apply_english_overlay
+
+    _apply_english_overlay(DISEASES, "exotic_other")
+except ImportError:
+    pass
+
 
 def analyze_symptoms(
     symptoms: List[str],

@@ -65,6 +65,13 @@ class Disease:
     etiology: str = ""  # 病因・原因
     pathophysiology: str = ""  # 病態生理
     treatment_protocol: str = ""  # 治療プロトコル(獣医師向け)
+    # ---- 英語版の臨床ナラティブ (JA-first レコードの英語欄フォールバック解消用) ----
+    # 用量を含まない非投薬フィールドのみ。空の場合は日本語へフォールバックする。
+    etiology_en: str = ""  # English etiology
+    pathophysiology_en: str = ""  # English pathophysiology
+    clinical_signs_detail_en: str = ""  # English clinical signs
+    prevention_en: str = ""  # English prevention
+    prognosis_en: str = ""  # English prognosis
 
     def reference_links(self) -> list[dict[str, str]]:
         """外部参照リンクを生成(症例写真・イラスト付きページへ)"""
@@ -12251,6 +12258,35 @@ def _enrich_horse_diseases() -> None:
 
 
 _enrich_horse_diseases()
+
+
+def _apply_horse_english() -> None:
+    """Attach faithful English translations to Japanese-first horse records.
+
+    A subset of records carry curated *Japanese* clinical narrative only, so
+    their English narrative columns fell back to the Japanese string. This fills
+    the ``*_en`` companion fields (non-dosing narrative only) from the
+    ``equine_english_overlay`` translations; the migrate step and the runtime
+    serving paths prefer ``*_en`` and fall back to the Japanese field, so
+    untranslated records are unaffected.
+    """
+    try:
+        from api.species.equine_english_overlay import HORSE_ENGLISH
+    except ImportError:
+        try:
+            from species.equine_english_overlay import HORSE_ENGLISH
+        except ImportError:
+            return
+    for disease in DISEASE_DATABASE:
+        overlay = HORSE_ENGLISH.get(disease.id)
+        if not overlay:
+            continue
+        for field_name, value in overlay.items():
+            if value and not getattr(disease, field_name, ""):
+                setattr(disease, field_name, value)
+
+
+_apply_horse_english()
 
 
 def _apply_horse_sponsor_adjuncts() -> None:

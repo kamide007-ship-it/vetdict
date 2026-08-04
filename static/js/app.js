@@ -3152,6 +3152,8 @@ function renderResults(data){
     }
     const drugLink=e.target.closest(".drug-nav-link");
     if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
+    const dbLink=e.target.closest(".disease-db-nav-link");
+    if(dbLink){e.preventDefault();navigateToDiseaseDb(dbLink.dataset.name);return;}
     if(e.target.closest("a"))return;
     const head=e.target.closest(".disease-head");
     if(head)toggleDetail(head);
@@ -4024,7 +4026,7 @@ function renderDiseaseCard(d,data){
       ${(()=>{const display=d.recommended_tests_display;const list=(display&&display.length)?display:recTests;if(!list||!list.length)return"";const chips=list.map(x=>{let label;if(display&&display.length){label=currentLang==="ja"?(x.name_ja||x.name_en||x.id):(x.name_en||x.name_ja||x.id);}else{label=humanizeTestId(typeof x==="string"?x:(currentLang==="ja"?(x.name_ja||x.name):(x.name||x.name_ja)));}return`<span style="display:inline-block;padding:3px 8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:4px;font-size:.78rem;color:var(--navy)">\u{1F52C} ${escapeHtml(label)}</span>`;}).join("");return`<div class="detail-tests"><strong>${t("dtRecommendedTests")}:</strong><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px">${chips}</div></div>`;})()}
       ${renderMentionedDrugs(d)}
       ${renderAnesthesiaConsiderations(d)}
-      <div class="detail-page-link"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">${currentLang==="ja"?"📖 この疾患の詳細ページを見る":"📖 View full disease page"} →</a></div>
+      <div class="detail-page-link"><button type="button" class="disease-db-nav-link" data-name="${escapeHtml(nameEn)}" style="font-size:.82rem;color:var(--navy);font-weight:600;background:none;border:none;padding:0;cursor:pointer;text-decoration:none">${currentLang==="ja"?"🔍 疾患データベースで開く":"🔍 Open in disease database"} →</button> <a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none;margin-left:12px">${currentLang==="ja"?"📖 詳細ページを見る":"📖 View full disease page"} →</a></div>
       ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}
     </div>
   </div>`;
