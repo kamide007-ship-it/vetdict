@@ -13205,6 +13205,14 @@ if _find_spec("api.dog_disease_enrichment") is not None:
 # ---------------------------------------------------------------------------
 enrich_diseases(DISEASES, "Dog")
 
+# Replace Japanese-first English narrative fields with curated English translations.
+try:
+    from .disease_english_overlay import apply_english_overlay as _apply_english_overlay
+
+    _apply_english_overlay(DISEASES, "dog")
+except ImportError:
+    pass
+
 # ---------------------------------------------------------------------------
 # Fill missing content fields with fallback for unenriched diseases
 # ---------------------------------------------------------------------------

@@ -1474,3 +1474,11 @@ def analyze_symptoms(
 
 
 DISEASES = enrich_diseases(DISEASES, "fish")
+
+# Replace Japanese-first English narrative fields with curated English translations.
+try:
+    from .disease_english_overlay import apply_english_overlay as _apply_english_overlay
+
+    _apply_english_overlay(DISEASES, "fish")
+except ImportError:
+    pass

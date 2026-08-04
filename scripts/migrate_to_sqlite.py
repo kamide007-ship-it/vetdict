@@ -1141,6 +1141,13 @@ def migrate_equine(conn) -> int:
         pathophysiology_ja, pathophysiology_en = _ja_en(d.pathophysiology)
         causes_ja, causes_en = _ja_en(d.etiology)
         signs_ja, signs_en = _ja_en(getattr(d, "clinical_signs_detail", None))
+        # Prefer the dedicated English narrative for Japanese-first records so the
+        # English column carries real English instead of falling back to Japanese.
+        prevention_en = getattr(d, "prevention_en", "") or prevention_en
+        prognosis_en = getattr(d, "prognosis_en", "") or prognosis_en
+        pathophysiology_en = getattr(d, "pathophysiology_en", "") or pathophysiology_en
+        causes_en = getattr(d, "etiology_en", "") or causes_en
+        signs_en = getattr(d, "clinical_signs_detail_en", "") or signs_en
 
         record = {
             "id": d.id,
