@@ -1082,4 +1082,59 @@ DRUGS_BATCH_11: list[dict] = [
             },
         ],
     },
+    {
+        "id": "allopurinol",
+        "name": "Allopurinol",
+        "name_ja": "アロプリノール",
+        "category": "urinary",
+        "mechanism": "Xanthine oxidase inhibitor: blocks conversion of hypoxanthine/xanthine to uric acid, lowering serum and urinary uric acid. Used to dissolve/prevent urate uroliths and as long-term leishmaniostatic therapy (inhibits Leishmania purine metabolism).",
+        "mechanism_ja": "キサンチンオキシダーゼ阻害薬：ヒポキサンチン・キサンチンから尿酸への変換を阻害し、血清・尿中尿酸を低下させる。尿酸アンモニウム結石の溶解・予防、およびリーシュマニア原虫のプリン代謝阻害による長期リーシュマニア静止療法に用いる。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "Urate urolithiasis: 10-15 mg/kg PO q12h with a purine-restricted low-protein diet; prevention 10-20 mg/kg/day. Canine leishmaniasis: 10 mg/kg PO q12h long-term (months-years), usually with/after meglumine antimoniate or miltefosine.",
+                "dosage_ja": "尿酸アンモニウム結石：10-15 mg/kg 経口 12時間毎、プリン制限低タンパク食と併用；予防は10-20 mg/kg/日。犬リーシュマニア症：10 mg/kg 経口 12時間毎を長期（数ヶ月〜数年）、通常メグルミンアンチモン酸/ミルテホシンと併用または後療法として。",
+                "notes": "Dose only with a purine-restricted diet — excess dietary purine plus allopurinol promotes xanthine urolith formation. Monitor for xanthine crystalluria/uroliths on long-term therapy; reduce dose in renal impairment. Not a first-line single agent for active leishmaniasis.",
+                "notes_ja": "必ずプリン制限食と併用—過剰なプリン摂取＋アロプリノールはキサンチン結石を誘発する。長期投与ではキサンチン結晶尿・結石をモニタリングし、腎機能低下時は減量。活動性リーシュマニア症の単剤第一選択ではない。",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "Rarely indicated; 10 mg/kg PO q24h has been used for urate urolithiasis (limited feline data).",
+                "dosage_ja": "適応はまれ；尿酸結石に10 mg/kg 経口 24時間毎の使用報告あり（猫のデータは限定的）。",
+                "notes": "Feline pharmacokinetic/safety data are limited — use conservatively and monitor renal values.",
+                "notes_ja": "猫での薬物動態・安全性データは限られる—慎重に使用し腎値をモニタリング。",
+            },
+        },
+        "side_effects": [
+            "xanthine urolith formation (esp. with high-purine diet)",
+            "hypersensitivity / dermatologic reactions",
+            "GI upset (vomiting, diarrhea)",
+            "hepatotoxicity (rare)",
+        ],
+        "side_effects_ja": [
+            "キサンチン結石形成（特に高プリン食併用時）",
+            "過敏症・皮膚反応",
+            "消化器症状（嘔吐・下痢）",
+            "肝毒性（まれ）",
+        ],
+        "contraindications": "Xanthine urolithiasis or a high-purine diet without protein restriction. Use caution and reduce dose in significant renal insufficiency. Avoid or drastically reduce concurrent azathioprine (see interactions).",
+        "contraindications_ja": "キサンチン結石、タンパク制限を伴わない高プリン食は禁忌。著明な腎機能不全では慎重投与・減量。アザチオプリンとの併用は回避または大幅減量（相互作用参照）。",
+        "drug_interactions": [
+            {
+                "drug": "azathioprine",
+                "effect": "Allopurinol blocks xanthine oxidase, the main route of azathioprine/6-mercaptopurine inactivation — markedly increases myelosuppression. Avoid, or reduce azathioprine dose by ~75% with close CBC monitoring.",
+                "effect_ja": "アロプリノールはアザチオプリン/6-メルカプトプリンの主要不活化経路であるキサンチンオキシダーゼを阻害し、骨髄抑制を著明に増強する。併用回避、または アザチオプリンを約75%減量しCBCを厳密にモニタリング。",
+            },
+            {
+                "drug": "cyclophosphamide",
+                "effect": "Enhanced myelosuppression — monitor CBC closely if combined.",
+                "effect_ja": "骨髄抑制が増強—併用時はCBCを厳密にモニタリング。",
+            },
+            {
+                "drug": "amoxicillin",
+                "effect": "Increased incidence of skin rash reported (aminopenicillins).",
+                "effect_ja": "皮疹の発現頻度上昇が報告される（アミノペニシリン系）。",
+            },
+        ],
+    },
 ]

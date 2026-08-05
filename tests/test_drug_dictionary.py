@@ -189,6 +189,27 @@ def test_aspirin_present_with_feline_dosing_caution():
     assert "q24h" not in cat["dosage"].lower()
 
 
+def test_allopurinol_present_with_azathioprine_interaction():
+    """Allopurinol is referenced as an interacting drug by azathioprine,
+    cyclophosphamide and the aminopenicillins, and is itself a staple for urate
+    urolithiasis and canine leishmaniasis. Guards the referenced-but-absent gap and
+    the clinically critical xanthine-oxidase interaction with thiopurines."""
+    allo = next((d for d in DRUGS if d["id"] == "allopurinol"), None)
+    assert allo is not None, "allopurinol missing from drug manual"
+    assert allo["category"] in DRUG_CATEGORIES
+    dog = allo["species_info"]["dog"]
+    assert dog["safe"] is True
+    assert dog["dosage"].strip()
+    # The dangerous azathioprine interaction must be documented on the entry.
+    referenced = {i["drug"] for i in allo.get("drug_interactions", [])}
+    assert "azathioprine" in referenced
+    # And azathioprine's own entry must point back at allopurinol (bidirectional).
+    aza = next((d for d in DRUGS if d["id"] == "azathioprine"), None)
+    if aza is not None:
+        aza_refs = {i.get("drug", "").lower() for i in aza.get("drug_interactions", [])}
+        assert any("allopurinol" in r for r in aza_refs)
+
+
 def test_enrofloxacin_present_and_correct():
     drug = next((d for d in DRUGS if d["id"] == "enrofloxacin"), None)
     assert drug is not None
