@@ -117,6 +117,13 @@
   </section>
   {% endif %}
 
+  {% if disease.clinical_signs_ja or disease.clinical_signs %}
+  <section>
+    <h2>臨床徴候</h2>
+    <p>{{ disease.clinical_signs_ja or disease.clinical_signs }}</p>
+  </section>
+  {% endif %}
+
   {% if disease.causes_ja or disease.causes %}
   <section>
     <h2>原因</h2>
@@ -128,6 +135,13 @@
   <section>
     <h2>病態生理</h2>
     <p>{{ disease.pathophysiology_ja or disease.pathophysiology }}</p>
+  </section>
+  {% endif %}
+
+  {% if disease.diagnosis_ja or disease.diagnosis %}
+  <section>
+    <h2>診断</h2>
+    <p>{{ disease.diagnosis_ja or disease.diagnosis }}</p>
   </section>
   {% endif %}
 

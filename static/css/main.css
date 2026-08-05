@@ -359,6 +359,14 @@ a:hover{text-decoration:underline}
 .treatment-drug-name{font-weight:600}
 .treatment-drug-cat{font-size:.66rem;color:var(--gray-500);background:var(--gray-100);padding:1px 6px;border-radius:8px}
 .treatment-drug-chip:hover .treatment-drug-cat{color:var(--navy)}
+/* --- Related diseases (shared-symptom differentials, click to jump) --- */
+.related-diseases-section{margin-top:12px;padding:8px 12px;background:rgba(34,168,79,.05);border-left:3px solid var(--green);border-radius:6px}
+.related-diseases-heading{font-size:.72rem;font-weight:700;color:var(--green);margin-bottom:6px;letter-spacing:.02em}
+.related-diseases-list{display:flex;flex-wrap:wrap;gap:6px}
+.related-disease-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--white);border:1px solid var(--gray-300);border-radius:14px;font-size:.74rem;color:var(--gray-800);cursor:pointer;transition:all .15s}
+.related-disease-chip:hover{border-color:var(--green);background:rgba(34,168,79,.08);color:var(--green);transform:translateY(-1px)}
+.related-disease-shared{font-size:.64rem;color:var(--gray-500);background:var(--gray-100);padding:1px 6px;border-radius:8px}
+.related-disease-chip:hover .related-disease-shared{color:var(--green)}
 /* --- Drug → Diseases section (reverse linking shown in drug detail panel) --- */
 .drug-diseases-section{margin-top:14px;padding:10px 12px;background:rgba(34,168,79,.04);border-left:3px solid var(--green);border-radius:6px}
 .drug-diseases-heading{font-size:.72rem;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:.02em;display:flex;align-items:center;gap:6px}

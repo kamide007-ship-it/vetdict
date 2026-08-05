@@ -1,0 +1,129 @@
+"""Regression tests for surfacing the clinical-signs / diagnosis fields.
+
+The `clinical_signs` (臨床徴候) and `diagnosis` (診断) fields have long been
+populated in the disease records but were never rendered in the SPA or SEO page,
+and never even serialized by the /api/health-check/diseases endpoint. These tests
+lock in that they are now:
+  1. returned by the disease browser API,
+  2. rendered on the server-side SEO detail page, and
+  3. wired into the SPA (app.js) with proper i18n labels.
+
+They also guard the data fix that split the two dog ophthalmology records whose
+diagnostic work-up had been mis-filed into the treatment field.
+"""
+
+from pathlib import Path
+
+from api.vetdict_api import app
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+APP_JS = (PROJECT_ROOT / "static" / "js" / "app.js").read_text(encoding="utf-8")
+SEO_TEMPLATE = (PROJECT_ROOT / "templates" / "disease_detail.html").read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
+# API: the disease browser endpoint now serializes the two fields
+# ---------------------------------------------------------------------------
+
+
+def test_api_diseases_include_clinical_signs_and_diagnosis():
+    client = app.test_client()
+    for species in ("dog", "cat", "reptile"):
+        resp = client.get(f"/api/health-check/diseases?species={species}")
+        assert resp.status_code == 200
+        diseases = resp.get_json()["diseases"]
+        # Every serialized record must carry the keys (may be empty for a few).
+        assert all("clinical_signs_ja" in d and "diagnosis_ja" in d for d in diseases), species
+        # And the large majority genuinely carry content.
+        with_dx = sum(1 for d in diseases if (d.get("diagnosis_ja") or "").strip())
+        with_cs = sum(1 for d in diseases if (d.get("clinical_signs_ja") or "").strip())
+        assert with_dx > len(diseases) * 0.5, f"{species}: only {with_dx}/{len(diseases)} have diagnosis"
+        assert with_cs > len(diseases) * 0.5, f"{species}: only {with_cs}/{len(diseases)} have clinical signs"
+
+
+# ---------------------------------------------------------------------------
+# Data fix: the two dog ophthalmology records no longer bury diagnosis in treatment
+# ---------------------------------------------------------------------------
+
+
+def test_misfiled_diagnosis_extracted_for_dog_eye_records():
+    from api.species.dog_diseases import DISEASES
+
+    targets = {
+        "Persistent Pupillary Membrane (PPM)",
+        "Persistent Hyperplastic Primary Vitreous (PHPV / PHTVL)",
+    }
+    seen = 0
+    for d in DISEASES:
+        if d.get("name") in targets:
+            seen += 1
+            assert (d.get("diagnosis_ja") or "").strip(), d["name"]
+            assert (d.get("diagnosis") or "").strip(), d["name"]
+            # The diagnosis header must no longer prefix the treatment field.
+            assert not (d.get("treatment_ja") or "").lstrip().startswith("診断"), d["name"]
+            assert not (d.get("treatment") or "").lstrip().upper().startswith("DIAGNOSIS"), d["name"]
+    assert seen == 2
+
+
+def test_no_dog_record_buries_diagnosis_in_treatment():
+    """Guard against the mis-filing pattern reappearing in the dog module."""
+    from api.species.dog_diseases import DISEASES
+
+    offenders = [
+        d.get("name")
+        for d in DISEASES
+        if not (d.get("diagnosis_ja") or "").strip() and (d.get("treatment_ja") or "").lstrip().startswith("診断")
+    ]
+    assert offenders == [], f"diagnosis mis-filed into treatment: {offenders}"
+
+
+# ---------------------------------------------------------------------------
+# SEO page: the two sections render server-side
+# ---------------------------------------------------------------------------
+
+
+def test_seo_detail_page_renders_clinical_signs_and_diagnosis():
+    client = app.test_client()
+    resp = client.get("/diseases/dog/canine-parvovirus")
+    assert resp.status_code == 200
+    html = resp.get_data(as_text=True)
+    assert "<h2>臨床徴候</h2>" in html
+    assert "<h2>診断</h2>" in html
+
+
+def test_seo_template_has_conditional_sections():
+    assert "disease.clinical_signs_ja or disease.clinical_signs" in SEO_TEMPLATE
+    assert "disease.diagnosis_ja or disease.diagnosis" in SEO_TEMPLATE
+    assert "<h2>臨床徴候</h2>" in SEO_TEMPLATE
+    assert "<h2>診断</h2>" in SEO_TEMPLATE
+
+
+# ---------------------------------------------------------------------------
+# SPA (app.js): i18n labels + rendering + related-disease click navigation
+# ---------------------------------------------------------------------------
+
+
+def test_app_js_defines_clinical_and_diagnosis_labels():
+    # Both JA and EN i18n dictionaries must define the labels (not fall back to key).
+    assert 'dtClinicalSigns:"臨床徴候"' in APP_JS
+    assert 'dtDiagnosis:"診断"' in APP_JS
+    assert 'dtClinicalSigns:"Clinical Signs"' in APP_JS
+    assert 'dtDiagnosis:"Diagnosis"' in APP_JS
+
+
+def test_app_js_renders_clinical_and_diagnosis_sections():
+    # DB detail panel (<dl>) and differential result card both reference the fields.
+    assert 't("dtClinicalSigns")' in APP_JS
+    assert 't("dtDiagnosis")' in APP_JS
+    assert "d.clinical_signs_ja" in APP_JS
+    assert "d.diagnosis_ja" in APP_JS
+
+
+def test_app_js_related_disease_navigation_present():
+    # The click-to-navigate related-disease feature: compute + hydrate + click handler.
+    assert "function computeRelatedDiseases" in APP_JS
+    assert "function hydrateRelatedDiseases" in APP_JS
+    assert "related-disease-chip" in APP_JS
+    # Clicking a chip must route through navigateToDiseaseDb.
+    assert 'e.target.closest(".related-disease-chip")' in APP_JS
+    assert "hydrateRelatedDiseases(detail)" in APP_JS

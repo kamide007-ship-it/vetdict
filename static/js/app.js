@@ -234,6 +234,7 @@ const I18N={
     catLabels:{respiratory:"呼吸器",digestive:"消化器",neurological:"神経",musculoskeletal:"運動器",dermatological:"皮膚",urinary:"泌尿器",ophthalmological:"眼",cardiovascular:"循環器",cardiac:"循環器",behavioral:"行動",general:"全身",skin:"体表・外観",fins:"鰭",gills:"鰓",eyes:"眼",eye:"眼",ocular:"眼",ears:"耳",eyes_ears:"眼・耳",oral:"口腔",internal:"内科・全身",developmental:"発達",limb:"四肢",hoof:"蹄",dental:"歯科",repository_exam:"検査所見",toxic:"中毒",foal:"子馬",immune:"免疫",endocrine:"内分泌",misc:"その他",body:"腹部・体型",parasites:"寄生虫",emergency:"急変",reproductive:"繁殖",behavior:"行動",other:"その他"},
     sevLabels:{low:"軽度",moderate:"中等度",high:"重度",emergency:"緊急"},
     dtDescription:"説明",dtPathophysiology:"病態生理",dtCauses:"原因",dtPrevention:"予防",dtTreatment:"治療",dtPrognosis:"予後",
+    dtClinicalSigns:"臨床徴候",dtDiagnosis:"診断",
     dtMatchedSymptoms:"一致した症状",dtRecommendedTests:"推奨検査",dtRecTestList:"推奨検査一覧:",
     dtSymptoms:"症状",
     dtContraindications:"禁忌事項",dtRoutes:"投与経路",dtFormulations:"製剤",dtInteractions:"薬物相互作用",dtSpeciesInfo:"動物種別情報:",dtMechanism:"作用機序",dtSideEffects:"主な副作用",
@@ -504,6 +505,7 @@ const I18N={
     catLabels:{respiratory:"Respiratory",digestive:"Digestive",neurological:"Neurological",musculoskeletal:"Musculoskeletal",dermatological:"Dermatological",urinary:"Urinary",ophthalmological:"Ophthalmological",cardiovascular:"Cardiovascular",cardiac:"Cardiac",behavioral:"Behavioral",general:"General",skin:"Skin & Appearance",fins:"Fins",gills:"Gills",eyes:"Eyes",eye:"Eyes",ocular:"Ocular",ears:"Ears",eyes_ears:"Eyes & Ears",oral:"Oral",internal:"Internal & Systemic",developmental:"Developmental",limb:"Limbs",hoof:"Hoof",dental:"Dental",repository_exam:"Exam Findings",toxic:"Toxic",foal:"Foal",immune:"Immune",endocrine:"Endocrine",misc:"Miscellaneous",body:"Body & Shape",parasites:"Parasites",emergency:"Emergency",reproductive:"Reproductive",behavior:"Behavior",other:"Other"},
     sevLabels:{low:"Mild",moderate:"Moderate",high:"Severe",emergency:"Emergency"},
     dtDescription:"Description",dtPathophysiology:"Pathophysiology",dtCauses:"Causes",dtPrevention:"Prevention",dtTreatment:"Treatment",dtPrognosis:"Prognosis",
+    dtClinicalSigns:"Clinical Signs",dtDiagnosis:"Diagnosis",
     dtMatchedSymptoms:"Matched Symptoms",dtRecommendedTests:"Recommended Tests",dtRecTestList:"Recommended Tests:",
     dtSymptoms:"Symptoms",
     dtContraindications:"Contraindications",dtRoutes:"Routes",dtFormulations:"Formulations",dtInteractions:"Drug Interactions",dtSpeciesInfo:"Species Information:",dtMechanism:"Mechanism of Action",dtSideEffects:"Common Side Effects",
@@ -3966,6 +3968,10 @@ function renderDiseaseCard(d,data){
   const prevention=pick(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
   const treatment=pick(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
   const prognosis=pick(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
+  /* Clinical signs / diagnostic work-up: already computed by the matcher and sent
+     to the client, but previously dropped in this card. Show only when present. */
+  const clinicalSigns=pick(d.clinical_signs_ja,d.clinical_signs);
+  const diagnosis=pick(d.diagnosis_ja,d.diagnosis);
   const matchDisplay=matchSymptoms.map(s=>{const n=symNames[s];if(!n)return escapeHtml(s);return currentLang==="ja"?`${escapeHtml(n.ja)} <span style="color:var(--gray-500);font-size:.78rem">${escapeHtml(n.en)}</span>`:`${escapeHtml(n.en)} <span style="color:var(--gray-500);font-size:.78rem">${escapeHtml(n.ja)}</span>`;}).join("&ensp;|&ensp;");
   const prevalenceTier=d.prevalence_tier||"unknown";
   const prevalenceLabel={very_common:(currentLang==="ja"?"非常に一般的":"Very Common"),common:(currentLang==="ja"?"一般的":"Common"),uncommon:(currentLang==="ja"?"稀":"Uncommon"),rare:(currentLang==="ja"?"非常に稀":"Rare"),unknown:(currentLang==="ja"?"不明":"Unknown")}[prevalenceTier]||"";
@@ -3999,6 +4005,10 @@ function renderDiseaseCard(d,data){
           <div class="detail-section-header"><span class="detail-icon">\u{1F4CB}</span> ${t("dtDescription")}</div>
           <div class="detail-section-body">${escapeHtml(desc||buildFieldFallback(t("dtDescription"),diseaseName))}</div>
         </div>
+        ${clinicalSigns?`<div class="detail-section">
+          <div class="detail-section-header"><span class="detail-icon">\u{1FA7A}</span> ${t("dtClinicalSigns")}</div>
+          <div class="detail-section-body">${escapeHtml(clinicalSigns)}</div>
+        </div>`:""}
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F9EC}</span> ${t("dtPathophysiology")}</div>
           <div class="detail-section-body">${escapeHtml(patho)}</div>
@@ -4007,6 +4017,10 @@ function renderDiseaseCard(d,data){
           <div class="detail-section-header"><span class="detail-icon">\u{1F50D}</span> ${t("dtCauses")}</div>
           <div class="detail-section-body">${escapeHtml(causes)}</div>
         </div>
+        ${diagnosis?`<div class="detail-section">
+          <div class="detail-section-header"><span class="detail-icon">\u{1F52C}</span> ${t("dtDiagnosis")}</div>
+          <div class="detail-section-body">${escapeHtml(diagnosis)}</div>
+        </div>`:""}
         <div class="detail-section">
           <div class="detail-section-header"><span class="detail-icon">\u{1F48A}</span> ${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</div>
           <div class="detail-section-body">${renderTreatmentWithAdjunct(treatment)}${buildTreatmentDrugsPlaceholder(currentSpecies||"dog",d.name_ja||d.name||"")}</div>
@@ -4294,6 +4308,11 @@ function renderDiseaseDb(){
     const prevention=pk(d.prevention_ja,d.prevention)||buildFieldFallback(t("dtPrevention"),diseaseName);
     const treatment=pk(d.treatment_ja,d.treatment)||buildFieldFallback(t("dtTreatment"),diseaseName);
     const prognosis=pk(d.prognosis_detailed_ja,d.prognosis_detailed)||pk(d.prognosis_ja,d.prognosis)||buildFieldFallback(t("dtPrognosis"),diseaseName);
+    /* Clinical signs (臨床徴候) and diagnostic work-up (診断) are evidence-grounded
+       fields present in the record but historically not surfaced. Show them only
+       when real content exists (no auto-fallback) so records without them stay clean. */
+    const clinicalSigns=pk(d.clinical_signs_ja,d.clinical_signs);
+    const diagnosis=pk(d.diagnosis_ja,d.diagnosis);
     const dNameEn=highlightMatch(d.name||"",search);
     const dNameJa=highlightMatch(d.name_ja||"",search);
     const dPrimary=currentLang==="ja"?dNameJa:dNameEn;
@@ -4314,8 +4333,10 @@ function renderDiseaseDb(){
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
         <dt>${t("dtDescription")}</dt><dd>${escapeHtml(desc)}</dd>
+        ${clinicalSigns?`<dt>${t("dtClinicalSigns")}</dt><dd>${escapeHtml(clinicalSigns)}</dd>`:""}
         <dt>${t("dtPathophysiology")}</dt><dd>${escapeHtml(patho)}</dd>
         <dt>${t("dtCauses")}</dt><dd>${escapeHtml(causes)}</dd>
+        ${diagnosis?`<dt>${t("dtDiagnosis")}</dt><dd>${escapeHtml(diagnosis)}</dd>`:""}
         <dt>${t("dtPrevention")}</dt><dd>${escapeHtml(prevention)}</dd>
         <dt>${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</dt><dd>${renderTreatmentWithAdjunct(treatment)}${buildTreatmentDrugsPlaceholder(currentSpecies||"dog",d.name_ja||d.name||"")}</dd>
         <dt>${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
@@ -4326,7 +4347,7 @@ function renderDiseaseDb(){
         ${recoveryWeeks?`<dt>${currentLang==="ja"?"回復期間":"Recovery Timeline"}</dt><dd>${currentLang==="ja"?`${recoveryWeeks}週間`:`${recoveryWeeks} weeks`}</dd>`:""}
         ${successRate!==undefined?`<dt>${currentLang==="ja"?"成功率":"Success Rate"}</dt><dd>${(successRate*100).toFixed(1)}%</dd>`:""}
         ${mortalityRate!==undefined?`<dt>${currentLang==="ja"?"死亡率":"Mortality Rate"}</dt><dd>${(mortalityRate*100).toFixed(1)}%</dd>`:""}
-      </dl>${renderOrthopedicReferences(d)}<div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
+      </dl>${renderOrthopedicReferences(d)}<div class="related-diseases-section" data-related="1" data-disease="${escapeHtml(d.name||"")}"></div><div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
     </div>`}).join("");
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
@@ -4454,6 +4475,49 @@ function navigateToDrug(drugName){
     const first=list.querySelector(".disease-db-item");
     if(first&&!first.querySelector(".disease-detail.open"))toggleDbItem(first);
   },350);
+}
+/* Related diseases: compute the closest differentials for a disease by counting
+   shared symptoms across the currently-loaded species list (allDiseases), mirroring
+   the server-rendered SEO page. Rendered lazily on expand so browsing stays fast.
+   Clicking a chip jumps to that disease and expands it (navigateToDiseaseDb). */
+function _diseaseSymptomSet(d){
+  const s=d&&d.symptoms;
+  if(Array.isArray(s))return new Set(s);
+  if(s&&typeof s==="object")return new Set(Object.keys(s));
+  return new Set();
+}
+function computeRelatedDiseases(diseaseName,maxItems){
+  if(!Array.isArray(allDiseases)||!allDiseases.length)return [];
+  const self=allDiseases.find(x=>(x.name||"")===diseaseName||(x.name_ja||"")===diseaseName);
+  if(!self)return [];
+  const mine=_diseaseSymptomSet(self);
+  if(mine.size<2)return [];
+  const out=[];
+  for(const other of allDiseases){
+    if(other===self||other._catHeader)continue;
+    if((other.name||"")===(self.name||""))continue;
+    let shared=0;
+    const os=_diseaseSymptomSet(other);
+    for(const sym of os){if(mine.has(sym)){shared++;}}
+    if(shared>=2)out.push({name:other.name||"",name_ja:other.name_ja||"",shared:shared});
+  }
+  out.sort((a,b)=>b.shared-a.shared);
+  return out.slice(0,maxItems||6);
+}
+function hydrateRelatedDiseases(root){
+  const holders=(root||document).querySelectorAll(".related-diseases-section[data-related='1']");
+  holders.forEach(holder=>{
+    holder.dataset.related="0";
+    const name=holder.dataset.disease||"";
+    const related=computeRelatedDiseases(name,6);
+    if(!related.length){holder.remove();return;}
+    const heading=currentLang==="ja"?"関連する疾患（共通症状）":"Related Diseases (shared signs)";
+    const chips=related.map(r=>{
+      const label=currentLang==="ja"?(r.name_ja||r.name):(r.name||r.name_ja);
+      return `<button type="button" class="related-disease-chip" data-name="${escapeHtml(r.name||r.name_ja)}">${escapeHtml(label)}<span class="related-disease-shared">${r.shared}</span></button>`;
+    }).join("");
+    holder.innerHTML=`<div class="related-diseases-heading">${heading}</div><div class="related-diseases-list">${chips}</div>`;
+  });
 }
 function navigateToDiseaseDb(query){
   _pushNavHistory(currentView,"database",query);
@@ -6465,6 +6529,8 @@ function _attachDbItemHandlers(container){
     if(xsp){e.preventDefault();openDiseaseAcrossSpecies(xsp.dataset.name,xsp.dataset.species);return;}
     const drugLink=e.target.closest(".drug-nav-link");
     if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
+    const relDisease=e.target.closest(".related-disease-chip");
+    if(relDisease){e.preventDefault();navigateToDiseaseDb(relDisease.dataset.name);return;}
     const anesthLink=e.target.closest(".anesthesia-nav-link");
     if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)scrollToAnchor(p);return;}
     if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);
@@ -6545,6 +6611,8 @@ function toggleDbItem(el){
       if(typeof hydrateTreatmentDrugs==="function")hydrateTreatmentDrugs(detail);
       /* Hydrate drug→diseases placeholders (drug detail panels) */
       if(typeof hydrateDrugDiseases==="function")hydrateDrugDiseases(detail);
+      /* Hydrate related-disease navigation chips (computed from shared symptoms) */
+      if(typeof hydrateRelatedDiseases==="function")hydrateRelatedDiseases(detail);
     }
   }
 }
