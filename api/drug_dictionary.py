@@ -51,6 +51,7 @@ from api.drug_batch_30 import (
     METOCLOPRAMIDE_DOG_LACTATION_NOTE_EN,
     METOCLOPRAMIDE_LACTATION_PATCH_30,
 )
+from api.drug_batch_31 import DRUGS_BATCH_31
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -10544,6 +10545,14 @@ if _metoc:
             _existing = _dog.get(_key) or ""
             if "29359978" not in _existing:
                 _dog[_key] = f"{_existing} {_text}".strip()
+
+# バッチ31: 麻酔プロトコルが参照するのに未収載だった麻酔関連薬6剤
+# （チオペンタール, グアイフェネシン/GGE, デトミジン, メピバカイン,
+#  2-フェノキシエタノール, ヨヒンビン）
+for _drug31 in DRUGS_BATCH_31:
+    if _drug31["id"] not in _drug_index:
+        DRUGS.append(_drug31)
+        _drug_index[_drug31["id"]] = _drug31
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

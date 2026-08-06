@@ -4472,8 +4472,17 @@ function navigateToDrug(drugName){
   setTimeout(()=>{
     const list=document.getElementById("drugList");
     if(!list)return;
-    const first=list.querySelector(".disease-db-item");
-    if(first&&!first.querySelector(".disease-detail.open"))toggleDbItem(first);
+    const items=[...list.querySelectorAll(".disease-db-item")];
+    if(!items.length)return;
+    /* Prefer the item whose base name exactly matches the search term. The drug
+       filter is a substring match, so "デトミジン" also lists Medetomidine and
+       "メデトミジン" also lists Dexmedetomidine; matching the base name (before any
+       brand suffix in parentheses) lands on the intended drug, not the first row. */
+    const base=s=>String(s||"").toLowerCase().split(/[(（]/)[0].trim();
+    const target=base(drugName);
+    const exact=items.find(it=>base(it.dataset.name)===target||base(it.dataset.nameJa)===target);
+    const pick=exact||items[0];
+    if(pick&&!pick.querySelector(".disease-detail.open"))toggleDbItem(pick);
   },350);
 }
 /* Related diseases: compute the closest differentials for a disease by counting
@@ -5913,7 +5922,7 @@ function renderDrugList(){
     const sponsorLink=d.sponsor?`<div class="drug-sponsor-link"><strong class="drug-sponsor-name">${escapeHtml(d.sponsor_name||"Equine & Canine Vet Nutrition")}</strong><br/><span class="drug-sponsor-vet">${t("sponsorVetLabel")}</span><br/><a href="${sanitizeUrl(d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/')}" target="_blank" class="drug-sponsor-url">${t("productDetails")}</a></div>`:"";
     const dName=highlightMatch(d.name||"",search);
     const dNameJa=highlightMatch(d.name_ja||"",search);
-    return`<div class="disease-db-item drug-item${d.sponsor?" drug-sponsored":""}" role="button" tabindex="0" aria-expanded="false">
+    return`<div class="disease-db-item drug-item${d.sponsor?" drug-sponsored":""}" role="button" tabindex="0" aria-expanded="false" data-name="${escapeHtml(d.name||"")}" data-name-ja="${escapeHtml(d.name_ja||"")}">
       <div class="drug-head-row">
         <div class="d-name">${dName} <span class="d-name-ja">${dNameJa}</span>${sponsorBadge}</div>
         <span class="drug-category-tag">${escapeHtml(catLabel)}</span>
@@ -6166,6 +6175,103 @@ function checkDrugContra(drugName){
     return r.conditions.some(c=>tags.has(c.toLowerCase()));
   });
 }
+
+/* Anaesthesia drug → drug-dictionary link resolver.
+   A protocol row's drug name is often a combination ("Acepromazine + Butorphanol"),
+   carries a brand/formulation suffix ("Medetomidine (Domitor)", "Ketamine CRI") or
+   is a protocol acronym ("MKM-OS", "Triple Drip"). Passing the whole descriptive
+   string to the drug search finds nothing. Instead we wrap each *recognised base
+   agent* in its own link whose search term is guaranteed to match a real formulary
+   entry, and leave acronyms / fluids / routes as plain text. The base-agent set is
+   static (self-contained, no dependency on the drug list being loaded yet) and is
+   covered by a test that asserts every canonical term resolves to a real drug. */
+const ANES_AGENTS=[
+  // dexmedetomidine MUST precede medetomidine (longer alias wins, but keep order clear)
+  {q:"デクスメデトミジン",en:["dexmedetomidine"],ja:["デクスメデトミジン","デクスドミトール"],abbr:["dex"]},
+  {q:"メデトミジン",en:["medetomidine"],ja:["メデトミジン","ドミトール"],abbr:["med"]},
+  {q:"デトミジン",en:["detomidine"],ja:["デトミジン","ドルモセダン"]},
+  {q:"ロミフィジン",en:["romifidine"],ja:["ロミフィジン"]},
+  {q:"キシラジン",en:["xylazine"],ja:["キシラジン"]},
+  {q:"アセプロマジン",en:["acepromazine"],ja:["アセプロマジン"],abbr:["acp"]},
+  {q:"ケタミン",en:["ketamine"],ja:["ケタミン"]},
+  {q:"アルファキサロン",en:["alfaxalone"],ja:["アルファキサロン","アルファキサン"],abbr:["alf"]},
+  {q:"プロポフォール",en:["propofol"],ja:["プロポフォール"]},
+  {q:"チオペンタール",en:["thiopental"],ja:["チオペンタール"]},
+  {q:"イソフルラン",en:["isoflurane"],ja:["イソフルラン"]},
+  {q:"セボフルラン",en:["sevoflurane"],ja:["セボフルラン"]},
+  {q:"ブトルファノール",en:["butorphanol"],ja:["ブトルファノール"],abbr:["btr"]},
+  {q:"ブプレノルフィン",en:["buprenorphine"],ja:["ブプレノルフィン"]},
+  {q:"メサドン",en:["methadone"],ja:["メサドン"]},
+  {q:"ヒドロモルフォン",en:["hydromorphone"],ja:["ヒドロモルフォン"]},
+  {q:"モルヒネ",en:["morphine"],ja:["モルヒネ"]},
+  {q:"レミフェンタニル",en:["remifentanil"],ja:["レミフェンタニル"]},
+  {q:"フェンタニル",en:["fentanyl"],ja:["フェンタニル"]},
+  {q:"リドカイン",en:["lidocaine"],ja:["リドカイン"]},
+  {q:"ブピバカイン",en:["bupivacaine"],ja:["ブピバカイン"]},
+  {q:"メピバカイン",en:["mepivacaine"],ja:["メピバカイン"]},
+  {q:"ミダゾラム",en:["midazolam"],ja:["ミダゾラム"],abbr:["mdz"]},
+  {q:"ジアゼパム",en:["diazepam"],ja:["ジアゼパム"]},
+  {q:"アチパメゾール",en:["atipamezole"],ja:["アティパメゾール","アチパメゾール","アンチセダン"]},
+  {q:"フルマゼニル",en:["flumazenil"],ja:["フルマゼニル"]},
+  {q:"ナロキソン",en:["naloxone"],ja:["ナロキソン"]},
+  {q:"ヨヒンビン",en:["yohimbine"],ja:["ヨヒンビン"]},
+  {q:"ネオスチグミン",en:["neostigmine"],ja:["ネオスチグミン"]},
+  {q:"グリコピロレート",en:["glycopyrrolate"],ja:["グリコピロレート"]},
+  {q:"アトロピン",en:["atropine"],ja:["アトロピン"]},
+  {q:"グアイフェネシン",en:["guaifenesin","glyceryl guaiacolate"],ja:["グアイフェネシン","グリセリルグアヤコレート"],abbr:["gge"]},
+  {q:"ガバペンチン",en:["gabapentin"],ja:["ガバペンチン"]},
+  {q:"オイゲノール",en:["eugenol"],ja:["オイゲノール"]},
+  {q:"MS-222",en:["ms-222","tricaine"],ja:["ms-222","トリカイン"]},
+  {q:"フェノキシエタノール",en:["phenoxyethanol"],ja:["フェノキシエタノール"]},
+];
+/* Flatten to {alias, q, kind} candidates. kind: 'latin' (letter-boundary match on a
+   lowercased copy), 'ja' (katakana substring), 'abbr' (uppercase whole token). */
+const _ANES_ALIASES=(()=>{
+  const out=[];
+  for(const a of ANES_AGENTS){
+    (a.en||[]).forEach(x=>out.push({alias:x.toLowerCase(),q:a.q,kind:"latin"}));
+    (a.ja||[]).forEach(x=>out.push({alias:x,q:a.q,kind:"ja"}));
+    (a.abbr||[]).forEach(x=>out.push({alias:x.toLowerCase(),q:a.q,kind:"abbr"}));
+  }
+  return out;
+})();
+function linkifyAnesDrugName(str){
+  if(!str)return "";
+  const lower=str.toLowerCase();
+  const isLetter=ch=>ch&&/[a-z]/i.test(ch);
+  const isAlnum=ch=>ch&&/[a-z0-9]/i.test(ch);
+  const matches=[];
+  for(const a of _ANES_ALIASES){
+    const hay=a.kind==="ja"?str:lower;
+    let idx=0;
+    while((idx=hay.indexOf(a.alias,idx))!==-1){
+      const end=idx+a.alias.length;
+      let ok=true;
+      if(a.kind==="latin"){if(isLetter(str[idx-1])||isLetter(str[end]))ok=false;}
+      else if(a.kind==="abbr"){if(isAlnum(str[idx-1])||isAlnum(str[end]))ok=false;}
+      if(ok)matches.push({start:idx,end:end,q:a.q,len:a.alias.length});
+      idx=end;
+    }
+  }
+  if(!matches.length)return escapeHtml(str);
+  // Greedy: prefer the longest match; drop any that overlap an already-chosen span.
+  matches.sort((x,y)=>y.len-x.len);
+  const chosen=[];
+  for(const m of matches){
+    if(chosen.some(c=>m.start<c.end&&m.end>c.start))continue;
+    chosen.push(m);
+  }
+  chosen.sort((x,y)=>x.start-y.start);
+  let html="",pos=0;
+  const title=currentLang==="ja"?"薬品詳細を見る":"View drug details";
+  for(const m of chosen){
+    if(m.start>pos)html+=escapeHtml(str.slice(pos,m.start));
+    html+=`<a class="anesthesia-drug-link drug-nav-link" href="#drugs" data-drug="${escapeHtml(m.q)}" title="${title}">${escapeHtml(str.slice(m.start,m.end))}</a>`;
+    pos=m.end;
+  }
+  if(pos<str.length)html+=escapeHtml(str.slice(pos));
+  return html;
+}
 function renderAnesthesiaList(){
   const list=document.getElementById("anesthesiaList");
   const search=(document.getElementById("anesthesiaSearch").value||"").toLowerCase();
@@ -6241,10 +6347,12 @@ function renderAnesthesiaList(){
               return`<tr class="anesthesia-contra-row"><td colspan="${cols}"><span class="anesthesia-contra-badge" style="background:${sevColors[sev]||"#ea580c"}">${sevIcons[sev]||"⚠️"} ${escapeHtml(sevLabels[sev]||sev)}</span> ${escapeHtml(msg)}</td></tr>`;
             }).join("");
           }
-          /* Drug name as anchor → navigates to drug detail (consistent with treatment chips) */
-          const drugSearchTerm=(d.name_ja||d.name||"").trim();
-          const drugAnchorEn=drugSearchTerm?`<a class="anesthesia-drug-link drug-nav-link" href="#drugs" data-drug="${escapeHtml(drugSearchTerm)}" title="${currentLang==="ja"?"薬品詳細を見る":"View drug details"}">${escapeHtml(d.name||"")}</a>`:escapeHtml(d.name||"");
-          return`<tr><td><strong>${drugAnchorEn}</strong><br/><span class="d-name-ja">${escapeHtml(d.name_ja||"")}</span></td><td>${escapeHtml(d.dose||"")}</td>${calcCell}<td>${escapeHtml(d.route||"")}</td><td>${escapeHtml(d.onset||"")}</td><td>${escapeHtml(d.duration||"")}</td></tr>`
+          /* Each recognised base agent in the name (English and Japanese lines)
+             becomes its own link to the drug dictionary — combinations link every
+             component, suffixed single drugs link the base, acronyms stay plain. */
+          const drugAnchorEn=linkifyAnesDrugName(d.name||"");
+          const drugAnchorJa=d.name_ja?`<br/><span class="d-name-ja">${linkifyAnesDrugName(d.name_ja)}</span>`:"";
+          return`<tr><td><strong>${drugAnchorEn}</strong>${drugAnchorJa}</td><td>${escapeHtml(d.dose||"")}</td>${calcCell}<td>${escapeHtml(d.route||"")}</td><td>${escapeHtml(d.onset||"")}</td><td>${escapeHtml(d.duration||"")}</td></tr>`
           +contraHtml
           +(dNotes?`<tr class="anesthesia-drug-note"><td colspan="${cols}">${escapeHtml(dNotes)}</td></tr>`:"");
         }).join("")

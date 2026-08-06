@@ -11,6 +11,7 @@ import hashlib
 import importlib
 import json
 import random
+import re
 import sys
 from pathlib import Path
 
@@ -1698,6 +1699,23 @@ def ground_missing_clinical_signs_and_diagnosis(conn) -> dict[str, int]:
                 label = label.split(sep, 1)[0]
         return label.strip()
 
+    def _en_test_name(label):
+        # Many tests are stored as ``"日本語 (English gloss)"`` — the ASCII English
+        # name lives in the parenthetical. Keeping the whole label out (because it
+        # contains CJK) left the English diagnosis empty even though a perfectly
+        # good English test name was available. Prefer the label itself when it is
+        # already Latin-only, else lift the ASCII gloss from the parentheses.
+        s = _short(label)
+        if not s:
+            return None
+        if _ascii(s):
+            return s
+        for grp in reversed(re.findall(r"[(（]([^)）]+)[)）]", s)):
+            grp = grp.strip()
+            if _ascii(grp):
+                return grp
+        return None
+
     _sym_cache: dict[str, dict] = {}
 
     def _syms(species):
@@ -1731,20 +1749,29 @@ def ground_missing_clinical_signs_and_diagnosis(conn) -> dict[str, int]:
                 conn.execute("UPDATE diseases SET clinical_signs_ja = ? WHERE id = ?", (new_ja, row["id"]))
                 counts["clinical_signs_ja"] += 1
 
-        dx_empty = not (row["diagnosis"] or "").strip() and not (row["diagnosis_ja"] or "").strip()
-        if dx_empty:
+        # Fill each language independently: a Japanese-first record often carries a
+        # complete ``diagnosis_ja`` while its English ``diagnosis`` is blank, so an
+        # English visitor sees no work-up. Gating on *both* being empty (as before)
+        # left those 54 records' English side empty. Each side is grounded only in
+        # the record's own recommended tests, so this restates stored facts and
+        # cannot overwrite a curated field (it only fills a blank one).
+        dx_en_empty = not (row["diagnosis"] or "").strip()
+        dx_ja_empty = not (row["diagnosis_ja"] or "").strip()
+        if dx_en_empty or dx_ja_empty:
             test_ids = _ids(row["recommended_tests"])
             display = _build_recommended_tests_display(test_ids, species)
-            tests_en = [t for t in (_short(d.get("name_en") or "") for d in display) if _ascii(t)]
-            tests_ja = [_short(d.get("name_ja") or "") for d in display if (d.get("name_ja") or "").strip()]
-            new_en = compose_grounded_diagnosis(tests_en)
-            new_ja = compose_grounded_diagnosis_ja(tests_ja)
-            if new_en:
-                conn.execute("UPDATE diseases SET diagnosis = ? WHERE id = ?", (new_en, row["id"]))
-                counts["diagnosis"] += 1
-            if new_ja:
-                conn.execute("UPDATE diseases SET diagnosis_ja = ? WHERE id = ?", (new_ja, row["id"]))
-                counts["diagnosis_ja"] += 1
+            if dx_en_empty:
+                tests_en = [t for t in (_en_test_name(d.get("name_en") or "") for d in display) if t]
+                new_en = compose_grounded_diagnosis(tests_en)
+                if new_en:
+                    conn.execute("UPDATE diseases SET diagnosis = ? WHERE id = ?", (new_en, row["id"]))
+                    counts["diagnosis"] += 1
+            if dx_ja_empty:
+                tests_ja = [_short(d.get("name_ja") or "") for d in display if (d.get("name_ja") or "").strip()]
+                new_ja = compose_grounded_diagnosis_ja(tests_ja)
+                if new_ja:
+                    conn.execute("UPDATE diseases SET diagnosis_ja = ? WHERE id = ?", (new_ja, row["id"]))
+                    counts["diagnosis_ja"] += 1
     return counts
 
 
