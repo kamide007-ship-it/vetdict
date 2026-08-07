@@ -10929,6 +10929,11 @@ for _d in DRUGS:
 # Drug name index for fast lookup (built once at module load).
 # Each entry: lowercase keyword → drug ID
 _DRUG_KEYWORD_INDEX: dict[str, str] = {}
+# Split a drug name at the first opening parenthesis (half- or full-width) or
+# bracket, so the generic base name can be indexed separately from the brand
+# suffix, e.g. "メチマゾール（タパゾール/フェリマゾール）" -> "メチマゾール".
+_DRUG_NAME_PAREN_RE = re.compile(r"[（(\[［]")
+_HAS_CJK_RE = re.compile(r"[぀-ヿ㐀-鿿]")
 
 
 def _build_drug_keyword_index() -> None:
@@ -10953,6 +10958,17 @@ def _build_drug_keyword_index() -> None:
             first_word = k.split()[0] if " " in k else k.split("-")[0]
             if first_word != k and len(first_word) >= 4 and first_word not in _DRUG_KEYWORD_INDEX:
                 _DRUG_KEYWORD_INDEX[first_word] = drug_id
+            # Index the base name before a parenthetical brand/alias suffix so
+            # Japanese names like "メチマゾール（タパゾール/フェリマゾール）" match
+            # treatment text that only writes the generic "メチマゾール". English
+            # names already split on the space before "(", but Japanese uses a
+            # full-width "（" with no space, so the base was never indexed.
+            base = _DRUG_NAME_PAREN_RE.split(k, 1)[0].strip()
+            if base and base != k and base != first_word:
+                # CJK terms are information-dense; allow ≥3, keep ≥4 for Latin.
+                min_len = 3 if _HAS_CJK_RE.search(base) else 4
+                if len(base) >= min_len and base not in _DRUG_KEYWORD_INDEX:
+                    _DRUG_KEYWORD_INDEX[base] = drug_id
 
 
 _build_drug_keyword_index()
