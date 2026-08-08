@@ -4049,6 +4049,123 @@ def _build_symptoms_display(symptoms, species: str) -> list[dict[str, str]]:
     return out
 
 
+# ---------------------------------------------------------------------------
+# Read-time grounding of empty clinical_signs / diagnosis (fallback serving path)
+# ---------------------------------------------------------------------------
+# A batch of records ships with both language variants of ``clinical_signs`` and
+# ``diagnosis`` empty, so those labelled sections silently vanish from the
+# disease detail while every sibling shows them. The SQLite build fills them
+# (``ground_missing_clinical_signs_and_diagnosis`` in migrate_to_sqlite.py), but
+# low-memory production serves straight from the Python modules and never runs
+# that pass. These helpers apply the same grounding at read time: they restate
+# only data the record already stores (its own presenting signs and recommended
+# tests), so the text is disease-specific and introduces no new clinical claim.
+# Records without usable signs/tests are left empty rather than filled with
+# boilerplate. The sentence templates mirror the composers in
+# scripts/template_elimination/clinical_fields_generator.py (kept local because
+# ``scripts`` is not importable from every production layout).
+
+
+def _is_latin(text: str) -> bool:
+    return bool(text) and all(ord(c) < 0x3000 for c in text)
+
+
+def _short_test_label(label: str) -> str:
+    # Free-text test entries can be full sentences ("Urine culture: mandatory
+    # before …"); keep only the test-name clause so the narrative stays a list.
+    for sep in (":", "：", ";", " — ", " - "):
+        if sep in label:
+            label = label.split(sep, 1)[0]
+    return label.strip()
+
+
+def _en_test_label(label: str) -> str | None:
+    # Tests stored as "日本語 (English gloss)" carry the English name in the
+    # parenthetical; lift it so the English narrative has no CJK leakage.
+    s = _short_test_label(label or "")
+    if not s:
+        return None
+    if _is_latin(s):
+        return s
+    for grp in reversed(re.findall(r"[(（]([^)）]+)[)）]", s)):
+        grp = grp.strip()
+        if _is_latin(grp):
+            return grp
+    return None
+
+
+def _join_names_ja(names: list, limit: int) -> str:
+    seen: list[str] = []
+    for n in names:
+        n = (n or "").strip()
+        if n and n not in seen:
+            seen.append(n)
+        if len(seen) >= limit:
+            break
+    return "・".join(seen)
+
+
+def _join_names_en(names: list, limit: int) -> str:
+    seen: list[str] = []
+    for n in names:
+        n = (n or "").strip()
+        if n and n.lower() not in [s.lower() for s in seen]:
+            seen.append(n)
+        if len(seen) >= limit:
+            break
+    if not seen:
+        return ""
+    if len(seen) == 1:
+        return seen[0]
+    return ", ".join(seen[:-1]) + " and " + seen[-1]
+
+
+def _ground_missing_supplementary_fields(item: dict, species: str) -> None:
+    """Fill empty clinical_signs / diagnosis sections from the item's own data."""
+    if not isinstance(item, dict):
+        return
+    # Clinical signs: only when BOTH languages are empty (curated prose in
+    # either language is never overwritten).
+    cs_empty = not (item.get("clinical_signs") or "").strip() and not (item.get("clinical_signs_ja") or "").strip()
+    if cs_empty:
+        display = item.get("symptoms_display") or []
+        signs_ja = _join_names_ja([d.get("name_ja") for d in display if isinstance(d, dict)], 8)
+        signs_en = _join_names_en(
+            [d.get("name_en") for d in display if isinstance(d, dict) and _is_latin(d.get("name_en") or "")], 8
+        )
+        if signs_ja:
+            item["clinical_signs_ja"] = (
+                f"本症で報告される主な臨床徴候には{signs_ja}などがある。所見の種類と程度は症例や病期により異なる。"
+            )
+        if signs_en:
+            item["clinical_signs"] = (
+                f"Clinical signs reported in this condition include {signs_en}. "
+                "Their range and severity vary between cases."
+            )
+    # Diagnosis: fill each language independently (a Japanese-first record often
+    # has diagnosis_ja but a blank English side).
+    dx_en_empty = not (item.get("diagnosis") or "").strip()
+    dx_ja_empty = not (item.get("diagnosis_ja") or "").strip()
+    if dx_en_empty or dx_ja_empty:
+        display = item.get("recommended_tests_display") or []
+        if dx_ja_empty:
+            tests_ja = _join_names_ja(
+                [_short_test_label(d.get("name_ja") or "") for d in display if isinstance(d, dict)], 6
+            )
+            if tests_ja:
+                item["diagnosis_ja"] = (
+                    f"診断は{tests_ja}などの検査所見を、臨床徴候および病歴と併せて総合的に評価して行う。"
+                )
+        if dx_en_empty:
+            tests_en = _join_names_en(
+                [_en_test_label(d.get("name_en") or "") for d in display if isinstance(d, dict)], 6
+            )
+            if tests_en:
+                item["diagnosis"] = (
+                    f"Diagnosis is based on {tests_en}, interpreted together with the clinical signs and history."
+                )
+
+
 @health_bp.route("/symptoms", methods=["GET"])
 def get_symptoms():
     """Return all symptoms, optionally filtered by category."""
@@ -4275,6 +4392,12 @@ def get_diseases():
                     species,
                 )
             )
+
+    # Fill empty clinical_signs / diagnosis sections from each record's own
+    # stored signs and recommended tests (same grounding the SQLite build
+    # applies; required here because low-memory production serves this path).
+    for item in output:
+        _ground_missing_supplementary_fields(item, species)
 
     # Collapse duplicate disease entries (same English name or same name_ja)
     # so the browser never renders two identical cards for one disease, and

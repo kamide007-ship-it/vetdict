@@ -1933,3 +1933,43 @@ named-pathogen 疾患に付いた**任意のカテゴリテンプレート**を�
 
 ### 注記
 - 変更は Python データ（`api/species/prevalence_data.py`）のみ。static 資産は不変のため ServiceWorker `CACHE_NAME` は据え置き。
+
+## 2026-08セッション（第3弾: 診断/臨床徴候セクションの実行時グラウンディング + SGLT2阻害薬2剤 + 疾患ナビの完全一致着地）
+
+### エラーチェック
+- **repo全体の ruff エラー10件を是正**（CIは変更ファイルのみlintするため main に混入していた）:
+  - `reco2/engine.py` の数学記法（I, P, T_base, D, T_final）→ pyproject に per-file-ignore `"reco2/*" = ["N803"]` を追加（意図的記法として許容）
+  - camelCase テスト関数名1件（N802）・非CapWordsテストクラス名4件（N801）をリネーム
+- **フルテストスイートの「36失敗」は環境アーティファクトと特定**: 監査スクリプトの app import が空の `instance/vetdict.db`（24KB スキーマのみ）を自動生成 → `test_served_db_*` のスキップガード（存在チェック）を欺いて失敗。`migrate_to_sqlite.py` で実DBを構築（7,058疾患、treatment/prevention/prognosis 100%）して全36件が合格。実回帰ゼロ。
+
+### 疾患内容: 診断（diagnosis）/臨床徴候（clinical_signs）の実行時グラウンディング
+- **ギャップ**: 733疾患が diagnosis/diagnosis_ja 両方空、多数が clinical_signs 両言語空。SQLiteビルドは `ground_missing_clinical_signs_and_diagnosis` で充填済みだが、**低メモリ本番はPythonモジュール直配信のためこのパスを通らず**、SPA疾患詳細・SEOページで該当セクションが黙って消えていた
+- `api/health_checker.py` に `_ground_missing_supplementary_fields()` を追加（migrate の composer と同一の文テンプレートをローカル実装 — `scripts` パッケージが全ての本番レイアウトで import 可能とは限らないため）:
+  - clinical_signs: 両言語空の場合のみ、レコード自身の `symptoms_display` から日英を構築
+  - diagnosis: 言語別に独立して空側のみ、`recommended_tests_display` から構築（英語側はCJK混入ガード付き）
+  - キュレート済み prose は決して上書きしない。徴候/検査が無いレコードは空のまま（捏造しない）
+- `/api/health-check/diseases`（SPA疾患ブラウザのデータ源）で dedupe 前に適用
+- SEOページ（`vetdict_api.py` disease_detail ルート）にも適用 — **モジュールdictは共有オブジェクトのためコピーしてから充填**（in-place 汚染なし）
+- 効果（フォールバック配信パス実測、6,529疾患）: diagnosis_ja 空 **733→0**、diagnosis(EN) 空 **733→21**（残21は日本語先行レコードでLatin検査名が無いもの＝設計通り空維持）、clinical_signs 両言語空 **→0**。馬にも diagnosis セクションが初めて付与（`recommended_exams` タプル由来）
+
+### 薬用量マニュアル: SGLT2阻害薬2剤の欠落是正（referenced-but-absent、`drug_batch_32.py` 新規）
+- 猫糖尿病の疾患エントリが「Bexagliflozin (Bexacat) and velagliflozin — SGLT2 inhibitors」（AAHA 2023）を推奨するのに**両剤とも薬品辞書に未収載**だった:
+  - **ベキサグリフロジン（Bexacat）**: 15 mg/頭 PO q24h 固定用量（体重3kg以上・インスリン未治療猫のみ）。FDA NADA 141-568、Hadd 2023 JVIM（治療成功率84%）
+  - **ベラグリフロジン（Senvelgo）**: 1 mg/kg PO q24h 液剤。FDA NADA 141-576、Niessen 2024 JVIM（インスリングラルギン非劣性RCT）
+- クラス定義の安全警告を両剤に明記: **正常血糖DKA**（血糖正常でもケトン監視必須）、インスリン併用/使用歴は禁忌、犬は safe:False（犬糖尿病はインスリン依存性でSGLT2単剤はDKAリスク）
+- 薬品総数: 579 → **581**
+- 回帰テスト: `test_sglt2_inhibitors_present_with_edka_warning`（用量・insulin-naive 制限・eDKA/ケトン警告・insulin 相互作用・犬 safe:False を検証）
+
+### UX: 疾患クロスリンクの完全一致着地（薬品ナビ修正と同型のバグ）
+- `navigateToDiseaseDb`（関連疾患チップ・よくみられる疾患チップ）と `openDiseaseAcrossSpecies`（横断検索結果）が**フィルタ結果の先頭行を無条件展開**していた。フィルタは部分一致のため「Gastritis」クリックで「Chronic Gastritis」が開く等、**意図と違う疾患に着地**
+- 共有ヘルパー `_pickListItemByName(list, query)` を新設: 括弧サフィックス前の基底名の完全一致（日英・大文字小文字無視）を優先し、無ければ先頭行にフォールバック。`navigateToDrug` の同一インラインロジックも本ヘルパーに統合（3ナビゲーション全てが同じ着地規則）
+- 疾患行テンプレートに `data-name` / `data-name-ja` を付与（薬品行と同形式）
+- 回帰テスト: `test_app_js_navigation_lands_on_exact_match` + グラウンディングの `test_api_diseases_diagnosis_grounded_at_read_time` / `test_api_diseases_grounding_never_overwrites_curated_prose`
+
+### 麻酔データ監査（結果: 健全）
+- 全21種×全8カテゴリ完備、188プロトコル、薬剤行の用量欠落0、参考文献全種あり
+- 主要用量のエビデンス照合: RECOVER（エピネフリン 0.01 mg/kg 低用量・アトロピン 0.02-0.04）、ウサギ アトロピン 0.05（アトロピナーゼ考慮）、猫 ALF 5 mg/kg IV（Tamura 2021）、犬猫プロポフォール 2-6 mg/kg 等 — 逸脱なし
+
+### テスト・CI
+- ruff check: repo全体 clean（従来は変更ファイルのみ）、ruff format: 変更ファイル通過
+- ServiceWorker: `CACHE_NAME` v105 → **v106**

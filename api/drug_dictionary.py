@@ -52,6 +52,7 @@ from api.drug_batch_30 import (
     METOCLOPRAMIDE_LACTATION_PATCH_30,
 )
 from api.drug_batch_31 import DRUGS_BATCH_31
+from api.drug_batch_32 import DRUGS_BATCH_32
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -10553,6 +10554,13 @@ for _drug31 in DRUGS_BATCH_31:
     if _drug31["id"] not in _drug_index:
         DRUGS.append(_drug31)
         _drug_index[_drug31["id"]] = _drug31
+
+# バッチ32: 猫糖尿病の疾患エントリが推奨するのに未収載だったSGLT2阻害薬2剤
+# （ベキサグリフロジン/Bexacat, ベラグリフロジン/Senvelgo — 正常血糖DKA警告付き）
+for _drug32 in DRUGS_BATCH_32:
+    if _drug32["id"] not in _drug_index:
+        DRUGS.append(_drug32)
+        _drug_index[_drug32["id"]] = _drug32
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
