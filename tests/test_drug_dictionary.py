@@ -189,6 +189,33 @@ def test_aspirin_present_with_feline_dosing_caution():
     assert "q24h" not in cat["dosage"].lower()
 
 
+def test_sglt2_inhibitors_present_with_edka_warning():
+    """The cat Diabetes Mellitus entry recommends bexagliflozin (Bexacat) and
+    velagliflozin (Senvelgo), so both SGLT2 inhibitors must be documented with
+    dosing and the class-defining euglycemic-DKA / insulin-naive-only warnings.
+    Guards the referenced-but-absent gap for this drug class."""
+    for drug_id, dose_marker in (("bexagliflozin", "15 mg"), ("velagliflozin", "1 mg/kg")):
+        entry = next((d for d in DRUGS if d["id"] == drug_id), None)
+        assert entry is not None, f"{drug_id} missing from drug manual"
+        assert entry["category"] in DRUG_CATEGORIES
+        cat = entry["species_info"]["cat"]
+        assert cat["safe"] is True
+        assert dose_marker in cat["dosage"]
+        # Insulin-naive restriction must be stated where the dose is read.
+        assert "insulin-naive" in cat["dosage"].lower()
+        # The euglycemic-DKA hazard must be documented (ketones can rise while
+        # glucose stays normal — the single most important safety fact).
+        combined = (cat.get("notes", "") + entry.get("side_effects", "")).lower()
+        assert "ketoacidosis" in combined or "dka" in combined
+        assert "ketone" in combined
+        # Insulin must be listed as a contraindicated interaction.
+        referenced = {i["drug"] for i in entry.get("drug_interactions", [])}
+        assert "insulin" in referenced
+        # Dogs must be flagged unestablished/not indicated, never dosed.
+        dog = entry["species_info"]["dog"]
+        assert dog["safe"] is False
+
+
 def test_allopurinol_present_with_azathioprine_interaction():
     """Allopurinol is referenced as an interacting drug by azathioprine,
     cyclophosphamide and the aminopenicillins, and is itself a staple for urate

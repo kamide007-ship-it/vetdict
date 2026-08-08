@@ -4327,7 +4327,7 @@ function renderDiseaseDb(){
     const _dCat=d._cat||classifyDisease(d);
     const _dCatObj=DISEASE_CATEGORIES[_dCat];
     const _dCatLbl=currentLang==="ja"?(_dCatObj?.ja||"その他"):(_dCatObj?.en||"Other");
-    return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false">
+    return`<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false" data-name="${escapeHtml(d.name||"")}" data-name-ja="${escapeHtml(d.name_ja||"")}">
       <div class="d-name">${dPrimary} <span class="d-name-ja">${dSecondary}</span></div>
       <div class="d-meta"><span class="d-cat-badge" data-cat="${escapeHtml(_dCat)}">${escapeHtml(_dCatLbl)}</span>${severityBadge(d.severity)}</div>
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
@@ -4420,7 +4420,7 @@ function openDiseaseAcrossSpecies(name,species){
     if(input)input.value=name;
     renderDiseaseDb();
     const list=document.getElementById("diseaseDbList");
-    if(list){const first=list.querySelector(".disease-db-item");if(first&&!first.querySelector(".disease-detail.open"))toggleDbItem(first);}
+    if(list){const pick=_pickListItemByName(list,name);if(pick&&!pick.querySelector(".disease-detail.open"))toggleDbItem(pick);}
   };
   setTimeout(apply,needSwitch?200:0);
 }
@@ -4472,16 +4472,11 @@ function navigateToDrug(drugName){
   setTimeout(()=>{
     const list=document.getElementById("drugList");
     if(!list)return;
-    const items=[...list.querySelectorAll(".disease-db-item")];
-    if(!items.length)return;
     /* Prefer the item whose base name exactly matches the search term. The drug
        filter is a substring match, so "デトミジン" also lists Medetomidine and
        "メデトミジン" also lists Dexmedetomidine; matching the base name (before any
        brand suffix in parentheses) lands on the intended drug, not the first row. */
-    const base=s=>String(s||"").toLowerCase().split(/[(（]/)[0].trim();
-    const target=base(drugName);
-    const exact=items.find(it=>base(it.dataset.name)===target||base(it.dataset.nameJa)===target);
-    const pick=exact||items[0];
+    const pick=_pickListItemByName(list,drugName);
     if(pick&&!pick.querySelector(".disease-detail.open"))toggleDbItem(pick);
   },350);
 }
@@ -4528,6 +4523,20 @@ function hydrateRelatedDiseases(root){
     holder.innerHTML=`<div class="related-diseases-heading">${heading}</div><div class="related-diseases-list">${chips}</div>`;
   });
 }
+/* Pick the list row whose name exactly matches the navigation query. The list
+   filter is a substring match, so navigating to "Gastritis" also lists
+   "Chronic Gastritis" (which sorts first) — expanding the first row then opens
+   the WRONG disease. Prefer an exact base-name match (before any parenthetical
+   suffix, case-insensitive) in either language, mirroring the same fix already
+   applied to drug navigation; fall back to the first row only when nothing
+   matches exactly. */
+function _pickListItemByName(list,query){
+  const items=[...list.querySelectorAll(".disease-db-item")];
+  if(!items.length)return null;
+  const base=s=>String(s||"").toLowerCase().split(/[(（]/)[0].trim();
+  const target=base(query);
+  return items.find(it=>base(it.dataset.name)===target||base(it.dataset.nameJa)===target)||items[0];
+}
 function navigateToDiseaseDb(query){
   _pushNavHistory(currentView,"database",query);
   switchView("database");
@@ -4539,8 +4548,8 @@ function navigateToDiseaseDb(query){
   setTimeout(()=>{
     const list=document.getElementById("diseaseDbList");
     if(!list)return;
-    const first=list.querySelector(".disease-db-item");
-    if(first&&!first.querySelector(".disease-detail.open"))toggleDbItem(first);
+    const pick=_pickListItemByName(list,query);
+    if(pick&&!pick.querySelector(".disease-detail.open"))toggleDbItem(pick);
   },350);
 }
 

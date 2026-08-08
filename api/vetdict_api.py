@@ -1186,6 +1186,36 @@ def disease_detail(species: str, disease_slug: str):
                 )
             }
 
+    # Fill empty clinical_signs / diagnosis sections from the record's own
+    # signs and recommended tests (same read-time grounding as the SPA disease
+    # browser in health_checker) so the SEO page shows the sections its SQLite
+    # counterpart shows. Work on a copy: the source dict belongs to the loaded
+    # module and must never be mutated in place.
+    try:
+        from api.health_checker import (
+            _build_recommended_tests_display,
+            _build_symptoms_display,
+            _ground_missing_supplementary_fields,
+        )
+
+        _needs_cs = (
+            not (disease.get("clinical_signs") or "").strip() and not (disease.get("clinical_signs_ja") or "").strip()
+        )
+        _needs_dx = not (disease.get("diagnosis") or "").strip() or not (disease.get("diagnosis_ja") or "").strip()
+        if _needs_cs or _needs_dx:
+            disease = dict(disease)
+            _syms = disease.get("symptoms") or []
+            if isinstance(_syms, set):
+                _syms = sorted(_syms)
+            disease.setdefault("symptoms_display", _build_symptoms_display(_syms, species_key))
+            disease.setdefault(
+                "recommended_tests_display",
+                _build_recommended_tests_display(disease.get("recommended_tests") or [], species_key),
+            )
+            _ground_missing_supplementary_fields(disease, species_key)
+    except ImportError:
+        pass
+
     sp_label_ja = sp_meta.get("name_ja", species_key)
     sp_label_en = sp_meta.get("name_en", species_key.title())
 

@@ -127,3 +127,60 @@ def test_app_js_related_disease_navigation_present():
     # Clicking a chip must route through navigateToDiseaseDb.
     assert 'e.target.closest(".related-disease-chip")' in APP_JS
     assert "hydrateRelatedDiseases(detail)" in APP_JS
+
+
+# ---------------------------------------------------------------------------
+# Read-time grounding: the fallback serving path must fill empty diagnosis /
+# clinical-signs sections (the SQLite build already does; low-memory production
+# serves the Python-module path, which previously left 733 records sectionless)
+# ---------------------------------------------------------------------------
+
+
+def test_api_diseases_diagnosis_grounded_at_read_time():
+    client = app.test_client()
+    for species in ("dog", "cat", "rabbit", "bird"):
+        diseases = client.get(f"/api/health-check/diseases?species={species}").get_json()["diseases"]
+        # Japanese diagnosis must be present wherever the record stores tests;
+        # after grounding no mainstream-species record should ship it empty.
+        no_dx_ja = [d["name"] for d in diseases if not (d.get("diagnosis_ja") or "").strip()]
+        assert not no_dx_ja, f"{species}: diagnosis_ja empty for {no_dx_ja[:5]}"
+        # Clinical signs: never empty in BOTH languages when the record has
+        # its own symptom list to ground from.
+        both_empty = [
+            d["name"]
+            for d in diseases
+            if not (d.get("clinical_signs") or "").strip()
+            and not (d.get("clinical_signs_ja") or "").strip()
+            and (d.get("symptoms_display") or [])
+        ]
+        assert not both_empty, f"{species}: clinical_signs empty both languages for {both_empty[:5]}"
+
+
+def test_api_diseases_grounding_never_overwrites_curated_prose():
+    # A record with curated diagnosis prose must keep it verbatim (grounding
+    # only fills blanks). FIP has long-standing curated content.
+    client = app.test_client()
+    diseases = client.get("/api/health-check/diseases?species=cat").get_json()["diseases"]
+    fip = next((d for d in diseases if "Infectious Peritonitis" in (d.get("name") or "")), None)
+    assert fip is not None
+    # Curated text is substantive, not the short grounded template.
+    assert (fip.get("diagnosis_ja") or "").strip()
+    assert not (fip.get("diagnosis_ja") or "").startswith("診断は")
+
+
+# ---------------------------------------------------------------------------
+# SPA: cross-link navigation must land on the exactly-named row, not the first
+# substring match ("Gastritis" must not open "Chronic Gastritis")
+# ---------------------------------------------------------------------------
+
+
+def test_app_js_navigation_lands_on_exact_match():
+    # Shared exact-match picker exists…
+    assert "function _pickListItemByName" in APP_JS
+    # …and every cross-link navigation routes through it (disease chips,
+    # cross-species results, drug links).
+    assert APP_JS.count("_pickListItemByName(list,") >= 3
+    # Disease rows must expose the names the picker matches against.
+    assert 'class="disease-db-item" role="button" tabindex="0" aria-expanded="false" data-name=' in APP_JS
+    # No navigation may blindly expand the first row of a filtered list.
+    assert 'const first=list.querySelector(".disease-db-item")' not in APP_JS
