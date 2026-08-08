@@ -321,8 +321,8 @@ class TestScenarioAmbiguousOnsetTiming:
 
         # If questions are generated, they should have proper structure
         for question in questions:
-            assert hasattr(question, 'question_text_en')
-            assert hasattr(question, 'question_text_ja')
+            assert hasattr(question, "question_text_en")
+            assert hasattr(question, "question_text_ja")
             assert len(question.question_text_en) > 0
 
 

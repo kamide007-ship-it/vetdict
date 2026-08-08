@@ -91,9 +91,7 @@ class TestHTMLIntegration:
         css_index = html_content.find("main.css")
         body_index = html_content.find("<body")
 
-        assert (
-            css_index < body_index
-        ), "CSS should be in <head>, before <body>"
+        assert css_index < body_index, "CSS should be in <head>, before <body>"
 
     def test_js_loaded_at_end_of_body(self):
         """Test that JavaScript is loaded at end of body."""
@@ -237,7 +235,7 @@ class TestAPIFrontendIntegration:
         # Check for correct JSON structure
         assert "symptom_ids" in js_content
         assert "suspected_diseases" in js_content
-        assert "method: \"POST\"" in js_content or "method: 'POST'" in js_content
+        assert 'method: "POST"' in js_content or "method: 'POST'" in js_content
 
     def test_api_response_handling(self):
         """Test that API response is properly handled."""
