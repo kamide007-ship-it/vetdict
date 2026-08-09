@@ -57,9 +57,7 @@ def test_every_entry_is_locked_and_served_ids_match_locks():
     for d in dd:
         locked = id_locks.locked_id_for("degu", d)
         assert locked, f"unlocked degu entry: {d.get('name')!r} — run scripts.quality.build_id_locks"
-        assert resolved[id(d)] == locked, (
-            f"served id {resolved[id(d)]!r} != locked id {locked!r} for {d.get('name')!r}"
-        )
+        assert resolved[id(d)] == locked, f"served id {resolved[id(d)]!r} != locked id {locked!r} for {d.get('name')!r}"
     ids = list(resolved.values())
     assert len(ids) == len(set(ids)), "duplicate served ids"
 
