@@ -462,6 +462,88 @@ SPECIES_PREVALENCE = {
         "Polydactyly": "rare",
     },
     # ==================================================================
+    # HORSE — curated equine tiers (keys match equine DB names exactly)
+    # Evidence: Reed & Bayly Equine Internal Medicine 4th ed; NAHMS Equine
+    # 2015; Sykes 2015 ECEIM EGUS consensus; Wylie 2011 (laminitis);
+    # McIlwraith 2012 (OA); Couetil 2016 equine asthma consensus;
+    # McFarlane 2011 (PPID); Gerding & Gilger 2016 (ERU)
+    # ==================================================================
+    "horse": {
+        # very_common
+        "Colic": "very_common",  # Leading equine emergency (NAHMS: 4-10/100 horse-yr)
+        "Gastric Ulcers (EGUS)": "very_common",  # 37-93% by discipline (Sykes 2015)
+        "Osteoarthritis": "very_common",  # Leading cause of lameness (McIlwraith 2012)
+        "Internal Parasites": "very_common",  # Cyathostomins ubiquitous
+        "Hoof Abscess": "very_common",  # Most common cause of acute severe lameness
+        "Thrush": "very_common",  # Ubiquitous frog infection in wet management
+        # common
+        "Laminitis": "common",  # Wylie 2011: 1.5-34% prevalence estimates
+        "Equine Asthma (IAD/RAO)": "common",  # Stabled horses (Couetil 2016)
+        "Equine Sarcoid": "common",  # Most common equine skin tumor
+        "Melanoma": "common",  # ~80% lifetime risk in gray horses
+        "Sweet Itch (Culicoides Hypersensitivity)": "common",  # Most common allergic dermatosis
+        "Dermatophilosis (Rain Scald)": "common",
+        "Dermatophytosis (Ringworm)": "common",
+        "Scratches (Pastern Dermatitis)": "common",
+        "Urticaria (Hives)": "common",
+        "Corneal Ulcer": "common",  # Most common equine ophthalmic emergency
+        "Equine Recurrent Uveitis": "common",  # Leading cause of equine blindness
+        "Pituitary Pars Intermedia Dysfunction (PPID / Cushing's)": "common",  # >20% of aged horses
+        "Equine Metabolic Syndrome (EMS)": "common",
+        "Superficial Digital Flexor Tendinitis": "common",  # Athletic horses
+        "Proximal Suspensory Desmitis": "common",  # Sport horses
+        "Navicular Syndrome": "common",
+        "Exertional Rhabdomyolysis (Tying Up)": "common",
+        "Back Pain": "common",
+        "Kissing Spines": "common",  # Radiographic ORDSP up to 39% (Zimmerman)
+        "Splints": "common",  # Young working horses
+        "Bone Spavin": "common",
+        "Osteochondritis Dissecans": "common",  # Young sport horses
+        "Angular Limb Deformities": "common",  # Foals
+        "Strangles": "common",
+        "Equine Influenza": "common",
+        "Equine Herpesvirus (EHV-1/4)": "common",
+        "Esophageal Obstruction (Choke)": "common",
+        "Endometritis": "common",  # No.1 cause of broodmare subfertility
+        "Retained Fetal Membranes": "common",  # 2-10% of foalings
+        "Wound Infection": "common",
+        "Cellulitis": "common",
+        "White Line Disease": "common",
+        # uncommon
+        "Sand Colic": "uncommon",  # Region/management dependent
+        "Enterolithiasis": "uncommon",
+        "Colitis": "uncommon",
+        "Pleuropneumonia": "uncommon",
+        "Sinusitis": "uncommon",
+        "Guttural Pouch Empyema": "uncommon",
+        "Guttural Pouch Mycosis": "uncommon",
+        "Tetanus": "uncommon",  # Vaccination-dependent
+        "Cataracts": "uncommon",
+        "Anhidrosis": "uncommon",  # Hot/humid climates
+        "Equine Hyperlipemia": "uncommon",  # Ponies, donkeys, miniatures
+        "Babesiosis": "uncommon",  # Tick-borne; JP override raises to common
+        "Equine Protozoal Myeloencephalitis": "uncommon",  # Americas; JP override rare
+        "West Nile Encephalitis": "uncommon",  # JP override rare
+        "Rhodococcus equi Pneumonia (Foal)": "uncommon",  # Endemic farms
+        "Neonatal Septicemia": "uncommon",
+        "Fracture": "uncommon",
+        "Lymphangitis": "uncommon",
+        "Placentitis": "uncommon",
+        "Cryptorchidism": "uncommon",
+        "Bog Spavin": "uncommon",
+        "Ringbone": "uncommon",
+        "Habronemiasis (Summer Sores)": "uncommon",
+        # rare
+        "Canker": "rare",
+        "Botulism": "rare",
+        "Mange": "rare",
+        "Getah Virus": "rare",  # Asia-specific; JP override common
+        "Japanese Encephalitis": "rare",  # Asia-specific; JP override common
+        "African Horse Sickness": "rare",
+        "Dourine": "rare",
+        "Venezuelan Equine Encephalomyelitis": "rare",
+    },
+    # ==================================================================
     # RABBIT — 35+ entries (expanded from ~23)
     # ==================================================================
     "rabbit": {
@@ -528,7 +610,6 @@ SPECIES_PREVALENCE = {
         "Clostridial Enterotoxemia": "common",
         "Colitis": "common",
         "Cystitis": "common",
-        "Diarrhea (Acute)": "common",
         "Heatstroke (Neurological)": "common",
         "Mastitis": "common",
         "Dehydration": "common",
@@ -614,11 +695,11 @@ SPECIES_PREVALENCE = {
         "Pacheco's Disease (Psittacid Herpesvirus)": "common",
         "Crop Burns": "common",
         "Mycobacteriosis (Avian TB)": "common",
-        "Renal Disease": "common",
+        "Renal Failure (Acute / Chronic)": "common",
         "Iodine Deficiency (Thyroid Hyperplasia)": "common",
         "Cloacitis": "common",
         "Xanthoma": "common",
-        "Papillomatosis": "common",
+        "Cloacal Papillomatosis": "common",
         "Feather Cyst": "common",
         "Zinc Toxicosis": "common",
         "Lead Poisoning": "common",
@@ -704,7 +785,7 @@ SPECIES_PREVALENCE = {
         "Renal Failure (Chronic Kidney Disease)": "uncommon",
         "Hemipenal Prolapse": "uncommon",
         "Nematode Infection": "very_common",
-        "Fungal Dermatitis": "uncommon",
+        "Dermal Mycosis (Non-CANV Fungal Dermatitis)": "uncommon",
         "Hepatic Lipidosis": "uncommon",
         "Salmonellosis": "uncommon",
         "Neoplasia (General)": "uncommon",
@@ -742,6 +823,7 @@ SPECIES_PREVALENCE = {
     "fish": {
         # very_common
         "Ichthyophthirius (White Spot Disease / Ich)": "very_common",
+        "Fin Rot (Bacterial/Fungal)": "very_common",
         "Columnaris Disease": "very_common",
         "Ammonia Poisoning": "very_common",
         "Swim Bladder Disorder": "very_common",
@@ -901,7 +983,7 @@ SPECIES_PREVALENCE = {
         "Lice Infestation (Gliricola/Gyropus)": "very_common",
         "Heat Stroke": "very_common",
         "Malocclusion": "very_common",
-        "Skin Abscess": "common",
+        "Subcutaneous Abscess": "common",
         "Alopecia": "common",
         "Cystitis": "common",
         "Dystocia": "common",
@@ -909,7 +991,7 @@ SPECIES_PREVALENCE = {
         "Intestinal Torsion": "common",
         "Mammary Tumor": "common",
         "Trichofolliculoma": "common",
-        "Pneumonia (Viral)": "common",
+        "Adenovirus Pneumonia": "common",
         "Rectal Prolapse": "common",
         "Pedal Abscess": "common",
         "Hepatic Lipidosis": "uncommon",
@@ -1049,7 +1131,7 @@ SPECIES_PREVALENCE = {
         "Ammonia Toxicosis": "common",
         "Organ Prolapse (Gastric/Intestinal/Cloacal)": "common",
         "Corneal Lipidosis": "uncommon",
-        "Renal Disease": "uncommon",
+        "Renal Failure": "uncommon",
         "Neoplasia / Tumors": "uncommon",
         "Thiamine Deficiency": "uncommon",
         "Septicemia": "uncommon",
@@ -1103,8 +1185,7 @@ SPECIES_PREVALENCE = {
         "Diabetes Mellitus - Chinchilla": "common",
         "Urolithiasis": "common",
         "Skin Abscess": "common",
-        "Rectal Prolapse": "common",
-        "Fatty Liver Disease": "common",
+        "Prolapsed Rectum": "common",
         "Cardiomyopathy": "uncommon",
         "Lymphoma": "uncommon",
         "Listeriosis - Chinchilla": "uncommon",
@@ -1113,7 +1194,7 @@ SPECIES_PREVALENCE = {
         "Toxoplasmosis": "rare",
         "Chordoma": "rare",
         # --- Additional chinchilla entries ---
-        "Dental Abscess": "very_common",
+        "Tooth Root Abscess": "very_common",
         "Dental Disease (Molar Elongation)": "very_common",
         "Slobbers (Dental-Related)": "very_common",
         "Bumblefoot (Pododermatitis)": "common",
@@ -1162,7 +1243,6 @@ SPECIES_PREVALENCE = {
         "Obesity": "common",
         "Conjunctivitis": "common",
         "Pneumonia": "common",
-        "Heatstroke": "common",
         "Elodontoma (Dental Tumor)": "common",
         "Hepatic Lipidosis": "uncommon",
         "Cardiomyopathy": "uncommon",
@@ -1208,19 +1288,19 @@ SPECIES_PREVALENCE = {
         "Lymphoma": "common",
         # --- Expanded exotic_other entries ---
         "Dental Disease (Exotic)": "very_common",
-        "Gastrointestinal Parasites": "very_common",
-        "Skin Infection (Bacterial)": "very_common",
+        "Dermatological Bacterial Infection": "very_common",
         "Obesity": "very_common",
         "Dehydration": "common",
         "GI Stasis": "common",
         "Pneumonia (Bacterial)": "common",
-        "Heatstroke": "common",
+        "Heat Stroke": "common",
         "Skin Abscess": "common",
         "Conjunctivitis": "common",
         "Diarrhea (Non-specific)": "common",
         "Constipation": "common",
-        "Mite Infestation": "common",
-        "Trauma / Fracture": "common",
+        "Mite Infestation (Tarantula)": "common",
+        "Fracture (Limb)": "common",
+        "Trauma / Wound Infection (Exotic)": "common",
         "Hepatic Lipidosis": "uncommon",
         "Renal Disease": "uncommon",
         "Neoplasia (General)": "uncommon",
@@ -1239,16 +1319,12 @@ SPECIES_PREVALENCE = {
         "Hedgehog Wobbly Hedgehog Syndrome (WHS)": "common",
         "Hedgehog Obesity": "common",
         "Hedgehog Cardiomyopathy": "common",
-        "Ich (White Spot Disease)": "common",
-        "Swim Bladder Disease": "common",
-        "Fin Rot": "common",
         "Dippity Pig Syndrome": "common",
         "Mange (Sarcoptic)": "common",
         "Hoof Overgrowth / Cracks (Porcine)": "common",
         "Sugar Glider Self-Mutilation": "uncommon",
         "Sugar Glider Nutritional Osteodystrophy": "uncommon",
         "Odontoma (Prairie Dog)": "uncommon",
-        "Koi Herpesvirus Disease (KHV)": "uncommon",
         "Ferret Canine Distemper": "rare",
         "Monkeypox": "rare",
         "Plague (Yersinia pestis)": "rare",
@@ -1542,42 +1618,44 @@ JAPAN_REGIONAL_ADJUSTMENTS = {
         # LESS common / absent in Japan
         "Salmon Poisoning Disease": "rare",  # Pacific NW North America only
         "Blastomycosis": "rare",  # Americas endemic, imported only
-        "Coccidioidomycosis": "rare",  # Americas endemic
+        "Coccidioidomycosis (Valley Fever)": "rare",  # Americas endemic
         "Histoplasmosis": "rare",  # Americas endemic
         "Rabies": "rare",  # Eliminated since 1957
-        "Chagas Disease (Trypanosomiasis)": "rare",  # Americas only
-        "Leishmaniasis (Visceral)": "rare",  # Not endemic
+        "Leishmaniasis": "rare",  # Not endemic
     },
     "cat": {
         # MORE common in Japan
-        "Feline Infectious Peritonitis (FIP)": "common",  # High multi-cat density
+        "Feline Infectious Peritonitis (FIP) - Wet Form": "common",  # High multi-cat density
+        "Feline Infectious Peritonitis (FIP) - Dry Form": "common",  # High multi-cat density
         "Feline Leukemia Virus (FeLV)": "common",  # Outdoor cats common
         "Feline Immunodeficiency Virus (FIV)": "common",  # High outdoor cat population
         "Hyperthyroidism": "very_common",  # Aging cat population
         "Chronic Kidney Disease (CKD)": "very_common",  # #1 cause of death in JP cats
         # LESS common / absent in Japan
         "Rabies": "rare",  # Eliminated
-        "Histoplasmosis": "rare",  # Americas endemic
-        "Cytauxzoonosis": "rare",  # Americas (tick-borne)
+        "Feline Histoplasmosis": "rare",  # Americas endemic
+        "Cytauxzoon felis (Acute Cytauxzoonosis)": "rare",  # Americas (tick-borne)
     },
     "horse": {
         # MORE common in Japan
         "Japanese Encephalitis": "common",  # Endemic, mosquito-borne
-        "Getah Virus Infection": "common",  # Endemic in Japanese horses
-        "Babesiosis (Equine)": "common",  # Tick-borne, endemic
+        "Getah Virus": "common",  # Endemic in Japanese horses (JRA outbreaks)
+        "Babesiosis": "common",  # Tick-borne, endemic
         # LESS common / absent in Japan
         "African Horse Sickness": "rare",  # Africa/Middle East
         "Dourine": "rare",  # Not present in Japan
-        "Venezuelan Equine Encephalitis": "rare",  # Americas only
+        "Venezuelan Equine Encephalomyelitis": "rare",  # Americas only
+        "Equine Protozoal Myeloencephalitis": "rare",  # Opossum host absent in Japan
+        "West Nile Encephalitis": "rare",  # WNV not established in Japan
     },
     "rabbit": {
         # MORE common in Japan
-        "Pasteurellosis": "very_common",  # Most common rabbit pathogen in JP
-        "Encephalitozoon cuniculi": "common",  # Widespread in pet rabbits
-        "GI Stasis": "very_common",  # #1 rabbit emergency in JP practice
+        "Pasteurellosis (Snuffles)": "very_common",  # Most common rabbit pathogen in JP
+        "Encephalitozoon cuniculi (E. cuniculi)": "common",  # Widespread in pet rabbits
+        "Gastrointestinal Stasis": "very_common",  # No.1 rabbit emergency in JP practice
         # LESS common in Japan
         "Myxomatosis": "rare",  # No endemic myxoma in Japan
-        "Rabbit Hemorrhagic Disease (RHDV)": "uncommon",  # Outbreaks sporadic in JP
+        "Rabbit Hemorrhagic Disease (RHD)": "uncommon",  # Outbreaks sporadic in JP
     },
     "ferret": {
         # MORE common in Japan
@@ -1589,8 +1667,8 @@ JAPAN_REGIONAL_ADJUSTMENTS = {
     },
     "fish": {
         # Japan-specific aquaculture and ornamental fish diseases
-        "Koi Herpesvirus Disease (KHV)": "common",  # Reportable in Japan, outbreaks
-        "White Spot Disease (Ichthyophthirius)": "very_common",
+        "Koi Herpesvirus Disease (KHV / CyHV-3)": "common",  # Reportable in Japan, outbreaks
+        "Ichthyophthirius (White Spot Disease / Ich)": "very_common",
         "Columnaris Disease": "very_common",  # Warm water, common in JP summer
     },
 }
@@ -1601,26 +1679,25 @@ INTERNATIONAL_REGIONAL_ADJUSTMENTS = {
         "Heartworm Disease": "common",  # Varies by region globally
         "Salmon Poisoning Disease": "uncommon",  # Pacific NW North America
         "Blastomycosis": "uncommon",  # Ohio/Mississippi river valleys
-        "Coccidioidomycosis": "uncommon",  # US Southwest, Central America
+        "Coccidioidomycosis (Valley Fever)": "uncommon",  # US Southwest, Central America
         "Histoplasmosis": "uncommon",  # Americas
         "Babesiosis": "uncommon",  # Global but more focal
         "Rabies": "common",  # Still endemic in most countries
-        "Leishmaniasis (Visceral)": "uncommon",  # Mediterranean, South America
-        "Chagas Disease (Trypanosomiasis)": "uncommon",  # Americas
+        "Leishmaniasis": "uncommon",  # Mediterranean, South America
     },
     "cat": {
         "Rabies": "uncommon",  # Still endemic globally
-        "Cytauxzoonosis": "uncommon",  # US Southeast
-        "Histoplasmosis": "uncommon",  # Americas
+        "Cytauxzoon felis (Acute Cytauxzoonosis)": "uncommon",  # US Southeast
+        "Feline Histoplasmosis": "uncommon",  # Americas
     },
     "horse": {
         "African Horse Sickness": "uncommon",  # Africa, Middle East
         "Japanese Encephalitis": "rare",  # Asia-specific
-        "Getah Virus Infection": "rare",  # Asia-specific
+        "Getah Virus": "rare",  # Asia-specific
     },
     "rabbit": {
         "Myxomatosis": "common",  # Endemic in Europe, Australia
-        "Rabbit Hemorrhagic Disease (RHDV)": "common",  # Endemic in Europe, Australia
+        "Rabbit Hemorrhagic Disease (RHD)": "common",  # Endemic in Europe, Australia
     },
 }
 

@@ -953,3 +953,63 @@ class TestEmergencyProtocolsAdditions:
                 assert p.get("key_drugs") and len(p["key_drugs"]) >= 3
                 assert p.get("monitoring")
                 assert p.get("ref")
+
+
+def test_batch33_referenced_but_absent_drugs_present():
+    """2026-08 audit: five drugs referenced by the manual's own interaction
+    lists or by the anesthesia protocols had no formulary entry. Guard the gap:
+    methotrexate (10 interaction refs), quinidine (equine AF treatment of
+    choice), pyrimethamine (EPM backbone), EMLA cream (named by rabbit
+    anesthesia protocols), niacinamide (tetracycline/niacinamide combination
+    for canine immune-mediated dermatoses)."""
+    by_id = {d["id"]: d for d in DRUGS}
+    for drug_id in ("methotrexate", "quinidine", "pyrimethamine", "emla_cream", "niacinamide"):
+        entry = by_id.get(drug_id)
+        assert entry is not None, f"{drug_id} missing from drug manual"
+        assert entry["category"] in DRUG_CATEGORIES
+        assert entry.get("mechanism") and entry.get("mechanism_ja")
+        assert entry.get("side_effects_ja") and entry.get("contraindications_ja")
+        for sp, info in entry["species_info"].items():
+            if info.get("safe"):
+                assert (info.get("dosage") or "").strip(), f"{drug_id}/{sp}: safe but no dosage"
+                assert (info.get("dosage_ja") or "").strip(), f"{drug_id}/{sp}: safe but no dosage_ja"
+
+
+def test_quinidine_equine_af_protocol_is_evidence_based():
+    """Quinidine sulfate is the pharmacologic conversion agent for equine atrial
+    fibrillation. The horse entry must state the 22 mg/kg q2h NGT protocol and
+    the QRS-widening stop criterion (Reed & Bayly; ACVIM consensus 2014)."""
+    quinidine = next(d for d in DRUGS if d["id"] == "quinidine")
+    horse = quinidine["species_info"]["horse"]
+    assert horse["safe"] is True
+    assert "22 mg/kg" in horse["dosage"]
+    assert "q2h" in horse["dosage"]
+    assert "25%" in horse["dosage"]  # QRS widening >25% = stop signal
+    # The classic digoxin doubling interaction must be documented.
+    refs = {i["drug"].lower() for i in quinidine.get("drug_interactions", [])}
+    assert "digoxin" in refs
+
+
+def test_pyrimethamine_epm_combination_and_pregnancy_caution():
+    """EPM therapy is pyrimethamine 1 mg/kg WITH sulfadiazine 20 mg/kg PO q24h
+    (ReBalance, FDA NADA 141-240); folic acid supplementation in pregnant mares
+    on this protocol is associated with congenital defects and must be warned."""
+    pyri = next(d for d in DRUGS if d["id"] == "pyrimethamine")
+    horse = pyri["species_info"]["horse"]
+    assert "1 mg/kg" in horse["dosage"]
+    assert "sulfadiazine" in horse["dosage"].lower()
+    assert "20 mg/kg" in horse["dosage"]
+    notes = horse.get("notes", "").lower()
+    assert "folic" in notes and "pregnan" in notes
+
+
+def test_emla_cream_feline_methemoglobinemia_caution():
+    """EMLA is named by the rabbit anesthesia protocols; the entry must carry
+    the prilocaine methemoglobinemia caution for cats and an occlusion/timing
+    instruction for rabbits (Flecknell, BSAVA Manual of Rabbit Medicine)."""
+    emla = next(d for d in DRUGS if d["id"] == "emla_cream")
+    rabbit = emla["species_info"]["rabbit"]
+    assert rabbit["safe"] is True
+    assert "30-60" in rabbit["dosage"]
+    cat_combined = (emla["species_info"]["cat"].get("notes", "") + emla.get("side_effects", "")).lower()
+    assert "methemoglobin" in cat_combined

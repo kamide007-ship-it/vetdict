@@ -184,3 +184,19 @@ def test_app_js_navigation_lands_on_exact_match():
     assert 'class="disease-db-item" role="button" tabindex="0" aria-expanded="false" data-name=' in APP_JS
     # No navigation may blindly expand the first row of a filtered list.
     assert 'const first=list.querySelector(".disease-db-item")' not in APP_JS
+
+
+def test_app_js_compound_interaction_refs_are_linkified():
+    """Compound interaction references such as "Ketoconazole/itraconazole" name
+    several real drugs in one cell but never resolve as a whole, so they used to
+    render as dead text. The cell builder must split on "/" and link each
+    component that exists in the manual (one tap from the warning to the drug)."""
+    assert "function _interactionDrugCell" in APP_JS
+    # The renderer must route through the shared cell builder.
+    assert "_interactionDrugCell(ref)" in APP_JS
+    # Split-and-resolve logic for compound refs.
+    assert 'ref.split("/")' in APP_JS
+    assert "interaction-drug-part" in APP_JS
+    # EMLA (added to the formulary in batch 33) must be reachable from the
+    # anesthesia protocol text via the drug linkifier.
+    assert "EMLAクリーム" in APP_JS

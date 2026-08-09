@@ -53,6 +53,7 @@ from api.drug_batch_30 import (
 )
 from api.drug_batch_31 import DRUGS_BATCH_31
 from api.drug_batch_32 import DRUGS_BATCH_32
+from api.drug_batch_33 import DRUGS_BATCH_33
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -10561,6 +10562,14 @@ for _drug32 in DRUGS_BATCH_32:
     if _drug32["id"] not in _drug_index:
         DRUGS.append(_drug32)
         _drug_index[_drug32["id"]] = _drug32
+
+# バッチ33: 相互作用・麻酔プロトコルが参照するのに未収載だった5剤
+# （メトトレキサート, キニジン硫酸塩（馬AF第一選択）, ピリメタミン（EPM）,
+#  EMLAクリーム, ニコチン酸アミド）
+for _drug33 in DRUGS_BATCH_33:
+    if _drug33["id"] not in _drug_index:
+        DRUGS.append(_drug33)
+        _drug_index[_drug33["id"]] = _drug33
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

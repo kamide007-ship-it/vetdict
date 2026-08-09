@@ -2971,6 +2971,17 @@ def api_common_diseases(species):
     name_map = {}
     for d in diseases_list:
         name_map[d.get("name", "")] = d.get("name_ja", "")
+    if not name_map and species == "horse":
+        # Horse is not served by the generic chat species data (it uses the
+        # dedicated equine engine), so resolve Japanese labels from the equine
+        # module directly — otherwise every horse chip renders English-only.
+        try:
+            from api.species.equine_diseases import DISEASE_DATABASE as _eq_db
+
+            _eq_vals = _eq_db.values() if isinstance(_eq_db, dict) else _eq_db
+            name_map = {d.name_en: d.name_ja for d in _eq_vals}
+        except ImportError:
+            name_map = {}
     result = []
     for name, tier in prev.items():
         if tier in ("very_common", "common"):

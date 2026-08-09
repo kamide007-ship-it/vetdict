@@ -2,8 +2,8 @@
  "species": "degu",
  "schema_version": 1,
  "note": "Frozen disease ids (name→id). Append-only: existing mappings are never changed. Delete to fall back to position-derived ids.",
- "generated_at": "2026-07-09T08:24:44Z",
- "count": 199,
+ "generated_at": "2026-08-09T00:51:02Z",
+ "count": 200,
  "locks": {
   "Abdominal Tumor␟腹腔内腫瘍": "degu_0041",
   "Acute Renal Failure␟急性腎不全（デグー）": "degu_0188",
@@ -73,6 +73,7 @@
   "E. coli Enteritis␟大腸菌性腸炎": "degu_0079",
   "Ear Infection (Otitis)␟耳感染症（外耳炎）": "degu_0051",
   "Ear Infection␟耳感染症（デグー）": "degu_0170",
+  "Elodontoma (Dental Tumor)␟エロドントーマ（歯牙腫瘍）": "degu_x0a3259ee",
   "Enamel Hypoplasia␟エナメル質形成不全": "degu_0066",
   "Encephalitis␟脳炎（デグー）": "degu_0171",
   "Endometritis␟子宮内膜炎": "degu_0091",

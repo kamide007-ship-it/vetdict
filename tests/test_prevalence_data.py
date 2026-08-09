@@ -95,6 +95,30 @@ class TestPrevalenceKeysResolveToDiseases:
             "snake": ["Retained Spectacle (Retained Eye Cap)"],
             "tortoise": ["Shell Fracture / Trauma"],
         }
+        # Second remap (2026-08): renames to canonical names, plus new disease
+        # entries added for previously-inert common-tier keys.
+        fixed_round2 = {
+            "chinchilla": ["Tooth Root Abscess", "Prolapsed Rectum"],
+            "guinea_pig": [
+                "Subcutaneous Abscess",
+                "Adenovirus Pneumonia",
+                "Intestinal Torsion",  # new disease entry
+            ],
+            "bird": ["Cloacal Papillomatosis", "Renal Failure (Acute / Chronic)"],
+            "amphibian": ["Renal Failure", "Parasitic Dermatitis"],  # latter is a new entry
+            "reptile": ["Dermal Mycosis (Non-CANV Fungal Dermatitis)"],
+            "degu": ["Elodontoma (Dental Tumor)"],  # new disease entry
+            "exotic_other": [
+                "Dermatological Bacterial Infection",
+                "Heat Stroke",
+                "Mite Infestation (Tarantula)",
+                "Fracture (Limb)",
+                "Trauma / Wound Infection (Exotic)",
+            ],
+            "fish": ["Fin Rot (Bacterial/Fungal)"],
+        }
+        for species, keys in fixed_round2.items():
+            fixed.setdefault(species, []).extend(keys)
         for species, keys in fixed.items():
             names = self._disease_names(species)
             prev = SPECIES_PREVALENCE.get(species, {})
@@ -106,16 +130,36 @@ class TestPrevalenceKeysResolveToDiseases:
         # These dead keys duplicated an already-active canonical entry and were
         # removed. They must not reappear (they would render broken duplicate chips).
         removed = {
-            "dog": "Immune-Mediated Hemolytic Anemia (IMHA)",
-            "rabbit": "Snuffles (Bordetella)",
-            "bird": "Psittacosis / Chlamydiosis",
-            "guinea_pig": "Ovarian Cystic Disease",
-            "chinchilla": "Penile Fur Ring",
+            "dog": ["Immune-Mediated Hemolytic Anemia (IMHA)"],
+            "rabbit": [
+                "Snuffles (Bordetella)",
+                # Symptom-level key; acute rabbit diarrhea is covered by the active
+                # Enterotoxemia / dysbiosis / coccidiosis entries.
+                "Diarrhea (Acute)",
+            ],
+            "bird": ["Psittacosis / Chlamydiosis"],
+            "guinea_pig": ["Ovarian Cystic Disease"],
+            "chinchilla": [
+                "Penile Fur Ring",
+                "Fatty Liver Disease",  # duplicate of active "Hepatic Lipidosis"
+            ],
+            "degu": ["Heatstroke"],  # duplicate of active "Heat Stroke"
+            "exotic_other": [
+                # Duplicate of active "Intestinal Parasitism"
+                "Gastrointestinal Parasites",
+                # Aquarium fish diseases live under the dedicated fish species,
+                # where each has an active canonical prevalence key.
+                "Ich (White Spot Disease)",
+                "Fin Rot",
+                "Swim Bladder Disease",
+                "Koi Herpesvirus Disease (KHV)",
+            ],
         }
-        for species, key in removed.items():
-            assert key not in SPECIES_PREVALENCE.get(species, {}), (
-                f"{species}: removed duplicate prevalence key {key!r} reappeared"
-            )
+        for species, keys in removed.items():
+            for key in keys:
+                assert key not in SPECIES_PREVALENCE.get(species, {}), (
+                    f"{species}: removed duplicate prevalence key {key!r} reappeared"
+                )
 
     def test_dead_key_count_stays_capped(self):
         # Regression guard: the vast majority of prevalence keys must resolve to a
@@ -124,6 +168,81 @@ class TestPrevalenceKeysResolveToDiseases:
         # future edits don't silently reintroduce inert keys.
         dead = 0
         for species, diseases in SPECIES_PREVALENCE.items():
+            if species == "horse":
+                # Horse is served by the dedicated equine engine, not the generic
+                # chat species data — validated separately in TestHorsePrevalence.
+                continue
             names = self._disease_names(species)
             dead += sum(1 for k in diseases if k not in names)
-        assert dead <= 40, f"{dead} prevalence keys resolve to no disease (cap 40)"
+        assert dead <= 15, f"{dead} prevalence keys resolve to no disease (cap 15)"
+
+
+class TestHorsePrevalence:
+    """Horse was the only species with no base prevalence data: the
+    common-diseases chips rendered empty and the diagnostic prior was inert for
+    the platform developer's own species. These tests guard the curated equine
+    tier set added 2026-08 (Reed & Bayly 4th ed; NAHMS Equine 2015; Sykes 2015
+    ECEIM EGUS consensus; Wylie 2011; McIlwraith 2012)."""
+
+    @staticmethod
+    def _horse_names():
+        from api.species.equine_diseases import DISEASE_DATABASE
+
+        vals = DISEASE_DATABASE.values() if isinstance(DISEASE_DATABASE, dict) else DISEASE_DATABASE
+        return {d.name_en for d in vals}
+
+    def test_horse_has_base_prevalence(self):
+        horse = SPECIES_PREVALENCE.get("horse", {})
+        assert len(horse) >= 40, "horse base prevalence set went missing"
+        assert horse.get("Colic") == "very_common"
+        assert horse.get("Gastric Ulcers (EGUS)") == "very_common"
+        assert horse.get("Laminitis") == "common"
+
+    def test_all_horse_keys_resolve_to_equine_db_names(self):
+        names = self._horse_names()
+        horse = SPECIES_PREVALENCE.get("horse", {})
+        dead = [k for k in horse if k not in names]
+        assert not dead, f"horse prevalence keys match no equine disease: {dead}"
+
+    def test_horse_regional_adjustment_keys_resolve(self):
+        from api.species.prevalence_data import (
+            INTERNATIONAL_REGIONAL_ADJUSTMENTS,
+            JAPAN_REGIONAL_ADJUSTMENTS,
+        )
+
+        names = self._horse_names()
+        for label, adj in (
+            ("jp", JAPAN_REGIONAL_ADJUSTMENTS),
+            ("intl", INTERNATIONAL_REGIONAL_ADJUSTMENTS),
+        ):
+            dead = [k for k in adj.get("horse", {}) if k not in names]
+            assert not dead, f"{label} horse regional keys match no disease: {dead}"
+
+
+class TestRegionalAdjustmentKeysResolve:
+    """Regional overrides merge into the base map by exact disease name; a key
+    that matches no disease silently never overrides anything. All JP/INTL
+    adjustment keys (fixed 2026-08: FIP wet/dry split, Pasteurellosis
+    (Snuffles), Gastrointestinal Stasis, KHV/Ich canonical fish names, etc.)
+    must resolve."""
+
+    def test_all_regional_keys_resolve(self):
+        from api.chat.species_data import get_species_data
+        from api.species.prevalence_data import (
+            INTERNATIONAL_REGIONAL_ADJUSTMENTS,
+            JAPAN_REGIONAL_ADJUSTMENTS,
+        )
+
+        for label, adj in (
+            ("jp", JAPAN_REGIONAL_ADJUSTMENTS),
+            ("intl", INTERNATIONAL_REGIONAL_ADJUSTMENTS),
+        ):
+            for species, overrides in adj.items():
+                if species == "horse":
+                    continue  # covered by TestHorsePrevalence
+                data = get_species_data(species) or {}
+                names = {d.get("name", "") for d in data.get("diseases", [])}
+                if not names:
+                    continue
+                dead = [k for k in overrides if k not in names]
+                assert not dead, f"{label}/{species}: regional keys match no disease: {dead}"
