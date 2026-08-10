@@ -184,3 +184,24 @@ def test_app_js_navigation_lands_on_exact_match():
     assert 'class="disease-db-item" role="button" tabindex="0" aria-expanded="false" data-name=' in APP_JS
     # No navigation may blindly expand the first row of a filtered list.
     assert 'const first=list.querySelector(".disease-db-item")' not in APP_JS
+
+
+def test_app_js_chat_cards_navigate_to_disease_db():
+    """Chat candidate cards (free chat + guided consultation finals) must offer a
+    click-through that lands on the disease's DB detail via the species-aware
+    opener, and the chat containers must carry the delegated handler that makes
+    both those buttons and the embedded drug links actually navigate (previously
+    the dotted-underline drug links fell through to a bare #drugs hash jump)."""
+    # Delegated handler is defined and attached to all three chat containers.
+    assert "function _attachChatNavHandlers" in APP_JS
+    assert '"chatMessages","landingChatMessages","guidedMessages"' in APP_JS
+    # Handler routes drug links through navigateToDrug (exact-match landing)…
+    handler = APP_JS.split("function _attachChatNavHandlers", 1)[1].split("\nfunction ", 1)[0]
+    assert "navigateToDrug(" in handler
+    # …and disease buttons through the species-aware opener (chat species can
+    # differ from the DB's loaded species).
+    assert "openDiseaseAcrossSpecies(" in handler
+    # Both free-chat and guided final-result cards render the button with the
+    # data the opener needs.
+    assert APP_JS.count('class="chat-disease-open"') >= 2
+    assert 'class="chat-disease-open" data-name=' in APP_JS

@@ -216,6 +216,121 @@ def test_sglt2_inhibitors_present_with_edka_warning():
         assert dog["safe"] is False
 
 
+def test_batch33_referenced_drugs_present_with_complete_dosing():
+    """The 2026-08 audit found 14 drugs that disease treatments, interaction
+    lists and anesthesia protocols reference but the formulary did not carry.
+    Guards that each is present, categorised, and fully dosed for every
+    species flagged safe."""
+    expected = [
+        "pyrimethamine",
+        "quinidine",
+        "valacyclovir",
+        "meclizine",
+        "colchicine",
+        "leuprolide",
+        "niacinamide",
+        "dexrazoxane",
+        "methotrexate",
+        "thiamine_b1",
+        "l_carnitine",
+        "paromomycin",
+        "emla_cream",
+        "dextrose_50",
+    ]
+    index = {d["id"]: d for d in DRUGS}
+    for drug_id in expected:
+        entry = index.get(drug_id)
+        assert entry is not None, f"{drug_id} missing from drug manual"
+        assert entry["category"] in DRUG_CATEGORIES
+        assert entry["mechanism_ja"].strip() and entry["mechanism"].strip()
+        for species, info in entry["species_info"].items():
+            if info.get("safe"):
+                assert info["dosage"].strip(), f"{drug_id}/{species} missing dosage"
+                assert info["dosage_ja"].strip(), f"{drug_id}/{species} missing dosage_ja"
+
+
+def test_valacyclovir_is_flagged_fatal_in_cats():
+    """Valacyclovir is the equine EHV-1/EHM antiviral, but at herpes-therapeutic
+    doses it causes fatal hepatic/renal necrosis and marrow suppression in cats
+    (Nasisse 1997). The feline entry must be safe:False and say so; famciclovir
+    must be named as the feline alternative."""
+    vala = next((d for d in DRUGS if d["id"] == "valacyclovir"), None)
+    assert vala is not None
+    horse = vala["species_info"]["horse"]
+    assert horse["safe"] is True
+    assert "27 mg/kg" in horse["dosage"]
+    cat = vala["species_info"]["cat"]
+    assert cat["safe"] is False
+    combined = (cat.get("notes", "") + cat.get("dosage", "")).lower()
+    assert "fatal" in combined
+    assert "famciclovir" in combined
+
+
+def test_quinidine_equine_af_protocol_with_digoxin_interaction():
+    """Quinidine is the classic conversion drug for equine atrial fibrillation
+    (Reef 2014 ACVIM consensus): 22 mg/kg via NGT q2h with the QRS > 25%
+    widening stop rule, and it roughly doubles plasma digoxin. Digoxin's own
+    interaction list references it, so the entry must exist and document both."""
+    quin = next((d for d in DRUGS if d["id"] == "quinidine"), None)
+    assert quin is not None
+    horse = quin["species_info"]["horse"]
+    assert horse["safe"] is True
+    assert "22 mg/kg" in horse["dosage"]
+    assert "25%" in horse["dosage"] or "25%" in horse.get("notes", "")
+    referenced = {i["drug"].lower() for i in quin.get("drug_interactions", [])}
+    assert "digoxin" in referenced
+    # Cats have safer alternatives; the entry must not present quinidine as usable.
+    assert quin["species_info"]["cat"]["safe"] is False
+
+
+def test_paromomycin_feline_absorption_warning():
+    """Oral paromomycin caused acute renal failure and deafness in cats treated
+    for cryptosporidiosis — the damaged mucosa absorbs the aminoglycoside
+    (Gookin 1999). The feline entry must be flagged and explain the mechanism."""
+    paro = next((d for d in DRUGS if d["id"] == "paromomycin"), None)
+    assert paro is not None
+    cat = paro["species_info"]["cat"]
+    assert cat["safe"] is False
+    notes = cat.get("notes", "").lower()
+    assert "renal" in notes
+    assert "deafness" in notes
+
+
+def test_dextrose_and_emla_carry_route_safety_warnings():
+    """Dextrose 50% must warn against undiluted peripheral administration
+    (phlebitis/necrosis) and EMLA must carry the feline prilocaine
+    methemoglobinemia caution — both referenced by anesthesia protocols."""
+    dex = next((d for d in DRUGS if d["id"] == "dextrose_50"), None)
+    assert dex is not None
+    dog = dex["species_info"]["dog"]
+    assert "dilut" in dog["dosage"].lower()
+    assert "necrosis" in (dog.get("notes", "") + dex.get("side_effects", "")).lower()
+    # Ferret insulinoma rebound warning (the anesthesia protocol referencing it)
+    ferret = dex["species_info"]["ferret"]
+    assert "rebound" in (ferret.get("notes", "") + ferret.get("dosage", "")).lower()
+
+    emla = next((d for d in DRUGS if d["id"] == "emla_cream"), None)
+    assert emla is not None
+    for sp in ("rabbit", "guinea_pig"):
+        assert emla["species_info"][sp]["safe"] is True
+        assert emla["species_info"][sp]["dosage"].strip()
+    assert "methemoglobin" in (emla["species_info"]["cat"].get("notes", "") + emla.get("side_effects", "")).lower()
+
+
+def test_pyrimethamine_epm_regimen_matches_consensus():
+    """EPM disease entries reference pyrimethamine/sulfadiazine; the entry must
+    carry the FDA-approved ReBalance regimen (1 + 20 mg/kg PO q24h) and the
+    folate-antagonist marrow-suppression monitoring note."""
+    pyri = next((d for d in DRUGS if d["id"] == "pyrimethamine"), None)
+    assert pyri is not None
+    horse = pyri["species_info"]["horse"]
+    assert horse["safe"] is True
+    assert "1 mg/kg" in horse["dosage"]
+    assert "20 mg/kg" in horse["dosage"]
+    combined = (horse.get("notes", "") + pyri.get("side_effects", "")).lower()
+    assert "marrow" in combined or "cbc" in combined
+
+
 def test_allopurinol_present_with_azathioprine_interaction():
     """Allopurinol is referenced as an interacting drug by azathioprine,
     cyclophosphamide and the aminopenicillins, and is itself a staple for urate
