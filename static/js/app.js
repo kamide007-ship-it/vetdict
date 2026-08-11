@@ -1540,24 +1540,24 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:600,drugs:536,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:515,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:598,drugs:340,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:258,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:283,drugs:68,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:600,drugs:546,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:525,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:598,drugs:345,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:263,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:283,drugs:69,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:307,drugs:136,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:229,drugs:91,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
     {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:198,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:226,drugs:68,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:198,drugs:73,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:178,drugs:154,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:218,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:412,drugs:218,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:218,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:265,drugs:97,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:255,drugs:104,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:222,drugs:104,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:219,drugs:99,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:198,drugs:74,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:178,drugs:155,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:223,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:412,drugs:223,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:223,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:265,drugs:100,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:255,drugs:108,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:222,drugs:107,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:219,drugs:102,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:250,drugs:18,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:28,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:1,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
@@ -1565,7 +1565,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6529,
     species:21,
-    drugs:595,
+    drugs:606,
     symptoms:52,
     protocols:188
   };
@@ -2689,7 +2689,7 @@ function _renderDrugDiseasesList(diseases,heading,drugId){
       const label=currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
       const urg=d.urgency||"";
       const badge=urg?`<span class="drug-disease-urgency ${urgencyColor[urg]||""}">${escapeHtml(urg)}</span>`:"";
-      return `<a class="drug-disease-chip" href="#diseases" data-disease="${escapeHtml(label)}" data-species="${escapeHtml(sp)}">${escapeHtml(label)}${badge}</a>`;
+      return `<a class="drug-disease-chip" href="#database" data-disease="${escapeHtml(label)}" data-species="${escapeHtml(sp)}">${escapeHtml(label)}${badge}</a>`;
     }).join("");
     const more=list.length>12?`<span class="drug-disease-more">+${list.length-12}</span>`:"";
     return `<div class="drug-disease-group"><div class="drug-disease-species-label">${escapeHtml(spLabel)} <span class="drug-disease-count">(${list.length})</span></div><div class="drug-disease-chips">${chips}${more}</div></div>`;
@@ -2714,21 +2714,11 @@ function hydrateDrugDiseases(container){
         const wrap=document.createElement("div");
         wrap.innerHTML=html;
         const newNode=wrap.firstElementChild;
+        /* Clicks are handled by the delegated .drug-disease-chip handler in
+           _attachDbItemHandlers (openDiseaseAcrossSpecies), which also covers the
+           cache-rendered path and waits for a cross-species list load instead of
+           racing it. No per-node listeners here — they would double-fire. */
         if(newNode&&ph.parentNode)ph.parentNode.replaceChild(newNode,ph);
-        if(newNode){
-          newNode.querySelectorAll(".drug-disease-chip").forEach(a=>{
-            a.addEventListener("click",e=>{
-              e.preventDefault();
-              const diseaseName=a.getAttribute("data-disease")||"";
-              const species=a.getAttribute("data-species")||"";
-              if(species&&species!==currentSpecies){
-                const speciesObj=SPECIES.find(s=>s.id===species);
-                if(speciesObj&&typeof selectSpecies==="function")selectSpecies(species);
-              }
-              if(typeof navigateToDiseaseDb==="function")navigateToDiseaseDb(diseaseName);
-            });
-          });
-        }
       })
       .catch(()=>{
         ph.setAttribute("data-rendered","error");
@@ -2762,17 +2752,10 @@ function hydrateTreatmentDrugs(container){
         const wrap=document.createElement("div");
         wrap.innerHTML=html;
         const newNode=wrap.firstElementChild;
+        /* Clicks are handled by the delegated .treatment-drug-chip handlers
+           (disease DB list + checker results area), which also cover the
+           cache-rendered path. No per-node listeners — they would double-fire. */
         if(newNode&&ph.parentNode)ph.parentNode.replaceChild(newNode,ph);
-        // Wire click handlers on new chips
-        if(newNode){
-          newNode.querySelectorAll(".treatment-drug-chip").forEach(a=>{
-            a.addEventListener("click",e=>{
-              e.preventDefault();
-              const drugName=a.getAttribute("data-drug")||"";
-              if(drugName&&typeof navigateToDrug==="function")navigateToDrug(drugName);
-            });
-          });
-        }
       })
       .catch(()=>{
         ph.setAttribute("data-rendered","error");
@@ -3165,6 +3148,9 @@ function renderResults(data){
     if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
     const dbLink=e.target.closest(".disease-db-nav-link");
     if(dbLink){e.preventDefault();navigateToDiseaseDb(dbLink.dataset.name);return;}
+    /* Cache-rendered related-drug chips carry no per-node listeners — delegate. */
+    const tChip=e.target.closest(".treatment-drug-chip");
+    if(tChip){e.preventDefault();navigateToDrug(tChip.dataset.drug);return;}
     if(e.target.closest("a"))return;
     const head=e.target.closest(".disease-head");
     if(head)toggleDetail(head);
@@ -6680,6 +6666,14 @@ function _attachDbItemHandlers(container){
     if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
     const relDisease=e.target.closest(".related-disease-chip");
     if(relDisease){e.preventDefault();navigateToDiseaseDb(relDisease.dataset.name);return;}
+    /* Related-drug / disease chips are also rendered synchronously from cache
+       (buildTreatmentDrugsPlaceholder / buildDrugDiseasesPlaceholder on a second
+       open), a path that attaches no per-node listeners — delegation here makes
+       every render land on the exact item instead of dead-ending on the href. */
+    const tChip=e.target.closest(".treatment-drug-chip");
+    if(tChip){e.preventDefault();navigateToDrug(tChip.dataset.drug);return;}
+    const dChip=e.target.closest(".drug-disease-chip");
+    if(dChip){e.preventDefault();openDiseaseAcrossSpecies(dChip.dataset.disease,dChip.dataset.species||currentSpecies||"");return;}
     const anesthLink=e.target.closest(".anesthesia-nav-link");
     if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)scrollToAnchor(p);return;}
     if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);

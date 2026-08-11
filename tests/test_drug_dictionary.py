@@ -1068,3 +1068,136 @@ class TestEmergencyProtocolsAdditions:
                 assert p.get("key_drugs") and len(p["key_drugs"]) >= 3
                 assert p.get("monitoring")
                 assert p.get("ref")
+
+
+def test_batch34_referenced_drugs_present_with_complete_dosing():
+    """The 2026-08 second referenced-but-absent sweep found 11 agents that
+    disease treatments and interaction lists reference but the formulary did
+    not carry (vinblastine alone is named by 408 treatment entries; the
+    crystalloid fluids by 1,700+). Guards that each is present, categorised,
+    bilingual, and fully dosed for every species flagged safe."""
+    expected = [
+        "vinblastine",
+        "lactated_ringers",
+        "normosol_r",
+        "l_theanine",
+        "alpha_casozepine",
+        "povidone_iodine",
+        "folic_acid",
+        "dmso",
+        "mineral_oil",
+        "lugols_iodine",
+        "fluorescein",
+    ]
+    index = {d["id"]: d for d in DRUGS}
+    for drug_id in expected:
+        entry = index.get(drug_id)
+        assert entry is not None, f"{drug_id} missing from drug manual"
+        assert entry["category"] in DRUG_CATEGORIES
+        assert entry["mechanism_ja"].strip() and entry["mechanism"].strip()
+        for species, info in entry["species_info"].items():
+            if info.get("safe"):
+                assert info["dosage"].strip(), f"{drug_id}/{species} missing dosage"
+                assert info["dosage_ja"].strip(), f"{drug_id}/{species} missing dosage_ja"
+
+
+def test_vinblastine_mct_protocol_and_vesicant_warning():
+    """Mast cell tumor protocols across the disease DB name vinblastine +
+    prednisolone (Thamm 2006). The entry must carry the protocol dose, the
+    CBC/neutrophil gate, and the vesicant handling that differs from
+    doxorubicin (WARM compress for vinca extravasation)."""
+    vin = next((d for d in DRUGS if d["id"] == "vinblastine"), None)
+    assert vin is not None
+    dog = vin["species_info"]["dog"]
+    assert dog["safe"] is True
+    assert "2 mg/m²" in dog["dosage"] or "2 mg/m2" in dog["dosage"]
+    assert "3,000" in dog["dosage"]  # neutrophil hold threshold
+    notes = dog["notes"].lower()
+    assert "vesicant" in notes
+    assert "warm" in notes  # vinca extravasation uses warm compress, not cold
+    # It must not be presented as interchangeable with vincristine.
+    assert "vincristine" in vin["contraindications"].lower()
+
+
+def test_crystalloid_fluids_present_with_species_rates():
+    """Fluid therapy is the single most-referenced intervention in the disease
+    DB (乳酸リンゲル 710 entries, ノルモソル 1,059) yet the formulary carried no
+    crystalloid. Guards shock/maintenance rates and the two class-defining
+    safety facts: LRS clots citrated blood in the same line (calcium), and
+    Normosol-R/Plasma-Lyte is the calcium-free, blood-compatible alternative."""
+    lrs = next((d for d in DRUGS if d["id"] == "lactated_ringers"), None)
+    assert lrs is not None
+    dog = lrs["species_info"]["dog"]
+    assert "10-20 mL/kg" in dog["dosage"]  # canine shock bolus
+    cat = lrs["species_info"]["cat"]
+    assert "5-10 mL/kg" in cat["dosage"]  # feline shock bolus is smaller
+    referenced = " ".join(i["drug"].lower() for i in lrs["drug_interactions"])
+    assert "blood products" in referenced
+    assert "ceftriaxone" in referenced
+    norm = next((d for d in DRUGS if d["id"] == "normosol_r"), None)
+    assert norm is not None
+    assert "calcium-free" in norm["mechanism"].lower()
+    # Small-exotic support: warmed SC maintenance documented for rabbits.
+    assert "80-100 mL/kg" in norm["species_info"]["rabbit"]["dosage"]
+    assert "80-100 mL/kg" in lrs["species_info"]["rabbit"]["dosage"]
+
+
+def test_folic_acid_pregnant_mare_warning():
+    """Folic acid is referenced by the pyrimethamine/sulfadiazine EPM regimen,
+    but oral folic acid given to pregnant mares on that combination is
+    associated with congenital defects in their foals (Toribio 1998). The
+    horse entry must carry that warning where the dose is read, and the
+    methotrexate interaction must point to folinic acid instead."""
+    fol = next((d for d in DRUGS if d["id"] == "folic_acid"), None)
+    assert fol is not None
+    horse = fol["species_info"]["horse"]
+    assert "pregnant" in horse["dosage"].lower()
+    assert "妊娠馬" in horse["dosage_ja"]
+    interactions = {i["drug"].lower(): i["effect"].lower() for i in fol["drug_interactions"]}
+    assert "pyrimethamine" in interactions
+    assert "folinic" in interactions.get("methotrexate", "")
+
+
+def test_mineral_oil_and_dmso_carry_route_safety_warnings():
+    """Mineral oil's one fatal failure mode is aspiration (lipoid pneumonia):
+    the equine dose must demand NGT placement confirmation and the small-animal
+    doses must forbid direct syringing. DMSO IV must state the <= 10% dilution
+    (haemolysis above that)."""
+    oil = next((d for d in DRUGS if d["id"] == "mineral_oil"), None)
+    assert oil is not None
+    assert "confirm" in oil["species_info"]["horse"]["dosage"].lower()
+    for sp in ("dog", "cat"):
+        combined = (oil["species_info"][sp]["dosage"] + oil["species_info"][sp].get("notes", "")).lower()
+        assert "never syringe" in combined or "syringe" in combined
+    dmso = next((d for d in DRUGS if d["id"] == "dmso"), None)
+    assert dmso is not None
+    horse = dmso["species_info"]["horse"]
+    assert "10%" in horse["dosage"]
+    assert "hemolysis" in (horse.get("notes", "") + dmso["side_effects"]).lower()
+
+
+def test_treatment_text_drug_matcher_precision_and_recall():
+    """The related-drug keyword index must (a) resolve the names treatment
+    texts actually use — fluid names without the 液 suffix, slash alternates,
+    parenthetical-stripped stems — and (b) no longer surface a drug for bare
+    generic words ('sodium restriction', 'critical care monitoring',
+    'vitamin supplementation'), which previously mapped to nitroprusside,
+    Oxbow Critical Care and vitamin K1. Capitalised 'Critical Care' (the
+    product, 1,000+ treatment entries) must still match case-sensitively."""
+    from api.drug_dictionary import find_drugs_in_text
+
+    def ids(text):
+        return [d["id"] for d in find_drugs_in_text(text)]
+
+    # Recall: the spellings treatment texts actually use.
+    assert "lactated_ringers" in ids("輸液: 乳酸リンゲル 10-20 mL/kg IV")
+    assert "normosol_r" in ids("温輸液（ノルモソルR） 25 mL/kg SC")
+    assert "mineral_oil" in ids("ミネラルオイル2-4 LをNGT投与")
+    assert "fluorescein" in ids("フルオレセイン染色で潰瘍を確認")
+    assert "critical_care_herbivore" in ids("Syringe-feed Critical Care q6-8h")
+    # Precision: bare generic words must not resolve to a drug.
+    assert ids("sodium restriction and vitamin supplementation") == []
+    assert ids("critical care monitoring overnight") == []
+    # Full compound names keep working.
+    assert "calcium_gluconate" in ids("calcium gluconate 10% IV slowly")
+    assert "nitroprusside" in ids("sodium nitroprusside CRI")
