@@ -215,8 +215,11 @@ def localize_dosage(dosage: str) -> Optional[str]:
     raw_tokens = tokenizable.split()
     out: list[str] = []
     for tok in raw_tokens:
-        # 先頭・末尾の区切り記号を切り離す（例: "q12h;" → "q12h" + ";"）
-        m = re.match(r"^([(\[]*)(.*?)([)\],;×]*)$", tok)
+        # 先頭・末尾の区切り記号を切り離す（例: "q12h;" → "q12h" + ";"、"q24h." → "q24h" + "."）。
+        # 文末ピリオドを剥がさないと "q24h." が頻度辞書にマッチせず、数値保持パスを
+        # 通って英語の頻度略号がそのまま日本語出力に漏れる（10.5 等の小数点は
+        # トークン内部にあるため影響しない）。
+        m = re.match(r"^([(\[]*)(.*?)([)\],;×.]*)$", tok)
         prefix, core, suffix = (m.group(1), m.group(2), m.group(3)) if m else ("", tok, "")
 
         if core == "":

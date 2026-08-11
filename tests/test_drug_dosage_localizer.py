@@ -34,6 +34,16 @@ class TestCanonicalDoseStrings:
         assert localize_dosage("1-3 mg/dog PO q24h") == "1-3 mg/頭 経口 24時間毎"
         assert localize_dosage("0.5-1 mg/cat PO q24h") == "0.5-1 mg/頭 経口 24時間毎"
 
+    def test_sentence_final_period_does_not_leak_frequency(self):
+        # "q24h." のような文末ピリオド付き頻度略号は、ピリオドを剥がして
+        # 頻度辞書にマッチさせる。剥がさないと数値保持パスを通って英語の
+        # 略号がそのまま日本語出力に漏れる（2026-08 に meclizine で発生）。
+        out = localize_dosage("12.5 mg/cat PO q24h.")
+        assert out == "12.5 mg/頭 経口 24時間毎."
+        assert "q24h" not in out
+        # 小数点（トークン内部の "."）は影響を受けない
+        assert "12.5" in out
+
     def test_bsa_unit_preserved(self):
         assert localize_dosage("2 mg/m² IV q24h") == "2 mg/m² 静注 24時間毎"
 

@@ -50,6 +50,9 @@ ignore = [
     "N811",   # constant imported as non-constant (intentional local aliasing pattern)
 ]
 
+[tool.ruff.lint.per-file-ignores]
+"reco2/*" = ["N803"]  # intentional math notation (I, P, T, D, ψ formulas)
+
 # Unfixable rules (manual review required)
 unfixable = ["F841", "F842"]  # Unused variables must be manually fixed
 

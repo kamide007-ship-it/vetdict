@@ -52,6 +52,9 @@ from api.drug_batch_30 import (
     METOCLOPRAMIDE_LACTATION_PATCH_30,
 )
 from api.drug_batch_31 import DRUGS_BATCH_31
+from api.drug_batch_32 import DRUGS_BATCH_32
+from api.drug_batch_33 import DRUGS_BATCH_33
+from api.drug_batch_34 import DRUGS_BATCH_34
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -10554,6 +10557,32 @@ for _drug31 in DRUGS_BATCH_31:
         DRUGS.append(_drug31)
         _drug_index[_drug31["id"]] = _drug31
 
+# バッチ32: 猫糖尿病の疾患エントリが推奨するのに未収載だったSGLT2阻害薬2剤
+# （ベキサグリフロジン/Bexacat, ベラグリフロジン/Senvelgo — 正常血糖DKA警告付き）
+for _drug32 in DRUGS_BATCH_32:
+    if _drug32["id"] not in _drug_index:
+        DRUGS.append(_drug32)
+        _drug_index[_drug32["id"]] = _drug32
+
+# バッチ33: 疾患治療・相互作用・麻酔プロトコルが参照するのに未収載だった14剤
+# （ピリメタミン/EPM, キニジン/馬AF, バラシクロビル/EHM(猫致死警告),
+#  メクリジン, コルヒチン, リュープロレリン, ナイアシンアミド, デクスラゾキサン,
+#  メトトレキサート, チアミン, L-カルニチン, パロモマイシン(猫腎不全警告),
+#  EMLAクリーム(猫メトヘモグロビン警告), 50%ブドウ糖(希釈警告)）
+for _drug33 in DRUGS_BATCH_33:
+    if _drug33["id"] not in _drug_index:
+        DRUGS.append(_drug33)
+        _drug_index[_drug33["id"]] = _drug33
+
+# バッチ34: 2026-08 第2回 referenced-but-absent 監査で検出された11剤
+# （ビンブラスチン/肥満細胞腫408参照, 乳酸リンゲル・ノルモソルR/輸液1,700+参照,
+#  L-テアニン, α-カソゼピン, ポビドンヨード, 葉酸(妊娠馬警告), DMSO,
+#  ミネラルオイル(誤嚥警告), ルゴール液/セキセイ甲状腺腫, フルオレセイン）
+for _drug34 in DRUGS_BATCH_34:
+    if _drug34["id"] not in _drug_index:
+        DRUGS.append(_drug34)
+        _drug_index[_drug34["id"]] = _drug34
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -10929,21 +10958,69 @@ for _d in DRUGS:
 # Drug name index for fast lookup (built once at module load).
 # Each entry: lowercase keyword → drug ID
 _DRUG_KEYWORD_INDEX: dict[str, str] = {}
-# Split a drug name at the first opening parenthesis (half- or full-width) or
-# bracket, so the generic base name can be indexed separately from the brand
-# suffix, e.g. "メチマゾール（タパゾール/フェリマゾール）" -> "メチマゾール".
-_DRUG_NAME_PAREN_RE = re.compile(r"[（(\[［]")
-_HAS_CJK_RE = re.compile(r"[぀-ヿ㐀-鿿]")
+
+
+# Generic English words that appear as the first word of compound drug names
+# ("Vitamin K1", "Critical Care Herbivore", "Sodium Nitroprusside" …). Bare, they
+# match unrelated prose ("critical care monitoring", "sodium restriction",
+# "vitamin supplementation") and surface the wrong related-drug chip — the full
+# compound name stays indexed, only the bare generic word is skipped.
+_FIRST_WORD_STOPLIST = {
+    "activated",
+    "aluminum",
+    "amino",
+    "aquarium",
+    "artificial",
+    "calcium",
+    "canine",
+    "carnivore",
+    "copper",
+    "critical",
+    "fish",
+    "iron",
+    "lactated",
+    "liquid",
+    "magnesium",
+    "medical",
+    "milk",
+    "mineral",
+    "oral",
+    "potassium",
+    "silver",
+    "sodium",
+    "vitamin",
+    "zinc",
+}
+
+# Derived stems that are generic clinical phrases, not drug references
+# ("Critical Care (Oxbow)" → stem "critical care" would match "critical care
+# monitoring" in any emergency protocol).
+_GENERIC_STEM_STOPLIST = {"critical care"}
+
+# Case-sensitive product references: treatment texts name the Oxbow syringe-feed
+# product as capitalised "Critical Care" (1,000+ entries), while generic prose
+# ("critical care monitoring") is lowercase — case distinguishes them where the
+# lowercased index cannot.
+_CASE_SENSITIVE_KEYWORDS = {"Critical Care": "critical_care_herbivore"}
 
 
 def _build_drug_keyword_index() -> None:
     """Build keyword → drug_id mapping for treatment-text scanning.
 
-    Indexed keys (lowercase, length ≥ 4 chars to avoid false matches):
-      - English name (e.g., "amoxicillin")
-      - Japanese name (e.g., "アモキシシリン")
-      - First word of multi-word names (e.g., "Toceranib" from "Toceranib Phosphate")
+    Indexed keys (lowercase, length ≥ 4 chars to avoid false matches), in
+    priority tiers so a drug's own full name always beats another drug's
+    derived variant:
+      1. Full English / Japanese names (e.g., "amoxicillin", "アモキシシリン")
+      2. Parenthetical-suffix-stripped stems ("ミネラルオイル（流動パラフィン）" →
+         "ミネラルオイル"), slash-separated alternates ("ノルモソルR／プラズマライトA" →
+         both), and trailing-液 stems for fluids (treatment texts write
+         "乳酸リンゲル 10-20 mL/kg" without the 液)
+      3. First word of multi-word names ("Toceranib" from "Toceranib
+         Phosphate") — except bare generic words (_FIRST_WORD_STOPLIST)
     """
+    tier1: list[tuple[str, str]] = []
+    tier2: list[tuple[str, str]] = []
+    tier3: list[tuple[str, str]] = []
     for d in DRUGS:
         drug_id = d.get("id")
         if not drug_id:
@@ -10952,23 +11029,25 @@ def _build_drug_keyword_index() -> None:
             if not key or len(key) < 4:
                 continue
             k = key.strip().lower()
-            if k not in _DRUG_KEYWORD_INDEX:
-                _DRUG_KEYWORD_INDEX[k] = drug_id
-            # Index first word for compound names like "Amoxicillin-Clavulanate"
+            tier1.append((k, drug_id))
+            variants: list[str] = []
+            stem = re.split(r"[（(]", k)[0].strip()
+            if stem and stem != k:
+                variants.append(stem)
+            for part in re.split(r"[／/]", stem or k):
+                part = part.strip()
+                if part and part != k and part not in variants:
+                    variants.append(part)
+            for v in list(variants) + [k]:
+                if v.endswith("液") and len(v) >= 5 and v[:-1] not in variants:
+                    variants.append(v[:-1])
+            tier2.extend((v, drug_id) for v in variants if len(v) >= 4 and v not in _GENERIC_STEM_STOPLIST)
             first_word = k.split()[0] if " " in k else k.split("-")[0]
-            if first_word != k and len(first_word) >= 4 and first_word not in _DRUG_KEYWORD_INDEX:
-                _DRUG_KEYWORD_INDEX[first_word] = drug_id
-            # Index the base name before a parenthetical brand/alias suffix so
-            # Japanese names like "メチマゾール（タパゾール/フェリマゾール）" match
-            # treatment text that only writes the generic "メチマゾール". English
-            # names already split on the space before "(", but Japanese uses a
-            # full-width "（" with no space, so the base was never indexed.
-            base = _DRUG_NAME_PAREN_RE.split(k, 1)[0].strip()
-            if base and base != k and base != first_word:
-                # CJK terms are information-dense; allow ≥3, keep ≥4 for Latin.
-                min_len = 3 if _HAS_CJK_RE.search(base) else 4
-                if len(base) >= min_len and base not in _DRUG_KEYWORD_INDEX:
-                    _DRUG_KEYWORD_INDEX[base] = drug_id
+            if first_word != k and len(first_word) >= 4 and first_word not in _FIRST_WORD_STOPLIST:
+                tier3.append((first_word, drug_id))
+    for keyword, drug_id in tier1 + tier2 + tier3:
+        if keyword not in _DRUG_KEYWORD_INDEX:
+            _DRUG_KEYWORD_INDEX[keyword] = drug_id
 
 
 _build_drug_keyword_index()
@@ -10985,6 +11064,10 @@ def find_drugs_in_text(text: str, max_results: int = 25) -> List[Dict]:
     text_lower = text.lower()
     found_ids: list[str] = []
     seen: set[str] = set()
+    for keyword, drug_id in _CASE_SENSITIVE_KEYWORDS.items():
+        if drug_id not in seen and keyword in text:
+            found_ids.append(drug_id)
+            seen.add(drug_id)
     for keyword, drug_id in _DRUG_KEYWORD_INDEX.items():
         if drug_id in seen:
             continue
@@ -11135,6 +11218,12 @@ def _build_drug_to_diseases_index() -> dict[str, list[dict]]:
             return
         text_lower = text.lower()
         seen_drugs_in_text: set[str] = set()
+        for keyword, drug_id in _CASE_SENSITIVE_KEYWORDS.items():
+            if drug_id not in seen_drugs_in_text and keyword in text:
+                seen_drugs_in_text.add(drug_id)
+                index.setdefault(drug_id, []).append(
+                    {"species": sp, "name": name_en, "name_ja": name_ja, "urgency": urgency or ""}
+                )
         for keyword, drug_id in sorted_keywords:
             if drug_id in seen_drugs_in_text:
                 continue
