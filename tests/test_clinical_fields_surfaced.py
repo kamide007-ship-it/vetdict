@@ -200,3 +200,48 @@ def test_app_js_compound_interaction_refs_are_linkified():
     # EMLA (added to the formulary in batch 33) must be reachable from the
     # anesthesia protocol text via the drug linkifier.
     assert "EMLAクリーム" in APP_JS
+
+
+def test_app_js_chat_cards_navigate_to_disease_db():
+    """Chat candidate cards (free chat + guided consultation finals) must offer a
+    click-through that lands on the disease's DB detail via the species-aware
+    opener, and the chat containers must carry the delegated handler that makes
+    both those buttons and the embedded drug links actually navigate (previously
+    the dotted-underline drug links fell through to a bare #drugs hash jump)."""
+    # Delegated handler is defined and attached to all three chat containers.
+    assert "function _attachChatNavHandlers" in APP_JS
+    assert '"chatMessages","landingChatMessages","guidedMessages"' in APP_JS
+    # Handler routes drug links through navigateToDrug (exact-match landing)…
+    handler = APP_JS.split("function _attachChatNavHandlers", 1)[1].split("\nfunction ", 1)[0]
+    assert "navigateToDrug(" in handler
+    # …and disease buttons through the species-aware opener (chat species can
+    # differ from the DB's loaded species).
+    assert "openDiseaseAcrossSpecies(" in handler
+    # Both free-chat and guided final-result cards render the button with the
+    # data the opener needs.
+    assert APP_JS.count('class="chat-disease-open"') >= 2
+    assert 'class="chat-disease-open" data-name=' in APP_JS
+
+
+def test_app_js_related_chips_navigate_via_delegation():
+    """Related-drug chips (disease detail / checker results) and drug→disease
+    chips (drug detail) are ALSO rendered synchronously from cache on any
+    second open — a path that attaches no per-node listeners, so their clicks
+    used to fall through to a dead '#diseases' hash. Both chip classes must be
+    handled by the delegated container handlers, the cross-species disease
+    chip must route through the species-aware opener (which waits for the
+    target species' list instead of racing it), and the per-node wiring that
+    would double-fire against delegation must stay removed."""
+    # Delegated handlers exist for both chip classes.
+    assert 'closest(".treatment-drug-chip")' in APP_JS
+    assert 'closest(".drug-disease-chip")' in APP_JS
+    # The disease chip routes through the species-aware opener with the chip's
+    # own species (the drug panel lists diseases of many species).
+    assert "openDiseaseAcrossSpecies(dChip.dataset.disease" in APP_JS
+    # Per-node listeners must not come back (they double-fire with delegation:
+    # the second toggle would immediately close the just-opened panel).
+    assert 'querySelectorAll(".drug-disease-chip").forEach' not in APP_JS
+    assert 'querySelectorAll(".treatment-drug-chip").forEach' not in APP_JS
+    # The fallback href must be a real view hash, not the dead '#diseases'.
+    assert 'class="drug-disease-chip" href="#database"' in APP_JS
+    assert 'href="#diseases"' not in APP_JS
