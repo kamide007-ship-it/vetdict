@@ -929,6 +929,30 @@ class TestDrugDiseaseLinking:
         assert "amoxicillin" in _DRUG_KEYWORD_INDEX
         assert "アモキシシリン" in _DRUG_KEYWORD_INDEX
 
+    def test_keyword_index_indexes_japanese_base_name(self):
+        """Japanese names with a parenthetical brand suffix must index the base
+        name, so treatment text that writes only the generic drug name matches.
+
+        Regression: "メチマゾール（タパゾール/フェリマゾール）" was indexed only as
+        the full string, so Japanese treatment text saying "メチマゾール" matched
+        nothing — Japanese users (the primary audience) got no drug links even
+        though the English side matched fine.
+        """
+        from api.drug_dictionary import _DRUG_KEYWORD_INDEX
+
+        assert _DRUG_KEYWORD_INDEX.get("メチマゾール") == "methimazole"
+        assert _DRUG_KEYWORD_INDEX.get("マロピタント") == "maropitant"
+        assert _DRUG_KEYWORD_INDEX.get("ピモベンダン") == "pimobendan"
+
+    def test_find_drugs_in_text_japanese_generic_name(self):
+        """The generic Japanese drug name in treatment text should match the
+        drug even when the dictionary entry carries a brand suffix."""
+        from api.drug_dictionary import find_drugs_in_text
+
+        text = "内科治療：メチマゾール（フェリマゾール 2.5 mg PO q12h）で甲状腺ホルモンを抑制。"
+        ids = {d["id"] for d in find_drugs_in_text(text)}
+        assert "methimazole" in ids
+
     def test_find_drugs_in_text_basic(self):
         from api.drug_dictionary import find_drugs_in_text
 
