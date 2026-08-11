@@ -205,3 +205,27 @@ def test_app_js_chat_cards_navigate_to_disease_db():
     # data the opener needs.
     assert APP_JS.count('class="chat-disease-open"') >= 2
     assert 'class="chat-disease-open" data-name=' in APP_JS
+
+
+def test_app_js_related_chips_navigate_via_delegation():
+    """Related-drug chips (disease detail / checker results) and drug→disease
+    chips (drug detail) are ALSO rendered synchronously from cache on any
+    second open — a path that attaches no per-node listeners, so their clicks
+    used to fall through to a dead '#diseases' hash. Both chip classes must be
+    handled by the delegated container handlers, the cross-species disease
+    chip must route through the species-aware opener (which waits for the
+    target species' list instead of racing it), and the per-node wiring that
+    would double-fire against delegation must stay removed."""
+    # Delegated handlers exist for both chip classes.
+    assert 'closest(".treatment-drug-chip")' in APP_JS
+    assert 'closest(".drug-disease-chip")' in APP_JS
+    # The disease chip routes through the species-aware opener with the chip's
+    # own species (the drug panel lists diseases of many species).
+    assert "openDiseaseAcrossSpecies(dChip.dataset.disease" in APP_JS
+    # Per-node listeners must not come back (they double-fire with delegation:
+    # the second toggle would immediately close the just-opened panel).
+    assert 'querySelectorAll(".drug-disease-chip").forEach' not in APP_JS
+    assert 'querySelectorAll(".treatment-drug-chip").forEach' not in APP_JS
+    # The fallback href must be a real view hash, not the dead '#diseases'.
+    assert 'class="drug-disease-chip" href="#database"' in APP_JS
+    assert 'href="#diseases"' not in APP_JS
