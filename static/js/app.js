@@ -1545,12 +1545,12 @@ function setDefaultStats(){
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:598,drugs:345,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:263,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:283,drugs:69,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:307,drugs:136,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:308,drugs:136,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:229,drugs:91,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
     {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:198,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:226,drugs:68,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
     {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:198,drugs:74,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:178,drugs:155,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:179,drugs:155,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
     {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:223,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
     {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:412,drugs:223,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
     {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:223,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
@@ -1558,12 +1558,12 @@ function setDefaultStats(){
     {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:255,drugs:108,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
     {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:222,drugs:107,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
     {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:219,drugs:102,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
-    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:250,drugs:18,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
+    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:251,drugs:18,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:28,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:1,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:6529,
+    diseases:6532,
     species:21,
     drugs:606,
     symptoms:52,
@@ -3606,6 +3606,27 @@ function _resolveInteractionDrug(ref){
   if(!key)return null;
   return allDrugs.find(d=>(d.id||"").toLowerCase()===key||(d.name||"").toLowerCase()===key||(d.name_ja||"").toLowerCase()===key)||null;
 }
+/* Build the drug-name cell of one interaction tag. A reference that resolves as a
+   whole becomes a single link. Compound references like "Ketoconazole/itraconazole"
+   or "metoclopramide/cisapride/mosapride" name several real drugs in one cell and
+   never resolve as a whole — split on "/" and link each component that is itself in
+   the manual, so every named drug stays one tap away. Class references ("NSAIDs",
+   "aminoglycosides") resolve nowhere and remain plain text. */
+function _interactionDrugCell(ref){
+  const title=currentLang==="ja"?"この薬品の詳細を開く":"Open this drug";
+  const partLink=(m,label)=>`<a href="#drugs" class="interaction-drug-part drug-nav-link" data-drug="${escapeHtml(m.name||label)}" title="${title}">${escapeHtml(label)}</a>`;
+  const match=_resolveInteractionDrug(ref);
+  if(match)return `<a href="#drugs" class="interaction-drug drug-nav-link" data-drug="${escapeHtml(match.name||ref)}" title="${title}">${escapeHtml(ref)}</a>`;
+  if(ref.indexOf("/")!==-1){
+    const parts=ref.split("/");
+    const resolved=parts.map(p=>_resolveInteractionDrug(p.trim()));
+    if(resolved.some(Boolean)){
+      const html=parts.map((p,i)=>resolved[i]?partLink(resolved[i],p):escapeHtml(p)).join("/");
+      return `<span class="interaction-drug">${html}</span>`;
+    }
+  }
+  return `<span class="interaction-drug">${escapeHtml(ref)}</span>`;
+}
 function renderDrugInteractionsList(interactions){
   if(!interactions||!interactions.length)return"";
   // Sort by severity: major > moderate > minor
@@ -3623,10 +3644,7 @@ function renderDrugInteractionsList(interactions){
     const ref=di.drug||"";
     // When the referenced drug is itself in the manual, make it a click target
     // that jumps to and expands that drug — one tap from "reverse with X" to X.
-    const match=_resolveInteractionDrug(ref);
-    const drugCell=match
-      ?`<a href="#drugs" class="interaction-drug drug-nav-link" data-drug="${escapeHtml(match.name||ref)}" title="${currentLang==="ja"?"この薬品の詳細を開く":"Open this drug"}">${escapeHtml(ref)}</a>`
-      :`<span class="interaction-drug">${escapeHtml(ref)}</span>`;
+    const drugCell=_interactionDrugCell(ref);
     return `<span class="drug-interaction-tag severity-${sev}"><span class="severity-badge">${icon} ${sevLabel}</span>${drugCell}<span class="interaction-effect">${escapeHtml(label)}</span></span>`;
   }).join("");
 }
@@ -6227,6 +6245,7 @@ const ANES_AGENTS=[
   {q:"グアイフェネシン",en:["guaifenesin","glyceryl guaiacolate"],ja:["グアイフェネシン","グリセリルグアヤコレート"],abbr:["gge"]},
   {q:"ガバペンチン",en:["gabapentin"],ja:["ガバペンチン"]},
   {q:"オイゲノール",en:["eugenol"],ja:["オイゲノール"]},
+  {q:"EMLAクリーム",en:["emla"],ja:["EMLAクリーム"]},
   {q:"MS-222",en:["ms-222","tricaine"],ja:["ms-222","トリカイン"]},
   {q:"フェノキシエタノール",en:["phenoxyethanol"],ja:["フェノキシエタノール"]},
 ];

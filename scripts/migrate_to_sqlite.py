@@ -20,7 +20,6 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from api.database import DB_PATH, get_connection, init_db, upsert_disease, upsert_drug, upsert_symptom
-from api.species.id_locks import stable_id_for
 
 # ---------------------------------------------------------------------------
 # Species module mapping: species_key → module path
@@ -57,6 +56,43 @@ def _load_module(module_path: str):
     return importlib.import_module(module_path)
 
 
+def _resolve_collision_free_ids(species_key: str, diseases, orig_index) -> dict:
+    """Resolve every entry's served id up-front so position-derived fallbacks can
+    never collide with another entry's LOCKED (or explicit) id.
+
+    Without this, a disease newly inserted into the module list takes the list
+    position an older entry held when the id-lock sidecar was generated; both
+    entries then resolve to the same id and INSERT OR REPLACE silently drops one
+    of them from the served DB (found 2026-08: three appended diseases vanished
+    this way). Explicit and lock-frozen ids are authoritative and claimed first;
+    unlocked entries keep their positional id unless taken, in which case they
+    deterministically bump to the next free index.
+    """
+    from api.species.id_locks import locked_id_for
+
+    resolved_ids: dict[int, str] = {}
+    taken: set[str] = set()
+    deferred: list = []
+    for d in diseases:
+        explicit = d.get("id")
+        locked = None if explicit else locked_id_for(species_key, d)
+        if explicit or locked:
+            disease_id = explicit or locked
+            resolved_ids[id(d)] = disease_id
+            taken.add(disease_id)
+        else:
+            deferred.append(d)
+    for d in deferred:
+        i = orig_index.get(id(d), 0)
+        candidate = f"{species_key}_{i:04d}"
+        while candidate in taken:
+            i += 1
+            candidate = f"{species_key}_{i:04d}"
+        resolved_ids[id(d)] = candidate
+        taken.add(candidate)
+    return resolved_ids
+
+
 def migrate_species_diseases(conn, species_key: str, module_path: str) -> int:
     """Load DISEASES from a species module and insert into SQLite. Returns count."""
     mod = _load_module(module_path)
@@ -72,6 +108,14 @@ def migrate_species_diseases(conn, species_key: str, module_path: str) -> int:
     orig_index = {id(e): i for i, e in enumerate(raw)}
     count = 0
 
+    # Resolve every entry's id up-front so position-derived fallbacks can never
+    # collide with another entry's LOCKED id. Without this, a disease newly
+    # inserted into the module list takes the list position an older entry held
+    # when the id-lock sidecar was generated; both entries then resolve to the
+    # same id and INSERT OR REPLACE silently drops one of them from the served
+    # DB (found 2026-08: three appended diseases vanished this way).
+    resolved_ids = _resolve_collision_free_ids(species_key, diseases, orig_index)
+
     # Helper to extract ja/en from dict fields
     def _extract_ja_en(field_val):
         if isinstance(field_val, dict):
@@ -79,10 +123,7 @@ def migrate_species_diseases(conn, species_key: str, module_path: str) -> int:
         return None, field_val
 
     for d in diseases:
-        i = orig_index.get(id(d), 0)
-        # Stable-id freeze (Phase 2): pin the id even if the list is later
-        # re-ordered. No lock file → position-derived id (unchanged behaviour).
-        disease_id = d.get("id") or stable_id_for(species_key, d, f"{species_key}_{i:04d}")
+        disease_id = resolved_ids[id(d)]
 
         # Extract ja/en from fields that might be dicts
         treatment_ja, treatment_en = _extract_ja_en(d.get("treatment"))
@@ -153,10 +194,11 @@ def migrate_dog_diseases(conn) -> int:
         diseases = raw
     orig_index = {id(e): i for i, e in enumerate(raw)}
     count = 0
+    # Stable-id freeze (Phase 2) with collision-safe allocation — see
+    # _resolve_collision_free_ids.
+    resolved_ids = _resolve_collision_free_ids("dog", diseases, orig_index)
     for d in diseases:
-        i = orig_index.get(id(d), 0)
-        # Stable-id freeze (Phase 2) — see migrate_species_diseases.
-        disease_id = d.get("id") or stable_id_for("dog", d, f"dog_{i:04d}")
+        disease_id = resolved_ids[id(d)]
 
         # Handle fields that might be dict with 'ja'/'en' keys
         def _extract_ja_en(field_val):

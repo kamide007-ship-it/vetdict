@@ -84,6 +84,21 @@ def stable_id_for(species_key: str, entry: Any, fallback_id: str) -> str:
     return locks.get(stable_key(entry), fallback_id)
 
 
+def locked_id_for(species_key: str, entry: Any) -> str | None:
+    """Return the frozen id for ``entry``, or ``None`` when it is not locked.
+
+    Unlike :func:`stable_id_for` this distinguishes "locked to exactly the
+    position-derived id" from "not locked at all", which id-allocation code
+    needs: a locked id is authoritative and must never be reassigned, while an
+    unlocked entry's positional fallback may be bumped to avoid colliding with
+    another entry's lock.
+    """
+    locks = _load_lock(species_key)
+    if not locks:
+        return None
+    return locks.get(stable_key(entry))
+
+
 def clear_cache() -> None:
     """Drop the in-process lock cache (for tests / after regenerating locks)."""
     _load_lock.cache_clear()

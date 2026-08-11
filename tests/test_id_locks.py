@@ -39,13 +39,27 @@ def test_missing_lock_falls_back_to_position_id():
     assert stable_id_for("no_such_species", {"name": "X", "name_ja": "X"}, "fallback_9") == "fallback_9"
 
 
-def test_current_order_ids_are_byte_identical():
-    """The lock must not change any id a disease has today."""
+def test_every_entry_is_locked_and_served_ids_match_locks():
+    """Every current degu entry must be frozen in the sidecar, and the served-DB
+    id allocator must assign exactly the locked id to each of them.
+
+    (This replaces the original "locked id == today's position id" assertion,
+    whose premise only held while the list composition never changed. Once a
+    disease is legitimately inserted mid-list — e.g. appended to the .py list
+    ahead of the supplementary block — later entries keep their FROZEN ids,
+    which by design no longer equal their new positional fallbacks. What must
+    hold instead: no entry is unlocked, and serving honours the lock.)"""
     id_locks.clear_cache()
     _, dd, orig = _degu_entries()
+    from scripts.migrate_to_sqlite import _resolve_collision_free_ids
+
+    resolved = _resolve_collision_free_ids("degu", dd, orig)
     for d in dd:
-        fb = d.get("id") or f"degu_{orig[id(d)]:04d}"
-        assert stable_id_for("degu", d, fb) == fb
+        locked = id_locks.locked_id_for("degu", d)
+        assert locked, f"unlocked degu entry: {d.get('name')!r} — run scripts.quality.build_id_locks"
+        assert resolved[id(d)] == locked, f"served id {resolved[id(d)]!r} != locked id {locked!r} for {d.get('name')!r}"
+    ids = list(resolved.values())
+    assert len(ids) == len(set(ids)), "duplicate served ids"
 
 
 def test_ids_are_pinned_across_reorder():

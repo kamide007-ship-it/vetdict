@@ -2110,3 +2110,62 @@ is-referenced-but-absent 監査で、コンテンツが参照するのに未収�
   （完全複合名は引き続き一致）。製品参照の大文字 "Critical Care"（1,000+件）は
   ケースセンシティブ特例で維持
 - 回帰テスト+1件（再現率5ケース・精度2ケース・完全名2ケース）
+
+## 2026-08セッション（第4弾: ID衝突バグ修正 + 馬の有病率データ新設 + prevalence dead key 33→10 + 薬5剤追加）
+
+### エラーチェック
+- ruff: repo全体 clean、フルテストスイート **3,755件合格**（34 skip、カバレッジ81.74%）— 既存コードは健全
+- 薬用量監査: safe薬品の dosage 欠落 **0**（581薬品）
+- 麻酔監査: 全21種×全8カテゴリ完備・188プロトコル・薬剤行の用量欠落 **0**
+- 疾患監査: 配信7,058疾患で treatment/prevention/prognosis **100%**
+
+### 致命的バグ発見・修正: IDロック位置衝突で新規疾患が配信DBから消失
+- **症状**: 種モジュール末尾に新規疾患を追加すると、migrate は「+1件」と報告するのに配信SQLiteに存在しない
+- **根本原因**: 新規（未ロック）エントリの位置由来ID（例 `degu_0123`）が、IDロックサイドカー生成時にその位置にいた既存エントリのロック済みIDと衝突。`INSERT OR REPLACE` が後勝ちで一方の行を黙って消していた
+- **修正**: `scripts/migrate_to_sqlite.py` に `_resolve_collision_free_ids()` を新設（species/dog両パスで使用）。明示ID・ロック済みIDを先に確保し、未ロックエントリは位置IDが取得済みなら決定論的に次の空き番号へバンプ。`api/species/id_locks.py` に `locked_id_for()`（ロック有無を区別する公開ヘルパー）を追加
+- **運用**: 新規疾患追加後は `python3 -m scripts.quality.build_id_locks <species>` でロック再生成（append-only、衝突時は content-hash ID を発行 — 今回の3疾患は `degu_x0a3259ee` 等で凍結済み）。`instance/vetdict.db` は増分upsertのため、ID変更を伴う再構築時は削除してクリーンビルドすること（残留した旧位置ID行が重複カードになる）
+- 回帰テスト: `tests/test_id_collision_free_migration.py`（4件 — ユニット2 + 全種衝突ゼロ検証 + 配信DB実在検証）。`tests/test_id_locks.py` の「ロックID＝現在位置ID」テストは前提が中間挿入で崩れるため「全エントリがロック済み かつ 配信ID割当がロックと一致」の検証に置換
+
+### prevalence dead key の是正（基礎 33→10、地域補正 15→0）
+- **リネーム（正規疾患名へ、有病率priorとチップ導線を活性化）**: chinchilla Dental Abscess→Tooth Root Abscess・Rectal Prolapse→Prolapsed Rectum、guinea_pig Skin Abscess→Subcutaneous Abscess・Pneumonia (Viral)→Adenovirus Pneumonia、bird Papillomatosis→Cloacal Papillomatosis・Renal Disease→Renal Failure (Acute / Chronic)、amphibian Renal Disease→Renal Failure、reptile Fungal Dermatitis→Dermal Mycosis (Non-CANV)、exotic_other Skin Infection→Dermatological Bacterial Infection・Heatstroke→Heat Stroke・Mite Infestation→(Tarantula)・Trauma / Fracture→Fracture (Limb)+Trauma / Wound Infection (Exotic)
+- **削除（active正規キーとの重複・誤配置）**: chinchilla Fatty Liver Disease（=Hepatic Lipidosis）、degu Heatstroke（=Heat Stroke）、rabbit Diarrhea (Acute)（症状レベルキー）、exotic_other Gastrointestinal Parasites（=Intestinal Parasitism）+ 魚病4キー（Ich/Fin Rot/Swim Bladder/KHV — fish種が正規キーで担当）
+- **追加**: fish 'Fin Rot (Bacterial/Fungal)': very_common（最頻出の観賞魚疾患なのにティア欠落だった）
+- **地域補正の dead key 15件を全修正**（JP補正が inert だった）: 犬 Coccidioidomycosis (Valley Fever)/Leishmaniasis、猫 FIP Wet/Dry Form 分割・Feline Histoplasmosis・Cytauxzoon felis、ウサギ Pasteurellosis (Snuffles)・E. cuniculi・Gastrointestinal Stasis・RHD、魚 KHV/Ich 正規名。犬 Chagas Disease は該当疾患なしのため削除
+- 残10件は当該種DBに疾患自体が無いもの（rare/uncommon中心）— cap テストを 40→15 に強化
+
+### 新規疾患エントリ3件（common ティアの真の欠落、エビデンスベース・日英完備）
+- **degu Elodontoma（エロドントーマ/歯牙腫瘍）**: デグー・プレーリードッグの代表的歯科腫瘤。気道閉塞の病態、頭部X線/CT診断、歯冠整形+鎮痛+抗菌薬の緩和管理（Jekl in Quesenberry & Carpenter 4th ed）
+- **guinea_pig Intestinal Torsion（腸捻転）**: 甚急性外科救急。X線ダブルバブル、安定化→減圧→緊急開腹、絞扼中の運動促進薬禁忌を明記（Dudás-Györki 2011）
+- **amphibian Parasitic Dermatitis（寄生虫性皮膚炎）**: Trichodina/Costia/Epistylis/Oodinium等。皮膚呼吸障害の病態、ウェットマウント診断、塩浴/メチレンブルー/プラジクアンテル（Wright & Whitaker; Mader 3rd ed）
+- 配信DB: 7,058 → **7,061疾患**
+
+### 馬の有病率データ新設（69キー — 唯一 prevalence が無い種だった）
+- 馬は基礎 prevalence ゼロ → 「よくみられる疾患」チップが空・チャット有病率priorが不動作（開発者自身の専門種なのに）
+- Reed & Bayly 4th ed / NAHMS 2015 / Sykes 2015 EGUS consensus / Wylie 2011 / McIlwraith 2012 / McFarlane 2011 準拠で69キーをキュレート（全キーが equine DB 名に完全一致することを検証済み）
+  - very_common: 疝痛・EGUS・OA・内部寄生虫・蹄膿瘍・蹄叉腐爛
+  - common: 蹄葉炎・馬喘息・サルコイド・メラノーマ・ERU・PPID・EMS・屈腱炎・ナビキュラー・タイイングアップ・腺疫・インフルエンザ・EHV・チョーク・子宮内膜炎・胎盤停滞 等33
+  - JP補正: Getah Virus/日本脳炎/Babesiosis=common、EPM/West Nile=rare（オポッサム・WNV不在）
+- `/api/species/horse/common-diseases`: 0 → **38チップ**（equine モジュールから name_ja 解決するフォールバックを `vetdict_api.py` に追加 — 疝痛・胃潰瘍・蹄膿瘍等が日本語表示）
+
+### 薬品5剤追加（referenced-but-absent 監査、`drug_batch_33.py` 新規、581→586）
+- **メトトレキサート**: 相互作用10回参照（NSAIDs/ペニシリン/サリチル酸が警告）なのに本体未収載。多剤リンパ腫プロトコル用量・ロイコボリンレスキュー・腎不全禁忌
+- **キニジン硫酸塩**: 馬の心房細動の薬理学的第一選択が未収載だった。22 mg/kg NGT q2h・QRS 25%延長で中止・ジゴキシン倍増相互作用（Reed & Bayly; ACVIM consensus 2014）
+- **ピリメタミン**: 馬EPMの主軸（+スルファジアジン 20 mg/kg、ReBalance NADA 141-240）。妊娠馬への葉酸補充警告（先天異常報告）。鳥トキソ/サルコシスティス用量
+- **EMLAクリーム**: ウサギ麻酔プロトコルが名指しするのに未収載。耳介辺縁静脈の密封30-60分、猫プリロカインMetHb警告（Flecknell BSAVA）
+- **ニコチン酸アミド**: テトラサイクリン/ドキシサイクリン併用の犬DLE標準療法（White 1992 JAVMA）。>10kg 500mg q8h
+- 回帰テスト4件（batch33存在+用量、キニジンAFプロトコル、EPM併用+妊娠警告、EMLA MetHb警告）
+
+### UX: クリック導線の強化
+- **複合相互作用参照のリンク化**: "Ketoconazole/itraconazole"・"metoclopramide/cisapride/mosapride" 等の複合表記は全体では解決不能でデッドテキストだった → `_interactionDrugCell()` が「/」で分割し、辞書収載の各成分を個別リンク化（1タップで該当薬品へ移動・自動展開）。CSS `.interaction-drug-part` 追加
+- **EMLA→薬品辞書リンク**: `ANES_AGENTS` に EMLA を追加（麻酔プロトコル本文から新設エントリへ1タップ）
+- 回帰テスト: `test_app_js_compound_interaction_refs_are_linkified`
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()` フォールバック21種を `/api/species-stats` 実測値に全同期、pendingStats: diseases 6520→6532・drugs 571→586
+- `build_disease_search_index.py` 再生成（6,532エントリ）
+- ServiceWorker: `CACHE_NAME` v106 → **v107**
+
+### テスト・CI（セッション終了時）
+- フルテストスイート: **3,768件合格**（34 skip、+13新規回帰テスト）、カバレッジ81.72%
+- ruff check/format: repo全体 clean
+- 配信DB: クリーンビルドで **7,061疾患**・586薬品、treatment/prevention/prognosis 100%

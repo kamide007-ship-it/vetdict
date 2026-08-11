@@ -2,8 +2,8 @@
  "species": "guinea_pig",
  "schema_version": 1,
  "note": "Frozen disease ids (name→id). Append-only: existing mappings are never changed. Delete to fall back to position-derived ids.",
- "generated_at": "2026-07-09T08:24:22Z",
- "count": 346,
+ "generated_at": "2026-08-09T00:51:02Z",
+ "count": 347,
  "locks": {
   "Abdominal Mass (Neoplasia)␟腹腔内腫瘤（腫瘍性）": "guinea_pig_0182",
   "Abscess (Subcutaneous)␟皮下膿瘍": "guinea_pig_0021",
@@ -167,6 +167,7 @@
   "Intestinal Adenocarcinoma␟腸腺癌（モルモット）": "guinea_pig_0216",
   "Intestinal Obstruction␟腸閉塞（モルモット）": "guinea_pig_0209",
   "Intestinal Parasites␟腸内寄生虫症": "guinea_pig_0011",
+  "Intestinal Torsion␟腸捻転": "guinea_pig_xd702215c",
   "Intussusception␟腸重積（モルモット）": "guinea_pig_0212",
   "Jaw Osteomyelitis␟顎骨髄炎（モルモット）": "guinea_pig_0231",
   "Keratitis␟角膜炎（モルモット）": "guinea_pig_0323",
