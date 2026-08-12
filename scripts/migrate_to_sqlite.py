@@ -1163,6 +1163,15 @@ def migrate_equine(conn) -> int:
     """Migrate equine diseases (Disease dataclass with different field names)."""
     mod = _load_module("api.species.equine_diseases")
     disease_db = getattr(mod, "DISEASE_DATABASE", [])
+    # Collapse duplicate cards (bare acronym "HYPP" vs full "Hyperkalemic
+    # Periodic Paralysis (HYPP)" etc.). The equine dataclass carries explicit
+    # ids, so dropping a duplicate cannot shift any other entry's id.
+    try:
+        from api.species.helpers import dedupe_disease_list
+
+        disease_db = dedupe_disease_list(disease_db)
+    except Exception:
+        pass
     count = 0
 
     def _ja_en(field_val):

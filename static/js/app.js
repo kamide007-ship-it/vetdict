@@ -1542,7 +1542,7 @@ function setDefaultStats(){
   SPECIES=[
     {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:600,drugs:546,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
     {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:525,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:598,drugs:345,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:345,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:263,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:283,drugs:69,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:308,drugs:136,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1563,7 +1563,7 @@ function setDefaultStats(){
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:1,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:6532,
+    diseases:6528,
     species:21,
     drugs:606,
     symptoms:52,
@@ -6244,6 +6244,15 @@ const ANES_AGENTS=[
   {q:"アトロピン",en:["atropine"],ja:["アトロピン"]},
   {q:"グアイフェネシン",en:["guaifenesin","glyceryl guaiacolate"],ja:["グアイフェネシン","グリセリルグアヤコレート"],abbr:["gge"]},
   {q:"ガバペンチン",en:["gabapentin"],ja:["ガバペンチン"]},
+  // Emergency/CPR agents (RECOVER protocols): previously rendered as dead text
+  // in the emergency category, the highest-stakes place to need a dose fast.
+  // NOTE: bare "アドレナリン" is NOT an alias — katakana matching has no word
+  // boundary, so it would also linkify the tail of "ノルアドレナリン".
+  {q:"エピネフリン",en:["epinephrine","adrenaline"],ja:["エピネフリン"]},
+  {q:"ドキサプラム",en:["doxapram"],ja:["ドキサプラム"]},
+  {q:"ドブタミン",en:["dobutamine"],ja:["ドブタミン"]},
+  {q:"デキストロース",en:["dextrose"],ja:["デキストロース"]},
+  {q:"メロキシカム",en:["meloxicam"],ja:["メロキシカム"]},
   {q:"オイゲノール",en:["eugenol"],ja:["オイゲノール"]},
   {q:"EMLAクリーム",en:["emla"],ja:["EMLAクリーム"]},
   {q:"MS-222",en:["ms-222","tricaine"],ja:["ms-222","トリカイン"]},

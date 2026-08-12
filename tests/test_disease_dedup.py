@@ -92,6 +92,79 @@ class TestDedupeUnit:
         assert dedupe_disease_list(items) is items
 
 
+class TestAcronymBridge:
+    """裸の頭字語名エントリ（"HYPP"）と正式名エントリ（"...(HYPP)"）の統合。
+
+    馬モジュールで HYPP/DDSP/PSSM/EOTRH が2枚のカードとして表示されていた
+    （2026-08 発見）。裸の頭字語エントリは、その頭字語をサフィックスに持つ
+    正式名エントリが種内に一意に存在する場合のみ統合され、正式名側が残る。
+    """
+
+    def test_bare_acronym_merges_into_unique_full_name(self):
+        items = [
+            _d(
+                "Hyperkalemic Periodic Paralysis (HYPP)",
+                "高カリウム性周期性麻痺(HYPP)",
+                causes_ja="SCN4A遺伝子変異" * 10,
+            ),
+            _d("HYPP", "高カリウム性周期性四肢麻痺", causes_ja="x"),
+        ]
+        out = dedupe_disease_list(items)
+        assert len(out) == 1
+        assert out[0]["name"] == "Hyperkalemic Periodic Paralysis (HYPP)"
+
+    def test_full_name_survives_even_when_bare_entry_is_richer(self):
+        # 正式名がカードの正準タイトルであり JSON overlay / prevalence のキー。
+        # モジュール段階の richness に関わらず正式名側を残す。
+        items = [
+            _d("HYPP", "高カリウム性周期性四肢麻痺", causes_ja="長い誤テンプレート" * 50),
+            _d("Hyperkalemic Periodic Paralysis (HYPP)", "高カリウム性周期性麻痺(HYPP)", causes_ja="x"),
+        ]
+        out = dedupe_disease_list(items)
+        assert len(out) == 1
+        assert out[0]["name"] == "Hyperkalemic Periodic Paralysis (HYPP)"
+
+    def test_ambiguous_acronym_never_bridges(self):
+        # "(DM)" を糖尿病と変性性脊髄症が共有 → 裸の "DM" はどちらにも統合しない
+        items = [
+            _d("Diabetes Mellitus (DM)", "糖尿病"),
+            _d("Degenerative Myelopathy (DM)", "変性性脊髄症"),
+            _d("DM", "ＤＭ"),
+        ]
+        assert len(dedupe_disease_list(items)) == 3
+
+    def test_mixed_case_short_name_is_not_an_acronym(self):
+        # "Ich"（白点病）は頭字語ではないため "(ICH)" と統合しない
+        items = [
+            _d("Ich", "白点病"),
+            _d("Ichthyophthirius (ICH)", "白点病（重症型）"),
+        ]
+        assert len(dedupe_disease_list(items)) == 2
+
+    def test_served_db_has_no_bare_acronym_duplicates(self):
+        import re
+        import sqlite3
+        from pathlib import Path
+
+        db = Path("instance/vetdict.db")
+        if not db.exists():
+            import pytest
+
+            pytest.skip("served DB not built")
+        conn = sqlite3.connect(db)
+        rows = conn.execute("SELECT species, name FROM diseases").fetchall()
+        by_sp = {}
+        for sp, nm in rows:
+            by_sp.setdefault(sp, set()).add(nm)
+        offenders = []
+        for sp, names in by_sp.items():
+            for nm in names:
+                m = re.search(r"\(([A-Z][A-Z0-9\-]{2,7})\)\s*$", nm or "")
+                if m and m.group(1) in names:
+                    offenders.append((sp, nm, m.group(1)))
+        assert not offenders, f"bare acronym duplicate cards remain: {offenders}"
+
+
 class TestDedupeIntegration:
     @pytest.fixture
     def client(self):

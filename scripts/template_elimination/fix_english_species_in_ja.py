@@ -50,6 +50,14 @@ EN_TO_JA = {
     "Dog": "犬",
 }
 
+# 小文字・snake_case の内部種ID（"hamsterにおける" / "guinea_pigの" 等）も
+# プレースホルダとして漏れることがあるため、同じ日本語名に解決する。
+# "Fish" は従来マップに欠落していたため大文字・小文字とも追加。
+EN_TO_JA.update({"Fish": "魚"})
+EN_TO_JA.update(
+    {k.lower().replace(" ", "_"): v for k, v in list(EN_TO_JA.items()) if k.lower().replace(" ", "_") not in EN_TO_JA}
+)
+
 _NAMES = sorted(EN_TO_JA, key=len, reverse=True)
 _ALT = "|".join(re.escape(n) for n in _NAMES)
 
@@ -129,6 +137,12 @@ def process_file(path: Path, apply: bool) -> int:
     print("  by field:", dict(field_counts.most_common()))
     for s in samples:
         print("   ", s)
+
+    if apply and total == 0:
+        # Nothing changed — do not rewrite the file. Re-serialising a file with
+        # zero content changes produces a formatting-only diff of tens of
+        # thousands of lines when the on-disk layout differs from json.dumps.
+        return total
 
     if apply:
         # Preserve each file's on-disk format so the diff stays minimal:
