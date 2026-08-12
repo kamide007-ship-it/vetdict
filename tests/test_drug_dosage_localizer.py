@@ -63,9 +63,58 @@ class TestFixedPhrases:
         assert localize_dosage("Not indicated") == "適応なし"
 
 
+class TestPhrasePatterns:
+    """管理語彙フレーズ（2026-08 拡張）の決定論的変換を検証する。"""
+
+    def test_repeat_in_days(self):
+        assert localize_dosage("50-100 mg/kg PO, repeat in 14 days") == "50-100 mg/kg 経口, 14日後に再投与"
+
+    def test_duration_after_multiplication(self):
+        assert localize_dosage("20-50 mg/kg PO q24h × 3-5 days") == ("20-50 mg/kg 経口 24時間毎 × 3-5日間")
+
+    def test_single_dose(self):
+        assert localize_dosage("1-2 mg/kg IM/ICe single dose") == "1-2 mg/kg 筋注/体腔内 単回投与"
+
+    def test_q_days_spelled_out(self):
+        out = localize_dosage("50 mg/kg PO q14 days or 10 mg/L bath × 6h")
+        assert out == "50 mg/kg 経口 14日毎 または 10 mg/L 薬浴 × 6h"
+
+    def test_drops_and_sublingual(self):
+        assert localize_dosage("5-7 mg/kg IV/IM or 1 drop sublingual") == ("5-7 mg/kg 静注/筋注 または 1滴 舌下")
+
+    def test_ophthalmic_ribbon(self):
+        assert localize_dosage("Apply 1cm ribbon to affected eye q6-8h") == ("患眼に1cmリボン状に塗布 6-8時間毎")
+
+    def test_nebulized_with_duration(self):
+        assert localize_dosage("Nebulized 0.5 mg/ml for 10-15 min") == ("ネブライザー投与 0.5 mg/ml 10-15分間")
+
+    def test_not_established_prefix_with_empirical_dose(self):
+        # 前半の固定句と後半の用量が両方変換され、区切り記号前の空白は残らない
+        out = localize_dosage("Not established; empirical 10-30 mg/kg PO q24-48h")
+        assert out == "用量未確立; 経験的に 10-30 mg/kg 経口 24-48時間毎"
+
+    def test_numbers_inside_phrases_preserved(self):
+        out = localize_dosage("5 mg/kg IM q3-5d × 8 injections (loading); then monthly maintenance")
+        assert out == "5 mg/kg 筋注 3-5日毎 × 8回注射 (負荷); その後 月1回 維持"
+
+    def test_bilingual_exact_split(self):
+        drugs = [
+            {
+                "id": "x",
+                "species_info": {"degu": {"dosage": "Not established in this species 本種では確立されていない"}},
+            }
+        ]
+        filled = fill_missing_dosage_ja(drugs)
+        assert filled == 1
+        info = drugs[0]["species_info"]["degu"]
+        assert info["dosage"] == "Not established in this species"
+        assert info["dosage_ja"] == "本種では確立されていない"
+
+
 class TestFailClosed:
     def test_free_text_returns_none(self):
-        assert localize_dosage("Apply thin layer to affected area") is None
+        # 管理語彙・フレーズに無い自由文はフレーズ拡張後も変換しない
+        assert localize_dosage("Consult formulary before use in neonates") is None
 
     def test_titrate_prose_returns_none(self):
         assert localize_dosage("titrate to effect") is None

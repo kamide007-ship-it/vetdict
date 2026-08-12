@@ -62,10 +62,22 @@ _WORD_MAP: dict[str, str] = {
     "divided": "分割",
     "diluted": "希釈",
     "dilute": "希釈",
+    "empirical": "経験的に",
+    "solution": "溶液",
+    "ointment": "軟膏",
+    "shampoo": "シャンプー",
+    "spray": "スプレー",
+    "gel": "ジェル",
+    "cream": "クリーム",
+    "suspension": "懸濁液",
+    "monthly": "月1回",
+    "weekly": "週1回",
+    "biweekly": "隔週",
+    "daily": "1日1回",
 }
 
 # そのまま保持する頻度・投与法略号（言語非依存で維持する慣用語）
-_KEEP_TOKENS: frozenset[str] = frozenset({"CRI", "PRN", "prn"})
+_KEEP_TOKENS: frozenset[str] = frozenset({"CRI", "PRN", "prn", "+"})
 
 # 大文字小文字を無視して一致させる固定フレーズ（末尾ピリオドは除去して判定）
 _FIXED_PHRASES: dict[str, str] = {
@@ -74,10 +86,85 @@ _FIXED_PHRASES: dict[str, str] = {
     "dose not established": "用量未確立",
     "not indicated": "適応なし",
     "not recommended": "非推奨",
+    "not recommended due to toxicity": "毒性のため非推奨",
+    "not commonly used": "一般的に使用されない",
     "contraindicated": "禁忌",
+    "do not use": "使用しない",
     "unknown": "不明",
     "not applicable": "該当なし",
 }
+
+# 部分フレーズ → 日本語（トークン分割前に置換する管理語彙のフレーズ集）。
+# 数値はキャプチャグループでそのまま保持し、置換結果はプレースホルダで保護して
+# 残りのトークンには従来どおり fail-closed の語彙判定を適用する。
+# 順序が重要: より特異的なフレーズ（"repeat in N days"）を汎用（"N days"）より先に置く。
+_PHRASE_PATTERNS: list[tuple[re.Pattern, str]] = [
+    (re.compile(r"(?i)\brepeat (?:in|after) (\d+(?:-\d+)?) ?days?\b"), r"\1日後に再投与"),
+    (re.compile(r"(?i)\brepeat (?:in|after) (\d+(?:-\d+)?) ?weeks?\b"), r"\1週後に再投与"),
+    (re.compile(r"(?i)\bq(\d+(?:-\d+)?) ?days\b"), r"\1日毎"),
+    (re.compile(r"(?i)\bq(\d+(?:-\d+)?) ?weeks?\b"), r"\1週毎"),
+    (re.compile(r"(?i)\bfor (\d+(?:-\d+)?) ?min(?:utes)?\b"), r"\1分間"),
+    (re.compile(r"(?i)\bfor (\d+(?:-\d+)?) ?days?\b"), r"\1日間"),
+    (re.compile(r"(?i)\bfor (\d+(?:-\d+)?) ?weeks?\b"), r"\1週間"),
+    (re.compile(r"(?i)\bover (\d+(?:-\d+)?) ?min(?:utes)?\b"), r"\1分かけて"),
+    (re.compile(r"(?i)\bover (\d+(?:-\d+)?) ?(?:hr|hrs|hours?)\b"), r"\1時間かけて"),
+    (re.compile(r"(?i)\bsingle dose\b"), "単回投与"),
+    (re.compile(r"(?i)\bonce daily\b"), "1日1回"),
+    (re.compile(r"(?i)\btwice daily\b"), "1日2回"),
+    (re.compile(r"(?i)\bthree times daily\b"), "1日3回"),
+    (re.compile(r"(?i)\b(\d+(?:-\d+)?) ?drops?\b"), r"\1滴"),
+    (re.compile(r"(?i)\b(\d+(?:-\d+)?) ?puffs?\b"), r"\1噴霧"),
+    (re.compile(r"(?i)\b(\d+(?:-\d+)?) ?doses\b"), r"\1回投与"),
+    (re.compile(r"(?i)\b(\d+(?:-\d+)?) ?injections\b"), r"\1回注射"),
+    (re.compile(r"(?i)\bunder (?:the )?tongue\b"), "舌下"),
+    (re.compile(r"(?i)\bmixed (?:in|with) food\b"), "フードに混和"),
+    (re.compile(r"(?i)\bin food\b"), "フードに混和"),
+    (re.compile(r"(?i)\bin drinking water\b"), "飲水に添加"),
+    (re.compile(r"(?i)\bper meal\b"), "毎食"),
+    (re.compile(r"(?i)\bwith meals?\b"), "食事と共に"),
+    (re.compile(r"(?i)\bon (?:an )?empty stomach\b"), "空腹時"),
+    (re.compile(r"(?i)\bas needed\b"), "必要時"),
+    (re.compile(r"(?i)\bto effect\b"), "効果発現まで"),
+    (re.compile(r"(?i)\bvia spacer\b"), "スペーサー使用"),
+    (re.compile(r"(?i)\bwith mask\b"), "マスク併用"),
+    (re.compile(r"(?i)\bvia nebulizer\b"), "ネブライザー投与"),
+    (re.compile(r"(?i)\bnebulized\b"), "ネブライザー投与"),
+    (re.compile(r"(?i)\bapply (?:a )?thin layer to (?:the )?wound\b"), "創部に薄く塗布"),
+    (re.compile(r"(?i)\bapply (?:a )?thin layer to (?:the )?affected areas?\b"), "患部に薄く塗布"),
+    (re.compile(r"(?i)\bapply (?:a )?thin layer\b"), "薄く塗布"),
+    (re.compile(r"(?i)\bapply to (?:the )?affected areas?\b"), "患部に塗布"),
+    (re.compile(r"(?i)\bto (?:the )?affected areas?\b"), "患部に"),
+    (
+        re.compile(r"(?i)\bapply (\d+(?:\.\d+)?) ?cm ribbon to (?:the )?affected eyes?\b"),
+        r"患眼に\1cmリボン状に塗布",
+    ),
+    (re.compile(r"(?i)\bto (?:the )?affected eyes?\b"), "患眼に"),
+    (re.compile(r"(?i)\btopical for wounds\b"), "創部に局所塗布"),
+    (re.compile(r"(?i)\brepeat (?:in|after) (\d+(?:-\d+)?) ?min(?:utes)?\b"), r"\1分後に再投与"),
+    (re.compile(r"(?i)\bif needed\b"), "必要に応じて"),
+    (re.compile(r"(?i)\bwith food\b"), "食事と共に"),
+    (re.compile(r"(?i)\bnot established\b"), "用量未確立"),
+    (re.compile(r"(?i)\bnot approved for cats\b"), "猫では未承認"),
+    (re.compile(r"(?i)\bnot approved for dogs\b"), "犬では未承認"),
+    (
+        re.compile(r"(?i)\bstart very low and titrate over weeks\b"),
+        "ごく低用量から開始し数週間かけて漸増",
+    ),
+    (re.compile(r"(?i)\bstart (?=\d)"), "開始用量 "),
+    (re.compile(r"(?i)\bin (\d+(?:\.\d+)?) ?m[lL] (?:of )?saline\b"), r"生理食塩水\1mLに溶解"),
+    (re.compile(r"(?i)\bin (\d+(?:\.\d+)?) ?L (?:of )?water\b"), r"水\1Lに溶解"),
+    (re.compile(r"(?i)\bin (\d+(?:\.\d+)?) ?m[lL]\b"), r"\1mLに溶解"),
+    (re.compile(r"(?i)\bvia nasogastric tube\b"), "経鼻胃チューブ投与"),
+    # 汎用の期間表現は特異的フレーズの後に置く（"× 3-5 days" 等の残余を捕捉）
+    (re.compile(r"(?i)\b(\d+(?:-\d+)?) ?days\b"), r"\1日間"),
+    (re.compile(r"(?i)\b(\d+(?:-\d+)?) ?weeks\b"), r"\1週間"),
+]
+
+# フレーズ置換結果を保護するプレースホルダ（私用領域文字。入力は CJK ガードで
+# 日本語を含まないことが保証されるため、原文と衝突しない）。
+_PH_OPEN = "\ue000"
+_PH_CLOSE = "\ue001"
+_PH_TOKEN = re.compile(rf"^{_PH_OPEN}(\d+){_PH_CLOSE}$")
 
 # 数値・単位トークンとみなす（＝そのまま保持）。数字を含めば単位付き用量とみなす。
 _HAS_DIGIT = re.compile(r"\d")
@@ -207,11 +294,27 @@ def localize_dosage(dosage: str) -> Optional[str]:
     if key in _FIXED_PHRASES:
         return _FIXED_PHRASES[key]
 
+    # 管理語彙フレーズ（"repeat in 14 days" 等）をプレースホルダに置換して保護する。
+    # 置換後の残りトークンには従来どおり fail-closed の語彙判定が適用されるため、
+    # フレーズ以外に未知語があれば全体として None になる（安全性は不変）。
+    protected: list[str] = []
+
+    def _protect(pattern: re.Pattern, repl: str, s: str) -> str:
+        def _sub(m: re.Match) -> str:
+            protected.append(m.expand(repl))
+            return f" {_PH_OPEN}{len(protected) - 1}{_PH_CLOSE} "
+
+        return pattern.sub(_sub, s)
+
+    phrased = text
+    for pattern, repl in _PHRASE_PATTERNS:
+        phrased = _protect(pattern, repl, phrased)
+
     # トークン分割: 空白で分割しつつ、区切り記号（; , × ( )）は保持する。
     # 日本語では読点・記号をそのまま維持し、英単語のみ翻訳する。
     # "×"（用量回数・期間の乗算記号）は頻度略号に密着することがある（"q12h×3"）ため、
     # 分割前に前後へ空白を挿入して独立トークンにする。
-    tokenizable = text.replace("×", " × ")
+    tokenizable = phrased.replace("×", " × ")
     raw_tokens = tokenizable.split()
     out: list[str] = []
     for tok in raw_tokens:
@@ -219,7 +322,9 @@ def localize_dosage(dosage: str) -> Optional[str]:
         # 文末ピリオドを剥がさないと "q24h." が頻度辞書にマッチせず、数値保持パスを
         # 通って英語の頻度略号がそのまま日本語出力に漏れる（10.5 等の小数点は
         # トークン内部にあるため影響しない）。
-        m = re.match(r"^([(\[]*)(.*?)([)\],;×.]*)$", tok)
+        # 末尾のコロンも剥がす（"PO:" / "nebulized:" のようなラベル用法。
+        # 数値比 "1:32" はコロンがトークン内部にあるため影響しない）。
+        m = re.match(r"^([(\[]*)(.*?)([)\],;×.:]*)$", tok)
         prefix, core, suffix = (m.group(1), m.group(2), m.group(3)) if m else ("", tok, "")
 
         if core == "":
@@ -227,7 +332,11 @@ def localize_dosage(dosage: str) -> Optional[str]:
             continue
 
         translated: Optional[str]
-        if core in _KEEP_TOKENS:
+        ph = _PH_TOKEN.match(core)
+        if ph:
+            # フレーズ置換済みプレースホルダ → 保護しておいた日本語に復元
+            translated = protected[int(ph.group(1))]
+        elif core in _KEEP_TOKENS:
             translated = core
         elif _localize_freq(core) is not None:
             # 頻度略号（q12h 等）は数字を含むが単位ではないため先に判定
@@ -247,16 +356,30 @@ def localize_dosage(dosage: str) -> Optional[str]:
         out.append(prefix + (translated or core) + suffix)
 
     result = " ".join(out).strip()
+    # フレーズ置換で独立トークン化された区切り記号の前の余分な空白を除去
+    result = re.sub(r"\s+([;,.:])", r"\1", result)
     # 変換結果が原文と同一（＝翻訳すべき語彙が無かった）なら None
     if not result or result == text:
         return None
     return result
 
 
+# 英語と日本語が同一文字列に併記されたエントリ（完全一致のみ分割）。
+# "dosage" に両言語が焼き込まれていると、日本語UIには英語が、英語UIには日本語が
+# それぞれ余分に表示される。既知の完全一致パターンに限り EN/JA に分割する。
+_BILINGUAL_EXACT: dict[str, tuple[str, str]] = {
+    "Not established in this species 本種では確立されていない": (
+        "Not established in this species",
+        "本種では確立されていない",
+    ),
+}
+
+
 def fill_missing_dosage_ja(drugs: list[dict[str, Any]]) -> int:
     """DRUGS 内で dosage はあるが dosage_ja が欠落したエントリを決定論的に補完。
 
     補完できた species_info エントリ数を返す。既存の dosage_ja は保持。
+    既知の英日併記文字列（``_BILINGUAL_EXACT``）は EN/JA の両フィールドに分割する。
     """
     filled = 0
     for drug in drugs:
@@ -268,6 +391,11 @@ def fill_missing_dosage_ja(drugs: list[dict[str, Any]]) -> int:
                 continue
             dosage = info.get("dosage")
             if not dosage:
+                continue
+            pair = _BILINGUAL_EXACT.get(dosage.strip())
+            if pair:
+                info["dosage"], info["dosage_ja"] = pair
+                filled += 1
                 continue
             ja = localize_dosage(dosage)
             if ja:

@@ -2169,3 +2169,70 @@ is-referenced-but-absent 監査で、コンテンツが参照するのに未収�
 - フルテストスイート: **3,768件合格**（34 skip、+13新規回帰テスト）、カバレッジ81.72%
 - ruff check/format: repo全体 clean
 - 配信DB: クリーンビルドで **7,061疾患**・586薬品、treatment/prevention/prognosis 100%
+
+## 2026-08セッション（第6弾: 薬用量ローカライザのフレーズ拡張 + 馬の頭字語重複カード統合 + 緊急薬リンク化）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **3,785件合格**（34 skip、カバレッジ81.77%）
+- 薬用量: safe薬品の dosage 欠落 **0**（606薬品）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose/route/name_ja/notes_ja 欠落 **0**、全種 references あり
+- 疾患: 配信7,061疾患で treatment/prevention/prognosis/causes/description/pathophysiology/clinical_signs 空欄 **0**
+
+### 薬用量ローカライザのフレーズ拡張（JA UIの英語露出 659→510件、-149）
+- `drug_dosage_localizer.py` に**管理語彙フレーズ層**を追加（プレースホルダ保護方式）:
+  - フレーズ置換（"repeat in 14 days"→「14日後に再投与」等）を先に適用し、置換結果を私用領域文字で保護。
+    残りトークンには従来どおり fail-closed 語彙判定を適用するため、**未知語が1語でもあれば全体 None**（安全性不変）
+  - 期間（for/over N min/days/weeks、× N days）、点眼（N drops→N滴、眼軟膏リボン）、吸入
+    （nebulized/via spacer/with mask）、食事（per meal/with food/in food/empty stomach）、
+    希釈（in N ml saline/in N L water）、頻度（qN days/once daily）、単回投与/N回注射 等 60+ フレーズ
+  - 固定フレーズ追加: "Not recommended due to toxicity"→「毒性のため非推奨」等5種
+  - 単語追加: solution/ointment/shampoo/monthly/weekly/empirical 等15語、"+"を保持トークンに
+  - 末尾コロン剥がし（"PO:"/"nebulized:" がラベル用法で頻度・経路辞書にマッチしなかった）
+  - 区切り記号前の余分な空白除去（"用量未確立 ;"→"用量未確立;"）
+- **英日併記文字列の分割**: "Not established in this species 本種では確立されていない"（20件）を
+  dosage=EN / dosage_ja=JA に分割（完全一致のみ、`_BILINGUAL_EXACT`）。英語UIの日本語露出も同時解消
+- モジュールロード時の自動補完: 614→**763件**。回帰テスト+11件（フレーズ変換10 + fail-closed更新1）
+- 残510件は自由文（"titrate to effect"等）で設計通り未変換。全変換結果に経路/頻度略号の残存0を全数検証
+
+### 馬の頭字語重複カード統合（HYPP/DDSP/PSSM/EOTRH、737→617... 実測621→617）
+- **バグ**: 馬モジュールに裸の頭字語エントリ（"HYPP"）と正式名エントリ（"Hyperkalemic Periodic
+  Paralysis (HYPP)"）が併存し、疾患ブラウザに**同一疾患が2枚のカード**で表示されていた（4組8枚）。
+  さらに ms_hypp 側は「HYPPの原因は感染性（脳炎・髄膜炎）・腫瘍性…」という**臨床的に誤った**
+  汎用テンプレート病因を保持（HYPPはSCN4A変異による純遺伝性チャネロパチー）
+- `dedupe_disease_list`（helpers.py）に**頭字語ブリッジ**を追加: 裸の頭字語名エントリは、その頭字語を
+  括弧サフィックスに持つ正式名エントリが**種内に一意**に存在する場合のみ統合。曖昧な頭字語
+  （"(DM)"=糖尿病/変性性脊髄症）は決して統合しない。統合時は**正式名側が常に残る**
+  （正式名がカードの正準タイトルであり、JSON overlay・prevalence のキーでもあるため。
+  richness はモジュール段階では信頼できない — 誤テンプレートで水増しされた裸エントリが勝っていた）
+- `migrate_to_sqlite.py` の `migrate_equine()` に dedupe を追加（equine パスだけ未適用だった）
+- 検証: 配信DB 7,061→**7,057疾患**（馬621→617）、horse prevalence の dead key 0、正式名側の
+  キュレート内容（SCN4A等）が全4組で残存。回帰テスト+5件（ブリッジ/曖昧头字語/配信DB検証）
+
+### Cyrillic homoglyph 汚染の修正
+- 馬HYPPの causes_ja/description_ja で Quarter Horse 種牡馬 "Impressive" が "Imprессive"
+  （キリル文字 е/с 混入）と綴られていた（検索・コピペ破壊）→ JSON 2箇所修正
+- 回帰テスト: 全疾患フィールドに キリル文字 0 を検証（`test_no_cyrillic_homoglyphs_in_disease_json`）
+
+### 小文字種名プレースホルダの日本語化（"hamsterにおける" 等 68+291件）
+- `fix_english_species_in_ja.py` の EN_TO_JA に**小文字・snake_case 種ID**（hamster/guinea_pig/
+  amphibian等21種）+ 欠落していた **Fish/fish** を追加
+- JSON 68トークン + 種モジュール .py **291トークン**（exotic_other 202含む）を日本語化。
+  モジュールパッチは**particle パターンのみ**適用（paren パターンは英語フィールドの "(fish)" を
+  誤変換するため除外 — レビューで発見し回避。配信DBスイープはJAフィールド限定なので従来どおり両方適用）
+- "Amazon parrotに" 等の品種・固有名は lookbehind 保護で不変。回帰テスト: 検証種リストを
+  小文字snake_case+Fishに拡張（JSON+配信DBの両テストが自動カバー）
+
+### UX: 麻酔緊急薬のワンタップ導線（デッドテキスト40行の解消）
+- **エピネフリン（20行）・ドキサプラム（17行）・ドブタミン・50%デキストロース・メロキシカム**が
+  `ANES_AGENTS` に無く、麻酔タブの**緊急（RECOVER CPR）カテゴリ**で素のテキストのまま —
+  用量に最速でたどり着きたい最高スティクスの場所でリンク切れだった
+- 5剤を追加（全て薬品辞書に収載済み、`navigateToDrug` の完全一致着地で正しい行に展開）。
+  裸の「アドレナリン」はエイリアスにしない（カタカナ部分一致が「ノルアドレナリン」の尾部に誤マッチ）
+- 未リンク残: Triple Drip (GKX) 1行のみ（混合物のため設計通り）
+- 回帰テスト+2件: 緊急5剤の存在・解決、**全プロトコル薬剤行のリンク可能性**（新規プロトコル追加時に
+  辞書エントリ/エイリアス欠落があればCIで検出）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: horse 598→594、pendingStats diseases 6532→6528（重複統合を反映）
+- `build_disease_search_index.py` 再生成（6,528エントリ）
+- ServiceWorker: `CACHE_NAME` v109 → **v110**

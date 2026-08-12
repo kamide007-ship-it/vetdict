@@ -139,3 +139,38 @@ def test_protocol_drug_names_have_a_resolver_alias():
                         used.add(alias)
     # At least 20 distinct base agents should be recognised across the protocols.
     assert len(used) >= 20, f"resolver only recognised {len(used)} agents in protocols"
+
+
+def test_emergency_cpr_agents_are_linkified():
+    """RECOVER emergency drugs (epinephrine, doxapram, dobutamine, dextrose) and
+    meloxicam were dead text in the anaesthesia tab until 2026-08 — the emergency
+    category is the highest-stakes place to need one-tap access to a dose. Each
+    must have a canonical term in ANES_AGENTS that resolves to a dictionary entry."""
+    terms = _parse_anes_agents()
+    for required in ("エピネフリン", "ドキサプラム", "ドブタミン", "デキストロース", "メロキシカム"):
+        assert required in terms, f"{required} missing from ANES_AGENTS"
+        assert _resolves(required), f"{required} does not resolve to a drug entry"
+
+
+def test_protocol_drug_rows_have_no_unlinkable_single_agents():
+    """Every single-agent drug row in every protocol must be resolvable by the JS
+    linkifier. Mixtures (Triple Drip GKX) are the only allowed exception, so any
+    newly added protocol agent without a dictionary entry + alias fails here."""
+    src = APP_JS.read_text(encoding="utf-8")
+    start = src.index("const ANES_AGENTS=[")
+    end = src.index("];", start)
+    aliases = set()
+    for grp in re.findall(r"(?:en|ja):\[([^\]]*)\]", src[start:end]):
+        aliases.update(a.lower() for a in re.findall(r'"([^"]+)"', grp))
+    allowed_unmatched = {"Triple Drip (GKX)"}
+    unmatched = []
+    for data in ANESTHESIA_PROTOCOLS.values():
+        for p in data.get("protocols", []) or []:
+            for row in p.get("drugs", []) or []:
+                nm = row.get("name") or ""
+                nm_ja = row.get("name_ja") or ""
+                if nm in allowed_unmatched:
+                    continue
+                if not any(a in nm.lower() or a in nm_ja.lower() for a in aliases):
+                    unmatched.append(nm)
+    assert not unmatched, f"anaesthesia drug rows with no linkifier alias: {sorted(set(unmatched))}"

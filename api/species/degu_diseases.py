@@ -55,7 +55,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "糖尿病性ケトアシドーシスはデグーにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "treatment": "Aggressive IV fluid therapy, regular insulin infusion with close glucose monitoring, electrolyte correction (especially potassium), bicarbonate if severely acidotic, and treatment of precipitating cause.",
-        "treatment_ja": "糖尿病性ケトアシドーシスはdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
+        "treatment_ja": "糖尿病性ケトアシドーシスはデグーでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "糖尿病性ケトアシドーシスの予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
         "prognosis": "Guarded. With aggressive treatment, many patients recover, but mortality remains significant. Recurrence risk is high without proper long-term diabetes management.",
@@ -199,7 +199,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "糖尿病性白内障はデグーにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "treatment": "Topical ophthalmic medication (antibiotics, anti-inflammatories, lubricants as indicated), pain management, protection from self-trauma, and monitoring for complications.",
-        "treatment_ja": "糖尿病性白内障はdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
+        "treatment_ja": "糖尿病性白内障はデグーでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "糖尿病性白内障の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",
@@ -733,9 +733,9 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["fecal_exam", "fecal_culture", "physical_exam"],
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
-        "causes_ja": "Exotic Otherにおける非特異的下痢（Exotic Other）の原因: その他エキゾチックにおける代謝性の消化器系疾患。非特異的下痢は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
+        "causes_ja": "その他における非特異的下痢（Exotic Other）の原因: その他エキゾチックにおける代謝性の消化器系疾患。非特異的下痢は適切な診断と治療管理が重要である。早期発見と適切な介入が予後改善の鍵となる。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
-        "pathophysiology_ja": "非特異的下痢（Exotic Other）はExotic Otherにおける消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
+        "pathophysiology_ja": "非特異的下痢（Exotic Other）はその他における消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "treatment": "FLUID RESUSCITATION (PRIORITY): Subcutaneous fluids — warmed lactated Ringer's solution "
         "50-100 mL/kg/day in divided doses (2-3 sites, maximum 10 mL per site). Reassess hydration "
         "q6-8h. Severe dehydration (>8%): IV access via lateral tail vein or jugular — 0.9% NaCl "
@@ -1398,7 +1398,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Impaired insulin production or action leads to persistent hyperglycemia, causing osmotic diuresis, cellular energy deficit, and progressive damage to vascular endothelium, nerves, and organs.",
         "pathophysiology_ja": "糖尿病性神経障害はデグーにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "treatment": "Insulin therapy with dose titration based on glucose curves, dietary management with consistent high-fiber meals, regular blood glucose monitoring, and management of concurrent conditions.",
-        "treatment_ja": "糖尿病性神経障害はdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
+        "treatment_ja": "糖尿病性神経障害はデグーでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes maintaining appropriate body weight through balanced diet and adequate exercise, regular health monitoring, and avoiding high-sugar/high-fat foods.",
         "prevention_ja": "糖尿病性神経障害の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
         "prognosis": "Fair to good with dedicated owner compliance and proper insulin management. Uncontrolled diabetes leads to serious complications including ketoacidosis.",
@@ -1415,7 +1415,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["blood_glucose", "fructosamine", "urinalysis"],
         "treatment": "Insulin therapy with dose titration based on glucose curves, dietary management with consistent high-fiber meals, regular blood glucose monitoring, and management of concurrent conditions.",
-        "treatment_ja": "糖尿病 - 1型（若年発症）はdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
+        "treatment_ja": "糖尿病 - 1型（若年発症）はデグーでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prognosis": "Fair to good with dedicated owner compliance and proper insulin management. Uncontrolled diabetes leads to serious complications including ketoacidosis.",
         "prognosis_ja": "飼い主の協力と適切なインスリン管理があれば予後やや良好〜良好。管理不良の糖尿病はケトアシドーシス等の重篤な合併症を招く。",
         "onset_pattern": {"chronic"},
@@ -1430,7 +1430,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["blood_glucose", "fructosamine", "diet_review"],
         "treatment": "Insulin therapy with dose titration based on glucose curves, dietary management with consistent high-fiber meals, regular blood glucose monitoring, and management of concurrent conditions.",
-        "treatment_ja": "糖尿病 - 2型（食事誘発性）はdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
+        "treatment_ja": "糖尿病 - 2型（食事誘発性）はデグーでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prognosis": "Fair to good with dedicated owner compliance and proper insulin management. Uncontrolled diabetes leads to serious complications including ketoacidosis.",
         "prognosis_ja": "飼い主の協力と適切なインスリン管理があれば予後やや良好〜良好。管理不良の糖尿病はケトアシドーシス等の重篤な合併症を招く。",
         "onset_pattern": {"chronic"},
@@ -1465,7 +1465,7 @@ DISEASES: List[Dict[str, Any]] = [
         "damage is largely irreversible once established. Early glycemic control is the ONLY "
         "effective intervention. References: Edwards (2009) Vet Clin Exot Anim; Jekl et al. "
         "(2011) J Small Anim Pract.",
-        "treatment_ja": "糖尿病性網膜症はdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
+        "treatment_ja": "糖尿病性網膜症はデグーでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
         "【血糖管理（最重要）】厳格な食事管理 — 糖分を含む全食品の排除、チモシー牧草ベース食"
         "（≥80%）、果物・根菜・糖分添加おやつ禁忌。空腹時血糖<200 mg/dLを目標。フルクトサミン"
         "を4-8週ごとにモニタリング。注: デグーではインスリン療法は標準的実践ではない — "
@@ -1494,7 +1494,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Progressive loss of functional nephrons impairs glomerular filtration, tubular reabsorption, and endocrine function. Uremic toxin accumulation and fluid-electrolyte imbalance lead to systemic complications.",
         "pathophysiology_ja": "糖尿病性腎症はデグーにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "treatment": "Insulin therapy with dose titration based on glucose curves, dietary management with consistent high-fiber meals, regular blood glucose monitoring, and management of concurrent conditions.",
-        "treatment_ja": "糖尿病性腎症はdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
+        "treatment_ja": "糖尿病性腎症はデグーでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "糖尿病性腎症の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
         "prognosis": "Fair to good with dedicated owner compliance and proper insulin management. Uncontrolled diabetes leads to serious complications including ketoacidosis.",
@@ -1515,7 +1515,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "糖尿病性足潰瘍はデグーにおける代謝・内分泌疾患である。基礎病態はホルモンのフィードバックループ、酵素活性、または基質代謝の調節障害を伴う。循環ホルモン、電解質、代謝中間体のバランス異常が複数の臓器系にわたる細胞機能に影響を及ぼす。代償機構が一時的に恒常性を維持するが、最終的に代償不全に陥り、進行性の臨床的悪化と多臓器への影響を引き起こす。",
         "treatment": "Insulin therapy with dose titration based on glucose curves, dietary management with consistent high-fiber meals, regular blood glucose monitoring, and management of concurrent conditions.",
-        "treatment_ja": "糖尿病性足潰瘍はdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
+        "treatment_ja": "糖尿病性足潰瘍はデグーでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "糖尿病性足潰瘍の予防には適切な食事設計、血液検査を含む定期的な健康モニタリング、健康体重の維持、過剰なおやつや不適切な食事の回避、無症候性変化の早期発見時の迅速な介入が含まれる。",
         "prognosis": "Fair to good with dedicated owner compliance and proper insulin management. Uncontrolled diabetes leads to serious complications including ketoacidosis.",
@@ -2777,7 +2777,7 @@ DISEASES: List[Dict[str, Any]] = [
         "PROGNOSIS NOTE: Nerve damage is often partially irreversible once established; early "
         "glycemic control is critical to prevent progression. "
         "References: Edwards (2009) Vet Clin Exot Anim; Jekl et al. (2011).",
-        "treatment_ja": "末梢神経障害（糖尿病性）はdeguでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
+        "treatment_ja": "末梢神経障害（糖尿病性）はデグーでは非常に稀。報告例ではインスリン依存性で、プロジンク 0.5-1 IU/動物 SC q12h から開始、家庭での血糖モニタ（耳介穿刺、CGM試験的）と組み合わせる。低糖質・高繊維食。インスリン抵抗性をきたす副腎疾患・甲状腺疾患・肥満を除外。支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
         "≥80%。空腹時血糖<200 mg/dL目標。デグーではインスリン療法は標準的でない。"
         "【神経障害性疼痛管理】ガバペンチン5-10 mg/kg PO q8-12h（神経障害性疼痛の第一選択 — "
         "他種からの外挿）。メロキシカム1-2 mg/kg PO/SC q24h。【補助】ビタミンB群サプリメント。"

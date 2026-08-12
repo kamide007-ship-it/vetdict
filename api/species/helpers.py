@@ -124,7 +124,10 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
     "Egg Binding / Dystocia" vs "Egg Binding (Dystocia)" — which render as
     identical URL slugs — collapse too). Because the UI renders ``name_ja`` (JA
     mode) or ``name`` (EN mode), any two entries that collide on any of these
-    would appear as identical cards to the user.
+    would appear as identical cards to the user. A bare acronym-named entry
+    ("HYPP") additionally merges into the unique full-name entry carrying that
+    acronym suffix ("Hyperkalemic Periodic Paralysis (HYPP)"); ambiguous
+    acronyms held by multiple distinct diseases never bridge.
 
     The richest entry (most non-empty content fields, then longest total
     content) is kept; ties resolve to the earliest entry. The relative order of
@@ -150,9 +153,17 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
     by_name: Dict[str, int] = {}
     by_ja: Dict[str, int] = {}
     by_slug: Dict[str, int] = {}
+    # Acronym bridging: "Hyperkalemic Periodic Paralysis (HYPP)" and a bare
+    # "HYPP" entry are the same disease shown as two cards. Merge a bare
+    # acronym-named entry into the full-name entry ONLY when exactly one
+    # full-name entry carries that acronym suffix in this species (an acronym
+    # shared by two different diseases, e.g. "(DM)", must never bridge).
+    paren_acr: Dict[str, Set[int]] = {}
+    bare_acr: Dict[str, int] = {}
     for i, e in enumerate(diseases):
         raw_nm = _disease_field(e, "name", "") or _disease_field(e, "name_en", "") or ""
-        nm = raw_nm.strip().lower()
+        raw_nm = raw_nm.strip()
+        nm = raw_nm.lower()
         ja = (_disease_field(e, "name_ja", "") or "").strip()
         slug = _re.sub(r"[^a-z0-9]+", "-", nm).strip("-")
         if nm:
@@ -172,17 +183,33 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
                 union(i, by_slug[slug])
             else:
                 by_slug[slug] = i
+        m = _re.search(r"\(([A-Z][A-Z0-9\-]{2,7})\)\s*$", raw_nm)
+        if m:
+            paren_acr.setdefault(m.group(1), set()).add(i)
+        elif _re.fullmatch(r"[A-Z][A-Z0-9\-]{2,7}", raw_nm):
+            bare_acr[raw_nm] = i
+
+    for acr, bare_i in bare_acr.items():
+        holders = paren_acr.get(acr)
+        if holders and len({find(h) for h in holders}) == 1:
+            union(bare_i, next(iter(holders)))
 
     groups: Dict[int, List[int]] = {}
     for i in range(len(diseases)):
         groups.setdefault(find(i), []).append(i)
 
     keep: Set[int] = set()
+    bare_idx = set(bare_acr.values())
     for idxs in groups.values():
         if len(idxs) == 1:
             keep.add(idxs[0])
         else:
-            keep.add(max(idxs, key=lambda i: (_dedup_richness(diseases[i]), -i)))
+            # A full-name entry always beats a bare acronym-named one: the full
+            # name is the canonical card title and the key that JSON-overlay /
+            # prevalence lookups match, so keeping "HYPP" over "Hyperkalemic
+            # Periodic Paralysis (HYPP)" would both read worse and orphan the
+            # curated overlay content. Richness breaks ties as before.
+            keep.add(max(idxs, key=lambda i: (i not in bare_idx, _dedup_richness(diseases[i]), -i)))
 
     if len(keep) == len(diseases):
         return diseases

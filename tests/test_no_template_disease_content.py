@@ -1761,8 +1761,10 @@ _DESCRIPTION_BOILERPLATE_JA = (
 
 # English species names that must never sit immediately before a Japanese
 # particle or inside parentheses in Japanese text (breed names like
-# "Quarter Horse" are excluded by the preceding-word lookbehind).
-_EN_SPECIES = (
+# "Quarter Horse" are excluded by the preceding-word lookbehind). Lowercase
+# snake_case species ids ("hamsterにおける", "guinea_pigの") leak the same way
+# from templated generators, so both forms are asserted (2026-08).
+_EN_SPECIES_TITLE = (
     "Guinea Pig",
     "Sugar Glider",
     "Exotic Other",
@@ -1783,7 +1785,9 @@ _EN_SPECIES = (
     "Cat",
     "Dog",
     "Horse",
+    "Fish",
 )
+_EN_SPECIES = _EN_SPECIES_TITLE + tuple(n.lower().replace(" ", "_") for n in _EN_SPECIES_TITLE)
 _EN_ALT = "|".join(re.escape(n) for n in sorted(_EN_SPECIES, key=len, reverse=True))
 _EN_SPECIES_PARTICLE = re.compile(
     rf"(?<![A-Za-z])(?<![A-Za-z]\s)(?P<sp>{_EN_ALT})(?=(に|の|は|を|では|における|にみられる|に発症|に好発))"
@@ -1881,6 +1885,23 @@ def test_served_db_no_english_species_in_japanese_fields():
         f"Found {len(offenders)} English species names in served-DB JA fields. First 8:\n"
         + "\n".join(f"  {n}.{f}" for n, f in offenders[:8])
     )
+
+
+def test_no_cyrillic_homoglyphs_in_disease_json():
+    """Latin/Cyrillic homoglyph contamination must not survive in disease text.
+
+    Found 2026-08: the HYPP entries spelled the Quarter Horse sire "Impressive"
+    as "Impressive" with Cyrillic е/с homoglyphs. Homoglyphs break search and
+    read as corrupted text, so no disease field may contain Cyrillic at all.
+    """
+    records = _load_json_entries()
+    cyr = re.compile(r"[Ѐ-ӿ]")
+    offenders = []
+    for r in records:
+        for k, v in r.items():
+            if isinstance(v, str) and cyr.search(v):
+                offenders.append((r.get("species"), r.get("name"), k))
+    assert not offenders, f"Cyrillic homoglyphs found: {offenders[:8]}"
 
 
 # ---------------------------------------------------------------------------
