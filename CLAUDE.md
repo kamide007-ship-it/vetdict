@@ -2236,3 +2236,54 @@ is-referenced-but-absent 監査で、コンテンツが参照するのに未収�
 - `setDefaultStats()`: horse 598→594、pendingStats diseases 6532→6528（重複統合を反映）
 - `build_disease_search_index.py` 再生成（6,528エントリ）
 - ServiceWorker: `CACHE_NAME` v109 → **v110**
+
+## 2026-08セッション（第7弾: referenced-but-absent 薬品15剤 + 表記ゆれエイリアス機構 + 麻酔注意事項のクリック導線）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **3,803件合格**（34 skip、カバレッジ81.82%）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose/name_ja 欠落 **0**、全種 references あり
+- 疾患: 配信7,057疾患で主要臨床フィールド（治療/病因/予後/予防/病態/説明）の空欄 **0**
+- prevalence dead key: **10**（当該種DBに疾患自体が無い既知の残、上限15のガード内）
+- 薬用量: safe薬品の dosage 欠落 0（dosage_ja 未変換分は自由文の設計通り fail-closed）
+
+### 薬用量マニュアル: referenced-but-absent 15剤の補完（`drug_batch_35.py` 新規、606→621薬品）
+カタカナ/英語トークン頻度解析（治療テキスト）+ 解毒薬相互参照監査の第3回スイープで検出:
+- **プラリドキシム（2-PAM）** — 有機リン中毒の標準解毒薬なのに未収載（**184参照**で最多）。20 mg/kg IM/緩徐IV q8-12h＋アトロピン併用、エージング前の早期投与、カーバメート相対禁忌
+- **レギュラーインスリン** — DKA CRI 0.05-0.1 U/kg/h・高K血症シフト 0.25-0.5 U/kg IV+ブドウ糖（16参照: 尿道閉塞・AKI・アジソンクリーゼ）。輸液チューブ吸着・低K血症未補正時の開始禁止を明記。馬高脂血症（McKenzie 2011）
+- **トリアムシノロンアセトニド** — 馬関節内 6-18 mg/関節（31参照）、EMS/PPID/蹄葉炎既往馬の注意
+- **イミドカルブ** — 大型バベシア 6.6 mg/kg IM×2・馬ピロプラズマ（T. equi 4 mg/kg q72h×4、**ロバ致死感受性**）・H. canis。アトロピン前処置。B. gibsoni 効果不良（アトバコン+アジスロ推奨）を明記
+- **サクシマー（DMSA）** — 鳥鉛/亜鉛中毒の経口キレート 25-35 mg/kg q12h（Denver 2000、**80 mg/kg超で死亡**の安全域警告）。CaEDTA・ペニシラミン・BALと合わせ重金属解毒薬セット完備
+- **シドフォビル0.5%点眼** — FHV-1 q12h（Fontenelle 2008、イドクスウリジンq4-6hに対する利点）
+- **アルベンダゾール** — E. cuniculi代替/ジアルジア。**猫 safe:False**（再生不良性貧血）、ウサギ骨髄抑制警告、フェンベンダゾール優先
+- **エニルコナゾール（イマベロール）** — 犬馬の皮膚糸状菌0.2%リンス。**猫 safe:False**（グルーミング摂取毒性）
+- **エスモロール** — 超短時間β1遮断 0.05-0.1 mg/kg IV→CRI 25-200 µg/kg/分（SVT診断・鳥メチルキサンチン中毒）
+- **オセルタミビル** — フェレットインフルエンザ 5 mg/kg q12h。**犬 safe:False（パルボ使用は Savigny 2010 で利益なしと明記）**
+- **フルルビプロフェン0.03%点眼**・**イドクスウリジン0.1%点眼** — ぶどう膜炎NSAID/FHV-1抗ウイルス
+- **トリクラベンダゾール** — 肝蛭（未成熟虫にも有効な唯一の吸虫駆除薬）
+- **ジメルカプロール（BAL）** — ヒ素解毒。**鉄・Cd・Se中毒禁忌（複合体がより毒性）**・BAL中の鉄剤禁止
+- **セレコキシブ** — 鳥PDD/ABVの経験的COX-2阻害（Dahlhausen 2002、10-20 mg/kg q24h）。PDD/ABV等の既存参照も解決
+
+### 表記ゆれエイリアス機構（`_KATAKANA_VARIANT_ALIASES` + `search_aliases` フィールド）
+- 治療テキストの正当な表記ゆれが関連薬品チップの解決を静かに壊していた（デキサメサゾン64回・ニスタチン21回・シルバースルファジアジン55回等）→ `_build_drug_keyword_index` が中央レジストリ＋薬品エントリの `search_aliases` を tier-2 で索引
+- 対応: デキサメサゾン→dexamethasone、ニスタチン→nystatin、シルバースルファジアジン→silver_sulfadiazine、スルファサラジン→sulfasalazine、フォメピゾール→fomepizole、チアマゾール（INN）→methimazole、プロカインペニシリン→penicillin_g。batch35 新薬にも短縮エイリアス付与（2-PAM/DMSA/イミドカルブ等）
+
+### 疾患コンテンツの garbled 薬品名・タイポ修正（JSON+モジュール）
+- **塩化セレストデロン**（実在しない薬品名、鳥脳炎/PDDの3件）→ セレコキシブ 10-20 mg/kg PO q24h（Dahlhausen 2002）
+- **ジルクトヘキシジン**（両生類口内炎）→ クロルヘキシジン0.05%（低濃度・短時間限定の注記付き）
+- タイポ修正: ファンベンダゾール→フェンベンダゾール、イミダカルブ→イミドカルブ、エナイルコナゾール→エニルコナゾール（JSON+cat_diseases.py）、フルビプロフェン→フルルビプロフェン、シスアプリド→シサプリド
+
+### UX: 麻酔注意事項ボックスのクリック導線 + 表示バグ修正
+- **バグ修正**: `anesthesiaContraRules` は麻酔タブを開いた時のみフェッチされていたため、チェッカー直行ユーザーには「🏥 この疾患の麻酔注意事項」ボックスが**一度も表示されなかった** → `ensureAnesthesiaContraRules()`（fetch-once）を新設し `doAnalyze()` で解析と並行フェッチ
+- **薬品名リンク化**: `/api/anesthesia/contraindications?all=true` が各ルールに `drug_links`（drug_patterns→薬品辞書解決、複合名 Tiletamine/Zolazepam (Telazol/Zoletil) の base/括弧/スラッシュ分割対応）を付与。フロントは解決した薬品名のみ `.drug-nav-link` 化（クラス語 nsaid・製造中止 halothane は素のテキスト維持 — 誤着地防止）。30ルール中29がリンク付き
+- **麻酔タブへのジャンプ**: ボックス末尾に「💉 この動物種の麻酔プロトコルを見る」（species連動）。チェッカー結果の委譲ハンドラに `.anesthesia-nav-link` ルーティング追加（従来はDBリストのみ）
+
+### 回帰テスト（+12件）
+- batch35 15剤の存在・完全バイリンガル用量、2-PAM/アトロピン対とカーバメート禁忌、レギュラーインスリンのDKA/高K血症プロトコル、イミドカルブのロバ警告、重金属解毒薬セット完備、種別安全ゲート（猫アルベンダゾール/エニルコナゾール・犬オセルタミビル）
+- 表記ゆれ17ケースの text-matcher 解決、garbled薬品名の再発防止（JSON走査）
+- drug_links API（複合名解決・クラス語非リンク）、フロントの considerations リンク化＋fetch-once 配線
+
+### テスト・CI
+- フルテストスイート: 全件合格（+12新規）、ruff check/format clean
+- 配信DB: 7,057疾患・**621薬品**、treatment/prevention/prognosis 100%
+- `setDefaultStats()` 種別薬品数を実測同期（dog 546→558, cat 525→537, horse 345→353, 鳥系 223→232 等）、pendingStats drugs 606→621
+- ServiceWorker: `CACHE_NAME` v110 → **v111**

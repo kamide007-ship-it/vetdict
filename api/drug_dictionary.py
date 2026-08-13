@@ -55,6 +55,7 @@ from api.drug_batch_31 import DRUGS_BATCH_31
 from api.drug_batch_32 import DRUGS_BATCH_32
 from api.drug_batch_33 import DRUGS_BATCH_33
 from api.drug_batch_34 import DRUGS_BATCH_34
+from api.drug_batch_35 import DRUGS_BATCH_35
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -10583,6 +10584,19 @@ for _drug34 in DRUGS_BATCH_34:
         DRUGS.append(_drug34)
         _drug_index[_drug34["id"]] = _drug34
 
+# バッチ35: 2026-08 第3回 referenced-but-absent 監査で検出された15剤
+# （プラリドキシム/有機リン184参照, レギュラーインスリン/DKA・高K血症16参照,
+#  トリアムシノロン/馬関節内31参照, イミドカルブ/バベシア22参照,
+#  サクシマーDMSA/鳥鉛キレート12参照, シドフォビル点眼/FHV-1,
+#  アルベンダゾール(骨髄毒性警告), エニルコナゾール(猫グルーミング警告),
+#  エスモロール, オセルタミビル(犬パルボ非推奨明記), フルルビプロフェン点眼,
+#  イドクスウリジン点眼, トリクラベンダゾール/肝蛭, ジメルカプロールBAL,
+#  セレコキシブ/鳥PDD）
+for _drug35 in DRUGS_BATCH_35:
+    if _drug35["id"] not in _drug_index:
+        DRUGS.append(_drug35)
+        _drug_index[_drug35["id"]] = _drug35
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11004,6 +11018,22 @@ _GENERIC_STEM_STOPLIST = {"critical care"}
 _CASE_SENSITIVE_KEYWORDS = {"Critical Care": "critical_care_herbivore"}
 
 
+# Legitimate katakana spelling variants that disease treatment texts use but
+# that differ from the formulary's canonical name_ja. Without these the
+# treatment-text → related-drug chips silently fail to resolve (e.g. 64
+# occurrences of デキサメサゾン never linked to dexamethasone). Only genuine
+# alternate spellings belong here — typos in content are fixed in the content.
+_KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
+    "dexamethasone": ("デキサメサゾン",),  # canonical: デキサメタゾン
+    "nystatin": ("ニスタチン",),  # canonical: ナイスタチン
+    "silver_sulfadiazine": ("シルバースルファジアジン",),  # canonical: スルファジアジン銀
+    "sulfasalazine": ("スルファサラジン",),  # canonical: サラゾスルファピリジン
+    "fomepizole": ("フォメピゾール",),  # canonical: ホメピゾール
+    "methimazole": ("チアマゾール",),  # thiamazole = INN of methimazole
+    "penicillin_g": ("プロカインペニシリン",),  # procaine penicillin G formulation
+}
+
+
 def _build_drug_keyword_index() -> None:
     """Build keyword → drug_id mapping for treatment-text scanning.
 
@@ -11025,6 +11055,13 @@ def _build_drug_keyword_index() -> None:
         drug_id = d.get("id")
         if not drug_id:
             continue
+        # Katakana spelling variants (legitimate alternates used by treatment
+        # texts) — indexed at tier 2 so a drug's own full name still wins.
+        # Central registry + optional per-drug "search_aliases" field.
+        for alias in list(_KATAKANA_VARIANT_ALIASES.get(drug_id, ())) + list(d.get("search_aliases") or ()):
+            a = alias.strip().lower()
+            if len(a) >= 4:
+                tier2.append((a, drug_id))
         for key in (d.get("name", ""), d.get("name_ja", "")):
             if not key or len(key) < 4:
                 continue
