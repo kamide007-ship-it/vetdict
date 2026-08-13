@@ -622,6 +622,13 @@ SPECIES_PREVALENCE = {
         "Chordoma": "rare",
         "Buphthalmia (Congenital Glaucoma)": "rare",
         "Cerebellar Hypoplasia": "rare",
+        # Acute-abdomen tiers: without these, the 2-sign presentation
+        # "anorexia + distension" ranked case-report rarities (ectopic
+        # pregnancy) above the everyday GI emergencies (Oglesbee 2nd ed).
+        "Gastric Dilation (Bloat)": "common",
+        "Intestinal Obstruction": "common",
+        "Peritonitis": "uncommon",
+        "Ectopic Pregnancy": "rare",
         # --- Additional rabbit entries ---
         "Encephalitozoonosis": "very_common",
         "Cheyletiella Mange (Fur Mites)": "very_common",

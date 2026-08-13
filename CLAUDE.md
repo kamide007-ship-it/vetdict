@@ -2287,3 +2287,54 @@ is-referenced-but-absent 監査で、コンテンツが参照するのに未収�
 - 配信DB: 7,057疾患・**621薬品**、treatment/prevention/prognosis 100%
 - `setDefaultStats()` 種別薬品数を実測同期（dog 546→558, cat 525→537, horse 345→353, 鳥系 223→232 等）、pendingStats drugs 606→621
 - ServiceWorker: `CACHE_NAME` v110 → **v111**
+
+## 2026-08セッション（第8弾: 臨床相談チャットの診断精度修正 — 有病率補正の欠落是正）
+
+### 背景: UIが提案する入力例自体が正しくヒットしなかった
+臨床相談（自由入力チャット）の「タップで入力」例とプレースホルダ例を全て実測検証した結果:
+- **犬 嘔吐 食欲不振** → 1位が肥満細胞腫（急性胃腸炎エントリがレガシーDBに存在しなかった）
+- **犬 多飲多尿 体重減少** → 1位が家族性腎症（稀な若齢遺伝病）で糖尿病・CKDを上回る
+- **ウサギ 食べない お腹が張っている** → 「お腹が張っている」が未抽出（エイリアスは「お腹が張ってる」のみ）、
+  消化管うっ滞が21位で子宮外妊娠（症例報告レベルの稀少疾患）が1位
+
+### 根因と修正
+1. **犬チャットパスに有病率補正が無かった**: レガシー62疾患DB（health_checker.DISEASES）の
+   チャットスコアラー（match_symptoms_to_diseases）は coverage 有利な「症状リストが短い稀少疾患」を
+   そのまま上位に出していた。チェックボックス側スコアラーは prevalence_tier フィールドを参照する
+   設計だったが、**62エントリ中0件しか tier を持っていなかった**（全て common=1.08 のフラット扱い）
+   → 全62（+新規1）エントリに evidence-based の prevalence_tier を付与（SPECIES_PREVALENCE との
+   name join 44件 + Ettinger 8th 準拠キュレート19件: 家族性腎症/ARVC/CEA/パグ脳炎等=rare）。
+   チャットスコアラーには汎用種パスと同一の _PREVALENCE_MULTIPLIER（1.35/1.125/0.875/0.70）を適用
+2. **急性胃腸炎エントリ新設**: GP最多のGI主訴なのにレガシーDBに存在せず。
+   acute_gastroenteritis（食餌性・非特異性、very_common、Ettinger 8th）を追加（62→63疾患）
+3. **エイリアス追加**: 「お腹が張っている」「腹が張っている」「おなかが張っている/張ってる」→ bloating
+4. **ウサギ消化管うっ滞の症状セット**: bloating/abdominal_distension を追加（ガス貯留・腹部膨満は
+   GI stasis の hallmark — Oglesbee, Quesenberry & Carpenter 4th）。修正前は「食欲不振+腹部膨満」で
+   21位だった
+5. **ウサギ有病率**: Gastric Dilation (Bloat)=common、Intestinal Obstruction=common、
+   Peritonitis=uncommon、Ectopic Pregnancy=rare を追加（全て配信DB実在名、dead-key 0維持）
+6. **similarity_score の1.0キャップ**（disease_matcher）: 乗算ブーストで1.068になり
+   フロントの match_percent が107%表示になりうるバグを修正
+
+### 修正後の実測（全例で臨床的に正しい順位）
+| 入力 | Before 1位 | After 上位 |
+|---|---|---|
+| 犬 嘔吐 食欲不振 | 肥満細胞腫 | **急性胃腸炎** > MCT > IBD > 膵炎 |
+| 犬 多飲多尿 体重減少 | 家族性腎症 | **糖尿病 > CKD** > 家族性腎症 |
+| 犬 嘔吐 下痢 血便 | — | パルボ / 急性胃腸炎 / IBD |
+| ウサギ 食べない お腹が張っている | 子宮外妊娠(抽出1症状のみ) | **消化管うっ滞** > 胃拡張 > 腸閉塞 |
+| 猫 くしゃみ 鼻水 目やに | (元々正しい) | 猫URI > FHV-1 > クラミジア ✓ |
+| 猫 血尿 頻尿 | (元々正しい) | UTI / FIC / FLUTD ✓ |
+| 3歳猫 嘔吐 食欲廃絶 黄疸 | (元々正しい) | 肝リピドーシス > 胆管炎 ✓ |
+
+### 回帰テスト（tests/test_diagnostic_chat.py TestChatClinicalAccuracyAudit、+5件）
+- 全レガシー犬疾患が有効な prevalence_tier を持つこと
+- PU/PD+体重減少で糖尿病>家族性腎症、嘔吐+食欲不振で急性胃腸炎1位
+- ウサギ・タップ例の抽出（distension必須）と消化管うっ滞1位・子宮外妊娠top5圏外
+- 汎用マッチャーの similarity_score ≤ 1.0
+- tests/test_health_checker.py の件数アサーション 62→63 更新
+
+### 静的コピーの数値同期（同セッション第1コミット）
+- ヒーローカウンターはAPI駆動で正しい（本番の薬品606表示は旧コードのデプロイ待ち→自動的に621へ）
+- 静的コピー8箇所の「590+薬品」→「600+薬品」（メタ/OGP/Schema.org/料金/使い方ガイド）、
+  「3,000+自動テスト」→「3,800+」。ServiceWorker CACHE_NAME v111→**v112**

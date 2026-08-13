@@ -529,6 +529,10 @@ def _match_species_symptoms_to_diseases(
             * breed_factor
             * lab_factor
         )
+        # Multiplicative boosts can push a saturated match past 1.0, and the
+        # frontend renders similarity as a percentage — cap so a perfect match
+        # reads 100%, never 107%.
+        composite = min(composite, 1.0)
 
         # --- Logistic confidence calibration ---
         raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (composite - 0.4)))

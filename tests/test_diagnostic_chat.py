@@ -1508,3 +1508,64 @@ class TestCardinalSignCoverageModernEngine:
 
         # cat uses 'lymph_node_enlargement'
         assert "lymph_node_enlargement" in _extract_species_symptoms("cat lymphadenopathy", "cat")
+
+
+class TestChatClinicalAccuracyAudit:
+    """2026-08 audit: the chat's own suggested example inputs must rank the
+    textbook first differential on top. Before this audit the legacy dog path
+    had NO prevalence weighting (familial nephropathy outranked diabetes for
+    PU/PD, mast cell tumor topped vomiting+anorexia because the DB carried no
+    gastroenteritis entry at all), and the rabbit tap-example's
+    「お腹が張っている」 wasn't even extracted."""
+
+    def test_all_legacy_dog_diseases_carry_prevalence_tier(self):
+        valid = {"very_common", "common", "uncommon", "rare"}
+        for d in DISEASES:
+            assert d.get("prevalence_tier") in valid, (
+                f"{d['id']} missing/invalid prevalence_tier — the chat and "
+                "checker scorers rank rare hereditary diseases above everyday "
+                "diagnoses without it"
+            )
+
+    def test_pupd_weight_loss_ranks_diabetes_over_familial_nephropathy(self):
+        from api.diagnostic_chat import match_symptoms_to_diseases
+
+        matches = match_symptoms_to_diseases(["excessive_thirst", "weight_loss"])
+        ids = [m["disease_id"] for m in matches[:3]]
+        assert ids[0] == "diabetes_mellitus"
+        assert "chronic_kidney_disease" in ids
+        # The rare juvenile hereditary disease must no longer outrank them.
+        assert matches[0]["disease_id"] != "familial_nephropathy"
+
+    def test_vomiting_anorexia_ranks_gastroenteritis_first(self):
+        from api.diagnostic_chat import match_symptoms_to_diseases
+
+        matches = match_symptoms_to_diseases(["vomiting", "loss_of_appetite"])
+        assert matches[0]["disease_id"] == "acute_gastroenteritis"
+
+    def test_rabbit_tap_example_extracts_distension_and_hits_gi_stasis(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        extracted = _extract_species_symptoms("ウサギ 食べない お腹が張っている", "rabbit")
+        assert "appetite_loss" in extracted
+        assert any(s in extracted for s in ("abdominal_distension", "bloating")), (
+            "「お腹が張っている」 (the UI's own tap-example wording) must extract a distension symptom"
+        )
+        matches = _match_species_symptoms_to_diseases(list(extracted), "rabbit", lang="ja")
+        assert matches, "rabbit matcher returned nothing"
+        assert matches[0].get("name_en") == "Gastrointestinal Stasis", (
+            f"anorexia + distension in a rabbit is GI stasis until proven otherwise, got {matches[0].get('name_en')}"
+        )
+        # Case-report rarities must not outrank the everyday GI emergencies.
+        top5 = [m.get("name_en") for m in matches[:5]]
+        assert "Ectopic Pregnancy" not in top5
+
+    def test_generic_matcher_similarity_capped_at_one(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        matches = _match_species_symptoms_to_diseases(["appetite_loss", "abdominal_distension"], "rabbit", lang="ja")
+        for m in matches:
+            assert m["similarity_score"] <= 1.0, (
+                f"{m.get('name')} similarity {m['similarity_score']} > 1.0 — the frontend renders this as a percentage"
+            )

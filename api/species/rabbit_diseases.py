@@ -296,6 +296,12 @@ DISEASES: List[Dict[str, Any]] = [
             "reduced_fecal_output",
             "teeth_grinding",
             "hunched_posture",
+            # Gas accumulation with abdominal distension is a hallmark of GI
+            # stasis (Oglesbee, Quesenberry & Carpenter 4th ed) — without these
+            # the classic presentation "not eating + distended belly" ranked GI
+            # stasis below rarities like ectopic pregnancy.
+            "bloating",
+            "abdominal_distension",
         },
         "description": "Gastrointestinal Stasis is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "ストレス、痛み、脱水、繊維不足などが原因で消化管の蠕動が低下または停止する、命に関わる疾患です。",
