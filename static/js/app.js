@@ -94,7 +94,7 @@ const I18N={
     cardEmergency:"🚨 緊急プロトコル / クイックリファレンス",emergencyImportant:"⚠ 重要:",emergencyDisclaimer:"緊急時は同時並行的に対応が必要です。本プロトコルは標準的な対応の参考ですが、実際の施行には熟練した獣医師の臨床判断が必須です。各薬品の用量・投与経路は処方前に必ず再確認してください。",
     emergencyTriggerSigns:"認識すべき徴候",emergencyKeyDrugs:"主要薬剤",emergencyMonitoring:"モニタリング指標",emergencyStepsTitle:"対応プロトコル",emergencyTimeTarget:"目標時間",
     landingChatTitle:"臨床症状から鑑別診断",
-    heroTrustSpecies:"犬猫〜エキゾチック21動物種対応",heroTrustRef:"190+学術文献に基づく",heroTrustTests:"3,000+自動テスト検証済み",heroTrustOss:"オープンソース開発",
+    heroTrustSpecies:"犬猫〜エキゾチック21動物種対応",heroTrustRef:"190+学術文献に基づく",heroTrustTests:"3,800+自動テスト検証済み",heroTrustOss:"オープンソース開発",
     landingChatHint:'臨床症状を入力すると鑑別疾患リストを生成します。<br/><span style="font-size:.76rem;color:var(--gray-500)">例: 「嘔吐 食欲不振 体重減少」「polyuria polydipsia lethargy」</span>',
     heroBadge:"現役獣医師が開発 — 臨床現場の鑑別診断を支援",
     heroAudience:"獣医師・獣医学生のための臨床支援ツール",
@@ -312,7 +312,7 @@ const I18N={
     pricingPeriodOriginal:"¥980/月",
     pricingFeature1:"鑑別診断リスト生成（全21動物種）",
     pricingFeature2:"疾患データベース<strong>6,500+疾患</strong>閲覧",
-    pricingFeature3:"薬品辞書<strong>590+薬品</strong>・種別投与量",
+    pricingFeature3:"薬品辞書<strong>600+薬品</strong>・種別投与量",
     pricingFeature4:"臨床相談チャット<strong>無制限</strong>",
     pricingFeature5:"検査値入力・疼痛スケール対応",
     pricingFeature6:"エキゾチック含む全21動物種対応",
@@ -366,7 +366,7 @@ const I18N={
     cardEmergency:"🚨 Emergency Protocols / Quick Reference",emergencyImportant:"⚠ Important:",emergencyDisclaimer:"Emergencies require simultaneous parallel actions. These protocols are standard references; actual execution requires experienced clinical judgment. Always verify drug doses and routes before administration.",
     emergencyTriggerSigns:"Recognize",emergencyKeyDrugs:"Key drugs",emergencyMonitoring:"Monitoring",emergencyStepsTitle:"Protocol",emergencyTimeTarget:"Time target",
     landingChatTitle:"Differential Diagnosis from Clinical Signs",
-    heroTrustSpecies:"21 species — from dogs & cats to exotics",heroTrustRef:"Based on 190+ academic references",heroTrustTests:"Verified by 3,000+ automated tests",heroTrustOss:"Open-source development",
+    heroTrustSpecies:"21 species — from dogs & cats to exotics",heroTrustRef:"Based on 190+ academic references",heroTrustTests:"Verified by 3,800+ automated tests",heroTrustOss:"Open-source development",
     landingChatHint:'Enter clinical signs to generate a differential diagnosis list.<br/><span style="font-size:.76rem;color:var(--gray-500)">e.g. "vomiting anorexia weight loss" "polyuria polydipsia lethargy"</span>',
     heroBadge:"Built by a practicing veterinarian — Clinical decision support",
     heroAudience:"A clinical tool for veterinarians and veterinary students",
@@ -583,7 +583,7 @@ const I18N={
     pricingPeriodOriginal:"¥980/month",
     pricingFeature1:"Differential diagnosis list (all 21 species)",
     pricingFeature2:"Disease database <strong>6,500+ diseases</strong>",
-    pricingFeature3:"Drug dictionary <strong>590+ drugs</strong> with species-specific dosing",
+    pricingFeature3:"Drug dictionary <strong>600+ drugs</strong> with species-specific dosing",
     pricingFeature4:"Clinical chat <strong>unlimited</strong>",
     pricingFeature5:"Lab values & pain scale input",
     pricingFeature6:"All 21 species (incl. exotics)",
@@ -3396,7 +3396,7 @@ function _renderHelpGuideContent(){
       tips:"💡 「3週間前」「2ヶ月前」等の時間表現を自動認識し急性/亜急性/慢性を判定",
     },
     {
-      title:"💊 3. 薬品辞書（590+薬品）",
+      title:"💊 3. 薬品辞書（600+薬品）",
       steps:[
         "薬品名（日英）・カテゴリ・動物種でフィルタ検索",
         "種別の安全性 ✓/✗ と用量（mg/kg）を表示",
@@ -3458,7 +3458,7 @@ function _renderHelpGuideContent(){
       tips:"💡 Auto-detects time expressions like \"3 weeks ago\" → acute/subacute/chronic",
     },
     {
-      title:"💊 3. Drug Dictionary (590+ drugs)",
+      title:"💊 3. Drug Dictionary (600+ drugs)",
       steps:[
         "Filter by name (JP/EN), category, or species",
         "Species-specific safety ✓/✗ and dosing (mg/kg) shown",
