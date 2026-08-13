@@ -1414,16 +1414,14 @@ DRUGS_BATCH_35: list[dict] = [
             "(idiosyncratic). Avian long-term safety data limited."
         ),
         "side_effects_ja": (
-            "消化器症状・潰瘍、循環血液量減少時の腎障害、特異体質性肝障害。"
-            "鳥類での長期安全性データは限定的。"
+            "消化器症状・潰瘍、循環血液量減少時の腎障害、特異体質性肝障害。鳥類での長期安全性データは限定的。"
         ),
         "contraindications": (
             "Dehydration/hypovolemia, renal or hepatic failure, GI ulceration, "
             "concurrent corticosteroids or other NSAIDs."
         ),
         "contraindications_ja": (
-            "脱水・循環血液量減少、腎不全・肝不全、消化管潰瘍、"
-            "コルチコステロイドまたは他のNSAIDsとの併用。"
+            "脱水・循環血液量減少、腎不全・肝不全、消化管潰瘍、コルチコステロイドまたは他のNSAIDsとの併用。"
         ),
         "drug_interactions": [
             {
