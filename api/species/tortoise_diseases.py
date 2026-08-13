@@ -100,7 +100,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Soft Shell (Metabolic Bone Disease in Chelonians)",
         "name_ja": "甲羅軟化（カメの代謝性骨疾患）",
-        "symptoms": {"soft_shell", "shell_deformity", "weakness", "lethargy", "anorexia", "tremors"},
+        "symptoms": {"soft_shell", "bone_weakness", "shell_deformity", "weakness", "lethargy", "anorexia", "tremors"},
         "description": "Soft Shell (Metabolic Bone Disease in Chelonians) is a metabolic disorder caused by calcium-phosphorus imbalance and/or vitamin D3 deficiency, leading to progressive skeletal demineralization, pathological fractures, and deformities.",
         "description_ja": "カルシウム不足、リンの不均衡、UVB不足による甲羅の軟化です。",
         "urgency": "high",
@@ -488,7 +488,16 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Metabolic Bone Disease (MBD)",
         "name_ja": "代謝性骨疾患（MBD）",
-        "symptoms": {"soft_shell", "weakness", "tremors", "lethargy", "shell_deformity", "fractures", "anorexia"},
+        "symptoms": {
+            "soft_shell",
+            "bone_weakness",
+            "weakness",
+            "tremors",
+            "lethargy",
+            "shell_deformity",
+            "fractures",
+            "anorexia",
+        },
         "description": "Metabolic Bone Disease (MBD) is a metabolic disorder caused by calcium-phosphorus imbalance and/or vitamin D3 deficiency, leading to progressive skeletal demineralization, pathological fractures, and deformities.",
         "description_ja": "カルシウム不足とUVB不足により甲羅軟化と骨弱化を引き起こす疾患です。",
         "urgency": "high",
