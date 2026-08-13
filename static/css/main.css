@@ -829,6 +829,10 @@ a.interaction-drug.drug-nav-link{cursor:pointer;text-decoration:underline;text-d
 a.interaction-drug.drug-nav-link:hover,a.interaction-drug.drug-nav-link:focus-visible{color:#7f1d1d;text-decoration-style:solid}
 .drug-interaction-tag a.interaction-drug-part{cursor:pointer;color:#991b1b;font-weight:700;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
 .drug-interaction-tag a.interaction-drug-part:hover,.drug-interaction-tag a.interaction-drug-part:focus-visible{color:#7f1d1d;text-decoration-style:solid}
+/* Anesthesia-considerations box: contraindicated drug names that resolve in the
+   formulary are one-tap links to the exact dosage entry */
+a.anesthesia-contra-drug{cursor:pointer;color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+a.anesthesia-contra-drug:hover,a.anesthesia-contra-drug:focus-visible{color:#7f1d1d;text-decoration-style:solid}
 .drug-interaction-tag .interaction-effect{color:var(--gray-700)}
 .drug-interaction-tag .severity-badge{display:inline-block;font-size:.64rem;padding:1px 6px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;font-weight:700;background:rgba(0,0,0,.06);color:#444}
 .drug-interaction-tag.severity-major .severity-badge{background:#dc2626;color:#fff}

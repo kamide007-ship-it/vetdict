@@ -22,6 +22,64 @@ logger = logging.getLogger(__name__)
 
 anesthesia_bp = Blueprint("anesthesia", __name__)
 
+# ---------------------------------------------------------------------------
+# Contraindication drug_patterns → drug-dictionary resolution.
+# The frontend renders each rule's drug names; annotating which patterns
+# resolve to a formulary entry lets it link those names for one-tap dosage
+# lookup while leaving class terms ("NSAIDs") and discontinued agents
+# ("halothane") as plain text. Built lazily on first request.
+# ---------------------------------------------------------------------------
+_PATTERN_DRUG_INDEX: dict[str, dict] | None = None
+
+
+def _build_pattern_drug_index() -> dict[str, dict]:
+    import re
+
+    from api.drug_dictionary import DRUGS
+
+    index: dict[str, dict] = {}
+
+    def register(key: str, drug: dict) -> None:
+        k = (key or "").strip().lower()
+        if len(k) >= 3 and k not in index:
+            index[k] = drug
+
+    for d in DRUGS:
+        register(d.get("id", ""), d)
+        for raw in (d.get("name", ""), d.get("name_ja", "")):
+            if not raw:
+                continue
+            # "Tiletamine/Zolazepam (Telazol/Zoletil)" → base + paren parts,
+            # each split on slash / interpunct so every alias resolves.
+            m = re.match(r"^([^（(]*)[（(]?([^）)]*)", raw)
+            base, paren = (m.group(1), m.group(2)) if m else (raw, "")
+            for chunk in (base, paren):
+                for part in re.split(r"[／/・,、]", chunk):
+                    register(part, d)
+    return index
+
+
+def _pattern_drug_links(patterns: list[str]) -> list[dict]:
+    """Resolve contraindication drug patterns to formulary entries."""
+    global _PATTERN_DRUG_INDEX
+    if _PATTERN_DRUG_INDEX is None:
+        _PATTERN_DRUG_INDEX = _build_pattern_drug_index()
+    links = []
+    seen: set[str] = set()
+    for p in patterns:
+        d = _PATTERN_DRUG_INDEX.get((p or "").strip().lower())
+        if d and d["id"] not in seen:
+            seen.add(d["id"])
+            links.append(
+                {
+                    "pattern": p,
+                    "id": d["id"],
+                    "name": d.get("name", ""),
+                    "name_ja": d.get("name_ja", ""),
+                }
+            )
+    return links
+
 
 @anesthesia_bp.route("/api/anesthesia/protocols", methods=["GET"])
 def api_anesthesia_protocols():
@@ -131,6 +189,7 @@ def api_anesthesia_contraindications():
                         "severity": r["severity"],
                         "message_ja": r["message_ja"],
                         "message_en": r["message_en"],
+                        "drug_links": _pattern_drug_links(r["drug_patterns"]),
                     }
                     for r in rules
                 ],

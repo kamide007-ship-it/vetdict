@@ -1540,20 +1540,20 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:600,drugs:546,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:525,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:345,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:263,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:600,drugs:558,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:537,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:353,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:265,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:283,drugs:69,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:308,drugs:136,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:229,drugs:91,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:198,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:201,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:226,drugs:68,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
     {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:198,drugs:74,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
     {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:179,drugs:155,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:223,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:412,drugs:223,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:223,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:232,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:412,drugs:232,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:232,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
     {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:265,drugs:100,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
     {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:255,drugs:108,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
     {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:222,drugs:107,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
@@ -1565,7 +1565,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6528,
     species:21,
-    drugs:606,
+    drugs:621,
     symptoms:52,
     protocols:188
   };
@@ -2903,6 +2903,10 @@ function showRelatedSuggestions(){
 function doAnalyze(){
   if(!currentSpecies||selectedSymptoms.size===0)return;
   showRelatedSuggestions();
+  /* Kick off the contraindication-rules fetch in parallel with the analysis so
+     the "anesthesia considerations" box can render on the results (the rules
+     used to load only when the anesthesia tab was opened first). */
+  ensureAnesthesiaContraRules();
   trackEvent("analyze_symptoms",{species:currentSpecies,symptom_count:selectedSymptoms.size});
   const btn=document.getElementById("analyzeBtn");if(btn){btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> ${t("analyzing")}`;}
   const progress=document.getElementById("analyzeProgress");
@@ -3151,6 +3155,9 @@ function renderResults(data){
     /* Cache-rendered related-drug chips carry no per-node listeners — delegate. */
     const tChip=e.target.closest(".treatment-drug-chip");
     if(tChip){e.preventDefault();navigateToDrug(tChip.dataset.drug);return;}
+    /* Anesthesia-considerations footer: jump to the species-synced anesthesia tab. */
+    const anesthLink=e.target.closest(".anesthesia-nav-link");
+    if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)scrollToAnchor(p);return;}
     if(e.target.closest("a"))return;
     const head=e.target.closest(".disease-head");
     if(head)toggleDetail(head);
@@ -3930,11 +3937,22 @@ function renderAnesthesiaConsiderations(d){
   let html=`<div class="detail-anesthesia-notes" style="margin-top:10px;padding:10px 14px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px"><strong style="font-size:.84rem">${title}</strong><div style="margin-top:6px;display:flex;flex-direction:column;gap:4px">`;
   warnings.slice(0,6).forEach(w=>{
     const msg=currentLang==="ja"?(w.message_ja||w.message_en):(w.message_en||w.message_ja);
-    const drugs=w.drug_patterns.slice(0,3).join(", ");
+    /* Patterns that resolve in the drug dictionary (server-annotated drug_links)
+       become one-tap links to the exact formulary entry; class terms ("NSAIDs")
+       and discontinued agents stay plain text. */
+    const linkByPattern={};
+    (w.drug_links||[]).forEach(l=>{linkByPattern[l.pattern]=l;});
+    const drugTitle=currentLang==="ja"?"この薬品の用量・詳細を開く":"Open this drug's dosage";
+    const drugs=w.drug_patterns.slice(0,3).map(p=>{
+      const l=linkByPattern[p];
+      if(!l)return escapeHtml(p);
+      return `<a href="#drugs" class="drug-nav-link anesthesia-contra-drug" data-drug="${escapeHtml(l.name||p)}" title="${drugTitle}">${escapeHtml(p)}</a>`;
+    }).join(", ");
     const sev=w.severity;
-    html+=`<div style="font-size:.8rem;padding:4px 0;border-bottom:1px dotted #fde68a"><span class="anesthesia-contra-badge" style="background:${sevColors[sev]||"#ea580c"}">${sevIcons[sev]||"⚠️"} ${escapeHtml(sevLabels[sev]||sev)}</span> <strong>${escapeHtml(drugs)}</strong>: ${escapeHtml(msg)}</div>`;
+    html+=`<div style="font-size:.8rem;padding:4px 0;border-bottom:1px dotted #fde68a"><span class="anesthesia-contra-badge" style="background:${sevColors[sev]||"#ea580c"}">${sevIcons[sev]||"⚠️"} ${escapeHtml(sevLabels[sev]||sev)}</span> <strong>${drugs}</strong>: ${escapeHtml(msg)}</div>`;
   });
-  html+=`</div></div>`;
+  const protoLabel=currentLang==="ja"?"💉 この動物種の麻酔プロトコルを見る":"💉 View anesthesia protocols for this species";
+  html+=`</div><div style="margin-top:8px"><a href="#anesthesia" class="anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}" style="font-size:.8rem;color:var(--navy);font-weight:600;text-decoration:none">${protoLabel} →</a></div></div>`;
   return html;
 }
 function renderMentionedDrugs(d){
@@ -6071,6 +6089,16 @@ function renderEmergencyProtocol(p){
 
 /* ===== Anesthesia Protocols ===== */
 let anesthesiaLoaded=false,anesthesiaData=null,anesthesiaCategories={},anesthesiaAsaData=null,anesthesiaContraRules=null;
+/* Contraindication rules power BOTH the anesthesia tab badges and the
+   "anesthesia considerations" box in checker results. Historically they were
+   fetched only when the anesthesia tab first opened, so checker-first users
+   never saw the considerations box. Fetch-once helper usable from both paths. */
+let _contraRulesFetchStarted=false;
+function ensureAnesthesiaContraRules(){
+  if(_contraRulesFetchStarted||(anesthesiaContraRules&&anesthesiaContraRules.length))return;
+  _contraRulesFetchStarted=true;
+  fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(err=>{_contraRulesFetchStarted=false;debugWarn("anesthesia/contraindications fetch failed:",err);});
+}
 
 function loadAnesthesiaProtocols(){
   const list=document.getElementById("anesthesiaList");
@@ -6097,7 +6125,7 @@ function loadAnesthesiaProtocols(){
     /* Fetch ASA classification */
     fetchWithTimeout("/api/anesthesia/categories").then(r=>r.json()).then(d=>{anesthesiaAsaData=d.asa_classification||null;}).catch(err=>{debugWarn("anesthesia/categories fetch failed:",err);});
     /* Fetch contraindication rules */
-    fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(err=>{debugWarn("anesthesia/contraindications fetch failed:",err);});
+    ensureAnesthesiaContraRules();
     document.getElementById("anesthesiaSearch").addEventListener("input",debounce(renderAnesthesiaList,200));
     document.getElementById("anesthesiaCategoryFilter").addEventListener("change",()=>{renderAnesthesiaList();_revealFilteredList("anesthesiaList");});
     /* Weight-based dose calculator */

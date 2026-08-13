@@ -5063,3 +5063,41 @@ def test_served_db_diagnosis_ja_grounded_when_tests_present():
     # label in either language (composer correctly returns None rather than
     # fabricating). Guard against a broad regression.
     assert rows <= 5, f"{rows} served records have recommended tests but an empty diagnosis section"
+
+
+def test_no_garbled_or_misspelled_drug_names_in_disease_json():
+    """The 2026-08 audit found garbled drug names in treatment texts —
+    '塩化セレストデロン' (a non-existent drug in the PDD/encephalitis protocols,
+    replaced with the documented empirical celecoxib) and 'ジルクトヘキシジン'
+    (a mangled クロルヘキシジン) — plus recurring typos that broke the
+    treatment→drug chip matcher. None may reappear."""
+    entries = _load_json_entries()
+    forbidden = [
+        "セレストデロン",  # garbled non-drug (was: PDD empirical therapy)
+        "ジルクトヘキシジン",  # garbled chlorhexidine
+        "ファンベンダゾール",  # typo of フェンベンダゾール
+        "イミダカルブ",  # typo of イミドカルブ
+        "エナイルコナゾール",  # typo of エニルコナゾール
+        "フルビプロフェン",  # typo of フルルビプロフェン (never a legit spelling)
+        "シスアプリド",  # typo of シサプリド
+    ]
+    hits = []
+    for e in entries:
+        blob = " ".join(
+            str(e.get(f) or "")
+            for f in (
+                "treatment_ja",
+                "treatment",
+                "causes_ja",
+                "pathophysiology_ja",
+                "prevention_ja",
+                "description_ja",
+            )
+        )
+        for tok in forbidden:
+            if tok in blob:
+                hits.append((e.get("species"), e.get("name"), tok))
+    assert not hits, f"garbled/misspelled drug names re-introduced: {hits[:10]}"
+    # The corrected PDD protocols must name the evidence-based empirical agent.
+    pdd = [e for e in entries if e.get("species") == "Bird" and "Proventricular Dilatation" in (e.get("name") or "")]
+    assert pdd and any("セレコキシブ" in (e.get("treatment_ja") or "") for e in pdd)

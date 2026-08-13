@@ -1285,3 +1285,162 @@ def test_treatment_text_drug_matcher_precision_and_recall():
     # Full compound names keep working.
     assert "calcium_gluconate" in ids("calcium gluconate 10% IV slowly")
     assert "nitroprusside" in ids("sodium nitroprusside CRI")
+
+
+def test_batch35_referenced_drugs_present_with_complete_dosing():
+    """The 2026-08 third referenced-but-absent sweep (katakana token frequency
+    over treatment texts + the antidote cross-reference audit) found 15 agents
+    the DB's own protocols dose but the formulary did not carry — pralidoxime
+    alone is named by 184 treatment references. Guards that each is present,
+    categorised, bilingual, and fully dosed for every species flagged safe."""
+    expected = [
+        "pralidoxime",
+        "insulin_regular",
+        "triamcinolone",
+        "imidocarb",
+        "succimer",
+        "cidofovir_ophthalmic",
+        "albendazole",
+        "enilconazole",
+        "esmolol",
+        "oseltamivir",
+        "flurbiprofen_ophthalmic",
+        "idoxuridine_ophthalmic",
+        "triclabendazole",
+        "dimercaprol",
+        "celecoxib",
+    ]
+    index = {d["id"]: d for d in DRUGS}
+    for drug_id in expected:
+        entry = index.get(drug_id)
+        assert entry is not None, f"{drug_id} missing from drug manual"
+        assert entry["category"] in DRUG_CATEGORIES
+        assert entry["mechanism_ja"].strip() and entry["mechanism"].strip()
+        for species, info in entry["species_info"].items():
+            if info.get("safe"):
+                assert info["dosage"].strip(), f"{drug_id}/{species} missing dosage"
+                assert info["dosage_ja"].strip(), f"{drug_id}/{species} missing dosage_ja"
+
+
+def test_pralidoxime_op_antidote_pairing_and_carbamate_caveat():
+    """Organophosphate toxicosis entries across the DB instruct 'atropine +
+    pralidoxime'. The 2-PAM entry must carry the 20 mg/kg dose, the atropine
+    pairing, the early-administration/aging window, and the carbamate relative
+    contraindication (reactivation unnecessary; worsens carbaryl toxicosis)."""
+    pam = next((d for d in DRUGS if d["id"] == "pralidoxime"), None)
+    assert pam is not None
+    dog = pam["species_info"]["dog"]
+    assert "20 mg/kg" in dog["dosage"]
+    assert "atropine" in dog["dosage"].lower()
+    combined = (dog.get("notes", "") + pam["mechanism"]).lower()
+    assert "age" in combined  # enzyme aging window
+    assert "carbamate" in pam["contraindications"].lower()
+    assert "カーバメート" in pam["contraindications_ja"]
+
+
+def test_regular_insulin_dka_and_hyperkalemia_protocols():
+    """DKA CRI protocols (0.05-0.1 U/kg/h) and hyperkalemia shifting doses
+    (0.25-0.5 U/kg IV + dextrose) are quoted throughout the disease DB
+    (blocked cat, AKI, Addisonian crisis) — the entry must match them, demand
+    dextrose co-administration, warn about IV-tubing adsorption, and forbid
+    starting insulin before severe hypokalemia is being corrected."""
+    ins = next((d for d in DRUGS if d["id"] == "insulin_regular"), None)
+    assert ins is not None
+    dog = ins["species_info"]["dog"]
+    assert "0.05-0.1" in dog["dosage"]
+    assert "0.25-0.5" in dog["dosage"]
+    assert "dextrose" in dog["dosage"].lower()
+    assert "adsorb" in dog["dosage"].lower() or "tubing" in dog["dosage"].lower()
+    assert "hypokalemia" in ins["contraindications"].lower()
+    cat = ins["species_info"]["cat"]
+    assert "0.25-0.5" in cat["dosage"]
+    # Equine hyperlipemia use is documented (McKenzie 2011).
+    assert "hyperlipemia" in ins["species_info"]["horse"]["dosage"].lower()
+
+
+def test_imidocarb_piroplasmosis_doses_and_donkey_warning():
+    """Imidocarb is the large-Babesia standard of care (6.6 mg/kg IM x2) and
+    the USDA T. equi clearance drug (4 mg/kg q72h x4) — but donkeys are highly
+    sensitive to that dose, small Babesia responds poorly, and cholinergic
+    premedication is standard. All four facts must be on the entry."""
+    imi = next((d for d in DRUGS if d["id"] == "imidocarb"), None)
+    assert imi is not None
+    dog = imi["species_info"]["dog"]
+    assert "6.6 mg/kg" in dog["dosage"]
+    assert "gibsoni" in dog["dosage"]  # small Babesia responds poorly
+    assert "atropine" in dog.get("notes", "").lower()
+    horse = imi["species_info"]["horse"]
+    assert "4 mg/kg" in horse["dosage"]
+    assert "donkey" in horse.get("notes", "").lower()
+    assert "ロバ" in horse.get("notes_ja", "")
+
+
+def test_heavy_metal_antidote_set_complete():
+    """With succimer (DMSA) and dimercaprol (BAL) added, every classic
+    heavy-metal chelator the disease DB references is carried: CaEDTA (lead),
+    DMSA (avian lead/zinc, narrow margin), penicillamine (copper), BAL
+    (arsenic; iron contraindication). Guards the avian overdose ceiling and
+    the BAL-iron prohibition."""
+    index = {d["id"]: d for d in DRUGS}
+    for chelator in ("calcium_edta", "succimer", "penicillamine", "dimercaprol"):
+        assert chelator in index, f"{chelator} missing"
+    dmsa = index["succimer"]
+    bird = dmsa["species_info"]["bird"]
+    assert "25-35 mg/kg" in bird["dosage"]
+    assert "80 mg/kg" in bird.get("notes", "")  # avian death threshold
+    bal = index["dimercaprol"]
+    contra = bal["contraindications"].lower()
+    assert "iron" in contra and "cadmium" in contra
+    interactions = " ".join(i["drug"].lower() for i in bal["drug_interactions"])
+    assert "iron" in interactions
+
+
+def test_batch35_species_toxicity_gates():
+    """Species-specific safety gates: albendazole is not for routine feline
+    use (aplastic anemia), enilconazole is not licensed for cats (grooming
+    ingestion), and oseltamivir must not be presented as a canine parvo drug
+    (Savigny 2010 showed no significant benefit)."""
+    index = {d["id"]: d for d in DRUGS}
+    alb_cat = index["albendazole"]["species_info"]["cat"]
+    assert alb_cat["safe"] is False
+    assert "fenbendazole" in alb_cat["dosage"].lower()
+    enil_cat = index["enilconazole"]["species_info"]["cat"]
+    assert enil_cat["safe"] is False
+    assert "grooming" in enil_cat["dosage"].lower() or "lime sulfur" in enil_cat["dosage"].lower()
+    osel_dog = index["oseltamivir"]["species_info"]["dog"]
+    assert osel_dog["safe"] is False
+    assert "parvo" in osel_dog["dosage"].lower()
+    # Rabbit albendazole stays second-line to fenbendazole for E. cuniculi.
+    alb_rab = index["albendazole"]["species_info"]["rabbit"]
+    assert "フェンベンダゾール" in alb_rab["dosage_ja"]
+
+
+def test_katakana_variant_aliases_resolve_in_text_matcher():
+    """Treatment texts use legitimate katakana spelling variants that differ
+    from the formulary's canonical name_ja (64 occurrences of デキサメサゾン
+    alone). The keyword index must resolve them — and the new batch-35 agents
+    — so the related-drug chips under treatment protocols actually appear."""
+    from api.drug_dictionary import find_drugs_in_text
+
+    cases = [
+        ("デキサメサゾン 0.1 mg/kg IV", "dexamethasone"),
+        ("ニスタチン 300,000 IU/kg PO", "nystatin"),
+        ("シルバースルファジアジンクリーム塗布", "silver_sulfadiazine"),
+        ("スルファサラジン 20 mg/kg PO", "sulfasalazine"),
+        ("エチレングリコール中毒にはフォメピゾール", "fomepizole"),
+        ("チアマゾール 2.5 mg PO q12h", "methimazole"),
+        ("プロカインペニシリンG 42,000 IU/kg SC", "penicillin_g"),
+        ("プラリドキシム 20 mg/kg IM", "pralidoxime"),
+        ("2-PAM 20 mg/kg IM q8-12h", "pralidoxime"),
+        ("レギュラーインスリン 0.1 U/kg/h CRI", "insulin_regular"),
+        ("イミドカルブ 6.6 mg/kg IM", "imidocarb"),
+        ("トリアムシノロン関節内注射", "triamcinolone"),
+        ("DMSA 30 mg/kg PO", "succimer"),
+        ("シドフォビル点眼 q12h", "cidofovir_ophthalmic"),
+        ("フルルビプロフェン点眼", "flurbiprofen_ophthalmic"),
+        ("イドクスウリジン0.1%点眼", "idoxuridine_ophthalmic"),
+        ("セレコキシブ 10-20 mg/kg PO q24h", "celecoxib"),
+    ]
+    for text, expected_id in cases:
+        ids = [d["id"] for d in find_drugs_in_text(text)]
+        assert expected_id in ids, f"{text!r} did not resolve to {expected_id} (got {ids})"

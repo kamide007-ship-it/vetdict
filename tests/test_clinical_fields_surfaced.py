@@ -245,3 +245,28 @@ def test_app_js_related_chips_navigate_via_delegation():
     # The fallback href must be a real view hash, not the dead '#diseases'.
     assert 'class="drug-disease-chip" href="#database"' in APP_JS
     assert 'href="#diseases"' not in APP_JS
+
+
+def test_app_js_anesthesia_considerations_are_clickable():
+    """The '🏥 この疾患の麻酔注意事項' box in checker results must (a) render
+    server-annotated drug_links as one-tap links to the exact formulary entry,
+    (b) offer a jump to the species-synced anesthesia tab, and (c) actually
+    have its data: the contraindication rules used to load only when the
+    anesthesia tab was opened first, so checker-first users never saw the box
+    at all. The fetch-once helper must exist and fire when analysis starts."""
+    # Fetch-once helper, wired into both the anesthesia tab and doAnalyze.
+    assert "function ensureAnesthesiaContraRules" in APP_JS
+    assert APP_JS.count("ensureAnesthesiaContraRules();") >= 2
+    # Considerations renderer links resolvable drug patterns…
+    renderer = APP_JS.split("function renderAnesthesiaConsiderations", 1)[1].split("\nfunction ", 1)[0]
+    assert "drug_links" in renderer
+    assert "anesthesia-contra-drug" in renderer
+    assert "drug-nav-link" in renderer
+    # …and carries the species-synced anesthesia-tab jump.
+    assert "anesthesia-nav-link" in renderer
+    # The checker-results delegated handler must route that jump (the DB list
+    # handler already did; checker results previously dead-ended on the href).
+    checker_handler = APP_JS.split('const dbLink=e.target.closest(".disease-db-nav-link")', 1)[1].split(
+        "\nfunction ", 1
+    )[0]
+    assert 'closest(".anesthesia-nav-link")' in checker_handler
