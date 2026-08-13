@@ -956,6 +956,7 @@ DISEASES = [
     # ---- 1. Brachycephalic Airway Syndrome ----
     {
         "id": "brachycephalic_airway_syndrome",
+        "prevalence_tier": "common",
         "name_ja": "短頭種気道症候群",
         "name_en": "Brachycephalic Obstructive Airway Syndrome (BOAS)",
         "description_ja": "短頭種に見られる上気道の構造的異常の総称です。狭窄性外鼻孔、軟口蓋過長などにより呼吸困難を引き起こします。",
@@ -985,6 +986,7 @@ DISEASES = [
     # ---- 2. Canine Parvovirus ----
     {
         "id": "canine_parvovirus",
+        "prevalence_tier": "common",
         "name_ja": "犬パルボウイルス感染症",
         "name_en": "Canine Parvovirus (CPV-2)",
         "description_ja": "特に子犬に致命的な高伝染性ウイルス疾患です。消化管を攻撃し、重度の脱水と免疫抑制を引き起こします。",
@@ -1017,6 +1019,7 @@ DISEASES = [
     # ---- 3. Canine Distemper ----
     {
         "id": "canine_distemper",
+        "prevalence_tier": "uncommon",
         "name_ja": "犬ジステンパー",
         "name_en": "Canine Distemper Virus (CDV)",
         "description_ja": "呼吸器・消化器・神経系を侵す重篤なウイルス疾患です。致死率が高く、回復しても神経後遺症が残ることがあります。",
@@ -1045,6 +1048,7 @@ DISEASES = [
     # ---- 4. Kennel Cough ----
     {
         "id": "kennel_cough",
+        "prevalence_tier": "common",
         "name_ja": "ケンネルコフ",
         "name_en": "Infectious Tracheobronchitis (Kennel Cough)",
         "description_ja": "高伝染性の呼吸器感染症で、特徴的な乾いた咳が持続します。多くは自然回復しますが、子犬や高齢犬では重症化することがあります。",
@@ -1068,6 +1072,7 @@ DISEASES = [
     # ---- 5. Canine Influenza ----
     {
         "id": "canine_influenza",
+        "prevalence_tier": "rare",
         "name_ja": "犬インフルエンザ",
         "name_en": "Canine Influenza Virus (CIV H3N2/H3N8)",
         "description_ja": "犬インフルエンザウイルスによる呼吸器感染症です。咳、鼻汁、発熱を伴い、多頭環境で急速に広がります。",
@@ -1092,6 +1097,7 @@ DISEASES = [
     # ---- 6. Gastric Dilatation-Volvulus (GDV / Bloat) ----
     {
         "id": "gdv_bloat",
+        "prevalence_tier": "common",
         "name_ja": "胃拡張捻転症候群",
         "name_en": "Gastric Dilatation-Volvulus (GDV / Bloat)",
         "description_ja": "胃がガスで膨張し捻転する生命を脅かす緊急疾患です。治療しなければ数時間で死亡する可能性があります。",
@@ -1134,6 +1140,7 @@ DISEASES = [
     # ---- 7. Hip Dysplasia ----
     {
         "id": "hip_dysplasia",
+        "prevalence_tier": "common",
         "name_ja": "股関節形成不全",
         "name_en": "Hip Dysplasia",
         "description_ja": "股関節の発育異常で、関節の不適合により早期の変形性関節症を引き起こす遺伝性疾患です。",
@@ -1166,6 +1173,7 @@ DISEASES = [
     # ---- 8. Elbow Dysplasia ----
     {
         "id": "elbow_dysplasia",
+        "prevalence_tier": "common",
         "name_ja": "肘関節形成不全",
         "name_en": "Elbow Dysplasia",
         "description_ja": "成長期の肘関節の発育異常の総称で、内側鉤状突起分離、離断性骨軟骨炎などの病態を含みます。",
@@ -1189,6 +1197,7 @@ DISEASES = [
     # ---- 9. Intervertebral Disc Disease (IVDD) ----
     {
         "id": "ivdd",
+        "prevalence_tier": "common",
         "name_ja": "椎間板ヘルニア",
         "name_en": "Intervertebral Disc Disease (IVDD)",
         "description_ja": "椎間板が脊髄を圧迫する疾患で、突然の痛みや麻痺を引き起こします。ダックスフンドなどの軟骨異栄養犬種に多発します。",
@@ -1217,6 +1226,7 @@ DISEASES = [
     # ---- 10. Degenerative Myelopathy ----
     {
         "id": "degenerative_myelopathy",
+        "prevalence_tier": "uncommon",
         "name_ja": "変性性脊髄症",
         "name_en": "Degenerative Myelopathy (DM)",
         "description_ja": "脊髄の白質が進行性に変性する神経疾患です。後肢の麻痺が徐々に進行し、最終的には四肢麻痺に至ります。",
@@ -1243,6 +1253,7 @@ DISEASES = [
     # ---- 11. Epilepsy ----
     {
         "id": "epilepsy",
+        "prevalence_tier": "common",
         "name_ja": "てんかん",
         "name_en": "Idiopathic Epilepsy",
         "description_ja": "反復性の痙攣発作を特徴とする神経疾患です。特発性てんかんが最も多く、生涯にわたる投薬管理が必要です。",
@@ -1274,6 +1285,7 @@ DISEASES = [
     # ---- 12. Atopic Dermatitis ----
     {
         "id": "atopic_dermatitis",
+        "prevalence_tier": "very_common",
         "name_ja": "アトピー性皮膚炎",
         "name_en": "Canine Atopic Dermatitis (CAD)",
         "description_ja": "環境アレルゲン（ダニ、花粉、カビなど）に対する遺伝的素因を持つ犬に発症するアレルギー性皮膚疾患です。",
@@ -1306,6 +1318,7 @@ DISEASES = [
     # ---- 13. Pyoderma ----
     {
         "id": "pyoderma",
+        "prevalence_tier": "very_common",
         "name_ja": "膿皮症",
         "name_en": "Bacterial Pyoderma",
         "description_ja": "細菌感染による皮膚疾患で、膿疱や痂皮を形成します。アレルギーや免疫低下が基礎疾患となることが多いです。",
@@ -1326,6 +1339,7 @@ DISEASES = [
     # ---- 14. Demodex Mange ----
     {
         "id": "demodex_mange",
+        "prevalence_tier": "common",
         "name_ja": "毛包虫症（ニキビダニ症）",
         "name_en": "Demodectic Mange (Demodicosis)",
         "description_ja": "常在性のニキビダニが免疫低下時に異常増殖し、脱毛や皮膚炎を引き起こす寄生虫性皮膚疾患です。",
@@ -1347,6 +1361,7 @@ DISEASES = [
     # ---- 15. Allergic Dermatitis ----
     {
         "id": "allergic_dermatitis",
+        "prevalence_tier": "very_common",
         "name_ja": "アレルギー性皮膚炎",
         "name_en": "Allergic Dermatitis (Food / Contact)",
         "description_ja": "食物や接触アレルゲンに対する過敏反応による皮膚炎です。痒み、皮疹、消化器症状を伴うことがあります。",
@@ -1382,6 +1397,7 @@ DISEASES = [
     # ---- 16. Hypothyroidism ----
     {
         "id": "hypothyroidism",
+        "prevalence_tier": "common",
         "name_ja": "甲状腺機能低下症",
         "name_en": "Hypothyroidism",
         "description_ja": "犬で最も一般的な内分泌疾患の一つです。甲状腺ホルモンの不足により代謝が低下し、全身に様々な症状が現れます。",
@@ -1412,6 +1428,7 @@ DISEASES = [
     # ---- 17. Cushing's Disease ----
     {
         "id": "cushings_disease",
+        "prevalence_tier": "common",
         "name_ja": "クッシング症候群（副腎皮質機能亢進症）",
         "name_en": "Hyperadrenocorticism (Cushing's Disease)",
         "description_ja": "コルチゾールが過剰に産生される疾患です。多飲多尿、腹部膨満、脱毛などの症状がゆっくり進行します。",
@@ -1447,6 +1464,7 @@ DISEASES = [
     # ---- 18. Addison's Disease ----
     {
         "id": "addisons_disease",
+        "prevalence_tier": "uncommon",
         "name_ja": "アジソン病（副腎皮質機能低下症）",
         "name_en": "Hypoadrenocorticism (Addison's Disease)",
         "description_ja": "副腎ホルモンの不足で起こる疾患です。症状が非特異的で診断が難しく「偉大な模倣者」と呼ばれます。",
@@ -1475,6 +1493,7 @@ DISEASES = [
     # ---- 19. Diabetes Mellitus ----
     {
         "id": "diabetes_mellitus",
+        "prevalence_tier": "common",
         "name_ja": "糖尿病",
         "name_en": "Diabetes Mellitus",
         "description_ja": "インスリンの不足または作用不全により血糖値が慢性的に高くなる代謝疾患です。生涯にわたるインスリン注射が必要です。",
@@ -1502,6 +1521,7 @@ DISEASES = [
     # ---- 20. Chronic Kidney Disease ----
     {
         "id": "chronic_kidney_disease",
+        "prevalence_tier": "common",
         "name_ja": "慢性腎臓病",
         "name_en": "Chronic Kidney Disease (CKD)",
         "description_ja": "腎機能が不可逆的に低下する進行性疾患です。早期発見が重要で、IRIS分類に基づくステージ管理が行われます。",
@@ -1536,6 +1556,7 @@ DISEASES = [
     # ---- 21. Urinary Stones ----
     {
         "id": "urinary_stones",
+        "prevalence_tier": "common",
         "name_ja": "尿路結石症",
         "name_en": "Urolithiasis (Urinary Stones)",
         "description_ja": "膀胱内にミネラルの結晶が集まって結石を形成する疾患です。ストルバイトとシュウ酸カルシウムが最も多いタイプです。",
@@ -1564,6 +1585,7 @@ DISEASES = [
     # ---- 22. Dilated Cardiomyopathy (DCM) ----
     {
         "id": "dcm",
+        "prevalence_tier": "common",
         "name_ja": "拡張型心筋症",
         "name_en": "Dilated Cardiomyopathy (DCM)",
         "description_ja": "心筋が薄くなり心室が拡張する心疾患です。心臓のポンプ機能が低下し、鬱血性心不全に至ることがあります。",
@@ -1600,6 +1622,7 @@ DISEASES = [
     # ---- 23. Mitral Valve Disease ----
     {
         "id": "mitral_valve_disease",
+        "prevalence_tier": "common",
         "name_ja": "僧帽弁閉鎖不全症",
         "name_en": "Myxomatous Mitral Valve Disease (MMVD)",
         "description_ja": "犬で最も多い後天性心疾患です。僧帽弁の変性により弁が閉鎖不全となり、血液の逆流が生じます。",
@@ -1629,6 +1652,7 @@ DISEASES = [
     # ---- 24. Patent Ductus Arteriosus (PDA) ----
     {
         "id": "pda",
+        "prevalence_tier": "uncommon",
         "name_ja": "動脈管開存症",
         "name_en": "Patent Ductus Arteriosus (PDA)",
         "description_ja": "出生後に閉鎖すべき動脈管が開存し続ける先天性心疾患です。早期の外科的閉鎖により予後は良好です。",
@@ -1656,6 +1680,7 @@ DISEASES = [
     # ---- 25. Cataracts ----
     {
         "id": "cataracts",
+        "prevalence_tier": "common",
         "name_ja": "白内障",
         "name_en": "Cataracts",
         "description_ja": "水晶体が白濁し視力が低下する疾患です。遺伝性、老齢性、糖尿病性など原因は様々です。",
@@ -1679,6 +1704,7 @@ DISEASES = [
     # ---- 26. Glaucoma ----
     {
         "id": "glaucoma",
+        "prevalence_tier": "common",
         "name_ja": "緑内障",
         "name_en": "Glaucoma",
         "description_ja": "眼圧の上昇により視神経が障害される疾患です。急性発作は非常に痛く、数時間で不可逆的な視力喪失を起こす緊急疾患です。",
@@ -1707,6 +1733,7 @@ DISEASES = [
     # ---- 27. Progressive Retinal Atrophy (PRA) ----
     {
         "id": "pra",
+        "prevalence_tier": "uncommon",
         "name_ja": "進行性網膜萎縮症",
         "name_en": "Progressive Retinal Atrophy (PRA)",
         "description_ja": "網膜の光受容細胞が進行性に変性・消失する遺伝性の眼疾患です。夜盲症から始まり、最終的に失明に至ります。",
@@ -1733,6 +1760,7 @@ DISEASES = [
     # ---- 28. Cherry Eye ----
     {
         "id": "cherry_eye",
+        "prevalence_tier": "common",
         "name_ja": "チェリーアイ（第三眼瞼腺逸脱）",
         "name_en": "Cherry Eye (Prolapsed Third Eyelid Gland)",
         "description_ja": "第三眼瞼の涙腺が突出する疾患です。赤いさくらんぼ状の腫れが目の内側に現れます。外科的整復が推奨されます。",
@@ -1757,9 +1785,33 @@ DISEASES = [
             "boston_terrier": 1.5,
         },
     },
+    # ---- 28b. Acute Gastroenteritis ----
+    # The single most common GI presentation in general practice was absent
+    # from this legacy database, so "vomiting + anorexia" chat queries ranked
+    # mast cell tumor first. Dietary indiscretion / acute gastroenteritis is
+    # the textbook first differential for that complaint (Ettinger 8th ed).
+    {
+        "id": "acute_gastroenteritis",
+        "prevalence_tier": "very_common",
+        "name_ja": "急性胃腸炎（食餌性・非特異性）",
+        "name_en": "Acute Gastroenteritis (Dietary Indiscretion)",
+        "description_ja": "食餌の急変・拾い食い・腐敗物摂取などによる胃腸粘膜の急性炎症。犬の嘔吐・下痢の最多原因で、多くは支持療法で2-3日以内に自然軽快します。",
+        "description_en": "Acute inflammation of the gastric and intestinal mucosa, most often from dietary indiscretion (scavenging, abrupt diet change, spoiled food). The most common cause of canine vomiting/diarrhea; most cases resolve within 2-3 days with supportive care.",
+        "symptoms": [
+            "vomiting",
+            "diarrhea",
+            "loss_of_appetite",
+            "lethargy",
+            "blood_in_stool",
+        ],
+        "severity": "low",
+        "recommended_tests": ["fecal_exam", "cbc", "blood_chemistry"],
+        "breed_risks": {},
+    },
     # ---- 29. Pancreatitis ----
     {
         "id": "pancreatitis",
+        "prevalence_tier": "common",
         "name_ja": "膵炎",
         "name_en": "Pancreatitis (Acute / Chronic)",
         "description_ja": "膵臓の炎症で、消化酵素が膵臓自体を消化してしまう自己消化が本態です。高脂肪食や肥満が誘因となります。",
@@ -1786,6 +1838,7 @@ DISEASES = [
     # ---- 30. Inflammatory Bowel Disease (IBD) ----
     {
         "id": "ibd",
+        "prevalence_tier": "common",
         "name_ja": "炎症性腸疾患",
         "name_en": "Inflammatory Bowel Disease (IBD)",
         "description_ja": "消化管壁に慢性的な炎症細胞浸潤を生じる疾患群です。慢性の嘔吐、下痢、体重減少を引き起こします。",
@@ -1819,6 +1872,7 @@ DISEASES = [
     # ---- 31. Liver Disease ----
     {
         "id": "liver_disease",
+        "prevalence_tier": "common",
         "name_ja": "肝臓病",
         "name_en": "Hepatopathy (Liver Disease)",
         "description_ja": "肝臓に影響する様々な疾患の総称です。肝臓は再生能力が高いため、症状が現れた時にはかなり進行していることが多いです。",
@@ -1853,6 +1907,7 @@ DISEASES = [
     # ---- 32. Hemangiosarcoma ----
     {
         "id": "hemangiosarcoma",
+        "prevalence_tier": "common",
         "name_ja": "血管肉腫",
         "name_en": "Hemangiosarcoma (HSA)",
         "description_ja": "血管内皮細胞由来の悪性腫瘍です。脾臓、心臓、肝臓に好発し、突然の内出血で発見されることが多いです。",
@@ -1887,6 +1942,7 @@ DISEASES = [
     # ---- 33. Lymphoma ----
     {
         "id": "lymphoma",
+        "prevalence_tier": "common",
         "name_ja": "リンパ腫",
         "name_en": "Lymphoma (Lymphosarcoma)",
         "description_ja": "リンパ球の悪性腫瘍で、犬で最も多い血液系腫瘍です。リンパ節の腫大が特徴的で、化学療法に比較的良好に反応します。",
@@ -1922,6 +1978,7 @@ DISEASES = [
     # ---- 34. Osteosarcoma ----
     {
         "id": "osteosarcoma",
+        "prevalence_tier": "uncommon",
         "name_ja": "骨肉腫",
         "name_en": "Osteosarcoma (Bone Cancer)",
         "description_ja": "骨の悪性腫瘍で、犬の原発性骨腫瘍の約85%を占めます。大型犬の四肢に好発し、早期の転移が特徴です。",
@@ -1951,6 +2008,7 @@ DISEASES = [
     # ---- 35. Mast Cell Tumor ----
     {
         "id": "mast_cell_tumor",
+        "prevalence_tier": "common",
         "name_ja": "肥満細胞腫",
         "name_en": "Mast Cell Tumor (MCT)",
         "description_ja": "犬の皮膚腫瘍で最も多い悪性腫瘍です。グレードにより予後が大きく異なり、早期の外科的切除が重要です。",
@@ -1985,6 +2043,7 @@ DISEASES = [
     # ---- 36. Patellar Luxation ----
     {
         "id": "patellar_luxation",
+        "prevalence_tier": "very_common",
         "name_ja": "膝蓋骨脱臼",
         "name_en": "Patellar Luxation",
         "description_ja": "膝蓋骨が正常な位置から内側または外側にずれる疾患です。小型犬に多く、グレード1〜4で重症度が分類されます。",
@@ -2011,6 +2070,7 @@ DISEASES = [
     # ---- 37. Cruciate Ligament Rupture ----
     {
         "id": "cruciate_ligament_rupture",
+        "prevalence_tier": "common",
         "name_ja": "前十字靭帯断裂",
         "name_en": "Cranial Cruciate Ligament (CCL) Rupture",
         "description_ja": "犬で最も多い整形外科疾患の一つです。膝関節の不安定性と疼痛を引き起こし、外科的治療が標準です。",
@@ -2037,6 +2097,7 @@ DISEASES = [
     # ---- 38. Laryngeal Paralysis ----
     {
         "id": "laryngeal_paralysis",
+        "prevalence_tier": "uncommon",
         "name_ja": "喉頭麻痺",
         "name_en": "Laryngeal Paralysis (GOLPP)",
         "description_ja": "喉頭の軟骨が適切に開閉しなくなる神経筋疾患です。吸気時の呼吸困難や喘鳴が特徴で、高齢の大型犬に多発します。",
@@ -2063,6 +2124,7 @@ DISEASES = [
     # ---- 39. Megaesophagus ----
     {
         "id": "megaesophagus",
+        "prevalence_tier": "uncommon",
         "name_ja": "巨大食道症",
         "name_en": "Megaesophagus",
         "description_ja": "食道の運動機能が低下し食道が拡張する疾患です。食物の逆流（吐出）が特徴で、誤嚥性肺炎のリスクがあります。",
@@ -2095,6 +2157,7 @@ DISEASES = [
     # ---- 40. Von Willebrand Disease ----
     {
         "id": "von_willebrand_disease",
+        "prevalence_tier": "uncommon",
         "name_ja": "フォンヴィレブランド病",
         "name_en": "Von Willebrand Disease (vWD)",
         "description_ja": "犬で最も多い遺伝性出血性疾患です。フォンヴィレブランド因子の異常により出血傾向を示します。",
@@ -2115,6 +2178,7 @@ DISEASES = [
     # ---- 41. Immune-Mediated Hemolytic Anemia (IMHA) ----
     {
         "id": "imha",
+        "prevalence_tier": "uncommon",
         "name_ja": "免疫介在性溶血性貧血",
         "name_en": "Immune-Mediated Hemolytic Anemia (IMHA)",
         "description_ja": "自己免疫系が赤血球を破壊する自己免疫疾患です。急速に進行し致死率が高い緊急疾患です。",
@@ -2150,6 +2214,7 @@ DISEASES = [
     # ---- 42. Portosystemic Shunt ----
     {
         "id": "portosystemic_shunt",
+        "prevalence_tier": "rare",
         "name_ja": "門脈体循環シャント",
         "name_en": "Portosystemic Shunt (PSS / Liver Shunt)",
         "description_ja": "門脈血が肝臓を迂回する異常血管による疾患です。肝臓での解毒が行われず、神経症状や発育不良を引き起こします。",
@@ -2187,6 +2252,7 @@ DISEASES = [
     # ---- 43. Wobbler Syndrome ----
     {
         "id": "wobbler_syndrome",
+        "prevalence_tier": "uncommon",
         "name_ja": "ウォブラー症候群（頸部脊椎不安定症）",
         "name_en": "Wobbler Syndrome (Cervical Spondylomyelopathy)",
         "description_ja": "頸部脊椎の不安定性や変形により脊髄が圧迫される疾患です。ふらつく歩様（ウォブリング）が特徴で、大型犬に多発します。",
@@ -2216,6 +2282,7 @@ DISEASES = [
     # ---- Orthopedic ----
     {
         "id": "legg_calve_perthes",
+        "prevalence_tier": "uncommon",
         "name_ja": "レッグ・カルベ・ペルテス病",
         "name_en": "Legg-Calvé-Perthes Disease",
         "description_ja": "大腿骨頭への血流障害により壊死が起こる疾患です。小型犬の若齢期に多く見られます。",
@@ -2233,6 +2300,7 @@ DISEASES = [
     },
     {
         "id": "syringomyelia",
+        "prevalence_tier": "uncommon",
         "name_ja": "脊髄空洞症",
         "name_en": "Syringomyelia (SM)",
         "description_ja": "脊髄内に液体で満たされた空洞が形成される疾患です。キアリ様奇形に関連し、痛みやかゆみを引き起こします。",
@@ -2249,6 +2317,7 @@ DISEASES = [
     },
     {
         "id": "tracheal_collapse",
+        "prevalence_tier": "common",
         "name_ja": "気管虚脱",
         "name_en": "Tracheal Collapse",
         "description_ja": "気管の軟骨環が弱くなり、気管が扁平化する疾患です。呼吸困難やガチョウ様の咳を引き起こします。",
@@ -2270,6 +2339,7 @@ DISEASES = [
     # ---- Cardiac ----
     {
         "id": "subaortic_stenosis",
+        "prevalence_tier": "uncommon",
         "name_ja": "大動脈弁下狭窄症",
         "name_en": "Subaortic Stenosis (SAS)",
         "description_ja": "大動脈弁の下に線維組織が形成され、左心室からの血流が狭窄する先天性心疾患です。",
@@ -2288,6 +2358,7 @@ DISEASES = [
     },
     {
         "id": "arvc",
+        "prevalence_tier": "rare",
         "name_ja": "ボクサー心筋症",
         "name_en": "Arrhythmogenic Right Ventricular Cardiomyopathy (ARVC)",
         "description_ja": "右心室の心筋が脂肪や線維組織に置換される遺伝性疾患です。不整脈や突然死のリスクがあります。",
@@ -2303,6 +2374,7 @@ DISEASES = [
     # ---- Eye ----
     {
         "id": "entropion",
+        "prevalence_tier": "common",
         "name_ja": "眼瞼内反症",
         "name_en": "Entropion",
         "description_ja": "まぶたが内側に巻き込む疾患で、まつ毛が角膜を刺激し、痛みや角膜損傷を引き起こします。",
@@ -2323,6 +2395,7 @@ DISEASES = [
     },
     {
         "id": "ectropion",
+        "prevalence_tier": "common",
         "name_ja": "眼瞼外反症",
         "name_en": "Ectropion",
         "description_ja": "まぶたが外側に垂れ下がる疾患で、結膜が露出し、乾燥や感染のリスクが高まります。",
@@ -2341,6 +2414,7 @@ DISEASES = [
     },
     {
         "id": "lens_luxation",
+        "prevalence_tier": "common",
         "name_ja": "水晶体脱臼",
         "name_en": "Lens Luxation",
         "description_ja": "水晶体を固定する靭帯が弱くなり、水晶体が正常な位置から脱臼する疾患です。緑内障の原因となります。",
@@ -2359,6 +2433,7 @@ DISEASES = [
     },
     {
         "id": "corneal_dystrophy",
+        "prevalence_tier": "common",
         "name_ja": "角膜ジストロフィー",
         "name_en": "Corneal Dystrophy",
         "description_ja": "角膜に脂質やカルシウムが沈着する遺伝性疾患です。通常は無痛ですが、重度の場合は視力に影響します。",
@@ -2377,6 +2452,7 @@ DISEASES = [
     },
     {
         "id": "retinal_dysplasia",
+        "prevalence_tier": "rare",
         "name_ja": "網膜異形成",
         "name_en": "Retinal Dysplasia",
         "description_ja": "網膜の発育異常により、網膜のひだや剥離が生じる疾患です。軽度のものから失明に至る重度のものまであります。",
@@ -2394,6 +2470,7 @@ DISEASES = [
     },
     {
         "id": "collie_eye_anomaly",
+        "prevalence_tier": "rare",
         "name_ja": "コリーアイ異常",
         "name_en": "Collie Eye Anomaly (CEA)",
         "description_ja": "コリー系犬種に見られる先天性の眼疾患で、脈絡膜の発達不全により視力障害が生じます。",
@@ -2412,6 +2489,7 @@ DISEASES = [
     # ---- Neurological ----
     {
         "id": "pug_encephalitis",
+        "prevalence_tier": "rare",
         "name_ja": "パグ脳炎",
         "name_en": "Pug Dog Encephalitis (Necrotizing Meningoencephalitis)",
         "description_ja": "脳の壊死性炎症を引き起こす遺伝性疾患で、パグに特異的です。発作や行動変化が特徴的です。",
@@ -2427,6 +2505,7 @@ DISEASES = [
     },
     {
         "id": "cerebellar_ataxia",
+        "prevalence_tier": "rare",
         "name_ja": "小脳失調症",
         "name_en": "Cerebellar Ataxia",
         "description_ja": "小脳の変性により、運動協調の障害、震え、異常歩行を引き起こします。",
@@ -2444,6 +2523,7 @@ DISEASES = [
     # ---- Gastrointestinal ----
     {
         "id": "epi",
+        "prevalence_tier": "uncommon",
         "name_ja": "外分泌膵機能不全",
         "name_en": "Exocrine Pancreatic Insufficiency (EPI)",
         "description_ja": "膵臓が消化酵素を十分に産生できなくなる疾患です。体重減少と栄養不良が起こります。",
@@ -2461,6 +2541,7 @@ DISEASES = [
     # ---- Urinary ----
     {
         "id": "familial_nephropathy",
+        "prevalence_tier": "rare",
         "name_ja": "家族性腎症",
         "name_en": "Familial Nephropathy",
         "description_ja": "遺伝性の腎疾患で、若齢期に腎機能が進行性に低下します。",
@@ -2478,6 +2559,7 @@ DISEASES = [
     # ---- Hematologic ----
     {
         "id": "hemolytic_anemia",
+        "prevalence_tier": "uncommon",
         "name_ja": "溶血性貧血",
         "name_en": "Hemolytic Anemia",
         "description_ja": "赤血球が正常より速く破壊される疾患で、貧血、黄疸、虚脱を引き起こします。",
@@ -2497,6 +2579,7 @@ DISEASES = [
     # ---- Dermatologic ----
     {
         "id": "sebaceous_adenitis",
+        "prevalence_tier": "rare",
         "name_ja": "皮脂腺炎",
         "name_en": "Sebaceous Adenitis (SA)",
         "description_ja": "皮脂腺が免疫系により破壊される疾患で、脱毛、乾燥肌、鱗屑を引き起こします。",
@@ -2514,6 +2597,7 @@ DISEASES = [
     },
     {
         "id": "dermatomyositis",
+        "prevalence_tier": "rare",
         "name_ja": "皮膚筋炎",
         "name_en": "Dermatomyositis",
         "description_ja": "皮膚と筋肉の炎症を引き起こす遺伝性疾患で、顔面や四肢に脱毛や潰瘍が生じます。",
@@ -2529,6 +2613,7 @@ DISEASES = [
     },
     {
         "id": "alopecia_x",
+        "prevalence_tier": "uncommon",
         "name_ja": "脱毛症X",
         "name_en": "Alopecia X (Black Skin Disease)",
         "description_ja": "原因不明の脱毛症で、主に北方犬種に見られます。体幹部の対称性脱毛と皮膚の色素沈着が特徴です。",

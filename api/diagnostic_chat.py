@@ -966,6 +966,12 @@ def match_symptoms_to_diseases(
 
     import math
 
+    # Prevalence prior — same tier multipliers as the generic species chat path
+    # (api/chat/disease_matcher). Chat inputs are typically 2-4 nonspecific
+    # signs, where a small-symptom-list rare disease (e.g. familial
+    # nephropathy) otherwise outranks diabetes/CKD on coverage alone.
+    from api.chat.disease_matcher import _PREVALENCE_MULTIPLIER
+
     # Import scoring components from health_checker (single source of truth)
     from api.health_checker import (
         _PATHOGNOMONIC_CLUSTERS,
@@ -1031,7 +1037,8 @@ def match_symptoms_to_diseases(
                     negative_penalty -= 0.03
             negative_penalty = max(negative_penalty, 0.5)
 
-        composite = base_score * cluster_boost * negative_penalty
+        prevalence_mult = _PREVALENCE_MULTIPLIER.get(disease.get("prevalence_tier", ""), 1.0)
+        composite = min(base_score * cluster_boost * negative_penalty * prevalence_mult, 1.0)
 
         # Logistic confidence calibration (same curve as health_checker)
         raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (composite - 0.4)))
@@ -1058,6 +1065,7 @@ def match_symptoms_to_diseases(
                     "coverage": round(coverage, 3),
                     "cluster_boost": cluster_boost,
                     "negative_penalty": round(negative_penalty, 3),
+                    "prevalence_mult": prevalence_mult,
                 },
             }
         )
