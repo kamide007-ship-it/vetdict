@@ -150,6 +150,10 @@ _SYN: dict[str, list[str]] = {
     "darkened_coloration": ["dark_coloration", "discoloration"],
     "dark_coloration": ["darkened_coloration", "discoloration"],
     "cold_limbs": ["cold_extremities"],
+    # Owners cannot reliably distinguish anuria from stranguria — bridge them
+    # so the blocked-cat family matches either phrasing (2026-08 audit).
+    "decreased_urination": ["straining_to_urinate"],
+    "straining_to_urinate": ["decreased_urination"],
     "cold_extremities": ["cold_limbs"],
     "self_mutilation": ["self_chewing", "feather_plucking"],
     "self_chewing": ["self_mutilation"],
@@ -225,7 +229,7 @@ _SYN: dict[str, list[str]] = {
     "pain_on_touch": ["pain_on_palpation", "tenderness", "discomfort"],
     # Skin/coat extended (new keys only)
     "skin_itching": ["itching", "pruritus", "scratching"],
-    "lumps": ["mass", "tumor", "nodule", "growth", "swelling"],
+    "lumps": ["mass", "tumor", "nodule", "growth", "swelling", "subcutaneous_mass", "lumps_and_bumps"],
     # Eye
     "eye_redness": ["red_eye", "ocular_redness", "conjunctivitis"],
     "eye_discharge": ["ocular_discharge", "tearing", "epiphora", "pus_in_eye"],
@@ -253,6 +257,36 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
     "uncommon": 0.875,
     "rare": 0.70,
 }
+
+# Textbook "X until proven otherwise" sign pairs. Each entry:
+# (species, frozenset of symptom ids that must ALL be present in the expanded
+#  user symptom set, disease name (module "name" field), boost multiplier).
+# Keep this list tiny and only for presentations with unambiguous textbook
+# backing — it exists to stop umbrella syndromes with long symptom lists
+# losing on coverage to narrow rarities.
+_PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    # Anorexia + reduced fecal output in a rabbit is GI stasis until proven
+    # otherwise (Oglesbee, Blackwell's 5-Minute Vet Consult: Small Mammal).
+    ("rabbit", frozenset({"appetite_loss", "reduced_fecal_output"}), "Gastrointestinal Stasis", 1.45),
+    # Stranguria/anuria + vocalization in a cat = urethral obstruction —
+    # the defining small-animal urinary emergency (Ettinger 8th ed).
+    ("cat", frozenset({"straining_to_urinate", "vocalization_changes"}), "Urinary Obstruction (Blocked Cat)", 1.35),
+    ("cat", frozenset({"decreased_urination", "straining_to_urinate"}), "Urinary Obstruction (Blocked Cat)", 1.35),
+    # Acute hind-limb paralysis + cold limbs/pain vocalization in a cat is
+    # aortic thromboembolism until proven otherwise (Smith 2003 JVIM).
+    ("cat", frozenset({"hind_limb_paralysis", "cold_extremities"}), "Aortic Thromboembolism (Saddle Thrombus)", 1.35),
+    (
+        "cat",
+        frozenset({"hind_limb_paralysis", "vocalization_changes"}),
+        "Aortic Thromboembolism (Saddle Thrombus)",
+        1.35,
+    ),
+    ("cat", frozenset({"decreased_urination", "vocalization_changes"}), "Urinary Obstruction (Blocked Cat)", 1.35),
+    # Pelvic-limb weakness + ptyalism in a ferret is the insulinoma
+    # hypoglycemia presentation (Quesenberry & Carpenter 4th ed).
+    ("ferret", frozenset({"hind_leg_weakness", "drooling"}), "Insulinoma", 1.35),
+    ("ferret", frozenset({"hind_leg_weakness", "staring"}), "Insulinoma", 1.35),
+]
 
 # Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.
 # Cached after first call since the disease data is loaded at module import
@@ -367,8 +401,16 @@ def _match_species_symptoms_to_diseases(
         _weight_cache[sym_id] = weight
         return weight
 
-    user_weights = {s: _compute_weight(s) for s in symptom_set}
-    total_user_weight = sum(user_weights.values())
+    # Group each ORIGINAL user symptom with its synonym expansion so one
+    # complaint counts exactly once in recall, no matter how many synonym
+    # spellings a disease happens to list. Without this, a disease listing
+    # e.g. constipation + reduced_fecal_output + small_fecal_pellets was
+    # triple-credited for the single complaint 「糞が小さい」 and outranked
+    # the everyday diagnosis that lists it once (rabbit megacolon vs GI
+    # stasis).
+    _source_groups: list[set[str]] = [{sid} | set(_SYN.get(sid, [])) for sid in dict.fromkeys(symptom_ids)]
+    _group_weights = [max(_compute_weight(s) for s in group) for group in _source_groups]
+    total_user_weight = sum(_group_weights)
 
     matches = []
     for disease in diseases:
@@ -381,7 +423,12 @@ def _match_species_symptoms_to_diseases(
             continue
 
         # --- Weighted recall (how well user symptoms match this disease) ---
-        matched_weight = sum(user_weights.get(s, 1.0) for s in matched)
+        # Per source-symptom group: credit the best-matching alternate once.
+        matched_weight = 0.0
+        for group, gw in zip(_source_groups, _group_weights):
+            hit = group & disease_symptoms
+            if hit:
+                matched_weight += min(gw, max(_compute_weight(s) for s in hit))
         weighted_recall = matched_weight / total_user_weight if total_user_weight > 0 else 0
 
         # --- Coverage (how much of the disease's symptom profile is covered) ---
@@ -438,6 +485,15 @@ def _match_species_symptoms_to_diseases(
         disease_name = disease.get("name", "")
         prevalence_tier = _prevalence.get(disease_name, "")
         prevalence_mult = _PREVALENCE_MULTIPLIER.get(prevalence_tier, 1.0)
+
+        # --- Pathognomonic pair boost ---
+        # Textbook "X until proven otherwise" presentations: when the defining
+        # sign pair is present, the syndrome must not be buried under
+        # narrow-symptom-list entries that win on coverage alone.
+        pathognomonic_boost = 1.0
+        for cl_species, cl_signs, cl_disease, cl_boost in _PATHOGNOMONIC_PAIRS:
+            if species == cl_species and disease_name == cl_disease and cl_signs <= symptom_set:
+                pathognomonic_boost = max(pathognomonic_boost, cl_boost)
 
         # --- Age-predisposition factor (if user supplied patient age category) ---
         # age_category should be one of: puppy/kitten/foal/young/adult/senior/geriatric
@@ -527,14 +583,19 @@ def _match_species_symptoms_to_diseases(
             * urgency_factor
             * coverage_bonus
             * prevalence_mult
+            * pathognomonic_boost
             * age_factor
             * onset_factor
             * breed_factor
             * lab_factor
         )
         # Multiplicative boosts can push a saturated match past 1.0, and the
-        # frontend renders similarity as a percentage — cap so a perfect match
-        # reads 100%, never 107%.
+        # frontend renders similarity as a percentage — cap the DISPLAYED
+        # score so a perfect match reads 100%, never 107%. Ranking still uses
+        # the uncapped composite: clamping before sorting flattened distinct
+        # top scores into ties and made rank 1 insertion-order arbitrary
+        # (FHV-1 vs the URI umbrella regression).
+        raw_composite = composite
         composite = min(composite, 1.0)
 
         # --- Logistic confidence calibration ---
@@ -558,6 +619,7 @@ def _match_species_symptoms_to_diseases(
                 "name_en": disease.get("name", ""),
                 "severity": urgency,
                 "similarity_score": round(composite, 3),
+                "_rank_score": raw_composite,
                 "confidence_percent": confidence,
                 "matched_symptoms": sorted(matched),
                 "unmatched_user_symptoms": sorted(symptom_set - disease_symptoms),
@@ -580,5 +642,5 @@ def _match_species_symptoms_to_diseases(
             }
         )
 
-    matches.sort(key=lambda m: m["similarity_score"], reverse=True)
+    matches.sort(key=lambda m: m.pop("_rank_score"), reverse=True)
     return matches

@@ -538,7 +538,14 @@ DISEASE_DATABASE: list[Disease] = [
         "hoof",
         "critical",
         "蹄葉(ラメラ)の炎症。蹄骨の回転・沈下に至る。代謝性疾患との関連が強い。",
-        ["hoof_heat", "hoof_laminitis_signs", "limb_digital_pulse", "gen_lethargy", "gen_recumbent"],
+        [
+            "hoof_heat",
+            "hoof_laminitis_signs",
+            "limb_digital_pulse",
+            "limb_lameness_fore",
+            "gen_lethargy",
+            "gen_recumbent",
+        ],
         urgency="emergency",
         recommended_exams=[
             (1, "X線検査(側面像 — 蹄骨角度確認)", "Radiography (Lateral — Coffin Bone Rotation)"),
@@ -7174,7 +7181,7 @@ DISEASE_DATABASE: list[Disease] = [
         "hoof",
         "critical",
         "蹄葉の急性炎症。代謝性・感染性・機械的原因。",
-        ["hoof_heat", "limb_digital_pulse", "limb_lameness_fore", "body_stiffness"],
+        ["hoof_heat", "limb_digital_pulse", "limb_lameness_fore", "body_stiffness", "gen_recumbent"],
         urgency="emergency",
         recommended_exams=[(1, "X線", "Radiographs"), (2, "ACTH/インスリン", "ACTH/Insulin")],
         merck_url=_MERCK + "acute+laminitis+horses",
@@ -12412,6 +12419,57 @@ def _confidence_level(pct: float) -> str:
     return "low"
 
 
+# --- Prevalence prior (same tier multipliers as the chat species engine) ---
+# Without this, single-finding queries ranked case-report rarities above the
+# everyday syndromes: checking "colic signs" alone put uterine torsion first
+# and the Colic entry itself 67th at 3%.
+_EQ_PREVALENCE_MULTIPLIER = {
+    "very_common": 1.35,
+    "common": 1.125,
+    "uncommon": 0.875,
+    "rare": 0.70,
+}
+_EQ_PREVALENCE_CACHE: dict[str, str] | None = None
+
+
+def _equine_prevalence_tier(name_en: str) -> str:
+    global _EQ_PREVALENCE_CACHE
+    if _EQ_PREVALENCE_CACHE is None:
+        try:
+            from api.species.prevalence_data import get_prevalence_for_species
+
+            _EQ_PREVALENCE_CACHE = get_prevalence_for_species("horse")
+        except Exception:  # pragma: no cover - prevalence data optional
+            _EQ_PREVALENCE_CACHE = {}
+    return _EQ_PREVALENCE_CACHE.get(name_en, "")
+
+
+# --- Syndrome-defining findings ---
+# Some checklist findings ARE the syndrome ("colic signs" checked → Colic is
+# the working diagnosis by definition; "laminitis signs" → Laminitis). A pure
+# coverage score buries these umbrella entries because they list many
+# associated findings. When the namesake finding is checked, guarantee the
+# syndrome a top-tier base score; additional findings still differentiate the
+# specific subtypes above or alongside it.
+_SYNDROME_FINDING_FLOORS: dict[str, tuple[str, ...]] = {
+    "dig_colic_signs": ("Colic",),
+    "hoof_laminitis_signs": ("Laminitis", "Acute Laminitis"),
+    "hoof_thrush": ("Thrush",),
+    "hoof_navicular": ("Navicular Syndrome",),
+    "hoof_abscess": ("Hoof Abscess",),
+}
+_SYNDROME_FLOOR_SCORE = 0.62
+
+# Sign PAIRS that define a syndrome even when the namesake checkbox wasn't
+# ticked: forelimb lameness + hoof heat is laminitis until proven otherwise
+# (Baxter, Adams & Stashak's Lameness 7th ed) — without this, two-finding
+# entries like DDF tendinitis win on trivially perfect coverage.
+_SYNDROME_PAIR_BOOSTS: list[tuple[frozenset, tuple[str, ...], float]] = [
+    (frozenset({"hoof_heat", "limb_lameness_fore"}), ("Laminitis", "Acute Laminitis"), 1.5),
+    (frozenset({"hoof_heat", "limb_digital_pulse"}), ("Laminitis", "Acute Laminitis"), 1.5),
+]
+
+
 def generate_differential_diagnosis(
     checked_findings: set[str],
     age_stage: str = "",
@@ -12519,11 +12577,28 @@ def generate_differential_diagnosis(
                 max_penalty = absent_idf_sum / (total_idf + 1.0)
                 absence_penalty = min(0.35, max_penalty * observability)
 
+        # --- 有病率 prior ---
+        prevalence_mult = _EQ_PREVALENCE_MULTIPLIER.get(_equine_prevalence_tier(disease.name_en), 1.0)
+
         # --- 最終スコア ---
-        raw_score = weighted_ratio * combo_bonus * age_bonus * (1.0 - absence_penalty)
+        raw_score = weighted_ratio * combo_bonus * age_bonus * (1.0 - absence_penalty) * prevalence_mult
+
+        # --- 症候群フロア: 症候群を定義する所見そのものがチェックされている ---
+        for finding, syndrome_names in _SYNDROME_FINDING_FLOORS.items():
+            if finding in matched and disease.name_en in syndrome_names:
+                raw_score = max(raw_score, _SYNDROME_FLOOR_SCORE * prevalence_mult)
+                break
+
+        # --- 症候群ペアブースト: 定義的な所見ペアが揃っている ---
+        for pair, syndrome_names, boost in _SYNDROME_PAIR_BOOSTS:
+            if disease.name_en in syndrome_names and pair <= checked_findings:
+                raw_score *= boost
+                break
+
+        raw_score = min(raw_score, 1.0)
 
         # 信頼度 % (0-100) に変換
-        # raw_score は理論上 0.0-1.2 の範囲なので 100 でスケール
+        # raw_score は理論上 0.0-1.0 の範囲なので 100 でスケール
         confidence_pct = min(99.0, round(raw_score * 100.0, 1))
 
         # 除外根拠の説明文生成
