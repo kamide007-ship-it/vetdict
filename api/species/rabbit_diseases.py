@@ -302,6 +302,11 @@ DISEASES: List[Dict[str, Any]] = [
             # stasis below rarities like ectopic pregnancy.
             "bloating",
             "abdominal_distension",
+            # Progressively smaller, scant fecal pellets are the earliest and
+            # most classic owner-reported sign of GI stasis (Oglesbee,
+            # Quesenberry & Carpenter 4th ed) — without it "small feces + not
+            # eating" ranked rare megacolon above GI stasis.
+            "small_fecal_pellets",
         },
         "description": "Gastrointestinal Stasis is a gastrointestinal condition affecting digestive function and nutrient absorption.",
         "description_ja": "ストレス、痛み、脱水、繊維不足などが原因で消化管の蠕動が低下または停止する、命に関わる疾患です。",
@@ -1955,7 +1960,17 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Trichobezoar (Hairball)",
         "name_ja": "毛球症",
-        "symptoms": {"appetite_loss", "reduced_fecal_output", "abdominal_distension", "lethargy", "teeth_grinding"},
+        # small_fecal_pellets: trichobezoar is a manifestation of GI stasis, and
+        # scant small pellets (often strung with hair) are a classic sign
+        # (Harcourt-Brown 2002; Oglesbee & Lord 2020 BSAVA).
+        "symptoms": {
+            "appetite_loss",
+            "reduced_fecal_output",
+            "abdominal_distension",
+            "lethargy",
+            "teeth_grinding",
+            "small_fecal_pellets",
+        },
         "description": "Trichobezoar (Hairball) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "胃内に摂取した毛が蓄積する状態。ウサギでは通常、消化管うっ滞に続発して起こります。",
         "urgency": "high",

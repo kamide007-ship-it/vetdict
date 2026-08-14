@@ -1444,3 +1444,65 @@ def test_katakana_variant_aliases_resolve_in_text_matcher():
     for text, expected_id in cases:
         ids = [d["id"] for d in find_drugs_in_text(text)]
         assert expected_id in ids, f"{text!r} did not resolve to {expected_id} (got {ids})"
+
+
+def test_ja_form_suffix_and_combination_stems_resolve_in_text_matcher():
+    """2026-08 4th sweep: treatment texts cite drugs without the formulary's
+    dose-form/salt suffixes (オフロキサシン点眼 → 「オフロキサシン 1滴」,
+    キニジン硫酸塩 → 「キニジン 22 mg/kg」) and cite one half of ・-joined
+    combinations (トリメトプリム・スルファメトキサゾール). Before the suffix-strip
+    and ・-split index rules 900+ treatment references — 732 for ペニシリン
+    alone — never surfaced a related-drug chip although the drug was carried."""
+    from api.drug_dictionary import find_drugs_in_text
+
+    cases = [
+        ("ペニシリン禁忌（モルモット・チンチラ）", "penicillin_g"),
+        ("オフロキサシン 1滴 q6h", "ofloxacin_ophthalmic"),
+        ("カルニチン 50 mg/kg PO", "l_carnitine"),
+        ("チモロール 1滴 q12h", "timolol_ophthalmic"),
+        ("シスプラチン化学療法", "cisplatin_injectable"),
+        ("ナタマイシン点眼を頻回投与", "natamycin_ophthalmic"),
+        ("リュープロレリン 700 μg/kg IM", "leuprolide"),
+        ("スルファメトキサゾール 15 mg/kg", "trimethoprim_sulfa"),
+        ("ピペラシリン 40 mg/kg IV", "piperacillin_tazobactam"),
+        ("イミペネム 5 mg/kg SC", "imipenem_cilastatin"),
+        ("キニジン 22 mg/kg NGT q2h", "quinidine"),
+        ("ダルベポエチン 1 μg/kg SC 週1回", "darbepoetin"),
+        ("ダーベポエチン投与", "darbepoetin"),
+        ("アルブテロール吸入", "salbutamol"),
+        ("ビタミンB1 25 mg/kg IM", "thiamine_b1"),
+    ]
+    for text, expected_id in cases:
+        ids = [d["id"] for d in find_drugs_in_text(text)]
+        assert expected_id in ids, f"{text!r} did not resolve to {expected_id} (got {ids})"
+
+    # Precision guards: generic words must NOT surface chips.
+    for text, forbidden in [
+        ("ジョイントサポートを推奨", "ecvn_for_joint"),
+        ("アンチオキシダント療法", "ecvn_for_antioxidant"),
+        ("ビタミンB1欠乏", "vitamin_b12"),  # B1 text must never chip the B12 entry
+    ]:
+        ids = [d["id"] for d in find_drugs_in_text(text)]
+        assert forbidden not in ids, f"{text!r} wrongly resolved to {forbidden}"
+
+
+def test_enoxaparin_present_with_anti_xa_based_dosing():
+    """Batch 36: 13 DIC/thromboembolism disease entries instruct enoxaparin with
+    explicit doses, but the formulary carried only UFH and dalteparin. The entry
+    must exist with the anti-Xa-based canine/feline regimens (Lunsford 2009 /
+    Alwood 2007) and the hypocoagulable-DIC contraindication."""
+    from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+    d = get_drug_by_id("enoxaparin")
+    assert d is not None, "enoxaparin missing from formulary"
+    dog = d["species_info"]["dog"]
+    cat = d["species_info"]["cat"]
+    assert "0.8 mg/kg" in dog["dosage"] and "q6h" in dog["dosage"]
+    assert "1.25 mg/kg" in cat["dosage"]
+    for sp in ("dog", "cat", "horse", "rabbit"):
+        info = d["species_info"][sp]
+        assert info.get("dosage") and info.get("dosage_ja"), f"enoxaparin {sp} dosing incomplete"
+    assert "DIC" in d["contraindications"]
+    # The treatment texts' own wording must resolve to the new entry.
+    ids = [x["id"] for x in find_drugs_in_text("エノキサパリン 0.8-1 mg/kg SC q12h、抗Xaモニタ")]
+    assert "enoxaparin" in ids

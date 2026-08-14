@@ -57,6 +57,7 @@ from api.drug_batch_32 import DRUGS_BATCH_32
 from api.drug_batch_33 import DRUGS_BATCH_33
 from api.drug_batch_34 import DRUGS_BATCH_34
 from api.drug_batch_35 import DRUGS_BATCH_35
+from api.drug_batch_36 import DRUGS_BATCH_36
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10599,6 +10600,13 @@ for _drug35 in DRUGS_BATCH_35:
         DRUGS.append(_drug35)
         _drug_index[_drug35["id"]] = _drug35
 
+# バッチ36: 2026-08 第4回 referenced-but-absent 監査で検出
+# （エノキサパリン/LMWH — DIC・血栓塞栓症プロトコル13疾患エントリが用量付きで参照）
+for _drug36 in DRUGS_BATCH_36:
+    if _drug36["id"] not in _drug_index:
+        DRUGS.append(_drug36)
+        _drug_index[_drug36["id"]] = _drug36
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11042,8 +11050,10 @@ _FIRST_WORD_STOPLIST = {
 
 # Derived stems that are generic clinical phrases, not drug references
 # ("Critical Care (Oxbow)" → stem "critical care" would match "critical care
-# monitoring" in any emergency protocol).
-_GENERIC_STEM_STOPLIST = {"critical care"}
+# monitoring" in any emergency protocol). ジョイント/アンチオキシダント are ECVN
+# product-name fragments that would surface sponsor chips from generic prose;
+# ビタミンb would wrongly map ビタミンB1 (thiamine) mentions to the B12 entry.
+_GENERIC_STEM_STOPLIST = {"critical care", "ジョイント", "アンチオキシダント", "ビタミンb"}
 
 # Case-sensitive product references: treatment texts name the Oxbow syringe-feed
 # product as capitalised "Critical Care" (1,000+ entries), while generic prose
@@ -11064,8 +11074,40 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "sulfasalazine": ("スルファサラジン",),  # canonical: サラゾスルファピリジン
     "fomepizole": ("フォメピゾール",),  # canonical: ホメピゾール
     "methimazole": ("チアマゾール",),  # thiamazole = INN of methimazole
-    "penicillin_g": ("プロカインペニシリン",),  # procaine penicillin G formulation
+    "penicillin_g": (
+        "プロカインペニシリン",
+        "ペニシリン",
+    ),  # procaine formulation / bare class-archetype (732 treatment refs incl. guinea-pig contraindication notes)
+    "l_carnitine": ("カルニチン",),  # canonical: L-カルニチン
+    "salbutamol": ("アルブテロール",),  # albuterol = USAN of salbutamol
+    "leuprolide": ("リュープロリド",),  # canonical: リュープロレリン酢酸塩
+    "darbepoetin": ("ダーベポエチン",),  # canonical: ダルベポエチンアルファ
+    "thiamine_b1": (
+        "ビタミンb1",
+    ),  # canonical: チアミン（ビタミンB1） — bare "ビタミンB1" must resolve to thiamine, never the B12 entry
 }
+
+
+# Japanese dose-form / salt / strength suffixes that formulary names carry but
+# treatment texts omit ("オフロキサシン点眼" is cited as "オフロキサシン 1滴 q6h",
+# "キニジン硫酸塩" as "キニジン 22 mg/kg"). Stripped iteratively so stacked
+# suffixes ("ナタマイシン点眼5%") reduce to the bare agent name.
+_JA_FORM_SUFFIX_RE = re.compile(
+    r"(配合点眼|点眼液|点眼|注射|吸入|外用|クリーム|軟膏|ゲル|リンス"
+    r"|酢酸塩|塩酸塩|硫酸塩|リン酸塩|アルファ"
+    r"|[0-9.]+[%％]?|[-–])$"
+)
+
+
+def _strip_ja_form_suffixes(name: str) -> str:
+    """Strip trailing Japanese dose-form/salt/strength suffixes from a drug name."""
+    s = name
+    for _ in range(6):
+        m = _JA_FORM_SUFFIX_RE.search(s)
+        if not m or m.start() == 0:
+            break
+        s = s[: m.start()].strip()
+    return s
 
 
 def _build_drug_keyword_index() -> None:
@@ -11077,8 +11119,12 @@ def _build_drug_keyword_index() -> None:
       1. Full English / Japanese names (e.g., "amoxicillin", "アモキシシリン")
       2. Parenthetical-suffix-stripped stems ("ミネラルオイル（流動パラフィン）" →
          "ミネラルオイル"), slash-separated alternates ("ノルモソルR／プラズマライトA" →
-         both), and trailing-液 stems for fluids (treatment texts write
-         "乳酸リンゲル 10-20 mL/kg" without the 液)
+         both), ・-separated combination halves ("トリメトプリム・スルファメトキサゾール"
+         → both — treatment texts frequently cite one half alone), trailing-液
+         stems for fluids (treatment texts write "乳酸リンゲル 10-20 mL/kg"
+         without the 液), and Japanese dose-form/salt-suffix-stripped stems
+         ("オフロキサシン点眼" → "オフロキサシン", "リュープロレリン酢酸塩" →
+         "リュープロレリン", "ダルベポエチンアルファ" → "ダルベポエチン")
       3. First word of multi-word names ("Toceranib" from "Toceranib
          Phosphate") — except bare generic words (_FIRST_WORD_STOPLIST)
     """
@@ -11105,13 +11151,17 @@ def _build_drug_keyword_index() -> None:
             stem = re.split(r"[（(]", k)[0].strip()
             if stem and stem != k:
                 variants.append(stem)
-            for part in re.split(r"[／/]", stem or k):
+            for part in re.split(r"[／/・]", stem or k):
                 part = part.strip()
                 if part and part != k and part not in variants:
                     variants.append(part)
             for v in list(variants) + [k]:
                 if v.endswith("液") and len(v) >= 5 and v[:-1] not in variants:
                     variants.append(v[:-1])
+            for v in list(variants) + [k]:
+                s = _strip_ja_form_suffixes(v)
+                if s and s != v and s not in variants:
+                    variants.append(s)
             tier2.extend((v, drug_id) for v in variants if len(v) >= 4 and v not in _GENERIC_STEM_STOPLIST)
             first_word = k.split()[0] if " " in k else k.split("-")[0]
             if first_word != k and len(first_word) >= 4 and first_word not in _FIRST_WORD_STOPLIST:

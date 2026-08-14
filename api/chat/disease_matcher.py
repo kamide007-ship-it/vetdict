@@ -217,10 +217,13 @@ _SYN: dict[str, list[str]] = {
     "excessive_panting": ["tachypnea", "rapid_breathing", "panting"],
     "dyspnea": ["labored_breathing", "respiratory_distress", "open_mouth_breathing"],
     # Pain/orthopedic
-    "limping_fl": ["lameness_fl", "limp", "lameness", "stiffness", "limping"],
-    "limping_fr": ["lameness_fr", "limp", "lameness", "stiffness", "limping"],
-    "limping_rl": ["lameness_rl", "limp", "lameness", "stiffness", "limping"],
-    "limping_rr": ["lameness_rr", "limp", "lameness", "stiffness", "limping"],
+    # Cross-leg expansion: chat inputs never specify the leg ("足を引きずる"), so a
+    # complaint resolved to one leg must also credit diseases listing the others
+    # (elbow dysplasia lists forelimbs only, CCL/hip dysplasia hindlimbs only).
+    "limping_fl": ["lameness_fl", "limp", "lameness", "stiffness", "limping", "limping_fr", "limping_rl", "limping_rr"],
+    "limping_fr": ["lameness_fr", "limp", "lameness", "stiffness", "limping", "limping_fl", "limping_rl", "limping_rr"],
+    "limping_rl": ["lameness_rl", "limp", "lameness", "stiffness", "limping", "limping_fl", "limping_fr", "limping_rr"],
+    "limping_rr": ["lameness_rr", "limp", "lameness", "stiffness", "limping", "limping_fl", "limping_fr", "limping_rl"],
     "lameness": ["limp", "limping", "limping_fl", "limping_fr", "limping_rl", "limping_rr"],
     "stiffness": ["stiff_gait", "lameness", "reluctance_to_move", "reluctance_move"],
     "pain_on_touch": ["pain_on_palpation", "tenderness", "discomfort"],

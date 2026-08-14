@@ -652,6 +652,15 @@ def extract_symptoms_from_text(text: str) -> list:
         "regurgitation": ["vomiting"],
         "ataxia": ["tremors"],
         "incoordination": ["tremors"],
+        # "足を引きずる"/"limping" aliases resolve to lameness_or_limping, which the
+        # legacy dog vocabulary carries as plain "limping" — without this mapping
+        # the dog chat's own quick-tap suggestion extracted nothing.
+        "lameness_or_limping": ["limping"],
+        "lameness": ["limping"],
+        # "itchy skin" resolves to the scratching/flashing IDs (fish vocabulary);
+        # the legacy dog vocabulary carries pruritus as "itching".
+        "scratching": ["itching"],
+        "flashing": ["itching"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

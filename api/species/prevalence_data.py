@@ -603,7 +603,10 @@ SPECIES_PREVALENCE = {
         "Treponematosis (Rabbit Syphilis)": "uncommon",
         "Bordetella Infection": "uncommon",
         "Mycoplasmosis": "uncommon",
-        "Megacolon": "uncommon",
+        # Rabbit megacolon is a congenital syndrome of En/En homozygous spotted
+        # rabbits (KIT-associated aganglionosis) — genuinely rare in practice,
+        # while GI stasis presents with the same small/scant pellets daily.
+        "Megacolon": "rare",
         "Ileus (Paralytic)": "uncommon",
         "Colonic Impaction": "uncommon",
         "Sarcoptic Mange": "uncommon",

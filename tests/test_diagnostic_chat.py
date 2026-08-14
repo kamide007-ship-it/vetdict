@@ -1571,6 +1571,81 @@ class TestChatClinicalAccuracyAudit:
             )
 
 
+class TestQuickTapPhraseExtraction:
+    """2026-08 audit: every phrase the chat UI itself offers as a quick-tap
+    button must extract at least one symptom — before this audit six of them
+    (dog 足を引きずる/limping, hedgehog 目が出ている, bird 羽を膨らませている,
+    cat can't urinate, rabbit small feces) extracted nothing end-to-end."""
+
+    # Mirrors the quickSymptoms map in static/js/app.js (renderSpeciesGuidance).
+    JA_QUICK = {
+        "dog": ["嘔吐している", "元気がない", "下痢している", "咳が出る", "足を引きずる", "皮膚が痒い"],
+        "cat": ["食べない", "吐いた", "くしゃみ", "目やにが出る", "おしっこが出ない", "毛が抜ける"],
+        "rabbit": ["糞が小さい", "食べない", "歯ぎしり", "首が傾いている", "お腹が張っている", "鼻水"],
+        "chinchilla": ["よだれが出る", "毛が抜ける", "食べない", "糞が出ない", "歯が伸びている", "砂浴びしない"],
+        "hamster": ["下痢", "元気がない", "毛が抜ける", "目が開かない", "お腹が膨れている", "食べない"],
+        "guinea_pig": ["食べない", "鼻水", "足を引きずる", "脱毛", "下痢", "くしゃみ"],
+        "ferret": ["ぐったり", "脱毛", "下痢", "後ろ足がふらつく", "嘔吐", "食べない"],
+        "hedgehog": ["針が抜ける", "フケ", "ふらつく", "食べない", "目が出ている", "体重が減った"],
+        "bird": ["羽を膨らませている", "食べない", "下痢", "鼻水", "羽が抜ける", "くしゃみ"],
+    }
+    EN_QUICK = {
+        "dog": ["vomiting", "lethargic", "diarrhea", "coughing", "limping", "itchy skin"],
+        "cat": ["not eating", "vomiting", "sneezing", "eye discharge", "can't urinate", "hair loss"],
+        "rabbit": ["small feces", "not eating", "teeth grinding", "head tilt", "bloated", "nasal discharge"],
+    }
+
+    @staticmethod
+    def _extract(species, phrase):
+        # The chat route sends dog through the legacy extractor and every other
+        # species through the modern species extractor — mirror that routing.
+        if species == "dog":
+            from api.diagnostic_chat import extract_symptoms_from_text
+
+            return extract_symptoms_from_text(phrase)
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        return _extract_species_symptoms(phrase, species)
+
+    def test_every_ja_quick_tap_phrase_extracts(self):
+        for species, phrases in self.JA_QUICK.items():
+            for phrase in phrases:
+                assert self._extract(species, phrase), f"UI quick-tap {phrase!r} for {species} extracted no symptom"
+
+    def test_every_en_quick_tap_phrase_extracts(self):
+        for species, phrases in self.EN_QUICK.items():
+            for phrase in phrases:
+                assert self._extract(species, phrase), f"UI quick-tap {phrase!r} for {species} extracted no symptom"
+
+    def test_dog_limping_tap_ranks_orthopedic_disease_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        symptoms = extract_symptoms_from_text("足を引きずる")
+        assert "limping" in symptoms
+        matches = match_symptoms_to_diseases(symptoms)
+        assert matches, "dog limping returned no candidates"
+        top_ids = [m["disease_id"] for m in matches[:5]]
+        assert any(
+            i in top_ids
+            for i in ("patellar_luxation", "cranial_cruciate_ligament_rupture", "hip_dysplasia", "osteoarthritis")
+        ), f"limping top-5 has no common orthopedic disease: {top_ids}"
+
+    def test_rabbit_small_feces_anorexia_ranks_stasis_spectrum_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        extracted = _extract_species_symptoms("糞が小さい 食べない", "rabbit")
+        assert "small_fecal_pellets" in extracted and "appetite_loss" in extracted
+        matches = _match_species_symptoms_to_diseases(list(extracted), "rabbit", lang="ja")
+        top2 = [m.get("name_en") for m in matches[:2]]
+        # GI stasis and its trichobezoar manifestation are the everyday answer;
+        # rare congenital megacolon (En/En spotted rabbits) must not top them.
+        assert set(top2) <= {"Gastrointestinal Stasis", "Trichobezoar (Hairball)"}, (
+            f"small pellets + anorexia must rank the stasis spectrum on top, got {top2}"
+        )
+        assert matches[0].get("name_en") != "Megacolon"
+
+
 class TestChatClinicalAccuracyAuditRound2:
     """2026-08 audit round 2: a 36-case realistic chief-complaint sweep across
     seven species. Root causes fixed: the equine engines had no prevalence
