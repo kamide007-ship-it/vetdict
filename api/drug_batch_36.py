@@ -55,8 +55,8 @@ DRUGS_BATCH_36: list[dict] = [
                 "safe": True,
                 "dosage": "0.8-1 mg/kg SC q12h (empirical; anti-Xa monitoring recommended where available).",
                 "dosage_ja": "0.8-1 mg/kg 皮下 12時間毎（経験的。可能であれば抗Xaモニタリング推奨）。",
-                "notes": "Thromboembolism / hypercoagulable-phase DIC. Contraindicated in the hypocoagulable (bleeding) phase of DIC.",
-                "notes_ja": "血栓塞栓症・DIC過凝固期に使用。DIC低凝固期（出血期）は禁忌。",
+                "notes": "Thromboembolism / hypercoagulable-phase DIC only — stop once the bleeding (hypocoagulable) phase develops.",
+                "notes_ja": "血栓塞栓症・DIC過凝固期にのみ使用 — 低凝固期（出血期）に移行したら中止する。",
             },
             "ferret": {
                 "safe": True,
