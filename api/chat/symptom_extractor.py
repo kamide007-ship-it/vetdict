@@ -159,6 +159,14 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "leg_swelling",
         "foot_swelling",
         "reluctance_to_move",
+        # Dog checkbox vocabulary only carries per-leg limping IDs — resolve an
+        # unspecified-leg complaint ("足を引きずる"/"limping") to the most common
+        # canine presentation (hindlimb: CCL rupture, hip dysplasia); the
+        # matcher's _SYN cross-leg expansion then credits any-leg diseases.
+        "limping_rl",
+        "limping_fl",
+        "limping_rr",
+        "limping_fr",
     ],
     "lumps_and_bumps": ["lumps_nodules", "skin_masses", "tumors", "skin_lumps"],
     # Hair

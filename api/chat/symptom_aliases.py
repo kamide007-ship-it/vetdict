@@ -96,6 +96,8 @@ SYMPTOM_ALIASES = {
     "vocalizing in litter box": "straining_to_urinate",
     "posturing to urinate": "straining_to_urinate",
     "unable to urinate": "straining_to_urinate",
+    "can't urinate": "straining_to_urinate",
+    "cant urinate": "straining_to_urinate",
     "only drops of urine": "straining_to_urinate",
     "cloudy urine": "cloudy_urine",
     "turbid urine": "cloudy_urine",
@@ -762,6 +764,7 @@ SYMPTOM_ALIASES = {
     "開口呼吸してる": "open_mouth_breathing",
     # 鳥
     "羽を膨らませてる": "fluffed_feathers",
+    "羽を膨らませている": "fluffed_feathers",
     "もこもこしてる": "fluffed_feathers",
     # 爬虫類
     "脱皮不全": "dysecdysis",
@@ -791,6 +794,9 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     "うんちが小さい": "small_fecal_pellets",
     "糞が小さい": "small_fecal_pellets",
+    "small feces": "small_fecal_pellets",
+    "small droppings": "small_fecal_pellets",
+    "small poops": "small_fecal_pellets",
     "うんちが少ない": "reduced_fecal_output",
     "糞が少ない": "reduced_fecal_output",
     "歯ぎしり": "teeth_grinding",
@@ -960,6 +966,7 @@ SYMPTOM_ALIASES = {
     "排便時に鳴く": "constipation",
     # ハムスター/ハリネズミ — 眼球突出
     "目が出てきた": "eye_bulging",
+    "目が出ている": "eye_bulging",
     "目が大きくなった": "eye_bulging",
     "目が飛び出した": "eye_bulging",
     "目が膨らんでる": "eye_bulging",

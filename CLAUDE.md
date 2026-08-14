@@ -2338,3 +2338,66 @@ is-referenced-but-absent 監査で、コンテンツが参照するのに未収�
 - ヒーローカウンターはAPI駆動で正しい（本番の薬品606表示は旧コードのデプロイ待ち→自動的に621へ）
 - 静的コピー8箇所の「590+薬品」→「600+薬品」（メタ/OGP/Schema.org/料金/使い方ガイド）、
   「3,000+自動テスト」→「3,800+」。ServiceWorker CACHE_NAME v111→**v112**
+
+## 2026-08セッション（第9弾: 薬品マッチャーの大規模リコール修正 + チャットのクイック入力全数検証 + エノキサパリン補完）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **3,820件合格**（34 skip、カバレッジ81.87%）
+- 疾患: 配信7,057疾患で treatment/prevention/prognosis **100%**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**
+
+### 薬品テキストマッチャーのリコール修正（973参照が新たにチップ化）
+katakana トークン頻度監査で「収載済みなのに treatment テキストの表記から解決できない」薬品を大量検出。
+不足していたのは薬品ではなく **インデックスの正規化ルール** だった:
+- **JA剤形・塩サフィックス剥がし**（`_strip_ja_form_suffixes`）: 点眼/配合点眼/注射/吸入/軟膏等の剤形、
+  酢酸塩/塩酸塩/硫酸塩/リン酸塩/アルファ の塩・接尾辞、末尾の濃度数値(5%等)を反復剥離して tier-2 索引
+  - オフロキサシン点眼→オフロキサシン(100参照)、キニジン硫酸塩→キニジン、リュープロレリン酢酸塩→リュープロレリン、
+    ダルベポエチンアルファ→ダルベポエチン、シスプラチン注射→シスプラチン、ナタマイシン点眼5%→ナタマイシン
+- **・区切り配合剤の分割**: トリメトプリム・スルファメトキサゾール→両半、イミペネム・シラスタチン、
+  ピペラシリン・タゾバクタム（既存の／分割と同格の tier-2）
+- **バリアントエイリアス追加**: ペニシリン→penicillin_g（**732参照** — モルモット禁忌注記等）、
+  カルニチン→l_carnitine、アルブテロール→salbutamol、リュープロリド→leuprolide、
+  ダーベポエチン→darbepoetin、ビタミンB1→thiamine_b1（B12誤マッピング防止）
+- **精度ガード**: `_GENERIC_STEM_STOPLIST` に ジョイント/アンチオキシダント（ECVN製品名断片が一般文からスポンサーチップ化するのを防止）、
+  ビタミンb（B1テキスト→B12誤チップ防止）を追加
+- 効果: **973 treatment 参照**が新たに関連薬品チップとして解決（ペニシリン698+オフロキサシン100+ビタミンB1 48+...）
+
+### referenced-but-absent 薬品の補完（`drug_batch_36.py` 新規、621→622薬品）
+- **エノキサパリン（クレキサン）** — DIC・血栓塞栓症の13疾患エントリが用量付きで参照するのに未収載だった
+  唯一のLMWH欠落。犬 0.8 mg/kg SC q6h（Lunsford 2009: ヒトの1日1回では犬に不足）、
+  猫 1.25 mg/kg SC q6h（Alwood 2007 抗Xa準拠、長期ATE予防はクロピドグレル第一選択を明記）、
+  馬 40-80 抗Xa IU/kg SC q24h（Feige 2003）、ウサギ/フェレット/鳥。DIC低凝固期禁忌・プロタミン部分中和(~60%)を明記
+
+### チャットのクイック入力（タップボタン）全数検証 — 6フレーズが完全不動作だった
+UI自身が提案する per-species クイック症状ボタン（JA 9種54フレーズ + EN 3種18フレーズ）を全数
+エンドツーエンド検証。**6フレーズで症状抽出ゼロ**（タップしても何も起きない）を検出・修正:
+| フレーズ | 原因 | 修正 |
+|---|---|---|
+| 犬「足を引きずる」/ "limping" | エイリアス→lameness_or_limping が legacy 犬語彙(limping)にも checkbox 語彙(limping_fl等)にも解決不能 | `_LEGACY_FALLBACK` に lameness_or_limping→limping、ID_SYNONYMS に per-leg フォールバック追加 |
+| 犬 "itchy skin" | エイリアス→scratching(魚語彙)が legacy 犬語彙に解決不能 | `_LEGACY_FALLBACK` に scratching/flashing→itching |
+| ハリネズミ「目が出ている」 | 「目が出てる」(pop_eye)はあるが「〜ている」形が欠落 | エイリアス追加→eye_bulging |
+| 鳥「羽を膨らませている」 | 「〜てる」形のみ収載 | エイリアス追加→fluffed_feathers |
+| 猫 "can't urinate" | "unable to urinate"のみ収載 | can't/cant urinate→straining_to_urinate |
+| ウサギ "small feces" | JA「糞が小さい」のみ収載 | small feces/droppings/poops→small_fecal_pellets |
+- **犬跛行のクロス肢展開**: チャット入力は肢を特定しないため、`_SYN` の limping_fl/fr/rl/rr が相互参照するよう拡張
+  （肘関節形成不全=前肢のみ、CCL/股関節形成不全=後肢のみの疾患も等しくマッチ）。
+  修正後: 足を引きずる→膝蓋骨脱臼/肘関節形成不全/前十字靭帯断裂/骨肉腫が上位
+
+### ウサギ診断精度: 「糞が小さい」の順位反転を修正
+- 「糞が小さい 食べない」（GI stasis の教科書的最早期症状）で**稀な先天性巨大結腸症が1位**、消化管うっ滞4位だった
+- 根因1: ウサギGI stasis の症状セットに `small_fecal_pellets` が欠落（最古典的な owner-reported 徴候なのに。
+  Oglesbee, Quesenberry & Carpenter 4th ed）→ GI stasis と毛球症（stasis の一表現型）に追加
+- 根因2: Megacolon の有病率ティア uncommon → **rare** に修正（En/En スポット遺伝型限定の先天症候群で実臨床では真に稀）
+- 修正後: 毛球症(0.702)>消化管うっ滞(0.672)>巨大結腸症(0.563) — stasis スペクトラムが上位2位を占有
+
+### UX: 相互作用参照のベース名解決（+28参照がリンク化）
+- `_resolveInteractionDrug`（app.js）が完全一致のみで、"Insulin"(17参照)・"Vitamin K1"・"Heparin"・
+  "N-acetylcysteine (oral)" 等が dead text だった
+- 両側の括弧サフィックスを剥がしたベース名同士の**等価比較**を追加（fuzzy にはしない — クラス語は素のテキスト維持）
+
+### 回帰テスト（+7件）
+- `test_ja_form_suffix_and_combination_stems_resolve_in_text_matcher` — 15解決ケース + 3精度ガード
+- `test_enoxaparin_present_with_anti_xa_based_dosing` — 用量・バイリンガル・DIC禁忌・テキスト解決
+- `TestQuickTapPhraseExtraction` — 全72クイックタップフレーズの抽出保証（JA54+EN18、経路別ルーティングをミラー）
+  + 犬跛行の整形外科上位 + ウサギ小糞粒の stasis スペクトラム上位
+- ServiceWorker: `CACHE_NAME` v112 → **v113**、`setDefaultStats()`/pendingStats を622薬品に同期
