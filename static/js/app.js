@@ -1572,7 +1572,7 @@ function setDefaultStats(){
     diseases:6528,
     species:21,
     drugs:621,
-    symptoms:52,
+    symptoms:57,
     protocols:188
   };
   renderSpeciesGrid();

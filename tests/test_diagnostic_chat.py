@@ -1569,3 +1569,105 @@ class TestChatClinicalAccuracyAudit:
             assert m["similarity_score"] <= 1.0, (
                 f"{m.get('name')} similarity {m['similarity_score']} > 1.0 — the frontend renders this as a percentage"
             )
+
+
+class TestChatClinicalAccuracyAuditRound2:
+    """2026-08 audit round 2: a 36-case realistic chief-complaint sweep across
+    seven species. Root causes fixed: the equine engines had no prevalence
+    prior and buried umbrella syndromes (colic ranked 67th when its own sign
+    was checked); synonym expansion triple-credited diseases that list several
+    spellings of one complaint; the legacy dog DB had no ear vocabulary and
+    no otitis externa; and several textbook sign-pairs (blocked cat, ATE,
+    ferret insulinoma) missed aliases or boosts."""
+
+    def test_dog_ear_complaint_hits_otitis_externa(self):
+        from api.diagnostic_chat import match_symptoms_to_diseases
+
+        matches = match_symptoms_to_diseases(["ear_scratching", "head_shaking", "ear_odor"])
+        assert matches and matches[0]["disease_id"] == "otitis_externa"
+
+    def test_dog_gdv_unproductive_retching_extracts_and_ranks(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        extracted = extract_symptoms_from_text("犬 お腹が膨れて吐きたそうで吐けない")
+        assert "unproductive_retching" in extracted
+        assert "bloating" in extracted
+        matches = match_symptoms_to_diseases(extracted)
+        assert matches[0]["disease_id"] == "gdv_bloat"
+
+    def test_equine_colic_sign_ranks_colic_entry_first(self):
+        from api.species.equine_diseases import generate_differential_diagnosis
+
+        items = generate_differential_diagnosis({"dig_colic_signs"})
+        assert items and items[0].disease.name_en == "Colic", (
+            "checking the colic-signs box must rank Colic first, not a "
+            "case-report subtype (was rank 67 before the prevalence prior)"
+        )
+
+    def test_equine_laminitis_pair_beats_two_finding_entries(self):
+        from api.species.equine_diseases import generate_differential_diagnosis
+
+        items = generate_differential_diagnosis({"hoof_heat", "limb_lameness_fore", "gen_recumbent"})
+        top3 = [i.disease.name_en for i in items[:3]]
+        assert any("Laminitis" in n for n in top3), (
+            f"forelimb lameness + hoof heat is laminitis until proven otherwise (Adams & Stashak 7th ed), got {top3}"
+        )
+
+    def test_horse_chat_delegates_to_checkbox_engine(self):
+        from api.diagnostic_chat import _match_equine_symptoms_to_diseases
+
+        matches = _match_equine_symptoms_to_diseases(["dig_colic_signs"])
+        assert matches and matches[0]["name_en"] == "Colic"
+        # Low-information cap still applies on the chat surface.
+        assert matches[0]["confidence_percent"] <= 35.0
+
+    def test_synonym_expansion_no_longer_multi_credits_one_complaint(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        res = _match_species_symptoms_to_diseases(["small_fecal_pellets", "appetite_loss"], "rabbit", lang="ja")
+        names = [x.get("name_en") for x in res[:3]]
+        assert "Gastrointestinal Stasis" in names, (
+            "small droppings + anorexia must rank GI stasis top-3; megacolon "
+            f"won by listing three spellings of one complaint before, got {names}"
+        )
+
+    def test_cat_blocked_and_ate_pairs_rank_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        blocked = _match_species_symptoms_to_diseases(["decreased_urination", "vocalization_changes"], "cat", lang="ja")
+        assert blocked[0].get("name_en") == "Urinary Obstruction (Blocked Cat)"
+        ate = _match_species_symptoms_to_diseases(["hind_limb_paralysis", "vocalization_changes"], "cat", lang="ja")
+        assert ate[0].get("name_en") == "Aortic Thromboembolism (Saddle Thrombus)"
+
+    def test_ferret_insulinoma_triad_ranks_top(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        extracted = _extract_species_symptoms("フェレット 後ろ足のふらつき ぼーっとする よだれ", "ferret")
+        assert "hind_leg_weakness" in extracted
+        res = _match_species_symptoms_to_diseases(list(extracted), "ferret", lang="ja")
+        assert res[0].get("name_en") == "Insulinoma"
+
+    def test_tortoise_soft_shell_ranks_mbd(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        res = _match_species_symptoms_to_diseases(["bone_weakness", "anorexia"], "tortoise", lang="ja")
+        assert "Metabolic Bone Disease" in (res[0].get("name_en") or "")
+
+    def test_avian_exposure_toxicoses_do_not_top_nonspecific_signs(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        res = _match_species_symptoms_to_diseases(["fluffed_feathers", "diarrhea", "lethargy"], "parakeet", lang="ja")
+        top3 = [x.get("name_en") or "" for x in res[:3]]
+        assert not any("Copper" in n or "Teflon" in n or "PTFE" in n for n in top3), (
+            f"exposure-dependent toxicoses need a history, not top billing for a nonspecific sick bird: {top3}"
+        )
+
+    def test_cat_skin_lump_ranks_common_ddx_over_sarcoma_rarities(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        res = _match_species_symptoms_to_diseases(["lumps"], "cat", lang="ja")
+        top4 = [x.get("name_en") or "" for x in res[:4]]
+        assert any(("Lipoma" in n) or ("Mast Cell" in n) or ("Abscess" in n) or ("Cyst" in n) for n in top4), (
+            f"a bare skin lump must surface the everyday differentials: {top4}"
+        )

@@ -210,7 +210,7 @@ SYMPTOM_ALIASES = {
     "有痛性排尿": "straining_to_urinate",
     "排尿時に鳴く": "straining_to_urinate",
     "トイレで力む": "straining_to_urinate",
-    "尿が出ない": "straining_to_urinate",
+    "尿が出ない": "decreased_urination",
     "尿が少ししか出ない": "straining_to_urinate",
     "ストランギュリア": "straining_to_urinate",
     "ディスユリア": "straining_to_urinate",
@@ -422,7 +422,7 @@ SYMPTOM_ALIASES = {
     "何度もトイレに行く": "frequent_urination",
     "トイレが近い": "frequent_urination",
     "おしっこが出にくい": "straining_to_urinate",
-    "おしっこが出ない": "straining_to_urinate",
+    "おしっこが出ない": "decreased_urination",
     "おしっこ出ない": "straining_to_urinate",
     "おしっこに血": "blood_in_urine",
     "ピンクのおしっこ": "blood_in_urine",
@@ -501,6 +501,7 @@ SYMPTOM_ALIASES = {
     "膨らんでる": "bloating",
     "腫れてる": "bloating",
     "お腹が張ってる": "bloating",
+    "お腹が膨れて": "bloating",
     "お腹が張っている": "bloating",
     "腹が張っている": "bloating",
     "おなかが張っている": "bloating",
@@ -1561,4 +1562,41 @@ SYMPTOM_ALIASES = {
     "enlarged lymph nodes": "swollen_lymph_nodes",
     "リンパ節腫大": "swollen_lymph_nodes",
     "リンパ節が腫れてる": "swollen_lymph_nodes",
+    # --- 2026-08 精度監査 第2弾: 実臨床フレーズの抽出漏れ ---
+    # 猫 動脈血栓塞栓症（ATE）: 「後ろ足が"突然"動かない」は既存キーの
+    # 「後ろ足が動かない」に部分一致しないため抽出ゼロだった
+    "後ろ足が突然動かない": "hind_limb_paralysis",
+    "後肢が動かない": "hind_limb_paralysis",
+    "後ろ足を引きずる": "hind_limb_weakness",
+    "痛がって鳴く": "vocalization_changes",
+    "鳴き叫ぶ": "vocalization_changes",
+    # GDV: 非生産性嘔吐（吐きたそうで吐けない = GDVの定義的サイン）
+    "吐きたそうで吐けない": "unproductive_retching",
+    "吐こうとして吐けない": "unproductive_retching",
+    "吐きたそうにしている": "unproductive_retching",
+    "空嘔吐": "unproductive_retching",
+    # 犬 外耳炎: 頭を振る（耳系の既存エイリアスと違い未登録だった）
+    "頭を振る": "head_shaking",
+    "頭をよく振る": "head_shaking",
+    # 爬虫類 MBD: ひらがな表記（既存はソフト（漢字）のみ）
+    "甲羅がやわらかい": "soft_bones",
+    # 鳥: 「羽を膨らませて」（てる/ている/動かない等の続きに関わらず一致する前方形）
+    "羽を膨らませて": "fluffed_feathers",
+    "羽がふくらんでいる": "fluffed_feathers",
+    # 猫 尿道閉塞: 排尿時の啼鳴
+    "おしっこの時に鳴く": "vocalization_changes",
+    "鳴き続ける": "vocalization_changes",
+    "鳴く": "vocalization_changes",
+    # 甲状腺機能亢進症の hallmark「食べるのに痩せる」
+    "食べるのに痩せる": "weight_loss",
+    "食べても痩せる": "weight_loss",
+    "食べているのに痩せる": "weight_loss",
+    # フェレット インスリノーマ triad（後肢のふらつき・ぼーっとする・流涎）
+    "後ろ足のふらつき": "hind_leg_weakness",
+    "後肢のふらつき": "hind_leg_weakness",
+    "ぼーっとする": "staring",
+    "ぼーっと": "staring",
+    "ぼんやりしている": "staring",
+    # （馬の疝痛行動サインは diagnostic_chat.EQUINE_SYMPTOM_ALIASES に登録 —
+    #   馬チャットはこの辞書ではなく専用辞書で抽出するため）
 }

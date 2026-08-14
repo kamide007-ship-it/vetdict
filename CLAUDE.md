@@ -2339,7 +2339,78 @@ is-referenced-but-absent 監査で、コンテンツが参照するのに未収�
 - 静的コピー8箇所の「590+薬品」→「600+薬品」（メタ/OGP/Schema.org/料金/使い方ガイド）、
   「3,000+自動テスト」→「3,800+」。ServiceWorker CACHE_NAME v111→**v112**
 
-## 2026-08セッション（第9弾: 薬品辞書の商品名検索対応 — 「バイトリル」0件バグの修正）
+## 2026-08セッション（第9弾: 鑑別診断+チャット精度 第2弾 — 種横断36症例スイープと4エンジン修正）
+
+### 背景: 現実的な主訴36例の体系スイープ（7種）で13例が臨床的に誤った上位
+第8弾（UI入力例7件）に続き、犬15・猫8・ウサギ4・小型哺乳類4・鳥2・爬虫類1・馬2の
+現実的な主訴でスイープ。当初 13/36 MISS → 全修正後 **36/36 合格**。
+
+### エンジン修正（4系統）
+1. **馬エンジン（equine_diseases.generate_differential_diagnosis）**: 有病率prior無し・純カバレッジ型で、
+   「疝痛サイン」をチェックしても疝痛が**67位3%**・子宮捻転が1位だった
+   - 有病率prior追加（horse 69キー、_EQ_PREVALENCE_MULTIPLIER 1.35/1.125/0.875/0.70）
+   - **症候群フロア**（_SYNDROME_FINDING_FLOORS）: 症候群を定義する所見そのもの
+     （dig_colic_signs→Colic、hoof_laminitis_signs→Laminitis等5種）チェック時に base 0.62×prior を保証
+   - **症候群ペアブースト**（_SYNDROME_PAIR_BOOSTS）: 前肢跛行+蹄熱感（またはデジタルパルス）→蹄葉炎×1.5
+     （Adams & Stashak 7th ed。所見2個のDDF腱炎がカバレッジ1.0で88%と過信勝ちしていた）
+   - 疝痛サイン単独→疝痛84%1位、蹄熱+跛行+起立嫌悪→急性蹄葉炎92%1位に
+2. **馬チャットの旧Jaccardマッチャーを廃止**: _match_equine_symptoms_to_diseases が
+   チェックボックスエンジンへ委譲（チャットと鑑別診断が同一ランキングに）。
+   低情報キャップ（1症状35%/2症状55%）は維持
+3. **汎用マッチャーのシノニム二重カウント修正（disease_matcher）**: 同一主訴のシノニム展開が
+   recall の分子・分母両方に複数計上され、同義語を3表記併記した疾患（ウサギ巨大結腸症）が
+   本命（消化管うっ滞）に勝っていた → ソース症状単位のグループで recall を1回だけ計上
+4. **汎用マッチャーにパトグノモニック・ペア（_PATHOGNOMONIC_PAIRS）**: 教科書的
+   「X until proven otherwise」ペアのみ最小限（rabbit 食欲不振+糞減少→GI stasis×1.45、
+   cat 排尿障害+啼鳴→尿道閉塞×1.35・後肢麻痺+冷感/啼鳴→ATE×1.35、
+   ferret 後肢虚弱+流涎/凝視→インスリノーマ×1.35）
+
+### レガシー犬DB（health_checker）
+- **外耳炎エントリ新設**（very_common、コッカー2.5×等）— 犬で最多レベルの主訴なのに
+  疾患も耳の症状語彙も存在しなかった。耳症状4種（ear_scratching/head_shaking/
+  ear_discharge/ear_odor）+ unproductive_retching を語彙に追加（52→57症状、63→64疾患）
+- GDVに unproductive_retching 追加 + パトグノモニック・クラスタ
+  {bloating, unproductive_retching}→GDV×1.8（Ettinger: 膨満+空嘔吐=GDVの定義的ペア）
+
+### エイリアス・シノニム・症状セット
+- エイリアス追加: 後ろ足が突然動かない/後肢が動かない→hind_limb_paralysis、痛がって鳴く/鳴く→
+  vocalization_changes、吐きたそうで吐けない等4種→unproductive_retching、頭を振る→head_shaking、
+  食べるのに痩せる→weight_loss、後ろ足のふらつき→hind_leg_weakness、ぼーっと→staring、
+  お腹が膨れて（前方形）→bloating、羽を膨らませて（前方形）→fluffed_feathers、甲羅がやわらかい→soft_bones
+- **おしっこが出ない/尿が出ない**: straining_to_urinate→**decreased_urination** に是正（無尿の直訳）
+  + _SYN に decreased_urination↔straining_to_urinate ブリッジ（飼い主は区別できない）
+- _SYN: lumps に subcutaneous_mass/lumps_and_bumps を追加（猫「しこり」が稀な肉腫ばかり
+  上位だったのを脂肪腫/皮膚型MCT等の日常ddxに）
+- EQUINE_SYMPTOM_ALIASES: 前掻き/転がる/寝転がる/お腹を蹴る/pawing/rolling→dig_colic_signs、
+  立ちたがらない→gen_recumbent
+- 症状セット: リクガメMBD 2エントリに bone_weakness、馬蹄葉炎に limb_lameness_fore、
+  急性蹄葉炎に gen_recumbent（いずれも教科書的所見）
+
+### 有病率追加（全キー配信DB実在名を検証済み）
+- horse: 疝痛サブタイプ（腎脾間膜変位/腸重積/有茎脂肪腫=uncommon、子宮捻転/胎水過多=rare）、
+  深趾屈腱炎=uncommon、Black Walnut Toxicity=rare
+- 鳥3種（bird/parakeet/parrot）: 銅中毒/PTFE中毒=rare（曝露歴依存）、ヘモプロテウス=uncommon
+- cat: FISS=uncommon、非注射部位肉腫/メラノーマ/コレカルシフェロール殺鼠剤=rare、心因性多飲=uncommon
+
+### 回帰テスト（TestChatClinicalAccuracyAuditRound2、+11件）
+外耳炎/GDV空嘔吐/馬疝痛1位/蹄葉炎ペア/馬チャット委譲/シノニム二重カウント/
+ブロック猫+ATEペア/フェレット・インスリノーマ/リクガメMBD/鳥中毒デモート/猫しこり日常ddx
+
+### テスト・CI
+- 36症例スイープ 36/36、フルテストスイート合格（症状数52→57・疾患数63→64のアサーション更新）
+- pendingStats symptoms 52→57、ServiceWorker CACHE_NAME v112→**v113**
+
+### 第9弾フォローアップ（フルスイートで発覚した2件の回帰を是正）
+- **similarity_score 1.0キャップのソート前適用**で上位スコア差が潰れ、猫FHV-1が
+  URI傘下エントリと同点タイ（挿入順）になっていた → 表示は1.0キャップ・
+  **ソートは非キャップ値**（_rank_score、返却前にpop）に分離
+- **チンチラ「Fur Mites=very_common」の事実誤り**を発見（チンチラは密被毛で
+  外部寄生虫は稀 — Quesenberry & Carpenter 4th ed。ウサギCheyletiellaのtierの混入）
+  → rare に是正 + Trichophyton mentagrophytes (Ringworm)=common 追加。
+  皮膚糸状菌クエリでリングワーム群がtop3を回復
+- フルテストスイート: **3,831件合格**（34 skip）、カバレッジ81.88%
+
+## 2026-08セッション（第10弾: 薬品辞書の商品名検索対応 — 「バイトリル」0件バグの修正）
 
 ### 背景: 利用者報告バグ — 商品名で検索すると0件
 利用者スクリーンショットで「バイトリル」（エンロフロキサシンの商品名）検索が 0/621件。
@@ -2382,7 +2453,7 @@ is-referenced-but-absent 監査で、コンテンツが参照するのに未収�
   「抗菌薬カテゴリ選択+検索で0件」のようなハマり状態から1タップで復帰）
 - **0件時ヒント**: 一般名・商品名・英語名のどれでも検索できる旨を表示
 - **プレースホルダ更新**: 「薬品名・商品名で検索... (例: バイトリル, メロキシカム)」（日英）
-- ServiceWorker: `CACHE_NAME` v112 → **v113**
+- ServiceWorker: `CACHE_NAME` v113 → **v114**（mainの第9弾も v113 を使用していたため、マージ時に改番）
 
 ### 回帰テスト（tests/test_drug_brand_search.py 新規、14件）
 - バイトリル→enrofloxacin（利用者報告ケースの再現）、入力ゆれ3種の正規化

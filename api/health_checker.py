@@ -614,6 +614,38 @@ SYMPTOMS = [
         "name_en": "Jaundice / Icterus",
         "category": "general",
     },
+    # --- 2026-08 audit: ear complaints (the most common canine presentation
+    # after skin) had NO vocabulary here, so otitis externa could not exist ---
+    {
+        "id": "ear_scratching",
+        "name_ja": "耳を掻く",
+        "name_en": "Ear Scratching",
+        "category": "dermatological",
+    },
+    {
+        "id": "head_shaking",
+        "name_ja": "頭を振る",
+        "name_en": "Head Shaking",
+        "category": "dermatological",
+    },
+    {
+        "id": "ear_discharge",
+        "name_ja": "耳垢が多い・耳だれ",
+        "name_en": "Ear Discharge / Excess Wax",
+        "category": "dermatological",
+    },
+    {
+        "id": "ear_odor",
+        "name_ja": "耳が臭い",
+        "name_en": "Ear Odor",
+        "category": "dermatological",
+    },
+    {
+        "id": "unproductive_retching",
+        "name_ja": "吐きたそうで吐けない（空嘔吐）",
+        "name_en": "Unproductive Retching",
+        "category": "digestive",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -1104,6 +1136,9 @@ DISEASES = [
         "description_en": "A life-threatening emergency where the stomach fills with gas and twists. Without treatment, it can be fatal within hours.",
         "symptoms": [
             "bloating",
+            # Unproductive retching is the defining owner-reported GDV sign
+            # (Ettinger 8th ed) — added with the 2026-08 vocabulary fix.
+            "unproductive_retching",
             "vomiting",
             "excessive_drooling",
             "lethargy",
@@ -1783,6 +1818,34 @@ DISEASES = [
             "lhasa_apso": 1.5,
             "shih_tzu": 1.5,
             "boston_terrier": 1.5,
+        },
+    },
+    # ---- 12b. Otitis Externa ----
+    # The most common canine ear disease and one of the most common reasons
+    # for a vet visit overall (very_common in every practice survey), yet the
+    # legacy database had neither the disease nor any ear vocabulary.
+    {
+        "id": "otitis_externa",
+        "prevalence_tier": "very_common",
+        "name_ja": "外耳炎",
+        "name_en": "Otitis Externa",
+        "description_ja": "外耳道の炎症。アレルギー（アトピー・食物）を基礎に、マラセチアや細菌の二次増殖で悪化します。頭を振る・耳を掻く・耳垢増加・悪臭が典型的な症状です。",
+        "description_en": "Inflammation of the external ear canal, usually secondary to allergic skin disease with Malassezia or bacterial overgrowth. Head shaking, ear scratching, discharge and odor are the classic presenting signs.",
+        "symptoms": [
+            "ear_scratching",
+            "head_shaking",
+            "ear_discharge",
+            "ear_odor",
+            "itching",
+        ],
+        "severity": "low",
+        "recommended_tests": ["ear_cytology", "otoscopy"],
+        "breed_risks": {
+            "cocker_spaniel": 2.5,
+            "labrador_retriever": 1.5,
+            "golden_retriever": 1.5,
+            "french_bulldog": 1.4,
+            "shih_tzu": 1.4,
         },
     },
     # ---- 28b. Acute Gastroenteritis ----
@@ -3642,6 +3705,9 @@ _PATHOGNOMONIC_CLUSTERS = [
     # GDV: bloating + excessive drooling + rapid breathing
     (frozenset({"bloating", "excessive_drooling", "rapid_breathing"}), "gdv_bloat", 2.0),
     (frozenset({"bloating", "excessive_drooling", "pale_gums"}), "gdv_bloat", 2.0),
+    # GDV: distension + unproductive retching is THE owner-reported pair
+    # (Ettinger 8th ed) — added with the 2026-08 ear/retching vocabulary fix.
+    (frozenset({"bloating", "unproductive_retching"}), "gdv_bloat", 1.8),
     # Parvovirus: bloody diarrhea + vomiting + lethargy in young dog
     (frozenset({"blood_in_stool", "vomiting", "diarrhea"}), "canine_parvovirus", 1.8),
     # Distemper: respiratory + neurological combination

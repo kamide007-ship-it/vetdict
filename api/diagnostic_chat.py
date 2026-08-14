@@ -334,6 +334,15 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "疝痛": "dig_colic_signs",
     "お腹痛い": "dig_colic_signs",
     "腹痛": "dig_colic_signs",
+    # Behavioral colic signs owners actually type (2026-08 accuracy audit)
+    "前掻き": "dig_colic_signs",
+    "前搔き": "dig_colic_signs",
+    "転がる": "dig_colic_signs",
+    "寝転がる": "dig_colic_signs",
+    "お腹を蹴る": "dig_colic_signs",
+    "pawing": "dig_colic_signs",
+    "rolling": "dig_colic_signs",
+    "立ちたがらない": "gen_recumbent",
     "diarrhea": "dig_diarrhea",
     "下痢": "dig_diarrhea",
     "constipation": "dig_constipation",
@@ -517,50 +526,52 @@ def _extract_equine_symptoms(text: str) -> list[str]:
 
 
 def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
-    """Match equine finding keys to equine diseases using Jaccard similarity."""
+    """Match equine finding keys to equine diseases.
+
+    Delegates to the equine checkbox engine (generate_differential_diagnosis:
+    IDF weighting + prevalence prior + syndrome-finding floors) so chat and
+    checker rank identically. The previous standalone Jaccard scorer had no
+    prevalence prior, so checking "colic signs" alone ranked uterine torsion
+    first and the Colic entry itself 67th.
+    """
     if not finding_keys:
         return []
 
+    try:
+        from api.species.equine_diseases import generate_differential_diagnosis
+    except ImportError:  # pragma: no cover - equine module optional
+        return []
+
     key_set = set(finding_keys)
+    n_user = len(key_set)
     matches = []
-
-    for disease in _get_equine_diseases():
+    for item in generate_differential_diagnosis(key_set):
+        disease = item.disease
         disease_findings = set(disease.associated_findings)
-        if not disease_findings:
-            continue
-
-        intersection = len(key_set & disease_findings)
-        union = len(key_set | disease_findings)
-
-        if intersection > 0:
-            similarity = intersection / union
-            # Logistic confidence calibration — same curve as other species
-            # so the frontend can display a comparable, calibrated percentage.
-            raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (similarity - 0.4)))
-            confidence = min(round(raw_logistic * 100, 1), 95.0)
-            # Cap when very few user symptoms were provided
-            n_user = len(key_set)
-            if n_user == 1:
-                confidence = min(confidence, 35.0)
-            elif n_user == 2:
-                confidence = min(confidence, 55.0)
-            matches.append(
-                {
-                    "disease_id": disease.id,
-                    "name_ja": disease.name_ja,
-                    "name_en": disease.name_en,
-                    "severity": disease.severity,
-                    "similarity_score": round(similarity, 3),
-                    "confidence_percent": confidence,
-                    "matched_symptoms": list(key_set & disease_findings),
-                    "unmatched_user_symptoms": list(key_set - disease_findings),
-                    "additional_disease_symptoms": list(disease_findings - key_set),
-                    "description": disease.description_ja,
-                    "description_ja": disease.description_ja,
-                    "description_en": disease.name_en,
-                    "recommended_tests": [f"{ja} ({en})" for _, ja, en in disease.recommended_exams],
-                }
-            )
+        confidence = min(item.confidence_pct, 95.0)
+        # Cap when very few user symptoms were provided (same low-information
+        # guard as the generic species chat path).
+        if n_user == 1:
+            confidence = min(confidence, 35.0)
+        elif n_user == 2:
+            confidence = min(confidence, 55.0)
+        matches.append(
+            {
+                "disease_id": disease.id,
+                "name_ja": disease.name_ja,
+                "name_en": disease.name_en,
+                "severity": disease.severity,
+                "similarity_score": round(min(item.weighted_score, 1.0), 3),
+                "confidence_percent": confidence,
+                "matched_symptoms": sorted(item.matched_findings),
+                "unmatched_user_symptoms": sorted(key_set - disease_findings),
+                "additional_disease_symptoms": sorted(disease_findings - key_set),
+                "description": disease.description_ja,
+                "description_ja": disease.description_ja,
+                "description_en": disease.name_en,
+                "recommended_tests": [f"{ja} ({en})" for _, ja, en in disease.recommended_exams],
+            }
+        )
 
     matches.sort(key=lambda m: m["similarity_score"], reverse=True)
     return matches
@@ -963,8 +974,6 @@ def match_symptoms_to_diseases(
     """
     if not symptom_ids:
         return []
-
-    import math
 
     # Prevalence prior — same tier multipliers as the generic species chat path
     # (api/chat/disease_matcher). Chat inputs are typically 2-4 nonspecific
