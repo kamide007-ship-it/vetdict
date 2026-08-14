@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 from typing import Any, Dict, List, Optional
 
 from flask import Blueprint, jsonify, request
@@ -56,6 +57,7 @@ from api.drug_batch_32 import DRUGS_BATCH_32
 from api.drug_batch_33 import DRUGS_BATCH_33
 from api.drug_batch_34 import DRUGS_BATCH_34
 from api.drug_batch_35 import DRUGS_BATCH_35
+from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
 
@@ -10952,6 +10954,38 @@ except ImportError:  # pragma: no cover - optional module
 # 統合後にインデックスを貼り直す（以降の参照は正規エントリのみを見る）
 _drug_index = {d["id"]: d for d in DRUGS if d.get("id")}
 
+# ---------------------------------------------------------------------------
+# 検索テキスト正規化（かな・全角半角ゆれの吸収）
+# 「ばいとりる」「ﾊﾞｲﾄﾘﾙ」「ＢＡＹＴＲＩＬ」のような入力ゆれでも一致するよう、
+# NFKC 正規化 + 小文字化 + ひらがな→カタカナ変換で照合する。
+# ---------------------------------------------------------------------------
+_HIRAGANA_TO_KATAKANA = str.maketrans({chr(c): chr(c + 0x60) for c in range(0x3041, 0x3097)})
+
+
+def _normalize_search_text(text: str) -> str:
+    """検索照合用にテキストを正規化する（NFKC + 小文字 + ひらがな→カタカナ）。"""
+    return unicodedata.normalize("NFKC", text or "").lower().translate(_HIRAGANA_TO_KATAKANA)
+
+
+# ---------------------------------------------------------------------------
+# 商品名エイリアスの適用（drug_brand_names.py の登録簿）
+# 「バイトリル」のような日本の商品名で検索・テキストマッチできるよう、
+# name / name_ja に含まれない別名だけを search_aliases に追記する。
+# 統合（_consolidate_duplicate_drugs）後・キーワード索引構築前に適用すること。
+# ---------------------------------------------------------------------------
+for _drug_id, _brand_aliases in BRAND_NAME_ALIASES.items():
+    _entry = _drug_index.get(_DRUG_ALIAS_TO_ID.get(_drug_id, _drug_id))
+    if _entry is None:
+        continue
+    _own_names = _normalize_search_text(f"{_entry.get('name', '')} {_entry.get('name_ja', '')}")
+    _alias_list = _entry.setdefault("search_aliases", [])
+    _existing_aliases = {_normalize_search_text(a) for a in _alias_list}
+    for _alias in _brand_aliases:
+        _norm = _normalize_search_text(_alias)
+        if _norm and _norm not in _own_names and _norm not in _existing_aliases:
+            _alias_list.append(_alias)
+            _existing_aliases.add(_norm)
+
 
 def resolve_drug_id(drug_id: str) -> str:
     """旧 id（統合された薬品）を正規 id に解決する。未知の id はそのまま返す。"""
@@ -11326,8 +11360,12 @@ def find_diseases_for_drug(drug_id: str, species: str | None = None, limit: int 
 
 
 def search_drugs(query: str, category: str | None = None, species: str | None = None) -> List[Dict]:
-    """薬品名・カテゴリ・動物種で検索する。"""
-    query_lower = query.lower() if query else ""
+    """薬品名・商品名エイリアス・カテゴリ・動物種で検索する。
+
+    照合は _normalize_search_text で正規化して行うため、ひらがな入力
+    （ばいとりる）・全角英数・半角カナでも一致する。
+    """
+    query_norm = _normalize_search_text(query) if query else ""
     results = []
     for drug in DRUGS:
         if category and drug["category"] != category:
@@ -11338,11 +11376,13 @@ def search_drugs(query: str, category: str | None = None, species: str | None = 
                 continue
         elif species:
             continue
-        if query_lower:
-            searchable = (
-                f"{drug['name']} {drug['name_ja']} {drug.get('mechanism', '')} {drug.get('mechanism_ja', '')}".lower()
+        if query_norm:
+            alias_text = " ".join(list(drug.get("search_aliases") or []) + list(drug.get("aliases") or []))
+            searchable = _normalize_search_text(
+                f"{drug['name']} {drug['name_ja']} {alias_text} "
+                f"{drug.get('mechanism', '')} {drug.get('mechanism_ja', '')}"
             )
-            if query_lower not in searchable:
+            if query_norm not in searchable:
                 continue
         results.append(drug)
     return results
@@ -11438,6 +11478,8 @@ def _drug_list_payload(d: Dict) -> Dict:
         "routes_ja",
         "formulations",
         "formulations_ja",
+        "search_aliases",
+        "aliases",
         "sponsor",
         "sponsor_name",
         "sponsor_url",
