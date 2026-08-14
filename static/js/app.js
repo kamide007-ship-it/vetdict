@@ -155,7 +155,10 @@ const I18N={
     anesthesiaAsaFilter:"ASA分類",anesthesiaAsaAll:"全ASA",
     anesthesiaSafetyTitle:"安全性情報",
     anesthesiaContraindicated:"禁忌",anesthesiaCaution:"慎重投与",anesthesiaMonitorExtra:"要モニタリング",
-    drugSearchPh:"薬品名で検索... (例: amoxicillin, メロキシカム)",
+    drugSearchPh:"薬品名・商品名で検索... (例: バイトリル, メロキシカム)",
+    drugBrandHit:"商品名",
+    drugNoMatchHint:"一般名（エンロフロキサシン）・商品名（バイトリル）・英語名（enrofloxacin）のいずれでも検索できます。",
+    drugClearFilters:"フィルタを解除して %n% 件を表示",
     allCategories:"全カテゴリ",allSpecies:"全動物種",speciesAny:"動物種（任意）",
     interactionCheckerTitle:"⚠️ 薬品相互作用チェッカー",interactionCheckerDesc:"複数の薬品を併用する際の相互作用を確認します。薬品名（半角英数）をカンマ区切りで入力してください。",interactionCheckBtn:"チェック",
     drugCompareTitle:"他の獣医薬リファレンスとの比較",
@@ -427,7 +430,10 @@ const I18N={
     anesthesiaAsaFilter:"ASA Class",anesthesiaAsaAll:"All ASA",
     anesthesiaSafetyTitle:"Safety Information",
     anesthesiaContraindicated:"Contraindicated",anesthesiaCaution:"Use with Caution",anesthesiaMonitorExtra:"Extra Monitoring",
-    drugSearchPh:"Search drugs... (e.g. amoxicillin, meloxicam)",
+    drugSearchPh:"Search drugs by generic or brand name... (e.g. Baytril, meloxicam)",
+    drugBrandHit:"Brand",
+    drugNoMatchHint:"You can search by generic name (enrofloxacin), brand name (Baytril), or Japanese name.",
+    drugClearFilters:"Clear filters to show %n% matches",
     allCategories:"All Categories",allSpecies:"All Species",speciesAny:"Species (optional)",
     interactionCheckerTitle:"⚠️ Drug Interaction Checker",interactionCheckerDesc:"Check interactions when combining multiple drugs. Enter comma-separated drug names (lowercase Latin).",interactionCheckBtn:"Check",
     drugCompareTitle:"How VetDict compares to other veterinary drug references",
@@ -5930,13 +5936,25 @@ function parseDoseRange(doseText){
   return null;
 }
 
+function normalizeDrugSearchText(s){
+  // NFKC（全角英数・半角カナの正規化）+ 小文字化 + ひらがな→カタカナ。
+  // 「ばいとりる」「ﾊﾞｲﾄﾘﾙ」「ＢＡＹＴＲＩＬ」でも「バイトリル」に一致させる。
+  return (s||"").normalize("NFKC").toLowerCase().replace(/[ぁ-ゖ]/g,ch=>String.fromCharCode(ch.charCodeAt(0)+0x60));
+}
+function _drugMatchesSearch(d,q){
+  // 一致した場合、どのフィールドで一致したかを返す（brand一致は結果カードに表示する）
+  if(normalizeDrugSearchText(d.name).includes(q)||normalizeDrugSearchText(d.name_ja).includes(q)||normalizeDrugSearchText(d.category_ja).includes(q))return{hit:"name"};
+  const aliases=(d.search_aliases||[]).concat(d.aliases||[]);
+  for(const a of aliases){if(normalizeDrugSearchText(a).includes(q))return{hit:"alias",alias:a};}
+  return null;
+}
 function renderDrugList(){
   const list=document.getElementById("drugList");
   if(!list)return;
   const searchEl=document.getElementById("drugSearch");
   const catEl=document.getElementById("drugCategoryFilter");
   const spEl=document.getElementById("drugSpeciesFilter");
-  const search=(searchEl&&searchEl.value||"").toLowerCase();
+  const search=normalizeDrugSearchText(searchEl&&searchEl.value||"");
   const cat=catEl?catEl.value:"";
   const species=spEl?spEl.value:"";
   const wCalc=document.getElementById("drugWeightCalc");
@@ -5944,10 +5962,31 @@ function renderDrugList(){
   let filtered=allDrugs;
   if(cat)filtered=filtered.filter(d=>d.category===cat);
   if(species)filtered=filtered.filter(d=>d.species_info&&d.species_info[species]);
-  if(search)filtered=filtered.filter(d=>(d.name||"").toLowerCase().includes(search)||(d.name_ja||"").toLowerCase().includes(search)||(d.category_ja||"").toLowerCase().includes(search));
+  const aliasHits={};
+  if(search)filtered=filtered.filter(d=>{
+    const m=_drugMatchesSearch(d,search);
+    if(m&&m.hit==="alias")aliasHits[d.id]=m.alias;
+    return!!m;
+  });
   const countEl=document.getElementById("drugCount");
   if(countEl)countEl.textContent=t("diseaseCount").replace("%filtered%",filtered.length).replace("%total%",allDrugs.length);
-  if(filtered.length===0){list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDrugMatch")}</div>`;return;}
+  if(filtered.length===0){
+    // 0件時: フィルタが原因なら「フィルタ解除で N 件」ボタンを提示し、
+    // 本当に0件なら 一般名/商品名/英語名 の検索ヒントを表示する
+    let extra=`<div style="margin-top:8px;font-size:.85rem;color:var(--gray-500)">${t("drugNoMatchHint")}</div>`;
+    if(search&&(cat||species)){
+      const unfiltered=allDrugs.filter(d=>_drugMatchesSearch(d,search)).length;
+      if(unfiltered>0)extra=`<div style="margin-top:10px"><button type="button" id="drugClearFiltersBtn" class="guided-action-btn">${t("drugClearFilters").replace("%n%",unfiltered)}</button></div>`;
+    }
+    list.innerHTML=`<div style="padding:20px;text-align:center;color:var(--gray-500)">${t("noDrugMatch")}${extra}</div>`;
+    const clearBtn=document.getElementById("drugClearFiltersBtn");
+    if(clearBtn)clearBtn.addEventListener("click",()=>{
+      if(catEl)catEl.value="";
+      if(spEl)spEl.value="";
+      renderDrugList();
+    });
+    return;
+  }
   filtered=[...filtered].sort((a,b)=>(b.sponsor?1:0)-(a.sponsor?1:0));
   list.innerHTML=filtered.map(d=>{
     const speciesFilter=document.getElementById("drugSpeciesFilter").value;
@@ -5974,9 +6013,10 @@ function renderDrugList(){
     const sponsorLink=d.sponsor?`<div class="drug-sponsor-link"><strong class="drug-sponsor-name">${escapeHtml(d.sponsor_name||"Equine & Canine Vet Nutrition")}</strong><br/><span class="drug-sponsor-vet">${t("sponsorVetLabel")}</span><br/><a href="${sanitizeUrl(d.sponsor_url||d.sponsor_url_dog||'https://www.caninevet.jp/')}" target="_blank" class="drug-sponsor-url">${t("productDetails")}</a></div>`:"";
     const dName=highlightMatch(d.name||"",search);
     const dNameJa=highlightMatch(d.name_ja||"",search);
+    const brandHit=aliasHits[d.id]?`<span class="drug-brand-hit">${t("drugBrandHit")}: ${escapeHtml(aliasHits[d.id])}</span>`:"";
     return`<div class="disease-db-item drug-item${d.sponsor?" drug-sponsored":""}" role="button" tabindex="0" aria-expanded="false" data-name="${escapeHtml(d.name||"")}" data-name-ja="${escapeHtml(d.name_ja||"")}">
       <div class="drug-head-row">
-        <div class="d-name">${dName} <span class="d-name-ja">${dNameJa}</span>${sponsorBadge}</div>
+        <div class="d-name">${dName} <span class="d-name-ja">${dNameJa}</span>${brandHit}${sponsorBadge}</div>
         <span class="drug-category-tag">${escapeHtml(catLabel)}</span>
       </div>${dosageHtml}
       <div class="disease-detail">${sponsorLink}
