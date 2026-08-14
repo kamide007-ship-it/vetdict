@@ -220,6 +220,14 @@ SPECIES_PREVALENCE = {
     # CAT — 230+ entries (expanded from ~73)
     # ==================================================================
     "cat": {
+        # Neoplasia/toxicosis tiers: a bare 「しこり」 query ranked injection-site
+        # sarcomas and melanoma above abscess/MCT; PU/PD queries ranked
+        # cholecalciferol rodenticide toxicosis above CKD.
+        "Feline Injection Site Sarcoma (FISS / Vaccine-Associated Sarcoma)": "uncommon",
+        "Feline Vaccine-Associated Sarcoma (Non-Injection Site)": "rare",
+        "Feline Melanoma": "rare",
+        "Feline Cholecalciferol Rodenticide Toxicosis": "rare",
+        "Feline Psychogenic Polydipsia": "uncommon",
         # very_common
         "Feline Upper Respiratory Infection": "very_common",
         "Feline Herpesvirus (FHV-1) Infection": "very_common",
@@ -469,6 +477,16 @@ SPECIES_PREVALENCE = {
     # McFarlane 2011 (PPID); Gerding & Gilger 2016 (ERU)
     # ==================================================================
     "horse": {
+        # Colic-subtype and misc tiers: without these, single-finding colic
+        # queries ranked uterine torsion / hydrops above the everyday causes
+        # (subtype shares per Reed & Bayly 4th ed / surgical colic series).
+        "Nephrosplenic Entrapment": "uncommon",
+        "Intussusception": "uncommon",
+        "Pedunculated Lipoma": "uncommon",
+        "Uterine Torsion": "rare",
+        "Hydrops (Allantois/Amnion)": "rare",
+        "Deep Digital Flexor Tendinitis": "uncommon",
+        "Black Walnut Toxicity": "rare",
         # very_common
         "Colic": "very_common",  # Leading equine emergency (NAHMS: 4-10/100 horse-yr)
         "Gastric Ulcers (EGUS)": "very_common",  # 37-93% by discipline (Sykes 2015)
@@ -659,6 +677,11 @@ SPECIES_PREVALENCE = {
     # BIRD — 28+ entries (expanded from ~16)
     # ==================================================================
     "bird": {
+        # Exposure-dependent toxicoses / incidental hemoparasites (see parakeet).
+        "Copper Poisoning": "rare",
+        "PTFE / Teflon Toxicosis": "rare",
+        "Teflon/PTFE Toxicosis": "rare",
+        "Blood Parasites (Haemoproteus)": "uncommon",
         # very_common
         "Aspergillosis": "very_common",
         "Feather Plucking (Feather Destructive Behavior)": "very_common",
@@ -1174,7 +1197,11 @@ SPECIES_PREVALENCE = {
         "Dental Malocclusion - Incisor": "very_common",
         "Dental Malocclusion - Molar Spurs": "very_common",
         "GI Stasis": "very_common",
-        "Fur Mites": "very_common",
+        # Chinchilla fur is too dense for ectoparasites — fur mites are RARE
+        # (Quesenberry & Carpenter 4th ed); the very_common tier belonged to
+        # rabbit Cheyletiella and had leaked here, burying dermatophytosis.
+        "Fur Mites": "rare",
+        "Trichophyton mentagrophytes (Ringworm)": "common",
         "Pneumonia": "common",
         "Dermatophytosis (Ringworm)": "common",
         "Conjunctivitis - Chinchilla": "common",
@@ -1381,6 +1408,14 @@ SPECIES_PREVALENCE = {
     # PARAKEET
     # ==================================================================
     "parakeet": {
+        # Exposure-dependent toxicoses are rare without a specific history,
+        # and Haemoproteus is usually an incidental finding — without tiers
+        # these outranked infectious/GI causes for nonspecific sick-bird signs.
+        "Copper Toxicosis": "rare",
+        "Copper Poisoning": "rare",
+        "Teflon (PTFE) Toxicosis": "rare",
+        "Teflon Toxicosis (Parakeet)": "rare",
+        "Haemoproteus Infection": "uncommon",
         "Psittacosis (Chlamydiosis)": "very_common",
         "Aspergillosis": "very_common",
         "Upper Respiratory Infection": "very_common",
@@ -1421,6 +1456,11 @@ SPECIES_PREVALENCE = {
     # PARROT
     # ==================================================================
     "parrot": {
+        # Exposure-dependent toxicoses / incidental hemoparasites (see parakeet).
+        "Copper Poisoning": "rare",
+        "PTFE Toxicosis (Teflon Poisoning)": "rare",
+        "Teflon/PTFE Toxicosis": "rare",
+        "Haemoproteus Infection": "uncommon",
         "Psittacosis (Chlamydiosis)": "very_common",
         "Aspergillosis": "very_common",
         "Chronic Respiratory Disease": "very_common",
