@@ -899,8 +899,9 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     # モルモット追加
     # ---------------------------------------------------------------
-    "関節が腫れてる": "lameness_or_limping",
-    "関節腫れ": "lameness_or_limping",
+    "関節が腫れてる": "swollen_joints",
+    "関節が腫れて": "swollen_joints",
+    "関節腫れ": "swollen_joints",
     "キーキー鳴く": "lethargy",
     "鳴き声が変": "lethargy",
     # ---------------------------------------------------------------
@@ -940,7 +941,10 @@ SYMPTOM_ALIASES = {
     "嘴過長": "loss_of_appetite",
     "眠ってばかり": "lethargy",
     # モルモット
-    "歯茎から出血": "blood_in_stool",
+    "歯茎から出血": "bleeding_gums",
+    "歯茎から血が出て": "bleeding_gums",
+    "歯ぐきから出血": "bleeding_gums",
+    "歯ぐきから血": "bleeding_gums",
     "壊血病": "weight_loss",
     # フェレット
     "低血糖": "lethargy",
@@ -1606,4 +1610,25 @@ SYMPTOM_ALIASES = {
     "ぼんやりしている": "staring",
     # （馬の疝痛行動サインは diagnostic_chat.EQUINE_SYMPTOM_ALIASES に登録 —
     #   馬チャットはこの辞書ではなく専用辞書で抽出するため）
+    # 前方形（て形）: 「首が傾いて目が揺れている」のように後続語が続いても一致する
+    "首が傾いて": "head_tilt",
+    "首をかしげて": "head_tilt",
+    "目が揺れて": "nystagmus",
+    "眼が揺れて": "nystagmus",
+    # 爬虫類 マウスロット（感染性口内炎）: 口腔内の膿・開口不能は定義的サイン
+    "口の中に膿": "mouth_lesions",
+    "口内に膿": "mouth_lesions",
+    "口が閉じない": "mouth_lesions",
+    "口の周りが汚れて": "mouth_lesions",
 }
+
+# --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---
+# 口語エイリアスの多くは縮約形（「目が揺れてる」）のみ登録されており、
+# 完全形（「目が揺れている」）の入力を取りこぼしていた（125キーで欠落）。
+# 双方向に自動生成することで、どちらの形で入力されても同じ症状IDに解決する。
+for _k, _v in list(SYMPTOM_ALIASES.items()):
+    if _k.endswith("てる") or _k.endswith("でる"):
+        SYMPTOM_ALIASES.setdefault(_k[:-1] + "いる", _v)
+    elif _k.endswith("ている") or _k.endswith("でいる"):
+        SYMPTOM_ALIASES.setdefault(_k[:-2] + "る", _v)
+del _k, _v

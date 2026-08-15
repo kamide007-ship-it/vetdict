@@ -661,6 +661,14 @@ def extract_symptoms_from_text(text: str) -> list:
         # the legacy dog vocabulary carries pruritus as "itching".
         "scratching": ["itching"],
         "flashing": ["itching"],
+        # "口臭がひどい" resolves to foul_breath (species vocabularies); the
+        # legacy dog vocabulary carries halitosis as "bad_breath".
+        "foul_breath": ["bad_breath"],
+        # "目が白く濁っている" resolves to cloudy_eye/cloudy_eyes (species
+        # vocabularies); the legacy dog vocabulary uses cloudiness_in_eyes —
+        # without this bridge the cataract complaint extracted nothing.
+        "cloudy_eye": ["cloudiness_in_eyes"],
+        "cloudy_eyes": ["cloudiness_in_eyes"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

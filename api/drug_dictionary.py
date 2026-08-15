@@ -58,6 +58,7 @@ from api.drug_batch_33 import DRUGS_BATCH_33
 from api.drug_batch_34 import DRUGS_BATCH_34
 from api.drug_batch_35 import DRUGS_BATCH_35
 from api.drug_batch_36 import DRUGS_BATCH_36
+from api.drug_batch_37 import DRUGS_BATCH_37
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10606,6 +10607,15 @@ for _drug36 in DRUGS_BATCH_36:
     if _drug36["id"] not in _drug_index:
         DRUGS.append(_drug36)
         _drug_index[_drug36["id"]] = _drug36
+
+# バッチ37: 2026-08 第5回 referenced-but-absent 監査で検出
+# （タウリン — 治療テキスト768参照の最多欠落、猫欠乏性DCMの根本治療;
+#  カルシトニン — ウサギ/鳥のビタミンD中毒・爬虫類NSHPが用量付きで参照;
+#  アンピシリン・スルバクタム — パルボ/汎白血球減少症の敗血症予防が参照）
+for _drug37 in DRUGS_BATCH_37:
+    if _drug37["id"] not in _drug_index:
+        DRUGS.append(_drug37)
+        _drug_index[_drug37["id"]] = _drug37
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

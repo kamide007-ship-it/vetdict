@@ -38,6 +38,10 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "straining_to_defecate",
         "small_fecal_pellets",
         "decreased_fecal_output",
+        # Birds/reptiles carry the tenesmus complaint as bare "straining"
+        # ("いきんでいる" — egg binding, cloacal impaction); mammal species
+        # resolve constipation directly so this fallback never fires there.
+        "straining",
     ],
     "reduced_fecal_output": ["constipation", "small_fecal_pellets", "decreased_fecal_output"],
     "decreased_fecal_output": ["reduced_fecal_output", "constipation", "small_fecal_pellets"],

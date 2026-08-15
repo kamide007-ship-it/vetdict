@@ -646,6 +646,12 @@ SYMPTOMS = [
         "name_en": "Unproductive Retching",
         "category": "digestive",
     },
+    {
+        "id": "bad_breath",
+        "name_ja": "口臭",
+        "name_en": "Bad Breath (Halitosis)",
+        "category": "digestive",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -1846,6 +1852,34 @@ DISEASES = [
             "golden_retriever": 1.5,
             "french_bulldog": 1.4,
             "shih_tzu": 1.4,
+        },
+    },
+    # ---- 12c. Periodontal Disease ----
+    # The most prevalent disease in dogs overall (80-90% of dogs over 3 years
+    # have some degree of periodontal disease — AAHA Dental Care Guidelines
+    # 2019; WSAVA Global Dental Guidelines, Niemiec 2020), yet the legacy
+    # database had no dental entry and no halitosis vocabulary, so the classic
+    # "口臭がひどい よだれ 食べにくそう" complaint ranked GDV/epilepsy first.
+    {
+        "id": "periodontal_disease",
+        "prevalence_tier": "very_common",
+        "name_ja": "歯周病",
+        "name_en": "Periodontal Disease",
+        "description_ja": "歯垢中の細菌により歯肉炎から歯周炎へ進行する、犬で最も有病率の高い疾患。口臭・よだれ・食べにくさ・歯のぐらつきが典型徴候で、進行すると歯槽骨吸収や内臓（心・腎・肝）への影響も報告されています。小型犬・短頭種で特にリスクが高くなります。",
+        "description_en": "Progression from plaque-induced gingivitis to periodontitis — the most prevalent disease in dogs. Halitosis, drooling, difficulty eating and loose teeth are the classic signs; advanced disease causes alveolar bone loss and has documented systemic (cardiac, renal, hepatic) associations. Small and brachycephalic breeds are at highest risk.",
+        "symptoms": [
+            "bad_breath",
+            "excessive_drooling",
+            "loss_of_appetite",
+        ],
+        "severity": "low",
+        "recommended_tests": ["oral_exam", "dental_radiography"],
+        "breed_risks": {
+            "toy_poodle": 2.0,
+            "chihuahua": 2.0,
+            "yorkshire_terrier": 2.0,
+            "dachshund": 1.8,
+            "miniature_schnauzer": 1.5,
         },
     },
     # ---- 28b. Acute Gastroenteritis ----

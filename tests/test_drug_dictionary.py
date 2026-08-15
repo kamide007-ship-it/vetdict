@@ -1506,3 +1506,74 @@ def test_enoxaparin_present_with_anti_xa_based_dosing():
     # The treatment texts' own wording must resolve to the new entry.
     ids = [x["id"] for x in find_drugs_in_text("エノキサパリン 0.8-1 mg/kg SC q12h、抗Xaモニタ")]
     assert "enoxaparin" in ids
+
+
+def test_batch37_taurine_calcitonin_ampicillin_sulbactam():
+    """Batch 37 (2026-08 5th referenced-but-absent sweep): taurine was the most
+    referenced absent agent in the formulary's own treatment texts (768
+    references — feline taurine-deficiency DCM's definitive therapy, Pion 1987);
+    salmon calcitonin is cited with doses in rabbit/bird hypervitaminosis-D
+    entries; ampicillin-sulbactam is the named empirical sepsis antibiotic in
+    the parvo/panleukopenia protocols."""
+    from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+    tau = get_drug_by_id("taurine")
+    assert tau is not None, "taurine missing from formulary"
+    assert "250" in tau["species_info"]["cat"]["dosage"] and "q12h" in tau["species_info"]["cat"]["dosage"]
+    assert "500" in tau["species_info"]["dog"]["dosage"]
+    for sp in ("cat", "dog", "ferret", "guinea_pig"):
+        info = tau["species_info"][sp]
+        assert info.get("dosage") and info.get("dosage_ja"), f"taurine {sp} dosing incomplete"
+
+    cal = get_drug_by_id("calcitonin_salmon")
+    assert cal is not None, "calcitonin missing from formulary"
+    assert "4-6 IU/kg" in cal["species_info"]["dog"]["dosage"]
+    # Reptile NSHP: giving calcitonin before calcium correction is fatal —
+    # the normocalcemia precondition must be stated (Mader 3rd ed).
+    rep = cal["species_info"]["reptile"]
+    assert "50 IU/kg" in rep["dosage"] and "normaliz" in rep["dosage"].lower()
+    assert "テタニー" in rep["notes_ja"]
+    assert "Hypocalcemia" in cal["contraindications"]
+
+    amp = get_drug_by_id("ampicillin_sulbactam")
+    assert amp is not None, "ampicillin-sulbactam missing from formulary"
+    assert "22" in amp["species_info"]["dog"]["dosage"] and "q8h" in amp["species_info"]["dog"]["dosage"]
+    # Hindgut fermenters: penicillins cause fatal enterotoxemia.
+    for sp in ("rabbit", "guinea_pig", "hamster", "chinchilla"):
+        assert amp["species_info"][sp]["safe"] is False, f"{sp} must be flagged unsafe"
+
+    # The treatment texts' own wording must resolve to the new entries.
+    ids = [x["id"] for x in find_drugs_in_text("タウリン補充 250-500 mg/cat PO q12h")]
+    assert "taurine" in ids
+    ids = [x["id"] for x in find_drugs_in_text("カルシトニン 4-6 IU/kg SC BID（重度高Ca血症時）")]
+    assert "calcitonin_salmon" in ids
+    ids = [x["id"] for x in find_drugs_in_text("アンピシリン・スルバクタム 22-30 mg/kg IV q8h")]
+    assert "ampicillin_sulbactam" in ids
+
+
+def test_no_garbled_pradofloxacin_or_sulbactam_typo_in_disease_json():
+    """The feline mycobacteriosis protocol carried a garbled drug name
+    (プラジコフロキサシン — a corruption of pradofloxacin prefixed with a
+    nonsensical 'not praziquantel' clause), and the parvo/panleukopenia sepsis
+    protocols misspelled sulbactam as サルバクタム. Both are corrected to real,
+    resolvable formulary names; neither corruption may return."""
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    raw = (root / "diseases_all_species.json").read_text(encoding="utf-8")
+    assert "プラジコフロキサシン" not in raw
+    assert "サルバクタム" not in raw  # correct spelling is スルバクタム
+    assert "プラジカンテルではなく" not in raw
+
+    data = json.loads(raw)
+    myco = [e for e in data if e.get("species") == "Cat" and "Mycobacterial Infection" in (e.get("name") or "")]
+    assert myco, "feline mycobacteriosis entry missing"
+    assert "プラドフロキサシン" in myco[0]["treatment_ja"], (
+        "ISFM triple therapy must name pradofloxacin (Gunn-Moore, JFMS 2013)"
+    )
+
+    # Same corruption existed in the cat species module.
+    mod = (root / "api" / "species" / "cat_diseases.py").read_text(encoding="utf-8")
+    assert "プラジコフロキサシン" not in mod
+    assert "サルバクタム" not in mod
