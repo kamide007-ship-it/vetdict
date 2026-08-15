@@ -1746,3 +1746,99 @@ class TestChatClinicalAccuracyAuditRound2:
         assert any(("Lipoma" in n) or ("Mast Cell" in n) or ("Abscess" in n) or ("Cyst" in n) for n in top4), (
             f"a bare skin lump must surface the everyday differentials: {top4}"
         )
+
+
+class TestChatClinicalAccuracyAuditRound3:
+    """2026-08 audit round 3. Root causes fixed this round: 125 colloquial
+    aliases existed only in the contracted 〜てる form and missed the full
+    〜ている inputs (now auto-expanded bidirectionally at module load); the
+    scurvy complaint 歯茎から出血 was mismapped to blood_in_stool and swollen
+    joints to lameness; the legacy dog DB had no dental entry or halitosis
+    vocabulary despite periodontal disease being the most prevalent canine
+    disease; and classic reptile mouth-rot / rabbit vestibular phrasings
+    extracted nothing."""
+
+    def test_teiru_form_aliases_auto_expanded(self):
+        from api.chat.symptom_aliases import SYMPTOM_ALIASES
+
+        # Every contracted 〜てる/〜でる key must have its full 〜ている/〜でいる
+        # twin (and vice versa). A handful of pre-existing pairs intentionally
+        # map the two forms to synonym-bridged IDs (腫れてる→bloating vs
+        # 腫れている→swelling), so we assert existence, not identity —
+        # setdefault never overrides an explicit curated mapping.
+        for k in list(SYMPTOM_ALIASES):
+            if k.endswith("てる") or k.endswith("でる"):
+                full = k[:-1] + "いる"
+                assert full in SYMPTOM_ALIASES, f"missing full-form twin for {k}"
+            elif k.endswith("ている") or k.endswith("でいる"):
+                short = k[:-2] + "る"
+                assert short in SYMPTOM_ALIASES, f"missing contracted twin for {k}"
+
+    def test_rabbit_head_tilt_nystagmus_full_form_extracts(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("首が傾いて目が揺れている", "rabbit")
+        assert "head_tilt" in syms and "nystagmus" in syms
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "rabbit")[:4]]
+        assert any(("前庭" in n) or ("斜頸" in n) or ("エンセファリトゾーン" in n) for n in top)
+
+    def test_guinea_pig_scurvy_complaint_extracts_and_ranks(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("関節が腫れて痛がる 歯茎から出血", "guinea_pig")
+        assert "bleeding_gums" in syms, "歯茎から出血 must map to bleeding_gums (was blood_in_stool)"
+        assert "swollen_joints" in syms, "関節が腫れて must map to swollen_joints (was lameness)"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "guinea_pig")[:3]]
+        assert any(("壊血病" in n) or ("ビタミンC" in n) for n in top), f"scurvy must rank top-3, got {top}"
+
+    def test_dog_cataract_complaint_extracts_cloudy_eyes(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        syms = extract_symptoms_from_text("目が白く濁っている")
+        assert "cloudiness_in_eyes" in syms
+        top = [m["disease_id"] for m in match_symptoms_to_diseases(syms)[:4]]
+        assert "cataracts" in top
+
+    def test_dog_dental_complaint_hits_periodontal_disease(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        syms = extract_symptoms_from_text("口臭がひどい よだれ 食べにくそう")
+        assert "bad_breath" in syms
+        matches = match_symptoms_to_diseases(syms)
+        assert matches and matches[0]["disease_id"] == "periodontal_disease", (
+            "halitosis + drooling + inappetence is periodontal disease first "
+            "(80-90% prevalence in dogs >3y, AAHA 2019) — got "
+            f"{[m['disease_id'] for m in matches[:3]]}"
+        )
+
+    def test_reptile_mouth_rot_phrasing_extracts_and_ranks(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("口の中に膿がある 口が閉じない", "reptile")
+        assert "mouth_lesions" in syms
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "reptile")[:5]]
+        assert any(("口内炎" in n) or ("口腔" in n) for n in top), f"mouth rot must rank, got {top}"
+
+    def test_bird_egg_binding_straining_resolves_and_ranks_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # いきんでいる resolves to constipation, which bird vocabulary carries
+        # as bare "straining" via the ID-synonym fallback.
+        syms = _extract_species_symptoms("卵が出ない お尻でいきんでいる ぐったり", "bird")
+        assert "egg_binding" in syms and "straining" in syms
+        top = _match_species_symptoms_to_diseases(syms, "bird")
+        assert top and "卵詰まり" in (top[0].get("name_ja") or ""), (
+            f"egg binding must rank first, got {[m.get('name_ja') for m in top[:3]]}"
+        )
+
+    def test_mammal_constipation_unaffected_by_straining_fallback(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # Cats resolve constipation directly — the straining fallback is for
+        # species whose vocabulary lacks a constipation ID (birds/reptiles).
+        syms = _extract_species_symptoms("何日も便が出ない いきんでいる", "cat")
+        assert "constipation" in syms

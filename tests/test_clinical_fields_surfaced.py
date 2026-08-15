@@ -270,3 +270,23 @@ def test_app_js_anesthesia_considerations_are_clickable():
         "\nfunction ", 1
     )[0]
     assert 'closest(".anesthesia-nav-link")' in checker_handler
+
+
+def test_app_js_disease_detail_has_differential_pivot():
+    """Disease detail → symptom checker pivot: the detail panel's symptom list
+    carries a one-tap button that pre-fills the checker with that disease's own
+    signs and auto-runs the analysis ("what else presents like this?"), landing
+    the reader on the ranked results instead of a bare text list."""
+    # The button builder and the runner exist.
+    assert "function _differentialCheckButton" in APP_JS
+    assert "function runDifferentialFromDisease" in APP_JS
+    # The detail template renders the button inside the symptoms definition.
+    assert "_differentialCheckButton(d)" in APP_JS
+    # The delegated DB-item handler routes the click (cache-rendered details
+    # attach no per-node listeners, so delegation is mandatory).
+    assert '.closest(".differential-check-btn")' in APP_JS
+    assert "runDifferentialFromDisease(diffBtn.dataset.ids)" in APP_JS
+    # IDs are validated against the loaded checker vocabulary, the checker view
+    # is activated, and the analysis runs (its completion scrolls to results).
+    assert "selectedSymptoms=new Set(usable)" in APP_JS
+    assert 'switchView("checker")' in APP_JS
