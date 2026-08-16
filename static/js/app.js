@@ -1546,9 +1546,9 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:600,drugs:562,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:541,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:355,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:600,drugs:564,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:543,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:356,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:269,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:283,drugs:70,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:308,drugs:138,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1556,14 +1556,14 @@ function setDefaultStats(){
     {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:203,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:226,drugs:68,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
     {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:198,drugs:75,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:179,drugs:157,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:234,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:412,drugs:234,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:234,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:265,drugs:101,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:255,drugs:109,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:222,drugs:108,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:219,drugs:103,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:179,drugs:158,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:235,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:412,drugs:235,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:235,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:265,drugs:102,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:255,drugs:110,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:222,drugs:109,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:219,drugs:104,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:251,drugs:18,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:28,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:1,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
@@ -1571,8 +1571,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6528,
     species:21,
-    drugs:625,
-    symptoms:58,
+    drugs:628,
+    symptoms:59,
     protocols:188
   };
   renderSpeciesGrid();
@@ -3060,7 +3060,11 @@ function renderResults(data){
     const warnMsg=currentLang==="ja"
       ?`⚠ 入力症状が${symCount}個${symCount<=2?"（推奨: 3個以上）":""}のため、鑑別精度が制限されています（最高信頼度 ${topPct.toFixed(1)}%）。症状を追加すると精度が大幅に向上します。`
       :`⚠ With only ${symCount} symptom${symCount!==1?"s":""} entered${symCount<=2?" (3+ recommended)":""}, diagnostic accuracy is limited (top confidence ${topPct.toFixed(1)}%). Adding more symptoms will significantly improve results.`;
-    html+=`<div role="status" aria-live="polite" style="padding:10px 14px;margin-bottom:12px;border-radius:var(--radius);font-size:.82rem;font-weight:500;background:#fef3c7;border-left:4px solid #f59e0b;color:#92400e">${warnMsg}</div>`;
+    /* One-tap pivot into the guided consultation: the structured step-by-step
+       questioning is exactly the remedy this banner recommends. Species carries
+       over (guided flow reads currentSpecies). Routed by the delegated handler. */
+    const consultLabel=currentLang==="ja"?"🩺 問診モードで症状を段階的に確認する":"🩺 Continue in guided consultation";
+    html+=`<div role="status" aria-live="polite" style="padding:10px 14px;margin-bottom:12px;border-radius:var(--radius);font-size:.82rem;font-weight:500;background:#fef3c7;border-left:4px solid #f59e0b;color:#92400e">${warnMsg}<div style="margin-top:8px"><button type="button" class="guided-consult-link">${consultLabel} →</button></div></div>`;
   }
   /* Next steps banner based on severity */
   const nextSteps=currentLang==="ja"?{
@@ -3164,6 +3168,18 @@ function renderResults(data){
     /* Anesthesia-considerations footer: jump to the species-synced anesthesia tab. */
     const anesthLink=e.target.closest(".anesthesia-nav-link");
     if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)scrollToAnchor(p);return;}
+    /* Low-confidence banner: one-tap pivot into the guided consultation with
+       the checker's species carried over, landing scrolled to the chat panel. */
+    const consultLink=e.target.closest(".guided-consult-link");
+    if(consultLink){
+      e.preventDefault();
+      trackEvent("guided_consult_from_checker",{species:currentSpecies||"dog"});
+      switchView("chat");
+      switchChatMode("guided");
+      const p=document.getElementById("viewChat");
+      if(p)scrollToAnchor(p);
+      return;
+    }
     if(e.target.closest("a"))return;
     const head=e.target.closest(".disease-head");
     if(head)toggleDetail(head);

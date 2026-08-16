@@ -290,3 +290,22 @@ def test_app_js_disease_detail_has_differential_pivot():
     # is activated, and the analysis runs (its completion scrolls to results).
     assert "selectedSymptoms=new Set(usable)" in APP_JS
     assert 'switchView("checker")' in APP_JS
+
+
+def test_app_js_low_confidence_banner_pivots_to_guided_consultation():
+    """Checker results → guided consultation pivot: when the low-confidence
+    banner fires (≤2 symptoms or top confidence <50%), it offers a one-tap
+    button that switches to the chat view, starts the guided consultation with
+    the checker's species carried over (guided flow reads currentSpecies), and
+    scrolls the chat panel into view — the structured re-questioning is exactly
+    the remedy the banner recommends."""
+    # The banner renders the pivot button.
+    assert 'class="guided-consult-link"' in APP_JS
+    # The delegated results-area handler routes the click into guided mode.
+    assert '.closest(".guided-consult-link")' in APP_JS
+    handler = APP_JS[APP_JS.index('.closest(".guided-consult-link")') :]
+    handler = handler[: handler.index("return;")]
+    assert 'switchView("chat")' in handler
+    assert 'switchChatMode("guided")' in handler
+    # switchChatMode("guided") starts the consultation for currentSpecies.
+    assert "startGuidedConsultation()" in APP_JS

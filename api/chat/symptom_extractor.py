@@ -155,6 +155,10 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "overgrooming",
     ],
     "pruritus": ["itching", "scratching", "excessive_licking"],
+    # 耳の痒み: 「耳が痒い/耳をかく」→ ear_scratching。猫等の語彙は
+    # scratching_ears 表記のため双方向にブリッジ（外耳炎・耳ダニが正しくランク）
+    "ear_scratching": ["scratching_ears", "itching"],
+    "scratching_ears": ["ear_scratching", "itching"],
     "lameness_or_limping": [
         "lameness",
         "limping",

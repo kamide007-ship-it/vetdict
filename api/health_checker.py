@@ -652,6 +652,12 @@ SYMPTOMS = [
         "name_en": "Bad Breath (Halitosis)",
         "category": "digestive",
     },
+    {
+        "id": "increased_appetite",
+        "name_ja": "食欲増加（多食なのに痩せる等）",
+        "name_en": "Increased Appetite (Polyphagia)",
+        "category": "digestive",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -1477,6 +1483,7 @@ DISEASES = [
         "symptoms": [
             "excessive_thirst",
             "frequent_urination",
+            "increased_appetite",
             "hair_loss",
             "bloating",
             "lethargy",
@@ -1543,8 +1550,8 @@ DISEASES = [
             "excessive_thirst",
             "frequent_urination",
             "weight_loss",
+            "increased_appetite",
             "lethargy",
-            "loss_of_appetite",
             "cloudiness_in_eyes",
         ],
         "severity": "moderate",
@@ -2625,7 +2632,7 @@ DISEASES = [
         "name_en": "Exocrine Pancreatic Insufficiency (EPI)",
         "description_ja": "膵臓が消化酵素を十分に産生できなくなる疾患です。体重減少と栄養不良が起こります。",
         "description_en": "The pancreas fails to produce sufficient digestive enzymes, causing weight loss, poor nutrient absorption, and voluminous stools.",
-        "symptoms": ["weight_loss", "diarrhea", "loss_of_appetite", "bloating"],
+        "symptoms": ["weight_loss", "diarrhea", "increased_appetite", "bloating"],
         "severity": "moderate",
         "recommended_tests": ["blood_chemistry", "fecal_exam", "ultrasound"],
         "breed_risks": {
