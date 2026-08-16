@@ -1551,6 +1551,78 @@ def test_batch37_taurine_calcitonin_ampicillin_sulbactam():
     assert "ampicillin_sulbactam" in ids
 
 
+def test_batch38_pancrelipase_benzbromarone_metformin():
+    """Batch 38 (2026-08 6th referenced-but-absent sweep): the dog/cat EPI
+    flagship entries prescribe powdered pancreatic enzyme with a dose
+    (1 tsp/10kg/meal) yet no PERT product was carried; the avian/reptile gout
+    protocols name benzbromarone 5 mg/kg PO q24h; the horse EMS/insulin
+    resistance entries name metformin 15-30 mg/kg (Durham 2008)."""
+    from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+    pert = get_drug_by_id("pancrelipase")
+    assert pert is not None, "pancrelipase missing from formulary"
+    assert "1 tsp" in pert["species_info"]["dog"]["dosage"]
+    # Cobalamin co-supplementation is near-universal in EPI — must be stated.
+    assert "B12" in pert["species_info"]["cat"]["notes_ja"]
+    for sp in ("dog", "cat"):
+        info = pert["species_info"][sp]
+        assert info.get("dosage") and info.get("dosage_ja"), f"pancrelipase {sp} dosing incomplete"
+
+    benz = get_drug_by_id("benzbromarone")
+    assert benz is not None, "benzbromarone missing from formulary"
+    assert "5 mg/kg" in benz["species_info"]["bird"]["dosage"]
+    # Auto-extrapolation must reach the bird/reptile sub-species views.
+    for sp in ("parakeet", "parrot", "reptile", "tortoise", "snake", "lizard"):
+        assert sp in benz["species_info"], f"benzbromarone missing {sp} extrapolation"
+    # Hydration precondition (urate deposition risk) must be stated.
+    assert "水和" in benz["species_info"]["bird"]["notes_ja"]
+
+    met = get_drug_by_id("metformin")
+    assert met is not None, "metformin missing from formulary"
+    horse = met["species_info"]["horse"]
+    assert "15-30 mg/kg" in horse["dosage"] and "Durham" in horse["dosage"]
+    # Canine diabetes is insulin-dependent — metformin must be flagged
+    # not-indicated, and renal-impairment lactic acidosis must be warned.
+    assert met["species_info"]["dog"]["safe"] is False
+    assert "乳酸アシドーシス" in met["contraindications_ja"]
+
+    # The treatment texts' own wording must resolve to the new entries.
+    ids = [x["id"] for x in find_drugs_in_text("粉末状膵酵素（パンクレアチン/パンクレリパーゼ）を毎食に混合")]
+    assert "pancrelipase" in ids
+    ids = [x["id"] for x in find_drugs_in_text("ベンズブロマロン 5 mg/kg PO q24h（試験的）")]
+    assert "benzbromarone" in ids
+    ids = [x["id"] for x in find_drugs_in_text("メトホルミン30 mg/kg PO q12h（インスリン抵抗性改善）")]
+    assert "metformin" in ids
+    # Precision guard: the diagnostic phrase 膵酵素上昇 (elevated pancreatic
+    # enzymes — a zinc-toxicosis lab finding) must NOT chip the PERT product.
+    ids = [x["id"] for x in find_drugs_in_text("膵酵素上昇（>2 ppm = 中毒）")]
+    assert "pancrelipase" not in ids
+
+
+def test_katakana_sweep6_variant_aliases_resolve_in_text_matcher():
+    """2026-08 sweep #6: treatment texts cite nine formulary drugs by bare or
+    variant katakana spellings the canonical name never reduces to (フルニキシン
+    198 refs, アセチルシステイン 131, デキストロース 81, リファンピシン 39,
+    インターフェロンω 44, …). Each must resolve to its canonical entry."""
+    from api.drug_dictionary import find_drugs_in_text
+
+    cases = {
+        "フルニキシン 1.1 mg/kg IV q12h": "flunixin",
+        "アセチルシステイン 70 mg/kg PO": "n_acetylcysteine",
+        "デキストロース 2.5%を輸液に添加": "dextrose_50",
+        "アンホテリシンB リポソーム製剤": "amphotericin_b",
+        "リファンピシン 5 mg/kg PO q12h": "rifampin",
+        "サルファジメトキシン 50 mg/kg": "sulfadimethoxine",
+        "インターフェロンω 1 MU/kg SC": "interferon_omega",
+        "インターフェロンオメガ皮下投与": "interferon_omega",
+        "ピリメサミン 0.25 mg/kg": "pyrimethamine",
+        "α-カソゼピン 15 mg/kg": "alpha_casozepine",
+    }
+    for text, want in cases.items():
+        ids = [x["id"] for x in find_drugs_in_text(text)]
+        assert want in ids, f"{text!r} must resolve to {want}, got {ids}"
+
+
 def test_no_garbled_pradofloxacin_or_sulbactam_typo_in_disease_json():
     """The feline mycobacteriosis protocol carried a garbled drug name
     (プラジコフロキサシン — a corruption of pradofloxacin prefixed with a

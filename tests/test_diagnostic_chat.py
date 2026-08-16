@@ -1842,3 +1842,101 @@ class TestChatClinicalAccuracyAuditRound3:
         # species whose vocabulary lacks a constipation ID (birds/reptiles).
         syms = _extract_species_symptoms("何日も便が出ない いきんでいる", "cat")
         assert "constipation" in syms
+
+
+class TestChatClinicalAccuracyAuditRound4:
+    """2026-08 audit round 4. Root causes fixed this round: the itch aliases
+    (痒い/痒がる/体を掻く) mapped to excessive_licking instead of itching, so
+    the most common canine presentation (pruritic dermatitis) lost its defining
+    symptom; no colloquial polyphagia phrasing existed, so the classic feline
+    hyperthyroidism/diabetes triad (PU/PD + weight loss + ravenous appetite)
+    extracted only two of three signs; the legacy dog DB had no
+    increased_appetite vocabulary at all (diabetes listed loss_of_appetite —
+    the DKA sign, not the classic presentation); caseous oral exudate
+    (チーズ状) — the textbook mouth-rot finding — extracted nothing; and ear
+    pruritus (耳が痒い/耳をかく) resolved to generic itching so otitis externa
+    and ear mites never ranked."""
+
+    def test_dog_pruritus_maps_to_itching_not_licking(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        syms = extract_symptoms_from_text("皮膚が赤くて痒がっている 毛が抜ける")
+        assert "itching" in syms, "痒がって must map to itching (was excessive_licking)"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:3]]
+        assert any(("アトピー" in n) or ("膿皮症" in n) or ("毛包虫" in n) for n in top), (
+            f"pruritic dermatoses must rank top-3, got {top}"
+        )
+        # Lick-behaviour phrasing itself must still resolve to excessive_licking.
+        assert "excessive_licking" in extract_symptoms_from_text("しきりに舐める")
+
+    def test_polyphagia_colloquial_phrases_extract(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        for phrase in ("食欲はすごくある", "食欲旺盛", "食欲が増えた", "たくさん食べる"):
+            syms = _extract_species_symptoms(f"{phrase} 痩せてきた", "cat")
+            assert "increased_appetite" in syms, f"{phrase!r} must map to increased_appetite"
+
+    def test_cat_hyperthyroid_triad_ranks_endocrine(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("水をよく飲む 痩せてきた 食欲はすごくある", "cat")
+        assert "increased_appetite" in syms
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "cat")[:2]]
+        assert any("糖尿病" in n for n in top) and any("甲状腺機能亢進" in n for n in top), (
+            f"DM + hyperthyroidism must occupy top-2, got {top}"
+        )
+
+    def test_legacy_dog_db_carries_polyphagia(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+        from api.health_checker import DISEASES, SYMPTOM_IDS
+
+        assert "increased_appetite" in SYMPTOM_IDS
+        by_id = {d["id"]: d for d in DISEASES}
+        # Polyphagia is a defining sign of uncomplicated canine DM, Cushing's
+        # and EPI (inappetence in DM signals DKA, not the classic presentation).
+        for did in ("diabetes_mellitus", "cushings_disease", "epi"):
+            assert "increased_appetite" in by_id[did]["symptoms"], did
+        syms = extract_symptoms_from_text("水をたくさん飲む おしっこが多い 食欲はすごくある")
+        assert "increased_appetite" in syms
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:3]]
+        assert any("糖尿病" in n for n in top), f"DM must rank top-3, got {top}"
+
+    def test_snake_caseous_mouth_rot_ranks_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("口の周りにチーズ状のもの 口が閉じない", "snake")
+        assert "mucus_in_mouth" in syms, "チーズ状 (caseous exudate) must map to mucus_in_mouth"
+        top = _match_species_symptoms_to_diseases(syms, "snake")
+        assert top and "口内炎" in (top[0].get("name_ja") or ""), (
+            f"infectious stomatitis must rank first, got {[m.get('name_ja') for m in top[:3]]}"
+        )
+
+    def test_caseous_alias_drops_safely_for_species_without_the_id(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # mucus_in_mouth is a reptile/avian-vocabulary ID; species without it
+        # must simply not extract it (no mis-mapping).
+        syms = _extract_species_symptoms("口の周りにチーズ状のもの", "dog")
+        assert "mucus_in_mouth" not in syms
+
+    def test_ear_pruritus_ranks_otitis_and_ear_mites(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        # Cat: 耳が痒い resolves via the ear_scratching→scratching_ears bridge.
+        syms = _extract_species_symptoms("耳が痒い 耳をかく", "cat")
+        assert "scratching_ears" in syms
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "cat")[:2]]
+        assert any(("外耳炎" in n) or ("耳ダニ" in n) for n in top), f"got {top}"
+        # Rabbit: ear mites (Psoroptes) are the classic cause.
+        syms = _extract_species_symptoms("耳をかく 耳の中にかさぶた", "rabbit")
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "rabbit")[:2]]
+        assert any(("耳ダニ" in n) or ("外耳炎" in n) for n in top), f"got {top}"
+        # Dog (legacy path): otitis externa must rank first.
+        syms = extract_symptoms_from_text("耳が痒い 頭を振る")
+        assert "ear_scratching" in syms
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:1]]
+        assert top and "外耳炎" in top[0], f"got {top}"

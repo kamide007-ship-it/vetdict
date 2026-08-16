@@ -59,6 +59,7 @@ from api.drug_batch_34 import DRUGS_BATCH_34
 from api.drug_batch_35 import DRUGS_BATCH_35
 from api.drug_batch_36 import DRUGS_BATCH_36
 from api.drug_batch_37 import DRUGS_BATCH_37
+from api.drug_batch_38 import DRUGS_BATCH_38
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10617,6 +10618,15 @@ for _drug37 in DRUGS_BATCH_37:
         DRUGS.append(_drug37)
         _drug_index[_drug37["id"]] = _drug37
 
+# バッチ38: 2026-08 第6回 referenced-but-absent 監査で検出
+# （パンクレリパーゼ — 犬猫EPIフラグシップが「1 tsp/10kg/食」と用量指示するのに未収載;
+#  ベンズブロマロン — 鳥/爬虫類痛風プロトコルが 5 mg/kg PO q24h で参照;
+#  メトホルミン — 馬EMS/インスリン抵抗性/慢性蹄葉炎が 15-30 mg/kg で参照）
+for _drug38 in DRUGS_BATCH_38:
+    if _drug38["id"] not in _drug_index:
+        DRUGS.append(_drug38)
+        _drug_index[_drug38["id"]] = _drug38
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11095,6 +11105,20 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "thiamine_b1": (
         "ビタミンb1",
     ),  # canonical: チアミン（ビタミンB1） — bare "ビタミンB1" must resolve to thiamine, never the B12 entry
+    # 2026-08 sweep #6: treatment texts cite these agents by bare/variant
+    # spellings that the canonical name_ja never reduces to.
+    "flunixin": ("フルニキシン",),  # canonical: フルニキシンメグルミン（バナミン） — 198 bare refs
+    "n_acetylcysteine": ("アセチルシステイン",),  # canonical: N-アセチルシステイン — 131 bare refs
+    "dextrose_50": ("デキストロース",),  # canonical: 50%ブドウ糖（デキストロース）注射液
+    "amphotericin_b": ("アンホテリシンb",),  # ン variant of アムホテリシンB
+    "rifampin": ("リファンピシン",),  # rifampicin = INN; canonical name_ja is リファンピン
+    "sulfadimethoxine": ("サルファジメトキシン",),  # サル variant of スルファジメトキシン
+    "interferon_omega": (
+        "インターフェロンオメガ",
+        "インターフェロンω",
+    ),  # canonical: 猫インターフェロンオメガ（…） — texts omit the 猫 prefix / use ω
+    "pyrimethamine": ("ピリメサミン",),  # サ transliteration variant of ピリメタミン
+    "alpha_casozepine": ("α-カソゼピン",),  # canonical: αカソゼピン（ジルケーン） — texts hyphenate
 }
 
 

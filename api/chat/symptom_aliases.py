@@ -322,6 +322,15 @@ SYMPTOM_ALIASES = {
     "多食": "increased_appetite",
     "過食": "increased_appetite",
     "よく食べるのに痩せる": "increased_appetite",
+    # 飼い主の口語表現（「水をよく飲む 痩せてきた 食欲はすごくある」で
+    # 多食が抽出されず、猫の甲状腺機能亢進症/糖尿病の古典的三徴が欠けていた）
+    "食欲はすごくある": "increased_appetite",
+    "食欲がすごい": "increased_appetite",
+    "食欲旺盛": "increased_appetite",
+    "食欲が増えた": "increased_appetite",
+    "食べる量が増えた": "increased_appetite",
+    "たくさん食べる": "increased_appetite",
+    "よく食べる": "increased_appetite",
     "polyphagia": "increased_appetite",
     "increased appetite": "increased_appetite",
     "polyphagic": "increased_appetite",
@@ -486,15 +495,20 @@ SYMPTOM_ALIASES = {
     "collapse": "collapse",
     "collapsed": "collapse",
     "collapsing": "collapse",
-    # 皮膚
-    "かゆい": "excessive_licking",
-    "痒い": "excessive_licking",
-    "かゆがる": "excessive_licking",
-    "痒がる": "excessive_licking",
-    "掻いてる": "excessive_licking",
-    "かいてる": "excessive_licking",
+    # 皮膚 — 痒み表現は itching に直接解決（旧: excessive_licking 経由）。
+    # itching↔excessive_licking は _ID_SYNONYMS で双方向ブリッジ済みなので、
+    # どちらの語彙しか持たない種でも解決される。舐め行動そのものの表現のみ
+    # excessive_licking を保持。
+    "かゆい": "itching",
+    "痒い": "itching",
+    "かゆがる": "itching",
+    "痒がる": "itching",
+    "かゆがって": "itching",
+    "痒がって": "itching",
+    "掻いてる": "itching",
+    "かいてる": "itching",
     "しきりに舐める": "excessive_licking",
-    "体を掻く": "excessive_licking",
+    "体を掻く": "itching",
     "できもの": "lumps_and_bumps",
     "しこりがある": "lumps_and_bumps",
     "できものがある": "lumps_and_bumps",
@@ -907,8 +921,8 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     # 獣医師監査: 追加エイリアス (全種共通 + 種別)
     # ---------------------------------------------------------------
-    # 猫 — 耳
-    "耳をかく": "itching",
+    # 猫 — 耳（耳の痒みは ear_scratching → scratching_ears ブリッジで外耳炎/耳ダニがランク）
+    "耳をかく": "ear_scratching",
     "耳が臭い": "ear_discharge",
     "黒い耳垢": "ear_discharge",
     "耳垢が多い": "ear_discharge",
@@ -965,7 +979,8 @@ SYMPTOM_ALIASES = {
     "耳から臭い": "ear_discharge",
     "耳垢が黒い": "ear_discharge",
     "耳の中が汚い": "ear_discharge",
-    "耳が痒い": "excessive_licking",
+    "耳が痒い": "ear_scratching",
+    "耳をかゆがる": "ear_scratching",
     # 猫 — 便秘（追加表現）
     "便が硬い": "constipation",
     "排便時に鳴く": "constipation",
@@ -1620,6 +1635,16 @@ SYMPTOM_ALIASES = {
     "口内に膿": "mouth_lesions",
     "口が閉じない": "mouth_lesions",
     "口の周りが汚れて": "mouth_lesions",
+    # 口腔内のチーズ状（乾酪様）滲出物 — 爬虫類マウスロットの教科書的所見。
+    # mucus_in_mouth は爬虫類系の語彙にのみ存在するため、他種では抽出段階で
+    # 自動的に落ちる（誤爆しない）。
+    "口の中にチーズ状": "mucus_in_mouth",
+    "口の周りにチーズ状": "mucus_in_mouth",
+    "口にチーズ状": "mucus_in_mouth",
+    "口内にチーズ状": "mucus_in_mouth",
+    "チーズ状の膿": "mucus_in_mouth",
+    "チーズ様物質": "mucus_in_mouth",
+    "乾酪様物質": "mucus_in_mouth",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

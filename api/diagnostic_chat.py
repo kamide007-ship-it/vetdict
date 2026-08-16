@@ -669,6 +669,10 @@ def extract_symptoms_from_text(text: str) -> list:
         # without this bridge the cataract complaint extracted nothing.
         "cloudy_eye": ["cloudiness_in_eyes"],
         "cloudy_eyes": ["cloudiness_in_eyes"],
+        # "皮膚が赤い" resolves to skin_lesions (species vocabularies); the
+        # legacy dog vocabulary carries skin redness/rash as skin_rashes —
+        # without this bridge the pruritic-dermatitis complaint lost a symptom.
+        "skin_lesions": ["skin_rashes"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:
