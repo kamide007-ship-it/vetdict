@@ -60,6 +60,7 @@ from api.drug_batch_35 import DRUGS_BATCH_35
 from api.drug_batch_36 import DRUGS_BATCH_36
 from api.drug_batch_37 import DRUGS_BATCH_37
 from api.drug_batch_38 import DRUGS_BATCH_38
+from api.drug_batch_39 import DRUGS_BATCH_39
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10626,6 +10627,15 @@ for _drug38 in DRUGS_BATCH_38:
     if _drug38["id"] not in _drug_index:
         DRUGS.append(_drug38)
         _drug_index[_drug38["id"]] = _drug38
+
+# バッチ39: 2026-08 第7回 referenced-but-absent 監査で検出
+# （ミルテホシン/メグルミンアンチモン酸塩 — 犬リーシュマニア症のLeishVet第一選択2剤が
+#  用量付きで参照されるのに両方未収載; ヒト免疫グロブリンIVIG — IMHA/ITP難治例レスキューが
+#  30-40参照で最多欠落; インターフェロンα — 鳥PBFD/猫レトロウイルス補助療法33参照、ω型のみ収載だった）
+for _drug39 in DRUGS_BATCH_39:
+    if _drug39["id"] not in _drug_index:
+        DRUGS.append(_drug39)
+        _drug_index[_drug39["id"]] = _drug39
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

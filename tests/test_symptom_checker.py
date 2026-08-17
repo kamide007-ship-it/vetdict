@@ -1248,3 +1248,27 @@ class TestEdgeCases:
         result = analyze_symptoms(list(VALID_SYMPTOMS))
         for d in result["suspected_diseases"]:
             assert d["match_count"] <= d["total_symptoms"]
+
+
+class TestScootingVocabulary:
+    """2026-08 audit: the checkbox/guided dog vocabulary had no perianal
+    symptom, so Anal Sac Disease — one of the most common canine disorders
+    (VetCompass 4.4% annual prevalence) — was only reachable via constipation
+    and pain_on_touch. Scooting is its near-pathognomonic owner complaint."""
+
+    def test_scooting_in_vocabulary_and_categories(self):
+        from api.species.dog_diseases import SYMPTOM_CATEGORIES, SYMPTOM_NAMES, VALID_SYMPTOMS
+
+        assert "scooting" in VALID_SYMPTOMS
+        assert "scooting" in SYMPTOM_NAMES
+        assert "scooting" in SYMPTOM_CATEGORIES["digestive"]["symptoms"]
+
+    def test_scooting_ranks_anal_sac_disease_first(self):
+        from api.symptom_checker import analyze_symptoms
+
+        result = analyze_symptoms(["scooting"])
+        names = [d["name_ja"] for d in result["suspected_diseases"][:1]]
+        assert names and "肛門嚢" in names[0], f"got {names}"
+        result = analyze_symptoms(["scooting", "constipation"])
+        top3 = [d["name_ja"] for d in result["suspected_diseases"][:3]]
+        assert any("肛門嚢疾患" in n for n in top3), f"got {top3}"

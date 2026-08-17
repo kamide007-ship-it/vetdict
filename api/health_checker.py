@@ -658,6 +658,12 @@ SYMPTOMS = [
         "name_en": "Increased Appetite (Polyphagia)",
         "category": "digestive",
     },
+    {
+        "id": "scooting",
+        "name_ja": "お尻を地面にこすりつける（スクーティング）",
+        "name_en": "Scooting (Dragging Rear on Ground)",
+        "category": "digestive",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -1670,7 +1676,13 @@ DISEASES = [
     # ---- 23. Mitral Valve Disease ----
     {
         "id": "mitral_valve_disease",
-        "prevalence_tier": "common",
+        # very_common: MMVD is the most common acquired canine cardiac disease
+        # (~75% of cardiac cases; Keene 2019 ACVIM consensus), and Japan's
+        # small-breed-dominant population (Chihuahua/CKCS/toy breeds) puts it
+        # among the most frequent presentations in practice. It was tiered
+        # "common" — the same as tracheal collapse — so cough + exercise
+        # intolerance complaints ranked airway disease above it.
+        "prevalence_tier": "very_common",
         "name_ja": "僧帽弁閉鎖不全症",
         "name_en": "Myxomatous Mitral Valve Disease (MMVD)",
         "description_ja": "犬で最も多い後天性心疾患です。僧帽弁の変性により弁が閉鎖不全となり、血液の逆流が生じます。",
@@ -1679,6 +1691,7 @@ DISEASES = [
             "coughing",
             "exercise_intolerance",
             "rapid_breathing",
+            "labored_breathing",
             "fainting",
             "lethargy",
         ],
@@ -1887,6 +1900,56 @@ DISEASES = [
             "yorkshire_terrier": 2.0,
             "dachshund": 1.8,
             "miniature_schnauzer": 1.5,
+        },
+    },
+    # ---- 27b2. Cognitive Dysfunction Syndrome ----
+    # Very common in the aging population (14-35% of dogs >8 y — Salvin 2010;
+    # prevalence rises steeply with age), yet the legacy database had no CDS
+    # entry, so the classic "夜鳴き・徘徊・ぐるぐる回る（老犬）" complaint
+    # ranked cerebellar ataxia and PSS first.
+    {
+        "id": "cognitive_dysfunction",
+        "prevalence_tier": "common",
+        "name_ja": "認知機能不全症候群（CDS）",
+        "name_en": "Canine Cognitive Dysfunction Syndrome (CDS)",
+        "description_ja": "高齢犬の神経変性性の認知低下（犬の認知症）。DISHA徴候 — 見当識障害（徘徊・部屋の隅で立ち往生）、社会的交流の変化、睡眠覚醒サイクルの逆転（夜鳴き・夜間徘徊）、トイレの失敗、活動性の変化 — が特徴です。8歳以上の14-35%にみられ、加齢とともに急増します。治療はセレギリン、抗酸化食（Hill's b/d等）、MCTオイル、環境エンリッチメントの組み合わせが中心です。",
+        "description_en": "Neurodegenerative cognitive decline of aged dogs (canine dementia). Characterized by the DISHA signs — Disorientation (pacing, getting stuck in corners), altered social Interactions, Sleep-wake cycle reversal (night-time vocalization/pacing), House-soiling, and Activity changes. Affects 14-35% of dogs over 8 years, rising steeply with age. Management combines selegiline, antioxidant diets (e.g. Hill's b/d), MCT oil and environmental enrichment.",
+        "symptoms": [
+            "disorientation",
+            "circling",
+            "anxiety",
+            "incontinence",
+            "aggression",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["neurological_exam", "bloodwork", "mri"],
+        "breed_risks": {},
+    },
+    # ---- 27c. Anal Sac Disease ----
+    # Among the most common canine disorders in primary care (VetCompass:
+    # 4.4% annual prevalence — O'Neill 2021), yet the legacy database had no
+    # perianal entry and no scooting vocabulary, so the pathognomonic owner
+    # complaint "おしりを地面にこすりつける" extracted nothing.
+    {
+        "id": "anal_sac_disease",
+        "prevalence_tier": "common",
+        "name_ja": "肛門嚢炎（肛門腺疾患）",
+        "name_en": "Anal Sac Disease (Impaction / Sacculitis / Abscess)",
+        "description_ja": "肛門嚢の分泌物うっ滞（impaction）から細菌感染（肛門嚢炎）・膿瘍化へ進行しうる、犬の一次診療で最も多い疾患の一つ（年間有病率約4.4% — VetCompass）。お尻を地面にこすりつける（スクーティング）・肛門周囲を執拗に舐める・排便時の痛みが典型徴候。治療は用手圧出、感染例は洗浄＋抗菌薬（アモキシシリン・クラブラン酸）＋鎮痛、膿瘍は切開排膿。再発例は食物繊維増量、難治例は肛門嚢摘出術を検討します。",
+        "description_en": "Impaction of anal sac secretions progressing to bacterial sacculitis and abscessation — one of the most common disorders in canine primary care (annual prevalence ~4.4%, VetCompass; O'Neill 2021). Scooting, persistent perianal licking and pain on defecation are the classic signs. Treatment: manual expression; infected sacs need lavage, antibiotics (amoxicillin-clavulanate) and analgesia; abscesses need incision and drainage. Recurrent cases benefit from added dietary fiber; anal sacculectomy is reserved for refractory disease.",
+        "symptoms": [
+            "scooting",
+            "excessive_licking",
+            "constipation",
+        ],
+        "severity": "low",
+        "recommended_tests": ["rectal_exam", "anal_sac_expression_cytology"],
+        "breed_risks": {
+            "toy_poodle": 1.5,
+            "chihuahua": 1.5,
+            "shih_tzu": 1.3,
+            "cavalier_king_charles": 1.3,
+            "cockapoo": 1.3,
         },
     },
     # ---- 28b. Acute Gastroenteritis ----

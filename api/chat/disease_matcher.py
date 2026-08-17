@@ -21,7 +21,19 @@ _SYN: dict[str, list[str]] = {
     "loss_of_appetite": ["appetite_loss", "anorexia"],
     "appetite_loss": ["loss_of_appetite", "anorexia"],
     "anorexia": ["loss_of_appetite", "appetite_loss"],
-    "constipation": ["reduced_fecal_output", "small_fecal_pellets", "decreased_fecal_output"],
+    "constipation": [
+        "reduced_fecal_output",
+        "small_fecal_pellets",
+        "decreased_fecal_output",
+        "straining_to_defecate",
+    ],
+    "straining_to_defecate": ["constipation", "straining"],
+    # 直腸脱/クロアカ脱のID表記ゆれ: 抽出IDが種語彙に実在すると ID_SYNONYMS の
+    # フォールバックを通らないため、疾患側が別表記（rectal_protrusion 等）を使う
+    # 種ではマッチング段階のブリッジが必要（フェレット直腸脱で発覚）
+    "rectal_prolapse": ["rectal_protrusion", "cloacal_prolapse"],
+    "rectal_protrusion": ["rectal_prolapse", "cloacal_prolapse"],
+    "cloacal_prolapse": ["rectal_prolapse", "rectal_protrusion"],
     "small_fecal_pellets": ["reduced_fecal_output", "constipation"],
     "reduced_fecal_output": ["small_fecal_pellets", "constipation", "decreased_fecal_output"],
     "decreased_fecal_output": ["reduced_fecal_output", "constipation", "small_fecal_pellets"],
