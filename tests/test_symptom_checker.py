@@ -49,39 +49,33 @@ class TestMapHealthChecksToSymptoms:
         assert result == ["lethargy"]
 
     def test_single_category_multiple_items(self):
-        result = map_health_checks_to_symptoms(
-            {"digestive": ["嘔吐", "下痢"]}
-        )
+        result = map_health_checks_to_symptoms({"digestive": ["嘔吐", "下痢"]})
         assert "vomiting" in result
         assert "diarrhea" in result
 
     def test_multiple_categories(self):
-        result = map_health_checks_to_symptoms({
-            "general": ["元気がない"],
-            "respiratory": ["咳"],
-        })
+        result = map_health_checks_to_symptoms(
+            {
+                "general": ["元気がない"],
+                "respiratory": ["咳"],
+            }
+        )
         assert "lethargy" in result
         assert "coughing" in result
 
     def test_item_with_multiple_symptom_ids(self):
         """Items like abdominal pain map to multiple symptom IDs."""
-        result = map_health_checks_to_symptoms(
-            {"digestive": ["腹痛（触ると痛がる）"]}
-        )
+        result = map_health_checks_to_symptoms({"digestive": ["腹痛（触ると痛がる）"]})
         assert "bloated_abdomen" in result
         assert "pain_on_touch" in result
 
     def test_respiratory_nasal_congestion_maps_two_ids(self):
-        result = map_health_checks_to_symptoms(
-            {"respiratory": ["鼻づまり"]}
-        )
+        result = map_health_checks_to_symptoms({"respiratory": ["鼻づまり"]})
         assert "nasal_discharge" in result
         assert "snoring" in result
 
     def test_skin_eczema_maps_two_ids(self):
-        result = map_health_checks_to_symptoms(
-            {"skin": ["湿疹"]}
-        )
+        result = map_health_checks_to_symptoms({"skin": ["湿疹"]})
         assert "skin_redness" in result
         assert "itching" in result
 
@@ -89,34 +83,38 @@ class TestMapHealthChecksToSymptoms:
 
     def test_deduplication_within_category(self):
         """Selecting two items that share a symptom ID should not duplicate."""
-        result = map_health_checks_to_symptoms(
-            {"digestive": ["嘔吐", "吐き気（よだれが多い）"]}
-        )
+        result = map_health_checks_to_symptoms({"digestive": ["嘔吐", "吐き気（よだれが多い）"]})
         assert result.count("vomiting") == 1
 
     def test_deduplication_across_categories(self):
         """lethargy appears in general and neurological; should appear once."""
-        result = map_health_checks_to_symptoms({
-            "general": ["元気がない"],
-            "neurological": ["反応が鈍い"],
-        })
+        result = map_health_checks_to_symptoms(
+            {
+                "general": ["元気がない"],
+                "neurological": ["反応が鈍い"],
+            }
+        )
         assert result.count("lethargy") == 1
 
     def test_no_duplicates_in_result(self):
         """Result list should never contain duplicates regardless of input."""
-        result = map_health_checks_to_symptoms({
-            "digestive": ["嘔吐"],
-            "other": ["異物誤飲の疑い"],
-        })
+        result = map_health_checks_to_symptoms(
+            {
+                "digestive": ["嘔吐"],
+                "other": ["異物誤飲の疑い"],
+            }
+        )
         assert len(result) == len(set(result))
 
     # -- return type / ordering ----------------------------------------
 
     def test_returns_sorted_list(self):
-        result = map_health_checks_to_symptoms({
-            "general": ["元気がない", "興奮している"],
-            "digestive": ["嘔吐"],
-        })
+        result = map_health_checks_to_symptoms(
+            {
+                "general": ["元気がない", "興奮している"],
+                "digestive": ["嘔吐"],
+            }
+        )
         assert result == sorted(result)
 
     def test_returns_list_type(self):
@@ -150,15 +148,11 @@ class TestMapHealthChecksToSymptoms:
         assert result == []
 
     def test_unknown_japanese_label_ignored(self):
-        result = map_health_checks_to_symptoms(
-            {"general": ["存在しないラベル"]}
-        )
+        result = map_health_checks_to_symptoms({"general": ["存在しないラベル"]})
         assert result == []
 
     def test_mix_known_and_unknown_labels(self):
-        result = map_health_checks_to_symptoms(
-            {"general": ["元気がない", "存在しないラベル"]}
-        )
+        result = map_health_checks_to_symptoms({"general": ["元気がない", "存在しないラベル"]})
         assert result == ["lethargy"]
 
     # -- edge cases ----------------------------------------------------
@@ -193,21 +187,15 @@ class TestMapHealthChecksToSymptoms:
         assert result == ["eye_discharge"]
 
     def test_musculoskeletal_limping(self):
-        result = map_health_checks_to_symptoms(
-            {"musculoskeletal": ["びっこ（片足を引く）"]}
-        )
+        result = map_health_checks_to_symptoms({"musculoskeletal": ["びっこ（片足を引く）"]})
         assert result == ["limping_fl"]
 
     def test_neurological_seizures(self):
-        result = map_health_checks_to_symptoms(
-            {"neurological": ["けいれん"]}
-        )
+        result = map_health_checks_to_symptoms({"neurological": ["けいれん"]})
         assert result == ["seizures"]
 
     def test_other_fever(self):
-        result = map_health_checks_to_symptoms(
-            {"other": ["発熱（体が熱い）"]}
-        )
+        result = map_health_checks_to_symptoms({"other": ["発熱（体が熱い）"]})
         assert result == ["fever"]
 
 
@@ -267,42 +255,68 @@ class TestAnalyzeSymptoms:
 
     def test_parvovirus_detected(self):
         """Parvovirus symptoms should yield Canine Parvovirus in results."""
-        result = analyze_symptoms([
-            "vomiting", "bloody_stool", "lethargy", "appetite_loss",
-            "fever", "diarrhea",
-        ])
+        result = analyze_symptoms(
+            [
+                "vomiting",
+                "bloody_stool",
+                "lethargy",
+                "appetite_loss",
+                "fever",
+                "diarrhea",
+            ]
+        )
         names = [d["name"] for d in result["suspected_diseases"]]
         assert "Canine Parvovirus" in names
 
     def test_kennel_cough_detected(self):
-        result = analyze_symptoms([
-            "coughing", "sneezing", "nasal_discharge",
-            "reverse_sneezing", "lethargy",
-        ])
+        result = analyze_symptoms(
+            [
+                "coughing",
+                "sneezing",
+                "nasal_discharge",
+                "reverse_sneezing",
+                "lethargy",
+            ]
+        )
         names = [d["name"] for d in result["suspected_diseases"]]
         assert "Kennel Cough (Bordetella)" in names
 
     def test_gdv_detected_with_matching_symptoms(self):
-        result = analyze_symptoms([
-            "bloated_abdomen", "vomiting", "excessive_panting",
-            "lethargy", "anxiety",
-        ])
+        result = analyze_symptoms(
+            [
+                "bloated_abdomen",
+                "vomiting",
+                "excessive_panting",
+                "lethargy",
+                "anxiety",
+            ]
+        )
         names = [d["name"] for d in result["suspected_diseases"]]
         assert "Gastric Dilatation-Volvulus (GDV/Bloat)" in names
 
     def test_hypothyroidism_detected(self):
-        result = analyze_symptoms([
-            "weight_gain", "lethargy", "hair_loss", "dry_skin",
-        ])
+        result = analyze_symptoms(
+            [
+                "weight_gain",
+                "lethargy",
+                "hair_loss",
+                "dry_skin",
+            ]
+        )
         names = [d["name"] for d in result["suspected_diseases"]]
         assert "Hypothyroidism" in names
 
     # -- disease result entry structure --------------------------------
 
     def test_disease_entry_fields(self):
-        result = analyze_symptoms([
-            "vomiting", "bloody_stool", "lethargy", "appetite_loss",
-        ])
+        result = analyze_symptoms(
+            [
+                "vomiting",
+                "bloody_stool",
+                "lethargy",
+                "appetite_loss",
+            ]
+        )
         for entry in result["suspected_diseases"]:
             assert "name" in entry
             assert "name_ja" in entry
@@ -366,21 +380,30 @@ class TestAnalyzeSymptoms:
             assert "_match_ratio" not in entry
 
     def test_matching_symptoms_are_sorted(self):
-        result = analyze_symptoms([
-            "vomiting", "lethargy", "diarrhea", "appetite_loss",
-        ])
+        result = analyze_symptoms(
+            [
+                "vomiting",
+                "lethargy",
+                "diarrhea",
+                "appetite_loss",
+            ]
+        )
         for entry in result["suspected_diseases"]:
-            assert entry["matching_symptoms"] == sorted(
-                entry["matching_symptoms"]
-            )
+            assert entry["matching_symptoms"] == sorted(entry["matching_symptoms"])
 
     # -- sorting --------------------------------------------------------
 
     def test_suspected_diseases_sorted_by_prevalence_then_score(self):
         """Results sorted by match quality tier, then prevalence, then score."""
-        result = analyze_symptoms([
-            "vomiting", "lethargy", "diarrhea", "appetite_loss", "fever",
-        ])
+        result = analyze_symptoms(
+            [
+                "vomiting",
+                "lethargy",
+                "diarrhea",
+                "appetite_loss",
+                "fever",
+            ]
+        )
         diseases = result["suspected_diseases"]
         prevalence_priority = {
             "very_common": 0,
@@ -435,14 +458,10 @@ class TestAnalyzeSymptoms:
         )
 
         status_only_parvo = next(
-            disease
-            for disease in status_only["suspected_diseases"]
-            if disease["name"] == "Canine Parvovirus"
+            disease for disease in status_only["suspected_diseases"] if disease["name"] == "Canine Parvovirus"
         )
         merged_parvo = next(
-            disease
-            for disease in merged["suspected_diseases"]
-            if disease["name"] == "Canine Parvovirus"
+            disease for disease in merged["suspected_diseases"] if disease["name"] == "Canine Parvovirus"
         )
 
         assert merged["vaccines"] == ["rabies"]
@@ -470,9 +489,7 @@ class TestAnalyzeSymptoms:
     # -- breed risk applied flag ----------------------------------------
 
     def test_breed_risk_applied_true(self):
-        result = analyze_symptoms(
-            ["coughing", "sneezing"], breed="101_french_bulldog"
-        )
+        result = analyze_symptoms(["coughing", "sneezing"], breed="101_french_bulldog")
         assert result["breed_risk_applied"] is True
 
     def test_breed_risk_applied_false_no_breed(self):
@@ -480,32 +497,24 @@ class TestAnalyzeSymptoms:
         assert result["breed_risk_applied"] is False
 
     def test_breed_risk_applied_false_unknown_breed(self):
-        result = analyze_symptoms(
-            ["coughing"], breed="999_unknown_breed"
-        )
+        result = analyze_symptoms(["coughing"], breed="999_unknown_breed")
         assert result["breed_risk_applied"] is False
 
     # -- breed multiplier boosts score ---------------------------------
 
     def test_breed_multiplier_boosts_score(self):
         """French Bulldog should boost Brachycephalic Airway Syndrome."""
-        base = analyze_symptoms(
-            ["snoring", "difficulty_breathing", "reverse_sneezing",
-             "excessive_panting"]
-        )
+        base = analyze_symptoms(["snoring", "difficulty_breathing", "reverse_sneezing", "excessive_panting"])
         boosted = analyze_symptoms(
-            ["snoring", "difficulty_breathing", "reverse_sneezing",
-             "excessive_panting"],
+            ["snoring", "difficulty_breathing", "reverse_sneezing", "excessive_panting"],
             breed="101_french_bulldog",
         )
         base_entry = next(
-            (d for d in base["suspected_diseases"]
-             if d["name"] == "Brachycephalic Airway Syndrome"),
+            (d for d in base["suspected_diseases"] if d["name"] == "Brachycephalic Airway Syndrome"),
             None,
         )
         boosted_entry = next(
-            (d for d in boosted["suspected_diseases"]
-             if d["name"] == "Brachycephalic Airway Syndrome"),
+            (d for d in boosted["suspected_diseases"] if d["name"] == "Brachycephalic Airway Syndrome"),
             None,
         )
         if base_entry and boosted_entry:
@@ -514,9 +523,7 @@ class TestAnalyzeSymptoms:
     # -- breed genetic tests -------------------------------------------
 
     def test_breed_genetic_tests_returned(self):
-        result = analyze_symptoms(
-            ["coughing"], breed="101_french_bulldog"
-        )
+        result = analyze_symptoms(["coughing"], breed="101_french_bulldog")
         assert len(result["breed_genetic_tests"]) > 0
         for test in result["breed_genetic_tests"]:
             assert "test" in test
@@ -524,9 +531,7 @@ class TestAnalyzeSymptoms:
             assert "purpose" in test
 
     def test_breed_genetic_tests_empty_for_unknown_breed(self):
-        result = analyze_symptoms(
-            ["coughing"], breed="999_unknown_breed"
-        )
+        result = analyze_symptoms(["coughing"], breed="999_unknown_breed")
         assert result["breed_genetic_tests"] == []
 
     def test_breed_genetic_tests_empty_when_no_breed(self):
@@ -554,9 +559,13 @@ class TestAnalyzeSymptoms:
     # -- recommended tests structure -----------------------------------
 
     def test_recommended_test_entry_fields(self):
-        result = analyze_symptoms([
-            "vomiting", "lethargy", "diarrhea",
-        ])
+        result = analyze_symptoms(
+            [
+                "vomiting",
+                "lethargy",
+                "diarrhea",
+            ]
+        )
         for test in result["recommended_tests"]:
             assert "name" in test
             assert "name_ja" in test
@@ -567,9 +576,14 @@ class TestAnalyzeSymptoms:
             assert isinstance(test["related_diseases"], list)
 
     def test_recommended_tests_sorted_by_priority_then_name(self):
-        result = analyze_symptoms([
-            "vomiting", "lethargy", "diarrhea", "appetite_loss",
-        ])
+        result = analyze_symptoms(
+            [
+                "vomiting",
+                "lethargy",
+                "diarrhea",
+                "appetite_loss",
+            ]
+        )
         tests = result["recommended_tests"]
         for i in range(len(tests) - 1):
             a_rank = _PRIORITY_RANK[tests[i]["priority"]]
@@ -605,9 +619,7 @@ class TestAnalyzeSymptoms:
     def test_match_percent_never_exceeds_100(self):
         """Even with a breed multiplier, match_percent <= 100."""
         for breed_id in _BREED_DISEASE_RISK:
-            result = analyze_symptoms(
-                list(VALID_SYMPTOMS), breed=breed_id
-            )
+            result = analyze_symptoms(list(VALID_SYMPTOMS), breed=breed_id)
             for d in result["suspected_diseases"]:
                 assert d["match_percent"] <= 100
 
@@ -722,13 +734,17 @@ class TestComputeSeverity:
 
     def test_gdv_all_symptoms_triggers_emergency(self):
         """GDV with all symptoms -> high likelihood -> emergency."""
-        result = analyze_symptoms([
-            "bloated_abdomen", "vomiting", "excessive_panting",
-            "lethargy", "anxiety",
-        ])
+        result = analyze_symptoms(
+            [
+                "bloated_abdomen",
+                "vomiting",
+                "excessive_panting",
+                "lethargy",
+                "anxiety",
+            ]
+        )
         gdv = next(
-            (d for d in result["suspected_diseases"]
-             if d["name"] == "Gastric Dilatation-Volvulus (GDV/Bloat)"),
+            (d for d in result["suspected_diseases"] if d["name"] == "Gastric Dilatation-Volvulus (GDV/Bloat)"),
             None,
         )
         assert gdv is not None
@@ -753,10 +769,12 @@ class TestCollectTests:
         assert _collect_tests([]) == []
 
     def test_returns_list_of_dicts(self):
-        suspected = [{
-            "name": "Canine Parvovirus",
-            "likelihood": "high",
-        }]
+        suspected = [
+            {
+                "name": "Canine Parvovirus",
+                "likelihood": "high",
+            }
+        ]
         result = _collect_tests(suspected)
         assert isinstance(result, list)
         for entry in result:
@@ -843,9 +861,7 @@ class TestDataIntegrity:
 
     def test_valid_symptoms_all_lowercase_snake_case(self):
         for s in VALID_SYMPTOMS:
-            assert re.match(r"^[a-z][a-z0-9_]*$", s), (
-                f"Invalid symptom ID format: {s}"
-            )
+            assert re.match(r"^[a-z][a-z0-9_]*$", s), f"Invalid symptom ID format: {s}"
 
     # -- Disease DB symptom references ---------------------------------
 
@@ -853,32 +869,24 @@ class TestDataIntegrity:
         """Every symptom in _DISEASE_DB must be in VALID_SYMPTOMS."""
         for disease in _DISEASE_DB:
             invalid = disease["symptoms"] - VALID_SYMPTOMS
-            assert invalid == set(), (
-                f"Disease '{disease['name']}' references invalid "
-                f"symptom IDs: {invalid}"
-            )
+            assert invalid == set(), f"Disease '{disease['name']}' references invalid symptom IDs: {invalid}"
 
     def test_all_diseases_have_required_fields(self):
         required = {"name", "name_ja", "symptoms", "description", "urgency"}
         for disease in _DISEASE_DB:
             missing = required - set(disease.keys())
-            assert missing == set(), (
-                f"Disease '{disease.get('name', '???')}' missing: {missing}"
-            )
+            assert missing == set(), f"Disease '{disease.get('name', '???')}' missing: {missing}"
 
     def test_disease_urgency_values(self):
         valid_urgency = {"low", "moderate", "normal", "high", "urgent", "emergency"}
         for disease in _DISEASE_DB:
             assert disease["urgency"] in valid_urgency, (
-                f"Disease '{disease['name']}' has invalid urgency: "
-                f"{disease['urgency']}"
+                f"Disease '{disease['name']}' has invalid urgency: {disease['urgency']}"
             )
 
     def test_disease_symptoms_non_empty(self):
         for disease in _DISEASE_DB:
-            assert len(disease["symptoms"]) > 0, (
-                f"Disease '{disease['name']}' has empty symptoms set"
-            )
+            assert len(disease["symptoms"]) > 0, f"Disease '{disease['name']}' has empty symptoms set"
 
     def test_disease_names_unique(self):
         names = [d["name"] for d in _DISEASE_DB]
@@ -886,9 +894,7 @@ class TestDataIntegrity:
 
     def test_disease_symptoms_are_sets(self):
         for disease in _DISEASE_DB:
-            assert isinstance(disease["symptoms"], set), (
-                f"Disease '{disease['name']}' symptoms should be a set"
-            )
+            assert isinstance(disease["symptoms"], set), f"Disease '{disease['name']}' symptoms should be a set"
 
     # -- Health check category symptom references ----------------------
 
@@ -897,8 +903,7 @@ class TestDataIntegrity:
             for item in cat_data["items"]:
                 for sid in item["symptom_ids"]:
                     assert sid in VALID_SYMPTOMS, (
-                        f"Category '{cat_key}', item '{item['ja']}' "
-                        f"references invalid symptom ID: {sid}"
+                        f"Category '{cat_key}', item '{item['ja']}' references invalid symptom ID: {sid}"
                     )
 
     def test_health_check_categories_have_labels(self):
@@ -913,17 +918,13 @@ class TestDataIntegrity:
             for item in cat_data["items"]:
                 assert "ja" in item, f"Item missing 'ja' in {cat_key}"
                 assert "en" in item, f"Item missing 'en' in {cat_key}"
-                assert "symptom_ids" in item, (
-                    f"Item missing 'symptom_ids' in {cat_key}"
-                )
+                assert "symptom_ids" in item, f"Item missing 'symptom_ids' in {cat_key}"
                 assert isinstance(item["symptom_ids"], list)
 
     def test_health_check_categories_non_empty(self):
         assert len(HEALTH_CHECK_CATEGORIES) >= 10
         for cat_key, cat_data in HEALTH_CHECK_CATEGORIES.items():
-            assert len(cat_data["items"]) > 0, (
-                f"Category '{cat_key}' has no items"
-            )
+            assert len(cat_data["items"]) > 0, f"Category '{cat_key}' has no items"
 
     # -- Test DB references valid diseases -----------------------------
 
@@ -931,24 +932,17 @@ class TestDataIntegrity:
         disease_names = {d["name"] for d in _DISEASE_DB}
         for test in _TEST_DB:
             invalid = test["related_diseases"] - disease_names
-            assert invalid == set(), (
-                f"Test '{test['name']}' references unknown diseases: "
-                f"{invalid}"
-            )
+            assert invalid == set(), f"Test '{test['name']}' references unknown diseases: {invalid}"
 
     def test_test_db_has_required_fields(self):
         required = {"name", "name_ja", "purpose", "related_diseases"}
         for test in _TEST_DB:
             missing = required - set(test.keys())
-            assert missing == set(), (
-                f"Test '{test.get('name', '???')}' missing: {missing}"
-            )
+            assert missing == set(), f"Test '{test.get('name', '???')}' missing: {missing}"
 
     def test_test_db_related_diseases_are_sets(self):
         for test in _TEST_DB:
-            assert isinstance(test["related_diseases"], set), (
-                f"Test '{test['name']}' related_diseases should be a set"
-            )
+            assert isinstance(test["related_diseases"], set), f"Test '{test['name']}' related_diseases should be a set"
 
     def test_test_db_names_unique(self):
         names = [t["name"] for t in _TEST_DB]
@@ -968,8 +962,7 @@ class TestDataIntegrity:
                 if (breed_id, disease_name) in known_missing:
                     continue
                 assert disease_name in disease_names, (
-                    f"Breed '{breed_id}' risk references unknown disease: "
-                    f"'{disease_name}'"
+                    f"Breed '{breed_id}' risk references unknown disease: '{disease_name}'"
                 )
 
     def test_known_missing_breed_risk_diseases_documented(self):
@@ -989,17 +982,13 @@ class TestDataIntegrity:
     def test_breed_risk_multipliers_positive(self):
         for breed_id, risks in _BREED_DISEASE_RISK.items():
             for disease_name, mult in risks.items():
-                assert mult > 0, (
-                    f"Breed '{breed_id}', disease '{disease_name}': "
-                    f"non-positive multiplier {mult}"
-                )
+                assert mult > 0, f"Breed '{breed_id}', disease '{disease_name}': non-positive multiplier {mult}"
 
     def test_breed_risk_multipliers_are_numeric(self):
         for breed_id, risks in _BREED_DISEASE_RISK.items():
             for disease_name, mult in risks.items():
                 assert isinstance(mult, (int, float)), (
-                    f"Breed '{breed_id}', disease '{disease_name}': "
-                    f"multiplier type is {type(mult)}"
+                    f"Breed '{breed_id}', disease '{disease_name}': multiplier type is {type(mult)}"
                 )
 
     # -- Breed genetic tests structure ---------------------------------
@@ -1014,9 +1003,7 @@ class TestDataIntegrity:
 
     def test_breed_genetic_tests_non_empty(self):
         for breed_id, tests in _BREED_GENETIC_TESTS.items():
-            assert len(tests) > 0, (
-                f"Breed '{breed_id}' has empty genetic tests list"
-            )
+            assert len(tests) > 0, f"Breed '{breed_id}' has empty genetic tests list"
 
     # -- _ANY_LIMPING consistency ---------------------------------------
 
@@ -1025,9 +1012,7 @@ class TestDataIntegrity:
 
     def test_any_limping_has_four_limbs(self):
         assert len(_ANY_LIMPING) == 4
-        assert {
-            "limping_fl", "limping_fr", "limping_rl", "limping_rr"
-        } == _ANY_LIMPING
+        assert {"limping_fl", "limping_fr", "limping_rl", "limping_rr"} == _ANY_LIMPING
 
     # -- Advice dictionary ---------------------------------------------
 
@@ -1044,24 +1029,18 @@ class TestDataIntegrity:
     # -- Priority / likelihood mappings --------------------------------
 
     def test_priority_rank_keys(self):
-        assert set(_PRIORITY_RANK.keys()) == {
-            "optional", "recommended", "urgent"
-        }
+        assert set(_PRIORITY_RANK.keys()) == {"optional", "recommended", "urgent"}
 
     def test_priority_rank_ordering(self):
         assert _PRIORITY_RANK["optional"] < _PRIORITY_RANK["recommended"]
         assert _PRIORITY_RANK["recommended"] < _PRIORITY_RANK["urgent"]
 
     def test_likelihood_to_priority_keys(self):
-        assert set(_LIKELIHOOD_TO_PRIORITY.keys()) == {
-            "high", "moderate", "low"
-        }
+        assert set(_LIKELIHOOD_TO_PRIORITY.keys()) == {"high", "moderate", "low"}
 
     def test_likelihood_to_priority_values_are_valid(self):
         for lik, prio in _LIKELIHOOD_TO_PRIORITY.items():
-            assert prio in _PRIORITY_RANK, (
-                f"Likelihood '{lik}' maps to unknown priority '{prio}'"
-            )
+            assert prio in _PRIORITY_RANK, f"Likelihood '{lik}' maps to unknown priority '{prio}'"
 
     # -- ABNORMAL_KEYWORDS non-empty -----------------------------------
 
@@ -1118,21 +1097,14 @@ class TestEdgeCases:
     # -- duplicate symptoms --------------------------------------------
 
     def test_duplicate_symptoms_ignored(self):
-        result_dup = analyze_symptoms(
-            ["vomiting", "vomiting", "lethargy", "lethargy"]
-        )
+        result_dup = analyze_symptoms(["vomiting", "vomiting", "lethargy", "lethargy"])
         result_clean = analyze_symptoms(["vomiting", "lethargy"])
-        assert (
-            result_dup["suspected_diseases"]
-            == result_clean["suspected_diseases"]
-        )
+        assert result_dup["suspected_diseases"] == result_clean["suspected_diseases"]
 
     # -- unknown breed -------------------------------------------------
 
     def test_unknown_breed_id(self):
-        result = analyze_symptoms(
-            ["vomiting", "lethargy"], breed="999_unknown_breed"
-        )
+        result = analyze_symptoms(["vomiting", "lethargy"], breed="999_unknown_breed")
         assert result["breed_risk_applied"] is False
         assert result["breed_genetic_tests"] == []
         assert isinstance(result["suspected_diseases"], list)
@@ -1155,10 +1127,12 @@ class TestEdgeCases:
 
     def test_health_check_to_analysis_round_trip(self):
         """map_health_checks_to_symptoms output -> analyze_symptoms."""
-        symptom_ids = map_health_checks_to_symptoms({
-            "digestive": ["嘔吐", "下痢", "血便"],
-            "general": ["元気がない"],
-        })
+        symptom_ids = map_health_checks_to_symptoms(
+            {
+                "digestive": ["嘔吐", "下痢", "血便"],
+                "general": ["元気がない"],
+            }
+        )
         result = analyze_symptoms(symptom_ids)
         assert len(result["suspected_diseases"]) > 0
         assert result["severity"] in {"emergency", "high", "moderate", "low"}
@@ -1170,8 +1144,7 @@ class TestEdgeCases:
         for symptoms_input in [
             ["sneezing"],
             ["vomiting", "lethargy", "diarrhea"],
-            ["bloated_abdomen", "vomiting", "excessive_panting",
-             "lethargy", "anxiety"],
+            ["bloated_abdomen", "vomiting", "excessive_panting", "lethargy", "anxiety"],
         ]:
             result = analyze_symptoms(symptoms_input)
             severity = result["severity"]
@@ -1183,64 +1156,79 @@ class TestEdgeCases:
 
     def test_all_known_breeds_in_breed_disease_risk(self):
         for breed_id in _BREED_DISEASE_RISK:
-            result = analyze_symptoms(
-                ["vomiting", "lethargy"], breed=breed_id
-            )
+            result = analyze_symptoms(["vomiting", "lethargy"], breed=breed_id)
             assert result["breed_risk_applied"] is True
 
     def test_all_breed_genetic_tests_returned(self):
         for breed_id in _BREED_GENETIC_TESTS:
             result = analyze_symptoms(["vomiting"], breed=breed_id)
-            assert len(result["breed_genetic_tests"]) > 0, (
-                f"No genetic tests for breed {breed_id}"
-            )
+            assert len(result["breed_genetic_tests"]) > 0, f"No genetic tests for breed {breed_id}"
 
     # -- limping symptoms specifically --------------------------------
 
     def test_limping_symptoms_match_diseases(self):
-        result = analyze_symptoms([
-            "limping_fl", "stiffness", "reluctance_move", "pain_on_touch",
-        ])
+        result = analyze_symptoms(
+            [
+                "limping_fl",
+                "stiffness",
+                "reluctance_move",
+                "pain_on_touch",
+            ]
+        )
         assert len(result["suspected_diseases"]) > 0
 
     # -- urinary symptoms ---------------------------------------------
 
     def test_urinary_symptoms_match(self):
-        result = analyze_symptoms([
-            "straining_urinate", "blood_urine", "excessive_urination",
-        ])
+        result = analyze_symptoms(
+            [
+                "straining_urinate",
+                "blood_urine",
+                "excessive_urination",
+            ]
+        )
         assert len(result["suspected_diseases"]) > 0
 
     # -- skin symptoms ------------------------------------------------
 
     def test_skin_symptoms_match(self):
-        result = analyze_symptoms([
-            "itching", "hair_loss", "skin_redness", "hot_spots",
-        ])
+        result = analyze_symptoms(
+            [
+                "itching",
+                "hair_loss",
+                "skin_redness",
+                "hot_spots",
+            ]
+        )
         assert len(result["suspected_diseases"]) > 0
 
     # -- eye symptoms -------------------------------------------------
 
     def test_eye_symptoms_match(self):
-        result = analyze_symptoms([
-            "eye_redness", "eye_discharge", "squinting",
-        ])
+        result = analyze_symptoms(
+            [
+                "eye_redness",
+                "eye_discharge",
+                "squinting",
+            ]
+        )
         assert len(result["suspected_diseases"]) > 0
 
     # -- recommended tests relate to suspected diseases ----------------
 
     def test_recommended_tests_relate_to_suspected_diseases(self):
-        result = analyze_symptoms([
-            "vomiting", "lethargy", "diarrhea", "appetite_loss",
-        ])
-        suspected_names = {
-            d["name"] for d in result["suspected_diseases"]
-        }
+        result = analyze_symptoms(
+            [
+                "vomiting",
+                "lethargy",
+                "diarrhea",
+                "appetite_loss",
+            ]
+        )
+        suspected_names = {d["name"] for d in result["suspected_diseases"]}
         for test in result["recommended_tests"]:
             related = set(test["related_diseases"])
-            assert related & suspected_names, (
-                f"Test '{test['name']}' unrelated to suspected diseases"
-            )
+            assert related & suspected_names, f"Test '{test['name']}' unrelated to suspected diseases"
 
     # -- match_count <= total_symptoms --------------------------------
 
