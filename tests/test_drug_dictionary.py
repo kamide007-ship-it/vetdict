@@ -1649,3 +1649,79 @@ def test_no_garbled_pradofloxacin_or_sulbactam_typo_in_disease_json():
     mod = (root / "api" / "species" / "cat_diseases.py").read_text(encoding="utf-8")
     assert "プラジコフロキサシン" not in mod
     assert "サルバクタム" not in mod
+
+
+def test_batch39_protamine_hydrocortisone_hypertonic_saline():
+    """2026-08 sweep #7 (referenced-but-absent): the formulary's own heparin /
+    enoxaparin / dalteparin entries name protamine as the reversal agent, the
+    Addisonian-crisis protocols name hydrocortisone, and the shock/GDV/TBI
+    protocols name 7.2% hypertonic saline — yet none was carried. All three
+    must exist with complete bilingual dosing and their defining safety facts."""
+    from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+    protamine = get_drug_by_id("protamine_sulfate")
+    assert protamine is not None, "protamine_sulfate missing from formulary"
+    dog = protamine["species_info"]["dog"]
+    assert "100 IU" in dog["dosage"], "protamine must be dosed per 100 IU heparin"
+    assert "60%" in protamine["mechanism"], "partial LMWH reversal (~60%) must be stated"
+    assert "緩徐" in dog["dosage_ja"] or "緩徐" in dog["notes_ja"], (
+        "slow-injection requirement (hypotension/anaphylactoid risk) must be in Japanese text"
+    )
+
+    hydro = get_drug_by_id("hydrocortisone_succinate")
+    assert hydro is not None, "hydrocortisone_succinate missing from formulary"
+    dd = hydro["species_info"]["dog"]
+    assert "0.5 mg/kg/h" in dd["dosage"], "Addisonian-crisis CRI dose (Lathan 2018) required"
+    assert "ACTH" in dd["notes"], "assay cross-reactivity note (draw ACTH stim first) required"
+
+    hts = get_drug_by_id("hypertonic_saline")
+    assert hts is not None, "hypertonic_saline missing from formulary"
+    assert "4-7 mL/kg" in hts["species_info"]["dog"]["dosage"], "canine shock dose (Silverstein)"
+    assert "2-4 mL/kg" in hts["species_info"]["cat"]["dosage"], "feline dose is lower"
+    assert "脱水" in hts["contraindications_ja"], (
+        "dehydration contraindication (interstitial water is the volume source) required"
+    )
+
+    # All three resolve from treatment-text spellings.
+    for text, want in {
+        "プロタミンで部分中和": "protamine_sulfate",
+        "ヒドロコルチゾン 0.5 mg/kg/h CRI": "hydrocortisone_succinate",
+        "高張食塩水 4 mL/kg を5-10分で静注": "hypertonic_saline",
+    }.items():
+        ids = [x["id"] for x in find_drugs_in_text(text)]
+        assert want in ids, f"{text!r} must resolve to {want}, got {ids}"
+
+
+def test_katakana_sweep7_variant_aliases_resolve_in_text_matcher():
+    """2026-08 sweep #7: treatment texts cite six formulary drugs by variant
+    spellings the canonical name never reduces to (ドーパミン 19 refs,
+    重炭酸ナトリウム, フィトナジオン, カルシウムグルコネート, ウルソジオール,
+    炭酸カルシウム 13 refs). Each must resolve to its canonical entry."""
+    from api.drug_dictionary import find_drugs_in_text
+
+    cases = {
+        "ドーパミン 5 µg/kg/分 CRI": "dopamine",
+        "重炭酸ナトリウム 1 mEq/kg 緩徐静注": "sodium_bicarbonate",
+        "フィトナジオン 2.5 mg/kg SC": "vitamin_k1",
+        "カルシウムグルコネート 10%液": "calcium_gluconate",
+        "ウルソジオール 10-15 mg/kg PO": "ursodiol",
+        "炭酸カルシウム 50-100 mg/kg PO SID": "calcium_supplement_reptile",
+    }
+    for text, want in cases.items():
+        ids = [x["id"] for x in find_drugs_in_text(text)]
+        assert want in ids, f"{text!r} must resolve to {want}, got {ids}"
+
+
+def test_digit_boundary_guard_b1_alias_never_chips_b12_text():
+    """The ビタミンB1→thiamine alias used plain substring matching, so every
+    ビタミンB12 mention spuriously chipped the thiamine entry. A keyword ending
+    in a digit must not match inside a longer number; the true B1 spelling must
+    still resolve."""
+    from api.drug_dictionary import find_drugs_in_text
+
+    b12_ids = [x["id"] for x in find_drugs_in_text("ビタミンB12 250 μg SC 週1回")]
+    assert "thiamine_b1" not in b12_ids, f"B12 text must not chip thiamine, got {b12_ids}"
+    assert "vitamin_b12" in b12_ids
+
+    b1_ids = [x["id"] for x in find_drugs_in_text("ビタミンB1（チアミン）25-50 mg IM")]
+    assert "thiamine_b1" in b1_ids, f"true B1 text must still resolve, got {b1_ids}"

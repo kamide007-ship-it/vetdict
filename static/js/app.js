@@ -1546,14 +1546,14 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:600,drugs:564,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:543,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:356,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:269,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:600,drugs:567,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:546,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:358,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:270,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:283,drugs:70,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:308,drugs:138,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:229,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:203,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:204,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:226,drugs:68,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
     {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:198,drugs:75,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
     {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:179,drugs:158,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
@@ -1571,8 +1571,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6528,
     species:21,
-    drugs:628,
-    symptoms:59,
+    drugs:631,
+    symptoms:60,
     protocols:188
   };
   renderSpeciesGrid();
@@ -6078,9 +6078,26 @@ function renderDrugList(){
           </div>
         </div>
         ${buildDrugDiseasesPlaceholder(d.id||"")}
+        ${(()=>{const q=_anesQueryForDrug(d.name||"",d.name_ja||"");return q?`<button type="button" class="drug-anes-protocols-link" data-anes-query="${escapeHtml(q)}">\u{1F489} ${currentLang==="ja"?"この薬品を使う麻酔プロトコルを見る":"View anesthesia protocols using this drug"}</button>`:"";})()}
       </div>
     </div>`;
   }).join("");
+}
+
+/* Reverse lookup: does this formulary drug appear in the anesthesia protocol
+   tables? Anesthesia→drug navigation has existed since the ANES_AGENTS
+   linkifier; this closes the loop drug→anesthesia so a clinician reading e.g.
+   midazolam can jump straight to every protocol that uses it (the anesthesia
+   search filter matches protocol drug tables). Abbreviation aliases are
+   skipped — too short to trust as containment matches. */
+function _anesQueryForDrug(name,nameJa){
+  if(typeof ANES_AGENTS==="undefined")return "";
+  const nl=(name||"").toLowerCase();
+  for(const a of ANES_AGENTS){
+    for(const en of (a.en||[])){if(en.length>=4&&nl.includes(en.toLowerCase()))return a.q;}
+    for(const ja of (a.ja||[])){if(ja.length>=3&&(nameJa||"").includes(ja))return a.q;}
+  }
+  return "";
 }
 
 /* ===== Emergency Protocols (Vetlexicon-style quick reference) ===== */
@@ -6828,6 +6845,24 @@ function _attachDbItemHandlers(container){
     if(dChip){e.preventDefault();openDiseaseAcrossSpecies(dChip.dataset.disease,dChip.dataset.species||currentSpecies||"");return;}
     const anesthLink=e.target.closest(".anesthesia-nav-link");
     if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)scrollToAnchor(p);return;}
+    /* Drug detail → anesthesia protocols using this drug: pre-fill the
+       anesthesia search with the agent query and land on the filtered list.
+       Setting the input before the (possibly still in-flight) protocol fetch
+       is safe — loadAnesthesiaProtocols re-reads it when it renders. */
+    const anesProto=e.target.closest(".drug-anes-protocols-link");
+    if(anesProto){
+      e.preventDefault();
+      _pushNavHistory(currentView,"anesthesia","");
+      switchView("anesthesia");
+      _showBackNav("anesthesiaBackNav","anesthesiaSearch");
+      const inp=document.getElementById("anesthesiaSearch");
+      if(inp)inp.value=anesProto.dataset.anesQuery||"";
+      if(anesthesiaLoaded)renderAnesthesiaList();
+      trackEvent("anesthesia_from_drug",{query:anesProto.dataset.anesQuery||""});
+      const p=document.getElementById("anesthesiaList");
+      if(p)scrollToAnchor(p);
+      return;
+    }
     const diffBtn=e.target.closest(".differential-check-btn");
     if(diffBtn){e.preventDefault();runDifferentialFromDisease(diffBtn.dataset.ids);return;}
     if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);
