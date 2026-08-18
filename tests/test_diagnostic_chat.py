@@ -41,6 +41,9 @@ _KNOWN_ALIAS_MISMATCHES = {
     "paralysis_or_paresis",
     "cloudy_urine",
     "foul_smelling_urine",
+    # Bridged to the legacy dog vocabulary (stiffness) via _LEGACY_FALLBACK;
+    # no species module carries a dedicated difficulty-rising ID.
+    "difficulty_standing",
 }
 
 
@@ -1940,3 +1943,91 @@ class TestChatClinicalAccuracyAuditRound4:
         assert "ear_scratching" in syms
         top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:1]]
         assert top and "外耳炎" in top[0], f"got {top}"
+
+
+class TestChatClinicalAccuracyAuditRound5:
+    """2026-08 audit round 5. Root causes fixed this round: the legacy dog DB
+    had no entry (and often no vocabulary) for four of the most common canine
+    presentations — anal sac disease (the pathognomonic scooting complaint
+    extracted nothing), corneal ulcer, osteoarthritis and cognitive
+    dysfunction; te-form squinting phrases (目を細めて/まぶしそう) missed the
+    dictionary-form alias; hind_leg_weakness / difficulty_standing / staring /
+    vocalization_changes had no legacy-vocabulary bridge; 夜鳴き mapped to
+    anxiety so the classic geriatric-cat nocturnal-yowling complaint never
+    ranked hyperthyroidism (whose symptom set also lacked the documented
+    vocalization sign — AAFP, Carney 2016); and crop distension
+    (そのうが膨らんでいる) had no alias so crop diseases never ranked."""
+
+    def test_dog_scooting_ranks_anal_sac_disease_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        syms = extract_symptoms_from_text("おしりを地面にこすりつける")
+        assert "scooting" in syms, "scooting phrase must extract (previously extracted nothing)"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:1]]
+        assert any("肛門嚢" in n for n in top), f"anal sac disease must rank first, got {top}"
+
+    def test_dog_geriatric_cognitive_complaint_ranks_cds_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        syms = extract_symptoms_from_text("夜鳴きする 同じ場所をぐるぐる回る ぼーっとしている")
+        assert "disorientation" in syms, "ぼーっとしている must bridge staring→disorientation"
+        assert "anxiety" in syms, "夜鳴き must bridge vocalization_changes→anxiety on the dog path"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:1]]
+        assert any("認知機能不全" in n for n in top), f"CDS must rank first, got {top}"
+
+    def test_dog_squinting_red_eye_ranks_corneal_ulcer(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        syms = extract_symptoms_from_text("目が赤い 目を細めてまぶしそう")
+        assert "squinting" in syms, "te-form 目を細めて / まぶしそう must extract squinting"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:3]]
+        assert any("角膜潰瘍" in n for n in top), f"corneal ulcer must rank top-3, got {top}"
+
+    def test_dog_hindlimb_weakness_ranks_orthopedic(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        syms = extract_symptoms_from_text("散歩を嫌がる 後ろ足がふらつく 立ち上がりにくい")
+        assert "limping" in syms, "hind_leg_weakness must bridge to limping on the dog path"
+        assert "stiffness" in syms, "difficulty_standing must bridge to stiffness"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:3]]
+        assert any(("変形性関節症" in n) or ("股関節" in n) or ("椎間板" in n) for n in top), (
+            f"orthopedic/neurologic hindlimb diseases must rank top-3, got {top}"
+        )
+
+    def test_legacy_dog_db_carries_new_common_presentations(self):
+        from api.health_checker import DISEASES, SYMPTOM_IDS
+
+        assert "scooting" in SYMPTOM_IDS
+        by_id = {d["id"]: d for d in DISEASES}
+        for did, tier in (
+            ("anal_sac_disease", "very_common"),
+            ("corneal_ulcer", "very_common"),
+            ("osteoarthritis", "very_common"),
+            ("cognitive_dysfunction", "common"),
+        ):
+            assert did in by_id, f"{did} missing from legacy dog DB"
+            assert by_id[did]["prevalence_tier"] == tier, did
+
+    def test_cat_nocturnal_yowling_ranks_hyperthyroidism_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("夜中に大声で鳴く 高齢 痩せてきた", "cat")
+        assert "vocalization_changes" in syms
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "cat")[:1]]
+        assert any("甲状腺機能亢進" in n for n in top), (
+            f"hyperthyroidism must rank first for the geriatric yowling triad, got {top}"
+        )
+        # 夜鳴き itself must also resolve to vocalization_changes now.
+        assert "vocalization_changes" in _extract_species_symptoms("夜鳴きがひどい", "cat")
+
+    def test_bird_crop_distension_ranks_crop_diseases(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("吐き戻しをする そのうが膨らんでいる", "bird")
+        assert "crop_distension" in syms, "そのうが膨らんでいる must extract crop_distension"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "bird")[:3]]
+        assert any(("嗉嚢" in n) or ("そ嚢" in n) or ("そのう" in n) or ("素嚢" in n) for n in top), (
+            f"crop diseases must dominate, got {top}"
+        )

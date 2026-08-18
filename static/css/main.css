@@ -587,6 +587,9 @@ a:hover{text-decoration:underline}
 /* Low-confidence banner → guided-consultation pivot (checker results) */
 .guided-consult-link{background:#fff;border:1px solid #f59e0b;border-radius:var(--radius);padding:6px 12px;font-size:.8rem;font-weight:600;color:#92400e;cursor:pointer;min-height:32px}
 .guided-consult-link:hover{background:#fef3c7}
+/* Drug detail → anesthesia protocols using this drug (reverse of ANES_AGENTS links) */
+.drug-anes-protocols-link{display:inline-block;margin-top:10px;background:#fff;border:1px solid var(--navy);border-radius:var(--radius);padding:6px 12px;font-size:.8rem;font-weight:600;color:var(--navy);cursor:pointer;min-height:32px}
+.drug-anes-protocols-link:hover{background:var(--gray-50);color:var(--green)}
 .chat-no-match,.chat-no-symptoms{font-size:.78rem;color:var(--gray-500);padding:12px;text-align:center;background:var(--gray-50);border-radius:8px;white-space:pre-wrap}
 .chat-followup{display:flex;flex-direction:column;gap:8px;margin-top:12px;padding:12px;background:var(--gray-50);border-radius:10px;border:1px solid var(--gray-200)}
 .chat-followup-label{font-size:.76rem;font-weight:700;color:var(--navy);margin-bottom:4px}

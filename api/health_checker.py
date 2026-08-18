@@ -658,6 +658,12 @@ SYMPTOMS = [
         "name_en": "Increased Appetite (Polyphagia)",
         "category": "digestive",
     },
+    {
+        "id": "scooting",
+        "name_ja": "おしりを地面にこすりつける（おしり歩き）",
+        "name_en": "Scooting (Dragging Rear on Ground)",
+        "category": "digestive",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -1888,6 +1894,110 @@ DISEASES = [
             "dachshund": 1.8,
             "miniature_schnauzer": 1.5,
         },
+    },
+    # ---- 12d. Anal Sac Disease ----
+    # One of the most common canine presentations in general practice (annual
+    # prevalence ~4.4%, O'Neill 2021 VetCompass), yet the legacy database had
+    # no entry and no scooting vocabulary, so the pathognomonic "おしりを地面に
+    # こすりつける" complaint extracted nothing at all.
+    {
+        "id": "anal_sac_disease",
+        "prevalence_tier": "very_common",
+        "name_ja": "肛門嚢疾患（肛門腺の詰まり・炎症）",
+        "name_en": "Anal Sac Disease (Impaction / Sacculitis)",
+        "description_ja": "肛門嚢の分泌物うっ滞・炎症・膿瘍。おしりを地面にこすりつける（スクーティング）、肛門周囲を執拗に舐める、急に座り込むなどが典型徴候です。小型犬で特に多く、膿瘍化すると肛門横が腫れて破裂することもあります。",
+        "description_en": "Impaction, inflammation or abscessation of the anal sacs. Scooting (dragging the rear on the ground), persistent licking of the perianal area and sudden sitting are the classic signs. Small breeds are predisposed; abscessed sacs may swell and rupture beside the anus.",
+        "symptoms": [
+            "scooting",
+            "excessive_licking",
+        ],
+        "severity": "low",
+        "recommended_tests": ["rectal_exam"],
+        "breed_risks": {
+            "chihuahua": 1.6,
+            "shih_tzu": 1.5,
+            "toy_poodle": 1.5,
+            "cavalier_king_charles_spaniel": 1.5,
+        },
+    },
+    # ---- 12e. Corneal Ulcer ----
+    # The most common canine corneal disease (brachycephalics at up to 11x
+    # risk — O'Neill 2017 VetCompass), yet the legacy database carried only
+    # corneal dystrophy, so "目が赤い 目を細めている" ranked eyelid
+    # conformation diseases first.
+    {
+        "id": "corneal_ulcer",
+        "prevalence_tier": "very_common",
+        "name_ja": "角膜潰瘍",
+        "name_en": "Corneal Ulcer",
+        "description_ja": "角膜上皮の欠損。外傷・逆さまつげ・乾性角結膜炎・短頭種の眼球突出などが原因となります。羞明（目を細める）、流涙、結膜充血が典型徴候で、フルオレセイン染色で診断します。深層潰瘍は穿孔リスクがあり緊急対応が必要です。",
+        "description_en": "Loss of corneal epithelium from trauma, distichiasis, KCS or brachycephalic exposure. Blepharospasm (squinting), epiphora and conjunctival hyperemia are the classic signs; diagnosed with fluorescein staining. Deep ulcers risk perforation and are an emergency.",
+        "symptoms": [
+            "squinting",
+            "redness_in_eyes",
+            "eye_discharge",
+            "cloudiness_in_eyes",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["fluorescein_stain", "schirmer_tear_test"],
+        "breed_risks": {
+            "pug": 2.5,
+            "french_bulldog": 2.5,
+            "shih_tzu": 2.0,
+            "boston_terrier": 1.8,
+        },
+    },
+    # ---- 12f. Osteoarthritis ----
+    # The most common canine orthopedic disease (~20% of dogs over 1 year,
+    # Johnston 1997; 2.5% annual VetCompass prevalence, Anderson 2018), yet the
+    # legacy database carried only specific primary causes (hip dysplasia,
+    # CCL), so "difficulty rising + reluctance to walk" complaints in older
+    # dogs had no direct match.
+    {
+        "id": "osteoarthritis",
+        "prevalence_tier": "very_common",
+        "name_ja": "変形性関節症（OA）",
+        "name_en": "Osteoarthritis (Degenerative Joint Disease)",
+        "description_ja": "関節軟骨の進行性変性。股関節形成不全・前十字靭帯断裂・肘関節形成不全などの続発が多く、加齢と肥満が増悪因子です。立ち上がりにくい、散歩を嫌がる、段差を避ける、休息後のこわばりが典型徴候です。",
+        "description_en": "Progressive degeneration of articular cartilage, most often secondary to hip/elbow dysplasia or cruciate disease; age and obesity are aggravating factors. Difficulty rising, exercise reluctance, avoiding stairs and post-rest stiffness are the classic signs.",
+        "symptoms": [
+            "limping",
+            "stiffness",
+            "reluctance_to_move",
+            "exercise_intolerance",
+            "joint_swelling",
+            "muscle_wasting",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["orthopedic_exam", "xray"],
+        "breed_risks": {
+            "labrador_retriever": 1.8,
+            "golden_retriever": 1.8,
+            "german_shepherd": 1.5,
+            "rottweiler": 1.5,
+        },
+    },
+    # ---- 12g. Cognitive Dysfunction Syndrome ----
+    # Present in 14.2% of dogs ≥8y (Salvin 2010) and 28% of 11-12y dogs
+    # (Neilson 2001), yet the legacy database had no geriatric behavioral
+    # entry, so night vocalization + circling + staring complaints ranked
+    # cerebellar/hepatic diseases first.
+    {
+        "id": "cognitive_dysfunction",
+        "prevalence_tier": "common",
+        "name_ja": "認知機能不全症候群（CDS）",
+        "name_en": "Cognitive Dysfunction Syndrome",
+        "description_ja": "高齢犬の進行性の脳の変性疾患（ヒトのアルツハイマー病に類似）。見当識障害（ぼーっとする・壁に向かって立つ）、夜鳴き・昼夜逆転、同じ場所をぐるぐる回る、トイレの失敗（DISHA徴候）が典型です。除外診断であり、脳腫瘍・代謝疾患の鑑別が必要です。",
+        "description_en": "Progressive neurodegenerative disease of aged dogs (analogous to Alzheimer's disease). Disorientation (staring, standing at walls), night vocalization with sleep-wake reversal, circling and house soiling (the DISHA signs) are typical. A diagnosis of exclusion — brain tumors and metabolic disease must be ruled out.",
+        "symptoms": [
+            "disorientation",
+            "anxiety",
+            "circling",
+            "incontinence",
+        ],
+        "severity": "low",
+        "recommended_tests": ["neurological_exam", "blood_chemistry"],
+        "breed_risks": {},
     },
     # ---- 28b. Acute Gastroenteritis ----
     # The single most common GI presentation in general practice was absent
