@@ -61,6 +61,7 @@ from api.drug_batch_36 import DRUGS_BATCH_36
 from api.drug_batch_37 import DRUGS_BATCH_37
 from api.drug_batch_38 import DRUGS_BATCH_38
 from api.drug_batch_39 import DRUGS_BATCH_39
+from api.drug_batch_40 import DRUGS_BATCH_40
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10629,13 +10630,22 @@ for _drug38 in DRUGS_BATCH_38:
         _drug_index[_drug38["id"]] = _drug38
 
 # バッチ39: 2026-08 第7回 referenced-but-absent 監査で検出
-# （ミルテホシン/メグルミンアンチモン酸塩 — 犬リーシュマニア症のLeishVet第一選択2剤が
-#  用量付きで参照されるのに両方未収載; ヒト免疫グロブリンIVIG — IMHA/ITP難治例レスキューが
-#  30-40参照で最多欠落; インターフェロンα — 鳥PBFD/猫レトロウイルス補助療法33参照、ω型のみ収載だった）
+# （プロタミン — ヘパリン/エノキサパリン/ダルテパリンの各entryが拮抗薬として名指しするのに未収載;
+#  ヒドロコルチゾン — アジソンクリーゼの標準グルココルチコイドが未収載;
+#  高張食塩水 — ショック/GDV/頭部外傷プロトコルが参照する少量蘇生輸液が未収載）
 for _drug39 in DRUGS_BATCH_39:
     if _drug39["id"] not in _drug_index:
         DRUGS.append(_drug39)
         _drug_index[_drug39["id"]] = _drug39
+
+# バッチ40: 2026-08 第8回 referenced-but-absent 監査で検出
+# （ミルテホシン/メグルミンアンチモン酸塩 — 犬リーシュマニア症のLeishVet第一選択2剤が
+#  用量付きで参照されるのに両方未収載; ヒト免疫グロブリンIVIG — IMHA/ITP難治例レスキューが
+#  30-40参照で最多欠落; インターフェロンα — 鳥PBFD/猫レトロウイルス補助療法33参照、ω型のみ収載だった）
+for _drug40 in DRUGS_BATCH_40:
+    if _drug40["id"] not in _drug_index:
+        DRUGS.append(_drug40)
+        _drug_index[_drug40["id"]] = _drug40
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
@@ -11129,6 +11139,16 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     ),  # canonical: 猫インターフェロンオメガ（…） — texts omit the 猫 prefix / use ω
     "pyrimethamine": ("ピリメサミン",),  # サ transliteration variant of ピリメタミン
     "alpha_casozepine": ("α-カソゼピン",),  # canonical: αカソゼピン（ジルケーン） — texts hyphenate
+    # 2026-08 sweep #7: treatment texts cite these agents by variant spellings
+    # that the canonical name_ja never reduces to.
+    "dopamine": ("ドーパミン",),  # long-vowel variant of ドパミン — 19 treatment refs
+    "sodium_bicarbonate": ("重炭酸ナトリウム",),  # canonical: 炭酸水素ナトリウム
+    "vitamin_k1": ("フィトナジオン",),  # phytonadione = INN of vitamin K1
+    "calcium_gluconate": ("カルシウムグルコネート",),  # canonical: グルコン酸カルシウム
+    "ursodiol": ("ウルソジオール",),  # canonical: ウルソデオキシコール酸
+    "calcium_supplement_reptile": (
+        "炭酸カルシウム",
+    ),  # canonical: 炭酸カルシウム粉末（爬虫類用） — 粉末 suffix defeats the stem index (13 treatment refs)
 }
 
 
@@ -11237,6 +11257,22 @@ def find_drugs_in_text(text: str, max_results: int = 25) -> List[Dict]:
         if drug_id in seen:
             continue
         if keyword in text_lower:
+            # Digit-boundary guard: a keyword ending in a digit ("ビタミンb1")
+            # must not match inside a longer number ("ビタミンB12") — otherwise
+            # every B12 mention spuriously chips the thiamine entry.
+            if keyword[-1].isdigit():
+                pos, hit = 0, False
+                while True:
+                    pos = text_lower.find(keyword, pos)
+                    if pos == -1:
+                        break
+                    nxt = pos + len(keyword)
+                    if nxt >= len(text_lower) or not text_lower[nxt].isdigit():
+                        hit = True
+                        break
+                    pos += 1
+                if not hit:
+                    continue
             found_ids.append(drug_id)
             seen.add(drug_id)
             if len(found_ids) >= max_results:

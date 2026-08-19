@@ -227,6 +227,8 @@ SYMPTOM_ALIASES = {
     "目の充血": "redness_in_eyes",
     "目の白濁": "cloudiness_in_eyes",
     "目を細める": "squinting",
+    "目を細めて": "squinting",
+    "まぶしそう": "squinting",
     "目の腫れ": "eye_swelling",
     "運動不耐性": "exercise_intolerance",
     "失神": "fainting",
@@ -568,9 +570,35 @@ SYMPTOM_ALIASES = {
     "うろうろ": "anxiety",
     "そわそわ": "anxiety",
     "ソワソワ": "anxiety",
-    "夜鳴き": "anxiety",
-    "夜泣き": "anxiety",
+    # 夜鳴き: nocturnal vocalization is the classic sign of feline
+    # hyperthyroidism/hypertension and canine CDS — map to
+    # vocalization_changes (the legacy dog path bridges it to anxiety, a CDS
+    # DISHA sign, via _LEGACY_FALLBACK).
+    "夜鳴き": "vocalization_changes",
+    "夜泣き": "vocalization_changes",
     "怖がる": "anxiety",
+    # おしりこすり（スクーティング）— 肛門嚢疾患のパトグノモニックな主訴
+    "おしりを地面にこすりつける": "scooting",
+    "お尻を地面にこすりつける": "scooting",
+    "おしりをこすりつける": "scooting",
+    "お尻をこすりつける": "scooting",
+    "おしりを引きずって歩く": "scooting",
+    "お尻を引きずって歩く": "scooting",
+    "おしり歩き": "scooting",
+    "お尻歩き": "scooting",
+    "スクーティング": "scooting",
+    # 起立困難 — 変形性関節症・神経疾患の古典的主訴
+    "立ち上がりにくい": "difficulty_standing",
+    "立ち上がれない": "difficulty_standing",
+    "立ち上がりが遅い": "difficulty_standing",
+    "立ち上がるのがつらそう": "difficulty_standing",
+    "立ち上がるのが大変そう": "difficulty_standing",
+    # そのう膨満（鳥）— そ嚢うっ滞・サワークロップの主訴
+    "そのうが膨らんでる": "crop_distension",
+    "そのうがふくらんでる": "crop_distension",
+    "そ嚢が膨らんでる": "crop_distension",
+    "そのうが大きい": "crop_distension",
+    "そのうがパンパン": "crop_distension",
     # その他
     "脱水": "excessive_thirst",
     "肌が黄色い": "jaundice",
@@ -1677,7 +1705,6 @@ SYMPTOM_ALIASES = {
     "お尻をこすりつけ": "scooting",
     "おしりを擦る": "scooting",
     "お尻を擦る": "scooting",
-    "スクーティング": "scooting",
     # 内分泌性脱毛（クッシング/甲状腺機能低下の左右対称性脱毛）
     "左右対称に毛が抜け": "hair_loss",
     "左右対称に抜け": "hair_loss",

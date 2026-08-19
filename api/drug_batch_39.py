@@ -1,219 +1,221 @@
 """Drug batch 39 – referenced-but-absent agents surfaced by the 2026-08 audit (7th sweep).
 
-A dose-context katakana/English token sweep of disease treatment protocols,
-cross-checked with the real text matcher (find_drugs_in_text), found four
-agents that VetDict's own content instructs clinicians to use — with explicit
-doses — yet were absent from the formulary:
+A katakana token-frequency sweep of disease treatment protocols plus an
+antidote/reversal cross-reference audit of the formulary's own entries found
+three agents that VetDict's own content instructs clinicians to use — yet were
+absent from the formulary:
 
-  - ミルテホシン (miltefosine): named with a dose (2 mg/kg PO q24h × 28日) in
-    the canine leishmaniosis entries as one of the two LeishVet first-line
-    anti-Leishmania drugs; absent.
-  - メグルミンアンチモン酸塩 (meglumine antimoniate): the other LeishVet
-    first-line drug, named with doses (SC q24h 4-8週) in the same entries;
-    absent.
-  - ヒト免疫グロブリン/hIVIG: referenced ~30-40 times ("ヒト免疫グロブリン
-    （IVIG）0.5-1 g/kg IV") as the refractory-case rescue in IMHA / ITP /
-    severe cutaneous drug reaction protocols; absent.
-  - 組換えヒトインターフェロンα (human interferon-alpha): referenced ~33
-    times ("組換えαインターフェロン 1-10万IU/kg SC q24h") in avian
-    PBFD / polyomavirus protocols and feline retrovirus adjunct therapy;
-    only feline interferon-omega was carried.
+  - プロタミン硫酸塩 (protamine sulfate): the heparin reversal agent. The
+    formulary's own heparin (unfractionated), enoxaparin and dalteparin
+    entries name protamine as the antidote ("プロタミン部分中和(~60%)"), yet
+    the antidote itself was not carried — the same self-referential gap class
+    as pralidoxime (organophosphates) and dexrazoxane (doxorubicin) fixed in
+    earlier sweeps.
+  - ヒドロコルチゾンコハク酸エステル (hydrocortisone sodium succinate): the
+    standard glucocorticoid for the Addisonian (hypoadrenocortical) crisis and
+    for CIRCI in septic shock; referenced in disease treatment texts but
+    absent. Unlike dexamethasone it provides both glucocorticoid and
+    mineralocorticoid activity and is the consensus choice once ACTH
+    stimulation testing is complete (or when dexamethasone was used to bridge).
+  - 高張食塩水 7.2-7.5% (hypertonic saline): named in shock / GDV / head
+    trauma protocols for small-volume resuscitation; completes the fluid set
+    started with LRS / Normosol-R (batch 34). Rapid intravascular volume
+    expansion at ~4-5x the infused volume; first-line for intracranial
+    hypertension alongside mannitol.
 
 References:
-  - Solano-Gallego L et al. LeishVet guidelines. Vet Parasitol 2009 /
-    Parasit Vectors 2011;4:86 — canine leishmaniosis treatment: miltefosine
-    2 mg/kg PO q24h ×28 d or meglumine antimoniate SC, each combined with
-    allopurinol 10 mg/kg PO q12h long term.
-  - Miró G et al. Vet Dermatol 2009 — randomized comparison
-    miltefosine+allopurinol vs meglumine antimoniate+allopurinol: comparable
-    clinical efficacy.
-  - Pennisi MG et al. LeishVet feline leishmaniosis guidelines. Parasit
-    Vectors 2015 — allopurinol first-line in cats; miltefosine 2 mg/kg PO
-    q24h ×28 d as alternative (limited data).
-  - Whelan MF et al. J Vet Emerg Crit Care 2009;19:617 — randomized
-    placebo-controlled trial of hIVIG (0.5 g/kg IV) in canine ITP: faster
-    platelet recovery and shorter hospitalization.
-  - Spurlock NK, Prittie JE. J Vet Emerg Crit Care 2011;21:471 — review of
-    hIVIG use in dogs (IMHA, ITP, cutaneous drug reactions): Fc-receptor
-    blockade; thromboembolism and volume-overload cautions; single-dose use
-    because of anti-human-protein sensitization.
-  - Kellerman DL, Bruyette DS. J Vet Intern Med 1997;11:328 — hIVIG in
-    canine IMHA.
-  - Cummins JM et al. — oral low-dose human IFN-α (30 IU) in FeLV-infected
-    cats; Weiss RC et al. J Am Vet Med Assoc 1991 — survival benefit in
-    FeLV-associated disease (evidence mixed; McCaw 2001 found no benefit).
-  - Stanford M. Vet Rec 2004 — interferon therapy for circovirus (PBFD)
-    infection in psittacines (limited evidence; extrapolated dosing).
-  - Plumb's Veterinary Drug Handbook, 10th ed — miltefosine, meglumine
-    antimoniate, immunoglobulin (human), interferon-alfa.
+  - Plumb's Veterinary Drug Handbook, 10th ed — protamine sulfate,
+    hydrocortisone sodium succinate, hypertonic saline.
+  - Silverstein DC, Hopper K. Small Animal Critical Care Medicine, 3rd ed —
+    hypertonic saline resuscitation doses (dog 4-7 mL/kg, cat 2-4 mL/kg),
+    traumatic brain injury use.
+  - Lunsford KV, Mackin AJ. Vet Clin North Am 2007 — heparin/LMWH reversal;
+    protamine neutralises UFH fully but LMWH anti-Xa activity only ~60%.
+  - Church DB. Canine hypoadrenocorticism. In: Ettinger 8th ed —
+    hydrocortisone CRI for Addisonian crisis.
+  - Lathan P, Thompson AL. Vet Med (Auckl) 2018 — management of
+    hypoadrenocorticism; hydrocortisone 0.5 mg/kg/h CRI.
+  - Sharp CR et al. J Vet Emerg Crit Care 2018 — hydrocortisone for CIRCI in
+    septic dogs.
+  - DiBartola SP. Fluid, Electrolyte, and Acid-Base Disorders, 4th ed —
+    hypertonic saline contraindications (dehydration, hypernatremia).
 """
 
 DRUGS_BATCH_39: list[dict] = [
     {
-        "id": "miltefosine",
-        "search_aliases": ["ミルテホシン", "ミルテフォラン", "Milteforan"],
-        "name": "Miltefosine",
-        "name_ja": "ミルテホシン（ミルテフォラン）",
-        "category": "antiparasitics",
-        "mechanism": "Alkylphosphocholine that disrupts Leishmania membrane phospholipid metabolism and mitochondrial function, causing apoptosis-like death of amastigotes; also modulates macrophage activation. One of the two LeishVet first-line anti-Leishmania drugs (with meglumine antimoniate), always combined with allopurinol.",
-        "mechanism_ja": "アルキルホスホコリン系抗リーシュマニア薬。リーシュマニア原虫の膜リン脂質代謝とミトコンドリア機能を障害しアマスティゴートをアポトーシス様死に導く。マクロファージ活性化の調節作用もある。LeishVetガイドラインの第一選択2剤の一つ（もう一方はメグルミンアンチモン酸塩）で、常にアロプリノールと併用する。",
+        "id": "protamine_sulfate",
+        "search_aliases": [
+            "プロタミン",
+            "硫酸プロタミン",
+            "Protamine",
+        ],
+        "name": "Protamine Sulfate",
+        "name_ja": "プロタミン硫酸塩",
+        "category": "miscellaneous",
+        "mechanism": "Strongly basic (arginine-rich) protein that forms an inert ionic complex with strongly acidic heparin, immediately neutralising its anticoagulant effect. Fully reverses unfractionated heparin; neutralises only ~60% of LMWH (enoxaparin/dalteparin) anti-Xa activity. Excess protamine itself has weak anticoagulant activity, so dosing is titrated to the heparin given.",
+        "mechanism_ja": "強塩基性（アルギニン豊富）蛋白で、強酸性のヘパリンとイオン複合体を形成し抗凝固作用を即時中和する。未分画ヘパリンは完全に、LMWH（エノキサパリン/ダルテパリン）の抗Xa活性は約60%のみ中和。プロタミン自体も過量で弱い抗凝固作用を持つため、投与ヘパリン量に合わせて滴定する。",
         "species_info": {
             "dog": {
                 "safe": True,
-                "dosage": "2 mg/kg PO q24h × 28 days, given with food, combined with allopurinol 10 mg/kg PO q12h for ≥6-12 months (LeishVet; Solano-Gallego 2011). Complete the full 28-day course — do not skip or reduce doses (resistance risk).",
-                "dosage_ja": "2 mg/kg 経口 24時間毎 × 28日間（食餌と同時投与）。アロプリノール 10 mg/kg 経口 12時間毎（6-12ヶ月以上）と併用（LeishVet; Solano-Gallego 2011）。28日間を完遂すること — 減量・中断は耐性リスク（スキップ不可）。",
-                "notes": "Efficacy comparable to meglumine antimoniate when combined with allopurinol (Miró 2009). Oral route avoids injection-site reactions; preferred when renal compromise makes antimonials risky. Vomiting/diarrhea in ~10-15% — usually transient; give with food. Monitor renal values and urine protein:creatinine during therapy. Clinical cure ≠ parasitological cure — monitor serology/PCR for relapse.",
-                "notes_ja": "アロプリノール併用でメグルミンアンチモン酸塩と同等の臨床効果（Miró 2009）。経口投与のため注射部位反応がなく、腎機能低下例でアンチモン製剤が使いにくい場合に優先される。約10-15%で嘔吐・下痢（通常一過性、食餌と同時投与で軽減）。治療中は腎数値と尿蛋白/クレアチニン比をモニタリング。臨床的治癒≠寄生虫学的治癒 — 血清抗体価/PCRで再発を監視。",
+                "dosage": "1 mg IV per 100 IU of heparin still active, by slow IV over 10+ min (max 50 mg). Reduce to 0.5 mg/100 IU if 30-60 min since heparin, 0.25 mg/100 IU if >2 h. LMWH: 1 mg per 1 mg (100 anti-Xa IU) enoxaparin — expect only partial (~60%) reversal.",
+                "dosage_ja": "残存ヘパリン100 IUあたり1 mgを10分以上かけて緩徐静注（最大50 mg）。ヘパリン投与後30-60分なら0.5 mg/100 IU、2時間以降は0.25 mg/100 IUに減量。LMWH: エノキサパリン1 mg（抗Xa 100 IU）あたり1 mg — 中和は部分的（約60%）。",
+                "notes": "Rapid injection causes hypotension, bradycardia and anaphylactoid reactions — always give slowly. Monitor aPTT/ACT to confirm reversal.",
+                "notes_ja": "急速静注は低血圧・徐脈・アナフィラキシー様反応を起こす — 必ず緩徐投与。aPTT/ACTで中和を確認。",
             },
             "cat": {
                 "safe": True,
-                "dosage": "2 mg/kg PO q24h × 28 days (LeishVet feline guidelines 2015; limited data). Allopurinol 10 mg/kg PO q12h is the feline first-line; miltefosine is an alternative/adjunct.",
-                "dosage_ja": "2 mg/kg 経口 24時間毎 × 28日間（LeishVet猫ガイドライン2015、データ限定的）。猫の第一選択はアロプリノール 10 mg/kg 経口 12時間毎で、ミルテホシンは代替・補助。",
-                "notes": "Feline leishmaniosis is uncommon; screen for FIV/FeLV co-infection which worsens prognosis.",
-                "notes_ja": "猫のリーシュマニア症は稀。予後を悪化させるFIV/FeLV共感染をスクリーニングする。",
+                "dosage": "1 mg IV per 100 IU of heparin still active, slow IV over 10+ min; same time-decay reduction as dogs.",
+                "dosage_ja": "残存ヘパリン100 IUあたり1 mgを10分以上かけて緩徐静注。犬と同様に経過時間で減量。",
+                "notes": "Cats given protamine for ATE thrombolysis-associated bleeding: monitor closely for hypotension.",
+                "notes_ja": "ATE治療関連出血への使用時は低血圧を厳重モニタリング。",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "1 mg IV per 100 IU heparin still active, very slow IV; titrate against ACT.",
+                "dosage_ja": "残存ヘパリン100 IUあたり1 mgを極めて緩徐に静注。ACTで滴定。",
+                "notes": "Rarely required; heparin's short half-life usually makes discontinuation sufficient.",
+                "notes_ja": "必要となることは稀 — ヘパリンは半減期が短く中止のみで十分なことが多い。",
             },
         },
-        "side_effects": "Vomiting, diarrhea, inappetence (usually transient); teratogenic",
-        "side_effects_ja": "嘔吐・下痢・食欲不振（通常一過性）。催奇形性",
-        "contraindications": "Pregnancy/lactation (teratogenic — also advise pregnant owners to wear gloves when handling). Severe hepatic/renal failure. Do not use as monotherapy without allopurinol (resistance).",
-        "contraindications_ja": "妊娠・授乳中（催奇形性 — 妊娠中の飼い主には手袋着用を指導）。重度の肝・腎不全。アロプリノール非併用の単剤使用は不可（耐性リスク）。",
+        "side_effects": "Hypotension, bradycardia, pulmonary hypertension and anaphylactoid reactions with rapid IV injection; rebound bleeding (heparin rebound) 2-8 h later; excess protamine is itself weakly anticoagulant",
+        "side_effects_ja": "急速静注で低血圧・徐脈・肺高血圧・アナフィラキシー様反応。2-8時間後のヘパリンリバウンド出血。過量投与はプロタミン自体の弱い抗凝固作用",
+        "contraindications": "Known protamine hypersensitivity. Use caution in animals previously exposed to protamine-containing insulin (PZI/NPH) — higher anaphylaxis risk.",
+        "contraindications_ja": "プロタミン過敏症。プロタミン含有インスリン（PZI/NPH）使用歴のある動物はアナフィラキシーリスク上昇 — 慎重投与。",
         "drug_interactions": [
             {
-                "drug": "Allopurinol",
-                "effect": "Standard combination for leishmaniosis — additive anti-Leishmania effect (LeishVet first-line protocol)",
-                "effect_ja": "リーシュマニア症の標準併用 — 抗リーシュマニア作用が相加的（LeishVet第一選択プロトコル）",
+                "drug": "Heparin (unfractionated)",
+                "effect": "Intended antagonism — full neutralisation; dose by remaining active heparin",
+                "severity": "info",
+            },
+            {
+                "drug": "Enoxaparin",
+                "effect": "Partial (~60%) neutralisation of anti-Xa activity only",
+                "severity": "moderate",
+            },
+            {
+                "drug": "Insulin PZI",
+                "effect": "Prior exposure to protamine-containing insulin increases anaphylaxis risk on IV protamine",
+                "severity": "moderate",
             },
         ],
     },
     {
-        "id": "meglumine_antimoniate",
+        "id": "hydrocortisone_succinate",
         "search_aliases": [
-            "メグルミンアンチモン酸塩",
-            "メグルミンアンチモン酸",
-            "アンチモン酸メグルミン",
-            "グルカンチーム",
-            "Glucantime",
+            "ヒドロコルチゾン",
+            "コハク酸ヒドロコルチゾン",
+            "ソル・コーテフ",
+            "Solu-Cortef",
         ],
-        "name": "Meglumine Antimoniate",
-        "name_ja": "メグルミンアンチモン酸塩（グルカンチーム）",
-        "category": "antiparasitics",
-        "mechanism": "Pentavalent antimonial: reduced intracellularly to trivalent antimony, which inhibits Leishmania glycolysis and fatty-acid β-oxidation, depleting amastigote ATP. One of the two LeishVet first-line anti-Leishmania drugs, always combined with allopurinol.",
-        "mechanism_ja": "5価アンチモン製剤。細胞内で3価アンチモンに還元され、リーシュマニア原虫の解糖系と脂肪酸β酸化を阻害してアマスティゴートのATPを枯渇させる。LeishVetガイドラインの第一選択2剤の一つで、常にアロプリノールと併用する。",
+        "name": "Hydrocortisone Sodium Succinate",
+        "name_ja": "ヒドロコルチゾンコハク酸エステル（ソル・コーテフ）",
+        "category": "corticosteroids",
+        "mechanism": "Water-soluble ester of cortisol providing physiological glucocorticoid AND appreciable mineralocorticoid activity — the reason it is preferred over dexamethasone for ongoing Addisonian crisis management (dexamethasone has no mineralocorticoid effect but does not cross-react with the cortisol assay, so it is used only to bridge until ACTH stimulation testing is done). Also used at physiological doses for critical-illness-related corticosteroid insufficiency (CIRCI) in septic shock.",
+        "mechanism_ja": "コルチゾールの水溶性エステルで、生理的グルココルチコイド作用に加え相応のミネラルコルチコイド作用を持つ — アジソンクリーゼの継続管理でデキサメタゾンより推奨される理由（デキサメタゾンはミネラルコルチコイド作用を欠くが、コルチゾール測定と交差しないためACTH刺激試験完了までのつなぎに用いる）。敗血症性ショックの相対的副腎皮質機能低下（CIRCI）にも生理量で使用。",
         "species_info": {
             "dog": {
                 "safe": True,
-                "dosage": "75-100 mg/kg SC q24h (or 40-75 mg/kg SC q12h) × 4-8 weeks, combined with allopurinol 10 mg/kg PO q12h for ≥6-12 months (LeishVet; Solano-Gallego 2011).",
-                "dosage_ja": "75-100 mg/kg 皮下 24時間毎（または 40-75 mg/kg 皮下 12時間毎）× 4-8週間。アロプリノール 10 mg/kg 経口 12時間毎（6-12ヶ月以上）と併用（LeishVet; Solano-Gallego 2011）。",
-                "notes": "Assess renal function BEFORE starting — nephrotoxicity potential; in dogs with significant renal disease (IRIS ≥2 with proteinuria) prefer allopurinol alone or miltefosine. Injection-site reactions (pain, swelling, abscessation) are common — rotate sites. Monitor renal values weekly during induction. Clinical cure ≠ parasitological cure — long-term serology/PCR monitoring for relapse.",
-                "notes_ja": "投与前に必ず腎機能を評価 — 腎毒性の可能性があり、有意な腎疾患（蛋白尿を伴うIRIS≥2）ではアロプリノール単独またはミルテホシンを優先。注射部位反応（疼痛・腫脹・膿瘍化）が多い — 部位をローテーション。導入期は週1回腎数値をモニタリング。臨床的治癒≠寄生虫学的治癒 — 血清抗体価/PCRで長期的に再発を監視。",
+                "dosage": "Addisonian crisis: 0.5 mg/kg/h IV CRI, or 2-4 mg/kg IV q6h, after fluid resuscitation; taper to oral replacement over 2-3 days. CIRCI in septic shock (vasopressor-refractory): 1 mg/kg/day CRI or divided q6h.",
+                "dosage_ja": "アジソンクリーゼ: 輸液蘇生後に0.5 mg/kg/h 静脈内CRI、または2-4 mg/kg IV q6h。2-3日かけて経口補充へ漸減。敗血症性ショックのCIRCI（昇圧薬抵抗性）: 1 mg/kg/日 CRIまたはq6h分割。",
+                "notes": "Cross-reacts with cortisol assays — draw the ACTH stimulation test BEFORE the first dose (use dexamethasone if steroid cover cannot wait). Continue IV fluids and monitor Na/K.",
+                "notes_ja": "コルチゾール測定と交差する — 初回投与前にACTH刺激試験の採血を済ませること（待てない場合はデキサメタゾンでつなぐ）。輸液を継続しNa/Kをモニタリング。",
             },
             "cat": {
                 "safe": True,
-                "dosage": "Not well established; allopurinol 10 mg/kg PO q12h is the feline first-line (LeishVet feline guidelines 2015). Antimonials reserved for refractory cases (5-50 mg/kg SC q24h reported).",
-                "dosage_ja": "確立された用量なし。猫の第一選択はアロプリノール 10 mg/kg 経口 12時間毎（LeishVet猫ガイドライン2015）。アンチモン製剤は難治例に限定（5-50 mg/kg 皮下 24時間毎の報告あり）。",
-                "notes": "Limited feline data; monitor renal function closely.",
-                "notes_ja": "猫でのデータは限定的。腎機能を厳重にモニタリング。",
+                "dosage": "Addisonian crisis (rare in cats): 0.5 mg/kg/h IV CRI or 2-4 mg/kg IV q6h after volume resuscitation.",
+                "dosage_ja": "アジソンクリーゼ（猫では稀）: 容量蘇生後に0.5 mg/kg/h CRIまたは2-4 mg/kg IV q6h。",
+                "notes": "Feline crises respond more slowly than canine — continue parenteral support 3-5 days.",
+                "notes_ja": "猫のクリーゼは犬より反応が遅い — 非経口サポートを3-5日継続。",
+            },
+            "ferret": {
+                "safe": True,
+                "dosage": "Hypoadrenocorticism after bilateral adrenalectomy: 1-2 mg/kg IV/IM initially, then oral glucocorticoid replacement.",
+                "dosage_ja": "両側副腎摘出後の副腎皮質機能低下: 初回1-2 mg/kg IV/IM、以後経口グルココルチコイド補充へ。",
+                "notes": "Anticipate crisis after bilateral adrenal surgery for ferret adrenal disease.",
+                "notes_ja": "フェレット副腎疾患の両側摘出術後はクリーゼを予期して準備。",
             },
         },
-        "side_effects": "Nephrotoxicity, injection-site pain/swelling/abscess, GI upset, lethargy; rare pancreatitis and cardiotoxicity (high cumulative doses)",
-        "side_effects_ja": "腎毒性、注射部位の疼痛・腫脹・膿瘍、消化器症状、元気消失。稀に膵炎・心毒性（高累積用量）",
-        "contraindications": "Significant renal insufficiency (use allopurinol alone or miltefosine instead), severe hepatic failure, pregnancy.",
-        "contraindications_ja": "有意な腎機能不全（アロプリノール単独またはミルテホシンを選択）、重度肝不全、妊娠。",
+        "side_effects": "PU/PD, polyphagia; GI ulceration at supraphysiological doses; hyperglycemia; immunosuppression with prolonged use; sodium retention (by design in Addisonian use)",
+        "side_effects_ja": "多飲多尿・多食。超生理量で消化管潰瘍。高血糖。長期使用で免疫抑制。ナトリウム貯留（アジソン病治療では意図した作用）",
+        "contraindications": "Systemic fungal infection without antifungal cover; do not use supraphysiological doses in septic shock (physiological CIRCI dosing only); GI ulceration/perforation",
+        "contraindications_ja": "抗真菌薬併用のない全身性真菌感染。敗血症性ショックでの超生理量投与は不可（CIRCIは生理量のみ）。消化管潰瘍・穿孔",
         "drug_interactions": [
             {
-                "drug": "Allopurinol",
-                "effect": "Standard combination for leishmaniosis — additive anti-Leishmania effect (LeishVet first-line protocol)",
-                "effect_ja": "リーシュマニア症の標準併用 — 抗リーシュマニア作用が相加的（LeishVet第一選択プロトコル）",
+                "drug": "NSAIDs",
+                "effect": "Combined GI ulceration risk — do not co-administer",
+                "severity": "major",
             },
             {
-                "drug": "Aminoglycosides",
-                "effect": "Additive nephrotoxicity — avoid concurrent use",
-                "effect_ja": "腎毒性が相加的 — 併用を避ける",
+                "drug": "Insulin",
+                "effect": "Glucocorticoid-induced insulin resistance raises insulin requirement",
+                "severity": "moderate",
+            },
+            {
+                "drug": "Desoxycorticosterone (DOCP)",
+                "effect": "Complementary — DOCP provides long-term mineralocorticoid replacement once crisis is controlled",
+                "severity": "info",
             },
         ],
     },
     {
-        "id": "human_ivig",
+        "id": "hypertonic_saline",
         "search_aliases": [
-            "ヒト免疫グロブリン",
-            "免疫グロブリン製剤",
-            "IVIG",
-            "hIVIG",
-            "静注用免疫グロブリン",
+            "高張食塩水",
+            "7.2%食塩水",
+            "7.5%食塩水",
+            "高張生理食塩水",
+            "Hypertonic saline",
         ],
-        "name": "Human Intravenous Immunoglobulin (hIVIG)",
-        "name_ja": "ヒト免疫グロブリン（IVIG）",
-        "category": "immunosuppressives",
-        "mechanism": "Pooled human IgG that blockades Fcγ receptors on mononuclear phagocytes, interrupting antibody-mediated destruction of erythrocytes/platelets; additional immune-complex clearance modulation and anti-idiotype effects. Provides rapid (24-72 h) interruption of immune-mediated cytopenias while conventional immunosuppression takes effect.",
-        "mechanism_ja": "プール化ヒトIgG製剤。単核貪食細胞系のFcγ受容体をブロックし、抗体を介した赤血球・血小板破壊を中断する。免疫複合体クリアランスの調節・抗イディオタイプ作用もある。従来の免疫抑制薬が効果を発揮するまでの間、免疫介在性血球減少を迅速（24-72時間）に中断する。",
+        "name": "Hypertonic Saline 7.2-7.5%",
+        "name_ja": "高張食塩水（7.2-7.5%）",
+        "category": "miscellaneous",
+        "mechanism": "Small-volume resuscitation fluid: the steep osmotic gradient pulls interstitial and intracellular water into the vasculature, expanding intravascular volume by ~4-5x the infused volume within minutes. In traumatic brain injury it reduces intracranial pressure by osmotically shrinking brain parenchyma while — unlike mannitol — supporting arterial pressure. Effect is transient (30-60 min); follow with isotonic crystalloids.",
+        "mechanism_ja": "少量蘇生輸液: 急峻な浸透圧勾配により間質・細胞内水分を血管内へ引き込み、数分で投与量の約4-5倍の血管内容量増加を得る。頭部外傷では脳実質を浸透圧的に縮小させ頭蓋内圧を下げつつ、マンニトールと異なり動脈圧を維持する。効果は一過性（30-60分）— 等張晶質液で後続する。",
         "species_info": {
             "dog": {
                 "safe": True,
-                "dosage": "0.5-1.5 g/kg IV over 6-12 h as a SINGLE infusion (refractory ITP: Whelan 2009 used 0.5 g/kg; IMHA rescue: 0.5-1.5 g/kg — Kellerman 1997, Spurlock 2011). Also reported for severe cutaneous drug reactions (SJS/TEN, 0.5-1 g/kg).",
-                "dosage_ja": "0.5-1.5 g/kg を6-12時間かけて緩徐に静注（単回）。難治性ITP: Whelan 2009は0.5 g/kgを使用。IMHAレスキュー: 0.5-1.5 g/kg（Kellerman 1997, Spurlock 2011）。重症皮膚薬物反応（SJS/TEN、0.5-1 g/kg）の報告もある。",
-                "notes": "Rescue therapy for IMHA/ITP refractory to glucocorticoids ± second-line immunosuppressants — NOT first-line. Single use only: anti-human-protein antibodies form after exposure, so repeat administration risks anaphylaxis. IMHA patients are already hypercoagulable — hIVIG may further increase thromboembolic risk; give concurrent thromboprophylaxis (clopidogrel/heparin). Monitor for volume overload (colloid osmotic load) and infusion reactions (slow/stop infusion, antihistamine).",
-                "notes_ja": "グルココルチコイド±第二選択免疫抑制薬に反応しないIMHA/ITPのレスキュー療法 — 第一選択ではない。単回使用に限る: 投与後に抗ヒト蛋白抗体が形成されるため、再投与はアナフィラキシーリスク。IMHA患者は既に過凝固状態 — hIVIGは血栓塞栓リスクをさらに高めうるため、抗血栓療法（クロピドグレル/ヘパリン）を併用。容量過負荷（膠質浸透圧負荷）と輸注反応をモニタリング（発現時は減速・中断、抗ヒスタミン薬）。",
+                "dosage": "Shock (incl. GDV pre-op): 4-7 mL/kg IV over 5-10 min, once. Traumatic brain injury / intracranial hypertension: 3-5 mL/kg IV over 10-15 min. Follow with isotonic crystalloids.",
+                "dosage_ja": "ショック（GDV術前含む）: 4-7 mL/kg を5-10分かけて単回静注。頭部外傷・頭蓋内圧亢進: 3-5 mL/kg を10-15分かけて静注。等張晶質液で後続。",
+                "notes": "Ideal when large-volume crystalloid is impractical (GDV: rapid pre-op stabilisation with small volume). Do not exceed 1 mL/kg/min (bradycardia/hypotension via vagal reflex).",
+                "notes_ja": "大量晶質液投与が困難な場面（GDVの術前迅速安定化等）に最適。1 mL/kg/分を超えない（迷走神経反射による徐脈・低血圧）。",
             },
             "cat": {
                 "safe": True,
-                "dosage": "0.5-1 g/kg IV over 6-8 h single infusion (limited case reports — pure red cell aplasia, refractory IMHA).",
-                "dosage_ja": "0.5-1 g/kg を6-8時間かけて静注（単回）。症例報告レベル（赤芽球癆・難治性IMHA）。",
-                "notes": "Feline evidence is anecdotal; reserve for refractory immune-mediated cytopenias after standard immunosuppression fails.",
-                "notes_ja": "猫でのエビデンスは逸話的。標準的免疫抑制が無効の難治性免疫介在性血球減少に限定する。",
+                "dosage": "Shock: 2-4 mL/kg IV over 10 min. TBI: 2-4 mL/kg over 10-15 min.",
+                "dosage_ja": "ショック: 2-4 mL/kg を10分かけて静注。頭部外傷: 2-4 mL/kg を10-15分。",
+                "notes": "Cats are volume-sensitive — use the lower end and reassess before repeating.",
+                "notes_ja": "猫は容量過負荷に敏感 — 低用量側を用い、再投与前に再評価。",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "Hypovolemic/endotoxemic shock: 2-4 mL/kg IV over 10-15 min (adult ~1-2 L of 7.2%), followed immediately by isotonic crystalloids at 2-4x the deficit.",
+                "dosage_ja": "循環血液量減少・エンドトキシンショック: 2-4 mL/kg を10-15分で静注（成馬で7.2%液 約1-2 L）。直後から等張晶質液を欠乏量の2-4倍で後続。",
+                "notes": "Standard field stabilisation for colic shock before referral — buys time when large-volume replacement is impossible in transit.",
+                "notes_ja": "疝痛ショックの搬送前安定化の標準 — 搬送中の大量輸液が不可能な状況で時間を稼ぐ。",
+            },
+            "rabbit": {
+                "safe": True,
+                "dosage": "Shock: 3 mL/kg IV/IO over 10 min, followed by isotonic crystalloids.",
+                "dosage_ja": "ショック: 3 mL/kg を10分かけてIV/IO投与し、等張晶質液で後続。",
+                "notes": "Useful when IV volume loading is limited by small patient size.",
+                "notes_ja": "小柄で大量輸液が難しい場合に有用。",
             },
         },
-        "side_effects": "Infusion reactions (facial swelling, urticaria, vomiting), thromboembolism (especially IMHA), volume overload, rare acute renal injury (sucrose-stabilized products)",
-        "side_effects_ja": "輸注反応（顔面腫脹・蕁麻疹・嘔吐）、血栓塞栓症（特にIMHA）、容量過負荷。稀に急性腎障害（ショ糖安定化製剤）",
-        "contraindications": "Prior hIVIG exposure (anti-human-protein sensitization — anaphylaxis risk on re-exposure). Uncontrolled hypercoagulable state without thromboprophylaxis. Volume-intolerant cardiac patients (slow infusion, reduce volume).",
-        "contraindications_ja": "hIVIG投与歴（抗ヒト蛋白感作 — 再投与でアナフィラキシーリスク）。抗血栓療法なしの制御不能な過凝固状態。容量負荷に耐えられない心疾患例（緩徐投与・減量）。",
+        "side_effects": "Transient hypernatremia/hyperchloremia; bradycardia and hypotension with rapid bolus (vagally mediated); phlebitis; rebound intracranial hypertension if used repeatedly without monitoring sodium",
+        "side_effects_ja": "一過性の高Na・高Cl血症。急速ボーラスで迷走神経性の徐脈・低血圧。静脈炎。Na監視なしの反復投与でリバウンド性頭蓋内圧亢進",
+        "contraindications": "Dehydration (interstitial water is the source of the volume effect — rehydrate first or concurrently), pre-existing hypernatremia, uncontrolled hemorrhage (relative — raises pressure before surgical control), cardiac disease with volume overload risk",
+        "contraindications_ja": "脱水（容量効果の源は間質水分 — 先行/同時の補水が必須）、既存の高Na血症、未制御の出血（相対的 — 外科的止血前の昇圧）、容量過負荷リスクのある心疾患",
         "drug_interactions": [
             {
-                "drug": "Prednisolone",
-                "effect": "Standard concurrent therapy — hIVIG bridges the 1-2 week lag of glucocorticoid immunosuppression",
-                "effect_ja": "標準的な併用 — グルココルチコイド免疫抑制の効果発現（1-2週）までをhIVIGが橋渡しする",
+                "drug": "Mannitol",
+                "effect": "Complementary osmotherapy for intracranial hypertension — hypertonic saline preferred when hypotensive",
+                "severity": "info",
             },
             {
-                "drug": "Clopidogrel",
-                "effect": "Recommended thromboprophylaxis when hIVIG is used in hypercoagulable IMHA patients",
-                "effect_ja": "過凝固状態のIMHA患者へのhIVIG使用時に推奨される血栓予防",
+                "drug": "Lactated Ringer's Solution",
+                "effect": "Required follow-on isotonic crystalloid after the transient volume effect",
+                "severity": "info",
             },
         ],
-    },
-    {
-        "id": "interferon_alpha",
-        "search_aliases": [
-            "インターフェロンアルファ",
-            "インターフェロンα",
-            "αインターフェロン",
-            "組換えαインターフェロン",
-            "ヒトインターフェロン",
-            "IFN-α",
-        ],
-        "name": "Interferon Alpha (Human Recombinant)",
-        "name_ja": "インターフェロンα（組換えヒト）",
-        "category": "antivirals",
-        "mechanism": "Type I interferon: binds the IFNAR receptor and induces antiviral effector proteins (2'5'-oligoadenylate synthetase, PKR) that degrade viral RNA and block viral protein synthesis; also enhances NK-cell and macrophage activity. Oral low-dose protocols act via oropharyngeal lymphoid immunomodulation rather than systemic antiviral levels.",
-        "mechanism_ja": "I型インターフェロン。IFNAR受容体に結合し抗ウイルスエフェクター蛋白（2'5'-オリゴアデニル酸合成酵素・PKR）を誘導してウイルスRNA分解・蛋白合成阻害を起こす。NK細胞・マクロファージ活性の増強作用もある。経口低用量プロトコルは全身の抗ウイルス濃度ではなく口腔咽頭リンパ組織の免疫調節を介して作用する。",
-        "species_info": {
-            "cat": {
-                "safe": True,
-                "dosage": "Oral low-dose: 30 IU/cat PO q24h on alternating weekly cycles (7 days on / 7 days off) as adjunct for FeLV/FIV-associated disease (Cummins 1988; Weiss 1991 — evidence mixed, McCaw 2001 found no benefit). High-dose SC (10⁴-10⁶ IU/kg) is limited by neutralizing antibody formation after 3-7 weeks.",
-                "dosage_ja": "経口低用量: 30 IU/頭 経口 24時間毎を週交代サイクル（7日投与/7日休薬）で、FeLV/FIV関連疾患の補助療法として（Cummins 1988; Weiss 1991 — エビデンスは賛否あり、McCaw 2001は効果を認めず）。高用量皮下投与（10⁴-10⁶ IU/kg）は3-7週で中和抗体が形成され効果が減弱する。",
-                "notes": "Feline interferon-omega (licensed in Japan/EU) is preferred where available — homologous protein, no neutralizing antibody problem. Human IFN-α is an economical adjunct when omega is unavailable. Supportive care and secondary-infection control remain the mainstay of retrovirus management.",
-                "notes_ja": "入手可能ならネコインターフェロンω（日本/EUで承認済み）を優先 — 同種蛋白のため中和抗体の問題がない。ヒトIFN-αはω入手不能時の安価な補助選択肢。レトロウイルス管理の主体は支持療法と二次感染対策であることに変わりはない。",
-            },
-            "bird": {
-                "safe": True,
-                "dosage": "10,000-100,000 IU/kg SC q24h (limited evidence; extrapolated) as adjunct for circovirus (PBFD) / polyomavirus infection (Stanford 2004 — interferon therapy for psittacine circovirus).",
-                "dosage_ja": "1-10万 IU/kg 皮下 24時間毎（限定的エビデンス・外挿）。サーコウイルス（PBFD）/ポリオーマウイルス感染の補助療法として（Stanford 2004 — オウム類サーコウイルスへのインターフェロン療法）。",
-                "notes": "No specific antiviral cures PBFD — therapy is supportive (nutrition, warmth, secondary-infection control, strict isolation/hygiene to protect the flock). Interferon is adjunctive with limited evidence; discuss euthanasia ethics for progressive PBFD in highly susceptible species.",
-                "notes_ja": "PBFDを治癒させる特異的抗ウイルス薬はない — 治療は支持療法（栄養・保温・二次感染対策・群を守る厳格な隔離/衛生管理）が主体。インターフェロンは限定的エビデンスの補助療法。感受性の高い種で進行性のPBFDでは安楽死の倫理的検討も説明する。",
-            },
-        },
-        "side_effects": "High-dose parenteral: fever, lethargy, myelosuppression (monitor CBC); neutralizing antibody formation (3-7 weeks) abolishes efficacy. Oral low-dose: minimal.",
-        "side_effects_ja": "高用量非経口投与: 発熱・元気消失・骨髄抑制（CBCモニタリング）。3-7週で中和抗体が形成され効果消失。経口低用量: ほぼなし",
-        "contraindications": "None significant at oral low dose. Avoid prolonged high-dose parenteral courses (antibody formation, myelosuppression).",
-        "contraindications_ja": "経口低用量では重大な禁忌なし。高用量非経口の長期投与は避ける（中和抗体形成・骨髄抑制）。",
-        "drug_interactions": [],
     },
 ]

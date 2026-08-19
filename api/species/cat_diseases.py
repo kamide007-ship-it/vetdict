@@ -1258,6 +1258,11 @@ DISEASES: List[Dict[str, Any]] = [
             "increased_appetite",
             "poor_coat",
             "heart_murmur",
+            # Increased (often nocturnal) vocalization is a documented sign of
+            # feline hyperthyroidism (AAFP Guidelines, Carney 2016) — without
+            # it the classic geriatric "夜中に大声で鳴く + 痩せてきた"
+            # complaint never ranked this diagnosis.
+            "vocalization_changes",
         },
         "description": "Hyperthyroidism is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "甲状腺ホルモンの過剰産生で、高齢猫で最も多い内分泌疾患です。",

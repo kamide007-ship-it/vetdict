@@ -309,3 +309,28 @@ def test_app_js_low_confidence_banner_pivots_to_guided_consultation():
     assert 'switchChatMode("guided")' in handler
     # switchChatMode("guided") starts the consultation for currentSpecies.
     assert "startGuidedConsultation()" in APP_JS
+
+
+def test_app_js_drug_detail_links_to_anesthesia_protocols():
+    """Anesthesia→drug navigation has existed since the ANES_AGENTS linkifier,
+    but the reverse was a dead end: a clinician reading midazolam in the drug
+    dictionary had no path to the protocols that use it. The drug detail must
+    render a drug→anesthesia jump for agents that appear in the protocol
+    tables, and the delegated handler must pre-fill the anesthesia search so
+    the landing list is already filtered to that drug."""
+    # Reverse-lookup helper against the ANES_AGENTS registry.
+    assert "function _anesQueryForDrug" in APP_JS
+    # Rendered inside the drug detail panel.
+    assert "drug-anes-protocols-link" in APP_JS
+    assert "_anesQueryForDrug(d.name" in APP_JS
+    # Delegated handler: switches view, pre-fills the search, re-renders when
+    # already loaded, and lands scrolled to the list.
+    handler = APP_JS.split('closest(".drug-anes-protocols-link")', 1)[1].split("\n    const diffBtn", 1)[0]
+    assert 'switchView("anesthesia")' in handler
+    assert "anesthesiaSearch" in handler
+    assert "anesProto.dataset.anesQuery" in handler
+    assert "renderAnesthesiaList()" in handler
+    # Abbreviation aliases (e.g. "dex", "mdz") must not drive containment
+    # matches — only en/ja aliases are consulted.
+    helper = APP_JS.split("function _anesQueryForDrug", 1)[1].split("\nfunction ", 1)[0]
+    assert "a.abbr" not in helper

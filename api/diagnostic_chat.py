@@ -682,6 +682,25 @@ def extract_symptoms_from_text(text: str) -> list:
         "pain": ["reluctance_to_move"],
         # "食べられない" resolves to difficulty_eating (species vocabularies).
         "difficulty_eating": ["loss_of_appetite"],
+        # "後ろ足がふらつく" resolves to hind_leg_weakness (species
+        # vocabularies); the legacy dog vocabulary carries pelvic-limb signs
+        # only as limping — without this bridge the phrase fell through to the
+        # shorter "ふらつく"→ataxia→tremors and orthopedic diseases never
+        # ranked for the classic hindlimb-weakness complaint.
+        "hind_leg_weakness": ["limping"],
+        "hind_limb_weakness": ["limping"],
+        # "立ち上がりにくい" (difficulty rising — the textbook osteoarthritis
+        # sign) resolves to difficulty_standing; the legacy dog vocabulary
+        # carries post-rest stiffness as its closest equivalent.
+        "difficulty_standing": ["stiffness"],
+        # "ぼーっとしている" resolves to staring (species vocabularies); in the
+        # legacy dog vocabulary the closest cognitive sign is disorientation
+        # (a CDS DISHA sign).
+        "staring": ["disorientation"],
+        # "夜鳴き" resolves to vocalization_changes (species vocabularies); in
+        # geriatric dogs night vocalization is a CDS DISHA sign whose closest
+        # legacy equivalent is anxiety.
+        "vocalization_changes": ["anxiety"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:
