@@ -52,6 +52,12 @@ SPECIES_PREVALENCE = {
         "Intestinal Parasites": "very_common",
         "Osteoarthritis": "very_common",
         "Pyoderma": "very_common",
+        # Pyotraumatic dermatitis — a top-10 canine presentation in humid
+        # summer months (Muller & Kirk 7th ed; Holm 2004, Vet Dermatol).
+        "Acute Moist Dermatitis (Hot Spot)": "common",
+        # Northern-breed keratinization disorder; classic but not common
+        # (White SD, JAVMA 2001; Colombini S, Vet Clin North Am 1999).
+        "Zinc-Responsive Dermatosis": "uncommon",
         "Mange (Demodex/Sarcoptes)": "very_common",
         # common — regular presentations
         "Urinary Tract Infection": "common",
@@ -1660,6 +1666,7 @@ JAPAN_REGIONAL_ADJUSTMENTS = {
         "Periodontal Disease": "very_common",  # Small breeds very popular in Japan
         "Patellar Luxation": "very_common",  # Small breed predominance in Japan
         "Brachycephalic Airway Syndrome": "common",  # French Bulldog #1 breed in Japan
+        "Acute Moist Dermatitis (Hot Spot)": "very_common",  # Hot humid summers (梅雨〜盛夏)
         "Leptospirosis": "common",  # High humidity, wildlife reservoirs
         # LESS common / absent in Japan
         "Salmon Poisoning Disease": "rare",  # Pacific NW North America only

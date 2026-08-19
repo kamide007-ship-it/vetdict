@@ -1758,6 +1758,29 @@ SYMPTOM_ALIASES = {
     "円形脱毛": "circular_hair_loss",
     # 移動を嫌がる（疼痛の非特異的サイン、草食小動物で重要）
     "歩きたがらない": "reluctance_to_move",
+    # --- 2026-08 ホットスポット/暑熱関連皮膚炎 ---
+    # 「暑がっている」は既存（→excessive_panting）。基本形と口語形を補完。
+    "暑がる": "excessive_panting",
+    "暑そうにしている": "excessive_panting",
+    # 湿潤性皮膚病変（ホットスポットの owner-reported 表現）。
+    # hot_spots はレガシー犬語彙のID — 他種では ID_SYNONYMS 経由で
+    # skin_lesions/skin_rashes にフォールバックする。
+    "皮膚がジュクジュク": "hot_spots",
+    "皮膚がじゅくじゅく": "hot_spots",
+    "ジュクジュクしている": "hot_spots",
+    "じゅくじゅくしている": "hot_spots",
+    "ホットスポット": "hot_spots",
+    "急に皮膚がただれた": "hot_spots",
+    # 連用形（〜赤く…と続く複合文）は既存の「皮膚が赤い」ではマッチしない
+    "皮膚が赤く": "skin_lesions",
+    # 「舐めている/舐めてる」（しきりに舐める・executive licking の口語形）
+    "舐めている": "excessive_licking",
+    "よく舐める": "excessive_licking",
+    # 発疹・湿疹・ブツブツ（皮疹の一般語が未収載だった）
+    "発疹": "skin_rashes",
+    "湿疹": "skin_rashes",
+    "皮膚にブツブツ": "skin_rashes",
+    "ブツブツができ": "skin_rashes",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

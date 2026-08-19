@@ -383,6 +383,16 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "reluctance_to_move": ["lameness_or_limping", "limping", "lethargy"],
     # Oral pain presenting as difficulty eating (dental/stomatitis complaints).
     "difficulty_eating": ["dropping_food", "dysphagia", "appetite_loss", "loss_of_appetite"],
+    # Moist erosive skin lesions ("ジュクジュク"): hot_spots is the legacy dog
+    # ID; other species fall back to their generic lesion vocabulary.
+    "hot_spots": ["skin_lesions", "skin_rashes", "skin_ulcers", "moist_dermatitis"],
+    # かさぶた ("かさぶたがある" alias resolves to crusting, which the dog
+    # vocabulary lacks — bridge to the lesion IDs so crusting complaints reach
+    # zinc-responsive dermatosis and pyoderma).
+    "crusting": ["crusty_skin", "skin_crusting", "skin_lesions", "skin_rashes"],
+    # 発疹/湿疹 resolve to the legacy skin_rashes ID; species vocabularies
+    # carry rashes under their generic lesion IDs.
+    "skin_rashes": ["skin_lesions", "skin_redness", "rash", "rashes"],
 }
 
 # Backwards-compat alias (some older imports use the private name).

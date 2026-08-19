@@ -416,6 +416,11 @@ class TestAnalyzeSymptoms:
         def _match_quality_tier(d):
             pct = d["match_percent"]
             cnt = d["match_count"]
+            # Excellent tier (2026-08): near-complete coverage on 3+ symptoms
+            # outranks the prevalence shuffle — a 96% hot-spot match must not
+            # sit below a 52% very_common allergy.
+            if pct >= 80 and cnt >= 3:
+                return -1
             if pct >= 50 or cnt >= 3:
                 return 0
             if pct >= 25 or cnt >= 2:

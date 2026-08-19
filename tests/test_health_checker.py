@@ -70,8 +70,8 @@ class TestDiseaseDatabase:
 
     def test_disease_count(self):
         assert (
-            len(DISEASES) == 69
-        )  # +anal_sac_disease, +corneal_ulcer, +osteoarthritis, +cognitive_dysfunction (2026-08 round-5 audit)
+            len(DISEASES) == 71
+        )  # +acute_moist_dermatitis (hot spot), +zinc_responsive_dermatosis (2026-08 clinician feedback)
 
     def test_all_diseases_have_required_fields(self):
         for d in DISEASES:

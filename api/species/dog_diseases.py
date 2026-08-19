@@ -179,6 +179,7 @@ _DISEASE_PREVALENCE: dict[str, str] = {
     "Allergic Dermatitis": "very_common",
     "Flea Allergy Dermatitis": "very_common",
     "Pyoderma": "very_common",
+    "Acute Moist Dermatitis (Hot Spot)": "common",
     "Ear Infection (Otitis)": "very_common",
     # -- 整形外科 --
     "Patellar Luxation": "very_common",
@@ -239,6 +240,8 @@ _DISEASE_PREVALENCE: dict[str, str] = {
     # ===== UNCOMMON (時折遭遇する疾患) =====
     "Megaesophagus": "uncommon",
     "Myasthenia Gravis": "uncommon",
+    "Zinc-Responsive Dermatosis": "uncommon",
+    "Zinc-Responsive Dermatosis - Syndrome I": "uncommon",
     "Pemphigus": "uncommon",
     "Systemic Lupus Erythematosus (SLE)": "uncommon",
     "Portosystemic Shunt (Liver Shunt)": "uncommon",
@@ -4103,7 +4106,9 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Zinc-Responsive Dermatosis",
         "name_ja": "亜鉛反応性皮膚症",
-        "symptoms": {"skin_redness", "dry_skin", "hair_loss"},
+        # skin_lesions = the hallmark mucocutaneous crusting/scaling — without it
+        # the classic "鼻の周りにかさぶた" complaint never reached this entry.
+        "symptoms": {"skin_redness", "dry_skin", "hair_loss", "skin_lesions"},
         "description": "Skin disease from zinc deficiency or malabsorption, common in Huskies and Malamutes.",
         "description_ja": "亜鉛欠乏または吸収障害による皮膚疾患で、ハスキーやマラミュートに多いです。",
         "urgency": "normal",
@@ -12943,6 +12948,39 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "onset_pattern": {"chronic"},
         "age_predisposition": {"adult"},
+    },
+    {
+        # 2026-08: one of the most common canine summer skin emergencies was
+        # absent from the DB entirely. Hot, humid weather + dense coat +
+        # moisture (swimming/rain) + a pruritic trigger → self-trauma →
+        # rapidly spreading moist surface pyoderma ("a hot dog becomes a hot
+        # spot"). Muller & Kirk's Small Animal Dermatology 7th ed; Holm BR et
+        # al. Vet Dermatol 2004.
+        "name": "Acute Moist Dermatitis (Hot Spot)",
+        "name_ja": "急性湿性皮膚炎（ホットスポット）",
+        "symptoms": {"itching", "skin_redness", "skin_lesions", "hair_loss", "pain_on_touch"},
+        "description": "Pyotraumatic dermatitis: a rapidly enlarging, intensely pruritic and painful moist erosive plaque produced by self-trauma, classically erupting within hours in hot humid weather in dense-coated dogs.",
+        "description_ja": "化膿性外傷性皮膚炎。自己外傷（掻く・舐める・咬む）により数時間で急速に拡大する、湿潤・びらん性で強い痒みと痛みを伴う局面病変。高温多湿の季節に密な被毛の犬種で好発します。",
+        "pathophysiology": "An underlying pruritic or painful trigger (flea-bite hypersensitivity most commonly, otitis externa, atopic dermatitis, anal sac disease, poor grooming) initiates focal self-trauma. Maceration of the skin surface under a dense, moisture-retaining coat allows rapid surface bacterial overgrowth (Staphylococcus pseudintermedius), creating an exudative erosion that expands within hours. In some dogs (Golden Retriever, St. Bernard, Rottweiler) the process extends into the follicles as pyotraumatic folliculitis/furunculosis — a true deep pyoderma with satellite papules that requires systemic antibiotics.",
+        "pathophysiology_ja": "基礎にある掻痒・疼痛トリガー（最多はノミ刺咬過敏、ほか外耳炎・アトピー性皮膚炎・肛門嚢疾患・被毛の手入れ不足）が局所の自己外傷を誘発。高温多湿下で水分を保持する密な被毛の下で皮膚表面が浸軟し、Staphylococcus pseudintermedius の表在性過剰増殖が起こり、数時間で拡大する滲出性びらんを形成する。一部の犬（ゴールデン・レトリバー、セント・バーナード、ロットワイラー）では毛包内に波及し化膿性外傷性毛包炎・癤症（衛星状丘疹を伴う真の深在性膿皮症）となり、全身性抗菌薬が必要になる。",
+        "causes": "Hot humid weather, dense double coat, coat moisture (swimming, bathing, rain), and an underlying pruritic trigger — flea allergy dermatitis first, then otitis externa, atopy, anal sacculitis. Heat itself is a classic precipitant: an overheated dog scratches and licks, and the macerated site converts to a hot spot within hours.",
+        "causes_ja": "高温多湿の気候、密なダブルコート、被毛の湿り（水泳・シャンプー後の生乾き・雨）、および基礎の掻痒トリガー（第一にノミアレルギー性皮膚炎、次いで外耳炎・アトピー・肛門嚢炎）。暑さ自体が古典的な誘因で、暑がって掻く・舐めるうちに浸軟部が数時間でホットスポット化する。",
+        "prevention": "Year-round isoxazoline flea control, thorough drying after swimming/bathing, summer coat care (undercoat removal — never shave to the skin), and prompt management of otitis/atopy. Cooling management for heat-intolerant dense-coated dogs in humid summers.",
+        "prevention_ja": "通年のイソオキサゾリン系ノミ予防、水泳・シャンプー後の完全乾燥、夏の被毛ケア（アンダーコート除去 — 皮膚までの丸刈りは不可）、外耳炎・アトピーの早期管理。高温多湿の夏は暑がりの厚被毛犬種の冷却管理も予防になる。",
+        "urgency": "moderate",
+        "treatment": "Clip widely and clean with 2-4% chlorhexidine; topical hydrocortisone aceponate spray or steroid-antibiotic combination q12-24h. Short anti-pruritic course (prednisolone 0.5-1 mg/kg PO q24h 3-7 days, or oclacitinib) breaks the itch-trauma cycle. Elizabethan collar. Systemic antibiotics (cephalexin 22-30 mg/kg PO q12h, 3-4 weeks) ONLY for pyotraumatic folliculitis (satellite papules/pustules, thickened plaque) — superficial hot spots do not need them. Always identify and treat the trigger (flea control for every case).",
+        "treatment_ja": "病変周囲を広くクリッピングし2-4%クロルヘキシジンで洗浄。外用はヒドロコルチゾンアセポネートスプレーまたはステロイド・抗菌薬配合剤 q12-24h。掻痒-外傷サイクルの遮断に短期抗掻痒療法（プレドニゾロン 0.5-1 mg/kg PO q24h×3-7日、またはオクラシチニブ）。エリザベスカラー装着。全身性抗菌薬（セファレキシン 22-30 mg/kg PO q12h×3-4週）は化膿性外傷性毛包炎（衛星状丘疹・膿疱、肥厚局面）の場合のみ — 表在性ホットスポットには不要。全例でトリガーの同定と治療（ノミ予防は必須）。",
+        "prognosis": "Excellent: superficial lesions resolve in 3-7 days with clipping, topical therapy and itch control. Recurrence is common when the underlying trigger (fleas, otitis, atopy) is left unmanaged; the deep folliculitis variant needs 3-4 weeks of systemic antibiotics.",
+        "prognosis_ja": "予後良好: 表在性病変はクリッピング・外用・掻痒管理で3-7日で治癒。基礎トリガー（ノミ・外耳炎・アトピー）未管理では再発が多い。深在性毛包炎型は3-4週の全身性抗菌薬を要する。",
+        "clinical_signs": "Acute onset (often overnight), rapidly enlarging, sharply demarcated moist erythematous erosion with matted overlying hair and purulent exudate; intensely pruritic and painful. Typical sites: cheek/neck (otitis-associated), dorsal rump and tail base (flea-associated), lateral thigh. Satellite papules at the margin indicate the deep pyotraumatic folliculitis variant.",
+        "clinical_signs_ja": "急性発症（一晩で出現することが多い）、急速に拡大する境界明瞭な湿潤性紅斑・びらんで、被毛の固着と膿性滲出物を伴い、強い掻痒と疼痛を示す。好発部位: 頬・頸部（外耳炎関連）、腰背部・尾根部（ノミ関連）、大腿外側。辺縁の衛星状丘疹は深在性の化膿性外傷性毛包炎型を示唆する。",
+        "diagnosis": "Clinical appearance and history (season, coat, moisture, fleas). Cytology of exudate (degenerate neutrophils, cocci). Palpate for plaque thickening and inspect margins for satellite papules to distinguish superficial from deep (folliculitis) forms. Flea combing; check ears and anal sacs for the trigger.",
+        "diagnosis_ja": "臨床像と病歴（季節・被毛・湿り・ノミ）で診断。滲出物の細胞診（変性好中球・球菌）。局面の肥厚触診と辺縁の衛星状丘疹の有無で表在型と深在型（毛包炎）を鑑別。ノミ取り櫛検査、トリガー検索として耳と肛門嚢の検査。",
+        "transmission": "Not contagious. Reflects the individual dog's coat, climate and underlying pruritic disease.",
+        "transmission_ja": "伝染性はない。個体の被毛・気候・基礎の掻痒性疾患を反映する。",
+        "recommended_tests": ["skin_cytology", "flea_combing", "otoscopy"],
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"young_adult", "adult"},
     },
 ]
 

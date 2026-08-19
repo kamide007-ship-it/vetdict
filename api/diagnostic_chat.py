@@ -1096,7 +1096,13 @@ def match_symptoms_to_diseases(
             negative_penalty = max(negative_penalty, 0.5)
 
         prevalence_mult = _PREVALENCE_MULTIPLIER.get(disease.get("prevalence_tier", ""), 1.0)
-        composite = min(base_score * cluster_boost * negative_penalty * prevalence_mult, 1.0)
+        # Display score is capped at 1.0, but the SORT must use the uncapped
+        # value — otherwise every disease whose boosted product exceeds 1.0
+        # collapses into an insertion-order tie and a pathognomonic-cluster
+        # boost can never lift its target above a very_common competitor
+        # (same fix as disease_matcher's _rank_score, 2026-08).
+        uncapped = base_score * cluster_boost * negative_penalty * prevalence_mult
+        composite = min(uncapped, 1.0)
 
         # Logistic confidence calibration (same curve as health_checker)
         raw_logistic = 1.0 / (1.0 + math.exp(-6.0 * (composite - 0.4)))
@@ -1125,10 +1131,13 @@ def match_symptoms_to_diseases(
                     "negative_penalty": round(negative_penalty, 3),
                     "prevalence_mult": prevalence_mult,
                 },
+                "_rank_score": uncapped,
             }
         )
 
-    matches.sort(key=lambda m: m["similarity_score"], reverse=True)
+    matches.sort(key=lambda m: m["_rank_score"], reverse=True)
+    for m in matches:
+        m.pop("_rank_score", None)
     return matches
 
 
