@@ -431,8 +431,18 @@ def _match_species_symptoms_to_diseases(
     _group_weights = [max(_compute_weight(s) for s in group) for group in _source_groups]
     total_user_weight = sum(_group_weights)
 
+    # Clone-set guard: supplementary entries whose symptom set is a >=5-way
+    # copy-paste clone are excluded from matching — the set is wrong for
+    # almost every member and steers common complaints toward obscure
+    # diseases (see helpers.unreliable_clone_set_names).
+    from api.species.helpers import unreliable_clone_set_names
+
+    _unreliable = unreliable_clone_set_names(diseases, species)
+
     matches = []
     for disease in diseases:
+        if disease.get("name", "") in _unreliable:
+            continue
         disease_symptoms = set(disease.get("symptoms", set()))
         if not disease_symptoms:
             continue

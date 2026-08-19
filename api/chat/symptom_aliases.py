@@ -1781,6 +1781,16 @@ SYMPTOM_ALIASES = {
     "湿疹": "skin_rashes",
     "皮膚にブツブツ": "skin_rashes",
     "ブツブツができ": "skin_rashes",
+    # --- 2026-08 稀少疾患乗っ取り監査 ---
+    # 低体温・擬似冬眠（ハムスター/ハリネズミの torpor 主訴が抽出ゼロだった）。
+    # cold_body 等は該当種の語彙にのみ存在 — 他種では抽出段階で安全に落ちる。
+    "体が冷たい": "cold_body",
+    "体が冷たくなって": "cold_body",
+    "呼吸がゆっくり": "slow_breathing",
+    "呼吸が遅い": "slow_breathing",
+    "反応がない": "unresponsiveness",
+    "反応が薄い": "unresponsiveness",
+    "動かないが息はしている": "unresponsiveness",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---
