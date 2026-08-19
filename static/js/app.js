@@ -2606,6 +2606,20 @@ function closeModalA11y(modal){
   }
 }
 
+/* Product page URLs on caninevet.jp — mirrors api/data/sponsor_adjuncts.PRODUCT_URLS
+   (consistency pinned by tests/test_ecvn_pr_label.py). Tapping a product name
+   in the sponsor block lands directly on its own product page. */
+const ECVN_PRODUCT_URLS={
+  "For Joint":"https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/for-joint/",
+  "For Antioxidant":"https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/for-antioxidant-asta-melon-vitamine-cysteine/",
+  "MSM+アミノコンプリート":"https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/msm-%E3%82%A2%E3%83%9F%E3%83%8E%E3%82%B3%E3%83%B3%E3%83%97%E3%83%AA%E3%83%BC%E3%83%88/",
+  "NMNミトコンドリアアシスト":"https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/nmn-%E3%83%9F%E3%83%88%E3%82%B3%E3%83%B3%E3%83%89%E3%83%AA%E3%82%A2%E3%82%A2%E3%82%B7%E3%82%B9%E3%83%88/",
+  "CPパウダー":"https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/prebiotics-probiotocs-%E3%82%B5%E3%82%A4%E3%83%AA%E3%82%A6%E3%83%A0/",
+  "Relax & CBD":"https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/canine-vet-relax-cbd/",
+  "Protain":"https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/canine-vet-protain/",
+  "Booster & Relax":"https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/canine-vet-booster-relax/",
+  "カミデミルク":"https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/%E3%82%AB%E3%83%9F%E3%83%87%E3%83%9F%E3%83%AB%E3%82%AF-1kg/"
+};
 function renderTreatmentWithAdjunct(text){
   const raw=String(text??"");
   const marker="[ECVN:Block]";
@@ -2615,22 +2629,33 @@ function renderTreatmentWithAdjunct(text){
   let adjunct=raw.slice(idx+marker.length).replace(/^\s+/,"");
   // Drop the data-side header line (【…】 / […]) — the UI supplies its own PR label.
   adjunct=adjunct.replace(/^\s*[【\[][^\n]*\n?/,"").replace(/^\s+/,"");
-  const adjHtml=escapeHtml(adjunct).replace(
+  let adjHtml=escapeHtml(adjunct).replace(
     /caninevet\.jp/g,
-    '<a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer">caninevet.jp</a>'
+    '<a href="https://www.caninevet.jp/" target="_blank" rel="sponsored noopener noreferrer">caninevet.jp</a>'
   );
+  /* Linkify each product name to its caninevet.jp product page (longest name
+     first so e.g. "Booster & Relax" is never split by a shorter key). */
+  const _pnames=Object.keys(ECVN_PRODUCT_URLS).sort((a,b)=>b.length-a.length);
+  for(const pn of _pnames){
+    const esc=escapeHtml(pn);
+    if(adjHtml.indexOf(esc)===-1)continue;
+    adjHtml=adjHtml.split(esc).join(`<a href="${ECVN_PRODUCT_URLS[pn]}" target="_blank" rel="sponsored noopener noreferrer">${esc}</a>`);
+  }
   const mainHtml=main?escapeHtml(main):"";
   const en=(typeof currentLang!=="undefined"&&currentLang==="en");
-  const labelTxt=en?"PR · Sponsored (own product)":"PR・自社製品";
+  const labelTxt=en?"PR · Sponsored (adjunct options)":"PR・自社製品（補助療法オプション）";
   const disclaimer=en
     ?"The following is a manufacturer's product promotion, not standard evidence-based treatment."
     :"以下は自社製品の紹介（広告）です。標準治療・エビデンスに基づく治療ではありません。";
   const aria=en?"Sponsored product information (advertisement)":"自社製品の広告（PR）";
-  const vendorLink='<a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer">Equine &amp; Canine Vet Nutrition</a>';
-  return `${mainHtml}<div class="ecvn-adjunct-block" role="complementary" aria-label="${aria}">`
-    +`<div class="ecvn-adjunct-label"><span class="ecvn-pr-badge">PR</span>${escapeHtml(labelTxt)} · ${vendorLink}</div>`
-    +`<div class="ecvn-adjunct-disclaimer">${escapeHtml(disclaimer)}</div>`
-    +`<div class="ecvn-adjunct-body">${adjHtml}</div></div>`;
+  const vendorLink='<a href="https://www.caninevet.jp/" target="_blank" rel="sponsored noopener noreferrer">Equine &amp; Canine Vet Nutrition</a>';
+  /* Collapsed by default (<details>): the sponsor note must never compete
+     with the treatment protocol or clutter search/reading flows — one tap on
+     the compact PR summary expands it, and each product links to its page. */
+  return `${mainHtml}<details class="ecvn-adjunct-block" role="complementary" aria-label="${aria}">`
+    +`<summary class="ecvn-adjunct-label"><span class="ecvn-pr-badge">PR</span>${escapeHtml(labelTxt)}</summary>`
+    +`<div class="ecvn-adjunct-disclaimer">${escapeHtml(disclaimer)} · ${vendorLink}</div>`
+    +`<div class="ecvn-adjunct-body">${adjHtml}</div></details>`;
 }
 
 // Cache of fetched drug-disease results keyed by `${species}::${diseaseName}::${lang}`
