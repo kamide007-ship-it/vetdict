@@ -3000,3 +3000,32 @@ katakana トークン頻度監査（第6回スイープ、実マッチャー突�
 ### 次セッション候補
 - supplementary の <5共有グループ（266グループ）の漸進的キュレート
 - モジュール側クローンファミリーの鑑別力向上（同一セット内は品種/年齢/発症様式でしか差が付かない）
+
+## 2026-08セッション（第18弾: ECVNスポンサーブロックの控えめ化 + 製品別リンク導線）
+
+### 背景（開発者からの直接フィードバック）
+「スポンサーのサプリメントの項目 — 目立たせすぎず、他の検索時の邪魔にもなるので、
+クリックしたらこちら（caninevet.jp）の各リンクに飛べるように」
+
+### 変更内容
+- **デフォルト折りたたみ化**: ECVN補助療法ブロックを `<details>`/`<summary>` に変更。
+  閉時はコンパクトなPRラベル1行（「PR・自社製品（補助療法オプション）▸」）のみ表示され、
+  治療プロトコルの読解・結果スキャンを妨げない。タップで展開
+- **製品別ダイレクトリンク**: `PRODUCT_URLS`（api/data/sponsor_adjuncts.py、正準マップ）を新設し、
+  ブロック本文の9製品名（For Joint / For Antioxidant / MSM+アミノコンプリート /
+  NMNミトコンドリアアシスト / CPパウダー / Relax & CBD / Protain / Booster & Relax /
+  カミデミルク）を各 caninevet.jp 製品ページへの `<a>` に変換（percent-encoded URL、
+  `rel="sponsored noopener noreferrer"` — 有償リンクのGoogleガイドライン準拠）
+- **両配信パスを同期**: SPA（app.js renderTreatmentWithAdjunct、ECVN_PRODUCT_URLS ミラー）+
+  SEOページ（vetdict_api._render_treatment_adjunct_html、PRODUCT_URLS import）。
+  マップの一致はテストで固定（app.js が全URLを含むことを検証）
+- **検索汚染の確認**: 疾患ブラウザ検索は name/description のみ対象（treatment 非対象）で
+  ECVN本文は検索にヒットしない、関連薬品チップのECVN断片は既存ストップリストで遮断済みを確認
+- CSS: summary のカスタム開閉マーカー（▸/回転）、閉時の控えめな背景・パディング
+- PRラベル・免責文言（「標準治療・エビデンスに基づく治療ではありません」）は維持
+
+### テスト
+- tests/test_ecvn_pr_label.py に +2件（details折りたたみ+製品リンク+レジストリ網羅、
+  app.js のURLマップミラー検証）。既存のPRラベル/免責/マーカー非漏出テストは全て維持
+- フルテストスイート 3,937件合格、ruff clean
+- ServiceWorker: CACHE_NAME v120 → **v121**

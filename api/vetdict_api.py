@@ -650,19 +650,38 @@ def _render_treatment_adjunct_html(text):
     adjunct = _re.sub(r"^\s*[【\[][^\n]*\n?", "", adjunct).lstrip()
     adj_html = str(escape(adjunct)).replace(
         "caninevet.jp",
-        '<a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer">caninevet.jp</a>',
+        '<a href="https://www.caninevet.jp/" target="_blank" rel="sponsored noopener noreferrer">caninevet.jp</a>',
     )
+    # Each product name links straight to its caninevet.jp product page —
+    # the block itself stays collapsed, so the promotion never crowds the
+    # treatment text but one tap lands on the product.
+    try:
+        from api.data.sponsor_adjuncts import PRODUCT_URLS
+    except ImportError:
+        PRODUCT_URLS = {}
+    for _pname in sorted(PRODUCT_URLS, key=len, reverse=True):
+        _esc = str(escape(_pname))
+        if _esc in adj_html:
+            adj_html = adj_html.replace(
+                _esc,
+                '<a href="{}" target="_blank" rel="sponsored noopener noreferrer">{}</a>'.format(
+                    PRODUCT_URLS[_pname], _esc
+                ),
+            )
     main_html = str(escape(main))
     vendor_link = (
-        '<a href="https://www.caninevet.jp/" target="_blank" rel="noopener noreferrer">'
+        '<a href="https://www.caninevet.jp/" target="_blank" rel="sponsored noopener noreferrer">'
         "Equine &amp; Canine Vet Nutrition</a>"
     )
+    # Collapsed by default (<details>): the sponsor note must not compete with
+    # the treatment protocol; readers who want it expand it with one tap.
     block = (
-        '<div class="ecvn-adjunct-block" role="complementary" aria-label="自社製品の広告（PR）">'
-        '<div class="ecvn-adjunct-label"><span class="ecvn-pr-badge">PR</span>PR・自社製品 · ' + vendor_link + "</div>"
+        '<details class="ecvn-adjunct-block" role="complementary" aria-label="自社製品の広告（PR）">'
+        '<summary class="ecvn-adjunct-label"><span class="ecvn-pr-badge">PR</span>'
+        "PR・自社製品（補助療法オプション）</summary>"
         '<div class="ecvn-adjunct-disclaimer">以下は自社製品の紹介（広告）です。'
-        "標準治療・エビデンスに基づく治療ではありません。</div>"
-        '<div class="ecvn-adjunct-body">' + adj_html + "</div></div>"
+        "標準治療・エビデンスに基づく治療ではありません。 · " + vendor_link + "</div>"
+        '<div class="ecvn-adjunct-body">' + adj_html + "</div></details>"
     )
     return Markup("<p>{}</p>".format(main_html) + block)
 

@@ -16,6 +16,24 @@ import re
 from typing import Any, Dict, List
 
 # ---------------------------------------------------------------------------
+# Product page URLs on caninevet.jp (percent-encoded paths)
+# ---------------------------------------------------------------------------
+# Canonical map used by both renderers (app.js mirrors these; the server-side
+# renderer in vetdict_api imports it) so a product name in the [ECVN:Block]
+# body becomes a direct link to its own product page instead of a dead label.
+PRODUCT_URLS: Dict[str, str] = {
+    "For Joint": "https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/for-joint/",
+    "For Antioxidant": "https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/for-antioxidant-asta-melon-vitamine-cysteine/",
+    "MSM+アミノコンプリート": "https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/msm-%E3%82%A2%E3%83%9F%E3%83%8E%E3%82%B3%E3%83%B3%E3%83%97%E3%83%AA%E3%83%BC%E3%83%88/",
+    "NMNミトコンドリアアシスト": "https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/nmn-%E3%83%9F%E3%83%88%E3%82%B3%E3%83%B3%E3%83%89%E3%83%AA%E3%82%A2%E3%82%A2%E3%82%B7%E3%82%B9%E3%83%88/",
+    "CPパウダー": "https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/prebiotics-probiotocs-%E3%82%B5%E3%82%A4%E3%83%AA%E3%82%A6%E3%83%A0/",
+    "Relax & CBD": "https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/canine-vet-relax-cbd/",
+    "Protain": "https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/canine-vet-protain/",
+    "Booster & Relax": "https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/canine-vet-booster-relax/",
+    "カミデミルク": "https://www.caninevet.jp/canine%E3%82%B5%E3%83%97%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88/%E3%82%AB%E3%83%9F%E3%83%87%E3%83%9F%E3%83%AB%E3%82%AF-1kg/",
+}
+
+# ---------------------------------------------------------------------------
 # Disease-name keyword patterns
 # ---------------------------------------------------------------------------
 
