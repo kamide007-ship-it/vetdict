@@ -1725,3 +1725,74 @@ def test_digit_boundary_guard_b1_alias_never_chips_b12_text():
 
     b1_ids = [x["id"] for x in find_drugs_in_text("ビタミンB1（チアミン）25-50 mg IM")]
     assert "thiamine_b1" in b1_ids, f"true B1 text must still resolve, got {b1_ids}"
+
+
+def test_batch40_ethambutol_and_dihydrostreptomycin():
+    """2026-08 sweep #8 (referenced-but-absent): the avian/reptile/dog/cat
+    mycobacteriosis multi-drug protocols name ethambutol (13 disease entries),
+    and the classic canine brucellosis regimen names dihydrostreptomycin
+    10 mg/kg IM (9 entries) — yet neither was carried in the formulary."""
+    from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+    etb = get_drug_by_id("ethambutol")
+    assert etb is not None, "ethambutol missing from formulary"
+    for sp in ("dog", "cat", "bird", "reptile"):
+        info = etb["species_info"][sp]
+        assert info["safe"] is True
+        assert info["dosage"].strip() and info["dosage_ja"].strip()
+    # Never monotherapy — the defining resistance-prevention fact.
+    assert "単剤" in etb["contraindications_ja"]
+    assert "monotherapy" in etb["contraindications"].lower()
+    # Avian dosing per Carpenter: 20-30 mg/kg within multi-drug protocols.
+    assert "20-30 mg/kg" in etb["species_info"]["bird"]["dosage"]
+
+    dsm = get_drug_by_id("dihydrostreptomycin")
+    assert dsm is not None, "dihydrostreptomycin missing from formulary"
+    dog = dsm["species_info"]["dog"]
+    assert "10 mg/kg" in dog["dosage"] and "doxycycline" in dog["dosage"].lower()
+    assert "ドキシサイクリン" in dog["dosage_ja"]
+    # Defining safety fact: the most vestibulotoxic aminoglycoside.
+    assert "前庭毒性" in dsm["side_effects_ja"]
+    assert "vestibulotoxic" in dsm["side_effects"].lower()
+
+    # Both resolve from actual treatment-text spellings, including the
+    # bare-streptomycin form the brucellosis protocols use.
+    for text, want in {
+        "エタンブトール 30 mg/kg PO q24h": "ethambutol",
+        "ジヒドロストレプトマイシン（10 mg/kg IM q12h×7日）": "dihydrostreptomycin",
+        "ストレプトマイシン併用": "dihydrostreptomycin",
+    }.items():
+        ids = [x["id"] for x in find_drugs_in_text(text)]
+        assert want in ids, f"{text!r} must resolve to {want}, got {ids}"
+
+
+def test_no_garbled_ethiobutol_in_disease_content():
+    """The avian TB triple-therapy protocols carried a garbled drug name
+    エチオブトール (a corruption of エタンブトール / ethambutol) in the bird and
+    parrot modules and the JSON overlay. The corruption may not return."""
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    for rel in (
+        "diseases_all_species.json",
+        "api/species/bird_diseases.py",
+        "api/species/parrot_diseases.py",
+        "scripts/template_elimination/template_content_library.py",
+    ):
+        raw = (root / rel).read_text(encoding="utf-8")
+        assert "エチオブトール" not in raw, f"garbled ethambutol name found in {rel}"
+
+
+def test_sweep8_variant_aliases_resolve():
+    """アティパメゾール (ティ variant of アチパメゾール, emergency-kit texts) and
+    bare ミルベマイシン (canonical name carries the オキシム suffix) must resolve
+    through the katakana variant-alias registry."""
+    from api.drug_dictionary import find_drugs_in_text
+
+    cases = {
+        "緊急機材：アティパメゾール（α2拮抗薬）": "atipamezole",
+        "ミルベマイシンA錠 0.5-1 mg/kg PO 月1回": "milbemycin_oxime",
+    }
+    for text, want in cases.items():
+        ids = [x["id"] for x in find_drugs_in_text(text)]
+        assert want in ids, f"{text!r} must resolve to {want}, got {ids}"

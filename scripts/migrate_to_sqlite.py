@@ -340,8 +340,30 @@ def migrate_json_enrichments(conn) -> int:
         return value
 
     # Iterate over all diseases currently in SQLite and enrich where names match.
-    rows = conn.execute("SELECT id, species, name FROM diseases").fetchall()
+    rows = conn.execute("SELECT id, species, name, treatment, treatment_ja FROM diseases").fetchall()
     count = 0
+
+    # Generic-workup treatment boilerplate from an old enrichment run
+    # ("…正確な臨床評価…から治療方針を決定…"). The runtime overlay path
+    # (helpers.enrich_diseases) never replaces informative module content, but
+    # this COALESCE-based path did — a curated module dose protocol (e.g. the
+    # guinea-pig ileus fluid/analgesia plan) was being clobbered by the JSON
+    # boilerplate. Mirror the runtime semantics for the treatment fields:
+    # boilerplate may FILL an empty/boilerplate row, never REPLACE curated text.
+    _WORKUP_TEMPLATE_MARKS = (
+        "正確な臨床評価（病歴、身体検査、CBC・生化学、画像）から治療方針を決定",
+        "accurate clinical evaluation (history, physical exam",
+    )
+
+    def _guard_treatment(new_val: str | None, existing: str | None) -> str | None:
+        if not new_val or not isinstance(new_val, str):
+            return new_val
+        if not any(m in new_val for m in _WORKUP_TEMPLATE_MARKS):
+            return new_val
+        cur = (existing or "").strip()
+        if cur and not any(m in cur for m in _WORKUP_TEMPLATE_MARKS):
+            return None  # keep the informative existing text
+        return new_val
 
     def _extract_ja_en(field_val):
         if isinstance(field_val, dict):
@@ -369,6 +391,7 @@ def migrate_json_enrichments(conn) -> int:
 
     for row in rows:
         db_id, db_species, db_name = row["id"], row["species"], row["name"]
+        db_treatment, db_treatment_ja = row["treatment"], row["treatment_ja"]
         # First try species-specific match — this prevents reptile content
         # from being applied to a cat row (and vice versa).
         entry = json_by_species_name.get((db_species, _norm(db_name)))
@@ -431,8 +454,8 @@ def migrate_json_enrichments(conn) -> int:
                 _ensure_string_or_none(entry.get("pathophysiology_ja")),
                 _clean(entry.get("causes")),
                 _clean(entry.get("causes_ja")),
-                _ensure_string_or_none(treatment_en or entry.get("treatment")),
-                _ensure_string_or_none(treatment_ja or entry.get("treatment_ja")),
+                _guard_treatment(_ensure_string_or_none(treatment_en or entry.get("treatment")), db_treatment),
+                _guard_treatment(_ensure_string_or_none(treatment_ja or entry.get("treatment_ja")), db_treatment_ja),
                 _ensure_string_or_none(prevention_en or entry.get("prevention")),
                 _ensure_string_or_none(prevention_ja or entry.get("prevention_ja")),
                 _clean(_ensure_string_or_none(prognosis_en or entry.get("prognosis"))),

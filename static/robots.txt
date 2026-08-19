@@ -9,7 +9,7 @@ Allow: /static/js/
 Allow: /static/css/
 Allow: /static/manifest.json
 
-# Disease database pages (7,000+ diseases)
+# Disease database pages (6,400+ diseases)
 # /diseases — hub page
 # /diseases/<species> — species index
 # /diseases/<species>/<disease> — individual disease

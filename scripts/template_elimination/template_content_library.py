@@ -1029,7 +1029,7 @@ def gen_mycobacteriosis(species: str, name_ja: str) -> Optional[dict]:
             "treatment_ja": (
                 "鳥類マイコバクテリウム症（鳥結核, M. avium）: 治療困難で再発が多い。"
                 "① 治療プロトコル: アジスロマイシン 40-50 mg/kg PO q24h + リファンピシン 45 mg/kg PO q24h + "
-                "エチオブトール 30 mg/kg PO q24h、最低6ヶ月（多くは12ヶ月以上）。"
+                "エタンブトール 30 mg/kg PO q24h、最低6ヶ月（多くは12ヶ月以上）。"
                 "② 飼養禁止：陽性個体は他鳥への感染源となるため隔離・治療または安楽死を検討。"
                 "③ 環境消毒は3%ホルムアルデヒドまたはエタノール70%（芽胞耐性高い）。"
                 "④ ⚠免疫不全者（HIV+、化学療法中）はM. avium感染リスク—家族曝露を確認。" + _avian_supportive(species)
