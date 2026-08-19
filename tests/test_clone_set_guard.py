@@ -37,18 +37,14 @@ class TestGuardUnit:
         assert unreliable_clone_set_names(diseases, "dogtest") == frozenset()
 
     def test_supplementary_clones_suppressed_and_whitelist_honored(self):
-        diseases = [
-            {"name": f"Clone{i}", "symptoms": {"x", "y"}, "_supplementary": True} for i in range(6)
-        ]
+        diseases = [{"name": f"Clone{i}", "symptoms": {"x", "y"}, "_supplementary": True} for i in range(6)]
         diseases.append({"name": "Constipation", "symptoms": {"x", "y"}, "_supplementary": True})
         out = unreliable_clone_set_names(diseases, "rabbit")
         assert {f"Clone{i}" for i in range(6)} <= out
         assert "Constipation" not in out  # whitelisted (rabbit)
 
     def test_small_groups_untouched(self):
-        diseases = [
-            {"name": f"Pair{i}", "symptoms": {"x", "y"}, "_supplementary": True} for i in range(4)
-        ]
+        diseases = [{"name": f"Pair{i}", "symptoms": {"x", "y"}, "_supplementary": True} for i in range(4)]
         assert unreliable_clone_set_names(diseases, "anytest") == frozenset()
 
 
