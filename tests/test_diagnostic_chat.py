@@ -2100,3 +2100,88 @@ class TestChatClinicalAccuracyAuditRound6:
         from api.chat.symptom_extractor import _extract_species_symptoms
 
         assert "reluctance_to_move" in _extract_species_symptoms("歩きたがらない", "guinea_pig")
+
+
+class TestHotSpotAndZincDermatosis:
+    """2026-08 clinician feedback: 'there is zinc-responsive dermatosis, but a
+    hot dog can also simply transition into dermatitis.' The hot-spot lesion
+    (pyotraumatic dermatitis) was absent from every dog DB, the legacy chat
+    could not rank it, and the zinc entries carried a generic dermatology
+    template for clinical signs."""
+
+    def test_legacy_db_carries_hot_spot_and_zinc(self):
+        from api.health_checker import DISEASE_MAP
+
+        hs = DISEASE_MAP["acute_moist_dermatitis"]
+        assert hs["prevalence_tier"] == "common"
+        assert "hot_spots" in hs["symptoms"]
+        zn = DISEASE_MAP["zinc_responsive_dermatosis"]
+        assert zn["prevalence_tier"] == "uncommon"
+        # Northern-breed signalment drives this diagnosis (White SD, JAVMA 2001).
+        assert zn["breed_risks"].get("siberian_husky", 0) >= 3.0
+        assert zn["breed_risks"].get("alaskan_malamute", 0) >= 3.0
+
+    def test_chat_moist_lesion_ranks_hot_spot_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        for text in (
+            "暑がって皮膚が赤くジュクジュクしている 痒がって舐めている",
+            "皮膚がジュクジュクしていて痒がる",
+            "急に皮膚がただれた 痒がる",
+        ):
+            syms = extract_symptoms_from_text(text)
+            assert "hot_spots" in syms, f"{text!r} must extract hot_spots, got {sorted(syms)}"
+            top = match_symptoms_to_diseases(syms)[0]
+            assert top["disease_id"] == "acute_moist_dermatitis", (
+                f"{text!r}: presenting-lesion dx must rank first, got {top['name_ja']}"
+            )
+
+    def test_chat_food_allergy_gi_cluster_still_boosts_allergic(self):
+        # The old {itching, skin_rashes, hot_spots}→allergic cluster was
+        # retargeted to the pruritus+GI picture; verify it still fires.
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        syms = extract_symptoms_from_text("痒がっている 皮膚に発疹 吐くこともある")
+        assert {"itching", "skin_rashes", "vomiting"} <= set(syms)
+        top3 = [m["disease_id"] for m in match_symptoms_to_diseases(syms)[:3]]
+        assert "allergic_dermatitis" in top3
+
+    def test_checkbox_hot_spot_excellent_tier_rank1(self):
+        # A 96% four-symptom match must not sit below a 52% very_common
+        # allergy — the excellent-match tier ranks it first.
+        from api.species_analyzer import analyze_species_symptoms
+
+        res = analyze_species_symptoms(
+            "dog", ["itching", "skin_redness", "skin_lesions", "pain_on_touch"], lang="ja"
+        )
+        top = res["suspected_diseases"][0]
+        assert top.get("name") == "Acute Moist Dermatitis (Hot Spot)", top.get("name")
+        assert top.get("prevalence_tier") == "common"
+
+    def test_zinc_clinical_signs_are_zinc_specific(self):
+        # Both zinc entries carried the generic dermatology distribution
+        # template; they must now name the mucocutaneous crusting and footpad
+        # hyperkeratosis that define the disease.
+        import json
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parents[1]
+        data = json.loads((root / "diseases_all_species.json").read_text(encoding="utf-8"))
+        found = 0
+        for e in data:
+            if e.get("species") == "Dog" and (e.get("name") or "").startswith("Zinc-Responsive"):
+                found += 1
+                cs = e.get("clinical_signs_ja") or ""
+                assert "皮膚粘膜移行部" in cs and "過角化" in cs, e.get("name")
+                assert "分布パターンが診断に有用" not in cs  # the old template
+                assert "hyperkeratosis" in (e.get("clinical_signs") or "")
+        assert found == 2
+
+    def test_dog_module_hot_spot_entry_curated(self):
+        from api.species.dog_diseases import DISEASES
+
+        hs = next(d for d in DISEASES if d.get("name") == "Acute Moist Dermatitis (Hot Spot)")
+        assert "クロルヘキシジン" in hs["treatment_ja"]
+        # Systemic antibiotics only for the deep folliculitis variant.
+        assert "毛包炎" in hs["treatment_ja"]
+        assert {"itching", "skin_redness", "skin_lesions"} <= set(hs["symptoms"])

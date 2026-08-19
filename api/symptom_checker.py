@@ -2660,6 +2660,12 @@ def analyze_symptoms(
     def _match_quality_tier(d: dict) -> int:
         pct = d["match_percent"]
         cnt = d["match_count"]
+        # Excellent match: near-complete coverage on 3+ symptoms outranks the
+        # prevalence shuffle — a 96% hot-spot match must not sit below a 52%
+        # very_common allergy. Requiring cnt >= 3 keeps tiny-symptom-set rare
+        # diseases from vaulting on a 2-symptom "100%".
+        if pct >= 80 and cnt >= 3:
+            return -1  # Excellent match
         if pct >= 50 or cnt >= 3:
             return 0  # Strong match
         if pct >= 25 or cnt >= 2:

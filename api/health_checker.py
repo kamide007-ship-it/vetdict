@@ -2844,6 +2844,61 @@ DISEASES = [
             "miniature_poodle": 1.3,
         },
     },
+    # ---- Acute Moist Dermatitis (Hot Spot) ----
+    # 2026-08: the legacy vocabulary carried a hot_spots symptom ID but no hot
+    # spot disease, so the classic summer complaint (a hot, humid dog that
+    # scratches itself into a moist erosion within hours) ranked only the
+    # underlying allergies. Muller & Kirk 7th ed; Holm BR, Vet Dermatol 2004.
+    {
+        "id": "acute_moist_dermatitis",
+        "prevalence_tier": "common",
+        "name_ja": "急性湿性皮膚炎（ホットスポット）",
+        "name_en": "Acute Moist Dermatitis (Hot Spot)",
+        "description_ja": "自己外傷により数時間で急速に拡大する湿潤・びらん性の皮膚炎（化膿性外傷性皮膚炎）です。高温多湿の季節、密な被毛、被毛の生乾き、基礎の痒みトリガー（ノミ・外耳炎・アトピー）が誘因で、暑がって掻く・舐めるうちに悪化します。",
+        "description_en": "Pyotraumatic dermatitis: a rapidly enlarging moist erosive plaque produced by self-trauma, classically erupting within hours in hot humid weather in dense-coated dogs. Triggered by fleas, otitis, atopy, or a damp coat — an overheated dog scratches itself into a hot spot.",
+        "symptoms": [
+            "hot_spots",
+            "itching",
+            "skin_rashes",
+            "hair_loss",
+            "excessive_licking",
+        ],
+        "severity": "low",
+        "recommended_tests": ["skin_scraping", "otoscopy"],
+        "breed_risks": {
+            "golden_retriever": 2.5,
+            "labrador_retriever": 1.8,
+            "saint_bernard": 1.8,
+            "german_shepherd": 1.5,
+            "rottweiler": 1.5,
+        },
+    },
+    # ---- Zinc-Responsive Dermatosis ----
+    # Companion differential the clinician asked for: mucocutaneous crusting/
+    # scaling in northern breeds is zinc-responsive dermatosis, NOT a hot spot —
+    # both must be rankable so heat-related moist dermatitis and true zinc
+    # deficiency separate on signalment and lesion character. White SD, JAVMA
+    # 2001; Colombini S, Vet Clin North Am 1999.
+    {
+        "id": "zinc_responsive_dermatosis",
+        "prevalence_tier": "uncommon",
+        "name_ja": "亜鉛反応性皮膚症",
+        "name_en": "Zinc-Responsive Dermatosis",
+        "description_ja": "亜鉛欠乏または遺伝的吸収障害による角化異常症。口唇・鼻・眼周囲など皮膚粘膜移行部の固着性の痂皮・鱗屑・脱毛と肉球の過角化が特徴で、ハスキー等の北方犬種（I型）と急成長期の大型犬の子犬（II型）に発症します。亜鉛補充（硫酸亜鉛 10 mg/kg/日）に反応します。",
+        "description_en": "A keratinization disorder from zinc deficiency or a genetic absorption defect. Adherent crusts, scaling and alopecia at mucocutaneous junctions (lips, nose, periocular) with footpad hyperkeratosis; northern breeds (Syndrome I) and rapidly growing large-breed puppies on deficient/high-phytate diets (Syndrome II). Responds to zinc supplementation.",
+        "symptoms": [
+            "skin_rashes",
+            "dry_skin",
+            "hair_loss",
+        ],
+        "severity": "low",
+        "recommended_tests": ["skin_biopsy", "skin_scraping"],
+        "breed_risks": {
+            "siberian_husky": 5.0,
+            "alaskan_malamute": 5.0,
+            "samoyed": 2.0,
+        },
+    },
 ]
 
 DISEASE_MAP = {d["id"]: d for d in DISEASES}
@@ -3859,6 +3914,11 @@ _PATHOGNOMONIC_CLUSTERS = [
     # GDV: distension + unproductive retching is THE owner-reported pair
     # (Ettinger 8th ed) — added with the 2026-08 ear/retching vocabulary fix.
     (frozenset({"bloating", "unproductive_retching"}), "gdv_bloat", 1.8),
+    # Hot spot: when the owner directly describes the moist erosive lesion
+    # (ジュクジュク) plus pruritus, the presenting-lesion diagnosis is
+    # pyotraumatic dermatitis itself — the allergies that share the hot_spots
+    # sign are underlying causes, not the lesion diagnosis (Muller & Kirk 7th).
+    (frozenset({"hot_spots", "itching"}), "acute_moist_dermatitis", 1.4),
     # Parvovirus: bloody diarrhea + vomiting + lethargy in young dog
     (frozenset({"blood_in_stool", "vomiting", "diarrhea"}), "canine_parvovirus", 1.8),
     # Distemper: respiratory + neurological combination
@@ -3883,8 +3943,13 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"cloudiness_in_eyes", "eye_swelling", "squinting"}), "glaucoma", 2.0),
     # Lymphoma: swollen lymph nodes + weight loss + lethargy
     (frozenset({"swollen_lymph_nodes", "weight_loss", "lethargy"}), "lymphoma", 1.7),
-    # Allergic dermatitis: itching + skin rashes + hot spots
-    (frozenset({"itching", "skin_rashes", "hot_spots"}), "allergic_dermatitis", 1.8),
+    # Allergic dermatitis (food/contact): pruritus WITH concurrent GI signs is
+    # the distinctive cutaneous-adverse-food-reaction picture. The old cluster
+    # ({itching, skin_rashes, hot_spots} ×1.8) predates the hot-spot entry and
+    # described the hot-spot lesion itself, not food allergy — it made the
+    # underlying-cause diagnosis outrank the presenting-lesion diagnosis.
+    (frozenset({"itching", "skin_rashes", "vomiting"}), "allergic_dermatitis", 1.6),
+    (frozenset({"itching", "skin_rashes", "diarrhea"}), "allergic_dermatitis", 1.6),
     # IMHA: pale gums + jaundice + lethargy
     (frozenset({"pale_gums", "jaundice", "lethargy"}), "hemolytic_anemia", 2.0),
     # Liver disease: jaundice + vomiting + loss of appetite
