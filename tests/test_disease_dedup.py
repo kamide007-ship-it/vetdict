@@ -247,3 +247,87 @@ class TestCrossSpeciesStrip:
 
         text = "犬の糖尿病はインスリン依存性である。"
         assert strip_cross_species_text(text, "dog") is text
+
+
+class TestSpeciesTagAndSpellingFold:
+    """2026-08 audit: ~250 duplicate-card pairs escaped the exact-match rules —
+    JA titles differing only by a display-noise species tag ("羽毛嚢胞" vs
+    "羽毛嚢胞（鳥）") and EN spelling/plural variants ("Heatstroke" vs
+    "Heat Stroke", "Tularaemia" vs "Tularemia")."""
+
+    def test_ja_species_tag_suffix_merges(self):
+        items = [
+            _d("Feather Cysts", "羽毛嚢胞", treatment_ja="curated protocol " * 20),
+            _d("Feather Cyst", "羽毛嚢胞（鳥）", treatment_ja="short"),
+        ]
+        out = dedupe_disease_list(items)
+        assert len(out) == 1
+        assert out[0]["name"] == "Feather Cysts"
+
+    def test_ja_clinical_qualifier_never_merges(self):
+        # Clinical qualifiers are not species tags — deliberately distinct
+        # subtype entries must survive.
+        items = [
+            _d("Iron Storage Disease (non-hemochromatosis)", "鉄蓄積症"),
+            _d("Iron Storage Disease (Hemochromatosis)", "鉄蓄積症（ヘモクロマトーシス）（鳥）"),
+        ]
+        assert len(dedupe_disease_list(items)) == 2
+        items = [
+            _d("Heat Stroke", "熱中症"),
+            _d("Heat Stroke - Severe", "熱中症（重度）"),
+        ]
+        assert len(dedupe_disease_list(items)) == 2
+
+    def test_en_spelling_and_plural_fold_merges(self):
+        for a, b in [
+            ("Heatstroke", "Heat Stroke"),
+            ("Tularaemia", "Tularemia"),
+            ("Hypoglycaemia", "Hypoglycemia"),
+            ("Mammary Tumors", "Mammary Tumor"),
+        ]:
+            items = [_d(a, "あ", treatment_ja="x" * 100), _d(b, "い", treatment_ja="y")]
+            out = dedupe_disease_list(items)
+            assert len(out) == 1, f"{a} / {b} must merge"
+
+    def test_en_paren_qualifiers_never_fold(self):
+        for a, b in [
+            ("Chytridiomycosis (Bd)", "Chytridiomycosis (Bsal)"),
+            ("Fracture (Wing)", "Fracture (Leg)"),
+            ("Anorexia (Multifactorial)", "Anorexia (Behavioral)"),
+        ]:
+            items = [_d(a, "あ"), _d(b, "い")]
+            assert len(dedupe_disease_list(items)) == 2, f"{a} / {b} must NOT merge"
+
+    def test_template_entry_never_beats_curated_twin(self):
+        # The generic-workup boilerplate is longer than many curated protocols;
+        # richness must discount it so the curated twin survives.
+        template = (
+            "【モルモットにおける腸閉塞】 腸閉塞はモルモットにおける正確な臨床評価"
+            "（病歴、身体検査、CBC・生化学、画像）から治療方針を決定。 " * 5
+        )
+        items = [
+            _d("Intestinal Obstruction", "腸閉塞（モルモット）", treatment_ja=template),
+            _d("Ileus", "腸閉塞", treatment_ja="輸液療法（乳酸リンゲル液 10mL/kg/hr IV/SC）。疼痛管理。"),
+        ]
+        out = dedupe_disease_list(items)
+        assert len(out) == 1
+        assert out[0]["name"] == "Ileus"
+
+    def test_served_db_bucked_shin_merged_with_correct_etiology(self):
+        import sqlite3
+        from pathlib import Path
+
+        db = Path(__file__).resolve().parents[1] / "instance" / "vetdict.db"
+        if not db.exists():
+            pytest.skip("served DB not built")
+        conn = sqlite3.connect(db)
+        rows = conn.execute(
+            "select name, causes_ja from diseases where species='horse' and name like 'Bucked%'"
+        ).fetchall()
+        assert len(rows) == 1, f"bucked shin duplicate cards must be merged, got {[r[0] for r in rows]}"
+        name, causes = rows[0]
+        assert name == "Bucked Shins"
+        # Etiology is repetitive-strain remodeling, never the acute external
+        # trauma template (falls/bites/traffic accidents).
+        assert "反復" in causes
+        assert "交通事故" not in causes

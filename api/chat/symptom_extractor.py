@@ -352,6 +352,30 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # NOTE: bloating / abdominal_distension keys defined earlier; bloated_abdomen added there
     # Swelling (generic)
     "swelling": ["facial_swelling", "eye_swelling", "edema"],
+    # --- 2026-08 accuracy sweep round 6 ---
+    # Plantar lesions: species-specific pododermatitis IDs, falling back to
+    # lameness only where no foot vocabulary exists.
+    "foot_sores": [
+        "pododermatitis_signs",
+        "foot_lesions",
+        "foot_redness",
+        "foot_swelling",
+        "swollen_foot",
+        "bumblefoot",
+        "lameness_or_limping",
+        "limping",
+    ],
+    # Non-productive retching gestures (ferret Helicobacter/gastric ulcer sign);
+    # species without a retching ID fall back to vomiting for matching.
+    "unproductive_retching": ["retching", "nausea", "vomiting"],
+    # Falling off the perch: parakeet/parrot vocabularies carry perch deficits
+    # under different IDs; neuro fallback for other avians.
+    "falling_off_perch": ["inability_to_perch", "difficulty_perching", "ataxia", "incoordination"],
+    # Reluctance to move (pain sign in small herbivores); fall back to
+    # lameness/lethargy where the species lacks the dedicated ID.
+    "reluctance_to_move": ["lameness_or_limping", "limping", "lethargy"],
+    # Oral pain presenting as difficulty eating (dental/stomatitis complaints).
+    "difficulty_eating": ["dropping_food", "dysphagia", "appetite_loss", "loss_of_appetite"],
 }
 
 # Backwards-compat alias (some older imports use the private name).

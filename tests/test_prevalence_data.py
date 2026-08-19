@@ -90,7 +90,9 @@ class TestPrevalenceKeysResolveToDiseases:
             "reptile": ["Bacterial Dermatitis", "Nematode Infection"],
             "hamster": ["Incisor Malocclusion", "Barbering", "Ear Infection (Otitis)"],
             "guinea_pig": ["Bloat (Gastric Dilation)", "Pedal Abscess"],
-            "amphibian": ["Saprolegniasis", "Ammonia Toxicosis"],
+            # Ammonia Poisoning: the 2026-08 duplicate-card merge kept the
+            # "Ammonia Poisoning" spelling and the key follows the survivor.
+            "amphibian": ["Saprolegniasis", "Ammonia Poisoning"],
             "chinchilla": ["Diabetes Mellitus - Chinchilla", "Conjunctivitis - Chinchilla"],
             "snake": ["Retained Spectacle (Retained Eye Cap)"],
             "tortoise": ["Shell Fracture / Trauma"],
@@ -110,7 +112,8 @@ class TestPrevalenceKeysResolveToDiseases:
             "degu": ["Elodontoma (Dental Tumor)"],  # new disease entry
             "exotic_other": [
                 "Dermatological Bacterial Infection",
-                "Heat Stroke",
+                # Survivor of the 2026-08 duplicate-card merge.
+                "Heat Stress / Heat Stroke",
                 "Mite Infestation (Tarantula)",
                 "Fracture (Limb)",
                 "Trauma / Wound Infection (Exotic)",

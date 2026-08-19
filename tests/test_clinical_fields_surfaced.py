@@ -334,3 +334,25 @@ def test_app_js_drug_detail_links_to_anesthesia_protocols():
     # matches — only en/ja aliases are consulted.
     helper = APP_JS.split("function _anesQueryForDrug", 1)[1].split("\nfunction ", 1)[0]
     assert "a.abbr" not in helper
+
+
+def test_app_js_guided_final_results_pivot_to_checker():
+    """Guided-consultation final results → checker pivot (reverse of the
+    low-confidence-banner pivot): the interview's confirmed symptom set must be
+    carried into the checkbox checker pre-selected and auto-analyzed, so the
+    vet can fine-tune signs one checkbox at a time instead of restarting the
+    interview. The pivot waits for the target species' checker vocabulary when
+    the guided species differs from the loaded one."""
+    # Final-results action row renders the pivot button and wires it.
+    assert 'id="guidedToChecker"' in APP_JS
+    assert "runCheckerFromGuided()" in APP_JS
+    # The pivot function carries guidedState into the checker and analyzes.
+    fn = APP_JS[APP_JS.index("function runCheckerFromGuided()") :]
+    fn = fn[: fn.index("\n}") + 2]
+    assert "guidedState.selectedSymptoms" in fn
+    assert "selectSpecies(sp)" in fn  # species alignment before applying
+    assert "selectedSymptoms=new Set(usable)" in fn
+    assert 'switchView("checker")' in fn
+    assert "doAnalyze()" in fn
+    # Unmappable sets degrade to a toast, never a broken checker state.
+    assert "showToast" in fn
