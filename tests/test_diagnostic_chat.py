@@ -2151,9 +2151,7 @@ class TestHotSpotAndZincDermatosis:
         # allergy — the excellent-match tier ranks it first.
         from api.species_analyzer import analyze_species_symptoms
 
-        res = analyze_species_symptoms(
-            "dog", ["itching", "skin_redness", "skin_lesions", "pain_on_touch"], lang="ja"
-        )
+        res = analyze_species_symptoms("dog", ["itching", "skin_redness", "skin_lesions", "pain_on_touch"], lang="ja")
         top = res["suspected_diseases"][0]
         assert top.get("name") == "Acute Moist Dermatitis (Hot Spot)", top.get("name")
         assert top.get("prevalence_tier") == "common"
