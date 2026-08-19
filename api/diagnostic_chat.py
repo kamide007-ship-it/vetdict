@@ -673,6 +673,15 @@ def extract_symptoms_from_text(text: str) -> list:
         # legacy dog vocabulary carries skin redness/rash as skin_rashes —
         # without this bridge the pruritic-dermatitis complaint lost a symptom.
         "skin_lesions": ["skin_rashes"],
+        # "背中を丸めて" resolves to hunched_posture (pain posture); the legacy
+        # dog vocabulary expresses guarded/painful posture as reluctance_to_move
+        # (IVDD's classic presentation alongside tremors).
+        "hunched_posture": ["reluctance_to_move"],
+        # "口を痛がる" resolves to pain; the legacy dog vocabulary has no
+        # generic pain ID — guarded behaviour is the closest signal.
+        "pain": ["reluctance_to_move"],
+        # "食べられない" resolves to difficulty_eating (species vocabularies).
+        "difficulty_eating": ["loss_of_appetite"],
         # "後ろ足がふらつく" resolves to hind_leg_weakness (species
         # vocabularies); the legacy dog vocabulary carries pelvic-limb signs
         # only as limping — without this bridge the phrase fell through to the

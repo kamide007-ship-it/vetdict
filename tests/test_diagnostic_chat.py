@@ -1582,15 +1582,23 @@ class TestQuickTapPhraseExtraction:
 
     # Mirrors the quickSymptoms map in static/js/app.js (renderSpeciesGuidance).
     JA_QUICK = {
-        "dog": ["嘔吐している", "元気がない", "下痢している", "咳が出る", "足を引きずる", "皮膚が痒い"],
+        "dog": [
+            "嘔吐している",
+            "元気がない",
+            "下痢している",
+            "咳が出る",
+            "足を引きずる",
+            "皮膚が痒い",
+            "おしりを地面にこすりつける",
+        ],
         "cat": ["食べない", "吐いた", "くしゃみ", "目やにが出る", "おしっこが出ない", "毛が抜ける"],
         "rabbit": ["糞が小さい", "食べない", "歯ぎしり", "首が傾いている", "お腹が張っている", "鼻水"],
         "chinchilla": ["よだれが出る", "毛が抜ける", "食べない", "糞が出ない", "歯が伸びている", "砂浴びしない"],
         "hamster": ["下痢", "元気がない", "毛が抜ける", "目が開かない", "お腹が膨れている", "食べない"],
         "guinea_pig": ["食べない", "鼻水", "足を引きずる", "脱毛", "下痢", "くしゃみ"],
-        "ferret": ["ぐったり", "脱毛", "下痢", "後ろ足がふらつく", "嘔吐", "食べない"],
+        "ferret": ["ぐったり", "脱毛", "下痢", "後ろ足がふらつく", "嘔吐", "食べない", "陰部が腫れている"],
         "hedgehog": ["針が抜ける", "フケ", "ふらつく", "食べない", "目が出ている", "体重が減った"],
-        "bird": ["羽を膨らませている", "食べない", "下痢", "鼻水", "羽が抜ける", "くしゃみ"],
+        "bird": ["羽を膨らませている", "食べない", "下痢", "鼻水", "羽が抜ける", "くしゃみ", "自分で羽を抜く"],
     }
     EN_QUICK = {
         "dog": ["vomiting", "lethargic", "diarrhea", "coughing", "limping", "itchy skin"],
@@ -2100,3 +2108,123 @@ class TestChatClinicalAccuracyAuditRound6:
         from api.chat.symptom_extractor import _extract_species_symptoms
 
         assert "reluctance_to_move" in _extract_species_symptoms("歩きたがらない", "guinea_pig")
+
+
+class TestChatClinicalAccuracyAuditRound7:
+    """2026-08 audit round 5 (15-case realistic-complaint sweep). Root causes
+    fixed this round: no alias for the owner phrasing of exercise intolerance
+    (座り込む) so cardiac complaints extracted airway signs only; the legacy
+    dog DB had no perianal entry/vocabulary at all so scooting — one of the
+    most common canine presentations (VetCompass 4.4%) — extracted nothing;
+    no CDS entry despite 14-35% prevalence in dogs >8 y; the feather-plucking
+    aliases mapped to hair_loss (passive loss) instead of the behavioural
+    feather_plucking ID; tail bobbing had no alias; 口を痛がる mapped to
+    excessive_drooling (double-counting よだれ) losing the oral-pain signal;
+    limb deformity (脚が曲がって — reptile MBD) had no ID_SYNONYMS bridge to
+    soft_bones; and the extracted rectal_prolapse ID never matched ferret
+    Rectal Prolapse because the disease uses rectal_protrusion and _SYN had
+    no bridge (ID_SYNONYMS only fires when the ID is absent from the species
+    vocabulary)."""
+
+    def test_dog_exercise_intolerance_phrasing_ranks_mmvd(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+        from api.health_checker import DISEASES
+
+        syms = extract_symptoms_from_text("散歩の途中で座り込む 呼吸が荒い 咳が出る")
+        assert "exercise_intolerance" in syms, "座り込む must map to exercise_intolerance"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:3]]
+        assert any("僧帽弁" in n for n in top), f"MMVD must rank top-3, got {top}"
+        # MMVD is the most common acquired canine cardiac disease (Keene 2019
+        # ACVIM consensus) — the tier must reflect that.
+        mmvd = next(d for d in DISEASES if d["id"] == "mitral_valve_disease")
+        assert mmvd["prevalence_tier"] == "very_common"
+
+    def test_dog_scooting_extracts_and_ranks_anal_sac_disease(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+        from api.health_checker import DISEASES, SYMPTOM_IDS
+
+        assert "scooting" in SYMPTOM_IDS
+        assert any(d["id"] == "anal_sac_disease" for d in DISEASES)
+        syms = extract_symptoms_from_text("おしりを地面にこすりつける ずっと舐めている")
+        assert "scooting" in syms, "こすりつけ phrasing must map to scooting"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:1]]
+        assert top and "肛門" in top[0], f"anal sac disease must rank first, got {top}"
+
+    def test_dog_senior_night_vocalization_ranks_cds(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+        from api.health_checker import DISEASES
+
+        assert any(d["id"] == "cognitive_dysfunction" for d in DISEASES)
+        syms = extract_symptoms_from_text("夜鳴きがひどい ぐるぐる回る 老犬です")
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:1]]
+        assert top and "認知機能不全" in top[0], f"CDS must rank first, got {top}"
+
+    def test_dog_pain_posture_ranks_ivdd(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        syms = extract_symptoms_from_text("震えている 背中を丸めて痛そうにしている 抱き上げると鳴く")
+        # 背中を丸めて → hunched_posture → reluctance_to_move (legacy bridge)
+        assert "reluctance_to_move" in syms, f"got {syms}"
+        assert "tremors" in syms
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:3]]
+        assert any("椎間板" in n for n in top), f"IVDD must rank top-3, got {top}"
+
+    def test_cat_oral_pain_ranks_gingivostomatitis(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("口を痛がって食べられない よだれが出る 口臭がひどい", "cat")
+        assert "pain" in syms, "口を痛がって must map to pain (was excessive_drooling)"
+        assert "difficulty_eating" in syms, "食べられない must map to difficulty_eating"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "cat")[:3]]
+        assert any("口内炎" in n for n in top), f"FCGS must rank top-3, got {top}"
+
+    def test_bird_feather_plucking_is_behavioural_not_hair_loss(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_aliases import SYMPTOM_ALIASES
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        assert SYMPTOM_ALIASES["毛引き"] == "feather_plucking"
+        syms = _extract_species_symptoms("自分の羽を抜いてしまう 皮膚が赤い", "bird")
+        assert "feather_plucking" in syms, f"got {syms}"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "bird")[:3]]
+        assert any(("羽毛破壊" in n) or ("毛引き" in n) or ("自傷" in n) for n in top), f"got {top}"
+
+    def test_bird_tail_bobbing_ranks_lower_respiratory(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("呼吸のたびに尾が上下に動く 口を開けて呼吸", "bird")
+        assert "tail_bobbing" in syms, f"got {syms}"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "bird")[:3]]
+        assert any(("気嚢" in n) or ("肺炎" in n) for n in top), f"got {top}"
+
+    def test_lizard_bowed_limbs_rank_mbd(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("後ろ足が震える 脚が曲がってきた", "lizard")
+        assert "tremors" in syms, f"got {syms}"
+        # 脚が曲がって → limb_deformity → soft_bones via the new ID_SYNONYMS bridge
+        assert "soft_bones" in syms, f"got {syms}"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "lizard")[:2]]
+        assert any(("代謝性骨疾患" in n) or ("副甲状腺" in n) for n in top), f"got {top}"
+
+    def test_ferret_rectal_prolapse_syn_bridge(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("お尻から赤いものが出ている いきんでいる", "ferret")
+        assert "rectal_prolapse" in syms, f"got {syms}"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "ferret")[:1]]
+        assert top and "直腸脱" in top[0], f"rectal prolapse must rank first, got {top}"
+
+    def test_ferret_vulvar_swelling_ranks_adrenal(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("毛が抜けてきて尻尾がハゲている 陰部が腫れている", "ferret")
+        assert "vulvar_swelling" in syms, "陰部が腫れている must map to vulvar_swelling"
+        assert "hair_loss" in syms
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "ferret")[:3]]
+        assert any("副腎" in n for n in top), f"adrenal disease must rank top-3, got {top}"

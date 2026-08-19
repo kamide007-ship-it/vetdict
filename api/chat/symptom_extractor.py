@@ -275,11 +275,18 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "soft_shell",
     ],
     "bone_deformity": ["bone_swelling", "limb_deformity", "soft_bones", "shell_deformity", "fractures"],
+    # 四肢の弯曲（爬虫類MBD/くる病の飼い主表現「脚が曲がってきた」）—
+    # limb_deformity を持たない種（lizard等）では soft_bones/swollen_limbs に解決
+    "limb_deformity": ["bone_deformity", "soft_bones", "swollen_limbs", "fractures"],
     "shell_softening": ["soft_shell", "soft_bones", "shell_soft_spots", "shell_deformity"],
     "soft_shell": ["shell_softening", "soft_bones", "shell_soft_spots", "shell_deformity"],
     "shell_deformity": ["bone_deformity", "soft_shell", "shell_softening"],
     "mouth_lesions": ["oral_lesions", "stomatitis", "mouth_rot"],
     "mucus_in_mouth": ["oral_mucus", "mouth_discharge"],
+    # 直腸脱/クロアカ脱（「お尻から赤いものが出ている」）— 種ごとのID表記ゆれを吸収
+    "rectal_prolapse": ["rectal_protrusion", "cloacal_prolapse", "prolapse"],
+    "rectal_protrusion": ["rectal_prolapse", "cloacal_prolapse"],
+    "cloacal_prolapse": ["rectal_prolapse", "rectal_protrusion", "prolapse"],
     # Limbs / extremities
     "cold_limbs": ["cold_extremities", "poor_circulation"],
     "cold_extremities": ["cold_limbs", "poor_circulation"],

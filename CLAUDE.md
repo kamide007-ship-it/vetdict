@@ -2811,3 +2811,75 @@ katakana トークン頻度監査（第6回スイープ、実マッチャー突�
   pendingStats diseases 6528→**6431**（API実測値）・drugs 631→**633**
 - ServiceWorker: `CACHE_NAME` v117 → **v118**
 - 再現手順: `migrate_to_sqlite.py`（dedupe/ガードは配信DBビルドに統合済み）→ `build_disease_search_index.py`
+
+## 2026-08セッション（第15弾: リーシュマニア第一選択2剤+IVIG+IFN-α補完 + 15症例精度スイープ + 犬レガシーDBの頻出疾患2件補完）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **3,828件合格**（78 skip、カバレッジ81.96%）
+- 薬用量: safe薬品の dosage 欠落 **0**（632薬品時点で全species_info検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**
+- 疾患: 配信7,057疾患で treatment/prevention/prognosis **100%**
+- prevalence dead key: 10（全て uncommon/rare tier で当該種DBに疾患自体が無い既知残、上限15ガード内）
+
+### referenced-but-absent 薬品4剤の補完（`drug_batch_41.py` 新規、633→637薬品 — mainのbatch_39/40とのマージで2回改番）
+用量文脈フィルタ付きカタカナ/英語トークン監査（第8回スイープ、実マッチャー突合）で検出。
+マッチャー自体はほぼ健全（ノルモソル/乳酸リンゲル/グルコン酸カルシウム等は文脈スニペットで全て解決）で、真の欠落は4剤:
+- **ミルテホシン（ミルテフォラン）** — 犬リーシュマニア症エントリが「2 mg/kg PO q24h（28日）」と用量指示する
+  LeishVet第一選択2剤の一方なのに未収載。催奇形性・妊娠飼い主の手袋着用指導・アロプリノール併用必須
+  （単剤=耐性リスク）を明記（Solano-Gallego 2011; Miró 2009 比較試験）
+- **メグルミンアンチモン酸塩（グルカンチーム）** — 同エントリのもう一方の第一選択（75-100 mg/kg SC q24h×4-8週）。
+  投与前腎機能評価必須・注射部位反応・IRIS≥2ではミルテホシン/アロプリノール単独優先を明記
+- **ヒト免疫グロブリン（hIVIG）** — IMHA/ITP/重症皮膚薬物反応の難治例レスキューとして30-40参照で最多欠落。
+  0.5-1.5 g/kg IV 6-12時間単回（Whelan 2009 RCT; Spurlock 2011）。**単回使用限定**（抗ヒト蛋白感作→再投与
+  アナフィラキシー）・IMHA過凝固への血栓予防併用（クロピドグレル）・容量過負荷を明記
+- **インターフェロンα（組換えヒト）** — 鳥PBFD/ポリオーマ（1-10万IU/kg SC）+ 猫レトロウイルス経口低用量
+  （30 IU/頭 週交代サイクル）で33参照、ω型のみ収載だった。高用量非経口は3-7週で中和抗体形成・
+  ネコIFN-ω優先（同種蛋白）を明記。エイリアスがinterferon_omega参照を奪わないことを検証済み
+
+### 診断チャット精度 第5弾（15症例スイープ 9 MISS → 15/15 合格）
+現実的な飼い主主訴15例（犬6・猫2・ウサギ1・ハムスター1・鳥2・トカゲ1・フェレット2）で系統検証:
+1. **犬レガシーDBに肛門嚢疾患が完全欠落**: 犬の最頻出主訴の一つ（VetCompass 年間有病率4.4% — O'Neill 2021）
+   なのに疾患もscooting語彙も無く「おしりを地面にこすりつける」が抽出ゼロだった → scooting症状（59→60）+
+   anal_sac_disease エントリ（65→66疾患、common tier）を新設。既存エイリアス「お尻を引きずる」→scooting も活性化
+2. **犬レガシーDBにCDS（認知機能不全症候群）が欠落**: 8歳以上の14-35%（Salvin 2010）なのに
+   「夜鳴き・ぐるぐる回る・老犬」が小脳失調症/PSS上位だった → cognitive_dysfunction エントリ新設（66→67疾患、
+   DISHA徴候・セレギリン/抗酸化食記載）→ rank 1
+3. **MMVD tier 是正**: common→**very_common**（Keene 2019 ACVIM: 犬後天性心疾患の~75%、日本の小型犬
+   人口構成）+ CHF徴候 labored_breathing を症状セットに追加。「散歩の途中で座り込む」→exercise_intolerance
+   エイリアス追加で心疾患主訴が top-3 に
+4. **毛引きエイリアスの誤マッピング是正**: 羽を抜いてる/毛引き/自分で羽を抜く→hair_loss（受動的脱羽）だったのを
+   行動学的IDの **feather_plucking** に是正（ID_SYNONYMSでfeather_loss/self_mutilationへフォールバック維持）。
+   自咬→self_mutilation に是正。「羽を抜いてしまう」形も抽出可能に
+5. **テイルボビング**: 鳥の呼吸困難の教科書的所見なのにエイリアス皆無 → 尾が上下に動/テイルボビング等→tail_bobbing
+6. **口の痛み**: 口を痛がる→excessive_drooling（よだれと二重計上）だったのを **pain** に是正 +「食べられない」→
+   difficulty_eating 新設（ID_SYNONYMS: dysphagia/appetite_loss、犬レガシー: loss_of_appetite フォールバック）。
+   猫FCGS（口を痛がって食べられない+よだれ+口臭）が top-3 に
+7. **爬虫類MBDの四肢弯曲**: 「脚が曲がって」→limb_deformity エイリアス + ID_SYNONYMS limb_deformity→
+   soft_bones/swollen_limbs ブリッジ新設（トカゲMBDがrank 1に）。「足が震え」→tremors も追加
+8. **直腸脱の_SYNブリッジ**: 抽出ID rectal_prolapse がフェレット語彙に実在するため ID_SYNONYMS を通らず、
+   疾患側の rectal_protrusion と永遠にマッチしなかった → _SYN に rectal_prolapse↔rectal_protrusion↔
+   cloacal_prolapse + constipation↔straining_to_defecate を追加（フェレット直腸脱 rank 1）。
+   お尻から赤いもの/肛門から何か出て/脱腸→rectal_prolapse エイリアス新設
+9. **フェレット副腎**: 「陰部が腫れて」→vulvar_swelling（従来は「外陰部が腫れてる」のみで取りこぼし）+
+   尻尾がハゲ→hair_loss → 副腎疾患群が top-3 に
+- その他: 背中を丸めて→hunched_posture + _LEGACY_FALLBACK→reluctance_to_move（犬IVDD top-3）、
+  左右対称に抜け/毛が薄くなって→hair_loss（クッシング）、座り込む→exercise_intolerance
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound5`（10件）+ 薬品4剤テスト3件
+
+### チェックボックス/問診モード経路にも scooting を追加（犬 dog_diseases モジュール）
+- 犬のチェックボックスUI・問診モードはレガシーDBではなく `dog_diseases` モジュール語彙（64症状）を使用しており、
+  肛門周囲症状が皆無だった（肛門嚢疾患は constipation/pain_on_touch 経由でしか到達不能）
+- VALID_SYMPTOMS/SYMPTOM_NAMES/SYMPTOM_CATEGORIES(digestive) に scooting を追加（64→65症状）、
+  Anal Sac Disease / Perianal Fistula の症状セットに scooting を追加
+- 検証: チェックボックス engine で scooting→肛門嚢疾患 rank1、問診モード digestive カテゴリに表示、
+  配信SQLite再構築で dog 65症状に反映。回帰テスト `TestScootingVocabulary`（2件）
+- これでチャット（レガシーDB）・チェックボックス・問診モードの3経路全てが同一主訴を扱える
+
+### UX: クイック入力ボタンの拡充（新規対応フレーズを1タップ導線に）
+- 犬「おしりを地面にこすりつける」・フェレット「陰部が腫れている」・鳥「自分で羽を抜く」を quick-tap に追加
+  （全て本セッションで抽出保証済み、ミラーテスト `TestQuickTapPhraseExtraction` も同期更新）
+- 新規薬品4剤は既存の治療チップ/相互作用リンク機構で自動的にワンタップ到達可能（マッチャー解決を検証済み）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: 全種をマージ後実測に同期（dog 570薬品・cat 550・馬358・鳥系236）、pendingStats drugs →**637**・symptoms →**60**
+- ServiceWorker: `CACHE_NAME` → **v119**（並行セッションとv117/v118が衝突したため改番）

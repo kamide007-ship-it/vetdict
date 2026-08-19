@@ -1796,3 +1796,80 @@ def test_sweep8_variant_aliases_resolve():
     for text, want in cases.items():
         ids = [x["id"] for x in find_drugs_in_text(text)]
         assert want in ids, f"{text!r} must resolve to {want}, got {ids}"
+
+
+def test_batch41_leishmania_first_line_pair_present():
+    """Batch 41 (2026-08 9th referenced-but-absent sweep): the canine
+    leishmaniosis entries prescribe both LeishVet first-line drugs with doses
+    (miltefosine 2 mg/kg PO q24h ×28d; meglumine antimoniate SC 4-8 weeks,
+    each + allopurinol) yet neither was carried."""
+    from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+    mil = get_drug_by_id("miltefosine")
+    assert mil is not None, "miltefosine missing from formulary"
+    dog = mil["species_info"]["dog"]
+    assert "2 mg/kg" in dog["dosage"] and "28" in dog["dosage"]
+    # Always combined with allopurinol (monotherapy = resistance risk).
+    assert "アロプリノール" in dog["dosage_ja"]
+    # Teratogenicity + pregnant-owner handling warning must be stated.
+    assert "催奇形" in mil["contraindications_ja"]
+
+    meg = get_drug_by_id("meglumine_antimoniate")
+    assert meg is not None, "meglumine antimoniate missing from formulary"
+    dog = meg["species_info"]["dog"]
+    assert dog.get("dosage") and dog.get("dosage_ja")
+    # Renal assessment before use is the defining safety fact for antimonials.
+    assert "腎" in dog["notes_ja"]
+
+    # The treatment texts' own wording must resolve to the new entries.
+    ids = [x["id"] for x in find_drugs_in_text("ミルテホシン 2 mg/kg PO q24h（28日）")]
+    assert "miltefosine" in ids
+    ids = [x["id"] for x in find_drugs_in_text("メグルミンアンチモン酸塩 100 mg/kg SC q24h")]
+    assert "meglumine_antimoniate" in ids
+    # Flunixin meglumine must not be shadowed by the new antimonial alias.
+    ids = [x["id"] for x in find_drugs_in_text("フルニキシン・メグルミン 1.1 mg/kg IV q12h")]
+    assert "flunixin" in ids and "meglumine_antimoniate" not in ids
+
+
+def test_batch41_hivig_single_dose_and_thromboprophylaxis():
+    """hIVIG is referenced ~30-40 times as the IMHA/ITP refractory rescue
+    (0.5-1 g/kg IV). Single-use (anti-human-protein sensitization) and
+    thromboembolism cautions are the class-defining safety facts."""
+    from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+    ivig = get_drug_by_id("human_ivig")
+    assert ivig is not None, "hIVIG missing from formulary"
+    dog = ivig["species_info"]["dog"]
+    assert "0.5-1.5 g/kg" in dog["dosage"]
+    # Single infusion only — re-exposure anaphylaxis risk must be stated.
+    assert "単回" in dog["dosage_ja"] or "単回" in dog["notes_ja"]
+    assert "アナフィラキシー" in ivig["contraindications_ja"]
+    # IMHA patients are hypercoagulable — thromboprophylaxis must be advised.
+    assert "血栓" in dog["notes_ja"]
+
+    ids = [x["id"] for x in find_drugs_in_text("ヒト免疫グロブリン（IVIG）0.5-1 g/kg IV 単回")]
+    assert "human_ivig" in ids
+
+
+def test_batch41_interferon_alpha_does_not_shadow_omega():
+    """Human IFN-α (~33 refs: avian PBFD adjunct, feline retrovirus oral
+    low-dose) was absent — only feline IFN-ω was carried. The new aliases
+    must not capture interferon-omega references."""
+    from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+    ifn = get_drug_by_id("interferon_alpha")
+    assert ifn is not None, "interferon alpha missing from formulary"
+    cat = ifn["species_info"]["cat"]
+    assert "30 IU" in cat["dosage"]
+    # Neutralizing-antibody limitation of high-dose parenteral use.
+    assert "中和抗体" in cat["dosage_ja"]
+    # Omega preference where licensed must be stated.
+    assert "オメガ" in cat["notes_ja"] or "ω" in cat["notes_ja"]
+    bird = ifn["species_info"]["bird"]
+    assert bird.get("dosage") and bird.get("dosage_ja")
+
+    ids = [x["id"] for x in find_drugs_in_text("組換えαインターフェロン 1-10万IU/kg SC q24h")]
+    assert "interferon_alpha" in ids
+    # Omega references must still resolve to interferon_omega, not alpha.
+    ids = [x["id"] for x in find_drugs_in_text("インターフェロンオメガ 1 MU/kg SC q48h")]
+    assert "interferon_omega" in ids and "interferon_alpha" not in ids
