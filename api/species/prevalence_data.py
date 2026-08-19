@@ -210,7 +210,9 @@ SPECIES_PREVALENCE = {
         "Tapeworm Infection (Dipylidium/Echinococcus)": "common",
         "Testicular Tumor": "common",
         "Thyroid Carcinoma": "uncommon",
-        "Tick Paralysis": "common",
+        # Tick paralysis is region-bound (Ixodes holocyclus in Australia,
+        # Dermacentor in N.America) — uncommon at best outside those areas.
+        "Tick Paralysis": "uncommon",
         "Tooth Abscess": "common",
         "Tooth Fracture": "common",
         "Transitional Cell Carcinoma": "uncommon",
@@ -1670,6 +1672,7 @@ JAPAN_REGIONAL_ADJUSTMENTS = {
         "Leptospirosis": "common",  # High humidity, wildlife reservoirs
         # LESS common / absent in Japan
         "Salmon Poisoning Disease": "rare",  # Pacific NW North America only
+        "Tick Paralysis": "rare",  # Ixodes holocyclus (Australia) / Dermacentor (N.America) phenomenon
         "Blastomycosis": "rare",  # Americas endemic, imported only
         "Coccidioidomycosis (Valley Fever)": "rare",  # Americas endemic
         "Histoplasmosis": "rare",  # Americas endemic

@@ -335,6 +335,99 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
     return [diseases[i] for i in range(len(diseases)) if i in keep]
 
 
+# ---------------------------------------------------------------------------
+# Clone-set matching guard
+# ---------------------------------------------------------------------------
+# An old enrichment run stamped one copy-pasted symptom set onto whole blocks
+# of supplementary diseases (e.g. 47 unrelated rabbit diseases — RHD,
+# papillomatosis, Pseudomonas… — all sharing {red_urine, sudden_death,
+# normal_behavior…}). Those sets are wrong for almost every member, so they
+# both (a) steer common complaints toward obscure diseases and (b) make the
+# member unfindable by its real presentation. Members of such groups are
+# excluded from MATCHING only (browse/search/SEO pages are unaffected).
+#
+# Module entries are never suppressed: identical sets inside a species module
+# are legitimate clinical families (the red-eye triad genuinely is the
+# presentation of a dozen eye diseases). Only supplementary-tagged entries in
+# groups of >= _CLONE_SET_MIN are suppressed, minus a reviewed whitelist of
+# members whose shared set IS their textbook presentation (the "seed" the set
+# was copied from, plus clinically interchangeable siblings).
+_CLONE_SET_MIN = 5
+
+_CLONE_SET_WHITELIST: frozenset = frozenset(
+    {
+        ("chinchilla", "Dental Disease (Molar Elongation)"),
+        ("chinchilla", "Slobbers (Dental-Related)"),
+        ("parakeet", "Candidiasis (Crop Mycosis)"),
+        ("parakeet", "Megabacteriosis (AGY)"),
+        ("parakeet", "Nutritional Deficiency (General)"),
+        ("parrot", "Feather Plucking"),
+        ("parrot", "Behavioral Feather Destructive Disorder"),
+        ("parrot", "Avian Bornavirus (ABV)"),
+        ("parrot", "Lead Poisoning"),
+        ("reptile", "Pneumonia"),
+        ("reptile", "Vitamin A Deficiency"),
+        ("reptile", "Nematode Infection"),
+        ("reptile", "Constipation"),
+        ("tortoise", "Respiratory Infection"),
+        ("tortoise", "Vitamin A Deficiency"),
+        ("tortoise", "Coccidia"),
+        ("tortoise", "Constipation"),
+        ("rabbit", "Constipation"),
+        ("rabbit", "Encephalitozoonosis"),
+        ("rabbit", "Rabbit Hemorrhagic Disease (RHD)"),
+        ("lizard", "Constipation"),
+        ("lizard", "Sand Impaction"),
+        ("snake", "Constipation"),
+        ("bird", "Lead Poisoning"),
+        ("bird", "Zinc Toxicosis"),
+        ("bird", "Feather Cyst"),
+        ("guinea_pig", "Urinary Tract Infection"),
+        ("guinea_pig", "Gastric Ulcer"),
+        ("exotic_other", "Upper Respiratory Infection"),
+        ("exotic_other", "Constipation"),
+        ("exotic_other", "Intestinal Parasitism"),
+        ("exotic_other", "Dermatological Bacterial Infection"),
+    }
+)
+
+_CLONE_SET_CACHE: Dict[str, tuple[int, frozenset]] = {}
+
+
+def unreliable_clone_set_names(diseases: List[Any], species: str) -> frozenset:
+    """Names of supplementary diseases whose symptom set is a >=5-way clone.
+
+    Cached per species, invalidated when the pool size changes (the pool only
+    grows — supplementary append happens once per process).
+    """
+    cached = _CLONE_SET_CACHE.get(species)
+    if cached and cached[0] == len(diseases):
+        return cached[1]
+    groups: Dict[frozenset, List[Any]] = {}
+    for d in diseases:
+        syms = _disease_field(d, "symptoms", None)
+        if not syms:
+            continue
+        fs = frozenset(syms)
+        if len(fs) < 2:
+            continue
+        groups.setdefault(fs, []).append(d)
+    out: Set[str] = set()
+    for members in groups.values():
+        if len(members) < _CLONE_SET_MIN:
+            continue
+        for d in members:
+            if not _disease_field(d, "_supplementary", False):
+                continue
+            nm = _disease_field(d, "name", "") or ""
+            if (species, nm) in _CLONE_SET_WHITELIST:
+                continue
+            out.add(nm)
+    result = frozenset(out)
+    _CLONE_SET_CACHE[species] = (len(diseases), result)
+    return result
+
+
 # Cross-species boilerplate clauses that older enrichment runs baked into every
 # species' articles. Each marker leads a self-contained enumeration sentence
 # (e.g. "甲状腺機能亢進症（猫）: ヨウ素…") that is only clinically relevant for the
@@ -718,6 +811,10 @@ def enrich_diseases(diseases: List[Dict[str, Any]], species: str) -> List[Dict[s
     existing_names: Set[str] = {d.get("name", "").lower() for d in diseases}
     for sd in supp.get(species, []):
         if sd.get("name", "").lower() not in existing_names:
+            # Provenance tag: supplementary entries are eligible for the
+            # clone-set matching guard (see unreliable_clone_set_names) —
+            # module entries never are.
+            sd.setdefault("_supplementary", True)
             diseases.append(sd)
             existing_names.add(sd.get("name", "").lower())
 
@@ -4223,7 +4320,14 @@ def analyze_symptoms_generic(
 
     n_checked = len(symptom_set)
 
+    # Clone-set guard: exclude supplementary entries whose symptom set is a
+    # >=5-way copy-paste clone (wrong for almost every member — they steer
+    # common complaints toward obscure diseases).
+    _unreliable = unreliable_clone_set_names(diseases, species or "")
+
     for disease in diseases:
+        if disease.get("name", "") in _unreliable:
+            continue
         disease_symptoms = set(disease.get("symptoms", set()))
         if not disease_symptoms:
             continue

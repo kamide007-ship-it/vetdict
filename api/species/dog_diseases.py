@@ -3884,14 +3884,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Tick Paralysis",
         "name_ja": "マダニ麻痺",
+        # Ascending FLACCID paralysis — never a painful orthopedic gait. The old
+        # set (4x limping + stiffness) made every lame-dog complaint surface
+        # tick paralysis in its top differentials while the true presentation
+        # (weakness → recumbency → respiratory compromise) never matched.
         "symptoms": {
-            "difficulty_breathing",
-            "stiffness",
             "reluctance_move",
-            "limping_fl",
-            "limping_fr",
-            "limping_rl",
-            "limping_rr",
+            "lethargy",
+            "collapse",
+            "difficulty_breathing",
         },
         "description": "Ascending flaccid paralysis caused by tick salivary neurotoxin blocking acetylcholine release at the neuromuscular junction.",
         "description_ja": "マダニ唾液中の神経毒素によるアセチルコリン放出阻害→後肢から始まる上行性弛緩性麻痺。ダニ除去後24-72時間で回復（オーストラリア型を除く）。",
