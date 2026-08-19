@@ -35,6 +35,7 @@ VALID_SYMPTOMS: set[str] = {
     "drooling",
     "abdominal_pain",
     "dehydration",
+    "scooting",
     # Respiratory
     "coughing",
     "sneezing",
@@ -109,6 +110,7 @@ SYMPTOM_NAMES: dict[str, dict[str, str]] = {
     "drooling": {"ja": "よだれ・流涎", "en": "Drooling / Hypersalivation"},
     "abdominal_pain": {"ja": "腹痛", "en": "Abdominal Pain"},
     "dehydration": {"ja": "脱水", "en": "Dehydration"},
+    "scooting": {"ja": "お尻を地面にこすりつける（スクーティング）", "en": "Scooting"},
     "coughing": {"ja": "咳", "en": "Coughing"},
     "sneezing": {"ja": "くしゃみ", "en": "Sneezing"},
     "nasal_discharge": {"ja": "鼻水", "en": "Nasal Discharge"},
@@ -4242,7 +4244,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Anal Sac Disease",
         "name_ja": "肛門嚢疾患",
-        "symptoms": {"pain_on_touch", "constipation"},
+        "symptoms": {"pain_on_touch", "constipation", "scooting"},
         "description": "Impaction, infection, or abscess of the anal glands causing pain and scooting behavior.",
         "description_ja": "肛門腺の貯留・感染・膿瘍で、痛みと地面に尻をこする行動を引き起こします。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
@@ -10127,7 +10129,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Perianal Fistula",
         "name_ja": "肛門周囲瘻",
-        "symptoms": {"bloody_stool", "constipation", "pain_on_touch", "itching"},
+        "symptoms": {"bloody_stool", "constipation", "pain_on_touch", "itching", "scooting"},
         "description": "Chronic draining tracts around the anus, common in German Shepherds.",
         "description_ja": "肛門周囲の慢性瘻管でジャーマンシェパードに多いです。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
@@ -13362,6 +13364,7 @@ SYMPTOM_CATEGORIES = {
             "drooling",
             "abdominal_pain",
             "dehydration",
+            "scooting",
         ],
     },
     "respiratory": {

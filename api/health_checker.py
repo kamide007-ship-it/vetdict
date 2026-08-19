@@ -1676,7 +1676,13 @@ DISEASES = [
     # ---- 23. Mitral Valve Disease ----
     {
         "id": "mitral_valve_disease",
-        "prevalence_tier": "common",
+        # very_common: MMVD is the most common acquired canine cardiac disease
+        # (~75% of cardiac cases; Keene 2019 ACVIM consensus), and Japan's
+        # small-breed-dominant population (Chihuahua/CKCS/toy breeds) puts it
+        # among the most frequent presentations in practice. It was tiered
+        # "common" — the same as tracheal collapse — so cough + exercise
+        # intolerance complaints ranked airway disease above it.
+        "prevalence_tier": "very_common",
         "name_ja": "僧帽弁閉鎖不全症",
         "name_en": "Myxomatous Mitral Valve Disease (MMVD)",
         "description_ja": "犬で最も多い後天性心疾患です。僧帽弁の変性により弁が閉鎖不全となり、血液の逆流が生じます。",
@@ -1685,6 +1691,7 @@ DISEASES = [
             "coughing",
             "exercise_intolerance",
             "rapid_breathing",
+            "labored_breathing",
             "fainting",
             "lethargy",
         ],

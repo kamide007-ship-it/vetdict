@@ -826,10 +826,16 @@ SYMPTOM_ALIASES = {
     "よだれが出る": "excessive_drooling",
     "食べにくそう": "loss_of_appetite",
     "食べるのを嫌がる": "loss_of_appetite",
-    # 「口を痛がる」= 口腔痛（歯科・口内炎の主訴）。旧マッピング excessive_drooling は
-    # 流涎（別症状、よだれエイリアスが担当）で不正確だった。
-    "口を痛がる": "difficulty_eating",
-    "口を触ると嫌がる": "excessive_drooling",
+    # 口の痛みは疼痛IDに直接解決する（pain は ID_SYNONYMS で lethargy/vocalization に
+    # フォールバックするため、pain を持たない種でも安全）。従来の excessive_drooling への
+    # マッピングは「よだれ」と二重計上になるだけで、口内炎/FCGS の痛み情報が失われていた。
+    "口を痛がる": "pain",
+    "口を痛がって": "pain",
+    "口が痛そう": "pain",
+    "口を触ると嫌がる": "pain",
+    # 「食べられない」= 摂食困難（口の問題で食べたいのに食べられない）
+    "食べられない": "difficulty_eating",
+    "食べたそうなのに食べない": "difficulty_eating",
     "歯が折れた": "excessive_drooling",
     "歯肉が赤い": "excessive_drooling",
     "口内炎": "oral_ulcers",
@@ -1031,10 +1037,22 @@ SYMPTOM_ALIASES = {
     "目の周りが汚れてる": "eye_discharge",
     "目の周りが濡れてる": "eye_discharge",
     # 鳥 — 毛引き/嘴
-    "羽を抜いてる": "hair_loss",
-    "自咬": "hair_loss",
-    "自分で羽を抜く": "hair_loss",
-    "毛引き": "hair_loss",
+    # 毛引き（feather destructive behavior）は行動学的疾患で、受動的な羽毛脱落
+    # （feather_loss/hair_loss）とは別概念。鳥語彙の feather_plucking に直接解決し、
+    # feather_plucking を持たない種では ID_SYNONYMS 経由で feather_loss/self_mutilation
+    # にフォールバックする（毛引き症とPBFDの鑑別はどちらも候補に残る）。
+    "羽を抜いてる": "feather_plucking",
+    "羽を抜いて": "feather_plucking",
+    "羽をむしって": "feather_plucking",
+    "羽をむしる": "feather_plucking",
+    "自咬": "self_mutilation",
+    "自分で羽を抜く": "feather_plucking",
+    "毛引き": "feather_plucking",
+    # 呼吸努力のテイルボビング（尾の上下動）— 鳥の呼吸困難の教科書的所見
+    "尾が上下に動": "tail_bobbing",
+    "尾が上下して": "tail_bobbing",
+    "尻尾が上下に動": "tail_bobbing",
+    "テイルボビング": "tail_bobbing",
     "嘴が長い": "loss_of_appetite",
     # モルモット — 壊血病の症状
     "歯茎が腫れてる": "bleeding_gums",
@@ -1679,6 +1697,50 @@ SYMPTOM_ALIASES = {
     "チーズ状の膿": "mucus_in_mouth",
     "チーズ様物質": "mucus_in_mouth",
     "乾酪様物質": "mucus_in_mouth",
+    # --- 2026-08 第8回精度スイープで検出した抽出漏れ ---
+    # 犬: 運動不耐（心疾患の飼い主表現）
+    "座り込む": "exercise_intolerance",
+    "座りこむ": "exercise_intolerance",
+    "散歩の途中で止まる": "exercise_intolerance",
+    # 犬: スクーティング（肛門嚢疾患の定義的サイン）
+    "おしりを地面にこすりつけ": "scooting",
+    "お尻を地面にこすりつけ": "scooting",
+    "おしりをこすりつけ": "scooting",
+    "お尻をこすりつけ": "scooting",
+    "おしりを擦る": "scooting",
+    "お尻を擦る": "scooting",
+    # 内分泌性脱毛（クッシング/甲状腺機能低下の左右対称性脱毛）
+    "左右対称に毛が抜け": "hair_loss",
+    "左右対称に抜け": "hair_loss",
+    "毛が薄くなって": "hair_loss",
+    # 疼痛姿勢（IVDD等）: 背中を丸める → hunched_posture
+    # （ID_SYNONYMS で abdominal_pain、犬レガシーでは reluctance_to_move に解決）
+    "背中を丸めて": "hunched_posture",
+    "背中を丸めながら": "hunched_posture",
+    # 振戦の部位付き表現（「震えてる」だけでは「足が震える」を取りこぼしていた）
+    "足が震え": "tremors",
+    "脚が震え": "tremors",
+    # 爬虫類MBD: 四肢の弯曲（limb_deformity → ID_SYNONYMS で soft_bones 等に解決）
+    "脚が曲がって": "limb_deformity",
+    "手足が曲がって": "limb_deformity",
+    # 直腸脱/クロアカ脱の飼い主表現（rectal_prolapse → ID_SYNONYMS で
+    # rectal_protrusion/cloacal_prolapse に解決。該当IDのない種では安全に脱落）
+    "お尻から赤いもの": "rectal_prolapse",
+    "お尻から何かが出て": "rectal_prolapse",
+    "お尻から何か出て": "rectal_prolapse",
+    "肛門から何か出て": "rectal_prolapse",
+    "肛門から赤いもの": "rectal_prolapse",
+    # 注: 「脱腸」はマッピングしない — 獣医学的には鼠径/腹壁ヘルニアを指す用語であり、
+    # 直腸脱に解決すると獣医師入力を誤誘導する
+    # フェレット副腎疾患: 外陰部腫脹（「外陰部が腫れてる」だけでは
+    # 「陰部が腫れている」を取りこぼしていた）
+    "陰部が腫れて": "vulvar_swelling",
+    "陰部の腫れ": "vulvar_swelling",
+    # 尾部脱毛（フェレット副腎の初発サイン）
+    "尻尾がハゲ": "hair_loss",
+    "しっぽがハゲ": "hair_loss",
+    "尻尾の毛が抜け": "hair_loss",
+    "しっぽの毛が抜け": "hair_loss",
     # --- 2026-08 精度スイープ第6弾 ---
     # 爬虫類の脱皮不全: 「できない」形が欠落していた（「うまくいかない」のみ収載）
     "脱皮がうまくできない": "dysecdysis",
