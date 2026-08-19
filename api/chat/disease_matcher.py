@@ -51,8 +51,15 @@ _SYN: dict[str, list[str]] = {
     "polydipsia": ["excessive_thirst", "increased_thirst"],
     "polyuria": ["excessive_urination", "frequent_urination", "increased_urination"],
     "hair_loss": ["alopecia", "scaling", "quill_loss", "severe_quill_loss", "feather_loss", "circular_hair_loss"],
-    "circular_hair_loss": ["hair_loss", "alopecia"],
+    "circular_hair_loss": ["hair_loss", "alopecia", "fur_loss_patches", "patchy_hair_loss"],
+    "fur_loss_patches": ["hair_loss", "circular_hair_loss", "patchy_hair_loss"],
     "alopecia": ["hair_loss", "circular_hair_loss"],
+    # Plantar lesion IDs: species modules split pododermatitis across
+    # foot_lesions / foot_swelling / pododermatitis_signs — the classic
+    # sore-hock complaint must reach all of them.
+    "pododermatitis_signs": ["foot_lesions", "foot_swelling", "foot_sores"],
+    "foot_lesions": ["pododermatitis_signs", "foot_swelling", "foot_sores"],
+    "foot_sores": ["foot_lesions", "pododermatitis_signs", "foot_swelling"],
     "feather_loss": ["hair_loss", "feather_plucking"],
     "feather_plucking": ["feather_loss", "self_mutilation"],
     "skin_lesions": [
@@ -156,7 +163,7 @@ _SYN: dict[str, list[str]] = {
     "wet_tail": ["diarrhea"],
     "diarrhea": ["wet_tail"],
     "poor_coat": ["hair_loss", "dry_skin"],
-    "dry_skin": ["poor_coat", "flaky_skin", "scaling"],
+    "dry_skin": ["poor_coat", "flaky_skin", "scaling", "skin_scaling", "scaling_skin"],
     "flaky_skin": ["dry_skin", "scaling", "crusting"],
     "thinning_skin": ["hair_loss"],
     "darkened_coloration": ["dark_coloration", "discoloration"],

@@ -314,7 +314,7 @@ const I18N={
     pricingHeader:"全機能無料",
     pricingPeriodOriginal:"¥980/月",
     pricingFeature1:"鑑別診断リスト生成（全21動物種）",
-    pricingFeature2:"疾患データベース<strong>6,500+疾患</strong>閲覧",
+    pricingFeature2:"疾患データベース<strong>6,400+疾患</strong>閲覧",
     pricingFeature3:"薬品辞書<strong>600+薬品</strong>・種別投与量",
     pricingFeature4:"臨床相談チャット<strong>無制限</strong>",
     pricingFeature5:"検査値入力・疼痛スケール対応",
@@ -588,7 +588,7 @@ const I18N={
     pricingHeader:"All features free",
     pricingPeriodOriginal:"¥980/month",
     pricingFeature1:"Differential diagnosis list (all 21 species)",
-    pricingFeature2:"Disease database <strong>6,500+ diseases</strong>",
+    pricingFeature2:"Disease database <strong>6,400+ diseases</strong>",
     pricingFeature3:"Drug dictionary <strong>600+ drugs</strong> with species-specific dosing",
     pricingFeature4:"Clinical chat <strong>unlimited</strong>",
     pricingFeature5:"Lab values & pain scale input",
@@ -1546,32 +1546,32 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:600,drugs:570,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:550,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:358,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:419,drugs:270,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:283,drugs:70,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:308,drugs:138,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
-    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:229,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:204,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
-    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:226,drugs:68,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:198,drugs:75,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:179,drugs:158,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:236,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:412,drugs:236,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:236,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:265,drugs:102,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:255,drugs:110,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:222,drugs:109,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:219,drugs:104,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
-    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:251,drugs:18,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:618,drugs:572,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:551,drugs:552,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:616,drugs:359,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:429,drugs:270,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:311,drugs:70,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:331,drugs:138,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:258,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:267,drugs:204,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:236,drugs:68,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:214,drugs:75,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:193,drugs:158,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:529,drugs:237,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:434,drugs:237,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:275,drugs:237,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:280,drugs:103,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:278,drugs:111,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:242,drugs:110,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:241,drugs:105,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:255,drugs:18,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:28,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
-    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:1,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
+    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:289,drugs:1,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:6528,
+    diseases:6431,
     species:21,
-    drugs:635,
+    drugs:637,
     symptoms:60,
     protocols:188
   };
@@ -4573,6 +4573,37 @@ function runDifferentialFromDisease(idsCsv){
   trackEvent("differential_from_disease",{species:currentSpecies,symptom_count:usable.length});
   doAnalyze();
 }
+/* Guided-consultation → checker pivot: carry the interview's confirmed symptom
+   set into the checkbox checker pre-selected and auto-analyzed, so the vet can
+   fine-tune signs one checkbox at a time instead of restarting the interview.
+   Completes the two-way flow with the checker's low-confidence banner, which
+   already pivots checker → guided mode. Waits for the species' checker
+   vocabulary to load when the guided species differs from the loaded one. */
+function runCheckerFromGuided(){
+  const sp=guidedState.species||currentSpecies||"dog";
+  const ids=(guidedState.selectedSymptoms||[]).slice();
+  if(!ids.length)return;
+  const needSwitch=sp!==currentSpecies;
+  if(needSwitch&&typeof selectSpecies==="function")selectSpecies(sp);
+  let tries=0;
+  const apply=()=>{
+    const valid=new Set((symptomData||[]).map(s=>s.id));
+    const usable=ids.filter(id=>valid.has(id));
+    if(needSwitch&&(currentSpecies!==sp||!usable.length)&&tries++<25){setTimeout(apply,150);return;}
+    if(!usable.length){
+      if(typeof showToast==="function")showToast(currentLang==="ja"?"症状セットをチェッカーに引き継げませんでした":"Could not carry the symptom set into the checker","warning");
+      return;
+    }
+    selectedSymptoms=new Set(usable);
+    renderSelectedSymptoms();
+    renderSymptomList(symptomData);
+    _pushNavHistory(currentView,"checker","");
+    switchView("checker");
+    trackEvent("checker_from_guided",{species:sp,symptom_count:usable.length});
+    doAnalyze();
+  };
+  setTimeout(apply,needSwitch?200:0);
+}
 /* Related diseases: compute the closest differentials for a disease by counting
    shared symptoms across the currently-loaded species list (allDiseases), mirroring
    the server-rendered SEO page. Rendered lazily on expand so browsing stays fast.
@@ -5686,11 +5717,17 @@ function guidedRenderFinalResults(data){
   const disclaimer=currentLang==="ja"?rec.next_step_ja:rec.next_step_en;
   if(disclaimer)guidedAddMsg(`<div class="chat-disclaimer">${escapeHtml(disclaimer)}</div>`,"bot chat-result");
 
-  // Action buttons: add more symptoms + restart
+  // Action buttons: add more symptoms + checker pivot + restart
   const addMoreLabel=currentLang==="ja"?"+ 症状を追加して再診断":"+ Add symptoms & re-diagnose";
-  guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn primary" id="guidedAddMore">${addMoreLabel}</button><button class="guided-action-btn text" id="guidedRestartFinal">${t("guidedRestart")}</button></div>`);
+  const checkerLabel=currentLang==="ja"?"\u{1F9EA} チェッカーで症状を微調整して再解析":"\u{1F9EA} Refine signs in the checker";
+  const checkerBtn=(guidedState.selectedSymptoms||[]).length>0
+    ?`<button class="guided-action-btn secondary" id="guidedToChecker">${checkerLabel}</button>`
+    :"";
+  guidedSetActions(`<div class="guided-bottom-actions"><button class="guided-action-btn primary" id="guidedAddMore">${addMoreLabel}</button>${checkerBtn}<button class="guided-action-btn text" id="guidedRestartFinal">${t("guidedRestart")}</button></div>`);
   const addBtn=document.getElementById("guidedAddMore");
   if(addBtn)addBtn.addEventListener("click",()=>{guidedSetActions("");guidedFetch("next_category");});
+  const chkBtn=document.getElementById("guidedToChecker");
+  if(chkBtn)chkBtn.addEventListener("click",()=>{runCheckerFromGuided();});
   const rb=document.getElementById("guidedRestartFinal");
   if(rb)rb.addEventListener("click",()=>{guidedSetActions("");startGuidedConsultation();});
 }

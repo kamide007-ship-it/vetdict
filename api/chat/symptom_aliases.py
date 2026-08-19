@@ -929,8 +929,12 @@ SYMPTOM_ALIASES = {
     "首を振る": "head_shaking",
     "尾を振る": "labored_breathing",
     "呼吸のたびに尾を振る": "labored_breathing",
-    "足の裏が赤い": "lameness_or_limping",
-    "足の裏が腫れてる": "lameness_or_limping",
+    # 足底病変（ソアホック/バンブルフット/足底皮膚炎）は足特異的IDに解決し、
+    # 足ID非保有種のみ ID_SYNONYMS 経由で跛行にフォールバックする。
+    "足の裏が赤い": "foot_sores",
+    "足の裏が腫れてる": "foot_sores",
+    "足の裏が赤く腫れている": "foot_sores",
+    "足裏が赤い": "foot_sores",
     "バンブルフット": "lameness_or_limping",
     "bumblefoot": "lameness_or_limping",
     # ---------------------------------------------------------------
@@ -1737,6 +1741,23 @@ SYMPTOM_ALIASES = {
     "しっぽがハゲ": "hair_loss",
     "尻尾の毛が抜け": "hair_loss",
     "しっぽの毛が抜け": "hair_loss",
+    # --- 2026-08 精度スイープ第6弾 ---
+    # 爬虫類の脱皮不全: 「できない」形が欠落していた（「うまくいかない」のみ収載）
+    "脱皮がうまくできない": "dysecdysis",
+    "脱皮が残っている": "dysecdysis",
+    "皮が残っている": "dysecdysis",
+    # 空吐き・悪心の仕草（フェレット胃潰瘍/ヘリコバクターの古典徴候）
+    "吐きそうにする": "unproductive_retching",
+    "吐きそうな仕草": "unproductive_retching",
+    # 鳥の神経徴候: 止まり木からの落下（重金属中毒・痙攣疾患の主訴）
+    "止まり木から落ちる": "falling_off_perch",
+    "止まり木から落ちた": "falling_off_perch",
+    # 円形脱毛（皮膚糸状菌症の教科書的パターン）
+    "毛が円形に抜ける": "circular_hair_loss",
+    "円形に毛が抜ける": "circular_hair_loss",
+    "円形脱毛": "circular_hair_loss",
+    # 移動を嫌がる（疼痛の非特異的サイン、草食小動物で重要）
+    "歩きたがらない": "reluctance_to_move",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

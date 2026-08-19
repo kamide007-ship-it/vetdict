@@ -103,16 +103,106 @@ _DEDUP_CONTENT_FIELDS = (
 )
 
 
+# Known generic-template fingerprints. A field carrying one of these is filler,
+# not clinical content — counting its length would let a long boilerplate entry
+# out-rank its curated duplicate twin during dedupe (observed with the
+# "正確な臨床評価…から治療方針を決定" workup template beating a curated
+# drug-dose protocol).
+_DEDUP_TEMPLATE_MARKS = (
+    "正確な臨床評価（病歴、身体検査、CBC・生化学、画像）から治療方針を決定",
+    "is a clinical condition affecting",
+    "is a clinical disorder affecting",
+)
+
+
 def _dedup_richness(entry: Any) -> tuple[int, int]:
-    """Rank a disease entry by content completeness (non-empty fields, then total length)."""
+    """Rank a disease entry by content completeness (non-empty fields, then total length).
+
+    Fields carrying a known generic-template fingerprint count as empty so a
+    curated entry always out-ranks its boilerplate duplicate.
+    """
     nonempty = 0
     total = 0
     for f in _DEDUP_CONTENT_FIELDS:
         v = _disease_field(entry, f, "")
         if isinstance(v, str) and v.strip():
+            if any(mark in v for mark in _DEDUP_TEMPLATE_MARKS):
+                continue
             nonempty += 1
             total += len(v)
     return (nonempty, total)
+
+
+_JA_SPECIES_TAGS = (
+    "犬",
+    "猫",
+    "馬",
+    "ウサギ",
+    "うさぎ",
+    "ハムスター",
+    "モルモット",
+    "チンチラ",
+    "フェレット",
+    "ハリネズミ",
+    "フクロモモンガ",
+    "デグー",
+    "鳥",
+    "鳥類",
+    "小鳥",
+    "インコ",
+    "オウム",
+    "爬虫類",
+    "リクガメ",
+    "ヘビ",
+    "トカゲ",
+    "両生類",
+    "魚",
+    "その他",
+)
+
+
+def _strip_ja_species_tag(ja: str) -> str:
+    """Strip trailing display-noise species tags from a JA disease name.
+
+    "羽毛嚢胞（鳥）" → "羽毛嚢胞"; "熱中症（呼吸器型）（デグー）" → "熱中症（呼吸器型）".
+    Only the exact species display names are stripped — clinical qualifiers
+    (（重度）, （ヘモクロマトーシス）, （豚） etc.) are left intact so genuinely
+    distinct subtype entries never collapse.
+    """
+    out = ja
+    changed = True
+    while changed:
+        changed = False
+        for tag in _JA_SPECIES_TAGS:
+            suffix = "（" + tag + "）"
+            if out.endswith(suffix) and len(out) > len(suffix):
+                out = out[: -len(suffix)]
+                changed = True
+    return out
+
+
+def _fold_en_name(nm: str) -> str:
+    """Fold an English disease name for spelling/plural-variant equality.
+
+    Used ONLY for equality matching (both sides folded identically), so the
+    folded string need not be a readable name. Keeps parenthetical qualifier
+    content — "(Bd)" vs "(Bsal)" or "(Wing)" vs "(Leg)" never collide — and
+    folds: case, punctuation/spacing, possessive "'s", final-word plural, and
+    British→American spelling (tularaemia/tularemia, tumour/tumor,
+    heatstroke/heat stroke).
+    """
+    n = nm.lower().replace("’", "'")
+    n = _re.sub(r"'s\b", "s", n)
+    tokens = _re.findall(r"[a-z0-9]+", n)
+    if not tokens:
+        return ""
+    last = tokens[-1]
+    if len(last) > 3 and last.endswith("s") and not last.endswith("ss"):
+        tokens[-1] = last[:-1]
+    joined = "".join(tokens)
+    for brit, amer in (("ae", "e"), ("oe", "e"), ("our", "or")):
+        joined = joined.replace(brit, amer)
+    return joined
 
 
 def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
@@ -128,6 +218,17 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
     ("HYPP") additionally merges into the unique full-name entry carrying that
     acronym suffix ("Hyperkalemic Periodic Paralysis (HYPP)"); ambiguous
     acronyms held by multiple distinct diseases never bridge.
+
+    Two further conservative keys close the remaining duplicate-card classes
+    (2026-08 audit found ~250 such pairs rendering as double cards):
+
+    - ``name_ja`` equal after stripping pure species-tag suffixes
+      ("羽毛嚢胞" vs "羽毛嚢胞（鳥）") — the tag is display noise, so the JA UI
+      shows near-identical titles. Clinical qualifiers are never stripped.
+    - English names equal after spelling/plural folding ("Heatstroke" vs
+      "Heat Stroke", "Tularaemia" vs "Tularemia", "Mammary Tumors" vs
+      "Mammary Tumor"). Parenthetical qualifiers are preserved in the fold so
+      deliberately distinct subtypes ("(Bd)" vs "(Bsal)") never collapse.
 
     The richest entry (most non-empty content fields, then longest total
     content) is kept; ties resolve to the earliest entry. The relative order of
@@ -153,6 +254,8 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
     by_name: Dict[str, int] = {}
     by_ja: Dict[str, int] = {}
     by_slug: Dict[str, int] = {}
+    by_ja_stripped: Dict[str, int] = {}
+    by_en_fold: Dict[str, int] = {}
     # Acronym bridging: "Hyperkalemic Periodic Paralysis (HYPP)" and a bare
     # "HYPP" entry are the same disease shown as two cards. Merge a bare
     # acronym-named entry into the full-name entry ONLY when exactly one
@@ -183,6 +286,22 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
                 union(i, by_slug[slug])
             else:
                 by_slug[slug] = i
+        # JA titles identical once display-noise species tags are stripped
+        # ("羽毛嚢胞" vs "羽毛嚢胞（鳥）") render as duplicate cards in JA mode.
+        ja_stripped = _strip_ja_species_tag(ja) if ja else ""
+        if ja_stripped:
+            if ja_stripped in by_ja_stripped:
+                union(i, by_ja_stripped[ja_stripped])
+            else:
+                by_ja_stripped[ja_stripped] = i
+        # EN spelling/plural variants ("Heatstroke"/"Heat Stroke",
+        # "Tularaemia"/"Tularemia") render as duplicate cards in EN mode.
+        en_fold = _fold_en_name(raw_nm) if raw_nm else ""
+        if en_fold:
+            if en_fold in by_en_fold:
+                union(i, by_en_fold[en_fold])
+            else:
+                by_en_fold[en_fold] = i
         m = _re.search(r"\(([A-Z][A-Z0-9\-]{2,7})\)\s*$", raw_nm)
         if m:
             paren_acr.setdefault(m.group(1), set()).add(i)

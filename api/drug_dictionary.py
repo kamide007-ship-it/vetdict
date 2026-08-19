@@ -62,6 +62,7 @@ from api.drug_batch_37 import DRUGS_BATCH_37
 from api.drug_batch_38 import DRUGS_BATCH_38
 from api.drug_batch_39 import DRUGS_BATCH_39
 from api.drug_batch_40 import DRUGS_BATCH_40
+from api.drug_batch_41 import DRUGS_BATCH_41
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10639,13 +10640,21 @@ for _drug39 in DRUGS_BATCH_39:
         _drug_index[_drug39["id"]] = _drug39
 
 # バッチ40: 2026-08 第8回 referenced-but-absent 監査で検出
-# （ミルテホシン/メグルミンアンチモン酸塩 — 犬リーシュマニア症のLeishVet第一選択2剤が
-#  用量付きで参照されるのに両方未収載; ヒト免疫グロブリンIVIG — IMHA/ITP難治例レスキューが
-#  30-40参照で最多欠落; インターフェロンα — 鳥PBFD/猫レトロウイルス補助療法33参照、ω型のみ収載だった）
+# （エタンブトール — 鳥/爬虫類/犬猫の抗酸菌症多剤プロトコルが13エントリで参照するのに未収載;
+#  ジヒドロストレプトマイシン — 犬ブルセラ症の古典的標準レジメンが9エントリで参照するのに未収載）
 for _drug40 in DRUGS_BATCH_40:
     if _drug40["id"] not in _drug_index:
         DRUGS.append(_drug40)
         _drug_index[_drug40["id"]] = _drug40
+
+# バッチ41: 2026-08 第9回 referenced-but-absent 監査で検出
+# （ミルテホシン/メグルミンアンチモン酸塩 — 犬リーシュマニア症のLeishVet第一選択2剤が
+#  用量付きで参照されるのに両方未収載; ヒト免疫グロブリンIVIG — IMHA/ITP難治例レスキューが
+#  30-40参照で最多欠落; インターフェロンα — 鳥PBFD/猫レトロウイルス補助療法33参照、ω型のみ収載だった）
+for _drug41 in DRUGS_BATCH_41:
+    if _drug41["id"] not in _drug_index:
+        DRUGS.append(_drug41)
+        _drug_index[_drug41["id"]] = _drug41
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
@@ -11149,6 +11158,11 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "calcium_supplement_reptile": (
         "炭酸カルシウム",
     ),  # canonical: 炭酸カルシウム粉末（爬虫類用） — 粉末 suffix defeats the stem index (13 treatment refs)
+    # 2026-08 sweep #8: variant spellings in anesthesia/treatment texts.
+    "atipamezole": ("アティパメゾール",),  # ティ variant of アチパメゾール — emergency-kit refs
+    "milbemycin_oxime": (
+        "ミルベマイシン",
+    ),  # canonical: ミルベマイシンオキシム — texts cite the bare stem (ミルベマイシンA錠 等)
 }
 
 

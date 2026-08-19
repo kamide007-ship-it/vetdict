@@ -2042,6 +2042,75 @@ class TestChatClinicalAccuracyAuditRound5:
 
 
 class TestChatClinicalAccuracyAuditRound6:
+    """2026-08 sweep round 6: realistic owner complaints that extracted
+    nothing (or ranked clinically wrong diseases) before the round-6 alias /
+    ID-synonym / matcher-bridge fixes."""
+
+    @staticmethod
+    def _run(text, species):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = sorted(_extract_species_symptoms(text, species))
+        return ex, _match_species_symptoms_to_diseases(list(ex), species, lang="ja")
+
+    def test_cat_oral_pain_ranks_dental_stomatitis(self):
+        # 口を痛がる was mismapped to excessive_drooling (a different sign);
+        # it must resolve to difficulty_eating so dental/FCGS complaints rank.
+        ex, m = self._run("口を痛がる よだれが多い 食べたそうなのに食べない", "cat")
+        assert "difficulty_eating" in ex
+        top5 = [x.get("name_ja") or x.get("name") for x in m[:5]]
+        assert any("歯周" in n or "口内炎" in n or "歯肉" in n for n in top5), top5
+
+    def test_guinea_pig_pododermatitis_rank1(self):
+        # 足の裏が赤く腫れている extracted only generic 'swelling' before.
+        ex, m = self._run("足の裏が赤く腫れている 歩きたがらない", "guinea_pig")
+        assert "foot_sores" in ex and "reluctance_to_move" in ex
+        top = m[0].get("name_ja") or m[0].get("name")
+        assert "足底皮膚炎" in top or "バンブルフット" in top, top
+
+    def test_rabbit_sore_hocks_rank1(self):
+        # The main sore-hocks entry keys on foot_lesions; the matcher bridge
+        # from pododermatitis_signs must reach it.
+        ex, m = self._run("足の裏が赤い 動きたがらない", "rabbit")
+        top = m[0].get("name_ja") or m[0].get("name")
+        assert "ソアホック" in top or "足底皮膚炎" in top, top
+
+    def test_snake_dysecdysis_and_spectacle_top(self):
+        # 「脱皮がうまくできない」(できない form) was not aliased at all.
+        ex, m = self._run("脱皮がうまくできない 目が白いまま", "snake")
+        assert "dysecdysis" in ex
+        top2 = [x.get("name_ja") or x.get("name") for x in m[:2]]
+        assert any("脱皮不全" in n for n in top2), top2
+
+    def test_ferret_retching_melena_ranks_helicobacter(self):
+        # 吐きそうにする (non-productive retching gesture) extracted nothing;
+        # bruxism + melena + retching is the classic Helicobacter/ulcer triad.
+        ex, m = self._run("吐きそうにする 歯ぎしりをする 黒い便が出る", "ferret")
+        assert len(ex) >= 3
+        top3 = [x.get("name_ja") or x.get("name") for x in m[:3]]
+        assert any("ヘリコバクター" in n or "胃潰瘍" in n for n in top3), top3
+
+    def test_bird_falling_off_perch_extracts(self):
+        ex, m = self._run("止まり木から落ちる 痙攣する", "bird")
+        assert "falling_off_perch" in ex and "seizures" in ex
+        top = m[0].get("name_ja") or m[0].get("name")
+        assert "痙攣" in top or "中毒" in top, top
+
+    def test_chinchilla_circular_alopecia_ranks_ringworm(self):
+        # 円形脱毛 (the textbook dermatophytosis pattern) was not aliased.
+        ex, m = self._run("毛が円形に抜ける カサカサしている", "chinchilla")
+        assert "circular_hair_loss" in ex
+        top3 = [x.get("name_ja") or x.get("name") for x in m[:3]]
+        assert any("糸状菌" in n or "白癬" in n for n in top3), top3
+
+    def test_reluctance_to_move_alias_general(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        assert "reluctance_to_move" in _extract_species_symptoms("歩きたがらない", "guinea_pig")
+
+
+class TestChatClinicalAccuracyAuditRound7:
     """2026-08 audit round 5 (15-case realistic-complaint sweep). Root causes
     fixed this round: no alias for the owner phrasing of exercise intolerance
     (座り込む) so cardiac complaints extracted airway signs only; the legacy

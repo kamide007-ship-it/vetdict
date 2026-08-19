@@ -39,9 +39,14 @@ def test_manifest_has_no_stale_counts():
     text = _read("static/manifest.json")
     # Old counts that historically drifted out of sync with the live DB.
     # Each represents a regression we don't want to reintroduce.
-    assert "220+薬品" not in text, "Stale drug count (220+) — current is 250+"
-    assert "194薬品" not in text, "Stale drug count (194) — current is 250+"
-    assert "6,400+疾患" not in text, "Stale disease count (6,400+) — current is 7,000+"
+    assert "220+薬品" not in text, "Stale drug count (220+) — current is 630+"
+    assert "194薬品" not in text, "Stale drug count (194) — current is 630+"
+    # 2026-08: the duplicate-card merge (dedupe round 2) brought the browsable
+    # corpus to ~6.9k rows / 6.4k cross-species entries, so the truthful rounded
+    # claim moved DOWN from 7,000+ to 6,400+. Never re-inflate past the number
+    # a user can actually browse.
+    assert "7,000+疾患" not in text, "Inflated disease count (7,000+) — current truthful claim is 6,400+"
+    assert "6,500+疾患" not in text, "Stale disease count (6,500+) — current truthful claim is 6,400+"
 
 
 # ---------------------------------------------------------------------------
@@ -56,8 +61,11 @@ def test_footer_share_text_does_not_use_brittle_exact_count():
         decoded = unquote(href)
         # Brittle exact counts (full-width comma) that have appeared before.
         assert "7,146" not in decoded, "Found stale exact count 7,146 in share URL"
-        assert "7,162" not in decoded, "Embed rounded counts (7,000+), not exact"
-        assert "7,000" in decoded, "Share URL should mention 7,000+ diseases"
+        assert "7,162" not in decoded, "Embed rounded counts, not exact"
+        # 2026-08 dedupe round 2: truthful rounded claim is 6,400+ (see
+        # test_disease_count_truthful.py for the advertised==browsable invariant).
+        assert "7,000" not in decoded, "Inflated count (7,000+) — current truthful claim is 6,400+"
+        assert "6,400" in decoded, "Share URL should mention 6,400+ diseases"
 
 
 # ---------------------------------------------------------------------------

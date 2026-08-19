@@ -2721,8 +2721,98 @@ katakana トークン頻度監査（第6回スイープ、実マッチャー突�
 ### 表示数値の同期・キャッシュ
 - `setDefaultStats()` 種別薬品数5種を実測同期（dog 567, cat 546, horse 358, rabbit 270, ferret 204）、
   pendingStats drugs 628→**631**・symptoms 59→**60**
+- ServiceWorker: `CACHE_NAME` v116 → **v117**
 
-## 2026-08セッション（第14弾: リーシュマニア第一選択2剤+IVIG+IFN-α補完 + 15症例精度スイープ + 犬レガシーDBの頻出疾患2件補完）
+## 2026-08セッション（第14弾: 重複カード197件の大規模統合 + 治療テンプレートのオーバーレイ上書きバグ修正 + 薬品2剤 + チャット精度第6弾）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **3,883件合格**（34 skip）
+- 疾患: 配信DBクリーンビルドで主要臨床フィールド（治療/病因/予後/予防/説明/病態）の空欄 **0**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 薬用量: safe薬品の dosage 欠落 **0**
+
+### 疾患重複カードの大規模統合（197件 — dedupe第2弾）
+第11弾の完全一致dedupeをすり抜けていた重複カード2クラスを、`dedupe_disease_list` の保守的な拡張で統合:
+- **JA種タグサフィックス**: 「羽毛嚢胞」vs「羽毛嚢胞（鳥）」のような、name_ja が表示ノイズの種タグ
+  （（鳥）（両生類）等21種+鳥類/小鳥）だけ違うペア。**臨床的修飾語（（重度）（ヘモクロマトーシス）等）は
+  決して剥がさない**ため、意図的なサブタイプ（Bd/Bsal、鉄蓄積症の2型、熱中症重度型等）は温存
+- **EN綴り/複数形フォールド**: Heatstroke/Heat Stroke・Tularaemia/Tularemia・Hypoglycaemia/Hypoglycemia・
+  Mammary Tumors/Tumor 等（英米綴り ae→e, oe→e, our→or + 末尾語の複数形フォールド + 所有格 's）。
+  **括弧内修飾語はフォールドに残す**ため (Wing)/(Leg)・(Bd)/(Bsal) は衝突しない
+- 全197ペアを目視レビューして全て同一疾患であることを確認（Dermatophytosis≠Dermatophilosis のような
+  別疾患ペアは修飾語差で自動的に除外されることを検証）
+- **richness にテンプレート減点を追加**: 汎用ワークアップ雛形（「正確な臨床評価…から治療方針を決定」）を
+  含むフィールドは非カウント。従来はボイラープレートの文字数がキュレート済みエントリに勝ってしまい、
+  モルモット・イレウスの輸液/鎮痛プロトコルがテンプレートに置き換わるところだった
+- 配信DB: 7,057 → **6,892疾患**（横断検索インデックス 6,528→6,431）
+- **prevalence キー37件を存続エントリ名にリネーム**（有病率priorとチップ導線を維持、dead key は既知の10のみ）
+
+### 治療テンプレートのオーバーレイ上書きバグ修正（256件復元）
+- migrate の JSON オーバーレイは COALESCE で**キュレート済みモジュール治療文を汎用ワークアップ雛形で
+  上書き**していた（低メモリ本番の実行時パス helpers.enrich_diseases は「空/テンプレートのみ置換」で正しく、
+  SQLiteパスだけが劣化していた = 2つの配信パスで内容が食い違っていた）
+- `migrate_json_enrichments` に `_guard_treatment` を追加: ワークアップ雛形は空/雛形行の充填のみ可、
+  情報のある既存治療文は決して置換しない → **256件の治療文がキュレート内容に復元**
+  （残る雛形499件は代替となるキュレート文が存在しないもの — 将来のキュレーション候補）
+
+### 馬バックドシン（管骨骨膜炎）の重複統合 + 誤病因修正
+- Bucked Shin / Bucked Shins の2枚カードをEN複数形フォールドで統合（テンプレート側が消え、
+  キュレート治療文側 ms_bucked_shins が存続）
+- **臨床的に誤った急性外傷テンプレート病因**（「落下・衝突・咬傷・交通事故」）を、
+  疲労性障害の正しい病因に置換: 若齢競走馬の高速調教による第三中手骨背側皮質への反復性高ひずみ負荷、
+  リモデリング遅延→骨膜反応、Nunamaker改良調教プログラム（EN pathophysiology のスタブも詳述化、
+  saucer fracture への進行と再発予防を記載。Adams & Stashak 7th ed）
+
+### referenced-but-absent 薬品2剤の補完（`drug_batch_40.py` 新規、631→633薬品）
+- **エタンブトール** — 鳥/爬虫類/犬猫の抗酸菌症多剤プロトコル13エントリが参照するのに未収載。
+  arabinosyl transferase 阻害機序、犬15/猫10-25/鳥20-30 mg/kg（Greene 4th・Gunn-Moore JFMS 2013・
+  Carpenter 6th）、**単剤使用禁止**（耐性）・視神経炎・人獣共通(MTBC)の行政相談を明記
+- **ジヒドロストレプトマイシン** — 犬ブルセラ症の古典的標準（ドキシサイクリン併用 10 mg/kg IM、
+  Wanke 2004）が9エントリで参照するのに未収載。**アミノグリコシド中最強の前庭毒性**・
+  入手不能時のゲンタマイシン代替・B. canis 完全除菌困難（避妊去勢+生涯モニタリング）を明記
+- **garbled 薬品名修正**: 鳥結核プロトコルの「エチオブトール」（実在しない）→「エタンブトール」
+  （JSON+bird/parrotモジュール+テンプレートライブラリの5箇所）
+- 表記ゆれエイリアス: アティパメゾール（ティ形）→atipamezole、裸のミルベマイシン→milbemycin_oxime
+
+### 診断チャット精度 第6弾（12症例スイープ → 全合格）
+- **エイリアス誤マッピング修正**: 「口を痛がる」→excessive_drooling（流涎、誤り）→ **difficulty_eating** に是正
+  → 猫の口腔痛主訴で歯周病/FCGS/歯肉炎がtop5独占。「足の裏が赤い/腫れている」→lameness（非特異）→
+  **foot_sores**（足特異ID、ID_SYNONYMS で pododermatitis_signs/foot_lesions/bumblefoot→跛行の順に解決）
+- **新規エイリアス**: 脱皮がうまくできない（できない形が欠落）→dysecdysis、吐きそうにする→
+  unproductive_retching、止まり木から落ちる→falling_off_perch、毛が円形に抜ける/円形脱毛→
+  circular_hair_loss、歩きたがらない→reluctance_to_move
+- **ID_SYNONYMS 追加**: foot_sores/unproductive_retching(→retching/nausea/vomiting)/falling_off_perch
+  (→inability_to_perch/ataxia)/reluctance_to_move/difficulty_eating の5系統
+- **_SYN マッチングブリッジ**: pododermatitis_signs↔foot_lesions↔foot_swelling（ウサギのソアホック本体
+  エントリは foot_lesions キーで、ブリッジ無しでは妊娠中毒症が1位だった）、circular_hair_loss↔
+  fur_loss_patches、dry_skin→skin_scaling/scaling_skin（チンチラ白癬）
+- 修正後: モルモット足底皮膚炎 rank1、ウサギ・ソアホック rank1 (1.0)、ヘビ・スペクタクル脱皮不全 top2、
+  フェレット・ヘリコバクター胃炎 rank1、チンチラ白癬菌感染 top2、猫歯科疾患 top5独占
+
+### UX: 問診モード最終結果→チェッカーのピボット（双方向動線の完成）
+- チェッカー低信頼度バナー→問診モード（第12弾）の**逆方向が dead end** だった: 問診の最終結果から
+  症状を微調整するには問診を最初からやり直すしかなかった
+- 最終結果のアクション行に「🧪 チェッカーで症状を微調整して再解析」ボタンを追加。
+  `runCheckerFromGuided()` が問診で確定した症状セットをチェッカーに事前選択→ビュー切替→自動解析。
+  問診の種とロード済みの種が違う場合は selectSpecies + readiness poll で語彙ロードを待ってから適用
+  （解決不能セットはトースト警告で無害化）。GA4 `checker_from_guided` イベント
+
+### 回帰テスト（+15件）
+- 薬品: batch40 2剤の存在・完全バイリンガル用量・定義的安全事実（単剤禁止/前庭毒性）・テキスト解決、
+  エチオブトール再発防止（4ファイル走査）、表記ゆれ2種
+- dedupe: JA種タグ統合・臨床修飾語の非統合・EN綴りフォールド・括弧修飾語の非衝突・
+  テンプレートエントリがキュレート双子に勝てないこと・配信DBのバックドシン統合+正病因
+- チャット: Round 6 クラス8件（猫口腔痛/モルモット・ウサギ足底/ヘビ脱皮/フェレット空吐き/
+  鳥落下/チンチラ円形脱毛/歩きたがらない）
+- UX: 問診→チェッカーピボットの配線検証
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()` 全21種の diseases/drugs を実測同期（dog 618疾患/569薬品 等）、
+  pendingStats diseases 6528→**6431**（API実測値）・drugs 631→**633**
+- ServiceWorker: `CACHE_NAME` v117 → **v118**
+- 再現手順: `migrate_to_sqlite.py`（dedupe/ガードは配信DBビルドに統合済み）→ `build_disease_search_index.py`
+
+## 2026-08セッション（第15弾: リーシュマニア第一選択2剤+IVIG+IFN-α補完 + 15症例精度スイープ + 犬レガシーDBの頻出疾患2件補完）
 
 ### エラーチェック（結果: ベースライン健全）
 - repo全体 ruff check clean、フルテスト **3,828件合格**（78 skip、カバレッジ81.96%）
@@ -2731,7 +2821,7 @@ katakana トークン頻度監査（第6回スイープ、実マッチャー突�
 - 疾患: 配信7,057疾患で treatment/prevention/prognosis **100%**
 - prevalence dead key: 10（全て uncommon/rare tier で当該種DBに疾患自体が無い既知残、上限15ガード内）
 
-### referenced-but-absent 薬品4剤の補完（`drug_batch_40.py` 新規、631→635薬品 — mainのbatch_39とのマージで改番）
+### referenced-but-absent 薬品4剤の補完（`drug_batch_41.py` 新規、633→637薬品 — mainのbatch_39/40とのマージで2回改番）
 用量文脈フィルタ付きカタカナ/英語トークン監査（第8回スイープ、実マッチャー突合）で検出。
 マッチャー自体はほぼ健全（ノルモソル/乳酸リンゲル/グルコン酸カルシウム等は文脈スニペットで全て解決）で、真の欠落は4剤:
 - **ミルテホシン（ミルテフォラン）** — 犬リーシュマニア症エントリが「2 mg/kg PO q24h（28日）」と用量指示する
@@ -2791,5 +2881,5 @@ katakana トークン頻度監査（第6回スイープ、実マッチャー突�
 - 新規薬品4剤は既存の治療チップ/相互作用リンク機構で自動的にワンタップ到達可能（マッチャー解決を検証済み）
 
 ### 表示数値の同期・キャッシュ
-- `setDefaultStats()`: 全種をマージ後実測に同期（dog 570薬品・cat 550・馬358・鳥系236）、pendingStats drugs →**635**・symptoms →**60**
-- ServiceWorker: `CACHE_NAME` → **v118**（並行セッションとv117が衝突したため改番）
+- `setDefaultStats()`: 全種をマージ後実測に同期（dog 570薬品・cat 550・馬358・鳥系236）、pendingStats drugs →**637**・symptoms →**60**
+- ServiceWorker: `CACHE_NAME` → **v119**（並行セッションとv117/v118が衝突したため改番）
