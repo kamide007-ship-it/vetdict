@@ -1070,8 +1070,8 @@ document.addEventListener("DOMContentLoaded",async()=>{
       heroDbBtn.addEventListener("click",e=>{
         e.preventDefault();
         switchView("database");
-        const dbPanel=document.getElementById("viewDatabase");
-        if(dbPanel)scrollToAnchor(dbPanel);
+        const target=_navLandingTarget("database");
+        if(target)scrollToAnchor(target);
       });
     }
     /* Hero stats: clickable navigation */
@@ -1146,8 +1146,8 @@ function setupHeroStats(){
     wrapper.setAttribute("tabindex","0");
     wrapper.addEventListener("click",()=>{
       switchView(view);
-      const panel=document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
-      if(panel)scrollToAnchor(panel);
+      const target=_navLandingTarget(view);
+      if(target)scrollToAnchor(target);
     });
     wrapper.addEventListener("keydown",e=>{
       if(e.key==="Enter"||e.key===" "){e.preventDefault();wrapper.click();}
@@ -4709,6 +4709,8 @@ function navigateToDiseaseDb(query){
    パネル先頭着地では検索欄が画面外に残っていた（利用者報告）。 */
 function _navLandingTarget(view){
   if(view==="checker")return document.getElementById("speciesSection")||document.getElementById("viewChecker");
+  /* 相談タブ: モード切替（自由入力/問診）＋チャット欄が見える位置に着地 */
+  if(view==="chat")return document.querySelector("#viewChat .chat-mode-toggle")||document.getElementById("viewChat");
   const searchInputs={database:"diseaseSearch",drugs:"drugSearch",anesthesia:"anesthesiaSearch",emergency:"emergencySearch"};
   const input=searchInputs[view]?document.getElementById(searchInputs[view]):null;
   if(input)return input.closest(".symptom-search")||input;
@@ -6215,7 +6217,14 @@ function setupEmergencyListeners(){
   list.dataset.emergencyListenersAttached="1";
   ["emergencySearch","emergencyCategoryFilter","emergencySpeciesFilter"].forEach(id=>{
     const el=document.getElementById(id);
-    if(el)el.addEventListener(el.tagName==="INPUT"?"input":"change",debounce(renderEmergencyList,200));
+    if(!el)return;
+    if(el.tagName==="INPUT"){
+      /* 検索入力: 位置は動かさない（キーボード表示中のページ移動を避ける） */
+      el.addEventListener("input",debounce(renderEmergencyList,200));
+    }else{
+      /* フィルタ選択: 他タブ（薬品/麻酔/疾患DB）と同様、絞り込み結果の先頭へ再アンカー */
+      el.addEventListener("change",()=>{renderEmergencyList();_revealFilteredList("emergencyList");});
+    }
   });
 }
 
