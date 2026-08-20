@@ -185,3 +185,21 @@ class TestFrontendWiring:
         assert APP_JS.count("_navLandingTarget(") >= 4  # 定義1 + 呼び出し3
         # タップ時のフォーカス（キーボード起動）は維持される
         assert "focusSearch:true" in APP_JS
+
+    def test_all_entry_points_land_smoothly(self):
+        """薬品以外の各項目クリックもスムーズに次の操作位置へ進む配線。
+
+        - 相談タブ: モード切替（自由入力/問診）＋チャット欄が見える位置に着地
+        - ヒーロー統計カード・ヒーローDBボタン: パネル先頭ではなく検索欄へ着地
+        - 救急のカテゴリ/動物種フィルタ: 変更時に絞り込み結果へ再アンカー
+          （他タブと同じ _revealFilteredList、検索入力のタイピングでは動かさない）
+        """
+        assert ".chat-mode-toggle" in APP_JS
+        # helper がヒーロー統計・ヒーローDBボタンからも使われる（計6箇所以上）
+        assert APP_JS.count("_navLandingTarget(") >= 6
+        assert '_revealFilteredList("emergencyList")' in APP_JS
+        # 既存タブのフィルタ再アンカーも維持
+        for list_id in ("drugList", "anesthesiaList", "diseaseDbList"):
+            assert f'_revealFilteredList("{list_id}")' in APP_JS
+        # 行展開時の読みやすい位置へのスクロール（全リスト共通）も維持
+        assert "scrollToAnchor(el,{settle:false})" in APP_JS
