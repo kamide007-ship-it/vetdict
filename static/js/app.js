@@ -6107,7 +6107,11 @@ function renderDrugList(){
     });
     return;
   }
-  filtered=[...filtered].sort((a,b)=>(b.sponsor?1:0)-(a.sponsor?1:0));
+  /* Sponsor (ECVN supplement) entries sort to the BOTTOM: opening the drug
+     dictionary must show clinical drugs first — surfacing supplements at the
+     top read as ads and undermined trust (clinician feedback 2026-08). They
+     remain fully searchable and category-filterable. */
+  filtered=[...filtered].sort((a,b)=>(a.sponsor?1:0)-(b.sponsor?1:0));
   list.innerHTML=filtered.map(d=>{
     const speciesFilter=document.getElementById("drugSpeciesFilter").value;
     let dosageHtml="";

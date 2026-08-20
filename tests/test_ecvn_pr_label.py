@@ -88,3 +88,21 @@ def test_app_js_mirrors_product_url_map_and_collapses_block():
     assert "<details" in fn and "<summary" in fn
     assert "ECVN_PRODUCT_URLS" in fn
     assert 'rel="sponsored noopener noreferrer"' in fn
+
+
+def test_drug_list_sorts_sponsor_supplements_to_bottom():
+    """Opening the drug dictionary must show clinical drugs first: the ECVN
+    supplement entries sort to the BOTTOM of the list (clinician feedback
+    2026-08 — supplements at the top read as ads and undermined trust). They
+    stay searchable and category-filterable; only default ordering changes."""
+    from pathlib import Path
+
+    js = (Path(__file__).resolve().parents[1] / "static" / "js" / "app.js").read_text(encoding="utf-8")
+    fn = js[js.index("function renderDrugList") :]
+    fn = fn[: fn.index("\n}") + 2]
+    # ascending sponsor sort (non-sponsor 0 first, sponsor 1 last)
+    assert "(a.sponsor?1:0)-(b.sponsor?1:0)" in fn
+    # the old sponsor-first ordering must not come back
+    assert "(b.sponsor?1:0)-(a.sponsor?1:0)" not in fn
+    # transparency badge on sponsor rows is retained
+    assert "sponsor-badge-tag" in fn
