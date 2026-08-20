@@ -168,3 +168,20 @@ class TestFrontendWiring:
     def test_placeholder_mentions_brand_search(self):
         """検索プレースホルダが商品名検索可能なことを案内する。"""
         assert "バイトリル" in APP_JS
+
+    def test_tab_click_lands_on_search_input(self):
+        """タブ/メニュークリックで検索入力欄に直接着地する配線。
+
+        薬品タブはパネル先頭に比較表・相互作用チェッカーがあり、パネル先頭
+        着地では検索欄が画面外に残っていた（利用者報告）。ナビの3経路
+        （デスクトップnav・モバイル下部nav・ハンバーガー閉時）すべてが
+        _navLandingTarget（検索主体ビューでは検索欄を返す）を使うこと。
+        """
+        assert "function _navLandingTarget(" in APP_JS
+        assert 'drugs:"drugSearch"' in APP_JS
+        # 検索入力欄（.symptom-search ラッパー）へ着地する
+        assert 'input.closest(".symptom-search")' in APP_JS
+        # 3つのナビ経路すべてが helper を経由する
+        assert APP_JS.count("_navLandingTarget(") >= 4  # 定義1 + 呼び出し3
+        # タップ時のフォーカス（キーボード起動）は維持される
+        assert "focusSearch:true" in APP_JS
