@@ -514,7 +514,7 @@ SPECIES_PREVALENCE = {
         "Urticaria (Hives)": "common",
         "Corneal Ulcer": "common",  # Most common equine ophthalmic emergency
         "Equine Recurrent Uveitis": "common",  # Leading cause of equine blindness
-        "Pituitary Pars Intermedia Dysfunction (PPID / Cushing's)": "common",  # >20% of aged horses
+        "Pituitary Pars Intermedia Dysfunction": "common",  # >20% of aged horses
         "Equine Metabolic Syndrome (EMS)": "common",
         "Superficial Digital Flexor Tendinitis": "common",  # Athletic horses
         "Proximal Suspensory Desmitis": "common",  # Sport horses

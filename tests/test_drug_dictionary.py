@@ -1873,3 +1873,66 @@ def test_batch41_interferon_alpha_does_not_shadow_omega():
     # Omega references must still resolve to interferon_omega, not alpha.
     ids = [x["id"] for x in find_drugs_in_text("インターフェロンオメガ 1 MU/kg SC q48h")]
     assert "interferon_omega" in ids and "interferon_alpha" not in ids
+
+
+class TestBatch42IsotonicSalineAndCholecalciferol:
+    """2026-08 10th referenced-but-absent sweep: 0.9% normal saline (293
+    treatment references — the formulary carried LRS/Normosol and 7.2%
+    hypertonic but no isotonic saline) and cholecalciferol/vitamin D3 (96
+    references — only the active metabolite calcitriol was carried)."""
+
+    def test_normal_saline_present_with_species_dosing_and_never_confused_with_hypertonic(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        ns = get_drug_by_id("normal_saline")
+        assert ns is not None
+        for sp in ("dog", "cat", "horse", "rabbit", "bird", "reptile"):
+            info = ns["species_info"][sp]
+            assert info.get("safe") is True
+            assert (info.get("dosage") or "").strip()
+            assert (info.get("dosage_ja") or "").strip()
+        # class-defining safety facts: chloride-rich/acidifying, K-free,
+        # slow correction of chronic hyponatremia
+        assert "hyperchloremic" in ns["side_effects"].lower()
+        assert "0.5 mEq/L" in ns["contraindications"]
+        # the 7.2% small-volume fluid must never be conflated with isotonic
+        assert any(
+            i.get("drug") == "Hypertonic Saline 7.2-7.5%" and i.get("severity") == "major"
+            for i in ns["drug_interactions"]
+        )
+        # treatment-text resolution (saline nebulization protocols)
+        ids = [h["id"] for h in find_drugs_in_text("ネブライザー 生理食塩水 q4-6h")]
+        assert "normal_saline" in ids and "hypertonic_saline" not in ids
+        # and the hypertonic complaint text still resolves to hypertonic only
+        ids2 = [h["id"] for h in find_drugs_in_text("高張食塩水 4 mL/kg IV")]
+        assert "hypertonic_saline" in ids2 and "normal_saline" not in ids2
+
+    def test_cholecalciferol_present_with_narrow_margin_warnings(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("cholecalciferol")
+        assert d is not None
+        # calcitriol preferred for titratability; reptile NSHP husbandry-first
+        assert "カルシトリオール" in d["species_info"]["dog"]["dosage_ja"]
+        assert "UV-B" in d["species_info"]["reptile"]["notes"]
+        # rodenticide-syndrome warning (same molecule)
+        assert "rodenticide" in d["side_effects"].lower() or "rodenticide" in d["contraindications"].lower()
+        ids = [h["id"] for h in find_drugs_in_text("ビタミンD3（コレカルシフェロール）4,000-6,000 IU/kg/日 PO")]
+        assert "cholecalciferol" in ids
+        # the numeric-boundary guard must keep B12 references clean
+        ids_b12 = [h["id"] for h in find_drugs_in_text("ビタミンB12 250 μg SC 週1回")]
+        assert "cholecalciferol" not in ids_b12
+
+    def test_variant_aliases_resolve_zinc_salts_tmp_sulfa_and_bare_ringer(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = {
+            "硫酸亜鉛 10 mg/kg/日 PO（食事と別に）": "zinc_acetate",
+            "グルコン酸亜鉛に変更可": "zinc_acetate",
+            "TMP-スルファ 15-30 mg/kg 経口 12時間ごと": "trimethoprim_sulfa",
+            "TMP/S 30 mg/kg PO q12h": "trimethoprim_sulfa",
+            "4°Cリンゲル液IVで冷却輸液": "lactated_ringers",
+        }
+        for text, target in cases.items():
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert target in ids, f"{text!r} -> {ids}"

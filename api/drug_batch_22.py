@@ -806,6 +806,13 @@ DRUGS_BATCH_22 = [
     },
     {
         "id": "zinc_acetate",
+        "search_aliases": [
+            "硫酸亜鉛",
+            "グルコン酸亜鉛",
+            "Zinc sulfate",
+            "Zinc gluconate",
+            "亜鉛補充",
+        ],
         "name": "Zinc Acetate",
         "name_ja": "酢酸亜鉛",
         "category": "miscellaneous",

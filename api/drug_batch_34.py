@@ -141,6 +141,7 @@ DRUGS_BATCH_34: list[dict] = [
     },
     {
         "id": "lactated_ringers",
+        "search_aliases": ["リンゲル液", "ハルトマン液", "Hartmann's solution"],
         "name": "Lactated Ringer's Solution (LRS)",
         "name_ja": "乳酸リンゲル液",
         "category": "miscellaneous",

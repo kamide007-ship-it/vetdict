@@ -63,6 +63,7 @@ from api.drug_batch_38 import DRUGS_BATCH_38
 from api.drug_batch_39 import DRUGS_BATCH_39
 from api.drug_batch_40 import DRUGS_BATCH_40
 from api.drug_batch_41 import DRUGS_BATCH_41
+from api.drug_batch_42 import DRUGS_BATCH_42
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -744,6 +745,7 @@ DRUGS: List[Dict[str, Any]] = [
     },
     {
         "id": "trimethoprim_sulfa",
+        "search_aliases": ["TMP-スルファ", "TMPスルファ", "TMP-S", "TMP/S", "TMS合剤"],
         "name": "Trimethoprim-Sulfamethoxazole",
         "name_ja": "トリメトプリム・スルファメトキサゾール",
         "category": "antibiotics",
@@ -10655,6 +10657,16 @@ for _drug41 in DRUGS_BATCH_41:
     if _drug41["id"] not in _drug_index:
         DRUGS.append(_drug41)
         _drug_index[_drug41["id"]] = _drug41
+
+# バッチ42: 2026-08 第10回 referenced-but-absent 監査で検出
+# （生理食塩水0.9% — 293参照で最多欠落の輸液。高張7.2%のみ収載で等張液が無く、
+#  高Ca血症・血液製剤ライン・ネブライゼーションの標準液が引けなかった;
+#  コレカルシフェロール/ビタミンD3 — 上皮小体機能低下症・爬虫類NSHPが96参照、
+#  活性型カルシトリオールのみ収載だった）
+for _drug42 in DRUGS_BATCH_42:
+    if _drug42["id"] not in _drug_index:
+        DRUGS.append(_drug42)
+        _drug_index[_drug42["id"]] = _drug42
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

@@ -3074,3 +3074,81 @@ katakana トークン頻度監査（第6回スイープ、実マッチャー突�
 - 回帰テスト: `test_all_entry_points_land_smoothly`（chat着地・helper 6箇所以上・
   救急フィルタ再アンカー・既存リスト再アンカーと行展開スクロールの維持）
 - ServiceWorker: `CACHE_NAME` v122 → **v123**
+
+## 2026-08セッション（第19弾: 馬PPID重複カード統合+誤治療是正 + 輸液/ビタミンD3補完 + チャット精度第8弾）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **3,937件合格**（34 skip）
+- 配信SQLiteクリーンビルド: treatment/prevention/prognosis **100%**
+- 薬用量: safe薬品の dosage 欠落 **0**（637薬品時点）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- prevalence dead key: **10**（当該種DBに疾患自体が無い既知残、上限15ガード内）
+
+### 馬PPIDの重複カード統合 + 臨床的に危険な誤治療の是正（開発者専門種）
+- **重複カード**: `mt_ppid`（下垂体中葉機能障害 (PPID)）と `mt_ppid2`（同(クッシング病)）が併存し
+  疾患ブラウザに2枚表示。所見セットを mt_ppid に統合（hirsutism+多飲多尿+筋萎縮の8所見）、
+  mt_ppid2 を削除（馬 621→620モジュール疾患）。prevalence キーも存続名にリネーム（prior維持）
+- **臨床誤り是正（JSONオーバーレイ）**: 削除した重複行の予後は「トリロスタン・ミトタンで管理」
+  （犬クッシング用 — 馬PPIDはペルゴリドが第一選択）、存続行の予後・予防は感染症テンプレート
+  （「抗病原体療法」「ワクチネーションプログラム」）だった → ペルゴリド 2 μg/kg・65-85%改善
+  （Ireland & McGowan 2018）・秋のACTH季節変動・EEG 2021年次スクリーニング・蹄葉炎管理を
+  日英で正確に記述。病態生理はドパミン神経変性/POMC の具体的内容へ差し替え
+- **hirsutism 症候群フロア**: 多毛・換毛不全はPPIDのpathognomonic（McFarlane 2011）なのに
+  希少疾患がカバレッジで上回っていた → `_SYNDROME_FINDING_FLOORS` に body_hirsutism→PPID を追加。
+  hirsutismエイリアス新設（毛が長く/換毛しない/毛が生え変わらない/巻き毛 等）
+- 修正後: 「毛が長くて換毛しない 痩せてきた 水をよく飲む」→ PPID rank 1（70%）
+
+### referenced-but-absent 薬品2剤の補完（`drug_batch_42.py` 新規、637→639薬品）
+- **生理食塩水（0.9%塩化ナトリウム）** — **293参照**で最多欠落の輸液。高張7.2%のみ収載で等張液が
+  無かった（高Ca血症の第一選択・血液製剤ライン・ネブライゼーション溶媒・低Cl性アルカローシス）。
+  AAHA/AAFP 2013のショックボーラス（犬10-20 mL/kg・猫5-10）・希釈性高Cl性アシドーシス・
+  慢性低Na血症の緩徐補正（≤0.5 mEq/L/h）・**7.2%高張液との混同厳禁**（severity: major）を明記
+- **コレカルシフェロール（ビタミンD3）** — 96参照（上皮小体機能低下症 4,000-6,000 IU/kg・爬虫類NSHP
+  200-400 IU/kg 週1）。活性型カルシトリオールのみ収載だった。作用発現遅延・数週間の組織半減期・
+  殺鼠剤と同一分子の狭い治療域・爬虫類はUV-B/食餌是正が主治療である旨を明記
+- **表記ゆれエイリアス**: 硫酸亜鉛/グルコン酸亜鉛→zinc_acetate（亜鉛反応性皮膚症の治療文が解決）、
+  TMP-スルファ/TMP/S→trimethoprim_sulfa、リンゲル液（裸）→lactated_ringers
+
+### 診断チャット精度 第8弾（22症例スイープ 10 MISS → 全実用症例合格）
+- **レガシー犬DBに語彙3件+疾患1件を追加**（60→63症状、71→72疾患）:
+  - `epistaxis`（鼻血）+ **鼻腔内腫瘍エントリ新設**（鼻出血の教科書的鑑別 — Withrow & MacEwen 6th。
+    vWDにも epistaxis 追加で凝固障害鑑別も並ぶ）→「鼻血が出た 鼻がつまる くしゃみ」rank 1
+  - `vision_loss`（物にぶつかる）を白内障/緑内障/PRA/網膜形成不全に付与 →「目が白く見える
+    夜に物にぶつかる」で白内障 top-3
+  - `voluminous_stool`（便の量が多い）をEPIに付与 →「食べているのに痩せる 便の量が多い 軟便」で
+    EPI rank 1（従来はIBD/リンパ腫上位）
+- **エイリアス新設**: スキップするように歩く/けんけん歩き→跛行（膝蓋骨脱臼 rank 1）、
+  顔が腫れて/目の下から膿→facial_swelling/eye_discharge（猫歯根膿瘍 rank 1）、
+  ジャンプしなくなった→reluctance_to_jump に是正（猫DJD top-3 — Lascelles 2010。
+  従来の reluctance_to_move への誤マッピングを修正）、毛づくろいしすぎ→excessive_grooming
+  （心因性脱毛症 rank 1）、鼻血/物にぶつかる/便の量が多い 等
+- **ID_SYNONYMS**: epistaxis/voluminous_stool/reluctance_to_jump/excessive_grooming の4系統
+  フォールバック、_LEGACY_FALLBACK に reluctance_to_jump/excessive_grooming/facial_swelling
+- **ウサギ**: 歯ぎしり+食欲不振（糞変化前の stasis 古典像 — Oglesbee）の pathognomonic ペア追加
+  → 消化管うっ滞 rank 1（従来は鼓脹症が1位）
+
+### UX: 馬のクイック入力ボタン新設 + 新規対応主訴の1タップ導線
+- **馬にクイック入力ボタンが1つも無かった** → 6ボタン新設（疝痛/前肢跛行/蹄熱感/PPID多毛/
+  食欲不振/咳 — 全て抽出保証済み、ミラーテストに horse 分岐追加）
+- 疝痛の連用形エイリアス（お腹を痛がっている/蹴っている/転がって）、前脚をかばって→前肢跛行
+- 犬「鼻血が出た」・猫「ジャンプしなくなった」をクイック入力に追加（本セッションの新規対応主訴）
+- ServiceWorker: `CACHE_NAME` v121 → **v122** → mainマージ後 **v124**（第11/12弾と同版衝突のため改番）
+
+### 薬品辞書リストのサプリメント先頭表示を是正（利用者フィードバック対応）
+- 「薬品辞書をクリックするとサプリメントが見えて違和感」— `renderDrugList()` がスポンサー
+  （ECVN 11製品）を**リスト先頭に**ソートしていた → 昇順に反転し**末尾**へ（臨床薬が先頭）。
+  検索・カテゴリフィルタでの到達性と Sponsor バッジ（透明性表示）は維持
+- 回帰テスト: `test_drug_list_sorts_sponsor_supplements_to_bottom`（旧sponsor-first順の再発防止）
+- ServiceWorker: `CACHE_NAME` v124 → **v125**
+
+### 回帰テスト（+14件）
+- Round 8 クラス11件（鼻血→鼻腔内腫瘍、視覚喪失→白内障、スキップ歩行→パテラ、EPI大量便、
+  猫歯根膿瘍/DJD/心因性脱毛、ウサギ歯ぎしり、馬hirsutism→PPID rank1、馬PPID単一エントリ+
+  prevalence解決、PPID JSONが内分泌内容で感染/トリロスタン記述なし）
+- 薬品3件（生理食塩水の種別用量+高張液混同ガード、コレカルシフェロールの狭治療域警告+B12境界、
+  表記ゆれ5ケース）
+- クイックタップミラーテストに horse 分岐＋新フレーズ同期
+
+### 表示数値の同期
+- `setDefaultStats()` 薬品数11種を実測同期（dog 574, cat 554, horse 360, 鳥系 239, 爬虫類系 105-113）、
+  horse diseases 616→615、pendingStats drugs 637→**639**・symptoms 60→**63**
