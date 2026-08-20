@@ -1846,8 +1846,8 @@ function setupMobileBottomNav(){
     if(!btn)return;
     haptic(10);
     switchView(btn.dataset.view,{focusSearch:true});
-    const panel=document.getElementById("view"+btn.dataset.view.charAt(0).toUpperCase()+btn.dataset.view.slice(1));
-    if(panel)scrollToAnchor(panel);
+    const target=_navLandingTarget(btn.dataset.view);
+    if(target)scrollToAnchor(target);
   });
   document.body.appendChild(nav);
 }
@@ -4702,6 +4702,17 @@ function navigateToDiseaseDb(query){
   },350);
 }
 
+/* タブ/メニューのタップ後に着地させる要素。検索主体のビュー（薬品/疾患DB/麻酔/救急）は
+   パネル先頭ではなく検索入力欄に直接着地させ、タップ→即入力できるようにする。
+   薬品タブはパネル先頭に比較表・相互作用チェッカーのアコーディオンがあり、
+   パネル先頭着地では検索欄が画面外に残っていた（利用者報告）。 */
+function _navLandingTarget(view){
+  if(view==="checker")return document.getElementById("speciesSection")||document.getElementById("viewChecker");
+  const searchInputs={database:"diseaseSearch",drugs:"drugSearch",anesthesia:"anesthesiaSearch",emergency:"emergencySearch"};
+  const input=searchInputs[view]?document.getElementById(searchInputs[view]):null;
+  if(input)return input.closest(".symptom-search")||input;
+  return document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
+}
 function switchView(view,opts){
   /* opts.silent — skip event tracking + auto-focus (used for initial hash routing
      on page load so the soft keyboard does not pop up unexpectedly on mobile).
@@ -4761,7 +4772,7 @@ function switchView(view,opts){
     nav.classList.remove("open");
     const hb=document.querySelector(".hamburger");
     if(hb)hb.setAttribute("aria-expanded","false");
-    if(activePanel)setTimeout(()=>scrollToAnchor(activePanel),100);
+    if(activePanel)setTimeout(()=>scrollToAnchor(_navLandingTarget(view)||activePanel),100);
   }
 }
 
@@ -4779,9 +4790,7 @@ function setupNavigation(){
        chosen panel (or the species picker, which is the checker's entry point)
        into view. switchView already scrolls when the mobile menu was open. */
     if(!menuWasOpen){
-      const target=view==="checker"
-        ?document.getElementById("speciesSection")
-        :document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
+      const target=_navLandingTarget(view);
       if(target)scrollToAnchor(target);
     }
   });

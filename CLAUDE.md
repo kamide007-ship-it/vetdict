@@ -3029,3 +3029,25 @@ katakana トークン頻度監査（第6回スイープ、実マッチャー突�
   app.js のURLマップミラー検証）。既存のPRラベル/免責/マーカー非漏出テストは全て維持
 - フルテストスイート 3,937件合格、ruff clean
 - ServiceWorker: CACHE_NAME v120 → **v121**
+
+## 2026-08セッション（第11弾: タブクリック→検索入力欄への直接着地）
+
+### 背景: 利用者要望「クリックしたら直ぐ検索入力へ移動するように」
+薬品タブはパネル先頭に「他の獣医薬リファレンスとの比較」「薬品相互作用チェッカー」の
+アコーディオンがあり、タブタップ後の着地（scrollToAnchor(panel)＝パネル先頭）では
+**検索入力欄が画面外に残り**、毎回スクロールが必要だった。フォーカス自体は既存の
+`switchView(view,{focusSearch:true})` でタップ同期コンテキストで当たっていた
+（モバイルでキーボードは開くが入力欄が見えない状態）。
+
+### 修正（static/js/app.js）
+- `_navLandingTarget(view)` ヘルパー新設: 検索主体のビュー
+  （drugs/database/anesthesia/emergency）は検索入力欄の `.symptom-search` ラッパーを、
+  checker は speciesSection を、その他はパネルを着地点として返す
+- ナビの3経路すべてを helper 経由に統一:
+  1. デスクトップ nav クリック（setupNavigation）
+  2. モバイル下部 nav クリック（mobileBottomNav）
+  3. ハンバーガーメニュー閉時のスクロール（switchView 内）
+- 既存の `focusSearch:true`（タップ→キーボード起動）はそのまま活き、
+  「タブをタップ → 検索欄が画面最上部に見えた状態でキーボードが開く」導線が完成
+- 回帰テスト: `test_tab_click_lands_on_search_input`（3経路の helper 経由・focusSearch 維持）
+- ServiceWorker: `CACHE_NAME` v121 → **v122**
