@@ -1211,8 +1211,10 @@ SYMPTOM_ALIASES = {
     "暑がっている": "excessive_panting",
     "耳が赤い": "red_ears",
     "ぐったりしている": "lethargy",
-    "ジャンプしない": "reluctance_to_move",
-    "ジャンプしなくなった": "reluctance_to_move",
+    # ジャンプ回避は猫DJDの最重要飼い主所見（Lascelles 2010）— reluctance_to_jump に
+    # 解決し、語彙に無い種は ID_SYNONYMS で reluctance_to_move へフォールバック
+    "ジャンプしない": "reluctance_to_jump",
+    "ジャンプしなくなった": "reluctance_to_jump",
     "陰茎に毛が巻きついている": "fur_ring_penis",
     "ペニスリング": "fur_ring_penis",
     "penile fur ring": "fur_ring_penis",
@@ -1791,6 +1793,45 @@ SYMPTOM_ALIASES = {
     "反応がない": "unresponsiveness",
     "反応が薄い": "unresponsiveness",
     "動かないが息はしている": "unresponsiveness",
+    # --- 2026-08 精度スイープ第8弾 ---
+    # 鼻出血（エピスタキシス）— 鼻腔内腫瘍・凝固障害（vWD）・真菌性鼻炎の主訴。
+    # epistaxis はウサギ語彙の正規ID。犬レガシーDBにも同IDを追加済み。
+    "鼻血": "epistaxis",
+    "鼻から血": "epistaxis",
+    "鼻から出血": "epistaxis",
+    # 視覚喪失（白内障・PRA・緑内障）— 「物にぶつかる」は飼い主の定番表現
+    "物にぶつかる": "vision_loss",
+    "目が見えていない": "vision_loss",
+    "目が見えてない": "vision_loss",
+    "目が見えない": "vision_loss",
+    "視力が落ちた": "vision_loss",
+    "夜目が見えない": "vision_loss",
+    # 白内障の飼い主表現（「目が白く濁っている」「目が白い」は既存 — 「見える」形が欠落）
+    "目が白く見える": "cloudy_eyes",
+    # EPI（膵外分泌不全）の hallmark: 大量の便（voluminous stool）
+    "便の量が多い": "voluminous_stool",
+    "便がたくさん出る": "voluminous_stool",
+    "大量の便": "voluminous_stool",
+    # 膝蓋骨脱臼のスキップ様歩行（飼い主の定番表現）
+    "スキップするように歩く": "lameness_or_limping",
+    "けんけんで歩く": "lameness_or_limping",
+    "けんけん歩き": "lameness_or_limping",
+    "後ろ足を上げて歩く": "lameness_or_limping",
+    # 歯根膿瘍（眼窩下瘻管）: 顔面腫脹＋目の下からの排膿
+    "顔が腫れて": "facial_swelling",
+    "顔の片側が腫れて": "facial_swelling",
+    "目の下から膿": "eye_discharge",
+    "目の下が腫れて": "facial_swelling",
+    # 猫の変形性関節症（DJD）: ジャンプ回避が最重要の飼い主観察所見（Lascelles 2010）
+    "ジャンプを嫌がる": "reluctance_to_jump",
+    "ジャンプできない": "reluctance_to_jump",
+    "高いところに登らなくなった": "reluctance_to_jump",
+    "段差を嫌がる": "reluctance_to_jump",
+    # 心因性脱毛・過剰グルーミング
+    "毛づくろいしすぎ": "excessive_grooming",
+    "過剰な毛づくろい": "excessive_grooming",
+    "毛づくろいが増えた": "excessive_grooming",
+    "毛づくろいばかりして": "excessive_grooming",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

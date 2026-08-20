@@ -1590,8 +1590,25 @@ class TestQuickTapPhraseExtraction:
             "足を引きずる",
             "皮膚が痒い",
             "おしりを地面にこすりつける",
+            "鼻血が出た",
         ],
-        "cat": ["食べない", "吐いた", "くしゃみ", "目やにが出る", "おしっこが出ない", "毛が抜ける"],
+        "cat": [
+            "食べない",
+            "吐いた",
+            "くしゃみ",
+            "目やにが出る",
+            "おしっこが出ない",
+            "毛が抜ける",
+            "ジャンプしなくなった",
+        ],
+        "horse": [
+            "お腹を痛がっている（疝痛）",
+            "前脚をかばって歩く",
+            "蹄が熱い",
+            "毛が長くて換毛しない",
+            "食べない",
+            "咳が出る",
+        ],
         "rabbit": ["糞が小さい", "食べない", "歯ぎしり", "首が傾いている", "お腹が張っている", "鼻水"],
         "chinchilla": ["よだれが出る", "毛が抜ける", "食べない", "糞が出ない", "歯が伸びている", "砂浴びしない"],
         "hamster": ["下痢", "元気がない", "毛が抜ける", "目が開かない", "お腹が膨れている", "食べない"],
@@ -1608,12 +1625,17 @@ class TestQuickTapPhraseExtraction:
 
     @staticmethod
     def _extract(species, phrase):
-        # The chat route sends dog through the legacy extractor and every other
-        # species through the modern species extractor — mirror that routing.
+        # The chat route sends dog through the legacy extractor, horse through
+        # the equine finding extractor, and every other species through the
+        # modern species extractor — mirror that routing.
         if species == "dog":
             from api.diagnostic_chat import extract_symptoms_from_text
 
             return extract_symptoms_from_text(phrase)
+        if species == "horse":
+            from api.diagnostic_chat import _extract_equine_symptoms
+
+            return _extract_equine_symptoms(phrase.lower())
         from api.chat.symptom_extractor import _extract_species_symptoms
 
         return _extract_species_symptoms(phrase, species)
@@ -2311,3 +2333,139 @@ class TestHotSpotAndZincDermatosis:
         # Systemic antibiotics only for the deep folliculitis variant.
         assert "毛包炎" in hs["treatment_ja"]
         assert {"itching", "skin_redness", "skin_lesions"} <= set(hs["symptoms"])
+
+
+class TestChatClinicalAccuracyAuditRound8:
+    """2026-08 audit round 8 (22-case realistic-complaint sweep). Root causes
+    fixed this round: the legacy dog DB had no epistaxis / vision-loss /
+    voluminous-stool vocabulary at all (nosebleeds extracted nothing and the
+    nasal-cavity differential was missing entirely; "目が白く見える 物にぶつかる"
+    extracted nothing; the EPI hallmark 便の量が多い was unextractable); the
+    patellar-luxation skip-gait phrasing had no alias; cat tooth-root abscess /
+    feline DJD / psychogenic alopecia complaints extracted only generic IDs;
+    rabbit bruxism+anorexia (the pre-fecal-change GI stasis presentation)
+    ranked bloat first; and the horse DB carried TWO duplicate PPID cards
+    while the hirsutism hallmark had no alias and no syndrome floor, so the
+    pathognomonic PPID complaint extracted nothing and rare coverage-perfect
+    diseases outranked PPID."""
+
+    def test_dog_epistaxis_extracts_and_ranks_nasal_tumor(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+        from api.health_checker import DISEASES, SYMPTOM_IDS
+
+        assert "epistaxis" in SYMPTOM_IDS
+        assert any(d["id"] == "nasal_tumor" for d in DISEASES)
+        syms = extract_symptoms_from_text("鼻血が出た 鼻がつまる くしゃみ")
+        assert "epistaxis" in syms, f"got {syms}"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:1]]
+        assert top and "鼻腔内腫瘍" in top[0], f"nasal tumor must rank first, got {top}"
+        # vWD carries epistaxis too (coagulopathy differential)
+        vwd = next(d for d in DISEASES if d["id"] == "von_willebrand_disease")
+        assert "epistaxis" in vwd["symptoms"]
+
+    def test_dog_vision_loss_ranks_cataracts(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+        from api.health_checker import SYMPTOM_IDS
+
+        assert "vision_loss" in SYMPTOM_IDS
+        syms = extract_symptoms_from_text("目が白く見える 夜に物にぶつかる 高齢")
+        assert "vision_loss" in syms and "cloudiness_in_eyes" in syms, f"got {syms}"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:3]]
+        assert any("白内障" in n for n in top), f"cataracts must rank top-3, got {top}"
+
+    def test_dog_skip_gait_ranks_patellar_luxation(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        syms = extract_symptoms_from_text("片足を上げてスキップするように歩く 小型犬")
+        assert "limping" in syms, f"got {syms}"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:1]]
+        assert top and "膝蓋骨" in top[0], f"patellar luxation must rank first, got {top}"
+
+    def test_dog_epi_voluminous_stool_ranks_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+        from api.health_checker import DISEASES, SYMPTOM_IDS
+
+        assert "voluminous_stool" in SYMPTOM_IDS
+        epi = next(d for d in DISEASES if d["id"] == "epi")
+        assert "voluminous_stool" in epi["symptoms"]
+        syms = extract_symptoms_from_text("食べているのに痩せる 便の量が多い 軟便")
+        assert "voluminous_stool" in syms, f"got {syms}"
+        top = [d.get("name_ja", "") for d in match_symptoms_to_diseases(syms)[:1]]
+        assert top and "膵" in top[0], f"EPI must rank first, got {top}"
+
+    def test_cat_facial_swelling_ranks_tooth_root_abscess(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("顔の片側が腫れている 目の下から膿が出ている", "cat")
+        assert "facial_swelling" in syms, f"got {syms}"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "cat")[:1]]
+        assert top and "歯根膿瘍" in top[0], f"tooth root abscess must rank first, got {top}"
+
+    def test_cat_reluctance_to_jump_ranks_djd(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("ジャンプしなくなった 動きが鈍い 高齢の猫", "cat")
+        assert "reluctance_to_jump" in syms, f"got {syms}"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "cat")[:3]]
+        assert any("変形性関節症" in n for n in top), f"feline DJD must rank top-3, got {top}"
+
+    def test_cat_overgrooming_ranks_psychogenic_alopecia(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("毛づくろいしすぎてお腹の毛が薄い", "cat")
+        assert "excessive_grooming" in syms, f"got {syms}"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "cat")[:3]]
+        assert any("心因性脱毛" in n for n in top), f"psychogenic alopecia must rank top-3, got {top}"
+
+    def test_rabbit_bruxism_anorexia_ranks_gi_stasis(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        syms = _extract_species_symptoms("歯ぎしりをしている じっとして動かない 餌を食べない", "rabbit")
+        assert "teeth_grinding" in syms and "appetite_loss" in syms, f"got {syms}"
+        top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "rabbit")[:1]]
+        assert top and "うっ滞" in top[0], f"GI stasis must rank first, got {top}"
+
+    def test_horse_hirsutism_extracts_and_ranks_ppid_first(self):
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        syms = _extract_equine_symptoms("毛が長くて換毛しない 痩せてきた 水をよく飲む")
+        assert "body_hirsutism" in syms, f"換毛しない must map to body_hirsutism, got {syms}"
+        top = [m.get("name_ja", "") for m in _match_equine_symptoms_to_diseases(syms)[:1]]
+        assert top and "PPID" in top[0], f"PPID must rank first, got {top}"
+
+    def test_horse_has_single_ppid_entry_with_merged_findings(self):
+        from api.species.equine_diseases import DISEASE_DATABASE
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        ppid = [d for d in DISEASE_DATABASE if "Pituitary" in d.name_en]
+        assert len(ppid) == 1, f"duplicate PPID cards must stay merged, got {[d.id for d in ppid]}"
+        findings = set(ppid[0].associated_findings)
+        # merged from both former entries
+        assert {"body_hirsutism", "gen_polydipsia", "gen_polyuria", "body_muscle_atrophy"} <= findings
+        # prevalence key must resolve to the surviving entry name (prior active)
+        assert SPECIES_PREVALENCE["horse"].get(ppid[0].name_en) == "common"
+
+    def test_horse_ppid_json_content_is_endocrine_not_infectious(self):
+        # The surviving overlay row carried infection-template prognosis and
+        # prevention ("antimicrobial therapy", vaccination boilerplate) and the
+        # deleted duplicate carried canine trilostane/mitotane guidance —
+        # equine PPID is managed with pergolide.
+        import json
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parents[1]
+        data = json.loads((root / "diseases_all_species.json").read_text(encoding="utf-8"))
+        rows = [e for e in data if e.get("species") == "Horse" and "Pituitary" in (e.get("name") or "")]
+        assert len(rows) == 1, f"duplicate horse PPID overlay rows: {[r.get('name') for r in rows]}"
+        r = rows[0]
+        assert "ペルゴリド" in (r.get("prognosis_ja") or "")
+        assert "抗病原体療法" not in (r.get("prognosis_ja") or "")
+        assert "トリロスタン" not in (r.get("prognosis_ja") or "")
+        assert "ワクチネーション" not in (r.get("prevention_ja") or "")
+        assert "pergolide" in (r.get("prognosis") or "").lower()
+        assert "antimicrobial" not in (r.get("prognosis") or "").lower()
+        assert "vaccination" not in (r.get("prevention") or "").lower()

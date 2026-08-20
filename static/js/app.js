@@ -1546,10 +1546,10 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:619,drugs:572,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:551,drugs:552,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:616,drugs:359,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:429,drugs:270,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:619,drugs:574,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:551,drugs:554,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:615,drugs:360,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:429,drugs:271,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:311,drugs:70,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:331,drugs:138,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:258,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
@@ -1557,13 +1557,13 @@ function setDefaultStats(){
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:236,drugs:68,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
     {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:214,drugs:75,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
     {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:193,drugs:158,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:529,drugs:237,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:434,drugs:237,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:275,drugs:237,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:280,drugs:103,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:278,drugs:111,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:242,drugs:110,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:241,drugs:105,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:529,drugs:239,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:434,drugs:239,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:275,drugs:239,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:280,drugs:105,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:278,drugs:113,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:242,drugs:112,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:241,drugs:107,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:255,drugs:18,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:28,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:289,drugs:1,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
@@ -1571,8 +1571,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6432,
     species:21,
-    drugs:637,
-    symptoms:60,
+    drugs:639,
+    symptoms:63,
     protocols:188
   };
   renderSpeciesGrid();
@@ -1947,8 +1947,9 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
-    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける"],
-    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける"],
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た"],
+    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった"],
+    horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る"],
     rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない"],
     hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない"],

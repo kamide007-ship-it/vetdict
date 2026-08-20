@@ -1139,7 +1139,17 @@ DISEASE_DATABASE: list[Disease] = [
         "metabolic",
         "moderate",
         "旧称クッシング病。高齢馬に多い。多毛、蹄葉炎、免疫低下。",
-        ["body_poor_coat", "gen_lethargy", "hoof_laminitis_signs", "skin_hair_loss", "body_hirsutism"],
+        # mt_ppid2 (重複カード) を統合: 多飲多尿・筋萎縮の所見を吸収 (2026-08)
+        [
+            "body_poor_coat",
+            "gen_lethargy",
+            "hoof_laminitis_signs",
+            "skin_hair_loss",
+            "body_hirsutism",
+            "gen_polydipsia",
+            "gen_polyuria",
+            "body_muscle_atrophy",
+        ],
         age_predisposition="senior",
         urgency="routine",
         recommended_exams=[
@@ -10968,22 +10978,9 @@ DISEASE_DATABASE: list[Disease] = [
         clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
         risk_factors="肥満、品種的素因(ポニー、モーガン、アラブ)、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動(春の牧草増加)",
     ),
-    Disease(
-        "mt_ppid2",
-        "下垂体中葉機能障害(クッシング病)",
-        "Pituitary Pars Intermedia Dysfunction (PPID / Cushing's)",
-        "metabolic",
-        "moderate",
-        "下垂体中葉の過形成。多毛症・蹄葉炎・免疫低下。高齢馬に好発。",
-        ["body_hirsutism", "hoof_laminitis_signs", "gen_polydipsia", "gen_polyuria", "body_muscle_atrophy"],
-        age_predisposition="senior",
-        urgency="routine",
-        recommended_exams=[(1, "血中ACTH", "Basal ACTH"), (2, "TRH刺激試験", "TRH Stimulation Test")],
-        merck_url=_MERCK + "pituitary+pars+intermedia+dysfunction+horses",
-        treatment_protocol="食事管理：低NSC(非構造性炭水化物)食、グレージングマズル、放牧制限。代謝異常に対する輸液療法(カリウム補充を含む乳酸リンゲル液)。インスリン調節：インスリン異常症にレボチロキシン 0.1 mg/kg PO SID、メトホルミン 15-30 mg/kg PO BID。電解質補正：低カルシウム血症にグルコン酸カルシウム、低マグネシウム血症に硫酸マグネシウム。肝支持療法：肝性脳症にIVブドウ糖、分岐鎖アミノ酸。馬メタボリックシンドロームに運動プログラム。定期的な代謝パネルモニタリング。",
-        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
-        risk_factors="肥満、品種的素因(ポニー、モーガン、アラブ)、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動(春の牧草増加)",
-    ),
+    # mt_ppid2 ("PPID / Cushing's") は mt_ppid と同一疾患の重複カードだったため
+    # 統合・削除 (2026-08)。所見は mt_ppid に吸収済み。旧エントリの予後には
+    # 犬クッシング用のトリロスタン/ミトタンが誤記されていた（馬PPIDはペルゴリドが第一選択）。
     Disease(
         "mt_hypocalcemia2",
         "低カルシウム血症(輸送テタニー)",
@@ -12457,6 +12454,10 @@ _SYNDROME_FINDING_FLOORS: dict[str, tuple[str, ...]] = {
     "hoof_thrush": ("Thrush",),
     "hoof_navicular": ("Navicular Syndrome",),
     "hoof_abscess": ("Hoof Abscess",),
+    # Hypertrichosis/failure to shed is pathognomonic for PPID in aged horses
+    # (McFarlane 2011; Ireland & McGowan 2018) — without a floor, rare
+    # coverage-perfect entries outranked PPID for its own defining sign.
+    "body_hirsutism": ("Pituitary Pars Intermedia Dysfunction",),
 }
 _SYNDROME_FLOOR_SCORE = 0.62
 

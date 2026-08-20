@@ -204,6 +204,7 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "sweating": "gen_sweating",
     "発汗": "gen_sweating",
     "汗をかく": "gen_sweating",
+    "汗をかい": "gen_sweating",
     "recumbent": "gen_recumbent",
     "立てない": "gen_recumbent",
     "横臥": "gen_recumbent",
@@ -250,6 +251,14 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "hirsutism": "body_hirsutism",
     "多毛": "body_hirsutism",
     "毛が長い": "body_hirsutism",
+    # PPIDのhallmark（長毛・換毛遅延）: 「毛が長くて…」の連用形と換毛表現
+    "毛が長く": "body_hirsutism",
+    "換毛しない": "body_hirsutism",
+    "換毛が遅い": "body_hirsutism",
+    "毛が生え変わらない": "body_hirsutism",
+    "巻き毛": "body_hirsutism",
+    "not shedding": "body_hirsutism",
+    "failure to shed": "body_hirsutism",
     "stiffness": "body_stiffness",
     "こわばり": "body_stiffness",
     "硬い": "body_stiffness",
@@ -266,8 +275,10 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "前肢跛行": "limb_lameness_fore",
     "前脚びっこ": "limb_lameness_fore",
     "前脚かばう": "limb_lameness_fore",
+    "前脚をかばって": "limb_lameness_fore",
     "hindlimb lameness": "limb_lameness_hind",
     "後肢跛行": "limb_lameness_hind",
+    "後脚をかばって": "limb_lameness_hind",
     "後脚びっこ": "limb_lameness_hind",
     "後脚かばう": "limb_lameness_hind",
     "lameness": "limb_lameness_fore",
@@ -340,6 +351,10 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "転がる": "dig_colic_signs",
     "寝転がる": "dig_colic_signs",
     "お腹を蹴る": "dig_colic_signs",
+    # 前方形（〜痛がっている/蹴っている/転がって等の活用でも一致する連用形）
+    "お腹を痛が": "dig_colic_signs",
+    "お腹を蹴っ": "dig_colic_signs",
+    "転がっ": "dig_colic_signs",
     "pawing": "dig_colic_signs",
     "rolling": "dig_colic_signs",
     "立ちたがらない": "gen_recumbent",
@@ -688,6 +703,17 @@ def extract_symptoms_from_text(text: str) -> list:
         # shorter "ふらつく"→ataxia→tremors and orthopedic diseases never
         # ranked for the classic hindlimb-weakness complaint.
         "hind_leg_weakness": ["limping"],
+        # "ジャンプしなくなった" resolves to reluctance_to_jump (feline DJD
+        # vocabulary); the legacy dog vocabulary expresses the same functional
+        # decline as stiffness/reluctance_to_move (canine osteoarthritis).
+        "reluctance_to_jump": ["stiffness", "reluctance_to_move"],
+        # "毛づくろいしすぎ" resolves to excessive_grooming (cat/hamster/ferret
+        # vocabularies); dogs overgroom as excessive licking.
+        "excessive_grooming": ["excessive_licking"],
+        # "顔が腫れて" resolves to facial_swelling (cat/bird vocabularies); the
+        # legacy dog vocabulary's closest signals are periocular swelling and
+        # a palpable mass (tooth-root abscess / sting presentations).
+        "facial_swelling": ["eye_swelling", "lumps_bumps"],
         "hind_limb_weakness": ["limping"],
         # "立ち上がりにくい" (difficulty rising — the textbook osteoarthritis
         # sign) resolves to difficulty_standing; the legacy dog vocabulary

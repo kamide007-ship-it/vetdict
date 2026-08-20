@@ -287,6 +287,10 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # Anorexia + reduced fecal output in a rabbit is GI stasis until proven
     # otherwise (Oglesbee, Blackwell's 5-Minute Vet Consult: Small Mammal).
     ("rabbit", frozenset({"appetite_loss", "reduced_fecal_output"}), "Gastrointestinal Stasis", 1.45),
+    # Bruxism (pain) + anorexia in a rabbit is the other classic owner-reported
+    # GI stasis presentation before fecal changes are noticed (Oglesbee,
+    # Blackwell's 5-Minute Vet Consult: Small Mammal 2nd ed).
+    ("rabbit", frozenset({"appetite_loss", "teeth_grinding"}), "Gastrointestinal Stasis", 1.35),
     # Stranguria/anuria + vocalization in a cat = urethral obstruction —
     # the defining small-animal urinary emergency (Ettinger 8th ed).
     ("cat", frozenset({"straining_to_urinate", "vocalization_changes"}), "Urinary Obstruction (Blocked Cat)", 1.35),

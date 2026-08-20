@@ -664,6 +664,24 @@ SYMPTOMS = [
         "name_en": "Scooting (Dragging Rear on Ground)",
         "category": "digestive",
     },
+    {
+        "id": "epistaxis",
+        "name_ja": "鼻血（鼻出血）",
+        "name_en": "Nosebleed (Epistaxis)",
+        "category": "respiratory",
+    },
+    {
+        "id": "vision_loss",
+        "name_ja": "目が見えていない・物にぶつかる",
+        "name_en": "Vision Loss (Bumping into Objects)",
+        "category": "ocular",
+    },
+    {
+        "id": "voluminous_stool",
+        "name_ja": "便の量が多い（大量の軟便）",
+        "name_en": "Voluminous Stool",
+        "category": "digestive",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -1746,7 +1764,7 @@ DISEASES = [
         "name_en": "Cataracts",
         "description_ja": "水晶体が白濁し視力が低下する疾患です。遺伝性、老齢性、糖尿病性など原因は様々です。",
         "description_en": "A condition where the lens of the eye becomes cloudy, leading to decreased vision. Causes include hereditary, age-related, and diabetic factors.",
-        "symptoms": ["cloudiness_in_eyes", "squinting", "eye_discharge"],
+        "symptoms": ["cloudiness_in_eyes", "squinting", "eye_discharge", "vision_loss"],
         "severity": "moderate",
         "recommended_tests": ["cerf_exam"],
         "breed_risks": {
@@ -1776,6 +1794,7 @@ DISEASES = [
             "squinting",
             "eye_swelling",
             "lethargy",
+            "vision_loss",
         ],
         "severity": "moderate",
         "recommended_tests": ["tonometry", "cerf_exam"],
@@ -1804,6 +1823,7 @@ DISEASES = [
             "squinting",
             "disorientation",
             "anxiety",
+            "vision_loss",
         ],
         "severity": "moderate",
         "recommended_tests": ["cerf_exam", "genetic_testing"],
@@ -2383,7 +2403,7 @@ DISEASES = [
         "name_en": "Von Willebrand Disease (vWD)",
         "description_ja": "犬で最も多い遺伝性出血性疾患です。フォンヴィレブランド因子の異常により出血傾向を示します。",
         "description_en": "The most common hereditary bleeding disorder in dogs. Caused by deficiency or dysfunction of von Willebrand factor, leading to prolonged bleeding.",
-        "symptoms": ["pale_gums", "lethargy", "blood_in_stool", "blood_in_urine"],
+        "symptoms": ["pale_gums", "lethargy", "blood_in_stool", "blood_in_urine", "epistaxis"],
         "severity": "high",
         "recommended_tests": ["coagulation_panel", "genetic_testing", "cbc"],
         "breed_risks": {
@@ -2749,7 +2769,7 @@ DISEASES = [
         "name_en": "Exocrine Pancreatic Insufficiency (EPI)",
         "description_ja": "膵臓が消化酵素を十分に産生できなくなる疾患です。体重減少と栄養不良が起こります。",
         "description_en": "The pancreas fails to produce sufficient digestive enzymes, causing weight loss, poor nutrient absorption, and voluminous stools.",
-        "symptoms": ["weight_loss", "diarrhea", "increased_appetite", "bloating"],
+        "symptoms": ["weight_loss", "diarrhea", "increased_appetite", "bloating", "voluminous_stool"],
         "severity": "moderate",
         "recommended_tests": ["blood_chemistry", "fecal_exam", "ultrasound"],
         "breed_risks": {
@@ -2904,6 +2924,36 @@ DISEASES = [
             "siberian_husky": 5.0,
             "alaskan_malamute": 5.0,
             "samoyed": 2.0,
+        },
+    },
+    # ---- Nasal Tumor ----
+    # 2026-08 sweep round 8: 「鼻血が出た 鼻がつまる くしゃみ」 extracted only
+    # sneezing and ranked infectious URIs. Epistaxis with progressive unilateral
+    # nasal discharge/obstruction in an older dog is nasal neoplasia
+    # (adenocarcinoma most common) until imaging says otherwise — the classic
+    # epistaxis differential alongside coagulopathy and fungal rhinitis
+    # (Turek & Lana in Withrow & MacEwen's Small Animal Clinical Oncology 6th
+    # ed). The legacy DB had no nasal-cavity entry and no epistaxis vocabulary.
+    {
+        "id": "nasal_tumor",
+        "prevalence_tier": "uncommon",
+        "name_ja": "鼻腔内腫瘍（鼻腺癌等）",
+        "name_en": "Nasal Tumor (Nasal Adenocarcinoma)",
+        "description_ja": "鼻腔内に発生する腫瘍で、腺癌が最多です。中高齢の中〜長頭種に多く、進行性の片側性鼻汁・鼻出血（エピスタキシス）・くしゃみ・鼻閉が典型徴候です。進行すると顔面変形や眼球突出、神経症状を伴います。診断はCT＋鼻腔内生検。治療は放射線療法が第一選択です。鼻血の鑑別として凝固障害（vWD等）・真菌性鼻炎・異物も除外します。",
+        "description_en": "Neoplasia of the nasal cavity — adenocarcinoma is most common. Typically middle-aged to older meso/dolichocephalic dogs with progressive unilateral nasal discharge, epistaxis, sneezing and obstruction; facial deformity, exophthalmos or neurological signs with progression. Diagnosis: CT plus intranasal biopsy; radiation therapy is the treatment of choice. Rule out coagulopathy (e.g. vWD), fungal rhinitis and foreign body as epistaxis differentials.",
+        "symptoms": [
+            "epistaxis",
+            "nasal_discharge",
+            "sneezing",
+            "labored_breathing",
+        ],
+        "severity": "high",
+        "recommended_tests": ["ct_scan", "rhinoscopy", "biopsy", "coagulation_panel"],
+        "breed_risks": {
+            "collie": 1.8,
+            "shetland_sheepdog": 1.6,
+            "german_shepherd": 1.4,
+            "labrador_retriever": 1.3,
         },
     },
 ]
