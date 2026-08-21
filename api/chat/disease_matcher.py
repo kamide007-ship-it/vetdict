@@ -5,6 +5,7 @@ negative evidence penalties, urgency boosts, and prevalence correction.
 """
 
 import math
+import re
 
 from api.chat.species_data import get_species_data
 from api.species import prevalence_data as _prev_mod
@@ -395,6 +396,17 @@ def _match_species_symptoms_to_diseases(
     # --- Load prevalence data for this species (region-aware) ---
     _region = "jp" if lang == "ja" else ("intl" if lang else "")
     _prevalence = _prev_mod.get_prevalence_for_species(species, region=_region)
+    # Token-set fallback index: prevalence keys use one canonical spelling per
+    # disease ("Psittacosis (Chlamydiosis)") while module entries may carry a
+    # separator variant of the same words ("Psittacosis / Chlamydiosis"). An
+    # order/punctuation-insensitive token-set match keeps the prior live for
+    # such variants without risking false merges ("Gout (Articular)" and
+    # "Gout (Visceral)" have different token sets). Ambiguous sets are dropped.
+    _prev_tokens: dict[frozenset, str] = {}
+    for _pk, _pt in _prevalence.items():
+        _ts = frozenset(re.findall(r"[a-z0-9]+", _pk.lower()))
+        if _ts:
+            _prev_tokens[_ts] = "" if _ts in _prev_tokens else _pt
 
     # --- Compute lab abnormality boosts for this species ---
     # Returns {disease_name: boost_multiplier} where multiplier > 1.0 for matching diseases.
@@ -517,6 +529,9 @@ def _match_species_symptoms_to_diseases(
         # --- Prevalence prior ---
         disease_name = disease.get("name", "")
         prevalence_tier = _prevalence.get(disease_name, "")
+        if not prevalence_tier:
+            _dts = frozenset(re.findall(r"[a-z0-9]+", disease_name.lower()))
+            prevalence_tier = _prev_tokens.get(_dts, "")
         prevalence_mult = _PREVALENCE_MULTIPLIER.get(prevalence_tier, 1.0)
 
         # --- Pathognomonic pair boost ---

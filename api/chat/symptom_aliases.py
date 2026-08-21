@@ -1832,6 +1832,43 @@ SYMPTOM_ALIASES = {
     "過剰な毛づくろい": "excessive_grooming",
     "毛づくろいが増えた": "excessive_grooming",
     "毛づくろいばかりして": "excessive_grooming",
+    # 2026-08 第9回精度スイープ: 実主訴20例の抽出ゼロ・誤抽出を是正
+    # 急性緑内障・眼球突出（「目が赤い」の連用形と「大きく見える」形が欠落していた）
+    "目が赤く": "redness_in_eyes",
+    "目が大きく見える": "eye_bulging",
+    # 心不全の運動不耐・チアノーゼ（飼い主表現）—「すぐ疲れる」は既存キー
+    "疲れやすい": "exercise_intolerance",
+    "舌が紫": "cyanosis",
+    "舌が青い": "cyanosis",
+    "歯茎が紫": "cyanosis",
+    # 頸部痛（IVDD頸部型の古典的主訴: 疼痛性啼鳴＋頸部保持）
+    "キャンと鳴": "pain",
+    "首を動かさない": "neck_stiffness",
+    "首を触ると痛がる": "neck_stiffness",
+    # 鳥の緑色便（ビリベルジン尿 — 肝疾患・オウム病の古典的所見）
+    "便が緑": "diarrhea_green",
+    "緑色の便": "diarrhea_green",
+    "緑色の下痢": "diarrhea_green",
+    # セキセイの呼吸器（副鼻腔炎・気嚢炎の飼い主表現）
+    "呼吸のたびに音": "wheezing",
+    "呼吸するたびに音": "wheezing",
+    "呼吸音がする": "wheezing",
+    "鼻の周りが汚れ": "nasal_discharge",
+    # 爬虫類肺炎（かな表記「あけて」と鼻腔泡沫）
+    "口をあけて呼吸": "open_mouth_breathing",
+    "口をあけたまま": "open_mouth_breathing",
+    "鼻から泡": "nasal_discharge",
+    # チンチラ白癬（て形 — 「毛が円形に抜ける」の辞書形のみ収載だった）
+    "毛が円形に抜けてる": "circular_hair_loss",
+    # クイック入力ボタン新設分（リクガメ・ヘビ・両生類・デグー・フクロモモンガ）
+    "甲羅に傷": "shell_lesions",
+    "ダニがついてる": "visible_mites",
+    "ダニが見える": "visible_mites",
+    "皮膚に白いもの": "white_patches_skin",
+    "尻尾の皮がむけた": "tail_injury",
+    "しっぽの皮がむけた": "tail_injury",
+    "自分を噛んでしまう": "self_mutilation",
+    "自分を噛んでる": "self_mutilation",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

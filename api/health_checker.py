@@ -423,6 +423,12 @@ SYMPTOMS = [
         "category": "musculoskeletal",
     },
     {
+        "id": "neck_pain",
+        "name_ja": "首の痛み・首を動かさない",
+        "name_en": "Neck Pain / Cervical Guarding",
+        "category": "musculoskeletal",
+    },
+    {
         "id": "joint_swelling",
         "name_ja": "関節の腫れ",
         "name_en": "Joint Swelling",
@@ -1280,6 +1286,7 @@ DISEASES = [
             "stiffness",
             "tremors",
             "incontinence",
+            "neck_pain",
         ],
         "severity": "moderate",
         "recommended_tests": ["mri", "xray", "ct_scan", "emg"],
@@ -2503,6 +2510,7 @@ DISEASES = [
             "paralysis",
             "reluctance_to_move",
             "muscle_wasting",
+            "neck_pain",
             "tremors",
         ],
         "severity": "high",

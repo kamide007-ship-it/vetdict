@@ -189,17 +189,17 @@
     },
     {
       "canonical": {
-        "id": "ms_bucked_shin",
-        "slug": "bucked-shin",
-        "name": "Bucked Shin",
-        "name_ja": "バックドシン"
+        "id": "ms_bucked_shins",
+        "slug": "bucked-shins",
+        "name": "Bucked Shins",
+        "name_ja": "中手骨骨膜炎"
       },
       "merged": [
         {
-          "id": "ms_bucked_shins",
-          "slug": "bucked-shins",
-          "name": "Bucked Shins",
-          "name_ja": "中手骨骨膜炎"
+          "id": "ms_bucked_shin",
+          "slug": "bucked-shin",
+          "name": "Bucked Shin",
+          "name_ja": "バックドシン"
         }
       ],
       "reason": "vet-approved same disease (curated; differs by an informative qualifier)",

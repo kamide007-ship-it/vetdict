@@ -3152,3 +3152,122 @@ katakana トークン頻度監査（第6回スイープ、実マッチャー突�
 ### 表示数値の同期
 - `setDefaultStats()` 薬品数11種を実測同期（dog 574, cat 554, horse 360, 鳥系 239, 爬虫類系 105-113）、
   horse diseases 616→615、pendingStats drugs 637→**639**・symptoms 60→**63**
+
+## 2026-08セッション（第20弾: 猫レトロウイルス汚染の全域撲滅 + 馬皮膚腫瘍の病因是正 + シタラビン/イミキモド補完 + チャット精度第9弾 + 全21種クイック入力）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **3,954件合格**（34 skip、カバレッジ80.68%）
+- 薬用量: safe薬品の dosage 欠落 **0**（639薬品時点、species_info 3,769エントリ全数検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 疾患: 配信6,892疾患で主要臨床フィールド（治療/病因/予後/予防/説明/病態/臨床徴候）の空欄 **0**
+- prevalence dead key: **10**（当該種DBに疾患自体が無い既知残、上限15ガード内）
+
+### 猫レトロウイルス（FeLV/FIV）汚染の全域撲滅（約4,000フィールド — 臨床的に危険なクロス種混入）
+配信内容の全域監査で、**猫のレトロウイルスであるFeLV/FIVが非猫種のテンプレートに大量残存**していたことを発見:
+- 腫瘍病因テンプレート「発癌性ウイルス感染（FeLV関連リンパ腫等の特異的例を除く）」— 馬・鳥・爬虫類等 全20非猫種 1,100+件
+- **予防テンプレートが非猫種にFeLVワクチン接種を推奨**（611件 — 馬・ウサギに存在しない猫用ワクチン）
+- 貧血予後リスト「基礎疾患（FeLV・FIV・CKD・出血等）」・ITP/貧血の感染性原因リスト・眼科鑑別テンプレート
+  「FIP・FeLV・甲状腺機能亢進症」・ウサギトキソプラズマの「FIV/FeLV併発」（猫エントリのコピー）・
+  馬ロドコッカスの免疫評価「FIV」等、計9系統のクローズ変種
+- 修正: `diseases_all_species.json` 3,646フィールド + `api/data/supplementary_diseases.json` 197フィールド +
+  `ferret_diseases.py` 1件 + **生成器自体**（`clinical_fields_generator.py` の neoplasia causes / lymphoid prognosis
+  テンプレートからFeLV文を除去 — 再生成での再混入を根絶）。置換は種中立の言い換えのみ（新規の医学的主張なし）
+- 配信SQLite実測: 非猫種のFeLV/FIV言及 **0件**（猫レコードの正当な言及は全て温存）
+- 回帰テスト+3件（JSON全フィールド走査・配信DB安全網・馬サルコイド病因）
+
+### 馬皮膚腫瘍の病因・治療の是正（開発者専門種のフラグシップ）
+- **馬サルコイド（馬で最多の皮膚腫瘍）**: 病因が汎用腫瘍テンプレート（FeLV言及）だった → **BPV-1/2**
+  （ウシパピローマウイルス、E5癌タンパク・PDGFR-β活性化・6臨床型・非産生性感染）の教科書的内容に置換（日英）
+- **芦毛馬メラノーマ**: → **STX17遺伝子4.6kb重複**（芦毛遺伝子、15歳以上芦毛馬の70-80%）に置換
+- **耳介プラーク**: → **EcPV-3/4**（ブユ媒介）に置換　**皮膚SCC**: → UV+**EcPV-2**（外性器型）に置換
+- **汎用皮膚科ワークアップテンプレートの撲滅**: 馬モジュールの skin カテゴリ44疾患の `treatment_protocol` が
+  「抗真菌シャンプー・グリセオフルビン・ペルメトリン」の汎用皮膚炎テンプレートを共有（サルコイド・メラノーマ・
+  SCC等の腫瘍にも適用）→ `_horse_template_markers` に3マーカー追加（皮膚科ワークアップ・腫瘍病因・腫瘍病態）で
+  JSON のキュレート済みテキストが必ず優先されるように修正。44件全てが正しい治療文に置換されたことを検証
+- 効果: サルコイドの関連薬品チップが ケトコナゾール/グリセオフルビン（誤り）→ **イミキモド/シスプラチン**（正しい）に
+
+### referenced-but-absent 薬品2剤の補完（`drug_batch_43.py` 新規、639→641薬品）
+- **シタラビン（Ara-C）** — MUO（GME/NME/NLE）の標準ステロイド補助療法「50 mg/m² SC q12h × 2日間、4週毎」が
+  犬猫神経病エントリ8件で逐語参照されるのに未収載（Zarfoss 2006; Lowrie 2013 CRI代替も記載）。
+  血液脳関門通過（本剤の存在意義）・骨髄抑制nadir 5-7日・細胞傷害性取扱注意を明記
+- **イミキモド5%クリーム** — 馬サルコイド/耳介プラーク（週3回、Nogueira 2006: 80%で75%超縮小、
+  塗布時疼痛→鎮静 Torres 2010）・猫SCC in situ（週3回×4-16週、奏効率40-70% Gill 2008、
+  グルーミング摂取防止エリザベスカラー）の5参照。TLR7アゴニスト機序
+- **MMFは既収載と判明**（id=mycophenolate）— 重複追加を回避し、SARDSエントリの裸表記
+  「ミコフェノール酸 20 mg/kg」が解決しないエイリアス欠落のみ `_KATAKANA_VARIANT_ALIASES` で是正
+- 回帰テスト+3件（MUOサイクル・血液脳関門・サルコイド/SCC用量・MMF単一エントリ検証）
+
+### 診断チャット精度 第9弾（20症例フレッシュスイープ 9 MISS → 全実用症例合格）
+- **エイリアス追加**: 目が赤く（連用形）/目が大きく見える（緑内障・眼球突出）、疲れやすい/舌が紫/舌が青い/歯茎が紫
+  （心不全・チアノーゼ）、キャンと鳴/首を動かさない/首を触ると痛がる（頸部IVDD）、便が緑/緑色の便（鳥ビリベルジン尿）、
+  呼吸のたびに音/鼻の周りが汚れ（セキセイ副鼻腔炎）、口をあけて呼吸/口をあけたまま/鼻から泡（爬虫類肺炎、かな表記）、
+  毛が円形に抜けてる（て形 — チンチラ白癬）
+- **ID_SYNONYMS追加**: exercise_intolerance/cyanosis/neck_stiffness/diarrhea_green/white_patches_skin の5系統新設、
+  lumps_and_bumps→lumps、wheezing→clicking_breathing_sounds等、**frequent_urination をstraining優先に並べ替え**
+  （頻尿=pollakiuria はLUTD徴候 — 従来は polyuria系に解決され尿崩症/糖尿病が上位だった → 膀胱炎/結石/前立腺が上位に）
+- **レガシー犬DBに neck_pain 症状を新設**（63→64症状)し IVDD/ウォブラーに付与 →「急にキャンと鳴いて首を動かさない」で
+  椎間板ヘルニア top-2（従来は抽出1IDで整形外科のみ）
+- **ヘビ感染性口内炎に stomatitis ID を追加**（自身の症状セットに欠落）+ Ophidian Herpesvirus=rare tier →
+  「口の中が赤い 食べない よだれ」でマウスロット rank 1（従来は稀なヘルペスが1位）
+- **鳥オウム病に fluffed_feathers 追加** + Psittacosis / Chlamydiosis（モジュール正準名）のprevalenceキー新設 +
+  Leucocytozoonosis=uncommon + Avocado Toxicity=rare →「羽を膨らませている 便が緑色 元気がない」の
+  シックバード三徴でオウム病 rank 1（従来はアボカド中毒/ロイコチトゾーンが上位）
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound9`（10件）
+
+### UX: 全21種にクイック入力ボタン（相談チャット導線の完成）
+- クイック入力（タップで入力）が10種のみだった → **未対応11種**（インコ・オウム・爬虫類・リクガメ・ヘビ・トカゲ・
+  両生類・魚・デグー・フクロモモンガ・その他）に各4-6フレーズを新設。全フレーズが抽出保証済み
+  （例: リクガメ「甲羅に傷がある」→shell_lesions、ヘビ「ダニがついている」→visible_mites、
+  両生類「皮膚に白いもの」→white_patches_skin、デグー「尻尾の皮がむけた」→tail_injury、
+  フクロモモンガ「自分を噛んでしまう」→self_mutilation — 不足エイリアス8種を同時新設）
+- ミラーテスト `TestQuickTapPhraseExtraction` の JA_QUICK を21種に同期（新規フレーズ全数の抽出をCIで保証）
+- 新薬2剤は既存の治療チップ機構で鑑別診断・チャット結果カードから自動到達（NME→シタラビン、猫SCC→イミキモド、
+  サルコイド→イミキモド/シスプラチンのチップ解決を検証済み）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 574→576・cat 554→556・horse 360→361薬品、pendingStats drugs 639→**641**・
+  symptoms 63→**64**（neck_pain追加）
+- ServiceWorker: `CACHE_NAME` v125 → **v126**
+- 再現手順: FeLV修正はJSON/モジュール/生成器に適用済み → `migrate_to_sqlite.py`（検索インデックスは名前不変のためno-op）
+
+### 疾患消失バグの発見・修正（dedupe×canonical マップの相互作用 — 17疾患を復元）
+- **根本原因**: dedupe の生存者選択は「内容の文字数」に敏感な richness スコアのみで決まり、無関係なテキスト編集
+  1文字で生存者が canonical マップの「merged側」の双子に反転しうる。反転すると `apply_canonical_map` が
+  その生存者を非表示にし、**疾患がブラウズから silently 消失**していた（本セッションのFeLV文削除で
+  モルモット乳腺腫瘍が消えかけたことから発見。ベースラインでも同機序で複数疾患が既に消失していた）
+- **修正**: `dedupe_disease_list` に **near-tie canonical stabiliser** を追加 — richness がほぼ同等
+  （フィールド数同等・文字数差≤300）の場合のみ、レビュー済み canonical マップ（T103）が canonical と
+  宣言する側を優先。決定的に充実した側（キュレート vs テンプレート）は従来通り richness が勝つ
+  （マップの方向性を内容より信頼しない）。全種マップの union から衝突slug（47件）は中立化
+- **復元された疾患（全て追加のみ・削除ゼロを before/after 全種diffで検証）**: 馬 Bucked Shins（キュレート済み
+  反復性骨膜炎）、鳥 ビタミンA欠乏症(!)、モルモット 胃潰瘍・皮下膿瘍、フェレット 尿石症・腎嚢胞、
+  インコ 卵黄性腹膜炎・甲状腺癌・銅中毒等、リクガメ 膀胱結石、ウサギ ビタミンD中毒 ほか計17件 +
+  フクロモモンガ Exophthalmos→Proptosis (Eye Prolapse)（canonical名への正規化1件）
+- **馬 canonical マップの方向バグ修正**: bucked-shin ペアの canonical が「Bucked Shin」（急性外傷テンプレート側 —
+  第14弾で撲滅した誤病因）を指し、キュレート済み「Bucked Shins」（反復負荷リモデリング）を merged 扱いしていた
+  → `api/data/canonical/horse.json` の方向を交換
+- **id ロック再生成**: 復元疾患の位置ID衝突を防ぐため全種の `build_id_locks` を再実行（+7新規ロック、append-only）
+- 配信ブラウザブル数: 6,432 → **6,449**（検索インデックス 6,449 に再生成、id 重複 0）
+- 回帰テスト: `TestCanonicalAwareSurvivorSelection`（3件 — near-tie優先・決定的richness差の維持・
+  モルモット乳腺の配信検証・インデックス整合）
+
+### 有病率priorのトークンセット・フォールバック（disease_matcher）
+- prevalence キーは1疾患1正準表記（"Psittacosis (Chlamydiosis)"）だが、モジュール側の表記ゆれ
+  （"Psittacosis / Chlamydiosis"）では完全一致せず prior が不発だった → 語順・区切り記号非依存の
+  トークンセット一致でフォールバック解決（フロントの `_resolveCommonDiseaseName` と同方針。
+  "Gout (Articular)" vs "(Visceral)" はトークンが異なり誤マージしない。曖昧セットは棄却）
+- これにより過去に削除済みの dead key（"Psittacosis / Chlamydiosis"）を復活させることなく prior が有効化
+
+### 表示数値の同期（第2弾）
+- `setDefaultStats()` 全21種を `/api/species-stats` の**ブラウズ可能数**基準に同期（dog 619→601疾患 等 —
+  従来のフォールバック値は canonical 適用前の基準でAPIと乖離していた）、pendingStats diseases 6432→**6449**
+
+### テスト・CI（セッション終了時）
+- フルテストスイート: **3,973件合格**（34 skip、+19新規回帰テスト）、ruff check/format clean
+- 再現手順: `migrate_to_sqlite.py` → `build_disease_search_index.py`（id ロックは append-only 再生成済み）
+
+### 既知の残課題（次セッション候補）
+- canonical マップに「canonical側の疾患名がモジュールに既に存在しない」dangling merge が残存
+  （richness差が大きく near-tie 帯で救済されないもの — 例: guinea_pig 'Pneumonia (Bacterial)'→'bacterial-pneumonia'）。
+  `scripts/quality/build_canonical.py` によるマップ再生成＋獣医レビューで解消するのが本筋
+- SQLite配信パス（6,892行）と fallback/canonical パス（6,449件）のブラウズ集合の差（canonical はread時適用）の一元化

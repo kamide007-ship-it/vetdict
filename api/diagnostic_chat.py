@@ -727,6 +727,20 @@ def extract_symptoms_from_text(text: str) -> list:
         # geriatric dogs night vocalization is a CDS DISHA sign whose closest
         # legacy equivalent is anxiety.
         "vocalization_changes": ["anxiety"],
+        # "できもの" resolves to lumps_and_bumps (species vocabularies); the
+        # legacy dog vocabulary carries palpable masses as lumps_bumps —
+        # without this bridge the oral-mass complaint extracted nothing.
+        "lumps_and_bumps": ["lumps_bumps"],
+        # "目が大きく見える" (buphthalmos — the acute-glaucoma owner sign)
+        # resolves to eye_bulging; the legacy vocabulary's closest signal.
+        "eye_bulging": ["eye_swelling"],
+        # "舌が紫" (cyanosis) has no legacy ID — respiratory compromise is
+        # the closest legacy signal for the CHF/airway complaint.
+        "cyanosis": ["labored_breathing"],
+        # "首を動かさない" (cervical guarding — the classic neck-IVDD sign)
+        # resolves to neck_stiffness; the legacy vocabulary now carries
+        # neck_pain directly (IVDD / wobbler symptom).
+        "neck_stiffness": ["neck_pain", "stiffness", "reluctance_to_move"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

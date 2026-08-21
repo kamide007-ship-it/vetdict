@@ -511,6 +511,7 @@ DISEASES: List[Dict[str, Any]] = [
             "respiratory_distress",
             "liver_enlargement",
             "weight_loss",
+            "fluffed_feathers",
         },
         "description": "Psittacosis / Chlamydiosis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "クラミジア・シタッシによる呼吸器・肝臓・全身性疾患。人獣共通感染症。",

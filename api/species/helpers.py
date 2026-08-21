@@ -115,6 +115,52 @@ _DEDUP_TEMPLATE_MARKS = (
 )
 
 
+def _dedup_slug(name: str) -> str:
+    """URL slug of a disease name — must match api.species.canonical._slug."""
+    import re as _re
+
+    return _re.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-")
+
+
+_CANON_PREF_CACHE: set | None = None
+
+
+def _canonical_preferred_slugs() -> set:
+    """Slugs the reviewed canonical maps (T103) declare as canonical targets.
+
+    Union across all species maps, minus any slug that is also a merged-away
+    slug in some map (conflicted identities get no preference and fall back to
+    richness). Used by dedupe survivor selection so the canonical twin keeps
+    winning regardless of content-length jitter.
+    """
+    global _CANON_PREF_CACHE
+    if _CANON_PREF_CACHE is not None:
+        return _CANON_PREF_CACHE
+    canon: set = set()
+    merged: set = set()
+    try:
+        import json as _json
+        from pathlib import Path as _Path
+
+        canon_dir = _Path(__file__).resolve().parent.parent / "data" / "canonical"
+        for f in canon_dir.glob("*.json"):
+            try:
+                cm = _json.loads(f.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            for mg in cm.get("merges", []):
+                cslug = mg.get("canonical", {}).get("slug")
+                if cslug:
+                    canon.add(cslug)
+                for m in mg.get("merged", []):
+                    if m.get("slug"):
+                        merged.add(m["slug"])
+    except Exception:
+        pass
+    _CANON_PREF_CACHE = canon - merged
+    return _CANON_PREF_CACHE
+
+
 def _dedup_richness(entry: Any) -> tuple[int, int]:
     """Rank a disease entry by content completeness (non-empty fields, then total length).
 
@@ -319,6 +365,7 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
 
     keep: Set[int] = set()
     bare_idx = set(bare_acr.values())
+    canon_pref = _canonical_preferred_slugs()
     for idxs in groups.values():
         if len(idxs) == 1:
             keep.add(idxs[0])
@@ -327,8 +374,30 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
             # name is the canonical card title and the key that JSON-overlay /
             # prevalence lookups match, so keeping "HYPP" over "Hyperkalemic
             # Periodic Paralysis (HYPP)" would both read worse and orphan the
-            # curated overlay content. Richness breaks ties as before.
-            keep.add(max(idxs, key=lambda i: (i not in bare_idx, _dedup_richness(diseases[i]), -i)))
+            # curated overlay content. Richness picks between full-name twins.
+            best = max(idxs, key=lambda i: (i not in bare_idx, _dedup_richness(diseases[i]), -i))
+            # Near-tie canonical stabiliser: richness is length-sensitive, so
+            # an unrelated text edit can flip the survivor by a single
+            # character — and when the flip lands on a merged-away twin,
+            # apply_canonical_map hides it, silently deleting the disease.
+            # When a twin whose slug the reviewed canonical map (T103)
+            # declares canonical is within a whisker of the richness winner
+            # (same field count, ≤300 chars shorter), prefer it. A decisively
+            # richer twin (curated vs template, e.g. Bucked Shins) still wins
+            # on richness — the map's direction is not trusted over content.
+            canon_alt = [
+                i
+                for i in idxs
+                if i not in bare_idx
+                and _dedup_slug(_disease_field(diseases[i], "name", "") or _disease_field(diseases[i], "name_en", ""))
+                in canon_pref
+            ]
+            if canon_alt and best not in canon_alt:
+                cand = max(canon_alt, key=lambda i: (_dedup_richness(diseases[i]), -i))
+                rb, rc = _dedup_richness(diseases[best]), _dedup_richness(diseases[cand])
+                if rc[0] >= rb[0] and rb[1] - rc[1] <= 300:
+                    best = cand
+            keep.add(best)
 
     if len(keep) == len(diseases):
         return diseases

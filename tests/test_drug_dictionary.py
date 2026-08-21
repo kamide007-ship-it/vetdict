@@ -1936,3 +1936,58 @@ class TestBatch42IsotonicSalineAndCholecalciferol:
         for text, target in cases.items():
             ids = [h["id"] for h in find_drugs_in_text(text)]
             assert target in ids, f"{text!r} -> {ids}"
+
+
+class TestBatch43CytarabineImiquimodAndMmfAlias:
+    """2026-08 11th referenced-but-absent sweep: cytarabine (8 dosed MUO
+    references) and imiquimod 5% cream (5 dosed references — equine sarcoid /
+    aural plaques, feline SCC in situ) were absent; mycophenolate turned out
+    to be present already, so only its bare acid-stem alias was added."""
+
+    def test_cytarabine_present_with_muo_cycle_and_safe_handling(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("cytarabine")
+        assert d is not None, "cytarabine missing from formulary"
+        dog = d["species_info"]["dog"]
+        # the exact MUO cycle VetDict's own neurology entries reference
+        assert "50 mg/m²" in dog["dosage"] and "q12h" in dog["dosage"]
+        assert "50 mg/m²" in dog["dosage_ja"]
+        # blood-brain barrier property is the defining reason this drug exists here
+        assert "blood-brain" in d["mechanism"].lower()
+        assert "血液脳関門" in d["mechanism_ja"]
+        # myelosuppression nadir + cytotoxic handling must be stated
+        assert "5-7" in dog["notes"] or "5-7" in d["side_effects"]
+        assert "手袋" in dog["notes_ja"] or "手袋" in d["contraindications_ja"]
+        cat = d["species_info"]["cat"]
+        assert (cat.get("dosage") or "").strip() and (cat.get("dosage_ja") or "").strip()
+        ids = [h["id"] for h in find_drugs_in_text("シタラビン（Ara-C）50 mg/m² SC q12h × 2日間、4週毎")]
+        assert "cytarabine" in ids
+
+    def test_imiquimod_present_for_equine_sarcoid_and_feline_scc_in_situ(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("imiquimod")
+        assert d is not None, "imiquimod missing from formulary"
+        horse = d["species_info"]["horse"]
+        assert "サルコイド" in horse["dosage_ja"]
+        # painful application / sedation caveat (Torres 2010) must be stated
+        assert "鎮静" in horse["dosage_ja"] or "鎮静" in horse["notes_ja"]
+        cat = d["species_info"]["cat"]
+        # grooming-ingestion prevention is the defining feline safety fact
+        assert "エリザベスカラー" in cat["dosage_ja"] or "エリザベスカラー" in cat["notes_ja"]
+        ids = [h["id"] for h in find_drugs_in_text("イミキモド5%クリーム外用q48h×数ヶ月")]
+        assert "imiquimod" in ids
+
+    def test_bare_mycophenolic_acid_resolves_to_existing_entry(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        # MMF itself must remain a single entry (no duplicate card)
+        assert get_drug_by_id("mycophenolate") is not None
+        assert get_drug_by_id("mycophenolate_mofetil") is None
+        # the SARDS entry cites the bare acid stem without モフェチル
+        ids = [h["id"] for h in find_drugs_in_text("IVIg 0.5 g/kg IV × 1回 + ミコフェノール酸 20 mg/kg PO q12h")]
+        assert "mycophenolate" in ids
+        # and the full spelling still resolves to the same entry
+        ids2 = [h["id"] for h in find_drugs_in_text("ミコフェノール酸モフェチル（MMF）10 mg/kg PO q12h")]
+        assert ids2.count("mycophenolate") == 1 and "mycophenolate_mofetil" not in ids2

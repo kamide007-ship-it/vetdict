@@ -250,6 +250,7 @@ DISEASES: List[Dict[str, Any]] = [
             "drooling",
             "oral_hemorrhage",
             "facial_swelling",
+            "stomatitis",
         },
         "description": "Infectious Stomatitis (Mouth Rot) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "乾酪性浸出液、組織壊死、顎の骨髄炎の可能性を伴う口腔の細菌感染症です。",
