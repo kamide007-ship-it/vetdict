@@ -12206,6 +12206,14 @@ def _enrich_horse_diseases() -> None:
         "の原因には、遺伝的素因、体型、",
         "の管理は、原因への対処、適切な支持療法",
         "免疫系が自己抗原または環境アレルゲンに対して",
+        # Generic dermatology work-up template stamped on all 44 skin-category
+        # entries (antifungal shampoo / griseofulvin / permethrin) — wrong for
+        # sarcoid, melanoma, SCC etc.; curated JSON text must win.
+        "局所療法：抗菌シャンプー",
+        # Generic neoplasia etiology template (cites FeLV — a feline virus).
+        "の発生には複数要因が複合的に関与する",
+        # Generic neoplasia pathophysiology template.
+        "病態生理は正常細胞の悪性転換から始まる",
     )
 
     def _is_horse_template(val: str) -> bool:

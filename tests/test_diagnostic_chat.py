@@ -44,6 +44,9 @@ _KNOWN_ALIAS_MISMATCHES = {
     # Bridged to the legacy dog vocabulary (stiffness) via _LEGACY_FALLBACK;
     # no species module carries a dedicated difficulty-rising ID.
     "difficulty_standing",
+    # Bridged via _LEGACY_FALLBACK (neck_pain/stiffness) and ID_SYNONYMS;
+    # no species module carries a dedicated cervical-guarding ID.
+    "neck_stiffness",
 }
 
 
@@ -1616,6 +1619,66 @@ class TestQuickTapPhraseExtraction:
         "ferret": ["ぐったり", "脱毛", "下痢", "後ろ足がふらつく", "嘔吐", "食べない", "陰部が腫れている"],
         "hedgehog": ["針が抜ける", "フケ", "ふらつく", "食べない", "目が出ている", "体重が減った"],
         "bird": ["羽を膨らませている", "食べない", "下痢", "鼻水", "羽が抜ける", "くしゃみ", "自分で羽を抜く"],
+        "parakeet": [
+            "食べない",
+            "膨らんでいる",
+            "呼吸のたびに音がする",
+            "吐き戻しが増えた",
+            "そのうが膨らんでいる",
+            "お尻でいきんでいる",
+        ],
+        "parrot": ["食べない", "自分で羽を抜く", "くしゃみ", "下痢", "元気がない", "吐き戻しが増えた"],
+        "reptile": [
+            "食べない",
+            "口をあけたまま呼吸",
+            "鼻水が出る",
+            "脱皮がうまくできない",
+            "目が開かない",
+            "痩せてきた",
+        ],
+        "tortoise": ["食べない", "甲羅がやわらかい", "鼻水が出る", "目が腫れている", "いきんでいる", "甲羅に傷がある"],
+        "snake": [
+            "食べない",
+            "口の中が赤い",
+            "脱皮がうまくできない",
+            "口をあけたまま呼吸",
+            "ダニがついている",
+            "吐き戻しが増えた",
+        ],
+        "lizard": [
+            "食べない",
+            "脚が曲がってきた",
+            "ふらつく",
+            "脱皮がうまくできない",
+            "口をあけたまま呼吸",
+            "痩せてきた",
+        ],
+        "amphibian": [
+            "食べない",
+            "皮膚が赤い",
+            "お腹が膨れている",
+            "皮膚に白いもの",
+            "元気がない",
+            "浮かんだまま沈めない",
+        ],
+        "fish": [
+            "体に白い点々",
+            "ヒレがボロボロ",
+            "体をこすりつける",
+            "水面で口をパクパク",
+            "お腹が膨れている",
+            "泳ぎ方がおかしい",
+        ],
+        "degu": ["食べない", "よだれが出る", "毛が抜ける", "尻尾の皮がむけた", "下痢", "ぐったりしている"],
+        "sugar_glider": [
+            "食べない",
+            "自分を噛んでしまう",
+            "後ろ足がふらつく",
+            "毛が抜ける",
+            "下痢",
+            "ぐったりしている",
+        ],
+        "exotic_other": ["食べない", "元気がない", "下痢", "毛が抜ける"],
     }
     EN_QUICK = {
         "dog": ["vomiting", "lethargic", "diarrhea", "coughing", "limping", "itchy skin"],
@@ -2469,3 +2532,115 @@ class TestChatClinicalAccuracyAuditRound8:
         assert "pergolide" in (r.get("prognosis") or "").lower()
         assert "antimicrobial" not in (r.get("prognosis") or "").lower()
         assert "vaccination" not in (r.get("prevention") or "").lower()
+
+
+class TestChatClinicalAccuracyAuditRound9:
+    """2026-08 audit round 9: a 20-case realistic chief-complaint sweep.
+    Root causes fixed: missing aliases (連用形「目が赤く」, かな表記「口をあけて」,
+    て形「円形に抜けて」, cyanosis/fatigue owner phrases, green droppings,
+    budgie breathing noise); missing ID synonym bridges (lumps_and_bumps→lumps,
+    exercise_intolerance, cyanosis, neck_stiffness, diarrhea_green,
+    pollakiuria→straining before polyuria); the legacy dog vocabulary gained
+    neck_pain (cervical IVDD/wobbler); the snake mouth-rot entry lacked its own
+    stomatitis ID; and untiered rarities (ophidian herpesvirus, avocado
+    toxicity, leucocytozoonosis) outranked common diseases."""
+
+    def test_dog_oral_mass_extracts_lumps_and_ranks_tumours(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        extracted = extract_symptoms_from_text("口の横にできものがある")
+        assert "lumps_bumps" in extracted
+        matches = match_symptoms_to_diseases(extracted)
+        assert matches, "the oral-mass complaint extracted nothing before the bridge"
+
+    def test_dog_acute_glaucoma_complaint_reaches_glaucoma(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        extracted = extract_symptoms_from_text("片目が急に赤くて痛そう 目が大きく見える")
+        assert extracted, "the buphthalmos complaint extracted nothing before the fixes"
+        names = [m.get("name_ja", "") for m in match_symptoms_to_diseases(extracted)[:4]]
+        assert any("緑内障" in n for n in names), names
+
+    def test_dog_chf_complaint_extracts_fatigue_and_cyanosis(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        extracted = extract_symptoms_from_text("咳が続く 疲れやすい 舌が紫")
+        assert "exercise_intolerance" in extracted
+        assert "labored_breathing" in extracted  # cyanosis → legacy bridge
+        names = [m.get("name_ja", "") for m in match_symptoms_to_diseases(extracted)[:4]]
+        assert any("僧帽弁" in n for n in names), names
+
+    def test_dog_neck_scream_ranks_cervical_diseases(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        extracted = extract_symptoms_from_text("急にキャンと鳴いて首を動かさない")
+        assert "neck_pain" in extracted, "the cervical-guarding complaint must reach the new legacy neck_pain ID"
+        names = [m.get("name_ja", "") for m in match_symptoms_to_diseases(extracted)[:3]]
+        assert any("椎間板" in n or "ウォブラー" in n for n in names), names
+
+    def test_dog_pollakiuria_resolves_to_lutd_not_polyuria(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("おしっこの回数が多い おしっこに血が混じる", "dog")
+        assert "straining_urinate" in ids and "blood_urine" in ids, ids
+        names = [(m.get("name_ja") or m.get("name") or "") for m in _match_species_symptoms_to_diseases(ids, "dog")[:4]]
+        assert any("尿路感染" in n or "膀胱" in n or "前立腺" in n for n in names), names
+
+    def test_bird_sick_bird_triad_ranks_psittacosis_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("羽を膨らませている 便が緑色 元気がない", "bird")
+        assert "diarrhea_green" in ids, ids
+        names = [
+            (m.get("name_ja") or m.get("name") or "") for m in _match_species_symptoms_to_diseases(ids, "bird")[:3]
+        ]
+        assert any("オウム病" in n for n in names), (
+            f"fluffed + green droppings + lethargy is the textbook psittacosis triad: {names}"
+        )
+
+    def test_parakeet_breathing_noise_and_dirty_nares_rank_respiratory(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("呼吸のたびに音がする 鼻の周りが汚れている", "parakeet")
+        assert len(ids) >= 2, ids
+        names = [
+            (m.get("name_ja") or m.get("name") or "") for m in _match_species_symptoms_to_diseases(ids, "parakeet")[:3]
+        ]
+        assert any("呼吸" in n or "肺炎" in n or "気道" in n for n in names), names
+
+    def test_reptile_kana_open_mouth_and_nasal_bubbles_rank_pneumonia(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("口をあけたまま呼吸 鼻から泡", "reptile")
+        assert "open_mouth_breathing" in ids and "nasal_discharge" in ids, ids
+        names = [
+            (m.get("name_ja") or m.get("name") or "") for m in _match_species_symptoms_to_diseases(ids, "reptile")[:3]
+        ]
+        assert any("肺炎" in n or "呼吸器" in n for n in names), names
+
+    def test_snake_stomatitis_complaint_ranks_mouth_rot_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("口の中が赤い 食べない よだれ", "snake")
+        assert "stomatitis" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "snake")[0]
+        assert "口内炎" in (top.get("name_ja") or ""), (
+            f"very_common mouth rot must outrank the rare ophidian herpesvirus: {top.get('name_ja')}"
+        )
+
+    def test_chinchilla_te_form_circular_alopecia_reaches_ringworm(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("毛が円形に抜けている", "chinchilla")
+        assert "circular_hair_loss" in ids, ids
+        names = [
+            (m.get("name_ja") or m.get("name") or "")
+            for m in _match_species_symptoms_to_diseases(ids, "chinchilla")[:3]
+        ]
+        assert any("糸状菌" in n or "白癬" in n for n in names), names

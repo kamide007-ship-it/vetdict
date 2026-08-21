@@ -31,8 +31,8 @@ class TestSymptomDatabase:
 
     def test_symptom_count(self):
         assert (
-            len(SYMPTOMS) == 63
-        )  # +epistaxis/vision_loss/voluminous_stool (2026-08 round-8 audit); before +scooting etc.
+            len(SYMPTOMS) == 64
+        )  # +neck_pain (2026-08 round-9 audit); before +epistaxis/vision_loss/voluminous_stool etc.
 
     def test_all_symptoms_have_required_fields(self):
         for s in SYMPTOMS:
@@ -295,7 +295,7 @@ class TestGetSymptomsRoute:
         assert "total" in data
         assert "symptoms" in data
         assert "categories" in data
-        assert data["total"] == 63
+        assert data["total"] == 64
 
     def test_filter_by_category(self, client):
         resp = client.get("/api/health-check/symptoms?category=respiratory")

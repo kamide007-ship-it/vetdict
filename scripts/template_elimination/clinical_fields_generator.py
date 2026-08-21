@@ -1052,7 +1052,7 @@ def gen_causes_ja(category: str, name_ja: str, species: str) -> str:
     if category == "neoplasia":
         return (
             f"{prefix}の発生には複数要因が複合的に関与する。"
-            f"遺伝的素因（品種特異的好発性）、慢性炎症の持続、発癌性ウイルス感染（FeLV関連リンパ腫等の特異的例を除く）、化学発癌物質への長期曝露、ホルモン異常（性ホルモン依存性腫瘍）、免疫監視機構の破綻、紫外線・電離放射線曝露が主要因子。"
+            f"遺伝的素因（品種特異的好発性）、慢性炎症の持続、腫瘍原性ウイルスの感染（関与が確立している腫瘍種の場合）、化学発癌物質への長期曝露、ホルモン異常（性ホルモン依存性腫瘍）、免疫監視機構の破綻、紫外線・電離放射線曝露が主要因子。"
             f"加齢に伴うDNA修復能低下と細胞増殖制御異常が促進因子となる。"
             f"早期発見と病期診断（TNM分類）が予後改善と治療選択の基盤である。{note}"
         )
@@ -1255,7 +1255,7 @@ def gen_causes_en(category: str, name_en: str, species: str) -> str:
     if category == "neoplasia":
         return (
             f"The development of {prefix} is multifactorial. "
-            f"Major factors include genetic predisposition (breed-specific tendencies), persistent chronic inflammation, oncogenic viral infection (aside from specific examples such as FeLV-associated lymphoma), prolonged exposure to chemical carcinogens, hormonal imbalance (sex-hormone-dependent tumours), failure of immune surveillance, and ultraviolet or ionising radiation. "
+            f"Major factors include genetic predisposition (breed-specific tendencies), persistent chronic inflammation, oncogenic viral infection (where a viral role is established for the tumour type), prolonged exposure to chemical carcinogens, hormonal imbalance (sex-hormone-dependent tumours), failure of immune surveillance, and ultraviolet or ionising radiation. "
             f"Age-related decline in DNA repair capacity and dysregulated control of cell proliferation are promoting factors. "
             f"Early detection and staging (TNM classification) underpin prognosis and treatment selection."
         )
@@ -3004,7 +3004,7 @@ _NEOPLASIA_PROGNOSIS: dict[str, str] = {
         "は全身性に進展する造血器腫瘍であり外科的治癒は困難。"
         "多剤併用化学療法（CHOP系等）が治療の主体で、寛解導入により生存期間の延長が期待できる。"
         "完全寛解率・寛解期間・生存期間は病型・免疫表現型（B/T細胞）・臨床ステージにより異なる。"
-        "再発例では救援プロトコルを検討する。猫ではFeLV/FIV感染が予後を悪化させる。"
+        "再発例では救援プロトコルを検討する。"
         "無治療では進行性で予後不良。"
     ),
     "mast_cell": (
@@ -3373,7 +3373,7 @@ _NEOPLASIA_PROGNOSIS_EN: dict[str, str] = {
         " is a systemic haematopoietic malignancy that is not cured by surgery. "
         "Multi-agent chemotherapy (CHOP-based protocols) is the mainstay; remission induction can extend survival. "
         "Remission rate, remission duration and survival vary with subtype, immunophenotype (B/T cell) and clinical stage. "
-        "Rescue protocols are considered at relapse, and FeLV/FIV co-infection worsens the prognosis in cats. "
+        "Rescue protocols are considered at relapse. "
         "Untreated disease is progressive with a poor outcome."
     ),
     "mast_cell": (

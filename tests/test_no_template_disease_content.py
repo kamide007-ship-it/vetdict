@@ -5104,3 +5104,85 @@ def test_no_garbled_or_misspelled_drug_names_in_disease_json():
     # The corrected PDD protocols must name the evidence-based empirical agent.
     pdd = [e for e in entries if e.get("species") == "Bird" and "Proventricular Dilatation" in (e.get("name") or "")]
     assert pdd and any("セレコキシブ" in (e.get("treatment_ja") or "") for e in pdd)
+
+
+def test_no_feline_retrovirus_mentions_in_non_cat_json_records():
+    """FeLV/FIV are feline retroviruses — 2026-08 audit found 3,600+ template
+    fields citing them (etiology, prognosis lists, an FeLV *vaccine*
+    recommendation, ophthalmic differentials) on horse/rabbit/bird/reptile
+    and every other non-cat species. They must never reappear outside Cat
+    records."""
+    import re
+
+    entries = _load_json_entries()
+    if not entries:
+        pytest.skip("diseases_all_species.json not present")
+    fiv_re = re.compile(r"\bFIV\b")
+    failures = []
+    for entry in entries:
+        if (entry.get("species") or "") == "Cat":
+            continue
+        for field, value in entry.items():
+            if not isinstance(value, str):
+                continue
+            if "FeLV" in value or fiv_re.search(value):
+                failures.append(f"[{entry.get('species')}] {entry.get('name')} :: {field}")
+    assert not failures, f"{len(failures)} non-cat fields cite feline retroviruses. First 10:\n" + "\n".join(
+        failures[:10]
+    )
+
+
+def test_served_db_no_feline_retrovirus_on_non_cat_species():
+    """Served-DB safety net for the same feline-retrovirus contamination."""
+    import re
+    import sqlite3
+
+    db = _served_db_path()
+    if db is None:
+        pytest.skip("served vetdict.db not present (run scripts/migrate_to_sqlite.py)")
+    fiv_re = re.compile(r"\bFIV\b")
+    conn = sqlite3.connect(str(db))
+    try:
+        cols = [
+            "causes_ja",
+            "pathophysiology_ja",
+            "prognosis_ja",
+            "prevention_ja",
+            "treatment_ja",
+            "causes",
+            "pathophysiology",
+            "prognosis",
+            "prevention",
+            "treatment",
+        ]
+        rows = conn.execute(f"SELECT species, name, {', '.join(cols)} FROM diseases WHERE species != 'cat'").fetchall()
+    finally:
+        conn.close()
+    failures = []
+    for row in rows:
+        species, name = row[0], row[1]
+        for col, value in zip(cols, row[2:]):
+            v = value or ""
+            if "FeLV" in v or fiv_re.search(v):
+                failures.append(f"[{species}] {name} :: {col}")
+    assert not failures, f"{len(failures)} served non-cat fields cite feline retroviruses. First 10:\n" + "\n".join(
+        failures[:10]
+    )
+
+
+def test_equine_sarcoid_etiology_is_bpv_not_generic_neoplasia():
+    """Equine sarcoid is BPV-1/2-driven — the most common equine skin tumour
+    must never carry the generic neoplasia template (which cited FeLV) or the
+    generic dermatology work-up (antifungal shampoo / griseofulvin)."""
+    from api.species.equine_diseases import DISEASE_DATABASE
+
+    sarcoid = next(d for d in DISEASE_DATABASE if d.name_en == "Equine Sarcoid")
+    assert "BPV" in (sarcoid.etiology or ""), "sarcoid etiology must name BPV-1/2"
+    assert "FeLV" not in (sarcoid.etiology or "")
+    assert "抗真菌" not in (sarcoid.treatment_protocol or "")
+    assert "グリセオフルビン" not in (sarcoid.treatment_protocol or "")
+    # the curated protocol names its actual modalities
+    assert "シスプラチン" in (sarcoid.treatment_protocol or "")
+    assert "イミキモド" in (sarcoid.treatment_protocol or "")
+    melanoma = next(d for d in DISEASE_DATABASE if d.name_en == "Melanoma")
+    assert "STX17" in (melanoma.etiology or ""), "grey-horse melanoma etiology must cite STX17"

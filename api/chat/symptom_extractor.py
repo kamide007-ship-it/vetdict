@@ -176,7 +176,7 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "limping_rr",
         "limping_fr",
     ],
-    "lumps_and_bumps": ["lumps_nodules", "skin_masses", "tumors", "skin_lumps"],
+    "lumps_and_bumps": ["lumps_nodules", "skin_masses", "tumors", "skin_lumps", "lumps"],
     # Hair
     "hair_loss": [
         "alopecia",
@@ -233,7 +233,14 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "open_mouth_breathing": ["labored_breathing", "respiratory_distress", "mouth_breathing"],
     "rapid_breathing": ["tachypnea", "panting", "labored_breathing"],
     "coughing": ["cough", "kennel_cough"],
-    "wheezing": ["coughing", "labored_breathing", "respiratory_distress"],
+    "wheezing": [
+        "coughing",
+        "labored_breathing",
+        "respiratory_distress",
+        "clicking_breathing_sounds",
+        "breathing_difficulty",
+        "difficulty_breathing",
+    ],
     "sneezing": ["reverse_sneezing", "nasal_irritation", "nasal_discharge"],
     "nasal_discharge": ["runny_nose", "rhinorrhea", "nasal_secretion", "sneezing"],
     # Urinary
@@ -245,7 +252,17 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "straining_urinate",
     ],
     "straining_urinate": ["straining_to_urinate", "dysuria", "urinary_straining", "difficulty_urinating"],
-    "frequent_urination": ["pollakiuria", "polyuria", "excessive_urination", "increased_urination"],
+    # pollakiuria (frequent small urinations) is an LUTD sign — resolve toward
+    # straining before the polyuria-flavoured IDs so「おしっこの回数が多い」
+    # ranks cystitis/urolithiasis rather than polyuric endocrinopathies.
+    "frequent_urination": [
+        "pollakiuria",
+        "straining_to_urinate",
+        "straining_urinate",
+        "polyuria",
+        "excessive_urination",
+        "increased_urination",
+    ],
     "excessive_urination": ["frequent_urination", "polyuria", "pollakiuria", "increased_urination"],
     "increased_urination": ["excessive_urination", "frequent_urination", "polyuria", "pollakiuria"],
     "cloudy_urine": ["turbid_urine", "murky_urine"],
@@ -298,6 +315,21 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # Limbs / extremities
     "cold_limbs": ["cold_extremities", "poor_circulation"],
     "cold_extremities": ["cold_limbs", "poor_circulation"],
+    # 2026-08 第9回精度スイープ: 心不全・頸部痛・鳥緑色便の主訴が解決不能だった
+    "exercise_intolerance": ["resp_exercise_intolerance", "lethargy"],
+    "cyanosis": [
+        "blue_gums",
+        "labored_breathing",
+        "difficulty_breathing",
+        "breathing_difficulty",
+        "respiratory_distress",
+    ],
+    "neck_stiffness": ["neck_pain", "stiffness", "reluctance_to_move", "reluctance_move", "pain"],
+    # 鳥の緑色便（ビリベルジン尿）— 種ごとの便ID表記ゆれを吸収し、
+    # 該当IDを持たない哺乳類等では diarrhea にフォールバック
+    "diarrhea_green": ["yellow_green_droppings", "diarrhea_yellow_green", "green_droppings", "diarrhea"],
+    # 「皮膚に白いもの」— 両生類は白斑/綿状増殖、魚は白点に解決
+    "white_patches_skin": ["white_patches", "cotton_like_growth", "white_spots"],
     # Bird-specific
     "fluffed_feathers": ["feather_fluffing", "puffed_up", "ruffled_feathers"],
     "feather_plucking": ["feather_loss", "self_mutilation", "feather_destructive_behavior"],
@@ -306,7 +338,7 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # Fish fin
     "frayed_fins": ["fin_rot", "fin_erosion", "ragged_fins"],
     "fin_rot": ["frayed_fins", "fin_erosion"],
-    "redness_skin": ["skin_redness", "hemorrhage", "fin_hemorrhage"],
+    "redness_skin": ["skin_redness", "hemorrhage", "fin_hemorrhage", "bleeding"],
     "skin_redness": ["redness_skin", "hemorrhage", "red_legs", "red_ventrum"],
     "fin_hemorrhage": ["redness_skin", "hemorrhage"],
     # Hamster

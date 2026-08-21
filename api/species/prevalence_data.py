@@ -770,6 +770,13 @@ SPECIES_PREVALENCE = {
         "Crop Impaction": "common",
         "Foreign Body Ingestion": "common",
         "Psittacosis (Chlamydiosis)": "common",
+        # Vector-borne blood parasite of outdoor/free-ranging birds — rare in
+        # pet psittacines; untiered it outranked psittacosis on green droppings.
+        "Leucocytozoonosis": "uncommon",
+        "Avian Leucocytozoonosis": "uncommon",
+        # Exposure-dependent toxicosis (same precedent as copper/PTFE = rare) —
+        # untiered it topped the fluffed+green-droppings sick-bird complaint.
+        "Avocado Toxicity": "rare",
         "Salmonellosis": "uncommon",
         "Squamous Cell Carcinoma": "uncommon",
         "Lipoma": "uncommon",
@@ -1540,6 +1547,10 @@ SPECIES_PREVALENCE = {
         "Internal Nematodes (Roundworms)": "common",
         "Boid Nidovirus (Ball Python Nidovirus)": "uncommon",
         "Snake Fungal Disease (Ophidiomyces)": "uncommon",
+        # Ophidian herpesvirus is a rare diagnosis in pet snakes (herpesviruses
+        # are chiefly a chelonian problem) — without a tier it outranked the
+        # very_common mouth rot on the stomatitis+anorexia complaint.
+        "Ophidian Herpesvirus Infection": "rare",
         "Gout (Visceral)": "uncommon",
         "Lymphoma": "uncommon",
         "Arenavirus Infection": "uncommon",

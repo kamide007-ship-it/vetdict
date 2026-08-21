@@ -64,6 +64,7 @@ from api.drug_batch_39 import DRUGS_BATCH_39
 from api.drug_batch_40 import DRUGS_BATCH_40
 from api.drug_batch_41 import DRUGS_BATCH_41
 from api.drug_batch_42 import DRUGS_BATCH_42
+from api.drug_batch_43 import DRUGS_BATCH_43
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10668,6 +10669,15 @@ for _drug42 in DRUGS_BATCH_42:
         DRUGS.append(_drug42)
         _drug_index[_drug42["id"]] = _drug42
 
+# バッチ43: 2026-08 第11回 referenced-but-absent 監査で検出
+# （シタラビンAra-C — MUO(GME/NME/NLE)標準補助療法が8エントリで用量付き参照されるのに未収載;
+#  イミキモド5%クリーム — 馬サルコイド/耳介プラーク・猫SCC in situ の5参照。
+#  MMFは既収載(mycophenolate)のため、裸の「ミコフェノール酸」表記のエイリアスのみ追加）
+for _drug43 in DRUGS_BATCH_43:
+    if _drug43["id"] not in _drug_index:
+        DRUGS.append(_drug43)
+        _drug_index[_drug43["id"]] = _drug43
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11175,6 +11185,9 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "milbemycin_oxime": (
         "ミルベマイシン",
     ),  # canonical: ミルベマイシンオキシム — texts cite the bare stem (ミルベマイシンA錠 等)
+    # 2026-08 sweep #11: SARDS/IMHA texts cite bare "ミコフェノール酸 20 mg/kg"
+    # (without モフェチル) — the full canonical name never reduces to the acid stem.
+    "mycophenolate": ("ミコフェノール酸", "ミコフェノレート"),
 }
 
 

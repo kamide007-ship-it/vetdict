@@ -331,3 +331,63 @@ class TestSpeciesTagAndSpellingFold:
         # trauma template (falls/bites/traffic accidents).
         assert "反復" in causes
         assert "交通事故" not in causes
+
+
+class TestCanonicalAwareSurvivorSelection:
+    """2026-08 audit: dedupe picked its survivor by content richness alone, a
+    length-sensitive score — an unrelated text edit flipped the guinea-pig
+    mammary-tumour survivor from the canonical "Mammary Tumors" to the
+    merged-away twin "Mammary Tumor", which apply_canonical_map then hid,
+    silently deleting the disease. Survivor selection now prefers the twin
+    whose slug the reviewed canonical map declares canonical; the same fix
+    resurrected ~90 diseases (guinea-pig UTI, bacterial pneumonia, bird lead
+    poisoning …) that were already being dropped this way at baseline."""
+
+    def test_canonical_slug_twin_wins_near_ties_but_not_curation_gaps(self):
+        from api.species.helpers import _canonical_preferred_slugs, dedupe_disease_list
+
+        assert "mammary-tumors" in _canonical_preferred_slugs()
+        # Near-tie (the real failure mode was a ONE-character difference):
+        # the canonical-map twin must win despite being marginally shorter.
+        items = [
+            {"name": "Mammary Tumor", "name_ja": "乳腺腫瘍（モルモット）", "treatment_ja": "y" * 1100},
+            {"name": "Mammary Tumors", "name_ja": "乳腺腫瘍", "treatment_ja": "x" * 1000},
+        ]
+        out = dedupe_disease_list(items)
+        assert len(out) == 1 and out[0]["name"] == "Mammary Tumors", (
+            "the canonical-map twin must survive richness jitter within the near-tie band"
+        )
+        # Decisive curation gap: a much richer merged twin still wins on
+        # richness (the map direction is not trusted over curated content —
+        # e.g. Bucked Shins vs the horse map's bucked-shin direction).
+        items2 = [
+            {"name": "Mammary Tumor", "name_ja": "乳腺腫瘍（モルモット）", "treatment_ja": "y" * 4000},
+            {"name": "Mammary Tumors", "name_ja": "乳腺腫瘍", "treatment_ja": "x" * 100},
+        ]
+        out2 = dedupe_disease_list(items2)
+        assert len(out2) == 1 and out2[0]["name"] == "Mammary Tumor"
+
+    def test_guinea_pig_served_list_keeps_canonical_mammary_and_uti(self):
+        import importlib
+
+        from api.species.canonical import apply_canonical_map
+        from api.species.helpers import dedupe_disease_list
+
+        mod = importlib.import_module("api.species.guinea_pig_diseases")
+        served = apply_canonical_map(dedupe_disease_list(mod.DISEASES), "guinea_pig")
+        names = {d.get("name") for d in served if isinstance(d, dict)}
+        assert "Mammary Tumors" in names, "canonical mammary-tumour card must be served"
+        assert "Mammary Tumor" not in names, "merged twin must stay hidden"
+
+    def test_search_index_has_no_duplicate_ids_and_matches_canonical_names(self):
+        import json
+        from pathlib import Path
+
+        idx_path = Path(__file__).resolve().parents[1] / "api" / "data" / "disease_search_index.json"
+        if not idx_path.exists():
+            pytest.skip("search index not built")
+        idx = json.loads(idx_path.read_text(encoding="utf-8"))
+        ids = [e["id"] for e in idx]
+        assert len(ids) == len(set(ids))
+        gp_names = {e["name"] for e in idx if e["species"] == "guinea_pig"}
+        assert "Mammary Tumors" in gp_names and "Mammary Tumor" not in gp_names
