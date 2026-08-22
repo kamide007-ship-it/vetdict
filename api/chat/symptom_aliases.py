@@ -1869,6 +1869,55 @@ SYMPTOM_ALIASES = {
     "しっぽの皮がむけた": "tail_injury",
     "自分を噛んでしまう": "self_mutilation",
     "自分を噛んでる": "self_mutilation",
+    # --- 2026-08 第10回精度スイープ: 実主訴の抽出ゼロを是正 ---
+    # 泌尿器（ポラキウリア連用形・猫の尿閉サイン）
+    "おしっこの回数が多く": "frequent_urination",
+    "トイレの回数が多い": "frequent_urination",
+    "おしっこが少ししか出ない": "straining_to_urinate",
+    "砂が濡れていない": "decreased_urination",
+    "鳴きながらいきむ": "straining_to_urinate",
+    # GDV（膨らんで形・吐こうとしても形）
+    "お腹が膨らんで": "bloating",
+    "お腹がふくらんで": "bloating",
+    "吐こうとしても吐けない": "unproductive_retching",
+    "吐こうとするが吐けない": "unproductive_retching",
+    # 喉頭麻痺（GOLPP: 誤嚥性むせ＋声の変化）
+    "むせる": "coughing",
+    "むせている": "coughing",
+    "声がかすれる": "voice_change",
+    "声がかすれて": "voice_change",
+    "声が変わった": "voice_change",
+    "鳴き声がかすれる": "voice_change",
+    # 消化器（ボルボリグミ＋草食べ＝悪心プロキシ）
+    "お腹がキュルキュル": "stomach_gurgling",
+    "お腹がゴロゴロ鳴": "stomach_gurgling",
+    "草を食べたがる": "nausea",
+    "草ばかり食べる": "nausea",
+    # 眼（進行形「濁ってきた」）
+    "目が白く濁ってきた": "cloudy_eye",
+    "目が濁ってきた": "cloudy_eyes",
+    # 鳥のテイルボビング（する形）と趾瘤症（て形・タコ表現）
+    "尾が上下する": "tail_bobbing",
+    "呼吸のたびに尾": "tail_bobbing",
+    "足の裏が腫れて": "foot_sores",
+    "タコのようになって": "foot_sores",
+    # フェレット副腎（尾部脱毛の語順違い＋菲薄皮膚）
+    "尻尾から毛が抜け": "hair_loss",
+    "毛が尻尾から抜け": "hair_loss",
+    "皮膚が薄い": "thinning_skin",
+    "皮膚が薄く": "thinning_skin",
+    # 猫ノトエドレス疥癬（耳介先端の痂皮）・カサカサのて形
+    # （「耳にかさぶた」は既存キー(skin_lesions)を維持）
+    "耳の先が黒く": "crusting",
+    "カサカサして": "dry_skin",
+    # 犬の趾間皮膚炎・アトピー（足舐め＋趾間紅斑）
+    "足を舐め": "excessive_licking",
+    "足の裏を舐め": "excessive_licking",
+    "舐め続ける": "excessive_licking",
+    "指の間が赤い": "skin_redness",
+    "指の間が赤く": "skin_redness",
+    # ポラキウリア（1回量の減少 — 飼い主表現では主語が省略されがち）
+    "少ししか出ない": "straining_to_urinate",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

@@ -102,7 +102,6 @@ class TestPrevalenceKeysResolveToDiseases:
         fixed_round2 = {
             "chinchilla": ["Tooth Root Abscess", "Prolapsed Rectum"],
             "guinea_pig": [
-                "Subcutaneous Abscess",
                 "Adenovirus Pneumonia",
                 "Intestinal Torsion",  # new disease entry
             ],
@@ -120,7 +119,23 @@ class TestPrevalenceKeysResolveToDiseases:
             ],
             "fish": ["Fin Rot (Bacterial/Fungal)"],
         }
+        # Third remap (2026-08): keys renamed to the canonical duplicate-merge
+        # survivor names so they resolve exactly in the served DB (chips) as well
+        # as in the module data (chat prior).
+        fixed_round3 = {
+            "bird": ["Vitamin A Deficiency (Hypovitaminosis A)"],
+            "guinea_pig": ["Abscess (Subcutaneous)", "Gastric Ulcers"],
+            "parakeet": [
+                "Copper Poisoning",
+                "Egg Yolk Peritonitis",
+                "Renal Adenocarcinoma",
+            ],
+            "tortoise": ["Bladder Stones (Urolithiasis)"],
+            "degu": ["Uterine Adenocarcinoma"],
+        }
         for species, keys in fixed_round2.items():
+            fixed.setdefault(species, []).extend(keys)
+        for species, keys in fixed_round3.items():
             fixed.setdefault(species, []).extend(keys)
         for species, keys in fixed.items():
             names = self._disease_names(species)

@@ -208,9 +208,23 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "scaling": ["skin_lesions", "dandruff", "scaly_skin", "skin_crusting"],
     "dandruff": ["scaling", "scaly_skin", "skin_crusting"],
     # Eyes
-    "cloudiness_in_eyes": ["cloudy_eyes", "eye_cloudiness", "corneal_opacity", "cloudy_eye", "corneal_cloudiness"],
-    "cloudy_eyes": ["cloudiness_in_eyes", "eye_cloudiness", "corneal_opacity", "cloudy_eye", "corneal_cloudiness"],
-    "cloudy_eye": ["cloudy_eyes", "cloudiness_in_eyes", "eye_cloudiness", "corneal_cloudiness"],
+    "cloudiness_in_eyes": [
+        "cloudy_eyes",
+        "eye_cloudiness",
+        "corneal_opacity",
+        "cloudy_eye",
+        "corneal_cloudiness",
+        "cataracts",
+    ],
+    "cloudy_eyes": [
+        "cloudiness_in_eyes",
+        "eye_cloudiness",
+        "corneal_opacity",
+        "cloudy_eye",
+        "corneal_cloudiness",
+        "cataracts",
+    ],
+    "cloudy_eye": ["cloudy_eyes", "cloudiness_in_eyes", "eye_cloudiness", "corneal_cloudiness", "cataracts"],
     "corneal_opacity": ["corneal_cloudiness", "cloudy_eyes", "cloudy_eye", "cloudiness_in_eyes"],
     "corneal_cloudiness": ["corneal_opacity", "cloudy_eyes", "cloudy_eye", "cloudiness_in_eyes"],
     "redness_in_eyes": ["red_eyes", "conjunctivitis", "eye_redness"],
@@ -433,6 +447,20 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 発疹/湿疹 resolve to the legacy skin_rashes ID; species vocabularies
     # carry rashes under their generic lesion IDs.
     "skin_rashes": ["skin_lesions", "skin_redness", "rash", "rashes"],
+    # --- 2026-08 round-10 sweep bridges ---
+    # ボルボリグミ（お腹がキュルキュル）: no species carries a dedicated
+    # borborygmi ID — bridge to the nausea/gas vocabulary.
+    "stomach_gurgling": ["nausea", "bloating", "abdominal_distension"],
+    # 草を食べたがる (grass eating — owner-reported nausea proxy): species
+    # vocabularies carry nausea only sporadically — fall back to vomiting.
+    "nausea": ["vomiting", "retching", "drooling"],
+    # 声がかすれる (bark/voice change — the GOLPP hallmark): cat and the legacy
+    # dog vocabulary carry voice_change directly; others fall back to the
+    # airway-noise IDs.
+    "voice_change": ["vocalization_changes", "wheezing", "stridor"],
+    # カサカサ (dry flaky skin): the cat vocabulary expresses it as scaling —
+    # without this bridge the ear-tip mange complaint lost the sign entirely.
+    "dry_skin": ["scaling", "flaky_skin", "skin_scaling", "skin_lesions"],
 }
 
 # Backwards-compat alias (some older imports use the private name).

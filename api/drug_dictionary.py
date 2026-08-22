@@ -65,6 +65,7 @@ from api.drug_batch_40 import DRUGS_BATCH_40
 from api.drug_batch_41 import DRUGS_BATCH_41
 from api.drug_batch_42 import DRUGS_BATCH_42
 from api.drug_batch_43 import DRUGS_BATCH_43
+from api.drug_batch_44 import DRUGS_BATCH_44
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10678,6 +10679,16 @@ for _drug43 in DRUGS_BATCH_43:
         DRUGS.append(_drug43)
         _drug_index[_drug43["id"]] = _drug43
 
+# バッチ44: 2026-08 第12回 referenced-but-absent 監査で検出
+# （シメチコン — 草食小型哺乳類6種のGIうっ滞/鼓脹プロトコルが40-50 mg/kg等の用量付きで
+#  37参照するのに未収載; トリエンチン — 犬銅関連性肝障害のペニシラミン不耐例の
+#  名指し第二選択キレート剤; オロパタジン0.1%点眼 — アレルギー性結膜炎プロトコルが参照。
+#  DOCPは既収載(desoxycorticosterone)のため頭字語エイリアスのみ追加）
+for _drug44 in DRUGS_BATCH_44:
+    if _drug44["id"] not in _drug_index:
+        DRUGS.append(_drug44)
+        _drug_index[_drug44["id"]] = _drug44
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11188,6 +11199,10 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     # 2026-08 sweep #11: SARDS/IMHA texts cite bare "ミコフェノール酸 20 mg/kg"
     # (without モフェチル) — the full canonical name never reduces to the acid stem.
     "mycophenolate": ("ミコフェノール酸", "ミコフェノレート"),
+    # 2026-08 sweep #12: Addison's texts cite the acronym "DOCP" alone — the
+    # canonical name only carries it inside a paren suffix, which the stem index
+    # strips. デソキシ/デスオキシ are transliteration variants of デオキシ.
+    "desoxycorticosterone": ("DOCP", "デソキシコルチコステロン", "デスオキシコルチコステロン"),
 }
 
 

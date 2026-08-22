@@ -741,6 +741,19 @@ def extract_symptoms_from_text(text: str) -> list:
         # resolves to neck_stiffness; the legacy vocabulary now carries
         # neck_pain directly (IVDD / wobbler symptom).
         "neck_stiffness": ["neck_pain", "stiffness", "reluctance_to_move"],
+        # "お腹がキュルキュル" (borborygmi) has no legacy ID — gas/bloating is
+        # the closest legacy signal for the gurgling-gut complaint.
+        "stomach_gurgling": ["bloating"],
+        # "草を食べたがる" (grass eating — the classic owner-reported nausea
+        # proxy) resolves to nausea; the legacy vocabulary's closest signal.
+        "nausea": ["vomiting"],
+        # "砂が濡れていない" resolves to decreased_urination (feline blocked-cat
+        # vocabulary); the legacy dog vocabulary carries obstruction signs as
+        # straining.
+        "decreased_urination": ["straining_to_urinate"],
+        # "指の間が赤い" (interdigital erythema — pododermatitis/atopy) resolves
+        # to skin_redness; the legacy dog vocabulary carries erythema as rashes.
+        "skin_redness": ["skin_rashes"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

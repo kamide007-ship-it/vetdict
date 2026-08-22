@@ -1991,3 +1991,61 @@ class TestBatch43CytarabineImiquimodAndMmfAlias:
         # and the full spelling still resolves to the same entry
         ids2 = [h["id"] for h in find_drugs_in_text("ミコフェノール酸モフェチル（MMF）10 mg/kg PO q12h")]
         assert ids2.count("mycophenolate") == 1 and "mycophenolate_mofetil" not in ids2
+
+
+class TestBatch44SimethiconeTrientineOlopatadine:
+    """2026-08 12th referenced-but-absent sweep: simethicone (37 dosed GI-stasis
+    references across 6 herbivore/small-mammal species), trientine (the named
+    second-line copper chelator in the canine copper-hepatopathy entries) and
+    olopatadine 0.1% ophthalmic were absent; DOCP turned out to be present
+    already (desoxycorticosterone) — only the bare acronym failed to resolve,
+    fixed via _KATAKANA_VARIANT_ALIASES."""
+
+    def test_simethicone_present_with_herbivore_stasis_dosing(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("simethicone")
+        assert d is not None, "simethicone missing from formulary"
+        # luminal-only action is the defining safety fact
+        assert "not absorbed" in d["mechanism"].lower()
+        assert "吸収されない" in d["mechanism_ja"]
+        for sp in ("rabbit", "guinea_pig", "chinchilla", "hamster", "dog", "cat"):
+            info = d["species_info"][sp]
+            assert (info.get("dosage") or "").strip() and (info.get("dosage_ja") or "").strip(), sp
+        # adjunct-not-substitute + obstruction caveat must be stated
+        assert "閉塞" in d["contraindications_ja"]
+        ids = [h["id"] for h in find_drugs_in_text("ガス軽減：シメチコン40-50mg/kg PO q6-8h")]
+        assert "simethicone" in ids
+
+    def test_trientine_present_as_second_line_copper_chelator(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("trientine")
+        assert d is not None, "trientine missing from formulary"
+        dog = d["species_info"]["dog"]
+        assert "10-15 mg/kg" in dog["dosage"] and "10-15 mg/kg" in dog["dosage_ja"]
+        # empty-stomach administration and penicillamine relationship are defining facts
+        assert "空腹時" in dog["dosage_ja"]
+        assert "ペニシラミン" in d["mechanism_ja"]
+        interactions = {i["drug"].lower(): i for i in d["drug_interactions"]}
+        assert any("zinc" in k for k in interactions)
+        ids = [h["id"] for h in find_drugs_in_text("トリエンチン 10-15 mg/kg PO q12h（空腹時）")]
+        assert "trientine" in ids
+
+    def test_olopatadine_present_and_feline_herpes_caveat(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("olopatadine_ophthalmic")
+        assert d is not None, "olopatadine missing from formulary"
+        cat = d["species_info"]["cat"]
+        # FHV-1-first caveat is the defining feline safety fact
+        assert "FHV-1" in (cat.get("notes") or "") or "FHV-1" in (cat.get("notes_ja") or "")
+        ids = [h["id"] for h in find_drugs_in_text("オロパタジン0.1%点眼 q12h（抗ヒスタミン+マスト細胞安定化）")]
+        assert "olopatadine_ophthalmic" in ids
+
+    def test_docp_acronym_resolves_to_existing_entry(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        assert get_drug_by_id("desoxycorticosterone") is not None
+        ids = [h["id"] for h in find_drugs_in_text("長期：DOCP（2.2 mg/kg IM q25日）が鉱質コルチコイド第一選択")]
+        assert "desoxycorticosterone" in ids

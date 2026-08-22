@@ -3271,3 +3271,64 @@ katakana トークン頻度監査（第6回スイープ、実マッチャー突�
   （richness差が大きく near-tie 帯で救済されないもの — 例: guinea_pig 'Pneumonia (Bacterial)'→'bacterial-pneumonia'）。
   `scripts/quality/build_canonical.py` によるマップ再生成＋獣医レビューで解消するのが本筋
 - SQLite配信パス（6,892行）と fallback/canonical パス（6,449件）のブラウズ集合の差（canonical はread時適用）の一元化
+
+## 2026-08セッション（第21弾: prevalence正準名リネーム第2波 + シメチコン/トリエンチン/オロパタジン補完 + チャット精度第10弾 + 犬レガシー膀胱炎/声変化）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **3,973件合格**（34 skip、カバレッジ82.14%）
+- 薬用量: safe薬品の dosage 欠落 **0**（641薬品時点、全species_info検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 疾患: 配信6,892疾患で主要臨床フィールド（治療/病因/予後/予防/説明/病態/臨床徴候）の空欄 **0**
+
+### prevalence 正準名リネーム第2波（dead key 17→9、第20弾dedupe復元の後追い同期）
+第20弾の canonical stabiliser で復元された疾患は**正準名側**が生存するため、旧名で張られた
+prevalence キーが配信DB完全一致で不発化していた（chip name_ja 欠落・fuzzy解決落ち）:
+- bird 'Vitamin A Deficiency'→'Vitamin A Deficiency (Hypovitaminosis A)'、
+  guinea_pig 'Subcutaneous Abscess'→'Abscess (Subcutaneous)'・'Gastric Ulcer'→'Gastric Ulcers'、
+  parakeet 'Copper Toxicosis'→'Copper Poisoning'・'Egg Peritonitis'→'Egg Yolk Peritonitis'・
+  'Renal Adenocarcinoma (Parakeet)'→'Renal Adenocarcinoma'、tortoise 'Bladder Stone'→
+  'Bladder Stones (Urolithiasis)'、degu 'Uterine Tumor'→'Uterine Adenocarcinoma'（真の dead key を活性化）
+- モジュール生名（チャットprior経路）でも全キー解決を検証。残9件は当該種DBに疾患が無い既知残
+- 回帰テスト: fixed_round3 セット追加（tests/test_prevalence_data.py）
+
+### referenced-but-absent 薬品3剤の補完（`drug_batch_44.py` 新規、641→644薬品）
+用量文脈フィルタ付きカタカナトークン監査（第12回スイープ、実マッチャー突合）で検出:
+- **シメチコン（ガスコン）** — 草食小型哺乳類6種のGIうっ滞/鼓脹プロトコルが「40-50mg/kg PO q6-8h」等の
+  用量付きで**37参照**するのに未収載。腔内限局・全身吸収なしの消泡界面活性剤（Carpenter 6th:
+  ウサギ65-130 mg/kg）。閉塞/GDVで経口投与のため減圧を遅らせない旨を禁忌に明記
+- **トリエンチン** — 犬銅関連性肝障害エントリが名指しする第二選択銅キレート剤（ペニシラミン不耐例、
+  10-15 mg/kg PO q12h 空腹時、ACVIM 2019）。亜鉛との2時間間隔・併用不可を明記
+- **オロパタジン0.1%点眼（パタノール）** — アレルギー性結膜炎プロトコル参照。猫はFHV-1優先鑑別を明記
+- **DOCP頭字語エイリアス** — アジソン病テキストの「DOCP 2.2 mg/kg IM q25日」が既収載
+  desoxycorticosterone に解決しなかった → _KATAKANA_VARIANT_ALIASES に DOCP/デソキシ/デスオキシ追加
+- 回帰テスト4件（TestBatch44）。新薬は治療チップ機構で鑑別診断・チャット結果カードから自動到達
+  （rabbit GI stasis→simethicone、dog銅蓄積症→trientine のチップ解決を検証済み）
+
+### 診断チャット精度 第10弾（26症例フレッシュスイープ 10 MISS → 全実用症例合格）
+- **犬レガシーDBに細菌性膀胱炎（UTI）を新設**（72→73疾患）: 犬で最頻の泌尿器主訴なのにエントリが無く、
+  頻尿主訴が多飲多尿疾患（糖尿病/CKD/家族性腎症）ばかり上位だった（ISCAID 2019; ~14%生涯発生率、tier=very_common）
+- **犬レガシーDBに voice_change 症状を新設**（64→65症状）し喉頭麻痺に付与: 「水を飲むとむせる 声がかすれる」
+  →喉頭麻痺 rank 1（むせる→coughing、声がかすれる→voice_change エイリアス新設）
+- **エイリアス追加（約30件）**: GDV「お腹が膨らんで/吐こうとしても吐けない」、ブロック猫「砂が濡れていない/
+  鳴きながらいきむ」、ポラキウリア連用形「おしっこの回数が多く/少ししか出ない」、趾間皮膚炎「足の裏を舐め/
+  指の間が赤い」、テイルボビング「尾が上下する/呼吸のたびに尾」、趾瘤症「足の裏が腫れて/タコのようになって」、
+  フェレット副腎「毛が尻尾から抜け/皮膚が薄い→thinning_skin」、ノトエドレス「耳の先が黒く→crusting」、
+  進行形「目が白く濁ってきた」、ボルボリグミ「お腹がキュルキュル→stomach_gurgling」、悪心プロキシ「草を食べたがる→nausea」
+- **ID_SYNONYMSブリッジ**: stomach_gurgling→[nausea,bloating]、nausea→[vomiting,retching]、
+  voice_change→[vocalization_changes,wheezing,stridor]、dry_skin→[scaling,...]（猫はscaling表記のため）、
+  cloudy_eye/cloudy_eyes→cataracts 追加（**ウサギ語彙に濁眼IDが無く「目が白く濁って」系が全滅していた** → 白内障が解決）
+- **_LEGACY_FALLBACK**: stomach_gurgling→bloating、nausea→vomiting、decreased_urination→straining、skin_redness→skin_rashes
+- **有病率是正**: ferret Botulism=rare（未ティアでインスリノーマ低血糖主訴の1位を奪っていた）、
+  guinea_pig Aortic Calcification=uncommon（壊血病を上回っていた）、cat 抗凝固殺鼠剤=common→uncommon
+  （猫は摂食習性から犬より顕著に稀 — 開口呼吸主訴の2位に出ていた）
+- 回帰テスト: TestChatClinicalAccuracyAuditRound10（13件）
+
+### UX: クイック入力にGDV救急主訴を追加
+- 犬に「お腹が膨らんで吐こうとしても吐けない」（GDV=分単位の救急。タップ→胃拡張捻転が即rank 1）
+- ミラーテスト JA_QUICK 同期（全フレーズ抽出保証をCIで維持）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 579/cat 558/rabbit 272/guinea_pig 139/chinchilla 93/hamster 71薬品、
+  pendingStats drugs 641→**644**・symptoms 64→**65**
+- ServiceWorker: `CACHE_NAME` v126 → **v127**
+- 再現手順: `migrate_to_sqlite.py`（644薬品反映。疾患名不変のため検索インデックスno-op）
