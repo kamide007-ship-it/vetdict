@@ -47,6 +47,12 @@ _KNOWN_ALIAS_MISMATCHES = {
     # Bridged via _LEGACY_FALLBACK (neck_pain/stiffness) and ID_SYNONYMS;
     # no species module carries a dedicated cervical-guarding ID.
     "neck_stiffness",
+    # Bridged via _LEGACY_FALLBACK (bloating) and ID_SYNONYMS (nausea/bloating);
+    # no species module carries a dedicated borborygmi ID.
+    "stomach_gurgling",
+    # Bridged via _LEGACY_FALLBACK (vomiting) and ID_SYNONYMS (vomiting/retching);
+    # no species module carries a dedicated nausea ID — grass-eating proxy.
+    "nausea",
 }
 
 
@@ -1594,6 +1600,7 @@ class TestQuickTapPhraseExtraction:
             "皮膚が痒い",
             "おしりを地面にこすりつける",
             "鼻血が出た",
+            "お腹が膨らんで吐こうとしても吐けない",
         ],
         "cat": [
             "食べない",
@@ -2644,3 +2651,133 @@ class TestChatClinicalAccuracyAuditRound9:
             for m in _match_species_symptoms_to_diseases(ids, "chinchilla")[:3]
         ]
         assert any("糸状菌" in n or "白癬" in n for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound10:
+    """2026-08 audit round 10: a 26-case realistic chief-complaint sweep.
+    Root causes fixed: missing aliases (連用形「おしっこの回数が多くて」,
+    「お腹が膨らんで」, GDV「吐こうとしても吐けない」, GOLPP「むせる/声がかすれる」,
+    blocked-cat「砂が濡れていない/鳴きながらいきむ」, tail bobbing「尾が上下する」,
+    bumblefoot「足の裏が腫れて/タコのよう」, ferret adrenal「毛が尻尾から抜け/
+    皮膚が薄い」, paw licking「足の裏を舐め/指の間が赤い」); new ID bridges
+    (stomach_gurgling, nausea, voice_change, dry_skin→scaling,
+    cloudy_eye→cataracts); the legacy dog vocabulary gained voice_change and a
+    bacterial-cystitis entry (the most common canine urinary presentation had
+    no entry); and untiered rarities (ferret botulism, guinea-pig aortic
+    calcification) outranked common diseases."""
+
+    def test_dog_gdv_hiragana_variant_extracts_both_signs(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("急にお腹が膨らんで吐こうとしても吐けない")
+        assert "bloating" in ex and "unproductive_retching" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "胃拡張" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_dog_golpp_complaint_reaches_laryngeal_paralysis(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("水を飲むとむせる 声がかすれる")
+        assert "voice_change" in ex and "coughing" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "喉頭麻痺" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_dog_pollakiuria_complaint_ranks_cystitis_over_pupd_diseases(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("おしっこの回数が多くて少ししか出ない 血が混じる")
+        assert "frequent_urination" in ex and "straining_to_urinate" in ex, ex
+        names = [m.get("name_ja", "") for m in match_symptoms_to_diseases(ex)[:2]]
+        assert any("膀胱炎" in n for n in names), (
+            f"bacterial cystitis (the most common canine urinary dx) must rank top-2: {names}"
+        )
+
+    def test_dog_paw_licking_interdigital_complaint_extracts_both_signs(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("散歩後に足の裏を舐め続ける 指の間が赤い")
+        assert "excessive_licking" in ex and "skin_rashes" in ex, ex
+        names = [m.get("name_ja", "") for m in match_symptoms_to_diseases(ex)[:4]]
+        assert any("アトピー" in n or "膿皮症" in n or "皮膚" in n for n in names), names
+
+    def test_dog_borborygmi_grass_eating_reaches_gi_diseases(self):
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        ex = extract_symptoms_from_text("お腹がキュルキュル鳴って草を食べたがる")
+        assert "bloating" in ex and "vomiting" in ex, ex
+
+    def test_cat_blocked_cat_complaint_ranks_urethral_obstruction_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("トイレに何度も行くのに砂が濡れていない 鳴きながらいきむ", "cat")
+        assert "decreased_urination" in ids and "straining_to_urinate" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "cat")[0]
+        assert "尿道閉塞" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_cat_ear_tip_crusting_reaches_notoedric_mange(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("耳の先が黒くカサカサしてかゆがる", "cat")
+        assert "crusting" in ids and "scaling" in ids and "itching" in ids, ids
+        names = [(m.get("name_ja") or "") for m in _match_species_symptoms_to_diseases(ids, "cat")[:3]]
+        assert any("ヒゼンダニ" in n for n in names), names
+
+    def test_rabbit_progressive_cloudy_eye_reaches_cataracts(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("目が白く濁ってきた", "rabbit")
+        assert "cataracts" in ids, f"the rabbit vocabulary has no cloudy-eye ID — the cataracts bridge must fire: {ids}"
+        names = [
+            (m.get("name_ja") or m.get("name") or "") for m in _match_species_symptoms_to_diseases(ids, "rabbit")[:3]
+        ]
+        assert any("白内障" in n or "Cataract" in n for n in names), names
+
+    def test_bird_tail_bobbing_suru_form_reaches_lower_airway_diseases(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("呼吸のたびに尾が上下する 止まり木でじっとしている", "bird")
+        assert "tail_bobbing" in ids, ids
+        names = [(m.get("name_ja") or "") for m in _match_species_symptoms_to_diseases(ids, "bird")[:3]]
+        assert any("アスペルギルス" in n or "肺炎" in n or "気嚢" in n for n in names), names
+
+    def test_bird_bumblefoot_callus_phrase_extracts_foot_lesions(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("足の裏が腫れてタコのようになっている", "bird")
+        assert ids, "the callus-pad complaint extracted nothing before the て-form aliases"
+        top = _match_species_symptoms_to_diseases(ids, "bird")[0]
+        assert "趾瘤" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_ferret_tail_alopecia_thin_skin_ranks_adrenal_disease(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("毛が尻尾から抜けてきた 皮膚が薄い", "ferret")
+        assert "hair_loss" in ids and "thinning_skin" in ids, ids
+        names = [(m.get("name_ja") or "") for m in _match_species_symptoms_to_diseases(ids, "ferret")[:2]]
+        assert any("副腎" in n for n in names), names
+
+    def test_ferret_hypoglycemia_signs_rank_insulinoma_over_botulism(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("ぐったりして口をくちゃくちゃさせる よだれ", "ferret")
+        names = [(m.get("name_ja") or "") for m in _match_species_symptoms_to_diseases(ids, "ferret")[:2]]
+        assert any("インスリノーマ" in n for n in names), (
+            f"insulinoma (very_common) must outrank the now rare-tiered botulism: {names}"
+        )
+
+    def test_guinea_pig_hindlimb_joint_complaint_ranks_scurvy_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("後ろ足を引きずる 関節が腫れている", "guinea_pig")
+        top = _match_species_symptoms_to_diseases(ids, "guinea_pig")[0]
+        assert "壊血病" in (top.get("name_ja") or ""), (
+            f"scurvy (very_common) must outrank the now-tiered aortic calcification: {top.get('name_ja')}"
+        )

@@ -329,6 +329,12 @@ SYMPTOMS = [
         "name_en": "Wheezing",
         "category": "respiratory",
     },
+    {
+        "id": "voice_change",
+        "name_ja": "声の変化（かすれ声）",
+        "name_en": "Voice Change (Hoarse Bark)",
+        "category": "respiratory",
+    },
     # Digestive (7)
     {
         "id": "vomiting",
@@ -1661,6 +1667,28 @@ DISEASES = [
             "pug": 1.3,
         },
     },
+    # ---- 21b. Bacterial Cystitis / UTI (2026-08 round-10 sweep: the most
+    # common canine urinary presentation had no legacy entry — pollakiuria
+    # complaints ranked only PU/PD diseases and urolithiasis. ISCAID 2019;
+    # Ling 1984: ~14% lifetime incidence, females >> males) ----
+    {
+        "id": "urinary_tract_infection",
+        "prevalence_tier": "very_common",
+        "name_ja": "細菌性膀胱炎（尿路感染症）",
+        "name_en": "Bacterial Cystitis (UTI)",
+        "description_ja": "細菌が膀胱に感染して起こる炎症です。頻尿・排尿時のいきみ・血尿が典型的で、雌犬に多発します。抗菌薬治療の前に尿培養・感受性試験が推奨されます（ISCAID 2019）。",
+        "description_en": "Bacterial infection of the bladder causing inflammation. Pollakiuria, stranguria and hematuria are typical; far more common in females. Urine culture and susceptibility testing are recommended before antimicrobials (ISCAID 2019).",
+        "symptoms": [
+            "frequent_urination",
+            "straining_to_urinate",
+            "blood_in_urine",
+            "incontinence",
+            "excessive_licking",
+        ],
+        "severity": "low",
+        "recommended_tests": ["urinalysis", "urine_culture", "ultrasound"],
+        "breed_risks": {},
+    },
     # ---- 22. Dilated Cardiomyopathy (DCM) ----
     {
         "id": "dcm",
@@ -2356,6 +2384,7 @@ DISEASES = [
             "exercise_intolerance",
             "wheezing",
             "fainting",
+            "voice_change",
         ],
         "severity": "high",
         "recommended_tests": ["xray", "endoscopy", "thyroid_panel"],
