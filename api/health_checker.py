@@ -694,6 +694,18 @@ SYMPTOMS = [
         "name_en": "Voluminous Stool",
         "category": "digestive",
     },
+    {
+        "id": "worms_in_stool",
+        "name_ja": "便に虫・白い米粒状のもの（片節）",
+        "name_en": "Worms / Rice-Grain Segments in Stool",
+        "category": "digestive",
+    },
+    {
+        "id": "postpartum_lactating",
+        "name_ja": "出産後・授乳中である",
+        "name_en": "Postpartum / Lactating",
+        "category": "general",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -2993,6 +3005,58 @@ DISEASES = [
             "labrador_retriever": 1.3,
         },
     },
+    # ---- 12k. Intestinal Parasites ----
+    # 2026-08 round-11 sweep: among the most common puppy/GP presentations
+    # (ESCCAP GL1; CAPC — Toxocara prevalence up to 30%+ in puppies), yet the
+    # legacy database had no endoparasite entry and no worms-in-stool
+    # vocabulary, so the pathognomonic "便に白い米粒のようなもの" (Dipylidium
+    # proglottids) extracted nothing at all.
+    {
+        "id": "intestinal_parasites",
+        "prevalence_tier": "very_common",
+        "name_ja": "腸管内部寄生虫症（回虫・条虫・鉤虫・鞭虫）",
+        "name_en": "Intestinal Parasites (Roundworm / Tapeworm / Hookworm / Whipworm)",
+        "description_ja": "回虫（Toxocara canis）・瓜実条虫（Dipylidium caninum）・鉤虫・鞭虫などの消化管寄生虫。子犬で特に多く、便中の白い米粒状の片節（条虫）やひも状の虫体（回虫）、下痢・軟便、腹部膨満（ポットベリー）、削痩が典型徴候です。糞便検査（浮遊法）で診断し、駆虫薬（フェンベンダゾール・ピランテル・プラジクアンテル等）で治療します。条虫はノミが中間宿主のためノミ駆除の併用が必須です。回虫は人獣共通感染症（幼虫移行症）のため衛生管理も重要です。",
+        "description_en": "Gastrointestinal helminths — Toxocara canis, Dipylidium caninum, hookworms and whipworms. Most common in puppies: rice-grain proglottids (tapeworm) or spaghetti-like worms (roundworm) in the stool, diarrhea, pot-bellied distension and poor growth are the classic signs. Diagnosed by fecal flotation; treated with anthelmintics (fenbendazole, pyrantel, praziquantel). Dipylidium requires concurrent flea control (flea = intermediate host); Toxocara is zoonotic (larva migrans), so hygiene counselling matters.",
+        "symptoms": [
+            "worms_in_stool",
+            "diarrhea",
+            "bloating",
+            "weight_loss",
+            "vomiting",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["fecal_exam"],
+        "breed_risks": {},
+    },
+    # ---- 12l. Eclampsia (Puerperal Tetany) ----
+    # Postpartum hypocalcemia of small-breed bitches nursing large litters
+    # (1-4 weeks post-whelping) — a calcium-gluconate emergency that the
+    # legacy database referenced in treatment texts but had no entry for, so
+    # "産後に震えて痙攣しそう" ranked idiopathic epilepsy first.
+    {
+        "id": "eclampsia",
+        "prevalence_tier": "uncommon",
+        "name_ja": "子癇（産褥テタニー・低カルシウム血症）",
+        "name_en": "Eclampsia (Puerperal Tetany / Hypocalcemia)",
+        "description_ja": "分娩後1〜4週の授乳期に多い急性低カルシウム血症（血清Ca <7 mg/dL）。小型犬・多頭産で特にリスクが高く、落ち着きのなさ・パンティングから始まり、筋硬直・振戦・痙攣・高体温へ急速に進行する救急疾患です。治療は10%グルコン酸カルシウム 0.5-1.5 mL/kg を心電図モニタ下で緩徐静注。授乳中の主訴（震え・けいれん）では常に最優先で鑑別します。妊娠中のカルシウム過剰補給はかえって発症リスクを高めます。",
+        "description_en": "Acute hypocalcemia (serum Ca <7 mg/dL) of lactating bitches, typically 1-4 weeks post-whelping. Small breeds nursing large litters are at highest risk. Restlessness and panting progress rapidly to muscle rigidity, tremors, seizures and hyperthermia — an emergency treated with 10% calcium gluconate 0.5-1.5 mL/kg slow IV under ECG monitoring. Always the first differential for tremors/seizures in a nursing bitch; prepartum calcium supplementation paradoxically increases risk.",
+        "symptoms": [
+            "postpartum_lactating",
+            "tremors",
+            "stiffness",
+            "seizures",
+            "rapid_breathing",
+        ],
+        "severity": "emergency",
+        "recommended_tests": ["blood_test", "serum_calcium"],
+        "breed_risks": {
+            "chihuahua": 2.0,
+            "toy_poodle": 2.0,
+            "shih_tzu": 1.6,
+            "pomeranian": 1.6,
+        },
+    },
 ]
 
 DISEASE_MAP = {d["id"]: d for d in DISEASES}
@@ -4043,6 +4107,14 @@ _PATHOGNOMONIC_CLUSTERS = [
     # described the hot-spot lesion itself, not food allergy — it made the
     # underlying-cause diagnosis outrank the presenting-lesion diagnosis.
     (frozenset({"itching", "skin_rashes", "vomiting"}), "allergic_dermatitis", 1.6),
+    # Visible worms/proglottids in the stool are diagnostic of intestinal
+    # parasitism itself (ESCCAP GL1) — no other differential produces them.
+    (frozenset({"worms_in_stool"}), "intestinal_parasites", 1.8),
+    # Tremors or seizures in a postpartum/lactating bitch = eclampsia until
+    # proven otherwise (Plumb's; Ettinger 8th ed) — a calcium emergency that
+    # must outrank idiopathic epilepsy when the nursing context is stated.
+    (frozenset({"postpartum_lactating", "tremors"}), "eclampsia", 1.8),
+    (frozenset({"postpartum_lactating", "seizures"}), "eclampsia", 1.8),
     (frozenset({"itching", "skin_rashes", "diarrhea"}), "allergic_dermatitis", 1.6),
     # IMHA: pale gums + jaundice + lethargy
     (frozenset({"pale_gums", "jaundice", "lethargy"}), "hemolytic_anemia", 2.0),

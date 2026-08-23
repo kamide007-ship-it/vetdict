@@ -346,13 +346,44 @@ def test_app_js_guided_final_results_pivot_to_checker():
     # Final-results action row renders the pivot button and wires it.
     assert 'id="guidedToChecker"' in APP_JS
     assert "runCheckerFromGuided()" in APP_JS
-    # The pivot function carries guidedState into the checker and analyzes.
+    # The guided pivot delegates to the shared carry-over helper with its
+    # confirmed symptom set (2026-08: refactored so the free-chat result can
+    # reuse the same logic).
     fn = APP_JS[APP_JS.index("function runCheckerFromGuided()") :]
     fn = fn[: fn.index("\n}") + 2]
     assert "guidedState.selectedSymptoms" in fn
-    assert "selectSpecies(sp)" in fn  # species alignment before applying
-    assert "selectedSymptoms=new Set(usable)" in fn
-    assert 'switchView("checker")' in fn
-    assert "doAnalyze()" in fn
+    assert "_runCheckerWithSymptoms" in fn
+    # The shared helper carries the IDs into the checker and analyzes.
+    helper = APP_JS[APP_JS.index("function _runCheckerWithSymptoms(") :]
+    helper = helper[: helper.index("\n}") + 2]
+    assert "selectSpecies(sp)" in helper  # species alignment before applying
+    assert "selectedSymptoms=new Set(usable)" in helper
+    assert 'switchView("checker")' in helper
+    assert "doAnalyze()" in helper
     # Unmappable sets degrade to a toast, never a broken checker state.
-    assert "showToast" in fn
+    assert "showToast" in helper
+
+
+def test_app_js_free_chat_results_pivot_to_checker():
+    """Free-input chat results → checker pivot (2026-08 round 11): the guided
+    mode had this pivot but the free-chat result did not, so adjusting one
+    sign after a typed complaint meant re-typing the whole message. The chat
+    card footer must render a refine button carrying the extracted symptom IDs
+    and the chat species, and the delegated chat-container handler must route
+    it through the same shared carry-over helper."""
+    # Renderer emits the refine button with the extracted IDs + chat species.
+    assert "chat-checker-refine" in APP_JS
+    idx = APP_JS.index("chat-checker-refine")
+    block = APP_JS[max(0, idx - 900) : idx + 900]
+    assert "symptoms.map(s=>s.id)" in block
+    assert "chatSpecies" in block
+    # Delegated handler (survives innerHTML resets) routes to the shared helper.
+    handler = APP_JS[APP_JS.index("function _attachChatNavHandlers(") :]
+    handler = handler[: handler.index("\n}") + 2]
+    assert ".chat-checker-refine" in handler
+    assert "_runCheckerWithSymptoms" in handler
+    assert "checker_from_chat" in handler
+    # Styled with a visible tap affordance.
+    with open("static/css/main.css", encoding="utf-8") as f:
+        css = f.read()
+    assert ".chat-checker-refine" in css

@@ -3332,3 +3332,66 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
   pendingStats drugs 641→**644**・symptoms 64→**65**
 - ServiceWorker: `CACHE_NAME` v126 → **v127**
 - 再現手順: `migrate_to_sqlite.py`（644薬品反映。疾患名不変のため検索インデックスno-op）
+
+## 2026-08セッション（第22弾: 犬レガシーDBに寄生虫症・子癇を新設 + 嘴過長エイリアス誤マッピング修正 + CaEDTA/UDCAエイリアス + 自由入力チャット→チェッカーピボット）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **3,990件合格**（34 skip）
+- 配信SQLiteクリーンビルド: 6,892疾患、treatment/prevention/prognosis **100%**、主要臨床フィールド空欄 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（644薬品、全species_info検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- prevalence dead key: **9**（当該種DBに疾患自体が無い既知残、上限15ガード内）
+
+### 薬品マッチャー: 頭字語・語順ゆれエイリアス4件（sweep #13、約120参照がチップ化）
+用量文脈フィルタ付きカタカナ/英語トークン監査（第13回スイープ、find_drugs_in_text 実マッチャー突合）。
+今回は referenced-but-absent の新薬ゼロ（辞書は充足）で、真の欠落は全てエイリアス層:
+- **CaEDTA**（51参照）→ calcium_edta — 馬鉛中毒「CaEDTA 75 mg/kg IV slow」等の頭字語表記が解決不能だった
+- **UDCA**（41参照）→ ursodiol — 「UDCA 10-15 mg/kg PO q24h」の標準臨床略号
+- **ヘタスターチ**（8参照）→ hetastarch — 正準名はヒドロキシエチルデンプン
+- **カルシウムグルコン酸(塩)**（21参照）→ calcium_gluconate — グルコン酸カルシウムの語順逆転形
+  （馬低Ca血症・両生類MBDの治療文）。プレフィックス一致で 酸/酸塩 両形をカバー
+- 回帰テスト: `test_sweep13_acronym_and_word_order_aliases_resolve`（5解決+2精度ガード）
+
+### 診断チャット精度 第11弾（20症例フレッシュスイープ 7 MISS → 全症例合格）
+- **エイリアス誤マッピング修正**: 「嘴が伸びてる/嘴過長/嘴が長い」→ **loss_of_appetite**（食欲不振!）に
+  誤マッピングされていた → **overgrown_beak** に是正 +「くちばしが伸びすぎ」追加。
+  鳥「くちばしが伸びすぎて変形」→ 嘴過長症/シザービーク top-3（従来は抽出ゼロ）
+- **犬レガシーDBに腸管寄生虫症を新設**（73→75疾患、65→67症状）: 子犬で最頻レベルの主訴なのに
+  内部寄生虫エントリも便中虫体語彙も皆無で、「便に白い米粒のようなもの」（瓜実条虫片節のパトグノモニック
+  主訴）が抽出ゼロだった → worms_in_stool 症状 + intestinal_parasites エントリ（very_common、
+  ESCCAP GL1/CAPC、人獣共通・ノミ中間宿主を明記）+ 単独パトグノモニック・クラスタ×1.8 → rank 1
+- **犬レガシーDBに子癇（産褥テタニー）を新設**: 治療テキストが参照するのにエントリが無く
+  「産後に震えて痙攣しそう 授乳中」が特発性てんかん1位だった → postpartum_lactating 文脈フラグ症状
+  （産後/出産後/授乳中エイリアス）+ eclampsia エントリ（10%グルコン酸Ca 0.5-1.5 mL/kg 緩徐IV、
+  小型犬・多頭産リスク、Plumb's/Ettinger 8th）+ {postpartum, tremors/seizures}→子癇×1.8 クラスタ
+  → rank 1（産後文脈なしの痙攣は従来どおり てんかん1位を維持 — 回帰テストで固定）
+- **ハムスター頬袋インパクション**: 既存キー「頬袋が戻らない」は「膨らんだまま」が間に挟まると
+  不一致 → 「頬袋が膨らんだまま/膨らんで」→cheek_swelling 追加 → 頬袋膿瘍/頬袋閉塞 top-3
+- **トカゲ総排泄腔脱**: 「お尻から何か出て」→rectal_prolapse は抽出できたがトカゲ語彙に
+  rectal_prolapse系IDが無く解決不能だった → _ID_SYNONYMS を tissue_protruding_from_cloaca/
+  tissue_prolapse/cloacal_swelling へ拡張 → 臓器脱 top-5
+- **ヘビ・スペクタクル残留**: 「脱皮した皮が目に残って」等4形→retained_spectacle 新設 → 眼鏡鱗停滞 rank 1
+- **モルモット白内障**: 「目が白く濁って」素の連用形（てる/てきた形のみ収載だった）→ cloudy_eye → 白内障 rank 1
+- **猫の条虫片節**: worms_in_stool→visible_worms/visible_parasites ブリッジで猫「便に白い米粒」→ 瓜実条虫症 rank 1
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound11`（10件）
+
+### UX: 自由入力チャット→チェッカーの微調整ピボット（双方向動線の最終ピース）
+- 問診モード最終結果には「チェッカーで症状を微調整して再解析」があるが（第14弾）、**自由入力チャットの
+  結果には無く**、1症状変えるには主訴全文を打ち直すしかなかった
+- `_runCheckerWithSymptoms(sp, ids, evName)` 共有ヘルパーに引き継ぎロジックを集約
+  （runCheckerFromGuided は委譲に）。自由入力チャット結果カード末尾に「🧪 チェッカーで症状を微調整して
+  再解析」ボタンを追加 — 抽出済み症状ID（data-ids）とチャット種（data-species）を運び、
+  種切替の readiness poll → チェッカー事前選択 → 自動解析。語彙で解決不能なIDは安全に脱落
+  （全て解決不能ならトースト警告）。GA4 `checker_from_chat` イベント
+- 委譲ハンドラ（`_attachChatNavHandlers`）でルーティング — innerHTMLリセット後も動作
+- CSS `.chat-checker-refine`（アンバー系、min-height 32px タップ領域）
+- 回帰テスト: `test_app_js_free_chat_results_pivot_to_checker` + 既存 guided ピボットテストを
+  共有ヘルパー構造に更新
+
+### UX: クイック入力に新規対応主訴を追加（1タップ導線）
+- 犬「便に白い米粒のようなもの」・ハムスター「頬袋が膨らんだまま戻らない」・
+  ヘビ「脱皮した皮が目に残っている」（全て本セッションで抽出保証済み、ミラーテスト同期）
+
+### 表示数値の同期・キャッシュ
+- `pendingStats` symptoms 65→**67**（worms_in_stool/postpartum_lactating 追加）
+- ServiceWorker: `CACHE_NAME` v127 → **v128**

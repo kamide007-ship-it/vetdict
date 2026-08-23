@@ -323,9 +323,30 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "mouth_lesions": ["oral_lesions", "stomatitis", "mouth_rot"],
     "mucus_in_mouth": ["oral_mucus", "mouth_discharge"],
     # 直腸脱/クロアカ脱（「お尻から赤いものが出ている」）— 種ごとのID表記ゆれを吸収
-    "rectal_prolapse": ["rectal_protrusion", "cloacal_prolapse", "prolapse"],
+    # 爬虫類（lizard等）は tissue_protruding_from_cloaca / tissue_prolapse /
+    # cloacal_swelling 表記のため、そのIDにもフォールバック（2026-08 第11回スイープ:
+    # トカゲ「お尻から何か出ている」が抽出後に解決不能だった）
+    "rectal_prolapse": [
+        "rectal_protrusion",
+        "cloacal_prolapse",
+        "prolapse",
+        "tissue_protruding_from_cloaca",
+        "tissue_prolapse",
+        "cloacal_swelling",
+    ],
     "rectal_protrusion": ["rectal_prolapse", "cloacal_prolapse"],
-    "cloacal_prolapse": ["rectal_prolapse", "rectal_protrusion", "prolapse"],
+    "cloacal_prolapse": [
+        "rectal_prolapse",
+        "rectal_protrusion",
+        "prolapse",
+        "tissue_protruding_from_cloaca",
+        "tissue_prolapse",
+    ],
+    # 2026-08 第11回スイープ: 条虫片節・回虫の飼い主主訴（「便に白い米粒」）と
+    # 嘴過長・スペクタクル残留の種別ID表記ゆれ
+    "worms_in_stool": ["visible_worms", "visible_parasites", "diarrhea"],
+    "overgrown_beak": ["beak_deformity", "beak_overgrowth"],
+    "retained_spectacle": ["dysecdysis", "cloudy_eyes", "eye_opacity"],
     # Limbs / extremities
     "cold_limbs": ["cold_extremities", "poor_circulation"],
     "cold_extremities": ["cold_limbs", "poor_circulation"],

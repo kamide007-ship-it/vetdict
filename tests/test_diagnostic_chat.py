@@ -1601,6 +1601,7 @@ class TestQuickTapPhraseExtraction:
             "おしりを地面にこすりつける",
             "鼻血が出た",
             "お腹が膨らんで吐こうとしても吐けない",
+            "便に白い米粒のようなもの",
         ],
         "cat": [
             "食べない",
@@ -1621,7 +1622,15 @@ class TestQuickTapPhraseExtraction:
         ],
         "rabbit": ["糞が小さい", "食べない", "歯ぎしり", "首が傾いている", "お腹が張っている", "鼻水"],
         "chinchilla": ["よだれが出る", "毛が抜ける", "食べない", "糞が出ない", "歯が伸びている", "砂浴びしない"],
-        "hamster": ["下痢", "元気がない", "毛が抜ける", "目が開かない", "お腹が膨れている", "食べない"],
+        "hamster": [
+            "下痢",
+            "元気がない",
+            "毛が抜ける",
+            "目が開かない",
+            "お腹が膨れている",
+            "食べない",
+            "頬袋が膨らんだまま戻らない",
+        ],
         "guinea_pig": ["食べない", "鼻水", "足を引きずる", "脱毛", "下痢", "くしゃみ"],
         "ferret": ["ぐったり", "脱毛", "下痢", "後ろ足がふらつく", "嘔吐", "食べない", "陰部が腫れている"],
         "hedgehog": ["針が抜ける", "フケ", "ふらつく", "食べない", "目が出ている", "体重が減った"],
@@ -1651,6 +1660,7 @@ class TestQuickTapPhraseExtraction:
             "口をあけたまま呼吸",
             "ダニがついている",
             "吐き戻しが増えた",
+            "脱皮した皮が目に残っている",
         ],
         "lizard": [
             "食べない",
@@ -2781,3 +2791,103 @@ class TestChatClinicalAccuracyAuditRound10:
         assert "壊血病" in (top.get("name_ja") or ""), (
             f"scurvy (very_common) must outrank the now-tiered aortic calcification: {top.get('name_ja')}"
         )
+
+
+class TestChatClinicalAccuracyAuditRound11:
+    """2026-08 audit round 11: a fresh 20-case realistic chief-complaint sweep.
+    Root causes fixed: the legacy dog database had no endoparasite entry and no
+    worms-in-stool vocabulary (the pathognomonic Dipylidium "便に白い米粒"
+    complaint extracted nothing), no eclampsia entry (postpartum tremors ranked
+    idiopathic epilepsy first); the beak-overgrowth aliases 「嘴が伸びてる/
+    嘴過長/嘴が長い」 were mismapped to loss_of_appetite; hamster cheek-pouch
+    impaction (「膨らんだまま戻らない」), snake retained spectacle, guinea-pig
+    cloudy eye (bare 連用形) and lizard cloacal prolapse (ID bridge to
+    tissue_protruding_from_cloaca) were unreachable."""
+
+    def test_dog_tapeworm_proglottids_reach_intestinal_parasites(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("便に白い米粒のようなものが動いている")
+        assert "worms_in_stool" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "寄生虫" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_dog_postpartum_tremors_rank_eclampsia_over_epilepsy(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("産後に震えてけいれんしそう 授乳中")
+        assert "postpartum_lactating" in ex and "tremors" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "子癇" in top.get("name_ja", ""), (
+            f"eclampsia is THE first differential for postpartum tremors: {top.get('name_ja')}"
+        )
+
+    def test_dog_seizures_without_postpartum_context_keep_epilepsy_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("けいれんを起こした 意識がない")
+        assert "postpartum_lactating" not in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "てんかん" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_bird_beak_overgrowth_aliases_no_longer_map_to_appetite_loss(self):
+        from api.chat.symptom_aliases import SYMPTOM_ALIASES
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        for phrase in ("嘴が伸びてる", "嘴過長", "嘴が長い"):
+            assert SYMPTOM_ALIASES.get(phrase) == "overgrown_beak", (phrase, SYMPTOM_ALIASES.get(phrase))
+        ids = _extract_species_symptoms("くちばしが伸びすぎて変形している", "bird")
+        assert "overgrown_beak" in ids, ids
+
+    def test_bird_beak_overgrowth_ranks_beak_diseases_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("くちばしが伸びすぎて変形している", "bird")
+        names = [(m.get("name_ja") or "") for m in _match_species_symptoms_to_diseases(ids, "bird")[:3]]
+        assert any("嘴" in n for n in names), names
+
+    def test_hamster_pouch_impaction_complaint_reaches_cheek_pouch_diseases(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("頬袋が膨らんだまま戻らない", "hamster")
+        assert "cheek_swelling" in ids, ids
+        names = [(m.get("name_ja") or "") for m in _match_species_symptoms_to_diseases(ids, "hamster")[:3]]
+        assert any("頬袋" in n for n in names), names
+
+    def test_lizard_cloacal_prolapse_complaint_resolves_via_tissue_bridge(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("お尻から何か出ている 総排泄腔", "lizard")
+        assert "tissue_protruding_from_cloaca" in ids or "tissue_prolapse" in ids, ids
+        names = [(m.get("name_ja") or "") for m in _match_species_symptoms_to_diseases(ids, "lizard")[:5]]
+        assert any("脱" in n for n in names), names
+
+    def test_guinea_pig_cloudy_eye_bare_form_reaches_cataracts(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("目が白く濁って見えにくそう", "guinea_pig")
+        assert "cloudy_eye" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "guinea_pig")[0]
+        assert "白内障" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_snake_retained_spectacle_complaint_ranks_spectacle_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("脱皮した皮が目に残っている", "snake")
+        assert "retained_spectacle" in ids, ids
+        names = [(m.get("name_ja") or "") for m in _match_species_symptoms_to_diseases(ids, "snake")[:3]]
+        assert any("スペクタクル" in n or "眼鏡" in n for n in names), names
+
+    def test_cat_proglottid_complaint_resolves_via_visible_worms_bridge(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("便に白い米粒のようなものがついている", "cat")
+        assert "visible_worms" in ids or "worms_in_stool" in ids, ids
+        names = [(m.get("name_ja") or "") for m in _match_species_symptoms_to_diseases(ids, "cat")[:3]]
+        assert any("条虫" in n or "回虫" in n for n in names), names
