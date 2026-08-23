@@ -586,6 +586,10 @@ details.ecvn-adjunct-block[open]>summary.ecvn-adjunct-label{margin-bottom:4px}
 .chat-disease-nav{margin-top:6px;padding-top:6px;border-top:1px dashed var(--gray-200)}
 .chat-disease-open{background:none;border:none;padding:2px 0;font-size:.74rem;font-weight:600;color:var(--navy);cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px;min-height:32px}
 .chat-disease-open:hover{color:var(--green)}
+/* Free-chat → checker refine pivot (amber accent to match the guided-mode pivot) */
+.chat-refine-nav{border-top:none;padding-top:2px}
+.chat-checker-refine{background:none;border:none;padding:2px 0;font-size:.74rem;font-weight:600;color:#92400e;cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px;min-height:32px}
+.chat-checker-refine:hover{color:var(--green)}
 /* Disease detail → symptom-checker differential pivot */
 .diff-check-nav{margin-top:6px}
 .differential-check-btn{background:none;border:none;padding:2px 0;font-size:.74rem;font-weight:600;color:var(--navy);cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px;min-height:32px;text-align:left}

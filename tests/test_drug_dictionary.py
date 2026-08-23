@@ -2049,3 +2049,26 @@ class TestBatch44SimethiconeTrientineOlopatadine:
         assert get_drug_by_id("desoxycorticosterone") is not None
         ids = [h["id"] for h in find_drugs_in_text("長期：DOCP（2.2 mg/kg IM q25日）が鉱質コルチコイド第一選択")]
         assert "desoxycorticosterone" in ids
+
+
+def test_sweep13_acronym_and_word_order_aliases_resolve():
+    """2026-08 sweep #13: chelation/hepatoprotectant/fluid texts cite CaEDTA
+    (51 refs), UDCA (41 refs), ヘタスターチ and the reversed word order
+    カルシウムグルコン酸(塩) (21 refs) — none of which the canonical names
+    reduce to, so the related-drug chips silently failed to resolve."""
+    from api.drug_dictionary import find_drugs_in_text
+
+    cases = {
+        "キレート療法：CaEDTA 75 mg/kg IV slow q12h×5日": "calcium_edta",
+        "UDCA 10-15 mg/kg PO q24h: 利胆作用": "ursodiol",
+        "膠質液（ヘタスターチ 10-20 mL/kg/日）で循環血液量を回復": "hetastarch",
+        "カルシウムグルコン酸23% 250-500 mL IV slow": "calcium_gluconate",
+        "カルシウムグルコン酸塩100 mg/kg ICe q12h": "calcium_gluconate",
+    }
+    for text, expected in cases.items():
+        ids = [h["id"] for h in find_drugs_in_text(text)]
+        assert expected in ids, (text, ids)
+    # precision guards: generic mentions must not produce chips
+    for text in ("カルシウム補給を行う", "educated guess による経験的治療"):
+        ids = [h["id"] for h in find_drugs_in_text(text)]
+        assert "calcium_gluconate" not in ids and "ursodiol" not in ids, (text, ids)

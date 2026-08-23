@@ -991,8 +991,8 @@ SYMPTOM_ALIASES = {
     # 鳥
     "糞が水っぽい": "diarrhea",
     "糞が緑色": "diarrhea",
-    "嘴が伸びてる": "loss_of_appetite",
-    "嘴過長": "loss_of_appetite",
+    "嘴が伸びてる": "overgrown_beak",
+    "嘴過長": "overgrown_beak",
     "眠ってばかり": "lethargy",
     # モルモット
     "歯茎から出血": "bleeding_gums",
@@ -1053,7 +1053,7 @@ SYMPTOM_ALIASES = {
     "尾が上下して": "tail_bobbing",
     "尻尾が上下に動": "tail_bobbing",
     "テイルボビング": "tail_bobbing",
-    "嘴が長い": "loss_of_appetite",
+    "嘴が長い": "overgrown_beak",
     # モルモット — 壊血病の症状
     "歯茎が腫れてる": "bleeding_gums",
     "関節が痛そう": "swollen_joints",
@@ -1918,6 +1918,32 @@ SYMPTOM_ALIASES = {
     "指の間が赤く": "skin_redness",
     # ポラキウリア（1回量の減少 — 飼い主表現では主語が省略されがち）
     "少ししか出ない": "straining_to_urinate",
+    # --- 2026-08 第11回精度スイープ ---
+    # 条虫片節・回虫（「便に白い米粒のようなもの」= Dipylidium 片節の古典的主訴）
+    "便に白い米粒": "worms_in_stool",
+    "白い米粒のようなもの": "worms_in_stool",
+    "米粒のようなものが動": "worms_in_stool",
+    "便に虫": "worms_in_stool",
+    "うんちに虫": "worms_in_stool",
+    "便に白いひも": "worms_in_stool",
+    "白いひものような虫": "worms_in_stool",
+    "お尻に米粒": "worms_in_stool",
+    # 産褥テタニー（子癇）の文脈フラグ — 産後・授乳中の震え/痙攣は低Ca血症を最優先鑑別に
+    "産後": "postpartum_lactating",
+    "出産後": "postpartum_lactating",
+    "授乳中": "postpartum_lactating",
+    # ハムスター頬袋インパクション（「膨らんだまま戻らない」は既存キーの間に語が挟まり不一致だった）
+    "頬袋が膨らんだまま": "cheek_swelling",
+    "頬袋が膨らんで": "cheek_swelling",
+    # 嘴過長（くちばし形は beak_deformity 済み — 伸びすぎ形を補完）
+    "くちばしが伸びすぎ": "overgrown_beak",
+    # 白内障・角膜混濁の連用形（「〜濁ってる/〜濁ってきた」のみでは途中形を取りこぼす）
+    "目が白く濁って": "cloudy_eye",
+    # ヘビ・スペクタクル残留（脱皮不全の眼所見）
+    "脱皮した皮が目に残って": "retained_spectacle",
+    "目に皮が残って": "retained_spectacle",
+    "目の上に皮が残って": "retained_spectacle",
+    "目の皮が脱皮できて": "retained_spectacle",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

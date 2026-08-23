@@ -11203,7 +11203,22 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     # canonical name only carries it inside a paren suffix, which the stem index
     # strips. デソキシ/デスオキシ are transliteration variants of デオキシ.
     "desoxycorticosterone": ("DOCP", "デソキシコルチコステロン", "デスオキシコルチコステロン"),
+    # 2026-08 sweep #13: chelation / hepatoprotectant / fluid texts cite these
+    # acronyms and variant word orders that the canonical names never reduce to.
+    "calcium_edta": ("CaEDTA",),  # canonical: カルシウムEDTA — 51 treatment refs cite the acronym
+    # ursodiol already aliases ウルソジオール above; UDCA is the standard clinical
+    # acronym (41 treatment refs: "UDCA 10-15 mg/kg PO q24h").
+    "hetastarch": ("ヘタスターチ",),  # canonical: ヒドロキシエチルデンプン（HES 6%）
+    # canonical: グルコン酸カルシウム — texts also write the reversed word order
+    # "カルシウムグルコン酸(塩)" (21 refs, horse hypocalcemia / amphibian MBD).
+    # Bare prefix covers both 酸 and 酸塩 endings via substring match.
 }
+# UDCA acronym for ursodiol (registry key already exists above, so extend here
+# rather than duplicating the dict key — ruff F601 guard).
+_KATAKANA_VARIANT_ALIASES["ursodiol"] = _KATAKANA_VARIANT_ALIASES["ursodiol"] + ("UDCA",)
+_KATAKANA_VARIANT_ALIASES["calcium_gluconate"] = _KATAKANA_VARIANT_ALIASES["calcium_gluconate"] + (
+    "カルシウムグルコン酸",
+)
 
 
 # Japanese dose-form / salt / strength suffixes that formulary names carry but

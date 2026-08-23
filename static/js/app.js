@@ -1572,7 +1572,7 @@ function setDefaultStats(){
     diseases:6449,
     species:21,
     drugs:644,
-    symptoms:65,
+    symptoms:67,
     protocols:188
   };
   renderSpeciesGrid();
@@ -1947,12 +1947,12 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
-    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない"],
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの"],
     cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る"],
     rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない"],
-    hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない"],
+    hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない"],
     guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ"],
     ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない","陰部が腫れている"],
     hedgehog:["針が抜ける","フケ","ふらつく","食べない","目が出ている","体重が減った"],
@@ -1961,7 +1961,7 @@ function resetSpeciesChat(species){
     parrot:["食べない","自分で羽を抜く","くしゃみ","下痢","元気がない","吐き戻しが増えた"],
     reptile:["食べない","口をあけたまま呼吸","鼻水が出る","脱皮がうまくできない","目が開かない","痩せてきた"],
     tortoise:["食べない","甲羅がやわらかい","鼻水が出る","目が腫れている","いきんでいる","甲羅に傷がある"],
-    snake:["食べない","口の中が赤い","脱皮がうまくできない","口をあけたまま呼吸","ダニがついている","吐き戻しが増えた"],
+    snake:["食べない","口の中が赤い","脱皮がうまくできない","口をあけたまま呼吸","ダニがついている","吐き戻しが増えた","脱皮した皮が目に残っている"],
     lizard:["食べない","脚が曲がってきた","ふらつく","脱皮がうまくできない","口をあけたまま呼吸","痩せてきた"],
     amphibian:["食べない","皮膚が赤い","お腹が膨れている","皮膚に白いもの","元気がない","浮かんだまま沈めない"],
     fish:["体に白い点々","ヒレがボロボロ","体をこすりつける","水面で口をパクパク","お腹が膨れている","泳ぎ方がおかしい"],
@@ -4616,9 +4616,12 @@ function runDifferentialFromDisease(idsCsv){
    Completes the two-way flow with the checker's low-confidence banner, which
    already pivots checker → guided mode. Waits for the species' checker
    vocabulary to load when the guided species differs from the loaded one. */
-function runCheckerFromGuided(){
-  const sp=guidedState.species||currentSpecies||"dog";
-  const ids=(guidedState.selectedSymptoms||[]).slice();
+function _runCheckerWithSymptoms(sp,ids,evName){
+  /* Shared carry-over: pre-select a symptom-ID set in the checkbox checker,
+     switch to it (waiting out an async species load if needed) and auto-run
+     the analysis. Used by the guided-consultation final result and the
+     free-input chat result (2026-08: the free-chat path previously had no
+     refine pivot, so adjusting one sign meant re-typing the whole complaint). */
   if(!ids.length)return;
   const needSwitch=sp!==currentSpecies;
   if(needSwitch&&typeof selectSpecies==="function")selectSpecies(sp);
@@ -4636,10 +4639,14 @@ function runCheckerFromGuided(){
     renderSymptomList(symptomData);
     _pushNavHistory(currentView,"checker","");
     switchView("checker");
-    trackEvent("checker_from_guided",{species:sp,symptom_count:usable.length});
+    trackEvent(evName,{species:sp,symptom_count:usable.length});
     doAnalyze();
   };
   setTimeout(apply,needSwitch?200:0);
+}
+function runCheckerFromGuided(){
+  const sp=guidedState.species||currentSpecies||"dog";
+  _runCheckerWithSymptoms(sp,(guidedState.selectedSymptoms||[]).slice(),"checker_from_guided");
 }
 /* Related diseases: compute the closest differentials for a disease by counting
    shared symptoms across the currently-loaded species list (allDiseases), mirroring
@@ -5120,6 +5127,22 @@ function renderChatResult(container,data){
       listDiv.appendChild(card);
     });
     wrapper.appendChild(listDiv);
+    // Checker-refine pivot (parity with the guided-consultation final result):
+    // carry the extracted symptom IDs into the checkbox checker so one sign can
+    // be added/removed without re-typing the whole complaint. IDs the current
+    // species vocabulary can't resolve are dropped safely by the shared helper.
+    if(symptoms.length>0){
+      const refineDiv=document.createElement("div");
+      refineDiv.className="chat-disease-nav chat-refine-nav";
+      const refineBtn=document.createElement("button");
+      refineBtn.type="button";
+      refineBtn.className="chat-checker-refine";
+      refineBtn.dataset.species=chatSpecies||currentSpecies||"dog";
+      refineBtn.dataset.ids=symptoms.map(s=>s.id).filter(Boolean).join(",");
+      refineBtn.textContent=(currentLang==="ja"?"\u{1F9EA} チェッカーで症状を微調整して再解析":"\u{1F9EA} Refine signs in the checker")+" →";
+      refineDiv.appendChild(refineBtn);
+      wrapper.appendChild(refineDiv);
+    }
   } else if(symptoms.length>0){
     const noMatch=document.createElement("div");
     noMatch.className="chat-no-match";
@@ -6919,6 +6942,13 @@ function _attachChatNavHandlers(container){
       if(!name)return;
       trackEvent("chat_open_disease_db",{disease:name.substring(0,80),species:openBtn.dataset.species||""});
       openDiseaseAcrossSpecies(name,openBtn.dataset.species||currentSpecies||"");
+      return;
+    }
+    const refineBtn=e.target.closest(".chat-checker-refine");
+    if(refineBtn){
+      e.preventDefault();
+      const ids=(refineBtn.dataset.ids||"").split(",").filter(Boolean);
+      _runCheckerWithSymptoms(refineBtn.dataset.species||currentSpecies||"dog",ids,"checker_from_chat");
     }
   });
 }
