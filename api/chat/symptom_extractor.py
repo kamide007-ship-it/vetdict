@@ -159,6 +159,11 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # scratching_ears 表記のため双方向にブリッジ（外耳炎・耳ダニが正しくランク）
     "ear_scratching": ["scratching_ears", "itching"],
     "scratching_ears": ["ear_scratching", "itching"],
+    # 耳血腫（耳介の波動性腫脹）— 犬レガシー/ウサギは ear_swelling を直接保有。
+    # 猫語彙は ear_inflammation 表記のためブリッジで解決する。
+    "ear_swelling": ["ear_inflammation", "ear_thickening", "facial_swelling", "swelling"],
+    # ドライアイ — 犬レガシーは dry_eye を直接保有。他種は眼分泌物が最近接シグナル。
+    "dry_eye": ["eye_discharge"],
     "lameness_or_limping": [
         "lameness",
         "limping",

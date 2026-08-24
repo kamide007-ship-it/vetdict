@@ -7646,7 +7646,7 @@ DISEASES: List[Dict[str, Any]] = [
         "Probiotics: E. faecium SF68 (FortiFlora), S. boulardii, FOS/MOS. "
         "Cobalamin supplementation if low: 250-1500 μg SC q7d × 6 weeks → taper. "
         "Essential: investigate underlying cause — serum TLI for EPI (most common association), anatomical abnormalities (blind loop syndrome).",
-        "treatment_ja": "【抗菌薬】チロシン 25 mg/kg PO q12h×6週（第一選択、再発率低い）。"
+        "treatment_ja": "【抗菌薬】タイロシン 25 mg/kg PO q12h×6週（第一選択、再発率低い）。"
         "メトロニダゾール 10-15 mg/kg PO q12h×4週（第二選択）。"
         "【食事療法】高消化性・低脂肪食＋サイリウム 1-2 tsp/10kg/食。"
         "【プロバイオティクス】E. faecium SF68（FortiFlora）、S. boulardii、FOS・MOS。"
@@ -7666,7 +7666,7 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "抗生物質療法に反応する慢性小腸性下痢で、腸内細菌叢の不均衡に関連する可能性があります。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
         "pathophysiology_ja": "腸内細菌叢の組成異常（ディスバイオーシス）→粘膜免疫応答の異常→慢性炎症→"
-        "小腸性下痢・体重減少・鼓腸。抗菌薬（メトロニダゾール・チロシン）投与で"
+        "小腸性下痢・体重減少・鼓腸。抗菌薬（メトロニダゾール・タイロシン）投与で"
         "異常な細菌叢が是正されると症状が改善。慢性腸症の約20-30%を占める。"
         "ジャーマンシェパードに遺伝的素因。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
@@ -7683,13 +7683,13 @@ DISEASES: List[Dict[str, Any]] = [
         "Endoscopic biopsy important to differentiate from IBD (which requires immunosuppression).",
         "treatment_ja": "【抗菌薬療法】第一選択：メトロニダゾール（10-15 mg/kg PO q12h×4-6週）— 嫌気性菌に有効、免疫調節作用あり。"
         "神経毒性（前庭症状・運動失調）に注意。"
-        "第二選択：チロシン（タイロシン 15-25 mg/kg PO q12h×6-8週）— 再発率低く長期安全性良好。"
+        "第二選択：タイロシン（15-25 mg/kg PO q12h×6-8週）— 再発率低く長期安全性良好。"
         "【食事療法】高消化性・低脂肪食＋新奇蛋白食/加水分解蛋白食の試験。"
         "サイリウム（Psyllium 1-2 tsp/10kg/食）— 水溶性食物繊維として短鎖脂肪酸に発酵、粘膜修復促進。"
         "【プロバイオティクス】E. faecium SF68（FortiFlora）、S. boulardii、FOS・MOS。"
         "【コバラミン補充】低値時は250-1500 μg SC q7d。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
-        "prognosis_ja": "抗菌薬反応性の症例は予後良好。再発率はメトロニダゾールで約50%、チロシンで約30%。"
+        "prognosis_ja": "抗菌薬反応性の症例は予後良好。再発率はメトロニダゾールで約50%、タイロシンで約30%。"
         "抗菌薬中止後に再発する場合は低用量維持療法を検討。免疫抑制剤が必要な場合はIBDの可能性。",
         "prevention": "Prevention includes appropriate husbandry, balanced nutrition, regular veterinary examinations, stress reduction, and prompt treatment of early signs of illness.",
         "prevention_ja": "良質な消化性の高い食事、プロバイオティクスの定期投与、ストレス管理。",
@@ -11893,7 +11893,7 @@ DISEASES: List[Dict[str, Any]] = [
         "treatment_ja": "【段階的アプローチ】第1段階：食事療法（新奇蛋白食/加水分解蛋白食×6-8週）。"
         "サイリウム 1-2 tsp/10kg/食で食物繊維補給（短鎖脂肪酸で粘膜修復促進）。"
         "第2段階（ARE）：メトロニダゾール 10-15 mg/kg PO q12h×4-6週、"
-        "またはチロシン 15-25 mg/kg PO q12h×6-8週（再発率低）。"
+        "またはタイロシン 15-25 mg/kg PO q12h×6-8週（再発率低）。"
         "第3段階：食事＋抗菌薬不応→IBDの可能性→プレドニゾロン。"
         "【プロバイオティクス】E. faecium SF68、S. boulardii、FOS・MOS。FMT（難治例）。"
         "【コバラミン】低値時は250-1500 μg SC q7d。",

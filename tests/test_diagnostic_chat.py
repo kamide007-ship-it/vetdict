@@ -1602,6 +1602,7 @@ class TestQuickTapPhraseExtraction:
             "鼻血が出た",
             "お腹が膨らんで吐こうとしても吐けない",
             "便に白い米粒のようなもの",
+            "耳が腫れてぷよぷよしている",
         ],
         "cat": [
             "食べない",
@@ -1619,6 +1620,7 @@ class TestQuickTapPhraseExtraction:
             "毛が長くて換毛しない",
             "食べない",
             "咳が出る",
+            "飲み込めず鼻から餌が出てくる",
         ],
         "rabbit": ["糞が小さい", "食べない", "歯ぎしり", "首が傾いている", "お腹が張っている", "鼻水"],
         "chinchilla": ["よだれが出る", "毛が抜ける", "食べない", "糞が出ない", "歯が伸びている", "砂浴びしない"],
@@ -2891,3 +2893,108 @@ class TestChatClinicalAccuracyAuditRound11:
         assert "visible_worms" in ids or "worms_in_stool" in ids, ids
         names = [(m.get("name_ja") or "") for m in _match_species_symptoms_to_diseases(ids, "cat")[:3]]
         assert any("条虫" in n or "回虫" in n for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound12:
+    """2026-08 audit round 12: fresh 16-case chief-complaint sweep. Root causes
+    fixed: the legacy dog database had no aural-hematoma or KCS entry and no
+    pinna-swelling / dry-eye / abdominal-pain vocabulary; pancreatitis lacked
+    the textbook vomiting+abdominal-pain cluster; the equine choke complaint
+    (「飲み込めない 鼻から餌が出てくる」) extracted nothing and rare
+    esophageal entries outranked choke on trivially perfect coverage; ferret
+    Pneumocystis pneumonia and bird essential-oil toxicosis were untiered and
+    outranked cardiomyopathy / post-laying hypocalcemia; chelonian
+    hypovitaminosis A was buried under the periocular-abscess entry for its
+    own defining sign pair; the bare te-form 「毛が抜けて」 extracted nothing."""
+
+    def test_dog_fluctuant_pinna_swelling_ranks_aural_hematoma_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("耳が腫れてぷよぷよしている 頭を振る")
+        assert "ear_swelling" in ex and "head_shaking" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "耳血腫" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_dog_dry_eye_with_tacky_discharge_ranks_kcs_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("目やにがベタベタ多い 目が乾いている")
+        assert "dry_eye" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "乾性角結膜炎" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_dog_prayer_position_vomiting_ranks_pancreatitis_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("背中を丸めて震えて嘔吐 お腹を触ると痛がる")
+        assert "abdominal_pain" in ex and "vomiting" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "膵炎" in top.get("name_ja", ""), (
+            f"vomiting + cranial abdominal pain is pancreatitis first (Ettinger 8th): {top.get('name_ja')}"
+        )
+
+    def test_dog_seizure_without_abdominal_context_keeps_epilepsy_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("けいれんを起こした 意識がない")
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "てんかん" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_horse_choke_complaint_extracts_and_ranks_first(self):
+        import api.diagnostic_chat as dc
+
+        ex = dc._extract_equine_symptoms("飲み込めない 鼻から餌が出てくる よだれ")
+        assert "dig_salivation" in ex and "resp_bilateral_discharge" in ex, ex
+        top = dc._match_equine_symptoms_to_diseases(ex)[0]
+        assert "食道閉塞" in top.get("name_ja", ""), (
+            f"ptyalism + feed at nostrils is choke until proven otherwise: {top.get('name_ja')}"
+        )
+
+    def test_ferret_cough_dyspnea_ascites_ranks_cardiomyopathy_over_pneumocystis(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("お腹が膨れて呼吸が苦しそう 咳をする", "ferret")
+        names = [
+            r.get("name_ja") or r.get("name")
+            for r in _match_species_symptoms_to_diseases(ids, "ferret")[:3]
+        ]
+        assert any("心筋症" in n or "心不全" in n for n in names), names
+        assert not any("ニューモシスチス" in n for n in names), (
+            f"rare opportunistic pneumonia must not outrank CHF for the classic triad: {names}"
+        )
+
+    def test_bird_post_laying_tremors_rank_hypocalcemia_over_essential_oil(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("産卵のあとぐったりして震えている", "bird")
+        names = [
+            r.get("name_ja") or r.get("name")
+            for r in _match_species_symptoms_to_diseases(ids, "bird")[:2]
+        ]
+        assert any("カルシウム欠乏" in n for n in names), names
+        assert not any("エッセンシャルオイル" in n for n in names), (
+            f"exposure-dependent toxicosis must not lead post-laying tremors: {names}"
+        )
+
+    def test_tortoise_swollen_eyes_anorexia_surfaces_hypovitaminosis_a(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("目が腫れて開かない 食欲がない", "tortoise")
+        assert "eye_swelling" in ids and "anorexia" in ids, ids
+        names = [
+            r.get("name_ja") or r.get("name")
+            for r in _match_species_symptoms_to_diseases(ids, "tortoise")[:2]
+        ]
+        assert any("ビタミンA欠乏" in n for n in names), (
+            f"bilateral palpebral swelling in a chelonian is hypovitaminosis A "
+            f"until proven otherwise (Mader 3rd ed): {names}"
+        )
+
+    def test_bare_te_form_hair_loss_extracts(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("毛が抜けて皮膚がかさかさ 激しく痒がる", "guinea_pig")
+        assert "hair_loss" in ids and "itching" in ids, ids

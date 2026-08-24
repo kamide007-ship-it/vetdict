@@ -1021,6 +1021,23 @@ SYMPTOM_ALIASES = {
     "耳の中が汚い": "ear_discharge",
     "耳が痒い": "ear_scratching",
     "耳をかゆがる": "ear_scratching",
+    # 犬・猫・ウサギ — 耳血腫（耳介の波動性腫脹）
+    "耳が腫れて": "ear_swelling",
+    "耳が腫れた": "ear_swelling",
+    "耳がぷよぷよ": "ear_swelling",
+    "耳がふくらんで": "ear_swelling",
+    "耳血腫": "ear_swelling",
+    # 犬 — 乾性角結膜炎（ドライアイ）
+    "目が乾いて": "dry_eye",
+    "目が乾く": "dry_eye",
+    "ドライアイ": "dry_eye",
+    "目やにがベタベタ": "dry_eye",
+    "目やにがべたべた": "dry_eye",
+    # 膵炎・急性腹症 — 触診痛（従来は「お腹を触ると嫌がる」のみ）
+    "お腹を触ると痛がる": "abdominal_pain",
+    "お腹を触られるのを嫌がる": "abdominal_pain",
+    # 脱毛のて形（「毛が抜ける/抜けてきた/抜けた」のみで素のて形が欠落）
+    "毛が抜けて": "hair_loss",
     # 猫 — 便秘（追加表現）
     "便が硬い": "constipation",
     "排便時に鳴く": "constipation",

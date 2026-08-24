@@ -387,3 +387,23 @@ def test_app_js_free_chat_results_pivot_to_checker():
     with open("static/css/main.css", encoding="utf-8") as f:
         css = f.read()
     assert ".chat-checker-refine" in css
+
+
+def test_app_js_free_chat_low_info_warning_pivots_to_guided_mode():
+    """Free-chat results ← guided-mode pivot (2026-08 round 12): the free
+    chat's low-info warning ('1-2 symptoms only') was text-only, unlike the
+    checker's low-confidence banner which offers a one-tap pivot into the
+    guided consultation. The warning box must now render a
+    .chat-guided-pivot button and the delegated chat handler must route it
+    into guided mode (opening the chat view first for the landing chat) and
+    scroll the mode toggle into view."""
+    # The warning box renders the pivot button (reuses the banner styling).
+    assert "chat-guided-pivot" in APP_JS
+    assert 'pivotBtn.className="guided-consult-link chat-guided-pivot"' in APP_JS
+    # The delegated chat-container handler routes the click.
+    assert '.closest(".chat-guided-pivot")' in APP_JS
+    handler = APP_JS[APP_JS.index('.closest(".chat-guided-pivot")') :]
+    handler = handler[: handler.index("return;")]
+    assert 'switchView("chat")' in handler
+    assert 'switchChatMode("guided")' in handler
+    assert "guided_from_chat_low_info" in handler

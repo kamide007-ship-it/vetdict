@@ -12476,6 +12476,15 @@ _SYNDROME_FLOOR_SCORE = 0.62
 _SYNDROME_PAIR_BOOSTS: list[tuple[frozenset, tuple[str, ...], float]] = [
     (frozenset({"hoof_heat", "limb_lameness_fore"}), ("Laminitis", "Acute Laminitis"), 1.5),
     (frozenset({"hoof_heat", "limb_digital_pulse"}), ("Laminitis", "Acute Laminitis"), 1.5),
+    # Ptyalism + bilateral (feed-containing) nasal discharge is esophageal
+    # obstruction until proven otherwise (Reed & Bayly, Equine Internal
+    # Medicine 4th ed) — without this, rare two-finding entries (esophageal
+    # diverticulum/stricture) won on trivially perfect coverage.
+    (
+        frozenset({"dig_salivation", "resp_bilateral_discharge"}),
+        ("Esophageal Obstruction (Choke)",),
+        1.5,
+    ),
 ]
 
 
