@@ -30,7 +30,13 @@
    scrollIntoView() call sites, hash routing, the skip-link, find-on-page and
    focus scrolling all clear the sticky chrome from one declaration. Do not also
    set scroll-margin-top on the targets — the two are additive. */
-html{font-size:15px;scroll-behavior:smooth;scroll-padding-top:var(--sticky-offset);-webkit-tap-highlight-color:transparent}
+/* text-size-adjust:100% — without it, mobile browsers (Android Chrome font
+   boosting, iOS Safari auto text-sizing) inflate long unconstrained text
+   blocks such as the differential-diagnosis treatment/pathophysiology
+   paragraphs, making result-card text render far larger than the authored
+   0.8rem on phones. 100% disables only the inflation heuristic; user zoom
+   and browser font-size accessibility settings still apply. */
+html{font-size:15px;scroll-behavior:smooth;scroll-padding-top:var(--sticky-offset);-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%}
 button,a,[role="tab"],[role="button"],input[type="submit"],input[type="button"]{touch-action:manipulation}
 body{font-family:var(--font);background:var(--bg);color:var(--gray-900);line-height:1.65;transition:background .3s ease,color .3s ease}
 a{color:var(--navy-light);text-decoration:none}
