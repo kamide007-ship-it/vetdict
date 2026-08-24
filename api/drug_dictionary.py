@@ -66,6 +66,7 @@ from api.drug_batch_41 import DRUGS_BATCH_41
 from api.drug_batch_42 import DRUGS_BATCH_42
 from api.drug_batch_43 import DRUGS_BATCH_43
 from api.drug_batch_44 import DRUGS_BATCH_44
+from api.drug_batch_45 import DRUGS_BATCH_45
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10688,6 +10689,15 @@ for _drug44 in DRUGS_BATCH_44:
     if _drug44["id"] not in _drug_index:
         DRUGS.append(_drug44)
         _drug_index[_drug44["id"]] = _drug44
+
+# Batch 45: 2026-08監査（第14回スイープ）— referenced-but-absent 3剤
+# （フィナステリド/酢酸オサテロン — 犬BPHエントリが用量付きで参照する内科治療2剤;
+#  フィルグラスチム(rhG-CSF) — パルボ・免疫介在性好中球減少・トラップド
+#  ニュートロフィル症候群等7エントリが「5 μg/kg SC q24h」で参照）
+for _drug45 in DRUGS_BATCH_45:
+    if _drug45["id"] not in _drug_index:
+        DRUGS.append(_drug45)
+        _drug_index[_drug45["id"]] = _drug45
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

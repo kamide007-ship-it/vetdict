@@ -310,6 +310,14 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # hypoglycemia presentation (Quesenberry & Carpenter 4th ed).
     ("ferret", frozenset({"hind_leg_weakness", "drooling"}), "Insulinoma", 1.35),
     ("ferret", frozenset({"hind_leg_weakness", "staring"}), "Insulinoma", 1.35),
+    # Bilateral palpebral swelling + anorexia in a chelonian is
+    # hypovitaminosis A until proven otherwise (Mader's Reptile and Amphibian
+    # Medicine and Surgery 3rd ed; Boyer, Vet Clin North Am Exot Anim Pract) —
+    # without a boost, the narrow periocular-abscess entry won on coverage.
+    ("tortoise", frozenset({"eye_swelling", "anorexia"}), "Vitamin A Deficiency (Hypovitaminosis A)", 1.45),
+    ("tortoise", frozenset({"swollen_eyes", "anorexia"}), "Vitamin A Deficiency (Hypovitaminosis A)", 1.45),
+    ("reptile", frozenset({"eye_swelling", "anorexia"}), "Vitamin A Deficiency (Hypovitaminosis A)", 1.45),
+    ("reptile", frozenset({"swollen_eyes", "anorexia"}), "Vitamin A Deficiency (Hypovitaminosis A)", 1.45),
 ]
 
 # Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.

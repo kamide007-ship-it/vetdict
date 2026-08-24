@@ -6095,7 +6095,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "Pancreatic acinar cell atrophy or destruction (chronic pancreatitis in cats) reduces digestive enzyme secretion below functional threshold, causing maldigestion, steatorrhea, weight loss, and fat-soluble vitamin deficiencies.",
         "pathophysiology_ja": "猫膵外分泌不全は猫における消化器疾患である。粘膜の完全性、運動性、分泌機能、またはマイクロバイオームバランスの障害を伴う。炎症により上皮バリアが損傷し、吸収不良、体液喪失、細菌トランスロケーションの可能性がある。運動障害（低運動性/うっ滞または亢進）により通過時間と消化効率が変化する。後腸発酵動物では盲腸/結腸フローラの破壊が致死的ディスバイオーシスと腸管毒素症を引き起こしうる。",
         "treatment": "Pancreatic enzyme supplementation (Viokase, Creon) with every meal. Vitamin B12 250 mcg/cat SC q7d. Low-fat, highly digestible diet. Prognosis fair with lifelong supplementation.",
-        "treatment_ja": "1) 膵酵素補充: パンクレリパーゼ（粉末）を毎食に添加（小さじ1/食、食事と混合後10-15分置く）。2) コバラミン補充: シアノコバラミン250μg/cat SC q7d×6週→q14d×6週→q30d（血中濃度正常化まで）。3) 高消化性・低繊維食。4) 小腸細菌過増殖（SIBO）合併時: メトロニダゾール10-15mg/kg PO q12h×14日 またはチロシン25mg/kg PO q12h。5) 葉酸欠乏時: 葉酸0.5-1mg/cat PO q24h。6) 体重・便性状・血中コバラミン/葉酸の定期モニタリング。",
+        "treatment_ja": "1) 膵酵素補充: パンクレリパーゼ（粉末）を毎食に添加（小さじ1/食、食事と混合後10-15分置く）。2) コバラミン補充: シアノコバラミン250μg/cat SC q7d×6週→q14d×6週→q30d（血中濃度正常化まで）。3) 高消化性・低繊維食。4) 小腸細菌過増殖（SIBO）合併時: メトロニダゾール10-15mg/kg PO q12h×14日 またはタイロシン25mg/kg PO q12h。5) 葉酸欠乏時: 葉酸0.5-1mg/cat PO q24h。6) 体重・便性状・血中コバラミン/葉酸の定期モニタリング。",
         "prevention": "定期的な獣医師による健康診断と早期の症状認識が予後改善に重要。",
         "prevention_ja": "猫膵外分泌不全の予防: 定期的な健康診断。適切な栄養管理。ストレスの軽減。清潔な飼育環境の維持。異常の早期発見・早期受診。",
         "prognosis": "Generally good to fair with appropriate treatment and follow-up care. Prognosis improves with early diagnosis and owner compliance.",

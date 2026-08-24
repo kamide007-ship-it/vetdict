@@ -367,6 +367,12 @@ SYMPTOMS = [
         "category": "digestive",
     },
     {
+        "id": "abdominal_pain",
+        "name_ja": "腹痛・お腹を触ると痛がる",
+        "name_en": "Abdominal Pain / Pain on Palpation",
+        "category": "digestive",
+    },
+    {
         "id": "constipation",
         "name_ja": "便秘",
         "name_en": "Constipation",
@@ -551,6 +557,12 @@ SYMPTOMS = [
         "name_en": "Eye Swelling / Periorbital Edema",
         "category": "ocular",
     },
+    {
+        "id": "dry_eye",
+        "name_ja": "目が乾く・目やにがベタつく",
+        "name_en": "Dry Eye / Tacky Mucoid Discharge",
+        "category": "ocular",
+    },
     # Cardiac (3)
     {
         "id": "exercise_intolerance",
@@ -650,6 +662,12 @@ SYMPTOMS = [
         "id": "ear_odor",
         "name_ja": "耳が臭い",
         "name_en": "Ear Odor",
+        "category": "dermatological",
+    },
+    {
+        "id": "ear_swelling",
+        "name_ja": "耳が腫れている（耳介の腫れ）",
+        "name_en": "Ear (Pinna) Swelling",
         "category": "dermatological",
     },
     {
@@ -1941,6 +1959,63 @@ DISEASES = [
             "shih_tzu": 1.4,
         },
     },
+    # ---- 12b2. Aural Hematoma ----
+    # A very frequent sequela of otitis externa / head shaking, yet the legacy
+    # database had no pinna-swelling vocabulary — the classic "耳が腫れて
+    # ぷよぷよしている" complaint extracted only head_shaking and ranked plain
+    # otitis alone. The fluctuant pinna swelling IS the presenting sign
+    # (Ettinger 8th ed; MacPhail, Vet Clin North Am 2016).
+    {
+        "id": "aural_hematoma",
+        "prevalence_tier": "common",
+        "name_ja": "耳血腫（耳介血腫）",
+        "name_en": "Aural Hematoma",
+        "description_ja": "耳介の軟骨と皮膚の間に血液が貯留し、耳がぷよぷよと腫れる疾患。多くは外耳炎やアレルギーによる激しい頭振り・耳掻きが誘因です。穿刺排液だけでは再発が多く、外科的処置と基礎にある外耳炎の治療が重要です。",
+        "description_en": "Blood accumulation between the auricular cartilage and skin producing a fluctuant pinna swelling, usually triggered by violent head shaking or scratching from otitis externa or allergic ear disease. Drainage alone often recurs; definitive surgery plus treatment of the underlying otitis is key.",
+        "symptoms": [
+            "ear_swelling",
+            "head_shaking",
+            "ear_scratching",
+        ],
+        "severity": "low",
+        "recommended_tests": ["otoscopy", "ear_cytology", "fine_needle_aspirate"],
+        "breed_risks": {
+            "labrador_retriever": 1.6,
+            "golden_retriever": 1.6,
+            "cocker_spaniel": 1.5,
+            "french_bulldog": 1.3,
+        },
+    },
+    # ---- 12b3. Keratoconjunctivitis Sicca (KCS / Dry Eye) ----
+    # Common canine ophthalmic disease (~1% prevalence, much higher in
+    # predisposed breeds — Ollivier 2004; Gelatt Veterinary Ophthalmology 6th
+    # ed), yet the legacy database had no dry-eye vocabulary and no KCS entry,
+    # so "目やにがベタベタ多い 目が乾いている" ranked eyelid conformation
+    # diseases instead.
+    {
+        "id": "kcs",
+        "prevalence_tier": "common",
+        "name_ja": "乾性角結膜炎（KCS・ドライアイ）",
+        "name_en": "Keratoconjunctivitis Sicca (KCS / Dry Eye)",
+        "description_ja": "涙液の水性成分が減少し角膜・結膜が乾燥する疾患。大部分は免疫介在性の涙腺炎が原因です。ベタベタした粘液性の目やに、結膜充血、光をまぶしがる、進行すると角膜の色素沈着・潰瘍を起こします。シルマー涙液試験で診断し、シクロスポリン点眼が第一選択です。",
+        "description_en": "Deficiency of the aqueous tear film drying the cornea and conjunctiva, most often from immune-mediated lacrimal adenitis. Tacky mucoid discharge, conjunctival hyperemia and blepharospasm progress to corneal pigmentation and ulceration. Diagnosed by Schirmer tear test; topical cyclosporine is first-line.",
+        "symptoms": [
+            "eye_discharge",
+            "dry_eye",
+            "redness_in_eyes",
+            "squinting",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["schirmer_tear_test", "fluorescein_stain", "ophthalmic_exam"],
+        "breed_risks": {
+            "shih_tzu": 2.5,
+            "pug": 2.3,
+            "english_bulldog": 2.2,
+            "cocker_spaniel": 2.0,
+            "west_highland_white_terrier": 2.0,
+            "cavalier_king_charles": 1.8,
+        },
+    },
     # ---- 12c. Periodontal Disease ----
     # The most prevalent disease in dogs overall (80-90% of dogs over 3 years
     # have some degree of periodontal disease — AAHA Dental Care Guidelines
@@ -2111,6 +2186,7 @@ DISEASES = [
             "lethargy",
             "bloating",
             "fever",
+            "abdominal_pain",
         ],
         "severity": "moderate",
         "recommended_tests": ["blood_chemistry", "ultrasound", "cbc"],
@@ -4097,6 +4173,12 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"blood_in_urine", "frequent_urination", "straining_to_urinate"}), "urinary_tract_infection", 2.0),
     # Pancreatitis: vomiting + loss of appetite + bloating
     (frozenset({"vomiting", "loss_of_appetite", "bloating"}), "pancreatitis", 1.6),
+    # Pancreatitis: vomiting + cranial abdominal pain (prayer position /
+    # pain on palpation) is the textbook acute-pancreatitis presentation
+    # (Ettinger 8th ed; Xenoulis 2015) — added with the abdominal_pain
+    # vocabulary so the hunched-trembling-vomiting complaint no longer ranks
+    # Addison's/IVDD above it.
+    (frozenset({"vomiting", "abdominal_pain"}), "pancreatitis", 1.5),
     # Glaucoma: cloudiness + eye swelling + squinting
     (frozenset({"cloudiness_in_eyes", "eye_swelling", "squinting"}), "glaucoma", 2.0),
     # Lymphoma: swollen lymph nodes + weight loss + lethargy

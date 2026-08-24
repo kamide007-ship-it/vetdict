@@ -2072,3 +2072,89 @@ def test_sweep13_acronym_and_word_order_aliases_resolve():
     for text in ("カルシウム補給を行う", "educated guess による経験的治療"):
         ids = [h["id"] for h in find_drugs_in_text(text)]
         assert "calcium_gluconate" not in ids and "ursodiol" not in ids, (text, ids)
+
+
+class TestBatch45FinasterideOsateroneFilgrastim:
+    """2026-08 14th referenced-but-absent sweep: the canine BPH entries dose
+    finasteride and osaterone acetate verbatim, and 7 entries dose filgrastim
+    (rhG-CSF 5 µg/kg SC q24h) — none existed in the formulary. The same sweep
+    caught the tylosin mis-transliteration (チロシン = tyrosine, the amino
+    acid; the antibiotic is タイロシン) in 6 dog/cat GI entries."""
+
+    def test_finasteride_present_with_bph_dosing_and_teratogenic_warning(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("finasteride")
+        assert d is not None, "finasteride missing from formulary"
+        dog = d["species_info"]["dog"]
+        assert "0.1-0.5 mg/kg" in dog["dosage"] and "0.1-0.5 mg/kg" in dog["dosage_ja"]
+        # fertility preservation is the defining clinical fact vs castration
+        assert "繁殖" in d["mechanism_ja"] or "精液" in d["mechanism_ja"]
+        # teratogenicity / pregnant-handler warning is the defining safety fact
+        assert "催奇形" in d["contraindications_ja"]
+        assert d["species_info"]["cat"]["safe"] is False
+        ids = [h["id"] for h in find_drugs_in_text("フィナステリド 0.1-0.5 mg/kg 経口 24時間ごと")]
+        assert "finasteride" in ids
+        ids_en = [h["id"] for h in find_drugs_in_text("Finasteride 0.1-0.5 mg/kg PO")]
+        assert "finasteride" in ids_en
+
+    def test_osaterone_present_with_seven_day_course_and_cortisol_caveat(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("osaterone")
+        assert d is not None, "osaterone missing from formulary"
+        dog = d["species_info"]["dog"]
+        assert "0.25-0.5 mg/kg" in dog["dosage"] and "7" in dog["dosage"]
+        assert "0.25-0.5 mg/kg" in dog["dosage_ja"] and "7日間" in dog["dosage_ja"]
+        # transient ACTH/cortisol attenuation is the defining safety fact (SPC)
+        assert "ACTH" in (dog.get("notes_ja") or "") or "コルチゾール" in (dog.get("notes_ja") or "")
+        ids = [h["id"] for h in find_drugs_in_text("酢酸オサテロン（Ypozane 0.25-0.5 mg/kg PO 7日間）")]
+        assert "osaterone" in ids
+
+    def test_filgrastim_present_with_short_course_antibody_warning(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("filgrastim")
+        assert d is not None, "filgrastim missing from formulary"
+        for sp in ("dog", "cat", "ferret"):
+            info = d["species_info"][sp]
+            assert "5 µg/kg" in info["dosage"] or "5 μg/kg" in info["dosage"], sp
+            assert (info.get("dosage_ja") or "").strip(), sp
+        # heterologous-protein antibody formation → short course is the
+        # defining safety fact for rhG-CSF in dogs and cats
+        assert "抗体" in d["mechanism_ja"] and "抗体" in d["contraindications_ja"]
+        ids = [h["id"] for h in find_drugs_in_text("G-CSF（フィルグラスチム5 μg/kg SC q24h）は急性好中球減少に有効")]
+        assert "filgrastim" in ids
+        # bare acronym in the parvo protocol must also resolve
+        ids2 = [h["id"] for h in find_drugs_in_text("組換え犬G-CSF 5 µg/kg SC q24h（重度好中球減少）")]
+        assert "filgrastim" in ids2
+        # precision guard: GM-CSF is a different cytokine
+        assert "filgrastim" not in [h["id"] for h in find_drugs_in_text("GM-CSF投与")]
+
+
+def test_no_tyrosine_typo_for_tylosin_in_disease_content():
+    """The antibiotic tylosin (タイロシン) was mis-transliterated as チロシン
+    (tyrosine, the amino acid) in the dog IBD/EPI/SIBO/ARD/CCE and cat EPI
+    entries — a wrong drug name a clinician would trip over. Legitimate
+    tyrosine-kinase (チロシンキナーゼ) mentions must survive, as must the
+    genuine tyrosine amino-acid supplement in the equine anhidrosis entry."""
+    import re
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    raw = (root / "diseases_all_species.json").read_text(encoding="utf-8")
+    # any non-kinase チロシン immediately followed by a dose is the typo
+    assert not re.search(r"チロシン(?!キナーゼ)[（(]?\s*[0-9]", raw), (
+        "tylosin must be written タイロシン, not チロシン, in dose contexts"
+    )
+    assert "チロシン（タイロシン" not in raw
+
+    for mod in ("dog_diseases.py", "cat_diseases.py"):
+        src = (root / "api" / "species" / mod).read_text(encoding="utf-8")
+        assert not re.search(r"チロシン(?!キナーゼ)", src), mod
+
+    # tylosin itself must resolve so the corrected texts produce drug chips
+    from api.drug_dictionary import find_drugs_in_text
+
+    ids = [h["id"] for h in find_drugs_in_text("タイロシン（15-25 mg/kg PO q12h×6-8週）")]
+    assert "tylosin" in ids

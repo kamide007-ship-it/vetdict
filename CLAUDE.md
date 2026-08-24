@@ -3395,3 +3395,79 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 ### 表示数値の同期・キャッシュ
 - `pendingStats` symptoms 65→**67**（worms_in_stool/postpartum_lactating 追加）
 - ServiceWorker: `CACHE_NAME` v127 → **v128**
+
+## 2026-08セッション（第23弾: タイロシン誤表記の是正 + BPH/G-CSF薬品3剤 + チャット精度第12弾 + 自由チャット低情報警告→問診モード動線）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,002件合格**（34 skip、カバレッジ80.78%）
+- 配信SQLiteクリーンビルド: 6,892疾患、treatment/prevention/prognosis **100%**、主要臨床フィールド空欄 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（644薬品、全species_info検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- prevalence dead key: **9**（当該種DBに疾患自体が無い既知残、上限15ガード内）
+
+### 臨床的に誤った薬品名の修正: チロシン→タイロシン（アミノ酸≠抗菌薬）
+- 犬のIBD/EPI/SIBO/抗菌薬反応性下痢/慢性腸症と猫EPIの計6疾患群で、抗菌薬タイロシン（tylosin）が
+  **アミノ酸チロシン（tyrosine）と誤表記**されていた（「チロシン 25 mg/kg PO q12h×6週」等、JSON 9フィールド+
+  dog/cat モジュール6箇所+enrichmentスクリプト3件）。チロシンキナーゼ阻害薬（トセラニブ等）の正当な言及と、
+  馬・無汗症のチロシン（神経伝達物質前駆体=本物のアミノ酸）は温存
+- 修正により SIBO 等の関連薬品チップが tylosin に正しく解決（従来は誤表記で不達）
+- 回帰テスト: `test_no_tyrosine_typo_for_tylosin_in_disease_content`（用量文脈の非キナーゼチロシンをJSON+モジュール走査で検出）
+
+### referenced-but-absent 薬品3剤の補完（`drug_batch_45.py` 新規、644→647薬品）
+用量文脈カタカナ/英語トークン監査（第14回スイープ、find_drugs_in_text 実マッチャー突合）で検出:
+- **フィナステリド（プロスカー）** — 犬BPHエントリ3件が「0.1-0.5 mg/kg PO q24h」で参照する5α-還元酵素阻害薬。
+  精液性状・繁殖能温存（Sirinarumitr 2001 JAVMA: 16週で前立腺体積43%減）。**催奇形性 — 妊娠中の飼い主が
+  破損錠剤を素手で扱わない**警告を明記。猫は適応なし（safe:False）
+- **酢酸オサテロン（Ypozane/イポザン）** — EU承認の犬BPH動物用医薬品（0.25-0.5 mg/kg PO×7日、効果5-6ヶ月、
+  Albouy 2008）。**投与後数週間のACTH刺激コルチゾール反応減弱**（SPC）を明記。BPHエントリの
+  garbled 参照「acetate 0.25-0.5 mg/kg PO」（薬品名脱落）も正しい名称+用量に修正
+- **フィルグラスチム（rhG-CSF）** — パルボ×2・免疫介在性好中球減少（犬猫）・ボーダーコリーTNS・
+  メチマゾール副反応・フェレット高エストロジェン血症の7エントリが「5 μg/kg SC q24h」で参照。
+  **異種蛋白のため約2-3週で中和抗体形成→遷延性好中球減少 — 短期投与限定**が定義的安全事実。
+  「G-CSF」裸頭字語も解決（GM-CSFには誤マッチしない境界ガード検証済み）
+- 3剤とも治療チップ機構で鑑別診断・チャット結果カードから1タップ到達を検証
+  （BPH→finasteride/osaterone、好中球減少→filgrastim）
+
+### 診断チャット精度 第12弾（16症例フレッシュスイープ 6 MISS → 全症例合格）
+- **犬レガシーDBに耳血腫・KCSを新設**（75→77疾患、67→70症状）:
+  - 耳血腫: 外耳炎の頻発続発症なのに耳介腫脹語彙が無く「耳が腫れてぷよぷよ」が head_shaking のみ抽出→
+    外耳炎単独1位だった。ear_swelling 症状+エイリアス5種（耳がぷよぷよ/耳血腫等）+ ID_SYNONYMS
+    （猫は ear_inflammation 表記へブリッジ）→ rank 1
+  - 乾性角結膜炎（KCS）: 犬の高頻度眼科疾患（好発犬種2-2.5×）なのにドライアイ語彙ゼロで眼瞼疾患が上位
+    だった。dry_eye 症状+エイリアス（目が乾いて/ドライアイ/目やにがベタベタ）→ rank 1
+- **膵炎の祈りのポーズ主訴**: abdominal_pain 症状を新設し（お腹を触ると痛がる エイリアス追加）、
+  {vomiting, abdominal_pain}→膵炎 ×1.5 パトグノモニック・クラスタ追加（Ettinger 8th; Xenoulis 2015）→
+  「背中を丸めて震えて嘔吐 お腹を触ると痛がる」で膵炎 rank 1（従来アジソン/IVDD上位）。
+  産後文脈なしの痙攣=てんかん1位は回帰テストで固定
+- **馬・食道閉塞（チョーク）が抽出ゼロだった**: 「飲み込め（ない）」「鼻から餌/食べ物/飼料」→
+  dig_salivation / resp_bilateral_discharge エイリアス新設 + **症候群ペアブースト**
+  {dig_salivation, resp_bilateral_discharge}→チョーク×1.5（流涎+鼻孔からの飼料逆流=チョークの definitional pair、
+  Reed & Bayly 4th ed）+ 食道憩室=rare/食道狭窄=uncommon/唾石症=rare/巨大食道症=uncommon の有病率是正
+  （稀な2所見エントリがカバレッジ1.0でチョーク自身を上回っていた）→ rank 1
+- **フェレット**: ニューモシスチス肺炎=rare（未ティアで咳+呼吸困難+腹水の心筋症/CHF三徴1位を奪っていた）
+- **鳥3種**: エッセンシャルオイル中毒=rare（曝露依存毒性、産卵後振戦でカルシウム欠乏症繁殖型を上回っていた）
+- **リクガメ/爬虫類**: {eye_swelling/swollen_eyes + anorexia}→ビタミンA欠乏症×1.45 パトグノモニック・ペア
+  （両側眼瞼腫脹はカメでhypovitaminosis A until proven otherwise — Mader 3rd ed）→ rank 5→2
+- **素のて形「毛が抜けて」**が全種で抽出不能だった（〜抜ける/〜抜けてきた のみ収載）→ エイリアス追加
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound12`（9件）
+
+### UX: 自由入力チャットの低情報警告→問診モードのワンタップ動線
+- 自由チャットの低情報警告（症状1-2個のみ）は**テキストのみ**で、チェッカーの低信頼度バナー（問診ピボット付き）と
+  非対称だった → 警告ボックス内に「🩺 問診モードで症状を段階的に確認する」ボタンを追加。
+  委譲ハンドラ（`.chat-guided-pivot`）で chat ビュー切替+guided モード起動+モード切替へスクロール
+  （ランディングチャットからも動作）。GA4 `guided_from_chat_low_info` イベント
+- 回帰テスト: `test_app_js_free_chat_low_info_warning_pivots_to_guided_mode`
+
+### UX: クイック入力に新規対応主訴を追加（1タップ導線）
+- 犬「耳が腫れてぷよぷよしている」（→耳血腫 rank 1）、馬「飲み込めず鼻から餌が出てくる」
+  （→チョーク即 rank 1）。ミラーテスト JA_QUICK 同期（全フレーズ抽出保証をCIで維持）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 582/cat 561/ferret 205/degu 159薬品、pendingStats drugs 644→**647**・
+  symptoms 67→**70**
+- ServiceWorker: `CACHE_NAME` v128 → **v129**
+
+### テスト・CI
+- フルテストスイート: **4,016件合格**（34 skip、+14新規回帰テスト）、カバレッジ82.16%
+- ruff check/format: repo全体 clean
+- 配信DB: クリーンビルドで 6,892疾患・**647薬品**、treatment/prevention/prognosis 100%

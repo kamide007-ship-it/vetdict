@@ -539,6 +539,11 @@ SPECIES_PREVALENCE = {
         "Sand Colic": "uncommon",  # Region/management dependent
         "Enterolithiasis": "uncommon",
         "Colitis": "uncommon",
+        # Esophageal disorders other than choke are genuinely infrequent in
+        # horses (Reed & Bayly 4th ed) — untiered they outranked choke itself
+        # on trivially perfect coverage for the ptyalism/dysphagia complaint.
+        "Esophageal Stricture": "uncommon",
+        "Megaesophagus": "uncommon",
         "Pleuropneumonia": "uncommon",
         "Sinusitis": "uncommon",
         "Guttural Pouch Empyema": "uncommon",
@@ -561,6 +566,8 @@ SPECIES_PREVALENCE = {
         "Habronemiasis (Summer Sores)": "uncommon",
         # rare
         "Canker": "rare",
+        "Esophageal Diverticulum": "rare",  # Reed & Bayly 4th ed
+        "Equine Sialolithiasis": "rare",
         "Botulism": "rare",
         "Mange": "rare",
         "Getah Virus": "rare",  # Asia-specific; JP override common
@@ -692,6 +699,7 @@ SPECIES_PREVALENCE = {
         "Copper Poisoning": "rare",
         "PTFE / Teflon Toxicosis": "rare",
         "Teflon/PTFE Toxicosis": "rare",
+        "Essential Oil Toxicity": "rare",  # Exposure-dependent; untiered it outranked hypocalcemia for post-laying tremors
         "Blood Parasites (Haemoproteus)": "uncommon",
         # very_common
         "Aspergillosis": "very_common",
@@ -1106,6 +1114,9 @@ SPECIES_PREVALENCE = {
         "Rabies": "rare",
         "Chordoma": "rare",
         "Botulism": "rare",
+        # Rare opportunistic infection (immunosuppressed animals) — untiered
+        # it outranked cardiomyopathy/CHF for the cough+dyspnea+ascites triad.
+        "Pneumocystis Pneumonia": "rare",
     },
     # ==================================================================
     # HEDGEHOG — 22+ entries (expanded from ~10)
@@ -1431,6 +1442,7 @@ SPECIES_PREVALENCE = {
         "Copper Poisoning": "rare",
         "Teflon (PTFE) Toxicosis": "rare",
         "Teflon Toxicosis (Parakeet)": "rare",
+        "Essential Oil Toxicity": "rare",
         "Haemoproteus Infection": "uncommon",
         "Psittacosis (Chlamydiosis)": "very_common",
         "Aspergillosis": "very_common",
@@ -1476,6 +1488,7 @@ SPECIES_PREVALENCE = {
         "Copper Poisoning": "rare",
         "PTFE Toxicosis (Teflon Poisoning)": "rare",
         "Teflon/PTFE Toxicosis": "rare",
+        "Essential Oil Toxicity": "rare",
         "Haemoproteus Infection": "uncommon",
         "Psittacosis (Chlamydiosis)": "very_common",
         "Aspergillosis": "very_common",
