@@ -2955,10 +2955,7 @@ class TestChatClinicalAccuracyAuditRound12:
         from api.chat.symptom_extractor import _extract_species_symptoms
 
         ids = _extract_species_symptoms("お腹が膨れて呼吸が苦しそう 咳をする", "ferret")
-        names = [
-            r.get("name_ja") or r.get("name")
-            for r in _match_species_symptoms_to_diseases(ids, "ferret")[:3]
-        ]
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "ferret")[:3]]
         assert any("心筋症" in n or "心不全" in n for n in names), names
         assert not any("ニューモシスチス" in n for n in names), (
             f"rare opportunistic pneumonia must not outrank CHF for the classic triad: {names}"
@@ -2969,10 +2966,7 @@ class TestChatClinicalAccuracyAuditRound12:
         from api.chat.symptom_extractor import _extract_species_symptoms
 
         ids = _extract_species_symptoms("産卵のあとぐったりして震えている", "bird")
-        names = [
-            r.get("name_ja") or r.get("name")
-            for r in _match_species_symptoms_to_diseases(ids, "bird")[:2]
-        ]
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "bird")[:2]]
         assert any("カルシウム欠乏" in n for n in names), names
         assert not any("エッセンシャルオイル" in n for n in names), (
             f"exposure-dependent toxicosis must not lead post-laying tremors: {names}"
@@ -2984,10 +2978,7 @@ class TestChatClinicalAccuracyAuditRound12:
 
         ids = _extract_species_symptoms("目が腫れて開かない 食欲がない", "tortoise")
         assert "eye_swelling" in ids and "anorexia" in ids, ids
-        names = [
-            r.get("name_ja") or r.get("name")
-            for r in _match_species_symptoms_to_diseases(ids, "tortoise")[:2]
-        ]
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "tortoise")[:2]]
         assert any("ビタミンA欠乏" in n for n in names), (
             f"bilateral palpebral swelling in a chelonian is hypovitaminosis A "
             f"until proven otherwise (Mader 3rd ed): {names}"

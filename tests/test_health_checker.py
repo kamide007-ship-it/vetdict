@@ -69,9 +69,7 @@ class TestDiseaseDatabase:
     """Verify disease database structure and consistency."""
 
     def test_disease_count(self):
-        assert (
-            len(DISEASES) == 77
-        )  # +aural_hematoma, +kcs (2026-08 round-12); before +intestinal_parasites, +eclampsia
+        assert len(DISEASES) == 77  # +aural_hematoma, +kcs (2026-08 round-12); before +intestinal_parasites, +eclampsia
 
     def test_all_diseases_have_required_fields(self):
         for d in DISEASES:
