@@ -359,7 +359,13 @@ SPECIES_PREVALENCE = {
         "Dystocia (Difficult Birth)": "common",
         "Cryptorchidism": "common",
         "Mammary Hyperplasia (Fibroadenomatous Change)": "common",
-        "Feline Mammary Carcinoma (Triple Negative)": "common",
+        # Triple-negative is a molecular subtype of feline mammary carcinoma,
+        # not an independently common diagnosis — the parent "Mammary Tumor"
+        # (3rd most common feline tumor) carries the common tier.
+        "Feline Mammary Carcinoma (Triple Negative)": "uncommon",
+        # Overt pseudopregnancy is rare in queens (unlike bitches) because
+        # ovulation is induced — Little, The Cat: Clinical Medicine & Management.
+        "Pseudopregnancy (Feline)": "rare",
         "Mast Cell Tumor (Cutaneous)": "common",
         "Feline Congestive Heart Failure": "common",
         "Feline Arterial Hypertension (Secondary)": "common",

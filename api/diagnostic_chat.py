@@ -767,6 +767,13 @@ def extract_symptoms_from_text(text: str) -> list:
         # "指の間が赤い" (interdigital erythema — pododermatitis/atopy) resolves
         # to skin_redness; the legacy dog vocabulary carries erythema as rashes.
         "skin_redness": ["skin_rashes"],
+        # "口を前足で掻く" resolves to pawing_at_mouth (ferret hypoglycemia /
+        # oral-pain vocabularies); dogs pawing at the mouth present with
+        # hypersalivation as the closest legacy signal.
+        "pawing_at_mouth": ["excessive_drooling"],
+        # "泡を吹く" resolves to drooling (species vocabularies); the legacy
+        # dog vocabulary carries ptyalism as excessive_drooling.
+        "drooling": ["excessive_drooling"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

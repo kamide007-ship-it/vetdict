@@ -3471,3 +3471,67 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 - フルテストスイート: **4,016件合格**（34 skip、+14新規回帰テスト）、カバレッジ82.16%
 - ruff check/format: repo全体 clean
 - 配信DB: クリーンビルドで 6,892疾患・**647薬品**、treatment/prevention/prognosis 100%
+
+## 2026-08セッション（第24弾: 括弧内商品名インデックス + 薬品→疾患逆引きのオーバーレイ対応と起動時ウォーム + チャット精度第13弾 + 犬レガシー乳腺/精巣腫瘍新設）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **3,970件合格**（80 skip — 初回はDB未構築のためのskip含む）
+- 薬用量: safe薬品の dosage 欠落 **0**（647薬品、全species_info検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 疾患: 配信SQLiteクリーンビルド 6,892疾患、treatment/prevention/prognosis **100%**
+
+### 薬品マッチャー: 括弧内商品名の tier-4 インデックス（sweep #15、約200+参照がチップ化）
+- **バグ発見**: 商品名エイリアス（drug_brand_names.py）のマージは「name/name_ja に既出の別名をスキップ」
+  するが、キーワード索引は括弧内を剥がすため、**括弧の中だけに存在する商品名は永遠に解決不能**だった
+  （プロジンク 19refs・コバラミン 22・アポキル/サイトポイント 各9・セレニア・バナミン・ガスコン等）
+- `_build_drug_keyword_index` に **tier-4（純カタカナの括弧内パート）** を追加。Latin括弧パートは
+  汎用英単語（oral/renal/saline等）が支配的なため対象外。`_PAREN_PART_STOPLIST` で一般語を遮断:
+  エキゾチック・インプラント・プログラム・メトロノミック・**バリウム**（=造影のバリウム。Valium音写が
+  diazepam の括弧内にあり、104件の造影文脈に誤チップするところをレビューで検出・遮断）
+- `_KATAKANA_VARIANT_ALIASES` 追加: tiludronate（ティルドロネート/チルドロネート — 正準はチルドロン酸、
+  馬ナビキュラー9refs）、insulin_glargine（グラルギン）、insulin_detemir（デテミル）、
+  insulin_pzi（プロジンク — 傘エントリ insulin_vetsulin の括弧リストとの tier 衝突を専用エントリ優先で解決）
+- `BRAND_NAME_ALIASES` 追加: プロジンク/ベトスリン/カニンスリン/ランタス/レベミル（インスリン製剤5ブランド）
+- 回帰テスト: `test_sweep15_paren_brand_names_resolve_in_text_matcher`（12解決+5精度ガード）
+
+### 薬品→疾患逆引き（この薬品を使う疾患）のJSONオーバーレイ対応 + 起動時ウォーム
+- **バグ**: `_build_drug_to_diseases_index` はPythonモジュールの治療文のみ走査していたため、
+  **JSONオーバーレイにしか治療文が無い薬品の逆引きカードが空**だった（例: tiludronate は
+  順方向チップは出るのに「この薬品を使う疾患」が0件）→ `diseases_all_species.json` も走査
+  （(species,name) dedup で二重ヒットは収束）。tiludronate 0→5疾患、insulin_pzi 20→30
+- **レイテンシ改善**: 走査は corpus 連結+キーワード毎の C-speed `str.find` スイープに書き換え
+  （旧: 26k texts × 1.9k keywords の Python ループ）。さらに**インポート時デーモンスレッドで
+  事前構築**（従来は初回リクエストが数十秒ブロックし本番 worker timeout 圏内だった。
+  ロックレス設計 — fork でスレッドが死んでも同期ビルドにフォールバックしデッドロックしない）
+
+### 診断チャット精度 第13弾（22症例フレッシュスイープ 5 MISS → 全症例合格）
+- **犬レガシーDBに乳腺腫瘍・精巣腫瘍を新設**（77→79疾患、70→71症状）:
+  - 乳腺腫瘍: 未避妊雌犬で最多の腫瘍（Sorenmo, Withrow & MacEwen 6th）なのにエントリも乳腺語彙も無く
+    「乳腺にしこり」が汎用 lumps のみ抽出だった。mammary_swelling 症状+very_common tier → rank 1
+  - 精巣腫瘍（セルトリ細胞腫・女性化症候群）: 「オスなのに乳首が腫れて毛が抜ける」が脱毛症X上位だった。
+    女性化ペア {mammary_swelling, hair_loss}→×1.5 クラスタ → rank 1。
+    **症状セットは女性化ペアに限定**（pale_gums/lethargy を持たせると貧血主訴を乗っ取ることを検証で発見・回避）
+- **黄疸の複合表現**: 「白目と歯茎が黄色い」が抽出ゼロ（「白目が黄色い」完全形のみ収載）→
+  歯茎が黄色い/目が黄色い/皮膚が黄色い を追加 → 肝臓病/IMHA/溶血性貧血が top-3
+- **「呼吸が速い」（速表記）が全種で抽出不能だった**（「呼吸が早い」のみ収載）→ 速い/速く/息が速い を追加
+- **フェレット低血糖の口掻き**: 「口を前足で掻く」→ 掻く→itching で耳ダニに誤誘導 →
+  pawing_at_mouth 直接解決（最長一致で勝つ、て形も追加）+ ID_SYNONYMS [pawing_at_face, drooling,
+  difficulty_eating] + 泡を吹く→drooling → インスリノーマ top-3
+- **チンチラ熱中症**: 「耳が赤くて」連用形欠落 + rapid_breathing↔excessive_panting/dyspnea の
+  マッチング側ブリッジ欠落 → _SYN 拡張 + パトグノモニック・ペア {red_ears, rapid_breathing}×1.45 /
+  {red_ears, lethargy}×1.35（充血耳=チンチラ高体温の cardinal sign、Quesenberry & Carpenter 4th）→ rank 1
+  （耳掻き主訴は外耳炎/白癬 first を回帰テストで固定）
+- **猫乳腺しこり**: 「乳腺にしこり」が同長タイの「しこりがある」に消費され lumps のみ抽出 →
+  7文字形エイリアスで最長一致を確実化 + ID_SYNONYMS mammary_swelling→[mammary_masses,...] →
+  乳腺グループが top-3 独占。有病率是正: Triple Negative乳癌=分子亜型でcommonは過大→uncommon、
+  猫顕性偽妊娠=rare（誘発排卵のため犬と異なり稀 — Little, The Cat）
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound13`（8件）
+
+### UX: クイック入力に新規対応主訴を追加（1タップ導線）
+- 犬「乳腺にしこりがある」・チンチラ「耳が赤くて呼吸が速い」（熱中症=分単位の救急）・
+  フェレット「口を前足で掻いてよだれ」（低血糖）— 全て抽出保証済み、ミラーテスト JA_QUICK 同期
+- 新設疾患は疾患DBの dog モジュール「Mammary Tumor/乳腺腫瘍」「Testicular Tumor/精巣腫瘍」に
+  base-name 完全一致するため、チャット候補カードの「疾患DBで詳細を開く」ピボットがそのまま機能
+
+### 表示数値の同期・キャッシュ
+- pendingStats symptoms 70→**71**、ServiceWorker: `CACHE_NAME` v129 → **v130**

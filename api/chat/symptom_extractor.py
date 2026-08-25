@@ -352,6 +352,12 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "worms_in_stool": ["visible_worms", "visible_parasites", "diarrhea"],
     "overgrown_beak": ["beak_deformity", "beak_overgrowth"],
     "retained_spectacle": ["dysecdysis", "cloudy_eyes", "eye_opacity"],
+    # 2026-08 Round 13: フェレット低血糖の口掻き・チンチラ熱中症の耳充血・
+    # 乳腺腫大の種別ID表記ゆれ（cat=mammary_masses）
+    "pawing_at_mouth": ["pawing_at_face", "drooling", "difficulty_eating"],
+    "red_ears": ["ear_redness"],
+    "ear_redness": ["red_ears"],
+    "mammary_swelling": ["mammary_masses", "mammary_enlargement", "lumps"],
     # Limbs / extremities
     "cold_limbs": ["cold_extremities", "poor_circulation"],
     "cold_extremities": ["cold_limbs", "poor_circulation"],

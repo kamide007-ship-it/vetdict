@@ -1961,6 +1961,39 @@ SYMPTOM_ALIASES = {
     "目に皮が残って": "retained_spectacle",
     "目の上に皮が残って": "retained_spectacle",
     "目の皮が脱皮できて": "retained_spectacle",
+    # --- 2026-08 Round 13 ---
+    # 黄疸: 「白目が黄色い」だけでは「白目と歯茎が黄色い」等の複合表現を取りこぼす
+    "歯茎が黄色い": "jaundice",
+    "目が黄色い": "jaundice",
+    "皮膚が黄色い": "jaundice",
+    # 頻呼吸: 「呼吸が早い」（早）のみ収載で「速い」表記が全滅していた
+    "呼吸が速い": "rapid_breathing",
+    "呼吸が速く": "rapid_breathing",
+    "息が速い": "rapid_breathing",
+    # フェレット低血糖の古典的所見（口を前足で掻く）— 最長一致で「掻く」→itching に勝つ
+    "口を前足で掻く": "pawing_at_mouth",
+    "口を前足でかく": "pawing_at_mouth",
+    "口を前足で掻いて": "pawing_at_mouth",
+    "口を掻く": "pawing_at_mouth",
+    "口を掻いて": "pawing_at_mouth",
+    "口を気にして掻く": "pawing_at_mouth",
+    # 流涎泡沫（発作中の「泡吹いてる」→seizures とは別に、意識下の泡沫流涎）
+    "泡を吹く": "drooling",
+    "泡を吹いて": "drooling",
+    # チンチラ熱中症の耳充血（「耳が赤い」のみでは連用形を取りこぼす）
+    "耳が赤く": "red_ears",
+    # 雄犬の女性化（セルトリ細胞腫）・乳腺腫瘍: 乳首/乳頭表現が未収載だった
+    "乳首が腫れ": "mammary_swelling",
+    "乳首が大きく": "mammary_swelling",
+    "乳頭が腫れ": "mammary_swelling",
+    "乳腺が腫れ": "mammary_swelling",
+    "乳房にしこり": "mammary_swelling",
+    "乳腺にしこり": "mammary_swelling",
+    # 7文字形: 同長タイの「しこりがある」より長くして最長一致で確実に勝つ
+    "乳房にしこりが": "mammary_swelling",
+    "乳腺にしこりが": "mammary_swelling",
+    "乳房のしこり": "mammary_swelling",
+    "乳腺のしこり": "mammary_swelling",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---
