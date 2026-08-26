@@ -3472,7 +3472,24 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 - ruff check/format: repo全体 clean
 - 配信DB: クリーンビルドで 6,892疾患・**647薬品**、treatment/prevention/prognosis 100%
 
-## 2026-08セッション（第24弾: 括弧内商品名インデックス + 薬品→疾患逆引きのオーバーレイ対応と起動時ウォーム + チャット精度第13弾 + 犬レガシー乳腺/精巣腫瘍新設）
+## 2026-08セッション（第24弾: スマホの鑑別診断文字サイズ修正 — モバイル・フォントインフレーションの無効化）
+
+### 背景（開発者からの直接フィードバック）
+「スマホにて鑑別診断時の文字が大きい」— カードのフォント指定は小さい（見出し.88rem・本文.8rem）のに、
+スマホでは鑑別診断結果の長文（治療プロトコル・病態生理等）だけが拡大表示されていた。
+
+### 根本原因: text-size-adjust 未設定によるモバイルブラウザのフォント自動拡大
+- スタイルシートに `text-size-adjust` が一切無く、Android Chrome の Font Boosting / iOS Safari の
+  自動テキスト拡大が「幅制約のない長文ブロック」を勝手に拡大していた
+- 鑑別診断カードの `.detail-section-body`（white-space:pre-wrap の長い日本語段落）がまさに対象で、
+  ヘッダーは小さいまま長文だけ大きくなる = 報告症状と一致
+- 修正: `html` ルールに `-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%`
+  を追加（normalize.css 標準の修正）。**拡大ヒューリスティックのみ無効化** — ユーザーのピンチズームと
+  ブラウザのアクセシビリティ文字サイズ設定は影響を受けない。サイト全域（チャット結果・疾患DB詳細含む）に適用
+- 回帰テスト: `test_main_css_disables_mobile_font_inflation`（html ルール内の text-size-adjust を検証）
+- ServiceWorker: `CACHE_NAME` v129 → **v130**
+
+## 2026-08セッション（第25弾: 括弧内商品名インデックス + 薬品→疾患逆引きのオーバーレイ対応と起動時ウォーム + チャット精度第13弾 + 犬レガシー乳腺/精巣腫瘍新設）
 
 ### エラーチェック（結果: ベースライン健全）
 - repo全体 ruff check clean、フルテスト **3,970件合格**（80 skip — 初回はDB未構築のためのskip含む）
@@ -3534,4 +3551,4 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
   base-name 完全一致するため、チャット候補カードの「疾患DBで詳細を開く」ピボットがそのまま機能
 
 ### 表示数値の同期・キャッシュ
-- pendingStats symptoms 70→**71**、ServiceWorker: `CACHE_NAME` v129 → **v130**
+- pendingStats symptoms 70→**71**、ServiceWorker: `CACHE_NAME` v130 → **v131**（第24弾のv130と衝突したため改番）
