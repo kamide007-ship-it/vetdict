@@ -27,6 +27,8 @@ DISEASES: List[Dict[str, Any]] = [
             "hind_leg_weakness",
             "weight_loss",
             "pawing_at_mouth",
+            # 低血糖発作時の苦悶性の悲鳴（Quesenberry & Carpenter 4th ed）
+            "vocalization",
         },
         "description": "Insulinoma in ferrets is a pancreatic beta-cell neoplasm causing excessive insulin secretion and hypoglycemia. Single most common endocrine neoplasm in ferrets; prevalence 4-12% overall (documented up to 20% in ferret shelters/breeding colonies), rising to 40-50% in ferrets >4 years old. Most ferrets develop insulinoma by age 5-7 years if they survive to that age. Characterized by recurrent symptomatic hypoglycemia (<60 mg/dL) with neurological signs (lethargy, seizures, collapse, ptyalism). Multi-nodular disease typical (70-80% have multiple nodules, mean 2-4 nodules per animal). Early neutering/spaying (performed at 6-8 weeks in US ferret breeding) and high-carbohydrate diet implicated in pathogenesis. Disease progressive; initial medical management effective but eventually surgical intervention often required. Hypoglycemic crisis can occur with minimal warning, making this life-threatening emergency requiring immediate intervention.",
         "description_ja": "フェレットのインスリノーマは膵β細胞新生物で、インスリン過剰分泌と低血糖を引き起こす。フェレットで最も一般的な内分泌新生物；有病率4-12% 全体（シェルター/繁殖群で最大20%記録）、>4年で40-50%に上昇。ほとんどのフェレットはその年齢に生存すればage 5-7年までに発症。反復する症候性低血糖（<60 mg/dL）で神経学的徴候（無気力、痙攣、虚脱、涎分泌）が特徴。多結節性疾患は典型的（70-80%が複数結節、平均2-4結節/動物）。早期避妊/去勢（米国繁殖で6-8週で実施）と高炭水化物食が病因に関与。疾患は進行性；初期医学的管理は有効だが最終的に外科的介入がしばしば必要。低血糖危機は最小限警告で発生し得、直ちに介入必須の生命脅迫的緊急。",

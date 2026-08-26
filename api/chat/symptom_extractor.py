@@ -493,10 +493,54 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # カサカサ (dry flaky skin): the cat vocabulary expresses it as scaling —
     # without this bridge the ear-tip mange complaint lost the sign entirely.
     "dry_skin": ["scaling", "flaky_skin", "skin_scaling", "skin_lesions"],
+    # --- 2026-08 round-13 sweep bridges ---
+    # あごが濡れている (slobbers/wet chin — the rabbit/rodent dental hallmark):
+    # guinea pig and chinchilla carry wet_chin natively; the rabbit vocabulary
+    # expresses ptyalism as drooling/salivation/dewlap_wetness.
+    "wet_chin": ["drooling", "salivation", "dewlap_wetness", "facial_wetness"],
+    # キーキー鳴く (screaming/vocal change): the cat vocabulary carries
+    # vocalization_changes natively; ferret and most small mammals use bare
+    # vocalization, birds use screaming/pain_vocalization.
+    "vocalization_changes": [
+        "vocalization",
+        "screaming",
+        "pain_vocalization",
+        "distress_vocalizations",
+    ],
+    # 尿が茶色い (pigmenturia — haemoglobin/bilirubin): cat/rabbit/hedgehog
+    # carry dark_urine natively; others express discoloured urine as
+    # red_urine / blood_in_urine.
+    "dark_urine": ["red_urine", "blood_in_urine"],
+    # 止まり木を握れない (grip loss): bird carries inability_to_perch natively;
+    # psittacine vocabularies vary — bridge to the perching/limb-weakness IDs.
+    "inability_to_perch": ["difficulty_perching", "falling_off_perch", "leg_weakness"],
+    # 口をくちゃくちゃ (jaw chattering — feline oral pain/FORL sign): only the
+    # cat vocabulary carries it natively; bridge to eating-difficulty IDs.
+    "jaw_chattering": ["difficulty_eating", "drooling", "mouth_pain"],
 }
 
 # Backwards-compat alias (some older imports use the private name).
 _ID_SYNONYMS = ID_SYNONYMS
+
+
+# 否定表現ガード: 「咳はない」「嘔吐はしていない」「下痢なし」のように、症状語の直後に
+# 否定が続く場合はその症状を抽出しない（従来は「咳はない」でも coughing が抽出され、
+# 除外情報のつもりの入力が逆に鑑別を汚染していた）。
+# 保守的設計: 症状語の直後（は/も + まだ/特に を許容）に否定語が続く場合のみ発火。
+# 「食欲がない」「飲み込めない」のような否定形を内包するエイリアス自体は、マッチ範囲の
+# 後ろを検査するため影響を受けない。
+import re as _neg_re
+
+_NEGATION_AFTER_RE = _neg_re.compile(
+    r"^(?:は|も)?(?:まだ|特に|とくに)?"
+    r"(?:ない|無い|なし|ありません|出ていない|出てない|でていない"
+    r"|していない|してない|しません|見られない|みられない)"
+)
+
+
+def is_negated_mention(text: str, end: int) -> bool:
+    """Return True if the symptom mention ending at ``end`` is directly negated."""
+    return bool(_NEGATION_AFTER_RE.match(text[end : end + 12]))
 
 
 def resolve_symptom_id(sid: str, symptom_names: dict) -> str | None:
@@ -541,6 +585,11 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
             alias_range = set(range(pos, pos + len(alias)))
             if alias_range & _consumed:
                 continue
+            if is_negated_mention(text_lower, pos + len(alias)):
+                # 「嘔吐はしていない」等 — 否定された言及は抽出せず、範囲だけ消費して
+                # 短いサブストリングの再マッチも防ぐ
+                _consumed |= alias_range
+                continue
             symptom_id = SYMPTOM_ALIASES[alias]
             resolved = _resolve_id(symptom_id)
             if resolved:
@@ -551,7 +600,11 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
     for sym_id, names in symptom_names.items():
         ja = names.get("ja", "").lower()
         en = names.get("en", "").lower()
-        if (ja and ja in text_lower) or (en and en in text_lower):
+        ja_pos = text_lower.find(ja) if ja else -1
+        en_pos = text_lower.find(en) if en else -1
+        if (ja_pos >= 0 and not is_negated_mention(text_lower, ja_pos + len(ja))) or (
+            en_pos >= 0 and not is_negated_mention(text_lower, en_pos + len(en))
+        ):
             matched.add(sym_id)
 
     # Phase 3: Fragment splitting for compound Japanese phrases

@@ -343,6 +343,14 @@ SYMPTOMS = [
         "category": "digestive",
     },
     {
+        # 吐出（受動的な未消化物の吐き戻し）は嘔吐と臨床的に別徴候 —
+        # 巨大食道症の定義的サイン（Ettinger 8th ed）
+        "id": "regurgitation",
+        "name_ja": "吐出（未消化物の吐き戻し）",
+        "name_en": "Regurgitation (Undigested Food)",
+        "category": "digestive",
+    },
+    {
         "id": "diarrhea",
         "name_ja": "下痢",
         "name_en": "Diarrhea",
@@ -506,6 +514,14 @@ SYMPTOMS = [
         "id": "blood_in_urine",
         "name_ja": "血尿",
         "name_en": "Blood in Urine / Hematuria",
+        "category": "urinary",
+    },
+    {
+        # 褐色尿（ヘモグロビン尿/ビリルビン尿）— 血管内溶血（IMHA・バベシア）の
+        # hallmark で、血尿（膀胱由来）とは鑑別の方向が異なる
+        "id": "dark_urine",
+        "name_ja": "褐色尿（コーラ色の尿）",
+        "name_en": "Dark / Cola-Colored Urine",
         "category": "urinary",
     },
     {
@@ -2553,6 +2569,7 @@ DISEASES = [
         "description_ja": "食道の運動機能が低下し食道が拡張する疾患です。食物の逆流（吐出）が特徴で、誤嚥性肺炎のリスクがあります。",
         "description_en": "A condition where the esophagus loses motility and becomes dilated. Characterized by regurgitation and carries risk of aspiration pneumonia.",
         "symptoms": [
+            "regurgitation",
             "vomiting",
             "loss_of_appetite",
             "weight_loss",
@@ -2609,6 +2626,7 @@ DISEASES = [
         "symptoms": [
             "pale_gums",
             "jaundice",
+            "dark_urine",
             "lethargy",
             "loss_of_appetite",
             "rapid_breathing",
@@ -2988,7 +3006,14 @@ DISEASES = [
         "name_en": "Hemolytic Anemia",
         "description_ja": "赤血球が正常より速く破壊される疾患で、貧血、黄疸、虚脱を引き起こします。",
         "description_en": "Red blood cells are destroyed faster than they can be produced, causing anemia, jaundice, and collapse.",
-        "symptoms": ["pale_gums", "lethargy", "jaundice", "loss_of_appetite", "rapid_breathing"],
+        "symptoms": [
+            "pale_gums",
+            "lethargy",
+            "jaundice",
+            "dark_urine",
+            "loss_of_appetite",
+            "rapid_breathing",
+        ],
         "severity": "high",
         "recommended_tests": ["cbc", "coombs_test", "blood_chemistry", "urinalysis"],
         "breed_risks": {

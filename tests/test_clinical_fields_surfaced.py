@@ -409,6 +409,23 @@ def test_app_js_free_chat_low_info_warning_pivots_to_guided_mode():
     assert "guided_from_chat_low_info" in handler
 
 
+def test_app_js_emergency_key_drugs_are_linkified():
+    """Emergency-tab key drugs (2026-08 round 13): the key-drug list rendered
+    plain text — no path from the highest-urgency view to the full formulary
+    entry (dosing detail, contraindications). Rows the server resolved
+    (link_name) must render as .drug-nav-link anchors routed by the existing
+    emergencyList delegation; unresolved rows stay plain so no tap dead-ends."""
+    idx = APP_JS.index("function renderEmergencyProtocol(")
+    block = APP_JS[idx : idx + 3000]
+    assert "emergency-drug-link" in block and "drug-nav-link" in block
+    assert "d.link_name" in block
+    # unresolved rows fall back to the plain <strong> label
+    assert ":`<strong>" in block.replace(" ", "")
+    with open("static/css/main.css", encoding="utf-8") as f:
+        css = f.read()
+    assert "a.emergency-drug-link" in css
+
+
 def test_main_css_disables_mobile_font_inflation():
     """Mobile-reported bug (2026-08): differential-diagnosis text rendered far
     larger than authored on phones. The card styles are small (0.8rem bodies),

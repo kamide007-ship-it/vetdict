@@ -860,6 +860,9 @@ a.interaction-drug.drug-nav-link:hover,a.interaction-drug.drug-nav-link:focus-vi
    formulary are one-tap links to the exact dosage entry */
 a.anesthesia-contra-drug{cursor:pointer;color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
 a.anesthesia-contra-drug:hover,a.anesthesia-contra-drug:focus-visible{color:#7f1d1d;text-decoration-style:solid}
+/* 救急プロトコルのkey drugリンク（辞書解決済みの行のみ） */
+a.emergency-drug-link{cursor:pointer;color:var(--navy);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px;min-height:32px;display:inline-flex;align-items:center}
+a.emergency-drug-link:hover,a.emergency-drug-link:focus-visible{color:#dc2626;text-decoration-style:solid}
 .drug-interaction-tag .interaction-effect{color:var(--gray-700)}
 .drug-interaction-tag .severity-badge{display:inline-block;font-size:.64rem;padding:1px 6px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;font-weight:700;background:rgba(0,0,0,.06);color:#444}
 .drug-interaction-tag.severity-major .severity-badge{background:#dc2626;color:#fff}

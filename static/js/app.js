@@ -1546,16 +1546,16 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:601,drugs:582,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:561,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:601,drugs:586,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:565,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:361,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:272,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:71,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:139,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:225,drugs:93,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:205,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:207,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:223,drugs:68,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:75,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:76,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
     {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:159,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
     {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:483,drugs:239,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
     {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:410,drugs:239,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
@@ -1571,8 +1571,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6449,
     species:21,
-    drugs:647,
-    symptoms:71,
+    drugs:651,
+    symptoms:73,
     protocols:188
   };
   renderSpeciesGrid();
@@ -1947,14 +1947,14 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
-    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","乳腺にしこりがある"],
-    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった"],
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある"],
+    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる"],
-    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水"],
+    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い"],
     hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない"],
     guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ"],
-    ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない","陰部が腫れている","口を前足で掻いてよだれ"],
+    ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない","陰部が腫れている","足を伸ばして硬直する","口を前足で掻いてよだれ"],
     hedgehog:["針が抜ける","フケ","ふらつく","食べない","目が出ている","体重が減った"],
     bird:["羽を膨らませている","食べない","下痢","鼻水","羽が抜ける","くしゃみ","自分で羽を抜く"],
     parakeet:["食べない","膨らんでいる","呼吸のたびに音がする","吐き戻しが増えた","そのうが膨らんでいる","お尻でいきんでいる"],
@@ -6313,7 +6313,17 @@ function renderEmergencyProtocol(p){
     const phase=s.phase||"";
     return `<li style="margin:8px 0;padding:8px 12px;background:#fafafa;border-left:3px solid #0891b2;border-radius:4px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:start;margin-bottom:4px"><strong style="font-size:.78rem;color:#0c4a6e">${s.order}. ${escapeHtml(phase)}</strong>${s.time_target?`<span style="font-size:.7rem;color:#64748b;white-space:nowrap">⏱ ${escapeHtml(s.time_target)}</span>`:""}</div><div style="font-size:.84rem;color:#1e293b;line-height:1.5">${escapeHtml(text)}</div></li>`;
   }).join("");
-  const drugsHtml=(p.key_drugs||[]).map(d=>{const nm=currentLang==="ja"?(d.name_ja||d.name):d.name;return `<li style="margin:3px 0;font-size:.82rem"><strong>${escapeHtml(nm)}</strong> — ${escapeHtml(d.dose)}</li>`;}).join("");
+  /* Key drugs: rows the server resolved to a formulary entry (link_name) become
+     one-tap links to the full drug entry — the emergency view is where reaching
+     complete dosing/contraindication detail matters most. Unresolved rows
+     (blood products, tPA) stay plain text so no tap ever dead-ends. */
+  const drugsHtml=(p.key_drugs||[]).map(d=>{
+    const nm=currentLang==="ja"?(d.name_ja||d.name):d.name;
+    const label=d.link_name
+      ?`<a href="#drugs" class="emergency-drug-link drug-nav-link" data-drug="${escapeHtml(d.link_name)}" title="${currentLang==="ja"?"薬品詳細を見る":"View drug details"}"><strong>${escapeHtml(nm)}</strong></a>`
+      :`<strong>${escapeHtml(nm)}</strong>`;
+    return `<li style="margin:3px 0;font-size:.82rem">${label} — ${escapeHtml(d.dose)}</li>`;
+  }).join("");
   const monitorHtml=(p.monitoring||[]).map(m=>`<span style="display:inline-block;padding:2px 8px;background:#dbeafe;color:#1e40af;border-radius:10px;font-size:.72rem;margin:2px 4px 2px 0">${escapeHtml(m)}</span>`).join("");
   return `<div class="disease-db-item" role="button" tabindex="0" aria-expanded="false" style="border-left:5px solid #dc2626">
     <div style="display:flex;justify-content:space-between;gap:8px;align-items:start;flex-wrap:wrap">

@@ -1123,6 +1123,11 @@ SPECIES_PREVALENCE = {
         # Rare opportunistic infection (immunosuppressed animals) — untiered
         # it outranked cardiomyopathy/CHF for the cough+dyspnea+ascites triad.
         "Pneumocystis Pneumonia": "rare",
+        # Primary/idiopathic epilepsy is rare in ferrets — hypoglycemia from
+        # insulinoma is the most common cause of ferret seizures (Quesenberry &
+        # Carpenter 4th ed). Untiered, it outranked insulinoma for the
+        # screaming+tonic-episode complaint.
+        "Seizure Disorder (Epilepsy)": "rare",
     },
     # ==================================================================
     # HEDGEHOG — 22+ entries (expanded from ~10)
