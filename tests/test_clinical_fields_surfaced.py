@@ -407,3 +407,17 @@ def test_app_js_free_chat_low_info_warning_pivots_to_guided_mode():
     assert 'switchView("chat")' in handler
     assert 'switchChatMode("guided")' in handler
     assert "guided_from_chat_low_info" in handler
+
+
+def test_main_css_disables_mobile_font_inflation():
+    """Mobile-reported bug (2026-08): differential-diagnosis text rendered far
+    larger than authored on phones. The card styles are small (0.8rem bodies),
+    but the stylesheet carried no text-size-adjust, so Android Chrome's font
+    boosting / iOS Safari's auto text-sizing inflated the long unconstrained
+    treatment/pathophysiology paragraphs in the result cards. The html rule
+    must pin text-size-adjust to 100% (inflation off; user zoom and browser
+    accessibility font settings are unaffected)."""
+    css = (PROJECT_ROOT / "static" / "css" / "main.css").read_text(encoding="utf-8")
+    html_rule = css[css.index("html{") : css.index("}", css.index("html{"))]
+    assert "-webkit-text-size-adjust:100%" in html_rule
+    assert "text-size-adjust:100%" in html_rule
