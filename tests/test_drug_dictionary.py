@@ -2158,3 +2158,44 @@ def test_no_tyrosine_typo_for_tylosin_in_disease_content():
 
     ids = [h["id"] for h in find_drugs_in_text("タイロシン（15-25 mg/kg PO q12h×6-8週）")]
     assert "tylosin" in ids
+
+
+def test_sweep15_paren_brand_names_resolve_in_text_matcher():
+    """2026-08 sweep #15: treatment texts cite Japanese brand names that only
+    exist inside the canonical name's paren suffix ("PZIインスリン（プロジンク）",
+    "フルニキシンメグルミン（バナミン）") — the stem index strips parens, so
+    these references never produced related-drug chips (ProZinc 19 refs,
+    コバラミン 22, アポキル/サイトポイント 9 each). Pure-katakana paren parts
+    are now indexed at the lowest tier; insulin analogue INN stems and the
+    tiludronate transliteration variants resolve via the variant registry."""
+    from api.drug_dictionary import find_drugs_in_text
+
+    cases = {
+        "プロジンク 0.5-1 IU/動物 SC q12h": "insulin_pzi",
+        "ランタス 1 U SC q12h": "insulin_glargine",
+        "グラルギン 1-2 U/猫 SC q12h": "insulin_glargine",
+        "ベトスリン 0.25 IU/kg SC q12h": "insulin_vetsulin",
+        "デテミル 0.1 U/kg SC q12h": "insulin_detemir",
+        "ティルドロネート 1 mg/kg IV（ナビキュラー症候群）": "tiludronate",
+        "チルドロネート 1 mg/kg IV": "tiludronate",
+        "バナミン 1.1 mg/kg IV q12h": "flunixin",
+        "セレニア 1 mg/kg SC q24h": "maropitant",
+        "ガスコン 40-50 mg/kg PO q6-8h": "simethicone",
+        "コバラミン 250 μg SC 週1回": "cobalamin_injection",
+        "アポキル 0.4-0.6 mg/kg PO q12h": "oclacitinib",
+    }
+    for text, expected in cases.items():
+        ids = [h["id"] for h in find_drugs_in_text(text)]
+        assert expected in ids, (text, ids)
+    # Precision guards: generic katakana words that appear inside name parens
+    # must never chip from ordinary prose (バリウム = barium contrast in every
+    # one of its 104 content refs, never the Valium brand).
+    for text in (
+        "バリウム造影で通過時間を評価",
+        "リハビリプログラムを開始",
+        "ホルモンインプラントの検討",
+        "メトロノミック化学療法へ移行",
+        "エキゾチック動物の診療に紹介",
+    ):
+        ids = [h["id"] for h in find_drugs_in_text(text)]
+        assert not ids, (text, ids)

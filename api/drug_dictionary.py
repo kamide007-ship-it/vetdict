@@ -11,6 +11,8 @@
 
 from __future__ import annotations
 
+import json
+import os
 import re
 import unicodedata
 from typing import Any, Dict, List, Optional
@@ -11147,6 +11149,23 @@ _FIRST_WORD_STOPLIST = {
 # ビタミンb would wrongly map ビタミンB1 (thiamine) mentions to the B12 entry.
 _GENERIC_STEM_STOPLIST = {"critical care", "ジョイント", "アンチオキシダント", "ビタミンb"}
 
+# Paren-inner brand names ("フルニキシンメグルミン（バナミン）" → バナミン) are
+# indexed at the lowest tier so treatment texts citing the Japanese brand alone
+# resolve ("プロジンク 0.5 IU", "セレニア 1 mg/kg"). Only pure-katakana parts are
+# indexed — Latin paren parts are dominated by generic English words (oral,
+# renal, saline) that would false-match English prose. Generic katakana words
+# that appear inside name parens but also in ordinary prose are excluded here.
+_PAREN_PART_STOPLIST = {
+    "エキゾチック",  # (エキゾチック用) descriptors
+    "インプラント",  # dose-form word — "ホルモンインプラント" prose would false-chip
+    "プログラム",  # Program (lufenuron) — "リハビリプログラム" prose collision
+    "メトロノミック",  # metronomic-chemo term, not a brand
+    # Valium transliteration inside diazepam's paren — but バリウム in vet texts
+    # is barium contrast (バリウム造影, 104 content refs), never the brand.
+    "バリウム",
+}
+_PURE_KATAKANA_RE = re.compile(r"^[ァ-ヴー]{4,}$")
+
 # Case-sensitive product references: treatment texts name the Oxbow syringe-feed
 # product as capitalised "Critical Care" (1,000+ entries), while generic prose
 # ("critical care monitoring") is lowercase — case distinguishes them where the
@@ -11219,6 +11238,18 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     # ursodiol already aliases ウルソジオール above; UDCA is the standard clinical
     # acronym (41 treatment refs: "UDCA 10-15 mg/kg PO q24h").
     "hetastarch": ("ヘタスターチ",),  # canonical: ヒドロキシエチルデンプン（HES 6%）
+    # 2026-08 sweep #15: equine navicular/ringbone texts cite tiludronate by the
+    # ティ/チ transliteration variants — canonical name_ja is チルドロン酸（チルドレン）.
+    "tiludronate": ("ティルドロネート", "チルドロネート"),
+    # Diabetes texts cite insulin analogues by the bare INN stem without the
+    # インスリン prefix ("グラルギン 1 U SC q12h") — the lead-word index only
+    # carries インスリン, which is too generic to map to a specific analogue.
+    "insulin_glargine": ("グラルギン",),
+    "insulin_detemir": ("デテミル",),
+    # プロジンク must map to the dedicated PZI entry, not the umbrella
+    # insulin_vetsulin entry whose paren list also names ProZinc (tier-2
+    # beats the paren-brand tier-4 first-wins ordering).
+    "insulin_pzi": ("プロジンク",),
     # canonical: グルコン酸カルシウム — texts also write the reversed word order
     # "カルシウムグルコン酸(塩)" (21 refs, horse hypocalcemia / amphibian MBD).
     # Bare prefix covers both 酸 and 酸塩 endings via substring match.
@@ -11274,6 +11305,7 @@ def _build_drug_keyword_index() -> None:
     tier1: list[tuple[str, str]] = []
     tier2: list[tuple[str, str]] = []
     tier3: list[tuple[str, str]] = []
+    tier4: list[tuple[str, str]] = []
     for d in DRUGS:
         drug_id = d.get("id")
         if not drug_id:
@@ -11309,7 +11341,18 @@ def _build_drug_keyword_index() -> None:
             first_word = k.split()[0] if " " in k else k.split("-")[0]
             if first_word != k and len(first_word) >= 4 and first_word not in _FIRST_WORD_STOPLIST:
                 tier3.append((first_word, drug_id))
-    for keyword, drug_id in tier1 + tier2 + tier3:
+            # Paren-inner Japanese brand names ("（バナミン）", "（プロジンク）") —
+            # lowest tier so a drug's own indexed stems always win first.
+            for paren in re.finditer(r"[（(]([^）)]*)[）)]", key):
+                for part in re.split(r"[／/・、,;；\s]+", paren.group(1)):
+                    part = part.strip()
+                    if (
+                        _PURE_KATAKANA_RE.match(part)
+                        and part not in _PAREN_PART_STOPLIST
+                        and part not in _GENERIC_STEM_STOPLIST
+                    ):
+                        tier4.append((part, drug_id))
+    for keyword, drug_id in tier1 + tier2 + tier3 + tier4:
         if keyword not in _DRUG_KEYWORD_INDEX:
             _DRUG_KEYWORD_INDEX[keyword] = drug_id
 
@@ -11489,29 +11532,24 @@ def _build_drug_to_diseases_index() -> dict[str, list[dict]]:
     }
     index: dict[str, list[dict]] = {}
 
-    # Precompute reverse keyword list sorted by length (longest first to avoid
-    # 'methyl' overlapping with 'methylprednisolone' if both in index).
-    sorted_keywords = sorted(_DRUG_KEYWORD_INDEX.items(), key=lambda kv: -len(kv[0]))
+    # Corpus-inverted scan: the naive per-(text, keyword) substring loop is
+    # O(texts × keywords) Python-level iterations (~26k texts × ~1.9k keywords
+    # after the JSON overlay was added) and took ~27s on the production tier.
+    # Instead all texts are concatenated once (NUL-fenced so no keyword can
+    # match across a text boundary) and each keyword runs a single C-speed
+    # str.find sweep over the corpus, mapping hit offsets back to text indices
+    # via bisect. Semantics are identical: a drug is referenced by a text iff
+    # any of its keywords is a substring of that text.
+    _texts: list[str] = []  # lowercased text per collected field
+    _texts_raw: list[str] = []  # original case (for _CASE_SENSITIVE_KEYWORDS)
+    _refs: list[dict] = []  # parallel disease ref per collected field
 
     def _scan(text: str, sp: str, name_en: str, name_ja: str, urgency: str) -> None:
         if not text:
             return
-        text_lower = text.lower()
-        seen_drugs_in_text: set[str] = set()
-        for keyword, drug_id in _CASE_SENSITIVE_KEYWORDS.items():
-            if drug_id not in seen_drugs_in_text and keyword in text:
-                seen_drugs_in_text.add(drug_id)
-                index.setdefault(drug_id, []).append(
-                    {"species": sp, "name": name_en, "name_ja": name_ja, "urgency": urgency or ""}
-                )
-        for keyword, drug_id in sorted_keywords:
-            if drug_id in seen_drugs_in_text:
-                continue
-            if keyword in text_lower:
-                seen_drugs_in_text.add(drug_id)
-                index.setdefault(drug_id, []).append(
-                    {"species": sp, "name": name_en, "name_ja": name_ja, "urgency": urgency or ""}
-                )
+        _texts.append(text.lower())
+        _texts_raw.append(text)
+        _refs.append({"species": sp, "name": name_en, "name_ja": name_ja, "urgency": urgency or ""})
 
     for sp_key, (mod_name, attr) in species_modules.items():
         try:
@@ -11533,12 +11571,97 @@ def _build_drug_to_diseases_index() -> dict[str, list[dict]]:
                 urgency = getattr(d, "urgency", "") or ""
                 _scan(getattr(d, "treatment_protocol", ""), sp_key, name_en, name_ja, urgency)
 
-    # De-duplicate identical (species, name) tuples per drug (occurs when both
-    # treatment + treatment_ja match the same drug for the same disease).
-    for drug_id, refs in index.items():
+    # Curated JSON overlay: the served treatment text for many diseases lives
+    # only in diseases_all_species.json (applied at enrich time), so drugs
+    # cited exclusively there (e.g. tiludronate in the equine navicular
+    # entries) had an empty "used by diseases" card while the forward
+    # disease→drug chips resolved fine. Scan the overlay too; the (species,
+    # name) de-duplication below collapses module/overlay double hits.
+    _overlay_path = os.path.join(os.path.dirname(__file__), "..", "diseases_all_species.json")
+    try:
+        with open(_overlay_path, encoding="utf-8") as _fh:
+            _overlay = json.load(_fh)
+    except (OSError, ValueError):
+        _overlay = []
+    _sp_from_json = {
+        "Dog": "dog",
+        "Cat": "cat",
+        "Horse": "horse",
+        "Rabbit": "rabbit",
+        "Hamster": "hamster",
+        "Guinea Pig": "guinea_pig",
+        "Chinchilla": "chinchilla",
+        "Ferret": "ferret",
+        "Hedgehog": "hedgehog",
+        "Sugar Glider": "sugar_glider",
+        "Degu": "degu",
+        "Bird": "bird",
+        "Parakeet": "parakeet",
+        "Parrot": "parrot",
+        "Reptile": "reptile",
+        "Tortoise": "tortoise",
+        "Snake": "snake",
+        "Lizard": "lizard",
+        "Amphibian": "amphibian",
+        "Fish": "fish",
+        "Exotic Other": "exotic_other",
+    }
+    for entry in _overlay:
+        sp_key = _sp_from_json.get(entry.get("species") or "")
+        if not sp_key:
+            continue
+        name_en = entry.get("name", "") or ""
+        name_ja = entry.get("name_ja", "") or ""
+        urgency = entry.get("urgency", "") or ""
+        _scan(entry.get("treatment", ""), sp_key, name_en, name_ja, urgency)
+        _scan(entry.get("treatment_ja", ""), sp_key, name_en, name_ja, urgency)
+
+    # Single inverted sweep over the concatenated corpus.
+    import bisect
+
+    _SEP = "\x00"
+
+    def _offsets_for(texts: list[str]) -> list[int]:
+        offs: list[int] = []
+        pos = 0
+        for t in texts:
+            offs.append(pos)
+            pos += len(t) + len(_SEP)
+        return offs
+
+    # lower() can change string length for exotic code points, so the raw
+    # (case-sensitive) corpus gets its own offset table.
+    offsets = _offsets_for(_texts)
+    offsets_raw = _offsets_for(_texts_raw)
+    corpus = _SEP.join(_texts)
+    corpus_raw = _SEP.join(_texts_raw)
+
+    def _sweep(haystack: str, offs: list[int], keyword: str, drug_id: str, hits: set) -> None:
+        start = haystack.find(keyword)
+        while start != -1:
+            ti = bisect.bisect_right(offs, start) - 1
+            hits.add((drug_id, ti))
+            # Jump past the current text so each text counts at most once.
+            next_pos = offs[ti + 1] if ti + 1 < len(offs) else len(haystack)
+            start = haystack.find(keyword, next_pos)
+
+    hits: set[tuple[str, int]] = set()
+    for keyword, drug_id in _CASE_SENSITIVE_KEYWORDS.items():
+        _sweep(corpus_raw, offsets_raw, keyword, drug_id, hits)
+    for keyword, drug_id in _DRUG_KEYWORD_INDEX.items():
+        _sweep(corpus, offsets, keyword, drug_id, hits)
+
+    # Emit refs in text order per drug, de-duplicating identical
+    # (species, name) tuples (occurs when both treatment + treatment_ja match
+    # the same drug for the same disease).
+    per_drug: dict[str, list[int]] = {}
+    for drug_id, ti in hits:
+        per_drug.setdefault(drug_id, []).append(ti)
+    for drug_id, tis in per_drug.items():
         seen_pairs: set[tuple] = set()
         unique: list[dict] = []
-        for r in refs:
+        for ti in sorted(tis):
+            r = _refs[ti]
             key = (r["species"], r["name"], r["name_ja"])
             if key in seen_pairs:
                 continue
@@ -11556,6 +11679,10 @@ def find_diseases_for_drug(drug_id: str, species: str | None = None, limit: int 
     """
     global _DRUG_TO_DISEASES_CACHE
     if _DRUG_TO_DISEASES_CACHE is None:
+        # Normally the import-time warm thread has already populated the
+        # cache; if a request arrives first (or the thread died in a fork),
+        # build synchronously. The build is idempotent, so a rare duplicate
+        # build is acceptable — no lock, so a fork can never deadlock us.
         _DRUG_TO_DISEASES_CACHE = _build_drug_to_diseases_index()
     refs = _DRUG_TO_DISEASES_CACHE.get(drug_id, [])
     if species:
@@ -11566,6 +11693,39 @@ def find_diseases_for_drug(drug_id: str, species: str | None = None, limit: int 
         key=lambda r: (urgency_order.get(r.get("urgency", ""), 5), r.get("name", "").lower()),
     )
     return refs_sorted[:limit]
+
+
+def _warm_drug_to_diseases_index() -> None:
+    """Populate the reverse drug→disease index off the request path.
+
+    The corpus scan takes tens of seconds (all species' treatment texts plus
+    the curated JSON overlay), which previously landed on the first request
+    that expanded a drug card's "used by diseases" chips — long enough to hit
+    the production worker timeout. Warm it in a daemon thread at import so
+    the build runs during process boot instead. Lock-free by design: if a
+    request races the thread (or a fork killed it), find_diseases_for_drug
+    simply builds synchronously and the last assignment wins.
+    """
+    global _DRUG_TO_DISEASES_CACHE
+    try:
+        built = _build_drug_to_diseases_index()
+    except Exception:  # pragma: no cover - warm-up must never crash a worker
+        return
+    if _DRUG_TO_DISEASES_CACHE is None:
+        _DRUG_TO_DISEASES_CACHE = built
+
+
+def _start_drug_to_diseases_warmup() -> None:
+    import threading
+
+    threading.Thread(
+        target=_warm_drug_to_diseases_index,
+        name="drug-disease-index-warmup",
+        daemon=True,
+    ).start()
+
+
+_start_drug_to_diseases_warmup()
 
 
 def search_drugs(query: str, category: str | None = None, species: str | None = None) -> List[Dict]:

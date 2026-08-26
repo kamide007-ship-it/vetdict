@@ -183,6 +183,13 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "oxytocin": ("アトニン",),
     "pergolide": ("プラセンド", "Prascend"),
     "deslorelin": ("スプレロリン", "スプレソリン", "Suprelorin"),
+    # インスリン製剤 — 治療テキストは「プロジンク 0.5 IU」「グラルギン 1 U」の
+    # ように商品名・INN語幹単独で引用するが、正準名では括弧内（stem索引が剥がす）
+    # か インスリン プレフィックス付きのため解決不能だった（ProZinc 20 refs）。
+    "insulin_pzi": ("プロジンク", "ProZinc"),
+    "insulin_vetsulin": ("ベトスリン", "カニンスリン", "Vetsulin", "Caninsulin"),
+    "insulin_glargine": ("ランタス", "Lantus"),
+    "insulin_detemir": ("レベミル", "Levemir"),
     # --- 免疫抑制・腫瘍 ---
     "cyclosporine": ("ネオーラル", "サンディミュン", "Neoral"),
     "tacrolimus_systemic": ("プログラフ", "Prograf"),
