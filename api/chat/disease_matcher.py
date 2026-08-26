@@ -233,7 +233,7 @@ _SYN: dict[str, list[str]] = {
     "urinary_incontinence": ["incontinence", "urine_leakage", "bladder_leakage"],
     # Respiratory extended
     "nasal_discharge": ["runny_nose", "rhinitis", "sniffles", "snuffles"],
-    "rapid_breathing": ["tachypnea", "labored_breathing", "panting"],
+    "rapid_breathing": ["tachypnea", "labored_breathing", "panting", "excessive_panting", "dyspnea"],
     "excessive_panting": ["tachypnea", "rapid_breathing", "panting"],
     "dyspnea": ["labored_breathing", "respiratory_distress", "open_mouth_breathing"],
     # Pain/orthopedic
@@ -323,6 +323,13 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     ("tortoise", frozenset({"swollen_eyes", "anorexia"}), "Vitamin A Deficiency (Hypovitaminosis A)", 1.45),
     ("reptile", frozenset({"eye_swelling", "anorexia"}), "Vitamin A Deficiency (Hypovitaminosis A)", 1.45),
     ("reptile", frozenset({"swollen_eyes", "anorexia"}), "Vitamin A Deficiency (Hypovitaminosis A)", 1.45),
+    # Red/flushed ears + tachypnea or collapse-lethargy in a chinchilla is
+    # hyperthermia until proven otherwise — dense fur, no sweat glands and a
+    # heat threshold of ~27°C make flushed pinnae the cardinal owner-visible
+    # sign (Quesenberry & Carpenter 4th ed). Narrow clone entries otherwise
+    # outranked it on coverage.
+    ("chinchilla", frozenset({"red_ears", "rapid_breathing"}), "Heat Stroke - Chinchilla", 1.45),
+    ("chinchilla", frozenset({"red_ears", "lethargy"}), "Heat Stroke - Chinchilla", 1.35),
 ]
 
 # Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.

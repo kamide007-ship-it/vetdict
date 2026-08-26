@@ -711,6 +711,12 @@ SYMPTOMS = [
         "category": "digestive",
     },
     {
+        "id": "mammary_swelling",
+        "name_ja": "乳腺・乳首の腫大（しこり）",
+        "name_en": "Mammary/Nipple Enlargement (Mass)",
+        "category": "general",
+    },
+    {
         "id": "epistaxis",
         "name_ja": "鼻血（鼻出血）",
         "name_en": "Nosebleed (Epistaxis)",
@@ -2083,6 +2089,58 @@ DISEASES = [
             "shih_tzu": 1.5,
             "toy_poodle": 1.5,
             "cavalier_king_charles_spaniel": 1.5,
+        },
+    },
+    # ---- 12d2. Mammary Tumor ----
+    # The most common tumor of intact bitches (Sorenmo, Withrow & MacEwen 6th
+    # ed), yet the legacy database had no entry and no mammary vocabulary, so
+    # the "乳腺にしこり" complaint resolved only to generic lumps_bumps.
+    {
+        "id": "mammary_tumor",
+        "prevalence_tier": "very_common",
+        "name_ja": "乳腺腫瘍",
+        "name_en": "Mammary Tumor",
+        "description_ja": "未避妊（または成熟後に避妊した）雌犬で最も多い腫瘍で、約50%が悪性。乳腺のしこり・腫大が典型で、後方（第4-5）乳腺に好発します。治療の原則は早期の外科的切除＋病理検査で、腫瘍径が予後と強く相関します（3cm未満で予後良好）。初回発情前の避妊で生涯リスクは約0.5%まで低下します（Schneider 1969）。",
+        "description_en": "The most common tumor of intact bitches; roughly half are malignant. Presents as palpable mammary masses, most often in the caudal (4th-5th) glands. Early surgical excision with histopathology is the standard of care — tumor size strongly predicts prognosis (<3 cm favorable). Spaying before the first estrus reduces lifetime risk to about 0.5% (Schneider 1969).",
+        "symptoms": [
+            "mammary_swelling",
+            "lumps_bumps",
+        ],
+        "severity": "high",
+        "recommended_tests": ["tissue_biopsy", "xray", "ultrasound"],
+        "breed_risks": {
+            "toy_poodle": 1.6,
+            "dachshund": 1.5,
+            "yorkshire_terrier": 1.5,
+            "maltese": 1.5,
+        },
+    },
+    # ---- 12d3. Testicular Tumor (Sertoli Cell Tumor / Feminization) ----
+    # Testicular tumors are the most common genital tumor of intact older
+    # male dogs (cryptorchid testes at ~10x risk — Liao 2009). Sertoli cell
+    # tumors secrete estrogen: bilaterally symmetric alopecia, gynecomastia
+    # and a pendulous prepuce, with pancytopenia (pale gums, lethargy) from
+    # estrogen myelotoxicity in advanced cases (Withrow & MacEwen 6th ed).
+    # The feminization complaint previously ranked only alopecia-X/demodex.
+    {
+        "id": "testicular_tumor",
+        "prevalence_tier": "common",
+        "name_ja": "精巣腫瘍（セルトリ細胞腫・女性化症候群）",
+        "name_en": "Testicular Tumor (Sertoli Cell Tumor / Feminization)",
+        "description_ja": "未去勢の高齢雄犬で最も多い生殖器腫瘍。特にセルトリ細胞腫はエストロジェンを分泌し、左右対称性の脱毛、乳首・乳腺の腫大（女性化乳房）、包皮の下垂が典型徴候です。陰睾（停留精巣）ではリスクが約10倍。進行例ではエストロジェン骨髄毒性による汎血球減少（歯茎蒼白・元気消失・出血傾向）が致命的となるため、去勢手術による早期摘出が原則です。",
+        "description_en": "The most common genital tumor of intact older male dogs. Sertoli cell tumors secrete estrogen, producing bilaterally symmetric alopecia, nipple/mammary enlargement (gynecomastia) and a pendulous prepuce. Cryptorchid testes carry ~10x risk. Advanced estrogen myelotoxicity causes pancytopenia (pale gums, lethargy, bleeding) and can be fatal — castration for early removal is the treatment of choice.",
+        # Restricted to the defining feminization pair: pale gums/lethargy
+        # (late estrogen myelotoxicity) would otherwise let this entry hijack
+        # the pallor+lethargy anemia complaint from IMHA/hemangiosarcoma.
+        "symptoms": [
+            "mammary_swelling",
+            "hair_loss",
+        ],
+        "severity": "high",
+        "recommended_tests": ["ultrasound", "cbc", "tissue_biopsy"],
+        "breed_risks": {
+            "boxer": 1.5,
+            "shetland_sheepdog": 1.4,
         },
     },
     # ---- 12e. Corneal Ulcer ----
@@ -4217,6 +4275,10 @@ _PATHOGNOMONIC_CLUSTERS = [
     # Visible worms/proglottids in the stool are diagnostic of intestinal
     # parasitism itself (ESCCAP GL1) — no other differential produces them.
     (frozenset({"worms_in_stool"}), "intestinal_parasites", 1.8),
+    # Gynecomastia + symmetric alopecia is the estrogen-feminization pair of
+    # a Sertoli cell tumor (Withrow & MacEwen 6th ed). Female mammary-mass
+    # complaints don't co-report hair loss, so collision risk is minimal.
+    (frozenset({"mammary_swelling", "hair_loss"}), "testicular_tumor", 1.5),
     # Tremors or seizures in a postpartum/lactating bitch = eclampsia until
     # proven otherwise (Plumb's; Ettinger 8th ed) — a calcium emergency that
     # must outrank idiopathic epilepsy when the nursing context is stated.

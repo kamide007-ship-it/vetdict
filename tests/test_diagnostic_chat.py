@@ -1604,6 +1604,7 @@ class TestQuickTapPhraseExtraction:
             "便に白い米粒のようなもの",
             "耳が腫れてぷよぷよしている",
             "食べた後すぐに未消化のまま吐く",
+            "乳腺にしこりがある",
         ],
         "cat": [
             "食べない",
@@ -1634,7 +1635,15 @@ class TestQuickTapPhraseExtraction:
             "鼻水",
             "あごが濡れている",
         ],
-        "chinchilla": ["よだれが出る", "毛が抜ける", "食べない", "糞が出ない", "歯が伸びている", "砂浴びしない"],
+        "chinchilla": [
+            "よだれが出る",
+            "毛が抜ける",
+            "食べない",
+            "糞が出ない",
+            "歯が伸びている",
+            "砂浴びしない",
+            "耳が赤くて呼吸が速い",
+        ],
         "hamster": [
             "下痢",
             "元気がない",
@@ -1654,6 +1663,7 @@ class TestQuickTapPhraseExtraction:
             "食べない",
             "陰部が腫れている",
             "足を伸ばして硬直する",
+            "口を前足で掻いてよだれ",
         ],
         "hedgehog": ["針が抜ける", "フケ", "ふらつく", "食べない", "目が出ている", "体重が減った"],
         "bird": ["羽を膨らませている", "食べない", "下痢", "鼻水", "羽が抜ける", "くしゃみ", "自分で羽を抜く"],
@@ -3013,6 +3023,104 @@ class TestChatClinicalAccuracyAuditRound12:
 
 class TestChatClinicalAccuracyAuditRound13:
     """2026-08 audit round 13: fresh 22-case chief-complaint sweep. Root causes
+    fixed: the icterus complaint "白目と歯茎が黄色い" extracted nothing (only the
+    exact "白目が黄色い" alias existed); the legacy dog database had neither a
+    mammary-tumor nor a testicular-tumor entry and no mammary vocabulary, so
+    both the most common tumor of intact bitches and the Sertoli feminization
+    complaint ranked alopecia-X first; 「呼吸が速い」 (速 spelling) had no alias
+    at all (only 早); the ferret hypoglycemia sign 「口を前足で掻く」 misrouted
+    to itching→ear mites; and the chinchilla heatstroke complaint 「耳が赤くて
+    熱い」 lost both the flushed-ear connective form and the rapid-breathing ↔
+    excessive-panting matching bridge."""
+
+    def test_dog_composite_icterus_phrase_extracts_jaundice(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("白目と歯茎が黄色い 嘔吐して食欲がない")
+        assert "jaundice" in ex, ex
+        names = [d.get("name_ja") for d in match_symptoms_to_diseases(ex)[:3]]
+        assert any(("肝" in n) or ("溶血" in n) for n in names), names
+
+    def test_dog_feminization_ranks_testicular_tumor_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("オスなのに乳首が腫れて毛が抜けて皮膚が黒ずむ")
+        assert "mammary_swelling" in ex and "hair_loss" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "精巣腫瘍" in top.get("name_ja", ""), (
+            f"gynecomastia + symmetric alopecia is Sertoli feminization "
+            f"(Withrow & MacEwen 6th ed): {top.get('name_ja')}"
+        )
+
+    def test_dog_mammary_mass_ranks_mammary_tumor_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("乳腺にしこりがある")
+        assert "mammary_swelling" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "乳腺腫瘍" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_dog_pallor_lethargy_complaint_keeps_anemia_ddx_first(self):
+        # The testicular-tumor entry must not hijack the anemia complaint via
+        # its late myelotoxicity signs — its symptom set is restricted to the
+        # feminization pair.
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("呼吸が速い 歯茎が白い ぐったり")
+        assert "pale_gums" in ex and "rapid_breathing" in ex, ex
+        names = [d.get("name_ja") for d in match_symptoms_to_diseases(ex)[:3]]
+        assert not any("精巣腫瘍" in n for n in names), names
+        assert any(("溶血" in n) or ("血管肉腫" in n) for n in names), names
+
+    def test_cat_mammary_mass_ranks_mammary_group_top(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("乳腺にしこりがある", "cat")
+        assert "mammary_masses" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "cat")[:3]]
+        assert any("乳腺" in n for n in names), names
+
+    def test_chinchilla_flushed_ears_tachypnea_ranks_heatstroke_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("耳が赤くて熱い ぐったりして呼吸が速い", "chinchilla")
+        assert "red_ears" in ids and "rapid_breathing" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "chinchilla")[0]
+        assert "熱中症" in (top.get("name_ja") or ""), (
+            f"flushed pinnae + tachypnea in a chinchilla is hyperthermia until "
+            f"proven otherwise (Quesenberry & Carpenter 4th ed): {top.get('name_ja')}"
+        )
+        # ear-scratching complaints must keep otitis/dermatophytosis first
+        ids2 = _extract_species_symptoms("耳をかゆがって耳垢が多い", "chinchilla")
+        names2 = [
+            r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids2, "chinchilla")[:2]
+        ]
+        assert not any("熱中症" in n for n in names2), names2
+
+    def test_ferret_pawing_at_mouth_frothing_ranks_insulinoma_top(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("急にキーキー鳴いて口を前足で掻く 泡を吹く", "ferret")
+        assert "pawing_at_mouth" in ids and "drooling" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "ferret")[:3]]
+        assert any(("インスリノーマ" in n) or ("低血糖" in n) for n in names), (
+            f"pawing at the mouth + ptyalism is the ferret hypoglycemia "
+            f"presentation (Quesenberry & Carpenter 4th ed): {names}"
+        )
+
+    def test_rapid_breathing_hayai_spelling_extracts_across_species(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        for sp in ("rabbit", "chinchilla", "guinea_pig"):
+            ids = _extract_species_symptoms("呼吸が速い", sp)
+            assert "rapid_breathing" in ids, (sp, ids)
+
+
+class TestChatClinicalAccuracyAuditRound14:
+    """2026-08 audit round 14 (parallel to round 13): fresh 22-case sweep. Root causes
     fixed: negated mentions (「咳はない」) polluted extraction; regurgitation
     collapsed into vomiting so megaesophagus never led its own defining
     complaint; pigmenturia (「おしっこが茶色い」) had no vocabulary; the cat

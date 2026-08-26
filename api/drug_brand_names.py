@@ -179,12 +179,14 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "calcitriol": ("ロカルトロール", "Rocaltrol"),
     "desmopressin": ("ミニリンメルト",),
     "semaglutide": ("オゼンピック", "リベルサス", "Ozempic"),
-    # インスリン製剤（治療テキストは商品名で参照: プロジンク 41参照 等）
+    # インスリン製剤 — 治療テキストは「プロジンク 0.5 IU」「グラルギン 1 U」の
+    # ように商品名・INN語幹単独で引用するが、正準名では括弧内（stem索引が剥がす）
+    # か インスリン プレフィックス付きのため解決不能だった（ProZinc 41参照）。
     "insulin_pzi": ("プロジンク", "ProZinc"),
+    "insulin_vetsulin": ("ベトスリン", "カニンスリン", "Vetsulin", "Caninsulin"),
     "insulin_glargine": ("ランタス", "Lantus"),
     "insulin_detemir": ("レベミル", "Levemir"),
     "insulin_regular": ("ヒューマリンR", "ノボリンR", "Humulin R"),
-    "insulin_vetsulin": ("カニンスリン", "Caninsulin"),
     "leuprolide": ("リュープリン", "Leuplin"),
     "oxytocin": ("アトニン",),
     "pergolide": ("プラセンド", "Prascend"),
