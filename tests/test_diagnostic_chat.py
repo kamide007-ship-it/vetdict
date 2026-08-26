@@ -1603,6 +1603,7 @@ class TestQuickTapPhraseExtraction:
             "お腹が膨らんで吐こうとしても吐けない",
             "便に白い米粒のようなもの",
             "耳が腫れてぷよぷよしている",
+            "食べた後すぐに未消化のまま吐く",
         ],
         "cat": [
             "食べない",
@@ -1612,6 +1613,8 @@ class TestQuickTapPhraseExtraction:
             "おしっこが出ない",
             "毛が抜ける",
             "ジャンプしなくなった",
+            "トイレ以外の場所で粗相する",
+            "口をくちゃくちゃさせる",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -1622,7 +1625,15 @@ class TestQuickTapPhraseExtraction:
             "咳が出る",
             "飲み込めず鼻から餌が出てくる",
         ],
-        "rabbit": ["糞が小さい", "食べない", "歯ぎしり", "首が傾いている", "お腹が張っている", "鼻水"],
+        "rabbit": [
+            "糞が小さい",
+            "食べない",
+            "歯ぎしり",
+            "首が傾いている",
+            "お腹が張っている",
+            "鼻水",
+            "あごが濡れている",
+        ],
         "chinchilla": ["よだれが出る", "毛が抜ける", "食べない", "糞が出ない", "歯が伸びている", "砂浴びしない"],
         "hamster": [
             "下痢",
@@ -1634,7 +1645,16 @@ class TestQuickTapPhraseExtraction:
             "頬袋が膨らんだまま戻らない",
         ],
         "guinea_pig": ["食べない", "鼻水", "足を引きずる", "脱毛", "下痢", "くしゃみ"],
-        "ferret": ["ぐったり", "脱毛", "下痢", "後ろ足がふらつく", "嘔吐", "食べない", "陰部が腫れている"],
+        "ferret": [
+            "ぐったり",
+            "脱毛",
+            "下痢",
+            "後ろ足がふらつく",
+            "嘔吐",
+            "食べない",
+            "陰部が腫れている",
+            "足を伸ばして硬直する",
+        ],
         "hedgehog": ["針が抜ける", "フケ", "ふらつく", "食べない", "目が出ている", "体重が減った"],
         "bird": ["羽を膨らませている", "食べない", "下痢", "鼻水", "羽が抜ける", "くしゃみ", "自分で羽を抜く"],
         "parakeet": [
@@ -2989,3 +3009,127 @@ class TestChatClinicalAccuracyAuditRound12:
 
         ids = _extract_species_symptoms("毛が抜けて皮膚がかさかさ 激しく痒がる", "guinea_pig")
         assert "hair_loss" in ids and "itching" in ids, ids
+
+
+class TestChatClinicalAccuracyAuditRound13:
+    """2026-08 audit round 13: fresh 22-case chief-complaint sweep. Root causes
+    fixed: negated mentions (「咳はない」) polluted extraction; regurgitation
+    collapsed into vomiting so megaesophagus never led its own defining
+    complaint; pigmenturia (「おしっこが茶色い」) had no vocabulary; the cat
+    inappropriate-elimination and jaw-chattering complaints extracted nothing;
+    「キーキー鳴く」 was mis-mapped to lethargy; rabbit slobbers (あご kana
+    form) / one-sided head tilt / bird grip loss / ferret screaming+tonic
+    episode extracted nothing; ferret primary epilepsy was untiered and
+    outranked insulinoma for the seizure complaint."""
+
+    def test_negated_symptom_mentions_are_not_extracted(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        # species path: negated cough must not extract; the positive sign must
+        ids = _extract_species_symptoms("咳はないが呼吸が速い", "cat")
+        assert "coughing" not in ids, ids
+        assert ids, "the positive rapid-breathing sign must still extract"
+        ids = _extract_species_symptoms("嘔吐はしていない 下痢なし 食欲がない", "cat")
+        assert "vomiting" not in ids and "diarrhea" not in ids, ids
+        assert "appetite_loss" in ids, ids
+        # legacy dog path
+        ids = extract_symptoms_from_text("嘔吐と下痢がある 血便はない")
+        assert "vomiting" in ids and "diarrhea" in ids, ids
+        assert "blood_in_stool" not in ids, ids
+        # negation-shaped aliases themselves must be unaffected
+        ids = extract_symptoms_from_text("食欲がない 元気がない")
+        assert "loss_of_appetite" in ids and "lethargy" in ids, ids
+
+    def test_dog_regurgitation_ranks_megaesophagus_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("食べた後すぐに未消化のまま吐く 最近痩せた")
+        assert "regurgitation" in ids, ids
+        top = match_symptoms_to_diseases(ids)[0]
+        assert "巨大食道" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_dog_dark_urine_jaundice_ranks_hemolysis_top(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("おしっこが茶色い 元気がない 白目が黄色い")
+        assert "dark_urine" in ids and "jaundice" in ids, ids
+        names = [r.get("name_ja", "") for r in match_symptoms_to_diseases(ids)[:2]]
+        assert any("溶血" in n for n in names), names
+
+    def test_cat_inappropriate_elimination_surfaces_urinary_ddx(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("トイレ以外の場所で粗相するようになった 高齢", "cat")
+        assert "inappropriate_urination" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "cat")[:5]]
+        assert any(("膀胱炎" in n) or ("尿路感染" in n) for n in names), names
+
+    def test_cat_jaw_chattering_surfaces_tooth_resorption(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("口をくちゃくちゃさせてよだれを垂らす", "cat")
+        assert "jaw_chattering" in ids and "drooling" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "cat")[:3]]
+        assert any(("歯の吸収" in n) or ("口内炎" in n) or ("歯周" in n) for n in names), names
+
+    def test_rabbit_wet_chin_kana_form_surfaces_dental_disease(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("あごが濡れている 硬いものを食べなくなった", "rabbit")
+        assert "drooling" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "rabbit")[:3]]
+        assert any(("不正咬合" in n) or ("臼歯" in n) or ("歯周" in n) for n in names), names
+
+    def test_rabbit_unilateral_exophthalmos_extracts_and_ranks(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("片方の目が飛び出してきた", "rabbit")
+        assert "exophthalmos" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "rabbit")[:3]]
+        assert any(("眼球突出" in n) or ("球後膿瘍" in n) for n in names), names
+
+    def test_guinea_pig_one_sided_head_tilt_extracts(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("首が片方に傾いて転がる", "guinea_pig")
+        assert "head_tilt" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "guinea_pig")[:3]]
+        assert any(("斜頸" in n) or ("中耳炎" in n) or ("前庭" in n) for n in names), names
+
+    def test_bird_grip_loss_extracts_perching_ids(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("止まり木を握れない 脚に力が入らない", "bird")
+        assert "inability_to_perch" in ids and "leg_weakness" in ids, ids
+
+    def test_ferret_screaming_tonic_episode_ranks_insulinoma_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("急にキーキー鳴いて足を伸ばして硬直", "ferret")
+        assert "seizures" in ids and "vocalization" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "ferret")[0]
+        assert "インスリノーマ" in (top.get("name_ja") or ""), (
+            "hypoglycemia from insulinoma is the most common cause of ferret "
+            f"seizures (Quesenberry & Carpenter 4th ed): {top.get('name_ja')}"
+        )
+
+    def test_screaming_no_longer_maps_to_lethargy(self):
+        from api.chat.symptom_aliases import SYMPTOM_ALIASES
+
+        assert SYMPTOM_ALIASES["キーキー鳴く"] == "vocalization_changes"
+        assert SYMPTOM_ALIASES["鳴き声が変"] == "vocalization_changes"
+
+    def test_fish_rapid_gilling_and_snake_ventral_redness_extract(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("水面で口をパクパク 鰓の動きが速い", "fish")
+        assert "rapid_gill_movement" in ids, ids
+        ids = _extract_species_symptoms("体に水ぶくれのような斑点 お腹のうろこが赤い", "snake")
+        assert "skin_redness" in ids and "skin_blistering" in ids, ids

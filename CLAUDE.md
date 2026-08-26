@@ -3471,3 +3471,95 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 - フルテストスイート: **4,016件合格**（34 skip、+14新規回帰テスト）、カバレッジ82.16%
 - ruff check/format: repo全体 clean
 - 配信DB: クリーンビルドで 6,892疾患・**647薬品**、treatment/prevention/prognosis 100%
+
+## 2026-08セッション（第24弾: 否定表現ガード + ジアゾキシド/リバロキサバン/マムシ抗毒素/グルカゴン補完 + 救急key drugリンク化 + チャット精度第13弾）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,016件合格**（34 skip）
+- 配信SQLiteクリーンビルド: 6,892疾患、treatment/prevention/prognosis **100%**、主要臨床フィールド空欄 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（647薬品時点、全species_info検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- prevalence dead key: **9**（当該種DBに疾患自体が無い既知残、上限15ガード内）
+
+### 症状抽出の否定表現ガード（新規・系統的修正）
+- **バグ**: 「咳はない」「嘔吐はしていない」「下痢なし」のような**除外情報のつもりの入力が、
+  逆に症状として抽出され鑑別を汚染**していた（例: 猫「呼吸が速くて…咳はない」で coughing 抽出
+  → 呼吸器より咳疾患が上位）
+- `symptom_extractor.py` に `is_negated_mention()` を新設: 症状語の直後（は/も + まだ/特に を許容）に
+  否定語（ない/無い/なし/ありません/出ていない/していない/見られない等）が続く場合のみ発火する保守的設計。
+  「食欲がない」「飲み込めない」のような否定形を内包するエイリアス自体はマッチ範囲の後ろを検査するため不変
+  （正属性の単独症状名が存在しないことを全種+レガシーで検証済み）
+- 種別抽出（Phase1/2）・レガシー犬抽出（Phase1/2）の両経路に適用
+
+### referenced-but-absent 薬品4剤の補完（`drug_batch_46.py` 新規、647→651薬品）
+救急タブkey drugリンク化監査 × 治療テキスト参照の突合（第15回スイープ）で検出:
+- **ジアゾキシド（プログリセム）** — インスリノーマ標準第二選択（44参照）なのに未収載。
+  フェレット/犬 5-30 mg/kg PO q12h（Quesenberry & Carpenter 4th; Goutal 2012 JVECC）。
+  食事と共に投与・低血糖クリーゼの緊急対応は50%ブドウ糖であり本剤で代替しない旨を明記
+- **リバロキサバン（イグザレルト）** — 猫ATE救急プロトコルのkey drugなのに経口Xa阻害薬が皆無だった。
+  猫 2.5 mg/頭 PO q24h（Dixon-Jimenez 2016; CURATIVE合意 Blais 2019）・犬 1-2 mg/kg PO q24h。
+  猫第一選択は依然クロピドグレル（FATCAT）・治療量抗凝固薬同士の併用禁止（major）を明記
+- **マムシ抗毒素血清（乾燥まむしウマ抗毒素）** — マムシ咬傷救急プロトコルのkey drug、日本臨床で
+  最重要の抗毒素なのに未収載。1バイアル6,000単位・咬傷後4-6時間以内（Hifumi 2015）・
+  ウマ由来血清のアナフィラキシー前処置・多くの犬咬傷は支持療法単独で回復（重症例に温存）を明記
+- **グルカゴン** — 難治性低血糖CRI（20参照 + 救急key drug）。50 ng/kg IVボーラス→CRI 5-40 ng/kg/分
+  （Plumb's 10th; Fischer JAVMA 2000）。急な中止での反跳性低血糖を明記
+
+### 商品名エイリアスの括弧内スキップバグ修正（系統的） + sweep #15
+- **バグ**: 商品名マージは「name/name_ja に含まれる別名」をスキップするが、キーワード索引は
+  括弧サフィックスを剥がすため、**括弧内にだけ載る商品名（PZIインスリン（プロジンク））は
+  検索にもテキストマッチにも永久に到達不能**だった → スキップ判定を括弧前ステムに限定
+  （プロジンク41参照・ランタス・レベミル等が解決）
+- BRAND_NAME_ALIASES にインスリン5製剤（プロジンク/ランタス/レベミル/ヒューマリンR/カニンスリン）追加
+- _KATAKANA_VARIANT_ALIASES: ティルドロネート（チルドロン酸の表記ゆれ）、セレン酸ナトリウム（白筋症9参照）、
+  銀スルファジアジン（語順逆転47参照 — 従来は全身投与用スルファジアジンに誤チップ）、
+  プラズマライト/グルコン酸Ca（救急key drug表記）
+
+### UX: 救急プロトコルkey drugのワンタップ導線（最高緊急度画面のデッドテキスト解消）
+- 救急タブのkey drugsリスト（117行）は**素のテキスト**で、分単位で用量詳細に到達したい画面から
+  薬品辞書への導線が無かった
+- `emergency_api.py` に `_resolve_key_drug_links()` 新設: find_drugs_in_text で辞書解決し、
+  **英語名トークン重なり最大**のエントリを選択（"Ampicillin/sulbactam" が素の ampicillin ではなく
+  ampicillin_sulbactam に着地）。解決行にのみ `link_name` 付与 → フロントは解決行だけを
+  `.drug-nav-link` 化（誤着地・デッドリンクゼロ設計）。**117行中113行がリンク化**
+  （残4行はFFP/tPA — 辞書対象外の血液製剤・血栓溶解薬で設計通り素のテキスト維持）
+
+### 診断チャット精度 第13弾（22症例フレッシュスイープ 7 MISS + 誤抽出1 → 全症例合格）
+- **エイリアス誤マッピング修正**: 「キーキー鳴く/鳴き声が変」→ **lethargy**（悲鳴が「元気消失」に化ける
+  明白な誤り）→ vocalization_changes に是正 + ID_SYNONYMS で vocalization/screaming/
+  pain_vocalization/distress_vocalizations へブリッジ
+- **レガシー犬DBに吐出・褐色尿を新設**（70→72症状）:
+  - regurgitation（未消化物の吐き戻し = 巨大食道症の定義的徴候）を巨大食道症に付与 →
+    「食べた後すぐに未消化のまま吐く 痩せた」で巨大食道症 rank 1（従来は寄生虫/IBD上位・rank5）
+  - dark_urine（ヘモグロビン尿/ビリルビン尿）をIMHA・溶血性貧血に付与 + エイリアス
+    （おしっこが茶色い/コーラ色の尿）→ 溶血性貧血+IMHAが top2
+- **フェレット・インスリノーマ発作**: 「急にキーキー鳴いて足を伸ばして硬直」が抽出ゼロ →
+  seizures/vocalization 抽出 + パトグノモニック・ペア {seizures, vocalization}→Insulinoma×1.35
+  （フェレットの発作の最多原因は低血糖 — Quesenberry & Carpenter 4th）+ 原発性てんかん=rare tier +
+  インスリノーマ症状セットに vocalization 追加 → rank 1（0.886）
+- **新規エイリアス**: 粗相する/トイレ以外で排尿（猫 inappropriate_urination → FIC/UTI/マーキングがtop5）、
+  口をくちゃくちゃ（猫 jaw_chattering → 歯の吸収病変 rank 1）、呼吸が速い（速い表記 — 従来は早いのみ）、
+  あごが濡れている（かな表記 → ウサギ不正咬合群がtop3）、目が飛び出してきた（てきた形 → 眼球突出 rank 1-2）、
+  首が片方に傾いて（斜頸）、止まり木を握れない/脚に力が入らない（鳥）、鰓の動きが速い（かな/漢字表記）、
+  お腹のうろこが赤い（ヘビ・スケールロット → 鱗腐敗 top2）、未消化のまま吐く 等
+- **ID_SYNONYMSブリッジ**: wet_chin→[drooling,salivation,dewlap_wetness,facial_wetness]、
+  vocalization_changes→[vocalization,screaming,...]、dark_urine→[red_urine,blood_in_urine]、
+  inability_to_perch→[difficulty_perching,falling_off_perch,leg_weakness]、
+  jaw_chattering→[difficulty_eating,drooling,mouth_pain]
+
+### UX: クイック入力の拡充（新規対応主訴の1タップ導線）
+- 犬「食べた後すぐに未消化のまま吐く」、猫「トイレ以外の場所で粗相する」「口をくちゃくちゃさせる」、
+  ウサギ「あごが濡れている」、フェレット「足を伸ばして硬直する」（ミラーテスト JA_QUICK 同期済み）
+
+### 回帰テスト（+19件）
+- チャット: TestChatClinicalAccuracyAuditRound13（12件 — 否定ガード両経路+正常系不変、吐出→巨大食道、
+  褐色尿→溶血、猫粗相/くちゃくちゃ、ウサギ流涎/眼球突出、モルモット斜頸、鳥握力、フェレット発作→
+  インスリノーマ、キーキー鳴く誤マッピング再発防止、魚鰓/ヘビ腹側発赤）
+- 薬品: test_sweep15（商品名括弧バグ+表記ゆれ5ケース+精度ガード3）、TestBatch46（5件 — 4剤の存在・
+  用量・定義的安全事実、救急リンク解決率≥90%+複合名着地+血液製剤の非リンク維持）
+- UX: test_app_js_emergency_key_drugs_are_linkified（レンダラー+CSS+非解決行のフォールバック）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 586/cat 565/ferret 207/sugar_glider 76薬品、pendingStats drugs 647→**651**・
+  symptoms 70→**72**
+- ServiceWorker: `CACHE_NAME` v129 → **v130**

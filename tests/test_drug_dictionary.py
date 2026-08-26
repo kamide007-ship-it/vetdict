@@ -2158,3 +2158,130 @@ def test_no_tyrosine_typo_for_tylosin_in_disease_content():
 
     ids = [h["id"] for h in find_drugs_in_text("タイロシン（15-25 mg/kg PO q12h×6-8週）")]
     assert "tylosin" in ids
+
+
+def test_sweep15_brand_paren_and_variant_aliases_resolve():
+    """2026-08 sweep #15: treatment texts cite ProZinc (プロジンク, 41 refs),
+    tiludronate by its standard transliteration (ティルドロネート — canonical
+    name_ja uses チルドロン酸), sodium selenite for white-muscle disease, and
+    the reversed word order 銀スルファジアジン (47 refs). ProZinc also exposed
+    a systemic gap: brand aliases contained only in a name's parenthetical
+    suffix were skipped by the brand merge, yet the keyword index strips
+    parentheses — so they were unreachable in both search and text matching."""
+    from api.drug_dictionary import find_drugs_in_text, search_drugs
+
+    cases = {
+        "プロジンク 0.5-1 IU/動物 SC q12hから開始": "insulin_pzi",
+        "グラルギン（ランタス）0.25 U/kg SC q12h": "insulin_glargine",
+        "ティルドロネート 1 mg/kg IV（ビスホスホネート）": "tiludronate",
+        "セレン酸ナトリウム0.05-0.1 mg/kg IM単回": "selenium_vitamin_e",
+        "クロルヘキシジン洗浄＋銀スルファジアジンクリーム塗布": "silver_sulfadiazine",
+    }
+    for text, expected in cases.items():
+        ids = [h["id"] for h in find_drugs_in_text(text)]
+        assert expected in ids, (text, ids)
+    # brand search must also resolve (hiragana input normalised)
+    assert any(r["id"] == "insulin_pzi" for r in search_drugs("ぷろじんく"))
+    # precision guards: unrelated mentions must not chip
+    for text, banned in (
+        ("セレギリン 0.5 mg/kg PO q24h", "selenium_vitamin_e"),
+        ("ビタミンB12 250 μg SC 週1", "selenium_vitamin_e"),
+        ("スルファジアジン銀ではなく全身投与のスルファジアジン 25 mg/kg", None),
+    ):
+        ids = [h["id"] for h in find_drugs_in_text(text)]
+        if banned:
+            assert banned not in ids, (text, ids)
+
+
+class TestBatch46DiazoxideRivaroxabanAntivenomGlucagon:
+    """2026-08 15th referenced-but-absent sweep, surfaced by the emergency-tab
+    key-drug linkification audit: diazoxide (standard second-line insulinoma
+    therapy, 44 treatment refs), rivaroxaban (the only oral factor Xa
+    inhibitor — feline ATE emergency key drug), mamushi antivenom (the most
+    Japan-clinically-relevant antivenom, an emergency key drug), and glucagon
+    (refractory-hypoglycemia CRI, 20 refs) were all absent from the
+    formulary."""
+
+    def test_diazoxide_present_with_insulinoma_dosing(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("diazoxide")
+        assert d is not None, "diazoxide missing from formulary"
+        for sp in ("ferret", "dog"):
+            info = d["species_info"][sp]
+            assert info["safe"] and "5" in info["dosage"] and "30" in info["dosage"]
+            assert info["dosage_ja"]
+        # defining safety facts: give with food, never a dextrose substitute
+        assert "食事と共に" in d["species_info"]["ferret"]["dosage_ja"]
+        assert "50%ブドウ糖" in d["contraindications_ja"]
+        ids = [h["id"] for h in find_drugs_in_text("ジアゾキシド 5-30 mg/kg PO q12h を追加")]
+        assert "diazoxide" in ids
+
+    def test_rivaroxaban_present_with_curative_dosing_and_bleeding_gates(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("rivaroxaban")
+        assert d is not None, "rivaroxaban missing from formulary"
+        cat = d["species_info"]["cat"]
+        assert "2.5 mg" in cat["dosage"] and "2.5 mg" in cat["dosage_ja"]
+        # clopidogrel stays the evidence-based feline first line (FATCAT)
+        assert "クロピドグレル" in cat["notes_ja"]
+        dog = d["species_info"]["dog"]
+        assert "1-2 mg/kg" in dog["dosage"]
+        # therapeutic-anticoagulant co-administration must be flagged major
+        assert any(
+            i.get("severity") == "major" and "heparin" in i.get("drug", "").lower() for i in d["drug_interactions"]
+        )
+        ids = [h["id"] for h in find_drugs_in_text("リバロキサバン 2.5 mg/頭 PO q24h")]
+        assert "rivaroxaban" in ids
+
+    def test_mamushi_antivenom_present_with_anaphylaxis_precautions(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("mamushi_antivenom")
+        assert d is not None, "mamushi antivenom missing from formulary"
+        dog = d["species_info"]["dog"]
+        assert "6,000" in dog["dosage"] and "エピネフリン" in dog["dosage_ja"]
+        # supportive-care-first triage note (most canine bites survive without it)
+        assert "支持療法" in dog["notes_ja"]
+        assert "血清病" in d["side_effects_ja"]
+        ids = [h["id"] for h in find_drugs_in_text("マムシ抗毒素血清 1バイアル 緩徐静注")]
+        assert "mamushi_antivenom" in ids
+
+    def test_glucagon_present_with_cri_dosing_and_rebound_warning(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("glucagon")
+        assert d is not None, "glucagon missing from formulary"
+        dog = d["species_info"]["dog"]
+        assert "50 ng/kg" in dog["dosage"] and "5-40 ng/kg" in dog["dosage"]
+        assert "反跳" in d["side_effects_ja"] or "反跳" in dog["notes_ja"]
+        ids = [h["id"] for h in find_drugs_in_text("グルカゴン CRI 5-40 ng/kg/分")]
+        assert "glucagon" in ids
+
+    def test_emergency_key_drugs_resolve_to_formulary_links(self):
+        """The emergency API must resolve key-drug rows to formulary links so
+        the救急 tab's drug names are one-tap navigable; only blood products /
+        thrombolytics absent from the formulary may stay unlinked."""
+        from api.emergency_api import _resolve_key_drug_links
+        from api.emergency_protocols import EMERGENCY_PROTOCOLS
+
+        _resolve_key_drug_links()
+        total = linked = 0
+        unlinked = []
+        by_name = {}
+        for p in EMERGENCY_PROTOCOLS:
+            for d in p.get("key_drugs", []):
+                total += 1
+                if d.get("link_name"):
+                    linked += 1
+                    by_name[d.get("name", "")] = d["link_name"]
+                else:
+                    unlinked.append(d.get("name", ""))
+        assert linked / total >= 0.9, (linked, total, unlinked)
+        # combination row must land on the combination entry, not bare ampicillin
+        assert "Sulbactam" in by_name.get("Ampicillin/sulbactam", ""), by_name.get("Ampicillin/sulbactam")
+        assert "Mamushi" in by_name.get("Mamushi antivenin", "")
+        assert "Dextrose" in by_name.get("50% Dextrose", "")
+        # blood products stay plain text (no dead-end links)
+        assert all(n in {"FFP", "tPA (alteplase)"} for n in unlinked), unlinked

@@ -310,6 +310,11 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # hypoglycemia presentation (Quesenberry & Carpenter 4th ed).
     ("ferret", frozenset({"hind_leg_weakness", "drooling"}), "Insulinoma", 1.35),
     ("ferret", frozenset({"hind_leg_weakness", "staring"}), "Insulinoma", 1.35),
+    # Sudden distress screaming + a tonic/seizure episode in a ferret is
+    # insulinoma hypoglycemia until a blood glucose proves otherwise — primary
+    # epilepsy is rare in ferrets and hypoglycemia is the most common cause of
+    # ferret seizures (Quesenberry & Carpenter 4th ed).
+    ("ferret", frozenset({"seizures", "vocalization"}), "Insulinoma", 1.35),
     # Bilateral palpebral swelling + anorexia in a chelonian is
     # hypovitaminosis A until proven otherwise (Mader's Reptile and Amphibian
     # Medicine and Surgery 3rd ed; Boyer, Vet Clin North Am Exot Anim Pract) —

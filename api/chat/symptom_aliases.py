@@ -956,8 +956,13 @@ SYMPTOM_ALIASES = {
     "関節が腫れてる": "swollen_joints",
     "関節が腫れて": "swollen_joints",
     "関節腫れ": "swollen_joints",
-    "キーキー鳴く": "lethargy",
-    "鳴き声が変": "lethargy",
+    # 悲鳴・鳴き声の変化は vocalization_changes（従来の lethargy は明白な誤マッピング —
+    # フェレット・モルモット等の疼痛/発作時の悲鳴が「元気消失」に化けていた）
+    "キーキー鳴く": "vocalization_changes",
+    "キーキー鳴いて": "vocalization_changes",
+    "悲鳴を上げる": "vocalization_changes",
+    "悲鳴をあげる": "vocalization_changes",
+    "鳴き声が変": "vocalization_changes",
     # ---------------------------------------------------------------
     # 獣医師監査: 追加エイリアス (全種共通 + 種別)
     # ---------------------------------------------------------------
@@ -1961,6 +1966,58 @@ SYMPTOM_ALIASES = {
     "目に皮が残って": "retained_spectacle",
     "目の上に皮が残って": "retained_spectacle",
     "目の皮が脱皮できて": "retained_spectacle",
+    # --- 2026-08 第13回精度スイープ ---
+    # 吐出（未消化物の吐き戻し = 巨大食道症の定義的徴候。嘔吐との臨床的区別）
+    "未消化のまま吐く": "regurgitation",
+    "未消化のものを吐く": "regurgitation",
+    "未消化物を吐く": "regurgitation",
+    "食べてすぐ吐く": "regurgitation",
+    "食べた後すぐに吐く": "regurgitation",
+    "食べた直後に吐く": "regurgitation",
+    # 褐色尿（ヘモグロビン尿/ビリルビン尿 — IMHA・バベシアの hallmark）
+    "おしっこが茶色い": "dark_urine",
+    "尿が茶色い": "dark_urine",
+    "茶色い尿": "dark_urine",
+    "コーラ色の尿": "dark_urine",
+    "尿の色が濃い": "dark_urine",
+    # 猫の不適切排泄（高齢猫の頻出主訴 — CKD/FIC/認知機能低下の鑑別入口）
+    "粗相する": "inappropriate_urination",
+    "粗相をする": "inappropriate_urination",
+    "トイレ以外で排尿": "inappropriate_urination",
+    "トイレ以外でおしっこ": "inappropriate_urination",
+    "トイレ以外の場所で粗相": "inappropriate_urination",
+    "トイレを失敗": "inappropriate_urination",
+    # 猫の口をくちゃくちゃ（歯痛・FORL・口内炎の owner-reported 徴候）
+    "口をくちゃくちゃ": "jaw_chattering",
+    "口をクチャクチャ": "jaw_chattering",
+    # 頻呼吸の「速い」表記（従来は「早い」のみ収載で取りこぼし）
+    "呼吸が速い": "rapid_breathing",
+    "呼吸が速く": "rapid_breathing",
+    # ウサギ流涎のかな表記（「顎が濡れ」のみ収載であごが取りこぼし）
+    "あごが濡れている": "wet_chin",
+    "あごが濡れてる": "wet_chin",
+    "あごが濡れて": "wet_chin",
+    # 眼球突出の「〜てきた」形
+    "目が飛び出してきた": "eye_bulging",
+    "目が飛び出てきた": "eye_bulging",
+    # 斜頸（「片方に」が間に挟まると既存キー「首が傾いて」に不一致だった）
+    "首が片方に傾い": "head_tilt",
+    "頭が片方に傾い": "head_tilt",
+    # 鳥の握力低下・脚力低下（止まり木につかまれない）
+    "止まり木を握れない": "inability_to_perch",
+    "止まり木につかまれない": "inability_to_perch",
+    "脚に力が入らない": "leg_weakness",
+    "足に力が入らない": "leg_weakness",
+    # フェレット・インスリノーマ発作様エピソード（後弓反張・強直）
+    "足を伸ばして硬直": "seizures",
+    "体をそらせて硬直": "seizures",
+    # 魚の鰓呼吸促迫（「エラの動きが速い」は既存キー — 鰓/えら表記を補完）
+    "鰓の動きが速い": "rapid_gill_movement",
+    "えらの動きが速い": "rapid_gill_movement",
+    # ヘビ・スケールロット（腹側鱗の発赤）
+    "お腹のうろこが赤い": "skin_redness",
+    "お腹の鱗が赤い": "skin_redness",
+    "腹側の鱗が赤い": "skin_redness",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

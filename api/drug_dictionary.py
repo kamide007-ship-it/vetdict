@@ -67,6 +67,7 @@ from api.drug_batch_42 import DRUGS_BATCH_42
 from api.drug_batch_43 import DRUGS_BATCH_43
 from api.drug_batch_44 import DRUGS_BATCH_44
 from api.drug_batch_45 import DRUGS_BATCH_45
+from api.drug_batch_46 import DRUGS_BATCH_46
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10699,6 +10700,15 @@ for _drug45 in DRUGS_BATCH_45:
         DRUGS.append(_drug45)
         _drug_index[_drug45["id"]] = _drug45
 
+# Batch 46: 2026-08監査（第15回スイープ）— referenced-but-absent 3剤
+# （ジアゾキシド — インスリノーマ標準第二選択、治療テキスト44参照;
+#  リバロキサバン — 猫ATE救急プロトコルのkey drugなのに経口Xa阻害薬が皆無;
+#  マムシ抗毒素血清 — マムシ咬傷救急プロトコルのkey drug、日本臨床で最重要の抗毒素）
+for _drug46 in DRUGS_BATCH_46:
+    if _drug46["id"] not in _drug_index:
+        DRUGS.append(_drug46)
+        _drug_index[_drug46["id"]] = _drug46
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11077,7 +11087,13 @@ for _drug_id, _brand_aliases in BRAND_NAME_ALIASES.items():
     _entry = _drug_index.get(_DRUG_ALIAS_TO_ID.get(_drug_id, _drug_id))
     if _entry is None:
         continue
-    _own_names = _normalize_search_text(f"{_entry.get('name', '')} {_entry.get('name_ja', '')}")
+    # スキップ判定は括弧前ステムに限定する: キーワード索引は括弧サフィックスを
+    # 剥がすため、「PZIインスリン（プロジンク）」のように括弧内にだけ載る商品名は
+    # 実際には索引に到達しない。フルネーム基準でスキップすると、こうした商品名が
+    # search_aliases にも索引にも入らず永久に解決不能になる（プロジンク 41参照）。
+    _own_names = _normalize_search_text(
+        f"{re.split(r'[（(]', _entry.get('name', ''))[0]} {re.split(r'[（(]', _entry.get('name_ja', ''))[0]}"
+    )
     _alias_list = _entry.setdefault("search_aliases", [])
     _existing_aliases = {_normalize_search_text(a) for a in _alias_list}
     for _alias in _brand_aliases:
@@ -11222,12 +11238,30 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     # canonical: グルコン酸カルシウム — texts also write the reversed word order
     # "カルシウムグルコン酸(塩)" (21 refs, horse hypocalcemia / amphibian MBD).
     # Bare prefix covers both 酸 and 酸塩 endings via substring match.
+    # 2026-08 sweep #15: treatment texts cite these agents by transliteration /
+    # word-order variants the canonical names never reduce to.
+    "tiludronate": ("ティルドロネート",),  # canonical: チルドロン酸（チルドレン） — navicular refs
+    # 救急プロトコルのkey drug表記（"グルコン酸Ca10%" / "Plasmalyte"）は
+    # 正準名（グルコン酸カルシウム / Plasma-Lyte A）に還元されない。
+    "normosol_r": ("プラズマライト", "plasmalyte"),
+    "selenium_vitamin_e": (
+        "セレン酸ナトリウム",
+        "亜セレン酸ナトリウム",
+    ),  # white-muscle-disease texts cite the sodium selenite salt (9 refs)
 }
+# canonical: スルファジアジン銀 — texts write the reversed word order
+# "銀スルファジアジン" (47 refs, burn/wound care) which resolved to the plain
+# systemic sulfadiazine entry instead of the topical silver product. Registry
+# key already exists above (ruff F601 guard), so extend here.
+_KATAKANA_VARIANT_ALIASES["silver_sulfadiazine"] = _KATAKANA_VARIANT_ALIASES["silver_sulfadiazine"] + (
+    "銀スルファジアジン",
+)
 # UDCA acronym for ursodiol (registry key already exists above, so extend here
 # rather than duplicating the dict key — ruff F601 guard).
 _KATAKANA_VARIANT_ALIASES["ursodiol"] = _KATAKANA_VARIANT_ALIASES["ursodiol"] + ("UDCA",)
 _KATAKANA_VARIANT_ALIASES["calcium_gluconate"] = _KATAKANA_VARIANT_ALIASES["calcium_gluconate"] + (
     "カルシウムグルコン酸",
+    "グルコン酸ca",  # 救急key drug表記 "グルコン酸Ca10%"（小文字化後に照合）
 )
 
 

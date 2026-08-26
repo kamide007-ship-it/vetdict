@@ -607,7 +607,11 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
 
 # Symptom extractor & disease matcher extracted to api/chat/
 from api.chat.disease_matcher import _match_species_symptoms_to_diseases  # noqa: F401
-from api.chat.symptom_extractor import ID_SYNONYMS, _extract_species_symptoms  # noqa: F401
+from api.chat.symptom_extractor import (  # noqa: F401
+    ID_SYNONYMS,
+    _extract_species_symptoms,
+    is_negated_mention,
+)
 
 # =============================================================================
 # SYMPTOM EXTRACTION FROM TEXT
@@ -790,6 +794,9 @@ def extract_symptoms_from_text(text: str) -> list:
         pos = text_lower.find(alias)
         if pos == -1:
             continue
+        if is_negated_mention(text_lower, pos + len(alias)):
+            # 「咳はない」等 — 否定された言及は抽出しない
+            continue
         symptom_id = _resolve_legacy_id(SYMPTOM_ALIASES[alias])
         if symptom_id is None:
             continue
@@ -812,7 +819,11 @@ def extract_symptoms_from_text(text: str) -> list:
         name_ja = symptom["name_ja"].lower()
         name_en = symptom["name_en"].lower()
         symptom_id = symptom["id"]
-        if name_ja in text_lower or name_en in text_lower:
+        ja_pos = text_lower.find(name_ja) if name_ja else -1
+        en_pos = text_lower.find(name_en) if name_en else -1
+        if (ja_pos >= 0 and not is_negated_mention(text_lower, ja_pos + len(name_ja))) or (
+            en_pos >= 0 and not is_negated_mention(text_lower, en_pos + len(name_en))
+        ):
             matched_symptoms.add(symptom_id)
 
     # ---------------------------------------------------------------

@@ -30,7 +30,7 @@ class TestSymptomDatabase:
     """Verify symptom database structure and consistency."""
 
     def test_symptom_count(self):
-        assert len(SYMPTOMS) == 70  # +abdominal_pain, +dry_eye, +ear_swelling (2026-08 round-12)
+        assert len(SYMPTOMS) == 72  # +regurgitation, +dark_urine (2026-08 round-13)
 
     def test_all_symptoms_have_required_fields(self):
         for s in SYMPTOMS:
@@ -291,7 +291,7 @@ class TestGetSymptomsRoute:
         assert "total" in data
         assert "symptoms" in data
         assert "categories" in data
-        assert data["total"] == 70
+        assert data["total"] == 72
 
     def test_filter_by_category(self, client):
         resp = client.get("/api/health-check/symptoms?category=respiratory")
