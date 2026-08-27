@@ -3644,3 +3644,97 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 - `setDefaultStats()`: dog 586/cat 565/ferret 207/sugar_glider 76薬品、pendingStats drugs 647→**651**・
   symptoms 70→**72**
 - ServiceWorker: `CACHE_NAME` v131 → **v132**（第24/25弾との同版衝突のため2回改番）
+
+## 2026-08セッション（第27弾: 薬品重複カード56件の統合 + referenced-but-absent 6剤 + チャット精度第15弾）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,045件合格**（34 skip）
+- 配信SQLiteクリーンビルド: 6,892疾患、treatment/prevention/prognosis **100%**、主要臨床フィールド空欄 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（全species_info検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- prevalence dead key: **9**（当該種DBに疾患自体が無い既知残、上限15ガード内）
+
+### 薬品重複カード56件の統合（651→601薬品 — 疾患T103と同型の重複解消・第2弾）
+括弧サフィックス（商品名・化学同義語・薬剤自体と同一の剤形記述）だけが違う同一薬の
+重複カードを監査で56件検出し、`_DRUG_CURATED_MERGE` を1件（ガバペンチン）→53グループに拡張:
+- **純粋な商品名違い**: Spironolactone / (Aldactone)、Clopidogrel / (Plavix)、Pergolide / (Prascend)、
+  Toceranib / Phosphate / (Palladia) Oral、Budesonide / (Entocort) 等
+- **化学同義語**: Calcitriol と「Calcitriol (1,25-Dihydroxyvitamin D3)」（=同一薬の2枚目カード。
+  **別薬のコレカルシフェロールは独立エントリのまま維持**）、SAMe 2枚、シリマリン 2枚、
+  Vitamin B12 (Cobalamin) と Cobalamin Injectable（SC用量同一）、PGF2α と Dinoprost（用量同一）
+- **適応名分割**: ベナゼプリル4枚（Fortekor/猫CKD/腎保護/フィラリアPH — 同一用量帯）等
+- **統合規則**（既存の安全規則に準拠）: 正規側（種数最多）の用量は**絶対に上書きしない**。
+  変種からは欠落種のみ取り込み（例: calcitriol が爬虫類カバレッジを獲得）。旧IDは
+  `_DRUG_ALIAS_TO_ID` で解決（ブックマーク・ナビゲーション維持）、商品名検索も維持
+  （アルダクトン→spironolactone 等を検証）
+- **意図的に統合しないもの**（用量が本質的に異なる変種、コメントで文書化）:
+  maropitant_travel（酔い止め8 mg/kg≠制吐2 mg/kg）、chlorambucil_low_dose（メトロノミック）、
+  piroxicam_bladder（TCCプロトコル）、diltiazem_oral（徐放）、melatonin_implant、
+  calcium_gluconate_oral（経口≠IV）、lidocaine_systemic、TXA topical/IV、heparin_laminitis、
+  prednisolone_lymphoma、tramadol_lactation 等
+- **ドンペリドンの正準名タイポ修正**: name_ja「ドメペリドン」→ 標準カナ「**ドンペリドン**」
+  （INN標準表記）。旧表記はエイリアスで解決維持（馬乳汁分泌不全テキストの9参照）
+
+### referenced-but-absent 薬品6剤の補完（`drug_batch_47.py` 新規、+6剤）
+用量文脈カタカナトークン監査（第16回スイープ）で、治療テキストが用量付きで指示するのに
+未収載だった6剤を検出・補完:
+- **ハロペリドール**（17参照）— 鳥の難治性羽毛破壊行動・自咬症 0.1-0.2 mg/kg PO q12-24h
+  （Carpenter 6th; Iglauer & Rasim 1993）。バタン類は低用量開始。犬は safe:False（現行行動学に適応なし）
+- **アトバコン**（12参照）— **自サイトのキュレート済みプロトコル（B. gibsoni: アトバコン+アジスロ、
+  Cytauxzoon: Cohn 2011 生存率60%）が名指しする第一選択なのに未収載だった**。
+  脂肪食との同時投与必須（空腹時投与=治療失敗の代表的原因）・M121I耐性を明記
+- **プリマキン**（20参照）— 鳥マラリア組織型/ガメトサイト + **猫バベシア唯一の有効薬**。
+  猫の致死量（約1 mg/kg）が治療量（0.5 mg/kg）のわずか2倍という**猫の抗原虫薬で最狭の治療域**を
+  用量・禁忌の両方に明記
+- **クロロキン**（20参照）— 鳥マラリア赤内型第一選択（25→15 mg/kg at 12/24/48h、プリマキン併用必須）
+- **ナルトレキソン**（9参照）— 肢端舐性皮膚炎・毛引き・馬自傷のオピオイド拮抗補助
+  （White 1990 JAVMA; Dodman 1987/1988）。**オピオイド鎮痛薬を無効化**する相互作用を major で明記
+- **ブチルスコポラミン（ブスコパン）**（10参照）— 馬の痙攣性疝痛・チョークのFDA承認鎮痙薬
+  0.3 mg/kg 緩徐IV。**投与前の心拍数記録必須**（一過性頻脈が疝痛重症度指標をマスク）・
+  効果消失後の疼痛再燃は外科的病変を示唆、を明記（Plumb's 10th; Reed & Bayly 4th）
+
+### 表記ゆれエイリアス（sweep #16、約200参照がチップ化）
+- プラジクアンテル（25参照、正準はプラジカンテル）、ミルクシスル（19）、トコフェロール（20）、
+  アスコルビン酸（9）、ロイプロリド（20）/リュープロライド（4）、流動パラフィン（16）/
+  パラフィンオイル（11、括弧内漢字混じりで tier-4 索引対象外だった）、パモ酸ピランテル（10、語順逆転）/
+  ピランテル（裸名）、硫酸鉄（20、正準は硫酸第一鉄）
+- **索引の3文字漢字許可**: 全漢字3文字（「硫酸鉄」）はラテン4文字以上と同等に特異的なため、
+  キュレート済みエイリアスに限り長さ制限を緩和
+
+### 診断チャット精度 第15弾（20症例フレッシュスイープ 8 MISS → 全症例合格）
+- **辞書形・連用形エイリアスギャップ**: 「関節が腫れる」（てる/て形のみ収載 — モルモット壊血病の
+  教科書的主訴が抽出不能）、「口の中が赤く」「チーズ状のもの」（ヘビ・マウスロット）、
+  「便に血が混じる/お尻から血」（血便系）、「骨が弱い/もろい」（フクロモモンガMBD）
+- **フェレット黒色便ブリッジ**: 飼い主は鮮血便と黒色便を区別できないのに、胃潰瘍
+  （black_tarry_stool/tarry_stool）が「血便」主訴でマッチせず**エストロゲン性骨髄抑制・
+  妊娠毒血症が血便+元気消失の上位を占めていた** → _SYN に bloody_stool→black_tarry_stool等の
+  ブリッジ + ferret prevalence 6キー追加（Gastric Ulcer=common、H. mustelae潰瘍=common、
+  Ibuprofen Toxicosis/Pregnancy Toxemia/Parvovirus Enteritis=rare）→ GI鑑別がtop5独占
+- **擬音語**: 「呼吸のたびにプチプチ音」→clicking_breathing_sounds（鳥の気嚢ダニ/アスペルギルス）
+- **サワークロップ**: 「そのうから酸っぱい臭い」→sour_crop_odor 新設（bird専用ID、
+  parrot/parakeet は ID_SYNONYMS で crop_stasis/crop_distension にフォールバック）
+- **犬の整形外科主訴**: 「階段を上れない」「後ろ足が震える」が抽出不能で
+  「散歩を嫌がる+階段+後ろ足が震える」の典型的OA主訴がてんかん1位だった →
+  階段系→stiffness、後ろ足が震える→hind_leg_weakness（「足が震え」→tremorsより長い最長一致）
+  → 膝蓋骨脱臼/OA/椎間板ヘルニアがtop3
+- **馬タイイングアップ**: 「後肢が突っ張って歩く 運動後に尿が茶色い」が抽出ゼロ →
+  突っ張っ→body_stiffness、尿が茶色/コーラ色の尿→body_dark_urine（語順ゆれ）→
+  横紋筋融解症ファミリーがtop4独占（労作後ミオグロビン尿の教科書的ペア — Reed & Bayly 4th）
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound15`（10件）
+
+### UX: クイック入力の拡充 + 新規薬品の双方向動線検証
+- クイック入力に新規対応主訴を追加: 馬「後肢が突っ張って歩き尿が茶色い」（タイイングアップ）、
+  モルモット「関節が腫れる」（壊血病）、フェレット「便に血が混じる」— ミラーテスト JA_QUICK 同期
+- 新規6剤の動線を検証: 疾患→薬品チップ（治療テキスト解決）と薬品→「この薬品を使う疾患」
+  逆引き（アトバコン12疾患・ブスコパン15疾患・ハロペリドール24疾患等）の双方向を確認 —
+  鑑別診断結果・チャット候補カードから1タップ到達
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()` 全21種の薬品数を統合後実測に同期（dog 545, cat 529, horse 347 等）、
+  pendingStats drugs 651→**601**（静的コピー「600+薬品」は据え置きで整合）
+- ServiceWorker: `CACHE_NAME` v132 → **v133**
+
+### テスト・CI
+- フルテストスイート合格（+13新規回帰テスト: batch47/エイリアス6 + 統合4 + チャット10 + 既存1調整）
+- ruff check: repo全体 clean、変更ファイル format 済み
+- 配信DB: クリーンビルドで 6,892疾患・**601薬品**、treatment/prevention/prognosis 100%

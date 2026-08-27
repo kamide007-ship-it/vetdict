@@ -244,6 +244,12 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "dark urine": "body_dark_urine",
     "尿が濃い": "body_dark_urine",
     "茶色い尿": "body_dark_urine",
+    # 2026-08 第14弾: 語順ゆれ「尿が茶色い」＋タイイングアップの
+    # 定義的所見「突っ張って歩く」（運動後ミオグロビン尿とペアで
+    # 労作性横紋筋融解症の教科書的主訴 — Reed & Bayly 4th ed）
+    "尿が茶色": "body_dark_urine",
+    "コーラ色の尿": "body_dark_urine",
+    "突っ張っ": "body_stiffness",
     "abdominal distension": "body_abdominal_distension",
     "お腹が張る": "body_abdominal_distension",
     "muscle fasciculation": "body_muscle_fasciculation",
