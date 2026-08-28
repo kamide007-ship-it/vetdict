@@ -778,6 +778,10 @@ def extract_symptoms_from_text(text: str) -> list:
         # "泡を吹く" resolves to drooling (species vocabularies); the legacy
         # dog vocabulary carries ptyalism as excessive_drooling.
         "drooling": ["excessive_drooling"],
+        # "後ろ足が立たなくなった" (acute pelvic-limb failure — IVDD/FCE)
+        # resolves to hind_limb_paralysis; the legacy dog vocabulary carries
+        # paralysis directly.
+        "hind_limb_paralysis": ["paralysis", "limping"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

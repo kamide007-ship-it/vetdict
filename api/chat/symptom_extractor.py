@@ -517,6 +517,24 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 口をくちゃくちゃ (jaw chattering — feline oral pain/FORL sign): only the
     # cat vocabulary carries it natively; bridge to eating-difficulty IDs.
     "jaw_chattering": ["difficulty_eating", "drooling", "mouth_pain"],
+    # --- 2026-08 Round 15 sweep ---
+    # いびき (stertor/snoring — BOAS complaint): cat/ferret/dog carry it
+    # natively; bridge to the noisy/labored-breathing IDs elsewhere.
+    "snoring": ["noisy_breathing", "wheezing", "labored_breathing"],
+    # 急性後肢麻痺: rabbit carries hind_limb_paralysis natively; bridge to
+    # the weakness/paralysis IDs used by the other vocabularies.
+    "hind_limb_paralysis": [
+        "hind_limb_weakness",
+        "paralysis",
+        "dragging_hind_legs",
+        "inability_to_stand",
+    ],
+    # 白猫の耳介先端SCC: only the cat vocabulary carries ear_tip_lesions —
+    # bridge to crusting/skin lesions for other species.
+    "ear_tip_lesions": ["crusting", "skin_lesions"],
+    "non_healing_wound": ["skin_ulcers", "skin_lesions", "wounds"],
+    # 爬虫類MBDのラバージョー: lizard carries jaw_softening natively.
+    "jaw_softening": ["rubber_jaw", "soft_bones", "swollen_jaw"],
 }
 
 # Backwards-compat alias (some older imports use the private name).

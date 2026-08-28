@@ -3644,3 +3644,72 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 - `setDefaultStats()`: dog 586/cat 565/ferret 207/sugar_glider 76薬品、pendingStats drugs 647→**651**・
   symptoms 70→**72**
 - ServiceWorker: `CACHE_NAME` v131 → **v132**（第24/25弾との同版衝突のため2回改番）
+
+## 2026-08セッション（第27弾: イソクスプリン/ビスマス/ビオチン補完 + チャット精度第15弾 + 疾患DB詳細に麻酔注意ボックス）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,045件合格**（34 skip）
+- 配信SQLiteクリーンビルド: 6,892疾患、主要臨床フィールド（治療/病因/予後/予防/説明/病態）の空欄 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（651薬品時点、species_info 3,802エントリ全数検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**
+- prevalence dead key: **9**（当該種DBに疾患自体が無い既知残、上限15ガード内）
+- 初回フルランの1失敗（test_chelonian_and_jp_antiparasitics）は並行 migrate_to_sqlite との既知のレース — 単独再実行で合格
+
+### referenced-but-absent 薬品3剤の補完（`drug_batch_47.py` 新規、651→654薬品）
+用量文脈カタカナトークン監査（第16回スイープ、find_drugs_in_text 実マッチャー突合）で検出:
+- **イソクスプリン** — 馬蹄舟骨症候群2エントリが「0.6 mg/kg PO q12h（末梢血管拡張）」で参照する古典的血管拡張薬
+  （Rose 1983 EVJ）。経口BA不良でエビデンス限定的（Erkert 2002）・装蹄矯正+NSAIDsが第一選択・
+  FEI/競馬禁止薬物を明記。犬 safe:False
+- **次サリチル酸ビスマス（ペプトビスモル）** — フェレット/ハムスターHelicobacter三剤併用の第三の柱
+  （17.5 mg/kg PO q8h ×14日、Quesenberry & Carpenter 4th; Marini 1999）が7参照なのに未収載。
+  **猫 safe:False**（サリチル酸グルクロン酸抱合能低下 — アスピリン中毒と同一機序）、糞便黒色化=メレナ誤認・
+  X線不透過・テトラサイクリン/キノロンのキレート相互作用（2時間間隔）を明記
+- **ビオチン（ビタミンB7）** — 28参照（馬蹄質改善 15-25 mg/日 Josseck/Zenker 1995 EVJ ×6-9ヶ月継続、
+  犬被毛サプリ、爬虫類の生卵白アビジン欠乏症）。ビタミンB12との数字境界ガードを検証
+- bare「ビスマス」エイリアス追加（フェレット胃潰瘍の裸表記を解決）。3剤とも治療チップ・逆引き
+  「この薬品を使う疾患」（isoxsuprine 2/bismuth 24/biotin 30疾患）双方の導線を検証済み
+
+### 診断チャット精度 第15弾（22症例フレッシュスイープ 8 MISS → 全症例合格）
+- **急性後肢不全**: 「後ろ足が立たなくなった」が legacy 犬パスで抽出ゼロ（hind_limb_paralysis の legacy
+  fallback 欠落）→ _LEGACY_FALLBACK に paralysis/limping 追加 + 変化形エイリアス3種
+  （立たなく/で立てなく/で立てない）→ IVDD/変性性脊髄症/ウォブラーが top-3
+- **いびき語彙が全パスに皆無**: BOAS の代表的主訴なのに legacy 犬 DB に snoring が無く、「いびきがひどい」
+  抽出ゼロで短頭種気道症候群が自身の主訴でランクインしなかった → legacy 語彙に snoring 追加（73→74症状）+
+  BOAS 症状セット + 「いびき」「すぐばてる」「暑さに弱い」エイリアス + ID_SYNONYMS
+  snoring→noisy_breathing/wheezing（「ガーガー」は気管虚脱のガチョウ様咳として coughing を維持）
+- **白猫の耳介先端SCC**: 「耳の先にかさぶたができて治らない」抽出ゼロ → ear_tip_lesions /
+  non_healing_wound エイリアス4種 → 皮膚扁平上皮癌/ボーエン病が top-2
+- **瞳孔不同**: 「片方の瞳孔だけ大きさが違う」抽出ゼロ → dilated_pupils エイリアス4種 →
+  網膜剥離/高血圧性網膜症が top-3
+- **ウサギ後肢麻痺**: 「後ろ足を引きずって立てない」が lameness のみ → て形エイリアス + ID_SYNONYMS
+  hind_limb_paralysis 系ブリッジ → 後肢不全麻痺/脊髄圧迫/脊椎亜脱臼が top-4
+- **爬虫類ラバージョー**: 「あごが柔らかくてぶよぶよ」（かな表記）が抽出ゼロ → jaw_softening エイリアス3種 +
+  ID_SYNONYMS → トカゲMBDが rank 1
+- **フェレット腹水**: 「お腹がパンパンに膨れている」が「パンパンに膨れている」→edema の最長一致に負けて
+  腹部文脈消失 → 11文字キー「お腹がパンパンに膨れて」→bloating で腹部文脈を確実に勝たせる → 心筋症 top-5
+- **ヘビ食後吐出**: 「吐き戻す」動詞形が皆無 + 「吐き戻し」→vomiting 誤マッピング → regurgitation に是正
+  （legacy fallback regurgitation→vomiting と ID_SYNONYMS で他種は不変 — 鳥クロップ疾患の回帰テストで固定）
+  → 吐出症候群/クリプトスポリジウム症が top-4
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound15`（9件）+ `TestBatch47IsoxsuprineBismuthBiotin`（5件）
+
+### UX: 疾患DB詳細パネルに麻酔注意ボックス（チェッカー結果とのパリティ）
+- 「🏥 この疾患の麻酔注意事項」ボックス（禁忌薬品のワンタップリンク + 種別麻酔プロトコルへのジャンプ付き）は
+  **チェッカー結果カードのみ**に表示され、疾患DBで拡張型心筋症を開いた獣医師にはα2作動薬禁忌が出なかった →
+  DB詳細テンプレートに `anes-considerations-slot` プレースホルダを追加し、`toggleDbItem` 展開時に
+  `hydrateAnesthesiaConsiderations()` で遅延ハイドレート（fetch-once の ensureAnesthesiaContraRules を
+  起動、ルール未着時は短時間ポーリング）。リンクは既存の委譲ハンドラ（drug-nav-link/anesthesia-nav-link）で
+  完全一致着地
+- 回帰テスト: `test_app_js_disease_db_detail_surfaces_anesthesia_considerations`
+
+### UX: クイック入力の拡充（新規対応主訴の1タップ導線）
+- 犬「いびきがひどく呼吸がガーガー鳴る」（→短頭種気道症候群）、猫「耳の先にかさぶたができて治らない」
+  （→扁平上皮癌の早期発見導線）。ミラーテスト JA_QUICK 同期済み
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 589/cat 566/horse 363/ferret 208/reptile 106/snake 113/lizard 108薬品、
+  pendingStats drugs 651→**654**・symptoms 73→**74**
+- ServiceWorker: `CACHE_NAME` v132 → **v133**
+
+### テスト・CI
+- フルテストスイート: **4,060件合格**（34 skip、+15新規回帰テスト）、ruff check/format clean
+- 配信DB: クリーンビルドで 6,892疾患・**654薬品**、treatment/prevention/prognosis 100%
