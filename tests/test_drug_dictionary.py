@@ -2326,3 +2326,85 @@ class TestBatch46DiazoxideRivaroxabanAntivenomGlucagon:
         assert "Dextrose" in by_name.get("50% Dextrose", "")
         # blood products stay plain text (no dead-end links)
         assert all(n in {"FFP", "tPA (alteplase)"} for n in unlinked), unlinked
+
+
+class TestBatch47FluorouracilAndIronAliases:
+    """2026-08 16th referenced-but-absent sweep: the equine sarcoid/aural
+    plaque/SCC protocols (11 refs) cite topical/intralesional 5-FU yet
+    fluorouracil was absent — along with its single most important safety
+    fact (lethal to cats by any route). 硫酸鉄 (26 refs) turned out to be an
+    alias gap on the existing ferrous_sulfate_oral entry, whose canonical
+    name_ja is 硫酸第一鉄."""
+
+    def test_fluorouracil_present_with_feline_lethality_gate(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("fluorouracil")
+        assert d is not None, "fluorouracil missing from formulary"
+        horse = d["species_info"]["horse"]
+        assert horse["safe"] and "5%" in horse["dosage"] and "50 mg/mL" in horse["dosage"]
+        assert "サルコイド" in horse["dosage_ja"]
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is False
+        assert "致死" in cat["dosage_ja"] or "致死" in cat["notes_ja"]
+        # accidental topical-cream exposure is the defining small-animal hazard
+        assert "誤摂取" in d["species_info"]["dog"]["dosage_ja"] or "誤摂取" in d["species_info"]["dog"]["notes_ja"]
+        for text in ("5-FU局所", "局所5-FU軟膏・イミキモド5%", "フルオロウラシル外用"):
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert "fluorouracil" in ids, (text, ids)
+
+    def test_ferrous_sulfate_aliases_resolve_and_horse_iv_ban_documented(self):
+        from api.drug_dictionary import find_drugs_in_text, get_drug_by_id
+
+        d = get_drug_by_id("ferrous_sulfate_oral")
+        assert d is not None
+        ids = [h["id"] for h in find_drugs_in_text("硫酸鉄 4-6 mg/kg PO q24h")]
+        assert "ferrous_sulfate_oral" in ids, ids
+        # injectable iron entry keeps its own resolution
+        ids2 = [h["id"] for h in find_drugs_in_text("鉄デキストラン 10-20 mg/kg IM 単回")]
+        assert "iron_dextran" in ids2 and "ferrous_sulfate_oral" not in ids2
+        # horse row documents the fatal-IV-iron and foal cautions
+        horse = d["species_info"]["horse"]
+        assert "静注鉄" in horse["notes_ja"] and "新生子馬" in horse["notes_ja"]
+        assert "ferret" in d["species_info"]
+
+    def test_seishoku_saline_shorthand_resolves_with_negative_context_guard(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        for text in (
+            "生食または0.05%クロルヘキシジンで洗浄",
+            "滅菌生食でそ嚢洗浄",
+            "温生食で腸管洗浄",
+        ):
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert "normal_saline" in ids, (text, ids)
+        # 産生食物 (gas-producing food) / 生食用 (raw food) must never chip saline
+        for text in (
+            "ガス産生食物の除去（キャベツ、豆類）",
+            "生食用の魚は与えない",
+        ):
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert "normal_saline" not in ids, (text, ids)
+        # a mixed sentence with one real mention still resolves
+        ids = [h["id"] for h in find_drugs_in_text("ガス産生食物の除外後、生食で洗浄")]
+        assert "normal_saline" in ids
+
+    def test_no_drug_has_string_typed_interactions(self):
+        # ethambutol/dihydrostreptomycin shipped drug_interactions as plain
+        # strings, which the frontend spread character-by-character into ~130
+        # broken one-letter interaction badges. Guard the schema repo-wide.
+        from api.drug_dictionary import DRUGS
+
+        offenders = []
+        for d in DRUGS:
+            di = d.get("drug_interactions")
+            if di is None:
+                continue
+            if not isinstance(di, list):
+                offenders.append((d["id"], type(di).__name__))
+                continue
+            for it in di:
+                if not isinstance(it, dict) or "drug" not in it:
+                    offenders.append((d["id"], repr(it)[:40]))
+                    break
+        assert not offenders, offenders

@@ -438,3 +438,30 @@ def test_main_css_disables_mobile_font_inflation():
     html_rule = css[css.index("html{") : css.index("}", css.index("html{"))]
     assert "-webkit-text-size-adjust:100%" in html_rule
     assert "text-size-adjust:100%" in html_rule
+
+
+def test_app_js_disease_db_panel_shows_anesthesia_considerations():
+    """Disease-DB detail panels (2026-08 round 14): the per-disease anesthesia
+    contraindication box (renderAnesthesiaConsiderations) rendered only in
+    checker results — a vet browsing the DB for HCM/CKD/epilepsy never saw the
+    α2/NSAID/acepromazine warnings there. The DB detail template must carry a
+    hydration holder, toggleDbItem must hydrate it on expand, and the
+    fetch-once rules loader must return a promise the hydrator can await."""
+    # holder rendered inside the DB detail template with both names carried
+    assert 'class="anesthesia-considerations-holder" data-anes="1"' in APP_JS
+    # hydrator exists, awaits the rules promise, and reuses the shared renderer
+    idx = APP_JS.index("function hydrateAnesthesiaConsiderations(")
+    block = APP_JS[idx : idx + 900]
+    assert "ensureAnesthesiaContraRules().then" in block
+    assert "renderAnesthesiaConsiderations(" in block
+    # wired into the expand path next to the other hydrators
+    assert "hydrateAnesthesiaConsiderations(detail)" in APP_JS
+    # the loader is promise-returning (memoised) so hydration can await it
+    lidx = APP_JS.index("function ensureAnesthesiaContraRules(")
+    lblock = APP_JS[lidx : lidx + 700]
+    assert "return Promise.resolve(anesthesiaContraRules)" in lblock
+    assert "return _contraRulesPromise" in lblock
+    # DB data loader warms the rules so first expand hydrates instantly
+    didx = APP_JS.index("function loadDiseaseDb(")
+    dblock = APP_JS[didx : didx + 600]
+    assert "ensureAnesthesiaContraRules()" in dblock

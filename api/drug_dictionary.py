@@ -70,6 +70,7 @@ from api.drug_batch_43 import DRUGS_BATCH_43
 from api.drug_batch_44 import DRUGS_BATCH_44
 from api.drug_batch_45 import DRUGS_BATCH_45
 from api.drug_batch_46 import DRUGS_BATCH_46
+from api.drug_batch_47 import DRUGS_BATCH_47
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10711,6 +10712,14 @@ for _drug46 in DRUGS_BATCH_46:
         DRUGS.append(_drug46)
         _drug_index[_drug46["id"]] = _drug46
 
+# Batch 47: 2026-08監査（第16回スイープ）— referenced-but-absent 2剤
+# （フルオロウラシル(5-FU) — 馬サルコイド/SCCの標準補助療法11参照 + 猫絶対禁忌の
+#  定義的安全事実; 硫酸鉄 — 鉄欠乏性貧血の経口維持療法26参照、注射鉄のみ収載だった）
+for _drug47 in DRUGS_BATCH_47:
+    if _drug47["id"] not in _drug_index:
+        DRUGS.append(_drug47)
+        _drug_index[_drug47["id"]] = _drug47
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11188,6 +11197,14 @@ _PURE_KATAKANA_RE = re.compile(r"^[ァ-ヴー]{4,}$")
 # lowercased index cannot.
 _CASE_SENSITIVE_KEYWORDS = {"Critical Care": "critical_care_herbivore"}
 
+# Keyword-level negative contexts: an occurrence that falls inside one of
+# these longer strings is not a drug mention. 生食 (clinical shorthand for
+# saline) must not fire inside ガス産生食物 (gas-producing food) or 生食用/
+# 生食物 (raw-food senses).
+_KEYWORD_NEGATIVE_CONTEXTS: dict[str, tuple[str, ...]] = {
+    "生食": ("産生食", "生食物", "生食用"),
+}
+
 
 # Legitimate katakana spelling variants that disease treatment texts use but
 # that differ from the formulary's canonical name_ja. Without these the
@@ -11349,7 +11366,11 @@ def _build_drug_keyword_index() -> None:
         # Central registry + optional per-drug "search_aliases" field.
         for alias in list(_KATAKANA_VARIANT_ALIASES.get(drug_id, ())) + list(d.get("search_aliases") or ()):
             a = alias.strip().lower()
-            if len(a) >= 4:
+            # Pure-kanji compounds are dense enough to be specific at 2-3
+            # chars (硫酸鉄, 生食 — clinical shorthand for saline); katakana
+            # and Latin aliases still need ≥4 chars, since bare substring
+            # matching would false-positive inside longer katakana runs.
+            if len(a) >= 4 or (len(a) >= 2 and all("一" <= ch <= "鿿" for ch in a)):
                 tier2.append((a, drug_id))
         for key in (d.get("name", ""), d.get("name_ja", "")):
             if not key or len(key) < 4:
@@ -11424,6 +11445,21 @@ def find_drugs_in_text(text: str, max_results: int = 25) -> List[Dict]:
                         break
                     nxt = pos + len(keyword)
                     if nxt >= len(text_lower) or not text_lower[nxt].isdigit():
+                        hit = True
+                        break
+                    pos += 1
+                if not hit:
+                    continue
+            negatives = _KEYWORD_NEGATIVE_CONTEXTS.get(keyword)
+            if negatives:
+                pos, hit = 0, False
+                while True:
+                    pos = text_lower.find(keyword, pos)
+                    if pos == -1:
+                        break
+                    if not any(
+                        neg in text_lower[max(0, pos - len(neg)) : pos + len(keyword) + len(neg)] for neg in negatives
+                    ):
                         hit = True
                         break
                     pos += 1

@@ -995,6 +995,11 @@ DRUGS_BATCH_21 = [
     },
     {
         "id": "ferrous_sulfate_oral",
+        "search_aliases": [
+            "硫酸鉄",
+            "フマル酸第一鉄",
+            "ferrous sulfate",
+        ],
         "name": "Ferrous Sulfate (Oral Iron)",
         "name_ja": "硫酸第一鉄（経口鉄剤）",
         "category": "miscellaneous",
@@ -1013,8 +1018,18 @@ DRUGS_BATCH_21 = [
             },
             "bird": {
                 "dose": "5-10 mg/kg PO q24h",
-                "notes_ja": "鳥類の鉄欠乏性貧血",
-                "notes": "Avian iron deficiency anemia",
+                "notes_ja": "鳥類の鉄欠乏性貧血。鉄蓄積症感受性種（オオハシ・キュウカンチョウ）には禁忌",
+                "notes": "Avian iron deficiency anemia. Contraindicated in iron-storage-disease-susceptible species (toucans, mynahs)",
+            },
+            "horse": {
+                "dose": "元素鉄として2-4 mg/kg PO q24h（確定的な鉄欠乏性貧血のみ）",
+                "notes_ja": "適応は稀 — 馬の貧血の多くは炎症性で鉄は充足。馬への静注鉄は致死的アナフィラキシー様反応の報告があり禁止。新生子馬への鉄投与も不可",
+                "notes": "Rarely indicated — most equine anaemias are inflammatory and iron-replete. Never give iron IV in horses (fatal anaphylactoid reactions); avoid iron in neonatal foals",
+            },
+            "ferret": {
+                "dose": "50-100 mg/kg PO q24h",
+                "notes_ja": "慢性消化管出血（ヘリコバクター潰瘍等）による鉄欠乏性貧血（Carpenter Formulary）。基礎の失血を同時に治療",
+                "notes": "Iron deficiency from chronic GI bleeding (e.g. Helicobacter ulcers; Carpenter Formulary). Treat the underlying blood loss concurrently",
             },
         },
         "side_effects": "GI upset, black feces, constipation, iron toxicity (overdose)",

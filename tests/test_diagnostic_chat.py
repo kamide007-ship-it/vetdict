@@ -3241,3 +3241,87 @@ class TestChatClinicalAccuracyAuditRound14:
         assert "rapid_gill_movement" in ids, ids
         ids = _extract_species_symptoms("体に水ぶくれのような斑点 お腹のうろこが赤い", "snake")
         assert "skin_redness" in ids and "skin_blistering" in ids, ids
+
+
+class TestChatClinicalAccuracyAuditRound15:
+    """2026-08 audit round 15: fresh 40-case sweep. Root causes fixed: the
+    canine Cushing complaint 「水をたくさん飲んでおしっこも多い…毛が左右対称に
+    薄い」 extracted nothing (four missing phrase variants), the otitis
+    complaint lost 耳から悪臭/茶色い耳垢, the budgerigar scaly-face mite
+    (Knemidokoptes) had no owner-phrasing aliases at all, the sore-hock
+    連用形 「足の裏が赤く腫れて」 fell through, and the equine hot-hoof
+    complaint ranked deep-digital-flexor tendinitis (a 2-finding entry with
+    trivially perfect coverage) above laminitis and hoof abscess."""
+
+    def test_dog_cushing_complaint_extracts_and_ranks_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("水をたくさん飲んでおしっこも多い お腹だけ膨れてきた 毛が左右対称に薄い")
+        for sid in ("excessive_thirst", "frequent_urination", "bloating", "hair_loss"):
+            assert sid in ex, (sid, ex)
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "クッシング" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_dog_otitis_complaint_ranks_otitis_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("耳から悪臭 茶色い耳垢 頭を振る")
+        assert "ear_odor" in ex and "ear_discharge" in ex and "head_shaking" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "外耳炎" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_parakeet_scaly_face_complaint_ranks_knemidokoptes(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("くちばしの周りにかさぶた 白い粉をふいたよう", "parakeet")
+        assert "crusty_beak" in ex and "scaly_face" in ex, ex
+        names = [
+            d.get("name_ja") or d.get("name")
+            for d in _match_species_symptoms_to_diseases(ex, "parakeet", lang="ja")[:3]
+        ]
+        assert any("疥癬" in n for n in names), names
+        # bird falls back through the ID-synonym bridge to its facial-lesion IDs
+        ex_b = _extract_species_symptoms("くちばしの周りにかさぶた かゆがる", "bird")
+        names_b = [
+            d.get("name_ja") or d.get("name") for d in _match_species_symptoms_to_diseases(ex_b, "bird", lang="ja")[:3]
+        ]
+        assert any("疥癬" in n for n in names_b), names_b
+
+    def test_rabbit_sore_hock_renyoukei_ranks_pododermatitis_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("足の裏が赤く腫れてハゲている", "rabbit")
+        assert "pododermatitis_signs" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "rabbit", lang="ja")[0]
+        name = top.get("name_ja") or top.get("name")
+        assert "足底" in name or "ソアホック" in name, name
+
+    def test_cat_notoedres_ear_tip_crust_extracts_crusting(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("耳の先が黒いかさぶた 耳をかく", "cat")
+        assert "crusting" in ex and "scratching_ears" in ex, ex
+
+    def test_horse_dragging_leg_alias_and_hot_hoof_differential(self):
+        from api.diagnostic_chat import _extract_equine_symptoms
+
+        ex = _extract_equine_symptoms("急に足を引きずる 蹄が熱い")
+        assert "limb_lameness_fore" in ex and "hoof_heat" in ex, ex
+
+    def test_horse_hot_hoof_checkbox_ranks_laminitis_and_abscess_in_top(self):
+        from api.species.equine_diseases import generate_differential_diagnosis
+
+        res = generate_differential_diagnosis({"hoof_heat", "limb_lameness_fore"})
+        names = [r.disease.name_en for r in res[:8]]
+        assert any("Laminitis" in n for n in names), names
+        assert "Hoof Abscess" in names, names
+        # the 2-finding DDFT entry must not run away with near-perfect confidence
+        ddft = next(r for r in res if r.disease.name_en == "Deep Digital Flexor Tendinitis")
+        assert ddft.confidence_pct < 75, ddft.confidence_pct
+        # with a digital pulse added, laminitis leads decisively
+        res2 = generate_differential_diagnosis({"hoof_heat", "limb_lameness_fore", "limb_digital_pulse"})
+        top3 = [r.disease.name_en for r in res2[:4]]
+        assert any("Laminitis" in n for n in top3), top3
+        assert "Hoof Abscess" in [r.disease.name_en for r in res2[:6]], top3

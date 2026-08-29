@@ -315,6 +315,11 @@ def localize_dosage(dosage: str) -> Optional[str]:
     # "×"（用量回数・期間の乗算記号）は頻度略号に密着することがある（"q12h×3"）ため、
     # 分割前に前後へ空白を挿入して独立トークンにする。
     tokenizable = phrased.replace("×", " × ")
+    # 全角括弧も独立トークンにする。"q24h（Carpenter）" のように括弧が頻度略号に
+    # 密着すると、数値保持パス（digit-containing token は改変しない）を通って
+    # 英語の頻度略号ごと日本語出力に漏れていた。分割すれば括弧内の未知語が
+    # fail-closed を正しく発火させる。
+    tokenizable = tokenizable.replace("（", " （ ").replace("）", " ） ")
     raw_tokens = tokenizable.split()
     out: list[str] = []
     for tok in raw_tokens:

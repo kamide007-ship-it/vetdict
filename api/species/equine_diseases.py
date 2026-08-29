@@ -8251,7 +8251,11 @@ DISEASE_DATABASE: list[Disease] = [
         "misc",
         "moderate",
         "DDFT損傷。蹄内病変はMRI必要。",
-        ["limb_lameness_fore", "hoof_heat"],
+        # 所見2個のみだと「跛行+蹄熱感」の全入力でカバレッジ1.0となり、
+        # 蹄膿瘍/蹄葉炎という圧倒的高頻度のddxを常に上回ってしまう。
+        # 本エントリ自身の clinical_signs_detail が挙げる冠部拍動亢進・
+        # 屈曲試験陽性を所見セットにも反映（Adams & Stashak 7th ed）。
+        ["limb_lameness_fore", "hoof_heat", "limb_digital_pulse", "limb_flexion_positive"],
         urgency="soon",
         recommended_exams=[(1, "超音波", "Ultrasound"), (2, "MRI", "MRI")],
         merck_url=_MERCK + "deep+digital+flexor+tendinitis+horses",
@@ -12474,8 +12478,19 @@ _SYNDROME_FLOOR_SCORE = 0.62
 # (Baxter, Adams & Stashak's Lameness 7th ed) — without this, two-finding
 # entries like DDF tendinitis win on trivially perfect coverage.
 _SYNDROME_PAIR_BOOSTS: list[tuple[frozenset, tuple[str, ...], float]] = [
-    (frozenset({"hoof_heat", "limb_lameness_fore"}), ("Laminitis", "Acute Laminitis"), 1.5),
-    (frozenset({"hoof_heat", "limb_digital_pulse"}), ("Laminitis", "Acute Laminitis"), 1.5),
+    # Acute lameness + a hot hoof is a hoof abscess or laminitis until proven
+    # otherwise (Adams & Stashak 7th ed) — the abscess is the single most
+    # common cause of acute severe lameness in practice.
+    (
+        frozenset({"hoof_heat", "limb_lameness_fore"}),
+        ("Laminitis", "Acute Laminitis", "Hoof Abscess"),
+        1.5,
+    ),
+    (
+        frozenset({"hoof_heat", "limb_digital_pulse"}),
+        ("Laminitis", "Acute Laminitis", "Hoof Abscess"),
+        1.5,
+    ),
     # Ptyalism + bilateral (feed-containing) nasal discharge is esophageal
     # obstruction until proven otherwise (Reed & Bayly, Equine Internal
     # Medicine 4th ed) — without this, rare two-finding entries (esophageal

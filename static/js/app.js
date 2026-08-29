@@ -1546,14 +1546,14 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:601,drugs:586,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:565,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:361,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:601,drugs:587,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:566,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:363,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:272,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:71,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:139,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:225,drugs:93,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:207,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:208,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:223,drugs:68,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
     {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:76,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
     {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:159,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
@@ -1571,7 +1571,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6449,
     species:21,
-    drugs:651,
+    drugs:652,
     symptoms:73,
     protocols:188
   };
@@ -4195,6 +4195,9 @@ function loadDiseaseDb(species){
   const requestId=++diseaseRequestId;
   const list=document.getElementById("diseaseDbList");
   if(!list){debugWarn("diseaseDbList element not found");return;}
+  /* Warm the contraindication rules so the per-disease anesthesia box
+     hydrates instantly on the first panel expand. */
+  ensureAnesthesiaContraRules();
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:80px"></div><div class="skeleton skeleton-card" style="height:100px"></div></div>';
   fetchWithTimeout(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();const dbTab=document.getElementById("tab-database");if(dbTab){let b=dbTab.querySelector(".tab-badge");if(!b){b=document.createElement("span");b.className="tab-badge";dbTab.appendChild(b);}b.textContent=allDiseases.length;}}})
   .catch(err=>{if(requestId===diseaseRequestId&&list){debugError("diseaseDb load failed:",err);list.innerHTML=`<div role="alert" style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button type="button" class="retry-db-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;const rb=list.querySelector(".retry-db-btn");if(rb)rb.addEventListener("click",()=>loadDiseaseDb(species));}});
@@ -4447,7 +4450,7 @@ function renderDiseaseDb(){
         ${recoveryWeeks?`<dt>${currentLang==="ja"?"回復期間":"Recovery Timeline"}</dt><dd>${currentLang==="ja"?`${recoveryWeeks}週間`:`${recoveryWeeks} weeks`}</dd>`:""}
         ${successRate!==undefined?`<dt>${currentLang==="ja"?"成功率":"Success Rate"}</dt><dd>${(successRate*100).toFixed(1)}%</dd>`:""}
         ${mortalityRate!==undefined?`<dt>${currentLang==="ja"?"死亡率":"Mortality Rate"}</dt><dd>${(mortalityRate*100).toFixed(1)}%</dd>`:""}
-      </dl>${renderOrthopedicReferences(d)}<div class="related-diseases-section" data-related="1" data-disease="${escapeHtml(d.name||"")}"></div><div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
+      </dl>${renderOrthopedicReferences(d)}<div class="related-diseases-section" data-related="1" data-disease="${escapeHtml(d.name||"")}"></div><div class="anesthesia-considerations-holder" data-anes="1" data-name="${escapeHtml(d.name||"")}" data-name-ja="${escapeHtml(d.name_ja||"")}"></div><div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
     </div>`}).join("");
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
@@ -4689,6 +4692,22 @@ function hydrateRelatedDiseases(root){
       return `<button type="button" class="related-disease-chip" data-name="${escapeHtml(r.name||r.name_ja)}">${escapeHtml(label)}<span class="related-disease-shared">${r.shared}</span></button>`;
     }).join("");
     holder.innerHTML=`<div class="related-diseases-heading">${heading}</div><div class="related-diseases-list">${chips}</div>`;
+  });
+}
+/* Fill the disease-DB detail panel's anesthesia-considerations box once the
+   contraindication rules have loaded. Checker results render the box inline
+   (rules are pre-fetched by doAnalyze); DB panels expand at arbitrary times,
+   so hydrate on expand and await the fetch-once promise. */
+function hydrateAnesthesiaConsiderations(root){
+  const holders=(root||document).querySelectorAll(".anesthesia-considerations-holder[data-anes='1']");
+  if(!holders.length)return;
+  ensureAnesthesiaContraRules().then(rules=>{
+    holders.forEach(holder=>{
+      holder.dataset.anes="0";
+      if(!rules||!rules.length){holder.remove();return;}
+      const html=renderAnesthesiaConsiderations({name:holder.dataset.name||"",name_ja:holder.dataset.nameJa||""});
+      if(html)holder.outerHTML=html;else holder.remove();
+    });
   });
 }
 /* Pick the list row whose name exactly matches the navigation query. The list
@@ -6347,11 +6366,12 @@ let anesthesiaLoaded=false,anesthesiaData=null,anesthesiaCategories={},anesthesi
    "anesthesia considerations" box in checker results. Historically they were
    fetched only when the anesthesia tab first opened, so checker-first users
    never saw the considerations box. Fetch-once helper usable from both paths. */
-let _contraRulesFetchStarted=false;
+let _contraRulesPromise=null;
 function ensureAnesthesiaContraRules(){
-  if(_contraRulesFetchStarted||(anesthesiaContraRules&&anesthesiaContraRules.length))return;
-  _contraRulesFetchStarted=true;
-  fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(err=>{_contraRulesFetchStarted=false;debugWarn("anesthesia/contraindications fetch failed:",err);});
+  if(anesthesiaContraRules&&anesthesiaContraRules.length)return Promise.resolve(anesthesiaContraRules);
+  if(_contraRulesPromise)return _contraRulesPromise;
+  _contraRulesPromise=fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];return anesthesiaContraRules;}).catch(err=>{_contraRulesPromise=null;debugWarn("anesthesia/contraindications fetch failed:",err);return[];});
+  return _contraRulesPromise;
 }
 
 function loadAnesthesiaProtocols(){
@@ -7107,6 +7127,9 @@ function toggleDbItem(el){
       if(typeof hydrateDrugDiseases==="function")hydrateDrugDiseases(detail);
       /* Hydrate related-disease navigation chips (computed from shared symptoms) */
       if(typeof hydrateRelatedDiseases==="function")hydrateRelatedDiseases(detail);
+      /* Hydrate the disease-specific anesthesia-considerations box (parity with
+         checker results — a vet browsing the DB sees the same 禁忌 warnings) */
+      if(typeof hydrateAnesthesiaConsiderations==="function")hydrateAnesthesiaConsiderations(detail);
     }
   }
 }

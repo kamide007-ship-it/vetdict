@@ -476,6 +476,10 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # vocabulary lacks — bridge to the lesion IDs so crusting complaints reach
     # zinc-responsive dermatosis and pyoderma).
     "crusting": ["crusty_skin", "skin_crusting", "skin_lesions", "skin_rashes"],
+    # Scaly-face mite (Knemidokoptes) complaints — parakeet carries the
+    # specific IDs; bird/parrot fall back to their facial-lesion IDs.
+    "crusty_beak": ["beak_deformity", "crusty_lesions_on_face", "crusting", "skin_lesions"],
+    "scaly_face": ["crusty_lesions_on_face", "crusty_beak", "thickened_skin", "skin_lesions"],
     # 発疹/湿疹 resolve to the legacy skin_rashes ID; species vocabularies
     # carry rashes under their generic lesion IDs.
     "skin_rashes": ["skin_lesions", "skin_redness", "rash", "rashes"],
