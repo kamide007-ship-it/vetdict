@@ -3644,3 +3644,82 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 - `setDefaultStats()`: dog 586/cat 565/ferret 207/sugar_glider 76薬品、pendingStats drugs 647→**651**・
   symptoms 70→**72**
 - ServiceWorker: `CACHE_NAME` v131 → **v132**（第24/25弾との同版衝突のため2回改番）
+
+## 2026-08セッション（第27弾: 犬急性蕁麻疹・血管性浮腫の新設 + オクトレオチド/デコキネート/ビオチン補完 + 連用形スイープ第14弾 + 疾患→緊急対応プロトコル動線）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,045件合格**（34 skip）
+- 配信SQLiteクリーンビルド: 6,892疾患、treatment/prevention/prognosis **100%**、主要臨床フィールド空欄 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（651薬品時点、全species_info検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり。
+  RECOVER準拠用量（エピネフリン低用量0.01・アトロピン0.02-0.04）・猫ALF 5 mg/kg（Tamura 2021）の逸脱なしを再確認
+- prevalence dead key: **9**（当該種DBに疾患自体が無い既知残、上限15ガード内）
+
+### referenced-but-absent 薬品3剤の補完（`drug_batch_47.py` 新規、651→654薬品）
+用量文脈カタカナトークン監査（第16回スイープ、find_drugs_in_text 実マッチャー突合）で検出:
+- **オクトレオチド（サンドスタチン）** — ガストリノーマ「1-5 μg/kg SC q8-12h」・インスリノーマ
+  「10-50 mcg SC q8-12h」・特発性乳糜胸「10 μg/kg SC q8h」の8+参照なのにソマトスタチンアナログが皆無だった。
+  猫先端巨大症には短時間作用型はほぼ無効（Peterson）を dosage 欄に明記（過大評価防止）、
+  インスリノーマでの逆説的低血糖リスクを注記（Altschul 1997; Robben 2006 JVIM）
+- **デコキネート（デコックス）** — Hepatozoon americanum の ACVIM標準・再発抑制フェーズ
+  「TCP 14日→デコキネート 10-20 mg/kg PO q12h 餌混和 2年以上」（Macintire 2001 JAVMA）が参照するのに未収載。
+  単独急性期治療ではない（TCP導入が先）を禁忌欄に明記
+- **ビオチン（ビタミンB7）** — 21参照（馬の裂蹄・冠状帯ジストロフィー「15-25 mg/日 6-12ヶ月」+ 犬皮膚科補助）。
+  プラセボ対照エビデンス（Josseck 1995・Zenker 1995 Equine Vet J）、蹄壁伸長速度と効果発現遅延を明記。
+  ビタミンB12との誤マッチ防止を検証（B12参照はB12のまま）
+- **表記ゆれエイリアス2件**: ロイプロリド（ロイ音写、鳥生殖器疾患20参照）→leuprolide、
+  Ca-EDTA（ハイフン形、重金属25参照）→calcium_edta
+- 逆引き（この薬品を使う疾患）も自動解決を確認: octreotide 11疾患・biotin 30疾患・decoquinate 3疾患
+
+### 新規疾患: 犬「急性蕁麻疹・血管性浮腫」（エビデンスベース、dog module + レガシーチャットDB両対応）
+- **ギャップ**: ワクチン接種後・虫刺され後の蕁麻疹/血管性浮腫は犬の最頻出救急皮膚科主訴なのに、
+  疾患DBには重症端の「ハチ刺傷アナフィラキシー」しか存在せず、チャットで「顔が腫れてじんましんが出た」が
+  眼瞼疾患ばかり上位だった（じんましん/蕁麻疹の語彙自体が皆無）
+- **dog module**（619→620疾患、`dog_x9176df51`）: I型過敏反応の病態、ジフェンヒドラミン 2-4 mg/kg ±
+  デキサメタゾン、アナフィラキシー進行時エピネフリン 0.01 mg/kg IM エスカレーション、二相性反応の
+  12-24時間観察（Shmuel & Cortes JVECC 2013; Ettinger 8th）。id_locks 再生成（+1、append-only）
+- **レガシーチャットDB**（79→80疾患、73→75症状）: hives/facial_swelling 症状を新設、
+  パトグノモニック・ペア {hives, facial_swelling}→×1.8。**名前はmoduleエントリと整合**
+  （「急性蕁麻疹・血管性浮腫（急性アレルギー反応）」）— チャット候補カードの「疾患DBで詳細を開く」
+  ピボットが base-name 完全一致で着地
+- ID_SYNONYMS: hives→[urticaria, wheals, skin_rashes, skin_lesions, swelling]（種経路フォールバック）
+- 配信DB: 6,892 → **6,893疾患**、検索インデックス 6,449→**6,450**
+
+### 診断チャット精度 第14弾（30症例フレッシュスイープ 12 MISS → 実質全合格）
+系統的根因: **連用形・語順ゆれ**が substring マッチをすり抜け（「水をたくさん飲んで」vs 飲む、
+「後ろ足が動かなくなって」vs なった、「そのうが膨らんで」vs 膨らんでいる、「羽を自分で抜く」語順）:
+- **猫ATE救急**: 「急に後ろ足が動かなくなって大声で鳴いている」が抽出ゼロ → 「後ろ足が動かなくな」stem +
+  「大声で鳴」→vocalization_changes 追加 → 大動脈血栓塞栓症 rank 1
+- **犬OA**: 「散歩を嫌がって階段を登らなくなった 後ろ足が硬い」が抽出ゼロ → 階段回避3形+「足が硬い」→
+  stiffness、「散歩を嫌がって」連用形 → 変形性関節症 top-3（階段回避は犬OAの古典的主訴）
+- **犬PU/PD多食**: 「水をたくさん飲んでおしっこも多い ご飯も食べるのに痩せる」→ 3ID抽出で糖尿病 top-3
+- **猫甲状腺機能亢進**: 「食欲はあるのに痩せ」→increased_appetite → 甲状腺機能亢進症 top-2
+- **ハリネズミWHS**: 「後ろ足がふらつ」stem + 「震える」辞書形 → WHS top-3
+- **フクロモモンガ自咬**: 「自分のお腹を噛」「自分の体を噛」（部位介在形）→ 自己損傷群 top-3
+- **鳥そのう/毛引き**: 「そのうが膨らん」stem・「吐き戻す」・「羽を自分で抜」・「皮膚が見えて」→
+  クロップ疾患群/毛引き rank 1
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound15`（10件 — 既存Round14と番号衝突のため15に改番）+
+  `TestAcuteUrticariaDiseaseEntry`（3件）+ `TestBatch47ReferencedDrugs`（4件）
+
+### UX: 疾患→緊急対応プロトコルのクロスリンク（麻酔連携と対の新動線）
+- **ギャップ**: 救急クラスの疾患（GDV・アナフィラキシー・尿道閉塞・熱中症・DKA・子癇・マムシ咬傷等）を
+  閲覧しても、対応する緊急対応プロトコルへの動線が無かった（麻酔注意事項リンクは既存なのに）
+- `DISEASE_EMERGENCY_MAP`（20エントリ、疾患名正規表現→プロトコルid+種ゲート）を新設。
+  **種配列はサーバーデータのサブセットであることをミラーテストで固定**（犬猫用量のプロトコルを
+  非対応種に提示しない）
+- チェッカー結果カード + 疾患DB詳細パネルに「🚨 この疾患の緊急対応プロトコルを開く」を条件表示。
+  `navigateToEmergencyProtocol()` が emergencyデータの readiness poll → フィルタクリア →
+  `data-proto-id` 完全一致で該当プロトコルを展開・スクロール（既存 toggleDbItem 再利用）。
+  両委譲ハンドラ（チェッカー結果・DBリスト共通）にルーティング追加。GA4 `emergency_from_disease`
+- 回帰テスト: `test_app_js_disease_to_emergency_protocol_cross_link` +
+  `test_app_js_emergency_map_mirrors_server_protocols`（マップ⇄サーバー同期ガード）
+
+### UX: クイック入力に新規対応主訴を追加
+- 犬「顔が腫れてじんましんが出た」「階段を登らなくなった」、猫「急に後ろ足が動かなくなった」（ATE救急）
+- ミラーテスト JA_QUICK 同期（全フレーズ抽出保証をCIで維持）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 602疾患/589薬品・cat 567・horse 362・ferret 208薬品、
+  pendingStats diseases 6449→**6450**・drugs 651→**654**・symptoms 73→**75**
+- ServiceWorker: `CACHE_NAME` v132 → **v133**
+- 再現手順: `build_id_locks dog` → `migrate_to_sqlite.py`（クリーンビルド）→ `build_disease_search_index.py`

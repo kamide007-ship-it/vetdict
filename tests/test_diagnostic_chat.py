@@ -1605,6 +1605,8 @@ class TestQuickTapPhraseExtraction:
             "耳が腫れてぷよぷよしている",
             "食べた後すぐに未消化のまま吐く",
             "乳腺にしこりがある",
+            "顔が腫れてじんましんが出た",
+            "階段を登らなくなった",
         ],
         "cat": [
             "食べない",
@@ -1616,6 +1618,7 @@ class TestQuickTapPhraseExtraction:
             "ジャンプしなくなった",
             "トイレ以外の場所で粗相する",
             "口をくちゃくちゃさせる",
+            "急に後ろ足が動かなくなった",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -3241,3 +3244,199 @@ class TestChatClinicalAccuracyAuditRound14:
         assert "rapid_gill_movement" in ids, ids
         ids = _extract_species_symptoms("体に水ぶくれのような斑点 お腹のうろこが赤い", "snake")
         assert "skin_redness" in ids and "skin_blistering" in ids, ids
+
+
+class TestChatClinicalAccuracyAuditRound15:
+    """2026-08 audit round 14: fresh 30-case chief-complaint sweep. Systematic
+    root cause this round: connective (連用形) and word-order variants of
+    already-supported phrases fell through the substring matcher — 「水を
+    たくさん飲んで」(vs 飲む), 「後ろ足が動かなくなって」(vs なった/なってきた),
+    「そのうが膨らんで」(vs 膨らんでいる), 「羽を自分で抜く」(vs 自分で羽を抜く).
+    Additionally the legacy dog database had no acute allergic reaction entry —
+    the classic post-vaccine urticaria/angioedema ER presentation (Shmuel &
+    Cortes JVECC 2013) extracted only eye_swelling and ranked eyelid diseases —
+    and no stair-avoidance vocabulary for the canine OA complaint."""
+
+    def test_dog_vaccine_urticaria_ranks_allergic_reaction_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("顔が腫れてじんましんが出た ワクチンの後")
+        assert "hives" in ex and "facial_swelling" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "アレルギー反応" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_dog_stair_avoidance_ranks_osteoarthritis(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("散歩を嫌がって階段を登らなくなった 後ろ足が硬い")
+        assert "stiffness" in ex and "exercise_intolerance" in ex, ex
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ex)[:3]]
+        assert any("関節" in n for n in names), names
+
+    def test_dog_pu_pd_polyphagia_ranks_diabetes(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("水をたくさん飲んでおしっこも多い ご飯も食べるのに痩せる")
+        assert "excessive_thirst" in ex and "frequent_urination" in ex, ex
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ex)[:3]]
+        assert any("糖尿病" in n for n in names), names
+
+    def test_cat_ate_connective_form_ranks_thromboembolism_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("急に後ろ足が動かなくなって大声で鳴いている", "cat")
+        assert "hind_limb_paralysis" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "cat")[0]
+        assert "血栓" in (top.get("name_ja") or ""), (
+            f"acute hindlimb paralysis + vocalization is aortic "
+            f"thromboembolism until proven otherwise: {top.get('name_ja')}"
+        )
+
+    def test_cat_hyperthyroid_polyphagia_phrase_extracts(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("水をよく飲む 食欲はあるのに痩せる 落ち着きがない", "cat")
+        assert "increased_appetite" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "cat")[:3]]
+        assert any("甲状腺機能亢進" in n for n in names), names
+
+    def test_hedgehog_whs_connective_wobble_extracts(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("後ろ足がふらついて立てない 震える", "hedgehog")
+        assert "hind_limb_weakness" in ex and "ataxia" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "hedgehog")[:3]]
+        assert any(("ふらつき" in n) or ("WHS" in n) for n in names), names
+
+    def test_sugar_glider_belly_biting_extracts_self_mutilation(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("自分のお腹を噛んでしまう 傷がある", "sugar_glider")
+        assert "self_mutilation" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "sugar_glider")[:3]]
+        assert any(("自己損傷" in n) or ("自咬" in n) for n in names), names
+
+    def test_parakeet_crop_connective_form_extracts(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("そのうが膨らんで吐き戻す", "parakeet")
+        assert "crop_distension" in ex and "vomiting" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "parakeet")[:5]]
+        assert any(("嗉嚢" in n) or ("そのう" in n) or ("甲状腺腫" in n) or ("異物" in n) for n in names), names
+
+    def test_parrot_plucking_word_order_variant_extracts(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("羽を自分で抜いてしまう 皮膚が見えている", "parrot")
+        assert "feather_plucking" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "parrot")[0]
+        assert "毛引き" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_normal_seizure_complaint_still_ranks_epilepsy_first(self):
+        # The new hives/facial_swelling vocabulary and allergic-reaction entry
+        # must not disturb the established non-dermatologic rankings.
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("痙攣した 意識がなくなった")
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "てんかん" in (top.get("name_ja") or ""), top.get("name_ja")
+
+
+class TestBatch47ReferencedDrugs:
+    """Sweep #16: octreotide / decoquinate / biotin were referenced with doses
+    in disease treatment texts but absent from the formulary; the ロイプロリド
+    transliteration (20 avian refs) and hyphenated Ca-EDTA (25 refs) never
+    resolved to their formulary entries."""
+
+    def test_batch47_drugs_present_with_bilingual_dosing(self):
+        from api.drug_dictionary import get_drug_by_id
+
+        for did, sp in [("octreotide", "dog"), ("decoquinate", "dog"), ("biotin", "horse")]:
+            d = get_drug_by_id(did)
+            assert d is not None, did
+            info = d["species_info"][sp]
+            assert info["safe"] and info["dosage"] and info["dosage_ja"], (did, sp)
+
+    def test_octreotide_carries_gastrinoma_dose_and_feline_acromegaly_caveat(self):
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id("octreotide")
+        assert "1-5 μg/kg" in d["species_info"]["dog"]["dosage"]
+        # Defining safety fact: short-acting octreotide is largely ineffective
+        # for feline acromegaly — the entry must not oversell it.
+        assert "INEFFECTIVE" in d["species_info"]["cat"]["dosage"]
+
+    def test_decoquinate_is_the_tcp_followup_phase(self):
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id("decoquinate")
+        dog = d["species_info"]["dog"]
+        assert "10-20 mg/kg" in dog["dosage"] and "TCP" in dog["dosage"]
+        assert "急性期" in (d.get("contraindications_ja") or "")
+
+    def test_sweep16_variant_aliases_resolve_in_text_matcher(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = [
+            ("オクトレオチド（ソマトスタチン類似体）：1-5 μg/kg SC q8-12h", "octreotide"),
+            ("続いてデコキネート10-20 mg/kg PO q12hを長期投与", "decoquinate"),
+            ("ビオチン15-25 mg/日PO（蹄質改善、6-12ヶ月）", "biotin"),
+            ("ロイプロリド400-800 μg/kg IM q14-28日", "leuprolide"),
+            ("重金属はキレート療法（鉛—Ca-EDTA、ペニシラミン 8-15 mg/kg）", "calcium_edta"),
+        ]
+        for text, want in cases:
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert want in ids, (text, ids)
+        # Precision guard: bare vitamin-B12 references must keep resolving to
+        # the B12 entry, never the new biotin (B7) entry.
+        ids = [h["id"] for h in find_drugs_in_text("ビタミンB12 250 μg SC 週1回")]
+        assert "vitamin_b12" in ids and "biotin" not in ids, ids
+
+
+class TestAcuteUrticariaDiseaseEntry:
+    """Round 14: acute urticaria/angioedema — among the most common canine ER
+    dermatology presentations — was absent from both the dog module database
+    and the legacy chat database (only full-blown anaphylaxis existed)."""
+
+    def test_dog_module_carries_urticaria_entry_with_epinephrine_escalation(self):
+        import api.species.dog_diseases as dd
+
+        entry = next(
+            d
+            for d in dd.DISEASES
+            if (d.get("name") if isinstance(d, dict) else d.name) == "Acute Urticaria and Angioedema"
+        )
+        tx = entry["treatment_ja"]
+        assert "ジフェンヒドラミン" in tx and "エピネフリン 0.01 mg/kg" in tx
+        assert entry["urgency"] == "high"
+
+    def test_legacy_chat_entry_mirrors_module_base_name_for_db_pivot(self):
+        # The chat card's 疾患DBで詳細を開く pivot lands by exact base-name match
+        # (_pickListItemByName strips the parenthetical) — the legacy entry's
+        # base name must equal the module entry's name_ja exactly.
+        from api.health_checker import DISEASES
+
+        legacy = next(d for d in DISEASES if d["id"] == "acute_allergic_reaction")
+        assert legacy["name_ja"].split("（")[0] == "急性蕁麻疹・血管性浮腫"
+        assert legacy["name_en"] == "Acute Urticaria and Angioedema"
+
+    def test_urticaria_entry_is_served(self):
+        import os
+        import sqlite3
+
+        import pytest
+
+        db = "instance/vetdict.db"
+        if not os.path.exists(db):
+            pytest.skip("served DB not built")
+        conn = sqlite3.connect(db)
+        row = conn.execute(
+            "select name_ja, urgency from diseases where species='dog' and name='Acute Urticaria and Angioedema'"
+        ).fetchone()
+        assert row is not None and row[0] == "急性蕁麻疹・血管性浮腫"

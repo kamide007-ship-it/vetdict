@@ -70,6 +70,7 @@ from api.drug_batch_43 import DRUGS_BATCH_43
 from api.drug_batch_44 import DRUGS_BATCH_44
 from api.drug_batch_45 import DRUGS_BATCH_45
 from api.drug_batch_46 import DRUGS_BATCH_46
+from api.drug_batch_47 import DRUGS_BATCH_47
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10711,6 +10712,15 @@ for _drug46 in DRUGS_BATCH_46:
         DRUGS.append(_drug46)
         _drug_index[_drug46["id"]] = _drug46
 
+# Batch 47: 2026-08監査（第16回スイープ）— referenced-but-absent 3剤
+# （オクトレオチド — ガストリノーマ/インスリノーマ/乳糜胸で用量付き8+参照;
+#  デコキネート — H. americanum のACVIM標準・長期再発抑制フェーズ;
+#  ビオチン — 馬の蹄質改善 15-25 mg/日 と犬皮膚科補助で21参照）
+for _drug47 in DRUGS_BATCH_47:
+    if _drug47["id"] not in _drug_index:
+        DRUGS.append(_drug47)
+        _drug_index[_drug47["id"]] = _drug47
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11207,7 +11217,10 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     ),  # procaine formulation / bare class-archetype (732 treatment refs incl. guinea-pig contraindication notes)
     "l_carnitine": ("カルニチン",),  # canonical: L-カルニチン
     "salbutamol": ("アルブテロール",),  # albuterol = USAN of salbutamol
-    "leuprolide": ("リュープロリド",),  # canonical: リュープロレリン酢酸塩
+    "leuprolide": (
+        "リュープロリド",
+        "ロイプロリド",  # 2026-08 sweep #16: 20 avian reproductive-disease refs use the ロイ- transliteration
+    ),  # canonical: リュープロレリン酢酸塩
     "darbepoetin": ("ダーベポエチン",),  # canonical: ダルベポエチンアルファ
     "thiamine_b1": (
         "ビタミンb1",
@@ -11250,7 +11263,10 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "desoxycorticosterone": ("DOCP", "デソキシコルチコステロン", "デスオキシコルチコステロン"),
     # 2026-08 sweep #13: chelation / hepatoprotectant / fluid texts cite these
     # acronyms and variant word orders that the canonical names never reduce to.
-    "calcium_edta": ("CaEDTA",),  # canonical: カルシウムEDTA — 51 treatment refs cite the acronym
+    "calcium_edta": (
+        "CaEDTA",
+        "Ca-EDTA",  # 2026-08 sweep #16: 25 heavy-metal refs use the hyphenated form
+    ),  # canonical: カルシウムEDTA — 51 treatment refs cite the acronym
     # ursodiol already aliases ウルソジオール above; UDCA is the standard clinical
     # acronym (41 treatment refs: "UDCA 10-15 mg/kg PO q24h").
     "hetastarch": ("ヘタスターチ",),  # canonical: ヒドロキシエチルデンプン（HES 6%）

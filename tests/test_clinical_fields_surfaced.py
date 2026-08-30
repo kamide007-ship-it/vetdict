@@ -438,3 +438,51 @@ def test_main_css_disables_mobile_font_inflation():
     html_rule = css[css.index("html{") : css.index("}", css.index("html{"))]
     assert "-webkit-text-size-adjust:100%" in html_rule
     assert "text-size-adjust:100%" in html_rule
+
+
+def test_app_js_disease_to_emergency_protocol_cross_link():
+    """Disease → emergency-protocol cross link (2026-08 round 14): viewing an
+    emergency-class disease (GDV, anaphylaxis, blocked cat, heatstroke...) had
+    no path to the matching 緊急対応 protocol — the exact mirror of the
+    existing disease → anesthesia considerations pivot. The checker result
+    card and the disease-DB detail must render .emergency-nav-link when the
+    disease matches, both delegated handlers must route it, and
+    navigateToEmergencyProtocol must land expanded on the exact protocol row
+    (data-proto-id) with filters cleared."""
+    assert "DISEASE_EMERGENCY_MAP" in APP_JS
+    assert "function _emergencyProtoForDisease(" in APP_JS
+    assert "function renderEmergencyCrossLink(" in APP_JS
+    assert "function navigateToEmergencyProtocol(" in APP_JS
+    # rendered in both surfaces
+    assert "${renderEmergencyCrossLink(d)}" in APP_JS
+    assert 'class="cross-nav-btn emergency-nav-link"' in APP_JS
+    # routed by both delegated handlers (checker results + DB lists)
+    assert APP_JS.count('.closest(".emergency-nav-link")') >= 2
+    # exact landing: row carries the protocol id and the nav opens it
+    assert 'data-proto-id="${escapeHtml(p.id||"")}"' in APP_JS
+    nav = APP_JS[APP_JS.index("function navigateToEmergencyProtocol(") :]
+    nav = nav[: nav.index("\nfunction ", 10)]
+    assert "data-proto-id" in nav and "toggleDbItem(row)" in nav
+    assert "renderEmergencyList()" in nav  # filters cleared then re-rendered
+
+
+def test_app_js_emergency_map_mirrors_server_protocols():
+    """Every protocol id and species list hardcoded in the client-side
+    DISEASE_EMERGENCY_MAP must exist in api/emergency_protocols.py with a
+    superset species list — a dog/cat-dosed protocol must never be offered
+    for a species the server does not cover."""
+    import re
+
+    from api.emergency_protocols import EMERGENCY_PROTOCOLS
+
+    server = {p["id"]: set(p.get("species") or []) for p in EMERGENCY_PROTOCOLS}
+    idx = APP_JS.index("const DISEASE_EMERGENCY_MAP=[")
+    block = APP_JS[idx : APP_JS.index("];", idx)]
+    entries = re.findall(r'/i,"([a-z_]+)",\[([^\]]*)\]', block)
+    assert len(entries) >= 15, entries
+    for proto_id, species_src in entries:
+        assert proto_id in server, f"unknown protocol id in map: {proto_id}"
+        species = set(re.findall(r'"([a-z_]+)"', species_src))
+        assert species, proto_id
+        extra = species - server[proto_id]
+        assert not extra, f"{proto_id}: map offers species the protocol lacks: {extra}"

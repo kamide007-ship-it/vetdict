@@ -2049,6 +2049,36 @@ SYMPTOM_ALIASES = {
     "乳腺にしこりが": "mammary_swelling",
     "乳房のしこり": "mammary_swelling",
     "乳腺のしこり": "mammary_swelling",
+    # --- 2026-08 第14回スイープ: 連用形・語順ゆれの取りこぼし修正 ---
+    # 多飲多尿・多食（「水をたくさん飲む」辞書形のみで「飲んで」連用形が欠落）
+    "水をたくさん飲んで": "excessive_thirst",
+    "おしっこも多い": "frequent_urination",
+    "おしっこの量が多い": "frequent_urination",
+    "食欲はあるのに痩せ": "increased_appetite",
+    # 変形性関節症の飼い主報告（階段回避は犬OAの古典的主訴 — Ettinger 8th）
+    "階段を登らな": "stiffness",
+    "階段を上がらな": "stiffness",
+    "階段を嫌が": "stiffness",
+    "散歩を嫌がって": "exercise_intolerance",
+    "足が硬い": "stiffness",
+    # 急性アレルギー反応（蕁麻疹・血管性浮腫）— ワクチン/虫刺され後の頻出救急主訴
+    "じんましん": "hives",
+    "蕁麻疹": "hives",
+    # 猫ATE救急: 「急に後ろ足が動かなくなった」完全形のみで連用形「〜なって」が欠落
+    "後ろ足が動かなくな": "hind_limb_paralysis",
+    "大声で鳴": "vocalization_changes",
+    # ハリネズミWHS: 「後ろ足のふらつき」のみで「後ろ足がふらついて」形が欠落
+    "後ろ足がふらつ": "hind_leg_weakness",
+    "震える": "tremors",
+    # フクロモモンガ自咬: 「自分を噛んでしまう」のみで部位介在形が欠落
+    "自分のお腹を噛": "self_mutilation",
+    "自分の体を噛": "self_mutilation",
+    # 鳥そのう疾患: 「そのうが膨らんでいる」のみで連用形「膨らんで」が欠落
+    "そのうが膨らん": "crop_distension",
+    "吐き戻す": "vomiting",
+    # 毛引き: 「自分で羽を抜く」のみで語順ゆれ「羽を自分で抜く」が欠落
+    "羽を自分で抜": "feather_plucking",
+    "皮膚が見えて": "feather_loss",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---
