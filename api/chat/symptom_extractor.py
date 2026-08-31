@@ -260,6 +260,10 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "breathing_difficulty",
         "difficulty_breathing",
     ],
+    # 2026-08 第14弾: クリック音は bird のみが専用IDを持つ — 他種は喘鳴系へ
+    "clicking_breathing_sounds": ["wheezing", "labored_breathing", "open_mouth_breathing"],
+    # サワークロップ臭は bird のみが専用IDを持つ — parrot/parakeet はそのう系へ
+    "sour_crop_odor": ["crop_stasis", "crop_distension", "regurgitation"],
     "sneezing": ["reverse_sneezing", "nasal_irritation", "nasal_discharge"],
     "nasal_discharge": ["runny_nose", "rhinorrhea", "nasal_secretion", "sneezing"],
     # Urinary
@@ -526,6 +530,24 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # crusty_lesions_on_legs natively; the parakeet vocabulary expresses the
     # same mite crusting as leg_scales/scaly_face, others as generic crusting.
     "crusty_lesions_on_legs": ["leg_scales", "scaly_face", "crusting", "skin_lesions"],
+    # --- 2026-08 Round 15 sweep ---
+    # いびき (stertor/snoring — BOAS complaint): cat/ferret/dog carry it
+    # natively; bridge to the noisy/labored-breathing IDs elsewhere.
+    "snoring": ["noisy_breathing", "wheezing", "labored_breathing"],
+    # 急性後肢麻痺: rabbit carries hind_limb_paralysis natively; bridge to
+    # the weakness/paralysis IDs used by the other vocabularies.
+    "hind_limb_paralysis": [
+        "hind_limb_weakness",
+        "paralysis",
+        "dragging_hind_legs",
+        "inability_to_stand",
+    ],
+    # 白猫の耳介先端SCC: only the cat vocabulary carries ear_tip_lesions —
+    # bridge to crusting/skin lesions for other species.
+    "ear_tip_lesions": ["crusting", "skin_lesions"],
+    "non_healing_wound": ["skin_ulcers", "skin_lesions", "wounds"],
+    # 爬虫類MBDのラバージョー: lizard carries jaw_softening natively.
+    "jaw_softening": ["rubber_jaw", "soft_bones", "swollen_jaw"],
 }
 
 # Backwards-compat alias (some older imports use the private name).
