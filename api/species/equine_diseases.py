@@ -12500,6 +12500,13 @@ _SYNDROME_PAIR_BOOSTS: list[tuple[frozenset, tuple[str, ...], float]] = [
         ("Esophageal Obstruction (Choke)",),
         1.5,
     ),
+    # Acute single-limb lameness with focal hoof heat is a hoof abscess until
+    # proven otherwise (Adams & Stashak 7th ed) — the most common cause of
+    # acute severe lameness in the horse. Without this, two-finding tendon
+    # entries won on trivially perfect coverage for the hindlimb variant
+    # (the fore variant already benefits from the laminitis pairs above).
+    (frozenset({"hoof_heat", "limb_lameness_hind"}), ("Hoof Abscess",), 1.5),
+    (frozenset({"hoof_heat", "limb_lameness_fore"}), ("Hoof Abscess",), 1.4),
 ]
 
 

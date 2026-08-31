@@ -473,6 +473,12 @@ SPECIES_PREVALENCE = {
         "Rabies": "rare",
         "Feline Botulism": "rare",
         "Cytauxzoon felis (Acute Cytauxzoonosis)": "rare",
+        # Neonatal isoerythrolysis: restricted to type-B queen × type-A kitten
+        # matings and the first days of life — must never outrank hepatic
+        # lipidosis/cholangitis for an adult icterus complaint (round-14 audit:
+        # the untiered NI entries took rank 1 for jaundice + lethargy).
+        "Neonatal Isoerythrolysis": "rare",
+        "Feline Neonatal Isoerythrolysis (Type B Queen x Type A Kitten)": "rare",
         "Feline Hemophilia A": "rare",
         "Feline von Willebrand Disease": "rare",
         "Disseminated Intravascular Coagulation (DIC)": "rare",
@@ -633,6 +639,14 @@ SPECIES_PREVALENCE = {
         "Sarcoptic Mange": "uncommon",
         "Thymoma": "uncommon",
         "Lymphoma": "uncommon",
+        # Dental-origin retrobulbar abscess is a common rabbit exophthalmos
+        # presentation (Harcourt-Brown, Textbook of Rabbit Medicine); the
+        # elodontoma/pseudo-odontoma is primarily a degu/prairie-dog disease
+        # and rare in rabbits (Capello & Lennox) — round-14 audit: the
+        # untiered Elodontoma outranked the abscess for 眼球突出+鼻水.
+        "Retrobulbar Abscess": "common",
+        "Retrobulbar Dental Abscess": "common",
+        "Elodontoma": "rare",
         # rare
         "Klebsiella Pneumonia": "rare",
         "Cecoliths": "rare",

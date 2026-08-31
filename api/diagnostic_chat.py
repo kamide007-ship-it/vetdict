@@ -287,6 +287,14 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "後脚をかばって": "limb_lameness_hind",
     "後脚びっこ": "limb_lameness_hind",
     "後脚かばう": "limb_lameness_hind",
+    # 2026-08 round-14: 飼い主口語の「後ろ足」系が皆無で「後ろ足を痛がる 蹄が
+    # 熱い」の後肢跛行が抽出ゼロだった（前脚系のみ収載）
+    "後ろ足を痛がる": "limb_lameness_hind",
+    "後ろ足をかばう": "limb_lameness_hind",
+    "後ろ足を引きずる": "limb_lameness_hind",
+    "後ろ脚を痛がる": "limb_lameness_hind",
+    "前足を痛がる": "limb_lameness_fore",
+    "前脚を痛がる": "limb_lameness_fore",
     "lameness": "limb_lameness_fore",
     "跛行": "limb_lameness_fore",
     "びっこ": "limb_lameness_fore",

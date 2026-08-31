@@ -74,6 +74,7 @@ from api.drug_batch_47 import DRUGS_BATCH_47
 from api.drug_batch_48 import DRUGS_BATCH_48
 from api.drug_batch_49 import DRUGS_BATCH_49
 from api.drug_batch_50 import DRUGS_BATCH_50
+from api.drug_batch_51 import DRUGS_BATCH_51
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10744,14 +10745,23 @@ for _drug49 in DRUGS_BATCH_49:
         DRUGS.append(_drug49)
         _drug_index[_drug49["id"]] = _drug49
 
-# Batch 50: 2026-08監査（第19回スイープ・本セッション分、47-49は並行セッションが使用）
-# （オクトレオチド — ガストリノーマ 1-5 μg/kg SC 等で用量付き8+参照なのに
-#  ソマトスタチンアナログが皆無; デコキネート — H. americanum のACVIM標準・
-#  長期再発抑制フェーズ 10-20 mg/kg PO q12h ≥2年 — Macintire 2001 JAVMA）
+# Batch 50: 2026-08監査（第16回スイープ・並行セッション分、47-49は並行セッションが使用）
+# （メマンチン — 犬強迫性障害のNMDA拮抗補助療法、疾患テキストが用量付きで参照;
+#  プロカルバジン — MUO/GMEレスキュー・MOPPの「P」、BBB通過細胞傷害薬が皆無だった;
+#  フェニトイン — ジギタリス中毒性心室性不整脈の古典的選択薬（猫は蓄積毒性で禁忌））
 for _drug50 in DRUGS_BATCH_50:
     if _drug50["id"] not in _drug_index:
         DRUGS.append(_drug50)
         _drug_index[_drug50["id"]] = _drug50
+
+# Batch 51: 2026-08監査（第20回スイープ・本セッション分、47-50は並行セッションが使用）
+# （オクトレオチド — ガストリノーマ 1-5 μg/kg SC 等で用量付き8+参照なのに
+#  ソマトスタチンアナログが皆無; デコキネート — H. americanum のACVIM標準・
+#  長期再発抑制フェーズ 10-20 mg/kg PO q12h ≥2年 — Macintire 2001 JAVMA）
+for _drug51 in DRUGS_BATCH_51:
+    if _drug51["id"] not in _drug_index:
+        DRUGS.append(_drug51)
+        _drug_index[_drug51["id"]] = _drug51
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
@@ -11435,6 +11445,16 @@ _KATAKANA_VARIANT_ALIASES["calcium_gluconate"] = _KATAKANA_VARIANT_ALIASES["calc
     "カルシウムグルコン酸",
     "グルコン酸ca",  # 救急key drug表記 "グルコン酸Ca10%"（小文字化後に照合）
 )
+# 2026-08 sweep #16 (parallel session): transliteration variants / acronyms the
+# canonical names never reduce to. SSDクリーム is the burn-cream abbreviation
+# (bare "SSD" is <4 chars and too collision-prone); Ca-EDTA is the hyphenated
+# form of the CaEDTA acronym already registered above.
+_KATAKANA_VARIANT_ALIASES["methadone"] = ("メタドン",)  # canonical: メサドン — タ variant (4+ refs)
+_KATAKANA_VARIANT_ALIASES["hydrocodone"] = ("ハイドロコドン",)  # canonical: ヒドロコドン — ハイ variant
+_KATAKANA_VARIANT_ALIASES["silver_sulfadiazine"] = _KATAKANA_VARIANT_ALIASES["silver_sulfadiazine"] + (
+    "ssdクリーム",  # lowercased at match time
+)
+_KATAKANA_VARIANT_ALIASES["calcium_edta"] = _KATAKANA_VARIANT_ALIASES["calcium_edta"] + ("ca-edta",)
 
 
 # Japanese dose-form / salt / strength suffixes that formulary names carry but

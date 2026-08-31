@@ -528,6 +528,15 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 口をくちゃくちゃ (jaw chattering — feline oral pain/FORL sign): only the
     # cat vocabulary carries it natively; bridge to eating-difficulty IDs.
     "jaw_chattering": ["difficulty_eating", "drooling", "mouth_pain"],
+    # --- 2026-08 round-14 sweep bridges ---
+    # 口の中にできもの (oral mass): the legacy dog vocabulary now carries
+    # oral_mass natively (oral-tumor entry); other species express visible
+    # oral pathology as mouth_lesions / oral swellings / generic masses.
+    "oral_mass": ["mouth_lesions", "oral_lesions", "mouth_sores", "lumps_and_bumps"],
+    # 脚に白いかさぶた (scaly leg — Knemidocoptes): bird carries
+    # crusty_lesions_on_legs natively; the parakeet vocabulary expresses the
+    # same mite crusting as leg_scales/scaly_face, others as generic crusting.
+    "crusty_lesions_on_legs": ["leg_scales", "scaly_face", "crusting", "skin_lesions"],
     # --- 2026-08 Round 15 sweep ---
     # いびき (stertor/snoring — BOAS complaint): cat/ferret/dog carry it
     # natively; bridge to the noisy/labored-breathing IDs elsewhere.
