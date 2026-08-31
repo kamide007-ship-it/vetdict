@@ -3963,7 +3963,7 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 ### 表示数値の同期・キャッシュ
 - `setDefaultStats()`: dog 602疾患/589薬品・cat 567・horse 362・ferret 208薬品、
   pendingStats diseases 6449→**6450**・drugs 651→**654**・symptoms 73→**75**
-- ServiceWorker: `CACHE_NAME` v134 → **v135**（並行セッションのv133/v134と衝突のため改番）
+- ServiceWorker: `CACHE_NAME` → **v136**（並行セッションのv133-v135と衝突のため2回改番）
 - 再現手順: `build_id_locks dog` → `migrate_to_sqlite.py`（クリーンビルド）→ `build_disease_search_index.py`
 
 ### mainマージ統合（並行第27弾×2セッションとの衝突解決）
