@@ -4261,6 +4261,9 @@ function loadDiseaseDb(species){
   const requestId=++diseaseRequestId;
   const list=document.getElementById("diseaseDbList");
   if(!list){debugWarn("diseaseDbList element not found");return;}
+  /* Warm the contraindication rules so the per-disease anesthesia box
+     hydrates instantly on the first panel expand. */
+  ensureAnesthesiaContraRules();
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:80px"></div><div class="skeleton skeleton-card" style="height:100px"></div></div>';
   fetchWithTimeout(`/api/health-check/diseases?species=${encodeURIComponent(species)}`).then(r=>r.json()).then(data=>{if(requestId!==diseaseRequestId||species!==currentSpecies)return;if(data.diseases){allDiseases=data.diseases;renderAzNav();renderDiseaseDb();const dbTab=document.getElementById("tab-database");if(dbTab){let b=dbTab.querySelector(".tab-badge");if(!b){b=document.createElement("span");b.className="tab-badge";dbTab.appendChild(b);}b.textContent=allDiseases.length;}}})
   .catch(err=>{if(requestId===diseaseRequestId&&list){debugError("diseaseDb load failed:",err);list.innerHTML=`<div role="alert" style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button type="button" class="retry-db-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;const rb=list.querySelector(".retry-db-btn");if(rb)rb.addEventListener("click",()=>loadDiseaseDb(species));}});
@@ -6413,11 +6416,12 @@ let anesthesiaLoaded=false,anesthesiaData=null,anesthesiaCategories={},anesthesi
    "anesthesia considerations" box in checker results. Historically they were
    fetched only when the anesthesia tab first opened, so checker-first users
    never saw the considerations box. Fetch-once helper usable from both paths. */
-let _contraRulesFetchStarted=false;
+let _contraRulesPromise=null;
 function ensureAnesthesiaContraRules(){
-  if(_contraRulesFetchStarted||(anesthesiaContraRules&&anesthesiaContraRules.length))return;
-  _contraRulesFetchStarted=true;
-  fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];}).catch(err=>{_contraRulesFetchStarted=false;debugWarn("anesthesia/contraindications fetch failed:",err);});
+  if(anesthesiaContraRules&&anesthesiaContraRules.length)return Promise.resolve(anesthesiaContraRules);
+  if(_contraRulesPromise)return _contraRulesPromise;
+  _contraRulesPromise=fetchWithTimeout("/api/anesthesia/contraindications?all=true").then(r=>r.json()).then(d=>{anesthesiaContraRules=d.rules||[];return anesthesiaContraRules;}).catch(err=>{_contraRulesPromise=null;debugWarn("anesthesia/contraindications fetch failed:",err);return[];});
+  return _contraRulesPromise;
 }
 
 function loadAnesthesiaProtocols(){
