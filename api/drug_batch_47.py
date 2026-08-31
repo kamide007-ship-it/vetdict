@@ -1,173 +1,384 @@
 """Drug batch 47 – referenced-but-absent agents surfaced by the 2026-08 audit (16th sweep).
 
-The dose-context katakana token audit (treatment texts cross-checked against
-find_drugs_in_text) found three agents that VetDict's own disease content
-instructs clinicians to use — with explicit doses — yet were absent from the
-formulary:
+The dosage-context katakana token sweep (treatment texts citing an agent with an
+explicit dose, cross-checked against find_drugs_in_text) found six agents that
+VetDict's own disease content instructs clinicians to use — with doses — yet
+were absent from the formulary:
 
-  - オクトレオチド (octreotide, Sandostatin): the canine gastrinoma entry
-    prescribes "1-5 μg/kg SC q8-12h", the insulinoma entry lists
-    "10-50 mcg SC q8-12h" and the idiopathic chylothorax entry cites
-    "10 μg/kg SC q8h" — 8+ references, no somatostatin analogue existed.
-  - デコキネート (decoquinate, Deccox): the Hepatozoon americanum entries
-    prescribe the ACVIM-standard relapse-suppression phase "10-20 mg/kg PO
-    q12h long-term after 14 days of TCP" — the drug that defines American
-    canine hepatozoonosis maintenance therapy was absent.
-  - ビオチン (biotin): 21 references — the equine hoof-quality supplement
-    ("15-25 mg/日 PO、6-12ヶ月" across hoof wall crack, sand crack, coronary
-    band dystrophy entries) and the canine dermatology adjunct — absent.
+  - ハロペリドール (haloperidol): 17 references — the classic pharmacologic
+    option for refractory avian feather-destructive behavior / self-mutilation
+    ("ハロペリドール0.1-0.2 mg/kg PO q12h短期使用").
+  - アトバコン (atovaquone): 12 references — VetDict's own curated protocols for
+    Babesia gibsoni (アトバコン+アジスロマイシン, Birkenheuer 2004) and
+    Cytauxzoon felis (Cohn 2011) name it as first-line, yet it was absent.
+  - プリマキン (primaquine): 20 references — avian malaria gametocyte/tissue
+    phase clearance and the only established therapy for Babesia felis.
+  - クロロキン (chloroquine): 20 references — avian malaria (Plasmodium)
+    first-line erythrocytic-phase therapy, always paired with primaquine.
+  - ナルトレキソン (naltrexone): 9 references — opioid antagonist for
+    self-directed/compulsive behavior (canine acral lick, avian feather
+    picking, equine self-mutilation).
+  - ブチルスコポラミン (N-butylscopolammonium bromide, Buscopan): 10 references
+    — the FDA-approved equine spasmolytic for spasmodic colic and esophageal
+    obstruction; a first-reach drug in equine practice.
 
 References:
-  - Altschul M et al. J Small Anim Pract 1997 / Hughes SM, N Z Vet J 2006 —
-    canine gastrinoma: octreotide 1-5 μg/kg SC q8-12h suppresses gastrin
-    secretion and clinical signs.
-  - Robben JH et al. J Vet Intern Med 2006 — somatostatin-receptor imaging /
-    octreotide response in canine insulinoma is variable (receptor-subtype
-    dependent); hypoglycemia palliation inconsistent.
-  - Fossum TW (chylothorax reviews); Sicard GK, JAVMA 2005 — octreotide
-    10 μg/kg SC q8h reduced chyle flow in some canine chylothorax cases
-    (evidence limited).
-  - Peterson ME — feline acromegaly: short-acting octreotide is largely
-    ineffective in cats (somatostatin-receptor profile); long-acting
-    analogues/hypophysectomy preferred.
-  - Macintire DK et al. JAVMA 2001;218:77 — Hepatozoon americanum: TCP
-    (trimethoprim-sulfa + clindamycin + pyrimethamine) ×14 days, then
-    decoquinate 10-20 mg/kg PO q12h in food ≥2 years prevents relapse and
-    markedly prolongs survival.
-  - Allen KE et al. Vet Parasitol 2011 — hepatozoonosis review confirming
-    decoquinate maintenance.
-  - Josseck H et al. Equine Vet J 1995;27:175 — biotin 20 mg/day PO improved
-    hoof horn quality in Lipizzaners over 9-19 months (placebo-controlled).
-  - Zenker W et al. Equine Vet J 1995;27:183 — histological confirmation of
-    biotin effect on hoof horn.
-  - Frigg M et al. Schweiz Arch Tierheilkd 1989 — biotin in dogs with fur
-    and skin conditions (adjunct-level evidence).
+  - Carpenter's Exotic Animal Formulary 6th ed — haloperidol 0.1-0.2 mg/kg PO
+    q12-24h for psittacine feather-destructive behavior (cockatoos start low);
+    naltrexone 1.5 mg/kg PO q12h for feather picking; avian malaria:
+    chloroquine 25 mg/kg PO once then 15 mg/kg at 12/24/48h plus primaquine
+    0.75-1 mg/kg PO q24h.
+  - Iglauer F, Rasim R. J Small Anim Pract 1993 — haloperidol treatment of
+    automutilation/feather plucking in psittacines.
+  - Birkenheuer AJ et al. J Vet Intern Med 2004;18:494 — atovaquone
+    13.3 mg/kg PO q8h with fatty food + azithromycin 10 mg/kg PO q24h ×10 days
+    for Babesia gibsoni.
+  - Cohn LA et al. J Vet Intern Med 2011;25:55 — atovaquone 15 mg/kg PO q8h +
+    azithromycin 10 mg/kg PO q24h ×10 days for Cytauxzoon felis: 60% survival
+    vs 26% with imidocarb.
+  - Penzhorn BL et al. / Jacobson LS — Babesia felis: primaquine 0.5 mg/kg is
+    the only consistently effective drug; the feline lethal dose (~1 mg/kg) is
+    close to the therapeutic dose — the definitional safety fact for this
+    agent in cats.
+  - Grim KC et al. J Zoo Wildl Med 2004; Remple JD 2004 — chloroquine/
+    primaquine protocols for avian malaria in penguins and raptors.
+  - Dodman NH et al. JAVMA 1988; White SD. JAVMA 1990;196:1073 — naltrexone
+    2.2 mg/kg PO for canine acral lick dermatitis; Dodman NH 1987 — opioid
+    antagonists in equine self-mutilation/crib-biting.
+  - Plumb's Veterinary Drug Handbook 10th ed; Reed & Bayly Equine Internal
+    Medicine 4th ed — N-butylscopolammonium bromide 0.3 mg/kg slow IV for
+    spasmodic colic / choke; transient tachycardia ~30 min masks the heart
+    rate as a pain indicator — record HR before dosing.
 """
 
 DRUGS_BATCH_47: list[dict] = [
     {
-        "id": "octreotide",
+        "id": "haloperidol",
         "search_aliases": [
-            "オクトレオチド",
-            "サンドスタチン",
-            "Octreotide",
-            "Sandostatin",
+            "ハロペリドール",
+            "セレネース",
+            "Haloperidol",
+            "Haldol",
         ],
-        "name": "Octreotide (Sandostatin)",
-        "name_ja": "オクトレオチド（サンドスタチン）",
-        "category": "endocrine",
-        "mechanism": "Synthetic somatostatin analogue that binds somatostatin receptors (predominantly SSTR2/5) and suppresses secretion of gastrin, insulin, glucagon and growth hormone, and reduces splanchnic/lymphatic flow. Veterinary uses: gastrinoma (best-supported), insulinoma palliation (variable, receptor-dependent), and adjunctive reduction of chyle flow in chylothorax.",
-        "mechanism_ja": "ソマトスタチン受容体（主にSSTR2/5）に結合し、ガストリン・インスリン・グルカゴン・成長ホルモンの分泌を抑制、内臓血流・リンパ流も減少させる合成ソマトスタチンアナログ。獣医領域ではガストリノーマ（最もエビデンスが確立）、インスリノーマの緩和（受容体依存性で反応不定）、乳糜胸のリンパ流量減少補助に用いる。",
+        "name": "Haloperidol (Haldol)",
+        "name_ja": "ハロペリドール（セレネース）",
+        "category": "behavioral",
+        "mechanism": "Butyrophenone antipsychotic — central dopamine D2 receptor antagonist. In birds it damps the compulsive/stereotypic drive underlying refractory feather-destructive behavior and self-mutilation when environmental/behavioral modification and first-line agents have failed.",
+        "mechanism_ja": "ブチロフェノン系抗精神病薬 — 中枢ドーパミンD2受容体拮抗薬。鳥では環境・行動修正と第一選択薬が無効な難治性の羽毛破壊行動・自咬症の背景にある強迫・常同的衝動を抑制する。",
         "species_info": {
+            "bird": {
+                "safe": True,
+                "dosage": "Refractory feather-destructive behavior / self-mutilation: 0.1-0.2 mg/kg PO q12-24h, start at the low end (Carpenter 6th ed; Iglauer & Rasim 1993). Cockatoos are sensitive — start 0.1 mg/kg q24h. Long-acting decanoate 1-2 mg/kg IM q2-3 weeks has been used when oral dosing is impractical.",
+                "dosage_ja": "難治性の羽毛破壊行動・自咬症: 0.1-0.2 mg/kg 経口 12-24時間毎、低用量から開始（Carpenter 6th ed; Iglauer & Rasim 1993）。オウム類（特にバタン）は感受性が高く0.1 mg/kg 24時間毎から。経口投与が困難な場合はデカン酸エステル持効型 1-2 mg/kg 筋注 2-3週毎の使用報告あり。",
+                "notes": "Short-term adjunct only — environmental enrichment, foraging opportunity and behavioral modification remain the foundation. Monitor for anorexia, sedation, agitation and extrapyramidal signs; discontinue if they appear.",
+                "notes_ja": "短期の補助療法に限る — 環境エンリッチメント・採餌機会・行動修正が治療の基盤。食欲不振・鎮静・興奮・錐体外路症状をモニタリングし、出現時は中止。",
+            },
+            "parrot": {
+                "safe": True,
+                "dosage": "0.1-0.2 mg/kg PO q12-24h, start low (Carpenter 6th ed). Cockatoos: 0.1 mg/kg q24h initially.",
+                "dosage_ja": "0.1-0.2 mg/kg 経口 12-24時間毎、低用量から開始（Carpenter 6th ed）。バタン類は0.1 mg/kg 24時間毎から。",
+                "notes": "Reserve for cases refractory to behavioral therapy and first-line agents (SSRIs/TCAs).",
+                "notes_ja": "行動療法と第一選択薬（SSRI/TCA）が無効な症例に限って使用。",
+            },
+            "parakeet": {
+                "safe": True,
+                "dosage": "0.1-0.2 mg/kg PO q12-24h, start low (Carpenter 6th ed).",
+                "dosage_ja": "0.1-0.2 mg/kg 経口 12-24時間毎、低用量から開始（Carpenter 6th ed）。",
+                "notes": "Small-bird dosing requires accurate weighing and compounded dilution.",
+                "notes_ja": "小型鳥では正確な体重測定と調剤希釈が必須。",
+            },
             "dog": {
-                "safe": True,
-                "dosage": "Gastrinoma: 1-5 μg/kg SC q8-12h (with PPI; long-acting depot 10-20 mg IM q4wk for chronic control). Insulinoma (unresectable, refractory): 10-50 μg/dog SC q8-12h — response is variable and receptor-dependent (Robben 2006). Chylothorax adjunct: 10 μg/kg SC q8h ×2-3 weeks (evidence limited).",
-                "dosage_ja": "ガストリノーマ: 1-5 μg/kg 皮下 8-12時間毎（PPI併用。慢性管理は長時間作用デポ 10-20 mg 筋注 4週毎）。インスリノーマ（切除不能・難治例）: 10-50 μg/頭 皮下 8-12時間毎 — 反応は受容体サブタイプ依存で不定（Robben 2006）。乳糜胸補助: 10 μg/kg 皮下 8時間毎×2-3週（エビデンス限定的）。",
-                "notes": "Monitor glucose when used for insulinoma — paradoxical worsening of hypoglycemia is possible if glucagon suppression outweighs insulin suppression. GI signs (inappetence, diarrhea) are the main adverse effects. Expensive; reserve for refractory/palliative cases.",
-                "notes_ja": "インスリノーマで使用する際は血糖を必ずモニタリング — グルカゴン抑制がインスリン抑制を上回ると逆説的な低血糖悪化がありうる。主な副作用は消化器症状（食欲低下・下痢）。高価なため難治例・緩和目的に温存。",
-            },
-            "cat": {
-                "safe": True,
-                "dosage": "Acromegaly: short-acting octreotide is largely INEFFECTIVE in cats (receptor profile — Peterson); hypophysectomy/radiation preferred. Gastrinoma (rare): extrapolated 1-5 μg/kg SC q8-12h.",
-                "dosage_ja": "先端巨大症: 短時間作用型オクトレオチドは猫ではほぼ無効（受容体プロファイル — Peterson）。下垂体切除/放射線が優先。ガストリノーマ（稀）: 外挿で 1-5 μg/kg 皮下 8-12時間毎。",
-                "notes": "Do not present octreotide as an acromegaly treatment option in cats — trial only when definitive options are unavailable, with IGF-1 monitoring.",
-                "notes_ja": "猫の先端巨大症の治療選択肢としては提示しないこと — 根治的選択肢が使えない場合の試験的投与に限り、IGF-1をモニタリング。",
-            },
-            "ferret": {
-                "safe": True,
-                "dosage": "Insulinoma (refractory to prednisolone + diazoxide): 1-2 μg/kg SC q8-12h reported (case-level evidence).",
-                "dosage_ja": "インスリノーマ（プレドニゾロン＋ジアゾキシド不応例）: 1-2 μg/kg 皮下 8-12時間毎の報告あり（症例報告レベル）。",
-                "notes": "Third-line only; frequent small meals, prednisolone and diazoxide remain the medical backbone.",
-                "notes_ja": "第三選択に限る。頻回少量給餌・プレドニゾロン・ジアゾキシドが内科管理の基本であることは不変。",
+                "safe": False,
+                "dosage": "Not recommended — modern behavioral pharmacotherapy (fluoxetine, clomipramine) is preferred for compulsive disorders.",
+                "dosage_ja": "非推奨 — 犬の強迫性障害には現行の行動薬物療法（フルオキセチン・クロミプラミン）が優先される。",
+                "notes": "Extrapyramidal effects and sedation without addressing the underlying behavior; no established indication in current canine behavioral medicine.",
+                "notes_ja": "錐体外路症状・鎮静のみで根本の行動問題に作用しない。現行の犬行動学に確立された適応なし。",
             },
         },
-        "side_effects": "GI signs (inappetence, vomiting, diarrhea), injection-site pain, altered glucose regulation (hypo- or hyperglycemia), rarely biliary sludge with chronic use",
-        "side_effects_ja": "消化器症状（食欲低下・嘔吐・下痢）、注射部位痛、血糖調節の変動（低血糖・高血糖の両方向）、慢性投与でまれに胆泥",
-        "contraindications": "Monitor glucose closely in insulinoma — paradoxical hypoglycemia possible. Reduce expectations in cats (acromegaly) — largely ineffective",
-        "contraindications_ja": "インスリノーマでは血糖を厳密にモニタリング — 逆説的低血糖がありうる。猫の先端巨大症にはほぼ無効であることを前提とする",
+        "side_effects": "Anorexia, sedation, paradoxical agitation, extrapyramidal signs (tremor, rigidity); hepatic metabolism — monitor liver values on prolonged use",
+        "side_effects_ja": "食欲不振・鎮静・逆説的興奮・錐体外路症状（振戦・固縮）。肝代謝 — 長期使用時は肝酵素をモニタリング",
+        "contraindications": "CNS depression, hepatic failure. Not a substitute for environmental/behavioral modification",
+        "contraindications_ja": "CNS抑制状態・肝不全。環境・行動修正の代替にはならない",
         "drug_interactions": [
             {
-                "drug": "Insulin / oral hypoglycemics / diazoxide",
-                "effect": "Octreotide alters insulin and glucagon secretion — glucose-regulating co-medication requires dose re-titration under monitoring",
-                "effect_ja": "オクトレオチドはインスリン・グルカゴン分泌の両方を変動させる — 血糖調節薬の併用は監視下での再滴定が必要",
+                "drug": "CNS depressants (opioids, benzodiazepines)",
+                "effect": "Additive sedation",
+                "effect_ja": "鎮静作用の相加",
                 "severity": "moderate",
             },
             {
-                "drug": "Cyclosporine",
-                "effect": "Octreotide reduces cyclosporine absorption (human data) — monitor levels",
-                "effect_ja": "オクトレオチドはシクロスポリンの吸収を低下させる（ヒトデータ）— 血中濃度をモニタリング",
+                "drug": "Metoclopramide",
+                "effect": "Both are dopamine antagonists — additive extrapyramidal risk",
+                "effect_ja": "共にドーパミン拮抗薬 — 錐体外路症状リスクが相加",
                 "severity": "moderate",
             },
         ],
     },
     {
-        "id": "decoquinate",
+        "id": "atovaquone",
         "search_aliases": [
-            "デコキネート",
-            "デコックス",
-            "Decoquinate",
-            "Deccox",
+            "アトバコン",
+            "メプロン",
+            "Atovaquone",
+            "Mepron",
         ],
-        "name": "Decoquinate (Deccox)",
-        "name_ja": "デコキネート（デコックス）",
+        "name": "Atovaquone (Mepron)",
+        "name_ja": "アトバコン（メプロン）",
         "category": "antiparasitics",
-        "mechanism": "Quinolone coccidiostat that blocks protozoal mitochondrial electron transport (cytochrome b), arresting sporozoite/merozoite development. In dogs it is the ACVIM-standard long-term suppression phase for Hepatozoon americanum: it does not clear tissue cysts but prevents merozoite release and relapse after triple therapy (TCP).",
-        "mechanism_ja": "原虫ミトコンドリア電子伝達系（チトクロムb）を阻害しスポロゾイト・メロゾイトの発育を停止させるキノロン系コクシジウム抑制薬。犬ではHepatozoon americanum（アメリカ型ヘパトゾーン症）のACVIM標準・長期再発抑制フェーズを担う: 組織シストは排除しないが、TCP三剤併用後のメロゾイト放出と再発を抑止する。",
+        "mechanism": "Hydroxynaphthoquinone antiprotozoal — inhibits the parasite mitochondrial cytochrome bc1 complex, collapsing the membrane potential. Combined with azithromycin it is the evidence-based first-line therapy for small Babesia (B. gibsoni) in dogs and Cytauxzoon felis in cats — the piroplasms that respond poorly to imidocarb.",
+        "mechanism_ja": "ヒドロキシナフトキノン系抗原虫薬 — 原虫ミトコンドリアのチトクロムbc1複合体を阻害し膜電位を消失させる。アジスロマイシンとの併用で、イミドカルブが効きにくい小型ピロプラズマ（犬のBabesia gibsoni、猫のCytauxzoon felis）に対するエビデンスに基づく第一選択。",
         "species_info": {
             "dog": {
                 "safe": True,
-                "dosage": "Hepatozoon americanum: after 14 days of TCP (trimethoprim-sulfa + clindamycin + pyrimethamine), decoquinate 10-20 mg/kg PO q12h mixed in food, continued ≥2 years (Macintire 2001 JAVMA — relapse prevention and markedly prolonged survival).",
-                "dosage_ja": "アメリカ型ヘパトゾーン症: TCP三剤併用（TMS＋クリンダマイシン＋ピリメタミン）14日間の後、デコキネート 10-20 mg/kg 経口 12時間毎（餌に混和）を2年以上継続（Macintire 2001 JAVMA — 再発抑止と生存期間の大幅延長）。",
-                "notes": "Wide safety margin (livestock feed-additive origin). Discontinuation before 2 years commonly leads to relapse — owner compliance counseling is part of the protocol. Combine with year-round tick control (Amblyomma maculatum).",
-                "notes_ja": "安全域は広い（家畜飼料添加物由来）。2年未満での中止は高率に再発する — 飼い主のコンプライアンス指導もプロトコルの一部。通年のマダニ対策（Amblyomma maculatum）を併用。",
+                "dosage": "Babesia gibsoni: 13.3 mg/kg PO q8h WITH a fatty meal ×10 days + azithromycin 10 mg/kg PO q24h (Birkenheuer 2004 JVIM). Fatty food increases absorption several-fold — administration on an empty stomach is a common cause of treatment failure.",
+                "dosage_ja": "Babesia gibsoni: 13.3 mg/kg 経口 8時間毎を**脂肪を含む食事と共に** 10日間 + アジスロマイシン 10 mg/kg 経口 24時間毎（Birkenheuer 2004 JVIM）。脂肪食で吸収が数倍に増加 — 空腹時投与は治療失敗の代表的原因。",
+                "notes": "M121I cytochrome b mutants confer atovaquone resistance — relapse after initial response warrants PCR re-testing and a switch (clindamycin combination protocols). Clearance (PCR-negative) rather than clinical cure is the treatment goal.",
+                "notes_ja": "チトクロムb M121I変異株はアトバコン耐性 — 初期反応後の再燃はPCR再検査とプロトコル変更（クリンダマイシン併用等）を検討。治療目標は臨床的改善ではなくPCR陰性化。",
             },
             "cat": {
                 "safe": True,
-                "dosage": "Hepatozoon felis (extrapolated): 10-20 mg/kg PO q12h in food as a relapse-suppression phase — feline evidence is limited to case-level reports.",
-                "dosage_ja": "Hepatozoon felis（外挿）: 再発抑制フェーズとして 10-20 mg/kg 経口 12時間毎（餌に混和）— 猫のエビデンスは症例報告レベル。",
-                "notes": "Feline hepatozoonosis is usually subclinical; treat only confirmed clinical cases.",
-                "notes_ja": "猫のヘパトゾーン症は通常不顕性。治療は臨床症状が確認された症例に限る。",
+                "dosage": "Cytauxzoon felis: 15 mg/kg PO q8h ×10 days + azithromycin 10 mg/kg PO q24h (Cohn 2011 JVIM — 60% survival vs 26% with imidocarb) alongside intensive supportive care (fluids, heparin, oxygen, nutrition). Babesia felis-group infections: reported adjunct where primaquine is unavailable.",
+                "dosage_ja": "サイトークスゾーン症: 15 mg/kg 経口 8時間毎 10日間 + アジスロマイシン 10 mg/kg 経口 24時間毎（Cohn 2011 JVIM — 生存率60% vs イミドカルブ26%）。集中支持療法（輸液・ヘパリン・酸素・栄養）と必ず併用。猫バベシアではプリマキン入手不能時の補助としての報告あり。",
+                "notes": "Give with food. Minimal-restraint nursing is part of the protocol — stress precipitates decompensation in cytauxzoonosis.",
+                "notes_ja": "食事と共に投与。サイトークスゾーン症ではストレスが急変を誘発するため最小限の保定・看護がプロトコルの一部。",
             },
         },
-        "side_effects": "Rare at therapeutic doses (GI upset); wide margin of safety",
-        "side_effects_ja": "治療用量では稀（軽度の消化器症状）。安全域は広い",
-        "contraindications": "Not a stand-alone acute therapy — it suppresses relapse only; acute H. americanum requires the TCP induction phase first",
-        "contraindications_ja": "単独での急性期治療薬ではない — 再発抑制のみ。急性期のH. americanumはまずTCP導入フェーズが必要",
-        "drug_interactions": [],
+        "side_effects": "Generally well tolerated; GI signs (vomiting, diarrhea, inappetence) most common",
+        "side_effects_ja": "概して忍容性良好。最多は消化器症状（嘔吐・下痢・食欲不振）",
+        "contraindications": "Hypersensitivity. Absorption is unreliable in anorexic patients — address nutrition first or use assisted feeding",
+        "contraindications_ja": "過敏症。食欲廃絶例では吸収が不安定 — 先に栄養補給・強制給餌を確立して投与",
+        "drug_interactions": [
+            {
+                "drug": "Azithromycin",
+                "effect": "Intended synergistic combination — the standard protocol for B. gibsoni and C. felis",
+                "effect_ja": "意図的な相乗併用 — B. gibsoni・C. felis の標準プロトコル",
+                "severity": "info",
+            },
+            {
+                "drug": "Metoclopramide",
+                "effect": "Reduces atovaquone plasma concentrations (human data) — prefer maropitant for antiemesis during therapy",
+                "effect_ja": "アトバコン血中濃度を低下させる（ヒトデータ） — 治療中の制吐はマロピタントを優先",
+                "severity": "moderate",
+            },
+        ],
     },
     {
-        "id": "biotin",
+        "id": "primaquine",
         "search_aliases": [
-            "ビオチン",
-            "バイオチン",
-            "ビタミンB7",
-            "Biotin",
+            "プリマキン",
+            "Primaquine",
         ],
-        "name": "Biotin (Vitamin B7)",
-        "name_ja": "ビオチン（ビタミンB7）",
-        "category": "supplements",
-        "mechanism": "Water-soluble B vitamin serving as a carboxylase cofactor in fatty-acid synthesis and keratinization. Supra-nutritional supplementation improves hoof horn tensile strength and growth quality in horses (placebo-controlled: Josseck 1995, Zenker 1995 Equine Vet J) and is used as a coat/skin adjunct in canine dermatology.",
-        "mechanism_ja": "脂肪酸合成と角化に関わるカルボキシラーゼ補酵素の水溶性ビタミンB群。栄養要求量を超える補充で馬の蹄角質の強度・成長品質が改善する（プラセボ対照試験: Josseck 1995・Zenker 1995 Equine Vet J）。犬の皮膚科では被毛・皮膚の補助療法として用いる。",
+        "name": "Primaquine",
+        "name_ja": "プリマキン",
+        "category": "antiparasitics",
+        "mechanism": "8-aminoquinoline antimalarial — the only class active against exoerythrocytic (tissue) stages and gametocytes of Plasmodium, and the only consistently effective drug for Babesia felis. Paired with chloroquine (which clears erythrocytic stages) in avian malaria to prevent relapse and block transmission.",
+        "mechanism_ja": "8-アミノキノリン系抗マラリア薬 — Plasmodiumの赤外型（組織型）とガメトサイトに有効な唯一のクラスで、Babesia felisに安定して有効な唯一の薬剤。鳥マラリアでは赤内型を除去するクロロキンと組み合わせ、再燃防止と伝播遮断を担う。",
+        "species_info": {
+            "cat": {
+                "safe": True,
+                "dosage": "Babesia felis: 0.5 mg/kg PO or IM once, repeat after 24h if parasitemia persists (Penzhorn/Jacobson). DO NOT exceed 0.5 mg/kg per dose — the feline lethal dose (~1 mg/kg) is only twice the therapeutic dose.",
+                "dosage_ja": "猫バベシア（Babesia felis）: 0.5 mg/kg 経口または筋注 単回、原虫血症持続時は24時間後に再投与（Penzhorn/Jacobson）。**1回0.5 mg/kgを超えないこと** — 猫の致死量（約1 mg/kg）は治療量のわずか2倍。",
+                "notes": "The narrowest therapeutic margin in the feline antiprotozoal formulary — double-check the calculation and use an accurate scale. Monitor for hemolysis and methemoglobinemia.",
+                "notes_ja": "猫の抗原虫薬で最も治療域が狭い薬剤 — 用量計算のダブルチェックと正確な体重測定が必須。溶血・メトヘモグロビン血症をモニタリング。",
+            },
+            "bird": {
+                "safe": True,
+                "dosage": "Avian malaria (Plasmodium): 0.75-1 mg/kg PO q24h ×3-10 days, combined with chloroquine loading (Carpenter 6th ed; Grim 2004 penguins). Prophylaxis in high-risk aviary/penguin collections during vector season: 1 mg/kg PO q24h.",
+                "dosage_ja": "鳥マラリア（Plasmodium）: 0.75-1 mg/kg 経口 24時間毎 3-10日間、クロロキン初期投与と併用（Carpenter 6th ed; Grim 2004 ペンギン）。媒介蚊シーズンの高リスク飼育群（ペンギン等）の予防: 1 mg/kg 経口 24時間毎。",
+                "notes": "Always paired with chloroquine — primaquine alone does not clear the erythrocytic stage. Vector (mosquito) control is part of the protocol.",
+                "notes_ja": "必ずクロロキンと併用 — プリマキン単独では赤内型を除去できない。媒介蚊対策もプロトコルの一部。",
+            },
+            "parakeet": {
+                "safe": True,
+                "dosage": "0.75-1 mg/kg PO q24h ×3-10 days with chloroquine (Carpenter 6th ed).",
+                "dosage_ja": "0.75-1 mg/kg 経口 24時間毎 3-10日間、クロロキンと併用（Carpenter 6th ed）。",
+                "notes": "Accurate microdosing required in small psittacines.",
+                "notes_ja": "小型インコでは正確な微量投与が必須。",
+            },
+            "parrot": {
+                "safe": True,
+                "dosage": "0.75-1 mg/kg PO q24h ×3-10 days with chloroquine (Carpenter 6th ed).",
+                "dosage_ja": "0.75-1 mg/kg 経口 24時間毎 3-10日間、クロロキンと併用（Carpenter 6th ed）。",
+                "notes": "Haemoproteus is often an incidental finding — reserve therapy for genuine Plasmodium disease.",
+                "notes_ja": "Haemoproteusは偶発所見のことが多い — 治療は真のPlasmodium感染症に限る。",
+            },
+        },
+        "side_effects": "Dose-dependent oxidative hemolysis and methemoglobinemia (8-aminoquinoline class effect); GI upset",
+        "side_effects_ja": "用量依存性の酸化的溶血・メトヘモグロビン血症（8-アミノキノリン系のクラス作用）、消化器症状",
+        "contraindications": "Cats: never exceed 0.5 mg/kg per dose — lethal at ~1 mg/kg. Severe anemia (correct first / transfuse). Not for Haemoproteus incidental parasitemia",
+        "contraindications_ja": "猫: 1回0.5 mg/kg厳守 — 約1 mg/kgで致死的。重度貧血（先に輸血・補正）。Haemoproteusの偶発的寄生血症は治療対象外",
+        "drug_interactions": [
+            {
+                "drug": "Chloroquine",
+                "effect": "Intended combination for avian malaria (erythrocytic + tissue phase coverage)",
+                "effect_ja": "鳥マラリアでの意図的併用（赤内型＋組織型を同時カバー）",
+                "severity": "info",
+            },
+            {
+                "drug": "Oxidant drugs (sulfonamides, benzocaine)",
+                "effect": "Additive oxidative RBC injury — heightened hemolysis/methemoglobinemia risk",
+                "effect_ja": "酸化的赤血球傷害が相加 — 溶血・メトヘモグロビン血症リスク増大",
+                "severity": "moderate",
+            },
+        ],
+    },
+    {
+        "id": "chloroquine",
+        "search_aliases": [
+            "クロロキン",
+            "Chloroquine",
+        ],
+        "name": "Chloroquine",
+        "name_ja": "クロロキン",
+        "category": "antiparasitics",
+        "mechanism": "4-aminoquinoline antimalarial — concentrates in the parasite food vacuole and blocks heme detoxification, killing erythrocytic-stage Plasmodium. The first-line erythrocytic-phase drug for avian malaria, always combined with primaquine for tissue-stage/gametocyte clearance.",
+        "mechanism_ja": "4-アミノキノリン系抗マラリア薬 — 原虫の食胞に濃縮しヘム無毒化を阻害して赤内型Plasmodiumを殺滅。鳥マラリアの赤内型に対する第一選択で、組織型・ガメトサイト除去のため必ずプリマキンと併用する。",
+        "species_info": {
+            "bird": {
+                "safe": True,
+                "dosage": "Avian malaria (Plasmodium): 25 mg/kg PO initial dose, then 15 mg/kg at 12, 24 and 48h, combined with primaquine 0.75-1 mg/kg PO q24h (Carpenter 6th ed; Remple 2004 raptors; Grim 2004 penguins).",
+                "dosage_ja": "鳥マラリア（Plasmodium）: 初回 25 mg/kg 経口、以後 15 mg/kg を12・24・48時間後に投与。プリマキン 0.75-1 mg/kg 経口 24時間毎と併用（Carpenter 6th ed; Remple 2004 猛禽; Grim 2004 ペンギン）。",
+                "notes": "Institute during acute hemolytic crisis with supportive care (fluids, oxygen); severe anemia may need transfusion. Screen collections and control mosquitoes in endemic seasons.",
+                "notes_ja": "急性溶血クリーゼでは支持療法（輸液・酸素）と共に開始。重度貧血は輸血を考慮。流行期は飼育群スクリーニングと蚊対策を併施。",
+            },
+            "parakeet": {
+                "safe": True,
+                "dosage": "25 mg/kg PO once, then 15 mg/kg at 12/24/48h + primaquine (Carpenter 6th ed).",
+                "dosage_ja": "初回 25 mg/kg 経口、以後 15 mg/kg を12/24/48時間後 + プリマキン併用（Carpenter 6th ed）。",
+                "notes": "Accurate microdosing in small birds.",
+                "notes_ja": "小型鳥では正確な微量投与が必須。",
+            },
+            "parrot": {
+                "safe": True,
+                "dosage": "25 mg/kg PO once, then 15 mg/kg at 12/24/48h + primaquine (Carpenter 6th ed).",
+                "dosage_ja": "初回 25 mg/kg 経口、以後 15 mg/kg を12/24/48時間後 + プリマキン併用（Carpenter 6th ed）。",
+                "notes": "Confirm Plasmodium (blood smear/PCR) before committing to the full course.",
+                "notes_ja": "全コース開始前に血液塗抹/PCRでPlasmodiumを確認。",
+            },
+        },
+        "side_effects": "Retinal toxicity with chronic use (class effect); GI upset; overdose causes cardiotoxicity",
+        "side_effects_ja": "長期使用で網膜毒性（クラス作用）、消化器症状。過量で心毒性",
+        "contraindications": "Pre-existing retinal disease for prolonged courses; severe hepatic impairment",
+        "contraindications_ja": "長期投与では既存網膜疾患に注意。重度肝障害",
+        "drug_interactions": [
+            {
+                "drug": "Primaquine",
+                "effect": "Intended combination for avian malaria",
+                "effect_ja": "鳥マラリアでの意図的併用",
+                "severity": "info",
+            },
+        ],
+    },
+    {
+        "id": "naltrexone",
+        "search_aliases": [
+            "ナルトレキソン",
+            "Naltrexone",
+        ],
+        "name": "Naltrexone",
+        "name_ja": "ナルトレキソン",
+        "category": "behavioral",
+        "mechanism": "Long-acting oral opioid receptor antagonist. Self-directed behaviors (acral licking, feather picking, flank biting) can be maintained by endogenous opioid release — blocking the reward loop reduces the behavior in a subset of patients.",
+        "mechanism_ja": "長時間作用型の経口オピオイド受容体拮抗薬。自己指向性行動（肢端舐性、毛引き、脇腹咬み）は内因性オピオイド放出により強化されることがあり、その報酬ループを遮断して一部の症例で行動を減少させる。",
+        "species_info": {
+            "dog": {
+                "safe": True,
+                "dosage": "Acral lick dermatitis / self-mutilation adjunct: 1-2.2 mg/kg PO q12-24h (White 1990 JAVMA; Dodman 1988). Trial 4-6 weeks; continue only in responders.",
+                "dosage_ja": "肢端舐性皮膚炎・自傷行動の補助: 1-2.2 mg/kg 経口 12-24時間毎（White 1990 JAVMA; Dodman 1988）。4-6週間試験投与し、反応例のみ継続。",
+                "notes": "Adjunct to behavioral modification and treatment of underlying pruritus/pain — not a standalone therapy. SSRIs/TCAs are the usual first-line pharmacotherapy.",
+                "notes_ja": "行動修正と基礎の掻痒・疼痛治療への補助であり単独療法ではない。薬物療法の第一選択は通常SSRI/TCA。",
+            },
+            "bird": {
+                "safe": True,
+                "dosage": "Feather-destructive behavior: 1.5 mg/kg PO q12h (Carpenter 6th ed; Turner 1993).",
+                "dosage_ja": "羽毛破壊行動: 1.5 mg/kg 経口 12時間毎（Carpenter 6th ed; Turner 1993）。",
+                "notes": "Response is individual — reassess at 4 weeks alongside enrichment and medical workup for pruritic causes.",
+                "notes_ja": "反応は個体差が大きい — エンリッチメントと掻痒原因の医学的精査を併行し4週で再評価。",
+            },
+            "parrot": {
+                "safe": True,
+                "dosage": "1.5 mg/kg PO q12h (Carpenter 6th ed).",
+                "dosage_ja": "1.5 mg/kg 経口 12時間毎（Carpenter 6th ed）。",
+                "notes": "Rule out medical causes of plucking (PBFD, giardiasis, dermatitis) first.",
+                "notes_ja": "先に毛引きの医学的原因（PBFD・ジアルジア・皮膚炎）を除外。",
+            },
+            "horse": {
+                "safe": True,
+                "dosage": "Self-mutilation / flank-biting adjunct: 0.4-1 mg/kg PO q24h reported (Dodman 1987 — opioid antagonism reduced stereotypic behavior).",
+                "dosage_ja": "自傷・脇腹咬み行動の補助: 0.4-1 mg/kg 経口 24時間毎の報告（Dodman 1987 — オピオイド拮抗で常同行動が減少）。",
+                "notes": "Address management factors (turnout, social contact, ulcer pain) first; pharmacotherapy is adjunctive.",
+                "notes_ja": "先に管理要因（放牧・社会的接触・胃潰瘍性疼痛）を是正。薬物療法は補助。",
+            },
+        },
+        "side_effects": "GI upset; lethargy at high doses; hepatic metabolism — monitor liver values on prolonged use",
+        "side_effects_ja": "消化器症状、高用量で元気消失。肝代謝 — 長期使用時は肝酵素をモニタリング",
+        "contraindications": "Blocks opioid analgesics — discontinue before procedures requiring opioid analgesia; acute hepatitis/liver failure",
+        "contraindications_ja": "オピオイド鎮痛薬を無効化する — オピオイド鎮痛が必要な処置の前に休薬。急性肝炎・肝不全",
+        "drug_interactions": [
+            {
+                "drug": "Opioid analgesics (morphine, buprenorphine, tramadol)",
+                "effect": "Antagonizes analgesia — opioids will not work while naltrexone is on board; plan perioperative analgesia with non-opioid agents or wash out first",
+                "effect_ja": "鎮痛作用を拮抗 — 本剤投与中はオピオイドが効かない。周術期は非オピオイド鎮痛で計画するか先に休薬",
+                "severity": "major",
+            },
+        ],
+    },
+    {
+        "id": "butylscopolamine",
+        "search_aliases": [
+            "ブチルスコポラミン",
+            "ブスコパン",
+            "臭化ブチルスコポラミン",
+            "N-ブチルスコポラミン",
+            "Butylscopolamine",
+            "Buscopan",
+            "N-butylscopolammonium",
+        ],
+        "name": "N-Butylscopolammonium Bromide (Buscopan)",
+        "name_ja": "ブチルスコポラミン臭化物（ブスコパン）",
+        "category": "gastrointestinal",
+        "mechanism": "Quaternary ammonium anticholinergic (antimuscarinic) spasmolytic — relaxes gastrointestinal smooth muscle without crossing the blood-brain barrier. The FDA-approved equine spasmolytic: rapidly relieves spasmodic colic pain and relaxes the esophagus in choke, and facilitates rectal palpation.",
+        "mechanism_ja": "第四級アンモニウム型の抗コリン（抗ムスカリン）鎮痙薬 — 血液脳関門を通過せずに消化管平滑筋を弛緩させる。馬でFDA承認された鎮痙薬: 痙攣性疝痛の疼痛を速やかに緩和し、食道梗塞（チョーク）では食道を弛緩、直腸検査の弛緩にも用いる。",
         "species_info": {
             "horse": {
                 "safe": True,
-                "dosage": "Hoof quality (hoof wall cracks, poor horn, coronary band dystrophy): 15-25 mg/head/day PO, continued 6-12 months minimum — the hoof wall grows ~6-9 mm/month, so effects appear only in new horn (Josseck 1995: 20 mg/day ×9-19 months).",
-                "dosage_ja": "蹄質改善（裂蹄・蹄角質不良・冠状帯ジストロフィー）: 15-25 mg/頭/日 経口、最低6-12ヶ月継続 — 蹄壁の伸長は月6-9 mmのため効果は新生角質にのみ現れる（Josseck 1995: 20 mg/日×9-19ヶ月）。",
-                "notes": "An adjunct to corrective farriery, never a replacement. Combine with balanced trimming q4-6wk. Methionine/zinc co-supplementation is common in hoof formulas.",
-                "notes_ja": "矯正装蹄の補助であり代替ではない。4-6週毎のバランストリミングと併用。蹄用サプリではメチオニン・亜鉛の同時配合が一般的。",
+                "dosage": "Spasmodic colic / esophageal obstruction (choke) / rectal relaxation: 0.3 mg/kg slow IV once (Plumb's 10th ed; Reed & Bayly 4th ed). Effect within minutes; duration ~20-30 min.",
+                "dosage_ja": "痙攣性疝痛・食道梗塞（チョーク）・直腸弛緩: 0.3 mg/kg 緩徐静注 単回（Plumb's 10th ed; Reed & Bayly 4th ed）。数分で効果発現、持続約20-30分。",
+                "notes": "Causes transient tachycardia (~30 min) — RECORD THE HEART RATE BEFORE DOSING, because HR is the key colic-severity indicator and is uninterpretable afterward. Pain returning after the spasmolytic wears off suggests a surgical lesion — re-evaluate rather than re-dose repeatedly.",
+                "notes_ja": "一過性頻脈（約30分）を起こす — **投与前に必ず心拍数を記録**（心拍数は疝痛重症度の主要指標であり投与後は評価不能になる）。効果消失後の疼痛再燃は外科的病変を示唆 — 反復投与でごまかさず再評価する。",
             },
             "dog": {
                 "safe": True,
-                "dosage": "Coat/skin adjunct (hypothyroid coat recovery, follicular dysplasias, dull brittle coat): 2.5-5 mg/day PO (Frigg 1989 — adjunct-level evidence).",
-                "dosage_ja": "被毛・皮膚の補助（甲状腺機能低下症の被毛回復・毛包形成異常・被毛脆弱）: 2.5-5 mg/日 経口（Frigg 1989 — 補助療法レベルのエビデンス）。",
-                "notes": "Water-soluble — excess is excreted; toxicity is not a practical concern. Address the primary disease first (e.g. levothyroxine for hypothyroidism).",
-                "notes_ja": "水溶性で過剰分は排泄されるため実務上の毒性懸念はない。まず基礎疾患の治療を優先（甲状腺機能低下症ならレボチロキシン等）。",
+                "dosage": "GI/urinary tract spasm adjunct: 0.2-0.3 mg/kg IV/IM/SC q8-12h (Plumb's). In Japan often as combination products with metamizole (Buscopan compositum).",
+                "dosage_ja": "消化管・尿路の痙攣性疼痛の補助: 0.2-0.3 mg/kg 静注/筋注/皮下 8-12時間毎（Plumb's）。日本ではメタミゾール配合剤（ブスコパン・コンポジタム等）としての使用も多い。",
+                "notes": "Symptomatic adjunct — identify and treat the underlying cause.",
+                "notes_ja": "対症的補助 — 基礎原因の診断・治療を並行する。",
+            },
+            "cat": {
+                "safe": True,
+                "dosage": "0.2-0.3 mg/kg IV/IM/SC q8-12h (extrapolated; limited feline data).",
+                "dosage_ja": "0.2-0.3 mg/kg 静注/筋注/皮下 8-12時間毎（外挿、猫のデータは限定的）。",
+                "notes": "Use anticholinergics cautiously in cats with cardiac disease (tachycardia).",
+                "notes_ja": "心疾患のある猫では抗コリン薬による頻脈に注意。",
             },
         },
-        "side_effects": "None expected at therapeutic doses (water-soluble vitamin)",
-        "side_effects_ja": "治療用量では想定されない（水溶性ビタミン）",
-        "contraindications": "None specific. Raw egg white feeding (avidin) antagonizes biotin — correct the diet rather than merely supplementing",
-        "contraindications_ja": "特異的禁忌なし。生卵白給餌（アビジン）はビオチンを拮抗阻害する — 補充だけでなく食事自体を是正する",
-        "drug_interactions": [],
+        "side_effects": "Transient tachycardia, decreased GI motility/borborygmi, mydriasis (minimal CNS effect — quaternary structure)",
+        "side_effects_ja": "一過性頻脈、消化管運動性・腸音の低下、散瞳（第四級構造のためCNS作用は最小）",
+        "contraindications": "Ileus and impaction/obstruction (further reduces motility); glaucoma; tachyarrhythmia. Masks heart rate as a pain indicator in colic — record HR first",
+        "contraindications_ja": "イレウス・便秘疝/閉塞（運動性をさらに低下させる）、緑内障、頻脈性不整脈。疝痛では心拍数指標をマスクする — 投与前の心拍数記録が必須",
+        "drug_interactions": [
+            {
+                "drug": "Metoclopramide / cisapride / prokinetics",
+                "effect": "Directly opposing pharmacology — anticholinergic spasmolysis antagonizes prokinetic effect",
+                "effect_ja": "薬理作用が真逆 — 抗コリン性鎮痙は消化管運動促進薬の効果を拮抗する",
+                "severity": "moderate",
+            },
+            {
+                "drug": "Other anticholinergics (atropine, glycopyrrolate)",
+                "effect": "Additive tachycardia and ileus risk",
+                "effect_ja": "頻脈・イレウスリスクが相加",
+                "severity": "moderate",
+            },
+        ],
     },
 ]

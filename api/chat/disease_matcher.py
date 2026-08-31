@@ -148,6 +148,10 @@ _SYN: dict[str, list[str]] = {
     "ear_discharge": ["ear_infection", "otitis", "ear_mites"],
     "blood_in_urine": ["hematuria", "uterine_bleeding"],
     "blood_in_stool": ["melena", "bleeding_gums", "hematochezia"],
+    # 2026-08 第14弾: 飼い主は鮮血便と黒色便（消化管上部出血）を区別できない —
+    # フェレット胃潰瘍（black_tarry_stool/tarry_stool）が「血便」主訴で
+    # マッチせず、エストロゲン性骨髄抑制等が上位を占めていた
+    "bloody_stool": ["black_tarry_stool", "tarry_stool", "melena", "blood_in_stool", "bloody_diarrhea"],
     "weight_loss": ["rough_coat", "poor_growth", "emaciation"],
     "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch"],
     "hind_limb_weakness": [

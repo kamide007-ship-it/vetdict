@@ -440,6 +440,29 @@ def test_main_css_disables_mobile_font_inflation():
     assert "text-size-adjust:100%" in html_rule
 
 
+def test_app_js_disease_db_detail_surfaces_anesthesia_considerations():
+    """2026-08: the disease-specific anesthesia-considerations box (matched
+    contraindication rules with one-tap drug links) rendered only in checker
+    result cards. A vet browsing the disease DB — e.g. opening 拡張型心筋症 —
+    saw no inline α2-agonist warning and had to pivot to the anesthesia tab
+    manually. The DB detail template must carry an anes-considerations-slot
+    placeholder, toggleDbItem must hydrate it on expansion, and the hydrator
+    must kick the fetch-once rules loader so DB-first users get the box too."""
+    js = (PROJECT_ROOT / "static" / "js" / "app.js").read_text(encoding="utf-8")
+    # placeholder rendered inside the DB detail panel with both names carried
+    assert 'class="anes-considerations-slot" data-anes="1"' in js
+    assert "data-dnja=" in js
+    # hydrator exists, kicks the fetch-once loader, and renders the shared box
+    assert "function hydrateAnesthesiaConsiderations(" in js
+    hyd = js[js.index("function hydrateAnesthesiaConsiderations(") :]
+    hyd = hyd[: hyd.index("\n}\n") + 3]
+    assert "ensureAnesthesiaContraRules" in hyd
+    assert "renderAnesthesiaConsiderations(" in hyd
+    # toggleDbItem calls the hydrator on expansion
+    tog = js[js.index("function toggleDbItem(") : js.index("function hydrateAnesthesiaConsiderations(")]
+    assert "hydrateAnesthesiaConsiderations(detail)" in tog
+
+
 def test_app_js_disease_to_emergency_protocol_cross_link():
     """Disease → emergency-protocol cross link (2026-08 round 14): viewing an
     emergency-class disease (GDV, anaphylaxis, blocked cat, heatstroke...) had

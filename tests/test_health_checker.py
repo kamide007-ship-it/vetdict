@@ -31,8 +31,8 @@ class TestSymptomDatabase:
 
     def test_symptom_count(self):
         assert (
-            len(SYMPTOMS) == 75
-        )  # +hives, +facial_swelling (2026-08 round-14); before +regurgitation, +dark_urine, +mammary_swelling
+            len(SYMPTOMS) == 76
+        )  # +hives, +facial_swelling (round-14) + snoring (round-15 BOAS) after merge
 
     def test_all_symptoms_have_required_fields(self):
         for s in SYMPTOMS:
@@ -295,7 +295,7 @@ class TestGetSymptomsRoute:
         assert "total" in data
         assert "symptoms" in data
         assert "categories" in data
-        assert data["total"] == 75
+        assert data["total"] == 76
 
     def test_filter_by_category(self, client):
         resp = client.get("/api/health-check/symptoms?category=respiratory")

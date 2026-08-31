@@ -1128,6 +1128,16 @@ SPECIES_PREVALENCE = {
         # Carpenter 4th ed). Untiered, it outranked insulinoma for the
         # screaming+tonic-episode complaint.
         "Seizure Disorder (Epilepsy)": "rare",
+        # 2026-08 第14弾: 血便主訴の是正。ヘリコバクター関連胃潰瘍はフェレットで
+        # 極めて高頻度（H. mustelae はほぼ全頭が保有 — Quesenberry & Carpenter
+        # 4th ed）なのに未ティアで、曝露依存のイブプロフェン中毒・繁殖個体限定の
+        # 妊娠毒血症が血便＋元気消失の上位を占めていた。
+        "Gastric Ulcer": "common",
+        "Helicobacter Mustelae Gastric Ulcer": "common",
+        "Coccidia (GI)": "common",
+        "Ibuprofen Toxicosis": "rare",
+        "Pregnancy Toxemia": "rare",
+        "Parvovirus Enteritis": "rare",
     },
     # ==================================================================
     # HEDGEHOG — 22+ entries (expanded from ~10)

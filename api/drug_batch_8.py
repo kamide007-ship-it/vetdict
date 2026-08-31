@@ -19,7 +19,7 @@ DRUGS_BATCH_8: List[Dict[str, Any]] = [
     {
         "id": "domperidone",
         "name": "Domperidone",
-        "name_ja": "ドメペリドン",
+        "name_ja": "ドンペリドン",
         "category": "lactation_support",
         "mechanism": "Dopamine D2 receptor antagonist that increases prolactin secretion by blocking dopamine's inhibitory effect on lactotroph cells. Peripheral action (doesn't cross BBB) minimizes CNS side effects.",
         "mechanism_ja": "ドーパミンD2受容体拮抗薬。ドーパミンのラクトトロープ細胞への抑制作用を遮断してプロラクチン分泌を増加。末梢作用（BBB非通過）でCNS副作用を最小化",
