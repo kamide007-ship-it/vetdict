@@ -461,3 +461,17 @@ def test_app_js_disease_db_detail_surfaces_anesthesia_considerations():
     # toggleDbItem calls the hydrator on expansion
     tog = js[js.index("function toggleDbItem(") : js.index("function hydrateAnesthesiaConsiderations(")]
     assert "hydrateAnesthesiaConsiderations(detail)" in tog
+
+
+def test_app_js_contra_rules_loader_is_promise_returning_and_prewarmed():
+    """The fetch-once contraindication-rules loader returns a memoised promise
+    (so any hydrator can await it instead of polling blindly), and
+    loadDiseaseDb pre-warms it so the first DB panel expansion hydrates
+    without waiting for the fetch round-trip."""
+    lidx = APP_JS.index("function ensureAnesthesiaContraRules(")
+    lblock = APP_JS[lidx : lidx + 700]
+    assert "return Promise.resolve(anesthesiaContraRules)" in lblock
+    assert "return _contraRulesPromise" in lblock
+    didx = APP_JS.index("function loadDiseaseDb(")
+    dblock = APP_JS[didx : didx + 600]
+    assert "ensureAnesthesiaContraRules()" in dblock

@@ -180,3 +180,13 @@ class TestModuleIntegration:
                 out = localize_dosage(dosage)
                 if out is not None:
                     assert not route_or_freq.search(out), f"leaked route/freq in {out!r} from {dosage!r}"
+
+    def test_fullwidth_paren_citation_fails_closed_not_partial(self):
+        # "q24h（Carpenter）" — a citation glued to the frequency token with
+        # full-width parens — used to slip through the digit-preserving path
+        # and leak the raw English frequency into the Japanese output. Full-
+        # width parens are now tokenized as separators, so the unknown
+        # citation word triggers the fail-closed None instead.
+        assert localize_dosage("50-100 mg/kg PO q24h（Carpenter）") is None
+        # plain conversions are unaffected
+        assert localize_dosage("50-100 mg/kg PO q24h") == "50-100 mg/kg 経口 24時間毎"

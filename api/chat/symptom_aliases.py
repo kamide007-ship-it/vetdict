@@ -420,6 +420,7 @@ SYMPTOM_ALIASES = {
     "くしゃみが多い": "sneezing",
     # 水を飲む
     "水をたくさん飲む": "excessive_thirst",
+    "水をたくさん飲んで": "excessive_thirst",
     "水ばっかり飲む": "excessive_thirst",
     "水飲みすぎ": "excessive_thirst",
     "よく水を飲む": "excessive_thirst",
@@ -432,6 +433,7 @@ SYMPTOM_ALIASES = {
     # 排尿
     "おしっこの回数が多い": "frequent_urination",
     "おしっこが多い": "frequent_urination",
+    "おしっこも多い": "frequent_urination",
     "何度もトイレに行く": "frequent_urination",
     "トイレが近い": "frequent_urination",
     "おしっこが出にくい": "straining_to_urinate",
@@ -520,6 +522,8 @@ SYMPTOM_ALIASES = {
     "腫れてる": "bloating",
     "お腹が張ってる": "bloating",
     "お腹が膨れて": "bloating",
+    "お腹だけ膨れて": "bloating",
+    "お腹だけが膨れて": "bloating",
     "お腹が張っている": "bloating",
     "腹が張っている": "bloating",
     "おなかが張っている": "bloating",
@@ -932,6 +936,7 @@ SYMPTOM_ALIASES = {
     # 足底病変（ソアホック/バンブルフット/足底皮膚炎）は足特異的IDに解決し、
     # 足ID非保有種のみ ID_SYNONYMS 経由で跛行にフォールバックする。
     "足の裏が赤い": "foot_sores",
+    "足の裏が赤く": "foot_sores",
     "足の裏が腫れてる": "foot_sores",
     "足の裏が赤く腫れている": "foot_sores",
     "足裏が赤い": "foot_sores",
@@ -969,7 +974,9 @@ SYMPTOM_ALIASES = {
     # 猫 — 耳（耳の痒みは ear_scratching → scratching_ears ブリッジで外耳炎/耳ダニがランク）
     "耳をかく": "ear_scratching",
     "耳が臭い": "ear_discharge",
+    "耳から悪臭": "ear_odor",
     "黒い耳垢": "ear_discharge",
+    "茶色い耳垢": "ear_discharge",
     "耳垢が多い": "ear_discharge",
     # 猫 — 眼
     "目をしょぼしょぼ": "squinting",
@@ -1736,6 +1743,7 @@ SYMPTOM_ALIASES = {
     # 内分泌性脱毛（クッシング/甲状腺機能低下の左右対称性脱毛）
     "左右対称に毛が抜け": "hair_loss",
     "左右対称に抜け": "hair_loss",
+    "左右対称に薄い": "hair_loss",
     "毛が薄くなって": "hair_loss",
     # 疼痛姿勢（IVDD等）: 背中を丸める → hunched_posture
     # （ID_SYNONYMS で abdominal_pain、犬レガシーでは reluctance_to_move に解決）
@@ -1931,6 +1939,7 @@ SYMPTOM_ALIASES = {
     # 猫ノトエドレス疥癬（耳介先端の痂皮）・カサカサのて形
     # （「耳にかさぶた」は既存キー(skin_lesions)を維持）
     "耳の先が黒く": "crusting",
+    "耳の先が黒い": "crusting",
     "カサカサして": "dry_skin",
     # 犬の趾間皮膚炎・アトピー（足舐め＋趾間紅斑）
     "足を舐め": "excessive_licking",
@@ -1959,6 +1968,14 @@ SYMPTOM_ALIASES = {
     "頬袋が膨らんで": "cheek_swelling",
     # 嘴過長（くちばし形は beak_deformity 済み — 伸びすぎ形を補完）
     "くちばしが伸びすぎ": "overgrown_beak",
+    # 疥癬ダニ症（Knemidokoptes/scaly face）— セキセイの代表的皮膚疾患。
+    # 飼い主の定番表現「くちばしの周りにかさぶた」「白い粉をふいたよう」
+    "くちばしの周りにかさぶた": "crusty_beak",
+    "くちばしにかさぶた": "crusty_beak",
+    "くちばしの付け根にかさぶた": "crusty_beak",
+    "くちばしの周りが白く": "scaly_face",
+    "白い粉をふいた": "scaly_face",
+    "顔に白いかさぶた": "scaly_face",
     # 白内障・角膜混濁の連用形（「〜濁ってる/〜濁ってきた」のみでは途中形を取りこぼす）
     "目が白く濁って": "cloudy_eye",
     # ヘビ・スペクタクル残留（脱皮不全の眼所見）
