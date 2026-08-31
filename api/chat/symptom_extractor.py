@@ -260,6 +260,10 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "breathing_difficulty",
         "difficulty_breathing",
     ],
+    # 2026-08 第14弾: クリック音は bird のみが専用IDを持つ — 他種は喘鳴系へ
+    "clicking_breathing_sounds": ["wheezing", "labored_breathing", "open_mouth_breathing"],
+    # サワークロップ臭は bird のみが専用IDを持つ — parrot/parakeet はそのう系へ
+    "sour_crop_odor": ["crop_stasis", "crop_distension", "regurgitation"],
     "sneezing": ["reverse_sneezing", "nasal_irritation", "nasal_discharge"],
     "nasal_discharge": ["runny_nose", "rhinorrhea", "nasal_secretion", "sneezing"],
     # Urinary
