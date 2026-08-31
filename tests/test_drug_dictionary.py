@@ -2326,3 +2326,72 @@ class TestBatch46DiazoxideRivaroxabanAntivenomGlucagon:
         assert "Dextrose" in by_name.get("50% Dextrose", "")
         # blood products stay plain text (no dead-end links)
         assert all(n in {"FFP", "tPA (alteplase)"} for n in unlinked), unlinked
+
+
+class TestBatch47AndSweep16:
+    """2026-08 audit (16th sweep): referenced-but-absent drugs + duplicate-card
+    consolidation + katakana variant aliases."""
+
+    def test_batch47_drugs_present_with_bilingual_dosing(self):
+        from api.drug_dictionary import DRUGS
+
+        by_id = {d["id"]: d for d in DRUGS}
+        for did in ("memantine", "procarbazine", "phenytoin", "biotin"):
+            d = by_id.get(did)
+            assert d is not None, f"{did} missing from formulary"
+            for sp, info in d["species_info"].items():
+                assert (info.get("dosage") or "").strip(), f"{did}/{sp} missing dosage"
+                assert (info.get("dosage_ja") or "").strip(), f"{did}/{sp} missing dosage_ja"
+
+    def test_phenytoin_is_cat_unsafe_with_accumulation_warning(self):
+        # Cats eliminate phenytoin over 24-108 h — chronic use is hepatotoxic
+        # (Plumb's 10th ed). The safety gate must be closed for cats.
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "phenytoin")
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is False
+        assert "24-108" in cat["dosage_ja"] or "蓄積" in cat["dosage_ja"]
+        dog = d["species_info"]["dog"]
+        assert "5-10 mg/kg" in dog["dosage"] and "IV" in dog["dosage"]
+
+    def test_procarbazine_cites_muo_and_mopp_regimens(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "procarbazine")
+        dog = d["species_info"]["dog"]["dosage"]
+        assert "25-50 mg/m²" in dog and "50 mg/m²" in dog
+        assert d["category"] == "antineoplastics"
+
+    def test_duplicate_display_cards_are_consolidated(self):
+        # hydrocodone_antitussive displayed as a second identical ヒドロコドン
+        # card; silymarin / s_adenosylmethionine / vitamin_d3 were near-identical
+        # subset twins. All are merged into the richer canonical entry.
+        from api.drug_dictionary import DRUGS
+
+        ids = {d["id"] for d in DRUGS}
+        for gone in ("hydrocodone_antitussive", "silymarin", "s_adenosylmethionine", "vitamin_d3"):
+            assert gone not in ids, f"{gone} should be merged away"
+        hydro = next(d for d in DRUGS if d["id"] == "hydrocodone")
+        assert "hydrocodone_antitussive" in (hydro.get("aliases") or [])
+        # the calcitriol merge must carry the reptile UVB-first rows across
+        calc = next(d for d in DRUGS if d["id"] == "calcitriol")
+        assert "reptile" in calc["species_info"] and "tortoise" in calc["species_info"]
+        # and never a cholecalciferol IU/kg dose mislabeled as calcitriol
+        assert "IU/kg" not in (calc["species_info"]["dog"].get("dosage") or "")
+
+    def test_sweep16_variant_aliases_resolve_in_text_matcher(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = [
+            ("メタドン 0.1-0.3 mg/kg IV/IM q4-6h", "methadone"),
+            ("ハイドロコドン 0.22 mg/kg PO q8-12h で鎮咳", "hydrocodone"),
+            ("毎日の創洗浄+SSDクリーム", "silver_sulfadiazine"),
+            ("鉛中毒にはCa-EDTA 75 mg/kg IV slow", "calcium_edta"),
+            ("メマンチン（0.3-0.5 mg/kg PO q12h — NMDA拮抗薬）", "memantine"),
+            ("フェニトイン5-10 mg/kg IV slow", "phenytoin"),
+            ("ビオチン単体 0.5-1.0 mg/kg PO q24h × 2-4週", "biotin"),
+        ]
+        for text, want in cases:
+            hits = [h["id"] for h in find_drugs_in_text(text)]
+            assert want in hits, f"{want} not resolved from {text!r}: {hits}"

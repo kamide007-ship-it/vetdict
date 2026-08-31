@@ -70,6 +70,7 @@ from api.drug_batch_43 import DRUGS_BATCH_43
 from api.drug_batch_44 import DRUGS_BATCH_44
 from api.drug_batch_45 import DRUGS_BATCH_45
 from api.drug_batch_46 import DRUGS_BATCH_46
+from api.drug_batch_47 import DRUGS_BATCH_47
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10711,6 +10712,16 @@ for _drug46 in DRUGS_BATCH_46:
         DRUGS.append(_drug46)
         _drug_index[_drug46["id"]] = _drug46
 
+# Batch 47: 2026-08監査（第16回スイープ）— referenced-but-absent 4剤
+# （メマンチン — 犬強迫性障害のNMDA拮抗補助療法、疾患テキストが用量付きで参照;
+#  プロカルバジン — MUO/GMEレスキュー・MOPPの「P」、BBB通過細胞傷害薬が皆無だった;
+#  フェニトイン — ジギタリス中毒性心室性不整脈の古典的選択薬（猫は蓄積毒性で禁忌）;
+#  ビオチン — 馬蹄角質の質改善（Josseck 1995 対照試験）・鳥角質障害）
+for _drug47 in DRUGS_BATCH_47:
+    if _drug47["id"] not in _drug_index:
+        DRUGS.append(_drug47)
+        _drug_index[_drug47["id"]] = _drug47
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -10968,6 +10979,18 @@ for _drug in DRUGS:
 _DRUG_CURATED_MERGE: dict[str, list[str]] = {
     # ガバペンチン: 適応名違いで3分割されていた（獣医指摘により統合）
     "gabapentin": ["gabapentin_pain", "gabapentin_oral"],
+    # 2026-08監査: 表示名が実質同一で内容が片方のサブセットの重複カードを統合
+    # （括弧サフィックスで用途が区別される意図的バリアント — exotic/適応別 — は対象外）。
+    # hydrocodone_antitussive は name_ja が「ヒドロコドン」で完全同一表示の2枚目カードだった。
+    "hydrocodone": ["hydrocodone_antitussive"],
+    # シリマリン: milk_thistle（6種収載）⊃ silymarin（犬猫のみ・表示ほぼ同一）
+    "milk_thistle": ["silymarin"],
+    # SAMe: same（4種収載）⊃ s_adenosylmethionine（犬猫のみ・表示ほぼ同一）
+    "same": ["s_adenosylmethionine"],
+    # カルシトリオール: 両entryとも活性型VitD3のng/kg用量（vitamin_d3側の爬虫類行は
+    # 「UVB第一選択」注記のみでコレカルシフェロール用量の混入なしを確認済み）。
+    # コレカルシフェロール本体は別entry（cholecalciferol）が担当。
+    "calcitriol": ["vitamin_d3"],
 }
 
 
@@ -11279,7 +11302,19 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
         "セレン酸ナトリウム",
         "亜セレン酸ナトリウム",
     ),  # white-muscle-disease texts cite the sodium selenite salt (9 refs)
+    # 2026-08 sweep #16: treatment texts cite these agents by transliteration
+    # variants / acronyms the canonical names never reduce to.
+    "methadone": ("メタドン",),  # canonical: メサドン — タ transliteration variant (4+ refs)
+    "hydrocodone": ("ハイドロコドン",),  # canonical: ヒドロコドン — ハイ variant (tracheal-collapse refs)
 }
+# canonical: スルファジアジン銀 — burn/wound texts cite the abbreviation
+# "SSDクリーム" (registry key already exists above, so extend — ruff F601 guard).
+_KATAKANA_VARIANT_ALIASES["silver_sulfadiazine"] = _KATAKANA_VARIANT_ALIASES["silver_sulfadiazine"] + (
+    "ssdクリーム",  # lowercased at match time; bare "SSD" is <4 chars and too collision-prone
+)
+# CaEDTA acronym also appears hyphenated as "Ca-EDTA" in chelation texts
+# (registry key already exists above — ruff F601 guard).
+_KATAKANA_VARIANT_ALIASES["calcium_edta"] = _KATAKANA_VARIANT_ALIASES["calcium_edta"] + ("ca-edta",)
 # canonical: スルファジアジン銀 — texts write the reversed word order
 # "銀スルファジアジン" (47 refs, burn/wound care) which resolved to the plain
 # systemic sulfadiazine entry instead of the topical silver product. Registry

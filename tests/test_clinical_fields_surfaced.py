@@ -438,3 +438,21 @@ def test_main_css_disables_mobile_font_inflation():
     html_rule = css[css.index("html{") : css.index("}", css.index("html{"))]
     assert "-webkit-text-size-adjust:100%" in html_rule
     assert "text-size-adjust:100%" in html_rule
+
+
+def test_app_js_checker_zero_results_pivot_to_guided_and_chat():
+    """Checker zero-result state pivots (2026-08 round 14): the 'no matching
+    diseases found' empty state was a dead end — tips only, no actionable
+    buttons. It must now offer one-tap pivots into the guided consultation and
+    the free-text chat (whose 530+ colloquial aliases parse phrasings the
+    checkbox vocabulary cannot express), carrying the selected symptom names
+    into the chat input so the user rewords instead of starting over."""
+    assert "results-empty-guided" in APP_JS
+    assert "results-empty-chat" in APP_JS
+    # both pivots land on the chat view
+    guided = APP_JS[APP_JS.index("guided_from_checker_empty") :][:400]
+    assert 'switchView("chat")' in guided and 'switchChatMode("guided")' in guided
+    chat = APP_JS[APP_JS.index("chat_from_checker_empty") :][:400]
+    assert 'switchView("chat")' in chat and 'switchChatMode("free")' in chat
+    # the selected symptom names prefill the free-chat input
+    assert "symptomWords" in APP_JS

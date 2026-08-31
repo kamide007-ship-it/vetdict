@@ -3644,3 +3644,87 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 - `setDefaultStats()`: dog 586/cat 565/ferret 207/sugar_glider 76薬品、pendingStats drugs 647→**651**・
   symptoms 70→**72**
 - ServiceWorker: `CACHE_NAME` v131 → **v132**（第24/25弾との同版衝突のため2回改番）
+
+## 2026-08セッション（第27弾: 薬品重複カード4組の統合 + referenced-but-absent 4剤 + チャット精度第15弾 + チェッカー0件時のチャット動線）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,045件合格**（34 skip）
+- 配信SQLiteクリーンビルド: 6,892疾患、treatment/prevention/prognosis **100%**、主要臨床フィールド空欄 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（651薬品、全species_info検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- prevalence dead key: **9**（当該種DBに疾患自体が無い既知残、上限15ガード内）
+
+### 薬品辞書: 表示同一の重複カード4組を統合（`_DRUG_CURATED_MERGE` 拡張）
+基底名重複監査（括弧サフィックス除去後の name/name_ja 照合）で、括弧バリアントで用途が区別される
+意図的な分割（meloxicam_exotic 等 60組）とは別に、**表示がほぼ同一で内容が片方のサブセット**の
+真の重複カード4組を検出・統合（既存の非破壊マージ機構を使用、旧IDは aliases に保存され検索・
+ナビゲーションは維持）:
+- **hydrocodone ← hydrocodone_antitussive**（両方 name_ja「ヒドロコドン」で2枚の同名カード。
+  正規側は猫の安全注記=オピオイド興奮のためブトルファノール代替を保持）
+- **milk_thistle ← silymarin**（シリマリン 6種収載 ⊃ 犬猫のみ）
+- **same ← s_adenosylmethionine**（SAMe 4種収載 ⊃ 犬猫のみ）
+- **calcitriol ← vitamin_d3**（両entry とも活性型VitD3の ng/kg 用量であることを確認済み —
+  爬虫類行は「UVB第一選択」注記のみでコレカルシフェロール用量の混入なし。爬虫類・リクガメ等
+  6種の行が正規サイドに統合）
+
+### referenced-but-absent 薬品4剤の補完（`drug_batch_47.py` 新規、統合4減+新規4増=651維持）
+用量文脈付き薬品接尾辞トークン監査（第16回スイープ、find_drugs_in_text 実マッチャー突合）で検出:
+- **メマンチン** — 犬強迫性障害エントリが「0.3-0.5 mg/kg PO q12h — NMDA拮抗薬」と用量指示するのに
+  NMDA拮抗薬が皆無だった（Schneider 2009 J Vet Behav: 11/11頭改善）。CDS補助にも同用量
+- **プロカルバジン** — MUO/GMEレスキュー「25-50 mg/m² PO q24h」（Coates & Jeffery 2014）と
+  リンパ腫再発MOPPの「P」（Northrup 2009）。BBB通過細胞傷害薬が辞書に無かった。
+  骨髄抑制ナディア2-3週・出血性胃腸炎・細胞傷害性取扱を明記
+- **フェニトイン** — ジギタリス中毒性心室性不整脈の古典的選択薬 5-10 mg/kg 緩徐IV（リドカイン
+  不応例、Plumb's 10th）。**猫は safe:False**（半減期24-108hの蓄積肝毒性・血小板減少）
+- **ビオチン** — 馬蹄角質の質改善 15-20 mg/頭/日（Josseck 1995 Equine Vet J 対照試験、
+  新生角質伸長まで6-9ヶ月継続）・鳥の羽毛/嘴角質障害 0.5-1.0 mg/kg（生卵白アビジン排除を明記）
+- **表記ゆれエイリアス**: メタドン→methadone（正準メサドン）、ハイドロコドン→hydrocodone
+  （正準ヒドロコドン）、SSDクリーム→silver_sulfadiazine、Ca-EDTA（ハイフン形）→calcium_edta
+
+### 診断チャット精度 第15弾（18症例フレッシュスイープ 6 MISS → 全症例合格）
+- **犬レガシーDBに口腔内腫瘍を新設**（79→80疾患、73→74症状）: 「口の中にできものがある 口臭」が
+  **乳腺腫瘍1位**だった（口腔腫瘤語彙もエントリも皆無）。oral_mass 症状 + oral_tumor エントリ
+  （メラノーマ=悪性最多/エプリス/SCC、common、チャウチャウ2.0×等、Withrow & MacEwen 6th）+
+  単独パトグノモニック・クラスタ {oral_mass}→×1.6（口腔内の腫瘤は部位診断的 — 乳腺/皮膚腫瘤は
+  鑑別に入らない）→ rank 1。乳腺主訴の順位は不変を回帰テストで固定
+- **犬チェックボックス/問診経路にもパリティ**: dog_diseases モジュールに oral_mass/bad_breath
+  語彙を追加（65→67症状）、Oral Melanoma/Epulis/Oral Papillomatosis/Periodontal Disease の
+  症状セットに付与 → チェックボックスで口腔メラノーマ rank 1
+- **クッシング三徴の連用形取りこぼし**: 「水をたくさん飲んで」（〜飲む形のみ収載）
+  「お腹だけ膨れてきた」（助詞「だけ」で不一致）→ エイリアス追加で3/3抽出 → クッシング rank 1
+- **馬の後肢跛行口語が皆無**: 「後ろ足を痛がる 蹄が熱い」が**抽出ゼロ**だった → 後ろ足を痛がる/
+  かばう/引きずる→limb_lameness_hind 等6エイリアス + **症候群ペアブースト**
+  {hoof_heat, limb_lameness_hind}→蹄膿瘍×1.5（急性跛行+局所蹄熱感は蹄膿瘍 until proven
+  otherwise — Adams & Stashak 7th。馬の急性重度跛行の最多原因）→ 蹄膿瘍 rank 1
+- **猫の成猫黄疸を新生児溶血が乗っ取り**: 未ティアの新生子溶血性疾患2エントリ（B型母猫×A型子猫の
+  血液型不適合・新生子限定）が「元気がない 白目が黄色い」で1位 → rare tier 付与 + 
+  「おしっこの色が濃い」→dark_urine エイリアス → IMHA/肝溶血群が上位
+- **ウサギ眼球突出のて形**: 「目が飛び出してきて」（〜てきた形のみ収載）→ エイリアス追加。
+  加えて**エロドントーマ=rare**（デグー/プレーリードッグの疾患でウサギでは稀 — Capello & Lennox）
+  **球後膿瘍（歯科由来）=common**（Harcourt-Brown）の有病率是正 → 稀な歯牙腫瘍の1位を解消
+- **鳥の疥癬（クヌドコプテス）語彙が皆無**: 「脚に白いかさぶた ガサガサ」が抽出ゼロ →
+  脚に白いかさぶた/脚がガサガサ等5エイリアス→crusty_lesions_on_legs + _ID_SYNONYMS ブリッジ
+  （インコは leg_scales/scaly_face 表記）→ bird/parakeet とも疥癬ダニ症 rank 1
+
+### UX: チェッカー0件時のデッドエンド解消（鑑別⇄相談チャットの動線完成）
+- 「該当する疾患が見つかりませんでした」の空状態は改善ヒントのテキストのみで**行き止まり**だった →
+  ヒントが推奨する2つの対処をワンタップ化:
+  - 「🩺 問診モードで段階的に絞り込む」→ chat ビュー + guided モード起動
+  - 「💬 相談チャットで自由入力で相談する」→ chat ビュー + free モード + **選択済み症状名を
+    チャット入力欄にプリフィル**（530+口語エイリアスがチェックボックス語彙で表現できない
+    言い回しを解釈する — ユーザーは打ち直しでなく言い換えから始められる）
+  - GA4: `guided_from_checker_empty` / `chat_from_checker_empty`
+- クイック入力ボタン追加: 犬「口の中にできものがある」・馬「後ろ足を痛がる」・鳥「脚に白いかさぶた」
+  （全て抽出保証済み、ミラーテスト JA_QUICK 同期）
+
+### 回帰テスト（+14件）
+- 薬品: TestBatch47AndSweep16（5件 — 4剤の存在・完全バイリンガル用量・猫フェニトイン safe:False・
+  プロカルバジンMUO/MOPPレジメン・重複統合の維持とcalcitriol爬虫類行・エイリアス7ケース解決）
+- チャット: TestChatClinicalAccuracyAuditRound15（8件 — クッシング三徴/口腔腫瘍rank1/乳腺ガード/
+  チェックボックスパリティ/馬蹄膿瘍/猫NI降格/ウサギ・エロドントーマ降格/鳥疥癬rank1）
+- UX: test_app_js_checker_zero_results_pivot_to_guided_and_chat（空状態ピボット+プリフィル配線）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: horse 361→362薬品、pendingStats symptoms 73→**74**（oral_mass追加）
+- ServiceWorker: `CACHE_NAME` v132 → **v133**
+- 再現手順: `migrate_to_sqlite.py` → `build_disease_search_index.py`（名前不変のためno-op）

@@ -746,6 +746,12 @@ SYMPTOMS = [
         "name_en": "Postpartum / Lactating",
         "category": "general",
     },
+    {
+        "id": "oral_mass",
+        "name_ja": "口の中のできもの・腫瘤",
+        "name_en": "Oral Mass / Growth",
+        "category": "digestive",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -3216,6 +3222,34 @@ DISEASES = [
             "pomeranian": 1.6,
         },
     },
+    # 2026-08 audit round 14: the oral-mass chief complaint (「口の中にできもの
+    # がある 口臭」) ranked mammary tumor first because the legacy DB had neither
+    # an oral-tumor entry nor any oral-mass vocabulary. Oral tumors are the 4th
+    # most common canine cancer site; melanoma is the most common malignant oral
+    # tumor and epulides/peripheral odontogenic fibromas the most common benign
+    # masses (Withrow & MacEwen's Small Animal Clinical Oncology 6th ed).
+    {
+        "id": "oral_tumor",
+        "prevalence_tier": "common",
+        "name_ja": "口腔内腫瘍（メラノーマ・エプリス・扁平上皮癌等）",
+        "name_en": "Oral Tumor (Melanoma / Epulis / SCC)",
+        "description_ja": "口腔は犬の腫瘍好発部位（全腫瘍の約6%）。良性ではエプリス（歯肉腫）・末梢性歯原性線維腫が多く、悪性では悪性黒色腫（最多）・扁平上皮癌・線維肉腫が代表的です。口臭・流涎（血混じり）・食べにくさ・口腔内のできものが典型徴候。悪性黒色腫は所属リンパ節・肺転移が早く、早期の生検・病期評価（リンパ節細胞診・胸部X線/CT）が予後を左右します。治療は外科切除（悪性では顎骨部分切除を含む広範囲切除）±放射線。黒色腫にはメラノーマワクチン（Oncept）併用の報告もあります（Withrow & MacEwen 6th ed）。",
+        "description_en": "The oral cavity is a common canine tumor site (~6% of all tumors). Epulides / peripheral odontogenic fibromas are the common benign masses; malignant melanoma (most common), squamous cell carcinoma and fibrosarcoma the principal malignancies. Halitosis, (bloody) drooling, difficulty eating and a visible oral growth are the classic signs. Oral melanoma metastasizes early to regional nodes and lungs — early biopsy and staging (node cytology, thoracic imaging) drive prognosis. Treatment is wide surgical excision (including partial maxillectomy/mandibulectomy for malignancies) ± radiation; the melanoma vaccine (Oncept) is an adjunct option (Withrow & MacEwen 6th ed).",
+        "symptoms": [
+            "oral_mass",
+            "bad_breath",
+            "excessive_drooling",
+            "loss_of_appetite",
+        ],
+        "severity": "high",
+        "recommended_tests": ["oral_exam", "biopsy", "xray", "lymph_node_cytology"],
+        "breed_risks": {
+            "chow_chow": 2.0,
+            "golden_retriever": 1.5,
+            "miniature_poodle": 1.5,
+            "cocker_spaniel": 1.4,
+        },
+    },
 ]
 
 DISEASE_MAP = {d["id"]: d for d in DISEASES}
@@ -4275,6 +4309,12 @@ _PATHOGNOMONIC_CLUSTERS = [
     # Visible worms/proglottids in the stool are diagnostic of intestinal
     # parasitism itself (ESCCAP GL1) — no other differential produces them.
     (frozenset({"worms_in_stool"}), "intestinal_parasites", 1.8),
+    # A visible mass inside the mouth is location-diagnostic: the differential
+    # is the oral-tumor group (melanoma/epulis/SCC — Withrow & MacEwen 6th ed),
+    # never mammary/skin masses. Without this boost the very_common mammary
+    # entry outranked the oral tumor via the generic lumps_bumps signal
+    # (round-14 audit).
+    (frozenset({"oral_mass"}), "oral_tumor", 1.6),
     # Gynecomastia + symmetric alopecia is the estrogen-feminization pair of
     # a Sertoli cell tumor (Withrow & MacEwen 6th ed). Female mammary-mass
     # complaints don't co-report hair loss, so collision risk is minimal.

@@ -1548,7 +1548,7 @@ function setDefaultStats(){
   SPECIES=[
     {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:601,drugs:586,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
     {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:565,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:361,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:362,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:272,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:71,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:139,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1572,7 +1572,7 @@ function setDefaultStats(){
     diseases:6449,
     species:21,
     drugs:651,
-    symptoms:73,
+    symptoms:74,
     protocols:188
   };
   renderSpeciesGrid();
@@ -1947,16 +1947,16 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
-    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある"],
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある"],
     cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる"],
-    horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる"],
+    horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる"],
     rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い"],
     hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない"],
     guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ"],
     ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない","陰部が腫れている","足を伸ばして硬直する","口を前足で掻いてよだれ"],
     hedgehog:["針が抜ける","フケ","ふらつく","食べない","目が出ている","体重が減った"],
-    bird:["羽を膨らませている","食べない","下痢","鼻水","羽が抜ける","くしゃみ","自分で羽を抜く"],
+    bird:["羽を膨らませている","食べない","下痢","鼻水","羽が抜ける","くしゃみ","自分で羽を抜く","脚に白いかさぶた"],
     parakeet:["食べない","膨らんでいる","呼吸のたびに音がする","吐き戻しが増えた","そのうが膨らんでいる","お尻でいきんでいる"],
     parrot:["食べない","自分で羽を抜く","くしゃみ","下痢","元気がない","吐き戻しが増えた"],
     reptile:["食べない","口をあけたまま呼吸","鼻水が出る","脱皮がうまくできない","目が開かない","痩せてきた"],
@@ -3085,7 +3085,34 @@ function renderResults(data){
     const tips=currentLang==="ja"?tipsJa:tipsEn;
     const heading=currentLang==="ja"?"\u8a72\u5f53\u3059\u308b\u75be\u60a3\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f":"No matching diseases found";
     const subheading=currentLang==="ja"?"\u9451\u5225\u7cbe\u5ea6\u3092\u4e0a\u3052\u308b\u305f\u3081\u306e\u30d2\u30f3\u30c8:":"Try these tips to improve matching:";
-    area.innerHTML=`<div class="results-empty"><span class="big-icon">\ud83d\udd0d</span><p style="font-weight:600;color:var(--navy);margin-bottom:6px">${escapeHtml(heading)}</p><p style="font-size:.82rem;color:var(--gray-600);margin-bottom:10px">${escapeHtml(subheading)}</p><ul style="text-align:left;display:inline-block;margin:0 auto;padding-left:18px;font-size:.82rem;color:var(--gray-700);line-height:1.6">${tips.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul></div>`;
+    /* Zero-result state used to be a dead end (tips only). Offer the two
+       remedies the tips describe as one-tap pivots: the guided consultation
+       (structured narrowing) and the free-text chat, whose 530+ colloquial
+       aliases parse phrasings the checkbox vocabulary cannot express. The
+       selected symptom names carry into the chat input so the user can
+       reword around them instead of starting over. */
+    const pivotGuided=currentLang==="ja"?"\ud83e\ude7a \u554f\u8a3a\u30e2\u30fc\u30c9\u3067\u6bb5\u968e\u7684\u306b\u7d5e\u308a\u8fbc\u3080":"\ud83e\ude7a Narrow down in guided consultation";
+    const pivotChat=currentLang==="ja"?"\ud83d\udcac \u76f8\u8ac7\u30c1\u30e3\u30c3\u30c8\u3067\u81ea\u7531\u5165\u529b\u3067\u76f8\u8ac7\u3059\u308b":"\ud83d\udcac Describe it in the clinical chat";
+    area.innerHTML=`<div class="results-empty"><span class="big-icon">\ud83d\udd0d</span><p style="font-weight:600;color:var(--navy);margin-bottom:6px">${escapeHtml(heading)}</p><p style="font-size:.82rem;color:var(--gray-600);margin-bottom:10px">${escapeHtml(subheading)}</p><ul style="text-align:left;display:inline-block;margin:0 auto;padding-left:18px;font-size:.82rem;color:var(--gray-700);line-height:1.6">${tips.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul><div class="results-empty-pivots" style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center"><button type="button" class="guided-consult-link results-empty-guided">${pivotGuided} \u2192</button><button type="button" class="guided-consult-link results-empty-chat">${pivotChat} \u2192</button></div></div>`;
+    const emptyGuided=area.querySelector(".results-empty-guided");
+    const emptyChat=area.querySelector(".results-empty-chat");
+    const symptomWords=()=>{
+      const words=[];
+      selectedSymptoms.forEach(id=>{const s=(symptomData||[]).find(x=>x.id===id);if(s)words.push(currentLang==="ja"?(s.name_ja||s.name_en||""):(s.name_en||s.name_ja||""));});
+      return words.filter(Boolean).join(" ");
+    };
+    if(emptyGuided)emptyGuided.addEventListener("click",()=>{
+      trackEvent("guided_from_checker_empty",{species:currentSpecies||"dog"});
+      switchView("chat");switchChatMode("guided");
+      const p=document.getElementById("viewChat");if(p)scrollToAnchor(p);
+    });
+    if(emptyChat)emptyChat.addEventListener("click",()=>{
+      trackEvent("chat_from_checker_empty",{species:currentSpecies||"dog"});
+      switchView("chat");switchChatMode("free");
+      const input=document.getElementById("chatInput");
+      if(input){const pre=symptomWords();if(pre&&!input.value)input.value=pre;setTimeout(()=>input.focus(),60);}
+      const p=document.getElementById("viewChat");if(p)scrollToAnchor(p);
+    });
     return;
   }
   const sevLabels=t("sevLabels");

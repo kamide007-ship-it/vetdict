@@ -36,6 +36,8 @@ VALID_SYMPTOMS: set[str] = {
     "abdominal_pain",
     "dehydration",
     "scooting",
+    "oral_mass",
+    "bad_breath",
     # Respiratory
     "coughing",
     "sneezing",
@@ -111,6 +113,8 @@ SYMPTOM_NAMES: dict[str, dict[str, str]] = {
     "abdominal_pain": {"ja": "腹痛", "en": "Abdominal Pain"},
     "dehydration": {"ja": "脱水", "en": "Dehydration"},
     "scooting": {"ja": "お尻を地面にこすりつける（スクーティング）", "en": "Scooting"},
+    "oral_mass": {"ja": "口の中のできもの・腫瘤", "en": "Oral Mass / Growth"},
+    "bad_breath": {"ja": "口臭", "en": "Bad Breath (Halitosis)"},
     "coughing": {"ja": "咳", "en": "Coughing"},
     "sneezing": {"ja": "くしゃみ", "en": "Sneezing"},
     "nasal_discharge": {"ja": "鼻水", "en": "Nasal Discharge"},
@@ -3184,7 +3188,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Periodontal Disease",
         "name_ja": "歯周病",
-        "symptoms": {"appetite_loss", "pain_on_touch"},
+        "symptoms": {"appetite_loss", "pain_on_touch", "bad_breath", "drooling"},
         "description": "Progressive infection of the teeth and gums, the "
         "most common disease in dogs. Can lead to tooth loss "
         "and systemic infection.",
@@ -5619,7 +5623,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Oral Melanoma",
         "name_ja": "口腔メラノーマ",
-        "symptoms": {"appetite_loss", "lumps", "weight_loss"},
+        "symptoms": {"appetite_loss", "lumps", "weight_loss", "oral_mass", "bad_breath"},
         "description": "The most common malignant oral tumor in dogs, highly aggressive with early metastasis.",
         "description_ja": "犬で最も多い口腔悪性腫瘍で、早期に転移する高悪性度腫瘍です。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
@@ -5633,7 +5637,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Epulis (Gingival Mass)",
         "name_ja": "エプリス（歯肉腫瘤）",
-        "symptoms": {"lumps", "appetite_loss"},
+        "symptoms": {"lumps", "appetite_loss", "oral_mass"},
         "description": "A benign or locally invasive gingival mass. Most common oral tumor in dogs.",
         "description_ja": "良性または局所浸潤性の歯肉腫瘤で、犬で最も多い口腔腫瘍です。",
         "urgency": "normal",
@@ -6686,7 +6690,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Oral Papillomatosis",
         "name_ja": "口腔乳頭腫症",
-        "symptoms": {"drooling", "lumps", "appetite_loss"},
+        "symptoms": {"drooling", "lumps", "appetite_loss", "oral_mass"},
         "description": "Viral wart-like growths in the mouth caused by canine papillomavirus, most common in young dogs.",
         "description_ja": "犬パピローマウイルスによる口腔内のイボ状腫瘤で、若い犬に最も多く見られます。",
         "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
@@ -13366,6 +13370,8 @@ SYMPTOM_CATEGORIES = {
             "abdominal_pain",
             "dehydration",
             "scooting",
+            "oral_mass",
+            "bad_breath",
         ],
     },
     "respiratory": {
