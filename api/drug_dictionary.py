@@ -73,6 +73,7 @@ from api.drug_batch_46 import DRUGS_BATCH_46
 from api.drug_batch_47 import DRUGS_BATCH_47
 from api.drug_batch_48 import DRUGS_BATCH_48
 from api.drug_batch_49 import DRUGS_BATCH_49
+from api.drug_batch_50 import DRUGS_BATCH_50
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10734,14 +10735,23 @@ for _drug48 in DRUGS_BATCH_48:
         DRUGS.append(_drug48)
         _drug_index[_drug48["id"]] = _drug48
 
-# Batch 49: 2026-08監査（第16回スイープ・並行セッション分）— referenced-but-absent 3剤
-# （メマンチン — 犬強迫性障害のNMDA拮抗補助療法、疾患テキストが用量付きで参照;
-#  プロカルバジン — MUO/GMEレスキュー・MOPPの「P」、BBB通過細胞傷害薬が皆無だった;
-#  フェニトイン — ジギタリス中毒性心室性不整脈の古典的選択薬（猫は蓄積毒性で禁忌））
+# Batch 49: 2026-08監査（第16回スイープ・本セッション分、47/48は並行セッションが使用）
+# （フルオロウラシル(5-FU) — 馬サルコイド/SCCの標準補助療法11参照 + 猫は経路を
+#  問わず致死的(safe:False, Dorman 1990)の定義的安全事実。硫酸鉄26参照は既存
+#  ferrous_sulfate_oral のエイリアス欠落と判明し batch_21 で是正）
 for _drug49 in DRUGS_BATCH_49:
     if _drug49["id"] not in _drug_index:
         DRUGS.append(_drug49)
         _drug_index[_drug49["id"]] = _drug49
+
+# Batch 50: 2026-08監査（第16回スイープ・並行セッション分、47-49は並行セッションが使用）
+# （メマンチン — 犬強迫性障害のNMDA拮抗補助療法、疾患テキストが用量付きで参照;
+#  プロカルバジン — MUO/GMEレスキュー・MOPPの「P」、BBB通過細胞傷害薬が皆無だった;
+#  フェニトイン — ジギタリス中毒性心室性不整脈の古典的選択薬（猫は蓄積毒性で禁忌））
+for _drug50 in DRUGS_BATCH_50:
+    if _drug50["id"] not in _drug_index:
+        DRUGS.append(_drug50)
+        _drug_index[_drug50["id"]] = _drug50
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
@@ -11285,6 +11295,14 @@ _PURE_KATAKANA_RE = re.compile(r"^[ァ-ヴー]{4,}$")
 # lowercased index cannot.
 _CASE_SENSITIVE_KEYWORDS = {"Critical Care": "critical_care_herbivore"}
 
+# Keyword-level negative contexts: an occurrence that falls inside one of
+# these longer strings is not a drug mention. 生食 (clinical shorthand for
+# saline) must not fire inside ガス産生食物 (gas-producing food) or 生食用/
+# 生食物 (raw-food senses).
+_KEYWORD_NEGATIVE_CONTEXTS: dict[str, tuple[str, ...]] = {
+    "生食": ("産生食", "生食物", "生食用"),
+}
+
 
 # Legitimate katakana spelling variants that disease treatment texts use but
 # that differ from the formulary's canonical name_ja. Without these the
@@ -11479,9 +11497,11 @@ def _build_drug_keyword_index() -> None:
         # Central registry + optional per-drug "search_aliases" field.
         for alias in list(_KATAKANA_VARIANT_ALIASES.get(drug_id, ())) + list(d.get("search_aliases") or ()):
             a = alias.strip().lower()
-            # 漢字は1文字あたりの情報量が大きく、全漢字3文字（例:「硫酸鉄」）は
-            # ラテン4文字以上と同等に特異的なので、キュレート済みエイリアスに限り許可
-            if len(a) >= 4 or (len(a) == 3 and re.fullmatch(r"[一-鿿]{3}", a)):
+            # 漢字は1文字あたりの情報量が大きく、純漢字複合語はキュレート済み
+            # エイリアスに限り2文字から許可（硫酸鉄=3字、生食=2字 — 生理食塩水の
+            # 臨床略記437参照）。カタカナ/Latin は長いカタカナ列内への部分一致
+            # 誤爆リスクがあるため4文字以上のまま。
+            if len(a) >= 4 or (len(a) >= 2 and all("一" <= ch <= "鿿" for ch in a)):
                 tier2.append((a, drug_id))
         for key in (d.get("name", ""), d.get("name_ja", "")):
             if not key or len(key) < 4:
@@ -11556,6 +11576,21 @@ def find_drugs_in_text(text: str, max_results: int = 25) -> List[Dict]:
                         break
                     nxt = pos + len(keyword)
                     if nxt >= len(text_lower) or not text_lower[nxt].isdigit():
+                        hit = True
+                        break
+                    pos += 1
+                if not hit:
+                    continue
+            negatives = _KEYWORD_NEGATIVE_CONTEXTS.get(keyword)
+            if negatives:
+                pos, hit = 0, False
+                while True:
+                    pos = text_lower.find(keyword, pos)
+                    if pos == -1:
+                        break
+                    if not any(
+                        neg in text_lower[max(0, pos - len(neg)) : pos + len(keyword) + len(neg)] for neg in negatives
+                    ):
                         hit = True
                         break
                     pos += 1

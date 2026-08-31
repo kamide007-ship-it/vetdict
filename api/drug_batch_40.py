@@ -78,8 +78,26 @@ DRUGS_BATCH_40: list[dict] = [
         "side_effects_ja": "用量依存性の視神経炎・球後視神経炎（ヒトで著明 — 動物では視覚変化の検出が困難）、消化器症状、肝毒性、稀に末梢神経障害",
         "contraindications": "Known optic neuritis; severe hepatic failure; never use as monotherapy (rapid resistance)",
         "contraindications_ja": "既知の視神経炎、重度肝不全。単剤使用は禁止（急速に耐性化）",
-        "drug_interactions": "Aluminium-containing antacids reduce absorption (separate by 4 h); additive hepatotoxicity with rifampin/isoniazid — monitor liver values",
-        "drug_interactions_ja": "アルミニウム含有制酸薬は吸収を低下（4時間以上あける）。リファンピン/イソニアジドと肝毒性が相加的 — 肝数値モニタリング",
+        "drug_interactions": [
+            {
+                "drug": "Aluminium-containing antacids",
+                "effect": "Reduce ethambutol absorption — separate administration by at least 4 hours",
+                "effect_ja": "エタンブトールの吸収を低下 — 4時間以上あけて投与",
+                "severity": "moderate",
+            },
+            {
+                "drug": "Rifampin",
+                "effect": "Additive hepatotoxicity within multi-drug mycobacterial protocols — monitor liver values",
+                "effect_ja": "多剤併用抗酸菌プロトコル内で肝毒性が相加的 — 肝数値をモニタリング",
+                "severity": "moderate",
+            },
+            {
+                "drug": "Isoniazid",
+                "effect": "Additive hepatotoxicity and peripheral neuropathy risk — monitor liver values",
+                "effect_ja": "肝毒性・末梢神経障害リスクが相加的 — 肝数値をモニタリング",
+                "severity": "moderate",
+            },
+        ],
     },
     {
         "id": "dihydrostreptomycin",
@@ -121,7 +139,37 @@ DRUGS_BATCH_40: list[dict] = [
         "side_effects_ja": "耳毒性 — アミノグリコシドの中で最も前庭毒性が強い（運動失調・眼振・難聴は不可逆のことがある）。腎毒性（尿沈渣・クレアチニンをモニタリング）。高用量で神経筋遮断",
         "contraindications": "Renal failure; pre-existing vestibular/hearing deficits; myasthenia gravis; concurrent other ototoxic/nephrotoxic drugs; pregnancy (fetal ototoxicity)",
         "contraindications_ja": "腎不全、既存の前庭・聴覚障害、重症筋無力症、他の耳毒性・腎毒性薬との併用、妊娠（胎子耳毒性）",
-        "drug_interactions": "Additive nephrotoxicity with NSAIDs, amphotericin B, cisplatin; additive neuromuscular blockade with anesthetics/muscle relaxants (atracurium); loop diuretics (furosemide) potentiate ototoxicity",
-        "drug_interactions_ja": "NSAIDs・アムホテリシンB・シスプラチンと腎毒性が相加的。麻酔薬・筋弛緩薬（アトラクリウム）と神経筋遮断が相加的。ループ利尿薬（フロセミド）は耳毒性を増強",
+        "drug_interactions": [
+            {
+                "drug": "NSAIDs",
+                "effect": "Additive nephrotoxicity — avoid concurrent use or monitor renal values closely",
+                "effect_ja": "腎毒性が相加的 — 併用回避または腎数値を厳密にモニタリング",
+                "severity": "major",
+            },
+            {
+                "drug": "Amphotericin B",
+                "effect": "Additive nephrotoxicity",
+                "effect_ja": "腎毒性が相加的",
+                "severity": "major",
+            },
+            {
+                "drug": "Cisplatin",
+                "effect": "Additive nephrotoxicity and ototoxicity",
+                "effect_ja": "腎毒性・耳毒性が相加的",
+                "severity": "major",
+            },
+            {
+                "drug": "Atracurium",
+                "effect": "Additive neuromuscular blockade with anesthetics/muscle relaxants — prolonged paralysis possible",
+                "effect_ja": "麻酔薬・筋弛緩薬と神経筋遮断が相加的 — 遷延性麻痺のリスク",
+                "severity": "moderate",
+            },
+            {
+                "drug": "Furosemide",
+                "effect": "Loop diuretics potentiate aminoglycoside ototoxicity (dihydrostreptomycin is the most vestibulotoxic aminoglycoside)",
+                "effect_ja": "ループ利尿薬はアミノグリコシドの耳毒性を増強（本剤は前庭毒性が最強）",
+                "severity": "major",
+            },
+        ],
     },
 ]
