@@ -2181,7 +2181,7 @@ def test_sweep15_paren_brand_names_resolve_in_text_matcher():
         "バナミン 1.1 mg/kg IV q12h": "flunixin",
         "セレニア 1 mg/kg SC q24h": "maropitant",
         "ガスコン 40-50 mg/kg PO q6-8h": "simethicone",
-        "コバラミン 250 μg SC 週1回": "cobalamin_injection",
+        "コバラミン 250 μg SC 週1回": "vitamin_b12",  # 2026-08 第27弾: cobalamin_injection は vitamin_b12 に統合
         "アポキル 0.4-0.6 mg/kg PO q12h": "oclacitinib",
     }
     for text, expected in cases.items():
@@ -2326,3 +2326,177 @@ class TestBatch46DiazoxideRivaroxabanAntivenomGlucagon:
         assert "Dextrose" in by_name.get("50% Dextrose", "")
         # blood products stay plain text (no dead-end links)
         assert all(n in {"FFP", "tPA (alteplase)"} for n in unlinked), unlinked
+
+
+class TestBatch47ReferencedButAbsentSweep16:
+    """2026-08 16th referenced-but-absent sweep (dosage-context katakana token
+    audit): haloperidol (avian feather-destructive behavior, 17 refs),
+    atovaquone (VetDict's own B. gibsoni / Cytauxzoon protocols name it as
+    first-line, 12 refs), primaquine/chloroquine (avian malaria standard
+    combination, 20 refs each; primaquine is the only effective drug for
+    Babesia felis with a lethal dose only 2x therapeutic), naltrexone
+    (self-directed behavior, 9 refs) and N-butylscopolammonium bromide
+    (Buscopan — the FDA-approved equine spasmolytic, 10 refs) were absent."""
+
+    def test_batch47_drugs_present_with_bilingual_dosing(self):
+        from api.drug_dictionary import get_drug_by_id
+
+        for drug_id, sp in [
+            ("haloperidol", "bird"),
+            ("atovaquone", "dog"),
+            ("primaquine", "cat"),
+            ("chloroquine", "bird"),
+            ("naltrexone", "dog"),
+            ("butylscopolamine", "horse"),
+        ]:
+            d = get_drug_by_id(drug_id)
+            assert d is not None, f"{drug_id} missing from formulary"
+            info = d["species_info"][sp]
+            assert info["safe"], f"{drug_id}/{sp} should be safe"
+            assert info["dosage"].strip(), f"{drug_id}/{sp} missing dosage"
+            assert info["dosage_ja"].strip(), f"{drug_id}/{sp} missing dosage_ja"
+
+    def test_primaquine_feline_narrow_margin_is_documented(self):
+        """The defining safety fact: feline lethal dose (~1 mg/kg) is only
+        twice the therapeutic dose (0.5 mg/kg) — must never be lost."""
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id("primaquine")
+        cat = d["species_info"]["cat"]
+        assert "0.5 mg/kg" in cat["dosage"] and "0.5 mg/kg" in cat["dosage_ja"]
+        assert "1 mg/kg" in d["contraindications_ja"]
+
+    def test_atovaquone_fatty_meal_and_combination_documented(self):
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id("atovaquone")
+        dog = d["species_info"]["dog"]
+        assert "13.3" in dog["dosage"] and "アジスロマイシン" in dog["dosage_ja"]
+        assert "脂肪" in dog["dosage_ja"]  # fatty-meal absorption requirement
+        cat = d["species_info"]["cat"]
+        assert "15 mg/kg" in cat["dosage"]  # Cytauxzoon (Cohn 2011)
+
+    def test_buscopan_equine_hr_masking_documented(self):
+        """Transient tachycardia masks HR as the colic severity indicator —
+        the defining clinical caution for equine Buscopan use."""
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id("butylscopolamine")
+        horse = d["species_info"]["horse"]
+        assert "0.3 mg/kg" in horse["dosage"]
+        assert "心拍数" in horse["notes_ja"]
+        assert "閉塞" in d["contraindications_ja"] or "イレウス" in d["contraindications_ja"]
+
+    def test_batch47_and_variant_aliases_resolve_in_text_matcher(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = [
+            ("ハロペリドール0.1-0.2mg/kg PO q12h短期使用", "haloperidol"),
+            ("アトバコン13.3 mg/kg PO q8h＋アジスロマイシン", "atovaquone"),
+            ("プリマキン（1 mg/kg PO q24h×2日）でガメトサイト排除", "primaquine"),
+            ("クロロキン（25 mg/kg PO q12h×3日間）が第一選択", "chloroquine"),
+            ("ナルトレキソン（1-2 mg/kg PO q12-24h — オピオイド拮抗薬）", "naltrexone"),
+            ("ブチルスコポラミン 0.3 mg/kg IV(痙攣性要素)", "butylscopolamine"),
+            ("ブスコパン 0.3 mg/kg 緩徐IV", "butylscopolamine"),
+            # variant-spelling aliases for existing entries (sweep #16)
+            ("プラジクアンテル 5 mg/kg PO/SC/IM 単回が標準", "praziquantel"),
+            ("シリマリン（ミルクシスル）50〜100 mg/kg/日 PO", "milk_thistle"),
+            ("天然型α-トコフェロール10 IU/kg PO q24h", "vitamin_e"),
+            ("アスコルビン酸30-50 mg/kg IV q12h（還元剤）", "vitamin_c_guinea_pig"),
+            ("流動パラフィン 0.5 mL/kg 経口（潤滑）", "mineral_oil"),
+            ("パラフィンオイル（0.5-1 mL/kg 経口）", "mineral_oil"),
+            ("ロイプロリド400-800 μg/kg IM q14-28日", "leuprolide"),
+            ("リュープロライド酢酸塩700-800μg/kg IM", "leuprolide"),
+            ("パモ酸ピランテル 5-10 mg/kg PO、2-3週間後に再投与", "pyrantel_pamoate"),
+            ("鉄デキストラン 10-20 mg/kg IM 単回、または硫酸鉄 4-6 mg/kg PO", "ferrous_sulfate_oral"),
+            ("ドンペリドン1.1 mg/kg PO q24h（分娩30日前から開始）", "domperidone"),
+            ("ドメペリドン 25-30 mg PO BID-TID", "domperidone"),
+        ]
+        for text, expected in cases:
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert expected in ids, f"{text!r} -> {ids} (expected {expected})"
+        # precision guards — prose words must not resolve to the new entries
+        for text in ["ハロー効果の評価", "スコポラミンではなく", "パラフィン包埋標本で確認"]:
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert not ids, f"guard {text!r} unexpectedly resolved {ids}"
+
+    def test_domperidone_canonical_name_is_standard_katakana(self):
+        """INN katakana is ドンペリドン (Nauzelin); the entry previously carried
+        the mistransliteration ドメペリドン as its canonical name_ja."""
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id("domperidone")
+        assert d["name_ja"].startswith("ドンペリドン")
+
+
+class TestCuratedDuplicateDrugCardMergeAug2026:
+    """2026-08 audit: 53 duplicate drug cards (same drug split across entries
+    whose names differ only by a brand-name/synonym parenthetical, e.g.
+    Spironolactone vs Spironolactone (Aldactone), or a second calcitriol entry
+    labelled 1,25-Dihydroxyvitamin D3) were consolidated via
+    _DRUG_CURATED_MERGE. Canonical dosages are never overwritten; variants
+    contribute only missing species. Genuinely distinct formulations
+    (extended-release, implants, route-specific dosing) stay separate."""
+
+    def test_merged_variants_no_longer_render_as_second_cards(self):
+        from api.drug_dictionary import DRUGS
+
+        ids = {d["id"] for d in DRUGS}
+        for gone in [
+            "spironolactone_oral",
+            "vitamin_d3",
+            "silymarin",
+            "s_adenosylmethionine",
+            "meloxicam_exotic",
+            "benazepril_feline",
+            "benazepril_ckd",
+            "benazepril_heartworm",
+            "toceranib_phosphate",
+            "adequan_equine",
+            "tylosin_oral",
+            # brand-first / synonym-name duplicates caught in the second pass
+            "palladia_oral",
+            "cobalamin_injection",
+            "dinoprost",
+        ]:
+            assert gone not in ids, f"{gone} still a separate card"
+
+    def test_old_ids_resolve_to_canonical_via_alias_table(self):
+        from api.drug_dictionary import _DRUG_ALIAS_TO_ID
+
+        assert _DRUG_ALIAS_TO_ID.get("vitamin_d3") == "calcitriol"
+        assert _DRUG_ALIAS_TO_ID.get("meloxicam_exotic") == "meloxicam"
+        assert _DRUG_ALIAS_TO_ID.get("benazepril_feline") == "benazepril"
+        assert _DRUG_ALIAS_TO_ID.get("silymarin") == "milk_thistle"
+
+    def test_canonical_gained_missing_species_and_kept_own_dosage(self):
+        from api.drug_dictionary import get_drug_by_id
+
+        # calcitriol absorbed the reptile coverage of the duplicate entry
+        calcitriol = get_drug_by_id("calcitriol")
+        assert "reptile" in calcitriol["species_info"]
+        # canonical's own dog dosage unchanged (2.5-3.5 ng/kg, not 1.5-3.5)
+        assert calcitriol["species_info"]["dog"]["dosage"].startswith("2.5")
+        # cholecalciferol (a DIFFERENT drug) remains its own entry
+        assert get_drug_by_id("cholecalciferol") is not None
+
+    def test_distinct_dose_formulations_stay_separate(self):
+        """Variants whose doses genuinely differ (motion-sickness maropitant,
+        metronomic chlorambucil, TCC piroxicam, ER diltiazem, implant
+        melatonin, oral calcium gluconate) must NOT be merged."""
+        from api.drug_dictionary import DRUGS
+
+        ids = {d["id"] for d in DRUGS}
+        for kept in [
+            "maropitant_travel",
+            "chlorambucil_low_dose",
+            "piroxicam_bladder",
+            "diltiazem_oral",
+            "melatonin_implant",
+            "calcium_gluconate_oral",
+            "lidocaine_systemic",
+            "heparin_laminitis",
+            "prednisolone_lymphoma",
+            "tramadol_lactation",
+        ]:
+            assert kept in ids, f"{kept} was merged but must stay separate"

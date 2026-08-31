@@ -1625,6 +1625,7 @@ class TestQuickTapPhraseExtraction:
             "食べない",
             "咳が出る",
             "飲み込めず鼻から餌が出てくる",
+            "後肢が突っ張って歩き尿が茶色い",
         ],
         "rabbit": [
             "糞が小さい",
@@ -1653,7 +1654,7 @@ class TestQuickTapPhraseExtraction:
             "食べない",
             "頬袋が膨らんだまま戻らない",
         ],
-        "guinea_pig": ["食べない", "鼻水", "足を引きずる", "脱毛", "下痢", "くしゃみ"],
+        "guinea_pig": ["食べない", "鼻水", "足を引きずる", "脱毛", "下痢", "くしゃみ", "関節が腫れる"],
         "ferret": [
             "ぐったり",
             "脱毛",
@@ -1664,6 +1665,7 @@ class TestQuickTapPhraseExtraction:
             "陰部が腫れている",
             "足を伸ばして硬直する",
             "口を前足で掻いてよだれ",
+            "便に血が混じる",
         ],
         "hedgehog": ["針が抜ける", "フケ", "ふらつく", "食べない", "目が出ている", "体重が減った"],
         "bird": ["羽を膨らませている", "食べない", "下痢", "鼻水", "羽が抜ける", "くしゃみ", "自分で羽を抜く"],
@@ -2338,7 +2340,10 @@ class TestChatClinicalAccuracyAuditRound7:
         from api.chat.symptom_extractor import _extract_species_symptoms
 
         syms = _extract_species_symptoms("後ろ足が震える 脚が曲がってきた", "lizard")
-        assert "tremors" in syms, f"got {syms}"
+        # Round 14: 「後ろ足が震える」 now resolves to hindlimb weakness (the
+        # canine OA/weakness picture); for lizards both weakness and tremor are
+        # MBD-consistent, and the MBD ranking below is what this test protects.
+        assert ("tremors" in syms) or ("hind_limb_weakness" in syms), f"got {syms}"
         # 脚が曲がって → limb_deformity → soft_bones via the new ID_SYNONYMS bridge
         assert "soft_bones" in syms, f"got {syms}"
         top = [m.get("name_ja", "") for m in _match_species_symptoms_to_diseases(syms, "lizard")[:2]]
@@ -3241,3 +3246,122 @@ class TestChatClinicalAccuracyAuditRound14:
         assert "rapid_gill_movement" in ids, ids
         ids = _extract_species_symptoms("体に水ぶくれのような斑点 お腹のうろこが赤い", "snake")
         assert "skin_redness" in ids and "skin_blistering" in ids, ids
+
+
+class TestChatClinicalAccuracyAuditRound15:
+    """2026-08 audit round 15: fresh 20-case chief-complaint sweep. Root causes
+    fixed: dictionary-form / connective-form alias gaps (「関節が腫れる」「口の中が
+    赤く」「チーズ状のもの」), the ferret melena bridge (owners cannot distinguish
+    fresh from digested blood, but Gastric Ulcer only listed black_tarry_stool so
+    「血便」 never matched it), missing sour-crop and clicking-breath onomatopoeia
+    aliases, missing 骨が弱い→soft_bones, the equine tying-up pair (「突っ張って」
+    ＋「尿が茶色い」 both unextractable), and canine orthopedic phrases (「階段を
+    上れない」「後ろ足が震える」) that extracted nothing and ranked epilepsy first."""
+
+    def test_guinea_pig_scurvy_dictionary_form_joint_swelling(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("後ろ足を引きずる 関節が腫れる 野菜をあまり与えていない", "guinea_pig")
+        assert "swollen_joints" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "guinea_pig")[0]
+        assert "壊血病" in (top.get("name_ja") or ""), (
+            f"swollen joints + hindlimb lameness in a guinea pig is scurvy "
+            f"until proven otherwise (Quesenberry & Carpenter 4th ed): {top.get('name_ja')}"
+        )
+
+    def test_ferret_bloody_stool_ranks_gi_not_estrogen(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("お尻から血 便に血が混じる ぐったり", "ferret")
+        assert "bloody_stool" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "ferret")[:5]]
+        assert any(
+            ("腸炎" in n) or ("胃潰瘍" in n) or ("コクシジウム" in n) or ("アリューシャン" in n) for n in names
+        ), names
+        # reproductive/estrogen entries must no longer hijack the GI complaint
+        assert not any(("エストロゲン" in n) or ("低カルシウム" in n) or ("妊娠毒血症" in n) for n in names[:3]), names
+
+    def test_ferret_melena_bridge_reaches_gastric_ulcer(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        names = [
+            d.get("name_ja") or ""
+            for d in _match_species_symptoms_to_diseases(["bloody_stool", "teeth_grinding", "vomiting"], "ferret")[:4]
+        ]
+        assert any("胃潰瘍" in n for n in names), (
+            f"melena + bruxism + vomiting is the classic ferret Helicobacter "
+            f"gastric ulcer picture (Quesenberry & Carpenter 4th ed): {names}"
+        )
+
+    def test_bird_clicking_breath_onomatopoeia_extracts(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("呼吸のたびにプチプチ音 声が変わった", "bird")
+        assert "clicking_breathing_sounds" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "bird")[:4]]
+        assert any(("ダニ" in n) or ("アスペルギルス" in n) or ("気嚢" in n) for n in names), names
+
+    def test_snake_mouth_rot_connective_form_and_cheese_exudate(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("口の中が赤くチーズ状のものがある", "snake")
+        assert "stomatitis" in ids and "mucus_in_mouth" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "snake")[0]
+        assert "口内炎" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_sugar_glider_weak_bones_ranks_mbd_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("後ろ足が麻痺 骨が弱い 果物ばかり与えている", "sugar_glider")
+        assert "soft_bones" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "sugar_glider")[0]
+        assert ("代謝性骨" in (top.get("name_ja") or "")) or ("MBD" in (top.get("name_ja") or "")), top.get("name_ja")
+
+    def test_parrot_sour_crop_falls_back_to_crop_ids(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("そのうから酸っぱい臭い 吐き戻し", "parrot")
+        assert any(i in ids for i in ("crop_stasis", "crop_distension")), ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "parrot")[:4]]
+        assert any(("嗉嚢" in n) or ("そのう" in n) or ("素嚢" in n) for n in names), names
+        # bird keeps its dedicated sour-crop ID
+        ids_bird = _extract_species_symptoms("そのうから酸っぱい臭い", "bird")
+        assert "sour_crop_odor" in ids_bird, ids_bird
+
+    def test_dog_orthopedic_phrases_rank_oa_not_epilepsy(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("散歩を嫌がる 階段を上れない 後ろ足が震える 大型犬")
+        assert "stiffness" in ids, ids
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ids)[:5]]
+        assert any(("関節" in n) or ("股関節" in n) or ("膝蓋骨" in n) or ("椎間板" in n) for n in names[:3]), names
+        assert "てんかん" not in names[0], names
+
+    def test_horse_tying_up_pair_extracts_and_ranks_rhabdo(self):
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ids = _extract_equine_symptoms("後肢が突っ張って歩く 運動後に尿が茶色い")
+        assert "body_stiffness" in ids and "body_dark_urine" in ids, ids
+        names = [(d.get("name_ja") or d.get("name") or "") for d in _match_equine_symptoms_to_diseases(ids)[:4]]
+        assert any(
+            ("横紋筋融解" in n)
+            or ("タイングアップ" in n)
+            or ("タイイングアップ" in n)
+            or ("PSSM" in n)
+            or ("ミオパチー" in n)
+            for n in names
+        ), names
+
+    def test_horse_colic_dictionary_forms_still_extract(self):
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ids = _extract_equine_symptoms("急にお腹を蹴って転がる 汗をかいている")
+        assert "dig_colic_signs" in ids and "gen_sweating" in ids, ids
+        top = _match_equine_symptoms_to_diseases(ids)[0]
+        assert "疝痛" in (top.get("name_ja") or ""), top.get("name_ja")

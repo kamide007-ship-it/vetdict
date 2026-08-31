@@ -70,6 +70,7 @@ from api.drug_batch_43 import DRUGS_BATCH_43
 from api.drug_batch_44 import DRUGS_BATCH_44
 from api.drug_batch_45 import DRUGS_BATCH_45
 from api.drug_batch_46 import DRUGS_BATCH_46
+from api.drug_batch_47 import DRUGS_BATCH_47
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10711,6 +10712,17 @@ for _drug46 in DRUGS_BATCH_46:
         DRUGS.append(_drug46)
         _drug_index[_drug46["id"]] = _drug46
 
+# Batch 47: 2026-08監査（第16回スイープ）— referenced-but-absent 6剤
+# （ハロペリドール — 鳥の難治性羽毛破壊行動 17参照; アトバコン — B. gibsoni /
+#  Cytauxzoon の第一選択なのに未収載 12参照; プリマキン/クロロキン — 鳥マラリア
+#  標準併用 各20参照、プリマキンは猫バベシア唯一の有効薬（致死量≈治療量×2）;
+#  ナルトレキソン — 自己指向性行動のオピオイド拮抗補助 9参照;
+#  ブチルスコポラミン（ブスコパン）— 馬の痙攣性疝痛・チョークのFDA承認鎮痙薬 10参照）
+for _drug47 in DRUGS_BATCH_47:
+    if _drug47["id"] not in _drug_index:
+        DRUGS.append(_drug47)
+        _drug_index[_drug47["id"]] = _drug47
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -10968,6 +10980,71 @@ for _drug in DRUGS:
 _DRUG_CURATED_MERGE: dict[str, list[str]] = {
     # ガバペンチン: 適応名違いで3分割されていた（獣医指摘により統合）
     "gabapentin": ["gabapentin_pain", "gabapentin_oral"],
+    # --- 2026-08 監査: 括弧サフィックス（商品名・化学同義語・剤形が薬剤自体と同一の
+    # 記述）だけが違う同一薬の重複カードを統合。統合規則は上記の安全規則に従う:
+    # 正規側（種数最多）の用量は不変、変種からは欠落種のみ取り込み。
+    # 意図的に統合しないもの（用量・適応が本質的に異なる変種）:
+    #   maropitant_travel（酔い止め 8 mg/kg は制吐 2 mg/kg と別用量）、
+    #   chlorambucil_low_dose/_ibd（メトロノミック/低用量プロトコル）、
+    #   piroxicam_bladder/_transitional_cell（TCCプロトコル）、
+    #   prednisolone_lymphoma（リンパ腫プロトコル用量）、
+    #   heparin_laminitis（周産期牝馬の蹄葉炎予防プロトコル）、
+    #   diltiazem_oral（徐放製剤は用量が別）、melatonin_implant（インプラント剤形）、
+    #   calcium_gluconate_oral（経口はIVと別用量）、lidocaine_systemic（CRI vs 局所）、
+    #   tranexamic_acid_topical/_iv（経路別）、miconazole_topical、eprinomectin_topical、
+    #   succinylcholine_equine（緊急プロトコル）、tramadol_lactation（乳汁分泌サポート）、
+    #   maropitant_oral（経路別）
+    "aluminum_hydroxide": ["aluminum_hydroxide_oral"],  # リン吸着剤=本剤の用途そのもの
+    "amlodipine": ["amlodipine_feline"],  # 猫高血圧=本剤の主用途
+    "atenolol": ["atenolol_oral"],  # 経口β遮断薬=本剤そのもの
+    "benazepril": ["benazepril_feline", "benazepril_ckd", "benazepril_heartworm"],  # 同一用量帯の適応名違い3分割
+    "budesonide": ["budesonide_oral"],  # Entocort=商品名
+    "buprenorphine": ["buprenorphine_exotic"],  # 正規側が既にエキゾチック14種をカバー
+    "cabergoline": ["cabergoline_endo", "cabergoline_prolactin"],  # Galastop=商品名
+    "calcitriol": ["vitamin_d3"],  # 同一薬（1,25(OH)2D3）。コレカルシフェロールは別エントリで維持
+    "cisapride": ["cisapride_exotic"],  # 正規側が既にエキゾチックをカバー
+    "clopidogrel": ["clopidogrel_oral"],  # Plavix=商品名
+    "dalteparin": ["dalteparin_injectable"],  # Fragmin=商品名、本剤は注射のみ
+    "deslorelin": ["deslorelin_reproductive"],  # Suprelorin=商品名、本剤はインプラントのみ
+    "domperidone": ["domperidone_equine"],  # Equi-Tox=商品名
+    "emodepside": ["emodepside_topical"],  # Profender=商品名、本剤はスポットオンのみ
+    "fluconazole": ["fluconazole_oral"],  # 経口抗真菌薬=本剤そのもの
+    "flunixin": ["flunixin_paste"],  # 馬用ペーストは同用量 1.1 mg/kg の剤形違い
+    "hydrocodone": ["hydrocodone_antitussive"],  # Hycodan=商品名、鎮咳=本剤の用途
+    "itraconazole": ["itraconazole_oral"],  # 本剤は経口のみ
+    "ivermectin": ["ivermectin_oral"],  # 括弧は「Oral/Injectable」=正規と同経路
+    "latanoprost": ["latanoprost_ophthalmic"],  # Xalatan=商品名、本剤は点眼のみ
+    "lufenuron": ["lufenuron_oral"],  # Program=商品名
+    "meloxicam": ["meloxicam_exotic"],  # 正規側が既にエキゾチック16種をカバー
+    "methocarbamol": ["methocarbamol_exotic"],
+    "milk_thistle": ["silymarin"],  # 同一サプリメント（シリマリン）
+    "mirtazapine": ["mirtazapine_oral"],  # Mirataz=商品名
+    "misoprostol": ["misoprostol_gi", "misoprostol_gastro"],  # 胃保護=本剤の用途そのもの
+    "oxytocin": ["oxytocin_reproductive"],  # 生殖=本剤の用途そのもの
+    "pergolide": ["pergolide_oral"],  # Prascend=商品名
+    "permethrin": ["permethrin_topical"],  # 本剤は外用のみ（猫 safe:False は正規側で維持）
+    "phenobarbital": ["phenobarbital_oral"],  # 経口抗痙攣薬=本剤そのもの
+    "phenylbutazone": ["phenylbutazone_equine"],  # 正規側が馬をカバー
+    "phenylpropanolamine": ["phenylpropanolamine_ui"],  # 尿失禁=本剤の唯一の獣医用途
+    "pimobendan": ["pimobendan_oral"],  # Vetmedin / Vetmedin Oral=同一商品
+    "polysulfated_glycosaminoglycan": ["adequan_equine"],  # Adequan=商品名、正規側が馬をカバー
+    "pradofloxacin": ["pradofloxacin_oral"],  # Veraflox=商品名
+    "pregabalin": ["pregabalin_oral"],  # Lyrica=商品名
+    "same": ["s_adenosylmethionine"],  # 同一サプリメント（SAMe）
+    "sarolaner": ["sarolaner_oral"],  # Simparica=商品名
+    "selamectin": ["selamectin_topical"],  # Revolution=商品名、本剤はスポットオンのみ
+    "sildenafil": ["sildenafil_pulmonary"],  # 肺高血圧=本剤の獣医主用途
+    "spironolactone": ["spironolactone_oral"],  # Aldactone=商品名
+    "sulfasalazine": ["sulfasalazine_oral"],  # Azulfidine=商品名
+    "telmisartan": ["telmisartan_feline"],  # Semintra=商品名
+    "tepoxalin": ["tepoxalin_oral"],  # Zubrin=商品名
+    "theophylline": ["theophylline_oral"],  # Theo-Dur=商品名
+    "toceranib": ["toceranib_phosphate", "palladia_oral"],  # Palladia=商品名、同一薬（brand-first 名の変種も統合）
+    "vitamin_b12": ["cobalamin_injection"],  # コバラミン=同一物質、SC用量も同一（250-1500 μg）
+    "prostaglandin_f2a": ["dinoprost"],  # ジノプロスト=PGF2αの一般名、用量同一（0.1-0.25 mg/kg = 100-250 μg/kg）
+    "tramadol": ["tramadol_exotic"],  # 正規側が既にエキゾチック12種をカバー
+    "trilostane": ["trilostane_feline"],  # Vetoryl=商品名（猫用量は正規側で維持）
+    "tylosin": ["tylosin_oral"],  # Tylan=商品名
 }
 
 
@@ -11207,7 +11284,27 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     ),  # procaine formulation / bare class-archetype (732 treatment refs incl. guinea-pig contraindication notes)
     "l_carnitine": ("カルニチン",),  # canonical: L-カルニチン
     "salbutamol": ("アルブテロール",),  # albuterol = USAN of salbutamol
-    "leuprolide": ("リュープロリド",),  # canonical: リュープロレリン酢酸塩
+    "leuprolide": (
+        "リュープロリド",
+        # 2026-08 sweep #16: 治療文は ロイプロリド（20参照）/ リュープロライド（4参照）
+        # の転写ゆれでも記載する
+        "ロイプロリド",
+        "リュープロライド",
+    ),  # canonical: リュープロレリン酢酸塩
+    # 2026-08 sweep #16: 実在薬の解決不能な表記ゆれ
+    "praziquantel": ("プラジクアンテル",),  # canonical: プラジカンテル — 25参照の転写ゆれ
+    "milk_thistle": ("ミルクシスル",),  # canonical: シリマリン（マリアアザミ） — 19参照
+    "vitamin_e": ("トコフェロール",),  # canonical: ビタミンE（α-トコフェロール） — 「α-トコフェロール」表記20参照を捕捉
+    "vitamin_c_guinea_pig": ("アスコルビン酸",),  # canonical: ビタミンC — 9参照
+    "mineral_oil": (
+        "流動パラフィン",  # 括弧内にのみ載る和名（漢字混じりのため tier-4 純カタカナ索引対象外）— 16参照
+        "パラフィンオイル",  # 11参照
+    ),
+    "pyrantel_pamoate": (
+        "パモ酸ピランテル",  # canonical: ピランテルパモ酸塩 — 語順逆転形 10参照
+        "ピランテル",  # 裸名 — 塩サフィックス剥がしでは到達しない
+    ),
+    "domperidone": ("ドメペリドン",),  # 旧表記（正準は標準カナのドンペリドンに修正済み）
     "darbepoetin": ("ダーベポエチン",),  # canonical: ダルベポエチンアルファ
     "thiamine_b1": (
         "ビタミンb1",
@@ -11233,6 +11330,9 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "vitamin_k1": ("フィトナジオン",),  # phytonadione = INN of vitamin K1
     "calcium_gluconate": ("カルシウムグルコネート",),  # canonical: グルコン酸カルシウム
     "ursodiol": ("ウルソジオール",),  # canonical: ウルソデオキシコール酸
+    # 2026-08 sweep #16: 治療文は「硫酸鉄 4-6 mg/kg PO」と略記する（20参照）が
+    # 正規 name_ja は「硫酸第一鉄」のため索引が届かなかった
+    "ferrous_sulfate_oral": ("硫酸鉄",),
     "calcium_supplement_reptile": (
         "炭酸カルシウム",
     ),  # canonical: 炭酸カルシウム粉末（爬虫類用） — 粉末 suffix defeats the stem index (13 treatment refs)
@@ -11349,7 +11449,9 @@ def _build_drug_keyword_index() -> None:
         # Central registry + optional per-drug "search_aliases" field.
         for alias in list(_KATAKANA_VARIANT_ALIASES.get(drug_id, ())) + list(d.get("search_aliases") or ()):
             a = alias.strip().lower()
-            if len(a) >= 4:
+            # 漢字は1文字あたりの情報量が大きく、全漢字3文字（例:「硫酸鉄」）は
+            # ラテン4文字以上と同等に特異的なので、キュレート済みエイリアスに限り許可
+            if len(a) >= 4 or (len(a) == 3 and re.fullmatch(r"[一-鿿]{3}", a)):
                 tier2.append((a, drug_id))
         for key in (d.get("name", ""), d.get("name_ja", "")):
             if not key or len(key) < 4:
