@@ -1598,6 +1598,7 @@ class TestQuickTapPhraseExtraction:
             "咳が出る",
             "足を引きずる",
             "皮膚が痒い",
+            "口の中にできものがある",
             "おしりを地面にこすりつける",
             "鼻血が出た",
             "お腹が膨らんで吐こうとしても吐けない",
@@ -1622,6 +1623,7 @@ class TestQuickTapPhraseExtraction:
         "horse": [
             "お腹を痛がっている（疝痛）",
             "前脚をかばって歩く",
+            "後ろ足を痛がる",
             "蹄が熱い",
             "毛が長くて換毛しない",
             "食べない",
@@ -1670,7 +1672,16 @@ class TestQuickTapPhraseExtraction:
             "便に血が混じる",
         ],
         "hedgehog": ["針が抜ける", "フケ", "ふらつく", "食べない", "目が出ている", "体重が減った"],
-        "bird": ["羽を膨らませている", "食べない", "下痢", "鼻水", "羽が抜ける", "くしゃみ", "自分で羽を抜く"],
+        "bird": [
+            "羽を膨らませている",
+            "食べない",
+            "下痢",
+            "鼻水",
+            "羽が抜ける",
+            "くしゃみ",
+            "自分で羽を抜く",
+            "脚に白いかさぶた",
+        ],
         "parakeet": [
             "食べない",
             "膨らんでいる",
@@ -3248,6 +3259,106 @@ class TestChatClinicalAccuracyAuditRound14:
         assert "rapid_gill_movement" in ids, ids
         ids = _extract_species_symptoms("体に水ぶくれのような斑点 お腹のうろこが赤い", "snake")
         assert "skin_redness" in ids and "skin_blistering" in ids, ids
+
+
+class TestChatClinicalAccuracyAuditRound16Parallel:
+    """2026-08 audit round 16 (parallel session; authored as round 15 before the
+    sibling session claimed the slot on main): fresh 18-case chief-complaint sweep. Root causes
+    fixed: the Cushing triad (「水をたくさん飲んで」「お腹だけ膨れてきた」) lost
+    two of three signs to connective-form alias gaps; the oral-mass complaint
+    ranked mammary tumor first (no oral-tumor entry or oral_mass vocabulary in
+    the legacy dog DB); the equine hindlimb-lameness colloquials (「後ろ足を
+    痛がる」) were entirely absent so extraction returned nothing; the untiered
+    feline neonatal-isoerythrolysis entries hijacked the adult icterus
+    complaint; the rabbit exophthalmos complaint lost the て-form and ranked
+    the rare Elodontoma over the common retrobulbar/URI group; and the
+    scaly-leg (Knemidocoptes) complaint had no leg-crust vocabulary at all."""
+
+    def test_dog_cushing_triad_ranks_cushings_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("水をたくさん飲んでお腹だけ膨れてきた 毛が薄い")
+        assert {"excessive_thirst", "bloating", "hair_loss"} <= set(ex), ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "クッシング" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_dog_oral_mass_ranks_oral_tumor_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("口の中にできものがある 口臭")
+        assert "oral_mass" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "口腔内腫瘍" in top.get("name_ja", ""), (
+            f"a visible oral mass is the oral-tumor group, never mammary "
+            f"(Withrow & MacEwen 6th ed): {top.get('name_ja')}"
+        )
+
+    def test_dog_mammary_complaint_still_ranks_mammary_first(self):
+        # the oral_mass cluster must not disturb the mammary complaint
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("乳腺にしこりがある")
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "乳腺腫瘍" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_dog_checkbox_path_carries_oral_vocabulary(self):
+        # parity: the checkbox/guided engine must handle the same complaint
+        from api.species.dog_diseases import VALID_SYMPTOMS, analyze_symptoms
+
+        assert {"oral_mass", "bad_breath"} <= VALID_SYMPTOMS
+        res = analyze_symptoms(["oral_mass", "bad_breath"])
+        names = [d.get("name_ja") for d in res["suspected_diseases"][:3]]
+        assert any("口腔" in (n or "") for n in names), names
+
+    def test_equine_hindlimb_colloquial_extracts_and_ranks_hoof_abscess(self):
+        from api.diagnostic_chat import (
+            _extract_equine_symptoms,
+            _match_equine_symptoms_to_diseases,
+        )
+
+        ex = _extract_equine_symptoms("急に後ろ足を痛がる 蹄が熱い")
+        assert {"limb_lameness_hind", "hoof_heat"} <= set(ex), ex
+        top = _match_equine_symptoms_to_diseases(ex)[0]
+        assert "蹄膿瘍" in (top.get("name_ja") or ""), (
+            f"acute lameness + focal hoof heat is a hoof abscess until proven "
+            f"otherwise (Adams & Stashak 7th ed): {top.get('name_ja')}"
+        )
+
+    def test_cat_adult_icterus_not_hijacked_by_neonatal_isoerythrolysis(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("おしっこの色が濃い 元気がない 白目が黄色い", "cat")
+        assert "dark_urine" in ex and "jaundice" in ex, ex
+        res = _match_species_symptoms_to_diseases(ex, "cat")
+        top_name = res[0].get("name_ja") or res[0].get("name") or ""
+        assert "新生" not in top_name, (
+            f"neonatal isoerythrolysis (rare, neonates only) must not outrank "
+            f"the hemolytic/hepatic adult ddx: {top_name}"
+        )
+
+    def test_rabbit_exophthalmos_te_form_extracts_and_demotes_elodontoma(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("目が飛び出してきて鼻水", "rabbit")
+        assert "exophthalmos" in ex, ex
+        res = _match_species_symptoms_to_diseases(ex, "rabbit")
+        names = [d.get("name_ja") or d.get("name") for d in res[:2]]
+        assert not any("エロドントーマ" in (n or "") for n in names), (
+            f"elodontoma is a degu/prairie-dog disease, rare in rabbits (Capello & Lennox): {names}"
+        )
+
+    def test_bird_scaly_leg_complaint_ranks_knemidocoptes_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        for species, want_id in (("bird", "crusty_lesions_on_legs"), ("parakeet", "leg_scales")):
+            ex = _extract_species_symptoms("脚に白いかさぶた ガサガサ", species)
+            assert want_id in ex, (species, ex)
+            top = _match_species_symptoms_to_diseases(ex, species)[0]
+            nm = top.get("name_ja") or top.get("name") or ""
+            assert ("疥癬" in nm) or ("ヒゼンダニ" in nm), (species, nm)
 
 
 class TestChatClinicalAccuracyAuditRound15:
