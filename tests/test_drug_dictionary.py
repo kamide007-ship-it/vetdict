@@ -2500,3 +2500,64 @@ class TestCuratedDuplicateDrugCardMergeAug2026:
             "tramadol_lactation",
         ]:
             assert kept in ids, f"{kept} was merged but must stay separate"
+
+
+class TestBatch48IsoxsuprineBismuthBiotin:
+    """2026-08 audit (17th sweep, parallel session — shipped as batch 48): referenced-but-absent agents. The equine
+    navicular entries dose isoxsuprine, the ferret/hamster Helicobacter
+    triple-therapy entries dose bismuth subsalicylate, and the hoof-quality /
+    biotin-deficiency content doses biotin — none had formulary entries."""
+
+    def _by_id(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        for d in DRUGS:
+            if d["id"] == drug_id:
+                return d
+        raise AssertionError(f"{drug_id} missing from formulary")
+
+    def test_batch47_present_with_complete_bilingual_dosing(self):
+        for drug_id in ("isoxsuprine", "bismuth_subsalicylate", "biotin"):
+            d = self._by_id(drug_id)
+            assert d.get("name_ja") and d.get("mechanism_ja")
+            for sp, info in d["species_info"].items():
+                assert (info.get("dosage") or "").strip(), (drug_id, sp)
+                assert (info.get("dosage_ja") or "").strip(), (drug_id, sp)
+
+    def test_bismuth_subsalicylate_feline_salicylate_gate(self):
+        d = self._by_id("bismuth_subsalicylate")
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is False
+        assert "サリチル酸" in cat["dosage_ja"]
+        ferret = d["species_info"]["ferret"]
+        assert "17.5" in ferret["dosage"] and "q8h" in ferret["dosage"]
+
+    def test_isoxsuprine_is_equine_adjunct_with_prohibited_substance_note(self):
+        d = self._by_id("isoxsuprine")
+        horse = d["species_info"]["horse"]
+        assert "0.6" in horse["dosage"]
+        assert "FEI" in horse["notes"] or "禁止" in horse["notes_ja"]
+        assert d["species_info"]["dog"]["safe"] is False
+
+    def test_biotin_hoof_dose_and_duration(self):
+        d = self._by_id("biotin")
+        horse = d["species_info"]["horse"]
+        assert "15-25" in horse["dosage"]
+        assert ("6-9" in horse["dosage_ja"]) or ("6-9" in horse["dosage"])
+
+    def test_batch47_text_matcher_resolution(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = {
+            "イソクスプリン 0.6 mg/kg PO q12h": "isoxsuprine",
+            "ビスマス次サリチル酸 17.5 mg/kg PO q8h": "bismuth_subsalicylate",
+            "ビスマス 17.5 mg/kg PO q12h": "bismuth_subsalicylate",
+            "バイオチン（蹄質改善、15-25 mg/日）": "biotin",
+            "ビオチン。亜鉛。": "biotin",
+        }
+        for text, expected in cases.items():
+            ids = [d["id"] for d in find_drugs_in_text(text)]
+            assert expected in ids, (text, ids)
+        # precision guard: B12 must not chip biotin/thiamine
+        ids = [d["id"] for d in find_drugs_in_text("ビタミンB12 250 μg SC 週1")]
+        assert "biotin" not in ids and "vitamin_b12" in ids, ids

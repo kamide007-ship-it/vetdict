@@ -1605,6 +1605,7 @@ class TestQuickTapPhraseExtraction:
             "耳が腫れてぷよぷよしている",
             "食べた後すぐに未消化のまま吐く",
             "乳腺にしこりがある",
+            "いびきがひどく呼吸がガーガー鳴る",
         ],
         "cat": [
             "食べない",
@@ -1616,6 +1617,7 @@ class TestQuickTapPhraseExtraction:
             "ジャンプしなくなった",
             "トイレ以外の場所で粗相する",
             "口をくちゃくちゃさせる",
+            "耳の先にかさぶたができて治らない",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -3365,3 +3367,98 @@ class TestChatClinicalAccuracyAuditRound15:
         assert "dig_colic_signs" in ids and "gen_sweating" in ids, ids
         top = _match_equine_symptoms_to_diseases(ids)[0]
         assert "疝痛" in (top.get("name_ja") or ""), top.get("name_ja")
+
+
+class TestChatClinicalAccuracyAuditRound16:
+    """2026-08 audit round 16 (parallel session's round 15): fresh 22-case sweep. Root causes fixed: the
+    acute pelvic-limb-failure complaint (「後ろ足が立たなくなった」) extracted
+    nothing on the legacy dog path (no hind_limb_paralysis fallback); いびき
+    (stertor) had no vocabulary anywhere so the BOAS complaint never ranked
+    its own entry; the white-cat ear-tip SCC and anisocoria complaints
+    extracted nothing; the kana rubber-jaw phrasing missed the lizard MBD
+    vocabulary; 「お腹がパンパンに膨れている」 lost the abdominal context to
+    the edema alias; and 吐き戻し was mapped to vomiting so the snake
+    postprandial-regurgitation complaint never reached the regurgitation ID."""
+
+    def test_dog_acute_hindlimb_failure_extracts_paralysis(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("散歩中に急に後ろ足が立たなくなった 痛がらない")
+        assert "paralysis" in ids, ids
+        names = [r.get("name_ja", "") for r in match_symptoms_to_diseases(ids)[:3]]
+        assert any(("ヘルニア" in n) or ("脊髄" in n) for n in names), names
+
+    def test_dog_snoring_vocabulary_and_boas_ranking(self):
+        import api.health_checker as hc
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        assert any(s["id"] == "snoring" for s in hc.SYMPTOMS)
+        ids = extract_symptoms_from_text("いびきがひどい 暑いとすぐばてる 呼吸がガーガー鳴る")
+        assert "snoring" in ids and "exercise_intolerance" in ids, ids
+        names = [r.get("name_ja", "") for r in match_symptoms_to_diseases(ids)[:5]]
+        assert any("短頭種" in n for n in names), names
+
+    def test_cat_ear_tip_crust_surfaces_squamous_cell_carcinoma(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("白い猫 耳の先にかさぶたができて治らない", "cat")
+        assert "non_healing_wound" in ids or "ear_tip_lesions" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "cat")[:3]]
+        assert any("扁平上皮癌" in n for n in names), names
+
+    def test_cat_anisocoria_surfaces_retinal_hypertensive_ddx(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("急に片方の瞳孔だけ大きさが違う", "cat")
+        assert "dilated_pupils" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "cat")[:5]]
+        assert any(("網膜" in n) or ("高血圧" in n) for n in names), names
+
+    def test_rabbit_hindlimb_dragging_surfaces_spinal_ddx(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("後ろ足を引きずって立てない", "rabbit")
+        assert "hind_limb_weakness" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "rabbit")[:5]]
+        assert any(("脊髄" in n) or ("脊椎" in n) or ("麻痺" in n) for n in names), names
+
+    def test_lizard_kana_rubber_jaw_ranks_mbd_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("あごが柔らかくてぶよぶよしている 食べない", "lizard")
+        assert "jaw_softening" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "lizard")[0]
+        name = top.get("name_ja") or top.get("name")
+        assert ("代謝性骨疾患" in name) or ("MBD" in name), name
+
+    def test_ferret_taut_abdomen_extracts_distension_and_ranks_cardiomyopathy(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("お腹がパンパンに膨れている 息が苦しそう", "ferret")
+        assert "abdominal_distension" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "ferret")[:5]]
+        assert any("心筋症" in n for n in names), names
+
+    def test_snake_postprandial_regurgitation_surfaces_crypto_ddx(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("餌を食べたあと吐き戻す 痩せてきた", "snake")
+        assert "regurgitation" in ids, ids
+        names = [r.get("name_ja") or r.get("name") for r in _match_species_symptoms_to_diseases(ids, "snake")[:5]]
+        assert any(("クリプトスポリジウム" in n) or ("吐出" in n) for n in names), names
+
+    def test_bird_crop_complaint_unaffected_by_regurgitation_remap(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("吐き戻しをする そのうが膨らんでいる", "bird")
+        assert "crop_distension" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "bird")[0]
+        name = top.get("name_ja") or top.get("name")
+        assert ("嗉嚢" in name) or ("そのう" in name) or ("素嚢" in name), name

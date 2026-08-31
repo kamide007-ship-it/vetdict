@@ -71,6 +71,7 @@ from api.drug_batch_44 import DRUGS_BATCH_44
 from api.drug_batch_45 import DRUGS_BATCH_45
 from api.drug_batch_46 import DRUGS_BATCH_46
 from api.drug_batch_47 import DRUGS_BATCH_47
+from api.drug_batch_48 import DRUGS_BATCH_48
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10722,6 +10723,15 @@ for _drug47 in DRUGS_BATCH_47:
     if _drug47["id"] not in _drug_index:
         DRUGS.append(_drug47)
         _drug_index[_drug47["id"]] = _drug47
+
+# Batch 48: 2026-08監査（第17回スイープ・並行セッション分）— referenced-but-absent 3剤
+# （イソクスプリン — 馬蹄舟骨症候群エントリが 0.6 mg/kg PO q12h で参照する古典的血管拡張薬;
+#  次サリチル酸ビスマス — フェレット/ハムスターHelicobacter三剤併用の第三の柱（17.5 mg/kg q8h）;
+#  ビオチン — 馬蹄質改善 15-25 mg/日・爬虫類欠乏症・皮膚科被毛サプリで28参照）
+for _drug48 in DRUGS_BATCH_48:
+    if _drug48["id"] not in _drug_index:
+        DRUGS.append(_drug48)
+        _drug_index[_drug48["id"]] = _drug48
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

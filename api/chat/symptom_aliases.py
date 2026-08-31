@@ -345,7 +345,7 @@ SYMPTOM_ALIASES = {
     "もどした": "vomiting",
     "ゲロ": "vomiting",
     "げろ": "vomiting",
-    "吐き戻し": "vomiting",
+    "吐き戻し": "regurgitation",
     "何回も吐く": "vomiting",
     "何度も吐く": "vomiting",
     "食べた後吐く": "vomiting",
@@ -925,7 +925,7 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     # 鳥追加
     # ---------------------------------------------------------------
-    "吐き戻してる": "vomiting",
+    "吐き戻してる": "regurgitation",
     "首を振る": "head_shaking",
     "尾を振る": "labored_breathing",
     "呼吸のたびに尾を振る": "labored_breathing",
@@ -2083,6 +2083,41 @@ SYMPTOM_ALIASES = {
     "後ろ足が震える": "hind_leg_weakness",
     "後ろ足が震え": "hind_leg_weakness",
     "後肢が震え": "hind_leg_weakness",
+    # --- 2026-08 Round 15 sweep ---
+    # いびき/睡眠時呼吸音（短頭種気道症候群の代表的主訴。「ガーガー」は
+    # 気管虚脱のガチョウ様咳として coughing を維持）
+    "いびき": "snoring",
+    # 運動不耐・暑熱不耐（BOAS/心疾患の owner-reported 表現）
+    "すぐばてる": "exercise_intolerance",
+    "暑さに弱い": "exercise_intolerance",
+    # 急性後肢不全（IVDD/FCE/ATE/脊椎骨折）: 「立たなくなった」変化形が
+    # 既存キー「後ろ足が立たない」に部分一致せず抽出ゼロだった
+    "後ろ足が立たなく": "hind_limb_paralysis",
+    "後ろ足で立てなく": "hind_limb_paralysis",
+    "後ろ足で立てない": "hind_limb_paralysis",
+    # て形（「後ろ足を引きずって立てない」— ウサギ脊椎損傷等の複合主訴）
+    "後ろ足を引きずって": "hind_limb_weakness",
+    # 白猫の耳介先端SCC（日光性皮膚炎→扁平上皮癌の定義的主訴）
+    "耳の先にかさぶた": "ear_tip_lesions",
+    "かさぶたができて治らない": "non_healing_wound",
+    "かさぶたが治らない": "non_healing_wound",
+    "治らないかさぶた": "non_healing_wound",
+    # 瞳孔不同・散瞳（高血圧性網膜症・網膜剥離・神経疾患の owner 主訴）
+    "瞳孔の大きさが違う": "dilated_pupils",
+    "片方の瞳孔": "dilated_pupils",
+    "瞳孔が開いた": "dilated_pupils",
+    "瞳孔が大きい": "dilated_pupils",
+    # 爬虫類MBDのラバージョー（かな表記・ぶよぶよ表現が未収載だった）
+    "あごが柔らか": "jaw_softening",
+    "あごがぶよぶよ": "jaw_softening",
+    "顎がぶよぶよ": "jaw_softening",
+    # 腹部膨満の強調形（「お腹パンパン」は収載済みだが助詞「が」入りが欠落。
+    # 11文字形は「パンパンに膨れている」→edema の自動展開キーより長くして
+    # 最長一致で腹部文脈を確実に勝たせる）
+    "お腹がパンパン": "bloating",
+    "お腹がパンパンに膨れて": "bloating",
+    # 吐出の動詞形（ヘビのクリプトスポリジウム症・食後吐き戻しの定義的主訴）
+    "吐き戻す": "regurgitation",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---
