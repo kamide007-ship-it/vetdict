@@ -3884,3 +3884,18 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
   pendingStats diseases 6449→**6450**・drugs 651→**654**・symptoms 73→**75**
 - ServiceWorker: `CACHE_NAME` v134 → **v135**（並行セッションのv133/v134と衝突のため改番）
 - 再現手順: `build_id_locks dog` → `migrate_to_sqlite.py`（クリーンビルド）→ `build_disease_search_index.py`
+
+### mainマージ統合（並行第27弾×2セッションとの衝突解決）
+- `drug_batch_47` 衝突: mainの6剤（ハロペリドール等）を採用し、本セッションの2剤
+  （オクトレオチド/デコキネート）は **batch_49** に改番。ビオチンは mainの batch_48 が
+  先に収載していたため重複追加を回避（本文の参照解決は batch_48 で機能）
+- `TestChatClinicalAccuracyAuditRound15` クラス名衝突 → 本セッション分を **Round17** に改番、
+  `TestBatch47ReferencedDrugs` → **TestBatch49ReferencedDrugs**
+- SYMPTOM_ALIASES 両セッションのユニオン統合。重複キー「吐き戻す」は mainの
+  **regurgitation** マッピングを採用（クロップ疾患には臨床的により正確）
+- **マージ回帰の検出・修正**: 吐き戻す→regurgitation 化により旧経路
+  （vomiting→crop_stasis ブリッジ）が切れ、「そのうが膨らんで吐き戻す」で
+  クロップ疾患群がtop8圏外に落ちた → `_SYN` に **crop_distension→crop_stasis/
+  crop_swelling/ingluvitis** ブリッジ + regurgitation→crop_stasis を追加
+  （甲状腺腫/酸敗嗉嚢が top2 を回復、哺乳類の吐出主訴は不変を検証）
+- レガシー犬DB統合後: **76症状**（+hives/facial_swelling/snoring）・**80疾患**

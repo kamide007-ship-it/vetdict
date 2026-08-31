@@ -3546,7 +3546,10 @@ class TestChatClinicalAccuracyAuditRound17:
         from api.chat.symptom_extractor import _extract_species_symptoms
 
         ex = _extract_species_symptoms("そのうが膨らんで吐き戻す", "parakeet")
-        assert "crop_distension" in ex and "vomiting" in ex, ex
+        # 吐き戻す maps to regurgitation since the parallel session's round-15
+        # merge (clinically the crop complaint IS regurgitation); either the
+        # direct ID or its vomiting synonym resolution satisfies the complaint.
+        assert "crop_distension" in ex and ({"regurgitation", "vomiting"} & set(ex)), ex
         names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "parakeet")[:5]]
         assert any(("嗉嚢" in n) or ("そのう" in n) or ("甲状腺腫" in n) or ("異物" in n) for n in names), names
 

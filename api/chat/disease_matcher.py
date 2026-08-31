@@ -137,7 +137,7 @@ _SYN: dict[str, list[str]] = {
     "exophthalmos": ["eye_protrusion", "eye_bulging", "eye_swelling", "pop_eye", "enlarged_eye", "proptosis"],
     "jaundice": ["icterus", "yellow_skin"],
     "vomiting": ["regurgitation", "crop_stasis"],
-    "regurgitation": ["vomiting"],
+    "regurgitation": ["vomiting", "crop_stasis"],
     "head_shaking": ["head_bobbing"],
     "gill_swelling": ["gill_redness"],
     "gill_paleness": ["gill_necrosis"],
@@ -200,7 +200,14 @@ _SYN: dict[str, list[str]] = {
     "retained_shed": ["dysecdysis", "retained_skin"],
     "retained_skin": ["dysecdysis", "retained_shed"],
     "crop_swelling": ["crop_stasis", "ingluvitis"],
-    "crop_stasis": ["crop_swelling", "ingluvitis"],
+    "crop_stasis": ["crop_swelling", "ingluvitis", "crop_distension"],
+    # 「そのうが膨らんで」 extracts crop_distension while the crop-disease
+    # symptom sets carry crop_stasis — without this bridge the classic
+    # crop complaint (distension + regurgitation) ranked GI foreign body
+    # over the crop diseases themselves (2026-08 merge regression: the
+    # 吐き戻す alias moved from vomiting, which bridged to crop_stasis,
+    # to the clinically-correct regurgitation, which did not).
+    "crop_distension": ["crop_stasis", "crop_swelling", "ingluvitis"],
     "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
     "red_ventrum": ["red_legs", "skin_redness"],
     "edema": ["swelling", "bloating", "ascites"],
