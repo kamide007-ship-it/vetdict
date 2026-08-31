@@ -30,9 +30,7 @@ class TestSymptomDatabase:
     """Verify symptom database structure and consistency."""
 
     def test_symptom_count(self):
-        assert (
-            len(SYMPTOMS) == 76
-        )  # +hives, +facial_swelling (round-14) + snoring (round-15 BOAS) after merge
+        assert len(SYMPTOMS) == 76  # +hives, +facial_swelling (round-14) + snoring (round-15 BOAS) after merge
 
     def test_all_symptoms_have_required_fields(self):
         for s in SYMPTOMS:
