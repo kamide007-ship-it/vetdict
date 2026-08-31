@@ -3998,7 +3998,7 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
   RECOVER準拠用量（エピネフリン低用量0.01・アトロピン0.02-0.04）・猫ALF 5 mg/kg（Tamura 2021）の逸脱なしを再確認
 - prevalence dead key: **9**（当該種DBに疾患自体が無い既知残、上限15ガード内）
 
-### referenced-but-absent 薬品2剤の補完（`drug_batch_50.py` 新規 — 並行セッションが47-49を先取したため50に改番）
+### referenced-but-absent 薬品2剤の補完（`drug_batch_51.py` 新規 — 並行セッションが47-50を先取したため51に改番）
 用量文脈カタカナトークン監査（第16回スイープ、find_drugs_in_text 実マッチャー突合）で検出:
 - **オクトレオチド（サンドスタチン）** — ガストリノーマ「1-5 μg/kg SC q8-12h」・インスリノーマ
   「10-50 mcg SC q8-12h」・特発性乳糜胸「10 μg/kg SC q8h」の8+参照なのにソマトスタチンアナログが皆無だった。
@@ -4062,12 +4062,12 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 ### 表示数値の同期・キャッシュ
 - `setDefaultStats()`: dog 602疾患/589薬品・cat 567・horse 362・ferret 208薬品、
   pendingStats diseases 6449→**6450**・drugs 651→**654**・symptoms 73→**75**
-- ServiceWorker: `CACHE_NAME` → **v136**（並行セッションのv133-v135と衝突のため2回改番）
+- ServiceWorker: `CACHE_NAME` → **v137**（並行セッションのv133-v136と衝突のため3回改番）
 - 再現手順: `build_id_locks dog` → `migrate_to_sqlite.py`（クリーンビルド）→ `build_disease_search_index.py`
 
 ### mainマージ統合（並行第27弾×2セッションとの衝突解決）
 - `drug_batch_47` 衝突: mainの6剤（ハロペリドール等）を採用し、本セッションの2剤
-  （オクトレオチド/デコキネート）は **batch_50** に改番（47-49は並行セッションが使用）。ビオチンは mainの batch_48 が
+  （オクトレオチド/デコキネート）は **batch_51** に改番（47-50は並行セッションが使用）。ビオチンは mainの batch_48 が
   先に収載していたため重複追加を回避（本文の参照解決は batch_48 で機能）
 - `TestChatClinicalAccuracyAuditRound15/17` クラス名衝突（2回） → 本セッション分を **Round18** に改番、
   `TestBatch47ReferencedDrugs` → **TestBatch50ReferencedDrugs**
