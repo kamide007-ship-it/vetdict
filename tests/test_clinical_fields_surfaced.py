@@ -440,28 +440,38 @@ def test_main_css_disables_mobile_font_inflation():
     assert "text-size-adjust:100%" in html_rule
 
 
-def test_app_js_disease_db_panel_shows_anesthesia_considerations():
-    """Disease-DB detail panels (2026-08 round 14): the per-disease anesthesia
-    contraindication box (renderAnesthesiaConsiderations) rendered only in
-    checker results — a vet browsing the DB for HCM/CKD/epilepsy never saw the
-    α2/NSAID/acepromazine warnings there. The DB detail template must carry a
-    hydration holder, toggleDbItem must hydrate it on expand, and the
-    fetch-once rules loader must return a promise the hydrator can await."""
-    # holder rendered inside the DB detail template with both names carried
-    assert 'class="anesthesia-considerations-holder" data-anes="1"' in APP_JS
-    # hydrator exists, awaits the rules promise, and reuses the shared renderer
-    idx = APP_JS.index("function hydrateAnesthesiaConsiderations(")
-    block = APP_JS[idx : idx + 900]
-    assert "ensureAnesthesiaContraRules().then" in block
-    assert "renderAnesthesiaConsiderations(" in block
-    # wired into the expand path next to the other hydrators
-    assert "hydrateAnesthesiaConsiderations(detail)" in APP_JS
-    # the loader is promise-returning (memoised) so hydration can await it
+def test_app_js_disease_db_detail_surfaces_anesthesia_considerations():
+    """2026-08: the disease-specific anesthesia-considerations box (matched
+    contraindication rules with one-tap drug links) rendered only in checker
+    result cards. A vet browsing the disease DB — e.g. opening 拡張型心筋症 —
+    saw no inline α2-agonist warning and had to pivot to the anesthesia tab
+    manually. The DB detail template must carry an anes-considerations-slot
+    placeholder, toggleDbItem must hydrate it on expansion, and the hydrator
+    must kick the fetch-once rules loader so DB-first users get the box too."""
+    js = (PROJECT_ROOT / "static" / "js" / "app.js").read_text(encoding="utf-8")
+    # placeholder rendered inside the DB detail panel with both names carried
+    assert 'class="anes-considerations-slot" data-anes="1"' in js
+    assert "data-dnja=" in js
+    # hydrator exists, kicks the fetch-once loader, and renders the shared box
+    assert "function hydrateAnesthesiaConsiderations(" in js
+    hyd = js[js.index("function hydrateAnesthesiaConsiderations(") :]
+    hyd = hyd[: hyd.index("\n}\n") + 3]
+    assert "ensureAnesthesiaContraRules" in hyd
+    assert "renderAnesthesiaConsiderations(" in hyd
+    # toggleDbItem calls the hydrator on expansion
+    tog = js[js.index("function toggleDbItem(") : js.index("function hydrateAnesthesiaConsiderations(")]
+    assert "hydrateAnesthesiaConsiderations(detail)" in tog
+
+
+def test_app_js_contra_rules_loader_is_promise_returning_and_prewarmed():
+    """The fetch-once contraindication-rules loader returns a memoised promise
+    (so any hydrator can await it instead of polling blindly), and
+    loadDiseaseDb pre-warms it so the first DB panel expansion hydrates
+    without waiting for the fetch round-trip."""
     lidx = APP_JS.index("function ensureAnesthesiaContraRules(")
     lblock = APP_JS[lidx : lidx + 700]
     assert "return Promise.resolve(anesthesiaContraRules)" in lblock
     assert "return _contraRulesPromise" in lblock
-    # DB data loader warms the rules so first expand hydrates instantly
     didx = APP_JS.index("function loadDiseaseDb(")
     dblock = APP_JS[didx : didx + 600]
     assert "ensureAnesthesiaContraRules()" in dblock

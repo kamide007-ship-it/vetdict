@@ -330,6 +330,12 @@ SYMPTOMS = [
         "category": "respiratory",
     },
     {
+        "id": "snoring",
+        "name_ja": "いびき（睡眠時の呼吸音）",
+        "name_en": "Snoring (Stertor)",
+        "category": "respiratory",
+    },
+    {
         "id": "voice_change",
         "name_ja": "声の変化（かすれ声）",
         "name_en": "Voice Change (Hoarse Bark)",
@@ -1096,6 +1102,7 @@ DISEASES = [
         "symptoms": [
             "labored_breathing",
             "wheezing",
+            "snoring",
             "reverse_sneezing",
             "exercise_intolerance",
             "coughing",
