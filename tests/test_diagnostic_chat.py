@@ -3767,8 +3767,8 @@ class TestChatClinicalAccuracyAuditRound18:
         assert "てんかん" in (top.get("name_ja") or ""), top.get("name_ja")
 
 
-class TestBatch50ReferencedDrugs:
-    """Sweep #19 (parallel-session batch 50): octreotide / decoquinate were referenced with doses
+class TestBatch51ReferencedDrugs:
+    """Sweep #20 (parallel-session batch 51): octreotide / decoquinate were referenced with doses
     in disease treatment texts but absent from the formulary (the biotin gap it
     also surfaced ships in batch 48); the ロイプロリド transliteration (20 avian
     refs) and hyphenated Ca-EDTA (25 refs) never resolved to their entries."""

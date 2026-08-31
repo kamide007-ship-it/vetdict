@@ -4070,7 +4070,7 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
   （オクトレオチド/デコキネート）は **batch_51** に改番（47-50は並行セッションが使用）。ビオチンは mainの batch_48 が
   先に収載していたため重複追加を回避（本文の参照解決は batch_48 で機能）
 - `TestChatClinicalAccuracyAuditRound15/17` クラス名衝突（2回） → 本セッション分を **Round18** に改番、
-  `TestBatch47ReferencedDrugs` → **TestBatch50ReferencedDrugs**
+  `TestBatch47ReferencedDrugs` → **TestBatch51ReferencedDrugs**
 - SYMPTOM_ALIASES 両セッションのユニオン統合。重複キー「吐き戻す」は mainの
   **regurgitation** マッピングを採用（クロップ疾患には臨床的により正確）
 - **マージ回帰の検出・修正**: 吐き戻す→regurgitation 化により旧経路
