@@ -1097,8 +1097,12 @@ SYMPTOM_ALIASES = {
     "甲羅がカビみたい": "shell_discoloration",
     "甲羅が白い": "shell_discoloration",
     "甲羅が変色してる": "shell_discoloration",
-    "便に虫がいる": "diarrhea",
-    "虫が出た": "diarrhea",
+    # 2026-09修正: 便中虫体の目撃は worms_in_stool に直接解決（従来の diarrhea への
+    # 粗いプロキシは臨床的に誤り。爬虫類等の worms_in_stool 非対応語彙は
+    # ID_SYNONYMS のフォールバック鎖 [visible_worms, visible_parasites, diarrhea] で
+    # 従来どおり安全に解決される）
+    "便に虫がいる": "worms_in_stool",
+    "虫が出た": "worms_in_stool",
     "寄生虫": "diarrhea",
     # ウサギ — 肛門/子宮
     "肛門が腫れてる": "perineal_swelling",
@@ -2160,6 +2164,29 @@ SYMPTOM_ALIASES = {
     "お腹がパンパンに膨れて": "bloating",
     # 吐出の動詞形（ヘビのクリプトスポリジウム症・食後吐き戻しの定義的主訴）
     "吐き戻す": "regurgitation",
+    # --- 2026-09 第18回精度スイープ ---
+    # 便中虫体の「ひも状」表現（条虫片節・回虫 — 「白い米粒」「白いひも」系は
+    # 収載済みだが「ひも状の（白い）虫」が欠落し抽出ゼロだった）
+    "ひも状の虫": "worms_in_stool",
+    "ひも状の白い虫": "worms_in_stool",
+    "便に白い虫": "worms_in_stool",
+    "うんちに白い虫": "worms_in_stool",
+    # 体表腫瘤の「腫れもの」表現（「できもの」は収載済み）
+    "腫れもの": "lumps_and_bumps",
+    "腫れ物": "lumps_and_bumps",
+    # 鳥の卵詰まり: 産卵後にケージ底でうずくまる・力む（うずくまり系は
+    # hunched_posture に解決し、鳥では ID_SYNONYMS でケージ底着座へフォールバック）
+    "ケージの底でうずくまる": "sitting_on_cage_floor",
+    "ケージの底にいる": "sitting_on_cage_floor",
+    "うずくまる": "hunched_posture",
+    "力んで": "straining",
+    # フクロモモンガの常同行動・自咬（尾の自咬は tail_chewing 直接解決）
+    "自分の尾を噛む": "tail_chewing",
+    "尻尾を噛む": "tail_chewing",
+    "しっぽを噛む": "tail_chewing",
+    "尾を噛んで": "tail_chewing",
+    "回転する動き": "circling",
+    "同じ動きを繰り返す": "circling",
     # --- 2026-08 第14回スイープ: 連用形・語順ゆれの取りこぼし修正 ---
     # 多飲多尿・多食（「水をたくさん飲む」辞書形のみで「飲んで」連用形が欠落）
     "おしっこの量が多い": "frequent_urination",

@@ -358,6 +358,19 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 嘴過長・スペクタクル残留の種別ID表記ゆれ
     "worms_in_stool": ["visible_worms", "visible_parasites", "diarrhea"],
     "overgrown_beak": ["beak_deformity", "beak_overgrowth"],
+    # 2026-09 第18回スイープ: 「毛が抜けた」→fur_loss_patches が斑状脱毛IDを
+    # 持たない種（ハムスター等）で脱落していた / うずくまり主訴の鳥への橋渡し
+    # （卵詰まりのケージ底着座・膨羽へフォールバック）/ フクロモモンガ尾自咬
+    "fur_loss_patches": ["hair_loss", "circular_hair_loss", "patchy_hair_loss", "alopecia"],
+    "hunched_posture": [
+        "abdominal_pain",
+        "reluctance_to_move",
+        "sitting_on_cage_floor",
+        "fluffed_feathers",
+        "lethargy",
+    ],
+    "tail_chewing": ["self_mutilation", "tail_injury"],
+    "sitting_on_cage_floor": ["fluffed_feathers", "lethargy"],
     "retained_spectacle": ["dysecdysis", "cloudy_eyes", "eye_opacity"],
     # 2026-08 Round 13: フェレット低血糖の口掻き・チンチラ熱中症の耳充血・
     # 乳腺腫大の種別ID表記ゆれ（cat=mammary_masses）

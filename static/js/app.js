@@ -160,7 +160,7 @@ const I18N={
     drugNoMatchHint:"一般名（エンロフロキサシン）・商品名（バイトリル）・英語名（enrofloxacin）のいずれでも検索できます。",
     drugClearFilters:"フィルタを解除して %n% 件を表示",
     allCategories:"全カテゴリ",allSpecies:"全動物種",speciesAny:"動物種（任意）",
-    interactionCheckerTitle:"⚠️ 薬品相互作用チェッカー",interactionCheckerDesc:"複数の薬品を併用する際の相互作用を確認します。薬品名（半角英数）をカンマ区切りで入力してください。",interactionCheckBtn:"チェック",
+    interactionCheckerTitle:"⚠️ 薬品相互作用チェッカー",interactionCheckerDesc:"複数の薬品を併用する際の相互作用を確認します。薬品名（一般名・商品名・日英どちらでも可）をカンマ区切りで入力するか、薬品リストの「相互作用チェックに追加」からワンタップで追加できます。",interactionCheckBtn:"チェック",interactionInputPh:"例: バイトリル, メロキシカム",
     drugCompareTitle:"他の獣医薬リファレンスとの比較",
     drugCompareHint:"（クリックで展開）",
     drugCompareIntro:"日常診療での使い分けの参考に、VetDict・Plumb's Veterinary Drugs・VIN（Veterinary Information Network）の特徴を比較しました。",
@@ -435,7 +435,7 @@ const I18N={
     drugNoMatchHint:"You can search by generic name (enrofloxacin), brand name (Baytril), or Japanese name.",
     drugClearFilters:"Clear filters to show %n% matches",
     allCategories:"All Categories",allSpecies:"All Species",speciesAny:"Species (optional)",
-    interactionCheckerTitle:"⚠️ Drug Interaction Checker",interactionCheckerDesc:"Check interactions when combining multiple drugs. Enter comma-separated drug names (lowercase Latin).",interactionCheckBtn:"Check",
+    interactionCheckerTitle:"⚠️ Drug Interaction Checker",interactionCheckerDesc:"Check interactions when combining multiple drugs. Enter comma-separated drug names (generic, brand, Japanese or English all work), or tap \"Add to interaction checker\" on any drug card.",interactionCheckBtn:"Check",interactionInputPh:"e.g. Baytril, meloxicam",
     drugCompareTitle:"How VetDict compares to other veterinary drug references",
     drugCompareHint:"(click to expand)",
     drugCompareIntro:"A side-by-side look at VetDict, Plumb's Veterinary Drugs, and VIN (Veterinary Information Network) to help you pick the right tool for the job.",
@@ -1546,24 +1546,24 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:554,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:536,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:351,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:257,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:68,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:130,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
-    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:225,drugs:91,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:197,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:557,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:538,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:354,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:259,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:69,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:131,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:225,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:198,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:223,drugs:63,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:72,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:149,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:483,drugs:233,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:410,drugs:233,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:257,drugs:233,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:260,drugs:101,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:248,drugs:108,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:218,drugs:107,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:213,drugs:103,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:73,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:151,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:483,drugs:234,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:410,drugs:234,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:257,drugs:234,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:260,drugs:102,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:248,drugs:109,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:218,drugs:108,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:213,drugs:104,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:251,drugs:18,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:28,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:1,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
@@ -1571,7 +1571,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6450,
     species:21,
-    drugs:610,
+    drugs:613,
     symptoms:77,
     protocols:188
   };
@@ -6100,6 +6100,35 @@ function setupInteractionChecker(){
   if(input)input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.isComposing){e.preventDefault();runInteractionCheck();}});
 }
 
+/* One-tap add from a drug detail card into the interaction checker: appends
+   the drug's display name to the input (dedup), opens the accordion, lands on
+   it, and auto-runs once two or more drugs are queued. The backend resolves
+   names (Japanese, brand, English) via resolve_drug_reference, so no ids are
+   ever needed. */
+function addDrugToInteractionChecker(name){
+  if(!name)return;
+  const input=document.getElementById("interactionDrugIds");
+  const acc=document.querySelector("details.interaction-checker");
+  if(!input)return;
+  const parts=(input.value||"").split(/[,，、]+/).map(s=>s.trim()).filter(Boolean);
+  if(!parts.some(p=>p.toLowerCase()===name.toLowerCase()))parts.push(name);
+  input.value=parts.join(", ");
+  if(acc)acc.open=true;
+  const wrap=acc||input;
+  scrollToAnchor(wrap);
+  trackEvent("interaction_check_add",{drug:name,count:parts.length});
+  if(parts.length>=2){runInteractionCheck();}
+  else{
+    const results=document.getElementById("interactionResults");
+    if(results){
+      const msg=currentLang==="ja"
+        ?`「${escapeHtml(name)}」を追加しました。もう1剤を薬品リストから「相互作用チェックに追加」するか、入力欄に薬品名を足してください。`
+        :`Added "${escapeHtml(name)}". Add one more drug from the list (or type another name) to run the check.`;
+      results.innerHTML=`<div role="status" style="padding:10px 12px;background:var(--gray-100);border-radius:6px;color:var(--gray-700);font-size:.82rem">${msg}</div>`;
+    }
+  }
+}
+
 function runInteractionCheck(){
   const input=document.getElementById("interactionDrugIds");
   const speciesSel=document.getElementById("interactionSpecies");
@@ -6107,7 +6136,10 @@ function runInteractionCheck(){
   if(!input||!results)return;
   const raw=(input.value||"").trim();
   if(!raw){results.innerHTML="";return;}
-  const drugIds=raw.split(/[,，、]+/).map(s=>s.trim().toLowerCase().replace(/\s+/g,"_").replace(/-/g,"_")).filter(Boolean);
+  /* Send raw trimmed tokens — the backend resolves ids, Japanese names,
+     brand names and English names (resolve_drug_reference). The old
+     client-side lowercase/underscore mangling made every non-id input fail. */
+  const drugIds=raw.split(/[,，、]+/).map(s=>s.trim()).filter(Boolean);
   if(drugIds.length<2){
     const msg=currentLang==="ja"?"⚠ 2つ以上の薬品名をカンマ区切りで入力してください。":"⚠ Please enter at least two drug names separated by commas.";
     results.innerHTML=`<div role="alert" style="padding:10px 12px;background:#fef3c7;border-left:4px solid #d97706;border-radius:6px;color:#92400e;font-size:.84rem">${msg}</div>`;
@@ -6134,11 +6166,23 @@ function renderInteractionResults(data,drugIds){
   const unknown=data.unknown_drug_ids||[];
   const recognized=data.recognized_drug_ids||(drugIds||[]).filter(d=>!unknown.includes(d));
   let html="";
-  // Surface unknown drug IDs so users know they typed a wrong name.
+  // Show what each input resolved to (バイトリル→エンロフロキサシン etc.) so
+  // brand-name inputs are transparently confirmed.
+  const resolved=data.resolved||[];
+  if(resolved.length){
+    const names=resolved.map(r=>{
+      const disp=currentLang==="ja"?(r.name_ja||r.name||r.id):(r.name||r.id);
+      const base=String(disp).split(/[（(]/)[0].trim();
+      return r.input&&base&&r.input.toLowerCase()!==base.toLowerCase()&&r.input.toLowerCase()!==String(disp).toLowerCase()
+        ?`${escapeHtml(r.input)}→${escapeHtml(base)}`:escapeHtml(base||r.input);
+    });
+    html+=`<div style="font-size:.78rem;color:var(--gray-600);margin-bottom:8px">${currentLang==="ja"?"認識":"Recognized"}: ${names.join(" / ")}</div>`;
+  }
+  // Surface unknown inputs so users know which name didn't match.
   if(unknown.length){
     const msg=currentLang==="ja"
-      ?`薬品名が認識できませんでした: <strong>${unknown.map(escapeHtml).join(", ")}</strong><br/><span style="font-size:.78rem;opacity:.85">下の検索バーから正しい薬品IDをご確認ください（半角英数小文字 / 例: meloxicam, prednisolone）</span>`
-      :`Unrecognized drug names: <strong>${unknown.map(escapeHtml).join(", ")}</strong><br/><span style="font-size:.78rem;opacity:.85">Check the correct drug ID using the search bar below (lowercase Latin, e.g. meloxicam, prednisolone).</span>`;
+      ?`薬品名が認識できませんでした: <strong>${unknown.map(escapeHtml).join(", ")}</strong><br/><span style="font-size:.78rem;opacity:.85">一般名・商品名・英語名のいずれでも入力できます（例: バイトリル, メロキシカム）。薬品リストの「相互作用チェックに追加」からワンタップでも追加できます。</span>`
+      :`Unrecognized drug names: <strong>${unknown.map(escapeHtml).join(", ")}</strong><br/><span style="font-size:.78rem;opacity:.85">Generic, brand, or Japanese names all work (e.g. Baytril, meloxicam) — or tap "Add to interaction checker" on any drug card.</span>`;
     html+=`<div role="alert" style="padding:10px 12px;background:#fef3c7;border-left:4px solid #d97706;border-radius:6px;color:#92400e;font-size:.84rem;margin-bottom:8px">⚠ ${msg}</div>`;
   }
   if(ix.length===0&&sw.length===0){
@@ -6299,6 +6343,7 @@ function renderDrugList(){
         </div>
         ${buildDrugDiseasesPlaceholder(d.id||"")}
         ${(()=>{const q=_anesQueryForDrug(d.name||"",d.name_ja||"");return q?`<button type="button" class="drug-anes-protocols-link" data-anes-query="${escapeHtml(q)}">\u{1F489} ${currentLang==="ja"?"この薬品を使う麻酔プロトコルを見る":"View anesthesia protocols using this drug"}</button>`:"";})()}
+        <button type="button" class="drug-interaction-add" data-drug-name="${escapeHtml(currentLang==="ja"?(d.name_ja||d.name||d.id):(d.name||d.id))}">⚠️ ${currentLang==="ja"?"相互作用チェックに追加":"Add to interaction checker"}</button>
       </div>
     </div>`;
   }).join("");
@@ -7127,6 +7172,10 @@ function _attachDbItemHandlers(container){
     }
     const diffBtn=e.target.closest(".differential-check-btn");
     if(diffBtn){e.preventDefault();runDifferentialFromDisease(diffBtn.dataset.ids);return;}
+    /* Drug detail → interaction checker: one-tap add so combinations are
+       built by tapping two drug cards instead of typing lowercase drug ids. */
+    const ixAdd=e.target.closest(".drug-interaction-add");
+    if(ixAdd){e.preventDefault();addDrugToInteractionChecker(ixAdd.dataset.drugName||"");return;}
     if(e.target.closest("a"))return;if(e.target.closest(".disease-detail.open"))return;const item=e.target.closest(".disease-db-item");if(item)toggleDbItem(item);
   });
   container.addEventListener("keydown",function(e){
