@@ -2713,3 +2713,85 @@ class TestBatch49FluorouracilAndIronAliases:
                     offenders.append((d["id"], repr(it)[:40]))
                     break
         assert not offenders, offenders
+
+
+class TestBatch51ReferencedButAbsentSweep17:
+    """2026-09 17th referenced-but-absent sweep (dosage-context token audit):
+    cannabidiol/CBD was the single most-referenced absent agent (260 mentions —
+    behavioural/OA/refractory-epilepsy entries cite McGrath 2019 & Gamble 2018
+    doses, yet only a sponsor supplement existed), L-tryptophan (49 behavioural
+    refs alongside already-listed L-theanine/alpha-casozepine) and hCG (48
+    refs — small-herbivore ovarian cysts, ferret persistent estrus, mare
+    ovulation induction) were absent, and mineral_oil lacked the pure-kanji
+    和名「鉱物油」(15 refs)."""
+
+    def test_batch51_drugs_present_with_bilingual_dosing(self):
+        from api.drug_dictionary import DRUGS
+
+        by_id = {d["id"]: d for d in DRUGS}
+        for did in ("cannabidiol", "l_tryptophan", "hcg"):
+            d = by_id.get(did)
+            assert d is not None, f"{did} missing from formulary"
+            for sp, info in d["species_info"].items():
+                assert (info.get("dosage") or "").strip(), f"{did}/{sp} missing dosage"
+                assert (info.get("dosage_ja") or "").strip(), f"{did}/{sp} missing dosage_ja"
+
+    def test_cannabidiol_safety_facts_and_species_gating(self):
+        # Definitional safety facts: adjunct-only, ALT/ALP monitoring, CYP450
+        # interaction with phenobarbital; birds/reptiles are explicitly gated
+        # off (VetDict's own behavioural content excludes them from CBD use).
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id("cannabidiol")
+        dog = d["species_info"]["dog"]
+        assert "2.5 mg/kg" in dog["dosage"] and "McGrath" in dog["dosage"]
+        assert "ALT" in dog["notes_ja"] or "肝酵素" in dog["notes_ja"]
+        assert d["species_info"]["bird"]["safe"] is False
+        assert d["species_info"]["reptile"]["safe"] is False
+        assert any(i["drug"] == "Phenobarbital" for i in d["drug_interactions"])
+
+    def test_l_tryptophan_never_iv_and_serotonin_interactions(self):
+        # IV tryptophan is haemolytic in horses (Grimmett & Sillence 2005) and
+        # MAO-inhibitor combination risks serotonin syndrome.
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id("l_tryptophan")
+        assert "静注" in d["contraindications_ja"] or "IV" in d["contraindications"]
+        horse = d["species_info"]["horse"]
+        assert "溶血" in horse["notes_ja"]
+        assert any(i["drug"] == "Selegiline" and i["severity"] == "major" for i in d["drug_interactions"])
+
+    def test_hcg_covers_classic_exotic_and_equine_indications(self):
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id("hcg")
+        assert "100 IU/kg" in d["species_info"]["guinea_pig"]["dosage"]
+        # ferret persistent estrus is the classic exotic indication
+        fer = d["species_info"]["ferret"]
+        assert "100 IU" in fer["dosage"] and "72" in fer["dosage_ja"]
+        horse = d["species_info"]["horse"]
+        assert "1,500-3,000 IU" in horse["dosage"] or "1500-3000" in horse["dosage"]
+        # serous cysts respond poorly — OHE definitive (guards against
+        # presenting hCG as curative for guinea-pig ovarian cysts)
+        assert "漿液性" in d["species_info"]["guinea_pig"]["notes_ja"]
+
+    def test_sweep17_aliases_resolve_in_text_matcher(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = [
+            ("CBD（カンナビジオール）2 mg/kg PO q12h", "cannabidiol"),
+            ("CBDオイル（0.5-1.0 mg/kg PO q12h、安全性データ限定的）", "cannabidiol"),
+            ("CBD oil (1-2 mg/kg PO q12h; limited safety data)", "cannabidiol"),
+            ("L-トリプトファン 20 mg/kg PO q24h（セロトニン前駆体）", "l_tryptophan"),
+            ("hCG 100 IU/kg IM 単回", "hcg"),
+            ("鉱物油 0.5 mL PO q24h × 3日（潤滑）", "mineral_oil"),
+        ]
+        for text, want in cases:
+            hits = [h["id"] for h in find_drugs_in_text(text)]
+            assert want in hits, f"{want} not resolved from {text!r}: {hits}"
+        # precision guards: GnRH mentions must not chip hCG (bare
+        # ゴナドトロピン is a substring of ゴナドトロピン放出ホルモン),
+        # and lowercase "hcg" must not match (case-sensitive keyword).
+        hits = [h["id"] for h in find_drugs_in_text("GnRH（ゴナドトロピン放出ホルモン）アゴニストのデスロレリン")]
+        assert "hcg" not in hits
+        assert "hcg" not in [h["id"] for h in find_drugs_in_text("hcg 100 iu")]

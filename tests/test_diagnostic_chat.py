@@ -3657,3 +3657,73 @@ class TestChatClinicalAccuracyAuditRound17:
         top3 = [r.disease.name_en for r in res2[:4]]
         assert any("Laminitis" in n for n in top3), top3
         assert "Hoof Abscess" in [r.disease.name_en for r in res2[:6]], top3
+
+
+class TestChatClinicalAccuracyAuditRound18:
+    """2026-09 audit round 18: fresh 24-case sweep — 4 extraction zeros fixed.
+    Root causes: string-of-worms phrasing (ひも状の虫) missing and the legacy
+    reptile-section alias 「便に虫がいる」 mis-mapped worm sightings to
+    *diarrhea*; the past-tense 「毛が抜けた」→fur_loss_patches had no extractor
+    fallback for species without a patchy-alopecia ID (hamster dropped it);
+    the egg-binding complaint 「産卵後にケージの底でうずくまる 力んでいる」
+    extracted nothing (no crouching/straining owner phrasing for birds); and
+    the sugar-glider stereotypy/tail-self-mutilation complaint had no aliases."""
+
+    def test_dog_string_worm_sighting_ranks_intestinal_parasites(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("便にひも状の白い虫がいた")
+        assert "worms_in_stool" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "寄生虫" in top.get("name_ja", ""), top.get("name_ja")
+
+    def test_worm_sighting_alias_no_longer_mismaps_to_diarrhea(self):
+        # 「便に虫がいる」 was mapped to *diarrhea* (a wrong legacy proxy that
+        # also beat the correct shorter key 便に虫 by longest-match).
+        from api.chat.symptom_extractor import _extract_species_symptoms
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        assert "worms_in_stool" in extract_symptoms_from_text("便に虫がいる")
+        # reptiles keep resolving through the fallback chain (…→diarrhea)
+        ex = _extract_species_symptoms("便に虫がいる 下痢", "reptile")
+        assert "diarrhea" in ex, ex
+
+    def test_hamster_lump_and_past_tense_hair_loss_extract(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("体に腫れものがある 毛が抜けた", "hamster")
+        assert "hair_loss" in ex, ex
+        assert "skin_masses" in ex or "skin_lump" in ex, ex
+
+    def test_bird_egg_binding_complaint_ranks_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("産卵後にケージの底でうずくまる 力んでいる", "bird")
+        assert "sitting_on_cage_floor" in ex and "straining" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "bird", lang="ja")[0]
+        name = top.get("name_ja") or top.get("name")
+        assert "卵詰まり" in name, name
+
+    def test_sugar_glider_stereotypy_and_tail_chewing_rank_self_mutilation(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("夜に回転する動きを繰り返す 自分の尾を噛む", "sugar_glider")
+        assert "circling" in ex and "tail_chewing" in ex, ex
+        names = [
+            d.get("name_ja") or d.get("name")
+            for d in _match_species_symptoms_to_diseases(ex, "sugar_glider", lang="ja")[:3]
+        ]
+        assert any("自己損傷" in n or "自咬" in n or "自傷" in n for n in names), names
+
+    def test_mammal_hunched_posture_guard_unchanged(self):
+        # うずくまる must keep resolving to hunched_posture for mammals
+        # (rabbit GI stasis pathway) — the bird bridge is a fallback only.
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("うずくまるようにじっとして食欲がない", "rabbit")
+        assert "hunched_posture" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "rabbit", lang="ja")[0]
+        assert "うっ滞" in (top.get("name_ja") or ""), top.get("name_ja")

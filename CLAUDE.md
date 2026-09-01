@@ -3987,3 +3987,79 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
 
 ### テスト・CI（マージ後）
 - ServiceWorker: `CACHE_NAME` v133/v134 → **v135**（並行セッションと同版衝突のため改番）
+
+## 2026-09セッション（第30弾: CBD/トリプトファン/hCG補完 + 相互作用チェッカーの自然言語入力対応 + チャット精度第18弾）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,107件合格**（34 skip）
+- 配信SQLiteクリーンビルド: 6,892疾患、treatment/prevention/prognosis **100%**、主要臨床フィールド空欄 **0**、キリル文字混入 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（608薬品時点、全species_info検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- prevalence dead key: **9**（当該種DBに疾患自体が無い既知残、上限15ガード内）
+
+### referenced-but-absent 薬品3剤の補完（`drug_batch_51.py` 新規、608→611薬品）
+用量文脈トークン監査（第17回スイープ、スニペット文脈で find_drugs_in_text 突合）で検出:
+- **カンナビジオール（CBD）** — **260参照で最多の欠落**。行動学・OA・難治てんかんエントリが
+  「CBD 2 mg/kg PO q12h（McGrath 2019）」等の用量付きで参照するのにECVNスポンサー製品しか無く、
+  中立的なモノグラフ（エビデンス用量+CYP450/ALT安全情報）が欠落していた。犬（OA: Gamble 2018 /
+  てんかん補助: McGrath 2019 JAVMA RCT 2.5 mg/kg）・猫（Deabold 2019 PK）・馬（FEI禁止物質明記）・
+  ウサギ。**鳥・爬虫類は safe:False**（自サイトの行動学コンテンツ自身が非推奨と明記 — データ皆無）。
+  フェノバルビタールCYP450相互作用・ALT/ALPモニタリング・THCフリー限定を明記
+- **L-トリプトファン** — 行動学49参照のセロトニン前駆体（姉妹サプリのL-テアニン/αカソゼピンは収載済み）。
+  DeNapoli 2000 JAVMA。**馬の静注は溶血のため絶対禁止**（Grimmett & Sillence 2005）・
+  セレギリン併用のセロトニン症候群リスクを明記
+- **hCG（ヒト絨毛性ゴナドトロピン）** — 48参照。小型草食獣の卵巣嚢胞（100 IU/kg IM、
+  モルモットの漿液性嚢胞は反応不良でOHEが根治的と明記）・**フェレット発情持続/エストロジェン中毒**
+  （100 IU/頭、72時間で外陰退縮確認 — 自サイトの再生不良性貧血エントリが名指し）・
+  馬の排卵誘起（1,500-3,000 IU、反復投与での抗hCG抗体形成→デスロレリン代替を明記）
+- **エイリアス**: 鉱物油（純漢字3字）→mineral_oil（15参照）、hCG は **case-sensitive キーワード**
+  として索引（3文字Latinは通常索引対象外だが、小文字h+大文字CGの混在は自然文に出現しないため精密）。
+  bare「ゴナドトロピン」は GnRH（ゴナドトロピン放出ホルモン）誤爆のため不使用
+- 動線検証: 逆引き「この薬品を使う疾患」= cannabidiol 50疾患 / l_tryptophan 22 / hcg 46 —
+  鑑別診断・チャット候補カードの関連薬品チップと双方向で自動接続
+
+### 相互作用チェッカーの自然言語入力対応 + ワンタップ動線（UX）
+- **バグ**: 相互作用チェッカーは「半角英数小文字の drug id」完全一致のみ受け付け、
+  「バイトリル」「メロキシカム」のような臨床現場の自然な表記が**全て unknown** になっていた
+  （プレースホルダ自体が "meloxicam, prednisolone" と id 入力を要求）
+- **バックエンド**: `resolve_drug_reference()` 新設 — id/統合旧id → name/name_ja/括弧前ステム/
+  search_aliases（商品名含む）の正規化完全一致（ひらがな・全角半角吸収）→ 一意な部分一致（4文字以上）
+  の3段解決。`/api/drugs/check-interactions` が各入力トークンを解決し `resolved`
+  （input→id/name/name_ja のマッピング）を返却。「ばいとりる」「メタカム」「ラシックス」
+  「クラバモックス」等が全て解決
+- **フロントエンド**: クライアント側の小文字/アンダースコア変換（非idを全滅させていた）を廃止し
+  生トークンを送信。結果に「認識: バイトリル→エンロフロキサシン」確認行を表示。
+  unknown ヒントを「一般名・商品名・日英いずれも可」に更新、プレースホルダを
+  「例: バイトリル, メロキシカム」に変更（i18n: interactionInputPh）
+- **ワンタップ動線**: 薬品詳細カードに「⚠️ 相互作用チェックに追加」ボタンを新設
+  （`.drug-interaction-add`、委譲ハンドラでキャッシュ再描画後も動作）。タップで薬品名を
+  チェッカー入力に追加（重複除去）→アコーディオンを開いて着地→2剤以上で自動チェック実行。
+  タイピング不要で2枚の薬品カードをタップするだけで併用チェックが完了。
+  GA4 `interaction_check_add` イベント。CSS `.drug-interaction-add`（アンバー系）
+
+### 診断チャット精度 第18弾（24症例フレッシュスイープ 4 MISS → 全症例合格）
+- **エイリアス誤マッピング修正**: 「便に虫がいる」→ **diarrhea**（爬虫類セクションの粗いプロキシ）に
+  誤マッピングされ、正しい短キー「便に虫」→worms_in_stool に最長一致で勝っていた →
+  worms_in_stool に是正（爬虫類は ID_SYNONYMS フォールバック鎖 […→diarrhea] で従来どおり安全）。
+  「虫が出た」も同様に是正
+- **新規エイリアス**: ひも状の虫/ひも状の白い虫/便に白い虫（条虫片節・回虫 — 抽出ゼロだった）、
+  腫れもの/腫れ物→lumps_and_bumps、ケージの底でうずくまる→sitting_on_cage_floor、
+  うずくまる→hunched_posture、力んで→straining、自分の尾を噛む/尻尾を噛む→tail_chewing、
+  回転する動き/同じ動きを繰り返す→circling
+- **extractor ID_SYNONYMS 追加**: fur_loss_patches→[hair_loss,…]（「毛が抜けた」（過去形）が
+  斑状脱毛IDを持たないハムスター等で脱落していた）、hunched_posture→[abdominal_pain,
+  reluctance_to_move, sitting_on_cage_floor, fluffed_feathers, lethargy]（哺乳類の腹痛姿勢と
+  鳥のケージ底うずくまりを1つの主訴語で両立）、tail_chewing→[self_mutilation, tail_injury]、
+  sitting_on_cage_floor→[fluffed_feathers, lethargy]
+- 修正後: 犬「便にひも状の白い虫」→腸管寄生虫症 rank1、ハムスター「体に腫れもの 毛が抜けた」→
+  皮膚腫瘤ddx、鳥「産卵後にケージの底でうずくまる 力んでいる」→**卵詰まり rank1**、
+  フクロモモンガ「回転する動きを繰り返す 自分の尾を噛む」→自己損傷-尾 rank1。
+  ガード検証: ウサギうずくまり→GI stasis rank1 維持・猫「白い米粒」→瓜実条虫 rank1 維持・
+  爬虫類の虫目撃→寄生虫ddx維持
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound18`（6件）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()` 17種の薬品数を実測同期（dog 555, cat 536, horse 354, rabbit 259, 鳥系 234 等）、
+  pendingStats drugs 608→**611**
+- ServiceWorker: `CACHE_NAME` v136 → **v137**
+- 再現手順: `migrate_to_sqlite.py`（611薬品反映。疾患名不変のため検索インデックス no-op）
