@@ -93,3 +93,71 @@ def test_no_duplicate_pairs():
     found = find_interactions(["meloxicam", "carprofen", "meloxicam"])
     pairs = {tuple(sorted([f["drug_a"], f["drug_b"]])) for f in found}
     assert len(pairs) == len(found)
+
+
+class TestInteractionCheckerNameResolution:
+    """2026-09 UX: the interaction checker used to accept only exact lowercase
+    drug ids — バイトリル/メロキシカム or brand names all came back unknown.
+    resolve_drug_reference now resolves ids, Japanese names, English names and
+    brand aliases (with kana/width normalisation), and the endpoint returns a
+    `resolved` mapping so the UI can confirm what each input matched."""
+
+    def test_resolve_drug_reference_accepts_natural_inputs(self):
+        from api.drug_dictionary import resolve_drug_reference
+
+        cases = {
+            "meloxicam": "meloxicam",  # id (legacy behavior)
+            "メロキシカム": "meloxicam",  # Japanese name
+            "バイトリル": "enrofloxacin",  # brand name
+            "ばいとりる": "enrofloxacin",  # hiragana input
+            "メタカム": "meloxicam",  # brand name
+            "ラシックス": "furosemide",  # human brand in vet use
+            "クラバモックス": "amoxicillin_clavulanate",
+            "CBD": "cannabidiol",  # short Latin exact alias
+            "hCG": "hcg",
+        }
+        for token, want in cases.items():
+            assert resolve_drug_reference(token) == want, token
+        assert resolve_drug_reference("存在しない薬") is None
+        assert resolve_drug_reference("") is None
+
+    def test_check_interactions_endpoint_resolves_names(self, client=None):
+        import json
+
+        from api.vetdict_api import app
+
+        c = app.test_client()
+        r = c.post(
+            "/api/drugs/check-interactions",
+            data=json.dumps({"drug_ids": ["バイトリル", "メロキシカム", "謎の薬X"], "species": "dog"}),
+            content_type="application/json",
+        )
+        assert r.status_code == 200
+        d = r.get_json()
+        assert d["unknown_drug_ids"] == ["謎の薬X"]
+        ids = {row["id"] for row in d["resolved"]}
+        assert ids == {"enrofloxacin", "meloxicam"}
+        # every resolved row carries display names for the UI confirmation line
+        for row in d["resolved"]:
+            assert row["name"] and "input" in row
+        # the classic NSAID+steroid pair still fires through name inputs
+        r2 = c.post(
+            "/api/drugs/check-interactions",
+            data=json.dumps({"drug_ids": ["メロキシカム", "プレドニゾロン"]}),
+            content_type="application/json",
+        )
+        assert r2.get_json()["total_interactions"] >= 1
+
+    def test_app_js_one_tap_add_to_interaction_checker(self):
+        from pathlib import Path
+
+        js = Path("static/js/app.js").read_text(encoding="utf-8")
+        # one-tap add helper + delegated routing from drug detail cards
+        assert "function addDrugToInteractionChecker" in js
+        assert 'closest(".drug-interaction-add")' in js
+        assert "drug-interaction-add" in js and "相互作用チェックに追加" in js
+        # the client must send raw trimmed tokens (no lowercase/underscore
+        # mangling that broke every non-id input)
+        assert 'replace(/\\s+/g,"_")' not in js.split("function runInteractionCheck")[1].split("function ")[0]
+        css = Path("static/css/main.css").read_text(encoding="utf-8")
+        assert ".drug-interaction-add" in css

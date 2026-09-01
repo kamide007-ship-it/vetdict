@@ -74,6 +74,7 @@ from api.drug_batch_47 import DRUGS_BATCH_47
 from api.drug_batch_48 import DRUGS_BATCH_48
 from api.drug_batch_49 import DRUGS_BATCH_49
 from api.drug_batch_50 import DRUGS_BATCH_50
+from api.drug_batch_51 import DRUGS_BATCH_51
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10753,6 +10754,17 @@ for _drug50 in DRUGS_BATCH_50:
         DRUGS.append(_drug50)
         _drug_index[_drug50["id"]] = _drug50
 
+# Batch 51: 2026-09監査（第17回スイープ）
+# （カンナビジオール/CBD — 260参照で最多の欠落。行動学・OA・難治てんかんの補助として
+#  自サイトが用量付きで参照（McGrath 2019 / Gamble 2018）するのに中立的な
+#  モノグラフが無かった（スポンサー製品のみ）;
+#  L-トリプトファン — 行動学49参照のセロトニン前駆体（L-テアニン/αカソゼピンは収載済み）;
+#  hCG — 小型草食獣の卵巣嚢胞・馬の排卵誘起で48参照のLH様ゴナドトロピン）
+for _drug51 in DRUGS_BATCH_51:
+    if _drug51["id"] not in _drug_index:
+        DRUGS.append(_drug51)
+        _drug_index[_drug51["id"]] = _drug51
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11217,6 +11229,44 @@ def resolve_drug_id(drug_id: str) -> str:
     return _DRUG_ALIAS_TO_ID.get(drug_id, drug_id)
 
 
+def resolve_drug_reference(token: str) -> str | None:
+    """ユーザー入力の薬品参照（id・日本語名・英語名・商品名エイリアス）を正規 id に解決する。
+
+    相互作用チェッカーの入力解決用。従来は半角英数の drug id 完全一致のみで、
+    「バイトリル」「メロキシカム」のような臨床現場の自然な表記が全て
+    unknown になっていた。解決順:
+      1. id / 統合旧 id（従来動作 — 空白・ハイフンを _ に正規化）
+      2. name / name_ja / 括弧前ステム / search_aliases の正規化完全一致
+         （_normalize_search_text: ひらがな→カタカナ・全角半角・大文字小文字を吸収）
+      3. 一意な部分一致（4文字以上のみ、複数候補は曖昧として None）
+    """
+    tok = (token or "").strip()
+    if not tok:
+        return None
+    id_cand = tok.lower().replace(" ", "_").replace("-", "_")
+    if get_drug_by_id(id_cand) is not None:
+        return resolve_drug_id(id_cand)
+    q = _normalize_search_text(tok)
+    if not q:
+        return None
+    exact: list[str] = []
+    partial: list[str] = []
+    for d in DRUGS:
+        names = [d.get("name", ""), d.get("name_ja", "")]
+        stems = [re.split(r"[（(]", n)[0].strip() for n in names]
+        cands = {_normalize_search_text(x) for x in names + stems + list(d.get("search_aliases") or []) if x}
+        cands.discard("")
+        if q in cands:
+            exact.append(d["id"])
+        elif len(q) >= 4 and any(q in c for c in cands):
+            partial.append(d["id"])
+    if exact:
+        return exact[0]
+    if len(partial) == 1:
+        return partial[0]
+    return None
+
+
 # Pre-compute drug count per category (O(n) once instead of O(categories×n) per request)
 _DRUG_COUNT_BY_CATEGORY: dict[str, int] = {}
 for _d in DRUGS:
@@ -11293,7 +11343,13 @@ _PURE_KATAKANA_RE = re.compile(r"^[ァ-ヴー]{4,}$")
 # product as capitalised "Critical Care" (1,000+ entries), while generic prose
 # ("critical care monitoring") is lowercase — case distinguishes them where the
 # lowercased index cannot.
-_CASE_SENSITIVE_KEYWORDS = {"Critical Care": "critical_care_herbivore"}
+_CASE_SENSITIVE_KEYWORDS = {
+    "Critical Care": "critical_care_herbivore",
+    # 2026-09 sweep #17: 治療文は「hCG 100 IU/kg IM」の3文字Latin頭字語で参照（48件）。
+    # 小文字h+大文字CGの混在ケースは自然文に出現しないため case-sensitive で精密に解決
+    # （4文字未満のLatinは通常索引の対象外）。
+    "hCG": "hcg",
+}
 
 # Keyword-level negative contexts: an occurrence that falls inside one of
 # these longer strings is not a drug mention. 生食 (clinical shorthand for
@@ -11337,6 +11393,7 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "mineral_oil": (
         "流動パラフィン",  # 括弧内にのみ載る和名（漢字混じりのため tier-4 純カタカナ索引対象外）— 16参照
         "パラフィンオイル",  # 11参照
+        "鉱物油",  # 2026-09 sweep #17: 純漢字の和名 — 15参照（ハムスター毛球・チンチラ便秘・ヘビ腸閉塞等）
     ),
     "pyrantel_pamoate": (
         "パモ酸ピランテル",  # canonical: ピランテルパモ酸塩 — 語順逆転形 10参照
@@ -12210,14 +12267,34 @@ def api_check_interactions():
             }
         )
 
-    # Identify which submitted IDs are recognized so the UI can warn on typos.
-    recognized = [did for did in drug_ids if get_drug_by_id(did) is not None]
-    unknown = [did for did in drug_ids if get_drug_by_id(did) is None]
+    # Resolve each token (id / Japanese name / brand name / English name) so
+    # clinicians can type バイトリル or メロキシカム instead of raw drug ids.
+    resolved: list[dict] = []
+    unknown: list[str] = []
+    seen_ids: set[str] = set()
+    for raw in drug_ids:
+        rid = resolve_drug_reference(str(raw))
+        if rid is None:
+            unknown.append(str(raw))
+            continue
+        if rid in seen_ids:
+            continue
+        seen_ids.add(rid)
+        d = get_drug_by_id(rid) or {}
+        resolved.append(
+            {
+                "input": str(raw),
+                "id": rid,
+                "name": d.get("name", rid),
+                "name_ja": d.get("name_ja", ""),
+            }
+        )
+    resolved_ids = [r["id"] for r in resolved]
 
-    interactions = find_interactions(drug_ids)
+    interactions = find_interactions(resolved_ids)
     species_warnings = []
     if species:
-        for did in drug_ids:
+        for did in resolved_ids:
             species_warnings.extend(find_species_specific_warnings(did, species))
 
     return jsonify(
@@ -12225,7 +12302,8 @@ def api_check_interactions():
             "interactions": interactions,
             "species_specific_warnings": species_warnings,
             "total_interactions": len(interactions),
-            "recognized_drug_ids": recognized,
+            "recognized_drug_ids": resolved_ids,
+            "resolved": resolved,
             "unknown_drug_ids": unknown,
         }
     )
