@@ -11,6 +11,9 @@ from api.chat.symptom_aliases import SYMPTOM_ALIASES
 # Hoisted to module scope so it can be reused by name-resolution helpers
 # (e.g. follow-up question label localization).
 ID_SYNONYMS: dict[str, list[str]] = {
+    # Urticaria/angioedema (2026-08 round 14): legacy dog vocabulary carries
+    # hives directly; species vocabularies express wheals as rashes/lesions.
+    "hives": ["urticaria", "wheals", "skin_rashes", "skin_lesions", "swelling"],
     # Appetite
     "loss_of_appetite": ["appetite_loss", "anorexia", "poor_appetite", "decreased_appetite"],
     "appetite_loss": ["loss_of_appetite", "anorexia", "poor_appetite", "decreased_appetite"],

@@ -2,8 +2,8 @@
  "species": "dog",
  "schema_version": 1,
  "note": "Frozen disease ids (name→id). Append-only: existing mappings are never changed. Delete to fall back to position-derived ids.",
- "generated_at": "2026-08-21T01:07:29Z",
- "count": 621,
+ "generated_at": "2026-08-30T00:27:50Z",
+ "count": 622,
  "locks": {
   "Acanthomatous Ameloblastoma␟棘細胞性エナメル上皮腫": "dog_0411",
   "Acetaminophen Toxicosis␟アセトアミノフェン中毒": "dog_0334",
@@ -14,6 +14,7 @@
   "Acromegaly (Growth Hormone Excess)␟先端巨大症": "dog_0292",
   "Actinomycosis␟放線菌症": "dog_0127",
   "Acute Moist Dermatitis (Hot Spot)␟急性湿性皮膚炎（ホットスポット）": "dog_0630",
+  "Acute Urticaria and Angioedema␟急性蕁麻疹・血管性浮腫": "dog_x9176df51",
   "Addison's Disease␟アジソン病（副腎皮質機能低下症）": "dog_0009",
   "Adrenal Cortical Carcinoma␟副腎皮質癌": "dog_0518",
   "Adrenal Gland Tumor␟副腎腫瘍": "dog_0404",

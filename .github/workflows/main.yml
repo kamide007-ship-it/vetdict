@@ -87,5 +87,31 @@ jobs:
       # resolved by upgrading. Production runs with FLASK_DEBUG=0, so the
       # debug-only path is not reachable. The ignore is scoped to this single
       # ID, so any new advisory still fails the build.
-      - run: pip-audit -r requirements.txt --ignore-vuln PYSEC-2024-271
-      - run: pip-audit -r requirements-dev.txt --ignore-vuln PYSEC-2024-271
+      #
+      # pip-audit queries PyPI's vulnerability API over the network; transient
+      # connection resets (ConnectionResetError 104) have failed otherwise-green
+      # runs. Retry up to 3 times with backoff — a genuine vulnerability finding
+      # still fails all attempts identically.
+      - name: pip-audit (requirements.txt, with network retry)
+        shell: bash
+        run: |
+          for i in 1 2 3; do
+            pip-audit -r requirements.txt --ignore-vuln PYSEC-2024-271 && exit 0
+            status=$?
+            # Exit code 1 with vulnerability output is a real finding; pip-audit
+            # uses the same code for connection errors, so retry on any failure
+            # but keep the last status if all attempts fail.
+            echo "pip-audit attempt $i failed (exit $status); retrying in $((i*10))s..."
+            sleep $((i*10))
+          done
+          pip-audit -r requirements.txt --ignore-vuln PYSEC-2024-271
+      - name: pip-audit (requirements-dev.txt, with network retry)
+        shell: bash
+        run: |
+          for i in 1 2 3; do
+            pip-audit -r requirements-dev.txt --ignore-vuln PYSEC-2024-271 && exit 0
+            status=$?
+            echo "pip-audit attempt $i failed (exit $status); retrying in $((i*10))s..."
+            sleep $((i*10))
+          done
+          pip-audit -r requirements-dev.txt --ignore-vuln PYSEC-2024-271

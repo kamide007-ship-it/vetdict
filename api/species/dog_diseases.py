@@ -5283,6 +5283,41 @@ DISEASES: List[Dict[str, Any]] = [
         "age_predisposition": {"puppy", "young", "adult", "senior"},
     },
     {
+        # 2026-08 audit: acute urticaria/angioedema — one of the most common
+        # canine ER dermatology presentations (post-vaccine, insect sting, drug,
+        # food) — was absent from the database: only full anaphylaxis existed.
+        # Shmuel & Cortes, J Vet Emerg Crit Care 2013; Ettinger 8th ed.
+        "name": "Acute Urticaria and Angioedema",
+        "name_ja": "急性蕁麻疹・血管性浮腫",
+        "symptoms": {
+            "itching",
+            "skin_redness",
+            "swelling",
+            "scratching",
+            "vomiting",
+        },
+        "description": "Type I hypersensitivity producing transient pruritic wheals (urticaria) and/or deeper eyelid-muzzle-facial swelling (angioedema), classically within minutes to hours of a vaccine, insect sting, drug or food exposure. The mild end of the anaphylaxis spectrum — most cases resolve with antihistamines ± glucocorticoids, but progression to hypotensive anaphylaxis must be watched for.",
+        "description_ja": "ワクチン接種・虫刺され・薬物・食物への曝露後、数分〜数時間で出現する一過性の掻痒性膨疹（蕁麻疹）と眼瞼・口唇・顔面の深部腫脹（血管性浮腫）を特徴とするI型過敏反応です。アナフィラキシー・スペクトラムの軽症端に位置し、大半は抗ヒスタミン薬±グルココルチコイドで消退しますが、低血圧性アナフィラキシーへの進行を監視する必要があります。",
+        "causes": "IgE-mediated (or direct) mast cell degranulation triggered by vaccines, Hymenoptera stings, drugs (penicillins, sulfonamides, contrast agents), foods, or blood products; idiopathic in a subset.",
+        "causes_ja": "ワクチン、膜翅目刺傷、薬物（ペニシリン系・サルファ系・造影剤等）、食物、血液製剤が誘因のIgE介在性（または直接性）肥満細胞脱顆粒。一部は特発性。",
+        "pathophysiology": "Mast cell degranulation releases histamine, leukotrienes and PAF; superficial dermal vascular leakage forms wheals, deeper dermal/subcutaneous leakage forms angioedema (periocular and muzzle predilection). The same mediator cascade at systemic scale is anaphylaxis — hence the observation window.",
+        "pathophysiology_ja": "肥満細胞脱顆粒によりヒスタミン・ロイコトリエン・PAFが放出され、真皮浅層の血管透過性亢進が膨疹を、真皮深層〜皮下の漏出が血管性浮腫（眼周囲・口吻好発）を形成します。同じメディエーター・カスケードが全身規模で起これば アナフィラキシーであり、経過観察が必要な理由です。",
+        "treatment": "Mild (wheals/facial swelling, normotensive): diphenhydramine 2-4 mg/kg IM or PO ± dexamethasone 0.1-0.2 mg/kg IV/IM (or prednisolone 0.5-1 mg/kg PO). Remove/avoid the trigger. Observe 12-24 h for recrudescence or progression. Any hypotension, collapse, vomiting/diarrhea or dyspnea → treat as anaphylaxis: epinephrine 0.01 mg/kg IM + IV crystalloid resuscitation. Recurrent idiopathic cases: identify trigger (diet trial, vaccine protocol review); cetirizine 1 mg/kg PO q12-24h for maintenance.",
+        "treatment_ja": "軽症（膨疹・顔面腫脹のみ・血圧正常）: ジフェンヒドラミン 2-4 mg/kg IM/PO ± デキサメタゾン 0.1-0.2 mg/kg IV/IM（またはプレドニゾロン 0.5-1 mg/kg PO）。誘因の除去・回避。再燃・進行の監視のため12-24時間の経過観察。低血圧・虚脱・嘔吐/下痢・呼吸困難のいずれかがあればアナフィラキシーとして対応: エピネフリン 0.01 mg/kg IM＋晶質液蘇生。再発性・特発性: 誘因検索（除去食試験・ワクチンプロトコル見直し）、維持にセチリジン 1 mg/kg PO q12-24h。",
+        "prognosis": "Excellent — most cases resolve within 12-24 h with treatment. The key risk is missed progression to anaphylaxis; biphasic reactions can recur 6-24 h after apparent resolution.",
+        "prognosis_ja": "予後は優良 — 大半は治療により12-24時間で消退します。最大のリスクはアナフィラキシーへの進行の見逃しで、見かけ上の消退後6-24時間で再燃する二相性反応があります。",
+        "prevention": "Record the trigger in the medical chart; premedicate with diphenhydramine before unavoidable re-exposure (e.g. necessary vaccines) and split/observe vaccine visits. Owners of severely affected dogs should have an emergency plan.",
+        "prevention_ja": "誘因をカルテに記録。回避不能な再曝露（必要なワクチン等）の前にはジフェンヒドラミンの前投与と接種後の院内観察を行います。重症例の飼い主には救急時対応プランを共有します。",
+        "recommended_tests": [
+            "身体検査 (Physical Exam) - wheal distribution, mucous membrane color, CRT",
+            "血圧測定 (Blood Pressure) - rule out progression to hypotensive anaphylaxis",
+            "問診 (History) - vaccine/drug/food/sting exposure within hours",
+        ],
+        "urgency": "high",
+        "onset_pattern": {"acute"},
+        "age_predisposition": {"puppy", "young", "adult", "senior"},
+    },
+    {
         "name": "Foreign Body in Ear",
         "name_ja": "耳内異物（草の実等）",
         "symptoms": {"ear_scratching", "head_tilting", "ear_odor", "pain_on_touch"},

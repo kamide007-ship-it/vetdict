@@ -504,6 +504,18 @@ SYMPTOMS = [
         "category": "dermatological",
     },
     {
+        "id": "hives",
+        "name_ja": "蕁麻疹（じんましん）",
+        "name_en": "Hives / Urticaria",
+        "category": "dermatological",
+    },
+    {
+        "id": "facial_swelling",
+        "name_ja": "顔面の腫れ（血管性浮腫）",
+        "name_en": "Facial Swelling / Angioedema",
+        "category": "dermatological",
+    },
+    {
         "id": "lumps_bumps",
         "name_ja": "しこり・腫瘤",
         "name_en": "Lumps and Bumps",
@@ -3121,6 +3133,33 @@ DISEASES = [
             "rottweiler": 1.5,
         },
     },
+    # ---- Acute Allergic Reaction (Urticaria / Angioedema) ----
+    # 2026-08 sweep round 14: 「顔が腫れてじんましんが出た ワクチンの後」 had no
+    # rankable entry — the classic post-vaccine/insect-sting ER presentation
+    # (acute urticaria, angioedema, anaphylaxis spectrum) was absent from the
+    # legacy chat database and the vocabulary had no hives/facial-swelling IDs.
+    # Shmuel & Cortes, JVECC 2013 (anaphylaxis review); Ettinger 8th ed.
+    {
+        "id": "acute_allergic_reaction",
+        "prevalence_tier": "common",
+        # Names mirror the dog module's "Acute Urticaria and Angioedema" entry
+        # so the chat card's 疾患DBで詳細を開く pivot lands by exact base-name
+        # match instead of falling back to a fuzzy filter search.
+        "name_ja": "急性蕁麻疹・血管性浮腫（急性アレルギー反応）",
+        "name_en": "Acute Urticaria and Angioedema",
+        "description_ja": "ワクチン接種・虫刺され（ハチ等）・薬物・食物が誘因のI型過敏反応です。膨疹（蕁麻疹）、眼瞼・口唇・顔面の腫脹（血管性浮腫）、掻痒が典型で、進行すると嘔吐・下痢・虚脱・低血圧（アナフィラキシー）に至ります。軽症: ジフェンヒドラミン 2-4 mg/kg IM/PO ± デキサメタゾン 0.1-0.2 mg/kg IV。アナフィラキシー: エピネフリン 0.01 mg/kg IM＋輸液蘇生。再燃監視のため12-24時間の経過観察を推奨します。",
+        "description_en": "Type-I hypersensitivity triggered by vaccines, insect stings, drugs or food. Wheals (urticaria), eyelid/muzzle/facial swelling (angioedema) and pruritus are typical; progression brings vomiting, diarrhoea, collapse and hypotension (anaphylaxis). Mild: diphenhydramine 2-4 mg/kg IM/PO ± dexamethasone 0.1-0.2 mg/kg IV. Anaphylaxis: epinephrine 0.01 mg/kg IM plus fluid resuscitation. Observe 12-24 h for recrudescence (Shmuel & Cortes, JVECC 2013).",
+        "symptoms": [
+            "hives",
+            "facial_swelling",
+            "itching",
+            "eye_swelling",
+            "vomiting",
+        ],
+        "severity": "high",
+        "recommended_tests": ["physical_exam", "blood_pressure"],
+        "breed_risks": {},
+    },
     # ---- Zinc-Responsive Dermatosis ----
     # Companion differential the clinician asked for: mucocutaneous crusting/
     # scaling in northern breeds is zinc-responsive dermatosis, NOT a hot spot —
@@ -4266,6 +4305,9 @@ _SYMPTOM_SPECIFICITY = {
 # Signature combinations that strongly indicate specific diseases.
 # Each cluster: (required_symptoms_frozenset, disease_id, boost_factor)
 _PATHOGNOMONIC_CLUSTERS = [
+    # Acute allergic reaction: hives + facial swelling is the definitional
+    # post-vaccine/insect-sting pair (Shmuel & Cortes, JVECC 2013).
+    (frozenset({"hives", "facial_swelling"}), "acute_allergic_reaction", 1.8),
     # GDV: bloating + excessive drooling + rapid breathing
     (frozenset({"bloating", "excessive_drooling", "rapid_breathing"}), "gdv_bloat", 2.0),
     (frozenset({"bloating", "excessive_drooling", "pale_gums"}), "gdv_bloat", 2.0),

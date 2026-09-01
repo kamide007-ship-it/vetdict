@@ -75,6 +75,7 @@ from api.drug_batch_48 import DRUGS_BATCH_48
 from api.drug_batch_49 import DRUGS_BATCH_49
 from api.drug_batch_50 import DRUGS_BATCH_50
 from api.drug_batch_51 import DRUGS_BATCH_51
+from api.drug_batch_52 import DRUGS_BATCH_52
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10736,7 +10737,7 @@ for _drug48 in DRUGS_BATCH_48:
         DRUGS.append(_drug48)
         _drug_index[_drug48["id"]] = _drug48
 
-# Batch 49: 2026-08監査（第16回スイープ・本セッション分、47/48は並行セッションが使用）
+# Batch 49: 2026-08監査（第16回スイープ・並行セッション分）
 # （フルオロウラシル(5-FU) — 馬サルコイド/SCCの標準補助療法11参照 + 猫は経路を
 #  問わず致死的(safe:False, Dorman 1990)の定義的安全事実。硫酸鉄26参照は既存
 #  ferrous_sulfate_oral のエイリアス欠落と判明し batch_21 で是正）
@@ -10754,7 +10755,7 @@ for _drug50 in DRUGS_BATCH_50:
         DRUGS.append(_drug50)
         _drug_index[_drug50["id"]] = _drug50
 
-# Batch 51: 2026-09監査（第17回スイープ）
+# Batch 51: 2026-09監査（第17回スイープ・並行セッション分）
 # （カンナビジオール/CBD — 260参照で最多の欠落。行動学・OA・難治てんかんの補助として
 #  自サイトが用量付きで参照（McGrath 2019 / Gamble 2018）するのに中立的な
 #  モノグラフが無かった（スポンサー製品のみ）;
@@ -10764,6 +10765,15 @@ for _drug51 in DRUGS_BATCH_51:
     if _drug51["id"] not in _drug_index:
         DRUGS.append(_drug51)
         _drug_index[_drug51["id"]] = _drug51
+
+# Batch 52: 2026-08監査（第21回スイープ・本セッション分、47-51は並行セッションが使用）
+# （オクトレオチド — ガストリノーマ 1-5 μg/kg SC 等で用量付き8+参照なのに
+#  ソマトスタチンアナログが皆無; デコキネート — H. americanum のACVIM標準・
+#  長期再発抑制フェーズ 10-20 mg/kg PO q12h ≥2年 — Macintire 2001 JAVMA）
+for _drug52 in DRUGS_BATCH_52:
+    if _drug52["id"] not in _drug_index:
+        DRUGS.append(_drug52)
+        _drug_index[_drug52["id"]] = _drug52
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
@@ -11445,7 +11455,10 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "desoxycorticosterone": ("DOCP", "デソキシコルチコステロン", "デスオキシコルチコステロン"),
     # 2026-08 sweep #13: chelation / hepatoprotectant / fluid texts cite these
     # acronyms and variant word orders that the canonical names never reduce to.
-    "calcium_edta": ("CaEDTA",),  # canonical: カルシウムEDTA — 51 treatment refs cite the acronym
+    "calcium_edta": (
+        "CaEDTA",
+        "Ca-EDTA",  # 2026-08 sweep #16: 25 heavy-metal refs use the hyphenated form
+    ),  # canonical: カルシウムEDTA — 51 treatment refs cite the acronym
     # ursodiol already aliases ウルソジオール above; UDCA is the standard clinical
     # acronym (41 treatment refs: "UDCA 10-15 mg/kg PO q24h").
     "hetastarch": ("ヘタスターチ",),  # canonical: ヒドロキシエチルデンプン（HES 6%）
