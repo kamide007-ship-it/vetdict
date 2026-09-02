@@ -4542,7 +4542,16 @@ DISEASE_DATABASE: list[Disease] = [
         "neurological",
         "moderate",
         "EDMと関連。軽度の対称性運動失調。ビタミンE欠乏関連。",
-        ["neuro_ataxia", "neuro_proprioceptive_deficit"],
+        # eNADの報告所見（対称性失調・固有位置覚障害に加え、鈍麻/行動変化と
+        # パフォーマンス低下 — Finno 2011 JVIM; Aleman）。2所見のみでは
+        # coverage 1.0 が有病率priorを常に上回り、単独の失調主訴で
+        # CVSM(Wobbler)より上位に出る構造的過剰カバレッジがあった。
+        [
+            "neuro_ataxia",
+            "neuro_proprioceptive_deficit",
+            "neuro_behavior_change",
+            "gen_chronic_fatigue",
+        ],
         age_predisposition="young",
         urgency="routine",
         recommended_exams=[(1, "血清ビタミンE", "Serum Vitamin E"), (2, "神経検査", "Neurological Exam")],
@@ -6789,7 +6798,11 @@ DISEASE_DATABASE: list[Disease] = [
         "eye",
         "severe",
         "水晶体の前方/後方脱臼。外傷・ERU続発。",
-        ["eye_squinting", "eye_tearing"],
+        # 自身の clinical_signs_detail が記載する角膜浮腫（内皮接触性）と
+        # 前房フレア（ERU続発性ぶどう膜炎）を所見セットへ反映 — 2所見のみでは
+        # coverage 1.0 が羞明+流涙の全入力で角膜潰瘍/ぶどう膜炎より上位に
+        # 出る構造的過剰カバレッジがあった（DDFT修正と同型）。
+        ["eye_squinting", "eye_tearing", "eye_cloudiness", "eye_uveitis_signs"],
         urgency="urgent",
         recommended_exams=[(1, "眼科検査", "Ophthalmic Examination"), (2, "超音波", "Ocular Ultrasound")],
         merck_url=_MERCK + "lens+luxation+horses",

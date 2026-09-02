@@ -76,6 +76,7 @@ from api.drug_batch_49 import DRUGS_BATCH_49
 from api.drug_batch_50 import DRUGS_BATCH_50
 from api.drug_batch_51 import DRUGS_BATCH_51
 from api.drug_batch_52 import DRUGS_BATCH_52
+from api.drug_batch_53 import DRUGS_BATCH_53
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10774,6 +10775,16 @@ for _drug52 in DRUGS_BATCH_52:
     if _drug52["id"] not in _drug_index:
         DRUGS.append(_drug52)
         _drug_index[_drug52["id"]] = _drug52
+
+# Batch 53: 2026-09監査（第19回スイープ）
+# （硫酸マグネシウム全身投与 — MgSO4×18 + MgO×19 + マグネシウム補充×4 の
+#  41参照が魚用薬浴エントリ（エプソムソルト）にしか解決しなかった。
+#  RECOVER のトルサード/難治性VF第一選択・馬グラステタニー・大結腸便秘の
+#  浸透圧下剤 — Plumb's 10th; Fletcher JVECC 2012; Reed & Bayly 4th ed）
+for _drug53 in DRUGS_BATCH_53:
+    if _drug53["id"] not in _drug_index:
+        DRUGS.append(_drug53)
+        _drug_index[_drug53["id"]] = _drug53
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

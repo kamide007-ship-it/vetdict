@@ -425,6 +425,14 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "光線過敏": "skin_photosensitivity",
     "sarcoid": "skin_sarcoid",
     "サルコイド": "skin_sarcoid",
+    # 2026-09 Round 19: 皮膚腫瘤の飼い主表現（サルコイド=馬で最多の皮膚腫瘍、
+    # 蕁麻疹=急性の膨疹）— 「皮膚にボコボコしたしこりが多数」が抽出ゼロだった
+    "皮膚にしこり": "skin_sarcoid",
+    "しこりが多数": "skin_sarcoid",
+    "イボ状のできもの": "skin_sarcoid",
+    "イボができ": "skin_sarcoid",
+    "皮膚にボコボコ": "skin_hives",
+    "じんましん": "skin_hives",
     "wound": "skin_wound",
     "傷": "skin_wound",
     "外傷": "skin_wound",
@@ -433,9 +441,14 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "目やに": "eye_discharge",
     "squinting": "eye_squinting",
     "目を細める": "eye_squinting",
+    # 2026-09 Round 19: 連用形と羞明の飼い主表現（ERU/角膜潰瘍の代表的主訴）
+    "目を細め": "eye_squinting",
+    "まぶしそう": "eye_squinting",
+    "まぶしがる": "eye_squinting",
     "tearing": "eye_tearing",
     "涙目": "eye_tearing",
     "流涙": "eye_tearing",
+    "涙が多い": "eye_tearing",
     "cloudy eye": "eye_cloudiness",
     "目が白い": "eye_cloudiness",
     "目の白濁": "eye_cloudiness",
@@ -447,6 +460,9 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "ataxia": "neuro_ataxia",
     "運動失調": "neuro_ataxia",
     "ふらふら": "neuro_ataxia",
+    # 2026-09 Round 19: 分回し歩様（EPM/頸椎症の飼い主表現）
+    "振り回すように歩": "neuro_ataxia",
+    "ふらついて歩": "neuro_ataxia",
     "seizure": "neuro_seizure",
     "発作": "neuro_seizure",
     "けいれん": "neuro_seizure",
@@ -799,6 +815,22 @@ def extract_symptoms_from_text(text: str) -> list:
         # resolves to hind_limb_paralysis; the legacy dog vocabulary carries
         # paralysis directly.
         "hind_limb_paralysis": ["paralysis", "limping"],
+        # "皮膚が黒ずんで/ゴワゴワ" (lichenification — the chronic-atopy owner
+        # sign) resolves to skin_thickening; the legacy dog vocabulary carries
+        # chronic skin change as rashes/dry skin.
+        "skin_thickening": ["skin_rashes", "dry_skin"],
+        # "お腹にしこり" resolves to abdominal_masses (ferret/exotic
+        # vocabularies); the legacy dog vocabulary carries palpable masses as
+        # lumps_bumps.
+        "abdominal_masses": ["lumps_bumps", "bloating"],
+        # "頭が傾いて" resolves to head_tilt; the legacy dog vocabulary carries
+        # the vestibular sign as head_tilting.
+        "head_tilt": ["head_tilting"],
+        "nystagmus": ["head_tilting"],
+        # "毛づやが悪い" resolves to poor_coat (species vocabularies); no
+        # direct legacy coat-quality ID — chronic-disease coat change most
+        # closely presents as hair loss in the legacy vocabulary.
+        "poor_coat": ["hair_loss"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

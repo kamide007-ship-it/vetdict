@@ -2795,3 +2795,59 @@ class TestBatch51ReferencedButAbsentSweep17:
         hits = [h["id"] for h in find_drugs_in_text("GnRH（ゴナドトロピン放出ホルモン）アゴニストのデスロレリン")]
         assert "hcg" not in hits
         assert "hcg" not in [h["id"] for h in find_drugs_in_text("hcg 100 iu")]
+
+
+class TestBatch53MagnesiumSulfate:
+    """2026-09 19th referenced-but-absent sweep: systemic magnesium was absent
+    from the formulary — only the fish-bath "Epsom Salt" entry existed, so
+    none of the 41 systemic references (MgSO4 colic laxative / grass-tetany
+    slow IV in the equine entries, RECOVER torsades bolus, oral MgO 10-20
+    g/day headshaking maintenance, avian egg-binding ICe dose) resolved to
+    any monograph (Plumb's 10th; Fletcher JVECC 2012 RECOVER; Reed & Bayly
+    4th ed)."""
+
+    def test_magnesium_sulfate_present_with_bilingual_dosing(self):
+        from api.drug_dictionary import DRUGS
+
+        by_id = {d["id"]: d for d in DRUGS}
+        d = by_id.get("magnesium_sulfate")
+        assert d is not None, "magnesium_sulfate missing from formulary"
+        for sp in ("dog", "cat", "horse", "bird"):
+            info = d["species_info"][sp]
+            assert (info.get("dosage") or "").strip(), f"{sp} missing dosage"
+            assert (info.get("dosage_ja") or "").strip(), f"{sp} missing dosage_ja"
+        # RECOVER bolus and the equine laxative/tetany doses are the
+        # referenced regimens the disease content cites.
+        assert "30 mg/kg" in d["species_info"]["dog"]["dosage"]
+        assert "0.5-1 g/kg" in d["species_info"]["horse"]["dosage"]
+        assert "MgO" in d["species_info"]["horse"]["dosage"]
+
+    def test_magnesium_sulfate_definitional_safety_facts(self):
+        # Rapid IV push causes cardiac arrest, renal excretion mandates
+        # dose reduction in renal failure, and calcium gluconate is the
+        # named antidote; NMB potentiation is the major interaction.
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id("magnesium_sulfate")
+        contra = d["contraindications_ja"]
+        assert "急速静注" in contra
+        assert "腎" in contra
+        assert "グルコン酸カルシウム" in contra
+        assert any("Neuromuscular" in i["drug"] and i["severity"] == "major" for i in d["drug_interactions"])
+
+    def test_magnesium_text_resolution_and_epsom_separation(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = [
+            ("MgSO4 1-5 mg/kg ICe併用", "magnesium_sulfate"),
+            ("硫酸マグネシウム 0.5-1 g/kg 経鼻投与", "magnesium_sulfate"),
+            ("マグネシウム補充: MgO 10 g/日 PO", "magnesium_sulfate"),
+            ("酸化マグネシウム30 g PO q24h維持", "magnesium_sulfate"),
+        ]
+        for text, want in cases:
+            hits = [h["id"] for h in find_drugs_in_text(text)]
+            assert want in hits, f"{want} not resolved from {text!r}: {hits}"
+        # The fish-bath entry keeps its own keyword and the new aliases must
+        # not swallow it.
+        hits = [h["id"] for h in find_drugs_in_text("エプソムソルト浴 大さじ1/20L")]
+        assert "epsom_salt" in hits

@@ -587,6 +587,39 @@ SPECIES_PREVALENCE = {
         "African Horse Sickness": "rare",
         "Dourine": "rare",
         "Venezuelan Equine Encephalomyelitis": "rare",
+        # -- 2026-09 Round 19: ophthalmic variant entries were untiered, so
+        # rare diseases (lens luxation / habronemiasis / eyeworm) outranked
+        # the high-frequency corneal ulcer / uveitis family on the classic
+        # squinting + tearing complaint (Brooks, Equine Ophthalmology 3rd ed;
+        # Gilger, Equine Ophthalmology).
+        "Superficial Corneal Ulcer": "very_common",
+        "Anterior Uveitis": "common",
+        "Equine Recurrent Uveitis (Moon Blindness)": "common",
+        "Deep / Melting Corneal Ulcer": "uncommon",
+        "Fungal Keratitis": "uncommon",
+        "Stromal Abscess": "uncommon",
+        "Immune-Mediated Keratitis": "uncommon",
+        "Nasolacrimal Duct Obstruction": "uncommon",
+        "Ocular Habronemiasis": "uncommon",
+        "Lens Luxation": "rare",
+        "Eyeworm Disease": "rare",
+        "Neurofibroma": "rare",
+        # -- 2026-09 Round 19: spinal-ataxia differential — CVSM (Wobbler) is
+        # the most common non-infectious spinal ataxia (Reed & Bayly 4th ed)
+        # yet was untiered, while exotic encephalitides topped the list.
+        "Cervical Vertebral Stenotic Myelopathy": "common",
+        "Cervical Vertebral Malformation": "common",
+        "Cervical Vertebral Stenotic Myelopathy Type II": "uncommon",
+        "EHV-1 Myeloencephalopathy": "uncommon",
+        "EHV-1 Myeloencephalopathy (EHM)": "uncommon",
+        "Equine Degenerative Myeloencephalopathy": "uncommon",
+        "Equine Neuroaxonal Dystrophy": "uncommon",
+        "Hyponatremia": "uncommon",
+        "Western Equine Encephalomyelitis": "rare",  # Americas; absent in JP
+        "Eastern/Western Equine Encephalomyelitis": "rare",
+        "Equine Encephalosis Virus": "rare",  # African orbivirus
+        "Nipah Virus": "rare",
+        "Cryptococcosis": "rare",
     },
     # ==================================================================
     # RABBIT — 35+ entries (expanded from ~23)
@@ -812,6 +845,13 @@ SPECIES_PREVALENCE = {
         "Testicular Tumor": "uncommon",
         "Hepatocellular Carcinoma": "rare",
         "Hemangiosarcoma": "rare",
+        # Poultry pathogens (ORT / avian metapneumovirus) — essentially absent
+        # in pet psittacines/passerines; untiered they outranked sinusitis
+        # (common) on the sneezing + nasal-discharge complaint.
+        "Ornithobacterium rhinotracheale (ORT) Infection": "rare",
+        "Ornithobacterium rhinotracheale (ORT) Pneumonia": "rare",
+        "Avian Metapneumovirus Infection": "rare",
+        "Avian Metapneumovirus Rhinotracheitis": "rare",
     },
     # ==================================================================
     # REPTILE — 22+ entries (expanded from ~12)

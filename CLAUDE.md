@@ -4155,3 +4155,85 @@ prevalence キーが配信DB完全一致で不発化していた（chip name_ja 
   crop_swelling/ingluvitis** ブリッジ + regurgitation→crop_stasis を追加
   （甲状腺腫/酸敗嗉嚢が top2 を回復、哺乳類の吐出主訴は不変を検証）
 - レガシー犬DB統合後: **76症状**（+hives/facial_swelling/snoring）・**80疾患**
+
+## 2026-09セッション（第31弾: 硫酸マグネシウム全身投与の補完 + チャット精度第19弾 + 馬眼科/神経tierの是正）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,140件合格**（34 skip）
+- 配信SQLiteクリーンビルド: 6,893疾患、主要臨床フィールド（治療/病因/予後/予防/説明/病態）の空欄 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（613薬品、species_info 3,661エントリ全数検証）
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 薬品マッチャー飽和度検証: 用量文脈トークン監査の上位候補15フレーズ
+  （ノルモソルR 1,089参照・ウルソデオキシコール酸・ミコフェノール酸モフェチル・
+  水酸化アルミニウム・ラクツロース・セフタジジム等）を実フレーズで全数突合 — **全て解決済み**
+
+### referenced-but-absent 薬品1剤の補完（`drug_batch_53.py` 新規、613→614薬品）
+第19回スイープで、**全身投与用マグネシウム**が唯一の真の欠落と判明（41参照:
+MgSO4×18 + MgO×19 + マグネシウム補充×4 が魚用薬浴エントリ「エプソムソルト」にしか解決しなかった）:
+- **硫酸マグネシウム（全身投与）** — RECOVER のトルサード/難治性心室細動 30 mg/kg 緩徐IV
+  （Fletcher JVECC 2012; Plumb's 10th）、低Mg血症 CRI 0.75-1 mEq/kg/日、
+  馬大結腸便秘の浸透圧下剤 0.5-1 g/kg NGT（Reed & Bayly 4th ed、チューブ確認・反復投与時のMg中毒警告）、
+  馬グラステタニーの希釈緩徐IV（急速静注=心停止）、ヘッドシェイキング維持 MgO 10-20 g/日、
+  鳥卵詰まり併発Mg欠乏 1-5 mg/kg ICe（Carpenter）
+- 定義的安全事実: 急速静注禁止・腎排泄（腎不全で減量/回避）・**解毒=グルコン酸カルシウム**・
+  Ca含有輸液と同一ライン配合変化・非脱分極性NMBA（アトラクリウム）増強=major
+- エイリアス: 硫酸マグネシウム/MgSO4/酸化マグネシウム/マグネシウム補充 → magnesium_sulfate
+  （魚用エプソムソルト薬浴は独立エントリのまま温存 — 相互不干渉をテストで固定）
+- 動線: 逆引き「この薬品を使う疾患」**50疾患**（馬中毒群・殺鼠剤中毒・心筋挫傷等）、
+  相互作用チェッカー自然言語解決、治療チップの双方向を検証済み
+
+### 診断チャット精度 第19弾（25症例フレッシュスイープ 13 MISS → 25/25 合格）
+- **失神の飼い主表現が皆無だった**: 「散歩中に急に倒れて意識を失った」が抽出ゼロ →
+  倒れて（連用形）/意識を失っ/意識がなくなっ/気を失っ→collapse 追加 → MMVD/大動脈弁下狭窄/DCM がtop3。
+  **ガードテストが正しく検出した回帰を是正**: 「痙攣した 意識がなくなった」で心臓性失神がてんかんを
+  上回った → てんかんの症状セットに発作時意識消失（ictal collapse=fainting、Ettinger 8th）を追加し、
+  痙攣+意識消失→てんかん1位・失神単独→心疾患群の両立を回帰テストで固定
+- **GDVに labored_breathing 追加**（横隔膜圧迫性呼吸窮迫 — Ettinger; Monnet 2003）+
+  副詞挿入形「お腹が突然/急にパンパン」→bloating（従来は「パンパンに膨れて」→edema に敗北）→ GDV top3
+- **慢性アトピー苔癬化の語彙が皆無**: 掻きむしっ/皮膚が黒ずん/皮膚がゴワゴワ/皮膚が厚く →
+  itching/skin_thickening（新設ID_SYNONYMS: thickened_skin/skin_rashes、legacy fallback）→ 毛包虫/膿皮/アトピー top3
+- **多飲の「量が増えた」形＋被毛粗剛**: 水を飲む量が増え/飲水量が増え→excessive_thirst、
+  毛づやが悪/毛艶が悪/毛並みが悪→poor_coat（ID_SYNONYMS拡張: greasy_coat/unkempt_coat）→ 猫CKD/甲状腺 top3
+- **前庭疾患の「頭が」形**: 頭が傾い→head_tilt、目が回っ→nystagmus、グルグル回る（カタカナ）→circling
+  → ウサギ前庭疾患/斜頸/E.cuniculi top3
+- **甲羅軟化の漢字形**: 甲羅が柔らか→soft_shell、甲羅が凹/へこ→shell_deformity → リクガメMBD群 top3
+- **腹腔内腫瘤の触知**: お腹にしこり/お腹を触るとしこり→abdominal_masses（新設ID_SYNONYMS）+
+  痩せてきて（て形）→weight_loss → フェレット・リンパ腫/腎細胞癌 top3
+- **鳥**: 便が水っぽ/水っぽい便→diarrhea + **家禽病原体の tier 是正**（ORT感染症/ORT肺炎/
+  鳥メタニューモウイルス感染症/鼻気管炎=rare — ペットバードでは実質不在なのに未tierで
+  副鼻腔炎(common)を抑えていた）→ くしゃみ+鼻水で副鼻腔炎 rank1
+- **馬エイリアス**（EQUINE_SYMPTOM_ALIASES）: 皮膚にしこり/しこりが多数/イボ状のできもの→skin_sarcoid、
+  皮膚にボコボコ/じんましん→skin_hives、目を細め/まぶしそう/まぶしがる→eye_squinting、涙が多い→eye_tearing、
+  振り回すように歩/ふらついて歩→neuro_ataxia → サルコイド rank1（蕁麻疹・メラノーマ併記）
+
+### 馬の眼科・神経バリアントエントリの構造的順位是正（開発者専門種）
+- **未tierバリアントが2所見 coverage 1.0 で高頻度疾患を常時抑圧**していた（DDFT熱蹄と同型）:
+  羞明+流涙で水晶体脱臼（稀）が表在性角膜潰瘍（馬の最多眼科救急 — Brooks）に、
+  失調で馬神経軸索ジストロフィー（2所見のみ）がCVSM/Wobbler（最多の非感染性脊髄失調 — Reed & Bayly）に勝っていた
+- **horse prevalence に27キー追加**: Superficial Corneal Ulcer=very_common、Anterior Uveitis/
+  ERU(Moon Blindness)/CVSM/CVM=common、Deep-Melting潰瘍/真菌性角膜炎/実質膿瘍/IMMK/鼻涙管閉塞/
+  眼ハブロネマ/EHM×2/EDM/eNAD/低Na血症=uncommon、水晶体脱臼/眼虫症/神経線維腫/WEE/EEE-WEE/
+  馬脳症ウイルス（アフリカ）/ニパ/クリプトコッカス=rare（全キー equine モジュール実在名で検証）
+- **所見セットの教科書的補完**（2所見エントリの過剰カバレッジ解消）:
+  水晶体脱臼に eye_cloudiness（内皮接触性角膜浮腫）+ eye_uveitis_signs（ERU続発 — 自身の
+  clinical_signs_detail 記載を反映）、eNAD に neuro_behavior_change + gen_chronic_fatigue
+  （鈍麻/行動変化・パフォーマンス低下 — Finno 2011 JVIM; Aleman）
+- 修正後: 羞明+流涙→表在性角膜潰瘍 rank1・前部ぶどう膜炎 top3、失調→頸椎奇形(Wobbler) rank1
+
+### UX: クイック入力の拡充（検証済み新主訴の1タップ導線）
+- 犬「散歩中に急に倒れて意識を失った」（失神→心疾患）、猫「水を飲む量が増えて痩せてきた」（老猫スクリーン）、
+  馬「皮膚にイボ状のできものがある」（サルコイド）「目を細めて涙が多い」（角膜潰瘍）、
+  フェレット「お腹を触るとしこりがある」（リンパ腫）— ミラーテスト JA_QUICK 同期（CI保証）
+- 新規薬品は既存チップ機構で鑑別診断・チャット結果カード・疾患DBの3ビューから自動到達
+
+### 回帰テスト（+15件）
+- `TestBatch53MagnesiumSulfate`（3件 — 存在・完全バイリンガル用量・RECOVER/馬用量・
+  定義的安全事実・エプソムソルト分離）
+- `TestChatClinicalAccuracyAuditRound20`（12件 — 失神/てんかんLOC両立ガード・苔癬化・GDV呼吸窮迫・
+  猫多飲量表現・ウサギ前庭・リクガメ甲羅軟化・フェレット腹部腫瘤・鳥副鼻腔炎vs家禽病原体・
+  馬サルコイド/角膜潰瘍vs水晶体脱臼/Wobbler vs NAD）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 558/cat 539/horse 355/鳥系 235薬品、pendingStats drugs 613→**614**
+- ServiceWorker: `CACHE_NAME` v138 → **v139**
+- 再現手順: `migrate_to_sqlite.py`（クリーンビルド）— 疾患名不変のため検索インデックス no-op
