@@ -411,8 +411,17 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "wet_tail": ["diarrhea", "watery_diarrhea"],
     # Skin / coat additional
     "thinning_skin": ["skin_fragility", "thin_skin", "fragile_skin"],
-    "poor_coat": ["dry_skin", "rough_coat", "dull_coat"],
+    "poor_coat": ["dry_skin", "rough_coat", "dull_coat", "greasy_coat", "unkempt_coat"],
     "rough_coat": ["poor_coat", "dry_skin", "dull_coat"],
+    # 慢性アトピーの苔癬化（2026-09 Round 19 — 種により thickened_skin 表記）
+    "skin_thickening": ["thickened_skin", "skin_rashes", "skin_lesions", "dry_skin"],
+    # 腹腔内腫瘤の触知（フェレット abdominal_masses / 他種は単数形・汎用IDへ）
+    "abdominal_masses": [
+        "abdominal_mass",
+        "subcutaneous_mass",
+        "lumps",
+        "abdominal_distension",
+    ],
     # Ferret reproductive
     "vulvar_swelling": ["vulvar_discharge", "genital_swelling"],
     "prostatic_enlargement": ["prostate_enlargement", "enlarged_prostate"],

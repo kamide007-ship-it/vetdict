@@ -1268,6 +1268,12 @@ DISEASES = [
             "excessive_drooling",
             "lethargy",
             "rapid_breathing",
+            # Respiratory distress from diaphragmatic compression by the
+            # distended stomach (Ettinger 8th ed; Monnet, Vet Clin NA 2003) —
+            # "膨れて呼吸が苦しそう" extracted labored_breathing but GDV only
+            # carried rapid_breathing, so the acute-bloat complaint ranked
+            # intestinal parasites (pot-belly) above GDV.
+            "labored_breathing",
             "pale_gums",
             "anxiety",
         ],
@@ -1424,6 +1430,11 @@ DISEASES = [
             "disorientation",
             "tremors",
             "excessive_drooling",
+            # Ictal loss of consciousness/collapse is part of the generalized
+            # seizure itself (Ettinger 8th ed) — without it, "痙攣して意識を
+            # 失った" (the textbook grand-mal description) extracted
+            # seizures + fainting and cardiac syncope outranked epilepsy.
+            "fainting",
             "loss_of_appetite",
             "lethargy",
         ],

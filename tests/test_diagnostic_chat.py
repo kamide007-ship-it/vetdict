@@ -1609,6 +1609,7 @@ class TestQuickTapPhraseExtraction:
             "いびきがひどく呼吸がガーガー鳴る",
             "顔が腫れてじんましんが出た",
             "階段を登らなくなった",
+            "散歩中に急に倒れて意識を失った",
         ],
         "cat": [
             "食べない",
@@ -1622,6 +1623,7 @@ class TestQuickTapPhraseExtraction:
             "口をくちゃくちゃさせる",
             "耳の先にかさぶたができて治らない",
             "急に後ろ足が動かなくなった",
+            "水を飲む量が増えて痩せてきた",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -1633,6 +1635,8 @@ class TestQuickTapPhraseExtraction:
             "咳が出る",
             "飲み込めず鼻から餌が出てくる",
             "後肢が突っ張って歩き尿が茶色い",
+            "皮膚にイボ状のできものがある",
+            "目を細めて涙が多い",
         ],
         "rabbit": [
             "糞が小さい",
@@ -1673,6 +1677,7 @@ class TestQuickTapPhraseExtraction:
             "足を伸ばして硬直する",
             "口を前足で掻いてよだれ",
             "便に血が混じる",
+            "お腹を触るとしこりがある",
         ],
         "hedgehog": ["針が抜ける", "フケ", "ふらつく", "食べない", "目が出ている", "体重が減った"],
         "bird": [
@@ -3929,3 +3934,133 @@ class TestAcuteUrticariaDiseaseEntry:
             "select name_ja, urgency from diseases where species='dog' and name='Acute Urticaria and Angioedema'"
         ).fetchone()
         assert row is not None and row[0] == "急性蕁麻疹・血管性浮腫"
+
+
+class TestChatClinicalAccuracyAuditRound20:
+    """2026-09 audit round 19: fresh 25-case chief-complaint sweep (13 initial
+    misses). Systematic root causes: (a) connective/kanji variants of supported
+    phrases (倒れて, 甲羅が柔らか, 頭が傾いて, 目が回って, 痩せてきて), (b) the
+    syncope complaint had no owner phrasing at all (意識を失った), (c) equine
+    ophthalmic/neuro variant entries were untiered so rare diseases (lens
+    luxation, neuroaxonal dystrophy) outranked the corneal-ulcer/uveitis and
+    Wobbler families via 2-finding coverage saturation, and (d) poultry
+    pathogens (ORT, avian metapneumovirus) outranked sinusitis in pet birds."""
+
+    def test_dog_syncope_ranks_cardiac_disease(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("散歩中に急に倒れて意識を失ったがすぐ戻った")
+        assert "fainting" in ex, ex
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ex)[:3]]
+        assert any(("僧帽弁" in n) or ("心筋" in n) or ("狭窄" in n) for n in names), names
+
+    def test_dog_seizure_with_loc_still_ranks_epilepsy_first(self):
+        # Ictal loss of consciousness is part of the generalized seizure —
+        # the new 意識を失った→collapse alias must not let cardiac syncope
+        # outrank epilepsy when 痙攣 is present (epilepsy now carries
+        # fainting for the ictal collapse itself — Ettinger 8th ed).
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("痙攣した 意識がなくなった")
+        top = match_symptoms_to_diseases(ex)[0]
+        assert "てんかん" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_dog_lichenification_complaint_ranks_dermatology(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("体を掻きむしって皮膚が黒ずんでゴワゴワしている")
+        assert "itching" in ex, ex
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ex)[:3]]
+        assert any(("アトピー" in n) or ("膿皮" in n) or ("毛包虫" in n) for n in names), names
+
+    def test_dog_acute_bloat_with_dyspnea_ranks_gdv_top3(self):
+        # GDV compresses the diaphragm (Ettinger 8th ed; Monnet 2003) — the
+        # entry now carries labored_breathing so the adverb-inserted bloat
+        # phrasing (お腹が突然パンパンに膨れて) reaches GDV.
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("お腹が突然パンパンに膨れて呼吸が苦しそう ぐったり")
+        assert "bloating" in ex, ex
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ex)[:3]]
+        assert any("胃拡張" in n for n in names), names
+
+    def test_cat_polydipsia_volume_phrasing_ranks_ckd_hyperthyroid(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("水を飲む量が増えて痩せてきた 毛づやが悪い", "cat")
+        assert "excessive_thirst" in ex and "weight_loss" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "cat")[:3]]
+        assert any(("腎" in n) or ("甲状腺" in n) or ("糖尿" in n) for n in names), names
+
+    def test_rabbit_head_tilt_spinning_ranks_vestibular(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("頭が傾いて目が回ってグルグル回る", "rabbit")
+        assert "head_tilt" in ex and "nystagmus" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "rabbit")[:3]]
+        assert any(("前庭" in n) or ("斜頸" in n) or ("エンセファリトゾーン" in n) for n in names), names
+
+    def test_tortoise_soft_shell_kanji_ranks_mbd(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("甲羅が柔らかくて凹む", "tortoise")
+        assert "soft_shell" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "tortoise")[:3]]
+        assert any(("代謝性骨疾患" in n) or ("MBD" in n) or ("副甲状腺" in n) for n in names), names
+
+    def test_ferret_abdominal_mass_ranks_neoplasia(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("痩せてきてお腹を触るとしこりがある", "ferret")
+        assert "abdominal_masses" in ex and "weight_loss" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "ferret")[:3]]
+        assert any(("リンパ腫" in n) or ("癌" in n) or ("腫瘍" in n) or ("コロナ" in n) for n in names), names
+
+    def test_bird_sinusitis_outranks_poultry_pathogens(self):
+        # ORT / avian metapneumovirus are poultry diseases — rare in pet
+        # birds — and untiered they topped the sneezing complaint.
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("くしゃみをして鼻水 鼻の穴の周りが汚れている", "bird")
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "bird")[:3]]
+        assert any("副鼻腔炎" in n for n in names), names
+        assert not any("オルニトバクテリウム" in n for n in names), names
+
+    def test_horse_multiple_skin_nodules_ranks_sarcoid_first(self):
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ex = _extract_equine_symptoms("皮膚にボコボコしたしこりが多数ある")
+        assert "skin_sarcoid" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_equine_symptoms_to_diseases(ex)[:3]]
+        assert any("サルコイド" in n for n in names), names
+
+    def test_horse_squint_tearing_ranks_corneal_ulcer_over_lens_luxation(self):
+        # Superficial corneal ulcer is the most common equine ocular
+        # emergency (Brooks, Equine Ophthalmology) — before the tier fix,
+        # 2-finding rare entries (lens luxation) saturated coverage and
+        # outranked the whole corneal-ulcer/uveitis family.
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ex = _extract_equine_symptoms("目を細めて涙が多い まぶしそうにしている")
+        assert "eye_squinting" in ex and "eye_tearing" in ex, ex
+        res = _match_equine_symptoms_to_diseases(ex)
+        names = [d.get("name_ja") or "" for d in res[:3]]
+        assert "角膜潰瘍" in names[0], names
+        assert any("ぶどう膜炎" in n for n in names), names
+
+    def test_horse_ataxia_ranks_wobbler_family_over_nad(self):
+        # CVSM/CVM (Wobbler) is the most common non-infectious spinal ataxia
+        # (Reed & Bayly 4th ed); the 2-finding NAD entry no longer saturates
+        # coverage.
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ex = _extract_equine_symptoms("後肢を外に振り回すように歩く ふらつく")
+        assert "neuro_ataxia" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_equine_symptoms_to_diseases(ex)[:3]]
+        assert any("頸椎" in n for n in names), names
+        assert not any("神経軸索" in n for n in names), names
