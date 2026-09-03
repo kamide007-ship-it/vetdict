@@ -12483,6 +12483,15 @@ _SYNDROME_FINDING_FLOORS: dict[str, tuple[str, ...]] = {
     # (McFarlane 2011; Ireland & McGowan 2018) — without a floor, rare
     # coverage-perfect entries outranked PPID for its own defining sign.
     "body_hirsutism": ("Pituitary Pars Intermedia Dysfunction",),
+    # Quidding is caused by sharp enamel points until proven otherwise — they
+    # are near-universal without routine floating (Baker & Easley, Equine
+    # Dentistry 3rd ed). Without a floor, single-finding congenital variants
+    # (supernumerary tooth, parrot mouth) won on trivially perfect coverage.
+    "dental_quidding": ("Sharp Enamel Points",),
+    # Ridden-exercise back pain: kissing spines is the most common osseous
+    # cause (Zimmerman; Jeffcott) — the umbrella Back Pain entry floors via
+    # its many findings, but the flagship specific diagnosis needs one too.
+    "body_back_pain": ("Back Pain", "Kissing Spines"),
 }
 _SYNDROME_FLOOR_SCORE = 0.62
 

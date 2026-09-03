@@ -11523,6 +11523,13 @@ _KATAKANA_VARIANT_ALIASES["silver_sulfadiazine"] = _KATAKANA_VARIANT_ALIASES["si
     "ssdクリーム",  # lowercased at match time
 )
 _KATAKANA_VARIANT_ALIASES["calcium_edta"] = _KATAKANA_VARIANT_ALIASES["calcium_edta"] + ("ca-edta",)
+# 2026-09 sweep #20: space-separated word-order form used by the reptile/chelonian
+# NSHP protocols ("カルシウム グルコネート 100 mg/kg PO"). Bare "グルコネート" is NOT
+# registered — it is a substring of キニジングルコネート and would mis-chip quinidine
+# contexts to calcium gluconate.
+_KATAKANA_VARIANT_ALIASES["calcium_gluconate"] = _KATAKANA_VARIANT_ALIASES["calcium_gluconate"] + (
+    "カルシウム グルコネート",
+)
 
 
 # Japanese dose-form / salt / strength suffixes that formulary names carry but

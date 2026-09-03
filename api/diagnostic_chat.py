@@ -232,6 +232,13 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "back pain": "body_back_pain",
     "背中痛い": "body_back_pain",
     "背部痛": "body_back_pain",
+    # 2026-09 Round 21: 背部痛の飼い主・騎乗者表現（キッシングスパイン/仙腸関節疾患の
+    # 代表的主訴 — 「背中を触ると痛がって乗ると嫌がる」が抽出ゼロだった）
+    "背中を触ると痛が": "body_back_pain",
+    "背中を痛が": "body_back_pain",
+    "乗ると嫌が": "body_back_pain",
+    "騎乗を嫌が": "body_back_pain",
+    "鞍を置くと嫌が": "body_back_pain",
     "muscle atrophy": "body_muscle_atrophy",
     "筋萎縮": "body_muscle_atrophy",
     "swelling": "body_swelling",
@@ -507,6 +514,14 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "quidding": "dental_quidding",
     "クイディング": "dental_quidding",
     "食べこぼし": "dental_quidding",
+    # 2026-09 Round 21: quidding の飼い主表現（歯の鋭利点・波状歯・EOTRH等の
+    # 教科書的主訴 — 「口から餌をこぼす」が抽出ゼロだった）
+    "餌をこぼ": "dental_quidding",
+    "エサをこぼ": "dental_quidding",
+    "口から餌": "dental_quidding",
+    "口からエサ": "dental_quidding",
+    "食べるのが遅く": "dental_quidding",
+    "丸めて吐き出": "dental_quidding",
     "bad breath": "dental_bad_breath",
     "口臭": "dental_bad_breath",
     "facial swelling": "dental_facial_swelling",
@@ -729,6 +744,10 @@ def extract_symptoms_from_text(text: str) -> list:
         # "口臭がひどい" resolves to foul_breath (species vocabularies); the
         # legacy dog vocabulary carries halitosis as "bad_breath".
         "foul_breath": ["bad_breath"],
+        # "陰部から膿" resolves to genital_discharge (species vocabularies); the
+        # legacy dog vocabulary carries it as vulvar_discharge (pyometra).
+        "genital_discharge": ["vulvar_discharge"],
+        "vaginal_discharge": ["vulvar_discharge"],
         # "目が白く濁っている" resolves to cloudy_eye/cloudy_eyes (species
         # vocabularies); the legacy dog vocabulary uses cloudiness_in_eyes —
         # without this bridge the cataract complaint extracted nothing.
