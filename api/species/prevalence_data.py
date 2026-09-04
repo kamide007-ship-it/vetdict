@@ -587,6 +587,11 @@ SPECIES_PREVALENCE = {
         "Sinusitis": "uncommon",
         "Guttural Pouch Empyema": "uncommon",
         "Guttural Pouch Mycosis": "uncommon",
+        # 2026-09: 発熱+鼻汁の主訴で腺疫(common)より上位に出ていた汎用
+        # アスペルギルス症エントリを実際の頻度に整合。肺型/全身性は免疫不全馬の
+        # 稀な日和見感染、喉嚢真菌症型の主徴は鼻出血であり発熱+鼻汁の
+        # ルーチン鑑別ではない（Reed & Bayly 4th ed）
+        "Aspergillosis": "rare",
         "Tetanus": "uncommon",  # Vaccination-dependent
         "Cataracts": "uncommon",
         "Anhidrosis": "uncommon",  # Hot/humid climates
@@ -646,6 +651,9 @@ SPECIES_PREVALENCE = {
         "Eastern/Western Equine Encephalomyelitis": "rare",
         "Equine Encephalosis Virus": "rare",  # African orbivirus
         "Nipah Virus": "rare",
+        # 2026-09: 豪州限定（オオコウモリ媒介）の人獣共通感染症 — 発熱+鼻汁の
+        # ルーチン鑑別で上位に出ないよう Nipah と同様に rare を明示
+        "Hendra Virus": "rare",
         "Cryptococcosis": "rare",
     },
     # ==================================================================

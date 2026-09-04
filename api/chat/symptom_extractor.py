@@ -352,6 +352,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "shell_deformity": ["bone_deformity", "soft_shell", "shell_softening"],
     "mouth_lesions": ["oral_lesions", "stomatitis", "mouth_rot"],
     "mucus_in_mouth": ["oral_mucus", "mouth_discharge"],
+    # 2026-09 第21回精度スイープ: 口周囲の排膿主訴（マウスロット/顎膿瘍）。
+    # oral_discharge を持たない種では mouth_lesions → drooling の順にフォールバック
+    "oral_discharge": ["mouth_lesions", "mouth_discharge", "mouth_rot", "drooling"],
     # 直腸脱/クロアカ脱（「お尻から赤いものが出ている」）— 種ごとのID表記ゆれを吸収
     # 爬虫類（lizard等）は tissue_protruding_from_cloaca / tissue_prolapse /
     # cloacal_swelling 表記のため、そのIDにもフォールバック（2026-08 第11回スイープ:

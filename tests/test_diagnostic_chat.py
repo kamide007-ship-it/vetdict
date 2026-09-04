@@ -1649,6 +1649,7 @@ class TestQuickTapPhraseExtraction:
             "お腹が張っている",
             "鼻水",
             "あごが濡れている",
+            "あごの下が腫れている",
         ],
         "chinchilla": [
             "よだれが出る",
@@ -1719,6 +1720,7 @@ class TestQuickTapPhraseExtraction:
             "ダニがついている",
             "吐き戻しが増えた",
             "脱皮した皮が目に残っている",
+            "脱皮した皮が体に残っている",
         ],
         "lizard": [
             "食べない",
@@ -4174,3 +4176,97 @@ class TestChatClinicalAccuracyAuditRound21:
         assert ex, ex  # was extraction-zero before round 21
         names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "guinea_pig")[:5]]
         assert any(("白内障" in n) or ("眼" in n) or ("角膜" in n) for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound21Parallel:
+    """2026-09 audit round 21: fresh 36-case chief-complaint sweep. Root
+    causes fixed: (a) connective-form gaps (糞が小さくなって, 脱皮した皮が体に
+    残って), (b) missing owner phrasings for equine back pain (背中を痛がって
+    鞍を嫌がる — Kissing Spines/back pain, Reed & Bayly 4th ed) and peri-oral
+    abscess/mouth-rot complaints, (c) rabbit jaw-abscess complaint resolved
+    only to generic swelling so myxomatosis outranked dental abscess, and
+    (d) untiered rare equine entries (Aspergillosis, Hendra) outranked
+    strangles for the routine fever+nasal-discharge complaint."""
+
+    def test_rabbit_small_feces_connective_form_ranks_gi_stasis(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("糞が小さくなって食欲がない", "rabbit")
+        assert "small_fecal_pellets" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "rabbit")[0]
+        assert "うっ滞" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_equine_back_pain_saddle_complaint_extracts_and_ranks_back_family(self):
+        from api.diagnostic_chat import (
+            _extract_equine_symptoms,
+            _match_equine_symptoms_to_diseases,
+        )
+
+        ex = _extract_equine_symptoms("背中を痛がって鞍をつけると嫌がる")
+        assert "body_back_pain" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_equine_symptoms_to_diseases(ex)[:5]]
+        assert any(("背部痛" in n) or ("キッシングスパイン" in n) or ("仙腸" in n) for n in names), names
+
+    def test_equine_fever_nasal_discharge_ranks_strangles_over_aspergillosis(self):
+        # Pulmonary/systemic aspergillosis is a rare opportunistic infection
+        # and guttural pouch mycosis presents with epistaxis — fever+nasal
+        # discharge is the strangles/EHV/empyema differential (Reed & Bayly).
+        from api.diagnostic_chat import (
+            _extract_equine_symptoms,
+            _match_equine_symptoms_to_diseases,
+        )
+
+        ex = _extract_equine_symptoms("食欲がなくて熱がある 鼻水が出る")
+        res = _match_equine_symptoms_to_diseases(ex)
+        names = [d.get("name_ja") or "" for d in res[:3]]
+        assert any("腺疫" in n for n in names), names
+        rank = {d.get("name_ja"): i for i, d in enumerate(res)}
+        asp = rank.get("アスペルギルス症")
+        strangles = rank.get("腺疫")
+        assert strangles is not None and (asp is None or strangles < asp), (strangles, asp)
+
+    def test_snake_body_shed_retention_extracts_dysecdysis(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("脱皮した皮が体に残ってしまっている", "snake")
+        assert "dysecdysis" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "snake")[0]
+        assert "脱皮" in (top.get("name_ja") or ""), top.get("name_ja")
+        # The eye-specific complaint must keep resolving to the spectacle ID
+        # via its longer alias (longest-match priority).
+        ex_eye = _extract_species_symptoms("脱皮した皮が目に残っている", "snake")
+        assert "retained_spectacle" in ex_eye, ex_eye
+
+    def test_rabbit_jaw_swelling_ranks_dental_abscess_family(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("あごの下が腫れてよだれが出る", "rabbit")
+        assert "jaw_swelling" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "rabbit")[:5]]
+        assert any("膿瘍" in n for n in names), names
+        # The jaw_swelling→facial_swelling bridge must reach the tooth-root
+        # abscess entry (facial_swelling vocabulary), not only 下顎膿瘍.
+        assert any("歯根" in n or "下顎膿瘍" in n for n in names), names
+
+    def test_reptile_perioral_swelling_extracts_facial_swelling(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("口の周りが腫れて膿のようなものが見える", "lizard")
+        assert "facial_swelling" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "lizard")[:5]]
+        assert any(("マウスロット" in n) or ("膿瘍" in n) or ("口内炎" in n) for n in names), names
+
+    def test_lizard_soft_jaw_guard_still_ranks_mbd(self):
+        # The new jaw-swelling aliases must not disturb the jaw-softening
+        # (rubber jaw → MBD) complaint fixed in an earlier round.
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("あごが柔らかくてぶよぶよしている", "lizard")
+        assert "jaw_softening" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "lizard")[0]
+        assert ("骨疾患" in (top.get("name_ja") or "")) or ("副甲状腺" in (top.get("name_ja") or ""))

@@ -2853,6 +2853,85 @@ class TestBatch53MagnesiumSulfate:
         assert "epsom_salt" in hits
 
 
+class TestBatch54ReferencedAgents:
+    """2026-09 20th referenced-but-absent sweep: four agents the site's own
+    curated disease content prescribes with explicit doses had no monograph —
+    tiopronin (first-line cystine urolith dissolution, ACVIM Lulich 2016),
+    diclazuril (FDA-approved EPM alternative, Protazil NADA 141-268),
+    isoproterenol (third-degree AV block bridge CRI in dog/cat/horse), and
+    diminazene aceturate (the Japan-approved canine babesiosis drug ガナゼック,
+    dosed by the equine dourine entry). Two alias gaps were also fixed
+    (フェニルエフリン spelling variant; space-separated カルシウム グルコネート)."""
+
+    def test_batch54_agents_present_with_bilingual_dosing(self):
+        from api.drug_dictionary import DRUGS
+
+        by_id = {d["id"]: d for d in DRUGS}
+        expect = {
+            "tiopronin": ("dog",),
+            "diclazuril": ("horse", "bird"),
+            "isoproterenol": ("dog", "cat", "horse"),
+            "diminazene": ("dog", "cat", "horse"),
+        }
+        for did, species in expect.items():
+            d = by_id.get(did)
+            assert d is not None, f"{did} missing from formulary"
+            for sp in species:
+                info = d["species_info"][sp]
+                assert (info.get("dosage") or "").strip(), f"{did}/{sp} missing dosage"
+                assert (info.get("dosage_ja") or "").strip(), f"{did}/{sp} missing dosage_ja"
+
+    def test_batch54_definitional_safety_facts(self):
+        from api.drug_dictionary import get_drug_by_id
+
+        # Diminazene: narrow safety margin — the 3.5 mg/kg cap and the
+        # no-repeat rule guard against the classic CNS haemorrhagic necrosis.
+        dim = get_drug_by_id("diminazene")
+        assert "3.5 mg/kg" in dim["species_info"]["dog"]["dosage"]
+        assert "神経毒性" in dim["contraindications_ja"]
+        # B. gibsoni relapse caveat keeps atovaquone+azithromycin first-line.
+        assert "アトバコン" in dim["species_info"]["dog"]["dosage_ja"]
+        # Isoproterenol: digitalis-sensitised myocardium is the major
+        # interaction; pacing remains definitive therapy.
+        iso = get_drug_by_id("isoproterenol")
+        assert any(i["severity"] == "major" and "Digoxin" in i["drug"] for i in iso["drug_interactions"])
+        assert "ペースメーカー" in iso["species_info"]["dog"]["dosage_ja"] + iso["species_info"]["dog"]["notes_ja"]
+        # Tiopronin: never a substitute for dietary management.
+        tio = get_drug_by_id("tiopronin")
+        assert "食事療法" in tio["contraindications_ja"]
+        assert "15-20 mg/kg" in tio["species_info"]["dog"]["dosage"]
+        # Diclazuril: the FDA-approved EPM regimen the entries cite.
+        dic = get_drug_by_id("diclazuril")
+        assert "1 mg/kg" in dic["species_info"]["horse"]["dosage"]
+        assert "28" in dic["species_info"]["horse"]["dosage"]
+
+    def test_batch54_text_resolution_and_alias_fixes(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = [
+            ("チオプロニン（15-20 mg/kg PO q12h）が第一選択", "tiopronin"),
+            ("2-MPG (tiopronin) 15-20 mg/kg PO q12h", "tiopronin"),
+            ("ジクラズリル1 mg/kg PO q24h × 28日間（Protazil®）", "diclazuril"),
+            ("イソプロテレノールCRI（0.04-0.08 μg/kg/min）", "isoproterenol"),
+            ("ジミナゼン3.5 mg/kg IM×2回", "diminazene"),
+            ("ガナゼック 3.5 mg/kg IM 単回", "diminazene"),
+            # Spelling-variant alias: canonical name_ja is フェニレフリン.
+            ("フェニルエフリン3 μg/kg/min CRI（脾臓収縮）", "phenylephrine"),
+            # Space-separated word order used by the reptile NSHP entries.
+            ("カルシウム グルコネート 100 mg/kg PO q24h × 2週", "calcium_gluconate"),
+        ]
+        for text, want in cases:
+            hits = [h["id"] for h in find_drugs_in_text(text)]
+            assert want in hits, f"{want} not resolved from {text!r}: {hits}"
+
+    def test_batch54_interaction_checker_resolves_natural_names(self):
+        from api.drug_dictionary import resolve_drug_reference
+
+        assert resolve_drug_reference("チオプロニン") == "tiopronin"
+        assert resolve_drug_reference("ガナゼック") == "diminazene"
+        assert resolve_drug_reference("イソプロテレノール") == "isoproterenol"
+
+
 def test_sweep20_spaced_calcium_gluconate_resolves():
     """2026-09 sweep #20: the reptile/chelonian NSHP protocols cite the
     space-separated word-order form (カルシウム グルコネート 100 mg/kg PO) which

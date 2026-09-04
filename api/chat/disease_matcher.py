@@ -212,6 +212,10 @@ _SYN: dict[str, list[str]] = {
     "red_ventrum": ["red_legs", "skin_redness"],
     "edema": ["swelling", "bloating", "ascites"],
     "swelling": ["edema", "facial_swelling", "eye_swelling"],
+    # 2026-09 第21回精度スイープ: 「あごの下が腫れ」→jaw_swelling がウサギの
+    # 歯根膿瘍（facial_swelling 表記）に届かず下顎膿瘍1件のみだった
+    "jaw_swelling": ["facial_swelling"],
+    "facial_swelling": ["jaw_swelling", "swelling_behind_jaw"],
     "rough_coat": ["poor_coat", "dry_skin"],
     "scaly_legs": ["leg_scales", "scaly_face"],
     "leg_scales": ["scaly_legs", "scaly_face"],
