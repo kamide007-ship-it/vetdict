@@ -770,6 +770,12 @@ SYMPTOMS = [
         "name_en": "Oral Mass / Growth",
         "category": "digestive",
     },
+    {
+        "id": "vulvar_discharge",
+        "name_ja": "陰部からの膿・おりもの（分泌物）",
+        "name_en": "Vulvar Discharge (Pus / Abnormal Secretion)",
+        "category": "general",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -3307,6 +3313,39 @@ DISEASES = [
             "cocker_spaniel": 1.4,
         },
     },
+    # 2026-09 audit round 21: the post-estrus purulent-discharge + PU/PD
+    # complaint (「陰部から膿が出る 水をよく飲む」) had no pyometra entry and no
+    # vulvar-discharge vocabulary at all, so intestinal parasites / Cushing's
+    # ranked first for the single most important intact-bitch emergency
+    # (~19-25% of intact bitches by age 10 — Egenvall 2001; Hagman 2018).
+    {
+        "id": "pyometra",
+        "prevalence_tier": "common",
+        "name_ja": "子宮蓄膿症",
+        "name_en": "Pyometra",
+        "description_ja": "未避妊の中高齢雌犬で発情後1〜3ヶ月（黄体期）に好発する子宮内の細菌感染（大腸菌が最多）。多飲多尿・元気食欲低下・腹囲膨満が典型で、開放性では陰部から膿性分泌物、閉鎖性では分泌物がなく重症化しやすい。エンドトキシン血症から敗血症・腎障害へ進行しうる救急疾患です。診断は超音波検査（子宮内液体貯留）・血液検査（好中球増多・高グロブリン血症）。治療の第一選択は卵巣子宮全摘出術（OHE）＋輸液・広域抗菌薬（アンピシリン・スルバクタム等）。繁殖価値の高い個体に限りアグレプリストン等の内科的管理の報告がありますが再発率が高い（Ettinger 8th ed; Hagman 2018）。",
+        "description_en": "Bacterial infection of the uterus (E. coli most common) of intact middle-aged bitches, typically 1-3 months post-estrus during diestrus. PU/PD, lethargy, inappetence and abdominal enlargement are classic; open-cervix cases show purulent vulvar discharge while closed-cervix cases lack discharge and deteriorate faster. Endotoxemia can progress to sepsis and renal injury — a surgical emergency. Diagnosis: ultrasound (intrauterine fluid), CBC (neutrophilia, hyperglobulinemia). Treatment of choice is ovariohysterectomy with fluids and broad-spectrum antibiotics (e.g. ampicillin-sulbactam); medical management (aglepristone) is reserved for valuable breeding bitches and carries high recurrence (Ettinger 8th ed; Hagman 2018).",
+        # Discharge-gated on purpose: every systemic sign of pyometra (PU/PD,
+        # vomiting, inappetence, distension) is nonspecific, and carrying any
+        # of them let this small entry hijack endocrine/GI complaints on
+        # precision (verified: PU/PD+weight-loss and vomiting+anorexia both
+        # ranked pyometra first). The entry therefore matches ONLY on its
+        # defining sign; the clusters below amplify it whenever discharge is
+        # stated with systemic context (same guard pattern as the
+        # testicular-tumor entry's feminization pair).
+        "symptoms": [
+            "vulvar_discharge",
+        ],
+        "severity": "emergency",
+        "recommended_tests": ["ultrasound", "blood_test", "xray"],
+        "breed_risks": {
+            "golden_retriever": 1.5,
+            "rough_collie": 1.5,
+            "rottweiler": 1.5,
+            "bernese_mountain_dog": 1.6,
+            "cavalier_king_charles_spaniel": 1.4,
+        },
+    },
 ]
 
 DISEASE_MAP = {d["id"]: d for d in DISEASES}
@@ -4384,6 +4423,13 @@ _PATHOGNOMONIC_CLUSTERS = [
     # must outrank idiopathic epilepsy when the nursing context is stated.
     (frozenset({"postpartum_lactating", "tremors"}), "eclampsia", 1.8),
     (frozenset({"postpartum_lactating", "seizures"}), "eclampsia", 1.8),
+    # Purulent vulvar discharge in a bitch = pyometra until proven otherwise
+    # (Ettinger 8th ed; Hagman 2018) — a life-threatening emergency that must
+    # be excluded before vaginitis. Single-sign cluster follows the oral_mass /
+    # worms_in_stool precedent; the PU/PD and distension pairs strengthen it.
+    (frozenset({"vulvar_discharge"}), "pyometra", 1.6),
+    (frozenset({"vulvar_discharge", "excessive_thirst"}), "pyometra", 2.0),
+    (frozenset({"vulvar_discharge", "bloating"}), "pyometra", 1.8),
     (frozenset({"itching", "skin_rashes", "diarrhea"}), "allergic_dermatitis", 1.6),
     # IMHA: pale gums + jaundice + lethargy
     (frozenset({"pale_gums", "jaundice", "lethargy"}), "hemolytic_anemia", 2.0),

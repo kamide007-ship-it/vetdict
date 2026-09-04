@@ -4238,7 +4238,63 @@ MgSO4×18 + MgO×19 + マグネシウム補充×4 が魚用薬浴エントリ「
 - ServiceWorker: `CACHE_NAME` v138 → **v139**
 - 再現手順: `migrate_to_sqlite.py`（クリーンビルド）— 疾患名不変のため検索インデックス no-op
 
-## 2026-09セッション（第32弾: シスチン尿症/EPM/房室ブロック/バベシア症の薬品4剤補完 + チャット精度第21弾 + 馬の背部痛主訴対応）
+## 2026-09セッション(第32弾: 犬子宮蓄膿症の新設 + 馬背部痛/quidding対応 + トカゲstick tail + チャット精度第21弾)
+
+### エラーチェック(結果: ベースライン健全)
+- repo全体 ruff check clean、フルテスト **4,155件合格**(34 skip、カバレッジ82.38%)
+- 配信SQLiteクリーンビルド: 6,893疾患・614薬品、treatment/prevention/prognosis **100%**
+- 麻酔: 全21種×全8カテゴリ完備(188プロトコル)、薬剤行の dose 欠落 **0**、全種 references あり
+- 薬用量: safe薬品の dosage 欠落 **0**、prevalence dead key **9**(既知残、上限15ガード内)
+- 薬品マッチャー第20回スイープ: 実フレーズ全解決 — 真の欠落は空白区切り「カルシウム グルコネート」
+  (爬虫類NSHP 13参照)のみ → calcium_gluconate エイリアス追加(bare グルコネートは
+  キニジングルコネート部分文字列衝突のため不使用、回帰テストで固定)
+
+### 診断チャット精度 第21弾(29症例フレッシュスイープ 5 MISS → 全症例合格)
+- **犬レガシーDBに子宮蓄膿症を新設**(81→82疾患、77→78症状): 未避妊雌の最重要救急疾患なのに
+  エントリも陰部分泌物語彙も皆無で「陰部から膿が出る 水をよく飲む」が腸管寄生虫1位だった
+  (Egenvall 2001; Hagman 2018: 10歳までの未避妊雌の19-25%)。**分泌物ゲート型設計**:
+  全身徴候(PU/PD・嘔吐・食欲不振・膨満)は全て非特異的で、セットに持たせると PU/PD+体重減少や
+  嘔吐+食欲不振の主訴を乗っ取ることを検証で発見(糖尿病/急性胃腸炎の1位を奪った)→
+  症状セットは vulvar_discharge のみに限定し(精巣腫瘍の女性化ペアと同型のガード)、
+  単独{vulvar_discharge}×1.6 / PU/PDペア×2.0 / 膨満ペア×1.8 のクラスタで分泌物明記時の rank 1 を保証
+- **genital_discharge のID-シノニム鎖を新設**: 「陰部からの出血」等のエイリアス標的なのに
+  ID_SYNONYMS 鎖が無く全種語彙で脱落していた → vaginal_discharge(猫/GP/ハムスター)・
+  vulvar_discharge(フェレット/レガシー犬)・bloody_vaginal_discharge(ウサギ)へ解決。
+  陰部から膿/おりものが出/外陰部から膿 等エイリアス7種追加。猫の同主訴も子宮蓄膿症 rank 1、
+  フェレット副腎(vulvar_swelling経路)は不変を回帰テストで固定
+- **馬・背部痛/quiddingの飼い主表現が皆無だった**(所見 body_back_pain/dental_quidding と
+  疾患群は既存で語彙のみ欠落): 背中を触ると痛がる/乗ると嫌がる/鞍を置くと嫌がる→body_back_pain、
+  口から餌をこぼす/餌をこぼ/食べるのが遅く→dental_quidding。歯科・背部の未tier 20件を
+  エビデンスで是正(歯の鋭利点=very_common・波状歯/ジアステマ/歯周病/乳歯遺残=common:
+  Baker & Easley Equine Dentistry 3rd ed、仙腸関節疾患=common: Dyson、椎間板脊椎炎/フッ素症/
+  過剰歯=rare)。症候群フロアに dental_quidding→Sharp Enamel Points、body_back_pain→
+  Back Pain/Kissing Spines を追加(1所見エントリのカバレッジ飽和対策 — hirsutism→PPIDと同型)。
+  修正後: 背部痛主訴=背部痛1位+キッシングスパイン2位、quidding主訴=歯科ddxがtop5独占
+- **トカゲ stick tail**: 「尻尾が細くなって食べない」(レオパードゲッコーの尾脂肪消耗=
+  Cryptosporidium varanii の hallmark — Mader 3rd ed; Deming 2008)が抽出ゼロ →
+  tail_thinning 症状IDをトカゲ語彙に新設し Cryptosporidiosis(モジュール)+
+  Gecko Cryptosporidiosis(supplementary JSON)の症状セットに付与、tier=common 追加 →
+  クリプトが rank 1-2。他種は ID_SYNONYMS で weight_loss にフォールバック(ハムスター検証済み)
+- **モルモット眼球突出**: 修飾語割り込み形「目が白く飛び出している」が既存の
+  「目が飛び出し…」キー群に不一致で抽出ゼロ → 眼球が飛び出/目玉が飛び出/片目が飛び出/
+  目が白く(stem) エイリアス + eye_bulging→swollen_eyes 鎖(GP語彙)追加
+
+### UX動線
+- クイック入力に検証済み新主訴を追加: 犬「陰部から膿が出て水をよく飲む」(救急)、
+  馬「口から餌をこぼす」「背中を触ると痛がる」、トカゲ「尻尾が細くなってきた」
+  (ミラーテスト JA_QUICK 同期、全フレーズ抽出保証をCIで維持)
+- 新設疾患はチャット候補カード「疾患DBで詳細を開く」ピボットが base-name 完全一致で着地
+  (子宮蓄膿症=dogモジュール Pyometra、クリプトスポリジウム症=lizardモジュール)を検証
+
+### テスト・CI
+- フルテストスイート: **4,166件合格**(34 skip、+11新規回帰テスト: Round21×10 + sweep20×1)、
+  カバレッジ82.40%
+- ruff check/format: repo全体 clean
+- 配信SQLite再構築: 6,893疾患・3,648症状・614薬品
+- ServiceWorker: CACHE_NAME v139 → **v140**、pendingStats symptoms 77→**78**
+- PR #788(draft): claude/eager-bardeen-bhylx9 → main
+
+## 2026-09セッション（第32弾・並行セッション分: シスチン尿症/EPM/房室ブロック/バベシア症の薬品4剤補完 + チャット精度第21弾 + 馬の背部痛主訴対応）
 
 ### エラーチェック（結果: ベースライン健全）
 - repo全体 ruff check clean、フルテスト **4,155件合格**（34 skip）
@@ -4308,3 +4364,17 @@ MgSO4×18 + MgO×19 + マグネシウム補充×4 が魚用薬浴エントリ「
 - `setDefaultStats()`: dog 561/cat 541/horse 358/鳥系 236薬品、pendingStats drugs 614→**618**
 - ServiceWorker: `CACHE_NAME` v139 → **v140**
 - 再現手順: `migrate_to_sqlite.py`（クリーンビルド）— 疾患名不変のため検索インデックス no-op
+
+### mainの並行第32弾（PR #788: 犬子宮蓄膿症+馬quidding+トカゲstick tail）とのマージ統合
+- 両セッションが「第32弾」「チャット精度第21弾」「SW v140」を並行使用し5ファイルで衝突 → 解決:
+  - EQUINE_SYMPTOM_ALIASES の背部痛キーは両セッションのユニオン（背中を触ると痛が/背中を痛が/
+    背中が硬い/鞍をつけると嫌が/鞍を置くと嫌が/鞍を嫌が/乗ると嫌が/騎乗を嫌が/saddle resentment）
+  - クイック入力: horse/lizard は main側（口から餌をこぼす・背中を触ると痛がる・尻尾が細くなってきた）、
+    rabbit/snake は本セッション側（あごの下が腫れている・脱皮した皮が体に残っている）を採用し
+    ミラーテスト JA_QUICK を同期
+  - テストクラス衝突: 本セッションの Round21 を **TestChatClinicalAccuracyAuditRound21Parallel** に改名
+    （main側の Round21=犬子宮蓄膿症/quidding/stick tail と共存）
+  - 「カルシウム グルコネート」空白形エイリアスは両セッションが同一解決（キー重複なし）
+  - CLAUDE.md は両セッションログを併記、pendingStats は合算実測（618薬品・78症状）に同期
+- ServiceWorker: 両セッションが v140 を使用 → **v141** に改番
+- マージ後フルテストスイート: **4,177件合格**（34 skip、両セッションの回帰テスト合算）、ruff clean

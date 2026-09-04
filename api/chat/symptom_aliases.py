@@ -1015,6 +1015,20 @@ SYMPTOM_ALIASES = {
     "うずくまってる": "hunched_posture",
     # ハムスター/ハリネズミ — 眼球突出
     "眼球突出": "eye_bulging",
+    # 2026-09 Round 21: 眼球突出の飼い主表現（修飾語が挟まる「目が白く飛び出して
+    # いる」は既存の「目が飛び出して…」キーに一致しないため、主語違いの言い換えを補完）
+    "眼球が飛び出": "eye_bulging",
+    "目玉が飛び出": "eye_bulging",
+    "片目が飛び出": "eye_bulging",
+    # 白眼系の連用形（「目が白く濁って」より短い stem — 最長一致で既存キーが優先）
+    "目が白く": "cloudy_eyes",
+    # トカゲ・レオパードゲッコー: 尾は脂肪貯蔵庫 — 尾が細る=削痩（stick tail、
+    # クリプトスポリジウム症の教科書的主訴 — Mader 3rd ed）。トカゲ語彙は
+    # tail_thinning を保有、他種は ID_SYNONYMS 経由で weight_loss にフォールバック
+    "尻尾が細く": "tail_thinning",
+    "尾が細く": "tail_thinning",
+    "しっぽが細く": "tail_thinning",
+    "スティックテール": "tail_thinning",
     "頬袋が出たまま": "cheek_pouch_prolapse",
     "頬袋が戻らない": "cheek_pouch_prolapse",
     # 鳥
@@ -1440,6 +1454,15 @@ SYMPTOM_ALIASES = {
     "genital bleeding": "genital_discharge",
     "bleeding from genitals": "genital_discharge",
     "vaginal discharge": "genital_discharge",
+    # 2026-09 Round 21: 膿性分泌物の飼い主表現（子宮蓄膿症の代表的主訴 —
+    # 「陰部から膿が出る」が抽出ゼロだった）
+    "陰部から膿": "genital_discharge",
+    "外陰部から膿": "genital_discharge",
+    "陰部から分泌物": "genital_discharge",
+    "おりものが出": "genital_discharge",
+    "おりものが増え": "genital_discharge",
+    "pus from vulva": "genital_discharge",
+    "purulent vulvar discharge": "genital_discharge",
     # 発情異常
     "発情がない": "prolonged_estrus",
     "ヒートが来ない": "prolonged_estrus",

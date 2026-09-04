@@ -2930,3 +2930,22 @@ class TestBatch54ReferencedAgents:
         assert resolve_drug_reference("チオプロニン") == "tiopronin"
         assert resolve_drug_reference("ガナゼック") == "diminazene"
         assert resolve_drug_reference("イソプロテレノール") == "isoproterenol"
+
+
+def test_sweep20_spaced_calcium_gluconate_resolves():
+    """2026-09 sweep #20: the reptile/chelonian NSHP protocols cite the
+    space-separated word-order form (カルシウム グルコネート 100 mg/kg PO) which
+    neither the canonical name nor the existing word-order aliases reduced to.
+    Bare グルコネート must NOT be an alias — it is a substring of
+    キニジングルコネート and would mis-chip quinidine contexts."""
+    from api.drug_dictionary import find_drugs_in_text
+
+    hits = find_drugs_in_text("Ca・VitD3補充（カルシウム グルコネート 100 mg/kg PO q24h × 2週）")
+    ids = {h["id"] for h in hits}
+    assert "calcium_gluconate" in ids, ids
+
+    # precision guard: quinidine gluconate stays quinidine-only
+    qhits = find_drugs_in_text("キニジングルコネート 0.5-2.2 mg/kg IV slow")
+    qids = {h["id"] for h in qhits}
+    assert "quinidine" in qids, qids
+    assert "calcium_gluconate" not in qids, qids

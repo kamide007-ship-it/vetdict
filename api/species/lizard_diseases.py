@@ -492,7 +492,17 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cryptosporidiosis",
         "name_ja": "クリプトスポリジウム症",
-        "symptoms": {"weight_loss", "anorexia", "lethargy", "diarrhea", "dehydration", "body_swelling"},
+        # tail_thinning: "stick tail" tail-fat wasting is the hallmark
+        # presentation in leopard geckos (Mader 3rd ed; Deming 2008)
+        "symptoms": {
+            "weight_loss",
+            "anorexia",
+            "lethargy",
+            "diarrhea",
+            "dehydration",
+            "body_swelling",
+            "tail_thinning",
+        },
         "description": "Cryptosporidiosis is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "特にヒョウモントカゲモドキで消耗を引き起こすクリプトスポリジウム属原虫の慢性感染症です。",
         "urgency": "high",
@@ -3133,6 +3143,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     # 体型・全身
     "swollen_limbs": "body",
     "weight_loss": "body",
+    "tail_thinning": "body",
     "poor_body_condition": "body",
     "excessive_weight": "body",
     "fat_deposits": "body",
@@ -3201,6 +3212,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "excessive_thirst": {"ja": "多飲", "en": "Excessive thirst"},
     "excessive_urination": {"ja": "多尿", "en": "Excessive urination"},
     "weight_loss": {"ja": "体重減少", "en": "Weight loss"},
+    "tail_thinning": {"ja": "尾が痩せ細る（スティックテール）", "en": "Tail thinning (stick tail)"},
     "poor_body_condition": {"ja": "低体格スコア", "en": "Poor body condition"},
     "excessive_weight": {"ja": "過体重", "en": "Excessive weight"},
     "fat_deposits": {"ja": "脂肪沈着", "en": "Fat deposits"},

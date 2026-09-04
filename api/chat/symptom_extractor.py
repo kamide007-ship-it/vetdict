@@ -14,6 +14,22 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # Urticaria/angioedema (2026-08 round 14): legacy dog vocabulary carries
     # hives directly; species vocabularies express wheals as rashes/lesions.
     "hives": ["urticaria", "wheals", "skin_rashes", "skin_lesions", "swelling"],
+    # Vulvar/vaginal discharge (2026-09 round 21): the alias target
+    # genital_discharge had no synonym chain, so the pyometra chief complaint
+    # (陰部から膿) dropped in every species vocabulary. Species modules carry
+    # vaginal_discharge (cat/gp/hamster), vulvar_discharge (ferret) or
+    # bloody_vaginal_discharge (rabbit); legacy dog carries vulvar_discharge.
+    "genital_discharge": [
+        "vaginal_discharge",
+        "vulvar_discharge",
+        "bloody_vaginal_discharge",
+        "vaginal_bleeding",
+    ],
+    "vaginal_discharge": ["genital_discharge", "vulvar_discharge", "bloody_vaginal_discharge"],
+    # Stick-tail wasting (2026-09 round 21): lizard vocabulary carries
+    # tail_thinning (Cryptosporidiosis hallmark); other species fall back to
+    # generic wasting.
+    "tail_thinning": ["weight_loss", "muscle_wasting"],
     # Appetite
     "loss_of_appetite": ["appetite_loss", "anorexia", "poor_appetite", "decreased_appetite"],
     "appetite_loss": ["loss_of_appetite", "anorexia", "poor_appetite", "decreased_appetite"],
@@ -133,6 +149,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "bulging_eye",
         "enlarged_eye",
         "proptosis",
+        # guinea pig vocabulary expresses exophthalmos as swollen_eyes
+        "swollen_eyes",
     ],
     "exophthalmos": [
         "pop_eye",
