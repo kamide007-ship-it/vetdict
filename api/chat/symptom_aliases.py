@@ -818,6 +818,12 @@ SYMPTOM_ALIASES = {
     "脱皮がうまくいかない": "dysecdysis",
     "脱皮できない": "dysecdysis",
     "皮が残ってる": "dysecdysis",
+    # 2026-09 第21回精度スイープ: 「脱皮した皮が体に残ってしまっている」が
+    # 抽出ゼロだった — 語幹キーで「残ってる/残ってしまって」の両形をカバー
+    # （目に残る主訴はより長い retained_spectacle キーが最長一致で優先）
+    "皮が残って": "dysecdysis",
+    "脱皮した皮が体に残": "dysecdysis",
+    "古い皮が残って": "dysecdysis",
     "retained shed": "dysecdysis",
     # 関節
     "足が腫れてる": "lameness_or_limping",
@@ -849,6 +855,11 @@ SYMPTOM_ALIASES = {
     # ---------------------------------------------------------------
     "うんちが小さい": "small_fecal_pellets",
     "糞が小さい": "small_fecal_pellets",
+    # 2026-09 第21回精度スイープ: 連用形「糞が小さくなって」が終止形キーに不一致で
+    # GIうっ滞の最古典的主訴が抽出ゼロだった — 語幹キーで両形をカバー
+    "糞が小さく": "small_fecal_pellets",
+    "うんちが小さく": "small_fecal_pellets",
+    "フンが小さく": "small_fecal_pellets",
     "small feces": "small_fecal_pellets",
     "small droppings": "small_fecal_pellets",
     "small poops": "small_fecal_pellets",
@@ -991,6 +1002,12 @@ SYMPTOM_ALIASES = {
     # ウサギ
     "膿が出てる": "abscess",
     "下顎が腫れてる": "jaw_swelling",
+    # 2026-09 第21回精度スイープ: ウサギ歯根膿瘍の古典的主訴「あごの下が腫れて
+    # いる」が汎用 swelling にしか落ちず粘液腫症が1位だった — 顎特異IDに直接解決
+    "あごの下が腫れ": "jaw_swelling",
+    "顎の下が腫れ": "jaw_swelling",
+    "あごが腫れ": "jaw_swelling",
+    "顎が腫れ": "jaw_swelling",
     "目から膿が出る": "eye_discharge",
     "目から膿": "eye_discharge",
     "顔が腫れてる": "facial_swelling",
@@ -1722,6 +1739,12 @@ SYMPTOM_ALIASES = {
     "口内に膿": "mouth_lesions",
     "口が閉じない": "mouth_lesions",
     "口の周りが汚れて": "mouth_lesions",
+    # 2026-09 第21回精度スイープ: 口周囲の腫脹・排膿の飼い主表現（爬虫類マウスロット/
+    # 顎膿瘍の主訴）。facial_swelling/oral_discharge を持たない種では抽出段階で
+    # ID_SYNONYMS フォールバックに乗るか安全に脱落する
+    "口の周りが腫れ": "facial_swelling",
+    "口の周りに膿": "oral_discharge",
+    "口から膿": "oral_discharge",
     # 口腔内のチーズ状（乾酪様）滲出物 — 爬虫類マウスロットの教科書的所見。
     # mucus_in_mouth は爬虫類系の語彙にのみ存在するため、他種では抽出段階で
     # 自動的に落ちる（誤爆しない）。

@@ -232,6 +232,13 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "back pain": "body_back_pain",
     "背中痛い": "body_back_pain",
     "背部痛": "body_back_pain",
+    # 2026-09 第21回精度スイープ: 「背中を痛がって鞍をつけると嫌がる」（キッシング
+    # スパイン/背部痛の代表的主訴 — Reed & Bayly 4th ed）が抽出ゼロだった
+    "背中を痛が": "body_back_pain",
+    "背中が硬い": "body_back_pain",
+    "鞍をつけると嫌が": "body_back_pain",
+    "鞍を嫌が": "body_back_pain",
+    "saddle resentment": "body_back_pain",
     "muscle atrophy": "body_muscle_atrophy",
     "筋萎縮": "body_muscle_atrophy",
     "swelling": "body_swelling",

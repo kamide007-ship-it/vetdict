@@ -77,6 +77,7 @@ from api.drug_batch_50 import DRUGS_BATCH_50
 from api.drug_batch_51 import DRUGS_BATCH_51
 from api.drug_batch_52 import DRUGS_BATCH_52
 from api.drug_batch_53 import DRUGS_BATCH_53
+from api.drug_batch_54 import DRUGS_BATCH_54
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10786,6 +10787,17 @@ for _drug53 in DRUGS_BATCH_53:
         DRUGS.append(_drug53)
         _drug_index[_drug53["id"]] = _drug53
 
+# Batch 54: 2026-09監査（第20回スイープ）
+# （チオプロニン — 犬シスチン尿症の第一選択溶解薬「15-20 mg/kg PO q12h」が
+#  3エントリで用量付き参照なのに未収載（ACVIM Lulich 2016）; ジクラズリル —
+#  EPMのFDA承認代替 Protazil 1 mg/kg×28日; イソプロテレノール — 第3度房室
+#  ブロックのブリッジCRIが犬猫馬3エントリで用量付き参照; ジミナゼン —
+#  日本承認の犬バベシア症治療薬ガナゼック、馬媾疫エントリが用量付き参照）
+for _drug54 in DRUGS_BATCH_54:
+    if _drug54["id"] not in _drug_index:
+        DRUGS.append(_drug54)
+        _drug_index[_drug54["id"]] = _drug54
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11444,7 +11456,12 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "dopamine": ("ドーパミン",),  # long-vowel variant of ドパミン — 19 treatment refs
     "sodium_bicarbonate": ("重炭酸ナトリウム",),  # canonical: 炭酸水素ナトリウム
     "vitamin_k1": ("フィトナジオン",),  # phytonadione = INN of vitamin K1
-    "calcium_gluconate": ("カルシウムグルコネート",),  # canonical: グルコン酸カルシウム
+    "calcium_gluconate": (
+        "カルシウムグルコネート",
+        # 2026-09 sweep #20: 爬虫類NSHPエントリが「カルシウム グルコネート 100 mg/kg PO」と
+        # 空白区切りで表記（4参照）— 連結形のみでは str.find が届かない
+        "カルシウム グルコネート",
+    ),  # canonical: グルコン酸カルシウム
     "ursodiol": ("ウルソジオール",),  # canonical: ウルソデオキシコール酸
     # 2026-08 sweep #16: 治療文は「硫酸鉄 4-6 mg/kg PO」と略記する（20参照）が
     # 正規 name_ja は「硫酸第一鉄」のため索引が届かなかった
@@ -11473,6 +11490,10 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     # ursodiol already aliases ウルソジオール above; UDCA is the standard clinical
     # acronym (41 treatment refs: "UDCA 10-15 mg/kg PO q24h").
     "hetastarch": ("ヘタスターチ",),  # canonical: ヒドロキシエチルデンプン（HES 6%）
+    # 2026-09 sweep #20: 馬の腎脾間膜変位（左背側変位）エントリが
+    # 「フェニルエフリン 3 μg/kg/min CRI」と表記（2参照）— 正規 name_ja は
+    # フェニレフリン（INN標準カナ）のため索引が届かなかった
+    "phenylephrine": ("フェニルエフリン",),
     # 2026-08 sweep #15: equine navicular/ringbone texts cite tiludronate by the
     # ティ/チ transliteration variants — canonical name_ja is チルドロン酸（チルドレン）.
     "tiludronate": ("ティルドロネート", "チルドロネート"),
