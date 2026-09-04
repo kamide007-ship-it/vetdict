@@ -547,6 +547,33 @@ SPECIES_PREVALENCE = {
         "Wound Infection": "common",
         "Cellulitis": "common",
         "White Line Disease": "common",
+        # 2026-09 Round 21: dental & back diseases — the quidding / ridden-back-pain
+        # complaints surfaced untiered rare variants above the textbook-frequent
+        # causes (Baker & Easley, Equine Dentistry 3rd ed; Dyson sacroiliac series;
+        # Reed & Bayly 4th ed). Sharp enamel points are near-universal without
+        # routine floating; diastema/periodontal disease affect a majority of
+        # aged horses; discospondylitis and fluorosis are genuinely rare.
+        "Sharp Enamel Points": "very_common",
+        "Wave Mouth": "common",
+        "Diastema": "common",
+        "Periodontal Disease": "common",
+        "Retained Deciduous Teeth (Caps)": "common",
+        "Wolf Teeth": "common",
+        "Malocclusion": "common",
+        "Sacroiliac Joint Disease": "common",  # Major cause of poor performance (Dyson)
+        "Saddle Sores": "common",
+        "EOTRH": "uncommon",  # Aged horses, increasingly recognized
+        "Periapical Abscess": "uncommon",
+        "Dental Caries": "uncommon",
+        "Displaced / Malerupted Tooth": "uncommon",
+        "Overjet (Parrot Mouth)": "uncommon",  # Congenital, 2-5%
+        "Cervical Facet Osteoarthritis": "uncommon",
+        "Sacroiliac Joint Injury": "uncommon",
+        "Supernumerary Tooth": "rare",
+        "Fluorosis": "rare",
+        "Discospondylitis": "rare",  # Rare in horses (Reed & Bayly 4th ed)
+        "Myofibrillar Myopathy": "rare",  # Arabian/WB-specific emerging myopathy
+        "Brucellosis": "rare",  # Fistulous withers now rare; eradicated in Japan
         # uncommon
         "Sand Colic": "uncommon",  # Region/management dependent
         "Enterolithiasis": "uncommon",
@@ -1485,6 +1512,12 @@ SPECIES_PREVALENCE = {
         "Coccidia Infection": "very_common",
         "Dehydration": "very_common",
         "Internal Nematodes (Roundworms)": "very_common",
+        # Cryptosporidium varanii is the single most important infectious
+        # disease of captive leopard geckos ("stick tail" wasting — Mader 3rd
+        # ed; Deming 2008) — untiered it was buried below 2-finding entries
+        # for its own hallmark complaint (尻尾が細くなって食べない).
+        "Cryptosporidiosis": "common",
+        "Gecko Cryptosporidiosis": "common",
         "Constipation": "very_common",
         "Egg Binding (Dystocia)": "common",
         "Corneal Ulcer": "common",

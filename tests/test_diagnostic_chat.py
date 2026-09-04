@@ -1610,6 +1610,7 @@ class TestQuickTapPhraseExtraction:
             "顔が腫れてじんましんが出た",
             "階段を登らなくなった",
             "散歩中に急に倒れて意識を失った",
+            "陰部から膿が出て水をよく飲む",
         ],
         "cat": [
             "食べない",
@@ -1637,6 +1638,8 @@ class TestQuickTapPhraseExtraction:
             "後肢が突っ張って歩き尿が茶色い",
             "皮膚にイボ状のできものがある",
             "目を細めて涙が多い",
+            "口から餌をこぼす",
+            "背中を触ると痛がる",
         ],
         "rabbit": [
             "糞が小さい",
@@ -1723,7 +1726,7 @@ class TestQuickTapPhraseExtraction:
             "ふらつく",
             "脱皮がうまくできない",
             "口をあけたまま呼吸",
-            "痩せてきた",
+            "尻尾が細くなってきた",
         ],
         "amphibian": [
             "食べない",
@@ -4064,3 +4067,110 @@ class TestChatClinicalAccuracyAuditRound20:
         names = [d.get("name_ja") or "" for d in _match_equine_symptoms_to_diseases(ex)[:3]]
         assert any("頸椎" in n for n in names), names
         assert not any("神経軸索" in n for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound21:
+    """2026-09 audit round 21: fresh 29-case chief-complaint sweep (5 initial
+    misses). Root causes: (a) the legacy dog DB had NO pyometra entry and no
+    vulvar-discharge vocabulary at all — the single most important intact-bitch
+    emergency ranked intestinal parasites first; (b) genital_discharge (the
+    alias target for 陰部からの分泌物) had no ID-synonym chain, so it dropped in
+    every species vocabulary; (c) equine back-pain / quidding owner phrasings
+    were unmapped and the dental/back variants untiered; (d) the leopard-gecko
+    stick-tail wasting complaint had no tail_thinning vocabulary, so the
+    Cryptosporidium family (its hallmark cause — Mader 3rd ed) never surfaced;
+    (e) modifier-interrupted exophthalmos phrasing (目が白く飛び出している)
+    missed every 目が飛び出し… key."""
+
+    def test_dog_pyometra_discharge_complaint_ranks_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("発情の後からお腹が膨れて陰部から膿が出る 水をよく飲む")
+        assert "vulvar_discharge" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert top.get("disease_id") == "pyometra", top.get("name_ja")
+
+    def test_dog_pyometra_is_discharge_gated(self):
+        # Every systemic pyometra sign is nonspecific — the entry must NOT
+        # hijack PU/PD or vomiting complaints that lack discharge (verified
+        # regressions during round 21 before the discharge-gated design).
+        from api.diagnostic_chat import match_symptoms_to_diseases
+
+        ids = [m["disease_id"] for m in match_symptoms_to_diseases(["excessive_thirst", "weight_loss"])[:3]]
+        assert ids[0] == "diabetes_mellitus", ids
+        assert "pyometra" not in ids, ids
+        ids2 = [m["disease_id"] for m in match_symptoms_to_diseases(["vomiting", "loss_of_appetite"])[:3]]
+        assert ids2[0] == "acute_gastroenteritis", ids2
+        assert "pyometra" not in ids2, ids2
+
+    def test_cat_pyometra_via_genital_discharge_chain(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("陰部から膿が出て水をよく飲む", "cat")
+        assert "vaginal_discharge" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "cat")[0]
+        assert "蓄膿" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_ferret_adrenal_vulvar_swelling_unaffected(self):
+        # The new discharge aliases/chains must not disturb the vulvar_swelling
+        # path that drives the ferret adrenal-disease complaint.
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("陰部が腫れて毛が抜ける", "ferret")
+        assert "vulvar_swelling" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "ferret")[:3]]
+        assert any("副腎" in n for n in names), names
+
+    def test_horse_ridden_back_pain_ranks_back_family(self):
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ex = _extract_equine_symptoms("背中を触ると痛がって乗ると嫌がる")
+        assert "body_back_pain" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_equine_symptoms_to_diseases(ex)[:3]]
+        assert "背部痛" in names[0], names
+        assert any("キッシングスパイン" in n for n in names), names
+
+    def test_horse_quidding_ranks_dental_family_with_sharp_points(self):
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ex = _extract_equine_symptoms("餌を食べるのが遅くなって口から餌をこぼす")
+        assert "dental_quidding" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_equine_symptoms_to_diseases(ex)[:5]]
+        assert any("歯の鋭利点" in n for n in names), names
+        # the whole top-5 must be dental, not the untiered rare variants
+        assert all(("歯" in n) or ("口" in n) or ("顎" in n) for n in names), names
+
+    def test_horse_choke_pair_still_first_after_dental_aliases(self):
+        # 口から餌 must not shadow the 鼻から餌 choke hallmark.
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ex = _extract_equine_symptoms("飲み込めず鼻から餌が出てくる")
+        assert "resp_bilateral_discharge" in ex, ex
+        top = _match_equine_symptoms_to_diseases(ex)[0]
+        assert "食道閉塞" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_lizard_stick_tail_ranks_cryptosporidiosis(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("尻尾が細くなって食べない", "lizard")
+        assert "tail_thinning" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "lizard")[:2]]
+        assert any("クリプトスポリジウム" in n for n in names), names
+
+    def test_tail_thinning_falls_back_to_weight_loss_elsewhere(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("尻尾が細くなって元気がない", "hamster")
+        assert "weight_loss" in ex, ex
+
+    def test_guinea_pig_white_protruding_eye_extracts_and_ranks(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("目が白く飛び出している", "guinea_pig")
+        assert ex, ex  # was extraction-zero before round 21
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "guinea_pig")[:5]]
+        assert any(("白内障" in n) or ("眼" in n) or ("角膜" in n) for n in names), names
