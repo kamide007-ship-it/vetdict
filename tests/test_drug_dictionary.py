@@ -2949,3 +2949,95 @@ def test_sweep20_spaced_calcium_gluconate_resolves():
     qids = {h["id"] for h in qhits}
     assert "quinidine" in qids, qids
     assert "calcium_gluconate" not in qids, qids
+
+
+class TestBatch55ReferencedAgents:
+    """2026-09 21st referenced-but-absent sweep: three agents the site's own
+    curated disease content prescribes had no monograph — bezafibrate (the
+    only fibrate; dog Miniature Schnauzer hyperlipidaemia entry doses it
+    5-10 mg/kg PO q24h, De Marco 2017 JVIM), medroxyprogesterone acetate
+    (feline eosinophilic keratoconjunctivitis rescue / hamster endometrial
+    hyperplasia 50 mg/kg SC; the avian entry explicitly recommends AGAINST it
+    — that defining safety profile belongs in the formulary), and the Oncept
+    canine melanoma DNA vaccine (USDA-licensed; the disease texts' "1 mL IM"
+    was corrected to the 0.4 mL transdermal needle-free label administration).
+    Also: ティルドロン酸 spelling variant now resolves to tiludronate, and the
+    garbled アルファカソジン was corrected to アルファカソゼピン."""
+
+    def test_batch55_agents_present_with_bilingual_dosing(self):
+        from api.drug_dictionary import DRUGS
+
+        by_id = {d["id"]: d for d in DRUGS}
+        expect = {
+            "bezafibrate": ("dog",),
+            "medroxyprogesterone": ("cat", "hamster"),
+            "oncept_melanoma_vaccine": ("dog",),
+        }
+        for did, species in expect.items():
+            d = by_id.get(did)
+            assert d is not None, f"{did} missing from formulary"
+            for sp in species:
+                info = d["species_info"][sp]
+                assert (info.get("dosage") or "").strip(), f"{did}/{sp} missing dosage"
+                assert (info.get("dosage_ja") or "").strip(), f"{did}/{sp} missing dosage_ja"
+
+    def test_batch55_definitional_safety_facts(self):
+        from api.drug_dictionary import get_drug_by_id
+
+        # Bezafibrate: secondary-cause workup first; adjunct to (not a
+        # substitute for) the low-fat diet.
+        bez = get_drug_by_id("bezafibrate")
+        assert "甲状腺機能低下" in bez["species_info"]["dog"]["notes_ja"]
+        assert "低脂肪食" in bez["species_info"]["dog"]["notes_ja"]
+        # MPA: bird use is refused outright (the site's own chronic-egg-laying
+        # entry abandons it for GnRH agonists); diabetes induction is the
+        # class-defining risk and insulin destabilisation is a major
+        # interaction.
+        mpa = get_drug_by_id("medroxyprogesterone")
+        assert mpa["species_info"]["bird"]["safe"] is False
+        assert "デスロレリン" in mpa["species_info"]["bird"]["dosage_ja"]
+        assert "糖尿病" in mpa["side_effects_ja"]
+        assert any(i["severity"] == "major" and "Insulin" in i["drug"] for i in mpa["drug_interactions"])
+        # Oncept: label administration is 0.4 mL transdermal needle-free —
+        # never 1 mL IM — and it is an adjunct after locoregional control.
+        onc = get_drug_by_id("oncept_melanoma_vaccine")
+        assert "0.4 mL" in onc["species_info"]["dog"]["dosage"]
+        assert "ニードルフリー" in onc["species_info"]["dog"]["dosage_ja"]
+        assert "局所制御" in onc["species_info"]["dog"]["dosage_ja"] + onc["species_info"]["dog"]["notes_ja"]
+
+    def test_batch55_text_matcher_resolution(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = [
+            ("ベザフィブラート5-10 mg/kg PO q24h（フィブラート系）", "bezafibrate"),
+            ("ゲムフィブロジル200 mg/dog PO q12h（代替フィブラート）", "bezafibrate"),
+            ("酢酸メドロキシプロゲステロン（Depo — 子宮内膜抑制）: 50 mg/kg SC", "medroxyprogesterone"),
+            ("メラノーマワクチン（Oncept — USDA承認）: 0.4 mL 経皮", "oncept_melanoma_vaccine"),
+            ("ティルドロン酸（Tildren）: 1 mg/kg IV", "tiludronate"),
+            ("アルファカソゼピン（Zylkene/ジルケーン）75 mg/cat PO q24h", "alpha_casozepine"),
+        ]
+        for phrase, want in cases:
+            ids = {h["id"] for h in find_drugs_in_text(phrase)}
+            assert want in ids, f"{phrase!r} -> {ids}"
+
+    def test_mpa_progestin_class_word_is_not_an_alias(self):
+        # 馬繁殖エントリの「プロゲスチン」クラス言及（実剤はアルトレノゲスト）が
+        # MPAに誤チップしないこと — class words are never aliases.
+        from api.drug_dictionary import find_drugs_in_text
+
+        ids = {h["id"] for h in find_drugs_in_text("プロゲスチン補充（アルトレノゲスト 0.044 mg/kg PO q24h）")}
+        assert "medroxyprogesterone" not in ids, ids
+        assert "altrenogest" in ids, ids
+
+    def test_no_garbled_oncept_dose_or_casozepine_in_json(self):
+        import json
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parents[1]
+        data = json.loads((root / "diseases_all_species.json").read_text(encoding="utf-8"))
+        for e in data:
+            for f in ("treatment_ja", "treatment"):
+                t = str(e.get(f) or "")
+                assert "アルファカソジン" not in t, (e.get("species"), e.get("name"))
+                if "Oncept" in t or "メラノーマワクチン" in t:
+                    assert "1 mL IM" not in t, (e.get("species"), e.get("name"))

@@ -541,3 +541,51 @@ def test_app_js_emergency_map_mirrors_server_protocols():
         assert species, proto_id
         extra = species - server[proto_id]
         assert not extra, f"{proto_id}: map offers species the protocol lacks: {extra}"
+
+
+def test_app_js_emergency_to_disease_reverse_link():
+    """Emergency protocol → disease-DB reverse link (2026-09 round 22): the
+    emergency tab linked drugs but the underlying disease's full entry (with
+    the differential-check and anesthesia pivots) was unreachable — the exact
+    mirror of the existing disease → emergency pivot. The expanded protocol
+    must render .emergency-disease-link, the delegated handler must route it
+    through openDiseaseAcrossSpecies (species-aware exact landing), and the
+    map entries must prefer the viewer's current species."""
+    assert "const EMERGENCY_TO_DISEASE_MAP={" in APP_JS
+    assert "function _emergencyDiseaseFor(" in APP_JS
+    assert 'class="emergency-disease-link"' in APP_JS
+    assert '.closest(".emergency-disease-link")' in APP_JS
+    handler = APP_JS[APP_JS.index('.closest(".emergency-disease-link")') :][:400]
+    assert "openDiseaseAcrossSpecies(" in handler
+    # current-species preference in the picker
+    picker = APP_JS[APP_JS.index("function _emergencyDiseaseFor(") :][:300]
+    assert "currentSpecies" in picker
+
+
+def test_emergency_to_disease_map_names_exist_in_served_db():
+    """Every (species, name) pair hardcoded in EMERGENCY_TO_DISEASE_MAP must
+    exist verbatim in the served DB so openDiseaseAcrossSpecies lands exactly
+    (a renamed/deduped disease would silently degrade to filtered search)."""
+    import re
+    import sqlite3
+    from pathlib import Path
+
+    db = Path(__file__).resolve().parents[1] / "instance" / "vetdict.db"
+    if not db.exists():
+        import pytest
+
+        pytest.skip("served DB not built")
+    idx = APP_JS.index("const EMERGENCY_TO_DISEASE_MAP={")
+    block = APP_JS[idx : APP_JS.index("};", idx)]
+    pairs = re.findall(r'\["([a-z_]+)","([^"]+)"\]', block)
+    assert len(pairs) >= 20, pairs
+    conn = sqlite3.connect(db)
+    try:
+        for sp, name in pairs:
+            row = conn.execute(
+                "SELECT 1 FROM diseases WHERE species=? COLLATE NOCASE AND name=? LIMIT 1",
+                (sp, name.replace("\\'", "'")),
+            ).fetchone()
+            assert row, f"EMERGENCY_TO_DISEASE_MAP names a missing disease: {sp}/{name}"
+    finally:
+        conn.close()

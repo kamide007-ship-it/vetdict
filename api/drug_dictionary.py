@@ -78,6 +78,7 @@ from api.drug_batch_51 import DRUGS_BATCH_51
 from api.drug_batch_52 import DRUGS_BATCH_52
 from api.drug_batch_53 import DRUGS_BATCH_53
 from api.drug_batch_54 import DRUGS_BATCH_54
+from api.drug_batch_55 import DRUGS_BATCH_55
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10798,6 +10799,17 @@ for _drug54 in DRUGS_BATCH_54:
         DRUGS.append(_drug54)
         _drug_index[_drug54["id"]] = _drug54
 
+# Batch 55: 2026-09監査（第21回スイープ）
+# （ベザフィブラート — 犬高脂血症エントリが「5-10 mg/kg PO q24h」で参照する
+#  フィブラート系が皆無だった（De Marco 2017 JVIM）; メドロキシプロゲステロン —
+#  猫好酸球性角結膜炎・ハムスター子宮内膜過形成が参照、鳥は非推奨と自サイトが
+#  明記する定義的安全情報を収載; Oncept — USDA承認の犬メラノーマDNAワクチン、
+#  ラベル用法 0.4 mL 経皮ニードルフリー（疾患テキストの 1 mL IM 誤記も同時是正））
+for _drug55 in DRUGS_BATCH_55:
+    if _drug55["id"] not in _drug_index:
+        DRUGS.append(_drug55)
+        _drug_index[_drug55["id"]] = _drug55
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11496,7 +11508,7 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "phenylephrine": ("フェニルエフリン",),
     # 2026-08 sweep #15: equine navicular/ringbone texts cite tiludronate by the
     # ティ/チ transliteration variants — canonical name_ja is チルドロン酸（チルドレン）.
-    "tiludronate": ("ティルドロネート", "チルドロネート"),
+    "tiludronate": ("ティルドロネート", "チルドロネート", "ティルドロン酸"),
     # Diabetes texts cite insulin analogues by the bare INN stem without the
     # インスリン prefix ("グラルギン 1 U SC q12h") — the lead-word index only
     # carries インスリン, which is too generic to map to a specific analogue.
