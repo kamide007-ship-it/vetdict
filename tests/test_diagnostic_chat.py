@@ -1611,6 +1611,7 @@ class TestQuickTapPhraseExtraction:
             "階段を登らなくなった",
             "散歩中に急に倒れて意識を失った",
             "陰部から膿が出て水をよく飲む",
+            "目やにがひどくて目が開かない",
         ],
         "cat": [
             "食べない",
@@ -1693,6 +1694,7 @@ class TestQuickTapPhraseExtraction:
             "くしゃみ",
             "自分で羽を抜く",
             "脚に白いかさぶた",
+            "急に飛べなくなって翼が下がっている",
         ],
         "parakeet": [
             "食べない",
@@ -2646,7 +2648,9 @@ class TestChatClinicalAccuracyAuditRound9:
 
         extracted = extract_symptoms_from_text("咳が続く 疲れやすい 舌が紫")
         assert "exercise_intolerance" in extracted
-        assert "labored_breathing" in extracted  # cyanosis → legacy bridge
+        # Round 22 made cyanosis a first-class legacy ID (attached to the
+        # airway/cardiac set) — the old labored_breathing bridge no longer fires.
+        assert "cyanosis" in extracted
         names = [m.get("name_ja", "") for m in match_symptoms_to_diseases(extracted)[:4]]
         assert any("僧帽弁" in n for n in names), names
 
@@ -4270,3 +4274,84 @@ class TestChatClinicalAccuracyAuditRound21Parallel:
         assert "jaw_softening" in ex, ex
         top = _match_species_symptoms_to_diseases(ex, "lizard")[0]
         assert ("骨疾患" in (top.get("name_ja") or "")) or ("副甲状腺" in (top.get("name_ja") or ""))
+
+
+class TestChatClinicalAccuracyAuditRound22:
+    """2026-09 audit round 22: fresh 25-case chief-complaint sweep (3 initial
+    misses). Root causes: (a) the legacy dog vocabulary had no cyanosis ID, so
+    舌が紫色 dropped and the cardiopulmonary complaint lost its defining sign;
+    (b) the legacy DB had no conjunctivitis entry — the single most common
+    canine ocular complaint ranked eyelid-conformation diseases instead;
+    (c) the acute bird wing-fracture complaint (急に飛べない＋翼下垂) had no
+    aliases and no wing_droop/inability_to_fly synonym chains. Also mapped the
+    classic owner description of reverse sneezing (しゃっくりのような呼吸)."""
+
+    def test_dog_cyanosis_complaint_ranks_cardiopulmonary(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("しゃっくりのような呼吸をして舌が紫色になる")
+        assert "cyanosis" in ex, ex
+        assert "reverse_sneezing" in ex, ex
+        ids = [m["disease_id"] for m in match_symptoms_to_diseases(ex)[:4]]
+        assert "brachycephalic_airway_syndrome" in ids, ids
+        # cyanosis attaches to the airway/cardiac set only
+        assert any(i in ids for i in ("tracheal_collapse", "mitral_valve_disease", "dcm")), ids
+
+    def test_dog_conjunctivitis_ranks_first_for_discharge_complaint(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("目やにがひどくて目が開かない")
+        top = match_symptoms_to_diseases(ex)[0]
+        assert top["disease_id"] == "conjunctivitis", top.get("name_ja")
+
+    def test_dog_kcs_complaint_unchanged_guard(self):
+        # The new conjunctivitis entry must not hijack the tacky-dry-eye
+        # complaint that belongs to KCS (distinct dry_eye vocabulary).
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("目やにがベタベタして目が乾いている")
+        top = match_symptoms_to_diseases(ex)[0]
+        assert top["disease_id"] == "kcs", top.get("name_ja")
+
+    def test_bird_wing_fracture_complaint_extracts_and_ranks(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("急に飛べなくなって片方の翼が下がっている", "bird")
+        assert "inability_to_fly" in ex and "wing_droop" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "bird")[0]
+        assert "骨折" in (top.get("name_ja") or top.get("name") or ""), top
+
+    def test_parakeet_wing_fracture_via_drooping_wing_chain(self):
+        # parakeet's vocabulary spells the ID drooping_wing — the synonym
+        # chain must land the same complaint on the wing-fracture family.
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("急に飛べなくなって片方の翼が下がっている", "parakeet")
+        assert "drooping_wing" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "parakeet")[:3]]
+        assert any("骨折" in n for n in names), names
+
+    def test_cyanosis_falls_back_safely_in_other_species(self):
+        # cat carries cyanosis natively; the complaint keeps ranking the
+        # pleural-space/cardiac family (round-22 guard).
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("口を開けて呼吸して舌が紫", "cat")
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "cat")[:3]]
+        assert any(("胸水" in n) or ("肺水腫" in n) or ("気胸" in n) for n in names), names
+
+    def test_dog_checkbox_path_has_cyanosis_parity(self):
+        # The checkbox/guided-consultation vocabulary must carry the same
+        # cyanosis sign added to the legacy chat DB (round 22), attached to
+        # the airway/cardiac set (Ettinger 8th: severe upper-airway
+        # obstruction and advanced CHF).
+        from api.species.dog_diseases import SYMPTOM_CATEGORIES, VALID_SYMPTOMS, analyze_symptoms
+
+        assert "cyanosis" in VALID_SYMPTOMS
+        assert "cyanosis" in SYMPTOM_CATEGORIES["respiratory"]["symptoms"]
+        res = analyze_symptoms(["cyanosis", "difficulty_breathing", "coughing"])
+        names = [d["name"] for d in res["suspected_diseases"][:4]]
+        assert any("Cardiomyopathy" in n or "Tracheal" in n or "Heart" in n for n in names), names

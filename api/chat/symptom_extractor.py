@@ -11,6 +11,14 @@ from api.chat.symptom_aliases import SYMPTOM_ALIASES
 # Hoisted to module scope so it can be reused by name-resolution helpers
 # (e.g. follow-up question label localization).
 ID_SYNONYMS: dict[str, list[str]] = {
+    # Wing droop / inability to fly (2026-09 round 22): the acute
+    # wing-fracture chief complaint (急に飛べない＋片翼下垂) extracted nothing.
+    # bird/parrot carry wing_droop, parakeet carries drooping_wing.
+    "wing_droop": ["drooping_wing", "wing_swelling", "wing_damage", "lameness"],
+    "inability_to_fly": ["difficulty_flying", "reluctance_to_fly", "wing_droop", "drooping_wing"],
+    # Reverse sneezing (2026-09 round 22): legacy dog carries the ID natively
+    # (BOAS); other species fall back to audible upper-airway signs.
+    "reverse_sneezing": ["sneezing", "wheezing", "noisy_breathing"],
     # Urticaria/angioedema (2026-08 round 14): legacy dog vocabulary carries
     # hives directly; species vocabularies express wheals as rashes/lesions.
     "hives": ["urticaria", "wheals", "skin_rashes", "skin_lesions", "swelling"],

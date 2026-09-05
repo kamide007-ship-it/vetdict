@@ -1915,12 +1915,27 @@ SYMPTOM_ALIASES = {
     # 2026-08 第9回精度スイープ: 実主訴20例の抽出ゼロ・誤抽出を是正
     # 急性緑内障・眼球突出（「目が赤い」の連用形と「大きく見える」形が欠落していた）
     "目が赤く": "redness_in_eyes",
+    # 副詞挿入形（「片目が急に赤くて」が「目が赤く」に不一致だった — 2026-09 第22回）
+    "目が急に赤": "redness_in_eyes",
+    "片目が赤": "redness_in_eyes",
+    "目が充血": "redness_in_eyes",
     "目が大きく見える": "eye_bulging",
     # 心不全の運動不耐・チアノーゼ（飼い主表現）—「すぐ疲れる」は既存キー
     "疲れやすい": "exercise_intolerance",
     "舌が紫": "cyanosis",
     "舌が青い": "cyanosis",
     "歯茎が紫": "cyanosis",
+    # 2026-09 第22回精度スイープ: 鳥の急性翼障害（骨折の代表的主訴）が抽出ゼロだった
+    # 逆くしゃみの飼い主表現（「しゃっくりのような呼吸」「ブタのような音」）
+    "しゃっくりのような呼吸": "reverse_sneezing",
+    "ブタのような音": "reverse_sneezing",
+    "豚のような音": "reverse_sneezing",
+    "飛べなくなっ": "inability_to_fly",
+    "飛べない": "inability_to_fly",
+    "翼が下がっ": "wing_droop",
+    "羽が下がっ": "wing_droop",
+    "翼が垂れ": "wing_droop",
+    "羽が垂れ": "wing_droop",
     # 頸部痛（IVDD頸部型の古典的主訴: 疼痛性啼鳴＋頸部保持）
     "キャンと鳴": "pain",
     "首を動かさない": "neck_stiffness",

@@ -616,6 +616,12 @@ SYMPTOMS = [
         "name_en": "Rapid Breathing / Tachypnea",
         "category": "cardiac",
     },
+    {
+        "id": "cyanosis",
+        "name_ja": "チアノーゼ（舌・歯茎が紫色）",
+        "name_en": "Cyanosis (Purple Tongue/Gums)",
+        "category": "cardiac",
+    },
     # Behavioral (4)
     {
         "id": "lethargy",
@@ -1131,6 +1137,7 @@ DISEASES = [
             "exercise_intolerance",
             "coughing",
             "fainting",
+            "cyanosis",
         ],
         "severity": "moderate",
         "recommended_tests": ["xray", "ct_scan", "endoscopy", "blood_pressure"],
@@ -1799,6 +1806,7 @@ DISEASES = [
             "rapid_breathing",
             "loss_of_appetite",
             "bloating",
+            "cyanosis",
         ],
         "severity": "high",
         "recommended_tests": [
@@ -1841,6 +1849,7 @@ DISEASES = [
             "labored_breathing",
             "fainting",
             "lethargy",
+            "cyanosis",
         ],
         "severity": "moderate",
         "recommended_tests": ["echocardiogram", "ecg", "xray"],
@@ -2079,6 +2088,31 @@ DISEASES = [
             "west_highland_white_terrier": 2.0,
             "cavalier_king_charles": 1.8,
         },
+    },
+    # ---- 12b4. Conjunctivitis ----
+    # The most common canine ocular complaint in primary practice (allergic,
+    # bacterial, irritant, or secondary to KCS/eyelid disease — Maggs,
+    # Slatter's Fundamentals of Veterinary Ophthalmology 6th ed), yet the
+    # legacy database had no conjunctivitis entry, so the classic
+    # "目やにがひどくて目が開かない" complaint ranked eyelid-conformation
+    # diseases and lens luxation instead of the bread-and-butter diagnosis.
+    {
+        "id": "conjunctivitis",
+        "prevalence_tier": "very_common",
+        "name_ja": "結膜炎",
+        "name_en": "Conjunctivitis",
+        "description_ja": "結膜の炎症で、犬の眼科主訴として最も頻度の高い疾患。アレルギー性・細菌性・刺激性のほか、ドライアイ（KCS）や眼瞼疾患に続発します。目やに・結膜充血・まぶたの腫れ・目をショボショボさせる（羞明）が典型徴候。フルオレセイン染色で角膜潰瘍を除外し、シルマー涙液試験でKCSを除外することが重要です。原因に応じて抗菌点眼・抗炎症点眼で治療します。",
+        "description_en": "Inflammation of the conjunctiva — the most common canine ocular presenting complaint. Allergic, bacterial or irritant, or secondary to KCS and eyelid disease. Discharge, conjunctival hyperemia, lid swelling and blepharospasm are typical. Always exclude corneal ulceration (fluorescein) and KCS (Schirmer test); treat with topical antimicrobials/anti-inflammatories per cause.",
+        "symptoms": [
+            "eye_discharge",
+            "redness_in_eyes",
+            "eye_swelling",
+            "squinting",
+            "itching",
+        ],
+        "severity": "low",
+        "recommended_tests": ["ophthalmic_exam", "fluorescein_stain", "schirmer_tear_test"],
+        "breed_risks": {},
     },
     # ---- 12c. Periodontal Disease ----
     # The most prevalent disease in dogs overall (80-90% of dogs over 3 years
@@ -2806,7 +2840,7 @@ DISEASES = [
         "name_en": "Tracheal Collapse",
         "description_ja": "気管の軟骨環が弱くなり、気管が扁平化する疾患です。呼吸困難やガチョウ様の咳を引き起こします。",
         "description_en": "Weakening of tracheal cartilage rings causes the trachea to flatten, resulting in breathing difficulties and a honking cough.",
-        "symptoms": ["coughing", "wheezing", "labored_breathing", "exercise_intolerance"],
+        "symptoms": ["coughing", "wheezing", "labored_breathing", "exercise_intolerance", "cyanosis"],
         "severity": "moderate",
         "recommended_tests": ["xray", "endoscopy", "ct_scan"],
         "breed_risks": {

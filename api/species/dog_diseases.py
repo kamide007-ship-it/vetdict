@@ -46,6 +46,7 @@ VALID_SYMPTOMS: set[str] = {
     "rapid_breathing",
     "reverse_sneezing",
     "snoring",
+    "cyanosis",
     # Eyes / Ears
     "eye_redness",
     "eye_discharge",
@@ -122,6 +123,7 @@ SYMPTOM_NAMES: dict[str, dict[str, str]] = {
     "rapid_breathing": {"ja": "頻呼吸", "en": "Rapid Breathing"},
     "reverse_sneezing": {"ja": "逆くしゃみ", "en": "Reverse Sneezing"},
     "snoring": {"ja": "いびき", "en": "Snoring"},
+    "cyanosis": {"ja": "チアノーゼ（舌・歯茎が紫色）", "en": "Cyanosis (purple tongue/gums)"},
     "eye_redness": {"ja": "目の充血", "en": "Eye Redness"},
     "eye_discharge": {"ja": "目やに", "en": "Eye Discharge"},
     "squinting": {"ja": "目を細める", "en": "Squinting"},
@@ -1351,7 +1353,14 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Brachycephalic Airway Syndrome",
         "name_ja": "短頭種気道症候群（BAS）",
-        "symptoms": {"difficulty_breathing", "snoring", "excessive_panting", "reverse_sneezing", "coughing"},
+        "symptoms": {
+            "difficulty_breathing",
+            "snoring",
+            "excessive_panting",
+            "reverse_sneezing",
+            "coughing",
+            "cyanosis",
+        },
         "description": "A set of upper airway abnormalities common in "
         "short-nosed breeds, causing breathing difficulties.",
         "description_ja": "短頭種犬（フレンチブルドッグ、パグ、ブルドッグ、ペキニーズ等）に見られる"
@@ -1743,7 +1752,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Dilated Cardiomyopathy (DCM)",
         "name_ja": "拡張型心筋症（DCM）",
-        "symptoms": {"difficulty_breathing", "coughing", "lethargy", "weight_loss", "bloated_abdomen"},
+        "symptoms": {"difficulty_breathing", "coughing", "lethargy", "weight_loss", "bloated_abdomen", "cyanosis"},
         "description": "Primary myocardial disease characterized by eccentric ventricular hypertrophy (dilation) with systolic dysfunction (reduced contractility). Most common in large/giant breeds: Doberman Pinscher (most common DCM breed — 58% affected lifetime; cardiomyocyte loss hypothesis), Irish Wolfhound, Great Dane, Boxer (arrhythmogenic right ventricular cardiomyopathy ARVC variant), Cocker Spaniel (possible nutritional DCM). DIET-ASSOCIATED DCM: FDA 2018-2019 investigation into grain-free/legume-rich diets (golden retrievers especially) — may be associated; mechanism unclear; reversible in some cases with diet change. Occult DCM (echocardiographic abnormalities before clinical signs) may last months to years before CHF onset. Sudden cardiac death from ventricular arrhythmias is a major complication, especially in Dobermans.",
         "description_ja": "心室の偏心性肥大（拡張）と収縮機能不全（収縮力低下）を特徴とする一次性心筋疾患。大型/超大型犬種に好発：ドーベルマン・ピンシャー（DCM最多犬種——生涯発症率58%；心筋細胞消失仮説）、アイリッシュ・ウルフハウンド、グレート・デーン、ボクサー（不整脈性右室心筋症ARVC亜型）、コッカー・スパニエル（栄養性DCMの可能性）。食餌関連性DCM：FDA 2018〜2019年調査（グレインフリー/豆類豊富食との関連；ゴールデン・レトリーバーに多い；機序不明；食餌変更で一部回復可能）。無症候性DCM（心エコー異常だが臨床症状なし）がCHF発症前に数ヶ月〜数年持続することがある。突然心臓死（心室性不整脈由来）が主要合併症——特にドーベルマン。",
         "pathophysiology": "DCM is characterized by progressive cardiomyocyte loss and dysfunction → ventricular dilation (Frank-Starling mechanism attempts compensation: increased preload → increased stroke volume, but at cost of increased wall stress) → eccentric hypertrophy. Core pathophysiological changes: (1) Reduced systolic function (decreased contractility, reduced ejection fraction EF <35%): inadequate forward output → compensatory neurohormonal activation (SNS, RAAS, ADH/vasopressin). (2) Neurohormonal activation: catecholamines increase HR and contractility (short-term benefit) but cause cardiomyocyte toxicity, beta-receptor downregulation, and arrhythmias over time; aldosterone causes Na+/water retention → volume overload → further dilation. (3) Ventricular wall stress: Law of Laplace — wall stress = pressure × radius / (2 × wall thickness); dilated ventricle with thin walls has massively elevated wall stress → impaired subendocardial perfusion. (4) Arrhythmias: Doberman DCM: ventricular premature complexes (VPCs) and ventricular tachycardia (VT) from structural heterogeneity and cardiomyocyte loss — leading cause of sudden death before CHF. Boxer ARVC: fatty infiltration of right ventricular myocardium → VT from RVFW. (5) Nutritional DCM hypothesis: taurine deficiency (grain-free diets) in predisposed breeds (Golden, Cocker, Newfoundland) impairs cardiac contractility — taurine is essential for myofilament Ca sensitivity and mitochondrial function.",
@@ -2399,7 +2408,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Tracheal Collapse",
         "name_ja": "気管虚脱",
-        "symptoms": {"coughing", "difficulty_breathing", "reverse_sneezing", "snoring"},
+        "symptoms": {"coughing", "difficulty_breathing", "reverse_sneezing", "snoring", "cyanosis"},
         "description": "Progressive weakening of tracheal cartilage rings, "
         "causing airway obstruction, common in toy breeds.",
         "description_ja": "気管軟骨輪の進行性弱化により気道閉塞を引き起こし、トイ犬種に多いです。",
@@ -2414,7 +2423,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Laryngeal Paralysis",
         "name_ja": "喉頭麻痺",
-        "symptoms": {"difficulty_breathing", "lethargy", "coughing", "excessive_panting", "snoring"},
+        "symptoms": {"difficulty_breathing", "lethargy", "coughing", "excessive_panting", "snoring", "cyanosis"},
         "description": "Failure of the arytenoid cartilages and vocal folds to abduct (open) during inspiration, causing upper airway obstruction. Acquired laryngeal paralysis (ALP): most common in large and giant breeds (Labrador Retriever, Golden Retriever, Irish Setter, Afghan Hound, Siberian Husky) — typically older dogs (median 9-10 years). Geriatric-onset laryngeal paralysis and polyneuropathy (GOLPP) is a progressive neurodegenerative condition — laryngeal paralysis may be the earliest sign of a diffuse neuropathy affecting esophagus, hindlimbs, etc. Congenital: Bouvier des Flandres, Siberian Husky. KEY COMPLICATION: aspiration pneumonia from concurrent esophageal dysfunction in GOLPP.",
         "description_ja": "吸気時に披裂軟骨と声帯が外転（開口）できないことによる上気道閉塞。後天性喉頭麻痺（ALP）：大型/超大型犬種に最多（ラブラドール・ゴールデン・アイリッシュ・セター・アフガン・シベリアン・ハスキー）——通常高齢犬（中央年齢9〜10歳）。老齢発症喉頭麻痺・多発ニューロパチー（GOLPP）：喉頭麻痺が食道機能障害・後肢を含む広汎性神経変性の最初の徴候でありうる進行性疾患。先天性：フランダース牧羊犬・シベリアン・ハスキー。重要合併症：GOLPPでの食道機能障害に関連した誤嚥性肺炎。",
         "pathophysiology": "Laryngeal abduction requires coordinated contraction of the cricoarytenoideus dorsalis (CAD) muscle, innervated by the recurrent laryngeal nerve (RLN) — the caudal branch of the vagus nerve. In ALP: axonal degeneration of the RLN (Wallerian degeneration) → denervation of CAD muscles → arytenoid cartilages remain in median (adducted) position during inspiration. Obstruction at the glottis (rima glottidis) → increased inspiratory effort → turbulent airflow → high-pitched inspiratory stridor. Increased negative intrathoracic pressure from obstructive breathing → airway edema, increased laryngeal mucosal swelling → worsens obstruction (positive feedback loop — crisis). Heat retention (impaired panting efficiency) → hyperthermia → further respiratory distress. GOLPP: underlying pathology is a progressive distal axonopathy — RLN is longest branch of vagus nerve in thorax → affected earliest; over time esophageal motility (recurrent laryngeal innervation), hindlimb strength (peripheral neuropathy), and potentially other autonomic functions affected. Aspiration pneumonia: concurrent megaesophagus or pharyngeal dysfunction → aspiration during swallowing — major cause of post-operative mortality.",
@@ -2620,6 +2629,7 @@ DISEASES: List[Dict[str, Any]] = [
             "weight_loss",
             "reluctance_move",
             "appetite_loss",
+            "cyanosis",
         },
         "description": (
             "Progressive myxomatous degeneration of the mitral valve causing regurgitation and "
@@ -13420,6 +13430,7 @@ SYMPTOM_CATEGORIES = {
             "rapid_breathing",
             "reverse_sneezing",
             "snoring",
+            "cyanosis",
         ],
     },
     "eyes_ears": {
