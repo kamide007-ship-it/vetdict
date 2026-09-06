@@ -250,6 +250,9 @@ SPECIES_PREVALENCE = {
         "Flea Allergy Dermatitis": "very_common",
         "Feline Lower Urinary Tract Disease (FLUTD)": "very_common",
         "Feline Idiopathic Cystitis (FIC)": "very_common",
+        # CKD続発の腎性二次性上皮小体機能亢進は独立診断としては uncommon —
+        # 未tierでPU/PD主訴の子宮蓄膿症を押しのけていた
+        "Feline Renal Secondary Hyperparathyroidism": "uncommon",
         "Hyperthyroidism": "very_common",
         "Chronic Kidney Disease (CKD)": "very_common",
         "Periodontal Disease": "very_common",
@@ -287,6 +290,18 @@ SPECIES_PREVALENCE = {
         "Squamous Cell Carcinoma (Oral)": "common",
         "Squamous Cell Carcinoma (Cutaneous)": "common",
         "Injection-Site Sarcoma (Fibrosarcoma)": "common",
+        # 全種コモンズ監査（2026-09）: 未tierのバリアント/稀少エントリが
+        # 高頻度疾患の教科書的症状セットで上位を奪っていた逆転の是正
+        "Feline Patellar Luxation": "uncommon",  # 犬と異なり猫では稀（Ettinger 8th）
+        "Feline Splenic Lymphoma": "uncommon",  # 消化管型が主。脾臓限局型は少数派
+        # 黄疸主訴で胆管炎（猫肝疾患の主鑑別）を押しのけていた — 胆嚢粘液嚢腫は
+        # 犬の疾患で猫は症例報告レベル（Ettinger 8th）
+        "Feline Gallbladder Mucocele": "rare",
+        # 咳嗽主訴で心糸状虫を押しのけていた — 猫の前縦隔腫瘤はリンパ腫が主で
+        # 胸腺腫は稀（Withrow & MacEwen 6th）
+        "Thymoma": "rare",
+        "Lily Nephrotoxicosis (Acute)": "common",  # Lily Toxicosis 本体と同tierの変異エントリ
+        "Intestinal Mast Cell Tumor": "uncommon",  # 猫腸腫瘍はリンパ腫/腺癌が主
         "Feline Heartworm Disease": "common",
         "Cholangitis / Cholangiohepatitis": "common",
         "Miliary Dermatitis": "common",
@@ -738,7 +753,23 @@ SPECIES_PREVALENCE = {
         "Mastitis": "common",
         "Dehydration": "common",
         "Bladder Sludge (Hypercalciuria)": "common",
+        # 尿管結石は膀胱スラッジ/膀胱結石よりはるかに稀（Oglesbee, Quesenberry &
+        # Carpenter 4th ed）— 未tierでスラッジ主訴の上位を奪っていた
+        "Urinary Calculi (Ureteral)": "uncommon",
         "Cuterebra (Bot Fly Larva)": "uncommon",
+        # 下痢主訴でGI stasisスペクトラムより上位に出ていた未tierの感染性腸炎を
+        # 実際の頻度に整列（成兎のロタ/クリプトは若齢・免疫不全例中心 — Oglesbee）
+        "Rotavirus Enteritis": "uncommon",
+        "Cryptosporidiosis": "uncommon",
+        "Coronavirus Enteritis": "rare",  # ウサギ腸コロナは離乳子兎中心の限定的報告
+        # 陰部分泌物主訴で子宮蓄膿症/子宮腺癌を押しのけていた — 繁殖直後に限定
+        # される病歴依存の鑑別（Quesenberry & Carpenter 4th ed）
+        "Retained Foetus": "uncommon",
+        "Spay Complications (Post-operative)": "uncommon",  # 術後歴に限定される鑑別
+        "Bacterial Pneumonia": "common",  # パスツレラ下気道型は高頻度（Oglesbee）
+        "Leiomyosarcoma": "rare",  # 子宮腫瘍は腺癌が圧倒的多数（Quesenberry & Carpenter）
+        "Bronchitis": "uncommon",
+        "Nephrolithiasis (Kidney Stones)": "uncommon",  # 膀胱スラッジ/結石より稀
         "Congestive Heart Failure": "uncommon",
         "Hepatic Lipidosis": "uncommon",
         "Dystocia": "uncommon",
@@ -849,6 +880,20 @@ SPECIES_PREVALENCE = {
         "Zinc Toxicosis (Hardware Disease)": "common",
         # 鉤頭虫は主に野鳥・水禽の寄生虫で伴侶鳥では稀（Ritchie & Harrison）
         "Acanthocephalan Infection (Thorny-Headed Worms)": "rare",
+        # 肺真菌症=アスペルギルス・ファミリー（very_commonのAspergillosisを
+        # 未tierで押しのけていた）、卵管炎は産卵鳥で一般的（Harrison）
+        "Pulmonary Mycosis": "common",
+        "Salpingitis (Oviduct Infection)": "common",  # チャット経路のモジュール名
+        "Gastrointestinal Foreign Body": "common",  # Foreign Body Ingestion(common)と同族
+        "Metabolic Bone Disease": "common",  # 全種子食の飼い鳥で頻発（Ritchie & Harrison）
+        "Tick Infestation": "uncommon",  # 屋内飼育の伴侶鳥ではマダニ寄生は稀
+        "Pulmonary Edema": "uncommon",  # 独立疾患ではなく心不全等の続発病態
+        "Hypothyroidism": "rare",  # 確定診断された報告は僅少（Oglesbee 1992）
+        "Aortic Rupture": "rare",  # 主にダチョウ・七面鳥の疾患。伴侶鳥では稀
+        "Mycotic Pneumonia": "common",  # アスペルギルス性肺炎は飼育鳥の代表的真菌症
+        "Brachyspira Infection (Avian Intestinal Spirochetosis)": "rare",  # 主に家禽
+        "Splenic Disease (Splenitis)": "uncommon",  # クラミジア等の続発病態
+        "Nutritional Hyperparathyroidism": "common",  # NSHP=MBDの別名エントリ
         "Arteriosclerosis": "common",
         "Ovarian Tumor": "uncommon",
         "Renal Tumor": "uncommon",
@@ -919,6 +964,10 @@ SPECIES_PREVALENCE = {
         "Internal Parasites (Nematodes)": "very_common",
         "Dysecdysis (Retained Shed)": "very_common",
         "Shell Rot (Ulcerative Shell Disease)": "very_common",
+        # 飼育爬虫類の卵胞うっ滞/卵性体腔炎は代表的な生殖器救急（Mader 3rd ed）
+        "Egg-related Coelomitis (Egg Peritonitis)": "common",
+        "Post-ovulatory Egg Stasis": "common",
+        "Preovulatory Follicular Stasis (Yolk Coelomitis)": "common",
         "Vitamin A Deficiency": "very_common",
         "External Mites (Ophionyssus)": "very_common",
         "Dehydration": "very_common",
@@ -1034,6 +1083,11 @@ SPECIES_PREVALENCE = {
         "Dental Malocclusion": "very_common",
         "Dental Overgrowth (Molar)": "very_common",
         "Flank Gland Dermatitis": "very_common",
+        # 呼吸器主訴でURIを押しのけていた — 誤嚥は強制給餌等に続発する二次事象
+        "Aspiration Pneumonia": "uncommon",
+        # 高齢ハムスターの心房血栓症は古典的疾患（Quesenberry & Carpenter 4th）
+        "Hamster Atrial Thrombosis / Congestive Heart Failure": "common",
+        "Polycystic Disease - Hepatic": "uncommon",  # 多くは無症候の偶発所見
         "Gastrointestinal Parasites": "very_common",
         "Demodex Mange": "very_common",
         # common
@@ -1118,6 +1172,15 @@ SPECIES_PREVALENCE = {
         "Sarcoptic Mange (Trixacarus caviae)": "very_common",
         "Ovarian Cysts": "very_common",
         "Fungal Dermatitis (Ringworm)": "very_common",
+        # 陰部分泌物主訴: 子宮蓄膿症が主鑑別。胎子遺残は繁殖直後に限定される病歴
+        # 依存の鑑別で、症状セットが蓄膿症のサブセットのため未tierだと常勝していた
+        "Pyometra": "common",
+        "Retained Fetus": "uncommon",
+        # ビタミンC欠乏の関節症型はモルモットの古典的表現型（Quesenberry &
+        # Carpenter 4th ed）— 壊血病本体と同格の common
+        "Scurvy-Related Arthritis": "common",
+        "Pregnancy Toxemia - Pre-partum": "uncommon",  # 繁殖雌限定の変異エントリ
+        "Pleuritis": "uncommon",  # 肺炎等の続発病態
         "Diarrhea": "very_common",
         "Staphylococcal Pododermatitis": "very_common",
         "Pneumonia (Bacterial)": "very_common",
@@ -1203,6 +1266,18 @@ SPECIES_PREVALENCE = {
         "Upper Respiratory Infection": "very_common",
         "Ear Mites (Otodectes cynotis)": "very_common",
         "Dental Disease / Periodontal Disease": "very_common",
+        # ヒト→フェレット感染は報告されるが、インフルエンザ様主訴の上位に
+        # 出るべき頻度ではない（未tierでURIを押しのけていた）
+        "COVID-19 (SARS-CoV-2)": "uncommon",
+        # 一次性細菌性肺炎は稀で、通常インフルエンザ等に続発（Quesenberry &
+        # Carpenter 4th ed）— 未tierでインフルエンザ様主訴の1位を奪っていた
+        "Bacterial Pneumonia": "uncommon",
+        # フェレット3大腫瘍はリンパ腫/インスリノーマ/副腎 — 白血病単独は少数派
+        "Lymphocytosis / Leukemia": "uncommon",
+        "Valvular Heart Disease": "uncommon",  # フェレット心疾患の主体はDCM
+        "Adrenal Cyst": "uncommon",  # 副腎疾患本体（very_common）と別掲の嚢胞変異
+        "Upper Respiratory Infection (URI)": "very_common",  # 括弧付き重複エントリ
+        "Gastrointestinal Foreign Body (Linear)": "common",  # 若齢フェレットのGI異物変異型
         # common
         "Lymphoma": "common",
         "Splenomegaly": "common",
@@ -1292,6 +1367,20 @@ SPECIES_PREVALENCE = {
     # AMPHIBIAN
     # ==================================================================
     "amphibian": {
+        # パックマンフロッグの過食性胃過負荷は飼育下ツノガエルの代表的疾患
+        # （Wright & Whitaker）— 未tierで異物摂取(common)を押しのけていた
+        "Pacman Frog Gastric Overload Syndrome": "common",
+        "Gastric Overload": "common",
+        # 飼育両生類の栄養性疾患2種は代表的コモンズ（Wright & Whitaker;
+        # Pessier）— 未tierで乗っ取り側に出ていたが実際に高頻度の正当な鑑別
+        "Vitamin A Deficiency": "common",  # short tongue syndrome
+        "Calcium Deficiency": "common",  # 飼育下NSHP
+        "Spring Disease (Post-hibernation Syndrome)": "uncommon",  # 越冬明け限定・季節性
+        "Capillariasis": "common",  # 線虫症の代表的サブタイプ（Pseudocapillaroides等）
+        "Frog Virus 3 (FV3)": "common",  # Ranavirus Infection 本体と同一疾患の別掲
+        "Salmonellosis": "uncommon",  # 両生類は無症候キャリアが主で臨床発症は少数
+        "Hypothermia": "uncommon",  # 飼育環境の温度事故に限定される状態病名
+        "Spinal Injury": "uncommon",  # 外傷性で散発的
         "Nematode Infection": "very_common",
         "Aeromonas Infection": "very_common",
         "Aspergillosis": "very_common",
@@ -1355,11 +1444,17 @@ SPECIES_PREVALENCE = {
         "Dental Malocclusion - Incisor": "very_common",
         "Dental Malocclusion - Molar Spurs": "very_common",
         "GI Stasis": "very_common",
+        # 繁殖雌に限定される病歴依存の鑑別 — 未tierで虚脱主訴の上位を奪っていた
+        "Ketosis (Pregnancy Toxemia)": "uncommon",
+        "Aspiration Pneumonia": "uncommon",  # 強制給餌等に続発する二次事象
+        "Pseudomonas Infection": "common",  # 水系由来のチンチラ代表的細菌感染
         # Chinchilla fur is too dense for ectoparasites — fur mites are RARE
         # (Quesenberry & Carpenter 4th ed); the very_common tier belonged to
         # rabbit Cheyletiella and had leaked here, burying dermatophytosis.
         "Fur Mites": "rare",
         "Trichophyton mentagrophytes (Ringworm)": "common",
+        "Cystitis": "common",
+        "Intussusception": "uncommon",  # GIうっ滞の続発症（チャット経路のモジュール名）
         "Pneumonia": "common",
         "Dermatophytosis (Ringworm)": "common",
         "Conjunctivitis - Chinchilla": "common",
@@ -1419,6 +1514,10 @@ SPECIES_PREVALENCE = {
         "Diarrhea": "very_common",
         "Senile Cataracts": "very_common",
         "Sand Bath Dermatitis": "very_common",
+        # 下痢主訴: 非特異性下痢が主で、E. coli単独腸炎の確定例は少数
+        "Diarrhea (Non-specific)": "common",
+        "E. coli Enteritis": "uncommon",
+        "Sand Bath Impaction": "uncommon",  # 砂浴び砂の摂取閉塞は報告レベル
         "Gastrointestinal Stasis": "common",
         "Intestinal Parasites": "common",
         "Seizures": "common",
@@ -1525,6 +1624,13 @@ SPECIES_PREVALENCE = {
     # LIZARD
     # ==================================================================
     "lizard": {
+        # 膀胱結石は膀胱を持つトカゲ（グリーンイグアナ等）で一般的（Mader 3rd ed)
+        "Bladder Stones (Urolithiasis)": "common",
+        # フトアゴのアタデノウイルスは飼育集団で広く蔓延（Mader 3rd ed）—
+        # 削痩主訴でクリプトと並ぶ正当な鑑別
+        "Agamid Adenovirus (Bearded Dragon Atadenovirus)": "common",
+        "Chronic Malnutrition": "common",  # 飼育環境・給餌不備に起因し高頻度
+        "Cloacal Prolapse": "common",  # 飼育トカゲの代表的救急（努責続発）
         "Mite Infestation (Ectoparasites)": "very_common",
         "Respiratory Infection": "very_common",
         "Metabolic Bone Disease (MBD)": "very_common",
@@ -1578,6 +1684,11 @@ SPECIES_PREVALENCE = {
         "Copper Poisoning": "rare",
         "Teflon (PTFE) Toxicosis": "rare",
         "Teflon Toxicosis (Parakeet)": "rare",
+        # モジュールに Egg Yolk Peritonitis（tier済み）と Egg Peritonitis の
+        # 同一疾患2エントリが併存 — 未tier側が上位に出る自己重複逆転の是正
+        "Egg Peritonitis": "common",
+        "Lower Respiratory Infection (Pneumonia)": "common",  # セキセイの下気道感染は日常的
+        "Oviductal Impaction": "common",  # 慢性産卵セキセイの卵管うっ滞は卵塞と同族
         "Essential Oil Toxicity": "rare",
         "Haemoproteus Infection": "uncommon",
         "Psittacosis (Chlamydiosis)": "very_common",
@@ -1627,6 +1738,14 @@ SPECIES_PREVALENCE = {
         "PTFE Toxicosis (Teflon Poisoning)": "rare",
         "Teflon/PTFE Toxicosis": "rare",
         "Essential Oil Toxicity": "rare",
+        "Avocado Toxicity": "rare",  # 曝露歴依存（bird と同基準）
+        "Aortic Rupture": "rare",  # 主にダチョウ・七面鳥の疾患。伴侶鳥では稀
+        "Coelomic Effusion (Ascites)": "uncommon",  # 独立疾患ではなく続発病態
+        "E. coli Infection (Colibacillosis)": "common",  # Gram陰性腸性感染は臨床分離で頻出
+        "Gram-negative Bacterial Infection": "common",  # オウム類の代表的細菌感染クラス
+        "Crop Stasis (Slow Crop / Crop Impaction)": "common",  # 挿し餌雛で頻発
+        "Heat Stroke (Hyperthermia)": "uncommon",  # 飼育環境事故に限定
+        "Cryptosporidiosis": "uncommon",  # オウム類では報告が限定的
         "Haemoproteus Infection": "uncommon",
         "Psittacosis (Chlamydiosis)": "very_common",
         "Aspergillosis": "very_common",
@@ -1655,6 +1774,13 @@ SPECIES_PREVALENCE = {
         "Lead Poisoning": "common",
         "Heavy Metal Poisoning (Lead/Zinc)": "common",
         "Heavy Metal Poisoning": "common",
+        # PDD変異エントリが未tierで、重金属・ABV（common）を押しのけていた
+        # （PDDは伴侶オウム類の最重要疾患の一つ — Hoppes 2013）
+        "Proventricular Dilatation Disease (PDD) / Bornavirus": "common",
+        "Proventricular Dilatation Disease (PDD / Avian Bornavirus)": "common",
+        # 低Ca血症（特にヨウム）・卵黄性腹膜炎は伴侶オウムで一般的（Harrison）
+        "Calcium Deficiency (Hypocalcemia)": "common",
+        "Egg Yolk Peritonitis": "common",  # チャット経路のモジュール名（配信名は Egg Peritonitis）
         "Zinc Toxicosis": "common",
         "Gout (Visceral/Articular)": "common",
         "Obesity": "common",
@@ -1673,6 +1799,10 @@ SPECIES_PREVALENCE = {
     # SNAKE
     # ==================================================================
     "snake": {
+        # 産卵後卵停滞はヘビの繁殖雌で一般的（Mader 3rd ed）— 未tierで
+        # GI宿便主訴の1位を奪っていた
+        "Post-ovulatory Egg Stasis (Slug Retention)": "common",
+        "Coccidia Infection": "common",  # 飼育ヘビの糞便検査で頻出（Mader 3rd ed）
         "Hemoparasites (Blood Parasites)": "very_common",
         "Respiratory Infection": "very_common",
         "Inclusion Body Disease (IBD)": "very_common",
@@ -1757,6 +1887,15 @@ SPECIES_PREVALENCE = {
     # TORTOISE
     # ==================================================================
     "tortoise": {
+        # 膀胱結石の変異エントリ（既存 Bladder Stones (Urolithiasis)=common と同族。
+        # 未tierでGI宿便の1位を奪っていた）。アデノウイルスはリクガメでは uncommon
+        "Tortoise Urolithiasis (Bladder Stone)": "common",
+        "Adenovirus Infection": "uncommon",
+        "Cecal Impaction": "common",  # 繊維不足/脱水のリクガメで頻発する消化器病態
+        "Chlamydiosis": "uncommon",  # カメでの報告は限定的（鳥のオウム病と異なる）
+        # モジュールに正準名と括弧付き変異の2エントリが併存し、括弧側が未tierで
+        # 正準側(very_common)より上位に出る自己重複逆転があった
+        "Vitamin A Deficiency (Hypovitaminosis A)": "very_common",
         "Respiratory Infection": "very_common",
         "Coccidia": "very_common",
         "Metabolic Bone Disease (MBD)": "very_common",
