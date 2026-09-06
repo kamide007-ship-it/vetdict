@@ -99,6 +99,88 @@ class TestFrontendCommonDiseaseVisibility:
             assert cls in MAIN_CSS, cls
 
 
+class TestAllSpeciesCommonsAudit:
+    """開発者指示「全ての動物種にて一般的な疾患が見落とされていないか、確認」
+    (2026-09) の全種自己検索監査で検出・修正した逆転の回帰ガード。
+
+    監査手法: 全21種の common/very_common 疾患について、その疾患自身の
+    教科書的症状セットで検索し、(a) 本体が top-3 に入るか、(b) 未tier/稀な
+    エントリが上位を奪っていないかを検証（88フラグ → 0-3/run に収束）。
+    症状セットは Python set のためサンプリングが非決定的 — ここでは固定の
+    症状リストで代表的な修正を固定する。"""
+
+    @staticmethod
+    def _match(species, symptom_ids):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        return _match_species_symptoms_to_diseases(symptom_ids, species)
+
+    def test_gp_dacryocystitis_urinary_clone_purged(self):
+        """GP涙嚢炎の supplementary 症状セットが泌尿器クローン
+        （blood_in_urine/straining_to_urinate等）で、膀胱炎主訴の上位を
+        涙嚢炎が奪っていた。眼徴候セットへのキュレート後は、泌尿器主訴に
+        涙嚢炎が出ず、眼主訴では涙嚢炎が1位で引けること。"""
+        r = self._match("guinea_pig", ["blood_in_urine", "straining_to_urinate", "frequent_urination"])
+        top6 = [x["name_en"] for x in r[:6]]
+        assert "Dacryocystitis" not in top6, top6
+        assert any("Cystitis" in n or "Bladder Sludge" in n for n in top6[:2]), top6
+        r2 = self._match("guinea_pig", ["eye_discharge", "crusty_eyes", "eye_redness"])
+        assert r2[0]["name_en"] == "Dacryocystitis", [x["name_en"] for x in r2[:3]]
+
+    def test_pyometra_outranks_retained_fetus_gp_and_rabbit(self):
+        """胎子遺残の症状セットは子宮蓄膿症の厳密なサブセットで、未tierの
+        まま陰部分泌物主訴で常勝していた（繁殖直後に限定される病歴依存の
+        鑑別）。tier整列後は蓄膿症が上位であること。"""
+        for sp, retained in (("guinea_pig", "Retained Fetus"), ("rabbit", "Retained Foetus")):
+            r = self._match(sp, ["vaginal_discharge", "lethargy", "appetite_loss"])
+            names = [x["name_en"] for x in r[:6]]
+            assert names[0] == "Pyometra", (sp, names)
+            i_ret = names.index(retained) if retained in names else 99
+            assert i_ret > 0, (sp, names)
+
+    def test_cat_jaundice_hepatic_commons_first(self):
+        """黄疸主訴で猫肝疾患の主鑑別（肝リピドーシス/胆管炎）より上位に
+        胆嚢粘液嚢腫（犬の疾患 — 猫は症例報告レベル）が出ていた逆転の是正。"""
+        r = self._match("cat", ["lethargy", "vomiting", "appetite_loss", "jaundice"])
+        top4 = [x["name_en"] for x in r[:4]]
+        assert any("Hepatic Lipidosis" in n for n in top4), top4
+        assert any("Cholangitis" in n for n in top4), top4
+        assert "Feline Gallbladder Mucocele" not in top4, top4
+        muc = next((x for x in r if x["name_en"] == "Feline Gallbladder Mucocele"), None)
+        if muc is not None:
+            assert muc["prevalence_tier"] == "rare"
+
+    def test_hamster_otitis_retrievable_by_vestibular_signs(self):
+        """ハムスター中耳炎の supplementary 症状セットがクローン汚染で
+        斜頸・旋回から引けなかった — キュレート後は1位で解決。"""
+        r = self._match("hamster", ["head_tilt", "circling"])
+        assert r[0]["name_en"] == "Ear Infection (Otitis)", [x["name_en"] for x in r[:3]]
+
+    def test_tortoise_vitamin_a_duplicate_pair_tier_aligned(self):
+        """リクガメはモジュールに Vitamin A Deficiency の正準名と括弧付き
+        変異の同一疾患2エントリが併存し、未tierの括弧側が正準側
+        （very_common）より上に出る自己重複逆転があった。両方 very_common
+        に整列していること。"""
+        r = self._match("tortoise", ["swollen_eyes", "anorexia", "nasal_discharge"])
+        va = [x for x in r if "Vitamin A" in x["name_en"]]
+        assert len(va) >= 2, [x["name_en"] for x in r[:8]]
+        assert all(x["prevalence_tier"] == "very_common" for x in va), [
+            (x["name_en"], x["prevalence_tier"]) for x in va
+        ]
+        assert "Vitamin A" in r[0]["name_en"], [x["name_en"] for x in r[:3]]
+
+    def test_parrot_pdd_and_heavy_metal_tiered_common(self):
+        """削痩+吐き戻し+振戦のオウム主訴で、PDD（tier済みcommon）と
+        重金属中毒群が未tierエントリに埋もれないこと。"""
+        r = self._match("parrot", ["weight_loss", "regurgitation", "tremors"])
+        top5 = r[:5]
+        assert any("PDD" in x["name_en"] for x in top5), [x["name_en"] for x in top5]
+        assert top5[0]["prevalence_tier"] in ("very_common", "common"), (
+            top5[0]["name_en"],
+            top5[0]["prevalence_tier"],
+        )
+
+
 class TestMobileErgonomics:
     def test_ios_zoom_block_covers_new_inputs(self):
         """フォーカス時フォント<16pxはiOS Safariがページを自動ズームする。
