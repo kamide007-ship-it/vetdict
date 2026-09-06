@@ -258,7 +258,7 @@ const I18N={
     emptyStateSelectBtn:"動物種を選択する",
     breadcrumbHome:"トップ",breadcrumbNoSpecies:"動物種未選択",
     kbdShortcutsHint:"キーボード: Ctrl+1〜5でタブ切替",
-    globalSearchPh:"疾患・薬品を検索...",
+    globalSearchPh:"疾患・薬品・症状・救急を検索（例: バイトリル, 嘔吐）",
     menuOpen:"メニューを開く",menuClose:"メニューを閉じる",
     removeLabel:"%s%を削除",
     painLabels:["痛みなし","軽度","中等度","中〜重度","重度"],
@@ -532,7 +532,7 @@ const I18N={
     emptyStateSelectBtn:"Select a species",
     breadcrumbHome:"Home",breadcrumbNoSpecies:"No species selected",
     kbdShortcutsHint:"Keyboard: Ctrl+1-5 to switch tabs",
-    globalSearchPh:"Search diseases & drugs...",
+    globalSearchPh:"Search diseases, drugs, symptoms, emergencies…",
     menuOpen:"Open menu",menuClose:"Close menu",
     removeLabel:"Remove %s%",
     painLabels:["No Pain","Mild","Moderate","Severe","Excruciating"],
@@ -1159,11 +1159,11 @@ let globalSearchSpeciesFilter=null;
 let globalSearchTypeFilter=null;
 let globalSearchReqId=0;
 
-function saveRecentSearch(type,name,nameJa){
+function saveRecentSearch(type,name,nameJa,extra){
   try{
     let recent=JSON.parse(localStorage.getItem("vetdict-recent-searches")||"[]");
     recent=recent.filter(r=>r.name!==name);
-    recent.unshift({type,name,name_ja:nameJa,ts:Date.now()});
+    recent.unshift(Object.assign({type,name,name_ja:nameJa,ts:Date.now()},extra||{}));
     if(recent.length>8)recent.length=8;
     localStorage.setItem("vetdict-recent-searches",JSON.stringify(recent));
   }catch(e){}
@@ -1177,11 +1177,23 @@ function showRecentSearches(results){
   const title=currentLang==="ja"?"最近の検索":"Recent searches";
   results.innerHTML=`<div class="search-recent-title" style="padding:8px 14px;font-size:.72rem;color:var(--gray-400);font-weight:600;border-bottom:1px solid var(--gray-100)">${title}</div>`+
     recent.map(m=>{
-      const icon=m.type==="disease"?"\u{1F4D6}":"\u{1F48A}";
+      const icon=m.type==="disease"?"\u{1F4D6}":m.type==="emergency"?"\u{1F6A8}":"\u{1F48A}";
       const label=currentLang==="ja"?(m.name_ja||m.name):(m.name||m.name_ja);
-      return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||"")}">${icon} ${escapeHtml(label)}</div>`;
+      return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||"")}" data-name-ja="${escapeHtml(m.name_ja||"")}" data-species="${escapeHtml(m.species||"")}" data-proto="${escapeHtml(m.proto||"")}">${icon} ${escapeHtml(label)}</div>`;
     }).join("");
   results.style.display="block";
+}
+
+/* Omnibox-only cache of emergency protocols (data, no UI). Deliberately
+   separate from emergencyData so the emergency tab's own loader/renderer and
+   navigateToEmergencyProtocol's readiness poll keep their exact semantics. */
+let _omniEmergencyPromise=null,_omniEmergency=null;
+function ensureEmergencySearchData(){
+  if(_omniEmergency)return Promise.resolve(_omniEmergency);
+  if(emergencyData&&emergencyData.length){_omniEmergency=emergencyData;return Promise.resolve(_omniEmergency);}
+  if(_omniEmergencyPromise)return _omniEmergencyPromise;
+  _omniEmergencyPromise=fetchWithTimeout("/api/emergency/protocols",{},30000).then(r=>r.json()).then(d=>{_omniEmergency=(d&&d.protocols)||[];return _omniEmergency;}).catch(err=>{_omniEmergencyPromise=null;debugWarn("omnibox emergency fetch failed:",err);return[];});
+  return _omniEmergencyPromise;
 }
 
 function setupGlobalSearch(){
@@ -1194,27 +1206,71 @@ function setupGlobalSearch(){
     input.setAttribute("aria-expanded",open?"true":"false");
   }).observe(results,{attributes:true,attributeFilter:["style"],childList:true,subtree:false});
   let debounceTimer=null;
+  /* Omnibox 2.0 (2026-09): one box reaches everything. Drugs match by the same
+     kana/width-normalised name+brand-alias rule as the drug tab (バイトリル
+     used to be 0 hits here), the dictionary is loaded on first use instead of
+     waiting for a species tap, emergency protocols join the results, and a
+     fixed action block (symptom → checker, anesthesia search, clinical chat
+     with the query pre-filled) guarantees no query dead-ends. */
+  let _drugLoadKicked=false;
+  function _rerunWhenDrugsLoaded(reqId,tries){
+    if(reqId!==globalSearchReqId)return;
+    if(drugsLoaded){runSearch();return;}
+    if((tries||0)<30)setTimeout(()=>_rerunWhenDrugsLoaded(reqId,(tries||0)+1),200);
+  }
+  function _speciesTag(spId){
+    const sp=spId?SPECIES.find(s=>s.id===spId):null;
+    return sp?`<span class="search-result-species">${SPECIES_ICONS[spId]||""} ${escapeHtml(currentLang==="ja"?sp.name:sp.nameEn)}</span>`:"";
+  }
+  function _entityRow(m){
+    const icon=m.type==="disease"?"\u{1F4D6}":m.type==="emergency"?"\u{1F6A8}":"\u{1F48A}";
+    const label=currentLang==="ja"?(m.name_ja||m.name):(m.name||m.name_ja);
+    const sub=currentLang==="ja"?(m.name||""):(m.name_ja||"");
+    const typeLabel=m.type==="disease"?(currentLang==="ja"?"疾患":"Disease"):m.type==="emergency"?(currentLang==="ja"?"救急":"Emergency"):(currentLang==="ja"?"薬品":"Drug");
+    const brand=m.brand?` <span class="drug-brand-hit">${currentLang==="ja"?"商品名":"Brand"}: ${escapeHtml(m.brand)}</span>`:"";
+    return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||m.name_ja||"")}" data-name-ja="${escapeHtml(m.name_ja||"")}" data-species="${escapeHtml(m.species||"")}" data-proto="${escapeHtml(m.proto||"")}">${icon} <strong>${escapeHtml(label)}</strong>${sub?` <span style="color:var(--gray-400);font-size:.78rem">${escapeHtml(sub)}</span>`:""}${brand}${_speciesTag(m.species)} <span class="search-result-type">${typeLabel}</span></div>`;
+  }
+  function _actionRows(rawQ,nq){
+    const rows=[];
+    /* Symptom → checker: the vet thinks symptom-first; match the loaded
+       checker vocabulary of the current species (never guesses a species). */
+    if(currentSpecies&&Array.isArray(symptomData)&&symptomData.length){
+      const hits=symptomData.filter(s=>normalizeDrugSearchText(s.name_ja||"").includes(nq)||normalizeDrugSearchText(s.name_en||"").includes(nq)).slice(0,2);
+      hits.forEach(s=>{
+        const nm=currentLang==="ja"?(s.name_ja||s.name_en||""):(s.name_en||s.name_ja||"");
+        const lbl=currentLang==="ja"?`症状「${nm}」で鑑別チェック`:`Differential check for symptom “${nm}”`;
+        rows.push(`<div class="search-result-item search-action-item" role="option" data-action="checker" data-symptom="${escapeHtml(s.id)}" data-q="${escapeHtml(rawQ)}">\u{1FA7A} <strong>${escapeHtml(lbl)}</strong>${_speciesTag(currentSpecies)}</div>`);
+      });
+    }
+    const anesLbl=currentLang==="ja"?`麻酔プロトコルを「${rawQ}」で検索`:`Search anesthesia protocols for “${rawQ}”`;
+    rows.push(`<div class="search-result-item search-action-item" role="option" data-action="anesthesia" data-q="${escapeHtml(rawQ)}">\u{1F489} <strong>${escapeHtml(anesLbl)}</strong></div>`);
+    const chatLbl=currentLang==="ja"?`「${rawQ}」を相談チャットで相談する`:`Ask the clinical chat about “${rawQ}”`;
+    rows.push(`<div class="search-result-item search-action-item" role="option" data-action="chat" data-q="${escapeHtml(rawQ)}">\u{1F4AC} <strong>${escapeHtml(chatLbl)}</strong></div>`);
+    const head=currentLang==="ja"?"他の探し方":"Other ways to find it";
+    return`<div class="search-recent-title search-action-head">${head}</div>`+rows.join("");
+  }
   function runSearch(){
     clearTimeout(debounceTimer);
-    const q=input.value.trim().toLowerCase();
+    const rawQ=input.value.trim();
+    const q=rawQ.toLowerCase();
     if(q.length<2){
       if(document.activeElement===input)showRecentSearches(results);
       else{results.style.display="none";results.innerHTML="";}
       return;
     }
+    const nq=normalizeDrugSearchText(rawQ);
     const reqId=++globalSearchReqId;
+    let drugsPending=false;
     function renderMatches(matches){
       if(reqId!==globalSearchReqId)return;
-      if(matches.length===0){results.innerHTML=`<div class="search-result-item" style="color:var(--gray-500)">${t("noDiseaseMatch")}</div>`;results.style.display="block";return;}
-      results.innerHTML=matches.slice(0,15).map(m=>{
-        const icon=m.type==="disease"?"\u{1F4D6}":"\u{1F48A}";
-        const label=currentLang==="ja"?(m.name_ja||m.name):(m.name||m.name_ja);
-        const sub=currentLang==="ja"?(m.name||""):(m.name_ja||"");
-        const sp=m.species?SPECIES.find(s=>s.id===m.species):null;
-        const spTag=sp?`<span class="search-result-species">${SPECIES_ICONS[m.species]||""} ${escapeHtml(currentLang==="ja"?sp.name:sp.nameEn)}</span>`:"";
-        const typeLabel=m.type==="disease"?(currentLang==="ja"?"疾患":"Disease"):(currentLang==="ja"?"薬品":"Drug");
-        return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||m.name_ja||"")}" data-name-ja="${escapeHtml(m.name_ja||"")}" data-species="${escapeHtml(m.species||"")}">${icon} <strong>${escapeHtml(label)}</strong>${sub?` <span style="color:var(--gray-400);font-size:.78rem">${escapeHtml(sub)}</span>`:""}${spTag} <span class="search-result-type">${typeLabel}</span></div>`;
-      }).join("")+(matches.length>15?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem;text-align:center">${currentLang==="ja"?`他${matches.length-15}件`:`${matches.length-15} more...`}</div>`:"");
+      const actions=_actionRows(rawQ,nq);
+      if(matches.length===0){
+        const none=currentLang==="ja"?"該当する疾患・薬品が見つかりません — 下の方法をお試しください":"No matching disease or drug — try one of the options below";
+        const pending=drugsPending?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem">${currentLang==="ja"?"薬品辞書を読み込み中…":"Loading the drug formulary…"}</div>`:"";
+        results.innerHTML=`<div class="search-result-item" style="color:var(--gray-500)">${none}</div>${pending}${actions}`;
+        results.style.display="block";return;
+      }
+      results.innerHTML=matches.slice(0,15).map(_entityRow).join("")+(matches.length>15?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem;text-align:center">${currentLang==="ja"?`他${matches.length-15}件`:`${matches.length-15} more...`}</div>`:"")+actions;
       results.style.display="block";
     }
     debounceTimer=setTimeout(()=>{
@@ -1222,24 +1278,28 @@ function setupGlobalSearch(){
       const seen=new Set();
       if(globalSearchTypeFilter!=="drug"){
         allDiseases.forEach(d=>{
-          const name=(d.name||"").toLowerCase();
-          const nameJa=(d.name_ja||"").toLowerCase();
-          if(name.includes(q)||nameJa.includes(q)){const key="d:"+(d.name||d.name_ja||"")+":"+(currentSpecies||"");if(!seen.has(key)){seen.add(key);matches.push({type:"disease",name:d.name,name_ja:d.name_ja,species:currentSpecies||""});}}
+          if(normalizeDrugSearchText(d.name||"").includes(nq)||normalizeDrugSearchText(d.name_ja||"").includes(nq)){const key="d:"+(d.name||d.name_ja||"")+":"+(currentSpecies||"");if(!seen.has(key)){seen.add(key);matches.push({type:"disease",name:d.name,name_ja:d.name_ja,species:currentSpecies||""});}}
         });
       }
       if(globalSearchTypeFilter!=="disease"){
-        allDrugs.forEach(d=>{
-          if(globalSearchSpeciesFilter&&d.species_info&&!d.species_info[globalSearchSpeciesFilter])return;
-          const name=(d.name||"").toLowerCase();
-          const nameJa=(d.name_ja||"").toLowerCase();
-          if(name.includes(q)||nameJa.includes(q)){matches.push({type:"drug",name:d.name,name_ja:d.name_ja});}
-        });
+        if(!drugsLoaded||!allDrugs.length){
+          drugsPending=true;
+          if(!_drugLoadKicked){_drugLoadKicked=true;if(!drugsLoaded)loadDrugDictionary();}
+          _rerunWhenDrugsLoaded(reqId,0);
+        }else{
+          allDrugs.forEach(d=>{
+            if(globalSearchSpeciesFilter&&d.species_info&&!d.species_info[globalSearchSpeciesFilter])return;
+            const hit=_drugMatchesSearch(d,nq);
+            if(hit)matches.push({type:"drug",name:d.name,name_ja:d.name_ja,brand:hit.hit==="alias"?hit.alias:""});
+          });
+        }
       }
       renderMatches(matches);
+      const _order=t=>t==="disease"?0:t==="drug"?1:2;
       /* 全種横断: 動物種を選ばなくても全21種から疾患をヒットさせる（ローカルに無い種の疾患を補完） */
       if(globalSearchTypeFilter!=="drug"){
         const spFilter=globalSearchSpeciesFilter?"&species="+encodeURIComponent(globalSearchSpeciesFilter):"";
-        fetchWithTimeout(`/api/diseases?q=${encodeURIComponent(q)}&limit=20${spFilter}`).then(r=>r.json()).then(data=>{
+        fetchWithTimeout(`/api/diseases?q=${encodeURIComponent(rawQ)}&limit=20${spFilter}`).then(r=>r.json()).then(data=>{
           if(reqId!==globalSearchReqId)return;
           const extra=(data&&data.diseases)||[];
           extra.forEach(d=>{
@@ -1247,26 +1307,77 @@ function setupGlobalSearch(){
             if(seen.has(key))return;seen.add(key);
             matches.push({type:"disease",name:d.name,name_ja:d.name_ja,species:d.species||""});
           });
-          /* 疾患を先頭に並べ替え（横断結果を見つけやすく） */
-          matches.sort((a,b)=>(a.type==="disease"?0:1)-(b.type==="disease"?0:1));
+          matches.sort((a,b)=>_order(a.type)-_order(b.type));
           renderMatches(matches);
         }).catch(err=>{debugWarn("global cross-species search failed:",err);});
+      }
+      /* 救急プロトコル: タイトル・トリガー徴候で照合（fetch-once、タブ未訪問でもヒット） */
+      if(globalSearchTypeFilter!=="drug"){
+        ensureEmergencySearchData().then(protos=>{
+          if(reqId!==globalSearchReqId||!protos.length)return;
+          let added=0;
+          protos.forEach(p=>{
+            if(globalSearchSpeciesFilter&&!(p.species||[]).includes(globalSearchSpeciesFilter))return;
+            const hay=[p.title_ja,p.title_en,...(p.trigger_signs_ja||[]),...(p.trigger_signs_en||[])].map(x=>normalizeDrugSearchText(x||"")).join("\n");
+            if(!hay.includes(nq))return;
+            const key="e:"+p.id;if(seen.has(key))return;seen.add(key);
+            matches.push({type:"emergency",name:p.title_en||p.title_ja,name_ja:p.title_ja||p.title_en,proto:p.id,species:(p.species||[]).includes(currentSpecies)?currentSpecies:(p.species||[])[0]||""});
+            added++;
+          });
+          if(added){matches.sort((a,b)=>_order(a.type)-_order(b.type));renderMatches(matches);}
+        });
       }
     },200);
   }
   input.addEventListener("input",runSearch);
   input.addEventListener("focus",()=>{if(input.value.trim().length<2)showRecentSearches(results);});
+  /* Warm the drug formulary on idle so the very first omnibox query already
+     covers drugs (previously the prefetch only started after a species tap). */
+  if(!drugsLoaded){
+    const _pf=()=>{if(!drugsLoaded&&!_drugLoadKicked){_drugLoadKicked=true;loadDrugDictionary();}};
+    if("requestIdleCallback" in window)requestIdleCallback(_pf,{timeout:3000});
+    else setTimeout(_pf,1500);
+  }
+  function _closeBox(){input.value="";results.style.display="none";}
   results.addEventListener("click",e=>{
     const item=e.target.closest(".search-result-item");
-    if(!item||!item.dataset.type)return;
-    saveRecentSearch(item.dataset.type,item.dataset.name,item.dataset.nameJa||"");
+    if(!item)return;
+    if(item.dataset.action){
+      const rawQ=item.dataset.q||"";
+      if(item.dataset.action==="chat"){
+        _pushNavHistory(currentView,"chat","");
+        switchView("chat");
+        if(typeof switchChatMode==="function")switchChatMode("free");
+        const ci=document.getElementById("chatInput");
+        if(ci){ci.value=rawQ;setTimeout(()=>ci.focus(),60);}
+        trackEvent("chat_from_search",{query:rawQ});
+        const p=document.querySelector(".chat-mode-toggle")||document.getElementById("viewChat");
+        if(p)scrollToAnchor(p);
+      }else if(item.dataset.action==="anesthesia"){
+        _pushNavHistory(currentView,"anesthesia","");
+        switchView("anesthesia");
+        _showBackNav("anesthesiaBackNav","anesthesiaSearch");
+        const inp=document.getElementById("anesthesiaSearch");
+        if(inp)inp.value=rawQ;
+        if(anesthesiaLoaded)renderAnesthesiaList();
+        trackEvent("anesthesia_from_search",{query:rawQ});
+        const p=document.getElementById("anesthesiaList");
+        if(p)scrollToAnchor(p);
+      }else if(item.dataset.action==="checker"){
+        _runCheckerWithSymptoms(currentSpecies||"dog",[item.dataset.symptom],"checker_from_search");
+      }
+      _closeBox();return;
+    }
+    if(!item.dataset.type)return;
+    saveRecentSearch(item.dataset.type,item.dataset.name,item.dataset.nameJa||"",{species:item.dataset.species||"",proto:item.dataset.proto||""});
     if(item.dataset.type==="disease"){
       const sp=item.dataset.species||"";
       if(sp&&sp!==currentSpecies)openDiseaseAcrossSpecies(item.dataset.name,sp);
       else navigateToDiseaseDb(item.dataset.name);
     }
+    else if(item.dataset.type==="emergency"){navigateToEmergencyProtocol(item.dataset.proto);}
     else{navigateToDrug(item.dataset.name);}
-    input.value="";results.style.display="none";
+    _closeBox();
   });
   document.addEventListener("click",e=>{
     if(!input.contains(e.target)&&!results.contains(e.target))results.style.display="none";
@@ -5946,7 +6057,10 @@ function guidedRenderFinalResults(data){
 
 let drugsLoaded=false,allDrugs=[],drugCategories={};
 
+let _drugLoadInFlight=false;
 function loadDrugDictionary(){
+  if(_drugLoadInFlight)return;
+  _drugLoadInFlight=true;
   const list=document.getElementById("drugList");
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:70px"></div><div class="skeleton skeleton-card" style="height:90px"></div><div class="skeleton skeleton-card" style="height:60px"></div></div>';
   Promise.all([fetchWithTimeout("/api/drugs").then(r=>r.json()),fetchWithTimeout("/api/drug-categories").then(r=>r.json())])
@@ -5959,11 +6073,12 @@ function loadDrugDictionary(){
     const spSelect=document.getElementById("drugSpeciesFilter");
     spSelect.innerHTML=`<option value="">${t("allSpecies")}</option>`;
     SPECIES.forEach(sp=>{const primary=currentLang==="ja"?sp.name:sp.nameEn;const secondary=currentLang==="ja"?sp.nameEn:sp.name;spSelect.insertAdjacentHTML("beforeend",`<option value="${escapeHtml(sp.id)}">${escapeHtml(primary)} ${escapeHtml(secondary)}</option>`);});
-    drugsLoaded=true;
+    drugsLoaded=true;_drugLoadInFlight=false;
     /* Auto-select current species in drug filter */
     if(currentSpecies){spSelect.value=currentSpecies;}
     renderDrugList();
   }).catch((err)=>{
+    _drugLoadInFlight=false;
     debugError("loadDrugDictionary failed:",err);
     list.innerHTML=`<div role="alert" style="padding:20px;text-align:center;color:var(--gray-500)">${t("loadFailed")}<br><button type="button" class="retry-drug-btn" style="margin-top:10px;padding:8px 20px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.84rem">${t("reload")}</button></div>`;
     const rb=list.querySelector(".retry-drug-btn");
