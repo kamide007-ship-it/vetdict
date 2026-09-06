@@ -22,6 +22,7 @@ import json
 import logging
 import textwrap
 import threading
+import unicodedata
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -956,19 +957,32 @@ def _disease_search_index() -> list[dict]:
     return []
 
 
+_HIRAGANA_TO_KATAKANA = str.maketrans({chr(c): chr(c + 0x60) for c in range(0x3041, 0x3097)})
+
+
+def _normalize_search_text(text: str) -> str:
+    """Search-side normalisation shared with the drug dictionary: NFKC (full-width
+    Latin/half-width kana) + lowercase + hiragana→katakana, so 「はくてん」 and
+    「ﾊｸﾃﾝ」 both reach 「白点病」's katakana reading and 「ＦＩＰ」 reaches FIP."""
+    return unicodedata.normalize("NFKC", text or "").lower().translate(_HIRAGANA_TO_KATAKANA)
+
+
 def _search_index_fallback(keywords: list[str], species: str | None, limit: int) -> list[dict]:
-    """Keyword search over the prebuilt name index (name + name_ja, AND logic)."""
+    """Keyword search over the prebuilt name index (name + name_ja, AND logic).
+
+    Both sides are kana/width-normalised, so this is also the rescue path for
+    queries the SQLite LIKE search cannot fold (hiragana, full-width input)."""
     index = _disease_search_index()
     if not index:
         return []
 
-    lowered = [k.lower() for k in keywords]
+    lowered = [_normalize_search_text(k) for k in keywords]
     scored: list[tuple[int, dict]] = []
     for entry in index:
         if species and entry.get("species") != species:
             continue
-        name = (entry.get("name") or "").lower()
-        name_ja = (entry.get("name_ja") or "").lower()
+        name = _normalize_search_text(entry.get("name") or "")
+        name_ja = _normalize_search_text(entry.get("name_ja") or "")
         haystack = name + "\n" + name_ja
         if not all(kw in haystack for kw in lowered):
             continue
@@ -1090,6 +1104,10 @@ def search_diseases(query: str, species: str | None = None, category: str | None
 
     # Sort by score (descending), then by name
     results.sort(key=lambda x: (-x[0], x[1].get("name", "")))
+    if not results and not category:
+        # SQLite LIKE is byte-literal: 「はくてん」/「ＦＩＰ」 miss katakana/ASCII
+        # names.  Rescue through the kana/width-normalised name index.
+        return _search_index_fallback(keywords, species, limit)
     return [r[1] for r in results]
 
 
