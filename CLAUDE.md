@@ -4505,3 +4505,83 @@ MgSO4×18 + MgO×19 + マグネシウム補充×4 が魚用薬浴エントリ「
 - 配線: 正規化＋商品名ルール、初回ロード＋プリフェッチ＋in-flightガード、救急グループ＋完全一致ナビ、
   3アクション行の配線（チェッカー/麻酔/チャット）と0件時のアクション維持、最近の検索の種/プロトコル保持、
   プレースホルダ/CSS
+
+## 2026-09セッション（第34弾: プロピレングリコール補完 + マヌカハニー到達性修正 + チャット精度第23弾 + 薬品→緊急対応プロトコル逆リンク）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean（変更分の F841 1件は即時是正）
+- 配信SQLiteクリーンビルド: 6,893疾患、treatment/prevention/prognosis **100%**
+- 薬用量: safe薬品の dosage 欠落 **0**（621薬品時点、全species_info検証）、文字列型相互作用スキーマ **0**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり。
+  エビデンス照合スポットチェック（RECOVERエピネフリン低用量0.01・アトロピン0.02-0.04・
+  猫ALF 5 mg/kg Tamura 2021・ウサギアトロピン0.05）逸脱なし
+- prevalence dead key: 既知残のみ（上限15ガード内、テスト18件合格）
+
+### referenced-but-absent 薬品1剤の補完（`drug_batch_56.py` 新規、621→622薬品）
+用量文脈カタカナトークン監査（第22回スイープ、find_drugs_in_text 実マッチャー突合）でマッチャーは
+ほぼ飽和と確認（ノルモソルR/乳酸リンゲル/ミコフェノール酸モフェチル/TMP-スルファ等の上位候補は全て解決済み）。
+真のモノグラフ欠落は1剤:
+- **プロピレングリコール** — 妊娠中毒症/ケトーシスの経口糖新生剤として14疾患エントリが用量付き参照
+  （ウサギ 1 mL PO q12h・ハムスター 0.5-1 mL・モルモット 1-2 mL（分娩前/後）・デグー 1 mL/kg・ヤギ 30-60 mL、
+  Quesenberry & Carpenter 4th / Pugh & Baird 2nd）+ 犬の外用角質溶解（脂腺炎50-75%溶液、Muller & Kirk 7th）。
+  **猫は safe:False** — ハインツ小体性溶血（Christopher JAVMA 1989、FDAがキャットフード使用を禁止。
+  ペイントボール中毒源）。逆引き「この薬品を使う疾患」24疾患
+- **マヌカハニーの到達性修正（重複追加を回避）**: 医療用マヌカハニーは既収載（id=silver_honey、
+  正準名「医療用マヌカハニー」）だが、創傷管理70+エントリ×15種の裸表記（マヌカハニー/Manuka honey/
+  medical grade honey）がキーワード索引に一切届いていなかった（「医療用」接頭辞は治療文に出現せず、
+  英語先頭語 medical はストップリスト）→ `_KATAKANA_VARIANT_ALIASES["silver_honey"]` に5別名を登録。
+  逆引き50疾患が接続
+
+### 診断チャット精度 第23弾（24症例フレッシュスイープ 6 MISS + 1抽出ゼロ → 全症例合格）
+- **エイリアス誤マッピング是正**: 「口から泡」→ vomiting（嘔吐）だったのを **drooling** に是正
+  （口の泡沫=流涎。既存の「泡を吹く」→drooling と整合）。drooling チェーン末尾に mucus_in_mouth を追加
+  （爬虫類の口腔泡沫=呼吸器/口腔徴候）。犬の発作主訴（痙攣+口から泡）はてんかん1位を回帰テストで固定
+- **連用形・語順ゆれ**: お腹が痛そう→abdominal_pain（犬膵炎の祈りのポーズ主訴が rank 1 に）、
+  すぐ疲れ（て形）→exercise_intolerance（労作性咳嗽でMMVD/DCMがtop3に）、
+  呼吸のたびに口を開/口を開けたまま呼吸→open_mouth_breathing（ヘビ呼吸器感染がtop4に。
+  既存キーは「口を開けて呼吸」のみで語順逆転形が欠落）、足先を噛→itching（趾間皮膚炎ddx）
+- **チンチラ毛噛み（バーバリング）が抽出ゼロだった**: チンチラの代表的行動疾患なのに飼い主表現が皆無
+  → 毛をかじ/自分の毛を噛→fur_chewing、毛が短くなっ→patchy_short_fur + ID_SYNONYMS チェーン新設
+  （fur_chewing→chewed_fur_tips/barbering/excessive_grooming/hair_loss — 他種は安全にフォールバック）
+  → 毛噛みファミリーが top3 独占
+- **トカゲ卵塞**: 既存キー「卵が詰まっている」→egg_binding がトカゲ語彙（egg_binding非保有）で脱落していた
+  → ID_SYNONYMS egg_binding→[egg_retention, dystocia, cloacal_swelling, abdominal_swelling, straining] 新設
+  → 卵塞（難産）がtop2に（鳥の卵詰まり rank 1 は不変を検証）
+- **鳥PU/PD**: 未tierのアミロイドーシス腎型が「多飲+水様便」で腎不全（common）を上回っていた →
+  鳥アミロイドーシス4亜型=uncommon（ペット鳥では慢性炎症続発の uncommon 病態 — 主に水禽の疾患）、
+  糖尿病=uncommon（Pilny 2008）を tier 付与 → 亜型の乗っ取り解消
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound23`（9件）
+
+### UX: 薬品詳細→緊急対応プロトコルの逆リンク（双方向動線の完成）+ 救急検索の薬品名対応
+- **バグ/ギャップ2件**: (a) 救急→薬品リンク（第26弾）の逆方向が dead end — アトロピンの薬品カードから
+  それを使う救急プロトコルへの導線が無かった。(b) **救急タブの検索がプロトコル名・症状のみ対象**で、
+  最高緊急度の画面で「アトロピン」「エピネフリン」と検索しても0件だった
+- 薬品詳細に `.drug-emergency-slot` を追加し、展開時に `hydrateEmergencyFromDrug()` でハイドレート
+  （`ensureEmergencyData()` memoized fetch — ensureAnesthesiaContraRules と同型）。
+  **key_drugs の link_name（辞書の正準英語名）が当該薬品に一致するプロトコルが1件以上ある場合のみ**
+  「🚨 この薬品を使う緊急対応プロトコルを見る（N件）」ボタンを表示（dead end ゼロ設計）
+- タップで救急タブへ切替+ `emergencyList.dataset.drugFilter`（link_name 完全一致フィルタ）+
+  検索欄に表示名をセット+データ到着を待つ readiness poll で絞り込みリストへ着地。
+  手入力が始まったら id フィルタは解除されテキスト検索に戻る。GA4 `emergency_from_drug`
+- 救急検索の haystack に key_drugs（name/name_ja/link_name）を追加 — 薬品名の手動検索が解決。
+  プレースホルダを「プロトコル名・症状・薬品名で検索」に更新
+- 救急タブに `emergencyBackNav` コンテナを新設（他タブと同じ「← 戻る/検索クリア」ナビ）
+- 回帰テスト: `test_app_js_drug_to_emergency_reverse_link` +
+  `test_emergency_api_link_name_is_canonical_english_name`（link_name=辞書正準名の契約を113行で検証）
+
+### UX: クイック入力の拡充
+- チンチラ「毛をかじって短くなっている」（本セッションで抽出保証済みの新対応主訴 — 毛噛み rank 1）。
+  ミラーテスト JA_QUICK 同期
+- 新規薬品は既存の治療チップ/逆引き/相互作用チェッカー機構で鑑別診断・チャット結果カード・
+  疾患DBの3ビューから自動到達（プロピレングリコール=妊娠中毒症チップ、マヌカハニー=創傷/熱傷/
+  ソアホックチップを検証済み）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 564/cat 543/rabbit 260/hamster 71/guinea_pig 132/sugar_glider 75/degu 153/
+  exotic_other 2 薬品に同期、pendingStats drugs 621→**622**
+- ServiceWorker: `CACHE_NAME` v142 → v143 → **v144**（並行の第34弾グローバル検索2.0（PR #791）と同版衝突のためマージ時に改番）
+
+### mainマージ統合（PR #791 グローバル検索2.0 との並行）
+- CLAUDE.md の第34弾ログ衝突を両論併記で解決、`static/js/app.js`/`main.css` は自動マージ後に
+  setDefaultStats/pendingStats（622薬品）とオムニボックスの救急検索・薬品ロードが共存することを検証
+- 両セッションが SW v143 を使用 → **v144** に改番

@@ -873,6 +873,17 @@ SPECIES_PREVALENCE = {
         # Exposure-dependent toxicosis (same precedent as copper/PTFE = rare) —
         # untiered it topped the fluffed+green-droppings sick-bird complaint.
         "Avocado Toxicity": "rare",
+        # 2026-09 round 23: avian amyloidosis is predominantly a waterfowl/
+        # shorebird condition (chronic-inflammation AA amyloid); in pet
+        # psittacines it is an uncommon sequela — untiered, the renal subtype
+        # outranked plain renal failure (common) on the PU/PD complaint.
+        "Amyloidosis – Renal": "uncommon",
+        "Amyloidosis – Hepatic": "uncommon",
+        "Amyloidosis (Systemic)": "uncommon",
+        "Hepatic Amyloidosis": "uncommon",
+        # Documented but uncommon in pet birds (Pilny 2008); tiering keeps the
+        # PU/PD differential honest alongside renal failure.
+        "Diabetes Mellitus": "uncommon",
         "Salmonellosis": "uncommon",
         "Squamous Cell Carcinoma": "uncommon",
         "Lipoma": "uncommon",
