@@ -259,6 +259,12 @@
             <div id="interactionResults" style="margin-top:12px" aria-live="polite"></div>
           </div>
         </details>
+        <details class="clinical-calculators" id="clinicalCalculators" style="margin-bottom:12px">
+          <summary style="cursor:pointer;padding:10px 14px;background:var(--gray-100);border-radius:var(--radius);font-weight:600;font-size:.86rem;color:var(--gray-800)" data-i18n="calcTitle">🧮 臨床計算機（用量・CRI・輸液・カロリー・チョコ中毒・輸血・BSA）</summary>
+          <div style="padding:14px;background:var(--gray-50);border-radius:var(--radius);margin-top:8px">
+            <div id="calcBody"></div>
+          </div>
+        </details>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
             <input type="search" id="drugSearch" placeholder="薬品名で検索... (例: amoxicillin, メロキシカム)" data-i18n-ph="drugSearchPh" aria-label="薬品名で検索" autocomplete="off" inputmode="search"/>
@@ -332,6 +338,7 @@
           <span data-i18n="emergencyDisclaimer">緊急時は同時並行的に対応が必要です。本プロトコルは標準的な対応の参考ですが、実際の施行には熟練した獣医師の臨床判断が必須です。各薬品の用量・投与経路は処方前に必ず再確認してください。</span>
         </div>
         <div id="emergencyBackNav" role="navigation" aria-label="緊急プロトコルナビゲーション" style="display:none;gap:8px;margin-bottom:8px;flex-wrap:wrap"></div>
+        <button type="button" id="emergencyCalcLink" class="emergency-calc-link" data-i18n="emergencyCalcLink">🧮 臨床計算機を開く（CRI・輸液・チョコ中毒・輸血）</button>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
           <div class="symptom-search" style="flex:1;min-width:200px;margin-bottom:0">
             <input type="search" id="emergencySearch" placeholder="プロトコル名・症状・薬品名で検索 (例: CPR, ショック, アトロピン)" aria-label="緊急プロトコル検索" autocomplete="off" inputmode="search"/>
