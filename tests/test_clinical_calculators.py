@@ -315,3 +315,92 @@ def test_calculator_safety_rails_in_source():
     # Prefill buttons only render for parseable doses on safe rows — the
     # species-card variant must gate on info.safe
     assert "info.safe?parseDoseRange(" in APP_JS
+
+
+@pytest.mark.skipif(NODE is None, reason="node not available")
+def test_mgcs_verified_by_node_and_wired():
+    """第37弾: Modified Glasgow Coma Scale (Platt 2001 JVIM). Band boundaries
+    3-8 grave / 9-14 guarded / 15-18 good are run under node against the
+    shipped code, and the tab ships with the stabilise-first / never-prognose-
+    on-a-single-score caveats."""
+    script = (
+        _extract_vd_calc()
+        + """
+const out={
+  total:VD_CALC.mgcsTotal(6,6,6),
+  min:VD_CALC.mgcsTotal(1,1,1),
+  nan:VD_CALC.mgcsTotal(NaN,3,3),
+  range:VD_CALC.mgcsTotal(7,3,3),
+  bands:[3,8,9,14,15,18].map(v=>VD_CALC.mgcsBand(v)),
+  oob:[VD_CALC.mgcsBand(2),VD_CALC.mgcsBand(19)],
+};
+console.log(JSON.stringify(out));
+"""
+    )
+    res = subprocess.run([NODE, "-e", script], capture_output=True, text=True, timeout=30)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["total"] == 18 and out["min"] == 3
+    assert out["nan"] is None and out["range"] is None
+    assert out["bands"] == ["grave", "grave", "guarded", "guarded", "good", "good"]
+    assert out["oob"] == [None, None]
+    # UI wiring: tab, three category selects, dog-validation + caveat text
+    assert 'data-calc-panel="mgcs"' in APP_JS
+    for el_id in ("calcMgcsMotor", "calcMgcsBrainstem", "calcMgcsConsciousness"):
+        assert f'"{el_id}"' in APP_JS, el_id
+    assert "Platt 2001" in APP_JS
+    assert "スコア単独で予後を断定しない" in APP_JS
+
+
+@pytest.mark.skipif(NODE is None, reason="node not available")
+def test_owner_handout_tips_curated_and_resolvable():
+    """第37弾: per-disease home-care tips for the owner handout. Every entry
+    must be bilingual with a reference, contain ZERO dosing language (the
+    handout's core safety contract), and every match-pattern set must resolve
+    to at least one real disease name in its gated species in the served DB
+    (mirror test — renames/dedupe that orphan a tip fail CI)."""
+    m = re.search(r"const OWNER_HANDOUT_TIPS=\[[\s\S]*?\n\];", APP_JS)
+    assert m, "OWNER_HANDOUT_TIPS registry missing"
+    script = (
+        m.group(0).replace("const OWNER_HANDOUT_TIPS", "globalThis.T")
+        + """
+console.log(JSON.stringify(T.map(t=>({match:t.match,sp:t.sp||null,ja:t.ja,en:t.en,ref:t.ref||""}))));
+"""
+    )
+    res = subprocess.run([NODE, "-e", script], capture_output=True, text=True, timeout=30)
+    assert res.returncode == 0, res.stderr
+    tips = json.loads(res.stdout)
+    assert len(tips) >= 25
+    dose_re = re.compile(r"(mg/kg|mcg|µg/|\bIU\b|q\d+h|mg/|mL/kg|単位/)")
+    for t in tips:
+        assert t["ja"] and t["en"] and t["ref"], t["match"]
+        for s in t["ja"] + t["en"]:
+            assert not dose_re.search(s), f"dosing language in owner tip: {s[:60]}"
+    # Handout integration: resolver + section title + ref line
+    assert "function _ownerTipsFor(" in APP_JS
+    assert "_ownerTipsFor(d)" in APP_JS
+    assert "ご家庭でのケアのポイント" in APP_JS
+    # Mirror check against the served DB (skip when DB not built locally)
+    db = ROOT / "instance" / "vetdict.db"
+    if not db.exists() or db.stat().st_size < 1_000_000:
+        pytest.skip("served DB not built")
+    import sqlite3
+
+    conn = sqlite3.connect(db)
+    rows = conn.execute("select species, name, name_ja from diseases").fetchall()
+    conn.close()
+
+    def base(s):
+        return re.sub(r"（[^）]*）|\([^)]*\)", "", (s or "")).strip().lower()
+
+    by_sp = {}
+    for sp, n, nj in rows:
+        by_sp.setdefault(sp, []).append((base(n), base(nj)))
+    for t in tips:
+        sps = t["sp"] or list(by_sp.keys())
+        hit = any(
+            any((mm.lower() in ne) or (mm.lower() in nj) for mm in t["match"])
+            for sp in sps
+            for ne, nj in by_sp.get(sp, [])
+        )
+        assert hit, f"owner tip pattern resolves to no served disease: {t['match']}"

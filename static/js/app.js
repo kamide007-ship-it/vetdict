@@ -6340,6 +6340,19 @@ const VD_CALC={
   irisUpcSubstage(species,upc){const p=species==="cat"?0.4:0.5;if(upc>p)return"P";if(upc>=0.2)return"BP";return"NP";},
   /* 血圧サブステージ（IRIS/ACVIM 2023）: <140 / 140-159 / 160-179 / ≥180 mmHg */
   irisBpSubstage(sbp){if(sbp>=180)return"severe";if(sbp>=160)return"hyper";if(sbp>=140)return"pre";return"normo";},
+  /* 修正グラスゴー昏睡スケール（MGCS — Platt 2001 JVIM、犬の頭部外傷で検証）。
+     運動・脳幹反射・意識レベル 各1-6点の合計 3-18。3-8 予後不良域 / 9-14 慎重 /
+     15-18 良好域（スコアは48時間生存確率と直線的に相関） */
+  mgcsTotal(motor,brainstem,consciousness){
+    const v=x=>Number.isFinite(x)&&x>=1&&x<=6;
+    return v(motor)&&v(brainstem)&&v(consciousness)?motor+brainstem+consciousness:null;
+  },
+  mgcsBand(total){
+    if(!(total>=3&&total<=18))return null;
+    if(total<=8)return"grave";
+    if(total<=14)return"guarded";
+    return"good";
+  },
 };/*VD_CALC_END*/
 
 /* 計算機の入力は全て非負の量（体重・用量・濃度・%・時間）— min="0" でもタイプでは
@@ -6373,6 +6386,7 @@ function renderCalculators(force){
     {id:"transfusion",label:ja?"輸血":"Transfusion"},
     {id:"bsa",label:"BSA"},
     {id:"iris",label:"IRIS"},
+    {id:"mgcs",label:"MGCS"},
     {id:"conv",label:ja?"単位換算":"Convert"},
   ];
   const row=(label,inner)=>`<div class="calc-row"><label>${label}</label>${inner}</div>`;
@@ -6437,6 +6451,31 @@ function renderCalculators(force){
       ${row(ja?"収縮期血圧（任意）":"Systolic BP (optional)",num("calcIrisSbp","mmHg","5")+`<span class="calc-unit">mmHg</span>`)}
       <div class="calc-result" id="calcIrisResult" aria-live="polite"></div>
       <div class="calc-note">${ja?"⚠ IRIS 2023。安定した慢性腎臓病のステージング専用 — AKI・脱水・静脈輸液中の値では判定しない。空腹時の反復測定（2回以上）で確定。":"⚠ IRIS 2023. For staging STABLE CKD only — do not stage on values from AKI, dehydration or while on IV fluids. Confirm with repeated fasted measurements."}</div>
+    </div>
+    <div class="calc-panel" data-calc-panel="mgcs" hidden>
+      ${row(ja?"運動機能":"Motor activity",`<select id="calcMgcsMotor"><option value="">—</option>
+        <option value="6">${ja?"6: 正常な歩行、正常な脊髄反射":"6: Normal gait, normal spinal reflexes"}</option>
+        <option value="5">${ja?"5: 不全麻痺・四肢不全麻痺、または除脳活動":"5: Hemiparesis, tetraparesis, or decerebrate activity"}</option>
+        <option value="4">${ja?"4: 横臥、間欠的な伸筋硬直":"4: Recumbent, intermittent extensor rigidity"}</option>
+        <option value="3">${ja?"3: 横臥、持続的な伸筋硬直":"3: Recumbent, constant extensor rigidity"}</option>
+        <option value="2">${ja?"2: 横臥、持続的な伸筋硬直＋後弓反張":"2: Recumbent, constant extensor rigidity with opisthotonus"}</option>
+        <option value="1">${ja?"1: 横臥、筋緊張低下・脊髄反射減弱〜消失":"1: Recumbent, hypotonia, depressed/absent spinal reflexes"}</option></select>`)}
+      ${row(ja?"脳幹反射":"Brainstem reflexes",`<select id="calcMgcsBrainstem"><option value="">—</option>
+        <option value="6">${ja?"6: 正常な瞳孔対光反射・眼球頭反射":"6: Normal PLR and oculocephalic reflexes"}</option>
+        <option value="5">${ja?"5: 対光反射緩慢、眼球頭反射は正常〜低下":"5: Slow PLR, normal to reduced oculocephalic"}</option>
+        <option value="4">${ja?"4: 両側縮瞳（対光反応なし）、眼球頭反射は正常〜低下":"4: Bilateral unresponsive miosis, normal to reduced oculocephalic"}</option>
+        <option value="3">${ja?"3: ピンポイント瞳孔、眼球頭反射低下〜消失":"3: Pinpoint pupils, reduced to absent oculocephalic"}</option>
+        <option value="2">${ja?"2: 片側散瞳（対光反応なし）、眼球頭反射低下〜消失":"2: Unilateral unresponsive mydriasis, reduced to absent oculocephalic"}</option>
+        <option value="1">${ja?"1: 両側散瞳（対光反応なし）、眼球頭反射低下〜消失":"1: Bilateral unresponsive mydriasis, reduced to absent oculocephalic"}</option></select>`)}
+      ${row(ja?"意識レベル":"Consciousness",`<select id="calcMgcsConsciousness"><option value="">—</option>
+        <option value="6">${ja?"6: 時折の覚醒があり、環境に反応する":"6: Occasional periods of alertness, responsive to environment"}</option>
+        <option value="5">${ja?"5: 沈鬱またはせん妄（反応はあるが不適切なことがある）":"5: Depression or delirium, responses may be inappropriate"}</option>
+        <option value="4">${ja?"4: 半昏睡、視覚刺激に反応":"4: Semicomatose, responsive to visual stimuli"}</option>
+        <option value="3">${ja?"3: 半昏睡、聴覚刺激に反応":"3: Semicomatose, responsive to auditory stimuli"}</option>
+        <option value="2">${ja?"2: 半昏睡、反復する侵害刺激にのみ反応":"2: Semicomatose, responsive only to repeated noxious stimuli"}</option>
+        <option value="1">${ja?"1: 昏睡、反復する侵害刺激にも無反応":"1: Comatose, unresponsive to repeated noxious stimuli"}</option></select>`)}
+      <div class="calc-result" id="calcMgcsResult" aria-live="polite"></div>
+      <div class="calc-note">${ja?"⚠ 修正グラスゴー昏睡スケール（犬の頭部外傷で検証 — Platt 2001 JVIM）。血圧・酸素化を安定させてから評価し、経時的な再評価（トレンド）で判断してください。低血圧・低酸素・鎮静薬はスコアを見かけ上悪化させます。スコア単独で予後を断定しないでください。":"⚠ Modified Glasgow Coma Scale (validated in canine head trauma — Platt 2001 JVIM). Score after stabilising blood pressure and oxygenation, and reassess serially — hypotension, hypoxia and sedatives artificially lower the score. Never base prognosis on a single score alone."}</div>
     </div>
     <div class="calc-panel" data-calc-panel="conv" hidden>
       ${row(ja?"項目":"Measurement",`<select id="calcConvKey">${_calcConvDefs().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>`)}
@@ -6681,6 +6720,25 @@ function _calcRecomputeAll(){
         html+=`<br/>SBP ${sbp} mmHg: <strong>${BL[b]}</strong>`;
       }
       irRes.innerHTML=html;
+    }
+  }
+  // MGCS（体重不要）
+  const mgRes=document.getElementById("calcMgcsResult");
+  if(mgRes){
+    const mo=parseInt((document.getElementById("calcMgcsMotor")||{}).value,10);
+    const br=parseInt((document.getElementById("calcMgcsBrainstem")||{}).value,10);
+    const co=parseInt((document.getElementById("calcMgcsConsciousness")||{}).value,10);
+    const total=VD_CALC.mgcsTotal(mo,br,co);
+    if(total===null){mgRes.textContent=ja?"3項目すべてを選択してください":"Select all three categories";}
+    else{
+      const band=VD_CALC.mgcsBand(total);
+      const BL={
+        grave:ja?"3-8: 予後不良域（重篤 — 48時間生存確率が低い。集中治療と経時再評価を）":"3-8: grave (low 48-h survival probability — intensive care and serial reassessment)",
+        guarded:ja?"9-14: 慎重（guarded — 経時的な再評価でトレンドを確認）":"9-14: guarded — reassess serially and follow the trend",
+        good:ja?"15-18: 良好域（good — 継続モニタリング）":"15-18: good — continue monitoring",
+      };
+      const cls=band==="grave"?"lethal":band==="guarded"?"cardiac":"low";
+      mgRes.innerHTML=`MGCS: <strong>${total} / 18</strong><br/><span class="calc-risk calc-risk-${cls}">${BL[band]}</span>`;
     }
   }
   // 単位換算（体重不要）
@@ -7611,6 +7669,118 @@ ${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
 }
 
+/* 飼い主向けホームケア・ポイント（疾患別キュレート、第37弾）。
+   標準的な飼い主教育内容（教科書のクライアント指導レベル）のみ — 投与量・薬品名は
+   一切含めない（回帰テストでガード）。match は括弧除去後の疾患基底名への部分一致
+   （日英どちらか）、sp は動物種ゲート（null=全種）。ref は根拠の短い出典。 */
+const OWNER_HANDOUT_TIPS=[
+ {match:["椎間板ヘルニア","intervertebral disc","ivdd"],sp:["dog"],ref:"ACVIM consensus (Olby 2022)",
+  ja:["安静（ケージレスト）が治療の柱です。獣医師が指示した期間は、ケージやサークル内で厳密に安静を守ってください","抱き上げるときは胸とお尻を両手で支え、体を水平に保ちます","段差・階段・ソファへの飛び乗り降りを避け、滑る床にはマットを敷きます","自力で排尿できているか毎日確認し、できていない場合は当日中にご連絡ください"],
+  en:["Strict cage rest is the core of treatment — keep it for the full period your vet advises","Lift with both hands supporting chest and hindquarters, keeping the spine level","Avoid stairs, sofas and jumping; put mats on slippery floors","Check daily that your dog can urinate on their own — call the clinic the same day if not"]},
+ {match:["膵炎","pancreatitis"],sp:["dog","cat"],ref:"ACVIM consensus (Xenoulis 2015)",
+  ja:["低脂肪食（猫では獣医師指定の食事）を厳守し、人の食べ物や脂っこいおやつは絶対に与えないでください","回復後も食事管理を続けることが再発予防の中心です","嘔吐の再発・食欲廃絶・ぐったりする様子があれば早めに再診してください"],
+  en:["Stick strictly to the prescribed diet; never feed table scraps or fatty treats","Continuing dietary management after recovery is the main way to prevent relapse","Return promptly if vomiting recurs, appetite stops, or your pet becomes lethargic"]},
+ {match:["僧帽弁","mitral valve","拡張型心筋症","dilated cardiomyopathy","肥大型心筋症","hypertrophic cardiomyopathy","うっ血性心不全","congestive heart failure"],sp:null,ref:"ACVIM consensus (Keene 2019)",
+  ja:["眠っているときの呼吸数（1分間の胸の上下）を週に数回数えて記録してください — 30回/分を超える日が続く場合はご連絡ください","激しい運動と暑い時間帯の散歩を避け、塩分の高いおやつは与えないでください","失神・咳の増加・呼吸が苦しそうな様子は早めの再診サインです","お薬は自己判断で中止しないでください（急な中止は危険です）"],
+  en:["Count the sleeping respiratory rate (breaths per minute) a few times a week — call if it stays above 30/min","Avoid strenuous exercise and hot-weather walks; avoid salty treats","Fainting, increased coughing or laboured breathing means an early recheck","Never stop heart medication on your own — abrupt withdrawal is dangerous"]},
+ {match:["アトピー性皮膚炎","atopic dermatitis"],sp:["dog"],ref:"ICADA guidelines (Olivry 2015)",
+  ja:["定期的な薬用シャンプー・保湿は治療の一部です（頻度は獣医師の指示どおり）","散歩後に足先や体を濡れタオルで拭くと花粉などの付着を減らせます","ノミ予防は一年を通して継続してください（ノミアレルギーの合併予防）","悪化する季節や場所をメモしておくと治療計画に役立ちます"],
+  en:["Regular medicated bathing/moisturising is part of therapy — follow your vet's schedule","Wiping paws and coat with a damp towel after walks reduces pollen exposure","Keep year-round flea prevention (prevents flea-allergy flares)","Note which seasons or places trigger flares — it helps treatment planning"]},
+ {match:["外耳炎","otitis externa"],sp:["dog","cat"],ref:"BSAVA Manual of Dermatology",
+  ja:["点耳薬・耳洗浄は途中で良くなったように見えても、指示された期間の最後まで続けてください","頭を振る・耳の臭い・赤みの再発は再診のサインです","水泳やシャンプーの後は耳をよく乾かしてください"],
+  en:["Finish the full course of ear medication even if the ear looks better midway","Head shaking, odour or redness returning means a recheck","Dry the ears well after swimming or bathing"]},
+ {match:["糖尿病","diabetes mellitus"],sp:["dog","cat"],ref:"AAHA Diabetes Guidelines 2018",
+  ja:["食事とインスリン注射は毎日できるだけ同じ時刻に行ってください（獣医師の指示どおり）","低血糖のサイン（ふらつき・虚脱・痙攣・ぼんやりする）が出たら、砂糖水やガムシロップを歯茎に塗り、すぐに受診してください","飲水量と食欲を記録すると治療の調整に非常に役立ちます","食べなかった日のインスリンは自己判断で打たず、クリニックに電話でご相談ください"],
+  en:["Give meals and insulin at the same times each day, as your vet directs","If you see hypoglycaemia signs (wobbliness, collapse, seizures, dullness), rub sugar syrup on the gums and seek care immediately","Recording water intake and appetite helps us adjust treatment","If your pet skips a meal, phone the clinic before giving insulin"]},
+ {match:["てんかん","epilepsy"],sp:["dog","cat"],ref:"IVETF consensus (Berendt 2015)",
+  ja:["発作は可能ならスマートフォンで動画を撮り、日時と長さを記録してください","発作中は口に手を入れず、周囲の家具などから頭を守り、静かに見守ってください","発作が5分以上続く、または短時間に繰り返す場合は救急受診してください","抗てんかん薬の自己中断は絶対にしないでください（重い発作の引き金になります）"],
+  en:["Video seizures if you can, and log date, time and duration","During a seizure keep hands away from the mouth, protect the head from furniture, and stay calm","A seizure lasting over 5 minutes, or clusters, is an emergency","Never stop anti-seizure medication on your own — withdrawal can trigger severe seizures"]},
+ {match:["クッシング","cushing","副腎皮質機能亢進","hyperadrenocorticism"],sp:["dog"],ref:"ACVIM consensus (Behrend 2013)",
+  ja:["多飲多尿は治療開始後も改善までに時間がかかります — 飲水量の記録を続けてください","元気消失・食欲低下・嘔吐が出た場合は薬の効き過ぎの可能性があるため、その日のうちにご連絡ください","定期的なモニタリング検査は安全な治療継続に不可欠です"],
+  en:["Excess drinking/urination improves gradually — keep logging water intake","Lethargy, poor appetite or vomiting can mean the medication is working too strongly — call the same day","Regular monitoring tests are essential for safe long-term treatment"]},
+ {match:["胃拡張捻転","gastric dilatation","gdv"],sp:["dog"],ref:"Ettinger 8th ed",
+  ja:["食事は1日2〜3回に分け、一気食い防止用の食器も有効です","食後1時間ほどは激しい運動を避けてください","お腹の急な膨らみ＋吐きたそうで吐けない様子は分単位の救急です — 夜間でも直ちに受診してください"],
+  en:["Split food into 2-3 meals a day; slow-feeder bowls help","Avoid vigorous exercise for about an hour after meals","Sudden abdominal bloating plus unproductive retching is a minute-level emergency — seek care immediately, even at night"]},
+ {match:["歯周病","periodontal disease"],sp:["dog","cat"],ref:"AAHA Dental Guidelines 2019",
+  ja:["毎日の歯磨きが最も効果的な予防です（動物用歯磨きペーストを使用 — 人用は不可）","デンタルガムやシートは歯磨きの補助であって代わりにはなりません","口臭の悪化・食べにくそうな様子・顔の腫れは再診のサインです"],
+  en:["Daily tooth brushing with pet toothpaste is the most effective prevention (never human toothpaste)","Dental chews are an adjunct, not a substitute for brushing","Worsening breath, difficulty eating or facial swelling means a recheck"]},
+ {match:["変形性関節症","osteoarthritis","股関節形成不全","hip dysplasia"],sp:["dog","cat"],ref:"AAHA Pain Management Guidelines 2022",
+  ja:["体重管理が最も効果の大きい対策です — 理想体重の維持・減量を最優先に","滑る床にマットを敷き、ジャンプや急な方向転換を減らします","散歩は「短く・頻回・一定」が原則で、週末だけの長距離は悪化要因です","寒い時期は症状が強くなりやすいため、寝床を暖かくしてください"],
+  en:["Weight control is the single most effective measure — prioritise reaching and keeping ideal weight","Put mats on slippery floors and reduce jumping and sharp turns","Walks should be short, frequent and consistent — long weekend-only walks make things worse","Signs often worsen in cold weather; keep bedding warm"]},
+ {match:["慢性腎臓病","chronic kidney disease"],sp:["dog","cat"],ref:"IRIS/ISFM guidelines",
+  ja:["新鮮な水をいつでも飲めるよう、家の複数箇所に置いてください","腎臓療法食への切り替えは数週間かけて少しずつ行うと成功しやすいです","食欲と体重を定期的に記録してください（体重減少は重要なサインです）","嘔吐の増加・食欲廃絶・ぐったりは早めの再診サインです"],
+  en:["Keep fresh water available in several places around the home","Transition to the renal diet gradually over weeks — it succeeds more often","Track appetite and body weight regularly (weight loss is an important signal)","More vomiting, appetite loss or lethargy means an early recheck"]},
+ {match:["特発性膀胱炎","idiopathic cystitis","下部尿路疾患","lower urinary tract disease","尿道閉塞","urethral obstruction"],sp:["cat"],ref:"ISFM consensus (2014)",
+  ja:["トイレは「頭数＋1個」を清潔に保ち、静かな場所に分散して置いてください","飲水を増やす工夫（ウェットフード・給水器・器を複数）が再発予防の柱です","環境の変化や同居動物との緊張などストレス要因を減らしてください","雄猫で尿が全く出ない・何度もトイレに行くのに出ない場合は数時間単位の救急です"],
+  en:["Provide one more clean litter box than the number of cats, in quiet locations","Increasing water intake (wet food, fountains, multiple bowls) is the core of prevention","Reduce stressors — household changes, tension with other pets","A male cat producing no urine despite straining is an emergency measured in hours"]},
+ {match:["甲状腺機能亢進症","hyperthyroidism"],sp:["cat"],ref:"AAFP guidelines (Carney 2016)",
+  ja:["お薬は毎日決まった回数を継続し、自己判断で中止しないでください","食欲があっても体重が減り続ける場合はご連絡ください","定期的な血液検査（甲状腺ホルモン・腎機能）が安全な治療に不可欠です"],
+  en:["Give medication consistently every day and never stop it on your own","Call if weight keeps dropping despite a good appetite","Regular blood tests (thyroid and kidney values) are essential for safe treatment"]},
+ {match:["喘息","asthma"],sp:["cat"],ref:"ISFM asthma guidance",
+  ja:["粉の立つ猫砂・タバコの煙・香料スプレー・線香などの空気中の刺激物を減らしてください","口を開けて呼吸する・お腹で息をする様子は救急です","吸入器を使う場合は嫌がらない練習から段階的に慣らします"],
+  en:["Reduce airborne irritants — dusty litter, tobacco smoke, aerosol sprays, incense","Open-mouth breathing or abdominal effort is an emergency","If using an inhaler, introduce it gradually with positive training"]},
+ {match:["肝リピドーシス","hepatic lipidosis"],sp:["cat"],ref:"Ettinger 8th ed",
+  ja:["「食べないこと」自体がこの病気を悪化させます — 24時間以上食べない猫は必ずご連絡ください","強制給餌や食事チューブの管理は獣医師の指示どおりに行ってください","少量ずつでも食べた量を毎日記録してください"],
+  en:["Not eating is itself what drives this disease — always call if your cat hasn't eaten for 24 hours","Follow your vet's instructions exactly for assisted or tube feeding","Record how much is eaten each day, even small amounts"]},
+ {match:["歯肉口内炎","gingivostomatitis"],sp:["cat"],ref:"AAFP/ISFM",
+  ja:["食べにくそうな様子・よだれ・口を触られるのを嫌がる変化を観察してください","柔らかい食事の方が食べやすいことがあります","治療後も定期的な口腔チェックが大切です"],
+  en:["Watch for difficulty eating, drooling, or new resentment of mouth handling","Softened food is often easier to eat","Regular oral rechecks matter even after treatment"]},
+ {match:["消化管うっ滞","gastrointestinal stasis","gi stasis"],sp:["rabbit","chinchilla","guinea_pig","degu"],ref:"Quesenberry & Carpenter 4th ed",
+  ja:["牧草（チモシーなど）中心の食事が最大の予防です — 牧草は常に食べ放題にしてください","糞の数・大きさ・食べる量を毎日観察してください","12時間食べない・糞が出ない場合は救急です — 様子見をしないでください","環境の変化や騒音などのストレスを減らしてください"],
+  en:["A hay-based diet is the strongest prevention — offer unlimited grass hay","Check droppings (number and size) and food intake every day","No eating or no droppings for 12 hours is an emergency — do not wait and see","Reduce stress from environmental changes and noise"]},
+ {match:["不正咬合","malocclusion","歯牙疾患","dental disease"],sp:["rabbit","chinchilla","guinea_pig","degu"],ref:"Quesenberry & Carpenter 4th ed",
+  ja:["常に伸び続ける歯を削るのは牧草を噛むことです — 牧草中心の食事を徹底してください","食べこぼし・よだれ・硬いものを避ける・体重減少は歯のトラブルのサインです","処置後も定期的な歯科チェックが必要です（再発しやすい病気です）"],
+  en:["Chewing hay is what wears the continuously growing teeth — keep the diet hay-based","Dropping food, drooling, avoiding hard items and weight loss are dental warning signs","Regular dental rechecks are needed after treatment — this condition tends to recur"]},
+ {match:["インスリノーマ","insulinoma"],sp:["ferret"],ref:"Quesenberry & Carpenter 4th ed",
+  ja:["低血糖のサイン（後ろ足のふらつき・よだれ・ぼんやり・虚脱）が出たら、蜂蜜やシロップを歯茎に塗って直ちに受診してください","食事は少量頻回にし、長い絶食時間を作らないでください","糖分の高いおやつを日常的に与えるのは逆効果です（緊急時のみ）"],
+  en:["If you see hypoglycaemia signs (hind-leg wobbliness, drooling, staring, collapse), rub honey or syrup on the gums and seek care immediately","Feed small frequent meals and avoid long fasting gaps","Sugary treats are counterproductive day-to-day — reserve them for emergencies"]},
+ {match:["副腎疾患","adrenal disease","副腎腫瘍","adrenal tumor"],sp:["ferret"],ref:"Quesenberry & Carpenter 4th ed",
+  ja:["脱毛の広がりを月1回程度、写真で記録すると治療評価に役立ちます","雌では外陰部の腫れ、雄では排尿しにくい様子に注意してください","雄で尿が出なくなった場合は救急です"],
+  en:["Photograph the hair-loss pattern about monthly — it helps track treatment response","Watch for vulvar swelling in females and straining to urinate in males","A male ferret that cannot urinate is an emergency"]},
+ {match:["卵詰まり","egg binding","卵塞"],sp:["bird","parakeet","parrot"],ref:"Carpenter Formulary 6th ed",
+  ja:["産卵後にうずくまる・力む・膨らんでじっとしている様子は救急です","慢性的な産卵は体力を消耗させます — 日照時間の管理や巣を連想させる物の撤去など、獣医師と発情対策を相談してください","カルシウムを含むバランスの良い食事が予防に重要です"],
+  en:["Hunching, straining or fluffed inactivity around egg laying is an emergency","Chronic egg laying is exhausting — discuss light-cycle management and removing nest triggers with your vet","A calcium-adequate balanced diet is key prevention"]},
+ {match:["肺炎","呼吸器感染","respiratory infection","pneumonia"],sp:["reptile","tortoise","snake","lizard"],ref:"Mader 3rd ed",
+  ja:["適切な温度勾配（その種の至適温度域）と湿度の維持は治療の一部です — 飼育環境の見直しを一緒に行いましょう","口を開けた呼吸・鼻や口の泡は重症のサインです","治療中は保温を優先し、ハンドリングを最小限にしてください"],
+  en:["Correcting the temperature gradient (species-appropriate range) and humidity is part of the treatment itself","Open-mouth breathing or bubbles at the nose/mouth are severe signs","Keep the animal warm and minimise handling during treatment"]},
+ {match:["代謝性骨疾患","metabolic bone disease","栄養性二次性上皮小体","nutritional secondary hyperparathyroidism"],sp:["reptile","tortoise","snake","lizard"],ref:"Mader 3rd ed",
+  ja:["UV-Bライトは点灯していても出力が落ちます — メーカー推奨期間（多くは6〜12ヶ月）で必ず交換してください","バスキングスポットとUV-Bの距離・遮蔽物（ガラス越しは不可）を確認してください","カルシウムやビタミンD3の補給は量を誤ると害になるため、獣医師の指示に従ってください","顎の柔らかさ・震え・食べにくそうな様子は進行のサインです"],
+  en:["UV-B bulbs lose output while still lighting — replace on the maker's schedule (often 6-12 months)","Check basking distance and that UV-B is not filtered through glass","Calcium and vitamin D3 supplements can harm if overdosed — follow your vet's directions","A soft jaw, tremors or difficulty eating are signs of progression"]},
+ {match:["疝痛","colic"],sp:["horse"],ref:"AAEP owner guidance; Reed & Bayly 4th ed",
+  ja:["前掻き・横腹を見る・転がるなどの疝痛サインが出たら、飼料を外して獣医師に連絡してください","指示があるまで鎮痛剤を自己判断で使わないでください（診断の手がかりを隠します）","飼料の急な変更・輸送の後は特に注意して観察してください","新鮮な水と塩へのアクセスを常に確保し、糞の量も日々観察してください"],
+  en:["If you see colic signs (pawing, flank watching, rolling), remove feed and call your veterinarian","Do not give pain medication on your own before advice — it can mask diagnostic clues","Watch closely after feed changes or transport","Ensure constant access to fresh water and salt, and monitor manure output daily"]},
+ {match:["蹄葉炎","laminitis"],sp:["horse"],ref:"Adams & Stashak 7th ed",
+  ja:["春先などの青草（特に短く伸び始めた草）は制限してください — 放牧はグレージングマズルや時間制限も有効です","体重管理と定期的な削蹄・装蹄は再発予防の柱です","蹄の熱感と指動脈の拍動の確認方法を獣医師・装蹄師に教わり、定期的にチェックしてください"],
+  en:["Restrict lush pasture (especially spring regrowth) — grazing muzzles or limited turnout help","Weight control and regular farriery are the pillars of prevention","Learn from your vet or farrier how to check hoof heat and digital pulses, and check regularly"]},
+ {match:["胃潰瘍","gastric ulcer"],sp:["horse"],ref:"ECEIM consensus (Sykes 2015)",
+  ja:["粗飼料（乾草）を少量ずつ長時間食べられるようにし、空腹時間を作らないでください","穀類中心の給餌・長い絶食・輸送や環境変化のストレスが悪化要因です","運動前に少量の乾草を与えると胃酸の跳ね上がりを和らげます"],
+  en:["Provide forage little and often so the stomach is rarely empty","High-grain feeding, long fasts and transport/environment stress make ulcers worse","A small hay feed before exercise buffers acid splash"]},
+ {match:["下垂体中葉機能障害","ppid","クッシング病"],sp:["horse"],ref:"Equine Endocrinology Group 2021",
+  ja:["換毛の遅れ・被毛の変化を季節ごとに写真で記録してください","蹄葉炎の併発が最大のリスクです — 蹄の熱感・跛行に日々注意してください","投薬は長期継続が前提です。定期的なACTH検査（秋は季節変動を考慮）で調整します"],
+  en:["Photograph coat changes each season to track shedding","Laminitis is the biggest associated risk — check daily for hoof heat or lameness","Treatment is long-term; regular ACTH testing (interpreting autumn values seasonally) guides dosing"]},
+ {match:["壊血病","ビタミンc欠乏","scurvy","vitamin c deficiency"],sp:["guinea_pig"],ref:"Quesenberry & Carpenter 4th ed",
+  ja:["モルモットは体内でビタミンCを作れません — 毎日の補給（新鮮な野菜や獣医師推奨のサプリメント）が必須です","ペレット中のビタミンCは古くなると失われます — 開封後は早めに使い切ってください","水に混ぜるタイプは分解が早く飲水量も落ちるため、直接与える方法が確実です"],
+  en:["Guinea pigs cannot make vitamin C — daily supplementation (fresh vegetables or a vet-recommended supplement) is essential","Vitamin C in pellets degrades with age — use bags quickly after opening","Water-added vitamin C degrades fast and can reduce drinking — direct dosing is more reliable"]},
+ {match:["熱中症","heat stroke"],sp:["chinchilla"],ref:"Quesenberry & Carpenter 4th ed",
+  ja:["チンチラは暑さに非常に弱い動物です — 室温はおおむね24°C以下・低湿度を保ってください","耳の充血・ぐったり・呼吸が速い様子は熱中症のサインです。涼しい場所へ移して直ちに受診してください","停電や夏場の外出時の温度対策（保冷材・エアコンタイマー）を準備しておきましょう"],
+  en:["Chinchillas tolerate heat poorly — keep the room roughly below 24°C with low humidity","Flushed ears, lethargy and fast breathing signal heat stroke: move to a cool place and seek care immediately","Plan for power cuts and summer absences (cooling packs, air-conditioner timers)"]},
+ {match:["羽毛損傷行動","毛引き","feather destructive","feather plucking"],sp:["bird","parakeet","parrot"],ref:"Behavior of Exotic Pets (Tynes)",
+  ja:["採餌玩具（フォージング）や新しいおもちゃのローテーションで、日中の「仕事」を増やしてください","規則正しい睡眠（静かな暗所で10〜12時間）が行動の安定に重要です","罰は逆効果です。羽引きを見ても大きく反応しないでください","急に始まった羽引きは体の病気が隠れていることがあり、検査が必要です"],
+  en:["Increase daytime 'work' with foraging toys and rotating enrichment","Consistent sleep (10-12 hours in a quiet, dark place) supports behavioural stability","Punishment backfires — avoid big reactions when you see plucking","Sudden-onset plucking can hide medical disease and needs a work-up"]},
+];
+
+/* 疾患レコード→ホームケア・ポイントの解決（括弧サフィックス除去後の基底名で部分一致、
+   種ゲート付き）。該当なしは null（セクション非表示 — 捏造しない）。 */
+function _ownerTipsFor(d){
+  const base=s=>(s||"").toLowerCase().replace(/（[^）]*）|\([^)]*\)/g,"").trim();
+  const nj=base(d.name_ja),ne=base(d.name);
+  for(const tdef of OWNER_HANDOUT_TIPS){
+    if(tdef.sp&&tdef.sp.indexOf(currentSpecies)<0)continue;
+    if(tdef.match.some(m=>{const ml=m.toLowerCase();return(nj&&nj.indexOf(ml)>=0)||(ne&&ne.indexOf(ml)>=0);}))return tdef;
+  }
+  return null;
+}
+
 /* 飼い主向け説明シート（印刷）— Plumb's/Vetlexicon の owner handout 相当。
    臨床用の薬品名・投与量（treatment_protocol）は意図的に載せない: 一般情報 +
    獣医師が個別指示を手書きするメモ欄という構成にし、飼い主が用量情報を
@@ -7633,6 +7803,9 @@ function printOwnerHandout(nameEn,nameJa){
   const urgent=d.severity==="emergency"||d.severity==="high";
   const now=new Date().toLocaleDateString();
   const sec=(h,b)=>b?`<h3>${h}</h3><p>${escapeHtml(b)}</p>`:"";
+  /* 疾患別ホームケア・ポイント（キュレート済みのみ — 該当なしはセクション非表示） */
+  const tips=_ownerTipsFor(d);
+  const tipsHtml=tips?`<h3>${ja?"ご家庭でのケアのポイント":"Home care points"}</h3><ul class="tips">${(ja?tips.ja:tips.en).map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul><div class="tips-ref">${ja?"参考":"Ref"}: ${escapeHtml(tips.ref)}</div>`:"";
   const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${escapeHtml(title)}</title>
 <style>body{font-family:sans-serif;padding:24px;font-size:13px;color:#333;line-height:1.7;max-width:720px;margin:0 auto}
 h2{text-align:center;margin:0 0 2px}.sub{text-align:center;color:#777;font-size:12px;margin-bottom:14px}
@@ -7643,6 +7816,8 @@ p{margin:4px 0;white-space:pre-wrap}
 .notes-area{border:1px solid #ccc;border-radius:4px;min-height:90px;margin-top:6px}
 .notes-area.small{min-height:60px}
 .urgent{background:#fef2f2;border:1px solid #fecaca;border-radius:4px;padding:8px 10px;margin-top:6px;color:#b91c1c}
+ul.tips{margin:4px 0 2px;padding-left:20px}ul.tips li{margin:3px 0}
+.tips-ref{font-size:10px;color:#999;text-align:right}
 .footer{margin-top:22px;border-top:1px solid #ccc;padding-top:8px;font-size:11px;color:#777}
 @media print{body{padding:8px}}</style></head><body>
 <h2>${escapeHtml(title)}</h2>${sub?`<div class="sub">${escapeHtml(sub)}</div>`:""}
@@ -7655,6 +7830,7 @@ p{margin:4px 0;white-space:pre-wrap}
 ${sec(ja?"この病気について":"About this condition",desc)}
 ${sec(ja?"主な症状":"Common signs",signs)}
 ${sec(ja?"ご家庭での予防・注意":"Prevention & home care",prevention)}
+${tipsHtml}
 ${sec(ja?"経過の見通し":"Outlook",prognosis)}
 <h3>${ja?"治療とお薬について":"Treatment & medication"}</h3>
 <p>${ja?"治療の内容とお薬の使い方は診察時にご説明します。処方されたお薬は自己判断で中止・増減せず、獣医師の指示どおりに与えてください。":"Your veterinarian will explain the treatment plan and how to give any medication. Do not stop or adjust prescribed medication without veterinary guidance."}</p>
