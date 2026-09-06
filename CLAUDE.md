@@ -4753,3 +4753,54 @@ MgSO4×18 + MgO×19 + マグネシウム補充×4 が魚用薬浴エントリ「
 ### 競合比較ロードマップの残り
 - 汎用の検査基準値表: 引き続き意図的に見送り（国際標準スケールはIRIS+MGCSで実装済み）
 - ハンドアウトの対象疾患拡充（現在31エントリ — 利用状況を見て漸進的に追加、獣医レビュー前提）
+
+## 2026-09セッション（第38弾: スマホ主体UXの是正 + 「一般的な疾患が見落とされがち」対策）
+
+### 背景（開発者フィードバック2件）
+1. **「スマホで使われることが多い」** — 直近追加分（計算機・IRIS/MGCS/換算・ハンドアウト）を中心にモバイル監査
+2. **「鑑別診断時に、いきなり重篤な疾患ではなく、一般的な疾患が見落とされがち」** — ランキング数式は
+   40件超のrank回帰テストを持つ調整済みエンジンのため不変とし（緊急疾患の安全ブーストは臨床上意図的）、
+   **可視化の層**で見落としを直接解消する方針
+
+### モバイルUX監査・是正（3系統の実害）
+- **iOSフォーカス時ズーム誤発火**: 既存の16pxブロック（`Prevent iOS auto-zoom`）新設後に追加された
+  入力が漏れていた — `.calc-row input[type=number]`・`.calc-row select`（計算機全10タブ）・
+  `#interactionDrugIds`（相互作用チェッカー）・`#landingChatInput`（ランディングチャット）を追加
+- **タップ目標サイズ**: `@media(max-width:600px)` で 計算機タブ44px・入力/select44px・
+  `.cross-nav-btn`（ハンドアウト/薬品/麻酔/救急リンク）44px・プリフィルボタン36px。
+  計算機の行は狭幅でラベルを上段に積む（`flex-basis:100%`）— MGCSの長文選択肢も収まる
+- **印刷のポップアップブロック時の無反応**: `printOwnerHandout`/`printAnesthesiaChecklist` の
+  `window.open` null時にトースト案内（従来は沈黙）
+
+### 一般的疾患の可視化（4エンジンの prevalence_tier 公開 + UI 2層）
+- **バックエンド**: `prevalence_tier` を結果ペイロードに公開 —
+  汎用チャットマッチャー（disease_matcher）・レガシー犬チャット（diagnostic_chat）・
+  レガシー犬チェッカー（health_checker）・**馬（species_analyzer — エンジン内部でしか使っておらず未公開だった）**
+- **馬チェッカーに2相表示**: `suspected_diseases_by_phase`（phase_1_common/phase_2_rare）を馬にも構築 —
+  汎用種は既に「🎯 最初に検討すべき疾患（よくある疾患）」の2相UIがあったが**馬だけフラットなスコア順**で、
+  稀な疾患が先頭に並んでいた（開発者専門種）。蹄熱+跛行 → Phase 1: 蹄葉炎・蹄膿瘍が先頭に
+- **頻度チップ（`freqChip`）**: チャット候補カード・問診最終結果カードに
+  「高頻度/よくみられる」（緑）「やや稀/稀な疾患」（グレー）を常時表示（tier不明はチップなし）。
+  チェッカーカードは既存の prevalence-badge を維持
+- **一般的鑑別ノート（`commonDxNote`）**: 1位が common/very_common でないとき
+  「💡 一般的な疾患の鑑別も確認: X（2位）・Y（4位）」を結果先頭に表示 —
+  自由チャット・問診最終結果・チェッカーのフラット表示2経路に配線。
+  ランキングは不変（「危険な疾患の提示」と「一般的な疾患の可視化」の両立）
+
+### 実逆転の是正（鳥の重金属・鉤頭虫）
+- スイープで発見: 鳥「下痢+元気がない」で**未tierの重金属変異エントリと鉤頭虫感染が
+  tier付きcommonを押しのけ上位独占** → bird: Zinc Poisoning/Heavy Metal Poisoning – Mixed/
+  Zinc Toxicosis – Acute/(Hardware Disease)=common（Ritchie & Harrison: Zn/Pbは伴侶鳥で最多クラスの中毒）、
+  **Acanthocephalan Infection=rare**（主に野鳥・水禽の寄生虫）。parakeet/parrot の Heavy Metal 変異も common に整列
+- 修正後: 重金属commonsが上位、鉤頭虫は最下位。犬猫ウサギ等のスイープは健全（commonsが1位）を確認
+
+### 回帰テスト（tests/test_common_disease_visibility.py 新規、12件）
+- tier公開4エンジン（rabbit GI stasis=very_common・馬2相+蹄膿瘍/蹄葉炎・猫URI）
+- 鳥逆転の再発防止（top3=common系・鉤頭虫=rare・重金属=common）
+- freqChip/commonDxNote の定義と配線（チャット2レンダラー+フラット2経路）、CSS
+- iOSズームブロックの新規セレクタ4種・44pxタップ目標・印刷トースト×2
+
+### テスト・CI
+- 新規12件 + チャット/チェッカー/有病率 534件 + 馬/app.js参照群 233件 合格、ruff clean
+- ServiceWorker: `CACHE_NAME` v147 → **v148**
+- データ変更は prevalence_data のみ（配信DB・検索インデックスは不変 — tierは実行時参照）

@@ -701,6 +701,9 @@ def _match_species_symptoms_to_diseases(
                 "name_ja": disease.get("name_ja", ""),
                 "name_en": disease.get("name", ""),
                 "severity": urgency,
+                # 有病率ティアをUIに公開（「一般的な疾患が見落とされがち」対策 —
+                # 結果カードの頻度チップと一般的鑑別コールアウトが参照する）
+                "prevalence_tier": prevalence_tier or "",
                 "similarity_score": round(composite, 3),
                 "_rank_score": raw_composite,
                 "confidence_percent": confidence,

@@ -840,6 +840,15 @@ SPECIES_PREVALENCE = {
         "Feather Cyst": "common",
         "Zinc Toxicosis": "common",
         "Lead Poisoning": "common",
+        # 重金属中毒の変異エントリ（未tierだと「下痢+元気なし」の汎用主訴で
+        # tier付きcommonの上に浮上していた — Ritchie & Harrison: Zn/Pbは
+        # 伴侶鳥で最多クラスの中毒）
+        "Zinc Poisoning": "common",
+        "Heavy Metal Poisoning – Mixed (Lead and Zinc)": "common",
+        "Zinc Toxicosis – Acute": "common",
+        "Zinc Toxicosis (Hardware Disease)": "common",
+        # 鉤頭虫は主に野鳥・水禽の寄生虫で伴侶鳥では稀（Ritchie & Harrison）
+        "Acanthocephalan Infection (Thorny-Headed Worms)": "rare",
         "Arteriosclerosis": "common",
         "Ovarian Tumor": "uncommon",
         "Renal Tumor": "uncommon",
@@ -1595,6 +1604,8 @@ SPECIES_PREVALENCE = {
         "Night Fright Injury": "common",
         "Lead Poisoning": "common",
         "Zinc Toxicosis": "common",
+        "Heavy Metal Poisoning (Lead/Zinc)": "common",
+        "Zinc Toxicosis (Advanced)": "common",
         "Lipomas": "common",
         "French Moult": "common",
         "Sour Crop": "common",
@@ -1642,6 +1653,8 @@ SPECIES_PREVALENCE = {
         "Crop Stasis": "common",
         "Crop Impaction": "common",
         "Lead Poisoning": "common",
+        "Heavy Metal Poisoning (Lead/Zinc)": "common",
+        "Heavy Metal Poisoning": "common",
         "Zinc Toxicosis": "common",
         "Gout (Visceral/Articular)": "common",
         "Obesity": "common",

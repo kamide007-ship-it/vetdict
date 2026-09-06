@@ -4774,6 +4774,7 @@ def _analyze_symptoms(breed_id, symptom_ids, age_years=None, onset=None):
                 "description_ja": disease.get("description_ja", ""),
                 "description_en": disease.get("description_en", ""),
                 "severity": disease["severity"],
+                "prevalence_tier": prevalence_tier,
                 "confidence_percent": confidence,
                 "composite_score": round(composite_score, 4),
                 "breed_risk_multiplier": breed_multiplier,
