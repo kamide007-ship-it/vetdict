@@ -1275,6 +1275,7 @@ def match_symptoms_to_diseases(
                 "name_ja": disease["name_ja"],
                 "name_en": disease["name_en"],
                 "severity": disease["severity"],
+                "prevalence_tier": disease.get("prevalence_tier", ""),
                 "similarity_score": round(composite, 3),
                 "confidence_percent": confidence,
                 "matched_symptoms": sorted(matched),

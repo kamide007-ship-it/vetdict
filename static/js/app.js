@@ -3319,9 +3319,9 @@ function renderResults(data){
     html+=`</div>`;
   }
 
-  // Fallback: render all diseases if no phase info
+  // Fallback: render all diseases if no phase info（フラット表示時は一般的鑑別ノートを先頭に）
   if(phase1.length===0&&phase2.length===0){
-    html+=`<div class="dx-group">${renderDxCards(diseases,data,DX_CAP_FLAT)}</div>`;
+    html+=`<div class="dx-group">${commonDxNote(diseases,DX_CAP_FLAT)}${renderDxCards(diseases,data,DX_CAP_FLAT)}</div>`;
   }
   html+=`</div>`;
 
@@ -3394,7 +3394,7 @@ function renderResults(data){
         groupHtml+=`</div>`;
       }
       if(phase1.length===0&&phase2.length===0){
-        groupHtml+=`<div class="dx-group">${renderDxCards(diseases,data,DX_CAP_FLAT)}</div>`;
+        groupHtml+=`<div class="dx-group">${commonDxNote(diseases,DX_CAP_FLAT)}${renderDxCards(diseases,data,DX_CAP_FLAT)}</div>`;
       }
       cardsArea.innerHTML=groupHtml;
       return;
@@ -4569,6 +4569,39 @@ function _revealFilteredList(listId){
    it is a clean, high-precision signal (verified: pyothorax, saddle thrombus,
    blocked cat, DKA…), so a clinician scanning the list spots true emergencies at
    a glance without the badge becoming noise. */
+/* 頻度チップ（開発者フィードバック「一般的な疾患が見落とされがち」対策）。
+   common/very_common は緑、uncommon/rare はグレー。ティア不明はチップなし（ノイズ回避）。 */
+function freqChip(tier){
+  const ja=currentLang==="ja";
+  if(tier==="very_common")return`<span class="freq-chip freq-common">${ja?"高頻度":"Very common"}</span>`;
+  if(tier==="common")return`<span class="freq-chip freq-common">${ja?"よくみられる":"Common"}</span>`;
+  if(tier==="uncommon")return`<span class="freq-chip freq-rare">${ja?"やや稀":"Uncommon"}</span>`;
+  if(tier==="rare")return`<span class="freq-chip freq-rare">${ja?"稀な疾患":"Rare"}</span>`;
+  return"";
+}
+
+/* 一般的鑑別ノート: 1位が common/very_common でないとき、リスト内の一般的な疾患を
+   順位付きで明示して見落としを防ぐ。ランキング自体は変えない — 緊急疾患を上位に
+   出す安全ブーストは臨床上意図的なため、「危険な疾患の提示」と「一般的な疾患の
+   可視化」を両立させる。 */
+function commonDxNote(list,limit){
+  if(!list||!list.length)return"";
+  const tier=x=>(x&&x.prevalence_tier)||"";
+  const isCommon=t=>t==="very_common"||t==="common";
+  if(isCommon(tier(list[0])))return"";
+  const ja=currentLang==="ja";
+  const names=[];
+  for(let i=1;i<Math.min(list.length,limit||5);i++){
+    if(isCommon(tier(list[i]))){
+      const n=ja?(list[i].name_ja||list[i].name_en||list[i].name||""):(list[i].name_en||list[i].name||list[i].name_ja||"");
+      if(n)names.push(escapeHtml(n)+(ja?`（${i+1}位）`:` (#${i+1})`));
+    }
+    if(names.length>=3)break;
+  }
+  if(!names.length)return"";
+  return`<div class="common-dx-note" role="note">\u{1F4A1} ${ja?"一般的な疾患の鑑別も確認":"Also consider these common differentials"}: ${names.join(ja?"・":", ")}</div>`;
+}
+
 function severityBadge(sev){
   if((sev||"").toLowerCase()!=="emergency")return "";
   return `<span class="d-urgency-badge badge-emergency" title="${currentLang==="ja"?"緊急疾患":"Emergency"}">🚨 ${currentLang==="ja"?"緊急":"Emergency"}</span>`;
@@ -5363,6 +5396,8 @@ function renderChatResult(container,data){
   if(candidates.length>0){
     const listDiv=document.createElement("div");
     listDiv.className="chat-disease-list";
+    // 1位が一般的な疾患でない場合、リスト内の一般的な疾患を先頭で明示（見落とし防止）
+    listDiv.insertAdjacentHTML("afterbegin",commonDxNote(candidates.slice(0,5),5));
     candidates.slice(0,5).forEach((c,i)=>{
       const card=document.createElement("div");
       card.className="chat-disease-card";
@@ -5375,6 +5410,7 @@ function renderChatResult(container,data){
           <span class="chat-disease-rank">${i+1}</span>
           <span class="chat-disease-name">${escapeHtml(currentLang==="ja"?(c.name_ja||c.name_en||c.disease_id):(c.name_en||c.name_ja||c.disease_id))}</span>
           <span class="chat-disease-name-en">${escapeHtml(currentLang==="ja"?(c.name_en||""):(c.name_ja||""))}</span>
+          ${freqChip(c.prevalence_tier)}
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
@@ -6013,6 +6049,7 @@ function guidedRenderFinalResults(data){
   if(diseases.length>0){
     let html=`<div class="guided-final-label">${t("guidedFinalTitle")}</div>`;
     html+='<div class="chat-disease-list">';
+    html+=commonDxNote(diseases.slice(0,5),5);
     diseases.slice(0,5).forEach((d,i)=>{
       const pct=d.match_percent||0;
       const sevClass=pct>=70?"sev-high":pct>=45?"sev-med":"sev-low";
@@ -6028,6 +6065,7 @@ function guidedRenderFinalResults(data){
           <span class="chat-disease-rank">${i+1}</span>
           <span class="chat-disease-name">${name}</span>
           <span class="chat-disease-name-en">${nameSecondary}</span>
+          ${freqChip(d.prevalence_tier)}
           <span class="chat-disease-pct ${sevClass}">${pct}%</span>
         </div>
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
@@ -7667,6 +7705,7 @@ ${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
 </body></html>`;
   const win=window.open("","_blank");
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
+  else{showToast(currentLang==="ja"?"ポップアップがブロックされました。ブラウザ設定でこのサイトのポップアップを許可してください":"Pop-up blocked — allow pop-ups for this site to print",true);}
 }
 
 /* 飼い主向けホームケア・ポイント（疾患別キュレート、第37弾）。
@@ -7843,6 +7882,7 @@ ${urgent?`<div class="urgent">${ja?"⚠ この病気は緊急性の高い状態�
 </body></html>`;
   const win=window.open("","_blank");
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
+  else{showToast(currentLang==="ja"?"ポップアップがブロックされました。ブラウザ設定でこのサイトのポップアップを許可してください":"Pop-up blocked — allow pop-ups for this site to print",true);}
   trackEvent("owner_handout_print",{disease:d.name||nameJa||""});
 }
 

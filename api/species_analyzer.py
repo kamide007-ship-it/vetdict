@@ -179,6 +179,7 @@ def analyze_horse(
     Returns:
         dict: 鑑別診断結果を共通形式に整形した辞書
     """
+    from api.species.equine_diseases import _equine_prevalence_tier as _equine_prevalence_tier_public
     from api.species.equine_diseases import generate_differential_diagnosis
 
     checked = set(symptoms)
@@ -294,6 +295,9 @@ def analyze_horse(
                 "name": name,
                 "name_ja": dis.name_ja or "",
                 "match_count": item.match_count,
+                # 有病率ティア（頻度チップ/一般的鑑別コールアウト用 — 馬経路は
+                # エンジン内部でしか参照しておらず結果に未公開だった）
+                "prevalence_tier": _equine_prevalence_tier_public(dis.name_en or ""),
                 "confidence": round(item.confidence_pct, 2),
                 "match_percent": match_pct,
                 "likelihood": likelihood,
@@ -410,9 +414,18 @@ def analyze_horse(
         sid: id_to_name[sid] for sid in used_symptoms if sid in id_to_name
     }
 
+    # 段階的鑑別（Phase 1=よくある疾患を先に提示）— 汎用種エンジンと同じ2相分割。
+    # 馬経路はフラットなスコア順のみで、稀な疾患が先頭に並び「一般的な疾患が
+    # 見落とされがち」だった（開発者・馬獣医師のフィードバック）
+    _ph1 = [c for c in possible_conditions if c.get("prevalence_tier") in ("very_common", "common")]
+    _ph2 = [c for c in possible_conditions if c.get("prevalence_tier") not in ("very_common", "common")]
     return {
         "possible_conditions": possible_conditions,
         "suspected_diseases": possible_conditions,
+        "suspected_diseases_by_phase": {
+            "phase_1_common": _ph1,
+            "phase_2_rare": _ph2,
+        },
         "recommended_tests": dedup_tests,
         "severity": severity,
         "breed_risk_applied": False,
