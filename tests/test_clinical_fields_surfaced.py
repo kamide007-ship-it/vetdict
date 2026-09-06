@@ -589,3 +589,60 @@ def test_emergency_to_disease_map_names_exist_in_served_db():
             assert row, f"EMERGENCY_TO_DISEASE_MAP names a missing disease: {sp}/{name}"
     finally:
         conn.close()
+
+
+def test_app_js_drug_to_emergency_reverse_link():
+    """Drug detail → emergency protocols (2026-09 round 23): the emergency→drug
+    linkifier (round 13/26) had no reverse — a clinician reading atropine had
+    no path to the protocols that dose it. The drug detail now carries a
+    .drug-emergency-slot hydrated on expansion (ensureEmergencyData, memoized)
+    that renders a pivot button ONLY when >=1 protocol's key_drugs link back
+    (link_name is the formulary's canonical English name — never the id), and
+    the emergency list honors an exact link_name drugFilter that user typing
+    clears. The emergency search haystack must also cover key-drug rows so
+    manual drug-name searches on the highest-stakes tab stop returning zero."""
+    # slot + hydrator + memoized data fetch
+    assert "drug-emergency-slot" in APP_JS
+    assert "function hydrateEmergencyFromDrug(" in APP_JS
+    assert "function ensureEmergencyData(" in APP_JS
+    idx = APP_JS.index("function hydrateEmergencyFromDrug(")
+    block = APP_JS[idx : idx + 1600]
+    # matches on the canonical English name (link_name semantics), not the id
+    assert "drugNameEn" in block and "kd.link_name===nameEn" in block
+    # delegated handler routes the pivot and sets the exact filter
+    assert ".drug-emergency-protocols-link" in APP_JS
+    hblock = APP_JS[APP_JS.index("const emProto=e.target.closest") :][:1600]
+    assert "dataset.drugFilter=emProto.dataset.drugNameEn" in hblock
+    assert 'trackEvent("emergency_from_drug"' in hblock
+    # expansion hook hydrates the slot
+    assert "hydrateEmergencyFromDrug(detail)" in APP_JS
+    # list filter: exact link_name match wins; typing clears the pivot filter
+    ridx = APP_JS.index("function renderEmergencyList(")
+    rblock = APP_JS[ridx : ridx + 2400]
+    assert "kd.link_name===drugFilter" in rblock
+    assert "delete list.dataset.drugFilter" in APP_JS
+    # search haystack now includes key-drug names
+    assert "kd.name_ja" in rblock and "kd.link_name" in rblock
+    with open("static/css/main.css", encoding="utf-8") as f:
+        css = f.read()
+    assert ".drug-emergency-protocols-link" in css
+
+
+def test_emergency_api_link_name_is_canonical_english_name():
+    """The drug→emergency pivot filters on key_drugs link_name === formulary
+    English name. Guard the contract: every resolved link_name must be the
+    exact `name` of a formulary entry (so the client-side exact match can
+    never silently miss)."""
+    from api.drug_dictionary import DRUGS
+    from api.emergency_api import EMERGENCY_PROTOCOLS, _resolve_key_drug_links
+
+    _resolve_key_drug_links()
+    names = {d.get("name", "") for d in DRUGS}
+    linked = 0
+    for p in EMERGENCY_PROTOCOLS:
+        for kd in p.get("key_drugs", []):
+            ln = kd.get("link_name")
+            if ln:
+                linked += 1
+                assert ln in names, (p.get("id"), kd.get("name"), ln)
+    assert linked >= 100  # 113 rows resolved as of round 26

@@ -1546,17 +1546,17 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:563,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:542,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:564,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:543,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:359,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:259,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:70,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:131,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:260,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:71,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:225,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
     {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:198,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:223,drugs:63,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:74,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:152,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:75,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:153,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
     {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:483,drugs:237,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
     {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:410,drugs:237,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
     {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:257,drugs:237,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
@@ -1566,12 +1566,12 @@ function setDefaultStats(){
     {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:213,drugs:104,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:251,drugs:18,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:28,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
-    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:1,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
+    {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:2,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
     diseases:6450,
     species:21,
-    drugs:621,
+    drugs:622,
     symptoms:79,
     protocols:188
   };
@@ -1951,7 +1951,7 @@ function resetSpeciesChat(species){
     cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる"],
     rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている"],
-    chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い"],
+    chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている"],
     hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない"],
     guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ","関節が腫れる"],
     ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない","陰部が腫れている","足を伸ばして硬直する","口を前足で掻いてよだれ","便に血が混じる","お腹を触るとしこりがある"],
@@ -6376,6 +6376,7 @@ function renderDrugList(){
         </div>
         ${buildDrugDiseasesPlaceholder(d.id||"")}
         ${(()=>{const q=_anesQueryForDrug(d.name||"",d.name_ja||"");return q?`<button type="button" class="drug-anes-protocols-link" data-anes-query="${escapeHtml(q)}">\u{1F489} ${currentLang==="ja"?"この薬品を使う麻酔プロトコルを見る":"View anesthesia protocols using this drug"}</button>`:"";})()}
+        <span class="drug-emergency-slot" data-drug-id="${escapeHtml(d.id||"")}" data-drug-name-en="${escapeHtml(d.name||"")}" data-drug-label="${escapeHtml(currentLang==="ja"?(d.name_ja||d.name||d.id):(d.name||d.id))}"></span>
         <button type="button" class="drug-interaction-add" data-drug-name="${escapeHtml(currentLang==="ja"?(d.name_ja||d.name||d.id):(d.name||d.id))}">⚠️ ${currentLang==="ja"?"相互作用チェックに追加":"Add to interaction checker"}</button>
       </div>
     </div>`;
@@ -6399,7 +6400,22 @@ function _anesQueryForDrug(name,nameJa){
 }
 
 /* ===== Emergency Protocols (Vetlexicon-style quick reference) ===== */
-let emergencyLoaded=false,emergencyData=null,emergencyCategories={};
+let emergencyLoaded=false,emergencyData=null,emergencyCategories={},_emergencyDataPromise=null;
+
+/* Memoized data-only fetch (mirrors ensureAnesthesiaContraRules). Used by the
+   drug-detail → emergency reverse link so the "protocols using this drug"
+   button only ever renders when at least one protocol actually links back
+   (key_drugs[].link_name === drug id) — no dead ends. loadEmergencyProtocols
+   still owns the tab UI and reuses whatever this cached. */
+function ensureEmergencyData(){
+  if(emergencyData&&emergencyData.length)return Promise.resolve(emergencyData);
+  if(_emergencyDataPromise)return _emergencyDataPromise;
+  _emergencyDataPromise=fetchWithTimeout("/api/emergency/protocols",{},30000).then(r=>r.json()).then(d=>{
+    if(!emergencyData){emergencyData=d.protocols||[];emergencyCategories=d.categories||{};}
+    return emergencyData;
+  }).catch(err=>{_emergencyDataPromise=null;debugWarn("emergency prefetch failed:",err);return[];});
+  return _emergencyDataPromise;
+}
 
 function loadEmergencyProtocols(){
   const list=document.getElementById("emergencyList");
@@ -6443,7 +6459,9 @@ function setupEmergencyListeners(){
     const el=document.getElementById(id);
     if(!el)return;
     if(el.tagName==="INPUT"){
-      /* 検索入力: 位置は動かさない（キーボード表示中のページ移動を避ける） */
+      /* 検索入力: 位置は動かさない（キーボード表示中のページ移動を避ける）。
+         手入力が始まったら薬品ピボットのidフィルタは解除（テキスト検索に戻す） */
+      el.addEventListener("input",()=>{delete list.dataset.drugFilter;});
       el.addEventListener("input",debounce(renderEmergencyList,200));
     }else{
       /* フィルタ選択: 他タブ（薬品/麻酔/疾患DB）と同様、絞り込み結果の先頭へ再アンカー */
@@ -6461,9 +6479,19 @@ function renderEmergencyList(){
   let filtered=emergencyData;
   if(cat)filtered=filtered.filter(p=>p.category===cat);
   if(species)filtered=filtered.filter(p=>(p.species||[]).includes(species));
-  if(search){
+  /* Drug pivot filter (drug detail → "emergency protocols using this drug"):
+     exact key_drugs link_name match — precise, id-based, no text ambiguity.
+     Cleared the moment the user types in the search box (see listener). */
+  const drugFilter=list.dataset.drugFilter||"";
+  if(drugFilter){
+    filtered=filtered.filter(p=>(p.key_drugs||[]).some(kd=>kd.link_name===drugFilter));
+  }else if(search){
     filtered=filtered.filter(p=>{
-      const hay=[p.title_ja,p.title_en,...(p.trigger_signs_ja||[]),...(p.trigger_signs_en||[])].join(" ").toLowerCase();
+      /* Haystack includes key-drug rows so "アトロピン" / "epinephrine" find
+         the protocols that dose them — previously drug-name searches on the
+         highest-stakes tab returned zero. */
+      const hay=[p.title_ja,p.title_en,...(p.trigger_signs_ja||[]),...(p.trigger_signs_en||[]),
+        ...(p.key_drugs||[]).flatMap(kd=>[kd.name||"",kd.name_ja||"",kd.link_name||""])].join(" ").toLowerCase();
       return hay.includes(search);
     });
   }
@@ -7208,6 +7236,32 @@ function _attachDbItemHandlers(container){
       if(p)scrollToAnchor(p);
       return;
     }
+    /* Drug detail → emergency protocols using this drug: land on the
+       emergency tab filtered to the protocols whose key_drugs link back to
+       this formulary entry (exact link_name filter — the search box shows the
+       drug's display name and typing in it reverts to normal text search). */
+    const emProto=e.target.closest(".drug-emergency-protocols-link");
+    if(emProto){
+      e.preventDefault();
+      _pushNavHistory(currentView,"emergency","");
+      switchView("emergency");
+      _showBackNav("emergencyBackNav","emergencySearch");
+      const list=document.getElementById("emergencyList");
+      if(list)list.dataset.drugFilter=emProto.dataset.drugNameEn||"";
+      const inp=document.getElementById("emergencySearch");
+      if(inp)inp.value=emProto.dataset.drugLabel||"";
+      const revealWhenReady=attempt=>{
+        if(!emergencyData||!emergencyData.length){
+          if(attempt<24)setTimeout(()=>revealWhenReady(attempt+1),250);
+          return;
+        }
+        renderEmergencyList();
+        _revealFilteredList("emergencyList");
+      };
+      revealWhenReady(0);
+      trackEvent("emergency_from_drug",{drug:emProto.dataset.drugId||""});
+      return;
+    }
     const diffBtn=e.target.closest(".differential-check-btn");
     if(diffBtn){e.preventDefault();runDifferentialFromDisease(diffBtn.dataset.ids);return;}
     /* Drug detail → interaction checker: one-tap add so combinations are
@@ -7298,8 +7352,40 @@ function toggleDbItem(el){
          the checker results show — contraindicated agents with one-tap drug
          links). Lazily fetched: the rules JSON loads once on first expansion. */
       if(typeof hydrateAnesthesiaConsiderations==="function")hydrateAnesthesiaConsiderations(detail);
+      /* Hydrate the drug → emergency-protocols reverse link (only when at
+         least one protocol's key_drugs resolve back to this formulary id). */
+      if(typeof hydrateEmergencyFromDrug==="function")hydrateEmergencyFromDrug(detail);
     }
   }
+}
+
+/* Fill .drug-emergency-slot placeholders inside an expanded drug detail with
+   a one-tap "emergency protocols using this drug" button. The emergency data
+   is fetched once (ensureEmergencyData); the button renders ONLY when at
+   least one protocol's key_drugs link back to this formulary id, so it can
+   never dead-end. Closes the loop opened by the emergency→drug linkifier
+   (第26弾) the same way the drug→anesthesia link (第13弾) closed that one. */
+function hydrateEmergencyFromDrug(root){
+  const slots=(root||document).querySelectorAll(".drug-emergency-slot[data-drug-id]");
+  if(!slots.length)return;
+  if(typeof ensureEmergencyData!=="function")return;
+  ensureEmergencyData().then(protos=>{
+    if(!protos||!protos.length)return;
+    slots.forEach(slot=>{
+      if(slot.dataset.hydrated)return;
+      slot.dataset.hydrated="1";
+      /* link_name is the formulary's canonical ENGLISH name (see
+         emergency_api._resolve_key_drug_links) — match on that, not the id. */
+      const nameEn=slot.dataset.drugNameEn||"";
+      if(!nameEn)return;
+      const n=protos.filter(p=>(p.key_drugs||[]).some(kd=>kd.link_name===nameEn)).length;
+      if(!n)return;
+      const label=currentLang==="ja"
+        ?`\u{1F6A8} この薬品を使う緊急対応プロトコルを見る（${n}件）`
+        :`\u{1F6A8} View emergency protocols using this drug (${n})`;
+      slot.innerHTML=`<button type="button" class="drug-emergency-protocols-link" data-drug-id="${escapeHtml(slot.dataset.drugId||"")}" data-drug-name-en="${escapeHtml(nameEn)}" data-drug-label="${escapeHtml(slot.dataset.drugLabel||"")}">${label}</button>`;
+    });
+  });
 }
 
 /* Fill .anes-considerations-slot placeholders inside an expanded disease-DB

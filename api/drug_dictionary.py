@@ -79,6 +79,7 @@ from api.drug_batch_52 import DRUGS_BATCH_52
 from api.drug_batch_53 import DRUGS_BATCH_53
 from api.drug_batch_54 import DRUGS_BATCH_54
 from api.drug_batch_55 import DRUGS_BATCH_55
+from api.drug_batch_56 import DRUGS_BATCH_56
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10810,6 +10811,18 @@ for _drug55 in DRUGS_BATCH_55:
         DRUGS.append(_drug55)
         _drug_index[_drug55["id"]] = _drug55
 
+# Batch 56: 2026-09監査（第22回スイープ）
+# （プロピレングリコール — 妊娠中毒症/ケトーシスの経口糖新生剤としてウサギ・
+#  ハムスター・モルモット・デグー・ヤギの14エントリが用量付き参照、犬の外用
+#  角質溶解（脂腺炎50-75%）も参照。猫はハインツ小体性溶血のため safe:False
+#  （Christopher JAVMA 1989、FDAがキャットフード使用を禁止）。
+#  同スイープでマヌカハニー（既収載 silver_honey）の裸表記70+参照が不達と
+#  判明 → search alias 側で是正）
+for _drug56 in DRUGS_BATCH_56:
+    if _drug56["id"] not in _drug_index:
+        DRUGS.append(_drug56)
+        _drug_index[_drug56["id"]] = _drug56
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11562,6 +11575,20 @@ _KATAKANA_VARIANT_ALIASES["calcium_edta"] = _KATAKANA_VARIANT_ALIASES["calcium_e
 # contexts to calcium gluconate.
 _KATAKANA_VARIANT_ALIASES["calcium_gluconate"] = _KATAKANA_VARIANT_ALIASES["calcium_gluconate"] + (
     "カルシウム グルコネート",
+)
+# 2026-09 sweep #22: the medical-honey monograph exists (id=silver_honey,
+# canonical name 医療用マヌカハニー / Medical Grade Manuka Honey) but 70+ wound-care
+# entries across 15 species cite it as bare マヌカハニー / "Manuka honey" /
+# "medical grade honey", none of which reached the keyword index ("医療用" prefix
+# never appears in treatment texts and the English first word "medical" is a
+# stoplisted generic). Register the bare forms; "manuka" is a 6-char precise
+# token that only ever denotes the honey.
+_KATAKANA_VARIANT_ALIASES["silver_honey"] = (
+    "マヌカハニー",
+    "マヌカ蜂蜜",
+    "manuka honey",
+    "manuka",
+    "medical grade honey",
 )
 
 

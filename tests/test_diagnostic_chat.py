@@ -1660,6 +1660,7 @@ class TestQuickTapPhraseExtraction:
             "歯が伸びている",
             "砂浴びしない",
             "耳が赤くて呼吸が速い",
+            "毛をかじって短くなっている",
         ],
         "hamster": [
             "下痢",
@@ -4355,3 +4356,96 @@ class TestChatClinicalAccuracyAuditRound22:
         res = analyze_symptoms(["cyanosis", "difficulty_breathing", "coughing"])
         names = [d["name"] for d in res["suspected_diseases"][:4]]
         assert any("Cardiomyopathy" in n or "Tracheal" in n or "Heart" in n for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound23:
+    """2026-09 audit round 23: fresh 24-case chief-complaint sweep (6 misses +
+    1 extract-zero). Root causes were conjugation/word-order gaps on existing
+    IDs (お腹が痛そう, すぐ疲れて, 呼吸のたびに口を開ける), a missing owner
+    vocabulary for the classic chinchilla fur-chewing complaint, missing
+    ID-synonym chains for egg_binding/fur_chewing outside their native
+    species, 口から泡 mis-mapped to vomiting (foam at the mouth is
+    hypersalivation — now aligned with the existing 泡を吹く→drooling), and
+    untiered avian amyloidosis subtypes outranking plain renal failure on the
+    PU/PD complaint."""
+
+    def test_dog_prayer_posture_vomiting_ranks_pancreatitis_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("急にお腹が痛そうにして背中を丸めている 何度も吐く")
+        assert "abdominal_pain" in ex and "vomiting" in ex, ex
+        top = match_symptoms_to_diseases(ex)[0]
+        assert top["disease_id"] == "pancreatitis", top.get("name_ja")
+
+    def test_dog_exertional_cough_ranks_cardiac(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("散歩ですぐ疲れて咳が出る 夜に咳がひどい")
+        assert "exercise_intolerance" in ex, ex
+        ids = [m["disease_id"] for m in match_symptoms_to_diseases(ex)[:4]]
+        assert "mitral_valve_disease" in ids, ids
+
+    def test_dog_foot_chewing_extracts_pruritus(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("足先を噛んでいる 指の間が赤い")
+        assert "itching" in ex, ex
+        names = [m.get("name_ja") or "" for m in match_symptoms_to_diseases(ex)[:5]]
+        assert any("アトピー" in n or "膿皮症" in n or "毛包虫" in n for n in names), names
+
+    def test_chinchilla_fur_chewing_complaint_ranks_barbering(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("毛をかじって短くなっている", "chinchilla")
+        assert "fur_chewing" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "chinchilla")[0]
+        assert "毛噛み" in (top.get("name_ja") or ""), top
+
+    def test_lizard_egg_binding_phrase_resolves_via_cloacal_chain(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("お腹に卵が詰まっている感じで力んでいる 食べない", "lizard")
+        assert "cloacal_swelling" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "lizard")[:3]]
+        assert any("卵" in n for n in names), names
+
+    def test_snake_open_mouth_breathing_kanji_form_ranks_respiratory(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("呼吸のたびに口を開ける 口から泡", "snake")
+        assert "open_mouth_breathing" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "snake")[:4]]
+        assert any("呼吸器" in n or "肺炎" in n for n in names), names
+
+    def test_bird_pu_pd_amyloid_subtype_no_longer_hijacks(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("水をたくさん飲んで水っぽい便をする", "bird")
+        assert "polydipsia" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "bird")[:5]]
+        assert not any("アミロイド" in n for n in names), names
+
+    def test_dog_seizure_foam_guard_unchanged(self):
+        # 口から泡 now maps to drooling (not vomiting) — the seizure complaint
+        # must keep ranking epilepsy first.
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("痙攣して口から泡を吹いている")
+        top = match_symptoms_to_diseases(ex)[0]
+        assert top["disease_id"] == "epilepsy", top.get("name_ja")
+
+    def test_fur_chewing_chain_falls_back_safely_elsewhere(self):
+        # rabbit has no fur_chewing ID — the chain must resolve to a plausible
+        # coat ID (or drop) without crashing, and GI stasis complaints stay put.
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("毛をかじって短くなっている", "rabbit")
+        _match_species_symptoms_to_diseases(ex, "rabbit")  # no crash
+        ex2 = _extract_species_symptoms("食べない お腹が張っている", "rabbit")
+        top = _match_species_symptoms_to_diseases(ex2, "rabbit")[0]
+        assert "うっ滞" in (top.get("name_ja") or ""), top

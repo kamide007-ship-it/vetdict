@@ -113,7 +113,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "emaciation": ["weight_loss", "wasting", "cachexia"],
     # Skin / coat
     "excessive_drooling": ["drooling", "hypersalivation", "ptyalism"],
-    "drooling": ["excessive_drooling", "hypersalivation"],
+    # 末尾の mucus_in_mouth は爬虫類フォールバック（口の泡沫=呼吸器/口腔徴候）
+    "drooling": ["excessive_drooling", "hypersalivation", "mucus_in_mouth"],
     "bad_breath": ["halitosis", "oral_odor"],
     "oral_ulcers": ["mouth_lesions", "stomatitis", "gingivitis"],
     "excessive_licking": ["itching", "pruritus", "scratching", "overgrooming", "ear_scratching", "scratching_ears"],
@@ -293,6 +294,18 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "clicking_breathing_sounds": ["wheezing", "labored_breathing", "open_mouth_breathing"],
     # サワークロップ臭は bird のみが専用IDを持つ — parrot/parakeet はそのう系へ
     "sour_crop_odor": ["crop_stasis", "crop_distension", "regurgitation"],
+    # 2026-09 第23弾: 卵塞は種によりID表記が異なる（鳥=egg_binding native、
+    # トカゲ/爬虫類は総排泄腔・腹部所見で表現）— 「卵が詰まっている」を全種で解決
+    "egg_binding": [
+        "egg_retention",
+        "dystocia",
+        "cloacal_swelling",
+        "abdominal_swelling",
+        "straining",
+    ],
+    # チンチラ毛噛み: fur_chewing はチンチラのみ native — 他種は脱毛/過剰グルーミング系へ
+    "fur_chewing": ["chewed_fur_tips", "barbering", "excessive_grooming", "hair_loss"],
+    "patchy_short_fur": ["fur_loss_patches", "patchy_hair_loss", "hair_loss"],
     "sneezing": ["reverse_sneezing", "nasal_irritation", "nasal_discharge"],
     "nasal_discharge": ["runny_nose", "rhinorrhea", "nasal_secretion", "sneezing"],
     # Urinary

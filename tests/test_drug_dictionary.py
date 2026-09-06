@@ -3041,3 +3041,56 @@ class TestBatch55ReferencedAgents:
                 assert "アルファカソジン" not in t, (e.get("species"), e.get("name"))
                 if "Oncept" in t or "メラノーマワクチン" in t:
                     assert "1 mL IM" not in t, (e.get("species"), e.get("name"))
+
+
+class TestBatch56PropyleneGlycolAndManukaAliases:
+    """2026-09 22nd referenced-but-absent sweep: propylene glycol (the oral
+    glucogenic that 14 pregnancy-toxemia/ketosis entries dose explicitly,
+    plus the canine 50-75% topical keratolytic) had no monograph; cats are
+    safe:False (Heinz-body hemolysis — Christopher JAVMA 1989, FDA-banned in
+    cat foods). The same sweep found the existing medical-manuka-honey
+    monograph (id=silver_honey) unreachable from its 70+ wound-care
+    references because only the prefixed canonical names were indexed."""
+
+    def test_propylene_glycol_present_with_bilingual_dosing(self):
+        from api.drug_dictionary import DRUGS
+
+        by_id = {d["id"]: d for d in DRUGS}
+        d = by_id.get("propylene_glycol")
+        assert d is not None, "propylene_glycol missing from formulary"
+        for sp in ("rabbit", "guinea_pig", "hamster", "degu", "dog", "exotic_other"):
+            info = d["species_info"][sp]
+            assert info.get("safe") is True, sp
+            assert (info.get("dosage") or "").strip(), f"{sp} missing dosage"
+            assert (info.get("dosage_ja") or "").strip(), f"{sp} missing dosage_ja"
+
+    def test_propylene_glycol_cat_heinz_body_gate(self):
+        from api.drug_dictionary import get_drug_by_id
+
+        pg = get_drug_by_id("propylene_glycol")
+        assert pg["species_info"]["cat"]["safe"] is False
+        assert "ハインツ" in pg["species_info"]["cat"]["notes_ja"]
+        # glucogenic adjunct, never a dextrose substitute
+        assert "ブドウ糖" in pg["species_info"]["rabbit"]["dosage_ja"]
+
+    def test_batch56_text_matcher_resolution(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = [
+            ("プロピレングリコール 1 mL PO q12h", "propylene_glycol"),
+            ("Propylene glycol 1-2 mL PO q12h (ketosis treatment)", "propylene_glycol"),
+            ("マヌカハニーを患部に塗布し包帯で被覆", "silver_honey"),
+            ("Apply manuka honey dressing q24h", "silver_honey"),
+            ("medical grade honeyで創傷管理", "silver_honey"),
+        ]
+        for phrase, want in cases:
+            ids = {h["id"] for h in find_drugs_in_text(phrase)}
+            assert want in ids, f"{phrase!r} -> {ids}"
+        # precision guard: unrelated honey-ish tokens must not chip
+        assert not find_drugs_in_text("ハニーワームを給餌して栄養補給")
+
+    def test_batch56_reverse_index_reaches_wound_and_toxemia_entries(self):
+        from api.drug_dictionary import find_diseases_for_drug
+
+        assert len(find_diseases_for_drug("silver_honey")) >= 20
+        assert len(find_diseases_for_drug("propylene_glycol")) >= 5
