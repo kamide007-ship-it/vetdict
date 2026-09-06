@@ -4694,7 +4694,7 @@ function renderDiseaseDb(){
         ${recoveryWeeks?`<dt>${currentLang==="ja"?"回復期間":"Recovery Timeline"}</dt><dd>${currentLang==="ja"?`${recoveryWeeks}週間`:`${recoveryWeeks} weeks`}</dd>`:""}
         ${successRate!==undefined?`<dt>${currentLang==="ja"?"成功率":"Success Rate"}</dt><dd>${(successRate*100).toFixed(1)}%</dd>`:""}
         ${mortalityRate!==undefined?`<dt>${currentLang==="ja"?"死亡率":"Mortality Rate"}</dt><dd>${(mortalityRate*100).toFixed(1)}%</dd>`:""}
-      </dl>${renderOrthopedicReferences(d)}<div class="anes-considerations-slot" data-anes="1" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}"></div><div class="related-diseases-section" data-related="1" data-disease="${escapeHtml(d.name||"")}"></div><div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a>${(()=>{const proto=_emergencyProtoForDisease(d,currentSpecies||"dog");return proto?`<a href="#emergency" class="cross-nav-btn emergency-nav-link" data-proto="${escapeHtml(proto)}" style="color:#dc2626;border-color:#fecaca">\u{1F6A8} ${currentLang==="ja"?"緊急対応プロトコル":"Emergency Protocol"}</a>`:"";})()}</div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
+      </dl>${renderOrthopedicReferences(d)}<div class="anes-considerations-slot" data-anes="1" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}"></div><div class="related-diseases-section" data-related="1" data-disease="${escapeHtml(d.name||"")}"></div><div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a>${(()=>{const proto=_emergencyProtoForDisease(d,currentSpecies||"dog");return proto?`<a href="#emergency" class="cross-nav-btn emergency-nav-link" data-proto="${escapeHtml(proto)}" style="color:#dc2626;border-color:#fecaca">\u{1F6A8} ${currentLang==="ja"?"緊急対応プロトコル":"Emergency Protocol"}</a>`:"";})()}<button type="button" class="cross-nav-btn owner-handout-btn" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}">\u{1F5A8} ${currentLang==="ja"?"飼い主向け説明シートを印刷":"Print owner handout"}</button></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
     </div>`}).join("");
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
@@ -6308,9 +6308,43 @@ const VD_CALC={
     const bv=species==="cat"?60:90;
     return donorPcv>0?bw*bv*(targetPcv-currentPcv)/donorPcv:null;
   },
+  /* リーン（推定理想）体重: BCS 9段階で5超は1ポイント≈+10%の過体重
+     （Laflamme 1997; WSAVA 2011）。削痩側（BCS<5）の理想体重推定式は
+     確立していないため現体重をそのまま返す。 */
+  idealWeight(bw,bcs9){
+    if(!(bw>0)||!(bcs9>=1&&bcs9<=9))return null;
+    return bcs9>5?bw/(1+0.10*(bcs9-5)):bw;
+  },
+  /* 単位換算係数（従来単位 × 係数 = SI）。体温 °F↔°C のみ非線形で convert() が特別扱い */
+  convFactors:{glucose:0.0555,creatinine:88.4,bun:0.357,calcium:0.2495,phosphorus:0.3229,bilirubin:17.1,t4:12.87,cortisol:27.59,weight_lb:0.4536},
+  convert(key,value,toSI){
+    if(key==="temp")return toSI?(value-32)*5/9:value*9/5+32;
+    const f=this.convFactors[key];
+    return f?(toSI?value*f:value/f):null;
+  },
+  /* IRIS CKD ステージング（IRIS 2023）— 安定期・適正水和・空腹時の反復測定が前提。
+     クレアチニン: 犬 <1.4 / 1.4-2.8 / 2.9-5.0 / >5.0、猫 <1.6 / 1.6-2.8 / 2.9-5.0 / >5.0 mg/dL
+     SDMA: 犬 <18 / 18-35 / 36-54 / >54、猫 <18 / 18-25 / 26-38 / >38 µg/dL */
+  irisCreatStage(species,creatMgDl){
+    const lo=species==="cat"?1.6:1.4;
+    if(creatMgDl>5.0)return 4;
+    if(creatMgDl>=2.9)return 3;
+    if(creatMgDl>=lo)return 2;
+    return 1;
+  },
+  irisSdmaStage(species,sdma){
+    if(species==="cat"){if(sdma>38)return 4;if(sdma>=26)return 3;if(sdma>=18)return 2;return 1;}
+    if(sdma>54)return 4;if(sdma>=36)return 3;if(sdma>=18)return 2;return 1;
+  },
+  /* UPC サブステージ: 非蛋白尿 <0.2、境界 0.2-0.5（猫0.2-0.4）、蛋白尿 >0.5（猫>0.4） */
+  irisUpcSubstage(species,upc){const p=species==="cat"?0.4:0.5;if(upc>p)return"P";if(upc>=0.2)return"BP";return"NP";},
+  /* 血圧サブステージ（IRIS/ACVIM 2023）: <140 / 140-159 / 160-179 / ≥180 mmHg */
+  irisBpSubstage(sbp){if(sbp>=180)return"severe";if(sbp>=160)return"hyper";if(sbp>=140)return"pre";return"normo";},
 };/*VD_CALC_END*/
 
-function _calcNum(id){const el=document.getElementById(id);const v=el?parseFloat(el.value):NaN;return isNaN(v)?null:v;}
+/* 計算機の入力は全て非負の量（体重・用量・濃度・%・時間）— min="0" でもタイプでは
+   負数を入れられるため、負値は未入力（null）として扱い、負の投与量・輸液量を出さない */
+function _calcNum(id){const el=document.getElementById(id);const v=el?parseFloat(el.value):NaN;return isNaN(v)||v<0?null:v;}
 function _calcFmt(v,dec){return v===null||isNaN(v)?"—":Number(v).toFixed(dec===undefined?1:dec);}
 function _calcSharedWeight(){return _calcNum("calcWeight");}
 
@@ -6322,6 +6356,14 @@ function renderCalculators(force){
   if(!force&&body.dataset.rendered===currentLang)return;
   const ja=currentLang==="ja";
   const savedW=(()=>{try{return localStorage.getItem("vetdict-drug-weight")||"";}catch(_){return"";}})();
+  /* 言語切替の再描画（force）で入力途中の値と選択中タブを失わないよう退避する。
+     ID は言語非依存なのでそのまま復元できる。 */
+  const prevVals={};let prevTab=null;
+  if(body.dataset.rendered){
+    body.querySelectorAll("input,select").forEach(el=>{if(el.id&&el.value!=="")prevVals[el.id]=el.value;});
+    const at=body.querySelector(".calc-tab-btn.active");
+    if(at)prevTab=at.dataset.calcTab;
+  }
   const TABS=[
     {id:"dose",label:ja?"用量":"Dose"},
     {id:"cri",label:"CRI"},
@@ -6330,6 +6372,8 @@ function renderCalculators(force){
     {id:"choco",label:ja?"チョコ中毒":"Chocolate"},
     {id:"transfusion",label:ja?"輸血":"Transfusion"},
     {id:"bsa",label:"BSA"},
+    {id:"iris",label:"IRIS"},
+    {id:"conv",label:ja?"単位換算":"Convert"},
   ];
   const row=(label,inner)=>`<div class="calc-row"><label>${label}</label>${inner}</div>`;
   const num=(id,ph,step)=>`<input type="number" id="${id}" inputmode="decimal" min="0" step="${step||"any"}" placeholder="${ph||""}"/>`;
@@ -6362,14 +6406,15 @@ function renderCalculators(force){
     <div class="calc-panel" data-calc-panel="energy" hidden>
       ${row(ja?"動物種":"Species",`<select id="calcEnergySpecies"><option value="dog">${ja?"犬":"Dog"}</option><option value="cat">${ja?"猫":"Cat"}</option></select>`)}
       ${row(ja?"係数":"Factor",`<select id="calcEnergyFactor"></select>`)}
+      ${row(ja?"BCS（9段階・任意）":"BCS (9-pt, optional)",`<select id="calcEnergyBcs"><option value="">—</option>${[4,5,6,7,8,9].map(b=>`<option value="${b}">${b}/9</option>`).join("")}</select>`)}
       <div class="calc-result" id="calcEnergyResult" aria-live="polite"></div>
-      <div class="calc-note">${ja?"RER = 70 × 体重^0.75（WSAVA 2011）。入院患者は RER×1.0 から開始し忍容性をみて漸増（過給餌・refeeding回避）。":"RER = 70 × BW^0.75 (WSAVA 2011). Start hospitalised patients at 1.0 × RER and titrate up (avoid overfeeding/refeeding)."}</div>
+      <div class="calc-note">${ja?"RER = 70 × 体重^0.75（WSAVA 2011）。入院患者は RER×1.0 から開始し忍容性をみて漸増（過給餌・refeeding回避）。BCS>5では1ポイント≈+10%過体重として推定理想体重を表示し、減量係数の計算は理想体重基準（Laflamme 1997）。":"RER = 70 × BW^0.75 (WSAVA 2011). Start hospitalised patients at 1.0 × RER and titrate up (avoid overfeeding/refeeding). With BCS >5, ideal weight is estimated at ≈10% excess per point (Laflamme 1997) and weight-loss targets use ideal weight."}</div>
     </div>
     <div class="calc-panel" data-calc-panel="choco" hidden>
       ${row(ja?"チョコの種類":"Chocolate type",`<select id="calcChocoType"><option value="milk">${ja?"ミルクチョコ (2.1 mg/g)":"Milk (2.1 mg/g)"}</option><option value="dark">${ja?"ダーク/スイート (5.5 mg/g)":"Dark/semi-sweet (5.5 mg/g)"}</option><option value="baking">${ja?"製菓用/ビター (14 mg/g)":"Baking (14 mg/g)"}</option><option value="cocoa">${ja?"ココアパウダー (26 mg/g)":"Cocoa powder (26 mg/g)"}</option><option value="white">${ja?"ホワイト (0.01 mg/g)":"White (0.01 mg/g)"}</option></select>`)}
       ${row(ja?"摂取量":"Amount ingested",num("calcChocoGrams","g","1")+`<span class="calc-unit">g</span>`)}
       <div class="calc-result" id="calcChocoResult" aria-live="polite"></div>
-      <div class="calc-note">${ja?"テオブロミン量のみの推定（カフェイン併含で総メチルキサンチンはさらに増える）。催吐は摂取後2-4時間以内が目安。":"Theobromine only (total methylxanthines are higher with caffeine). Emesis is most useful within 2-4 h of ingestion."}<button type="button" class="chat-disease-open calc-choco-disease">${ja?"🔍 チョコレート中毒の疾患エントリを開く":"🔍 Open the Chocolate Toxicosis entry"}</button></div>
+      <div class="calc-note">${ja?"テオブロミン量のみの推定（カフェイン併含で総メチルキサンチンはさらに増える）。リスク閾値は犬のデータ（猫はより感受性が高い）。催吐は摂取後2-4時間以内が目安。":"Theobromine only (total methylxanthines are higher with caffeine). Risk tiers are canine data (cats are more sensitive). Emesis is most useful within 2-4 h of ingestion."}<button type="button" class="chat-disease-open calc-choco-disease">${ja?"🔍 チョコレート中毒の疾患エントリを開く":"🔍 Open the Chocolate Toxicosis entry"}</button></div>
     </div>
     <div class="calc-panel" data-calc-panel="transfusion" hidden>
       ${row(ja?"動物種":"Species",`<select id="calcTransSpecies"><option value="dog">${ja?"犬（血液量90 mL/kg）":"Dog (90 mL/kg)"}</option><option value="cat">${ja?"猫（血液量60 mL/kg）":"Cat (60 mL/kg)"}</option></select>`)}
@@ -6384,11 +6429,35 @@ function renderCalculators(force){
       <div class="calc-result" id="calcBsaResult" aria-live="polite"></div>
       <div class="calc-note">${ja?"化学療法（mg/m²）用の体表面積。":"Body surface area for m²-based chemotherapy dosing."}</div>
     </div>
+    <div class="calc-panel" data-calc-panel="iris" hidden>
+      ${row(ja?"動物種":"Species",`<select id="calcIrisSpecies"><option value="dog">${ja?"犬":"Dog"}</option><option value="cat">${ja?"猫":"Cat"}</option></select>`)}
+      ${row(ja?"クレアチニン":"Creatinine",num("calcIrisCreat","","0.1")+`<select id="calcIrisCreatUnit"><option value="mgdl">mg/dL</option><option value="umol">µmol/L</option></select>`)}
+      ${row(ja?"SDMA（任意）":"SDMA (optional)",num("calcIrisSdma","µg/dL","1")+`<span class="calc-unit">µg/dL</span>`)}
+      ${row(ja?"UPC（任意）":"UPC (optional)",num("calcIrisUpc","","0.1"))}
+      ${row(ja?"収縮期血圧（任意）":"Systolic BP (optional)",num("calcIrisSbp","mmHg","5")+`<span class="calc-unit">mmHg</span>`)}
+      <div class="calc-result" id="calcIrisResult" aria-live="polite"></div>
+      <div class="calc-note">${ja?"⚠ IRIS 2023。安定した慢性腎臓病のステージング専用 — AKI・脱水・静脈輸液中の値では判定しない。空腹時の反復測定（2回以上）で確定。":"⚠ IRIS 2023. For staging STABLE CKD only — do not stage on values from AKI, dehydration or while on IV fluids. Confirm with repeated fasted measurements."}</div>
+    </div>
+    <div class="calc-panel" data-calc-panel="conv" hidden>
+      ${row(ja?"項目":"Measurement",`<select id="calcConvKey">${_calcConvDefs().map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select>`)}
+      ${row(ja?"変換方向":"Direction",`<select id="calcConvDir"></select>`)}
+      ${row(ja?"値":"Value",num("calcConvVal","","any"))}
+      <div class="calc-result" id="calcConvResult" aria-live="polite"></div>
+      <div class="calc-note">${ja?"海外文献・海外測定機器の単位を日常単位へ相互換算（SI換算係数は標準値）。":"Convert between conventional and SI units used across references and analysers."}</div>
+    </div>
     <div class="calc-disclaimer">${ja?"⚠ 計算結果は入力値に依存します。投与前に必ず用量・濃度・計算を再確認してください。本ツールは獣医師の臨床判断を代替しません。":"⚠ Results depend on your inputs. Always re-verify dose, concentration and arithmetic before administration. This tool does not replace clinical judgement."}</div>`;
   body.dataset.rendered=currentLang;
   const w=document.getElementById("calcWeight");
   if(w&&savedW&&!isNaN(parseFloat(savedW)))w.value=savedW;
+  // 退避した値を復元（係数selectは動物種依存の選択肢を再構築してから復元する）
+  Object.entries(prevVals).forEach(([id,v])=>{const el=document.getElementById(id);if(el)el.value=v;});
   _calcPopulateEnergyFactors();
+  if(prevVals.calcEnergyFactor){const ef=document.getElementById("calcEnergyFactor");if(ef)ef.value=prevVals.calcEnergyFactor;}
+  _calcPopulateConvDir();
+  if(prevVals.calcConvDir){const cd=document.getElementById("calcConvDir");if(cd)cd.value=prevVals.calcConvDir;}
+  const fsSel=document.getElementById("calcFluidSpecies");
+  if(fsSel&&fsSel.value==="other"){const r=document.getElementById("calcFluidCustomRow");if(r)r.hidden=false;}
+  if(prevTab)_calcSwitchTab(prevTab,true);
   if(!body.dataset.wired){
     body.dataset.wired="1";
     body.addEventListener("click",e=>{
@@ -6406,18 +6475,19 @@ function renderCalculators(force){
     body.addEventListener("change",e=>{
       if(e.target.id==="calcEnergySpecies")_calcPopulateEnergyFactors();
       if(e.target.id==="calcFluidSpecies"){const r=document.getElementById("calcFluidCustomRow");if(r)r.hidden=e.target.value!=="other";}
+      if(e.target.id==="calcConvKey")_calcPopulateConvDir();
       _calcRecomputeAll();
     });
   }
   _calcRecomputeAll();
 }
 
-function _calcSwitchTab(tabId){
+function _calcSwitchTab(tabId,silent){
   const body=document.getElementById("calcBody");
   if(!body)return;
   body.querySelectorAll(".calc-tab-btn").forEach(b=>{const on=b.dataset.calcTab===tabId;b.classList.toggle("active",on);b.setAttribute("aria-selected",on);});
   body.querySelectorAll(".calc-panel").forEach(p=>{p.hidden=p.dataset.calcPanel!==tabId;});
-  trackEvent("calculator_tab",{tab:tabId});
+  if(!silent)trackEvent("calculator_tab",{tab:tabId});
 }
 
 function _calcPopulateEnergyFactors(){
@@ -6425,11 +6495,38 @@ function _calcPopulateEnergyFactors(){
   const spSel=document.getElementById("calcEnergySpecies");
   if(!sel||!spSel)return;
   const ja=currentLang==="ja";
-  /* WSAVA Global Nutrition Guidelines 2011 の代表係数 */
+  /* WSAVA Global Nutrition Guidelines 2011 の代表係数。減量オプションは "_wl" マーカー付き —
+     BCS入力があれば減量計算を推定理想体重基準に切り替える（parseFloat は接尾辞を無視する） */
   const F=spSel.value==="cat"
-    ?[["1.2",ja?"避妊去勢済み成猫 ×1.2":"Neutered adult ×1.2"],["1.4",ja?"未避妊去勢の成猫 ×1.4":"Intact adult ×1.4"],["0.8",ja?"減量 ×0.8":"Weight loss ×0.8"],["2.5",ja?"成長期 ×2.5":"Growth ×2.5"],["1.0",ja?"入院・重症 ×1.0（RER）":"Hospitalised ×1.0 (RER)"]]
-    :[["1.6",ja?"避妊去勢済み成犬 ×1.6":"Neutered adult ×1.6"],["1.8",ja?"未避妊去勢の成犬 ×1.8":"Intact adult ×1.8"],["1.0",ja?"減量 ×1.0（RER）":"Weight loss ×1.0 (RER)"],["2.5",ja?"成長期 ×2.5":"Growth ×2.5"],["1.0_h",ja?"入院・重症 ×1.0（RER）":"Hospitalised ×1.0 (RER)"]];
+    ?[["1.2",ja?"避妊去勢済み成猫 ×1.2":"Neutered adult ×1.2"],["1.4",ja?"未避妊去勢の成猫 ×1.4":"Intact adult ×1.4"],["0.8_wl",ja?"減量 ×0.8":"Weight loss ×0.8"],["2.5",ja?"成長期 ×2.5":"Growth ×2.5"],["1.0",ja?"入院・重症 ×1.0（RER）":"Hospitalised ×1.0 (RER)"]]
+    :[["1.6",ja?"避妊去勢済み成犬 ×1.6":"Neutered adult ×1.6"],["1.8",ja?"未避妊去勢の成犬 ×1.8":"Intact adult ×1.8"],["1.0_wl",ja?"減量 ×1.0（RER）":"Weight loss ×1.0 (RER)"],["2.5",ja?"成長期 ×2.5":"Growth ×2.5"],["1.0_h",ja?"入院・重症 ×1.0（RER）":"Hospitalised ×1.0 (RER)"]];
   sel.innerHTML=F.map(([v,l])=>`<option value="${v}">${l}</option>`).join("");
+}
+
+/* 単位換算の定義（key, ラベル, 従来単位, SI単位）。renderCalculators と
+   _calcRecomputeAll の両方から参照するためラベルは呼び出し時の currentLang で解決 */
+function _calcConvDefs(){
+  const ja=currentLang==="ja";
+  return[
+    ["glucose",ja?"血糖 Glucose":"Glucose","mg/dL","mmol/L"],
+    ["creatinine",ja?"クレアチニン":"Creatinine","mg/dL","µmol/L"],
+    ["bun",ja?"BUN（尿素窒素）":"BUN (urea)","mg/dL","mmol/L"],
+    ["calcium",ja?"カルシウム Ca":"Calcium","mg/dL","mmol/L"],
+    ["phosphorus",ja?"リン P":"Phosphorus","mg/dL","mmol/L"],
+    ["bilirubin",ja?"総ビリルビン":"Total bilirubin","mg/dL","µmol/L"],
+    ["t4","T4","µg/dL","nmol/L"],
+    ["cortisol",ja?"コルチゾール":"Cortisol","µg/dL","nmol/L"],
+    ["weight_lb",ja?"体重（lb ↔ kg）":"Weight (lb ↔ kg)","lb","kg"],
+    ["temp",ja?"体温（°F ↔ °C）":"Temperature (°F ↔ °C)","°F","°C"],
+  ];
+}
+
+function _calcPopulateConvDir(){
+  const dirSel=document.getElementById("calcConvDir");
+  const keySel=document.getElementById("calcConvKey");
+  if(!dirSel||!keySel)return;
+  const def=_calcConvDefs().find(c=>c[0]===keySel.value)||_calcConvDefs()[0];
+  dirSel.innerHTML=`<option value="toSI">${def[2]} → ${def[3]}</option><option value="toConv">${def[3]} → ${def[2]}</option>`;
 }
 
 function _calcRecomputeAll(){
@@ -6444,7 +6541,8 @@ function _calcRecomputeAll(){
     const conc=_calcNum("calcDoseConc"),tab=_calcNum("calcDoseTab");
     if(!bw||lo===null){doseRes.textContent=bw?(ja?"用量を入力してください":"Enter a dose"):needW;}
     else{
-      const hi=hiRaw===null?lo:hiRaw;
+      // 上限<下限のタイプ途中入力では逆転レンジ（例 5–2 mg）を表示しない
+      const hi=hiRaw===null?lo:Math.max(hiRaw,lo);
       const mgLo=VD_CALC.doseMg(lo,bw);
       const mgHi=VD_CALC.doseMg(hi,bw);
       const u=unit==="ug"?"µg":"mg";
@@ -6499,9 +6597,18 @@ function _calcRecomputeAll(){
   if(enRes){
     if(!bw){enRes.textContent=needW;}
     else{
-      const rer=VD_CALC.rer(bw);
-      const f=parseFloat((document.getElementById("calcEnergyFactor")||{}).value)||1;
-      enRes.innerHTML=`RER: <strong>${_calcFmt(rer,0)} kcal/${ja?"日":"day"}</strong><br/>${ja?"目標(MER)":"Target (MER)"}: <strong>${_calcFmt(rer*f,0)} kcal/${ja?"日":"day"}</strong> (×${f})`;
+      const fv=(document.getElementById("calcEnergyFactor")||{}).value||"";
+      const f=parseFloat(fv)||1;
+      const bcs=parseFloat((document.getElementById("calcEnergyBcs")||{}).value)||null;
+      const ideal=bcs?VD_CALC.idealWeight(bw,bcs):null;
+      // 減量係数（_wl）でBCS>5なら推定理想体重基準で計算する（Laflamme 1997; WSAVA 2011）
+      const useIdeal=fv.indexOf("_wl")>=0&&ideal!==null&&ideal<bw;
+      const rer=VD_CALC.rer(useIdeal?ideal:bw);
+      let html=`RER: <strong>${_calcFmt(rer,0)} kcal/${ja?"日":"day"}</strong>`;
+      if(useIdeal)html+=` <span class="calc-hint">(${ja?"理想体重":"ideal wt"} ${_calcFmt(ideal,1)} kg ${ja?"基準":"basis"})</span>`;
+      html+=`<br/>${ja?"目標(MER)":"Target (MER)"}: <strong>${_calcFmt(rer*f,0)} kcal/${ja?"日":"day"}</strong> (×${f})`;
+      if(ideal!==null&&bcs>5)html+=`<br/>${ja?"推定理想体重":"Est. ideal weight"}: <strong>${_calcFmt(ideal,1)} kg</strong> <span class="calc-hint">(BCS ${bcs}/9${ja?"、超過分約"+Math.round((bw/ideal-1)*100)+"%":", ≈"+Math.round((bw/ideal-1)*100)+"% over"})</span>`;
+      enRes.innerHTML=html;
     }
   }
   // チョコ中毒
@@ -6542,6 +6649,54 @@ function _calcRecomputeAll(){
   if(bsRes){
     const sp=(document.getElementById("calcBsaSpecies")||{}).value||"dog";
     bsRes.innerHTML=bw?`BSA: <strong>${VD_CALC.bsa(bw,sp).toFixed(3)} m²</strong>`:needW;
+  }
+  // IRIS CKD ステージング（体重不要）
+  const irRes=document.getElementById("calcIrisResult");
+  if(irRes){
+    const sp=(document.getElementById("calcIrisSpecies")||{}).value||"dog";
+    const cu=(document.getElementById("calcIrisCreatUnit")||{}).value||"mgdl";
+    let creat=_calcNum("calcIrisCreat");
+    if(creat!==null&&cu==="umol")creat=creat/88.4;
+    const sdma=_calcNum("calcIrisSdma");
+    const upc=_calcNum("calcIrisUpc");
+    const sbp=_calcNum("calcIrisSbp");
+    if(creat===null&&sdma===null){irRes.textContent=ja?"クレアチニン（またはSDMA）を入力してください":"Enter creatinine (or SDMA)";}
+    else{
+      const cs=creat!==null?VD_CALC.irisCreatStage(sp,creat):null;
+      const ss=sdma!==null?VD_CALC.irisSdmaStage(sp,sdma):null;
+      const stage=Math.max(cs||0,ss||0);
+      const parts=[];
+      if(cs)parts.push(`${ja?"クレアチニン":"creatinine"}: ${cs}${cu==="umol"?` (${_calcFmt(creat,2)} mg/dL)`:""}`);
+      if(ss)parts.push(`SDMA: ${ss}`);
+      let html=`<strong>IRIS ${ja?"ステージ":"Stage"} ${stage}</strong> <span class="calc-hint">(${parts.join(" / ")})</span>`;
+      if(cs&&ss&&cs!==ss)html+=`<br/><span class="calc-hint">${ja?"クレアチニンとSDMAのステージが乖離 — 筋肉量低下例ではSDMA側を考慮（IRIS 2023）":"Creatinine and SDMA stages differ — weight SDMA in patients with muscle loss (IRIS 2023)"}</span>`;
+      if(upc!==null){
+        const u=VD_CALC.irisUpcSubstage(sp,upc);
+        const UL={NP:ja?"非蛋白尿":"non-proteinuric",BP:ja?"境界蛋白尿":"borderline proteinuric",P:ja?"蛋白尿":"proteinuric"};
+        html+=`<br/>UPC ${upc}: <strong>${UL[u]}</strong>`;
+      }
+      if(sbp!==null){
+        const b=VD_CALC.irisBpSubstage(sbp);
+        const BL={normo:ja?"正常血圧（<140）":"normotensive (<140)",pre:ja?"前高血圧（140-159）":"prehypertensive (140-159)",hyper:ja?"高血圧（160-179）":"hypertensive (160-179)",severe:ja?"重度高血圧（≥180）— 標的臓器障害リスク":"severely hypertensive (≥180) — target-organ damage risk"};
+        html+=`<br/>SBP ${sbp} mmHg: <strong>${BL[b]}</strong>`;
+      }
+      irRes.innerHTML=html;
+    }
+  }
+  // 単位換算（体重不要）
+  const cvRes=document.getElementById("calcConvResult");
+  if(cvRes){
+    const key=(document.getElementById("calcConvKey")||{}).value||"glucose";
+    const dir=(document.getElementById("calcConvDir")||{}).value||"toSI";
+    const v=_calcNum("calcConvVal");
+    const def=_calcConvDefs().find(c=>c[0]===key);
+    if(v===null||!def){cvRes.textContent=ja?"値を入力してください":"Enter a value";}
+    else{
+      const toSI=dir==="toSI";
+      const out=VD_CALC.convert(key,v,toSI);
+      const dec=key==="temp"?1:(Math.abs(out)<1?3:(Math.abs(out)<10?2:1));
+      cvRes.innerHTML=`${v} ${toSI?def[2]:def[3]} = <strong>${_calcFmt(out,dec)} ${toSI?def[3]:def[2]}</strong>`;
+    }
   }
 }
 
@@ -6706,14 +6861,19 @@ function renderInteractionResults(data,drugIds){
 }
 
 function parseDoseRange(doseText){
-  const m=doseText.match(/([\d.]+)\s*[-–~～]\s*([\d.]+)\s*mg\/kg/i);
-  if(m)return{min:parseFloat(m[1]),max:parseFloat(m[2]),unit:"mg"};
-  const m2=doseText.match(/([\d.]+)\s*mg\/kg/i);
-  if(m2)return{min:parseFloat(m2[1]),max:parseFloat(m2[1]),unit:"mg"};
-  const m3=doseText.match(/([\d.]+)\s*[-–~～]\s*([\d.]+)\s*[μµu]g\/kg/i);
-  if(m3)return{min:parseFloat(m3[1]),max:parseFloat(m3[2]),unit:"µg"};
-  const m4=doseText.match(/([\d.]+)\s*[μµu]g\/kg/i);
-  if(m4)return{min:parseFloat(m4[1]),max:parseFloat(m4[1]),unit:"µg"};
+  /* /kg の直後にスラッシュが続く表記（mg/kg/hr・mg/kg/day・mg/kg/min の CRI/日量、
+     mg/kg/dose 等）は「1回量」ではないため (?!\s*\/) で除外する — 除外により
+     同一テキスト内の後続の真の1回量（例「…CRI; bolus 2 mg/kg」）には引き続き一致する。
+     退化パース（桁区切りカンマ等で min=0）や逆転レンジは null（ボタン非表示）。 */
+  const pick=(min,max,unit)=>(min>0&&max>=min)?{min,max,unit}:null;
+  let m=doseText.match(/([\d.]+)\s*[-–~～]\s*([\d.]+)\s*mg\/kg(?!\s*\/)/i);
+  if(m)return pick(parseFloat(m[1]),parseFloat(m[2]),"mg");
+  m=doseText.match(/([\d.]+)\s*mg\/kg(?!\s*\/)/i);
+  if(m)return pick(parseFloat(m[1]),parseFloat(m[1]),"mg");
+  m=doseText.match(/([\d.]+)\s*[-–~～]\s*([\d.]+)\s*[μµu]g\/kg(?!\s*\/)/i);
+  if(m)return pick(parseFloat(m[1]),parseFloat(m[2]),"µg");
+  m=doseText.match(/([\d.]+)\s*[μµu]g\/kg(?!\s*\/)/i);
+  if(m)return pick(parseFloat(m[1]),parseFloat(m[1]),"µg");
   return null;
 }
 
@@ -7451,128 +7611,63 @@ ${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
 }
 
-/* Print anesthesia checklist */
-function printAnesthesiaChecklist(){
-  const sp=currentSpecies||"";
-  const weightEl=document.getElementById("anesthesiaWeight");
-  const weight=weightEl?weightEl.value:"";
-  const spLabel=document.getElementById("anesthesiaSpeciesLabel");
-  const spName=spLabel?spLabel.textContent:"";
+/* 飼い主向け説明シート（印刷）— Plumb's/Vetlexicon の owner handout 相当。
+   臨床用の薬品名・投与量（treatment_protocol）は意図的に載せない: 一般情報 +
+   獣医師が個別指示を手書きするメモ欄という構成にし、飼い主が用量情報を
+   自己解釈するリスクを避ける。ECVNスポンサーブロックも同時に非掲載になる。 */
+function printOwnerHandout(nameEn,nameJa){
+  const d=allDiseases.find(x=>(nameEn&&(x.name||"")===nameEn)||(nameJa&&(x.name_ja||"")===nameJa));
+  if(!d){showToast(currentLang==="ja"?"疾患データが見つかりません。リストを再読み込みしてください":"Disease data not found — reload the list",true);return;}
+  const ja=currentLang==="ja";
+  const pk=(a,b)=>ja?(a||b||""):(b||a||"");
+  const title=ja?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
+  const sub=ja?(d.name||""):(d.name_ja||"");
+  const spDef=(typeof SPECIES!=="undefined"?SPECIES:[]).find(s=>s.id===currentSpecies);
+  const spLabel=spDef?(ja?spDef.name:spDef.nameEn):(currentSpecies||"");
+  const desc=pk(d.description_ja,d.description);
+  const signs=(d.symptoms_display&&d.symptoms_display.length)
+    ?d.symptoms_display.map(s=>ja?(s.name_ja||s.id):(s.name_en||s.id)).join(ja?"、":", ")
+    :pk(d.clinical_signs_ja,d.clinical_signs);
+  const prevention=pk(d.prevention_ja,d.prevention);
+  const prognosis=pk(d.prognosis_detailed_ja,d.prognosis_detailed)||pk(d.prognosis_ja,d.prognosis);
+  const urgent=d.severity==="emergency"||d.severity==="high";
   const now=new Date().toLocaleDateString();
-  const preopItems=t("anesthesiaPrintPreopItems").split(",");
-  const intraopItems=t("anesthesiaPrintIntraopItems").split(",");
-  const postopItems=t("anesthesiaPrintPostopItems").split(",");
-  const makeChecklist=(items)=>items.map(i=>`<div class="ck-item"><span class="ck-box">☐</span> ${escapeHtml(i.trim())}</div>`).join("");
-
-  /* Collect currently visible protocols with drugs */
-  const cat=document.getElementById("anesthesiaCategoryFilter").value;
-  let visibleProtocols=[];
-  if(anesthesiaData){
-    let prots=anesthesiaData.protocols||[];
-    if(cat)prots=prots.filter(p=>p.category===cat);
-    visibleProtocols=prots.slice(0,10);
-  }
-  let drugSummary="";
-  if(visibleProtocols.length&&weight){
-    const wKg=parseFloat(weight);
-    drugSummary=visibleProtocols.filter(p=>p.drugs&&p.drugs.length).map(p=>{
-      const pN=currentLang==="ja"?(p.name?.ja||p.name?.en||""):(p.name?.en||p.name?.ja||"");
-      const rows=p.drugs.map(d=>{
-        const calc=calcDoseForWeight(d.dose,wKg);
-        const calcStr=calc?(calc.isRange?`${calc.lo}–${calc.hi} ${calc.unit}`:`${calc.lo} ${calc.unit}`):"—";
-        return`<tr><td>${escapeHtml(d.name||"")}</td><td>${escapeHtml(d.dose||"")}</td><td><strong>${calcStr}</strong></td><td>${escapeHtml(d.route||"")}</td></tr>`;
-      }).join("");
-      return`<h4 style="margin:12px 0 4px">${escapeHtml(pN)}</h4><table><thead><tr><th>Drug</th><th>Dose/kg</th><th>Calculated</th><th>Route</th></tr></thead><tbody>${rows}</tbody></table>`;
-    }).join("");
-  }
-
-  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${t("anesthesiaPrintTitle")}</title>
-<style>body{font-family:sans-serif;padding:20px;font-size:13px;color:#333}
-h2{text-align:center;margin-bottom:4px}h3{margin:16px 0 6px;border-bottom:2px solid #333;padding-bottom:4px}h4{font-size:13px;color:#555}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;border:1px solid #ccc;padding:12px;border-radius:4px}
-.info-grid div{font-size:13px}.info-grid strong{display:inline-block;min-width:60px}
-.ck-item{padding:4px 0;border-bottom:1px dotted #ddd;font-size:13px}.ck-box{font-size:16px;margin-right:6px}
-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}th,td{border:1px solid #ccc;padding:4px 8px;text-align:left}
-th{background:#f0f0f0;font-weight:600}.notes{margin-top:20px;border-top:2px solid #333;padding-top:8px}
-.notes-area{width:100%;height:80px;border:1px solid #ccc;border-radius:4px;margin-top:4px}
-@media print{body{padding:10px}}</style></head><body>
-<h2>${t("anesthesiaPrintTitle")}</h2>
+  const sec=(h,b)=>b?`<h3>${h}</h3><p>${escapeHtml(b)}</p>`:"";
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${escapeHtml(title)}</title>
+<style>body{font-family:sans-serif;padding:24px;font-size:13px;color:#333;line-height:1.7;max-width:720px;margin:0 auto}
+h2{text-align:center;margin:0 0 2px}.sub{text-align:center;color:#777;font-size:12px;margin-bottom:14px}
+h3{margin:16px 0 6px;border-bottom:2px solid #2f855a;padding-bottom:3px;font-size:14px;color:#2f855a}
+p{margin:4px 0;white-space:pre-wrap}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;border:1px solid #ccc;padding:12px;border-radius:4px;font-size:13px}
+.blank{display:inline-block;min-width:140px;border-bottom:1px solid #999}
+.notes-area{border:1px solid #ccc;border-radius:4px;min-height:90px;margin-top:6px}
+.notes-area.small{min-height:60px}
+.urgent{background:#fef2f2;border:1px solid #fecaca;border-radius:4px;padding:8px 10px;margin-top:6px;color:#b91c1c}
+.footer{margin-top:22px;border-top:1px solid #ccc;padding-top:8px;font-size:11px;color:#777}
+@media print{body{padding:8px}}</style></head><body>
+<h2>${escapeHtml(title)}</h2>${sub?`<div class="sub">${escapeHtml(sub)}</div>`:""}
 <div class="info-grid">
-<div><strong>${t("anesthesiaPrintSpecies")}:</strong> ${escapeHtml(spName||sp)}</div>
-<div><strong>${t("anesthesiaPrintWeight")}:</strong> ${escapeHtml(weight?weight+" kg":"_____ kg")}</div>
-<div><strong>${t("anesthesiaPrintDate")}:</strong> ${escapeHtml(now)}</div>
-<div><strong>ASA:</strong> ☐I ☐II ☐III ☐IV ☐V ☐E</div>
+<div><strong>${ja?"動物種":"Species"}:</strong> ${escapeHtml(spLabel)}</div>
+<div><strong>${ja?"日付":"Date"}:</strong> ${escapeHtml(now)}</div>
+<div><strong>${ja?"患者名":"Patient"}:</strong> <span class="blank">&nbsp;</span></div>
+<div><strong>${ja?"担当獣医師":"Veterinarian"}:</strong> <span class="blank">&nbsp;</span></div>
 </div>
-${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
-<h3>${t("anesthesiaPrintPreop")}</h3>${makeChecklist(preopItems)}
-<h3>${t("anesthesiaPrintIntraop")}</h3>${makeChecklist(intraopItems)}
-<h3>${t("anesthesiaPrintPostop")}</h3>${makeChecklist(postopItems)}
-<div class="notes"><h3>Notes</h3><div class="notes-area" contenteditable="true"></div></div>
+${sec(ja?"この病気について":"About this condition",desc)}
+${sec(ja?"主な症状":"Common signs",signs)}
+${sec(ja?"ご家庭での予防・注意":"Prevention & home care",prevention)}
+${sec(ja?"経過の見通し":"Outlook",prognosis)}
+<h3>${ja?"治療とお薬について":"Treatment & medication"}</h3>
+<p>${ja?"治療の内容とお薬の使い方は診察時にご説明します。処方されたお薬は自己判断で中止・増減せず、獣医師の指示どおりに与えてください。":"Your veterinarian will explain the treatment plan and how to give any medication. Do not stop or adjust prescribed medication without veterinary guidance."}</p>
+<div class="notes-area"></div>
+<h3>${ja?"再診の目安・緊急時":"Recheck & emergencies"}</h3>
+${urgent?`<div class="urgent">${ja?"⚠ この病気は緊急性の高い状態を起こすことがあります。急変時はすぐにご連絡ください。":"⚠ This condition can become an emergency. Contact the clinic immediately if your animal deteriorates."}</div>`:""}
+<p>${ja?"ぐったりする・食べない・呼吸が苦しそう等の悪化サインや、気になる変化があれば早めにご連絡ください。":"Contact the clinic promptly if you notice deterioration such as lethargy, not eating, or difficulty breathing."}</p>
+<div class="notes-area small"></div>
+<div class="footer">${ja?"本シートは一般的な情報です。個々の治療については担当獣医師の指示を優先してください。":"This sheet is general information — always follow your veterinarian's individual instructions."} — VetDict (vetdict.info)</div>
 </body></html>`;
   const win=window.open("","_blank");
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
-}
-
-/* Print anesthesia checklist */
-function printAnesthesiaChecklist(){
-  const sp=currentSpecies||"";
-  const weightEl=document.getElementById("anesthesiaWeight");
-  const weight=weightEl?weightEl.value:"";
-  const spLabel=document.getElementById("anesthesiaSpeciesLabel");
-  const spName=spLabel?spLabel.textContent:"";
-  const now=new Date().toLocaleDateString();
-  const preopItems=t("anesthesiaPrintPreopItems").split(",");
-  const intraopItems=t("anesthesiaPrintIntraopItems").split(",");
-  const postopItems=t("anesthesiaPrintPostopItems").split(",");
-  const makeChecklist=(items)=>items.map(i=>`<div class="ck-item"><span class="ck-box">☐</span> ${escapeHtml(i.trim())}</div>`).join("");
-
-  /* Collect currently visible protocols with drugs */
-  const cat=document.getElementById("anesthesiaCategoryFilter").value;
-  let visibleProtocols=[];
-  if(anesthesiaData){
-    let prots=anesthesiaData.protocols||[];
-    if(cat)prots=prots.filter(p=>p.category===cat);
-    visibleProtocols=prots.slice(0,10);
-  }
-  let drugSummary="";
-  if(visibleProtocols.length&&weight){
-    const wKg=parseFloat(weight);
-    drugSummary=visibleProtocols.filter(p=>p.drugs&&p.drugs.length).map(p=>{
-      const pN=currentLang==="ja"?(p.name?.ja||p.name?.en||""):(p.name?.en||p.name?.ja||"");
-      const rows=p.drugs.map(d=>{
-        const calc=calcDoseForWeight(d.dose,wKg);
-        const calcStr=calc?(calc.isRange?`${calc.lo}–${calc.hi} ${calc.unit}`:`${calc.lo} ${calc.unit}`):"—";
-        return`<tr><td>${escapeHtml(d.name||"")}</td><td>${escapeHtml(d.dose||"")}</td><td><strong>${calcStr}</strong></td><td>${escapeHtml(d.route||"")}</td></tr>`;
-      }).join("");
-      return`<h4 style="margin:12px 0 4px">${escapeHtml(pN)}</h4><table><thead><tr><th>Drug</th><th>Dose/kg</th><th>Calculated</th><th>Route</th></tr></thead><tbody>${rows}</tbody></table>`;
-    }).join("");
-  }
-
-  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${t("anesthesiaPrintTitle")}</title>
-<style>body{font-family:sans-serif;padding:20px;font-size:13px;color:#333}
-h2{text-align:center;margin-bottom:4px}h3{margin:16px 0 6px;border-bottom:2px solid #333;padding-bottom:4px}h4{font-size:13px;color:#555}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;border:1px solid #ccc;padding:12px;border-radius:4px}
-.info-grid div{font-size:13px}.info-grid strong{display:inline-block;min-width:60px}
-.ck-item{padding:4px 0;border-bottom:1px dotted #ddd;font-size:13px}.ck-box{font-size:16px;margin-right:6px}
-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}th,td{border:1px solid #ccc;padding:4px 8px;text-align:left}
-th{background:#f0f0f0;font-weight:600}.notes{margin-top:20px;border-top:2px solid #333;padding-top:8px}
-.notes-area{width:100%;height:80px;border:1px solid #ccc;border-radius:4px;margin-top:4px}
-@media print{body{padding:10px}}</style></head><body>
-<h2>${t("anesthesiaPrintTitle")}</h2>
-<div class="info-grid">
-<div><strong>${t("anesthesiaPrintSpecies")}:</strong> ${escapeHtml(spName||sp)}</div>
-<div><strong>${t("anesthesiaPrintWeight")}:</strong> ${escapeHtml(weight?weight+" kg":"_____ kg")}</div>
-<div><strong>${t("anesthesiaPrintDate")}:</strong> ${escapeHtml(now)}</div>
-<div><strong>ASA:</strong> ☐I ☐II ☐III ☐IV ☐V ☐E</div>
-</div>
-${drugSummary?`<h3>Drug Protocol</h3>${drugSummary}`:""}
-<h3>${t("anesthesiaPrintPreop")}</h3>${makeChecklist(preopItems)}
-<h3>${t("anesthesiaPrintIntraop")}</h3>${makeChecklist(intraopItems)}
-<h3>${t("anesthesiaPrintPostop")}</h3>${makeChecklist(postopItems)}
-<div class="notes"><h3>Notes</h3><div class="notes-area" contenteditable="true"></div></div>
-</body></html>`;
-  const win=window.open("","_blank");
-  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(()=>win.print(),300);}
+  trackEvent("owner_handout_print",{disease:d.name||nameJa||""});
 }
 
 /* ===== Shared helpers ===== */
@@ -7721,6 +7816,9 @@ function _attachDbItemHandlers(container){
     if(ixAdd){e.preventDefault();addDrugToInteractionChecker(ixAdd.dataset.drugName||"");return;}
     /* Drug dose row → clinical calculator: prefill mg/kg range parsed from the
        exact row the clinician is reading (source text is echoed for re-check). */
+    /* Disease detail → printable owner handout (dosing deliberately omitted) */
+    const handoutBtn=e.target.closest(".owner-handout-btn");
+    if(handoutBtn){e.preventDefault();e.stopPropagation();printOwnerHandout(handoutBtn.dataset.dn||"",handoutBtn.dataset.dnja||"");return;}
     const calcOpen=e.target.closest(".drug-calc-open");
     if(calcOpen){
       e.preventDefault();e.stopPropagation();

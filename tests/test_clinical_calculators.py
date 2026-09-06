@@ -98,6 +98,164 @@ console.log(JSON.stringify(out));
     assert out["theobromine"] == {"white": 0.01, "milk": 2.1, "dark": 5.5, "baking": 14, "cocoa": 26}
 
 
+@pytest.mark.skipif(NODE is None, reason="node not available")
+def test_vd_calc_iris_conversion_lean_weight_verified_by_node():
+    """第36弾 additions: IRIS 2023 CKD staging boundaries, SI unit conversion
+    factors, and the Laflamme BCS-9 ideal-weight estimate — run under node."""
+    script = (
+        _extract_vd_calc()
+        + """
+const out={
+  iw8:VD_CALC.idealWeight(30,8),           // 30/(1+0.10*3) ≈ 23.0769
+  iw5:VD_CALC.idealWeight(30,5),           // BCS≤5 → current weight
+  iwBad:VD_CALC.idealWeight(30,0),         // invalid BCS → null
+  glu:VD_CALC.convert("glucose",100,true), // 100 mg/dL → 5.55 mmol/L
+  gluBack:VD_CALC.convert("glucose",5.55,false),
+  creat:VD_CALC.convert("creatinine",2,true), // 176.8 µmol/L
+  tempF:VD_CALC.convert("temp",103.1,true),   // ≈39.5 °C
+  lb:VD_CALC.convert("weight_lb",10,true),    // 4.536 kg
+  badKey:VD_CALC.convert("nope",1,true),      // null
+  // IRIS 2023 creatinine boundaries (dog 1.4/2.9/5.0, cat 1.6/2.9/5.0 mg/dL)
+  dC:[1.3,1.4,2.8,2.9,5.1].map(v=>VD_CALC.irisCreatStage("dog",v)),
+  cC:[1.5,1.6].map(v=>VD_CALC.irisCreatStage("cat",v)),
+  // IRIS 2023 SDMA bands (dog 18-35/36-54/>54, cat 18-25/26-38/>38 µg/dL)
+  dS:[17,18,36,54,55].map(v=>VD_CALC.irisSdmaStage("dog",v)),
+  cS:[25,26,38,39].map(v=>VD_CALC.irisSdmaStage("cat",v)),
+  // UPC substage: borderline is inclusive of the upper bound (dog 0.5 / cat 0.4)
+  upc:[VD_CALC.irisUpcSubstage("dog",0.1),VD_CALC.irisUpcSubstage("dog",0.5),
+       VD_CALC.irisUpcSubstage("dog",0.51),VD_CALC.irisUpcSubstage("cat",0.41)],
+  bp:[139,140,160,180].map(v=>VD_CALC.irisBpSubstage(v)),
+};
+console.log(JSON.stringify(out));
+"""
+    )
+    res = subprocess.run([NODE, "-e", script], capture_output=True, text=True, timeout=30)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert abs(out["iw8"] - 30 / 1.3) < 1e-9
+    assert out["iw5"] == 30
+    assert out["iwBad"] is None
+    assert abs(out["glu"] - 5.55) < 1e-9
+    assert abs(out["gluBack"] - 100) < 1e-6
+    assert abs(out["creat"] - 176.8) < 1e-9
+    assert abs(out["tempF"] - 39.5) < 0.01
+    assert abs(out["lb"] - 4.536) < 1e-9
+    assert out["badKey"] is None
+    assert out["dC"] == [1, 2, 2, 3, 4]
+    assert out["cC"] == [1, 2]
+    assert out["dS"] == [1, 2, 3, 3, 4]
+    assert out["cS"] == [2, 3, 3, 4]
+    assert out["upc"] == ["NP", "BP", "P", "P"]
+    assert out["bp"] == ["normo", "pre", "hyper", "severe"]
+
+
+@pytest.mark.skipif(NODE is None, reason="node not available")
+def test_parse_dose_range_rejects_cri_and_degenerate_doses():
+    """parseDoseRange gates the per-drug prefill button. It must never treat a
+    CRI/per-day dose (mg/kg/hr, mg/kg/day, mg/kg/min) as a single dose, must
+    skip past a leading CRI to a genuine bolus in the same text, and must
+    return null for degenerate (0 or inverted) parses — real rows: diltiazem
+    horse '0.125 mg/kg/min IV CRI', colistin '2-5 mg/kg/day IV divided'."""
+    m = re.search(r"function parseDoseRange\(doseText\)\{[\s\S]*?\n\}", APP_JS)
+    assert m, "parseDoseRange missing"
+    script = (
+        m.group(0).replace("function parseDoseRange", "globalThis.parseDoseRange=function")
+        + """
+const cases=[
+ ["0.125 mg/kg/min IV CRI", null],
+ ["CMS: 2-5 mg/kg/day IV divided q8-12h", null],
+ ["0.5-1 mg/kg IM/SC q4-6h; 0.1-0.3 mg/kg/hr CRI", {min:0.5,max:1,unit:"mg"}],
+ ["1-2 mg/kg/day CRI; bolus 2 mg/kg", {min:2,max:2,unit:"mg"}],
+ ["CRI: 5-40 \\u03bcg/kg/hr (load: 1-2 \\u03bcg/kg IV)", {min:1,max:2,unit:"\\u00b5g"}],
+ ["2 mg/kg IV", {min:2,max:2,unit:"mg"}],
+ ["5-10 \\u00b5g/kg IM", {min:5,max:10,unit:"\\u00b5g"}],
+ ["10-5 mg/kg (inverted)", null],
+ ["1,000 \\u00b5g/kg", null],
+ ["12.5-25 mg/dog", null],
+];
+let bad=0;
+for(const [t,exp] of cases){
+ if(JSON.stringify(parseDoseRange(t))!==JSON.stringify(exp)){bad++;console.error("FAIL:",t,JSON.stringify(parseDoseRange(t)));}
+}
+console.log(JSON.stringify({bad}));
+"""
+    )
+    res = subprocess.run([NODE, "-e", script], capture_output=True, text=True, timeout=30)
+    assert res.returncode == 0, res.stderr
+    assert json.loads(res.stdout.strip().splitlines()[-1])["bad"] == 0, res.stderr
+
+
+def test_calculator_input_hardening_in_source():
+    """Edge-case guards from the 第36弾 error audit stay in place:
+    negative typed values are treated as empty (all calculator quantities are
+    non-negative), an inverted dose range is normalised instead of rendering
+    '5–2 mg', and a language re-render preserves typed values and the active
+    tab instead of wiping the form."""
+    assert "isNaN(v)||v<0?null:v" in APP_JS
+    assert "Math.max(hiRaw,lo)" in APP_JS
+    # language re-render snapshot/restore + silent tab restore
+    assert "prevVals" in APP_JS
+    assert "_calcSwitchTab(prevTab,true)" in APP_JS
+    # analytics stays silent on programmatic tab restore
+    assert 'if(!silent)trackEvent("calculator_tab"' in APP_JS
+    # duplicate print function cleanup must not regress (merge artifact removed)
+    assert APP_JS.count("function printAnesthesiaChecklist(") == 1
+
+
+def test_iris_and_conversion_panels_wired():
+    """New IRIS / unit-conversion tabs and the BCS lean-weight row are wired,
+    including the direction-select rebuild and the AKI/dehydration guard note."""
+    for panel in ("iris", "conv"):
+        assert f'data-calc-panel="{panel}"' in APP_JS, panel
+    for el_id in (
+        "calcIrisSpecies",
+        "calcIrisCreat",
+        "calcIrisCreatUnit",
+        "calcIrisSdma",
+        "calcIrisUpc",
+        "calcIrisSbp",
+        "calcConvKey",
+        "calcConvDir",
+        "calcConvVal",
+        "calcEnergyBcs",
+    ):
+        # number inputs are built via the num() helper, selects inline — either
+        # way the element id appears as a quoted string in the template source
+        assert f'"{el_id}"' in APP_JS, el_id
+    # conversion direction select rebuilds when the measurement changes
+    assert 'if(e.target.id==="calcConvKey")_calcPopulateConvDir()' in APP_JS
+    # IRIS staging is only valid on stable CKD — the guard note must ship
+    assert "AKI・脱水・静脈輸液中の値では判定しない" in APP_JS
+    # discordant creatinine/SDMA guidance (IRIS 2023) is surfaced
+    assert "クレアチニンとSDMAのステージが乖離" in APP_JS
+    # weight-loss factors are marked so BCS switches the basis to ideal weight
+    assert '"1.0_wl"' in APP_JS and '"0.8_wl"' in APP_JS
+    assert 'fv.indexOf("_wl")>=0' in APP_JS
+    # chocolate risk tiers are canine data — the species caveat must ship
+    assert "リスク閾値は犬のデータ" in APP_JS
+
+
+def test_owner_handout_is_wired_and_omits_dosing():
+    """Owner handout print (Plumb's/Vetlexicon parity): reachable from the
+    disease-DB detail via delegation, and the generated sheet deliberately
+    prints NO treatment_protocol text (no drug doses reach owners — the vet
+    writes individual instructions into the blank memo area)."""
+    assert "function printOwnerHandout(" in APP_JS
+    assert APP_JS.count("owner-handout-btn") >= 2  # template button + delegated route
+    idx = APP_JS.index('e.target.closest(".owner-handout-btn")')
+    assert idx < APP_JS.index('e.target.closest(".disease-detail.open")', idx), (
+        "handout route must run before the open-detail guard swallows the click"
+    )
+    body = APP_JS[APP_JS.index("function printOwnerHandout(") :]
+    body = body[: body.index("/* ===== Shared helpers ===== */")]
+    # The handout must not embed the clinical treatment fields
+    assert "treatment_ja" not in body and "d.treatment" not in body
+    assert "notes-area" in body  # vet's hand-written instruction area
+    assert "獣医師の指示どおり" in body
+    assert 'trackEvent("owner_handout_print"' in APP_JS
+    assert ".owner-handout-btn" in MAIN_CSS
+
+
 def test_calculator_ui_is_wired():
     """Accordion, tabs, prefill buttons, emergency link and language re-render
     are all present — the suite must be reachable from the drugs tab, the
