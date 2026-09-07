@@ -80,6 +80,7 @@ from api.drug_batch_53 import DRUGS_BATCH_53
 from api.drug_batch_54 import DRUGS_BATCH_54
 from api.drug_batch_55 import DRUGS_BATCH_55
 from api.drug_batch_56 import DRUGS_BATCH_56
+from api.drug_batch_57 import DRUGS_BATCH_57
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10823,6 +10824,19 @@ for _drug56 in DRUGS_BATCH_56:
         DRUGS.append(_drug56)
         _drug_index[_drug56["id"]] = _drug56
 
+# Batch 57: 2026-09監査（第23回スイープ — 初の英語トークンスイープ）
+# （プレドニゾン — 18エントリが用量付き参照し、自辞書のプレドニゾロン entry が
+#  「猫は変換不良」と警告するのに本体未収載だった自己参照ギャップ。犬=同等使用可、
+#  猫=変換不良で非推奨（Graham-Mize & Rosser 2004）、馬=経口吸収不良でRAO試験
+#  でも無効（Peroni 2002）という種の定義的差を収載;
+#  イソトレチノイン — 犬脂腺炎/上皮向性リンパ腫/ケラトアカントーマが
+#  1-2 mg/kg で参照する合成レチノイド。妊娠中の飼い主の取り扱い警告
+#  （ヒトiPLEDGE級催奇形物質）を明記）
+for _drug57 in DRUGS_BATCH_57:
+    if _drug57["id"] not in _drug_index:
+        DRUGS.append(_drug57)
+        _drug_index[_drug57["id"]] = _drug57
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11589,6 +11603,14 @@ _KATAKANA_VARIANT_ALIASES["silver_honey"] = (
     "manuka honey",
     "manuka",
     "medical grade honey",
+)
+
+# 2026-09 sweep #23: vitamin-A treatment texts cite the chemical name
+# ("Retinol 5000 IU/kg", 「レチノール」) which never matched the formulary
+# entry "Vitamin A Injectable". 7-char/4-char precise tokens.
+_KATAKANA_VARIANT_ALIASES["vitamin_a_injectable"] = (
+    "レチノール",
+    "retinol",
 )
 
 

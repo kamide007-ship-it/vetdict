@@ -577,7 +577,9 @@ SPECIES_PREVALENCE = {
         "Malocclusion": "common",
         "Sacroiliac Joint Disease": "common",  # Major cause of poor performance (Dyson)
         "Saddle Sores": "common",
-        "EOTRH": "uncommon",  # Aged horses, increasingly recognized
+        # 高齢馬で認知が進む歯科疾患。裸の頭字語キーは第6弾の重複統合で正式名
+        # エントリに一本化されたため、配信名に合わせてリネーム（priorを活性化）
+        "Equine Odontoclastic Tooth Resorption and Hypercementosis (EOTRH)": "uncommon",
         "Periapical Abscess": "uncommon",
         "Dental Caries": "uncommon",
         "Displaced / Malerupted Tooth": "uncommon",
@@ -1512,7 +1514,9 @@ SPECIES_PREVALENCE = {
         "Dental Disease": "very_common",
         "Diabetes Mellitus": "very_common",
         "Diarrhea": "very_common",
-        "Senile Cataracts": "very_common",
+        # デグーの白内障は圧倒的に糖尿病性（若齢でも週単位で進行 — Quesenberry &
+        # Carpenter 4th ed）。老年性は高齢個体に限られるため糖尿病性より下位に
+        "Senile Cataracts": "common",
         "Sand Bath Dermatitis": "very_common",
         # 下痢主訴: 非特異性下痢が主で、E. coli単独腸炎の確定例は少数
         "Diarrhea (Non-specific)": "common",
@@ -1548,7 +1552,9 @@ SPECIES_PREVALENCE = {
         "Molar Spurs": "very_common",
         "Cataracts (Diabetic)": "very_common",
         "Dental Abscess": "common",
-        "Diabetic Cataracts": "common",
+        # 糖尿病性白内障の名称バリアントは全て very_common に整列（同一疾患）
+        "Diabetic Cataracts": "very_common",
+        "Degu Diabetes-Induced Cataracts": "very_common",
         "Diabetic Ketoacidosis": "common",
         "Fracture": "common",
         "Giardiasis": "common",
@@ -1562,7 +1568,7 @@ SPECIES_PREVALENCE = {
         "Cecal Impaction": "uncommon",
         "Fibrosarcoma": "uncommon",
         "Ovarian Cysts": "uncommon",
-        "Diabetes-Related Cataracts": "uncommon",
+        "Diabetes-Related Cataracts": "very_common",
         "Alzheimer's-like Disease": "rare",
         "Cognitive Dysfunction (Senile)": "rare",
     },

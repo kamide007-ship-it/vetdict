@@ -264,7 +264,20 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "corneal_cloudiness": ["corneal_opacity", "cloudy_eyes", "cloudy_eye", "cloudiness_in_eyes"],
     "redness_in_eyes": ["red_eyes", "conjunctivitis", "eye_redness"],
     "eye_discharge": ["ocular_discharge", "eye_secretion", "epiphora"],
-    "squinting": ["blepharospasm", "eye_squinting"],
+    "squinting": ["blepharospasm", "eye_squinting", "eye_pain", "eye_swelling"],
+    # 「顔をこする」: チンチラ/ハリネズミ等は native 保有。他種は掻痒へフォールバック
+    "pawing_at_face": ["face_rubbing", "pawing_at_eye", "pawing_at_mouth", "itching"],
+    # 「イボのようなもの」: ハムスターは wart_like_growths 保有。他種は腫瘤系へ
+    "wart_like_growths": ["skin_lump", "lumps", "lumps_and_bumps", "skin_masses", "skin_lesions"],
+    # 慢性産卵（鳥）: parakeet は excessive_egg_laying 保有、bird は chronic_egg_laying_signs
+    "excessive_egg_laying": ["chronic_egg_laying_signs"],
+    # 「発情が続く」: フェレット高エストロジェン血症は persistent_estrus、鳥は慢性産卵へ
+    "prolonged_estrus": [
+        "persistent_estrus",
+        "vulvar_swelling",
+        "excessive_egg_laying",
+        "chronic_egg_laying_signs",
+    ],
     "tearing": ["excessive_tearing", "epiphora", "eye_discharge"],
     "excessive_tearing": ["tearing", "epiphora", "eye_discharge"],
     "vision_loss": ["blindness", "cloudy_eye", "cloudy_eyes", "cataracts"],
