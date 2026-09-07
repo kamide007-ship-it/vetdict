@@ -3094,3 +3094,65 @@ class TestBatch56PropyleneGlycolAndManukaAliases:
 
         assert len(find_diseases_for_drug("silver_honey")) >= 20
         assert len(find_diseases_for_drug("propylene_glycol")) >= 5
+
+
+class TestBatch57PrednisoneIsotretinoinAndRetinolAlias:
+    """2026-09 audit (23rd sweep — first English-token sweep): prednisone was
+    prescribed by name in 18 disease entries and warned about inside the
+    formulary's own prednisolone entry while having no monograph; isotretinoin
+    is dosed in canine sebaceous adenitis / epitheliotropic lymphoma /
+    keratoacanthoma entries; 'Retinol' never reached vitamin_a_injectable."""
+
+    def test_prednisone_present_with_species_conversion_gates(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "prednisone")
+        # dog: usable, with both dose tiers
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is True
+        assert "0.5-1 mg/kg" in dog["dosage"] and "2 mg/kg" in dog["dosage"]
+        assert dog["dosage_ja"]
+        # cats and horses: conversion-failure gates (definitional facts)
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is False
+        assert "プレドニゾロン" in cat["dosage_ja"]
+        horse = d["species_info"]["horse"]
+        assert horse["safe"] is False
+        assert "Peroni" in horse["dosage"]
+        # NSAID combination stays flagged major
+        assert any(i.get("severity") == "major" and "NSAID" in i.get("drug", "") for i in d["drug_interactions"])
+
+    def test_isotretinoin_present_with_teratogen_handling_warning(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "isotretinoin")
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is True
+        assert "1-2 mg/kg" in dog["dosage"]
+        assert "シルマー" in dog["dosage_ja"]
+        # the class-defining safety fact: pregnant owners must not handle
+        assert "妊娠" in d["contraindications_ja"]
+        assert "teratogen" in d["contraindications"].lower()
+        # vitamin A combination flagged major (additive hypervitaminosis A)
+        assert any(i.get("severity") == "major" and "Vitamin A" in i.get("drug", "") for i in d["drug_interactions"])
+
+    def test_new_agents_resolve_in_text_matcher_without_shadowing(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = {
+            "Prednisone 2 mg/kg PO q24h": "prednisone",
+            "プレドニゾン 1 mg/kg PO": "prednisone",
+            "Isotretinoin 1-2 mg/kg PO q24h": "isotretinoin",
+            "イソトレチノイン 1 mg/kg": "isotretinoin",
+            "Retinol 5000 IU/kg": "vitamin_a_injectable",
+            "レチノール 5000 IU/kg IM": "vitamin_a_injectable",
+        }
+        for text, expected in cases.items():
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert expected in ids, (text, ids)
+        # prednisolone references must keep resolving to prednisolone, and the
+        # new prednisone entry must not appear for them (not a substring).
+        ids = [h["id"] for h in find_drugs_in_text("プレドニゾロン 1 mg/kg PO q24h")]
+        assert "prednisolone" in ids and "prednisone" not in ids, ids
+        ids = [h["id"] for h in find_drugs_in_text("Prednisolone 1 mg/kg PO q24h")]
+        assert "prednisolone" in ids and "prednisone" not in ids, ids

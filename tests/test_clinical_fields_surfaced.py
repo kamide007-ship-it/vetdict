@@ -646,3 +646,24 @@ def test_emergency_api_link_name_is_canonical_english_name():
                 linked += 1
                 assert ln in names, (p.get("id"), kd.get("name"), ln)
     assert linked >= 100  # 113 rows resolved as of round 26
+
+
+def test_app_js_chat_cards_surface_emergency_protocol_pivot():
+    """Round 24 UX: chat candidate cards (free chat + guided final results)
+    for emergency-class conditions (GDV, urethral obstruction, heat stroke…)
+    carry a one-tap link to the matching 緊急対応 protocol — the checker
+    results and DB detail already had this pivot; chat was the one surface
+    where a minute-level emergency could rank #1 with no direct route."""
+    # helper exists and consults the species-gated map
+    assert "function _chatEmergencyLink(" in APP_JS
+    helper = APP_JS.split("function _chatEmergencyLink(")[1].split("\nfunction ")[0]
+    assert "_emergencyProtoForDisease" in helper
+    assert "emergency-nav-link" in helper
+    # both chat renderers call it (free chat uses c.*, guided uses d.*)
+    assert "_chatEmergencyLink(c.name_en,c.name_ja," in APP_JS
+    assert "_chatEmergencyLink(d.name,d.name_ja," in APP_JS
+    # the chat delegated handler routes the link through the exact-landing
+    # protocol navigator (works after innerHTML resets too)
+    handler = APP_JS.split("function _attachChatNavHandlers(")[1].split("\nfunction ")[0]
+    assert 'closest(".emergency-nav-link")' in handler
+    assert "navigateToEmergencyProtocol(" in handler

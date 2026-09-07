@@ -1661,6 +1661,7 @@ class TestQuickTapPhraseExtraction:
             "砂浴びしない",
             "耳が赤くて呼吸が速い",
             "毛をかじって短くなっている",
+            "目が濡れて顔をこする",
         ],
         "hamster": [
             "下痢",
@@ -1670,6 +1671,7 @@ class TestQuickTapPhraseExtraction:
             "お腹が膨れている",
             "食べない",
             "頬袋が膨らんだまま戻らない",
+            "腰に黒いイボのようなもの",
         ],
         "guinea_pig": ["食べない", "鼻水", "足を引きずる", "脱毛", "下痢", "くしゃみ", "関節が腫れる"],
         "ferret": [
@@ -1696,6 +1698,7 @@ class TestQuickTapPhraseExtraction:
             "自分で羽を抜く",
             "脚に白いかさぶた",
             "急に飛べなくなって翼が下がっている",
+            "発情が続いて産卵が止まらない",
         ],
         "parakeet": [
             "食べない",
@@ -4449,3 +4452,126 @@ class TestChatClinicalAccuracyAuditRound23:
         ex2 = _extract_species_symptoms("食べない お腹が張っている", "rabbit")
         top = _match_species_symptoms_to_diseases(ex2, "rabbit")[0]
         assert "うっ滞" in (top.get("name_ja") or ""), top
+
+
+class TestChatClinicalAccuracyAuditRound24:
+    """2026-09 audit round 24: fresh 26-case chief-complaint sweep. Root
+    causes were conjugation gaps on existing aliases (おしっこが赤い,
+    目が開かなくなった, 目が飛び出して plain て-form, 口が閉まらない), four
+    owner vocabularies with no aliases at all (chronic egg laying, wart-like
+    skin growths, watery eye + face pawing, toe swelling), missing ID-synonym
+    chains for the new targets outside their native species, and degu senile
+    cataracts tiered above the diabetic variants (degu cataracts are
+    overwhelmingly diabetic — Quesenberry & Carpenter 4th ed)."""
+
+    def test_dog_hematuria_pollakiuria_ranks_cystitis_family(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("おしっこの色が赤い 何度もトイレに行く")
+        assert "blood_in_urine" in ex and "frequent_urination" in ex, ex
+        ids = [m["disease_id"] for m in match_symptoms_to_diseases(ex)[:2]]
+        assert "urinary_tract_infection" in ids or "urinary_stones" in ids, ids
+
+    def test_cat_acute_blepharospasm_extracts_squinting(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("急に片目が開かなくなった 目やに", "cat")
+        assert "squinting" in ex and "eye_discharge" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "cat")[:5]]
+        assert any("結膜炎" in n or "角膜" in n for n in names), names
+
+    def test_rabbit_exophthalmos_plain_te_form_ranks_retrobulbar_abscess(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("目が飛び出して奥歯が伸びている", "rabbit")
+        assert "exophthalmos" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "rabbit")[:4]]
+        assert any("球後膿瘍" in n or "眼球突出" in n for n in names), names
+
+    def test_hamster_wart_like_growth_extracts_and_ranks_skin_mass(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("腰のあたりに黒いイボのようなものがある", "hamster")
+        assert "wart_like_growths" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "hamster")[:3]]
+        assert any("腫" in n or "パピローマ" in n for n in names), names
+
+    def test_bird_chronic_egg_laying_complaint_resolves(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        for sp in ("bird", "parakeet"):
+            ex = _extract_species_symptoms("発情が続いて産卵が止まらない", sp)
+            assert "excessive_egg_laying" in ex, (sp, ex)
+            names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, sp)[:3]]
+            assert any("産卵" in n or "卵巣" in n for n in names), (sp, names)
+
+    def test_ferret_persistent_estrus_resolves_via_chain(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("発情が続いて外陰部が腫れている", "ferret")
+        assert "persistent_estrus" in ex and "vulvar_swelling" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "ferret")[:8]]
+        assert any("卵巣遺残" in n for n in names), names
+        assert any("副腎" in n or "エストロゲン" in n for n in names), names
+
+    def test_chinchilla_epiphora_face_pawing_ranks_dental_in_top(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("目が濡れていて前足で顔をこする", "chinchilla")
+        assert "eye_discharge" in ex and "pawing_at_face" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "chinchilla")[:5]]
+        assert any("歯" in n for n in names), names
+
+    def test_bird_toe_swelling_ranks_bumblefoot_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("足の指が赤く腫れてびっこをひく", "bird")
+        assert "foot_lesions" in ex or "foot_sores" in ex, ex
+        top = _match_species_symptoms_to_diseases(ex, "bird")[0]
+        assert "趾瘤" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_lizard_jaw_wont_close_ranks_mouth_rot(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("口が閉まらない あごが腫れている", "lizard")
+        assert "mouth_lesions" in ex, ex
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "lizard")[:3]]
+        assert any("口内炎" in n or "歯周病" in n for n in names), names
+
+    def test_dog_interdigital_moisture_ranks_dermatology(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ex = extract_symptoms_from_text("散歩の後に足を舐め続ける 肉球の間が湿っている")
+        assert "itching" in ex and "excessive_licking" in ex, ex
+        names = [m.get("name_ja") or "" for m in match_symptoms_to_diseases(ex)[:4]]
+        assert any("アトピー" in n or "皮膚炎" in n for n in names), names
+
+    def test_degu_diabetic_cataract_variants_tiered_very_common(self):
+        """All diabetic-cataract name variants share one tier; senile sits
+        below them (degu cataracts are overwhelmingly diabetic)."""
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        degu = SPECIES_PREVALENCE["degu"]
+        for key in (
+            "Diabetic Cataracts",
+            "Cataracts (Diabetic)",
+            "Diabetes-Related Cataracts",
+            "Degu Diabetes-Induced Cataracts",
+        ):
+            assert degu.get(key) == "very_common", (key, degu.get(key))
+        assert degu.get("Senile Cataracts") == "common"
+        # diabetic variant must sit inside the top-2 on the cloudy-eye complaint
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ex = _extract_species_symptoms("若いのに目が白く濁ってきた", "degu")
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "degu")[:2]]
+        assert any("糖尿病" in n for n in names), names

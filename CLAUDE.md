@@ -4842,3 +4842,73 @@ MgSO4×18 + MgO×19 + マグネシウム補充×4 が魚用薬浴エントリ「
 ### テスト・CI
 - フルテストスイート合格、ruff check/format clean
 - 変更は Pythonデータ+JSON+テストのみ（静的アセット不変のため ServiceWorker 据え置き）
+
+## 2026-09セッション（第40弾: プレドニゾン/イソトレチノイン補完 + チャット精度第24弾 + チャット候補カード→緊急対応プロトコル動線）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,242件合格**（34 skip）
+- 配信SQLiteクリーンビルド: 6,893疾患、主要臨床フィールド（治療/病因/予後/予防/説明/病態）の空欄 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（622薬品時点、全species_info検証）、文字列型相互作用スキーマ **0**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 片仮名トークンスイープ（用量文脈）: 実フレーズ全解決 — マッチャー飽和を再確認
+
+### referenced-but-absent 薬品2剤の補完（`drug_batch_57.py` 新規、622→624薬品 — 初の英語トークンスイープ）
+第23回スイープとして**英語薬品様トークン**（-in/-ol/-one等の接尾辞 × 用量文脈）を初めて掃引し、
+片仮名スイープでは見えなかった2つの真の欠落を検出:
+- **プレドニゾン** — 18疾患エントリが用量付き参照し、**自辞書のプレドニゾロンentryが「猫は変換不良」と
+  警告するのに本体未収載**だった自己参照ギャップ（ネオスチグミン/アスピリン/プロタミンと同型）。
+  犬=プレドニゾロンと同等使用可（抗炎症0.5-1・免疫抑制2 mg/kg/日、大型犬はm²換算）、
+  **猫=safe:False**（経口プレドニゾンからの血中プレドニゾロンが著しく低い — Graham-Mize & Rosser
+  Vet Dermatol 2004。毒性ではなく治療失敗ゲート）、**馬=safe:False**（経口吸収/変換不良でRAO臨床試験
+  でも無効 — Peroni EVJ 2002。プレドニゾロン/デキサメタゾンを使用）。NSAIDs併用=major
+- **イソトレチノイン** — 犬脂腺炎（重度1-2 mg/kg PO q24h — White JAVMA 1995）・上皮向性リンパ腫の
+  レチノイド補助・多発性ケラトアカントーマが用量付き参照する合成レチノイドが皆無だった。
+  シルマー値/TG/肝酵素モニタリング、**妊娠中の飼い主の破損カプセル取り扱い警告**（ヒトiPLEDGE級
+  催奇形物質）、ビタミンA併用=major を明記
+- **レチノール別名**: 「Retinol 5000 IU/kg」「レチノール」が既収載 vitamin_a_injectable に不達だった
+  → `_KATAKANA_VARIANT_ALIASES` で解決
+- 動線検証: 逆引き「この薬品を使う疾患」= prednisone **50疾患**/isotretinoin 7疾患、
+  プレドニゾロンとの相互シャドウイング無し（部分文字列非衝突を回帰テストで固定）
+
+### 診断チャット精度 第24弾（26症例フレッシュスイープ 10 MISS → 全症例合格）
+- **抽出ゼロだった飼い主語彙4系統を新設**:
+  - 鳥の慢性産卵「発情が続いて産卵が止まらない」→ excessive_egg_laying（+ chronic_egg_laying_signs
+    チェーン、フェレットは 発情が続い→prolonged_estrus→persistent_estrus で高エストロジェン血症に接続）
+  - ハムスター皮膚腫瘤「黒いイボのようなもの」→ wart_like_growths（+ skin_lump/lumps チェーン）
+  - チンチラ流涙・歯科「目が濡れていて前足で顔をこする」→ eye_discharge + pawing_at_face
+    （+ face_rubbing/itching チェーン）→ 結膜炎/角膜潰瘍/臼歯スパー/歯根膿瘍が上位
+  - 鳥趾瘤「足の指が赤く腫れて」→ foot_sores → 趾瘤症（バンブルフット）rank 1
+- **変化形ギャップ**: おしっこの色が赤い→blood_in_urine（血尿+頻尿で膀胱炎/尿石症がtop2 —
+  従来は糖尿病/CKDに誤誘導）、目が開かなくなった→squinting（猫の急性眼瞼痙攣で結膜炎/角膜系が上位、
+  squinting→eye_pain/eye_swellingチェーンで爬虫類も安全）、目が飛び出して（素のて形）→eye_bulging
+  （ウサギ球後膿瘍+切歯過長の古典像が解決）、口が閉まらない→mouth_lesions（トカゲのマウスロット）、
+  肉球の間が湿って/赤い→itching（趾間皮膚炎ddx）
+- **デグー白内障の tier 整列**: 老年性=very_common が糖尿病性(common)を上回っていた —
+  デグーの白内障は圧倒的に糖尿病性（若齢でも週単位で進行、Quesenberry & Carpenter 4th ed）
+  → 糖尿病性の名称バリアント4件を very_common に整列・老年性を common に降格
+- **horse EOTRH prevalence キー**: 裸の頭字語キーが第6弾の重複統合後の配信名
+  （正式名エントリが生存）と不一致 → 正式名にリネームして prior を活性化
+
+### UX: チャット候補カード→緊急対応プロトコルのワンタップ動線（新規）
+- チェッカー結果・疾患DB詳細には緊急対応プロトコルへのピボットがあるが、**チャット
+  （自由入力・問診最終結果）だけは GDV や尿道閉塞が rank 1 に出ても直接導線が無かった**
+- `_chatEmergencyLink()` 新設: DISEASE_EMERGENCY_MAP（種ゲート付き）に解決する候補カードにのみ
+  「🚨 緊急対応プロトコルを開く」を表示（dead end ゼロ設計）。自由チャット（c.name_en/name_ja ×
+  chatSpecies）と問診最終結果（d.name/name_ja × guidedState.species）の両レンダラーに配線、
+  委譲ハンドラ `_attachChatNavHandlers` で `navigateToEmergencyProtocol`（完全一致着地+自動展開）へ。
+  GA4 `emergency_from_chat`
+- クイック入力に検証済み新主訴3件を追加: 鳥「発情が続いて産卵が止まらない」・
+  チンチラ「目が濡れて顔をこする」・ハムスター「腰に黒いイボのようなもの」（ミラーテスト同期）
+
+### 回帰テスト（+15件）
+- `TestChatClinicalAccuracyAuditRound24`（11件 — 血尿+頻尿/猫眼瞼痙攣/ウサギ球後膿瘍/ハムスター腫瘤/
+  鳥・インコ慢性産卵/フェレット発情持続チェーン/チンチラ歯科/鳥趾瘤rank1/トカゲ開口不能/
+  犬趾間掻痒/デグー糖尿病性白内障tier+top2）
+- `TestBatch57PrednisoneIsotretinoinAndRetinolAlias`（3件 — 種別変換ゲート・催奇形警告・
+  マッチャー解決とプレドニゾロン非シャドウイング）
+- `test_app_js_chat_cards_surface_emergency_protocol_pivot`（チャット緊急ピボットの配線）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 566/cat 544/horse 360薬品、pendingStats drugs 622→**624**
+- ServiceWorker: `CACHE_NAME` v148 → **v149**
+- 再現手順: `migrate_to_sqlite.py`（クリーンビルド 6,893疾患）— 疾患名不変のため検索インデックス no-op

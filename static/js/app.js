@@ -1664,9 +1664,9 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:564,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:543,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:359,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:566,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:544,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:360,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:260,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:71,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1689,7 +1689,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6450,
     species:21,
-    drugs:622,
+    drugs:624,
     symptoms:79,
     protocols:188
   };
@@ -2069,12 +2069,12 @@ function resetSpeciesChat(species){
     cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる"],
     rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている"],
-    chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている"],
-    hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない"],
+    chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている","目が濡れて顔をこする"],
+    hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない","腰に黒いイボのようなもの"],
     guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ","関節が腫れる"],
     ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない","陰部が腫れている","足を伸ばして硬直する","口を前足で掻いてよだれ","便に血が混じる","お腹を触るとしこりがある"],
     hedgehog:["針が抜ける","フケ","ふらつく","食べない","目が出ている","体重が減った"],
-    bird:["羽を膨らませている","食べない","下痢","鼻水","羽が抜ける","くしゃみ","自分で羽を抜く","脚に白いかさぶた","急に飛べなくなって翼が下がっている"],
+    bird:["羽を膨らませている","食べない","下痢","鼻水","羽が抜ける","くしゃみ","自分で羽を抜く","脚に白いかさぶた","急に飛べなくなって翼が下がっている","発情が続いて産卵が止まらない"],
     parakeet:["食べない","膨らんでいる","呼吸のたびに音がする","吐き戻しが増えた","そのうが膨らんでいる","お尻でいきんでいる"],
     parrot:["食べない","自分で羽を抜く","くしゃみ","下痢","元気がない","吐き戻しが増えた"],
     reptile:["食べない","口をあけたまま呼吸","鼻水が出る","脱皮がうまくできない","目が開かない","痩せてきた"],
@@ -4213,6 +4213,18 @@ function renderEmergencyCrossLink(d){
   const label=currentLang==="ja"?"🚨 この疾患の緊急対応プロトコルを開く":"🚨 Open the emergency protocol for this condition";
   return `<div style="margin-top:8px"><a href="#emergency" class="emergency-nav-link" data-proto="${escapeHtml(proto)}" style="font-size:.8rem;color:#dc2626;font-weight:700;text-decoration:none">${label} →</a></div>`;
 }
+/* Chat candidate cards (free chat + guided final results): when a ranked
+   disease is an emergency-class condition (GDV, urethral obstruction, heat
+   stroke…), surface a one-tap link to the matching 緊急対応 protocol. The
+   checker results and DB detail already have this pivot; chat was the one
+   surface where a minute-level emergency ranked #1 with no direct route. */
+function _chatEmergencyLink(nameEn,nameJa,sp){
+  if(typeof _emergencyProtoForDisease!=="function")return"";
+  const proto=_emergencyProtoForDisease({name:nameEn||"",name_ja:nameJa||""},sp||"dog");
+  if(!proto)return"";
+  const label=currentLang==="ja"?"🚨 緊急対応プロトコルを開く":"🚨 Open emergency protocol";
+  return `<div class="chat-disease-nav"><a href="#emergency" class="emergency-nav-link" data-proto="${escapeHtml(proto)}" style="color:#dc2626;font-weight:700">${label} →</a></div>`;
+}
 /* Reverse of DISEASE_EMERGENCY_MAP: each emergency protocol links back to the
    full disease-DB entry (pathophysiology, complete treatment, related drugs,
    and from there the 鑑別チェック / anesthesia pivots). Names are exact served
@@ -5418,6 +5430,7 @@ function renderChatResult(container,data){
         ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">${currentLang==="ja"?"\u4e00\u81f4: ":"Matched: "}${escapeHtml(c.matched_symptoms.map(sid=>{const f=(symptoms||[]).find(s=>s&&s.id===sid);return f?(currentLang==="ja"?(f.name_ja||f.name_en||sid):(f.name_en||f.name_ja||sid)):sid;}).join(", "))}</div>`:""}
         ${c.mentioned_drugs&&c.mentioned_drugs.length?renderMentionedDrugs(c):""}
         <div class="chat-disease-nav"><button type="button" class="chat-disease-open" data-name="${escapeHtml(c.name_en||c.name_ja||c.disease_id||"")}" data-species="${escapeHtml(chatSpecies||currentSpecies||"dog")}">\u{1F50D} ${currentLang==="ja"?"\u75be\u60a3DB\u3067\u8a73\u7d30\u3092\u958b\u304f":"Open in disease DB"} \u2192</button></div>
+        ${_chatEmergencyLink(c.name_en,c.name_ja,chatSpecies||currentSpecies||"dog")}
       `;
       listDiv.appendChild(card);
     });
@@ -6072,6 +6085,7 @@ function guidedRenderFinalResults(data){
         ${desc?`<div class="chat-disease-desc">${desc}</div>`:""}
         ${matched?`<div class="chat-disease-matched">${currentLang==="ja"?"一致: ":"Matched: "}${matched}</div>`:""}
         <div class="chat-disease-nav"><button type="button" class="chat-disease-open" data-name="${escapeHtml(d.name||d.name_ja||"")}" data-species="${escapeHtml(guidedState.species||currentSpecies||"dog")}">\u{1F50D} ${currentLang==="ja"?"疾患DBで詳細を開く":"Open in disease DB"} →</button></div>
+        ${_chatEmergencyLink(d.name,d.name_ja,guidedState.species||currentSpecies||"dog")}
       </div>`;
     });
     html+='</div>';
@@ -7923,6 +7937,9 @@ function _attachChatNavHandlers(container){
   container.addEventListener("click",function(e){
     const drugLink=e.target.closest(".drug-nav-link");
     if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
+    /* Emergency-class candidate → open the matching 緊急対応 protocol. */
+    const emLink=e.target.closest(".emergency-nav-link");
+    if(emLink){e.preventDefault();trackEvent("emergency_from_chat",{proto:emLink.dataset.proto||""});navigateToEmergencyProtocol(emLink.dataset.proto);return;}
     const openBtn=e.target.closest(".chat-disease-open");
     if(openBtn){
       e.preventDefault();
