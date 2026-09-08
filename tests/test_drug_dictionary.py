@@ -3234,8 +3234,6 @@ class TestBatch58TetanusAntitoxinFlucytosineAndEnAliases:
         from api.drug_interactions import find_interactions
 
         pairs = find_interactions(["flucytosine", "amphotericin_b"])
-        assert any(
-            {p["drug_a"], p["drug_b"]} == {"flucytosine", "amphotericin_b"} for p in pairs
-        ), pairs
+        assert any({p["drug_a"], p["drug_b"]} == {"flucytosine", "amphotericin_b"} for p in pairs), pairs
         pairs2 = find_interactions(["flucytosine", "cytarabine"])
         assert any({p["drug_a"], p["drug_b"]} == {"flucytosine", "cytarabine"} for p in pairs2), pairs2
