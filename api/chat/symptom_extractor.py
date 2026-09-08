@@ -507,8 +507,12 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "leg_scales": ["scaly_legs", "scaly_face"],
     # Pain
     "pain": ["lethargy", "vocalization"],
-    # Oral
-    "stomatitis": ["oral_ulcers", "bad_breath", "excessive_drooling"],
+    # Oral — mouth_lesions/mucus_in_mouth appended so the caseous-exudate
+    # aliases (チーズ状→stomatitis) still resolve in species whose vocabulary
+    # spells the oral finding differently (2026-09 第25弾).
+    "stomatitis": ["oral_ulcers", "bad_breath", "excessive_drooling", "mouth_lesions", "mucus_in_mouth"],
+    # チンチラ等の耳介下垂 — 中耳炎/外耳炎の随伴所見（2026-09 第25弾）
+    "ear_drooping": ["head_tilt", "head_shaking", "ear_discharge"],
     # Perianal
     "perineal_swelling": ["perianal_irritation", "swelling"],
     # Guinea pig scurvy

@@ -1142,6 +1142,29 @@ INTERACTIONS: list[dict[str, Any]] = [
         "management_ja": "厳重監視。ヘパリン減量。出血に注意。",
         "ref": "Plumb's 9th ed.",
     },
+    # ====== フルシトシン（batch 58）======
+    {
+        "drug_a": "flucytosine",
+        "drug_b": "amphotericin_b",
+        "severity": SEVERITY_MODERATE,
+        "mechanism": "アムホテリシン腎毒性によるフルシトシン蓄積",
+        "effect_en": "Intended synergistic combination for cryptococcosis, but amphotericin nephrotoxicity reduces flucytosine clearance and raises myelotoxicity.",
+        "effect_ja": "クリプトコッカス症で意図されたシナジー併用だが、アムホテリシンの腎毒性でフルシトシンのクリアランスが低下し骨髄毒性が増強する。",
+        "management_en": "Monitor renal values and CBC; reduce flucytosine dose with azotemia. Do not abandon the combination (monotherapy breeds resistance).",
+        "management_ja": "腎数値とCBCを監視し、高窒素血症ではフルシトシンを減量。併用自体は維持する（単剤は耐性化）。",
+        "ref": "Greene 4th ed.; Sykes",
+    },
+    {
+        "drug_a": "flucytosine",
+        "drug_b": "cytarabine",
+        "severity": SEVERITY_MODERATE,
+        "mechanism": "抗真菌活性の競合的拮抗",
+        "effect_en": "Cytarabine antagonises the antifungal activity of flucytosine.",
+        "effect_ja": "シタラビンがフルシトシンの抗真菌活性を拮抗する。",
+        "management_en": "Avoid concurrent use; separate therapy phases if both are indicated.",
+        "management_ja": "併用を避ける。両方が必要な場合は治療フェーズを分ける。",
+        "ref": "Plumb's 10th ed.",
+    },
 ]
 
 

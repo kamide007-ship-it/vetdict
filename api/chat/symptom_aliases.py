@@ -590,6 +590,10 @@ SYMPTOM_ALIASES = {
     "お尻を引きずって歩く": "scooting",
     "おしり歩き": "scooting",
     "お尻歩き": "scooting",
+    # 2026-09 第25弾: 肛門部を舐め続ける主訴（肛門嚢疾患/条虫の代表的表現）
+    "お尻を舐め": "scooting",
+    "おしりを舐め": "scooting",
+    "肛門を舐め": "scooting",
     "スクーティング": "scooting",
     # 起立困難 — 変形性関節症・神経疾患の古典的主訴
     "立ち上がりにくい": "difficulty_standing",
@@ -1289,6 +1293,10 @@ SYMPTOM_ALIASES = {
     "お腹が膨れている": "abdominal_distension",
     "糞が出ない": "reduced_fecal_output",
     "便が出ない": "reduced_fecal_output",
+    # 2026-09 第25弾: 進行形の言い回し（「出ない」キーは「出ていない」に不一致）
+    "便が出ていない": "reduced_fecal_output",
+    "便が出てない": "reduced_fecal_output",
+    "糞が出ていない": "reduced_fecal_output",
     "痙攣している": "seizures",
     # ---------------------------------------------------------------
     # 両生類用エイリアス (Amphibian-specific aliases) — 重複なし
@@ -1738,6 +1746,14 @@ SYMPTOM_ALIASES = {
     # 鳥: 「羽を膨らませて」（てる/ている/動かない等の続きに関わらず一致する前方形）
     "羽を膨らませて": "fluffed_feathers",
     "羽がふくらんでいる": "fluffed_feathers",
+    # 2026-09 第25弾: かな表記（「羽をふくらませて…」が抽出ゼロだった）
+    "羽をふくらませて": "fluffed_feathers",
+    "羽をふくらませる": "fluffed_feathers",
+    # チンチラ等の耳介下垂 — 外耳炎/中耳炎の随伴所見。ear_drooping は
+    # _ID_SYNONYMS で head_tilt/head_shaking/ear_discharge へフォールバック
+    "耳が垂れて": "ear_drooping",
+    "耳が垂れている": "ear_drooping",
+    "片耳が垂れ": "ear_drooping",
     # 猫 尿道閉塞: 排尿時の啼鳴
     "おしっこの時に鳴く": "vocalization_changes",
     "鳴き続ける": "vocalization_changes",
@@ -1771,15 +1787,18 @@ SYMPTOM_ALIASES = {
     "口の周りに膿": "oral_discharge",
     "口から膿": "oral_discharge",
     # 口腔内のチーズ状（乾酪様）滲出物 — 爬虫類マウスロットの教科書的所見。
-    # mucus_in_mouth は爬虫類系の語彙にのみ存在するため、他種では抽出段階で
-    # 自動的に落ちる（誤爆しない）。
-    "口の中にチーズ状": "mucus_in_mouth",
-    "口の周りにチーズ状": "mucus_in_mouth",
-    "口にチーズ状": "mucus_in_mouth",
-    "口内にチーズ状": "mucus_in_mouth",
-    "チーズ状の膿": "mucus_in_mouth",
-    "チーズ様物質": "mucus_in_mouth",
-    "乾酪様物質": "mucus_in_mouth",
+    # 2026-09 第25弾: mucus_in_mouth（口腔粘液は肺炎の泡沫とも共有される
+    # 非特異ID）から stomatitis（乾酪様滲出物の実体）へ是正 — 単独入力
+    # 「口の中に白いチーズ状のもの」で細菌性肺炎がマウスロットを上回っていた。
+    # stomatitis は爬虫類系4種すべての語彙に実在し、他種は _ID_SYNONYMS の
+    # チェーン（oral_ulcers→…→mucus_in_mouth）で安全にフォールバックする。
+    "口の中にチーズ状": "stomatitis",
+    "口の周りにチーズ状": "stomatitis",
+    "口にチーズ状": "stomatitis",
+    "口内にチーズ状": "stomatitis",
+    "チーズ状の膿": "stomatitis",
+    "チーズ様物質": "stomatitis",
+    "乾酪様物質": "stomatitis",
     # --- 2026-08 第8回精度スイープで検出した抽出漏れ ---
     # 犬: 運動不耐（心疾患の飼い主表現）
     "座り込む": "exercise_intolerance",
@@ -2172,7 +2191,7 @@ SYMPTOM_ALIASES = {
     "プツプツ音": "clicking_breathing_sounds",
     # 爬虫類マウスロット: 「口の中にチーズ状」のみで「チーズ状のもの」
     # 「口の中が赤く（連用形）」が欠落
-    "チーズ状のもの": "mucus_in_mouth",
+    "チーズ状のもの": "stomatitis",  # 2026-09 第25弾: 乾酪様滲出物=マウスロット実体へ是正
     "口の中が赤く": "stomatitis",
     # 代謝性骨疾患（フクロモモンガNSHP等）: 「骨が柔らかい」のみで
     # 「骨が弱い/もろい」が欠落

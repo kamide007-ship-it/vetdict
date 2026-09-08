@@ -831,6 +831,9 @@ SPECIES_PREVALENCE = {
         "Ingluvitis (Crop Infection)": "very_common",
         "Crop Stasis (Crop Slowdown)": "very_common",
         "E. coli Infection (Colibacillosis)": "very_common",
+        # 2026-09 第25弾: 括弧なしの重複エントリを同tierに整列（PU/PD主訴で
+        # 未tierのままカバレッジ勝ちして腎不全を抑圧していた）
+        "E. coli Infection": "very_common",
         "Dermatitis": "very_common",
         # common
         "Psittacine Beak and Feather Disease (PBFD)": "common",
@@ -940,6 +943,12 @@ SPECIES_PREVALENCE = {
         # Documented but uncommon in pet birds (Pilny 2008); tiering keeps the
         # PU/PD differential honest alongside renal failure.
         "Diabetes Mellitus": "uncommon",
+        # 2026-09 第25弾: 未tierの日和見/家禽病原体が「多飲+水様便」で腎不全
+        # (common) を押しのけていた。シトロバクターは日和見グラム陰性菌で
+        # 大腸菌より頻度が低く（Ritchie & Harrison）、鳥コロナウイルス（IBV系）
+        # は家禽の疾患で伴侶鳥では実質不在。
+        "Citrobacter Infection": "uncommon",
+        "Avian Coronavirus Infection": "rare",
         "Salmonellosis": "uncommon",
         "Squamous Cell Carcinoma": "uncommon",
         "Lipoma": "uncommon",
@@ -1690,6 +1699,12 @@ SPECIES_PREVALENCE = {
         "Copper Poisoning": "rare",
         "Teflon (PTFE) Toxicosis": "rare",
         "Teflon Toxicosis (Parakeet)": "rare",
+        # 2026-09 第25弾: 同一クローン症状セット（7所見バイト一致）の合成
+        # 生殖器ペアが未tierのままシックバード三徴でオウム病を押しのけていた。
+        # 先天異常は定義的に稀、合成の炎症性疾患エントリは個別tier済みの
+        # 卵管炎（Salpingitis）より下に置く
+        "Reproductive Congenital Anomaly": "rare",
+        "Reproductive Inflammatory Disease": "uncommon",
         # モジュールに Egg Yolk Peritonitis（tier済み）と Egg Peritonitis の
         # 同一疾患2エントリが併存 — 未tier側が上位に出る自己重複逆転の是正
         "Egg Peritonitis": "common",
@@ -1753,6 +1768,11 @@ SPECIES_PREVALENCE = {
         "Heat Stroke (Hyperthermia)": "uncommon",  # 飼育環境事故に限定
         "Cryptosporidiosis": "uncommon",  # オウム類では報告が限定的
         "Haemoproteus Infection": "uncommon",
+        # 2026-09 第25弾: 未tierのクローン症状セット（fluffed+lethargy）が
+        # シックバード三徴でオウム病(very_common)を押しのけていた
+        "Hypothermia": "uncommon",  # 飼育環境事故に限定（Heat Strokeと同基準）
+        "Valvular Heart Disease": "uncommon",  # オウム類の心疾患は動脈硬化が主（Beaufrère）
+        "Rodenticide Poisoning": "rare",  # 曝露歴依存（bird のPTFE/アボカドと同基準）
         "Psittacosis (Chlamydiosis)": "very_common",
         "Aspergillosis": "very_common",
         "Chronic Respiratory Disease": "very_common",

@@ -53,6 +53,9 @@ _KNOWN_ALIAS_MISMATCHES = {
     # Bridged via _LEGACY_FALLBACK (vomiting) and ID_SYNONYMS (vomiting/retching);
     # no species module carries a dedicated nausea ID — grass-eating proxy.
     "nausea",
+    # Bridged via ID_SYNONYMS (head_tilt/head_shaking/ear_discharge); no species
+    # module carries a dedicated ear-droop ID (chinchilla otitis presentation).
+    "ear_drooping",
 }
 
 
@@ -1626,6 +1629,7 @@ class TestQuickTapPhraseExtraction:
             "耳の先にかさぶたができて治らない",
             "急に後ろ足が動かなくなった",
             "水を飲む量が増えて痩せてきた",
+            "お尻を舐めてばかりいる",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -1662,6 +1666,7 @@ class TestQuickTapPhraseExtraction:
             "耳が赤くて呼吸が速い",
             "毛をかじって短くなっている",
             "目が濡れて顔をこする",
+            "耳が垂れて耳から臭い",
         ],
         "hamster": [
             "下痢",
@@ -2086,7 +2091,9 @@ class TestChatClinicalAccuracyAuditRound4:
         from api.chat.symptom_extractor import _extract_species_symptoms
 
         syms = _extract_species_symptoms("口の周りにチーズ状のもの 口が閉じない", "snake")
-        assert "mucus_in_mouth" in syms, "チーズ状 (caseous exudate) must map to mucus_in_mouth"
+        # 2026-09 第25弾: 乾酪様滲出物はマウスロットの実体である stomatitis へ
+        # 直接解決（旧 mucus_in_mouth は肺炎の泡沫とも共有される非特異ID）
+        assert "stomatitis" in syms, "チーズ状 (caseous exudate) must map to stomatitis"
         top = _match_species_symptoms_to_diseases(syms, "snake")
         assert top and "口内炎" in (top[0].get("name_ja") or ""), (
             f"infectious stomatitis must rank first, got {[m.get('name_ja') for m in top[:3]]}"
@@ -3443,7 +3450,8 @@ class TestChatClinicalAccuracyAuditRound15:
         from api.chat.symptom_extractor import _extract_species_symptoms
 
         ids = _extract_species_symptoms("口の中が赤くチーズ状のものがある", "snake")
-        assert "stomatitis" in ids and "mucus_in_mouth" in ids, ids
+        # 2026-09 第25弾: 両フレーズとも stomatitis に解決（乾酪様滲出物の実体）
+        assert "stomatitis" in ids, ids
         top = _match_species_symptoms_to_diseases(ids, "snake")[0]
         assert "口内炎" in (top.get("name_ja") or ""), top.get("name_ja")
 
@@ -4575,3 +4583,92 @@ class TestChatClinicalAccuracyAuditRound24:
         ex = _extract_species_symptoms("若いのに目が白く濁ってきた", "degu")
         names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ex, "degu")[:2]]
         assert any("糖尿病" in n for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound25:
+    """2026-09 audit round 25: fresh 22-case sweep. Root causes were an
+    unextracted ear-droop complaint (chinchilla otitis), progressive-form
+    「便が出ていない」, an unaliased anal-licking complaint, the caseous-exudate
+    aliases resolving to the nonspecific mucus_in_mouth instead of stomatitis,
+    a kana 「羽をふくらませて」 variant, a missing green-droppings _SYN bridge
+    (parrot psittacosis lists lime_green_droppings), and untiered clone
+    entries (bird E.coli duplicate pair, Citrobacter, avian coronavirus,
+    parrot hypothermia/valvular/rodenticide, parakeet synthetic repro pair)."""
+
+    def test_chinchilla_ear_droop_and_odor_ranks_otitis_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("耳が垂れて元気がない 耳から臭い", "chinchilla")
+        assert "ear_discharge" in ids and "head_tilt" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "chinchilla")[:2]]
+        assert any("耳炎" in n for n in names), names
+
+    def test_cat_hairball_with_progressive_constipation_form(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("毛玉を何度も吐く 便が出ていない", "cat")
+        assert "vomiting" in ids and "constipation" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "cat")[:4]]
+        assert any("毛球" in n for n in names), names
+        assert any(("便秘" in n) or ("巨大結腸" in n) for n in names), names
+
+    def test_cat_anal_licking_extracts_scooting_and_ranks_perianal_ddx(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("お尻を舐めてばかりいる 便に血が混じる", "cat")
+        assert "scooting" in ids and "bloody_stool" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "cat")[:4]]
+        assert any(("条虫" in n) or ("肛門" in n) for n in names), names
+
+    def test_snake_single_caseous_exudate_ranks_mouth_rot_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("口の中に白いチーズ状のものがある", "snake")
+        assert "stomatitis" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "snake")[0]
+        assert "口内炎" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_parrot_sick_bird_triad_kana_fluffed_ranks_psittacosis(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        msg = "羽をふくらませて止まり木の下でじっとしている 便が緑色"
+        ids = _extract_species_symptoms(msg, "parrot")
+        assert "fluffed_feathers" in ids and "diarrhea_green" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "parrot")[0]
+        assert "オウム病" in (top.get("name_ja") or ""), top.get("name_ja")
+        # parakeet: psittacosis must stay in the top-3 despite the synthetic
+        # reproductive clone pair (now tiered rare/uncommon)
+        ids_pk = _extract_species_symptoms(msg, "parakeet")
+        names_pk = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids_pk, "parakeet")[:3]]
+        assert any("オウム病" in n for n in names_pk), names_pk
+
+    def test_bird_untier_clone_tiers_aligned(self):
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        bird = SPECIES_PREVALENCE["bird"]
+        # duplicate-pair alignment (plain variant was untiered)
+        assert bird.get("E. coli Infection") == bird.get("E. coli Infection (Colibacillosis)") == "very_common"
+        assert bird.get("Citrobacter Infection") == "uncommon"
+        assert bird.get("Avian Coronavirus Infection") == "rare"
+        parrot = SPECIES_PREVALENCE["parrot"]
+        assert parrot.get("Rodenticide Poisoning") == "rare"
+        assert parrot.get("Hypothermia") == "uncommon"
+        parakeet = SPECIES_PREVALENCE["parakeet"]
+        assert parakeet.get("Reproductive Congenital Anomaly") == "rare"
+
+    def test_caseous_alias_falls_back_safely_outside_reptiles(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # hamster has no stomatitis-family vocabulary — the alias must simply
+        # drop, never mis-map (same guard as the original mucus_in_mouth era)
+        ids = _extract_species_symptoms("口の中にチーズ状のもの", "hamster")
+        assert "stomatitis" not in ids, ids
+        # cat resolves stomatitis directly (caseous oral exudate → stomatitis
+        # family is the correct feline bucket as well)
+        ids_cat = _extract_species_symptoms("口の中にチーズ状のもの", "cat")
+        assert "stomatitis" in ids_cat, ids_cat

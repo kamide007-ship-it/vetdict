@@ -81,6 +81,7 @@ from api.drug_batch_54 import DRUGS_BATCH_54
 from api.drug_batch_55 import DRUGS_BATCH_55
 from api.drug_batch_56 import DRUGS_BATCH_56
 from api.drug_batch_57 import DRUGS_BATCH_57
+from api.drug_batch_58 import DRUGS_BATCH_58
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10837,6 +10838,16 @@ for _drug57 in DRUGS_BATCH_57:
         DRUGS.append(_drug57)
         _drug_index[_drug57["id"]] = _drug57
 
+# （破傷風抗毒素 — 犬破傷風「TAT 100-500 IU/kg」・馬破傷風「TAT 1,500-10,000 IU」が
+#  用量付きで名指しするのに本体未収載だった自己参照ギャップ。ウマ由来血清の
+#  試験量投与と、成馬のタイラー病（血清肝炎）という製剤固有のリスクを明記;
+#  フルシトシン — 猫/鳥クリプトコッカス併用療法が用量付き参照。犬は重度皮膚
+#  薬物反応/TEN様反応のため禁忌（Malik; Sykes）という種の定義的ゲートを収載）
+for _drug58 in DRUGS_BATCH_58:
+    if _drug58["id"] not in _drug_index:
+        DRUGS.append(_drug58)
+        _drug_index[_drug58["id"]] = _drug58
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11611,6 +11622,28 @@ _KATAKANA_VARIANT_ALIASES["silver_honey"] = (
 _KATAKANA_VARIANT_ALIASES["vitamin_a_injectable"] = (
     "レチノール",
     "retinol",
+)
+
+# 2026-09 sweep #24: English chemical names that never reached the keyword
+# index — the canonical entries carry them only inside Latin paren suffixes
+# (tier-4 indexes pure-katakana paren parts only) or under a different name.
+#   - "Cobalamin 250-1500 ug SC q7d" (31 EN treatment refs) → the B12 entry.
+#     Substring hits on hypocobalaminemia/methylcobalamin also correctly
+#     denote B12 therapy contexts.
+#   - "Silibinin (milk thistle extract)" (hepatoprotectant refs) → silymarin.
+#   - "Calcium glubionate 23 mg/mL" / 「グルビオン酸カルシウム」 (36 refs,
+#     chronic oral Ca correction in reptiles/birds) → the syrup monograph,
+#     whose EN lead word "calcium" is stoplisted and whose JA name only
+#     appears with the シロップ suffix treatment texts omit.
+_KATAKANA_VARIANT_ALIASES["vitamin_b12"] = ("cobalamin", "コバラミン注射")
+_KATAKANA_VARIANT_ALIASES["milk_thistle"] = _KATAKANA_VARIANT_ALIASES["milk_thistle"] + (
+    "silibinin",
+    "シリビニン",
+)
+_KATAKANA_VARIANT_ALIASES["calcium_glubionate"] = (
+    "glubionate",
+    "グルビオン酸カルシウム",
+    "グルビオン酸",
 )
 
 

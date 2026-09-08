@@ -152,6 +152,12 @@ _SYN: dict[str, list[str]] = {
     # フェレット胃潰瘍（black_tarry_stool/tarry_stool）が「血便」主訴で
     # マッチせず、エストロゲン性骨髄抑制等が上位を占めていた
     "bloody_stool": ["black_tarry_stool", "tarry_stool", "melena", "blood_in_stool", "bloody_diarrhea"],
+    # 緑色便のID表記ゆれ: 抽出ID diarrhea_green が種語彙に実在すると
+    # _ID_SYNONYMS を通らないため、疾患側が lime_green_droppings 等の別表記を
+    # 使う種（parrot オウム病）ではマッチング段階のブリッジが必要（2026-09 第25弾）
+    "diarrhea_green": ["lime_green_droppings", "green_droppings", "yellow_green_droppings"],
+    "lime_green_droppings": ["diarrhea_green", "green_droppings", "yellow_green_droppings"],
+    "green_droppings": ["diarrhea_green", "lime_green_droppings", "yellow_green_droppings"],
     "weight_loss": ["rough_coat", "poor_growth", "emaciation"],
     "lethargy": ["reluctance_to_move", "weakness", "pain_on_touch"],
     "hind_limb_weakness": [
