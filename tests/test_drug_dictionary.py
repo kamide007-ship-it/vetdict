@@ -3156,3 +3156,84 @@ class TestBatch57PrednisoneIsotretinoinAndRetinolAlias:
         assert "prednisolone" in ids and "prednisone" not in ids, ids
         ids = [h["id"] for h in find_drugs_in_text("Prednisolone 1 mg/kg PO q24h")]
         assert "prednisolone" in ids and "prednisone" not in ids, ids
+
+
+class TestBatch58TetanusAntitoxinFlucytosineAndEnAliases:
+    """2026-09 audit (24th sweep): tetanus antitoxin was dosed by name in the
+    formulary's own dog/horse Tetanus entries (self-referential gap, equine
+    flagship); flucytosine is dosed in cat/bird cryptococcosis combination
+    entries with a class-defining canine cutaneous-eruption contraindication;
+    Cobalamin (EN) / Silibinin / Calcium glubionate never reached the index."""
+
+    def test_tetanus_antitoxin_present_with_theilers_and_test_dose_facts(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "tetanus_antitoxin")
+        horse = d["species_info"]["horse"]
+        assert horse["safe"] is True
+        # therapeutic + prophylactic ranges (Reed & Bayly / Plumb's)
+        assert "10,000-50,000" in horse["dosage"] and "1,500-3,000" in horse["dosage"]
+        # defining iatrogenic risk of the product: Theiler's disease
+        assert "タイラー病" in horse["notes_ja"]
+        assert "Theiler" in horse["notes"]
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is True
+        assert "100-500 IU/kg" in dog["dosage"]
+        # equine-origin serum anaphylaxis → test dose first (documented in the
+        # disease entry this monograph resolves)
+        assert "試験量" in dog["dosage_ja"] or "試験" in dog["dosage_ja"]
+        # passive immunisation only — toxoid given separately (definitional)
+        assert "トキソイド" in d["contraindications_ja"]
+        assert any("SEPARATE site" in i.get("effect", "") for i in d["drug_interactions"])
+
+    def test_flucytosine_present_with_canine_ten_gate_and_combination_rule(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "flucytosine")
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is True
+        assert "25-50 mg/kg" in cat["dosage"]
+        assert cat["dosage_ja"]
+        # class-defining species gate: dogs → severe cutaneous eruption / TEN
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is False
+        assert "toxic epidermal necrolysis" in dog["dosage"].lower()
+        assert "皮膚薬物反応" in dog["dosage_ja"]
+        # monotherapy resistance rule is definitional — must appear in
+        # contraindications
+        assert "単剤" in d["contraindications_ja"]
+        assert "monotherapy" in d["contraindications"].lower()
+        bird = d["species_info"]["bird"]
+        assert bird["safe"] is True and "30-50 mg/kg" in bird["dosage"]
+
+    def test_batch58_agents_and_en_aliases_resolve_in_text_matcher(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = {
+            "破傷風抗毒素（TAT）1,500-10,000 IU IV/IM": "tetanus_antitoxin",
+            "Tetanus antitoxin 100-500 IU/kg IV/IM": "tetanus_antitoxin",
+            "Flucytosine 30-50 mg/kg PO q6-8h": "flucytosine",
+            "フルシトシン 125-250 mg/kg": "flucytosine",
+            "Cobalamin 250-1500 ug SC q7d": "vitamin_b12",
+            "Silibinin (milk thistle extract) 20-50 mg/kg": "milk_thistle",
+            "Calcium glubionate 23 mg/mL oral suspension": "calcium_glubionate",
+            "グルビオン酸カルシウム 23 mg/mL 経口懸濁液": "calcium_glubionate",
+        }
+        for text, expected in cases.items():
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert expected in ids, (text, ids)
+        # precision guard: the brucellosis serology acronym 2ME-TAT must never
+        # chip tetanus antitoxin (bare "TAT" is deliberately NOT indexed)
+        ids = [h["id"] for h in find_drugs_in_text("血清学的モニタリング（RSAT/2ME-TAT）")]
+        assert "tetanus_antitoxin" not in ids, ids
+
+    def test_flucytosine_amphotericin_pair_reaches_interaction_checker(self):
+        # the per-monograph drug_interactions field is display-only; the
+        # combination checker reads the curated INTERACTIONS registry, so the
+        # cryptococcosis combination pair must be registered there too.
+        from api.drug_interactions import find_interactions
+
+        pairs = find_interactions(["flucytosine", "amphotericin_b"])
+        assert any({p["drug_a"], p["drug_b"]} == {"flucytosine", "amphotericin_b"} for p in pairs), pairs
+        pairs2 = find_interactions(["flucytosine", "cytarabine"])
+        assert any({p["drug_a"], p["drug_b"]} == {"flucytosine", "cytarabine"} for p in pairs2), pairs2
