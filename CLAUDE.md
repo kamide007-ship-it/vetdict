@@ -4990,3 +4990,98 @@ MgSO4×18 + MgO×19 + マグネシウム補充×4 が魚用薬浴エントリ「
 - `setDefaultStats()`: dog 568/cat 546/horse 361/鳥系 238薬品、pendingStats drugs 624→**626**
 - ServiceWorker: `CACHE_NAME` v149 → **v150**
 - 再現手順: `migrate_to_sqlite.py`（クリーンビルド 6,893疾患・626薬品）— 疾患名不変のため検索インデックス no-op
+
+## 2026-09セッション（第42弾: ビノレルビン/メチラポン/パシレオチド補完 + PSGAGエイリアス大穴 + Adequan用量誤記是正 + チャット精度第26弾 + 救急動線3プロトコル）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、配信SQLiteクリーンビルド: 6,893疾患、treatment/prevention/prognosis **100%**
+- 薬用量: safe薬品の dosage 欠落 **0**（626薬品時点、全species_info検証）、文字列型相互作用スキーマ **0**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 片仮名トークンスイープ: 実フレーズ全解決（リンゲル/モフェチル/デキストラン等の断片は文脈で解決を確認）
+
+### referenced-but-absent 薬品3剤の補完（`drug_batch_59.py` 新規、626→629薬品 — 第25回・英語トークンスイープ）
+英語薬品様トークン（-ine/-ol/-one等の接尾辞 × 用量文脈）スイープで検出:
+- **ビノレルビン** — 犬猫の気管支原性癌エントリが「Vinorelbine 15-18 mg/m² IV weekly」と用量付き参照するのに
+  ビンクリスチン/ビンブラスチン以外のビンカアルカロイドが皆無だった。肺組織集積（血漿の最大300倍）が
+  肺癌への使用根拠（Poirier 2004 JVIM）。好中球ゲート・血管外漏出刺激性・他ビンカとのmg換算流用禁止を明記
+- **メチラポン** — 猫クッシング「Metyrapone 65 mg/kg PO（alternative）」参照。副腎摘出前安定化の古典薬
+  （Feldman & Nelson; Plumb's 10th）。犬は safe:False（トリロスタン/ミトタン標準）。
+  トリロスタン併用=major（副腎抑制相加）を収載
+- **パシレオチド** — 猫先端巨大症「Pasireotide 0.03 mg/kg SC q12h」参照。猫の下垂体腺腫はsst5発現で
+  sst2選択的オクトレオチドがほぼ無効という受容体学的根拠ごと収載（Scudder 2015 / Gostelow 2017 JVIM LAR 6-8 mg/kg）。
+  インスリン感受性改善に伴う低血糖=major
+
+### PSGAG（アデクアン）の大規模エイリアス欠落 + ラベル用量誤記の是正
+- 収載済み entry（正準名 多硫酸化グリコサミノグリカン）に対し、**馬の運動器治療文の多数が
+  「ポリ硫酸グリコサミノグリカン(Adequan)」表記**・犬猫OA/股関節形成不全/FICが「Adequan (PSGAG)」表記で、
+  いずれもキーワード索引に不達だった（Latinの括弧内パートは tier-4 対象外）→
+  _KATAKANA_VARIANT_ALIASES に ポリ硫酸(化)グリコサミノグリカン/アデクアン/adequan/psgag を登録。
+  逆引き「この薬品を使う疾患」**0→67疾患**（OCD・屈腱炎・チップ骨折等の馬運動器群が接続）
+- **Adequan Canine ラベル用量の転記ミス修正**: 犬OA/股関節形成不全の「Adequan 2 mg/kg IM」は
+  ラベルの 2 mg/lb を kg に誤転記した半量 → 「4.4 mg/kg (2 mg/lb) IM twice weekly」に修正（JSON 2件）。
+  猫FICの12.5 mg SC（GAG補充試験用量）は正しいため温存
+- **英語化学名エイリアス3件**: Glargine（猫糖尿病第一選択の裸表記）→insulin_glargine、
+  Acetylcysteine→n_acetylcysteine、Tryptophan→l_tryptophan
+
+### 診断チャット精度 第26弾（33症例フレッシュスイープ 11 MISS → 全症例合格）
+- **犬IVDD胸腰部の代表的主訴が抽出ゼロだった**: 「背中を痛がって抱き上げると鳴く」→
+  レガシー犬DBに back_pain 症状を新設（IVDDに付与、79→81症状）+ エイリアス6種
+  （背中を痛が/抱き上げると鳴/抱くと鳴 等）+ ID_SYNONYMS back_pain→[spinal_pain, pain,
+  reluctance_to_move, hunched_posture]（馬パスは既存 body_back_pain が優先で不変）→ IVDD rank 1
+- **急性緑内障（救急）が痛み+混濁で不達**: 「片目が急に白く濁って痛がっている」が副詞挿入で
+  既存キー不一致 + レガシー緑内障セットに pain が無かった → 急に白く濁っ/片目が白く エイリアス +
+  pain 症状新設（痛がって→pain 連用形も追加）+ クラスタ {cloudiness_in_eyes, pain}→緑内障×1.5/
+  角膜潰瘍×1.4（急性有痛性混濁眼で無痛の角膜ジストロフィー1所見エントリが常勝していた —
+  Maggs, Slatter's 6th）→ 緑内障 rank 1・角膜潰瘍 rank 2
+- **語幹形ギャップ**: 首をかしげ（たまま形）→head_tilt、お腹が大きくなっ（て形 — 猫腹水/FIP主訴）→
+  bloating、羽が抜け（てきた形。行動学的「羽を抜く」とは助詞で区別）→hair_loss、便が小さ/便の数が減
+  （チンチラ・デグー小糞粒 — ウサギ用「糞が小さく」のみ収載だった）→small_fecal_pellets、
+  口をずっと開け→open_mouth_breathing、餌を食べず→loss_of_appetite
+- **ハムスター頬袋脱**: 「頬袋から何か飛び出している」が抽出ゼロ → 頬袋から何か/頬袋が飛び出 等→
+  cheek_pouch_prolapse → 頬袋脱 rank 1
+- **モルモット排尿時発声**: squealing_when_urinating が種語彙に実在するのに飼い主表現が皆無 →
+  おしっこのときにキーキー/排尿時にキーキー等 + ID_SYNONYMS チェーン + 裸「血が混じ」→blood_in_urine
+  フォールバック（便に血が混じる等の長キーが最長一致で常に優先されることをガードテストで固定）→
+  尿石症/膀胱炎/尿泥が top 独占
+- **有病率是正2件**: 猫 Feline Ectopic Ureter=rare（未tierの先天奇形が3所見カバレッジで血尿+頻尿主訴の
+  very_common FIC/UTIを上回っていた — 猫の異所性尿管は犬よりさらに稀）、チンチラ Congenital Megacolon=rare
+  （ウサギMegacolon=rareと同型 — 小糞粒主訴でGIうっ滞を上回っていた）
+- **ウサギ赤色尿の良性色素尿を可視化**: 「おしっこが赤い」→blood_in_urine が既収載の
+  「赤色尿（非病的）」エントリ（red_urine表記）に届かなかった → _SYN blood_in_urine→red_urine ブリッジ →
+  良性ポルフィリン色素尿（最頻の飼い主相談）が rank 1、血尿ddx（子宮疾患/膀胱炎/結石）が後続する
+  正しいカウンセリング順に
+
+### UX: 救急動線の未接続3プロトコルを接続（DISEASE_EMERGENCY_MAP 20→23行）
+- サーバー側25救急プロトコル中、**respiratory_failure / hemorrhagic_shock /
+  ards_pulmonary_thromboembolism の3つに疾患側からの動線が皆無**だった（喉頭麻痺・気管虚脱・BOAS・
+  血管肉腫（脾破裂）・肺血栓塞栓症の疾患ビューが行き止まり）→ マップ行3件を追加
+  （種配列はサーバーデータのサブセットであることを既存ミラーテストが自動検証、rabbit含む
+  respiratory_failure も正しくゲート）。チェッカー結果・疾患DB詳細・チャット候補カードの
+  既存「🚨 緊急対応プロトコルを開く」ピボットが3疾患群でも発火するように
+
+### 動線の確認（新規薬品→鑑別・チャット）
+- 逆引き「この薬品を使う疾患」: vinorelbine 7疾患・metyrapone 1・pasireotide 3・**PSGAG 67**。
+  鑑別診断・チャット候補カード・疾患DBの3ビューの関連薬品チップと双方向で自動接続を検証済み
+
+### 回帰テスト（+18件）
+- 薬品: TestBatch59（5件 — 3剤の存在・完全バイリンガル用量・定義的安全事実（sst5根拠・トリロスタンmajor・
+  好中球ゲート）・エイリアス9ケース解決・Adequan半量誤記の再発防止JSON走査）
+- チャット: TestChatClinicalAccuracyAuditRound26（12件 — IVDD/緑内障+ガード/猫腹囲/猫異所性尿管降格/
+  ウサギ赤色尿/ハムスター頬袋脱/GP排尿時発声/チンチラ小糞粒/トカゲ開口/便血の最長一致ガード/羽毛脱落と毛引きの分離）
+- UX: test_app_js_emergency_map_covers_airway_hemorrhage_pte_protocols（+既存ミラーテストが種サブセットを検証）
+
+### 相互作用チェッカー: 表記ゆれエイリアスの解決対応（副産物）
+- `_KATAKANA_VARIANT_ALIASES` はテキストマッチャーのキーワード索引のみに供給されており、
+  相互作用チェッカーの `resolve_drug_reference` は per-entry の search_aliases しか参照しないため、
+  「PSGAG」「UDCA」「マヌカハニー」等がチェッカーで unknown になっていた →
+  resolver が variant aliases も照合するように統合（回帰テスト付き）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 571/cat 549薬品、pendingStats drugs 626→**629**・symptoms 79→**81**
+- ServiceWorker: `CACHE_NAME` v150 → **v151**
+- 再現手順: `migrate_to_sqlite.py`（クリーンビルド 6,893疾患・629薬品）— 疾患名不変のため検索インデックス no-op
+
+### テスト・CI
+- フルテストスイート: **4,287件合格**（34 skip、+19新規回帰テスト）
+- ruff check: repo全体 clean、変更ファイル format 済み
+- 配信DB: クリーンビルドで 6,893疾患・**629薬品**、treatment/prevention/prognosis 100%

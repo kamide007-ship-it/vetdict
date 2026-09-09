@@ -3237,3 +3237,99 @@ class TestBatch58TetanusAntitoxinFlucytosineAndEnAliases:
         assert any({p["drug_a"], p["drug_b"]} == {"flucytosine", "amphotericin_b"} for p in pairs), pairs
         pairs2 = find_interactions(["flucytosine", "cytarabine"])
         assert any({p["drug_a"], p["drug_b"]} == {"flucytosine", "cytarabine"} for p in pairs2), pairs2
+
+
+class TestBatch59VinorelbineMetyraponePasireotideAndPsgagAliases:
+    """2026-09 audit round 25 (English drug-like-token sweep): three true
+    monograph gaps (vinorelbine / metyrapone / pasireotide — each cited with
+    doses by the formulary's own disease entries) plus the PSGAG alias gap
+    (dozens of equine musculoskeletal texts cite ポリ硫酸グリコサミノグリカン(Adequan)
+    which never reached the keyword index)."""
+
+    def test_vinorelbine_present_with_lung_rationale_and_neutrophil_gate(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "vinorelbine")
+        assert "lung" in d["mechanism"].lower()  # pulmonary concentration rationale
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is True
+        assert "15 mg/m²" in dog["dosage"] and "Poirier" in dog["dosage"]
+        assert dog["dosage_ja"] and "好中球" in dog["dosage_ja"]
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is True and "限定的" in cat["dosage_ja"]
+
+    def test_metyrapone_cat_only_with_trilostane_gate(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "metyrapone")
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is True and "65 mg/kg" in cat["dosage"]
+        assert "副腎摘出" in cat["dosage_ja"]
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is False  # trilostane/mitotane standard in dogs
+        assert "トリロスタン" in dog["dosage_ja"]
+        # additive adrenal suppression with trilostane is definitional
+        assert any("Trilostane" in i.get("drug", "") for i in d["drug_interactions"])
+
+    def test_pasireotide_cat_only_with_insulin_hypoglycemia_rule(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "pasireotide")
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is True
+        assert "0.03 mg/kg" in cat["dosage"] and "Scudder" in cat["dosage"]
+        assert "Gostelow" in cat["dosage"]  # LAR evidence
+        assert "低血糖" in cat["dosage_ja"]
+        # sst5 receptor rationale (why octreotide fails in cats) is definitional
+        assert "sst5" in d["mechanism"]
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is False
+        assert any(i.get("severity") == "major" and "Insulin" in i.get("drug", "") for i in d["drug_interactions"])
+
+    def test_batch59_agents_and_aliases_resolve_in_text_matcher(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = {
+            "Vinorelbine 15-18 mg/m² IV weekly": "vinorelbine",
+            "ビノレルビン 15 mg/m2 IV": "vinorelbine",
+            "Metyrapone 65 mg/kg PO q12h": "metyrapone",
+            "Pasireotide 0.03 mg/kg SC q12h": "pasireotide",
+            # PSGAG alias gap — equine module word-order variant + Latin paren brand
+            "ポリ硫酸グリコサミノグリカン(Adequan)で軟骨を保護": "polysulfated_glycosaminoglycan",
+            "Adequan (PSGAG) 4.4 mg/kg (2 mg/lb) IM twice weekly": "polysulfated_glycosaminoglycan",
+            # English chemical names that lived only in paren suffixes
+            "Glargine (Lantus) 1-2 IU/cat SC q12h": "insulin_glargine",
+            "Acetylcysteine 5-10 mg/kg PO q12h": "n_acetylcysteine",
+            "Tryptophan supplementation 20 mg/kg PO": "l_tryptophan",
+        }
+        for text, expected in cases.items():
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert expected in ids, (text, ids)
+
+    def test_adequan_label_dose_transcription_fixed_in_json(self):
+        # Adequan Canine label is 2 mg/lb (4.4 mg/kg); the JSON previously
+        # carried the half-dose mistranscription "Adequan 2 mg/kg".
+        import json
+        import os
+
+        path = os.path.join(os.path.dirname(__file__), "..", "diseases_all_species.json")
+        with open(path, encoding="utf-8") as f:
+            raw = f.read()
+        assert "Adequan (PSGAG) 2 mg/kg" not in raw
+        assert "Adequan 2 mg/kg" not in raw
+        # the cat FIC GAG-repletion dose (12.5 mg SC) is a different, correct
+        # study dose and must be preserved
+        json.loads(raw)  # file must remain valid JSON
+        assert "12.5 mg SC" in raw
+
+    def test_variant_aliases_reach_interaction_checker_resolver(self):
+        # _KATAKANA_VARIANT_ALIASES previously fed only the text-matcher
+        # keyword index; the interaction checker's resolve_drug_reference read
+        # per-entry search_aliases only, so "PSGAG"/"UDCA"/"マヌカハニー" were
+        # unknown there despite resolving in treatment texts.
+        from api.drug_dictionary import resolve_drug_reference
+
+        assert resolve_drug_reference("PSGAG") == "polysulfated_glycosaminoglycan"
+        assert resolve_drug_reference("ポリ硫酸グリコサミノグリカン") == "polysulfated_glycosaminoglycan"
+        assert resolve_drug_reference("UDCA") == "ursodiol"
+        assert resolve_drug_reference("マヌカハニー") == "silver_honey"
