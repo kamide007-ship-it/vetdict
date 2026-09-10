@@ -1664,8 +1664,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:569,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:547,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:572,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:550,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:361,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:260,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:71,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1689,8 +1689,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6450,
     species:21,
-    drugs:627,
-    symptoms:81,
+    drugs:630,
+    symptoms:83,
     protocols:188
   };
   renderSpeciesGrid();
@@ -4201,6 +4201,9 @@ const DISEASE_EMERGENCY_MAP=[
   [/マムシ咬傷|mamushi/i,"mamushi_envenomation",["dog","cat"]],
   [/子癇|産褥テタニー|eclampsia|puerperal tetany/i,"postpartum_eclampsia",["dog","cat"]],
   [/急性腎障害|急性腎不全|acute kidney injury|acute renal failure/i,"aki",["dog","cat"]],
+  [/喉頭麻痺|気管虚脱|短頭種気道|上気道閉塞|laryngeal paralysis|tracheal collapse|brachycephalic airway|airway obstruction/i,"respiratory_failure",["dog","cat","rabbit"]],
+  [/血管肉腫|脾破裂|hemangiosarcoma|splenic rupture/i,"hemorrhagic_shock",["dog","cat"]],
+  [/肺血栓塞栓|pulmonary thromboembolism|\bARDS\b/i,"ards_pulmonary_thromboembolism",["dog","cat"]],
 ];
 function _emergencyProtoForDisease(d,sp){
   const name=((d.name||"")+" "+(d.name_ja||""));

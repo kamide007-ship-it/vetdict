@@ -146,7 +146,9 @@ _SYN: dict[str, list[str]] = {
     "tremors": ["ataxia", "shaking", "muscle_twitching"],
     "wobbling": ["ataxia", "incoordination", "stumbling"],
     "ear_discharge": ["ear_infection", "otitis", "ear_mites"],
-    "blood_in_urine": ["hematuria", "uterine_bleeding"],
+    # red_urine: ウサギの赤色尿（非病的ポルフィリン色素尿）は最頻の飼い主相談 —
+    # 血尿ddxと並んで良性色素尿エントリも提示する（Oglesbee; Quesenberry & Carpenter 4th）
+    "blood_in_urine": ["hematuria", "uterine_bleeding", "red_urine"],
     "blood_in_stool": ["melena", "bleeding_gums", "hematochezia"],
     # 2026-08 第14弾: 飼い主は鮮血便と黒色便（消化管上部出血）を区別できない —
     # フェレット胃潰瘍（black_tarry_stool/tarry_stool）が「血便」主訴で

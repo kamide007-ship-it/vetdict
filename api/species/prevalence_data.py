@@ -250,13 +250,12 @@ SPECIES_PREVALENCE = {
         "Flea Allergy Dermatitis": "very_common",
         "Feline Lower Urinary Tract Disease (FLUTD)": "very_common",
         "Feline Idiopathic Cystitis (FIC)": "very_common",
+        # 先天奇形 — 猫の異所性尿管は犬よりさらに稀（Holt & Gibbs）。未tierのまま
+        # 3所見セットのカバレッジで血尿+頻尿主訴のFIC/UTIを上回っていた
+        "Feline Ectopic Ureter": "rare",
         # CKD続発の腎性二次性上皮小体機能亢進は独立診断としては uncommon —
         # 未tierでPU/PD主訴の子宮蓄膿症を押しのけていた
         "Feline Renal Secondary Hyperparathyroidism": "uncommon",
-        # 先天奇形（若齢雌に多い持続性尿失禁）— 未tierで頻尿・排尿困難主訴の
-        # 尿道閉塞/膀胱炎を押しのけて1位を奪っていた（2026-09 第26弾。
-        # 猫では犬よりさらに稀 — Holt & Gibbs; Ettinger 8th ed）
-        "Feline Ectopic Ureter": "rare",
         # 膵癌/胆管癌の傍腫瘍症候群（光沢のある急性脱毛）— 真に稀な腫瘍マーカー
         # なのに未tier小セットで高齢猫の削痩+被毛粗剛主訴（CKD/甲状腺機能亢進の
         # 古典像）の1位を奪っていた（2026-09 第26弾。Turek 2003 Vet Dermatol）
@@ -1458,6 +1457,9 @@ SPECIES_PREVALENCE = {
     # CHINCHILLA
     # ==================================================================
     "chinchilla": {
+        # 先天性疾患 — 未tierのまま2所見カバレッジで小糞粒主訴のGIうっ滞を上回っていた
+        # （ウサギMegacolon=rareと同型の是正。チンチラの糞量減少の主因はうっ滞）
+        "Congenital Megacolon": "rare",
         "Upper Respiratory Infection": "very_common",
         "Diarrhea": "very_common",
         "Dental Malocclusion - Incisor": "very_common",

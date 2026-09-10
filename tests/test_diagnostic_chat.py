@@ -4676,7 +4676,121 @@ class TestChatClinicalAccuracyAuditRound25:
 
 
 class TestChatClinicalAccuracyAuditRound26:
-    """2026-09 audit round 26: fresh 24-case sweep. Root causes were the
+    """2026-09 audit round 26. Root causes: unaliased back-pain/cries-when-
+    picked-up complaint (dog IVDD hallmark), adverb-split acute-cloudy-eye
+    phrasing plus a glaucoma set that lacked pain, stem-form gaps
+    (かしげたまま/大きくなってきて/羽が抜けてきた/便が小さく), the hamster
+    cheek-pouch eversion complaint, guinea-pig squealing-on-urination, an
+    untiered feline ectopic ureter outranking very_common FIC/UTI, an
+    untiered chinchilla congenital megacolon outranking GI stasis, and the
+    rabbit benign red-urine entry being unreachable from hematuria wording."""
+
+    def test_dog_back_pain_cries_when_picked_up_ranks_ivdd_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("背中を痛がって抱き上げると鳴く 後ろ足がふらつく")
+        assert "back_pain" in ids, ids
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ids)[:2]]
+        assert any("椎間板" in n for n in names), names
+
+    def test_dog_acute_painful_cloudy_eye_ranks_glaucoma_and_ulcer(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("片目が急に白く濁って痛がっている")
+        assert "cloudiness_in_eyes" in ids and "pain" in ids, ids
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ids)[:3]]
+        assert any("緑内障" in n for n in names), names
+        assert any("角膜潰瘍" in n for n in names), names
+
+    def test_dog_seizure_loc_still_ranks_epilepsy_first(self):
+        # guard: the new pain/back_pain vocabulary must not disturb the
+        # seizure+LOC → epilepsy ranking fixed in round 20
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("痙攣した 意識がなくなった")
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ids)[:1]]
+        assert any("てんかん" in n for n in names), names
+
+    def test_cat_abdominal_enlargement_te_form_extracts_distension(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("お腹が大きくなってきて呼吸が苦しそう", "cat")
+        assert "abdominal_distension" in ids and "labored_breathing" in ids, ids
+
+    def test_cat_hematuria_pollakiuria_ranks_uti_fic_over_ectopic_ureter(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("おしっこが赤い 何度もトイレに行く", "cat")
+        res = _match_species_symptoms_to_diseases(ids, "cat")
+        names = [d.get("name_ja") or "" for d in res[:3]]
+        assert any(("尿路感染" in n) or ("膀胱炎" in n) for n in names), names
+        assert not any("異所性尿管" in n for n in names), names
+
+    def test_rabbit_red_urine_surfaces_benign_pigmenturia_entry(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("おしっこが赤い", "rabbit")
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "rabbit")[:3]]
+        assert any("赤色尿" in n for n in names), names
+
+    def test_hamster_cheek_pouch_eversion_complaint_ranks_prolapse_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("頬袋から何か飛び出している", "hamster")
+        assert "cheek_pouch_prolapse" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "hamster")[:1]]
+        assert any("頬袋脱" in n for n in names), names
+
+    def test_guinea_pig_squealing_on_urination_ranks_urinary_ddx(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("おしっこのときにキーキー鳴く 血が混じる", "guinea_pig")
+        assert "squealing_when_urinating" in ids and "blood_in_urine" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "guinea_pig")[:4]]
+        assert any(("結石" in n) or ("膀胱炎" in n) or ("尿" in n) for n in names[:2]), names
+
+    def test_chinchilla_small_droppings_rank_gi_stasis_over_megacolon(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("便が小さくなって数が減った", "chinchilla")
+        assert ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "chinchilla")[:2]]
+        assert any("うっ滞" in n for n in names), names
+        assert not any("先天性巨大結腸" in n for n in names), names
+
+    def test_lizard_open_mouth_with_zutto_and_zu_form_anorexia(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("餌を食べずに口をずっと開けている", "lizard")
+        assert "open_mouth_breathing" in ids, ids
+        assert any(i in ids for i in ("anorexia", "appetite_loss", "loss_of_appetite")), ids
+
+    def test_stool_blood_long_key_still_wins_over_bare_bridge(self):
+        # guard: 便に血が混じる must stay blood-in-stool (longest-match) even
+        # though the bare 血が混じ→blood_in_urine fallback now exists
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("便に血が混じる 下痢", "dog")
+        assert any(i in ids for i in ("bloody_stool", "blood_in_stool")), ids
+        assert "blood_in_urine" not in ids, ids
+
+    def test_passive_feather_loss_stem_and_plucking_guard(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("お腹が膨らんで羽が抜けてきた", "parakeet")
+        assert "feather_loss" in ids or "hair_loss" in ids, ids
+        # behavioral plucking stays on its own id
+        ids2 = _extract_species_symptoms("羽を自分で抜いてしまう", "bird")
+        assert "feather_plucking" in ids2, ids2
+
+
+class TestChatClinicalAccuracyAuditRound26Parallel:
+    """2026-09 audit round 26 (parallel session): fresh 24-case sweep. Root causes were the
     complete absence of food-toxicosis entries from the legacy dog chat DB
     (onion/allium and chocolate — the two most common canine food-toxicosis
     inquiries in Japan), no owner phrases for the pathognomonic feline

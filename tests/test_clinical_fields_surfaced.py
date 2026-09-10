@@ -697,3 +697,16 @@ def test_app_js_disease_to_calculator_pivot_wired():
         handler = APP_JS.split(chunk_marker)[1].split("\nfunction ")[0]
         assert 'closest(".calc-nav-link")' in handler
         assert "openClinicalCalculators({tab:" in handler
+
+
+def test_app_js_emergency_map_covers_airway_hemorrhage_pte_protocols():
+    """2026-09 round 26: three server-side emergency protocols
+    (respiratory_failure / hemorrhagic_shock / ards_pulmonary_thromboembolism)
+    had no DISEASE_EMERGENCY_MAP rows, so laryngeal-paralysis / ruptured-
+    hemangiosarcoma / PTE disease views were dead ends with no one-tap route
+    to their matching emergency protocol."""
+    seg = APP_JS[APP_JS.find("DISEASE_EMERGENCY_MAP") :][:4000]
+    assert '"respiratory_failure"' in seg
+    assert "喉頭麻痺" in seg and "気管虚脱" in seg
+    assert '"hemorrhagic_shock"' in seg and "血管肉腫" in seg
+    assert '"ards_pulmonary_thromboembolism"' in seg and "肺血栓塞栓" in seg
