@@ -1664,15 +1664,15 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:568,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:546,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:569,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:547,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:361,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:260,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:71,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:225,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
     {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:198,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
-    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:223,drugs:63,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
+    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:223,drugs:64,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
     {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:75,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
     {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:153,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
     {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:483,drugs:238,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
@@ -1689,8 +1689,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6450,
     species:21,
-    drugs:626,
-    symptoms:79,
+    drugs:627,
+    symptoms:81,
     protocols:188
   };
   renderSpeciesGrid();
@@ -2065,7 +2065,7 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
-    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない"],
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった"],
     cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる"],
     rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている"],
@@ -3353,6 +3353,9 @@ function renderResults(data){
     /* Emergency cross link: open the matching 緊急対応 protocol expanded. */
     const emLink=e.target.closest(".emergency-nav-link");
     if(emLink){e.preventDefault();navigateToEmergencyProtocol(emLink.dataset.proto);return;}
+    /* Disease → clinical calculator (chocolate risk band / IRIS staging). */
+    const calcLink=e.target.closest(".calc-nav-link");
+    if(calcLink){e.preventDefault();trackEvent("calculator_from_disease",{tab:calcLink.dataset.calctab||""});openClinicalCalculators({tab:calcLink.dataset.calctab||"dose"});return;}
     /* Low-confidence banner: one-tap pivot into the guided consultation with
        the checker's species carried over, landing scrolled to the chat panel. */
     const consultLink=e.target.closest(".guided-consult-link");
@@ -4213,6 +4216,29 @@ function renderEmergencyCrossLink(d){
   const label=currentLang==="ja"?"🚨 この疾患の緊急対応プロトコルを開く":"🚨 Open the emergency protocol for this condition";
   return `<div style="margin-top:8px"><a href="#emergency" class="emergency-nav-link" data-proto="${escapeHtml(proto)}" style="font-size:.8rem;color:#dc2626;font-weight:700;text-decoration:none">${label} →</a></div>`;
 }
+/* 疾患→臨床計算機のワンタップ導線（計算機→疾患の逆方向は既存 — チョコ計算機の
+   「疾患エントリを開く」）。判定計算がそのまま次のアクションになる疾患のみ:
+   チョコレート中毒→摂取量リスク計算、CKD→IRISステージング（犬猫で検証された
+   スケールのため種ゲート）。マップが解決しない疾患にはボタン自体を出さない。 */
+const DISEASE_CALC_MAP=[
+  [/チョコレート中毒|chocolate (?:toxicosis|poisoning)/i,"choco",["dog"],
+   {ja:"🧮 チョコレート中毒計算機でリスク評価",en:"🧮 Estimate risk with the chocolate calculator"}],
+  [/慢性腎臓病|chronic kidney disease|\bCKD\b/i,"iris",["dog","cat"],
+   {ja:"🧮 IRIS CKDステージングを開く",en:"🧮 Open IRIS CKD staging"}],
+];
+function _calcTabForDisease(d,sp){
+  const name=((d.name||d.name_en||"")+" "+(d.name_ja||""));
+  for(const[re,tab,species,labels]of DISEASE_CALC_MAP){
+    if(re.test(name)&&species.includes(sp))return{tab,labels};
+  }
+  return null;
+}
+function renderCalculatorCrossLink(d,sp){
+  const hit=_calcTabForDisease(d,sp||currentSpecies||"dog");
+  if(!hit)return"";
+  const label=currentLang==="ja"?hit.labels.ja:hit.labels.en;
+  return `<div style="margin-top:8px"><a href="#drugs" class="calc-nav-link" data-calctab="${escapeHtml(hit.tab)}" style="font-size:.8rem;color:#b45309;font-weight:700;text-decoration:none">${label} →</a></div>`;
+}
 /* Chat candidate cards (free chat + guided final results): when a ranked
    disease is an emergency-class condition (GDV, urethral obstruction, heat
    stroke…), surface a one-tap link to the matching 緊急対応 protocol. The
@@ -4224,6 +4250,16 @@ function _chatEmergencyLink(nameEn,nameJa,sp){
   if(!proto)return"";
   const label=currentLang==="ja"?"🚨 緊急対応プロトコルを開く":"🚨 Open emergency protocol";
   return `<div class="chat-disease-nav"><a href="#emergency" class="emergency-nav-link" data-proto="${escapeHtml(proto)}" style="color:#dc2626;font-weight:700">${label} →</a></div>`;
+}
+/* チャット候補カード→臨床計算機（チョコ中毒のリスク帯計算・CKDのIRISステージング）。
+   摂取量の申告でチョコレート中毒が1位に出た瞬間、次のアクションは量からのリスク
+   計算そのもの — dead end にしない（renderCalculatorCrossLink のチャット版）。 */
+function _chatCalcLink(nameEn,nameJa,sp){
+  if(typeof _calcTabForDisease!=="function")return"";
+  const hit=_calcTabForDisease({name:nameEn||"",name_ja:nameJa||""},sp||"dog");
+  if(!hit)return"";
+  const label=currentLang==="ja"?hit.labels.ja:hit.labels.en;
+  return `<div class="chat-disease-nav"><a href="#drugs" class="calc-nav-link" data-calctab="${escapeHtml(hit.tab)}" style="color:#b45309;font-weight:700">${label} →</a></div>`;
 }
 /* Reverse of DISEASE_EMERGENCY_MAP: each emergency protocol links back to the
    full disease-DB entry (pathophysiology, complete treatment, related drugs,
@@ -4396,6 +4432,7 @@ function renderDiseaseCard(d,data){
       ${renderMentionedDrugs(d)}
       ${renderAnesthesiaConsiderations(d)}
       ${renderEmergencyCrossLink(d)}
+      ${renderCalculatorCrossLink(d)}
       <div class="detail-page-link"><button type="button" class="disease-db-nav-link" data-name="${escapeHtml(nameEn)}" style="font-size:.82rem;color:var(--navy);font-weight:600;background:none;border:none;padding:0;cursor:pointer;text-decoration:none">${currentLang==="ja"?"🔍 疾患データベースで開く":"🔍 Open in disease database"} →</button> <a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent(nameEn.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none;margin-left:12px">${currentLang==="ja"?"📖 詳細ページを見る":"📖 View full disease page"} →</a></div>
       ${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}
     </div>
@@ -4739,7 +4776,7 @@ function renderDiseaseDb(){
         ${recoveryWeeks?`<dt>${currentLang==="ja"?"回復期間":"Recovery Timeline"}</dt><dd>${currentLang==="ja"?`${recoveryWeeks}週間`:`${recoveryWeeks} weeks`}</dd>`:""}
         ${successRate!==undefined?`<dt>${currentLang==="ja"?"成功率":"Success Rate"}</dt><dd>${(successRate*100).toFixed(1)}%</dd>`:""}
         ${mortalityRate!==undefined?`<dt>${currentLang==="ja"?"死亡率":"Mortality Rate"}</dt><dd>${(mortalityRate*100).toFixed(1)}%</dd>`:""}
-      </dl>${renderOrthopedicReferences(d)}<div class="anes-considerations-slot" data-anes="1" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}"></div><div class="related-diseases-section" data-related="1" data-disease="${escapeHtml(d.name||"")}"></div><div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a>${(()=>{const proto=_emergencyProtoForDisease(d,currentSpecies||"dog");return proto?`<a href="#emergency" class="cross-nav-btn emergency-nav-link" data-proto="${escapeHtml(proto)}" style="color:#dc2626;border-color:#fecaca">\u{1F6A8} ${currentLang==="ja"?"緊急対応プロトコル":"Emergency Protocol"}</a>`:"";})()}<button type="button" class="cross-nav-btn owner-handout-btn" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}">\u{1F5A8} ${currentLang==="ja"?"飼い主向け説明シートを印刷":"Print owner handout"}</button></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
+      </dl>${renderOrthopedicReferences(d)}<div class="anes-considerations-slot" data-anes="1" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}"></div><div class="related-diseases-section" data-related="1" data-disease="${escapeHtml(d.name||"")}"></div><div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a>${(()=>{const proto=_emergencyProtoForDisease(d,currentSpecies||"dog");return proto?`<a href="#emergency" class="cross-nav-btn emergency-nav-link" data-proto="${escapeHtml(proto)}" style="color:#dc2626;border-color:#fecaca">\u{1F6A8} ${currentLang==="ja"?"緊急対応プロトコル":"Emergency Protocol"}</a>`:"";})()}${(()=>{const hit=_calcTabForDisease(d,currentSpecies||"dog");return hit?`<a href="#drugs" class="cross-nav-btn calc-nav-link" data-calctab="${escapeHtml(hit.tab)}" style="color:#b45309;border-color:#fcd34d">\u{1F9EE} ${currentLang==="ja"?"臨床計算機":"Clinical calculator"}</a>`:"";})()}<button type="button" class="cross-nav-btn owner-handout-btn" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}">\u{1F5A8} ${currentLang==="ja"?"飼い主向け説明シートを印刷":"Print owner handout"}</button></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
     </div>`}).join("");
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
@@ -5431,6 +5468,7 @@ function renderChatResult(container,data){
         ${c.mentioned_drugs&&c.mentioned_drugs.length?renderMentionedDrugs(c):""}
         <div class="chat-disease-nav"><button type="button" class="chat-disease-open" data-name="${escapeHtml(c.name_en||c.name_ja||c.disease_id||"")}" data-species="${escapeHtml(chatSpecies||currentSpecies||"dog")}">\u{1F50D} ${currentLang==="ja"?"\u75be\u60a3DB\u3067\u8a73\u7d30\u3092\u958b\u304f":"Open in disease DB"} \u2192</button></div>
         ${_chatEmergencyLink(c.name_en,c.name_ja,chatSpecies||currentSpecies||"dog")}
+        ${_chatCalcLink(c.name_en,c.name_ja,chatSpecies||currentSpecies||"dog")}
       `;
       listDiv.appendChild(card);
     });
@@ -6086,6 +6124,7 @@ function guidedRenderFinalResults(data){
         ${matched?`<div class="chat-disease-matched">${currentLang==="ja"?"一致: ":"Matched: "}${matched}</div>`:""}
         <div class="chat-disease-nav"><button type="button" class="chat-disease-open" data-name="${escapeHtml(d.name||d.name_ja||"")}" data-species="${escapeHtml(guidedState.species||currentSpecies||"dog")}">\u{1F50D} ${currentLang==="ja"?"疾患DBで詳細を開く":"Open in disease DB"} →</button></div>
         ${_chatEmergencyLink(d.name,d.name_ja,guidedState.species||currentSpecies||"dog")}
+        ${_chatCalcLink(d.name,d.name_ja,guidedState.species||currentSpecies||"dog")}
       </div>`;
     });
     html+='</div>';
@@ -7940,6 +7979,9 @@ function _attachChatNavHandlers(container){
     /* Emergency-class candidate → open the matching 緊急対応 protocol. */
     const emLink=e.target.closest(".emergency-nav-link");
     if(emLink){e.preventDefault();trackEvent("emergency_from_chat",{proto:emLink.dataset.proto||""});navigateToEmergencyProtocol(emLink.dataset.proto);return;}
+    /* Chat candidate → clinical calculator (chocolate risk band / IRIS). */
+    const calcLink=e.target.closest(".calc-nav-link");
+    if(calcLink){e.preventDefault();trackEvent("calculator_from_disease",{tab:calcLink.dataset.calctab||""});openClinicalCalculators({tab:calcLink.dataset.calctab||"dose"});return;}
     const openBtn=e.target.closest(".chat-disease-open");
     if(openBtn){
       e.preventDefault();
@@ -7993,6 +8035,9 @@ function _attachDbItemHandlers(container){
     /* Disease detail → emergency protocol: open the matching 緊急対応 row. */
     const emLink=e.target.closest(".emergency-nav-link");
     if(emLink){e.preventDefault();navigateToEmergencyProtocol(emLink.dataset.proto);return;}
+    /* Disease detail → clinical calculator (chocolate risk band / IRIS). */
+    const calcLink=e.target.closest(".calc-nav-link");
+    if(calcLink){e.preventDefault();trackEvent("calculator_from_disease",{tab:calcLink.dataset.calctab||""});openClinicalCalculators({tab:calcLink.dataset.calctab||"dose"});return;}
     /* Emergency protocol → disease DB (reverse flow): full entry with the
        differential-check and anesthesia pivots. Species-aware exact landing. */
     const emDisease=e.target.closest(".emergency-disease-link");

@@ -82,6 +82,7 @@ from api.drug_batch_55 import DRUGS_BATCH_55
 from api.drug_batch_56 import DRUGS_BATCH_56
 from api.drug_batch_57 import DRUGS_BATCH_57
 from api.drug_batch_58 import DRUGS_BATCH_58
+from api.drug_batch_59 import DRUGS_BATCH_59
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10847,6 +10848,17 @@ for _drug58 in DRUGS_BATCH_58:
     if _drug58["id"] not in _drug_index:
         DRUGS.append(_drug58)
         _drug_index[_drug58["id"]] = _drug58
+
+# Batch 59: 2026-09監査（第25回スイープ）の referenced-but-absent 補完
+# （メタゾラミド — 犬緑内障フラグシップ・ハリネズミ緑内障・小型哺乳類ガイダンスが
+#  「methazolamide 2-4 mg/kg PO q8-12h」と用量付きで名指しし、犬エントリ自身が
+#  「アセタゾラミドより副作用が少ない」と比較するのに本体未収載だった自己参照
+#  ギャップ。点眼CAIとの併用無益・サリチル酸との重度アシドーシス・肝疾患禁忌
+#  というクラス定義的安全事実を収載）
+for _drug59 in DRUGS_BATCH_59:
+    if _drug59["id"] not in _drug_index:
+        DRUGS.append(_drug59)
+        _drug_index[_drug59["id"]] = _drug59
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

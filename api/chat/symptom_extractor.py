@@ -513,6 +513,12 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "stomatitis": ["oral_ulcers", "bad_breath", "excessive_drooling", "mouth_lesions", "mucus_in_mouth"],
     # チンチラ等の耳介下垂 — 中耳炎/外耳炎の随伴所見（2026-09 第25弾）
     "ear_drooping": ["head_tilt", "head_shaking", "ear_discharge"],
+    # 猫の蹠行姿勢（かかと歩行 = 糖尿病性神経障害）。他種は後肢虚弱へ
+    # 安全にフォールバック（2026-09 第26弾）
+    "plantigrade_stance": ["hind_leg_weakness", "hind_limb_weakness", "weakness", "ataxia"],
+    # 出血斑 — 両生類はネイティブ petechiae（レッドレッグの定義的所見）、
+    # 他種は皮膚出血/病変へフォールバック（2026-09 第26弾）
+    "petechiae": ["skin_hemorrhage", "hemorrhage", "bruising", "skin_lesions"],
     # Perianal
     "perineal_swelling": ["perianal_irritation", "swelling"],
     # Guinea pig scurvy

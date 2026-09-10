@@ -782,6 +782,22 @@ SYMPTOMS = [
         "name_en": "Vulvar Discharge (Pus / Abnormal Secretion)",
         "category": "general",
     },
+    # 2026-09 audit round 26: exposure-context flags (postpartum_lactating
+    # precedent). The two most common food-toxicosis owner reports in Japan
+    # had no legacy chat entry at all — the ingestion statement itself is the
+    # decisive diagnostic datum, so it gets a symptom ID.
+    {
+        "id": "onion_ingestion",
+        "name_ja": "玉ねぎ・ネギ類・ニンニクを食べた",
+        "name_en": "Onion / Allium / Garlic Ingestion",
+        "category": "general",
+    },
+    {
+        "id": "chocolate_ingestion",
+        "name_ja": "チョコレートを食べた",
+        "name_en": "Chocolate Ingestion",
+        "category": "general",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -3380,6 +3396,54 @@ DISEASES = [
             "cavalier_king_charles_spaniel": 1.4,
         },
     },
+    # 2026-09 audit round 26: the legacy chat DB had ZERO food-toxicosis
+    # entries, so 「玉ねぎ入りハンバーグを食べてしまった 元気がない 尿が赤い」
+    # ranked urolithiasis/cystitis first for the single most common canine
+    # food-toxicosis inquiry in Japan. The dog module (checkbox path) already
+    # carries Onion/Garlic Toxicosis and Chocolate Toxicosis — names are kept
+    # identical so the chat card's 疾患DBで詳細を開く pivot lands exactly.
+    {
+        "id": "allium_toxicosis",
+        "prevalence_tier": "common",
+        "name_ja": "タマネギ・ニンニク中毒",
+        "name_en": "Onion/Garlic Toxicosis",
+        "description_ja": "ネギ属（玉ねぎ・長ねぎ・ニラ・ニンニク）の有機硫黄化合物（N-プロピルジスルフィド等）が赤血球を酸化障害し、ハインツ小体形成→溶血性貧血を起こす食餌性中毒。加熱調理（ハンバーグ・すき焼き・味噌汁の具）でも毒性は失われません。摂取後1〜5日で元気消失・蒼白粘膜・赤〜茶色い尿（ヘモグロビン尿）・頻呼吸・嘔吐が出現。玉ねぎ約15〜30 g/kg（体重の0.5%）が中毒量の目安。特異的解毒薬はなく、摂取直後なら催吐・活性炭、以後は輸液と重症例で輸血（Cope 2005; Plumb's 10th ed）。数日遅れて発症するため「食べたが元気」でも経過観察が必要です。",
+        "description_en": "Organosulfur compounds (N-propyl disulfide etc.) in Allium species (onion, leek, chive, garlic) oxidise red-cell membranes and hemoglobin — Heinz body formation and hemolytic anemia. Cooking does NOT inactivate the toxin (hamburger steak, sukiyaki, miso soup are classic Japanese sources). Lethargy, pale mucous membranes, red-brown urine (hemoglobinuria), tachypnea and vomiting appear 1-5 days after ingestion; ~15-30 g/kg of onion (0.5% of body weight) is the guideline toxic dose. No antidote: emesis/activated charcoal if recent, then fluids and transfusion for severe anemia (Cope 2005; Plumb's 10th ed). Because signs are delayed, monitor even an initially well dog.",
+        # Ingestion-gated on purpose (pyometra guard pattern): every clinical
+        # sign of allium toxicosis (lethargy, pale gums, pigmenturia, tachypnea)
+        # is shared with IMHA/hemolytic anemia, and carrying them let this
+        # entry hijack hemolysis complaints without any exposure history. The
+        # entry matches ONLY on the stated ingestion; the clusters amplify it
+        # whenever the exposure is reported alongside signs.
+        "symptoms": [
+            "onion_ingestion",
+        ],
+        "severity": "high",
+        "recommended_tests": ["blood_test", "cbc", "urinalysis"],
+        "breed_risks": {
+            "shiba_inu": 1.4,
+            "akita": 1.4,
+        },
+    },
+    {
+        "id": "chocolate_toxicosis",
+        "prevalence_tier": "common",
+        "name_ja": "チョコレート中毒",
+        "name_en": "Chocolate Toxicosis",
+        "description_ja": "チョコレートのメチルキサンチン（テオブロミン・カフェイン）による中毒。犬はテオブロミン半減期が約17.5時間と長く蓄積しやすい。毒性はチョコの種類に依存（製菓用・ダーク >> ミルク >> ホワイト）。テオブロミン20 mg/kg超で嘔吐・下痢・多飲・落ち着きのなさ、40〜60 mg/kgで頻脈・不整脈・振戦、100 mg/kg超で痙攣・致死的。特異的解毒薬はなく、摂取2〜4時間以内の催吐＋活性炭（腸肝循環のため反復投与）、輸液、頻脈にβ遮断薬、振戦・痙攣に対症療法（Plumb's 10th ed; ASPCA APCC）。摂取量が分かる場合は本サイトの臨床計算機（チョコレート中毒）でリスク評価できます。",
+        "description_en": "Methylxanthine (theobromine/caffeine) poisoning from chocolate. The canine theobromine half-life is ~17.5 h, so signs are prolonged. Toxicity depends on chocolate type (baking/dark >> milk >> white). >20 mg/kg theobromine causes vomiting, diarrhea, polydipsia and restlessness; 40-60 mg/kg tachycardia, arrhythmias and tremors; >100 mg/kg seizures and death. No antidote: emesis within 2-4 h plus repeated activated charcoal (enterohepatic recirculation), IV fluids, beta-blockers for tachyarrhythmias, symptomatic control of tremors/seizures (Plumb's 10th ed; ASPCA APCC). This site's clinical calculator (chocolate toxicity) estimates the risk band when the amount is known.",
+        # Ingestion-gated on purpose (pyometra guard pattern): the systemic
+        # signs (vomiting, tremors, seizures, tachypnea) are all nonspecific
+        # and carrying them let this entry outrank idiopathic epilepsy for a
+        # plain seizure complaint. The entry matches ONLY on the stated
+        # ingestion; the clusters amplify it when signs accompany the report.
+        "symptoms": [
+            "chocolate_ingestion",
+        ],
+        "severity": "high",
+        "recommended_tests": ["blood_test", "ecg"],
+        "breed_risks": {},
+    },
 ]
 
 DISEASE_MAP = {d["id"]: d for d in DISEASES}
@@ -4457,6 +4521,13 @@ _PATHOGNOMONIC_CLUSTERS = [
     # must outrank idiopathic epilepsy when the nursing context is stated.
     (frozenset({"postpartum_lactating", "tremors"}), "eclampsia", 1.8),
     (frozenset({"postpartum_lactating", "seizures"}), "eclampsia", 1.8),
+    # A stated ingestion is the decisive datum for a food toxicosis — the
+    # exposure flag alone must put the toxicosis on top of whatever nonspecific
+    # signs accompany it (round-26 audit; worms_in_stool precedent).
+    (frozenset({"onion_ingestion"}), "allium_toxicosis", 1.8),
+    (frozenset({"onion_ingestion", "dark_urine"}), "allium_toxicosis", 2.0),
+    (frozenset({"chocolate_ingestion"}), "chocolate_toxicosis", 1.8),
+    (frozenset({"chocolate_ingestion", "tremors"}), "chocolate_toxicosis", 2.0),
     # Purulent vulvar discharge in a bitch = pyometra until proven otherwise
     # (Ettinger 8th ed; Hagman 2018) — a life-threatening emergency that must
     # be excluded before vaginitis. Single-sign cluster follows the oral_mass /

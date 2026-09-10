@@ -1615,6 +1615,7 @@ class TestQuickTapPhraseExtraction:
             "散歩中に急に倒れて意識を失った",
             "陰部から膿が出て水をよく飲む",
             "目やにがひどくて目が開かない",
+            "チョコレートを食べてしまった",
         ],
         "cat": [
             "食べない",
@@ -4672,3 +4673,120 @@ class TestChatClinicalAccuracyAuditRound25:
         # family is the correct feline bucket as well)
         ids_cat = _extract_species_symptoms("口の中にチーズ状のもの", "cat")
         assert "stomatitis" in ids_cat, ids_cat
+
+
+class TestChatClinicalAccuracyAuditRound26:
+    """2026-09 audit round 26: fresh 24-case sweep. Root causes were the
+    complete absence of food-toxicosis entries from the legacy dog chat DB
+    (onion/allium and chocolate — the two most common canine food-toxicosis
+    inquiries in Japan), no owner phrases for the pathognomonic feline
+    plantigrade stance, an untiered cat ectopic-ureter / paraneoplastic-
+    alopecia pair hijacking common complaints, missing unkempt-coat /
+    worried-foot-licking variants, and no 出血斑 (petechiae) vocabulary for
+    amphibian red-leg syndrome."""
+
+    def test_onion_ingestion_with_hemolysis_signs_ranks_allium_toxicosis_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("玉ねぎ入りハンバーグを食べてしまった 元気がない 尿が茶色い")
+        assert "onion_ingestion" in ids, ids
+        names = [m.get("name_ja") or "" for m in match_symptoms_to_diseases(ids)[:3]]
+        assert "タマネギ・ニンニク中毒" in names[0], names
+        # hemolytic anemia must follow as the sign-based differential
+        assert any("溶血" in n for n in names[1:]), names
+
+    def test_chocolate_ingestion_ranks_chocolate_toxicosis_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("チョコレートを食べてしまって震えている")
+        assert "chocolate_ingestion" in ids and "tremors" in ids, ids
+        top = match_symptoms_to_diseases(ids)[0]
+        assert "チョコレート中毒" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_toxicosis_entries_are_ingestion_gated(self):
+        # Without a stated ingestion, a plain seizure complaint must keep
+        # epilepsy first and a hemolysis complaint must keep IMHA/hemolytic
+        # anemia first — the toxicosis entries match ONLY on their exposure
+        # flag (pyometra discharge-gate pattern).
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+        from api.health_checker import DISEASE_MAP
+
+        assert DISEASE_MAP["allium_toxicosis"]["symptoms"] == ["onion_ingestion"]
+        assert DISEASE_MAP["chocolate_toxicosis"]["symptoms"] == ["chocolate_ingestion"]
+        ids = extract_symptoms_from_text("痙攣した 意識がなくなった")
+        top = match_symptoms_to_diseases(ids)[0]
+        assert "てんかん" in (top.get("name_ja") or ""), top.get("name_ja")
+        ids2 = extract_symptoms_from_text("元気がない 歯茎が白い おしっこが茶色い")
+        names2 = [m.get("name_ja") or "" for m in match_symptoms_to_diseases(ids2)[:2]]
+        assert any("溶血" in n or "貧血" in n for n in names2), names2
+
+    def test_toxicosis_names_mirror_dog_module_for_db_pivot(self):
+        # The chat card's 疾患DBで詳細を開く pivot lands via base-name exact
+        # match — legacy names must stay identical to the dog module entries.
+        from api.health_checker import DISEASE_MAP
+        from api.species import dog_diseases as dm
+
+        module_names = {(d.get("name"), d.get("name_ja")) for d in dm.DISEASES}
+        assert ("Onion/Garlic Toxicosis", "タマネギ・ニンニク中毒") in module_names
+        assert ("Chocolate Toxicosis", "チョコレート中毒") in module_names
+        assert DISEASE_MAP["allium_toxicosis"]["name_en"] == "Onion/Garlic Toxicosis"
+        assert DISEASE_MAP["allium_toxicosis"]["name_ja"] == "タマネギ・ニンニク中毒"
+        assert DISEASE_MAP["chocolate_toxicosis"]["name_en"] == "Chocolate Toxicosis"
+        assert DISEASE_MAP["chocolate_toxicosis"]["name_ja"] == "チョコレート中毒"
+
+    def test_cat_plantigrade_stance_ranks_diabetes_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("後ろ足のかかとをつけて歩く ぺたぺた歩き", "cat")
+        assert "plantigrade_stance" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "cat")[0]
+        assert "糖尿病" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_cat_pollakiuria_not_hijacked_by_ectopic_ureter(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        assert SPECIES_PREVALENCE["cat"].get("Feline Ectopic Ureter") == "rare"
+        ids = _extract_species_symptoms("急にトイレに何度も行くけどおしっこがほとんど出ていない 鳴いている", "cat")
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "cat")[:3]]
+        assert not any("異所性尿管" in n for n in names), names
+        assert any(("閉塞" in n) or ("膀胱炎" in n) or ("感染" in n) for n in names), names
+
+    def test_cat_elderly_unkempt_coat_surfaces_ckd_not_paraneoplastic_alopecia(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        assert SPECIES_PREVALENCE["cat"].get("Feline Paraneoplastic Alopecia") == "rare"
+        ids = _extract_species_symptoms("毛づくろいをしなくなって毛がボサボサ 痩せた", "cat")
+        assert "poor_coat" in ids and "weight_loss" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "cat")[:6]]
+        # the rare pancreatic-carcinoma marker must not lead the list
+        assert "傍腫瘍" not in names[0], names
+        assert any("腎" in n for n in names), names
+
+    def test_amphibian_red_leg_ranks_first_for_petechiae_complaint(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("皮膚が赤くなって足に出血斑 元気がない", "amphibian")
+        assert "petechiae" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "amphibian")[0]
+        assert "レッドレッグ" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_petechiae_alias_falls_back_safely_outside_amphibians(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # ferret carries petechiae natively (estrogen-induced marrow
+        # suppression); dog legacy path must not crash and resolves via the
+        # fallback chain
+        ids = _extract_species_symptoms("皮膚に出血斑がある", "ferret")
+        assert "petechiae" in ids, ids
+
+    def test_dog_worried_foot_licking_extracts_licking(self):
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        ids = extract_symptoms_from_text("散歩のあと足の裏を気にして舐めている")
+        assert "excessive_licking" in ids or "itching" in ids, ids
