@@ -446,6 +446,11 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "respiratory_distress",
     ],
     "neck_stiffness": ["neck_pain", "stiffness", "reluctance_to_move", "reluctance_move", "pain"],
+    # 犬IVDD（胸腰部）主訴「背中を痛がる・抱き上げると鳴く」— back_pain を持たない
+    # 種語彙では脊椎痛/疼痛/動きたがらない/円背姿勢へ安全にフォールバック
+    "back_pain": ["spinal_pain", "pain", "reluctance_to_move", "reluctance_move", "hunched_posture"],
+    # モルモット尿石症の排尿時発声 — 当該IDを持たない種では排尿困難/発声変化へ
+    "squealing_when_urinating": ["straining_to_urinate", "vocalization_changes", "pain"],
     # 鳥の緑色便（ビリベルジン尿）— 種ごとの便ID表記ゆれを吸収し、
     # 該当IDを持たない哺乳類等では diarrhea にフォールバック
     "diarrhea_green": ["yellow_green_droppings", "diarrhea_yellow_green", "green_droppings", "diarrhea"],

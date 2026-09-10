@@ -82,6 +82,7 @@ from api.drug_batch_55 import DRUGS_BATCH_55
 from api.drug_batch_56 import DRUGS_BATCH_56
 from api.drug_batch_57 import DRUGS_BATCH_57
 from api.drug_batch_58 import DRUGS_BATCH_58
+from api.drug_batch_59 import DRUGS_BATCH_59
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10848,6 +10849,16 @@ for _drug58 in DRUGS_BATCH_58:
         DRUGS.append(_drug58)
         _drug_index[_drug58["id"]] = _drug58
 
+# （ビノレルビン — 犬猫の気管支原性癌エントリが「Vinorelbine 15-18 mg/m² IV weekly」と
+#  用量付きで名指しするのに本体未収載だった（肺組織集積が使用根拠 — Poirier 2004 JVIM）;
+#  メチラポン — 猫クッシング「Metyrapone 65 mg/kg PO」参照、副腎摘出前安定化の古典薬;
+#  パシレオチド — 猫先端巨大症「Pasireotide 0.03 mg/kg SC」参照。オクトレオチドが
+#  猫でほぼ無効である受容体学的理由（sst5）ごと収載）
+for _drug59 in DRUGS_BATCH_59:
+    if _drug59["id"] not in _drug_index:
+        DRUGS.append(_drug59)
+        _drug_index[_drug59["id"]] = _drug59
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11337,7 +11348,8 @@ def resolve_drug_reference(token: str) -> str | None:
     for d in DRUGS:
         names = [d.get("name", ""), d.get("name_ja", "")]
         stems = [re.split(r"[（(]", n)[0].strip() for n in names]
-        cands = {_normalize_search_text(x) for x in names + stems + list(d.get("search_aliases") or []) if x}
+        variants = list(_KATAKANA_VARIANT_ALIASES.get(d["id"], ()))
+        cands = {_normalize_search_text(x) for x in names + stems + list(d.get("search_aliases") or []) + variants if x}
         cands.discard("")
         if q in cands:
             exact.append(d["id"])
@@ -11645,6 +11657,30 @@ _KATAKANA_VARIANT_ALIASES["calcium_glubionate"] = (
     "グルビオン酸カルシウム",
     "グルビオン酸",
 )
+
+# 2026-09 sweep #25: the Adequan monograph exists
+# (id=polysulfated_glycosaminoglycan, canonical name_ja 多硫酸化グリコサミノグリカン)
+# but dozens of equine musculoskeletal treatment texts cite it as
+# ポリ硫酸グリコサミノグリカン(Adequan) and dog/cat OA / hip-dysplasia / FIC texts as
+# "Adequan (PSGAG)" — none of which reached the keyword index (Latin paren
+# parts are not tier-4 indexed; the ポリ硫酸 word-order variant never reduces to
+# the canonical 多硫酸化 name). Bare English chemical-name aliases for entries
+# whose EN form only lived inside paren suffixes:
+#   - "Glargine (Lantus) 1-2 IU/cat" (first-line cat diabetes text) → insulin_glargine
+#   - "Acetylcysteine 5-10 mg/kg PO" (avian mucolytic texts) → n_acetylcysteine
+#   - "Tryptophan"-only citations → l_tryptophan
+_KATAKANA_VARIANT_ALIASES["polysulfated_glycosaminoglycan"] = (
+    "ポリ硫酸グリコサミノグリカン",
+    "ポリ硫酸化グリコサミノグリカン",
+    "アデクアン",
+    "adequan",
+    "psgag",
+)
+_KATAKANA_VARIANT_ALIASES["insulin_glargine"] = _KATAKANA_VARIANT_ALIASES.get("insulin_glargine", ()) + ("glargine",)
+_KATAKANA_VARIANT_ALIASES["n_acetylcysteine"] = _KATAKANA_VARIANT_ALIASES.get("n_acetylcysteine", ()) + (
+    "acetylcysteine",
+)
+_KATAKANA_VARIANT_ALIASES["l_tryptophan"] = _KATAKANA_VARIANT_ALIASES.get("l_tryptophan", ()) + ("tryptophan",)
 
 
 # Japanese dose-form / salt / strength suffixes that formulary names carry but

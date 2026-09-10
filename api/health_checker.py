@@ -455,6 +455,18 @@ SYMPTOMS = [
         "category": "musculoskeletal",
     },
     {
+        "id": "back_pain",
+        "name_ja": "背中の痛み・抱き上げると鳴く",
+        "name_en": "Back Pain / Cries When Picked Up",
+        "category": "musculoskeletal",
+    },
+    {
+        "id": "pain",
+        "name_ja": "痛がる（部位不特定）",
+        "name_en": "Pain (Unlocalized)",
+        "category": "general",
+    },
+    {
         "id": "joint_swelling",
         "name_ja": "関節の腫れ",
         "name_en": "Joint Swelling",
@@ -1389,6 +1401,7 @@ DISEASES = [
             "tremors",
             "incontinence",
             "neck_pain",
+            "back_pain",
         ],
         "severity": "moderate",
         "recommended_tests": ["mri", "xray", "ct_scan", "emg"],
@@ -1933,6 +1946,7 @@ DISEASES = [
             "eye_swelling",
             "lethargy",
             "vision_loss",
+            "pain",
         ],
         "severity": "moderate",
         "recommended_tests": ["tonometry", "cerf_exam"],
@@ -4431,6 +4445,11 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"vomiting", "abdominal_pain"}), "pancreatitis", 1.5),
     # Glaucoma: cloudiness + eye swelling + squinting
     (frozenset({"cloudiness_in_eyes", "eye_swelling", "squinting"}), "glaucoma", 2.0),
+    # Acute glaucoma: a suddenly cloudy AND painful eye is an emergency where
+    # glaucoma/ulcer must outrank incidental 1-sign entries (corneal dystrophy
+    # is non-painful — Maggs, Slatter's 6th ed).
+    (frozenset({"cloudiness_in_eyes", "pain"}), "glaucoma", 1.5),
+    (frozenset({"cloudiness_in_eyes", "pain"}), "corneal_ulcer", 1.4),
     # Lymphoma: swollen lymph nodes + weight loss + lethargy
     (frozenset({"swollen_lymph_nodes", "weight_loss", "lethargy"}), "lymphoma", 1.7),
     # Allergic dermatitis (food/contact): pruritus WITH concurrent GI signs is

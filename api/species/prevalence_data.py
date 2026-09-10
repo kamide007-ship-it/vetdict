@@ -250,6 +250,9 @@ SPECIES_PREVALENCE = {
         "Flea Allergy Dermatitis": "very_common",
         "Feline Lower Urinary Tract Disease (FLUTD)": "very_common",
         "Feline Idiopathic Cystitis (FIC)": "very_common",
+        # 先天奇形 — 猫の異所性尿管は犬よりさらに稀（Holt & Gibbs）。未tierのまま
+        # 3所見セットのカバレッジで血尿+頻尿主訴のFIC/UTIを上回っていた
+        "Feline Ectopic Ureter": "rare",
         # CKD続発の腎性二次性上皮小体機能亢進は独立診断としては uncommon —
         # 未tierでPU/PD主訴の子宮蓄膿症を押しのけていた
         "Feline Renal Secondary Hyperparathyroidism": "uncommon",
@@ -1450,6 +1453,9 @@ SPECIES_PREVALENCE = {
     # CHINCHILLA
     # ==================================================================
     "chinchilla": {
+        # 先天性疾患 — 未tierのまま2所見カバレッジで小糞粒主訴のGIうっ滞を上回っていた
+        # （ウサギMegacolon=rareと同型の是正。チンチラの糞量減少の主因はうっ滞）
+        "Congenital Megacolon": "rare",
         "Upper Respiratory Infection": "very_common",
         "Diarrhea": "very_common",
         "Dental Malocclusion - Incisor": "very_common",
