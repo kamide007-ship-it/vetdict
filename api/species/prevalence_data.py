@@ -256,6 +256,10 @@ SPECIES_PREVALENCE = {
         # CKD続発の腎性二次性上皮小体機能亢進は独立診断としては uncommon —
         # 未tierでPU/PD主訴の子宮蓄膿症を押しのけていた
         "Feline Renal Secondary Hyperparathyroidism": "uncommon",
+        # 膵癌/胆管癌の傍腫瘍症候群（光沢のある急性脱毛）— 真に稀な腫瘍マーカー
+        # なのに未tier小セットで高齢猫の削痩+被毛粗剛主訴（CKD/甲状腺機能亢進の
+        # 古典像）の1位を奪っていた（2026-09 第26弾。Turek 2003 Vet Dermatol）
+        "Feline Paraneoplastic Alopecia": "rare",
         "Hyperthyroidism": "very_common",
         "Chronic Kidney Disease (CKD)": "very_common",
         "Periodontal Disease": "very_common",

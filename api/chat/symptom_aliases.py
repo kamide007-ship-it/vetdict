@@ -2388,6 +2388,38 @@ SYMPTOM_ALIASES = {
     # 鳥趾瘤症（バンブルフット）の趾表現（「足の裏が赤い」のみで趾が欠落）
     "足の指が赤く腫れ": "foot_sores",
     "足の指が腫れ": "foot_sores",
+    # --- 2026-09 第26弾 ---
+    # 食餌性中毒の摂取文脈（レガシー犬DBに中毒エントリ新設 — 摂取の申告自体が
+    # 決定的な診断情報。postpartum_lactating と同型の文脈フラグ）
+    "玉ねぎを食べ": "onion_ingestion",
+    "たまねぎを食べ": "onion_ingestion",
+    "タマネギを食べ": "onion_ingestion",
+    "ネギを食べ": "onion_ingestion",
+    "ねぎを食べ": "onion_ingestion",
+    "ニラを食べ": "onion_ingestion",
+    "ニンニクを食べ": "onion_ingestion",
+    "玉ねぎ入り": "onion_ingestion",
+    "ネギ入り": "onion_ingestion",
+    "チョコレートを食べ": "chocolate_ingestion",
+    "チョコを食べ": "chocolate_ingestion",
+    "チョコを盗み食い": "chocolate_ingestion",
+    # 猫の蹠行姿勢（かかと歩行）= 糖尿病性神経障害のpathognomonic
+    # （cat語彙に plantigrade_stance は実在するのに飼い主表現が皆無だった）
+    "かかとをつけて歩": "plantigrade_stance",
+    "かかとを地面につけ": "plantigrade_stance",
+    "かかとで歩": "plantigrade_stance",
+    "ぺたぺた歩": "plantigrade_stance",
+    # 高齢猫の毛づくろい低下（「毛づやが悪い」のみでグルーミング低下形が欠落）
+    "毛づくろいをしなくな": "poor_coat",
+    "毛づくろいしなくな": "poor_coat",
+    "毛がボサボサ": "poor_coat",
+    "毛並みがボサボサ": "poor_coat",
+    # 足裏を気にする舐め行動（「足の裏を舐め」のみで「気にして」介在形が欠落）
+    "足の裏を気にし": "excessive_licking",
+    "足を気にして舐め": "excessive_licking",
+    # 出血斑（両生類レッドレッグ・点状出血の飼い主表現）
+    "出血斑": "petechiae",
+    "皮膚に赤い斑点": "petechiae",
     # --- 2026-09 Round 26 ---
     # 犬IVDD（胸腰部）の代表的主訴「背中を痛がる・抱き上げると鳴く」が抽出不能だった
     # （馬パスは EQUINE_SYMPTOM_ALIASES の body_back_pain が優先されるため不変）

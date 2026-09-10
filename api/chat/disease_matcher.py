@@ -218,6 +218,10 @@ _SYN: dict[str, list[str]] = {
     "crop_distension": ["crop_stasis", "crop_swelling", "ingluvitis"],
     "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
     "red_ventrum": ["red_legs", "skin_redness"],
+    # 出血系の相互ブリッジ: 飼い主は点状出血・皮膚出血・出血斑を区別できない
+    # （両生類レッドレッグ = petechiae/hemorrhage 併記の代表例、2026-09 第26弾）
+    "hemorrhage": ["petechiae", "skin_hemorrhage", "red_legs"],
+    "petechiae": ["hemorrhage", "skin_hemorrhage", "bruising"],
     "edema": ["swelling", "bloating", "ascites"],
     "swelling": ["edema", "facial_swelling", "eye_swelling"],
     # 2026-09 第21回精度スイープ: 「あごの下が腫れ」→jaw_swelling がウサギの

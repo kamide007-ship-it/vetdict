@@ -3333,3 +3333,52 @@ class TestBatch59VinorelbineMetyraponePasireotideAndPsgagAliases:
         assert resolve_drug_reference("ポリ硫酸グリコサミノグリカン") == "polysulfated_glycosaminoglycan"
         assert resolve_drug_reference("UDCA") == "ursodiol"
         assert resolve_drug_reference("マヌカハニー") == "silver_honey"
+
+
+class TestBatch60Methazolamide:
+    """2026-09 audit (25th sweep, parallel session — renumbered batch 60 on merge): methazolamide was dosed by name in the
+    formulary's own canine glaucoma flagship ("methazolamide 2-4 mg/kg PO
+    q12h"), hedgehog glaucoma, and small-mammal glaucoma guidance — with the
+    canine text even comparing it favourably against acetazolamide — yet only
+    acetazolamide had a monograph (self-referential gap)."""
+
+    def test_methazolamide_present_with_cai_class_safety_facts(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "methazolamide")
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is True
+        assert "2-4 mg/kg" in dog["dosage"]
+        assert dog["dosage_ja"] and "2-4 mg/kg" in dog["dosage_ja"]
+        # class-defining fact: systemic + topical CAI gives no additive IOP
+        # benefit — the combination rule must be stated (Gelatt's 6th ed)
+        assert "ドルゾラミド" in dog["notes_ja"]
+        assert "no additional iop" in dog["notes"].lower()
+        # cats: lower dose, hypokalemia-prone, topical CAI preferred
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is True and "1-2 mg/kg" in cat["dosage"]
+        assert "ドルゾラミド" in cat["dosage_ja"]
+        # hedgehog dose matches the formulary's own hedgehog glaucoma entry
+        hh = d["species_info"]["hedgehog"]
+        assert hh["safe"] is True and "2-4 mg/kg" in hh["dosage"]
+        # hepatic contraindication (ammonia excretion) is definitional for CAIs
+        assert "肝" in d["contraindications_ja"]
+        assert "hepatic" in d["contraindications"].lower()
+        # salicylate interaction must be major
+        assert any(
+            "salicylate" in (i.get("drug", "") + i.get("effect", "")).lower() and i.get("severity") == "major"
+            for i in d["drug_interactions"]
+        )
+
+    def test_methazolamide_resolves_in_text_matcher_and_reverse_lookup(self):
+        from api.drug_dictionary import find_diseases_for_drug, find_drugs_in_text
+
+        for text in (
+            "メタゾラミド（内服）2〜4 mg/kg 12時間毎",
+            "Systemic: methazolamide 2-4 mg/kg PO q8-12h",
+            "具体的な薬剤目安: methazolamide 2-4 mg/kg PO",
+        ):
+            ids = [h["id"] for h in find_drugs_in_text(text)]
+            assert "methazolamide" in ids, (text, ids)
+        # the drug->disease reverse card must not be a dead end
+        assert len(find_diseases_for_drug("methazolamide")) >= 3

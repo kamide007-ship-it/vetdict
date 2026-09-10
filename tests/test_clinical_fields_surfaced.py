@@ -669,6 +669,36 @@ def test_app_js_chat_cards_surface_emergency_protocol_pivot():
     assert "navigateToEmergencyProtocol(" in handler
 
 
+def test_app_js_disease_to_calculator_pivot_wired():
+    """Round 26 UX: diseases whose next clinical action IS a calculation get a
+    one-tap pivot into the clinical calculators — chocolate toxicosis opens
+    the chocolate risk-band tab (completing the calculator→disease reverse
+    link that already existed) and CKD opens IRIS staging (dog/cat gated).
+    Wired on all four surfaces: checker result cards, chat candidate cards
+    (free + guided), and the disease-DB detail cross-nav."""
+    # species-gated map with the two curated targets
+    assert "const DISEASE_CALC_MAP=[" in APP_JS
+    map_src = APP_JS.split("const DISEASE_CALC_MAP=[")[1].split("];")[0]
+    assert '"choco"' in map_src and '["dog"]' in map_src
+    assert '"iris"' in map_src and '["dog","cat"]' in map_src
+    # helper + renderers exist
+    assert "function _calcTabForDisease(" in APP_JS
+    assert "function renderCalculatorCrossLink(" in APP_JS
+    assert "function _chatCalcLink(" in APP_JS
+    # all four render surfaces call into the map
+    assert "${renderCalculatorCrossLink(d)}" in APP_JS  # checker card
+    assert "_chatCalcLink(c.name_en,c.name_ja," in APP_JS  # free chat
+    assert "_chatCalcLink(d.name,d.name_ja," in APP_JS  # guided final
+    assert 'class="cross-nav-btn calc-nav-link"' in APP_JS  # DB detail
+    # every delegated handler that owns one of those surfaces routes the
+    # link through openClinicalCalculators with the mapped tab
+    assert APP_JS.count('closest(".calc-nav-link")') >= 3
+    for chunk_marker in ("function _attachChatNavHandlers(",):
+        handler = APP_JS.split(chunk_marker)[1].split("\nfunction ")[0]
+        assert 'closest(".calc-nav-link")' in handler
+        assert "openClinicalCalculators({tab:" in handler
+
+
 def test_app_js_emergency_map_covers_airway_hemorrhage_pte_protocols():
     """2026-09 round 26: three server-side emergency protocols
     (respiratory_failure / hemorrhagic_shock / ards_pulmonary_thromboembolism)
