@@ -5224,6 +5224,7 @@ def test_served_db_flagship_toxicoses_carry_agent_specific_treatment():
     conn = sqlite3.connect(str(db))
     conn.row_factory = sqlite3.Row
     try:
+
         def tx(species, name):
             row = conn.execute(
                 "SELECT treatment_ja FROM diseases WHERE species=? AND name=?", (species, name)

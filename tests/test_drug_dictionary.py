@@ -3419,9 +3419,13 @@ class TestBatch61IndomethacinAndSweep26Aliases:
 
         assert any(
             d["id"] == "indomethacin"
-            for d in find_drugs_in_text("Indomethacin 1-2 mg/kg PO q12h (reduces prostaglandin-mediated renal blood flow)")
+            for d in find_drugs_in_text(
+                "Indomethacin 1-2 mg/kg PO q12h (reduces prostaglandin-mediated renal blood flow)"
+            )
         )
-        assert any(d["id"] == "indomethacin" for d in find_drugs_in_text("持続性PDA→インドメタシン0.2 mg/kg IV q12h×3回"))
+        assert any(
+            d["id"] == "indomethacin" for d in find_drugs_in_text("持続性PDA→インドメタシン0.2 mg/kg IV q12h×3回")
+        )
 
     def test_alpha_interferon_word_order_and_albuterol_aliases(self):
         from api.drug_dictionary import find_drugs_in_text
