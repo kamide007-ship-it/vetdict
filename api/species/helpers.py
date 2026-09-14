@@ -112,6 +112,8 @@ _DEDUP_TEMPLATE_MARKS = (
     "正確な臨床評価（病歴、身体検査、CBC・生化学、画像）から治療方針を決定",
     "is a clinical condition affecting",
     "is a clinical disorder affecting",
+    "特異的解毒剤がある場合は投与する（例：抗凝固性殺鼠剤にビタミンK1",
+    "Treatment of toxicosis follows the principles of decontamination",
 )
 
 
@@ -851,6 +853,14 @@ _TEMPLATE_MARKERS = (
     "真菌は分生子または菌糸",
     "寄生虫は宿主組織に定着し",
     "にみられる疾患である",
+    # Generic toxin-decontamination treatment boilerplate ("迅速な除染と支持
+    # 療法…催吐…活性炭…特異的解毒剤がある場合は投与する"). Marking it lets a
+    # curated JSON treatment replace a templated module treatment at runtime,
+    # and (via the shared richness/dedup logic) stops the boilerplate from
+    # out-ranking a curated twin. The full example clause is used so genuine
+    # curated antidote protocols never fingerprint-match.
+    "特異的解毒剤がある場合は投与する（例：抗凝固性殺鼠剤にビタミンK1",
+    "Treatment of toxicosis follows the principles of decontamination",
 )
 
 

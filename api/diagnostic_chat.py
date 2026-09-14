@@ -855,6 +855,18 @@ def extract_symptoms_from_text(text: str) -> list:
         # direct legacy coat-quality ID — chronic-disease coat change most
         # closely presents as hair loss in the legacy vocabulary.
         "poor_coat": ["hair_loss"],
+        # --- 2026-09 Round 27 ---
+        # "歯がぐらぐら" resolves to loose_teeth (guinea-pig scurvy vocabulary);
+        # in the legacy dog vocabulary tooth mobility is a periodontal-disease
+        # presentation — halitosis is its co-reported anchor sign.
+        "loose_teeth": ["bad_breath"],
+        # "肉球がえぐれて/足の裏を痛がる" resolves to foot_sores (pododermatitis
+        # vocabularies); the legacy dog vocabulary expresses paw complaints
+        # through the licking/lameness signals.
+        "foot_sores": ["excessive_licking", "limping"],
+        # "瞳が開いたまま/目の色が左右で違う" resolves to dilated_pupils (feline
+        # vocabulary); the closest legacy dog signals are the visual-deficit IDs.
+        "dilated_pupils": ["vision_loss", "cloudiness_in_eyes"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

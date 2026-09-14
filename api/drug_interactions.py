@@ -58,6 +58,30 @@ INTERACTIONS: list[dict[str, Any]] = [
         "ref": "AAHA 2020",
     },
     {
+        # Indomethacin (batch 61) is among the most ulcerogenic NSAIDs known in
+        # dogs — the steroid combination is the single most dangerous pairing.
+        "drug_a": "indomethacin",
+        "drug_b": "prednisolone",
+        "severity": SEVERITY_CONTRAINDICATED,
+        "mechanism": "胃腸粘膜保護の二重阻害（最も潰瘍原性の高いNSAIDの一つ）",
+        "effect_en": "Indomethacin is among the most ulcerogenic NSAIDs in dogs; adding a corticosteroid makes GI hemorrhage/perforation likely.",
+        "effect_ja": "インドメタシンは犬で最も潰瘍原性の高いNSAIDの一つであり、ステロイド併用で消化管出血・穿孔が現実的リスクとなる。",
+        "management_en": "Never combine. Even alone, use only for the documented niche indications with gastroprotection.",
+        "management_ja": "併用絶対禁忌。単独でも文書化されたニッチ適応に限り消化管保護併用で使用する。",
+        "ref": "Plumb's 10th ed.; Ewing JAVMA 1972",
+    },
+    {
+        "drug_a": "indomethacin",
+        "drug_b": "meloxicam",
+        "severity": SEVERITY_CONTRAINDICATED,
+        "mechanism": "COX阻害の重複",
+        "effect_en": "Concurrent NSAIDs sharply increase GI ulceration/perforation and renal toxicity — indomethacin is already the highest-risk member.",
+        "effect_ja": "NSAIDs併用で消化管潰瘍・穿孔・腎毒性が急増 — インドメタシンは単独でも最高リスク群。",
+        "management_en": "Do not use concurrently; observe a 5-7 day washout when switching.",
+        "management_ja": "併用禁忌。切替時は5-7日のウォッシュアウトを設ける。",
+        "ref": "Plumb's 10th ed.",
+    },
+    {
         "drug_a": "meloxicam",
         "drug_b": "furosemide",
         "severity": SEVERITY_MAJOR,

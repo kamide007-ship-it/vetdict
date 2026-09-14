@@ -84,6 +84,7 @@ from api.drug_batch_57 import DRUGS_BATCH_57
 from api.drug_batch_58 import DRUGS_BATCH_58
 from api.drug_batch_59 import DRUGS_BATCH_59
 from api.drug_batch_60 import DRUGS_BATCH_60
+from api.drug_batch_61 import DRUGS_BATCH_61
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10871,6 +10872,16 @@ for _drug60 in DRUGS_BATCH_60:
         DRUGS.append(_drug60)
         _drug_index[_drug60["id"]] = _drug60
 
+# Batch 61: 2026-09 監査（第26回スイープ）の referenced-but-absent 補完
+# （インドメタシン — 自サイトの犬・腎性尿崩症エントリが「1-2 mg/kg PO q12h」、
+#  馬・新生子PDAエントリが「0.2 mg/kg IV q12h×3」と用量付きで名指しするのに
+#  未収載だった。犬で最も潰瘍原性の高いNSAIDの一つであり、鎮痛薬ではなく
+#  2つのニッチ用途をガードレール付きで文書化するためのモノグラフ）
+for _drug61 in DRUGS_BATCH_61:
+    if _drug61["id"] not in _drug_index:
+        DRUGS.append(_drug61)
+        _drug_index[_drug61["id"]] = _drug61
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11484,7 +11495,17 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
         "ペニシリン",
     ),  # procaine formulation / bare class-archetype (732 treatment refs incl. guinea-pig contraindication notes)
     "l_carnitine": ("カルニチン",),  # canonical: L-カルニチン
-    "salbutamol": ("アルブテロール",),  # albuterol = USAN of salbutamol
+    "salbutamol": (
+        "アルブテロール",
+        "albuterol",  # 2026-09 sweep #26: EN "Albuterol inhaler 90 μg" in feline asthma texts
+    ),  # albuterol = USAN of salbutamol
+    "interferon_alpha": (
+        # 2026-09 sweep #26: 鳥PBFD/ポリオーマ治療文11件が「組換えαインターフェロン
+        # 1-10万IU/kg SC」とα前置の語順で表記し、正準名「インターフェロンα」に
+        # 不一致だった。ωは常に「インターフェロンω/オメガ」表記のため衝突しない。
+        "αインターフェロン",
+        "アルファインターフェロン",
+    ),
     "leuprolide": (
         "リュープロリド",
         # 2026-08 sweep #16: 治療文は ロイプロリド（20参照）/ リュープロライド（4参照）

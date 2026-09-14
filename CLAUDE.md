@@ -5182,3 +5182,110 @@ MgSO4×18 + MgO×19 + マグネシウム補充×4 が魚用薬浴エントリ「
   - レガシー犬DBはマージ後 **85疾患・83症状**（+onion/chocolate_ingestion 本セッション、+back_pain/pain main）
   - pendingStats はマージ後実測 **630薬品**（627+3）・symptoms **83** に同期、dog 572/cat 550
   - ServiceWorker: 両セッションが v151 → **v152** に改番
+
+## 2026-09セッション（第43弾: 汎用毒物治療テンプレートの全域撲滅 + 消失疾患5件の復元 + インドメタシン補完 + チャット精度第27弾）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,300件合格**（34 skip、ベースライン）
+- 配信SQLiteクリーンビルド: 6,893疾患、主要JAフィールド（治療/病因/予後/予防/説明/病態）の空欄 **0**、キリル文字混入 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（630薬品時点、全species_info検証）、文字列型相互作用スキーマ **0**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 薬品マッチャー飽和度（第26回スイープ、片仮名+英語×用量文脈）: 上位候補は実フレーズで全解決を確認
+
+### 汎用毒物治療テンプレートの全域撲滅（82件 — 臨床的に危険な誤治療の是正）
+配信監査で、**82の中毒レコードが単一の200字「汎用除染テンプレート」treatment を共有**していた
+（「…催吐…胃洗浄…活性炭…特異的解毒剤がある場合は投与する（例：殺鼠剤にビタミンK1…）」/
+EN "Treatment of toxicosis follows the principles of decontamination…"）。害は3系統:
+1. **キュレート済みモジュール治療の上書き**: migrate の JSON オーバーレイ（COALESCE）が
+   犬チョコレート（753c アポモルヒネ・プロトコル）・EG（1132c）・ペルメトリン・毒蛇咬傷
+   （「切開・吸引禁忌」）・サケ中毒症（リケッチア→ドキシサイクリン）等 **33件のキュレート
+   モジュール治療を200cのテンプレートで置換**していた → `_guard_treatment`（migrate）・
+   `_TEMPLATE_MARKERS`（runtime helpers）・`_DEDUP_TEMPLATE_MARKS`（dedupe richness）の
+   3ガードに毒物テンプレートFPを追加し全件復元
+2. **クロスカテゴリ誤適用**: 猫「中毒性巨大結腸症」（便秘疾患!）に催吐・活性炭、猫TEN
+   （薬物有害反応）に除染、魚のアンモニア中毒に催吐（魚に催吐は存在しない）
+3. **template-only 49件は誤った解毒剤情報**: 猫ユリ（→輸液が予後を決める・18時間窓）・
+   猫アセトアミノフェン（→NAC 140→70×7回）・猫EG（→**猫用高用量フォメピゾール125 mg/kg・
+   3時間窓** Connally 2010）・猫イベルメクチン/大麻/ティーツリー（→静注脂肪乳剤ILE）・
+   ブロメタリン（解毒剤なし・反復活性炭）・メタアルデヒド（振戦後の催吐禁忌）等が
+   全て「殺鼠剤にビタミンK1」の例文で済まされていた
+- **新規ライブラリ `scripts/template_elimination/toxicosis_treatment_library.py`**:
+  正確な(species, name)キー49件のキュレート治療（JA+EN、Plumb's 10th/Peterson & Talcott 3rd/
+  Carpenter 6th/Mader 3rd/Ritchie & Harrison準拠）。猫19（ユリ×2・アセトアミノフェン×2・EG・
+  チョコ・ネギ・NSAID・殺鼠剤・鉛・亜鉛・OP・塩・イベルメクチン・大麻・メタアルデヒド・
+  ブロメタリン・ティーツリー・TEN・巨大結腸症）+ 爬虫類4種×（イベルメクチン=**リクガメ絶対禁忌**・
+  鉛・メトロニダゾール）+ 鳥（鉛キレーション・アボカド・精油・植物・殺鼠剤・煙/PTFE・チョコ）+
+  デグー/GP/フェレット/ブタ/フクロモモンガ/魚
+- **EN backfill 25件**: JAは充実しているのにENだけテンプレートだったレコード（GP血小板減少症に
+  英語で除染プロトコル等）に、既存JAの忠実な英訳を収載（新規医学的主張なし）
+- **さらに別系統の誤テンプレート10件を発見・修正**: インコ/オウム急性腎不全とUrolithiasisに
+  **哺乳類の尿石症プロトコル**（ストルバイト酸性化・尿道カテーテル — 鳥に膀胱はない）→
+  鳥AKI/総排泄腔尿石の正しい内容に置換。小型哺乳類5種の**急性**腎不全のENが**CKD管理**文 →
+  AKI管理（原因除去・利尿維持・乏尿の過剰輸液警告）に置換。トカゲ大腿腺閉塞のワークアップ
+  テンプレート → 温浴・用手圧出・飼育環境是正の疾患固有内容に
+- 適用: `fix_toxicosis_treatments.py --apply`（JA 60 + EN 61置換）→ 配信SQLite実測で
+  毒物テンプレートJA/EN **0件**・urolith-on-bird **0件**・CKD-on-AKI **0件**
+
+### 消失疾患5件の復元（dedupe richness × canonical map — 第20弾と同機序）
+- テンプレート減点の追加により、**テンプレートで文字数水増しされた双子が dedupe に勝って
+  canonical マップに隠され、疾患ごと消えていた5件が復元**: bird Lead Poisoning (Plumbism)・
+  Zinc Poisoning、parakeet Lead Toxicosis、tortoise/lizard Renal Failure (Chronic Kidney Disease)
+  （canonical マップはこれらを正準と宣言していたが、水増し richness 差が near-tie 帯（300c）を
+  超えており stabiliser が効かなかった）。before/after 全種diffで **追加のみ・消失ゼロ** を検証
+- 配信ブラウズ数: 6,450 → **6,455**（検索インデックス再生成）
+
+### referenced-but-absent 薬品1剤の補完（`drug_batch_61.py` 新規、630→631薬品）
+- **インドメタシン** — 自サイトの犬・腎性尿崩症エントリが「1-2 mg/kg PO q12h（限定使用）」、
+  馬・新生子PDAエントリが「0.2 mg/kg IV q12h×3（動脈管閉鎖促進）」と用量付きで名指しするのに
+  未収載だった自己参照ギャップ。**犬で最も潰瘍原性の高いNSAIDの一つ**（低用量でも致死的
+  出血性胃症 — Ewing JAVMA 1972）のため、鎮痛薬としてではなく2つのニッチ用途を
+  ガードレール付きで文書化（犬 safe:False + 消化管保護必須・猫禁忌・馬は新生子PDAのみ）。
+  ステロイド/他NSAIDs併用=major。逆引き「この薬品を使う疾患」3疾患。
+  **相互作用レジストリ（drug_interactions.py）にも登録**（×プレドニゾロン=contraindicated・
+  ×メロキシカム=contraindicated — 併用チェッカーで1タップ検出、find_interactions 到達を回帰テストで固定）
+- **エイリアス2系統**: 「組換えαインターフェロン 1-10万IU/kg」（鳥PBFD/ポリオーマ11件の
+  α前置語順）→interferon_alpha（ωは非衝突を検証）、EN "Albuterol"→salbutamol
+
+### 診断チャット精度 第27弾（50症例フレッシュスイープ 9 MISS → 全症例合格）
+- **レガシー犬DBにブドウ・レーズン中毒を新設**（85→86疾患、83→84症状）: 日本の犬の代表的
+  食餌性中毒（特発性AKI・酒石酸・安全量なし）なのに「ぶどうを食べてしまった 嘔吐」が
+  急性胃腸炎1位だった → grape_ingestion 摂取文脈フラグ（onion/chocolateと同型のゲート設計 —
+  素の嘔吐主訴を乗っ取らないことを回帰テストで固定）+ エイリアス7種（レーズンパン含む）+
+  クラスタ{grape_ingestion}×1.8/{+vomiting}×2.0 → rank 1。名前はdogモジュール
+  「Grape/Raisin Toxicosis」と完全一致（疾患DBピボット着地・prevalence prior 共に接続）
+- **黄疸の連用形**: 「白目が黄色くて…おしっこが濃い」が抽出ゼロ → 白目が黄色く/おしっこが濃い
+  → 溶血性貧血/IMHA/肝臓病 top-3
+- **動揺歯の語彙が全パスに皆無**: 「歯がぐらぐら」→loose_teeth 新設（GP壊血病のネイティブID —
+  壊血病 rank 1、_ID_SYNONYMS で猫 tooth_loss/他種 bad_breath 系へ、_LEGACY_FALLBACK で
+  犬は歯周病 rank 1）+ 口が臭く（連用形）
+- **瞳孔不同バリアント**: 瞳が開いたまま/瞳の大きさが違/目の色が左右で違→dilated_pupils
+  （猫: 網膜剥離/高血圧性網膜症 top-3、legacy犬は vision_loss へフォールバック）
+- **肉球損傷**: 肉球がえぐれ/切れ/から血/に傷・足の裏を痛が→foot_sores（legacy犬は
+  excessive_licking/limping フォールバック）
+- **回し車回避**: 回し車で走らなくなっ等→lethargy（ハムスターの代表的活動指標）
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound27`（10件 — grape rank1+摂取ゲート検証+
+  てんかんガード、黄疸、歯周病/GP壊血病、猫瞳孔不同、ハムスター、パッド損傷）
+
+### UX: クリック動線
+- クイック入力に「ぶどうを食べてしまった」（犬）を追加（ミラーテスト JA_QUICK 同期）
+- `DISEASE_EMERGENCY_MAP` に ブドウ・レーズン中毒→aki（犬）を追加 — チャット/チェッカー/
+  疾患DBの候補カードから「🚨 緊急対応プロトコル（AKI）」へワンタップ（種サブセットは
+  既存ミラーテストがCIで検証）
+- 新規薬品・復元疾患は既存の治療チップ/逆引き/相互作用チェッカー機構で3ビューから自動到達
+
+### 回帰テスト（+17件）
+- テンプレート: `test_served_db_has_no_generic_toxin_treatment_template`・
+  `test_served_db_flagship_toxicoses_carry_agent_specific_treatment`（ユリ18時間窓/NAC/
+  フォメピゾール/ILE/巨大結腸症の非中毒化/チョコ復元/サケ=ドキシ/毒蛇=切開禁忌/リクガメ
+  イベルメクチン絶対禁忌/魚=換水）・`test_served_db_avian_aki_and_urolithiasis_not_mammal_templated`・
+  `test_browse_restores_template_hidden_metal_and_renal_entries`
+- 薬品: `TestBatch61IndomethacinAndSweep26Aliases`（3件 — ガードレール・テキスト解決・
+  α語順とωの非窃取）
+- チャット: Round27（10件）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 573/cat 551/horse 362薬品・bird 485/parakeet 411/tortoise 249/
+  lizard 214疾患、pendingStats diseases 6450→**6455**・drugs 630→**631**・symptoms 83→**84**
+- ServiceWorker: `CACHE_NAME` v152 → **v153**
+- 再現手順: `fix_toxicosis_treatments.py --apply`（適用済み）→ `migrate_to_sqlite.py` →
+  `build_disease_search_index.py`

@@ -2403,6 +2403,16 @@ SYMPTOM_ALIASES = {
     "チョコレートを食べ": "chocolate_ingestion",
     "チョコを食べ": "chocolate_ingestion",
     "チョコを盗み食い": "chocolate_ingestion",
+    # --- 2026-09 Round 27 ---
+    # ブドウ・レーズン摂取（犬の特発性AKI — onion/chocolate と同じ摂取文脈フラグ。
+    # 従来は「ぶどうを食べてしまった 嘔吐」が急性胃腸炎1位で中毒が候補に出なかった）
+    "ぶどうを食べ": "grape_ingestion",
+    "ブドウを食べ": "grape_ingestion",
+    "葡萄を食べ": "grape_ingestion",
+    "レーズンを食べ": "grape_ingestion",
+    "干しぶどうを食べ": "grape_ingestion",
+    "干しブドウを食べ": "grape_ingestion",
+    "レーズンパンを食べ": "grape_ingestion",
     # 猫の蹠行姿勢（かかと歩行）= 糖尿病性神経障害のpathognomonic
     # （cat語彙に plantigrade_stance は実在するのに飼い主表現が皆無だった）
     "かかとをつけて歩": "plantigrade_stance",
@@ -2461,6 +2471,38 @@ SYMPTOM_ALIASES = {
     # 尿への血液混入（「便に血が混じる」等の長いキーが常に優先されるため、
     # 裸の「血が混じる」は排尿文脈の残余フラグメントでのみ発火する）
     "血が混じ": "blood_in_urine",
+    # --- 2026-09 Round 27 ---
+    # 黄疸の連用形（「白目が黄色い」終止形のみで「白目が黄色くて」が欠落）
+    "白目が黄色く": "jaundice",
+    "目が黄色く": "jaundice",
+    # 濃色尿の短縮形（「おしっこの色が濃い」のみで「おしっこが濃い」が欠落）
+    "おしっこが濃い": "dark_urine",
+    "尿が濃い": "dark_urine",
+    # 歯周病の動揺歯（歯のぐらつき語彙が皆無で「歯がぐらぐら」が抽出ゼロだった。
+    # loose_teeth はモルモット壊血病のネイティブID — 他種は ID_SYNONYMS で
+    # tooth_loss/bad_breath 系へフォールバック）
+    "歯がぐらぐら": "loose_teeth",
+    "歯がグラグラ": "loose_teeth",
+    "歯が抜けそう": "loose_teeth",
+    "歯がゆれ": "loose_teeth",
+    "歯が揺れ": "loose_teeth",
+    # 口臭の連用形（「口が臭い」終止形のみで「口が臭くて」が欠落）
+    "口が臭く": "bad_breath",
+    # 瞳孔異常の表現バリアント（「片方の瞳孔だけ大きさが違う」のみ収載だった。
+    # 「瞳孔が開いた」は既収載 — line 2236）
+    "瞳が開いたまま": "dilated_pupils",
+    "瞳の大きさが違": "dilated_pupils",
+    "目の色が左右で違": "dilated_pupils",
+    # 肉球損傷（パッド損傷の飼い主表現が皆無だった）
+    "肉球がえぐれ": "foot_sores",
+    "肉球が切れ": "foot_sores",
+    "肉球から血": "foot_sores",
+    "肉球に傷": "foot_sores",
+    "足の裏を痛が": "foot_sores",
+    # ハムスター等の活動量低下（回し車は齧歯類の代表的な活動指標）
+    "回し車で走らなくなっ": "lethargy",
+    "回し車を回さなくなっ": "lethargy",
+    "回し車に乗らなくなっ": "lethargy",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

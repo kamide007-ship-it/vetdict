@@ -5186,3 +5186,124 @@ def test_equine_sarcoid_etiology_is_bpv_not_generic_neoplasia():
     assert "イミキモド" in (sarcoid.treatment_protocol or "")
     melanoma = next(d for d in DISEASE_DATABASE if d.name_en == "Melanoma")
     assert "STX17" in (melanoma.etiology or ""), "grey-horse melanoma etiology must cite STX17"
+
+
+# ---------------------------------------------------------------------------
+# 2026-09 audit: generic toxin-decontamination treatment template elimination
+# (82 toxicosis records shared one 200-char boilerplate naming the WRONG
+#  antidotes; it also overwrote curated module protocols during migration and
+#  mis-applied emesis/charcoal to a megacolon cat, TEN, and a fish ammonia
+#  burn. Mammalian urolithiasis boilerplate sat on avian AKI/urolithiasis and
+#  a CKD protocol on small-mammal acute renal failure.)
+# ---------------------------------------------------------------------------
+
+TOXIN_TX_JA_SIG = "特異的解毒剤がある場合は投与する（例：抗凝固性殺鼠剤にビタミンK1"
+TOXIN_TX_EN_SIG = "Treatment of toxicosis follows the principles of decontamination"
+
+
+def test_served_db_has_no_generic_toxin_treatment_template():
+    """The generic toxin boilerplate must never surface in the served DB —
+    curated module protocols win via the migrate/runtime guards, and the
+    template-only records now carry curated agent-specific treatments."""
+    failures = []
+    for row in _served_db_rows_full("species, name, treatment_ja, treatment"):
+        if TOXIN_TX_JA_SIG in (row["treatment_ja"] or ""):
+            failures.append(f"[{row['species']}] {row['name']} (JA)")
+        if TOXIN_TX_EN_SIG in (row["treatment"] or ""):
+            failures.append(f"[{row['species']}] {row['name']} (EN)")
+    assert not failures, "Generic toxin treatment template served:\n" + "\n".join(failures[:12])
+
+
+def test_served_db_flagship_toxicoses_carry_agent_specific_treatment():
+    """The restored/curated protocols must name their actual antidotes."""
+    import sqlite3
+
+    db = ROOT / "instance" / "vetdict.db"
+    if not db.exists():
+        pytest.skip("served DB not present")
+    conn = sqlite3.connect(str(db))
+    conn.row_factory = sqlite3.Row
+    try:
+        def tx(species, name):
+            row = conn.execute(
+                "SELECT treatment_ja FROM diseases WHERE species=? AND name=?", (species, name)
+            ).fetchone()
+            return (row["treatment_ja"] or "") if row else ""
+
+        # cat lily → fluids-before-anuria window; acetaminophen → NAC;
+        # EG → feline high-dose fomepizole; ivermectin → lipid emulsion
+        assert "輸液" in tx("cat", "Lily Toxicosis") and "18時間" in tx("cat", "Lily Toxicosis")
+        assert "N-アセチルシステイン" in tx("cat", "Acetaminophen (Paracetamol) Toxicosis")
+        assert "フォメピゾール" in tx("cat", "Ethylene Glycol (Antifreeze) Poisoning")
+        assert "脂肪乳剤" in tx("cat", "Feline Ivermectin Toxicosis")
+        # megacolon is NOT a poisoning — no emesis/charcoal, real prokinetics
+        mega = tx("cat", "Feline Toxic Megacolon")
+        assert "催吐・活性炭は適応外" in mega and "ラクツロース" in mega
+        # dog module restorations (guard fix): chocolate decontam protocol,
+        # salmon poisoning = rickettsial doxycycline, snakebite = no suction
+        assert "アポモルヒネ" in tx("dog", "Chocolate Toxicosis")
+        assert "ドキシサイクリン" in tx("dog", "Salmon Poisoning Disease")
+        assert "禁忌" in tx("dog", "Snakebite Envenomation")
+        # tortoise ivermectin: absolute chelonian contraindication stated
+        assert "絶対禁忌" in tx("tortoise", "Ivermectin Toxicosis")
+    finally:
+        conn.close()
+    # fish ammonia burn is water-quality management, not decontamination —
+    # the record is JSON-overlay-only (no module row), so assert on the JSON.
+    import json
+
+    data = json.loads((ROOT / "diseases_all_species.json").read_text(encoding="utf-8"))
+    ammonia = next(
+        (e for e in data if e.get("name") == "Ammonia Burns / Poisoning (Fish)"),
+        None,
+    )
+    assert ammonia is not None
+    assert "換水" in (ammonia.get("treatment_ja") or "")
+    assert TOXIN_TX_JA_SIG not in (ammonia.get("treatment_ja") or "")
+
+
+def test_served_db_avian_aki_and_urolithiasis_not_mammal_templated():
+    """Birds have no bladder: the mammalian urolithiasis work-up (struvite
+    acidification, urinary catheter) must not serve as avian AKI/urolithiasis
+    treatment, and small-mammal ACUTE renal failure must not carry a CKD
+    protocol as its English treatment."""
+    urolith_ja = "結石組成同定後（X線吸収係数"
+    ckd_en = "CKD management. Renal diet (phosphorus/protein restricted)"
+    failures = []
+    for row in _served_db_rows_full("species, name, treatment_ja, treatment"):
+        sp, name = row["species"], row["name"] or ""
+        if sp in ("bird", "parakeet", "parrot") and urolith_ja in (row["treatment_ja"] or ""):
+            failures.append(f"[{sp}] {name}: mammalian urolith template (JA)")
+        if "Acute Renal Failure" in name and ckd_en in (row["treatment"] or ""):
+            failures.append(f"[{sp}] {name}: CKD protocol on acute renal failure (EN)")
+        if sp in ("parakeet", "parrot") and "【Small Mammal Urolithiasis】" in (row["treatment"] or ""):
+            failures.append(f"[{sp}] {name}: small-mammal urolith text on a bird (EN)")
+    assert not failures, "\n".join(failures[:10])
+
+
+def test_browse_restores_template_hidden_metal_and_renal_entries():
+    """Demoting the toxin template in dedupe richness restored five diseases
+    that a template-inflated twin had knocked out of the browse view (the
+    canonical map hid the surviving twin's slug — the T103 disappearance
+    class): bird lead/zinc poisoning, parakeet lead toxicosis, and the
+    tortoise/lizard chronic renal failure entries."""
+    import importlib
+
+    from api.species import canonical
+    from api.species.helpers import dedupe_disease_list, enrich_diseases
+
+    expected = {
+        "bird": {"Lead Poisoning (Plumbism)", "Zinc Poisoning"},
+        "parakeet": {"Lead Toxicosis"},
+        "tortoise": {"Renal Failure (Chronic Kidney Disease)"},
+        "lizard": {"Renal Failure (Chronic Kidney Disease)"},
+    }
+    for sp, names in expected.items():
+        mod = importlib.import_module(f"api.species.{sp}_diseases")
+        dis = [dict(d) for d in mod.DISEASES]
+        dis = enrich_diseases(dis, sp)
+        dis = dedupe_disease_list(dis)
+        dis = canonical.apply_canonical_map(dis, sp)
+        browsed = {d.get("name") for d in dis if isinstance(d.get("name"), str)}
+        missing = names - browsed
+        assert not missing, f"[{sp}] previously template-hidden diseases still missing: {missing}"
