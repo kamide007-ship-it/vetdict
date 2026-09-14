@@ -1616,6 +1616,7 @@ class TestQuickTapPhraseExtraction:
             "陰部から膿が出て水をよく飲む",
             "目やにがひどくて目が開かない",
             "チョコレートを食べてしまった",
+            "ぶどうを食べてしまった",
         ],
         "cat": [
             "食べない",
@@ -4904,3 +4905,92 @@ class TestChatClinicalAccuracyAuditRound26Parallel:
 
         ids = extract_symptoms_from_text("散歩のあと足の裏を気にして舐めている")
         assert "excessive_licking" in ids or "itching" in ids, ids
+
+
+class TestChatClinicalAccuracyAuditRound27:
+    """2026-09 audit round 27. Root causes fixed: grape/raisin ingestion had
+    no legacy entry or exposure-flag vocabulary (acute gastroenteritis ranked
+    first for Japan's second most common canine food-toxicosis inquiry), the
+    jaundice/dark-urine complaint lost both signs to conjugation-form gaps,
+    loose-tooth wording was absent everywhere (periodontal disease and
+    guinea-pig scurvy hallmark), anisocoria phrasing variants missed the
+    dilated_pupils alias, pad-injury and wheel-avoidance owner wordings
+    extracted nothing, and the α-prefixed interferon word-order variant left
+    avian antiviral texts without a drug chip."""
+
+    def test_dog_grape_ingestion_ranks_grape_toxicosis_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("ぶどうを食べてしまった 嘔吐")
+        assert "grape_ingestion" in ids, ids
+        top = match_symptoms_to_diseases(ids)[0]
+        assert "ブドウ・レーズン中毒" in (top.get("name_ja") or ""), top
+
+    def test_dog_raisin_bread_phrase_extracts_exposure_flag(self):
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        assert "grape_ingestion" in extract_symptoms_from_text("レーズンパンを食べてしまった")
+
+    def test_dog_plain_vomiting_not_hijacked_by_grape_entry(self):
+        # exposure-gated design: without the stated ingestion the toxicosis
+        # must stay out of plain-GI differentials.
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("嘔吐している 食欲がない")
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ids)[:5]]
+        assert not any("ブドウ" in n for n in names), names
+
+    def test_dog_jaundice_dark_urine_ranks_hemolysis_and_liver(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("白目が黄色くて元気がない おしっこが濃い")
+        assert "jaundice" in ids and "dark_urine" in ids, ids
+        names = [d.get("name_ja") or "" for d in match_symptoms_to_diseases(ids)[:3]]
+        assert any(("溶血" in n) or ("肝" in n) for n in names), names
+
+    def test_dog_loose_teeth_halitosis_ranks_periodontal_first(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("口が臭くて歯がぐらぐらしている")
+        assert "bad_breath" in ids, ids
+        top = match_symptoms_to_diseases(ids)[0]
+        assert "歯周病" in (top.get("name_ja") or ""), top
+
+    def test_guinea_pig_loose_teeth_native_id_ranks_scurvy(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("歯がぐらぐらして歯茎から出血 関節が腫れる", "guinea_pig")
+        assert "loose_teeth" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "guinea_pig")[0]
+        assert "壊血病" in (top.get("name_ja") or ""), top
+
+    def test_cat_anisocoria_variants_extract_dilated_pupils(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("目の色が左右で違って見える 瞳が開いたまま", "cat")
+        assert "dilated_pupils" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "cat")[:4]]
+        assert any(("網膜" in n) or ("高血圧" in n) for n in names), names
+
+    def test_hamster_wheel_avoidance_extracts_lethargy(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("回し車で走らなくなって横腹に大きなしこり", "hamster")
+        assert "lethargy" in ids and any("mass" in s for s in ids), ids
+
+    def test_dog_pad_injury_phrase_extracts_paw_signals(self):
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        ids = extract_symptoms_from_text("散歩のあと足の裏を痛がって肉球がえぐれている")
+        assert ids, "pad-injury complaint must extract something"
+        assert ("excessive_licking" in ids) or ("limping" in ids) or ("pain" in ids), ids
+
+    def test_seizure_loc_guard_still_ranks_epilepsy_first(self):
+        # ingestion-flag additions must not disturb the plain seizure ranking.
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("痙攣した 意識がなくなった")
+        top = match_symptoms_to_diseases(ids)[0]
+        assert "てんかん" in (top.get("name_ja") or ""), top

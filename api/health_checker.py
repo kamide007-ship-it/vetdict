@@ -810,6 +810,12 @@ SYMPTOMS = [
         "name_en": "Chocolate Ingestion",
         "category": "general",
     },
+    {
+        "id": "grape_ingestion",
+        "name_ja": "ぶどう・レーズンを食べた",
+        "name_en": "Grape / Raisin Ingestion",
+        "category": "general",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -3458,6 +3464,24 @@ DISEASES = [
         "recommended_tests": ["blood_test", "ecg"],
         "breed_risks": {},
     },
+    {
+        "id": "grape_raisin_toxicosis",
+        "prevalence_tier": "common",
+        "name_ja": "ブドウ・レーズン中毒",
+        "name_en": "Grape/Raisin Toxicosis",
+        "description_ja": "ブドウ・レーズン（干しぶどう・カラント含む）の摂取による特発性急性腎障害（AKI）。毒性成分は酒石酸と特定されつつあり（2021年ASPCA APCC）、感受性は個体差が大きく安全量は確立されていない — 少量でも致死的になりうる。摂取後6〜12時間で嘔吐・食欲不振・元気消失、24〜72時間で乏尿性腎不全へ進行しうる。特異的解毒薬はなく、摂取2時間以内の催吐＋活性炭、その後48〜72時間の積極的輸液（維持量の2〜3倍）と尿量モニタリングが予後を決める（Plumb's 10th ed; ASPCA APCC）。パン・ケーキ・レーズンパン等の加工品も同様に危険。「食べたが今は元気」でも受診が必要です。",
+        "description_en": "Idiosyncratic acute kidney injury (AKI) after ingestion of grapes or raisins (including sultanas and currants). Tartaric acid has been implicated as the toxic principle (ASPCA APCC 2021); individual sensitivity varies widely and NO safe dose is established — small amounts can be fatal. Vomiting, anorexia and lethargy appear within 6-12 h; oliguric renal failure may follow at 24-72 h. There is no antidote: emesis + activated charcoal within 2 h, then aggressive IV fluids (2-3× maintenance) for 48-72 h with urine-output monitoring determine the outcome (Plumb's 10th ed; ASPCA APCC). Baked goods (raisin bread, cakes) are equally dangerous. Even an initially well dog needs veterinary assessment.",
+        # Ingestion-gated on purpose (allium/chocolate guard pattern): the
+        # systemic signs (vomiting, anorexia, lethargy, oliguria) are all
+        # nonspecific — carrying them would let this entry hijack plain GI
+        # complaints. The entry matches ONLY on the stated ingestion.
+        "symptoms": [
+            "grape_ingestion",
+        ],
+        "severity": "high",
+        "recommended_tests": ["blood_test", "urinalysis", "ultrasound"],
+        "breed_risks": {},
+    },
 ]
 
 DISEASE_MAP = {d["id"]: d for d in DISEASES}
@@ -4547,6 +4571,8 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"onion_ingestion", "dark_urine"}), "allium_toxicosis", 2.0),
     (frozenset({"chocolate_ingestion"}), "chocolate_toxicosis", 1.8),
     (frozenset({"chocolate_ingestion", "tremors"}), "chocolate_toxicosis", 2.0),
+    (frozenset({"grape_ingestion"}), "grape_raisin_toxicosis", 1.8),
+    (frozenset({"grape_ingestion", "vomiting"}), "grape_raisin_toxicosis", 2.0),
     # Purulent vulvar discharge in a bitch = pyometra until proven otherwise
     # (Ettinger 8th ed; Hagman 2018) — a life-threatening emergency that must
     # be excluded before vaginitis. Single-sign cluster follows the oral_mass /

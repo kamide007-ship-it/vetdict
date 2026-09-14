@@ -353,6 +353,12 @@ def migrate_json_enrichments(conn) -> int:
     _WORKUP_TEMPLATE_MARKS = (
         "正確な臨床評価（病歴、身体検査、CBC・生化学、画像）から治療方針を決定",
         "accurate clinical evaluation (history, physical exam",
+        # Generic toxin-decontamination boilerplate. Curated module protocols
+        # (chocolate, ethylene glycol, permethrin, snakebite antivenom …) were
+        # being replaced by this 200-char filler; it also mis-applies emesis /
+        # charcoal to non-toxicoses ("Feline Toxic Megacolon").
+        "特異的解毒剤がある場合は投与する（例：抗凝固性殺鼠剤にビタミンK1",
+        "Treatment of toxicosis follows the principles of decontamination",
     )
 
     def _guard_treatment(new_val: str | None, existing: str | None) -> str | None:

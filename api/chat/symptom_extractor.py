@@ -647,6 +647,12 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "non_healing_wound": ["skin_ulcers", "skin_lesions", "wounds"],
     # 爬虫類MBDのラバージョー: lizard carries jaw_softening natively.
     "jaw_softening": ["rubber_jaw", "soft_bones", "swollen_jaw"],
+    # --- 2026-09 Round 27 sweep ---
+    # 歯がぐらぐら (loose/mobile teeth — periodontal disease and guinea-pig
+    # scurvy hallmark): guinea_pig carries loose_teeth natively; cat expresses
+    # tooth mobility as tooth_loss; other vocabularies fall back to the oral
+    # signs that co-report with dental disease.
+    "loose_teeth": ["tooth_loss", "teeth_problems", "difficulty_eating", "bad_breath"],
 }
 
 # Backwards-compat alias (some older imports use the private name).

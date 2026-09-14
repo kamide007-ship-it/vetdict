@@ -3382,3 +3382,67 @@ class TestBatch60Methazolamide:
             assert "methazolamide" in ids, (text, ids)
         # the drug->disease reverse card must not be a dead end
         assert len(find_diseases_for_drug("methazolamide")) >= 3
+
+
+class TestBatch61IndomethacinAndSweep26Aliases:
+    """2026-09 audit (26th sweep): indomethacin — referenced with doses by the
+    canine nephrogenic-DI and foal-PDA entries but absent; plus the
+    α-prefixed interferon word-order variant and the English 'Albuterol'
+    spelling, both unresolvable by the text matcher."""
+
+    def _drug(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        return next(d for d in DRUGS if d["id"] == drug_id)
+
+    def test_indomethacin_present_with_guardrails(self):
+        d = self._drug("indomethacin")
+        dog = d["species_info"]["dog"]
+        # documented niche use, but NOT offered as a routine/analgesic drug
+        assert dog["safe"] is False
+        assert "1-2 mg/kg" in dog["dosage"]
+        assert "消化管保護" in dog["dosage_ja"]
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is False
+        horse = d["species_info"]["horse"]
+        assert "0.2 mg/kg" in horse["dosage"] and "PDA" in horse["dosage"]
+        # bilingual completeness
+        for sp in ("dog", "horse"):
+            info = d["species_info"][sp]
+            assert info["dosage"] and info["dosage_ja"]
+        # class-defining interactions present
+        drugs = {i["drug"] for i in d["drug_interactions"]}
+        assert "Corticosteroids" in drugs and "Other NSAIDs" in drugs
+
+    def test_indomethacin_resolves_from_disease_texts(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        assert any(
+            d["id"] == "indomethacin"
+            for d in find_drugs_in_text(
+                "Indomethacin 1-2 mg/kg PO q12h (reduces prostaglandin-mediated renal blood flow)"
+            )
+        )
+        assert any(
+            d["id"] == "indomethacin" for d in find_drugs_in_text("持続性PDA→インドメタシン0.2 mg/kg IV q12h×3回")
+        )
+
+    def test_alpha_interferon_word_order_and_albuterol_aliases(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        ids = {d["id"] for d in find_drugs_in_text("PBFD/ポリオーマ→組換えαインターフェロン 1-10万IU/kg SC q24h")}
+        assert "interferon_alpha" in ids
+        # the ω references must not be stolen by the new aliases
+        ids_omega = {d["id"] for d in find_drugs_in_text("インターフェロンω 2.5 MU/kg SC")}
+        assert "interferon_omega" in ids_omega and "interferon_alpha" not in ids_omega
+        assert any(d["id"] == "salbutamol" for d in find_drugs_in_text("Albuterol inhaler 90 μg per actuation"))
+
+    def test_indomethacin_reaches_pairwise_interaction_checker(self):
+        # the per-monograph drug_interactions field is display-only; the
+        # pairwise checker consults the curated INTERACTIONS registry —
+        # the steroid pairing (the single most dangerous combination for the
+        # most ulcerogenic canine NSAID) must be detectable there.
+        from api.drug_interactions import find_interactions
+
+        hits = find_interactions(["indomethacin", "prednisolone"])
+        assert hits, "indomethacin × prednisolone must be flagged by the registry"
