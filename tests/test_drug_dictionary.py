@@ -3607,3 +3607,117 @@ class TestFelineGabapentinDetail:
         si = self._gaba()["species_info"]
         for sp in ("guinea_pig", "hamster", "hedgehog", "chinchilla"):
             assert si.get(sp, {}).get("dosage"), sp
+
+
+class TestHighFrequencyDrugDetailBatch2:
+    """第46弾: gabapentin-style enrichment of six more high-frequency drugs
+    (mirtazapine, trazodone, buprenorphine, methimazole, amlodipine,
+    pimobendan). Each monograph must keep its study-anchored protocols and
+    class-defining safety pearls, bilingually."""
+
+    def _drug(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        for d in DRUGS:
+            if d.get("id") == drug_id:
+                return d
+        raise AssertionError(f"{drug_id} missing")
+
+    def test_mirtazapine_cat_ckd_interval_and_mirataz_label(self):
+        cat = self._drug("mirtazapine")["species_info"]["cat"]
+        # CKD cats dose q48h (Quimby PK/crossover), healthy cats q24h
+        assert "48時間毎" in cat["dosage_ja"] and "Quimby 2013" in cat["dosage_ja"]
+        assert "q48h" in cat["dosage"] and "Quimby" in cat["dosage"]
+        # Mirataz label: 2 mg = 1.5-inch ribbon (the old entry said 2 inch)
+        assert "1.5インチ" in cat["dosage_ja"] and "Poole 2019" in cat["dosage_ja"]
+        assert "1.5-inch" in cat["dosage"]
+        assert "2インチ" not in cat["dosage_ja"], "old 2-inch mislabel must stay dead"
+        # serotonin-syndrome antidote pearl
+        assert "シプロヘプタジン" in cat["notes_ja"] and "cyproheptadine" in cat["notes"].lower()
+
+    def test_trazodone_dog_and_cat_protocols(self):
+        si = self._drug("trazodone")["species_info"]
+        dog, cat = si["dog"], si["cat"]
+        # situational 5-7 mg/kg 1.5-2h pre-trigger + post-op confinement (Gruen 2014)
+        assert "5-7 mg/kg" in dog["dosage_ja"] and "Gruen 2014" in dog["dosage_ja"]
+        assert "Gruen 2014" in dog["dosage"]
+        # cat single 50 mg pre-transport RCT (Stevens 2016)
+        assert "50 mg/頭" in cat["dosage_ja"] and "Stevens 2016" in cat["dosage_ja"]
+        assert "Stevens 2016" in cat["dosage"]
+        # serotonin-syndrome counselling stays
+        assert "セロトニン症候群" in dog["notes_ja"]
+        # ferret/rabbit patch rows survive the rewrite
+        for sp in ("ferret", "rabbit"):
+            assert si.get(sp, {}).get("dosage_ja"), sp
+
+    def test_buprenorphine_cat_otm_simbadol_and_dog_otm_caveat(self):
+        si = self._drug("buprenorphine")["species_info"]
+        cat, dog = si["cat"], si["dog"]
+        # OTM route rationale + Simbadol 0.24 mg/kg SC q24h with 6x-concentration guard
+        assert "口腔粘膜" in cat["dosage_ja"] and "Simbadol" in cat["dosage_ja"]
+        assert "0.24 mg/kg" in cat["dosage_ja"] and "6倍濃度" in cat["dosage_ja"]
+        assert "0.24 mg/kg" in cat["dosage"] and "Robertson 2005" in cat["dosage"]
+        # feline opioid hyperthermia pearl
+        assert "高体温" in cat["notes_ja"]
+        # dogs: OTM absorption is poor (Ko 2011) — parenteral preferred
+        assert "Ko 2011" in dog["dosage_ja"] and "Ko 2011" in dog["dosage"]
+        # ceiling-effect escalation guidance
+        assert "メサドン" in dog["notes_ja"] or "メサドン" in cat["notes_ja"]
+        # exotic rows survive
+        for sp in ("guinea_pig", "chinchilla", "hedgehog", "ferret"):
+            assert si.get(sp, {}).get("dosage_ja"), sp
+
+    def test_methimazole_cat_monitoring_transdermal_and_renal_masking(self):
+        cat = self._drug("methimazole")["species_info"]["cat"]
+        # low-start + 2-3 week recheck cadence (AAFP 2016)
+        assert "AAFP 2016" in cat["dosage_ja"] and "2-3週" in cat["dosage_ja"]
+        assert "AAFP 2016" in cat["dosage"]
+        # transdermal PLO alternative (Sartor 2004)
+        assert "経皮PLO" in cat["dosage_ja"] and "Sartor 2004" in cat["dosage_ja"]
+        # stop-vs-reduce rule for serious adverse effects, renal masking,
+        # iatrogenic-hypothyroidism survival pearl (Williams 2010)
+        assert "中止" in cat["notes_ja"] and "Williams 2010" in cat["notes_ja"]
+        assert "腎マスキング" in cat["notes_ja"]
+        assert "Williams 2010" in cat["notes"]
+
+    def test_amlodipine_cat_titration_targets_and_dog_raas(self):
+        si = self._drug("amlodipine")["species_info"]
+        cat, dog = si["cat"], si["dog"]
+        # ACVIM 2018 first-line, 0.625 start, SBP <160 target, white-coat caveat
+        assert "0.625 mg/頭" in cat["dosage_ja"] and "Acierno 2018" in cat["dosage_ja"]
+        assert "<160" in cat["dosage_ja"] and "白衣効果" in cat["dosage_ja"]
+        assert "0.625 mg/cat" in cat["dosage"] and "<160" in cat["dosage"]
+        # retinal-detachment emergency pearl
+        assert "失明" in cat["notes_ja"]
+        # dogs: monotherapy activates RAAS — combine with ACEi/telmisartan
+        assert "RAAS" in dog["dosage_ja"] and "RAAS" in dog["dosage"]
+
+    def test_pimobendan_dog_epic_criteria_and_cat_lvoto_gate(self):
+        si = self._drug("pimobendan")["species_info"]
+        dog, cat = si["dog"], si["cat"]
+        # EPIC B2 start criteria (LA/Ao ≥1.6, LVIDDN ≥1.7, VHS >10.5) + B1 exclusion
+        assert "Boswood 2016" in dog["dosage_ja"] and "LA/Ao" in dog["dosage_ja"]
+        assert "LVIDDN" in dog["dosage_ja"] and "B1" in dog["dosage_ja"]
+        assert "Boswood 2016" in dog["dosage"] and "PROTECT" in dog["dosage"]
+        # fasted administration retained
+        assert "1時間前" in dog["dosage_ja"]
+        # cat: LVOTO echocardiographic gate before off-label use
+        assert "LVOTO" in cat["dosage_ja"] and "Reina-Doreste 2014" in cat["dosage_ja"]
+        assert "LVOTO" in cat["dosage"]
+        assert "HOCM" in cat["notes_ja"] or "閉塞性HCM" in cat["notes_ja"]
+
+    def test_all_enriched_rows_stay_fully_bilingual(self):
+        for drug_id in (
+            "mirtazapine",
+            "trazodone",
+            "buprenorphine",
+            "methimazole",
+            "amlodipine",
+            "pimobendan",
+        ):
+            si = self._drug(drug_id)["species_info"]
+            for sp in ("dog", "cat"):
+                row = si.get(sp)
+                if row and row.get("safe"):
+                    for field in ("dosage", "dosage_ja", "notes", "notes_ja"):
+                        assert row.get(field), f"{drug_id}/{sp}/{field} empty"
