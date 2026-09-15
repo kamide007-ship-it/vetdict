@@ -2261,17 +2261,17 @@ DRUGS: List[Dict[str, Any]] = [
         "species_info": {
             "dog": {
                 "safe": True,
-                "dosage": "5-10 mg/kg PO q8-12h (pain); 10-20 mg/kg q8h (seizures)",
-                "dosage_ja": "5-10 mg/kg 経口 8-12時間毎（疼痛）; 10-20 mg/kg 8時間毎（痙攣）",
-                "notes": "Increasingly popular for chronic pain. Mild sedation.",
-                "notes_ja": "慢性疼痛管理に使用増加中。軽度鎮静作用。",
+                "dosage": "Chronic/neuropathic pain: 5-10 mg/kg PO q8-12h, titrate up to effect. Seizure adjunct: 10-20 mg/kg PO q8h. Situational anxiety (storms, fireworks, clinic visits): 10-20 mg/kg PO 1.5-2 h before the trigger, often combined with trazodone. Reduce dose ~50% in renal impairment (renally excreted).",
+                "dosage_ja": "慢性・神経障害性疼痛: 5-10 mg/kg 経口 8-12時間毎（効果をみて漸増）。抗てんかん補助: 10-20 mg/kg 経口 8時間毎。状況性不安（雷・花火・来院）: トリガーの1.5-2時間前に 10-20 mg/kg 経口（トラゾドン併用可）。腎機能低下例は約50%に減量（腎排泄）。",
+                "notes": "Mild sedation/pelvic-limb ataxia at higher doses. Human oral SOLUTIONS may contain xylitol — toxic to dogs (hypoglycemia/hepatic necrosis); use capsules/tablets only. Taper over 1-2 weeks after chronic use.",
+                "notes_ja": "高用量で軽度鎮静・後肢のふらつき。ヒト用経口液剤にはキシリトール含有製剤があり犬に有毒（低血糖・肝壊死）— カプセル/錠剤のみ使用。慢性投与の中止は1-2週で漸減。",
             },
             "cat": {
                 "safe": True,
-                "dosage": "3-10 mg/kg PO q8-12h",
-                "dosage_ja": "3-10 mg/kg 経口 8-12時間毎",
-                "notes": "Excellent for anxiety/stress reduction pre-visit. Also for chronic pain.",
-                "notes_ja": "来院前の不安・ストレス軽減に優れる。慢性疼痛にも有効。",
+                "dosage": "Pre-visit/transport stress (first-line per ISFM/AAFP 2022 Cat Friendly guidelines): 50-100 mg/cat PO (fixed dose, capsule opened into a small amount of wet food) 1.5-3 h before travel — 100 mg for a healthy adult, 50 mg for small (<3-4 kg), senior or frail cats; a dose the evening before plus the morning dose gives more reliable effect (van Haaften 2017 JAVMA: 100 mg/cat 90 min pre-visit significantly reduced stress scores and improved handling compliance). Chronic pain — osteoarthritis/neuropathic: start 5 mg/kg (or 25 mg/cat) PO q12h and titrate to effect up to 10 mg/kg q8-12h (Guedes 2018 JAVMA RCT: 10 mg/kg q12h improved owner-assessed activity/impairment in geriatric OA cats). CKD cats: renally excreted with no hepatic metabolism — plasma levels rise with azotemia, so reduce ~50% (pre-visit ≤50 mg/cat; chronic 2.5-5 mg/kg) and titrate to sedation (Quimby, JFMS pharmacokinetics).",
+                "dosage_ja": "来院前・移動ストレス軽減（ISFM/AAFP 2022 Cat Friendlyガイドラインの第一選択）: 50-100 mg/頭 経口（体重非依存の固定用量。カプセルを開けて少量のウェットフードに混和可）を移動の1.5-3時間前 — 健康成猫は100 mg/頭、小柄（<3-4 kg）・高齢・虚弱猫は50 mg。前夜＋当日朝の2回投与で効果がより安定（van Haaften 2017 JAVMA: 来院90分前の100 mg/頭でストレススコア低下・ハンドリング協力性が有意に改善）。慢性疼痛（変形性関節症・神経障害性疼痛）: 5 mg/kg（または25 mg/頭）経口 12時間毎から開始し、効果をみて最大10 mg/kg 8-12時間毎まで漸増（Guedes 2018 JAVMA RCT: 高齢OA猫で10 mg/kg q12hが飼い主評価の活動性を改善）。CKD猫: 肝代謝を受けず腎排泄のため高窒素血症で血中濃度が上昇 — 約50%に減量（来院前は50 mg/頭以下、慢性投与は2.5-5 mg/kg）し鎮静の程度をみて調整（Quimby, JFMS薬物動態）。",
+                "notes": "Peak effect 1-2 h post-dose; sedation, ataxia and hypersalivation are transient (resolve within ~8 h). Pre-visit dosing reduces situational (white-coat) hypertension but may mildly lower measured blood pressure — interpret BP screening visits accordingly. Bitter taste is minimal; wet-food admixture works for most cats. NEVER use human xylitol-containing oral solutions. Single pre-visit doses need no taper; taper chronic dosing over 1-2 weeks (rebound pain/withdrawal). Also useful for feline hyperesthesia syndrome and post-amputation neuropathic pain as an adjunct.",
+                "notes_ja": "効果は投与後1-2時間でピーク。鎮静・ふらつき・流涎は一過性（約8時間で消失）。来院前投与は状況性（白衣）高血圧を減らす一方で測定血圧をやや下げうるため、血圧評価目的の来院では解釈に注意。苦味は少なくウェットフード混和で投与しやすい。ヒト用キシリトール含有経口液剤は使用しない。来院前の単回投与は漸減不要だが、慢性投与の中止は1-2週かけて漸減（反跳性疼痛・離脱様徴候の防止）。猫知覚過敏症候群（FHS）・断脚後の神経障害性疼痛の補助にも有用。",
             },
             "horse": {
                 "safe": True,

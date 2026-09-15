@@ -3560,3 +3560,50 @@ class TestDrugUpsertSchemaConformance:
             conn.commit()
             row = conn.execute("SELECT contraindications FROM drugs WHERE id='zz_test_list_fields'").fetchone()
         assert row is not None and "a" in row[0]
+
+
+class TestFelineGabapentinDetail:
+    """2026-09 developer request: the feline gabapentin row was two thin lines
+    while gabapentin is a feline flagship drug with three distinct
+    evidence-based use patterns (fixed-dose pre-visit anxiolysis, chronic
+    OA/neuropathic pain titration, CKD dose reduction). The enriched
+    monograph must keep the study-anchored numbers and safety pearls."""
+
+    def _gaba(self):
+        from api.drug_dictionary import DRUGS
+
+        for d in DRUGS:
+            if d.get("id") == "gabapentin":
+                return d
+        raise AssertionError("gabapentin missing")
+
+    def test_cat_row_carries_three_use_patterns_with_citations(self):
+        cat = self._gaba()["species_info"]["cat"]
+        # fixed-dose pre-visit protocol (van Haaften 2017; ISFM/AAFP 2022)
+        assert "50-100 mg/頭" in cat["dosage_ja"] and "van Haaften" in cat["dosage_ja"]
+        assert "ISFM/AAFP" in cat["dosage_ja"]
+        # chronic OA titration (Guedes 2018: 10 mg/kg q12h)
+        assert "Guedes" in cat["dosage_ja"] and "10 mg/kg" in cat["dosage_ja"]
+        # CKD ~50% reduction (renal excretion; Quimby PK)
+        assert "50%" in cat["dosage_ja"] and "Quimby" in cat["dosage_ja"]
+        # EN mirror carries the same three patterns
+        assert "van Haaften" in cat["dosage"] and "Guedes" in cat["dosage"] and "Quimby" in cat["dosage"]
+
+    def test_cat_notes_carry_safety_pearls(self):
+        cat = self._gaba()["species_info"]["cat"]
+        assert "キシリトール" in cat["notes_ja"], "xylitol oral-solution warning required"
+        assert "血圧" in cat["notes_ja"], "BP-interpretation caveat required"
+        assert "漸減" in cat["notes_ja"], "chronic-use taper guidance required"
+        assert "xylitol" in cat["notes"].lower()
+
+    def test_dog_row_gains_situational_anxiety_and_xylitol_warning(self):
+        dog = self._gaba()["species_info"]["dog"]
+        assert "状況性不安" in dog["dosage_ja"] and "トラゾドン" in dog["dosage_ja"]
+        assert "キシリトール" in dog["notes_ja"] and "xylitol" in dog["notes"].lower()
+
+    def test_exotic_patch_rows_survive_enrichment(self):
+        # batch 3/5 patches supply the exotic rows — the rewrite of dog/cat
+        # must not disturb them.
+        si = self._gaba()["species_info"]
+        for sp in ("guinea_pig", "hamster", "hedgehog", "chinchilla"):
+            assert si.get(sp, {}).get("dosage"), sp
