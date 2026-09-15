@@ -5289,3 +5289,96 @@ EN "Treatment of toxicosis follows the principles of decontamination…"）。�
 - ServiceWorker: `CACHE_NAME` v152 → **v153**
 - 再現手順: `fix_toxicosis_treatments.py --apply`（適用済み）→ `migrate_to_sqlite.py` →
   `build_disease_search_index.py`
+
+## 2026-09セッション（第44弾: プルカロプリド/ニクロサミド/ブリンゾラミド補完 + チャット精度第28弾 + CRI用量→計算機CRIタブのワンタップ・プリフィル）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,318件合格**（34 skip、ベースライン）
+- 配信SQLiteクリーンビルド: 6,893疾患、treatment/prevention/prognosis **100%**
+- 薬用量: safe薬品の dosage 欠落 **0**（631薬品時点、全species_info検証）、文字列型相互作用スキーマ **0**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 薬品マッチャー飽和度（第27回スイープ、用量文脈トークン×実マッチャー突合）: バイオチン/フェリマゾール/
+  ダーベポエチン/ロイプロリド/メタドン/カベルゴリン/ラタノプロスト等の上位候補は全て解決済みを確認
+
+### referenced-but-absent 薬品3剤の補完（`drug_batch_62.py` 新規、631→634薬品）
+- **プルカロプリド（レゾロール）** — 猫巨大結腸/難治性便秘の3エントリが「0.5-2 mg/cat PO q24h
+  （シサプリド代替 — ヒト用）」と用量付きで名指しするのに未収載だった。シサプリドがヒト市場撤退
+  （hERG/QT毒性）で国内は院内特殊調剤のみとなった現在の現実的代替。**高選択的5-HT4作動でhERG親和性
+  なし**（シサプリドを撤退させたQT延長リスクを持たない）というクラス定義的事実と、機械的閉塞での
+  プロキネティクス共通禁忌・腎排泄（CKD減量）を明記（Washabau & Day; Briejer 2001）
+- **ニクロサミド** — ハムスター小形条虫（R. nana 100 mg/kg PO、プラジカンテル代替）・鳥条虫
+  （250 mg/kg 単回）・両生類消化管吸虫（150 mg/kg 単回）が用量付き参照。**消化管から実質吸収されず
+  管腔内の成虫のみに作用**（幼虫・組織内ステージ無効=エキノコックス嚢胞に不適）という定義的性質を明記
+- **ブリンゾラミド1%点眼（エイゾプト）** — 緑内障プロトコルが参照する点眼CAIでドルゾラミドのみ
+  収載だった。生理的pH製剤で点眼刺激がドルゾラミド2%より少ない（コンプライアンス上の実利点）、
+  全身性CAI（アセタゾラミド/メタゾラミド）併用は眼圧追加効果なく毒性のみ相加=major を明記
+  （Gelatt's 6th ed）
+- 動線検証: テキストマッチャー解決・逆引き「この薬品を使う疾患」（prucalopride 3/niclosamide 4/
+  brinzolamide 1疾患）・相互作用チェッカー自然言語解決（レゾロール/エイゾプト/ひらがな形）
+
+### 診断チャット精度 第28弾（30症例フレッシュスイープ 14 MISS → 30/30 合格）
+- **エイリアス誤マッピング是正**: 「口をパクパクさせて呼吸」が vomiting（そのう疾患の吐出動作）に
+  解決され、鳥の開口呼吸主訴でトリコモナス/カンジダが上位だった → 呼吸語を含む長形のみ
+  **open_mouth_breathing** に最長一致で上書き（裸の「口をパクパク」→vomiting は維持、魚の
+  水面パクパク→gasping_surface は open_mouth_breathing チェーン末尾追加で保全）→
+  アスペルギルス/気管開口虫等の呼吸器ddxが top4 に
+- **新規エイリアス**: 水をよく飲み（連用形）、トイレの砂の塊が大き（猫の多尿の飼い主観察→CKD/糖尿が
+  top3）、おしっこがオレンジ（ウサギ良性ポルフィリン色素尿 rank1、red_urine→dark_urine チェーン新設で
+  他種も安全）、頬袋が腫れ（語幹形→頬袋膿瘍/閉塞 top3）、お腹が大きく膨らん（副詞挿入形）、
+  鱗が赤く/うろこが赤く（ヘビ・スケールロット）、あごが腫れて柔らか（非連続で不一致だった複合形→
+  トカゲMBD rank1）、首を伸ばして呼吸（チェロニアン肺炎の教科書的姿勢→肺炎 rank1）、
+  骨が折れたかも（骨折疑い→観察実体の limping にマップ、GP骨折 top3）、便が毛でつながって
+  （毛球症の古典的飼い主観察→毛球症/うっ滞 top3）
+- **_ID_SYNONYMS**: jaw_chattering チェーンの先頭に **pawing_at_mouth**（フェレットの口くちゃくちゃ=
+  インスリノーマ低血糖症状に接続。猫は jaw_chattering をネイティブ保有のためチェーン不発 —
+  歯の吸収病変 rank1 維持をガードテストで固定）、red_urine/limping チェーン新設、
+  open_mouth_breathing 末尾に gasping_surface
+- **_SYN**: collapse チェーンに falling 追加（猫前庭疾患セットは falling 表記 — 「ぐるぐる回って倒れた」
+  が接続）
+- **有病率是正**: 猫 特発性前庭疾患/前庭疾患 uncommon→**common**（急性前庭症候群は猫神経疾患の
+  頻出プレゼンテーションで特発性が最多原因 — Rossmeisl 2010。従来は頭蓋内腫瘍が上位を占有）、
+  猫脈絡叢腫瘍=rare（主に犬の腫瘍 — 未tierで旋回主訴を乗っ取っていた）、parakeet アボカド中毒
+  2変異=rare（曝露歴依存 — 腹部膨満鑑別で卵黄性腹膜炎(common)を上回っていた）
+- **パトグノモニック**: rabbit {exophthalmos}→球後膿瘍 ×1.35（ウサギの片側眼球突出は歯根由来
+  球後膿瘍 until proven otherwise — Capello & Lennox。5所見エントリがカバレッジで rare の
+  エロドントーマに負けていた）
+- 回帰テスト: `TestChatClinicalAccuracyAuditRound28`（14件）
+
+### UX: CRI表記用量→臨床計算機CRIタブのワンタップ・プリフィル（新動線）
+- **ギャップ**: parseDoseRange は CRI/持続表記（mg/kg/hr 等）を「1回量ではない」として意図的に
+  除外するため、エスモロール/ドブタミン/リドカインCRI等の行には計算機ボタンが一切出ず、
+  麻酔タブのCRIプロトコル行もインライン体重計算列（rate×BWのみ）ではポンプ流量 mL/hr に
+  変換できなかった
+- `parseCriRate()` 新設: mg|µg /kg/ min|hr|day（日本語期間語 分/時間/日も対応）を CRIタブの
+  単位値にマップ。**下限をプリフィル**（CRIは低用量から滴定開始が原則、全文は出典エコーに表示）。
+  ガード: 経皮パッチ（フェンタニル µg/kg/hr）除外、mg/kg/day は **CRI 明記時のみ**（経口分割日量の
+  誤誘導防止）、逆転レンジ・桁区切りカンマ退化は null — 全14エッジケースを node 実測で検証
+- `.drug-cri-open` ボタンを3サイトに発行: 薬品リスト用量ボックス・薬品詳細の全種カード・
+  **麻酔プロトコル薬剤行**（実データで麻酔30行+薬品24行=54行が新規接続）。共有委譲ハンドラで
+  `openClinicalCalculators({tab:"cri", criRate, criUnit})` へルーティング（キャッシュ再描画後も動作）。
+  CRIタブに出典エコー `#calcCriRef` を新設（薬品名+原文用量+「必ず原文を確認」）。
+  GA4 `cri_calc_from_dose`
+- 回帰テスト: `test_parse_cri_rate_verified_by_node_and_wired`（node実測14ケース+配線検証）
+
+### UX: クイック入力の拡充（検証済み新主訴の1タップ導線）
+- 猫「水をよく飲みトイレの砂の塊が大きい」（CKDスクリーン）・ウサギ「便が毛でつながっている」
+  （毛球症）・リクガメ「首を伸ばして呼吸している」（肺炎）— ミラーテスト JA_QUICK 同期
+  （全フレーズ抽出保証をCIで維持）
+
+### 薬品スキーマバグの発見・修正（drug staleness 自動修復が silently 失敗する経路）
+- 低メモリ本番の drug-count staleness 自動修復（`disease_store._ensure_db` → `upsert_drug`）は、
+  **list型の contraindications を持つ薬品が1剤でもあると sqlite3.ProgrammingError で全体が中断**し、
+  例外は debug レベルで握り潰されて配信薬品数が古いまま残ることを発見（batch 62 が一時的に
+  bilingual list 形式で出荷して顕在化）。二重に是正:
+  1. batch 62 をコーパス規約（EN文字列 + `contraindications_ja`）に準拠
+  2. `api/database.py upsert_drug` が list型 contraindications/contraindications_ja を
+     side_effects と同様に JSON シリアライズする安全網を追加
+- 回帰テスト: `TestDrugUpsertSchemaConformance`（全634薬品が fresh schema にクリーンに upsert
+  できる不変条件 + list型フィールドの JSON 化）— 将来のバッチが非準拠形式で入っても CI で検出
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 576/cat 554/hamster 72/鳥系 240/amphibian 19薬品、
+  pendingStats drugs 631→**634**
+- ServiceWorker: `CACHE_NAME` v153 → **v154**
+- 疾患データ変更なし（配信DB・検索インデックスは不変 — tier/エイリアスは実行時参照。
+  配信SQLiteの drugs テーブルは 634 剤に更新済み）
