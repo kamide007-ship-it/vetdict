@@ -3721,3 +3721,123 @@ class TestHighFrequencyDrugDetailBatch2:
                 if row and row.get("safe"):
                     for field in ("dosage", "dosage_ja", "notes", "notes_ja"):
                         assert row.get(field), f"{drug_id}/{sp}/{field} empty"
+
+
+class TestHighFrequencyDrugDetailBatch3:
+    """第47弾: gabapentin-style enrichment of six more high-frequency drugs
+    (phenobarbital, levetiracetam, trilostane, cyclosporine, oclacitinib,
+    zonisamide). Serum-monitoring protocols, ACTH-stim mechanics and
+    class-defining safety pearls must survive, bilingually."""
+
+    def _drug(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        for d in DRUGS:
+            if d.get("id") == drug_id:
+                return d
+        raise AssertionError(f"{drug_id} missing")
+
+    def test_phenobarbital_serum_monitoring_protocol(self):
+        si = self._drug("phenobarbital")["species_info"]
+        dog, cat = si["dog"], si["cat"]
+        # 2-week recheck, 15-35 target, proportional adjustment, ALP-induction pearl
+        assert "15-35" in dog["dosage_ja"] and "2週間後" in dog["dosage_ja"]
+        assert "Levitski" in dog["dosage_ja"] and "比例計算" in dog["dosage_ja"]
+        assert "15-35" in dog["dosage"] and "ALP" in dog["dosage"]
+        assert "ALP" in dog["dosage_ja"] and "胆汁酸" in dog["dosage_ja"]
+        # taper rule + CYP induction pearl in notes
+        assert "漸減" in dog["notes_ja"] and "CYP450" in dog["notes_ja"]
+        # cat: first-line status + 15-30 target (Finnerty 2014)
+        assert "第一選択" in cat["dosage_ja"] and "15-30" in cat["dosage_ja"]
+        assert "Finnerty" in cat["dosage"]
+
+    def test_levetiracetam_pb_clearance_and_pulse_protocol(self):
+        si = self._drug("levetiracetam")["species_info"]
+        dog, cat = si["dog"], si["cat"]
+        # PB co-administration doubles clearance -> raise dose, not abandon
+        assert "Moore 2011" in dog["dosage_ja"] and "半減" in dog["dosage_ja"]
+        assert "Moore 2011" in dog["dosage"]
+        # cluster pulse: 60 mg/kg load then 20 mg/kg q8h (Packer 2015)
+        assert "60 mg/kg" in dog["dosage_ja"] and "Packer 2015" in dog["dosage_ja"]
+        # monitoring pearl: routine levels unnecessary (wide index)
+        assert "血中濃度測定は通常不要" in dog["notes_ja"]
+        assert "Volk 2008" in dog["notes_ja"], "honeymoon-effect pearl required"
+        # cat CKD reduction
+        assert "CKD" in cat["dosage_ja"] and "Bailey 2008" in cat["dosage_ja"]
+
+    def test_trilostane_acth_stim_mechanics_and_stop_rule(self):
+        si = self._drug("trilostane")["species_info"]
+        dog, cat = si["dog"], si["cat"]
+        # 4-6h post-pill timing, 1.45-5.4 target, 10-14 day recheck, with food
+        assert "投薬後4-6時間" in dog["dosage_ja"] and "1.45-5.4" in dog["dosage_ja"]
+        assert "10-14日後" in dog["dosage_ja"] and "食事と共に" in dog["dosage_ja"]
+        assert "POST-PILL" in dog["dosage"] and "1.45-5.4" in dog["dosage"]
+        # pre-pill cortisol alternative (Macfarlane 2016)
+        assert "Macfarlane 2016" in dog["dosage_ja"]
+        # stop rule + owner skip-dose counselling
+        assert "中止" in dog["notes_ja"] and "スキップ" in dog["notes_ja"]
+        # cat q12h with citation (was q24h)
+        assert "12時間毎" in cat["dosage_ja"] and "Mellett Keith" in cat["dosage_ja"]
+
+    def test_cyclosporine_slow_onset_taper_and_feline_toxoplasma(self):
+        d = self._drug("cyclosporine")
+        dog, cat = d["species_info"]["dog"], d["species_info"]["cat"]
+        # slow onset + bridge + taper schedule
+        assert "4-8週" in dog["dosage_ja"] and "オクラシチニブ" in dog["dosage_ja"]
+        assert "週2回" in dog["dosage_ja"] and "Steffan 2006" in dog["dosage_ja"]
+        assert "4-8 weeks" in dog["dosage"] and "Steffan 2006" in dog["dosage"]
+        # ketoconazole dose-sparing documented as deliberate interaction
+        assert "ケトコナゾール" in dog["dosage_ja"] and "節約" in dog["dosage_ja"]
+        # atopy needs no blood levels
+        assert "血中濃度測定は不要" in dog["notes_ja"]
+        # feline toxoplasma pearls
+        assert "トキソプラズマ" in cat["notes_ja"] and "生肉" in cat["notes_ja"]
+        assert "Lappin" in cat["notes"] and "toxoplasmosis" in cat["notes"].lower()
+        # contraindication no longer flatly bans the therapeutic keto combo
+        assert "意図的" in d["contraindications_ja"]
+
+    def test_oclacitinib_stepdown_rule_and_feline_metabolism(self):
+        si = self._drug("oclacitinib")["species_info"]
+        dog, cat = si["dog"], si["cat"]
+        # 14-day cap then q24h; >=12 months; allergy-testing non-interference
+        assert "最長14日間" in dog["dosage_ja"] and "24時間毎" in dog["dosage_ja"]
+        assert "12ヶ月齢以上" in dog["dosage_ja"]
+        assert "干渉しない" in dog["dosage_ja"] and "Olivry" in dog["dosage_ja"]
+        assert "MAXIMUM of 14 days" in dog["dosage"] and "Cosgrove 2013" in dog["dosage"]
+        # symptomatic-control pearl
+        assert "再燃" in dog["notes_ja"]
+        # cats need continued q12h (Lopes 2019); steroids/ciclosporin stay first-line
+        assert "12時間毎の継続" in cat["dosage_ja"] and "Lopes 2019" in cat["dosage_ja"]
+        assert "第一選択" in cat["dosage_ja"]
+
+    def test_zonisamide_pb_double_dose_and_feline_once_daily(self):
+        si = self._drug("zonisamide")["species_info"]
+        dog, cat = si["dog"], si["cat"]
+        # PB co-med doubles clearance -> 10 mg/kg start; 10-40 target; Consave
+        assert "10 mg/kg q12h で開始" in dog["dosage_ja"] and "Orito 2008" in dog["dosage_ja"]
+        assert "10-40" in dog["dosage_ja"] and "コンセーブ" in dog["dosage_ja"]
+        assert "10-40" in dog["dosage"] and "Orito 2008" in dog["dosage"]
+        # sulfa + KCS/Schirmer pearl
+        assert "サルファ" in dog["notes_ja"] and "シルマー" in dog["notes_ja"]
+        # cat once-daily via 33h half-life
+        assert "24時間毎" in cat["dosage_ja"] and "Hasegawa 2008" in cat["dosage_ja"]
+        assert "q24h" in cat["dosage"]
+
+    def test_batch3_rows_bilingual_and_patch_rows_survive(self):
+        expectations = {
+            "phenobarbital": ("horse", "rabbit", "chinchilla"),
+            "levetiracetam": ("bird", "rabbit", "ferret"),
+            "trilostane": ("ferret", "horse"),
+            "cyclosporine": ("horse", "rabbit", "ferret"),
+            "oclacitinib": ("ferret", "rabbit"),
+            "zonisamide": ("horse",),
+        }
+        for drug_id, extras in expectations.items():
+            si = self._drug(drug_id)["species_info"]
+            for sp in ("dog", "cat"):
+                row = si.get(sp)
+                if row and row.get("safe"):
+                    for field in ("dosage", "dosage_ja", "notes", "notes_ja"):
+                        assert row.get(field), f"{drug_id}/{sp}/{field} empty"
+            for sp in extras:
+                assert si.get(sp, {}).get("dosage_ja"), f"{drug_id}/{sp} patch row lost"

@@ -731,10 +731,10 @@ SPECIES_INFO_PATCH_5: dict[str, dict[str, dict]] = {
         },
         "cat": {
             "safe": True,
-            "dosage": "1-2 mg/kg PO q24h",
-            "dosage_ja": "1-2 mg/kg 経口 24時間毎",
-            "notes": "Feline hyperadrenocorticism is rare; monitor electrolytes closely",
-            "notes_ja": "猫の副腎皮質機能亢進症は稀。電解質を厳密にモニター",
+            "dosage": "1-2 mg/kg PO q12h - cats metabolise trilostane quickly and usually need twice-daily dosing (Mellett Keith 2013 JVIM). Monitor as in dogs: ACTH stimulation test 4-6 h post-pill 10-14 days after starting/dose changes, plus electrolytes (Na/K).",
+            "dosage_ja": "1-2 mg/kg 経口 12時間毎 — 猫は代謝が速く、1日2回の分割投与が必要なことが多い（Mellett Keith 2013 JVIM）。モニタリングは犬に準ずる: 開始・用量変更の10-14日後に投薬後4-6時間のACTH刺激試験＋電解質（Na/K）。",
+            "notes": "Feline hyperadrenocorticism is rare and most affected cats are diabetic - insulin sensitivity improves as cortisol falls, so anticipate insulin dose reduction to avoid hypoglycaemia.",
+            "notes_ja": "猫の副腎皮質機能亢進症はまれで、罹患猫の多くは糖尿病を併発 — コルチゾール低下でインスリン感受性が改善するため、低血糖回避のインスリン減量を予期する。",
         },
     },
     # ------------------------------------------------------------------
