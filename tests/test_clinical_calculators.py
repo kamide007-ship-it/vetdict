@@ -404,3 +404,57 @@ console.log(JSON.stringify(T.map(t=>({match:t.match,sp:t.sp||null,ja:t.ja,en:t.e
             for ne, nj in by_sp.get(sp, [])
         )
         assert hit, f"owner tip pattern resolves to no served disease: {t['match']}"
+
+
+def test_parse_cri_rate_verified_by_node_and_wired():
+    """2026-09 round: CRI-notation doses (deliberately rejected by
+    parseDoseRange) get their own one-tap prefill into the calculator's CRI
+    tab. parseCriRate must map mg|µg /kg/ min|hr|day (EN + JA period words) to
+    the CRI-tab unit values, prefill the LOW bound, reject transdermal-patch
+    rates and bare per-day oral notations (mg/kg/day without an explicit CRI
+    marker), and reject degenerate/inverted parses. The .drug-cri-open button
+    must be emitted at the three dose-row sites and routed by the shared
+    delegated handler into openClinicalCalculators({tab:'cri'})."""
+    m = re.search(r"function parseCriRate\(doseText\)\{[\s\S]*?\n\}", APP_JS)
+    assert m, "parseCriRate missing"
+    script = (
+        m.group(0).replace("function parseCriRate", "globalThis.parseCriRate=function")
+        + """
+const cases=[
+ ["5 \\u00b5g/kg/min IV CRI", {lo:5,hi:5,unit:"ug_kg_min"}],
+ ["25-200 \\u00b5g/kg/min", {lo:25,hi:200,unit:"ug_kg_min"}],
+ ["0.1-0.2 mg/kg/hr CRI", {lo:0.1,hi:0.2,unit:"mg_kg_hr"}],
+ ["1-4 \\u03bcg/kg/hr", {lo:1,hi:4,unit:"ug_kg_hr"}],
+ ["1-2 mg/kg/day CRI", {lo:1,hi:2,unit:"mg_kg_day"}],
+ ["2-5 mg/kg/day PO divided", null],
+ ["4 \\u03bcg/kg/\\u6642\\u9593", {lo:4,hi:4,unit:"ug_kg_hr"}],
+ ["fentanyl patch 2-4 \\u00b5g/kg/hr", null],
+ ["\\u30d5\\u30a7\\u30f3\\u30bf\\u30cb\\u30eb\\u30d1\\u30c3\\u30c1 2-4 \\u00b5g/kg/hr", null],
+ ["10 mg/kg PO q12h", null],
+ ["0.125 mg/kg/min IV", null],
+ ["50 mg/kg/dose", null],
+ ["10-5 mg/kg/hr", null],
+ ["1,000 \\u00b5g/kg/min", null],
+];
+let bad=0;
+for(const [t,exp] of cases){
+ if(JSON.stringify(parseCriRate(t))!==JSON.stringify(exp)){bad++;console.error("FAIL:",t,JSON.stringify(parseCriRate(t)));}
+}
+console.log(JSON.stringify({bad}));
+"""
+    )
+    res = subprocess.run([NODE, "-e", script], capture_output=True, text=True, timeout=30)
+    assert res.returncode == 0, res.stderr
+    assert json.loads(res.stdout.strip().splitlines()[-1])["bad"] == 0, res.stderr
+
+    # wiring: emission sites (drug list dose box, drug detail species cards,
+    # anesthesia drug rows), the delegated route, the CRI-tab source echo and
+    # the CRI prefill fields in openClinicalCalculators
+    assert APP_JS.count("drug-cri-open") >= 4, "3 emit sites + delegated handler expected"
+    assert 'closest(".drug-cri-open")' in APP_JS
+    assert 'id="calcCriRef"' in APP_JS
+    assert "criRate:parseFloat(criOpen.dataset.criLo)" in APP_JS
+    assert "prefill.criRate" in APP_JS and "prefill.criUnit" in APP_JS
+    # mobile tap target + shared styling for the new button
+    css = (ROOT / "static" / "css" / "main.css").read_text(encoding="utf-8")
+    assert ".drug-cri-open" in css

@@ -635,8 +635,8 @@ details.ecvn-adjunct-block[open]>summary.ecvn-adjunct-label{margin-bottom:4px}
 .calc-risk-seizure{background:#fee2e2;color:#991b1b}
 .calc-risk-lethal{background:#991b1b;color:#fff}
 .calc-choco-disease{display:block;margin-top:8px;background:none;border:none;color:var(--navy);font-size:.78rem;font-weight:600;cursor:pointer;text-decoration:underline dotted;padding:4px 0;min-height:32px}
-.drug-calc-open{display:inline-block;margin-left:8px;background:#fff;border:1px solid var(--gray-300);border-radius:12px;padding:2px 8px;font-size:.72rem;font-weight:600;color:var(--navy);cursor:pointer;min-height:26px;vertical-align:middle}
-.drug-calc-open:hover{border-color:var(--navy);background:var(--gray-50)}
+.drug-calc-open,.drug-cri-open{display:inline-block;margin-left:8px;background:#fff;border:1px solid var(--gray-300);border-radius:12px;padding:2px 8px;font-size:.72rem;font-weight:600;color:var(--navy);cursor:pointer;min-height:26px;vertical-align:middle}
+.drug-calc-open:hover,.drug-cri-open:hover{border-color:var(--navy);background:var(--gray-50)}
 .emergency-calc-link{display:inline-block;margin-bottom:12px;background:#fff;border:1px solid var(--navy);border-radius:var(--radius);padding:8px 14px;font-size:.82rem;font-weight:600;color:var(--navy);cursor:pointer;min-height:36px}
 .emergency-calc-link:hover{background:var(--gray-50)}
 .drug-interaction-add{display:inline-block;margin-top:10px;margin-left:8px;background:#fff;border:1px solid #d97706;border-radius:var(--radius);padding:6px 12px;font-size:.8rem;font-weight:600;color:#92400e;cursor:pointer;min-height:32px}
@@ -2100,7 +2100,7 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
   .calc-row input[type=number]{flex:1;min-width:0;max-width:170px;min-height:44px}
   .calc-row select{flex:1;min-width:0;max-width:100%;min-height:44px}
   .calc-result{font-size:.95rem}
-  .drug-calc-open{min-height:36px;padding:6px 12px;font-size:.8rem}
+  .drug-calc-open,.drug-cri-open{min-height:36px;padding:6px 12px;font-size:.8rem}
   .cross-nav-btn{min-height:44px}
 }
 

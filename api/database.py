@@ -382,8 +382,12 @@ def upsert_drug(conn: sqlite3.Connection, drug: dict) -> None:
             drug.get("category"),
             drug.get("mechanism"),
             drug.get("mechanism_ja"),
-            drug.get("contraindications"),
-            drug.get("contraindications_ja"),
+            json.dumps(drug["contraindications"], ensure_ascii=False)
+            if isinstance(drug.get("contraindications"), list)
+            else drug.get("contraindications"),
+            json.dumps(drug["contraindications_ja"], ensure_ascii=False)
+            if isinstance(drug.get("contraindications_ja"), list)
+            else drug.get("contraindications_ja"),
             json.dumps(drug["side_effects"])
             if isinstance(drug.get("side_effects"), list)
             else drug.get("side_effects"),

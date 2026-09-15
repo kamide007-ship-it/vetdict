@@ -85,6 +85,7 @@ from api.drug_batch_58 import DRUGS_BATCH_58
 from api.drug_batch_59 import DRUGS_BATCH_59
 from api.drug_batch_60 import DRUGS_BATCH_60
 from api.drug_batch_61 import DRUGS_BATCH_61
+from api.drug_batch_62 import DRUGS_BATCH_62
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10881,6 +10882,16 @@ for _drug61 in DRUGS_BATCH_61:
     if _drug61["id"] not in _drug_index:
         DRUGS.append(_drug61)
         _drug_index[_drug61["id"]] = _drug61
+
+# Batch 62: 2026-09 監査（第27回スイープ）の referenced-but-absent 補完
+# （プルカロプリド — 猫巨大結腸3エントリが「0.5-2 mg/cat PO q24h シサプリド代替」と
+#  用量付きで名指し。ニクロサミド — ハムスター小形条虫/鳥条虫/両生類吸虫の代替駆虫薬
+#  として用量付き参照。ブリンゾラミド — 緑内障プロトコルが参照する点眼CAIで
+#  ドルゾラミドのみ収載だった）
+for _drug62 in DRUGS_BATCH_62:
+    if _drug62["id"] not in _drug_index:
+        DRUGS.append(_drug62)
+        _drug_index[_drug62["id"]] = _drug62
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

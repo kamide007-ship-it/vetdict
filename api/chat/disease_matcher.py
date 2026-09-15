@@ -239,7 +239,9 @@ _SYN: dict[str, list[str]] = {
     "cough": ["coughing", "honking_cough"],
     "exercise_intolerance": ["weakness", "lethargy", "reluctance_to_move", "reluctance_move"],
     "syncope": ["collapse", "fainting", "loss_of_consciousness"],
-    "collapse": ["syncope", "fainting", "loss_of_consciousness"],
+    # falling bridges the acute-vestibular presentation ("ぐるぐる回って
+    # 倒れた") — feline vestibular sets key on falling, owners say collapse.
+    "collapse": ["syncope", "fainting", "loss_of_consciousness", "falling"],
     "fainting": ["syncope", "collapse"],
     # Neurological
     "seizures": ["convulsions", "fits", "epileptic_seizure", "tonic_clonic"],
@@ -357,6 +359,11 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # outranked it on coverage.
     ("chinchilla", frozenset({"red_ears", "rapid_breathing"}), "Heat Stroke - Chinchilla", 1.45),
     ("chinchilla", frozenset({"red_ears", "lethargy"}), "Heat Stroke - Chinchilla", 1.35),
+    # Unilateral exophthalmos in a pet rabbit is a retrobulbar (usually
+    # tooth-root) abscess until proven otherwise (Capello & Lennox; Harcourt-
+    # Brown) — without a boost the 5-sign entry lost on coverage to the rare
+    # elodontoma whose set happens to include nasal_discharge.
+    ("rabbit", frozenset({"exophthalmos"}), "Retrobulbar Abscess", 1.35),
 ]
 
 # Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.

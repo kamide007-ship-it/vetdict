@@ -442,8 +442,15 @@ SPECIES_PREVALENCE = {
         "Feline Mitral Valve Disease": "uncommon",
         "Corneal Sequestrum": "uncommon",
         "Feline Dry Eye (Keratoconjunctivitis Sicca)": "uncommon",
-        "Feline Idiopathic Vestibular Disease": "uncommon",
-        "Vestibular Disease": "uncommon",
+        # Acute peripheral vestibular syndrome is a common feline neuro
+        # presentation and idiopathic disease is its most frequent cause
+        # (Rossmeisl, Vet Clin North Am 2010) — as "uncommon" the intracranial
+        # tumors outranked it for the classic circling+falling complaint.
+        "Feline Idiopathic Vestibular Disease": "common",
+        "Vestibular Disease": "common",
+        # Choroid plexus tumors are predominantly canine; genuinely rare in
+        # cats (Withrow & MacEwen 6th ed) — untiered it hijacked circling.
+        "Feline Choroid Plexus Tumor": "rare",
         "Feline Audiogenic Reflex Seizures (FARS)": "uncommon",
         "Feline Status Epilepticus": "uncommon",
         "Feline Megaesophagus": "uncommon",
@@ -1709,6 +1716,11 @@ SPECIES_PREVALENCE = {
         "Copper Poisoning": "rare",
         "Teflon (PTFE) Toxicosis": "rare",
         "Teflon Toxicosis (Parakeet)": "rare",
+        # 2026-09 第28弾: 曝露歴依存の中毒が未tierで腹部膨満鑑別の卵黄性
+        # 腹膜炎(common)を上回っていた（bird/parrot の Avocado Toxicity=rare
+        # と同基準。parakeet モジュールのエントリ名は Toxicosis 表記）
+        "Avocado Toxicosis": "rare",
+        "Avocado Toxicosis (Parakeet)": "rare",
         # 2026-09 第25弾: 同一クローン症状セット（7所見バイト一致）の合成
         # 生殖器ペアが未tierのままシックバード三徴でオウム病を押しのけていた。
         # 先天異常は定義的に稀、合成の炎症性疾患エントリは個別tier済みの

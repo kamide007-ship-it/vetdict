@@ -1664,32 +1664,32 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:573,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:551,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:576,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:554,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:362,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:260,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:71,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:225,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
     {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:198,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:223,drugs:64,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
     {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:75,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
     {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:153,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:485,drugs:238,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:411,drugs:238,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:257,drugs:238,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:485,drugs:240,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:411,drugs:240,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:257,drugs:240,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
     {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:260,drugs:102,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
     {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:249,drugs:109,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
     {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:218,drugs:108,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
     {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:214,drugs:104,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
-    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:251,drugs:18,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
+    {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:251,drugs:19,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:28,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:2,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
     diseases:6455,
     species:21,
-    drugs:631,
+    drugs:634,
     symptoms:84,
     protocols:188
   };
@@ -2066,9 +2066,9 @@ function resetSpeciesChat(species){
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
     dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった"],
-    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる"],
+    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる"],
-    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている"],
+    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている","目が濡れて顔をこする","耳が垂れて耳から臭い"],
     hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない","腰に黒いイボのようなもの"],
     guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ","関節が腫れる"],
@@ -2078,7 +2078,7 @@ function resetSpeciesChat(species){
     parakeet:["食べない","膨らんでいる","呼吸のたびに音がする","吐き戻しが増えた","そのうが膨らんでいる","お尻でいきんでいる"],
     parrot:["食べない","自分で羽を抜く","くしゃみ","下痢","元気がない","吐き戻しが増えた"],
     reptile:["食べない","口をあけたまま呼吸","鼻水が出る","脱皮がうまくできない","目が開かない","痩せてきた"],
-    tortoise:["食べない","甲羅がやわらかい","鼻水が出る","目が腫れている","いきんでいる","甲羅に傷がある"],
+    tortoise:["食べない","甲羅がやわらかい","鼻水が出る","目が腫れている","いきんでいる","甲羅に傷がある","首を伸ばして呼吸している"],
     snake:["食べない","口の中が赤い","脱皮がうまくできない","口をあけたまま呼吸","ダニがついている","吐き戻しが増えた","脱皮した皮が目に残っている","脱皮した皮が体に残っている"],
     lizard:["食べない","脚が曲がってきた","ふらつく","脱皮がうまくできない","口をあけたまま呼吸","尻尾が細くなってきた"],
     amphibian:["食べない","皮膚が赤い","お腹が膨れている","皮膚に白いもの","元気がない","浮かんだまま沈めない"],
@@ -6498,6 +6498,7 @@ function renderCalculators(force){
       <div class="calc-result" id="calcDoseResult" aria-live="polite"></div>
     </div>
     <div class="calc-panel" data-calc-panel="cri" hidden>
+      <div id="calcCriRef" class="calc-ref" hidden></div>
       ${row(ja?"用量":"Dose",num("calcCriDose","")+`<select id="calcCriUnit"><option value="ug_kg_min">µg/kg/min</option><option value="ug_kg_hr">µg/kg/hr</option><option value="mg_kg_hr">mg/kg/hr</option><option value="mg_kg_day">mg/kg/day</option></select>`)}
       ${row(ja?"薬液濃度":"Concentration",num("calcCriConc","mg/mL")+`<span class="calc-unit">mg/mL</span>`)}
       <div class="calc-result" id="calcCriResult" aria-live="polite"></div>
@@ -6870,14 +6871,22 @@ function openClinicalCalculators(prefill){
     if(hi)hi.value=(prefill.doseMax!==undefined&&prefill.doseMax!==prefill.doseMin)?prefill.doseMax:"";
     if(unitSel&&prefill.unit)unitSel.value=prefill.unit==="µg"?"ug":"mg";
   }
-  const ref=document.getElementById("calcDoseRef");
-  if(ref){
-    if(prefill&&prefill.doseText){
-      const ja=currentLang==="ja";
-      ref.hidden=false;
-      ref.innerHTML=`${ja?"出典":"Source"}: <strong>${escapeHtml(prefill.drugLabel||"")}</strong> — ${escapeHtml(prefill.doseText)}<br/><span class="calc-hint">${ja?"※必ず原文の用量・経路・頻度を確認してください":"Always verify dose, route and frequency against the source text"}</span>`;
-    }else{ref.hidden=true;ref.innerHTML="";}
+  if(prefill&&prefill.criRate!==undefined&&prefill.criRate!==null){
+    const cd=document.getElementById("calcCriDose"),cu=document.getElementById("calcCriUnit");
+    if(cd)cd.value=prefill.criRate;
+    if(cu&&prefill.criUnit)cu.value=prefill.criUnit;
   }
+  const isCri=!!(prefill&&prefill.tab==="cri");
+  const srcEcho=(el,show)=>{
+    if(!el)return;
+    if(show&&prefill&&prefill.doseText){
+      const ja=currentLang==="ja";
+      el.hidden=false;
+      el.innerHTML=`${ja?"出典":"Source"}: <strong>${escapeHtml(prefill.drugLabel||"")}</strong> — ${escapeHtml(prefill.doseText)}<br/><span class="calc-hint">${ja?"※必ず原文の用量・経路・頻度を確認してください":"Always verify dose, route and frequency against the source text"}</span>`;
+    }else{el.hidden=true;el.innerHTML="";}
+  };
+  srcEcho(document.getElementById("calcDoseRef"),!isCri);
+  srcEcho(document.getElementById("calcCriRef"),isCri);
   _calcRecomputeAll();
   const p=details||document.getElementById("viewDrugs");
   if(p)scrollToAnchor(p);
@@ -7030,6 +7039,32 @@ function parseDoseRange(doseText){
   return null;
 }
 
+function parseCriRate(doseText){
+  /* CRI/持続・日量表記（mg|µg /kg/ min|hr|day）を計算機CRIタブの単位に
+     マップする — parseDoseRange が「1回量ではない」として意図的に除外する
+     表記の受け皿。範囲は下限をプリフィル（CRIは低用量から滴定開始が原則。
+     全文は出典エコーに表示され、上限は術者が確認して調整する）。 */
+  const txt=doseText||"";
+  /* 経皮パッチ（フェンタニル 2-4 µg/kg/hr 等）はポンプ流量計算の対象外 */
+  if(/patch|パッチ|貼付|transdermal/i.test(txt))return null;
+  const m=txt.match(/([\d.]+)(?:\s*[-–~～]\s*([\d.]+))?\s*(mg|mcg|[μµu]g)\s*\/\s*kg\s*\/\s*(min|hr|h|day|日|時間|時|分)/i);
+  if(!m)return null;
+  const lo=parseFloat(m[1]);
+  const hi=m[2]?parseFloat(m[2]):lo;
+  if(!(lo>0&&hi>=lo))return null;
+  const isMg=m[3].toLowerCase()==="mg";
+  const per=m[4].toLowerCase();
+  const perMin=per==="min"||per==="分";
+  const perHr=per==="hr"||per==="h"||per==="時間"||per==="時";
+  const perDay=per==="day"||per==="日";
+  if(!isMg&&perMin)return{lo,hi,unit:"ug_kg_min"};
+  if(!isMg&&perHr)return{lo,hi,unit:"ug_kg_hr"};
+  if(isMg&&perHr)return{lo,hi,unit:"mg_kg_hr"};
+  /* mg/kg/day は経口分割の日量表記が大半 — CRI 明記時のみポンプ計算を提案 */
+  if(isMg&&perDay&&/CRI/i.test(txt))return{lo,hi,unit:"mg_kg_day"};
+  return null;
+}
+
 function normalizeDrugSearchText(s){
   // NFKC（全角英数・半角カナの正規化）+ 小文字化 + ひらがな→カタカナ。
   // 「ばいとりる」「ﾊﾞｲﾄﾘﾙ」「ＢＡＹＴＲＩＬ」でも「バイトリル」に一致させる。
@@ -7106,7 +7141,9 @@ function renderDrugList(){
       }
       /* 用量が一意に解析できた行のみ計算機プリフィルボタンを表示（誤解析ゼロ設計 —
          出典テキストは計算機側にも常時表示され、必ず原文確認を促す） */
-      const calcBtn=(parsed&&si.safe)?`<button type="button" class="drug-calc-open" data-dose-min="${parsed.min}" data-dose-max="${parsed.max}" data-dose-unit="${parsed.unit}" data-drug-label="${escapeHtml(currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))}" data-dose-text="${escapeHtml(doseText.slice(0,160))}">\u{1F9EE} ${currentLang==="ja"?"計算機で開く":"Open in calculator"}</button>`:"";
+      const criParsed=(!parsed&&si.safe)?parseCriRate(si.dosage||si.dosage_ja||""):null;
+      const calcBtn=(parsed&&si.safe)?`<button type="button" class="drug-calc-open" data-dose-min="${parsed.min}" data-dose-max="${parsed.max}" data-dose-unit="${parsed.unit}" data-drug-label="${escapeHtml(currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))}" data-dose-text="${escapeHtml(doseText.slice(0,160))}">\u{1F9EE} ${currentLang==="ja"?"計算機で開く":"Open in calculator"}</button>`
+        :(criParsed?`<button type="button" class="drug-cri-open" data-cri-lo="${criParsed.lo}" data-cri-unit="${criParsed.unit}" data-drug-label="${escapeHtml(currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))}" data-dose-text="${escapeHtml(doseText.slice(0,160))}">\u{1F9EE} ${currentLang==="ja"?"CRI計算機で開く":"Open in CRI calculator"}</button>`:"");
       dosageHtml=`<div class="drug-dosage-box ${si.safe?"drug-safe":"drug-unsafe"}">${safeLabel} | ${t("dosageLabel")}${escapeHtml(doseText)}${calcHtml}${calcBtn}<br/><span class="drug-dosage-note">${escapeHtml(noteText)}</span></div>`;
     }
     const catLabel=drugCategories[d.category]?(currentLang==="ja"?(drugCategories[d.category].ja||drugCategories[d.category].en):(drugCategories[d.category].en||drugCategories[d.category].ja)):(currentLang==="ja"?(d.category_ja||d.category):(d.category||d.category_ja));
@@ -7129,7 +7166,7 @@ function renderDrugList(){
         ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")} <span style="font-size:.7rem;color:var(--gray-500);font-weight:400">(${d.drug_interactions.length})</span></dt><dd>${renderDrugInteractionsList(d.drug_interactions)}</dd></dl>`:""}
         <div class="drug-species-section"><strong class="drug-species-title">${t("dtSpeciesInfo")}</strong>
           <div class="drug-species-grid">
-            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");const highlight=currentSpecies===sp?"drug-species-highlight":"";const cardParsed=info.safe?parseDoseRange(info.dosage||info.dosage_ja||""):null;const cardCalc=cardParsed?`<button type="button" class="drug-calc-open" data-dose-min="${cardParsed.min}" data-dose-max="${cardParsed.max}" data-dose-unit="${cardParsed.unit}" data-drug-label="${escapeHtml((currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))+" ("+label+")")}" data-dose-text="${escapeHtml(dose.slice(0,160))}">\u{1F9EE}</button>`:"";return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"} ${highlight}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)} ${cardCalc}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
+            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");const highlight=currentSpecies===sp?"drug-species-highlight":"";const cardParsed=info.safe?parseDoseRange(info.dosage||info.dosage_ja||""):null;const cardCri=(!cardParsed&&info.safe)?parseCriRate(info.dosage||info.dosage_ja||""):null;const cardCalc=cardParsed?`<button type="button" class="drug-calc-open" data-dose-min="${cardParsed.min}" data-dose-max="${cardParsed.max}" data-dose-unit="${cardParsed.unit}" data-drug-label="${escapeHtml((currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))+" ("+label+")")}" data-dose-text="${escapeHtml(dose.slice(0,160))}">\u{1F9EE}</button>`:(cardCri?`<button type="button" class="drug-cri-open" data-cri-lo="${cardCri.lo}" data-cri-unit="${cardCri.unit}" data-drug-label="${escapeHtml((currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))+" ("+label+")")}" data-dose-text="${escapeHtml(dose.slice(0,160))}">\u{1F9EE}CRI</button>`:"");return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"} ${highlight}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)} ${cardCalc}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
           </div>
         </div>
         ${buildDrugDiseasesPlaceholder(d.id||"")}
@@ -7636,7 +7673,12 @@ function renderAnesthesiaList(){
              component, suffixed single drugs link the base, acronyms stay plain. */
           const drugAnchorEn=linkifyAnesDrugName(d.name||"");
           const drugAnchorJa=d.name_ja?`<br/><span class="d-name-ja">${linkifyAnesDrugName(d.name_ja)}</span>`:"";
-          return`<tr><td><strong>${drugAnchorEn}</strong>${drugAnchorJa}</td><td>${escapeHtml(d.dose||"")}</td>${calcCell}<td>${escapeHtml(d.route||"")}</td><td>${escapeHtml(d.onset||"")}</td><td>${escapeHtml(d.duration||"")}</td></tr>`
+          /* CRI-notation rows (µg/kg/min etc.) get a one-tap prefill into the
+             clinical calculator's CRI tab — the inline weight column cannot
+             convert a rate into a pump mL/hr, the CRI tab can. */
+          const criRow=parseCriRate(d.dose||"");
+          const criBtn=criRow?` <button type="button" class="drug-cri-open" data-cri-lo="${criRow.lo}" data-cri-unit="${criRow.unit}" data-drug-label="${escapeHtml((currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))||"")}${spLabel?escapeHtml(" ("+spLabel+")"):""}" data-dose-text="${escapeHtml((d.dose||"").slice(0,160))}" title="${currentLang==="ja"?"CRI計算機で開く":"Open in CRI calculator"}">\u{1F9EE}</button>`:"";
+          return`<tr><td><strong>${drugAnchorEn}</strong>${drugAnchorJa}</td><td>${escapeHtml(d.dose||"")}${criBtn}</td>${calcCell}<td>${escapeHtml(d.route||"")}</td><td>${escapeHtml(d.onset||"")}</td><td>${escapeHtml(d.duration||"")}</td></tr>`
           +contraHtml
           +(dNotes?`<tr class="anesthesia-drug-note"><td colspan="${cols}">${escapeHtml(dNotes)}</td></tr>`:"");
         }).join("")
@@ -8112,6 +8154,21 @@ function _attachDbItemHandlers(container){
         unit:calcOpen.dataset.doseUnit||"mg",
         drugLabel:calcOpen.dataset.drugLabel||"",
         doseText:calcOpen.dataset.doseText||"",
+      });
+      return;
+    }
+    /* CRI-notation dose row → calculator CRI tab (rate + unit prefilled from
+       the exact row; concentration is entered by the clinician) */
+    const criOpen=e.target.closest(".drug-cri-open");
+    if(criOpen){
+      e.preventDefault();e.stopPropagation();
+      trackEvent("cri_calc_from_dose",{drug:criOpen.dataset.drugLabel||""});
+      openClinicalCalculators({
+        tab:"cri",
+        criRate:parseFloat(criOpen.dataset.criLo),
+        criUnit:criOpen.dataset.criUnit||"",
+        drugLabel:criOpen.dataset.drugLabel||"",
+        doseText:criOpen.dataset.doseText||"",
       });
       return;
     }

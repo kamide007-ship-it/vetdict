@@ -3446,3 +3446,117 @@ class TestBatch61IndomethacinAndSweep26Aliases:
 
         hits = find_interactions(["indomethacin", "prednisolone"])
         assert hits, "indomethacin × prednisolone must be flagged by the registry"
+
+
+class TestBatch62PrucaloprideNiclosamideBrinzolamide:
+    """2026-09 audit (27th sweep): three referenced-but-absent monographs —
+    prucalopride (feline megacolon entries prescribe 0.5-2 mg/cat PO q24h as
+    the cisapride alternative), niclosamide (hamster R. nana / avian cestode /
+    amphibian trematode doses), brinzolamide (avian glaucoma protocol lists
+    the topical CAI while only dorzolamide was catalogued)."""
+
+    def _get(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        for d in DRUGS:
+            if d.get("id") == drug_id:
+                return d
+        raise AssertionError(f"{drug_id} missing from DRUGS")
+
+    def test_batch62_present_with_bilingual_dosing(self):
+        for drug_id in ("prucalopride", "niclosamide", "brinzolamide"):
+            d = self._get(drug_id)
+            assert d.get("name_ja") and d.get("mechanism_ja")
+            for sp, si in (d.get("species_info") or {}).items():
+                if si.get("safe"):
+                    assert (si.get("dosage") or "").strip(), (drug_id, sp)
+                    assert (si.get("dosage_ja") or "").strip(), (drug_id, sp)
+
+    def test_prucalopride_documents_class_defining_facts(self):
+        d = self._get("prucalopride")
+        # no-hERG selectivity is WHY it replaced cisapride; obstruction is the
+        # prokinetic-class contraindication
+        assert "hERG" in (d.get("mechanism") or "")
+        assert "obstruction" in (d.get("contraindications") or "").lower()
+        assert "閉塞" in (d.get("contraindications_ja") or "")
+        cat = d["species_info"]["cat"]
+        assert "0.5-2" in cat["dosage"]
+
+    def test_niclosamide_is_luminal_only(self):
+        d = self._get("niclosamide")
+        mech = (d.get("mechanism") or "") + (d.get("mechanism_ja") or "")
+        assert "not absorbed" in d.get("mechanism", "") and "吸収" in d.get("mechanism_ja", ""), mech
+        assert "Echinococcus" in (d.get("contraindications") or "")
+        assert "エキノコックス" in (d.get("contraindications_ja") or "")
+
+    def test_brinzolamide_blocks_systemic_cai_combination(self):
+        d = self._get("brinzolamide")
+        ix = d.get("drug_interactions") or []
+        assert any((i.get("severity") or "") == "major" and "CAI" in (i.get("drug") or "") for i in ix), ix
+
+    def test_batch62_resolves_in_text_matcher_and_reference_resolver(self):
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        cases = {
+            "プルカロプリド0.5-2 mg/cat PO q24h（シサプリド代替）": "prucalopride",
+            "ニクロサミド 100 mg/kg PO 単回、7日後反復": "niclosamide",
+            "ブリンゾラミド1%: 1滴 q8-12h": "brinzolamide",
+        }
+        for text, want in cases.items():
+            ids = {d["id"] for d in find_drugs_in_text(text)}
+            assert want in ids, (text, ids)
+        # interaction-checker natural language resolution (brand/kana forms)
+        assert resolve_drug_reference("レゾロール") == "prucalopride"
+        assert resolve_drug_reference("エイゾプト") == "brinzolamide"
+        assert resolve_drug_reference("ぷるかろぷりど") == "prucalopride"
+
+    def test_batch62_reverse_disease_lookup_connects(self):
+        from api.drug_dictionary import find_diseases_for_drug
+
+        assert find_diseases_for_drug("prucalopride"), "megacolon entries must back-reference"
+        assert find_diseases_for_drug("niclosamide"), "cestode entries must back-reference"
+
+
+class TestDrugUpsertSchemaConformance:
+    """The low-memory production path repairs drug-count staleness via
+    api.database.upsert_drug — a single drug whose fields don't bind to
+    SQLite (e.g. a list-typed contraindications) silently aborts that repair
+    (the exception is swallowed at debug level) and the served drug count
+    stays stale. Found in the 2026-09 audit when batch 62 briefly shipped
+    list contraindications: every catalogued drug must upsert cleanly, and
+    upsert_drug itself must serialise list-typed text fields as JSON instead
+    of raising."""
+
+    def test_every_drug_upserts_into_a_fresh_schema(self, tmp_path):
+        from api.database import get_connection, init_db, upsert_drug
+        from api.drug_dictionary import DRUGS
+
+        db = str(tmp_path / "upsert_check.db")
+        init_db(db)
+        with get_connection(db) as conn:
+            for drug in DRUGS:
+                upsert_drug(conn, drug)  # must not raise for any entry
+            conn.commit()
+            count = conn.execute("SELECT COUNT(*) FROM drugs").fetchone()[0]
+        assert count == len({d["id"] for d in DRUGS})
+
+    def test_upsert_drug_serialises_list_typed_text_fields(self, tmp_path):
+        from api.database import get_connection, init_db, upsert_drug
+
+        db = str(tmp_path / "upsert_list.db")
+        init_db(db)
+        rogue = {
+            "id": "zz_test_list_fields",
+            "name": "List Field Probe",
+            "name_ja": "リスト型フィールド検査",
+            "category": "other",
+            "contraindications": ["a", "b"],
+            "contraindications_ja": ["あ", "い"],
+            "side_effects": ["x"],
+            "species_info": {"dog": {"safe": True, "dosage": "1 mg/kg", "dosage_ja": "1 mg/kg"}},
+        }
+        with get_connection(db) as conn:
+            upsert_drug(conn, rogue)  # hardened path: JSON-dumps, no raise
+            conn.commit()
+            row = conn.execute("SELECT contraindications FROM drugs WHERE id='zz_test_list_fields'").fetchone()
+        assert row is not None and "a" in row[0]

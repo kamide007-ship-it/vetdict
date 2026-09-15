@@ -292,7 +292,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # Respiratory
     "labored_breathing": ["respiratory_distress", "dyspnea", "open_mouth_breathing", "difficulty_breathing"],
     "respiratory_distress": ["labored_breathing", "dyspnea", "open_mouth_breathing"],
-    "open_mouth_breathing": ["labored_breathing", "respiratory_distress", "mouth_breathing"],
+    # gasping_surface is the fish-native id for surface gaping — keeps the
+    # "口をパクパクさせて呼吸" gaping alias resolving for fish too.
+    "open_mouth_breathing": ["labored_breathing", "respiratory_distress", "mouth_breathing", "gasping_surface"],
     "rapid_breathing": ["tachypnea", "panting", "labored_breathing"],
     "coughing": ["cough", "kennel_cough"],
     "wheezing": [
@@ -614,12 +616,22 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # carry dark_urine natively; others express discoloured urine as
     # red_urine / blood_in_urine.
     "dark_urine": ["red_urine", "blood_in_urine"],
+    # おしっこがオレンジ (orange urine): rabbit carries red_urine natively
+    # (benign porphyrin pigmenturia is orange-red); elsewhere discoloured
+    # urine maps to dark_urine/blood_in_urine.
+    "red_urine": ["dark_urine", "blood_in_urine"],
+    # 骨が折れたかも (suspected fracture — observable is lameness): most
+    # vocabularies carry limping; bridge the rest to their lameness ids.
+    "limping": ["lameness", "lameness_or_limping", "limb_swelling"],
     # 止まり木を握れない (grip loss): bird carries inability_to_perch natively;
     # psittacine vocabularies vary — bridge to the perching/limb-weakness IDs.
     "inability_to_perch": ["difficulty_perching", "falling_off_perch", "leg_weakness"],
     # 口をくちゃくちゃ (jaw chattering — feline oral pain/FORL sign): only the
     # cat vocabulary carries it natively; bridge to eating-difficulty IDs.
-    "jaw_chattering": ["difficulty_eating", "drooling", "mouth_pain"],
+    # pawing_at_mouth leads: in ferrets jaw-smacking/mouth-pawing is the
+    # insulinoma hypoglycemia presentation (Quesenberry & Carpenter 4th ed);
+    # cats carry jaw_chattering natively so this chain never fires for them.
+    "jaw_chattering": ["pawing_at_mouth", "difficulty_eating", "drooling", "mouth_pain"],
     # --- 2026-08 round-14 sweep bridges ---
     # 口の中にできもの (oral mass): the legacy dog vocabulary now carries
     # oral_mass natively (oral-tumor entry); other species express visible
