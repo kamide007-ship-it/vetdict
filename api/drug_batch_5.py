@@ -212,17 +212,17 @@ DRUGS_BATCH_5: list[dict] = [
         "species_info": {
             "dog": {
                 "safe": True,
-                "dosage": "2-5 mg/kg PO q8-12h (up to 8-10 mg/kg for events)",
-                "dosage_ja": "2-5 mg/kg 経口 8-12時間毎（イベント時は最大8-10 mg/kg）",
-                "notes": "Widely used for confinement anxiety, vet visits, thunderstorms. Can combine with gabapentin. Titrate up slowly",
-                "notes_ja": "安静時不安、通院、雷恐怖症に広く使用。ガバペンチンと併用可。ゆっくり増量",
+                "dosage": "Situational anxiety (vet visits, thunderstorms, fireworks, car travel): 5-7 mg/kg PO 1.5-2 h before the trigger; do a test dose at home first to gauge sedation, and increase to 8-10 mg/kg next time if insufficient. Post-operative confinement/cage rest: start approx. 3.5 mg/kg PO q12h and titrate up to approx. 7 mg/kg q8-12h as needed (Gruen 2014 JAVMA: improved confinement tolerance after orthopedic surgery, well tolerated). Also reduces stress-related behaviors in hospitalized dogs (Gilbert-Gregory 2016 JAVMA). Daily anxiolytic maintenance: 2-5 mg/kg q8-12h, titrated slowly.",
+                "dosage_ja": "状況性不安（通院・雷・花火・車移動）: 5-7 mg/kg 経口をトリガーの1.5-2時間前 — 初回は自宅で試験投与して鎮静の程度を確認し、不十分なら次回8-10 mg/kgへ増量。術後の安静・ケージレスト: 約3.5 mg/kg 経口 12時間毎から開始し、必要に応じ約7 mg/kg 8-12時間毎へ漸増（Gruen 2014 JAVMA: 整形外科術後犬の安静遵守を改善、忍容性良好）。入院犬のストレス関連行動も減少（Gilbert-Gregory 2016 JAVMA）。常用の抗不安維持: 2-5 mg/kg 8-12時間毎をゆっくり漸増。",
+                "notes": "Onset approx. 1-2 h, effect approx. 4 h or more - re-dose for long events. Combines well with gabapentin ('chill protocol'); reduce each drug for additive sedation. With SSRIs/clomipramine/tramadol, watch for serotonin syndrome (tremor, agitation, hyperthermia, diarrhea) and reduce doses. Paradoxical excitement and priapism are rare.",
+                "notes_ja": "効果発現は約1-2時間・持続は約4時間以上 — 長いイベントでは再投与。ガバペンチンとの併用（チル・プロトコル）が有効だが、相加鎮静のため各薬を減量調整。SSRI/クロミプラミン/トラマドール併用時はセロトニン症候群（振戦・興奮・高体温・下痢）を指導し減量。逆説的興奮・持続勃起症はまれ。",
             },
             "cat": {
                 "safe": True,
-                "dosage": "25-50 mg/cat PO q12-24h (or 2-5 mg/kg)",
-                "dosage_ja": "25-50 mg/匹 経口 12-24時間毎（または2-5 mg/kg）",
-                "notes": "Useful for travel, vet visits, hospitalization anxiety. Can combine with gabapentin for synergistic effect",
-                "notes_ja": "移動、通院、入院時の不安に有用。ガバペンチンとの併用で相乗効果",
+                "dosage": "Pre-visit/transport: 50 mg/cat PO given 1-1.5 h before leaving home (Stevens 2016 JAVMA placebo-controlled crossover: a single 50 mg dose significantly reduced transport- and examination-related anxiety, well tolerated); small/frail cats may start at 25 mg. Chronic/hospitalization anxiety: 25-50 mg/cat PO q12-24h. Combines well with pre-visit gabapentin for fractious cats.",
+                "dosage_ja": "来院前・移動: 50 mg/頭 経口を出発の1-1.5時間前（Stevens 2016 JAVMA プラセボ対照クロスオーバー: 単回50 mgで移動・診察時の不安行動を有意に減少、忍容性良好）。小柄・虚弱猫は25 mgから。慢性・入院時不安: 25-50 mg/頭 12-24時間毎。攻撃的な猫では来院前ガバペンチンとの併用が有効。",
+                "notes": "Give a test dose at home before the actual visit. Same serotonin-syndrome cautions as dogs when combined with other serotonergic drugs.",
+                "notes_ja": "本番の前に自宅で試験投与を。他のセロトニン作動薬併用時の注意は犬と同様。",
             },
             "horse": {
                 "safe": True,
