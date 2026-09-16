@@ -5254,3 +5254,205 @@ class TestChatClinicalAccuracyAuditRound29:
         ids = dc._extract_equine_symptoms("後ろ足を痛がる 蹄が熱い")
         names = [d.get("name_ja") or "" for d in dc._match_equine_symptoms_to_diseases(ids)[:1]]
         assert names[0] == "蹄膿瘍", names
+
+
+class TestChatClinicalAccuracyAuditRound30:
+    """2026-09 audit round 30 — systematic fixes, not one-off aliases.
+
+    A polite-form probe showed the most natural owner phrasings (ます体:
+    「食べません」「吐いています」「痩せてきました」「元気がありません」) extracted
+    ZERO symptoms on every path — the single largest accuracy hole found to
+    date. Fixed with normalize_chat_text (morphologically-always-correct
+    polite→plain replacements applied on all three chat paths), plus three
+    module-load key expansions (i-adjective く-forms, て-stems of ている keys,
+    が→も particle variants) with a curated-prefix shadow guard, a negation
+    guard for the phase-3 fragment fallback (negated-only complaints used to
+    re-extract through fragments), and ranking fixes: blocked-cat anuria
+    pairs to 1.5 (obstruction until proven otherwise — ISFM), cat UTI tier
+    very_common→common (FIC dominates feline LUTS — Lund; Sykes), rabbit
+    snuffles/flystrike floors, reptile mouth-rot floors, and equine
+    exertional-myopathy tier alignment (WMD is a foal disease, MH is
+    anesthesia-associated — Reed & Bayly 4th ed)."""
+
+    # ---- 丁寧語正規化（3経路） ----
+
+    def test_normalize_chat_text_polite_pairs(self):
+        from api.chat.symptom_extractor import normalize_chat_text as n
+
+        assert n("ご飯を食べません") == "ご飯を食べない"
+        assert n("何度も吐いています") == "何度も吐いている"
+        assert n("元気がありません") == "元気がない"
+        assert n("痩せてきました") == "痩せてきた"
+        assert n("便が出ていません") == "便が出ていない"
+        assert n("水をたくさん飲みます") == "水をたくさん飲む"
+        # 変換対象外の動詞は不変（誤活用を生成しない）
+        assert n("遊びません") == "遊びません"
+
+    def test_polite_dog_anorexia_vomiting_ranks_gastroenteritis(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("昨日からご飯を食べません。何度も吐いています")
+        assert "loss_of_appetite" in ids and "vomiting" in ids, ids
+        assert match_symptoms_to_diseases(ids)[0]["disease_id"] == "acute_gastroenteritis"
+
+    def test_polite_dog_pupd_extracts_and_ranks_endocrine(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("水をたくさん飲みます。おしっこの量も増えました")
+        assert "excessive_thirst" in ids, ids
+        top3 = [m["disease_id"] for m in match_symptoms_to_diseases(ids)[:3]]
+        assert any(d in top3 for d in ("diabetes", "cushings", "kidney_disease", "chronic_kidney_disease")), top3
+
+    def test_polite_acute_hindlimb_failure_ranks_ivdd(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("後ろ足が急に立たなくなりました")
+        assert "paralysis" in ids, ids
+        assert match_symptoms_to_diseases(ids)[0]["disease_id"] == "ivdd"
+
+    def test_polite_equine_path_normalized(self):
+        import api.diagnostic_chat as dc
+
+        # 丁寧語でも equine 経路が抽出できる（「飲み込めません」→飲み込めない は
+        # 正規化対象外だが、ています進行形は正規化される）
+        ids = dc._extract_equine_symptoms("背中を触ると痛がっています")
+        assert "body_back_pain" in ids, ids
+
+    # ---- 否定ガードのフラグメント経路 ----
+
+    def test_negated_only_complaints_extract_nothing_via_fragments(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        # Phase1/2 が全て否定でゼロ件 → Phase3 フラグメント経由の再抽出も遮断
+        assert _extract_species_symptoms("嘔吐はしていません。下痢もありません", "cat") == []
+        assert extract_symptoms_from_text("嘔吐はしていません。下痢もありません") == []
+        # 陽性コントロールは抽出される
+        assert set(_extract_species_symptoms("嘔吐と下痢があります", "cat")) >= {"vomiting", "diarrhea"}
+
+    # ---- キー自動展開（く形・て語幹・が→も）と shadow ガード ----
+
+    def test_ku_form_expansion_hamster_torpor(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("体が冷たくて動きません。呼吸はしています", "hamster")
+        assert "cold_body" in ids, ids
+        names = [m["name_en"] for m in _match_species_symptoms_to_diseases(ids, "hamster")[:3]]
+        assert any("Hypothermia" in n or "Hibernation" in n or "Torpor" in n for n in names), names
+
+    def test_te_stem_and_mo_particle_tortoise_hypovitaminosis_a(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # 「目が腫れて」= て語幹、「食欲もありません」= が→も + ありません正規化
+        ids = _extract_species_symptoms("目が腫れて開きません。食欲もありません", "tortoise")
+        assert "anorexia" in ids and "eye_swelling" in ids, ids
+        names = [m["name_en"] for m in _match_species_symptoms_to_diseases(ids, "tortoise")[:3]]
+        assert any("Vitamin A" in n for n in names), names
+
+    def test_mo_particle_rabbit_small_pellets_ranks_gi_stasis(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("昨日から餌を食べません。糞も小さくなっています", "rabbit")
+        assert "small_fecal_pellets" in ids and "appetite_loss" in ids, ids
+        assert _match_species_symptoms_to_diseases(ids, "rabbit")[0]["name_en"] == "Gastrointestinal Stasis"
+
+    def test_generated_variant_never_shadows_curated_prefix(self):
+        from api.chat.symptom_aliases import SYMPTOM_ALIASES
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # 「甲羅が柔らかい」→soft_bones から生成される く形 が、キュレート済み語幹
+        # 「甲羅が柔らか」→soft_shell（別ID）を最長一致で影にしない
+        assert SYMPTOM_ALIASES.get("甲羅が柔らか") == "soft_shell"
+        assert SYMPTOM_ALIASES.get("甲羅が柔らかく") is None
+        ids = _extract_species_symptoms("甲羅が柔らかくて凹んでいます", "tortoise")
+        assert "soft_shell" in ids, ids
+
+    # ---- ランキング是正 ----
+
+    def test_anuria_pollakiuria_ranks_blocked_cat_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("何度もトイレに行くのにおしっこが出ません。鳴いています", "cat")
+        assert "decreased_urination" in ids, ids
+        r = _match_species_symptoms_to_diseases(ids, "cat")
+        assert r[0]["name_en"] == "Urinary Obstruction (Blocked Cat)", [m["name_en"] for m in r[:3]]
+
+    def test_non_anuria_luts_keeps_fic_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        # 無尿なしの血尿+頻尿は FIC が第一（猫の細菌性UTIは common に降格 —
+        # ISFM/AAFP: 若齢猫のLUTSはFICが主因）。閉塞ペアは発火しない
+        r = _match_species_symptoms_to_diseases(["frequent_urination", "blood_in_urine"], "cat")
+        top = [m["name_en"] for m in r[:3]]
+        assert r[0]["name_en"] == "Feline Idiopathic Cystitis (FIC)", top
+        assert "Urinary Obstruction (Blocked Cat)" not in top, top
+
+    def test_rabbit_flystrike_maggot_report_ranks_top3(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("お尻に虫がついています。じゅくじゅくしています", "rabbit")
+        assert "maggots_visible" in ids, ids
+        names = [m["name_en"] for m in _match_species_symptoms_to_diseases(ids, "rabbit")[:3]]
+        assert any("Flystrike" in n or "Myiasis" in n for n in names), names
+
+    def test_rabbit_snuffles_pair_ranks_pasteurella_top3(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+
+        names = [
+            m["name_en"] for m in _match_species_symptoms_to_diseases(["sneezing", "nasal_discharge"], "rabbit")[:3]
+        ]
+        assert any("Pasteurell" in n for n in names), names
+
+    def test_bird_egg_protruding_ranks_egg_binding_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("お尻から卵が出かかっていて力んでいます", "bird")
+        assert "egg_binding" in ids, ids
+        r = _match_species_symptoms_to_diseases(ids, "bird")
+        assert "Egg Binding" in r[0]["name_en"], [m["name_en"] for m in r[:3]]
+
+    def test_snake_oral_foam_ranks_mouth_rot_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("口の中が赤くて泡が出ています。口が閉じません", "snake")
+        assert "stomatitis" in ids, ids
+        r = _match_species_symptoms_to_diseases(ids, "snake")
+        assert "Stomatitis" in r[0]["name_en"], [m["name_en"] for m in r[:3]]
+
+    def test_reptile_cheese_like_exudate_ranks_mouth_rot(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("口の周りにチーズのようなものがついて口が閉じません", "reptile")
+        assert "stomatitis" in ids, ids
+        names = [m["name_en"] for m in _match_species_symptoms_to_diseases(ids, "reptile")[:3]]
+        assert any("Stomatitis" in n for n in names), names
+
+    def test_equine_tying_up_beats_foal_and_anesthetic_myopathies(self):
+        import api.diagnostic_chat as dc
+
+        ids = dc._extract_equine_symptoms("運動のあと後肢が突っ張って尿が茶色くなりました")
+        assert "body_dark_urine" in ids and "body_stiffness" in ids, ids
+        names = [d["name_en"] for d in dc._match_equine_symptoms_to_diseases(ids)[:3]]
+        # 白筋症（子馬疾患）・悪性高熱（麻酔関連）は成馬の労作性主訴の top3 を占有しない
+        assert any("Rhabdomyolysis" in n or "PSSM" in n for n in names), names
+        assert not any("Malignant Hyperthermia" in n for n in names), names
+
+    def test_gdv_unproductive_retching_sou_variant(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("急にお腹が膨らんで吐きそうなのに吐けません")
+        assert "unproductive_retching" in ids and "bloating" in ids, ids
+        assert match_symptoms_to_diseases(ids)[0]["disease_id"] == "gdv_bloat"
+
+    def test_age_alias_kourei_extracts(self):
+        from api.diagnostic_chat import extract_age_from_text
+
+        assert extract_age_from_text("高齢です") == 10.0

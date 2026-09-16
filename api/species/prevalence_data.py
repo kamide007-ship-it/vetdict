@@ -246,7 +246,11 @@ SPECIES_PREVALENCE = {
         "Gastroenteritis": "very_common",
         "Intestinal Parasitism": "very_common",
         "Feline Otitis Externa": "very_common",
-        "Urinary Tract Infection (UTI)": "very_common",
+        # 猫の細菌性UTIは犬と異なり若齢猫では稀（LUTS の主因は FIC ~55-65%、
+        # 尿石 ~15-20%、UTI は ~8-15% で高齢・CKD 併発例に偏る — ISFM/AAFP;
+        # Sykes; Lund）。very_common のままでは排尿主訴で常に FIC・閉塞より
+        # 上位に出る clinically wrong なランキングだった
+        "Urinary Tract Infection (UTI)": "common",
         "Flea Allergy Dermatitis": "very_common",
         "Feline Lower Urinary Tract Disease (FLUTD)": "very_common",
         "Feline Idiopathic Cystitis (FIC)": "very_common",
@@ -573,6 +577,13 @@ SPECIES_PREVALENCE = {
         "Proximal Suspensory Desmitis": "common",  # Sport horses
         "Navicular Syndrome": "common",
         "Exertional Rhabdomyolysis (Tying Up)": "common",
+        # 労作後の筋硬直+ミオグロビン尿の鑑別で未tierの3所見エントリが
+        # ER/PSSMを抑圧していた（2026-09 round 30）: 白筋症は子馬のセレン/
+        # ビタミンE欠乏疾患（Reed & Bayly 4th）、悪性高熱は麻酔関連の真に稀な
+        # 薬理遺伝学的疾患であり、成馬の運動関連主訴の上位に出るべきでない
+        "Nutritional Myodegeneration (White Muscle Disease)": "uncommon",
+        "Selenium Deficiency": "uncommon",
+        "Malignant Hyperthermia": "rare",
         "Back Pain": "common",
         "Kissing Spines": "common",  # Radiographic ORDSP up to 39% (Zimmerman)
         "Splints": "common",  # Young working horses
@@ -710,6 +721,18 @@ SPECIES_PREVALENCE = {
         "Incisor Overgrowth": "very_common",
         "Pasteurellosis (Snuffles)": "very_common",
         "Upper Respiratory Infection": "very_common",
+        # 鼻汁・くしゃみ鑑別の未tierエントリ整列（2026-09 round 30）:
+        # 鼻腔ポリープは主に猫の疾患でウサギでは真に稀。アスペルギルスは
+        # ウサギでは日和見の稀な感染。未tierのままではカバレッジで
+        # パスツレラ（very_common）を押しのけて上位を占めていた
+        "Nasal Polyps": "rare",
+        "Aspergillosis": "rare",
+        "Nasal Foreign Body": "uncommon",
+        "Sinusitis": "common",
+        # ウサギの毛包虫症（Demodex cuniculi）は真に稀（Quesenberry &
+        # Carpenter 4th）— 未tierのまま湿潤性皮膚病変でハエウジ症（時間単位の
+        # 救急）より上位に出ていた
+        "Demodex Mange": "rare",
         "Coccidiosis (Intestinal)": "very_common",
         "Hepatic Coccidiosis": "very_common",
         "Otitis Externa": "very_common",

@@ -601,7 +601,9 @@ def _build_equine_symptoms() -> list[dict[str, str]]:
 
 def _extract_equine_symptoms(text: str) -> list[str]:
     """Extract equine finding keys from natural language text."""
-    text_lower = text.lower()
+    from api.chat.symptom_extractor import normalize_chat_text
+
+    text_lower = normalize_chat_text(text).lower()
     matched: set[str] = set()
 
     # Direct name matches from health check items
@@ -717,7 +719,9 @@ def extract_symptoms_from_text(text: str) -> list:
                 # Fall through to manual extraction
 
     # Manual extraction (original algorithm)
-    text_lower = text.lower()
+    from api.chat.symptom_extractor import normalize_chat_text
+
+    text_lower = normalize_chat_text(text).lower()
     matched_symptoms = set()
 
     # Cross-vocabulary fallback: legacy dog vocabulary (52 IDs) differs from the
@@ -946,14 +950,25 @@ def extract_symptoms_from_text(text: str) -> list:
         fragments = [f.strip() for f in fragments if len(f.strip()) >= 1]
         for frag in fragments:
             for alias in _sorted_aliases:
-                if alias in frag:
+                pos = frag.find(alias)
+                if pos >= 0:
+                    # Phase 1/2 と同じ否定ガード: 除外情報のフラグメント経由の
+                    # 再抽出を防ぐ（「嘔吐はしていない」等）
+                    if is_negated_mention(frag, pos + len(alias)):
+                        break
                     sid = _resolve_legacy_id(SYMPTOM_ALIASES[alias])
                     if sid is not None:
                         matched_symptoms.add(sid)
                         break  # one match per fragment is enough
             # Also check direct names
             for symptom in SYMPTOMS:
-                if symptom["name_ja"].lower() in frag or symptom["name_en"].lower() in frag:
+                _nj = symptom["name_ja"].lower()
+                _ne = symptom["name_en"].lower()
+                _jp = frag.find(_nj) if _nj else -1
+                _ep = frag.find(_ne) if _ne else -1
+                if (_jp >= 0 and not is_negated_mention(frag, _jp + len(_nj))) or (
+                    _ep >= 0 and not is_negated_mention(frag, _ep + len(_ne))
+                ):
                     matched_symptoms.add(symptom["id"])
 
     return list(matched_symptoms)
@@ -1135,6 +1150,9 @@ _AGE_ALIASES: dict[str, float] = {
     "老犬": 10.0,
     "老猫": 12.0,
     "シニア": 9.0,
+    # 「高齢です」は最も一般的な高齢表現なのに未収載で年齢抽出ゼロだった
+    "高齢": 10.0,
+    "年寄り": 10.0,
 }
 
 

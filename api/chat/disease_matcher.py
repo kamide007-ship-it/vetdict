@@ -324,7 +324,9 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # Stranguria/anuria + vocalization in a cat = urethral obstruction —
     # the defining small-animal urinary emergency (Ettinger 8th ed).
     ("cat", frozenset({"straining_to_urinate", "vocalization_changes"}), "Urinary Obstruction (Blocked Cat)", 1.35),
-    ("cat", frozenset({"decreased_urination", "straining_to_urinate"}), "Urinary Obstruction (Blocked Cat)", 1.35),
+    # 無尿を含むペアは 1.5: 尿が出ていない申告は閉塞 until proven otherwise
+    # （FICは定義上尿産生があり、very_common priorだけで閉塞を上回っていた）
+    ("cat", frozenset({"decreased_urination", "straining_to_urinate"}), "Urinary Obstruction (Blocked Cat)", 1.5),
     # Acute hind-limb paralysis + cold limbs/pain vocalization in a cat is
     # aortic thromboembolism until proven otherwise (Smith 2003 JVIM).
     ("cat", frozenset({"hind_limb_paralysis", "cold_extremities"}), "Aortic Thromboembolism (Saddle Thrombus)", 1.35),
@@ -334,7 +336,7 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
         "Aortic Thromboembolism (Saddle Thrombus)",
         1.35,
     ),
-    ("cat", frozenset({"decreased_urination", "vocalization_changes"}), "Urinary Obstruction (Blocked Cat)", 1.35),
+    ("cat", frozenset({"decreased_urination", "vocalization_changes"}), "Urinary Obstruction (Blocked Cat)", 1.5),
     # Pelvic-limb weakness + ptyalism in a ferret is the insulinoma
     # hypoglycemia presentation (Quesenberry & Carpenter 4th ed).
     ("ferret", frozenset({"hind_leg_weakness", "drooling"}), "Insulinoma", 1.35),
@@ -364,6 +366,28 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # Brown) — without a boost the 5-sign entry lost on coverage to the rare
     # elodontoma whose set happens to include nasal_discharge.
     ("rabbit", frozenset({"exophthalmos"}), "Retrobulbar Abscess", 1.35),
+    # Pollakiuria with no urine production is urethral obstruction until
+    # proven otherwise in cats (male cats especially) — the minutes-count
+    # emergency must not rank below UTI/FIC when the owner reports both
+    # "frequent trips" and "nothing comes out" (ISFM/AAFP; Sykes).
+    ("cat", frozenset({"frequent_urination", "decreased_urination"}), "Urinary Obstruction (Blocked Cat)", 1.5),
+    # Oral inflammation in a captive squamate/chelonian is infectious
+    # stomatitis (mouth rot) until proven otherwise (Mader 3rd ed) — the
+    # 5-8 sign flagship entry otherwise lost on coverage dilution whenever a
+    # second extracted ID (e.g. regurgitation from oral foam) added noise.
+    ("snake", frozenset({"stomatitis"}), "Infectious Stomatitis (Mouth Rot)", 1.35),
+    ("reptile", frozenset({"stomatitis"}), "Infectious Stomatitis (Mouth Rot)", 1.35),
+    ("lizard", frozenset({"stomatitis"}), "Infectious Stomatitis (Mouth Rot)", 1.35),
+    ("tortoise", frozenset({"stomatitis"}), "Infectious Stomatitis (Mouth Rot)", 1.35),
+    # Perineal maggots in a rabbit are flystrike — an hours-count emergency
+    # (Oglesbee; Quesenberry & Carpenter 4th ed). The 4-6 sign entries lost
+    # on coverage to narrow dermatitis clones without a floor.
+    ("rabbit", frozenset({"maggots_visible"}), "Myiasis (Flystrike)", 1.4),
+    # Sneezing + nasal discharge in a pet rabbit is the snuffles complex —
+    # Pasteurella multocida is the classic primary agent (Harcourt-Brown;
+    # Quesenberry & Carpenter 4th ed). The flagship entry's larger sign set
+    # otherwise lost on coverage to narrow untiered rhinitis clones.
+    ("rabbit", frozenset({"sneezing", "nasal_discharge"}), "Pasteurellosis (Snuffles)", 1.25),
 ]
 
 # Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.
