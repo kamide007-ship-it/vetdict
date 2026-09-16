@@ -545,6 +545,18 @@ SPECIES_PREVALENCE = {
         "Thrush": "very_common",  # Ubiquitous frog infection in wet management
         # common
         "Laminitis": "common",  # Wylie 2011: 1.5-34% prevalence estimates
+        "Acute Laminitis": "common",  # Acute presentation of the same common disease
+        # 2026-09 round-29: untiered 3-finding hoof entries won the fore-limb
+        # hot-hoof pair (hoof_heat + limb_lameness_fore) on trivially high
+        # coverage, pushing abscess/laminitis below niche diagnoses. Tiered
+        # per Adams & Stashak 7th ed (abscess >> puncture/imbalance/DJD as
+        # causes of the acute hot painful foot).
+        "Foreign Body in Foot": "uncommon",  # Street-nail/solar puncture — real but << abscess
+        "Coffin Joint Disease": "uncommon",  # DIP DJD — chronic performance lameness
+        "Low Ringbone (Distal Interphalangeal Osteoarthritis)": "uncommon",  # Chronic DJD, not an acute hot foot
+        "Coronary Band Injury": "uncommon",  # Visible wound accompanies it
+        "Contracted Heels": "uncommon",  # Conformation/trimming disorder
+        "Sheared Heels": "uncommon",  # Conformation/trimming disorder
         "Equine Asthma (IAD/RAO)": "common",  # Stabled horses (Couetil 2016)
         "Equine Sarcoid": "common",  # Most common equine skin tumor
         "Melanoma": "common",  # ~80% lifetime risk in gray horses

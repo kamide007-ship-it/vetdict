@@ -2544,6 +2544,32 @@ SYMPTOM_ALIASES = {
     "便が毛でつながって": "small_fecal_pellets",
     "糞が毛でつながって": "small_fecal_pellets",
     "うんちが毛でつながって": "small_fecal_pellets",
+    # 2026-09 第29回精度スイープ
+    # レプトスピラ症の疫学的曝露フラグ（川・水たまり・田んぼの水 —
+    # Sykes 2011 ACVIM consensus。legacy犬DBの新設エントリに接続）
+    "川遊び": "stagnant_water_exposure",
+    "川の水を飲": "stagnant_water_exposure",
+    "水たまりの水": "stagnant_water_exposure",
+    "池の水を飲": "stagnant_water_exposure",
+    "田んぼの水": "stagnant_water_exposure",
+    "用水路の水": "stagnant_water_exposure",
+    # 逆くしゃみの「みたいな」変化形（「しゃっくりのような」のみ収載だった）
+    "しゃっくりみたいな呼吸": "reverse_sneezing",
+    # 挙上肢位（膝蓋骨脱臼・骨折の飼い主観察「足を上げたまま」）
+    "足を上げたまま": "lameness_or_limping",
+    # 黒色耳垢（耳ダニの古典的所見 — 「黒い耳垢」のみ収載で
+    # 「耳の中が黒い垢だらけ」を取りこぼしていた）
+    "耳の中が黒い": "ear_discharge",
+    # ヘビの脱力（とぐろを巻けない＝立ち直り反射喪失・弛緩性筋緊張低下。
+    # IBD/スターゲイジング等の神経筋疾患の hallmark — Mader 3rd ed。
+    # snake は loss_of_righting_reflex をネイティブ保有、他種は
+    # ID_SYNONYMS で weakness 系へ安全にフォールバック）
+    "とぐろを巻かない": "loss_of_righting_reflex",
+    "とぐろを巻けない": "loss_of_righting_reflex",
+    "とぐろが巻けない": "loss_of_righting_reflex",
+    "とぐろを巻かず": "loss_of_righting_reflex",
+    "体がだらんとし": "loss_of_righting_reflex",
+    "だらんとして": "loss_of_righting_reflex",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---
