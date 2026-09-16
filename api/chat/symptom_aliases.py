@@ -2570,12 +2570,134 @@ SYMPTOM_ALIASES = {
     "とぐろを巻かず": "loss_of_righting_reflex",
     "体がだらんとし": "loss_of_righting_reflex",
     "だらんとして": "loss_of_righting_reflex",
+    # ---------------------------------------------------------------
+    # 2026-09 精度監査 第30弾（丁寧語正規化と併せた体系スイープの残ミス）
+    # ---------------------------------------------------------------
+    # 跛行の促音便語幹（「足を引きずる」のみ収載で「引きずって/引きずっている」
+    # を取りこぼし — 正規化後も 引きずっている は 引きずる に不一致）
+    "足を引きずっ": "lameness_or_limping",
+    "脚を引きずっ": "lameness_or_limping",
+    "後ろ足を引きずっ": "hind_leg_weakness",
+    # 空嘔吐の「吐きそう」系（GDVの定義的主訴 — 既存は「吐きたそうで」のみ）
+    "吐きそうなのに吐けな": "unproductive_retching",
+    "吐きそうで吐けな": "unproductive_retching",
+    "吐こうとしても何も出": "unproductive_retching",
+    # 起立不能の促音便語幹（「後ろ足が立たなく」は副詞挿入で不一致だった）
+    "立たなくなっ": "hind_limb_paralysis",
+    "立てなくなっ": "hind_limb_paralysis",
+    # 爬虫類マウスロットの乾酪様滲出物（「チーズ状」のみ収載だった）
+    "チーズのような": "stomatitis",
+    "チーズみたいな": "stomatitis",
+    # ウサギ等のハエウジ症（フライストライク — 会陰部の蛆は数時間単位の救急。
+    # Oglesbee; Quesenberry & Carpenter 4th ed）
+    "お尻に虫": "maggots_visible",
+    "おしりに虫": "maggots_visible",
+    "お尻にウジ": "maggots_visible",
+    "ウジがわ": "maggots_visible",
+    "うじ虫": "maggots_visible",
+    "ウジ虫": "maggots_visible",
+    "蛆": "maggots_visible",
+    # 卵塞の「出かかっている」形（鳥・爬虫類の救急 — 既存は「卵が詰まって」のみ）
+    "卵が出かかっ": "egg_binding",
+    "卵が出かけ": "egg_binding",
+    "卵が途中で止ま": "egg_binding",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---
 # 口語エイリアスの多くは縮約形（「目が揺れてる」）のみ登録されており、
 # 完全形（「目が揺れている」）の入力を取りこぼしていた（125キーで欠落）。
 # 双方向に自動生成することで、どちらの形で入力されても同じ症状IDに解決する。
+for _k, _v in list(SYMPTOM_ALIASES.items()):
+    if _k.endswith("てる") or _k.endswith("でる"):
+        SYMPTOM_ALIASES.setdefault(_k[:-1] + "いる", _v)
+    elif _k.endswith("ている") or _k.endswith("でいる"):
+        SYMPTOM_ALIASES.setdefault(_k[:-2] + "る", _v)
+del _k, _v
+
+# --- い形容詞の連用形（〜く）自動生成 ---
+# 「体が冷たい」は登録済みでも「体が冷たくて動かない」の連用形が取りこぼされる
+# ギャップが監査ラウンドで繰り返し検出されてきた（赤く/白く/小さく/熱く…）。
+# い で終わるキーから く 形を自動生成する。い形容詞では常に正しい活用
+# （赤い→赤く）で、い が形容詞語尾でないキー（例: めまい→めまく）から生成される
+# 形は実文に出現しないため照合されず無害。否定内容エイリアス（食欲がない等）も
+# 「食欲がなくなった」の形を拾えるようになる。setdefault のためキュレート済みの
+# 既存マッピングは決して上書きしない。
+
+
+def _shadows_curated_prefix(variant: str, target: str) -> bool:
+    """生成キーが、より短いキュレート済みキー（別ID）を最長一致で影にする場合 True。
+
+    例: 「甲羅が柔らかい」→soft_bones から く形「甲羅が柔らかく」を生成すると、
+    キュレート済み語幹「甲羅が柔らか」→soft_shell（別ID）より長く、最長一致で
+    キュレートの意図を上書きしてしまう。既存の接頭辞キーが別IDを指す場合は
+    生成しない（同一IDなら生成してよい — 単なる冗長キー）。
+    """
+    for i in range(3, len(variant)):
+        prefix = variant[:i]
+        existing = SYMPTOM_ALIASES.get(prefix)
+        if existing is not None and existing != target:
+            return True
+    return False
+
+
+for _k, _v in list(SYMPTOM_ALIASES.items()):
+    if len(_k) >= 3 and _k.endswith("い"):
+        _variant = _k[:-1] + "く"
+        if not _shadows_curated_prefix(_variant, _v):
+            SYMPTOM_ALIASES.setdefault(_variant, _v)
+del _k, _v
+
+# --- 〜ている キーの て語幹自動生成 ---
+# 「吐いている」は登録済みでも「吐いていて」「吐いており」「吐いてばかり」の
+# 接続形が取りこぼされる。ている/でいる で終わるキーから て/で 語幹を生成する。
+# 安全ガード: (a) 語幹に漢字を1文字以上含む（かな only の短語幹は誤爆リスク）、
+# (b) 語幹3文字以上、(c) 一般語の接尾に一致する危険語幹はブロック
+# （「張って」は頑張って/引っ張って/見張って に部分一致するため除外 —
+# 主語付きの「お腹が張って」等はブロックされない）。
+_TE_STEM_BLOCKLIST = frozenset(
+    {
+        "張って",
+        "出て",
+        "して",
+        "来て",
+        "きて",
+        "行って",
+        "入って",
+        "なって",
+        "取って",
+        "とって",
+        "持って",
+        "見て",
+        "当てて",
+    }
+)
+
+
+def _has_kanji(s: str) -> bool:
+    return any("一" <= ch <= "鿿" for ch in s)
+
+
+for _k, _v in list(SYMPTOM_ALIASES.items()):
+    if _k.endswith("ている") or _k.endswith("でいる"):
+        _stem = _k[:-2]  # 「〜ている」→「〜て」
+        if len(_stem) >= 3 and _has_kanji(_stem) and _stem not in _TE_STEM_BLOCKLIST:
+            SYMPTOM_ALIASES.setdefault(_stem, _v)
+del _k, _v
+
+# --- 助詞「が」⇄「も」バリアント自動生成 ---
+# 複数症状を並べる飼い主入力では2つ目以降の症状が「も」で導入される
+# （「餌を食べません。糞**も**小さくなっています」）が、キーは「糞が小さく」の
+# が形のみで不一致だった。が を含むキーから も 形を生成する（意味は同一）。
+for _k, _v in list(SYMPTOM_ALIASES.items()):
+    if "が" in _k and len(_k) >= 4:
+        _variant = _k.replace("が", "も", 1)
+        if not _shadows_curated_prefix(_variant, _v):
+            SYMPTOM_ALIASES.setdefault(_variant, _v)
+del _k, _v
+
+# --- てる⇄ている 双方向補完の最終パス ---
+# 上の派生生成（も形等）で新たに生まれた てる/ている 終わりのキーにも
+# 縮約⇄完全形の双子を補完する（生成順序に依存しない不変条件として維持）
 for _k, _v in list(SYMPTOM_ALIASES.items()):
     if _k.endswith("てる") or _k.endswith("でる"):
         SYMPTOM_ALIASES.setdefault(_k[:-1] + "いる", _v)

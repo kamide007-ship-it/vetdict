@@ -669,6 +669,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # tooth mobility as tooth_loss; other vocabularies fall back to the oral
     # signs that co-report with dental disease.
     "loose_teeth": ["tooth_loss", "teeth_problems", "difficulty_eating", "bad_breath"],
+    # ハエウジ症（フライストライク）: rabbit は maggots_visible をネイティブ保有。
+    # 他種は湿潤性皮膚病変系へ安全にフォールバック（2026-09 round-30）
+    "maggots_visible": ["skin_lesions", "wounds", "skin_ulcers", "moist_dermatitis"],
 }
 
 # Backwards-compat alias (some older imports use the private name).
@@ -695,6 +698,90 @@ def is_negated_mention(text: str, end: int) -> bool:
     return bool(_NEGATION_AFTER_RE.match(text[end : end + 12]))
 
 
+# --- 丁寧語（ます体）→ 平叙形の入力正規化 -------------------------------------
+# 飼い主の主訴は丁寧語で入力されることが非常に多いが、エイリアス辞書は平叙形
+# （〜ている/〜ない/〜た）で整備されているため、「食べません」「吐いています」
+# 「痩せてきました」のような最も自然な入力が抽出ゼロになっていた（2026-09監査で
+# 丁寧語プローブ17件中12件が全滅）。ここでは**形態論的に常に正しい置換のみ**を
+# テーブル化する: 〜ています→〜ている は全動詞で正しいが、〜ません→〜ない の
+# 一括置換は五段動詞で誤活用（飲みません→飲みない）になるため、動詞ごとの
+# 正しい活用のみを列挙する（誤生成は照合に一致しないだけで無害だが、正しい形の
+# 生成のみに限定して保守する）。適用は3経路（汎用種・レガシー犬・馬）共通。
+_POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
+    # 進行形・状態動詞（全動詞で常に正しい）
+    ("ていませんでした", "ていない"),
+    ("でいませんでした", "でいない"),
+    ("ていました", "ている"),
+    ("でいました", "でいる"),
+    ("ていません", "ていない"),
+    ("でいません", "でいない"),
+    ("ています", "ている"),
+    ("でいます", "でいる"),
+    ("てきました", "てきた"),
+    ("できません", "できない"),
+    ("ありません", "ない"),
+    ("ありました", "あった"),
+    # 〜まる五段動詞（止まりません→止まらない 等、〜まる動詞で常に正しい）
+    ("まりません", "まらない"),
+    # する動詞（します は常に する の丁寧形）
+    ("しました", "した"),
+    ("しません", "しない"),
+    ("します", "する"),
+    # 高頻度の症状動詞（動詞ごとに正しい活用へ。ここに無い動詞は変換しない）
+    ("食べません", "食べない"),
+    ("食べました", "食べた"),
+    ("食べます", "食べる"),
+    ("飲みません", "飲まない"),
+    ("飲みました", "飲んだ"),
+    ("飲みます", "飲む"),
+    ("吐きました", "吐いた"),
+    ("吐きます", "吐く"),
+    ("出ません", "出ない"),
+    ("出ました", "出た"),
+    ("出ます", "出る"),
+    ("歩きません", "歩かない"),
+    ("歩けません", "歩けない"),
+    ("立ちません", "立たない"),
+    ("立てません", "立てない"),
+    ("動きません", "動かない"),
+    ("動けません", "動けない"),
+    ("飛べません", "飛べない"),
+    ("見えません", "見えない"),
+    ("聞こえません", "聞こえない"),
+    ("なりました", "なった"),
+    ("なります", "なる"),
+    ("痩せました", "痩せた"),
+    ("増えました", "増えた"),
+    ("減りました", "減った"),
+    ("腫れました", "腫れた"),
+    ("倒れました", "倒れた"),
+    ("抜けました", "抜けた"),
+    ("鳴きます", "鳴く"),
+    ("治りません", "治らない"),
+    ("閉じません", "閉じない"),
+    ("開きません", "開かない"),
+    ("吐けません", "吐けない"),
+    ("座れません", "座れない"),
+    ("眠れません", "眠れない"),
+]
+# 長い置換を先に適用（「ていませんでした」が「ていません」より先）
+_POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
+
+
+def normalize_chat_text(text: str) -> str:
+    """丁寧語（ます体）の主訴を平叙形に正規化する。
+
+    エイリアス照合の前段として全チャット経路（汎用種・レガシー犬・馬）で
+    使用する。置換テーブルは形態論的に常に正しいペアのみで構成され、
+    否定ガード（is_negated_mention）が参照する否定形（〜ていない等）は
+    正規化後も保存される。
+    """
+    for polite, plain in _POLITE_NORMALIZATIONS:
+        if polite in text:
+            text = text.replace(polite, plain)
+    return text
+
+
 def resolve_symptom_id(sid: str, symptom_names: dict) -> str | None:
     """Return the canonical symptom ID for a species, following synonyms.
 
@@ -719,7 +806,7 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
     if not sp_data:
         return []
 
-    text_lower = text.lower()
+    text_lower = normalize_chat_text(text).lower()
     matched: set[str] = set()
     symptom_names = sp_data["symptom_names"]
 
@@ -767,7 +854,12 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         fragments = [f.strip() for f in fragments if len(f.strip()) >= 1]
         for frag in fragments:
             for alias in _sorted_aliases:
-                if alias in frag:
+                pos = frag.find(alias)
+                if pos >= 0:
+                    # Phase 1/2 と同じ否定ガード: 「嘔吐はしていない」等の除外情報が
+                    # フラグメント経由で症状として再抽出されるのを防ぐ
+                    if is_negated_mention(frag, pos + len(alias)):
+                        break
                     sid = SYMPTOM_ALIASES[alias]
                     if sid in symptom_names:
                         matched.add(sid)
@@ -775,7 +867,11 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
             for sym_id, names in symptom_names.items():
                 ja = names.get("ja", "").lower()
                 en = names.get("en", "").lower()
-                if (ja and ja in frag) or (en and en in frag):
+                ja_pos = frag.find(ja) if ja else -1
+                en_pos = frag.find(en) if en else -1
+                if (ja_pos >= 0 and not is_negated_mention(frag, ja_pos + len(ja))) or (
+                    en_pos >= 0 and not is_negated_mention(frag, en_pos + len(en))
+                ):
                     matched.add(sym_id)
 
     return list(matched)
