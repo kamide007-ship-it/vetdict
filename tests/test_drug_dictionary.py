@@ -3841,3 +3841,98 @@ class TestHighFrequencyDrugDetailBatch3:
                         assert row.get(field), f"{drug_id}/{sp}/{field} empty"
             for sp in extras:
                 assert si.get(sp, {}).get("dosage_ja"), f"{drug_id}/{sp} patch row lost"
+
+
+class TestBatch63PhysostigmineTilmicosinAtorvastatin:
+    """2026-09 audit (28th sweep): three referenced-but-absent monographs —
+    physostigmine (the formulary's own toxicology protocols dose it for
+    anticholinergic toxicity and refractory ivermectin coma — the
+    self-referential antidote gap), tilmicosin (goat/pig mycoplasma entries
+    dose it; injection is fatal in swine/horses and IV is fatal in ALL
+    species), atorvastatin (avian aortic rupture/thromboembolism entries dose
+    the statin for psittacine atherosclerosis)."""
+
+    def _get(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        for d in DRUGS:
+            if d.get("id") == drug_id:
+                return d
+        raise AssertionError(f"{drug_id} missing from DRUGS")
+
+    def test_batch63_present_with_bilingual_dosing(self):
+        for drug_id in ("physostigmine", "tilmicosin", "atorvastatin"):
+            d = self._get(drug_id)
+            assert d.get("name_ja") and d.get("mechanism_ja")
+            assert isinstance(d.get("drug_interactions"), list)
+            for sp, si in (d.get("species_info") or {}).items():
+                if si.get("safe"):
+                    assert (si.get("dosage") or "").strip(), (drug_id, sp)
+                    assert (si.get("dosage_ja") or "").strip(), (drug_id, sp)
+
+    def test_physostigmine_defining_safety_facts(self):
+        d = self._get("physostigmine")
+        # BBB penetration (vs quaternary neostigmine) is the raison d'être
+        assert "血液脳関門" in d["mechanism_ja"]
+        assert "blood-brain barrier" in d["mechanism"]
+        # OP/carbamate cases are the hard contraindication
+        assert "有機リン" in d["contraindications_ja"]
+        assert "carbamate" in d["contraindications"].lower()
+        # atropine rescue must be documented as an interaction row
+        drugs = " ".join(r.get("drug", "") for r in d["drug_interactions"])
+        assert "Atropine" in drugs and "Organophosphates" in drugs
+
+    def test_tilmicosin_species_fatality_gates(self):
+        d = self._get("tilmicosin")
+        assert d["species_info"]["horse"]["safe"] is False
+        assert d["species_info"]["dog"]["safe"] is False
+        assert d["species_info"]["cat"]["safe"] is False
+        # IV-fatal-in-all-species and swine-injection-fatal gates
+        assert "静脈内投与" in d["contraindications_ja"]
+        assert "fatal" in d["contraindications"].lower()
+        goat = d["species_info"]["exotic_other"]
+        assert "単回" in goat["dosage_ja"] and "静注は絶対不可" in goat["dosage_ja"]
+        assert "SINGLE" in goat["dosage"]
+        # human self-injection warning must survive edits
+        assert "誤自己注射" in goat["notes_ja"] or "誤自己注射" in d["contraindications_ja"]
+        # epinephrine worsens swine lethality — not a rescue
+        drugs = " ".join(r.get("drug", "") for r in d["drug_interactions"])
+        assert "Epinephrine" in drugs
+
+    def test_tilmicosin_dangerous_slow_injection_text_removed(self):
+        # The caprine entry used to read 「注射は心毒性→緩徐投与」 which
+        # implied a repeatable slow injection; IV is fatal in every species.
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parents[1]
+        raw = (root / "diseases_all_species.json").read_text(encoding="utf-8")
+        assert "注射は心毒性→緩徐投与" not in raw
+        assert "injection→cardiotoxicity risk, administer slowly" not in raw
+        assert "静注は全種で致死的" in raw
+        assert "IV administration is fatal in ALL species" in raw
+
+    def test_atorvastatin_avian_honest_framing_and_azole_interaction(self):
+        d = self._get("atorvastatin")
+        bird = d["species_info"]["bird"]
+        # honest evidence framing: PK caveat + diet-first message
+        assert "Beaufrère" in bird["dosage"] and "Beaufrère" in bird["dosage_ja"]
+        assert "エビデンスは限定的" in bird["dosage_ja"]
+        # the azole (itraconazole) CYP3A4 interaction is the daily-relevant one
+        rows = d["drug_interactions"]
+        azole = [r for r in rows if "traconazole" in r.get("drug", "")]
+        assert azole and azole[0]["severity"] == "major"
+
+    def test_batch63_resolves_in_text_matcher_and_checker(self):
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        cases = {
+            "physostigmine": "フィゾスチグミン 0.06 mg/kg IV — 議論あり",
+            "tilmicosin": "チルミコシン 10 mg/kg SC 単回",
+            "atorvastatin": "Atorvastatin 0.3-1 mg/kg PO q24h (extrapolated)",
+        }
+        for drug_id, phrase in cases.items():
+            ids = [h["id"] for h in find_drugs_in_text(phrase)]
+            assert drug_id in ids, (drug_id, ids)
+        assert resolve_drug_reference("ミコチル") == "tilmicosin"
+        assert resolve_drug_reference("リピトール") == "atorvastatin"
+        assert resolve_drug_reference("エゼリン") == "physostigmine"

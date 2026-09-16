@@ -86,6 +86,7 @@ from api.drug_batch_59 import DRUGS_BATCH_59
 from api.drug_batch_60 import DRUGS_BATCH_60
 from api.drug_batch_61 import DRUGS_BATCH_61
 from api.drug_batch_62 import DRUGS_BATCH_62
+from api.drug_batch_63 import DRUGS_BATCH_63
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10892,6 +10893,18 @@ for _drug62 in DRUGS_BATCH_62:
     if _drug62["id"] not in _drug_index:
         DRUGS.append(_drug62)
         _drug_index[_drug62["id"]] = _drug62
+
+# Batch 63: 2026-09 監査（第28回スイープ）の referenced-but-absent 補完
+# （フィゾスチグミン — 自サイトの中毒プロトコル3件が「0.02-0.06 mg/kg IV slowly」と
+#  用量付きで名指しする抗コリン中毒解毒薬（自己参照的解毒薬ギャップ）。
+#  チルミコシン — 山羊/豚マイコプラズマ肺炎が参照。静注は全種で致死・豚馬は注射自体が
+#  致死というクラス最重要級の安全ゲートを文書化。
+#  アトルバスタチン — 鳥の大動脈破裂/血栓塞栓症エントリが用量付き参照する
+#  オウム類アテローム性動脈硬化症のスタチン療法）
+for _drug63 in DRUGS_BATCH_63:
+    if _drug63["id"] not in _drug_index:
+        DRUGS.append(_drug63)
+        _drug_index[_drug63["id"]] = _drug63
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

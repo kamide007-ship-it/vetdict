@@ -816,6 +816,16 @@ SYMPTOMS = [
         "name_en": "Grape / Raisin Ingestion",
         "category": "general",
     },
+    # 2026-09 audit round 29: leptospirosis exposure-context flag. Contact
+    # with stagnant/river water or rodents is the decisive epidemiologic
+    # datum for canine leptospirosis (Sykes 2011 ACVIM consensus) — the
+    # fever+jaundice+PU/PD triad alone is shared with hepatopathy/IMHA.
+    {
+        "id": "stagnant_water_exposure",
+        "name_ja": "川・水たまり・田んぼの水に接触/飲んだ",
+        "name_en": "River / Stagnant Water Exposure",
+        "category": "general",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -3482,6 +3492,35 @@ DISEASES = [
         "recommended_tests": ["blood_test", "urinalysis", "ultrasound"],
         "breed_risks": {},
     },
+    # 2026-09 audit round 29: the legacy chat DB had NO leptospirosis entry,
+    # so the classic zoonotic presentation (fever + jaundice + PU/PD after
+    # river/stagnant-water exposure) ranked hepatopathy/IMHA only and the
+    # water-contact history was never used. Name matches the dog module's
+    # "Leptospirosis" so the chat card's 疾患DBで詳細を開く pivot lands.
+    {
+        "id": "leptospirosis",
+        "prevalence_tier": "uncommon",
+        "name_ja": "レプトスピラ症",
+        "name_en": "Leptospirosis",
+        "description_ja": "病原性レプトスピラ（Leptospira interrogans 各血清型）によるスピロヘータ感染症で、人獣共通感染症（届出対象）。感染動物（特にネズミ等の齧歯類）の尿で汚染された川・水たまり・田んぼの水との接触や飲水で経皮・経粘膜感染する。腎臓と肝臓が主要標的で、発熱・元気消失・嘔吐に続き、黄疸・多飲多尿〜乏尿（急性腎障害）・褐色尿が出現する。診断はMAT抗体価ペア血清とPCR。治療は早期のドキシサイクリン5 mg/kg PO/IV q12h（急性期はアンピシリン静注→回復後ドキシサイクリン2週間で腎保菌を除去）と積極的輸液。人にも感染するため、尿の取り扱いは手袋着用（Sykes 2011 ACVIM consensus; Greene 4th ed）。ワクチンで主要血清型は予防可能。",
+        "description_en": "Zoonotic spirochete infection (Leptospira interrogans serovars, notifiable). Dogs are infected through skin/mucosa contact with — or drinking of — river, puddle or paddy water contaminated by the urine of reservoir hosts (especially rodents). Kidney and liver are the main targets: fever, lethargy and vomiting are followed by jaundice, PU/PD progressing to oliguric acute kidney injury, and dark urine. Diagnosis: paired MAT titers and PCR. Treatment: early doxycycline 5 mg/kg PO/IV q12h (IV ampicillin in the acute phase, then a 2-week doxycycline course to clear renal carriage) with aggressive IV fluids. Handle urine with gloves — humans are susceptible (Sykes 2011 ACVIM consensus; Greene 4th ed). Vaccination covers the major serovars.",
+        # Carries the systemic triad on purpose (unlike the ingestion-gated
+        # toxicoses): fever + jaundice + PU/PD IS the textbook leptospirosis
+        # presentation and belongs in that differential even without a stated
+        # exposure. The exposure flag and clusters push it to the top when
+        # the water-contact history is reported.
+        "symptoms": [
+            "stagnant_water_exposure",
+            "fever",
+            "jaundice",
+            "excessive_thirst",
+            "vomiting",
+            "dark_urine",
+        ],
+        "severity": "high",
+        "recommended_tests": ["blood_test", "cbc", "urinalysis"],
+        "breed_risks": {},
+    },
 ]
 
 DISEASE_MAP = {d["id"]: d for d in DISEASES}
@@ -4573,6 +4612,14 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"chocolate_ingestion", "tremors"}), "chocolate_toxicosis", 2.0),
     (frozenset({"grape_ingestion"}), "grape_raisin_toxicosis", 1.8),
     (frozenset({"grape_ingestion", "vomiting"}), "grape_raisin_toxicosis", 2.0),
+    # Stated river/stagnant-water contact is the decisive epidemiologic datum
+    # for leptospirosis (Sykes 2011 ACVIM consensus); with fever or jaundice
+    # alongside it the zoonosis must top the list. The un-gated triad cluster
+    # covers the textbook icteric presentation without exposure history.
+    (frozenset({"stagnant_water_exposure"}), "leptospirosis", 1.5),
+    (frozenset({"stagnant_water_exposure", "fever"}), "leptospirosis", 1.8),
+    (frozenset({"stagnant_water_exposure", "jaundice"}), "leptospirosis", 2.0),
+    (frozenset({"fever", "jaundice", "excessive_thirst"}), "leptospirosis", 1.5),
     # Purulent vulvar discharge in a bitch = pyometra until proven otherwise
     # (Ettinger 8th ed; Hagman 2018) — a life-threatening emergency that must
     # be excluded before vaginitis. Single-sign cluster follows the oral_mass /

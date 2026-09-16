@@ -1617,6 +1617,7 @@ class TestQuickTapPhraseExtraction:
             "目やにがひどくて目が開かない",
             "チョコレートを食べてしまった",
             "ぶどうを食べてしまった",
+            "川や水たまりの水を飲んだ後に発熱",
         ],
         "cat": [
             "食べない",
@@ -5151,3 +5152,105 @@ class TestChatClinicalAccuracyAuditRound28:
         assert "exophthalmos" in ids, ids
         names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "rabbit", lang="ja")[:3]]
         assert any("球後膿瘍" in n for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound29:
+    """2026-09 audit round 29. Root causes fixed: the legacy dog DB had NO
+    leptospirosis entry (the fever+jaundice+PU/PD zoonosis after river/
+    stagnant-water exposure ranked hepatopathy/IMHA only, and the water
+    history — the decisive epidemiologic datum per Sykes 2011 — was never
+    used), 「しゃっくりみたいな呼吸」 lost the reverse-sneeze mapping to its
+    みたいな variant, the held-up-leg observation 「足を上げたまま」 extracted
+    nothing (patellar luxation presentation ranked glaucoma on the bare pain
+    token), black ear debris (「耳の中が黒い」 — classic Otodectes) had no
+    alias, an uncoiled flaccid snake (「とぐろを巻かず」= righting/tone loss,
+    the IBD/stargazing hallmark) extracted nothing, the equine 前足 spelling
+    of the guarded forelimb plus the 蹄が熱くて continuative and 指動脈 owner
+    phrasings were all missing, and the untiered 3-finding hoof entries
+    (coffin joint disease, foreign body, low ringbone, coronary injury) beat
+    laminitis/abscess on trivially high coverage for the fore hot-hoof pair."""
+
+    def test_legacy_dog_has_leptospirosis_with_water_exposure_flag(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("川遊びのあと発熱して黄疸が出て水をたくさん飲む")
+        assert "stagnant_water_exposure" in ids and "fever" in ids and "jaundice" in ids, ids
+        matches = match_symptoms_to_diseases(ids)
+        assert matches[0]["disease_id"] == "leptospirosis", [m["disease_id"] for m in matches[:3]]
+
+    def test_water_exposure_with_fever_tops_lepto_without_jaundice(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("水たまりの水を飲んだあと下痢が続く 熱がある")
+        assert "stagnant_water_exposure" in ids, ids
+        matches = match_symptoms_to_diseases(ids)
+        top3 = [m["disease_id"] for m in matches[:3]]
+        assert "leptospirosis" in top3, top3
+
+    def test_lepto_does_not_hijack_plain_hepatic_or_hemolytic_complaints(self):
+        from api.diagnostic_chat import match_symptoms_to_diseases
+
+        # plain icteric GI complaint → liver disease stays first
+        ids = ["jaundice", "vomiting", "loss_of_appetite"]
+        assert match_symptoms_to_diseases(ids)[0]["disease_id"] == "liver_disease"
+        # hemolytic triad → hemolytic anemia stays first
+        ids = ["pale_gums", "jaundice", "lethargy"]
+        assert match_symptoms_to_diseases(ids)[0]["disease_id"] == "hemolytic_anemia"
+
+    def test_reverse_sneeze_mitaina_variant_extracts(self):
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        assert "reverse_sneezing" in extract_symptoms_from_text("しゃっくりみたいな呼吸を繰り返す")
+
+    def test_held_up_leg_extracts_limping_and_ranks_orthopedics(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("キャンと鳴いてから左後ろ足を上げたまま")
+        assert "limping" in ids, ids
+        top = [m["disease_id"] for m in match_symptoms_to_diseases(ids)[:3]]
+        assert "patellar_luxation" in top, top
+
+    def test_cat_black_ear_debris_ranks_ear_mites_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("耳の中が黒い垢だらけで痒がる", "cat")
+        assert "ear_discharge" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "cat")[:2]]
+        assert any("耳ダニ" in n for n in names), names
+
+    def test_snake_uncoiled_flaccid_ranks_ibd_stargazing(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("とぐろを巻かずにだらんとしている", "snake")
+        assert "loss_of_righting_reflex" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "snake")[:3]]
+        assert any(("封入体" in n) or ("スターゲイジング" in n) for n in names), names
+        # other species fall back safely through the synonym chain
+        assert _extract_species_symptoms("だらんとして元気がない", "hamster")
+
+    def test_equine_fore_hot_hoof_owner_phrasings_extract_and_rank_foot_cluster(self):
+        import api.diagnostic_chat as dc
+
+        ids = dc._extract_equine_symptoms("急に前足をかばって蹄が熱い")
+        assert "limb_lameness_fore" in ids and "hoof_heat" in ids, ids
+        names = [d.get("name_ja") or "" for d in dc._match_equine_symptoms_to_diseases(ids)[:6]]
+        # laminitis leads, and every top hit is a foot differential incl. the abscess
+        assert names[0] == "急性蹄葉炎", names
+        assert any("蹄膿瘍" in n for n in names), names
+
+    def test_equine_hoof_heat_continuative_and_digital_pulse_extract(self):
+        import api.diagnostic_chat as dc
+
+        ids = dc._extract_equine_symptoms("蹄が熱くて足を引きずる 指動脈の拍動が強い")
+        assert "hoof_heat" in ids and "limb_digital_pulse" in ids, ids
+        names = [d.get("name_ja") or "" for d in dc._match_equine_symptoms_to_diseases(ids)[:4]]
+        assert any("蹄葉炎" in n for n in names), names
+
+    def test_equine_hind_hot_hoof_abscess_stays_first(self):
+        import api.diagnostic_chat as dc
+
+        ids = dc._extract_equine_symptoms("後ろ足を痛がる 蹄が熱い")
+        names = [d.get("name_ja") or "" for d in dc._match_equine_symptoms_to_diseases(ids)[:1]]
+        assert names[0] == "蹄膿瘍", names

@@ -294,6 +294,10 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "前脚びっこ": "limb_lameness_fore",
     "前脚かばう": "limb_lameness_fore",
     "前脚をかばって": "limb_lameness_fore",
+    # 2026-09 round-29: 「前足」表記（足/脚の表記差）が欠落し
+    # 「前足をかばって蹄が熱い」の hot-hoof ペアが片翼だけになっていた
+    "前足をかば": "limb_lameness_fore",
+    "前あしをかば": "limb_lameness_fore",
     "hindlimb lameness": "limb_lameness_hind",
     "後肢跛行": "limb_lameness_hind",
     "後脚をかばって": "limb_lameness_hind",
@@ -336,6 +340,13 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "蹄膿瘍": "hoof_abscess",
     "hoof heat": "hoof_heat",
     "蹄が熱い": "hoof_heat",
+    # 2026-09 round-29: 連用形「蹄が熱くて」と指動脈系の飼い主表現が欠落
+    "蹄が熱く": "hoof_heat",
+    "蹄が熱を持": "hoof_heat",
+    "指動脈の拍動": "limb_digital_pulse",
+    "指動脈が強く": "limb_digital_pulse",
+    "指動脈拍動": "limb_digital_pulse",
+    "デジタルパルス": "limb_digital_pulse",
     "thrush": "hoof_thrush",
     "蹄叉腐爛": "hoof_thrush",
     "hoof crack": "hoof_crack",

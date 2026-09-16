@@ -47,6 +47,10 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # General
     "lethargy": ["depression", "inactivity", "weakness", "listlessness", "muscle_wasting"],
     "weakness": ["lethargy", "depression", "inactivity", "muscle_weakness", "generalized_weakness"],
+    # ヘビの「とぐろを巻けない」等の弛緩性脱力 — snakeはネイティブ保有、
+    # 他種は弛緩・立ち直り喪失系へ安全にフォールバック（2026-09 round-29）
+    "muscle_weakness": ["weakness", "loss_of_righting_reflex", "generalized_weakness", "lethargy"],
+    "loss_of_righting_reflex": ["muscle_weakness", "weakness", "ataxia", "paralysis", "lethargy"],
     "depression": ["lethargy", "inactivity", "weakness"],
     "fever": ["hyperthermia", "elevated_temperature"],
     "swollen_lymph_nodes": [

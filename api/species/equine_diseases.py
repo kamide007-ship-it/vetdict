@@ -12528,7 +12528,11 @@ _SYNDROME_PAIR_BOOSTS: list[tuple[frozenset, tuple[str, ...], float]] = [
     # entries won on trivially perfect coverage for the hindlimb variant
     # (the fore variant already benefits from the laminitis pairs above).
     (frozenset({"hoof_heat", "limb_lameness_hind"}), ("Hoof Abscess",), 1.5),
-    (frozenset({"hoof_heat", "limb_lameness_fore"}), ("Hoof Abscess",), 1.4),
+    # 2026-09 round-29: parity with the hindlimb pair. Combined with tiering
+    # the niche 3-finding hoof entries (prevalence_data), this keeps the
+    # abscess inside the tight top cluster of foot differentials for the
+    # fore-limb hot-hoof pair (laminitis leads — typically bilateral fore).
+    (frozenset({"hoof_heat", "limb_lameness_fore"}), ("Hoof Abscess",), 1.5),
 ]
 
 
