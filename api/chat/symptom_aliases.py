@@ -421,6 +421,11 @@ SYMPTOM_ALIASES = {
     # 水を飲む
     "水をたくさん飲む": "excessive_thirst",
     "水をたくさん飲んで": "excessive_thirst",
+    "がぶがぶ飲": "excessive_thirst",
+    "ガブガブ飲": "excessive_thirst",
+    # 高齢猫の夜間活動亢進（甲状腺機能亢進症の古典的飼い主主訴 — Carney 2016 AAFP）
+    "夜中に走り回": "hyperactivity",
+    "夜に走り回": "hyperactivity",
     "水ばっかり飲む": "excessive_thirst",
     "水飲みすぎ": "excessive_thirst",
     "よく水を飲む": "excessive_thirst",
@@ -811,6 +816,7 @@ SYMPTOM_ALIASES = {
     "目が白っぽい": "cloudy_eyes",
     # 呼吸
     "口を開けて呼吸": "open_mouth_breathing",
+    "口で呼吸": "open_mouth_breathing",
     "口開けてる": "open_mouth_breathing",
     "開口呼吸してる": "open_mouth_breathing",
     # 鳥
@@ -1732,14 +1738,17 @@ SYMPTOM_ALIASES = {
     "後肢が動かない": "hind_limb_paralysis",
     "後ろ足を引きずる": "hind_limb_weakness",
     "痛がって鳴く": "vocalization_changes",
+    "痛がって鳴い": "vocalization_changes",
     "鳴き叫ぶ": "vocalization_changes",
     # GDV: 非生産性嘔吐（吐きたそうで吐けない = GDVの定義的サイン）
     "吐きたそうで吐けない": "unproductive_retching",
+    "吐きたそうなのに吐けな": "unproductive_retching",
     "吐こうとして吐けない": "unproductive_retching",
     "吐きたそうにしている": "unproductive_retching",
     "空嘔吐": "unproductive_retching",
     # 犬 外耳炎: 頭を振る（耳系の既存エイリアスと違い未登録だった）
     "頭を振る": "head_shaking",
+    "頭を振っ": "head_shaking",
     "頭をよく振る": "head_shaking",
     # 爬虫類 MBD: ひらがな表記（既存はソフト（漢字）のみ）
     "甲羅がやわらかい": "soft_bones",
@@ -1980,6 +1989,11 @@ SYMPTOM_ALIASES = {
     "甲羅に傷": "shell_lesions",
     "ダニがついてる": "visible_mites",
     "ダニが見える": "visible_mites",
+    # ヘビダニ・外部寄生虫の「動く点」表現（鱗の間の赤い点々 = Ophionyssus）
+    "点々が動い": "visible_mites",
+    "赤い点々が動": "visible_mites",
+    "黒い点々が動": "visible_mites",
+    "小さな虫が動い": "visible_mites",
     "皮膚に白いもの": "white_patches_skin",
     "尻尾の皮がむけた": "tail_injury",
     "しっぽの皮がむけた": "tail_injury",
@@ -2111,6 +2125,8 @@ SYMPTOM_ALIASES = {
     "止まり木につかまれない": "inability_to_perch",
     "脚に力が入らない": "leg_weakness",
     "足に力が入らない": "leg_weakness",
+    "脚の力が抜け": "leg_weakness",
+    "足の力が抜け": "leg_weakness",
     # フェレット・インスリノーマ発作様エピソード（後弓反張・強直）
     "足を伸ばして硬直": "seizures",
     "体をそらせて硬直": "seizures",
@@ -2255,6 +2271,13 @@ SYMPTOM_ALIASES = {
     "うんちに白い虫": "worms_in_stool",
     # 体表腫瘤の「腫れもの」表現（「できもの」は収載済み）
     "腫れもの": "lumps_and_bumps",
+    # 多発性のイボ状腫瘤（若齢=パピローマ / 高齢=脂腺腫 — Muller & Kirk 7th。
+    # カタカナ「イボのような」は round-24 のハムスター腫瘤キーとして収載済み）
+    "いぼのような": "wart_like_growths",
+    "いぼがたくさん": "wart_like_growths",
+    "イボがたくさん": "wart_like_growths",
+    "いぼが増え": "wart_like_growths",
+    "イボが増え": "wart_like_growths",
     "腫れ物": "lumps_and_bumps",
     # 鳥の卵詰まり: 産卵後にケージ底でうずくまる・力む（うずくまり系は
     # hunched_posture に解決し、鳥では ID_SYNONYMS でケージ底着座へフォールバック）
@@ -2269,6 +2292,11 @@ SYMPTOM_ALIASES = {
     "尾を噛んで": "tail_chewing",
     "回転する動き": "circling",
     "同じ動きを繰り返す": "circling",
+    # 犬の尾追い（常同障害の定義的主訴 — Overall 2013; Moon-Fanelli 2011）
+    "しっぽを追いかけ": "tail_chasing",
+    "尻尾を追いかけ": "tail_chasing",
+    "自分の尾を追いかけ": "tail_chasing",
+    "尾追い": "tail_chasing",
     # --- 2026-08 第14回スイープ: 連用形・語順ゆれの取りこぼし修正 ---
     # 多飲多尿・多食（「水をたくさん飲む」辞書形のみで「飲んで」連用形が欠落）
     "おしっこの量が多い": "frequent_urination",
@@ -2516,6 +2544,14 @@ SYMPTOM_ALIASES = {
     "おしっこがオレンジ": "red_urine",
     "尿がオレンジ": "red_urine",
     "おしっこの色がオレンジ": "red_urine",
+    # ウサギ・モルモットの尿路スラッジ（白色泥状尿 = 炭酸Ca沈渣）
+    "おしっこが白っぽ": "thick_white_urine",
+    "尿が白っぽ": "thick_white_urine",
+    "おしっこがドロドロ": "thick_white_urine",
+    "ドロドロしたおしっこ": "thick_white_urine",
+    "おしっこが白くにご": "thick_white_urine",
+    "尿が白くにご": "thick_white_urine",
+    "白い尿": "thick_white_urine",
     # ハムスター頬袋の語幹形（「腫れてる/腫れている」のみで「腫れて〜」を取りこぼし）
     "頬袋が腫れ": "cheek_swelling",
     # 開口性の努力呼吸（呼吸文脈を伴うパクパクは gaping — 鳥・爬虫類の呼吸窮迫。

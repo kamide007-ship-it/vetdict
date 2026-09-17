@@ -561,6 +561,16 @@ SPECIES_PREVALENCE = {
         "Coronary Band Injury": "uncommon",  # Visible wound accompanies it
         "Contracted Heels": "uncommon",  # Conformation/trimming disorder
         "Sheared Heels": "uncommon",  # Conformation/trimming disorder
+        # 2026-09 round-31: untiered two-finding forelimb entries outranked
+        # hoof abscess for the bare acute-lameness complaint (Adams &
+        # Stashak 7th ed — abscess is the most common cause of acute
+        # severe lameness; these are racehorse/trauma niches in the general
+        # population).
+        "Bucked Shins": "uncommon",  # Juvenile racehorse fatigue injury
+        "Carpitis": "uncommon",  # Performance-horse carpal synovitis
+        "Radial Nerve Paralysis": "uncommon",  # Trauma/anesthesia-associated
+        "Acquired Flexural Deformity": "uncommon",  # Foal/growth disorder
+        "Bicipital Bursitis": "uncommon",
         "Equine Asthma (IAD/RAO)": "common",  # Stabled horses (Couetil 2016)
         "Equine Sarcoid": "common",  # Most common equine skin tumor
         "Melanoma": "common",  # ~80% lifetime risk in gray horses

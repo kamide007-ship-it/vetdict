@@ -388,6 +388,11 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # Quesenberry & Carpenter 4th ed). The flagship entry's larger sign set
     # otherwise lost on coverage to narrow untiered rhinitis clones.
     ("rabbit", frozenset({"sneezing", "nasal_discharge"}), "Pasteurellosis (Snuffles)", 1.25),
+    # A visible egg stuck at the vent is egg binding/dystocia itself — an
+    # hours-count emergency (Ritchie & Harrison; Bowles, Vet Clin North Am
+    # Exot Anim Pract 2002). Salpingitis/chronic-egg-laying entries otherwise
+    # outranked the dystocia entry on coverage for the single defining sign.
+    ("bird", frozenset({"egg_binding"}), "Egg Binding (Dystocia)", 1.45),
 ]
 
 # Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.
