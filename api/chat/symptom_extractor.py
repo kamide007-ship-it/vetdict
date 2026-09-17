@@ -431,6 +431,15 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "lethargy",
     ],
     "tail_chewing": ["self_mutilation", "tail_injury"],
+    # 犬の尾追い（レガシー犬DBは tail_chasing をネイティブ保有 — 他種は
+    # 自咬/常同のフォールバックへ）
+    "tail_chasing": ["tail_chewing", "self_mutilation", "circling"],
+    # ウサギ/モルモットの白色泥状尿（尿路スラッジ）— 他種は色調系へ
+    "thick_white_urine": ["urine_staining", "dark_urine", "cloudy_urine"],
+    # 鳥の脚力低下 — 他種は後肢虚弱/筋力低下系へ
+    "leg_weakness": ["hind_leg_weakness", "muscle_weakness", "weakness", "lameness"],
+    # ヘビダニ等の「動く点」— 種語彙により寄生虫系へフォールバック
+    "visible_mites": ["visible_parasites", "external_parasites", "mites", "fleas"],
     "sitting_on_cage_floor": ["fluffed_feathers", "lethargy"],
     "retained_spectacle": ["dysecdysis", "cloudy_eyes", "eye_opacity"],
     # 2026-08 Round 13: フェレット低血糖の口掻き・チンチラ熱中症の耳充血・
@@ -756,6 +765,8 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     ("腫れました", "腫れた"),
     ("倒れました", "倒れた"),
     ("抜けました", "抜けた"),
+    ("落ちます", "落ちる"),
+    ("落ちました", "落ちた"),
     ("鳴きます", "鳴く"),
     ("治りません", "治らない"),
     ("閉じません", "閉じない"),
@@ -763,6 +774,10 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     ("吐けません", "吐けない"),
     ("座れません", "座れない"),
     ("眠れません", "眠れない"),
+    # 可能形・受身形（ます語幹が「れ」で終わる全動詞で常に正しい:
+    # 食べられません→食べられない、走れません→走れない、かもしれません→かもしれない）
+    ("れません", "れない"),
+    ("れました", "れた"),
 ]
 # 長い置換を先に適用（「ていませんでした」が「ていません」より先）
 _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)

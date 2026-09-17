@@ -1618,6 +1618,7 @@ class TestQuickTapPhraseExtraction:
             "チョコレートを食べてしまった",
             "ぶどうを食べてしまった",
             "川や水たまりの水を飲んだ後に発熱",
+            "自分のしっぽを追いかけてかじる",
         ],
         "cat": [
             "食べない",
@@ -1660,6 +1661,7 @@ class TestQuickTapPhraseExtraction:
             "あごが濡れている",
             "あごの下が腫れている",
             "便が毛でつながっている",
+            "おしっこが白っぽくてドロドロしている",
         ],
         "chinchilla": [
             "よだれが出る",
@@ -1709,6 +1711,7 @@ class TestQuickTapPhraseExtraction:
             "脚に白いかさぶた",
             "急に飛べなくなって翼が下がっている",
             "発情が続いて産卵が止まらない",
+            "お尻から卵が出かかっている",
         ],
         "parakeet": [
             "食べない",
@@ -5236,9 +5239,10 @@ class TestChatClinicalAccuracyAuditRound29:
         ids = dc._extract_equine_symptoms("急に前足をかばって蹄が熱い")
         assert "limb_lameness_fore" in ids and "hoof_heat" in ids, ids
         names = [d.get("name_ja") or "" for d in dc._match_equine_symptoms_to_diseases(ids)[:6]]
-        # laminitis leads, and every top hit is a foot differential incl. the abscess
-        assert names[0] == "急性蹄葉炎", names
-        assert any("蹄膿瘍" in n for n in names), names
+        # abscess or laminitis until proven otherwise (Adams & Stashak 7th ed):
+        # both must lead the list (round-31 lameness floor promotes the abscess
+        # — the most common cause of acute severe lameness — into the tie).
+        assert {"急性蹄葉炎", "蹄膿瘍"} <= set(names[:2]), names
 
     def test_equine_hoof_heat_continuative_and_digital_pulse_extract(self):
         import api.diagnostic_chat as dc
@@ -5456,3 +5460,189 @@ class TestChatClinicalAccuracyAuditRound30:
         from api.diagnostic_chat import extract_age_from_text
 
         assert extract_age_from_text("高齢です") == 10.0
+
+
+class TestChatClinicalAccuracyAuditRound31:
+    """2026-09 audit round 31 — polite potential forms, new legacy behavioral/
+    dermatologic entries, and equine lameness-floor alignment.
+
+    A fresh 52-case sweep found: (a) polite potential forms (〜られません/
+    〜れません) were not normalized (食べられません extracted nothing);
+    (b) the legacy dog DB had no compulsive-disorder or papilloma entry so
+    tail-chasing and multiple-wart complaints extracted nothing; (c) rabbit
+    urinary sludge (white gritty urine — thick_white_urine was in the
+    vocabulary but had no owner aliases); (d) the visible egg at the vent
+    ranked salpingitis above the dystocia entry; (e) equine asthma owner
+    phrasings (ゼーゼー / 運動すると咳) and non-weight-bearing lameness were
+    unextractable, and untiered two-finding entries (bucked shins/carpitis)
+    outranked the hoof abscess for the bare acute-lameness complaint
+    (Adams & Stashak 7th ed)."""
+
+    # ---- 丁寧語: 可能形の正規化 ----
+
+    def test_polite_potential_forms_normalize(self):
+        from api.chat.symptom_extractor import normalize_chat_text as n
+
+        assert n("ご飯を食べられません") == "ご飯を食べられない"
+        assert n("うまく走れません") == "うまく走れない"
+        assert n("食べられました") == "食べられた"
+        # かもしれません も正しく変換される（誤活用を生成しない）
+        assert n("病気かもしれません") == "病気かもしれない"
+
+    def test_cat_oral_pain_polite_ranks_dental_group(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("口を痛がってご飯を食べられません", "cat")
+        assert "difficulty_eating" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "cat")[:5]]
+        assert any(("歯" in n) or ("口内炎" in n) for n in names), names
+
+    # ---- GDV: なのに形の非生産性嘔吐（否定ガードと衝突しないキー末尾） ----
+
+    def test_gdv_nanoni_unproductive_retching(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("急にお腹が張って吐きたそうなのに吐けません")
+        assert "unproductive_retching" in ids and "bloating" in ids, ids
+        assert match_symptoms_to_diseases(ids)[0]["disease_id"] == "gdv_bloat"
+
+    # ---- 外耳炎: 頭を振っています ----
+
+    def test_dog_head_shaking_progressive_ranks_otitis(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("耳をしきりに掻いて頭を振っています")
+        assert "head_shaking" in ids, ids
+        top3 = [m["disease_id"] for m in match_symptoms_to_diseases(ids)[:3]]
+        assert "otitis_externa" in top3, top3
+
+    # ---- クッシング: がぶがぶ飲む ----
+
+    def test_dog_gabugabu_thirst_extracts_and_ranks_endocrine(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("水をがぶがぶ飲んでお腹が膨れてきました")
+        assert "excessive_thirst" in ids and "bloating" in ids, ids
+        top5 = [m["disease_id"] for m in match_symptoms_to_diseases(ids)[:5]]
+        assert "cushings_disease" in top5, top5
+
+    # ---- 猫 甲状腺機能亢進症: 夜間活動亢進 ----
+
+    def test_cat_night_zoomies_vocalization_ranks_hyperthyroidism(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("夜中に走り回って大声で鳴きます", "cat")
+        assert "hyperactivity" in ids and "vocalization_changes" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "cat")[:3]]
+        assert any("甲状腺機能亢進" in n for n in names), names
+
+    # ---- 新レガシー疾患: 常同障害・乳頭腫症 ----
+
+    def test_dog_tail_chasing_ranks_compulsive_disorder(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("自分のしっぽを追いかけてかじっています")
+        assert "tail_chasing" in ids, ids
+        assert match_symptoms_to_diseases(ids)[0]["disease_id"] == "compulsive_disorder"
+
+    def test_dog_multiple_warts_rank_papillomatosis(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("いぼのようなものが体にたくさんできました")
+        assert "wart_like_growths" in ids, ids
+        assert match_symptoms_to_diseases(ids)[0]["disease_id"] == "papillomatosis"
+
+    def test_tail_chasing_falls_back_for_other_species(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # フクロモモンガ等は tail_chewing/self_mutilation チェーンで安全に解決
+        ids = _extract_species_symptoms("自分のしっぽを追いかけてかじる", "sugar_glider")
+        assert ids, ids
+
+    # ---- ウサギ尿路スラッジ ----
+
+    def test_rabbit_sludge_urine_ranks_hypercalciuria_group(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("おしっこが白っぽくてドロドロしています", "rabbit")
+        assert "thick_white_urine" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "rabbit")[:3]]
+        assert any(("スラッジ" in n) or ("カルシウム" in n) for n in names), names
+
+    # ---- 鳥: 卵詰まりフロア・脚力低下・落ちます正規化 ----
+
+    def test_bird_visible_egg_ranks_dystocia_first(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("お尻から卵が出かかっています", "bird")
+        assert "egg_binding" in ids, ids
+        top = _match_species_symptoms_to_diseases(ids, "bird")[0]
+        assert "卵詰まり" in (top.get("name_ja") or ""), top.get("name_ja")
+
+    def test_bird_leg_weakness_falling_polite_extracts(self):
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("脚の力が抜けて止まり木から落ちます", "bird")
+        assert "falling_off_perch" in ids and "leg_weakness" in ids, ids
+
+    # ---- ヘビダニ・リクガメ肺炎 ----
+
+    def test_snake_moving_red_dots_rank_mites(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("鱗の間に赤い点々が動いています", "snake")
+        assert "visible_mites" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "snake")[:3]]
+        assert any("ダニ" in n for n in names), names
+
+    def test_tortoise_mouth_breathing_ranks_pneumonia(self):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms("鼻から泡が出て口で呼吸しています", "tortoise")
+        assert "open_mouth_breathing" in ids, ids
+        names = [d.get("name_ja") or "" for d in _match_species_symptoms_to_diseases(ids, "tortoise")[:3]]
+        assert any("肺炎" in n for n in names), names
+
+    # ---- 馬: 喘息の飼い主表現・非負重跛行と膿瘍フロア ----
+
+    def test_equine_asthma_owner_phrasings_extract_and_rank(self):
+        import api.diagnostic_chat as dc
+
+        ids = dc._extract_equine_symptoms("運動すると咳をしてゼーゼーいいます")
+        assert "resp_cough_at_exercise" in ids and "resp_abnormal_lung_sounds" in ids, ids
+        names = [d.get("name_ja") or "" for d in dc._match_equine_symptoms_to_diseases(ids)[:3]]
+        assert any("喘息" in n for n in names), names
+
+    def test_equine_non_weight_bearing_ranks_hoof_abscess_first(self):
+        import api.diagnostic_chat as dc
+
+        ids = dc._extract_equine_symptoms("急に片足を全く着けなくなりました")
+        assert "limb_lameness_fore" in ids, ids
+        top = dc._match_equine_symptoms_to_diseases(ids)[0]
+        assert top.get("name_ja") == "蹄膿瘍", top.get("name_ja")
+
+    def test_equine_lameness_floor_does_not_hijack_respiratory_picture(self):
+        import api.diagnostic_chat as dc
+
+        # 発熱＋咳＋鼻汁＋跛行は呼吸器像 — 膿瘍フロア（減額値）は1位を奪わない
+        r = dc._match_equine_symptoms_to_diseases(
+            ["gen_fever", "resp_cough", "resp_nasal_discharge", "limb_lameness_fore"]
+        )
+        assert (r[0].get("name_ja") or "") != "蹄膿瘍", [m.get("name_ja") for m in r[:3]]
+
+    def test_dog_checkbox_parity_tail_chasing(self):
+        # チェックボックス/問診経路のパリティ: tail_chasing が dog モジュール
+        # 語彙に存在し、常同障害エントリへ届く（scooting/oral_mass と同型）
+        from api.species.dog_diseases import SYMPTOM_CATEGORIES, VALID_SYMPTOMS, analyze_symptoms
+
+        assert "tail_chasing" in VALID_SYMPTOMS
+        assert "tail_chasing" in SYMPTOM_CATEGORIES["behavioral"]["symptoms"]
+        r = analyze_symptoms(["tail_chasing"])
+        ds = r.get("suspected_diseases") or []
+        assert ds and "Compulsive" in ds[0]["name"], [d["name"] for d in ds[:3]]

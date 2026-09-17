@@ -76,6 +76,7 @@ VALID_SYMPTOMS: set[str] = {
     "excessive_panting",
     "hiding",
     "circling",
+    "tail_chasing",
     "scratching",
     "seizures",
     # Urinary / Reproductive
@@ -149,6 +150,7 @@ SYMPTOM_NAMES: dict[str, dict[str, str]] = {
     "excessive_panting": {"ja": "過度のパンティング", "en": "Excessive Panting"},
     "hiding": {"ja": "隠れる", "en": "Hiding"},
     "circling": {"ja": "旋回行動", "en": "Circling"},
+    "tail_chasing": {"ja": "しっぽを追いかける・かじる（常同行動）", "en": "Tail Chasing / Chewing"},
     "scratching": {"ja": "掻く動作", "en": "Scratching"},
     "seizures": {"ja": "痙攣", "en": "Seizures"},
     "straining_urinate": {"ja": "排尿困難", "en": "Straining to Urinate"},
@@ -5502,7 +5504,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Compulsive Disorder (Canine OCD)",
         "name_ja": "強迫性障害",
-        "symptoms": {"circling", "anxiety", "itching"},
+        "symptoms": {"circling", "anxiety", "itching", "tail_chasing"},
         "description": "Repetitive behaviors like tail chasing, flank sucking, or shadow chasing beyond normal patterns.",
         "description_ja": "尾追い・脇腹吸い・影追いなど正常範囲を超えた反復行動です。",
         "urgency": "normal",
@@ -9946,7 +9948,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Compulsive Disorder",
         "name_ja": "強迫性障害",
-        "symptoms": {"anxiety", "circling", "itching", "aggression_change"},
+        "symptoms": {"anxiety", "circling", "itching", "aggression_change", "tail_chasing"},
         "description": "Repetitive out-of-context behaviors such as tail chasing.",
         "description_ja": "尾追いなどの持続的な反復行動です。",
         "urgency": "normal",
@@ -13466,6 +13468,7 @@ SYMPTOM_CATEGORIES = {
             "excessive_panting",
             "hiding",
             "circling",
+            "tail_chasing",
             "scratching",
             "seizures",
         ],

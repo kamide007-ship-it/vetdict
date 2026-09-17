@@ -753,6 +753,18 @@ SYMPTOMS = [
         "category": "general",
     },
     {
+        "id": "tail_chasing",
+        "name_ja": "しっぽを追いかける・かじる（常同行動）",
+        "name_en": "Tail Chasing / Chewing (Repetitive Behavior)",
+        "category": "behavioral",
+    },
+    {
+        "id": "wart_like_growths",
+        "name_ja": "いぼ状のできもの（複数）",
+        "name_en": "Wart-like Growths (Multiple)",
+        "category": "dermatological",
+    },
+    {
         "id": "epistaxis",
         "name_ja": "鼻血（鼻出血）",
         "name_en": "Nosebleed (Epistaxis)",
@@ -2342,6 +2354,52 @@ DISEASES = [
         ],
         "severity": "low",
         "recommended_tests": ["neurological_exam", "blood_chemistry"],
+        "breed_risks": {},
+    },
+    # ---- Compulsive Disorder (Canine) ----
+    # Tail chasing / spinning / acral licking are frequent behavioral chief
+    # complaints, but the legacy chat database had no compulsive-disorder
+    # entry (only CDS), so "しっぽを追いかけてかじる" extracted nothing and
+    # ranked nothing behavioral. Symptom set is gated to the repetitive-
+    # behavior signals themselves (like the pyometra/toxicosis gate designs)
+    # so generic pruritus complaints are not hijacked (Overall, Manual of
+    # Clinical Behavioral Medicine 2013; Moon-Fanelli 2011 JAVMA).
+    {
+        "id": "compulsive_disorder",
+        "prevalence_tier": "common",
+        "name_ja": "常同障害・強迫性障害（尾追い・肢端舐性）",
+        "name_en": "Compulsive Disorder (Tail Chasing / Acral Licking)",
+        "description_ja": "尾追い・回転・肢端の過剰な舐め・脇腹吸引など、目的なく反復される常同行動。ブルテリア（回転）、ジャーマンシェパード（尾追い）、ドーベルマン（脇腹吸引）に好発します。疼痛・皮膚炎・てんかん（精神運動発作）の除外が先で、治療は環境エンリッチメント＋行動修正＋SSRI/クロミプラミンです（Overall 2013; Moon-Fanelli 2011 JAVMA）。",
+        "description_en": "Purposeless repetitive behaviors — tail chasing, spinning, acral licking, flank sucking. Breed predispositions: Bull Terrier (spinning), German Shepherd (tail chasing), Doberman (flank sucking). Rule out pain, dermatitis and psychomotor seizures first; treatment combines environmental enrichment, behavior modification and SSRIs/clomipramine (Overall 2013; Moon-Fanelli 2011 JAVMA).",
+        "symptoms": [
+            "tail_chasing",
+            "excessive_licking",
+        ],
+        "severity": "low",
+        "recommended_tests": ["neurological_exam", "skin_scraping"],
+        "breed_risks": {
+            "ブルテリア": 3.0,
+            "ジャーマンシェパード": 2.5,
+            "ドーベルマン": 2.5,
+        },
+    },
+    # ---- Canine Papillomatosis / multiple wart complaints ----
+    # "Many wart-like growths" is a very common owner complaint (young dogs:
+    # canine papillomavirus; older dogs: sebaceous adenomas), but the legacy
+    # database had no wart vocabulary or entry, so the complaint extracted
+    # nothing (Muller & Kirk's Small Animal Dermatology 7th ed).
+    {
+        "id": "papillomatosis",
+        "prevalence_tier": "common",
+        "name_ja": "犬乳頭腫症（イボ・脂腺腫）",
+        "name_en": "Canine Papillomatosis (Warts / Sebaceous Adenomas)",
+        "description_ja": "若齢犬ではパピローマウイルスによる乳頭腫（口唇・口腔周囲に好発、多くは数ヶ月で自然消退）、高齢犬では脂腺腫（良性、体幹・眼瞼に多発）が「イボが多発する」主訴の二大原因です。急速増大・出血・潰瘍化する腫瘤は細胞診で悪性腫瘍を除外します（Muller & Kirk 7th ed）。",
+        "description_en": "In young dogs, viral papillomas (lips/oral mucosa; most regress spontaneously within months). In older dogs, benign sebaceous adenomas (trunk, eyelids) are the classic cause of multiple wart-like growths. Any rapidly growing, bleeding or ulcerated mass warrants cytology to exclude malignancy (Muller & Kirk 7th ed).",
+        "symptoms": [
+            "wart_like_growths",
+        ],
+        "severity": "low",
+        "recommended_tests": ["cytology", "skin_scraping"],
         "breed_risks": {},
     },
     # ---- 28b. Acute Gastroenteritis ----
@@ -4588,6 +4646,13 @@ _PATHOGNOMONIC_CLUSTERS = [
     # Visible worms/proglottids in the stool are diagnostic of intestinal
     # parasitism itself (ESCCAP GL1) — no other differential produces them.
     (frozenset({"worms_in_stool"}), "intestinal_parasites", 1.8),
+    # Tail chasing / repetitive tail chewing is the defining compulsive-
+    # disorder presentation (Overall 2013; Moon-Fanelli 2011 JAVMA) — no
+    # other differential is described as purposeless tail pursuit.
+    (frozenset({"tail_chasing"}), "compulsive_disorder", 1.6),
+    # Multiple wart-like growths are lesion-diagnostic for the papilloma /
+    # sebaceous adenoma group (Muller & Kirk 7th ed).
+    (frozenset({"wart_like_growths"}), "papillomatosis", 1.6),
     # A visible mass inside the mouth is location-diagnostic: the differential
     # is the oral-tumor group (melanoma/epulis/SCC — Withrow & MacEwen 6th ed),
     # never mammary/skin masses. Without this boost the very_common mammary

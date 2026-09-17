@@ -12492,8 +12492,23 @@ _SYNDROME_FINDING_FLOORS: dict[str, tuple[str, ...]] = {
     # cause (Zimmerman; Jeffcott) — the umbrella Back Pain entry floors via
     # its many findings, but the flagship specific diagnosis needs one too.
     "body_back_pain": ("Back Pain", "Kissing Spines"),
+    # A hoof abscess is the single most common cause of acute (often
+    # non-weight-bearing) lameness in practice (Baxter, Adams & Stashak's
+    # Lameness 7th ed) — without a floor, untiered two-finding entries
+    # (bucked shins, carpitis, radial nerve paralysis) won on trivially
+    # perfect coverage for the bare lameness complaint.
+    "limb_lameness_fore": ("Hoof Abscess",),
+    "limb_lameness_hind": ("Hoof Abscess",),
 }
 _SYNDROME_FLOOR_SCORE = 0.62
+# Findings that are the *most common cause* rather than pathognomonic get a
+# reduced floor: bare lameness must surface the abscess in the top group
+# without letting it outrank multi-system presentations (fever + cough +
+# lameness is a respiratory picture, not a foot picture).
+_SYNDROME_FLOOR_SCORE_OVERRIDES: dict[str, float] = {
+    "limb_lameness_fore": 0.42,
+    "limb_lameness_hind": 0.42,
+}
 
 # Sign PAIRS that define a syndrome even when the namesake checkbox wasn't
 # ticked: forelimb lameness + hoof heat is laminitis until proven otherwise
@@ -12652,7 +12667,8 @@ def generate_differential_diagnosis(
         # --- 症候群フロア: 症候群を定義する所見そのものがチェックされている ---
         for finding, syndrome_names in _SYNDROME_FINDING_FLOORS.items():
             if finding in matched and disease.name_en in syndrome_names:
-                raw_score = max(raw_score, _SYNDROME_FLOOR_SCORE * prevalence_mult)
+                floor = _SYNDROME_FLOOR_SCORE_OVERRIDES.get(finding, _SYNDROME_FLOOR_SCORE)
+                raw_score = max(raw_score, floor * prevalence_mult)
                 break
 
         # --- 症候群ペアブースト: 定義的な所見ペアが揃っている ---
