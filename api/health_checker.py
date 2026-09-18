@@ -2090,6 +2090,68 @@ DISEASES = [
             "shih_tzu": 1.4,
         },
     },
+    # ---- 12b1b. Otitis Media/Interna ----
+    # 2026-09 round 32: the legacy DB had no middle/inner-ear entry, so the
+    # classic "ear signs + head tilt" complaint routed exclusively to rare
+    # intracranial diseases (syringomyelia/pug encephalitis/cerebellar
+    # ataxia). Otitis media/interna — usually an extension of chronic otitis
+    # externa through the tympanum — is the everyday cause of that
+    # combination (Gotthelf, Small Animal Ear Diseases 2nd ed; Ettinger 8th
+    # ed). Peripheral vestibular signs (head tilt toward the lesion,
+    # horizontal nystagmus) with concurrent ear discharge/odor are the
+    # textbook presentation.
+    {
+        "id": "otitis_media_interna",
+        "prevalence_tier": "common",
+        "name_ja": "中耳炎・内耳炎",
+        # EN名は dog モジュールの "Inner Ear Infection (Otitis Interna)" と完全一致 —
+        # チャット候補カード「疾患DBで詳細を開く」ピボットが検索フィルタ＋
+        # base-name 完全一致で正しい行に着地する（第28弾の設計原則）
+        "name_en": "Inner Ear Infection (Otitis Interna)",
+        "description_ja": "中耳・内耳の感染・炎症。多くは慢性外耳炎が鼓膜を越えて波及したもの。頭部傾斜（病変側へ）・眼振・平衡障害などの末梢前庭症状に、耳を振る・耳垢・悪臭などの外耳症状を伴うのが典型です。治療は全身抗菌薬（培養感受性に基づく4-6週）＋基礎の外耳炎・アレルギー管理。重度・再発例は鼓室胞切開の適応（Gotthelf; Ettinger 8th ed）。",
+        "description_en": "Infection/inflammation of the middle and inner ear, usually an extension of chronic otitis externa through the tympanic membrane. Peripheral vestibular signs (head tilt toward the lesion, nystagmus, imbalance) combined with external-ear signs (head shaking, discharge, odor) are the classic presentation. Treatment is 4-6 weeks of culture-based systemic antimicrobials plus management of the underlying otitis externa/allergy; bulla osteotomy for severe or refractory cases (Gotthelf; Ettinger 8th ed).",
+        "symptoms": [
+            "head_tilting",
+            "head_shaking",
+            "ear_scratching",
+            "ear_discharge",
+            "ear_odor",
+            "disorientation",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["otoscopy", "ear_cytology", "skull_radiography_ct"],
+        "breed_risks": {
+            "cocker_spaniel": 2.5,
+            "french_bulldog": 1.5,
+            "shih_tzu": 1.4,
+        },
+    },
+    # ---- 12b1c. Idiopathic (Geriatric) Vestibular Disease ----
+    # 2026-09 round 32: idiopathic "old dog" vestibular disease is the most
+    # common peripheral vestibular disorder of dogs (Rossmeisl, Vet Clin
+    # North Am 2010; Ettinger 8th ed) — the acute head tilt/rolling senior
+    # dog that recovers in days — yet the legacy DB routed every head-tilt
+    # complaint to rare intracranial disease. Owners typically fear a
+    # "stroke"; the benign course and supportive-care message is exactly
+    # what the ddx should surface first for a senior acute presentation.
+    {
+        "id": "vestibular_disease",
+        "prevalence_tier": "common",
+        # 名称は dog モジュールのエントリと完全一致（疾患DBピボットの着地保証）
+        "name_ja": "特発性前庭疾患（老犬前庭症候群）",
+        "name_en": "Idiopathic Vestibular Disease (Old Dog Vestibular)",
+        "description_ja": "高齢犬に突然発症する末梢前庭障害。犬の末梢前庭疾患で最も多く、急な頭部傾斜・眼振・旋回・転倒・めまいによる嘔吐が典型（「脳卒中では」と心配されがちな症候群）。原因不明で、意識・四肢の固有位置感覚は正常。多くは72時間以内に改善が始まり数日〜数週で自然回復します。治療は支持療法（制吐薬・転倒防止・介助給餌）のみ。改善しない場合や他の神経症状を伴う場合は中枢性疾患・中耳炎の精査を（Rossmeisl 2010; Ettinger 8th ed）。",
+        "description_en": "Acute-onset peripheral vestibular dysfunction of older dogs — the most common peripheral vestibular disorder in dogs. Sudden head tilt, nystagmus, circling/falling and vertigo-induced vomiting are classic; owners often fear a stroke. Mentation and proprioception are normal, improvement typically begins within 72 hours, and most dogs recover over days to weeks with supportive care only (antiemetics, fall protection, assisted feeding). Failure to improve or additional neurologic deficits warrants workup for central disease or otitis media/interna (Rossmeisl 2010; Ettinger 8th ed).",
+        "symptoms": [
+            "head_tilting",
+            "circling",
+            "disorientation",
+            "vomiting",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["neurological_exam", "otoscopy"],
+        "breed_risks": {},
+    },
     # ---- 12b2. Aural Hematoma ----
     # A very frequent sequela of otitis externa / head shaking, yet the legacy
     # database had no pinna-swelling vocabulary — the classic "耳が腫れて

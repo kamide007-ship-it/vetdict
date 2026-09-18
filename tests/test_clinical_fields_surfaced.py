@@ -710,3 +710,24 @@ def test_app_js_emergency_map_covers_airway_hemorrhage_pte_protocols():
     assert "喉頭麻痺" in seg and "気管虚脱" in seg
     assert '"hemorrhagic_shock"' in seg and "血管肉腫" in seg
     assert '"ards_pulmonary_thromboembolism"' in seg and "肺血栓塞栓" in seg
+
+
+def test_app_js_interaction_checker_results_linkify_drug_names():
+    """2026-09 round 32: the interaction-checker RESULTS panel showed raw
+    snake_case drug ids ("meloxicam + prednisolone") as dead text — doubly bad
+    for JA users. The renderer must resolve ids to display names via the
+    API's `resolved` map and wrap both the recognized line and each
+    drug_a/drug_b in a .drug-nav-link that routes to navigateToDrug (one tap
+    from a CONTRAINDICATED banner to the monograph). #interactionResults sits
+    outside #drugList's delegation, so it needs its own one-time delegated
+    handler (dataset guard, same pattern as the DB list containers)."""
+    # id→name resolution map built from data.resolved
+    assert "resolvedById" in APP_JS
+    assert "const drugRefLink=" in APP_JS
+    # both interaction partners rendered through the link builder
+    assert "drugRefLink(i.drug_a)" in APP_JS and "drugRefLink(i.drug_b)" in APP_JS
+    # one-time delegated routing on the results container
+    seg_start = APP_JS.find("function renderInteractionResults")
+    seg = APP_JS[seg_start : seg_start + 1200]
+    assert "results.dataset.handlersAttached" in seg
+    assert "navigateToDrug(drugLink.dataset.drug)" in seg

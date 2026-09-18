@@ -87,6 +87,7 @@ from api.drug_batch_60 import DRUGS_BATCH_60
 from api.drug_batch_61 import DRUGS_BATCH_61
 from api.drug_batch_62 import DRUGS_BATCH_62
 from api.drug_batch_63 import DRUGS_BATCH_63
+from api.drug_batch_64 import DRUGS_BATCH_64
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10906,6 +10907,16 @@ for _drug63 in DRUGS_BATCH_63:
         DRUGS.append(_drug63)
         _drug_index[_drug63["id"]] = _drug63
 
+# Batch 64: 2026-09 監査（第30回スイープ）の referenced-but-absent 補完
+# （エドロフォニウム — 自サイトのMGエントリ5件が「テンシロン試験 0.1-0.2 mg/kg IV」
+#  「0.25-0.5 mg/cat IV」と用量付きで名指しする診断薬（自己参照的ギャップ）。
+#  リボフラビン — 鳥/インコに専用の欠乏症疾患エントリがあり「0.5-1 mg/kg PO q24h」
+#  「3-10 mg/kg 飼料」の用量参照があるのにB2本体が未収載だった（B1/B7/B12は収載済み））
+for _drug64 in DRUGS_BATCH_64:
+    if _drug64["id"] not in _drug_index:
+        DRUGS.append(_drug64)
+        _drug_index[_drug64["id"]] = _drug64
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11509,6 +11520,9 @@ _KEYWORD_NEGATIVE_CONTEXTS: dict[str, tuple[str, ...]] = {
 # alternate spellings belong here — typos in content are fixed in the content.
 _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "dexamethasone": ("デキサメサゾン",),  # canonical: デキサメタゾン
+    # 2026-09 sweep #30: エキゾチック5種の赤血球増加症プロトコルが
+    # 「ヒドロキシ尿素 30 mg/kg PO q24h」の漢字複合表記で参照（正準名 ヒドロキシウレア）
+    "hydroxyurea": ("ヒドロキシ尿素",),
     "nystatin": ("ニスタチン",),  # canonical: ナイスタチン
     "silver_sulfadiazine": ("シルバースルファジアジン",),  # canonical: スルファジアジン銀
     "sulfasalazine": ("スルファサラジン",),  # canonical: サラゾスルファピリジン

@@ -681,6 +681,10 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # ハエウジ症（フライストライク）: rabbit は maggots_visible をネイティブ保有。
     # 他種は湿潤性皮膚病変系へ安全にフォールバック（2026-09 round-30）
     "maggots_visible": ["skin_lesions", "wounds", "skin_ulcers", "moist_dermatitis"],
+    # --- 2026-09 Round 32 sweep ---
+    # 嘴・粘膜蒼白（鳥の「くちばしの色が薄い」）: parakeet/bird は
+    # pale_mucous_membranes をネイティブ保有。他種は貧血系へフォールバック。
+    "pale_mucous_membranes": ["pale_gums", "pale_comb", "anemia", "weakness"],
 }
 
 # Backwards-compat alias (some older imports use the private name).

@@ -290,6 +290,10 @@ _SYN: dict[str, list[str]] = {
     "low_temperature": ["hypothermia", "cold_extremities", "subnormal_temperature"],
     "weak_pulse": ["thready_pulse", "absent_pulse", "weak_femoral_pulse"],
     "pale_gums": ["pallor", "mucous_membrane_pallor", "white_gums", "anemic"],
+    # 嘴・粘膜蒼白（鳥）: parakeet では pale_mucous_membranes がネイティブだが
+    # 保有疾患が少なく、貧血系エントリ（anemia/pale_comb 表記）に届かなかった
+    # （2026-09 round-32）
+    "pale_mucous_membranes": ["anemia", "pale_comb", "pale_gums", "pallor"],
     # Reproductive
     "mammary_swelling": ["mammary_enlargement", "lactation", "mammary_mass"],
     "genital_discharge": ["vulvar_discharge", "preputial_discharge", "vaginal_discharge"],
@@ -393,6 +397,11 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # Exot Anim Pract 2002). Salpingitis/chronic-egg-laying entries otherwise
     # outranked the dystocia entry on coverage for the single defining sign.
     ("bird", frozenset({"egg_binding"}), "Egg Binding (Dystocia)", 1.45),
+    # Unilateral persistent cheek swelling in a hamster is cheek-pouch disease
+    # (impaction/abscess) until proven otherwise (Quesenberry & Carpenter
+    # 4th ed) — a co-extracted generic distension ID otherwise diluted
+    # coverage and let GI entries outrank the pouch entries (2026-09 round-32).
+    ("hamster", frozenset({"cheek_swelling"}), "Cheek Pouch Impaction", 1.35),
 ]
 
 # Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.

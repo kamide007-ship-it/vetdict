@@ -1616,6 +1616,7 @@ class TestQuickTapPhraseExtraction:
             "陰部から膿が出て水をよく飲む",
             "目やにがひどくて目が開かない",
             "チョコレートを食べてしまった",
+            "急に首を傾けてぐるぐる回る",
             "ぶどうを食べてしまった",
             "川や水たまりの水を飲んだ後に発熱",
             "自分のしっぽを追いかけてかじる",
@@ -5646,3 +5647,155 @@ class TestChatClinicalAccuracyAuditRound31:
         r = analyze_symptoms(["tail_chasing"])
         ds = r.get("suspected_diseases") or []
         assert ds and "Compulsive" in ds[0]["name"], [d["name"] for d in ds[:3]]
+
+
+class TestChatClinicalAccuracyAuditRound32:
+    """2026-09 audit round 32 — fresh 35-case sweep.
+
+    Fixed classes: (a) the reptile/lizard/tortoise Infectious Stomatitis
+    entries did not carry the `stomatitis` symptom ID (only snake's did), so
+    the caseous-exudate aliases extracted an ID no mouth-rot entry matched;
+    (b) owner phrasings with zero extraction — ear flapping (耳をパタパタ),
+    crystalluria as urinary sand, black ear debris as カス, sole-fur loss
+    (sore hocks), continuous tearing, cheek-pouch swelling as ほっぺた,
+    squeaky respiratory sounds, pale beak; (c) a co-extracted generic
+    distension ID diluted the hamster cheek-pouch complaint below GI entries
+    (pathognomonic floor per Quesenberry & Carpenter 4th ed); (d) parakeet
+    Tick Infestation was untiered and topped the pale-beak anemia ddx
+    (caged-budgie ticks are an outdoor-aviary disease — Ritchie & Harrison)."""
+
+    def _species(self, text, sp):
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(text, sp)
+        return ids, _match_species_symptoms_to_diseases(ids, sp)
+
+    # ---- 爬虫類マウスロット: stomatitis ID が疾患セットに存在する ----
+
+    def test_reptile_family_mouth_rot_carries_stomatitis_id(self):
+        import importlib
+
+        for sp in ("reptile", "lizard", "snake", "tortoise"):
+            mod = importlib.import_module(f"api.species.{sp}_diseases")
+            found = False
+            for d in mod.DISEASES:
+                get = (lambda k, _d=d: _d.get(k)) if isinstance(d, dict) else (lambda k, _d=d: getattr(_d, k, None))
+                if get("name") == "Infectious Stomatitis (Mouth Rot)" and "stomatitis" in (get("symptoms") or set()):
+                    found = True
+                    break
+            assert found, f"{sp}: mouth rot entry lacks the stomatitis symptom ID"
+
+    def test_reptile_cheese_exudate_ranks_mouth_rot_first(self):
+        ids, res = self._species("口の中に白いチーズのようなものが付いています", "reptile")
+        assert "stomatitis" in ids, ids
+        names = [r.get("name_ja") or r.get("name") or "" for r in res[:3]]
+        assert any("口内炎" in n for n in names), names
+
+    # ---- 犬: 耳パタパタ・尿砂・苦しそう・食べづら ----
+
+    def test_dog_ear_flapping_head_tilt_ranks_otitis_media(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("耳をパタパタさせて首をかしげています")
+        assert "head_shaking" in ids and "head_tilting" in ids, ids
+        top3 = [m["disease_id"] for m in match_symptoms_to_diseases(ids)[:3]]
+        # 新設の中耳炎・内耳炎（耳症状＋頭位傾斜の日常的原因）が上位に来る
+        assert "otitis_media_interna" in top3, top3
+
+    def test_dog_senior_acute_head_tilt_ranks_vestibular_disease(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        # 老犬性前庭症候群 — 犬の末梢前庭疾患で最多（Rossmeisl 2010）なのに
+        # 従来は稀な頭蓋内疾患（脊髄空洞症/パグ脳炎/小脳失調）のみが上位だった
+        ids = extract_symptoms_from_text("高齢犬が急に首を傾けてぐるぐる回って吐きます")
+        assert "head_tilting" in ids and "circling" in ids, ids
+        top2 = [m["disease_id"] for m in match_symptoms_to_diseases(ids)[:2]]
+        assert "vestibular_disease" in top2, top2
+
+    def test_dog_head_tilt_guards_epilepsy_and_cds_unchanged(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        # 新設2エントリが既存の看板ランキングを乗っ取らないこと
+        ids = extract_symptoms_from_text("痙攣した 意識がなくなった")
+        assert match_symptoms_to_diseases(ids)[0]["disease_id"] == "epilepsy"
+        ids = extract_symptoms_from_text("夜鳴きしてぐるぐる回る 老犬")
+        assert match_symptoms_to_diseases(ids)[0]["disease_id"] == "cognitive_dysfunction"
+
+    def test_dog_urinary_sand_ranks_stones(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("おしっこにキラキラした砂のようなものが混ざっています")
+        assert "blood_in_urine" in ids, ids
+        top5 = [m["disease_id"] for m in match_symptoms_to_diseases(ids)[:5]]
+        assert "urinary_stones" in top5, top5
+
+    def test_dog_gdv_with_distress_phrase(self):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text("急にお腹がパンパンに膨らんで苦しそうにしています")
+        assert "labored_breathing" in ids and "bloating" in ids, ids
+        top3 = [m["disease_id"] for m in match_symptoms_to_diseases(ids)[:3]]
+        assert "gdv_bloat" in top3, top3
+
+    def test_cat_difficulty_eating_variant_ranks_dental(self):
+        ids, res = self._species("ご飯のとき口を傾けて食べづらそうにしています", "cat")
+        assert "difficulty_eating" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:5]]
+        assert any(("歯" in n) or ("口内炎" in n) for n in names), names
+
+    def test_cat_black_ear_debris_ranks_ear_mites(self):
+        ids, res = self._species("耳の中に黒いカスがたまって痒がっています", "cat")
+        assert "ear_discharge" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("耳ダニ" in n) or ("外耳" in n) for n in names), names
+
+    # ---- ウサギ: ソアホック・流涙 ----
+
+    def test_rabbit_sole_fur_loss_ranks_sore_hocks(self):
+        ids, res = self._species("後ろ足の裏の毛が抜けて赤くなっています", "rabbit")
+        # rabbit は foot_sores 非保有のため ID_SYNONYMS で pododermatitis_signs に解決される
+        assert any(i in ids for i in ("foot_sores", "pododermatitis_signs", "foot_lesions")), ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("足底" in n) or ("ソアホック" in n) for n in names), names
+
+    def test_rabbit_continuous_tearing_extracts_eye_discharge(self):
+        ids, res = self._species("目の下が濡れていて涙がずっと出ています", "rabbit")
+        assert "eye_discharge" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:5]]
+        assert any(("鼻涙管" in n) or ("結膜" in n) or ("流涙" in n) for n in names), names
+
+    # ---- ハムスター頬袋フロア ----
+
+    def test_hamster_cheek_pouch_floor_beats_gi_dilution(self):
+        ids, res = self._species("ほっぺたが片方だけずっと膨らんでいます", "hamster")
+        assert "cheek_swelling" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any("頬袋" in n for n in names), names
+
+    # ---- 鳥: 呼吸クリック音・嘴蒼白 ----
+
+    def test_bird_squeaky_breathing_ranks_respiratory(self):
+        ids, res = self._species("呼吸のたびにキュッキュッと音がします", "bird")
+        assert "clicking_breathing_sounds" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:5]]
+        assert any(("気嚢" in n) or ("アスペルギルス" in n) or ("呼吸" in n) for n in names), names
+
+    def test_parakeet_pale_beak_ranks_anemia_causes_not_ticks_first(self):
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        assert SPECIES_PREVALENCE["parakeet"].get("Tick Infestation") == "uncommon"
+        ids, res = self._species("くちばしの色が薄くなって元気がありません", "parakeet")
+        assert "pale_mucous_membranes" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:8]]
+        assert any(
+            ("貧血" in n) or ("ヘモ" in n) or ("ロイコ" in n) or ("マラリア" in n) or ("大動脈" in n) for n in names
+        ), names
+
+    # ---- モルモット食べこぼし ----
+
+    def test_guinea_pig_dropped_food_ranks_dental(self):
+        ids, res = self._species("口をもぐもぐするのに食べこぼしが多いです", "guinea_pig")
+        assert "difficulty_eating" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:5]]
+        assert any(("不正咬合" in n) or ("歯" in n) for n in names), names
