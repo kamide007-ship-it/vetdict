@@ -2637,6 +2637,52 @@ SYMPTOM_ALIASES = {
     "卵が出かかっ": "egg_binding",
     "卵が出かけ": "egg_binding",
     "卵が途中で止ま": "egg_binding",
+    # ---------------------------------------------------------------
+    # 2026-09 精度監査 第32弾
+    # ---------------------------------------------------------------
+    # 外耳炎の耳振り（「耳をパタパタ」= ear flapping の飼い主表現が皆無だった）
+    "耳をパタパタ": "head_shaking",
+    "耳をぱたぱた": "head_shaking",
+    # 頭位傾斜の を格（「首が傾いて」のみ収載で「首を傾けて」が欠落）
+    "首を傾け": "head_tilt",
+    # 呼吸窮迫の汎用表現（「苦しそうにしている」— 既存は息/呼吸前置形のみ。
+    # GDV・CHF等の distress 主訴の標準プロキシ）
+    "苦しそうにし": "labored_breathing",
+    # 犬猫の結晶尿・尿砂（飼い主は尿中のキラキラした沈殿として観察する。
+    # 尿路結石症/膀胱炎ルーティングの proxy — 骨折疑い→limping と同型）
+    "おしっこに砂": "blood_in_urine",
+    "尿に砂": "blood_in_urine",
+    "キラキラした砂": "blood_in_urine",
+    # 皮膚の色素性病変（黒色斑の増加 — lentigo/メラノーマ/内分泌性色素沈着の
+    # 皮膚科ddxへの proxy ルーティング）
+    "皮膚に黒いシミ": "skin_lesions",
+    "黒いシミが増え": "skin_lesions",
+    # 摂食困難のバリアント（「食べにくそう」のみ収載で づら形・食べこぼしが欠落）
+    "食べづら": "difficulty_eating",
+    "食べこぼし": "difficulty_eating",
+    "食べこぼす": "difficulty_eating",
+    # 耳ダニの黒色耳垢（「耳の中が黒い垢だらけ」のみで カス形が欠落）
+    "耳の中に黒いカス": "ear_discharge",
+    "耳に黒いカス": "ear_discharge",
+    # ソアホックの足裏脱毛（既存キーは発赤・腫脹形のみ）
+    "足の裏の毛が抜け": "foot_sores",
+    # 流涙・眼脂の連用形（「涙が出る」終止形のみで「涙がずっと出て」が不一致）
+    "涙が出て": "eye_discharge",
+    "目の下が濡れ": "eye_discharge",
+    # ハムスター頬袋（「頬袋が〜」のみ収載で「ほっぺた」表記が欠落。
+    # 「ほっぺたが片方だけずっと膨らんで」のような割り込み形は片方キーで捕捉）
+    "ほっぺたが膨らん": "cheek_swelling",
+    "ほっぺが膨らん": "cheek_swelling",
+    "ほっぺたが腫れ": "cheek_swelling",
+    "ほっぺたが片方": "cheek_swelling",
+    "片方のほっぺ": "cheek_swelling",
+    # 鳥の異常呼吸音（キュッキュッ — クリック音の擬音語バリアント）
+    "キュッキュ": "clicking_breathing_sounds",
+    "キューキュー": "clicking_breathing_sounds",
+    # 鳥の嘴蒼白（貧血・慢性疾患の徴候 — parakeet はネイティブ、他種は
+    # ID_SYNONYMS で pale_comb/anemia へフォールバック）
+    "くちばしの色が薄": "pale_mucous_membranes",
+    "嘴の色が薄": "pale_mucous_membranes",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

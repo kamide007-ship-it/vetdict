@@ -748,7 +748,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Infectious Stomatitis (Mouth Rot)",
         "name_ja": "感染性口内炎（マウスロット）",
-        "symptoms": {"mouth_lesions", "swollen_gums", "mucus_in_mouth", "anorexia", "drooling"},
+        "symptoms": {"mouth_lesions", "swollen_gums", "mucus_in_mouth", "anorexia", "drooling", "stomatitis"},
         "description": "Infectious Stomatitis (Mouth Rot) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "嘴と口腔の細菌感染により乾酪性浸出液と壊死を引き起こす疾患です。",
         "urgency": "high",

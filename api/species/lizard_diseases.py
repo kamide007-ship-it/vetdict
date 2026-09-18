@@ -413,7 +413,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Infectious Stomatitis (Mouth Rot)",
         "name_ja": "感染性口内炎（マウスロット）",
-        "symptoms": {"mouth_lesions", "swollen_gums", "mucus_in_mouth", "anorexia", "drooling", "oral_hemorrhage"},
+        "symptoms": {
+            "mouth_lesions",
+            "swollen_gums",
+            "mucus_in_mouth",
+            "anorexia",
+            "drooling",
+            "oral_hemorrhage",
+            "stomatitis",
+        },
         "description": "Infectious Stomatitis (Mouth Rot) is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "口腔の細菌感染により乾酪性浸出液、歯肉腫脹、組織壊死を引き起こす疾患です。",
         "urgency": "high",
@@ -2928,7 +2936,15 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Infectious Stomatitis (Mouth Rot)",
         "name_ja": "感染性口内炎（マウスロット）",
-        "symptoms": {"mouth_lesions", "anorexia", "oral_discharge", "swollen_jaw", "lethargy", "weight_loss"},
+        "symptoms": {
+            "mouth_lesions",
+            "anorexia",
+            "oral_discharge",
+            "swollen_jaw",
+            "lethargy",
+            "weight_loss",
+            "stomatitis",
+        },
         "description": "Bacterial infection of the oral cavity, one of the most common diseases in captive lizards.",
         "description_ja": "口腔内の細菌感染症。飼育下トカゲで最も多い疾患の一つ。"
         "Pseudomonas, Aeromonas, Klebsiella等のグラム陰性菌が主要な起因菌。"

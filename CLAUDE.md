@@ -5747,3 +5747,98 @@ ACTH刺激プロトコル・シクロスポリン・オクラシチニブ等）�
 ### 表示数値の同期・キャッシュ
 - pendingStats symptoms 85→**87**、ServiceWorker: `CACHE_NAME` v155 → **v156**
 - 再現手順: `migrate_to_sqlite.py`（クリーンビルド — dog 語彙 tail_chasing 反映）
+
+## 2026-09セッション（第50弾: エドロフォニウム/リボフラビン補完 + 犬レガシーDBに中耳内耳炎・老犬前庭症候群 + 爬虫類マウスロットID欠落修正 + 相互作用結果のlinkify）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,413件合格**（34 skip、ベースライン）
+- 配信SQLiteクリーンビルド: **6,893疾患・639薬品**、treatment/prevention/prognosis **100%**、
+  主要臨床フィールド（治療/病因/予後/予防/説明/病態）の空欄 **0**、キリル文字混入 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（全species_info検証）、文字列型相互作用スキーマ **0**、ID重複 **0**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- prevalence: 回帰テスト18件合格（dead key 既知残のみ、上限ガード内）
+
+### referenced-but-absent 薬品2剤の補完（`drug_batch_64.py` 新規、637→639薬品 — 第30回スイープ）
+用量文脈カタカナトークン監査で辞書の飽和を再確認した上で、真のギャップ2剤＋エイリアス1件を検出:
+- **エドロフォニウム（テンシロン）** — 自サイトの重症筋無力症エントリ5件（犬限局型MG・猫MG×3
+  （筋無力症クリーゼ含む）・フェレットMG）が「エドロフォニウム試験 0.1-0.2 mg/kg IV」
+  「0.25-0.5 mg/cat IV」と用量付きで名指しする診断薬なのに未収載だった自己参照ギャップ
+  （2-PAM/プロタミン/プレドニゾン/破傷風抗毒素と同型）。超短時間作用（1-2分）＝ベッドサイド診断薬で
+  あり治療はピリドスチグミンという定義的事実、**試験前のアトロピン準備必須**（コリン作動性クリーゼの
+  レスキュー）、猫は固定低総量（mg/kg計算ではない）、偽陰性でもMG除外不可（確定は抗AChR抗体価）、
+  先発テンシロン販売中止市場でのネオスチグミン反応試験代替を明記（Shelton; Plumb's 10th ed）
+- **リボフラビン（ビタミンB2）** — 鳥・インコに**専用の欠乏症疾患エントリ**があり
+  「0.5-1 mg/kg PO q24h」「3-10 mg/kg 飼料」（雛の巻き趾麻痺）と用量参照し、馬のリボフラビン
+  反応性MADDエントリも補充を参照するのに、B2本体が未収載だった（B1/B7/B12は収載済み）。
+  巻き趾変形は治療遅延で永続化＝疑い時点で治療、**馬は検証済み用量が未確立であることを正直に明記**
+  （捏造しない設計）、E/Se欠乏・鳥脳脊髄炎との鑑別注意（Carpenter 6th; Ritchie & Harrison）
+- **ヒドロキシ尿素エイリアス** — 収載済み hydroxyurea（正準名ヒドロキシウレア）に対し、エキゾチック
+  5種の赤血球増加症プロトコルが漢字複合表記「ヒドロキシ尿素 30 mg/kg PO q24h」で参照し索引不達
+  だった → `_KATAKANA_VARIANT_ALIASES` で解決（逆引き 0→21疾患）
+- **B2/B12境界ガード検証**: リボフラビンエイリアスがビタミンB12言及を奪わないことを回帰テストで固定
+- 動線検証: テキストマッチャー・逆引き「この薬品を使う疾患」（edrophonium 5疾患/riboflavin_b2 8疾患）・
+  相互作用チェッカー自然言語解決（テンシロン/りぼふらびん/ヒドロキシ尿素）全て接続
+
+### 診断チャット精度 第32弾（35症例フレッシュスイープ 13 MISS → 35/35 合格）
+- **爬虫類マウスロットの stomatitis ID 欠落（データバグ）**: 乾酪様滲出物エイリアス（チーズ状→
+  stomatitis、第41弾）が抽出するIDを、reptile/lizard/tortoise の Infectious Stomatitis エントリが
+  症状セットに持っていなかった（snake のみ保有 — reptile では唯一の保有疾患がヘルペスで、
+  マウスロット主訴がヘルペス1位になっていた）→ 3モジュール4エントリに stomatitis を追加 →
+  感染性口内炎 rank 1
+- **犬レガシーDBに中耳炎・内耳炎と特発性前庭疾患（老犬前庭症候群）を新設**（89→91疾患）:
+  頭位傾斜の主訴が**稀な頭蓋内疾患のみ**（脊髄空洞症/パグ脳炎/小脳失調症）に誘導される構造的
+  ギャップだった。特発性前庭疾患は犬の末梢前庭障害の最多原因（Rossmeisl, Vet Clin North Am 2010 —
+  「脳卒中では」と心配される高齢犬の急性頭位傾斜・眼振・旋回で、多くは数日で自然回復）、
+  中耳内耳炎は慢性外耳炎の鼓膜波及＝耳症状+頭位傾斜の日常的原因（Gotthelf; Ettinger 8th ed）。
+  既存の age タグに死んでいた id `vestibular_disease` を再利用し senior 年齢係数を自動有効化。
+  名称は dog モジュールと完全一致（Inner Ear Infection (Otitis Interna) / Idiopathic Vestibular
+  Disease (Old Dog Vestibular)）— チャット候補カード「疾患DBで詳細を開く」ピボットが完全一致着地。
+  修正後: 耳パタパタ+首かしげ→中耳炎・内耳炎 rank 1、高齢+急な頭位傾斜+旋回+嘔吐→前庭疾患 rank 1。
+  ガード: 痙攣+意識消失→てんかん1位・夜鳴き+旋回→CDS 1位は不変（回帰テストで固定）
+- **新規エイリアス**: 耳をパタパタ→head_shaking、首を傾け（を格）→head_tilt、苦しそうにし→
+  labored_breathing（GDV distress主訴）、おしっこに砂/尿に砂/キラキラした砂→blood_in_urine
+  （結晶尿・尿砂の proxy → 尿路結石症 top5）、皮膚に黒いシミ/黒いシミが増え→skin_lesions、
+  食べづら/食べこぼし→difficulty_eating（猫歯科・モルモット不正咬合）、耳の中に黒いカス→
+  ear_discharge（猫耳ダニ）、足の裏の毛が抜け→foot_sores（ソアホック rank 1）、涙が出て/
+  目の下が濡れ→eye_discharge（ウサギ鼻涙管・流涙）、ほっぺたが膨らん/ほっぺたが片方→
+  cheek_swelling、キュッキュ/キューキュー→clicking_breathing_sounds（鳥呼吸クリック音）、
+  くちばしの色が薄→pale_mucous_membranes
+- **ID_SYNONYMS/_SYN**: pale_mucous_membranes 抽出チェーン新設（pale_gums/pale_comb/anemia/
+  weakness）+ マッチング側 _SYN ブリッジ（parakeet はネイティブ保有だが保有疾患が大動脈破裂のみで
+  貧血系エントリに届かなかった）
+- **パトグノモニック・フロア**: hamster {cheek_swelling}→Cheek Pouch Impaction ×1.35
+  （ハムスターの片側持続性頬部腫脹は頬袋疾患 until proven otherwise — Quesenberry & Carpenter
+  4th ed。汎用膨満IDの共抽出がカバレッジを希釈しGI エントリが上回っていた）
+- **有病率是正**: parakeet Tick Infestation=uncommon（ケージ飼いセキセイのマダニは屋外禽舎の疾患 —
+  Ritchie & Harrison。未tierで嘴蒼白主訴の貧血ddx上位を独占していた。bird側uncommonと整列）
+- 副産物確認: ハムスター「臼歯過成長」の擬似冬眠様クローン症状セット（20エントリ共有）は
+  既存のクローンガードがマッチング除外済みで実害なし（歯科主訴は臼歯過長/不正咬合が正しく上位）
+
+### UX: 相互作用チェッカー結果の薬品名 linkify（デッドテキスト解消）
+- 相互作用チェッカーの結果パネルは `drug_a + drug_b` を**生の英語 snake_case ID のまま**表示し
+  （日本語UIで二重に不親切）、タップ導線も無かった — 禁忌/重大の警告を見た瞬間の次のアクション
+  （モノグラフで代替薬・対応を確認）が行き止まりだった
+- APIの `resolved` マップ（input→id/name/name_ja）から id→現在言語の表示名を解決し、
+  「認識: バイトリル→エンロフロキサシン」行と各相互作用行の両薬品名を `.drug-nav-link` 化
+  （navigateToDrug の完全一致着地で該当モノグラフへ1タップ）。`#interactionResults` は
+  `#drugList` の委譲外のため、per-container dataset ガード付きの専用委譲ハンドラを新設
+- クイック入力に「急に首を傾けてぐるぐる回る」（犬 — タップで老犬前庭症候群 rank 1）を追加
+  （ミラーテスト JA_QUICK 同期）
+
+### 回帰テスト（+21件）
+- 薬品: TestBatch64EdrophoniumRiboflavin（5件 — 2剤の存在・完全バイリンガル用量・定義的安全事実
+  （診断専用1-2分/アトロピン準備/猫固定総量/偽陰性・巻き趾/馬用量非捏造/E-Se鑑別）・
+  エイリアス5ケース＋B2/B12境界ガード・チェッカー解決4ケース）
+- チャット: TestChatClinicalAccuracyAuditRound32（15件 — 爬虫類4種の stomatitis ID 保有・
+  マウスロット rank 1・中耳炎/前庭疾患 rank 1×2+てんかん/CDSガード・尿砂→結石・猫食べづら/
+  黒色耳垢・ウサギソアホック/流涙・ハムスター頬袋フロア・鳥クリック音・parakeet嘴蒼白+Tick tier・
+  モルモット食べこぼし）
+- UX: test_app_js_interaction_checker_results_linkify_drug_names（resolvedByIdマップ・
+  drugRefLink・両薬品のリンク化・専用委譲ハンドラ）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 580/cat 557/horse 364/ferret 199/鳥系 243薬品、
+  pendingStats drugs 637→**639**
+- ServiceWorker: `CACHE_NAME` v156 → **v157**
+- 再現手順: `migrate_to_sqlite.py`（クリーンビルド 6,893疾患・639薬品）— 疾患名不変のため
+  検索インデックス no-op

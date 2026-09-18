@@ -3936,3 +3936,88 @@ class TestBatch63PhysostigmineTilmicosinAtorvastatin:
         assert resolve_drug_reference("ミコチル") == "tilmicosin"
         assert resolve_drug_reference("リピトール") == "atorvastatin"
         assert resolve_drug_reference("エゼリン") == "physostigmine"
+
+
+class TestBatch64EdrophoniumRiboflavin:
+    """2026-09 audit (30th sweep): two referenced-but-absent monographs and one
+    alias gap — edrophonium (five of the site's own myasthenia gravis entries
+    dose the Tensilon test: 0.1-0.2 mg/kg IV, cat 0.25-0.5 mg total),
+    riboflavin/B2 (dedicated Riboflavin Deficiency disease entries in bird AND
+    parakeet dose it 0.5-1 mg/kg PO q24h / 3-10 mg/kg feed, and the equine
+    riboflavin-responsive MADD entry references supplementation), and the
+    hydroxyurea kanji-compound spelling ヒドロキシ尿素 used by five exotic
+    polycythemia protocols that never reached the keyword index."""
+
+    def _get(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        for d in DRUGS:
+            if d.get("id") == drug_id:
+                return d
+        raise AssertionError(f"{drug_id} missing from DRUGS")
+
+    def test_batch64_present_with_bilingual_dosing(self):
+        for drug_id in ("edrophonium", "riboflavin_b2"):
+            d = self._get(drug_id)
+            assert d.get("name_ja") and d.get("mechanism_ja")
+            assert isinstance(d.get("drug_interactions"), list)
+            for sp, si in (d.get("species_info") or {}).items():
+                if si.get("safe"):
+                    assert (si.get("dosage") or "").strip(), (drug_id, sp)
+                    assert (si.get("dosage_ja") or "").strip(), (drug_id, sp)
+
+    def test_edrophonium_defining_safety_facts(self):
+        d = self._get("edrophonium")
+        # Diagnostic-only: the 1-2 min duration and the pyridostigmine handoff
+        assert "1-2分" in d["mechanism_ja"] or "1-2 min" in d["mechanism"]
+        assert "ピリドスチグミン" in d["contraindications_ja"]
+        assert "pyridostigmine" in d["contraindications"].lower()
+        # Atropine drawn up before every test (cholinergic-crisis rescue)
+        dog = d["species_info"]["dog"]
+        assert "アトロピン" in dog["notes_ja"]
+        # Cats get a fixed low TOTAL dose (0.25-0.5 mg/cat), not mg/kg
+        cat = d["species_info"]["cat"]
+        assert "0.25-0.5" in cat["dosage_ja"] and "総量" in cat["dosage_ja"]
+        # A negative test does not exclude MG (false negatives documented)
+        assert "偽陰性" in dog["dosage_ja"]
+        # OP/carbamate exclusion carried over from the AChE-inhibitor class
+        assert "有機リン" in d["contraindications_ja"]
+
+    def test_riboflavin_curled_toe_and_no_fabricated_horse_dose(self):
+        d = self._get("riboflavin_b2")
+        bird = d["species_info"]["bird"]
+        assert "巻き趾" in bird["dosage_ja"] and "0.5-1 mg/kg" in bird["dosage_ja"]
+        assert "3-10 mg" in bird["dosage_ja"]  # feed-level correction
+        assert "curled-toe" in bird["dosage"].lower()
+        # Horse MADD row must state that no validated equine dose exists
+        horse = d["species_info"]["horse"]
+        assert "確立されていない" in horse["dosage_ja"]
+        assert "no validated equine dose" in horse["dosage"].lower()
+        # The lookalike-disease caveat (vit E/Se deficiency, AE) is the only
+        # real failure mode and must survive edits
+        assert "ビタミンE" in d["contraindications_ja"]
+
+    def test_sweep30_aliases_resolve_in_text_matcher(self):
+        from api.drug_dictionary import find_drugs_in_text
+
+        cases = [
+            ("ヒドロキシ尿素 30 mg/kg PO q24h で骨髄抑制、CBCモニタ", "hydroxyurea"),
+            ("エドロフォニウム試験 0.1-0.2 mg/kg IV（短時間作用型AChE阻害薬）", "edrophonium"),
+            ("テンシロン試験で一過性の症状改善", "edrophonium"),
+            ("リボフラビン（B2: 3-10 mg/kg 飼料）で趾曲がり症を治療", "riboflavin_b2"),
+            ("リボフラビン0.5-1 mg/kg q24h。B群ビタミン補給", "riboflavin_b2"),
+        ]
+        for text, want in cases:
+            ids = [d["id"] for d in find_drugs_in_text(text)]
+            assert want in ids, (text, ids)
+        # Precision guard: the B2 alias must not steal vitamin B12 mentions
+        ids = [d["id"] for d in find_drugs_in_text("ビタミンB12（コバラミン）250 μg SC 週1")]
+        assert "riboflavin_b2" not in ids and "vitamin_b12" in ids, ids
+
+    def test_batch64_resolves_in_interaction_checker(self):
+        from api.drug_dictionary import resolve_drug_reference
+
+        assert resolve_drug_reference("テンシロン") == "edrophonium"
+        assert resolve_drug_reference("エドロフォニウム") == "edrophonium"
+        assert resolve_drug_reference("リボフラビン") == "riboflavin_b2"
+        assert resolve_drug_reference("ヒドロキシ尿素") == "hydroxyurea"

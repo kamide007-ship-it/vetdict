@@ -1779,6 +1779,9 @@ SPECIES_PREVALENCE = {
         "Oviductal Impaction": "common",  # 慢性産卵セキセイの卵管うっ滞は卵塞と同族
         "Essential Oil Toxicity": "rare",
         "Haemoproteus Infection": "uncommon",
+        # ケージ飼いセキセイのマダニ寄生は屋外禽舎の疾患（Ritchie & Harrison）—
+        # bird側の uncommon と整列（2026-09 round-32: 嘴蒼白主訴の上位独占を解消）
+        "Tick Infestation": "uncommon",
         "Psittacosis (Chlamydiosis)": "very_common",
         "Aspergillosis": "very_common",
         "Upper Respiratory Infection": "very_common",
