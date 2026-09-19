@@ -174,7 +174,7 @@ from api.chat.symptom_aliases import SYMPTOM_ALIASES  # noqa: F401
 # EQUINE SYMPTOM ALIASES (natural language → equine finding keys)
 # =============================================================================
 
-EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
+EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     # -- General --
     "fever": "gen_fever",
     "発熱": "gen_fever",
@@ -298,6 +298,10 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     # 「前足をかばって蹄が熱い」の hot-hoof ペアが片翼だけになっていた
     "前足をかば": "limb_lameness_fore",
     "前あしをかば": "limb_lameness_fore",
+    # 2026-09 第33弾: 解剖学用語の「前肢/後肢をかばう」表記（獣医学生・
+    # 技術者の入力形）が欠落していた
+    "前肢をかば": "limb_lameness_fore",
+    "後肢をかば": "limb_lameness_hind",
     "hindlimb lameness": "limb_lameness_hind",
     "後肢跛行": "limb_lameness_hind",
     "後脚をかばって": "limb_lameness_hind",
@@ -431,13 +435,16 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str] = {
     "嚥下困難": "dig_salivation",
     "can't swallow": "dig_salivation",
     "dysphagia": "dig_salivation",
-    # 鼻孔からの飼料・唾液の逆流 = チョークの hallmark（Reed & Bayly 4th ed）
-    "鼻から餌": "resp_bilateral_discharge",
-    "鼻から食べ物": "resp_bilateral_discharge",
-    "鼻から飼料": "resp_bilateral_discharge",
-    "鼻からエサ": "resp_bilateral_discharge",
-    "feed from nostrils": "resp_bilateral_discharge",
-    "food from nose": "resp_bilateral_discharge",
+    # 鼻孔からの飼料・唾液の逆流 = チョークの hallmark（Reed & Bayly 4th ed）。
+    # 飼料の鼻腔逆流は嚥下不能（dysphagia）の発現そのものなので、両所見に解決
+    # して {dig_salivation, resp_bilateral_discharge} のチョーク症候群ペアを
+    # 発火させる（従来は片所見のみで、咳と併記されると呼吸器感染が上位だった）
+    "鼻から餌": ("resp_bilateral_discharge", "dig_salivation"),
+    "鼻から食べ物": ("resp_bilateral_discharge", "dig_salivation"),
+    "鼻から飼料": ("resp_bilateral_discharge", "dig_salivation"),
+    "鼻からエサ": ("resp_bilateral_discharge", "dig_salivation"),
+    "feed from nostrils": ("resp_bilateral_discharge", "dig_salivation"),
+    "food from nose": ("resp_bilateral_discharge", "dig_salivation"),
     "gastric reflux": "dig_gastric_reflux",
     "胃液逆流": "dig_gastric_reflux",
     "teeth grinding": "dig_bruxism",
@@ -627,10 +634,16 @@ def _extract_equine_symptoms(text: str) -> list[str]:
         if sym["name_ja"].lower() in text_lower or sym["name_en"].lower() in text_lower:
             matched.add(sym["id"])
 
-    # Alias matches
+    # Alias matches（値はstrまたは複数所見のtuple — 例: 鼻からの飼料逆流は
+    # 両側鼻汁＋嚥下不能の両所見として解決する）
+    valid_keys = _build_equine_finding_keys()
     for alias, finding_key in EQUINE_SYMPTOM_ALIASES.items():
-        if alias in text_lower and finding_key in _build_equine_finding_keys():
-            matched.add(finding_key)
+        if alias not in text_lower:
+            continue
+        keys = finding_key if isinstance(finding_key, tuple) else (finding_key,)
+        for key in keys:
+            if key in valid_keys:
+                matched.add(key)
 
     return list(matched)
 

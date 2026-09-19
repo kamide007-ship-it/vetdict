@@ -370,6 +370,20 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # Brown) — without a boost the 5-sign entry lost on coverage to the rare
     # elodontoma whose set happens to include nasal_discharge.
     ("rabbit", frozenset({"exophthalmos"}), "Retrobulbar Abscess", 1.35),
+    # Acute hind-limb paralysis in a pet rabbit is a vertebral fracture /
+    # spinal injury (typically improper-restraint L7 fracture) until proven
+    # otherwise (Harcourt-Brown, Textbook of Rabbit Medicine; Quesenberry &
+    # Carpenter 4th ed) — without a floor the untier'd two-sign Nail
+    # Overgrowth entry won on trivially perfect lameness coverage.
+    ("rabbit", frozenset({"hind_limb_paralysis"}), "Hind Limb Paresis / Paralysis", 1.35),
+    ("rabbit", frozenset({"hind_limb_paralysis"}), "Spinal Fracture / Luxation", 1.35),
+    # A soft/rubbery mandible in a lizard or generic reptile is nutritional
+    # secondary hyperparathyroidism (MBD) until proven otherwise — "rubber
+    # jaw" is the pathognomonic sign (Mader's Reptile and Amphibian Medicine
+    # 3rd ed). Co-extracted limb weakness otherwise diluted coverage and let
+    # renal-mineralization / vertebral-fracture entries outrank MBD itself.
+    ("lizard", frozenset({"jaw_softening"}), "Metabolic Bone Disease (MBD)", 1.5),
+    ("reptile", frozenset({"jaw_softening"}), "Metabolic Bone Disease (MBD)", 1.5),
     # Pollakiuria with no urine production is urethral obstruction until
     # proven otherwise in cats (male cats especially) — the minutes-count
     # emergency must not rank below UTI/FIC when the owner reports both

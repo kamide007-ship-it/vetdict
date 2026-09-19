@@ -735,6 +735,16 @@ SYMPTOMS = [
         "category": "digestive",
     },
     {
+        # 2026-09 第33弾: 口腔疼痛の観察可能な発現（片側咀嚼・食べこぼし・
+        # 口を触られるのを嫌がる）。従来は種別語彙のみで legacy 犬パスでは
+        # loss_of_appetite に落ち、歯科主訴が bare pain 経由で緑内障に誤誘導
+        # されていた（AAHA Dental Care Guidelines 2019）
+        "id": "difficulty_eating",
+        "name_ja": "食べにくそう（片側で噛む・食べこぼす）",
+        "name_en": "Difficulty Eating (Chewing on One Side / Dropping Food)",
+        "category": "digestive",
+    },
+    {
         "id": "increased_appetite",
         "name_ja": "食欲増加（多食なのに痩せる等）",
         "name_en": "Increased Appetite (Polyphagia)",
@@ -2250,6 +2260,7 @@ DISEASES = [
         "symptoms": [
             "bad_breath",
             "excessive_drooling",
+            "difficulty_eating",
             "loss_of_appetite",
         ],
         "severity": "low",

@@ -1690,7 +1690,7 @@ function setDefaultStats(){
     diseases:6455,
     species:21,
     drugs:639,
-    symptoms:87,
+    symptoms:88,
     protocols:188
   };
   renderSpeciesGrid();
@@ -2065,8 +2065,8 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
-    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る"],
-    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい"],
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ"],
+    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる"],
     rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている","おしっこが白っぽくてドロドロしている"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている","目が濡れて顔をこする","耳が垂れて耳から臭い"],
@@ -2080,7 +2080,7 @@ function resetSpeciesChat(species){
     reptile:["食べない","口をあけたまま呼吸","鼻水が出る","脱皮がうまくできない","目が開かない","痩せてきた"],
     tortoise:["食べない","甲羅がやわらかい","鼻水が出る","目が腫れている","いきんでいる","甲羅に傷がある","首を伸ばして呼吸している"],
     snake:["食べない","口の中が赤い","脱皮がうまくできない","口をあけたまま呼吸","ダニがついている","吐き戻しが増えた","脱皮した皮が目に残っている","脱皮した皮が体に残っている"],
-    lizard:["食べない","脚が曲がってきた","ふらつく","脱皮がうまくできない","口をあけたまま呼吸","尻尾が細くなってきた"],
+    lizard:["食べない","脚が曲がってきた","ふらつく","脱皮がうまくできない","口をあけたまま呼吸","尻尾が細くなってきた","あごが柔らかくてぶよぶよ"],
     amphibian:["食べない","皮膚が赤い","お腹が膨れている","皮膚に白いもの","元気がない","浮かんだまま沈めない"],
     fish:["体に白い点々","ヒレがボロボロ","体をこすりつける","水面で口をパクパク","お腹が膨れている","泳ぎ方がおかしい"],
     degu:["食べない","よだれが出る","毛が抜ける","尻尾の皮がむけた","下痢","ぐったりしている"],
@@ -2103,8 +2103,16 @@ function resetSpeciesChat(species){
       el.innerHTML=`<div class="chat-msg bot">${escapeHtml(hint)}${quickHtml}</div>`;
       el.querySelectorAll(".quick-sym-btn").forEach(btn=>{
         btn.addEventListener("click",function(){
-          const input=document.getElementById("chatInput")||document.getElementById("landingChatInput");
-          const send=document.getElementById("chatSend")||document.getElementById("landingChatSend");
+          /* Route to the chat panel the chip actually lives in: both the hero
+             (landing) chat and the main chat exist in the DOM at all times, so
+             the previous chatInput-first lookup sent landing-panel taps to the
+             off-screen main chat and the reply rendered where the user was not
+             looking (the landing panel appeared dead). */
+          const isLanding=!!this.closest("#landingChatMessages");
+          const input=document.getElementById(isLanding?"landingChatInput":"chatInput")
+            ||document.getElementById("chatInput")||document.getElementById("landingChatInput");
+          const send=document.getElementById(isLanding?"landingChatSend":"chatSend")
+            ||document.getElementById("chatSend")||document.getElementById("landingChatSend");
           if(input){input.value=this.dataset.symptom||this.textContent;}
           if(send)send.click();
         });

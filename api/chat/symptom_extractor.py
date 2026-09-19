@@ -708,7 +708,14 @@ _NEGATION_AFTER_RE = _neg_re.compile(
 
 def is_negated_mention(text: str, end: int) -> bool:
     """Return True if the symptom mention ending at ``end`` is directly negated."""
-    return bool(_NEGATION_AFTER_RE.match(text[end : end + 12]))
+    if not _NEGATION_AFTER_RE.match(text[end : end + 12]):
+        return False
+    # 「しか〜ない」構文は限定の肯定表現（「ポタポタとしか出ない」= 滴下排尿
+    # という陽性症状）であり否定ではない。しか は必ず否定述語を要求するため、
+    # マッチ直前に しか がある場合は否定ガードを発火させない。
+    if "しか" in text[max(0, end - 8) : end]:
+        return False
+    return True
 
 
 # --- 丁寧語（ます体）→ 平叙形の入力正規化 -------------------------------------
@@ -782,6 +789,18 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     # 食べられません→食べられない、走れません→走れない、かもしれません→かもしれない）
     ("れません", "れない"),
     ("れました", "れた"),
+    # 〜ておらず/〜でおらず（おらず＝おる の文語否定連用形。て形に続く場合は
+    # 全動詞で〜ていない/〜でいない と同値: うんちが出ておらず→出ていない）
+    ("ておらず", "ていない"),
+    ("でおらず", "でいない"),
+    # 〜がる五段動詞（痛がる・嫌がる・怖がる・欲しがる・転がる・上がる等 —
+    # 「がります」で終わる動詞は全て五段〜がる活用なので常に正しい）
+    ("がりません", "がらない"),
+    ("がりました", "がった"),
+    ("がります", "がる"),
+    # 歩く（ペタペタ歩きます→歩く 等の歩様主訴）
+    ("歩きました", "歩いた"),
+    ("歩きます", "歩く"),
 ]
 # 長い置換を先に適用（「ていませんでした」が「ていません」より先）
 _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
