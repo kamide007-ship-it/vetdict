@@ -5083,6 +5083,8 @@ def test_no_garbled_or_misspelled_drug_names_in_disease_json():
         "エナイルコナゾール",  # typo of エニルコナゾール
         "フルビプロフェン",  # typo of フルルビプロフェン (never a legit spelling)
         "シスアプリド",  # typo of シサプリド
+        "規ュラーインスリン",  # garbled レギュラーインスリン (2026-09 round 33, cat DKA text)
+        "ュラーインスリン規",  # defensive: any re-scrambling of the same token
     ]
     hits = []
     for e in entries:

@@ -386,7 +386,6 @@ SYMPTOM_ALIASES = {
     "咳する": "coughing",
     "せきする": "coughing",
     "せき": "coughing",
-    "えずく": "coughing",
     "ケッケッ": "coughing",
     "ゲホゲホ": "coughing",
     "ガーガー": "coughing",
@@ -2683,6 +2682,84 @@ SYMPTOM_ALIASES = {
     # ID_SYNONYMS で pale_comb/anemia へフォールバック）
     "くちばしの色が薄": "pale_mucous_membranes",
     "嘴の色が薄": "pale_mucous_membranes",
+    # ---------------------------------------------------------------
+    # 2026-09 精度監査 第33弾
+    # ---------------------------------------------------------------
+    # 外耳炎の耳漏バリアント（「耳から茶色い液が飛び散る」「耳だれ」が皆無だった）
+    "耳から茶色い液": "ear_discharge",
+    "耳から液": "ear_discharge",
+    "みみだれ": "ear_discharge",
+    # 多飲の飼い主観察（「水入れの水がすぐなくなる」— 直接の飲水表現を使わない
+    # 最も一般的な多飲の報告形。PU/PD スクリーニングの主要トリガー）
+    "水がすぐなくな": "excessive_thirst",
+    "水がすぐになくな": "excessive_thirst",
+    # 多尿の量表現（既存は「おしっこの量が多い」のみで「増えた」形が欠落）
+    "おしっこの量が増え": "frequent_urination",
+    "尿の量が増え": "frequent_urination",
+    # 歯科疼痛の片側咀嚼（chewing on one side — 犬猫歯科疾患の教科書的な
+    # 飼い主観察。Niemiec, BSAVA Dental Manual）
+    "片側だけで噛": "difficulty_eating",
+    "片側で噛": "difficulty_eating",
+    "片方の歯で噛": "difficulty_eating",
+    # 四肢疼痛の部位付き形（「後ろ足を痛がって」— 馬は EQUINE_SYMPTOM_ALIASES
+    # が先に解決。汎用種は lameness_or_limping → 種別跛行IDへフォールバック）
+    "後ろ足を痛が": "lameness_or_limping",
+    "前足を痛が": "lameness_or_limping",
+    "足を痛が": "lameness_or_limping",
+    # 蹠行姿勢のカタカナ表記（ひらがな「ぺたぺた歩」のみ収載だった）
+    "ペタペタ歩": "plantigrade_stance",
+    # うんち表記の排便停止（「便が出ない」ファミリーと同義 — ウサギGIうっ滞の
+    # 最重要主訴。「うんちが出ておらず」は ておらず 正規化で ていない 形に到達）
+    "うんちが出ていない": "constipation",
+    "うんちが出てない": "constipation",
+    "うんちが出なく": "constipation",
+    # 鳥の多尿（便の周囲の水分増加 = 尿酸塩周囲の尿部分拡大。鳥はネイティブ
+    # polyuria、他種は ID_SYNONYMS で frequent_urination 系へフォールバック）
+    "便のまわりに水": "polyuria",
+    "便の周りに水": "polyuria",
+    "便のまわりが水っぽ": "polyuria",
+    "便の周りが水っぽ": "polyuria",
+    # 喉頭麻痺・気管虚脱の嚥下時むせ+嗄声（既存は「むせる」終止形と
+    # 「声がかすれる」のみで、て形とガラガラ声の口語が欠落していた）
+    "むせて": "coughing",
+    "むせながら": "coughing",
+    "声がガラガラ": "voice_change",
+    "ガラガラ声": "voice_change",
+    "声が変わっ": "voice_change",
+    # 排尿困難の飼い主観察（stranguria — 滴下排尿・排尿時間延長。
+    # ISCAID 2019 の下部尿路疾患主訴）
+    "おしっこに時間がかか": "straining_to_urinate",
+    "おしっこするときに時間がかか": "straining_to_urinate",
+    "排尿に時間がかか": "straining_to_urinate",
+    "ポタポタとしか出": "straining_to_urinate",
+    "尿がポタポタ": "straining_to_urinate",
+    "おしっこがポタポタ": "straining_to_urinate",
+    # 空嘔吐の ず形・えずき（「吐こうとして吐けず」「えずく」— 既存は
+    # 〜のに吐けない形のみ。cat毛球/GDVの共通主訴。キーは否定ガードが
+    # 自己遮断しないよう な/ず まで含める — 吐きそうなのに吐けな と同型）
+    "吐こうとして吐けな": "unproductive_retching",
+    "吐こうとして吐けず": "unproductive_retching",
+    "えずいて": "unproductive_retching",
+    "えずく": "unproductive_retching",
+    # 歯肉炎の発赤（bleeding_gums は猫語彙の歯肉炎マーカーID — 発赤は
+    # 出血性歯肉炎の前段の同一病態としてプロキシ解決。骨折疑い→limping と同型）
+    "歯茎が赤": "bleeding_gums",
+    "歯ぐきが赤": "bleeding_gums",
+    # 尿中の砂粒（結晶尿・尿砂 — 既存「おしっこに砂」の のようなもの 形）
+    "砂のようなものが混ざ": "blood_in_urine",
+    "砂のようなものが出": "blood_in_urine",
+    # チンチラ熱中症の充血耳（真っ赤 強調形が欠落していた —
+    # Quesenberry & Carpenter 4th ed）
+    "耳が真っ赤": "red_ears",
+    # 横臥（「横になったまま」= 起立不能・重度嗜眠の飼い主表現）
+    "横になったまま": "lethargy",
+    "横たわったまま": "lethargy",
+    # 腹囲膨満の 膨れ 形（既存は「膨らん」形のみ: フェレット腹水・猫FIP等）
+    "お腹が大きく膨れ": "bloating",
+    "お腹がふくれ": "bloating",
+    # 鳥の鼻孔周囲の汚れ（既存「鼻の周りが汚れ」に 穴 が割り込む形）
+    "鼻の穴のまわりが汚れ": "nasal_discharge",
+    "鼻の穴の周りが汚れ": "nasal_discharge",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

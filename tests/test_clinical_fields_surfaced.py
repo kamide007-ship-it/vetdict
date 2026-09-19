@@ -731,3 +731,19 @@ def test_app_js_interaction_checker_results_linkify_drug_names():
     seg = APP_JS[seg_start : seg_start + 1200]
     assert "results.dataset.handlersAttached" in seg
     assert "navigateToDrug(drugLink.dataset.drug)" in seg
+
+
+def test_app_js_landing_quick_tap_routes_to_landing_chat():
+    """Quick-tap chips route to their own chat panel (2026-09 round 33): both
+    the hero (landing) chat and the main chat exist in the DOM at all times, so
+    the previous chatInput-first lookup sent landing-panel taps to the
+    off-screen main chat and the reply rendered where the user was not looking
+    (the landing panel appeared dead)."""
+    with open("static/js/app.js", encoding="utf-8") as f:
+        js = f.read()
+    handler = js[js.index('el.querySelectorAll(".quick-sym-btn")') :]
+    handler = handler[: handler.index("});\n      });") + 20]
+    # The chip resolves its own container before picking input/send targets.
+    assert 'this.closest("#landingChatMessages")' in handler
+    assert 'isLanding?"landingChatInput":"chatInput"' in handler
+    assert 'isLanding?"landingChatSend":"chatSend"' in handler

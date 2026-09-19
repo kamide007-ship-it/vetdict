@@ -1854,7 +1854,17 @@ DISEASE_DATABASE: list[Disease] = [
         "digestive",
         "severe",
         "食道内の飼料・異物による閉塞。食物残渣を含む鼻汁が特徴的。",
-        ["dig_salivation", "resp_bilateral_discharge", "gen_poor_appetite", "dig_bruxism", "body_neck_crest"],
+        # resp_cough: 自身の clinical_signs_detail が記載する嚥下動作時の咳嗽・
+        # 誤嚥性咳（Feige et al. EVJ 2000）— 欠落していると咳併記の主訴で
+        # 呼吸器感染にカバレッジ負けしていた（2026-09 第33弾）
+        [
+            "dig_salivation",
+            "resp_bilateral_discharge",
+            "gen_poor_appetite",
+            "dig_bruxism",
+            "body_neck_crest",
+            "resp_cough",
+        ],
         urgency="emergency",
         recommended_exams=[
             (1, "経鼻胃管(診断+治療)", "Nasogastric Intubation (Diagnosis + Treatment)"),
@@ -5869,7 +5879,11 @@ DISEASE_DATABASE: list[Disease] = [
         "infectious",
         "moderate",
         "Aspergillus spp.。喉嚢・肺。免疫不全で重症化。",
-        ["resp_cough", "resp_nasal_discharge", "gen_fever"],
+        # gen_weight_loss/resp_labored_breathing: 自身の clinical_signs_detail
+        # が記載する肺型の慢性経過（体重減少・呼吸困難 — Reed & Bayly 4th ed）。
+        # 最小3所見セットは急性ウイルス性呼吸器主訴（発熱+咳+鼻汁）で coverage
+        # 1.0 となり、rare tier でもインフルエンザ等を常に上回る artifact だった
+        ["resp_cough", "resp_nasal_discharge", "gen_fever", "gen_weight_loss", "resp_labored_breathing"],
         urgency="soon",
         recommended_exams=[(1, "内視鏡", "Endoscopy"), (2, "培養", "Culture")],
         merck_url=_MERCK + "aspergillosis+horses",
@@ -12667,6 +12681,13 @@ def generate_differential_diagnosis(
         # --- 症候群フロア: 症候群を定義する所見そのものがチェックされている ---
         for finding, syndrome_names in _SYNDROME_FINDING_FLOORS.items():
             if finding in matched and disease.name_en in syndrome_names:
+                # 跛行→蹄膿瘍フロアは「単純な足部像」専用: 発熱を伴う跛行は
+                # 全身性/感染性の像であり、膿瘍が呼吸器疾患群を上回っては
+                # ならない（フロアの設計意図そのもの — Baxter, Adams &
+                # Stashak 7th ed。従来は Aspergillosis の過剰スコアが偶然
+                # 蓋をしていたため顕在化しなかった）
+                if finding in ("limb_lameness_fore", "limb_lameness_hind") and "gen_fever" in checked_findings:
+                    continue
                 floor = _SYNDROME_FLOOR_SCORE_OVERRIDES.get(finding, _SYNDROME_FLOOR_SCORE)
                 raw_score = max(raw_score, floor * prevalence_mult)
                 break

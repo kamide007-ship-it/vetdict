@@ -1620,6 +1620,7 @@ class TestQuickTapPhraseExtraction:
             "ぶどうを食べてしまった",
             "川や水たまりの水を飲んだ後に発熱",
             "自分のしっぽを追いかけてかじる",
+            "水を飲むとむせて声がガラガラ",
         ],
         "cat": [
             "食べない",
@@ -1636,6 +1637,7 @@ class TestQuickTapPhraseExtraction:
             "水を飲む量が増えて痩せてきた",
             "お尻を舐めてばかりいる",
             "水をよく飲みトイレの砂の塊が大きい",
+            "かかとをつけてペタペタ歩く",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -1757,6 +1759,7 @@ class TestQuickTapPhraseExtraction:
             "脱皮がうまくできない",
             "口をあけたまま呼吸",
             "尻尾が細くなってきた",
+            "あごが柔らかくてぶよぶよ",
         ],
         "amphibian": [
             "食べない",
@@ -5799,3 +5802,177 @@ class TestChatClinicalAccuracyAuditRound32:
         assert "difficulty_eating" in ids, ids
         names = [r.get("name_ja") or "" for r in res[:5]]
         assert any(("不正咬合" in n) or ("歯" in n) for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound33:
+    """2026-09 第33弾: ておらず/がります/しか〜ない正規化 + 馬チョーク両所見解決 +
+    レガシー犬 difficulty_eating + ウサギ後肢麻痺フロア + トカゲ・ラバージョーフロア +
+    馬呼吸器tier整合の回帰テスト。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    # ---- 正規化: ておらず / がります / 歩きます ----
+
+    def test_polite_normalization_oraz_and_garimasu(self):
+        from api.chat.symptom_extractor import normalize_chat_text
+
+        assert "出ていない" in normalize_chat_text("うんちが出ておらず")
+        assert "痛がっている" in normalize_chat_text("後ろ足を痛がっています")
+        assert "嫌がる" in normalize_chat_text("口を触ると嫌がります")
+        assert "歩く" in normalize_chat_text("ペタペタ歩きます")
+        # ここに無い動詞は変換しない（誤活用を生成しない保守設計）
+        assert normalize_chat_text("読みません") == "読みません"
+
+    def test_shika_nai_is_not_a_negation(self):
+        # 「ポタポタとしか出ない」は限定の肯定表現 — 否定ガードが誤遮断しない
+        ids, _ = self._legacy("おしっこするときに時間がかかって、ポタポタとしか出ません")
+        assert "straining_to_urinate" in ids, ids
+        # 素の否定は引き続き遮断される
+        neg, _ = self._legacy("咳はない 嘔吐はしていない")
+        assert not neg, neg
+
+    def test_rabbit_unchi_oraz_ranks_gi_stasis(self):
+        ids, res = self._species("夜からうんちが出ておらず、歯ぎしりをしています", "rabbit")
+        assert "constipation" in ids and "teeth_grinding" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("うっ滞" in n) or ("毛球" in n) for n in names), names
+
+    # ---- 馬: チョーク両所見解決 + 発熱時の跛行フロア抑制 + 呼吸器tier ----
+
+    def test_equine_feed_reflux_resolves_both_findings_and_ranks_choke(self):
+        import api.diagnostic_chat as dc
+
+        ids = set(dc._extract_equine_symptoms("餌を食べたあとに首を伸ばして咳き込み、鼻から餌が出てきます"))
+        assert {"dig_salivation", "resp_bilateral_discharge", "resp_cough"} <= ids, ids
+        res = dc._match_equine_symptoms_to_diseases(list(ids))
+        assert "チョーク" in (res[0].get("name_ja") or ""), [m.get("name_ja") for m in res[:3]]
+
+    def test_equine_febrile_respiratory_triad_not_topped_by_niche_entries(self):
+        import api.diagnostic_chat as dc
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        h = SPECIES_PREVALENCE["horse"]
+        assert h.get("Melioidosis") == "rare"
+        assert h.get("Coccidioidomycosis") == "rare"
+        assert h.get("Equine Herpesvirus Type 4 (EHV-4)") == "common"
+        res = dc._match_equine_symptoms_to_diseases(["gen_fever", "resp_cough", "resp_nasal_discharge"])
+        names = [m.get("name_ja") or "" for m in res[:5]]
+        # アスペルギルス症（rare・肺型は免疫不全馬の日和見）が最上位を独占しない
+        assert "アスペルギルス" not in names[0], names
+        assert any(("インフルエンザ" in n) or ("腺疫" in n) for n in names), names
+
+    def test_equine_febrile_lameness_floor_suppressed(self):
+        # 発熱を伴う跛行は全身性の像 — 蹄膿瘍フロアは発火しない
+        import api.diagnostic_chat as dc
+
+        res = dc._match_equine_symptoms_to_diseases(
+            ["gen_fever", "resp_cough", "resp_nasal_discharge", "limb_lameness_fore"]
+        )
+        assert (res[0].get("name_ja") or "") != "蹄膿瘍", [m.get("name_ja") for m in res[:3]]
+        # 素の跛行では従来どおり膿瘍が最上位グループ
+        bare = dc._match_equine_symptoms_to_diseases(["limb_lameness_fore"])
+        assert any("蹄膿瘍" in (m.get("name_ja") or "") for m in bare[:2]), [m.get("name_ja") for m in bare[:3]]
+
+    def test_equine_anatomical_limb_guarding_hits_hot_hoof_pair(self):
+        import api.diagnostic_chat as dc
+
+        ids = set(dc._extract_equine_symptoms("急に右前肢をかばって歩き、蹄が熱いです"))
+        assert {"limb_lameness_fore", "hoof_heat"} <= ids, ids
+        res = dc._match_equine_symptoms_to_diseases(list(ids))
+        names = [m.get("name_ja") or "" for m in res[:2]]
+        assert any("蹄膿瘍" in n for n in names) and any("蹄葉炎" in n for n in names), names
+
+    # ---- レガシー犬: 歯科・耳漏・PU/PD・排尿困難・GOLPP ----
+
+    def test_dog_one_sided_chewing_ranks_periodontal_not_glaucoma(self):
+        ids, res = self._legacy("ごはんを食べるときに片側だけで噛んでいて、口を触ると嫌がります")
+        assert "difficulty_eating" in ids, ids
+        assert "歯周病" in (res[0].get("name_ja") or ""), [m.get("name_ja") for m in res[:3]]
+
+    def test_dog_oral_mass_complaint_still_ranks_oral_tumor(self):
+        # difficulty_eating の追加が口腔腫瘍クラスタを乱していない
+        ids, res = self._legacy("口の中にできものがある 口臭")
+        assert "oral_mass" in ids, ids
+        assert "口腔内腫瘍" in (res[0].get("name_ja") or ""), [m.get("name_ja") for m in res[:3]]
+
+    def test_dog_brown_ear_discharge_ranks_otitis(self):
+        ids, res = self._legacy("体を振ると耳から茶色い液が飛び散ります")
+        assert "ear_discharge" in ids, ids
+        assert "外耳炎" in (res[0].get("name_ja") or ""), [m.get("name_ja") for m in res[:3]]
+
+    def test_dog_water_bowl_empties_fast_ranks_pupd(self):
+        ids, res = self._legacy("最近水入れの水がすぐなくなります。おしっこの量も増えました")
+        assert {"excessive_thirst", "frequent_urination"} <= ids, ids
+        names = [m.get("name_ja") or "" for m in res[:3]]
+        assert any(("糖尿病" in n) or ("腎臓" in n) for n in names), names
+
+    def test_dog_choking_on_water_hoarse_voice_ranks_larpar(self):
+        ids, res = self._legacy("水を飲むときにむせて、声がガラガラになりました")
+        assert {"coughing", "voice_change"} <= ids, ids
+        assert "喉頭麻痺" in (res[0].get("name_ja") or ""), [m.get("name_ja") for m in res[:3]]
+
+    # ---- ウサギ後肢麻痺フロア ----
+
+    def test_rabbit_hind_limb_paralysis_ranks_paresis_not_nail_overgrowth(self):
+        ids, res = self._species("後ろ足で立てなくなり、足を引きずっています", "rabbit")
+        assert "hind_limb_paralysis" in ids, ids
+        assert "麻痺" in (res[0].get("name_ja") or ""), [m.get("name_ja") for m in res[:3]]
+        # 素の跛行主訴はフロア対象外（爪過成長/ソアホック等の日常ddxを維持）
+        bare, bres = self._species("足を引きずっている", "rabbit")
+        assert "hind_limb_paralysis" not in bare, bare
+
+    # ---- トカゲ・ラバージョーフロア ----
+
+    def test_lizard_rubber_jaw_with_limb_weakness_ranks_mbd_first(self):
+        ids, res = self._species("後ろ足が震えて、あごが柔らかい気がします", "lizard")
+        assert "jaw_softening" in ids, ids
+        assert "代謝性骨疾患" in (res[0].get("name_ja") or ""), [m.get("name_ja") for m in res[:3]]
+
+    # ---- 猫・チンチラ・鳥・フェレット wave-2 ----
+
+    def test_cat_katakana_petapeta_gait_ranks_diabetes(self):
+        ids, res = self._species("後ろ足の爪が引っかかるようにペタペタ歩きます", "cat")
+        assert "plantigrade_stance" in ids, ids
+        assert "糖尿病" in (res[0].get("name_ja") or ""), [m.get("name_ja") for m in res[:3]]
+
+    def test_cat_red_gums_ranks_dental(self):
+        ids, res = self._species("口臭が魚のように生臭くて、歯茎が赤いです", "cat")
+        assert "bleeding_gums" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("歯周" in n) or ("歯肉" in n) for n in names), names
+
+    def test_chinchilla_bright_red_ears_recumbent_ranks_heatstroke(self):
+        ids, res = self._species("急にぐったりして横になったまま、耳が真っ赤です", "chinchilla")
+        assert "red_ears" in ids, ids
+        assert "熱中症" in (res[0].get("name_ja") or ""), [m.get("name_ja") for m in res[:3]]
+
+    def test_ferret_distended_abdomen_dyspnea_ranks_gi_or_effusion(self):
+        ids, res = self._species("お腹が大きく膨れて、呼吸が苦しそうです", "ferret")
+        assert "abdominal_distension" in ids and "respiratory_distress" in ids, ids
+        assert res, res
+
+    def test_bird_dirty_nares_ranks_sinusitis(self):
+        ids, res = self._species("くしゃみをして鼻の穴のまわりが汚れています", "bird")
+        assert "nasal_discharge" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("副鼻腔炎" in n) or ("鼻炎" in n) for n in names), names
+
+    def test_bird_polyuria_around_droppings_ranks_renal_diabetes(self):
+        ids, res = self._species("水をたくさん飲んで便のまわりに水が広がっています", "bird")
+        assert "polyuria" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:5]]
+        assert any(("腎不全" in n) or ("糖尿病" in n) for n in names), names

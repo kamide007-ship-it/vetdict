@@ -656,6 +656,17 @@ SPECIES_PREVALENCE = {
         # 稀な日和見感染、喉嚢真菌症型の主徴は鼻出血であり発熱+鼻汁の
         # ルーチン鑑別ではない（Reed & Bayly 4th ed）
         "Aspergillosis": "rare",
+        # 2026-09 第33弾: 発熱+咳+鼻汁の急性呼吸器三徴で、未tierの小所見セット
+        # エントリが common の伝染性呼吸器疾患（インフルエンザ/EHV/腺疫）を
+        # カバレッジで抑圧していたのを整合（Reed & Bayly 4th ed; AAEP）
+        "Equine Herpesvirus Type 4 (EHV-4)": "common",  # 若齢馬の主要呼吸器病原体
+        "Bacterial Pneumonia": "common",  # 輸送熱・胸膜肺炎は主要疾患
+        "Aspiration Pneumonia": "uncommon",  # チョーク等の続発
+        "Lung Abscess": "uncommon",
+        "Fungal Pneumonia": "rare",  # 免疫不全の日和見感染
+        "Rhodococcus equi (Adult)": "rare",  # 成馬は重度免疫不全例のみ
+        "Melioidosis": "rare",  # 東南アジア限定の輸入感染症
+        "Coccidioidomycosis": "rare",  # Americas endemic（日本には存在しない）
         "Tetanus": "uncommon",  # Vaccination-dependent
         "Cataracts": "uncommon",
         "Anhidrosis": "uncommon",  # Hot/humid climates
@@ -1701,6 +1712,10 @@ SPECIES_PREVALENCE = {
     # LIZARD
     # ==================================================================
     "lizard": {
+        # 2026-09 第33弾: 未tierの4所見エントリが後肢虚弱+ラバージョー主訴で
+        # MBD(very_common)をカバレッジで上回っていた。腎石灰沈着は続発性病態で
+        # 一次診断としては uncommon（Mader 3rd ed）
+        "Nephrocalcinosis": "uncommon",
         # 膀胱結石は膀胱を持つトカゲ（グリーンイグアナ等）で一般的（Mader 3rd ed)
         "Bladder Stones (Urolithiasis)": "common",
         # フトアゴのアタデノウイルスは飼育集団で広く蔓延（Mader 3rd ed）—
