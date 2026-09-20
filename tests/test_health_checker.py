@@ -69,7 +69,7 @@ class TestDiseaseDatabase:
     """Verify disease database structure and consistency."""
 
     def test_disease_count(self):
-        assert len(DISEASES) == 91  # +otitis_media_interna, vestibular_disease (2026-09 round 32)
+        assert len(DISEASES) == 92  # +tooth_root_abscess (2026-09 round 34)
 
     def test_all_diseases_have_required_fields(self):
         for d in DISEASES:

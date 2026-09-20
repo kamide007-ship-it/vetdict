@@ -1203,6 +1203,24 @@ function ensureEmergencySearchData(){
   return _omniEmergencyPromise;
 }
 
+/* Omnibox → clinical-calculator routing: keyword regex (tested against the
+   NFKC-lowered, kana-folded query) → calculator tab id. First match wins. */
+const _CALC_SEARCH_TABS=[
+  [/チョコ|テオブロミン|chocolate|theobromine/,"choco"],
+  [/輸液|点滴|fluid/,"fluid"],
+  [/(^|[^a-z])cri([^a-z]|$)|シリンジポンプ|持続投与/,"cri"],
+  [/カロリー|給餌量|(^|[^a-z])(rer|mer)([^a-z]|$)/,"energy"],
+  [/輸血|transfusion/,"transfusion"],
+  [/体表面積|(^|[^a-z])bsa([^a-z]|$)/,"bsa"],
+  [/(^|[^a-z])iris([^a-z]|$)|腎ステージ|ckdステージ|(^|[^a-z])sdma([^a-z]|$)/,"iris"],
+  [/(^|[^a-z])mgcs([^a-z]|$)|昏睡スケール|グラスゴー|glasgow/,"mgcs"],
+  [/換算|(^|[^a-z])mmol|conversion/,"conv"],
+  [/計算|用量|投与量|calculator/,"dose"],
+];
+function _calcTabLabel(tabId){
+  const ja=currentLang==="ja";
+  return({dose:ja?"用量":"Dose",cri:"CRI",fluid:ja?"輸液":"Fluids",energy:ja?"カロリー":"Calories",choco:ja?"チョコ中毒":"Chocolate",transfusion:ja?"輸血":"Transfusion",bsa:"BSA",iris:"IRIS",mgcs:"MGCS",conv:ja?"単位換算":"Convert"})[tabId]||tabId;
+}
 function setupGlobalSearch(){
   const input=document.getElementById("globalSearch");
   const results=document.getElementById("globalSearchResults");
@@ -1248,6 +1266,15 @@ function setupGlobalSearch(){
         const lbl=currentLang==="ja"?`症状「${nm}」で鑑別チェック`:`Differential check for symptom “${nm}”`;
         rows.push(`<div class="search-result-item search-action-item" role="option" data-action="checker" data-symptom="${escapeHtml(s.id)}" data-q="${escapeHtml(rawQ)}">\u{1FA7A} <strong>${escapeHtml(lbl)}</strong>${_speciesTag(currentSpecies)}</div>`);
       });
+    }
+    /* Calculator intent → the clinical calculator suite was unreachable from
+       the omnibox (typing 輸液 / CRI / チョコ中毒 dead-ended). One row, first
+       matching tab; nq is NFKC-lower + kana-folded so hiragana works too. */
+    const calcHit=_CALC_SEARCH_TABS.find(([re])=>re.test(nq));
+    if(calcHit){
+      const tabLbl=(_calcTabLabel(calcHit[1])||"").trim();
+      const calcLbl=currentLang==="ja"?`臨床計算機（${tabLbl}）を開く`:`Open clinical calculator (${tabLbl})`;
+      rows.push(`<div class="search-result-item search-action-item" role="option" data-action="calculator" data-calctab="${escapeHtml(calcHit[1])}" data-q="${escapeHtml(rawQ)}">\u{1F9EE} <strong>${escapeHtml(calcLbl)}</strong></div>`);
     }
     const anesLbl=currentLang==="ja"?`麻酔プロトコルを「${rawQ}」で検索`:`Search anesthesia protocols for “${rawQ}”`;
     rows.push(`<div class="search-result-item search-action-item" role="option" data-action="anesthesia" data-q="${escapeHtml(rawQ)}">\u{1F489} <strong>${escapeHtml(anesLbl)}</strong></div>`);
@@ -1372,6 +1399,9 @@ function setupGlobalSearch(){
         if(p)scrollToAnchor(p);
       }else if(item.dataset.action==="checker"){
         _runCheckerWithSymptoms(currentSpecies||"dog",[item.dataset.symptom],"checker_from_search");
+      }else if(item.dataset.action==="calculator"){
+        trackEvent("calculator_from_search",{query:rawQ,tab:item.dataset.calctab||""});
+        openClinicalCalculators({tab:item.dataset.calctab||"dose"});
       }
       _closeBox();return;
     }
@@ -1664,10 +1694,10 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:580,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:557,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:582,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:559,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:261,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:225,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
@@ -1675,21 +1705,21 @@ function setDefaultStats(){
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:223,drugs:64,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
     {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:76,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
     {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:154,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:485,drugs:243,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:411,drugs:243,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:257,drugs:243,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:260,drugs:102,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:249,drugs:109,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:218,drugs:108,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:214,drugs:104,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:485,drugs:244,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:411,drugs:244,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:257,drugs:244,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:260,drugs:103,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:249,drugs:110,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:218,drugs:109,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:214,drugs:105,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:251,drugs:19,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
-    {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:28,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
+    {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:29,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:3,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
     diseases:6455,
     species:21,
-    drugs:639,
+    drugs:642,
     symptoms:88,
     protocols:188
   };
@@ -2065,10 +2095,10 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
-    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ"],
-    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く"],
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ","顔の片側が腫れて目の下から膿が出る"],
+    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く","耳の付け根を掻いて黒いカスが出る"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる"],
-    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている","おしっこが白っぽくてドロドロしている"],
+    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている","おしっこが白っぽくてドロドロしている","お尻の周りに軟らかい便がつく"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている","目が濡れて顔をこする","耳が垂れて耳から臭い"],
     hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない","腰に黒いイボのようなもの"],
     guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ","関節が腫れる"],

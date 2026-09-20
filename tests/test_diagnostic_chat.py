@@ -1621,6 +1621,7 @@ class TestQuickTapPhraseExtraction:
             "川や水たまりの水を飲んだ後に発熱",
             "自分のしっぽを追いかけてかじる",
             "水を飲むとむせて声がガラガラ",
+            "顔の片側が腫れて目の下から膿が出る",
         ],
         "cat": [
             "食べない",
@@ -1638,6 +1639,7 @@ class TestQuickTapPhraseExtraction:
             "お尻を舐めてばかりいる",
             "水をよく飲みトイレの砂の塊が大きい",
             "かかとをつけてペタペタ歩く",
+            "耳の付け根を掻いて黒いカスが出る",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -1665,6 +1667,7 @@ class TestQuickTapPhraseExtraction:
             "あごの下が腫れている",
             "便が毛でつながっている",
             "おしっこが白っぽくてドロドロしている",
+            "お尻の周りに軟らかい便がつく",
         ],
         "chinchilla": [
             "よだれが出る",
@@ -5976,3 +5979,98 @@ class TestChatClinicalAccuracyAuditRound33:
         assert "polyuria" in ids, ids
         names = [r.get("name_ja") or "" for r in res[:5]]
         assert any(("腎不全" in n) or ("糖尿病" in n) for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound34:
+    """2026-09 第52弾（精度監査 第34弾）: 丁寧語「ほとんど出ていません」・ず形
+    「力が入らず」・レガシー犬 歯根膿瘍（眼下膿瘍）新設・盲腸便付着・甲羅腐敗
+    _SYNブリッジ・SGストレス症候群の常同行動・白目濁り/耳基部/尾剥脱の変化形。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    def test_cat_blocked_bladder_hotondo_polite_form(self):
+        ids, res = self._species("何度もトイレに行くのにおしっこがほとんど出ていません", "cat")
+        assert "decreased_urination" in ids, ids
+        assert "尿道閉塞" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+    def test_ferret_insulinoma_zu_form_hind_weakness(self):
+        ids, res = self._species("後ろ足に力が入らず、口を前足で掻いてよだれを垂らしています", "ferret")
+        assert "hind_limb_weakness" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:2]]
+        assert any(("インスリノーマ" in n) or ("低血糖" in n) for n in names), names
+
+    def test_dog_carnassial_abscess_ranks_first(self):
+        ids, res = self._legacy("顔の片側が腫れて、目の下から膿が出てきました")
+        assert {"facial_swelling", "eye_discharge"} <= ids, ids
+        assert "歯根膿瘍" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+    def test_dog_conjunctivitis_not_hijacked_by_tooth_abscess(self):
+        # Guard: pure ocular complaint stays conjunctivitis-first (round 33)
+        ids, res = self._legacy("目やにがひどくて目が開かない")
+        assert "結膜炎" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+    def test_cat_ear_base_scratching_black_debris(self):
+        ids, res = self._species("耳の付け根をずっと掻いていて、黒いカスが出ます", "cat")
+        assert "ear_discharge" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:2]]
+        assert any(("耳ダニ" in n) or ("外耳炎" in n) for n in names), names
+
+    def test_rabbit_uneaten_cecotropes_sticky_bottom(self):
+        ids, res = self._species("お尻の周りに軟らかい便がついて、正常な丸い便も出ています", "rabbit")
+        assert "abnormal_cecotropes" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any("盲腸" in n for n in names), names
+
+    def test_tortoise_shell_wound_ranks_flagship_shell_rot(self):
+        ids, res = self._species("甲羅に傷があって、臭い液が出ています", "tortoise")
+        assert {"shell_lesions", "foul_odor"} <= ids, ids
+        assert "甲羅腐敗" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+    def test_sugar_glider_stereotypy_surfaces_stress_syndrome(self):
+        ids, res = self._species("夜中にぐるぐる回る動きを繰り返しています", "sugar_glider")
+        assert "circling" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:5]]
+        assert any("ストレス" in n for n in names), names
+
+    def test_sugar_glider_stress_syndrome_pathophysiology_is_behavioral(self):
+        # The entry carried a nutritional-disorder template pathophysiology —
+        # clinically wrong for a behavioural syndrome; must stay behavioural.
+        from api.species import sugar_glider_diseases as sg
+
+        entry = next(
+            d for d in sg.DISEASES if (d.get("name") if isinstance(d, dict) else "") == "Depression / Stress Syndrome"
+        )
+        assert "栄養障害" not in (entry.get("pathophysiology_ja") or "")
+        assert "HPA" in (entry.get("pathophysiology_ja") or "")
+        assert "circling" in entry.get("symptoms")
+
+    def test_degu_scleral_area_cloudiness_reaches_cataract(self):
+        ids, res = self._species("白目のあたりが白く濁ってきました", "degu")
+        assert ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any("白内障" in n for n in names), names
+
+    def test_degu_tail_slip_shimaimashita_form(self):
+        ids, res = self._species("尻尾の皮がむけてしまいました", "degu")
+        assert "tail_injury" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:2]]
+        assert any(("尾" in n) or ("テール" in n) for n in names), names
+
+    def test_snake_spectacle_positional_variant(self):
+        ids, res = self._species("脱皮した皮が目のところだけ残っています", "snake")
+        assert "retained_spectacle" in ids, ids
+        assert "眼鏡鱗" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]

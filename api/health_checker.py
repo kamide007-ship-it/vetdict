@@ -2273,6 +2273,30 @@ DISEASES = [
             "miniature_schnauzer": 1.5,
         },
     },
+    # ---- 12c2. Tooth Root (Carnassial) Abscess ----
+    # The classic cause of an acute suborbital swelling with a draining
+    # purulent tract below the eye in dogs (maxillary 4th premolar root
+    # abscess — Niemiec, BSAVA Dental Manual). The legacy DB had no entry, so
+    # the「顔の片側が腫れて目の下から膿」complaint ranked eyelid diseases and
+    # urticaria instead of the dental emergency it almost always is.
+    {
+        "id": "tooth_root_abscess",
+        "prevalence_tier": "common",
+        "name_ja": "歯根膿瘍（眼下膿瘍）",
+        "name_en": "Tooth Abscess",
+        "description_ja": "上顎第4前臼歯（裂肉歯）などの歯根の感染により、目の下（眼窩下）が急に腫れ、進行すると皮膚が破れて膿が出る疾患。硬いものを噛む習慣や歯の破折・重度歯周病が背景にあることが多く、確定には歯科X線が必要です。治療は原因歯の抜歯（または歯内治療）と抗菌薬で、切開排膿だけでは必ず再発します。",
+        "description_en": "Infection of a tooth root — classically the maxillary 4th premolar (carnassial) — producing an acute suborbital swelling that may rupture and drain pus below the eye. Tooth fracture from chewing hard objects and advanced periodontal disease are the usual causes; dental radiography confirms. Treatment is extraction (or root canal) of the affected tooth plus antibiotics — lancing alone always recurs.",
+        "symptoms": [
+            "facial_swelling",
+            "eye_discharge",
+            "bad_breath",
+            "difficulty_eating",
+            "loss_of_appetite",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["oral_exam", "dental_radiography"],
+        "breed_risks": {},
+    },
     # ---- 12d. Anal Sac Disease ----
     # One of the most common canine presentations in general practice (annual
     # prevalence ~4.4%, O'Neill 2021 VetCompass), yet the legacy database had
@@ -4664,6 +4688,10 @@ _PATHOGNOMONIC_CLUSTERS = [
     # Acute allergic reaction: hives + facial swelling is the definitional
     # post-vaccine/insect-sting pair (Shmuel & Cortes, JVECC 2013).
     (frozenset({"hives", "facial_swelling"}), "acute_allergic_reaction", 1.8),
+    # Carnassial abscess: unilateral facial/suborbital swelling with a
+    # purulent discharge below the eye is a tooth-root abscess until proven
+    # otherwise in dogs (Niemiec, BSAVA Dental Manual).
+    (frozenset({"facial_swelling", "eye_discharge"}), "tooth_root_abscess", 1.5),
     # GDV: bloating + excessive drooling + rapid breathing
     (frozenset({"bloating", "excessive_drooling", "rapid_breathing"}), "gdv_bloat", 2.0),
     (frozenset({"bloating", "excessive_drooling", "pale_gums"}), "gdv_bloat", 2.0),

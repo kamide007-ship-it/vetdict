@@ -88,6 +88,7 @@ from api.drug_batch_61 import DRUGS_BATCH_61
 from api.drug_batch_62 import DRUGS_BATCH_62
 from api.drug_batch_63 import DRUGS_BATCH_63
 from api.drug_batch_64 import DRUGS_BATCH_64
+from api.drug_batch_65 import DRUGS_BATCH_65
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10916,6 +10917,17 @@ for _drug64 in DRUGS_BATCH_64:
     if _drug64["id"] not in _drug_index:
         DRUGS.append(_drug64)
         _drug_index[_drug64["id"]] = _drug64
+
+# Batch 65: 2026-09 監査（第32回スイープ）の referenced-but-absent 補完
+# （次亜塩素酸ナトリウム — 「次亜塩素酸1:32」等 1,200+参照で最多の未解決だった環境消毒薬。
+#  希釈表・接触時間・有機物失活・アンモニア混合禁止・無効病原体（ティザー芽胞/
+#  クリプトオーシスト）のクラス定義的事実を文書化。
+#  フェリウェイ(F3)/アダプティル(DAP) — FIC MEMOプロトコル・犬行動疾患群が名指しする
+#  フェロモン製剤2種。エビデンスの限定性（Frank 2010）を正直に併記）
+for _drug65 in DRUGS_BATCH_65:
+    if _drug65["id"] not in _drug_index:
+        DRUGS.append(_drug65)
+        _drug_index[_drug65["id"]] = _drug65
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

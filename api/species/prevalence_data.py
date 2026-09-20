@@ -2009,6 +2009,12 @@ SPECIES_PREVALENCE = {
         "Vitamin A Deficiency (Hypovitaminosis A)": "very_common",
         "Respiratory Infection": "very_common",
         "Coccidia": "very_common",
+        # 病原体名付き甲羅感染の変異エントリ（Beneckea=古典的潰瘍性甲羅疾患起因菌、
+        # Geotrichum=真菌性甲羅疾患）。未tierの小所見セットが甲羅損傷主訴で
+        # フラグシップ甲羅腐敗症(very_common)を抑圧していた
+        "Pseudomonas Infection": "uncommon",
+        "Beneckea Infection": "uncommon",
+        "Geotrichum Infection": "uncommon",
         "Metabolic Bone Disease (MBD)": "very_common",
         "Vitamin A Deficiency": "very_common",
         "Shell Rot (Ulcerative Shell Disease)": "very_common",

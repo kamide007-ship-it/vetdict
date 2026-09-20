@@ -102,6 +102,16 @@ _SYN: dict[str, list[str]] = {
         "shell_softening",
     ],
     "bone_deformity": ["soft_bones", "limb_deformity", "shell_deformity", "fractures", "swollen_limbs"],
+    # 甲羅の「傷」の飼い主報告 — フラグシップ甲羅腐敗症の所見表記
+    # （陥凹・変色・軟化斑）と SCUD の潰瘍へブリッジ（Mader 3rd ed:
+    # 飼い主は pitting/discoloration/ulceration を「傷」と区別しない）
+    "shell_lesions": [
+        "shell_pitting",
+        "shell_discoloration",
+        "shell_soft_spots",
+        "shell_rot",
+        "skin_ulceration",
+    ],
     "shell_softening": ["soft_shell", "soft_bones", "shell_deformity"],
     "soft_shell": ["shell_softening", "soft_bones", "shell_deformity"],
     "shell_deformity": ["bone_deformity", "soft_shell", "shell_softening"],

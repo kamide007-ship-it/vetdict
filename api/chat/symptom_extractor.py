@@ -442,6 +442,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "visible_mites": ["visible_parasites", "external_parasites", "mites", "fleas"],
     "sitting_on_cage_floor": ["fluffed_feathers", "lethargy"],
     "retained_spectacle": ["dysecdysis", "cloudy_eyes", "eye_opacity"],
+    # 2026-09 Round 34: ウサギ盲腸便付着（非保有種は軟便/下痢へ安全フォールバック）
+    "abnormal_cecotropes": ["cecotrope_impaction", "soft_stool", "diarrhea"],
     # 2026-08 Round 13: フェレット低血糖の口掻き・チンチラ熱中症の耳充血・
     # 乳腺腫大の種別ID表記ゆれ（cat=mammary_masses）
     "pawing_at_mouth": ["pawing_at_face", "drooling", "difficulty_eating"],
