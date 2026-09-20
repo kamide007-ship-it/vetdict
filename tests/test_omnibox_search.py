@@ -137,3 +137,42 @@ def test_omnibox_placeholder_and_styles():
     assert 'globalSearchPh:"疾患・薬品・症状・救急を検索' in APP_JS
     assert ".search-action-item{" in CSS
     assert ".search-action-head{" in CSS
+
+
+def test_omnibox_calculator_action_routes_to_matching_tab():
+    """2026-09 第52弾: 計算機がオムニボックスから到達不能だった（「輸液」「CRI」
+    「チョコ中毒」と検索しても計算機への動線ゼロ）。キーワード→タブ解決の
+    アクション行と、クリック→openClinicalCalculators のルーティングを固定する。"""
+    block = _omnibox_block()
+    # Action row emitted with the resolved tab id
+    assert 'data-action="calculator"' in block
+    assert "_CALC_SEARCH_TABS.find" in block
+    # Click routing opens the calculator on that tab (never a dead default)
+    assert 'item.dataset.action==="calculator"' in block
+    assert 'openClinicalCalculators({tab:item.dataset.calctab||"dose"})' in block
+    assert '"calculator_from_search"' in block
+    # Keyword table lives at top level and maps the headline intents
+    assert "_CALC_SEARCH_TABS=[" in APP_JS
+    import re
+
+    table = APP_JS[APP_JS.index("_CALC_SEARCH_TABS=[") :]
+    table = table[: table.index("];")]
+    for kw, tab in (
+        ("チョコ", "choco"),
+        ("輸液", "fluid"),
+        ("cri", "cri"),
+        ("カロリー", "energy"),
+        ("輸血", "transfusion"),
+        ("iris", "iris"),
+        ("mgcs", "mgcs"),
+        ("換算", "conv"),
+        ("計算", "dose"),
+    ):
+        assert kw in table and f'"{tab}"' in table, (kw, tab)
+    # Every routed tab id must exist in the calculator TABS definition
+    tabs_src = APP_JS[APP_JS.index("const TABS=[") :]
+    tabs_src = tabs_src[: tabs_src.index("];")]
+    routed = re.findall(r'/,"([a-z]+)"\]', table)
+    assert len(routed) >= 9, routed  # the table is not vacuously empty
+    for tab in routed:
+        assert f'id:"{tab}"' in tabs_src, tab

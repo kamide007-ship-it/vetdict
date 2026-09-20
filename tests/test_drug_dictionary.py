@@ -4021,3 +4021,77 @@ class TestBatch64EdrophoniumRiboflavin:
         assert resolve_drug_reference("エドロフォニウム") == "edrophonium"
         assert resolve_drug_reference("リボフラビン") == "riboflavin_b2"
         assert resolve_drug_reference("ヒドロキシ尿素") == "hydroxyurea"
+
+
+class TestBatch65HypochloriteAndPheromones:
+    """2026-09 第52弾: referenced-but-absent 3剤（次亜塩素酸=1,200+参照で最多の
+    未解決・フェリウェイ=FIC MEMOが名指し・アダプティル=犬行動疾患群が名指し）。"""
+
+    def _drug(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        for d in DRUGS:
+            if d["id"] == drug_id:
+                return d
+        raise AssertionError(f"{drug_id} not found")
+
+    def test_batch65_agents_present_with_bilingual_dosing(self):
+        for drug_id, sp in (
+            ("sodium_hypochlorite", "dog"),
+            ("feliway_f3", "cat"),
+            ("adaptil_dap", "dog"),
+        ):
+            d = self._drug(drug_id)
+            row = d["species_info"][sp]
+            assert row.get("dosage") and row.get("dosage_ja"), drug_id
+            assert d.get("mechanism_ja") and d.get("contraindications_ja"), drug_id
+
+    def test_hypochlorite_class_defining_safety_facts(self):
+        d = self._drug("sodium_hypochlorite")
+        # 1:32 dilution + 10-min contact is the parvo standard (Greene 4th ed)
+        assert "1:32" in d["species_info"]["dog"]["dosage_ja"]
+        assert "10分" in d["species_info"]["dog"]["dosage_ja"]
+        # Never-mix-with-ammonia (chlorine gas) is a major interaction
+        ints = {i["drug"]: i for i in d["drug_interactions"]}
+        ammonia = next(v for k, v in ints.items() if "mmonia" in k)
+        assert ammonia["severity"] == "major"
+        # Pathogens it does NOT kill are documented (Tyzzer spores, crypto oocysts)
+        assert "ティザー" in d["contraindications_ja"]
+        assert "クリプトスポリジウム" in d["contraindications_ja"] or "オーシスト" in d["contraindications_ja"]
+        # Fish: equipment only, never into stocked water
+        assert d["species_info"]["fish"]["safe"] is False
+        # Caustic ingestion: emesis is contraindicated
+        assert "催吐禁忌" in d["contraindications_ja"]
+
+    def test_pheromones_are_adjuncts_with_honest_evidence(self):
+        fel = self._drug("feliway_f3")
+        dap = self._drug("adaptil_dap")
+        # Honest evidence framing (Frank 2010 systematic review) on both
+        assert "Frank" in " ".join(fel.get("references", []))
+        assert "Frank" in " ".join(dap.get("references", []))
+        # Never sole therapy: MEMO adjunct positioning for FIC
+        assert "MEMO" in fel["species_info"]["cat"]["dosage_ja"]
+        assert "単独治療" in fel["species_info"]["cat"]["notes_ja"]
+        # Species-specific signal documented (no cross-species use implied)
+        assert "犬" in fel["contraindications_ja"]
+        assert "猫" in dap["species_info"]["dog"]["notes_ja"]
+
+    def test_batch65_resolves_in_text_matcher_and_checker(self):
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        cases = {
+            "ケージ消毒（次亜塩素酸1:32）で環境対策": "sodium_hypochlorite",
+            "フェリウェイ（合成フェイシャルフェロモン）を設置": "feliway_f3",
+            "Adaptil（DAP犬用フェロモン）カラー": "adaptil_dap",
+            "アダプティルのディフューザー": "adaptil_dap",
+        }
+        for text, expect in cases.items():
+            ids = [h if isinstance(h, str) else h.get("id") for h in find_drugs_in_text(text)]
+            assert expect in ids, (text, ids)
+        for q, expect in (
+            ("フェリウェイ", "feliway_f3"),
+            ("ふぇりうぇい", "feliway_f3"),
+            ("アダプティル", "adaptil_dap"),
+            ("次亜塩素酸", "sodium_hypochlorite"),
+        ):
+            assert resolve_drug_reference(q) == expect, q
