@@ -4688,6 +4688,11 @@ _PATHOGNOMONIC_CLUSTERS = [
     # Acute allergic reaction: hives + facial swelling is the definitional
     # post-vaccine/insect-sting pair (Shmuel & Cortes, JVECC 2013).
     (frozenset({"hives", "facial_swelling"}), "acute_allergic_reaction", 1.8),
+    # Owners describe wheals as ブツブツ (extracted as skin_rashes): acute
+    # facial swelling + sudden rash eruption is still the allergic pair —
+    # demodicosis/pyoderma do not present with acute facial swelling
+    # (Shmuel & Cortes, JVECC 2013). 2026-09 第35回監査で追加。
+    (frozenset({"facial_swelling", "skin_rashes"}), "acute_allergic_reaction", 1.5),
     # Carnassial abscess: unilateral facial/suborbital swelling with a
     # purulent discharge below the eye is a tooth-root abscess until proven
     # otherwise in dogs (Niemiec, BSAVA Dental Manual).

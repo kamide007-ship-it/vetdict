@@ -1892,6 +1892,8 @@ SYMPTOM_ALIASES = {
     "湿疹": "skin_rashes",
     "皮膚にブツブツ": "skin_rashes",
     "ブツブツができ": "skin_rashes",
+    "ブツブツが出": "skin_rashes",
+    "ぶつぶつが出": "skin_rashes",
     # --- 2026-08 稀少疾患乗っ取り監査 ---
     # 低体温・擬似冬眠（ハムスター/ハリネズミの torpor 主訴が抽出ゼロだった）。
     # cold_body 等は該当種の語彙にのみ存在 — 他種では抽出段階で安全に落ちる。
@@ -1925,6 +1927,10 @@ SYMPTOM_ALIASES = {
     "スキップするように歩く": "lameness_or_limping",
     "けんけんで歩く": "lameness_or_limping",
     "けんけん歩き": "lameness_or_limping",
+    # カタカナ表記＋「しながら」形（ケンケンしながら歩きます — 2026-09第35回監査）
+    "ケンケンしながら": "lameness_or_limping",
+    "ケンケンで歩く": "lameness_or_limping",
+    "ケンケン歩き": "lameness_or_limping",
     "後ろ足を上げて歩く": "lameness_or_limping",
     # 歯根膿瘍（眼窩下瘻管）: 顔面腫脹＋目の下からの排膿
     "顔が腫れて": "facial_swelling",

@@ -4095,3 +4095,107 @@ class TestBatch65HypochloriteAndPheromones:
             ("次亜塩素酸", "sodium_hypochlorite"),
         ):
             assert resolve_drug_reference(q) == expect, q
+
+
+class TestBatch66OncologyAndZenreliaFix:
+    """2026-09 第53弾: 実在しない薬品エントリ「Epofolaner (Zenrelia)」の是正
+    （Zenrelia の実体はイルノシチニブ＝JAK阻害薬であり外部寄生虫薬ではない）と、
+    エビデンスベースの新規腫瘍薬2剤（ラバクフォサジン/チギラノールチグラート）。"""
+
+    def _drug(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        for d in DRUGS:
+            if d["id"] == drug_id:
+                return d
+        raise AssertionError(f"{drug_id} not found")
+
+    def test_fabricated_epofolaner_replaced_by_real_ilunocitinib(self):
+        from api.drug_dictionary import _DRUG_ALIAS_TO_ID, DRUGS
+
+        # 実在しない「epofolaner」は薬品として存在してはならない
+        assert not any(d["id"] == "epofolaner" for d in DRUGS)
+        # 旧 id は正しいモノグラフに解決（ブックマーク・URL維持）
+        assert _DRUG_ALIAS_TO_ID.get("epofolaner") == "ilunocitinib"
+        d = self._drug("ilunocitinib")
+        # JAK阻害薬（皮膚科）であり、外部寄生虫薬カテゴリの誤帰属が再発していない
+        assert d["category"] != "antiparasitic"
+        assert "JAK" in d["mechanism"]
+        assert "イソオキサゾリン" not in (d.get("mechanism_ja") or "")
+        # 用量とワクチン枠組み警告（ラベル定義的安全事実）
+        dog = d["species_info"]["dog"]
+        assert "0.6-0.8 mg/kg" in dog["dose"]
+        assert "ワクチン" in dog["notes_ja"] and "枠組み警告" in dog["notes_ja"]
+        ints = {i["drug"]: i for i in d["drug_interactions"]}
+        vac = next(v for k, v in ints.items() if "accine" in k)
+        assert vac["severity"] == "major"
+
+    def test_rabacfosadine_present_with_label_defining_safety(self):
+        d = self._drug("rabacfosadine")
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is True
+        # ラベル用量: 1 mg/kg 30分点滴 q21日 ×5
+        assert "1 mg/kg" in dog["dosage"] and "30" in dog["dosage"]
+        assert "30分" in dog["dosage_ja"]
+        # ウエスティ禁忌（致死的肺線維症の品種素因）は contraindications と notes の両方
+        assert "ウエスト・ハイランド" in d["contraindications_ja"]
+        assert "肺線維症" in dog["notes_ja"]
+        # 猫は使用しない（犬専用ラベル）
+        assert d["species_info"]["cat"]["safe"] is False
+
+    def test_tigilanol_tiglate_present_with_mandatory_concomitants(self):
+        d = self._drug("tigilanol_tiglate")
+        dog = d["species_info"]["dog"]
+        # ラベル用量: 0.5 mL/cm³、上限 0.25 mL/kg・総量5 mL、腫瘍 ≤10 cm³
+        assert "0.5 mL" in dog["dosage"] and "0.25 mL/kg" in dog["dosage"]
+        assert "10 cm³" in dog["dosage_ja"] and "5 mL" in dog["dosage_ja"]
+        # 必須併用プロトコル（ステロイド＋H1＋H2）が notes と contraindications に明記
+        assert "必須" in dog["notes_ja"] and "ファモチジン" in dog["notes_ja"]
+        assert "H1" in d["contraindications"] and "H2" in d["contraindications"]
+        # 予定された創形成（作用機序）の飼い主カウンセリング
+        assert "脱落" in dog["notes_ja"]
+        assert d["species_info"]["cat"]["safe"] is False
+
+    def test_new_agents_resolve_in_text_matcher_and_checker(self):
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        for phrase, drug_id in (
+            ("ラバクフォサジン（タノベア — Tanovea、1 mg/kg 30分点滴 q3週）", "rabacfosadine"),
+            ("チギラノールチグラート（ステルフォンタ）腫瘍内注射", "tigilanol_tiglate"),
+            ("イルノシチニブ（ゼンレリア）0.6-0.8 mg/kg PO q24h", "ilunocitinib"),
+            ("Stelfonta single intratumoral injection", "tigilanol_tiglate"),
+        ):
+            ids = [d["id"] for d in find_drugs_in_text(phrase)]
+            assert drug_id in ids, (phrase, ids)
+        for token, drug_id in (
+            ("タノベア", "rabacfosadine"),
+            ("ステルフォンタ", "tigilanol_tiglate"),
+            ("ゼンレリア", "ilunocitinib"),
+        ):
+            hit = resolve_drug_reference(token)
+            got = hit.get("id") if isinstance(hit, dict) else hit
+            assert got == drug_id, (token, hit)
+
+    def test_disease_content_references_new_agents(self):
+        # 鑑別診断・チャット候補カードの関連薬品チップ（同一テキストマッチャー）
+        # が疾患→薬品の動線を張ることを、配信テキスト側から検証
+        import json
+
+        from api.drug_dictionary import find_drugs_in_text
+
+        with open("diseases_all_species.json", encoding="utf-8") as fh:
+            data = json.load(fh)
+        by_name = {}
+        for d in data:
+            if d.get("species") == "Dog":
+                by_name.setdefault(d.get("name"), d)
+        mct = by_name["Mast Cell Tumor"]
+        atopy = by_name["Canine Atopic Dermatitis"]
+        assert "チギラノール" in mct["treatment_ja"]
+        assert "tigilanol_tiglate" in [x["id"] for x in find_drugs_in_text(mct["treatment_ja"])]
+        assert "イルノシチニブ" in atopy["treatment_ja"]
+        assert "ilunocitinib" in [x["id"] for x in find_drugs_in_text(atopy["treatment_ja"])]
+        # リンパ腫レスキューの garbled「（L-SARN）」は正しいタノベア注記に是正済み
+        joined = json.dumps(data, ensure_ascii=False)
+        assert "L-SARN" not in joined
+        assert "ラバクフォサジン（タノベア" in joined

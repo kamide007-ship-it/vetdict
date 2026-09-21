@@ -1694,8 +1694,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:582,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:559,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:584,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:561,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1719,7 +1719,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6455,
     species:21,
-    drugs:642,
+    drugs:644,
     symptoms:88,
     protocols:188
   };
@@ -4268,6 +4268,10 @@ const DISEASE_CALC_MAP=[
    {ja:"🧮 チョコレート中毒計算機でリスク評価",en:"🧮 Estimate risk with the chocolate calculator"}],
   [/慢性腎臓病|chronic kidney disease|\bCKD\b/i,"iris",["dog","cat"],
    {ja:"🧮 IRIS CKDステージングを開く",en:"🧮 Open IRIS CKD staging"}],
+  // 化学療法が mg/m² 換算の腫瘍群（CHOP・ビンブラスチン・ドキソルビシン・カルボプラチン等）
+  // → BSA計算機。用量計算がそのまま次のアクションになる（2026-09 第53弾）
+  [/リンパ腫|lymphoma|肥満細胞腫|mast cell tumou?r|骨肉腫|osteosarcoma|血管肉腫|hemangiosarcoma/i,"bsa",["dog","cat"],
+   {ja:"🧮 BSA（体表面積）計算機を開く — mg/m²換算",en:"🧮 Open BSA calculator for mg/m² chemo dosing"}],
 ];
 function _calcTabForDisease(d,sp){
   const name=((d.name||d.name_en||"")+" "+(d.name_ja||""));
