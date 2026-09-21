@@ -6074,3 +6074,82 @@ class TestChatClinicalAccuracyAuditRound34:
         ids, res = self._species("脱皮した皮が目のところだけ残っています", "snake")
         assert "retained_spectacle" in ids, ids
         assert "眼鏡鱗" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+
+class TestChatClinicalAccuracyAuditRound35:
+    """2026-09 第53弾（精度監査 第35弾）: 助詞直後の強調・時間副詞（急に/突然/
+    パンパンに/自分で）の系統的除去 — 「後ろ足が急に動かなくなり」「毛を自分で
+    かじって」等の副詞挿入形が既存キュレートキーに不一致で抽出ゼロになる故障
+    クラスへの根本対応。＋治りません丁寧形・ケンケン片仮名形・顔面腫脹×発疹の
+    アレルギークラスタ。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    def test_adverb_strip_normalisation_unit(self):
+        from api.chat.symptom_extractor import normalize_chat_text
+
+        # 助詞直後の 急に/突然/パンパンに/自分で は除去される
+        assert "後ろ足が動かなくなり" in normalize_chat_text("後ろ足が急に動かなくなり")
+        assert "お腹が膨れて" in normalize_chat_text("お腹がパンパンに膨れて")
+        assert "毛をかじって" in normalize_chat_text("毛を自分でかじって")
+        assert "足を痛がって" in normalize_chat_text("足を突然痛がって")
+        # 助詞を伴わない出現は不変（「急に倒れて」= collapse キーの一部）
+        assert "急に倒れて" in normalize_chat_text("散歩中に急に倒れて意識を失った")
+
+    def test_cat_ate_adverb_inserted_form_ranks_first(self):
+        ids, res = self._species("後ろ足が急に動かなくなり大声で鳴いています", "cat")
+        assert "hind_limb_paralysis" in ids, ids
+        assert "血栓塞栓" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+    def test_dog_acute_lameness_adverb_and_katakana_kenken(self):
+        ids, res = self._legacy("後ろ足を急に痛がってケンケンしながら歩きます")
+        assert "limping" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("膝蓋骨" in n) or ("十字" in n) or ("形成不全" in n) for n in names), names
+
+    def test_dog_facial_swelling_with_rash_is_allergic_first(self):
+        # ブツブツ（膨疹の飼い主表現）+ 顔面腫脹 = 急性アレルギー反応のペア。
+        # 副詞挿入形「顔がパンパンに腫れて」も正規化で抽出される
+        ids, res = self._legacy("顔がパンパンに腫れてブツブツが出ています")
+        assert {"facial_swelling", "skin_rashes"} <= ids, ids
+        names = [r.get("name_ja") or "" for r in res[:2]]
+        assert any("蕁麻疹" in n for n in names), names
+
+    def test_dog_pure_rash_complaint_keeps_derm_ddx_first(self):
+        # ガード: 顔面腫脹を伴わない掻痒・発疹はアレルギー反応に乗っ取られない
+        ids, res = self._legacy("皮膚が赤くて痒がっている 毛が抜ける")
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert not any("蕁麻疹" in n for n in names), names
+        assert any(("毛包虫" in n) or ("膿皮" in n) or ("アトピー" in n) for n in names), names
+
+    def test_chinchilla_fur_chewing_jibunde_word_order(self):
+        ids, res = self._species("毛を自分でかじって短くなっています", "chinchilla")
+        assert "fur_chewing" in ids, ids
+        assert "毛噛み" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+    def test_parrot_feather_plucking_jibunde_still_extracts(self):
+        # ガード: 「羽を自分で抜いて」は 自分で 除去後もベースキー（羽を抜いて）に着地
+        ids, res = self._species("羽を自分で抜いてしまって皮膚が見えています", "parrot")
+        assert "feather_plucking" in ids, ids
+        assert "毛引き" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+    def test_cat_nonhealing_ear_crust_polite_naorimasen(self):
+        # 治りません→治らない の丁寧形正規化で non_healing_wound キー群が発火
+        ids, res = self._species("耳の先にかさぶたができて治りません", "cat")
+        assert "non_healing_wound" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:2]]
+        assert any(("扁平上皮" in n) or ("ボーエン" in n) for n in names), names

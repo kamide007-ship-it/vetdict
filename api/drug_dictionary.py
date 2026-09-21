@@ -89,6 +89,7 @@ from api.drug_batch_62 import DRUGS_BATCH_62
 from api.drug_batch_63 import DRUGS_BATCH_63
 from api.drug_batch_64 import DRUGS_BATCH_64
 from api.drug_batch_65 import DRUGS_BATCH_65
+from api.drug_batch_66 import DRUGS_BATCH_66
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10929,6 +10930,17 @@ for _drug65 in DRUGS_BATCH_65:
         DRUGS.append(_drug65)
         _drug_index[_drug65["id"]] = _drug65
 
+# Batch 66: 2026-09 監査（第53弾）— エビデンスベースの新規腫瘍薬2剤
+# （ラバクフォサジン(Tanovea) — 犬リンパ腫初のFDA正式承認薬。自サイトのリンパ腫
+#  レスキューテキストが名指しするのに未収載だった。ウェスティ禁忌・30分点滴必須・
+#  皮膚障害/肺線維症のラベル定義的安全事実を文書化。
+#  チギラノールチグラート(Stelfonta) — 非転移性MCTの腫瘍内注射薬（De Ridder 2021
+#  JVIM RCT: 単回で完全奏効75%）。必須併用薬プロトコルと予定された創形成を文書化）
+for _drug66 in DRUGS_BATCH_66:
+    if _drug66["id"] not in _drug_index:
+        DRUGS.append(_drug66)
+        _drug_index[_drug66["id"]] = _drug66
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11325,6 +11337,11 @@ def _consolidate_duplicate_drugs() -> Dict[str, str]:
 
 
 _DRUG_ALIAS_TO_ID: Dict[str, str] = _consolidate_duplicate_drugs()
+
+# 2026-09監査: 実在しない薬品名だった旧エントリの id リネーム
+# （epofolaner は実在せず、ブランド Zenrelia の実体はイルノシチニブ＝JAK阻害薬。
+#  batch_15 のエントリを正しいモノグラフに置換した — 旧URLはここで新 id に解決）
+_DRUG_ALIAS_TO_ID.setdefault("epofolaner", "ilunocitinib")
 
 # 獣医師がフォーミュラリから記入し published にした用量のみを適用する
 # （api/drug_dosage_overrides.py の fail-closed ゲート）。未記入・出典なしは無視されるので、

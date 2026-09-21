@@ -681,6 +681,8 @@ def test_app_js_disease_to_calculator_pivot_wired():
     map_src = APP_JS.split("const DISEASE_CALC_MAP=[")[1].split("];")[0]
     assert '"choco"' in map_src and '["dog"]' in map_src
     assert '"iris"' in map_src and '["dog","cat"]' in map_src
+    # 2026-09 第53弾: mg/m² 化学療法の腫瘍群（リンパ腫/MCT/骨肉腫/血管肉腫）→ BSA計算機
+    assert '"bsa"' in map_src and "lymphoma" in map_src and "mast cell" in map_src
     # helper + renderers exist
     assert "function _calcTabForDisease(" in APP_JS
     assert "function renderCalculatorCrossLink(" in APP_JS
