@@ -577,6 +577,16 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # Non-productive retching gestures (ferret Helicobacter/gastric ulcer sign);
     # species without a retching ID fall back to vomiting for matching.
     "unproductive_retching": ["retching", "nausea", "vomiting"],
+    # Interdigital/pad-web redness (2026-09 round 36): site-specific canine
+    # pododermatitis signal; species without a paw ID fall back to the
+    # generic dermatitis chain (previous behaviour for these aliases).
+    "paw_redness": [
+        "pododermatitis_signs",
+        "foot_lesions",
+        "foot_sores",
+        "skin_redness",
+        "itching",
+    ],
     # Falling off the perch: parakeet/parrot vocabularies carry perch deficits
     # under different IDs; neuro fallback for other avians.
     "falling_off_perch": ["inability_to_perch", "difficulty_perching", "ataxia", "incoordination"],
@@ -790,6 +800,10 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     ("吐けません", "吐けない"),
     ("座れません", "座れない"),
     ("眠れません", "眠れない"),
+    # 入る（五段: 力が入りません→入らない — はいる/いる どちらの読みでも同活用）
+    ("入りません", "入らない"),
+    ("入りました", "入った"),
+    ("入ります", "入る"),
     # 可能形・受身形（ます語幹が「れ」で終わる全動詞で常に正しい:
     # 食べられません→食べられない、走れません→走れない、かもしれません→かもしれない）
     ("れません", "れない"),
@@ -818,7 +832,18 @@ _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
 # 症状の意味は変わらない（パンパンに は直後の 腫れ/膨れ が症状本体）。
 # 副詞を含む既存キュレートキー（目が急に赤 等）は全てベース形キーが併存する
 # ことを検証済み（回帰テストで固定）。
-_ADVERB_STRIP = _neg_re.compile(r"(が|を|も|は)(?:急に|突然|パンパンに|自分で)")
+# 2026-09 第36回監査で程度・時間副詞（すごく/とても/かなり/いつも/ずっと）を追加。
+# キュレート済みキー自体が副詞を含む3系統は lookaround で温存する:
+#   食欲がすごく/食欲はすごくある → increased_appetite（(?<!食欲) で保護）
+#   いつもと違う → lethargy（(?!と違) で保護）
+#   口をずっと開け → open_mouth_breathing（(?<!口) で保護）
+_ADVERB_STRIP = _neg_re.compile(
+    r"(が|を|も|は)"
+    r"(?:急に|突然|パンパンに|自分で|とても|かなり"
+    r"|(?<!食欲が)(?<!食欲を)(?<!食欲も)(?<!食欲は)すごく"
+    r"|いつも(?!と違)"
+    r"|(?<!口が)(?<!口を)(?<!口も)(?<!口は)ずっと)"
+)
 
 
 def normalize_chat_text(text: str) -> str:

@@ -1601,6 +1601,7 @@ class TestQuickTapPhraseExtraction:
             "咳が出る",
             "足を引きずる",
             "皮膚が痒い",
+            "肉球の間が赤く腫れて舐め続ける",
             "口の中にできものがある",
             "おしりを地面にこすりつける",
             "鼻血が出た",
@@ -6153,3 +6154,130 @@ class TestChatClinicalAccuracyAuditRound35:
         assert "non_healing_wound" in ids, ids
         names = [r.get("name_ja") or "" for r in res[:2]]
         assert any(("扁平上皮" in n) or ("ボーエン" in n) for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound36:
+    """2026-09 第54弾（精度監査 第36弾）: 程度・時間副詞（すごく/とても/かなり/
+    いつも/ずっと）の guarded 除去 + 入りません丁寧形 + ブロック猫の
+    「トイレでいきむ」飼い主誤認シナリオ + 犬・趾間皮膚炎（paw_redness）の
+    部位特異ID新設 + 馬・指動脈拍動の飼い主表現。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    def test_degree_adverb_strip_with_curated_key_guards(self):
+        from api.chat.symptom_extractor import normalize_chat_text
+
+        # 程度・時間副詞は助詞直後で除去される
+        assert "飲む量が増えて" in normalize_chat_text("飲む量がすごく増えて")
+        assert "あごの下が濡れて" in normalize_chat_text("あごの下がいつも濡れて")
+        assert "お腹が腫れて" in normalize_chat_text("お腹がかなり腫れて")
+        # guard: 副詞自体を含むキュレートキーは lookaround で温存
+        assert "食欲がすごく" in normalize_chat_text("食欲がすごくある")
+        assert "食欲はすごくある" in normalize_chat_text("食欲はすごくある")
+        assert "いつもと違う" in normalize_chat_text("様子がいつもと違う")
+        assert "口をずっと開け" in normalize_chat_text("口をずっと開けている")
+
+    def test_hairimasen_polite_form_normalises(self):
+        from api.chat.symptom_extractor import normalize_chat_text
+
+        assert "力が入らない" in normalize_chat_text("片足に力が入りません")
+
+    def test_dog_pu_pd_with_sugoku_ranks_endocrine(self):
+        ids, res = self._legacy("水を飲む量がすごく増えてお腹が膨れてきた気がします")
+        assert "excessive_thirst" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("クッシング" in n) or ("糖尿" in n) or ("腎" in n) for n in names), names
+
+    def test_dog_gdv_noni_retching_form(self):
+        ids, res = self._legacy("急にお腹が張って何度も吐こうとするのに何も出ません")
+        assert "unproductive_retching" in ids, ids
+        assert "胃拡張" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+    def test_dog_jaundice_ppoi_form(self):
+        ids, res = self._legacy("白目が黄色っぽくて食欲がありません")
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("肝" in n) or ("溶血" in n) or ("貧血" in n) for n in names), names
+
+    def test_cat_litterbox_straining_is_blocked_cat_first(self):
+        # 飼い主は便秘と誤認するがトイレ内怒責＋啼鳴は尿道閉塞 until proven
+        # otherwise（ISFM/AAFP）
+        ids, res = self._species("トイレで長い時間いきんでいるのに何も出ず鳴き続けています", "cat")
+        assert "straining_to_urinate" in ids, ids
+        assert "尿道閉塞" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+    def test_cat_hairball_constipation_still_constipation_first(self):
+        # guard: 便秘明記の主訴は従来どおり便秘系が上位
+        ids, res = self._species("毛玉を何度も吐きます 便が出ていません", "cat")
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("便秘" in n) or ("巨大結腸" in n) or ("毛球" in n) for n in names), names
+
+    def test_cat_oral_pain_on_opening_ranks_dental(self):
+        ids, res = self._species("口を開けるときに痛がってご飯を途中でやめてしまいます", "cat")
+        assert "difficulty_eating" in ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("歯" in n) or ("口内炎" in n) for n in names), names
+
+    def test_rabbit_wet_chin_with_itsumo(self):
+        # wet_chin はウサギ語彙に無いため ID シノニム鎖で drooling へ解決される
+        ids, res = self._species("あごの下がいつも濡れていて前足も汚れています", "rabbit")
+        assert ids, ids
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert any(("不正咬合" in n) or ("歯" in n) for n in names), names
+
+    def test_bird_perch_fall_te_form_and_polite_weakness(self):
+        ids, res = self._species("止まり木から落ちて片足に力が入りません", "bird")
+        assert ids, ids
+        names = [r.get("name_ja") or "" for r in res[:4]]
+        assert any(("骨折" in n) or ("腎" in n) or ("痛風" in n) for n in names), names
+
+    def test_dog_interdigital_complaint_ranks_pododermatitis_first(self):
+        ids, res = self._legacy("肉球の間が赤く腫れて舐め続けています")
+        assert "paw_redness" in ids, ids
+        assert "趾間" in (res[0].get("name_ja") or ""), [r.get("name_ja") for r in res[:3]]
+
+    def test_dog_generic_itch_not_hijacked_by_interdigital(self):
+        # guard: 部位非特異の掻痒・脱毛主訴は従来の皮膚科ddxを維持
+        ids, res = self._legacy("皮膚が赤くて痒がっている 毛が抜ける")
+        names = [r.get("name_ja") or "" for r in res[:3]]
+        assert not any("趾間" in (n or "") for n in names), names
+
+    def test_interdigital_legacy_name_aligns_with_dog_module(self):
+        # チャット候補カードの「疾患DBで詳細を開く」ピボットは base-name
+        # 完全一致で着地するため、レガシー名は dog モジュール名と揃える
+        from api.health_checker import DISEASES
+        from api.species.dog_diseases import DISEASES as DOG
+
+        legacy = next(d for d in DISEASES if d["id"] == "interdigital_furunculosis")
+        legacy_base = legacy["name_en"].split("(")[0].strip().lower()
+        module_bases = {d["name"].split("(")[0].strip().lower() for d in DOG}
+        assert legacy_base in module_bases, legacy_base
+        # 有病率 prior（チェックボックス経路）も配信名に解決する
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        assert SPECIES_PREVALENCE["dog"].get("Interdigital Cyst (Furuncle)") == "common"
+
+    def test_horse_owner_phrased_digital_pulse_extracts(self):
+        from api.diagnostic_chat import (
+            _extract_equine_symptoms,
+            _match_equine_symptoms_to_diseases,
+        )
+
+        ids = set(_extract_equine_symptoms("前足の蹄が熱くて指で触ると脈を感じます"))
+        assert "limb_digital_pulse" in ids, ids
+        res = _match_equine_symptoms_to_diseases(list(ids))
+        names = [(r.get("name_ja") or r.get("name") or "") for r in res[:2]]
+        assert any(("蹄葉炎" in n) or ("蹄膿瘍" in n) for n in names), names

@@ -359,6 +359,13 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "指動脈が強く": "limb_digital_pulse",
     "指動脈拍動": "limb_digital_pulse",
     "デジタルパルス": "limb_digital_pulse",
+    # 2026-09 round-36: 指動脈拍動の飼い主表現（用語を知らない場合の
+    # 「触ると脈を感じる/脈がドクドクする」— Adams & Stashak 7th ed の
+    # bounding digital pulse に相当）
+    "触ると脈": "limb_digital_pulse",
+    "脈を感じ": "limb_digital_pulse",
+    "脈が触れ": "limb_digital_pulse",
+    "脈がドクドク": "limb_digital_pulse",
     "thrush": "hoof_thrush",
     "蹄叉腐爛": "hoof_thrush",
     "hoof crack": "hoof_crack",

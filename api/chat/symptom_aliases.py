@@ -2050,8 +2050,8 @@ SYMPTOM_ALIASES = {
     "足を舐め": "excessive_licking",
     "足の裏を舐め": "excessive_licking",
     "舐め続ける": "excessive_licking",
-    "指の間が赤い": "skin_redness",
-    "指の間が赤く": "skin_redness",
+    "舐め続け": "excessive_licking",
+    # 指の間が赤い/赤く は 2026-09 第36回監査で paw_redness（部位特異ID）へ移行
     # ポラキウリア（1回量の減少 — 飼い主表現では主語が省略されがち）
     "少ししか出ない": "straining_to_urinate",
     # --- 2026-08 第11回精度スイープ ---
@@ -2400,9 +2400,8 @@ SYMPTOM_ALIASES = {
     "目が開けられない": "squinting",
     # 眼球突出の素の連用形（「〜してる/〜した/〜してきた」のみで「〜して」が欠落）
     "目が飛び出して": "eye_bulging",
-    # 趾間皮膚炎の肉球表現（「指の間が赤い」→itching と同方針）
+    # 趾間皮膚炎の肉球表現（肉球の間が赤 は第36回監査で paw_redness へ移行）
     "肉球の間が湿っ": "itching",
-    "肉球の間が赤": "itching",
     "肉球を舐め": "excessive_licking",
     # マウスロット/MBDの開口不能（「口が閉じない」のみで「閉まらない」形が欠落）
     "口が閉まらな": "mouth_lesions",
@@ -2826,6 +2825,38 @@ SYMPTOM_ALIASES = {
     "臭い液が出": "foul_odor",
     "悪臭のする液": "foul_odor",
     "悪臭のある液": "foul_odor",
+    # ---- 2026-09 第36回監査 ----
+    # GDVの空嘔吐「吐こうとするのに何も出ません」（のに接続形が全て欠落していた）
+    "吐こうとするのに": "unproductive_retching",
+    # 黄疸の「〜っぽい」形（白目が黄色っぽくて — っぽ 接尾形が欠落）
+    "白目が黄色っぽ": "jaundice",
+    "目が黄色っぽ": "jaundice",
+    # ブロック猫の教科書的な飼い主誤認シナリオ「トイレで長い時間いきんでいる」
+    # （飼い主は便秘と思い込むが、猫のトイレ内怒責は尿道閉塞 until proven
+    # otherwise — ISFM/AAFP。constipation との鑑別は _SYN ブリッジと
+    # パトグノモニック・ペアが担う）
+    "トイレでいきん": "straining_to_urinate",
+    "長い時間いきん": "straining_to_urinate",
+    "鳴き続け": "vocalization_changes",
+    # 口腔痛の行動表現（口を開けるときに痛がる・食事を途中でやめる —
+    # FCGS/歯周病/歯の吸収病変の代表的主訴。Niemiec, BSAVA Dental Manual）
+    "口を開けると痛": "difficulty_eating",
+    "口を開けるときに痛": "difficulty_eating",
+    "ご飯を途中でやめ": "difficulty_eating",
+    "食べるのを途中でやめ": "difficulty_eating",
+    # ウサギ・チンチラ流涎の「あごの下」部位形（あごが濡れ のみ収載だった。
+    # いつも挿入形は _ADVERB_STRIP が正規化）
+    "あごの下が濡れ": "wet_chin",
+    # 鳥の止まり木落下のて形（落ちる/落ちた のみで「落ちて」が不一致だった）
+    "止まり木から落ち": "falling_off_perch",
+    # 犬の趾間皮膚炎・趾間フルンクローシス（肉球・指間の限局性発赤は
+    # 部位診断的 — Muller & Kirk 7th ed。従来は汎用 itching/skin_redness に
+    # 解決され趾間疾患が鑑別に出なかった）
+    "肉球の間が赤": "paw_redness",
+    "指の間が赤い": "paw_redness",
+    "指の間が赤く": "paw_redness",
+    "指の間が腫れ": "paw_redness",
+    "肉球の間が腫れ": "paw_redness",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

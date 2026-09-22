@@ -90,6 +90,7 @@ from api.drug_batch_63 import DRUGS_BATCH_63
 from api.drug_batch_64 import DRUGS_BATCH_64
 from api.drug_batch_65 import DRUGS_BATCH_65
 from api.drug_batch_66 import DRUGS_BATCH_66
+from api.drug_batch_67 import DRUGS_BATCH_67
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10940,6 +10941,15 @@ for _drug66 in DRUGS_BATCH_66:
     if _drug66["id"] not in _drug_index:
         DRUGS.append(_drug66)
         _drug_index[_drug66["id"]] = _drug66
+
+# Batch 67 (2026-09 第54弾: シロリムス徐放錠 Felycin-CA1 —
+#  猫の心疾患に対する史上初のFDA承認薬（2025年条件付き承認、無症候性HCMの
+#  心室肥大管理）。RAPACAT試験に基づく正直なエビデンス枠組み・糖尿病/肝疾患
+#  禁忌・丸ごと嚥下必須の徐放性・CYP3A4/P-gp相互作用面を文書化）
+for _drug67 in DRUGS_BATCH_67:
+    if _drug67["id"] not in _drug_index:
+        DRUGS.append(_drug67)
+        _drug_index[_drug67["id"]] = _drug67
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

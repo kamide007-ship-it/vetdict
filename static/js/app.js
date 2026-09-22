@@ -1694,8 +1694,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:584,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:561,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:585,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:562,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1719,8 +1719,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6455,
     species:21,
-    drugs:644,
-    symptoms:88,
+    drugs:645,
+    symptoms:89,
     protocols:188
   };
   renderSpeciesGrid();
@@ -2095,7 +2095,7 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
-    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ","顔の片側が腫れて目の下から膿が出る"],
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ","顔の片側が腫れて目の下から膿が出る","肉球の間が赤く腫れて舐め続ける"],
     cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く","耳の付け根を掻いて黒いカスが出る"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる"],
     rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている","おしっこが白っぽくてドロドロしている","お尻の周りに軟らかい便がつく"],
