@@ -4199,3 +4199,80 @@ class TestBatch66OncologyAndZenreliaFix:
         joined = json.dumps(data, ensure_ascii=False)
         assert "L-SARN" not in joined
         assert "ラバクフォサジン（タノベア" in joined
+
+
+class TestBatch67Sirolimus:
+    """2026-09 第54弾: シロリムス徐放錠（Felycin-CA1）— 猫の心疾患に対する
+    史上初のFDA承認薬（2025年条件付き承認、無症候性HCMの心室肥大管理）。"""
+
+    def _drug(self):
+        from api.drug_dictionary import DRUGS
+
+        return next(d for d in DRUGS if d["id"] == "sirolimus")
+
+    def test_present_with_label_defining_facts(self):
+        d = self._drug()
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is True
+        # ラベル定義的事実: 0.3 mg/kg 週1回・丸ごと嚥下・2.5 kg未満不可
+        assert "0.3 mg/kg" in cat["dosage_ja"]
+        assert "週1回" in cat["dosage_ja"]
+        assert "分割" in cat["dosage_ja"] or "丸ごと" in cat["dosage_ja"]
+        assert "2.5 kg未満" in cat["dosage_ja"]
+        assert "once WEEKLY" in cat["dosage"] or "once weekly" in cat["dosage"].lower()
+        # 糖尿病・肝疾患禁忌
+        assert "糖尿病" in d["contraindications_ja"]
+        assert "肝疾患" in d["contraindications_ja"]
+        # 条件付き承認の正直なエビデンス枠組み（RAPACAT）
+        assert "RAPACAT" in d["mechanism_ja"]
+        assert "条件付き承認" in d["mechanism_ja"]
+
+    def test_dog_gated_no_validated_dose(self):
+        d = self._drug()
+        assert d["species_info"]["dog"]["safe"] is False
+
+    def test_bilingual_completeness(self):
+        d = self._drug()
+        for sp, info in d["species_info"].items():
+            for f in ("dosage", "dosage_ja", "notes", "notes_ja"):
+                assert info.get(f), (sp, f)
+        assert d["side_effects_ja"] and d["contraindications_ja"]
+        assert isinstance(d["drug_interactions"], list)
+
+    def test_matcher_checker_and_disease_linkage(self):
+        import json
+
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+        from api.drug_interactions import find_interactions
+
+        # テキストマッチャー（治療チップ経路）
+        assert "sirolimus" in [x["id"] for x in find_drugs_in_text("シロリムス徐放錠（Felycin-CA1）0.3 mg/kg PO 週1回")]
+        assert "sirolimus" in [x["id"] for x in find_drugs_in_text("ラパマイシン 0.3 mg/kg")]
+        # 相互作用チェッカーの自然言語解決 + レジストリ到達
+        for q in ("シロリムス", "フェリシン", "felycin", "rapamycin"):
+            assert resolve_drug_reference(q) == "sirolimus", q
+        pairs = find_interactions(["sirolimus", "diltiazem"])
+        assert any(
+            {p["drug_a"], p["drug_b"]} == {"sirolimus", "diltiazem"} and p["severity"] == "major" for p in pairs
+        ), pairs
+        # 疾患側の動線: 猫HCMエントリの治療文がシロリムスに解決する
+        with open("diseases_all_species.json") as f:
+            data = json.load(f)
+        found = []
+
+        def walk(o, sp=None):
+            if isinstance(o, dict):
+                sp2 = o.get("species", sp)
+                if sp2 == "Cat" and o.get("name") == "Hypertrophic Cardiomyopathy (HCM)":
+                    found.append(o)
+                for v in o.values():
+                    walk(v, sp2)
+            elif isinstance(o, list):
+                for x in o:
+                    walk(x, sp)
+
+        walk(data)
+        assert found
+        hcm = found[0]
+        assert "シロリムス" in hcm["treatment_ja"]
+        assert "sirolimus" in [x["id"] for x in find_drugs_in_text(hcm["treatment_ja"])]

@@ -1189,6 +1189,42 @@ INTERACTIONS: list[dict[str, Any]] = [
         "management_ja": "併用を避ける。両方が必要な場合は治療フェーズを分ける。",
         "ref": "Plumb's 10th ed.",
     },
+    # Sirolimus (Felycin-CA1, batch 67): CYP3A4/P-glycoprotein interaction
+    # surface from the US label. Diltiazem is the clinically important pairing
+    # because it is a standard feline HCM co-medication.
+    {
+        "drug_a": "sirolimus",
+        "drug_b": "diltiazem",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "CYP3A4/P糖蛋白阻害によるシロリムス曝露上昇",
+        "effect_en": "Diltiazem (a CYP3A4/P-gp inhibitor and common HCM co-medication) raises sirolimus exposure and toxicity risk.",
+        "effect_ja": "ジルチアゼム（CYP3A4/P糖蛋白阻害薬でHCM併用薬の定番）はシロリムス曝露と毒性リスクを上昇させる。",
+        "management_en": "Reassess the need for the combination; if unavoidable, monitor closely for sirolimus adverse effects (hepatic enzymes, GI signs).",
+        "management_ja": "併用の必要性を再評価。やむを得ない場合は肝酵素・消化器症状などシロリムス副作用を厳重に監視する。",
+        "ref": "Felycin-CA1 US label (DailyMed)",
+    },
+    {
+        "drug_a": "sirolimus",
+        "drug_b": "ketoconazole",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "CYP3A4/P糖蛋白の強力な阻害",
+        "effect_en": "Azole antifungals markedly increase sirolimus exposure.",
+        "effect_ja": "アゾール系抗真菌薬はシロリムス曝露を大幅に上昇させる。",
+        "management_en": "Avoid the combination where possible; otherwise monitor closely and expect to need a lower sirolimus exposure.",
+        "management_ja": "可能な限り併用を避ける。やむを得ない場合は厳重監視のうえシロリムス曝露低減を前提とする。",
+        "ref": "Felycin-CA1 US label (DailyMed)",
+    },
+    {
+        "drug_a": "sirolimus",
+        "drug_b": "cyclosporine",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "CYP3A4/P糖蛋白経路の競合（免疫抑制の相加）",
+        "effect_en": "Shared CYP3A4/P-gp metabolism raises exposure of both drugs and compounds immunosuppression.",
+        "effect_ja": "CYP3A4/P糖蛋白経路の競合で両薬の曝露が上昇し、免疫抑制も相加する。",
+        "management_en": "Avoid concurrent use in cats on Felycin-CA1.",
+        "management_ja": "Felycin-CA1投与中の猫では併用を避ける。",
+        "ref": "Felycin-CA1 US label (DailyMed)",
+    },
 ]
 
 

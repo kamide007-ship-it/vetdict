@@ -55,6 +55,9 @@ SPECIES_PREVALENCE = {
         # Pyotraumatic dermatitis — a top-10 canine presentation in humid
         # summer months (Muller & Kirk 7th ed; Holm 2004, Vet Dermatol).
         "Acute Moist Dermatitis (Hot Spot)": "common",
+        # Interdigital furunculosis: frequent first-opinion dermatology
+        # presentation, bulldog-type breeds predisposed (Muller & Kirk 7th ed)
+        "Interdigital Cyst (Furuncle)": "common",
         # Northern-breed keratinization disorder; classic but not common
         # (White SD, JAVMA 2001; Colombini S, Vet Clin North Am 1999).
         "Zinc-Responsive Dermatosis": "uncommon",

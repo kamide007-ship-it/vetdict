@@ -757,6 +757,12 @@ SYMPTOMS = [
         "category": "digestive",
     },
     {
+        "id": "paw_redness",
+        "name_ja": "肉球・指の間の発赤や腫れ",
+        "name_en": "Interdigital/Paw Redness or Swelling",
+        "category": "dermatological",
+    },
+    {
         "id": "mammary_swelling",
         "name_ja": "乳腺・乳首の腫大（しこり）",
         "name_en": "Mammary/Nipple Enlargement (Mass)",
@@ -2320,6 +2326,36 @@ DISEASES = [
             "shih_tzu": 1.5,
             "toy_poodle": 1.5,
             "cavalier_king_charles_spaniel": 1.5,
+        },
+    },
+    # ---- 12d1b. Interdigital Furunculosis (Pododermatitis) ----
+    # One of the most common canine dermatology presentations (deep pyoderma
+    # of the interdigital webs — Muller & Kirk 7th ed), yet the legacy
+    # database had no paw-localised entry, so「肉球の間が赤く腫れて」resolved
+    # only to generic itching and ranked demodicosis/otitis instead.
+    {
+        "id": "interdigital_furunculosis",
+        "prevalence_tier": "common",
+        # name matches the dog module entry (Interdigital Cyst (Furuncle) /
+        # 趾間嚢胞) so the chat card's「疾患DBで詳細を開く」pivot lands exactly
+        "name_ja": "趾間嚢胞・趾間皮膚炎（指間炎）",
+        "name_en": "Interdigital Cyst (Interdigital Furunculosis)",
+        "description_ja": "指の間・肉球の間の発赤・腫脹・結節（いわゆる指間炎）。短い剛毛の外傷性埋入による毛包破裂と角化物への異物反応が本態で、アトピー・ニキビダニ症・体型（短頭種の趾間荷重）などの基礎要因が関与します。診断は細胞診と深部掻爬（ニキビダニ除外）、再発例は培養感受性試験。治療はクロルヘキシジン等の局所消毒・浸漬に加え、深在性膿皮症として培養に基づく全身抗菌薬を4-6週以上、基礎疾患（アレルギー）の管理を並行します（Muller & Kirk 7th ed）。",
+        "description_en": "Erythema, swelling and nodules of the interdigital webs (so-called interdigital cysts). The lesion is a traumatic follicular rupture with a foreign-body reaction to embedded keratin; atopy, demodicosis and conformation (weight-bearing on the webs in bulldog-type breeds) are common underlying drivers. Work-up: cytology and deep skin scrapes (rule out Demodex), culture for recurrent lesions. Treat as a deep pyoderma — topical chlorhexidine soaks plus culture-guided systemic antimicrobials for 4-6+ weeks — while managing the underlying allergy (Muller & Kirk 7th ed).",
+        "symptoms": [
+            "paw_redness",
+            "excessive_licking",
+            "itching",
+            "limping",
+        ],
+        "severity": "low",
+        "recommended_tests": ["skin_scraping", "cytology", "culture"],
+        "breed_risks": {
+            "english_bulldog": 2.0,
+            "french_bulldog": 1.8,
+            "labrador_retriever": 1.6,
+            "german_shepherd": 1.5,
+            "shar_pei": 1.5,
         },
     },
     # ---- 12d2. Mammary Tumor ----
@@ -4765,6 +4801,10 @@ _PATHOGNOMONIC_CLUSTERS = [
     # entry outranked the oral tumor via the generic lumps_bumps signal
     # (round-14 audit).
     (frozenset({"oral_mass"}), "oral_tumor", 1.6),
+    # Interdigital redness/swelling is site-diagnostic for pododermatitis
+    # (Muller & Kirk 7th ed): the paw-localised complaint should rank the
+    # interdigital entry above generic pruritic dermatoses.
+    (frozenset({"paw_redness"}), "interdigital_furunculosis", 1.5),
     # Gynecomastia + symmetric alopecia is the estrogen-feminization pair of
     # a Sertoli cell tumor (Withrow & MacEwen 6th ed). Female mammary-mass
     # complaints don't co-report hair loss, so collision risk is minimal.
