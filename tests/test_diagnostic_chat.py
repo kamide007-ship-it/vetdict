@@ -2807,10 +2807,12 @@ class TestChatClinicalAccuracyAuditRound10:
     def test_dog_paw_licking_interdigital_complaint_extracts_both_signs(self):
         from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
 
+        # 2026-09 第36回監査で「指の間が赤い」は部位特異ID paw_redness へ移行
+        # （趾間皮膚炎エントリ新設）— 皮膚科ddxが上位である点は不変
         ex = extract_symptoms_from_text("散歩後に足の裏を舐め続ける 指の間が赤い")
-        assert "excessive_licking" in ex and "skin_rashes" in ex, ex
+        assert "excessive_licking" in ex and "paw_redness" in ex, ex
         names = [m.get("name_ja", "") for m in match_symptoms_to_diseases(ex)[:4]]
-        assert any("アトピー" in n or "膿皮症" in n or "皮膚" in n for n in names), names
+        assert any("趾間" in n or "アトピー" in n or "膿皮症" in n or "皮膚" in n for n in names), names
 
     def test_dog_borborygmi_grass_eating_reaches_gi_diseases(self):
         from api.diagnostic_chat import extract_symptoms_from_text
