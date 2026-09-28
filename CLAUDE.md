@@ -6166,3 +6166,101 @@ ACTH刺激プロトコル・シクロスポリン・オクラシチニブ等）�
 - ServiceWorker: `CACHE_NAME` v160 → **v161**
 - 再現手順: `migrate_to_sqlite.py`（クリーンビルド 6,893疾患・645薬品）— 疾患名不変のため
   検索インデックス no-op
+
+## 2026-09セッション（第55弾: モリデュスタット（Varenzin-CA1）公開 — 猫CKD貧血初のFDA承認薬 + 裸の出血表現→陰部分泌物の全域誤マッピング是正 + チャット精度第37弾 + 治療薬セット→相互作用チェッカー動線）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト（ベースライン初回ランの1失敗は自セッションのJSON書込との
+  並行読取レース — 単独再実行で合格の既知パターン）
+- 配信SQLiteクリーンビルド: **6,893疾患**、treatment/prevention/prognosis **100%**
+- 薬用量: safe薬品の dosage 欠落 **0**（645薬品時点、全species_info検証）、
+  文字列型相互作用スキーマ **0**、ID重複 **0**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 薬品マッチャー飽和度（第35回スイープ、片仮名+英語×用量文脈の実スニペット突合）:
+  referenced-but-absent の真の欠落 **0**（ノルモソルR/乳酸リンゲル/クラブラン酸/グルコン酸Ca/
+  UDCA/フルニキシン・メグルミン/MMF/ティルドロネート/バイオチン/Ca-EDTA 等を実フレーズで全解決確認）
+
+### エビデンスベースの新規薬品公開: モリデュスタット（Varenzin-CA1）（`drug_batch_68.py` 新規、645→646薬品）
+- **猫CKD関連の非再生性貧血に対して史上初めてFDAが承認（2023年条件付き承認）した薬剤**で、
+  獣医療初の**HIF-PH阻害薬クラス**なのに未収載だった。自サイトの猫CKDフラグシップはダルベポエチン
+  週1注射しか選択肢を持たなかった（通院注射が難しい猫への経口・自宅投与の代替が存在しなかった）
+- ラベル定義的事実を文書化（Varenzin-CA1 US label, Elanco）: 5 mg/kg PO q24h×最長28日・
+  再開は**最低7日休薬後**・**週1回PCV監視＋目標到達で中止**（過剰造血→多血症/血栓塞栓が
+  中核リスク）・鉄充足が奏効の前提・最多AEは嘔吐・犬は safe:False（猫限定承認）
+- 機序の臨床的意義を明記: 内因性EPO産生刺激＝**抗rhEPO抗体→赤芽球癆という組換えESAの
+  失敗様式を回避**できる根拠。条件付き承認（合理的期待段階）の正直なエビデンス枠組み
+- **相互作用チェッカーのレジストリにも登録**: molidustat×darbepoetin / ×erythropoietin = major
+  （造血刺激の相加 — どちらか一方を選択しPCV監視）。find_interactions ペア検出を回帰テストで固定
+- **鑑別診断・相談チャットへの動線**: 猫CKDエントリ（cat_diseases.py 腎性貧血セクション +
+  JSONオーバーレイの貧血管理行）にモリデュスタット行を日英で追記 → 治療チップ解決・
+  逆引き「この薬品を使う疾患」（CKD 2エントリ）・チェッカー自然言語解決
+  （モリデュスタット/バレンジン/varenzin/ひらがな形）を全て検証済み
+
+### 裸の出血表現→genital_discharge の全域誤マッピング是正（臨床的に危険な系統バグ）
+- 旧「繁殖関連」セクションが**部位を特定しない出血表現**（血が出ている/出血がある/異常な出血/
+  abnormal bleeding）を genital_discharge にマッピングしており、「口臭が強くて歯茎から血が
+  出ています」（歯周病の教科書的主訴）が**子宮蓄膿症 rank 1** になっていた（耳・鼻・皮膚等の
+  あらゆる出血主訴が陰部分泌物に誤誘導される全域バグ）
+- 部位フリーの4表現を汎用 **bleeding** に是正（ID_SYNONYMS チェーン新設: bleeding→
+  [hemorrhage, skin_hemorrhage, petechiae, bruising] — bleeding 非保有種は出血系語彙へ安全に
+  フォールバック）。**陰部/膣を明記する表現**（陰部からの出血・膣からの出血・不正出血）のみ
+  genital_discharge を維持。ガード検証: 犬「陰部から膿」→子宮蓄膿症 rank 1 不変・
+  フェレット出血斑→血小板減少症 rank 1 不変
+
+### 診断チャット精度 第37弾（35症例・2波スイープ 13 MISS → 全症例合格）
+- **語彙ギャップ（エイリアス+チェーン）**: 肉球が赤/真っ赤/腫れ→paw_redness（趾間皮膚炎 rank 1 —
+  従来は「間」を含む形のみで抽出ゼロ）、首を振り（連用形語幹）→head_shaking + 耳をかゆがっ（て形）
+  →ear_scratching（外耳炎 rank 1）、爪が伸びすぎ/巻き爪/爪が肉球に刺さ→**nail_abnormalities 新設**
+  （cat native、ID_SYNONYMS: curled_nails(GP)/foot_sores/lameness）、毛玉が増え→excessive_grooming
+  （猫の心因性脱毛/過剰グルーミングの飼い主観察 — 毛玉を吐く単発は vomiting 維持）、
+  鼻がつまっ（かな表記 — 漢字「詰まって」のみ収載だった）、固いものを残/硬いものを残→
+  difficulty_eating（選択的摂食=歯科疾患の教科書的観察 → ウサギ切歯過長/臼歯疾患群）、
+  腰のあたりが濡れ/下半身が濡れ→wet_tail（ハムスター）、羽が生え変わら→abnormal_feathers
+  （PBFD/フレンチモルトが解決 — 「羽がボロボロ」のみ収載だった）、黒い点が動/小さい点が動→
+  visible_mites（ヘビダニ — 「点々が動い」のみ収載だった）
+- **猫の子癇ハイジャック是正**: 未tierの子癇（発熱+嗜眠を含む6所見）が産後文脈のない
+  「急に元気がなくなって熱っぽい」の rank 1 を奪っていた → Eclampsia=rare（猫では犬と異なり
+  真に稀 — Little, The Cat）+ Postpartum Metritis (Feline)=uncommon → 胃腸炎/咬傷膿瘍が正しい上位に
+- **ウサギ dirty bottom の臨床是正**: お尻が汚れて→diarrhea だったのを **abnormal_cecotropes** に
+  リマップ（ウサギの汚れた臀部は未摂取盲腸便が最多原因 — Harcourt-Brown。チェーンで犬猫は
+  従来どおり下痢へ）→ 盲腸便摂取障害 rank 1、犬の下痢ガード不変
+- **トカゲ/爬虫類MBDの後肢徴候ペア**: 「後ろ足が震えて歩き方がおかしい」（幼若トカゲの
+  低Ca性振戦+不全麻痺 = NSHP until proven otherwise — Mader 3rd ed）で MBD が top-7 圏外だった →
+  (a) lizard/reptile モジュール+supplementary の MBD/NSHP 症状セットに hind_limb_weakness を追加
+  （教科書的所見の反映）、(b) パトグノモニック・ペア {hind_limb_weakness, lameness}→MBD ×1.5
+  （**両所見必須** — 素の跛行は痛風/外傷ddxを維持、ガードテストで固定）→ MBD top-2
+- **legacy犬フォールバック**: abnormal_cecotropes→diarrhea、nail_abnormalities→limping、
+  bleeding_gums→bad_breath（歯茎出血主訴が症状を全喪失していた）
+
+### UX: 治療薬セット→相互作用チェッカーの一括投入ピボット（ポリファーマシー安全動線）
+- 疾患の「治療に関連する薬品」チップ群（疾患DB詳細+チェッカー結果の両ビュー）は個別ナビのみで、
+  **治療が常用する多剤併用の安全チェックには1剤ずつ打ち直すしかなかった** →
+  チップが2剤以上のとき「⚠️ この治療薬セットで相互作用チェック（N剤）」ボタンを発行
+  （先頭10剤、`runInteractionCheckWithDrugs` が薬品タブへ遷移→入力欄一括セット→アコーディオン
+  展開→自動実行。名前解決はサーバーの resolve_drug_reference なので日英・商品名混在も可）
+- キャッシュ再描画・ハイドレート両パス共通のレンダラーで発行し、委譲ハンドラ2系統
+  （疾患DBリスト+チェッカー結果エリア）でルーティング。CSS `.treatment-drugs-ix-check`
+  （アンバー系、モバイル44pxタップ目標）。GA4 `interaction_check_from_disease`
+- 例: 猫CKD詳細 → ベナゼプリル/アムロジピン/ダルベポエチン/モリデュスタット等を1タップで
+  ペアワイズチェック（molidustat×darbepoetin major が即検出される）
+
+### UX: クイック入力の拡充（検証済み新主訴の1タップ導線）
+- 猫「爪が伸びすぎて肉球に刺さっている」・ウサギ「お尻が汚れていて臭い」（→盲腸便摂取障害）・
+  トカゲ「後ろ足が震えて歩き方がおかしい」（→MBD top-2）— ミラーテスト JA_QUICK 同期
+  （全フレーズ抽出保証をCIで維持）
+
+### 回帰テスト（+20件）
+- 薬品: TestBatch68Molidustat（6件 — ラベル定義的事実（28日+7日休薬+PCV中止ルール+鉄前提）・
+  犬ゲート・ESAスタッキングのレジストリ登録・マッチャー/リゾルバ解決・猫CKD 2経路の参照+チップ解決・
+  逆引き接続）
+- チャット: TestChatClinicalAccuracyAuditRound37（13件 — 出血マッピング再発防止+歯周病rank1+
+  子宮蓄膿症ガード、肉球/耳/爪/毛玉/盲腸便/MBDペア+素の跛行ガード、MBD症状セット、
+  wave2語彙5種、フェレット出血斑ガード）
+- UX: test_app_js_disease_treatment_set_pivots_to_interaction_checker（ヘルパー・レンダラー・
+  委譲2系統・CSS/44px）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: cat 563薬品、pendingStats drugs 645→**646**
+- ServiceWorker: `CACHE_NAME` v161 → **v162**
+- 再現手順: `migrate_to_sqlite.py`（クリーンビルド 6,893疾患・646薬品）— 疾患名不変のため
+  検索インデックス no-op

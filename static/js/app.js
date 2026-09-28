@@ -1695,7 +1695,7 @@ function loadSpeciesStats(){
 function setDefaultStats(){
   SPECIES=[
     {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:602,drugs:585,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:562,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:563,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1719,7 +1719,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6455,
     species:21,
-    drugs:645,
+    drugs:646,
     symptoms:89,
     protocols:188
   };
@@ -2096,9 +2096,9 @@ function resetSpeciesChat(species){
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
     dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ","顔の片側が腫れて目の下から膿が出る","肉球の間が赤く腫れて舐め続ける"],
-    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く","耳の付け根を掻いて黒いカスが出る"],
+    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く","耳の付け根を掻いて黒いカスが出る","爪が伸びすぎて肉球に刺さっている"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる"],
-    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている","おしっこが白っぽくてドロドロしている","お尻の周りに軟らかい便がつく"],
+    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている","おしっこが白っぽくてドロドロしている","お尻の周りに軟らかい便がつく","お尻が汚れていて臭い"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている","目が濡れて顔をこする","耳が垂れて耳から臭い"],
     hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない","腰に黒いイボのようなもの"],
     guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ","関節が腫れる"],
@@ -2110,7 +2110,7 @@ function resetSpeciesChat(species){
     reptile:["食べない","口をあけたまま呼吸","鼻水が出る","脱皮がうまくできない","目が開かない","痩せてきた"],
     tortoise:["食べない","甲羅がやわらかい","鼻水が出る","目が腫れている","いきんでいる","甲羅に傷がある","首を伸ばして呼吸している"],
     snake:["食べない","口の中が赤い","脱皮がうまくできない","口をあけたまま呼吸","ダニがついている","吐き戻しが増えた","脱皮した皮が目に残っている","脱皮した皮が体に残っている"],
-    lizard:["食べない","脚が曲がってきた","ふらつく","脱皮がうまくできない","口をあけたまま呼吸","尻尾が細くなってきた","あごが柔らかくてぶよぶよ"],
+    lizard:["食べない","脚が曲がってきた","ふらつく","脱皮がうまくできない","口をあけたまま呼吸","尻尾が細くなってきた","あごが柔らかくてぶよぶよ","後ろ足が震えて歩き方がおかしい"],
     amphibian:["食べない","皮膚が赤い","お腹が膨れている","皮膚に白いもの","元気がない","浮かんだまま沈めない"],
     fish:["体に白い点々","ヒレがボロボロ","体をこすりつける","水面で口をパクパク","お腹が膨れている","泳ぎ方がおかしい"],
     degu:["食べない","よだれが出る","毛が抜ける","尻尾の皮がむけた","下痢","ぐったりしている"],
@@ -2853,7 +2853,38 @@ function _renderTreatmentDrugsList(drugs,heading){
     const cat=d.category||"";
     return `<a class="treatment-drug-chip" href="#drugs" data-drug="${escapeHtml(d.name_ja||d.name||"")}"><span class="treatment-drug-name">${escapeHtml(label)}</span>${cat?`<span class="treatment-drug-cat">${escapeHtml(cat)}</span>`:""}</a>`;
   }).join("");
-  return `<div class="treatment-drugs-section" data-rendered="1"><div class="treatment-drugs-heading">${heading}</div><div class="treatment-drugs-list">${items}</div></div>`;
+  /* Polypharmacy safety pivot: a disease's treatment routinely stacks
+     several of these drugs — one tap loads the set into the interaction
+     checker instead of retyping each name (names resolve server-side). */
+  let ixBtn="";
+  if(drugs.length>=2){
+    const names=drugs.slice(0,10).map(d=>d.name_ja||d.name||"").filter(Boolean);
+    if(names.length>=2){
+      const label=currentLang==="ja"
+        ?`⚠️ この治療薬セットで相互作用チェック（${names.length}剤）`
+        :`⚠️ Check interactions across these ${names.length} drugs`;
+      ixBtn=`<button type="button" class="treatment-drugs-ix-check" data-drugs="${escapeHtml(names.join("||"))}">${label}</button>`;
+    }
+  }
+  return `<div class="treatment-drugs-section" data-rendered="1"><div class="treatment-drugs-heading">${heading}</div><div class="treatment-drugs-list">${items}</div>${ixBtn}</div>`;
+}
+
+/* Load a whole drug-name set into the interaction checker (drugs tab),
+   open the accordion, land on it, and auto-run the pairwise check.
+   Used by the disease-view "この治療薬セットで相互作用チェック" pivot. */
+function runInteractionCheckWithDrugs(namesJoined){
+  const names=(namesJoined||"").split("||").map(s=>s.trim()).filter(Boolean);
+  if(names.length<2)return;
+  _pushNavHistory(currentView,"drugs","");
+  switchView("drugs");
+  const input=document.getElementById("interactionDrugIds");
+  const acc=document.querySelector("details.interaction-checker");
+  if(!input)return;
+  input.value=names.join(", ");
+  if(acc)acc.open=true;
+  scrollToAnchor(acc||input);
+  trackEvent("interaction_check_from_disease",{count:names.length});
+  runInteractionCheck();
 }
 
 // --- Reverse direction: drug → diseases (rendered in drug detail panel) ---
@@ -3385,6 +3416,9 @@ function renderResults(data){
     /* Cache-rendered related-drug chips carry no per-node listeners — delegate. */
     const tChip=e.target.closest(".treatment-drug-chip");
     if(tChip){e.preventDefault();navigateToDrug(tChip.dataset.drug);return;}
+    /* Treatment-drug set → interaction checker (polypharmacy pivot). */
+    const ixSet=e.target.closest(".treatment-drugs-ix-check");
+    if(ixSet){e.preventDefault();runInteractionCheckWithDrugs(ixSet.dataset.drugs||"");return;}
     /* Anesthesia-considerations footer: jump to the species-synced anesthesia tab. */
     const anesthLink=e.target.closest(".anesthesia-nav-link");
     if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)scrollToAnchor(p);return;}
@@ -8140,6 +8174,9 @@ function _attachDbItemHandlers(container){
        every render land on the exact item instead of dead-ending on the href. */
     const tChip=e.target.closest(".treatment-drug-chip");
     if(tChip){e.preventDefault();navigateToDrug(tChip.dataset.drug);return;}
+    /* Treatment-drug set → interaction checker (polypharmacy pivot). */
+    const ixSet=e.target.closest(".treatment-drugs-ix-check");
+    if(ixSet){e.preventDefault();runInteractionCheckWithDrugs(ixSet.dataset.drugs||"");return;}
     const dChip=e.target.closest(".drug-disease-chip");
     if(dChip){e.preventDefault();openDiseaseAcrossSpecies(dChip.dataset.disease,dChip.dataset.species||currentSpecies||"");return;}
     const anesthLink=e.target.closest(".anesthesia-nav-link");

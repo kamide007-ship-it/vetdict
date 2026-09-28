@@ -541,6 +541,11 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 出血斑 — 両生類はネイティブ petechiae（レッドレッグの定義的所見）、
     # 他種は皮膚出血/病変へフォールバック（2026-09 第26弾）
     "petechiae": ["skin_hemorrhage", "hemorrhage", "bruising", "skin_lesions"],
+    # Location-free bleeding mention ("血が出ている") — generic haemorrhage
+    # signal; species without a bare "bleeding" ID degrade to their
+    # haemorrhage/petechiae vocabulary instead of the old (wrong)
+    # genital_discharge hijack.
+    "bleeding": ["hemorrhage", "skin_hemorrhage", "petechiae", "bruising"],
     # Perianal
     "perineal_swelling": ["perianal_irritation", "swelling"],
     # Guinea pig scurvy
@@ -586,6 +591,15 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "foot_sores",
         "skin_redness",
         "itching",
+    ],
+    # Overgrown/ingrown claws: cat carries nail_abnormalities natively,
+    # guinea pig uses curled_nails; other species degrade to foot/lameness
+    # signals (an ingrown claw presents as a painful foot).
+    "nail_abnormalities": [
+        "curled_nails",
+        "overgrown_nails",
+        "foot_sores",
+        "lameness",
     ],
     # Falling off the perch: parakeet/parrot vocabularies carry perch deficits
     # under different IDs; neuro fallback for other avians.

@@ -835,6 +835,19 @@ def extract_symptoms_from_text(text: str) -> list:
         # "毛づくろいしすぎ" resolves to excessive_grooming (cat/hamster/ferret
         # vocabularies); dogs overgroom as excessive licking.
         "excessive_grooming": ["excessive_licking"],
+        # "お尻が汚れて" resolves to abnormal_cecotropes (rabbit/chinchilla
+        # vocabularies — uneaten cecotropes are the most common cause of a
+        # dirty bottom in hindgut fermenters); dogs express it as diarrhea.
+        "abnormal_cecotropes": ["diarrhea"],
+        # "爪が伸びすぎ/巻き爪" resolves to nail_abnormalities (cat
+        # vocabulary); an ingrown claw presents in the legacy dog vocabulary
+        # as a painful foot/limp.
+        "nail_abnormalities": ["limping"],
+        # "歯茎から血が出て" resolves to bleeding_gums (guinea-pig scurvy
+        # vocabulary); the legacy dog vocabulary's closest periodontal signal
+        # is halitosis — without this the gingival-bleeding complaint lost a
+        # symptom entirely.
+        "bleeding_gums": ["bad_breath"],
         # "顔が腫れて" resolves to facial_swelling (cat/bird vocabularies); the
         # legacy dog vocabulary's closest signals are periocular swelling and
         # a palpable mass (tooth-root abscess / sting presentations).

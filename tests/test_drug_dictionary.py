@@ -4276,3 +4276,89 @@ class TestBatch67Sirolimus:
         hcm = found[0]
         assert "シロリムス" in hcm["treatment_ja"]
         assert "sirolimus" in [x["id"] for x in find_drugs_in_text(hcm["treatment_ja"])]
+
+
+class TestBatch68Molidustat:
+    """2026-09 第55弾: モリデュスタット（Varenzin-CA1）— 猫CKD関連の非再生性
+    貧血に対する史上初のFDA承認薬（2023年条件付き承認、獣医療初のHIF-PH阻害薬）。"""
+
+    def _drug(self):
+        from api.drug_dictionary import DRUGS
+
+        return next(d for d in DRUGS if d["id"] == "molidustat")
+
+    def test_present_with_label_defining_facts(self):
+        d = self._drug()
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is True
+        # ラベル定義的事実: 5 mg/kg q24h・最長28日・7日休薬・週1回PCV中止ルール
+        assert "5 mg/kg" in cat["dosage_ja"]
+        assert "28日" in cat["dosage_ja"]
+        assert "7日" in cat["dosage_ja"]
+        assert "PCV" in cat["dosage_ja"]
+        assert "28 days" in cat["dosage"]
+        assert "PCV" in cat["dosage"]
+        # 鉄充足の前提（ESA系共通の失敗様式）
+        assert "鉄" in cat["dosage_ja"] or "鉄" in cat["notes_ja"]
+        # 条件付き承認の正直なエビデンス枠組み
+        assert "条件付き承認" in d["mechanism_ja"]
+        # HIF-PH クラスの定義（内因性EPO刺激 = 抗rhEPO抗体回避の根拠）
+        assert "HIF" in d["mechanism_ja"]
+        assert "エリスロポエチン" in d["mechanism_ja"]
+
+    def test_dog_gated_no_validated_dose(self):
+        d = self._drug()
+        assert d["species_info"]["dog"]["safe"] is False
+
+    def test_esa_stacking_registered_in_interaction_checker(self):
+        # per-monograph 表示だけでなく併用チェッカーのレジストリにも登録
+        from api.drug_interactions import find_interactions
+
+        pairs = find_interactions(["molidustat", "darbepoetin"])
+        assert any(
+            {p["drug_a"], p["drug_b"]} == {"molidustat", "darbepoetin"} and p["severity"] == "major" for p in pairs
+        )
+        pairs2 = find_interactions(["molidustat", "erythropoietin"])
+        assert any({p["drug_a"], p["drug_b"]} == {"molidustat", "erythropoietin"} for p in pairs2)
+
+    def test_matcher_and_resolver_reach_molidustat(self):
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        for phrase in [
+            "モリデュスタット（バレンジン-CA1）5 mg/kg PO q24h",
+            "molidustat (Varenzin-CA1) 5 mg/kg PO",
+        ]:
+            assert "molidustat" in [x["id"] for x in find_drugs_in_text(phrase)]
+        for q in ["モリデュスタット", "バレンジン", "varenzin", "もりでゅすたっと"]:
+            assert resolve_drug_reference(q) == "molidustat"
+
+    def test_cat_ckd_entries_reference_molidustat(self):
+        # 疾患→薬品チップの動線: 猫CKDの治療文（モジュール+JSON）が本剤を
+        # 名指しし、テキストマッチャーで解決すること
+        import json
+
+        from api.drug_dictionary import find_drugs_in_text
+
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            data = json.load(f)
+        json_hit = next(d for d in data if d.get("species") == "Cat" and d.get("name") == "Chronic Kidney Disease")
+        assert "モリデュスタット" in json_hit["treatment_ja"]
+        assert "molidustat" in json_hit["treatment"].lower()
+        assert "molidustat" in [x["id"] for x in find_drugs_in_text(json_hit["treatment_ja"])]
+
+        import importlib
+
+        cat_mod = importlib.import_module("api.species.cat_diseases")
+        mod_hit = next(
+            d
+            for d in cat_mod.DISEASES
+            if "慢性腎臓病" in (d.get("name_ja") or "") and "モリデュスタット" in (d.get("treatment_ja") or "")
+        )
+        assert "molidustat" in [x["id"] for x in find_drugs_in_text(mod_hit["treatment_ja"])]
+
+    def test_reverse_lookup_connects_ckd(self):
+        from api.drug_dictionary import _build_drug_to_diseases_index
+
+        idx = _build_drug_to_diseases_index()
+        names = " / ".join(x.get("name", "") for x in idx.get("molidustat", []))
+        assert "Chronic Kidney Disease" in names

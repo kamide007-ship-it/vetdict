@@ -161,3 +161,26 @@ class TestInteractionCheckerNameResolution:
         assert 'replace(/\\s+/g,"_")' not in js.split("function runInteractionCheck")[1].split("function ")[0]
         css = Path("static/css/main.css").read_text(encoding="utf-8")
         assert ".drug-interaction-add" in css
+
+    def test_app_js_disease_treatment_set_pivots_to_interaction_checker(self):
+        """2026-09 第55弾: 疾患ビューの「治療に関連する薬品」チップ群から
+        相互作用チェッカーへの一括投入ピボット（ポリファーマシー安全動線）。"""
+        from pathlib import Path
+
+        js = Path("static/js/app.js").read_text(encoding="utf-8")
+        # 一括投入ヘルパー: 薬品タブへ遷移→入力欄セット→アコーディオン展開→自動実行
+        assert "function runInteractionCheckWithDrugs" in js
+        body = js.split("function runInteractionCheckWithDrugs")[1].split("\nfunction ")[0]
+        assert 'switchView("drugs")' in body
+        assert "runInteractionCheck()" in body
+        assert "interaction_check_from_disease" in body
+        # レンダラーが2剤以上のときのみボタンを発行（キャッシュ/ハイドレート両パス共通）
+        renderer = js.split("function _renderTreatmentDrugsList")[1].split("\nfunction ")[0]
+        assert "treatment-drugs-ix-check" in renderer
+        assert "drugs.length>=2" in renderer
+        # 委譲ハンドラ2系統（疾患DB詳細 + チェッカー結果エリア）でルーティング
+        assert js.count('closest(".treatment-drugs-ix-check")') >= 2
+        css = Path("static/css/main.css").read_text(encoding="utf-8")
+        assert ".treatment-drugs-ix-check" in css
+        # モバイル44pxタップ目標
+        assert ".treatment-drugs-ix-check{min-height:44px}" in css
