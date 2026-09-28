@@ -394,6 +394,13 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # renal-mineralization / vertebral-fracture entries outrank MBD itself.
     ("lizard", frozenset({"jaw_softening"}), "Metabolic Bone Disease (MBD)", 1.5),
     ("reptile", frozenset({"jaw_softening"}), "Metabolic Bone Disease (MBD)", 1.5),
+    # Hind-limb trembling/paresis WITH an abnormal gait in a lizard is
+    # hypocalcemic MBD/NSHP until proven otherwise — muscle fasciculations
+    # and pelvic-limb paresis are the classic presenting signs in juvenile
+    # insectivorous/herbivorous lizards (Mader 3rd ed; Divers & Stahl).
+    # Requires BOTH signs so bare lameness keeps gout/trauma differentials.
+    ("lizard", frozenset({"hind_limb_weakness", "lameness"}), "Metabolic Bone Disease (MBD)", 1.5),
+    ("reptile", frozenset({"hind_limb_weakness", "lameness"}), "Metabolic Bone Disease (MBD)", 1.5),
     # Pollakiuria with no urine production is urethral obstruction until
     # proven otherwise in cats (male cats especially) — the minutes-count
     # emergency must not rank below UTI/FIC when the owner reports both

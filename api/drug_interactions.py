@@ -1225,6 +1225,28 @@ INTERACTIONS: list[dict[str, Any]] = [
         "management_ja": "Felycin-CA1投与中の猫では併用を避ける。",
         "ref": "Felycin-CA1 US label (DailyMed)",
     },
+    {
+        "drug_a": "molidustat",
+        "drug_b": "darbepoetin",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "造血刺激作用の相加（多血症・過粘稠リスク）",
+        "effect_en": "Combining a HIF-PH inhibitor with an ESA stacks erythropoiesis-stimulating effects — risk of erythrocytosis, hyperviscosity and thromboembolism.",
+        "effect_ja": "HIF-PH阻害薬とESAの併用は造血刺激が相加し、多血症・過粘稠・血栓塞栓のリスクとなる。",
+        "management_en": "Choose ONE erythropoiesis-stimulating strategy (molidustat OR darbepoetin) and monitor PCV weekly; stop at target PCV.",
+        "management_ja": "造血刺激療法はどちらか一方（モリデュスタット or ダルベポエチン）を選択し、PCVを週1回監視。目標PCVに達したら中止する。",
+        "ref": "Varenzin-CA1 US label (Elanco, FDA conditional approval 2023)",
+    },
+    {
+        "drug_a": "molidustat",
+        "drug_b": "erythropoietin",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "造血刺激作用の相加（多血症・過粘稠リスク）",
+        "effect_en": "Combining a HIF-PH inhibitor with epoetin stacks erythropoiesis-stimulating effects — risk of erythrocytosis and thromboembolism.",
+        "effect_ja": "HIF-PH阻害薬とエポエチンの併用は造血刺激が相加し、多血症・血栓塞栓のリスクとなる。",
+        "management_en": "Do not combine; choose one agent and monitor PCV weekly with a stop-at-target rule.",
+        "management_ja": "併用しない。どちらか一方を選択し、週1回PCV監視＋目標到達で中止のルールを徹底する。",
+        "ref": "Varenzin-CA1 US label (Elanco, FDA conditional approval 2023)",
+    },
 ]
 
 

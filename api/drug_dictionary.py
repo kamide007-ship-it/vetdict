@@ -91,6 +91,7 @@ from api.drug_batch_64 import DRUGS_BATCH_64
 from api.drug_batch_65 import DRUGS_BATCH_65
 from api.drug_batch_66 import DRUGS_BATCH_66
 from api.drug_batch_67 import DRUGS_BATCH_67
+from api.drug_batch_68 import DRUGS_BATCH_68
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10950,6 +10951,15 @@ for _drug67 in DRUGS_BATCH_67:
     if _drug67["id"] not in _drug_index:
         DRUGS.append(_drug67)
         _drug_index[_drug67["id"]] = _drug67
+
+# Batch 68 (2026-09 第55弾: モリデュスタット Varenzin-CA1 —
+#  猫CKD関連の非再生性貧血に対する史上初のFDA承認薬（2023年条件付き承認）。
+#  獣医療初のHIF-PH阻害薬クラスで、ダルベポエチン週1注射の経口・自宅投与代替。
+#  28日サイクル＋7日休薬・週1回PCV中止ルール・鉄充足前提を文書化）
+for _drug68 in DRUGS_BATCH_68:
+    if _drug68["id"] not in _drug_index:
+        DRUGS.append(_drug68)
+        _drug_index[_drug68["id"]] = _drug68
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

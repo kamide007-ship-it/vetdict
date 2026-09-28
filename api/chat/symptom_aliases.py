@@ -941,7 +941,11 @@ SYMPTOM_ALIASES = {
     "目が揺れてる": "nystagmus",
     "眼振": "nystagmus",
     "目がぐるぐる": "nystagmus",
-    "お尻が汚れてる": "diarrhea",
+    # ウサギ・チンチラの「お尻が汚れている」は未摂取盲腸便の付着が最多原因
+    # （真の下痢より頻度が高い — Harcourt-Brown）。abnormal_cecotropes の
+    # ID_SYNONYMS チェーン [cecotrope_impaction, soft_stool, diarrhea] で
+    # 非保有種（犬猫等）は従来どおり下痢系へ安全にフォールバックする。
+    "お尻が汚れてる": "abnormal_cecotropes",
     "ウジがわいてる": "diarrhea",
     "歯が伸びすぎ": "teeth_grinding",
     "歯が長い": "teeth_grinding",
@@ -1455,15 +1459,19 @@ SYMPTOM_ALIASES = {
     # 繁殖関連症状（Reproductive Health）
     # ---------------------------------------------------------------
     # 異常出血・陰部分泌物
-    "異常な出血": "genital_discharge",
-    "出血がある": "genital_discharge",
-    "血が出ている": "genital_discharge",
+    # 部位を特定しない出血表現は汎用 bleeding へ（旧 genital_discharge
+    # マッピングは「歯茎から血が出ています」等のあらゆる出血主訴を
+    # 陰部分泌物→子宮蓄膿症に誤誘導していた — 2026-09 第55弾で是正。
+    # 陰部/膣を明記する表現のみ genital_discharge を維持）
+    "異常な出血": "bleeding",
+    "出血がある": "bleeding",
+    "血が出ている": "bleeding",
     "不正出血": "genital_discharge",
     "陰部からの出血": "genital_discharge",
     "陰部分泌物": "genital_discharge",
     "膣からの出血": "genital_discharge",
     "膣からの分泌": "genital_discharge",
-    "abnormal bleeding": "genital_discharge",
+    "abnormal bleeding": "bleeding",
     "vaginal bleeding": "genital_discharge",
     "genital discharge": "genital_discharge",
     "genital bleeding": "genital_discharge",
@@ -2857,6 +2865,49 @@ SYMPTOM_ALIASES = {
     "指の間が赤く": "paw_redness",
     "指の間が腫れ": "paw_redness",
     "肉球の間が腫れ": "paw_redness",
+    # --- 2026-09 第55弾（精度監査 第37弾） ---
+    # 肉球自体の発赤・腫脹（「間」を含む形のみ収載で「肉球が真っ赤に腫れて」が
+    # 抽出ゼロだった。趾間皮膚炎/趾瘤症の代表的主訴 — Muller & Kirk 7th ed）
+    "肉球が赤": "paw_redness",
+    "肉球が真っ赤": "paw_redness",
+    "肉球が腫れ": "paw_redness",
+    # 頭部振盪の連用形語幹（「首を振る」のみ収載で「首を振ります/振りながら」が
+    # 不一致 — 外耳炎・耳ダニの定義的随伴徴候）
+    "首を振り": "head_shaking",
+    # 耳掻痒のて形語幹（「耳をかゆがる」のみ収載で「耳をかゆがって」が不一致）
+    "耳をかゆがっ": "ear_scratching",
+    # 爪の過長・陥入（高齢猫の巻き爪→肉球陥入は頻出主訴なのに爪語彙が皆無だった。
+    # cat=nail_abnormalities native、GP=curled_nails へ ID_SYNONYMS チェーン）
+    "爪が伸びすぎ": "nail_abnormalities",
+    "爪が肉球に刺さ": "nail_abnormalities",
+    "巻き爪": "nail_abnormalities",
+    "爪が刺さっ": "nail_abnormalities",
+    # 猫の過剰グルーミングの飼い主観察（毛玉の増加 — 心因性脱毛/掻痒の proxy。
+    # 「毛玉を吐く」単発は従来どおり vomiting を維持）
+    "毛玉が増え": "excessive_grooming",
+    "毛玉を吐く回数が増え": "excessive_grooming",
+    # 鼻閉のかな表記（「鼻が詰まって」のみ収載で「鼻がつまって」が抽出ゼロだった）
+    "鼻がつまっ": "nasal_discharge",
+    # 選択的摂食（固いものを残す/避ける）= 歯科疾患の教科書的な飼い主観察
+    # （ウサギ・チンチラ・モルモットの臼歯過長 — Harcourt-Brown）
+    "固いものを残": "difficulty_eating",
+    "硬いものを残": "difficulty_eating",
+    "固いものを食べな": "difficulty_eating",
+    "硬いものを食べな": "difficulty_eating",
+    # ハムスターの下半身湿潤（ウェットテイルの部位表現 — お尻が濡れ のみ収載だった。
+    # wet_tail 非保有種は ID_SYNONYMS チェーンで diarrhea へフォールバック）
+    "腰のあたりが濡れ": "wet_tail",
+    "下半身が濡れ": "wet_tail",
+    # 換羽不全・羽質不良（PBFD/栄養性の代表的主訴。「羽がボロボロ」のみ収載で
+    # 「羽が生え変わらず」が抽出ゼロだった）
+    "羽が生え変わら": "abnormal_feathers",
+    "羽の艶がな": "poor_feather_quality",
+    "羽艶が悪": "poor_feather_quality",
+    # ヘビ・トカゲのダニ目撃の色表現（「点々が動い」のみ収載で
+    # 「小さい黒い点が動いて」が抽出ゼロだった）
+    "黒い点が動": "visible_mites",
+    "小さい点が動": "visible_mites",
+    "小さな点が動": "visible_mites",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

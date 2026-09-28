@@ -260,6 +260,13 @@ SPECIES_PREVALENCE = {
         # 先天奇形 — 猫の異所性尿管は犬よりさらに稀（Holt & Gibbs）。未tierのまま
         # 3所見セットのカバレッジで血尿+頻尿主訴のFIC/UTIを上回っていた
         "Feline Ectopic Ureter": "rare",
+        # 猫の子癇（産後低カルシウム血症）は犬と異なり真に稀（Little, The Cat;
+        # 産科文献でも症例報告レベル）。未tierの小症状セット（発熱+嗜眠を含む）が
+        # 産後文脈のない汎用「発熱+元気消失」主訴の1位を奪っていた
+        # （2026-09 第55弾 精度監査第37弾 — 咬傷膿瘍/胃腸炎が正しい上位）
+        "Eclampsia (Puerperal Hypocalcemia)": "rare",
+        # 産後子宮炎も繁殖歴のある授乳期の雌限定 — 一般集団では uncommon
+        "Postpartum Metritis (Feline)": "uncommon",
         # CKD続発の腎性二次性上皮小体機能亢進は独立診断としては uncommon —
         # 未tierでPU/PD主訴の子宮蓄膿症を押しのけていた
         "Feline Renal Secondary Hyperparathyroidism": "uncommon",

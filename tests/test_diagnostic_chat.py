@@ -1641,6 +1641,7 @@ class TestQuickTapPhraseExtraction:
             "水をよく飲みトイレの砂の塊が大きい",
             "かかとをつけてペタペタ歩く",
             "耳の付け根を掻いて黒いカスが出る",
+            "爪が伸びすぎて肉球に刺さっている",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -1669,6 +1670,7 @@ class TestQuickTapPhraseExtraction:
             "便が毛でつながっている",
             "おしっこが白っぽくてドロドロしている",
             "お尻の周りに軟らかい便がつく",
+            "お尻が汚れていて臭い",
         ],
         "chinchilla": [
             "よだれが出る",
@@ -1764,6 +1766,7 @@ class TestQuickTapPhraseExtraction:
             "口をあけたまま呼吸",
             "尻尾が細くなってきた",
             "あごが柔らかくてぶよぶよ",
+            "後ろ足が震えて歩き方がおかしい",
         ],
         "amphibian": [
             "食べない",
@@ -6283,3 +6286,140 @@ class TestChatClinicalAccuracyAuditRound36:
         res = _match_equine_symptoms_to_diseases(list(ids))
         names = [(r.get("name_ja") or r.get("name") or "") for r in res[:2]]
         assert any(("蹄葉炎" in n) or ("蹄膿瘍" in n) for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound37:
+    """2026-09 第55弾（精度監査 第37弾）: 裸の出血表現→genital_discharge
+    全域誤マッピングの是正 + 肉球発赤/耳掻痒/爪過長/盲腸便付着/換羽不全/
+    ダニ色表現の語彙補完 + 猫子癇の tier ゲート + トカゲMBDの後肢徴候ペア。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    @staticmethod
+    def _names(results, n=6):
+        return [(r.get("name_ja") or r.get("name") or "") for r in results[:n]]
+
+    def test_bare_bleeding_no_longer_maps_to_genital_discharge(self):
+        # 「歯茎から血が出ています」が子宮蓄膿症（genital_discharge）に
+        # 誤誘導されていた全域バグの再発防止
+        from api.chat.symptom_aliases import SYMPTOM_ALIASES
+
+        for key in ["血が出ている", "出血がある", "異常な出血", "abnormal bleeding"]:
+            assert SYMPTOM_ALIASES[key] != "genital_discharge", key
+        # 陰部/膣を明記する表現は genital_discharge を維持
+        assert SYMPTOM_ALIASES["陰部からの出血"] == "genital_discharge"
+        assert SYMPTOM_ALIASES["不正出血"] == "genital_discharge"
+
+    def test_dog_gingival_bleeding_ranks_periodontal_not_pyometra(self):
+        ids, res = self._legacy("口臭が強くて歯茎から血が出ています")
+        assert "vulvar_discharge" not in ids
+        names = self._names(res, 3)
+        assert any("歯周病" in n for n in names[:1])
+        assert not any("子宮蓄膿症" in n for n in names)
+
+    def test_dog_pyometra_guard_unchanged(self):
+        # 陰部を明記した主訴は従来どおり子宮蓄膿症 rank 1
+        ids, res = self._legacy("陰部から膿が出て水をよく飲みます")
+        assert "vulvar_discharge" in ids
+        assert "子宮蓄膿症" in self._names(res, 1)[0]
+
+    def test_dog_pad_erythema_extracts_paw_redness(self):
+        ids, res = self._legacy("散歩のあと足の裏を見たら肉球が真っ赤に腫れています")
+        assert "paw_redness" in ids
+        assert any("趾間" in n for n in self._names(res, 1))
+
+    def test_dog_ear_pruritus_head_shaking_ranks_otitis(self):
+        ids, res = self._legacy("耳をかゆがって首を振ります")
+        assert {"ear_scratching", "head_shaking"} <= ids
+        assert "外耳炎" in self._names(res, 1)[0]
+
+    def test_cat_overgrown_claw_extracts_nail_id(self):
+        ids, _ = self._species("後ろ足の爪が伸びすぎて肉球に刺さっています", "cat")
+        assert "nail_abnormalities" in ids
+
+    def test_cat_generic_fever_lethargy_not_hijacked_by_eclampsia(self):
+        # 猫の子癇は真に稀（Little, The Cat）— 産後文脈のない発熱+嗜眠で
+        # 1位を奪っていた
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        cp = SPECIES_PREVALENCE["cat"]
+        assert cp.get("Eclampsia (Puerperal Hypocalcemia)") == "rare"
+        assert cp.get("Postpartum Metritis (Feline)") == "uncommon"
+        _, res = self._species("急に元気がなくなって熱っぽいです", "cat")
+        names = self._names(res, 3)
+        assert not any("子癇" in n for n in names)
+
+    def test_cat_increased_hairballs_rank_overgrooming(self):
+        ids, res = self._species("毛玉が増えて背中の毛が薄くなってきました", "cat")
+        assert "excessive_grooming" in ids
+        assert any("心因性脱毛" in n or "対称性脱毛" in n for n in self._names(res, 2))
+        # ガード: 毛玉+便秘の毛球閉塞主訴は従来どおり
+        _, res2 = self._species("毛玉を吐く 便が出ていない", "cat")
+        assert any("便秘" in n or "毛球" in n for n in self._names(res2, 2))
+
+    def test_rabbit_dirty_bottom_ranks_cecotroph_disorders(self):
+        ids, res = self._species("お尻が汚れていて臭いです", "rabbit")
+        assert "abnormal_cecotropes" in ids
+        assert any("盲腸便" in n for n in self._names(res, 2))
+        # ガード: 犬の同表現は従来どおり下痢系へフォールバック
+        dids, dres = self._legacy("下痢をしてお尻が汚れています")
+        assert "diarrhea" in dids
+        assert any("胃腸炎" in n for n in self._names(dres, 2))
+
+    def test_lizard_hindlimb_tremor_gait_ranks_mbd(self):
+        for spc in ["lizard", "reptile"]:
+            ids, res = self._species("後ろ足が震えて歩き方がおかしいです", spc)
+            assert "hind_limb_weakness" in ids
+            assert any("代謝性骨疾患" in n for n in self._names(res, 3)), (spc, self._names(res))
+        # ガード: 素の跛行は痛風/外傷ddxを維持（ペアは両所見必須）
+        _, res2 = self._species("足を引きずっています", "lizard")
+        assert not any("代謝性骨疾患" in n for n in self._names(res2, 3))
+
+    def test_mbd_symptom_sets_carry_hindlimb_weakness(self):
+        import importlib
+
+        for spmod, names in [
+            ("lizard", ["Metabolic Bone Disease (MBD)", "Nutritional Secondary Hyperparathyroidism (NSHP)"]),
+            ("reptile", ["Metabolic Bone Disease (MBD)", "Nutritional Secondary Hyperparathyroidism"]),
+        ]:
+            m = importlib.import_module(f"api.species.{spmod}_diseases")
+            for want in names:
+                d = next(x for x in m.DISEASES if x.get("name") == want)
+                assert "hind_limb_weakness" in d["symptoms"], (spmod, want)
+
+    def test_wave2_vocabulary_gaps_extract(self):
+        # 鼻閉かな表記 / 選択的摂食 / 下半身湿潤 / 換羽不全 / ダニ色表現
+        ids, res = self._species("鼻がつまってごはんの匂いがわからないみたいです", "cat")
+        assert "nasal_discharge" in ids
+        ids, res = self._species("餌を食べる速度が遅くなって固いものを残します", "rabbit")
+        assert "difficulty_eating" in ids
+        assert any("切歯過長" in n or "不正咬合" in n or "歯周病" in n for n in self._names(res, 2))
+        ids, res = self._species("腰のあたりが濡れていて臭います", "hamster")
+        assert "wet_tail" in ids
+        assert any("ウェットテイル" in n for n in self._names(res, 1))
+        ids, res = self._species("羽が生え変わらずボロボロのままです", "bird")
+        assert "abnormal_feathers" in ids
+        assert any("PBFD" in n for n in self._names(res, 2))
+        ids, res = self._species("体の表面に小さい黒い点が動いています", "snake")
+        assert "visible_mites" in ids
+        assert any("ダニ" in n for n in self._names(res, 1))
+
+    def test_ferret_petechiae_guard_unchanged(self):
+        # 出血表現の是正がフェレットの出血斑主訴を壊していないこと
+        ids, res = self._species("皮膚に出血斑があります", "ferret")
+        assert "petechiae" in ids
+        assert any("血小板減少症" in n for n in self._names(res, 1))

@@ -1006,6 +1006,7 @@ DISEASES: List[Dict[str, Any]] = [
         "【食欲不振】 ミルタザピン 1.88 mg/匹 PO q48h または経皮ミラタズ®（FDA承認）、カプロモレリン 2 mg/kg PO q24h。"
         "【脱水補正】 在宅皮下輸液 LRS 100-150 mL q24-72h（家族指導）。"
         "【腎性貧血】 HCT<20%でダルベポエチン 0.45-1 μg/kg SC 週1回、鉄補充必須（鉄欠乏で抗EPO抗体産生リスク）。"
+        "経口代替: モリデュスタット（バレンジン-CA1）5 mg/kg PO q24h×最長28日（FDA条件付き承認2023 — HIF-PH阻害薬。週1回PCV監視・目標到達で中止、再開は7日以上の休薬後）。"
         "【二次性上皮小体機能亢進症】 カルシトリオール 1.5-3.5 ng/kg PO q24h（夜間空腹時）。"
         "【低K血症対策】 グルコン酸カリウム 2-6 mEq/匹/日 PO（IRIS 3-4で頻発）。",
         "prevention": "Annual senior wellness exams from age 7 with creatinine, SDMA, BUN, electrolytes, urinalysis (USG, UPC). Avoid nephrotoxic drugs (NSAIDs, aminoglycosides, lily ingestion). Maintain hydration (wet food, fresh water sources). Treat hypertension and proteinuria early. Annual blood pressure measurement in cats over 10 years.",
