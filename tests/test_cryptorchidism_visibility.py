@@ -78,6 +78,70 @@ class TestTreatmentSexSpeciesMismatch:
         assert "癌遺伝子" not in block, "停留精巣に腫瘍性疾患ボイラープレートが残存"
         assert "鼠径管" in block, "発生異常としての正しい病態記述が無い"
 
+    def test_cryptorchidism_all_fields_curated_and_clean(self):
+        """犬・猫の停留精巣は全臨床フィールドが疾患固有で、雌/鳥/腫瘍テンプレ汚染が無い。
+
+        利用者要望「しっかりと記載」: clinical_signs は「子宮蓄膿・乳腺炎・難産・
+        妊娠中毒症の徴候」という雌用カテゴリ文、EN の causes/pathophysiology/
+        prevention/diagnosis は感染症/腫瘍/雌生殖器ボイラープレートだった。
+        """
+        bad_markers = (
+            "子宮蓄膿",
+            "Pyometra",
+            "卵停滞",
+            "IU/羽",
+            "乳腺炎",
+            "難産",
+            "Dystocia",
+            "oestrus",
+            "癌遺伝子",
+            "neoplastic diseases involves",
+            "infectious (bacterial",
+            "requiring veterinary evaluation",
+        )
+        fields = (
+            "description",
+            "description_ja",
+            "causes",
+            "causes_ja",
+            "pathophysiology",
+            "pathophysiology_ja",
+            "prevention",
+            "prevention_ja",
+            "clinical_signs",
+            "clinical_signs_ja",
+            "treatment",
+            "treatment_ja",
+            "diagnosis",
+            "diagnosis_ja",
+            "prognosis",
+            "prognosis_ja",
+        )
+        for want_sp in ("dog", "cat"):
+            e = next(
+                x
+                for x in _overlay_entries()
+                if (x.get("species") or "").lower() == want_sp and x.get("name") == "Cryptorchidism"
+            )
+            for f in fields:
+                v = e.get(f) or ""
+                assert v, f"{want_sp}.{f} が空"
+                for b in bad_markers:
+                    assert b not in v, f"{want_sp}.{f} にテンプレ汚染: {b!r}"
+            # 疾患固有の核心記述
+            assert "セルトリ" in (e.get("pathophysiology_ja") or "")
+            assert "Sertoli" in (e.get("pathophysiology") or "")
+
+    def test_dog_module_entry_fully_curated(self):
+        """犬モジュールの停留精巣エントリが疾患固有の日英記載＋推奨検査を持つ。"""
+        src = (ROOT / "api" / "species" / "dog_diseases.py").read_text(encoding="utf-8")
+        i = src.find('"name": "Cryptorchidism"')
+        block = src[i : i + 6000]
+        for marker in ("INSL3", "精巣導帯", "セルトリ細胞腫", "recommended_tests", "hCG/GnRH"):
+            assert marker in block, f"犬モジュールに {marker} が無い"
+        for bad in ("Multifactorial etiology including infectious", "tissue injury, inflammatory response"):
+            assert bad not in block, f"犬モジュールに汎用テンプレが残存: {bad!r}"
+
     def test_fallback_generator_male_repro_guard(self):
         """fallback_generator が雄性生殖器疾患に卵停滞テンプレートを生成しない。"""
         from scripts.template_elimination.fallback_generator import _class_specific_lines
@@ -121,7 +185,7 @@ class TestCategoryClassifierWiring:
 
     def test_reproductive_keyword_covers_cryptorchid(self):
         """生殖器カテゴリの正規表現が cryptorchid を含む（停留精巣の受け皿）。"""
-        m = re.search(r'reproductive:\{[^}]*keywords:/([^/]+)/', APP_JS)
+        m = re.search(r"reproductive:\{[^}]*keywords:/([^/]+)/", APP_JS)
         assert m and "cryptorchid" in m.group(1)
 
 
