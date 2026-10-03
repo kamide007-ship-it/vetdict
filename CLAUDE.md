@@ -6264,3 +6264,53 @@ ACTH刺激プロトコル・シクロスポリン・オクラシチニブ等）�
 - ServiceWorker: `CACHE_NAME` v161 → **v162**
 - 再現手順: `migrate_to_sqlite.py`（クリーンビルド 6,893疾患・646薬品）— 疾患名不変のため
   検索インデックス no-op
+
+## 2026-10セッション（犬の停留精巣が疾患DBで見つからない問題 — UI分類の部分一致バグ + 雄疾患への雌・鳥用治療文の是正）
+
+### 背景（利用者報告）: 「犬の停留精巣について疾患DBに記載なし」
+エントリ自体（dog_diseases.py「Cryptorchidism / 停留精巣（陰睾）」）は存在・配信されており、
+独立した2つのバグで「無い」ように見えていた。
+
+### バグ1: classifyDisease の部分一致誤マッチで〈感染症〉に収容（app.js）
+- infectious 正規表現の `crypto`（クリプトコッカス用）が「**Crypto**rchidism」に部分一致 →
+  「カテゴリで探す」で停留精巣が〈感染症〉に分類され、〈生殖器〉カテゴリに存在しなかった
+- 同型の部分一致バグを一括修正: `crypto`→`cryptococc|cryptospor`、`skin`→`\bskin`
+  （Dy**skin**esia→皮膚を防止）、`nocardia`→`nocardi`（No**cardi**osis が
+  infectious に届かず cardiovascular に流れていた）、`cystit`→`\bcystit`
+  （Dacryo**cystit**is→泌尿器を防止）、`bladder`→`(?:^|[^l])bladder`（Gall**bladder**→泌尿器を防止）、
+  `polycyst`→`polycyst(?!.*liver)`（多嚢胞性肝疾患→泌尿器を防止）。
+  infectious に `streptococc|staphylococc|salmon\s*poisoning` 追加、GI に
+  `cholecyst|gallbladder|mucocele`、眼科に `dacryocyst|lacrimal`、呼吸器に `ciliary\s*dyskinesia` 追加
+- **2パス分類**: まず疾患名（name+name_ja、キュレート済みで最も信頼できる）だけで判定し、
+  名前で決まらない場合のみ説明文を含めて再判定。説明文の「increasing cancer risk」等の
+  付随言及による誤分類（中毒疾患が臓器系に散る等）を排除
+- **名前パス専用の照合順 DISEASE_CAT_MATCH_ORDER**: 泌尿器＞消化器（「尿道閉塞」が GI の
+  obstruct に先取りされない）、眼科＞筋骨格（「水晶体脱臼」が luxat に先取りされない）。
+  説明文パスとカテゴリグリッド表示順は従来の DISEASE_CAT_ORDER を維持
+  （順序入替を説明文パスに適用すると胃潰瘍→泌尿器のような誤分類が発生することを実測で確認し回避）
+- 効果（4種実測 2,052疾患、全162シフトを目視レビュー）: 停留精巣→〈生殖器〉、全中毒→〈中毒〉、
+  クッシング/糖尿病→〈内分泌〉、緑内障/角膜潰瘍→〈眼科〉等、全シフトが臨床的に正しい方向
+
+### バグ2: 雄疾患・哺乳類に鳥の卵詰まり治療テンプレート（臨床的誤り）
+- fallback_generator の reproductive テンプレート（「卵停滞・卵管脱・難産: オキシトシン…
+  **鳥1-3 IU/羽**、…卵巣子宮全摘出(OHE)…」）が、**雄の犬・猫の停留精巣**と哺乳類の
+  雌性生殖器疾患（ハムスター子宮平滑筋腫・フェレット卵巣遺残・ハリネズミ顆粒膜細胞腫）の
+  treatment_ja にスタンプされていた（計5件、英語 treatment は正しい精巣摘出プロトコルだった）
+- `scripts/template_elimination/fix_male_repro_treatment_mismatch.py`（新規）で5件を
+  教科書準拠のキュレート文に置換（犬: 両側精巣摘出・腹腔内は開腹/腹腔鏡・ホルモン療法非推奨・
+  繁殖禁止・Cox 1986/Yates 2003。猫: 去勢時必須摘出・Yates 2003/Romagnoli 2017 等）
+- **猫モジュールの病態生理も誤り**: 「停留精巣は**腫瘍性疾患**である。癌遺伝子…」という
+  腫瘍ボイラープレート → 発生異常としての正しい病態（鼠径管・熱ストレス・捻転リスク・
+  去勢済みに見えて雄行動が残る臨床ヒント）に置換。causes_ja の循環参照文も是正
+- **fallback_generator に再発ガード**: 雄性疾患名（停留精巣/精巣/前立腺/陰茎等）は
+  雄用プロトコルを生成、卵停滞・IU/羽 の文言は産卵動物（鳥/爬虫類/両生類/魚）限定、
+  哺乳類の雌性疾患は難産・帝王切開表現に
+
+### 回帰テスト（tests/test_cryptorchidism_visibility.py 新規、9件）
+- 哺乳類 treatment_ja に IU/羽・卵停滞 が無い（全種走査）、犬猫停留精巣の雄プロトコル、
+  猫モジュールの腫瘍ボイラープレート不在、generator の雄/哺乳類雌/産卵動物3分岐
+- 2パス分類・MATCH_ORDER・修正済み正規表現トークンの配線検証
+- 配信API: 犬停留精巣の取得と治療文、横断検索「停留精巣」の犬ヒット
+
+### テスト・CI
+- ServiceWorker: `CACHE_NAME` v162 → **v163**
