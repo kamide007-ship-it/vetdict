@@ -6423,3 +6423,92 @@ class TestChatClinicalAccuracyAuditRound37:
         ids, res = self._species("皮膚に出血斑があります", "ferret")
         assert "petechiae" in ids
         assert any("血小板減少症" in n for n in self._names(res, 1))
+
+
+class TestDeciduousMalocclusionEntry:
+    """2026-10: 乳歯列期不正咬合（咬合誘導抜歯）エントリの新設 +
+    噛み合わせ・歯過長エイリアスの誤マッピング是正（teeth_grinding→歯科ID）。
+    受け口/出っ歯の主訴が咬合疾患に届かなかったギャップの再発防止。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    @staticmethod
+    def _names(results, n=6):
+        return [(r.get("name_ja") or r.get("name") or "") for r in results[:n]]
+
+    def test_underbite_complaint_ranks_malocclusion_first(self):
+        # 受け口の飼い主主訴（本セッションの実症例）が rank 1 に解決すること
+        for phrase in [
+            "下の歯が前に出てきて受け口になってきた",
+            "生後3ヶ月で受け口になってきました",
+            "噛み合わせがおかしい気がする",
+        ]:
+            ids, res = self._legacy(phrase)
+            assert "malocclusion" in ids, (phrase, ids)
+            top = self._names(res, 1)
+            assert top and "不正咬合" in top[0], (phrase, top)
+
+    def test_generic_oral_complaints_not_hijacked(self):
+        # 主訴ゲート設計: よだれ・口腔痛・食欲不振だけでは咬合エントリは
+        # 上位を奪わない（歯周病/口腔内腫瘍の既存ddxを維持）
+        ids, res = self._legacy("よだれが多くて食欲がない")
+        assert "malocclusion" not in ids
+        names = self._names(res, 3)
+        assert any("歯周病" in n or "口腔内腫瘍" in n for n in names), names
+        assert not any("不正咬合" in n for n in names), names
+
+    def test_legacy_entry_mirrors_dog_module_for_pivot(self):
+        # チャット候補カードの「疾患DBで詳細を開く」ピボットが base-name
+        # 完全一致で着地するよう、レガシー名=犬モジュール名を固定
+        from api.health_checker import DISEASES
+        from api.species import dog_diseases as dmod
+
+        legacy = next(d for d in DISEASES if d["id"] == "deciduous_malocclusion")
+        mod = next(d for d in dmod.DISEASES if d["name"].startswith("Deciduous Malocclusion"))
+        assert legacy["name_en"] == mod["name"]
+        assert legacy["name_ja"] == mod["name_ja"]
+        assert legacy.get("prevalence_tier") == "common"
+        # モジュールエントリはキュレート済み治療文（咬合誘導の中核事実）を持つ
+        t = mod["treatment_ja"]
+        assert "インターセプティブ" in t or "咬合誘導" in t
+        assert "永久歯萌出" in t and "Hale" in mod["treatment"]
+        # 本処置は成長促進ではない、の安全文言（飼い主説明の中核）
+        assert "成長を促進する処置ではありません" in mod["pathophysiology_ja"]
+
+    def test_prevalence_key_resolves_to_module_name(self):
+        from api.species import dog_diseases as dmod
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        key = "Deciduous Malocclusion (Interceptive Orthodontics)"
+        assert SPECIES_PREVALENCE["dog"].get(key) == "common"
+        assert any(d["name"] == key for d in dmod.DISEASES)
+
+    def test_overgrown_teeth_aliases_fixed_rank_dental_disease(self):
+        # 歯が伸びすぎ/噛み合わせが悪い → teeth_grinding（疼痛徴候）への
+        # 誤マッピングを歯科IDに是正: 齧歯類・ウサギで歯科疾患が上位に
+        ids, res = self._species("噛み合わせが悪くてよだれが出ています", "chinchilla")
+        names = self._names(res, 2)
+        assert any("不正咬合" in n for n in names), (ids, names)
+        ids, res = self._species("歯が伸びすぎて食べられないようです", "hamster")
+        names = self._names(res, 2)
+        assert any("過長" in n or "不正咬合" in n for n in names), (ids, names)
+        ids, res = self._species("歯が伸びすぎている", "rabbit")
+        names = self._names(res, 2)
+        assert any("切歯過長" in n or "不正咬合" in n for n in names), (ids, names)
+        # ガード: 歯ぎしり（真の疼痛徴候）は従来どおり teeth_grinding
+        ids2, _ = self._species("歯ぎしりをしています", "rabbit")
+        assert "teeth_grinding" in ids2

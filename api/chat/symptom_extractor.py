@@ -525,6 +525,15 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "visible_tooth_overgrowth",
     ],
     "visible_tooth_overgrowth": ["overgrown_teeth", "dental_overgrowth", "malocclusion"],
+    # 2026-10: 受け口/出っ歯/噛み合わせ主訴。犬レガシーDBは malocclusion を
+    # ネイティブ保有。ウサギ・齧歯類は過長歯系ID、他種は食べにくさへ解決。
+    "malocclusion": [
+        "overgrown_teeth",
+        "dental_overgrowth",
+        "incisor_overgrowth",
+        "visible_tooth_overgrowth",
+        "difficulty_eating",
+    ],
     "scaly_legs": ["leg_scales", "scaly_face"],
     "leg_scales": ["scaly_legs", "scaly_face"],
     # Pain
