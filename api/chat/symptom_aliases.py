@@ -2941,6 +2941,46 @@ SYMPTOM_ALIASES = {
     "黒い点が動": "visible_mites",
     "小さい点が動": "visible_mites",
     "小さな点が動": "visible_mites",
+    # --- 2026-10 第62弾（精度監査 第38弾） ---
+    # 蒼白粘膜の口語「白っぽい」（「歯茎が白い/白く」のみ収載で
+    # 「歯茎が白っぽくて」が抽出ゼロ — 血管肉腫破裂/IMHAの定義的徴候）
+    "歯茎が白っぽ": "pale_gums",
+    "歯ぐきが白": "pale_gums",
+    "口の中が白っぽ": "pale_gums",
+    # 足底の潰瘍・びらんの口語「ただれ」（「足の裏が赤い/毛が抜け」のみ収載で
+    # ウサギ・ソアホックの代表的主訴「足の裏がただれて」が bleeding 単独に
+    # 落ちて DIC/血小板減少症が上位を占めていた）
+    "足の裏がただれ": "foot_sores",
+    "足裏がただれ": "foot_sores",
+    "足の裏がじゅくじゅく": "foot_sores",
+    # 口部疼痛の飼い主観察（「口を痛がる」のみ収載で「口の周りを気にして」
+    # 「食べるとき痛そう」が抽出ゼロ — 歯科疾患の教科書的主訴）
+    "口の周りを気にし": "difficulty_eating",
+    "口元を気にし": "difficulty_eating",
+    "食べるとき痛そう": "difficulty_eating",
+    "食べるときに痛": "difficulty_eating",
+    "食べると痛そう": "difficulty_eating",
+    # 猫FLUTD/FICの会陰部過剰グルーミング（Buffington; AAFP — FIC/FLUTD の
+    # 症状セットは excessive_grooming を保有。従来は汎用 itching に落ちて
+    # 皮膚科疾患が上位を占めていた）
+    # 注: 「舐めている」(5字, excessive_licking) と長さタイにならないよう
+    # 6字以上のキーで登録する（タイは辞書挿入順で旧キーが勝つ）
+    "陰部を舐めて": "excessive_grooming",
+    "陰部を舐める": "excessive_grooming",
+    "陰部をしきりに舐め": "excessive_grooming",
+    "陰部をずっと舐め": "excessive_grooming",
+    "お尻のまわりを舐め": "excessive_grooming",
+    # 排便困難の口語（「おしっこが出にくい」のみ収載で便側の「出にくそう」が
+    # 抽出ゼロ — 鳥の卵詰まり・総排泄腔疾患の随伴主訴）
+    "うんちが出にく": "constipation",
+    "便が出にく": "constipation",
+    "フンが出にく": "constipation",
+    "ふんが出にく": "constipation",
+    # 浮遊（両生類・魚の浮力異常）: 「体が浮いて」のみ収載で主語省略形
+    # 「膨れて浮いています」が抽出ゼロ — 両生類浮腫症候群/魚鰾疾患の主訴
+    "浮いてい": "buoyancy_problems",
+    "水面に浮い": "buoyancy_problems",
+    "沈めな": "buoyancy_problems",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

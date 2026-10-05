@@ -6588,3 +6588,95 @@ class TestMissingTeethEntry:
         # 猫: tooth_loss へ解決し歯周病系が上位
         ids2 = _extract_species_symptoms("歯がないようです", "cat")
         assert "tooth_loss" in ids2, ids2
+
+
+class TestChatClinicalAccuracyAuditRound38:
+    """2026-10 第62弾（精度監査 第38弾）: 歯茎蒼白の口語「白っぽい」・
+    足底びらん「ただれ」・口部疼痛の飼い主観察・猫FLUTD会陰部グルーミング・
+    排便困難「出にくそう」・両生類浮遊「浮いています」の語彙補完 +
+    鳥開脚症/両生類腫瘍クローンの tier ゲート。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    @staticmethod
+    def _names(results, n=6):
+        return [(r.get("name_ja") or r.get("name") or "") for r in results[:n]]
+
+    def test_dog_pale_gums_colloquial_ranks_hemangiosarcoma(self):
+        # 「歯茎が白っぽくて」が抽出ゼロで血管肉腫（脾破裂）が沈んでいた
+        ids, res = self._legacy("急にぐったりして歯茎が白っぽくてお腹が膨れています")
+        assert "pale_gums" in ids, ids
+        assert any("血管肉腫" in n for n in self._names(res, 2)), self._names(res)
+
+    def test_rabbit_sore_hock_tadare_ranks_pododermatitis(self):
+        # 「足の裏がただれて」が bleeding 単独に落ちて DIC/血小板減少症が
+        # 上位を占めていた — ソアホックの代表的主訴
+        ids, res = self._species("後ろ足の裏がただれて血が出ています", "rabbit")
+        assert "pododermatitis_signs" in ids, ids
+        names = self._names(res, 3)
+        assert any("足底" in n or "ソアホック" in n for n in names), names
+
+    def test_dog_mouth_pain_observation_ranks_dental(self):
+        # 「口の周りを気にして」「食べるとき痛そう」が抽出ゼロで
+        # CDS/網膜萎縮が上位だった — 歯科疾患の教科書的主訴
+        ids, res = self._legacy("口の周りを気にしていてご飯を食べるとき痛そうに鳴きます")
+        assert "loss_of_appetite" in ids or "difficulty_eating" in ids, ids
+        assert "歯周病" in self._names(res, 1)[0], self._names(res)
+
+    def test_cat_genital_licking_extracts_grooming_and_surfaces_fic(self):
+        # 「陰部をずっと舐めています」が汎用 itching に落ちて皮膚糸状菌が
+        # 上位独占 — FLUTD/FIC の症状セットは excessive_grooming を保有
+        # （Buffington）。「舐めている」(5字)との長さタイを避けるため
+        # キーは6字以上で登録されている
+        ids, res = self._species("トイレのあと陰部をずっと舐めています", "cat")
+        assert "excessive_grooming" in ids, ids
+        names = self._names(res, 6)
+        assert any("特発性膀胱炎" in n or "FLUTD" in n or "膀胱炎" in n for n in names), names
+
+    def test_parakeet_difficulty_defecating_extracts_straining(self):
+        # 「うんちが出にくそう」が抽出ゼロで腹部膨満単独だった
+        ids, res = self._species("お腹が膨れていてうんちが出にくそうです", "parakeet")
+        assert "straining" in ids or "constipation" in ids, ids
+        names = self._names(res, 5)
+        assert any("卵" in n or "総排泄腔" in n for n in names), names
+
+    def test_amphibian_floating_bloat_ranks_dropsy_not_neoplasia(self):
+        # 「膨れて浮いています」の主語省略形が抽出ゼロで、未tierの
+        # 肝細胞癌/腎腺癌クローンが上位を占めていた
+        ids, res = self._species("お腹がパンパンに膨れて浮いています", "amphibian")
+        assert "buoyancy_problems" in ids, ids
+        names = self._names(res, 3)
+        assert any("浮腫" in n or "水腫" in n or "浮遊" in n for n in names), names
+        assert not any("癌" in n for n in names), names
+
+    def test_bird_leg_up_complaint_not_hijacked_by_splay_leg(self):
+        # 開脚症（雛の発育期変形）が未tierで成鳥の挙上肢主訴の rank 1 を
+        # 奪っていた — uncommon tier 化で rank 1 は譲る
+        ids, res = self._species("片足を上げたままで止まり木に止まれません", "bird")
+        assert "開脚症" not in self._names(res, 1)[0], self._names(res)
+
+    def test_guard_pyometra_and_hotspot_unchanged(self):
+        ids, res = self._legacy("陰部から膿が出て水をよく飲みます")
+        assert "子宮蓄膿症" in self._names(res, 1)[0]
+        ids2, res2 = self._legacy("皮膚がジュクジュクしていて痒がる")
+        assert "ホットスポット" in self._names(res2, 1)[0] or "急性湿性皮膚炎" in self._names(res2, 1)[0]
+
+    def test_guard_generic_licking_stays_dermatologic(self):
+        # 部位を特定しない舐め主訴は従来どおり皮膚科ddxを維持
+        ids, res = self._species("体をしきりに舐めています", "cat")
+        names = self._names(res, 3)
+        assert any("皮膚" in n or "ノミ" in n for n in names), names

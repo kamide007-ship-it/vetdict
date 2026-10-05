@@ -727,6 +727,19 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 嘴・粘膜蒼白（鳥の「くちばしの色が薄い」）: parakeet/bird は
     # pale_mucous_membranes をネイティブ保有。他種は貧血系へフォールバック。
     "pale_mucous_membranes": ["pale_gums", "pale_comb", "anemia", "weakness"],
+    # --- 2026-10 Round 38 sweep ---
+    # 歯茎蒼白（「歯茎が白っぽい」）: cat/ferret 等は pale_gums をネイティブ
+    # 保有。非保有種は粘膜蒼白→貧血系へフォールバック（逆方向チェーン）。
+    "pale_gums": ["pale_mucous_membranes", "pale_comb", "anemia", "weakness"],
+    # 浮力異常（「浮いたまま沈めない」）: amphibian は buoyancy_problems を
+    # ネイティブ保有。fish は遊泳異常系の語彙のため安全にフォールバック。
+    "buoyancy_problems": [
+        "inability_to_sink",
+        "swimming_upside_down",
+        "abnormal_swimming",
+        "erratic_swimming",
+        "bloating",
+    ],
 }
 
 # Backwards-compat alias (some older imports use the private name).
