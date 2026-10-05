@@ -4464,3 +4464,69 @@ class TestBatch69EpsiprantelDapsone:
         assert "Epsiprantel 5.5 mg/kg PO。" not in raw
         # 修正後の正しい表記が配信されている
         assert "cats 2.75 mg/kg" in raw
+
+
+class TestBatch70Gilvetmab:
+    """2026-10: ギルベトマブ — 犬で初のUSDA条件付きライセンス・チェックポイント
+    阻害薬（抗PD-1犬化mAb、Merck）。MCT I-III・メラノーマ II-III。
+    10 mg/kg IV ≥30分 q2w 最大10回。免疫抑制薬併用はラベル除外。"""
+
+    def _get(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        return next(d for d in DRUGS if d["id"] == drug_id)
+
+    def test_gilvetmab_present_with_label_dosing_and_honest_evidence(self):
+        d = self._get("gilvetmab")
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is True
+        # ラベル定義的用法: 10 mg/kg・30分以上・q2w・最大10回
+        assert "10 mg/kg" in dog["dosage"] and "30" in dog["dosage"]
+        assert "最大10回" in dog["dosage_ja"] and "30分以上" in dog["dosage_ja"]
+        # 条件付きライセンスの正直なエビデンス枠組み（JVIM 2026の実数値）
+        notes = dog["notes"] + dog["notes_ja"]
+        assert "20%" in notes and "46%" in notes
+        assert "偽性進行" in dog["notes_ja"]
+        # リンパ腫は非適応（単剤有効性不十分）
+        assert "リンパ腫" in dog["notes_ja"]
+        # 完全バイリンガル
+        for k in ("dosage", "dosage_ja", "notes", "notes_ja"):
+            assert dog[k].strip()
+
+    def test_gilvetmab_immunosuppressant_gate(self):
+        d = self._get("gilvetmab")
+        # 猫は犬化抗体のため safe:False
+        assert d["species_info"]["cat"]["safe"] is False
+        # グルココルチコイド併用除外が禁忌とレジストリの両方に
+        assert "グルココルチコイド" in d["contraindications_ja"]
+        from api.drug_interactions import find_interactions
+
+        pairs = {
+            (ix["drug_a"], ix["drug_b"]): ix["severity"]
+            for ix in find_interactions(["gilvetmab", "prednisolone", "cyclosporine", "dexamethasone"])
+        }
+        assert pairs.get(("gilvetmab", "prednisolone")) == "major"
+        assert pairs.get(("gilvetmab", "cyclosporine")) == "major"
+        assert pairs.get(("gilvetmab", "dexamethasone")) == "major"
+
+    def test_gilvetmab_resolves_and_connects_to_oncology_entries(self):
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        assert {h["id"] for h in find_drugs_in_text("ギルベトマブ 10 mg/kg IV q2w 最大10回")} >= {"gilvetmab"}
+        assert {h["id"] for h in find_drugs_in_text("Gilvetmab 10 mg/kg IV over 30 min q2w")} >= {"gilvetmab"}
+        assert resolve_drug_reference("ギルベトマブ") == "gilvetmab"
+        assert resolve_drug_reference("ぎるべとまぶ") == "gilvetmab"
+        # 犬メラノーマ/口腔メラノーマ/MCT の治療テキストが本剤を参照（動線）
+        import json
+
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            data = json.load(f)
+        hits = {
+            d["name"]
+            for d in data
+            if d.get("species") == "Dog"
+            and d.get("name") in ("Mast Cell Tumor", "Melanoma", "Oral Melanoma")
+            and "ギルベトマブ" in (d.get("treatment_ja") or "")
+            and "Gilvetmab" in (d.get("treatment") or "")
+        }
+        assert hits == {"Mast Cell Tumor", "Melanoma", "Oral Melanoma"}, hits

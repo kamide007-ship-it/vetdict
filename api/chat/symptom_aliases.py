@@ -2530,6 +2530,24 @@ SYMPTOM_ALIASES = {
     "口をずっと開け": "open_mouth_breathing",
     # 「餌を食べずに」（ない形のみ収載で ず形が欠落）
     "餌を食べず": "loss_of_appetite",
+    "ご飯を食べず": "loss_of_appetite",
+    # 2026-10 第39回監査: クッシング三徴の飼い主表現（太ってきて・お腹が垂れて・
+    # 毛が薄くなり）が語幹・連用形で既存キーに不一致だった
+    "太ってき": "weight_gain",
+    "体重が増え": "weight_gain",
+    "お腹が垂れ": "bloating",
+    "毛が薄くな": "hair_loss",
+    # 歯科疼痛の飼い主観察（「口を開けるのを嫌がる」「食べるのが遅い」）
+    "口を開けるのを嫌が": "difficulty_eating",
+    "口を開けたがらな": "difficulty_eating",
+    "食べるのが遅": "difficulty_eating",
+    # 顔面神経麻痺の飼い主表現（顔の歪み・片側の垂れ・瞬目不能 — 2026-10 新設
+    # facial_droop ID へ。犬レガシーは顔面神経麻痺/中耳炎・内耳炎に接続）
+    "顔が歪ん": "facial_droop",
+    "顔がゆがん": "facial_droop",
+    "顔が曲がっ": "facial_droop",
+    "顔の片側が垂れ": "facial_droop",
+    "まばたきができな": "facial_droop",
     # チンチラ/デグー等の「便が小さい」（ウサギ用「糞が小さく」のみ収載だった）
     "便が小さ": "small_fecal_pellets",
     "便の数が減": "small_fecal_pellets",
@@ -2752,6 +2770,11 @@ SYMPTOM_ALIASES = {
     "後ろ足を痛が": "lameness_or_limping",
     "前足を痛が": "lameness_or_limping",
     "足を痛が": "lameness_or_limping",
+    # 触診介在形（「後ろ足を触ると痛がって」— 触ると が割り込むと
+    # 「後ろ足を痛が」キーに不一致で抽出ゼロだった。2026-10 第39回監査）
+    "後ろ足を触ると痛が": "lameness_or_limping",
+    "前足を触ると痛が": "lameness_or_limping",
+    "足を触ると痛が": "lameness_or_limping",
     # 蹠行姿勢のカタカナ表記（ひらがな「ぺたぺた歩」のみ収載だった）
     "ペタペタ歩": "plantigrade_stance",
     # うんち表記の排便停止（「便が出ない」ファミリーと同義 — ウサギGIうっ滞の

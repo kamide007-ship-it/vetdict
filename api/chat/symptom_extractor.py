@@ -551,6 +551,17 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "stomatitis": ["oral_ulcers", "bad_breath", "excessive_drooling", "mouth_lesions", "mucus_in_mouth"],
     # チンチラ等の耳介下垂 — 中耳炎/外耳炎の随伴所見（2026-09 第25弾）
     "ear_drooping": ["head_tilt", "head_shaking", "ear_discharge"],
+    # 顔面神経麻痺の飼い主表現「顔が歪んで耳が下がっている」（2026-10 第39回）。
+    # 猫 facial_nerve_paralysis/ear_droop・ウサギ facial_drooping・フェレット
+    # facial_asymmetry へ解決し、非保有種は head_tilt で前庭ddxに安全着地
+    "facial_droop": [
+        "facial_drooping",
+        "facial_nerve_paralysis",
+        "facial_asymmetry",
+        "ear_droop",
+        "ear_drooping",
+        "head_tilt",
+    ],
     # 猫の蹠行姿勢（かかと歩行 = 糖尿病性神経障害）。他種は後肢虚弱へ
     # 安全にフォールバック（2026-09 第26弾）
     "plantigrade_stance": ["hind_leg_weakness", "hind_limb_weakness", "weakness", "ataxia"],
