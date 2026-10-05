@@ -11,8 +11,9 @@ gtag('consent','default',{'analytics_storage':'denied'});
 /* Stored values are 'granted' / 'denied' / 'dismissed' (see _setConsent below).
    Legacy '1' is still honored so users who opted in before the storage format
    was unified are not silently downgraded. */
-(function(){var v=localStorage.getItem('vetdict-analytics-consent');
+(function(){try{var v=localStorage.getItem('vetdict-analytics-consent');
 if(v==='granted'||v==='1'){gtag('consent','update',{'analytics_storage':'granted'});}
+}catch(e){/* blocked storage (iOS "Block All Cookies" etc.) — default stays denied */}
 })();
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8LSEGW9ZX" nonce="{{ g.csp_nonce }}"></script>
@@ -248,15 +249,19 @@ if(v==='granted'||v==='1'){gtag('consent','update',{'analytics_storage':'granted
   </div>
 </div>
 <script nonce="{{ g.csp_nonce }}">
+/* localStorage access may throw (iOS Safari "Block All Cookies", some private
+   modes). The banner must still show and dismiss; the choice just won't persist. */
+function _consentGet(){try{return localStorage.getItem('vetdict-analytics-consent');}catch(e){return null;}}
+function _consentSet(v){try{localStorage.setItem('vetdict-analytics-consent',v);}catch(e){}}
 function _setConsent(state){
   if(state==='granted'){
     if(typeof gtag==='function')gtag('consent','update',{'analytics_storage':'granted'});
-    localStorage.setItem('vetdict-analytics-consent','granted');
+    _consentSet('granted');
   } else if(state==='denied'){
     if(typeof gtag==='function')gtag('consent','update',{'analytics_storage':'denied'});
-    localStorage.setItem('vetdict-analytics-consent','denied');
+    _consentSet('denied');
   } else {
-    localStorage.setItem('vetdict-analytics-consent','dismissed');
+    _consentSet('dismissed');
   }
   document.getElementById('cookieConsent').style.display='none';
 }
@@ -264,7 +269,7 @@ function reopenCookieConsent(){
   document.getElementById('cookieConsent').style.display='flex';
 }
 function _initCookieConsent(){
-  const state=localStorage.getItem('vetdict-analytics-consent');
+  const state=_consentGet();
   if(!state){
     /* First visit: show banner */
     document.getElementById('cookieConsent').style.display='flex';

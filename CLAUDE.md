@@ -6493,3 +6493,48 @@ Playwright実機再現（モバイル390px/デスクトップ1280px）で3つの
   （歯科X線必須・含歯性嚢胞29%・Babbitt/operculectomy・治療不要と病理検査の両端）、
   prevalenceキー解決、他種フォールバック（ウサギ/猫）
 - 件数アサーション更新（91症状・95疾患）
+
+## 2026-10セッション（第60弾: スマホ「何を押しても表示されない」の根本修正 — localStorageブロック環境での起動全滅）
+
+### 背景（利用者報告「スマホで薬品DB・疾患DB・動物種を押しても表示されない」）
+第57弾（Cookieバナー遮蔽・scrollToAnchor）後も再報告。Playwright実測で本番配信バイトは健全
+（app.js 601KB 完全配信・origin/mainと一致・新規セッションでは全動作）だが、
+**「iOS Safariの『すべてのCookieをブロック』設定（＋一部プライベートモード）では
+localStorageアクセス自体がSecurityErrorをthrowする」**環境で完全再現:
+`checkAccess()` 内の素の `localStorage.getItem`（line 63等）がthrow →
+**DOMContentLoaded起動全体が単一try/catchだったため、後続の全setup（setupNavigation・
+setupMobileBottomNav含む）がスキップ** → 下部ナビ不生成・全タブ/種タップのハンドラ未登録 =
+報告症状と完全一致（本番ミラー+ブロックモックで再現確認済み）。
+
+### 修正（4系統）
+1. **ガード付きストレージアクセサ** `lsGet/lsSet/lsRemove`（try/catch、ブロック時はnull/no-op）
+   を新設し、app.js内の直接 `localStorage.*` 呼び出し**29箇所を全置換**（直接呼び出しは
+   ヘルパー内3箇所のみに — 回帰テストでカウント固定）
+2. **起動の区画化**: 単一try/catchを `_boot(name,fn)` ラッパーによる**23の独立ステップ**に分割
+   （async stepのrejectも捕捉）。1ステップの失敗がナビゲーション設定を殺せない構造に。
+   `await checkAccess()` も専用try/catchで隔離
+3. **index.htmlインライン同意スクリプトのガード**: head内IIFEと `_setConsent/_initCookieConsent` の
+   素のlocalStorageを `_consentGet/_consentSet` に置換（ブロック時もバナー表示・閉じるが機能、
+   選択が永続しないだけに劣化）
+4. **ServiceWorkerナビゲーションのnetwork-first化**: 旧 `/` cache-firstは「古いHTMLシェル＋
+   最新app.js（?v=はnetwork-first）」のHTML/JS不整合を再訪ユーザーに供給しえた →
+   navigate/`/` をnetwork-first（オフライン時のみキャッシュフォールバック）に変更。
+   `CACHE_NAME` v166→**v167**
+
+### 検証（Playwright・モバイル390px・実タッチ）
+| 条件 | Before（本番ミラー） | After |
+|---|---|---|
+| localStorageブロック + 下部ナビ | **不生成・全タップ死**（"The operation is insecure."×2） | 生成・疾患DB/薬品切替・犬タップで症状10カテゴリ+薬品フィルタ同期+疾患101件 |
+| ブロック時のpageerror | 2件（inline同意スクリプト含む） | **0件**（バナー表示→同意で閉じるも動作） |
+| 通常環境（実タッチ） | — | タブ切替・種タップとも回帰なし |
+
+### 回帰テスト（tests/test_mobile_boot_resilience.py 新規、11件）
+- ヘルパー定義・直接localStorage呼び出しがヘルパー内3箇所のみ・checkAccessのガード使用・
+  index.html同意スクリプトのガード
+- `_boot` 定義（promise reject捕捉含む）・重要ナビ5ステップの個別ラップ・ステップ数≥20・
+  checkAccess隔離
+- sw.js: v167以上・navigate分岐がcache-first静的分岐より前・network-first+フォールバック・`/`包含
+
+### テスト・CI
+- 新規11件 + app.js参照の全12テストファイル **175件合格**、ruff clean、node --check（app.js/sw.js）通過
+- 疾患データ変更なし（検索インデックス・配信DB不変）

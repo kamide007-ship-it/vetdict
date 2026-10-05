@@ -43,11 +43,20 @@ function toList(v){
   return v==null?[]:[v];
 }
 
+/* Guarded localStorage accessors. iOS Safari with "Block All Cookies" (and some
+   private-browsing modes) throws a SecurityError on ANY localStorage access, so a
+   single bare call in the boot path used to kill the entire init (no bottom nav,
+   no tab handlers — every tap dead on mobile). All storage access goes through
+   these; a blocked store degrades to "no persistence", never to a dead page. */
+function lsGet(k){try{return window.localStorage.getItem(k);}catch(_){return null;}}
+function lsSet(k,v){try{window.localStorage.setItem(k,v);}catch(_){}}
+function lsRemove(k){try{window.localStorage.removeItem(k);}catch(_){}}
+
 async function checkAccess(){
   const params=new URLSearchParams(location.search);
   if(OPEN_BETA) isPro=true;
   if(params.get("pro")==="activated"){
-    localStorage.setItem("vetdict-pro","1");
+    lsSet("vetdict-pro","1");
     isPro=true;
     history.replaceState(null,"",location.pathname+location.hash);
   }
@@ -56,20 +65,20 @@ async function checkAccess(){
     try{
       const r=await fetchWithTimeout("/api/admin/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:adminParam})},5000);
       const d=await r.json();
-      if(d.valid){localStorage.setItem("vetdict-admin","1");isAdmin=true;isPro=true;}
-      else{localStorage.removeItem("vetdict-admin");}
+      if(d.valid){lsSet("vetdict-admin","1");isAdmin=true;isPro=true;}
+      else{lsRemove("vetdict-admin");}
     }catch(e){/* network error — skip admin */}
     history.replaceState(null,"",location.pathname+location.hash);
-  } else if(localStorage.getItem("vetdict-admin")==="1"){
+  } else if(lsGet("vetdict-admin")==="1"){
     isAdmin=true;isPro=true;
   }
-  if(!OPEN_BETA&&localStorage.getItem("vetdict-pro")==="1"){
+  if(!OPEN_BETA&&lsGet("vetdict-pro")==="1"){
     isPro=true;
-    const subId=localStorage.getItem("vetdict-subscription-id");
+    const subId=lsGet("vetdict-subscription-id");
     if(subId){
       fetchWithTimeout("/api/paypal/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subscription_id:subId})},5000)
       .then(function(r){return r.json();})
-      .then(function(d){if(!d.active){localStorage.removeItem("vetdict-pro");localStorage.removeItem("vetdict-subscription-id");isPro=false;document.body.classList.remove("is-pro");}})
+      .then(function(d){if(!d.active){lsRemove("vetdict-pro");lsRemove("vetdict-subscription-id");isPro=false;document.body.classList.remove("is-pro");}})
       .catch(function(){});
     }
   }
@@ -773,11 +782,11 @@ function setupLanguageToggle(){
     const btn=e.target.closest("[data-lang]");
     if(!btn||btn.dataset.lang===currentLang)return;
     currentLang=btn.dataset.lang;
-    try{localStorage.setItem("vetdict-lang",currentLang);}catch(e){}
+    try{lsSet("vetdict-lang",currentLang);}catch(e){}
     applyLanguage();
   });
   // Restore saved language preference
-  try{const saved=localStorage.getItem("vetdict-lang");if(saved&&I18N[saved]){currentLang=saved;applyLanguage();}}catch(e){}
+  try{const saved=lsGet("vetdict-lang");if(saved&&I18N[saved]){currentLang=saved;applyLanguage();}}catch(e){}
 }
 /* ===== End i18n system ===== */
 
@@ -999,33 +1008,54 @@ let _maxScrollPct=0;
 window.addEventListener("scroll",function(){const h=document.documentElement;const pct=Math.round((h.scrollTop/(h.scrollHeight-h.clientHeight||1))*100);if(pct>_maxScrollPct)_maxScrollPct=pct;},{passive:true});
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"){const dur=Math.round((Date.now()-_sessionStart)/1000);trackEvent("session_engagement",{duration_sec:dur,max_scroll_pct:_maxScrollPct,species_used:currentSpecies||"none",analyses_done:loadDiagnosisHistory().length});}});
 
+/* Boot-step isolation: one failed setup step must never kill the rest of the
+   boot. Before this wrapper existed the whole init ran inside a single
+   try/catch, so a throw in ANY early step (e.g. blocked localStorage, a missing
+   element on a stale service-worker-cached HTML shell) silently skipped
+   everything after it — including setupNavigation/setupMobileBottomNav, leaving
+   every tab and species tap dead on mobile. */
+function _boot(name,fn){
+  try{
+    const r=fn();
+    if(r&&typeof r.catch==="function")r.catch(e=>debugError("boot:"+name,e));
+    return r;
+  }catch(e){debugError("boot:"+name,e);}
+}
+
 document.addEventListener("DOMContentLoaded",async()=>{
   /* Funnel step 0: page load */
-  trackEvent("funnel_page_load",{referrer:document.referrer.substring(0,100),lang:currentLang});
+  _boot("trackPageLoad",()=>trackEvent("funnel_page_load",{referrer:document.referrer.substring(0,100),lang:currentLang}));
   try{
-    await checkAccess();
-    loadSpeciesStats();
-    setupNavigation();
-    setupChat();
-    setupGuidedConsultation();
-    setupHamburger();
-    setupLanguageToggle();
+    try{await checkAccess();}catch(e){debugError("boot:checkAccess",e);}
+    _boot("loadSpeciesStats",loadSpeciesStats);
+    _boot("setupNavigation",setupNavigation);
+    _boot("setupChat",setupChat);
+    _boot("setupGuidedConsultation",setupGuidedConsultation);
+    _boot("setupHamburger",setupHamburger);
+    _boot("setupLanguageToggle",setupLanguageToggle);
     const symptomSearch=document.getElementById("symptomSearch");
+    _boot("checkerSearchWiring",()=>{
     const analyzeBtn=document.getElementById("analyzeBtn");
     const diseaseSearch=document.getElementById("diseaseSearch");
     if(symptomSearch)symptomSearch.addEventListener("input",debounce(()=>{renderSymptomList(symptomData);if(symptomSearch.value.length>=2)trackEvent("symptom_search",{species:currentSpecies,query:symptomSearch.value.substring(0,50)});},300));
     if(analyzeBtn)analyzeBtn.addEventListener("click",doAnalyze);
     if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;_renderPinningAnchor(diseaseSearch,renderDiseaseDb);},200));
-    setupGlobalSearch();
+    });
+    _boot("setupGlobalSearch",setupGlobalSearch);
     // Restore view from URL hash (silent: don't auto-focus inputs on initial load —
     // would pop the mobile keyboard for users landing on /#chat etc.)
+    _boot("hashRouting",()=>{
     const hash=location.hash.replace("#","");
     if(hash&&["checker","database","chat","drugs","anesthesia","emergency"].includes(hash))switchView(hash,{silent:true});
+    });
     // Handle ?species= query param (from sitemap/SEO links)
+    _boot("speciesParam",()=>{
     const spParam=new URLSearchParams(location.search).get("species");
     if(spParam&&SPECIES_ICONS[spParam])selectSpecies(spParam);
     else renderSymptomEmptyState();
+    });
     // Search clear buttons (replaces inline onclick)
+    _boot("searchMiscWiring",()=>{
     document.querySelectorAll('[data-action="clear-search"]').forEach(btn=>{
       btn.addEventListener("click",()=>{const inp=btn.previousElementSibling;inp.value='';inp.dispatchEvent(new Event('input'));inp.focus();});
     });
@@ -1068,23 +1098,29 @@ document.addEventListener("DOMContentLoaded",async()=>{
         if(e.key==="Enter"||e.key===" "){e.preventDefault();refHeader.click();}
       });
     }
+    });
     /* Attach click/keyboard handlers to all DB list containers at init (event delegation).
        These containers exist in static HTML and never get replaced — only their innerHTML changes.
        Attaching once at init avoids timing issues with async data loading. */
+    _boot("dbListDelegation",()=>{
     ["diseaseDbList","drugList","anesthesiaList","emergencyList"].forEach(id=>{
       const el=document.getElementById(id);
       if(el&&!el.dataset.handlersAttached){el.dataset.handlersAttached="1";_attachDbItemHandlers(el);}
+    });
     });
     /* Chat containers: candidate cards embed drug links (renderMentionedDrugs) and
        "open in disease DB" buttons, but these containers never had a delegated
        handler — the dotted-underline drug links fell through to a bare #drugs hash
        jump that landed at the top of the drugs tab instead of on the drug itself.
        Delegation attaches once per container (innerHTML resets don't detach it). */
+    _boot("chatDelegation",()=>{
     ["chatMessages","landingChatMessages","guidedMessages"].forEach(id=>{
       const el=document.getElementById(id);
       if(el&&!el.dataset.chatNavAttached){el.dataset.chatNavAttached="1";_attachChatNavHandlers(el);}
     });
+    });
     /* Hero CTA: in-app database tab navigation */
+    _boot("heroWiring",()=>{
     const heroDbBtn=document.querySelector(".hero-btn.secondary");
     if(heroDbBtn){
       heroDbBtn.addEventListener("click",e=>{
@@ -1102,21 +1138,23 @@ document.addEventListener("DOMContentLoaded",async()=>{
     /* Help/Tour modal trigger */
     const helpBtn=document.getElementById("helpGuideBtn");
     if(helpBtn)helpBtn.addEventListener("click",openHelpGuide);
+    });
     /* Breadcrumb bar below header */
-    updateBreadcrumb();
+    _boot("updateBreadcrumb",updateBreadcrumb);
     /* Keyboard shortcuts for tab switching */
-    setupKeyboardShortcuts();
+    _boot("setupKeyboardShortcuts",setupKeyboardShortcuts);
     /* Mobile bottom tab bar */
-    setupMobileBottomNav();
+    _boot("setupMobileBottomNav",setupMobileBottomNav);
     /* First-visit nudge to select a species */
-    setupFirstVisitCoach();
+    _boot("setupFirstVisitCoach",setupFirstVisitCoach);
     /* Swipe gesture for tab switching */
-    setupSwipeGesture();
+    _boot("setupSwipeGesture",setupSwipeGesture);
     /* Offline indicator */
-    setupOfflineIndicator();
+    _boot("setupOfflineIndicator",setupOfflineIndicator);
     /* Returning user welcome */
-    showReturningUserBanner();
+    _boot("showReturningUserBanner",showReturningUserBanner);
     /* Global keyboard shortcuts */
+    _boot("globalKeydown",()=>{
     document.addEventListener("keydown",e=>{
       if(e.target.matches("input,textarea,select,[contenteditable]"))return;
       if(e.key==="Escape"){
@@ -1149,6 +1187,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     });
     const kbBtn=document.getElementById("kbHintBtn");
     if(kbBtn)kbBtn.addEventListener("click",toggleKbShortcuts);
+    });
   }catch(e){
     debugError("Error in DOMContentLoaded:",e);
   }
@@ -1181,15 +1220,15 @@ let globalSearchReqId=0;
 
 function saveRecentSearch(type,name,nameJa,extra){
   try{
-    let recent=JSON.parse(localStorage.getItem("vetdict-recent-searches")||"[]");
+    let recent=JSON.parse(lsGet("vetdict-recent-searches")||"[]");
     recent=recent.filter(r=>r.name!==name);
     recent.unshift(Object.assign({type,name,name_ja:nameJa,ts:Date.now()},extra||{}));
     if(recent.length>8)recent.length=8;
-    localStorage.setItem("vetdict-recent-searches",JSON.stringify(recent));
+    lsSet("vetdict-recent-searches",JSON.stringify(recent));
   }catch(e){}
 }
 function getRecentSearches(){
-  try{return JSON.parse(localStorage.getItem("vetdict-recent-searches")||"[]");}catch(e){return[];}
+  try{return JSON.parse(lsGet("vetdict-recent-searches")||"[]");}catch(e){return[];}
 }
 function showRecentSearches(results){
   const recent=getRecentSearches();
@@ -1855,7 +1894,7 @@ function selectSpecies(id,opts){
   updateTabBadges(id);
   /* Dismiss the first-visit coach once a species is chosen. */
   const _coach=document.querySelector(".first-visit-coach");
-  if(_coach){_coach.remove();try{localStorage.setItem("vetdict-coach-seen","1");}catch(e){}}
+  if(_coach){_coach.remove();try{lsSet("vetdict-coach-seen","1");}catch(e){}}
   /* Prefetch the drug dictionary on idle so the first drug-tab open is instant. */
   if(!drugsLoaded){
     const _pf=()=>{if(!drugsLoaded)loadDrugDictionary();};
@@ -1916,7 +1955,7 @@ function updateTabBadges(speciesId){
    (localStorage), only before any species is chosen. Auto-dismisses on selection
    (handled in selectSpecies). */
 function setupFirstVisitCoach(){
-  try{if(localStorage.getItem("vetdict-coach-seen"))return;}catch(e){}
+  try{if(lsGet("vetdict-coach-seen"))return;}catch(e){}
   if(currentSpecies)return;
   const anchor=document.getElementById("speciesSection");
   if(!anchor||anchor.querySelector(".first-visit-coach"))return;
@@ -1928,7 +1967,7 @@ function setupFirstVisitCoach(){
   tip.innerHTML=`<span class="first-visit-coach-arrow" aria-hidden="true">\u{1F447}</span><span>${msg}</span><button type="button" class="first-visit-coach-close" aria-label="${closeLabel}">×</button>`;
   anchor.insertBefore(tip,anchor.firstChild);
   tip.querySelector(".first-visit-coach-close").addEventListener("click",()=>{
-    tip.remove();try{localStorage.setItem("vetdict-coach-seen","1");}catch(e){}
+    tip.remove();try{lsSet("vetdict-coach-seen","1");}catch(e){}
   });
 }
 
@@ -3582,15 +3621,15 @@ function saveDiagnosisHistory(data,diseases){
       topDiseases:diseases.slice(0,5).map(d=>({name:d.name||"",name_ja:d.name_ja||"",confidence:d.match_percent||d.confidence||0})),
       severity:data.severity||"",
     };
-    const history=JSON.parse(localStorage.getItem("vetdict-history")||"[]");
+    const history=JSON.parse(lsGet("vetdict-history")||"[]");
     history.unshift(entry);
     if(history.length>50)history.length=50;
-    localStorage.setItem("vetdict-history",JSON.stringify(history));
+    lsSet("vetdict-history",JSON.stringify(history));
   }catch(e){/* quota exceeded or private mode */}
 }
 
 function loadDiagnosisHistory(){
-  try{return JSON.parse(localStorage.getItem("vetdict-history")||"[]");}catch(e){return[];}
+  try{return JSON.parse(lsGet("vetdict-history")||"[]");}catch(e){return[];}
 }
 
 /* --- Dashboard modal: detailed VetDict statistics --- */
@@ -4060,15 +4099,15 @@ function attachHistoryHandlers(container){
   if(clearBtn){clearBtn.addEventListener("click",e=>{
     e.stopPropagation();
     let prev=null;
-    try{prev=localStorage.getItem("vetdict-history");}catch(_){}
-    try{localStorage.removeItem("vetdict-history");}catch(_){}
+    try{prev=lsGet("vetdict-history");}catch(_){}
+    try{lsRemove("vetdict-history");}catch(_){}
     const panel=container.querySelector(".history-panel");
     if(panel)panel.remove();
     if(typeof showToast==="function"){
       const msg=currentLang==="ja"?"履歴をクリアしました":"History cleared";
       const undoLabel=currentLang==="ja"?"元に戻す":"Undo";
       showToast(msg,"success",5000,prev?{label:undoLabel,onClick:()=>{
-        try{localStorage.setItem("vetdict-history",prev);}catch(_){}
+        try{lsSet("vetdict-history",prev);}catch(_){}
         const resultsArea=document.getElementById("resultsArea");
         if(resultsArea&&!resultsArea.querySelector(".history-panel")){
           const tmp=document.createElement("div");tmp.innerHTML=renderHistoryPanel();
@@ -6319,12 +6358,12 @@ function loadDrugDictionary(){
     document.getElementById("drugSpeciesFilter").addEventListener("change",()=>{renderDrugList();_revealFilteredList("drugList");});
     const dwInput=document.getElementById("drugWeight");
     if(dwInput){
-      const saved=localStorage.getItem("vetdict-drug-weight");
+      const saved=lsGet("vetdict-drug-weight");
       if(saved&&!isNaN(parseFloat(saved)))dwInput.value=saved;
       dwInput.addEventListener("input",debounce(()=>{
         const v=dwInput.value.trim();
-        if(v===""){localStorage.removeItem("vetdict-drug-weight");}
-        else if(!isNaN(parseFloat(v))){localStorage.setItem("vetdict-drug-weight",v);}
+        if(v===""){lsRemove("vetdict-drug-weight");}
+        else if(!isNaN(parseFloat(v))){lsSet("vetdict-drug-weight",v);}
         renderDrugList();
       },300));
     }
@@ -6589,7 +6628,7 @@ function renderCalculators(force){
   if(!body)return;
   if(!force&&body.dataset.rendered===currentLang)return;
   const ja=currentLang==="ja";
-  const savedW=(()=>{try{return localStorage.getItem("vetdict-drug-weight")||"";}catch(_){return"";}})();
+  const savedW=(()=>{try{return lsGet("vetdict-drug-weight")||"";}catch(_){return"";}})();
   /* 言語切替の再描画（force）で入力途中の値と選択中タブを失わないよう退避する。
      ID は言語非依存なのでそのまま復元できる。 */
   const prevVals={};let prevTab=null;
@@ -6729,7 +6768,7 @@ function renderCalculators(force){
     });
     body.addEventListener("input",e=>{
       if(e.target.id==="calcWeight"){
-        try{const v=e.target.value.trim();if(v&&!isNaN(parseFloat(v)))localStorage.setItem("vetdict-drug-weight",v);}catch(_){/* private mode */}
+        try{const v=e.target.value.trim();if(v&&!isNaN(parseFloat(v)))lsSet("vetdict-drug-weight",v);}catch(_){/* private mode */}
       }
       _calcRecomputeAll();
     });
@@ -8589,7 +8628,7 @@ renderSpeciesGrid=function(){
   let deferredPrompt=null;
   window.addEventListener("beforeinstallprompt",e=>{
     e.preventDefault();deferredPrompt=e;
-    if(localStorage.getItem("vetdict-pwa-dismissed"))return;
+    if(lsGet("vetdict-pwa-dismissed"))return;
     setTimeout(()=>{if(!deferredPrompt)return;
       let banner=document.getElementById("pwaInstallBanner");
       if(banner)return;
@@ -8601,10 +8640,10 @@ renderSpeciesGrid=function(){
       const removeBanner=()=>{banner.classList.remove("visible");setTimeout(()=>banner.remove(),300);};
       banner.querySelector(".pwa-install-btn").addEventListener("click",()=>{
         removeBanner();deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(c=>{if(c.outcome==="accepted"){localStorage.setItem("vetdict-pwa-dismissed","1");}deferredPrompt=null;});
+        deferredPrompt.userChoice.then(c=>{if(c.outcome==="accepted"){lsSet("vetdict-pwa-dismissed","1");}deferredPrompt=null;});
       });
       banner.querySelector(".pwa-dismiss-btn").addEventListener("click",()=>{
-        removeBanner();localStorage.setItem("vetdict-pwa-dismissed","1");
+        removeBanner();lsSet("vetdict-pwa-dismissed","1");
       });
     },5000);
   });
