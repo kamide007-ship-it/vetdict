@@ -534,6 +534,13 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "visible_tooth_overgrowth",
         "difficulty_eating",
     ],
+    # 2026-10: 欠歯主訴。犬レガシーDBは missing_teeth をネイティブ保有。
+    # 非保有種は歯の喪失・摂食困難系へ安全にフォールバック
+    "missing_teeth": [
+        "tooth_loss",
+        "loose_teeth",
+        "difficulty_eating",
+    ],
     "scaly_legs": ["leg_scales", "scaly_face"],
     "leg_scales": ["scaly_legs", "scaly_face"],
     # Pain

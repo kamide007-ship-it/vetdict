@@ -966,6 +966,23 @@ SYMPTOM_ALIASES = {
     "下の歯が前に出": "malocclusion",
     "上の歯が前に出": "malocclusion",
     "下顎が出て": "malocclusion",
+    # 2026-10: 欠歯・未萌出の飼い主表現（犬は missing_teeth ネイティブ、
+    # 他種は _ID_SYNONYMS で tooth_loss/difficulty_eating 系へフォールバック）。
+    # 「歯が生えてこな」語幹は ない/なくて/ません(正規化後) を全てカバーし、
+    # 否定ガードはマッチ範囲後の残り「い」等では発火しない（吐けな と同型）
+    "歯が生えてこな": "missing_teeth",
+    "歯が生えてきません": "missing_teeth",
+    "歯が足りな": "missing_teeth",
+    "歯が足りません": "missing_teeth",
+    "歯の数が少な": "missing_teeth",
+    # 「歯が1本無い/2本足りない」の本数介在形（本+無い/足りない は主訴文脈で
+    # 歯以外にほぼ出現しない）
+    "本無い": "missing_teeth",
+    "本ない": "missing_teeth",
+    "本足りな": "missing_teeth",
+    "歯が無い": "missing_teeth",
+    "歯がない": "missing_teeth",
+    "欠歯": "missing_teeth",
     # ---------------------------------------------------------------
     # 鳥追加
     # ---------------------------------------------------------------

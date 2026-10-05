@@ -769,6 +769,12 @@ SYMPTOMS = [
         "category": "general",
     },
     {
+        "id": "missing_teeth",
+        "name_ja": "歯が足りない・生えてこない",
+        "name_en": "Missing Teeth / Tooth Not Erupting",
+        "category": "general",
+    },
+    {
         "id": "mammary_swelling",
         "name_ja": "乳腺・乳首の腫大（しこり）",
         "name_en": "Mammary/Nipple Enlargement (Mass)",
@@ -3619,6 +3625,36 @@ DISEASES = [
             "miniature_dachshund": 1.3,
         },
     },
+    # 2026-10: clinically missing / unerupted teeth — the「歯が生えてこない」
+    # complaint had no landing disease. The clinical rule (missing tooth =
+    # dental radiograph; ~29% of unerupted teeth carry dentigerous cysts —
+    # Babbitt, J Vet Dent 2016) is exactly what a chat consult should surface.
+    # Name matches the dog module entry so the chat card's
+    # 「疾患DBで詳細を開く」pivot lands exactly.
+    {
+        "id": "missing_teeth",
+        "prevalence_tier": "common",
+        "name_ja": "欠歯（欠如歯・埋伏歯）",
+        "name_en": "Missing Teeth (Hypodontia / Unerupted Teeth)",
+        "description_ja": "歯列上に歯が無い状態で、①真の先天性欠如（第1前臼歯・切歯に好発、トイ種・短頭種に多い — 治療不要）、②埋伏歯（歯肉・骨の下に埋まった未萌出歯）、③既往の脱落・破折による喪失、の3つを鑑別します。臨床原則は「欠けている歯は必ず歯科X線」— 埋伏歯の約29%に含歯性嚢胞（骨を破壊する膨張性病変、短頭種の下顎第1前臼歯に好発）が伴います（Babbitt 2016）。萌出余地のある若齢ではオペルキュレクトミー、見込みが無ければ予防的抜歯、嚢胞形成済みなら抜歯＋嚢胞壁の完全摘出・掻爬＋病理検査（Hale 2005; Fulton 2014）。",
+        "description_en": "A tooth absent from the dental arch. Differentiate: (1) true congenital absence (first premolars and incisors; toy and brachycephalic breeds — no treatment), (2) an unerupted tooth embedded under gingiva/bone, (3) prior loss. The clinical rule: every missing tooth gets a dental radiograph — roughly 29% of unerupted teeth carry dentigerous cysts (expansile bone-destroying lesions, classically the mandibular first premolar of brachycephalics; Babbitt 2016). Operculectomy for young dogs with eruption potential, prophylactic extraction otherwise, and extraction plus complete cyst enucleation with histopathology once a cyst has formed (Hale 2005; Fulton 2014).",
+        # Complaint-gated on purpose: jaw swelling / oral pain are nonspecific
+        # (owned by tooth-root abscess / oral tumor ddx), so the entry matches
+        # ONLY on its defining sign — the owner noticing an absent tooth —
+        # same guard pattern as deciduous_malocclusion.
+        "symptoms": [
+            "missing_teeth",
+        ],
+        "severity": "low",
+        "recommended_tests": ["dental_xray", "oral_exam", "histopathology"],
+        "breed_risks": {
+            "boxer": 2.0,
+            "french_bulldog": 1.6,
+            "english_bulldog": 1.6,
+            "toy_poodle": 1.3,
+            "chihuahua": 1.3,
+        },
+    },
     # 2026-09 audit round 21: the post-estrus purulent-discharge + PU/PD
     # complaint (「陰部から膿が出る 水をよく飲む」) had no pyometra entry and no
     # vulvar-discharge vocabulary at all, so intestinal parasites / Cushing's
@@ -4839,6 +4875,9 @@ _PATHOGNOMONIC_CLUSTERS = [
     # Owner-visible bite abnormality (受け口/出っ歯) is site-diagnostic for an
     # occlusion problem — no other entry carries this sign (2026-10).
     (frozenset({"malocclusion"}), "deciduous_malocclusion", 1.6),
+    # An owner reporting an absent / never-erupted tooth is site-diagnostic
+    # for the missing-tooth work-up — no other entry carries this sign (2026-10).
+    (frozenset({"missing_teeth"}), "missing_teeth", 1.6),
     # Interdigital redness/swelling is site-diagnostic for pododermatitis
     # (Muller & Kirk 7th ed): the paw-localised complaint should rank the
     # interdigital entry above generic pruritic dermatoses.
@@ -4923,6 +4962,7 @@ for _d in DISEASES:
         "pda",
         "cherry_eye",
         "deciduous_malocclusion",
+        "missing_teeth",
     ):
         tags.add("congenital")
     # Degenerative / age-related

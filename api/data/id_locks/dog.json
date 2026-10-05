@@ -2,8 +2,8 @@
  "species": "dog",
  "schema_version": 1,
  "note": "Frozen disease ids (name→id). Append-only: existing mappings are never changed. Delete to fall back to position-derived ids.",
- "generated_at": "2026-10-05T07:41:59Z",
- "count": 623,
+ "generated_at": "2026-10-05T08:38:41Z",
+ "count": 624,
  "locks": {
   "Acanthomatous Ameloblastoma␟棘細胞性エナメル上皮腫": "dog_0411",
   "Acetaminophen Toxicosis␟アセトアミノフェン中毒": "dog_0334",
@@ -400,6 +400,7 @@
   "Metacarpal/Metatarsal Fracture␟中手骨/中足骨骨折": "dog_0530",
   "Metaldehyde Toxicosis␟メタアルデヒド中毒（ナメクジ忌避剤）": "dog_0470",
   "Miniature Schnauzer Hyperlipidemia␟ミニチュア・シュナウザー高脂血症": "dog_0557",
+  "Missing Teeth (Hypodontia / Unerupted Teeth)␟欠歯（欠如歯・埋伏歯）": "dog_x22a19280",
   "Mitral Valve Disease (MMVD)␟僧帽弁閉鎖不全症（MMVD）": "dog_0098",
   "Mitral Valve Dysplasia␟僧帽弁形成不全": "dog_0352",
   "Motion Sickness (Travel Sickness)␟乗り物酔い（動揺病）": "dog_x92d859ba",
