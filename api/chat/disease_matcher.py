@@ -214,6 +214,14 @@ _SYN: dict[str, list[str]] = {
     ],
     "dental_overgrowth": ["overgrown_teeth", "malocclusion", "visible_tooth_overgrowth"],
     "visible_tooth_overgrowth": ["overgrown_teeth", "dental_overgrowth", "malocclusion"],
+    # 2026-10: 噛み合わせ主訴（受け口/出っ歯）が過長歯・切歯表記の歯科疾患
+    # エントリにも届くようにする双方向ブリッジ
+    "malocclusion": [
+        "overgrown_teeth",
+        "dental_overgrowth",
+        "incisor_overgrowth",
+        "visible_tooth_overgrowth",
+    ],
     "dysecdysis": ["retained_shed", "retained_skin", "shedding_problems"],
     "retained_shed": ["dysecdysis", "retained_skin"],
     "retained_skin": ["dysecdysis", "retained_shed"],

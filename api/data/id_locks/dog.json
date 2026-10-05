@@ -2,8 +2,8 @@
  "species": "dog",
  "schema_version": 1,
  "note": "Frozen disease ids (name→id). Append-only: existing mappings are never changed. Delete to fall back to position-derived ids.",
- "generated_at": "2026-08-30T00:27:50Z",
- "count": 622,
+ "generated_at": "2026-10-05T07:41:59Z",
+ "count": 623,
  "locks": {
   "Acanthomatous Ameloblastoma␟棘細胞性エナメル上皮腫": "dog_0411",
   "Acetaminophen Toxicosis␟アセトアミノフェン中毒": "dog_0334",
@@ -183,6 +183,7 @@
   "Cystinuria␟シスチン尿症": "dog_0102",
   "Dalmatian Hyperuricosuria␟ダルメシアン高尿酸尿症": "dog_0546",
   "Dancing Doberman Disease␟ダンシング・ドーベルマン病": "dog_0532",
+  "Deciduous Malocclusion (Interceptive Orthodontics)␟乳歯列期不正咬合（咬合誘導抜歯）": "dog_x0f63a3aa",
   "Degenerative Myelopathy (DM)␟変性性脊髄症（DM）": "dog_0099",
   "Degenerative Myelopathy␟変性性脊髄症": "dog_0454",
   "Dentigerous Cyst␟含歯性嚢胞": "dog_0314",

@@ -947,9 +947,25 @@ SYMPTOM_ALIASES = {
     # 非保有種（犬猫等）は従来どおり下痢系へ安全にフォールバックする。
     "お尻が汚れてる": "abnormal_cecotropes",
     "ウジがわいてる": "diarrhea",
-    "歯が伸びすぎ": "teeth_grinding",
-    "歯が長い": "teeth_grinding",
-    "噛み合わせが悪い": "teeth_grinding",
+    # 2026-10是正: 歯の過長・咬合異常の主訴が疼痛徴候（歯ぎしり=bruxism）に
+    # 誤マッピングされ、歯科疾患本体に届いていなかった → 歯科IDへ是正。
+    # overgrown_teeth/malocclusion は _ID_SYNONYMS で相互・近縁IDへ解決し、
+    # 非保有種は difficulty_eating 系へ安全にフォールバックする。
+    "歯が伸びすぎ": "overgrown_teeth",
+    "歯が長い": "overgrown_teeth",
+    "噛み合わせが悪い": "malocclusion",
+    "噛み合わせがおかしい": "malocclusion",
+    "噛み合わせがずれ": "malocclusion",
+    "かみ合わせが悪い": "malocclusion",
+    "かみ合わせがおかしい": "malocclusion",
+    "受け口": "malocclusion",
+    "うけ口": "malocclusion",
+    "出っ歯": "malocclusion",
+    "アンダーショット": "malocclusion",
+    "オーバーショット": "malocclusion",
+    "下の歯が前に出": "malocclusion",
+    "上の歯が前に出": "malocclusion",
+    "下顎が出て": "malocclusion",
     # ---------------------------------------------------------------
     # 鳥追加
     # ---------------------------------------------------------------

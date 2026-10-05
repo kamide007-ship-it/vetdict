@@ -5335,6 +5335,40 @@ DISEASES: List[Dict[str, Any]] = [
         "age_predisposition": {"puppy", "young", "adult", "senior"},
     },
     {
+        # 2026-10: deciduous (puppy) malocclusion + interceptive orthodontics.
+        # Common in toy breeds yet the database had no occlusion entry at all —
+        # the owner complaint「受け口になってきた」had no landing disease.
+        # Hale, Vet Clin North Am 2005; Fulton/Fiani/Verstraete 2014;
+        # Wiggs's Veterinary Dentistry 2nd ed 2019; AVDC nomenclature (MAL1-4).
+        "name": "Deciduous Malocclusion (Interceptive Orthodontics)",
+        "name_ja": "乳歯列期不正咬合（咬合誘導抜歯）",
+        "symptoms": {
+            "drooling",
+            "pain_on_touch",
+            "appetite_loss",
+        },
+        "description": "Abnormal occlusion recognized in the deciduous (puppy) dentition — most often a developing mandibular mesioclusion (Class III / underbite, MAL3) or mandibular distoclusion (Class II / overbite, MAL2). The clinical problems are (1) a dental interlock that prevents the restrained jaw from expressing its growth potential and (2) traumatic tooth-soft tissue contact (classically Class II deciduous mandibular canines striking the hard palate). Managed by interceptive orthodontics: selective extraction of the deciduous teeth that form the interlock or cause trauma, as early as possible and always before permanent eruption.",
+        "description_ja": "乳歯列期に認める咬合異常で、発育性の下顎近心咬合（クラスIII・アンダーショット, MAL3）または下顎遠心咬合（クラスII・オーバーショット, MAL2）が代表です。臨床的な問題は（1）dental interlock（歯性ロック）が成長抑制側の顎の成長ポテンシャル発揮を妨げること、（2）歯と軟部組織の外傷性接触（クラスIIの下顎乳犬歯による口蓋穿孔が典型）の2点です。治療はインターセプティブ・オーソドンティクス（咬合誘導）＝ロックを形成する乳歯・外傷の原因歯の選択的抜歯で、可及的早期・永久歯萌出前に行います。",
+        "causes": "Primarily genetic (skeletal jaw-length discrepancy — polygenic; breed-typical in brachycephalics where Class III is the breed standard). Dental interlock then perpetuates the discrepancy: once the deciduous teeth interdigitate abnormally, independent jaw growth is mechanically restrained. Purely dental (tooth-position) malocclusions and retained deciduous teeth also contribute.",
+        "causes_ja": "主因は遺伝性（骨格性の顎長差 — 多因子遺伝。短頭種ではクラスIIIがブリード標準）。乳歯が異常な位置で咬合し合うと dental interlock が顎の独立成長を機械的に拘束し、顎長差を固定・増悪させます。歯性（歯の位置異常のみ）の不正咬合や乳歯遺残も要因となります。",
+        "pathophysiology": "The maxilla and mandible grow independently at different times. When deciduous teeth interdigitate abnormally, the shorter jaw's growth thrust is blocked by tooth-on-tooth contact (interlock); the discrepancy worsens with growth. In Class II, the mandibular deciduous canines occlude palatally and can penetrate the hard palate (pain, oronasal communication risk). In Class III, the maxillary incisors become trapped behind the mandibular incisors. Removing the interlocking deciduous teeth frees the restrained jaw to express its genetic growth potential — it does not stimulate growth.",
+        "pathophysiology_ja": "上顎と下顎は独立して異なる時期に成長します。乳歯が異常位置で咬合すると、短い側の顎の前方成長が歯同士の接触（インターロック）で遮断され、成長とともに顎長差が増悪します。クラスIIでは下顎乳犬歯が口蓋側に咬合して硬口蓋を穿孔しえます（疼痛・口腔鼻腔瘻リスク）。クラスIIIでは上顎切歯が下顎切歯の舌側に捕捉されます。ロックを形成する乳歯の抜去は、抑制されている顎が遺伝的成長ポテンシャルを発揮できる環境を作る処置であり、成長を促進する処置ではありません。",
+        "treatment": "Interceptive orthodontics — selective extraction of the deciduous teeth forming the dental interlock and/or causing trauma, under one anesthesia, as soon as the malocclusion is recognized (ideally 6-12 weeks of age, always before permanent eruption at 3.5-5 months; benefit depends on remaining growth time — Hale 2005). Class II: extract the mandibular deciduous canines (± incisors) to free the mandible and relieve palatal trauma. Class III: extract the deciduous incisors forming the interlock to free the maxilla (the trapped maxillary incisors, and/or the opposing mandibular incisors blocking their path; include the maxillary deciduous third incisor/canine if interdigitated with the mandibular canine). Gentle open or closed technique with complete root removal — permanent tooth buds lie lingual/apical to the deciduous roots and are easily damaged; retained root tips cause inflammation and deflect permanent eruption. Re-evaluate occlusion at permanent incisor eruption (3.5-5 months): a functional, non-traumatic adult occlusion needs no further treatment; traumatic adult malocclusion → orthodontics (ball therapy, inclined plane), crown reduction with vital pulp therapy, or extraction. Cosmetic orthodontics is discouraged (AVDC ethics); genetic counseling — affected skeletal cases should not be bred.",
+        "treatment_ja": "インターセプティブ・オーソドンティクス（咬合誘導）＝dental interlockを形成する乳歯・外傷原因歯の選択的抜歯。不正咬合を認めたら可及的早期（理想は生後6-12週、必ず永久歯萌出（3.5-5ヶ月）前）に1回の麻酔で実施します。効果は残存成長期間に依存します（Hale 2005）。クラスII: 下顎乳犬歯（±乳切歯）を抜去し下顎を解放・口蓋外傷を解除。クラスIII: インターロックを形成する乳切歯を抜去し上顎を解放（捕捉されている上顎乳切歯、および/またはその前方経路を遮断する対向側の下顎乳切歯。上顎第3乳切歯/乳犬歯が下顎犬歯と干渉していれば併せて抜去）。永久歯胚は乳歯根の舌側・根尖側に位置し損傷しやすいため愛護的な挺出・歯根の完全抜去が必須（遺残歯根は炎症・永久歯萌出方向の偏位の原因）。永久切歯萌出期（3.5-5ヶ月）に咬合を再評価: 機能的で外傷のない咬合なら追加治療不要。外傷性の永久歯不正咬合には矯正（ボールセラピー・傾斜板）、歯冠短縮＋生活歯髄療法、または抜歯を検討。審美目的の矯正はAVDC倫理指針上非推奨。骨格性の症例は遺伝性のため繁殖供用を避けるカウンセリングを行います。",
+        "prognosis": "Interlock release gives the restrained jaw the chance to catch up, but the final adult occlusion is determined genetically — skeletal Class II/III frequently persists despite correctly performed interceptive extraction (the procedure levels the playing field; it does not orthopedically correct the jaw). Prognosis for comfort is excellent once traumatic contacts are removed. A functional, pain-free bite is the treatment goal, not a scissor bite.",
+        "prognosis_ja": "ロック解除により抑制側の顎に挽回の機会が生まれますが、最終的な永久歯咬合は遺伝的に規定されるため、骨格性のクラスII/IIIは適切な咬合誘導抜歯後も残存することが少なくありません（本処置は公平な成長環境を作るもので、顎を整形的に矯正するものではありません）。外傷性接触を除去すれば快適性の予後は優良です。治療目標はシザーバイトではなく「機能的で痛みのない咬合」です。",
+        "prevention": "No prevention for the genetic component — selection away from affected breeding lines is the only population-level measure. Individual-level: check occlusion at every puppy visit (vaccine series) so interceptive extraction can be performed within the growth window; monitor deciduous exfoliation and extract retained deciduous teeth promptly (never two teeth of the same type in the same place).",
+        "prevention_ja": "遺伝的素因そのものの予防法はなく、罹患ラインを繁殖から外す選択が集団レベルで唯一の対策です。個体レベルでは、ワクチンシリーズ等の子犬の全来院時に咬合をチェックし、成長ウィンドウ内に咬合誘導抜歯を行える体制を取ること、乳歯交換を監視し乳歯遺残（同種の歯が同部位に2本）を速やかに抜歯することが重要です。",
+        "recommended_tests": [
+            "咬合検査 (Occlusal Exam) - awake, lips retracted with mouth closed: identify which teeth form the interlock and any traumatic contact",
+            "口腔内検査 (Oral Exam) - palatal mucosa for Class II canine trauma",
+            "歯科X線 (Dental Radiographs) - permanent tooth bud position before/after extraction, retained roots",
+        ],
+        "urgency": "normal",
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"puppy"},
+    },
+    {
         "name": "Foreign Body in Ear",
         "name_ja": "耳内異物（草の実等）",
         "symptoms": {"ear_scratching", "head_tilting", "ear_odor", "pain_on_touch"},

@@ -763,6 +763,12 @@ SYMPTOMS = [
         "category": "dermatological",
     },
     {
+        "id": "malocclusion",
+        "name_ja": "噛み合わせの異常（受け口・出っ歯）",
+        "name_en": "Malocclusion (Underbite/Overbite)",
+        "category": "general",
+    },
+    {
         "id": "mammary_swelling",
         "name_ja": "乳腺・乳首の腫大（しこり）",
         "name_en": "Mammary/Nipple Enlargement (Mass)",
@@ -3584,6 +3590,35 @@ DISEASES = [
             "cocker_spaniel": 1.4,
         },
     },
+    # 2026-10: deciduous (puppy) malocclusion — the「受け口になってきた」
+    # complaint had no occlusion vocabulary or landing disease at all.
+    # Common in toy breeds (Hale, Vet Clin North Am 2005; Fulton 2014).
+    # Name matches the dog module entry so the chat card's
+    # 「疾患DBで詳細を開く」pivot lands exactly.
+    {
+        "id": "deciduous_malocclusion",
+        "prevalence_tier": "common",
+        "name_ja": "乳歯列期不正咬合（咬合誘導抜歯）",
+        "name_en": "Deciduous Malocclusion (Interceptive Orthodontics)",
+        "description_ja": "乳歯列期（生後2〜4ヶ月頃）に認める咬合異常で、発育性の下顎近心咬合（アンダーショット・クラスIII）や下顎遠心咬合（オーバーショット・クラスII）が代表です。乳歯同士が異常な位置で咬み合う dental interlock が顎の独立成長を妨げ、クラスIIでは下顎乳犬歯が硬口蓋を傷つけます。治療はインターセプティブ・オーソドンティクス（咬合誘導）＝ロック形成歯・外傷原因歯の選択的乳歯抜歯で、可及的早期・永久歯萌出（3.5〜5ヶ月）前の実施が原則。骨格性（遺伝性）の顎長差自体は矯正できないため、永久歯萌出時に咬合を再評価し、機能的で痛みのない咬合を目標とします（Hale 2005; Fulton 2014; Wiggs's Veterinary Dentistry 2nd ed）。",
+        "description_en": "Abnormal occlusion recognized in the deciduous dentition (around 2-4 months) — typically a developing mandibular mesioclusion (Class III underbite) or distoclusion (Class II overbite). Abnormal dental interlock restrains independent jaw growth, and in Class II the mandibular deciduous canines traumatize the hard palate. Treatment is interceptive orthodontics: selective extraction of the interlocking/traumatizing deciduous teeth, as early as possible and always before permanent eruption (3.5-5 months). The skeletal (genetic) jaw-length discrepancy itself cannot be corrected — re-evaluate at permanent eruption, aiming for a functional, pain-free bite (Hale 2005; Fulton 2014; Wiggs's Veterinary Dentistry 2nd ed).",
+        # Complaint-gated on purpose: drooling / oral pain / inappetence are
+        # all nonspecific, so the entry matches ONLY on its defining sign
+        # (the owner-visible bite abnormality), same guard pattern as
+        # pyometra's discharge gate.
+        "symptoms": [
+            "malocclusion",
+        ],
+        "severity": "low",
+        "recommended_tests": ["occlusal_exam", "oral_exam", "dental_xray"],
+        "breed_risks": {
+            "toy_poodle": 1.5,
+            "chihuahua": 1.5,
+            "yorkshire_terrier": 1.5,
+            "pomeranian": 1.4,
+            "miniature_dachshund": 1.3,
+        },
+    },
     # 2026-09 audit round 21: the post-estrus purulent-discharge + PU/PD
     # complaint (「陰部から膿が出る 水をよく飲む」) had no pyometra entry and no
     # vulvar-discharge vocabulary at all, so intestinal parasites / Cushing's
@@ -4801,6 +4836,9 @@ _PATHOGNOMONIC_CLUSTERS = [
     # entry outranked the oral tumor via the generic lumps_bumps signal
     # (round-14 audit).
     (frozenset({"oral_mass"}), "oral_tumor", 1.6),
+    # Owner-visible bite abnormality (受け口/出っ歯) is site-diagnostic for an
+    # occlusion problem — no other entry carries this sign (2026-10).
+    (frozenset({"malocclusion"}), "deciduous_malocclusion", 1.6),
     # Interdigital redness/swelling is site-diagnostic for pododermatitis
     # (Muller & Kirk 7th ed): the paw-localised complaint should rank the
     # interdigital entry above generic pruritic dermatoses.
@@ -4877,7 +4915,15 @@ for _d in DISEASES:
     if _did in ("canine_parvovirus", "canine_distemper", "kennel_cough", "canine_influenza", "leptospirosis"):
         tags.add("infectious")
     # Congenital / developmental
-    if _did in ("hip_dysplasia", "elbow_dysplasia", "patellar_luxation", "portosystemic_shunt", "pda", "cherry_eye"):
+    if _did in (
+        "hip_dysplasia",
+        "elbow_dysplasia",
+        "patellar_luxation",
+        "portosystemic_shunt",
+        "pda",
+        "cherry_eye",
+        "deciduous_malocclusion",
+    ):
         tags.add("congenital")
     # Degenerative / age-related
     if _did in (

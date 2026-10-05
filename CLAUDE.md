@@ -6402,3 +6402,52 @@ Playwright実機再現（モバイル390px/デスクトップ1280px）で3つの
   （バナー退避CSS・フィルタ同期・ビューフォールバック・ウォッチャー解放の4系統）
 - app.js参照の全13テストファイル **958件合格**、ruff clean、app.js構文パース検証
 - ServiceWorker: `CACHE_NAME` v163 → **v164**
+
+## 2026-10セッション（第58弾: 乳歯列期不正咬合（咬合誘導抜歯）エントリ新設 — 開発者実症例の反映 + 咬合系エイリアス誤マッピング是正）
+
+### 背景（開発者の実症例: トイプードル2.5ヶ月のアンダーショット→下顎乳切歯の咬合誘導抜歯）
+咬合異常のエントリが全DBに存在せず、「受け口になってきた」という代表的な子犬の飼い主主訴に
+着地する疾患が無かった。併せて咬合・歯過長の既存エイリアス3件が疼痛徴候（teeth_grinding=歯ぎしり）に
+誤マッピングされており、齧歯類・ウサギでも歯科疾患本体に届いていなかった。
+
+### 犬モジュールに「Deciduous Malocclusion (Interceptive Orthodontics)／乳歯列期不正咬合（咬合誘導抜歯）」新設
+- 全16臨床フィールドをキュレート（日英、Hale Vet Clin North Am 2005; Fulton/Fiani/Verstraete 2014;
+  Wiggs's Veterinary Dentistry 2nd ed; AVDC MAL1-4準拠）:
+  - dental interlock理論（抑制側の顎の解放 — 「成長を促進する処置ではない」の安全文言を病態に明記）
+  - クラスII=下顎乳犬歯抜去（口蓋外傷解除）/クラスIII=インターロック形成乳切歯の抜去、
+    1回麻酔・可及的早期（理想6-12週、永久歯萌出3.5-5ヶ月前必須）
+  - 永久歯胚保護（乳歯根の舌側・根尖側）・遺残歯根の害・永久切歯萌出期の再評価・
+    審美矯正非推奨（AVDC倫理）・骨格性症例の繁殖カウンセリング
+- id_locks再生成（dog 623ロック、+1新規 → dog_x0f63a3aa）、配信DB 6,893→**6,894疾患**、
+  検索インデックス 6,455→**6,456**
+
+### レガシーチャットDB（93→94疾患、89→90症状）
+- 症状 `malocclusion`（噛み合わせの異常（受け口・出っ歯））新設 + 疾患 `deciduous_malocclusion`
+  （tier=common、トイ種 breed_risks、_AGE_CATEGORY_TAGS congenital で puppy 年齢係数有効化）
+- **主訴ゲート設計**（pyometra と同型）: よだれ・口腔痛・食欲不振は非特異的のため症状セットは
+  malocclusion のみ + 単独パトグノモニック・クラスタ ×1.6（oral_mass と同型）
+- 名称は犬モジュールと完全一致 — チャット候補カード「疾患DBで詳細を開く」ピボットが完全一致着地
+
+### 咬合系エイリアスの誤マッピング是正 + 新設（約15キー）
+- **是正**: 歯が伸びすぎ/歯が長い→teeth_grinding（誤り）→ **overgrown_teeth**、
+  噛み合わせが悪い→teeth_grinding（誤り）→ **malocclusion**（テスト依存なしを確認の上）
+- **新設**: 受け口/うけ口/出っ歯/アンダーショット/オーバーショット/下の歯が前に出/上の歯が前に出/
+  下顎が出て/噛み合わせがおかしい・ずれ/かみ合わせ系 → malocclusion
+- _ID_SYNONYMS: malocclusion→[overgrown_teeth, dental_overgrowth, incisor_overgrowth,
+  visible_tooth_overgrowth, difficulty_eating]（非保有種の安全フォールバック）、
+  _SYN に malocclusion→過長歯系の双方向ブリッジ
+- 修正後実測: 犬「受け口になってきた」→乳歯列期不正咬合 rank 1、チンチラ「噛み合わせが悪い」→
+  不正咬合-切歯/臼歯スパー top2、ハムスター「歯が伸びすぎ」→臼歯過長/不正咬合 top2、
+  ウサギ→切歯過長 rank 1（是正前は全て疼痛徴候経由で歯科本体に不達）。
+  よだれ+食欲不振の汎用主訴は歯周病/口腔内腫瘍を維持（ゲート検証）
+
+### prevalence・表示数値
+- SPECIES_PREVALENCE dog に 'Deciduous Malocclusion (Interceptive Orthodontics)': common
+- pendingStats diseases 6455→6456・symptoms 89→90、dog fallback 602→603疾患
+- ServiceWorker: CACHE_NAME v165
+
+### 回帰テスト（+5件: TestDeciduousMalocclusionEntry）
+- 受け口3表現で rank 1、汎用口腔主訴の非ハイジャック、レガシー=モジュール名ミラー（ピボット保証）+
+  キュレート内容（咬合誘導・Hale・「成長促進ではない」文言）、prevalenceキー解決、
+  齧歯類3種の歯科ランキング+歯ぎしりガード
+- 件数アサーション更新（90症状・94疾患）
