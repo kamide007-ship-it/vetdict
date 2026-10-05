@@ -5369,6 +5369,40 @@ DISEASES: List[Dict[str, Any]] = [
         "age_predisposition": {"puppy"},
     },
     {
+        # 2026-10: clinically "missing" teeth. The defining rule is that a
+        # missing tooth is a radiographic diagnosis — ~29% of unerupted teeth
+        # carry dentigerous cysts (Babbitt et al., J Vet Dent 2016).
+        # Verstraete, Kass & Terpak AJVR 1998; Hale 2005; Fulton 2014;
+        # Wiggs's Veterinary Dentistry 2nd ed 2019; BSAVA Niemiec 2018.
+        "name": "Missing Teeth (Hypodontia / Unerupted Teeth)",
+        "name_ja": "欠歯（欠如歯・埋伏歯）",
+        "symptoms": {
+            "swelling",
+            "pain_on_touch",
+        },
+        "description": "A tooth clinically absent from the dental arch. Three distinct entities hide behind the same presentation: true congenital absence (hypodontia/oligodontia — most often first premolars, mandibular third molars and incisors; toy and brachycephalic breeds), an unerupted/impacted tooth embedded under gingiva or bone, and acquired loss (prior exfoliation or crown fracture with a possible retained root). The clinical rule: every clinically missing tooth is radiographed — roughly 29% of unerupted teeth are associated with dentigerous cyst formation (Babbitt 2016), an expansile, bone-destroying lesion that is entirely preventable by early extraction.",
+        "description_ja": "歯列上に歯が臨床的に認められない状態です。同じ見た目の裏に3つの異なる実体が隠れています: 真の先天性欠如（欠如歯・乏歯症 — 第1前臼歯・下顎第3後臼歯・切歯に好発し、トイ種・短頭種に多い）、歯肉・骨の下に埋まった埋伏歯（未萌出歯）、既往の脱落・破折による後天的喪失（残根の可能性あり）。臨床原則は「臨床的に欠けている歯は必ず歯科X線撮影」— 埋伏歯の約29%に含歯性嚢胞の形成が伴い（Babbitt 2016）、これは骨を破壊する膨張性病変でありながら早期抜歯で完全に予防可能です。",
+        "causes": "Congenital absence: polygenic inheritance (breed-typical in toy and brachycephalic breeds; syndromic forms occur with ectodermal dysplasia). Unerupted teeth: a thickened gingival operculum, crowding, or a malpositioned tooth bud blocking the eruption path. Acquired loss: previous extraction, exfoliation or crown-root fracture.",
+        "causes_ja": "先天性欠如: 多因子遺伝（トイ種・短頭種にブリード的に多い。外胚葉形成不全症候群に伴う症候性のものもある）。埋伏歯: 肥厚した歯肉弁（オペルキュラム）・歯の叢生・歯胚の位置異常による萌出経路の遮断。後天的喪失: 既往の抜歯・脱落・歯冠歯根破折。",
+        "pathophysiology": "In true hypodontia the tooth bud never forms — there is no pathology to treat. In an unerupted tooth the bud forms but fails to erupt; its reduced enamel epithelium can secrete fluid between crown and follicle, forming a dentigerous cyst: expansile osteolysis, resorption of neighboring tooth roots, and in advanced mandibular cases pathologic fracture. Mandibular first premolars of brachycephalic breeds (classically the Boxer) are the highest-risk site.",
+        "pathophysiology_ja": "真の欠如歯では歯胚自体が形成されないため、治療対象となる病変はありません。埋伏歯では歯胚は形成されるが萌出に失敗し、残存エナメル上皮（退縮エナメル上皮）が歯冠と歯小嚢の間に液体を分泌して含歯性嚢胞を形成しえます: 膨張性の骨融解・隣接歯の歯根吸収・進行した下顎例では病的骨折に至ります。短頭種（古典的にはボクサー）の下顎第1前臼歯が最高リスク部位です。",
+        "treatment": "Step 1 — dental radiography of every clinically missing tooth (full permanent dentition should be present by 6-7 months; Verstraete 1998 established the diagnostic value of full-mouth radiographs). Then by finding: (1) Congenitally absent — no treatment; record in the chart; genetic counseling for breeding animals. (2) Unerupted tooth with eruption potential in a young dog — operculectomy (excision of the overlying gingiva) within the eruption window (Hale 2005). (3) Unerupted tooth without eruption potential — prophylactic surgical extraction is recommended given the ~29% dentigerous-cyst rate (Babbitt 2016); radiographic monitoring every 6-12 months is an alternative only with informed owner consent. (4) Dentigerous cyst already formed — surgical extraction of the causative tooth plus complete enucleation/curettage of the cyst lining (always submit for histopathology — odontogenic tumors are the differential) ± bone augmentation for large defects.",
+        "treatment_ja": "第1段階 — 臨床的に欠けている全ての歯の歯科X線撮影（永久歯列は生後6-7ヶ月で完成。全顎X線の診断的価値は Verstraete 1998 が確立）。所見別に: (1) 先天性欠如 — 治療不要。カルテに記録し、繁殖供用個体では遺伝カウンセリング。(2) 萌出ポテンシャルの残る若齢犬の埋伏歯 — 萌出ウィンドウ内のオペルキュレクトミー（被覆歯肉の切除 — Hale 2005）。(3) 萌出が見込めない埋伏歯 — 含歯性嚢胞の発生率約29%（Babbitt 2016）を踏まえ予防的外科抜歯を推奨。6-12ヶ月毎のX線モニタリングは飼い主のインフォームドコンセント下でのみ代替となる。(4) 含歯性嚢胞を形成済み — 原因歯の外科抜歯＋嚢胞壁の完全な摘出・掻爬（歯原性腫瘍が鑑別となるため病理組織検査へ必ず提出）± 大きな骨欠損への骨補填。",
+        "prognosis": "Excellent. Congenital absence is a cosmetic/registry issue, not a health problem, in companion dogs. Dentigerous cysts treated early (extraction + complete lining removal) have an excellent prognosis; delayed diagnosis risks extensive bone loss and pathologic mandibular fracture.",
+        "prognosis_ja": "予後は優良です。先天性欠如は伴侶犬では健康上の問題ではなく審美・血統登録上の事項にとどまります。含歯性嚢胞は早期治療（抜歯＋嚢胞壁の完全除去）で予後優良。診断の遅れは広範な骨喪失・下顎の病的骨折のリスクとなります。",
+        "prevention": "Count teeth at every puppy visit and confirm the full permanent count at 6-7 months of age; radiograph any clinically missing tooth at that point — this converts dentigerous cysts from a destructive surprise into a preventable finding. Selection away from severely affected breeding lines for the congenital form.",
+        "prevention_ja": "子犬の全来院時に歯数をカウントし、生後6-7ヶ月で永久歯の全数を確認。その時点で臨床的に欠けている歯は必ずX線撮影する — これにより含歯性嚢胞は「破壊的な偶発所見」から「予防可能な所見」に変わります。先天性欠如については重度罹患ラインを繁殖から外す選択を。",
+        "recommended_tests": [
+            "歯科X線 (Dental Radiographs) - mandatory for every clinically missing tooth: congenital absence vs unerupted tooth vs retained root",
+            "歯数カウント (Tooth Count) - full permanent dentition check at 6-7 months",
+            "CT (Computed Tomography) - extent mapping for large dentigerous cysts",
+            "病理組織検査 (Histopathology) - cyst lining; rule out odontogenic tumors",
+        ],
+        "urgency": "normal",
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"puppy", "young"},
+    },
+    {
         "name": "Foreign Body in Ear",
         "name_ja": "耳内異物（草の実等）",
         "symptoms": {"ear_scratching", "head_tilting", "ear_odor", "pain_on_touch"},

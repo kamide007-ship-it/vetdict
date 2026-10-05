@@ -6512,3 +6512,79 @@ class TestDeciduousMalocclusionEntry:
         # ガード: 歯ぎしり（真の疼痛徴候）は従来どおり teeth_grinding
         ids2, _ = self._species("歯ぎしりをしています", "rabbit")
         assert "teeth_grinding" in ids2
+
+
+class TestMissingTeethEntry:
+    """2026-10: 欠歯（欠如歯・埋伏歯）エントリの新設。
+    「歯が生えてこない」主訴に着地する疾患が無かったギャップの再発防止 +
+    含歯性嚢胞ワークアップ（欠歯=歯科X線必須、Babbitt 2016）の収載検証。"""
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    @staticmethod
+    def _names(results, n=6):
+        return [(r.get("name_ja") or r.get("name_en") or "") for r in results[:n]]
+
+    def test_missing_tooth_complaints_rank_first(self):
+        for phrase in [
+            "乳歯が抜けたのに永久歯が生えてこない",
+            "歯の数が少ない気がします",
+            "歯が足りません",
+            "前歯が1本無いようです",
+        ]:
+            ids, res = self._legacy(phrase)
+            assert "missing_teeth" in ids, (phrase, ids)
+            top = self._names(res, 1)
+            assert top and "欠歯" in top[0], (phrase, top)
+
+    def test_generic_dental_complaints_not_hijacked(self):
+        # 主訴ゲート設計: 口臭・よだれ・顎腫脹では欠歯は上位を奪わない
+        ids, res = self._legacy("口臭がひどい よだれ")
+        assert "missing_teeth" not in ids
+        names = self._names(res, 3)
+        assert any("歯周病" in n or "口腔内腫瘍" in n for n in names), names
+        assert not any("欠歯" in n for n in names), names
+
+    def test_legacy_entry_mirrors_dog_module_for_pivot(self):
+        from api.health_checker import DISEASES
+        from api.species import dog_diseases as dmod
+
+        legacy = next(d for d in DISEASES if d["id"] == "missing_teeth")
+        mod = next(d for d in dmod.DISEASES if d["name"].startswith("Missing Teeth"))
+        assert legacy["name_en"] == mod["name"]
+        assert legacy["name_ja"] == mod["name_ja"]
+        assert legacy.get("prevalence_tier") == "common"
+        # 中核の臨床規則（欠歯=X線必須・含歯性嚢胞29%・Babbitt 2016）を保持
+        t = mod["treatment_ja"]
+        assert "歯科X線" in t and "含歯性嚢胞" in t and "29%" in t
+        assert "Babbitt" in mod["treatment"] and "operculectomy" in mod["treatment"].lower()
+        # 先天性欠如=治療不要、嚢胞壁は病理検査へ、の両端も固定
+        assert "治療不要" in t and "病理組織検査" in t
+
+    def test_prevalence_key_resolves_to_module_name(self):
+        from api.species import dog_diseases as dmod
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        key = "Missing Teeth (Hypodontia / Unerupted Teeth)"
+        assert SPECIES_PREVALENCE["dog"].get(key) == "common"
+        assert any(d["name"] == key for d in dmod.DISEASES)
+
+    def test_other_species_fall_back_to_dental_ddx(self):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        # ウサギ: 摂食困難系へフォールバックし歯科ddxが上位
+        ids = _extract_species_symptoms("前歯が無いままです", "rabbit")
+        assert ids, ids
+        names = [m.get("name_ja") or "" for m in _match_species_symptoms_to_diseases(list(ids), "rabbit")[:3]]
+        assert any("切歯" in n or "不正咬合" in n or "歯" in n for n in names), names
+        # 猫: tooth_loss へ解決し歯周病系が上位
+        ids2 = _extract_species_symptoms("歯がないようです", "cat")
+        assert "tooth_loss" in ids2, ids2
