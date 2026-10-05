@@ -933,6 +933,15 @@ def extract_symptoms_from_text(text: str) -> list:
         "dilated_pupils": ["vision_loss", "cloudiness_in_eyes"],
     }
 
+    # 単一IDでは臨床的意味が落ちる主訴の「併記抽出」: 祈りのポーズ
+    # （背中を丸める）は防御姿勢であると同時に腹痛姿勢そのもの（Ettinger
+    # 8th ed — pancreatitis の prayer position）。従来は hunched_posture→
+    # reluctance_to_move の単一解決で腹痛シグナルが消え、嘔吐を伴わない
+    # 「震えて背中を丸めて食べない」主訴で膵炎が top-6 圏外だった。
+    _LEGACY_COEXTRACT = {
+        "hunched_posture": ["abdominal_pain"],
+    }
+
     def _resolve_legacy_id(sid: str) -> str | None:
         if sid in SYMPTOM_IDS:
             return sid
@@ -957,9 +966,14 @@ def extract_symptoms_from_text(text: str) -> list:
         if is_negated_mention(text_lower, pos + len(alias)):
             # 「咳はない」等 — 否定された言及は抽出しない
             continue
-        symptom_id = _resolve_legacy_id(SYMPTOM_ALIASES[alias])
+        raw_id = SYMPTOM_ALIASES[alias]
+        symptom_id = _resolve_legacy_id(raw_id)
         if symptom_id is None:
             continue
+        # 併記抽出: 主ID に加え、臨床的に同時に意味されるIDも抽出する
+        for co_id in _LEGACY_COEXTRACT.get(raw_id, []):
+            if co_id in SYMPTOM_IDS:
+                matched_symptoms.add(co_id)
         end = pos + len(alias)
         # Skip if this range overlaps with an already-consumed range
         overlap = False

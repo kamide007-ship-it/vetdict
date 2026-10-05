@@ -92,6 +92,7 @@ from api.drug_batch_65 import DRUGS_BATCH_65
 from api.drug_batch_66 import DRUGS_BATCH_66
 from api.drug_batch_67 import DRUGS_BATCH_67
 from api.drug_batch_68 import DRUGS_BATCH_68
+from api.drug_batch_69 import DRUGS_BATCH_69
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10960,6 +10961,15 @@ for _drug68 in DRUGS_BATCH_68:
     if _drug68["id"] not in _drug_index:
         DRUGS.append(_drug68)
         _drug_index[_drug68["id"]] = _drug68
+
+# Batch 69 (2026-10 第62弾: referenced-but-absent 2剤 —
+#  エプシプランテル（Cestex、条虫11参照。猫はラベル2.75 mg/kg=犬の半量で
+#  疾患テキストの(dogs/cats)誤記も同時是正）、ダプソン（犬の難治性血管炎・
+#  ライノスポリジウム症5参照。猫は溶血・神経毒性で safe:False）)
+for _drug69 in DRUGS_BATCH_69:
+    if _drug69["id"] not in _drug_index:
+        DRUGS.append(_drug69)
+        _drug_index[_drug69["id"]] = _drug69
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

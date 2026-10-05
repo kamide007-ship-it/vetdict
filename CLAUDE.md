@@ -6538,3 +6538,70 @@ setupMobileBottomNav含む）がスキップ** → 下部ナビ不生成・全�
 ### テスト・CI
 - 新規11件 + app.js参照の全12テストファイル **175件合格**、ruff clean、node --check（app.js/sw.js）通過
 - 疾患データ変更なし（検索インデックス・配信DB不変）
+
+## 2026-10セッション（第62弾: エプシプランテル/ダプソン補完 + エプシプランテル猫用量誤記の是正 + チャット精度第38弾 + 祈りのポーズ併記抽出）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,558件合格**（34 skip、ベースライン）
+- 配信SQLiteクリーンビルド: **6,895疾患・646→648薬品**、treatment/prevention/prognosis **100%**、
+  主要臨床フィールドの空欄 **0**、キリル文字・破損カナ混入 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**、文字列型相互作用スキーマ **0**、ID重複 **0**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose/name_ja 欠落 **0**、全種 references あり
+- 薬品マッチャー飽和度（第36回スイープ、カタカナ+英語×用量文脈の実スニペット突合）:
+  カタカナ側は飽和（ノルモソルR/乳酸リンゲル/クラブラン酸/グルコン酸Ca/UDCA/フルニキシン・メグルミン/
+  MMF/アムホテリシンB/鉄デキストラン/CaEDTA/SSD/ペニシラミン 全て実フレーズで解決確認）
+
+### referenced-but-absent 薬品2剤の補完（`drug_batch_69.py` 新規、646→648薬品）
+英語トークンスイープで検出した真のモノグラフ欠落:
+- **エプシプランテル（セステックス）** — 条虫エントリ11参照の FDA承認セストサイド（NADA 140-893）なのに
+  プラジカンテル以外の条虫駆除薬が皆無だった。**ラベル用量は犬5.5 / 猫2.75 mg/kg（犬の半量）**、
+  消化管非吸収（<0.1%）=腔内限局の定義的性質、エキノコックス適応外（北海道等ではプラジカンテル第一選択）、
+  7週齢未満不可、瓜実条虫のノミ対策必須を明記
+- **ダプソン** — 犬の難治性血管炎・天疱瘡補助・SLO・ライノスポリジウム症再発抑制の5参照（1 mg/kg PO
+  q8-12h）なのにスルホン系が皆無だった。CBC+メトヘモグロビン+肝酵素の定期監視必須、
+  **猫 safe:False**（臨床用量で溶血性貧血・神経毒性 — Plumb's）、TMP-サルファ併用=major
+- **疾患テキストの用量誤記を是正**: 「Epsiprantel 5.5 mg/kg PO single dose (dogs/cats)」（EN 5件+JA 5件）は
+  猫に犬量を併記する誤り → 「dogs 5.5 mg/kg; cats 2.75 mg/kg — label doses differ」に日英とも修正
+- 動線検証: テキストマッチャー・逆引き「この薬品を使う疾患」（epsiprantel 6疾患/dapsone 2疾患）・
+  相互作用チェッカー自然言語解決（セステックス/だぷそん等）全て接続
+
+### 診断チャット精度 第38弾（32症例フレッシュスイープ 7 MISS → 全症例合格）
+- **語彙ギャップ（エイリアス追加）**: 歯茎が白っぽ/歯ぐきが白→pale_gums（「急にぐったり+歯茎が白っぽい+
+  腹部膨満」で血管肉腫（脾破裂）が rank 1 に — 従来は抽出ゼロで寄生虫上位）、足の裏がただれ→foot_sores
+  （ウサギ・ソアホックの代表的主訴が bleeding 単独に落ちて DIC/血小板減少症が上位だった → 潰瘍性足底皮膚炎
+  rank 1）、口の周りを気にし/食べるとき痛そう→difficulty_eating（歯周病 rank 1 — 従来はCDS/網膜萎縮上位）、
+  うんちが出にく/便が出にく→constipation（インコ「お腹が膨れて便が出にくい」で卵管・卵塞群がtop独占）、
+  浮いてい/水面に浮い/沈めな→buoyancy_problems（両生類「膨れて浮いています」の主語省略形が抽出ゼロだった）
+- **猫FLUTD会陰部グルーミング**: 「陰部をずっと舐めています」が汎用 itching に落ちて皮膚糸状菌が上位独占 →
+  陰部を舐めて 系エイリアス→**excessive_grooming**（FIC/FLUTDの症状セットが保有 — Buffington）。
+  **「舐めている」(5字)との長さタイは辞書挿入順で旧キーが勝つ**ことを発見 — 新キーは6字以上で登録
+  （タイ回避の設計メモをソースに記載）
+- **ID_SYNONYMS 新設2チェーン**: pale_gums→[pale_mucous_membranes, pale_comb, anemia, weakness]
+  （非保有種の逆方向フォールバック）、buoyancy_problems→[inability_to_sink, swimming_upside_down,
+  abnormal_swimming, erratic_swimming, bloating]（魚は遊泳異常語彙へ安全フォールバック）
+- **tier是正**: 両生類 肝細胞癌/腎腺癌/胃捻転=rare・膵炎=uncommon（未tierクローンが「お腹が膨れて浮く」
+  主訴の上位を占有 — 浮腫・水腫（腹水症）/浮遊障害が正しい上位に）、鳥 開脚症=uncommon
+  （雛の発育期変形が未tierで成鳥の挙上肢主訴 rank 1 を奪っていた — Ritchie & Harrison）
+- **祈りのポーズの併記抽出（`_LEGACY_COEXTRACT` 新設）**: 「背中を丸める」は防御姿勢であると同時に
+  腹痛姿勢そのもの（prayer position — Ettinger 8th ed）だが、hunched_posture→reluctance_to_move の
+  単一解決で腹痛シグナルが消え、嘔吐を伴わない「震えて背中を丸めて食べない」で膵炎が top-6 圏外だった →
+  主ID（reluctance_to_move、IVDD系の既存挙動を維持）に加えて abdominal_pain を併記抽出する機構を新設
+  → 膵炎がtop-5内に（IVDD 2位は不変、既存の祈りのポーズ+嘔吐→膵炎 rank 1 ガードも不変）
+
+### UX・スマホ検証（Playwright 390px 実タッチ）
+- 下部ナビ→薬品/疾患DBタブ: 検索欄に正着（topY≈120）、新規薬品ダプソンの検索・詳細展開 ✓
+- 種選択→チャット: 犬28クイックボタン表示、タップ→候補カード（疾患DBピボット5件+チェッカー refine）✓
+- チャット候補カード「疾患DBで詳細を開く」→ #database へ切替+詳細自動展開+スクロール着地 ✓
+- `setDefaultStats()` dog 588/cat 565薬品・pendingStats drugs 646→**648** に同期
+
+### 回帰テスト（+13件）
+- `TestBatch69EpsiprantelDapsone`（4件 — ラベル用量（猫2.75=犬の半量）・猫ダプソン safe:False・
+  監視必須事実・マッチャー/リゾルバ解決・疾患JSONの(dogs/cats)誤記再発防止）
+- `TestChatClinicalAccuracyAuditRound38`（9件 — 血管肉腫/ソアホック/歯周病/FIC表面化/インコ排便困難/
+  両生類浮遊vs腫瘍クローン/鳥開脚症デモート/子宮蓄膿症+ホットスポットガード/汎用舐め主訴の皮膚科維持）
+
+### テスト・CI
+- フルテストスイート合格、ruff check/format: repo全体 clean
+- ServiceWorker: `CACHE_NAME` v168 → **v169**
+- 再現手順: `migrate_to_sqlite.py`（クリーンビルド 6,895疾患・648薬品）— 疾患名不変のため
+  検索インデックス no-op

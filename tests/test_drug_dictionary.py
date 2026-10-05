@@ -4403,3 +4403,64 @@ class TestBatch68Molidustat:
         ]
         assert resolve_drug_reference("モリデュスタットナトリウム") == "molidustat"
         assert resolve_drug_reference("モリデュスタット") == "molidustat"
+
+
+class TestBatch69EpsiprantelDapsone:
+    """2026-10 第62弾: referenced-but-absent 2剤（エプシプランテル・ダプソン）
+    + エプシプランテル猫用量誤記（犬量5.5の(dogs/cats)併記）の是正。"""
+
+    def _get(self, did):
+        from api.drug_dictionary import get_drug_by_id
+
+        d = get_drug_by_id(did)
+        assert d is not None, did
+        return d
+
+    def test_epsiprantel_present_with_label_doses(self):
+        d = self._get("epsiprantel")
+        dog = d["species_info"]["dog"]
+        cat = d["species_info"]["cat"]
+        assert dog["safe"] and cat["safe"]
+        assert "5.5 mg/kg" in dog["dosage"]
+        # ラベルの猫用量は犬の半量 — 誤って犬量を流用しない
+        assert "2.75 mg/kg" in cat["dosage"]
+        assert "2.75" in cat["dosage_ja"]
+        for sp in ("dog", "cat"):
+            info = d["species_info"][sp]
+            assert info["dosage"] and info["dosage_ja"] and info["notes_ja"]
+        # 定義的事実: 腸管腔内限局・エキノコックスには適応外（プラジカンテル優先）
+        assert "エキノコックス" in d["contraindications_ja"]
+        assert "7週齢" in d["contraindications_ja"]
+
+    def test_dapsone_present_with_monitoring_and_cat_gate(self):
+        d = self._get("dapsone")
+        dog = d["species_info"]["dog"]
+        assert dog["safe"]
+        assert "1 mg/kg" in dog["dosage"]
+        # モニタリング必須（CBC・メトヘモグロビン）の定義的安全事実
+        assert "CBC" in dog["notes_ja"]
+        assert "メトヘモグロビン" in dog["notes_ja"] or "メトヘモグロビン" in d["contraindications_ja"]
+        # 猫は溶血・神経毒性で safe:False（Plumb's）
+        cat = d["species_info"]["cat"]
+        assert cat["safe"] is False
+        assert "溶血" in cat["notes_ja"]
+
+    def test_new_drugs_resolve_in_matcher_and_resolver(self):
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        assert {
+            h["id"] for h in find_drugs_in_text("Epsiprantel single dose (dogs 5.5 mg/kg PO; cats 2.75 mg/kg PO)")
+        } >= {"epsiprantel"}
+        assert {h["id"] for h in find_drugs_in_text("ダプソン 1 mg/kg PO q8h — CBC監視")} >= {"dapsone"}
+        assert resolve_drug_reference("セステックス") == "epsiprantel"
+        assert resolve_drug_reference("だぷそん") == "dapsone"
+
+    def test_disease_json_epsiprantel_cat_dose_corrected(self):
+        # 「Epsiprantel 5.5 mg/kg PO single dose (dogs/cats)」という
+        # 猫への犬量併記が残っていないこと（ラベル: 猫2.75 mg/kg）
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            raw = f.read()
+        assert "Epsiprantel 5.5 mg/kg PO single dose (dogs/cats)" not in raw
+        assert "Epsiprantel 5.5 mg/kg PO。" not in raw
+        # 修正後の正しい表記が配信されている
+        assert "cats 2.75 mg/kg" in raw

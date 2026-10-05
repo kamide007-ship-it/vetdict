@@ -904,6 +904,10 @@ SPECIES_PREVALENCE = {
         "Teflon/PTFE Toxicosis": "rare",
         "Essential Oil Toxicity": "rare",  # Exposure-dependent; untiered it outranked hypocalcemia for post-laying tremors
         "Blood Parasites (Haemoproteus)": "uncommon",
+        # 開脚症は雛（人工育雛）の発育期変形で、成鳥の片側挙上肢・止まり木
+        # 不能主訴の鑑別としては稀（Ritchie & Harrison）— 未tierで趾瘤症・
+        # 痛風・骨折を押しのけて1位に出ていた
+        "Splay Leg (Spraddle Leg)": "uncommon",
         # very_common
         "Aspergillosis": "very_common",
         "Feather Plucking (Feather Destructive Behavior)": "very_common",
@@ -1469,6 +1473,13 @@ SPECIES_PREVALENCE = {
         "Vitamin A Deficiency": "common",  # short tongue syndrome
         "Calcium Deficiency": "common",  # 飼育下NSHP
         "Spring Disease (Post-hibernation Syndrome)": "uncommon",  # 越冬明け限定・季節性
+        # 腫瘍・胃捻転の供給エントリは散発的（Wright & Whitaker: 両生類の
+        # 腹部膨満の実臨床コモンズは浮腫症候群/腹水・胃過負荷・卵胞うっ滞）。
+        # 未tierで「お腹が膨れて浮く」主訴の上位を占有していた
+        "Hepatocellular Carcinoma": "rare",
+        "Renal Adenocarcinoma": "rare",
+        "Gastric Torsion": "rare",
+        "Pancreatitis": "uncommon",
         "Capillariasis": "common",  # 線虫症の代表的サブタイプ（Pseudocapillaroides等）
         "Frog Virus 3 (FV3)": "common",  # Ranavirus Infection 本体と同一疾患の別掲
         "Salmonellosis": "uncommon",  # 両生類は無症候キャリアが主で臨床発症は少数
