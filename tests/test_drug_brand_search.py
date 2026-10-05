@@ -230,3 +230,29 @@ class TestFrontendWiring:
         assert "_anchorWatchRelease=release;" in APP_JS
         # 3b. ターゲットが非表示化（タブ切替等）したらウォッチャーは即終了
         assert "if(!el.isConnected||el.offsetParent===null)return release();" in APP_JS
+
+    def test_species_gated_tabs_auto_select_last_species(self):
+        """疾患DB/麻酔タブは動物種未選択でも1クリックで内容が出る（第61弾）。
+
+        従来は「タブ→空状態→動物種を選択するボタン→種タップ」の往復が必要
+        だった（利用者報告「もう1クリック少なくしたい」）。switchView が
+        前回使った種（lsGet("vetdict-last-species")、無ければ犬）を自動選択
+        するため、PC/スマホ下部ナビ/ハンバーガーの全経路で検索欄＋カテゴリ＋
+        リストが即表示される。
+        """
+        # 1. 種選択は常に永続化される（ガード付きアクセサ経由）
+        assert 'lsSet("vetdict-last-species",id)' in APP_JS
+        # 2. switchView が疾患DB/麻酔で未選択時に自動選択する
+        assert 'lsGet("vetdict-last-species")' in APP_JS
+        assert 'view==="database"||view==="anesthesia"' in APP_JS
+        assert 'autoSp="dog"' in APP_JS
+        # 3. 不正な保存値はSPECIESレジストリ照合で犬にフォールバック
+        assert "SPECIES.some(s=>s.id===autoSp)" in APP_JS
+        # 4. 自動選択は selectSpecies 経由（quiet=初期ルーティングでトースト抑制、
+        #    auto=アナリティクス区別）。失敗しても起動は死なない（try/catch）
+        assert "selectSpecies(autoSp,{auto:true,quiet:!!opts.silent})" in APP_JS
+        # 5. トースト抑制とauto計測の配線が selectSpecies 側に存在する
+        assert "opts&&opts.quiet" in APP_JS
+        assert "opts&&opts.auto" in APP_JS
+        # 6. 自動選択が失敗した場合の空状態フォールバックは維持される
+        assert 'renderEmptyState("database")' in APP_JS

@@ -1874,7 +1874,10 @@ function renderSpeciesGrid(){
 }
 
 function selectSpecies(id,opts){
-  trackEvent("select_species",{species:id});
+  trackEvent("select_species",opts&&opts.auto?{species:id,auto:true}:{species:id});
+  /* Remember the last-used species so species-gated tabs (疾患DB/麻酔) can
+     auto-restore it next visit instead of demanding a fresh pick (第61弾). */
+  lsSet("vetdict-last-species",id);
   currentSpecies=id;selectedSymptoms.clear();currentBreed="";
   document.querySelectorAll(".species-card").forEach(c=>{
     const sel=c.dataset.species===id;
@@ -1887,7 +1890,7 @@ function selectSpecies(id,opts){
   if(guidedCont&&!guidedCont.classList.contains("hidden")){startGuidedConsultation();}
   else{guidedState.species=id;}
   const sp=SPECIES.find(s=>s.id===id);
-  if(sp&&typeof showToast==="function"){const label=currentLang==="ja"?sp.name:sp.nameEn;showToast(currentLang==="ja"?`${label}を選択しました`:`${label} selected`,"success");}
+  if(sp&&typeof showToast==="function"&&!(opts&&opts.quiet)){const label=currentLang==="ja"?sp.name:sp.nameEn;showToast(currentLang==="ja"?`${label}を選択しました`:`${label} selected`,"success");}
   const resultsArea=document.getElementById("resultsArea");
   if(resultsArea){resultsArea.innerHTML=`<div class="results-empty"><span class="big-icon" aria-hidden="true">\u{1F50D}</span><p>${t("resultsSelectSymptom")}</p></div>${renderHistoryPanel()}`;attachHistoryHandlers(resultsArea);}
   updateBreadcrumb();
@@ -5261,10 +5264,21 @@ function switchView(view,opts){
      lands with the panel heading tucked under the header. Callers scroll after
      switchView returns, so the offset is correct by then. */
   _syncStickyOffset();
+  /* 第61弾: 動物種未選択で種依存タブ（疾患DB/麻酔）を開いたら、前回使った種
+     （無ければ犬）を自動選択して検索欄＋カテゴリ＋リストを即表示する —
+     「タブ→種選択画面→種タップ→戻る」の往復を1クリック削減。
+     PC/スマホ下部ナビ/ハンバーガーの全経路が switchView を通るため挙動は同一。
+     初期ハッシュルーティング（opts.silent）ではトーストを出さない。
+     種はいつでも動物種カードから変更できる（selectSpecies が全タブへ同期）。 */
+  if(!currentSpecies&&(view==="database"||view==="anesthesia")){
+    let autoSp=lsGet("vetdict-last-species");
+    if(!autoSp||!SPECIES.some(s=>s.id===autoSp))autoSp="dog";
+    try{selectSpecies(autoSp,{auto:true,quiet:!!opts.silent});}catch(e){debugError("autoSpecies",e);}
+  }
   if(view==="drugs"&&!drugsLoaded)loadDrugDictionary();
   if(view==="anesthesia"&&!anesthesiaLoaded)loadAnesthesiaProtocols();
   if(view==="emergency"&&!emergencyLoaded)loadEmergencyProtocols();
-  /* 動物種未選択で疾患DBを開いた場合、空白ではなく案内（種選択 + 横断検索ヒント）を表示 */
+  /* 自動種選択が失敗した場合の安全網: 空白ではなく案内（種選択 + 横断検索ヒント）を表示 */
   if(view==="database"&&!currentSpecies){
     const dbList=document.getElementById("diseaseDbList");
     if(dbList&&!dbList.children.length)dbList.innerHTML=renderEmptyState("database");
