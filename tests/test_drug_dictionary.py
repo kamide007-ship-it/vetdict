@@ -4362,3 +4362,44 @@ class TestBatch68Molidustat:
         idx = _build_drug_to_diseases_index()
         names = " / ".join(x.get("name", "") for x in idx.get("molidustat", []))
         assert "Chronic Kidney Disease" in names
+
+    def test_japan_market_availability_documented(self):
+        """2026-10 第56弾: バレンジン®が日本でも動物用医薬品（指定・要指示）として
+        承認・発売 — モノグラフと猫CKD治療文の両方が国内入手可能性を反映すること
+        （従来は米国Varenzin-CA1のみの参照だった）。"""
+        d = self._drug()
+        assert "バレンジン" in d["name_ja"]
+        cat = d["species_info"]["cat"]
+        jp_text = cat["dosage_ja"] + cat["notes_ja"] + d["mechanism_ja"]
+        # 国内製剤の定義的事実: 25 mg/mL 経口懸濁液・要指示・国内承認
+        assert "25 mg/mL" in jp_text
+        assert "要指示" in jp_text
+        assert "日本" in jp_text and "承認" in jp_text
+
+        # 疾患→薬品の動線: 猫CKD治療文（JSON+モジュール）が国内承認を反映
+        import json
+
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            data = json.load(f)
+        ckd = next(x for x in data if x.get("species") == "Cat" and x.get("name") == "Chronic Kidney Disease")
+        assert "バレンジン" in ckd["treatment_ja"] and "日本" in ckd["treatment_ja"]
+        assert "approved in japan" in ckd["treatment"].lower()
+
+        import importlib
+
+        cat_mod = importlib.import_module("api.species.cat_diseases")
+        mod_hit = next(
+            x
+            for x in cat_mod.DISEASES
+            if "慢性腎臓病" in (x.get("name_ja") or "") and "バレンジン" in (x.get("treatment_ja") or "")
+        )
+        assert "日本でも" in mod_hit["treatment_ja"]
+
+        # マッチャー/リゾルバ: 国内表記（®付き・ナトリウム塩名）でも解決
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        assert "molidustat" in [
+            x["id"] for x in find_drugs_in_text("バレンジン®25 mg/mL猫用経口懸濁液 5 mg/kg PO q24h")
+        ]
+        assert resolve_drug_reference("モリデュスタットナトリウム") == "molidustat"
+        assert resolve_drug_reference("モリデュスタット") == "molidustat"
