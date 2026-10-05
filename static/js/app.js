@@ -843,9 +843,17 @@ document.addEventListener("DOMContentLoaded",_syncStickyOffset);
         re-assert the position while the document is still growing.
    Uses window.scrollTo with an explicitly computed y (programmatic scrollTo is
    not affected by scroll-padding-top, so the offset is applied once, not twice). */
+let _anchorWatchRelease=null;
 function scrollToAnchor(el,opts){
   if(!el)return;
   opts=opts||{};
+  /* 直前の settle ウォッチャーを必ず解放する。ウォッチャーは最長12秒生きて
+     ターゲットの文書内位置を監視し続けるが、ユーザー操作(wheel/touch/key)で
+     しか解放されなかったため、タブ切替（プログラムスクロール）では前タブの
+     ウォッチャーが生存したまま非表示になったターゲット（rect=0）へ向けて
+     再アンカーし、新しいスクロールを先頭付近へ引き戻していた
+     （「疾患DBを押しても直ぐにそこへ飛ばない」の実測原因）。 */
+  if(_anchorWatchRelease)_anchorWatchRelease();
   _syncStickyOffset();
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const offset=()=>parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sticky-offset"),10)||112;
@@ -880,8 +888,10 @@ function scrollToAnchor(el,opts){
     cancelled=true;
     if(raf)cancelAnimationFrame(raf);
     evs.forEach(ev=>window.removeEventListener(ev,release));
+    if(_anchorWatchRelease===release)_anchorWatchRelease=null;
   }
   evs.forEach(ev=>window.addEventListener(ev,release,{passive:true}));
+  _anchorWatchRelease=release;
   const docTopOf=()=>el.getBoundingClientRect().top+window.scrollY;
   const now=()=>(window.performance&&performance.now?performance.now():Date.now());
   const doc=document.documentElement;
@@ -899,6 +909,9 @@ function scrollToAnchor(el,opts){
   const minWatchMs=2000;
   const settle=()=>{
     if(cancelled)return;
+    /* ターゲットが非表示になったら（タブ切替でパネルごと隠れた等）即終了 —
+       rect=0 の要素へ再アンカーすると先頭へ吹き飛ぶ */
+    if(!el.isConnected||el.offsetParent===null)return release();
     const y=Math.round(window.scrollY);
     const docTop=docTopOf();
     const want=Math.max(0,Math.round(docTop-offset()));
@@ -1849,13 +1862,30 @@ function selectSpecies(id,opts){
     if("requestIdleCallback" in window)requestIdleCallback(_pf,{timeout:2500});
     else setTimeout(_pf,1200);
   }
-  /* On a user tap of a species card, carry the viewport to the "select symptoms"
-     step so the next action is visible — on mobile the checker sits below the
-     species grid and the tap otherwise looks like nothing happened. Programmatic
-     calls (deep link, history restore, cross-view flows) pass no opts and never
-     move the page. Skip when the card is already comfortably in view (desktop). */
+  /* 種選択を薬品辞書へ即時反映する。loadDrugDictionary はロード完了時に
+     しか currentSpecies を同期しないため、プリフェッチ済み（種選択前に
+     ロード）だと species フィルタが「全種」のまま固定され、種を押しても
+     薬品辞書に用量ボックスが出なかった。ここで常に同期して再描画する。 */
+  if(drugsLoaded){
+    const drugSp=document.getElementById("drugSpeciesFilter");
+    if(drugSp&&drugSp.value!==id){drugSp.value=id;renderDrugList();}
+  }
+  /* On a user tap of a species card, carry the viewport to the next action so
+     the tap never looks like a no-op. The species grid is a standalone section
+     reachable from EVERY tab:
+       - checker view: land on the "select symptoms" step (従来どおり)
+       - any other view (drugs/database/anesthesia/emergency/chat): land back on
+         that view's own landing target — e.g. from the drug dictionary, tapping
+         犬 returns to the (now dog-filtered) drug search. 従来は非表示の
+         チェッカーパネルだけを対象にしていたため、薬品辞書タブ中に種を押すと
+         何も起きなかった（「動物種を押しても薬品辞書が表示されない」）。
+     Programmatic calls (deep link, history restore, cross-view flows) pass no
+     opts and never move the page. */
   if(opts&&opts.scroll){
-    const target=document.querySelector("#viewChecker .panels");
+    let target=document.querySelector("#viewChecker .panels");
+    if(!target||target.offsetParent===null){
+      target=(currentView&&currentView!=="checker")?_navLandingTarget(currentView):null;
+    }
     if(target&&target.offsetParent!==null){
       const top=target.getBoundingClientRect().top;
       const stickyOffset=parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sticky-offset"),10)||112;

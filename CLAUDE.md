@@ -6332,3 +6332,73 @@ ACTH刺激プロトコル・シクロスポリン・オクラシチニブ等）�
   （猫モジュールの prevention は EN フィールドに日本語が入っていたバグも是正）
 - 回帰テスト拡張（9→11件）: 全16フィールドの非空＋雌/鳥/腫瘍テンプレマーカー12種の不在、
   犬モジュールの疾患固有記載（INSL3/精巣導帯/推奨検査）検証
+
+## 2026-10セッション（第56弾: バレンジン®日本承認の反映 — モリデュスタット収載内容の国内対応）
+
+### 背景（開発者からの直接リクエスト「治療に反映したい。追加。」+ Elanco製品資材の提示）
+第55弾で収載したモリデュスタット（Varenzin-CA1、米国FDA条件付き承認ベース）が、
+**日本でも動物用医薬品バレンジン®として承認・発売**された（エランコジャパン、
+モリデュスタットナトリウム25 mg/mL猫用経口懸濁液・27 mLボトル・投与用シリンジ付属・
+フィッシュオイルフレーバー、指定医薬品・要指示医薬品）。従来の収載は米国限定の参照だったため、
+国内で処方可能な薬剤として反映。
+
+### 変更内容
+- **drug_batch_68.py**: name/name_ja を「Molidustat (Varenzin / Varenzin-CA1)／
+  モリデュスタットナトリウム（バレンジン）」に更新。mechanism（日英）・cat dosage_ja・
+  notes（日英）に国内製剤の定義的事実（25 mg/mL懸濁液・27 mL・要指示・付属シリンジでの
+  自宅投与・フィッシュオイルフレーバー・国内添付文書準拠）を追記。search_aliases に
+  モリデュスタットナトリウム追加。EU承認（Varenzin 23.3 mg/ml、EMA）も参考文献に併記
+- **猫CKD治療文の更新（両配信パス）**: cat_diseases.py の腎性貧血セクション +
+  diseases_all_species.json（JA/EN）の「経口代替」行を、FDA限定の記述から
+  「日本でも動物用医薬品バレンジン®として承認済みで自宅投与可」に更新
+  （5 mg/kg×28日・7日休薬・週1回PCV中止ルール・鉄充足前提は不変）
+- 用法用量の骨格は米国/EUラベル（5 mg/kg PO q24h×最長28日）を維持し、
+  国内の実投与は「国内添付文書に従う」と明記（JP固有用量の捏造をしない設計）
+
+### 回帰テスト（TestBatch68Molidustat +1件 = 8件）
+- `test_japan_market_availability_documented` — モノグラフの国内製剤事実（25 mg/mL・要指示・
+  日本承認）、猫CKD治療文（JSON+モジュール）の国内承認反映、®付き・ナトリウム塩名での
+  マッチャー/リゾルバ解決
+
+### テスト・CI
+- ruff check/format: 変更ファイル通過
+- 配信SQLite再構築（6,893疾患・treatment/prevention/prognosis 100%）
+- 薬品APIはPython直配信のためデプロイで即反映（薬品数不変: 646）
+
+## 2026-10セッション（第57弾: スマホ動線の実測修正 — Cookieバナーの下部ナビ遮蔽 + 種選択→薬品辞書同期 + scrollToAnchor引き戻しバグ）
+
+### 背景（利用者報告「動物種を押しても薬品辞書が表示されない」「疾患DBを押しても直ぐにそこへ飛ばない」）
+Playwright実機再現（モバイル390px/デスクトップ1280px）で3つの独立した根本原因を特定。
+
+### 根本原因と修正
+1. **Cookie同意バナーがモバイル下部ナビを完全遮蔽**（最重要）: バナー（fixed, z:200, 画面下部292px）が
+   下部ナビ（z:101）の真上に重なり、**同意ボタンを押すまで全タブタップが無効**だった
+   （Playwright tap が hit-test 不能で30秒タイムアウト＝実機でタップが届かない状態）。
+   → `@media(max-width:600px)` で `.cookie-consent` を下部ナビの高さ分上に退避
+   （bottom: calc(53px + safe-area)）+ コンパクト化（padding/font縮小）
+2. **種カードタップが薬品辞書に反映されない**: (a) `loadDrugDictionary` はロード完了時にしか
+   currentSpecies を同期しないため、アイドルプリフェッチ（種選択前にロード）後は species フィルタが
+   「全種」のまま固定。(b) `selectSpecies` のスクロールは非表示の `#viewChecker .panels` のみ対象
+   のため、薬品辞書タブ中に種を押すと「何も起きない」。
+   → selectSpecies が drugSpeciesFilter を常に同期+renderDrugList()、チェッカー非表示時は
+   `_navLandingTarget(currentView)` へフォールバック（薬品辞書から犬タップ→犬フィルタ済み
+   薬品辞書の検索欄に着地、用量ボックス表示）
+3. **scrollToAnchor の stale settle ウォッチャーが新しいスクロールを引き戻す**: ウォッチャー
+   （最長12秒）はユーザー操作（wheel/touch/key）でしか解放されず、タブ切替後も前タブの
+   非表示ターゲット（rect=0）へ再アンカーし続け、疾患DBタブの着地を先頭付近（scrollY 288）へ
+   引き戻していた（デスクトップ実測）。
+   → モジュールレベル `_anchorWatchRelease` で新しい scrollToAnchor 開始時に直前ウォッチャーを
+   必ず解放 + ターゲット非表示化（offsetParent null）で即 release
+
+### 実機検証（Before→After）
+| シナリオ | Before | After |
+|---|---|---|
+| モバイル: 下部ナビ「疾患DB」タップ（初回訪問） | 無反応（バナーが遮蔽） | 即着地（hash #database・検索欄表示） |
+| 薬品辞書タブ中に種カード「犬」タップ | 何も起きない・フィルタ空 | 犬フィルタ済み薬品辞書に着地・用量ボックス表示（モバイル/デスクトップとも） |
+| 犬選択後に疾患DBタブ（デスクトップ） | scrollY 288に引き戻され着地失敗 | 検索欄に正着（scrollY 2604） |
+
+### テスト・CI
+- 回帰テスト: `test_species_tap_reaches_drug_dictionary_and_no_stale_scroll_hijack`
+  （バナー退避CSS・フィルタ同期・ビューフォールバック・ウォッチャー解放の4系統）
+- app.js参照の全13テストファイル **958件合格**、ruff clean、app.js構文パース検証
+- ServiceWorker: `CACHE_NAME` v163 → **v164**
