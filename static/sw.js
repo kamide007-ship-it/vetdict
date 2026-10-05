@@ -1,5 +1,5 @@
 // VetDict Service Worker — offline support & caching
-const CACHE_NAME = 'vetdict-v166';
+const CACHE_NAME = 'vetdict-v167';
 const STATIC_ASSETS = [
   '/',
   '/static/favicon.svg',
@@ -53,6 +53,29 @@ self.addEventListener('fetch', (event) => {
       }).catch(() =>
         caches.match(event.request).then((cached) =>
           cached || (event.request.mode === 'navigate' ? caches.match('/') : new Response('Offline', { status: 503 }))
+        )
+      )
+    );
+    return;
+  }
+
+  // Navigations / the app shell ('/'): network-first, cache only as offline fallback.
+  // The old cache-first rule could serve a STALE cached HTML shell while the
+  // versioned app.js request (network-first below) returned the NEWEST script —
+  // an HTML/JS mismatch that could break init on returning mobile devices until
+  // the service worker itself cycled. Fresh HTML on every online visit kills
+  // that class of breakage; offline still falls back to the cached shell.
+  if (event.request.mode === 'navigate' || url.pathname === '/') {
+    event.respondWith(
+      fetch(event.request).then((response) => {
+        if (response && response.status === 200) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() =>
+        caches.match(event.request).then((cached) =>
+          cached || caches.match('/').then((shell) => shell || new Response('Offline', { status: 503 }))
         )
       )
     );
