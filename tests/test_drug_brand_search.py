@@ -203,3 +203,30 @@ class TestFrontendWiring:
             assert f'_revealFilteredList("{list_id}")' in APP_JS
         # 行展開時の読みやすい位置へのスクロール（全リスト共通）も維持
         assert "scrollToAnchor(el,{settle:false})" in APP_JS
+
+    def test_species_tap_reaches_drug_dictionary_and_no_stale_scroll_hijack(self):
+        """2026-10 利用者報告2件の実測バグ修正の配線ガード。
+
+        実ブラウザ再現で特定した3つの根本原因:
+        1. Cookie同意バナー(z:200)がモバイル下部ナビ(z:101)を完全に覆い、
+           同意するまで全タブタップが無効だった（「疾患DBを押しても飛ばない」）
+        2. 種カードタップが薬品speciesフィルタを同期せず（プリフェッチ後は
+           loadDrugDictionary のロード時同期が二度と走らない）、かつ非表示の
+           チェッカーパネルだけをスクロール対象にしていたため、薬品辞書タブ中に
+           動物種を押しても何も起きなかった
+        3. scrollToAnchor の settle ウォッチャー（最長12秒）がユーザー操作で
+           しか解放されず、タブ切替後も前タブの非表示ターゲット(rect=0)へ
+           再アンカーして新しいスクロールを先頭付近へ引き戻していた
+        """
+        # 1. Cookieバナーはモバイルで下部ナビの高さ分だけ上に退避する
+        assert ".cookie-consent{bottom:calc(53px + env(safe-area-inset-bottom))" in MAIN_CSS
+        # 2a. 種選択は薬品辞書の species フィルタを常に同期して再描画する
+        assert "if(drugSp&&drugSp.value!==id){drugSp.value=id;renderDrugList();}" in APP_JS
+        # 2b. チェッカーパネル非表示時は現在ビューの着地点へフォールバック
+        assert 'target=(currentView&&currentView!=="checker")?_navLandingTarget(currentView):null;' in APP_JS
+        # 3a. 新しい scrollToAnchor は直前の settle ウォッチャーを必ず解放する
+        assert "let _anchorWatchRelease=null;" in APP_JS
+        assert "if(_anchorWatchRelease)_anchorWatchRelease();" in APP_JS
+        assert "_anchorWatchRelease=release;" in APP_JS
+        # 3b. ターゲットが非表示化（タブ切替等）したらウォッチャーは即終了
+        assert "if(!el.isConnected||el.offsetParent===null)return release();" in APP_JS
