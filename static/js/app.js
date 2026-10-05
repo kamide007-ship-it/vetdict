@@ -5269,7 +5269,9 @@ function switchView(view,opts){
      「タブ→種選択画面→種タップ→戻る」の往復を1クリック削減。
      PC/スマホ下部ナビ/ハンバーガーの全経路が switchView を通るため挙動は同一。
      初期ハッシュルーティング（opts.silent）ではトーストを出さない。
-     種はいつでも動物種カードから変更できる（selectSpecies が全タブへ同期）。 */
+     種はいつでも動物種カードから変更できる（selectSpecies が全タブへ同期）。
+     薬品辞書は意図的に対象外: 全薬品リスト（全カテゴリ・全動物種）＋検索＋
+     カテゴリ選択がそのまま1クリックで開く（利用者指定の画面）。 */
   if(!currentSpecies&&(view==="database"||view==="anesthesia")){
     let autoSp=lsGet("vetdict-last-species");
     if(!autoSp||!SPECIES.some(s=>s.id===autoSp))autoSp="dog";
