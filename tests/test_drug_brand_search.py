@@ -242,9 +242,12 @@ class TestFrontendWiring:
         """
         # 1. 種選択は常に永続化される（ガード付きアクセサ経由）
         assert 'lsSet("vetdict-last-species",id)' in APP_JS
-        # 2. switchView が疾患DB/麻酔で未選択時に自動選択する
+        # 2. switchView が疾患DB/麻酔で未選択時に自動選択する。薬品辞書は
+        #    意図的に対象外（全カテゴリ・全動物種の全薬品リスト＋検索＋カテゴリ
+        #    選択がそのまま開く — 利用者指定の画面。種で自動フィルタしない）
         assert 'lsGet("vetdict-last-species")' in APP_JS
         assert 'view==="database"||view==="anesthesia"' in APP_JS
+        assert 'view==="drugs"||view==="anesthesia"' not in APP_JS
         assert 'autoSp="dog"' in APP_JS
         # 3. 不正な保存値はSPECIESレジストリ照合で犬にフォールバック
         assert "SPECIES.some(s=>s.id===autoSp)" in APP_JS
