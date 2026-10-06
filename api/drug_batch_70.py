@@ -25,6 +25,9 @@ Evidence:
     dose prescribed beforehand by the oncologist), and dogs should be
     monitored for at least 1 hour after the infusion — infusion
     reactions including anaphylaxis are documented.
+  - Merck FAQ: gilvetmab has NOT been studied in combination with other
+    therapies (chemotherapy, radiation, targeted therapy, vaccines) —
+    sequencing vs. concurrent use is an unstudied specialist decision.
   - NOT licensed for lymphoma (insufficient monotherapy efficacy).
 """
 
@@ -46,8 +49,8 @@ DRUGS_BATCH_70 = [
                 "safe": True,
                 "dosage": "10 mg/kg (0.5 mL/kg) IV infusion over AT LEAST 30 minutes, every 2 weeks, for up to 10 treatments (US conditional license label). REQUIRED PREMEDICATION: diphenhydramine 2 mg/kg IM within 15-30 minutes before each infusion (or an oral dose prescribed beforehand by the oncologist) — infusion reactions including anaphylaxis are documented. Monitor the dog for at least 1 hour after each infusion. Indications: mast cell tumor stages I-III and melanoma stages II-III, as an aid in reducing solid tumor burden.",
                 "dosage_ja": "10 mg/kg（0.5 mL/kg）を30分以上かけて緩徐に静脈内点滴、2週毎、最大10回（米国条件付きライセンスのラベル用法）。前投薬必須: 各点滴の15-30分前にジフェンヒドラミン 2 mg/kg IM（腫瘍科医が事前に経口投与を処方した場合はそれでも可）— アナフィラキシーを含むインフュージョンリアクションが報告されているため。点滴終了後も最低1時間は院内でモニタリング。適応: 肥満細胞腫 ステージI-III、メラノーマ ステージII-III（固形腫瘍量減少の補助）。",
-                "notes": "Conditional license = 'reasonable expectation of efficacy' (JVIM 2026: melanoma ORR 20%, median TTP 56 days; MCT ORR 46%, median TTP not reached). Serious AEs (anaphylaxis, hypotension, tumor hemorrhage) in 5.9% — hence the diphenhydramine 2 mg/kg IM premedication 15-30 min before each infusion and >=1 hour post-infusion monitoring (Merck FAQ). Pseudoprogression (tumor enlargement before regression) can occur — do not abandon therapy on early size increase alone. NOT licensed for lymphoma (insufficient monotherapy efficacy). Combination options: Oncept vaccine (melanoma), Stelfonta (cutaneous MCT), surgery/RT per oncologist.",
-                "notes_ja": "条件付きライセンス（有効性への合理的期待の段階 — JVIM 2026: メラノーマ奏効率20%・進行までの期間中央値56日、肥満細胞腫 奏効率46%・進行中央値未到達）。重篤な有害事象（アナフィラキシー・低血圧・腫瘍出血）が5.9% — このため各点滴の15-30分前のジフェンヒドラミン 2 mg/kg IM 前投薬と、点滴後1時間以上のモニタリングがMerck FAQで推奨される。偽性進行（縮小前の一過性増大）がありうるため、早期のサイズ増大のみで治療を中断しない。リンパ腫には非適応（単剤での有効性不十分）。メラノーマではOnceptワクチン、皮膚型MCTではステルフォンタ等との役割分担を腫瘍科医と検討。",
+                "notes": "Conditional license = 'reasonable expectation of efficacy' (JVIM 2026: melanoma ORR 20%, median TTP 56 days; MCT ORR 46%, median TTP not reached). Serious AEs (anaphylaxis, hypotension, tumor hemorrhage) in 5.9% — hence the diphenhydramine 2 mg/kg IM premedication 15-30 min before each infusion and >=1 hour post-infusion monitoring (Merck FAQ). Pseudoprogression (tumor enlargement before regression) can occur — do not abandon therapy on early size increase alone. NOT licensed for lymphoma (insufficient monotherapy efficacy). Combination with other therapies (Oncept vaccine, Stelfonta, chemotherapy, surgery/RT) has NOT been studied (Merck FAQ) — whether to sequence or combine is an unstudied, specialist-level decision, not an evidence-backed combination.",
+                "notes_ja": "条件付きライセンス（有効性への合理的期待の段階 — JVIM 2026: メラノーマ奏効率20%・進行までの期間中央値56日、肥満細胞腫 奏効率46%・進行中央値未到達）。重篤な有害事象（アナフィラキシー・低血圧・腫瘍出血）が5.9% — このため各点滴の15-30分前のジフェンヒドラミン 2 mg/kg IM 前投薬と、点滴後1時間以上のモニタリングがMerck FAQで推奨される。偽性進行（縮小前の一過性増大）がありうるため、早期のサイズ増大のみで治療を中断しない。リンパ腫には非適応（単剤での有効性不十分）。他療法（Onceptワクチン・ステルフォンタ・化学療法・手術/放射線）との併用は未研究（Merck FAQ）— 併用か逐次かはエビデンスのある組み合わせではなく、腫瘍科専門医の個別判断。",
             },
             "cat": {
                 "safe": False,

@@ -1282,6 +1282,82 @@ INTERACTIONS: list[dict[str, Any]] = [
     },
 ]
 
+# --- ギルベトマブ × 免疫抑制薬クラスの網羅的登録（Codexレビュー P1 対応） ----
+# Merck 条件付きライセンスのラベル/FAQ: 「グルココルチコイドまたはその他の
+# 免疫抑制薬を投与中の犬には使用しない」。find_interactions は ID 完全一致の
+# ため、上の3エントリ（prednisolone/dexamethasone/cyclosporine）だけでは
+# 辞書に実在する他のグルココルチコイド・免疫抑制薬（prednisone・
+# methylprednisolone・azathioprine・mycophenolate 等）との併用が無警告に
+# なる安全ギャップがあった。辞書収載の該当 ID を全てクラス単位で登録する。
+# 意図的な除外: 点眼剤（cyclosporine_ophthalmic / tacrolimus_ophthalmic /
+# neo_poly_dex_ophthalmic — 全身免疫抑制は実質なし）、純粋なミネラル
+# コルチコイド（desoxycorticosterone / fludrocortisone — アジソン病の
+# 生理的補充であり免疫抑制ではない）。
+GILVETMAB_GLUCOCORTICOID_IDS = [
+    "prednisolone",
+    "prednisone",
+    "prednisolone_lymphoma",
+    "dexamethasone",
+    "dexamethasone_sp",
+    "methylprednisolone",
+    "triamcinolone",
+    "hydrocortisone_succinate",
+    "budesonide",
+    "fluticasone",
+    "fluticasone_inhaler",
+]
+GILVETMAB_IMMUNOSUPPRESSANT_IDS = [
+    "cyclosporine",
+    "tacrolimus_systemic",
+    "azathioprine",
+    "mycophenolate",
+    "leflunomide",
+    "methotrexate",
+    "chlorambucil",
+    "chlorambucil_low_dose",
+    "chlorambucil_ibd",
+    "cyclophosphamide",
+    "cyclophosphamide_oral",
+    "oclacitinib",
+    "ilunocitinib",
+    "sirolimus",
+]
+
+_GILVETMAB_REGISTERED = {ix["drug_b"] for ix in INTERACTIONS if ix.get("drug_a") == "gilvetmab"}
+for _gc_id in GILVETMAB_GLUCOCORTICOID_IDS:
+    if _gc_id in _GILVETMAB_REGISTERED:
+        continue
+    INTERACTIONS.append(
+        {
+            "drug_a": "gilvetmab",
+            "drug_b": _gc_id,
+            "severity": SEVERITY_MAJOR,
+            "mechanism": "グルココルチコイドの免疫抑制がPD-1遮断の機序を打ち消す",
+            "effect_en": "Glucocorticoids (any systemic formulation, including depot and inhaled routes with systemic absorption) suppress the T-cell response that gilvetmab works by restoring — the conditional license label excludes dogs on concurrent glucocorticoids or other immunosuppressive medication.",
+            "effect_ja": "グルココルチコイド（デポ製剤・全身吸収のある吸入経路を含む全身性製剤）はギルベトマブが回復させるT細胞応答自体を抑制する — 条件付きライセンスのラベルはグルココルチコイドその他の免疫抑制薬の併用中の犬を除外している。",
+            "management_en": "Do not start gilvetmab in dogs receiving glucocorticoids; taper and discontinue first per oncologist guidance before checkpoint-inhibitor therapy.",
+            "management_ja": "グルココルチコイド投与中の犬にはギルベトマブを開始しない。チェックポイント阻害療法の前に腫瘍科医の指示でステロイドを漸減・中止する。",
+            "ref": "Gilvetmab US conditional license label/FAQ (Merck Animal Health)",
+        }
+    )
+for _is_id in GILVETMAB_IMMUNOSUPPRESSANT_IDS:
+    if _is_id in _GILVETMAB_REGISTERED:
+        continue
+    INTERACTIONS.append(
+        {
+            "drug_a": "gilvetmab",
+            "drug_b": _is_id,
+            "severity": SEVERITY_MAJOR,
+            "mechanism": "免疫抑制薬がチェックポイント阻害の前提（機能するT細胞）を崩す",
+            "effect_en": "Immunosuppressive / immunomodulatory medication (calcineurin, antimetabolite, alkylating, JAK and mTOR inhibitors) suppresses the T-cell compartment that PD-1 blockade requires — the conditional license label excludes concurrent immunosuppressive use.",
+            "effect_ja": "免疫抑制・免疫調節薬（カルシニューリン阻害薬・代謝拮抗薬・アルキル化薬・JAK阻害薬・mTOR阻害薬）はPD-1遮断が前提とするT細胞そのものを抑制する — 条件付きライセンスのラベルは免疫抑制薬の併用を除外している。",
+            "management_en": "Do not combine; withdraw the immunosuppressant first (per oncologist guidance) before starting gilvetmab.",
+            "management_ja": "併用しない。ギルベトマブ開始前に免疫抑制薬を中止する（腫瘍科医の指示に従う）。",
+            "ref": "Gilvetmab US conditional license label/FAQ (Merck Animal Health)",
+        }
+    )
+del _GILVETMAB_REGISTERED
+
 
 def normalize_drug_id(drug_id: str) -> str:
     """薬品IDを正規化（小文字・スネークケース）"""

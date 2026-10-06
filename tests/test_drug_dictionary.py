@@ -4509,6 +4509,48 @@ class TestBatch70Gilvetmab:
         assert pairs.get(("gilvetmab", "cyclosporine")) == "major"
         assert pairs.get(("gilvetmab", "dexamethasone")) == "major"
 
+    def test_gilvetmab_interaction_coverage_spans_all_immunosuppressant_ids(self):
+        """Codexレビュー P1 対応の回帰防止: チェッカーはID完全一致のため、辞書に
+        実在する全身性グルココルチコイド・免疫抑制薬の全IDがレジストリに登録されて
+        いること（prednisone 等が無警告になる安全ギャップの再発防止）。"""
+        from api.drug_dictionary import DRUGS
+        from api.drug_interactions import (
+            GILVETMAB_GLUCOCORTICOID_IDS,
+            GILVETMAB_IMMUNOSUPPRESSANT_IDS,
+            find_interactions,
+        )
+
+        index = {d["id"] for d in DRUGS}
+        covered = GILVETMAB_GLUCOCORTICOID_IDS + GILVETMAB_IMMUNOSUPPRESSANT_IDS
+        # カバレッジリストの全IDが辞書に実在（リネーム/統合で孤児化したらCIで検出）
+        missing = [i for i in covered if i not in index]
+        assert not missing, f"coverage list has orphan ids: {missing}"
+        # Codexが名指しした代表IDを含め、全ペアが major で検出される
+        for drug_id in covered:
+            pairs = {(ix["drug_a"], ix["drug_b"]): ix["severity"] for ix in find_interactions(["gilvetmab", drug_id])}
+            assert pairs.get(("gilvetmab", drug_id)) == "major", drug_id
+        for named in ("prednisone", "methylprednisolone", "triamcinolone", "azathioprine", "mycophenolate"):
+            assert named in covered, named
+        # 意図的除外（点眼剤・純粋なミネラルコルチコイド=生理的補充）は無警告のまま
+        for excluded in ("cyclosporine_ophthalmic", "tacrolimus_ophthalmic", "desoxycorticosterone", "fludrocortisone"):
+            assert not find_interactions(["gilvetmab", excluded]), excluded
+
+    def test_gilvetmab_combination_therapy_labelled_unstudied(self):
+        """Codexレビュー P2 対応の回帰防止: Merck FAQ は他療法との併用を未研究と
+        明記 — notes が併用を推奨と読める framing（Combination options）に戻らないこと。"""
+        d = self._get("gilvetmab")
+        dog = d["species_info"]["dog"]
+        assert "Combination options" not in dog["notes"]
+        assert "has NOT been studied" in dog["notes"]
+        assert "併用は未研究" in dog["notes_ja"]
+        import json
+
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            data = json.load(f)
+        oral = next(r for r in data if r.get("species") == "Dog" and r.get("name") == "Oral Melanoma")
+        assert "併用は未研究" in oral["treatment_ja"]
+        assert "has not been studied" in oral["treatment"]
+
     def test_gilvetmab_resolves_and_connects_to_oncology_entries(self):
         from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
 

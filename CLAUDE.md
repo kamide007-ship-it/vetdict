@@ -6641,6 +6641,18 @@ setupMobileBottomNav含む）がスキップ** → 下部ナビ不生成・全�
   **点滴後1時間以上のモニタリング**を規定（インフュージョンリアクション/アナフィラキシー対策）。
   モノグラフ（dosage/dosage_ja/notes 日英）と3疾患の治療文（日英6フィールド）の両方に追記、
   回帰テスト `test_gilvetmab_diphenhydramine_premedication_documented` で固定
+- **レビュー是正 第2弾（Codex P1+P2）**:
+  - **P1 相互作用カバレッジの安全ギャップ**: チェッカーはID完全一致のため、登録済み3剤以外の
+    グルココルチコイド・免疫抑制薬（prednisone・メチルプレドニゾロン・トリアムシノロン・
+    アザチオプリン・ミコフェノール酸等）との併用が無警告だった → `drug_interactions.py` に
+    `GILVETMAB_GLUCOCORTICOID_IDS`（11剤）+ `GILVETMAB_IMMUNOSUPPRESSANT_IDS`（14剤 —
+    カルシニューリン/代謝拮抗/アルキル化/JAK/mTOR）をクラス単位で網羅登録（計25ペア=major）。
+    点眼剤（cyclosporine_ophthalmic 等）と純粋なミネラルコルチコイド（DOCP/フルドロコルチゾン=
+    アジソン生理的補充）は意図的に除外。回帰テストが「全IDの辞書実在＋全ペアmajor検出＋
+    除外の無警告維持」を固定（`test_gilvetmab_interaction_coverage_spans_all_immunosuppressant_ids`）
+  - **P2 併用の framing**: notes の「Combination options:」が未研究の併用を推奨と読めた —
+    Merck FAQ は他療法（化学療法・放射線・ワクチン等）との併用を**未研究**と明記 →
+    「併用は未研究 — 腫瘍科専門医の個別判断」に日英とも是正（口腔メラノーマJSONのOncept行も同様）
 
 ### 診断チャット精度 第39弾（24症例フレッシュスイープ 5 MISS → 全症例合格 + ガード4件）
 - **レガシー犬DBに顔面神経麻痺を新設**（95→96疾患、91→93症状）: 「片方の耳だけ下がって顔が歪んで
