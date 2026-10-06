@@ -13513,7 +13513,15 @@ SYMPTOM_CATEGORIES = {
     "eyes_ears": {
         "name_ja": "眼・耳",
         "name_en": "Eyes/Ears",
-        "symptoms": ["eye_redness", "eye_discharge", "squinting", "ear_scratching", "ear_odor", "head_tilting", "facial_droop"],
+        "symptoms": [
+            "eye_redness",
+            "eye_discharge",
+            "squinting",
+            "ear_scratching",
+            "ear_odor",
+            "head_tilting",
+            "facial_droop",
+        ],
     },
     "skin": {
         "name_ja": "皮膚・被毛",
