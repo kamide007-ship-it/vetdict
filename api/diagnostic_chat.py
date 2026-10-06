@@ -315,6 +315,17 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "後ろ脚を痛がる": "limb_lameness_hind",
     "前足を痛がる": "limb_lameness_fore",
     "前脚を痛がる": "limb_lameness_fore",
+    # 2026-10 第63弾: て形・丁寧形（「前足を痛がっています」）は終止形キーに
+    # 不一致で抽出ゼロ — hot-hoof ペア（蹄熱感+前肢跛行）が発火しなかった
+    "前足を痛が": "limb_lameness_fore",
+    "前脚を痛が": "limb_lameness_fore",
+    "後ろ足を痛が": "limb_lameness_hind",
+    "後ろ脚を痛が": "limb_lameness_hind",
+    # 労作性横紋筋融解症（タイイングアップ）の飼い主表現「筋肉が硬くなって」
+    # （「硬い」終止形のみ収載でく形が不一致）
+    "筋肉が硬": "body_stiffness",
+    "筋肉がカチカチ": "body_stiffness",
+    "筋肉がガチガチ": "body_stiffness",
     "lameness": "limb_lameness_fore",
     "跛行": "limb_lameness_fore",
     "びっこ": "limb_lameness_fore",
@@ -668,7 +679,7 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
         return []
 
     try:
-        from api.species.equine_diseases import generate_differential_diagnosis
+        from api.species.equine_diseases import _equine_prevalence_tier, generate_differential_diagnosis
     except ImportError:  # pragma: no cover - equine module optional
         return []
 
@@ -692,6 +703,14 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
                 "name_en": disease.name_en,
                 "severity": disease.severity,
                 "similarity_score": round(min(item.weighted_score, 1.0), 3),
+                # Sort on the uncapped score: capping first collapsed boosted
+                # entries into insertion-order ties (same bug class as the
+                # generic matcher's round-9 fix). Popped before returning.
+                "_rank_score": item.weighted_score,
+                # Exposed so the chat card renders the frequency chip and the
+                # 「一般的な疾患の鑑別も確認」note for horses too (other species
+                # already carried it — 第38弾 visibility layer).
+                "prevalence_tier": _equine_prevalence_tier(disease.name_en) or None,
                 "confidence_percent": confidence,
                 "matched_symptoms": sorted(item.matched_findings),
                 "unmatched_user_symptoms": sorted(key_set - disease_findings),
@@ -703,7 +722,9 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
             }
         )
 
-    matches.sort(key=lambda m: m["similarity_score"], reverse=True)
+    matches.sort(key=lambda m: m["_rank_score"], reverse=True)
+    for m in matches:
+        m.pop("_rank_score", None)
     return matches
 
 
@@ -777,6 +798,7 @@ def extract_symptoms_from_text(text: str) -> list:
         "cachexia": ["weight_loss", "muscle_wasting"],
         "emaciation": ["weight_loss", "muscle_wasting"],
         "polyuria": ["frequent_urination"],
+        "excessive_urination": ["frequent_urination"],
         "polydipsia": ["excessive_thirst"],
         "tachypnea": ["labored_breathing"],
         "dyspnea": ["labored_breathing"],

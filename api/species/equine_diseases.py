@@ -12513,6 +12513,14 @@ _SYNDROME_FINDING_FLOORS: dict[str, tuple[str, ...]] = {
     # perfect coverage for the bare lameness complaint.
     "limb_lameness_fore": ("Hoof Abscess",),
     "limb_lameness_hind": ("Hoof Abscess",),
+    # 成馬の急性下痢は大腸炎 until proven otherwise（Feary & Hassel 2006） —
+    # 9所見の包括エントリはカバレッジで希釈され、2所見の稀なエントリが
+    # 下痢主訴を独占していた。最多原因であってパトグノモニックではないため
+    # 減額フロア（跛行→蹄膿瘍と同値）を用いる
+    "dig_diarrhea": ("Colitis",),
+    # 運動後の急性筋硬直は労作性横紋筋融解症（タイイングアップ）が最多原因
+    # （Valberg, Reed & Bayly 4th ed）— 減額フロア（最多原因・非パトグノモニック）
+    "body_stiffness": ("Exertional Rhabdomyolysis (Tying Up)", "Exertional Rhabdomyolysis"),
 }
 _SYNDROME_FLOOR_SCORE = 0.62
 # Findings that are the *most common cause* rather than pathognomonic get a
@@ -12522,6 +12530,8 @@ _SYNDROME_FLOOR_SCORE = 0.62
 _SYNDROME_FLOOR_SCORE_OVERRIDES: dict[str, float] = {
     "limb_lameness_fore": 0.42,
     "limb_lameness_hind": 0.42,
+    "dig_diarrhea": 0.42,
+    "body_stiffness": 0.42,
 }
 
 # Sign PAIRS that define a syndrome even when the namesake checkbox wasn't

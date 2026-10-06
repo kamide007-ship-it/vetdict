@@ -297,6 +297,24 @@ _SYN: dict[str, list[str]] = {
     # Skin/coat extended (new keys only)
     "skin_itching": ["itching", "pruritus", "scratching"],
     "lumps": ["mass", "tumor", "nodule", "growth", "swelling", "subcutaneous_mass", "lumps_and_bumps"],
+    # 止まり木に止まれない（inability_to_perch）は疾患側では
+    # reluctance_to_perch/difficulty_perching 表記 — ブリッジ欠落で
+    # 趾瘤症・関節炎が「足を痛がって止まり木に止まれない」に届かなかった
+    "inability_to_perch": ["reluctance_to_perch", "difficulty_perching", "falling_off_perch"],
+    "reluctance_to_perch": ["inability_to_perch", "difficulty_perching"],
+    # 触知腫瘤の飼い主表現（お腹/体にしこり）→ subcutaneous_mass は種によって
+    # skin_masses/skin_lump/mammary_mass 表記 — 単一エントリ（脂肪腫）しか
+    # 返らなかったハムスター等の腫瘤鑑別を接続する
+    "subcutaneous_mass": [
+        "lumps",
+        "skin_masses",
+        "skin_mass",
+        "skin_lump",
+        "mammary_mass",
+        "mammary_masses",
+        "skin_mass_growth",
+        "slow_growing_lump",
+    ],
     # Eye
     "eye_redness": ["red_eye", "ocular_redness", "conjunctivitis"],
     "eye_discharge": ["ocular_discharge", "tearing", "epiphora", "pus_in_eye"],
@@ -359,6 +377,12 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
         1.35,
     ),
     ("cat", frozenset({"decreased_urination", "vocalization_changes"}), "Urinary Obstruction (Blocked Cat)", 1.5),
+    # 粘膜蒼白＋頻呼吸の猫は貧血（低酸素血症代償の頻呼吸） until proven
+    # otherwise — 蒼白は呼吸器疾患・心疾患の徴候ではない（Little, The Cat;
+    # Tasker 2010 JFMS ヘモプラズマ）。従来は2所見で喘息/CHFが上位を占め
+    # 貧血エントリが圏外だった
+    ("cat", frozenset({"pale_gums", "labored_breathing"}), "Immune-Mediated Hemolytic Anemia (IMHA)", 1.3),
+    ("cat", frozenset({"pale_gums", "labored_breathing"}), "Feline Infectious Anemia (Hemoplasma)", 1.3),
     # Pelvic-limb weakness + ptyalism in a ferret is the insulinoma
     # hypoglycemia presentation (Quesenberry & Carpenter 4th ed).
     ("ferret", frozenset({"hind_leg_weakness", "drooling"}), "Insulinoma", 1.35),
