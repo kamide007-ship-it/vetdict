@@ -2345,7 +2345,7 @@ SYMPTOM_ALIASES = {
     "尾追い": "tail_chasing",
     # --- 2026-08 第14回スイープ: 連用形・語順ゆれの取りこぼし修正 ---
     # 多飲多尿・多食（「水をたくさん飲む」辞書形のみで「飲んで」連用形が欠落）
-    "おしっこの量が多い": "frequent_urination",
+    "おしっこの量が多い": "excessive_urination",
     "食欲はあるのに痩せ": "increased_appetite",
     # 変形性関節症の飼い主報告（階段回避は犬OAの古典的主訴 — Ettinger 8th）
     "階段を登らな": "stiffness",
@@ -2740,7 +2740,7 @@ SYMPTOM_ALIASES = {
     "水がすぐなくな": "excessive_thirst",
     "水がすぐになくな": "excessive_thirst",
     # 多尿の量表現（既存は「おしっこの量が多い」のみで「増えた」形が欠落）
-    "おしっこの量が増え": "frequent_urination",
+    "おしっこの量が増え": "excessive_urination",
     "尿の量が増え": "frequent_urination",
     # 歯科疼痛の片側咀嚼（chewing on one side — 犬猫歯科疾患の教科書的な
     # 飼い主観察。Niemiec, BSAVA Dental Manual）
@@ -2981,6 +2981,66 @@ SYMPTOM_ALIASES = {
     "浮いてい": "buoyancy_problems",
     "水面に浮い": "buoyancy_problems",
     "沈めな": "buoyancy_problems",
+    # --- 2026-10 第63弾（精度監査 第39弾） ---
+    # 体重減少の進行形「体重が減ってきた」（「体重が減った」のみ収載で
+    # 「減ってきました/減ってきて」が抽出ゼロ — PU/PD・慢性下痢の主訴の要）
+    "体重が減っ": "weight_loss",
+    "体重が落ち": "weight_loss",
+    # 尿の「量」表現は多尿（polyuria）。従来は頻尿（pollakiuria → LUTD優先）に
+    # 解決されており、高齢猫の「おしっこの量が多くて痩せた」（CKD/甲状腺/
+    # 糖尿の古典像）が膀胱炎・尿石症へ誤誘導されていた
+    "おしっこの量が多": "excessive_urination",
+    "尿の量が多": "excessive_urination",
+    "尿量が多": "excessive_urination",
+    "尿量が増え": "excessive_urination",
+    # 食欲廃絶のず形（「餌を食べず」のみ収載）
+    "ご飯を食べず": "loss_of_appetite",
+    "ごはんを食べず": "loss_of_appetite",
+    "何も食べず": "loss_of_appetite",
+    "牧草を食べず": "loss_of_appetite",
+    # 腹部圧痛のて形（「お腹を触ると痛がる」終止形のみ収載）
+    "お腹を触ると痛が": "abdominal_pain",
+    "お腹を触ると嫌が": "abdominal_pain",
+    "おなかを触ると痛が": "abdominal_pain",
+    # 嘴の変形（PBFD・嘴不正咬合の主訴。「くちばしが伸び」のみ収載）
+    "くちばしが変形": "beak_deformity",
+    "嘴が変形": "beak_deformity",
+    "くちばしがボロボロ": "beak_deformity",
+    "くちばしが割れ": "beak_deformity",
+    # 猫の粟粒性皮膚炎（頭頸部の小痂皮 — 猫アレルギー性皮膚炎の
+    # 反応パターン: ノミアレルギー/アトピー/食物 — Hnilica, Small Animal
+    # Dermatology 4th ed）。従来は汎用 skin_lesions に落ちて皮膚糸状菌・
+    # 疥癬が上位を独占していた
+    "首の周りにかさぶた": "miliary_dermatitis",
+    "首にかさぶた": "miliary_dermatitis",
+    "首のまわりにかさぶた": "miliary_dermatitis",
+    "小さなかさぶたがたくさん": "miliary_dermatitis",
+    "ぶつぶつしたかさぶた": "miliary_dermatitis",
+    "粟粒性皮膚炎": "miliary_dermatitis",
+    # 「足を痛がっています」が「痛がっている」(6字, pain) に最長一致で負け、
+    # 跛行が抽出されず pain/lethargy のみになっていた（鳥・猫で再現）。
+    # タイは辞書挿入順で旧キーが勝つため7字以上で登録する
+    "足を痛がってい": "lameness_or_limping",
+    "足を痛がって": "lameness_or_limping",
+    "脚を痛がって": "lameness_or_limping",
+    "脚を痛がってい": "lameness_or_limping",
+    "前足を痛がって": "lameness_or_limping",
+    "後ろ足を痛がって": "lameness_or_limping",
+    # 尿失禁の口語（「おもらし」のみ収載で動詞形が抽出ゼロ）
+    "おしっこをもらす": "incontinence",
+    "おしっこを漏らす": "incontinence",
+    "おしっこをもらし": "incontinence",
+    "おしっこを漏らし": "incontinence",
+    "尿が漏れ": "incontinence",
+    "尿がもれ": "incontinence",
+    "寝ている間におしっこ": "incontinence",
+    # 運動不耐の て形・連用形（「座り込む」終止形のみ収載）
+    "座り込ん": "exercise_intolerance",
+    "すぐ座り込": "exercise_intolerance",
+    # 活動性低下の口語（両生類・爬虫類・魚の主訴で頻出）
+    "動きが鈍": "lethargy",
+    "動きが悪": "lethargy",
+    "あまり動かな": "lethargy",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

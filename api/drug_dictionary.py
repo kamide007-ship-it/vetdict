@@ -93,6 +93,7 @@ from api.drug_batch_66 import DRUGS_BATCH_66
 from api.drug_batch_67 import DRUGS_BATCH_67
 from api.drug_batch_68 import DRUGS_BATCH_68
 from api.drug_batch_69 import DRUGS_BATCH_69
+from api.drug_batch_70 import DRUGS_BATCH_70
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10970,6 +10971,14 @@ for _drug69 in DRUGS_BATCH_69:
     if _drug69["id"] not in _drug_index:
         DRUGS.append(_drug69)
         _drug_index[_drug69["id"]] = _drug69
+
+# Batch 70 (2026-10 第63弾: 新規承認薬 — フルララネル徐放性注射剤
+#  （ブラベクト クオンタム、FDA 2025年承認の初の12ヶ月ノミ・マダニ注射剤。
+#  経口チュアブル用量の流用防止のため独立モノグラフ）)
+for _drug70 in DRUGS_BATCH_70:
+    if _drug70["id"] not in _drug_index:
+        DRUGS.append(_drug70)
+        _drug_index[_drug70["id"]] = _drug70
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

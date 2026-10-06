@@ -1642,6 +1642,7 @@ class TestQuickTapPhraseExtraction:
             "かかとをつけてペタペタ歩く",
             "耳の付け根を掻いて黒いカスが出る",
             "爪が伸びすぎて肉球に刺さっている",
+            "首の周りにかさぶたがある",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -1657,6 +1658,7 @@ class TestQuickTapPhraseExtraction:
             "目を細めて涙が多い",
             "口から餌をこぼす",
             "背中を触ると痛がる",
+            "下痢がひどく元気がない",
         ],
         "rabbit": [
             "糞が小さい",
@@ -1729,6 +1731,7 @@ class TestQuickTapPhraseExtraction:
             "吐き戻しが増えた",
             "そのうが膨らんでいる",
             "お尻でいきんでいる",
+            "くちばしが変形している",
         ],
         "parrot": ["食べない", "自分で羽を抜く", "くしゃみ", "下痢", "元気がない", "吐き戻しが増えた"],
         "reptile": [
@@ -6680,3 +6683,111 @@ class TestChatClinicalAccuracyAuditRound38:
         ids, res = self._species("体をしきりに舐めています", "cat")
         names = self._names(res, 3)
         assert any("皮膚" in n or "ノミ" in n for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound39:
+    """2026-10 第63弾（精度監査 第39弾）: 体重減少の進行形・尿「量」=多尿・
+    ず形食欲廃絶・腹部圧痛て形・嘴変形・猫粟粒性皮膚炎・「足を痛がって」の
+    最長一致タイ・尿失禁動詞形 + 馬の大腸炎/タイイングアップ減額フロア +
+    猫の蒼白+頻呼吸→貧血ペア + 馬チャットの tier 公開。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    def _horse(self, phrase):
+        import api.diagnostic_chat as dc
+
+        ids = dc._extract_equine_symptoms(phrase)
+        return set(ids), dc._match_equine_symptoms_to_diseases(list(ids))
+
+    @staticmethod
+    def _names(results, n=6):
+        return [(r.get("name_ja") or r.get("name") or "") for r in results[:n]]
+
+    def test_progressive_weight_loss_extracts(self):
+        ids, _ = self._legacy("下痢が続いていて体重が減ってきました")
+        assert {"diarrhea", "weight_loss"} <= ids, ids
+
+    def test_cat_urine_volume_is_polyuria_not_lutd(self):
+        # 尿の「量」は多尿 — 従来は頻尿→LUTD優先で膀胱炎・尿石症に誤誘導
+        ids, res = self._species("おしっこの量が多くて体重が減ってきました高齢です", "cat")
+        assert "excessive_urination" in ids and "weight_loss" in ids, ids
+        names = self._names(res, 3)
+        assert any("腎臓病" in n or "糖尿病" in n or "甲状腺" in n for n in names), names
+        assert not any("膀胱炎" in n for n in names), names
+        assert "移行上皮癌" not in "".join(names), names
+
+    def test_rabbit_zu_form_anorexia_ranks_stasis(self):
+        ids, res = self._species("ご飯を食べず、うんちが出ていません", "rabbit")
+        assert "constipation" in ids and len(ids) >= 2, ids
+        assert "うっ滞" in self._names(res, 1)[0], self._names(res)
+
+    def test_cat_abdominal_pain_te_form(self):
+        ids, _ = self._species("お腹を触ると痛がって黄色い液を吐きます", "cat")
+        assert "abdominal_pain" in ids, ids
+
+    def test_parakeet_beak_deformity_extracts(self):
+        ids, res = self._species("羽が抜けてくちばしが変形しています", "parakeet")
+        assert "beak_deformity" in ids, ids
+        assert any("嘴" in n or "PBFD" in n or "疥癬" in n for n in self._names(res, 5)), self._names(res)
+
+    def test_cat_miliary_dermatitis_ranks_allergy(self):
+        ids, res = self._species("顔をかきむしって首の周りにかさぶたがあります", "cat")
+        assert "miliary_dermatitis" in ids, ids
+        names = self._names(res, 3)
+        assert any("ノミアレルギー" in n or "アトピー" in n or "粟粒" in n for n in names), names
+
+    def test_foot_pain_te_form_beats_bare_pain_key(self):
+        # 「痛がっている」(6字, pain) に最長一致で負けて跛行が消えていた
+        for sp in ("bird", "cat"):
+            ids, _ = self._species("足を痛がっています", sp)
+            assert "lameness" in ids, (sp, ids)
+
+    def test_bird_perch_lameness_bridges_to_bumblefoot(self):
+        ids, res = self._species("足を痛がって止まり木に止まれません", "bird")
+        assert {"lameness", "inability_to_perch"} <= ids, ids
+        names = self._names(res, 3)
+        assert any("趾瘤" in n or "関節炎" in n or "痛風" in n or "爪" in n for n in names), names
+        assert "ミオパチー" not in self._names(res, 1)[0]
+
+    def test_dog_incontinence_and_sitting_down_extract(self):
+        assert "incontinence" in self._legacy("おしっこをもらすようになりました")[0]
+        assert "exercise_intolerance" in self._legacy("散歩中にすぐ座り込んでしまいます")[0]
+
+    def test_cat_pallor_tachypnea_surfaces_anemia(self):
+        ids, res = self._species("呼吸が速くて歯茎が白いです", "cat")
+        assert {"pale_gums", "labored_breathing"} <= ids, ids
+        assert any("貧血" in n for n in self._names(res, 3)), self._names(res)
+
+    def test_horse_diarrhea_ranks_colitis_with_tier(self):
+        ids, res = self._horse("下痢がひどくて元気がありません")
+        assert "dig_diarrhea" in ids, ids
+        assert res[0]["name_en"] == "Colitis", self._names(res)
+        assert res[0]["prevalence_tier"] == "common"
+
+    def test_horse_post_exercise_stiffness_ranks_tying_up(self):
+        ids, res = self._horse("運動後に筋肉が硬くなって動けなくなりました")
+        assert "body_stiffness" in ids, ids
+        assert "横紋筋融解症" in self._names(res, 1)[0], self._names(res)
+
+    def test_horse_fore_lameness_te_form_fires_hot_hoof_pair(self):
+        ids, res = self._horse("蹄が熱くて前足を痛がっています")
+        assert {"hoof_heat", "limb_lameness_fore"} <= ids, ids
+        assert any("蹄膿瘍" in n or "蹄葉炎" in n for n in self._names(res, 2)), self._names(res)
+
+    def test_hamster_abdominal_lump_reaches_tumor_ddx(self):
+        _, res = self._species("お腹にしこりがあって大きくなってきました", "hamster")
+        assert len(res) >= 3, self._names(res)

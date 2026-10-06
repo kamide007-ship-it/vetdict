@@ -6605,3 +6605,59 @@ setupMobileBottomNav含む）がスキップ** → 下部ナビ不生成・全�
 - ServiceWorker: `CACHE_NAME` v168 → **v169**
 - 再現手順: `migrate_to_sqlite.py`（クリーンビルド 6,895疾患・648薬品）— 疾患名不変のため
   検索インデックス no-op
+
+## 2026-10セッション（第63弾: ブラベクト クオンタム公開 + 寄生虫/ノミアレルギー治療テンプレートの是正 + チャット精度第39弾 + 馬チャットのtier公開）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト **4,571件合格**（34 skip、ベースライン）
+- 配信SQLiteクリーンビルド: **6,895疾患・648→649薬品**、treatment/prevention/prognosis **100%**
+- 注: コンテナに flask 未導入だったため `python3 -m pip install --ignore-installed blinker -r requirements.txt -r requirements-dev.txt` で復旧
+
+### 新規承認薬の公開: フルララネル徐放性注射剤（ブラベクト クオンタム）（`drug_batch_70.py`）
+- 犬初の12ヶ月ノミ・マダニ注射剤（FDA 2025年承認、EU/豪では Bravecto injectable 150 mg/mL）。
+  15 mg/kg SC 1回（0.1 mL/kg）・12ヶ月毎・6ヶ月齢以上・獣医師投与。**経口チュアブル用量
+  （25-56 mg/kg）の流用防止のため独立モノグラフ**（統合しない）。イソキサゾリン系神経警告、
+  **注射デポは除去不可**（忍容性を試す症例は経口/外用を先に）、猫 safe:False、他イソキサゾリン重複=moderate
+- 動線: 犬ノミアレルギー性皮膚炎の治療文（日英）にコンプライアンス選択肢として追記 → 治療チップ・
+  逆引き・相互作用チェッカー（ひらがな「ぶらべくとくおんたむ」含む）を検証
+
+### 汎用治療テンプレートの臨床的に重要な誤適用を是正（`fix_parasite_fad_treatment_ja.py`）
+- 英語 treatment はキュレート済みなのに treatment_ja だけが汎用文のエントリを検出:
+  - 「同定された寄生虫に応じた適切な駆虫薬が必要」（102件）のうち臨床的に誤りとなる群を是正:
+    **犬フィラリア症**（AHS 3回メラルソミン法）、**マダニ麻痺**（治療本体はダニ除去+呼吸管理）、
+    **ウマバエ幼虫症 犬猫**（幼虫を潰さない・イベルメクチン非推奨）、猫好酸球性肺炎、犬テラジア、
+    犬アンギオストロンギルス、**フェレット大静脈症候群**（日英とも新規記述）、
+    **ヤドカリ貝殻放棄症候群**（非寄生虫性の飼育環境ストレス — 日英とも新規記述）
+  - 「床材（杉材は禁忌）」小型哺乳類アレルギーテンプレートが **犬・猫・フェレットのノミアレルギー性
+    皮膚炎**に混入 → 英語キュレート文の忠実な日本語版に置換（猫はペルメトリン禁忌明記）
+- 両配信パスを保証: runtime `_TEMPLATE_MARKERS`（helpers）と migrate `_guard_treatment` に
+  2テンプレートFPを登録（キュレートJSONがテンプレートのモジュール文を置換、逆は不可）
+- 残課題: 寄生虫テンプレート残り約90件は真の寄生虫症で「汎用だが誤りではない」— 漸進的キュレート候補
+
+### 診断チャット精度 第39弾（66症例・2波スイープ 16 MISS → 3 MISS、残りは非特異/ID無しで設計通り）
+- **語彙**: 体重が減っ（進行形「減ってきました」が抽出ゼロだった）、**尿の「量」→ excessive_urination**
+  （従来は頻尿→LUTD優先で高齢猫PU+WLが膀胱炎へ誤誘導。excessive_urination チェーンを polyuria 先頭に）、
+  ご飯を食べず（ず形）、お腹を触ると痛が（て形）、くちばしが変形→beak_deformity、
+  首の周りにかさぶた→**miliary_dermatitis**（猫粟粒性皮膚炎=アレルギー反応パターン → ノミアレルギー rank 1）、
+  おしっこをもらす→incontinence、座り込ん、動きが鈍
+- **最長一致タイの是正**: 「足を痛がっています」が「痛がっている」(6字, pain)に負け跛行が消えていた →
+  7字キー「足を痛がってい」等を追加（鳥・猫で lameness 抽出を確認）
+- **マッチング**: _SYN inability_to_perch↔reluctance_to_perch（鳥の止まり木+跛行→趾瘤症/関節炎へ接続）、
+  subcutaneous_mass→skin_masses/mammary_mass 等（ハムスター腹部腫瘤が脂肪腫1件のみだった）、
+  猫ペア {pale_gums, labored_breathing}→IMHA/ヘモプラズマ ×1.3（蒼白+頻呼吸=貧血 until proven otherwise）
+- **tier**: 猫 膀胱TCC/腎性・中枢性尿崩症=rare、Cytauxzoon変異=rare、アセトアミノフェン(Acute)=uncommon、
+  鳥 捕獲性ミオパチー/末梢神経障害/内分泌栄養障害=uncommon、馬 Colitis uncommon→**common**
+  （Feary & Hassel 2006）+ Besnoitia/RTA/溺水等=rare
+- **馬**: 減額フロア dig_diarrhea→Colitis・body_stiffness→タイイングアップ（0.42、最多原因・非パトグノモニック）、
+  前足/後ろ足を痛が（て形）・筋肉が硬 エイリアス
+- **馬チャットの payload**: prevalence_tier を公開（頻度チップ・一般的疾患ノートが馬でも表示）+
+  キャップ後ソートのタイ潰れを非キャップ値ソートに是正（第9弾と同型）
+
+### UX
+- クイック入力: 猫「首の周りにかさぶたがある」・インコ「くちばしが変形している」・馬「下痢がひどく元気がない」
+  （ミラーテスト JA_QUICK 同期）
+- `setDefaultStats()` dog 589/cat 566薬品、pendingStats drugs 648→**649**、ServiceWorker v169→**v170**
+
+### 回帰テスト（+21件）
+- TestChatClinicalAccuracyAuditRound39（14件）・TestBatch70FluralanerInjectable（4件）・
+  テンプレート是正3件（JSON・配信DB・runtimeマーカー）

@@ -233,6 +233,16 @@ SPECIES_PREVALENCE = {
     # CAT — 230+ entries (expanded from ~73)
     # ==================================================================
     "cat": {
+        # PU/PD + 体重減少（高齢猫の CKD/甲状腺/糖尿の古典像）で、未tierの
+        # 猫膀胱TCC（犬と異なり猫では稀 — Wilson 2007 JFMS）と尿崩症2型
+        # （真に稀な内分泌疾患）が CKD を上回っていた
+        "Transitional Cell Carcinoma (Bladder)": "rare",
+        "Feline Nephrogenic Diabetes Insipidus": "rare",
+        "Feline Diabetes Insipidus (Central)": "rare",
+        # 北米限定の Cytauxzoon 変異（本邦不在）と曝露歴依存の中毒が、
+        # 蒼白+頻呼吸の貧血主訴で未tierのまま上位を占めていた
+        "Tick-Borne Disease (Cytauxzoonosis)": "rare",
+        "Acetaminophen Toxicosis (Acute)": "uncommon",
         # Neoplasia/toxicosis tiers: a bare 「しこり」 query ranked injection-site
         # sarcomas and melanoma above abscess/MCT; PU/PD queries ranked
         # cholecalciferol rodenticide toxicosis above CKD.
@@ -653,7 +663,19 @@ SPECIES_PREVALENCE = {
         # uncommon
         "Sand Colic": "uncommon",  # Region/management dependent
         "Enterolithiasis": "uncommon",
-        "Colitis": "uncommon",
+        # 成馬の急性下痢の主因は大腸炎（Feary & Hassel, Vet Clin Equine 2006 —
+        # 原因病原体は症例の多くで特定されない）。uncommon のままでは
+        # 「下痢がひどくて元気がない」で Besnoitia/RTA/溺水等の未tier
+        # エントリが上位を独占していた
+        "Colitis": "common",
+        "Besnoitiosis": "rare",
+        "Renal Tubular Acidosis": "rare",
+        "Near-Drowning": "rare",
+        "Pokeweed Toxicity": "rare",
+        "Iodine Deficiency": "rare",
+        "Lawsonia intracellularis Infection": "uncommon",  # 離乳期子馬の疾患
+        "Rotavirus": "uncommon",  # 新生子馬の下痢
+        "Equine Coronavirus": "uncommon",
         # Esophageal disorders other than choke are genuinely infrequent in
         # horses (Reed & Bayly 4th ed) — untiered they outranked choke itself
         # on trivially perfect coverage for the ptyalism/dysphagia complaint.
@@ -898,6 +920,12 @@ SPECIES_PREVALENCE = {
     # BIRD — 28+ entries (expanded from ~16)
     # ==================================================================
     "bird": {
+        # 未tierのまま「足を痛がって止まり木に止まれない」の上位を占めていた:
+        # 捕獲性ミオパチーは主に野鳥の病態、末梢神経障害・合成内分泌栄養
+        # エントリは非特異（趾瘤症・関節炎・痛風が日常鑑別 — Ritchie & Harrison）
+        "Myopathy (Nutritional / Capture)": "uncommon",
+        "Peripheral Neuropathy": "uncommon",
+        "Endocrine Nutritional Disorder": "uncommon",
         # Exposure-dependent toxicoses / incidental hemoparasites (see parakeet).
         "Copper Poisoning": "rare",
         "PTFE / Teflon Toxicosis": "rare",
