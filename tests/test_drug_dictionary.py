@@ -4534,6 +4534,51 @@ class TestBatch70Gilvetmab:
         # 意図的除外（点眼剤・純粋なミネラルコルチコイド=生理的補充）は無警告のまま
         for excluded in ("cyclosporine_ophthalmic", "tacrolimus_ophthalmic", "desoxycorticosterone", "fludrocortisone"):
             assert not find_interactions(["gilvetmab", excluded]), excluded
+        # Codexレビュー第2波 P1: 綴り違いの重複エントリ（英式 ciclosporin）も個別IDで配信
+        # されるため登録が必要 — find_interactions がペアを返すこと
+        pairs2 = {
+            (ix["drug_a"], ix["drug_b"]): ix["severity"] for ix in find_interactions(["gilvetmab", "ciclosporin_oral"])
+        }
+        assert pairs2.get(("gilvetmab", "ciclosporin_oral")) == "major"
+
+    def test_gilvetmab_coverage_tracks_dictionary_immunosuppressant_categories(self):
+        """CIガード（Codexレビュー第2波 P1 の再発防止）: 辞書に「コルチコステロイド/
+        免疫抑制薬」カテゴリの新エントリ（綴り違いの重複含む）が追加されたら、
+        カバレッジリストへの登録 or 文書化済み除外のどちらかを必ず選ばせる。"""
+        from api.drug_dictionary import DRUGS
+        from api.drug_interactions import (
+            GILVETMAB_GLUCOCORTICOID_IDS,
+            GILVETMAB_IMMUNOSUPPRESSANT_IDS,
+        )
+
+        covered = set(GILVETMAB_GLUCOCORTICOID_IDS) | set(GILVETMAB_IMMUNOSUPPRESSANT_IDS)
+        # 文書化済み除外（drug_interactions.py のコメントと同期）:
+        # 点眼剤=全身免疫抑制なし、interferon_omega=免疫賦活（カテゴリ誤り気味）、
+        # human_ivig=単回Fc遮断レスキュー、dapsone=抗好中球性サルホン、
+        # fuzapladib=急性膵炎の短期LFA-1阻害 — いずれもT細胞抑制を主機序としない
+        documented_exclusions = {
+            "cyclosporine_ophthalmic",
+            "tacrolimus_ophthalmic",
+            "interferon_omega",
+            "human_ivig",
+            "dapsone",
+            "fuzapladib",
+        }
+        unaccounted = []
+        for d in DRUGS:
+            cat = (d.get("category") or "").lower()
+            if "corticosteroid" not in cat and "immunosuppress" not in cat:
+                continue
+            if d["id"] == "gilvetmab":
+                continue
+            if "ophthalmic" in d["id"] and d["id"] in documented_exclusions:
+                continue
+            if d["id"] not in covered and d["id"] not in documented_exclusions:
+                unaccounted.append(d["id"])
+        assert not unaccounted, (
+            f"corticosteroid/immunosuppressant entries not covered by the gilvetmab "
+            f"interaction registry nor documented as excluded: {unaccounted}"
+        )
 
     def test_gilvetmab_combination_therapy_labelled_unstudied(self):
         """Codexレビュー P2 対応の回帰防止: Merck FAQ は他療法との併用を未研究と

@@ -1292,7 +1292,12 @@ INTERACTIONS: list[dict[str, Any]] = [
 # 意図的な除外: 点眼剤（cyclosporine_ophthalmic / tacrolimus_ophthalmic /
 # neo_poly_dex_ophthalmic — 全身免疫抑制は実質なし）、純粋なミネラル
 # コルチコイド（desoxycorticosterone / fludrocortisone — アジソン病の
-# 生理的補充であり免疫抑制ではない）。
+# 生理的補充であり免疫抑制ではない）、T細胞抑制を主機序としない免疫調節薬
+# （interferon_omega=免疫賦活、human_ivig=単回Fc遮断レスキュー、
+# dapsone=抗好中球性サルホン、fuzapladib=急性膵炎の短期LFA-1阻害）。
+# 注: 綴り違いの重複エントリ（ciclosporin_oral=英式綴りの改良型経口
+# アトピカ、batch_19）も独立IDとして配信されるため個別に登録が必要
+# （Codexレビュー第2波 P1 で検出）。
 GILVETMAB_GLUCOCORTICOID_IDS = [
     "prednisolone",
     "prednisone",
@@ -1308,6 +1313,7 @@ GILVETMAB_GLUCOCORTICOID_IDS = [
 ]
 GILVETMAB_IMMUNOSUPPRESSANT_IDS = [
     "cyclosporine",
+    "ciclosporin_oral",
     "tacrolimus_systemic",
     "azathioprine",
     "mycophenolate",

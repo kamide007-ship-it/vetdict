@@ -6653,6 +6653,12 @@ setupMobileBottomNav含む）がスキップ** → 下部ナビ不生成・全�
   - **P2 併用の framing**: notes の「Combination options:」が未研究の併用を推奨と読めた —
     Merck FAQ は他療法（化学療法・放射線・ワクチン等）との併用を**未研究**と明記 →
     「併用は未研究 — 腫瘍科専門医の個別判断」に日英とも是正（口腔メラノーマJSONのOncept行も同様）
+  - **第3波 P1（綴り違い重複の取りこぼし）**: `ciclosporin_oral`（英式綴りの改良型経口アトピカ、
+    batch_19 — 列挙regex `cyclospor` が「ciclo」を取りこぼした）が独立IDで配信されており無警告
+    だった → カバレッジリストに追加（26ペア）。再発防止として**カテゴリ走査CIガード**を新設:
+    辞書の corticosteroid/immunosuppress カテゴリ全エントリが「カバレッジ登録 or 文書化済み除外
+    （点眼剤・IFN-ω=免疫賦活・hIVIG=単回Fc遮断・ダプソン=抗好中球・フザプラジブ=短期LFA-1）」の
+    どちらかに必ず分類されることを検証（`test_gilvetmab_coverage_tracks_dictionary_immunosuppressant_categories`）
 
 ### 診断チャット精度 第39弾（24症例フレッシュスイープ 5 MISS → 全症例合格 + ガード4件）
 - **レガシー犬DBに顔面神経麻痺を新設**（95→96疾患、91→93症状）: 「片方の耳だけ下がって顔が歪んで
