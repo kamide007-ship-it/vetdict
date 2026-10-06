@@ -4530,3 +4530,31 @@ class TestBatch70Gilvetmab:
             and "Gilvetmab" in (d.get("treatment") or "")
         }
         assert hits == {"Mast Cell Tumor", "Melanoma", "Oral Melanoma"}, hits
+
+    def test_gilvetmab_diphenhydramine_premedication_documented(self):
+        """Merck FAQ: 各点滴の15-30分前にジフェンヒドラミン 2 mg/kg IM の前投薬＋
+        点滴後1時間以上のモニタリングが必須 — モノグラフと疾患治療文の両方に明記
+        （Codexレビュー P1 対応の回帰防止）。"""
+        d = self._get("gilvetmab")
+        dog = d["species_info"]["dog"]
+        # モノグラフ（日英の用量欄）に前投薬と投与後モニタリング
+        assert "ジフェンヒドラミン" in dog["dosage_ja"] and "2 mg/kg" in dog["dosage_ja"]
+        assert "15-30分前" in dog["dosage_ja"] and "1時間" in dog["dosage_ja"]
+        assert "diphenhydramine 2 mg/kg IM" in dog["dosage"]
+        assert "15-30 min" in dog["dosage"] and "1 hour" in dog["dosage"]
+        # 疾患治療文（3エントリ×日英）にも前投薬が同伴
+        import json
+
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            data = json.load(f)
+        for rec in data:
+            if rec.get("species") != "Dog":
+                continue
+            if rec.get("name") not in ("Mast Cell Tumor", "Melanoma", "Oral Melanoma"):
+                continue
+            t_ja = rec.get("treatment_ja") or ""
+            t_en = rec.get("treatment") or ""
+            if "ギルベトマブ" in t_ja:
+                assert "ジフェンヒドラミン 2 mg/kg IM" in t_ja, rec["name"]
+            if "Gilvetmab" in t_en:
+                assert "diphenhydramine 2 mg/kg IM" in t_en, rec["name"]
