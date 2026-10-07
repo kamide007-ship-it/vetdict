@@ -767,7 +767,7 @@ def extract_symptoms_from_text(text: str) -> list:
     _LEGACY_FALLBACK = {
         # 耳介下垂（チンチラ向け ear_drooping キー）は犬では顔面神経麻痺/
         # 中耳炎の徴候 — facial_droop へ（2026-10 第39回）
-        "ear_drooping": ["facial_droop", "head_tilting"],
+        "ear_drooping": ["head_tilting"],
         "weakness": ["lethargy", "exercise_intolerance"],
         "dropsy": ["bloating", "abdominal_distension"],
         "ascites": ["bloating", "abdominal_distension"],

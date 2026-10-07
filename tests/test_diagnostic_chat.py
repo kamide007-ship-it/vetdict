@@ -6708,6 +6708,19 @@ class TestChatClinicalAccuracyAuditRound39:
     def _names(results, n=6):
         return [(r.get("name_ja") or r.get("name") or "") for r in results[:n]]
 
+    def test_bare_drooped_ear_is_not_promoted_to_facial_palsy(self):
+        """Codexレビュー P2: 耳介下垂は多くの犬種で正常な耳形であり、それ単独では
+        顔面神経麻痺の定義的徴候（片側の顔面・口唇・眼瞼の歪み/瞬目不能）ではない。
+        裸の「耳が垂れて」は facial_droop に昇格させず、耳・前庭ddxに着地させる。"""
+        ids, results = self._legacy("耳が垂れています")
+        assert "facial_droop" not in ids, ids
+        assert "顔面神経麻痺" not in self._names(results, 3), self._names(results, 3)
+        # 定義的な非対称徴候を伴う主訴は従来どおり顔面神経麻痺 rank 1
+        for phrase in ("片方の耳だけ下がって顔が歪んでいます", "まばたきができない"):
+            ids2, results2 = self._legacy(phrase)
+            assert "facial_droop" in ids2, (phrase, ids2)
+            assert self._names(results2, 1)[0] == "顔面神経麻痺", (phrase, self._names(results2, 3))
+
     def test_dog_facial_droop_ranks_facial_nerve_paralysis(self):
         # 「片方の耳だけ下がって顔が歪んでいます」が抽出ゼロだった —
         # facial_droop 新設 + 顔面神経麻痺エントリ（特発性が最多、Ettinger 8th）
