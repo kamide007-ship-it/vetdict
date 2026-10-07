@@ -783,15 +783,19 @@ _NEGATION_AFTER_RE = _neg_re.compile(
 # （〜ていない・〜っていない・〜てきていない・〜ておらず）。語幹エイリアスは
 # 連用形の陽性主訴を拾うためのものなので、否定活用が続く場合は否定とみなす。
 _STEM_NEGATION_AFTER_RE = _neg_re.compile(
-    r"^(?:(?:なっ|っ)?[てで])?(?:き[てで])?(?:は|も)?[いお]?(?:ない|ません|らず)"
-    r"|^な?[らく](?:ない|ありません|ず)"
+    r"^(?:(?:なっ|っ)?[てで])?(?:き[てで])?(?:は|も)?[いお]?(?:ない|なかった|ません|らず)"
+    r"|^な?[らく](?:ない|なかった|ありません|ず)|^な?りません"
 )
 
 
 def is_negated_mention(text: str, end: int) -> bool:
     """Return True if the symptom mention ending at ``end`` is directly negated."""
     tail = text[end : end + 12]
-    if not (_NEGATION_AFTER_RE.match(tail) or _STEM_NEGATION_AFTER_RE.match(tail)):
+    # 「〜くな」で終わる語幹キー（毛が薄くな 等 = 〜くなる の語幹）に「かった」が
+    # 続く場合は形容詞の過去否定（毛が薄くなかった）。「食欲がなかった」のような
+    # 陽性の欠如表現と区別するため「くな」終端に限定する。
+    stem_past_neg = text[:end].endswith("くな") and tail.startswith("かった")
+    if not (_NEGATION_AFTER_RE.match(tail) or _STEM_NEGATION_AFTER_RE.match(tail) or stem_past_neg):
         return False
     # 「しか〜ない」構文は限定の肯定表現（「ポタポタとしか出ない」= 滴下排尿
     # という陽性症状）であり否定ではない。しか は必ず否定述語を要求するため、
