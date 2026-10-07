@@ -68,7 +68,7 @@ DRUGS_BATCH_71 = [
             "Vomiting (16% in melanoma dogs)",
             "Weight loss (16% in melanoma dogs)",
             "Serious: anaphylaxis, hypotension, tumor hemorrhage (5.9%)",
-            "Immune-mediated adverse events (class effect)",
+            "Immune-mediated adverse events — not observed in the canine trials; theoretical risk extrapolated from human checkpoint-inhibitor use (Merck FAQ)",
         ],
         "side_effects_ja": [
             "嗜眠・易疲労（メラノーマ犬で24% — メラノーマ群n=25の値。MCT群・全体の発現率は異なる）",
@@ -76,7 +76,7 @@ DRUGS_BATCH_71 = [
             "嘔吐（メラノーマ犬で16%）",
             "体重減少（メラノーマ犬で16%）",
             "重篤: アナフィラキシー・低血圧・腫瘍出血（5.9%）",
-            "免疫介在性有害事象（クラス効果）",
+            "免疫介在性有害事象 — 犬の臨床試験では観察されていない。ヒトのチェックポイント阻害薬での既知事象からの外挿による理論的リスク（Merck FAQ）",
         ],
         "drug_interactions": [
             {

@@ -6836,11 +6836,16 @@ class TestChatClinicalAccuracyAuditRound39Parallel:
             "食べるのが遅くなかった",
             "毛が薄くなりませんでした",
             "太ってきていなかった",
+            "食べるのが遅くはない",
+            "食べるのが遅いわけではない",
+            "太ってきたわけではない",
+            "口を開けるのを嫌がるわけではない",
         ):
             assert extract_symptoms_from_text(neg) == [], neg
         got = set(extract_symptoms_from_text("太ってきて毛が薄くなりお腹が垂れて"))
         assert {"weight_gain", "hair_loss", "bloating"} <= got
         assert "vomiting" in extract_symptoms_from_text("吐いている")
+        assert extract_symptoms_from_text("吐いているわけではない") == []
 
     def test_facial_distortion_not_converted_to_head_tilt(self):
         """顔面の歪みは非保有種で head_tilt 等の別所見に置換しない。"""

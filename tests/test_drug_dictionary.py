@@ -4713,3 +4713,20 @@ class TestBatch71Gilvetmab:
             text = f.read()
         assert "beforehand by the oncologist" not in text
         assert text.count("2 mg/kg PO within 4 hours") >= 3
+
+    def test_gilvetmab_unstudied_oncology_combinations_warn(self):
+        from api.drug_interactions import find_interactions
+
+        for other in ("vinblastine", "carboplatin", "toceranib", "oncept_melanoma_vaccine", "tigilanol_tiglate"):
+            hits = find_interactions(["gilvetmab", other])
+            assert hits and hits[0]["severity"] == "moderate", other
+            assert "Unstudied" in hits[0]["effect_en"], other
+
+    def test_gilvetmab_immune_mediated_events_labelled_theoretical(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "gilvetmab")
+        en = next(x for x in d["side_effects"] if "Immune-mediated" in x)
+        ja = next(x for x in d["side_effects_ja"] if "免疫介在性" in x)
+        assert "not observed" in en and "theoretical" in en
+        assert "観察されていない" in ja and "理論的" in ja

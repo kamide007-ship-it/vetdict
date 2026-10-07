@@ -1362,6 +1362,50 @@ for _is_id in GILVETMAB_IMMUNOSUPPRESSANT_IDS:
             "ref": "Gilvetmab US conditional license label/FAQ (Merck Animal Health)",
         }
     )
+# 他の抗腫瘍療法（化学療法・分子標的薬・腫瘍内注射・腫瘍ワクチン）との併用は
+# Merck FAQ で「未評価」とされる。相互作用が「無い」と表示されないよう、免疫抑制系
+# （上の major 登録分）以外の抗腫瘍薬は「併用未研究」の moderate 警告として登録する
+# （Codexレビュー対応）。
+GILVETMAB_UNSTUDIED_ONCOLOGY_IDS = [
+    "carboplatin",
+    "cisplatin_injectable",
+    "cytarabine",
+    "doxorubicin",
+    "doxorubicin_injectable",
+    "fluorouracil",
+    "hydroxyurea",
+    "l_asparaginase",
+    "lomustine",
+    "lomustine_oral",
+    "melphalan",
+    "mitoxantrone",
+    "palladia",
+    "procarbazine",
+    "rabacfosadine",
+    "tigilanol_tiglate",
+    "toceranib",
+    "vinblastine",
+    "vincristine",
+    "vincristine_injectable",
+    "vinorelbine",
+    "oncept_melanoma_vaccine",
+]
+for _onc_id in GILVETMAB_UNSTUDIED_ONCOLOGY_IDS:
+    if _onc_id in _GILVETMAB_REGISTERED:
+        continue
+    INTERACTIONS.append(
+        {
+            "drug_a": "gilvetmab",
+            "drug_b": _onc_id,
+            "severity": SEVERITY_MODERATE,
+            "mechanism": "併用未研究（他の抗腫瘍療法とのチェックポイント阻害の併用データなし）",
+            "effect_en": "Unstudied combination: concurrent chemotherapy, radiation, targeted therapy, intratumoral agents or tumor vaccines have not been evaluated with gilvetmab (Merck FAQ). Safety and efficacy of the combination — including additive myelosuppression or cytotoxic depletion of the T cells that PD-1 blockade relies on — are unknown.",
+            "effect_ja": "併用未研究: 化学療法・放射線・分子標的薬・腫瘍内注射剤・腫瘍ワクチンとギルベトマブの併用は評価されていない（Merck FAQ）。骨髄抑制の相加や、PD-1遮断が依存するT細胞の細胞傷害性減少を含め、併用時の安全性・有効性は不明。",
+            "management_en": "Treat as a specialist decision: decide concurrent vs. sequential use with a veterinary oncologist, and monitor CBC and clinical response closely if combined.",
+            "management_ja": "腫瘍科専門医の判断事項として扱う: 併用か逐次かを腫瘍科医と決定し、併用する場合はCBCと臨床反応を厳密に監視する。",
+            "ref": "Gilvetmab External FAQ (Merck Animal Health, 2025)",
+        }
+    )
 del _GILVETMAB_REGISTERED
 
 
