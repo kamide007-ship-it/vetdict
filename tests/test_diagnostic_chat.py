@@ -6823,11 +6823,28 @@ class TestChatClinicalAccuracyAuditRound39Parallel:
         """語幹エイリアス（太ってき/お腹が垂れ/毛が薄くな）は〜ていない等の活用否定で発火しない。"""
         from api.diagnostic_chat import extract_symptoms_from_text
 
-        for neg in ("太ってきていない", "お腹が垂れていない", "毛が薄くなっていない", "毛が薄くなってきていない"):
+        for neg in (
+            "太ってきていない",
+            "お腹が垂れていない",
+            "毛が薄くなっていない",
+            "毛が薄くなってきていない",
+            "毛が薄くならない",
+            "太ってきてはいない",
+            "口を開けるのを嫌がらない",
+            "食べるのが遅くない",
+        ):
             assert extract_symptoms_from_text(neg) == [], neg
         got = set(extract_symptoms_from_text("太ってきて毛が薄くなりお腹が垂れて"))
         assert {"weight_gain", "hair_loss", "bloating"} <= got
         assert "vomiting" in extract_symptoms_from_text("吐いている")
+
+    def test_facial_distortion_not_converted_to_head_tilt(self):
+        """顔面の歪みは非保有種で head_tilt 等の別所見に置換しない。"""
+        from api.diagnostic_chat import _extract_species_symptoms
+
+        for sp in ("hamster", "guinea_pig", "chinchilla", "bird"):
+            assert "head_tilt" not in _extract_species_symptoms("顔が歪んでいます", sp), sp
+        assert "facial_drooping" in _extract_species_symptoms("顔が歪んでいます", "rabbit")
 
     def test_bare_drooped_ear_is_not_promoted_to_facial_palsy(self):
         """Codexレビュー P2: 耳介下垂は多くの犬種で正常な耳形であり、それ単独では

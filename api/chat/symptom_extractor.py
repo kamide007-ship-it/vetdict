@@ -562,14 +562,14 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "ear_drooping": ["head_tilt", "head_shaking", "ear_discharge"],
     # 顔面神経麻痺の飼い主表現「顔が歪んで耳が下がっている」（2026-10 第39回）。
     # 猫 facial_nerve_paralysis/ear_droop・ウサギ facial_drooping・フェレット
-    # facial_asymmetry へ解決し、非保有種は head_tilt で前庭ddxに安全着地
+    # facial_asymmetry へ解決する。非保有種では未マッチのまま（顔面の歪みを
+    # 頭位傾斜など別の身体所見に置き換えない）
     "facial_droop": [
         "facial_drooping",
         "facial_nerve_paralysis",
         "facial_asymmetry",
         "ear_droop",
         "ear_drooping",
-        "head_tilt",
     ],
     # 猫の蹠行姿勢（かかと歩行 = 糖尿病性神経障害）。他種は後肢虚弱へ
     # 安全にフォールバック（2026-09 第26弾）
@@ -782,7 +782,10 @@ _NEGATION_AFTER_RE = _neg_re.compile(
 # 語幹キー（太ってき・お腹が垂れ・毛が薄くな 等）の直後に続く活用否定
 # （〜ていない・〜っていない・〜てきていない・〜ておらず）。語幹エイリアスは
 # 連用形の陽性主訴を拾うためのものなので、否定活用が続く場合は否定とみなす。
-_STEM_NEGATION_AFTER_RE = _neg_re.compile(r"^(?:(?:なっ|っ)?[てで])?(?:き[てで])?[いお]?(?:ない|ません|らず)")
+_STEM_NEGATION_AFTER_RE = _neg_re.compile(
+    r"^(?:(?:なっ|っ)?[てで])?(?:き[てで])?(?:は|も)?[いお]?(?:ない|ません|らず)"
+    r"|^な?[らく](?:ない|ありません|ず)"
+)
 
 
 def is_negated_mention(text: str, end: int) -> bool:

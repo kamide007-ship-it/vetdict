@@ -4700,3 +4700,16 @@ class TestBatch71Gilvetmab:
         for line in d["side_effects_ja"]:
             if "%" in line and "5.9%" not in line:
                 assert "メラノーマ" in line, line
+
+    def test_gilvetmab_oral_premedication_schedule_specified(self):
+
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "gilvetmab")
+        dog = d["species_info"]["dog"]
+        assert "2 mg/kg PO within 4 hours" in dog["dosage"]
+        assert "4時間以内に 2 mg/kg 経口" in dog["dosage_ja"]
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            text = f.read()
+        assert "beforehand by the oncologist" not in text
+        assert text.count("2 mg/kg PO within 4 hours") >= 3
