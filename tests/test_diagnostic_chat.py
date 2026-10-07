@@ -6715,6 +6715,11 @@ class TestChatClinicalAccuracyAuditRound39:
         ids, results = self._legacy("耳が垂れています")
         assert "facial_droop" not in ids, ids
         assert "顔面神経麻痺" not in self._names(results, 3), self._names(results, 3)
+        # Codex第2指摘: 耳介下垂は頭位傾斜（前庭徴候）でもない — 何の徴候も推定しない
+        assert "head_tilting" not in ids, ids
+        # 実際の頭位傾斜表現を伴えば前庭ddxに着地する
+        ids_tilt, _ = self._legacy("耳が垂れて首を傾けている")
+        assert "head_tilting" in ids_tilt, ids_tilt
         # 定義的な非対称徴候を伴う主訴は従来どおり顔面神経麻痺 rank 1
         for phrase in ("片方の耳だけ下がって顔が歪んでいます", "まばたきができない"):
             ids2, results2 = self._legacy(phrase)
