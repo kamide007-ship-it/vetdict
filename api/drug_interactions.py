@@ -1380,6 +1380,8 @@ GILVETMAB_UNSTUDIED_ONCOLOGY_IDS = [
     "melphalan",
     "mitoxantrone",
     "palladia",
+    "piroxicam_bladder",
+    "piroxicam_transitional_cell",
     "procarbazine",
     "rabacfosadine",
     "tigilanol_tiglate",

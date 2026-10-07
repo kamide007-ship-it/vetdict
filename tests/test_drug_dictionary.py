@@ -4730,3 +4730,13 @@ class TestBatch71Gilvetmab:
         ja = next(x for x in d["side_effects_ja"] if "免疫介在性" in x)
         assert "not observed" in en and "theoretical" in en
         assert "観察されていない" in ja and "理論的" in ja
+
+    def test_gilvetmab_warns_for_every_antineoplastic_in_dictionary(self):
+        """抗腫瘍薬カテゴリの全エントリがギルベトマブ併用で警告される（ID完全一致の取りこぼし防止）。"""
+        from api.drug_dictionary import DRUGS
+        from api.drug_interactions import find_interactions
+
+        exempt = {"gilvetmab", "dexrazoxane"}  # 自身・心保護/漏出解毒薬
+        for d in DRUGS:
+            if d.get("category") in ("antineoplastic", "antineoplastics") and d["id"] not in exempt:
+                assert find_interactions(["gilvetmab", d["id"]]), d["id"]
