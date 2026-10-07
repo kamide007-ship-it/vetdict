@@ -779,11 +779,16 @@ _NEGATION_AFTER_RE = _neg_re.compile(
     r"(?:ない|無い|なし|ありません|出ていない|出てない|でていない"
     r"|していない|してない|しません|見られない|みられない)"
 )
+# 語幹キー（太ってき・お腹が垂れ・毛が薄くな 等）の直後に続く活用否定
+# （〜ていない・〜っていない・〜てきていない・〜ておらず）。語幹エイリアスは
+# 連用形の陽性主訴を拾うためのものなので、否定活用が続く場合は否定とみなす。
+_STEM_NEGATION_AFTER_RE = _neg_re.compile(r"^(?:(?:なっ|っ)?[てで])?(?:き[てで])?[いお]?(?:ない|ません|らず)")
 
 
 def is_negated_mention(text: str, end: int) -> bool:
     """Return True if the symptom mention ending at ``end`` is directly negated."""
-    if not _NEGATION_AFTER_RE.match(text[end : end + 12]):
+    tail = text[end : end + 12]
+    if not (_NEGATION_AFTER_RE.match(tail) or _STEM_NEGATION_AFTER_RE.match(tail)):
         return False
     # 「しか〜ない」構文は限定の肯定表現（「ポタポタとしか出ない」= 滴下排尿
     # という陽性症状）であり否定ではない。しか は必ず否定述語を要求するため、

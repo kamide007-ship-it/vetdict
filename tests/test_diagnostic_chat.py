@@ -6819,6 +6819,16 @@ class TestChatClinicalAccuracyAuditRound39Parallel:
     def _names(results, n=6):
         return [(r.get("name_ja") or r.get("name") or "") for r in results[:n]]
 
+    def test_stem_aliases_respect_conjugated_negation(self):
+        """語幹エイリアス（太ってき/お腹が垂れ/毛が薄くな）は〜ていない等の活用否定で発火しない。"""
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        for neg in ("太ってきていない", "お腹が垂れていない", "毛が薄くなっていない", "毛が薄くなってきていない"):
+            assert extract_symptoms_from_text(neg) == [], neg
+        got = set(extract_symptoms_from_text("太ってきて毛が薄くなりお腹が垂れて"))
+        assert {"weight_gain", "hair_loss", "bloating"} <= got
+        assert "vomiting" in extract_symptoms_from_text("吐いている")
+
     def test_bare_drooped_ear_is_not_promoted_to_facial_palsy(self):
         """Codexレビュー P2: 耳介下垂は多くの犬種で正常な耳形であり、それ単独では
         顔面神経麻痺の定義的徴候（片側の顔面・口唇・眼瞼の歪み/瞬目不能）ではない。

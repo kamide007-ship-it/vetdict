@@ -4689,3 +4689,14 @@ class TestBatch71Gilvetmab:
                 assert "ジフェンヒドラミン 2 mg/kg IM" in t_ja, rec["name"]
             if "Gilvetmab" in t_en:
                 assert "diphenhydramine 2 mg/kg IM" in t_en, rec["name"]
+
+    def test_gilvetmab_adverse_event_rates_qualified_as_melanoma_subgroup(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "gilvetmab")
+        for line in d["side_effects"]:
+            if "%" in line and "5.9%" not in line:
+                assert "melanoma" in line, line
+        for line in d["side_effects_ja"]:
+            if "%" in line and "5.9%" not in line:
+                assert "メラノーマ" in line, line
