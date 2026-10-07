@@ -359,6 +359,9 @@ def migrate_json_enrichments(conn) -> int:
         # charcoal to non-toxicoses ("Feline Toxic Megacolon").
         "特異的解毒剤がある場合は投与する（例：抗凝固性殺鼠剤にビタミンK1",
         "Treatment of toxicosis follows the principles of decontamination",
+        # Generic deworming / small-mammal bedding boilerplate (第63弾)
+        "同定された寄生虫に応じた適切な駆虫薬が必要である",
+        "床材（杉材は禁忌、紙系/ペレット系へ）",
     )
 
     def _guard_treatment(new_val: str | None, existing: str | None) -> str | None:

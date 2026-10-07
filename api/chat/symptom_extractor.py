@@ -347,7 +347,14 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "excessive_urination",
         "increased_urination",
     ],
-    "excessive_urination": ["frequent_urination", "polyuria", "pollakiuria", "increased_urination"],
+    # 尿の「量」は多尿 — polyuria系を頻尿（LUTD優先チェーン）より先に解決する
+    "excessive_urination": [
+        "polyuria",
+        "increased_urination",
+        "polyuria_polydipsia",
+        "frequent_urination",
+        "pollakiuria",
+    ],
     "increased_urination": ["excessive_urination", "frequent_urination", "polyuria", "pollakiuria"],
     "cloudy_urine": ["turbid_urine", "murky_urine"],
     "foul_smelling_urine": ["malodorous_urine", "urine_odor"],
@@ -419,6 +426,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 嘴過長・スペクタクル残留の種別ID表記ゆれ
     "worms_in_stool": ["visible_worms", "visible_parasites", "diarrhea"],
     "overgrown_beak": ["beak_deformity", "beak_overgrowth"],
+    "beak_deformity": ["beak_overgrowth", "overgrown_beak", "crusty_beak"],
+    "miliary_dermatitis": ["crusting", "skin_lesions", "itching"],
     # 2026-09 第18回スイープ: 「毛が抜けた」→fur_loss_patches が斑状脱毛IDを
     # 持たない種（ハムスター等）で脱落していた / うずくまり主訴の鳥への橋渡し
     # （卵詰まりのケージ底着座・膨羽へフォールバック）/ フクロモモンガ尾自咬

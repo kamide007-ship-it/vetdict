@@ -5310,3 +5310,58 @@ def test_browse_restores_template_hidden_metal_and_renal_entries():
         browsed = {d.get("name") for d in dis if isinstance(d.get("name"), str)}
         missing = names - browsed
         assert not missing, f"[{sp}] previously template-hidden diseases still missing: {missing}"
+
+
+def test_flagship_parasite_and_fad_entries_not_deworm_or_bedding_templated():
+    """第63弾: 犬フィラリア・マダニ麻痺・ウマバエ・猫好酸球性肺炎・ヤドカリ貝殻放棄・
+    ノミアレルギー（犬猫フェレット）の JA 治療文が汎用テンプレートでないこと."""
+    import json
+    from pathlib import Path
+
+    data = json.loads((Path(__file__).resolve().parents[1] / "diseases_all_species.json").read_text(encoding="utf-8"))
+    targets = {
+        ("Dog", "Heartworm Disease"): "メラルソミン",
+        ("Dog", "Tick Paralysis"): "マダニの除去",
+        ("Dog", "Cuterebra Infestation"): "潰さない",
+        ("Cat", "Cuterebra Infestation"): "潰さない",
+        ("Cat", "Feline Eosinophilic Pneumonia"): "プレドニゾロン",
+        ("Ferret", "Heartworm Disease - Caval Syndrome"): "大静脈症候群",
+        ("Exotic Other", "Shell Evacuation Syndrome (Hermit Crab)"): "寄生虫症ではなく",
+        ("Dog", "Flea Allergy Dermatitis"): "ノミ駆除",
+        ("Cat", "Flea Allergy Dermatitis"): "ペルメトリン",
+        ("Ferret", "Flea Allergy Dermatitis"): "セラメクチン",
+    }
+    by_key = {(d.get("species"), d.get("name")): d for d in data}
+    for key, must in targets.items():
+        ja = by_key[key]["treatment_ja"]
+        assert "同定された寄生虫に応じた適切な駆虫薬" not in ja, key
+        assert "杉材" not in ja, key
+        assert must in ja, key
+
+
+def test_served_db_flagship_parasite_treatment_curated():
+    import sqlite3
+    from pathlib import Path
+
+    db = Path(__file__).resolve().parents[1] / "instance" / "vetdict.db"
+    if not db.exists() or db.stat().st_size < 1_000_000:
+        import pytest
+
+        pytest.skip("served DB not built")
+    c = sqlite3.connect(db)
+    for sp, name in [
+        ("dog", "Tick Paralysis"),
+        ("ferret", "Heartworm Disease - Caval Syndrome"),
+        ("exotic_other", "Shell Evacuation Syndrome (Hermit Crab)"),
+        ("dog", "Flea Allergy Dermatitis"),
+    ]:
+        row = c.execute("select treatment_ja from diseases where species=? and name=?", (sp, name)).fetchone()
+        assert row and "同定された寄生虫に応じた適切な駆虫薬" not in row[0] and "杉材" not in row[0], (sp, name)
+
+
+def test_runtime_overlay_replaces_deworm_template_module_treatment():
+    from api.species.helpers import _is_template_text
+
+    assert _is_template_text("…の治療には、同定された寄生虫に応じた適切な駆虫薬が必要である。")
+    assert _is_template_text("① 原因物質の同定と除去が最重要—床材（杉材は禁忌、紙系/ペレット系へ）")
+    assert not _is_template_text("成虫駆除: メラルソミン 2.5 mg/kg")

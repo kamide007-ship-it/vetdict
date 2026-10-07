@@ -4466,8 +4466,52 @@ class TestBatch69EpsiprantelDapsone:
         assert "cats 2.75 mg/kg" in raw
 
 
-class TestBatch70Gilvetmab:
-    """2026-10: ギルベトマブ — 犬で初のUSDA条件付きライセンス・チェックポイント
+class TestBatch70FluralanerInjectable:
+    """2026-10 第63弾: フルララネル徐放性注射剤（ブラベクト クオンタム、FDA 2025）."""
+
+    def _drug(self):
+        from api.drug_dictionary import DRUGS
+
+        return next(d for d in DRUGS if d["id"] == "fluralaner_injectable")
+
+    def test_label_dose_and_gates(self):
+        d = self._drug()
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is True
+        assert "15 mg/kg" in dog["dosage"] and "15 mg/kg" in dog["dosage_ja"]
+        assert "12" in dog["dosage"] and "6 months" in dog["dosage"]
+        # 経口用量の流用防止を明記
+        assert "25-56" in dog["dosage"] and "流用しない" in dog["dosage_ja"]
+        assert d["species_info"]["cat"]["safe"] is False
+        assert "除去できない" in dog["notes_ja"]
+
+    def test_oral_entry_unchanged_and_distinct(self):
+        from api.drug_dictionary import DRUGS
+
+        oral = next(x for x in DRUGS if x["id"] == "fluralaner")
+        assert "25-56" in oral["species_info"]["dog"]["dosage"]
+
+    def test_matcher_and_resolver(self):
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        ids = [x["id"] if isinstance(x, dict) else x for x in find_drugs_in_text("Bravecto Quantum injectable")]
+        assert "fluralaner_injectable" in ids
+        assert resolve_drug_reference("ぶらべくとくおんたむ") == "fluralaner_injectable"
+
+    def test_dog_flea_allergy_links_to_injectable(self):
+        import json
+        from pathlib import Path
+
+        data = json.loads(
+            (Path(__file__).resolve().parents[1] / "diseases_all_species.json").read_text(encoding="utf-8")
+        )
+        fad = next(d for d in data if d.get("species") == "Dog" and d.get("name") == "Flea Allergy Dermatitis")
+        assert "ブラベクト クオンタム" in fad["treatment_ja"]
+        assert "Bravecto Quantum" in fad["treatment"]
+
+
+class TestBatch71Gilvetmab:
+    """2026-10: Batch 71: ギルベトマブ — 犬で初のUSDA条件付きライセンス・チェックポイント
     阻害薬（抗PD-1犬化mAb、Merck）。MCT I-III・メラノーマ II-III。
     10 mg/kg IV ≥30分 q2w 最大10回。免疫抑制薬併用はラベル除外。"""
 
