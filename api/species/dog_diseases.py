@@ -54,6 +54,7 @@ VALID_SYMPTOMS: set[str] = {
     "ear_scratching",
     "ear_odor",
     "head_tilting",
+    "facial_droop",
     # Skin / Coat
     "itching",
     "hair_loss",
@@ -131,6 +132,7 @@ SYMPTOM_NAMES: dict[str, dict[str, str]] = {
     "ear_scratching": {"ja": "耳を掻く", "en": "Ear Scratching"},
     "ear_odor": {"ja": "耳の悪臭", "en": "Ear Odor"},
     "head_tilting": {"ja": "首の傾き", "en": "Head Tilting"},
+    "facial_droop": {"ja": "顔面の歪み・片側の垂れ（耳・唇・まぶた）", "en": "Facial Droop / Asymmetry"},
     "itching": {"ja": "かゆみ", "en": "Itching"},
     "hair_loss": {"ja": "脱毛", "en": "Hair Loss"},
     "skin_redness": {"ja": "皮膚の赤み", "en": "Skin Redness"},
@@ -11059,7 +11061,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Facial Nerve Paralysis",
         "name_ja": "顔面神経麻痺",
-        "symptoms": {"drooling", "eye_discharge", "ear_discharge"},
+        "symptoms": {"facial_droop", "drooling", "eye_discharge", "ear_discharge"},
         "description": "Unilateral or bilateral loss of facial nerve function causing drooped ear, lip, and inability to blink.",
         "description_ja": "片側性または両側性の顔面神経機能喪失で、耳・唇の垂れ下がりや瞬きの障害を引き起こします。",
         "urgency": "moderate",
@@ -13511,7 +13513,15 @@ SYMPTOM_CATEGORIES = {
     "eyes_ears": {
         "name_ja": "眼・耳",
         "name_en": "Eyes/Ears",
-        "symptoms": ["eye_redness", "eye_discharge", "squinting", "ear_scratching", "ear_odor", "head_tilting"],
+        "symptoms": [
+            "eye_redness",
+            "eye_discharge",
+            "squinting",
+            "ear_scratching",
+            "ear_odor",
+            "head_tilting",
+            "facial_droop",
+        ],
     },
     "skin": {
         "name_ja": "皮膚・被毛",

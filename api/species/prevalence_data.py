@@ -60,6 +60,9 @@ SPECIES_PREVALENCE = {
         "Interdigital Cyst (Furuncle)": "common",
         "Deciduous Malocclusion (Interceptive Orthodontics)": "common",
         "Missing Teeth (Hypodontia / Unerupted Teeth)": "common",
+        # Idiopathic facial nerve paralysis — recognized but not everyday
+        # (~75% of canine facial paralysis; cockers predisposed. Ettinger 8th)
+        "Facial Nerve Paralysis": "uncommon",
         # Northern-breed keratinization disorder; classic but not common
         # (White SD, JAVMA 2001; Colombini S, Vet Clin North Am 1999).
         "Zinc-Responsive Dermatosis": "uncommon",

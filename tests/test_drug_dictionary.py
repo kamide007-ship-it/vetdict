@@ -4508,3 +4508,235 @@ class TestBatch70FluralanerInjectable:
         fad = next(d for d in data if d.get("species") == "Dog" and d.get("name") == "Flea Allergy Dermatitis")
         assert "ブラベクト クオンタム" in fad["treatment_ja"]
         assert "Bravecto Quantum" in fad["treatment"]
+
+
+class TestBatch71Gilvetmab:
+    """2026-10: Batch 71: ギルベトマブ — 犬で初のUSDA条件付きライセンス・チェックポイント
+    阻害薬（抗PD-1犬化mAb、Merck）。MCT I-III・メラノーマ II-III。
+    10 mg/kg IV ≥30分 q2w 最大10回。免疫抑制薬併用はラベル除外。"""
+
+    def _get(self, drug_id):
+        from api.drug_dictionary import DRUGS
+
+        return next(d for d in DRUGS if d["id"] == drug_id)
+
+    def test_gilvetmab_present_with_label_dosing_and_honest_evidence(self):
+        d = self._get("gilvetmab")
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is True
+        # ラベル定義的用法: 10 mg/kg・30分以上・q2w・最大10回
+        assert "10 mg/kg" in dog["dosage"] and "30" in dog["dosage"]
+        assert "最大10回" in dog["dosage_ja"] and "30分以上" in dog["dosage_ja"]
+        # 条件付きライセンスの正直なエビデンス枠組み（JVIM 2026の実数値）
+        notes = dog["notes"] + dog["notes_ja"]
+        assert "20%" in notes and "46%" in notes
+        assert "偽性進行" in dog["notes_ja"]
+        # リンパ腫は非適応（単剤有効性不十分）
+        assert "リンパ腫" in dog["notes_ja"]
+        # 完全バイリンガル
+        for k in ("dosage", "dosage_ja", "notes", "notes_ja"):
+            assert dog[k].strip()
+
+    def test_gilvetmab_immunosuppressant_gate(self):
+        d = self._get("gilvetmab")
+        # 猫は犬化抗体のため safe:False
+        assert d["species_info"]["cat"]["safe"] is False
+        # グルココルチコイド併用除外が禁忌とレジストリの両方に
+        assert "グルココルチコイド" in d["contraindications_ja"]
+        from api.drug_interactions import find_interactions
+
+        pairs = {
+            (ix["drug_a"], ix["drug_b"]): ix["severity"]
+            for ix in find_interactions(["gilvetmab", "prednisolone", "cyclosporine", "dexamethasone"])
+        }
+        assert pairs.get(("gilvetmab", "prednisolone")) == "major"
+        assert pairs.get(("gilvetmab", "cyclosporine")) == "major"
+        assert pairs.get(("gilvetmab", "dexamethasone")) == "major"
+
+    def test_gilvetmab_interaction_coverage_spans_all_immunosuppressant_ids(self):
+        """Codexレビュー P1 対応の回帰防止: チェッカーはID完全一致のため、辞書に
+        実在する全身性グルココルチコイド・免疫抑制薬の全IDがレジストリに登録されて
+        いること（prednisone 等が無警告になる安全ギャップの再発防止）。"""
+        from api.drug_dictionary import DRUGS
+        from api.drug_interactions import (
+            GILVETMAB_GLUCOCORTICOID_IDS,
+            GILVETMAB_IMMUNOSUPPRESSANT_IDS,
+            find_interactions,
+        )
+
+        index = {d["id"] for d in DRUGS}
+        covered = GILVETMAB_GLUCOCORTICOID_IDS + GILVETMAB_IMMUNOSUPPRESSANT_IDS
+        # カバレッジリストの全IDが辞書に実在（リネーム/統合で孤児化したらCIで検出）
+        missing = [i for i in covered if i not in index]
+        assert not missing, f"coverage list has orphan ids: {missing}"
+        # Codexが名指しした代表IDを含め、全ペアが major で検出される
+        for drug_id in covered:
+            pairs = {(ix["drug_a"], ix["drug_b"]): ix["severity"] for ix in find_interactions(["gilvetmab", drug_id])}
+            assert pairs.get(("gilvetmab", drug_id)) == "major", drug_id
+        for named in ("prednisone", "methylprednisolone", "triamcinolone", "azathioprine", "mycophenolate"):
+            assert named in covered, named
+        # 意図的除外（点眼剤・純粋なミネラルコルチコイド=生理的補充）は無警告のまま
+        for excluded in ("cyclosporine_ophthalmic", "tacrolimus_ophthalmic", "desoxycorticosterone", "fludrocortisone"):
+            assert not find_interactions(["gilvetmab", excluded]), excluded
+        # Codexレビュー第2波 P1: 綴り違いの重複エントリ（英式 ciclosporin）も個別IDで配信
+        # されるため登録が必要 — find_interactions がペアを返すこと
+        pairs2 = {
+            (ix["drug_a"], ix["drug_b"]): ix["severity"] for ix in find_interactions(["gilvetmab", "ciclosporin_oral"])
+        }
+        assert pairs2.get(("gilvetmab", "ciclosporin_oral")) == "major"
+
+    def test_gilvetmab_coverage_tracks_dictionary_immunosuppressant_categories(self):
+        """CIガード（Codexレビュー第2波 P1 の再発防止）: 辞書に「コルチコステロイド/
+        免疫抑制薬」カテゴリの新エントリ（綴り違いの重複含む）が追加されたら、
+        カバレッジリストへの登録 or 文書化済み除外のどちらかを必ず選ばせる。"""
+        from api.drug_dictionary import DRUGS
+        from api.drug_interactions import (
+            GILVETMAB_GLUCOCORTICOID_IDS,
+            GILVETMAB_IMMUNOSUPPRESSANT_IDS,
+        )
+
+        covered = set(GILVETMAB_GLUCOCORTICOID_IDS) | set(GILVETMAB_IMMUNOSUPPRESSANT_IDS)
+        # 文書化済み除外（drug_interactions.py のコメントと同期）:
+        # 点眼剤=全身免疫抑制なし、interferon_omega=免疫賦活（カテゴリ誤り気味）、
+        # human_ivig=単回Fc遮断レスキュー、dapsone=抗好中球性サルホン、
+        # fuzapladib=急性膵炎の短期LFA-1阻害 — いずれもT細胞抑制を主機序としない
+        documented_exclusions = {
+            "cyclosporine_ophthalmic",
+            "tacrolimus_ophthalmic",
+            "interferon_omega",
+            "human_ivig",
+            "dapsone",
+            "fuzapladib",
+        }
+        unaccounted = []
+        for d in DRUGS:
+            cat = (d.get("category") or "").lower()
+            if "corticosteroid" not in cat and "immunosuppress" not in cat:
+                continue
+            if d["id"] == "gilvetmab":
+                continue
+            if "ophthalmic" in d["id"] and d["id"] in documented_exclusions:
+                continue
+            if d["id"] not in covered and d["id"] not in documented_exclusions:
+                unaccounted.append(d["id"])
+        assert not unaccounted, (
+            f"corticosteroid/immunosuppressant entries not covered by the gilvetmab "
+            f"interaction registry nor documented as excluded: {unaccounted}"
+        )
+
+    def test_gilvetmab_combination_therapy_labelled_unstudied(self):
+        """Codexレビュー P2 対応の回帰防止: Merck FAQ は他療法との併用を未研究と
+        明記 — notes が併用を推奨と読める framing（Combination options）に戻らないこと。"""
+        d = self._get("gilvetmab")
+        dog = d["species_info"]["dog"]
+        assert "Combination options" not in dog["notes"]
+        assert "has NOT been studied" in dog["notes"]
+        assert "併用は未研究" in dog["notes_ja"]
+        import json
+
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            data = json.load(f)
+        oral = next(r for r in data if r.get("species") == "Dog" and r.get("name") == "Oral Melanoma")
+        assert "併用は未研究" in oral["treatment_ja"]
+        assert "has not been studied" in oral["treatment"]
+
+    def test_gilvetmab_resolves_and_connects_to_oncology_entries(self):
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        assert {h["id"] for h in find_drugs_in_text("ギルベトマブ 10 mg/kg IV q2w 最大10回")} >= {"gilvetmab"}
+        assert {h["id"] for h in find_drugs_in_text("Gilvetmab 10 mg/kg IV over 30 min q2w")} >= {"gilvetmab"}
+        assert resolve_drug_reference("ギルベトマブ") == "gilvetmab"
+        assert resolve_drug_reference("ぎるべとまぶ") == "gilvetmab"
+        # 犬メラノーマ/口腔メラノーマ/MCT の治療テキストが本剤を参照（動線）
+        import json
+
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            data = json.load(f)
+        hits = {
+            d["name"]
+            for d in data
+            if d.get("species") == "Dog"
+            and d.get("name") in ("Mast Cell Tumor", "Melanoma", "Oral Melanoma")
+            and "ギルベトマブ" in (d.get("treatment_ja") or "")
+            and "Gilvetmab" in (d.get("treatment") or "")
+        }
+        assert hits == {"Mast Cell Tumor", "Melanoma", "Oral Melanoma"}, hits
+
+    def test_gilvetmab_diphenhydramine_premedication_documented(self):
+        """Merck FAQ: 各点滴の15-30分前にジフェンヒドラミン 2 mg/kg IM の前投薬＋
+        点滴後1時間以上のモニタリングが必須 — モノグラフと疾患治療文の両方に明記
+        （Codexレビュー P1 対応の回帰防止）。"""
+        d = self._get("gilvetmab")
+        dog = d["species_info"]["dog"]
+        # モノグラフ（日英の用量欄）に前投薬と投与後モニタリング
+        assert "ジフェンヒドラミン" in dog["dosage_ja"] and "2 mg/kg" in dog["dosage_ja"]
+        assert "15-30分前" in dog["dosage_ja"] and "1時間" in dog["dosage_ja"]
+        assert "diphenhydramine 2 mg/kg IM" in dog["dosage"]
+        assert "15-30 min" in dog["dosage"] and "1 hour" in dog["dosage"]
+        # 疾患治療文（3エントリ×日英）にも前投薬が同伴
+        import json
+
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            data = json.load(f)
+        for rec in data:
+            if rec.get("species") != "Dog":
+                continue
+            if rec.get("name") not in ("Mast Cell Tumor", "Melanoma", "Oral Melanoma"):
+                continue
+            t_ja = rec.get("treatment_ja") or ""
+            t_en = rec.get("treatment") or ""
+            if "ギルベトマブ" in t_ja:
+                assert "ジフェンヒドラミン 2 mg/kg IM" in t_ja, rec["name"]
+            if "Gilvetmab" in t_en:
+                assert "diphenhydramine 2 mg/kg IM" in t_en, rec["name"]
+
+    def test_gilvetmab_adverse_event_rates_qualified_as_melanoma_subgroup(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "gilvetmab")
+        for line in d["side_effects"]:
+            if "%" in line and "5.9%" not in line:
+                assert "melanoma" in line, line
+        for line in d["side_effects_ja"]:
+            if "%" in line and "5.9%" not in line:
+                assert "メラノーマ" in line, line
+
+    def test_gilvetmab_oral_premedication_schedule_specified(self):
+
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "gilvetmab")
+        dog = d["species_info"]["dog"]
+        assert "2 mg/kg PO within 4 hours" in dog["dosage"]
+        assert "4時間以内に 2 mg/kg 経口" in dog["dosage_ja"]
+        with open("diseases_all_species.json", encoding="utf-8") as f:
+            text = f.read()
+        assert "beforehand by the oncologist" not in text
+        assert text.count("2 mg/kg PO within 4 hours") >= 3
+
+    def test_gilvetmab_unstudied_oncology_combinations_warn(self):
+        from api.drug_interactions import find_interactions
+
+        for other in ("vinblastine", "carboplatin", "toceranib", "oncept_melanoma_vaccine", "tigilanol_tiglate"):
+            hits = find_interactions(["gilvetmab", other])
+            assert hits and hits[0]["severity"] == "moderate", other
+            assert "Unstudied" in hits[0]["effect_en"], other
+
+    def test_gilvetmab_immune_mediated_events_labelled_theoretical(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "gilvetmab")
+        en = next(x for x in d["side_effects"] if "Immune-mediated" in x)
+        ja = next(x for x in d["side_effects_ja"] if "免疫介在性" in x)
+        assert "not observed" in en and "theoretical" in en
+        assert "観察されていない" in ja and "理論的" in ja
+
+    def test_gilvetmab_warns_for_every_antineoplastic_in_dictionary(self):
+        """抗腫瘍薬カテゴリの全エントリがギルベトマブ併用で警告される（ID完全一致の取りこぼし防止）。"""
+        from api.drug_dictionary import DRUGS
+        from api.drug_interactions import find_interactions
+
+        exempt = {"gilvetmab", "dexrazoxane"}  # 自身・心保護/漏出解毒薬
+        for d in DRUGS:
+            if d.get("category") in ("antineoplastic", "antineoplastics") and d["id"] not in exempt:
+                assert find_interactions(["gilvetmab", d["id"]]), d["id"]

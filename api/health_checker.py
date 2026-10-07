@@ -774,6 +774,24 @@ SYMPTOMS = [
         "name_en": "Missing Teeth / Tooth Not Erupting",
         "category": "general",
     },
+    # 2026-10 audit round 39: facial-droop and weight-gain vocabulary.
+    # 「片方の耳だけ下がって顔が歪んでいます」 extracted ZERO ids — the single
+    # defining sign of facial nerve paralysis (and a common otitis
+    # media-interna accompaniment) had no legacy ID at all.
+    {
+        "id": "facial_droop",
+        "name_ja": "顔面の歪み・片側の垂れ（耳・唇・まぶた）",
+        "name_en": "Facial Droop / Asymmetry (Ear, Lip, Eyelid)",
+        "category": "neurological",
+    },
+    # 「太ってきて毛が薄い」 — Cushing's / hypothyroidism's classic weight-gain
+    # presentation extracted only hair_loss because weight_gain had no legacy ID.
+    {
+        "id": "weight_gain",
+        "name_ja": "体重増加・太ってきた",
+        "name_en": "Weight Gain",
+        "category": "general",
+    },
     {
         "id": "mammary_swelling",
         "name_ja": "乳腺・乳首の腫大（しこり）",
@@ -1674,6 +1692,7 @@ DISEASES = [
         "description_en": "One of the most common endocrine disorders in dogs. Insufficient thyroid hormone production leads to decreased metabolism with widespread systemic effects.",
         "symptoms": [
             "lethargy",
+            "weight_gain",
             "hair_loss",
             "dry_skin",
             "stiffness",
@@ -1707,6 +1726,7 @@ DISEASES = [
             "excessive_thirst",
             "frequent_urination",
             "increased_appetite",
+            "weight_gain",
             "hair_loss",
             "bloating",
             "lethargy",
@@ -2145,6 +2165,7 @@ DISEASES = [
             "ear_discharge",
             "ear_odor",
             "disorientation",
+            "facial_droop",
         ],
         "severity": "moderate",
         "recommended_tests": ["otoscopy", "ear_cytology", "skull_radiography_ct"],
@@ -3655,6 +3676,40 @@ DISEASES = [
             "chihuahua": 1.3,
         },
     },
+    # 2026-10 audit round 39: facial nerve paralysis. 「片方の耳だけ下がって
+    # 顔が歪んでいます」 extracted zero symptoms — the characteristic unilateral
+    # facial droop had neither a legacy symptom nor a disease. Idiopathic facial
+    # nerve paralysis is the most common cause in dogs (~75%; cocker spaniels
+    # predisposed), with otitis media-interna and hypothyroidism the main
+    # identifiable causes (Ettinger 8th ed; Rossmeisl 2010). Name mirrors the
+    # dog module entry ("Facial Nerve Paralysis") so the chat candidate card's
+    # 「疾患DBで詳細を開く」 pivot lands exactly.
+    {
+        "id": "facial_nerve_paralysis",
+        "prevalence_tier": "uncommon",
+        "name_ja": "顔面神経麻痺",
+        "name_en": "Facial Nerve Paralysis",
+        "description_ja": "片側の耳・唇・まぶたが垂れ、顔が歪んで見える末梢神経障害です。まばたきができない（瞬目反射消失）・患側からのよだれ・食べこぼしが典型。犬では特発性が最多（約75%、コッカー・スパニエル好発）で、同定可能な原因としては中耳炎・内耳炎と甲状腺機能低下症が重要です。治療は基礎疾患の検索（耳鏡検査・甲状腺検査）と、瞬目不能による曝露性角膜炎を防ぐ人工涙液・眼軟膏が中心。特発例の多くは完全回復しませんが、筋拘縮により外観は時間とともに目立たなくなります（Ettinger 8th ed）。",
+        "description_en": "A peripheral neuropathy producing a drooped ear, lip and eyelid on one side — the face looks asymmetric. Inability to blink (absent palpebral reflex), drooling and dropping food from the affected side are typical. Idiopathic disease is the most common cause in dogs (~75%; cocker spaniels predisposed); otitis media-interna and hypothyroidism are the key identifiable causes. Work-up targets the underlying cause (otoscopy, thyroid testing); treatment centers on tear replacement/lubricants to prevent exposure keratitis from the lost blink. Many idiopathic cases never fully recover, though contracture makes the asymmetry less obvious over time (Ettinger 8th ed).",
+        # Complaint-gated: drooling / head signs are nonspecific (owned by
+        # dental and vestibular ddx), so the entry matches only on its
+        # defining sign — the facial droop itself (missing_teeth pattern).
+        "symptoms": [
+            "facial_droop",
+        ],
+        "severity": "moderate",
+        "recommended_tests": [
+            "neurological_exam",
+            "otoscopy",
+            "thyroid_panel",
+            "schirmer_tear_test",
+        ],
+        "breed_risks": {
+            "cocker_spaniel": 2.5,
+            "beagle": 1.5,
+            "pembroke_welsh_corgi": 1.4,
+        },
+    },
     # 2026-09 audit round 21: the post-estrus purulent-discharge + PU/PD
     # complaint (「陰部から膿が出る 水をよく飲む」) had no pyometra entry and no
     # vulvar-discharge vocabulary at all, so intestinal parasites / Cushing's
@@ -4872,6 +4927,10 @@ _PATHOGNOMONIC_CLUSTERS = [
     # entry outranked the oral tumor via the generic lumps_bumps signal
     # (round-14 audit).
     (frozenset({"oral_mass"}), "oral_tumor", 1.6),
+    # Facial droop is the defining sign of facial nerve paralysis (single-sign
+    # cluster, oral_mass pattern) — otitis media-interna shares the sign in its
+    # own set and stays in the list as the key identifiable cause (2026-10).
+    (frozenset({"facial_droop"}), "facial_nerve_paralysis", 1.6),
     # Owner-visible bite abnormality (受け口/出っ歯) is site-diagnostic for an
     # occlusion problem — no other entry carries this sign (2026-10).
     (frozenset({"malocclusion"}), "deciduous_malocclusion", 1.6),

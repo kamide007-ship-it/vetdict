@@ -6661,3 +6661,116 @@ setupMobileBottomNav含む）がスキップ** → 下部ナビ不生成・全�
 ### 回帰テスト（+21件）
 - TestChatClinicalAccuracyAuditRound39（14件）・TestBatch70FluralanerInjectable（4件）・
   テンプレート是正3件（JSON・配信DB・runtimeマーカー）
+
+## 2026-10セッション（第63弾・並行セッション分: ギルベトマブ公開 — 犬初のチェックポイント阻害薬 + 顔面神経麻痺の新設 + チャット精度第39弾）
+
+### エラーチェック（結果: ベースライン健全）
+- repo全体 ruff check clean、フルテスト合格（ベースライン）
+- 配信SQLiteクリーンビルド: **6,895疾患・648薬品**、treatment/prevention/prognosis **100%**、
+  主要臨床フィールド（治療/病因/予後/予防/説明/病態）の空欄 **0**、キリル文字混入 **0**
+- 薬用量: safe薬品の dosage 欠落 **0**（species_info 3,782行全数検証）、文字列型相互作用スキーマ **0**、ID重複 **0**
+- 麻酔: 全21種×全8カテゴリ完備（188プロトコル）、薬剤行の dose 欠落 **0**、全種 references あり
+- 薬品マッチャー飽和度（第37回スイープ、カタカナ+英語×用量文脈の実スニペット突合）:
+  referenced-but-absent の真の欠落 **0**（Cytosine arabinoside→cytarabine・Paraffin/mineral oil 等の
+  上位候補は全て解決済みを確認。Chlorothiazide 2参照・human albumin 1参照は閾値未満で見送り）
+
+### エビデンスベースの新規薬品公開: ギルベトマブ（`drug_batch_70.py` 新規、648→649薬品）
+- **犬で初めてUSDA条件付きライセンスを取得した免疫チェックポイント阻害薬**（Merck Animal Health、
+  抗PD-1犬化モノクローナル抗体）なのに未収載だった。Oncept・ステルフォンタ・タノベアは収載済みで、
+  メラノーマ/MCTフラグシップに最新の全身免疫療法の選択肢が欠けていた
+- ラベル定義的事実を収載: **10 mg/kg（0.5 mL/kg）IV 30分以上かけて点滴・q2w・最大10回**。
+  適応: 肥満細胞腫 ステージI-III・メラノーマ ステージII-III（固形腫瘍量減少の補助）
+- **条件付き承認の正直なエビデンス枠組み**（JVIM 2026, PMID 42247661）: メラノーマ奏効率20%
+  （進行中央値56日）・MCT奏効率46%（進行中央値未到達）、重篤AE（アナフィラキシー・低血圧・
+  腫瘍出血）5.9%、**偽性進行**（縮小前の一過性増大 — 早期のサイズ増大のみで中断しない）を明記。
+  **リンパ腫は非適応**（単剤有効性不十分でライセンス外）
+- **クラス定義的安全ゲート**: グルココルチコイド/シクロスポリン併用中は使用不可（PD-1遮断の機序を
+  打ち消す — ラベル除外）。相互作用レジストリに gilvetmab×プレドニゾロン/デキサメタゾン/
+  シクロスポリン=major を登録（併用チェッカーで1タップ検出）。猫は犬化抗体のため safe:False
+- **鑑別診断・相談チャットへの動線**: 犬メラノーマ・口腔メラノーマ・MCTの3エントリ（JSON、日英）に
+  ギルベトマブ行を追記 → 治療チップ（find_drugs_in_text解決検証済み）・逆引き「この薬品を使う疾患」
+  3疾患・相互作用チェッカー自然言語解決（ギルベトマブ/ぎるべとまぶ/gilvetmab）を全て検証
+- **UX**: `DISEASE_CALC_MAP` の腫瘍群BSAピボットに **メラノーマ** を追加（カルボプラチン300 mg/m²が
+  次のアクション — チェッカー結果/チャット候補カード/疾患DB詳細の既存4面レンダラーで自動発火）
+- **レビュー是正（Codex P1、一次資料で確認）**: 必須前投薬の欠落 — Merck gilvetmab FAQ は
+  **各点滴の15-30分前にジフェンヒドラミン 2 mg/kg IM**（腫瘍科医の事前経口処方でも可）＋
+  **点滴後1時間以上のモニタリング**を規定（インフュージョンリアクション/アナフィラキシー対策）。
+  モノグラフ（dosage/dosage_ja/notes 日英）と3疾患の治療文（日英6フィールド）の両方に追記、
+  回帰テスト `test_gilvetmab_diphenhydramine_premedication_documented` で固定
+- **レビュー是正 第2弾（Codex P1+P2）**:
+  - **P1 相互作用カバレッジの安全ギャップ**: チェッカーはID完全一致のため、登録済み3剤以外の
+    グルココルチコイド・免疫抑制薬（prednisone・メチルプレドニゾロン・トリアムシノロン・
+    アザチオプリン・ミコフェノール酸等）との併用が無警告だった → `drug_interactions.py` に
+    `GILVETMAB_GLUCOCORTICOID_IDS`（11剤）+ `GILVETMAB_IMMUNOSUPPRESSANT_IDS`（14剤 —
+    カルシニューリン/代謝拮抗/アルキル化/JAK/mTOR）をクラス単位で網羅登録（計25ペア=major）。
+    点眼剤（cyclosporine_ophthalmic 等）と純粋なミネラルコルチコイド（DOCP/フルドロコルチゾン=
+    アジソン生理的補充）は意図的に除外。回帰テストが「全IDの辞書実在＋全ペアmajor検出＋
+    除外の無警告維持」を固定（`test_gilvetmab_interaction_coverage_spans_all_immunosuppressant_ids`）
+  - **P2 併用の framing**: notes の「Combination options:」が未研究の併用を推奨と読めた —
+    Merck FAQ は他療法（化学療法・放射線・ワクチン等）との併用を**未研究**と明記 →
+    「併用は未研究 — 腫瘍科専門医の個別判断」に日英とも是正（口腔メラノーマJSONのOncept行も同様）
+  - **第3波 P1（綴り違い重複の取りこぼし）**: `ciclosporin_oral`（英式綴りの改良型経口アトピカ、
+    batch_19 — 列挙regex `cyclospor` が「ciclo」を取りこぼした）が独立IDで配信されており無警告
+    だった → カバレッジリストに追加（26ペア）。再発防止として**カテゴリ走査CIガード**を新設:
+    辞書の corticosteroid/immunosuppress カテゴリ全エントリが「カバレッジ登録 or 文書化済み除外
+    （点眼剤・IFN-ω=免疫賦活・hIVIG=単回Fc遮断・ダプソン=抗好中球・フザプラジブ=短期LFA-1）」の
+    どちらかに必ず分類されることを検証（`test_gilvetmab_coverage_tracks_dictionary_immunosuppressant_categories`）
+
+### 診断チャット精度 第39弾（24症例フレッシュスイープ 5 MISS → 全症例合格 + ガード4件）
+- **レガシー犬DBに顔面神経麻痺を新設**（95→96疾患、91→93症状）: 「片方の耳だけ下がって顔が歪んで
+  います」が**抽出ゼロ**だった — 片側性顔面下垂という定義的徴候に症状IDも疾患も無かった。
+  `facial_droop` 症状新設 + facial_nerve_paralysis エントリ（特発性が犬の最多原因 約75%・コッカー好発、
+  同定可能な原因は中耳炎・内耳炎と甲状腺機能低下 — Ettinger 8th; Rossmeisl 2010。瞬目不能→曝露性
+  角膜炎予防の人工涙液を治療の中心に記載）。**主訴ゲート設計**（missing_teethパターン: よだれ・頭部徴候は
+  歯科/前庭ddxの所有物のため症状セットは facial_droop のみ + 単独クラスタ×1.6）。
+  中耳炎・内耳炎の症状セットにも facial_droop を追加（顔面神経は中耳を走行 — Gotthelf）。
+  名称は dog モジュール「Facial Nerve Paralysis」と完全一致（疾患DBピボット着地）、
+  SPECIES_PREVALENCE dog に uncommon で登録
+- **エイリアス誤欠落の是正**: 顔が歪ん/顔がゆがん/顔が曲がっ/顔の片側が垂れ/まばたきができな→
+  facial_droop（_ID_SYNONYMS チェーン新設: 猫 facial_nerve_paralysis・ウサギ facial_drooping・
+  フェレット facial_asymmetry へ解決、非保有種は head_tilt で前庭ddxに安全着地。
+  _LEGACY_FALLBACK に ear_drooping→facial_droop）
+- **クッシング/甲状腺機能低下の飼い主表現が抽出不能だった**: 「太ってきて毛が薄くなりお腹が垂れて」→
+  weight_gain 症状をレガシーに新設し クッシング+甲状腺機能低下の症状セットに付与（古典的体重増加像 —
+  Ettinger）+ 語幹エイリアス（太ってき/体重が増え/毛が薄くな/お腹が垂れ→bloating=pot belly）
+- **触診介在形の跛行**: 「後ろ足を触ると痛がって」が「後ろ足を痛が」キーに不一致で抽出ゼロ
+  （緑内障/CDSが上位だった）→ 触ると介在形3キー → 膝蓋骨脱臼/肘形成不全/CCL top
+- **歯科疼痛の観察表現**: 「口を開けるのを嫌がってご飯を食べるのが遅い」が抽出ゼロ →
+  口を開けるのを嫌が/口を開けたがらな/食べるのが遅→difficulty_eating → 歯周病/歯根膿瘍 top
+- **ず形の残穴**: 「ご飯を食べず」（餌を食べず のみ収載だった）→ ウサギ「ご飯を食べず歯ぎしり」で
+  GI stasis パトグノモニック・ペアが発火し消化管うっ滞 rank 1
+- ガード検証: 祈りのポーズ→膵炎・皮膚科主訴→毛包虫/膿皮・チンチラ耳垂れ→中耳炎・
+  猫顔面歪み→猫顔面神経麻痺（ネイティブID）の非回帰を固定
+- **犬チェックボックス/問診経路のパリティ**（scooting/oral_mass と同型）: dog モジュールに
+  facial_droop 語彙（eyes_ears カテゴリ、69→70症状）+ Facial Nerve Paralysis の症状セットに追加 →
+  チェックボックスで顔面神経麻痺 rank 1・慢性中耳炎 rank 2
+
+### スマホ実機検証（Playwright 390px・実タッチ・7/7 合格）
+- 下部ナビ→薬品タブ→検索欄着地、ギルベトマブの薬品検索ヒット、種タップ→薬品フィルタ同期、
+  メラノーマ詳細→BSA計算機ピボット+ギルベトマブ治療行表示、チャットAPI→顔面神経麻痺95% rank 1
+- JSエラー 0（サンドボックスのプロキシ証明書による外部リソース1件のみ — 製品バグではない）
+
+### 回帰テスト（+13件）
+- `TestBatch70Gilvetmab`（3件 — ラベル用法・正直なエビデンス数値（20%/46%/偽性進行）・リンパ腫非適応・
+  免疫抑制薬ゲート（レジストリ3ペアmajor+猫safe:False）・マッチャー/リゾルバ解決+3疾患の動線）
+- `TestChatClinicalAccuracyAuditRound39`（10件 — 顔面神経麻痺rank1+中耳炎併記・dogモジュール名ミラー+
+  prevalenceキー・クッシング三徴・甲状腺機能低下・触診介在跛行・歯科観察表現・ウサギず形GIうっ滞・
+  猫ネイティブチェーン・チンチラ/祈りのポーズ/皮膚科ガード）
+
+### 表示数値の同期・キャッシュ
+- `setDefaultStats()`: dog 589/cat 566薬品、pendingStats drugs 648→**649**・symptoms 91→**93**
+- ServiceWorker: `CACHE_NAME` v169 → **v170**
+- 再現手順: `migrate_to_sqlite.py`（クリーンビルド 6,895疾患・649薬品）— 疾患名不変のため
+  検索インデックス no-op
+
+### mainの並行第63弾（PR #825: ブラベクト クオンタム）とのマージ統合
+- PR #825 のマージでPRがコンフリクト状態になり、**GitHub は pull_request イベントのCIランを一切作成しなくなっていた**
+  （約4時間CIが動かなかった真因 — ランナー枯渇ではない）。main をマージして解消:
+  - `drug_batch_70` は main（フルララネル徐放性注射剤）を維持し、本セッションのギルベトマブを **batch_71 に改番**
+    （テストも TestBatch71Gilvetmab に改名）。薬品数 **650**（648+2）
+  - `TestChatClinicalAccuracyAuditRound39` は main 側を維持し、本セッション分を **Round39Parallel** に改名
+  - `diseases_all_species.json` は1行JSONのため行単位では全体衝突 → 共通祖先に対する**フィールド単位3-wayマージ**
+    （本セッション6フィールド・main 15フィールドで真の衝突ゼロを検証）
+  - pendingStats drugs **650**・symptoms **93**、dog 590/cat 567薬品、ServiceWorker 両者 v170 → **v171**
+- レビュー是正（Codex P2×2）: 本PRで追加したレガシー犬フォールバック ear_drooping→facial_droop/head_tilting を撤去
+  — 耳介下垂は多くの犬種で正常な耳形で、顔面麻痺の定義的徴候でも頭位傾斜でもない（裸の「耳が垂れて」は何も推定しない）

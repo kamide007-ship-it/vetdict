@@ -94,6 +94,7 @@ from api.drug_batch_67 import DRUGS_BATCH_67
 from api.drug_batch_68 import DRUGS_BATCH_68
 from api.drug_batch_69 import DRUGS_BATCH_69
 from api.drug_batch_70 import DRUGS_BATCH_70
+from api.drug_batch_71 import DRUGS_BATCH_71
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10979,6 +10980,15 @@ for _drug70 in DRUGS_BATCH_70:
     if _drug70["id"] not in _drug_index:
         DRUGS.append(_drug70)
         _drug_index[_drug70["id"]] = _drug70
+
+# Batch 71 (2026-10: ギルベトマブ — 犬で初のUSDA条件付きライセンス
+#  チェックポイント阻害薬（抗PD-1犬化mAb、Merck）。MCT I-III・メラノーマ
+#  II-III。10 mg/kg IV 30分以上 q2w 最大10回。グルココルチコイド併用除外。
+#  JVIM 2026: メラノーマORR 20%/MCT ORR 46%。猫は safe:False)
+for _drug71 in DRUGS_BATCH_71:
+    if _drug71["id"] not in _drug_index:
+        DRUGS.append(_drug71)
+        _drug_index[_drug71["id"]] = _drug71
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

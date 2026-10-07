@@ -6791,3 +6791,185 @@ class TestChatClinicalAccuracyAuditRound39:
     def test_hamster_abdominal_lump_reaches_tumor_ddx(self):
         _, res = self._species("お腹にしこりがあって大きくなってきました", "hamster")
         assert len(res) >= 3, self._names(res)
+
+
+class TestChatClinicalAccuracyAuditRound39Parallel:
+    """2026-10 精度監査 第39弾: 顔面神経麻痺の語彙・疾患新設（レガシー犬 96疾患・
+    93症状）、クッシング三徴の飼い主表現（太ってきて/お腹が垂れて/毛が薄くなり）、
+    触診介在形の跛行（後ろ足を触ると痛がって）、歯科疼痛の観察表現、
+    ご飯を食べず（ず形）のウサギGIうっ滞接続。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    @staticmethod
+    def _names(results, n=6):
+        return [(r.get("name_ja") or r.get("name") or "") for r in results[:n]]
+
+    def test_stem_aliases_respect_conjugated_negation(self):
+        """語幹エイリアス（太ってき/お腹が垂れ/毛が薄くな）は〜ていない等の活用否定で発火しない。"""
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        for neg in (
+            "太ってきていない",
+            "お腹が垂れていない",
+            "毛が薄くなっていない",
+            "毛が薄くなってきていない",
+            "毛が薄くならない",
+            "太ってきてはいない",
+            "口を開けるのを嫌がらない",
+            "食べるのが遅くない",
+            "毛が薄くなかった",
+            "食べるのが遅くなかった",
+            "毛が薄くなりませんでした",
+            "太ってきていなかった",
+            "食べるのが遅くはない",
+            "食べるのが遅いわけではない",
+            "太ってきたわけではない",
+            "口を開けるのを嫌がるわけではない",
+            "太ってきたのではなく、毛量が増えただけです",
+            "毛が薄くなったのではなく、短く切っただけです",
+            "食べるのが遅いのではなく、少しずつ食べています",
+        ):
+            assert extract_symptoms_from_text(neg) == [], neg
+        got = set(extract_symptoms_from_text("太ってきて毛が薄くなりお腹が垂れて"))
+        assert {"weight_gain", "hair_loss", "bloating"} <= got
+        assert "vomiting" in extract_symptoms_from_text("吐いている")
+        assert extract_symptoms_from_text("吐いているわけではない") == []
+
+    def test_facial_distortion_not_converted_to_head_tilt(self):
+        """顔面の歪みは非保有種で head_tilt 等の別所見に置換しない。"""
+        from api.diagnostic_chat import _extract_species_symptoms
+
+        for sp in ("hamster", "guinea_pig", "chinchilla", "bird"):
+            assert "head_tilt" not in _extract_species_symptoms("顔が歪んでいます", sp), sp
+        assert "facial_drooping" in _extract_species_symptoms("顔が歪んでいます", "rabbit")
+
+    def test_bare_drooped_ear_is_not_promoted_to_facial_palsy(self):
+        """Codexレビュー P2: 耳介下垂は多くの犬種で正常な耳形であり、それ単独では
+        顔面神経麻痺の定義的徴候（片側の顔面・口唇・眼瞼の歪み/瞬目不能）ではない。
+        裸の「耳が垂れて」は facial_droop に昇格させず、耳・前庭ddxに着地させる。"""
+        ids, results = self._legacy("耳が垂れています")
+        assert "facial_droop" not in ids, ids
+        assert "顔面神経麻痺" not in self._names(results, 3), self._names(results, 3)
+        # Codex第2指摘: 耳介下垂は頭位傾斜（前庭徴候）でもない — 何の徴候も推定しない
+        assert "head_tilting" not in ids, ids
+        # 実際の頭位傾斜表現を伴えば前庭ddxに着地する
+        ids_tilt, _ = self._legacy("耳が垂れて首を傾けている")
+        assert "head_tilting" in ids_tilt, ids_tilt
+        # 定義的な非対称徴候を伴う主訴は従来どおり顔面神経麻痺 rank 1
+        for phrase in ("片方の耳だけ下がって顔が歪んでいます", "まばたきができない"):
+            ids2, results2 = self._legacy(phrase)
+            assert "facial_droop" in ids2, (phrase, ids2)
+            assert self._names(results2, 1)[0] == "顔面神経麻痺", (phrase, self._names(results2, 3))
+
+    def test_dog_facial_droop_ranks_facial_nerve_paralysis(self):
+        # 「片方の耳だけ下がって顔が歪んでいます」が抽出ゼロだった —
+        # facial_droop 新設 + 顔面神経麻痺エントリ（特発性が最多、Ettinger 8th）
+        ids, res = self._legacy("片方の耳だけ下がって顔が歪んでいます")
+        assert "facial_droop" in ids, ids
+        names = self._names(res, 3)
+        assert "顔面神経麻痺" in names[0], names
+        # 中耳炎・内耳炎（同定可能な主要原因）も鑑別リストに残る
+        assert any("中耳炎" in n for n in names), names
+
+    def test_dog_facial_paralysis_name_mirrors_dog_module(self):
+        # チャット候補カード「疾患DBで詳細を開く」ピボットの完全一致着地保証
+        from api.health_checker import DISEASES
+        from api.species.dog_diseases import DISEASES as DOG
+
+        legacy = next(d for d in DISEASES if d["id"] == "facial_nerve_paralysis")
+        dog_names = {(d.get("name") if isinstance(d, dict) else d.name) for d in DOG}
+        assert legacy["name_en"] in dog_names, legacy["name_en"]
+        # prevalence キーも配信名に解決（prior + チップ導線）
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        assert SPECIES_PREVALENCE["dog"].get("Facial Nerve Paralysis") == "uncommon"
+
+    def test_dog_cushing_triad_owner_phrasing_extracts_and_ranks(self):
+        # 「太ってきて毛が薄くなりお腹が垂れて」— weight_gain 語彙新設 +
+        # 語幹エイリアスでクッシング/甲状腺機能低下が上位に
+        ids, res = self._legacy("最近太ってきて毛が薄くなりお腹が垂れてきました")
+        assert {"weight_gain", "hair_loss", "bloating"} <= ids, ids
+        names = self._names(res, 4)
+        assert any("クッシング" in n for n in names), names
+
+    def test_dog_hypothyroid_weight_gain_lethargy(self):
+        # 体重増加+嗜眠+被毛不良 = 甲状腺機能低下の古典像（多食なし）
+        ids, res = self._legacy("食べる量は変わらないのに太ってきて元気がなく毛が薄くなりました")
+        assert "weight_gain" in ids, ids
+        names = self._names(res, 4)
+        assert any("甲状腺機能低下" in n for n in names), names
+
+    def test_dog_hindlimb_touch_pain_ranks_orthopedic(self):
+        # 触診介在形「後ろ足を触ると痛がって」が「後ろ足を痛が」キーに不一致で
+        # 抽出ゼロ → 緑内障/CDSが上位だった
+        ids, res = self._legacy("後ろ足を触ると痛がってキャンと鳴きます")
+        assert "limping" in ids, ids
+        names = self._names(res, 4)
+        assert any(("膝蓋骨" in n) or ("ヘルニア" in n) or ("靭帯" in n) or ("形成不全" in n) for n in names), names
+
+    def test_dog_slow_eating_mouth_aversion_ranks_dental(self):
+        # 「口を開けるのを嫌がってご飯を食べるのが遅い」が抽出ゼロだった
+        ids, res = self._legacy("口を開けるのを嫌がってご飯を食べるのが遅いです")
+        assert "difficulty_eating" in ids, ids
+        assert any("歯周" in n or "歯根" in n for n in self._names(res, 3)), self._names(res)
+
+    def test_rabbit_zu_form_anorexia_plus_bruxism_ranks_gi_stasis(self):
+        # 「ご飯を食べず」（ず形）が欠落し、歯ぎしり+食欲不振の GI stasis
+        # パトグノモニック・ペアが発火しなかった
+        ids, res = self._species("ご飯を食べず歯ぎしりをしてじっとしています", "rabbit")
+        assert "teeth_grinding" in ids, ids
+        assert any(x in ids for x in ("appetite_loss", "loss_of_appetite", "anorexia")), ids
+        assert "うっ滞" in self._names(res, 1)[0], self._names(res)
+
+    def test_cat_facial_droop_falls_back_to_native_paralysis_id(self):
+        # 猫は facial_nerve_paralysis をネイティブ保有 — チェーン解決の検証
+        ids, res = self._species("顔が歪んで片目のまばたきができません", "cat")
+        assert "facial_nerve_paralysis" in ids, ids
+        assert any("顔面神経麻痺" in n for n in self._names(res, 4)), self._names(res)
+
+    def test_guard_chinchilla_ear_droop_stays_otitis(self):
+        # チンチラの耳介下垂（ear_drooping 既存チェーン）は従来どおり中耳炎へ
+        ids, res = self._species("耳が垂れて元気がなく耳から臭いがします", "chinchilla")
+        assert "中耳炎" in self._names(res, 1)[0], self._names(res)
+
+    def test_guard_prayer_position_and_pruritus_unchanged(self):
+        # 既存の祈りのポーズ・皮膚科主訴ランキングの非回帰
+        ids, res = self._legacy("震えながら背中を丸めてじっとしています")
+        assert any("膵炎" in n for n in self._names(res, 5)), self._names(res)
+        ids2, res2 = self._legacy("皮膚が赤くて痒がって毛が抜けます")
+        names2 = self._names(res2, 3)
+        assert any("毛包虫" in n or "膿皮" in n for n in names2), names2
+
+    def test_dog_checkbox_parity_facial_droop(self):
+        # チェックボックス/問診経路にも facial_droop を追加（scooting/oral_mass
+        # パリティと同型）— dog モジュール語彙 + Facial Nerve Paralysis セット
+        from api.species.dog_diseases import (
+            SYMPTOM_CATEGORIES,
+            SYMPTOM_NAMES,
+            VALID_SYMPTOMS,
+            analyze_symptoms,
+        )
+
+        assert "facial_droop" in VALID_SYMPTOMS
+        assert "facial_droop" in SYMPTOM_NAMES
+        assert "facial_droop" in SYMPTOM_CATEGORIES["eyes_ears"]["symptoms"]
+        res = analyze_symptoms(["facial_droop", "ear_discharge"])
+        lst = res.get("suspected_diseases") if isinstance(res, dict) else res
+        lst = lst or (res.get("results") if isinstance(res, dict) else [])
+        names = [(d.get("name") or "") for d in lst[:3]]
+        assert any("Facial Nerve Paralysis" in n for n in names), names

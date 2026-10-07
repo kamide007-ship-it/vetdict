@@ -560,6 +560,17 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "stomatitis": ["oral_ulcers", "bad_breath", "excessive_drooling", "mouth_lesions", "mucus_in_mouth"],
     # チンチラ等の耳介下垂 — 中耳炎/外耳炎の随伴所見（2026-09 第25弾）
     "ear_drooping": ["head_tilt", "head_shaking", "ear_discharge"],
+    # 顔面神経麻痺の飼い主表現「顔が歪んで耳が下がっている」（2026-10 第39回）。
+    # 猫 facial_nerve_paralysis/ear_droop・ウサギ facial_drooping・フェレット
+    # facial_asymmetry へ解決する。非保有種では未マッチのまま（顔面の歪みを
+    # 頭位傾斜など別の身体所見に置き換えない）
+    "facial_droop": [
+        "facial_drooping",
+        "facial_nerve_paralysis",
+        "facial_asymmetry",
+        "ear_droop",
+        "ear_drooping",
+    ],
     # 猫の蹠行姿勢（かかと歩行 = 糖尿病性神経障害）。他種は後肢虚弱へ
     # 安全にフォールバック（2026-09 第26弾）
     "plantigrade_stance": ["hind_leg_weakness", "hind_limb_weakness", "weakness", "ataxia"],
@@ -768,11 +779,26 @@ _NEGATION_AFTER_RE = _neg_re.compile(
     r"(?:ない|無い|なし|ありません|出ていない|出てない|でていない"
     r"|していない|してない|しません|見られない|みられない)"
 )
+# 語幹キー（太ってき・お腹が垂れ・毛が薄くな 等）の直後に続く活用否定
+# （〜ていない・〜っていない・〜てきていない・〜ておらず）。語幹エイリアスは
+# 連用形の陽性主訴を拾うためのものなので、否定活用が続く場合は否定とみなす。
+_STEM_NEGATION_AFTER_RE = _neg_re.compile(
+    r"^(?:(?:なっ|っ)?[てで])?(?:き[てで])?(?:は|も)?[いお]?(?:ない|なかった|ません|らず)"
+    r"|^な?[らく](?:ない|なかった|ありません|ず)|^な?りません"
+    r"|^く[はも](?:ない|なかった|ありません)"
+    r"|^[ぁ-ゖ]{0,5}?わけ(?:では|じゃ)(?:ない|なかった|ありません)"
+    r"|^[ぁ-ゖ]{0,5}?[のん](?:では|じゃ)(?:なく|ない|なかった|ありません)"
+)
 
 
 def is_negated_mention(text: str, end: int) -> bool:
     """Return True if the symptom mention ending at ``end`` is directly negated."""
-    if not _NEGATION_AFTER_RE.match(text[end : end + 12]):
+    tail = text[end : end + 12]
+    # 「〜くな」で終わる語幹キー（毛が薄くな 等 = 〜くなる の語幹）に「かった」が
+    # 続く場合は形容詞の過去否定（毛が薄くなかった）。「食欲がなかった」のような
+    # 陽性の欠如表現と区別するため「くな」終端に限定する。
+    stem_past_neg = text[:end].endswith("くな") and tail.startswith("かった")
+    if not (_NEGATION_AFTER_RE.match(tail) or _STEM_NEGATION_AFTER_RE.match(tail) or stem_past_neg):
         return False
     # 「しか〜ない」構文は限定の肯定表現（「ポタポタとしか出ない」= 滴下排尿
     # という陽性症状）であり否定ではない。しか は必ず否定述語を要求するため、
