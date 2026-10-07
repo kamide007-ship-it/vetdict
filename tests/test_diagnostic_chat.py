@@ -6840,6 +6840,9 @@ class TestChatClinicalAccuracyAuditRound39Parallel:
             "食べるのが遅いわけではない",
             "太ってきたわけではない",
             "口を開けるのを嫌がるわけではない",
+            "太ってきたのではなく、毛量が増えただけです",
+            "毛が薄くなったのではなく、短く切っただけです",
+            "食べるのが遅いのではなく、少しずつ食べています",
         ):
             assert extract_symptoms_from_text(neg) == [], neg
         got = set(extract_symptoms_from_text("太ってきて毛が薄くなりお腹が垂れて"))
