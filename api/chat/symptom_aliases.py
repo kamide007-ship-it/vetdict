@@ -565,7 +565,9 @@ SYMPTOM_ALIASES = {
     "熱っぽい": "fever",
     "体が熱い": "fever",
     "触ると熱い": "fever",
-    "鼻が乾いてる": "fever",
+    # 「鼻が乾く＝発熱」は俗説（鼻の湿度は体温の指標にならない — 体温計測が必要）。
+    # 鼻鏡の乾燥・ガサガサは鼻平面の角化/痂皮所見として扱う（2026-10 第40回監査で是正）
+    "鼻が乾いてる": "crusting",
     "耳が熱い": "fever",
     # 行動
     "噛みつく": "aggression",
@@ -3063,6 +3065,70 @@ SYMPTOM_ALIASES = {
     "動きが鈍": "lethargy",
     "動きが悪": "lethargy",
     "あまり動かな": "lethargy",
+    # --- 2026-10 第64弾（精度監査 第40弾） ---
+    # 軟便の形容詞形（「軟便」「下痢」のみ収載で「便がゆるい」が抽出ゼロ）
+    "便がゆる": "diarrhea",
+    "便が緩": "diarrhea",
+    "うんちがゆる": "diarrhea",
+    "うんちが緩": "diarrhea",
+    "うんちがやわらか": "diarrhea",
+    "便がやわらか": "diarrhea",
+    "便が柔らか": "diarrhea",
+    # 吐物中の血（吐血）— 裸の「血が混じ」→血尿 に誤誘導されないよう最長一致で上書き
+    "毛玉に血が混じ": "vomiting",
+    "毛玉に血": "vomiting",
+    "吐いたものに血": "vomiting",
+    "吐いた物に血": "vomiting",
+    "吐物に血": "vomiting",
+    "吐いたものが赤": "vomiting",
+    "血を吐": "vomiting",
+    "吐血": "vomiting",
+    # 舌のチアノーゼの飼い主表現
+    "舌の色が悪": "cyanosis",
+    "舌の色がおかし": "cyanosis",
+    "舌の色が変": "cyanosis",
+    # 呼吸音（モルモット・ウサギの上気道/肺炎の主訴）
+    "呼吸の音が": "wheezing",
+    "呼吸音が": "wheezing",
+    "ゴロゴロと呼吸": "wheezing",
+    "呼吸がゴロゴロ": "wheezing",
+    "息がゴロゴロ": "wheezing",
+    "ブーブー音": "wheezing",
+    # ハリネズミ針脱落の語幹形（「針が抜ける」終止形のみ収載）
+    "針が抜け": "quill_loss",
+    "針がたくさん抜け": "quill_loss",
+    # セキセイのろう膜変色（雄の褐色化＝精巣腫瘍のエストロゲン性変化）
+    "鼻の色が茶色": "cere_color_change",
+    "鼻が茶色": "cere_color_change",
+    "鼻の色が変わ": "cere_color_change",
+    "ろう膜が茶色": "cere_color_change",
+    "ろう膜の色": "cere_color_change",
+    "ろう膜が変色": "cere_color_change",
+    # 鼻鏡の乾燥・角化（鼻平面角化症・DLE・天疱瘡・亜鉛反応性の主訴）
+    "鼻が乾": "crusting",
+    "鼻先がガサガサ": "crusting",
+    "鼻先がカサカサ": "crusting",
+    "鼻がガサガサ": "crusting",
+    "鼻がカサカサ": "crusting",
+    # ウサギ耳疥癬（Psoroptes cuniculi）の耳道内痂皮
+    "耳の中にかさぶた": "ear_crusting",
+    "耳の中がかさぶた": "ear_crusting",
+    "耳の中がガサガサ": "ear_crusting",
+    "耳の中が白いかさぶた": "ear_crusting",
+    # 両生類ツボカビ症の皮膚白濁（過剰脱皮片の付着）
+    "皮膚が白く濁": "excessive_shedding",
+    "皮膚が白っぽく濁": "excessive_shedding",
+    "皮が白く濁": "excessive_shedding",
+    "脱皮が多": "excessive_shedding",
+    "脱皮の回数が多": "excessive_shedding",
+    # 魚の鰭損傷（尾ぐされ病の代表的主訴）
+    "ひれがボロボロ": "frayed_fins",
+    "鰭がボロボロ": "frayed_fins",
+    "ひれが溶け": "frayed_fins",
+    "ヒレが溶け": "frayed_fins",
+    "ひれが裂け": "frayed_fins",
+    "ヒレが裂け": "frayed_fins",
+    "尾びれがボロボロ": "frayed_fins",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

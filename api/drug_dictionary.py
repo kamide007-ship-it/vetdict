@@ -95,6 +95,7 @@ from api.drug_batch_68 import DRUGS_BATCH_68
 from api.drug_batch_69 import DRUGS_BATCH_69
 from api.drug_batch_70 import DRUGS_BATCH_70
 from api.drug_batch_71 import DRUGS_BATCH_71
+from api.drug_batch_72 import DRUGS_BATCH_72
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10990,6 +10991,14 @@ for _drug71 in DRUGS_BATCH_71:
         DRUGS.append(_drug71)
         _drug_index[_drug71["id"]] = _drug71
 
+# Batch 72 (2026-10: クレデリオ クワトロ — ロチラネル+モキシデクチン+プラジカンテル+
+#  ピランテルの月1回経口4成分配合。FDA NADA 141-581。最低 20/0.02/5/5 mg/kg、
+#  8週齢以上・1.5 kg以上。猫は safe:False)
+for _drug72 in DRUGS_BATCH_72:
+    if _drug72["id"] not in _drug_index:
+        DRUGS.append(_drug72)
+        _drug_index[_drug72["id"]] = _drug72
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11622,6 +11631,9 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
         "αインターフェロン",
         "アルファインターフェロン",
     ),
+    # 2026-10: 単剤 Credelio の英語商品名を lotilaner に固定（4成分配合の
+    # Credelio Quattro の先頭語 tier3 が単剤参照を奪わないように）
+    "lotilaner": ("credelio",),
     "leuprolide": (
         "リュープロリド",
         # 2026-08 sweep #16: 治療文は ロイプロリド（20参照）/ リュープロライド（4参照）
