@@ -1673,6 +1673,7 @@ class TestQuickTapPhraseExtraction:
             "おしっこが白っぽくてドロドロしている",
             "お尻の周りに軟らかい便がつく",
             "お尻が汚れていて臭い",
+            "耳の中にかさぶたがある",
         ],
         "chinchilla": [
             "よだれが出る",
@@ -1732,6 +1733,7 @@ class TestQuickTapPhraseExtraction:
             "そのうが膨らんでいる",
             "お尻でいきんでいる",
             "くちばしが変形している",
+            "鼻の色が茶色くなった",
         ],
         "parrot": ["食べない", "自分で羽を抜く", "くしゃみ", "下痢", "元気がない", "吐き戻しが増えた"],
         "reptile": [
@@ -1778,6 +1780,7 @@ class TestQuickTapPhraseExtraction:
             "皮膚に白いもの",
             "元気がない",
             "浮かんだまま沈めない",
+            "皮膚が白く濁っている",
         ],
         "fish": [
             "体に白い点々",
@@ -6973,3 +6976,91 @@ class TestChatClinicalAccuracyAuditRound39Parallel:
         lst = lst or (res.get("results") if isinstance(res, dict) else [])
         names = [(d.get("name") or "") for d in lst[:3]]
         assert any("Facial Nerve Paralysis" in n for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound40:
+    """2026-10 精度監査 第40弾: 存在動詞「あります」・い形容詞＋です の丁寧語正規化、
+    吐血の血尿誤誘導是正、鼻乾燥＝発熱の俗説マッピング是正、軟便形容詞形、
+    ウサギ耳疥癬の耳道内痂皮、両生類ツボカビの皮膚白濁、魚の鰭損傷、
+    セキセイのろう膜変色、馬の角膜混濁・流涙・発熱（あります形）。"""
+
+    @staticmethod
+    def _sp(phrase, species, n=5):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        res = _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+        return set(ids), [r.get("name_ja") or r.get("name") or "" for r in res[:n]]
+
+    def test_polite_aru_and_i_adjective_desu_normalized(self):
+        from api.chat.symptom_extractor import normalize_chat_text as n
+
+        assert n("熱があります") == "熱がある"
+        assert n("しこりがありました") == "しこりがあった"
+        assert n("便がゆるいです") == "便がゆるい"
+        assert n("元気がなかったです") == "元気がなかった"
+        assert n("熱はありません") == "熱はない"
+
+    def test_horse_fever_polite_form_extracted(self):
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ids = _extract_equine_symptoms("鼻水と咳が出て熱があります")
+        assert "gen_fever" in ids
+        top = [r.get("name_ja") for r in _match_equine_symptoms_to_diseases(list(ids))[:3]]
+        assert any("インフルエンザ" in t or "腺疫" in t for t in top), top
+
+    def test_horse_corneal_opacity_and_tearing(self):
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ids = _extract_equine_symptoms("目が白く濁って涙が出ています")
+        assert {"eye_cloudiness", "eye_tearing"} <= set(ids)
+        top = [r.get("name_ja") for r in _match_equine_symptoms_to_diseases(list(ids))[:3]]
+        assert any("角膜" in t for t in top), top
+
+    def test_vomited_blood_not_misread_as_hematuria(self):
+        ids, top = self._sp("吐いた毛玉に血が混じります 食欲がない", "cat")
+        assert "vomiting" in ids and "bloody_urine" not in ids, ids
+        assert not any("尿" in t for t in top[:3]), top
+
+    def test_dry_nose_is_not_fever(self):
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        ids = extract_symptoms_from_text("鼻が乾いて鼻先がガサガサしています")
+        assert "fever" not in ids, ids
+        assert ids, "dry nasal planum should still yield a skin finding"
+
+    def test_loose_stool_adjective_form(self):
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        assert "diarrhea" in extract_symptoms_from_text("便がゆるくて粘液がついています")
+
+    def test_rabbit_ear_crusts_rank_ear_mites(self):
+        ids, top = self._sp("耳を痒がって耳の中にかさぶたがあります", "rabbit", n=2)
+        assert "ear_crusting" in ids
+        assert any("耳ダニ" in t or "耳疥癬" in t for t in top), top
+
+    def test_amphibian_cloudy_skin_ranks_chytrid(self):
+        ids, top = self._sp("皮膚が白く濁っています", "amphibian", n=2)
+        assert "excessive_shedding" in ids
+        assert any("ツボカビ" in t for t in top), top
+
+    def test_fish_frayed_fins_hiragana(self):
+        ids, top = self._sp("ひれがボロボロです", "fish", n=3)
+        assert "frayed_fins" in ids
+        assert any("尾ぐされ" in t for t in top), top
+
+    def test_parakeet_cere_color_change(self):
+        ids, top = self._sp("鼻の色が茶色くなりました", "parakeet", n=3)
+        assert "cere_color_change" in ids
+        assert any("精巣" in t or "蝋膜" in t for t in top), top
+
+    def test_hedgehog_quill_loss_stem_and_gp_noisy_breathing(self):
+        ids, _ = self._sp("針が抜けてフケが多いです", "hedgehog")
+        assert "quill_loss" in ids
+        ids, top = self._sp("ゴロゴロと呼吸の音がして鼻水が出ます", "guinea_pig")
+        assert "wheezing" in ids
+        assert any("肺炎" in t for t in top[:2]), top

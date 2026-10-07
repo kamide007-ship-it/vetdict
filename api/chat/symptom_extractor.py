@@ -651,6 +651,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # かさぶた ("かさぶたがある" alias resolves to crusting, which the dog
     # vocabulary lacks — bridge to the lesion IDs so crusting complaints reach
     # zinc-responsive dermatosis and pyoderma).
+    # 耳道内痂皮（ウサギ耳疥癬のネイティブID）— 非保有種は耳分泌物・耳掻痒へ（2026-10 第40回）
+    "ear_crusting": ["ear_discharge", "ear_scratching", "scratching_ears", "crusting", "skin_lesions"],
     "crusting": ["crusty_skin", "skin_crusting", "skin_lesions", "skin_rashes"],
     # Scaly-face mite (Knemidokoptes) complaints — parakeet carries the
     # specific IDs; bird/parrot fall back to their facial-lesion IDs.
@@ -831,6 +833,11 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     ("できません", "できない"),
     ("ありません", "ない"),
     ("ありました", "あった"),
+    # ある（存在動詞・非活用ゆれなし: 熱があります→熱がある、しこりがあります→しこりがある）
+    ("あります", "ある"),
+    # い形容詞＋です（便がゆるいです→ゆるい、痛いです→痛い。「〜ないです」も「〜ない」で正しい）
+    ("かったです", "かった"),
+    ("いです", "い"),
     # 〜まる五段動詞（止まりません→止まらない 等、〜まる動詞で常に正しい）
     ("まりません", "まらない"),
     # 治る（五段）: かさぶたが治りません → 治らない（non_healing_wound キー群）

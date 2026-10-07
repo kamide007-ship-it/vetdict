@@ -2144,3 +2144,12 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
 @keyframes coach-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
 @media (prefers-reduced-motion: reduce){.first-visit-coach-arrow{animation:none}}
 @media (max-width:600px){.first-visit-coach{margin:0 12px 12px;font-size:.8rem;padding:9px 12px}}
+
+/* 2026-10: スマホのクイック入力チップ — 種によっては12件超で縦に何行も折り返し、
+   チップ自体も約22pxでタップしにくかった。2段の横スクロール帯にまとめ、
+   タップ目標を36px以上に（スクロールでき続きがあることを右端フェードで示す）。 */
+@media(max-width:600px){
+.quick-sym-row{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding:2px 24px 6px 0;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,#000 85%,transparent);mask-image:linear-gradient(to right,#000 85%,transparent)}
+.quick-sym-row::-webkit-scrollbar{display:none}
+.quick-sym-row .quick-sym-btn{margin:0!important;min-height:36px;padding:6px 12px!important;white-space:nowrap;scroll-snap-align:start;font-size:.8rem!important}
+}

@@ -712,6 +712,10 @@ SPECIES_PREVALENCE = {
         "Equine Protozoal Myeloencephalitis": "uncommon",  # Americas; JP override rare
         "West Nile Encephalitis": "uncommon",  # JP override rare
         "Rhodococcus equi Pneumonia (Foal)": "uncommon",  # Endemic farms
+        # モジュール正準名（括弧なし）— 旧キーは配信名のみ一致しチャット経路で prior 不発だった
+        "Rhodococcus equi Pneumonia": "uncommon",  # 1-6ヶ月齢子馬限定（Giguère 2011 ACVIM）
+        # 若齢馬で正常〜軽度所見（Raker 1983 Grade I-II）。発熱主訴の原因疾患ではない
+        "Pharyngeal Lymphoid Hyperplasia": "uncommon",
         "Neonatal Septicemia": "uncommon",
         "Fracture": "uncommon",
         "Lymphangitis": "uncommon",

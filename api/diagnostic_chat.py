@@ -512,6 +512,12 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "tearing": "eye_tearing",
     "涙目": "eye_tearing",
     "流涙": "eye_tearing",
+    "涙が出": "eye_tearing",
+    "涙がたくさん": "eye_tearing",
+    "目が白く濁": "eye_cloudiness",
+    "目が濁": "eye_cloudiness",
+    "目が白っぽ": "eye_cloudiness",
+    "角膜が白": "eye_cloudiness",
     "涙が多い": "eye_tearing",
     "cloudy eye": "eye_cloudiness",
     "目が白い": "eye_cloudiness",
@@ -837,6 +843,8 @@ def extract_symptoms_from_text(text: str) -> list:
         # legacy dog vocabulary carries skin redness/rash as skin_rashes —
         # without this bridge the pruritic-dermatitis complaint lost a symptom.
         "skin_lesions": ["skin_rashes"],
+        # 鼻鏡・皮膚の痂皮（鼻が乾いてガサガサ等 — 2026-10 第40回）
+        "crusting": ["skin_lesions", "skin_rashes"],
         # "背中を丸めて" resolves to hunched_posture (pain posture); the legacy
         # dog vocabulary expresses guarded/painful posture as reluctance_to_move
         # (IVDD's classic presentation alongside tremors).

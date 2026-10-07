@@ -4740,3 +4740,42 @@ class TestBatch71Gilvetmab:
         for d in DRUGS:
             if d.get("category") in ("antineoplastic", "antineoplastics") and d["id"] not in exempt:
                 assert find_interactions(["gilvetmab", d["id"]]), d["id"]
+
+
+class TestBatch72CredelioQuattro:
+    def test_monograph_label_doses_and_gates(self):
+        from api.drug_dictionary import DRUGS
+
+        d = next(x for x in DRUGS if x["id"] == "credelio_quattro")
+        dog = d["species_info"]["dog"]
+        assert dog["safe"] is True
+        for frag in ("20 mg/kg", "0.02 mg/kg", "5 mg/kg", "8 weeks", "1.5 kg"):
+            assert frag in dog["dosage"], frag
+        assert "20 mg/kg" in dog["dosage_ja"] and "8週齢" in dog["dosage_ja"]
+        assert d["species_info"]["cat"]["safe"] is False
+        assert "seizure" in d["contraindications"].lower()
+        assert "NADA 141-581" in " ".join(d["references"])
+
+    def test_resolution_does_not_steal_single_agent_credelio(self):
+        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+
+        assert [x["id"] for x in find_drugs_in_text("クレデリオ（ロチラネル）月1回")] == ["lotilaner"]
+        assert [x["id"] for x in find_drugs_in_text("Credelio (lotilaner) monthly")] == ["lotilaner"]
+        assert "credelio_quattro" in [x["id"] for x in find_drugs_in_text("クレデリオクワトロを月1回")]
+        assert resolve_drug_reference("くれでりおくわとろ") == "credelio_quattro"
+
+    def test_dog_tapeworm_entry_links_combination(self):
+        import json
+        from pathlib import Path
+
+        from api.drug_dictionary import find_drugs_in_text
+
+        data = json.loads(Path("diseases_all_species.json").read_text(encoding="utf-8"))
+        e = next(
+            x
+            for x in data
+            if x.get("name") == "Tapeworm Infection (Dipylidium/Echinococcus)" and x.get("species") in ("Dog", "dog")
+        )
+        assert "同定された寄生虫に応じた適切な駆虫薬" not in e["treatment_ja"]
+        assert "credelio_quattro" in [x["id"] for x in find_drugs_in_text(e["treatment_ja"])]
+        assert "praziquantel" in [x["id"] for x in find_drugs_in_text(e["treatment_ja"])]
