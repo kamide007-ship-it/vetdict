@@ -517,7 +517,11 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "cheek_swelling": ["bloating", "cheek_pouch_prolapse", "facial_swelling"],
     "cheek_pouch_prolapse": ["cheek_swelling"],
     "jaw_swelling": ["facial_swelling", "swelling"],
-    "abscess": ["discharge", "swelling"],
+    "abscess": ["draining_wound", "discharge", "swelling"],
+    # 2026-10 第41回監査: 新規抽出IDの種フォールバック
+    "chin_swelling": ["crusting", "skin_lesions", "skin_rashes"],
+    "black_tarry_stool": ["tarry_stool", "melena", "blood_in_stool", "bloody_stool"],
+    "white_deposits_on_joints": ["gout_deposits", "joint_swelling", "swollen_joints", "lameness"],
     "overgrown_teeth": [
         "dental_overgrowth",
         "incisor_overgrowth",
@@ -924,7 +928,7 @@ _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
 #   口をずっと開け → open_mouth_breathing（(?<!口) で保護）
 _ADVERB_STRIP = _neg_re.compile(
     r"(が|を|も|は)"
-    r"(?:急に|突然|パンパンに|自分で|とても|かなり"
+    r"(?:急に|突然|パンパンに|自分で|とても|かなり|何日も|何日間も|数日間?"
     r"|(?<!食欲が)(?<!食欲を)(?<!食欲も)(?<!食欲は)すごく"
     r"|いつも(?!と違)"
     r"|(?<!口が)(?<!口を)(?<!口も)(?<!口は)ずっと)"

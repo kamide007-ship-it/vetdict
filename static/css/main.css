@@ -1175,7 +1175,7 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .species-card .icon{font-size:1.8rem}
   .sponsor-banner-inner{flex-direction:column;align-items:flex-start}
   .scroll-top{bottom:72px;right:16px;width:38px;height:38px}
-  .chat-container{height:calc(100dvh - 340px);min-height:280px;max-height:460px}
+  .chat-container{height:calc(100dvh - 240px);min-height:320px;max-height:680px}
   #chatGuidedContainer{height:calc(100dvh - 340px);min-height:320px;max-height:500px}
   .guided-actions{max-height:260px;padding:6px}
   .guided-category-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px}

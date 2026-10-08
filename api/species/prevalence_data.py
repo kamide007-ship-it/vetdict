@@ -795,6 +795,10 @@ SPECIES_PREVALENCE = {
         # Carpenter 4th）— 未tierのまま湿潤性皮膚病変でハエウジ症（時間単位の
         # 救急）より上位に出ていた
         "Demodex Mange": "rare",
+        # 2026-10 第41回監査: 未tierの稀な皮膚疾患が掻痒+フケ主訴でツメダニ症を
+        # 抑圧していた（ウサギのデルマトフィルス症・ムコール症は症例報告レベル）
+        "Dermatophilosis": "rare",
+        "Mucormycosis": "rare",
         "Coccidiosis (Intestinal)": "very_common",
         "Hepatic Coccidiosis": "very_common",
         "Otitis Externa": "very_common",

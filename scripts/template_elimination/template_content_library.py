@@ -74,8 +74,16 @@ def _reptile_supportive(species: str) -> str:
     )
 
 
+SHOCK_FLUID_JA = {
+    "dog": "輸液（晶質液 維持量 約60 mL/kg/日 IV、ショック時は 10-20 mL/kg を15分でボーラスし灌流指標で再評価を反復 — AAHA/AAFP 2013）、",
+    "cat": "輸液（晶質液 維持量 約40-60 mL/kg/日 IV、ショック時は 5-10 mL/kg を15分でボーラスし再評価を反復 — 猫は容量過負荷・胸水に注意、AAHA/AAFP 2013）、",
+}
+
+
 def _dogcat_supportive(species: str) -> str:
-    base = "支持療法: 輸液（晶質液 60-80 mL/kg/日 IV、ショック時 90 mL/kg初期ボーラス）、酸素化、栄養管理、疼痛管理。"
+    # ショック蘇生は「全血液量ボーラス（90 mL/kg）」ではなく少量反復ボーラス＋再評価が
+    # 現行標準（AAHA/AAFP Fluid Therapy Guidelines 2013）。猫は容量過負荷に特に脆弱。
+    base = "支持療法: " + SHOCK_FLUID_JA.get(species, SHOCK_FLUID_JA["dog"]) + "酸素化、栄養管理、疼痛管理。"
     if species == "cat":
         base += "ブプレノルフィン 0.02-0.03 mg/kg IM/OTM q6-8h で疼痛管理（オピオイド過剰反応に注意）。"
     else:

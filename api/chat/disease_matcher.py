@@ -460,6 +460,17 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # Exot Anim Pract 2002). Salpingitis/chronic-egg-laying entries otherwise
     # outranked the dystocia entry on coverage for the single defining sign.
     ("bird", frozenset({"egg_binding"}), "Egg Binding (Dystocia)", 1.45),
+    # White periarticular tophi on the feet are articular gout itself
+    # (urate deposition — Ritchie & Harrison, Avian Medicine). A co-extracted
+    # generic "swelling" otherwise pulled periorbital abscess/xanthoma above
+    # the gout entry (2026-10 round-41).
+    ("bird", frozenset({"white_deposits_on_joints"}), "Articular Gout", 1.45),
+    # Pruritic dorsal scaling ("walking dandruff") in a rabbit is
+    # Cheyletiella until proven otherwise; rabbit dermatophytosis is usually
+    # minimally pruritic (Harcourt-Brown, Textbook of Rabbit Medicine;
+    # Quesenberry & Carpenter 4th ed). 2026-10 round-41.
+    ("rabbit", frozenset({"dandruff", "itching"}), "Fur Mites (Cheyletiella parasitovorax)", 1.3),
+    ("rabbit", frozenset({"dandruff", "itching"}), "Cheyletiella Mange (Fur Mites)", 1.3),
     # Unilateral persistent cheek swelling in a hamster is cheek-pouch disease
     # (impaction/abscess) until proven otherwise (Quesenberry & Carpenter
     # 4th ed) — a co-extracted generic distension ID otherwise diluted

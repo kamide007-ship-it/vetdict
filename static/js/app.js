@@ -1746,8 +1746,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:591,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:567,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:593,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:569,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1771,7 +1771,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6457,
     species:21,
-    drugs:651,
+    drugs:653,
     symptoms:93,
     protocols:188
   };
@@ -5521,7 +5521,10 @@ function sendChatMessage(isRetry){
   fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})},20000)
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
-    clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn){sendBtn.disabled=false;sendBtn.removeAttribute("aria-busy");}input.focus();
+    clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn){sendBtn.disabled=false;sendBtn.removeAttribute("aria-busy");}
+    /* タッチ端末では回答後に入力欄へ再フォーカスしない — キーボードが回答を覆い、
+       ページが入力欄位置へ引き戻されて鑑別候補が画面外に残っていた（2026-10 第65弾） */
+    if(!_isTouchUI())input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
     if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
@@ -5550,6 +5553,22 @@ function sendChatMessage(isRetry){
     }
     msgs.appendChild(errDiv);msgs.scrollTop=msgs.scrollHeight;
   });
+}
+
+/* 長い回答（鑑別候補カード等）は最下部ではなく回答の先頭に着地させる — スマホで
+   最下部（免責文）に着地すると1位候補を読むために毎回スクロールで戻る必要があった。
+   短い回答は従来どおり最下部（会話の流れを維持）。2026-10 第65弾。 */
+function _isTouchUI(){try{return window.matchMedia("(pointer:coarse)").matches;}catch(e){return false;}}
+function _revealChatMsg(container,el){
+  if(!container||!el)return;
+  /* 直前のタブ切替の settle ウォッチャー（最長12秒）が回答描画後もページを旧アンカーへ
+     引き戻していた（実測: 回答直後に+338px移動）— 回答の着地を優先して解放する */
+  if(_anchorWatchRelease)_anchorWatchRelease();
+  const tall=el.offsetHeight>container.clientHeight*0.6;
+  if(!tall){container.scrollTop=container.scrollHeight;return;}
+  const top=el.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-8;
+  container.scrollTop=Math.max(0,top);
+  el.dataset.revealedTop="1";
 }
 
 function renderChatResult(container,data){
@@ -5807,7 +5826,7 @@ function renderChatResult(container,data){
   wrapper.appendChild(disc);
 
   container.appendChild(wrapper);
-  container.scrollTop=container.scrollHeight;
+  _revealChatMsg(container,wrapper);
 }
 
 function addChatMsg(text,type){
@@ -5876,7 +5895,7 @@ function guidedAddMsg(html,type){
   div.className=`chat-msg ${type||"bot"}`;
   div.innerHTML=html;
   msgs.appendChild(div);
-  msgs.scrollTop=msgs.scrollHeight;
+  if(type==="user")msgs.scrollTop=msgs.scrollHeight;else _revealChatMsg(msgs,div);
 }
 
 function guidedSetActions(html){
@@ -5884,7 +5903,8 @@ function guidedSetActions(html){
   if(!actions)return;
   actions.innerHTML=html;
   const msgs=document.getElementById("guidedMessages");
-  if(msgs)msgs.scrollTop=msgs.scrollHeight;
+  const last=msgs&&msgs.lastElementChild;
+  if(msgs&&!(last&&last.dataset.revealedTop))msgs.scrollTop=msgs.scrollHeight;
 }
 
 var _guidedFetching=false;

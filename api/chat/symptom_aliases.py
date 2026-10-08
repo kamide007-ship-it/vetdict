@@ -3129,6 +3129,89 @@ SYMPTOM_ALIASES = {
     "ひれが裂け": "frayed_fins",
     "ヒレが裂け": "frayed_fins",
     "尾びれがボロボロ": "frayed_fins",
+    # 2026-10 第41回監査: 臨床相談チャットの抽出ゼロ/劣化主訴の補完
+    # 犬GDV — 「何度も吐こうとして」（吐けない明記なしの空嘔吐試行）
+    "何度も吐こうと": "unproductive_retching",
+    "吐こうとしてい": "unproductive_retching",
+    # 肛門嚢 — 「床に」位置修飾形（「地面に」形のみ収載だった）
+    "お尻を床にこすり": "scooting",
+    "おしりを床にこすり": "scooting",
+    "お尻をすりつけ": "scooting",
+    # 犬の後肢固有感覚障害（ナックリング・交差歩様 — IVDD/DMの古典的観察）
+    "後ろ足を交差": "hind_leg_weakness",
+    "後ろ足が交差": "hind_leg_weakness",
+    "足の甲を地面に": "hind_leg_weakness",
+    "ナックリング": "hind_leg_weakness",
+    # 急性有痛性眼（充血・眼瞼痙攣）の副詞介在形
+    "充血して": "redness_in_eyes",
+    "目を閉じて": "squinting",
+    "目をつぶって": "squinting",
+    "目を開けられ": "squinting",
+    "痛そうに目": "pain",
+    # 猫の過剰グルーミング（心因性脱毛/アレルギー）— 「舐めすぎ」形
+    "舐めすぎて": "excessive_grooming",
+    "なめすぎて": "excessive_grooming",
+    "舐めすぎる": "excessive_grooming",
+    "なめすぎる": "excessive_grooming",
+    "毛がなくなっ": "hair_loss",
+    "毛がなくなり": "hair_loss",
+    "毛が無くなっ": "hair_loss",
+    # 多飲の量表現
+    "水を大量に": "excessive_thirst",
+    "大量に水を": "excessive_thirst",
+    # ウサギ等の足底脱毛（ソアホック初期）
+    "足の裏がはげ": "foot_sores",
+    "足の裏の毛がな": "foot_sores",
+    "かかとがはげ": "foot_sores",
+    # 鳥のそのう腫脹
+    "そのうが腫れ": "crop_distension",
+    "嗉嚢が腫れ": "crop_distension",
+    "そ嚢が腫れ": "crop_distension",
+    # 犬猫の排尿痛（dysuria）— 「おしっこをするときに痛がる」形
+    "おしっこをするときに痛": "straining_to_urinate",
+    "おしっこの時に痛": "straining_to_urinate",
+    "おしっこのときに痛": "straining_to_urinate",
+    "排尿時に痛": "straining_to_urinate",
+    "排尿のときに痛": "straining_to_urinate",
+    # 膿瘍の排膿（語幹形 — 「膿が出てる」のみ収載だった）
+    "膿が出て": "abscess",
+    "膿が出る": "abscess",
+    "膿が出た": "abscess",
+    # 猫ざ瘡（下顎の面皰 — 猫で最頻の顎部皮膚病変）
+    "下顎に黒い": "chin_swelling",
+    "あごに黒い": "chin_swelling",
+    "顎に黒い": "chin_swelling",
+    "あごの下に黒い": "chin_swelling",
+    "あごにぶつぶつ": "chin_swelling",
+    "あごにブツブツ": "chin_swelling",
+    # 猫尾腺過形成（スタッドテイル）の皮脂過剰
+    "しっぽの付け根がべたべた": "greasy_coat",
+    "しっぽの付け根がベタベタ": "greasy_coat",
+    "尻尾の付け根がべたべた": "greasy_coat",
+    "尻尾の付け根がベタベタ": "greasy_coat",
+    "尾の付け根がべたべた": "greasy_coat",
+    "毛がべたべた": "greasy_coat",
+    "毛がベタベタ": "greasy_coat",
+    # ウサギ鼓脹の飼い主表現
+    "ガスがたまっ": "bloating",
+    "ガスが溜まっ": "bloating",
+    # フェレット等のメレナ（タール便）
+    "タール状": "black_tarry_stool",
+    "タールのような": "black_tarry_stool",
+    "真っ黒な便": "black_tarry_stool",
+    "便が真っ黒": "black_tarry_stool",
+    # 鳥の関節痛風（痛風結節 — 白色沈着）
+    "足に白い塊": "white_deposits_on_joints",
+    "足に白いかたまり": "white_deposits_on_joints",
+    "関節に白い": "white_deposits_on_joints",
+    "足の関節が白": "white_deposits_on_joints",
+    # セキセイ疥癬の「〜が」助詞形
+    "くちばしの周りがかさぶた": "crusty_beak",
+    "くちばしの周りがガサガサ": "crusty_beak",
+    "くちばしがガサガサ": "crusty_beak",
+    # 爬虫類の総排泄腔脱（「何か」介在形）
+    "お尻から何か赤": "rectal_prolapse",
+    "総排泄腔から何か": "rectal_prolapse",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

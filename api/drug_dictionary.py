@@ -96,6 +96,7 @@ from api.drug_batch_69 import DRUGS_BATCH_69
 from api.drug_batch_70 import DRUGS_BATCH_70
 from api.drug_batch_71 import DRUGS_BATCH_71
 from api.drug_batch_72 import DRUGS_BATCH_72
+from api.drug_batch_73 import DRUGS_BATCH_73
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10998,6 +10999,14 @@ for _drug72 in DRUGS_BATCH_72:
     if _drug72["id"] not in _drug_index:
         DRUGS.append(_drug72)
         _drug_index[_drug72["id"]] = _drug72
+
+# Batch 73 (2026-10: アチンビシチニブ（ヌメルビ）— 犬アレルギー性掻痒の第二世代JAK1選択的
+#  阻害薬 0.8-1.2 mg/kg q24h（FDA 2026/EU 2025）、レルフォベトマブ（ポルテラ）— 猫OA疼痛の
+#  3ヶ月間隔抗NGF抗体（EU/カナダ/英国）。いずれも国内未承認）
+for _drug73 in DRUGS_BATCH_73:
+    if _drug73["id"] not in _drug_index:
+        DRUGS.append(_drug73)
+        _drug_index[_drug73["id"]] = _drug73
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
