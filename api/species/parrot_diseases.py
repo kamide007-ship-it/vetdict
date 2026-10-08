@@ -869,7 +869,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["uric acid level", "radiographs", "joint aspirate", "renal panel"],
         "treatment": "Appropriate medical or surgical intervention based on diagnosis, supportive care with IV fluids as needed, pain management, nutritional support, and regular monitoring of treatment response.",
-        "treatment_ja": "【オウムにおける痛風（関節型・内臓型）】\n痛風（関節型・内臓型）に対し、画像（X線2方向、必要に応じCT）で病変を評価。安静期間 4-8週を厳守。\n鎮痛: メロキシカム 0.2-0.5 mg/kg PO q24h（小型哺乳類）または0.1-0.2 mg/kg q24h（馬は1.7 mg/kg q24h）。\n骨折・脱臼: 整復＋ プレート・ピン・外固定。種別の骨密度・体重・関節構造に応じて選択。\nリハビリテーション: 受動的可動域訓練、水中歩行、リハビリ用機材導入でオウムの機能回復を加速。\n支持療法（鳥類）: 保温28-30℃（重症は30-32℃）、皮下/骨内輸液 50-100 mL/kg/日 （温乳酸リンゲルまたはノルモソルR）、強制給餌（Emeraid Omnivore/Carnivoreなど 20-30 mL/kg q4-6h）、酸素分圧40%以下を維持しつつ呼吸補助。\n【鑑別と経過観察】類似症候を呈する疾患の除外と、治療4-8週後の再評価が予後改善の鍵。重症度・併発症によってはオウムの専門医紹介を考慮する。",
+        "treatment_ja": "【オウムにおける痛風（関節型・内臓型）】\n痛風（関節型・内臓型）に対し、画像（X線2方向、必要に応じCT）で病変を評価。安静期間 4-8週を厳守。\n鎮痛: メロキシカム 1.0-1.6 mg/kg PO q12-24h（オウム類の薬物動態 — Cole 2009; Carpenter 6th）。\n骨折・脱臼: 整復＋ プレート・ピン・外固定。種別の骨密度・体重・関節構造に応じて選択。\nリハビリテーション: 受動的可動域訓練、水中歩行、リハビリ用機材導入でオウムの機能回復を加速。\n支持療法（鳥類）: 保温28-30℃（重症は30-32℃）、皮下/骨内輸液 50-100 mL/kg/日 （温乳酸リンゲルまたはノルモソルR）、強制給餌（Emeraid Omnivore/Carnivoreなど 20-30 mL/kg q4-6h）、酸素分圧40%以下を維持しつつ呼吸補助。\n【鑑別と経過観察】類似症候を呈する疾患の除外と、治療4-8週後の再評価が予後改善の鍵。重症度・併発症によってはオウムの専門医紹介を考慮する。",
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
         "onset_pattern": {"chronic"},

@@ -838,7 +838,7 @@ DISEASES: List[Dict[str, Any]] = [
         "(4) Secondary infection management — cephalexin 22-30 mg/kg PO BID for Staphylococcus pyoderma; itraconazole 5 mg/kg PO SID for Malassezia dermatitis. "
         "(5) Allergen-specific immunotherapy (ASIT) — sole disease-modifying therapy (60-70% success rate, requires 6-12 months for full effect). "
         "Elimination diet trial (8-12 weeks, novel protein or hydrolyzed) to rule out food allergy (30% comorbidity).",
-        "treatment_ja": "犬犬アトピー性皮膚炎（CAD）: 原因（感染・アレルギー・寄生虫・自己免疫・内分泌）特定が治療方針を決定。① 検査: 培養（細菌・真菌）、皮膚生検、寄生虫検査、内分泌・CBC・生化学。② 局所: 患部洗浄（0.05%クロルヘキシジン q12h）、外用抗菌・抗真菌軟膏、保護包帯。③ 全身抗菌薬（感染時）: 培養感受性で選択—エンロフロキサシン 5-15 mg/kg PO/IM q12-24h、アモキシシリン/クラブラン酸 12.5-25 mg/kg PO q12h（草食種除く）、最低3-4週。④ 抗炎症: 短期プレドニゾロン 0.5-1 mg/kg PO q24h × 5-7日（必要時）、ω3脂肪酸補充。⑤ 自傷防止のエリザベスカラー、環境整備（湿度・清潔）、栄養改善。支持療法: 輸液（晶質液 60-80 mL/kg/日 IV、ショック時 90 mL/kg初期ボーラス）、酸素化、栄養管理、疼痛管理。メサドン 0.1-0.5 mg/kg IM/IV q4-6h またはブプレノルフィン 0.01-0.02 mg/kg IM q6-8h。"
+        "treatment_ja": "犬犬アトピー性皮膚炎（CAD）: 原因（感染・アレルギー・寄生虫・自己免疫・内分泌）特定が治療方針を決定。① 検査: 培養（細菌・真菌）、皮膚生検、寄生虫検査、内分泌・CBC・生化学。② 局所: 患部洗浄（0.05%クロルヘキシジン q12h）、外用抗菌・抗真菌軟膏、保護包帯。③ 全身抗菌薬（感染時）: 培養感受性で選択—エンロフロキサシン 5-15 mg/kg PO/IM q12-24h、アモキシシリン/クラブラン酸 12.5-25 mg/kg PO q12h（草食種除く）、最低3-4週。④ 抗炎症: 短期プレドニゾロン 0.5-1 mg/kg PO q24h × 5-7日（必要時）、ω3脂肪酸補充。⑤ 自傷防止のエリザベスカラー、環境整備（湿度・清潔）、栄養改善。支持療法: 輸液（晶質液 維持量 約60 mL/kg/日 IV、ショック時は 10-20 mL/kg を15分でボーラスし灌流指標で再評価を反復 — AAHA/AAFP 2013）、酸素化、栄養管理、疼痛管理。メサドン 0.1-0.5 mg/kg IM/IV q4-6h またはブプレノルフィン 0.01-0.02 mg/kg IM q6-8h。"
         "(2)薬物療法—オクラシチニブ（アポキル0.4〜0.6mg/kg BID→SID）、"
         "ロキベトマブ（サイトポイント2mg/kg SC月1回）が第一選択。重症急性期のみ短期プレドニゾロン。"
         "(3)スキンケア—セラミド配合シャンプー・保湿（週1〜2回）、"

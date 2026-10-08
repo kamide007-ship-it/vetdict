@@ -4859,6 +4859,11 @@ _PATHOGNOMONIC_CLUSTERS = [
     # purulent discharge below the eye is a tooth-root abscess until proven
     # otherwise in dogs (Niemiec, BSAVA Dental Manual).
     (frozenset({"facial_swelling", "eye_discharge"}), "tooth_root_abscess", 1.5),
+    # Conjunctivitis: red eye + ocular discharge without facial swelling is
+    # the bread-and-butter conjunctivitis complaint (Maggs, Slatter's 6th ed);
+    # the 5-sign entry was otherwise out-scored on coverage by 2-sign eyelid
+    # conformation entries (entropion/ectropion). 2026-10 第41回監査で追加。
+    (frozenset({"redness_in_eyes", "eye_discharge"}), "conjunctivitis", 1.4),
     # GDV: bloating + excessive drooling + rapid breathing
     (frozenset({"bloating", "excessive_drooling", "rapid_breathing"}), "gdv_bloat", 2.0),
     (frozenset({"bloating", "excessive_drooling", "pale_gums"}), "gdv_bloat", 2.0),

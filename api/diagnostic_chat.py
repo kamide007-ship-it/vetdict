@@ -320,6 +320,8 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "前足を痛が": "limb_lameness_fore",
     "前脚を痛が": "limb_lameness_fore",
     "後ろ足を痛が": "limb_lameness_hind",
+    "後ろ足を引きずっ": "limb_lameness_hind",
+    "後ろ脚を引きずっ": "limb_lameness_hind",
     "後ろ脚を痛が": "limb_lameness_hind",
     # 労作性横紋筋融解症（タイイングアップ）の飼い主表現「筋肉が硬くなって」
     # （「硬い」終止形のみ収載でく形が不一致）
@@ -665,11 +667,28 @@ def _extract_equine_symptoms(text: str) -> list[str]:
         if alias not in text_lower:
             continue
         keys = finding_key if isinstance(finding_key, tuple) else (finding_key,)
+        # 裸の「足を〜」キー（前肢既定）は「後ろ足を〜」の部分文字列として
+        # 必ず発火するため、全出現が「後ろ/後」直後なら前肢所見を付与しない
+        # （後肢跛行の主訴に前肢跛行が混入していた — 2026-10 第41回監査）。
+        if alias[0] in "足脚" and "limb_lameness_fore" in keys and _all_occurrences_hind(text_lower, alias):
+            keys = tuple(k for k in keys if k != "limb_lameness_fore")
         for key in keys:
             if key in valid_keys:
                 matched.add(key)
 
     return list(matched)
+
+
+def _all_occurrences_hind(text: str, alias: str) -> bool:
+    """True when every occurrence of ``alias`` is directly preceded by 後ろ/後."""
+    idx = text.find(alias)
+    if idx < 0:
+        return False
+    while idx >= 0:
+        if not (text[max(0, idx - 2) : idx] == "後ろ" or text[max(0, idx - 1) : idx] == "後"):
+            return False
+        idx = text.find(alias, idx + 1)
+    return True
 
 
 def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:

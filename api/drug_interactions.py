@@ -1193,6 +1193,39 @@ INTERACTIONS: list[dict[str, Any]] = [
     # surface from the US label. Diltiazem is the clinically important pairing
     # because it is a standard feline HCM co-medication.
     {
+        "drug_a": "atinvicitinib",
+        "drug_b": "oclacitinib",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "JAK阻害の重複",
+        "effect_en": "Two JAK inhibitors add immunosuppression without additional antipruritic benefit.",
+        "effect_ja": "JAK阻害薬の重複は止痒効果を上乗せせず免疫抑制のみを相加する。",
+        "management_en": "Do not combine; switch from one JAK inhibitor to the other.",
+        "management_ja": "併用しない。一方から他方へ切り替える。",
+        "ref": "NUMELVI US label (Merck Animal Health, 2026)",
+    },
+    {
+        "drug_a": "atinvicitinib",
+        "drug_b": "ilunocitinib",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "JAK阻害の重複",
+        "effect_en": "Two JAK inhibitors add immunosuppression without additional antipruritic benefit.",
+        "effect_ja": "JAK阻害薬の重複は止痒効果を上乗せせず免疫抑制のみを相加する。",
+        "management_en": "Do not combine; switch from one JAK inhibitor to the other.",
+        "management_ja": "併用しない。一方から他方へ切り替える。",
+        "ref": "NUMELVI US label (Merck Animal Health, 2026)",
+    },
+    {
+        "drug_a": "relfovetmab",
+        "drug_b": "frunevetmab",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "抗NGF抗体の重複",
+        "effect_en": "Duplicate anti-NGF antibody therapy.",
+        "effect_ja": "抗NGF抗体療法の重複。",
+        "management_en": "Never combine; switch only after the previous product's dosing interval has elapsed.",
+        "management_ja": "併用しない。前製剤の投与間隔経過後に切り替える。",
+        "ref": "Portela EU SmPC (Zoetis, 2025)",
+    },
+    {
         "drug_a": "sirolimus",
         "drug_b": "diltiazem",
         "severity": SEVERITY_MAJOR,
@@ -1326,6 +1359,7 @@ GILVETMAB_IMMUNOSUPPRESSANT_IDS = [
     "cyclophosphamide_oral",
     "oclacitinib",
     "ilunocitinib",
+    "atinvicitinib",
     "sirolimus",
 ]
 
