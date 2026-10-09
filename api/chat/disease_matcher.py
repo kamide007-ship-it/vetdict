@@ -377,6 +377,10 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
         1.35,
     ),
     ("cat", frozenset({"decreased_urination", "vocalization_changes"}), "Urinary Obstruction (Blocked Cat)", 1.5),
+    # 体重減少＋落ち着きのなさ/活動亢進の猫は甲状腺機能亢進症 until proven
+    # otherwise（Carney 2016 AAFP guidelines）— 2026-10 第42回: 行動疾患が上位だった
+    ("cat", frozenset({"weight_loss", "anxiety"}), "Hyperthyroidism", 1.6),
+    ("cat", frozenset({"weight_loss", "hyperactivity"}), "Hyperthyroidism", 1.6),
     # 粘膜蒼白＋頻呼吸の猫は貧血（低酸素血症代償の頻呼吸） until proven
     # otherwise — 蒼白は呼吸器疾患・心疾患の徴候ではない（Little, The Cat;
     # Tasker 2010 JFMS ヘモプラズマ）。従来は2所見で喘息/CHFが上位を占め

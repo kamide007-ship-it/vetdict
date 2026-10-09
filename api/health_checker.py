@@ -805,6 +805,12 @@ SYMPTOMS = [
         "category": "behavioral",
     },
     {
+        "id": "greasy_skin",
+        "name_ja": "皮膚のベタつき・体臭（脂漏）",
+        "name_en": "Greasy Skin / Body Odor (Seborrhea)",
+        "category": "dermatological",
+    },
+    {
         "id": "wart_like_growths",
         "name_ja": "いぼ状のできもの（複数）",
         "name_en": "Wart-like Growths (Multiple)",
@@ -2389,6 +2395,35 @@ DISEASES = [
             "labrador_retriever": 1.6,
             "german_shepherd": 1.5,
             "shar_pei": 1.5,
+        },
+    },
+    # ---- 12d1c. Malassezia Dermatitis ----
+    # 2026-10 round-42 audit:「皮膚がベタベタして臭いです」extracted nothing and
+    # the legacy DB had no yeast-dermatitis entry, although Malassezia
+    # dermatitis is one of the most common canine dermatoses (greasy,
+    # malodorous, pruritic skin in skin folds/ventrum/paws — Bond et al.,
+    # Vet Dermatol 2020 consensus; Muller & Kirk 7th ed). Gated on the
+    # greasy/odor sign so bare itching keeps the atopy/pyoderma ordering.
+    {
+        "id": "malassezia_dermatitis",
+        "prevalence_tier": "very_common",
+        # name matches the dog module entry (Malassezia Dermatitis /
+        # マラセチア皮膚炎) so the chat card's DB pivot lands exactly
+        "name_ja": "マラセチア皮膚炎",
+        "name_en": "Malassezia Dermatitis",
+        "description_ja": "常在酵母 Malassezia pachydermatis の過剰増殖による皮膚炎。脂っぽくベタつく皮膚・独特の酸っぱい体臭・掻痒・色素沈着/苔癬化が特徴で、皺部・腹部・指間・外耳道に好発します。多くはアトピー・食物アレルギー・内分泌疾患（甲状腺機能低下症・クッシング）に続発するため基礎疾患の評価が必須。診断はテープ/押捺細胞診（酵母の確認）、治療はクロルヘキシジン2-4%＋ミコナゾール2%シャンプー週2-3回、広範・重度例はイトラコナゾール5 mg/kg PO q24h（またはパルス投与）を併用します（Bond 2020 Vet Dermatol 国際コンセンサス）。",
+        "description_en": "Dermatitis from overgrowth of the commensal yeast Malassezia pachydermatis: greasy skin, a characteristic rancid odor, pruritus and hyperpigmentation/lichenification in skin folds, ventrum, interdigital skin and ear canals. Usually secondary to atopy, food allergy or endocrinopathy (hypothyroidism, Cushing's), which must be worked up. Diagnose by tape-strip/impression cytology; treat with chlorhexidine 2-4% + miconazole 2% shampoo 2-3x weekly, adding itraconazole 5 mg/kg PO q24h (or pulse) for extensive disease (Bond et al. 2020 Vet Dermatol consensus).",
+        "symptoms": [
+            "greasy_skin",
+        ],
+        "severity": "low",
+        "recommended_tests": ["cytology", "skin_scraping"],
+        "breed_risks": {
+            "west_highland_white_terrier": 2.5,
+            "basset_hound": 2.0,
+            "shih_tzu": 1.8,
+            "cocker_spaniel": 1.8,
+            "english_bulldog": 1.5,
         },
     },
     # ---- 12d2. Mammary Tumor ----
@@ -4946,6 +4981,9 @@ _PATHOGNOMONIC_CLUSTERS = [
     # (Muller & Kirk 7th ed): the paw-localised complaint should rank the
     # interdigital entry above generic pruritic dermatoses.
     (frozenset({"paw_redness"}), "interdigital_furunculosis", 1.5),
+    # Greasy, malodorous skin is the lesion-pattern sign of Malassezia
+    # dermatitis (Bond 2020 Vet Dermatol consensus) — gated on greasy_skin.
+    (frozenset({"greasy_skin"}), "malassezia_dermatitis", 1.6),
     # Gynecomastia + symmetric alopecia is the estrogen-feminization pair of
     # a Sertoli cell tumor (Withrow & MacEwen 6th ed). Female mammary-mass
     # complaints don't co-report hair loss, so collision risk is minimal.

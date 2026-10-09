@@ -30,7 +30,7 @@ class TestSymptomDatabase:
     """Verify symptom database structure and consistency."""
 
     def test_symptom_count(self):
-        assert len(SYMPTOMS) == 93  # +facial_droop/weight_gain (2026-10 round 39)
+        assert len(SYMPTOMS) == 94  # +greasy_skin (2026-10 round 42); +facial_droop/weight_gain (2026-10 round 39)
 
     def test_all_symptoms_have_required_fields(self):
         for s in SYMPTOMS:
@@ -69,7 +69,7 @@ class TestDiseaseDatabase:
     """Verify disease database structure and consistency."""
 
     def test_disease_count(self):
-        assert len(DISEASES) == 96  # +facial_nerve_paralysis (2026-10 round 39)
+        assert len(DISEASES) == 97  # +malassezia_dermatitis (round 42); +facial_nerve_paralysis (2026-10 round 39)
 
     def test_all_diseases_have_required_fields(self):
         for d in DISEASES:
@@ -291,7 +291,7 @@ class TestGetSymptomsRoute:
         assert "total" in data
         assert "symptoms" in data
         assert "categories" in data
-        assert data["total"] == 93  # +facial_droop/weight_gain (2026-10 round 39)
+        assert data["total"] == 94  # +greasy_skin; +facial_droop/weight_gain (2026-10 round 39)
 
     def test_filter_by_category(self, client):
         resp = client.get("/api/health-check/symptoms?category=respiratory")

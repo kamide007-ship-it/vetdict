@@ -367,6 +367,14 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "蹄が熱い": "hoof_heat",
     # 2026-09 round-29: 連用形「蹄が熱くて」と指動脈系の飼い主表現が欠落
     "蹄が熱く": "hoof_heat",
+    # 歩きたがらない＝跛行の飼い主表現（蹄葉炎の「卵の殻の上を歩く」歩様 — 2026-10 第42回）
+    "歩きたがら": "limb_lameness_fore",
+    # 下顎リンパ節腫脹（腺疫の定義的所見 — 飼い主は「あごの下が腫れた」と表現）
+    "下顎が腫れ": "gen_swollen_lymph",
+    "あごの下が腫れ": "gen_swollen_lymph",
+    "顎の下が腫れ": "gen_swollen_lymph",
+    "のどが腫れ": "gen_swollen_lymph",
+    "歩くのを嫌が": "limb_lameness_fore",
     "蹄が熱を持": "hoof_heat",
     "指動脈の拍動": "limb_digital_pulse",
     "指動脈が強く": "limb_digital_pulse",
@@ -814,6 +822,8 @@ def extract_symptoms_from_text(text: str) -> list:
         # 耳介下垂（チンチラ向け ear_drooping キー）は犬では顔面神経麻痺/
         # 中耳炎の徴候 — facial_droop へ（2026-10 第39回）
         "weakness": ["lethargy", "exercise_intolerance"],
+        # 脂漏・皮膚臭（2026-10 第42回）
+        "greasy_coat": ["greasy_skin"],
         "dropsy": ["bloating", "abdominal_distension"],
         "ascites": ["bloating", "abdominal_distension"],
         "effusion": ["labored_breathing", "bloating"],

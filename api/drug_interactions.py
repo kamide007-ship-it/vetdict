@@ -1424,6 +1424,7 @@ GILVETMAB_UNSTUDIED_ONCOLOGY_IDS = [
     "vincristine",
     "vincristine_injectable",
     "vinorelbine",
+    "verdinexor",
     "oncept_melanoma_vaccine",
 ]
 for _onc_id in GILVETMAB_UNSTUDIED_ONCOLOGY_IDS:
