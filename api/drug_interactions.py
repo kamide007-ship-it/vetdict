@@ -1415,7 +1415,6 @@ GILVETMAB_UNSTUDIED_ONCOLOGY_IDS = [
     "mitoxantrone",
     "palladia",
     "piroxicam_bladder",
-    "piroxicam_transitional_cell",
     "procarbazine",
     "rabacfosadine",
     "tigilanol_tiglate",
@@ -1444,6 +1443,34 @@ for _onc_id in GILVETMAB_UNSTUDIED_ONCOLOGY_IDS:
         }
     )
 del _GILVETMAB_REGISTERED
+
+# --- 2026-10 第67弾: エンフリコキシブ（週1回コキシブ）× 他NSAIDs/ステロイド ---
+# 活性代謝物の半減期が非常に長く、最終投与後も数週間曝露が続くため、
+# 通常のNSAID併用禁忌に加え切替時の休薬期間を明記する（EMA SPC Daxocox 2021）。
+for _other, _kind in (
+    ("meloxicam", "nsaid"),
+    ("carprofen", "nsaid"),
+    ("robenacoxib", "nsaid"),
+    ("firocoxib", "nsaid"),
+    ("mavacoxib", "nsaid"),
+    ("grapiprant", "nsaid"),
+    ("prednisolone", "steroid"),
+    ("dexamethasone", "steroid"),
+):
+    INTERACTIONS.append(
+        {
+            "drug_a": "enflicoxib",
+            "drug_b": _other,
+            "severity": SEVERITY_CONTRAINDICATED,
+            "mechanism": "COX阻害の重複" if _kind == "nsaid" else "胃腸粘膜保護の二重阻害",
+            "effect_en": "Concurrent NSAID/corticosteroid exposure markedly increases GI ulceration, perforation and renal toxicity — and enflicoxib's long-lived active metabolite keeps exposure going for weeks after the last weekly dose.",
+            "effect_ja": "NSAIDs/ステロイドとの併用は消化管潰瘍・穿孔・腎毒性を著しく増加させる。エンフリコキシブは活性代謝物が長く残るため、最終の週1回投与から数週間は曝露が続く。",
+            "management_en": "Do not combine. When switching to or from enflicoxib, allow a washout of at least one week after the last weekly dose (longer if clinically indicated).",
+            "management_ja": "併用禁忌。エンフリコキシブとの切替時は、最終の週1回投与から最低1週間（臨床的に必要ならそれ以上）の休薬期間を置く。",
+            "ref": "Daxocox EMA SPC (2021)",
+        }
+    )
+del _other, _kind
 
 
 def normalize_drug_id(drug_id: str) -> str:

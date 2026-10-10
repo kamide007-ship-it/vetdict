@@ -1746,9 +1746,9 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:595,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:571,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:597,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:574,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:363,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1772,7 +1772,7 @@ function setDefaultStats(){
     diseases:6457,
     species:21,
     drugs:656,
-    symptoms:94,
+    symptoms:95,
     protocols:188
   };
   renderSpeciesGrid();
@@ -2167,8 +2167,8 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
-    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ","顔の片側が腫れて目の下から膿が出る","肉球の間が赤く腫れて舐め続ける"],
-    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く","耳の付け根を掻いて黒いカスが出る","爪が伸びすぎて肉球に刺さっている","首の周りにかさぶたがある"],
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ","顔の片側が腫れて目の下から膿が出る","肉球の間が赤く腫れて舐め続ける","発熱があり関節を痛がって歩かない"],
+    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く","耳の付け根を掻いて黒いカスが出る","爪が伸びすぎて肉球に刺さっている","首の周りにかさぶたがある","後ろ足がふらつき高い所へ飛び乗れない"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる","下痢がひどく元気がない"],
     rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている","おしっこが白っぽくてドロドロしている","お尻の周りに軟らかい便がつく","お尻が汚れていて臭い","耳の中にかさぶたがある"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている","目が濡れて顔をこする","耳が垂れて耳から臭い"],

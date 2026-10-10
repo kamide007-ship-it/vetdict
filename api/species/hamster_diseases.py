@@ -794,7 +794,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "low",
         "recommended_tests": ["physical_exam", "dietary_review", "hormone_panel"],
         "treatment": "R/O parasites (skin scraping), endocrine (Cushing's, hypothyroidism), nutritional deficiency. Treat underlying cause. Improve diet quality. Vitamin E supplementation.",
-        "treatment_ja": "【ハムスターにおける脱毛症（非寄生虫性）】\n脱毛症（非寄生虫性）は皮膚生検（パンチまたはincisional）、細胞診（インプレッションスメア、テープストリッピング）、培養で原因を特定。\n感染性: 培養感受性ベースの全身抗菌薬・抗真菌薬（前述の方針）。\nアレルギー性: 食物アレルギー除外食試験（8週hydrolyzed蛋白食）、環境アレルゲン特異IgE。シクロスポリン 5-7 mg/kg PO q24h、オクラシチニブ（犬専用）。\n外用ケア: 抗菌・抗真菌シャンプー q3-7日、湿潤環境改善。\n自傷防止のエリザベスカラー、慢性掻痒には認知行動的アプローチも併用。\n支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。\n【鑑別と経過観察】類似症候を呈する疾患の除外と、治療4-8週後の再評価が予後改善の鍵。重症度・併発症によってはハムスターの専門医紹介を考慮する。",
+        "treatment_ja": "【ハムスターにおける脱毛症（非寄生虫性）】\n脱毛症（非寄生虫性）は皮膚生検（パンチまたはincisional）、細胞診（インプレッションスメア、テープストリッピング）、培養で原因を特定。\n感染性: 培養感受性ベースの全身抗菌薬・抗真菌薬（前述の方針）。\nアレルギー性（まれ）: 寄生虫・感染・床材や環境刺激の除外を優先。犬猫用の免疫抑制薬・JAK阻害薬（シクロスポリン・オクラシチニブ）は本種で用量未確立のため用いない。\n外用ケア: 抗菌・抗真菌シャンプー q3-7日、湿潤環境改善。\n自傷防止のエリザベスカラー、慢性掻痒には認知行動的アプローチも併用。\n支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。\n【鑑別と経過観察】類似症候を呈する疾患の除外と、治療4-8週後の再評価が予後改善の鍵。重症度・併発症によってはハムスターの専門医紹介を考慮する。",
         "prognosis": "Good with appropriate antiparasitic treatment. Reinfection is possible without environmental management.",
         "prognosis_ja": "適切な駆虫薬治療で予後良好。環境管理なしでは再感染の可能性あり。",
         "onset_pattern": {"acute", "chronic", "subacute"},

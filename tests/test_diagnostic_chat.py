@@ -39,7 +39,6 @@ _KNOWN_ALIAS_MISMATCHES = {
     "joint_pain_or_stiffness",
     "lumps_and_bumps",
     "paralysis_or_paresis",
-    "cloudy_urine",
     "foul_smelling_urine",
     # Bridged to the legacy dog vocabulary (stiffness) via _LEGACY_FALLBACK;
     # no species module carries a dedicated difficulty-rising ID.
@@ -1602,6 +1601,7 @@ class TestQuickTapPhraseExtraction:
             "足を引きずる",
             "皮膚が痒い",
             "肉球の間が赤く腫れて舐め続ける",
+            "発熱があり関節を痛がって歩かない",
             "口の中にできものがある",
             "おしりを地面にこすりつける",
             "鼻血が出た",
@@ -1643,6 +1643,7 @@ class TestQuickTapPhraseExtraction:
             "耳の付け根を掻いて黒いカスが出る",
             "爪が伸びすぎて肉球に刺さっている",
             "首の周りにかさぶたがある",
+            "後ろ足がふらつき高い所へ飛び乗れない",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
