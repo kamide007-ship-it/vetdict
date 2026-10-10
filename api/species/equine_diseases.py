@@ -12521,6 +12521,10 @@ _SYNDROME_FINDING_FLOORS: dict[str, tuple[str, ...]] = {
     # 運動後の急性筋硬直は労作性横紋筋融解症（タイイングアップ）が最多原因
     # （Valberg, Reed & Bayly 4th ed）— 減額フロア（最多原因・非パトグノモニック）
     "body_stiffness": ("Exertional Rhabdomyolysis (Tying Up)", "Exertional Rhabdomyolysis"),
+    # 蹄の熱感単独は蹄膿瘍か蹄葉炎 until proven otherwise（Adams & Stashak 7th
+    # ed）— 未tierの3所見エントリ（蹄関節疾患・蹄異物）が単一所見の熱蹄主訴で
+    # 上位を独占していた（2026-10 第42回）。最多原因であり減額フロア。
+    "hoof_heat": ("Hoof Abscess", "Acute Laminitis"),
 }
 _SYNDROME_FLOOR_SCORE = 0.62
 # Findings that are the *most common cause* rather than pathognomonic get a
@@ -12532,6 +12536,7 @@ _SYNDROME_FLOOR_SCORE_OVERRIDES: dict[str, float] = {
     "limb_lameness_hind": 0.42,
     "dig_diarrhea": 0.42,
     "body_stiffness": 0.42,
+    "hoof_heat": 0.42,
 }
 
 # Sign PAIRS that define a syndrome even when the namesake checkbox wasn't

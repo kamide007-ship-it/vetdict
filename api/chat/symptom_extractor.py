@@ -366,7 +366,7 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # Musculoskeletal
     "joint_pain_or_stiffness": ["joint_pain", "arthritis", "stiffness"],
     # Behavior
-    "anxiety": ["restlessness", "pacing", "nervousness"],
+    "anxiety": ["restlessness", "pacing", "nervousness", "hyperactivity"],
     "self_mutilation": ["self_chewing", "self_harm", "overgrooming", "feather_plucking"],
     "self_chewing": ["self_mutilation", "self_harm"],
     "behavioral_change": ["behavioral_changes", "aggression", "depression", "restlessness"],
@@ -909,6 +909,9 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     # 歩く（ペタペタ歩きます→歩く 等の歩様主訴）
     ("歩きました", "歩いた"),
     ("歩きます", "歩く"),
+    # 行く（いく — 否定形は不規則でも いかない が正しい: 脱皮がうまくいきません）
+    ("いきません", "いかない"),
+    ("いきませんでした", "いかなかった"),
 ]
 # 長い置換を先に適用（「ていませんでした」が「ていません」より先）
 _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
@@ -948,7 +951,22 @@ def normalize_chat_text(text: str) -> str:
         if polite in text:
             text = text.replace(polite, plain)
     text = _ADVERB_STRIP.sub(r"\1", text)
+    # 部位を明示しない「血が混じ」は尿語が無ければ文脈の部位に読み替える
+    # （「下痢が続いて血が混じっています」「鼻水に血が混じります」が血尿→
+    # 膀胱炎に誤誘導されていた — 2026-10 第42回監査）。尿語が1つでもあれば
+    # 従来どおり血尿側に残す。
+    if "血が混じ" in text and not _BLOOD_URINE_CTX.search(text) and "毛玉に血" not in text:
+        if "鼻" in text:
+            text = text.replace("血が混じ", "鼻血・混じ")
+        elif "吐" in text:
+            text = text.replace("血が混じ", "吐血・混じ")
+        elif _BLOOD_STOOL_CTX.search(text) and "便に血が混じ" not in text:
+            text = text.replace("血が混じ", "血便・混じ")
     return text
+
+
+_BLOOD_STOOL_CTX = _neg_re.compile(r"下痢|便|うんち|ウンチ|軟便")
+_BLOOD_URINE_CTX = _neg_re.compile(r"尿|おしっこ|オシッコ|排尿|トイレ")
 
 
 def resolve_symptom_id(sid: str, symptom_names: dict) -> str | None:

@@ -97,6 +97,7 @@ from api.drug_batch_70 import DRUGS_BATCH_70
 from api.drug_batch_71 import DRUGS_BATCH_71
 from api.drug_batch_72 import DRUGS_BATCH_72
 from api.drug_batch_73 import DRUGS_BATCH_73
+from api.drug_batch_74 import DRUGS_BATCH_74
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11007,6 +11008,14 @@ for _drug73 in DRUGS_BATCH_73:
     if _drug73["id"] not in _drug_index:
         DRUGS.append(_drug73)
         _drug_index[_drug73["id"]] = _drug73
+
+# Batch 74 (2026-10: リポソーム化ブピバカイン（ノシタ）— 72時間徐放局所麻酔（犬CCL閉創浸潤/
+#  猫抜爪前4点ブロック）、ブプレノルフィン経皮溶液（ゾルビウム）— 猫術後4日鎮痛の単回塗布、
+#  ベルジネクソル（ラバーディア）— 犬リンパ腫の経口XPO1阻害薬（FDA条件付き）。国内未承認）
+for _drug74 in DRUGS_BATCH_74:
+    if _drug74["id"] not in _drug_index:
+        DRUGS.append(_drug74)
+        _drug_index[_drug74["id"]] = _drug74
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

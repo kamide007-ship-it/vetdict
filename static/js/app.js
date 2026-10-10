@@ -1746,8 +1746,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:593,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:569,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:595,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:571,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1771,8 +1771,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6457,
     species:21,
-    drugs:653,
-    symptoms:93,
+    drugs:656,
+    symptoms:94,
     protocols:188
   };
   renderSpeciesGrid();
@@ -5414,6 +5414,23 @@ function renderSpeciesGuidance(containerId,guidance){
   msgs.scrollTop=msgs.scrollHeight;
 }
 
+/* 2026-10 第42回: サーバーがメッセージ内の動物種名（「猫 …」等）で解析種を
+   切り替えた場合、その旨を必ず表示する。従来は「皮膚がベタベタ」が魚（ベタ）に
+   誤検出されても無言で切り替わり、選択した種と違う鑑別が出ていた。 */
+function _noteChatSpeciesSwitch(sentSpecies,data,container){
+  if(!data||!data.species||!sentSpecies||data.species===sentSpecies)return;
+  const sp=SPECIES.find(s=>s.id===data.species);
+  const label=sp?(currentLang==="ja"?sp.name:sp.nameEn):data.species;
+  const msg=currentLang==="ja"
+    ?`メッセージ内の動物種名から「${label}」として解析しました。別の動物種の場合は動物種を選び直してください。`
+    :`Analysed as ${label} based on the species named in your message. Re-select the species if this is wrong.`;
+  if(container&&container.id!=="chatMessages"){
+    const d=document.createElement("div");d.className="chat-msg bot-brief species-switch-note";d.setAttribute("role","status");d.textContent=msg;container.appendChild(d);
+  }else{
+    addChatMsg(msg,"bot-brief");
+  }
+}
+
 const _CHAT_MAX_RETRIES=3;
 let _landingChatRetries=0;
 let _chatRetries=0;
@@ -5434,6 +5451,7 @@ function sendLandingChat(isRetry){
   .then(data=>{
     loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
+    _noteChatSpeciesSwitch(species,data,msgs);
     if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
@@ -5526,6 +5544,7 @@ function sendChatMessage(isRetry){
        ページが入力欄位置へ引き戻されて鑑別候補が画面外に残っていた（2026-10 第65弾） */
     if(!_isTouchUI())input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
+    _noteChatSpeciesSwitch(species,data);
     if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);

@@ -3212,6 +3212,43 @@ SYMPTOM_ALIASES = {
     # 爬虫類の総排泄腔脱（「何か」介在形）
     "お尻から何か赤": "rectal_prolapse",
     "総排泄腔から何か": "rectal_prolapse",
+    # 2026-10 第42回監査
+    # 鳥のそのう膨満（膨れ形 — 膨らん形のみ収載だった）
+    "そのうが膨れ": "crop_distension",
+    # セキセイ疥癬（クヌドコプテス）の「ボコボコ/デコボコ」表現
+    "くちばしの周りがボコボコ": "crusty_beak",
+    "くちばしの周りがデコボコ": "crusty_beak",
+    "くちばしがボコボコ": "crusty_beak",
+    "くちばしがデコボコ": "crusty_beak",
+    "嘴がボコボコ": "crusty_beak",
+    # 猫・犬の排便努責（「うんちをしようと」形 — いきむ は単独では抽出不能だった）
+    "うんちをしようと": "constipation",
+    "うんちしようと": "constipation",
+    "便をしようと": "constipation",
+    "排便しようと": "constipation",
+    # 脂漏・マラセチアの皮膚臭・べたつき
+    "皮膚がベタベタ": "greasy_coat",
+    "皮膚がべたべた": "greasy_coat",
+    "体がベタベタ": "greasy_coat",
+    "皮膚が臭": "greasy_coat",
+    "体が臭": "greasy_coat",
+    # 旋回（「同じところを回る」形 — ぐるぐる回る のみ収載だった）
+    "同じところを回": "circling",
+    "同じ場所を回": "circling",
+    "同じ方向に回": "circling",
+    "同じ方向へ回": "circling",
+    # 夜間頻尿（夜中におしっこに起きる）
+    "おしっこに起き": "frequent_urination",
+    "夜中におしっこ": "frequent_urination",
+    "夜中に何度もおしっこ": "frequent_urination",
+    "夜にトイレに起き": "frequent_urination",
+    # 眼球サイズ左右差（牛眼＝緑内障・眼球突出）
+    "目の大きさが違": "eye_bulging",
+    "目の大きさが左右で違": "eye_bulging",
+    "片目が大きく": "eye_bulging",
+    "片目だけ大き": "eye_bulging",
+    # 鼻出血の混入表現
+    "鼻水に血": "epistaxis",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---
