@@ -480,6 +480,11 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # 4th ed) — a co-extracted generic distension ID otherwise diluted
     # coverage and let GI entries outrank the pouch entries (2026-09 round-32).
     ("hamster", frozenset({"cheek_swelling"}), "Cheek Pouch Impaction", 1.35),
+    # Vulvar bleeding / haematuria-like blood in an intact doe is uterine
+    # adenocarcinoma until proven otherwise — 50-80% of intact does > 4 y
+    # (Saito 2002; Walter 2010). Narrow untiered uterine entries otherwise
+    # won on coverage (2026-10 round-43).
+    ("rabbit", frozenset({"vaginal_bleeding"}), "Uterine Adenocarcinoma", 1.35),
 ]
 
 # Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.
@@ -685,8 +690,12 @@ def _match_species_symptoms_to_diseases(
         # --- Coverage completeness bonus ---
         # Reward diseases where more absolute symptoms matched (not just ratio).
         # This prevents diseases with few symptoms from dominating.
+        # Count matched COMPLAINTS (source-symptom groups), not synonym
+        # spellings: a 2-complaint query that a disease matches via 3 synonym
+        # IDs must not earn the 3+-match bonus (2026-10 round-43 — bird
+        # avocado toxicity won 「羽を膨らませて寝てばかり」 this way).
         coverage_bonus = 1.0
-        absolute_match_count = len(matched)
+        absolute_match_count = sum(1 for group in _source_groups if group & disease_symptoms)
         if absolute_match_count >= 4:
             coverage_bonus = 1.10
         elif absolute_match_count >= 3:

@@ -98,6 +98,7 @@ from api.drug_batch_71 import DRUGS_BATCH_71
 from api.drug_batch_72 import DRUGS_BATCH_72
 from api.drug_batch_73 import DRUGS_BATCH_73
 from api.drug_batch_74 import DRUGS_BATCH_74
+from api.drug_batch_75 import DRUGS_BATCH_75
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11017,6 +11018,13 @@ for _drug74 in DRUGS_BATCH_74:
         DRUGS.append(_drug74)
         _drug_index[_drug74["id"]] = _drug74
 
+# Batch 75 (2026-10: ロピニロール点眼液（クレボー）— 犬の催吐（EMA 2018/FDA 2020）、
+#  エンフリコキシブ（ダクソコックス）— 犬OAの週1回コキシブ（EMA 2021）。いずれも国内未承認）
+for _drug75 in DRUGS_BATCH_75:
+    if _drug75["id"] not in _drug_index:
+        DRUGS.append(_drug75)
+        _drug_index[_drug75["id"]] = _drug75
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11625,6 +11633,9 @@ _KEYWORD_NEGATIVE_CONTEXTS: dict[str, tuple[str, ...]] = {
 # alternate spellings belong here — typos in content are fixed in the content.
 _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "dexamethasone": ("デキサメサゾン",),  # canonical: デキサメタゾン
+    # 2026-10 第43回: 治療文の「アポモルヒネ」表記（正準はアポモルフィン）が
+    # 「モルヒネ」に誤チップしていた
+    "apomorphine": ("アポモルヒネ",),
     # 2026-09 sweep #30: エキゾチック5種の赤血球増加症プロトコルが
     # 「ヒドロキシ尿素 30 mg/kg PO q24h」の漢字複合表記で参照（正準名 ヒドロキシウレア）
     "hydroxyurea": ("ヒドロキシ尿素",),
@@ -11964,6 +11975,52 @@ def _build_drug_keyword_index() -> None:
 _build_drug_keyword_index()
 
 
+_WORD_SEPARATORS = set(" \t+/・（()、,＋-&")
+_INNER_SUPERSTRINGS: dict[str, list[tuple[str, int]]] | None = None
+
+
+def _inner_superstrings() -> dict[str, list[tuple[str, int]]]:
+    """keyword → [(longer keyword of a DIFFERENT drug, offset)] where the short
+    keyword sits inside a single word of the longer one (not at its start, no
+    separator before it): ofloxacin ⊂ enrofloxacin, detomidine ⊂ medetomidine,
+    epinephrine ⊂ norepinephrine, morphine ⊂ apomorphine. An occurrence
+    covered by such a superstring is a different molecule, not a mention.
+    Combination products (amoxicillin ⊂ amoxicillin-clavulanate) start with
+    the short keyword or separate it, so both still chip (2026-10 round-43).
+    """
+    global _INNER_SUPERSTRINGS
+    if _INNER_SUPERSTRINGS is None:
+        out: dict[str, list[tuple[str, int]]] = {}
+        items = list(_DRUG_KEYWORD_INDEX.items())
+        for k, v in items:
+            for k2, v2 in items:
+                if v2 == v or k2 == k or k not in k2:
+                    continue
+                start = 0
+                while True:
+                    off = k2.find(k, start)
+                    if off == -1:
+                        break
+                    pre = k2[:off]
+                    if off > 0 and not any(c in _WORD_SEPARATORS for c in pre):
+                        out.setdefault(k, []).append((k2, off))
+                    start = off + 1
+        _INNER_SUPERSTRINGS = out
+    return _INNER_SUPERSTRINGS
+
+
+def _has_uncovered_occurrence(text_lower: str, keyword: str, supers: list[tuple[str, int]]) -> bool:
+    pos = 0
+    while True:
+        pos = text_lower.find(keyword, pos)
+        if pos == -1:
+            return False
+        covered = any(pos - off >= 0 and text_lower.startswith(sup, pos - off) for sup, off in supers)
+        if not covered:
+            return True
+        pos += 1
+
+
 def find_drugs_in_text(text: str, max_results: int = 25) -> List[Dict]:
     """Extract drugs mentioned in a free-text treatment description.
 
@@ -11999,6 +12056,9 @@ def find_drugs_in_text(text: str, max_results: int = 25) -> List[Dict]:
                     pos += 1
                 if not hit:
                     continue
+            supers = _inner_superstrings().get(keyword)
+            if supers and not _has_uncovered_occurrence(text_lower, keyword, supers):
+                continue
             negatives = _KEYWORD_NEGATIVE_CONTEXTS.get(keyword)
             if negatives:
                 pos, hit = 0, False
@@ -12255,9 +12315,17 @@ def _build_drug_to_diseases_index() -> dict[str, list[dict]]:
     corpus = _SEP.join(_texts)
     corpus_raw = _SEP.join(_texts_raw)
 
+    _supers_map = _inner_superstrings()
+
     def _sweep(haystack: str, offs: list[int], keyword: str, drug_id: str, hits: set) -> None:
+        supers = _supers_map.get(keyword)
         start = haystack.find(keyword)
         while start != -1:
+            # Word-internal containment (ofloxacin inside enrofloxacin): skip
+            # occurrences that are really a different molecule's name.
+            if supers and any(start - off >= 0 and haystack.startswith(sup, start - off) for sup, off in supers):
+                start = haystack.find(keyword, start + 1)
+                continue
             ti = bisect.bisect_right(offs, start) - 1
             hits.add((drug_id, ti))
             # Jump past the current text so each text counts at most once.

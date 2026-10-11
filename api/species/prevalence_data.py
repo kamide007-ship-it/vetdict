@@ -555,6 +555,19 @@ SPECIES_PREVALENCE = {
     # McFarlane 2011 (PPID); Gerding & Gilger 2016 (ERU)
     # ==================================================================
     "horse": {
+        # 2026-10 第43回: 遠位肢浮腫の鑑別（Reed & Bayly 4th ed）
+        "Stocking Up": "common",
+        "Frostbite": "rare",
+        "Chronic Progressive Lymphedema": "uncommon",
+        "Guttural Pouch Tympany": "uncommon",
+        "Jugular Thrombophlebitis": "uncommon",
+        "Recurrent Airway Obstruction (Heaves)": "common",
+        "Epiglottal Entrapment": "uncommon",
+        # 先天性心疾患（Reef; Marr & Bowen — VSD が最多だが全体として稀）
+        "Ventricular Septal Defect": "uncommon",
+        "Atrial Septal Defect": "rare",
+        "Patent Ductus Arteriosus": "rare",
+        "Tetralogy of Fallot": "rare",
         # Colic-subtype and misc tiers: without these, single-finding colic
         # queries ranked uterine torsion / hydrops above the everyday causes
         # (subtype shares per Reed & Bayly 4th ed / surgical colic series).
@@ -776,6 +789,10 @@ SPECIES_PREVALENCE = {
     # RABBIT — 35+ entries (expanded from ~23)
     # ==================================================================
     "rabbit": {
+        # 2026-10 第43回: 陰部出血の鑑別 — 未避妊雌の子宮腺癌が圧倒的（Saito 2002;
+        # Walter 2010 — 4歳以上の未避妊雌の50-80%）。平滑筋腫・捻転は稀
+        "Leiomyoma (Uterine)": "uncommon",
+        "Uterine Torsion": "rare",
         # very_common
         "Gastrointestinal Stasis": "very_common",
         "Dental Malocclusion": "very_common",

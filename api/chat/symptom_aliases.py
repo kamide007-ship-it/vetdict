@@ -1186,7 +1186,7 @@ SYMPTOM_ALIASES = {
     # ウサギ — 肛門/子宮
     "肛門が腫れてる": "perineal_swelling",
     "肛門周囲が腫れ": "perineal_swelling",
-    "陰部から出血": "blood_in_urine",
+    "陰部から出血": "vaginal_bleeding",
     # 鳥 — 貧血
     "貧血": "lethargy",
     "anemia": "lethargy",
@@ -1502,9 +1502,9 @@ SYMPTOM_ALIASES = {
     "出血がある": "bleeding",
     "血が出ている": "bleeding",
     "不正出血": "genital_discharge",
-    "陰部からの出血": "genital_discharge",
+    "陰部からの出血": "vaginal_bleeding",
     "陰部分泌物": "genital_discharge",
-    "膣からの出血": "genital_discharge",
+    "膣からの出血": "vaginal_bleeding",
     "膣からの分泌": "genital_discharge",
     "abnormal bleeding": "bleeding",
     "vaginal bleeding": "genital_discharge",
@@ -3249,6 +3249,80 @@ SYMPTOM_ALIASES = {
     "片目だけ大き": "eye_bulging",
     # 鼻出血の混入表現
     "鼻水に血": "epistaxis",
+    # 2026-10 第43回監査
+    # 皮膚発赤（「赤くなっている」(魚の redness_skin)との最長一致タイを避けるため8字以上）
+    "皮膚が赤くなって": "skin_redness",
+    "皮膚が赤くなってい": "skin_redness",
+    "皮膚が赤くなりま": "skin_redness",
+    "体が赤くなって": "skin_redness",
+    # 耳道発赤（外耳炎）
+    "耳の中が赤": "ear_inflammation",
+    "耳の内側が赤": "ear_inflammation",
+    "耳が赤くて臭": "ear_inflammation",
+    "耳の中が臭": "ear_discharge",
+    # 黒色便（メレナ）の述語形 — 「黒い便」名詞形のみ収載だった
+    "便が黒": "black_tarry_stool",
+    "うんちが黒": "black_tarry_stool",
+    "ウンチが黒": "black_tarry_stool",
+    "うんこが黒": "black_tarry_stool",
+    "黒っぽい便": "black_tarry_stool",
+    "黒っぽいうんち": "black_tarry_stool",
+    # 猫のトイレ内反復姿勢（LUTDの飼い主表現 — 「トイレに何度も行く」形のみだった）
+    "トイレで何度も": "frequent_urination",
+    "トイレに何度も": "frequent_urination",
+    "何度もトイレに": "frequent_urination",
+    "トイレに行ったり来たり": "frequent_urination",
+    "トイレを行ったり来たり": "frequent_urination",
+    # 挙上肢位（ひらがな「あげ」形 — 漢字「上げ」形のみ収載だった）
+    "足をあげて": "lameness_or_limping",
+    "足をあげたまま": "lameness_or_limping",
+    "片足をあげ": "lameness_or_limping",
+    # GDV の終止形・パンパン形
+    "吐こうとす": "unproductive_retching",
+    "お腹がパンパンにな": "bloating",
+    "おなかがパンパン": "bloating",
+    # CDS の徘徊（「ぐるぐる回る」形のみ収載だった）
+    "ぐるぐる歩": "circling",
+    "夜中に歩き回": "circling",
+    "夜に歩き回": "circling",
+    "夜中にうろうろ": "circling",
+    # 虹彩の色調変化（猫ぶどう膜炎・虹彩メラノーシス）
+    "目の色が変わ": "iris_color_change",
+    "目の色が変化": "iris_color_change",
+    "黒目の色が変": "iris_color_change",
+    "虹彩の色が変": "iris_color_change",
+    # 足底の傷（ソアホック・趾瘤症）
+    "足の裏に傷": "foot_sores",
+    "足の裏にけが": "foot_sores",
+    # 陰部出血（ウサギ子宮腺癌の古典的主訴 — 部位明記形のみ genital_discharge）
+    "陰部から血": "vaginal_bleeding",
+    "おまたから血": "vaginal_bleeding",
+    # 「血が出ている」(bleeding, 6字) に最長一致で負けないための長形
+    "陰部から血が出": "vaginal_bleeding",
+    "陰部から血が": "vaginal_bleeding",
+    # 口腔腫脹・排膿（爬虫類マウスロット）
+    "口が腫れて膿": "stomatitis",
+    "口に膿": "oral_discharge",
+    "口の中が腫れ": "stomatitis",
+    # 浮遊（主語省略・連用形）
+    # 「沈めない」の「ない」まで含めないと否定ガードが発火する
+    "浮いて沈めな": "buoyancy_problems",
+    # 魚のフラッシング（「体を〜にこすりつける」形）
+    "体をこすりつけ": "flashing",
+    "岩にこすりつけ": "flashing",
+    "石にこすりつけ": "flashing",
+    "体をこすって": "flashing",
+    # 尾の損傷・断裂（デグー尾剥脱・自切）
+    "尻尾が切れ": "tail_injury",
+    "しっぽが切れ": "tail_injury",
+    "尾が切れ": "tail_injury",
+    "尻尾が取れ": "tail_injury",
+    "しっぽが取れ": "tail_injury",
+    "尾が取れ": "tail_injury",
+    # 羽色の変化（PBFD・栄養性・肝疾患）
+    "羽の色が変": "abnormal_feathers",
+    "羽の色がおかし": "abnormal_feathers",
+    "羽が黒っぽ": "abnormal_feathers",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

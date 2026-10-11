@@ -755,7 +755,13 @@ DISEASE_DATABASE: list[Disease] = [
         "respiratory",
         "moderate",
         "炎症性気道疾患〜回帰性気道閉塞。粉塵・カビが誘因。",
-        ["resp_cough", "resp_labored_breathing", "resp_exercise_intolerance", "resp_abnormal_lung_sounds"],
+        [
+            "resp_cough",
+            "resp_labored_breathing",
+            "resp_exercise_intolerance",
+            "resp_abnormal_lung_sounds",
+            "resp_cough_at_exercise",
+        ],
         urgency="routine",
         recommended_exams=[
             (1, "気管支肺胞洗浄(BAL)", "Bronchoalveolar Lavage (BAL)"),
@@ -6502,7 +6508,8 @@ DISEASE_DATABASE: list[Disease] = [
         "respiratory",
         "moderate",
         "子馬。喉嚢内空気貯留。非痛性頭部腫脹。",
-        ["resp_stridor", "limb_filling"],
+        # 所見は Viborg 三角〜耳下部の非疼痛性腫脹（四肢の腫脹ではない — 2026-10 第43回是正）
+        ["resp_stridor", "body_swelling"],
         urgency="soon",
         recommended_exams=[(1, "内視鏡", "Endoscopy"), (2, "X線", "Radiographs")],
         merck_url=_MERCK + "guttural+pouch+tympany+horses",
@@ -6871,7 +6878,7 @@ DISEASE_DATABASE: list[Disease] = [
         "eye",
         "severe",
         "眼窩の細菌感染。眼球突出・疼痛・発熱。",
-        ["eye_squinting", "gen_fever", "limb_filling"],
+        ["eye_squinting", "gen_fever", "body_swelling"],
         urgency="urgent",
         recommended_exams=[(1, "超音波", "Orbital Ultrasound"), (2, "CT", "CT Scan")],
         merck_url=_MERCK + "orbital+cellulitis+horses",
@@ -8544,7 +8551,8 @@ DISEASE_DATABASE: list[Disease] = [
         "cardiovascular",
         "moderate",
         "静脈注射合併症。頸部腫脹・疼痛。",
-        ["limb_filling", "gen_fever"],
+        # 所見は頸静脈周囲の索状硬結・腫脹（四肢の浮腫ではない — 2026-10 第43回是正）
+        ["body_swelling", "gen_fever"],
         urgency="soon",
         recommended_exams=[(1, "超音波", "Ultrasound")],
         merck_url=_MERCK + "jugular+thrombophlebitis+horses",
@@ -12525,6 +12533,10 @@ _SYNDROME_FINDING_FLOORS: dict[str, tuple[str, ...]] = {
     # ed）— 未tierの3所見エントリ（蹄関節疾患・蹄異物）が単一所見の熱蹄主訴で
     # 上位を独占していた（2026-10 第42回）。最多原因であり減額フロア。
     "hoof_heat": ("Hoof Abscess", "Acute Laminitis"),
+    # 発熱を伴わない遠位肢の浮腫（フィリング）は厩舎飼養馬のストッキングアップが
+    # 最多原因（Reed & Bayly 4th ed; Fogle）。発熱併存時は蜂窩織炎・リンパ管炎の
+    # 像のため発火させない（2026-10 第43回）— 減額フロア
+    "limb_filling": ("Stocking Up",),
 }
 _SYNDROME_FLOOR_SCORE = 0.62
 # Findings that are the *most common cause* rather than pathognomonic get a
@@ -12537,6 +12549,7 @@ _SYNDROME_FLOOR_SCORE_OVERRIDES: dict[str, float] = {
     "dig_diarrhea": 0.42,
     "body_stiffness": 0.42,
     "hoof_heat": 0.42,
+    "limb_filling": 0.46,
 }
 
 # Sign PAIRS that define a syndrome even when the namesake checkbox wasn't
@@ -12577,6 +12590,18 @@ _SYNDROME_PAIR_BOOSTS: list[tuple[frozenset, tuple[str, ...], float]] = [
     # abscess inside the tight top cluster of foot differentials for the
     # fore-limb hot-hoof pair (laminitis leads — typically bilateral fore).
     (frozenset({"hoof_heat", "limb_lameness_fore"}), ("Hoof Abscess",), 1.5),
+    # 2026-10 第43回: 発熱を伴う肢の腫脹は蜂窩織炎・リンパ管炎 until proven
+    # otherwise（Fogle, Reed & Bayly 4th ed）— 多所見の本体がカバレッジで希釈され、
+    # 外傷管理・眼窩蜂窩織炎等の小セットが上位を独占していた
+    (
+        frozenset({"limb_filling", "gen_fever"}),
+        ("Cellulitis", "Lymphangitis", "Ulcerative Lymphangitis (Corynebacterium pseudotuberculosis)"),
+        1.5,
+    ),
+    # 高熱＋咳嗽は馬インフルエンザ・EHV-4（鼻肺炎）の古典像（Reed & Bayly 4th ed; AAEP
+    # 感染症ガイドライン）— 稀な地域限定エントリ（類鼻疽）が3所見カバレッジで
+    # 上回っていた
+    (frozenset({"gen_fever", "resp_cough"}), ("Equine Influenza", "Equine Herpesvirus Type 4 (EHV-4)"), 1.6),
 ]
 
 
@@ -12701,7 +12726,10 @@ def generate_differential_diagnosis(
                 # ならない（フロアの設計意図そのもの — Baxter, Adams &
                 # Stashak 7th ed。従来は Aspergillosis の過剰スコアが偶然
                 # 蓋をしていたため顕在化しなかった）
-                if finding in ("limb_lameness_fore", "limb_lameness_hind") and "gen_fever" in checked_findings:
+                if (
+                    finding in ("limb_lameness_fore", "limb_lameness_hind", "limb_filling")
+                    and "gen_fever" in checked_findings
+                ):
                     continue
                 floor = _SYNDROME_FLOOR_SCORE_OVERRIDES.get(finding, _SYNDROME_FLOOR_SCORE)
                 raw_score = max(raw_score, floor * prevalence_mult)
