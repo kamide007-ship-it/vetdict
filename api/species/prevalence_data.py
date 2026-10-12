@@ -568,6 +568,9 @@ SPECIES_PREVALENCE = {
     # McFarlane 2011 (PPID); Gerding & Gilger 2016 (ERU)
     # ==================================================================
     "horse": {
+        # 2026-10 第69弾: 体重減少単独主訴を皮膚腫瘍の2所見エントリが独占していた
+        "Fibrosarcoma": "uncommon",
+        "Hemangiosarcoma": "rare",
         # 2026-10 第43回: 遠位肢浮腫の鑑別（Reed & Bayly 4th ed）
         "Stocking Up": "common",
         "Frostbite": "rare",
@@ -633,7 +636,7 @@ SPECIES_PREVALENCE = {
         "Corneal Ulcer": "common",  # Most common equine ophthalmic emergency
         "Equine Recurrent Uveitis": "common",  # Leading cause of equine blindness
         "Pituitary Pars Intermedia Dysfunction": "common",  # >20% of aged horses
-        "Equine Metabolic Syndrome (EMS)": "common",
+        "Equine Metabolic Syndrome": "common",
         "Superficial Digital Flexor Tendinitis": "common",  # Athletic horses
         "Proximal Suspensory Desmitis": "common",  # Sport horses
         "Navicular Syndrome": "common",

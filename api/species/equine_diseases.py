@@ -835,7 +835,7 @@ DISEASE_DATABASE: list[Disease] = [
             (1, "鼻腔スワブPCR", "Nasal Swab PCR"),
         ],
         merck_url=_MERCK + "equine+influenza",
-        treatment_protocol="【病態】馬インフルエンザ(Equine Influenza Virus、EIV)— H3N8亜型(主流)・H7N7亜型(過去株、近年検出なし)のインフルエンザAウイルスによる急性上部呼吸器感染症。飛沫感染で潜伏期1-3日、発症後7-10日間ウイルス排泄。集団発生で数日内に全頭波及するほど伝染性高く、レース・展示中止リスク。下部気道炎症 → 二次性細菌性肺炎・心筋炎(運動復帰早期化リスク)。【診断】(1)鼻咽頭スワブPCR(リアルタイムRT-PCR、発症0-5日が最高陽性率) — 感度・特異度ともゴールドスタンダード。(2)鼻咽頭スワブ抗原迅速検査(Directigen Flu A 等) — チェアサイド15分、感度70-80%、陰性でもPCR必須。(3)ペア血清(発症急性期 + 2-3週後) — HI抗体価4倍上昇で確定診断、回顧的。(4)ウイルス分離(発育鶏卵・MDCK細胞) — 株サーベイランス用。(5)CBC:急性期リンパ球減少 + 単球増加。【治療(対症療法のみ、抗ウイルス薬適応外が原則)】(1)完全休養:発症から最低3週間(下部気道炎症消退・心筋回復) — 早期復帰は心筋炎・運動誘発性肺出血悪化リスク、ガイドライン上必須。(2)NSAIDs:フルニキシンメグルミン 1.1 mg/kg IV/PO q12-24h(発熱>39.5°C)、フェニルブタゾン 2.2 mg/kg PO BID。(3)粘液溶解:デキサメタゾン吸入(炎症高度時)、N-アセチルシステイン4-6 g PO BID(参考)、温湿生理食塩水ネブライザー。(4)二次性細菌性肺炎発症時(発熱遷延・粘膿性鼻汁・気管音):培養 + ペニシリン 22,000 IU/kg IV q6h ± ゲンタマイシン 6.6 mg/kg IV q24h、TMS 30 mg/kg PO BID。(5)オセルタミビル 2 mg/kg PO BID × 5日 — エビデンス限定的、シェディング軽減の可能性(Yamanaka 2007、低力価)、第一選択ではない。【予防接種(最重要)】HI titer ≥1:160維持目標。(1)成馬基礎免疫:0/3-6週/6ヶ月の3回シリーズ(初回は不活化または組換え)、その後6ヶ月毎ブースター(レース馬・競技馬必須)、12ヶ月毎(低リスク馬)。(2)子馬:6ヶ月齢から開始(母乳由来抗体減衰後)、3回シリーズ。(3)株:現流行株(H3N8 Florida sublineage clade 1 + 2)対応ワクチン推奨、OIE Expert Surveillance Panel年次更新。(4)生ワクチン(Flu Avert IN、鼻腔噴霧):6ヶ月免疫、IgA局所免疫誘導。(5)組換えカナリポックスベクター(ProteqFlu):2週間で免疫獲得・流行下緊急接種に有用。【バイオセキュリティ】(1)発症馬即時隔離(独立厩舎・専用器具・専用人員)、3週間維持。(2)新規入厩馬の14-21日隔離・PCR陰性確認。(3)体温日次モニタリング(>38.5°Cで隔離 + PCR)。(4)厩舎・運搬車消毒(次亜塩素酸ナトリウム1:32、過酢酸)。(5)職員のシェディング媒介(衣類・手指)対策。(6)集団発生時はAAEPガイドライン準拠の蔓延制御。【予後】対症管理 + 適切な休養で>95%完全回復、休養不十分例で慢性気道過敏症(IAD)・運動能力低下・心筋炎リスク。混合感染・二次性細菌性肺炎で死亡稀。【参考文献】Cullinane A, Newton JR. Equine influenza — A global perspective. Vet Microbiol 2013 / OIE Expert Surveillance Panel on Equine Influenza Vaccine Composition (annual update) / Daly JM et al. Equine influenza: a review of an unpredictable virus. Vet J 2011 / AAEP Vaccination Guidelines: Equine Influenza (current) / Yamanaka T et al. Antiviral effect of oseltamivir against EIV. J Vet Med Sci 2007 / Sellon DC, Long MT. Equine Infectious Diseases 2nd ed (2014)。",
+        treatment_protocol="【病態】馬インフルエンザ(Equine Influenza Virus、EIV)— H3N8亜型(主流)・H7N7亜型(過去株、近年検出なし)のインフルエンザAウイルスによる急性上部呼吸器感染症。飛沫感染で潜伏期1-3日、発症後7-10日間ウイルス排泄。集団発生で数日内に全頭波及するほど伝染性高く、レース・展示中止リスク。下部気道炎症 → 二次性細菌性肺炎・心筋炎(運動復帰早期化リスク)。【診断】(1)鼻咽頭スワブPCR(リアルタイムRT-PCR、発症0-5日が最高陽性率) — 感度・特異度ともゴールドスタンダード。(2)鼻咽頭スワブ抗原迅速検査(Directigen Flu A 等) — チェアサイド15分、感度70-80%、陰性でもPCR必須。(3)ペア血清(発症急性期 + 2-3週後) — HI抗体価4倍上昇で確定診断、回顧的。(4)ウイルス分離(発育鶏卵・MDCK細胞) — 株サーベイランス用。(5)CBC:急性期リンパ球減少 + 単球増加。【治療(対症療法のみ、抗ウイルス薬適応外が原則)】(1)完全休養:発症から最低3週間(下部気道炎症消退・心筋回復) — 早期復帰は心筋炎・運動誘発性肺出血悪化リスク、ガイドライン上必須。(2)NSAIDs:フルニキシンメグルミン 1.1 mg/kg IV/PO q12-24h(発熱>39.5°C)、フェニルブタゾン 2.2 mg/kg PO BID。NSAIDが使いにくい症例（消化管潰瘍・腎機能低下）の解熱にはメタミゾール（ジピロン・スルピリン）30 mg/kg 緩徐IV q12h（最長3日、ZIMETA FDA 2020承認; 国内は動物用スルピリン注の添付文書に従う）も選択肢。(3)粘液溶解:デキサメタゾン吸入(炎症高度時)、N-アセチルシステイン4-6 g PO BID(参考)、温湿生理食塩水ネブライザー。(4)二次性細菌性肺炎発症時(発熱遷延・粘膿性鼻汁・気管音):培養 + ペニシリン 22,000 IU/kg IV q6h ± ゲンタマイシン 6.6 mg/kg IV q24h、TMS 30 mg/kg PO BID。(5)オセルタミビル 2 mg/kg PO BID × 5日 — エビデンス限定的、シェディング軽減の可能性(Yamanaka 2007、低力価)、第一選択ではない。【予防接種(最重要)】HI titer ≥1:160維持目標。(1)成馬基礎免疫:0/3-6週/6ヶ月の3回シリーズ(初回は不活化または組換え)、その後6ヶ月毎ブースター(レース馬・競技馬必須)、12ヶ月毎(低リスク馬)。(2)子馬:6ヶ月齢から開始(母乳由来抗体減衰後)、3回シリーズ。(3)株:現流行株(H3N8 Florida sublineage clade 1 + 2)対応ワクチン推奨、OIE Expert Surveillance Panel年次更新。(4)生ワクチン(Flu Avert IN、鼻腔噴霧):6ヶ月免疫、IgA局所免疫誘導。(5)組換えカナリポックスベクター(ProteqFlu):2週間で免疫獲得・流行下緊急接種に有用。【バイオセキュリティ】(1)発症馬即時隔離(独立厩舎・専用器具・専用人員)、3週間維持。(2)新規入厩馬の14-21日隔離・PCR陰性確認。(3)体温日次モニタリング(>38.5°Cで隔離 + PCR)。(4)厩舎・運搬車消毒(次亜塩素酸ナトリウム1:32、過酢酸)。(5)職員のシェディング媒介(衣類・手指)対策。(6)集団発生時はAAEPガイドライン準拠の蔓延制御。【予後】対症管理 + 適切な休養で>95%完全回復、休養不十分例で慢性気道過敏症(IAD)・運動能力低下・心筋炎リスク。混合感染・二次性細菌性肺炎で死亡稀。【参考文献】Cullinane A, Newton JR. Equine influenza — A global perspective. Vet Microbiol 2013 / OIE Expert Surveillance Panel on Equine Influenza Vaccine Composition (annual update) / Daly JM et al. Equine influenza: a review of an unpredictable virus. Vet J 2011 / AAEP Vaccination Guidelines: Equine Influenza (current) / Yamanaka T et al. Antiviral effect of oseltamivir against EIV. J Vet Med Sci 2007 / Sellon DC, Long MT. Equine Infectious Diseases 2nd ed (2014)。",
         clinical_signs_detail="高熱(39.5-41.5°C、急峻発症)、沈鬱・食欲不振、頻発する短く乾いた咳嗽(発熱解熱後も2-3週間遷延)、漿液性鼻汁(初期)→粘液膿性(二次感染時)、下顎リンパ節中等度腫脹、運動不耐性、結膜充血・流涙。発症3-7日で発熱解熱、咳嗽は2-3週間継続。子馬・高齢馬・ワクチン未接種で重症化(下部気道炎症・気管支肺炎・心筋炎)。下部気道炎症遷延でIAD移行リスク。集団内では数日で次々発症するパターンが特徴",
         risk_factors="ワクチン未接種・接種後>6ヶ月経過、密集飼育(レース場・展示会・厩舎)、新規馬の頻繁な出入り(隔離不足)、若齢馬(2-5歳のレース馬)、輸送ストレス、混合輸送(複数厩舎)、現流行株とワクチン株の抗原性ドリフト、競技シーズン(春秋の集団移動期)、母乳由来抗体減衰期(6-12ヶ月齢子馬)、寒冷・乾燥気候(エアロゾル安定化)、AAEPリスクベースワクチネーション基準のhigh risk群該当",
     ),
@@ -1125,8 +1125,10 @@ DISEASE_DATABASE: list[Disease] = [
         "Equine Metabolic Syndrome",
         "metabolic",
         "moderate",
-        "インスリン抵抗性、肥満、蹄葉炎のリスク増加。",
-        ["gen_weight_loss", "hoof_laminitis_signs", "body_edema", "repo_blood_abnormal", "body_hirsutism"],
+        "インスリン調節障害（高インスリン血症・インスリン抵抗性）、全身性/局所性肥満、蹄葉炎のリスク増加。",
+        # 2026-10 第69弾: 旧所見は体重減少・多毛（=PPIDの徴候）で EMS（肥満の疾患）と
+        # 逆だった。重複カード mt_ems2 の正しい所見に統合（Durham 2019 ECEIM consensus）
+        ["body_fat_deposits", "body_neck_crest", "hoof_laminitis_signs", "repo_blood_abnormal"],
         urgency="routine",
         recommended_exams=[
             (1, "血液検査(インスリン)", "Blood Work (Insulin)"),
@@ -1134,8 +1136,8 @@ DISEASE_DATABASE: list[Disease] = [
             (3, "ACTH検査", "ACTH Test"),
         ],
         merck_url=_MERCK + "equine+metabolic+syndrome",
-        treatment_protocol="食事管理：低NSC(非構造性炭水化物)食、グレージングマズル、放牧制限。代謝異常に対する輸液療法(カリウム補充を含む乳酸リンゲル液)。インスリン調節：インスリン異常症にレボチロキシン 0.1 mg/kg PO SID、メトホルミン 15-30 mg/kg PO BID。電解質補正：低カルシウム血症にグルコン酸カルシウム、低マグネシウム血症に硫酸マグネシウム。肝支持療法：肝性脳症にIVブドウ糖、分岐鎖アミノ酸。馬メタボリックシンドロームに運動プログラム。定期的な代謝パネルモニタリング。",
-        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
+        treatment_protocol="食事管理が治療の中心：NSC（非構造性炭水化物）10%DM未満の乾草（給与前の浸水30-60分で糖質を低減）を体重の1.5%DM/日（減量時）、穀物・甘味飼料の中止、グレージングマズルまたは放牧制限（春秋の若草はフルクタン高含有）。運動：蹄葉炎のない馬では段階的な運動プログラム（インスリン感受性を改善）。薬物は食事・運動管理の補助：レボチロキシン 0.1 mg/kg PO q24h×3-6ヶ月（減量補助）、メトホルミン 30 mg/kg PO q8-12h（経口生物学的利用率が低くエビデンス限定的）。PPID併発例はペルゴリド。蹄葉炎は即時の蹄支持・NSAID鎮痛。インスリン動態検査（経口糖負荷試験）とBCS/頸部稜スコアで定期評価（Durham AE et al. ECEIM consensus 2019; Frank N et al. JVIM 2010）。",
+        clinical_signs_detail="肥満（イージーキーパー）、局所性脂肪沈着（頸部稜＝クレスティネック、尾根部、肩・包皮/乳房周囲）、慢性・再発性の蹄葉炎（蹄輪の発散、陥蹄）、高インスリン血症（臨床徴候を伴わないことが多い）、運動不耐。体重減少・多毛はPPIDを示唆し、併発の有無を評価する",
         risk_factors="肥満、品種的素因(ポニー、モーガン、アラブ)、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動(春の牧草増加)",
     ),
     Disease(
@@ -10998,25 +11000,8 @@ DISEASE_DATABASE: list[Disease] = [
     # ================================================================
     # 追加代謝性疾患 (Metabolic) — 追加10疾患
     # ================================================================
-    Disease(
-        "mt_ems2",
-        "馬メタボリック症候群",
-        "Equine Metabolic Syndrome (EMS)",
-        "metabolic",
-        "moderate",
-        "インスリン調節障害・肥満・蹄葉炎リスク。イージーキーパーに好発。",
-        ["body_fat_deposits", "body_neck_crest", "hoof_laminitis_signs", "gen_polydipsia"],
-        urgency="routine",
-        recommended_exams=[
-            (1, "インスリン動態検査", "Dynamic Insulin Test"),
-            (2, "血糖値", "Blood Glucose"),
-            (3, "ACTH検査", "ACTH Assay"),
-        ],
-        merck_url=_MERCK + "equine+metabolic+syndrome",
-        treatment_protocol="食事管理：低NSC(非構造性炭水化物)食、グレージングマズル、放牧制限。代謝異常に対する輸液療法(カリウム補充を含む乳酸リンゲル液)。インスリン調節：インスリン異常症にレボチロキシン 0.1 mg/kg PO SID、メトホルミン 15-30 mg/kg PO BID。電解質補正：低カルシウム血症にグルコン酸カルシウム、低マグネシウム血症に硫酸マグネシウム。肝支持療法：肝性脳症にIVブドウ糖、分岐鎖アミノ酸。馬メタボリックシンドロームに運動プログラム。定期的な代謝パネルモニタリング。",
-        clinical_signs_detail="多飲多尿、体重減少/肥満、被毛粗剛・脱毛、異常脂肪沈着(馬首)、陥蹄(続発性蹄葉炎)、筋痙攣・横臥、異常発汗、沈鬱・元気消失",
-        risk_factors="肥満、品種的素因(ポニー、モーガン、アラブ)、高糖質飼料・豊富な牧草、加齢、クッシング病併発、運動不足、季節変動(春の牧草増加)",
-    ),
+    # mt_ems2 ("Equine Metabolic Syndrome (EMS)") は mt_ems と同一疾患の重複カードだったため
+    # 統合・削除（2026-10 第69弾）。所見は mt_ems に吸収済み。
     # mt_ppid2 ("PPID / Cushing's") は mt_ppid と同一疾患の重複カードだったため
     # 統合・削除 (2026-08)。所見は mt_ppid に吸収済み。旧エントリの予後には
     # 犬クッシング用のトリロスタン/ミトタンが誤記されていた（馬PPIDはペルゴリドが第一選択）。
@@ -11510,6 +11495,7 @@ DISEASE_DATABASE: list[Disease] = [
         "子馬の胃・十二指腸潰瘍。生後2日目から胃酸分泌開始、扁平上皮部と腺部両方に発生。サイレント型から穿孔・十二指腸狭窄まで4つの臨床型(Becht et al. Proc AAEP 1986)。入院NICU子馬の有病率40-50%、健康子馬でも25-50%(Murray AJVR 1989)。",
         [
             "dig_bruxism",
+            "dig_salivation",
             "foal_lethargy",
             "gen_poor_appetite",
             "dig_gastric_reflux",
@@ -12253,6 +12239,18 @@ def _enrich_horse_diseases() -> None:
         "の発生には複数要因が複合的に関与する",
         # Generic neoplasia pathophysiology template.
         "病態生理は正常細胞の悪性転換から始まる",
+        # 2026-10 第69弾: 治療欄のカテゴリ共通テンプレート（蹄・歯科・関節・神経・
+        # 代謝・中毒）— 26疾患で疾患固有の治療と異なる共通文だった。JSON の
+        # キュレート文（英語キュレート治療の日本語版）を優先する。
+        "治療用蹄鉄装着またはフーフキャスティングによる即時安定化",
+        "鎮静(デトミジン 0.01-0.02 mg/kg IV ＋ ブトルファノール 0.01-0.02 mg/kg IV)下で",
+        "初期管理として安静、運動制限、冷却療法を実施",
+        "支持療法：起立不能馬のスリング支持",
+        "代謝異常に対する輸液療法(カリウム補充",
+        "直ちに毒物源から除去。胃洗浄：活性炭",
+        "腎支持・利尿のための輸液療法(乳酸リンゲル液、0.9% NaCl)",
+        "免疫抑制療法：デキサメタゾン 0.04-0.2 mg/kg IV/IM 漸減",
+        "解剖学的に可能な場合は広いマージンでの外科的切除",
     )
 
     def _is_horse_template(val: str) -> bool:
@@ -12265,7 +12263,13 @@ def _enrich_horse_diseases() -> None:
         if enrichment:
             for dc_field, json_fields in field_map.items():
                 current = getattr(disease, dc_field, None) or ""
-                if current and not _is_horse_template(current):
+                # 治療欄が疾患説明文の複写（第69弾: 14疾患）は空欄と同等に扱う
+                desc_copy = (
+                    dc_field == "treatment_protocol"
+                    and bool(disease.description_ja)
+                    and current[:30] == disease.description_ja[:30]
+                )
+                if current and not desc_copy and not _is_horse_template(current):
                     continue
                 for jf in json_fields:
                     val = enrichment.get(jf)
@@ -12537,6 +12541,9 @@ _SYNDROME_FINDING_FLOORS: dict[str, tuple[str, ...]] = {
     # 最多原因（Reed & Bayly 4th ed; Fogle）。発熱併存時は蜂窩織炎・リンパ管炎の
     # 像のため発火させない（2026-10 第43回）— 減額フロア
     "limb_filling": ("Stocking Up",),
+    # 成馬の慢性的な体重減少は歯科疾患と内部寄生虫が最多原因（Reed & Bayly 4th ed）
+    # — 皮膚腫瘍の2所見エントリが体重減少単独主訴を独占していた（第69弾）。減額フロア
+    "gen_weight_loss": ("Malocclusion", "Internal Parasites"),
 }
 _SYNDROME_FLOOR_SCORE = 0.62
 # Findings that are the *most common cause* rather than pathognomonic get a
@@ -12550,6 +12557,7 @@ _SYNDROME_FLOOR_SCORE_OVERRIDES: dict[str, float] = {
     "body_stiffness": 0.42,
     "hoof_heat": 0.42,
     "limb_filling": 0.46,
+    "gen_weight_loss": 0.42,
 }
 
 # Sign PAIRS that define a syndrome even when the namesake checkbox wasn't
@@ -12585,6 +12593,25 @@ _SYNDROME_PAIR_BOOSTS: list[tuple[frozenset, tuple[str, ...], float]] = [
     # entries won on trivially perfect coverage for the hindlimb variant
     # (the fore variant already benefits from the laminitis pairs above).
     (frozenset({"hoof_heat", "limb_lameness_hind"}), ("Hoof Abscess",), 1.5),
+    # 2026-10 第69弾: 発熱＋下顎/咽喉頭リンパ節腫脹は腺疫 until proven otherwise
+    # （Boyle 2018 ACVIM consensus）— 頸静脈炎・リンパ管炎の小セットが上位だった
+    (
+        frozenset({"gen_fever", "gen_swollen_lymph"}),
+        ("Strangles", "Strangles (Streptococcus equi)"),
+        1.5,
+    ),
+    # 屈腱部の腫脹＋熱感は屈腱炎（SDFT が最多 — Adams & Stashak 7th ed）
+    (
+        frozenset({"limb_tendon_swelling", "limb_tendon_heat"}),
+        ("Superficial Digital Flexor Tendinitis",),
+        1.4,
+    ),
+    # 子馬の歯ぎしり＋流涎は胃潰瘍の古典的徴候（Reed & Bayly 4th ed）
+    (
+        frozenset({"dig_bruxism", "dig_salivation"}),
+        ("Foal Gastric Ulcer Syndrome (FGUS)", "Gastric Ulcers (EGUS)"),
+        1.5,
+    ),
     # 2026-09 round-29: parity with the hindlimb pair. Combined with tiering
     # the niche 3-finding hoof entries (prevalence_data), this keeps the
     # abscess inside the tight top cluster of foot differentials for the

@@ -781,6 +781,22 @@ SYMPTOMS = [
         "name_en": "Missing Teeth / Tooth Not Erupting",
         "category": "general",
     },
+    # 2026-10 第69弾: 運動失調（ふらつき）に legacy ID が無く ataxia→tremors
+    # フォールバックでてんかん/低Ca血症へ誤誘導されていた（老犬の後肢ふらつき）。
+    {
+        "id": "ataxia",
+        "name_ja": "運動失調・ふらつき",
+        "name_en": "Ataxia / Wobbly Gait",
+        "category": "neurological",
+    },
+    # 2026-10 第69弾: 点状出血・紫斑（「お腹に赤い点々」）に legacy ID が無く、
+    # 犬の代表的な出血救急である免疫介在性血小板減少症に着地しなかった。
+    {
+        "id": "petechiae",
+        "name_ja": "点状出血・紫斑（皮膚や歯茎の赤い点々・あざ）",
+        "name_en": "Petechiae / Ecchymoses (Pinpoint Red Spots, Bruising)",
+        "category": "general",
+    },
     # 2026-10 audit round 39: facial-droop and weight-gain vocabulary.
     # 「片方の耳だけ下がって顔が歪んでいます」 extracted ZERO ids — the single
     # defining sign of facial nerve paralysis (and a common otitis
@@ -1528,6 +1544,7 @@ DISEASES = [
         "description_ja": "脊髄の白質が進行性に変性する神経疾患です。後肢の麻痺が徐々に進行し、最終的には四肢麻痺に至ります。",
         "description_en": "A progressive neurological disease causing degeneration of the spinal cord white matter. Leads to gradual hind limb paralysis progressing to quadriplegia.",
         "symptoms": [
+            "ataxia",
             "paralysis",
             "stiffness",
             "reluctance_to_move",
@@ -2206,6 +2223,7 @@ DISEASES = [
         "description_ja": "高齢犬に突然発症する末梢前庭障害。犬の末梢前庭疾患で最も多く、急な頭部傾斜・眼振・旋回・転倒・めまいによる嘔吐が典型（「脳卒中では」と心配されがちな症候群）。原因不明で、意識・四肢の固有位置感覚は正常。多くは72時間以内に改善が始まり数日〜数週で自然回復します。治療は支持療法（制吐薬・転倒防止・介助給餌）のみ。改善しない場合や他の神経症状を伴う場合は中枢性疾患・中耳炎の精査を（Rossmeisl 2010; Ettinger 8th ed）。",
         "description_en": "Acute-onset peripheral vestibular dysfunction of older dogs — the most common peripheral vestibular disorder in dogs. Sudden head tilt, nystagmus, circling/falling and vertigo-induced vomiting are classic; owners often fear a stroke. Mentation and proprioception are normal, improvement typically begins within 72 hours, and most dogs recover over days to weeks with supportive care only (antiemetics, fall protection, assisted feeding). Failure to improve or additional neurologic deficits warrants workup for central disease or otitis media/interna (Rossmeisl 2010; Ettinger 8th ed).",
         "symptoms": [
+            "ataxia",
             "head_tilting",
             "circling",
             "disorientation",
@@ -3113,6 +3131,7 @@ DISEASES = [
         "description_ja": "頸部脊椎の不安定性や変形により脊髄が圧迫される疾患です。ふらつく歩様（ウォブリング）が特徴で、大型犬に多発します。",
         "description_en": "A condition where cervical spinal instability or malformation compresses the spinal cord. Characterized by a wobbly gait, predominantly affecting large breeds.",
         "symptoms": [
+            "ataxia",
             "stiffness",
             "paralysis",
             "reluctance_to_move",
@@ -3366,7 +3385,7 @@ DISEASES = [
         "name_en": "Cerebellar Ataxia",
         "description_ja": "小脳の変性により、運動協調の障害、震え、異常歩行を引き起こします。",
         "description_en": "Degeneration of the cerebellum causing loss of coordination, tremors, and abnormal gait.",
-        "symptoms": ["tremors", "disorientation", "head_tilting", "circling", "stiffness"],
+        "symptoms": ["ataxia", "tremors", "disorientation", "head_tilting", "circling", "stiffness"],
         "severity": "high",
         "recommended_tests": ["mri", "genetic_testing", "csf_analysis"],
         "breed_risks": {
@@ -3776,6 +3795,32 @@ DISEASES = [
             "cocker_spaniel": 2.5,
             "beagle": 1.5,
             "pembroke_welsh_corgi": 1.4,
+        },
+    },
+    # 2026-10 第69弾: 犬の出血性救急で最多の原発性血小板減少症が legacy DB に
+    # 無く、「お腹に赤い点々がたくさん」が抽出ゼロ/無関係疾患に着地していた。
+    # 主訴ゲート設計（点状出血のみ — 元気消失・鼻血は他疾患の所有物）。
+    {
+        "id": "immune_mediated_thrombocytopenia",
+        "prevalence_tier": "uncommon",
+        "name_ja": "免疫介在性血小板減少症（ITP）",
+        "name_en": "Autoimmune Thrombocytopenia (ITP)",
+        "description_ja": "抗血小板抗体により血小板が破壊され、皮膚・粘膜の点状出血/斑状出血、鼻出血、血便・メレナ、血尿を起こす救急疾患です。中年の雌犬に多く、コッカー・スパニエル、プードル、オールド・イングリッシュ・シープドッグが好発。血小板数は通常30,000/µL未満（自然出血は多くが20,000/µL未満）で、PT/aPTTは正常（DICとの鑑別点）。マダニ媒介感染症（エーリキア・アナプラズマ・バベシア）、薬剤、腫瘍による二次性を除外してから一次性と診断します。治療は免疫抑制量のグルココルチコイド（プレドニゾロン 2 mg/kg/日、大型犬は 50-60 mg/m²/日）が軸で、重症例はビンクリスチン 0.02 mg/kg IV 単回併用で血小板回復が早まり（Rozanski 2002）、ヒト免疫グロブリン（hIVIG）も選択肢。出血中は筋注・頸静脈穿刺を避け、重度貧血には輸血（Ettinger 8th ed; ACVIM consensus 2019）。",
+        "description_en": "Antiplatelet antibodies destroy platelets, causing skin/mucosal petechiae and ecchymoses, epistaxis, melena/hematochezia and hematuria — a bleeding emergency. Middle-aged females are overrepresented (cocker spaniels, poodles, Old English sheepdogs). Platelet count is usually <30,000/µL (spontaneous bleeding mostly <20,000/µL) with normal PT/aPTT (distinguishing it from DIC). Secondary causes (tick-borne Ehrlichia/Anaplasma/Babesia, drugs, neoplasia) must be excluded before calling it primary. Treatment centers on immunosuppressive glucocorticoids (prednisolone 2 mg/kg/day; 50-60 mg/m²/day in large dogs); a single vincristine dose 0.02 mg/kg IV shortens time to platelet recovery in severe cases (Rozanski 2002), and human IVIG is an option. Avoid IM injections and jugular venipuncture while bleeding; transfuse for severe anemia (Ettinger 8th ed; ACVIM consensus 2019).",
+        "symptoms": [
+            "petechiae",
+        ],
+        "severity": "high",
+        "recommended_tests": [
+            "cbc",
+            "blood_smear",
+            "coagulation_panel",
+            "tick_borne_serology",
+        ],
+        "breed_risks": {
+            "cocker_spaniel": 2.0,
+            "poodle": 1.6,
+            "old_english_sheepdog": 1.8,
         },
     },
     # 2026-09 audit round 21: the post-estrus purulent-discharge + PU/PD
@@ -5007,6 +5052,8 @@ _PATHOGNOMONIC_CLUSTERS = [
     # cluster, oral_mass pattern) — otitis media-interna shares the sign in its
     # own set and stays in the list as the key identifiable cause (2026-10).
     (frozenset({"facial_droop"}), "facial_nerve_paralysis", 1.6),
+    # 点状出血は血小板/血管障害の部位診断的所見（2026-10 第69弾）
+    (frozenset({"petechiae"}), "immune_mediated_thrombocytopenia", 1.6),
     # Owner-visible bite abnormality (受け口/出っ歯) is site-diagnostic for an
     # occlusion problem — no other entry carries this sign (2026-10).
     (frozenset({"malocclusion"}), "deciduous_malocclusion", 1.6),
@@ -5605,10 +5652,44 @@ def _join_names_en(names: list, limit: int) -> str:
     return ", ".join(seen[:-1]) + " and " + seen[-1]
 
 
+# 2026-10 第69弾: 臨床徴候セクションのカテゴリ・テンプレートのうち「他の疾患の
+# 徴候を列挙する」型（内分泌=糖尿病/甲状腺/クッシング/アジソン、皮膚=アトピー/
+# 蚤アレルギー/皮膚糸状菌の分布パターン）は、鳥の糖尿病や馬EMSの臨床徴候として
+# 犬猫の別疾患の所見を並べる誤記になっていた（配信DB 430件）。当該テンプレートは
+# 空欄と同等に扱い、レコード自身の症状から再構成する。
+CLINICAL_SIGNS_CATEGORY_TEMPLATE_MARKS = (
+    "ホルモン異常または代謝障害の種類により特異的パターン",
+    "分布パターンが診断に有用",
+    "follow the specific hormonal or metabolic disturbance",
+    "Distribution aids diagnosis:",
+)
+
+
+def _is_cs_category_template(text: str | None) -> bool:
+    return bool(text) and any(m in text for m in CLINICAL_SIGNS_CATEGORY_TEMPLATE_MARKS)
+
+
 def _ground_missing_supplementary_fields(item: dict, species: str) -> None:
     """Fill empty clinical_signs / diagnosis sections from the item's own data."""
     if not isinstance(item, dict):
         return
+    # Templated "lists other diseases' signs" sections are replaced per language
+    # from the record's own presenting signs (kept as-is when none resolve).
+    if _is_cs_category_template(item.get("clinical_signs_ja")) or _is_cs_category_template(item.get("clinical_signs")):
+        display = item.get("symptoms_display") or []
+        signs_ja = _join_names_ja([d.get("name_ja") for d in display if isinstance(d, dict)], 8)
+        signs_en = _join_names_en(
+            [d.get("name_en") for d in display if isinstance(d, dict) and _is_latin(d.get("name_en") or "")], 8
+        )
+        if signs_ja and _is_cs_category_template(item.get("clinical_signs_ja")):
+            item["clinical_signs_ja"] = (
+                f"本症で報告される主な臨床徴候には{signs_ja}などがある。所見の種類と程度は症例や病期により異なる。"
+            )
+        if signs_en and _is_cs_category_template(item.get("clinical_signs")):
+            item["clinical_signs"] = (
+                f"Clinical signs reported in this condition include {signs_en}. "
+                "Their range and severity vary between cases."
+            )
     # Clinical signs: only when BOTH languages are empty (curated prose in
     # either language is never overwritten).
     cs_empty = not (item.get("clinical_signs") or "").strip() and not (item.get("clinical_signs_ja") or "").strip()

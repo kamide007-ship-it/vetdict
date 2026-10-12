@@ -67,7 +67,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "doramectin": ("デクトマックス", "Dectomax"),
     "eprinomectin": ("エプリネックス", "Eprinex"),
     "emodepside": ("プロフェンダー", "Profender"),
-    "imidacloprid": ("アドバンテージ",),
+    "imidacloprid": ("アドバンテージ", "Advantage"),
     # --- NSAIDs・鎮痛 ---
     "meloxicam": ("メタカム", "Metacam"),
     "grapiprant": ("ガリプラント", "Galliprant"),
@@ -97,7 +97,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "phenobarbital": ("フェノバール", "Phenobal"),
     "zonisamide": ("エクセグラン", "コンセーブ", "Consave"),
     "gabapentin": ("ガバペン",),
-    "pregabalin": ("リリカ", "Lyrica"),
+    "pregabalin": ("リリカ", "Lyrica", "ボンキャット", "Bonqat"),
     "topiramate": ("トピナ",),
     "alprazolam": ("ソラナックス", "コンスタン"),
     "fluoxetine": ("プロザック", "Prozac"),
@@ -168,7 +168,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "loperamide": ("ロペミン",),
     "lactulose": ("モニラック", "ラグノス"),
     "ursodiol": ("ウルソ", "Urso"),
-    "n_acetylcysteine": ("ムコフィリン",),
+    "n_acetylcysteine": ("ムコフィリン", "NAC"),
     # --- 内分泌 ---
     "methimazole": ("メルカゾール", "Mercazole"),
     "levothyroxine": ("チラーヂン", "チラージン"),
@@ -192,7 +192,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "pergolide": ("プラセンド", "Prascend"),
     "deslorelin": ("スプレロリン", "スプレソリン", "Suprelorin"),
     # --- 免疫抑制・腫瘍 ---
-    "cyclosporine": ("ネオーラル", "サンディミュン", "Neoral"),
+    "cyclosporine": ("ネオーラル", "サンディミュン", "Neoral", "アトピカ", "Atopica"),
     "tacrolimus_systemic": ("プログラフ", "Prograf"),
     "tacrolimus_ophthalmic": ("タリムス",),
     "azathioprine": ("イムラン", "アザニン", "Imuran"),
@@ -231,4 +231,23 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     # --- 消毒・外用 ---
     "chlorhexidine": ("ヒビテン", "ノルバサン", "Nolvasan"),
     "povidone_iodine": ("イソジン", "Isodine"),
+    # --- 2026-10 第69弾: 括弧内にのみ載る主要ブランド（複数の剤形バリアントが同じ
+    # ブランドを括弧に持つため相互作用チェッカーの一意部分一致で未解決だった）---
+    "selamectin": ("レボリューション", "Revolution", "ストロングホールド", "Stronghold"),
+    "fipronil": ("フロントライン", "Frontline"),
+    "fluralaner": ("ブラベクト", "Bravecto"),
+    "maropitant": ("セレニア", "Cerenia", "プレボマックス", "Prevomax"),
+    "bedinvetmab": ("リブレラ", "Librela"),
+    "frunevetmab": ("ソレンシア", "Solensia"),
+    "lotilaner": ("クレデリオ", "Credelio"),
+    "detomidine": ("ドルモセダン", "Dormosedan"),
+    "capromorelin": ("エルラ", "エンタイス", "Elura", "Entyce"),
+    "leflunomide": ("アラバ", "Arava"),
+    "lomustine": ("CCNU",),
+    "tranexamic_acid": ("トランサミン", "TXA"),
+    "desoxycorticosterone": ("ジコータル", "Zycortal", "パーコーテン"),
+    "dexmedetomidine_oromucosal": ("シレオ",),
+    "lactated_ringers": ("LRS",),
+    "guaifenesin": ("GGE",),
+    "dimercaprol": ("BAL",),
 }

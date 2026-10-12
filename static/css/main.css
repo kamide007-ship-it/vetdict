@@ -2166,3 +2166,8 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
   .az-mode-toggle{min-height:36px}
   .interaction-drug.drug-nav-link{display:inline-block;padding:6px 2px;margin:-6px 0}
 }
+
+/* 2026-10 第69弾: モバイルのパンくず「トップ」のタップ目標（33x18px）を拡大 */
+@media(max-width:600px){.breadcrumb-home{display:inline-flex;align-items:center;min-height:36px;padding:0 8px;margin-left:-8px}}
+/* 2026-10 第69弾: チャットの追加質問チップ（26px）・よくみられる疾患チップ（24px）のタップ目標 */
+@media(max-width:600px){.chat-followup-btn,.common-disease-tag{min-height:36px;display:inline-flex;align-items:center}}
