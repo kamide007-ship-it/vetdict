@@ -354,6 +354,10 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # backing — it exists to stop umbrella syndromes with long symptom lists
 # losing on coverage to narrow rarities.
 _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    # 跳躍不能は猫の変形性関節症で最も感度の高い飼い主所見（6歳超の猫の60-90%に
+    # 画像上のDJD — Lascelles 2010 Vet Surg; ISFM/AAFP 2010 疼痛ガイドライン）。
+    # 2026-10 第67弾
+    ("cat", frozenset({"reluctance_to_jump"}), "Osteoarthritis (Degenerative Joint Disease)", 1.35),
     # Anorexia + reduced fecal output in a rabbit is GI stasis until proven
     # otherwise (Oglesbee, Blackwell's 5-Minute Vet Consult: Small Mammal).
     ("rabbit", frozenset({"appetite_loss", "reduced_fecal_output"}), "Gastrointestinal Stasis", 1.45),

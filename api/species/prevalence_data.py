@@ -236,6 +236,19 @@ SPECIES_PREVALENCE = {
     # CAT — 230+ entries (expanded from ~73)
     # ==================================================================
     "cat": {
+        # 2026-10 第67弾: 跳躍不能（猫DJDの最頻の飼い主所見）主訴で未tierの稀な
+        # 脊椎・栄養性エントリが変形性関節症を上回っていた
+        "Feline Atlantoaxial Instability": "rare",
+        "Feline Discospondylitis": "rare",
+        "Feline Hypervitaminosis A (Chronic)": "rare",
+        "Feline Hypervitaminosis A": "rare",
+        "Feline Pansteatitis (Yellow Fat Disease)": "rare",
+        "Feline Chronic Progressive Polyarthritis": "uncommon",
+        # 筋力低下主訴の未tier稀少エントリ（猫胸腺腫瘍・RTA・ヘパトゾーンは真に稀）
+        "Thymic Carcinoma": "rare",
+        "Feline Renal Tubular Acidosis": "rare",
+        "Feline Hepatozoonosis": "rare",
+        "Hypokalemia": "common",
         # PU/PD + 体重減少（高齢猫の CKD/甲状腺/糖尿の古典像）で、未tierの
         # 猫膀胱TCC（犬と異なり猫では稀 — Wilson 2007 JFMS）と尿崩症2型
         # （真に稀な内分泌疾患）が CKD を上回っていた
@@ -1585,6 +1598,11 @@ SPECIES_PREVALENCE = {
         # 先天性疾患 — 未tierのまま2所見カバレッジで小糞粒主訴のGIうっ滞を上回っていた
         # （ウサギMegacolon=rareと同型の是正。チンチラの糞量減少の主因はうっ滞）
         "Congenital Megacolon": "rare",
+        # 2026-10 第67弾: 「下痢+元気消失」で徴候名エントリ（筋萎縮）が嗜眠の同義語
+        # 展開3件でカバレッジ勝ちし1位を奪っていた — 消化器ddxを正しい上位に
+        "Muscle Wasting": "uncommon",
+        "Antibiotic-Associated Dysbiosis": "common",
+        "E. coli Enteritis": "common",
         "Upper Respiratory Infection": "very_common",
         "Diarrhea": "very_common",
         "Dental Malocclusion - Incisor": "very_common",

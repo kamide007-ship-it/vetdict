@@ -98,6 +98,7 @@ from api.drug_batch_71 import DRUGS_BATCH_71
 from api.drug_batch_72 import DRUGS_BATCH_72
 from api.drug_batch_73 import DRUGS_BATCH_73
 from api.drug_batch_74 import DRUGS_BATCH_74
+from api.drug_batch_75 import DRUGS_BATCH_75
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11017,6 +11018,14 @@ for _drug74 in DRUGS_BATCH_74:
         DRUGS.append(_drug74)
         _drug_index[_drug74["id"]] = _drug74
 
+# Batch 75 (2026-10 第67弾: ロピニロール点眼液（クレボー）— 静脈確保不要の犬の催吐、
+#  シンパリカトリオ — 月1回のノミ・マダニ・フィラリア・回虫鉤虫配合チュアブル、
+#  エンフリコキシブ（ダクソコックス）— 週1回投与の犬OA用コキシブ）
+for _drug75 in DRUGS_BATCH_75:
+    if _drug75["id"] not in _drug_index:
+        DRUGS.append(_drug75)
+        _drug_index[_drug75["id"]] = _drug75
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11288,6 +11297,14 @@ _DRUG_CURATED_MERGE: dict[str, list[str]] = {
     #   tranexamic_acid_topical/_iv（経路別）、miconazole_topical、eprinomectin_topical、
     #   succinylcholine_equine（緊急プロトコル）、tramadol_lactation（乳汁分泌サポート）、
     #   maropitant_oral（経路別）
+    # --- 2026-10 第67弾監査: 括弧前ステム一致の残存重複カード ---
+    # レボリューションプラス（同一製剤・同一用量の2枚目カード）
+    "selamectin_sarolaner": ["selamectin_sarolaner_combo"],
+    # ブスコパン（scopolamine_butylbromide は同一薬の旧エントリ — 心拍数記録の安全
+    # パールを持つキュレート側を正規に、旧側からは欠落種（ウサギ等）のみ取り込み）
+    "butylscopolamine": ["scopolamine_butylbromide"],
+    # ピロキシカム TCC プロトコル（同一用量 0.3 mg/kg q24h の2枚目カード）
+    "piroxicam_bladder": ["piroxicam_transitional_cell"],
     "aluminum_hydroxide": ["aluminum_hydroxide_oral"],  # リン吸着剤=本剤の用途そのもの
     "amlodipine": ["amlodipine_feline"],  # 猫高血圧=本剤の主用途
     "atenolol": ["atenolol_oral"],  # 経口β遮断薬=本剤そのもの

@@ -629,6 +629,14 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "排尿痛": "uri_stranguria",
     "discolored urine": "uri_discolored_urine",
     "尿の色異常": "uri_discolored_urine",
+    # 肢の熱感（飼い主は蹄と肢を区別しない — 前肢熱感は蹄熱感+前肢跛行の
+    # 両所見として hot-hoof ペアへ。2026-10 第67弾）
+    "前足が熱": ("hoof_heat", "limb_lameness_fore"),
+    "前肢が熱": ("hoof_heat", "limb_lameness_fore"),
+    "後ろ足が熱": ("hoof_heat", "limb_lameness_hind"),
+    "後肢が熱": ("hoof_heat", "limb_lameness_hind"),
+    "足が熱い": "hoof_heat",
+    "足が熱く": "hoof_heat",
 }
 
 # Lazily built equine finding keys and symptom list
@@ -822,6 +830,10 @@ def extract_symptoms_from_text(text: str) -> list:
         # 耳介下垂（チンチラ向け ear_drooping キー）は犬では顔面神経麻痺/
         # 中耳炎の徴候 — facial_droop へ（2026-10 第39回）
         "weakness": ["lethargy", "exercise_intolerance"],
+        # 関節を痛がる（2026-10 第67弾）— レガシー犬は関節腫脹/こわばりで保持
+        "joint_pain_or_stiffness": ["joint_swelling", "stiffness"],
+        "swollen_joints": ["joint_swelling"],
+        "miliary_dermatitis": ["skin_rashes", "itching"],
         # 脂漏・皮膚臭（2026-10 第42回）
         "greasy_coat": ["greasy_skin"],
         "dropsy": ["bloating", "abdominal_distension"],

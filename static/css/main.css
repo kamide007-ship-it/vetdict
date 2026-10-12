@@ -2153,3 +2153,10 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
 .quick-sym-row::-webkit-scrollbar{display:none}
 .quick-sym-row .quick-sym-btn{margin:0!important;min-height:36px;padding:6px 12px!important;white-space:nowrap;scroll-snap-align:start;font-size:.8rem!important}
 }
+/* 2026-10 第67弾: スマホの小さすぎるタップ目標（390px 実測 21-29px）を 40px 以上に */
+@media(max-width:600px){
+  .first-visit-coach-close,.anesthesia-weight-clear{min-width:40px;min-height:40px;display:inline-flex;align-items:center;justify-content:center}
+  .chat-mode-btn{min-height:40px}
+  .az-mode-toggle{min-height:36px}
+  .interaction-drug.drug-nav-link{display:inline-block;padding:6px 2px;margin:-6px 0}
+}

@@ -4,6 +4,8 @@ Maps JP/EN colloquial expressions to canonical symptom IDs.
 530+ aliases covering veterinary clinical terminology.
 """
 
+import re
+
 SYMPTOM_ALIASES = {
     # English variants
     "cough": "coughing",
@@ -1005,7 +1007,8 @@ SYMPTOM_ALIASES = {
     # 爬虫類追加
     # ---------------------------------------------------------------
     "目が腫れて開かない": "eye_swelling",
-    "目が開かない": "eye_swelling",
+    # 開瞼不能は眼瞼痙攣・眼脂固着（眼痛）の表現 — 眼球腫大ではない（2026-10 第67弾）
+    "目が開かない": "squinting",
     "甲羅に白い斑点": "skin_lesions",
     "甲羅が変色": "skin_lesions",
     "柔らかい部分がある": "soft_bones",
@@ -3249,6 +3252,62 @@ SYMPTOM_ALIASES = {
     "片目だけ大き": "eye_bulging",
     # 鼻出血の混入表現
     "鼻水に血": "epistaxis",
+    # --- 2026-10 第67弾（チャット精度第43回スイープ） ---
+    # 混濁尿・尿臭（膿尿の飼い主表現 → 細菌性膀胱炎）
+    "おしっこが濁": "cloudy_urine",
+    "おしっこの濁り": "cloudy_urine",
+    "尿が濁っ": "cloudy_urine",
+    "尿の濁り": "cloudy_urine",
+    "おしっこの臭いがきつ": "cloudy_urine",
+    "おしっこの臭いが強": "cloudy_urine",
+    "おしっこが臭": "cloudy_urine",
+    "尿の臭いがきつ": "cloudy_urine",
+    "尿の臭いが強": "cloudy_urine",
+    "尿が臭": "cloudy_urine",
+    # ひらがな「あげ」形の挙上肢位（漢字「上げ」のみ収載だった）
+    "足をあげ": "lameness_or_limping",
+    "片足をあげ": "lameness_or_limping",
+    "足を上げて歩": "lameness_or_limping",
+    # 関節痛（多発性関節炎・関節炎）
+    "関節を痛が": "joint_pain_or_stiffness",
+    "関節が痛": "joint_pain_or_stiffness",
+    "関節を触ると痛": "joint_pain_or_stiffness",
+    # 眼周囲の腫脹（眼瞼浮腫 — アレルギー/眼瞼炎）
+    "目の周りが腫れ": "eye_swelling",
+    "まぶたが腫れ": "eye_swelling",
+    "瞼が腫れ": "eye_swelling",
+    # 鼻をすする（鼻閉・鼻汁 — 上部呼吸器）
+    "鼻をすす": "sneezing",
+    "鼻がずるずる": "nasal_discharge",
+    "鼻をずるずる": "nasal_discharge",
+    # 腹式呼吸・努力呼吸（胸水/肺水腫/喘息の飼い主表現）
+    "お腹で呼吸": "labored_breathing",
+    "おなかで呼吸": "labored_breathing",
+    "腹で呼吸": "labored_breathing",
+    "腹式呼吸": "labored_breathing",
+    "肩で息": "labored_breathing",
+    # 猫の粟粒性皮膚炎（小さなかさぶたが多数 — ノミアレルギー等の反応パターン）
+    "かさぶたがたくさん": "miliary_dermatitis",
+    "小さいかさぶた": "miliary_dermatitis",
+    "細かいかさぶた": "miliary_dermatitis",
+    "ブツブツしたかさぶた": "miliary_dermatitis",
+    # 跳躍不能（猫DJD・神経障害 — 飼い主の最頻観察）
+    "飛び乗れな": "reluctance_to_jump",
+    "飛び乗らな": "reluctance_to_jump",
+    "高い所に上れな": "reluctance_to_jump",
+    "高い所へ上れな": "reluctance_to_jump",
+    "高いところに登れな": "reluctance_to_jump",
+    "高い所に登れな": "reluctance_to_jump",
+    # モルモット排尿時発声の言い回し
+    "おしっこをするときに鳴": "squealing_when_urinating",
+    "おしっこするときに鳴": "squealing_when_urinating",
+    "おしっこの時に鳴": "squealing_when_urinating",
+    "排尿時に鳴": "squealing_when_urinating",
+    # トカゲの趾端脱皮不全（脱皮殻の残留 — 目の残留は最長一致で retained_spectacle）
+    "脱皮した皮が": "dysecdysis",
+    "皮が指に残": "dysecdysis",
+    "指に皮が残": "dysecdysis",
+    "脱皮殻が残": "dysecdysis",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---
@@ -3337,8 +3396,11 @@ del _k, _v
 # （「餌を食べません。糞**も**小さくなっています」）が、キーは「糞が小さく」の
 # が形のみで不一致だった。が を含むキーから も 形を生成する（意味は同一）。
 for _k, _v in list(SYMPTOM_ALIASES.items()):
-    if "が" in _k and len(_k) >= 4:
-        _variant = _k.replace("が", "も", 1)
+    # 助詞の が のみ置換: 「ながら」の が・「〜がる」動詞語尾（上がる/痛がる）は除外
+    # （旧実装は「鳴きながらいきむ」→「鳴きなもらいきむ」のような無意味キーを生成していた）
+    _m = re.search(r"(?<!な)が(?![らりるれろっ])", _k) if len(_k) >= 4 else None
+    if _m:
+        _variant = _k[: _m.start()] + "も" + _k[_m.end() :]
         if not _shadows_curated_prefix(_variant, _v):
             SYMPTOM_ALIASES.setdefault(_variant, _v)
 del _k, _v

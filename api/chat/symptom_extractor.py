@@ -85,6 +85,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "distended_abdomen",
         "bloated_abdomen",
         "abdominal_pain",
+        # トカゲ等の体腔膨満（abdominal_swelling 表記 — 2026-10 第67弾）
+        "abdominal_swelling",
+        "coelomic_distension",
     ],
     "abdominal_distension": [
         "bloating",
@@ -108,7 +111,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "hind_leg_weakness",
     ],
     "paralysis": ["paralysis_or_paresis", "paresis", "hind_limb_weakness", "hind_limb_paralysis"],
-    "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis"],
+    # 末尾 muscle_weakness/ataxia: 後肢専用IDを持たない猫等で「後ろ足がふらつき」が
+    # 脱落し「ふらつき」→tremors（中毒ddx）に落ちていた（2026-10 第67弾）
+    "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis", "muscle_weakness", "ataxia"],
     "hind_limb_weakness": ["hind_leg_weakness", "hindlimb_weakness", "posterior_paresis", "progressive_paralysis"],
     "jaundice": ["icterus", "yellow_skin", "yellow_mucous_membranes"],
     # Weight / body
