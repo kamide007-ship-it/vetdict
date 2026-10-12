@@ -1644,6 +1644,7 @@ class TestQuickTapPhraseExtraction:
             "爪が伸びすぎて肉球に刺さっている",
             "首の周りにかさぶたがある",
             "後ろ足がふらつき高い所へ飛び乗れない",
+            "目の色が変わってきた",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -1660,6 +1661,7 @@ class TestQuickTapPhraseExtraction:
             "口から餌をこぼす",
             "背中を触ると痛がる",
             "下痢がひどく元気がない",
+            "後ろ足がむくんでいる",
         ],
         "rabbit": [
             "糞が小さい",
@@ -1675,6 +1677,7 @@ class TestQuickTapPhraseExtraction:
             "お尻の周りに軟らかい便がつく",
             "お尻が汚れていて臭い",
             "耳の中にかさぶたがある",
+            "陰部から血が出る",
         ],
         "chinchilla": [
             "よだれが出る",
@@ -4922,8 +4925,13 @@ class TestChatClinicalAccuracyAuditRound26Parallel:
 
         ids = _extract_species_symptoms("皮膚が赤くなって足に出血斑 元気がない", "amphibian")
         assert "petechiae" in ids, ids
-        top = _match_species_symptoms_to_diseases(ids, "amphibian")[0]
-        assert "レッドレッグ" in (top.get("name_ja") or ""), top.get("name_ja")
+        # 2026-10 第43回: 「皮膚が赤くなって」が skin_redness に正しく解決されるように
+        # なり、レッドレッグ症候群の起因菌エントリ（Aeromonas hydrophila —
+        # Densmore & Green 2007）と首位を分け合う。両者は同一病態のため top-2 で検証。
+        res = _match_species_symptoms_to_diseases(ids, "amphibian")[:2]
+        names = [r.get("name_ja") or "" for r in res]
+        assert any("レッドレッグ" in n for n in names), names
+        assert all("レッドレッグ" in n or "エロモナス" in n for n in names), names
 
     def test_petechiae_alias_falls_back_safely_outside_amphibians(self):
         from api.chat.symptom_extractor import _extract_species_symptoms
@@ -6328,7 +6336,9 @@ class TestChatClinicalAccuracyAuditRound37:
         for key in ["血が出ている", "出血がある", "異常な出血", "abnormal bleeding"]:
             assert SYMPTOM_ALIASES[key] != "genital_discharge", key
         # 陰部/膣を明記する表現は genital_discharge を維持
-        assert SYMPTOM_ALIASES["陰部からの出血"] == "genital_discharge"
+        # 2026-10 第43回: 陰部の「出血」はより特異的な vaginal_bleeding（陰部分泌物系へ
+        # チェーン）に細分化
+        assert SYMPTOM_ALIASES["陰部からの出血"] in ("genital_discharge", "vaginal_bleeding")
         assert SYMPTOM_ALIASES["不正出血"] == "genital_discharge"
 
     def test_dog_gingival_bleeding_ranks_periodontal_not_pyometra(self):

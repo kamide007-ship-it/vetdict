@@ -34,6 +34,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "vaginal_bleeding",
     ],
     "vaginal_discharge": ["genital_discharge", "vulvar_discharge", "bloody_vaginal_discharge"],
+    # 陰部出血（2026-10 第43回）: rabbit はネイティブ保有（子宮腺癌の古典的主訴）。
+    # 非保有種は血様/陰部分泌物へフォールバック（legacy 犬は vulvar_discharge）。
+    "vaginal_bleeding": ["bloody_vaginal_discharge", "vaginal_discharge", "vulvar_discharge", "genital_discharge"],
     # Stick-tail wasting (2026-09 round 21): lizard vocabulary carries
     # tail_thinning (Cryptosporidiosis hallmark); other species fall back to
     # generic wasting.
@@ -183,7 +186,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "ear_discharge": ["ear_infection", "ear_inflammation", "otitis", "ear_mites"],
     "blood_in_urine": ["hematuria", "bloody_urine", "uterine_bleeding", "blood_urine"],
     "blood_urine": ["blood_in_urine", "hematuria", "bloody_urine"],
-    "blood_in_stool": ["melena", "hematochezia", "bloody_stool", "bleeding_gums"],
+    # 鳥類は bloody_droppings 表記（2026-10 第43回 — 鳥「便に血」が抽出ゼロだった）
+    "blood_in_stool": ["bloody_droppings", "melena", "hematochezia", "bloody_stool", "bleeding_gums"],
     "itching": [
         "pruritus",
         "scratching",
@@ -495,8 +499,11 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # Fish fin
     "frayed_fins": ["fin_rot", "fin_erosion", "ragged_fins"],
     "fin_rot": ["frayed_fins", "fin_erosion"],
-    "redness_skin": ["skin_redness", "hemorrhage", "fin_hemorrhage", "bleeding"],
-    "skin_redness": ["redness_skin", "hemorrhage", "red_legs", "red_ventrum"],
+    # 発赤→出血のチェーンは魚・両生類の出血性発赤のためのもの。哺乳類・鳥で
+    # 「皮膚が赤くなっている」が bleeding/hemorrhage に化けないよう、皮膚病変を
+    # 出血より先に置く（2026-10 第43回監査 — 猫/鳥/オウムで bleeding 誤抽出）。
+    "redness_skin": ["skin_redness", "skin_rashes", "skin_lesions", "hemorrhage", "fin_hemorrhage", "bleeding"],
+    "skin_redness": ["redness_skin", "red_legs", "red_ventrum", "skin_rashes", "skin_lesions", "hemorrhage"],
     "fin_hemorrhage": ["redness_skin", "hemorrhage"],
     # Hamster
     "wet_tail": ["diarrhea", "watery_diarrhea"],
@@ -771,6 +778,14 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "erratic_swimming",
         "bloating",
     ],
+    # --- 2026-10 Round 43 sweep ---
+    # 耳道発赤（「耳の中が赤い」）: 猫等は ear_inflammation をネイティブ保有。
+    # 非保有種は外耳炎の他徴候へフォールバック。
+    "ear_inflammation": ["ear_redness", "ear_discharge", "ear_scratching", "scratching_ears", "head_shaking"],
+    # 虹彩変色: cat はネイティブ保有。非保有種は眼の混濁・ぶどう膜炎徴候へ。
+    "iris_color_change": ["uveitis_signs", "eye_redness", "cloudy_eye", "cloudy_eyes", "eye_discharge"],
+    # 羽毛異常: parrot は feather_abnormalities も保有。
+    "abnormal_feathers": ["feather_abnormalities", "feather_discoloration", "feather_loss", "poor_feather_quality"],
 }
 
 # Backwards-compat alias (some older imports use the private name).
@@ -902,6 +917,10 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     # 食べられません→食べられない、走れません→走れない、かもしれません→かもしれない）
     ("れません", "れない"),
     ("れました", "れた"),
+    # ます語幹が「め」で終わる動詞は一段（または可能形）のみ — 五段〜むの
+    # ます形は〜みます。沈めません→沈めない、止めません→止めない（2026-10 第43回）
+    ("めません", "めない"),
+    ("めました", "めた"),
     # 〜ておらず/〜でおらず（おらず＝おる の文語否定連用形。て形に続く場合は
     # 全動詞で〜ていない/〜でいない と同値: うんちが出ておらず→出ていない）
     ("ておらず", "ていない"),

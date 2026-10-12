@@ -637,6 +637,24 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "後肢が熱": ("hoof_heat", "limb_lameness_hind"),
     "足が熱い": "hoof_heat",
     "足が熱く": "hoof_heat",
+    # -- 2026-10 第43回監査（抽出ゼロの飼い主表現） --
+    "食べず": "gen_poor_appetite",
+    "食べな": "gen_poor_appetite",
+    "餌を残": "gen_poor_appetite",
+    "飼い葉を残": "gen_poor_appetite",
+    "足がむくん": "limb_filling",
+    "脚がむくん": "limb_filling",
+    "肢がむくん": "limb_filling",
+    "足がむくみ": "limb_filling",
+    "足が腫れ": "limb_filling",
+    "運動を嫌が": "resp_exercise_intolerance",
+    "すぐ疲れ": "resp_exercise_intolerance",
+    "熱があ": "gen_fever",
+    "熱っぽ": "gen_fever",
+    "皮膚にイボ": "skin_sarcoid",
+    "イボがあ": "skin_sarcoid",
+    "いぼがあ": "skin_sarcoid",
+    "皮膚にいぼ": "skin_sarcoid",
 }
 
 # Lazily built equine finding keys and symptom list
@@ -965,6 +983,11 @@ def extract_symptoms_from_text(text: str) -> list:
         # "指の間が赤い" (interdigital erythema — pododermatitis/atopy) resolves
         # to skin_redness; the legacy dog vocabulary carries erythema as rashes.
         "skin_redness": ["skin_rashes"],
+        # 2026-10 round-43: "耳の中が赤い" (otitis erythema) and melena
+        # predicates ("便が黒い") — closest legacy signals.
+        "ear_inflammation": ["ear_discharge", "ear_scratching"],
+        "black_tarry_stool": ["blood_in_stool"],
+        "vaginal_bleeding": ["vulvar_discharge"],
         # "口を前足で掻く" resolves to pawing_at_mouth (ferret hypoglycemia /
         # oral-pain vocabularies); dogs pawing at the mouth present with
         # hypersalivation as the closest legacy signal.
