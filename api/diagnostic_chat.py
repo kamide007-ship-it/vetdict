@@ -176,6 +176,29 @@ from api.chat.symptom_aliases import SYMPTOM_ALIASES  # noqa: F401
 
 EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     # -- General --
+    # 2026-10 第69弾（馬スイープの語彙ギャップ）
+    "体重が減っ": "gen_weight_loss",
+    "首の上が太": "body_neck_crest",
+    "首の付け根が太": "body_neck_crest",
+    "たてがみの付け根が太": "body_neck_crest",
+    "クレスティネック": "body_neck_crest",
+    "太って": "body_fat_deposits",
+    "体重が増え": "body_fat_deposits",
+    "肥満": "body_fat_deposits",
+    "体重が落ち": "gen_weight_loss",
+    "しょぼしょぼ": "eye_squinting",
+    "涙を流": "eye_tearing",
+    "赤茶色": "body_dark_urine",
+    "茶色っぽいおしっこ": "body_dark_urine",
+    "蹄の裏から悪臭": ("hoof_thrush", "hoof_foul_odor"),
+    "蹄から悪臭": ("hoof_thrush", "hoof_foul_odor"),
+    "蹄が臭": ("hoof_thrush", "hoof_foul_odor"),
+    "黒い汁": "hoof_thrush",
+    "背中を触ると嫌が": "body_back_pain",
+    "腱が腫れて熱": ("limb_tendon_swelling", "limb_tendon_heat"),
+    "腱が熱": "limb_tendon_heat",
+    "下顎が腫れて膿": ("gen_swollen_lymph", "body_swelling"),
+    "顎の下が腫れて膿": ("gen_swollen_lymph", "body_swelling"),
     "fever": "gen_fever",
     "発熱": "gen_fever",
     "熱がある": "gen_fever",
@@ -875,8 +898,7 @@ def extract_symptoms_from_text(text: str) -> list:
         "prostration": ["fainting", "lethargy"],
         "abdominal_distension": ["bloating"],
         "regurgitation": ["vomiting"],
-        "ataxia": ["tremors"],
-        "incoordination": ["tremors"],
+        "incoordination": ["ataxia"],
         # "足を引きずる"/"limping" aliases resolve to lameness_or_limping, which the
         # legacy dog vocabulary carries as plain "limping" — without this mapping
         # the dog chat's own quick-tap suggestion extracted nothing.
@@ -897,6 +919,7 @@ def extract_symptoms_from_text(text: str) -> list:
         # vocabularies); the legacy dog vocabulary uses cloudiness_in_eyes —
         # without this bridge the cataract complaint extracted nothing.
         "cloudy_eye": ["cloudiness_in_eyes"],
+        "corneal_cloudiness": ["cloudiness_in_eyes"],
         "cloudy_eyes": ["cloudiness_in_eyes"],
         # "皮膚が赤い" resolves to skin_lesions (species vocabularies); the
         # legacy dog vocabulary carries skin redness/rash as skin_rashes —

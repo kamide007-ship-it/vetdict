@@ -1799,6 +1799,11 @@ def ground_missing_clinical_signs_and_diagnosis(conn) -> dict[str, int]:
                 return grp
         return None
 
+    try:
+        from api.health_checker import CLINICAL_SIGNS_CATEGORY_TEMPLATE_MARKS as _CS_TEMPLATE_MARKS
+    except ImportError:
+        from health_checker import CLINICAL_SIGNS_CATEGORY_TEMPLATE_MARKS as _CS_TEMPLATE_MARKS  # type: ignore
+
     _sym_cache: dict[str, dict] = {}
 
     def _syms(species):
@@ -1818,6 +1823,26 @@ def ground_missing_clinical_signs_and_diagnosis(conn) -> dict[str, int]:
         species = (row["species"] or "").lower()
 
         cs_empty = not (row["clinical_signs"] or "").strip() and not (row["clinical_signs_ja"] or "").strip()
+        # 他疾患の徴候を列挙するカテゴリ・テンプレート（第69弾）は言語別に空欄扱い
+        tmpl_ja = any(m in (row["clinical_signs_ja"] or "") for m in _CS_TEMPLATE_MARKS)
+        tmpl_en = any(m in (row["clinical_signs"] or "") for m in _CS_TEMPLATE_MARKS)
+        if tmpl_ja or tmpl_en:
+            lookup = _syms(species)
+            sym_ids = _ids(row["symptoms"])
+            if tmpl_en:
+                new_en = compose_grounded_clinical_signs(
+                    [t for t in (lookup.get(s, {}).get("en") for s in sym_ids) if _ascii(t)]
+                )
+                if new_en:
+                    conn.execute("UPDATE diseases SET clinical_signs = ? WHERE id = ?", (new_en, row["id"]))
+                    counts["clinical_signs"] += 1
+            if tmpl_ja:
+                new_ja = compose_grounded_clinical_signs_ja(
+                    [lookup.get(s, {}).get("ja") for s in sym_ids if lookup.get(s, {}).get("ja")]
+                )
+                if new_ja:
+                    conn.execute("UPDATE diseases SET clinical_signs_ja = ? WHERE id = ?", (new_ja, row["id"]))
+                    counts["clinical_signs_ja"] += 1
         if cs_empty:
             lookup = _syms(species)
             sym_ids = _ids(row["symptoms"])

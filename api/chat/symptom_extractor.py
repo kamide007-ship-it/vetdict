@@ -955,7 +955,7 @@ _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
 #   口をずっと開け → open_mouth_breathing（(?<!口) で保護）
 _ADVERB_STRIP = _neg_re.compile(
     r"(が|を|も|は)"
-    r"(?:急に|突然|パンパンに|自分で|とても|かなり|何日も|何日間も|数日間?"
+    r"(?:急に|突然|パンパンに|自分で|とても|かなり|何日も|何日間も|数日間?|だんだん|徐々に|少しずつ"
     r"|(?<!食欲が)(?<!食欲を)(?<!食欲も)(?<!食欲は)すごく"
     r"|いつも(?!と違)"
     r"|(?<!口が)(?<!口を)(?<!口も)(?<!口は)ずっと)"
@@ -979,6 +979,11 @@ def normalize_chat_text(text: str) -> str:
     # （「下痢が続いて血が混じっています」「鼻水に血が混じります」が血尿→
     # 膀胱炎に誤誘導されていた — 2026-10 第42回監査）。尿語が1つでもあれば
     # 従来どおり血尿側に残す。
+    # 排尿文脈での「足をあげる」は雄犬の排尿姿勢（頻回の排尿姿勢=頻尿）で跛行ではない
+    # （「おしっこが出にくそうで何度も足をあげています」が跛行に化けていた — 第69弾）
+    if _BLOOD_URINE_CTX.search(text):
+        for _leg in ("何度も足をあげ", "何度も足を上げ", "何度も足を挙げ"):
+            text = text.replace(_leg, "何度もおしっこ・姿勢")
     if "血が混じ" in text and not _BLOOD_URINE_CTX.search(text) and "毛玉に血" not in text:
         if "鼻" in text:
             text = text.replace("血が混じ", "鼻血・混じ")
