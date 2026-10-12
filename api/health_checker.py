@@ -555,6 +555,13 @@ SYMPTOMS = [
         "category": "urinary",
     },
     {
+        # 混濁尿・尿臭の増強（膿尿/細菌尿の飼い主表現 — 2026-10 第67弾）
+        "id": "cloudy_urine",
+        "name_ja": "尿の濁り・強い尿臭",
+        "name_en": "Cloudy / Malodorous Urine",
+        "category": "urinary",
+    },
+    {
         "id": "straining_to_urinate",
         "name_ja": "排尿困難",
         "name_en": "Straining to Urinate / Stranguria",
@@ -1896,6 +1903,7 @@ DISEASES = [
             "blood_in_urine",
             "incontinence",
             "excessive_licking",
+            "cloudy_urine",
         ],
         "severity": "low",
         "recommended_tests": ["urinalysis", "urine_culture", "ultrasound"],
@@ -2424,6 +2432,31 @@ DISEASES = [
             "shih_tzu": 1.8,
             "cocker_spaniel": 1.8,
             "english_bulldog": 1.5,
+        },
+    },
+    # ---- 12d1b. Immune-Mediated Polyarthritis (2026-10 第67弾) ----
+    # 「発熱+関節を痛がって歩かない」は犬の多発性関節炎の古典像で、IMPA は
+    # 犬の発熱を伴う跛行の主要な原因（Stull 2008 JVIM; Ettinger 8th ed）だが
+    # レガシーDBにエントリが無く整形外科疾患のみが並んでいた。発熱との
+    # ペアでゲート（素の跛行主訴は整形外科ddx firstを維持）。
+    {
+        "id": "immune_mediated_polyarthritis",
+        "prevalence_tier": "uncommon",
+        "name_ja": "免疫介在性多発性関節炎（IMPA）",
+        "name_en": "Immune-Mediated Polyarthritis (IMPA)",
+        "description_ja": "免疫複合体の関節沈着による非びらん性（多くは特発性I型）の多発性関節炎。周期的な発熱・元気消失・複数関節の疼痛と腫脹・こわばった歩様・歩行拒否が典型で、関節腫脹が目立たない例も多く「不明熱」の重要な鑑別です。診断は複数関節の関節液細胞診（非変性好中球の増加）が確定的で、感染性関節炎・ダニ媒介性疾患（アナプラズマ/エーリキア/ライム）・薬物反応（サルファ剤）・SLE を除外します。治療は免疫抑制量プレドニゾロン 2 mg/kg/日から漸減、難治例はシクロスポリン/レフルノミド/アザチオプリンを併用し、再発監視に関節液再検査を用います（Stull 2008 JVIM; Johnson & Mackin 2012）。",
+        "description_en": "Non-erosive (mostly idiopathic type I) polyarthritis from immune-complex deposition. Cyclic fever, lethargy, pain and effusion in several joints, a stilted gait and reluctance to walk are typical — joint swelling is often subtle, so IMPA is a key cause of fever of unknown origin. Multi-joint synovial fluid cytology (increased non-degenerate neutrophils) is diagnostic after excluding septic arthritis, tick-borne disease (Anaplasma/Ehrlichia/Lyme), drug reactions (sulfonamides) and SLE. Treat with immunosuppressive prednisolone 2 mg/kg/day tapered over months, adding ciclosporin/leflunomide/azathioprine for refractory cases, and monitor relapse by repeat arthrocentesis (Stull 2008 JVIM; Johnson & Mackin 2012).",
+        "symptoms": [
+            "joint_swelling",
+            "fever",
+            "stiffness",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["arthrocentesis", "cbc", "biochemistry", "tick_borne_serology"],
+        "breed_risks": {
+            "akita": 2.0,
+            "german_shorthaired_pointer": 1.8,
+            "boxer": 1.5,
         },
     },
     # ---- 12d2. Mammary Tumor ----
@@ -4899,6 +4932,9 @@ _PATHOGNOMONIC_CLUSTERS = [
     # the 5-sign entry was otherwise out-scored on coverage by 2-sign eyelid
     # conformation entries (entropion/ectropion). 2026-10 第41回監査で追加。
     (frozenset({"redness_in_eyes", "eye_discharge"}), "conjunctivitis", 1.4),
+    # 「目やにがひどくて目が開かない」— 眼脂主体の開瞼困難は結膜炎が最頻
+    # （眼脂の目立たない眼痛性の羞明は角膜潰瘍/眼瞼内反を維持 — 2026-10 第67弾）
+    (frozenset({"squinting", "eye_discharge"}), "conjunctivitis", 1.25),
     # GDV: bloating + excessive drooling + rapid breathing
     (frozenset({"bloating", "excessive_drooling", "rapid_breathing"}), "gdv_bloat", 2.0),
     (frozenset({"bloating", "excessive_drooling", "pale_gums"}), "gdv_bloat", 2.0),
@@ -4984,6 +5020,10 @@ _PATHOGNOMONIC_CLUSTERS = [
     # Greasy, malodorous skin is the lesion-pattern sign of Malassezia
     # dermatitis (Bond 2020 Vet Dermatol consensus) — gated on greasy_skin.
     (frozenset({"greasy_skin"}), "malassezia_dermatitis", 1.6),
+    # 発熱+関節痛/腫脹は多発性関節炎（IMPA）の定義的ペア（2026-10 第67弾）
+    (frozenset({"fever", "joint_swelling"}), "immune_mediated_polyarthritis", 1.8),
+    # 混濁尿・強い尿臭（膿尿）は細菌性膀胱炎の飼い主所見（ISCAID 2019）
+    (frozenset({"cloudy_urine"}), "urinary_tract_infection", 1.4),
     # Gynecomastia + symmetric alopecia is the estrogen-feminization pair of
     # a Sertoli cell tumor (Withrow & MacEwen 6th ed). Female mammary-mass
     # complaints don't co-report hair loss, so collision risk is minimal.
