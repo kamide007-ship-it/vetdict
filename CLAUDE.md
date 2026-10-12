@@ -6993,3 +6993,21 @@ setupMobileBottomNav含む）がスキップ** → 下部ナビ不生成・全�
 - pendingStats drugs 656→**658**、dog 598/cat 575、ServiceWorker v174→**v175**
 
 ### 回帰テスト（tests/test_round43_audit.py、36件）+ 既存1件の期待値更新（両生類 top-2 にエロモナスを許容）
+
+## 2026-10セッション（第68弾: スマホの着地ずれの根本修正 — sticky ヘッダー無効化バグ）
+
+### 背景（利用者報告「スマホで各機能をクリックするとその場所へ行くもののずれている」）
+Playwright（iPhone 13 エミュレーション・実タップ）で全下部ナビタブの着地位置を実測し、2つの原因を特定。
+
+1. **モバイルで sticky ヘッダーが張り付いていなかった**（主因）: `@media(max-width:600px){html,body{overflow-x:hidden}}`
+   により body がスクロールコンテナになり、`position:sticky` のヘッダー・パンくずがスクロールで画面外へ消えていた。
+   一方 `_syncStickyOffset` は存在しないヘッダー分（121px）を差し引いて着地させるため、目的の検索欄の上に
+   前の内容が121px覗く「ずれ」になり、ナビ・検索窓もスクロールで失われていた（アクセシビリティ低下）。
+   → `html{overflow-x:hidden} body{overflow-x:clip}`（clip はスクロールコンテナを作らない）
+2. **パンくずがヘッダーの裏に潜っていた**: モバイルのヘッダーは検索行込みで約82pxなのに、パンくずは固定 `top:46px`
+   → `_syncStickyOffset` がヘッダー実高さを `--header-h` に公開し、`.breadcrumb-bar{top:var(--header-h)}` で直下に配置
+
+### 実測（After）
+- 全6タブ（鑑別/疾患DB/相談/薬品/麻酔/緊急）・疾患行展開・薬品行展開とも、ターゲットが可視クローム下端の10px下に着地
+- 回帰テスト: `test_mobile_sticky_header_not_broken_by_body_scroll_container`
+- ServiceWorker: `CACHE_NAME` v176 → **v177**（v176 は main マージ時に使用）

@@ -69,7 +69,7 @@ a:hover{text-decoration:underline}
 .hamburger svg{display:block;width:24px;height:24px;color:var(--white)}
 
 /* --- Breadcrumb Bar --- */
-.breadcrumb-bar{background:linear-gradient(90deg,rgba(26,48,104,.06),rgba(26,48,104,.02));border-bottom:1px solid var(--gray-200);position:sticky;top:52px;z-index:99;font-size:.78rem}
+.breadcrumb-bar{background:linear-gradient(90deg,rgba(26,48,104,.06),rgba(26,48,104,.02));border-bottom:1px solid var(--gray-200);position:sticky;top:var(--header-h,52px);z-index:99;font-size:.78rem}
 .breadcrumb-inner{max-width:1200px;margin:0 auto;padding:6px 20px;display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto}
 .breadcrumb-item{color:var(--gray-500);white-space:nowrap}
 .breadcrumb-home{color:var(--navy);text-decoration:none;cursor:pointer;font-weight:500;transition:color var(--transition-fast)}
@@ -1159,7 +1159,7 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .header-nav button{text-align:left;padding:12px 16px;border-radius:8px}
   .header-nav button[aria-selected="true"]{background:rgba(34,168,79,.15);color:var(--green);border-left:3px solid var(--green);font-weight:700;box-shadow:none}
   .hamburger{display:block}
-  .breadcrumb-bar{top:46px;font-size:.72rem}
+  .breadcrumb-bar{top:var(--header-h,46px);font-size:.72rem}
   .breadcrumb-inner{padding:5px 12px}
   .hero{padding:40px 16px 36px}
   .hero-title{font-size:2.2rem}
@@ -1989,7 +1989,13 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
 
 .card img,.card video,.card iframe,.disease-detail img{max-width:100%;height:auto}
 @media(max-width:600px){
-  html,body{overflow-x:hidden}
+  /* 横はみ出し防止。html,body 両方に overflow-x:hidden を付けると body が
+     スクロールコンテナになり、position:sticky のヘッダー・パンくずが張り付かず
+     スクロールで消える（存在しないヘッダー分の --sticky-offset だけ着地位置が
+     ずれる原因）。html は viewport へ伝播させ、body は scroll container を作らない
+     clip にする。 */
+  html{overflow-x:hidden}
+  body{overflow-x:clip}
   .references{padding:16px 14px}
   .ref-category{padding:12px 14px}
   .ref-header{padding:12px 14px}

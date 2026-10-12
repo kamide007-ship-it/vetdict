@@ -818,6 +818,15 @@ let symptomSortMode="category";
 function _syncStickyOffset(){
   try{
     let off=0;
+    /* ヘッダーの実高さ（モバイルは検索行込みで約82px）を --header-h に公開し、
+       パンくずをその直下に貼り付ける。固定値 top:46px だとパンくずがヘッダーの
+       裏に潜り、和で計算した offset が実際の表示より約40px大きくなって
+       着地位置がずれていた。 */
+    const hdr=document.querySelector(".header");
+    if(hdr){
+      const h=Math.round(hdr.getBoundingClientRect().height);
+      if(h>0)document.documentElement.style.setProperty("--header-h",h+"px");
+    }
     for(const sel of [".header",".breadcrumb-bar"]){
       const el=document.querySelector(sel);
       if(!el)continue;

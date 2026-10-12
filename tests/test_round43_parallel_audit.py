@@ -72,7 +72,6 @@ class TestDrugMatcherWordInternalContainment:
         assert not any("clavulanate" in k2 for k2, _ in sup.get("amoxicillin", []))
 
 
-
 class TestChatClinicalAccuracyAuditRound43Parallel:
     def test_skin_redness_does_not_become_bleeding(self):
         for sp in ("cat", "bird", "parrot"):
@@ -166,3 +165,18 @@ class TestEquineRound43Parallel:
         for name in ("Guttural Pouch Tympany", "Jugular Thrombophlebitis", "Orbital Cellulitis"):
             assert "limb_filling" not in by[name].associated_findings, name
         assert "resp_cough_at_exercise" in by["Equine Asthma (IAD/RAO)"].associated_findings
+
+
+def test_mobile_sticky_header_not_broken_by_body_scroll_container():
+    """html,body 両方に overflow-x:hidden を付けると body がスクロールコンテナになり
+    sticky ヘッダーが張り付かず、存在しないヘッダー分だけ着地位置がずれた。"""
+    import re
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parent.parent
+    css = (root / "static" / "css" / "main.css").read_text(encoding="utf-8")
+    assert "html,body{overflow-x:hidden}" not in css
+    assert "body{overflow-x:clip}" in css
+    assert re.search(r"\.breadcrumb-bar\{[^}]*top:var\(--header-h", css)
+    js = (root / "static" / "js" / "app.js").read_text(encoding="utf-8")
+    assert '"--header-h"' in js
