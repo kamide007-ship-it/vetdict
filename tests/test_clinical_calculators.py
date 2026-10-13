@@ -458,3 +458,147 @@ console.log(JSON.stringify({bad}));
     # mobile tap target + shared styling for the new button
     css = (ROOT / "static" / "css" / "main.css").read_text(encoding="utf-8")
     assert ".drug-cri-open" in css
+
+
+@pytest.mark.skipif(NODE is None, reason="node not available")
+def test_dog_age_tables_reproduced_by_node():
+    """犬年齢換算（2026-10 第63弾 — 開発者提供の2つの換算表の反映）。
+
+    発達と寿命の節目を結んだ試算: 6か月/1歳/2歳アンカー（発育タイプ別）→
+    シニア入り（推定寿命の最後の25% — AAHA 2019）=ヒト63歳 → 平均寿命
+    （アニコム白書2023）=ヒト84歳（厚労省簡易生命表）。ここでは出荷コードの
+    VD_CALC を node で実行し、提供された原表（ゴールデン・レトリーバー
+    10.7歳／トイプードル15歳）の**全行**（ヒト年齢・ライフステージ）を
+    Math.round 表示値で厳密に再現することを固定する。
+    """
+    script = (
+        _extract_vd_calc()
+        + """
+const g=VD_CALC.dogAgeProfile("golden");
+const t=VD_CALC.dogAgeProfile("toy_poodle");
+const row=(p,a)=>[Math.round(VD_CALC.dogAgeHuman(a,p)),VD_CALC.dogAgeStage(a,p)];
+const out={
+  golden:[0.5,1,2,3,4,5,6,7,8,9,10,11,12,13].map(a=>[a,...row(g,a)]),
+  toy:[0.5,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map(a=>[a,...row(t,a)]),
+  // カスタム（同手法で寿命から再構成）は同一寿命でプリセットと完全一致する
+  customLargeMatches:[0.5,1,2,5,8,11,13].every(a=>
+    Math.round(VD_CALC.dogAgeHuman(a,VD_CALC.dogAgeProfile("custom_large",10.7)))===Math.round(VD_CALC.dogAgeHuman(a,g))),
+  customSmallMatches:[0.5,1,2,7,11,15,18].every(a=>
+    Math.round(VD_CALC.dogAgeHuman(a,VD_CALC.dogAgeProfile("custom_small",15)))===Math.round(VD_CALC.dogAgeHuman(a,t))),
+  // ガード: カスタムは寿命必須（5〜25歳）、年齢は非負、0歳=ヒト0歳
+  guardNoLifespan:VD_CALC.dogAgeProfile("custom_small",null),
+  guardTooShort:VD_CALC.dogAgeProfile("custom_small",3),
+  guardTooLong:VD_CALC.dogAgeProfile("custom_large",30),
+  guardNegAge:VD_CALC.dogAgeHuman(-1,g),
+  birth:VD_CALC.dogAgeHuman(0,g),
+};
+console.log(JSON.stringify(out));
+"""
+    )
+    res = subprocess.run([NODE, "-e", script], capture_output=True, text=True, timeout=30)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    # ゴールデン・レトリーバー原表の全行（犬年齢, ヒト年齢, ライフステージ）
+    assert out["golden"] == [
+        [0.5, 10, "puppy"],
+        [1, 14, "junior"],
+        [2, 22, "adult"],
+        [3, 29, "adult"],
+        [4, 36, "adult"],
+        [5, 43, "mature"],
+        [6, 49, "mature"],
+        [7, 56, "mature"],
+        [8, 63, "senior"],
+        [9, 71, "senior"],
+        [10, 79, "senior"],
+        [11, 86, "geriatric"],
+        [12, 94, "geriatric"],
+        [13, 102, "geriatric"],
+    ]
+    # トイプードル原表の全行
+    assert out["toy"] == [
+        [0.5, 12, "puppy"],
+        [1, 17, "junior"],
+        [2, 25, "adult"],
+        [3, 29, "adult"],
+        [4, 33, "adult"],
+        [5, 38, "adult"],
+        [6, 42, "adult"],
+        [7, 46, "mature"],
+        [8, 50, "mature"],
+        [9, 55, "mature"],
+        [10, 59, "mature"],
+        [11, 63, "senior"],
+        [12, 68, "senior"],
+        [13, 74, "senior"],
+        [14, 79, "senior"],
+        [15, 84, "geriatric"],
+        [16, 89, "geriatric"],
+        [17, 95, "geriatric"],
+        [18, 100, "geriatric"],
+    ]
+    assert out["customLargeMatches"] is True
+    assert out["customSmallMatches"] is True
+    assert out["guardNoLifespan"] is None
+    assert out["guardTooShort"] is None
+    assert out["guardTooLong"] is None
+    assert out["guardNegAge"] is None
+    assert out["birth"] == 0
+
+
+@pytest.mark.skipif(NODE is None, reason="node not available")
+def test_dog_age_panel_wired_and_omnibox_routed():
+    """犬年齢換算タブの配線: パネル・タブ・再計算・言語非依存ID・オムニボックス。
+
+    「年齢換算」は汎用の「換算」(→conv) より先に照合されなければならない —
+    出荷コードの _CALC_SEARCH_TABS を node で実行して実際のルーティングを検証。
+    """
+    # panel + tab + recompute + custom-lifespan row toggle/restore
+    assert 'data-calc-panel="dogage"' in APP_JS
+    assert '{id:"dogage"' in APP_JS
+    assert 'id="calcDogAgeBreed"' in APP_JS
+    assert 'id="calcDogAgeLifespanRow"' in APP_JS
+    assert 'num("calcDogAgeYears"' in APP_JS
+    assert 'id="calcDogAgeResult"' in APP_JS
+    assert 'id="calcDogAgeTable"' in APP_JS
+    assert 'e.target.id==="calcDogAgeBreed"' in APP_JS, "custom lifespan row toggle missing"
+    assert 'daSel.value.indexOf("custom")===0' in APP_JS, "lifespan row restore after re-render missing"
+    assert "VD_CALC.dogAgeProfile(breed" in APP_JS
+    # tab label for the omnibox action row
+    assert 'dogage:ja?"犬年齢換算"' in APP_JS
+    # evidence framing: estimate (not validated), AAHA senior 25%, Anicom lifespans
+    assert "検証済みの換算式ではありません" in APP_JS
+    assert "AAHA 2019" in APP_JS
+    assert "白書2023" in APP_JS  # アニコム「家庭どうぶつ白書2023」の平均寿命
+    assert "Mariner 2026 Science" in APP_JS
+    # CSS for the collapsible table + mobile tap target
+    assert ".calc-dogage-table" in MAIN_CSS
+    assert ".calc-dogage-details summary{min-height:44px}" in MAIN_CSS
+    # omnibox routing: run the ACTUAL regex table under node
+    m = re.search(r"const _CALC_SEARCH_TABS=\[(.*?)\n\];", APP_JS, re.S)
+    assert m, "_CALC_SEARCH_TABS missing"
+    script = (
+        "const _CALC_SEARCH_TABS=["
+        + m.group(1)
+        + "\n];\n"
+        + """
+const route=q=>{const h=_CALC_SEARCH_TABS.find(([re])=>re.test(q));return h?h[1]:null;};
+console.log(JSON.stringify({
+  nenrei:route("年齢換算"),
+  inuNenrei:route("犬の年齢"),
+  hitoNenrei:route("ヒト年齢"),
+  dogAge:route("dog age"),
+  plainConv:route("換算"),
+  mmol:route("mmol"),
+}));
+"""
+    )
+    res = subprocess.run([NODE, "-e", script], capture_output=True, text=True, timeout=30)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["nenrei"] == "dogage", "年齢換算 must beat the generic 換算→conv rule"
+    assert out["inuNenrei"] == "dogage"
+    assert out["hitoNenrei"] == "dogage"
+    assert out["dogAge"] == "dogage"
+    assert out["plainConv"] == "conv", "plain 換算 must still reach the unit converter"
+    assert out["mmol"] == "conv"

@@ -1,5 +1,5 @@
 // VetDict Service Worker — offline support & caching
-const CACHE_NAME = 'vetdict-v169';
+const CACHE_NAME = 'vetdict-v170';
 const STATIC_ASSETS = [
   '/',
   '/static/favicon.svg',
