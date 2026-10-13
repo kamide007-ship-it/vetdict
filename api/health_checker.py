@@ -764,6 +764,12 @@ SYMPTOMS = [
         "category": "digestive",
     },
     {
+        "id": "flea_signs",
+        "name_ja": "ノミ・ノミの糞／しっぽの付け根の脱毛・かさぶた",
+        "name_en": "Fleas / Flea Dirt / Tail-Base Alopecia & Crusts",
+        "category": "dermatological",
+    },
+    {
         "id": "paw_redness",
         "name_ja": "肉球・指の間の発赤や腫れ",
         "name_en": "Interdigital/Paw Redness or Swelling",
@@ -2422,6 +2428,27 @@ DISEASES = [
             "german_shepherd": 1.5,
             "shar_pei": 1.5,
         },
+    },
+    # ---- 12d1b2. Flea Allergy Dermatitis ----
+    # 2026-10 第70弾: 犬で最多の皮膚疾患の一つ（Muller & Kirk 7th ed; Hensel 2015
+    # ICADA）なのにレガシーチャットDBにエントリもノミ語彙も無く、「しっぽの付け根の
+    # 毛が抜けてかさぶた」が毛包虫症・膿皮症に誘導されていた。ノミ/尾根部病変の
+    # 主訴でゲート（素の掻痒・脱毛はアトピー/膿皮症の順序を維持）。
+    {
+        "id": "flea_allergy_dermatitis",
+        "prevalence_tier": "very_common",
+        # name matches the dog module entry (Flea Allergy Dermatitis /
+        # ノミアレルギー性皮膚炎) so the chat card's DB pivot lands exactly
+        "name_ja": "ノミアレルギー性皮膚炎",
+        "name_en": "Flea Allergy Dermatitis",
+        "description_ja": "ノミ唾液抗原に対する過敏反応による掻痒性皮膚炎。腰背部〜尾根部・大腿尾側に好発する丘疹・痂皮・脱毛が特徴的な分布で、少数のノミ刺咬でも発症するため成虫が見つからないことも多い（ノミ糞を湿った白紙で確認）。治療は同居動物全頭への速効性イソキサゾリン系等による継続的なノミ駆除と環境対策（成虫は全体の約5%）を中心に、短期のステロイドまたはオクラシチニブで掻痒を制御し、二次性膿皮症を併発していれば抗菌療法を行う（Muller & Kirk 7th ed; Bruet 2012; ESCCAP）。",
+        "description_en": "Pruritic dermatitis from hypersensitivity to flea salivary antigens. Papules, crusts and alopecia concentrate over the dorsal lumbosacral area, tail base and caudal thighs; a few bites suffice, so adult fleas are often not found (check flea dirt on damp white paper). Treatment centres on continuous, fast-kill flea control (e.g. isoxazolines) for every in-contact animal plus environmental control (adults are ~5% of the population), short-course glucocorticoids or oclacitinib for itch, and antimicrobials for secondary pyoderma (Muller & Kirk 7th ed; Bruet 2012; ESCCAP).",
+        "symptoms": [
+            "flea_signs",
+        ],
+        "severity": "low",
+        "recommended_tests": ["cytology", "skin_scraping"],
+        "breed_risks": {},
     },
     # ---- 12d1c. Malassezia Dermatitis ----
     # 2026-10 round-42 audit:「皮膚がベタベタして臭いです」extracted nothing and
@@ -5067,6 +5094,8 @@ _PATHOGNOMONIC_CLUSTERS = [
     # Greasy, malodorous skin is the lesion-pattern sign of Malassezia
     # dermatitis (Bond 2020 Vet Dermatol consensus) — gated on greasy_skin.
     (frozenset({"greasy_skin"}), "malassezia_dermatitis", 1.6),
+    # ノミの目撃・尾根部の脱毛/痂皮はノミアレルギーの部位診断的所見（2026-10 第70弾）
+    (frozenset({"flea_signs"}), "flea_allergy_dermatitis", 1.6),
     # 発熱+関節痛/腫脹は多発性関節炎（IMPA）の定義的ペア（2026-10 第67弾）
     (frozenset({"fever", "joint_swelling"}), "immune_mediated_polyarthritis", 1.8),
     # 混濁尿・強い尿臭（膿尿）は細菌性膀胱炎の飼い主所見（ISCAID 2019）
