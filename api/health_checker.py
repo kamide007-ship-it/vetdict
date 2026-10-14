@@ -555,6 +555,13 @@ SYMPTOMS = [
         "category": "urinary",
     },
     {
+        # 混濁尿・尿臭の増強（膿尿/細菌尿の飼い主表現 — 2026-10 第67弾）
+        "id": "cloudy_urine",
+        "name_ja": "尿の濁り・強い尿臭",
+        "name_en": "Cloudy / Malodorous Urine",
+        "category": "urinary",
+    },
+    {
         "id": "straining_to_urinate",
         "name_ja": "排尿困難",
         "name_en": "Straining to Urinate / Stranguria",
@@ -757,6 +764,12 @@ SYMPTOMS = [
         "category": "digestive",
     },
     {
+        "id": "flea_signs",
+        "name_ja": "ノミ・ノミの糞／しっぽの付け根の脱毛・かさぶた",
+        "name_en": "Fleas / Flea Dirt / Tail-Base Alopecia & Crusts",
+        "category": "dermatological",
+    },
+    {
         "id": "paw_redness",
         "name_ja": "肉球・指の間の発赤や腫れ",
         "name_en": "Interdigital/Paw Redness or Swelling",
@@ -774,6 +787,40 @@ SYMPTOMS = [
         "name_en": "Missing Teeth / Tooth Not Erupting",
         "category": "general",
     },
+    # 2026-10 第69弾: 運動失調（ふらつき）に legacy ID が無く ataxia→tremors
+    # フォールバックでてんかん/低Ca血症へ誤誘導されていた（老犬の後肢ふらつき）。
+    {
+        "id": "ataxia",
+        "name_ja": "運動失調・ふらつき",
+        "name_en": "Ataxia / Wobbly Gait",
+        "category": "neurological",
+    },
+    # 2026-10 第69弾: 点状出血・紫斑（「お腹に赤い点々」）に legacy ID が無く、
+    # 犬の代表的な出血救急である免疫介在性血小板減少症に着地しなかった。
+    {
+        "id": "petechiae",
+        "name_ja": "点状出血・紫斑（皮膚や歯茎の赤い点々・あざ）",
+        "name_en": "Petechiae / Ecchymoses (Pinpoint Red Spots, Bruising)",
+        "category": "general",
+    },
+    # 2026-10 audit round 39: facial-droop and weight-gain vocabulary.
+    # 「片方の耳だけ下がって顔が歪んでいます」 extracted ZERO ids — the single
+    # defining sign of facial nerve paralysis (and a common otitis
+    # media-interna accompaniment) had no legacy ID at all.
+    {
+        "id": "facial_droop",
+        "name_ja": "顔面の歪み・片側の垂れ（耳・唇・まぶた）",
+        "name_en": "Facial Droop / Asymmetry (Ear, Lip, Eyelid)",
+        "category": "neurological",
+    },
+    # 「太ってきて毛が薄い」 — Cushing's / hypothyroidism's classic weight-gain
+    # presentation extracted only hair_loss because weight_gain had no legacy ID.
+    {
+        "id": "weight_gain",
+        "name_ja": "体重増加・太ってきた",
+        "name_en": "Weight Gain",
+        "category": "general",
+    },
     {
         "id": "mammary_swelling",
         "name_ja": "乳腺・乳首の腫大（しこり）",
@@ -785,6 +832,12 @@ SYMPTOMS = [
         "name_ja": "しっぽを追いかける・かじる（常同行動）",
         "name_en": "Tail Chasing / Chewing (Repetitive Behavior)",
         "category": "behavioral",
+    },
+    {
+        "id": "greasy_skin",
+        "name_ja": "皮膚のベタつき・体臭（脂漏）",
+        "name_en": "Greasy Skin / Body Odor (Seborrhea)",
+        "category": "dermatological",
     },
     {
         "id": "wart_like_growths",
@@ -1497,6 +1550,7 @@ DISEASES = [
         "description_ja": "脊髄の白質が進行性に変性する神経疾患です。後肢の麻痺が徐々に進行し、最終的には四肢麻痺に至ります。",
         "description_en": "A progressive neurological disease causing degeneration of the spinal cord white matter. Leads to gradual hind limb paralysis progressing to quadriplegia.",
         "symptoms": [
+            "ataxia",
             "paralysis",
             "stiffness",
             "reluctance_to_move",
@@ -1674,6 +1728,7 @@ DISEASES = [
         "description_en": "One of the most common endocrine disorders in dogs. Insufficient thyroid hormone production leads to decreased metabolism with widespread systemic effects.",
         "symptoms": [
             "lethargy",
+            "weight_gain",
             "hair_loss",
             "dry_skin",
             "stiffness",
@@ -1707,6 +1762,7 @@ DISEASES = [
             "excessive_thirst",
             "frequent_urination",
             "increased_appetite",
+            "weight_gain",
             "hair_loss",
             "bloating",
             "lethargy",
@@ -1870,6 +1926,7 @@ DISEASES = [
             "blood_in_urine",
             "incontinence",
             "excessive_licking",
+            "cloudy_urine",
         ],
         "severity": "low",
         "recommended_tests": ["urinalysis", "urine_culture", "ultrasound"],
@@ -2145,6 +2202,7 @@ DISEASES = [
             "ear_discharge",
             "ear_odor",
             "disorientation",
+            "facial_droop",
         ],
         "severity": "moderate",
         "recommended_tests": ["otoscopy", "ear_cytology", "skull_radiography_ct"],
@@ -2171,6 +2229,7 @@ DISEASES = [
         "description_ja": "高齢犬に突然発症する末梢前庭障害。犬の末梢前庭疾患で最も多く、急な頭部傾斜・眼振・旋回・転倒・めまいによる嘔吐が典型（「脳卒中では」と心配されがちな症候群）。原因不明で、意識・四肢の固有位置感覚は正常。多くは72時間以内に改善が始まり数日〜数週で自然回復します。治療は支持療法（制吐薬・転倒防止・介助給餌）のみ。改善しない場合や他の神経症状を伴う場合は中枢性疾患・中耳炎の精査を（Rossmeisl 2010; Ettinger 8th ed）。",
         "description_en": "Acute-onset peripheral vestibular dysfunction of older dogs — the most common peripheral vestibular disorder in dogs. Sudden head tilt, nystagmus, circling/falling and vertigo-induced vomiting are classic; owners often fear a stroke. Mentation and proprioception are normal, improvement typically begins within 72 hours, and most dogs recover over days to weeks with supportive care only (antiemetics, fall protection, assisted feeding). Failure to improve or additional neurologic deficits warrants workup for central disease or otitis media/interna (Rossmeisl 2010; Ettinger 8th ed).",
         "symptoms": [
+            "ataxia",
             "head_tilting",
             "circling",
             "disorientation",
@@ -2368,6 +2427,81 @@ DISEASES = [
             "labrador_retriever": 1.6,
             "german_shepherd": 1.5,
             "shar_pei": 1.5,
+        },
+    },
+    # ---- 12d1b2. Flea Allergy Dermatitis ----
+    # 2026-10 第70弾: 犬で最多の皮膚疾患の一つ（Muller & Kirk 7th ed; Hensel 2015
+    # ICADA）なのにレガシーチャットDBにエントリもノミ語彙も無く、「しっぽの付け根の
+    # 毛が抜けてかさぶた」が毛包虫症・膿皮症に誘導されていた。ノミ/尾根部病変の
+    # 主訴でゲート（素の掻痒・脱毛はアトピー/膿皮症の順序を維持）。
+    {
+        "id": "flea_allergy_dermatitis",
+        "prevalence_tier": "very_common",
+        # name matches the dog module entry (Flea Allergy Dermatitis /
+        # ノミアレルギー性皮膚炎) so the chat card's DB pivot lands exactly
+        "name_ja": "ノミアレルギー性皮膚炎",
+        "name_en": "Flea Allergy Dermatitis",
+        "description_ja": "ノミ唾液抗原に対する過敏反応による掻痒性皮膚炎。腰背部〜尾根部・大腿尾側に好発する丘疹・痂皮・脱毛が特徴的な分布で、少数のノミ刺咬でも発症するため成虫が見つからないことも多い（ノミ糞を湿った白紙で確認）。治療は同居動物全頭への速効性イソキサゾリン系等による継続的なノミ駆除と環境対策（成虫は全体の約5%）を中心に、短期のステロイドまたはオクラシチニブで掻痒を制御し、二次性膿皮症を併発していれば抗菌療法を行う（Muller & Kirk 7th ed; Bruet 2012; ESCCAP）。",
+        "description_en": "Pruritic dermatitis from hypersensitivity to flea salivary antigens. Papules, crusts and alopecia concentrate over the dorsal lumbosacral area, tail base and caudal thighs; a few bites suffice, so adult fleas are often not found (check flea dirt on damp white paper). Treatment centres on continuous, fast-kill flea control (e.g. isoxazolines) for every in-contact animal plus environmental control (adults are ~5% of the population), short-course glucocorticoids or oclacitinib for itch, and antimicrobials for secondary pyoderma (Muller & Kirk 7th ed; Bruet 2012; ESCCAP).",
+        "symptoms": [
+            "flea_signs",
+        ],
+        "severity": "low",
+        "recommended_tests": ["cytology", "skin_scraping"],
+        "breed_risks": {},
+    },
+    # ---- 12d1c. Malassezia Dermatitis ----
+    # 2026-10 round-42 audit:「皮膚がベタベタして臭いです」extracted nothing and
+    # the legacy DB had no yeast-dermatitis entry, although Malassezia
+    # dermatitis is one of the most common canine dermatoses (greasy,
+    # malodorous, pruritic skin in skin folds/ventrum/paws — Bond et al.,
+    # Vet Dermatol 2020 consensus; Muller & Kirk 7th ed). Gated on the
+    # greasy/odor sign so bare itching keeps the atopy/pyoderma ordering.
+    {
+        "id": "malassezia_dermatitis",
+        "prevalence_tier": "very_common",
+        # name matches the dog module entry (Malassezia Dermatitis /
+        # マラセチア皮膚炎) so the chat card's DB pivot lands exactly
+        "name_ja": "マラセチア皮膚炎",
+        "name_en": "Malassezia Dermatitis",
+        "description_ja": "常在酵母 Malassezia pachydermatis の過剰増殖による皮膚炎。脂っぽくベタつく皮膚・独特の酸っぱい体臭・掻痒・色素沈着/苔癬化が特徴で、皺部・腹部・指間・外耳道に好発します。多くはアトピー・食物アレルギー・内分泌疾患（甲状腺機能低下症・クッシング）に続発するため基礎疾患の評価が必須。診断はテープ/押捺細胞診（酵母の確認）、治療はクロルヘキシジン2-4%＋ミコナゾール2%シャンプー週2-3回、広範・重度例はイトラコナゾール5 mg/kg PO q24h（またはパルス投与）を併用します（Bond 2020 Vet Dermatol 国際コンセンサス）。",
+        "description_en": "Dermatitis from overgrowth of the commensal yeast Malassezia pachydermatis: greasy skin, a characteristic rancid odor, pruritus and hyperpigmentation/lichenification in skin folds, ventrum, interdigital skin and ear canals. Usually secondary to atopy, food allergy or endocrinopathy (hypothyroidism, Cushing's), which must be worked up. Diagnose by tape-strip/impression cytology; treat with chlorhexidine 2-4% + miconazole 2% shampoo 2-3x weekly, adding itraconazole 5 mg/kg PO q24h (or pulse) for extensive disease (Bond et al. 2020 Vet Dermatol consensus).",
+        "symptoms": [
+            "greasy_skin",
+        ],
+        "severity": "low",
+        "recommended_tests": ["cytology", "skin_scraping"],
+        "breed_risks": {
+            "west_highland_white_terrier": 2.5,
+            "basset_hound": 2.0,
+            "shih_tzu": 1.8,
+            "cocker_spaniel": 1.8,
+            "english_bulldog": 1.5,
+        },
+    },
+    # ---- 12d1b. Immune-Mediated Polyarthritis (2026-10 第67弾) ----
+    # 「発熱+関節を痛がって歩かない」は犬の多発性関節炎の古典像で、IMPA は
+    # 犬の発熱を伴う跛行の主要な原因（Stull 2008 JVIM; Ettinger 8th ed）だが
+    # レガシーDBにエントリが無く整形外科疾患のみが並んでいた。発熱との
+    # ペアでゲート（素の跛行主訴は整形外科ddx firstを維持）。
+    {
+        "id": "immune_mediated_polyarthritis",
+        "prevalence_tier": "uncommon",
+        "name_ja": "免疫介在性多発性関節炎（IMPA）",
+        "name_en": "Immune-Mediated Polyarthritis (IMPA)",
+        "description_ja": "免疫複合体の関節沈着による非びらん性（多くは特発性I型）の多発性関節炎。周期的な発熱・元気消失・複数関節の疼痛と腫脹・こわばった歩様・歩行拒否が典型で、関節腫脹が目立たない例も多く「不明熱」の重要な鑑別です。診断は複数関節の関節液細胞診（非変性好中球の増加）が確定的で、感染性関節炎・ダニ媒介性疾患（アナプラズマ/エーリキア/ライム）・薬物反応（サルファ剤）・SLE を除外します。治療は免疫抑制量プレドニゾロン 2 mg/kg/日から漸減、難治例はシクロスポリン/レフルノミド/アザチオプリンを併用し、再発監視に関節液再検査を用います（Stull 2008 JVIM; Johnson & Mackin 2012）。",
+        "description_en": "Non-erosive (mostly idiopathic type I) polyarthritis from immune-complex deposition. Cyclic fever, lethargy, pain and effusion in several joints, a stilted gait and reluctance to walk are typical — joint swelling is often subtle, so IMPA is a key cause of fever of unknown origin. Multi-joint synovial fluid cytology (increased non-degenerate neutrophils) is diagnostic after excluding septic arthritis, tick-borne disease (Anaplasma/Ehrlichia/Lyme), drug reactions (sulfonamides) and SLE. Treat with immunosuppressive prednisolone 2 mg/kg/day tapered over months, adding ciclosporin/leflunomide/azathioprine for refractory cases, and monitor relapse by repeat arthrocentesis (Stull 2008 JVIM; Johnson & Mackin 2012).",
+        "symptoms": [
+            "joint_swelling",
+            "fever",
+            "stiffness",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["arthrocentesis", "cbc", "biochemistry", "tick_borne_serology"],
+        "breed_risks": {
+            "akita": 2.0,
+            "german_shorthaired_pointer": 1.8,
+            "boxer": 1.5,
         },
     },
     # ---- 12d2. Mammary Tumor ----
@@ -3024,6 +3158,7 @@ DISEASES = [
         "description_ja": "頸部脊椎の不安定性や変形により脊髄が圧迫される疾患です。ふらつく歩様（ウォブリング）が特徴で、大型犬に多発します。",
         "description_en": "A condition where cervical spinal instability or malformation compresses the spinal cord. Characterized by a wobbly gait, predominantly affecting large breeds.",
         "symptoms": [
+            "ataxia",
             "stiffness",
             "paralysis",
             "reluctance_to_move",
@@ -3277,7 +3412,7 @@ DISEASES = [
         "name_en": "Cerebellar Ataxia",
         "description_ja": "小脳の変性により、運動協調の障害、震え、異常歩行を引き起こします。",
         "description_en": "Degeneration of the cerebellum causing loss of coordination, tremors, and abnormal gait.",
-        "symptoms": ["tremors", "disorientation", "head_tilting", "circling", "stiffness"],
+        "symptoms": ["ataxia", "tremors", "disorientation", "head_tilting", "circling", "stiffness"],
         "severity": "high",
         "recommended_tests": ["mri", "genetic_testing", "csf_analysis"],
         "breed_risks": {
@@ -3653,6 +3788,66 @@ DISEASES = [
             "english_bulldog": 1.6,
             "toy_poodle": 1.3,
             "chihuahua": 1.3,
+        },
+    },
+    # 2026-10 audit round 39: facial nerve paralysis. 「片方の耳だけ下がって
+    # 顔が歪んでいます」 extracted zero symptoms — the characteristic unilateral
+    # facial droop had neither a legacy symptom nor a disease. Idiopathic facial
+    # nerve paralysis is the most common cause in dogs (~75%; cocker spaniels
+    # predisposed), with otitis media-interna and hypothyroidism the main
+    # identifiable causes (Ettinger 8th ed; Rossmeisl 2010). Name mirrors the
+    # dog module entry ("Facial Nerve Paralysis") so the chat candidate card's
+    # 「疾患DBで詳細を開く」 pivot lands exactly.
+    {
+        "id": "facial_nerve_paralysis",
+        "prevalence_tier": "uncommon",
+        "name_ja": "顔面神経麻痺",
+        "name_en": "Facial Nerve Paralysis",
+        "description_ja": "片側の耳・唇・まぶたが垂れ、顔が歪んで見える末梢神経障害です。まばたきができない（瞬目反射消失）・患側からのよだれ・食べこぼしが典型。犬では特発性が最多（約75%、コッカー・スパニエル好発）で、同定可能な原因としては中耳炎・内耳炎と甲状腺機能低下症が重要です。治療は基礎疾患の検索（耳鏡検査・甲状腺検査）と、瞬目不能による曝露性角膜炎を防ぐ人工涙液・眼軟膏が中心。特発例の多くは完全回復しませんが、筋拘縮により外観は時間とともに目立たなくなります（Ettinger 8th ed）。",
+        "description_en": "A peripheral neuropathy producing a drooped ear, lip and eyelid on one side — the face looks asymmetric. Inability to blink (absent palpebral reflex), drooling and dropping food from the affected side are typical. Idiopathic disease is the most common cause in dogs (~75%; cocker spaniels predisposed); otitis media-interna and hypothyroidism are the key identifiable causes. Work-up targets the underlying cause (otoscopy, thyroid testing); treatment centers on tear replacement/lubricants to prevent exposure keratitis from the lost blink. Many idiopathic cases never fully recover, though contracture makes the asymmetry less obvious over time (Ettinger 8th ed).",
+        # Complaint-gated: drooling / head signs are nonspecific (owned by
+        # dental and vestibular ddx), so the entry matches only on its
+        # defining sign — the facial droop itself (missing_teeth pattern).
+        "symptoms": [
+            "facial_droop",
+        ],
+        "severity": "moderate",
+        "recommended_tests": [
+            "neurological_exam",
+            "otoscopy",
+            "thyroid_panel",
+            "schirmer_tear_test",
+        ],
+        "breed_risks": {
+            "cocker_spaniel": 2.5,
+            "beagle": 1.5,
+            "pembroke_welsh_corgi": 1.4,
+        },
+    },
+    # 2026-10 第69弾: 犬の出血性救急で最多の原発性血小板減少症が legacy DB に
+    # 無く、「お腹に赤い点々がたくさん」が抽出ゼロ/無関係疾患に着地していた。
+    # 主訴ゲート設計（点状出血のみ — 元気消失・鼻血は他疾患の所有物）。
+    {
+        "id": "immune_mediated_thrombocytopenia",
+        "prevalence_tier": "uncommon",
+        "name_ja": "免疫介在性血小板減少症（ITP）",
+        "name_en": "Autoimmune Thrombocytopenia (ITP)",
+        "description_ja": "抗血小板抗体により血小板が破壊され、皮膚・粘膜の点状出血/斑状出血、鼻出血、血便・メレナ、血尿を起こす救急疾患です。中年の雌犬に多く、コッカー・スパニエル、プードル、オールド・イングリッシュ・シープドッグが好発。血小板数は通常30,000/µL未満（自然出血は多くが20,000/µL未満）で、PT/aPTTは正常（DICとの鑑別点）。マダニ媒介感染症（エーリキア・アナプラズマ・バベシア）、薬剤、腫瘍による二次性を除外してから一次性と診断します。治療は免疫抑制量のグルココルチコイド（プレドニゾロン 2 mg/kg/日、大型犬は 50-60 mg/m²/日）が軸で、重症例はビンクリスチン 0.02 mg/kg IV 単回併用で血小板回復が早まり（Rozanski 2002）、ヒト免疫グロブリン（hIVIG）も選択肢。出血中は筋注・頸静脈穿刺を避け、重度貧血には輸血（Ettinger 8th ed; ACVIM consensus 2019）。",
+        "description_en": "Antiplatelet antibodies destroy platelets, causing skin/mucosal petechiae and ecchymoses, epistaxis, melena/hematochezia and hematuria — a bleeding emergency. Middle-aged females are overrepresented (cocker spaniels, poodles, Old English sheepdogs). Platelet count is usually <30,000/µL (spontaneous bleeding mostly <20,000/µL) with normal PT/aPTT (distinguishing it from DIC). Secondary causes (tick-borne Ehrlichia/Anaplasma/Babesia, drugs, neoplasia) must be excluded before calling it primary. Treatment centers on immunosuppressive glucocorticoids (prednisolone 2 mg/kg/day; 50-60 mg/m²/day in large dogs); a single vincristine dose 0.02 mg/kg IV shortens time to platelet recovery in severe cases (Rozanski 2002), and human IVIG is an option. Avoid IM injections and jugular venipuncture while bleeding; transfuse for severe anemia (Ettinger 8th ed; ACVIM consensus 2019).",
+        "symptoms": [
+            "petechiae",
+        ],
+        "severity": "high",
+        "recommended_tests": [
+            "cbc",
+            "blood_smear",
+            "coagulation_panel",
+            "tick_borne_serology",
+        ],
+        "breed_risks": {
+            "cocker_spaniel": 2.0,
+            "poodle": 1.6,
+            "old_english_sheepdog": 1.8,
         },
     },
     # 2026-09 audit round 21: the post-estrus purulent-discharge + PU/PD
@@ -4804,6 +4999,14 @@ _PATHOGNOMONIC_CLUSTERS = [
     # purulent discharge below the eye is a tooth-root abscess until proven
     # otherwise in dogs (Niemiec, BSAVA Dental Manual).
     (frozenset({"facial_swelling", "eye_discharge"}), "tooth_root_abscess", 1.5),
+    # Conjunctivitis: red eye + ocular discharge without facial swelling is
+    # the bread-and-butter conjunctivitis complaint (Maggs, Slatter's 6th ed);
+    # the 5-sign entry was otherwise out-scored on coverage by 2-sign eyelid
+    # conformation entries (entropion/ectropion). 2026-10 第41回監査で追加。
+    (frozenset({"redness_in_eyes", "eye_discharge"}), "conjunctivitis", 1.4),
+    # 「目やにがひどくて目が開かない」— 眼脂主体の開瞼困難は結膜炎が最頻
+    # （眼脂の目立たない眼痛性の羞明は角膜潰瘍/眼瞼内反を維持 — 2026-10 第67弾）
+    (frozenset({"squinting", "eye_discharge"}), "conjunctivitis", 1.25),
     # GDV: bloating + excessive drooling + rapid breathing
     (frozenset({"bloating", "excessive_drooling", "rapid_breathing"}), "gdv_bloat", 2.0),
     (frozenset({"bloating", "excessive_drooling", "pale_gums"}), "gdv_bloat", 2.0),
@@ -4872,6 +5075,12 @@ _PATHOGNOMONIC_CLUSTERS = [
     # entry outranked the oral tumor via the generic lumps_bumps signal
     # (round-14 audit).
     (frozenset({"oral_mass"}), "oral_tumor", 1.6),
+    # Facial droop is the defining sign of facial nerve paralysis (single-sign
+    # cluster, oral_mass pattern) — otitis media-interna shares the sign in its
+    # own set and stays in the list as the key identifiable cause (2026-10).
+    (frozenset({"facial_droop"}), "facial_nerve_paralysis", 1.6),
+    # 点状出血は血小板/血管障害の部位診断的所見（2026-10 第69弾）
+    (frozenset({"petechiae"}), "immune_mediated_thrombocytopenia", 1.6),
     # Owner-visible bite abnormality (受け口/出っ歯) is site-diagnostic for an
     # occlusion problem — no other entry carries this sign (2026-10).
     (frozenset({"malocclusion"}), "deciduous_malocclusion", 1.6),
@@ -4882,6 +5091,15 @@ _PATHOGNOMONIC_CLUSTERS = [
     # (Muller & Kirk 7th ed): the paw-localised complaint should rank the
     # interdigital entry above generic pruritic dermatoses.
     (frozenset({"paw_redness"}), "interdigital_furunculosis", 1.5),
+    # Greasy, malodorous skin is the lesion-pattern sign of Malassezia
+    # dermatitis (Bond 2020 Vet Dermatol consensus) — gated on greasy_skin.
+    (frozenset({"greasy_skin"}), "malassezia_dermatitis", 1.6),
+    # ノミの目撃・尾根部の脱毛/痂皮はノミアレルギーの部位診断的所見（2026-10 第70弾）
+    (frozenset({"flea_signs"}), "flea_allergy_dermatitis", 1.6),
+    # 発熱+関節痛/腫脹は多発性関節炎（IMPA）の定義的ペア（2026-10 第67弾）
+    (frozenset({"fever", "joint_swelling"}), "immune_mediated_polyarthritis", 1.8),
+    # 混濁尿・強い尿臭（膿尿）は細菌性膀胱炎の飼い主所見（ISCAID 2019）
+    (frozenset({"cloudy_urine"}), "urinary_tract_infection", 1.4),
     # Gynecomastia + symmetric alopecia is the estrogen-feminization pair of
     # a Sertoli cell tumor (Withrow & MacEwen 6th ed). Female mammary-mass
     # complaints don't co-report hair loss, so collision risk is minimal.
@@ -5463,10 +5681,44 @@ def _join_names_en(names: list, limit: int) -> str:
     return ", ".join(seen[:-1]) + " and " + seen[-1]
 
 
+# 2026-10 第69弾: 臨床徴候セクションのカテゴリ・テンプレートのうち「他の疾患の
+# 徴候を列挙する」型（内分泌=糖尿病/甲状腺/クッシング/アジソン、皮膚=アトピー/
+# 蚤アレルギー/皮膚糸状菌の分布パターン）は、鳥の糖尿病や馬EMSの臨床徴候として
+# 犬猫の別疾患の所見を並べる誤記になっていた（配信DB 430件）。当該テンプレートは
+# 空欄と同等に扱い、レコード自身の症状から再構成する。
+CLINICAL_SIGNS_CATEGORY_TEMPLATE_MARKS = (
+    "ホルモン異常または代謝障害の種類により特異的パターン",
+    "分布パターンが診断に有用",
+    "follow the specific hormonal or metabolic disturbance",
+    "Distribution aids diagnosis:",
+)
+
+
+def _is_cs_category_template(text: str | None) -> bool:
+    return bool(text) and any(m in text for m in CLINICAL_SIGNS_CATEGORY_TEMPLATE_MARKS)
+
+
 def _ground_missing_supplementary_fields(item: dict, species: str) -> None:
     """Fill empty clinical_signs / diagnosis sections from the item's own data."""
     if not isinstance(item, dict):
         return
+    # Templated "lists other diseases' signs" sections are replaced per language
+    # from the record's own presenting signs (kept as-is when none resolve).
+    if _is_cs_category_template(item.get("clinical_signs_ja")) or _is_cs_category_template(item.get("clinical_signs")):
+        display = item.get("symptoms_display") or []
+        signs_ja = _join_names_ja([d.get("name_ja") for d in display if isinstance(d, dict)], 8)
+        signs_en = _join_names_en(
+            [d.get("name_en") for d in display if isinstance(d, dict) and _is_latin(d.get("name_en") or "")], 8
+        )
+        if signs_ja and _is_cs_category_template(item.get("clinical_signs_ja")):
+            item["clinical_signs_ja"] = (
+                f"本症で報告される主な臨床徴候には{signs_ja}などがある。所見の種類と程度は症例や病期により異なる。"
+            )
+        if signs_en and _is_cs_category_template(item.get("clinical_signs")):
+            item["clinical_signs"] = (
+                f"Clinical signs reported in this condition include {signs_en}. "
+                "Their range and severity vary between cases."
+            )
     # Clinical signs: only when BOTH languages are empty (curated prose in
     # either language is never overwritten).
     cs_empty = not (item.get("clinical_signs") or "").strip() and not (item.get("clinical_signs_ja") or "").strip()

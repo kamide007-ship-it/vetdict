@@ -213,6 +213,39 @@ def _disease_class_hint(name_ja: str) -> str:
     return "general"
 
 
+# 種別メロキシカム用量（旧テンプレートは全種に「小型哺乳類 0.2-0.5 / 馬 1.7 mg/kg」を
+# 併記しており、猫（0.05→0.01-0.03 mg/kg）・犬・馬（0.6 mg/kg）で誤用量となっていた。
+# Plumb's 10th; ISFM/AAFP NSAID guidelines 2010; Carpenter Exotic Animal Formulary 6th）
+_MELOXICAM_JA = {
+    "cat": "鎮痛: メロキシカム 0.05 mg/kg PO 初回→0.01-0.03 mg/kg PO q24h（最小有効量・腎機能と脱水の監視必須 — ISFM/AAFP 2010）。慢性OA疼痛はフルネベトマブ（抗NGF抗体）も選択肢。",
+    "dog": "鎮痛: メロキシカム 0.2 mg/kg PO 初回→0.1 mg/kg PO q24h（腎・肝機能と消化管徴候を監視）。",
+    "horse": "鎮痛: メロキシカム 0.6 mg/kg PO q24h、またはフェニルブタゾン 2.2-4.4 mg/kg PO q12-24h（短期・最小有効量）。",
+    "rabbit": "鎮痛: メロキシカム 0.5-1.0 mg/kg PO q24h（ウサギは代謝が速く高用量を要する — Carpenter 6th）。",
+    "ferret": "鎮痛: メロキシカム 0.2 mg/kg PO q24h。",
+}
+_MELOXICAM_GROUP_JA = (
+    (
+        ("bird", "parakeet", "parrot"),
+        "鎮痛: メロキシカム 1.0-1.6 mg/kg PO q12-24h（オウム類の薬物動態 — Cole 2009; Carpenter 6th）。",
+    ),
+    (
+        ("reptile", "lizard", "snake", "tortoise"),
+        "鎮痛: メロキシカム 0.2-0.4 mg/kg PO/IM q24-48h（腎機能・水和を確認 — Carpenter 6th）。",
+    ),
+    (("amphibian",), "鎮痛: メロキシカム 0.2-0.4 mg/kg PO/経皮 q24h（データ限定的 — Carpenter 6th）。"),
+)
+
+
+def meloxicam_line_ja(species: str) -> str:
+    """Species-appropriate meloxicam line for musculoskeletal fallback text."""
+    if species in _MELOXICAM_JA:
+        return _MELOXICAM_JA[species]
+    for group, line in _MELOXICAM_GROUP_JA:
+        if species in group:
+            return line
+    return "鎮痛: メロキシカム 0.2-0.5 mg/kg PO q24h（小型哺乳類 — 種に応じて用量を調整）。"
+
+
 def _class_specific_lines(species: str, klass: str, name_ja: str) -> list[str]:
     """Provide clinical management lines specific to disease class + species."""
     species_ja = _species_label_ja(species)
@@ -273,6 +306,20 @@ def _class_specific_lines(species: str, klass: str, name_ja: str) -> list[str]:
             f"{species_ja}に特異的な必要量はQuesenberry & Carpenter "
             "(Exotic Animal Medicine for the Veterinary Technician) または Carpenter Exotic Animal Formulary 6th ed を参照。",
         ]
+    if klass == "parasitic" and any(k in name_ja for k in ("ダニ", "ノミ", "シラミ", "疥癬", "ヒゼン", "外部寄生虫")):
+        # 外部寄生虫は糞便検査・蠕虫/原虫用の駆虫薬の対象ではない（2026-10 第70弾）
+        sp = (species or "").lower()
+        if sp in ("tortoise", "turtle"):
+            drug = "イベルメクチンはカメ類に禁忌（致死的）— 物理的除去と環境処理を主体とする。"
+        elif sp in ("amphibian", "fish", "exotic_other"):
+            drug = "外用殺虫剤・イベルメクチンの使用は種の感受性を確認してから（両生類は経皮吸収、無脊椎動物には致死的）— 物理的除去と環境処理を主体とする。"
+        else:
+            drug = "イベルメクチン 0.2-0.4 mg/kg SC 14日毎×3回、またはセラメクチン外用（種別用量・禁忌を確認。フィプロニルはウサギ・齧歯類・鳥に使用しない）。"
+        return [
+            f"{name_ja}はセロハンテープ・皮膚掻爬・耳垢鏡検・虫体の形態で寄生虫を同定する（蠕虫・原虫用の駆虫薬は無効）。",
+            drug,
+            "同居個体も治療し、床材・ケージ・止まり木など飼育環境を同時に処理（多くのダニは環境中に潜む）。",
+        ]
     if klass == "parasitic":
         return [
             f"{name_ja}は糞便PCR/直接鏡検/フローテーション法で原因虫種を特定してから駆虫薬を選択する。",
@@ -316,7 +363,7 @@ def _class_specific_lines(species: str, klass: str, name_ja: str) -> list[str]:
     if klass == "musculoskeletal":
         return [
             f"{name_ja}に対し、画像（X線2方向、必要に応じCT）で病変を評価。安静期間 4-8週を厳守。",
-            "鎮痛: メロキシカム 0.2-0.5 mg/kg PO q24h（小型哺乳類）または0.1-0.2 mg/kg q24h（馬は1.7 mg/kg q24h）。",
+            meloxicam_line_ja(species),
             "骨折・脱臼: 整復＋ プレート・ピン・外固定。種別の骨密度・体重・関節構造に応じて選択。",
             f"リハビリテーション: 受動的可動域訓練、水中歩行、リハビリ用機材導入で{species_ja}の機能回復を加速。",
         ]

@@ -1221,6 +1221,13 @@ def disease_detail(species: str, disease_slug: str):
             not (disease.get("clinical_signs") or "").strip() and not (disease.get("clinical_signs_ja") or "").strip()
         )
         _needs_dx = not (disease.get("diagnosis") or "").strip() or not (disease.get("diagnosis_ja") or "").strip()
+        from api.health_checker import _is_cs_category_template
+
+        _needs_cs = (
+            _needs_cs
+            or _is_cs_category_template(disease.get("clinical_signs_ja"))
+            or _is_cs_category_template(disease.get("clinical_signs"))
+        )
         if _needs_cs or _needs_dx:
             disease = dict(disease)
             _syms = disease.get("symptoms") or []

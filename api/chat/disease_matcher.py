@@ -297,6 +297,24 @@ _SYN: dict[str, list[str]] = {
     # Skin/coat extended (new keys only)
     "skin_itching": ["itching", "pruritus", "scratching"],
     "lumps": ["mass", "tumor", "nodule", "growth", "swelling", "subcutaneous_mass", "lumps_and_bumps"],
+    # 止まり木に止まれない（inability_to_perch）は疾患側では
+    # reluctance_to_perch/difficulty_perching 表記 — ブリッジ欠落で
+    # 趾瘤症・関節炎が「足を痛がって止まり木に止まれない」に届かなかった
+    "inability_to_perch": ["reluctance_to_perch", "difficulty_perching", "falling_off_perch"],
+    "reluctance_to_perch": ["inability_to_perch", "difficulty_perching"],
+    # 触知腫瘤の飼い主表現（お腹/体にしこり）→ subcutaneous_mass は種によって
+    # skin_masses/skin_lump/mammary_mass 表記 — 単一エントリ（脂肪腫）しか
+    # 返らなかったハムスター等の腫瘤鑑別を接続する
+    "subcutaneous_mass": [
+        "lumps",
+        "skin_masses",
+        "skin_mass",
+        "skin_lump",
+        "mammary_mass",
+        "mammary_masses",
+        "skin_mass_growth",
+        "slow_growing_lump",
+    ],
     # Eye
     "eye_redness": ["red_eye", "ocular_redness", "conjunctivitis"],
     "eye_discharge": ["ocular_discharge", "tearing", "epiphora", "pus_in_eye"],
@@ -336,6 +354,19 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # backing — it exists to stop umbrella syndromes with long symptom lists
 # losing on coverage to narrow rarities.
 _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    # 跳躍不能は猫の変形性関節症で最も感度の高い飼い主所見（6歳超の猫の60-90%に
+    # 画像上のDJD — Lascelles 2010 Vet Surg; ISFM/AAFP 2010 疼痛ガイドライン）。
+    # 2026-10 第67弾
+    ("cat", frozenset({"reluctance_to_jump"}), "Osteoarthritis (Degenerative Joint Disease)", 1.35),
+    # フェレットの黒色便（メレナ）は胃潰瘍（H. mustelae 関連が大半）until proven
+    # otherwise — Quesenberry & Carpenter 4th ed; Fox 1990。下痢の共抽出でカバレッジが
+    # 希釈され、腸管寄生虫・ウイルス性腸炎の下（16位）に沈んでいた（2026-10 第70弾）
+    ("ferret", frozenset({"black_tarry_stool"}), "Gastric Ulcer", 1.5),
+    ("ferret", frozenset({"black_tarry_stool"}), "Helicobacter Mustelae Gastritis", 1.4),
+    # ウサギの足底（飛節）の脱毛・発赤はソアホック（潰瘍性足底皮膚炎）の初期像 —
+    # Harcourt-Brown; Mancinelli 2014。汎用の接触性/潰瘍性皮膚炎が上回っていた
+    ("rabbit", frozenset({"pododermatitis_signs"}), "Pododermatitis (Sore Hocks)", 1.4),
+    ("rabbit", frozenset({"pododermatitis_signs"}), "Ulcerative Pododermatitis - Grade I", 1.3),
     # Anorexia + reduced fecal output in a rabbit is GI stasis until proven
     # otherwise (Oglesbee, Blackwell's 5-Minute Vet Consult: Small Mammal).
     ("rabbit", frozenset({"appetite_loss", "reduced_fecal_output"}), "Gastrointestinal Stasis", 1.45),
@@ -359,6 +390,16 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
         1.35,
     ),
     ("cat", frozenset({"decreased_urination", "vocalization_changes"}), "Urinary Obstruction (Blocked Cat)", 1.5),
+    # 体重減少＋落ち着きのなさ/活動亢進の猫は甲状腺機能亢進症 until proven
+    # otherwise（Carney 2016 AAFP guidelines）— 2026-10 第42回: 行動疾患が上位だった
+    ("cat", frozenset({"weight_loss", "anxiety"}), "Hyperthyroidism", 1.6),
+    ("cat", frozenset({"weight_loss", "hyperactivity"}), "Hyperthyroidism", 1.6),
+    # 粘膜蒼白＋頻呼吸の猫は貧血（低酸素血症代償の頻呼吸） until proven
+    # otherwise — 蒼白は呼吸器疾患・心疾患の徴候ではない（Little, The Cat;
+    # Tasker 2010 JFMS ヘモプラズマ）。従来は2所見で喘息/CHFが上位を占め
+    # 貧血エントリが圏外だった
+    ("cat", frozenset({"pale_gums", "labored_breathing"}), "Immune-Mediated Hemolytic Anemia (IMHA)", 1.3),
+    ("cat", frozenset({"pale_gums", "labored_breathing"}), "Feline Infectious Anemia (Hemoplasma)", 1.3),
     # Pelvic-limb weakness + ptyalism in a ferret is the insulinoma
     # hypoglycemia presentation (Quesenberry & Carpenter 4th ed).
     ("ferret", frozenset({"hind_leg_weakness", "drooling"}), "Insulinoma", 1.35),
@@ -436,11 +477,27 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # Exot Anim Pract 2002). Salpingitis/chronic-egg-laying entries otherwise
     # outranked the dystocia entry on coverage for the single defining sign.
     ("bird", frozenset({"egg_binding"}), "Egg Binding (Dystocia)", 1.45),
+    # White periarticular tophi on the feet are articular gout itself
+    # (urate deposition — Ritchie & Harrison, Avian Medicine). A co-extracted
+    # generic "swelling" otherwise pulled periorbital abscess/xanthoma above
+    # the gout entry (2026-10 round-41).
+    ("bird", frozenset({"white_deposits_on_joints"}), "Articular Gout", 1.45),
+    # Pruritic dorsal scaling ("walking dandruff") in a rabbit is
+    # Cheyletiella until proven otherwise; rabbit dermatophytosis is usually
+    # minimally pruritic (Harcourt-Brown, Textbook of Rabbit Medicine;
+    # Quesenberry & Carpenter 4th ed). 2026-10 round-41.
+    ("rabbit", frozenset({"dandruff", "itching"}), "Fur Mites (Cheyletiella parasitovorax)", 1.3),
+    ("rabbit", frozenset({"dandruff", "itching"}), "Cheyletiella Mange (Fur Mites)", 1.3),
     # Unilateral persistent cheek swelling in a hamster is cheek-pouch disease
     # (impaction/abscess) until proven otherwise (Quesenberry & Carpenter
     # 4th ed) — a co-extracted generic distension ID otherwise diluted
     # coverage and let GI entries outrank the pouch entries (2026-09 round-32).
     ("hamster", frozenset({"cheek_swelling"}), "Cheek Pouch Impaction", 1.35),
+    # Vulvar bleeding / haematuria-like blood in an intact doe is uterine
+    # adenocarcinoma until proven otherwise — 50-80% of intact does > 4 y
+    # (Saito 2002; Walter 2010). Narrow untiered uterine entries otherwise
+    # won on coverage (2026-10 round-43).
+    ("rabbit", frozenset({"vaginal_bleeding"}), "Uterine Adenocarcinoma", 1.35),
 ]
 
 # Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.
@@ -646,8 +703,12 @@ def _match_species_symptoms_to_diseases(
         # --- Coverage completeness bonus ---
         # Reward diseases where more absolute symptoms matched (not just ratio).
         # This prevents diseases with few symptoms from dominating.
+        # Count matched COMPLAINTS (source-symptom groups), not synonym
+        # spellings: a 2-complaint query that a disease matches via 3 synonym
+        # IDs must not earn the 3+-match bonus (2026-10 round-43 — bird
+        # avocado toxicity won 「羽を膨らませて寝てばかり」 this way).
         coverage_bonus = 1.0
-        absolute_match_count = len(matched)
+        absolute_match_count = sum(1 for group in _source_groups if group & disease_symptoms)
         if absolute_match_count >= 4:
             coverage_bonus = 1.10
         elif absolute_match_count >= 3:

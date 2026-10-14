@@ -39,7 +39,6 @@ _KNOWN_ALIAS_MISMATCHES = {
     "joint_pain_or_stiffness",
     "lumps_and_bumps",
     "paralysis_or_paresis",
-    "cloudy_urine",
     "foul_smelling_urine",
     # Bridged to the legacy dog vocabulary (stiffness) via _LEGACY_FALLBACK;
     # no species module carries a dedicated difficulty-rising ID.
@@ -1602,6 +1601,7 @@ class TestQuickTapPhraseExtraction:
             "足を引きずる",
             "皮膚が痒い",
             "肉球の間が赤く腫れて舐め続ける",
+            "発熱があり関節を痛がって歩かない",
             "口の中にできものがある",
             "おしりを地面にこすりつける",
             "鼻血が出た",
@@ -1642,6 +1642,9 @@ class TestQuickTapPhraseExtraction:
             "かかとをつけてペタペタ歩く",
             "耳の付け根を掻いて黒いカスが出る",
             "爪が伸びすぎて肉球に刺さっている",
+            "首の周りにかさぶたがある",
+            "後ろ足がふらつき高い所へ飛び乗れない",
+            "目の色が変わってきた",
         ],
         "horse": [
             "お腹を痛がっている（疝痛）",
@@ -1657,6 +1660,8 @@ class TestQuickTapPhraseExtraction:
             "目を細めて涙が多い",
             "口から餌をこぼす",
             "背中を触ると痛がる",
+            "下痢がひどく元気がない",
+            "後ろ足がむくんでいる",
         ],
         "rabbit": [
             "糞が小さい",
@@ -1671,6 +1676,8 @@ class TestQuickTapPhraseExtraction:
             "おしっこが白っぽくてドロドロしている",
             "お尻の周りに軟らかい便がつく",
             "お尻が汚れていて臭い",
+            "耳の中にかさぶたがある",
+            "陰部から血が出る",
         ],
         "chinchilla": [
             "よだれが出る",
@@ -1706,6 +1713,7 @@ class TestQuickTapPhraseExtraction:
             "足を伸ばして硬直する",
             "口を前足で掻いてよだれ",
             "便に血が混じる",
+            "黒い下痢が出る",
             "お腹を触るとしこりがある",
         ],
         "hedgehog": ["針が抜ける", "フケ", "ふらつく", "食べない", "目が出ている", "体重が減った"],
@@ -1729,6 +1737,8 @@ class TestQuickTapPhraseExtraction:
             "吐き戻しが増えた",
             "そのうが膨らんでいる",
             "お尻でいきんでいる",
+            "くちばしが変形している",
+            "鼻の色が茶色くなった",
         ],
         "parrot": ["食べない", "自分で羽を抜く", "くしゃみ", "下痢", "元気がない", "吐き戻しが増えた"],
         "reptile": [
@@ -1775,6 +1785,7 @@ class TestQuickTapPhraseExtraction:
             "皮膚に白いもの",
             "元気がない",
             "浮かんだまま沈めない",
+            "皮膚が白く濁っている",
         ],
         "fish": [
             "体に白い点々",
@@ -4915,8 +4926,13 @@ class TestChatClinicalAccuracyAuditRound26Parallel:
 
         ids = _extract_species_symptoms("皮膚が赤くなって足に出血斑 元気がない", "amphibian")
         assert "petechiae" in ids, ids
-        top = _match_species_symptoms_to_diseases(ids, "amphibian")[0]
-        assert "レッドレッグ" in (top.get("name_ja") or ""), top.get("name_ja")
+        # 2026-10 第43回: 「皮膚が赤くなって」が skin_redness に正しく解決されるように
+        # なり、レッドレッグ症候群の起因菌エントリ（Aeromonas hydrophila —
+        # Densmore & Green 2007）と首位を分け合う。両者は同一病態のため top-2 で検証。
+        res = _match_species_symptoms_to_diseases(ids, "amphibian")[:2]
+        names = [r.get("name_ja") or "" for r in res]
+        assert any("レッドレッグ" in n for n in names), names
+        assert all("レッドレッグ" in n or "エロモナス" in n for n in names), names
 
     def test_petechiae_alias_falls_back_safely_outside_amphibians(self):
         from api.chat.symptom_extractor import _extract_species_symptoms
@@ -6321,7 +6337,9 @@ class TestChatClinicalAccuracyAuditRound37:
         for key in ["血が出ている", "出血がある", "異常な出血", "abnormal bleeding"]:
             assert SYMPTOM_ALIASES[key] != "genital_discharge", key
         # 陰部/膣を明記する表現は genital_discharge を維持
-        assert SYMPTOM_ALIASES["陰部からの出血"] == "genital_discharge"
+        # 2026-10 第43回: 陰部の「出血」はより特異的な vaginal_bleeding（陰部分泌物系へ
+        # チェーン）に細分化
+        assert SYMPTOM_ALIASES["陰部からの出血"] in ("genital_discharge", "vaginal_bleeding")
         assert SYMPTOM_ALIASES["不正出血"] == "genital_discharge"
 
     def test_dog_gingival_bleeding_ranks_periodontal_not_pyometra(self):
@@ -6680,3 +6698,381 @@ class TestChatClinicalAccuracyAuditRound38:
         ids, res = self._species("体をしきりに舐めています", "cat")
         names = self._names(res, 3)
         assert any("皮膚" in n or "ノミ" in n for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound39:
+    """2026-10 第63弾（精度監査 第39弾）: 体重減少の進行形・尿「量」=多尿・
+    ず形食欲廃絶・腹部圧痛て形・嘴変形・猫粟粒性皮膚炎・「足を痛がって」の
+    最長一致タイ・尿失禁動詞形 + 馬の大腸炎/タイイングアップ減額フロア +
+    猫の蒼白+頻呼吸→貧血ペア + 馬チャットの tier 公開。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    def _horse(self, phrase):
+        import api.diagnostic_chat as dc
+
+        ids = dc._extract_equine_symptoms(phrase)
+        return set(ids), dc._match_equine_symptoms_to_diseases(list(ids))
+
+    @staticmethod
+    def _names(results, n=6):
+        return [(r.get("name_ja") or r.get("name") or "") for r in results[:n]]
+
+    def test_progressive_weight_loss_extracts(self):
+        ids, _ = self._legacy("下痢が続いていて体重が減ってきました")
+        assert {"diarrhea", "weight_loss"} <= ids, ids
+
+    def test_cat_urine_volume_is_polyuria_not_lutd(self):
+        # 尿の「量」は多尿 — 従来は頻尿→LUTD優先で膀胱炎・尿石症に誤誘導
+        ids, res = self._species("おしっこの量が多くて体重が減ってきました高齢です", "cat")
+        assert "excessive_urination" in ids and "weight_loss" in ids, ids
+        names = self._names(res, 3)
+        assert any("腎臓病" in n or "糖尿病" in n or "甲状腺" in n for n in names), names
+        assert not any("膀胱炎" in n for n in names), names
+        assert "移行上皮癌" not in "".join(names), names
+
+    def test_rabbit_zu_form_anorexia_ranks_stasis(self):
+        ids, res = self._species("ご飯を食べず、うんちが出ていません", "rabbit")
+        assert "constipation" in ids and len(ids) >= 2, ids
+        assert "うっ滞" in self._names(res, 1)[0], self._names(res)
+
+    def test_cat_abdominal_pain_te_form(self):
+        ids, _ = self._species("お腹を触ると痛がって黄色い液を吐きます", "cat")
+        assert "abdominal_pain" in ids, ids
+
+    def test_parakeet_beak_deformity_extracts(self):
+        ids, res = self._species("羽が抜けてくちばしが変形しています", "parakeet")
+        assert "beak_deformity" in ids, ids
+        assert any("嘴" in n or "PBFD" in n or "疥癬" in n for n in self._names(res, 5)), self._names(res)
+
+    def test_cat_miliary_dermatitis_ranks_allergy(self):
+        ids, res = self._species("顔をかきむしって首の周りにかさぶたがあります", "cat")
+        assert "miliary_dermatitis" in ids, ids
+        names = self._names(res, 3)
+        assert any("ノミアレルギー" in n or "アトピー" in n or "粟粒" in n for n in names), names
+
+    def test_foot_pain_te_form_beats_bare_pain_key(self):
+        # 「痛がっている」(6字, pain) に最長一致で負けて跛行が消えていた
+        for sp in ("bird", "cat"):
+            ids, _ = self._species("足を痛がっています", sp)
+            assert "lameness" in ids, (sp, ids)
+
+    def test_bird_perch_lameness_bridges_to_bumblefoot(self):
+        ids, res = self._species("足を痛がって止まり木に止まれません", "bird")
+        assert {"lameness", "inability_to_perch"} <= ids, ids
+        names = self._names(res, 3)
+        assert any("趾瘤" in n or "関節炎" in n or "痛風" in n or "爪" in n for n in names), names
+        assert "ミオパチー" not in self._names(res, 1)[0]
+
+    def test_dog_incontinence_and_sitting_down_extract(self):
+        assert "incontinence" in self._legacy("おしっこをもらすようになりました")[0]
+        assert "exercise_intolerance" in self._legacy("散歩中にすぐ座り込んでしまいます")[0]
+
+    def test_cat_pallor_tachypnea_surfaces_anemia(self):
+        ids, res = self._species("呼吸が速くて歯茎が白いです", "cat")
+        assert {"pale_gums", "labored_breathing"} <= ids, ids
+        assert any("貧血" in n for n in self._names(res, 3)), self._names(res)
+
+    def test_horse_diarrhea_ranks_colitis_with_tier(self):
+        ids, res = self._horse("下痢がひどくて元気がありません")
+        assert "dig_diarrhea" in ids, ids
+        assert res[0]["name_en"] == "Colitis", self._names(res)
+        assert res[0]["prevalence_tier"] == "common"
+
+    def test_horse_post_exercise_stiffness_ranks_tying_up(self):
+        ids, res = self._horse("運動後に筋肉が硬くなって動けなくなりました")
+        assert "body_stiffness" in ids, ids
+        assert "横紋筋融解症" in self._names(res, 1)[0], self._names(res)
+
+    def test_horse_fore_lameness_te_form_fires_hot_hoof_pair(self):
+        ids, res = self._horse("蹄が熱くて前足を痛がっています")
+        assert {"hoof_heat", "limb_lameness_fore"} <= ids, ids
+        assert any("蹄膿瘍" in n or "蹄葉炎" in n for n in self._names(res, 2)), self._names(res)
+
+    def test_hamster_abdominal_lump_reaches_tumor_ddx(self):
+        _, res = self._species("お腹にしこりがあって大きくなってきました", "hamster")
+        assert len(res) >= 3, self._names(res)
+
+
+class TestChatClinicalAccuracyAuditRound39Parallel:
+    """2026-10 精度監査 第39弾: 顔面神経麻痺の語彙・疾患新設（レガシー犬 96疾患・
+    93症状）、クッシング三徴の飼い主表現（太ってきて/お腹が垂れて/毛が薄くなり）、
+    触診介在形の跛行（後ろ足を触ると痛がって）、歯科疼痛の観察表現、
+    ご飯を食べず（ず形）のウサギGIうっ滞接続。"""
+
+    def _species(self, phrase, species):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        return set(ids), _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+
+    def _legacy(self, phrase):
+        from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
+
+        ids = extract_symptoms_from_text(phrase)
+        return set(ids), match_symptoms_to_diseases(list(ids))
+
+    @staticmethod
+    def _names(results, n=6):
+        return [(r.get("name_ja") or r.get("name") or "") for r in results[:n]]
+
+    def test_stem_aliases_respect_conjugated_negation(self):
+        """語幹エイリアス（太ってき/お腹が垂れ/毛が薄くな）は〜ていない等の活用否定で発火しない。"""
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        for neg in (
+            "太ってきていない",
+            "お腹が垂れていない",
+            "毛が薄くなっていない",
+            "毛が薄くなってきていない",
+            "毛が薄くならない",
+            "太ってきてはいない",
+            "口を開けるのを嫌がらない",
+            "食べるのが遅くない",
+            "毛が薄くなかった",
+            "食べるのが遅くなかった",
+            "毛が薄くなりませんでした",
+            "太ってきていなかった",
+            "食べるのが遅くはない",
+            "食べるのが遅いわけではない",
+            "太ってきたわけではない",
+            "口を開けるのを嫌がるわけではない",
+            "太ってきたのではなく、毛量が増えただけです",
+            "毛が薄くなったのではなく、短く切っただけです",
+            "食べるのが遅いのではなく、少しずつ食べています",
+        ):
+            assert extract_symptoms_from_text(neg) == [], neg
+        got = set(extract_symptoms_from_text("太ってきて毛が薄くなりお腹が垂れて"))
+        assert {"weight_gain", "hair_loss", "bloating"} <= got
+        assert "vomiting" in extract_symptoms_from_text("吐いている")
+        assert extract_symptoms_from_text("吐いているわけではない") == []
+
+    def test_facial_distortion_not_converted_to_head_tilt(self):
+        """顔面の歪みは非保有種で head_tilt 等の別所見に置換しない。"""
+        from api.diagnostic_chat import _extract_species_symptoms
+
+        for sp in ("hamster", "guinea_pig", "chinchilla", "bird"):
+            assert "head_tilt" not in _extract_species_symptoms("顔が歪んでいます", sp), sp
+        assert "facial_drooping" in _extract_species_symptoms("顔が歪んでいます", "rabbit")
+
+    def test_bare_drooped_ear_is_not_promoted_to_facial_palsy(self):
+        """Codexレビュー P2: 耳介下垂は多くの犬種で正常な耳形であり、それ単独では
+        顔面神経麻痺の定義的徴候（片側の顔面・口唇・眼瞼の歪み/瞬目不能）ではない。
+        裸の「耳が垂れて」は facial_droop に昇格させず、耳・前庭ddxに着地させる。"""
+        ids, results = self._legacy("耳が垂れています")
+        assert "facial_droop" not in ids, ids
+        assert "顔面神経麻痺" not in self._names(results, 3), self._names(results, 3)
+        # Codex第2指摘: 耳介下垂は頭位傾斜（前庭徴候）でもない — 何の徴候も推定しない
+        assert "head_tilting" not in ids, ids
+        # 実際の頭位傾斜表現を伴えば前庭ddxに着地する
+        ids_tilt, _ = self._legacy("耳が垂れて首を傾けている")
+        assert "head_tilting" in ids_tilt, ids_tilt
+        # 定義的な非対称徴候を伴う主訴は従来どおり顔面神経麻痺 rank 1
+        for phrase in ("片方の耳だけ下がって顔が歪んでいます", "まばたきができない"):
+            ids2, results2 = self._legacy(phrase)
+            assert "facial_droop" in ids2, (phrase, ids2)
+            assert self._names(results2, 1)[0] == "顔面神経麻痺", (phrase, self._names(results2, 3))
+
+    def test_dog_facial_droop_ranks_facial_nerve_paralysis(self):
+        # 「片方の耳だけ下がって顔が歪んでいます」が抽出ゼロだった —
+        # facial_droop 新設 + 顔面神経麻痺エントリ（特発性が最多、Ettinger 8th）
+        ids, res = self._legacy("片方の耳だけ下がって顔が歪んでいます")
+        assert "facial_droop" in ids, ids
+        names = self._names(res, 3)
+        assert "顔面神経麻痺" in names[0], names
+        # 中耳炎・内耳炎（同定可能な主要原因）も鑑別リストに残る
+        assert any("中耳炎" in n for n in names), names
+
+    def test_dog_facial_paralysis_name_mirrors_dog_module(self):
+        # チャット候補カード「疾患DBで詳細を開く」ピボットの完全一致着地保証
+        from api.health_checker import DISEASES
+        from api.species.dog_diseases import DISEASES as DOG
+
+        legacy = next(d for d in DISEASES if d["id"] == "facial_nerve_paralysis")
+        dog_names = {(d.get("name") if isinstance(d, dict) else d.name) for d in DOG}
+        assert legacy["name_en"] in dog_names, legacy["name_en"]
+        # prevalence キーも配信名に解決（prior + チップ導線）
+        from api.species.prevalence_data import SPECIES_PREVALENCE
+
+        assert SPECIES_PREVALENCE["dog"].get("Facial Nerve Paralysis") == "uncommon"
+
+    def test_dog_cushing_triad_owner_phrasing_extracts_and_ranks(self):
+        # 「太ってきて毛が薄くなりお腹が垂れて」— weight_gain 語彙新設 +
+        # 語幹エイリアスでクッシング/甲状腺機能低下が上位に
+        ids, res = self._legacy("最近太ってきて毛が薄くなりお腹が垂れてきました")
+        assert {"weight_gain", "hair_loss", "bloating"} <= ids, ids
+        names = self._names(res, 4)
+        assert any("クッシング" in n for n in names), names
+
+    def test_dog_hypothyroid_weight_gain_lethargy(self):
+        # 体重増加+嗜眠+被毛不良 = 甲状腺機能低下の古典像（多食なし）
+        ids, res = self._legacy("食べる量は変わらないのに太ってきて元気がなく毛が薄くなりました")
+        assert "weight_gain" in ids, ids
+        names = self._names(res, 4)
+        assert any("甲状腺機能低下" in n for n in names), names
+
+    def test_dog_hindlimb_touch_pain_ranks_orthopedic(self):
+        # 触診介在形「後ろ足を触ると痛がって」が「後ろ足を痛が」キーに不一致で
+        # 抽出ゼロ → 緑内障/CDSが上位だった
+        ids, res = self._legacy("後ろ足を触ると痛がってキャンと鳴きます")
+        assert "limping" in ids, ids
+        names = self._names(res, 4)
+        assert any(("膝蓋骨" in n) or ("ヘルニア" in n) or ("靭帯" in n) or ("形成不全" in n) for n in names), names
+
+    def test_dog_slow_eating_mouth_aversion_ranks_dental(self):
+        # 「口を開けるのを嫌がってご飯を食べるのが遅い」が抽出ゼロだった
+        ids, res = self._legacy("口を開けるのを嫌がってご飯を食べるのが遅いです")
+        assert "difficulty_eating" in ids, ids
+        assert any("歯周" in n or "歯根" in n for n in self._names(res, 3)), self._names(res)
+
+    def test_rabbit_zu_form_anorexia_plus_bruxism_ranks_gi_stasis(self):
+        # 「ご飯を食べず」（ず形）が欠落し、歯ぎしり+食欲不振の GI stasis
+        # パトグノモニック・ペアが発火しなかった
+        ids, res = self._species("ご飯を食べず歯ぎしりをしてじっとしています", "rabbit")
+        assert "teeth_grinding" in ids, ids
+        assert any(x in ids for x in ("appetite_loss", "loss_of_appetite", "anorexia")), ids
+        assert "うっ滞" in self._names(res, 1)[0], self._names(res)
+
+    def test_cat_facial_droop_falls_back_to_native_paralysis_id(self):
+        # 猫は facial_nerve_paralysis をネイティブ保有 — チェーン解決の検証
+        ids, res = self._species("顔が歪んで片目のまばたきができません", "cat")
+        assert "facial_nerve_paralysis" in ids, ids
+        assert any("顔面神経麻痺" in n for n in self._names(res, 4)), self._names(res)
+
+    def test_guard_chinchilla_ear_droop_stays_otitis(self):
+        # チンチラの耳介下垂（ear_drooping 既存チェーン）は従来どおり中耳炎へ
+        ids, res = self._species("耳が垂れて元気がなく耳から臭いがします", "chinchilla")
+        assert "中耳炎" in self._names(res, 1)[0], self._names(res)
+
+    def test_guard_prayer_position_and_pruritus_unchanged(self):
+        # 既存の祈りのポーズ・皮膚科主訴ランキングの非回帰
+        ids, res = self._legacy("震えながら背中を丸めてじっとしています")
+        assert any("膵炎" in n for n in self._names(res, 5)), self._names(res)
+        ids2, res2 = self._legacy("皮膚が赤くて痒がって毛が抜けます")
+        names2 = self._names(res2, 3)
+        assert any("毛包虫" in n or "膿皮" in n for n in names2), names2
+
+    def test_dog_checkbox_parity_facial_droop(self):
+        # チェックボックス/問診経路にも facial_droop を追加（scooting/oral_mass
+        # パリティと同型）— dog モジュール語彙 + Facial Nerve Paralysis セット
+        from api.species.dog_diseases import (
+            SYMPTOM_CATEGORIES,
+            SYMPTOM_NAMES,
+            VALID_SYMPTOMS,
+            analyze_symptoms,
+        )
+
+        assert "facial_droop" in VALID_SYMPTOMS
+        assert "facial_droop" in SYMPTOM_NAMES
+        assert "facial_droop" in SYMPTOM_CATEGORIES["eyes_ears"]["symptoms"]
+        res = analyze_symptoms(["facial_droop", "ear_discharge"])
+        lst = res.get("suspected_diseases") if isinstance(res, dict) else res
+        lst = lst or (res.get("results") if isinstance(res, dict) else [])
+        names = [(d.get("name") or "") for d in lst[:3]]
+        assert any("Facial Nerve Paralysis" in n for n in names), names
+
+
+class TestChatClinicalAccuracyAuditRound40:
+    """2026-10 精度監査 第40弾: 存在動詞「あります」・い形容詞＋です の丁寧語正規化、
+    吐血の血尿誤誘導是正、鼻乾燥＝発熱の俗説マッピング是正、軟便形容詞形、
+    ウサギ耳疥癬の耳道内痂皮、両生類ツボカビの皮膚白濁、魚の鰭損傷、
+    セキセイのろう膜変色、馬の角膜混濁・流涙・発熱（あります形）。"""
+
+    @staticmethod
+    def _sp(phrase, species, n=5):
+        import warnings
+
+        warnings.filterwarnings("ignore")
+        from api.chat.disease_matcher import _match_species_symptoms_to_diseases
+        from api.chat.symptom_extractor import _extract_species_symptoms
+
+        ids = _extract_species_symptoms(phrase, species)
+        res = _match_species_symptoms_to_diseases(list(ids), species, lang="ja")
+        return set(ids), [r.get("name_ja") or r.get("name") or "" for r in res[:n]]
+
+    def test_polite_aru_and_i_adjective_desu_normalized(self):
+        from api.chat.symptom_extractor import normalize_chat_text as n
+
+        assert n("熱があります") == "熱がある"
+        assert n("しこりがありました") == "しこりがあった"
+        assert n("便がゆるいです") == "便がゆるい"
+        assert n("元気がなかったです") == "元気がなかった"
+        assert n("熱はありません") == "熱はない"
+
+    def test_horse_fever_polite_form_extracted(self):
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ids = _extract_equine_symptoms("鼻水と咳が出て熱があります")
+        assert "gen_fever" in ids
+        top = [r.get("name_ja") for r in _match_equine_symptoms_to_diseases(list(ids))[:3]]
+        assert any("インフルエンザ" in t or "腺疫" in t for t in top), top
+
+    def test_horse_corneal_opacity_and_tearing(self):
+        from api.diagnostic_chat import _extract_equine_symptoms, _match_equine_symptoms_to_diseases
+
+        ids = _extract_equine_symptoms("目が白く濁って涙が出ています")
+        assert {"eye_cloudiness", "eye_tearing"} <= set(ids)
+        top = [r.get("name_ja") for r in _match_equine_symptoms_to_diseases(list(ids))[:3]]
+        assert any("角膜" in t for t in top), top
+
+    def test_vomited_blood_not_misread_as_hematuria(self):
+        ids, top = self._sp("吐いた毛玉に血が混じります 食欲がない", "cat")
+        assert "vomiting" in ids and "bloody_urine" not in ids, ids
+        assert not any("尿" in t for t in top[:3]), top
+
+    def test_dry_nose_is_not_fever(self):
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        ids = extract_symptoms_from_text("鼻が乾いて鼻先がガサガサしています")
+        assert "fever" not in ids, ids
+        assert ids, "dry nasal planum should still yield a skin finding"
+
+    def test_loose_stool_adjective_form(self):
+        from api.diagnostic_chat import extract_symptoms_from_text
+
+        assert "diarrhea" in extract_symptoms_from_text("便がゆるくて粘液がついています")
+
+    def test_rabbit_ear_crusts_rank_ear_mites(self):
+        ids, top = self._sp("耳を痒がって耳の中にかさぶたがあります", "rabbit", n=2)
+        assert "ear_crusting" in ids
+        assert any("耳ダニ" in t or "耳疥癬" in t for t in top), top
+
+    def test_amphibian_cloudy_skin_ranks_chytrid(self):
+        ids, top = self._sp("皮膚が白く濁っています", "amphibian", n=2)
+        assert "excessive_shedding" in ids
+        assert any("ツボカビ" in t for t in top), top
+
+    def test_fish_frayed_fins_hiragana(self):
+        ids, top = self._sp("ひれがボロボロです", "fish", n=3)
+        assert "frayed_fins" in ids
+        assert any("尾ぐされ" in t for t in top), top
+
+    def test_parakeet_cere_color_change(self):
+        ids, top = self._sp("鼻の色が茶色くなりました", "parakeet", n=3)
+        assert "cere_color_change" in ids
+        assert any("精巣" in t or "蝋膜" in t for t in top), top
+
+    def test_hedgehog_quill_loss_stem_and_gp_noisy_breathing(self):
+        ids, _ = self._sp("針が抜けてフケが多いです", "hedgehog")
+        assert "quill_loss" in ids
+        ids, top = self._sp("ゴロゴロと呼吸の音がして鼻水が出ます", "guinea_pig")
+        assert "wheezing" in ids
+        assert any("肺炎" in t for t in top[:2]), top

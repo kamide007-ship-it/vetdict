@@ -1193,6 +1193,39 @@ INTERACTIONS: list[dict[str, Any]] = [
     # surface from the US label. Diltiazem is the clinically important pairing
     # because it is a standard feline HCM co-medication.
     {
+        "drug_a": "atinvicitinib",
+        "drug_b": "oclacitinib",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "JAK阻害の重複",
+        "effect_en": "Two JAK inhibitors add immunosuppression without additional antipruritic benefit.",
+        "effect_ja": "JAK阻害薬の重複は止痒効果を上乗せせず免疫抑制のみを相加する。",
+        "management_en": "Do not combine; switch from one JAK inhibitor to the other.",
+        "management_ja": "併用しない。一方から他方へ切り替える。",
+        "ref": "NUMELVI US label (Merck Animal Health, 2026)",
+    },
+    {
+        "drug_a": "atinvicitinib",
+        "drug_b": "ilunocitinib",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "JAK阻害の重複",
+        "effect_en": "Two JAK inhibitors add immunosuppression without additional antipruritic benefit.",
+        "effect_ja": "JAK阻害薬の重複は止痒効果を上乗せせず免疫抑制のみを相加する。",
+        "management_en": "Do not combine; switch from one JAK inhibitor to the other.",
+        "management_ja": "併用しない。一方から他方へ切り替える。",
+        "ref": "NUMELVI US label (Merck Animal Health, 2026)",
+    },
+    {
+        "drug_a": "relfovetmab",
+        "drug_b": "frunevetmab",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "抗NGF抗体の重複",
+        "effect_en": "Duplicate anti-NGF antibody therapy.",
+        "effect_ja": "抗NGF抗体療法の重複。",
+        "management_en": "Never combine; switch only after the previous product's dosing interval has elapsed.",
+        "management_ja": "併用しない。前製剤の投与間隔経過後に切り替える。",
+        "ref": "Portela EU SmPC (Zoetis, 2025)",
+    },
+    {
         "drug_a": "sirolimus",
         "drug_b": "diltiazem",
         "severity": SEVERITY_MAJOR,
@@ -1226,6 +1259,50 @@ INTERACTIONS: list[dict[str, Any]] = [
         "ref": "Felycin-CA1 US label (DailyMed)",
     },
     {
+        "drug_a": "metamizole",
+        "drug_b": "acepromazine",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "ピラゾロン系とフェノチアジン系の併用による体温調節抑制・血管拡張の相加",
+        "effect_en": "Metamizole combined with a phenothiazine has caused severe hypothermia, with additive hypotension.",
+        "effect_ja": "メタミゾールとフェノチアジン系（アセプロマジン）の併用で重度の低体温と低血圧の相加が報告されている。",
+        "management_en": "Avoid the combination where possible; if used (e.g. premedication), monitor temperature and blood pressure and provide active warming.",
+        "management_ja": "可能な限り併用を避ける。前投薬等で併用する場合は体温・血圧を監視し能動的加温を行う。",
+        "ref": "Plumb's Veterinary Drug Handbook 10th ed — Metamizole (Dipyrone)",
+    },
+    {
+        "drug_a": "metamizole",
+        "drug_b": "methotrexate",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "血液毒性（無顆粒球症・骨髄抑制）の相加",
+        "effect_en": "Additive haematological toxicity — metamizole's idiosyncratic agranulocytosis compounds drug-induced myelosuppression.",
+        "effect_ja": "メタミゾールの特異体質性無顆粒球症と骨髄抑制薬の血液毒性が相加する。",
+        "management_en": "Prefer an alternative analgesic/antipyretic; if combined, monitor CBC closely.",
+        "management_ja": "他の鎮痛・解熱薬を優先する。併用時はCBCを厳重に監視する。",
+        "ref": "Plumb's Veterinary Drug Handbook 10th ed — Metamizole (Dipyrone)",
+    },
+    {
+        "drug_a": "metamizole",
+        "drug_b": "azathioprine",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "血液毒性（無顆粒球症・骨髄抑制）の相加",
+        "effect_en": "Additive haematological toxicity — metamizole's idiosyncratic agranulocytosis compounds drug-induced myelosuppression.",
+        "effect_ja": "メタミゾールの特異体質性無顆粒球症と骨髄抑制薬の血液毒性が相加する。",
+        "management_en": "Prefer an alternative analgesic/antipyretic; if combined, monitor CBC closely.",
+        "management_ja": "他の鎮痛・解熱薬を優先する。併用時はCBCを厳重に監視する。",
+        "ref": "Plumb's Veterinary Drug Handbook 10th ed — Metamizole (Dipyrone)",
+    },
+    {
+        "drug_a": "metamizole",
+        "drug_b": "chlorambucil",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "血液毒性（無顆粒球症・骨髄抑制）の相加",
+        "effect_en": "Additive haematological toxicity — metamizole's idiosyncratic agranulocytosis compounds drug-induced myelosuppression.",
+        "effect_ja": "メタミゾールの特異体質性無顆粒球症と骨髄抑制薬の血液毒性が相加する。",
+        "management_en": "Prefer an alternative analgesic/antipyretic; if combined, monitor CBC closely.",
+        "management_ja": "他の鎮痛・解熱薬を優先する。併用時はCBCを厳重に監視する。",
+        "ref": "Plumb's Veterinary Drug Handbook 10th ed — Metamizole (Dipyrone)",
+    },
+    {
         "drug_a": "molidustat",
         "drug_b": "darbepoetin",
         "severity": SEVERITY_MAJOR,
@@ -1247,7 +1324,197 @@ INTERACTIONS: list[dict[str, Any]] = [
         "management_ja": "併用しない。どちらか一方を選択し、週1回PCV監視＋目標到達で中止のルールを徹底する。",
         "ref": "Varenzin-CA1 US label (Elanco, FDA conditional approval 2023)",
     },
+    {
+        "drug_a": "gilvetmab",
+        "drug_b": "prednisolone",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "免疫抑制がPD-1遮断の機序を打ち消す",
+        "effect_en": "Glucocorticoids suppress the T-cell response that gilvetmab works by restoring — the conditional license label excludes dogs on concurrent immunosuppressive medication.",
+        "effect_ja": "グルココルチコイドはギルベトマブが回復させるT細胞応答自体を抑制する — 条件付きライセンスのラベルは免疫抑制薬併用中の犬を除外している。",
+        "management_en": "Do not start gilvetmab in dogs receiving glucocorticoids; taper and discontinue steroids first (per oncologist guidance) before checkpoint-inhibitor therapy.",
+        "management_ja": "グルココルチコイド投与中の犬にはギルベトマブを開始しない。チェックポイント阻害療法の前にステロイドを漸減・中止する（腫瘍科医の指示に従う）。",
+        "ref": "Gilvetmab US conditional license label/FAQ (Merck Animal Health); JVIM 2026 (PMID 42247661)",
+    },
+    {
+        "drug_a": "gilvetmab",
+        "drug_b": "dexamethasone",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "免疫抑制がPD-1遮断の機序を打ち消す",
+        "effect_en": "Same mechanism conflict as prednisolone — concurrent glucocorticoids blunt checkpoint blockade.",
+        "effect_ja": "プレドニゾロンと同じ機序的矛盾 — グルココルチコイド併用はチェックポイント遮断を減弱させる。",
+        "management_en": "Avoid concurrent use; discontinue before starting gilvetmab.",
+        "management_ja": "併用を避け、ギルベトマブ開始前に中止する。",
+        "ref": "Gilvetmab US conditional license label/FAQ (Merck Animal Health)",
+    },
+    {
+        "drug_a": "gilvetmab",
+        "drug_b": "cyclosporine",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "T細胞抑制がチェックポイント阻害の前提を崩す",
+        "effect_en": "Cyclosporine suppresses the T-cell compartment that PD-1 blockade requires to work.",
+        "effect_ja": "シクロスポリンはPD-1遮断が前提とするT細胞そのものを抑制する。",
+        "management_en": "Do not combine; checkpoint-inhibitor therapy requires withdrawal of immunosuppressants first.",
+        "management_ja": "併用しない。チェックポイント阻害療法の前に免疫抑制薬を中止する。",
+        "ref": "Gilvetmab US conditional license label/FAQ (Merck Animal Health)",
+    },
 ]
+
+# --- ギルベトマブ × 免疫抑制薬クラスの網羅的登録（Codexレビュー P1 対応） ----
+# Merck 条件付きライセンスのラベル/FAQ: 「グルココルチコイドまたはその他の
+# 免疫抑制薬を投与中の犬には使用しない」。find_interactions は ID 完全一致の
+# ため、上の3エントリ（prednisolone/dexamethasone/cyclosporine）だけでは
+# 辞書に実在する他のグルココルチコイド・免疫抑制薬（prednisone・
+# methylprednisolone・azathioprine・mycophenolate 等）との併用が無警告に
+# なる安全ギャップがあった。辞書収載の該当 ID を全てクラス単位で登録する。
+# 意図的な除外: 点眼剤（cyclosporine_ophthalmic / tacrolimus_ophthalmic /
+# neo_poly_dex_ophthalmic — 全身免疫抑制は実質なし）、純粋なミネラル
+# コルチコイド（desoxycorticosterone / fludrocortisone — アジソン病の
+# 生理的補充であり免疫抑制ではない）、T細胞抑制を主機序としない免疫調節薬
+# （interferon_omega=免疫賦活、human_ivig=単回Fc遮断レスキュー、
+# dapsone=抗好中球性サルホン、fuzapladib=急性膵炎の短期LFA-1阻害）。
+# 注: 綴り違いの重複エントリ（ciclosporin_oral=英式綴りの改良型経口
+# アトピカ、batch_19）も独立IDとして配信されるため個別に登録が必要
+# （Codexレビュー第2波 P1 で検出）。
+GILVETMAB_GLUCOCORTICOID_IDS = [
+    "prednisolone",
+    "prednisone",
+    "prednisolone_lymphoma",
+    "dexamethasone",
+    "dexamethasone_sp",
+    "methylprednisolone",
+    "triamcinolone",
+    "hydrocortisone_succinate",
+    "budesonide",
+    "fluticasone",
+    "fluticasone_inhaler",
+]
+GILVETMAB_IMMUNOSUPPRESSANT_IDS = [
+    "cyclosporine",
+    "ciclosporin_oral",
+    "tacrolimus_systemic",
+    "azathioprine",
+    "mycophenolate",
+    "leflunomide",
+    "methotrexate",
+    "chlorambucil",
+    "chlorambucil_low_dose",
+    "chlorambucil_ibd",
+    "cyclophosphamide",
+    "cyclophosphamide_oral",
+    "oclacitinib",
+    "ilunocitinib",
+    "atinvicitinib",
+    "sirolimus",
+]
+
+_GILVETMAB_REGISTERED = {ix["drug_b"] for ix in INTERACTIONS if ix.get("drug_a") == "gilvetmab"}
+for _gc_id in GILVETMAB_GLUCOCORTICOID_IDS:
+    if _gc_id in _GILVETMAB_REGISTERED:
+        continue
+    INTERACTIONS.append(
+        {
+            "drug_a": "gilvetmab",
+            "drug_b": _gc_id,
+            "severity": SEVERITY_MAJOR,
+            "mechanism": "グルココルチコイドの免疫抑制がPD-1遮断の機序を打ち消す",
+            "effect_en": "Glucocorticoids (any systemic formulation, including depot and inhaled routes with systemic absorption) suppress the T-cell response that gilvetmab works by restoring — the conditional license label excludes dogs on concurrent glucocorticoids or other immunosuppressive medication.",
+            "effect_ja": "グルココルチコイド（デポ製剤・全身吸収のある吸入経路を含む全身性製剤）はギルベトマブが回復させるT細胞応答自体を抑制する — 条件付きライセンスのラベルはグルココルチコイドその他の免疫抑制薬の併用中の犬を除外している。",
+            "management_en": "Do not start gilvetmab in dogs receiving glucocorticoids; taper and discontinue first per oncologist guidance before checkpoint-inhibitor therapy.",
+            "management_ja": "グルココルチコイド投与中の犬にはギルベトマブを開始しない。チェックポイント阻害療法の前に腫瘍科医の指示でステロイドを漸減・中止する。",
+            "ref": "Gilvetmab US conditional license label/FAQ (Merck Animal Health)",
+        }
+    )
+for _is_id in GILVETMAB_IMMUNOSUPPRESSANT_IDS:
+    if _is_id in _GILVETMAB_REGISTERED:
+        continue
+    INTERACTIONS.append(
+        {
+            "drug_a": "gilvetmab",
+            "drug_b": _is_id,
+            "severity": SEVERITY_MAJOR,
+            "mechanism": "免疫抑制薬がチェックポイント阻害の前提（機能するT細胞）を崩す",
+            "effect_en": "Immunosuppressive / immunomodulatory medication (calcineurin, antimetabolite, alkylating, JAK and mTOR inhibitors) suppresses the T-cell compartment that PD-1 blockade requires — the conditional license label excludes concurrent immunosuppressive use.",
+            "effect_ja": "免疫抑制・免疫調節薬（カルシニューリン阻害薬・代謝拮抗薬・アルキル化薬・JAK阻害薬・mTOR阻害薬）はPD-1遮断が前提とするT細胞そのものを抑制する — 条件付きライセンスのラベルは免疫抑制薬の併用を除外している。",
+            "management_en": "Do not combine; withdraw the immunosuppressant first (per oncologist guidance) before starting gilvetmab.",
+            "management_ja": "併用しない。ギルベトマブ開始前に免疫抑制薬を中止する（腫瘍科医の指示に従う）。",
+            "ref": "Gilvetmab US conditional license label/FAQ (Merck Animal Health)",
+        }
+    )
+# 他の抗腫瘍療法（化学療法・分子標的薬・腫瘍内注射・腫瘍ワクチン）との併用は
+# Merck FAQ で「未評価」とされる。相互作用が「無い」と表示されないよう、免疫抑制系
+# （上の major 登録分）以外の抗腫瘍薬は「併用未研究」の moderate 警告として登録する
+# （Codexレビュー対応）。
+GILVETMAB_UNSTUDIED_ONCOLOGY_IDS = [
+    "carboplatin",
+    "cisplatin_injectable",
+    "cytarabine",
+    "doxorubicin",
+    "doxorubicin_injectable",
+    "fluorouracil",
+    "hydroxyurea",
+    "l_asparaginase",
+    "lomustine",
+    "lomustine_oral",
+    "melphalan",
+    "mitoxantrone",
+    "palladia",
+    "piroxicam_bladder",
+    "procarbazine",
+    "rabacfosadine",
+    "tigilanol_tiglate",
+    "toceranib",
+    "vinblastine",
+    "vincristine",
+    "vincristine_injectable",
+    "vinorelbine",
+    "verdinexor",
+    "oncept_melanoma_vaccine",
+]
+for _onc_id in GILVETMAB_UNSTUDIED_ONCOLOGY_IDS:
+    if _onc_id in _GILVETMAB_REGISTERED:
+        continue
+    INTERACTIONS.append(
+        {
+            "drug_a": "gilvetmab",
+            "drug_b": _onc_id,
+            "severity": SEVERITY_MODERATE,
+            "mechanism": "併用未研究（他の抗腫瘍療法とのチェックポイント阻害の併用データなし）",
+            "effect_en": "Unstudied combination: concurrent chemotherapy, radiation, targeted therapy, intratumoral agents or tumor vaccines have not been evaluated with gilvetmab (Merck FAQ). Safety and efficacy of the combination — including additive myelosuppression or cytotoxic depletion of the T cells that PD-1 blockade relies on — are unknown.",
+            "effect_ja": "併用未研究: 化学療法・放射線・分子標的薬・腫瘍内注射剤・腫瘍ワクチンとギルベトマブの併用は評価されていない（Merck FAQ）。骨髄抑制の相加や、PD-1遮断が依存するT細胞の細胞傷害性減少を含め、併用時の安全性・有効性は不明。",
+            "management_en": "Treat as a specialist decision: decide concurrent vs. sequential use with a veterinary oncologist, and monitor CBC and clinical response closely if combined.",
+            "management_ja": "腫瘍科専門医の判断事項として扱う: 併用か逐次かを腫瘍科医と決定し、併用する場合はCBCと臨床反応を厳密に監視する。",
+            "ref": "Gilvetmab External FAQ (Merck Animal Health, 2025)",
+        }
+    )
+del _GILVETMAB_REGISTERED
+
+# --- 2026-10 第67弾: エンフリコキシブ（週1回コキシブ）× 他NSAIDs/ステロイド ---
+# 活性代謝物の半減期が非常に長く、最終投与後も数週間曝露が続くため、
+# 通常のNSAID併用禁忌に加え切替時の休薬期間を明記する（EMA SPC Daxocox 2021）。
+for _other, _kind in (
+    ("meloxicam", "nsaid"),
+    ("carprofen", "nsaid"),
+    ("robenacoxib", "nsaid"),
+    ("firocoxib", "nsaid"),
+    ("mavacoxib", "nsaid"),
+    ("grapiprant", "nsaid"),
+    ("prednisolone", "steroid"),
+    ("dexamethasone", "steroid"),
+):
+    INTERACTIONS.append(
+        {
+            "drug_a": "enflicoxib",
+            "drug_b": _other,
+            "severity": SEVERITY_CONTRAINDICATED,
+            "mechanism": "COX阻害の重複" if _kind == "nsaid" else "胃腸粘膜保護の二重阻害",
+            "effect_en": "Concurrent NSAID/corticosteroid exposure markedly increases GI ulceration, perforation and renal toxicity — and enflicoxib's long-lived active metabolite keeps exposure going for weeks after the last weekly dose.",
+            "effect_ja": "NSAIDs/ステロイドとの併用は消化管潰瘍・穿孔・腎毒性を著しく増加させる。エンフリコキシブは活性代謝物が長く残るため、最終の週1回投与から数週間は曝露が続く。",
+            "management_en": "Do not combine. When switching to or from enflicoxib, allow a washout of at least one week after the last weekly dose (longer if clinically indicated).",
+            "management_ja": "併用禁忌。エンフリコキシブとの切替時は、最終の週1回投与から最低1週間（臨床的に必要ならそれ以上）の休薬期間を置く。",
+            "ref": "Daxocox EMA SPC (2021)",
+        }
+    )
+del _other, _kind
 
 
 def normalize_drug_id(drug_id: str) -> str:

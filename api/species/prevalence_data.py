@@ -60,6 +60,9 @@ SPECIES_PREVALENCE = {
         "Interdigital Cyst (Furuncle)": "common",
         "Deciduous Malocclusion (Interceptive Orthodontics)": "common",
         "Missing Teeth (Hypodontia / Unerupted Teeth)": "common",
+        # Idiopathic facial nerve paralysis — recognized but not everyday
+        # (~75% of canine facial paralysis; cockers predisposed. Ettinger 8th)
+        "Facial Nerve Paralysis": "uncommon",
         # Northern-breed keratinization disorder; classic but not common
         # (White SD, JAVMA 2001; Colombini S, Vet Clin North Am 1999).
         "Zinc-Responsive Dermatosis": "uncommon",
@@ -233,6 +236,29 @@ SPECIES_PREVALENCE = {
     # CAT — 230+ entries (expanded from ~73)
     # ==================================================================
     "cat": {
+        # 2026-10 第67弾: 跳躍不能（猫DJDの最頻の飼い主所見）主訴で未tierの稀な
+        # 脊椎・栄養性エントリが変形性関節症を上回っていた
+        "Feline Atlantoaxial Instability": "rare",
+        "Feline Discospondylitis": "rare",
+        "Feline Hypervitaminosis A (Chronic)": "rare",
+        "Feline Hypervitaminosis A": "rare",
+        "Feline Pansteatitis (Yellow Fat Disease)": "rare",
+        "Feline Chronic Progressive Polyarthritis": "uncommon",
+        # 筋力低下主訴の未tier稀少エントリ（猫胸腺腫瘍・RTA・ヘパトゾーンは真に稀）
+        "Thymic Carcinoma": "rare",
+        "Feline Renal Tubular Acidosis": "rare",
+        "Feline Hepatozoonosis": "rare",
+        "Hypokalemia": "common",
+        # PU/PD + 体重減少（高齢猫の CKD/甲状腺/糖尿の古典像）で、未tierの
+        # 猫膀胱TCC（犬と異なり猫では稀 — Wilson 2007 JFMS）と尿崩症2型
+        # （真に稀な内分泌疾患）が CKD を上回っていた
+        "Transitional Cell Carcinoma (Bladder)": "rare",
+        "Feline Nephrogenic Diabetes Insipidus": "rare",
+        "Feline Diabetes Insipidus (Central)": "rare",
+        # 北米限定の Cytauxzoon 変異（本邦不在）と曝露歴依存の中毒が、
+        # 蒼白+頻呼吸の貧血主訴で未tierのまま上位を占めていた
+        "Tick-Borne Disease (Cytauxzoonosis)": "rare",
+        "Acetaminophen Toxicosis (Acute)": "uncommon",
         # Neoplasia/toxicosis tiers: a bare 「しこり」 query ranked injection-site
         # sarcomas and melanoma above abscess/MCT; PU/PD queries ranked
         # cholecalciferol rodenticide toxicosis above CKD.
@@ -542,6 +568,22 @@ SPECIES_PREVALENCE = {
     # McFarlane 2011 (PPID); Gerding & Gilger 2016 (ERU)
     # ==================================================================
     "horse": {
+        # 2026-10 第69弾: 体重減少単独主訴を皮膚腫瘍の2所見エントリが独占していた
+        "Fibrosarcoma": "uncommon",
+        "Hemangiosarcoma": "rare",
+        # 2026-10 第43回: 遠位肢浮腫の鑑別（Reed & Bayly 4th ed）
+        "Stocking Up": "common",
+        "Frostbite": "rare",
+        "Chronic Progressive Lymphedema": "uncommon",
+        "Guttural Pouch Tympany": "uncommon",
+        "Jugular Thrombophlebitis": "uncommon",
+        "Recurrent Airway Obstruction (Heaves)": "common",
+        "Epiglottal Entrapment": "uncommon",
+        # 先天性心疾患（Reef; Marr & Bowen — VSD が最多だが全体として稀）
+        "Ventricular Septal Defect": "uncommon",
+        "Atrial Septal Defect": "rare",
+        "Patent Ductus Arteriosus": "rare",
+        "Tetralogy of Fallot": "rare",
         # Colic-subtype and misc tiers: without these, single-finding colic
         # queries ranked uterine torsion / hydrops above the everyday causes
         # (subtype shares per Reed & Bayly 4th ed / surgical colic series).
@@ -594,7 +636,7 @@ SPECIES_PREVALENCE = {
         "Corneal Ulcer": "common",  # Most common equine ophthalmic emergency
         "Equine Recurrent Uveitis": "common",  # Leading cause of equine blindness
         "Pituitary Pars Intermedia Dysfunction": "common",  # >20% of aged horses
-        "Equine Metabolic Syndrome (EMS)": "common",
+        "Equine Metabolic Syndrome": "common",
         "Superficial Digital Flexor Tendinitis": "common",  # Athletic horses
         "Proximal Suspensory Desmitis": "common",  # Sport horses
         "Navicular Syndrome": "common",
@@ -653,7 +695,19 @@ SPECIES_PREVALENCE = {
         # uncommon
         "Sand Colic": "uncommon",  # Region/management dependent
         "Enterolithiasis": "uncommon",
-        "Colitis": "uncommon",
+        # 成馬の急性下痢の主因は大腸炎（Feary & Hassel, Vet Clin Equine 2006 —
+        # 原因病原体は症例の多くで特定されない）。uncommon のままでは
+        # 「下痢がひどくて元気がない」で Besnoitia/RTA/溺水等の未tier
+        # エントリが上位を独占していた
+        "Colitis": "common",
+        "Besnoitiosis": "rare",
+        "Renal Tubular Acidosis": "rare",
+        "Near-Drowning": "rare",
+        "Pokeweed Toxicity": "rare",
+        "Iodine Deficiency": "rare",
+        "Lawsonia intracellularis Infection": "uncommon",  # 離乳期子馬の疾患
+        "Rotavirus": "uncommon",  # 新生子馬の下痢
+        "Equine Coronavirus": "uncommon",
         # Esophageal disorders other than choke are genuinely infrequent in
         # horses (Reed & Bayly 4th ed) — untiered they outranked choke itself
         # on trivially perfect coverage for the ptyalism/dysphagia complaint.
@@ -687,6 +741,10 @@ SPECIES_PREVALENCE = {
         "Equine Protozoal Myeloencephalitis": "uncommon",  # Americas; JP override rare
         "West Nile Encephalitis": "uncommon",  # JP override rare
         "Rhodococcus equi Pneumonia (Foal)": "uncommon",  # Endemic farms
+        # モジュール正準名（括弧なし）— 旧キーは配信名のみ一致しチャット経路で prior 不発だった
+        "Rhodococcus equi Pneumonia": "uncommon",  # 1-6ヶ月齢子馬限定（Giguère 2011 ACVIM）
+        # 若齢馬で正常〜軽度所見（Raker 1983 Grade I-II）。発熱主訴の原因疾患ではない
+        "Pharyngeal Lymphoid Hyperplasia": "uncommon",
         "Neonatal Septicemia": "uncommon",
         "Fracture": "uncommon",
         "Lymphangitis": "uncommon",
@@ -747,6 +805,10 @@ SPECIES_PREVALENCE = {
     # RABBIT — 35+ entries (expanded from ~23)
     # ==================================================================
     "rabbit": {
+        # 2026-10 第43回: 陰部出血の鑑別 — 未避妊雌の子宮腺癌が圧倒的（Saito 2002;
+        # Walter 2010 — 4歳以上の未避妊雌の50-80%）。平滑筋腫・捻転は稀
+        "Leiomyoma (Uterine)": "uncommon",
+        "Uterine Torsion": "rare",
         # very_common
         "Gastrointestinal Stasis": "very_common",
         "Dental Malocclusion": "very_common",
@@ -766,6 +828,10 @@ SPECIES_PREVALENCE = {
         # Carpenter 4th）— 未tierのまま湿潤性皮膚病変でハエウジ症（時間単位の
         # 救急）より上位に出ていた
         "Demodex Mange": "rare",
+        # 2026-10 第41回監査: 未tierの稀な皮膚疾患が掻痒+フケ主訴でツメダニ症を
+        # 抑圧していた（ウサギのデルマトフィルス症・ムコール症は症例報告レベル）
+        "Dermatophilosis": "rare",
+        "Mucormycosis": "rare",
         "Coccidiosis (Intestinal)": "very_common",
         "Hepatic Coccidiosis": "very_common",
         "Otitis Externa": "very_common",
@@ -898,6 +964,12 @@ SPECIES_PREVALENCE = {
     # BIRD — 28+ entries (expanded from ~16)
     # ==================================================================
     "bird": {
+        # 未tierのまま「足を痛がって止まり木に止まれない」の上位を占めていた:
+        # 捕獲性ミオパチーは主に野鳥の病態、末梢神経障害・合成内分泌栄養
+        # エントリは非特異（趾瘤症・関節炎・痛風が日常鑑別 — Ritchie & Harrison）
+        "Myopathy (Nutritional / Capture)": "uncommon",
+        "Peripheral Neuropathy": "uncommon",
+        "Endocrine Nutritional Disorder": "uncommon",
         # Exposure-dependent toxicoses / incidental hemoparasites (see parakeet).
         "Copper Poisoning": "rare",
         "PTFE / Teflon Toxicosis": "rare",
@@ -1546,6 +1618,11 @@ SPECIES_PREVALENCE = {
         # 先天性疾患 — 未tierのまま2所見カバレッジで小糞粒主訴のGIうっ滞を上回っていた
         # （ウサギMegacolon=rareと同型の是正。チンチラの糞量減少の主因はうっ滞）
         "Congenital Megacolon": "rare",
+        # 2026-10 第67弾: 「下痢+元気消失」で徴候名エントリ（筋萎縮）が嗜眠の同義語
+        # 展開3件でカバレッジ勝ちし1位を奪っていた — 消化器ddxを正しい上位に
+        "Muscle Wasting": "uncommon",
+        "Antibiotic-Associated Dysbiosis": "common",
+        "E. coli Enteritis": "common",
         "Upper Respiratory Infection": "very_common",
         "Diarrhea": "very_common",
         "Dental Malocclusion - Incisor": "very_common",

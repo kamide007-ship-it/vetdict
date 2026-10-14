@@ -69,7 +69,7 @@ a:hover{text-decoration:underline}
 .hamburger svg{display:block;width:24px;height:24px;color:var(--white)}
 
 /* --- Breadcrumb Bar --- */
-.breadcrumb-bar{background:linear-gradient(90deg,rgba(26,48,104,.06),rgba(26,48,104,.02));border-bottom:1px solid var(--gray-200);position:sticky;top:52px;z-index:99;font-size:.78rem}
+.breadcrumb-bar{background:linear-gradient(90deg,rgba(26,48,104,.06),rgba(26,48,104,.02));border-bottom:1px solid var(--gray-200);position:sticky;top:var(--header-h,52px);z-index:99;font-size:.78rem}
 .breadcrumb-inner{max-width:1200px;margin:0 auto;padding:6px 20px;display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto}
 .breadcrumb-item{color:var(--gray-500);white-space:nowrap}
 .breadcrumb-home{color:var(--navy);text-decoration:none;cursor:pointer;font-weight:500;transition:color var(--transition-fast)}
@@ -1167,7 +1167,7 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .header-nav button{text-align:left;padding:12px 16px;border-radius:8px}
   .header-nav button[aria-selected="true"]{background:rgba(34,168,79,.15);color:var(--green);border-left:3px solid var(--green);font-weight:700;box-shadow:none}
   .hamburger{display:block}
-  .breadcrumb-bar{top:46px;font-size:.72rem}
+  .breadcrumb-bar{top:var(--header-h,46px);font-size:.72rem}
   .breadcrumb-inner{padding:5px 12px}
   .hero{padding:40px 16px 36px}
   .hero-title{font-size:2.2rem}
@@ -1183,7 +1183,7 @@ input:focus,select:focus{box-shadow:0 0 0 3px rgba(42,74,143,.15)}
   .species-card .icon{font-size:1.8rem}
   .sponsor-banner-inner{flex-direction:column;align-items:flex-start}
   .scroll-top{bottom:72px;right:16px;width:38px;height:38px}
-  .chat-container{height:calc(100dvh - 340px);min-height:280px;max-height:460px}
+  .chat-container{height:calc(100dvh - 240px);min-height:320px;max-height:680px}
   #chatGuidedContainer{height:calc(100dvh - 340px);min-height:320px;max-height:500px}
   .guided-actions{max-height:260px;padding:6px}
   .guided-category-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px}
@@ -1997,7 +1997,13 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
 
 .card img,.card video,.card iframe,.disease-detail img{max-width:100%;height:auto}
 @media(max-width:600px){
-  html,body{overflow-x:hidden}
+  /* 横はみ出し防止。html,body 両方に overflow-x:hidden を付けると body が
+     スクロールコンテナになり、position:sticky のヘッダー・パンくずが張り付かず
+     スクロールで消える（存在しないヘッダー分の --sticky-offset だけ着地位置が
+     ずれる原因）。html は viewport へ伝播させ、body は scroll container を作らない
+     clip にする。 */
+  html{overflow-x:hidden}
+  body{overflow-x:clip}
   .references{padding:16px 14px}
   .ref-category{padding:12px 14px}
   .ref-header{padding:12px 14px}
@@ -2155,3 +2161,24 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
 @keyframes coach-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
 @media (prefers-reduced-motion: reduce){.first-visit-coach-arrow{animation:none}}
 @media (max-width:600px){.first-visit-coach{margin:0 12px 12px;font-size:.8rem;padding:9px 12px}}
+
+/* 2026-10: スマホのクイック入力チップ — 種によっては12件超で縦に何行も折り返し、
+   チップ自体も約22pxでタップしにくかった。2段の横スクロール帯にまとめ、
+   タップ目標を36px以上に（スクロールでき続きがあることを右端フェードで示す）。 */
+@media(max-width:600px){
+.quick-sym-row{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding:2px 24px 6px 0;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,#000 85%,transparent);mask-image:linear-gradient(to right,#000 85%,transparent)}
+.quick-sym-row::-webkit-scrollbar{display:none}
+.quick-sym-row .quick-sym-btn{margin:0!important;min-height:36px;padding:6px 12px!important;white-space:nowrap;scroll-snap-align:start;font-size:.8rem!important}
+}
+/* 2026-10 第67弾: スマホの小さすぎるタップ目標（390px 実測 21-29px）を 40px 以上に */
+@media(max-width:600px){
+  .first-visit-coach-close,.anesthesia-weight-clear{min-width:40px;min-height:40px;display:inline-flex;align-items:center;justify-content:center}
+  .chat-mode-btn{min-height:40px}
+  .az-mode-toggle{min-height:36px}
+  .interaction-drug.drug-nav-link{display:inline-block;padding:6px 2px;margin:-6px 0}
+}
+
+/* 2026-10 第69弾: モバイルのパンくず「トップ」のタップ目標（33x18px）を拡大 */
+@media(max-width:600px){.breadcrumb-home{display:inline-flex;align-items:center;min-height:36px;padding:0 8px;margin-left:-8px}}
+/* 2026-10 第69弾: チャットの追加質問チップ（26px）・よくみられる疾患チップ（24px）のタップ目標 */
+@media(max-width:600px){.chat-followup-btn,.common-disease-tag{min-height:36px;display:inline-flex;align-items:center}}

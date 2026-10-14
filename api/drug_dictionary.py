@@ -93,6 +93,14 @@ from api.drug_batch_66 import DRUGS_BATCH_66
 from api.drug_batch_67 import DRUGS_BATCH_67
 from api.drug_batch_68 import DRUGS_BATCH_68
 from api.drug_batch_69 import DRUGS_BATCH_69
+from api.drug_batch_70 import DRUGS_BATCH_70
+from api.drug_batch_71 import DRUGS_BATCH_71
+from api.drug_batch_72 import DRUGS_BATCH_72
+from api.drug_batch_73 import DRUGS_BATCH_73
+from api.drug_batch_74 import DRUGS_BATCH_74
+from api.drug_batch_75 import DRUGS_BATCH_75
+from api.drug_batch_76 import DRUGS_BATCH_76
+from api.drug_batch_77 import DRUGS_BATCH_77
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -10971,6 +10979,69 @@ for _drug69 in DRUGS_BATCH_69:
         DRUGS.append(_drug69)
         _drug_index[_drug69["id"]] = _drug69
 
+# Batch 70 (2026-10 第63弾: 新規承認薬 — フルララネル徐放性注射剤
+#  （ブラベクト クオンタム、FDA 2025年承認の初の12ヶ月ノミ・マダニ注射剤。
+#  経口チュアブル用量の流用防止のため独立モノグラフ）)
+for _drug70 in DRUGS_BATCH_70:
+    if _drug70["id"] not in _drug_index:
+        DRUGS.append(_drug70)
+        _drug_index[_drug70["id"]] = _drug70
+
+# Batch 71 (2026-10: ギルベトマブ — 犬で初のUSDA条件付きライセンス
+#  チェックポイント阻害薬（抗PD-1犬化mAb、Merck）。MCT I-III・メラノーマ
+#  II-III。10 mg/kg IV 30分以上 q2w 最大10回。グルココルチコイド併用除外。
+#  JVIM 2026: メラノーマORR 20%/MCT ORR 46%。猫は safe:False)
+for _drug71 in DRUGS_BATCH_71:
+    if _drug71["id"] not in _drug_index:
+        DRUGS.append(_drug71)
+        _drug_index[_drug71["id"]] = _drug71
+
+# Batch 72 (2026-10: クレデリオ クワトロ — ロチラネル+モキシデクチン+プラジカンテル+
+#  ピランテルの月1回経口4成分配合。FDA NADA 141-581。最低 20/0.02/5/5 mg/kg、
+#  8週齢以上・1.5 kg以上。猫は safe:False)
+for _drug72 in DRUGS_BATCH_72:
+    if _drug72["id"] not in _drug_index:
+        DRUGS.append(_drug72)
+        _drug_index[_drug72["id"]] = _drug72
+
+# Batch 73 (2026-10: アチンビシチニブ（ヌメルビ）— 犬アレルギー性掻痒の第二世代JAK1選択的
+#  阻害薬 0.8-1.2 mg/kg q24h（FDA 2026/EU 2025）、レルフォベトマブ（ポルテラ）— 猫OA疼痛の
+#  3ヶ月間隔抗NGF抗体（EU/カナダ/英国）。いずれも国内未承認）
+for _drug73 in DRUGS_BATCH_73:
+    if _drug73["id"] not in _drug_index:
+        DRUGS.append(_drug73)
+        _drug_index[_drug73["id"]] = _drug73
+
+# Batch 74 (2026-10: リポソーム化ブピバカイン（ノシタ）— 72時間徐放局所麻酔（犬CCL閉創浸潤/
+#  猫抜爪前4点ブロック）、ブプレノルフィン経皮溶液（ゾルビウム）— 猫術後4日鎮痛の単回塗布、
+#  ベルジネクソル（ラバーディア）— 犬リンパ腫の経口XPO1阻害薬（FDA条件付き）。国内未承認）
+for _drug74 in DRUGS_BATCH_74:
+    if _drug74["id"] not in _drug_index:
+        DRUGS.append(_drug74)
+        _drug_index[_drug74["id"]] = _drug74
+
+# Batch 75 (2026-10 第67弾: ロピニロール点眼液（クレボー）— 静脈確保不要の犬の催吐、
+#  シンパリカトリオ — 月1回のノミ・マダニ・フィラリア・回虫鉤虫配合チュアブル、
+#  エンフリコキシブ（ダクソコックス）— 週1回投与の犬OA用コキシブ）
+for _drug75 in DRUGS_BATCH_75:
+    if _drug75["id"] not in _drug_index:
+        DRUGS.append(_drug75)
+        _drug_index[_drug75["id"]] = _drug75
+
+# Batch 76 (2026-10 第69弾: メタミゾール（ジピロン・スルピリン）— 馬の解熱（Zimeta、
+#  FDA 2020）とNSAID禁忌例の犬猫の多角的鎮痛）
+for _drug76 in DRUGS_BATCH_76:
+    if _drug76["id"] not in _drug_index:
+        DRUGS.append(_drug76)
+        _drug_index[_drug76["id"]] = _drug76
+
+# Batch 77 (2026-10 第70弾: ブラベクトプラス（猫）・ネクスガードプラス（犬）—
+#  フィラリア予防を含む外部・内部寄生虫の配合剤）
+for _drug77 in DRUGS_BATCH_77:
+    if _drug77["id"] not in _drug_index:
+        DRUGS.append(_drug77)
+        _drug_index[_drug77["id"]] = _drug77
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11242,6 +11313,14 @@ _DRUG_CURATED_MERGE: dict[str, list[str]] = {
     #   tranexamic_acid_topical/_iv（経路別）、miconazole_topical、eprinomectin_topical、
     #   succinylcholine_equine（緊急プロトコル）、tramadol_lactation（乳汁分泌サポート）、
     #   maropitant_oral（経路別）
+    # --- 2026-10 第67弾監査: 括弧前ステム一致の残存重複カード ---
+    # レボリューションプラス（同一製剤・同一用量の2枚目カード）
+    "selamectin_sarolaner": ["selamectin_sarolaner_combo"],
+    # ブスコパン（scopolamine_butylbromide は同一薬の旧エントリ — 心拍数記録の安全
+    # パールを持つキュレート側を正規に、旧側からは欠落種（ウサギ等）のみ取り込み）
+    "butylscopolamine": ["scopolamine_butylbromide"],
+    # ピロキシカム TCC プロトコル（同一用量 0.3 mg/kg q24h の2枚目カード）
+    "piroxicam_bladder": ["piroxicam_transitional_cell"],
     "aluminum_hydroxide": ["aluminum_hydroxide_oral"],  # リン吸着剤=本剤の用途そのもの
     "amlodipine": ["amlodipine_feline"],  # 猫高血圧=本剤の主用途
     "atenolol": ["atenolol_oral"],  # 経口β遮断薬=本剤そのもの
@@ -11579,6 +11658,9 @@ _KEYWORD_NEGATIVE_CONTEXTS: dict[str, tuple[str, ...]] = {
 # alternate spellings belong here — typos in content are fixed in the content.
 _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
     "dexamethasone": ("デキサメサゾン",),  # canonical: デキサメタゾン
+    # 2026-10 第43回: 治療文の「アポモルヒネ」表記（正準はアポモルフィン）が
+    # 「モルヒネ」に誤チップしていた
+    "apomorphine": ("アポモルヒネ",),
     # 2026-09 sweep #30: エキゾチック5種の赤血球増加症プロトコルが
     # 「ヒドロキシ尿素 30 mg/kg PO q24h」の漢字複合表記で参照（正準名 ヒドロキシウレア）
     "hydroxyurea": ("ヒドロキシ尿素",),
@@ -11603,6 +11685,9 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
         "αインターフェロン",
         "アルファインターフェロン",
     ),
+    # 2026-10: 単剤 Credelio の英語商品名を lotilaner に固定（4成分配合の
+    # Credelio Quattro の先頭語 tier3 が単剤参照を奪わないように）
+    "lotilaner": ("credelio",),
     "leuprolide": (
         "リュープロリド",
         # 2026-08 sweep #16: 治療文は ロイプロリド（20参照）/ リュープロライド（4参照）
@@ -11915,6 +12000,52 @@ def _build_drug_keyword_index() -> None:
 _build_drug_keyword_index()
 
 
+_WORD_SEPARATORS = set(" \t+/・（()、,＋-&")
+_INNER_SUPERSTRINGS: dict[str, list[tuple[str, int]]] | None = None
+
+
+def _inner_superstrings() -> dict[str, list[tuple[str, int]]]:
+    """keyword → [(longer keyword of a DIFFERENT drug, offset)] where the short
+    keyword sits inside a single word of the longer one (not at its start, no
+    separator before it): ofloxacin ⊂ enrofloxacin, detomidine ⊂ medetomidine,
+    epinephrine ⊂ norepinephrine, morphine ⊂ apomorphine. An occurrence
+    covered by such a superstring is a different molecule, not a mention.
+    Combination products (amoxicillin ⊂ amoxicillin-clavulanate) start with
+    the short keyword or separate it, so both still chip (2026-10 round-43).
+    """
+    global _INNER_SUPERSTRINGS
+    if _INNER_SUPERSTRINGS is None:
+        out: dict[str, list[tuple[str, int]]] = {}
+        items = list(_DRUG_KEYWORD_INDEX.items())
+        for k, v in items:
+            for k2, v2 in items:
+                if v2 == v or k2 == k or k not in k2:
+                    continue
+                start = 0
+                while True:
+                    off = k2.find(k, start)
+                    if off == -1:
+                        break
+                    pre = k2[:off]
+                    if off > 0 and not any(c in _WORD_SEPARATORS for c in pre):
+                        out.setdefault(k, []).append((k2, off))
+                    start = off + 1
+        _INNER_SUPERSTRINGS = out
+    return _INNER_SUPERSTRINGS
+
+
+def _has_uncovered_occurrence(text_lower: str, keyword: str, supers: list[tuple[str, int]]) -> bool:
+    pos = 0
+    while True:
+        pos = text_lower.find(keyword, pos)
+        if pos == -1:
+            return False
+        covered = any(pos - off >= 0 and text_lower.startswith(sup, pos - off) for sup, off in supers)
+        if not covered:
+            return True
+        pos += 1
+
+
 def find_drugs_in_text(text: str, max_results: int = 25) -> List[Dict]:
     """Extract drugs mentioned in a free-text treatment description.
 
@@ -11950,6 +12081,9 @@ def find_drugs_in_text(text: str, max_results: int = 25) -> List[Dict]:
                     pos += 1
                 if not hit:
                     continue
+            supers = _inner_superstrings().get(keyword)
+            if supers and not _has_uncovered_occurrence(text_lower, keyword, supers):
+                continue
             negatives = _KEYWORD_NEGATIVE_CONTEXTS.get(keyword)
             if negatives:
                 pos, hit = 0, False
@@ -12206,9 +12340,17 @@ def _build_drug_to_diseases_index() -> dict[str, list[dict]]:
     corpus = _SEP.join(_texts)
     corpus_raw = _SEP.join(_texts_raw)
 
+    _supers_map = _inner_superstrings()
+
     def _sweep(haystack: str, offs: list[int], keyword: str, drug_id: str, hits: set) -> None:
+        supers = _supers_map.get(keyword)
         start = haystack.find(keyword)
         while start != -1:
+            # Word-internal containment (ofloxacin inside enrofloxacin): skip
+            # occurrences that are really a different molecule's name.
+            if supers and any(start - off >= 0 and haystack.startswith(sup, start - off) for sup, off in supers):
+                start = haystack.find(keyword, start + 1)
+                continue
             ti = bisect.bisect_right(offs, start) - 1
             hits.add((drug_id, ti))
             # Jump past the current text so each text counts at most once.

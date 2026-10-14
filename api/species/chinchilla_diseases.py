@@ -317,7 +317,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "high",
         "recommended_tests": ["physical_exam", "genital_exam"],
         "treatment": "Manual removal under light sedation. Lubricate with KY jelly or mineral oil. Gently roll prepuce to expose and remove constrictive fur ring. Check regularly in intact males. If necrotic: surgical intervention.",
-        "treatment_ja": "【チンチラにおけるファーリング（陰茎毛輪）】\nファーリング（陰茎毛輪）は皮膚生検（パンチまたはincisional）、細胞診（インプレッションスメア、テープストリッピング）、培養で原因を特定。\n感染性: 培養感受性ベースの全身抗菌薬・抗真菌薬（前述の方針）。\nアレルギー性: 食物アレルギー除外食試験（8週hydrolyzed蛋白食）、環境アレルゲン特異IgE。シクロスポリン 5-7 mg/kg PO q24h、オクラシチニブ（犬専用）。\n外用ケア: 抗菌・抗真菌シャンプー q3-7日、湿潤環境改善。\n自傷防止のエリザベスカラー、慢性掻痒には認知行動的アプローチも併用。\n支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。 フィプロニル禁忌（致死性）。経口β-ラクタムは禁忌。\n【鑑別と経過観察】類似症候を呈する疾患の除外と、治療4-8週後の再評価が予後改善の鍵。重症度・併発症によってはチンチラの専門医紹介を考慮する。",
+        "treatment_ja": "【チンチラの陰茎毛輪（ファーリング）】軽い鎮静下で包皮を反転し、潤滑剤（水溶性ゼリー/ミネラルオイル）を用いて陰茎に絡んだ被毛の輪を慎重に巻き戻して除去する。嵌頓包茎・陰茎の腫脹が強ければ冷却と潤滑で整復し、壊死があれば外科処置を検討。鎮痛（メロキシカム 0.5-1 mg/kg PO q24h）。繁殖期の未去勢雄は月1-2回の定期チェックを飼い主に指導する（Quesenberry & Carpenter 4th）。",
         "prognosis": "Prognosis depends on disease severity, timeliness of intervention, and response to treatment. Early diagnosis and appropriate therapy generally improve outcomes.",
         "prognosis_ja": "疾患の重症度、治療開始の早さ、治療反応により異なる。早期の適切な治療介入で一般に予後改善。",
         "onset_pattern": {"acute", "subacute"},

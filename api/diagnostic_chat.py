@@ -176,6 +176,29 @@ from api.chat.symptom_aliases import SYMPTOM_ALIASES  # noqa: F401
 
 EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     # -- General --
+    # 2026-10 第69弾（馬スイープの語彙ギャップ）
+    "体重が減っ": "gen_weight_loss",
+    "首の上が太": "body_neck_crest",
+    "首の付け根が太": "body_neck_crest",
+    "たてがみの付け根が太": "body_neck_crest",
+    "クレスティネック": "body_neck_crest",
+    "太って": "body_fat_deposits",
+    "体重が増え": "body_fat_deposits",
+    "肥満": "body_fat_deposits",
+    "体重が落ち": "gen_weight_loss",
+    "しょぼしょぼ": "eye_squinting",
+    "涙を流": "eye_tearing",
+    "赤茶色": "body_dark_urine",
+    "茶色っぽいおしっこ": "body_dark_urine",
+    "蹄の裏から悪臭": ("hoof_thrush", "hoof_foul_odor"),
+    "蹄から悪臭": ("hoof_thrush", "hoof_foul_odor"),
+    "蹄が臭": ("hoof_thrush", "hoof_foul_odor"),
+    "黒い汁": "hoof_thrush",
+    "背中を触ると嫌が": "body_back_pain",
+    "腱が腫れて熱": ("limb_tendon_swelling", "limb_tendon_heat"),
+    "腱が熱": "limb_tendon_heat",
+    "下顎が腫れて膿": ("gen_swollen_lymph", "body_swelling"),
+    "顎の下が腫れて膿": ("gen_swollen_lymph", "body_swelling"),
     "fever": "gen_fever",
     "発熱": "gen_fever",
     "熱がある": "gen_fever",
@@ -315,6 +338,19 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "後ろ脚を痛がる": "limb_lameness_hind",
     "前足を痛がる": "limb_lameness_fore",
     "前脚を痛がる": "limb_lameness_fore",
+    # 2026-10 第63弾: て形・丁寧形（「前足を痛がっています」）は終止形キーに
+    # 不一致で抽出ゼロ — hot-hoof ペア（蹄熱感+前肢跛行）が発火しなかった
+    "前足を痛が": "limb_lameness_fore",
+    "前脚を痛が": "limb_lameness_fore",
+    "後ろ足を痛が": "limb_lameness_hind",
+    "後ろ足を引きずっ": "limb_lameness_hind",
+    "後ろ脚を引きずっ": "limb_lameness_hind",
+    "後ろ脚を痛が": "limb_lameness_hind",
+    # 労作性横紋筋融解症（タイイングアップ）の飼い主表現「筋肉が硬くなって」
+    # （「硬い」終止形のみ収載でく形が不一致）
+    "筋肉が硬": "body_stiffness",
+    "筋肉がカチカチ": "body_stiffness",
+    "筋肉がガチガチ": "body_stiffness",
     "lameness": "limb_lameness_fore",
     "跛行": "limb_lameness_fore",
     "びっこ": "limb_lameness_fore",
@@ -354,6 +390,14 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "蹄が熱い": "hoof_heat",
     # 2026-09 round-29: 連用形「蹄が熱くて」と指動脈系の飼い主表現が欠落
     "蹄が熱く": "hoof_heat",
+    # 歩きたがらない＝跛行の飼い主表現（蹄葉炎の「卵の殻の上を歩く」歩様 — 2026-10 第42回）
+    "歩きたがら": "limb_lameness_fore",
+    # 下顎リンパ節腫脹（腺疫の定義的所見 — 飼い主は「あごの下が腫れた」と表現）
+    "下顎が腫れ": "gen_swollen_lymph",
+    "あごの下が腫れ": "gen_swollen_lymph",
+    "顎の下が腫れ": "gen_swollen_lymph",
+    "のどが腫れ": "gen_swollen_lymph",
+    "歩くのを嫌が": "limb_lameness_fore",
     "蹄が熱を持": "hoof_heat",
     "指動脈の拍動": "limb_digital_pulse",
     "指動脈が強く": "limb_digital_pulse",
@@ -501,6 +545,12 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "tearing": "eye_tearing",
     "涙目": "eye_tearing",
     "流涙": "eye_tearing",
+    "涙が出": "eye_tearing",
+    "涙がたくさん": "eye_tearing",
+    "目が白く濁": "eye_cloudiness",
+    "目が濁": "eye_cloudiness",
+    "目が白っぽ": "eye_cloudiness",
+    "角膜が白": "eye_cloudiness",
     "涙が多い": "eye_tearing",
     "cloudy eye": "eye_cloudiness",
     "目が白い": "eye_cloudiness",
@@ -602,6 +652,32 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "排尿痛": "uri_stranguria",
     "discolored urine": "uri_discolored_urine",
     "尿の色異常": "uri_discolored_urine",
+    # 肢の熱感（飼い主は蹄と肢を区別しない — 前肢熱感は蹄熱感+前肢跛行の
+    # 両所見として hot-hoof ペアへ。2026-10 第67弾）
+    "前足が熱": ("hoof_heat", "limb_lameness_fore"),
+    "前肢が熱": ("hoof_heat", "limb_lameness_fore"),
+    "後ろ足が熱": ("hoof_heat", "limb_lameness_hind"),
+    "後肢が熱": ("hoof_heat", "limb_lameness_hind"),
+    "足が熱い": "hoof_heat",
+    "足が熱く": "hoof_heat",
+    # -- 2026-10 第43回監査（抽出ゼロの飼い主表現） --
+    "食べず": "gen_poor_appetite",
+    "食べな": "gen_poor_appetite",
+    "餌を残": "gen_poor_appetite",
+    "飼い葉を残": "gen_poor_appetite",
+    "足がむくん": "limb_filling",
+    "脚がむくん": "limb_filling",
+    "肢がむくん": "limb_filling",
+    "足がむくみ": "limb_filling",
+    "足が腫れ": "limb_filling",
+    "運動を嫌が": "resp_exercise_intolerance",
+    "すぐ疲れ": "resp_exercise_intolerance",
+    "熱があ": "gen_fever",
+    "熱っぽ": "gen_fever",
+    "皮膚にイボ": "skin_sarcoid",
+    "イボがあ": "skin_sarcoid",
+    "いぼがあ": "skin_sarcoid",
+    "皮膚にいぼ": "skin_sarcoid",
 }
 
 # Lazily built equine finding keys and symptom list
@@ -648,11 +724,28 @@ def _extract_equine_symptoms(text: str) -> list[str]:
         if alias not in text_lower:
             continue
         keys = finding_key if isinstance(finding_key, tuple) else (finding_key,)
+        # 裸の「足を〜」キー（前肢既定）は「後ろ足を〜」の部分文字列として
+        # 必ず発火するため、全出現が「後ろ/後」直後なら前肢所見を付与しない
+        # （後肢跛行の主訴に前肢跛行が混入していた — 2026-10 第41回監査）。
+        if alias[0] in "足脚" and "limb_lameness_fore" in keys and _all_occurrences_hind(text_lower, alias):
+            keys = tuple(k for k in keys if k != "limb_lameness_fore")
         for key in keys:
             if key in valid_keys:
                 matched.add(key)
 
     return list(matched)
+
+
+def _all_occurrences_hind(text: str, alias: str) -> bool:
+    """True when every occurrence of ``alias`` is directly preceded by 後ろ/後."""
+    idx = text.find(alias)
+    if idx < 0:
+        return False
+    while idx >= 0:
+        if not (text[max(0, idx - 2) : idx] == "後ろ" or text[max(0, idx - 1) : idx] == "後"):
+            return False
+        idx = text.find(alias, idx + 1)
+    return True
 
 
 def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
@@ -668,7 +761,7 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
         return []
 
     try:
-        from api.species.equine_diseases import generate_differential_diagnosis
+        from api.species.equine_diseases import _equine_prevalence_tier, generate_differential_diagnosis
     except ImportError:  # pragma: no cover - equine module optional
         return []
 
@@ -692,6 +785,14 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
                 "name_en": disease.name_en,
                 "severity": disease.severity,
                 "similarity_score": round(min(item.weighted_score, 1.0), 3),
+                # Sort on the uncapped score: capping first collapsed boosted
+                # entries into insertion-order ties (same bug class as the
+                # generic matcher's round-9 fix). Popped before returning.
+                "_rank_score": item.weighted_score,
+                # Exposed so the chat card renders the frequency chip and the
+                # 「一般的な疾患の鑑別も確認」note for horses too (other species
+                # already carried it — 第38弾 visibility layer).
+                "prevalence_tier": _equine_prevalence_tier(disease.name_en) or None,
                 "confidence_percent": confidence,
                 "matched_symptoms": sorted(item.matched_findings),
                 "unmatched_user_symptoms": sorted(key_set - disease_findings),
@@ -703,7 +804,9 @@ def _match_equine_symptoms_to_diseases(finding_keys: list[str]) -> list[dict]:
             }
         )
 
-    matches.sort(key=lambda m: m["similarity_score"], reverse=True)
+    matches.sort(key=lambda m: m["_rank_score"], reverse=True)
+    for m in matches:
+        m.pop("_rank_score", None)
     return matches
 
 
@@ -765,7 +868,15 @@ def extract_symptoms_from_text(text: str) -> list:
     # SYMPTOM_IDS (e.g. "weakness" from 起立不能, "dropsy" from 腹水, "anorexia"),
     # try a small synonym map to fall back to a valid generic ID.
     _LEGACY_FALLBACK = {
+        # 耳介下垂（チンチラ向け ear_drooping キー）は犬では顔面神経麻痺/
+        # 中耳炎の徴候 — facial_droop へ（2026-10 第39回）
         "weakness": ["lethargy", "exercise_intolerance"],
+        # 関節を痛がる（2026-10 第67弾）— レガシー犬は関節腫脹/こわばりで保持
+        "joint_pain_or_stiffness": ["joint_swelling", "stiffness"],
+        "swollen_joints": ["joint_swelling"],
+        "miliary_dermatitis": ["skin_rashes", "itching"],
+        # 脂漏・皮膚臭（2026-10 第42回）
+        "greasy_coat": ["greasy_skin"],
         "dropsy": ["bloating", "abdominal_distension"],
         "ascites": ["bloating", "abdominal_distension"],
         "effusion": ["labored_breathing", "bloating"],
@@ -777,6 +888,7 @@ def extract_symptoms_from_text(text: str) -> list:
         "cachexia": ["weight_loss", "muscle_wasting"],
         "emaciation": ["weight_loss", "muscle_wasting"],
         "polyuria": ["frequent_urination"],
+        "excessive_urination": ["frequent_urination"],
         "polydipsia": ["excessive_thirst"],
         "tachypnea": ["labored_breathing"],
         "dyspnea": ["labored_breathing"],
@@ -786,8 +898,7 @@ def extract_symptoms_from_text(text: str) -> list:
         "prostration": ["fainting", "lethargy"],
         "abdominal_distension": ["bloating"],
         "regurgitation": ["vomiting"],
-        "ataxia": ["tremors"],
-        "incoordination": ["tremors"],
+        "incoordination": ["ataxia"],
         # "足を引きずる"/"limping" aliases resolve to lameness_or_limping, which the
         # legacy dog vocabulary carries as plain "limping" — without this mapping
         # the dog chat's own quick-tap suggestion extracted nothing.
@@ -808,11 +919,14 @@ def extract_symptoms_from_text(text: str) -> list:
         # vocabularies); the legacy dog vocabulary uses cloudiness_in_eyes —
         # without this bridge the cataract complaint extracted nothing.
         "cloudy_eye": ["cloudiness_in_eyes"],
+        "corneal_cloudiness": ["cloudiness_in_eyes"],
         "cloudy_eyes": ["cloudiness_in_eyes"],
         # "皮膚が赤い" resolves to skin_lesions (species vocabularies); the
         # legacy dog vocabulary carries skin redness/rash as skin_rashes —
         # without this bridge the pruritic-dermatitis complaint lost a symptom.
         "skin_lesions": ["skin_rashes"],
+        # 鼻鏡・皮膚の痂皮（鼻が乾いてガサガサ等 — 2026-10 第40回）
+        "crusting": ["skin_lesions", "skin_rashes"],
         # "背中を丸めて" resolves to hunched_posture (pain posture); the legacy
         # dog vocabulary expresses guarded/painful posture as reluctance_to_move
         # (IVDD's classic presentation alongside tremors).
@@ -892,6 +1006,11 @@ def extract_symptoms_from_text(text: str) -> list:
         # "指の間が赤い" (interdigital erythema — pododermatitis/atopy) resolves
         # to skin_redness; the legacy dog vocabulary carries erythema as rashes.
         "skin_redness": ["skin_rashes"],
+        # 2026-10 round-43: "耳の中が赤い" (otitis erythema) and melena
+        # predicates ("便が黒い") — closest legacy signals.
+        "ear_inflammation": ["ear_discharge", "ear_scratching"],
+        "black_tarry_stool": ["blood_in_stool"],
+        "vaginal_bleeding": ["vulvar_discharge"],
         # "口を前足で掻く" resolves to pawing_at_mouth (ferret hypoglycemia /
         # oral-pain vocabularies); dogs pawing at the mouth present with
         # hypersalivation as the closest legacy signal.

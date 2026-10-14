@@ -1285,7 +1285,7 @@ DISEASES: List[Dict[str, Any]] = [
         "pathophysiology": "",
         "pathophysiology_ja": "",
         "treatment": "Topical and/or systemic antifungal therapy, environmental decontamination, and isolation of affected individuals. Treatment duration typically 4-8 weeks.",
-        "treatment_ja": "【エキゾチック動物における皮膚糸状菌症（エキゾチック哺乳類）】\n皮膚糸状菌症（エキゾチック哺乳類）は皮膚生検（パンチまたはincisional）、細胞診（インプレッションスメア、テープストリッピング）、培養で原因を特定。\n感染性: 培養感受性ベースの全身抗菌薬・抗真菌薬（前述の方針）。\nアレルギー性: 食物アレルギー除外食試験（8週hydrolyzed蛋白食）、環境アレルゲン特異IgE。シクロスポリン 5-7 mg/kg PO q24h、オクラシチニブ（犬専用）。\n外用ケア: 抗菌・抗真菌シャンプー q3-7日、湿潤環境改善。\n自傷防止のエリザベスカラー、慢性掻痒には認知行動的アプローチも併用。\n支持療法: 種に適切な輸液・栄養管理・疼痛緩和を行う。\n【鑑別と経過観察】類似症候を呈する疾患の除外と、治療4-8週後の再評価が予後改善の鍵。重症度・併発症によってはエキゾチック動物の専門医紹介を考慮する。",
+        "treatment_ja": "【エキゾチック動物における皮膚糸状菌症（エキゾチック哺乳類）】\n皮膚糸状菌症（エキゾチック哺乳類）は皮膚生検（パンチまたはincisional）、細胞診（インプレッションスメア、テープストリッピング）、培養で原因を特定。\n感染性: 培養感受性ベースの全身抗菌薬・抗真菌薬（前述の方針）。\nアレルギー性（まれ）: 寄生虫・感染・床材や環境刺激の除外を優先。犬猫用の免疫抑制薬・JAK阻害薬（シクロスポリン・オクラシチニブ）は本種で用量未確立のため用いない。\n外用ケア: 抗菌・抗真菌シャンプー q3-7日、湿潤環境改善。\n自傷防止のエリザベスカラー、慢性掻痒には認知行動的アプローチも併用。\n支持療法: 種に適切な輸液・栄養管理・疼痛緩和を行う。\n【鑑別と経過観察】類似症候を呈する疾患の除外と、治療4-8週後の再評価が予後改善の鍵。重症度・併発症によってはエキゾチック動物の専門医紹介を考慮する。",
         "prevention": "",
         "prevention_ja": "",
         "prognosis": "Good with appropriate antifungal therapy, though treatment course may be prolonged. Environmental recontamination can cause recurrence.",

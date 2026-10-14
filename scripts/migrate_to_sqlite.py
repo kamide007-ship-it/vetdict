@@ -359,6 +359,9 @@ def migrate_json_enrichments(conn) -> int:
         # charcoal to non-toxicoses ("Feline Toxic Megacolon").
         "特異的解毒剤がある場合は投与する（例：抗凝固性殺鼠剤にビタミンK1",
         "Treatment of toxicosis follows the principles of decontamination",
+        # Generic deworming / small-mammal bedding boilerplate (第63弾)
+        "同定された寄生虫に応じた適切な駆虫薬が必要である",
+        "床材（杉材は禁忌、紙系/ペレット系へ）",
     )
 
     def _guard_treatment(new_val: str | None, existing: str | None) -> str | None:
@@ -1796,6 +1799,11 @@ def ground_missing_clinical_signs_and_diagnosis(conn) -> dict[str, int]:
                 return grp
         return None
 
+    try:
+        from api.health_checker import CLINICAL_SIGNS_CATEGORY_TEMPLATE_MARKS as _CS_TEMPLATE_MARKS
+    except ImportError:
+        from health_checker import CLINICAL_SIGNS_CATEGORY_TEMPLATE_MARKS as _CS_TEMPLATE_MARKS  # type: ignore
+
     _sym_cache: dict[str, dict] = {}
 
     def _syms(species):
@@ -1815,6 +1823,26 @@ def ground_missing_clinical_signs_and_diagnosis(conn) -> dict[str, int]:
         species = (row["species"] or "").lower()
 
         cs_empty = not (row["clinical_signs"] or "").strip() and not (row["clinical_signs_ja"] or "").strip()
+        # 他疾患の徴候を列挙するカテゴリ・テンプレート（第69弾）は言語別に空欄扱い
+        tmpl_ja = any(m in (row["clinical_signs_ja"] or "") for m in _CS_TEMPLATE_MARKS)
+        tmpl_en = any(m in (row["clinical_signs"] or "") for m in _CS_TEMPLATE_MARKS)
+        if tmpl_ja or tmpl_en:
+            lookup = _syms(species)
+            sym_ids = _ids(row["symptoms"])
+            if tmpl_en:
+                new_en = compose_grounded_clinical_signs(
+                    [t for t in (lookup.get(s, {}).get("en") for s in sym_ids) if _ascii(t)]
+                )
+                if new_en:
+                    conn.execute("UPDATE diseases SET clinical_signs = ? WHERE id = ?", (new_en, row["id"]))
+                    counts["clinical_signs"] += 1
+            if tmpl_ja:
+                new_ja = compose_grounded_clinical_signs_ja(
+                    [lookup.get(s, {}).get("ja") for s in sym_ids if lookup.get(s, {}).get("ja")]
+                )
+                if new_ja:
+                    conn.execute("UPDATE diseases SET clinical_signs_ja = ? WHERE id = ?", (new_ja, row["id"]))
+                    counts["clinical_signs_ja"] += 1
         if cs_empty:
             lookup = _syms(species)
             sym_ids = _ids(row["symptoms"])

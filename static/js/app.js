@@ -818,6 +818,15 @@ let symptomSortMode="category";
 function _syncStickyOffset(){
   try{
     let off=0;
+    /* ヘッダーの実高さ（モバイルは検索行込みで約82px）を --header-h に公開し、
+       パンくずをその直下に貼り付ける。固定値 top:46px だとパンくずがヘッダーの
+       裏に潜り、和で計算した offset が実際の表示より約40px大きくなって
+       着地位置がずれていた。 */
+    const hdr=document.querySelector(".header");
+    if(hdr){
+      const h=Math.round(hdr.getBoundingClientRect().height);
+      if(h>0)document.documentElement.style.setProperty("--header-h",h+"px");
+    }
     for(const sel of [".header",".breadcrumb-bar"]){
       const el=document.querySelector(sel);
       if(!el)continue;
@@ -1748,8 +1757,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:588,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:565,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:600,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:577,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1773,8 +1782,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6457,
     species:21,
-    drugs:648,
-    symptoms:91,
+    drugs:659,
+    symptoms:98,
     protocols:188
   };
   renderSpeciesGrid();
@@ -2169,23 +2178,23 @@ function resetSpeciesChat(species){
   const hint=currentLang==="ja"?`${spLabel}の症状を入力してください。`:`Please describe ${spLabel} symptoms.`;
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
-    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ","顔の片側が腫れて目の下から膿が出る","肉球の間が赤く腫れて舐め続ける"],
-    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く","耳の付け根を掻いて黒いカスが出る","爪が伸びすぎて肉球に刺さっている"],
-    horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる"],
-    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている","おしっこが白っぽくてドロドロしている","お尻の周りに軟らかい便がつく","お尻が汚れていて臭い"],
+    dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ","顔の片側が腫れて目の下から膿が出る","肉球の間が赤く腫れて舐め続ける","発熱があり関節を痛がって歩かない"],
+    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く","耳の付け根を掻いて黒いカスが出る","爪が伸びすぎて肉球に刺さっている","首の周りにかさぶたがある","後ろ足がふらつき高い所へ飛び乗れない","目の色が変わってきた"],
+    horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる","下痢がひどく元気がない","後ろ足がむくんでいる"],
+    rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている","おしっこが白っぽくてドロドロしている","お尻の周りに軟らかい便がつく","お尻が汚れていて臭い","耳の中にかさぶたがある","陰部から血が出る"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている","目が濡れて顔をこする","耳が垂れて耳から臭い"],
     hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない","腰に黒いイボのようなもの"],
     guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ","関節が腫れる"],
-    ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない","陰部が腫れている","足を伸ばして硬直する","口を前足で掻いてよだれ","便に血が混じる","お腹を触るとしこりがある"],
+    ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない","陰部が腫れている","足を伸ばして硬直する","口を前足で掻いてよだれ","便に血が混じる","黒い下痢が出る","お腹を触るとしこりがある"],
     hedgehog:["針が抜ける","フケ","ふらつく","食べない","目が出ている","体重が減った"],
     bird:["羽を膨らませている","食べない","下痢","鼻水","羽が抜ける","くしゃみ","自分で羽を抜く","脚に白いかさぶた","急に飛べなくなって翼が下がっている","発情が続いて産卵が止まらない","お尻から卵が出かかっている"],
-    parakeet:["食べない","膨らんでいる","呼吸のたびに音がする","吐き戻しが増えた","そのうが膨らんでいる","お尻でいきんでいる"],
+    parakeet:["食べない","膨らんでいる","呼吸のたびに音がする","吐き戻しが増えた","そのうが膨らんでいる","お尻でいきんでいる","くちばしが変形している","鼻の色が茶色くなった"],
     parrot:["食べない","自分で羽を抜く","くしゃみ","下痢","元気がない","吐き戻しが増えた"],
     reptile:["食べない","口をあけたまま呼吸","鼻水が出る","脱皮がうまくできない","目が開かない","痩せてきた"],
     tortoise:["食べない","甲羅がやわらかい","鼻水が出る","目が腫れている","いきんでいる","甲羅に傷がある","首を伸ばして呼吸している"],
     snake:["食べない","口の中が赤い","脱皮がうまくできない","口をあけたまま呼吸","ダニがついている","吐き戻しが増えた","脱皮した皮が目に残っている","脱皮した皮が体に残っている"],
     lizard:["食べない","脚が曲がってきた","ふらつく","脱皮がうまくできない","口をあけたまま呼吸","尻尾が細くなってきた","あごが柔らかくてぶよぶよ","後ろ足が震えて歩き方がおかしい"],
-    amphibian:["食べない","皮膚が赤い","お腹が膨れている","皮膚に白いもの","元気がない","浮かんだまま沈めない"],
+    amphibian:["食べない","皮膚が赤い","お腹が膨れている","皮膚に白いもの","元気がない","浮かんだまま沈めない","皮膚が白く濁っている"],
     fish:["体に白い点々","ヒレがボロボロ","体をこすりつける","水面で口をパクパク","お腹が膨れている","泳ぎ方がおかしい"],
     degu:["食べない","よだれが出る","毛が抜ける","尻尾の皮がむけた","下痢","ぐったりしている"],
     sugar_glider:["食べない","自分を噛んでしまう","後ろ足がふらつく","毛が抜ける","下痢","ぐったりしている"],
@@ -2198,7 +2207,7 @@ function resetSpeciesChat(species){
   const btns=(quickSymptoms[species]||[]).map(s=>
     `<button class="quick-sym-btn" style="display:inline-block;padding:4px 10px;margin:2px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;font-size:.76rem;cursor:pointer;color:var(--navy);transition:all .15s" data-symptom="${escapeHtml(s)}">${s}</button>`
   ).join("");
-  const quickHtml=btns?`<div style="margin-top:6px;font-size:.72rem;color:var(--gray-400)">${currentLang==="ja"?"💬 タップで入力:":"💬 Quick input:"}</div><div style="margin-top:4px">${btns}</div>`:"";
+  const quickHtml=btns?`<div style="margin-top:6px;font-size:.72rem;color:var(--gray-400)">${currentLang==="ja"?"💬 タップで入力:":"💬 Quick input:"}</div><div class="quick-sym-row" style="margin-top:4px">${btns}</div>`:"";
   ["chatMessages","landingChatMessages"].forEach(id=>{
     const el=document.getElementById(id);
     if(el){
@@ -4378,7 +4387,7 @@ const DISEASE_CALC_MAP=[
    {ja:"🧮 IRIS CKDステージングを開く",en:"🧮 Open IRIS CKD staging"}],
   // 化学療法が mg/m² 換算の腫瘍群（CHOP・ビンブラスチン・ドキソルビシン・カルボプラチン等）
   // → BSA計算機。用量計算がそのまま次のアクションになる（2026-09 第53弾）
-  [/リンパ腫|lymphoma|肥満細胞腫|mast cell tumou?r|骨肉腫|osteosarcoma|血管肉腫|hemangiosarcoma/i,"bsa",["dog","cat"],
+  [/リンパ腫|lymphoma|肥満細胞腫|mast cell tumou?r|骨肉腫|osteosarcoma|血管肉腫|hemangiosarcoma|メラノーマ|melanoma/i,"bsa",["dog","cat"],
    {ja:"🧮 BSA（体表面積）計算機を開く — mg/m²換算",en:"🧮 Open BSA calculator for mg/m² chemo dosing"}],
 ];
 function _calcTabForDisease(d,sp){
@@ -5416,6 +5425,23 @@ function renderSpeciesGuidance(containerId,guidance){
   msgs.scrollTop=msgs.scrollHeight;
 }
 
+/* 2026-10 第42回: サーバーがメッセージ内の動物種名（「猫 …」等）で解析種を
+   切り替えた場合、その旨を必ず表示する。従来は「皮膚がベタベタ」が魚（ベタ）に
+   誤検出されても無言で切り替わり、選択した種と違う鑑別が出ていた。 */
+function _noteChatSpeciesSwitch(sentSpecies,data,container){
+  if(!data||!data.species||!sentSpecies||data.species===sentSpecies)return;
+  const sp=SPECIES.find(s=>s.id===data.species);
+  const label=sp?(currentLang==="ja"?sp.name:sp.nameEn):data.species;
+  const msg=currentLang==="ja"
+    ?`メッセージ内の動物種名から「${label}」として解析しました。別の動物種の場合は動物種を選び直してください。`
+    :`Analysed as ${label} based on the species named in your message. Re-select the species if this is wrong.`;
+  if(container&&container.id!=="chatMessages"){
+    const d=document.createElement("div");d.className="chat-msg bot-brief species-switch-note";d.setAttribute("role","status");d.textContent=msg;container.appendChild(d);
+  }else{
+    addChatMsg(msg,"bot-brief");
+  }
+}
+
 const _CHAT_MAX_RETRIES=3;
 let _landingChatRetries=0;
 let _chatRetries=0;
@@ -5436,6 +5462,7 @@ function sendLandingChat(isRetry){
   .then(data=>{
     loading.remove();input.disabled=false;if(sendBtn)sendBtn.disabled=false;input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
+    _noteChatSpeciesSwitch(species,data,msgs);
     if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
@@ -5523,8 +5550,12 @@ function sendChatMessage(isRetry){
   fetchWithTimeout("/api/diagnostic-chat/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,species:species,previous_symptoms:chatAccumulatedSymptoms,lang:currentLang})},20000)
   .then(r=>{if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json();})
   .then(data=>{
-    clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn){sendBtn.disabled=false;sendBtn.removeAttribute("aria-busy");}input.focus();
+    clearTimeout(slowTimer);loading.remove();input.disabled=false;if(sendBtn){sendBtn.disabled=false;sendBtn.removeAttribute("aria-busy");}
+    /* タッチ端末では回答後に入力欄へ再フォーカスしない — キーボードが回答を覆い、
+       ページが入力欄位置へ引き戻されて鑑別候補が画面外に残っていた（2026-10 第65弾） */
+    if(!_isTouchUI())input.focus();
     if(!data){addChatMsg(t("noResponse"),"bot");return;}
+    _noteChatSpeciesSwitch(species,data);
     if(data.species)chatSpecies=data.species;
     if(data.accumulated_symptoms) chatAccumulatedSymptoms=data.accumulated_symptoms;
     renderChatResult(msgs,data);
@@ -5552,6 +5583,22 @@ function sendChatMessage(isRetry){
     }
     msgs.appendChild(errDiv);msgs.scrollTop=msgs.scrollHeight;
   });
+}
+
+/* 長い回答（鑑別候補カード等）は最下部ではなく回答の先頭に着地させる — スマホで
+   最下部（免責文）に着地すると1位候補を読むために毎回スクロールで戻る必要があった。
+   短い回答は従来どおり最下部（会話の流れを維持）。2026-10 第65弾。 */
+function _isTouchUI(){try{return window.matchMedia("(pointer:coarse)").matches;}catch(e){return false;}}
+function _revealChatMsg(container,el){
+  if(!container||!el)return;
+  /* 直前のタブ切替の settle ウォッチャー（最長12秒）が回答描画後もページを旧アンカーへ
+     引き戻していた（実測: 回答直後に+338px移動）— 回答の着地を優先して解放する */
+  if(_anchorWatchRelease)_anchorWatchRelease();
+  const tall=el.offsetHeight>container.clientHeight*0.6;
+  if(!tall){container.scrollTop=container.scrollHeight;return;}
+  const top=el.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-8;
+  container.scrollTop=Math.max(0,top);
+  el.dataset.revealedTop="1";
 }
 
 function renderChatResult(container,data){
@@ -5809,7 +5856,7 @@ function renderChatResult(container,data){
   wrapper.appendChild(disc);
 
   container.appendChild(wrapper);
-  container.scrollTop=container.scrollHeight;
+  _revealChatMsg(container,wrapper);
 }
 
 function addChatMsg(text,type){
@@ -5878,7 +5925,7 @@ function guidedAddMsg(html,type){
   div.className=`chat-msg ${type||"bot"}`;
   div.innerHTML=html;
   msgs.appendChild(div);
-  msgs.scrollTop=msgs.scrollHeight;
+  if(type==="user")msgs.scrollTop=msgs.scrollHeight;else _revealChatMsg(msgs,div);
 }
 
 function guidedSetActions(html){
@@ -5886,7 +5933,8 @@ function guidedSetActions(html){
   if(!actions)return;
   actions.innerHTML=html;
   const msgs=document.getElementById("guidedMessages");
-  if(msgs)msgs.scrollTop=msgs.scrollHeight;
+  const last=msgs&&msgs.lastElementChild;
+  if(msgs&&!(last&&last.dataset.revealedTop))msgs.scrollTop=msgs.scrollHeight;
 }
 
 var _guidedFetching=false;

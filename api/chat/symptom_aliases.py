@@ -4,6 +4,8 @@ Maps JP/EN colloquial expressions to canonical symptom IDs.
 530+ aliases covering veterinary clinical terminology.
 """
 
+import re
+
 SYMPTOM_ALIASES = {
     # English variants
     "cough": "coughing",
@@ -378,7 +380,7 @@ SYMPTOM_ALIASES = {
     "うんちに血": "blood_in_stool",
     "血が混じったうんち": "blood_in_stool",
     "赤いうんち": "blood_in_stool",
-    "黒いうんち": "blood_in_stool",
+    "黒いうんち": "black_tarry_stool",
     "タール便": "blood_in_stool",
     # 咳
     "咳が出る": "coughing",
@@ -565,7 +567,9 @@ SYMPTOM_ALIASES = {
     "熱っぽい": "fever",
     "体が熱い": "fever",
     "触ると熱い": "fever",
-    "鼻が乾いてる": "fever",
+    # 「鼻が乾く＝発熱」は俗説（鼻の湿度は体温の指標にならない — 体温計測が必要）。
+    # 鼻鏡の乾燥・ガサガサは鼻平面の角化/痂皮所見として扱う（2026-10 第40回監査で是正）
+    "鼻が乾いてる": "crusting",
     "耳が熱い": "fever",
     # 行動
     "噛みつく": "aggression",
@@ -1003,7 +1007,8 @@ SYMPTOM_ALIASES = {
     # 爬虫類追加
     # ---------------------------------------------------------------
     "目が腫れて開かない": "eye_swelling",
-    "目が開かない": "eye_swelling",
+    # 開瞼不能は眼瞼痙攣・眼脂固着（眼痛）の表現 — 眼球腫大ではない（2026-10 第67弾）
+    "目が開かない": "squinting",
     "甲羅に白い斑点": "skin_lesions",
     "甲羅が変色": "skin_lesions",
     "柔らかい部分がある": "soft_bones",
@@ -1044,7 +1049,7 @@ SYMPTOM_ALIASES = {
     # 猫 — 脱水
     "脱水してる": "lethargy",
     # 猫 — 毛
-    "毛艶が悪い": "weight_loss",
+    "毛艶が悪い": "poor_coat",
     # ウサギ
     "膿が出てる": "abscess",
     "下顎が腫れてる": "jaw_swelling",
@@ -1184,7 +1189,7 @@ SYMPTOM_ALIASES = {
     # ウサギ — 肛門/子宮
     "肛門が腫れてる": "perineal_swelling",
     "肛門周囲が腫れ": "perineal_swelling",
-    "陰部から出血": "blood_in_urine",
+    "陰部から出血": "vaginal_bleeding",
     # 鳥 — 貧血
     "貧血": "lethargy",
     "anemia": "lethargy",
@@ -1500,9 +1505,9 @@ SYMPTOM_ALIASES = {
     "出血がある": "bleeding",
     "血が出ている": "bleeding",
     "不正出血": "genital_discharge",
-    "陰部からの出血": "genital_discharge",
+    "陰部からの出血": "vaginal_bleeding",
     "陰部分泌物": "genital_discharge",
-    "膣からの出血": "genital_discharge",
+    "膣からの出血": "vaginal_bleeding",
     "膣からの分泌": "genital_discharge",
     "abnormal bleeding": "bleeding",
     "vaginal bleeding": "genital_discharge",
@@ -2345,7 +2350,7 @@ SYMPTOM_ALIASES = {
     "尾追い": "tail_chasing",
     # --- 2026-08 第14回スイープ: 連用形・語順ゆれの取りこぼし修正 ---
     # 多飲多尿・多食（「水をたくさん飲む」辞書形のみで「飲んで」連用形が欠落）
-    "おしっこの量が多い": "frequent_urination",
+    "おしっこの量が多い": "excessive_urination",
     "食欲はあるのに痩せ": "increased_appetite",
     # 変形性関節症の飼い主報告（階段回避は犬OAの古典的主訴 — Ettinger 8th）
     "階段を登らな": "stiffness",
@@ -2501,6 +2506,43 @@ SYMPTOM_ALIASES = {
     "足の裏を気にし": "excessive_licking",
     "足を気にして舐め": "excessive_licking",
     # 出血斑（両生類レッドレッグ・点状出血の飼い主表現）
+    # --- 2026-10 第69弾 ---
+    "何度もおしっこ": "frequent_urination",
+    "ふらふらと歩": "ataxia",
+    "よろよろ歩": "ataxia",
+    "よろよろと歩": "ataxia",
+    "後ろ足の筋肉が落ち": "muscle_wasting",
+    "筋肉が落ち": "muscle_wasting",
+    "おしっこが出にくそう": "straining_to_urinate",
+    "おしっこが出にく": "straining_to_urinate",
+    "尿が出にく": "straining_to_urinate",
+    "足を挙げて": "lameness_or_limping",
+    "足を挙げたまま": "lameness_or_limping",
+    "目の表面が白": "corneal_cloudiness",
+    "黒目が白": "cloudy_eye",
+    "乳腺のあたりにしこり": "mammary_swelling",
+    "乳首のあたりにしこり": "mammary_swelling",
+    "乳首の近くにしこり": "mammary_swelling",
+    "赤い点々": "petechiae",
+    "赤い点が": "petechiae",
+    "紫色のあざ": "petechiae",
+    "内出血のあざ": "petechiae",
+    "あざができ": "petechiae",
+    "歯茎に赤い点": "petechiae",
+    "首を触ると悲鳴": "neck_pain",
+    "首を触るとキャン": "neck_pain",
+    "頭を下げたまま": "neck_pain",
+    "未消化のまま": "regurgitation",
+    "食べたものを戻": "regurgitation",
+    "食べた物を戻": "regurgitation",
+    "頬が片方だけ腫れ": "cheek_swelling",
+    "頬が腫れ": "cheek_swelling",
+    "ほっぺが腫れ": "cheek_swelling",
+    "まだらに抜け": "hair_loss",
+    "止まり木にとまれな": "inability_to_perch",
+    "止まり木に乗れな": "inability_to_perch",
+    "前足の内側が汚れ": "nasal_discharge",
+    "前足が鼻水で汚れ": "nasal_discharge",
     "出血斑": "petechiae",
     "皮膚に赤い斑点": "petechiae",
     # --- 2026-09 Round 26 ---
@@ -2530,6 +2572,23 @@ SYMPTOM_ALIASES = {
     "口をずっと開け": "open_mouth_breathing",
     # 「餌を食べずに」（ない形のみ収載で ず形が欠落）
     "餌を食べず": "loss_of_appetite",
+    # 2026-10 第39回監査: クッシング三徴の飼い主表現（太ってきて・お腹が垂れて・
+    # 毛が薄くなり）が語幹・連用形で既存キーに不一致だった
+    "太ってき": "weight_gain",
+    "体重が増え": "weight_gain",
+    "お腹が垂れ": "bloating",
+    "毛が薄くな": "hair_loss",
+    # 歯科疼痛の飼い主観察（「口を開けるのを嫌がる」「食べるのが遅い」）
+    "口を開けるのを嫌が": "difficulty_eating",
+    "口を開けたがらな": "difficulty_eating",
+    "食べるのが遅": "difficulty_eating",
+    # 顔面神経麻痺の飼い主表現（顔の歪み・片側の垂れ・瞬目不能 — 2026-10 新設
+    # facial_droop ID へ。犬レガシーは顔面神経麻痺/中耳炎・内耳炎に接続）
+    "顔が歪ん": "facial_droop",
+    "顔がゆがん": "facial_droop",
+    "顔が曲がっ": "facial_droop",
+    "顔の片側が垂れ": "facial_droop",
+    "まばたきができな": "facial_droop",
     # チンチラ/デグー等の「便が小さい」（ウサギ用「糞が小さく」のみ収載だった）
     "便が小さ": "small_fecal_pellets",
     "便の数が減": "small_fecal_pellets",
@@ -2740,7 +2799,7 @@ SYMPTOM_ALIASES = {
     "水がすぐなくな": "excessive_thirst",
     "水がすぐになくな": "excessive_thirst",
     # 多尿の量表現（既存は「おしっこの量が多い」のみで「増えた」形が欠落）
-    "おしっこの量が増え": "frequent_urination",
+    "おしっこの量が増え": "excessive_urination",
     "尿の量が増え": "frequent_urination",
     # 歯科疼痛の片側咀嚼（chewing on one side — 犬猫歯科疾患の教科書的な
     # 飼い主観察。Niemiec, BSAVA Dental Manual）
@@ -2752,6 +2811,11 @@ SYMPTOM_ALIASES = {
     "後ろ足を痛が": "lameness_or_limping",
     "前足を痛が": "lameness_or_limping",
     "足を痛が": "lameness_or_limping",
+    # 触診介在形（「後ろ足を触ると痛がって」— 触ると が割り込むと
+    # 「後ろ足を痛が」キーに不一致で抽出ゼロだった。2026-10 第39回監査）
+    "後ろ足を触ると痛が": "lameness_or_limping",
+    "前足を触ると痛が": "lameness_or_limping",
+    "足を触ると痛が": "lameness_or_limping",
     # 蹠行姿勢のカタカナ表記（ひらがな「ぺたぺた歩」のみ収載だった）
     "ペタペタ歩": "plantigrade_stance",
     # うんち表記の排便停止（「便が出ない」ファミリーと同義 — ウサギGIうっ滞の
@@ -2981,6 +3045,427 @@ SYMPTOM_ALIASES = {
     "浮いてい": "buoyancy_problems",
     "水面に浮い": "buoyancy_problems",
     "沈めな": "buoyancy_problems",
+    # --- 2026-10 第63弾（精度監査 第39弾） ---
+    # 体重減少の進行形「体重が減ってきた」（「体重が減った」のみ収載で
+    # 「減ってきました/減ってきて」が抽出ゼロ — PU/PD・慢性下痢の主訴の要）
+    "体重が減っ": "weight_loss",
+    "体重が落ち": "weight_loss",
+    # 尿の「量」表現は多尿（polyuria）。従来は頻尿（pollakiuria → LUTD優先）に
+    # 解決されており、高齢猫の「おしっこの量が多くて痩せた」（CKD/甲状腺/
+    # 糖尿の古典像）が膀胱炎・尿石症へ誤誘導されていた
+    "おしっこの量が多": "excessive_urination",
+    "尿の量が多": "excessive_urination",
+    "尿量が多": "excessive_urination",
+    "尿量が増え": "excessive_urination",
+    # 食欲廃絶のず形（「餌を食べず」のみ収載）
+    "ご飯を食べず": "loss_of_appetite",
+    "ごはんを食べず": "loss_of_appetite",
+    "何も食べず": "loss_of_appetite",
+    "牧草を食べず": "loss_of_appetite",
+    # 腹部圧痛のて形（「お腹を触ると痛がる」終止形のみ収載）
+    "お腹を触ると痛が": "abdominal_pain",
+    "お腹を触ると嫌が": "abdominal_pain",
+    "おなかを触ると痛が": "abdominal_pain",
+    # 嘴の変形（PBFD・嘴不正咬合の主訴。「くちばしが伸び」のみ収載）
+    "くちばしが変形": "beak_deformity",
+    "嘴が変形": "beak_deformity",
+    "くちばしがボロボロ": "beak_deformity",
+    "くちばしが割れ": "beak_deformity",
+    # 猫の粟粒性皮膚炎（頭頸部の小痂皮 — 猫アレルギー性皮膚炎の
+    # 反応パターン: ノミアレルギー/アトピー/食物 — Hnilica, Small Animal
+    # Dermatology 4th ed）。従来は汎用 skin_lesions に落ちて皮膚糸状菌・
+    # 疥癬が上位を独占していた
+    "首の周りにかさぶた": "miliary_dermatitis",
+    "首にかさぶた": "miliary_dermatitis",
+    "首のまわりにかさぶた": "miliary_dermatitis",
+    "小さなかさぶたがたくさん": "miliary_dermatitis",
+    "ぶつぶつしたかさぶた": "miliary_dermatitis",
+    "粟粒性皮膚炎": "miliary_dermatitis",
+    # 「足を痛がっています」が「痛がっている」(6字, pain) に最長一致で負け、
+    # 跛行が抽出されず pain/lethargy のみになっていた（鳥・猫で再現）。
+    # タイは辞書挿入順で旧キーが勝つため7字以上で登録する
+    "足を痛がってい": "lameness_or_limping",
+    "足を痛がって": "lameness_or_limping",
+    "脚を痛がって": "lameness_or_limping",
+    "脚を痛がってい": "lameness_or_limping",
+    "前足を痛がって": "lameness_or_limping",
+    "後ろ足を痛がって": "lameness_or_limping",
+    # 尿失禁の口語（「おもらし」のみ収載で動詞形が抽出ゼロ）
+    "おしっこをもらす": "incontinence",
+    "おしっこを漏らす": "incontinence",
+    "おしっこをもらし": "incontinence",
+    "おしっこを漏らし": "incontinence",
+    "尿が漏れ": "incontinence",
+    "尿がもれ": "incontinence",
+    "寝ている間におしっこ": "incontinence",
+    # 運動不耐の て形・連用形（「座り込む」終止形のみ収載）
+    "座り込ん": "exercise_intolerance",
+    "すぐ座り込": "exercise_intolerance",
+    # 活動性低下の口語（両生類・爬虫類・魚の主訴で頻出）
+    "動きが鈍": "lethargy",
+    "動きが悪": "lethargy",
+    "あまり動かな": "lethargy",
+    # --- 2026-10 第64弾（精度監査 第40弾） ---
+    # 軟便の形容詞形（「軟便」「下痢」のみ収載で「便がゆるい」が抽出ゼロ）
+    "便がゆる": "diarrhea",
+    "便が緩": "diarrhea",
+    "うんちがゆる": "diarrhea",
+    "うんちが緩": "diarrhea",
+    "うんちがやわらか": "diarrhea",
+    "便がやわらか": "diarrhea",
+    "便が柔らか": "diarrhea",
+    # 吐物中の血（吐血）— 裸の「血が混じ」→血尿 に誤誘導されないよう最長一致で上書き
+    "毛玉に血が混じ": "vomiting",
+    "毛玉に血": "vomiting",
+    "吐いたものに血": "vomiting",
+    "吐いた物に血": "vomiting",
+    "吐物に血": "vomiting",
+    "吐いたものが赤": "vomiting",
+    "血を吐": "vomiting",
+    "吐血": "vomiting",
+    # 舌のチアノーゼの飼い主表現
+    "舌の色が悪": "cyanosis",
+    "舌の色がおかし": "cyanosis",
+    "舌の色が変": "cyanosis",
+    # 呼吸音（モルモット・ウサギの上気道/肺炎の主訴）
+    "呼吸の音が": "wheezing",
+    "呼吸音が": "wheezing",
+    "ゴロゴロと呼吸": "wheezing",
+    "呼吸がゴロゴロ": "wheezing",
+    "息がゴロゴロ": "wheezing",
+    "ブーブー音": "wheezing",
+    # ハリネズミ針脱落の語幹形（「針が抜ける」終止形のみ収載）
+    "針が抜け": "quill_loss",
+    "針がたくさん抜け": "quill_loss",
+    # セキセイのろう膜変色（雄の褐色化＝精巣腫瘍のエストロゲン性変化）
+    "鼻の色が茶色": "cere_color_change",
+    "鼻が茶色": "cere_color_change",
+    "鼻の色が変わ": "cere_color_change",
+    "ろう膜が茶色": "cere_color_change",
+    "ろう膜の色": "cere_color_change",
+    "ろう膜が変色": "cere_color_change",
+    # 鼻鏡の乾燥・角化（鼻平面角化症・DLE・天疱瘡・亜鉛反応性の主訴）
+    "鼻が乾": "crusting",
+    "鼻先がガサガサ": "crusting",
+    "鼻先がカサカサ": "crusting",
+    "鼻がガサガサ": "crusting",
+    "鼻がカサカサ": "crusting",
+    # ウサギ耳疥癬（Psoroptes cuniculi）の耳道内痂皮
+    "耳の中にかさぶた": "ear_crusting",
+    "耳の中がかさぶた": "ear_crusting",
+    "耳の中がガサガサ": "ear_crusting",
+    "耳の中が白いかさぶた": "ear_crusting",
+    # 両生類ツボカビ症の皮膚白濁（過剰脱皮片の付着）
+    "皮膚が白く濁": "excessive_shedding",
+    "皮膚が白っぽく濁": "excessive_shedding",
+    "皮が白く濁": "excessive_shedding",
+    "脱皮が多": "excessive_shedding",
+    "脱皮の回数が多": "excessive_shedding",
+    # 魚の鰭損傷（尾ぐされ病の代表的主訴）
+    "ひれがボロボロ": "frayed_fins",
+    "鰭がボロボロ": "frayed_fins",
+    "ひれが溶け": "frayed_fins",
+    "ヒレが溶け": "frayed_fins",
+    "ひれが裂け": "frayed_fins",
+    "ヒレが裂け": "frayed_fins",
+    "尾びれがボロボロ": "frayed_fins",
+    # 2026-10 第41回監査: 臨床相談チャットの抽出ゼロ/劣化主訴の補完
+    # 犬GDV — 「何度も吐こうとして」（吐けない明記なしの空嘔吐試行）
+    "何度も吐こうと": "unproductive_retching",
+    "吐こうとしてい": "unproductive_retching",
+    # 肛門嚢 — 「床に」位置修飾形（「地面に」形のみ収載だった）
+    "お尻を床にこすり": "scooting",
+    "おしりを床にこすり": "scooting",
+    "お尻をすりつけ": "scooting",
+    # 犬の後肢固有感覚障害（ナックリング・交差歩様 — IVDD/DMの古典的観察）
+    "後ろ足を交差": "hind_leg_weakness",
+    "後ろ足が交差": "hind_leg_weakness",
+    "足の甲を地面に": "hind_leg_weakness",
+    "ナックリング": "hind_leg_weakness",
+    # 急性有痛性眼（充血・眼瞼痙攣）の副詞介在形
+    "充血して": "redness_in_eyes",
+    "目を閉じて": "squinting",
+    "目をつぶって": "squinting",
+    "目を開けられ": "squinting",
+    "痛そうに目": "pain",
+    # 猫の過剰グルーミング（心因性脱毛/アレルギー）— 「舐めすぎ」形
+    "舐めすぎて": "excessive_grooming",
+    "なめすぎて": "excessive_grooming",
+    "舐めすぎる": "excessive_grooming",
+    "なめすぎる": "excessive_grooming",
+    "毛がなくなっ": "hair_loss",
+    "毛がなくなり": "hair_loss",
+    "毛が無くなっ": "hair_loss",
+    # 多飲の量表現
+    "水を大量に": "excessive_thirst",
+    "大量に水を": "excessive_thirst",
+    # ウサギ等の足底脱毛（ソアホック初期）
+    "足の裏がはげ": "foot_sores",
+    "足の裏の毛がな": "foot_sores",
+    "かかとがはげ": "foot_sores",
+    # 鳥のそのう腫脹
+    "そのうが腫れ": "crop_distension",
+    "嗉嚢が腫れ": "crop_distension",
+    "そ嚢が腫れ": "crop_distension",
+    # 犬猫の排尿痛（dysuria）— 「おしっこをするときに痛がる」形
+    "おしっこをするときに痛": "straining_to_urinate",
+    "おしっこの時に痛": "straining_to_urinate",
+    "おしっこのときに痛": "straining_to_urinate",
+    "排尿時に痛": "straining_to_urinate",
+    "排尿のときに痛": "straining_to_urinate",
+    # 膿瘍の排膿（語幹形 — 「膿が出てる」のみ収載だった）
+    "膿が出て": "abscess",
+    "膿が出る": "abscess",
+    "膿が出た": "abscess",
+    # 猫ざ瘡（下顎の面皰 — 猫で最頻の顎部皮膚病変）
+    "下顎に黒い": "chin_swelling",
+    "あごに黒い": "chin_swelling",
+    "顎に黒い": "chin_swelling",
+    "あごの下に黒い": "chin_swelling",
+    "あごにぶつぶつ": "chin_swelling",
+    "あごにブツブツ": "chin_swelling",
+    # 猫尾腺過形成（スタッドテイル）の皮脂過剰
+    "しっぽの付け根がべたべた": "greasy_coat",
+    "しっぽの付け根がベタベタ": "greasy_coat",
+    "尻尾の付け根がべたべた": "greasy_coat",
+    "尻尾の付け根がベタベタ": "greasy_coat",
+    "尾の付け根がべたべた": "greasy_coat",
+    "毛がべたべた": "greasy_coat",
+    "毛がベタベタ": "greasy_coat",
+    # ウサギ鼓脹の飼い主表現
+    "ガスがたまっ": "bloating",
+    "ガスが溜まっ": "bloating",
+    # フェレット等のメレナ（タール便）
+    "タール状": "black_tarry_stool",
+    "タールのような": "black_tarry_stool",
+    "真っ黒な便": "black_tarry_stool",
+    "便が真っ黒": "black_tarry_stool",
+    # 鳥の関節痛風（痛風結節 — 白色沈着）
+    "足に白い塊": "white_deposits_on_joints",
+    "足に白いかたまり": "white_deposits_on_joints",
+    "関節に白い": "white_deposits_on_joints",
+    "足の関節が白": "white_deposits_on_joints",
+    # セキセイ疥癬の「〜が」助詞形
+    "くちばしの周りがかさぶた": "crusty_beak",
+    "くちばしの周りがガサガサ": "crusty_beak",
+    "くちばしがガサガサ": "crusty_beak",
+    # 爬虫類の総排泄腔脱（「何か」介在形）
+    "お尻から何か赤": "rectal_prolapse",
+    "総排泄腔から何か": "rectal_prolapse",
+    # 2026-10 第42回監査
+    # 鳥のそのう膨満（膨れ形 — 膨らん形のみ収載だった）
+    "そのうが膨れ": "crop_distension",
+    # セキセイ疥癬（クヌドコプテス）の「ボコボコ/デコボコ」表現
+    "くちばしの周りがボコボコ": "crusty_beak",
+    "くちばしの周りがデコボコ": "crusty_beak",
+    "くちばしがボコボコ": "crusty_beak",
+    "くちばしがデコボコ": "crusty_beak",
+    "嘴がボコボコ": "crusty_beak",
+    # 猫・犬の排便努責（「うんちをしようと」形 — いきむ は単独では抽出不能だった）
+    "うんちをしようと": "constipation",
+    "うんちしようと": "constipation",
+    "便をしようと": "constipation",
+    "排便しようと": "constipation",
+    # 脂漏・マラセチアの皮膚臭・べたつき
+    "皮膚がベタベタ": "greasy_coat",
+    "皮膚がべたべた": "greasy_coat",
+    "体がベタベタ": "greasy_coat",
+    "皮膚が臭": "greasy_coat",
+    "体が臭": "greasy_coat",
+    # 旋回（「同じところを回る」形 — ぐるぐる回る のみ収載だった）
+    "同じところを回": "circling",
+    "同じ場所を回": "circling",
+    "同じ方向に回": "circling",
+    "同じ方向へ回": "circling",
+    # 夜間頻尿（夜中におしっこに起きる）
+    "おしっこに起き": "frequent_urination",
+    "夜中におしっこ": "frequent_urination",
+    "夜中に何度もおしっこ": "frequent_urination",
+    "夜にトイレに起き": "frequent_urination",
+    # 眼球サイズ左右差（牛眼＝緑内障・眼球突出）
+    "目の大きさが違": "eye_bulging",
+    "目の大きさが左右で違": "eye_bulging",
+    "片目が大きく": "eye_bulging",
+    "片目だけ大き": "eye_bulging",
+    # 鼻出血の混入表現
+    "鼻水に血": "epistaxis",
+    # --- 2026-10 第67弾（チャット精度第43回スイープ） ---
+    # 混濁尿・尿臭（膿尿の飼い主表現 → 細菌性膀胱炎）
+    "おしっこが濁": "cloudy_urine",
+    "おしっこの濁り": "cloudy_urine",
+    "尿が濁っ": "cloudy_urine",
+    "尿の濁り": "cloudy_urine",
+    "おしっこの臭いがきつ": "cloudy_urine",
+    "おしっこの臭いが強": "cloudy_urine",
+    "おしっこが臭": "cloudy_urine",
+    "尿の臭いがきつ": "cloudy_urine",
+    "尿の臭いが強": "cloudy_urine",
+    "尿が臭": "cloudy_urine",
+    # ひらがな「あげ」形の挙上肢位（漢字「上げ」のみ収載だった）
+    "足をあげ": "lameness_or_limping",
+    "片足をあげ": "lameness_or_limping",
+    "足を上げて歩": "lameness_or_limping",
+    # 関節痛（多発性関節炎・関節炎）
+    "関節を痛が": "joint_pain_or_stiffness",
+    "関節が痛": "joint_pain_or_stiffness",
+    "関節を触ると痛": "joint_pain_or_stiffness",
+    # 眼周囲の腫脹（眼瞼浮腫 — アレルギー/眼瞼炎）
+    "目の周りが腫れ": "eye_swelling",
+    "まぶたが腫れ": "eye_swelling",
+    "瞼が腫れ": "eye_swelling",
+    # 鼻をすする（鼻閉・鼻汁 — 上部呼吸器）
+    "鼻をすす": "sneezing",
+    "鼻がずるずる": "nasal_discharge",
+    "鼻をずるずる": "nasal_discharge",
+    # 腹式呼吸・努力呼吸（胸水/肺水腫/喘息の飼い主表現）
+    "お腹で呼吸": "labored_breathing",
+    "おなかで呼吸": "labored_breathing",
+    "腹で呼吸": "labored_breathing",
+    "腹式呼吸": "labored_breathing",
+    "肩で息": "labored_breathing",
+    # 猫の粟粒性皮膚炎（小さなかさぶたが多数 — ノミアレルギー等の反応パターン）
+    "かさぶたがたくさん": "miliary_dermatitis",
+    "小さいかさぶた": "miliary_dermatitis",
+    "細かいかさぶた": "miliary_dermatitis",
+    "ブツブツしたかさぶた": "miliary_dermatitis",
+    # 跳躍不能（猫DJD・神経障害 — 飼い主の最頻観察）
+    "飛び乗れな": "reluctance_to_jump",
+    "飛び乗らな": "reluctance_to_jump",
+    "高い所に上れな": "reluctance_to_jump",
+    "高い所へ上れな": "reluctance_to_jump",
+    "高いところに登れな": "reluctance_to_jump",
+    "高い所に登れな": "reluctance_to_jump",
+    # モルモット排尿時発声の言い回し
+    "おしっこをするときに鳴": "squealing_when_urinating",
+    "おしっこするときに鳴": "squealing_when_urinating",
+    "おしっこの時に鳴": "squealing_when_urinating",
+    "排尿時に鳴": "squealing_when_urinating",
+    # トカゲの趾端脱皮不全（脱皮殻の残留 — 目の残留は最長一致で retained_spectacle）
+    "脱皮した皮が": "dysecdysis",
+    "皮が指に残": "dysecdysis",
+    "指に皮が残": "dysecdysis",
+    "脱皮殻が残": "dysecdysis",
+    # 2026-10 第43回監査
+    # 皮膚発赤（「赤くなっている」(魚の redness_skin)との最長一致タイを避けるため8字以上）
+    "皮膚が赤くなって": "skin_redness",
+    "皮膚が赤くなってい": "skin_redness",
+    "皮膚が赤くなりま": "skin_redness",
+    "体が赤くなって": "skin_redness",
+    # 耳道発赤（外耳炎）
+    "耳の中が赤": "ear_inflammation",
+    "耳の内側が赤": "ear_inflammation",
+    "耳が赤くて臭": "ear_inflammation",
+    "耳の中が臭": "ear_discharge",
+    # 黒色便（メレナ）の述語形 — 「黒い便」名詞形のみ収載だった
+    "便が黒": "black_tarry_stool",
+    "うんちが黒": "black_tarry_stool",
+    "ウンチが黒": "black_tarry_stool",
+    "うんこが黒": "black_tarry_stool",
+    "黒っぽい便": "black_tarry_stool",
+    "黒っぽいうんち": "black_tarry_stool",
+    # 猫のトイレ内反復姿勢（LUTDの飼い主表現 — 「トイレに何度も行く」形のみだった）
+    "トイレで何度も": "frequent_urination",
+    "トイレに何度も": "frequent_urination",
+    "何度もトイレに": "frequent_urination",
+    "トイレに行ったり来たり": "frequent_urination",
+    "トイレを行ったり来たり": "frequent_urination",
+    # 挙上肢位（ひらがな「あげ」形 — 漢字「上げ」形のみ収載だった）
+    "足をあげて": "lameness_or_limping",
+    "足をあげたまま": "lameness_or_limping",
+    # GDV の終止形・パンパン形
+    "吐こうとす": "unproductive_retching",
+    "お腹がパンパンにな": "bloating",
+    "おなかがパンパン": "bloating",
+    # CDS の徘徊（「ぐるぐる回る」形のみ収載だった）
+    "ぐるぐる歩": "circling",
+    "夜中に歩き回": "circling",
+    "夜に歩き回": "circling",
+    "夜中にうろうろ": "circling",
+    # 虹彩の色調変化（猫ぶどう膜炎・虹彩メラノーシス）
+    "目の色が変わ": "iris_color_change",
+    "目の色が変化": "iris_color_change",
+    "黒目の色が変": "iris_color_change",
+    "虹彩の色が変": "iris_color_change",
+    # 足底の傷（ソアホック・趾瘤症）
+    "足の裏に傷": "foot_sores",
+    "足の裏にけが": "foot_sores",
+    # 陰部出血（ウサギ子宮腺癌の古典的主訴 — 部位明記形のみ genital_discharge）
+    "陰部から血": "vaginal_bleeding",
+    "おまたから血": "vaginal_bleeding",
+    # 「血が出ている」(bleeding, 6字) に最長一致で負けないための長形
+    "陰部から血が出": "vaginal_bleeding",
+    "陰部から血が": "vaginal_bleeding",
+    # 口腔腫脹・排膿（爬虫類マウスロット）
+    "口が腫れて膿": "stomatitis",
+    "口に膿": "oral_discharge",
+    "口の中が腫れ": "stomatitis",
+    # 浮遊（主語省略・連用形）
+    # 「沈めない」の「ない」まで含めないと否定ガードが発火する
+    "浮いて沈めな": "buoyancy_problems",
+    # 魚のフラッシング（「体を〜にこすりつける」形）
+    "体をこすりつけ": "flashing",
+    "岩にこすりつけ": "flashing",
+    "石にこすりつけ": "flashing",
+    "体をこすって": "flashing",
+    # 尾の損傷・断裂（デグー尾剥脱・自切）
+    "尻尾が切れ": "tail_injury",
+    "しっぽが切れ": "tail_injury",
+    "尾が切れ": "tail_injury",
+    "尻尾が取れ": "tail_injury",
+    "しっぽが取れ": "tail_injury",
+    "尾が取れ": "tail_injury",
+    # 羽色の変化（PBFD・栄養性・肝疾患）
+    "羽の色が変": "abnormal_feathers",
+    "羽の色がおかし": "abnormal_feathers",
+    "羽が黒っぽ": "abnormal_feathers",
+    # 2026-10 第70弾: ひらがな・語順ゆれ（第45回スイープ）
+    "お尻をなめ": "scooting",
+    "おしりをなめ": "scooting",
+    "床をすべるように": "scooting",
+    "お尻を床にすべ": "scooting",
+    "足をひきずっ": "lameness_or_limping",
+    "後ろ足をひきずっ": "hind_leg_weakness",
+    "後ろ足をひきずる": "hind_leg_weakness",
+    "指の間にできもの": "paw_redness",
+    "指の間にしこり": "paw_redness",
+    "指の間に腫れ": "paw_redness",
+    "白目の部分が赤": "redness_in_eyes",
+    "白目が赤": "redness_in_eyes",
+    "白目が充血": "redness_in_eyes",
+    "ぶつぶつが顎": "chin_swelling",
+    "ブツブツが顎": "chin_swelling",
+    "ぶつぶつがあご": "chin_swelling",
+    "黒い下痢": "black_tarry_stool",
+    "下痢が黒": "black_tarry_stool",
+    "黒っぽい下痢": "black_tarry_stool",
+    "顎がやわらか": "jaw_softening",
+    "顎が柔らか": "jaw_softening",
+    "あごがやわらか": "jaw_softening",
+    "ノミがいる": "flea_signs",
+    "ノミがい": "flea_signs",
+    "ノミを見つけ": "flea_signs",
+    "ノミの糞": "flea_signs",
+    "ノミのフン": "flea_signs",
+    "しっぽの付け根の毛が抜け": "flea_signs",
+    "尻尾の付け根の毛が抜け": "flea_signs",
+    "しっぽの付け根にかさぶた": "flea_signs",
+    "尻尾の付け根にかさぶた": "flea_signs",
+    "腰からしっぽ": "flea_signs",
+    "おしっこが漏れ": "incontinence",
+    "首を触ると痛が": "neck_pain",
+    "首を触ると鳴": "neck_pain",
+    "首を触ると嫌が": "neck_pain",
+    "水を飲む量が多": "excessive_thirst",
+    "飲む量が多": "excessive_thirst",
+    "耳の先が赤": "ear_tip_lesions",
+    "耳の先が白く": "ear_tip_lesions",
+    "耳の先がただれ": "ear_tip_lesions",
+    "耳の先がジュクジュク": "ear_tip_lesions",
+    "卵を産もうと": "egg_binding",
+    "産卵しようと": "egg_binding",
+    "卵が産めな": "egg_binding",
+    "苦しそうです": "labored_breathing",
+    "苦しそうで": "labored_breathing",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---
@@ -3069,8 +3554,11 @@ del _k, _v
 # （「餌を食べません。糞**も**小さくなっています」）が、キーは「糞が小さく」の
 # が形のみで不一致だった。が を含むキーから も 形を生成する（意味は同一）。
 for _k, _v in list(SYMPTOM_ALIASES.items()):
-    if "が" in _k and len(_k) >= 4:
-        _variant = _k.replace("が", "も", 1)
+    # 助詞の が のみ置換: 「ながら」の が・「〜がる」動詞語尾（上がる/痛がる）は除外
+    # （旧実装は「鳴きながらいきむ」→「鳴きなもらいきむ」のような無意味キーを生成していた）
+    _m = re.search(r"(?<!な)が(?![らりるれろっ])", _k) if len(_k) >= 4 else None
+    if _m:
+        _variant = _k[: _m.start()] + "も" + _k[_m.end() :]
         if not _shadows_curated_prefix(_variant, _v):
             SYMPTOM_ALIASES.setdefault(_variant, _v)
 del _k, _v

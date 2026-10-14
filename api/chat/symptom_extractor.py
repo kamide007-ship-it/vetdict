@@ -34,6 +34,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "vaginal_bleeding",
     ],
     "vaginal_discharge": ["genital_discharge", "vulvar_discharge", "bloody_vaginal_discharge"],
+    # 陰部出血（2026-10 第43回）: rabbit はネイティブ保有（子宮腺癌の古典的主訴）。
+    # 非保有種は血様/陰部分泌物へフォールバック（legacy 犬は vulvar_discharge）。
+    "vaginal_bleeding": ["bloody_vaginal_discharge", "vaginal_discharge", "vulvar_discharge", "genital_discharge"],
     # Stick-tail wasting (2026-09 round 21): lizard vocabulary carries
     # tail_thinning (Cryptosporidiosis hallmark); other species fall back to
     # generic wasting.
@@ -85,6 +88,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "distended_abdomen",
         "bloated_abdomen",
         "abdominal_pain",
+        # トカゲ等の体腔膨満（abdominal_swelling 表記 — 2026-10 第67弾）
+        "abdominal_swelling",
+        "coelomic_distension",
     ],
     "abdominal_distension": [
         "bloating",
@@ -108,7 +114,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "hind_leg_weakness",
     ],
     "paralysis": ["paralysis_or_paresis", "paresis", "hind_limb_weakness", "hind_limb_paralysis"],
-    "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis"],
+    # 末尾 muscle_weakness/ataxia: 後肢専用IDを持たない猫等で「後ろ足がふらつき」が
+    # 脱落し「ふらつき」→tremors（中毒ddx）に落ちていた（2026-10 第67弾）
+    "hind_leg_weakness": ["hind_limb_weakness", "hindlimb_weakness", "posterior_paresis", "muscle_weakness", "ataxia"],
     "hind_limb_weakness": ["hind_leg_weakness", "hindlimb_weakness", "posterior_paresis", "progressive_paralysis"],
     "jaundice": ["icterus", "yellow_skin", "yellow_mucous_membranes"],
     # Weight / body
@@ -178,7 +186,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "ear_discharge": ["ear_infection", "ear_inflammation", "otitis", "ear_mites"],
     "blood_in_urine": ["hematuria", "bloody_urine", "uterine_bleeding", "blood_urine"],
     "blood_urine": ["blood_in_urine", "hematuria", "bloody_urine"],
-    "blood_in_stool": ["melena", "hematochezia", "bloody_stool", "bleeding_gums"],
+    # 鳥類は bloody_droppings 表記（2026-10 第43回 — 鳥「便に血」が抽出ゼロだった）
+    "blood_in_stool": ["bloody_droppings", "melena", "hematochezia", "bloody_stool", "bleeding_gums"],
     "itching": [
         "pruritus",
         "scratching",
@@ -347,7 +356,14 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "excessive_urination",
         "increased_urination",
     ],
-    "excessive_urination": ["frequent_urination", "polyuria", "pollakiuria", "increased_urination"],
+    # 尿の「量」は多尿 — polyuria系を頻尿（LUTD優先チェーン）より先に解決する
+    "excessive_urination": [
+        "polyuria",
+        "increased_urination",
+        "polyuria_polydipsia",
+        "frequent_urination",
+        "pollakiuria",
+    ],
     "increased_urination": ["excessive_urination", "frequent_urination", "polyuria", "pollakiuria"],
     "cloudy_urine": ["turbid_urine", "murky_urine"],
     "foul_smelling_urine": ["malodorous_urine", "urine_odor"],
@@ -359,7 +375,7 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # Musculoskeletal
     "joint_pain_or_stiffness": ["joint_pain", "arthritis", "stiffness"],
     # Behavior
-    "anxiety": ["restlessness", "pacing", "nervousness"],
+    "anxiety": ["restlessness", "pacing", "nervousness", "hyperactivity"],
     "self_mutilation": ["self_chewing", "self_harm", "overgrooming", "feather_plucking"],
     "self_chewing": ["self_mutilation", "self_harm"],
     "behavioral_change": ["behavioral_changes", "aggression", "depression", "restlessness"],
@@ -419,6 +435,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 嘴過長・スペクタクル残留の種別ID表記ゆれ
     "worms_in_stool": ["visible_worms", "visible_parasites", "diarrhea"],
     "overgrown_beak": ["beak_deformity", "beak_overgrowth"],
+    "beak_deformity": ["beak_overgrowth", "overgrown_beak", "crusty_beak"],
+    "miliary_dermatitis": ["crusting", "skin_lesions", "itching"],
     # 2026-09 第18回スイープ: 「毛が抜けた」→fur_loss_patches が斑状脱毛IDを
     # 持たない種（ハムスター等）で脱落していた / うずくまり主訴の鳥への橋渡し
     # （卵詰まりのケージ底着座・膨羽へフォールバック）/ フクロモモンガ尾自咬
@@ -440,6 +458,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "leg_weakness": ["hind_leg_weakness", "muscle_weakness", "weakness", "lameness"],
     # ヘビダニ等の「動く点」— 種語彙により寄生虫系へフォールバック
     "visible_mites": ["visible_parasites", "external_parasites", "mites", "fleas"],
+    # ノミ目撃・尾根部病変（2026-10 第70弾）— 非保有種はノミ/外部寄生虫→掻痒へ
+    "flea_signs": ["fleas", "flea_infestation", "visible_parasites", "external_parasites", "itching", "hair_loss"],
     "sitting_on_cage_floor": ["fluffed_feathers", "lethargy"],
     "retained_spectacle": ["dysecdysis", "cloudy_eyes", "eye_opacity"],
     # 2026-09 Round 34: ウサギ盲腸便付着（非保有種は軟便/下痢へ安全フォールバック）
@@ -481,8 +501,11 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # Fish fin
     "frayed_fins": ["fin_rot", "fin_erosion", "ragged_fins"],
     "fin_rot": ["frayed_fins", "fin_erosion"],
-    "redness_skin": ["skin_redness", "hemorrhage", "fin_hemorrhage", "bleeding"],
-    "skin_redness": ["redness_skin", "hemorrhage", "red_legs", "red_ventrum"],
+    # 発赤→出血のチェーンは魚・両生類の出血性発赤のためのもの。哺乳類・鳥で
+    # 「皮膚が赤くなっている」が bleeding/hemorrhage に化けないよう、皮膚病変を
+    # 出血より先に置く（2026-10 第43回監査 — 猫/鳥/オウムで bleeding 誤抽出）。
+    "redness_skin": ["skin_redness", "skin_rashes", "skin_lesions", "hemorrhage", "fin_hemorrhage", "bleeding"],
+    "skin_redness": ["redness_skin", "red_legs", "red_ventrum", "skin_rashes", "skin_lesions", "hemorrhage"],
     "fin_hemorrhage": ["redness_skin", "hemorrhage"],
     # Hamster
     "wet_tail": ["diarrhea", "watery_diarrhea"],
@@ -508,7 +531,11 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "cheek_swelling": ["bloating", "cheek_pouch_prolapse", "facial_swelling"],
     "cheek_pouch_prolapse": ["cheek_swelling"],
     "jaw_swelling": ["facial_swelling", "swelling"],
-    "abscess": ["discharge", "swelling"],
+    "abscess": ["draining_wound", "discharge", "swelling"],
+    # 2026-10 第41回監査: 新規抽出IDの種フォールバック
+    "chin_swelling": ["crusting", "skin_lesions", "skin_rashes"],
+    "black_tarry_stool": ["tarry_stool", "melena", "blood_in_stool", "bloody_stool"],
+    "white_deposits_on_joints": ["gout_deposits", "joint_swelling", "swollen_joints", "lameness"],
     "overgrown_teeth": [
         "dental_overgrowth",
         "incisor_overgrowth",
@@ -551,6 +578,17 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "stomatitis": ["oral_ulcers", "bad_breath", "excessive_drooling", "mouth_lesions", "mucus_in_mouth"],
     # チンチラ等の耳介下垂 — 中耳炎/外耳炎の随伴所見（2026-09 第25弾）
     "ear_drooping": ["head_tilt", "head_shaking", "ear_discharge"],
+    # 顔面神経麻痺の飼い主表現「顔が歪んで耳が下がっている」（2026-10 第39回）。
+    # 猫 facial_nerve_paralysis/ear_droop・ウサギ facial_drooping・フェレット
+    # facial_asymmetry へ解決する。非保有種では未マッチのまま（顔面の歪みを
+    # 頭位傾斜など別の身体所見に置き換えない）
+    "facial_droop": [
+        "facial_drooping",
+        "facial_nerve_paralysis",
+        "facial_asymmetry",
+        "ear_droop",
+        "ear_drooping",
+    ],
     # 猫の蹠行姿勢（かかと歩行 = 糖尿病性神経障害）。他種は後肢虚弱へ
     # 安全にフォールバック（2026-09 第26弾）
     "plantigrade_stance": ["hind_leg_weakness", "hind_limb_weakness", "weakness", "ataxia"],
@@ -631,6 +669,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # かさぶた ("かさぶたがある" alias resolves to crusting, which the dog
     # vocabulary lacks — bridge to the lesion IDs so crusting complaints reach
     # zinc-responsive dermatosis and pyoderma).
+    # 耳道内痂皮（ウサギ耳疥癬のネイティブID）— 非保有種は耳分泌物・耳掻痒へ（2026-10 第40回）
+    "ear_crusting": ["ear_discharge", "ear_scratching", "scratching_ears", "crusting", "skin_lesions"],
     "crusting": ["crusty_skin", "skin_crusting", "skin_lesions", "skin_rashes"],
     # Scaly-face mite (Knemidokoptes) complaints — parakeet carries the
     # specific IDs; bird/parrot fall back to their facial-lesion IDs.
@@ -740,6 +780,14 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "erratic_swimming",
         "bloating",
     ],
+    # --- 2026-10 Round 43 sweep ---
+    # 耳道発赤（「耳の中が赤い」）: 猫等は ear_inflammation をネイティブ保有。
+    # 非保有種は外耳炎の他徴候へフォールバック。
+    "ear_inflammation": ["ear_redness", "ear_discharge", "ear_scratching", "scratching_ears", "head_shaking"],
+    # 虹彩変色: cat はネイティブ保有。非保有種は眼の混濁・ぶどう膜炎徴候へ。
+    "iris_color_change": ["uveitis_signs", "eye_redness", "cloudy_eye", "cloudy_eyes", "eye_discharge"],
+    # 羽毛異常: parrot は feather_abnormalities も保有。
+    "abnormal_feathers": ["feather_abnormalities", "feather_discoloration", "feather_loss", "poor_feather_quality"],
 }
 
 # Backwards-compat alias (some older imports use the private name).
@@ -759,11 +807,26 @@ _NEGATION_AFTER_RE = _neg_re.compile(
     r"(?:ない|無い|なし|ありません|出ていない|出てない|でていない"
     r"|していない|してない|しません|見られない|みられない)"
 )
+# 語幹キー（太ってき・お腹が垂れ・毛が薄くな 等）の直後に続く活用否定
+# （〜ていない・〜っていない・〜てきていない・〜ておらず）。語幹エイリアスは
+# 連用形の陽性主訴を拾うためのものなので、否定活用が続く場合は否定とみなす。
+_STEM_NEGATION_AFTER_RE = _neg_re.compile(
+    r"^(?:(?:なっ|っ)?[てで])?(?:き[てで])?(?:は|も)?[いお]?(?:ない|なかった|ません|らず)"
+    r"|^な?[らく](?:ない|なかった|ありません|ず)|^な?りません"
+    r"|^く[はも](?:ない|なかった|ありません)"
+    r"|^[ぁ-ゖ]{0,5}?わけ(?:では|じゃ)(?:ない|なかった|ありません)"
+    r"|^[ぁ-ゖ]{0,5}?[のん](?:では|じゃ)(?:なく|ない|なかった|ありません)"
+)
 
 
 def is_negated_mention(text: str, end: int) -> bool:
     """Return True if the symptom mention ending at ``end`` is directly negated."""
-    if not _NEGATION_AFTER_RE.match(text[end : end + 12]):
+    tail = text[end : end + 12]
+    # 「〜くな」で終わる語幹キー（毛が薄くな 等 = 〜くなる の語幹）に「かった」が
+    # 続く場合は形容詞の過去否定（毛が薄くなかった）。「食欲がなかった」のような
+    # 陽性の欠如表現と区別するため「くな」終端に限定する。
+    stem_past_neg = text[:end].endswith("くな") and tail.startswith("かった")
+    if not (_NEGATION_AFTER_RE.match(tail) or _STEM_NEGATION_AFTER_RE.match(tail) or stem_past_neg):
         return False
     # 「しか〜ない」構文は限定の肯定表現（「ポタポタとしか出ない」= 滴下排尿
     # という陽性症状）であり否定ではない。しか は必ず否定述語を要求するため、
@@ -796,6 +859,11 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     ("できません", "できない"),
     ("ありません", "ない"),
     ("ありました", "あった"),
+    # ある（存在動詞・非活用ゆれなし: 熱があります→熱がある、しこりがあります→しこりがある）
+    ("あります", "ある"),
+    # い形容詞＋です（便がゆるいです→ゆるい、痛いです→痛い。「〜ないです」も「〜ない」で正しい）
+    ("かったです", "かった"),
+    ("いです", "い"),
     # 〜まる五段動詞（止まりません→止まらない 等、〜まる動詞で常に正しい）
     ("まりません", "まらない"),
     # 治る（五段）: かさぶたが治りません → 治らない（non_healing_wound キー群）
@@ -851,6 +919,10 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     # 食べられません→食べられない、走れません→走れない、かもしれません→かもしれない）
     ("れません", "れない"),
     ("れました", "れた"),
+    # ます語幹が「め」で終わる動詞は一段（または可能形）のみ — 五段〜むの
+    # ます形は〜みます。沈めません→沈めない、止めません→止めない（2026-10 第43回）
+    ("めません", "めない"),
+    ("めました", "めた"),
     # 〜ておらず/〜でおらず（おらず＝おる の文語否定連用形。て形に続く場合は
     # 全動詞で〜ていない/〜でいない と同値: うんちが出ておらず→出ていない）
     ("ておらず", "ていない"),
@@ -863,6 +935,9 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     # 歩く（ペタペタ歩きます→歩く 等の歩様主訴）
     ("歩きました", "歩いた"),
     ("歩きます", "歩く"),
+    # 行く（いく — 否定形は不規則でも いかない が正しい: 脱皮がうまくいきません）
+    ("いきません", "いかない"),
+    ("いきませんでした", "いかなかった"),
 ]
 # 長い置換を先に適用（「ていませんでした」が「ていません」より先）
 _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
@@ -882,7 +957,7 @@ _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
 #   口をずっと開け → open_mouth_breathing（(?<!口) で保護）
 _ADVERB_STRIP = _neg_re.compile(
     r"(が|を|も|は)"
-    r"(?:急に|突然|パンパンに|自分で|とても|かなり"
+    r"(?:急に|突然|パンパンに|自分で|とても|かなり|何日も|何日間も|数日間?|だんだん|徐々に|少しずつ"
     r"|(?<!食欲が)(?<!食欲を)(?<!食欲も)(?<!食欲は)すごく"
     r"|いつも(?!と違)"
     r"|(?<!口が)(?<!口を)(?<!口も)(?<!口は)ずっと)"
@@ -902,7 +977,27 @@ def normalize_chat_text(text: str) -> str:
         if polite in text:
             text = text.replace(polite, plain)
     text = _ADVERB_STRIP.sub(r"\1", text)
+    # 部位を明示しない「血が混じ」は尿語が無ければ文脈の部位に読み替える
+    # （「下痢が続いて血が混じっています」「鼻水に血が混じります」が血尿→
+    # 膀胱炎に誤誘導されていた — 2026-10 第42回監査）。尿語が1つでもあれば
+    # 従来どおり血尿側に残す。
+    # 排尿文脈での「足をあげる」は雄犬の排尿姿勢（頻回の排尿姿勢=頻尿）で跛行ではない
+    # （「おしっこが出にくそうで何度も足をあげています」が跛行に化けていた — 第69弾）
+    if _BLOOD_URINE_CTX.search(text):
+        for _leg in ("何度も足をあげ", "何度も足を上げ", "何度も足を挙げ"):
+            text = text.replace(_leg, "何度もおしっこ・姿勢")
+    if "血が混じ" in text and not _BLOOD_URINE_CTX.search(text) and "毛玉に血" not in text:
+        if "鼻" in text:
+            text = text.replace("血が混じ", "鼻血・混じ")
+        elif "吐" in text:
+            text = text.replace("血が混じ", "吐血・混じ")
+        elif _BLOOD_STOOL_CTX.search(text) and "便に血が混じ" not in text:
+            text = text.replace("血が混じ", "血便・混じ")
     return text
+
+
+_BLOOD_STOOL_CTX = _neg_re.compile(r"下痢|便|うんち|ウンチ|軟便")
+_BLOOD_URINE_CTX = _neg_re.compile(r"尿|おしっこ|オシッコ|排尿|トイレ")
 
 
 def resolve_symptom_id(sid: str, symptom_names: dict) -> str | None:

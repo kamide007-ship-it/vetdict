@@ -861,6 +861,15 @@ _TEMPLATE_MARKERS = (
     # curated antidote protocols never fingerprint-match.
     "特異的解毒剤がある場合は投与する（例：抗凝固性殺鼠剤にビタミンK1",
     "Treatment of toxicosis follows the principles of decontamination",
+    # Generic deworming treatment boilerplate (「同定された寄生虫に応じた適切な
+    # 駆虫薬が必要である」) — stamped on heartworm, tick paralysis, Cuterebra
+    # (where killing the larva in situ risks anaphylaxis) and even the
+    # non-parasitic hermit-crab shell evacuation. Marked so a curated JSON
+    # treatment replaces a templated module treatment at runtime.
+    "同定された寄生虫に応じた適切な駆虫薬が必要である",
+    # Small-mammal bedding allergy template（床材・杉材）mis-stamped on
+    # dog/cat/ferret flea allergy dermatitis.
+    "床材（杉材は禁忌、紙系/ペレット系へ）",
 )
 
 
