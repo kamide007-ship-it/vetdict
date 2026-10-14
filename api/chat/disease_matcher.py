@@ -354,6 +354,10 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # backing — it exists to stop umbrella syndromes with long symptom lists
 # losing on coverage to narrow rarities.
 _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    # 緑色粘液便（"green slime"）はフェレット流行性カタル性腸炎（ECE、フェレット腸
+    # コロナウイルス）の定義的所見（Williams 2000 Vet Pathol; Quesenberry & Carpenter
+    # 4th ed）— 2026-10 第45回: 汎用下痢エントリがカバレッジで上回っていた
+    ("ferret", frozenset({"green_diarrhea"}), "Epizootic Catarrhal Enteritis (ECE / Green Slime Disease)", 1.45),
     # 跳躍不能は猫の変形性関節症で最も感度の高い飼い主所見（6歳超の猫の60-90%に
     # 画像上のDJD — Lascelles 2010 Vet Surg; ISFM/AAFP 2010 疼痛ガイドライン）。
     # 2026-10 第67弾

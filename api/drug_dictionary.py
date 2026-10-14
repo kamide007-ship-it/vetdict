@@ -100,6 +100,7 @@ from api.drug_batch_73 import DRUGS_BATCH_73
 from api.drug_batch_74 import DRUGS_BATCH_74
 from api.drug_batch_75 import DRUGS_BATCH_75
 from api.drug_batch_76 import DRUGS_BATCH_76
+from api.drug_batch_77 import DRUGS_BATCH_77
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11033,6 +11034,13 @@ for _drug76 in DRUGS_BATCH_76:
     if _drug76["id"] not in _drug_index:
         DRUGS.append(_drug76)
         _drug_index[_drug76["id"]] = _drug76
+
+# Batch 77 (2026-10 第70弾: パロキセチン（参照されていたが未収載）・ネクスガードプラス・
+#  フェルプレバ — 犬猫の外部寄生虫配合剤の海外承認製剤）
+for _drug77 in DRUGS_BATCH_77:
+    if _drug77["id"] not in _drug_index:
+        DRUGS.append(_drug77)
+        _drug_index[_drug77["id"]] = _drug77
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

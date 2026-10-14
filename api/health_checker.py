@@ -1521,6 +1521,9 @@ DISEASES = [
             "incontinence",
             "neck_pain",
             "back_pain",
+            # 固有位置感覚障害による後肢のふらつき・ナックリングは胸腰部IVDD
+            # （Hansen I/II）の初期徴候（Ettinger 8th; Olby 2010 — 第45回）
+            "ataxia",
         ],
         "severity": "moderate",
         "recommended_tests": ["mri", "xray", "ct_scan", "emg"],
@@ -5064,6 +5067,11 @@ _PATHOGNOMONIC_CLUSTERS = [
     # (Muller & Kirk 7th ed): the paw-localised complaint should rank the
     # interdigital entry above generic pruritic dermatoses.
     (frozenset({"paw_redness"}), "interdigital_furunculosis", 1.5),
+    # 後肢のふらつき（運動失調）+ 跛行様歩様は脊髄性（固有位置感覚障害）の
+    # 歩様 — 整形外科疾患は失調を起こさない。胸腰部IVDD・変性性脊髄症を
+    # 優先（Olby 2010; Coates 2010 — 2026-10 第45回）
+    (frozenset({"ataxia", "limping"}), "ivdd", 1.5),
+    (frozenset({"ataxia", "limping"}), "degenerative_myelopathy", 1.5),
     # Greasy, malodorous skin is the lesion-pattern sign of Malassezia
     # dermatitis (Bond 2020 Vet Dermatol consensus) — gated on greasy_skin.
     (frozenset({"greasy_skin"}), "malassezia_dermatitis", 1.6),
