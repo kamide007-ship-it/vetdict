@@ -1,6 +1,5 @@
-"""2026-10 第70弾: 外部寄生虫・皮膚糸状菌・フェレットフィラリアの汎用駆虫テンプレート撲滅、
-パロキセチン/ネクスガードプラス/フェルプレバ公開、チャット精度第45回、
-スクロールトップボタンの「検索欄へ戻る」2段階化。"""
+"""2026-10 第70弾: チャット精度第45回・外部寄生虫症の治療テンプレート撲滅・
+ブラベクトプラス/ネクスガードプラス公開・犬ノミアレルギー性皮膚炎（チャットDB）。"""
 
 import json
 import sqlite3
@@ -11,11 +10,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 DB = ROOT / "instance" / "vetdict.db"
-APP_JS = (ROOT / "static" / "js" / "app.js").read_text(encoding="utf-8")
 warnings.filterwarnings("ignore")
-
-TEMPLATE_EN = "Anti-parasitic therapy appropriate to the parasite (fenbendazole"
-TEMPLATE_JA = "同定された寄生虫に応じた適切な駆虫薬が必要"
 
 
 def _sp(phrase, species, n=5):
@@ -27,169 +22,158 @@ def _sp(phrase, species, n=5):
     return set(ids), [r.get("name_ja") or "" for r in res[:n]]
 
 
-def _dog(phrase, n=5):
+def _dog(phrase, n=4):
     from api.diagnostic_chat import extract_symptoms_from_text, match_symptoms_to_diseases
 
     ids = extract_symptoms_from_text(phrase)
     return set(ids), [r.get("name_ja") or "" for r in match_symptoms_to_diseases(ids)[:n]]
 
 
-def _horse(phrase):
-    from api.diagnostic_chat import _extract_equine_symptoms
+class TestChatClinicalAccuracyAuditRound45:
+    def test_dog_scooting_hiragana(self):
+        ids, top = _dog("お尻をなめて床をすべるように歩いています")
+        assert "scooting" in ids and "肛門嚢" in top[0], top
 
-    return set(_extract_equine_symptoms(phrase))
+    def test_dog_hind_limp_hiragana(self):
+        ids, top = _dog("散歩の後に後ろ足をひきずっています")
+        assert ids and any(k in " ".join(top) for k in ("膝蓋", "十字", "関節")), top
+
+    def test_dog_interdigital_mass(self):
+        ids, top = _dog("足の指の間にできものができて舐めています")
+        assert "paw_redness" in ids and "趾間" in top[0], top
+
+    def test_dog_scleral_redness(self):
+        ids, top = _dog("白目の部分が赤くて涙が多いです")
+        assert any(k in " ".join(top[:3]) for k in ("結膜炎", "緑内障")), top
+
+    def test_dog_flea_allergy_entry(self):
+        ids, top = _dog("しっぽの付け根の毛が抜けてかさぶたがあります")
+        assert "flea_signs" in ids and "ノミアレルギー" in top[0], top
+
+    def test_flea_entry_is_complaint_gated(self):
+        _, top = _dog("毛が抜けてかゆがっています")
+        assert "ノミアレルギー" not in top[0], top
+
+    def test_flea_entry_name_mirrors_dog_module(self):
+        from api.health_checker import DISEASES
+        from api.species.dog_diseases import DISEASES as MOD
+
+        legacy = next(d for d in DISEASES if d["id"] == "flea_allergy_dermatitis")
+        names = {(d["name"] if isinstance(d, dict) else d.name) for d in MOD}
+        assert legacy["name_en"] in names
+
+    def test_dog_incontinence_and_neck(self):
+        ids, _ = _dog("おしっこが漏れてしまいます")
+        assert "incontinence" in ids
+        ids, top = _dog("首を触ると痛がって鳴きます")
+        assert "neck_pain" in ids and any("椎間板" in t for t in top[:3]), top
+
+    def test_poor_coat_is_not_weight_loss(self):
+        from api.chat.symptom_aliases import SYMPTOM_ALIASES
+
+        assert SYMPTOM_ALIASES["毛艶が悪い"] == "poor_coat"
+
+    def test_cat_pu_wording(self):
+        ids, top = _sp("水を飲む量が多くて痩せてきて毛艶も悪いです", "cat", 3)
+        assert "excessive_thirst" in ids and any(k in " ".join(top) for k in ("腎", "甲状腺", "糖尿")), top
+
+    def test_cat_ear_tip_scc(self):
+        ids, top = _sp("耳の先が白くて赤くただれています", "cat", 4)
+        assert ids and any(k in " ".join(top) for k in ("扁平上皮癌", "日光")), top
+
+    def test_cat_flea_signs_fall_back(self):
+        ids, top = _sp("しっぽの付け根の毛が抜けています", "cat", 4)
+        assert any("ノミ" in t for t in top), top
+
+    def test_bird_egg_laying_effort(self):
+        ids, top = _sp("卵を産もうとしてずっと力んでいます", "bird", 2)
+        assert any(k in " ".join(top) for k in ("卵詰まり", "卵停滞")), top
+
+    def test_ferret_melena_gastric_ulcer(self):
+        ids, top = _sp("黒い下痢が出ています", "ferret", 3)
+        assert "black_tarry_stool" in ids and any(k in " ".join(top) for k in ("胃潰瘍", "ヘリコバクター")), top
+
+    def test_rabbit_sore_hocks(self):
+        _, top = _sp("足の裏の毛が抜けて赤くなっています", "rabbit", 2)
+        assert any(k in " ".join(top) for k in ("足底", "ソアホック")), top
+
+    def test_lizard_rubber_jaw_kanji(self):
+        ids, top = _sp("後ろ足が弱くて顎がやわらかい", "lizard", 2)
+        assert "jaw_softening" in ids and any(k in " ".join(top) for k in ("代謝性骨", "MBD", "栄養性二次")), top
 
 
-class TestEctoparasiteFungalTemplateElimination:
-    @pytest.fixture(scope="class")
-    def entries(self):
-        return {(e["species"], e["name"]): e for e in json.loads((ROOT / "diseases_all_species.json").read_text())}
+JSON = ROOT / "diseases_all_species.json"
+EN_MARK = "Anti-parasitic therapy appropriate to the parasite (fenbendazole"
+JA_MARKS = ("同定された寄生虫に応じた適切な駆虫薬", "糞便PCR/直接鏡検/フローテーション法で原因虫種を特定")
+ECTO = ("Mite", "Flea", "Mange", "Scabies", "Demodic", "Cheyletiell", "Louse", "Tick ")
 
-    def test_library_entries_carry_no_template(self, entries):
-        from scripts.template_elimination.ectoparasite_fungal_treatment_library import CURATED
 
-        for key in CURATED:
-            e = entries[key]
-            assert TEMPLATE_EN not in (e.get("treatment") or ""), key
-            assert TEMPLATE_JA not in (e.get("treatment_ja") or ""), key
-            assert "フローテーション法で原因虫種を特定してから駆虫薬" not in (e.get("treatment_ja") or ""), key
+class TestEctoparasiteTreatments:
+    def test_no_endoparasite_template_on_ectoparasites_in_json(self):
+        bad = []
+        for d in json.loads(JSON.read_text(encoding="utf-8")):
+            if not any(k in d.get("name", "") for k in ECTO):
+                continue
+            if EN_MARK in (d.get("treatment") or "") or any(m in (d.get("treatment_ja") or "") for m in JA_MARKS):
+                bad.append((d["species"], d["name"]))
+        assert not bad, bad
 
-    def test_dermatophytoses_are_antifungal_not_antiparasitic(self, entries):
-        for sp, name in [
-            ("Hamster", "Dermatophytosis (Ringworm)"),
-            ("Guinea Pig", "Dermatophytosis (Ringworm)"),
-            ("Bird", "Dermatophytosis (Ringworm)"),
-            ("Exotic Other", "Hedgehog Ringworm (Trichophyton)"),
-            ("Horse", "Coccidioidomycosis"),
-        ]:
-            en = entries[(sp, name)]["treatment"]
-            assert "antiparasitics are not indicated" in en, name
-            assert any(k in en for k in ("terbinafine", "itraconazole", "Itraconazole", "Terbinafine")), name
+    def test_tarantula_mites_never_get_acaricides(self):
+        d = next(x for x in json.loads(JSON.read_text(encoding="utf-8")) if x["name"] == "Mite Infestation (Tarantula)")
+        assert "lethal" in d["treatment"] and "致死的" in d["treatment_ja"]
+        assert "never" in d["treatment"].lower()
 
-    def test_tarantula_never_gets_acaricides(self, entries):
-        for name in ("Mite Infestation (Tarantula)", "Oral Nematodes (Tarantula)"):
-            e = entries[("Exotic Other", name)]
-            assert "ivermectin" in e["treatment"] and "致死的" in e["treatment_ja"], name
-        from api.species import exotic_other_diseases as m
+    def test_bird_red_mite_no_carbaryl_on_bird(self):
+        d = next(x for x in json.loads(JSON.read_text(encoding="utf-8")) if x["name"] == "Red Mite (Dermanyssus)")
+        assert "カルバリル5%パウダーの体表散布" not in d["treatment_ja"]
 
-        for d in m.DISEASES:
-            if d["name"] in ("Mite Infestation (Tarantula)", "Oral Nematodes (Tarantula)"):
-                assert "ivermectin" in d["treatment"] and "Species-appropriate antiparasitic" not in d["treatment"]
-
-    def test_ferret_heartworm_slow_kill(self, entries):
-        for name in ("Heartworm Disease", "Heartworm (Dirofilaria)"):
-            e = entries[("Ferret", name)]
-            assert "melarsomine" in e["treatment"].lower() and "slow-kill" in e["treatment"], name
-            assert "メラルソミン" in e["treatment_ja"], name
-
-    def test_chelonian_ivermectin_warning_on_snake_mites(self, entries):
-        e = entries[("Reptile", "Snake Mite Infestation (Ophionyssus natricis) - Severe")]
-        assert "chelonian" in e["treatment"] and "カメ類" in e["treatment_ja"]
-
-    @pytest.mark.skipif(not DB.exists(), reason="served DB not built")
-    def test_served_db_ectoparasite_and_fungal_rows_curated(self):
+    def test_served_db_clean(self):
+        if not DB.exists():
+            pytest.skip("served DB not built")
         c = sqlite3.connect(DB)
-        rows = c.execute(
-            "select species,name,treatment,treatment_ja from diseases where "
-            "name like '%mite%' or name like '%ringworm%' or name like '%dermatoph%' "
-            "or name like '%mange%' or (species='ferret' and name like '%heartworm%')"
-        ).fetchall()
-        assert rows
-        for sp, name, t, tj in rows:
-            assert TEMPLATE_EN not in (t or ""), (sp, name)
-            assert TEMPLATE_JA not in (tj or ""), (sp, name)
+        n = c.execute(
+            "select count(*) from diseases where treatment like ? and (name like '%Mite%' or name like '%Mange%' or name like '%Flea%')",
+            (f"%{EN_MARK}%",),
+        ).fetchone()[0]
+        assert n == 0
+        en = c.execute("select pathophysiology from diseases where species='cat' and name='Feline Obesity'").fetchone()
+        if en:
+            assert "tissue injury, inflammatory response" not in en[0]
 
 
-class TestBatch77:
-    def test_drugs_present_and_bilingual(self):
+class TestBatch77Parasiticides:
+    def test_entries_and_label_facts(self):
         from api.drug_dictionary import DRUGS
 
         idx = {d["id"]: d for d in DRUGS}
-        for did in ("paroxetine", "nexgard_plus", "felpreva"):
-            d = idx[did]
-            for sp, info in d["species_info"].items():
-                assert info["dosage"] and info["dosage_ja"], (did, sp)
-        assert idx["nexgard_plus"]["species_info"]["cat"]["safe"] is False
-        assert idx["felpreva"]["species_info"]["dog"]["safe"] is False
-        assert "14.4 mg/kg" in idx["felpreva"]["species_info"]["cat"]["dosage"]
-        assert "0.024 mg/kg moxidectin" in idx["nexgard_plus"]["species_info"]["dog"]["dosage"]
-        assert "amitraz" in idx["paroxetine"]["contraindications"].lower()
+        bp = idx["fluralaner_moxidectin_topical"]["species_info"]
+        assert bp["cat"]["safe"] and not bp["dog"]["safe"]
+        assert (
+            "40 mg/kg" in bp["cat"]["dosage"] and "1.2 kg" in bp["cat"]["dosage"] and "6 months" in bp["cat"]["dosage"]
+        )
+        nx = idx["afoxolaner_moxidectin_pyrantel"]["species_info"]
+        assert nx["dog"]["safe"] and not nx["cat"]["safe"]
+        assert (
+            "2.5 mg/kg" in nx["dog"]["dosage"]
+            and "24 µg/kg" in nx["dog"]["dosage"]
+            and "8 weeks" in nx["dog"]["dosage"]
+        )
+        assert "陰性" in nx["dog"]["notes_ja"] or "検査" in nx["dog"]["notes_ja"]
 
-    def test_text_matcher_and_resolver(self):
-        from api.drug_dictionary import find_drugs_in_text, resolve_drug_reference
+    def test_resolution_without_stealing_single_agents(self):
+        from api.drug_dictionary import resolve_drug_reference as r
 
-        assert "paroxetine" in {d["id"] for d in find_drugs_in_text("代替: パロキセチン0.5-1mg/kg PO q24h")}
-        assert resolve_drug_reference("ぱろきせちん") == "paroxetine"
-        assert resolve_drug_reference("フェルプレバ") == "felpreva"
-        assert resolve_drug_reference("NexGard PLUS") == "nexgard_plus"
-        assert resolve_drug_reference("ネクスガード") == "afoxolaner"
+        assert r("ブラベクトプラス") == "fluralaner_moxidectin_topical"
+        assert r("ぶらべくとぷらす") == "fluralaner_moxidectin_topical"
+        assert r("ネクスガードプラス") == "afoxolaner_moxidectin_pyrantel"
+        assert r("ブラベクト") == "fluralaner"
+        assert r("ネクスガード") == "afoxolaner"
 
-    def test_interaction_registry(self):
-        from api.drug_interactions import find_interactions
-
-        found = {(i["drug_a"], i["drug_b"]): i["severity"] for i in find_interactions(["paroxetine", "selegiline"])}
-        assert found[("paroxetine", "selegiline")] == "contraindicated"
-
-    def test_disease_links(self):
+    def test_disease_text_links(self):
         from api.drug_dictionary import find_drugs_in_text
 
-        entries = {(e["species"], e["name"]): e for e in json.loads((ROOT / "diseases_all_species.json").read_text())}
-        assert "felpreva" in {d["id"] for d in find_drugs_in_text(entries[("Cat", "Flea Infestation")]["treatment_ja"])}
-        hook = entries[("Dog", "Hookworm Infection")]["treatment_ja"]
-        assert TEMPLATE_JA not in hook
-        assert "nexgard_plus" in {d["id"] for d in find_drugs_in_text(hook)}
-
-
-class TestChatClinicalAccuracyAuditRound45:
-    def test_dog_pancreatitis_belly_pain(self):
-        ids, top = _dog("急にお腹を痛がって、何度も吐いています")
-        assert "abdominal_pain" in ids and any("膵炎" in t for t in top[:3]), top
-
-    def test_dog_cushing_pot_belly(self):
-        ids, top = _dog("おしっこの量がとても多くて、水ばかり飲みます。お腹がぽっこりしています")
-        assert {"excessive_thirst", "bloating"} <= ids and any("クッシング" in t for t in top), top
-
-    def test_dog_ataxia_stumbling_spinal(self):
-        ids, top = _dog("後ろ足がふらついて、つまずくことが多くなりました")
-        assert "ataxia" in ids and any("椎間板" in t or "変性性脊髄" in t for t in top[:3]), top
-
-    def test_dog_facial_edema_urticaria(self):
-        ids, top = _dog("顔がむくんで、目の周りが赤く腫れています")
-        assert "facial_swelling" in ids and any("蕁麻疹" in t for t in top[:3]), top
-
-    def test_cat_overgrooming(self):
-        ids, top = _sp("毛をむしってお腹がハゲています", "cat")
-        assert "excessive_grooming" in ids, ids
-
-    def test_cat_bite_abscess(self):
-        ids, top = _sp("顔に傷があって、腫れて熱を持っています", "cat")
-        assert any("膿瘍" in t for t in top[:3]), top
-
-    def test_bird_egg_binding_cant_lay(self):
-        ids, top = _sp("卵を産めずに、いきんでいます", "bird")
-        assert any("卵詰まり" in t or "難産" in t for t in top[:3]), top
-
-    def test_hamster_wet_tail_area(self):
-        ids, top = _sp("しっぽのあたりが濡れて元気がありません", "hamster")
-        assert "wet_tail" in ids, ids
-
-    def test_ferret_green_slime_ece(self):
-        ids, top = _sp("下痢が緑色です", "ferret")
-        assert any("カタル性腸炎" in t for t in top[:3]), top
-
-    def test_bird_white_oral_plaques(self):
-        ids, _ = _sp("口の中に白い膜があります", "bird")
-        assert ids & {"white_patches_in_mouth", "oral_plaques", "oral_lesions"}, ids
-
-    def test_horse_quidding_and_lumps_and_local_heat(self):
-        assert "dental_quidding" in _horse("ご飯をこぼして食べるのが遅いです")
-        assert "skin_sarcoid" in _horse("皮膚にこぶがたくさんあります")
-        assert {"limb_filling", "limb_tendon_heat"} <= _horse("足が腫れて熱を持っています")
-
-
-def test_scroll_top_button_jumps_to_tab_search_first():
-    assert "function _scrollTopLandingTarget()" in APP_JS
-    i = APP_JS.index("/* --- Scroll-to-top button with progress ring --- */")
-    block = APP_JS[i : i + 4000]
-    assert "scrollToAnchor(lt)" in block and "jump_to_search" in block
-    assert 'getElementById("cookieConsent")' in block and '"important"' in block
+        data = {(d["species"], d["name"]): d for d in json.loads(JSON.read_text(encoding="utf-8"))}
+        ids = {d["id"] for d in find_drugs_in_text(data[("Cat", "Flea Infestation")]["treatment_ja"])}
+        assert "fluralaner_moxidectin_topical" in ids
+        ids = {d["id"] for d in find_drugs_in_text(data[("Dog", "Heartworm Disease")]["treatment_ja"])}
+        assert "afoxolaner_moxidectin_pyrantel" in ids

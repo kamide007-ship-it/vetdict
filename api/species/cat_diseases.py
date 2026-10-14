@@ -5350,12 +5350,12 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "猫で最も多い栄養障害。室内飼育猫の30〜40%が肥満または過体重。"
         "BCS 7/9以上を肥満と判定。糖尿病・肝リピドーシス・関節疾患・"
         "下部尿路疾患のリスク因子。肥満猫が食欲廃絶すると肝リピドーシスを発症するため注意。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
+        "pathophysiology": "Chronic positive energy balance expands white adipose tissue; dysregulated adipokine secretion produces insulin resistance (about a 4-fold diabetes risk) and chronic low-grade inflammation. Because cats rely heavily on protein metabolism, fasting mobilises fat to the liver rapidly, so an obese cat that stops eating is at high risk of hepatic lipidosis.",
         "pathophysiology_ja": "慢性的なエネルギー過剰→白色脂肪組織の蓄積→"
         "アディポカイン分泌異常→インスリン抵抗性（糖尿病リスク4倍）→"
         "慢性低度炎症。猫は犬と異なりタンパク質代謝依存が高く、"
         "絶食時に肝臓への脂肪動員が急速→肝リピドーシスのリスク。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
+        "causes": "Excess caloric intake, low activity (strictly indoor housing), reduced energy requirement after neutering, free-choice (ad libitum) feeding and high-carbohydrate diets. Predisposition reported in domestic crossbreds and British Shorthairs.",
         "causes_ja": "過剰なカロリー摂取、運動不足（完全室内飼育）、避妊/去勢後の代謝低下、"
         "自由給餌（ad lib feeding）、高炭水化物食。"
         "品種素因：雑種猫、ブリティッシュショートヘア。",
@@ -12088,7 +12088,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"mammary_masses", "swelling", "lethargy", "anxiety"},
         "description": "Non-pregnant state with pregnancy-like signs after ovulation in unmated queens, caused by prolonged luteal function.",
         "description_ja": "発情排卵後の非妊娠状態で妊娠様徴候を呈する。猫では交配誘発排卵なので未交配でも発生可能。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
+        "pathophysiology": "Cats are induced ovulators, but ovulation can occur without mating (e.g. after stroking or environmental stimuli). The resulting non-pregnant luteal phase causes sustained progesterone and, as it ends, mammary hyperplasia and lactation with nesting behaviour, reduced courtship and sometimes polydipsia. Clinically overt pseudopregnancy is much less common in cats than in dogs.",
         "pathophysiology_ja": "猫は交配誘発排卵動物だが、交配なしで心理的刺激や環境変化で排卵が起こる場合がある。黄体期の遷延→高プロゲステロン血症→乳腺増生・乳汁分泌。行動：巣作り行動・求愛行動低下・多飲。犬ほど一般的ではないが報告あり。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "交配なしの排卵（猫では稀）。黄体期遷延。多妊娠の自然流産後。視床下部-下垂体-卵巣軸の機能異常。",
@@ -12131,7 +12131,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"prolonged_estrus", "vaginal_discharge", "lethargy"},
         "description": "Ovarian cysts causing persistent estrus or nymphomania in queens due to anovulation or interrupted estrous cycles.",
         "description_ja": "卵巣嚢胞による持続性発情またはnymph omania。排卵障害や発情周期の中断に伴う。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
+        "pathophysiology": "Fluid-filled ovarian cysts disturb ovarian hormone secretion. Oestrogen-producing (follicular) cysts cause persistent oestrogen exposure and prolonged oestrus (behavioural oestrus lasting >3 weeks); ovulation fails (anovulation) or luteinisation after ovulation is incomplete, and the cat's response to the induced-ovulation stimulus is altered.",
         "pathophysiology_ja": "卵巣嚢胞（fluid-filled structure）の発生→ホルモン分泌異常。エストロゲン産生嚢胞の場合、持続的エストロゲン分泌→持続性発情（estrus持続期間>3週）。排卵が起こらない（anovulation）か、排卵後も黄体形成が不完全。猫では交配誘発排卵だが、嚢胞がある場合は刺激への反応性が変化。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "卵巣嚢胞の形成機序は不明だが、LH surge異常との関連が疑われる。多妊娠中の流産後。病的卵巣機能（腫瘍など）。",
@@ -12175,7 +12175,7 @@ DISEASES: List[Dict[str, Any]] = [
         "symptoms": {"vaginal_discharge", "fever", "lethargy", "appetite_loss"},
         "description": "Uterine infection in postpartum queens, usually from retained fetuses or placental tissue.",
         "description_ja": "産後の子宮内膜感染症。胎仔遺残・胎盤停滞に伴う。犬ほど一般的ではないが発症時は重症化傾向。",
-        "pathophysiology": "The pathological process involves tissue injury, inflammatory response, and progressive functional impairment. Without intervention, compensatory mechanisms may be overwhelmed, leading to clinical deterioration.",
+        "pathophysiology": "Endometrial sloughing at parturition combined with retained fetuses (one or more kittens not expelled) or retained placentas becomes a suppurative uterine infection. Postpartum complications are rarer in cats than in dogs, but when metritis develops it tends to progress rapidly to septic shock.",
         "pathophysiology_ja": "分娩時の子宮内膜剥離 → 胎仔遺残（one or more kittens not expelled）or胎盤遺残→化膿性感染。猫での産褥合併症は犬より稀だが、発症時は急速に敗血症ショックに進行する傾向。",
         "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
         "causes_ja": "胎仔遺残（最多原因）。胎盤停滞。低カルシウム血症による子宮無力症。子宮破裂。多母体妊娠（>6匹）での分娩ストレス。",

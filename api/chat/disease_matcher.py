@@ -362,6 +362,15 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # 画像上のDJD — Lascelles 2010 Vet Surg; ISFM/AAFP 2010 疼痛ガイドライン）。
     # 2026-10 第67弾
     ("cat", frozenset({"reluctance_to_jump"}), "Osteoarthritis (Degenerative Joint Disease)", 1.35),
+    # フェレットの黒色便（メレナ）は胃潰瘍（H. mustelae 関連が大半）until proven
+    # otherwise — Quesenberry & Carpenter 4th ed; Fox 1990。下痢の共抽出でカバレッジが
+    # 希釈され、腸管寄生虫・ウイルス性腸炎の下（16位）に沈んでいた（2026-10 第70弾）
+    ("ferret", frozenset({"black_tarry_stool"}), "Gastric Ulcer", 1.5),
+    ("ferret", frozenset({"black_tarry_stool"}), "Helicobacter Mustelae Gastritis", 1.4),
+    # ウサギの足底（飛節）の脱毛・発赤はソアホック（潰瘍性足底皮膚炎）の初期像 —
+    # Harcourt-Brown; Mancinelli 2014。汎用の接触性/潰瘍性皮膚炎が上回っていた
+    ("rabbit", frozenset({"pododermatitis_signs"}), "Pododermatitis (Sore Hocks)", 1.4),
+    ("rabbit", frozenset({"pododermatitis_signs"}), "Ulcerative Pododermatitis - Grade I", 1.3),
     # Anorexia + reduced fecal output in a rabbit is GI stasis until proven
     # otherwise (Oglesbee, Blackwell's 5-Minute Vet Consult: Small Mammal).
     ("rabbit", frozenset({"appetite_loss", "reduced_fecal_output"}), "Gastrointestinal Stasis", 1.45),

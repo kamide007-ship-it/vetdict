@@ -306,6 +306,20 @@ def _class_specific_lines(species: str, klass: str, name_ja: str) -> list[str]:
             f"{species_ja}に特異的な必要量はQuesenberry & Carpenter "
             "(Exotic Animal Medicine for the Veterinary Technician) または Carpenter Exotic Animal Formulary 6th ed を参照。",
         ]
+    if klass == "parasitic" and any(k in name_ja for k in ("ダニ", "ノミ", "シラミ", "疥癬", "ヒゼン", "外部寄生虫")):
+        # 外部寄生虫は糞便検査・蠕虫/原虫用の駆虫薬の対象ではない（2026-10 第70弾）
+        sp = (species or "").lower()
+        if sp in ("tortoise", "turtle"):
+            drug = "イベルメクチンはカメ類に禁忌（致死的）— 物理的除去と環境処理を主体とする。"
+        elif sp in ("amphibian", "fish", "exotic_other"):
+            drug = "外用殺虫剤・イベルメクチンの使用は種の感受性を確認してから（両生類は経皮吸収、無脊椎動物には致死的）— 物理的除去と環境処理を主体とする。"
+        else:
+            drug = "イベルメクチン 0.2-0.4 mg/kg SC 14日毎×3回、またはセラメクチン外用（種別用量・禁忌を確認。フィプロニルはウサギ・齧歯類・鳥に使用しない）。"
+        return [
+            f"{name_ja}はセロハンテープ・皮膚掻爬・耳垢鏡検・虫体の形態で寄生虫を同定する（蠕虫・原虫用の駆虫薬は無効）。",
+            drug,
+            "同居個体も治療し、床材・ケージ・止まり木など飼育環境を同時に処理（多くのダニは環境中に潜む）。",
+        ]
     if klass == "parasitic":
         return [
             f"{name_ja}は糞便PCR/直接鏡検/フローテーション法で原因虫種を特定してから駆虫薬を選択する。",

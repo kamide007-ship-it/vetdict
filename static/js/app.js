@@ -1755,8 +1755,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:601,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:578,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:602,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:579,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1780,8 +1780,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6457,
     species:21,
-    drugs:660,
-    symptoms:97,
+    drugs:661,
+    symptoms:98,
     protocols:188
   };
   renderSpeciesGrid();
@@ -2183,7 +2183,7 @@ function resetSpeciesChat(species){
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている","目が濡れて顔をこする","耳が垂れて耳から臭い"],
     hamster:["下痢","元気がない","毛が抜ける","目が開かない","お腹が膨れている","食べない","頬袋が膨らんだまま戻らない","腰に黒いイボのようなもの"],
     guinea_pig:["食べない","鼻水","足を引きずる","脱毛","下痢","くしゃみ","関節が腫れる"],
-    ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない","陰部が腫れている","足を伸ばして硬直する","口を前足で掻いてよだれ","便に血が混じる","お腹を触るとしこりがある"],
+    ferret:["ぐったり","脱毛","下痢","後ろ足がふらつく","嘔吐","食べない","陰部が腫れている","足を伸ばして硬直する","口を前足で掻いてよだれ","便に血が混じる","黒い下痢が出る","お腹を触るとしこりがある"],
     hedgehog:["針が抜ける","フケ","ふらつく","食べない","目が出ている","体重が減った"],
     bird:["羽を膨らませている","食べない","下痢","鼻水","羽が抜ける","くしゃみ","自分で羽を抜く","脚に白いかさぶた","急に飛べなくなって翼が下がっている","発情が続いて産卵が止まらない","お尻から卵が出かかっている"],
     parakeet:["食べない","膨らんでいる","呼吸のたびに音がする","吐き戻しが増えた","そのうが膨らんでいる","お尻でいきんでいる","くちばしが変形している","鼻の色が茶色くなった"],
