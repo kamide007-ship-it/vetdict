@@ -1275,12 +1275,14 @@ const _CALC_SEARCH_TABS=[
   [/体表面積|(^|[^a-z])bsa([^a-z]|$)/,"bsa"],
   [/(^|[^a-z])iris([^a-z]|$)|腎ステージ|ckdステージ|(^|[^a-z])sdma([^a-z]|$)/,"iris"],
   [/(^|[^a-z])mgcs([^a-z]|$)|昏睡スケール|グラスゴー|glasgow/,"mgcs"],
+  // 年齢換算は「換算」(→conv) より先に照合する
+  [/年齢換算|犬年齢|犬の年齢|ヒト年齢|人間の年齢|人間でいう|dog ?age|human ?age/,"dogage"],
   [/換算|(^|[^a-z])mmol|conversion/,"conv"],
   [/計算|用量|投与量|calculator/,"dose"],
 ];
 function _calcTabLabel(tabId){
   const ja=currentLang==="ja";
-  return({dose:ja?"用量":"Dose",cri:"CRI",fluid:ja?"輸液":"Fluids",energy:ja?"カロリー":"Calories",choco:ja?"チョコ中毒":"Chocolate",transfusion:ja?"輸血":"Transfusion",bsa:"BSA",iris:"IRIS",mgcs:"MGCS",conv:ja?"単位換算":"Convert"})[tabId]||tabId;
+  return({dose:ja?"用量":"Dose",cri:"CRI",fluid:ja?"輸液":"Fluids",energy:ja?"カロリー":"Calories",choco:ja?"チョコ中毒":"Chocolate",transfusion:ja?"輸血":"Transfusion",bsa:"BSA",iris:"IRIS",mgcs:"MGCS",conv:ja?"単位換算":"Convert",dogage:ja?"犬年齢換算":"Dog age"})[tabId]||tabId;
 }
 function setupGlobalSearch(){
   const input=document.getElementById("globalSearch");
@@ -6677,6 +6679,49 @@ const VD_CALC={
     if(total<=14)return"guarded";
     return"good";
   },
+  /* 犬年齢→ヒト年齢の試算（2026-10 第63弾）。発達の節目（6か月=永久歯列、1歳・2歳=
+     性成熟/骨格成熟 — 発育タイプ別アンカー）と寿命の節目（シニア入り=推定寿命の最後の
+     25% — AAHA 2019 — をヒト63歳、平均寿命 — アニコム白書2023 — をヒト84歳 — 厚労省
+     簡易生命表）を区分線形で結ぶ。検証済み換算式ではない（Kraus 2013 / Inoue 2018 /
+     方向性の裏づけ: Mariner 2026 Science; Wang 2020; Horvath 2022）。
+     表示は Math.round（半数切り上げ）で原表（ゴールデン10.7歳・トイプードル15歳）を
+     全行再現する — 回帰テストが両表の全行を node 実測で固定している。 */
+  dogAgeProfiles:{
+    golden:{a6:10,a1:14,a2:22,senior:8,lifespan:10.7},
+    toy_poodle:{a6:12,a1:17,a2:25,senior:11,lifespan:15},
+  },
+  dogAgeProfile(breed,lifespan){
+    if(this.dogAgeProfiles[breed])return this.dogAgeProfiles[breed];
+    // custom_small / custom_large: 同じ手法（シニア=0.75×寿命を丸め→63歳、寿命→84歳）で
+    // 任意の平均寿命から試算。アンカーは発育タイプ（小型=トイプードル型/大型=ゴールデン型）
+    if(breed!=="custom_small"&&breed!=="custom_large")return null;
+    const L=lifespan;
+    if(!(L>=5&&L<=25))return null;
+    const base=breed==="custom_large"?this.dogAgeProfiles.golden:this.dogAgeProfiles.toy_poodle;
+    const senior=Math.round(0.75*L);
+    if(!(senior>2&&senior<L))return null;
+    return{a6:base.a6,a1:base.a1,a2:base.a2,senior,lifespan:L};
+  },
+  dogAgeHuman(age,p){
+    if(!p||!(age>=0))return null;
+    if(age<0.5)return(p.a6/0.5)*age;
+    if(age<1)return p.a6+(p.a1-p.a6)*(age-0.5)/0.5;
+    if(age<2)return p.a1+(p.a2-p.a1)*(age-1);
+    if(age<p.senior)return p.a2+(63-p.a2)*(age-2)/(p.senior-2);
+    return 63+(84-63)*(age-p.senior)/(p.lifespan-p.senior);
+  },
+  /* ライフステージ境界: <1 子犬期 / <2 若齢成犬 / 成犬期 / 中高齢期（成犬期とシニアの
+     中点から — ゴールデン5歳・トイプードル7歳で原表と一致）/ シニア期 / 長寿期（平均寿命
+     の切り上げから — 10.7→11歳、15→15歳で原表と一致） */
+  dogAgeStage(age,p){
+    if(!p||!(age>=0))return null;
+    if(age<1)return"puppy";
+    if(age<2)return"junior";
+    if(age<Math.round((2+p.senior)/2))return"adult";
+    if(age<p.senior)return"mature";
+    if(age<Math.ceil(p.lifespan-1e-9))return"senior";
+    return"geriatric";
+  },
 };/*VD_CALC_END*/
 
 /* 計算機の入力は全て非負の量（体重・用量・濃度・%・時間）— min="0" でもタイプでは
@@ -6712,6 +6757,7 @@ function renderCalculators(force){
     {id:"iris",label:"IRIS"},
     {id:"mgcs",label:"MGCS"},
     {id:"conv",label:ja?"単位換算":"Convert"},
+    {id:"dogage",label:ja?"犬年齢":"Dog age"},
   ];
   const row=(label,inner)=>`<div class="calc-row"><label>${label}</label>${inner}</div>`;
   const num=(id,ph,step)=>`<input type="number" id="${id}" inputmode="decimal" min="0" step="${step||"any"}" placeholder="${ph||""}"/>`;
@@ -6809,6 +6855,19 @@ function renderCalculators(force){
       <div class="calc-result" id="calcConvResult" aria-live="polite"></div>
       <div class="calc-note">${ja?"海外文献・海外測定機器の単位を日常単位へ相互換算（SI換算係数は標準値）。":"Convert between conventional and SI units used across references and analysers."}</div>
     </div>
+    <div class="calc-panel" data-calc-panel="dogage" hidden>
+      ${row(ja?"犬種・発育タイプ":"Breed / growth type",`<select id="calcDogAgeBreed">
+        <option value="golden">${ja?"ゴールデン・レトリーバー（平均寿命10.7歳）":"Golden Retriever (avg lifespan 10.7 y)"}</option>
+        <option value="toy_poodle">${ja?"トイプードル（平均寿命約15歳）":"Toy Poodle (avg lifespan ≈15 y)"}</option>
+        <option value="custom_small">${ja?"その他: 小型犬タイプ（寿命を入力）":"Other: small-breed type (enter lifespan)"}</option>
+        <option value="custom_large">${ja?"その他: 大型犬タイプ（寿命を入力）":"Other: large-breed type (enter lifespan)"}</option>
+      </select>`)}
+      <div class="calc-row" id="calcDogAgeLifespanRow" hidden><label>${ja?"平均寿命":"Average lifespan"}</label>${num("calcDogAgeLifespan",ja?"例: 13":"e.g. 13","0.1")}<span class="calc-unit">${ja?"歳":"y"}</span></div>
+      ${row(ja?"犬の年齢":"Dog's age",num("calcDogAgeYears",ja?"6か月=0.5":"6 mo = 0.5","0.1")+`<span class="calc-unit">${ja?"歳":"y"}</span>`)}
+      <div class="calc-result" id="calcDogAgeResult" aria-live="polite"></div>
+      <details class="calc-dogage-details"><summary>${ja?"換算表を表示":"Show full conversion table"}</summary><div id="calcDogAgeTable"></div></details>
+      <div class="calc-note">${ja?"発達の節目（永久歯列・性成熟・骨格成熟）と寿命の節目（シニア入り=推定寿命の最後の25%: AAHA 2019、平均寿命=ヒト84歳: 厚労省簡易生命表）を結んだ試算で、検証済みの換算式ではありません。平均寿命はアニコム「家庭どうぶつ白書2023」（ゴールデン10.7歳・トイプードル15.3歳）。小型犬は成長期が早く成犬期以降は緩やか、大型犬はその逆です（Kraus 2013 Am Nat; Inoue 2018 J Vet Med Sci）。エピジェネティック老化研究（Mariner 2026 Science; Wang 2020 Cell Systems; Horvath 2022 PNAS）は方向性の裏づけで、雄は雌よりやや老化が速いと報告されています — 本表は雌雄共通の目安です。1歳時点のヒト年齢には12〜20歳程度の幅があり、個体差（体重・体型・飼育環境）で前後します。":"An estimate linking developmental milestones (permanent dentition, sexual/skeletal maturity) to lifespan milestones (senior onset = last 25% of expected lifespan, AAHA 2019; average lifespan mapped to human 84 y, MHLW life tables) — not a validated conversion formula. Lifespans from the Anicom 2023 white paper (Golden 10.7 y, Toy Poodle 15.3 y). Small breeds mature faster then age more slowly; large breeds the reverse (Kraus 2013 Am Nat; Inoue 2018 J Vet Med Sci). Epigenetic-aging studies (Mariner 2026 Science; Wang 2020 Cell Systems; Horvath 2022 PNAS) support the direction — males age slightly faster; this is a unisex guide. The human equivalent at 1 y spans roughly 12-20 y and varies with weight, build and husbandry."}</div>
+    </div>
     <div class="calc-disclaimer">${ja?"⚠ 計算結果は入力値に依存します。投与前に必ず用量・濃度・計算を再確認してください。本ツールは獣医師の臨床判断を代替しません。":"⚠ Results depend on your inputs. Always re-verify dose, concentration and arithmetic before administration. This tool does not replace clinical judgement."}</div>`;
   body.dataset.rendered=currentLang;
   const w=document.getElementById("calcWeight");
@@ -6821,6 +6880,8 @@ function renderCalculators(force){
   if(prevVals.calcConvDir){const cd=document.getElementById("calcConvDir");if(cd)cd.value=prevVals.calcConvDir;}
   const fsSel=document.getElementById("calcFluidSpecies");
   if(fsSel&&fsSel.value==="other"){const r=document.getElementById("calcFluidCustomRow");if(r)r.hidden=false;}
+  const daSel=document.getElementById("calcDogAgeBreed");
+  if(daSel&&daSel.value.indexOf("custom")===0){const r=document.getElementById("calcDogAgeLifespanRow");if(r)r.hidden=false;}
   if(prevTab)_calcSwitchTab(prevTab,true);
   if(!body.dataset.wired){
     body.dataset.wired="1";
@@ -6839,6 +6900,7 @@ function renderCalculators(force){
     body.addEventListener("change",e=>{
       if(e.target.id==="calcEnergySpecies")_calcPopulateEnergyFactors();
       if(e.target.id==="calcFluidSpecies"){const r=document.getElementById("calcFluidCustomRow");if(r)r.hidden=e.target.value!=="other";}
+      if(e.target.id==="calcDogAgeBreed"){const r=document.getElementById("calcDogAgeLifespanRow");if(r)r.hidden=e.target.value.indexOf("custom")!==0;}
       if(e.target.id==="calcConvKey")_calcPopulateConvDir();
       _calcRecomputeAll();
     });
@@ -7079,6 +7141,53 @@ function _calcRecomputeAll(){
       const out=VD_CALC.convert(key,v,toSI);
       const dec=key==="temp"?1:(Math.abs(out)<1?3:(Math.abs(out)<10?2:1));
       cvRes.innerHTML=`${v} ${toSI?def[2]:def[3]} = <strong>${_calcFmt(out,dec)} ${toSI?def[3]:def[2]}</strong>`;
+    }
+  }
+  // 犬年齢換算（体重不要）— 2026-10 第63弾
+  const daRes=document.getElementById("calcDogAgeResult");
+  if(daRes){
+    const breed=(document.getElementById("calcDogAgeBreed")||{}).value||"golden";
+    const p=VD_CALC.dogAgeProfile(breed,_calcNum("calcDogAgeLifespan"));
+    const age=_calcNum("calcDogAgeYears");
+    const tblDiv=document.getElementById("calcDogAgeTable");
+    const STG={puppy:ja?"子犬期":"Puppy",junior:ja?"若齢成犬":"Junior adult",adult:ja?"成犬期":"Adult",mature:ja?"中高齢期":"Mature adult",senior:ja?"シニア期":"Senior",geriatric:ja?"長寿期":"Geriatric"};
+    const small=breed==="toy_poodle"||breed==="custom_small";
+    const geri=p?Math.ceil(p.lifespan-1e-9):0;
+    // 原表の「節目」列（永久歯列・性成熟/骨格・シニア入り・平均寿命）
+    const milestone=a=>{
+      if(!p)return"";
+      if(a===0.5)return ja?"永久歯列の完成":"Permanent dentition complete";
+      if(a===1)return small?(ja?"性成熟・骨格成熟":"Sexual & skeletal maturity"):(ja?"初回発情前後・骨格は成長中":"Around first estrus; skeleton still growing");
+      if(a===2)return small?(ja?"成熟期の入口":"Entering adulthood"):(ja?"骨格・性成熟の完了":"Skeletal & sexual maturation complete");
+      if(a===p.senior)return ja?"シニア入り（寿命の残り25%）":"Senior onset (last 25% of lifespan)";
+      if(a===geri)return p.lifespan===geri?(ja?"平均寿命":"Average lifespan"):(ja?`平均寿命（${p.lifespan}歳=84歳）`:`Average lifespan (${p.lifespan} y = human 84)`);
+      return"";
+    };
+    if(!p){
+      daRes.textContent=ja?"平均寿命（5〜25歳）を入力してください":"Enter an average lifespan (5-25 years)";
+      if(tblDiv)tblDiv.innerHTML="";
+    }else{
+      if(age===null){daRes.textContent=ja?"犬の年齢を入力してください（6か月=0.5）":"Enter the dog's age (6 months = 0.5)";}
+      else{
+        const h=Math.round(VD_CALC.dogAgeHuman(age,p));
+        const st=STG[VD_CALC.dogAgeStage(age,p)]||"";
+        let html=`${ja?"ヒト年齢（試算）":"Human age (estimate)"}: <strong>${h}${ja?"歳":" y"}</strong>（${st}）`;
+        const ms=milestone(age);
+        if(ms)html+=`<br/><span class="calc-hint">${ms}</span>`;
+        html+=`<br/><span class="calc-hint">${ja?`シニア入り ${p.senior}歳〜 ・ 平均寿命 ${p.lifespan}歳（ヒト84歳相当）`:`Senior from ${p.senior} y · avg lifespan ${p.lifespan} y (≈ human 84)`}</span>`;
+        daRes.innerHTML=html;
+      }
+      if(tblDiv){
+        // 6か月 + 1歳〜（ヒト年齢が100歳に達するまで — 原表と同じ打ち切り。上限25歳）
+        const ages=[0.5];
+        for(let a=1;a<=25;a++){ages.push(a);if(Math.round(VD_CALC.dogAgeHuman(a,p))>=100)break;}
+        tblDiv.innerHTML=`<table class="calc-dogage-table"><thead><tr><th>${ja?"犬の年齢":"Dog age"}</th><th>${ja?"ヒト年齢（試算）":"Human (est.)"}</th><th>${ja?"ライフステージ":"Life stage"}</th><th>${ja?"節目":"Milestone"}</th></tr></thead><tbody>${ages.map(a=>{
+          const hh=Math.round(VD_CALC.dogAgeHuman(a,p));
+          const ss=STG[VD_CALC.dogAgeStage(a,p)]||"";
+          const mm=milestone(a);
+          return`<tr${mm?' class="calc-dogage-mark"':""}><td>${a===0.5?(ja?"6か月":"6 mo"):ja?`${a}歳`:`${a} y`}</td><td><strong>${hh}${ja?"歳":""}</strong></td><td>${ss}</td><td>${mm}</td></tr>`;
+        }).join("")}</tbody></table>`;
+      }
     }
   }
 }

@@ -635,6 +635,14 @@ details.ecvn-adjunct-block[open]>summary.ecvn-adjunct-label{margin-bottom:4px}
 .calc-risk-seizure{background:#fee2e2;color:#991b1b}
 .calc-risk-lethal{background:#991b1b;color:#fff}
 .calc-choco-disease{display:block;margin-top:8px;background:none;border:none;color:var(--navy);font-size:.78rem;font-weight:600;cursor:pointer;text-decoration:underline dotted;padding:4px 0;min-height:32px}
+/* 犬年齢換算（第63弾）: 折りたたみの換算表。節目の行（.calc-dogage-mark）は原表と同じく淡色ハイライト */
+.calc-dogage-details{margin-top:10px}
+.calc-dogage-details summary{cursor:pointer;font-size:.8rem;font-weight:600;color:var(--navy);padding:4px 0;min-height:32px;display:flex;align-items:center}
+.calc-dogage-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:.78rem}
+.calc-dogage-table th{background:var(--navy);color:#fff;padding:5px 8px;text-align:left;font-weight:600;font-size:.74rem}
+.calc-dogage-table td{padding:4px 8px;border-bottom:1px solid var(--gray-200);line-height:1.4}
+.calc-dogage-table tbody tr:nth-child(even){background:var(--gray-50)}
+.calc-dogage-table tr.calc-dogage-mark td{background:#fdf6e3;font-weight:600}
 .drug-calc-open,.drug-cri-open{display:inline-block;margin-left:8px;background:#fff;border:1px solid var(--gray-300);border-radius:12px;padding:2px 8px;font-size:.72rem;font-weight:600;color:var(--navy);cursor:pointer;min-height:26px;vertical-align:middle}
 .drug-calc-open:hover,.drug-cri-open:hover{border-color:var(--navy);background:var(--gray-50)}
 .emergency-calc-link{display:inline-block;margin-bottom:12px;background:#fff;border:1px solid var(--navy);border-radius:var(--radius);padding:8px 14px;font-size:.82rem;font-weight:600;color:var(--navy);cursor:pointer;min-height:36px}
@@ -2116,6 +2124,9 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
   .drug-calc-open,.drug-cri-open{min-height:36px;padding:6px 12px;font-size:.8rem}
   .cross-nav-btn{min-height:44px}
   .treatment-drugs-ix-check{min-height:44px}
+  .calc-dogage-details summary{min-height:44px}
+  .calc-dogage-table{font-size:.74rem}
+  .calc-dogage-table th,.calc-dogage-table td{padding:4px 5px}
 }
 
 /* Filter dropdown panels: keep within viewport on small screens */
