@@ -96,7 +96,10 @@ class TestBatch79OticProducts:
         assert "7 days" in osurnia["species_info"]["dog"]["dosage"]
         assert osurnia["species_info"]["cat"]["safe"] is False
         otomax = self._get("gentamicin_betamethasone_clotrimazole_otic")
-        assert "4 drops" in otomax["species_info"]["dog"]["dosage"] and "8 drops" in otomax["species_info"]["dog"]["dosage"]
+        assert (
+            "4 drops" in otomax["species_info"]["dog"]["dosage"]
+            and "8 drops" in otomax["species_info"]["dog"]["dosage"]
+        )
         surolan = self._get("polymyxin_miconazole_prednisolone_otic")
         assert surolan["species_info"]["cat"]["safe"] is True and "5 drops" in surolan["species_info"]["cat"]["dosage"]
         for i in (
@@ -143,10 +146,10 @@ class TestBatch79OticProducts:
 class TestDeepLinks:
     def test_router_and_share_button_wired(self):
         assert "function _parseDeepLinkHash" in APP_JS and "function _handleDeepLinkHash" in APP_JS
-        assert re.search(r'else if\(hash\)_handleDeepLinkHash\(hash\)', APP_JS)
+        assert re.search(r"else if\(hash\)_handleDeepLinkHash\(hash\)", APP_JS)
         assert "else _handleDeepLinkHash(hash);" in APP_JS
         assert APP_JS.count('class="cross-nav-btn share-link-btn"') == 1
-        assert "share-link-btn\" data-kind=\"drug\"" in APP_JS
+        assert 'share-link-btn" data-kind="drug"' in APP_JS
         assert 'closest(".share-link-btn")' in APP_JS and "navigator.share" in APP_JS
 
     def test_parse_deep_link_by_node(self):
