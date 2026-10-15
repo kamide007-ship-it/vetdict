@@ -678,6 +678,16 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "イボがあ": "skin_sarcoid",
     "いぼがあ": "skin_sarcoid",
     "皮膚にいぼ": "skin_sarcoid",
+    # -- 2026-10 第45回監査 --
+    "ご飯をこぼ": "dental_quidding",
+    "飼い葉をこぼ": "dental_quidding",
+    "食べるのが遅": "dental_quidding",
+    "皮膚にこぶ": "skin_sarcoid",
+    "こぶがたくさん": "skin_sarcoid",
+    "こぶができ": "skin_sarcoid",
+    # 局所の腫脹+熱感（全身性発熱ではない）— 四肢の蜂窩織炎/リンパ管炎の所見
+    "腫れて熱を持": ("limb_filling", "limb_tendon_heat"),
+    "熱を持って腫れ": ("limb_filling", "limb_tendon_heat"),
 }
 
 # Lazily built equine finding keys and symptom list

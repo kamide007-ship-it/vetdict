@@ -362,6 +362,9 @@ def migrate_json_enrichments(conn) -> int:
         # Generic deworming / small-mammal bedding boilerplate (第63弾)
         "同定された寄生虫に応じた適切な駆虫薬が必要である",
         "床材（杉材は禁忌、紙系/ペレット系へ）",
+        # EN generic antiparasitic boilerplate (fenbendazole/praziquantel/toltrazuril
+        # listed for mites and dermatophytes — 第70弾)
+        "Anti-parasitic therapy appropriate to the parasite (fenbendazole",
     )
 
     def _guard_treatment(new_val: str | None, existing: str | None) -> str | None:

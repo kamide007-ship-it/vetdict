@@ -870,6 +870,10 @@ _TEMPLATE_MARKERS = (
     # Small-mammal bedding allergy template（床材・杉材）mis-stamped on
     # dog/cat/ferret flea allergy dermatitis.
     "床材（杉材は禁忌、紙系/ペレット系へ）",
+    # EN generic antiparasitic boilerplate (fenbendazole/praziquantel/toltrazuril
+    # listed for mites and dermatophytes — 第70弾)
+    "Anti-parasitic therapy appropriate to the parasite (fenbendazole",
+    "Species-appropriate antiparasitic (ivermectin, fenbendazole, praziquantel, or selamectin depending on parasite type)",
 )
 
 
