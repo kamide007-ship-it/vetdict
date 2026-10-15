@@ -1757,8 +1757,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:600,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:577,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:602,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:579,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1766,7 +1766,7 @@ function setDefaultStats(){
     {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:225,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
     {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:199,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
     {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:223,drugs:64,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:76,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:77,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
     {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:154,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
     {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:485,drugs:244,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
     {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:411,drugs:244,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
@@ -1782,7 +1782,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6457,
     species:21,
-    drugs:659,
+    drugs:661,
     symptoms:98,
     protocols:188
   };
@@ -8767,14 +8767,36 @@ function highlightMatch(text,query){
       const scrollH=document.documentElement.scrollHeight-window.innerHeight;
       const pct=scrollH>0?Math.min(window.scrollY/scrollH,1):0;
       btn.classList.toggle("visible",window.scrollY>400);
+      /* 長い一覧・結果の途中では「現在タブの検索欄へ」、検索欄より上では「ページ先頭へ」
+         （2026-10 第70弾 — スマホで数百件の一覧から検索欄まで戻るのが負担だった） */
+      const lt=_scrollTopLandingTarget();
+      btn.setAttribute("aria-label",lt?(currentLang==="ja"?"検索欄へ戻る":"Back to search"):(currentLang==="ja"?"ページの先頭へ":"Scroll to top"));
+      btn.classList.toggle("to-search",!!lt);
+      /* Cookie同意バナー表示中はバナーの上に退避（タップが遮られないように）。
+         position:fixed 要素は offsetParent が常に null のため display と rect で判定 */
+      const banner=document.getElementById("cookieConsent");
+      const bRect=banner&&!banner.hidden&&getComputedStyle(banner).display!=="none"?banner.getBoundingClientRect():null;
+      if(bRect&&bRect.height>0&&bRect.top<window.innerHeight)btn.style.setProperty("bottom",Math.round(window.innerHeight-bRect.top+12)+"px","important");
+      else btn.style.removeProperty("bottom");
       if(arc)arc.style.strokeDashoffset=circ*(1-pct);
       const rp=document.getElementById("readingProgress");
       if(rp)rp.style.width=(pct*100)+"%";
       ticking=false;
     });ticking=true;}
   },{passive:true});
-  btn.addEventListener("click",()=>{haptic(10);window.scrollTo({top:0,behavior:"smooth"});});
+  btn.addEventListener("click",()=>{
+    haptic(10);
+    const lt=_scrollTopLandingTarget();
+    if(lt){scrollToAnchor(lt);trackEvent("jump_to_search",{view:currentView});}
+    else window.scrollTo({top:0,behavior:"smooth"});
+  });
 })();
+/* 現在タブの着地点（検索欄等）が画面上方に十分離れていれば返す（それ以外は null） */
+function _scrollTopLandingTarget(){
+  const t=_navLandingTarget(currentView);
+  if(!t||t.offsetParent===null)return null;
+  return t.getBoundingClientRect().top< -60?t:null;
+}
 
 /* --- Fade-in sections on scroll --- */
 (function(){

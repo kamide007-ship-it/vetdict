@@ -490,7 +490,14 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "squealing_when_urinating": ["straining_to_urinate", "vocalization_changes", "pain"],
     # 鳥の緑色便（ビリベルジン尿）— 種ごとの便ID表記ゆれを吸収し、
     # 該当IDを持たない哺乳類等では diarrhea にフォールバック
-    "diarrhea_green": ["yellow_green_droppings", "diarrhea_yellow_green", "green_droppings", "diarrhea"],
+    "diarrhea_green": [
+        "yellow_green_droppings",
+        "diarrhea_yellow_green",
+        "green_droppings",
+        "green_diarrhea",
+        "green_mucoid_stool",
+        "diarrhea",
+    ],
     # 「皮膚に白いもの」— 両生類は白斑/綿状増殖、魚は白点に解決
     "white_patches_skin": ["white_patches", "cotton_like_growth", "white_spots"],
     # Bird-specific
@@ -788,6 +795,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "iris_color_change": ["uveitis_signs", "eye_redness", "cloudy_eye", "cloudy_eyes", "eye_discharge"],
     # 羽毛異常: parrot は feather_abnormalities も保有。
     "abnormal_feathers": ["feather_abnormalities", "feather_discoloration", "feather_loss", "poor_feather_quality"],
+    # 口腔内の白い膜（カンジダ/トリコモナス/ビタミンA欠乏 — 2026-10 第45回）
+    "white_patches_in_mouth": ["oral_plaques", "oral_lesions", "mouth_lesions", "stomatitis", "oral_irritation"],
 }
 
 # Backwards-compat alias (some older imports use the private name).

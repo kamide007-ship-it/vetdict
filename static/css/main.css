@@ -2182,3 +2182,7 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
 @media(max-width:600px){.breadcrumb-home{display:inline-flex;align-items:center;min-height:36px;padding:0 8px;margin-left:-8px}}
 /* 2026-10 第69弾: チャットの追加質問チップ（26px）・よくみられる疾患チップ（24px）のタップ目標 */
 @media(max-width:600px){.chat-followup-btn,.common-disease-tag{min-height:36px;display:inline-flex;align-items:center}}
+
+/* 検索欄へ戻るモード（2026-10 第70弾）: 矢印を緑にして「ページ先頭」と区別 */
+.scroll-top.to-search .scroll-arrow{color:var(--green)}
+@media(max-width:600px){.scroll-top{width:44px;height:44px}}
