@@ -102,6 +102,7 @@ from api.drug_batch_75 import DRUGS_BATCH_75
 from api.drug_batch_76 import DRUGS_BATCH_76
 from api.drug_batch_77 import DRUGS_BATCH_77
 from api.drug_batch_78 import DRUGS_BATCH_78
+from api.drug_batch_79 import DRUGS_BATCH_79
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11050,6 +11051,12 @@ for _drug78 in DRUGS_BATCH_78:
         DRUGS.append(_drug78)
         _drug_index[_drug78["id"]] = _drug78
 
+# Batch 79 (2026-10 第71弾: 点耳薬5製品 — 外耳炎の治療文が参照する製品が辞書に無かった)
+for _drug79 in DRUGS_BATCH_79:
+    if _drug79["id"] not in _drug_index:
+        DRUGS.append(_drug79)
+        _drug_index[_drug79["id"]] = _drug79
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11974,7 +11981,11 @@ def _build_drug_keyword_index() -> None:
             stem = re.split(r"[（(]", k)[0].strip()
             if stem and stem != k:
                 variants.append(stem)
-            for part in re.split(r"[／/・]", stem or k):
+            # Multi-ingredient products (otic combos) opt out of per-component
+            # stems: "ベタメタゾン"/"モメタゾン" mentioned anywhere must not chip
+            # an ear-drop product just because no single-agent entry exists.
+            _parts = [] if d.get("no_component_index") else re.split(r"[／/・]", stem or k)
+            for part in _parts:
                 part = part.strip()
                 if part and part != k and part not in variants:
                     variants.append(part)

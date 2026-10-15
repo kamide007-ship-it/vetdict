@@ -12629,6 +12629,9 @@ _SYNDROME_PAIR_BOOSTS: list[tuple[frozenset, tuple[str, ...], float]] = [
     # 感染症ガイドライン）— 稀な地域限定エントリ（類鼻疽）が3所見カバレッジで
     # 上回っていた
     (frozenset({"gen_fever", "resp_cough"}), ("Equine Influenza", "Equine Herpesvirus Type 4 (EHV-4)"), 1.6),
+    # 咳嗽＋運動不耐性（パフォーマンス低下）は軽度馬喘息（IAD）の定義的ペア —
+    # Couetil 2016 ACVIM consensus。咽頭リンパ濾胞過形成・EIPHが上回っていた（第46回）
+    (frozenset({"resp_cough", "resp_exercise_intolerance"}), ("Equine Asthma (IAD/RAO)",), 1.5),
 ]
 
 
