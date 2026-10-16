@@ -72,6 +72,7 @@ class Disease:
     clinical_signs_detail_en: str = ""  # English clinical signs
     prevention_en: str = ""  # English prevention
     prognosis_en: str = ""  # English prognosis
+    treatment_protocol_en: str = ""  # English treatment (JSON curated text or verified EN mirror)
 
     def reference_links(self) -> list[dict[str, str]]:
         """外部参照リンクを生成(症例写真・イラスト付きページへ)"""
@@ -12276,6 +12277,17 @@ def _enrich_horse_diseases() -> None:
                     if val:
                         setattr(disease, dc_field, val)
                         break
+            # English treatment: curated JSON text only (category templates and
+            # Japanese-in-English fields are skipped — 2026-10 第71弾)
+            en_tx = enrichment.get("treatment") or ""
+            if en_tx and not disease.treatment_protocol_en:
+                try:
+                    from api.species.en_treatment_translations import is_mostly_japanese
+                    from api.species.helpers import _TEMPLATE_MARKERS
+                except ImportError:  # pragma: no cover
+                    is_mostly_japanese, _TEMPLATE_MARKERS = (lambda t: False), ()
+                if not is_mostly_japanese(en_tx) and not any(m in en_tx for m in _TEMPLATE_MARKERS):
+                    disease.treatment_protocol_en = en_tx
             if not disease.general_management:
                 val = enrichment.get("treatment_ja") or enrichment.get("treatment")
                 if val:

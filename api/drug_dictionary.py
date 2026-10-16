@@ -103,6 +103,7 @@ from api.drug_batch_76 import DRUGS_BATCH_76
 from api.drug_batch_77 import DRUGS_BATCH_77
 from api.drug_batch_78 import DRUGS_BATCH_78
 from api.drug_batch_79 import DRUGS_BATCH_79
+from api.drug_batch_80 import DRUGS_BATCH_80
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11056,6 +11057,13 @@ for _drug79 in DRUGS_BATCH_79:
     if _drug79["id"] not in _drug_index:
         DRUGS.append(_drug79)
         _drug_index[_drug79["id"]] = _drug79
+
+# Batch 80 (2026-10 第71弾・並行: アピキサバン（CURATIVEコンセンサスのDOAC、リバーロ
+#  キサバンの姉妹薬）・クレデリオプラス（ロチラネル＋ミルベマイシン、EU承認））
+for _drug80 in DRUGS_BATCH_80:
+    if _drug80["id"] not in _drug_index:
+        DRUGS.append(_drug80)
+        _drug_index[_drug80["id"]] = _drug80
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

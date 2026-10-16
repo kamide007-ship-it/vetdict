@@ -797,6 +797,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "abnormal_feathers": ["feather_abnormalities", "feather_discoloration", "feather_loss", "poor_feather_quality"],
     # 口腔内の白い膜（カンジダ/トリコモナス/ビタミンA欠乏 — 2026-10 第45回）
     "white_patches_in_mouth": ["oral_plaques", "oral_lesions", "mouth_lesions", "stomatitis", "oral_irritation"],
+    # 2026-10 第71弾: 口腔腫脹・肛門周囲腫脹のフォールバック
+    "swollen_gums": ["gum_swelling", "gingivitis", "stomatitis", "mouth_lesions", "facial_swelling"],
+    "perianal_swelling": ["anal_sac_swelling", "perineal_swelling", "scooting", "swelling"],
     # 皮膚のさざ波様痙攣（猫知覚過敏症候群の定義的所見 — 2026-10 第46回）。非保有種は掻痒/振戦へ
     "skin_twitching": ["skin_rippling", "itching", "tremors"],
     # 片肢の麻痺（セキセイの腎腫瘍・精巣腫瘍による坐骨神経圧迫の古典像）。非保有種は虚弱/跛行へ

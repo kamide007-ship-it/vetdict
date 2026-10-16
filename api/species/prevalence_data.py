@@ -1419,7 +1419,8 @@ SPECIES_PREVALENCE = {
         "Dilated Cardiomyopathy": "uncommon",
         "Intestinal Adenocarcinoma": "uncommon",
         "Squamous Cell Carcinoma": "uncommon",
-        "Trixacarus caviae Mange": "uncommon",
+        "Trixacarus caviae Mange": "common",  # 2026-10 第71弾: モルモットで最頻の皮膚疾患の一つ（Quesenberry & Carpenter 4th）
+        "Trixacarus caviae (Sarcoptic Mange) - Severe": "common",
         "Aortic Calcification": "uncommon",
         "Cytomegalovirus Infection": "rare",
         "Lymphocytic Choriomeningitis (LCMV)": "rare",

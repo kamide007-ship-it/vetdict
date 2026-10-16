@@ -1628,7 +1628,11 @@ def gen_clinical_signs_ja(category: str, name_ja: str, species: str) -> str:
             f"早期心不全: 運動不耐性・咳（左心不全）・腹水（右心不全）。"
             f"進行性心不全: 呼吸困難・チアノーゼ・失神・夜間咳。"
             f"末期: 起座呼吸・肺水腫・心原性ショック。"
-            f"猫では FATE（大動脈血栓塞栓症）として急性後肢麻痺・冷感・疼痛・パルス消失で発症することがある。"
+            + (
+                "猫では FATE（大動脈血栓塞栓症）として急性後肢麻痺・冷感・疼痛・パルス消失で発症することがある。"
+                if str(species).lower() == "cat"
+                else ""
+            )
         )
     if category == "respiratory_other":
         return (
@@ -1827,7 +1831,11 @@ def gen_clinical_signs(category: str, name_en: str, species: str) -> str:
             f"Compensated (asymptomatic): a murmur may be the only finding on auscultation. "
             f"Early failure: exercise intolerance, cough (left-sided) or ascites (right-sided). "
             f"Advanced failure: dyspnoea, cyanosis, syncope and nocturnal cough. "
-            f"In cats, feline aortic thromboembolism may present acutely with hindlimb paresis, cold limbs, pain and absent pulses."
+            + (
+                " In cats, feline aortic thromboembolism may present acutely with hindlimb paresis, cold limbs, pain and absent pulses."
+                if str(species).lower() == "cat"
+                else ""
+            )
         )
     if category == "respiratory_other":
         return (

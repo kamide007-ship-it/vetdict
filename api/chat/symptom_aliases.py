@@ -525,7 +525,9 @@ SYMPTOM_ALIASES = {
     "腫瘍": "lumps_and_bumps",
     "ふくらみ": "lumps_and_bumps",
     "膨らんでる": "bloating",
-    "腫れてる": "bloating",
+    # 「腫れてる」は部位を特定しない腫脹 — 「腫れている」(swelling) と統一
+    # （旧: bloating。「リンパ節が腫れてる」で腹部膨満を雑音抽出していた — 2026-10 第71弾）
+    "腫れてる": "swelling",
     "お腹が張ってる": "bloating",
     "お腹が膨れて": "bloating",
     "お腹だけ膨れて": "bloating",
@@ -3506,6 +3508,31 @@ SYMPTOM_ALIASES = {
     "口の中に白い膜": "white_patches_in_mouth",
     "口の中に白いもの": "white_patches_in_mouth",
     "口の中が白く": "white_patches_in_mouth",
+    # --- 2026-10 第71弾（チャット精度第46回） ---
+    # 頸部の腫瘤（下顎/浅頸リンパ節腫大 — 犬猫の多中心型リンパ腫の古典的主訴）
+    "首にしこり": "swollen_lymph_nodes",
+    "首のしこり": "swollen_lymph_nodes",
+    "首に大きなしこり": "swollen_lymph_nodes",
+    "首のリンパ節": "swollen_lymph_nodes",
+    # 眼の白濁（白内障/核硬化の飼い主表現 — 「っぽい」形が抽出ゼロだった）
+    "目が白っぽ": "cloudy_eyes",
+    "目の色が白っぽ": "cloudy_eyes",
+    # 口腔の腫脹（爬虫類マウスロット・猫口内炎）
+    "口が腫れ": "stomatitis",
+    # 肛門周囲の腫脹（肛門嚢膿瘍・会陰ヘルニア）
+    "お尻のまわりが腫れ": "perianal_swelling",
+    "お尻の周りが腫れ": "perianal_swelling",
+    "おしりのまわりが腫れ": "perianal_swelling",
+    "肛門の周りが腫れ": "perianal_swelling",
+    "肛門のわきが腫れ": "perianal_swelling",
+    # 粘膜蒼白の強調形（血管肉腫破裂・IMHA）
+    "歯茎が真っ白": "pale_gums",
+    "歯ぐきが真っ白": "pale_gums",
+    "歯茎の色が白": "pale_gums",
+    "歯ぐきの色が白": "pale_gums",
+    # 疼痛性啼鳴（猫ATEの悲鳴）
+    "悲鳴をあげ": "vocalization_changes",
+    "悲鳴を上げ": "vocalization_changes",
     # 2026-10 第46回（第71弾）スイープ
     "口がくさ": "bad_breath",
     "口がにおう": "bad_breath",

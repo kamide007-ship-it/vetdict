@@ -1060,6 +1060,10 @@ def extract_symptoms_from_text(text: str) -> list:
         # "瞳が開いたまま/目の色が左右で違う" resolves to dilated_pupils (feline
         # vocabulary); the closest legacy dog signals are the visual-deficit IDs.
         "dilated_pupils": ["vision_loss", "cloudiness_in_eyes"],
+        # 2026-10 第71弾: 肛門周囲腫脹（肛門嚢膿瘍）は犬では肛門嚢疾患の徴候、
+        # 口腔腫脹は歯科・口腔疾患の徴候として最も近いレガシーIDへ。
+        "perianal_swelling": ["scooting"],
+        "stomatitis": ["bad_breath", "excessive_drooling"],
     }
 
     # 単一IDでは臨床的意味が落ちる主訴の「併記抽出」: 祈りのポーズ

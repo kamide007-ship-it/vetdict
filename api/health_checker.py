@@ -4990,6 +4990,12 @@ _SYMPTOM_SPECIFICITY = {
 # Signature combinations that strongly indicate specific diseases.
 # Each cluster: (required_symptoms_frozenset, disease_id, boost_factor)
 _PATHOGNOMONIC_CLUSTERS = [
+    # Otitis externa: ear scratching + head shaking is the otitis complaint;
+    # aural hematoma is its complication and requires pinnal swelling
+    # (ear_swelling) to lead (Gotthelf, Small Animal Ear Diseases 2nd ed).
+    # 2026-10 第71弾: 包含エイリアスの雑音抽出（痒い→itching）を止めた結果、
+    # 3所見の耳血腫が5所見の外耳炎をカバレッジで上回るのを防ぐ。
+    (frozenset({"ear_scratching", "head_shaking"}), "otitis_externa", 1.3),
     # Acute allergic reaction: hives + facial swelling is the definitional
     # post-vaccine/insect-sting pair (Shmuel & Cortes, JVECC 2013).
     (frozenset({"hives", "facial_swelling"}), "acute_allergic_reaction", 1.8),
@@ -5722,6 +5728,20 @@ def _ground_missing_supplementary_fields(item: dict, species: str) -> None:
     """Fill empty clinical_signs / diagnosis sections from the item's own data."""
     if not isinstance(item, dict):
         return
+    # English treatment empty / Japanese-only: use the verified English mirror
+    # of the curated Japanese protocol when one exists (2026-10 第71弾).
+    try:
+        from api.species.en_treatment_translations import en_treatment_for, ja_treatment_upgrade, needs_en_treatment
+
+        _ja_tx = ja_treatment_upgrade(species, item.get("name") or "", item.get("treatment_ja"))
+        if _ja_tx:
+            item["treatment_ja"] = _ja_tx
+        if needs_en_treatment(item.get("treatment")):
+            _en_tx = en_treatment_for(species, item.get("name") or "")
+            if _en_tx:
+                item["treatment"] = _en_tx
+    except ImportError:  # pragma: no cover
+        pass
     # Templated "lists other diseases' signs" sections are replaced per language
     # from the record's own presenting signs (kept as-is when none resolve).
     if _is_cs_category_template(item.get("clinical_signs_ja")) or _is_cs_category_template(item.get("clinical_signs")):
@@ -5949,7 +5969,7 @@ def get_diseases():
                         "causes_ja": _ga(d, "etiology") or _ga(d, "risk_factors"),
                         "prevention": _ga(d, "prevention_en"),
                         "prevention_ja": _ga(d, "prevention"),
-                        "treatment": "",
+                        "treatment": _ga(d, "treatment_protocol_en"),
                         "treatment_ja": _ga(d, "treatment_protocol") or _ga(d, "general_management"),
                         "prognosis": _ga(d, "prognosis_en"),
                         "prognosis_ja": _ga(d, "prognosis"),

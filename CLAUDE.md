@@ -7246,3 +7246,43 @@ Playwright実測で原因は**ロード失敗後のフロントエンドのデ�
 
 ### テスト
 - `tests/test_round46_audit.py`（18件）
+
+## 2026-10セッション（第71弾・並行セッション分: 英語欄の日本語のみ治療97件の検証済み英訳 + 犬MMVDオーバーレイ是正 + 猫ATE文の異種混入撲滅 + 専門医紹介行の是正 + アピキサバン/クレデリオプラス公開 + チャット精度第46弾 + 疾患詳細のセクション・ジャンプ）
+
+### エラーチェック（結果: ベースライン健全）
+- ruff clean、フルテスト **4,837件合格**（ベースライン）→ **4,861件合格**（34 skip、カバレッジ82.80%）
+
+### 英語UIで日本語のまま表示されていた治療欄 97件を検証済み英訳に
+- 配信DBで英語の treatment 欄が日本語のレコード: 馬70・魚25・犬2（馬の中毒・消化器・腎・繁殖等）。英語側JSONは汎用テンプレートで正しく棄却されており、日本語プロトコルが英語欄にフォールバックしていた
+- さらに **低メモリ本番の馬経路は英語治療欄を常に空文字**で返していた（`health_checker` 馬分岐の `"treatment": ""`）→ 英語UIでは全馬疾患が日本語表示
+- `api/data/treatment_en_translations.json`（97件）: 既存の公開済み日本語プロトコルの忠実な英訳のみ（新規の臨床内容なし）。`scripts/template_elimination/apply_en_treatment_translations.py` が**数値トークン（用量・速度・期間・閾値）の多重集合一致**を検証（日本語助数詞の「週1回→weekly」等のみ語で許容、余分な数値は不可）、手動照合1件は `MANUALLY_REVIEWED` に明記。ECVNスポンサーブロックは訳文から除去（配信時に言語別に再注入）
+- 適用: 実行時（`_ground_missing_supplementary_fields`）・馬dataclassに `treatment_protocol_en`（JSONのキュレート英語を採用、テンプレート/日本語は除外）・配信DBビルドの最終sweep。**8件は詳細な日本語プロトコルが英語欄にしかなく日本語欄が短い/汎用文だった**ため、`ja_entries` で日本語欄も詳細版に置換（犬フェーディングパピー症候群・新生子死亡、馬内部寄生虫・肝疾患・肝性脳症 等）
+- 配信DB・実行時とも、英語治療欄が日本語のレコード **97→0**、馬の英語治療欄の空欄 **0**
+- 注: 用量を含む英訳のため、獣医師のPRレビュー対象として明記
+
+### 犬MMVD（犬の後天性心疾患の75%超）のオーバーレイ是正
+- JSONの「Mitral Valve Disease (MMVD)」が日本語9フィールド（治療・予後・病因・臨床徴候・診断等）すべて同一の汎用段落「…系統的アプローチにより…」で、配信DBのキュレート済みACVIM 2019治療を上書きしていた → `fix_mmvd_overlay.py` でモジュールのキュレート文（EPIC/QUEST/ACVIM 2019）を採用、臨床徴候・診断・伝播の日本語は疾患固有文を新規収載
+
+### 猫ATEの一文の異種混入撲滅（302フィールド）
+- 循環器カテゴリ生成器が全種の臨床徴候に「猫では FATE（大動脈血栓塞栓症）として…」/"In cats, feline aortic thromboembolism…" を付けており、馬25件を含む非猫の心疾患に混入 → 生成器を猫限定化、JSON 302フィールドから除去、実行時 `strip_cross_species_text` にマーカー追加（`clinical_signs_ja` も対象に）
+
+### 専門医紹介行の是正（957箇所）
+- 汎用ワークアップ・テンプレートが全種に「{種}専門医（ACZMまたはAVMAエキゾチック分科会等）に紹介」— ACZMは動物園動物医学で犬猫馬には誤り、「AVMAエキゾチック分科会」は実在しない → `fix_specialist_referral_line.py` で種別の正しい専門医制度（犬猫: ACVIM/ECVIM・ACVD・ACVS、馬: ACVIM大動物・ECEIM、鳥: ABVP Avian・ECZM Avian、爬虫類両生類: ABVP Reptile & Amphibian・ECZM Herpetology、小型哺乳類: ABVP ECM・ECZM Small Mammal）に置換。生成器も同関数を使用
+
+### 新規薬品2剤（当初 `drug_batch_79.py` — mainが同番号を先取したため **batch_80 に改番**、テストは `tests/test_round46_parallel_audit.py`）
+- **アピキサバン（エリキュース）**: CURATIVEコンセンサス（Blais 2019）のDOAC。犬 0.5 mg/kg PO q12h・猫 0.625 mg/頭 q12h（ATE再発予防の代替、第一選択はクロピドグレル）。リバーロキサバン/ヘパリン/LMWH併用=major、クロピドグレル=moderate をレジストリ登録。猫ATEの治療文に追記
+- **クレデリオプラス（ロチラネル＋ミルベマイシンオキシム、EU 2021）**: 犬 月1回 20-41 / 0.75-1.53 mg/kg、8週齢・1.4 kg以上、フィラリア陰性確認、猫 safe:False、国内未承認。犬肺虫症の治療文に追記。単剤「クレデリオ」は従来どおりロチラネルに解決
+
+### 診断チャット精度 第46弾（72症例スイープ 12 MISS → 実用症例全合格）
+- 誤マッピング是正: 「腫れてる」→bloating を swelling に（「リンパ節が腫れてる」で腹部膨満を雑音抽出していた）
+- エイリアス: 首/顎の下のしこり→swollen_lymph_nodes（リンパ腫）、目が白っぽ→cloudy_eyes、口が腫れ→stomatitis、お尻/肛門の周りが腫れ→perianal_swelling（肛門嚢 rank1）、歯茎が真っ白→pale_gums、鳴き叫/悲鳴→vocalization_changes
+- クラスタ/ペア: 犬 {耳掻き＋頭振り}→外耳炎×1.3（耳血腫は耳介腫脹がある時のみ優先）、猫 {筋力低下＋啼鳴}→ATE、モルモット {掻痒＋痙攣}→Trixacarus疥癬、Trixacarus tier uncommon→common
+- 注: `-k` で絞ったテスト実行は既存の順序依存で50件失敗する（変更前ツリーでも同じ）— フルスイートでは合格
+
+### スマホUX: 疾患詳細のセクション・ジャンプバー
+- 展開した疾患（疾患DB）の先頭に「💊 治療 / 🔬 診断 / 🩺 臨床徴候 / 📈 予後」チップ。スマホでは治療欄が説明→病態→病因の数画面下にあったため、1タップで sticky ヘッダー補正済みの位置へ着地（iPhone 13 エミュレーションで実測: ヘッダー直下に着地、パネルは開いたまま、JSエラー0）
+- ServiceWorker: `CACHE_NAME` v181 → v182 → **v183**（main 第71弾と同版衝突のためマージで改番）、pendingStats drugs **668**（マージ後実測）
+
+### テスト
+- `tests/test_round46_audit.py`（24件）
+- 再現: `fix_specialist_referral_line.py --apply` → `fix_mmvd_overlay.py --apply` → `migrate_to_sqlite.py`
