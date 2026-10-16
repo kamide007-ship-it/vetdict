@@ -1381,7 +1381,10 @@ function setupGlobalSearch(){
       if(globalSearchTypeFilter!=="disease"){
         if(!drugsLoaded||!allDrugs.length){
           drugsPending=true;
-          if(!_drugLoadKicked){_drugLoadKicked=true;if(!drugsLoaded)loadDrugDictionary();}
+          /* ロード失敗後も次のキー入力で再キックする（in-flight中は loadDrugDictionary が
+             no-op なので重複フェッチにはならない）。旧 _drugLoadKicked の一回限りガードは
+             失敗後に「薬品辞書を読み込み中…」のまま永久に固まるバグの原因だった。 */
+          if(!drugsLoaded)loadDrugDictionary();
           _rerunWhenDrugsLoaded(reqId,0);
         }else{
           allDrugs.forEach(d=>{
@@ -6396,7 +6399,9 @@ function loadDrugDictionary(){
   _drugLoadInFlight=true;
   const list=document.getElementById("drugList");
   list.innerHTML='<div style="padding:12px"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card" style="height:70px"></div><div class="skeleton skeleton-card" style="height:90px"></div><div class="skeleton skeleton-card" style="height:60px"></div></div>';
-  Promise.all([fetchWithTimeout("/api/drugs").then(r=>r.json()),fetchWithTimeout("/api/drug-categories").then(r=>r.json())])
+  /* 45s timeout: Render free-plan cold starts routinely exceed the 10s default,
+     and an aborted first load left the drug tab dead ("デポメドロール"等が0件のまま). */
+  Promise.all([fetchWithTimeout("/api/drugs",{},45000).then(r=>r.json()),fetchWithTimeout("/api/drug-categories",{},45000).then(r=>r.json())])
   .then(([drugsData,catData])=>{
     allDrugs=drugsData.drugs||[];drugCategories=drugsData.categories||{};
     pendingStats.drugs=allDrugs.length;animateCount(document.getElementById("statDrugs"),allDrugs.length,800);
@@ -7441,6 +7446,13 @@ function _drugMatchesSearch(d,q){
 function renderDrugList(){
   const list=document.getElementById("drugList");
   if(!list)return;
+  if(!drugsLoaded){
+    /* 辞書未着（初回ロード中/ロード失敗後）に検索入力で呼ばれても、スケルトンや
+       エラー+再試行UIを「該当する薬品がありません」で上書きしない。ロード失敗後は
+       入力そのものが再読込のトリガーになる（in-flight中は loadDrugDictionary が no-op）。 */
+    if(!_drugLoadInFlight)loadDrugDictionary();
+    return;
+  }
   const searchEl=document.getElementById("drugSearch");
   const catEl=document.getElementById("drugCategoryFilter");
   const spEl=document.getElementById("drugSpeciesFilter");

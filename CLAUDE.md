@@ -7176,3 +7176,37 @@ Playwright（iPhone 13 エミュレーション・実タップ）で全下部ナ
   EN完全翻訳・オムニボックス着地・pageerror 0
 - ServiceWorker: `CACHE_NAME` → **v181**（並行セッション群と2度のv版数衝突（v179/v180）のためマージ時に再改番）
 - データ変更なし（配信DB・検索インデックスは不変 — 全てフロントエンド+テスト）
+
+## 2026-10セッション（第71弾: 「デポメドロールと入れて反応しない」の根本修正 — 薬品辞書ロード失敗後のデッドエンド解消）
+
+### 背景（利用者報告「デポメドロールと入れて反応しない」）
+データは健全だった（methylprednisolone の name_ja「メチルプレドニゾロン（デポメドロール/メドロール）」、
+バックエンド search_drugs / resolve_drug_reference / find_drugs_in_text 全て解決、本番ペイロードにも存在）。
+Playwright実測で原因は**ロード失敗後のフロントエンドのデッドエンド**と特定:
+1. `/api/drugs` の初回フェッチが失敗（Renderコールドスタートが `fetchWithTimeout` 既定10秒を超過、
+   または回線断）→ エラー+再試行UIは出るが、**検索欄に入力すると renderDrugList が空の allDrugs で
+   「該当する薬品がありません」を描画し再試行UIを上書き** — 以後何を打っても反応しない
+2. オムニボックスは一回限りの `_drugLoadKicked` ガードのため、失敗後は
+   「薬品辞書を読み込み中…」のまま永久に固まる
+
+### 修正（static/js/app.js）
+- **renderDrugList の自己修復ガード**: `!drugsLoaded` なら早期return（スケルトン/エラーUIを上書きしない）
+  + in-flight でなければ `loadDrugDictionary()` を再キック — **入力そのものが再読込のトリガー**になる
+- **コールドスタート耐性**: `/api/drugs`・`/api/drug-categories` のフェッチを 45秒タイムアウトに
+  （既定10秒はRenderフリープランの起床時間に不足）
+- **オムニボックスの再キック**: 検索サイトの `_drugLoadKicked` 一回限りガードを撤去し
+  `if(!drugsLoaded)loadDrugDictionary()` に（重複フェッチは `_drugLoadInFlight` が防止）。
+  アイドルプリフェッチの一回限りウォームは維持
+- 検証（Playwright・ローカル実アプリ・390px）: 初回 `/api/drugs` を強制失敗 → 薬品タブで
+  「デポメドロール」入力 → 自動再読込 → デポメドロールのカード表示を確認。オムニボックスも
+  失敗後の再入力でヒット（従来は読み込み中のまま固まった）
+
+### 回帰テスト（tests/test_drug_load_resilience.py 新規、6件）
+- データ: デポメドロール検索/リゾルバ/テキストマッチャーの解決を固定（ひらがな・英語ブランド含む）
+- 配線: renderDrugList の self-heal ガード（フィルタ処理より前・in-flight 判定付き）、
+  45秒タイムアウト、オムニボックスの非一回限りキック、SW版数 ≥ v182
+
+### テスト・CI
+- 新規6件 + app.js参照の全テストファイル **1,149件合格**（初回の served-DB 2失敗はローカルDBの
+  stale による既知アーティファクト — クリーンビルドで合格）、ruff clean、node --check 通過
+- ServiceWorker: `CACHE_NAME` v181 → **v182**。データ変更なし（配信DB・検索インデックス不変）
