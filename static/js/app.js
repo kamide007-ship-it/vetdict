@@ -1056,6 +1056,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     _boot("hashRouting",()=>{
     const hash=location.hash.replace("#","");
     if(hash&&["checker","database","chat","drugs","anesthesia","emergency"].includes(hash))switchView(hash,{silent:true});
+    else if(hash)_handleDeepLinkHash(hash);
     });
     // Handle ?species= query param (from sitemap/SEO links)
     _boot("speciesParam",()=>{
@@ -1757,8 +1758,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:604,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:581,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:609,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:586,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1782,7 +1783,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6457,
     species:21,
-    drugs:663,
+    drugs:668,
     symptoms:98,
     protocols:188
   };
@@ -4959,7 +4960,7 @@ function renderDiseaseDb(){
         ${recoveryWeeks?`<dt>${currentLang==="ja"?"回復期間":"Recovery Timeline"}</dt><dd>${currentLang==="ja"?`${recoveryWeeks}週間`:`${recoveryWeeks} weeks`}</dd>`:""}
         ${successRate!==undefined?`<dt>${currentLang==="ja"?"成功率":"Success Rate"}</dt><dd>${(successRate*100).toFixed(1)}%</dd>`:""}
         ${mortalityRate!==undefined?`<dt>${currentLang==="ja"?"死亡率":"Mortality Rate"}</dt><dd>${(mortalityRate*100).toFixed(1)}%</dd>`:""}
-      </dl>${renderOrthopedicReferences(d)}<div class="anes-considerations-slot" data-anes="1" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}"></div><div class="related-diseases-section" data-related="1" data-disease="${escapeHtml(d.name||"")}"></div><div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a>${(()=>{const proto=_emergencyProtoForDisease(d,currentSpecies||"dog");return proto?`<a href="#emergency" class="cross-nav-btn emergency-nav-link" data-proto="${escapeHtml(proto)}" style="color:#dc2626;border-color:#fecaca">\u{1F6A8} ${currentLang==="ja"?"緊急対応プロトコル":"Emergency Protocol"}</a>`:"";})()}${(()=>{const hit=_calcTabForDisease(d,currentSpecies||"dog");return hit?`<a href="#drugs" class="cross-nav-btn calc-nav-link" data-calctab="${escapeHtml(hit.tab)}" style="color:#b45309;border-color:#fcd34d">\u{1F9EE} ${currentLang==="ja"?"臨床計算機":"Clinical calculator"}</a>`:"";})()}<button type="button" class="cross-nav-btn owner-handout-btn" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}">\u{1F5A8} ${currentLang==="ja"?"飼い主向け説明シートを印刷":"Print owner handout"}</button></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
+      </dl>${renderOrthopedicReferences(d)}<div class="anes-considerations-slot" data-anes="1" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}"></div><div class="related-diseases-section" data-related="1" data-disease="${escapeHtml(d.name||"")}"></div><div class="cross-nav-links"><a href="#drugs" class="cross-nav-btn drug-nav-link" data-drug="${escapeHtml(d.name||"")}">\u{1F48A} ${currentLang==="ja"?"薬品辞書で検索":"Search Drug Dictionary"}</a><a href="#anesthesia" class="cross-nav-btn anesthesia-nav-link" data-species="${escapeHtml(currentSpecies||"")}">\u{1F489} ${currentLang==="ja"?"麻酔プロトコル":"Anesthesia Protocols"}</a>${(()=>{const proto=_emergencyProtoForDisease(d,currentSpecies||"dog");return proto?`<a href="#emergency" class="cross-nav-btn emergency-nav-link" data-proto="${escapeHtml(proto)}" style="color:#dc2626;border-color:#fecaca">\u{1F6A8} ${currentLang==="ja"?"緊急対応プロトコル":"Emergency Protocol"}</a>`:"";})()}${(()=>{const hit=_calcTabForDisease(d,currentSpecies||"dog");return hit?`<a href="#drugs" class="cross-nav-btn calc-nav-link" data-calctab="${escapeHtml(hit.tab)}" style="color:#b45309;border-color:#fcd34d">\u{1F9EE} ${currentLang==="ja"?"臨床計算機":"Clinical calculator"}</a>`:"";})()}<button type="button" class="cross-nav-btn owner-handout-btn" data-dn="${escapeHtml(d.name||"")}" data-dnja="${escapeHtml(d.name_ja||"")}">\u{1F5A8} ${currentLang==="ja"?"飼い主向け説明シートを印刷":"Print owner handout"}</button><button type="button" class="cross-nav-btn share-link-btn" data-kind="disease" data-a="${escapeHtml(currentSpecies||"")}" data-b="${escapeHtml(d.name||d.name_ja||"")}" data-title="${escapeHtml(currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||""))}">\u{1F517} ${currentLang==="ja"?"この疾患へのリンクを共有":"Share link to this disease"}</button></div><div style="margin-top:8px"><a href="/diseases/${encodeURIComponent(currentSpecies)}/${encodeURIComponent((d.name||"").toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}" target="_blank" rel="noopener noreferrer" style="font-size:.82rem;color:var(--green);font-weight:600;text-decoration:none">📖 ${currentLang==="ja"?"詳細ページを見る":"View full page"} →</a></div>${d.content_origin?`<div class="missing-note">${currentLang==="ja"?"データソース":"Content source"}: ${escapeHtml(contentOriginLabel(d.content_origin))}</div>`:""}${renderCitationMap(d)}${renderReferenceLinks(d)}${renderDataReviewNote(d)}</div>
     </div>`}).join("");
   const shownCount=shown.filter(d=>!d._catHeader).length;
   if(totalCount>shownCount){
@@ -5013,6 +5014,62 @@ function renderCrossSpeciesDiseaseSearch(query){
 }
 
 /* 横断検索結果クリック時: その種を選択して疾患DBで該当疾患を開く */
+/* Deep links (2026-10): "#drug=<id>" and "#disease=<species>:<name>" jump
+   straight to an expanded drug/disease detail. Lets a vet share or bookmark
+   the exact entry (or open it from a home-screen shortcut) and land on it in
+   one tap on mobile, instead of re-searching. Waits for the async lists
+   (drug dictionary / species disease DB) before landing. */
+function _deepLinkFor(kind,a,b){
+  const base=location.origin+location.pathname;
+  if(kind==="drug")return base+"#drug="+encodeURIComponent(a||"");
+  return base+"#disease="+encodeURIComponent(a||"")+":"+encodeURIComponent(b||"");
+}
+function _parseDeepLinkHash(hash){
+  const h=(hash||"").replace(/^#/,"");
+  let m=h.match(/^drug=(.+)$/);
+  if(m){let id="";try{id=decodeURIComponent(m[1]);}catch(_){return null;}return id?{kind:"drug",id}:null;}
+  m=h.match(/^disease=([^:]+):(.+)$/);
+  if(m){let sp="",nm="";try{sp=decodeURIComponent(m[1]);nm=decodeURIComponent(m[2]);}catch(_){return null;}
+    if(!nm||!SPECIES_ICONS[sp])return null;return{kind:"disease",species:sp,name:nm};}
+  return null;
+}
+function _handleDeepLinkHash(hash){
+  const link=_parseDeepLinkHash(hash);
+  if(!link)return false;
+  if(link.kind==="drug"){
+    switchView("drugs",{silent:true});
+    if(!drugsLoaded)loadDrugDictionary();
+    let tries=0;
+    const land=()=>{
+      if(!drugsLoaded){if(tries++<60)setTimeout(land,200);return;}
+      const q=link.id.toLowerCase();
+      const d=allDrugs.find(x=>(x.id||"").toLowerCase()===q)||allDrugs.find(x=>(x.name||"").toLowerCase()===q||(x.name_ja||"")===link.id);
+      if(!d){showToast(currentLang==="ja"?"リンク先の薬品が見つかりませんでした":"Linked drug not found","error");return;}
+      navigateToDrug(currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja));
+    };
+    land();
+    return true;
+  }
+  if(link.species!==currentSpecies){openDiseaseAcrossSpecies(link.name,link.species);return true;}
+  switchView("database",{silent:true});
+  let tries=0;
+  const wait=()=>{
+    const ready=allDiseases.some(d=>d.name===link.name||d.name_ja===link.name);
+    if(!ready&&tries++<40){setTimeout(wait,150);return;}
+    openDiseaseAcrossSpecies(link.name,link.species);
+  };
+  wait();
+  return true;
+}
+async function shareDeepLink(url,title){
+  try{
+    if(navigator.share&&/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent||"")){await navigator.share({title:title||"VetDict",url});return;}
+  }catch(e){if(e&&e.name==="AbortError")return;}
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(url);showToast(currentLang==="ja"?"リンクをコピーしました":"Link copied","success");return;}
+  }catch(_){}
+  window.prompt(currentLang==="ja"?"このリンクをコピーしてください":"Copy this link",url);
+}
 function openDiseaseAcrossSpecies(name,species){
   const needSwitch=species&&species!==currentSpecies;
   if(needSwitch&&typeof selectSpecies==="function")selectSpecies(species);
@@ -5354,6 +5411,7 @@ function setupNavigation(){
   window.addEventListener("hashchange",()=>{
     const hash=location.hash.replace("#","");
     if(["checker","database","chat","drugs","anesthesia","emergency"].includes(hash))switchView(hash);
+    else _handleDeepLinkHash(hash);
   });
 }
 
@@ -7534,6 +7592,7 @@ function renderDrugList(){
         ${(()=>{const q=_anesQueryForDrug(d.name||"",d.name_ja||"");return q?`<button type="button" class="drug-anes-protocols-link" data-anes-query="${escapeHtml(q)}">\u{1F489} ${currentLang==="ja"?"この薬品を使う麻酔プロトコルを見る":"View anesthesia protocols using this drug"}</button>`:"";})()}
         <span class="drug-emergency-slot" data-drug-id="${escapeHtml(d.id||"")}" data-drug-name-en="${escapeHtml(d.name||"")}" data-drug-label="${escapeHtml(currentLang==="ja"?(d.name_ja||d.name||d.id):(d.name||d.id))}"></span>
         <button type="button" class="drug-interaction-add" data-drug-name="${escapeHtml(currentLang==="ja"?(d.name_ja||d.name||d.id):(d.name||d.id))}">⚠️ ${currentLang==="ja"?"相互作用チェックに追加":"Add to interaction checker"}</button>
+        <button type="button" class="drug-interaction-add share-link-btn" data-kind="drug" data-a="${escapeHtml(d.id||"")}" data-title="${escapeHtml(currentLang==="ja"?(d.name_ja||d.name||d.id):(d.name||d.id))}">\u{1F517} ${currentLang==="ja"?"この薬品へのリンクを共有":"Share link to this drug"}</button>
       </div>
     </div>`;
   }).join("");
@@ -8500,6 +8559,8 @@ function _attachDbItemHandlers(container){
     if(diffBtn){e.preventDefault();runDifferentialFromDisease(diffBtn.dataset.ids);return;}
     /* Drug detail → interaction checker: one-tap add so combinations are
        built by tapping two drug cards instead of typing lowercase drug ids. */
+    const shareBtn=e.target.closest(".share-link-btn");
+    if(shareBtn){e.preventDefault();e.stopPropagation();shareDeepLink(_deepLinkFor(shareBtn.dataset.kind,shareBtn.dataset.a,shareBtn.dataset.b),shareBtn.dataset.title||"");trackEvent("share_deep_link",{kind:shareBtn.dataset.kind||""});return;}
     const ixAdd=e.target.closest(".drug-interaction-add");
     if(ixAdd){e.preventDefault();addDrugToInteractionChecker(ixAdd.dataset.drugName||"");return;}
     /* Drug dose row → clinical calculator: prefill mg/kg range parsed from the

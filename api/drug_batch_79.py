@@ -1,144 +1,247 @@
-"""Drug batch 79 – 2026-10 第71弾.
+"""Drug batch 79 – 2026-10 session (第71弾).
 
-1. Apixaban (Eliquis) — oral direct factor Xa inhibitor listed alongside
-   rivaroxaban as a DOAC option in the ACVECC CURATIVE consensus (Blais
-   2019) for dogs and cats with thrombotic risk (feline ATE secondary
-   prevention, canine IMHA/PLN/PTE). Rivaroxaban was present but its
-   sister DOAC was absent, so the cat ATE / canine PTE entries had no
-   apixaban option.
-2. Credelio Plus (lotilaner + milbemycin oxime) — EU-authorised (EMA 2021,
-   Elanco) monthly chewable for dogs: fleas/ticks plus heartworm
-   prevention and roundworm/hookworm/whipworm/lungworm treatment.
+Otic (ear) combination products. Otitis externa is one of the most common
+presenting problems in canine practice, yet the dictionary had no otic
+products at all: the disease entries named Osurnia/Otomax/Posatex/Surolan
+but none resolved, so a vet tapping the treatment had nowhere to land and
+could not check label drop counts or the shared ear-drum warning.
 
-Evidence:
-  - Blais MC et al. Consensus on the Rational Use of Antithrombotics in
-    Veterinary Critical Care (CURATIVE): Domain 3. JVECC 2019;29:60-74.
-  - Myers JA et al. Pharmacokinetics and pharmacodynamics of apixaban in
-    healthy cats. AJVR 2015.
-  - Credelio Plus EPAR / SPC (EMA, Elanco Animal Health, 2021).
+All five are label-defined (dose = drops/tubes per ear, not mg/kg):
+- Florfenicol + terbinafine + betamethasone acetate otic gel (Osurnia) —
+  1 tube per ear, repeat once after 7 days (EU/US labels).
+- Florfenicol + terbinafine + mometasone furoate otic solution (Claro;
+  Neptra is the same three-ingredient class) — single 1 mL veterinarian-
+  administered dose per ear, 30-day efficacy.
+- Gentamicin + betamethasone valerate + clotrimazole otic ointment (Otomax)
+  — 4 drops (<30 lb / ~13.6 kg) or 8 drops (>=30 lb) q12h x 7 days.
+- Orbifloxacin + mometasone furoate + posaconazole otic suspension
+  (Posatex) — 2 / 4 / 8 drops by weight band q24h x 7 days.
+- Polymyxin B + miconazole + prednisolone acetate otic suspension
+  (Surolan) — 5 drops q12h x 7 days; dogs and cats.
+
+Shared class facts: confirm the tympanic membrane is intact before
+instilling (aminoglycosides/chlorhexidine-type vehicles are ototoxic in the
+middle ear); otitis has an underlying cause (atopy, food allergy,
+endocrine, foreign body) that must be addressed; cytology guides the choice.
+
+Evidence: product labels (DailyMed / EMA SPC); Paterson S. J Small Anim Pract 2016
+(topical ear treatment); Nuttall T. Vet Rec 2016; Gotthelf LN. Small Animal
+Ear Diseases 2nd ed.; Plumb's Veterinary Drug Handbook 10th ed.
 """
 
+_TM_EN = (
+    "Examine the ear canal and confirm the tympanic membrane is intact before use — "
+    "do not use with a ruptured ear drum (risk of ototoxicity/vestibular signs). "
+    "Use ear cytology to confirm cocci/rods/Malassezia, and address the primary cause "
+    "(atopic dermatitis, food allergy, endocrine disease, foreign body) or recurrence is expected. "
+)
+_TM_JA = (
+    "使用前に耳道を観察し鼓膜が正常であることを確認する — 鼓膜穿孔例には使用しない（耳毒性・前庭症状のリスク）。"
+    "耳垢細胞診で球菌・桿菌・マラセチアを確認し、基礎疾患（アトピー性皮膚炎・食物アレルギー・内分泌疾患・異物）に"
+    "対処しないと再発する。"
+)
+
+
+def _otic(id_, aliases, name, name_ja, mech, mech_ja, dog, cat, contra, contra_ja, se, se_ja, refs, ix=None):
+    return {
+        "id": id_,
+        "search_aliases": aliases,
+        "name": name,
+        "name_ja": name_ja,
+        "category": "dermatological",
+        "no_component_index": True,
+        "routes": ["otic"],
+        "routes_ja": ["耳用（点耳）"],
+        "mechanism": mech,
+        "mechanism_ja": mech_ja,
+        "species_info": {"dog": dog, "cat": cat},
+        "contraindications": contra,
+        "contraindications_ja": contra_ja,
+        "side_effects": se,
+        "side_effects_ja": se_ja,
+        "drug_interactions": ix or [],
+        "references": refs,
+    }
+
+
+_CAT_NOT_LABELED = {
+    "safe": False,
+    "dosage": "Not labelled for cats — use a feline-labelled otic product (e.g. polymyxin B/miconazole/prednisolone) or one chosen on cytology.",
+    "dosage_ja": "猫には適応がない（犬用ラベル）— 猫に適応のある点耳薬（ポリミキシンB・ミコナゾール・プレドニゾロン配合等）か細胞診に基づく製剤を用いる。",
+    "notes": "Feline ear canals and safety data differ; cats are also prone to Otodectes and polyps — examine before treating.",
+    "notes_ja": "猫は耳道構造と安全性データが異なる。耳ダニ・炎症性ポリープも多いため治療前に診察する。",
+}
+
 DRUGS_BATCH_79 = [
-    {
-        "id": "apixaban",
-        "search_aliases": ["アピキサバン", "エリキュース", "Eliquis", "apixaban"],
-        "name": "Apixaban (Eliquis)",
-        "name_ja": "アピキサバン（エリキュース）",
-        "category": "anticoagulants",
-        "mechanism": "Direct, reversible inhibitor of free and clot-bound factor Xa (direct oral anticoagulant, DOAC). Does not require antithrombin and needs no routine aPTT monitoring; anti-Xa activity can be measured if available.",
-        "mechanism_ja": "遊離型・血栓結合型の第Xa因子を直接かつ可逆的に阻害する直接経口抗凝固薬（DOAC）。アンチトロンビン非依存で、通常 aPTT モニタリングは不要（測定可能なら抗Xa活性で評価）。",
-        "species_info": {
-            "dog": {
-                "safe": True,
-                "dosage": "0.5 mg/kg PO q12h (CURATIVE consensus range 0.5 mg/kg q12-24h) for thromboprophylaxis in dogs at risk (IMHA, protein-losing nephropathy/enteropathy, PTE, hyperadrenocorticism with thrombosis). Rivaroxaban 1-2 mg/kg q24h has more canine data and is the usual first DOAC choice.",
-                "dosage_ja": "0.5 mg/kg PO q12h（CURATIVE コンセンサス範囲 0.5 mg/kg q12-24h）— 血栓リスクのある犬（IMHA・蛋白漏出性腎症/腸症・肺血栓塞栓症・血栓を伴うクッシング症候群）の血栓予防。犬のデータはリバーロキサバン（1-2 mg/kg q24h）の方が多く、DOACの第一候補は通常そちら。",
-                "notes": "Off-label (human drug). Bleeding risk rises with concurrent anticoagulants/antiplatelets. Hepatically cleared with a renal component — reduce or avoid in severe hepatic disease.",
-                "notes_ja": "適応外使用（ヒト用医薬品）。他の抗凝固薬・抗血小板薬との併用で出血リスク上昇。肝代謝（一部腎排泄）— 重度肝疾患では減量または回避。",
-            },
-            "cat": {
-                "safe": True,
-                "dosage": "0.625 mg/cat PO q12h (≈1/4 of a 2.5 mg tablet; CURATIVE consensus) as an alternative DOAC for secondary prevention after aortic thromboembolism or in cats with HCM and a high-risk left atrium. Clopidogrel 18.75 mg/cat q24h remains first-line (FATCAT); a DOAC may be added or substituted in high-risk cats.",
-                "dosage_ja": "0.625 mg/頭 PO q12h（2.5 mg錠の約1/4、CURATIVE コンセンサス）— 動脈血栓塞栓症（ATE）後の再発予防、または高リスク左房を伴うHCM猫の代替DOAC。第一選択は引き続きクロピドグレル 18.75 mg/頭 q24h（FATCAT試験）で、高リスク猫ではDOACを追加または代替する。",
-                "notes": "Off-label; clinical outcome data in cats are limited (pharmacokinetic/pharmacodynamic studies — Myers 2015). Splitting tablets: give consistently. Monitor for bleeding (melena, hematuria, epistaxis).",
-                "notes_ja": "適応外使用。猫の臨床転帰データは限定的（薬物動態・薬力学研究 — Myers 2015）。錠剤分割は一定量で継続。出血徴候（黒色便・血尿・鼻出血）を監視。",
-            },
+    _otic(
+        "florfenicol_terbinafine_betamethasone_otic",
+        ["オスルニア", "Osurnia", "osurnia", "フロルフェニコール・テルビナフィン・ベタメタゾン"],
+        "Florfenicol / Terbinafine / Betamethasone acetate otic gel (Osurnia)",
+        "フロルフェニコール・テルビナフィン・ベタメタゾン酢酸エステル点耳ゲル（オスルニア）",
+        "Florfenicol (bacteriostatic amphenicol: staphylococci) + terbinafine (allylamine antifungal: Malassezia) + betamethasone acetate (anti-inflammatory). The gel coats the canal and releases drug for about a week, so only two clinic-applied doses are needed.",
+        "フロルフェニコール（静菌性アンフェニコール系: ブドウ球菌）＋テルビナフィン（アリルアミン系抗真菌薬: マラセチア）＋ベタメタゾン酢酸エステル（抗炎症）。ゲルが耳道を覆い約1週間薬剤を放出するため、院内での2回投与で治療が完了する。",
+        {
+            "safe": True,
+            "dosage": "Clean and dry the ear, then instil 1 tube (1 mL) per affected ear; repeat once after 7 days (2 doses total). Dogs only.",
+            "dosage_ja": "耳を洗浄・乾燥させた後、患耳1つにつきチューブ1本（1 mL）を注入し、7日後に1回再投与する（計2回）。犬のみ。",
+            "notes": _TM_EN
+            + "Avoid ear cleaning during the treatment period so the gel is not removed (follow the label). Avoid contact with the eyes — keratoconjunctivitis sicca and corneal ulcers have been reported. Head shaking right after application is common. Low owner burden makes it useful where twice-daily drops fail.",
+            "notes_ja": _TM_JA
+            + "治療期間中はゲルを除去しないよう耳洗浄を控える（ラベルに従う）。眼への付着を避ける（乾性角結膜炎・角膜潰瘍の報告あり）。投与直後の頭振りはよくみられる。飼い主の投薬負担が少なく、1日2回の点耳が続かない症例に有用。",
         },
-        "contraindications": "Active bleeding or coagulopathy, severe thrombocytopenia, severe hepatic disease. Do not combine with another therapeutic-dose anticoagulant (heparin, LMWH, rivaroxaban) except during a planned switch.",
-        "contraindications_ja": "活動性出血・凝固障害・重度血小板減少・重度肝疾患。計画的な切替時を除き、他の治療量抗凝固薬（ヘパリン・低分子ヘパリン・リバーロキサバン）と併用しない。",
-        "side_effects": ["Bleeding (gastrointestinal, urinary, epistaxis)", "Vomiting or inappetence (uncommon)"],
-        "side_effects_ja": ["出血（消化管・尿路・鼻出血）", "嘔吐・食欲低下（まれ）"],
-        "drug_interactions": [
-            {
-                "drug": "Rivaroxaban",
-                "effect": "Duplicate factor-Xa inhibition — do not combine; additive bleeding.",
-                "effect_ja": "第Xa因子阻害の重複 — 併用しない（出血の相加）。",
-                "severity": "major",
-            },
-            {
-                "drug": "Heparin / Enoxaparin / Dalteparin",
-                "effect": "Additive anticoagulation — only overlap during a planned switch.",
-                "effect_ja": "抗凝固作用の相加 — 計画的な切替時以外は重ねない。",
-                "severity": "major",
-            },
-            {
-                "drug": "Clopidogrel / Aspirin",
-                "effect": "Combined antiplatelet + anticoagulant therapy increases bleeding; reserve for high-risk cases with monitoring.",
-                "effect_ja": "抗血小板薬との併用で出血リスク上昇 — 高リスク症例に限定し監視下で。",
-                "severity": "moderate",
-            },
-            {
-                "drug": "NSAIDs",
-                "effect": "Increased gastrointestinal bleeding risk.",
-                "effect_ja": "消化管出血リスクの上昇。",
-                "severity": "moderate",
-            },
+        _CAT_NOT_LABELED,
+        "Ruptured tympanic membrane; hypersensitivity to ingredients; demodicosis or generalised infection where corticosteroid is undesirable; not for breeding dogs (safety not established).",
+        "鼓膜穿孔、成分過敏症、副腎皮質ステロイドが望ましくない毛包虫症・全身感染、繁殖犬（安全性未確立）。",
+        [
+            "Head shaking after application",
+            "Ocular disorders if gel reaches the eye (KCS, corneal ulcer)",
+            "Hearing loss / vestibular signs (rare)",
         ],
-        "references": [
-            "Blais MC et al. Consensus on the Rational Use of Antithrombotics in Veterinary Critical Care (CURATIVE): Domain 3. J Vet Emerg Crit Care 2019;29:60-74.",
-            "Myers JA et al. Pharmacokinetics and pharmacodynamics of apixaban in healthy cats. Am J Vet Res 2015.",
-            "Hogan DF et al. Secondary prevention of cardiogenic arterial thromboembolism in the cat (FATCAT). J Vet Cardiol 2015;17:S306-S317.",
+        ["投与後の頭振り", "眼への付着による眼障害（乾性角結膜炎・角膜潰瘍）", "聴覚低下・前庭症状（まれ）"],
+        [
+            "Osurnia (florfenicol/terbinafine/betamethasone acetate) otic gel — EMA SPC / US label",
+            "Paterson S. Topical ear treatment — options, indications and limitations of current therapy. J Small Anim Pract 2016.",
         ],
-    },
-    {
-        "id": "lotilaner_milbemycin",
-        "search_aliases": [
-            "クレデリオプラス",
-            "クレデリオ プラス",
-            "Credelio Plus",
-            "credelio plus",
-            "ロチラネル・ミルベマイシンオキシム",
-        ],
-        "name": "Lotilaner + Milbemycin Oxime (Credelio Plus)",
-        "name_ja": "ロチラネル・ミルベマイシンオキシム（クレデリオプラス）",
-        "category": "antiparasitic",
-        "mechanism": "Lotilaner (isoxazoline) blocks insect/acarine GABA-gated chloride channels — fleas and ticks; milbemycin oxime (macrocyclic lactone) opens glutamate-gated chloride channels — heartworm (L3/L4) prevention and nematode treatment.",
-        "mechanism_ja": "ロチラネル（イソキサゾリン系）は昆虫・ダニのGABA作動性クロライドチャネルを遮断しノミ・マダニを駆除。ミルベマイシンオキシム（大環状ラクトン）はグルタミン酸作動性クロライドチャネルを開口し、犬糸状虫（L3/L4幼虫）予防と線虫駆除を担う。",
-        "species_info": {
-            "dog": {
-                "safe": True,
-                "dosage": "Monthly chewable with food: lotilaner 20-41 mg/kg + milbemycin oxime 0.75-1.53 mg/kg (minimum 20 / 0.75 mg/kg; EU label). Dogs ≥8 weeks and ≥1.4 kg. Fleas and ticks for 1 month, heartworm prevention when given monthly, and treatment of roundworm, hookworm, whipworm and lungworm (Angiostrongylus vasorum) infections.",
-                "dosage_ja": "月1回、食事と共に経口: ロチラネル 20-41 mg/kg ＋ ミルベマイシンオキシム 0.75-1.53 mg/kg（最低 20 / 0.75 mg/kg、EUラベル）。8週齢以上・体重1.4 kg以上。ノミ・マダニを1ヶ月駆除、毎月投与で犬糸状虫予防、回虫・鉤虫・鞭虫・肺虫（Angiostrongylus vasorum）の駆除。",
-                "notes": "Confirm heartworm-negative status before starting. Isoxazoline class warning — neurological adverse events (tremor, ataxia, seizures) reported; use with caution in dogs with a seizure history. Milbemycin at preventive dose is tolerated by ABCB1 (MDR1)-mutant dogs. Not approved in Japan (as of 2026-10); the Japanese single-agent Credelio (lotilaner) is available.",
-                "notes_ja": "開始前に犬糸状虫陰性を確認。イソキサゾリン系のクラス警告 — 神経系副作用（振戦・運動失調・けいれん）の報告があり、けいれん歴のある犬では慎重に。予防用量のミルベマイシンはABCB1（MDR1）変異犬でも忍容される。国内未承認（2026-10時点） — 国内では単剤クレデリオ（ロチラネル）が利用可能。",
-            },
-            "cat": {
-                "safe": False,
-                "dosage": "Not for cats — use the feline lotilaner product (Credelio CAT) or another feline-labelled combination.",
-                "dosage_ja": "猫には使用しない — 猫用ロチラネル製剤（Credelio CAT）など猫用ラベルの製剤を使用する。",
-                "notes": "Dog-only product.",
-                "notes_ja": "犬専用製剤。",
-            },
+    ),
+    _otic(
+        "florfenicol_terbinafine_mometasone_otic",
+        ["クラロ", "Claro", "claro", "ネプトラ", "Neptra", "neptra", "フロルフェニコール・テルビナフィン・モメタゾン"],
+        "Florfenicol / Terbinafine / Mometasone furoate otic solution (Claro, Neptra)",
+        "フロルフェニコール・テルビナフィン・モメタゾン点耳液（クラロ／ネプトラ）",
+        "Same antibacterial/antifungal pair as Osurnia with mometasone furoate as the glucocorticoid; formulated as a single veterinarian-administered dose that persists in the canal for about 30 days.",
+        "オスルニアと同じ抗菌・抗真菌の組み合わせに副腎皮質ステロイドとしてモメタゾンフランカルボン酸エステルを配合。獣医師が1回投与し、耳道内に約30日間持続する製剤。",
+        {
+            "safe": True,
+            "dosage": "Single dose: 1 mL (one dropperette) per affected ear, administered by the veterinarian after cleaning and drying. Efficacy assessed at 30 days. Dogs only.",
+            "dosage_ja": "単回投与: 患耳1つにつき1 mL（1本）を、洗浄・乾燥後に獣医師が投与する。効果判定は30日後。犬のみ。",
+            "notes": _TM_EN
+            + "Post-marketing reports include hearing loss and vestibular signs — counsel owners and avoid in dogs with suspected TM rupture. Do not clean the ears for the duration of action unless directed. Ideal when daily medication is impossible.",
+            "notes_ja": _TM_JA
+            + "市販後に聴覚低下・前庭症状の報告があり、飼い主へ説明し鼓膜穿孔が疑われる犬には使用しない。指示がない限り作用期間中は耳洗浄を行わない。毎日の投薬が困難な症例に適する。",
         },
-        "contraindications": "Dogs <8 weeks or <1.4 kg; heartworm-positive dogs (microfilaricidal reactions); hypersensitivity. Caution with a history of seizures.",
-        "contraindications_ja": "8週齢未満または1.4 kg未満、犬糸状虫陽性犬（ミクロフィラリア殺滅反応）、過敏症。けいれん歴のある犬では慎重に。",
-        "side_effects": [
-            "Vomiting, diarrhea (uncommon)",
-            "Lethargy, anorexia",
-            "Neurological signs (tremor, ataxia, seizures) — rare, isoxazoline class",
+        _CAT_NOT_LABELED,
+        "Ruptured tympanic membrane; hypersensitivity to ingredients; breeding, pregnant or lactating dogs (not evaluated).",
+        "鼓膜穿孔、成分過敏症、繁殖・妊娠・授乳中の犬（評価されていない）。",
+        [
+            "Hearing loss / deafness (post-marketing reports)",
+            "Vestibular signs (head tilt, ataxia)",
+            "Head shaking, vomiting",
         ],
-        "side_effects_ja": [
-            "嘔吐・下痢（まれ）",
-            "元気消失・食欲低下",
-            "神経症状（振戦・運動失調・けいれん）— まれ、イソキサゾリン系のクラス効果",
+        ["聴覚低下・難聴（市販後報告）", "前庭症状（斜頸・運動失調）", "頭振り・嘔吐"],
+        [
+            "Claro (florfenicol, terbinafine, mometasone furoate) otic solution — US label",
+            "Neptra (florfenicol, terbinafine hydrochloride, mometasone furoate) otic solution — US label / EMA SPC",
+            "Nuttall T. Successful management of otitis externa. In Practice 2016.",
         ],
-        "drug_interactions": [
+    ),
+    _otic(
+        "gentamicin_betamethasone_clotrimazole_otic",
+        [
+            "オトマックス",
+            "Otomax",
+            "otomax",
+            "モメタマックス",
+            "Mometamax",
+            "mometamax",
+            "ゲンタマイシン・ベタメタゾン・クロトリマゾール点耳",
+        ],
+        "Gentamicin / Betamethasone valerate / Clotrimazole otic ointment (Otomax)",
+        "ゲンタマイシン・ベタメタゾン・クロトリマゾール点耳軟膏（オトマックス）",
+        "Gentamicin (aminoglycoside: staphylococci and many Pseudomonas) + clotrimazole (imidazole antifungal: Malassezia) + betamethasone valerate. The mometasone variant (Mometamax) uses the same gentamicin/clotrimazole pair with once-daily dosing.",
+        "ゲンタマイシン（アミノグリコシド系: ブドウ球菌・多くの緑膿菌）＋クロトリマゾール（イミダゾール系抗真菌薬: マラセチア）＋ベタメタゾン吉草酸エステル。モメタゾン配合品（モメタマックス）は同じ組み合わせで1日1回投与。",
+        {
+            "safe": True,
+            "dosage": "Otomax: dogs < 30 lb (~13.6 kg) 4 drops, >= 30 lb 8 drops into the ear canal q12h for 7 days. Mometamax variant: same drop counts q24h for 7 days.",
+            "dosage_ja": "オトマックス: 体重30ポンド（約13.6 kg）未満は4滴、それ以上は8滴を耳道に1日2回・7日間。モメタマックス（モメタゾン配合）は同じ滴数を1日1回・7日間。",
+            "notes": _TM_EN
+            + "Aminoglycoside: ototoxic if the drum is ruptured — this is the classic product to avoid with otitis media. Pseudomonas otitis often needs culture-guided therapy and a Tris-EDTA flush. Massage the base of the ear after instillation.",
+            "notes_ja": _TM_JA
+            + "アミノグリコシド系のため鼓膜穿孔時は耳毒性 — 中耳炎で避けるべき代表的製剤。緑膿菌性外耳炎は培養に基づく治療とTris-EDTA洗浄を要することが多い。点耳後に耳の付け根をマッサージする。",
+        },
+        _CAT_NOT_LABELED,
+        "Ruptured tympanic membrane / otitis media; hypersensitivity to ingredients; pregnancy and breeding dogs (corticosteroid).",
+        "鼓膜穿孔・中耳炎、成分過敏症、妊娠犬・繁殖犬（副腎皮質ステロイド）。",
+        [
+            "Ototoxicity / hearing loss (with ruptured drum)",
+            "Local irritation",
+            "Systemic corticosteroid effects with prolonged use",
+        ],
+        ["耳毒性・聴覚低下（鼓膜穿孔時）", "局所刺激", "長期使用時の全身性ステロイド作用"],
+        [
+            "Otomax (gentamicin sulfate, betamethasone valerate, clotrimazole) otic ointment — US label",
+            "Mometamax (gentamicin, mometasone furoate, clotrimazole) otic suspension — US label",
+            "Gotthelf LN. Small Animal Ear Diseases, 2nd ed. Elsevier.",
+        ],
+        [
             {
-                "drug": "Other isoxazolines (afoxolaner, fluralaner, sarolaner)",
-                "effect": "Duplicate isoxazoline therapy — do not combine.",
-                "effect_ja": "イソキサゾリン系の重複 — 併用しない。",
+                "drug": "Other ototoxic drugs (aminoglycosides, loop diuretics)",
+                "effect": "Additive ototoxicity if absorbed through a ruptured drum",
+                "effect_ja": "鼓膜穿孔から吸収された場合に耳毒性が相加",
                 "severity": "moderate",
-            },
-            {
-                "drug": "Other macrocyclic lactones (ivermectin, moxidectin, selamectin)",
-                "effect": "Duplicate macrocyclic-lactone therapy — avoid stacking, especially in ABCB1-mutant breeds.",
-                "effect_ja": "大環状ラクトンの重複 — 特にABCB1変異犬種では重ねない。",
-                "severity": "moderate",
-            },
+            }
         ],
-        "references": [
-            "Credelio Plus EPAR / Summary of Product Characteristics (EMA, Elanco Animal Health, 2021).",
-            "Cavalleri D et al. Efficacy of a novel oral chewable tablet containing lotilaner and milbemycin oxime against Angiostrongylus vasorum. Parasit Vectors 2021.",
-            "American Heartworm Society. Canine Guidelines 2024.",
+    ),
+    _otic(
+        "orbifloxacin_mometasone_posaconazole_otic",
+        ["ポサテックス", "Posatex", "posatex", "オルビフロキサシン・モメタゾン・ポサコナゾール"],
+        "Orbifloxacin / Mometasone furoate / Posaconazole otic suspension (Posatex)",
+        "オルビフロキサシン・モメタゾン・ポサコナゾール点耳懸濁液（ポサテックス）",
+        "Orbifloxacin (fluoroquinolone: staphylococci, Pseudomonas) + posaconazole (triazole: Malassezia) + mometasone furoate.",
+        "オルビフロキサシン（フルオロキノロン系: ブドウ球菌・緑膿菌）＋ポサコナゾール（トリアゾール系: マラセチア）＋モメタゾンフランカルボン酸エステル。",
+        {
+            "safe": True,
+            "dosage": "Once daily for 7 days: dogs < 2 kg 2 drops, 2-15 kg 4 drops, >= 15 kg 8 drops per affected ear.",
+            "dosage_ja": "1日1回・7日間: 体重2 kg未満は2滴、2-15 kgは4滴、15 kg以上は8滴を患耳に点耳。",
+            "notes": _TM_EN
+            + "Reserve fluoroquinolone otics for rods/Pseudomonas on cytology rather than first-line cocci infections (antimicrobial stewardship).",
+            "notes_ja": _TM_JA
+            + "抗菌薬適正使用の観点から、フルオロキノロン系点耳薬は細胞診で桿菌・緑膿菌が見られる症例に温存し、球菌性の初回治療には用いない。",
+        },
+        _CAT_NOT_LABELED,
+        "Ruptured tympanic membrane; hypersensitivity to ingredients; pregnant or breeding dogs.",
+        "鼓膜穿孔、成分過敏症、妊娠犬・繁殖犬。",
+        ["Local irritation, head shaking", "Hearing impairment (rare)"],
+        ["局所刺激・頭振り", "聴覚障害（まれ）"],
+        [
+            "Posatex (orbifloxacin, mometasone furoate, posaconazole) otic suspension — EMA SPC / US label",
+            "Paterson S. J Small Anim Pract 2016 (topical ear therapy; reserving fluoroquinolones).",
         ],
-    },
+    ),
+    _otic(
+        "polymyxin_miconazole_prednisolone_otic",
+        [
+            "スロラン",
+            "Surolan",
+            "surolan",
+            "ポリミキシンB・ミコナゾール・プレドニゾロン",
+            "ポリミキシン・ミコナゾール・プレドニゾロン配合点耳",
+        ],
+        "Polymyxin B / Miconazole / Prednisolone acetate otic suspension (Surolan)",
+        "ポリミキシンB・ミコナゾール・プレドニゾロン配合点耳液（スロラン）",
+        "Polymyxin B (Gram-negative incl. Pseudomonas) + miconazole (Malassezia; also some anti-staphylococcal activity) + prednisolone acetate. Also acaricidal by suffocation against Otodectes.",
+        "ポリミキシンB（緑膿菌を含むグラム陰性菌）＋ミコナゾール（マラセチア、一部の抗ブドウ球菌作用）＋プレドニゾロン酢酸エステル。耳ダニ（ミミヒゼンダニ）にも物理的な殺ダニ作用がある。",
+        {
+            "safe": True,
+            "dosage": "5 drops into the affected ear q12h for 7 days (shake well).",
+            "dosage_ja": "よく振ってから患耳に5滴を1日2回・7日間点耳。",
+            "notes": _TM_EN + "Polymyxin B is ototoxic in the middle ear.",
+            "notes_ja": _TM_JA + "ポリミキシンBは中耳に入ると耳毒性がある。",
+        },
+        {
+            "safe": True,
+            "dosage": "5 drops into the affected ear q12h for 7 days (shake well).",
+            "dosage_ja": "よく振ってから患耳に5滴を1日2回・7日間点耳。",
+            "notes": "Labelled for cats. In cats, examine for Otodectes and inflammatory polyps first; for ear mites a systemic/spot-on acaricide (selamectin, isoxazoline) treats all in-contact animals. "
+            + "Confirm the ear drum is intact.",
+            "notes_ja": "猫に適応がある。猫ではまず耳ダニと炎症性ポリープを確認し、耳ダニには同居動物全頭へスポットオン/全身性駆除薬（セラメクチン・イソキサゾリン系）を用いる。鼓膜が正常であることを確認する。",
+        },
+        "Ruptured tympanic membrane; hypersensitivity to ingredients.",
+        "鼓膜穿孔、成分過敏症。",
+        ["Ototoxicity (with ruptured drum)", "Local irritation"],
+        ["耳毒性（鼓膜穿孔時）", "局所刺激"],
+        [
+            "Surolan (miconazole nitrate, polymyxin B sulfate, prednisolone acetate) — EMA SPC (dogs and cats)",
+            "Paterson S. Topical ear treatment. J Small Anim Pract 2016.",
+        ],
+    ),
 ]

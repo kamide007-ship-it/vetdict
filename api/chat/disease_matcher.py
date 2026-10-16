@@ -370,6 +370,10 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # ウサギの足底（飛節）の脱毛・発赤はソアホック（潰瘍性足底皮膚炎）の初期像 —
     # Harcourt-Brown; Mancinelli 2014。汎用の接触性/潰瘍性皮膚炎が上回っていた
     ("rabbit", frozenset({"pododermatitis_signs"}), "Pododermatitis (Sore Hocks)", 1.4),
+    # 両生類の過剰な脱皮（皮膚の白濁・剥離の繰り返し）はツボカビ症（Bd）until proven
+    # otherwise — Berger 1998 PNAS; Wright & Whitaker. 肥満症・溶血性貧血等の
+    # 汎用エントリが元気消失の共抽出で上位を占めていた（2026-10 第46回）
+    ("amphibian", frozenset({"excessive_shedding"}), "Chytridiomycosis (Bd)", 1.45),
     ("rabbit", frozenset({"pododermatitis_signs"}), "Ulcerative Pododermatitis - Grade I", 1.3),
     # Anorexia + reduced fecal output in a rabbit is GI stasis until proven
     # otherwise (Oglesbee, Blackwell's 5-Minute Vet Consult: Small Mammal).
