@@ -507,6 +507,8 @@ def unreliable_clone_set_names(diseases: List[Any], species: str) -> frozenset:
 # (e.g. "…、甲状腺機能亢進症（猫）、…" inside a differential list) are left intact.
 _CROSS_SPECIES_CLAUSES: tuple[tuple[str, frozenset[str]], ...] = (
     ("支持療法（爬虫類）", frozenset({"reptile", "tortoise", "snake", "lizard"})),
+    # 循環器カテゴリ生成器が全種の臨床徴候に付けていた猫ATEの一文（2026-10 第71弾）
+    ("猫では FATE（大動脈血栓塞栓症）", frozenset({"cat"})),
     ("喘息（猫）", frozenset({"cat"})),
     ("甲状腺機能亢進症（猫）", frozenset({"cat"})),
     ("アトピー性（犬）", frozenset({"dog"})),
@@ -519,6 +521,7 @@ _CS_LEADING_SYMBOLS = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲
 
 _CS_VISIBLE_FIELDS = (
     "prevention_ja",
+    "clinical_signs_ja",
     "causes_ja",
     "treatment_ja",
     "pathophysiology_ja",

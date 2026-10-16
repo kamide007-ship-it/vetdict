@@ -1251,7 +1251,7 @@ def migrate_equine(conn) -> int:
             "pathophysiology_ja": pathophysiology_ja,
             "causes": causes_en or causes_ja,
             "causes_ja": causes_ja,
-            "treatment": treatment_en or treatment_ja,
+            "treatment": treatment_en or getattr(d, "treatment_protocol_en", "") or treatment_ja,
             "treatment_ja": treatment_ja,
             "prevention": prevention_en or prevention_ja,
             "prevention_ja": prevention_ja,
@@ -1640,6 +1640,30 @@ def fix_prognosis_possessive_en(conn) -> int:
         if new != val:
             conn.execute("UPDATE diseases SET prognosis = ? WHERE id = ?", (new, row["id"]))
             n += 1
+    return n
+
+
+def apply_en_treatment_translations_in_served_db(conn) -> int:
+    """Fill English treatment columns that are empty or predominantly Japanese."""
+    try:
+        from api.species.en_treatment_translations import en_treatment_for, needs_en_treatment
+    except ImportError:
+        return 0
+    from api.species.en_treatment_translations import ja_treatment_upgrade
+
+    n = 0
+    rows = conn.execute("SELECT id, species, name, treatment, treatment_ja FROM diseases").fetchall()
+    for rid, species, name, tx, tx_ja in rows:
+        rich_ja = ja_treatment_upgrade(species, name, tx_ja)
+        if rich_ja:
+            conn.execute("UPDATE diseases SET treatment_ja = ? WHERE id = ?", (rich_ja, rid))
+        if not needs_en_treatment(tx):
+            continue
+        en = en_treatment_for(species, name)
+        if en:
+            conn.execute("UPDATE diseases SET treatment = ? WHERE id = ?", (en, rid))
+            n += 1
+    conn.commit()
     return n
 
 
@@ -2798,6 +2822,11 @@ def main(db_path: str | None = None):
         print("\n[safety] removing oral beta-lactam/lincosamide advice from hindgut fermenters...")
         hg_n = make_hindgut_oral_antibiotics_safe(conn)
         print(f"  → {hg_n} hindgut-fermenter treatments made safe")
+
+        # English treatment fields that are still empty/Japanese-only get the
+        # verified English mirror of the curated Japanese protocol (第71弾).
+        en_tx_n = apply_en_treatment_translations_in_served_db(conn)
+        print(f"  → {en_tx_n} Japanese-only English treatments replaced by verified English mirrors")
 
         # Ivermectin is fatal in chelonians; the drug dictionary already says so.
         print("\n[safety] removing ivermectin from chelonian (tortoise) treatments...")

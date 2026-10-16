@@ -1757,8 +1757,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:602,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:579,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:604,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:581,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1782,7 +1782,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6457,
     species:21,
-    drugs:661,
+    drugs:663,
     symptoms:98,
     protocols:188
   };
@@ -4945,13 +4945,13 @@ function renderDiseaseDb(){
       <div class="d-desc">${highlightMatch(dDesc,search)}</div>
       <div class="disease-detail"><dl>
         <dt>${t("dtDescription")}</dt><dd>${escapeHtml(desc)}</dd>
-        ${clinicalSigns?`<dt>${t("dtClinicalSigns")}</dt><dd>${escapeHtml(clinicalSigns)}</dd>`:""}
+        ${clinicalSigns?`<dt data-jump="signs">${t("dtClinicalSigns")}</dt><dd>${escapeHtml(clinicalSigns)}</dd>`:""}
         <dt>${t("dtPathophysiology")}</dt><dd>${escapeHtml(patho)}</dd>
         <dt>${t("dtCauses")}</dt><dd>${escapeHtml(causes)}</dd>
-        ${diagnosis?`<dt>${t("dtDiagnosis")}</dt><dd>${escapeHtml(diagnosis)}</dd>`:""}
+        ${diagnosis?`<dt data-jump="diagnosis">${t("dtDiagnosis")}</dt><dd>${escapeHtml(diagnosis)}</dd>`:""}
         <dt>${t("dtPrevention")}</dt><dd>${escapeHtml(prevention)}</dd>
-        <dt>${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</dt><dd>${renderTreatmentWithAdjunct(treatment)}${buildTreatmentDrugsPlaceholder(currentSpecies||"dog",d.name_ja||d.name||"")}</dd>
-        <dt>${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
+        <dt data-jump="treatment">${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</dt><dd>${renderTreatmentWithAdjunct(treatment)}${buildTreatmentDrugsPlaceholder(currentSpecies||"dog",d.name_ja||d.name||"")}</dd>
+        <dt data-jump="prognosis">${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
         ${(d.symptoms_display&&d.symptoms_display.length)?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(d.symptoms_display.map(s=>currentLang==="ja"?(s.name_ja||s.id):(s.name_en||s.id)).join("、"))}${_differentialCheckButton(d)}</dd>`:(d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):String(d.symptoms)))}${_differentialCheckButton(d)}</dd>`:"")}
         ${(d.recommended_tests_display&&d.recommended_tests_display.length)?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests_display.map(x=>currentLang==="ja"?(x.name_ja||x.id):(x.name_en||x.id)).join("、"))}</dd>`:(d.recommended_tests?`<dt>${t("dtRecommendedTests")}</dt><dd>${escapeHtml(d.recommended_tests.join(", "))}</dd>`:"")}
         ${rehab?`<dt>${currentLang==="ja"?"リハビリテーション":"Rehabilitation"}</dt><dd><pre style="white-space:pre-wrap;font-family:inherit;margin:0">${escapeHtml(rehab)}</pre></dd>`:""}
@@ -8592,6 +8592,7 @@ function toggleDbItem(el){
         closeBtn.addEventListener("click",e=>{e.stopPropagation();toggleDbItem(el);});
         detail.prepend(closeBtn);
       }
+      _addDetailJumpBar(detail);
       requestAnimationFrame(()=>{
         /* One clean scroll to a reading position — NOT the 12s re-anchoring
            watcher. The detail's own markup renders synchronously (so the initial
@@ -8625,6 +8626,38 @@ function toggleDbItem(el){
       if(typeof hydrateEmergencyFromDrug==="function")hydrateEmergencyFromDrug(detail);
     }
   }
+}
+
+/* In-panel section jump bar (2026-10 第71弾): on a phone the treatment and
+   prognosis sections of an expanded disease sit several screens below the
+   header (description → pathophysiology → causes come first). A row of chips
+   jumps straight to each labelled section with the same sticky-header-aware
+   scroll the tabs use. Built only from sections actually present, once. */
+function _addDetailJumpBar(detail){
+  if(!detail||detail.querySelector(".detail-jump-bar"))return;
+  const targets=detail.querySelectorAll("dt[data-jump]");
+  if(targets.length<2)return;
+  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"]};
+  const order=["treatment","diagnosis","signs","prognosis"];
+  const bar=document.createElement("nav");
+  bar.className="detail-jump-bar";
+  bar.setAttribute("aria-label",currentLang==="ja"?"セクションへ移動":"Jump to section");
+  order.forEach(key=>{
+    const dt=detail.querySelector(`dt[data-jump="${key}"]`);
+    if(!dt)return;
+    const b=document.createElement("button");
+    b.type="button";
+    b.className="detail-jump-chip";
+    b.textContent=labels[key][currentLang==="ja"?0:1];
+    b.addEventListener("click",e=>{
+      e.preventDefault();e.stopPropagation();
+      scrollToAnchor(dt,{settle:false});
+      trackEvent("detail_section_jump",{section:key});
+    });
+    bar.appendChild(b);
+  });
+  const anchor=detail.querySelector(".detail-close-btn");
+  if(anchor&&anchor.nextSibling)detail.insertBefore(bar,anchor.nextSibling);else detail.prepend(bar);
 }
 
 /* Fill .drug-emergency-slot placeholders inside an expanded drug detail with

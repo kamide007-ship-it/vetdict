@@ -396,6 +396,13 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     ("cat", frozenset({"decreased_urination", "vocalization_changes"}), "Urinary Obstruction (Blocked Cat)", 1.5),
     # 体重減少＋落ち着きのなさ/活動亢進の猫は甲状腺機能亢進症 until proven
     # otherwise（Carney 2016 AAFP guidelines）— 2026-10 第42回: 行動疾患が上位だった
+    # 2026-10 第71弾: 急な後肢の引きずり＋悲鳴は猫ATEの古典像（Smith 2003
+    # JVIM）— 猫語彙では「後ろ足を引きずる」が muscle_weakness へ解決される。
+    ("cat", frozenset({"muscle_weakness", "vocalization_changes"}), "Aortic Thromboembolism (Saddle Thrombus)", 1.35),
+    # モルモットの激しい掻痒＋痙攣発作は Trixacarus caviae 疥癬の定義的像
+    # （掻痒誘発性発作 — Quesenberry & Carpenter 4th ed）。
+    ("guinea_pig", frozenset({"itching", "seizures"}), "Trixacarus caviae (Sarcoptic Mange) - Severe", 1.45),
+    ("guinea_pig", frozenset({"itching", "seizures"}), "Trixacarus caviae Mange", 1.45),
     ("cat", frozenset({"weight_loss", "anxiety"}), "Hyperthyroidism", 1.6),
     ("cat", frozenset({"weight_loss", "hyperactivity"}), "Hyperthyroidism", 1.6),
     # 粘膜蒼白＋頻呼吸の猫は貧血（低酸素血症代償の頻呼吸） until proven

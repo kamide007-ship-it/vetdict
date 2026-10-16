@@ -422,8 +422,15 @@ def _class_specific_lines(species: str, klass: str, name_ja: str) -> list[str]:
         f"{name_ja}は{species_ja}における正確な臨床評価（病歴、身体検査、CBC・生化学、画像）から治療方針を決定。",
         "基礎疾患の特定→特異的治療＋支持療法の組み合わせが原則。",
         "経過モニタリング: 主訴の改善、検査値の変化、QOLを2-4週毎に再評価。",
-        f"複雑症例は{species_ja}専門医（ACZMまたはAVMAエキゾチック分科会等）に紹介を検討。",
+        referral_line(species),
     ]
+
+
+def referral_line(species: str) -> str:
+    """種ごとの正しい専門医制度（2026-10 第71弾 — 旧ACZM/架空組織名を是正）。"""
+    from scripts.template_elimination.fix_specialist_referral_line import referral_line as _rl
+
+    return _rl(species)
 
 
 def generate_fallback_content(

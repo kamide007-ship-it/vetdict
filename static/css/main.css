@@ -2186,3 +2186,9 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
 /* 検索欄へ戻るモード（2026-10 第70弾）: 矢印を緑にして「ページ先頭」と区別 */
 .scroll-top.to-search .scroll-arrow{color:var(--green)}
 @media(max-width:600px){.scroll-top{width:44px;height:44px}}
+
+/* In-panel section jump bar (2026-10 第71弾) */
+.detail-jump-bar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;padding:6px 0;border-bottom:1px dashed var(--border,#e2e8f0)}
+.detail-jump-chip{border:1px solid var(--border,#cbd5e1);background:var(--card-bg,#fff);color:inherit;border-radius:999px;padding:4px 12px;font-size:.78rem;cursor:pointer;min-height:32px}
+.detail-jump-chip:hover,.detail-jump-chip:focus-visible{background:#ecfdf5;border-color:#10b981}
+@media(max-width:600px){.detail-jump-chip{min-height:40px;padding:6px 14px;font-size:.82rem}}
