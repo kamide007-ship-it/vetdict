@@ -5111,6 +5111,15 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"fever", "joint_swelling"}), "immune_mediated_polyarthritis", 1.8),
     # 混濁尿・強い尿臭（膿尿）は細菌性膀胱炎の飼い主所見（ISCAID 2019）
     (frozenset({"cloudy_urine"}), "urinary_tract_infection", 1.4),
+    # 粘膜蒼白＋色素尿（赤茶色・コーラ色の尿）は溶血の定義的ペア — 犬の溶血の最多原因は
+    # IMHA（Garden 2019 ACVIM consensus）。尿路結石・vWDへの誤誘導を防ぐ（2026-10 第46回）
+    # 眼球の腫大（牛眼）＋疼痛は緑内障の古典像（Maggs, Slatter's 6th ed）— 第46回
+    (frozenset({"eye_swelling", "pain"}), "glaucoma", 1.5),
+    # 多発性の体表リンパ節腫大は犬ではリンパ腫 until proven otherwise（Vail, Withrow &
+    # MacEwen 6th ed）— 汎用「しこり」の共抽出で乳腺腫瘍が上回っていた（第46回）
+    (frozenset({"swollen_lymph_nodes"}), "lymphoma", 1.5),
+    (frozenset({"pale_gums", "dark_urine"}), "imha", 1.6),
+    (frozenset({"pale_gums", "dark_urine"}), "hemolytic_anemia", 1.5),
     # Gynecomastia + symmetric alopecia is the estrogen-feminization pair of
     # a Sertoli cell tumor (Withrow & MacEwen 6th ed). Female mammary-mass
     # complaints don't co-report hair loss, so collision risk is minimal.
