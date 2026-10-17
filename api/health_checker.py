@@ -1958,7 +1958,8 @@ DISEASES = [
             "loss_of_appetite",
             "bloating",
             "cyanosis",
-         "ascites",],
+            "ascites",
+        ],
         "severity": "high",
         "recommended_tests": [
             "echocardiogram",
@@ -2792,7 +2793,8 @@ DISEASES = [
             "excessive_thirst",
             "bloating",
             "seizures",
-         "ascites",],
+            "ascites",
+        ],
         "severity": "high",
         "recommended_tests": [
             "blood_chemistry",
@@ -2826,7 +2828,8 @@ DISEASES = [
             "weight_loss",
             "fainting",
             "rapid_breathing",
-         "ascites",],
+            "ascites",
+        ],
         "severity": "high",
         "recommended_tests": [
             "ultrasound",
