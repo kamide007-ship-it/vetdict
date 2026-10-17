@@ -4719,7 +4719,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Cryptorchidism",
         "name_ja": "停留精巣",
-        "symptoms": {"swollen_testicle", "abdominal_pain"},
+        "symptoms": {"swollen_testicle"},
         "description": "Failure of one or both testes to descend into the scrotum (inguinal retention is most common in cats). An important differential for apparently castrated cats with persistent male behaviour; retained testes carry increased tumour and torsion risk.",
         "description_ja": "片側または両側の精巣が陰嚢へ下降しない先天異常（猫では鼠径部停留が最多）。去勢済みに見えて雄行動が残る猫の重要な鑑別で、停留精巣は腫瘍化・捻転のリスクが上昇する。",
         "urgency": "moderate",

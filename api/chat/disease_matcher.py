@@ -407,6 +407,10 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # （掻痒誘発性発作 — Quesenberry & Carpenter 4th ed）。
     ("guinea_pig", frozenset({"itching", "seizures"}), "Trixacarus caviae (Sarcoptic Mange) - Severe", 1.45),
     ("guinea_pig", frozenset({"itching", "seizures"}), "Trixacarus caviae Mange", 1.45),
+    # 発熱＋腹部膨満（腹水）の猫は滲出型FIP until proven otherwise — 猫の
+    # 腹水貯留の主要原因で、化膿性腹膜炎より高頻度（Addie ABCD 2022;
+    # Tasker 2023 JFMS — 2026-10 第72弾）
+    ("cat", frozenset({"fever", "abdominal_distension"}), "Feline Infectious Peritonitis (FIP) - Wet Form", 1.4),
     ("cat", frozenset({"weight_loss", "anxiety"}), "Hyperthyroidism", 1.6),
     ("cat", frozenset({"weight_loss", "hyperactivity"}), "Hyperthyroidism", 1.6),
     # 粘膜蒼白＋頻呼吸の猫は貧血（低酸素血症代償の頻呼吸） until proven

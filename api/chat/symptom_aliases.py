@@ -3582,6 +3582,33 @@ SYMPTOM_ALIASES = {
     "片方の足が動か": "leg_paralysis",
     "腹部が膨れ": "bloating",
     "腹部が膨ら": "bloating",
+    # --- 2026-10 第72弾（チャット精度第47回） ---
+    "ふらつい": "ataxia",
+    "足を浮かせ": "lameness_or_limping",
+    "足を浮かして": "lameness_or_limping",
+    "お腹に水": "ascites",
+    "おなかに水": "ascites",
+    "卵が出ず": "egg_binding",
+    "卵が出てこな": "egg_binding",
+    "おしりから白い虫": "worms_in_stool",
+    "お尻から白い虫": "worms_in_stool",
+    "おしりから虫": "worms_in_stool",
+    "お尻から虫が": "worms_in_stool",
+    "肛門から虫": "worms_in_stool",
+    "尿のにおいが強": "cloudy_urine",
+    "おしっこのにおいが強": "cloudy_urine",
+    "尿が濁": "cloudy_urine",
+    "トイレの外でおしっこ": "inappropriate_urination",
+    "耳を振っ": "head_shaking",
+    "耳を振る": "head_shaking",
+    "耳垢がたま": "ear_discharge",
+    "耳垢が多": "ear_discharge",
+    # 「体を触ると痛がって震える」— 部位を特定しない体幹の触診痛は脊椎痛
+    # （椎間板ヘルニアの古典的な飼い主表現 — Ettinger 8th ed）。腹部を明記した
+    # 「お腹を触ると痛が」は最長一致で abdominal_pain を維持する。
+    "体を触ると痛が": "back_pain",
+    "体を触ると嫌が": "back_pain",
+    "身体を触ると痛が": "back_pain",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

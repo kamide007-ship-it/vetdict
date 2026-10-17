@@ -834,6 +834,12 @@ SYMPTOMS = [
         "category": "behavioral",
     },
     {
+        "id": "ascites",
+        "name_ja": "腹水（お腹に水がたまる）",
+        "name_en": "Ascites (Fluid in the Abdomen)",
+        "category": "digestive",
+    },
+    {
         "id": "greasy_skin",
         "name_ja": "皮膚のベタつき・体臭（脂漏）",
         "name_en": "Greasy Skin / Body Odor (Seborrhea)",
@@ -1952,6 +1958,7 @@ DISEASES = [
             "loss_of_appetite",
             "bloating",
             "cyanosis",
+            "ascites",
         ],
         "severity": "high",
         "recommended_tests": [
@@ -2786,6 +2793,7 @@ DISEASES = [
             "excessive_thirst",
             "bloating",
             "seizures",
+            "ascites",
         ],
         "severity": "high",
         "recommended_tests": [
@@ -2820,6 +2828,7 @@ DISEASES = [
             "weight_loss",
             "fainting",
             "rapid_breathing",
+            "ascites",
         ],
         "severity": "high",
         "recommended_tests": [
