@@ -421,7 +421,14 @@ SPECIES_PREVALENCE = {
         "Heartworm-Associated Respiratory Disease (HARD)": "common",
         "Pyometra": "common",
         "Dystocia (Difficult Birth)": "common",
-        "Cryptorchidism": "common",
+        # 猫の停留精巣は約1.3-1.7%（犬より低頻度 — Yates 2003）、腹部膨満・腹痛は
+        # 腹腔内精巣捻転/腫瘍化の稀な合併時のみ。common だと腹部膨満の単独主訴で
+        # FIP/腹膜炎/胃拡張より上位に出ていた（2026-10 第72弾）
+        "Cryptorchidism": "uncommon",
+        # 猫の胃拡張・脾捻転・腸間膜軸捻転は症例報告レベル（GDVは犬の疾患）
+        "Feline Gastric Dilatation": "rare",
+        "Feline Splenic Torsion": "rare",
+        "Feline Mesenteric Volvulus": "rare",
         "Mammary Hyperplasia (Fibroadenomatous Change)": "common",
         # Triple-negative is a molecular subtype of feline mammary carcinoma,
         # not an independently common diagnosis — the parent "Mammary Tumor"
