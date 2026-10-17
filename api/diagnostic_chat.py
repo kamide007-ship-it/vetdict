@@ -1403,6 +1403,18 @@ from api.chat.supplements import (  # noqa: F401
     get_treatment_recommendations_for_disease,
 )
 
+_ORTHOPEDIC_ONLY_IDS = frozenset(
+    {
+        "patellar_luxation",
+        "elbow_dysplasia",
+        "hip_dysplasia",
+        "cruciate_ligament_rupture",
+        "osteoarthritis",
+        "legg_calve_perthes",
+        "osteosarcoma",
+    }
+)
+
 
 def match_symptoms_to_diseases(
     symptom_ids: list,
@@ -1492,6 +1504,12 @@ def match_symptoms_to_diseases(
                 elif spec >= 2.0:
                     negative_penalty -= 0.03
             negative_penalty = max(negative_penalty, 0.5)
+        # 運動失調（ふらつき）は神経学的徴候 — 純粋な整形外科疾患は失調を
+        # 起こさない（固有位置感覚は正常: Olby 2010; Ettinger 8th ed）。
+        # 失調の申告がある場合、整形外科単独の疾患は減点し脊髄・神経疾患を
+        # 優先する（2026-10 第72弾）。
+        if "ataxia" in symptom_set and disease["id"] in _ORTHOPEDIC_ONLY_IDS:
+            negative_penalty *= 0.55
 
         prevalence_mult = _PREVALENCE_MULTIPLIER.get(disease.get("prevalence_tier", ""), 1.0)
         # Display score is capped at 1.0, but the SORT must use the uncapped

@@ -1761,8 +1761,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:609,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:586,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:611,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:588,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1786,8 +1786,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6457,
     species:21,
-    drugs:668,
-    symptoms:98,
+    drugs:670,
+    symptoms:99,
     protocols:188
   };
   renderSpeciesGrid();
@@ -7591,11 +7591,11 @@ function renderDrugList(){
       <div class="disease-detail">${sponsorLink}
         ${d.mechanism_ja||d.mechanism?`<dl><dt>${t("dtMechanism")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.mechanism_ja||d.mechanism||""):(d.mechanism||d.mechanism_ja||""))}</dd></dl>`:""}
         ${(()=>{let se=currentLang==="ja"?(d.side_effects_ja||d.side_effects):(d.side_effects||d.side_effects_ja);se=toList(se);return se.length?`<dl><dt>${t("dtSideEffects")}</dt><dd>${se.map(s=>`<span class="drug-se-tag">${escapeHtml(s)}</span>`).join("")}</dd></dl>`:"";})()}
-        <dl><dt>${t("dtContraindications")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||""))}</dd></dl>
+        <dl><dt data-jump="contra">${t("dtContraindications")}</dt><dd>${escapeHtml(currentLang==="ja"?(d.contraindications_ja||d.contraindications||""):(d.contraindications||d.contraindications_ja||""))}</dd></dl>
         ${d.routes_ja||d.routes?`<dl><dt>${t("dtRoutes")}</dt><dd>${escapeHtml(toList(currentLang==="ja"?(d.routes_ja||d.routes):(d.routes||d.routes_ja)).join(", "))}</dd></dl>`:""}
         ${d.formulations_ja||d.formulations?`<dl><dt>${t("dtFormulations")}</dt><dd>${escapeHtml(toList(currentLang==="ja"?(d.formulations_ja||d.formulations):(d.formulations||d.formulations_ja)).join(", "))}</dd></dl>`:""}
-        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt>${t("dtInteractions")} <span style="font-size:.7rem;color:var(--gray-500);font-weight:400">(${d.drug_interactions.length})</span></dt><dd>${renderDrugInteractionsList(d.drug_interactions)}</dd></dl>`:""}
-        <div class="drug-species-section"><strong class="drug-species-title">${t("dtSpeciesInfo")}</strong>
+        ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt data-jump="interactions">${t("dtInteractions")} <span style="font-size:.7rem;color:var(--gray-500);font-weight:400">(${d.drug_interactions.length})</span></dt><dd>${renderDrugInteractionsList(d.drug_interactions)}</dd></dl>`:""}
+        <div class="drug-species-section"><strong class="drug-species-title" data-jump="dosage">${t("dtSpeciesInfo")}</strong>
           <div class="drug-species-grid">
             ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");const highlight=currentSpecies===sp?"drug-species-highlight":"";const cardParsed=info.safe?parseDoseRange(info.dosage||info.dosage_ja||""):null;const cardCri=(!cardParsed&&info.safe)?parseCriRate(info.dosage||info.dosage_ja||""):null;const cardCalc=cardParsed?`<button type="button" class="drug-calc-open" data-dose-min="${cardParsed.min}" data-dose-max="${cardParsed.max}" data-dose-unit="${cardParsed.unit}" data-drug-label="${escapeHtml((currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))+" ("+label+")")}" data-dose-text="${escapeHtml(dose.slice(0,160))}">\u{1F9EE}</button>`:(cardCri?`<button type="button" class="drug-cri-open" data-cri-lo="${cardCri.lo}" data-cri-unit="${cardCri.unit}" data-drug-label="${escapeHtml((currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))+" ("+label+")")}" data-dose-text="${escapeHtml(dose.slice(0,160))}">\u{1F9EE}CRI</button>`:"");return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"} ${highlight}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)} ${cardCalc}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
           </div>
@@ -8705,19 +8705,25 @@ function toggleDbItem(el){
    prognosis sections of an expanded disease sit several screens below the
    header (description → pathophysiology → causes come first). A row of chips
    jumps straight to each labelled section with the same sticky-header-aware
-   scroll the tabs use. Built only from sections actually present, once. */
+   scroll the tabs use. Built only from sections actually present, once.
+   2026-10 第72弾: drug panels too — the species dose cards sit below
+   mechanism / side effects / contraindications / routes / interactions, so a
+   phone user had to scroll several screens to reach the dose they came for. */
 function _addDetailJumpBar(detail){
   if(!detail||detail.querySelector(".detail-jump-bar"))return;
-  const targets=detail.querySelectorAll("dt[data-jump]");
+  const targets=detail.querySelectorAll("[data-jump]");
   if(targets.length<2)return;
-  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"]};
-  const order=["treatment","diagnosis","signs","prognosis"];
+  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"],dosage:["💊 動物種別用量","💊 Dosage"],contra:["⛔ 禁忌","⛔ Contraindications"],interactions:["🔄 相互作用","🔄 Interactions"]};
+  const order=["treatment","diagnosis","signs","prognosis","dosage","contra","interactions"];
   const bar=document.createElement("nav");
   bar.className="detail-jump-bar";
   bar.setAttribute("aria-label",currentLang==="ja"?"セクションへ移動":"Jump to section");
   order.forEach(key=>{
-    const dt=detail.querySelector(`dt[data-jump="${key}"]`);
+    let dt=detail.querySelector(`[data-jump="${key}"]`);
     if(!dt)return;
+    /* Drug panels: land on the currently selected species' dose card when
+       present — that is the one line a vet opened the drug to read. */
+    if(key==="dosage"){const hl=detail.querySelector(".drug-species-highlight");if(hl)dt=hl;}
     const b=document.createElement("button");
     b.type="button";
     b.className="detail-jump-chip";

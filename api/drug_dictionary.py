@@ -104,6 +104,7 @@ from api.drug_batch_77 import DRUGS_BATCH_77
 from api.drug_batch_78 import DRUGS_BATCH_78
 from api.drug_batch_79 import DRUGS_BATCH_79
 from api.drug_batch_80 import DRUGS_BATCH_80
+from api.drug_batch_81 import DRUGS_BATCH_81
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11064,6 +11065,13 @@ for _drug80 in DRUGS_BATCH_80:
     if _drug80["id"] not in _drug_index:
         DRUGS.append(_drug80)
         _drug_index[_drug80["id"]] = _drug80
+
+# Batch 81 (2026-10 第72弾: カルビマゾール（猫甲状腺機能亢進症の治療文が参照）・
+#  タシピミジン（犬の状況性不安、EU 2022 承認））
+for _drug81 in DRUGS_BATCH_81:
+    if _drug81["id"] not in _drug_index:
+        DRUGS.append(_drug81)
+        _drug_index[_drug81["id"]] = _drug81
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
