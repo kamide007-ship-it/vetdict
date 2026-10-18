@@ -63,6 +63,7 @@ SPECIES_PREVALENCE = {
         # Idiopathic facial nerve paralysis — recognized but not everyday
         # (~75% of canine facial paralysis; cockers predisposed. Ettinger 8th)
         "Facial Nerve Paralysis": "uncommon",
+        "Traumatic Proptosis (Globe Prolapse)": "uncommon",
         # Northern-breed keratinization disorder; classic but not common
         # (White SD, JAVMA 2001; Colombini S, Vet Clin North Am 1999).
         "Zinc-Responsive Dermatosis": "uncommon",
@@ -288,6 +289,11 @@ SPECIES_PREVALENCE = {
         # 先天奇形 — 猫の異所性尿管は犬よりさらに稀（Holt & Gibbs）。未tierのまま
         # 3所見セットのカバレッジで血尿+頻尿主訴のFIC/UTIを上回っていた
         "Feline Ectopic Ureter": "rare",
+        # 2026-10 第73弾: 曝露歴依存の外傷・市販食で実質不在の栄養欠乏が、口腔潰瘍＋
+        # 流涎の主訴で慢性歯肉口内炎（FCGS）を上回っていた
+        "Feline Electric Cord Bite Injury": "rare",
+        "Feline Electrical Cord Injury (Electrocution)": "rare",
+        "Feline Niacin Deficiency (Pellagra)": "rare",
         # 猫の子癇（産後低カルシウム血症）は犬と異なり真に稀（Little, The Cat;
         # 産科文献でも症例報告レベル）。未tierの小症状セット（発熱+嗜眠を含む）が
         # 産後文脈のない汎用「発熱+元気消失」主訴の1位を奪っていた
@@ -908,7 +914,9 @@ SPECIES_PREVALENCE = {
         "Cystitis": "common",
         "Heatstroke (Neurological)": "common",
         "Mastitis": "common",
-        "Dehydration": "common",
+        # 脱水は基礎疾患（GIうっ滞等）に続発する状態で主診断ではない — 2症状セットで
+        # 食欲不振主訴の1位を常時占有していた（2026-10 第73弾）
+        "Dehydration": "uncommon",
         "Bladder Sludge (Hypercalciuria)": "common",
         # 尿管結石は膀胱スラッジ/膀胱結石よりはるかに稀（Oglesbee, Quesenberry &
         # Carpenter 4th ed）— 未tierでスラッジ主訴の上位を奪っていた

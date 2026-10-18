@@ -105,6 +105,7 @@ from api.drug_batch_78 import DRUGS_BATCH_78
 from api.drug_batch_79 import DRUGS_BATCH_79
 from api.drug_batch_80 import DRUGS_BATCH_80
 from api.drug_batch_81 import DRUGS_BATCH_81
+from api.drug_batch_82 import DRUGS_BATCH_82
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11072,6 +11073,13 @@ for _drug81 in DRUGS_BATCH_81:
     if _drug81["id"] not in _drug_index:
         DRUGS.append(_drug81)
         _drug_index[_drug81["id"]] = _drug81
+
+# Batch 82 (2026-10 第73弾: シクレソニド吸入（馬専用吸入ステロイド、重度馬喘息 —
+#  馬喘息の治療文の「吸入デキサメタゾン 2噴霧」誤記を是正））
+for _drug82 in DRUGS_BATCH_82:
+    if _drug82["id"] not in _drug_index:
+        DRUGS.append(_drug82)
+        _drug_index[_drug82["id"]] = _drug82
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

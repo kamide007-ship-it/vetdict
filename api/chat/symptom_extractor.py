@@ -804,6 +804,15 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "skin_twitching": ["skin_rippling", "itching", "tremors"],
     # 片肢の麻痺（セキセイの腎腫瘍・精巣腫瘍による坐骨神経圧迫の古典像）。非保有種は虚弱/跛行へ
     "leg_paralysis": ["unilateral_leg_paralysis", "leg_weakness", "hind_limb_paralysis", "paralysis", "lameness"],
+    # 2026-10 第73弾: 頸部腹側のしこり（猫の甲状腺結節）。非保有種はリンパ節腫大/腫瘤へ
+    "palpable_thyroid_nodule": ["swollen_lymph_nodes", "lymph_node_enlargement", "lumps", "lumps_and_bumps"],
+    # 頸部腹側屈曲（猫の低K血症性ポリミオパチー・チアミン欠乏）。非保有種は虚弱へ
+    "ventroflexion_of_neck": ["neck_ventroflexion", "muscle_weakness", "weakness", "lethargy"],
+}
+
+# 部位特異的ID → それに包含される汎用ID（両方抽出された場合は汎用側を落とす）
+_SUBSUMES: dict[str, set[str]] = {
+    "palpable_thyroid_nodule": {"lumps", "lumps_and_bumps", "lumps_bumps"},
 }
 
 # Backwards-compat alias (some older imports use the private name).
@@ -954,6 +963,9 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     # 行く（いく — 否定形は不規則でも いかない が正しい: 脱皮がうまくいきません）
     ("いきません", "いかない"),
     ("いきませんでした", "いかなかった"),
+    # 振る（五段: 頭をよく振ります→振る — 2026-10 第73弾）
+    ("振ります", "振る"),
+    ("振りました", "振った"),
 ]
 # 長い置換を先に適用（「ていませんでした」が「ていません」より先）
 _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
@@ -1108,4 +1120,10 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
                 ):
                     matched.add(sym_id)
 
+    # 部位特異的な所見は同じ部位を指す汎用IDを包含する（「喉の下にしこり」→
+    # 甲状腺結節が、症状名の直接一致で拾われる汎用「しこり」に希釈されない —
+    # 2026-10 第73弾）
+    for _specific, _generic in _SUBSUMES.items():
+        if _specific in matched:
+            matched -= _generic
     return list(matched)
