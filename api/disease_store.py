@@ -1054,24 +1054,39 @@ def search_diseases(query: str, species: str | None = None, category: str | None
 
     search_clause = " AND ".join(f"({c})" for c in and_clauses)
 
+    # 第74弾: docstring の「名前一致優先」は Python 側スコアリングで実装されていたが、
+    # SQL の LIMIT がアルファベット順で先に適用されるため、治療文一致が limit 件を
+    # 埋めると名前一致の疾患がスコアリング前に切り捨てられていた（薬品名クエリ
+    # 「ガバペンチン」等で治療文一致 20 件が名前一致を押し出す）。名前一致ランクを
+    # ORDER BY に入れて LIMIT を生き残らせる。
+    name_rank_clauses = []
+    rank_params: list[str] = []
+    for keyword in keywords:
+        like_pattern = "%" + escape_like(keyword) + "%"
+        name_rank_clauses.append("(name LIKE ? ESCAPE '\\' OR name_ja LIKE ? ESCAPE '\\')")
+        rank_params.extend([like_pattern] * 2)
+    name_rank = "(CASE WHEN " + " AND ".join(name_rank_clauses) + " THEN 0 ELSE 1 END)"
+
     with get_connection() as conn:
         if species:
             query_str = (
                 "SELECT id, species, name, name_ja, urgency, symptoms FROM diseases "
-                "WHERE " + search_clause + " AND species = ? ORDER BY name LIMIT ?"
+                "WHERE " + search_clause + " AND species = ? "
+                "ORDER BY " + name_rank + ", name LIMIT ?"
             )
             rows = conn.execute(
                 query_str,
-                [*params, species, limit],
+                [*params, species, *rank_params, limit],
             ).fetchall()
         else:
             query_str = (
                 "SELECT id, species, name, name_ja, urgency, symptoms FROM diseases "
-                "WHERE " + search_clause + " ORDER BY species, name LIMIT ?"
+                "WHERE " + search_clause + " "
+                "ORDER BY " + name_rank + ", species, name LIMIT ?"
             )
             rows = conn.execute(
                 query_str,
-                [*params, limit],
+                [*params, *rank_params, limit],
             ).fetchall()
 
     # Score results for better relevance ranking + category filtering

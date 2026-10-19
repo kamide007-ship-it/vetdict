@@ -1305,7 +1305,22 @@ function setupGlobalSearch(){
   function _rerunWhenDrugsLoaded(reqId,tries){
     if(reqId!==globalSearchReqId)return;
     if(drugsLoaded){runSearch();return;}
-    if((tries||0)<30)setTimeout(()=>_rerunWhenDrugsLoaded(reqId,(tries||0)+1),200);
+    /* 第74弾: Render無料プランのコールドスタートは10〜45秒かかる（だからこそ
+       /api/drugs の fetchタイムアウトは45秒）。旧実装はここを6秒（30×200ms）で
+       打ち切っていたため、コールドスタート中に検索した利用者には辞書到着後も
+       「該当する疾患・薬品が見つかりません」のまま永久に更新されなかった
+       （デポメドロール→ガバペンチンの実機報告の経路）。ロードが in-flight の間は
+       ポーリングを続け（上限60秒 > 45秒タイムアウト）、完了した時点で必ず再検索する。
+       in-flight でないのに未ロード＝ロード失敗: 再キックせず（ダウン中のサーバーへの
+       無限リトライを避ける — 次のキー入力が既存設計どおり再キックする）、
+       「読み込み中…」行だけを失敗の案内にその場で差し替える。 */
+    const n=(tries||0)+1;
+    if(_drugLoadInFlight||n<=5){
+      if(n<=300)setTimeout(()=>_rerunWhenDrugsLoaded(reqId,n),200);
+      return;
+    }
+    const pendEl=results.querySelector(".omni-drug-pending");
+    if(pendEl)pendEl.textContent=currentLang==="ja"?"薬品辞書の読み込みに失敗しました — もう一度入力すると再試行します":"Failed to load the drug formulary — type again to retry";
   }
   function _speciesTag(spId){
     const sp=spId?SPECIES.find(s=>s.id===spId):null;
@@ -1317,7 +1332,11 @@ function setupGlobalSearch(){
     const sub=currentLang==="ja"?(m.name||""):(m.name_ja||"");
     const typeLabel=m.type==="disease"?(currentLang==="ja"?"疾患":"Disease"):m.type==="emergency"?(currentLang==="ja"?"救急":"Emergency"):(currentLang==="ja"?"薬品":"Drug");
     const brand=m.brand?` <span class="drug-brand-hit">${currentLang==="ja"?"商品名":"Brand"}: ${escapeHtml(m.brand)}</span>`:"";
-    return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||m.name_ja||"")}" data-name-ja="${escapeHtml(m.name_ja||"")}" data-species="${escapeHtml(m.species||"")}" data-proto="${escapeHtml(m.proto||"")}">${icon} <strong>${escapeHtml(label)}</strong>${sub?` <span style="color:var(--gray-400);font-size:.78rem">${escapeHtml(sub)}</span>`:""}${brand}${_speciesTag(m.species)} <span class="search-result-type">${typeLabel}</span></div>`;
+    /* 名前ではなく治療文などの本文で一致した疾患行には理由タグを付ける
+       （薬品名クエリで「腕神経叢損傷」等が並ぶのは治療にその薬を使うため —
+       無言で並べると無関係なノイズに見える） */
+    const bodyHit=m.type==="disease"&&m.nameHit===false?` <span class="drug-brand-hit">${currentLang==="ja"?"治療文に一致":"Matches treatment text"}</span>`:"";
+    return`<div class="search-result-item" role="option" data-type="${m.type}" data-name="${escapeHtml(m.name||m.name_ja||"")}" data-name-ja="${escapeHtml(m.name_ja||"")}" data-species="${escapeHtml(m.species||"")}" data-proto="${escapeHtml(m.proto||"")}">${icon} <strong>${escapeHtml(label)}</strong>${sub?` <span style="color:var(--gray-400);font-size:.78rem">${escapeHtml(sub)}</span>`:""}${brand}${bodyHit}${_speciesTag(m.species)} <span class="search-result-type">${typeLabel}</span></div>`;
   }
   function _actionRows(rawQ,nq){
     const rows=[];
@@ -1362,13 +1381,17 @@ function setupGlobalSearch(){
     function renderMatches(matches){
       if(reqId!==globalSearchReqId)return;
       const actions=_actionRows(rawQ,nq);
+      /* 第74弾: 辞書ロード中の0件は「見つかりません」ではなくロード中の案内を見出しにする
+         （初回アクセスのコールドスタート中に薬品名を検索すると「見つかりません」と断定して
+         いた — 結果はロード完了時に自動更新される）。.omni-drug-pending は失敗時に
+         _rerunWhenDrugsLoaded がその場で文言を差し替えるためのフック。 */
+      const pending=drugsPending?`<div class="search-result-item omni-drug-pending" style="color:var(--gray-400);font-size:.78rem">${currentLang==="ja"?"薬品辞書を読み込んでいます…（初回アクセスは時間がかかることがあります。結果は自動で更新されます）":"Loading the drug formulary… (the first visit can take a while; results update automatically)"}</div>`:"";
       if(matches.length===0){
-        const none=currentLang==="ja"?"該当する疾患・薬品が見つかりません — 下の方法をお試しください":"No matching disease or drug — try one of the options below";
-        const pending=drugsPending?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem">${currentLang==="ja"?"薬品辞書を読み込み中…":"Loading the drug formulary…"}</div>`:"";
-        results.innerHTML=`<div class="search-result-item" style="color:var(--gray-500)">${none}</div>${pending}${actions}`;
+        const none=drugsPending?"":`<div class="search-result-item" style="color:var(--gray-500)">${currentLang==="ja"?"該当する疾患・薬品が見つかりません — 下の方法をお試しください":"No matching disease or drug — try one of the options below"}</div>`;
+        results.innerHTML=`${none}${pending}${actions}`;
         results.style.display="block";return;
       }
-      results.innerHTML=matches.slice(0,15).map(_entityRow).join("")+(matches.length>15?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem;text-align:center">${currentLang==="ja"?`他${matches.length-15}件`:`${matches.length-15} more...`}</div>`:"")+actions;
+      results.innerHTML=matches.slice(0,15).map(_entityRow).join("")+(matches.length>15?`<div class="search-result-item" style="color:var(--gray-400);font-size:.78rem;text-align:center">${currentLang==="ja"?`他${matches.length-15}件`:`${matches.length-15} more...`}</div>`:"")+pending+actions;
       results.style.display="block";
     }
     debounceTimer=setTimeout(()=>{
@@ -1376,7 +1399,7 @@ function setupGlobalSearch(){
       const seen=new Set();
       if(globalSearchTypeFilter!=="drug"){
         allDiseases.forEach(d=>{
-          if(normalizeDrugSearchText(d.name||"").includes(nq)||normalizeDrugSearchText(d.name_ja||"").includes(nq)){const key="d:"+(d.name||d.name_ja||"")+":"+(currentSpecies||"");if(!seen.has(key)){seen.add(key);matches.push({type:"disease",name:d.name,name_ja:d.name_ja,species:currentSpecies||""});}}
+          if(normalizeDrugSearchText(d.name||"").includes(nq)||normalizeDrugSearchText(d.name_ja||"").includes(nq)){const key="d:"+(d.name||d.name_ja||"")+":"+(currentSpecies||"");if(!seen.has(key)){seen.add(key);matches.push({type:"disease",name:d.name,name_ja:d.name_ja,species:currentSpecies||"",nameHit:true});}}
         });
       }
       if(globalSearchTypeFilter!=="disease"){
@@ -1391,12 +1414,18 @@ function setupGlobalSearch(){
           allDrugs.forEach(d=>{
             if(globalSearchSpeciesFilter&&d.species_info&&!d.species_info[globalSearchSpeciesFilter])return;
             const hit=_drugMatchesSearch(d,nq);
-            if(hit)matches.push({type:"drug",name:d.name,name_ja:d.name_ja,brand:hit.hit==="alias"?hit.alias:""});
+            if(hit)matches.push({type:"drug",name:d.name,name_ja:d.name_ja,brand:hit.hit==="alias"?hit.alias:"",nameHit:true});
           });
         }
       }
       renderMatches(matches);
+      /* 第74弾: 並び順は「名前一致 > 治療文など本文一致」を最優先にする。
+         従来は type のみ（疾患 > 薬品）でソートしていたため、薬品名クエリ
+         （例: ガバペンチン）で /api/diseases の治療文一致の疾患が20件返ると、
+         正確な薬品ヒットが上位15件制限の圏外に埋もれて「見つからない」ように
+         見えた（ガバペンチン/デポメドロールの実機報告の経路その2）。 */
       const _order=t=>t==="disease"?0:t==="drug"?1:2;
+      const _cmp=(a,b)=>((b.nameHit?1:0)-(a.nameHit?1:0))||(_order(a.type)-_order(b.type));
       /* 全種横断: 動物種を選ばなくても全21種から疾患をヒットさせる（ローカルに無い種の疾患を補完） */
       if(globalSearchTypeFilter!=="drug"){
         const spFilter=globalSearchSpeciesFilter?"&species="+encodeURIComponent(globalSearchSpeciesFilter):"";
@@ -1406,9 +1435,9 @@ function setupGlobalSearch(){
           extra.forEach(d=>{
             const key="d:"+(d.name||d.name_ja||"")+":"+(d.species||"");
             if(seen.has(key))return;seen.add(key);
-            matches.push({type:"disease",name:d.name,name_ja:d.name_ja,species:d.species||""});
+            matches.push({type:"disease",name:d.name,name_ja:d.name_ja,species:d.species||"",nameHit:normalizeDrugSearchText(d.name||"").includes(nq)||normalizeDrugSearchText(d.name_ja||"").includes(nq)});
           });
-          matches.sort((a,b)=>_order(a.type)-_order(b.type));
+          matches.sort(_cmp);
           renderMatches(matches);
         }).catch(err=>{debugWarn("global cross-species search failed:",err);});
       }
@@ -1422,10 +1451,11 @@ function setupGlobalSearch(){
             const hay=[p.title_ja,p.title_en,...(p.trigger_signs_ja||[]),...(p.trigger_signs_en||[])].map(x=>normalizeDrugSearchText(x||"")).join("\n");
             if(!hay.includes(nq))return;
             const key="e:"+p.id;if(seen.has(key))return;seen.add(key);
-            matches.push({type:"emergency",name:p.title_en||p.title_ja,name_ja:p.title_ja||p.title_en,proto:p.id,species:(p.species||[]).includes(currentSpecies)?currentSpecies:(p.species||[])[0]||""});
+            const titleHit=normalizeDrugSearchText(p.title_ja||"").includes(nq)||normalizeDrugSearchText(p.title_en||"").includes(nq);
+            matches.push({type:"emergency",name:p.title_en||p.title_ja,name_ja:p.title_ja||p.title_en,proto:p.id,species:(p.species||[]).includes(currentSpecies)?currentSpecies:(p.species||[])[0]||"",nameHit:titleHit});
             added++;
           });
-          if(added){matches.sort((a,b)=>_order(a.type)-_order(b.type));renderMatches(matches);}
+          if(added){matches.sort(_cmp);renderMatches(matches);}
         });
       }
     },200);
