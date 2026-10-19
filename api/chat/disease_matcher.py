@@ -354,6 +354,13 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # backing — it exists to stop umbrella syndromes with long symptom lists
 # losing on coverage to narrow rarities.
 _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    # 中高齢猫の頸部腹側（喉の下）の触知結節は甲状腺結節＝甲状腺機能亢進症
+    # until proven otherwise（罹患猫の約80-90%で触知 — Peterson; AAFP 2016）。
+    # 汎用「しこり」の共抽出で皮下腫瘤エントリが上回っていた（2026-10 第73弾）
+    ("cat", frozenset({"palpable_thyroid_nodule"}), "Hyperthyroidism", 1.6),
+    # 高齢猫の夜鳴き＋体重減少は甲状腺機能亢進症の古典的二徴（AAFP 2016; Carney
+    # 2016）。甲状腺結節を症状セットに加えたことによるカバレッジ希釈を補正。
+    ("cat", frozenset({"vocalization_changes", "weight_loss"}), "Hyperthyroidism", 1.3),
     # 緑色粘液便（"green slime"）はフェレット流行性カタル性腸炎（ECE、フェレット腸
     # コロナウイルス）の定義的所見（Williams 2000 Vet Pathol; Quesenberry & Carpenter
     # 4th ed）— 2026-10 第45回: 汎用下痢エントリがカバレッジで上回っていた

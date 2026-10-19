@@ -55,6 +55,7 @@ VALID_SYMPTOMS: set[str] = {
     "ear_odor",
     "head_tilting",
     "facial_droop",
+    "eye_bulging",
     # Skin / Coat
     "itching",
     "hair_loss",
@@ -133,6 +134,7 @@ SYMPTOM_NAMES: dict[str, dict[str, str]] = {
     "ear_odor": {"ja": "耳の悪臭", "en": "Ear Odor"},
     "head_tilting": {"ja": "首の傾き", "en": "Head Tilting"},
     "facial_droop": {"ja": "顔面の歪み・片側の垂れ（耳・唇・まぶた）", "en": "Facial Droop / Asymmetry"},
+    "eye_bulging": {"ja": "眼球突出（目が飛び出している）", "en": "Bulging / Protruding Eye"},
     "itching": {"ja": "かゆみ", "en": "Itching"},
     "hair_loss": {"ja": "脱毛", "en": "Hair Loss"},
     "skin_redness": {"ja": "皮膚の赤み", "en": "Skin Redness"},
@@ -904,7 +906,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Glaucoma",
         "name_ja": "緑内障",
-        "symptoms": {"lethargy", "eye_redness", "squinting", "pain_on_touch"},
+        "symptoms": {"lethargy", "eye_redness", "squinting", "pain_on_touch", "eye_bulging"},
         "description": "Elevation of intraocular pressure (IOP) damaging the optic nerve and retinal ganglion cells. Primary glaucoma: genetic predisposition (goniodysgenesis — abnormal iridocorneal angle); breeds: Basset Hound, Chow Chow, Cocker Spaniel, Samoyed, Shih Tzu, Dalmatian, Great Dane. Secondary glaucoma: uveal effusion, lens luxation, neoplasia, hyphema, uveitis. OCULAR EMERGENCY: acute glaucoma causes permanent vision loss within 24-72 hours if IOP untreated. Normal IOP: 10-25 mmHg; acute glaucoma typically >40-60 mmHg. Tonometry (Tono-Pen or Tonovet rebound tonometer) is mandatory.",
         "description_ja": "眼圧（IOP）上昇による視神経および網膜神経節細胞の傷害。原発性緑内障：遺伝的素因（眼隅角形成異常——虹彩角膜角の異常）；好発品種：バセット・ハウンド、チャウ・チャウ、コッカー・スパニエル、サモエド、シーズー等。続発性緑内障：ぶどう膜滲出・水晶体脱臼・腫瘍・血眼・ぶどう膜炎。眼科的緊急症：急性緑内障はIOPを治療しなければ24〜72時間以内に不可逆的な失明を引き起こす。正常IOP：10〜25 mmHg；急性緑内障は通常>40〜60 mmHg。眼圧計（Tono-PenまたはTonovet反射式）による測定が必須。",
         "pathophysiology": "Aqueous humor is produced by the ciliary body epithelium → flows through the posterior chamber → through the pupil → into the anterior chamber → exits via the trabecular meshwork → uveoscleral route. IOP equilibrium = production rate / outflow resistance. In glaucoma: outflow obstruction at trabecular meshwork (most common) → IOP rises → mechanical compression of optic nerve axons at lamina cribrosa + reduced blood flow to optic nerve head → retinal ganglion cell (RGC) apoptosis. Glutamate excitotoxicity, oxidative stress, and mitochondrial dysfunction amplify RGC death. Primary goniodysgenesis (POAG in dogs): abnormal trabecular meshwork development → increased outflow resistance from birth → gradual IOP rise (often bilateral). Acute secondary glaucoma: sudden IOP spike from pupillary block (lens luxation occluding pupil), inflammatory debris clogging trabecular meshwork (uveitis), hyphema. Chronic IOP elevation → globe enlargement (buphthalmos) → corneal striae (Haab striae) → corneal edema → lens subluxation → blindness. Optic cup:disc ratio (CDR) expansion = structural glaucomatous damage marker.",
@@ -5403,6 +5405,36 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "normal",
         "onset_pattern": {"chronic"},
         "age_predisposition": {"puppy", "young"},
+    },
+    {
+        # 2026-10 第73弾: traumatic proptosis — a common brachycephalic ocular
+        # emergency with no entry anywhere in the DB. Gilger BC, Slatter's
+        # Fundamentals of Veterinary Ophthalmology 6th ed; Maggs; Gelatt's
+        # Veterinary Ophthalmology 6th ed; Gilger 1995 JAVMA (prognostic
+        # factors, 84 dogs); Pe'er O et al. Vet Ophthalmol 2021.
+        "name": "Traumatic Proptosis (Globe Prolapse)",
+        "name_ja": "外傷性眼球脱出（眼球突出）",
+        "symptoms": {"eye_bulging", "eye_redness", "pain_on_touch", "squinting"},
+        "description": "Forward displacement of the globe past the eyelid margins, with the lids closing behind the equator so the eye cannot return on its own. An ocular emergency: exposure keratitis, venous congestion and optic nerve stretch progress within hours. Brachycephalic breeds (pug, shih tzu, pekingese, chihuahua) are strongly predisposed because their shallow orbits and wide palpebral fissures allow proptosis from minor force — collar pressure, restraint or a scuffle; meso/dolichocephalic dogs need major trauma.",
+        "description_ja": "眼球が眼瞼縁を越えて前方へ脱出し、眼瞼が眼球赤道部の後方で閉じてしまうため自力では戻らない状態です。眼科救急: 曝露性角膜炎・静脈うっ血・視神経の伸展が数時間で進行します。短頭種（パグ・シーズー・ペキニーズ・チワワ等）は眼窩が浅く眼裂が広いため、首輪の締め付け・保定・小競り合いのような軽微な外力でも起こり、中頭種・長頭種では強い外傷が必要です。",
+        "causes": "Brachycephalic breeds: minor trauma, collar/leash pressure, restraint, play or fights with another dog. Other breeds: major blunt head trauma (road traffic accidents, kicks, bites). Predisposing anatomy: shallow orbit, macropalpebral fissure, exophthalmic globe position.",
+        "causes_ja": "短頭種: 軽微な外傷・首輪/リードの圧迫・保定・他犬とのじゃれ合いや喧嘩。その他の犬種: 強い鈍性頭部外傷（交通事故・蹴傷・咬傷）。素因となる解剖: 浅い眼窩・大眼瞼裂・突出した眼球位置。",
+        "pathophysiology": "Once the lids close behind the globe they act as a tourniquet: venous and lymphatic outflow obstruct, the conjunctiva and orbit swell, and the proptosis becomes self-perpetuating. The exposed cornea desiccates and ulcerates rapidly; the optic nerve is stretched and its vascular supply compromised; extraocular muscles — the medial rectus first, as it is the shortest — may avulse, producing strabismus. Intraocular hemorrhage, uveitis and secondary glaucoma can follow. Vision outcome depends on optic nerve injury, so the presence of direct/consensual pupillary light reflexes and the number of avulsed muscles are the key prognostic signs (Gilger 1995).",
+        "pathophysiology_ja": "眼瞼が眼球の後方で閉じると止血帯として働き、静脈・リンパ還流が閉塞して結膜・眼窩が腫脹し、脱出が自己増悪します。露出した角膜は急速に乾燥・潰瘍化し、視神経は伸展され血行が障害されます。外眼筋（最も短い内直筋から）が断裂すると斜視が生じます。眼内出血・ぶどう膜炎・続発緑内障が続発しえます。視覚の転帰は視神経損傷で決まるため、直接・間接の対光反射の有無と断裂した外眼筋の数が主要な予後所見です（Gilger 1995）。",
+        "treatment": "Owner first aid: keep the cornea moist with saline-soaked gauze or lubricant, prevent self-trauma, do NOT attempt to push the globe back, and transport immediately. Clinic: stabilize systemic trauma first (head trauma, thoracic injury). Under general anesthesia: corneal lubrication, gentle reduction with a lateral canthotomy as needed, and temporary tarsorrhaphy (horizontal mattress sutures with stents, leaving a medial gap for medication) for 10-14 days. Medical therapy: topical broad-spectrum antibiotic, systemic anti-inflammatory (NSAID, or short-course prednisolone 0.5-1 mg/kg/day if no contraindication), systemic antibiotic for contaminated wounds, analgesia, E-collar. Enucleation is indicated for a ruptured globe, avulsion of three or more extraocular muscles, optic nerve transection, or severe hyphema with no PLR. Remove sutures at 2 weeks; reassess tear production (Schirmer — neurogenic KCS is common) and strabismus.",
+        "treatment_ja": "飼い主の応急処置: 生理食塩水で湿らせたガーゼや眼軟膏で角膜を湿潤に保ち、自傷を防ぎ、眼球を押し戻そうとせず、直ちに来院。病院: まず全身の外傷（頭部外傷・胸部外傷）を安定化。全身麻酔下に角膜保護、必要に応じ外側眼角切開を併用した愛護的整復、一時的瞼板縫合（ステント付き水平マットレス縫合、点眼用に内側を一部開ける）を10-14日。内科: 広域抗菌点眼、全身抗炎症（NSAID、禁忌がなければ短期プレドニゾロン0.5-1 mg/kg/日）、汚染創には全身抗菌薬、鎮痛、エリザベスカラー。眼球破裂・外眼筋3本以上の断裂・視神経断裂・対光反射消失を伴う重度前房出血は眼球摘出の適応。2週で抜糸し、涙液量（シルマー試験 — 神経性KCSが多い）と斜視を再評価。",
+        "prognosis": "Globe retention is achieved in most promptly treated dogs; return of vision is less common. Favorable signs: brachycephalic breed (proptosis from minor force implies less optic nerve trauma), positive direct/consensual PLR, fewer avulsed muscles, short time to reduction. Poor signs: non-brachycephalic breed (implies severe trauma), absent PLR, ≥3 avulsed muscles, hyphema. Common sequelae: lateral strabismus (usually improves over months), KCS, corneal scarring, lagophthalmos and recurrence.",
+        "prognosis_ja": "迅速に治療した犬の多くで眼球は温存できますが、視覚の回復はそれより少なくなります。良好な所見: 短頭種（軽微な外力での脱出＝視神経損傷が軽い）、直接/間接対光反射陽性、断裂した外眼筋が少ない、整復までの時間が短い。不良な所見: 非短頭種（強い外傷を意味する）、対光反射消失、外眼筋3本以上の断裂、前房出血。よくある後遺症: 外斜視（数ヶ月で改善することが多い）、乾性角結膜炎、角膜瘢痕、兎眼、再発。",
+        "prevention": "In brachycephalic breeds use a harness instead of a neck collar, restrain by the body rather than the scruff, avoid rough play with larger dogs, and consider permanent partial tarsorrhaphy (medial canthoplasty) for dogs with lagophthalmos or a previous proptosis of either eye.",
+        "prevention_ja": "短頭種では首輪ではなくハーネスを使用し、首筋ではなく体幹で保定し、大型犬との激しい遊びを避ける。兎眼のある犬や、どちらかの眼で脱出歴のある犬では永久的な部分瞼板縫合（内眼角形成術）を検討します。",
+        "recommended_tests": [
+            "眼科検査 (Ophthalmic Exam) - direct/consensual PLR, menace, extraocular muscle integrity, globe integrity",
+            "フルオレセイン染色 (Fluorescein Stain) - exposure ulceration",
+            "シルマー涙液試験 (Schirmer Tear Test) - after reduction; neurogenic KCS",
+            "頭部X線/CT (Skull Imaging) - orbital fractures with major trauma",
+        ],
+        "urgency": "emergency",
+        "onset_pattern": {"acute"},
     },
     {
         "name": "Foreign Body in Ear",
@@ -13521,6 +13553,7 @@ SYMPTOM_CATEGORIES = {
             "ear_odor",
             "head_tilting",
             "facial_droop",
+            "eye_bulging",
         ],
     },
     "skin": {

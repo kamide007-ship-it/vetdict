@@ -507,6 +507,14 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "hair loss": "skin_hair_loss",
     "脱毛": "skin_hair_loss",
     "毛が抜ける": "skin_hair_loss",
+    # たてがみ・尾根部の擦りつけは馬の掻痒の典型（夏癬=Culicoides過敏症 — 2026-10 第73弾）
+    "皮膚がかゆ": "skin_itching",
+    "かゆが": "skin_itching",
+    "たてがみをこす": "skin_itching",
+    "尾をこす": "skin_itching",
+    "しっぽをこす": "skin_itching",
+    "尻尾をこす": "skin_itching",
+    "柱にこすりつけ": "skin_itching",
     "itching": "skin_itching",
     "痒い": "skin_itching",
     "掻いてる": "skin_itching",
@@ -996,6 +1004,14 @@ def extract_symptoms_from_text(text: str) -> list:
         # "目が大きく見える" (buphthalmos — the acute-glaucoma owner sign)
         # resolves to eye_bulging; the legacy vocabulary's closest signal.
         "eye_bulging": ["eye_swelling"],
+        "pop_eye": ["eye_bulging", "eye_swelling"],
+        # 「目が大きく見える」は牛眼（緑内障の眼球拡大）— 外傷性脱出の
+        # eye_bulging とは別に、従来どおり眼球腫大として保持（2026-10 第73弾）
+        "enlarged_eye": ["eye_swelling"],
+        # 顔の擦りつけ（犬では顔面掻痒）・甲状腺/頸部結節（2026-10 第73弾）
+        "pawing_at_face": ["itching"],
+        "ventroflexion_of_neck": ["lethargy"],
+        "palpable_thyroid_nodule": ["swollen_lymph_nodes", "lumps_bumps"],
         # "舌が紫" (cyanosis) has no legacy ID — respiratory compromise is
         # the closest legacy signal for the CHF/airway complaint.
         "cyanosis": ["labored_breathing"],
