@@ -8419,6 +8419,40 @@ ${urgent?`<div class="urgent">${ja?"⚠ この病気は緊急性の高い状態�
 
 /* ===== Shared helpers ===== */
 
+/* 2026-10 第73弾: .disease-detail.open は開閉アニメーション用に
+   max-height:5000px + overflow-y:auto を持つが、中身が 5000px を超える
+   薬品/疾患（例: メロキシカム詳細 ≈6,500px）ではパネル自体が「見えない
+   入れ子スクロールコンテナ」になり、スマホのスワイプがページではなく
+   パネル内部のスクロールに吸われて「動物種（別用量）から下にスクロールが
+   進まない」状態になっていた（Playwright 実タッチで再現: 内部スクロール
+   残量 ≈1,500px を使い切るまでの4スワイプがページを1pxも動かさない）。
+   開くアニメーション完了後に上限を解除してページスクロール一本に戻す。 */
+function _unclampDetailPanel(detail){
+  if(!detail)return;
+  const done=()=>{
+    if(!detail.classList.contains("open"))return;
+    detail.style.maxHeight="none";
+    detail.style.overflowY="visible";
+  };
+  const onEnd=e=>{
+    if(e.target!==detail||e.propertyName!=="max-height")return;
+    detail.removeEventListener("transitionend",onEnd);
+    done();
+  };
+  detail.addEventListener("transitionend",onEnd);
+  /* transitionend は reduced-motion・非表示タブ等で発火しないことがあるため、
+     アニメーション時間(0.4s)より長いフォールバックで必ず解除する */
+  setTimeout(()=>{detail.removeEventListener("transitionend",onEnd);done();},600);
+}
+
+/* 閉じる側: インラインの max-height:none が残っていると .open を外しても
+   閉じないため、クラス操作の前に必ずインライン上書きを剥がす */
+function _clampDetailPanel(detail){
+  if(!detail)return;
+  detail.style.maxHeight="";
+  detail.style.overflowY="";
+}
+
 /* Toggle detail panel with accessibility */
 function toggleDetail(head){
   /* Find detail section: nextElementSibling or querySelector within parent */
@@ -8429,7 +8463,9 @@ function toggleDetail(head){
   }
   if(!detail)return;
   const icon=head.querySelector(".expand-icon");
+  if(detail.classList.contains("open"))_clampDetailPanel(detail);
   const isOpen=detail.classList.toggle("open");
+  if(isOpen)_unclampDetailPanel(detail);
   head.setAttribute("aria-expanded",isOpen);
   if(icon)icon.classList.toggle("rotated",isOpen);
   /* On open, bring the card to a useful reading position — just below the sticky
@@ -8635,7 +8671,9 @@ function _attachDbItemHandlers(container){
 function toggleDbItem(el){
   const detail=el.querySelector(".disease-detail");
   if(detail){
+    if(detail.classList.contains("open"))_clampDetailPanel(detail);
     const isOpen=detail.classList.toggle("open");
+    if(isOpen)_unclampDetailPanel(detail);
     el.setAttribute("aria-expanded",isOpen);
     const nameEl=el.querySelector(".d-name")||el.querySelector(".disease-name");
     const diseaseName=nameEl?(nameEl.textContent||"").trim().substring(0,80):"";
@@ -8648,7 +8686,7 @@ function toggleDbItem(el){
         listEl.querySelectorAll(".disease-db-item[aria-expanded='true']").forEach(other=>{
           if(other===el)return;
           const od=other.querySelector(".disease-detail.open");
-          if(od)od.classList.remove("open");
+          if(od){_clampDetailPanel(od);od.classList.remove("open");}
           other.setAttribute("aria-expanded","false");
           const on=other.querySelector(".d-name")||other.querySelector(".disease-name");
           const onm=on?(on.textContent||"").trim().substring(0,80):"";
