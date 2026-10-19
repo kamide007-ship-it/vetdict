@@ -194,6 +194,9 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "hypothermia": "internal",
     "jaundice": "internal",
     "lymph_node_enlargement": "internal",
+    # 頸部腹側の甲状腺結節（甲状腺機能亢進症の猫の約80-90%で触知 — Peterson,
+    # AAFP 2016）。飼い主は「喉の下のしこり」として気づく（2026-10 第73弾）
+    "palpable_thyroid_nodule": "internal",
     "pale_gums": "internal",
     "recurrent_infections": "internal",
 }
@@ -1259,6 +1262,9 @@ DISEASES: List[Dict[str, Any]] = [
             "increased_appetite",
             "poor_coat",
             "heart_murmur",
+            # 触知可能な甲状腺結節（goiter）— 罹患猫の約80-90%（Peterson,
+            # AAFP 2016）。「喉の下にしこり」の主訴が甲状腺に届くように。
+            "palpable_thyroid_nodule",
             # Increased (often nocturnal) vocalization is a documented sign of
             # feline hyperthyroidism (AAFP Guidelines, Carney 2016) — without
             # it the classic geriatric "夜中に大声で鳴く + 痩せてきた"
@@ -12642,6 +12648,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "lip_swelling": {"ja": "口唇腫脹", "en": "Lip Swelling"},
     "lumps": {"ja": "しこり", "en": "Lumps"},
     "lymph_node_enlargement": {"ja": "リンパ節腫大", "en": "Lymph Node Enlargement"},
+    "palpable_thyroid_nodule": {"ja": "頸部（喉の下）のしこり・甲状腺結節", "en": "Palpable Cervical / Thyroid Nodule"},
     "mammary_masses": {"ja": "乳腺腫瘤", "en": "Mammary Masses"},
     "miliary_dermatitis": {"ja": "粟粒性皮膚炎", "en": "Miliary Dermatitis"},
     "muffled_heart_sounds": {"ja": "心音減弱", "en": "Muffled Heart Sounds"},

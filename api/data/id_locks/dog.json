@@ -2,8 +2,8 @@
  "species": "dog",
  "schema_version": 1,
  "note": "Frozen disease ids (name→id). Append-only: existing mappings are never changed. Delete to fall back to position-derived ids.",
- "generated_at": "2026-10-05T08:38:41Z",
- "count": 624,
+ "generated_at": "2026-10-18T15:15:31Z",
+ "count": 625,
  "locks": {
   "Acanthomatous Ameloblastoma␟棘細胞性エナメル上皮腫": "dog_0411",
   "Acetaminophen Toxicosis␟アセトアミノフェン中毒": "dog_0334",
@@ -597,6 +597,7 @@
   "Tracheal Hypoplasia␟気管低形成": "dog_0502",
   "Tracheal Perforation␟気管穿孔": "dog_0412",
   "Transitional Cell Carcinoma␟移行上皮がん（膀胱がん）": "dog_0110",
+  "Traumatic Proptosis (Globe Prolapse)␟外傷性眼球脱出（眼球突出）": "dog_xb09f23e2",
   "Tricuspid Valve Dysplasia␟三尖弁形成不全": "dog_0285",
   "Trigeminal Neuritis␟三叉神経炎": "dog_0534",
   "Tularemia␟野兎病": "dog_0508",

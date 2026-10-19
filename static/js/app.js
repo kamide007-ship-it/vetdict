@@ -1761,9 +1761,9 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:604,drugs:611,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:588,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:364,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:605,drugs:612,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:589,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:365,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1784,10 +1784,10 @@ function setDefaultStats(){
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:3,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:6457,
+    diseases:6458,
     species:21,
-    drugs:670,
-    symptoms:99,
+    drugs:671,
+    symptoms:100,
     protocols:188
   };
   renderSpeciesGrid();
@@ -2183,7 +2183,7 @@ function resetSpeciesChat(species){
   /* Quick symptom buttons per species */
   const quickSymptoms=currentLang==="ja"?{
     dog:["嘔吐している","元気がない","下痢している","咳が出る","足を引きずる","皮膚が痒い","おしりを地面にこすりつける","鼻血が出た","お腹が膨らんで吐こうとしても吐けない","便に白い米粒のようなもの","耳が腫れてぷよぷよしている","食べた後すぐに未消化のまま吐く","乳腺にしこりがある","口の中にできものがある","いびきがひどく呼吸がガーガー鳴る","顔が腫れてじんましんが出た","階段を登らなくなった","散歩中に急に倒れて意識を失った","陰部から膿が出て水をよく飲む","目やにがひどくて目が開かない","チョコレートを食べてしまった","ぶどうを食べてしまった","川や水たまりの水を飲んだ後に発熱","自分のしっぽを追いかけてかじる","急に首を傾けてぐるぐる回る","水を飲むとむせて声がガラガラ","顔の片側が腫れて目の下から膿が出る","肉球の間が赤く腫れて舐め続ける","発熱があり関節を痛がって歩かない"],
-    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く","耳の付け根を掻いて黒いカスが出る","爪が伸びすぎて肉球に刺さっている","首の周りにかさぶたがある","後ろ足がふらつき高い所へ飛び乗れない","目の色が変わってきた"],
+    cat:["食べない","吐いた","くしゃみ","目やにが出る","おしっこが出ない","毛が抜ける","ジャンプしなくなった","トイレ以外の場所で粗相する","口をくちゃくちゃさせる","耳の先にかさぶたができて治らない","急に後ろ足が動かなくなった","水を飲む量が増えて痩せてきた","お尻を舐めてばかりいる","水をよく飲みトイレの砂の塊が大きい","かかとをつけてペタペタ歩く","耳の付け根を掻いて黒いカスが出る","爪が伸びすぎて肉球に刺さっている","首の周りにかさぶたがある","後ろ足がふらつき高い所へ飛び乗れない","目の色が変わってきた","喉の下にしこりがある","首を下げたまま歩く"],
     horse:["お腹を痛がっている（疝痛）","前脚をかばって歩く","後ろ足を痛がる","蹄が熱い","毛が長くて換毛しない","食べない","咳が出る","飲み込めず鼻から餌が出てくる","後肢が突っ張って歩き尿が茶色い","皮膚にイボ状のできものがある","目を細めて涙が多い","口から餌をこぼす","背中を触ると痛がる","下痢がひどく元気がない","後ろ足がむくんでいる"],
     rabbit:["糞が小さい","食べない","歯ぎしり","首が傾いている","お腹が張っている","鼻水","あごが濡れている","あごの下が腫れている","便が毛でつながっている","おしっこが白っぽくてドロドロしている","お尻の周りに軟らかい便がつく","お尻が汚れていて臭い","耳の中にかさぶたがある","陰部から血が出る"],
     chinchilla:["よだれが出る","毛が抜ける","食べない","糞が出ない","歯が伸びている","砂浴びしない","耳が赤くて呼吸が速い","毛をかじって短くなっている","目が濡れて顔をこする","耳が垂れて耳から臭い"],
@@ -8751,13 +8751,17 @@ function _addDetailJumpBar(detail){
   if(!detail||detail.querySelector(".detail-jump-bar"))return;
   const targets=detail.querySelectorAll("[data-jump]");
   if(targets.length<2)return;
-  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"],dosage:["💊 動物種別用量","💊 Dosage"],contra:["⛔ 禁忌","⛔ Contraindications"],interactions:["🔄 相互作用","🔄 Interactions"]};
-  const order=["treatment","diagnosis","signs","prognosis","dosage","contra","interactions"];
+  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"],dosage:["💊 動物種別用量","💊 Dosage"],contra:["⛔ 禁忌","⛔ Contraindications"],interactions:["🔄 相互作用","🔄 Interactions"],drugs:["💉 関連薬品","💉 Related drugs"]};
+  /* 2026-10 第73弾: 長い治療プロトコルの末尾にある「治療に関連する薬品」チップ群
+     （→薬品詳細・相互作用チェック）へも1タップで（スマホで治療文を数画面
+     スクロールしなくてよい）。チップ群は非同期にハイドレートされるため
+     クリック時に再取得する。 */
+  const order=["treatment","drugs","diagnosis","signs","prognosis","dosage","contra","interactions"];
   const bar=document.createElement("nav");
   bar.className="detail-jump-bar";
   bar.setAttribute("aria-label",currentLang==="ja"?"セクションへ移動":"Jump to section");
   order.forEach(key=>{
-    let dt=detail.querySelector(`[data-jump="${key}"]`);
+    let dt=key==="drugs"?detail.querySelector(".treatment-drugs-section"):detail.querySelector(`[data-jump="${key}"]`);
     if(!dt)return;
     /* Drug panels: land on the currently selected species' dose card when
        present — that is the one line a vet opened the drug to read. */
@@ -8768,6 +8772,7 @@ function _addDetailJumpBar(detail){
     b.textContent=labels[key][currentLang==="ja"?0:1];
     b.addEventListener("click",e=>{
       e.preventDefault();e.stopPropagation();
+      if(key==="drugs")dt=detail.querySelector(".treatment-drugs-section")||dt;
       scrollToAnchor(dt,{settle:false});
       trackEvent("detail_section_jump",{section:key});
     });

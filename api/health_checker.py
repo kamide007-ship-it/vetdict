@@ -807,6 +807,15 @@ SYMPTOMS = [
     # 「片方の耳だけ下がって顔が歪んでいます」 extracted ZERO ids — the single
     # defining sign of facial nerve paralysis (and a common otitis
     # media-interna accompaniment) had no legacy ID at all.
+    # 2026-10 第73弾: 眼球突出・眼球脱出（目が飛び出している）。従来は
+    # eye_bulging→eye_swelling フォールバックで結膜炎・チェリーアイへ誤誘導
+    # されていた（短頭種の外傷性眼球脱出は分単位の眼科救急）。
+    {
+        "id": "eye_bulging",
+        "name_ja": "眼球突出（目が飛び出している）",
+        "name_en": "Bulging / Protruding Eye",
+        "category": "ocular",
+    },
     {
         "id": "facial_droop",
         "name_ja": "顔面の歪み・片側の垂れ（耳・唇・まぶた）",
@@ -2086,6 +2095,9 @@ DISEASES = [
             "lethargy",
             "vision_loss",
             "pain",
+            # 牛眼（buphthalmos — 慢性緑内障の眼球拡大）は飼い主には
+            # 「目が大きく/飛び出して見える」（2026-10 第73弾）
+            "eye_bulging",
         ],
         "severity": "moderate",
         "recommended_tests": ["tonometry", "cerf_exam"],
@@ -3802,6 +3814,31 @@ DISEASES = [
             "chihuahua": 1.3,
         },
     },
+    # 2026-10 第73弾: 外傷性眼球脱出（眼球突出）。短頭種で軽微な外力・保定でも
+    # 起こる眼科救急（Gilger, Slatter's 6th; Maggs; Pe'er 2021 Vet Ophthalmol —
+    # 短頭種は視覚温存率が高い）。名前は犬モジュールと完全一致（疾患DBピボット着地）。
+    {
+        "id": "traumatic_proptosis",
+        "prevalence_tier": "uncommon",
+        "name_ja": "外傷性眼球脱出（眼球突出）",
+        "name_en": "Traumatic Proptosis (Globe Prolapse)",
+        "description_ja": "眼球が眼瞼の後方へ前方脱出し、まぶたが眼球の後ろで閉じて戻らなくなる眼科救急です。短頭種（パグ・シーズー・ペキニーズ・チワワ等）は眼窩が浅く、咬傷・交通事故だけでなく首輪の締め付けや保定でも起こります。来院までは濡らしたガーゼで角膜の乾燥を防ぎ、眼球を押し戻そうとしないよう指導。治療は全身麻酔下の外側眼角切開を併用した整復＋一時的瞼板縫合（10-14日）と抗菌・抗炎症療法。眼球破裂・外眼筋3本以上の断裂・視神経断裂例は眼球摘出。予後因子は対光反射（直接/間接）の有無と外眼筋断裂の数で、短頭種は非短頭種より視覚温存率が高い（Gilger, Slatter's 6th ed; Pe'er 2021）。",
+        "description_en": "An ophthalmic emergency in which the globe displaces forward past the eyelids, which then close behind it. Brachycephalic breeds (pug, shih tzu, pekingese, chihuahua) have shallow orbits — proptosis follows not only bites and road trauma but collar pressure or restraint. Until arrival keep the cornea moist with wet gauze and never try to push the eye back. Treatment: reduction under general anesthesia (lateral canthotomy as needed) plus temporary tarsorrhaphy for 10-14 days with antimicrobial/anti-inflammatory therapy; enucleation for a ruptured globe, avulsion of three or more extraocular muscles or optic nerve transection. Prognostic factors are the pupillary light reflexes and the number of avulsed muscles; brachycephalics retain vision more often than other breeds (Gilger, Slatter's 6th ed; Pe'er 2021).",
+        # Complaint-gated: eye redness/discharge belong to conjunctivitis ddx;
+        # the entry matches on the defining sign only.
+        "symptoms": [
+            "eye_bulging",
+        ],
+        "severity": "high",
+        "recommended_tests": ["ophthalmic_exam", "pupillary_light_reflex", "fluorescein_stain"],
+        "breed_risks": {
+            "pug": 3.0,
+            "shih_tzu": 2.5,
+            "pekingese": 2.5,
+            "chihuahua": 1.8,
+            "french_bulldog": 1.5,
+        },
+    },
     # 2026-10 audit round 39: facial nerve paralysis. 「片方の耳だけ下がって
     # 顔が歪んでいます」 extracted zero symptoms — the characteristic unilateral
     # facial droop had neither a legacy symptom nor a disease. Idiopathic facial
@@ -5097,6 +5134,8 @@ _PATHOGNOMONIC_CLUSTERS = [
     # cluster, oral_mass pattern) — otitis media-interna shares the sign in its
     # own set and stays in the list as the key identifiable cause (2026-10).
     (frozenset({"facial_droop"}), "facial_nerve_paralysis", 1.6),
+    # 眼球突出は部位診断的 — 短頭種の外傷性眼球脱出（2026-10 第73弾）
+    (frozenset({"eye_bulging"}), "traumatic_proptosis", 1.5),
     # 点状出血は血小板/血管障害の部位診断的所見（2026-10 第69弾）
     (frozenset({"petechiae"}), "immune_mediated_thrombocytopenia", 1.6),
     # Owner-visible bite abnormality (受け口/出っ歯) is site-diagnostic for an
