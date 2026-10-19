@@ -847,7 +847,8 @@ DISEASE_DATABASE: list[Disease] = [
         "infectious",
         "severe",
         "Streptococcus equi による上気道感染。下顎リンパ節膿瘍形成。",
-        ["resp_nasal_discharge", "gen_fever", "gen_swollen_lymph", "gen_poor_appetite"],
+        # 咽後リンパ節膿瘍による嚥下困難・流涎は腺疫の典型所見（Boyle 2018 ACVIM consensus）
+        ["resp_nasal_discharge", "gen_fever", "gen_swollen_lymph", "gen_poor_appetite", "dig_salivation"],
         urgency="urgent",
         recommended_exams=[
             (1, "鼻咽頭スワブ培養", "Nasopharyngeal Swab Culture"),
@@ -12611,6 +12612,14 @@ _SYNDROME_PAIR_BOOSTS: list[tuple[frozenset, tuple[str, ...], float]] = [
         frozenset({"gen_fever", "gen_swollen_lymph"}),
         ("Strangles", "Strangles (Streptococcus equi)"),
         1.5,
+    ),
+    # 2026-10 第74弾: 咽喉頭リンパ節腫脹＋嚥下困難（流涎）は咽後リンパ節膿瘍による
+    # 腺疫の古典像（Boyle 2018 ACVIM consensus — 嚥下困難・頸部伸展姿勢）。
+    # 鼻孔からの飼料逆流を伴えばチョークのペアが別途発火する。
+    (
+        frozenset({"gen_swollen_lymph", "dig_salivation"}),
+        ("Strangles", "Strangles (Streptococcus equi)"),
+        1.4,
     ),
     # 屈腱部の腫脹＋熱感は屈腱炎（SDFT が最多 — Adams & Stashak 7th ed）
     (

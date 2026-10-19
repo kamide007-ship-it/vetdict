@@ -12096,7 +12096,7 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "発情排卵後の非妊娠状態で妊娠様徴候を呈する。猫では交配誘発排卵なので未交配でも発生可能。",
         "pathophysiology": "Cats are induced ovulators, but ovulation can occur without mating (e.g. after stroking or environmental stimuli). The resulting non-pregnant luteal phase causes sustained progesterone and, as it ends, mammary hyperplasia and lactation with nesting behaviour, reduced courtship and sometimes polydipsia. Clinically overt pseudopregnancy is much less common in cats than in dogs.",
         "pathophysiology_ja": "猫は交配誘発排卵動物だが、交配なしで心理的刺激や環境変化で排卵が起こる場合がある。黄体期の遷延→高プロゲステロン血症→乳腺増生・乳汁分泌。行動：巣作り行動・求愛行動低下・多飲。犬ほど一般的ではないが報告あり。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
+        "causes": "Ovulation without conception (rare in cats, which are induced ovulators — follows sterile mating or occasional spontaneous ovulation), with a prolonged luteal phase; also after spontaneous abortion of a pregnancy. Dysregulation of the hypothalamic-pituitary-ovarian axis contributes.",
         "causes_ja": "交配なしの排卵（猫では稀）。黄体期遷延。多妊娠の自然流産後。視床下部-下垂体-卵巣軸の機能異常。",
         "treatment": "MILD CASES: Supportive care and observation — signs typically resolve spontaneously within "
         "2-3 weeks as progesterone levels decline. Discourage nesting behavior (remove nesting "
@@ -12139,7 +12139,7 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "卵巣嚢胞による持続性発情またはnymph omania。排卵障害や発情周期の中断に伴う。",
         "pathophysiology": "Fluid-filled ovarian cysts disturb ovarian hormone secretion. Oestrogen-producing (follicular) cysts cause persistent oestrogen exposure and prolonged oestrus (behavioural oestrus lasting >3 weeks); ovulation fails (anovulation) or luteinisation after ovulation is incomplete, and the cat's response to the induced-ovulation stimulus is altered.",
         "pathophysiology_ja": "卵巣嚢胞（fluid-filled structure）の発生→ホルモン分泌異常。エストロゲン産生嚢胞の場合、持続的エストロゲン分泌→持続性発情（estrus持続期間>3週）。排卵が起こらない（anovulation）か、排卵後も黄体形成が不完全。猫では交配誘発排卵だが、嚢胞がある場合は刺激への反応性が変化。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
+        "causes": "The mechanism of feline ovarian cyst formation is unknown; an abnormal LH surge is suspected. Reported after abortion during pregnancy and with pathological ovarian function (e.g., ovarian tumors).",
         "causes_ja": "卵巣嚢胞の形成機序は不明だが、LH surge異常との関連が疑われる。多妊娠中の流産後。病的卵巣機能（腫瘍など）。",
         "treatment": "MEDICAL MANAGEMENT: (1) Ovulation induction — hCG (human chorionic gonadotropin) 250-500 IU "
         "IM single dose to induce ovulation and subsequent luteal phase, temporarily resolving "
@@ -12183,7 +12183,7 @@ DISEASES: List[Dict[str, Any]] = [
         "description_ja": "産後の子宮内膜感染症。胎仔遺残・胎盤停滞に伴う。犬ほど一般的ではないが発症時は重症化傾向。",
         "pathophysiology": "Endometrial sloughing at parturition combined with retained fetuses (one or more kittens not expelled) or retained placentas becomes a suppurative uterine infection. Postpartum complications are rarer in cats than in dogs, but when metritis develops it tends to progress rapidly to septic shock.",
         "pathophysiology_ja": "分娩時の子宮内膜剥離 → 胎仔遺残（one or more kittens not expelled）or胎盤遺残→化膿性感染。猫での産褥合併症は犬より稀だが、発症時は急速に敗血症ショックに進行する傾向。",
-        "causes": "Multifactorial etiology including infectious, environmental, immune, and host-related factors. Specific risk factors and triggers vary by individual case.",
+        "causes": "Retained fetus (most common cause), retained placenta, uterine inertia from hypocalcemia, uterine rupture, and parturition stress with large litters (>6 kittens), allowing ascending bacterial infection of the postpartum uterus.",
         "causes_ja": "胎仔遺残（最多原因）。胎盤停滞。低カルシウム血症による子宮無力症。子宮破裂。多母体妊娠（>6匹）での分娩ストレス。",
         "treatment": "DIAGNOSTIC WORKUP: Abdominal ultrasound is essential to confirm retained fetuses or placental "
         "tissue. Abdominal radiographs to assess fetal mineralization (retained fetuses). CBC/chemistry "
