@@ -11082,7 +11082,8 @@ for _drug82 in DRUGS_BATCH_82:
         DRUGS.append(_drug82)
         _drug_index[_drug82["id"]] = _drug82
 
-# Batch 83 (2026-10 第74弾: イゼニベトマブ（レニビア、犬の3ヶ月毎抗NGF抗体））
+# Batch 83 (2026-10 第74弾: イゼニベトマブ（レニビア、3ヶ月間隔の犬用抗NGF抗体 —
+#  英国VMD 2026・カナダ・EU承認））
 for _drug83 in DRUGS_BATCH_83:
     if _drug83["id"] not in _drug_index:
         DRUGS.append(_drug83)

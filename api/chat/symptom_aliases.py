@@ -3682,6 +3682,72 @@ SYMPTOM_ALIASES = {
     "卵をたくさん産": "excessive_egg_laying",
     "産卵が多": "excessive_egg_laying",
     "顎が腫れて柔らか": "jaw_softening",
+    # 2026-10 第74弾（チャット精度第49回）
+    # 雄の包皮・陰茎からの膿/血（亀頭包皮炎・前立腺肥大症）— 従来は抽出ゼロ
+    "陰茎から膿": "preputial_discharge",
+    "陰茎から血": "preputial_discharge",
+    "陰茎から何か": "preputial_discharge",
+    "おちんちんから膿": "preputial_discharge",
+    "おちんちんから血": "preputial_discharge",
+    "おちんちんの先から": "preputial_discharge",
+    "包皮から膿": "preputial_discharge",
+    "包皮から膿が出": "preputial_discharge",
+    "陰茎から膿が出": "preputial_discharge",
+    "陰茎から血が出": "preputial_discharge",
+    "包皮から血": "preputial_discharge",
+    "包皮が汚れ": "preputial_discharge",
+    "包皮から分泌物": "preputial_discharge",
+    "ペニスから膿": "preputial_discharge",
+    "ペニスから血": "preputial_discharge",
+    # 皮膚の赤い丘疹・膿疱（膿皮症の古典的主訴）
+    "赤いぶつぶつ": "skin_rashes",
+    "赤いブツブツ": "skin_rashes",
+    "赤い発疹": "skin_rashes",
+    "膿をもったぶつぶつ": "skin_rashes",
+    "皮膚にぶつぶつ": "skin_rashes",
+    # 束状・斑状の脱毛
+    "束になって抜け": "hair_loss",
+    "地肌が見え": "hair_loss",
+    "地肌が透け": "hair_loss",
+    "毛がごっそり抜け": "hair_loss",
+    # 尾根部の触診痛は腰仙部痛（馬尾症候群・肛門嚢・尾の挫傷）— 体幹痛として扱う
+    "尻尾を触ると痛が": "back_pain",
+    "しっぽを触ると痛が": "back_pain",
+    "尾を触ると痛が": "back_pain",
+    "尻尾の付け根を痛が": "back_pain",
+    "しっぽの付け根を痛が": "back_pain",
+    # 猫: 頻回のトイレ通い（下部尿路疾患の主訴）
+    "トイレに何回も": "frequent_urination",
+    "トイレの回数が増え": "frequent_urination",
+    "トイレの回数が多": "frequent_urination",
+    # 耳の後ろ・耳周囲の掻破（耳ダニ・外耳炎・食物アレルギーの好発部位）
+    "耳の後ろを掻": "ear_scratching",
+    "耳の後ろをかい": "ear_scratching",
+    "耳の後ろをか": "ear_scratching",
+    "耳の周りを掻": "ear_scratching",
+    "耳の周りをか": "ear_scratching",
+    "耳の後ろがハゲ": "ear_scratching",
+    # 扁平便・細い便（前立腺腫大・会陰ヘルニアによる直腸圧迫の古典的所見）
+    "便が細": "constipation",
+    "束で抜け": "hair_loss",
+    "痩せて": "weight_loss",
+    "痩せてしま": "weight_loss",
+    "やせてき": "weight_loss",
+    "くちばしの周りがかさかさ": "crusty_beak",
+    "くちばしの周りがカサカサ": "crusty_beak",
+    "嘴の周りがかさかさ": "crusty_beak",
+    "嘴の周りがカサカサ": "crusty_beak",
+    # 両生類: 皮膚の剥離（ツボカビ症の過剰脱皮）
+    "皮膚がはがれ": "excessive_shedding",
+    "皮膚が剥がれ": "excessive_shedding",
+    "皮膚がめくれ": "excessive_shedding",
+    "うんちが細": "constipation",
+    "平べったい便": "constipation",
+    "掻きこわ": "itching",
+    "かきこわ": "itching",
+    "掻き壊": "itching",
+    # 鳥: 首を振る（そのう疾患・トリコモナスの頭振り吐出）
+    "首を振っ": "head_shaking",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

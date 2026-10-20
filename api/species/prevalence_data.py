@@ -128,6 +128,9 @@ SPECIES_PREVALENCE = {
         "Aural Hematoma": "common",
         "Babesiosis": "uncommon",
         "Benign Prostatic Hyperplasia": "common",
+        "Benign Prostatic Hyperplasia (BPH)": "common",
+        # 2026-10 第74弾: 雄犬の最頻生殖器主訴（Johnston, Canine and Feline Theriogenology）
+        "Balanoposthitis": "common",
         "Brachycephalic Airway Syndrome": "common",
         "Brain Tumor": "uncommon",
         "Boxer Arrhythmogenic Right Ventricular Cardiomyopathy": "common",
@@ -668,6 +671,9 @@ SPECIES_PREVALENCE = {
         "Osteochondritis Dissecans": "common",  # Young sport horses
         "Angular Limb Deformities": "common",  # Foals
         "Strangles": "common",
+        # 2026-10 第74弾: 皮膚リンパ型スポロトリコーシスは馬では散発的（Reed & Bayly 4th）
+        "Equine Sporotrichosis": "uncommon",
+        "Sporotrichosis": "uncommon",
         "Equine Influenza": "common",
         "Equine Herpesvirus (EHV-1/4)": "common",
         "Esophageal Obstruction (Choke)": "common",

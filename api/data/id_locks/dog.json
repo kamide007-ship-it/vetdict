@@ -2,8 +2,8 @@
  "species": "dog",
  "schema_version": 1,
  "note": "Frozen disease ids (name→id). Append-only: existing mappings are never changed. Delete to fall back to position-derived ids.",
- "generated_at": "2026-10-18T15:15:31Z",
- "count": 625,
+ "generated_at": "2026-10-19T15:19:27Z",
+ "count": 626,
  "locks": {
   "Acanthomatous Ameloblastoma␟棘細胞性エナメル上皮腫": "dog_0411",
   "Acetaminophen Toxicosis␟アセトアミノフェン中毒": "dog_0334",
@@ -44,6 +44,7 @@
   "Aural Hematoma␟耳介血腫": "dog_0267",
   "Autoimmune Thrombocytopenia (ITP)␟免疫介在性血小板減少症（ITP）": "dog_0113",
   "Babesiosis␟バベシア症": "dog_0047",
+  "Balanoposthitis␟亀頭包皮炎": "dog_x33ceee33",
   "Basenji Fanconi-like Syndrome␟バセンジー型ファンコニ症候群": "dog_0545",
   "Bee/Wasp Sting Anaphylaxis␟ハチ刺傷アナフィラキシー": "dog_0222",
   "Benign Prostatic Hyperplasia (BPH)␟良性前立腺肥大症": "dog_0087",

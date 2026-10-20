@@ -1,19 +1,20 @@
 """Drug batch 83 – 2026-10 第74弾.
 
-1. Izenivetmab (Lenivia, Zoetis) — a long-acting caninised anti-NGF
-   monoclonal antibody for osteoarthritis pain in dogs, given SC once every
-   three months (Health Canada 2025; EU 2025/2026; GB VMD May 2026). The
-   dictionary carried only the monthly anti-NGF bedinvetmab (Librela) for
-   dogs, while cats already had both the monthly (frunevetmab) and the
-   3-monthly (relfovetmab) options. Not authorised in Japan.
+1. Izenivetmab (Lenivia) — the first long-acting caninised anti-NGF
+   monoclonal antibody for canine osteoarthritis pain, given once every three
+   months (Health Canada 2025; EU 2025; UK VMD 29 May 2026). The existing
+   anti-NGF entry, bedinvetmab (Librela), is monthly.
 
-Evidence:
-  - Lenivia (izenivetmab) Summary of Product Characteristics, VMD GB,
-    issued May 2026 (AN 00027/2025): 0.05-0.1 mg/kg SC every 3 months by
-    vial-strength weight bands; <5 kg 0.1 mL/kg from a 0.5 mg vial; do not
-    use <12 months, in breeding, pregnant or lactating dogs; ADA in 3.46%;
-    pivotal EU trial treatment success 37.3% vs 22.6% placebo at day 90,
-    onset from day 7.
+Evidence (label figures copied from the UK package leaflet, Vm 42058/5196,
+issued May 2026):
+  - Dose 0.05-0.1 mg/kg SC once every three months; 1 mL vials of 0.5 / 1.0 /
+    1.5 / 2.0 / 3.0 mg by body-weight band (5-10, 10.1-20, 20.1-30, 30.1-40,
+    40.1-60 kg; 60.1-80 kg two 2.0 mg vials; 80.1-100 kg 2.0 + 3.0 mg;
+    100.1-120 kg two 3.0 mg vials). <5 kg: 0.1 mL/kg from a 0.5 mg vial.
+  - Contraindicated <12 months of age, breeding, pregnant or lactating dogs.
+  - Anti-drug antibodies in 3.46% of dogs (9-month repeat-dose trial);
+    waning of effect towards the end of each interval; caution in IMHA/IMTP;
+    no long-term NSAID co-administration safety data.
   - Zoetis press releases (Health Canada approval Oct 2025; GB approval 2026).
 """
 
@@ -30,49 +31,62 @@ DRUGS_BATCH_83 = [
         "name": "Izenivetmab (Lenivia)",
         "name_ja": "イゼニベトマブ（レニビア）",
         "category": "biologics",
-        "mechanism": "Caninised monoclonal antibody that binds nerve growth factor (NGF), preventing NGF-TrkA signalling that drives peripheral sensitisation and osteoarthritis pain. Engineered for a long half-life so one SC injection covers about three months. Cleared by normal protein catabolism (no hepatic/renal CYP metabolism).",
-        "mechanism_ja": "神経成長因子（NGF）に結合する犬化モノクローナル抗体で、末梢感作と変形性関節症の疼痛を駆動するNGF-TrkAシグナルを遮断する。長い半減期を持つよう設計され、1回の皮下注射で約3ヶ月作用する。通常の蛋白異化で消失し、肝CYP代謝・腎排泄に依存しない。",
+        "mechanism": "Caninised monoclonal antibody against canine nerve growth factor (NGF). Binding NGF prevents its interaction with TrkA/p75 receptors on nociceptors and immune cells, reducing peripheral sensitisation and OA pain. Degraded like endogenous protein (not metabolised by cytochrome P450). Engineered for a three-month dosing interval, compared with the monthly bedinvetmab (Librela).",
+        "mechanism_ja": "犬神経成長因子（NGF）に対する犬化モノクローナル抗体。NGFに結合して侵害受容器・免疫細胞上のTrkA/p75受容体との相互作用を阻止し、末梢性感作と変形性関節症（OA）の疼痛を軽減する。内因性蛋白と同様に分解され、CYP450では代謝されない。月1回のベジンベトマブ（リブレラ）に対し、3ヶ月間隔の投与を想定して設計されている。",
         "species_info": {
             "dog": {
                 "safe": True,
-                "dosage": "0.05-0.1 mg/kg SC once every 3 months, dosed by vial strength (entire 1 mL vial): 5.0-10.0 kg 0.5 mg; 10.1-20.0 kg 1.0 mg; 20.1-30.0 kg 1.5 mg; 30.1-40.0 kg 2.0 mg; 40.1-60.0 kg 3.0 mg; >60 kg combine vials in one syringe per the label chart. <5.0 kg: 0.1 mL/kg drawn from a 0.5 mg vial (discard the remainder). Dogs ≥12 months only.",
-                "dosage_ja": "0.05-0.1 mg/kg SC 3ヶ月に1回。バイアル規格（1 mL全量）で体重帯投与: 5.0-10.0 kg 0.5 mg、10.1-20.0 kg 1.0 mg、20.1-30.0 kg 1.5 mg、30.1-40.0 kg 2.0 mg、40.1-60.0 kg 3.0 mg、60 kg超はラベル表に従い複数バイアルを1本のシリンジに合算。5.0 kg未満は0.5 mgバイアルから0.1 mL/kgを採取（残液は廃棄）。12ヶ月齢以上のみ。",
-                "notes": "Pivotal EU trial: treatment success (CBPI) 37.3% vs 22.6% placebo at day 90, onset from day 7; some waning of effect near the end of each interval — if response is absent or limited, change treatment. Anti-drug antibodies in 3.46% (lower exposure, sometimes lack of efficacy). Not studied in dogs previously given other monoclonal antibodies (e.g. bedinvetmab). Increase exercise gradually over a few weeks once pain is controlled. Caution with pre-existing IMHA/ITP. No safety data for concurrent long-term NSAIDs (human anti-NGF rapidly progressive OA risk rose with >90-day NSAID co-use; no canine equivalent reported). Give vaccines at a different site. Accidental self-injection: anaphylaxis risk; pregnant women must avoid self-injection (NGF is essential for fetal neurodevelopment). Not authorised in Japan.",
-                "notes_ja": "ピボタル試験（EU）: 90日目の治療成功率（CBPI）37.3% vs プラセボ22.6%、効果発現は7日目から。投与間隔の終盤に効果減弱がみられることがあり、無効・効果不十分なら他の治療に変更する。抗薬物抗体3.46%（血中濃度低下・一部で効果消失）。他のモノクローナル抗体（ベジンベトマブ等）の投与歴がある犬では未検討。疼痛が抑えられたら運動量は数週間かけて段階的に増やす。IMHA・ITPの既往では慎重に。NSAIDsの長期併用の安全性データはない（ヒトの抗NGF抗体では90日超のNSAID併用で急速進行性OAが増加 — 犬で同等の報告はない）。ワクチンは別部位に接種。誤自己注射でアナフィラキシーの恐れ、妊婦は自己注射を厳に避ける（NGFは胎児の神経発生に必須）。国内未承認。",
+                "dosage": "0.05-0.1 mg/kg SC once every 3 months (label). Give the entire 1 mL vial by body weight: 5-10 kg 0.5 mg; 10.1-20 kg 1.0 mg; 20.1-30 kg 1.5 mg; 30.1-40 kg 2.0 mg; 40.1-60 kg 3.0 mg; 60.1-80 kg two 2.0 mg vials; 80.1-100 kg 2.0 mg + 3.0 mg; 100.1-120 kg two 3.0 mg vials (combined into one syringe, single SC injection). Dogs <5 kg: withdraw 0.1 mL/kg from one 0.5 mg vial and discard the rest. Dogs ≥12 months only.",
+                "dosage_ja": "0.05〜0.1 mg/kg 皮下投与 3ヶ月に1回（ラベル）。体重帯ごとに1 mLバイアルを全量投与: 5〜10 kg 0.5 mg、10.1〜20 kg 1.0 mg、20.1〜30 kg 1.5 mg、30.1〜40 kg 2.0 mg、40.1〜60 kg 3.0 mg、60.1〜80 kg 2.0 mgを2本、80.1〜100 kg 2.0 mg＋3.0 mg、100.1〜120 kg 3.0 mgを2本（同一シリンジに合わせ1回の皮下注射）。5 kg未満: 0.5 mgバイアルから0.1 mL/kgを採取し残りは廃棄。12ヶ月齢以上のみ。",
+                "notes": "Effect may wane towards the end of each three-month interval (pivotal trial); not all dogs respond — use alternative analgesia if response is absent or limited. Anti-drug antibodies developed in 3.46% of dogs and were associated with lower drug levels and lack of efficacy in some. Not studied in dogs previously given other monoclonal antibodies. Reintroduce exercise gradually over a few weeks after pain relief. Caution in dogs with pre-existing immune-mediated haemolytic anaemia or thrombocytopenia (very rare post-marketing reports). Not authorised in Japan.",
+                "notes_ja": "各3ヶ月間隔の終盤に効果が減弱しうる（承認試験）。全例が反応するわけではなく、反応がない・乏しい場合は他の鎮痛法へ切り替える。抗薬物抗体が3.46%で生じ、一部で血中濃度低下・効果不十分と関連した。他のモノクローナル抗体の投与歴がある犬では未検討。疼痛が軽減したら運動量は数週間かけて徐々に増やす。免疫介在性溶血性貧血・血小板減少症の既往がある犬では慎重に（市販後の非常にまれな報告）。国内未承認。",
             },
             "cat": {
                 "safe": False,
-                "dosage": "Not for cats (caninised antibody) — use frunevetmab (Solensia, monthly) or relfovetmab (Portela, 3-monthly).",
-                "dosage_ja": "猫には使用しない（犬化抗体）— フルネベトマブ（ソレンシア、月1回）またはレルフォベトマブ（ポルテラ、3ヶ月毎）を使用。",
-                "notes": "Species-specific antibody framework.",
-                "notes_ja": "抗体のフレームワークが種特異的。",
+                "dosage": "Not for cats (caninised antibody) — use frunevetmab (Solensia) or relfovetmab (Portela).",
+                "dosage_ja": "猫には使用しない（犬化抗体） — フルネベトマブ（ソレンシア）またはレルフォベトマブ（ポルテラ）を使用。",
+                "notes": "Species-specific antibody.",
+                "notes_ja": "動物種特異的な抗体製剤。",
             },
         },
-        "contraindications": "Dogs under 12 months; dogs intended for breeding; pregnant or lactating dogs; hypersensitivity to izenivetmab.",
-        "contraindications_ja": "12ヶ月齢未満、繁殖予定の犬、妊娠・授乳中の犬、イゼニベトマブ過敏症。",
+        "contraindications": "Hypersensitivity to izenivetmab or excipients; dogs under 12 months of age; breeding dogs; pregnant or lactating dogs (anti-NGF antibodies are teratogenic/foetotoxic in primates). Do not mix with other products in the syringe.",
+        "contraindications_ja": "イゼニベトマブまたは添加物への過敏症、12ヶ月齢未満、繁殖犬、妊娠・授乳中の犬（抗NGF抗体は霊長類で催奇形性・胎子毒性）。他剤とシリンジ内で混合しない。",
         "side_effects": [
-            "Injection-site reactions",
-            "Anti-drug antibodies (3.46%) with loss of efficacy",
-            "Hypersensitivity (rare)",
+            "Pain at injection (common)",
+            "Ataxia, polydipsia, polyuria (uncommon)",
+            "Anorexia, lethargy (rare)",
+            "Hypersensitivity (facial swelling), immune-mediated haemolytic anaemia, immune-mediated thrombocytopenia (very rare)",
         ],
-        "side_effects_ja": ["注射部位反応", "抗薬物抗体（3.46%）による効果減弱", "過敏反応（まれ）"],
+        "side_effects_ja": [
+            "注射時の疼痛（よくみられる）",
+            "運動失調・多飲・多尿（まれ）",
+            "食欲不振・元気消失（まれ）",
+            "過敏反応（顔面腫脹）・免疫介在性溶血性貧血・免疫介在性血小板減少症（非常にまれ）",
+        ],
         "drug_interactions": [
             {
                 "drug": "Bedinvetmab (Librela)",
-                "effect": "Duplicate anti-NGF antibody therapy; safety after prior monoclonal antibodies not studied.",
-                "effect_ja": "抗NGF抗体療法の重複。他の抗体製剤の投与歴がある犬での安全性は未検討。",
+                "effect": "Duplicate anti-NGF antibody therapy — never combine; switch only after the previous product's dosing interval has elapsed.",
+                "effect_ja": "抗NGF抗体療法の重複 — 併用しない。前製剤の投与間隔が経過してから切り替える。",
                 "severity": "major",
             },
             {
-                "drug": "NSAIDs (long-term concurrent use)",
-                "effect": "No canine safety data for long-term co-administration; in humans >90-day NSAID co-use with anti-NGF raised rapidly progressive OA risk.",
-                "effect_ja": "犬での長期併用の安全性データなし。ヒトでは抗NGF抗体と90日超のNSAID併用で急速進行性OAが増加。",
+                "drug": "NSAIDs (long-term)",
+                "effect": "No safety data for concurrent long-term NSAID use in dogs; rapidly progressive OA was reported in humans given anti-NGF antibodies with >90 days of NSAIDs (no canine equivalent reported).",
+                "effect_ja": "犬でのNSAIDs長期併用の安全性データはない。ヒトでは抗NGF抗体と90日超のNSAIDs併用で急速進行性OAが報告されている（犬では同等の報告なし）。",
                 "severity": "moderate",
+            },
+            {
+                "drug": "Vaccines",
+                "effect": "If given on the same day, inject vaccines at a different site.",
+                "effect_ja": "同日に接種する場合はワクチンを別部位に投与する。",
+                "severity": "minor",
             },
         ],
         "references": [
-            "Lenivia (izenivetmab) Summary of Product Characteristics, Veterinary Medicines Directorate (GB), issued May 2026, Zoetis.",
-            "Zoetis. Health Canada approval of Lenivia (izenivetmab injection) for osteoarthritis pain in dogs. Press release, Oct 2025.",
+            "Lenivia (izenivetmab) solution for injection for dogs, UK package leaflet, Vm 42058/5196, Zoetis UK, issued May 2026.",
+            "Zoetis. Health Canada approval of Lenivia (izenivetmab) for alleviation of osteoarthritis pain in dogs, October 2025.",
+            "Enomoto M et al. Anti-nerve growth factor monoclonal antibodies for the control of pain in dogs and cats. Vet Rec 2019;184:23.",
         ],
     },
 ]

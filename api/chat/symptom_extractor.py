@@ -808,11 +808,19 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "palpable_thyroid_nodule": ["swollen_lymph_nodes", "lymph_node_enlargement", "lumps", "lumps_and_bumps"],
     # 頸部腹側屈曲（猫の低K血症性ポリミオパチー・チアミン欠乏）。非保有種は虚弱へ
     "ventroflexion_of_neck": ["neck_ventroflexion", "muscle_weakness", "weakness", "lethargy"],
+    # 2026-10 第74弾: 包皮・陰茎からの分泌物（雄の亀頭包皮炎・前立腺疾患）。
+    # フェレットは discharge_from_prepuce（副腎疾患の前立腺嚢胞）を保有。
+    # 雌用の vulvar_discharge へは決してフォールバックしない（子宮蓄膿症の誤誘導防止）。
+    "preputial_discharge": ["discharge_from_prepuce", "genital_discharge", "preputial_swelling", "genital_lesions"],
 }
 
 # 部位特異的ID → それに包含される汎用ID（両方抽出された場合は汎用側を落とす）
 _SUBSUMES: dict[str, set[str]] = {
     "palpable_thyroid_nodule": {"lumps", "lumps_and_bumps", "lumps_bumps"},
+    # 部位を特定した疼痛（脊椎・尾根部/腹部）は「痛がる」の汎用 pain を包含する
+    # （「尻尾を触ると痛がります」で汎用 pain が緑内障へ誘導していた — 2026-10 第74弾）
+    "back_pain": {"pain"},
+    "abdominal_pain": {"pain"},
 }
 
 # Backwards-compat alias (some older imports use the private name).
@@ -985,7 +993,7 @@ _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
 #   口をずっと開け → open_mouth_breathing（(?<!口) で保護）
 _ADVERB_STRIP = _neg_re.compile(
     r"(が|を|も|は)"
-    r"(?:急に|突然|パンパンに|自分で|とても|かなり|何日も|何日間も|数日間?|だんだん|徐々に|少しずつ"
+    r"(?:急に|突然|パンパンに|自分で|とても|かなり|頻繁に|たびたび|しょっちゅう|何日も|何日間も|数日間?|だんだん|徐々に|少しずつ"
     r"|(?<!食欲が)(?<!食欲を)(?<!食欲も)(?<!食欲は)すごく"
     r"|いつも(?!と違)"
     r"|(?<!口が)(?<!口を)(?<!口も)(?<!口は)ずっと)"
