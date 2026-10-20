@@ -1051,6 +1051,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     if(diseaseSearch)diseaseSearch.addEventListener("input",debounce(()=>{diseaseDisplayLimit=100;_renderPinningAnchor(diseaseSearch,renderDiseaseDb);},200));
     });
     _boot("setupGlobalSearch",setupGlobalSearch);
+    _boot("listSearchEnter",setupListSearchEnter);
     // Restore view from URL hash (silent: don't auto-focus inputs on initial load —
     // would pop the mobile keyboard for users landing on /#chat etc.)
     _boot("hashRouting",()=>{
@@ -1545,6 +1546,16 @@ function setupGlobalSearch(){
     if(e.key==="ArrowDown"){e.preventDefault();activeIdx=(activeIdx+1)%items.length;_highlight(items,activeIdx);}
     else if(e.key==="ArrowUp"){e.preventDefault();activeIdx=(activeIdx-1+items.length)%items.length;_highlight(items,activeIdx);}
     else if(e.key==="Enter"&&activeIdx>=0){e.preventDefault();items[activeIdx].click();activeIdx=-1;}
+    /* スマホのキーボードの「検索/開く」キー（ハイライト無しの Enter）は先頭の結果を開く
+       — 従来は何も起きず、結果をタップし直す必要があった（2026-10 第74弾） */
+    else if(e.key==="Enter"&&!e.isComposing){
+      e.preventDefault();
+      /* 名前（括弧前）がクエリと一致する結果を優先 — 薬品名で検索して治療文が言及する疾患へ飛ばない */
+      const q=normalizeDrugSearchText(input.value||"").split(/[(（]/)[0].trim();
+      const base=v=>normalizeDrugSearchText(v||"").split(/[(（]/)[0].trim();
+      const pick=(q&&items.find(it=>base(it.dataset.name)===q||base(it.dataset.nameJa)===q))||items[0];
+      pick.click();activeIdx=-1;input.blur();
+    }
   });
   /* Reset highlight whenever the result list re-renders. */
   const _resetIdx=new MutationObserver(()=>{activeIdx=-1;});
@@ -1791,7 +1802,7 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:605,drugs:612,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:606,drugs:613,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
     {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:589,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:365,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
@@ -1814,10 +1825,10 @@ function setDefaultStats(){
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:3,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:6458,
+    diseases:6459,
     species:21,
-    drugs:671,
-    symptoms:100,
+    drugs:672,
+    symptoms:101,
     protocols:188
   };
   renderSpeciesGrid();
@@ -5300,6 +5311,39 @@ function hydrateRelatedDiseases(root){
    suffix, case-insensitive) in either language, mirroring the same fix already
    applied to drug navigation; fall back to the first row only when nothing
    matches exactly. */
+/* 2026-10 第74弾: 疾患DB・薬品・麻酔・救急タブの検索欄で Enter（スマホの「検索」キー）を
+   押すとキーボードを閉じ、結果の先頭（名前が完全一致する行、または結果が1件ならその行を展開）へ
+   着地する。従来は Enter を押しても何も起きず、キーボードが結果を覆ったままだった。
+   入力の debounce（200ms）後の再描画を待ってから着地する。 */
+function setupListSearchEnter(){
+  const pairs={diseaseSearch:"diseaseDbList",drugSearch:"drugList",anesthesiaSearch:"anesthesiaList",emergencySearch:"emergencyList"};
+  Object.entries(pairs).forEach(([inputId,listId])=>{
+    const input=document.getElementById(inputId);
+    if(!input||input.dataset.enterLanding)return;
+    input.dataset.enterLanding="1";
+    input.addEventListener("keydown",e=>{
+      if(e.key!=="Enter"||e.isComposing)return;
+      e.preventDefault();
+      input.blur();
+      const q=(input.value||"").trim();
+      setTimeout(()=>{
+        const list=document.getElementById(listId);
+        if(!list)return;
+        const items=[...list.querySelectorAll(".disease-db-item")];
+        if(!items.length){scrollToAnchor(list);return;}
+        const base=v=>String(v||"").toLowerCase().split(/[(（]/)[0].trim();
+        const exact=q&&items.find(it=>base(it.dataset.name)===base(q)||base(it.dataset.nameJa)===base(q));
+        const target=exact||items[0];
+        /* 行展開は toggleDbItem 自身が読みやすい位置へ1回だけスクロールする */
+        if((exact||items.length===1)&&target.getAttribute("aria-expanded")!=="true"&&typeof toggleDbItem==="function"){
+          toggleDbItem(target);
+        }else{
+          scrollToAnchor(target,{settle:false});
+        }
+      },260);
+    });
+  });
+}
 function _pickListItemByName(list,query){
   const items=[...list.querySelectorAll(".disease-db-item")];
   if(!items.length)return null;

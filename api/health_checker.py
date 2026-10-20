@@ -816,6 +816,15 @@ SYMPTOMS = [
         "name_en": "Bulging / Protruding Eye",
         "category": "ocular",
     },
+    # 2026-10 第74弾: 雄の包皮・陰茎からの分泌物（膿・血）。従来は「陰茎から膿が
+    # 出ています」が抽出ゼロ — 雄犬の最頻生殖器主訴（亀頭包皮炎・前立腺肥大症）に
+    # 症状IDも疾患も無かった。雌の陰部分泌物（vulvar_discharge）とは別IDに分離。
+    {
+        "id": "preputial_discharge",
+        "name_ja": "包皮・陰茎からの分泌物（膿・血）",
+        "name_en": "Preputial / Penile Discharge (Pus or Blood)",
+        "category": "urinary",
+    },
     {
         "id": "facial_droop",
         "name_ja": "顔面の歪み・片側の垂れ（耳・唇・まぶた）",
@@ -3839,6 +3848,41 @@ DISEASES = [
             "french_bulldog": 1.5,
         },
     },
+    # 2026-10 第74弾: 亀頭包皮炎。未去勢雄犬の少量の黄緑色包皮分泌物（smegma）は
+    # 生理的範囲だが、量の増加・悪臭・頻回の舐め・出血は細菌性亀頭包皮炎
+    # （Johnston, Root Kustritz & Olson, Canine and Feline Theriogenology;
+    # Ettinger 8th ed）。主訴ゲート設計（分泌物のみ）— 名前は犬モジュールと完全一致。
+    {
+        "id": "balanoposthitis",
+        "prevalence_tier": "common",
+        "name_ja": "亀頭包皮炎",
+        "name_en": "Balanoposthitis",
+        "description_ja": "包皮腔と亀頭粘膜の炎症で、未去勢・去勢済みを問わず雄犬に多い疾患です。少量の黄緑色の包皮分泌物（スメグマ）は成犬雄では生理的範囲ですが、量の増加・悪臭・頻繁な舐め・出血・包皮の腫脹は亀頭包皮炎を示します。原因は常在菌（大腸菌・ブドウ球菌・レンサ球菌等）の過剰増殖が主で、包皮内異物（草の芒）・腫瘍（可移植性性器肉腫・扁平上皮癌）・犬ヘルペスウイルス・アトピーが関与します。治療は包皮腔の洗浄（希釈クロルヘキシジン/ポビドンヨード）と原因除去で、全身抗菌薬は重度例・培養に基づいて使用。出血性分泌物では前立腺疾患・尿路出血・凝固障害を鑑別します（Johnston, Root Kustritz & Olson; Ettinger 8th ed）。",
+        "description_en": "Inflammation of the preputial cavity and glans penis, common in both intact and neutered male dogs. A small amount of yellow-green preputial discharge (smegma) is physiological in adult males; increased volume, foul odor, frequent licking, bleeding or preputial swelling indicate balanoposthitis. Overgrowth of resident bacteria (E. coli, Staphylococcus, Streptococcus) is the usual cause, with preputial foreign bodies (grass awns), tumors (transmissible venereal tumor, SCC), canine herpesvirus and atopy contributing. Treatment is preputial lavage (dilute chlorhexidine/povidone-iodine) and removal of the cause; systemic antimicrobials for severe or culture-guided cases. Bloody discharge prompts work-up for prostatic disease, urinary tract hemorrhage and coagulopathy (Johnston, Root Kustritz & Olson; Ettinger 8th ed).",
+        "symptoms": [
+            "preputial_discharge",
+        ],
+        "severity": "low",
+        "recommended_tests": ["fine_needle_aspirate", "urinalysis", "cbc"],
+        "breed_risks": {},
+    },
+    # 2026-10 第74弾: 良性前立腺肥大症。6歳以上の未去勢雄の80%超に組織学的に存在
+    # （Johnston 2000; Smith 2008 Theriogenology）。血様包皮分泌物（尿とは無関係の
+    # 滴下）・血尿・排便時のしぶり（扁平便）が典型。名前は犬モジュールと完全一致。
+    {
+        "id": "benign_prostatic_hyperplasia",
+        "prevalence_tier": "common",
+        "name_ja": "良性前立腺肥大症",
+        "name_en": "Benign Prostatic Hyperplasia (BPH)",
+        "description_ja": "アンドロゲン（ジヒドロテストステロン）依存性の前立腺の加齢性肥大で、6歳以上の未去勢雄犬の80%超に組織学的に認められます。多くは無症状ですが、排尿と無関係な血様の包皮分泌物（滴下）・血尿・血精液症、排便時のしぶり・扁平便が典型的な主訴です。診断は直腸検査（左右対称・非疼痛性の腫大）と超音波検査、前立腺特異アルギニンエステラーゼ（CPSE）測定。去勢が根治的（数週間で50-70%縮小）、繁殖犬ではフィナステリドまたは酢酸オサテロンを使用します。発熱・疼痛を伴う場合は細菌性前立腺炎・膿瘍、非対称・去勢犬の腫大は前立腺癌を鑑別します（Johnston 2000; Smith 2008; Albouy 2008）。",
+        "description_en": "Age-related androgen (dihydrotestosterone)-dependent prostatic enlargement, present histologically in over 80% of intact male dogs older than 6 years. Most cases are subclinical; typical complaints are bloody preputial dripping unrelated to urination, hematuria, hemospermia, and tenesmus or ribbon-like stools. Diagnosis: rectal palpation (symmetric, non-painful enlargement), ultrasonography and canine prostate-specific arginine esterase (CPSE). Castration is curative (50-70% size reduction within weeks); finasteride or osaterone acetate for breeding dogs. Fever or pain suggests bacterial prostatitis/abscess; asymmetric enlargement or enlargement in a neutered dog suggests prostatic carcinoma (Johnston 2000; Smith 2008; Albouy 2008).",
+        "symptoms": [
+            "preputial_discharge",
+        ],
+        "severity": "low",
+        "recommended_tests": ["ultrasound", "urinalysis", "fine_needle_aspirate"],
+        "breed_risks": {},
+    },
     # 2026-10 audit round 39: facial nerve paralysis. 「片方の耳だけ下がって
     # 顔が歪んでいます」 extracted zero symptoms — the characteristic unilateral
     # facial droop had neither a legacy symptom nor a disease. Idiopathic facial
@@ -5136,6 +5180,13 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"facial_droop"}), "facial_nerve_paralysis", 1.6),
     # 眼球突出は部位診断的 — 短頭種の外傷性眼球脱出（2026-10 第73弾）
     (frozenset({"eye_bulging"}), "traumatic_proptosis", 1.5),
+    # 包皮・陰茎からの分泌物は部位診断的（2026-10 第74弾）。膿/単独→亀頭包皮炎、
+    # 血尿・排尿困難・しぶりを伴えば前立腺肥大症（Johnston 2000; Smith 2008）
+    (frozenset({"preputial_discharge"}), "balanoposthitis", 1.6),
+    (frozenset({"preputial_discharge"}), "benign_prostatic_hyperplasia", 1.45),
+    (frozenset({"preputial_discharge", "blood_in_urine"}), "benign_prostatic_hyperplasia", 1.9),
+    (frozenset({"preputial_discharge", "straining_to_urinate"}), "benign_prostatic_hyperplasia", 1.8),
+    (frozenset({"preputial_discharge", "constipation"}), "benign_prostatic_hyperplasia", 1.8),
     # 点状出血は血小板/血管障害の部位診断的所見（2026-10 第69弾）
     (frozenset({"petechiae"}), "immune_mediated_thrombocytopenia", 1.6),
     # Owner-visible bite abnormality (受け口/出っ歯) is site-diagnostic for an

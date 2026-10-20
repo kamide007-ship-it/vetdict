@@ -394,6 +394,12 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "歩きたがら": "limb_lameness_fore",
     # 下顎リンパ節腫脹（腺疫の定義的所見 — 飼い主は「あごの下が腫れた」と表現）
     "下顎が腫れ": "gen_swollen_lymph",
+    # 2026-10 第74弾: 咽喉頭部の腫脹（腺疫の咽後リンパ節膿瘍）・ひらがな跛行
+    "喉が腫れ": "gen_swollen_lymph",
+    "喉のあたりが腫れ": "gen_swollen_lymph",
+    "首が腫れ": "gen_swollen_lymph",
+    "後ろ足をひきず": "limb_lameness_hind",
+    "前足をひきず": "limb_lameness_fore",
     "あごの下が腫れ": "gen_swollen_lymph",
     "顎の下が腫れ": "gen_swollen_lymph",
     "のどが腫れ": "gen_swollen_lymph",
@@ -750,6 +756,12 @@ def _extract_equine_symptoms(text: str) -> list[str]:
         for key in keys:
             if key in valid_keys:
                 matched.add(key)
+
+    # 部位特異的な腫脹（リンパ節腫脹）が取れたら汎用の体表腫脹を落とす
+    # （「喉が腫れて」の汎用「腫れ」照合でリンパ管炎・外傷感染が腺疫を希釈していた
+    # — 2026-10 第74弾。症状抽出の _SUBSUMES と同じ包含ルール）。
+    if "gen_swollen_lymph" in matched:
+        matched.discard("body_swelling")
 
     return list(matched)
 
@@ -1183,6 +1195,12 @@ def extract_symptoms_from_text(text: str) -> list:
                 ):
                     matched_symptoms.add(symptom["id"])
 
+    # 部位特異的な所見は同部位の汎用IDを包含する（種別経路と同じ _SUBSUMES）
+    from api.chat.symptom_extractor import _SUBSUMES
+
+    for _specific, _generic in _SUBSUMES.items():
+        if _specific in matched_symptoms:
+            matched_symptoms -= _generic
     return list(matched_symptoms)
 
 

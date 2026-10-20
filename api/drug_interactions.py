@@ -1249,6 +1249,17 @@ INTERACTIONS: list[dict[str, Any]] = [
         "ref": "NUMELVI US label (Merck Animal Health, 2026)",
     },
     {
+        "drug_a": "izenivetmab",
+        "drug_b": "bedinvetmab",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "抗NGF抗体の重複",
+        "effect_en": "Duplicate anti-NGF antibody therapy.",
+        "effect_ja": "抗NGF抗体療法の重複。",
+        "management_en": "Never combine; switch only after the previous product's dosing interval has elapsed (Librela 1 month, Lenivia 3 months).",
+        "management_ja": "併用しない。前製剤の投与間隔（リブレラ1ヶ月・レニビア3ヶ月）経過後に切り替える。",
+        "ref": "Lenivia UK package leaflet (Zoetis, 2026)",
+    },
+    {
         "drug_a": "relfovetmab",
         "drug_b": "frunevetmab",
         "severity": SEVERITY_MAJOR,
