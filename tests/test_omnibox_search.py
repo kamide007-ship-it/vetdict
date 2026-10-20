@@ -176,3 +176,87 @@ def test_omnibox_calculator_action_routes_to_matching_tab():
     assert len(routed) >= 9, routed  # the table is not vacuously empty
     for tab in routed:
         assert f'id:"{tab}"' in tabs_src, tab
+
+
+# ---------------------------------------------------------------------------
+# 第74弾 (2026-10): 「ガバペンチンもダメだった」 — two independent failures when a
+# drug name is typed into the header search.
+#
+# 1. Cold-start dead-end: the rerun-after-drug-load poll gave up after 6s
+#    (30×200ms) while the /api/drugs fetch timeout is 45s precisely because
+#    Render free-plan cold starts routinely take 10-45s, so a query typed
+#    during a cold start stayed on a stale 「該当する疾患・薬品が見つかりません」
+#    forever even after the dictionary arrived.
+# 2. Relevance burial: /api/diseases?q= matches treatment text too, ordered
+#    alphabetically before LIMIT, and the omnibox sorted diseases before
+#    drugs — so the exact Gabapentin drug hit sat below 20 treatment-text
+#    disease rows and the 15-row cutoff hid it entirely.
+# ---------------------------------------------------------------------------
+
+
+def test_omnibox_rerun_survives_cold_start_and_reports_failure():
+    """The rerun poll must keep going while the load is in flight (cap well
+    above the 45s fetch timeout), and a definitive load failure must flip the
+    pending row to a retry hint instead of re-kicking the load (no infinite
+    retry loop against a down server — the next keystroke retries by design)."""
+    block = _omnibox_block()
+    rerun = block[block.index("function _rerunWhenDrugsLoaded") :]
+    rerun = rerun[: rerun.index("\n  }")]
+    # Polls while the fetch is still in flight, not for a fixed 6s window
+    assert "_drugLoadInFlight" in rerun
+    assert "n<=300" in rerun  # 60s cap > 45s fetch timeout
+    assert "30)" not in rerun.replace("n<=300", "")  # old 30-try cap is gone
+    # Failure path: in-place message on the pending row, no loadDrugDictionary
+    assert ".omni-drug-pending" in rerun
+    assert "読み込みに失敗" in rerun
+    assert "loadDrugDictionary" not in rerun
+
+
+def test_omnibox_pending_row_is_honest_and_present_with_matches():
+    """While the dictionary is loading, a zero-match render must say loading
+    (never the false 「見つかりません」), and a render that already has disease
+    matches must still append the pending row so the user knows drug results
+    are coming."""
+    block = _omnibox_block()
+    render = block[block.index("function renderMatches") :]
+    render = render[: render.index("debounceTimer=setTimeout")]
+    assert "omni-drug-pending" in render
+    assert "読み込んでいます" in render
+    # Zero-match branch suppresses the not-found headline while pending
+    assert 'drugsPending?"":' in render.replace(" ", "")
+    # Matches branch appends the pending row too
+    matches_branch = render[render.index("matches.slice(0,15)") :]
+    assert "+pending+actions" in matches_branch.replace(" ", "")
+
+
+def test_omnibox_sorts_name_hits_before_treatment_text_hits():
+    """An exact drug-name hit must outrank diseases that matched only via
+    treatment text; those rows carry a 治療文に一致 tag so they read as
+    intentional, not noise."""
+    block = _omnibox_block()
+    assert "const _cmp=(a,b)=>((b.nameHit?1:0)-(a.nameHit?1:0))||(_order(a.type)-_order(b.type))" in block
+    # Every push site carries nameHit (local diseases, drugs, server extras,
+    # emergency titles) and both async re-renders sort with _cmp.
+    assert block.count("nameHit:true") >= 2
+    assert "nameHit:normalizeDrugSearchText(d.name" in block.replace(" ", "")
+    assert "nameHit:titleHit" in block
+    assert block.count("matches.sort(_cmp)") == 2
+    assert "治療文に一致" in APP_JS
+
+
+def test_disease_search_ranks_name_matches_inside_sql_limit(client):
+    """search_diseases scored name matches +100 *after* the SQL LIMIT had
+    already truncated alphabetically — treatment-text rows could crowd every
+    name match out of the result set. The name-match rank now lives in
+    ORDER BY so name hits always survive the LIMIT."""
+    from api.disease_store import search_diseases
+
+    named = search_diseases("てんかん", limit=8)
+    if named:  # served DB present
+        assert all("てんかん" in ((d.get("name_ja") or "") + (d.get("name") or "")) for d in named), [
+            (d.get("name_ja"), d.get("name")) for d in named
+        ]
+    # Treatment-text-only queries still return rows (the drug→diseases angle)
+    body_only = search_diseases("ガバペンチン", limit=5)
+    for d in body_only:
+        assert "ガバペンチン" not in ((d.get("name_ja") or "") + (d.get("name") or ""))
