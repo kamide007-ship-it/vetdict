@@ -918,6 +918,14 @@ SYMPTOMS = [
         "name_en": "Chocolate Ingestion",
         "category": "general",
     },
+    # 2026-10 audit round 49: xylitol (sugar-free gum/candy) is the third
+    # most frequent dog food-toxicosis report — same ingestion-gated design.
+    {
+        "id": "xylitol_ingestion",
+        "name_ja": "キシリトール（ガム・菓子）を食べた",
+        "name_en": "Xylitol Ingestion",
+        "category": "general",
+    },
     {
         "id": "grape_ingestion",
         "name_ja": "ぶどう・レーズンを食べた",
@@ -3980,6 +3988,25 @@ DISEASES = [
         "recommended_tests": ["blood_test", "ecg"],
         "breed_risks": {},
     },
+    # 2026-10 audit round 49: xylitol ingestion had no legacy chat entry, so
+    # 「キシリトールガムを食べてしまいました」 extracted nothing. Name matches
+    # the dog module's "Xylitol Poisoning" (疾患DBピボット着地).
+    {
+        "id": "xylitol_poisoning",
+        "prevalence_tier": "common",
+        "name_ja": "キシリトール中毒",
+        "name_en": "Xylitol Poisoning",
+        "description_ja": "シュガーレスガム・菓子・歯磨き剤・一部のピーナッツバター等に含まれるキシリトールによる中毒。犬では膵β細胞からの急速なインスリン分泌を起こし、0.1 g/kg超で摂取後10〜60分（ガム製剤では最長12時間遅延）に重度低血糖（嘔吐・脱力・運動失調・振戦・痙攣）、0.5 g/kg超で12〜72時間後に急性肝壊死・凝固障害をきたしうる。猫での毒性は確立されていない。無症状なら催吐を検討（低血糖・意識障害時は禁忌）、血糖を1〜2時間毎に12時間以上監視し、低血糖にはブドウ糖ボーラス後に2.5〜5%ブドウ糖CRI、肝毒性量では肝酵素・凝固系を72時間追跡しN-アセチルシステイン・SAMe等の肝保護を行う。活性炭はキシリトールをほとんど吸着しない（Dunayer 2006 JAVMA; Plumb's 10th ed; ASPCA APCC）。「食べたが今は元気」でも直ちに受診が必要です。",
+        "description_en": "Poisoning by xylitol in sugar-free gum, candy, toothpaste and some peanut butters. In dogs it triggers rapid insulin release from pancreatic beta cells: >0.1 g/kg causes severe hypoglycemia (vomiting, weakness, ataxia, tremors, seizures) within 10-60 min (up to 12 h with gum), and >0.5 g/kg can cause acute hepatic necrosis and coagulopathy at 12-72 h. Toxicity in cats is not established. Consider emesis only in an asymptomatic dog (contraindicated with hypoglycemia or altered mentation); monitor blood glucose every 1-2 h for at least 12 h, treat hypoglycemia with a dextrose bolus followed by a 2.5-5% dextrose CRI, and at hepatotoxic doses follow liver enzymes and coagulation for 72 h with hepatoprotectants (N-acetylcysteine, SAMe). Activated charcoal binds xylitol poorly (Dunayer 2006 JAVMA; Plumb's 10th ed; ASPCA APCC). Even an initially well dog needs immediate veterinary assessment.",
+        # Ingestion-gated (chocolate/grape pattern): hypoglycemic signs are
+        # nonspecific and must not hijack plain seizure complaints.
+        "symptoms": [
+            "xylitol_ingestion",
+        ],
+        "severity": "high",
+        "recommended_tests": ["blood_test"],
+        "breed_risks": {},
+    },
     {
         "id": "grape_raisin_toxicosis",
         "prevalence_tier": "common",
@@ -5191,6 +5218,12 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"chocolate_ingestion"}), "chocolate_toxicosis", 1.8),
     (frozenset({"chocolate_ingestion", "tremors"}), "chocolate_toxicosis", 2.0),
     (frozenset({"grape_ingestion"}), "grape_raisin_toxicosis", 1.8),
+    (frozenset({"xylitol_ingestion"}), "xylitol_poisoning", 1.8),
+    # 労作時呼吸困難＋運動不耐性は小型犬のうっ血性心不全（MMVD）の古典的二徴
+    # （Keene 2019 ACVIM）— 咳を伴わない主訴で気管虚脱が上回っていた（第74弾）
+    (frozenset({"exercise_intolerance", "labored_breathing"}), "mitral_valve_disease", 1.4),
+    (frozenset({"xylitol_ingestion", "seizures"}), "xylitol_poisoning", 2.0),
+    (frozenset({"xylitol_ingestion", "tremors"}), "xylitol_poisoning", 2.0),
     (frozenset({"grape_ingestion", "vomiting"}), "grape_raisin_toxicosis", 2.0),
     # Stated river/stagnant-water contact is the decisive epidemiologic datum
     # for leptospirosis (Sykes 2011 ACVIM consensus); with fever or jaundice

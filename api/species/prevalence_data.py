@@ -1886,6 +1886,10 @@ SPECIES_PREVALENCE = {
     # PARAKEET
     # ==================================================================
     "parakeet": {
+        # 開脚症は新生雛の発育期変形 — 成鳥の片肢不全主訴を乗っ取らない（第74弾）
+        "Splay Leg": "uncommon",
+        "Splayed Legs (Neonatal)": "uncommon",
+        "Splayed Leg (Neonatal)": "uncommon",
         # Exposure-dependent toxicoses are rare without a specific history,
         # and Haemoproteus is usually an incidental finding — without tiers
         # these outranked infectious/GI causes for nonspecific sick-bird signs.

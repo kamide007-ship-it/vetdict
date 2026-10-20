@@ -455,7 +455,7 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # ウサギ/モルモットの白色泥状尿（尿路スラッジ）— 他種は色調系へ
     "thick_white_urine": ["urine_staining", "dark_urine", "cloudy_urine"],
     # 鳥の脚力低下 — 他種は後肢虚弱/筋力低下系へ
-    "leg_weakness": ["hind_leg_weakness", "muscle_weakness", "weakness", "lameness"],
+    "leg_weakness": ["hind_leg_weakness", "leg_paralysis", "muscle_weakness", "weakness", "lameness"],
     # ヘビダニ等の「動く点」— 種語彙により寄生虫系へフォールバック
     "visible_mites": ["visible_parasites", "external_parasites", "mites", "fleas"],
     # ノミ目撃・尾根部病変（2026-10 第70弾）— 非保有種はノミ/外部寄生虫→掻痒へ

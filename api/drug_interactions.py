@@ -1249,6 +1249,17 @@ INTERACTIONS: list[dict[str, Any]] = [
         "ref": "NUMELVI US label (Merck Animal Health, 2026)",
     },
     {
+        "drug_a": "izenivetmab",
+        "drug_b": "bedinvetmab",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "抗NGF抗体の重複",
+        "effect_en": "Duplicate anti-NGF antibody therapy; not studied after other monoclonal antibodies.",
+        "effect_ja": "抗NGF抗体療法の重複。他の抗体製剤投与歴のある犬では未検討。",
+        "management_en": "Never combine; switch only after the previous product's dosing interval has elapsed.",
+        "management_ja": "併用しない。前製剤の投与間隔経過後に切り替える。",
+        "ref": "Lenivia SPC (VMD GB, May 2026)",
+    },
+    {
         "drug_a": "relfovetmab",
         "drug_b": "frunevetmab",
         "severity": SEVERITY_MAJOR,

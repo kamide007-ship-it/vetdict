@@ -300,6 +300,8 @@ _SYN: dict[str, list[str]] = {
     # 止まり木に止まれない（inability_to_perch）は疾患側では
     # reluctance_to_perch/difficulty_perching 表記 — ブリッジ欠落で
     # 趾瘤症・関節炎が「足を痛がって止まり木に止まれない」に届かなかった
+    # 鳥の脚の脱力＝不全麻痺（腎・生殖腺腫瘍の坐骨神経圧迫 — 第74弾）
+    "leg_weakness": ["leg_paralysis"],
     "inability_to_perch": ["reluctance_to_perch", "difficulty_perching", "falling_off_perch"],
     "reluctance_to_perch": ["inability_to_perch", "difficulty_perching"],
     # 触知腫瘤の飼い主表現（お腹/体にしこり）→ subcutaneous_mass は種によって
@@ -354,6 +356,11 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # backing — it exists to stop umbrella syndromes with long symptom lists
 # losing on coverage to narrow rarities.
 _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    # セキセイインコの片肢不全麻痺は腎腫瘍・精巣腫瘍による坐骨神経圧迫
+    # until proven otherwise（Ritchie & Harrison; Simova-Curd 2006 JSAP）。
+    # 2026-10 第74弾: 新生雛の開脚症がカバレッジで成鳥の主訴を上回っていた
+    ("parakeet", frozenset({"leg_paralysis"}), "Renal Adenocarcinoma", 1.3),
+    ("parakeet", frozenset({"leg_weakness", "inability_to_perch"}), "Renal Adenocarcinoma", 1.3),
     # 中高齢猫の頸部腹側（喉の下）の触知結節は甲状腺結節＝甲状腺機能亢進症
     # until proven otherwise（罹患猫の約80-90%で触知 — Peterson; AAFP 2016）。
     # 汎用「しこり」の共抽出で皮下腫瘤エントリが上回っていた（2026-10 第73弾）

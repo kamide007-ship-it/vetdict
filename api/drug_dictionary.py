@@ -106,6 +106,7 @@ from api.drug_batch_79 import DRUGS_BATCH_79
 from api.drug_batch_80 import DRUGS_BATCH_80
 from api.drug_batch_81 import DRUGS_BATCH_81
 from api.drug_batch_82 import DRUGS_BATCH_82
+from api.drug_batch_83 import DRUGS_BATCH_83
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11080,6 +11081,12 @@ for _drug82 in DRUGS_BATCH_82:
     if _drug82["id"] not in _drug_index:
         DRUGS.append(_drug82)
         _drug_index[_drug82["id"]] = _drug82
+
+# Batch 83 (2026-10 第74弾: イゼニベトマブ（レニビア、犬の3ヶ月毎抗NGF抗体））
+for _drug83 in DRUGS_BATCH_83:
+    if _drug83["id"] not in _drug_index:
+        DRUGS.append(_drug83)
+        _drug_index[_drug83["id"]] = _drug83
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

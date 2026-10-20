@@ -631,7 +631,7 @@ SYMPTOM_ALIASES = {
     "散歩嫌がる": "exercise_intolerance",
     "運動嫌がる": "exercise_intolerance",
     "すぐバテる": "exercise_intolerance",
-    "息切れ": "exercise_intolerance",
+    "息切れ": "labored_breathing",  # 労作時呼吸困難（第74弾: 運動不耐性は「行きたがらない」等が担う）
     # ---------------------------------------------------------------
     # 魚病用エイリアス (Fish disease aliases)
     # ---------------------------------------------------------------
@@ -2486,6 +2486,20 @@ SYMPTOM_ALIASES = {
     # --- 2026-09 Round 27 ---
     # ブドウ・レーズン摂取（犬の特発性AKI — onion/chocolate と同じ摂取文脈フラグ。
     # 従来は「ぶどうを食べてしまった 嘔吐」が急性胃腸炎1位で中毒が候補に出なかった）
+    # 2026-10 audit round 49: xylitol ingestion + residual GDV/tail-bob/
+    # anhidrosis gaps
+    "散歩に行きたがらな": "exercise_intolerance",
+    "散歩に行きたがらず": "exercise_intolerance",
+    "散歩に行きたくな": "exercise_intolerance",
+    "キシリトール": "xylitol_ingestion",
+    "シュガーレスガム": "xylitol_ingestion",
+    "ガムを食べ": "xylitol_ingestion",
+    "吐こうとしても何も出な": "unproductive_retching",
+    "吐こうとしても出な": "unproductive_retching",
+    "吐こうとするが何も出な": "unproductive_retching",
+    "尾を振って呼吸": "tail_bobbing",
+    "尾を上下に振": "tail_bobbing",
+    "尻尾を振って呼吸": "tail_bobbing",
     "ぶどうを食べ": "grape_ingestion",
     "ブドウを食べ": "grape_ingestion",
     "葡萄を食べ": "grape_ingestion",
