@@ -169,15 +169,15 @@ class TestProtocolJumpBar:
             'class="anesthesia-drugs-table" data-jump="anesdrugs"',
             'class="anesthesia-monitor-section" data-jump="monitor"',
             'class="anesthesia-references" data-jump="refs"',
-            'data-jump="steps"',
-            'data-jump="keydrugs"',
+            'data-jump="emsteps"',
+            'data-jump="emdrugs"',
         ):
             assert anchor in APP_JS, anchor
-        for key in ("steps", "keydrugs", "anesdrugs", "monitor", "refs"):
+        for key in ("emsteps", "emdrugs", "anesdrugs", "monitor", "refs"):
             assert f'"{key}"' in APP_JS.split("function _addDetailJumpBar")[1].split("\n}\n")[0], key
 
     def test_service_worker_bumped(self):
         sw = (ROOT / "static" / "sw.js").read_text(encoding="utf-8")
         import re
 
-        assert int(re.search(r"vetdict-v(\d+)", sw).group(1)) >= 188
+        assert int(re.search(r"vetdict-v(\d+)", sw).group(1)) >= 189

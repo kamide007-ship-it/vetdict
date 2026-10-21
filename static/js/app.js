@@ -1828,7 +1828,7 @@ function setDefaultStats(){
     diseases:6459,
     species:21,
     drugs:674,
-    symptoms:101,
+    symptoms:102,
     protocols:188
   };
   renderSpeciesGrid();
@@ -7842,9 +7842,9 @@ function renderEmergencyProtocol(p){
     <div style="font-size:.74rem;color:#64748b;margin-top:4px">🐾 ${escapeHtml(speciesText)}</div>
     ${triggerHtml}
     <div class="disease-detail">
-      <div style="margin:10px 0" data-jump="steps"><strong style="font-size:.82rem;color:#0c4a6e">${t("emergencyStepsTitle")}</strong><ol style="margin:6px 0 0 0;padding:0;list-style:none">${stepsHtml}</ol></div>
-      ${drugsHtml?`<div style="margin:10px 0" data-jump="keydrugs"><strong style="font-size:.82rem;color:#0c4a6e">💊 ${t("emergencyKeyDrugs")}</strong><ul style="margin:4px 0 0 20px;padding:0">${drugsHtml}</ul></div>`:""}
-      ${monitorHtml?`<div style="margin:10px 0" data-jump="monitor"><strong style="font-size:.82rem;color:#0c4a6e">📊 ${t("emergencyMonitoring")}:</strong><div style="margin-top:4px">${monitorHtml}</div></div>`:""}
+      <div style="margin:10px 0" data-jump="emsteps"><strong style="font-size:.82rem;color:#0c4a6e">${t("emergencyStepsTitle")}</strong><ol style="margin:6px 0 0 0;padding:0;list-style:none">${stepsHtml}</ol></div>
+      ${drugsHtml?`<div style="margin:10px 0" data-jump="emdrugs"><strong style="font-size:.82rem;color:#0c4a6e">💊 ${t("emergencyKeyDrugs")}</strong><ul style="margin:4px 0 0 20px;padding:0">${drugsHtml}</ul></div>`:""}
+      ${monitorHtml?`<div style="margin:10px 0" data-jump="emmonitor"><strong style="font-size:.82rem;color:#0c4a6e">📊 ${t("emergencyMonitoring")}:</strong><div style="margin-top:4px">${monitorHtml}</div></div>`:""}
       ${(()=>{const de=_emergencyDiseaseFor(p.id);return de?`<button type="button" class="emergency-disease-link" data-disease="${escapeHtml(de[1])}" data-species="${escapeHtml(de[0])}">🔍 ${currentLang==="ja"?"この疾患の詳細を疾患DBで開く（鑑別チェックへも移動可）":"Open this condition in the disease DB (differential check available there)"}</button>`:"";})()}
       ${p.ref?`<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e2e8f0;font-size:.72rem;color:#64748b"><em>Ref: ${escapeHtml(p.ref)}</em></div>`:""}
     </div>
@@ -8825,14 +8825,16 @@ function _addDetailJumpBar(detail){
   if(!detail||detail.querySelector(".detail-jump-bar"))return;
   const targets=detail.querySelectorAll("[data-jump]");
   if(targets.length<2)return;
-  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"],dosage:["💊 動物種別用量","💊 Dosage"],contra:["⛔ 禁忌","⛔ Contraindications"],interactions:["🔄 相互作用","🔄 Interactions"],drugs:["💉 関連薬品","💉 Related drugs"],steps:["🚑 手順","🚑 Steps"],keydrugs:["💊 主要薬品","💊 Key drugs"],anesdrugs:["💉 薬品・用量","💉 Drugs & doses"],monitor:["📊 モニタリング","📊 Monitoring"],refs:["📚 参考文献","📚 References"]};
+  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"],dosage:["💊 動物種別用量","💊 Dosage"],contra:["⛔ 禁忌","⛔ Contraindications"],interactions:["🔄 相互作用","🔄 Interactions"],drugs:["💉 関連薬品","💉 Related drugs"],emsteps:["🚨 対応手順","🚨 Steps"],emdrugs:["💊 主要薬剤・用量","💊 Key drug doses"],emmonitor:["📊 モニタリング","📊 Monitoring"],anesdrugs:["💉 薬品・用量","💉 Drugs & doses"],monitor:["📊 モニタリング","📊 Monitoring"],refs:["📚 参考文献","📚 References"]};
   /* 2026-10 第73弾: 長い治療プロトコルの末尾にある「治療に関連する薬品」チップ群
      （→薬品詳細・相互作用チェック）へも1タップで（スマホで治療文を数画面
      スクロールしなくてよい）。チップ群は非同期にハイドレートされるため
      クリック時に再取得する。 */
-  /* 2026-10 第75弾: 麻酔プロトコル（長い注記の下に薬品表・モニタリング表）と
-     緊急対応プロトコル（手順→主要薬品→モニタリング）にも同じジャンプバー。 */
-  const order=["treatment","drugs","diagnosis","signs","prognosis","dosage","contra","interactions","steps","keydrugs","anesdrugs","monitor","refs"];
+  /* 2026-10 第74弾: 救急プロトコルも — 手順が長く、分単位で必要な主要薬剤の
+     用量が数画面下にあった（スマホ）。 */
+  const order=["treatment","drugs","diagnosis","signs","prognosis","dosage","contra","interactions","emdrugs","emsteps","emmonitor"];
+  /* 2026-10 第75弾: 麻酔プロトコル（長い注記の下に薬品表・モニタリング表・参考文献）にも同じジャンプバー。 */
+  order.push("anesdrugs","monitor","refs");
   const bar=document.createElement("nav");
   bar.className="detail-jump-bar";
   bar.setAttribute("aria-label",currentLang==="ja"?"セクションへ移動":"Jump to section");
