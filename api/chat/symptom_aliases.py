@@ -3734,6 +3734,42 @@ SYMPTOM_ALIASES = {
     "掻き壊": "itching",
     # 鳥: 首を振る（そのう疾患・トリコモナスの頭振り吐出）
     "首を振っ": "head_shaking",
+    # 2026-10 第75弾（チャット精度第50回）
+    # 耳道のびらん・排膿（細菌性外耳炎・緑膿菌性外耳炎の典型的主訴）
+    "耳の中がただれ": "ear_discharge",
+    "耳がただれ": "ear_discharge",
+    "耳から膿": "ear_discharge",
+    "耳の中から膿": "ear_discharge",
+    "耳から黄色い": "ear_discharge",
+    "黄色い耳だれ": "ear_discharge",
+    # 口腔の発赤（猫慢性歯肉口内炎の主訴）
+    "口の中が真っ赤": "stomatitis",
+    "歯茎が真っ赤": "stomatitis",
+    "歯ぐきが真っ赤": "stomatitis",
+    # 「食べたがらない」（ます体「食べたがりません」は正規化で到達）
+    "食べたがらな": "loss_of_appetite",
+    # 前足で顔をこする（顔面掻痒 — アトピー・食物アレルギー）
+    "前足でこす": "pawing_at_face",
+    "前足で顔をこす": "pawing_at_face",
+    "目の周りが赤": "redness_in_eyes",
+    # 肛門周囲の腫瘤（肛門周囲腺腫・肛門嚢腺癌）
+    "お尻のまわりにしこり": "perianal_swelling",
+    "お尻の周りにしこり": "perianal_swelling",
+    "肛門のまわりにしこり": "perianal_swelling",
+    "肛門の周りにしこり": "perianal_swelling",
+    "肛門のまわりが腫れ": "perianal_swelling",
+    # 片側の眼球突出（「目だけ飛び出した」）
+    "目だけ飛び出": "eye_bulging",
+    "目が飛び出したよう": "eye_bulging",
+    # 猫の歯の吸収病変（歯冠が欠けたように溶ける）
+    "歯が溶け": "tooth_loss",
+    "歯が欠けたように": "tooth_loss",
+    "歯がとけ": "tooth_loss",
+    # 無尿・飲水廃絶（キーに「な」まで含め否定ガードとの自己衝突を回避）
+    "おしっこもしていな": "decreased_urination",
+    "おしっこをしていな": "decreased_urination",
+    "おしっこが出ていな": "decreased_urination",
+    "水を飲まな": "loss_of_appetite",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

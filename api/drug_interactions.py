@@ -866,6 +866,18 @@ INTERACTIONS: list[dict[str, Any]] = [
         "management_ja": "最小有効量で監視。セロトニン作用のない鎮痛薬を優先。",
         "ref": "Plumb's 10th ed.",
     },
+    # 2026-10 第75弾: メチルフェニデート（中枢刺激薬）
+    {
+        "drug_a": "methylphenidate",
+        "drug_b": "selegiline",
+        "severity": SEVERITY_CONTRAINDICATED,
+        "mechanism": "MAO阻害薬＋中枢刺激薬",
+        "effect_en": "MAO inhibitor plus a dopamine/noradrenaline reuptake blocker → hypertensive crisis risk.",
+        "effect_ja": "MAO阻害薬とドパミン・ノルアドレナリン再取り込み阻害薬の併用→高血圧クリーゼのリスク。",
+        "management_en": "CONTRAINDICATED. Allow a 14-day washout after selegiline.",
+        "management_ja": "併用禁忌。セレギリン中止後14日のウォッシュアウト。",
+        "ref": "Plumb's 10th ed.",
+    },
     # ====== 種特異的追加 ======
     {
         "drug_a": "fipronil",

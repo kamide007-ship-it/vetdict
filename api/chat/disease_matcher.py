@@ -369,6 +369,12 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # 画像上のDJD — Lascelles 2010 Vet Surg; ISFM/AAFP 2010 疼痛ガイドライン）。
     # 2026-10 第67弾
     ("cat", frozenset({"reluctance_to_jump"}), "Osteoarthritis (Degenerative Joint Disease)", 1.35),
+    # 猫の歯の欠損・「歯が溶ける」は歯の吸収病変（FORL）が最多原因（成猫の29-67% —
+    # Lommer & Verstraete 2000; Ingham 2001）。7所見セットのカバレッジ希釈で
+    # 歯周病・エナメル質形成不全に負けていた（2026-10 第50回）
+    ("cat", frozenset({"tooth_loss"}), "Feline Tooth Resorption (FORL)", 1.35),
+    # 猫の顎のチャタリングも FORL の代表的な飼い主所見（病変への接触・咀嚼時の疼痛反応）
+    ("cat", frozenset({"jaw_chattering"}), "Feline Tooth Resorption (FORL)", 1.25),
     # フェレットの黒色便（メレナ）は胃潰瘍（H. mustelae 関連が大半）until proven
     # otherwise — Quesenberry & Carpenter 4th ed; Fox 1990。下痢の共抽出でカバレッジが
     # 希釈され、腸管寄生虫・ウイルス性腸炎の下（16位）に沈んでいた（2026-10 第70弾）
