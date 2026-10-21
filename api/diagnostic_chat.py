@@ -226,6 +226,10 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "リンパ節腫脹": "gen_swollen_lymph",
     "sweating": "gen_sweating",
     "発汗": "gen_sweating",
+    # 2026-10 第74弾: 無汗症（高温多湿の日本で夏に多い — Reed & Bayly 4th ed）
+    "汗をかかな": "misc_anhidrosis",
+    "汗が出な": "misc_anhidrosis",
+    "汗をかけな": "misc_anhidrosis",
     "汗をかく": "gen_sweating",
     "汗をかい": "gen_sweating",
     "recumbent": "gen_recumbent",

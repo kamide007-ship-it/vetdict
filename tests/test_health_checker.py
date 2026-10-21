@@ -30,7 +30,7 @@ class TestSymptomDatabase:
     """Verify symptom database structure and consistency."""
 
     def test_symptom_count(self):
-        assert len(SYMPTOMS) == 101  # +preputial_discharge (第74弾)
+        assert len(SYMPTOMS) == 102  # +preputial_discharge, xylitol_ingestion (第74弾)
 
     def test_all_symptoms_have_required_fields(self):
         for s in SYMPTOMS:
@@ -69,7 +69,7 @@ class TestDiseaseDatabase:
     """Verify disease database structure and consistency."""
 
     def test_disease_count(self):
-        assert len(DISEASES) == 103  # +balanoposthitis, BPH (第74弾)
+        assert len(DISEASES) == 104  # +balanoposthitis, BPH, xylitol poisoning (第74弾)
 
     def test_all_diseases_have_required_fields(self):
         for d in DISEASES:
@@ -291,7 +291,7 @@ class TestGetSymptomsRoute:
         assert "total" in data
         assert "symptoms" in data
         assert "categories" in data
-        assert data["total"] == 101  # +preputial_discharge (2026-10 第74弾)
+        assert data["total"] == 102  # +preputial_discharge, xylitol_ingestion (2026-10 第74弾)
 
     def test_filter_by_category(self, client):
         resp = client.get("/api/health-check/symptoms?category=respiratory")
