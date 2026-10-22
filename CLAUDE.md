@@ -7481,3 +7481,43 @@ Playwright（iPhone 13・実タッチ）で再現: `.disease-detail.open` は開
 - 回帰テスト `tests/test_omnibox_search.py` +4件（rerun存続+失敗差し替え・pending行の正直表示・
   nameHitソート+タグ・SQLランクのLIMIT生存とガバペンチン治療文一致）
 - app.js参照の全テスト **1,240件合格**、ruff check/format clean、node --check 通過
+
+## 2026-10セッション（第75弾: 英語臨床徴候の定型句2,165件撲滅 + 猫の歯の吸収病変（FORL）のキュレーション + エルツグリフロジン/メチルフェニデート公開 + チャット精度第50弾 + 麻酔・緊急プロトコルのジャンプバー）
+
+### エラーチェック（結果: ベースライン健全）
+- ruff clean、フルテスト **4,963件合格**（ベースライン）、配信SQLiteクリーンビルド（treatment/prevention/prognosis 100%）
+- 薬用量: safe薬品の dosage 欠落 **0**、文字列型相互作用 **0**
+
+### 英語の臨床徴候に付いた定型句の撲滅（`strip_clinical_signs_filler.py` 新規、2,165件）
+- 英語 clinical_signs の末尾に「; typical viral etiology presentation; variable severity depending on disease stage; …; response to treatment helps confirm diagnosis」が付いていた。
+  **アジソン病・子宮蓄膿症・IMHA 等の非ウイルス性疾患1,100件に「典型的なウイルス性の病像」**と表示される臨床的な誤り（bacterial/parasitic/腫瘍の各変種も同様）
+- 末尾の節を既知の定型句語彙と照合して後ろから除去（キュレート済みの節は温存、症状リストは保持）。配信DBの残存 **0**
+
+### 猫の歯の吸収病変（FORL）のキュレーション（`fix_feline_tooth_resorption.py` 新規）
+- 成猫の29〜67%にみられる最多の歯科疾患なのに、治療文が「不正咬合は種と重症度に応じて歯のトリミング」（齧歯類・ウサギの常生歯の処置）、
+  病因・予防・臨床徴候が草食動物の過長歯・チモシー乾草・鳥のカトルボーンを列挙するカテゴリテンプレートだった
+- 病因・病態（タイプ1/2/3）・臨床徴候・治療（全顎歯科X線必須、タイプ1は抜歯、タイプ2は歯冠切断 — 歯周炎・口内炎・FeLV/FIV陽性は適応外、修復は非推奨）・
+  予防・予後・伝播を日英で記述（Reiter 2002; Lommer & Verstraete 2000; Ingham 2001; DuPont & DeBowes 2002; AAHA 2019）。JSONと猫モジュールの両方を是正し、症状セットに tooth_loss を追加
+- 残課題: 同じ歯科カテゴリテンプレート（草食動物の過長歯の記述）が犬猫・馬の他の歯科疾患（歯周病・口内炎等）に約30件残存 — 次回以降の候補
+
+### 新規薬品2剤（`drug_batch_84.py`、672→674薬品）— 治療文が用量付きで参照するのに未収載
+- **エルツグリフロジン**: 馬のインスリン調節異常関連蹄葉炎 0.05 mg/kg PO q24h（Sundra 2023 EVJ 症例集積）。食事管理の補助、高トリグリセリド血症の監視、適応外使用を明記。犬猫 safe:False
+- **メチルフェニデート**: 犬の過活動症の診断的試験投与 0.2〜1 mg/kg（Luescher 1993; Overall 2013）、国内は第一種向精神薬で入手が限られる旨を明記。セレギリン併用=禁忌をレジストリ登録。猫 safe:False
+- 表記ゆれ: セフポドキシム・マイコフェノール酸・ファイロコキシブ・アンフォテリシン を既存モノグラフに解決
+
+### 診断チャット精度 第50弾（82症例・2波スイープ 8 MISS → 0）
+- 副詞除去に 全然/まったく/全く/しきりに（「陰部をしきりに舐め」は温存）
+- エイリアス: 耳の中がただれ/耳から膿（外耳炎）、口の中が真っ赤（猫口内炎）、食べたがらな、前足でこす、目の周りが赤、お尻のまわりにしこり（肛門周囲腫瘤）、
+  目だけ飛び出、歯が溶け/歯が欠けたように（猫FORL）、おしっこもしていな（否定ガードとの衝突回避）
+- `_SUBSUMES`: 肛門周囲腫瘤⊃汎用しこり、歯の欠損⊃汎用疼痛。レガシー犬経路はフォールバック前の種別IDで包含を判定
+- 猫 {tooth_loss}→FORL ×1.35、{jaw_chattering}→FORL ×1.25（症状セット拡張によるカバレッジ希釈の補正）
+
+### スマホUX
+- 麻酔プロトコル（💉 薬品・用量 / 📊 モニタリング / 📚 参考文献）と緊急対応プロトコル（🚑 手順 / 💊 主要薬品 / 📊 モニタリング）の詳細にもセクション・ジャンプバー。
+  iPhone 13 実測で sticky ヘッダー直下（top≈139px）に着地、JSエラー0
+- ServiceWorker: `CACHE_NAME` v187 → v188 → **v189**（mainの第74弾と同版衝突のためマージで改番）、pendingStats drugs 674・symptoms 102
+- mainマージ: 緊急プロトコルのジャンプバーはmain側（emsteps/emdrugs/emmonitor）を採用し、麻酔プロトコル（anesdrugs/monitor/refs）のみ本セッション分を追加
+
+### テスト
+- `tests/test_round50_audit.py`（25件）
+- 再現: `strip_clinical_signs_filler --apply` → `fix_feline_tooth_resorption --apply` → `migrate_to_sqlite.py`

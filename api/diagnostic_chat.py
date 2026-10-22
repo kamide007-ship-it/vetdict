@@ -1096,6 +1096,7 @@ def extract_symptoms_from_text(text: str) -> list:
         # 口腔腫脹は歯科・口腔疾患の徴候として最も近いレガシーIDへ。
         "perianal_swelling": ["scooting"],
         "stomatitis": ["bad_breath", "excessive_drooling"],
+        "tooth_loss": ["difficulty_eating", "missing_teeth"],
     }
 
     # 単一IDでは臨床的意味が落ちる主訴の「併記抽出」: 祈りのポーズ
@@ -1123,6 +1124,9 @@ def extract_symptoms_from_text(text: str) -> list:
     # ---------------------------------------------------------------
     _sorted_aliases = sorted(SYMPTOM_ALIASES.keys(), key=len, reverse=True)
     consumed_ranges: list[tuple[int, int]] = []  # track matched text regions
+    # 種別IDのまま記録（フォールバック後は perianal_swelling→scooting のように
+    # 部位情報が失われ、_SUBSUMES の包含ルールが働かないため — 2026-10 第50回）
+    _raw_alias_ids: set[str] = set()
 
     for alias in _sorted_aliases:
         pos = text_lower.find(alias)
@@ -1132,6 +1136,7 @@ def extract_symptoms_from_text(text: str) -> list:
             # 「咳はない」等 — 否定された言及は抽出しない
             continue
         raw_id = SYMPTOM_ALIASES[alias]
+        _raw_alias_ids.add(raw_id)
         symptom_id = _resolve_legacy_id(raw_id)
         if symptom_id is None:
             continue
@@ -1203,7 +1208,7 @@ def extract_symptoms_from_text(text: str) -> list:
     from api.chat.symptom_extractor import _SUBSUMES
 
     for _specific, _generic in _SUBSUMES.items():
-        if _specific in matched_symptoms:
+        if _specific in matched_symptoms or _specific in _raw_alias_ids:
             matched_symptoms -= _generic
     return list(matched_symptoms)
 

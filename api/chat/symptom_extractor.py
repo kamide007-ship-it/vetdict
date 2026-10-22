@@ -734,6 +734,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # insulinoma hypoglycemia presentation (Quesenberry & Carpenter 4th ed);
     # cats carry jaw_chattering natively so this chain never fires for them.
     "jaw_chattering": ["pawing_at_mouth", "difficulty_eating", "drooling", "mouth_pain"],
+    # 2026-10 第50回: 歯の吸収・欠損（猫ネイティブ）。他種は歯科/摂食困難へ
+    "tooth_loss": ["missing_teeth", "loose_teeth", "dental_disease", "difficulty_eating", "drooling"],
     # --- 2026-08 round-14 sweep bridges ---
     # 口の中にできもの (oral mass): the legacy dog vocabulary now carries
     # oral_mass natively (oral-tumor entry); other species express visible
@@ -821,6 +823,10 @@ _SUBSUMES: dict[str, set[str]] = {
     # （「尻尾を触ると痛がります」で汎用 pain が緑内障へ誘導していた — 2026-10 第74弾）
     "back_pain": {"pain"},
     "abdominal_pain": {"pain"},
+    # 肛門周囲の腫瘤（2026-10 第50回）は部位特異 — 汎用「しこり」で乳腺/皮膚腫瘍へ散らさない
+    "perianal_swelling": {"lumps", "lumps_and_bumps", "lumps_bumps"},
+    # 歯の吸収・欠損は口腔の局所痛を包含
+    "tooth_loss": {"pain"},
 }
 
 # Backwards-compat alias (some older imports use the private name).
@@ -994,6 +1000,9 @@ _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)
 _ADVERB_STRIP = _neg_re.compile(
     r"(が|を|も|は)"
     r"(?:急に|突然|パンパンに|自分で|とても|かなり|頻繁に|たびたび|しょっちゅう|何日も|何日間も|数日間?|だんだん|徐々に|少しずつ"
+    # 2026-10 第50回: 全否定の強調（全然/まったく）と反復（しきりに）。
+    # 「陰部をしきりに舐め」はキュレートキーのため温存。
+    r"|全然|まったく|全く|(?<!陰部を)しきりに"
     r"|(?<!食欲が)(?<!食欲を)(?<!食欲も)(?<!食欲は)すごく"
     r"|いつも(?!と違)"
     r"|(?<!口が)(?<!口を)(?<!口も)(?<!口は)ずっと)"

@@ -107,6 +107,7 @@ from api.drug_batch_80 import DRUGS_BATCH_80
 from api.drug_batch_81 import DRUGS_BATCH_81
 from api.drug_batch_82 import DRUGS_BATCH_82
 from api.drug_batch_83 import DRUGS_BATCH_83
+from api.drug_batch_84 import DRUGS_BATCH_84
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11089,6 +11090,13 @@ for _drug83 in DRUGS_BATCH_83:
         DRUGS.append(_drug83)
         _drug_index[_drug83["id"]] = _drug83
 
+# Batch 84 (2026-10 第75弾: エルツグリフロジン（馬インスリン調節異常関連蹄葉炎のSGLT2阻害薬）・
+#  メチルフェニデート（犬過活動症の診断的試験投与） — 治療文が用量付きで参照するのに未収載）
+for _drug84 in DRUGS_BATCH_84:
+    if _drug84["id"] not in _drug_index:
+        DRUGS.append(_drug84)
+        _drug_index[_drug84["id"]] = _drug84
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11943,6 +11951,23 @@ _KATAKANA_VARIANT_ALIASES["n_acetylcysteine"] = _KATAKANA_VARIANT_ALIASES.get("n
     "acetylcysteine",
 )
 _KATAKANA_VARIANT_ALIASES["l_tryptophan"] = _KATAKANA_VARIANT_ALIASES.get("l_tryptophan", ()) + ("tryptophan",)
+
+# Sweep #38 (2026-10 第75弾): bare katakana spellings cited with doses in the
+# treatment texts that never reached their existing monographs:
+#   - "セフポドキシム 5-10 mg/kg" (dog UTI/pyelonephritis, foal omphalitis) — the
+#     formulary name carries the "プロキセチル" ester suffix
+#   - "マイコフェノール酸 10-15 mg/kg" (autoimmune skin disease) — マイコ form of
+#     ミコフェノール酸
+#   - "ファイロコキシブ(エクオキソル)" (equine laminitis) — ファイロ form of
+#     フィロコキシブ
+#   - "アンフォテリシンB" (avian aspergillosis) — アンフォ form of アムホテリシン
+for _vid, _vals in (
+    ("cefpodoxime", ("セフポドキシム",)),
+    ("mycophenolate", ("マイコフェノール酸",)),
+    ("firocoxib", ("ファイロコキシブ",)),
+    ("amphotericin_b", ("アンフォテリシン",)),
+):
+    _KATAKANA_VARIANT_ALIASES[_vid] = _KATAKANA_VARIANT_ALIASES.get(_vid, ()) + _vals
 
 
 # Japanese dose-form / salt / strength suffixes that formulary names carry but

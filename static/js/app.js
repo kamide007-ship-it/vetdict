@@ -1802,9 +1802,9 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:606,drugs:613,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:606,drugs:614,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
     {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:589,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:365,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:366,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1827,7 +1827,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6459,
     species:21,
-    drugs:672,
+    drugs:674,
     symptoms:102,
     protocols:188
   };
@@ -8148,7 +8148,7 @@ function renderAnesthesiaList(){
     if(p.drugs&&p.drugs.length){
       const hasCalc=patientWeight>0;
       const calcHeader=hasCalc?`<th>${t("anesthesiaCalcDose")} (${patientWeight}kg)</th>`:"";
-      drugsHtml=`<div class="anesthesia-drugs-table"><table><thead><tr><th>${currentLang==="ja"?"薬品":"Drug"}</th><th>${t("anesthesiaDose")}</th>${calcHeader}<th>${t("anesthesiaRoute")}</th><th>${t("anesthesiaOnset")}</th><th>${t("anesthesiaDuration")}</th></tr></thead><tbody>`
+      drugsHtml=`<div class="anesthesia-drugs-table" data-jump="anesdrugs"><table><thead><tr><th>${currentLang==="ja"?"薬品":"Drug"}</th><th>${t("anesthesiaDose")}</th>${calcHeader}<th>${t("anesthesiaRoute")}</th><th>${t("anesthesiaOnset")}</th><th>${t("anesthesiaDuration")}</th></tr></thead><tbody>`
         +p.drugs.map(d=>{
           const dNotes=currentLang==="ja"?(d.notes_ja||d.notes||""):(d.notes||d.notes_ja||"");
           let calcCell="";
@@ -8193,7 +8193,7 @@ function renderAnesthesiaList(){
 
     let monitorHtml="";
     if(p.monitoring_params&&p.monitoring_params.length){
-      monitorHtml=`<div class="anesthesia-monitor-section"><strong>${t("anesthesiaMonitoring")}</strong><table><thead><tr><th>Parameter</th><th>${t("anesthesiaTarget")}</th><th>Notes</th></tr></thead><tbody>`
+      monitorHtml=`<div class="anesthesia-monitor-section" data-jump="monitor"><strong>${t("anesthesiaMonitoring")}</strong><table><thead><tr><th>Parameter</th><th>${t("anesthesiaTarget")}</th><th>Notes</th></tr></thead><tbody>`
         +p.monitoring_params.map(m=>{
           const mNotes=currentLang==="ja"?(m.notes_ja||m.notes||""):(m.notes||m.notes_ja||"");
           return`<tr><td><strong>${escapeHtml(m.param||"")}</strong></td><td>${escapeHtml(m.target||"")}</td><td>${escapeHtml(mNotes)}</td></tr>`;
@@ -8209,7 +8209,7 @@ function renderAnesthesiaList(){
       </div>
       <div class="disease-detail">
         ${notes?`<div class="anesthesia-notes">${escapeHtml(notes)}</div>`:""}
-        ${drugsHtml}${monitorHtml}${p.references&&p.references.length?`<div class="anesthesia-references"><strong>${currentLang==="ja"?"参考文献":"References"}</strong><ul>${p.references.map(r=>`<li>${escapeHtml(r)}</li>`).join("")}</ul></div>`:""}
+        ${drugsHtml}${monitorHtml}${p.references&&p.references.length?`<div class="anesthesia-references" data-jump="refs"><strong>${currentLang==="ja"?"参考文献":"References"}</strong><ul>${p.references.map(r=>`<li>${escapeHtml(r)}</li>`).join("")}</ul></div>`:""}
       </div>
     </div>`;
   }).join("");
@@ -8825,7 +8825,7 @@ function _addDetailJumpBar(detail){
   if(!detail||detail.querySelector(".detail-jump-bar"))return;
   const targets=detail.querySelectorAll("[data-jump]");
   if(targets.length<2)return;
-  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"],dosage:["💊 動物種別用量","💊 Dosage"],contra:["⛔ 禁忌","⛔ Contraindications"],interactions:["🔄 相互作用","🔄 Interactions"],drugs:["💉 関連薬品","💉 Related drugs"],emsteps:["🚨 対応手順","🚨 Steps"],emdrugs:["💊 主要薬剤・用量","💊 Key drug doses"],emmonitor:["📊 モニタリング","📊 Monitoring"]};
+  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"],dosage:["💊 動物種別用量","💊 Dosage"],contra:["⛔ 禁忌","⛔ Contraindications"],interactions:["🔄 相互作用","🔄 Interactions"],drugs:["💉 関連薬品","💉 Related drugs"],emsteps:["🚨 対応手順","🚨 Steps"],emdrugs:["💊 主要薬剤・用量","💊 Key drug doses"],emmonitor:["📊 モニタリング","📊 Monitoring"],anesdrugs:["💉 薬品・用量","💉 Drugs & doses"],monitor:["📊 モニタリング","📊 Monitoring"],refs:["📚 参考文献","📚 References"]};
   /* 2026-10 第73弾: 長い治療プロトコルの末尾にある「治療に関連する薬品」チップ群
      （→薬品詳細・相互作用チェック）へも1タップで（スマホで治療文を数画面
      スクロールしなくてよい）。チップ群は非同期にハイドレートされるため
@@ -8833,6 +8833,8 @@ function _addDetailJumpBar(detail){
   /* 2026-10 第74弾: 救急プロトコルも — 手順が長く、分単位で必要な主要薬剤の
      用量が数画面下にあった（スマホ）。 */
   const order=["treatment","drugs","diagnosis","signs","prognosis","dosage","contra","interactions","emdrugs","emsteps","emmonitor"];
+  /* 2026-10 第75弾: 麻酔プロトコル（長い注記の下に薬品表・モニタリング表・参考文献）にも同じジャンプバー。 */
+  order.push("anesdrugs","monitor","refs");
   const bar=document.createElement("nav");
   bar.className="detail-jump-bar";
   bar.setAttribute("aria-label",currentLang==="ja"?"セクションへ移動":"Jump to section");
