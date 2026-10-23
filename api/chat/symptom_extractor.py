@@ -752,6 +752,7 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 急性後肢麻痺: rabbit carries hind_limb_paralysis natively; bridge to
     # the weakness/paralysis IDs used by the other vocabularies.
     "hind_limb_paralysis": [
+        "hind_leg_paralysis",
         "hind_limb_weakness",
         "paralysis",
         "dragging_hind_legs",
@@ -980,6 +981,10 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     # 振る（五段: 頭をよく振ります→振る — 2026-10 第73弾）
     ("振ります", "振る"),
     ("振りました", "振った"),
+    # 抜ける（一段: 毛が抜けます→抜ける — 2026-10 第76弾。毛が抜けるキー群が丁寧形で不発だった）
+    ("抜けます", "抜ける"),
+    ("抜けました", "抜けた"),
+    ("抜けません", "抜けない"),
 ]
 # 長い置換を先に適用（「ていませんでした」が「ていません」より先）
 _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)

@@ -108,6 +108,7 @@ from api.drug_batch_81 import DRUGS_BATCH_81
 from api.drug_batch_82 import DRUGS_BATCH_82
 from api.drug_batch_83 import DRUGS_BATCH_83
 from api.drug_batch_84 import DRUGS_BATCH_84
+from api.drug_batch_85 import DRUGS_BATCH_85
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11097,6 +11098,13 @@ for _drug84 in DRUGS_BATCH_84:
         DRUGS.append(_drug84)
         _drug_index[_drug84["id"]] = _drug84
 
+# Batch 85 (2026-10 第76弾: デルタメトリン4%首輪（スカリボール） — リーシュマニア症予防の
+#  サシチョウバエ忌避剤。犬リーシュマニア症の予防・治療文が参照するのに未収載）
+for _drug85 in DRUGS_BATCH_85:
+    if _drug85["id"] not in _drug_index:
+        DRUGS.append(_drug85)
+        _drug_index[_drug85["id"]] = _drug85
+
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減
 # bird データ → parakeet, parrot（鳥類サブグループ、薬物動態類似）
@@ -11506,6 +11514,9 @@ _DRUG_ALIAS_TO_ID: Dict[str, str] = _consolidate_duplicate_drugs()
 # （epofolaner は実在せず、ブランド Zenrelia の実体はイルノシチニブ＝JAK阻害薬。
 #  batch_15 のエントリを正しいモノグラフに置換した — 旧URLはここで新 id に解決）
 _DRUG_ALIAS_TO_ID.setdefault("epofolaner", "ilunocitinib")
+# 旧 id "palladia" はマシチニブのエントリに付いていたが、Palladia はトセラニブの商品名
+# （2026-10 第76弾）。旧URL・旧入力は商品名の意味どおりトセラニブへ解決する。
+_DRUG_ALIAS_TO_ID["palladia"] = "toceranib"
 
 # 獣医師がフォーミュラリから記入し published にした用量のみを適用する
 # （api/drug_dosage_overrides.py の fail-closed ゲート）。未記入・出典なしは無視されるので、

@@ -505,6 +505,11 @@ def unreliable_clone_set_names(diseases: List[Any], species: str) -> frozenset:
 # listed owner species; in any other species it is stale contamination. Matching
 # is anchored to the START of a sentence so inline comparative mentions
 # (e.g. "…、甲状腺機能亢進症（猫）、…" inside a differential list) are left intact.
+_REPTILES_CS = frozenset({"reptile", "tortoise", "snake", "lizard", "exotic_other"})
+_BIRDS_CS = frozenset({"bird", "parakeet", "parrot", "exotic_other"})
+# 常生歯（切歯・臼歯が生涯伸び続ける）を持つ草食・齧歯類と馬（長冠歯） — 歯のトリミングが適応となる群
+_ELODONT_CS = frozenset({"rabbit", "guinea_pig", "chinchilla", "degu", "hamster", "horse", "exotic_other"})
+
 _CROSS_SPECIES_CLAUSES: tuple[tuple[str, frozenset[str]], ...] = (
     ("支持療法（爬虫類）", frozenset({"reptile", "tortoise", "snake", "lizard"})),
     # 循環器カテゴリ生成器が全種の臨床徴候に付けていた猫ATEの一文（2026-10 第71弾）
@@ -515,6 +520,44 @@ _CROSS_SPECIES_CLAUSES: tuple[tuple[str, frozenset[str]], ...] = (
     ("FIP（猫）", frozenset({"cat"})),
     ("ビタミンC欠乏（モルモット）", frozenset({"guinea_pig"})),
     ("Cryptosporidium（ヘビ）", frozenset({"snake"})),
+    # 多種列挙型のカテゴリ生成器が全種の臨床徴候・予防・治療に付けていた他群向けの一文
+    # （2026-10 第76弾 — 犬猫に「草食動物: チモシー乾草」「鳥類: カトルボーン」、
+    # 哺乳類・鳥に「ビタミンD/UV-B不足（爬虫類）」、肉食動物に歯のトリミング等）
+    ("ビタミンD/UV-B不足（爬虫類）", _REPTILES_CS),
+    ("ビタミンC不足（モルモット）", frozenset({"guinea_pig"})),
+    ("不正咬合（草食動物）", _ELODONT_CS),
+    ("草食動物（ウサギ", _ELODONT_CS - {"horse"}),
+    ("不正咬合は種と重症度に応じて歯のトリミング", _ELODONT_CS),
+    ("小動物（犬猫）", frozenset({"dog", "cat"})),
+    ("鳥類:", _BIRDS_CS),
+    ("鳥類：", _BIRDS_CS),
+    ("爬虫類:", _REPTILES_CS),
+    ("爬虫類：", _REPTILES_CS),
+    ("ウサギ:", frozenset({"rabbit", "exotic_other"})),
+)
+
+_HERBIVORE_SMALL_CS = frozenset({"rabbit", "guinea_pig", "chinchilla", "degu", "hamster", "exotic_other"})
+
+# 文中に埋め込まれた草食小動物向けの句を、肉食・食虫・雑食・両生類では種に合う句へ置換する
+# （exotic_mammal 生成器が ferret/hedgehog/sugar_glider にも草食動物の乾草指導を出していた）。
+_NUTRITION_PAREN_HERBIVORE = (
+    "（草食性小動物は高繊維チモシー乾草を主体に、モルモットはビタミンCを継続補給、糖質過多を避ける）"
+)
+_DENTAL_SENTENCE_HERBIVORE = (
+    "草食性小動物では高繊維チモシー乾草を主体に歯の自然摩耗を促し、定期的な歯科検診で不正咬合・過長歯を早期に発見する。"
+)
+_NUTRITION_PAREN_BY_SPECIES = {
+    "ferret": "（フェレットは高蛋白・高脂肪・低炭水化物の肉食性フードを主体に、糖質・果物のおやつを避ける）",
+    "hedgehog": "（ハリネズミは高蛋白・低脂肪の食虫性フードに生き餌を組み合わせ、肥満を避ける）",
+    "sugar_glider": "（フクロモモンガは蛋白源と樹液・花蜜代用食を組み合わせ、カルシウム/リン比と糖質過多に注意する）",
+    "amphibian": "（両生類は生き餌へのカルシウム・ビタミンD3ダスティングとガットローディングを行う）",
+}
+_DENTAL_SENTENCE_CARNIVORE = (
+    "定期的な口腔検査と麻酔下の歯石除去、軟食・糖質の多いおやつの回避により歯周病の進行を防ぐ。"
+)
+_CROSS_SPECIES_INLINE: tuple[tuple[str, frozenset[str], Any], ...] = (
+    (_NUTRITION_PAREN_HERBIVORE, _HERBIVORE_SMALL_CS, lambda sp: _NUTRITION_PAREN_BY_SPECIES.get(sp, "")),
+    (_DENTAL_SENTENCE_HERBIVORE, _HERBIVORE_SMALL_CS, lambda sp: _DENTAL_SENTENCE_CARNIVORE),
 )
 
 _CS_LEADING_SYMBOLS = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳■●○◆・※【】 　\t\n\r"
@@ -538,8 +581,13 @@ def strip_cross_species_text(text: str, species: str) -> str:
     Returns the original text unchanged when nothing matches, and never blanks a
     field that becomes empty after stripping.
     """
-    if not text or "（" not in text:
+    if not text:
         return text
+    inline_changed = False
+    for needle, owners, repl in _CROSS_SPECIES_INLINE:
+        if species not in owners and needle in text:
+            text = text.replace(needle, repl(species))
+            inline_changed = True
     segments = _re.split(r"(?<=。)", text)
     kept: List[str] = []
     changed = False
@@ -551,7 +599,7 @@ def strip_cross_species_text(text: str, species: str) -> str:
             continue
         kept.append(seg)
     if not changed:
-        return text
+        return text if not inline_changed else text.strip()
     result = "".join(kept).strip()
     return result if result else text
 
