@@ -1957,10 +1957,16 @@ def strip_cross_species_clauses_in_served_db(conn) -> int:
     clinically relevant, while inline comparative mentions are left intact.
     """
     sys.path.insert(0, str(ROOT))
-    from api.species.helpers import _CS_VISIBLE_FIELDS, strip_cross_species_text
+    from api.species.helpers import (
+        _CS_VISIBLE_FIELDS,
+        _CS_VISIBLE_FIELDS_EN,
+        strip_cross_species_text,
+        strip_cross_species_text_en,
+    )
 
     existing = {r["name"] for r in conn.execute("PRAGMA table_info(diseases)").fetchall()}
-    fields = [f for f in _CS_VISIBLE_FIELDS if f in existing]
+    fields = [f for f in (*_CS_VISIBLE_FIELDS, *_CS_VISIBLE_FIELDS_EN) if f in existing]
+    en_fields = set(_CS_VISIBLE_FIELDS_EN)
     rows = conn.execute("SELECT id, species, " + ", ".join(fields) + " FROM diseases").fetchall()
     total = 0
     for row in rows:
@@ -1970,7 +1976,8 @@ def strip_cross_species_clauses_in_served_db(conn) -> int:
             v = row[f]
             if not v:
                 continue
-            cleaned = strip_cross_species_text(v, species)
+            fn = strip_cross_species_text_en if f in en_fields else strip_cross_species_text
+            cleaned = fn(v, species)
             if cleaned != v:
                 updates[f] = cleaned
                 total += 1
@@ -2905,6 +2912,12 @@ def main(db_path: str | None = None):
         print("\n[enrichment] grounding English causes to Japanese category parity...")
         en_causes = ground_english_causes_to_category(conn)
         print(f"  → English causes upgraded to category parity: {en_causes}")
+
+        # Re-run the cross-species clause strip after every regeneration pass:
+        # the category generators above re-emit herbivore/avian enumeration
+        # sentences (第76弾), so the first sweep alone is not the final word.
+        cs_n2 = strip_cross_species_clauses_in_served_db(conn)
+        print(f"  → {cs_n2} cross-species clauses removed after regeneration")
 
         # Drugs
         print("\n[drugs] migrating drug dictionary...")

@@ -479,7 +479,7 @@ SYMPTOM_ALIASES = {
     "ふらふら": "ataxia",
     "フラフラ": "tremors",
     "ふらつき": "tremors",
-    "よろよろ": "tremors",
+    "よろよろ": "ataxia",
     "ヨロヨロ": "tremors",
     "ふるえてる": "tremors",
     "震えてる": "tremors",
@@ -3806,6 +3806,26 @@ SYMPTOM_ALIASES = {
     "ダニがついて": "visible_mites",
     "水入れに浸か": "excessive_soaking",
     "水入れにつか": "excessive_soaking",
+    "背中を触ると痛が": "back_pain",
+    "腰を触ると痛が": "back_pain",
+    "後ろ足の力が弱": "hind_limb_weakness",
+    "後ろ足の力がな": "hind_limb_weakness",
+    "よろけ": "ataxia",
+    "お尻の横が赤く腫れ": "scooting",
+    "おしりの横が赤く腫れ": "scooting",
+    "おしっこの回数が増え": "frequent_urination",
+    "瞳孔が開いて": "dilated_pupils",
+    "瞳孔が開いたまま": "dilated_pupils",
+    "黒目が大き": "dilated_pupils",
+    "耳を痒が": "ear_scratching",
+    "耳をかゆが": "ear_scratching",
+    "耳を痒そう": "ear_scratching",
+    # 「痒がって」(itching)との4字タイを避けるため5字以上で登録
+    "耳を痒がっ": "ear_scratching",
+    # 少量頻尿（pollakiuria）— 量が少ないのは多尿ではなく下部尿路疾患
+    "回数が増えて量が少な": "straining_to_urinate",
+    "回数が多くて量が少な": "straining_to_urinate",
+    "回数が多いのに量が少な": "straining_to_urinate",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

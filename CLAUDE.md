@@ -7522,7 +7522,7 @@ Playwright（iPhone 13・実タッチ）で再現: `.disease-detail.open` は開
 - `tests/test_round50_audit.py`（25件）
 - 再現: `strip_clinical_signs_filler --apply` → `fix_feline_tooth_resorption --apply` → `migrate_to_sqlite.py`
 
-## 2026-10セッション（第76弾: 多種列挙型テンプレートの種間汚染除去 + Palladia/マシチニブ ID衝突の是正 + リーシュマニア症予防のキュレーション + デルタメトリン首輪公開 + チャット精度第51弾 + 「予防」ジャンプ・旧IDディープリンク）
+## 2026-10セッション（第76弾・並行セッション分: 多種列挙型テンプレートの種間汚染除去 + Palladia/マシチニブ ID衝突の是正 + リーシュマニア症予防のキュレーション + デルタメトリン首輪公開 + チャット精度第51弾 + 「予防」ジャンプ・旧IDディープリンク）
 
 ### エラーチェック（結果: ベースライン健全）
 - ruff clean、フルテスト **4,999件合格**（ベースライン）→ **5,017件合格**（34 skip、カバレッジ82.89%）、配信SQLiteクリーンビルド（treatment/prevention/prognosis 100%）
@@ -7557,3 +7557,38 @@ Playwright（iPhone 13・実タッチ）で再現: `.disease-detail.open` は開
 ### テスト
 - `tests/test_round51_audit.py`（20件）
 - 再現: `fix_leishmaniasis_prevention --apply` → `migrate_to_sqlite.py`
+## 2026-10セッション（第76弾: 犬猫等の消化器・歯科欄に混入した草食動物/鳥類の異種文の撲滅 + チャット精度第51弾 + 鑑別診断結果カードのセクション・ジャンプ）
+
+### エラーチェック（結果: ベースライン健全）
+- ruff clean、フルテスト **4,999件合格**（ベースライン）→ **5,015件合格**（34 skip、カバレッジ82.86%）、配信SQLiteクリーンビルド（6,896疾患・prognosis 100%）
+
+### 異種文の撲滅（犬のGDV予防に「チモシー乾草を給与量の80%以上」等）
+- 消化器・歯科カテゴリ生成器が全種の疾患に付けていた草食小型哺乳類・鳥類の一文が、犬猫・フェレット・爬虫類等に残存していた:
+  「草食動物（ウサギ・モルモット・チンチラ・デグー）: 高繊維チモシー乾草…」「草食動物GI stasis: 強制給餌…」「草食動物では繊維質不足…」
+  「鳥類: 適切なくちばし磨耗のための…カトルボーン」「不正咬合（草食動物）…」、英語 "In herbivores, …"、列挙内の「、過長歯（草食動物・げっ歯類）」
+  （犬GDV・膵炎・IBD・肝臓病、猫歯周病 等）
+- `strip_cross_species_text` に所有種付きマーカーを追加（草食小型哺乳類／草食動物全般（馬・リクガメ・トカゲ含む）／鳥類 — 所有種では温存）、
+  英語版 `strip_cross_species_text_en`（元の改行を保持）と列挙内フラグメント除去を新設、対象欄に transmission/diagnosis/栄養管理/リハビリ欄を追加
+- JSONオーバーレイに `strip_cross_taxon_gi_dental_clauses.py --apply` で適用（2,124フィールド）。配信DBビルドは生成器の再生成パスの後にも
+  同スイープを再実行（初回スイープ後に再混入していた28件）。多種比較の栄養要求リスト（「草食動物（モルモット）のビタミンC、爬虫類のCa/UV-B…」）は正当な比較として温存
+
+### 診断チャット精度 第51弾（80症例・2波スイープ 11 MISS → 実用症例全合格）
+- エイリアス: 目が真っ赤、背中/腰を触ると痛が→back_pain、後ろ足の力が弱、よろけ→ataxia、お尻の横が赤く腫れ→肛門嚢、
+  おしっこの回数が増え、回数が増えて量が少な→下部尿路（「食べる量が少ない」は非該当）、瞳孔が開いて/黒目が大き、耳を痒がっ（itchingとの4字タイ回避）
+- 誤マッピング是正: 「よろよろ」tremors → ataxia
+
+### スマホUX: 鑑別診断の結果カードにセクション・ジャンプバー
+- 疾患DB詳細（第71弾）と同じ「💊 治療 / 💉 関連薬品 / 🔬 診断 / 🩺 臨床徴候 / 📈 予後」を結果カード展開時に表示
+  （Playwright 390px 実測: 治療チップでsticky ヘッダー直下 top=139px に着地、JSエラー0）
+- ServiceWorker: `CACHE_NAME` v189 → **v190**
+- 新規薬品・新規疾患: 今回のスイープでは追加なし（辞書は674剤で飽和を再確認）
+
+### テスト
+- `tests/test_round51_audit.py`（16件）
+- 再現: `strip_cross_taxon_gi_dental_clauses --apply` → `migrate_to_sqlite.py`
+
+### mainの並行第76弾（PR #844: 草食動物/鳥類の異種文撲滅 + 鑑別結果カードのジャンプバー）とのマージ統合
+- `helpers.py`: 両セッションのマーカーを統合（重複マーカーは本セッション側の所有種セット — 馬の不正咬合を許容 — を採用）、
+  置換型インライン（`_CROSS_SPECIES_INLINE_REPL`）と削除型インライン（main の `_CROSS_SPECIES_INLINE`）を併用
+- `diseases_all_species.json` はフィールド単位3-wayマージ（真の衝突0）、テストは本セッション分を `tests/test_round51_parallel_audit.py`（Round51Parallel）に分離
+- ServiceWorker: 両者 v190 → **v191** に改番

@@ -509,6 +509,9 @@ _REPTILES_CS = frozenset({"reptile", "tortoise", "snake", "lizard", "exotic_othe
 _BIRDS_CS = frozenset({"bird", "parakeet", "parrot", "exotic_other"})
 # 常生歯（切歯・臼歯が生涯伸び続ける）を持つ草食・齧歯類と馬（長冠歯） — 歯のトリミングが適応となる群
 _ELODONT_CS = frozenset({"rabbit", "guinea_pig", "chinchilla", "degu", "hamster", "horse", "exotic_other"})
+_HERBIVORE_SMALL_MAMMALS = frozenset({"rabbit", "guinea_pig", "chinchilla", "degu", "hamster", "exotic_other"})
+_HERBIVORES = _HERBIVORE_SMALL_MAMMALS | frozenset({"horse", "tortoise", "lizard", "reptile"})
+_BIRDS = frozenset({"bird", "parakeet", "parrot"})
 
 _CROSS_SPECIES_CLAUSES: tuple[tuple[str, frozenset[str]], ...] = (
     ("支持療法（爬虫類）", frozenset({"reptile", "tortoise", "snake", "lizard"})),
@@ -534,6 +537,12 @@ _CROSS_SPECIES_CLAUSES: tuple[tuple[str, frozenset[str]], ...] = (
     ("爬虫類:", _REPTILES_CS),
     ("爬虫類：", _REPTILES_CS),
     ("ウサギ:", frozenset({"rabbit", "exotic_other"})),
+    # 2026-10 第76弾: 消化器・歯科カテゴリ生成器が全種に付けていた草食小型哺乳類・鳥類の一文
+    # （犬のGDV予防に「チモシー乾草を給与量の80%以上」、猫の歯周病予防に「カトルボーン」等）
+    ("草食動物GI stasis", _HERBIVORE_SMALL_MAMMALS),
+    ("草食動物では", _HERBIVORES),
+    ("草食動物の不正咬合", _HERBIVORE_SMALL_MAMMALS),
+    ("草食・げっ歯類の不正咬合", _HERBIVORE_SMALL_MAMMALS),
 )
 
 _HERBIVORE_SMALL_CS = frozenset({"rabbit", "guinea_pig", "chinchilla", "degu", "hamster", "exotic_other"})
@@ -555,9 +564,36 @@ _NUTRITION_PAREN_BY_SPECIES = {
 _DENTAL_SENTENCE_CARNIVORE = (
     "定期的な口腔検査と麻酔下の歯石除去、軟食・糖質の多いおやつの回避により歯周病の進行を防ぐ。"
 )
-_CROSS_SPECIES_INLINE: tuple[tuple[str, frozenset[str], Any], ...] = (
+_CROSS_SPECIES_INLINE_REPL: tuple[tuple[str, frozenset[str], Any], ...] = (
     (_NUTRITION_PAREN_HERBIVORE, _HERBIVORE_SMALL_CS, lambda sp: _NUTRITION_PAREN_BY_SPECIES.get(sp, "")),
     (_DENTAL_SENTENCE_HERBIVORE, _HERBIVORE_SMALL_CS, lambda sp: _DENTAL_SENTENCE_CARNIVORE),
+)
+
+# English counterparts (sentence-leading), dropped from the same non-owner species.
+_CROSS_SPECIES_CLAUSES_EN: tuple[tuple[str, frozenset[str]], ...] = (
+    ("In herbivores (rabbit", _HERBIVORE_SMALL_MAMMALS),
+    ("In herbivores, cheek-tooth", _HERBIVORE_SMALL_MAMMALS),
+    ("In herbivores,", _HERBIVORES),
+    ("Malocclusion in herbivores", _HERBIVORE_SMALL_MAMMALS),
+    ("Malocclusion (herbivores)", _HERBIVORE_SMALL_MAMMALS),
+)
+
+# Inline enumeration items that name another taxon's disease mechanism.
+_CROSS_SPECIES_INLINE: tuple[tuple[str, frozenset[str]], ...] = (
+    ("、過長歯（草食動物・げっ歯類）", _HERBIVORE_SMALL_MAMMALS),
+    (", overgrown (elodont) teeth in herbivores and rodents", _HERBIVORE_SMALL_MAMMALS),
+)
+
+_CS_VISIBLE_FIELDS_EN = (
+    "prevention",
+    "clinical_signs",
+    "causes",
+    "treatment",
+    "pathophysiology",
+    "description",
+    "prognosis",
+    "diagnosis",
+    "transmission",
 )
 
 _CS_LEADING_SYMBOLS = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳■●○◆・※【】 　\t\n\r"
@@ -570,7 +606,46 @@ _CS_VISIBLE_FIELDS = (
     "pathophysiology_ja",
     "description_ja",
     "prognosis_ja",
+    "transmission_ja",
+    "diagnosis_ja",
+    "nutrition_management_ja",
+    "rehabilitation_protocol_ja",
 )
+
+
+def _strip_inline(text: str, species: str) -> str:
+    for frag, owners in _CROSS_SPECIES_INLINE:
+        if species not in owners and frag in text:
+            text = text.replace(frag, "")
+    return text
+
+
+def strip_cross_species_text_en(text: str, species: str) -> str:
+    """English counterpart of :func:`strip_cross_species_text` (sentence = ". ").
+
+    Original whitespace (including list newlines) is preserved: only the matched
+    sentence and the separator that follows it are removed.
+    """
+    if not text or "erbivore" not in text:
+        return text
+    base = _strip_inline(text, species)
+    parts = _re.split(r"(?<=\.)(\s+)", base)
+    out: List[str] = []
+    i = 0
+    while i < len(parts):
+        seg = parts[i]
+        sep = parts[i + 1] if i + 1 < len(parts) else ""
+        core = seg.lstrip()
+        if any(species not in o and core.startswith(m) for m, o in _CROSS_SPECIES_CLAUSES_EN):
+            if seg != core:
+                out.append(seg[: len(seg) - len(core)])
+        else:
+            out.append(seg + sep)
+        i += 2
+    result = "".join(out).strip()
+    if not result:
+        return text
+    return result if result != text.strip() else text
 
 
 def strip_cross_species_text(text: str, species: str) -> str:
@@ -583,14 +658,14 @@ def strip_cross_species_text(text: str, species: str) -> str:
     """
     if not text:
         return text
-    inline_changed = False
-    for needle, owners, repl in _CROSS_SPECIES_INLINE:
+    original = text
+    for needle, owners, repl in _CROSS_SPECIES_INLINE_REPL:
         if species not in owners and needle in text:
             text = text.replace(needle, repl(species))
-            inline_changed = True
-    segments = _re.split(r"(?<=。)", text)
+    inlined = _strip_inline(text, species)
+    segments = _re.split(r"(?<=。)", inlined)
     kept: List[str] = []
-    changed = False
+    changed = inlined != original
     for seg in segments:
         core = seg.lstrip(_CS_LEADING_SYMBOLS)
         drop = any(species not in owners and core.startswith(marker) for marker, owners in _CROSS_SPECIES_CLAUSES)
@@ -599,9 +674,9 @@ def strip_cross_species_text(text: str, species: str) -> str:
             continue
         kept.append(seg)
     if not changed:
-        return text if not inline_changed else text.strip()
+        return original
     result = "".join(kept).strip()
-    return result if result else text
+    return result if result else original
 
 
 def strip_cross_species_clauses(disease: Any, species: str) -> Any:
@@ -612,6 +687,16 @@ def strip_cross_species_clauses(disease: Any, species: str) -> Any:
             continue
         cleaned = strip_cross_species_text(current, species)
         if cleaned is not current and cleaned != current:
+            if isinstance(disease, dict):
+                disease[field] = cleaned
+            else:
+                setattr(disease, field, cleaned)
+    for field in _CS_VISIBLE_FIELDS_EN:
+        current = _disease_field(disease, field, "")
+        if not isinstance(current, str) or not current:
+            continue
+        cleaned = strip_cross_species_text_en(current, species)
+        if cleaned != current:
             if isinstance(disease, dict):
                 disease[field] = cleaned
             else:
