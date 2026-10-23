@@ -4605,7 +4605,7 @@ function renderDiseaseCard(d,data){
           <div class="detail-section-header"><span class="detail-icon">\u{1F4CB}</span> ${t("dtDescription")}</div>
           <div class="detail-section-body">${escapeHtml(desc||buildFieldFallback(t("dtDescription"),diseaseName))}</div>
         </div>
-        ${clinicalSigns?`<div class="detail-section">
+        ${clinicalSigns?`<div class="detail-section" data-jump="signs">
           <div class="detail-section-header"><span class="detail-icon">\u{1FA7A}</span> ${t("dtClinicalSigns")}</div>
           <div class="detail-section-body">${escapeHtml(clinicalSigns)}</div>
         </div>`:""}
@@ -4617,11 +4617,11 @@ function renderDiseaseCard(d,data){
           <div class="detail-section-header"><span class="detail-icon">\u{1F50D}</span> ${t("dtCauses")}</div>
           <div class="detail-section-body">${escapeHtml(causes)}</div>
         </div>
-        ${diagnosis?`<div class="detail-section">
+        ${diagnosis?`<div class="detail-section" data-jump="diagnosis">
           <div class="detail-section-header"><span class="detail-icon">\u{1F52C}</span> ${t("dtDiagnosis")}</div>
           <div class="detail-section-body">${escapeHtml(diagnosis)}</div>
         </div>`:""}
-        <div class="detail-section">
+        <div class="detail-section" data-jump="treatment">
           <div class="detail-section-header"><span class="detail-icon">\u{1F48A}</span> ${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</div>
           <div class="detail-section-body">${renderTreatmentWithAdjunct(treatment)}${buildTreatmentDrugsPlaceholder(currentSpecies||"dog",d.name_ja||d.name||"")}</div>
         </div>
@@ -4629,7 +4629,7 @@ function renderDiseaseCard(d,data){
           <div class="detail-section-header"><span class="detail-icon">\u{1F6E1}\uFE0F</span> ${t("dtPrevention")}</div>
           <div class="detail-section-body">${escapeHtml(prevention)}</div>
         </div>
-        <div class="detail-section">
+        <div class="detail-section" data-jump="prognosis">
           <div class="detail-section-header"><span class="detail-icon">\u{1F4CA}</span> ${t("dtPrognosis")}</div>
           <div class="detail-section-body">${escapeHtml(prognosis)}</div>
         </div>
@@ -8540,6 +8540,9 @@ function toggleDetail(head){
   if(detail.classList.contains("open"))_clampDetailPanel(detail);
   const isOpen=detail.classList.toggle("open");
   if(isOpen)_unclampDetailPanel(detail);
+  /* 2026-10 第76弾: 鑑別診断の結果カードにも疾患DBと同じセクション・ジャンプバー
+     （スマホでは治療欄が説明→病態→病因の数画面下にあった）。 */
+  if(isOpen)_addDetailJumpBar(detail);
   head.setAttribute("aria-expanded",isOpen);
   if(icon)icon.classList.toggle("rotated",isOpen);
   /* On open, bring the card to a useful reading position — just below the sticky
