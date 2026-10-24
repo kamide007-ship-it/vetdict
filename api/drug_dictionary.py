@@ -108,6 +108,7 @@ from api.drug_batch_81 import DRUGS_BATCH_81
 from api.drug_batch_82 import DRUGS_BATCH_82
 from api.drug_batch_83 import DRUGS_BATCH_83
 from api.drug_batch_84 import DRUGS_BATCH_84
+from api.drug_batch_85 import DRUGS_BATCH_85
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11096,6 +11097,13 @@ for _drug84 in DRUGS_BATCH_84:
     if _drug84["id"] not in _drug_index:
         DRUGS.append(_drug84)
         _drug_index[_drug84["id"]] = _drug84
+
+# Batch 85 (2026-10 第77弾: グルコン酸カリウム（猫CKD・低K性筋症の経口補充）・イマチニブ（KIT変異
+#  肥満細胞腫/GIST）・ゾレドロン酸（骨肉腫骨痛・高Ca血症） — 治療文が用量付きで参照するのに未収載）
+for _drug85 in DRUGS_BATCH_85:
+    if _drug85["id"] not in _drug_index:
+        DRUGS.append(_drug85)
+        _drug_index[_drug85["id"]] = _drug85
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

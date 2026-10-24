@@ -911,6 +911,8 @@ def extract_symptoms_from_text(text: str) -> list:
         "miliary_dermatitis": ["skin_rashes", "itching"],
         # 脂漏・皮膚臭（2026-10 第42回）
         "greasy_coat": ["greasy_skin"],
+        # 耳の触診痛（2026-10 第77弾）
+        "ear_pain": ["ear_scratching", "head_shaking"],
         "dropsy": ["bloating", "abdominal_distension"],
         "ascites": ["bloating", "abdominal_distension"],
         "effusion": ["labored_breathing", "bloating"],

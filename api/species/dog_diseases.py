@@ -5407,6 +5407,41 @@ DISEASES: List[Dict[str, Any]] = [
         "age_predisposition": {"puppy", "young"},
     },
     {
+        # 2026-10 第77弾: urethral sphincter mechanism incompetence (USMI) —
+        # the commonest cause of urinary incontinence in adult spayed bitches,
+        # with no entry anywhere in the DB (the dictionary carries PPA/estriol
+        # but no disease reached them). Arnold S et al. Schweiz Arch Tierheilkd
+        # 1989 (incidence ~20% in spayed bitches >20 kg); Thrusfield MV 1998
+        # JSAP; Byron JK et al. JVIM 2017 (spay timing, 3-year cohort);
+        # Proin ER FDA NADA 141-526; Incurin FDA NADA 141-325 / EU SPC;
+        # Reeves L et al. Vet Surg 2013 (artificial urethral sphincter);
+        # Ettinger 8th ed; Acierno MJ & Labato MA, Vet Clin Small Anim 2019.
+        "name": "Urethral Sphincter Mechanism Incompetence (USMI)",
+        "name_ja": "尿道括約筋機能不全（避妊後尿失禁）",
+        "symptoms": {"incontinence"},
+        "description": "Passive leakage of urine — typically while the dog is asleep or lying down — caused by inadequate urethral closure pressure, most often in a spayed female. The dog urinates normally otherwise and is unaware of the leaking. The commonest cause of urinary incontinence in adult dogs; it responds to medical therapy in most cases.",
+        "description_ja": "主に寝ている時・伏せている時に尿が受動的に漏れる状態で、尿道の閉鎖圧が不十分なことが原因です。多くは避妊済みの雌犬に起こり、通常の排尿は正常で本人（犬）は漏れに気付いていません。成犬の尿失禁で最も多い原因で、大半が内科療法に反応します。",
+        "causes": "Loss of oestrogen after ovariohysterectomy (risk rises several years after spaying; reported in about 5-20% of spayed bitches and up to ~20% of those over 20 kg), large/giant breed (Dobermann, Boxer, Old English Sheepdog, Rottweiler, Weimaraner, Irish Setter), obesity, short urethra or intrapelvic bladder neck, docked tail. Congenital forms (often with ectopic ureter) occur in young bitches; males are rarely affected.",
+        "causes_ja": "卵巣子宮摘出後のエストロゲン低下（リスクは避妊後数年で上昇。避妊済み雌犬の約5-20%、体重20 kg超では約20%に発生）、大型・超大型犬種（ドーベルマン、ボクサー、オールド・イングリッシュ・シープドッグ、ロットワイラー、ワイマラナー、アイリッシュ・セター）、肥満、短い尿道・骨盤内膀胱頸部、断尾。若齢雌では先天性（異所性尿管を伴うことが多い）もある。雄は稀。",
+        "pathophysiology": "Urethral closure depends on urethral smooth-muscle tone (alpha-adrenergic), striated sphincter, submucosal vascular plexus and the intra-abdominal position of the bladder neck. Oestrogen deficiency reduces alpha-receptor sensitivity and mucosal coaptation; when closure pressure falls below bladder pressure at rest (lying down, sleep, raised abdominal pressure) urine leaks. Persistent leakage predisposes to perivulvar dermatitis and ascending urinary tract infection.",
+        "pathophysiology_ja": "尿道の閉鎖は、尿道平滑筋の緊張（α交感神経）・横紋筋性括約筋・粘膜下血管叢・膀胱頸部の腹腔内位置によって保たれる。エストロゲン欠乏はα受容体の感受性と粘膜の密着を低下させ、安静時（伏臥・睡眠・腹圧上昇時）に尿道閉鎖圧が膀胱内圧を下回ると尿が漏れる。持続的な漏出は外陰部周囲皮膚炎と上行性尿路感染症の素因となる。",
+        "treatment": "Diagnosis first: urinalysis and urine culture (rule out UTI, PU/PD — diabetes, Cushing's, CKD), abdominal ultrasound/radiographs (ectopic ureter, bladder neck position, uroliths), neurological exam (rule out a neurogenic bladder — a large, easily expressed bladder is NOT USMI). Medical therapy (effective in ~75-90%): phenylpropanolamine 1-1.5 mg/kg PO q8-12h, or Proin ER 2 mg/kg PO q24h (FDA 2021) — alpha-agonist; monitor blood pressure (hypertension, restlessness, anorexia); avoid in hypertension, CKD-related hypertension, cardiac disease. Estriol (Incurin) 2 mg/dog PO q24h (US label; EU SPC starts 1 mg) then taper to the lowest effective dose (often 0.5-1 mg q24h or every other day) — oestrogen; monitor CBC (marrow suppression is rare at label doses) and signs of oestrus. Combination PPA + estriol for partial responders (synergistic). Refractory cases: endoscopic urethral submucosal bulking (collagen/polyacrylamide), colposuspension, or a hydraulic artificial urethral sphincter (Reeves 2013: continence in most dogs). Weight loss helps; treat perivulvar dermatitis and UTI.",
+        "treatment_ja": "まず診断: 尿検査・尿培養（尿路感染症、多飲多尿＝糖尿病・クッシング症候群・慢性腎臓病の除外）、腹部超音波/X線（異所性尿管・膀胱頸部の位置・尿石）、神経学的検査（膀胱が大きく容易に圧迫排尿できる場合は神経因性膀胱であり本症ではない）。内科療法（約75-90%で有効）: フェニルプロパノールアミン 1-1.5 mg/kg PO q8-12h、またはプロイン ER 2 mg/kg PO q24h（FDA 2021）— α作動薬。血圧を監視（高血圧・落ち着きのなさ・食欲低下）、高血圧・CKD関連高血圧・心疾患では避ける。エストリオール（インキュリン）2 mg/頭 PO q24h（米国ラベル。EU SPCは1 mgで開始）で開始し最小有効量（多くは0.5-1 mg q24hまたは隔日）へ漸減 — エストロゲン製剤。CBC（ラベル用量での骨髄抑制は稀）と発情徴候を監視。部分反応例はフェニルプロパノールアミン＋エストリオール併用（相乗効果）。難治例: 内視鏡下尿道粘膜下注入（コラーゲン/ポリアクリルアミド）、膣固定術、水圧式人工尿道括約筋（Reeves 2013: 大半で失禁消失）。減量も有効。外陰部周囲皮膚炎と尿路感染症を治療する。",
+        "prognosis": "Good. Most dogs become fully or largely continent on medication, though lifelong therapy is usually required; relapse on drug withdrawal is common. Surgical options rescue many medically refractory dogs.",
+        "prognosis_ja": "良好。大半は投薬で完全またはほぼ失禁が消失するが、通常は生涯の投薬が必要で、休薬で再発しやすい。内科療法に反応しない例も外科的選択肢で多くが改善する。",
+        "prevention": "In large-breed bitches discuss spay timing with the owner (evidence on early vs later spaying is mixed — Byron 2017 found no difference in a 3-year cohort); keep a lean body condition; check urinalysis promptly when leakage starts so UTI and PU/PD are not missed.",
+        "prevention_ja": "大型犬の雌では避妊の時期を飼い主と相談する（早期避妊と遅い避妊の比較はエビデンスが一致しない — Byron 2017 の3年コホートでは差なし）。適正体重を保つ。漏れが始まったら早めに尿検査を行い、尿路感染症や多飲多尿疾患を見逃さない。",
+        "recommended_tests": [
+            "尿検査・尿培養 (Urinalysis & Culture) - rule out UTI and PU/PD",
+            "腹部超音波 (Abdominal Ultrasound) - ectopic ureter, bladder neck, uroliths",
+            "神経学的検査 (Neurological Exam) - exclude neurogenic bladder",
+            "血圧測定 (Blood Pressure) - before and during phenylpropanolamine",
+        ],
+        "urgency": "low",
+        "onset_pattern": {"chronic"},
+        "age_predisposition": {"adult", "senior"},
+    },
+    {
         # 2026-10 第73弾: traumatic proptosis — a common brachycephalic ocular
         # emergency with no entry anywhere in the DB. Gilger BC, Slatter's
         # Fundamentals of Veterinary Ophthalmology 6th ed; Maggs; Gelatt's

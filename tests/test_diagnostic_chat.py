@@ -35,6 +35,7 @@ from api.health_checker import DISEASES, SYMPTOM_IDS, SYMPTOMS
 # These aliases will never match via the alias path because of the
 # ``symptom_id in SYMPTOM_IDS`` guard in extract_symptoms_from_text().
 _KNOWN_ALIAS_MISMATCHES = {
+    "ear_pain",  # 2026-10 第77弾: 耳の触診痛 — 種別に ear_inflammation/scratching_ears へ解決
     "lameness_or_limping",
     "joint_pain_or_stiffness",
     "lumps_and_bumps",

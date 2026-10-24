@@ -60,6 +60,7 @@ SPECIES_PREVALENCE = {
         "Interdigital Cyst (Furuncle)": "common",
         "Deciduous Malocclusion (Interceptive Orthodontics)": "common",
         "Missing Teeth (Hypodontia / Unerupted Teeth)": "common",
+        "Urethral Sphincter Mechanism Incompetence (USMI)": "common",
         # Idiopathic facial nerve paralysis — recognized but not everyday
         # (~75% of canine facial paralysis; cockers predisposed. Ettinger 8th)
         "Facial Nerve Paralysis": "uncommon",

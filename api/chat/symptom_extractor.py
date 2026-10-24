@@ -437,6 +437,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "overgrown_beak": ["beak_deformity", "beak_overgrowth"],
     "beak_deformity": ["beak_overgrowth", "overgrown_beak", "crusty_beak"],
     "miliary_dermatitis": ["crusting", "skin_lesions", "itching"],
+    # 2026-10 第77弾: 耳の触診痛・脂漏（非保有種の安全フォールバック）
+    "ear_pain": ["ear_inflammation", "scratching_ears", "ear_scratching", "head_shaking"],
+    "greasy_skin": ["greasy_coat", "seborrhea", "oily_skin", "skin_scaling", "scaling", "skin_lesions"],
     # 2026-09 第18回スイープ: 「毛が抜けた」→fur_loss_patches が斑状脱毛IDを
     # 持たない種（ハムスター等）で脱落していた / うずくまり主訴の鳥への橋渡し
     # （卵詰まりのケージ底着座・膨羽へフォールバック）/ フクロモモンガ尾自咬
@@ -827,7 +830,13 @@ _SUBSUMES: dict[str, set[str]] = {
     "perianal_swelling": {"lumps", "lumps_and_bumps", "lumps_bumps"},
     # 歯の吸収・欠損は口腔の局所痛を包含
     "tooth_loss": {"pain"},
+    # 耳の触診痛（2026-10 第77弾）— 「耳を触ると痛がる」で汎用 pain が緑内障へ散らない
+    "ear_pain": {"pain"},
 }
+
+# 眼の所見と同時に抽出された汎用「痛がる/痛そう」は眼痛として読む
+# （猫「目が白く濁って痛そう」で汎用 pain が臍ヘルニア・腫瘍へ散っていた — 2026-10 第77弾）
+_EYE_ID_TOKENS = ("eye", "corne", "squint", "tear", "cloud", "pupil", "iris", "blind")
 
 # Backwards-compat alias (some older imports use the private name).
 _ID_SYNONYMS = ID_SYNONYMS
@@ -1143,4 +1152,11 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
     for _specific, _generic in _SUBSUMES.items():
         if _specific in matched:
             matched -= _generic
+    if (
+        "pain" in matched
+        and "eye_pain" in symptom_names
+        and any(t in m for m in matched if m != "pain" for t in _EYE_ID_TOKENS)
+    ):
+        matched.discard("pain")
+        matched.add("eye_pain")
     return list(matched)
