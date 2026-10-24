@@ -1802,8 +1802,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:606,drugs:615,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:592,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:606,drugs:619,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:596,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:366,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1827,7 +1827,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6460,
     species:21,
-    drugs:677,
+    drugs:678,
     symptoms:102,
     protocols:188
   };
@@ -4994,7 +4994,7 @@ function renderDiseaseDb(){
         <dt>${t("dtPathophysiology")}</dt><dd>${escapeHtml(patho)}</dd>
         <dt>${t("dtCauses")}</dt><dd>${escapeHtml(causes)}</dd>
         ${diagnosis?`<dt data-jump="diagnosis">${t("dtDiagnosis")}</dt><dd>${escapeHtml(diagnosis)}</dd>`:""}
-        <dt>${t("dtPrevention")}</dt><dd>${escapeHtml(prevention)}</dd>
+        <dt data-jump="prevention">${t("dtPrevention")}</dt><dd>${escapeHtml(prevention)}</dd>
         <dt data-jump="treatment">${t("dtTreatment")} ${evidenceBadge(quickAssessGrade(treatment))}</dt><dd>${renderTreatmentWithAdjunct(treatment)}${buildTreatmentDrugsPlaceholder(currentSpecies||"dog",d.name_ja||d.name||"")}</dd>
         <dt data-jump="prognosis">${t("dtPrognosis")}</dt><dd>${escapeHtml(prognosis)}</dd>
         ${(d.symptoms_display&&d.symptoms_display.length)?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(d.symptoms_display.map(s=>currentLang==="ja"?(s.name_ja||s.id):(s.name_en||s.id)).join("、"))}${_differentialCheckButton(d)}</dd>`:(d.symptoms?`<dt>${t("dtSymptoms")}</dt><dd>${escapeHtml(Array.isArray(d.symptoms)?d.symptoms.join(", "):(typeof d.symptoms==="object"?Object.keys(d.symptoms).join(", "):String(d.symptoms)))}${_differentialCheckButton(d)}</dd>`:"")}
@@ -5087,9 +5087,18 @@ function _handleDeepLinkHash(hash){
     const land=()=>{
       if(!drugsLoaded){if(tries++<60)setTimeout(land,200);return;}
       const q=link.id.toLowerCase();
-      const d=allDrugs.find(x=>(x.id||"").toLowerCase()===q)||allDrugs.find(x=>(x.name||"").toLowerCase()===q||(x.name_ja||"")===link.id);
-      if(!d){showToast(currentLang==="ja"?"リンク先の薬品が見つかりませんでした":"Linked drug not found","error");return;}
-      navigateToDrug(currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja));
+      const findLocal=key=>allDrugs.find(x=>(x.id||"").toLowerCase()===key)||allDrugs.find(x=>(x.name||"").toLowerCase()===key||(x.name_ja||"")===link.id||(x.aliases||[]).some(a=>String(a).toLowerCase()===key));
+      const go=d=>navigateToDrug(currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja));
+      const notFound=()=>showToast(currentLang==="ja"?"リンク先の薬品が見つかりませんでした":"Linked drug not found","error");
+      const d=findLocal(q);
+      if(d){go(d);return;}
+      /* 2026-10 第76弾: 統合・改名された旧 id（例: palladia→toceranib）のブックマーク・共有リンクは
+         サーバーの別名解決（/api/drugs/<id>）で正準 id に読み替えてから着地する。 */
+      fetchWithTimeout(`/api/drugs/${encodeURIComponent(link.id)}`).then(r=>r.ok?r.json():null).then(j=>{
+        const cid=((j&&(j.drug||j))||{}).id;
+        const hit=cid?findLocal(String(cid).toLowerCase()):null;
+        if(hit)go(hit);else notFound();
+      }).catch(notFound);
     };
     land();
     return true;
@@ -8850,14 +8859,14 @@ function _addDetailJumpBar(detail){
   if(!detail||detail.querySelector(".detail-jump-bar"))return;
   const targets=detail.querySelectorAll("[data-jump]");
   if(targets.length<2)return;
-  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"],dosage:["💊 動物種別用量","💊 Dosage"],contra:["⛔ 禁忌","⛔ Contraindications"],interactions:["🔄 相互作用","🔄 Interactions"],drugs:["💉 関連薬品","💉 Related drugs"],emsteps:["🚨 対応手順","🚨 Steps"],emdrugs:["💊 主要薬剤・用量","💊 Key drug doses"],emmonitor:["📊 モニタリング","📊 Monitoring"],anesdrugs:["💉 薬品・用量","💉 Drugs & doses"],monitor:["📊 モニタリング","📊 Monitoring"],refs:["📚 参考文献","📚 References"]};
+  const labels={treatment:["💊 治療","💊 Treatment"],prognosis:["📈 予後","📈 Prognosis"],prevention:["🛡️ 予防","🛡️ Prevention"],diagnosis:["🔬 診断","🔬 Diagnosis"],signs:["🩺 臨床徴候","🩺 Signs"],dosage:["💊 動物種別用量","💊 Dosage"],contra:["⛔ 禁忌","⛔ Contraindications"],interactions:["🔄 相互作用","🔄 Interactions"],drugs:["💉 関連薬品","💉 Related drugs"],emsteps:["🚨 対応手順","🚨 Steps"],emdrugs:["💊 主要薬剤・用量","💊 Key drug doses"],emmonitor:["📊 モニタリング","📊 Monitoring"],anesdrugs:["💉 薬品・用量","💉 Drugs & doses"],monitor:["📊 モニタリング","📊 Monitoring"],refs:["📚 参考文献","📚 References"]};
   /* 2026-10 第73弾: 長い治療プロトコルの末尾にある「治療に関連する薬品」チップ群
      （→薬品詳細・相互作用チェック）へも1タップで（スマホで治療文を数画面
      スクロールしなくてよい）。チップ群は非同期にハイドレートされるため
      クリック時に再取得する。 */
   /* 2026-10 第74弾: 救急プロトコルも — 手順が長く、分単位で必要な主要薬剤の
      用量が数画面下にあった（スマホ）。 */
-  const order=["treatment","drugs","diagnosis","signs","prognosis","dosage","contra","interactions","emdrugs","emsteps","emmonitor"];
+  const order=["treatment","drugs","diagnosis","signs","prognosis","prevention","dosage","contra","interactions","emdrugs","emsteps","emmonitor"];
   /* 2026-10 第75弾: 麻酔プロトコル（長い注記の下に薬品表・モニタリング表・参考文献）にも同じジャンプバー。 */
   order.push("anesdrugs","monitor","refs");
   const bar=document.createElement("nav");

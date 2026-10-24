@@ -7522,6 +7522,41 @@ Playwright（iPhone 13・実タッチ）で再現: `.disease-detail.open` は開
 - `tests/test_round50_audit.py`（25件）
 - 再現: `strip_clinical_signs_filler --apply` → `fix_feline_tooth_resorption --apply` → `migrate_to_sqlite.py`
 
+## 2026-10セッション（第76弾・並行セッション分: 多種列挙型テンプレートの種間汚染除去 + Palladia/マシチニブ ID衝突の是正 + リーシュマニア症予防のキュレーション + デルタメトリン首輪公開 + チャット精度第51弾 + 「予防」ジャンプ・旧IDディープリンク）
+
+### エラーチェック（結果: ベースライン健全）
+- ruff clean、フルテスト **4,999件合格**（ベースライン）→ **5,017件合格**（34 skip、カバレッジ82.89%）、配信SQLiteクリーンビルド（treatment/prevention/prognosis 100%）
+
+### 多種列挙型テンプレートの種間汚染除去（`strip_cross_species_text` 拡張）
+- カテゴリ生成器が全種に付けていた他群向けの一文が残存: 犬猫の予防に「草食動物（ウサギ…）: 高繊維チモシー乾草」「鳥類: カトルボーン」、
+  哺乳類・鳥の臨床徴候に「ビタミンD/UV-B不足（爬虫類）」（全20種・532件）、犬猫フェレットの歯科治療に「歯のトリミング」（常生歯の処置）
+- `_CROSS_SPECIES_CLAUSES` に11マーカー（所有種ゲート付き: 爬虫類・鳥類・常生歯群（ウサギ/モルモット/チンチラ/デグー/ハムスター/馬））を追加。
+  文中の草食動物向け句（栄養・歯科予防）はフェレット/ハリネズミ/フクロモモンガ/両生類で種に合う句へ置換（`_CROSS_SPECIES_INLINE`）
+- 実行時（疾患ブラウザ）・配信DBビルド・**SEO詳細ページ**（従来未適用）の3経路に適用
+
+### Palladia/マシチニブの ID 衝突（薬品の誤着地）
+- batch_15 のマシチニブ（12.5 mg/kg q24h）が id `palladia` を持ち、トセラニブの商品名「Palladia」（2.5-2.75 mg/kg 隔日、約5倍差）の入力・リンクがマシチニブに解決していた
+  → id を `masitinib` に是正、旧 `palladia` はトセラニブへ解決。マシチニブに混同警告とCBC/UPC監視（Hahn 2008 JVIM; Masivet SPC）を追記。ギルベトマブ腫瘍薬リストも実IDに
+
+### リーシュマニア症の予防をキュレーション + デルタメトリン首輪公開（`drug_batch_85.py`、674→675薬品）
+- 犬2件・猫1件の予防文が汎用寄生虫テンプレート（子犬の駆虫・フィラリア予防）で、媒介者（サシチョウバエ）に一切触れていなかった
+  → `fix_leishmaniasis_prevention.py`: 忌避ピレスロイド・夕方〜明け方の屋内飼育・流行地ワクチン・帰国犬の血清スクリーニング・繁殖禁止（LeishVet 2011/2017）。
+  猫はピレスロイド有毒のためイミダクロプリド/フルメトリン首輪（Brianti 2017）。犬の治療文に「治療後も感染源→忌避剤継続」を追記
+- **デルタメトリン4%首輪（スカリボール）**: 48/65 cm、忌避効果は約1週間で発現し5〜6ヶ月持続、7週齢以上、装着後5日は水泳回避、猫 safe:False（Killick-Kendrick 1997; Maroli 2001; Foglia Manzillo 2006）
+
+### 診断チャット精度 第51弾（73症例・2波スイープ 13 MISS → 実用症例全合格）
+- 丁寧語: 抜けます→抜ける（「毛が抜けます」が全経路で不発だった）
+- エイリアス: 足がもつれ→ataxia、しっぽの付け根を触ると痛が→back_pain、目が真っ赤、熱が出/高熱→fever、顎の下に黒い（猫ざ瘡）、黄色い皮膚、しっぽのまわりが濡れ、ダニがついて、水入れに浸か、後ろ足が麻痺
+- クラスタ/ペア: 犬 {多食+腹部膨満+脱毛}→クッシング×1.6、猫 {体重減少+被毛粗剛}→CKD/甲状腺機能亢進症×1.3（AAFP Senior Care 2021）、フクロモモンガ {後肢麻痺}→MBD×1.35
+
+### スマホUX
+- 疾患詳細のジャンプバーに「🛡️ 予防」チップ（iPhone 13 実測で sticky ヘッダー直下 top≈139px に着地、JSエラー0）
+- 薬品ディープリンク `#drug=<id>` が統合・改名済みの旧IDで「見つかりません」になっていた → `aliases` 照合＋サーバー別名解決（/api/drugs/<id>）のフォールバック
+- ServiceWorker: `CACHE_NAME` v189 → **v190**、pendingStats drugs 675、setDefaultStats を API 実測に同期
+
+### テスト
+- `tests/test_round51_audit.py`（20件）
+- 再現: `fix_leishmaniasis_prevention --apply` → `migrate_to_sqlite.py`
 ## 2026-10セッション（第76弾: 犬猫等の消化器・歯科欄に混入した草食動物/鳥類の異種文の撲滅 + チャット精度第51弾 + 鑑別診断結果カードのセクション・ジャンプ）
 
 ### エラーチェック（結果: ベースライン健全）
@@ -7552,6 +7587,12 @@ Playwright（iPhone 13・実タッチ）で再現: `.disease-detail.open` は開
 - `tests/test_round51_audit.py`（16件）
 - 再現: `strip_cross_taxon_gi_dental_clauses --apply` → `migrate_to_sqlite.py`
 
+### mainの並行第76弾（PR #844: 草食動物/鳥類の異種文撲滅 + 鑑別結果カードのジャンプバー）とのマージ統合
+- `helpers.py`: 両セッションのマーカーを統合（重複マーカーは本セッション側の所有種セット — 馬の不正咬合を許容 — を採用）、
+  置換型インライン（`_CROSS_SPECIES_INLINE_REPL`）と削除型インライン（main の `_CROSS_SPECIES_INLINE`）を併用
+- `diseases_all_species.json` はフィールド単位3-wayマージ（真の衝突0）、テストは本セッション分を `tests/test_round51_parallel_audit.py`（Round51Parallel）に分離
+- ServiceWorker: 両者 v190 → **v191** に改番
+
 ## 2026-10セッション（第77弾: 避妊後尿失禁（USMI）の新設 + グルコン酸カリウム/イマチニブ/ゾレドロン酸公開 + チャット精度第52弾 + 「← 戻る」で直前にタップしたカードへ復帰）
 
 ### エラーチェック（結果: ベースライン健全）
@@ -7565,7 +7606,7 @@ Playwright（iPhone 13・実タッチ）で再現: `.disease-detail.open` は開
   エストリオール 2 mg/頭 q24h→最小有効量、併用、難治例の尿道粘膜下注入・人工尿道括約筋（Reeves 2013）、Byron 2017（避妊時期）を日英で記載
 - チャットDBは主訴ゲート設計（症状は incontinence のみ）— 後肢麻痺＋失禁→IVDD、夜鳴き＋旋回＋失禁→CDS は不変。名前一致で疾患DBピボット着地、prevalence common
 
-### 新規薬品3剤（`drug_batch_85.py`、674→677）— 治療文が用量付きで参照するのに未収載
+### 新規薬品3剤（`drug_batch_86.py`、675→678 — mainの第76弾が85番を先取したためマージで86に改番）— 治療文が用量付きで参照するのに未収載
 - **グルコン酸カリウム（トゥミルK）**: 猫CKD・低K性多発性筋症・RTA・高アルドステロン症の治療文が「2-4 mEq/cat PO q12h」で約15参照（Dow 1987/1989、IRIS 2023）。
   経口慢性補充専用（重度は塩化カリウム静注 0.5 mEq/kg/h以下）、スピロノラクトン=major・ACEi/テルミサルタン=moderate
 - **イマチニブ**: KIT変異肥満細胞腫・GIST 10 mg/kg q24h（Isotani 2008/2010）、犬の肝毒性、トセラニブ併用=major
@@ -7581,7 +7622,7 @@ Playwright（iPhone 13・実タッチ）で再現: `.disease-detail.open` は開
 - 疾患→薬品チップ→「← 疾患DBに戻る」がタブ先頭に戻り、長い治療プロトコルを再スクロールする必要があった → 直前のタップ要素から
   関連薬品欄/カードを記録し、戻る時にその位置へ着地（iPhone 13 実測: チップ y=439 に復帰）
 - `openDiseaseAcrossSpecies`（チャット候補カード・薬品→疾患・救急/計算機ピボット）に戻るバーが無かった → 「← 臨床相談に戻る」等を表示
-- ServiceWorker: `CACHE_NAME` v190 → **v191**、pendingStats drugs 677・diseases 6460
+- ServiceWorker: `CACHE_NAME` v190 → v191 → **v192**（mainと同版衝突のためマージで改番）、pendingStats drugs 678・diseases 6460
 
 ### テスト
 - `tests/test_round52_audit.py`（16件）

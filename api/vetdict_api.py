@@ -1239,6 +1239,9 @@ def disease_detail(species: str, disease_slug: str):
                 _build_recommended_tests_display(disease.get("recommended_tests") or [], species_key),
             )
             _ground_missing_supplementary_fields(disease, species_key)
+        from api.species.helpers import strip_cross_species_clauses
+
+        disease = strip_cross_species_clauses(dict(disease), species_key)
     except ImportError:
         pass
 

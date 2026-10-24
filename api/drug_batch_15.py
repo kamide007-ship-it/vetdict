@@ -147,7 +147,9 @@ DRUGS_BATCH_15: list[dict] = [
         ],
     },
     {
-        "id": "palladia",
+        # 2026-10 第76弾: 旧 id "palladia" はトセラニブの商品名（Palladia）と衝突し、
+        # 「Palladia」入力がマシチニブ（用量約5倍）に解決していた。id を実体名に是正。
+        "id": "masitinib",
         "name": "Masitinib (Masivet/Kinavet)",
         "name_ja": "マシチニブ（マシベット）",
         "category": "antineoplastic",
@@ -156,8 +158,19 @@ DRUGS_BATCH_15: list[dict] = [
         "species_info": {
             "dog": {
                 "dose": "12.5 mg/kg PO q24h (with food)",
-                "notes": "Non-resectable Grade II/III mast cell tumors with confirmed c-Kit mutation; EMA-approved",
-                "notes_ja": "c-Kit変異確認済み切除不能Grade II/III肥満細胞腫；EMA承認",
+                "notes": (
+                    "Non-resectable Grade II/III mast cell tumors with confirmed c-Kit mutation (Masivet EU label). "
+                    "Not interchangeable with toceranib (Palladia, 2.5-2.75 mg/kg EOD) — dose units differ ~5-fold. "
+                    "Monitor CBC and urine protein:creatinine ratio every 2 weeks for the first 2 months, then monthly; "
+                    "interrupt for protein-losing nephropathy (UPC >2), hemolytic anemia or severe neutropenia "
+                    "(Hahn 2008 JVIM; Masivet SPC)"
+                ),
+                "notes_ja": (
+                    "c-Kit変異確認済みの切除不能Grade II/III肥満細胞腫（マシベット EU添付文書）。"
+                    "トセラニブ（パラディア、2.5-2.75 mg/kg 隔日）とは別薬で用量が約5倍異なるため混同しない。"
+                    "最初の2ヶ月は2週毎、以後は月1回のCBCと尿蛋白/クレアチニン比を監視し、"
+                    "蛋白漏出性腎症（UPC>2）・溶血性貧血・重度好中球減少では休薬する（Hahn 2008 JVIM; Masivet SPC）"
+                ),
             },
             "cat": {
                 "dose": "50 mg/cat PO q24h (off-label)",
