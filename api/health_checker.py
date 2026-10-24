@@ -5158,6 +5158,10 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"head_tilting", "circling"}), "vestibular_disease", 1.8),
     # Cushing's: excessive thirst + frequent urination + hair loss
     (frozenset({"excessive_thirst", "frequent_urination", "hair_loss"}), "cushings_disease", 1.8),
+    # 多食＋腹部膨満（pot belly）＋脱毛は多飲多尿を伴わない主訴でもクッシングの古典像
+    # （Behrend 2013 ACVIM consensus; Ettinger 8th）。寄生虫エントリが膨満でカバレッジ勝ち
+    # していた（2026-10 第76弾）
+    (frozenset({"increased_appetite", "bloating", "hair_loss"}), "cushings_disease", 1.6),
     # CKD: excessive thirst + frequent urination + weight loss
     (frozenset({"excessive_thirst", "frequent_urination", "weight_loss"}), "chronic_kidney_disease", 1.7),
     # UTI: blood in urine + frequent urination + straining

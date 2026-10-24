@@ -356,6 +356,14 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # backing — it exists to stop umbrella syndromes with long symptom lists
 # losing on coverage to narrow rarities.
 _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    # 中高齢猫の体重減少＋被毛粗剛（毛づやの低下）は慢性腎臓病・甲状腺機能亢進症の
+    # 古典的な二徴（AAFP Senior Care Guidelines 2021; ISFM CKD 2016）。寄生虫・脱毛の
+    # 皮膚科エントリがカバレッジで上回っていた（2026-10 第76弾）
+    ("cat", frozenset({"weight_loss", "poor_coat"}), "Chronic Kidney Disease (CKD)", 1.3),
+    ("cat", frozenset({"weight_loss", "poor_coat"}), "Hyperthyroidism", 1.3),
+    # フクロモモンガの後肢不全麻痺は栄養性二次性上皮小体機能亢進症（低Ca・MBD）
+    # until proven otherwise（Ness & Johnson-Delaney; Quesenberry & Carpenter 4th）
+    ("sugar_glider", frozenset({"hind_leg_paralysis"}), "Metabolic Bone Disease (MBD)", 1.35),
     # セキセイインコの片肢不全麻痺は腎腫瘍・精巣腫瘍による坐骨神経圧迫
     # until proven otherwise（Ritchie & Harrison; Simova-Curd 2006 JSAP）。
     # 2026-10 第74弾: 新生雛の開脚症がカバレッジで成鳥の主訴を上回っていた
