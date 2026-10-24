@@ -1802,8 +1802,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:606,drugs:617,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:594,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:606,drugs:619,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:596,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:366,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1825,9 +1825,9 @@ function setDefaultStats(){
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:3,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:6459,
+    diseases:6460,
     species:21,
-    drugs:675,
+    drugs:678,
     symptoms:102,
     protocols:188
   };
@@ -5125,8 +5125,15 @@ async function shareDeepLink(url,title){
 }
 function openDiseaseAcrossSpecies(name,species){
   const needSwitch=species&&species!==currentSpecies;
+  /* Cross-view entries (chat candidate cards, drug → "diseases using this drug",
+     emergency/calculator pivots) had no way back to where the vet was — offer the
+     same "← 戻る" bar as navigateToDiseaseDb, returning to the tapped card
+     (2026-10 第77弾). */
+  const fromView=currentView;
+  if(fromView&&fromView!=="database")_pushNavHistory(fromView,"database",name);
   if(needSwitch&&typeof selectSpecies==="function")selectSpecies(species);
   switchView("database");
+  if(fromView&&fromView!=="database")_showBackNav("diseaseBackNav","diseaseSearch");
   const panel=document.getElementById("viewDatabase");
   if(panel)scrollToAnchor(panel);
   let tries=0;
@@ -5155,8 +5162,19 @@ document.addEventListener("click",function(e){
 
 /* --- Cross-view navigation history (shared by all views) --- */
 let _navHistory=[];
+/* Return-point capture (2026-10 第77弾): remember what was tapped right before a
+   cross-view jump (a treatment-drug chip inside a disease card, a chat candidate
+   card's DB link…) so "← 戻る" lands back on that exact card/section instead of the
+   top of the originating tab — on a phone the vet otherwise had to scroll back
+   through a long protocol to find where they were reading. */
+let _lastNavTrigger=null;
+document.addEventListener("click",function(e){_lastNavTrigger=e.target;},true);
+function _navReturnAnchor(el){
+  if(!el||!el.closest)return null;
+  return el.closest(".treatment-drugs-section,.cross-nav,.detail-section")||el.closest(".disease-db-item,.disease-result,.chat-disease-card,.chat-msg")||null;
+}
 function _pushNavHistory(fromView,toView,query){
-  _navHistory.push({from:fromView,to:toView,query:query||"",ts:Date.now()});
+  _navHistory.push({from:fromView,to:toView,query:query||"",ts:Date.now(),anchor:_navReturnAnchor(_lastNavTrigger)});
   if(_navHistory.length>10)_navHistory.shift();
 }
 function _showBackNav(containerId,searchInputId){
@@ -5176,7 +5194,11 @@ document.addEventListener("click",function(e){
        the returned panel (which sits far below the landing sections) could be
        off-screen. Carry the viewport to the returned view's useful entry point,
        mirroring the tab-click and cross-link navigation. */
-    const rv=last.from;const target=rv==="checker"?document.getElementById("speciesSection"):document.getElementById("view"+rv.charAt(0).toUpperCase()+rv.slice(1));if(target)scrollToAnchor(target);}return;}
+    const rv=last.from;const target=rv==="checker"?document.getElementById("speciesSection"):document.getElementById("view"+rv.charAt(0).toUpperCase()+rv.slice(1));
+    /* Prefer the exact card/section that was tapped (still in the DOM and visible
+       after the view switch); fall back to the view's entry point. */
+    const back=last.anchor&&last.anchor.isConnected&&last.anchor.offsetParent!==null?last.anchor:null;
+    if(back)scrollToAnchor(back);else if(target)scrollToAnchor(target);}return;}
   const cb=e.target.closest(".nav-clear-btn");
   if(cb){const si=cb.dataset.sid;if(si){const inp=document.getElementById(si);if(inp){inp.value="";inp.dispatchEvent(new Event("input"));}}const ci=document.getElementById(cb.dataset.cid);if(ci){ci.style.display="none";ci.innerHTML="";}return;}
 });

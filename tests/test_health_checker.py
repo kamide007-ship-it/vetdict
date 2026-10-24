@@ -69,7 +69,7 @@ class TestDiseaseDatabase:
     """Verify disease database structure and consistency."""
 
     def test_disease_count(self):
-        assert len(DISEASES) == 104  # +balanoposthitis, BPH, xylitol poisoning (第74弾)
+        assert len(DISEASES) == 105  # +USMI (第77弾)
 
     def test_all_diseases_have_required_fields(self):
         for d in DISEASES:

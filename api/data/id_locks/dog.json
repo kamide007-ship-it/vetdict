@@ -2,8 +2,8 @@
  "species": "dog",
  "schema_version": 1,
  "note": "Frozen disease ids (name→id). Append-only: existing mappings are never changed. Delete to fall back to position-derived ids.",
- "generated_at": "2026-10-19T15:19:27Z",
- "count": 626,
+ "generated_at": "2026-10-24T15:27:00Z",
+ "count": 627,
  "locks": {
   "Acanthomatous Ameloblastoma␟棘細胞性エナメル上皮腫": "dog_0411",
   "Acetaminophen Toxicosis␟アセトアミノフェン中毒": "dog_0334",
@@ -607,6 +607,7 @@
   "Urate Urolithiasis␟尿酸アンモニウム尿石症": "dog_0015",
   "Urethral Obstruction␟尿道閉塞": "dog_0246",
   "Urethral Prolapse␟尿道脱": "dog_0376",
+  "Urethral Sphincter Mechanism Incompetence (USMI)␟尿道括約筋機能不全（避妊後尿失禁）": "dog_xe5e51d09",
   "Urinary Bladder Tumor (TCC)␟膀胱腫瘍（移行上皮癌）": "dog_0402",
   "Urinary Tract Infection␟尿路感染症（UTI）": "dog_0011",
   "Uroabdomen␟尿腹（腹腔内尿漏出）": "dog_0485",

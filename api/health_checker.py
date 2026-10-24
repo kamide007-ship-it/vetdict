@@ -3831,6 +3831,32 @@ DISEASES = [
             "chihuahua": 1.3,
         },
     },
+    # 2026-10 第77弾: 尿道括約筋機能不全（避妊後尿失禁）。成犬の尿失禁で最多の原因
+    # （避妊済み雌の約5-20%、20 kg超で約20% — Arnold 1989; Thrusfield 1998）なのに
+    # エントリが無く、「寝ている時におしっこが漏れる」が認知機能不全症候群へ誘導されていた。
+    # 名前は犬モジュールと完全一致（疾患DBピボット着地）。主訴ゲート設計。
+    {
+        "id": "usmi",
+        "prevalence_tier": "common",
+        "name_ja": "尿道括約筋機能不全（避妊後尿失禁）",
+        "name_en": "Urethral Sphincter Mechanism Incompetence (USMI)",
+        "description_ja": "主に睡眠中・伏臥時に尿が受動的に漏れる状態で、避妊済み雌犬（特に大型犬・肥満）に多く、成犬の尿失禁で最も多い原因です。まず尿検査・尿培養で尿路感染症や多飲多尿疾患（糖尿病・クッシング・CKD）を除外し、膀胱が大きく圧迫排尿できる場合は神経因性膀胱を疑います。治療はフェニルプロパノールアミン 1-1.5 mg/kg PO q8-12h（プロイン ER 2 mg/kg q24h、血圧監視）またはエストリオール 2 mg/頭 q24h から最小有効量へ漸減、部分反応例は併用。難治例は尿道粘膜下注入・人工尿道括約筋（Reeves 2013）。約75-90%が内科療法に反応しますが通常は生涯投薬です。",
+        "description_en": "Passive urine leakage, mostly while asleep or lying down, in spayed bitches (especially large breeds and obese dogs) — the commonest cause of incontinence in adult dogs. Rule out UTI and PU/PD (diabetes, Cushing's, CKD) with urinalysis and culture; a large, easily expressed bladder suggests a neurogenic bladder instead. Treat with phenylpropanolamine 1-1.5 mg/kg PO q8-12h (Proin ER 2 mg/kg q24h; monitor blood pressure) or estriol 2 mg/dog q24h tapered to the lowest effective dose, combining both for partial responders. Refractory dogs: urethral submucosal bulking or an artificial urethral sphincter (Reeves 2013). About 75-90% respond to medication, usually lifelong.",
+        # Complaint-gated: the leakage itself is the defining sign; neuro
+        # (IVDD/DM) and behavioural (CDS) entries own incontinence-plus-other-signs.
+        "symptoms": [
+            "incontinence",
+        ],
+        "severity": "low",
+        "recommended_tests": ["urinalysis", "urine_culture", "abdominal_ultrasound", "blood_pressure"],
+        "breed_risks": {
+            "dobermann": 2.0,
+            "boxer": 1.8,
+            "old_english_sheepdog": 1.8,
+            "rottweiler": 1.6,
+            "weimaraner": 1.6,
+        },
+    },
     # 2026-10 第73弾: 外傷性眼球脱出（眼球突出）。短頭種で軽微な外力・保定でも
     # 起こる眼科救急（Gilger, Slatter's 6th; Maggs; Pe'er 2021 Vet Ophthalmol —
     # 短頭種は視覚温存率が高い）。名前は犬モジュールと完全一致（疾患DBピボット着地）。
