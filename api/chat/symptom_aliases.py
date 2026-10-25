@@ -2211,6 +2211,13 @@ SYMPTOM_ALIASES = {
     "耳が赤く": "red_ears",
     # 雄犬の女性化（セルトリ細胞腫）・乳腺腫瘍: 乳首/乳頭表現が未収載だった
     "乳首が腫れ": "mammary_swelling",
+    # 「首が腫れて」（リンパ節）の部分一致に負けないよう同長以上で登録（第78弾）
+    "乳首が腫れて": "mammary_swelling",
+    "乳首がはれ": "mammary_swelling",
+    "足首が腫れ": "swollen_joints",
+    "手首が腫れ": "swollen_joints",
+    "足首が腫れて": "swollen_joints",
+    "手首が腫れて": "swollen_joints",
     "乳首が大きく": "mammary_swelling",
     "乳頭が腫れ": "mammary_swelling",
     "乳腺が腫れ": "mammary_swelling",
@@ -3854,6 +3861,27 @@ SYMPTOM_ALIASES = {
     "回数が増えて量が少な": "straining_to_urinate",
     "回数が多くて量が少な": "straining_to_urinate",
     "回数が多いのに量が少な": "straining_to_urinate",
+    # 2026-10 第78弾
+    "首を痛が": "neck_pain",
+    "首が痛そう": "neck_pain",
+    "首を動かすと痛": "neck_pain",
+    "鼻の上が茶色": "cere_color_change",
+    "鼻の上がガサガサ": "cere_color_change",
+    "鼻の上がかさかさ": "cere_color_change",
+    "鼻の上の色が": "cere_color_change",
+    "お腹を触られるのを嫌が": "abdominal_pain",
+    "お腹を見せたがらな": "abdominal_pain",
+    "お腹を見せたがらず": "abdominal_pain",
+    "お乳が出": "lactation",
+    "乳が出": "lactation",
+    "母乳が出": "lactation",
+    "おっぱいが出": "lactation",
+    "乳汁が出": "lactation",
+    "おっぱいが張": "mammary_swelling",
+    "乳が張": "mammary_swelling",
+    "おしっこもほとんどしな": "decreased_urination",
+    "おしっこをほとんどしな": "decreased_urination",
+    "尿がほとんど出な": "decreased_urination",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

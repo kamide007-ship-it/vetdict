@@ -2629,7 +2629,11 @@ def gen_prevention_ja(category: str, name_ja: str, species: str) -> str:
             f"発達性疾患（HD・ED・OCD・FCP）予防: 大型犬の成長期過剰カロリー回避、適切なカルシウム/リン比、過度な運動・階段使用回避。"
             f"OA予防: 適正体重維持、関節サプリメント（グルコサミン・コンドロイチン・MSM）、低衝撃運動。"
             f"骨折・外傷予防: 安全な飼育環境、リード散歩、滑床対策。"
-            f"代謝性骨疾患予防: 適切な栄養とUV-B（爬虫類・若齢動物）。"
+            + (
+                "代謝性骨疾患予防: 適切な栄養とUV-B（爬虫類・若齢動物）。"
+                if (species or "").lower() in ("reptile", "tortoise", "snake", "lizard", "amphibian", "exotic_other")
+                else ""
+            )
         )
     if category == "dental":
         return (

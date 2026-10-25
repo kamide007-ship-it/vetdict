@@ -132,4 +132,4 @@ class TestBackNavReturnsToTappedCard:
 
     def test_sw_cache_bumped(self):
         sw = (ROOT / "static" / "sw.js").read_text(encoding="utf-8")
-        assert "vetdict-v192" in sw
+        assert int(__import__("re").search(r"vetdict-v(\d+)", sw).group(1)) >= 192

@@ -817,6 +817,7 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 2026-10 第74弾: 包皮・陰茎からの分泌物（雄の亀頭包皮炎・前立腺疾患）。
     # フェレットは discharge_from_prepuce（副腎疾患の前立腺嚢胞）を保有。
     # 雌用の vulvar_discharge へは決してフォールバックしない（子宮蓄膿症の誤誘導防止）。
+    "lactation": ["mammary_swelling", "mammary_gland_swelling", "mammary_masses", "mammary_mass"],
     "preputial_discharge": ["discharge_from_prepuce", "genital_discharge", "preputial_swelling", "genital_lesions"],
 }
 
@@ -833,6 +834,8 @@ _SUBSUMES: dict[str, set[str]] = {
     "tooth_loss": {"pain"},
     # 耳の触診痛（2026-10 第77弾）— 「耳を触ると痛がる」で汎用 pain が緑内障へ散らない
     "ear_pain": {"pain"},
+    # 頸部痛（2026-10 第78弾）— 「首を痛がってキャンと鳴く」で汎用 pain が眼科へ散らない
+    "neck_pain": {"pain"},
 }
 
 # 眼の所見と同時に抽出された汎用「痛がる/痛そう」は眼痛として読む
@@ -1100,6 +1103,9 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
         if pos >= 0:
             alias_range = set(range(pos, pos + len(alias)))
             if alias_range & _consumed:
+                continue
+            # 「乳首/足首/手首が腫れて」は頸部（リンパ節）の所見ではない（2026-10 第78弾）
+            if alias.startswith("首") and pos > 0 and text_lower[pos - 1] in "乳足手":
                 continue
             if is_negated_mention(text_lower, pos + len(alias)):
                 # 「嘔吐はしていない」等 — 否定された言及は抽出せず、範囲だけ消費して

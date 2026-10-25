@@ -160,7 +160,19 @@ def _canonical_preferred_slugs() -> set:
     except Exception:
         pass
     _CANON_PREF_CACHE = canon - merged
+    global _CANON_MERGED_CACHE
+    _CANON_MERGED_CACHE = merged - canon
     return _CANON_PREF_CACHE
+
+
+_CANON_MERGED_CACHE: set | None = None
+
+
+def _canonical_merged_slugs() -> set:
+    """Merged-away slugs (hidden by apply_canonical_map when served)."""
+    if _CANON_MERGED_CACHE is None:
+        _canonical_preferred_slugs()
+    return _CANON_MERGED_CACHE or set()
 
 
 def _dedup_richness(entry: Any) -> tuple[int, int]:
@@ -366,6 +378,8 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
         groups.setdefault(find(i), []).append(i)
 
     keep: Set[int] = set()
+    replaced: Dict[int, Any] = {}
+    _LAST_DEDUP_ORIGIN.clear()
     bare_idx = set(bare_acr.values())
     canon_pref = _canonical_preferred_slugs()
     for idxs in groups.values():
@@ -397,13 +411,58 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
             if canon_alt and best not in canon_alt:
                 cand = max(canon_alt, key=lambda i: (_dedup_richness(diseases[i]), -i))
                 rb, rc = _dedup_richness(diseases[best]), _dedup_richness(diseases[cand])
-                if rc[0] >= rb[0] and rb[1] - rc[1] <= 300:
+                # Vanish guard (2026-10 第78弾): a winner whose slug the map merges
+                # away is hidden by apply_canonical_map — keeping it would delete
+                # the disease from the served view outright (rabbit Vitamin D
+                # Toxicity vanished when its twin out-ranked it by 370 chars).
+                best_slug = _dedup_slug(
+                    _disease_field(diseases[best], "name", "") or _disease_field(diseases[best], "name_en", "")
+                )
+                if best_slug in _canonical_merged_slugs():
+                    # Keep the canonical identity but carry the richer twin's
+                    # curated content, so restoring the card never downgrades it
+                    # to template text (guinea pig "Pneumonia (Bacterial)").
+                    replaced[cand] = _inherit_dedup_content(diseases[cand], diseases[best])
+                    _LAST_DEDUP_ORIGIN[id(replaced[cand])] = diseases[cand]
+                    best = cand
+                elif rc[0] >= rb[0] and rb[1] - rc[1] <= 300:
                     best = cand
             keep.add(best)
 
-    if len(keep) == len(diseases):
+    if len(keep) == len(diseases) and not replaced:
         return diseases
-    return [diseases[i] for i in range(len(diseases)) if i in keep]
+    return [replaced.get(i, diseases[i]) for i in range(len(diseases)) if i in keep]
+
+
+# id(copy) → original entry for the content-inheriting copies made by the last
+# dedupe_disease_list call (callers that key on object identity — the
+# migration's original-index id allocation — map copies back through it).
+_LAST_DEDUP_ORIGIN: Dict[int, Any] = {}
+
+
+def dedupe_original(entry: Any) -> Any:
+    """The source-list object a dedupe output entry was derived from."""
+    return _LAST_DEDUP_ORIGIN.get(id(entry), entry)
+
+
+def _is_template_text(v: Any) -> bool:
+    return not (isinstance(v, str) and v.strip()) or any(m in v for m in _DEDUP_TEMPLATE_MARKS)
+
+
+def _inherit_dedup_content(canonical: Any, donor: Any) -> Any:
+    """Copy of ``canonical`` taking each content field from ``donor`` when the
+    donor's text is curated and the canonical's is empty/template or shorter."""
+    if not isinstance(canonical, dict):
+        return canonical
+    out = dict(canonical)
+    for f in _DEDUP_CONTENT_FIELDS:
+        dv = _disease_field(donor, f, "")
+        if _is_template_text(dv):
+            continue
+        cv = out.get(f)
+        if _is_template_text(cv) or len(dv) > len(cv):
+            out[f] = dv
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -527,6 +586,8 @@ _CROSS_SPECIES_CLAUSES: tuple[tuple[str, frozenset[str]], ...] = (
     # （2026-10 第76弾 — 犬猫に「草食動物: チモシー乾草」「鳥類: カトルボーン」、
     # 哺乳類・鳥に「ビタミンD/UV-B不足（爬虫類）」、肉食動物に歯のトリミング等）
     ("ビタミンD/UV-B不足（爬虫類）", _REPTILES_CS),
+    # 筋骨格カテゴリ予防の一文（犬の変形性関節症等に「UV-B（爬虫類）」— 2026-10 第78弾）
+    ("代謝性骨疾患予防: 適切な栄養とUV-B（爬虫類・若齢動物）", _REPTILES_CS | frozenset({"amphibian"})),
     ("ビタミンC不足（モルモット）", frozenset({"guinea_pig"})),
     ("不正咬合（草食動物）", _ELODONT_CS),
     ("草食動物（ウサギ", _ELODONT_CS - {"horse"}),
