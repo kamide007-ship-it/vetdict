@@ -958,6 +958,15 @@ SYMPTOMS = [
         "name_en": "River / Stagnant Water Exposure",
         "category": "general",
     },
+    # 2026-10 第79弾: 暑熱曝露の文脈フラグ。熱中症の決定的な病歴（暑い日の運動・
+    # 車内放置・高温多湿の室内）— パンティング/虚脱だけでは心肺疾患と区別できない
+    # （Bruchim 2006 JVIM; Hall 2020 Sci Rep）。
+    {
+        "id": "heat_exposure",
+        "name_ja": "暑い環境にいた（炎天下の散歩・車内・高温の室内）",
+        "name_en": "Heat Exposure (hot weather exercise / car / hot room)",
+        "category": "general",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -4126,6 +4135,32 @@ DISEASES = [
     # river/stagnant-water exposure) ranked hepatopathy/IMHA only and the
     # water-contact history was never used. Name matches the dog module's
     # "Leptospirosis" so the chat card's 疾患DBで詳細を開く pivot lands.
+    # 2026-10 第79弾: 熱中症。夏季の犬の救急で最頻クラスなのにチャットDBに無く、
+    # 「暑い日に散歩したらぐったりして呼吸が荒い」が僧帽弁閉鎖不全症1位だった。
+    # 暑熱曝露フラグ・ゲート設計（パンティング・虚脱・嘔吐は心肺/消化器ddxの所有物）。
+    # 名前は犬モジュール「Heat Stroke」と完全一致（疾患DBピボット着地）。
+    {
+        "id": "heat_stroke",
+        "prevalence_tier": "common",
+        "name_ja": "熱中症",
+        "name_en": "Heat Stroke",
+        "description_ja": "暑熱環境（炎天下の散歩・駐車中の車内・高温多湿の室内）で体温調節が破綻し、直腸温が41℃を超えて多臓器不全に至りうる救急疾患です。短頭種・肥満犬・高齢犬・厚い被毛の犬で起こりやすく、激しいパンティング・流涎・虚脱・嘔吐/下痢（血便）・痙攣・意識障害がみられます。来院前の冷却（常温の水で全身を濡らし送風 — 氷水は末梢血管収縮で逆効果）が死亡率を大きく下げ（Hall 2020 Sci Rep）、39.5℃前後で冷却を止めます（過冷却の防止）。院内では輸液・酸素・血糖/凝固（DIC）・腎機能・神経症状の監視を行い、症状が軽く見えても24時間以内の悪化（DIC・急性腎障害）があるため必ず受診を指示します（Bruchim 2006 JVIM; Ettinger 8th ed）。",
+        "description_en": "An emergency in which thermoregulation fails in a hot environment (exercise in hot weather, a parked car, a hot humid room); rectal temperature above 41°C can lead to multi-organ failure. Brachycephalic, obese, senior and heavy-coated dogs are at higher risk. Signs: intense panting, drooling, collapse, vomiting/diarrhoea (haemorrhagic), seizures and altered mentation. Pre-hospital cooling (wet the whole body with tap-temperature water and fan — ice water causes peripheral vasoconstriction and is counter-productive) markedly lowers mortality (Hall 2020 Sci Rep); stop active cooling at about 39.5°C to avoid overshoot. In hospital: fluids, oxygen and monitoring of glucose, coagulation (DIC), renal function and neurological status. Advise examination even when the dog seems to recover — DIC and AKI can develop within 24 h (Bruchim 2006 JVIM; Ettinger 8th ed).",
+        # Exposure-gated: panting/collapse/vomiting alone belong to the
+        # cardiopulmonary and GI differentials.
+        "symptoms": [
+            "heat_exposure",
+        ],
+        "severity": "high",
+        "recommended_tests": ["physical_exam", "blood_test", "cbc", "coagulation_profile"],
+        "breed_risks": {
+            "french_bulldog": 3.0,
+            "english_bulldog": 3.0,
+            "pug": 2.5,
+            "golden_retriever": 1.5,
+            "labrador_retriever": 1.5,
+        },
+    },
     {
         "id": "leptospirosis",
         "prevalence_tier": "uncommon",
@@ -5339,6 +5374,10 @@ _PATHOGNOMONIC_CLUSTERS = [
     # for leptospirosis (Sykes 2011 ACVIM consensus); with fever or jaundice
     # alongside it the zoonosis must top the list. The un-gated triad cluster
     # covers the textbook icteric presentation without exposure history.
+    # 暑熱曝露の病歴は熱中症の決定的情報（2026-10 第79弾）
+    (frozenset({"heat_exposure"}), "heat_stroke", 1.8),
+    (frozenset({"heat_exposure", "labored_breathing"}), "heat_stroke", 2.0),
+    (frozenset({"heat_exposure", "lethargy"}), "heat_stroke", 2.0),
     (frozenset({"stagnant_water_exposure"}), "leptospirosis", 1.5),
     (frozenset({"stagnant_water_exposure", "fever"}), "leptospirosis", 1.8),
     (frozenset({"stagnant_water_exposure", "jaundice"}), "leptospirosis", 2.0),

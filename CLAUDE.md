@@ -7661,3 +7661,31 @@ Playwright（iPhone 13・実タッチ）で再現: `.disease-detail.open` は開
 ### テスト
 - `tests/test_round53_audit.py`（16件）
 - 再現: `fix_mammal_nutrition_treatments --apply` → `migrate_to_sqlite.py` → `build_disease_search_index.py`
+
+## 2026-10セッション（第79弾: 犬の熱中症（チャットDB）+ チャット精度第54弾 + 2.5%ポリアクリルアミドハイドロゲル（馬OA）公開 + チャット候補カード→治療セクション直接着地）
+
+### エラーチェック（結果: ベースライン健全）
+- ruff clean、フルテスト **5,065件合格**（ベースライン）→ **5,075件合格**（34 skip、カバレッジ82.93%）、配信SQLiteクリーンビルド（6,897疾患・679薬品・prognosis 100%）
+
+### 新規疾患（チャットDB）: 犬「熱中症」（107疾患・104症状 `heat_exposure`）
+- 夏季の救急で最頻クラスなのにチャットDBに無く、「暑い日に散歩したらぐったりして呼吸が荒い」が僧帽弁閉鎖不全症1位だった
+- 暑熱曝露の文脈フラグ（暑い日に/炎天下/車内に/暑い部屋 等）＋ゲート設計（パンティング・虚脱のみは心肺ddxを維持）、クラスタ×1.8〜2.0。
+  来院前冷却（常温水＋送風・氷水は不可・39.5℃で中止）、24時間以内のDIC/AKIの監視（Bruchim 2006 JVIM; Hall 2020 Sci Rep）。
+  dogモジュール「Heat Stroke」と名前一致（疾患DBピボット・緊急プロトコル）、prevalence common
+
+### 診断チャット精度 第54弾（85症例・2波スイープ 9 MISS → 実用症例全合格）
+- エイリアス: 腰がふらつ→ataxia（「ふらつき」→tremors で てんかんに流れていた）、舌が白っぽ→pale_gums、粘液便/うんちに粘液→diarrhea、粘液と血→血便、
+  顎にぶつぶつ（猫ざ瘡）、高い所に登らなくな/ジャンプしなくな→reluctance_to_jump、お腹の毛が抜け/内股の毛が薄→猫の過剰グルーミング
+- 猫: 咳単独で未tierの縦隔嚢胞（偶発所見）・気管支石灰化・気管断裂が猫喘息より上位 → rare/uncommon に（猫喘息 rank 1）
+
+### 新規製品: 2.5%ポリアクリルアミドハイドロゲル（アースラミド・ベット）（`drug_batch_87.py`、678→679）
+- 馬の慢性OAの永続的な関節内インプラント（医療機器）。1関節1〜2 mL 単回・効果発現2〜6週（Tnibar 2015 Acta Vet Scand）。
+  化膿性関節炎・不安定関節は禁忌、注入後フレアと医原性感染の鑑別。馬OAの治療文（日英）に追記 → 治療チップ・逆引き・チェッカー解決
+
+### スマホUX: チャット候補カードから治療セクションへ直接着地
+- 自由入力・問診の候補カードに「💊 治療を見る」を追加 — 疾患DBへ切替＋詳細展開後、治療セクションに sticky ヘッダー補正で着地
+  （iPhone 13 実測 top 139px、JSエラー0）。`openDiseaseAcrossSpecies(name, species, {section})`
+- ServiceWorker: `CACHE_NAME` v193 → **v194**、pendingStats drugs 679・symptoms 104
+
+### テスト
+- `tests/test_round54_audit.py`（10件）
