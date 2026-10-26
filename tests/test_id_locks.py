@@ -66,13 +66,15 @@ def test_ids_are_pinned_across_reorder():
     """After the source list is re-ordered, ids must not drift."""
     id_locks.clear_cache()
     raw, dd, orig = _degu_entries()
-    from api.species.helpers import dedupe_disease_list
+    from api.species.helpers import dedupe_disease_list, dedupe_original
 
     def ids_for(raw_list):
         d2 = dedupe_disease_list(raw_list)
         o2 = {id(e): i for i, e in enumerate(raw_list)}
         return {
-            (d.get("name") or d.get("name_ja")): stable_id_for("degu", d, d.get("id") or f"degu_{o2[id(d)]:04d}")
+            (d.get("name") or d.get("name_ja")): stable_id_for(
+                "degu", d, d.get("id") or f"degu_{o2[id(dedupe_original(d))]:04d}"
+            )
             for d in d2
         }
 

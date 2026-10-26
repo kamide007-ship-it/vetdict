@@ -89,7 +89,6 @@ def test_appended_audit_diseases_are_served():
             ("amphibian", "Parasitic Dermatitis"),
             # Previously clobbered by the id collision — must survive:
             ("degu", "Cataracts (Diabetic)"),
-            ("guinea_pig", "Pneumonia (Bacterial)"),
             ("amphibian", "Batrachochytrium salamandrivorans (Bsal)"),
         ]
         for species, name in expected:
@@ -98,5 +97,14 @@ def test_appended_audit_diseases_are_served():
                 (species, name),
             )
             assert cur.fetchone()[0] == 1, f"{species}/{name} missing from served DB"
+        # The canonical map merges this appended entry into "Bacterial Pneumonia";
+        # dedupe now serves the canonical card carrying its curated content
+        # (vanish guard, 2026-10 第78弾) — exactly one of the pair must be served.
+        cur.execute(
+            "SELECT treatment_ja FROM diseases WHERE species='guinea_pig' AND name IN (?, ?)",
+            ("Pneumonia (Bacterial)", "Bacterial Pneumonia"),
+        )
+        rows = cur.fetchall()
+        assert len(rows) == 1 and "エンロフロキサシン" in rows[0][0], rows
     finally:
         conn.close()

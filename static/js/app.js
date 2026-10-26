@@ -1825,10 +1825,10 @@ function setDefaultStats(){
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:3,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:6460,
+    diseases:6525,
     species:21,
     drugs:678,
-    symptoms:102,
+    symptoms:103,
     protocols:188
   };
   renderSpeciesGrid();
@@ -3543,7 +3543,7 @@ function renderResults(data){
     if(dbLink){e.preventDefault();navigateToDiseaseDb(dbLink.dataset.name);return;}
     /* Cache-rendered related-drug chips carry no per-node listeners — delegate. */
     const tChip=e.target.closest(".treatment-drug-chip");
-    if(tChip){e.preventDefault();navigateToDrug(tChip.dataset.drug);return;}
+    if(tChip){e.preventDefault();navigateToDrug(tChip.dataset.drug,{landDose:true});return;}
     /* Treatment-drug set → interaction checker (polypharmacy pivot). */
     const ixSet=e.target.closest(".treatment-drugs-ix-check");
     if(ixSet){e.preventDefault();runInteractionCheckWithDrugs(ixSet.dataset.drugs||"");return;}
@@ -5204,7 +5204,7 @@ document.addEventListener("click",function(e){
 });
 
 let _drugNavReturnView=null;
-function navigateToDrug(drugName){
+function navigateToDrug(drugName,opts){
   _pushNavHistory(currentView,"drugs",drugName);
   _drugNavReturnView=currentView;
   switchView("drugs");
@@ -5222,7 +5222,18 @@ function navigateToDrug(drugName){
        brand suffix in parentheses) lands on the intended drug, not the first row. */
     const pick=_pickListItemByName(list,drugName);
     if(pick&&!pick.querySelector(".disease-detail.open"))toggleDbItem(pick);
+    /* 2026-10 第78弾: 疾患の「治療に関連する薬品」チップから来た場合は、その動物種の
+       用量カードに直接着地する（スマホでは作用機序・副作用・禁忌の数画面下にあり、
+       獣医師が薬品を開く目的はまさにその1行）。カードは展開時に描画されるため短時間待つ。 */
+    /* toggleDbItem's own reading-position scroll runs on the next frame — land after it. */
+    if(pick&&opts&&opts.landDose)setTimeout(()=>_landOnSpeciesDose(pick),300);
   },350);
+}
+function _landOnSpeciesDose(item,tries){
+  const n=tries||0;
+  const hl=item.querySelector(".disease-detail.open .drug-species-highlight");
+  if(hl){scrollToAnchor(hl,{settle:false});trackEvent("drug_dose_landing",{});return;}
+  if(n<12)setTimeout(()=>_landOnSpeciesDose(item,n+1),120);
 }
 /* Differential pivot: one tap from a disease-detail symptom list to the symptom
    checker pre-filled with that disease's own signs, auto-analyzed. Lets a vet
@@ -8649,7 +8660,7 @@ function _attachDbItemHandlers(container){
        open), a path that attaches no per-node listeners — delegation here makes
        every render land on the exact item instead of dead-ending on the href. */
     const tChip=e.target.closest(".treatment-drug-chip");
-    if(tChip){e.preventDefault();navigateToDrug(tChip.dataset.drug);return;}
+    if(tChip){e.preventDefault();navigateToDrug(tChip.dataset.drug,{landDose:true});return;}
     /* Treatment-drug set → interaction checker (polypharmacy pivot). */
     const ixSet=e.target.closest(".treatment-drugs-ix-check");
     if(ixSet){e.preventDefault();runInteractionCheckWithDrugs(ixSet.dataset.drugs||"");return;}

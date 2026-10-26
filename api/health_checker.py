@@ -845,6 +845,13 @@ SYMPTOMS = [
         "name_en": "Mammary/Nipple Enlargement (Mass)",
         "category": "general",
     },
+    # 2026-10 第78弾: 乳汁分泌（偽妊娠の定義的徴候）。「お乳が出る」が抽出ゼロだった
+    {
+        "id": "lactation",
+        "name_ja": "乳汁が出る（乳汁分泌）",
+        "name_en": "Milk Production (Lactation)",
+        "category": "general",
+    },
     {
         "id": "tail_chasing",
         "name_ja": "しっぽを追いかける・かじる（常同行動）",
@@ -3857,6 +3864,25 @@ DISEASES = [
             "weimaraner": 1.6,
         },
     },
+    # 2026-10 第78弾: 偽妊娠。未避妊雌犬の発情後6-12週に多発する生理的現象
+    # （Gobello 2001 Theriogenology; Root Kustritz, Johnston Canine and Feline
+    # Theriogenology）なのにチャットDBに無く、「お乳が出る」主訴が抽出ゼロだった。
+    # 主訴ゲート設計（乳汁分泌が定義的徴候 — 乳腺の腫瘤のみは乳腺腫瘍ddx）。
+    {
+        "id": "pseudopregnancy",
+        "prevalence_tier": "common",
+        "name_ja": "偽妊娠（想像妊娠）",
+        "name_en": "Pseudopregnancy (False Pregnancy / Galactorrhea)",
+        "description_ja": "未避妊雌犬の発情後6-12週（黄体期の終わりにプロゲステロンが低下しプロラクチンが上昇する時期）に、妊娠していないのに乳腺の腫大・乳汁分泌・巣作り・おもちゃを子のように守る・食欲低下などがみられる生理的な状態です。多くは2-3週で自然に治まります。乳腺を舐めさせない（エリザベスカラー・冷罨法、温めたり搾ったりしない）のが基本で、症状が強い場合はカベルゴリン 5 µg/kg PO q24h×5-10日でプロラクチンを抑制します。妊娠の除外（超音波）と、乳腺のしこりが残る場合は乳腺腫瘍の鑑別、乳腺の発赤・熱感・疼痛は乳腺炎を疑います。繰り返す場合は発情休止期（乳汁分泌が治まってから）の避妊手術を検討します（Gobello 2001; Root Kustritz; Ettinger 8th ed）。",
+        "description_en": "A physiological state in intact bitches 6-12 weeks after oestrus (as progesterone falls and prolactin rises at the end of dioestrus): mammary enlargement, milk production, nesting, mothering of toys and inappetence without pregnancy. Most cases resolve within 2-3 weeks. Prevent licking (collar, cool compresses — do not warm or express the glands); for marked signs give cabergoline 5 µg/kg PO q24h for 5-10 days to suppress prolactin. Rule out pregnancy (ultrasonography), investigate persistent nodules as mammary tumours, and suspect mastitis if the glands are red, hot or painful. For recurrent cases, spay in anoestrus once lactation has stopped (Gobello 2001; Root Kustritz; Ettinger 8th ed).",
+        "symptoms": [
+            "lactation",
+            "mammary_swelling",
+        ],
+        "severity": "low",
+        "recommended_tests": ["abdominal_ultrasound", "physical_exam"],
+        "breed_risks": {},
+    },
     # 2026-10 第73弾: 外傷性眼球脱出（眼球突出）。短頭種で軽微な外力・保定でも
     # 起こる眼科救急（Gilger, Slatter's 6th; Maggs; Pe'er 2021 Vet Ophthalmol —
     # 短頭種は視覚温存率が高い）。名前は犬モジュールと完全一致（疾患DBピボット着地）。
@@ -5200,6 +5226,8 @@ _PATHOGNOMONIC_CLUSTERS = [
     # vocabulary so the hunched-trembling-vomiting complaint no longer ranks
     # Addison's/IVDD above it.
     (frozenset({"vomiting", "abdominal_pain"}), "pancreatitis", 1.5),
+    # 腹部触診痛＋震え（疼痛性振戦）は急性腹症 — 痙攣性疾患（てんかん）へ誘導しない（第78弾）
+    (frozenset({"abdominal_pain", "tremors"}), "pancreatitis", 1.4),
     # Glaucoma: cloudiness + eye swelling + squinting
     (frozenset({"cloudiness_in_eyes", "eye_swelling", "squinting"}), "glaucoma", 2.0),
     # Acute glaucoma: a suddenly cloudy AND painful eye is an emergency where
@@ -5240,6 +5268,7 @@ _PATHOGNOMONIC_CLUSTERS = [
     # 包皮・陰茎からの分泌物は部位診断的（2026-10 第74弾）。膿/単独→亀頭包皮炎、
     # 血尿・排尿困難・しぶりを伴えば前立腺肥大症（Johnston 2000; Smith 2008）
     (frozenset({"preputial_discharge"}), "balanoposthitis", 1.6),
+    (frozenset({"lactation"}), "pseudopregnancy", 1.6),
     (frozenset({"preputial_discharge"}), "benign_prostatic_hyperplasia", 1.45),
     (frozenset({"preputial_discharge", "blood_in_urine"}), "benign_prostatic_hyperplasia", 1.9),
     (frozenset({"preputial_discharge", "straining_to_urinate"}), "benign_prostatic_hyperplasia", 1.8),

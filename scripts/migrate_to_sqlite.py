@@ -83,7 +83,11 @@ def _resolve_collision_free_ids(species_key: str, diseases, orig_index) -> dict:
         else:
             deferred.append(d)
     for d in deferred:
-        i = orig_index.get(id(d), 0)
+        try:
+            from api.species.helpers import dedupe_original
+        except ImportError:  # pragma: no cover
+            dedupe_original = lambda e: e  # noqa: E731
+        i = orig_index.get(id(d), orig_index.get(id(dedupe_original(d)), 0))
         candidate = f"{species_key}_{i:04d}"
         while candidate in taken:
             i += 1

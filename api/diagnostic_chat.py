@@ -1137,6 +1137,10 @@ def extract_symptoms_from_text(text: str) -> list:
         if is_negated_mention(text_lower, pos + len(alias)):
             # 「咳はない」等 — 否定された言及は抽出しない
             continue
+        # 「乳首/足首/手首が腫れて」の「首が腫れて」（頸部リンパ節）は部位の部分一致 —
+        # 重なりを残す設計の本パスでも頸部の所見としては拾わない（2026-10 第78弾）
+        if alias.startswith("首") and pos > 0 and text_lower[pos - 1] in "乳足手":
+            continue
         raw_id = SYMPTOM_ALIASES[alias]
         _raw_alias_ids.add(raw_id)
         symptom_id = _resolve_legacy_id(raw_id)
@@ -1186,6 +1190,8 @@ def extract_symptoms_from_text(text: str) -> list:
         for frag in fragments:
             for alias in _sorted_aliases:
                 pos = frag.find(alias)
+                if pos >= 0 and alias.startswith("首") and pos > 0 and frag[pos - 1] in "乳足手":
+                    continue
                 if pos >= 0:
                     # Phase 1/2 と同じ否定ガード: 除外情報のフラグメント経由の
                     # 再抽出を防ぐ（「嘔吐はしていない」等）
