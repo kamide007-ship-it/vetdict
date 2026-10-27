@@ -784,6 +784,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 歯茎蒼白（「歯茎が白っぽい」）: cat/ferret 等は pale_gums をネイティブ
     # 保有。非保有種は粘膜蒼白→貧血系へフォールバック（逆方向チェーン）。
     "pale_gums": ["pale_mucous_membranes", "pale_comb", "anemia", "weakness"],
+    # 暑熱曝露フラグ（犬レガシーのみネイティブ）— 他種は高体温系の所見へ
+    "heat_exposure": ["hyperthermia", "heat_stress"],
     # 浮力異常（「浮いたまま沈めない」）: amphibian は buoyancy_problems を
     # ネイティブ保有。fish は遊泳異常系の語彙のため安全にフォールバック。
     "buoyancy_problems": [

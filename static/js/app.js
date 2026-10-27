@@ -1804,7 +1804,7 @@ function setDefaultStats(){
   SPECIES=[
     {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:606,drugs:619,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
     {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:596,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
-    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:366,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
+    {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:367,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
@@ -1827,8 +1827,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6525,
     species:21,
-    drugs:678,
-    symptoms:103,
+    drugs:679,
+    symptoms:104,
     protocols:188
   };
   renderSpeciesGrid();
@@ -5123,7 +5123,7 @@ async function shareDeepLink(url,title){
   }catch(_){}
   window.prompt(currentLang==="ja"?"このリンクをコピーしてください":"Copy this link",url);
 }
-function openDiseaseAcrossSpecies(name,species){
+function openDiseaseAcrossSpecies(name,species,opts){
   const needSwitch=species&&species!==currentSpecies;
   /* Cross-view entries (chat candidate cards, drug → "diseases using this drug",
      emergency/calculator pivots) had no way back to where the vet was — offer the
@@ -5149,7 +5149,26 @@ function openDiseaseAcrossSpecies(name,species){
     if(input)input.value=name;
     renderDiseaseDb();
     const list=document.getElementById("diseaseDbList");
-    if(list){const pick=_pickListItemByName(list,name);if(pick&&!pick.querySelector(".disease-detail.open"))toggleDbItem(pick);}
+    if(list){
+      const pick=_pickListItemByName(list,name);
+      if(pick&&!pick.querySelector(".disease-detail.open"))toggleDbItem(pick);
+      /* 2026-10 第79弾: chat candidate cards' 「💊 治療を見る」 lands directly on the
+         treatment section (the reason the vet tapped) instead of the panel top —
+         on a phone description/pathophysiology/causes came first, several screens
+         above. Waits for the detail to render, then re-anchors (the new
+         scrollToAnchor releases toggleDbItem's settle watcher). */
+      const sec=opts&&opts.section;
+      if(pick&&sec){
+        let n=0;
+        const go=()=>{
+          const det=pick.querySelector(".disease-detail.open");
+          const el=det&&(sec==="drugs"?det.querySelector(".treatment-drugs-section"):det.querySelector(`[data-jump="${sec}"]`));
+          if(el){scrollToAnchor(el,{settle:false});return;}
+          if(n++<20)setTimeout(go,100);
+        };
+        setTimeout(go,350);
+      }
+    }
   };
   setTimeout(apply,needSwitch?200:0);
 }
@@ -5877,7 +5896,7 @@ function renderChatResult(container,data){
         ${(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))?`<div class="chat-disease-desc">${escapeHtml(currentLang==="ja"?(c.description_ja||c.description):(c.description||c.description_ja))}</div>`:""}
         ${c.matched_symptoms&&c.matched_symptoms.length?`<div class="chat-disease-matched">${currentLang==="ja"?"\u4e00\u81f4: ":"Matched: "}${escapeHtml(c.matched_symptoms.map(sid=>{const f=(symptoms||[]).find(s=>s&&s.id===sid);return f?(currentLang==="ja"?(f.name_ja||f.name_en||sid):(f.name_en||f.name_ja||sid)):sid;}).join(", "))}</div>`:""}
         ${c.mentioned_drugs&&c.mentioned_drugs.length?renderMentionedDrugs(c):""}
-        <div class="chat-disease-nav"><button type="button" class="chat-disease-open" data-name="${escapeHtml(c.name_en||c.name_ja||c.disease_id||"")}" data-species="${escapeHtml(chatSpecies||currentSpecies||"dog")}">\u{1F50D} ${currentLang==="ja"?"\u75be\u60a3DB\u3067\u8a73\u7d30\u3092\u958b\u304f":"Open in disease DB"} \u2192</button></div>
+        <div class="chat-disease-nav"><button type="button" class="chat-disease-open" data-name="${escapeHtml(c.name_en||c.name_ja||c.disease_id||"")}" data-species="${escapeHtml(chatSpecies||currentSpecies||"dog")}">\u{1F50D} ${currentLang==="ja"?"\u75be\u60a3DB\u3067\u8a73\u7d30\u3092\u958b\u304f":"Open in disease DB"} \u2192</button><button type="button" class="chat-disease-open chat-disease-treat" data-section="treatment" data-name="${escapeHtml(c.name_en||c.name_ja||c.disease_id||"")}" data-species="${escapeHtml(chatSpecies||currentSpecies||"dog")}">\u{1F48A} ${currentLang==="ja"?"治療を見る":"Treatment"}</button></div>
         ${_chatEmergencyLink(c.name_en,c.name_ja,chatSpecies||currentSpecies||"dog")}
         ${_chatCalcLink(c.name_en,c.name_ja,chatSpecies||currentSpecies||"dog")}
       `;
@@ -6534,7 +6553,7 @@ function guidedRenderFinalResults(data){
         <div class="chat-disease-bar-bg"><div class="chat-disease-bar ${sevClass}" style="width:${pct}%"></div></div>
         ${desc?`<div class="chat-disease-desc">${desc}</div>`:""}
         ${matched?`<div class="chat-disease-matched">${currentLang==="ja"?"一致: ":"Matched: "}${matched}</div>`:""}
-        <div class="chat-disease-nav"><button type="button" class="chat-disease-open" data-name="${escapeHtml(d.name||d.name_ja||"")}" data-species="${escapeHtml(guidedState.species||currentSpecies||"dog")}">\u{1F50D} ${currentLang==="ja"?"疾患DBで詳細を開く":"Open in disease DB"} →</button></div>
+        <div class="chat-disease-nav"><button type="button" class="chat-disease-open" data-name="${escapeHtml(d.name||d.name_ja||"")}" data-species="${escapeHtml(guidedState.species||currentSpecies||"dog")}">\u{1F50D} ${currentLang==="ja"?"疾患DBで詳細を開く":"Open in disease DB"} →</button><button type="button" class="chat-disease-open chat-disease-treat" data-section="treatment" data-name="${escapeHtml(d.name||d.name_ja||"")}" data-species="${escapeHtml(guidedState.species||currentSpecies||"dog")}">\u{1F48A} ${currentLang==="ja"?"治療を見る":"Treatment"}</button></div>
         ${_chatEmergencyLink(d.name,d.name_ja,guidedState.species||currentSpecies||"dog")}
         ${_chatCalcLink(d.name,d.name_ja,guidedState.species||currentSpecies||"dog")}
       </div>`;
@@ -8621,7 +8640,7 @@ function _attachChatNavHandlers(container){
       const name=openBtn.dataset.name||"";
       if(!name)return;
       trackEvent("chat_open_disease_db",{disease:name.substring(0,80),species:openBtn.dataset.species||""});
-      openDiseaseAcrossSpecies(name,openBtn.dataset.species||currentSpecies||"");
+      openDiseaseAcrossSpecies(name,openBtn.dataset.species||currentSpecies||"",openBtn.dataset.section?{section:openBtn.dataset.section}:undefined);
       return;
     }
     const refineBtn=e.target.closest(".chat-checker-refine");

@@ -110,6 +110,7 @@ from api.drug_batch_83 import DRUGS_BATCH_83
 from api.drug_batch_84 import DRUGS_BATCH_84
 from api.drug_batch_85 import DRUGS_BATCH_85
 from api.drug_batch_86 import DRUGS_BATCH_86
+from api.drug_batch_87 import DRUGS_BATCH_87
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11112,6 +11113,12 @@ for _drug86 in DRUGS_BATCH_86:
     if _drug86["id"] not in _drug_index:
         DRUGS.append(_drug86)
         _drug_index[_drug86["id"]] = _drug86
+
+# Batch 87 (2026-10 第79弾: 2.5%ポリアクリルアミドハイドロゲル（アースラミド・ベット） — 馬の慢性OAの関節内インプラント）
+for _drug87 in DRUGS_BATCH_87:
+    if _drug87["id"] not in _drug_index:
+        DRUGS.append(_drug87)
+        _drug_index[_drug87["id"]] = _drug87
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

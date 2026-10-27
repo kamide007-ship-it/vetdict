@@ -3697,7 +3697,8 @@ SYMPTOM_ALIASES = {
     # 腹部・内股の対称性脱毛は猫では過剰グルーミング（アレルギー・心因性）
     "お腹に毛がな": "excessive_grooming",
     "お腹に毛がなくな": "excessive_grooming",
-    "お腹の毛が薄": "excessive_grooming",
+    "お腹の毛が薄くな": "excessive_grooming",
+    "お腹の毛が薄い": "excessive_grooming",
     "お腹がはげ": "excessive_grooming",
     "内股の毛がな": "excessive_grooming",
     # 頸部腹側のしこり（猫の甲状腺結節・リンパ節）
@@ -3882,6 +3883,36 @@ SYMPTOM_ALIASES = {
     "おしっこもほとんどしな": "decreased_urination",
     "おしっこをほとんどしな": "decreased_urination",
     "尿がほとんど出な": "decreased_urination",
+    # 2026-10 第79弾: 暑熱曝露（熱中症の決定的病歴）・腰のふらつき・舌の蒼白・
+    # 粘液便・猫ざ瘡（語順）・高所回避・腹部の脱毛（猫の過剰グルーミング）
+    "暑い日に": "heat_exposure",
+    "暑い中": "heat_exposure",
+    "炎天下": "heat_exposure",
+    "車内に": "heat_exposure",
+    "車の中に": "heat_exposure",
+    "車に置いて": "heat_exposure",
+    "暑い部屋": "heat_exposure",
+    "エアコンを切": "heat_exposure",
+    "熱中症": "heat_exposure",
+    "腰がふらつ": "ataxia",
+    "腰がふらふら": "ataxia",
+    "腰が抜けたよう": "ataxia",
+    "舌が白っぽ": "pale_gums",
+    "舌の色が白": "pale_gums",
+    "舌が白く": "pale_gums",
+    "うんちに粘液": "diarrhea",
+    "便に粘液": "diarrhea",
+    "粘液便": "diarrhea",
+    "ゼリー状の便": "diarrhea",
+    "粘液と血": "blood_in_stool",
+    "顎にぶつぶつ": "chin_swelling",
+    "顎に黒いぶつぶつ": "chin_swelling",
+    "高い所に登らなくな": "reluctance_to_jump",
+    "高い所に上らなくな": "reluctance_to_jump",
+    "高いところに登らなくな": "reluctance_to_jump",
+    "ジャンプしなくな": "reluctance_to_jump",
+    "お腹の毛が抜け": "excessive_grooming",
+    "内股の毛が薄": "excessive_grooming",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

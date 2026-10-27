@@ -81,6 +81,7 @@ SPECIES_PREVALENCE = {
         "Canine Parvovirus": "common",
         "Kennel Cough (Bordetella)": "common",
         "Leptospirosis": "common",
+        "Heat Stroke": "common",  # 2026-10 第79弾 — 夏季救急（Bruchim 2006）
         "Pyometra": "common",
         "Mammary Tumor": "common",
         "Lymphoma": "common",
@@ -330,6 +331,11 @@ SPECIES_PREVALENCE = {
         "Systemic Hypertension": "common",
         "Hypertrophic Cardiomyopathy (HCM)": "common",
         "Feline Asthma": "common",
+        # 2026-10 第79弾: 咳単独の主訴で未tierの偶発所見・外傷エントリが猫喘息より上位だった
+        "Feline Mediastinal Cyst": "rare",  # 多くは偶発的画像所見（Zekas 2001）
+        "Feline Bronchial Mineralization": "uncommon",  # 慢性気道疾患に伴う所見
+        "Feline Tracheal Avulsion": "rare",  # 外傷性
+        "Feline Idiopathic Chylothorax": "uncommon",
         "Feline Chronic Gingivostomatitis": "common",
         "Alimentary Lymphoma": "common",
         "Mammary Tumor": "common",
