@@ -796,6 +796,13 @@ SPECIES_PREVALENCE = {
         # squinting + tearing complaint (Brooks, Equine Ophthalmology 3rd ed;
         # Gilger, Equine Ophthalmology).
         "Superficial Corneal Ulcer": "very_common",
+        # 2026-10 第80弾: 眼瞼腫脹＋流涙で稀な眼部SCC・緑内障が結膜炎を上回っていた
+        # （Brooks, Equine Ophthalmology 3rd ed: 結膜炎は最頻、SCCは最多の眼周囲腫瘍だが
+        # 有病率は低い。緑内障は主にERU続発、眼瞼内反症は主に新生子）
+        "Conjunctivitis": "common",
+        "Ocular Squamous Cell Carcinoma": "uncommon",
+        "Glaucoma": "uncommon",
+        "Entropion": "uncommon",
         "Anterior Uveitis": "common",
         "Equine Recurrent Uveitis (Moon Blindness)": "common",
         "Deep / Melting Corneal Ulcer": "uncommon",

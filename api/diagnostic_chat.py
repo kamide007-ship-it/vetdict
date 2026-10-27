@@ -565,6 +565,14 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "流涙": "eye_tearing",
     "涙が出": "eye_tearing",
     "涙がたくさん": "eye_tearing",
+    # 2026-10 第80弾: 眼瞼・眼周囲の腫脹（従来は body_swelling に化けて肥満細胞腫・
+    # 頸静脈血栓性静脈炎へ誤誘導されていた）
+    "目が腫れ": "eye_swelling",
+    "目の周りが腫れ": "eye_swelling",
+    "まぶたが腫れ": "eye_swelling",
+    "瞼が腫れ": "eye_swelling",
+    "汗をかきません": "misc_anhidrosis",
+    "汗をかいていな": "misc_anhidrosis",
     "目が白く濁": "eye_cloudiness",
     "目が濁": "eye_cloudiness",
     "目が白っぽ": "eye_cloudiness",
@@ -764,7 +772,7 @@ def _extract_equine_symptoms(text: str) -> list[str]:
     # 部位特異的な腫脹（リンパ節腫脹）が取れたら汎用の体表腫脹を落とす
     # （「喉が腫れて」の汎用「腫れ」照合でリンパ管炎・外傷感染が腺疫を希釈していた
     # — 2026-10 第74弾。症状抽出の _SUBSUMES と同じ包含ルール）。
-    if "gen_swollen_lymph" in matched:
+    if matched & {"gen_swollen_lymph", "eye_swelling"}:
         matched.discard("body_swelling")
 
     return list(matched)
@@ -1053,7 +1061,6 @@ def extract_symptoms_from_text(text: str) -> list:
         # 2026-10 round-43: "耳の中が赤い" (otitis erythema) and melena
         # predicates ("便が黒い") — closest legacy signals.
         "ear_inflammation": ["ear_discharge", "ear_scratching"],
-        "black_tarry_stool": ["blood_in_stool"],
         "vaginal_bleeding": ["vulvar_discharge"],
         # "口を前足で掻く" resolves to pawing_at_mouth (ferret hypoglycemia /
         # oral-pain vocabularies); dogs pawing at the mouth present with

@@ -242,5 +242,5 @@ def test_app_js_detail_jump_bar_wired():
     assert "function _addDetailJumpBar" in js and "_addDetailJumpBar(detail);" in js
     for key in ("treatment", "prognosis", "diagnosis", "signs"):
         assert f'dt data-jump="{key}"' in js
-    assert "scrollToAnchor(dt,{settle:false})" in js and "e.stopPropagation()" in js
+    assert "scrollToAnchor(dt,{settle:false" in js and "e.stopPropagation()" in js
     assert ".detail-jump-chip" in css and "min-height:40px" in css

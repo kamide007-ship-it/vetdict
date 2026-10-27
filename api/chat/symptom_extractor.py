@@ -295,7 +295,7 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "excessive_tearing": ["tearing", "epiphora", "eye_discharge"],
     "vision_loss": ["blindness", "cloudy_eye", "cloudy_eyes", "cataracts"],
     # 鼻出血: ウサギ語彙は epistaxis を正規IDに持つ。他種は鼻分泌物へフォールバック
-    "epistaxis": ["nose_bleeding", "nasal_discharge"],
+    "epistaxis": ["nose_bleeding", "bloody_nasal_discharge", "nasal_discharge"],
     # EPI hallmark の大量便: フェレット語彙は voluminous_stool を保有。他種は下痢へ
     "voluminous_stool": ["bulky_stool", "diarrhea"],
     # 猫DJDのジャンプ回避: 他種では動きたがらない・こわばりへフォールバック

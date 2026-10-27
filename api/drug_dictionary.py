@@ -111,6 +111,7 @@ from api.drug_batch_84 import DRUGS_BATCH_84
 from api.drug_batch_85 import DRUGS_BATCH_85
 from api.drug_batch_86 import DRUGS_BATCH_86
 from api.drug_batch_87 import DRUGS_BATCH_87
+from api.drug_batch_88 import DRUGS_BATCH_88
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11119,6 +11120,12 @@ for _drug87 in DRUGS_BATCH_87:
     if _drug87["id"] not in _drug_index:
         DRUGS.append(_drug87)
         _drug_index[_drug87["id"]] = _drug87
+
+# Batch 88 (2026-10 第80弾: ベナゼプリル・スピロノラクトン配合錠（カルダリス） — 犬MMVDのうっ血性心不全、BESST 2021）
+for _drug88 in DRUGS_BATCH_88:
+    if _drug88["id"] not in _drug_index:
+        DRUGS.append(_drug88)
+        _drug_index[_drug88["id"]] = _drug88
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

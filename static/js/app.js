@@ -874,7 +874,9 @@ function scrollToAnchor(el,opts){
   if(_anchorWatchRelease)_anchorWatchRelease();
   _syncStickyOffset();
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const offset=()=>parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sticky-offset"),10)||112;
+  /* opts.extraOffset: 追加で画面上部を覆う要素（スマホで詳細パネル内に貼り付く
+     セクション・ジャンプバー等）の高さ — その下に着地させる（2026-10 第80弾） */
+  const offset=()=>(parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sticky-offset"),10)||112)+(opts.extraOffset||0);
   const wantY=()=>Math.max(0,Math.round(el.getBoundingClientRect().top+window.scrollY-offset()));
   const first=wantY();
   /* Distance-aware motion. The content panels sit ~3,400px below the landing
@@ -1802,24 +1804,24 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:606,drugs:619,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:596,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:609,drugs:620,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:597,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:367,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
-    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:417,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:276,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
-    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:303,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
-    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:225,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
-    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:243,drugs:199,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
-    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:223,drugs:64,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
-    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:193,drugs:77,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
-    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:176,drugs:154,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
-    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:485,drugs:244,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
-    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:411,drugs:244,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
-    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:257,drugs:244,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:260,drugs:103,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:249,drugs:110,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:218,drugs:109,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:214,drugs:105,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:418,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:280,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:306,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:230,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
+    {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:199,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
+    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:224,drugs:64,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
+    {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:197,drugs:77,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
+    {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:178,drugs:154,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
+    {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:244,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
+    {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:413,drugs:244,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
+    {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:244,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:264,drugs:103,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:254,drugs:110,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:221,drugs:109,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:218,drugs:105,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:251,drugs:19,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:29,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:3,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
@@ -1827,8 +1829,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6525,
     species:21,
-    drugs:679,
-    symptoms:104,
+    drugs:680,
+    symptoms:105,
     protocols:188
   };
   renderSpeciesGrid();
@@ -8568,6 +8570,10 @@ function _unclampDetailPanel(detail){
     if(!detail.classList.contains("open"))return;
     detail.style.maxHeight="none";
     detail.style.overflowY="visible";
+    /* 片軸だけ visible だと他軸の hidden に引きずられ auto（＝スクロールコンテナ）に
+       なり、パネル内の sticky ジャンプバーが効かない。横は clip（はみ出しは切るが
+       スクロールコンテナを作らない）にする（2026-10 第80弾） */
+    detail.style.overflowX="clip";
   };
   const onEnd=e=>{
     if(e.target!==detail||e.propertyName!=="max-height")return;
@@ -8586,6 +8592,7 @@ function _clampDetailPanel(detail){
   if(!detail)return;
   detail.style.maxHeight="";
   detail.style.overflowY="";
+  detail.style.overflowX="";
 }
 
 /* Toggle detail panel with accessibility */
@@ -8885,6 +8892,15 @@ function toggleDbItem(el){
    2026-10 第72弾: drug panels too — the species dose cards sit below
    mechanism / side effects / contraindications / routes / interactions, so a
    phone user had to scroll several screens to reach the dose they came for. */
+/* スマホでパネル内に貼り付いたジャンプバーが画面上部を覆う高さ（sticky でない
+   デスクトップでは0）。セクション着地をバーの下にずらすのに使う。 */
+function _jumpBarOverlay(bar){
+  try{
+    if(!bar||getComputedStyle(bar).position!=="sticky")return 0;
+    return Math.round(bar.getBoundingClientRect().height)+4;
+  }catch(_){return 0;}
+}
+
 function _addDetailJumpBar(detail){
   if(!detail||detail.querySelector(".detail-jump-bar"))return;
   const targets=detail.querySelectorAll("[data-jump]");
@@ -8915,11 +8931,26 @@ function _addDetailJumpBar(detail){
     b.addEventListener("click",e=>{
       e.preventDefault();e.stopPropagation();
       if(key==="drugs")dt=detail.querySelector(".treatment-drugs-section")||dt;
-      scrollToAnchor(dt,{settle:false});
+      scrollToAnchor(dt,{settle:false,extraOffset:_jumpBarOverlay(bar)});
       trackEvent("detail_section_jump",{section:key});
     });
     bar.appendChild(b);
   });
+  /* 2026-10 第80弾: スマホではバーがパネル内に貼り付く（sticky）ため、深く読み進めた
+     後もセクション間を1タップで移動できる。カード先頭（疾患名・閉じるボタン）へ戻る
+     チップも末尾に置く — 長い治療文の途中から上へ数画面スクロールしなくてよい。 */
+  if(bar.children.length){
+    const top=document.createElement("button");
+    top.type="button";
+    top.className="detail-jump-chip detail-jump-top";
+    top.textContent=currentLang==="ja"?"⬆ 先頭":"⬆ Top";
+    top.addEventListener("click",e=>{
+      e.preventDefault();e.stopPropagation();
+      scrollToAnchor(detail.parentElement||detail,{settle:false});
+      trackEvent("detail_section_jump",{section:"top"});
+    });
+    bar.appendChild(top);
+  }
   const anchor=detail.querySelector(".detail-close-btn");
   if(anchor&&anchor.nextSibling)detail.insertBefore(bar,anchor.nextSibling);else detail.prepend(bar);
 }

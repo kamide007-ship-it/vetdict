@@ -87,7 +87,8 @@ class TestChatClinicalAccuracyAuditRound43Parallel:
         ids, top = _dog("耳の中が赤くて臭いがします")
         assert ids and "外耳炎" in top[0], (ids, top)
         ids, _ = _dog("ウンチが黒っぽいです")
-        assert "blood_in_stool" in ids
+        # 第80弾: 黒色便はメレナ専用ID（→胃潰瘍）に分離
+        assert "black_tarry_stool" in ids
 
     def test_cat_litter_box_squatting(self):
         ids, top = _sp("トイレで何度もしゃがんでいます", "cat")

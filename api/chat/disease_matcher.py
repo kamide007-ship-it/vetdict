@@ -356,6 +356,9 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # backing — it exists to stop umbrella syndromes with long symptom lists
 # losing on coverage to narrow rarities.
 _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    # 猫の耳介の波動性腫脹（ぷよぷよ）は耳血腫 until proven otherwise — 外耳炎の
+    # 頭振り・掻破に続発する（Little, The Cat; 2026-10 第80弾）
+    ("cat", frozenset({"ear_swelling"}), "Feline Aural Hematoma", 1.4),
     # 中高齢猫の体重減少＋被毛粗剛（毛づやの低下）は慢性腎臓病・甲状腺機能亢進症の
     # 古典的な二徴（AAFP Senior Care Guidelines 2021; ISFM CKD 2016）。寄生虫・脱毛の
     # 皮膚科エントリがカバレッジで上回っていた（2026-10 第76弾）
