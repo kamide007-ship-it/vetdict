@@ -58,6 +58,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "ear_discharge": "ears",
     "ear_droop": "ears",
     "ear_inflammation": "ears",
+    "ear_swelling": "ears",
     "ear_tip_lesions": "ears",
     "hearing_loss": "ears",
     "head_shaking": "ears",
@@ -9566,7 +9567,8 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Umbilical Hernia",
         "name_ja": "猫臍ヘルニア",
-        "symptoms": {"swelling", "pain"},
+        # 大半は無痛性の還納性腫瘤（疼痛は嵌頓時のみ）— 2026-10 第80弾で pain を除去
+        "symptoms": {"swelling", "lumps"},
         "description": "Feline Umbilical Hernia is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "臍輪の先天性または後天性の欠損で腹部内容が突出する状態です。",
         "urgency": "low",
@@ -10250,7 +10252,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Aural Hematoma",
         "name_ja": "猫耳血腫",
-        "symptoms": {"ear_inflammation", "head_shaking", "swelling", "pain", "scratching_ears"},
+        "symptoms": {"ear_swelling", "ear_inflammation", "head_shaking", "swelling", "pain", "scratching_ears"},
         "description": "Feline Aural Hematoma is a clinical condition requiring veterinary evaluation, diagnosis, and appropriate treatment.",
         "description_ja": "頭振りや耳掻きによる耳軟骨層間の血液貯留です。",
         "urgency": "moderate",
@@ -12606,6 +12608,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "ear_discharge": {"ja": "耳漏", "en": "Ear Discharge"},
     "ear_droop": {"ja": "耳の下垂", "en": "Ear Droop"},
     "ear_inflammation": {"ja": "耳の炎症", "en": "Ear Inflammation"},
+    "ear_swelling": {"ja": "耳介の腫れ（ぷよぷよ）", "en": "Ear Flap Swelling (Fluctuant Pinna)"},
     "ear_tip_lesions": {"ja": "耳先端病変", "en": "Ear Tip Lesions"},
     "eating_non_food": {"ja": "異食症", "en": "Eating Non-Food Items"},
     "enlarged_eye": {"ja": "眼球拡大", "en": "Enlarged Eye"},

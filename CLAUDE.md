@@ -7689,3 +7689,33 @@ Playwright（iPhone 13・実タッチ）で再現: `.disease-detail.open` は開
 
 ### テスト
 - `tests/test_round54_audit.py`（10件）
+
+## 2026-10セッション（第80弾: 犬の胃潰瘍（チャットDB・黒色便）+ 猫の耳血腫 + チャット精度第55弾 + カルダリス公開 + スマホの詳細パネル内 sticky ジャンプバー）
+
+### エラーチェック（結果: ベースライン健全）
+- ruff clean、フルテスト **5,075件合格**（ベースライン）→ **5,090件合格**（34 skip、カバレッジ82.94%）、配信SQLiteクリーンビルド（6,897疾患・680薬品）
+
+### 新規疾患（チャットDB）: 犬「胃潰瘍」（108疾患・105症状 `black_tarry_stool`）
+- 「便が真っ黒でタール状」が鮮血便（blood_in_stool）にフォールバックし急性胃腸炎・パルボへ誘導されていた → 黒色便（メレナ）専用ID＋胃十二指腸潰瘍エントリ（黒色便ゲート、×1.6/嘔吐併発×1.8）。
+  原因（NSAIDs±ステロイド・肝腎疾患・肥満細胞腫・副腎皮質機能低下症）、オメプラゾール 1 mg/kg q12h（Marks 2018 ACVIM consensus）・スクラルファート。dogモジュール「Gastric Ulcer」と名前一致。「タール便」「黒い便」の旧マッピングも是正
+
+### 診断チャット精度 第55弾（80症例・2波スイープ 14 MISS → 実用症例全合格）
+- 猫の耳介腫脹（ぷよぷよ）: cat語彙に `ear_swelling` を新設し猫耳血腫に付与＋{ear_swelling}×1.4（外耳炎が1位だった）
+- 鼻血: 「血が出ている」(6字→bleeding) に最長一致で負けていた → 7字以上のキー、epistaxis チェーンに bloody_nasal_discharge
+- エイリアス: 尻尾を下げたまま/振らなくな→back_pain、おしりから血、涙がたくさん、尻尾が細い（トカゲのクリプト）
+- 猫臍ヘルニアの症状セットから pain を除去（大半は無痛の還納性腫瘤 — 汎用疼痛主訴の上位を占めていた）
+- 馬: 目が腫れ→eye_swelling（従来は体表腫脹で肥満細胞腫へ）＋眼部位で body_swelling を落とす、汗をかきません→無汗症、tier: 結膜炎 common・眼部SCC/緑内障/眼瞼内反症 uncommon
+
+### 新規薬品: ベナゼプリル・スピロノラクトン配合錠（カルダリス、EU）（`drug_batch_88.py`、679→680）
+- 犬MMVDのうっ血性心不全: 0.25 + 2 mg/kg PO q24h 食事と共に（Cardalis SPC; BESST — Coffman 2021 JVIM; Bernay 2010）。成分の追加禁止・K/Cr監視・猫 safe:False（メインクーンの顔面皮膚炎）・国内は配合錠未流通。
+  ×スピロノラクトン/ベナゼプリル/エナラプリル/グルコン酸K/塩化K=major をレジストリ登録（`no_component_index` で成分言及は配合錠に化けない）。犬MMVDのStage C治療文（モジュール・JSON両方、日英）に追記
+- 商品名: パノクエル（Panoquell-CA1）→フザプラジブ
+
+### スマホUX: 詳細パネル内の sticky ジャンプバー
+- 長い治療文を読み進めるとジャンプバーが画面外に消えていた → 600px以下でパネル内に貼り付け（1行横スクロール）、末尾に「⬆ 先頭」チップ。
+  着地はバーの高さ分下げる（`scrollToAnchor` の `extraOffset`）。sticky を阻んでいた `.card{overflow:hidden}` と展開後パネルの片軸 hidden を `overflow:clip` に（クリップは維持・スクロールコンテナを作らない）
+- iPhone 13 実測: バーがヘッダー直下に固定、セクションはバー直下に着地、先頭チップでカード見出しへ、横はみ出し0・JSエラー0
+- ServiceWorker: `CACHE_NAME` v194 → **v195**、pendingStats drugs 680・symptoms 105、setDefaultStats を API 実測に同期
+
+### テスト
+- `tests/test_round55_audit.py`（15件）

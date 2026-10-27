@@ -250,4 +250,6 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "lactated_ringers": ("LRS",),
     "guaifenesin": ("GGE",),
     "dimercaprol": ("BAL",),
+    # 2026-10 第80弾: フザプラジブの米国商品名（FDA条件付き承認 2022）
+    "fuzapladib": ("パノクエル", "Panoquell", "Panoquell-CA1"),
 }

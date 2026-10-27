@@ -967,6 +967,15 @@ SYMPTOMS = [
         "name_en": "Heat Exposure (hot weather exercise / car / hot room)",
         "category": "general",
     },
+    # 2026-10 第80弾: 黒色便（タール便・メレナ）は上部消化管出血の部位診断的所見。
+    # 従来は blood_in_stool（鮮血便）にフォールバックし、「便が真っ黒でタール状」が
+    # 急性胃腸炎・パルボへ誘導されていた（胃十二指腸潰瘍に着地しなかった）。
+    {
+        "id": "black_tarry_stool",
+        "name_ja": "黒色便（タール状の真っ黒な便）",
+        "name_en": "Black Tarry Stool (Melena)",
+        "category": "digestive",
+    },
 ]
 
 SYMPTOM_IDS = {s["id"] for s in SYMPTOMS}
@@ -4161,6 +4170,26 @@ DISEASES = [
             "labrador_retriever": 1.5,
         },
     },
+    # 2026-10 第80弾: 胃十二指腸潰瘍（黒色便・吐血）。犬の上部消化管出血の主因
+    # （NSAIDs・ステロイド併用、肝/腎疾患、肥満細胞腫、副腎皮質機能低下症、
+    # 低灌流 — Marks 2018 ACVIM consensus）。黒色便ゲート設計（嘔吐単独は急性胃腸炎
+    # のまま）。名前は犬モジュール「Gastric Ulcer」と完全一致（疾患DBピボット着地）。
+    {
+        "id": "gastroduodenal_ulcer",
+        "prevalence_tier": "common",
+        "name_ja": "胃潰瘍",
+        "name_en": "Gastric Ulcer",
+        "description_ja": "胃・十二指腸粘膜の潰瘍で、黒色便（タール便・メレナ）・吐血（コーヒー残渣様の嘔吐物）・貧血・腹痛が典型徴候です。原因はNSAIDs（特にステロイドとの併用・過量・休薬期間なしの切替）、肝疾患・腎疾患、肥満細胞腫（ヒスタミン）、ガストリノーマ、副腎皮質機能低下症、ショック・低灌流。治療は原因薬の中止、オメプラゾール1 mg/kg PO q12h（H2遮断薬より優れる — Marks 2018 ACVIM consensus statement）、スクラルファート0.5-1 g/頭 PO q8h（他剤と2時間ずらす）、輸液と貧血の評価。吐血・虚脱・急な腹痛（穿孔の疑い）は救急です。",
+        "description_en": "Gastric/duodenal mucosal ulceration presenting with melena (black tarry stool), haematemesis (coffee-ground vomitus), anaemia and abdominal pain. Causes: NSAIDs (especially combined with corticosteroids, overdose, or switching without a washout), hepatic and renal disease, mast cell tumour (histamine), gastrinoma, hypoadrenocorticism, shock/hypoperfusion. Treatment: stop the offending drug; omeprazole 1 mg/kg PO q12h (superior to H2 blockers — Marks 2018 ACVIM consensus statement); sucralfate 0.5-1 g/dog PO q8h (separate from other drugs by 2 h); fluids and anaemia assessment. Haematemesis, collapse or sudden abdominal pain (suspected perforation) is an emergency.",
+        # Melena-gated: vomiting / anorexia alone belong to the acute
+        # gastroenteritis differential.
+        "symptoms": [
+            "black_tarry_stool",
+        ],
+        "severity": "high",
+        "recommended_tests": ["cbc", "blood_test", "fecal_exam", "abdominal_ultrasound"],
+        "breed_risks": {},
+    },
     {
         "id": "leptospirosis",
         "prevalence_tier": "uncommon",
@@ -5375,6 +5404,9 @@ _PATHOGNOMONIC_CLUSTERS = [
     # alongside it the zoonosis must top the list. The un-gated triad cluster
     # covers the textbook icteric presentation without exposure history.
     # 暑熱曝露の病歴は熱中症の決定的情報（2026-10 第79弾）
+    # 黒色便は上部消化管出血の部位診断的所見（2026-10 第80弾）
+    (frozenset({"black_tarry_stool"}), "gastroduodenal_ulcer", 1.6),
+    (frozenset({"black_tarry_stool", "vomiting"}), "gastroduodenal_ulcer", 1.8),
     (frozenset({"heat_exposure"}), "heat_stroke", 1.8),
     (frozenset({"heat_exposure", "labored_breathing"}), "heat_stroke", 2.0),
     (frozenset({"heat_exposure", "lethargy"}), "heat_stroke", 2.0),

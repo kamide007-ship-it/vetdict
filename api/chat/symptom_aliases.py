@@ -381,7 +381,7 @@ SYMPTOM_ALIASES = {
     "血が混じったうんち": "blood_in_stool",
     "赤いうんち": "blood_in_stool",
     "黒いうんち": "black_tarry_stool",
-    "タール便": "blood_in_stool",
+    "タール便": "black_tarry_stool",
     # 咳
     "咳が出る": "coughing",
     "咳してる": "coughing",
@@ -1195,7 +1195,7 @@ SYMPTOM_ALIASES = {
     # 鳥 — 貧血
     "貧血": "lethargy",
     "anemia": "lethargy",
-    "黒い便": "blood_in_stool",
+    "黒い便": "black_tarry_stool",
     # ---------------------------------------------------------------
     # 獣医師監査 第3回
     # ---------------------------------------------------------------
@@ -3288,6 +3288,27 @@ SYMPTOM_ALIASES = {
     "ガスが溜まっ": "bloating",
     # フェレット等のメレナ（タール便）
     "タール状": "black_tarry_stool",
+    # 2026-10 第80弾
+    "便が黒く": "black_tarry_stool",
+    "おしりから血": "blood_in_stool",
+    "鼻血が出": "epistaxis",
+    # 「血が出ている」(6字 → bleeding) に最長一致で負けないよう7字以上で登録
+    "鼻血が出ている": "epistaxis",
+    "鼻血が出ています": "epistaxis",
+    "鼻から血が出ている": "epistaxis",
+    "涙がたくさん": "eye_discharge",
+    "涙がいっぱい": "eye_discharge",
+    # 尾を下げたまま振らない＝尾根部・腰仙部の疼痛（腰仙部狭窄・椎間板・
+    # 急性尾部筋障害 — 2026-10 第80弾）
+    "尻尾を下げたまま": "back_pain",
+    "しっぽを下げたまま": "back_pain",
+    "尻尾を振らなくな": "back_pain",
+    "肛門から血": "blood_in_stool",
+    "尻尾が細い": "tail_thinning",
+    "しっぽが細": "tail_thinning",
+    "耳が腫れてぷよぷよ": "ear_swelling",
+    "耳がぶよぶよ": "ear_swelling",
+    "耳がパンパンに腫れ": "ear_swelling",
     "タールのような": "black_tarry_stool",
     "真っ黒な便": "black_tarry_stool",
     "便が真っ黒": "black_tarry_stool",

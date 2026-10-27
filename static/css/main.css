@@ -213,7 +213,7 @@ a:hover{text-decoration:underline}
    offset, dropping the target ~2x the header height down the viewport. */
 .panels{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
 
-.card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden;border:1px solid var(--gray-200);transition:box-shadow var(--transition-normal)}
+.card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden;overflow:clip;border:1px solid var(--gray-200);transition:box-shadow var(--transition-normal)}
 .card:hover{box-shadow:var(--shadow-md)}
 .card-header{padding:14px 18px;font-weight:700;font-size:.88rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--gray-200);background:var(--gray-50);color:var(--navy)}
 .card-header.accent{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);color:var(--white)}
@@ -2194,3 +2194,8 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
 .detail-jump-chip{border:1px solid var(--border,#cbd5e1);background:var(--card-bg,#fff);color:inherit;border-radius:999px;padding:4px 12px;font-size:.78rem;cursor:pointer;min-height:32px}
 .detail-jump-chip:hover,.detail-jump-chip:focus-visible{background:#ecfdf5;border-color:#10b981}
 @media(max-width:600px){.detail-jump-chip{min-height:40px;padding:6px 14px;font-size:.82rem}}
+/* 2026-10 第80弾: スマホではジャンプバーを詳細パネル内に貼り付け（sticky）、長い治療文を
+   読み進めた後もセクション移動・カード先頭へ戻るが1タップ。1行の横スクロールにして
+   画面を占有しすぎないようにする（パネルは展開後 overflow:visible になるため sticky が効く）。 */
+@media(max-width:600px){.disease-detail.open .detail-jump-bar{position:sticky;top:var(--sticky-offset,112px);z-index:6;background:var(--gray-50);flex-wrap:nowrap;overflow-x:auto;margin:0 -16px 10px;padding:6px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch;box-shadow:0 2px 4px rgba(15,23,42,.06)}.disease-detail.open .detail-jump-bar::-webkit-scrollbar{display:none}.detail-jump-chip{flex:0 0 auto;white-space:nowrap}}
+.detail-jump-top{margin-left:auto}
