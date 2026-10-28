@@ -952,7 +952,7 @@ SYMPTOM_ALIASES = {
     # ID_SYNONYMS チェーン [cecotrope_impaction, soft_stool, diarrhea] で
     # 非保有種（犬猫等）は従来どおり下痢系へ安全にフォールバックする。
     "お尻が汚れてる": "abnormal_cecotropes",
-    "ウジがわいてる": "diarrhea",
+    "ウジがわいてる": "maggots_visible",  # 2026-10 第81弾: 旧 diarrhea 誤マッピングを是正
     # 2026-10是正: 歯の過長・咬合異常の主訴が疼痛徴候（歯ぎしり=bruxism）に
     # 誤マッピングされ、歯科疾患本体に届いていなかった → 歯科IDへ是正。
     # overgrown_teeth/malocclusion は _ID_SYNONYMS で相互・近縁IDへ解決し、
@@ -3934,6 +3934,36 @@ SYMPTOM_ALIASES = {
     "ジャンプしなくな": "reluctance_to_jump",
     "お腹の毛が抜け": "excessive_grooming",
     "内股の毛が薄": "excessive_grooming",
+    # --- 2026-10 第81弾（チャット精度第56回） ---
+    # 「〜をかばって」= 患肢を負重しない跛行（「足を引きずる」と同義）
+    "前足をかば": "lameness_or_limping",
+    "後ろ足をかば": "lameness_or_limping",
+    "足をかばっ": "lameness_or_limping",
+    "脚をかばっ": "lameness_or_limping",
+    # 毛玉を吐こうとして出ない（非生産的なえずき）— 猫では毛球症と、
+    # 咳を「毛玉吐き」と誤認しやすい猫喘息の鑑別（Padrid; Little, The Cat）
+    "毛玉が出な": "hairball_retching",
+    "毛玉を吐こうと": "hairball_retching",
+    "毛玉を吐けな": "hairball_retching",
+    "毛玉を吐きたそう": "hairball_retching",
+    # 眼の混濁・羞明
+    "目の色が濁": "cloudy_eyes",
+    "目の色が白": "cloudy_eyes",
+    "眩しそう": "squinting",
+    "眩しが": "squinting",
+    # 排尿時の発声（モルモット尿石症）— 「キーキー鳴」(5字)より長い最長一致で確実化
+    "おしっこをするときにキーキー": "squealing_when_urinating",
+    "おしっこをする時にキーキー": "squealing_when_urinating",
+    "おしっこする時にキーキー": "squealing_when_urinating",
+    "おしっこするときにキーキー": "squealing_when_urinating",
+    "ウジがい": "maggots_visible",
+    "うじがい": "maggots_visible",
+    "うじがわ": "maggots_visible",
+    "ウジがつ": "maggots_visible",
+    "足にかさぶた": "crusty_lesions_on_legs",
+    "足がかさかさ": "crusty_lesions_on_legs",
+    "皮膚がかさかさ": "dry_skin",
+    "皮膚がガサガサ": "dry_skin",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

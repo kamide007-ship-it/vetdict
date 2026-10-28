@@ -100,7 +100,7 @@ class TestChatClinicalAccuracyAuditRound52:
     def test_cat_cloudy_painful_eye_is_ocular(self):
         ids, top = _sp("目が白く濁って痛そうです", "cat")
         assert "eye_pain" in ids and "pain" not in ids, ids
-        assert all(any(k in t for k in ("白内障", "緑内障", "ぶどう膜", "角膜")) for t in top), top
+        assert all(any(k in t for k in ("白内障", "緑内障", "ぶどう膜", "角膜", "角結膜", "水晶体")) for t in top), top
 
     def test_generic_pain_without_eye_signs_unchanged(self):
         from api.chat.symptom_extractor import _extract_species_symptoms

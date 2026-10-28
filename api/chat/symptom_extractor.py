@@ -646,6 +646,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # Non-productive retching gestures (ferret Helicobacter/gastric ulcer sign);
     # species without a retching ID fall back to vomiting for matching.
     "unproductive_retching": ["retching", "nausea", "vomiting"],
+    # 猫以外は非生産的えずき→嘔吐系へ（2026-10 第81弾）
+    "hairball_retching": ["unproductive_retching", "retching", "coughing", "vomiting"],
     # Interdigital/pad-web redness (2026-09 round 36): site-specific canine
     # pododermatitis signal; species without a paw ID fall back to the
     # generic dermatitis chain (previous behaviour for these aliases).
