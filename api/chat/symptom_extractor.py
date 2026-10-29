@@ -823,6 +823,8 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # 雌用の vulvar_discharge へは決してフォールバックしない（子宮蓄膿症の誤誘導防止）。
     "lactation": ["mammary_swelling", "mammary_gland_swelling", "mammary_masses", "mammary_mass"],
     "preputial_discharge": ["discharge_from_prepuce", "genital_discharge", "preputial_swelling", "genital_lesions"],
+    # 扁平便 — 非保有種は便秘系へ（2026-10 第82弾）
+    "flat_stool": ["constipation", "straining_to_defecate", "straining"],
 }
 
 # 部位特異的ID → それに包含される汎用ID（両方抽出された場合は汎用側を落とす）

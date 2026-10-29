@@ -852,6 +852,13 @@ SYMPTOMS = [
         "name_en": "Milk Production (Lactation)",
         "category": "general",
     },
+    # 2026-10 第82弾: 扁平便・リボン状便（前立腺腫大／会陰ヘルニアの直腸圧迫所見）
+    {
+        "id": "flat_stool",
+        "name_ja": "便が平べったい・細い（扁平便）",
+        "name_en": "Flat / Ribbon-like Stool",
+        "category": "digestive",
+    },
     {
         "id": "tail_chasing",
         "name_ja": "しっぽを追いかける・かじる（常同行動）",
@@ -3856,6 +3863,29 @@ DISEASES = [
             "chihuahua": 1.3,
         },
     },
+    # 2026-10 第82弾: 会陰ヘルニア。チャットDBに便秘を主訴とする疾患が1件も無く、
+    # 「便秘しています」が候補ゼロだった。中高齢の未去勢雄犬で骨盤隔膜（肛門挙筋・
+    # 尾骨筋）の萎縮により直腸が偏位し、しぶり・便秘・扁平便を呈する（Ettinger 8th;
+    # Grand 2013 Vet Surg）。膀胱の後方反転は尿閉の外科救急。名前は犬モジュールと一致。
+    {
+        "id": "perineal_hernia",
+        "prevalence_tier": "uncommon",
+        "name_ja": "会陰ヘルニア",
+        "name_en": "Perineal Hernia",
+        "description_ja": "骨盤隔膜（肛門挙筋・尾骨筋）の萎縮・脆弱化により直腸や骨盤内臓器が会陰部へ脱出する疾患で、7〜9歳の未去勢雄犬に好発します（コーギー・ボストンテリア・ボクサー・ペキニーズ等）。肛門の横の膨らみ、排便時のしぶり、便秘・扁平便が典型で、直腸検査で偏位・憩室を確認します。膀胱が反転して脱出すると尿閉を起こす外科救急です（排尿できない場合は直ちに受診）。治療は内側閉鎖筋転位術などの外科的整復と同時去勢（前立腺肥大の縮小・再発予防）で、術前後は便軟化剤（ラクツロース）と高繊維食で管理します。片側整復後も対側発症のリスクがあります（Grand 2013; Ettinger 8th ed）。",
+        "description_en": "Weakening of the pelvic diaphragm (levator ani and coccygeus) lets the rectum and pelvic contents herniate into the perineum, mainly in intact male dogs aged 7-9 years (Corgi, Boston Terrier, Boxer, Pekingese). Typical signs are a swelling beside the anus, tenesmus, constipation and flattened stools; rectal palpation confirms deviation or a diverticulum. Bladder retroflexion causes urinary obstruction and is a surgical emergency. Treatment is surgical repair (e.g. internal obturator muscle transposition) with concurrent castration, plus stool softeners (lactulose) and a high-fibre diet peri-operatively. The contralateral side may herniate later (Grand 2013; Ettinger 8th ed).",
+        "symptoms": [
+            "constipation",
+            "flat_stool",
+        ],
+        "severity": "moderate",
+        "recommended_tests": ["rectal_exam", "ultrasound", "radiograph"],
+        "breed_risks": {
+            "corgi": 1.8,
+            "boston_terrier": 1.8,
+            "boxer": 1.5,
+        },
+    },
     # 2026-10 第77弾: 尿道括約筋機能不全（避妊後尿失禁）。成犬の尿失禁で最多の原因
     # （避妊済み雌の約5-20%、20 kg超で約20% — Arnold 1989; Thrusfield 1998）なのに
     # エントリが無く、「寝ている時におしっこが漏れる」が認知機能不全症候群へ誘導されていた。
@@ -3956,6 +3986,7 @@ DISEASES = [
         "description_en": "Age-related androgen (dihydrotestosterone)-dependent prostatic enlargement, present histologically in over 80% of intact male dogs older than 6 years. Most cases are subclinical; typical complaints are bloody preputial dripping unrelated to urination, hematuria, hemospermia, and tenesmus or ribbon-like stools. Diagnosis: rectal palpation (symmetric, non-painful enlargement), ultrasonography and canine prostate-specific arginine esterase (CPSE). Castration is curative (50-70% size reduction within weeks); finasteride or osaterone acetate for breeding dogs. Fever or pain suggests bacterial prostatitis/abscess; asymmetric enlargement or enlargement in a neutered dog suggests prostatic carcinoma (Johnston 2000; Smith 2008; Albouy 2008).",
         "symptoms": [
             "preputial_discharge",
+            "flat_stool",
         ],
         "severity": "low",
         "recommended_tests": ["ultrasound", "urinalysis", "fine_needle_aspirate"],
@@ -5334,9 +5365,14 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"preputial_discharge"}), "balanoposthitis", 1.6),
     (frozenset({"lactation"}), "pseudopregnancy", 1.6),
     (frozenset({"preputial_discharge"}), "benign_prostatic_hyperplasia", 1.45),
-    (frozenset({"preputial_discharge", "blood_in_urine"}), "benign_prostatic_hyperplasia", 1.9),
+    (frozenset({"preputial_discharge", "blood_in_urine"}), "benign_prostatic_hyperplasia", 2.1),
     (frozenset({"preputial_discharge", "straining_to_urinate"}), "benign_prostatic_hyperplasia", 1.8),
     (frozenset({"preputial_discharge", "constipation"}), "benign_prostatic_hyperplasia", 1.8),
+    # 扁平便は直腸の外部圧迫を示す部位診断的所見（2026-10 第82弾）。排尿困難を
+    # 伴えば前立腺腫大による尿道・直腸の同時圧迫（Johnston 2000; Smith 2008）
+    (frozenset({"flat_stool"}), "benign_prostatic_hyperplasia", 1.5),
+    (frozenset({"flat_stool", "preputial_discharge"}), "benign_prostatic_hyperplasia", 2.0),
+    (frozenset({"flat_stool", "straining_to_urinate"}), "benign_prostatic_hyperplasia", 1.8),
     # 点状出血は血小板/血管障害の部位診断的所見（2026-10 第69弾）
     (frozenset({"petechiae"}), "immune_mediated_thrombocytopenia", 1.6),
     # Owner-visible bite abnormality (受け口/出っ歯) is site-diagnostic for an

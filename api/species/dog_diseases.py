@@ -801,13 +801,13 @@ DISEASES: List[Dict[str, Any]] = [
         "treatment": "ACVIM 2019 staging: Stage B2 (asymptomatic with cardiomegaly): pimobendan 0.25 mg/kg PO BID (EPIC trial — delays onset of CHF by ~15 months). "
         "Stage C (symptomatic CHF): furosemide 2-4 mg/kg PO BID-TID + pimobendan 0.25 mg/kg BID + ACE inhibitor (benazepril 0.5 mg/kg SID-BID or enalapril 0.5 mg/kg BID). Add spironolactone 1-2 mg/kg BID. "
         "Stage D (refractory): escalate diuretics (furosemide up to 4-6 mg/kg TID + hydrochlorothiazide 1-2 mg/kg BID), add hydralazine or amlodipine for afterload reduction. "
-        "Acute pulmonary edema: oxygen supplementation + furosemide 2-4 mg/kg IV bolus (repeat q1-2h as needed) + pimobendan IV/PO. "
+        "Acute pulmonary edema: oxygen supplementation + furosemide 2-4 mg/kg IV bolus (repeat q1-2h as needed) + pimobendan (0.15 mg/kg IV once with the injectable Vetmedin solution where available [EU/UK], then 0.25 mg/kg PO q12h from 12 h later; otherwise PO/nasogastric). "
         "Atrial fibrillation: diltiazem 1.5-3.5 mg/kg PO TID ± digoxin 0.005-0.008 mg/kg PO BID (target serum 0.8-1.5 ng/mL). "
         "Sodium-restricted diet. Exercise restriction proportional to disease stage.",
         "treatment_ja": "Stage B2（無症候性だが心拡大あり）：ピモベンダン(0.25mg/kg BID)で心不全発症を遅延。"
         "Stage C（症候性CHF）：フロセミド(2〜4mg/kg BID〜TID)＋ピモベンダン＋ACE阻害薬(ベナゼプリル)。"
         "Stage D（難治性）：利尿薬の増量、スピロノラクトン追加、ヒドララジン追加。"
-        "肺水腫急性期：酸素療法＋フロセミドIV bolus。心房細動にはジルチアゼム。"
+        "肺水腫急性期：酸素療法＋フロセミドIV bolus＋ピモベンダン（注射液が入手可能なら0.15 mg/kg 単回静注→12時間後から経口0.25 mg/kg q12h、なければ経口・経鼻胃チューブ）。心房細動にはジルチアゼム。"
         "安静＋低ナトリウム食。",
         "prognosis": "Prognosis depends on severity, timeliness of treatment, and response to therapy. Early intervention generally improves outcomes.",
         "prognosis_ja": "MMVD Stage B2：ピモベンダン投与で心不全発症までの中央期間約1,228日。"
