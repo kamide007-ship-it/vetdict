@@ -3785,7 +3785,7 @@ SYMPTOM_ALIASES = {
     "耳の周りをか": "ear_scratching",
     "耳の後ろがハゲ": "ear_scratching",
     # 扁平便・細い便（前立腺腫大・会陰ヘルニアによる直腸圧迫の古典的所見）
-    "便が細": "constipation",
+    "便が細": "flat_stool",
     "束で抜け": "hair_loss",
     "痩せて": "weight_loss",
     "痩せてしま": "weight_loss",
@@ -3799,7 +3799,7 @@ SYMPTOM_ALIASES = {
     "皮膚が剥がれ": "excessive_shedding",
     "皮膚がめくれ": "excessive_shedding",
     "うんちが細": "constipation",
-    "平べったい便": "constipation",
+    "平べったい便": "flat_stool",
     "掻きこわ": "itching",
     "かきこわ": "itching",
     "掻き壊": "itching",
@@ -3964,6 +3964,62 @@ SYMPTOM_ALIASES = {
     "足がかさかさ": "crusty_lesions_on_legs",
     "皮膚がかさかさ": "dry_skin",
     "皮膚がガサガサ": "dry_skin",
+    # --- 2026-10 第82弾（チャット精度第57回） ---
+    # 排尿後も続く怒責（尿道・膀胱・前立腺の下部尿路徴候 — 便秘と誤認されやすい）
+    "おしっこをした後もいきん": "straining_to_urinate",
+    "おしっこした後もいきん": "straining_to_urinate",
+    "おしっこの後もいきん": "straining_to_urinate",
+    "排尿後もいきん": "straining_to_urinate",
+    "排尿の後もいきん": "straining_to_urinate",
+    # 扁平便・リボン状便（前立腺腫大・会陰ヘルニアによる直腸圧迫）
+    "便が平べった": "flat_stool",
+    "便も平べった": "flat_stool",
+    "便が平た": "flat_stool",
+    "リボン状の便": "flat_stool",
+    # 足先・爪を擦って歩く（固有位置感覚障害 — ナックリングと同義）
+    "爪をこすって歩": "ataxia",
+    "爪を擦って歩": "ataxia",
+    "足先をこすって歩": "ataxia",
+    "足の甲をこすって": "ataxia",
+    "爪がすり減": "ataxia",
+    # 粘液便（大腸性下痢）
+    "便にゼリー": "diarrhea",
+    "ゼリー状のもの": "diarrhea",
+    "ゼリーのような便": "diarrhea",
+    # 流涙・涙やけ（流涙症・結膜炎・眼瞼疾患）
+    "涙やけ": "eye_discharge",
+    "涙で茶色": "eye_discharge",
+    "涙で汚れ": "eye_discharge",
+    "目の下が茶色": "eye_discharge",
+    # 頸部痛（首を下げた疼痛姿勢）— 「首を下げたまま」(猫の頸部腹側屈曲)より長いキーで確実化
+    "首を下げて痛が": "neck_pain",
+    "首を下げて歩くと痛": "neck_pain",
+    "首を下げて動きたがらな": "neck_pain",
+    # 飲水・摂食直後の吐き戻し（吐出 — 巨大食道症の古典的主訴）
+    "飲んだ後に吐": "regurgitation",
+    "飲んだ後すぐに吐": "regurgitation",
+    "食べた直後に吐": "regurgitation",
+    # 猫: 鼻梁の治らない痂皮（扁平上皮癌・ヘルペス性皮膚炎の鑑別）
+    "鼻の上にかさぶた": "non_healing_wound",
+    "かさぶたがあって治らな": "non_healing_wound",
+    # 猫: トイレに入っても何も出ない（尿道閉塞 until proven otherwise）
+    "トイレに入っては何も出": "decreased_urination",
+    "トイレに入っても何も出": "decreased_urination",
+    "トイレで何も出": "decreased_urination",
+    # ウサギ: 耳の痂皮・尿砂（修飾語介在形）
+    "耳の中に茶色いかさぶた": "ear_crusting",
+    "耳の中に茶色いカサブタ": "ear_crusting",
+    "ざらざらした砂": "thick_white_urine",
+    "おしっこにざらざら": "thick_white_urine",
+    # 卵塞・脱皮不全の「ず」形
+    "卵が出てこず": "egg_binding",
+    "脱皮がうまくいかず": "dysecdysis",
+    "脱皮がうまくできず": "dysecdysis",
+    "脱皮した皮が指": "dysecdysis",
+    # 外部寄生虫の数量修飾介在形（「ダニがたくさんついて」）
+    "ダニがたくさん": "visible_mites",
+    "ダニが沢山": "visible_mites",
+    "ダニがいっぱい": "visible_mites",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

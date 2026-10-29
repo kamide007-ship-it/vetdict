@@ -113,6 +113,7 @@ from api.drug_batch_86 import DRUGS_BATCH_86
 from api.drug_batch_87 import DRUGS_BATCH_87
 from api.drug_batch_88 import DRUGS_BATCH_88
 from api.drug_batch_89 import DRUGS_BATCH_89
+from api.drug_batch_90 import DRUGS_BATCH_90
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11133,6 +11134,12 @@ for _drug89 in DRUGS_BATCH_89:
     if _drug89["id"] not in _drug_index:
         DRUGS.append(_drug89)
         _drug_index[_drug89["id"]] = _drug89
+
+# Batch 90 (2026-10 第82弾: ピモベンダン注射液（ベトメディン注射液、EU/英国） — 犬CHF治療開始の単回静注 0.15 mg/kg）
+for _drug90 in DRUGS_BATCH_90:
+    if _drug90["id"] not in _drug_index:
+        DRUGS.append(_drug90)
+        _drug_index[_drug90["id"]] = _drug90
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

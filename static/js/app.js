@@ -1804,8 +1804,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:609,drugs:621,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:598,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:609,drugs:622,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:599,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:367,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:418,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:280,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1829,8 +1829,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6525,
     species:21,
-    drugs:681,
-    symptoms:105,
+    drugs:682,
+    symptoms:106,
     protocols:188
   };
   renderSpeciesGrid();
@@ -5247,14 +5247,20 @@ function navigateToDrug(drugName,opts){
        用量カードに直接着地する（スマホでは作用機序・副作用・禁忌の数画面下にあり、
        獣医師が薬品を開く目的はまさにその1行）。カードは展開時に描画されるため短時間待つ。 */
     /* toggleDbItem's own reading-position scroll runs on the next frame — land after it. */
-    if(pick&&opts&&opts.landDose)setTimeout(()=>_landOnSpeciesDose(pick),300);
+    if(pick&&opts&&opts.landDose)setTimeout(()=>_landOnSpeciesDose(pick,0,opts.species),300);
   },350);
 }
-function _landOnSpeciesDose(item,tries){
+/* 2026-10 第82弾: species を渡すとその動物種の用量カード（data-sp）に着地する —
+   チャット回答の薬品リンクは相談中の動物種が currentSpecies と異なることがあるため。 */
+function _landOnSpeciesDose(item,tries,sp){
   const n=tries||0;
-  const hl=item.querySelector(".disease-detail.open .drug-species-highlight");
-  if(hl){scrollToAnchor(hl,{settle:false});trackEvent("drug_dose_landing",{});return;}
-  if(n<12)setTimeout(()=>_landOnSpeciesDose(item,n+1),120);
+  const open=".disease-detail.open ";
+  const hl=(sp&&item.querySelector(open+'.drug-species-card[data-sp="'+CSS.escape(sp)+'"]'))||item.querySelector(open+".drug-species-highlight");
+  if(hl){
+    if(sp&&!hl.classList.contains("drug-species-highlight")){hl.classList.add("chat-card-flash");setTimeout(()=>hl.classList.remove("chat-card-flash"),1200);}
+    scrollToAnchor(hl,{settle:false});trackEvent("drug_dose_landing",{});return;
+  }
+  if(n<12)setTimeout(()=>_landOnSpeciesDose(item,n+1,sp),120);
 }
 /* Differential pivot: one tap from a disease-detail symptom list to the symptom
    checker pre-filled with that disease's own signs, auto-analyzed. Lets a vet
@@ -7750,7 +7756,7 @@ function renderDrugList(){
         ${d.drug_interactions&&d.drug_interactions.length?`<dl><dt data-jump="interactions">${t("dtInteractions")} <span style="font-size:.7rem;color:var(--gray-500);font-weight:400">(${d.drug_interactions.length})</span></dt><dd>${renderDrugInteractionsList(d.drug_interactions)}</dd></dl>`:""}
         <div class="drug-species-section"><strong class="drug-species-title" data-jump="dosage">${t("dtSpeciesInfo")}</strong>
           <div class="drug-species-grid">
-            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");const highlight=currentSpecies===sp?"drug-species-highlight":"";const cardParsed=info.safe?parseDoseRange(info.dosage||info.dosage_ja||""):null;const cardCri=(!cardParsed&&info.safe)?parseCriRate(info.dosage||info.dosage_ja||""):null;const cardCalc=cardParsed?`<button type="button" class="drug-calc-open" data-dose-min="${cardParsed.min}" data-dose-max="${cardParsed.max}" data-dose-unit="${cardParsed.unit}" data-drug-label="${escapeHtml((currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))+" ("+label+")")}" data-dose-text="${escapeHtml(dose.slice(0,160))}">\u{1F9EE}</button>`:(cardCri?`<button type="button" class="drug-cri-open" data-cri-lo="${cardCri.lo}" data-cri-unit="${cardCri.unit}" data-drug-label="${escapeHtml((currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))+" ("+label+")")}" data-dose-text="${escapeHtml(dose.slice(0,160))}">\u{1F9EE}CRI</button>`:"");return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"} ${highlight}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)} ${cardCalc}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
+            ${Object.entries(d.species_info||{}).map(([sp,info])=>{const spName=SPECIES.find(s=>s.id===sp);const label=spName?(currentLang==="ja"?spName.name:spName.nameEn):sp;const dose=currentLang==="ja"?(info.dosage_ja||info.dosage||""):(info.dosage||info.dosage_ja||"");const note=currentLang==="ja"?(info.notes_ja||info.notes||""):(info.notes||info.notes_ja||"");const highlight=currentSpecies===sp?"drug-species-highlight":"";const cardParsed=info.safe?parseDoseRange(info.dosage||info.dosage_ja||""):null;const cardCri=(!cardParsed&&info.safe)?parseCriRate(info.dosage||info.dosage_ja||""):null;const cardCalc=cardParsed?`<button type="button" class="drug-calc-open" data-dose-min="${cardParsed.min}" data-dose-max="${cardParsed.max}" data-dose-unit="${cardParsed.unit}" data-drug-label="${escapeHtml((currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))+" ("+label+")")}" data-dose-text="${escapeHtml(dose.slice(0,160))}">\u{1F9EE}</button>`:(cardCri?`<button type="button" class="drug-cri-open" data-cri-lo="${cardCri.lo}" data-cri-unit="${cardCri.unit}" data-drug-label="${escapeHtml((currentLang==="ja"?(d.name_ja||d.name):(d.name||d.name_ja))+" ("+label+")")}" data-dose-text="${escapeHtml(dose.slice(0,160))}">\u{1F9EE}CRI</button>`:"");return`<div class="drug-species-card ${info.safe?"drug-safe":"drug-unsafe"} ${highlight}" data-sp="${escapeHtml(sp)}"><strong>${escapeHtml(label)}</strong>: ${info.safe?'\u2713':'\u2717'} ${escapeHtml(dose)} ${cardCalc}${note?'<br/><span class="drug-dosage-note">'+escapeHtml(note)+'</span>':''}</div>`;}).join("")}
           </div>
         </div>
         ${buildDrugDiseasesPlaceholder(d.id||"")}
@@ -8665,7 +8671,8 @@ function _attachChatNavHandlers(container){
       return;
     }
     const drugLink=e.target.closest(".drug-nav-link");
-    if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
+    /* 2026-10 第82弾: チャット回答の薬品リンクは相談中の動物種の用量カードへ直接着地 */
+    if(drugLink){e.preventDefault();const spHost=drugLink.closest("[data-species]");const chatSp=(spHost&&spHost.dataset.species)||(typeof chatSpecies!=="undefined"&&chatSpecies)||currentSpecies;navigateToDrug(drugLink.dataset.drug,{landDose:true,species:chatSp});return;}
     /* Emergency-class candidate → open the matching 緊急対応 protocol. */
     const emLink=e.target.closest(".emergency-nav-link");
     if(emLink){e.preventDefault();trackEvent("emergency_from_chat",{proto:emLink.dataset.proto||""});navigateToEmergencyProtocol(emLink.dataset.proto);return;}

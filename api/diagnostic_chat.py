@@ -772,7 +772,9 @@ def _extract_equine_symptoms(text: str) -> list[str]:
     # 部位特異的な腫脹（リンパ節腫脹）が取れたら汎用の体表腫脹を落とす
     # （「喉が腫れて」の汎用「腫れ」照合でリンパ管炎・外傷感染が腺疫を希釈していた
     # — 2026-10 第74弾。症状抽出の _SUBSUMES と同じ包含ルール）。
-    if matched & {"gen_swollen_lymph", "eye_swelling"}:
+    # 四肢の腫脹（limb_filling）も同様 — 「後肢が腫れて熱を持つ」で汎用の体表腫脹が
+    # 肥満細胞腫・頸静脈炎を上位に引き上げていた（2026-10 第82弾）。
+    if matched & {"gen_swollen_lymph", "eye_swelling", "limb_filling"}:
         matched.discard("body_swelling")
 
     return list(matched)

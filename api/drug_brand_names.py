@@ -108,7 +108,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "selegiline": ("アニプリル", "エフピー", "Anipryl"),
     "clonidine": ("カタプレス",),
     # --- 循環器 ---
-    "pimobendan": ("ピモベハート", "アカルディ"),
+    "pimobendan": ("ピモベハート", "アカルディ", "ベトメディン", "Vetmedin"),
     "digoxin": ("ジゴシン",),
     "atenolol": ("テノーミン",),
     "propranolol": ("インデラル", "Inderal"),
