@@ -112,6 +112,7 @@ from api.drug_batch_85 import DRUGS_BATCH_85
 from api.drug_batch_86 import DRUGS_BATCH_86
 from api.drug_batch_87 import DRUGS_BATCH_87
 from api.drug_batch_88 import DRUGS_BATCH_88
+from api.drug_batch_89 import DRUGS_BATCH_89
 from api.drug_brand_names import BRAND_NAME_ALIASES
 
 drug_bp = Blueprint("drug_dictionary", __name__)
@@ -11126,6 +11127,12 @@ for _drug88 in DRUGS_BATCH_88:
     if _drug88["id"] not in _drug_index:
         DRUGS.append(_drug88)
         _drug_index[_drug88["id"]] = _drug88
+
+# Batch 89 (2026-10 第81弾: 組換えヒトTSH（タイロゲン） — TSH刺激試験の刺激薬、Boretti 2006 / Stegeman 2003）
+for _drug89 in DRUGS_BATCH_89:
+    if _drug89["id"] not in _drug_index:
+        DRUGS.append(_drug89)
+        _drug_index[_drug89["id"]] = _drug89
 
 # ---------------------------------------------------------------------------
 # 動物種カバレッジ自動拡張: 類似種への自動展開で「✕」表示を低減

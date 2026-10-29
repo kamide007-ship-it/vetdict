@@ -1804,8 +1804,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:609,drugs:620,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:597,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:609,drugs:621,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:598,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:367,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:418,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:280,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1829,7 +1829,7 @@ function setDefaultStats(){
   pendingStats={
     diseases:6525,
     species:21,
-    drugs:680,
+    drugs:681,
     symptoms:105,
     protocols:188
   };
@@ -5879,9 +5879,25 @@ function renderChatResult(container,data){
     listDiv.className="chat-disease-list";
     // 1位が一般的な疾患でない場合、リスト内の一般的な疾患を先頭で明示（見落とし防止）
     listDiv.insertAdjacentHTML("afterbegin",commonDxNote(candidates.slice(0,5),5));
+    /* 候補ジャンプ・ストリップ: スマホでは5枚の候補カードが数画面に及び、2位以下を
+       読むのに長いスクロールが要った — 「2位 疾患名」をタップでそのカードへ着地
+       （2026-10 第81弾） */
+    if(candidates.length>1){
+      const jump=document.createElement("div");
+      jump.className="chat-cand-jump";
+      jump.setAttribute("role","navigation");
+      jump.setAttribute("aria-label",currentLang==="ja"?"鑑別候補へジャンプ":"Jump to candidate");
+      jump.innerHTML=candidates.slice(0,5).map((c,i)=>{
+        const nm=currentLang==="ja"?(c.name_ja||c.name_en||c.disease_id||""):(c.name_en||c.name_ja||c.disease_id||"");
+        const short=nm.length>12?nm.slice(0,11)+"…":nm;
+        return `<button type="button" class="chat-cand-jump-btn" data-rank="${i+1}">${i+1}${currentLang==="ja"?"位":"."} ${escapeHtml(short)}</button>`;
+      }).join("");
+      listDiv.insertBefore(jump,listDiv.firstChild);
+    }
     candidates.slice(0,5).forEach((c,i)=>{
       const card=document.createElement("div");
       card.className="chat-disease-card";
+      card.dataset.rank=String(i+1);
       // Prefer the backend-calibrated confidence_percent (IDF + prevalence + cluster boost)
       // over the raw Jaccard similarity_score so vets see the same value the model ranks by.
       const pct=Math.round(c.confidence_percent!=null?c.confidence_percent:(c.similarity_score||0)*100);
@@ -8633,6 +8649,21 @@ function toggleDetail(head){
    switch-and-wait, then expands the exact disease at a readable scroll position. */
 function _attachChatNavHandlers(container){
   container.addEventListener("click",function(e){
+    /* 候補ジャンプ → 同じ回答内の n 位カードへ、チャット欄の中でスクロール着地 */
+    const candJump=e.target.closest(".chat-cand-jump-btn");
+    if(candJump){
+      e.preventDefault();
+      const res=candJump.closest(".chat-result")||candJump.closest(".chat-msg");
+      const card=res&&res.querySelector('.chat-disease-card[data-rank="'+candJump.dataset.rank+'"]');
+      if(card){
+        const top=card.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-8;
+        try{container.scrollTo({top:Math.max(0,top),behavior:"smooth"});}catch(err){container.scrollTop=Math.max(0,top);}
+        card.classList.add("chat-card-flash");
+        setTimeout(()=>card.classList.remove("chat-card-flash"),1200);
+        trackEvent("chat_candidate_jump",{rank:candJump.dataset.rank});
+      }
+      return;
+    }
     const drugLink=e.target.closest(".drug-nav-link");
     if(drugLink){e.preventDefault();navigateToDrug(drugLink.dataset.drug);return;}
     /* Emergency-class candidate → open the matching 緊急対応 protocol. */

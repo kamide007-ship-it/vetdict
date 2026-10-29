@@ -100,6 +100,7 @@ SYMPTOM_CATEGORIES: Dict[str, str] = {
     "visible_tissue_protrusion": "digestive",
     "visible_worms": "digestive",
     "vomiting": "digestive",
+    "hairball_retching": "digestive",
     # 骨格・四肢
     "deformity": "musculoskeletal",
     "enlarged_head": "musculoskeletal",
@@ -7213,7 +7214,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Gastric Hairball Obstruction",
         "name_ja": "猫毛球閉塞症",
-        "symptoms": {"vomiting", "appetite_loss", "constipation", "lethargy", "abdominal_pain"},
+        "symptoms": {"hairball_retching", "vomiting", "appetite_loss", "constipation", "lethargy", "abdominal_pain"},
         "description": "Feline Gastric Hairball Obstruction involves blockage of a body passage or organ requiring intervention to restore normal flow.",
         "description_ja": "大きな毛球による胃または腸の閉塞で、内科的または外科的介入が必要です。",
         "urgency": "high",
@@ -11966,7 +11967,7 @@ DISEASES: List[Dict[str, Any]] = [
     {
         "name": "Feline Trichobezoar-Induced Obstruction",
         "name_ja": "猫毛球閉塞",
-        "symptoms": {"vomiting", "appetite_loss", "constipation", "lethargy", "abdominal_pain"},
+        "symptoms": {"hairball_retching", "vomiting", "appetite_loss", "constipation", "lethargy", "abdominal_pain"},
         "description": "Feline Trichobezoar-Induced Obstruction involves blockage of a body passage or organ requiring intervention to restore normal flow.",
         "description_ja": "毛球嵌頓による消化管閉塞で、長毛種により多く見られます。",
         "urgency": "high",
@@ -12634,6 +12635,7 @@ SYMPTOM_NAMES: Dict[str, Dict[str, str]] = {
     "greasy_coat": {"ja": "脂性被毛", "en": "Greasy Coat"},
     "hair_loss": {"ja": "脱毛", "en": "Hair Loss"},
     "head_pressing": {"ja": "ヘッドプレッシング", "en": "Head Pressing"},
+    "hairball_retching": {"ja": "毛玉を吐こうとして出ない（非生産的えずき）", "en": "Unproductive Hairball Retching"},
     "hearing_loss": {"ja": "聴力喪失", "en": "Hearing Loss"},
     "head_shaking": {"ja": "頭振り", "en": "Head Shaking"},
     "head_tilt": {"ja": "斜頸", "en": "Head Tilt"},

@@ -341,6 +341,10 @@ SPECIES_PREVALENCE = {
         "Mammary Tumor": "common",
         "Hypothyroidism (Iatrogenic)": "common",
         "Feline Anterior Uveitis": "common",
+        # 虹彩黒色腫（虹彩メラノーシスからの進展）は高齢猫の緩徐な腫瘍 — 未tierで羞明主訴の
+        # 1位をぶどう膜炎・角膜潰瘍から奪っていた（Maggs, Slatter's 6th; 2026-10 第81弾）
+        "Iris Melanoma": "uncommon",
+        "Feline Horner Syndrome": "uncommon",
         "Inflammatory Bowel Disease (IBD)": "common",
         "Feline Pancreatitis": "common",
         "Feline Tooth Resorption (FORL)": "common",
@@ -401,6 +405,10 @@ SPECIES_PREVALENCE = {
         "Feline Acne": "very_common",
         "Feline Chronic Vomiting (Idiopathic)": "very_common",
         "Feline Gastric Hairball Obstruction": "very_common",
+        # 2026-10 第81弾: 猫の頻拍性不整脈は大半が心筋症の続発 — 未tierで開口呼吸＋虚脱の
+        # 主訴の1位を基礎心疾患（HCM・うっ血性心不全）から奪っていた（Côté, Feline Cardiology）
+        "Arrhythmia - Ventricular Tachycardia": "uncommon",
+        "Feline Supraventricular Tachycardia": "uncommon",
         "Feline Linear Foreign Body": "very_common",
         "Feline Litter Box Aversion": "very_common",
         "Territorial Marking / Urine Spraying": "very_common",

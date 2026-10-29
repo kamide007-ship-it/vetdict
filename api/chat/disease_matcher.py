@@ -14,6 +14,8 @@ from api.species import prevalence_data as _prev_mod
 # (e.g. fin_rot ↔ frayed_fins, hair_loss ↔ alopecia, polydipsia ↔ excessive_thirst).
 # Hoisted to module scope so the dict literal isn't rebuilt on every call.
 _SYN: dict[str, list[str]] = {
+    # 毛玉を吐けない非生産的えずき — 猫喘息の咳は毛玉吐きと誤認される（2026-10 第81弾）
+    "hairball_retching": ["coughing", "vomiting"],
     "frayed_fins": ["fin_rot"],
     "fin_rot": ["frayed_fins"],
     "redness_skin": ["fin_hemorrhage", "hemorrhage", "skin_redness"],
@@ -85,6 +87,9 @@ _SYN: dict[str, list[str]] = {
     "cloudy_eye": ["cloudy_eyes", "corneal_cloudiness", "corneal_opacity"],
     "corneal_opacity": ["corneal_cloudiness", "cloudy_eyes", "cloudy_eye"],
     "corneal_cloudiness": ["corneal_opacity", "cloudy_eyes", "cloudy_eye"],
+    # 猫等は混濁を cloudiness_in_eyes で抽出するが、ぶどう膜炎・角膜潰瘍の症状セットは
+    # corneal_cloudiness 表記（2026-10 第81弾）
+    "cloudiness_in_eyes": ["corneal_cloudiness", "cloudy_eyes", "corneal_opacity"],
     "tearing": ["excessive_tearing", "epiphora"],
     "excessive_tearing": ["tearing", "epiphora"],
     "vision_loss": ["blindness", "cloudy_eye", "cataracts"],
@@ -359,6 +364,10 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # 猫の耳介の波動性腫脹（ぷよぷよ）は耳血腫 until proven otherwise — 外耳炎の
     # 頭振り・掻破に続発する（Little, The Cat; 2026-10 第80弾）
     ("cat", frozenset({"ear_swelling"}), "Feline Aural Hematoma", 1.4),
+    # 毛玉を吐こうとして出ない非生産的えずきは毛球症 — ただし咳を毛玉吐きと誤認する
+    # 猫喘息も同時に鑑別に残す（Padrid 2000; 2026-10 第81弾）
+    ("cat", frozenset({"hairball_retching"}), "Feline Gastric Hairball Obstruction", 1.3),
+    ("cat", frozenset({"hairball_retching"}), "Feline Asthma", 1.35),
     # 中高齢猫の体重減少＋被毛粗剛（毛づやの低下）は慢性腎臓病・甲状腺機能亢進症の
     # 古典的な二徴（AAFP Senior Care Guidelines 2021; ISFM CKD 2016）。寄生虫・脱毛の
     # 皮膚科エントリがカバレッジで上回っていた（2026-10 第76弾）
