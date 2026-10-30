@@ -709,6 +709,10 @@ ID_SYNONYMS: dict[str, list[str]] = {
     # あごが濡れている (slobbers/wet chin — the rabbit/rodent dental hallmark):
     # guinea pig and chinchilla carry wet_chin natively; the rabbit vocabulary
     # expresses ptyalism as drooling/salivation/dewlap_wetness.
+    # 腰を左右に振る歩様（股関節形成不全・変性性脊髄症 — 2026-10 第83弾）
+    # 陰部を舐める（犬: 尿路感染・膣炎の所見、猫: FIC の会陰部グルーミング — 2026-10 第83弾）
+    "genital_licking": ["excessive_grooming", "excessive_licking", "frequent_urination"],
+    "swaying_gait": ["hind_leg_weakness", "hind_limb_weakness", "ataxia", "lameness"],
     "wet_chin": ["drooling", "salivation", "dewlap_wetness", "facial_wetness"],
     # キーキー鳴く (screaming/vocal change): the cat vocabulary carries
     # vocalization_changes natively; ferret and most small mammals use bare
@@ -842,6 +846,10 @@ _SUBSUMES: dict[str, set[str]] = {
     "ear_pain": {"pain"},
     # 頸部痛（2026-10 第78弾）— 「首を痛がってキャンと鳴く」で汎用 pain が眼科へ散らない
     "neck_pain": {"pain"},
+    # リンパ節腫大（首のしこり）は部位特異 — 汎用「しこり」で脂肪腫・肉腫へ散らさない（2026-10 第83弾）
+    "swollen_lymph_nodes": {"lumps", "lumps_and_bumps", "lumps_bumps"},
+    "lymph_node_enlargement": {"lumps", "lumps_and_bumps", "lumps_bumps"},
+    "enlarged_lymph_nodes": {"lumps", "lumps_and_bumps", "lumps_bumps"},
 }
 
 # 眼の所見と同時に抽出された汎用「痛がる/痛そう」は眼痛として読む

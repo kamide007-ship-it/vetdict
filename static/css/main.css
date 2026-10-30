@@ -2207,3 +2207,9 @@ button.cross-nav-btn{font-family:inherit;min-height:32px}
 .chat-cand-jump-btn:hover{border-color:#10b981}
 .chat-disease-card.chat-card-flash{box-shadow:0 0 0 2px #10b981;transition:box-shadow .3s}
 @media(max-width:600px){.chat-cand-jump-btn{min-height:36px;font-size:.78rem}}
+/* 2026-10 第83弾: 鑑別チェッカー結果の候補ジャンプ（チャット版のスタイルを共用） */
+.disease-result.chat-card-flash{box-shadow:0 0 0 2px #10b981;transition:box-shadow .3s}
+.checker-cand-jump{margin:4px 0 10px;width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+/* グリッド項目の min-width:auto により横スクロール帯（nowrap チップ）の最小内容幅が
+   列幅を押し広げ、スマホで結果カードが画面幅を超えてクリップされていた */
+.panels>*{min-width:0}
