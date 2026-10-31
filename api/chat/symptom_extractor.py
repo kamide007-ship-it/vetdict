@@ -842,6 +842,10 @@ _SUBSUMES: dict[str, set[str]] = {
     "ear_pain": {"pain"},
     # 頸部痛（2026-10 第78弾）— 「首を痛がってキャンと鳴く」で汎用 pain が眼科へ散らない
     "neck_pain": {"pain"},
+    # 2026-10 第83弾: 顎下・頸部の「ぐりぐりしたしこり」はリンパ節 — 汎用しこりで乳腺/皮膚腫瘍へ散らさない
+    "swollen_lymph_nodes": {"lumps", "lumps_and_bumps", "lumps_bumps"},
+    # 足底・肉球の病変は局所痛を包含（「肉球がひび割れて痛そう」で汎用 pain が緑内障へ）
+    "foot_sores": {"pain"},
 }
 
 # 眼の所見と同時に抽出された汎用「痛がる/痛そう」は眼痛として読む

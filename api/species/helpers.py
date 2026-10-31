@@ -160,12 +160,21 @@ def _canonical_preferred_slugs() -> set:
     except Exception:
         pass
     _CANON_PREF_CACHE = canon - merged
-    global _CANON_MERGED_CACHE
+    global _CANON_MERGED_CACHE, _CANON_ALL_CACHE
     _CANON_MERGED_CACHE = merged - canon
+    _CANON_ALL_CACHE = canon
     return _CANON_PREF_CACHE
 
 
 _CANON_MERGED_CACHE: set | None = None
+_CANON_ALL_CACHE: set | None = None
+
+
+def _canonical_any_slugs() -> set:
+    """Every slug some map declares canonical (including cross-species conflicts)."""
+    if _CANON_ALL_CACHE is None:
+        _canonical_preferred_slugs()
+    return _CANON_ALL_CACHE or set()
 
 
 def _canonical_merged_slugs() -> set:
@@ -408,6 +417,26 @@ def dedupe_disease_list(diseases: List[Any]) -> List[Any]:
                 and _dedup_slug(_disease_field(diseases[i], "name", "") or _disease_field(diseases[i], "name_en", ""))
                 in canon_pref
             ]
+            # Vanish guard fallback (2026-10 第83弾): a slug that is canonical in
+            # one species' map but merged away in another (e.g. "heat-stroke") is
+            # dropped from canon_pref, so when the richness winner is itself a
+            # merged-away twin nothing protected the canonical card and the
+            # disease vanished (chinchilla Heat Stroke). Only for that vanish case,
+            # fall back to the raw canonical slug set.
+            if not canon_alt:
+                _bslug = _dedup_slug(
+                    _disease_field(diseases[best], "name", "") or _disease_field(diseases[best], "name_en", "")
+                )
+                if _bslug in _canonical_merged_slugs():
+                    canon_alt = [
+                        i
+                        for i in idxs
+                        if i not in bare_idx
+                        and _dedup_slug(
+                            _disease_field(diseases[i], "name", "") or _disease_field(diseases[i], "name_en", "")
+                        )
+                        in _canonical_any_slugs()
+                    ]
             if canon_alt and best not in canon_alt:
                 cand = max(canon_alt, key=lambda i: (_dedup_richness(diseases[i]), -i))
                 rb, rc = _dedup_richness(diseases[best]), _dedup_richness(diseases[cand])
@@ -456,11 +485,13 @@ def _inherit_dedup_content(canonical: Any, donor: Any) -> Any:
         return canonical
     out = dict(canonical)
     for f in _DEDUP_CONTENT_FIELDS:
-        dv = _disease_field(donor, f, "")
-        if _is_template_text(dv):
+        dv = _disease_field(donor, f, "") or ""
+        if not (isinstance(dv, str) and dv.strip()) or _is_template_text(dv):
             continue
-        cv = out.get(f)
-        if _is_template_text(cv) or len(dv) > len(cv):
+        cv = out.get(f) or ""
+        if not isinstance(cv, str):
+            continue
+        if not cv.strip() or _is_template_text(cv) or len(dv) > len(cv):
             out[f] = dv
     return out
 
@@ -1071,6 +1102,12 @@ _TEMPLATE_MARKERS = (
     # listed for mites and dermatophytes — 第70弾)
     "Anti-parasitic therapy appropriate to the parasite (fenbendazole",
     "Species-appropriate antiparasitic (ivermectin, fenbendazole, praziquantel, or selamectin depending on parasite type)",
+    # 汎用ワークアップ・テンプレート（「…正確な臨床評価（病歴、身体検査、CBC・生化学、画像）
+    # から治療方針を決定」＋定型の輸液・メサドン支持療法）。配信DBビルドの _guard_treatment は
+    # 既にこれをテンプレート扱いしていたが実行時オーバーレイでは未登録で、低メモリ本番の
+    # 疾患ブラウザでは猫の低カリウム血症等が JSON のキュレート治療文に置換されなかった
+    # （2026-10 第83弾）
+    "正確な臨床評価（病歴、身体検査、CBC・生化学、画像）から治療方針を決定",
 )
 
 

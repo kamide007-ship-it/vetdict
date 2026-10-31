@@ -100,6 +100,18 @@ def build_species_entries(species: str) -> list[dict]:
     except Exception:
         diseases = raw
     orig_index = {id(e): i for i, e in enumerate(raw)}
+    # apply_canonical_map returns content-inheriting copies too, so also key the
+    # source position by name (unique per species after dedupe).
+    try:
+        from api.species.helpers import dedupe_original as _orig
+    except Exception:  # pragma: no cover
+        _orig = lambda e: e  # noqa: E731
+    name_index: dict[str, int] = {}
+    for _d in diseases:
+        _i = orig_index.get(id(_orig(_d)), orig_index.get(id(_d)))
+        _n = _attr(_d, "name_en", "") or _attr(_d, "name", "")
+        if _i is not None and _n:
+            name_index.setdefault(_n, _i)
 
     try:
         from api.species.canonical import apply_canonical_map
@@ -120,7 +132,18 @@ def build_species_entries(species: str) -> list[dict]:
         name = _attr(d, "name_en", "") or _attr(d, "name", "")
         name_ja = _attr(d, "name_ja", "") or name
         urgency = _attr(d, "urgency", "") or _attr(d, "severity", "") or ""
-        i = orig_index.get(id(d), 0)
+        # Content-inheriting dedupe copies map back to their source object
+        # (mirrors migrate_to_sqlite.py — otherwise every restored canonical
+        # card fell back to index 0 and collided on "<species>_0000").
+        try:
+            from api.species.helpers import dedupe_original
+
+            src = dedupe_original(d)
+        except Exception:  # pragma: no cover
+            src = d
+        i = orig_index.get(id(src), orig_index.get(id(d)))
+        if i is None:
+            i = name_index.get(_attr(d, "name_en", "") or _attr(d, "name", ""), 0)
         disease_id = _attr(d, "id", "")
         if not disease_id:
             fallback = f"{species}_{i:04d}"
