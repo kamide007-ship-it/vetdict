@@ -38,7 +38,11 @@ class TestDedupeUnit:
         ]
         out = dedupe_disease_list(items)
         assert len(out) == 1
-        assert out[0]["name"] == "Heat Stroke - Chinchilla"
+        # "Heat Stroke - Chinchilla" is merged away by the chinchilla canonical map
+        # (it would be hidden when served) — the canonical card survives and carries
+        # the richer twin's curated content (2026-10 第83弾: vanish-guard fallback).
+        assert out[0]["name"] == "Heat Stroke"
+        assert out[0]["causes_ja"] == "a" * 500
 
     def test_keeps_distinct_diseases(self):
         items = [

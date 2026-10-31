@@ -1808,26 +1808,26 @@ function setDefaultStats(){
     {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:599,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:367,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:418,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
-    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:280,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
+    {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:281,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
     {id:"guinea_pig",name:"モルモット",nameEn:"Guinea Pig",icon:"\u{1F43E}",diseases:306,drugs:132,description:"Vitamin C deficiency and respiratory diseases",description_ja:"ビタミンC欠乏症や呼吸器疾患"},
-    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:230,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
+    {id:"chinchilla",name:"チンチラ",nameEn:"Chinchilla",icon:"\u{1F43E}",diseases:234,drugs:92,description:"Chinchilla dental and digestive conditions",description_ja:"チンチラの歯科・消化器疾患"},
     {id:"ferret",name:"フェレット",nameEn:"Ferret",icon:"\u{1F43E}",diseases:248,drugs:199,description:"Ferret endocrine and neoplastic diseases",description_ja:"フェレットの内分泌・腫瘍疾患"},
-    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:224,drugs:64,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
+    {id:"hedgehog",name:"ハリネズミ",nameEn:"Hedgehog",icon:"\u{1F994}",diseases:225,drugs:64,description:"Hedgehog skin and neurological conditions",description_ja:"ハリネズミの皮膚・神経疾患"},
     {id:"sugar_glider",name:"フクロモモンガ",nameEn:"Sugar Glider",icon:"\u{1F43E}",diseases:197,drugs:77,description:"Nutritional diseases and stress-related conditions",description_ja:"栄養性疾患やストレス関連症状"},
     {id:"degu",name:"デグー",nameEn:"Degu",icon:"\u{1F43E}",diseases:178,drugs:154,description:"Degu diabetes and dental diseases",description_ja:"デグーの糖尿病・歯科疾患"},
     {id:"bird",name:"鳥",nameEn:"Bird",icon:"\u{1F426}",diseases:500,drugs:244,description:"Avian infections and nutritional diseases",description_ja:"鳥類全般の感染症・栄養疾患"},
     {id:"parakeet",name:"インコ",nameEn:"Parakeet",icon:"\u{1F99C}",diseases:413,drugs:244,description:"Parakeet respiratory and feather disorders",description_ja:"インコの呼吸器・羽毛疾患"},
     {id:"parrot",name:"オウム",nameEn:"Parrot",icon:"\u{1F99C}",diseases:262,drugs:244,description:"Psittacosis, PBFD, and large parrot diseases",description_ja:"オウム病やPBFDなど大型鳥の疾患"},
-    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:264,drugs:103,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
-    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:254,drugs:110,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
-    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:221,drugs:109,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
-    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:218,drugs:105,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
+    {id:"reptile",name:"爬虫類",nameEn:"Reptile",icon:"\u{1F98E}",diseases:265,drugs:103,description:"Metabolic bone disease and general reptile conditions",description_ja:"爬虫類全般の代謝性骨疾患など"},
+    {id:"tortoise",name:"リクガメ",nameEn:"Tortoise",icon:"\u{1F422}",diseases:255,drugs:110,description:"Tortoise shell and respiratory disorders",description_ja:"リクガメの甲羅・呼吸器疾患"},
+    {id:"snake",name:"ヘビ",nameEn:"Snake",icon:"\u{1F40D}",diseases:222,drugs:109,description:"Snake respiratory infections and dysecdysis",description_ja:"ヘビの呼吸器感染症・脱皮異常"},
+    {id:"lizard",name:"トカゲ",nameEn:"Lizard",icon:"\u{1F98E}",diseases:219,drugs:105,description:"Lizard parasitic and metabolic diseases",description_ja:"トカゲの寄生虫症・代謝疾患"},
     {id:"amphibian",name:"両生類",nameEn:"Amphibian",icon:"\u{1F438}",diseases:251,drugs:19,description:"Chytrid fungus and amphibian diseases",description_ja:"カエル・イモリのツボカビ症など"},
     {id:"fish",name:"魚",nameEn:"Fish",icon:"\u{1F41F}",diseases:45,drugs:29,description:"Ich, fin rot, dropsy and aquarium fish diseases",description_ja:"白点病・尾ぐされ病・松かさ病など観賞魚の疾患"},
     {id:"exotic_other",name:"その他エキゾチック",nameEn:"Exotic Other",icon:"\u{1F43E}",diseases:265,drugs:3,description:"Diseases of other exotic animals",description_ja:"その他のエキゾチックアニマルの疾患"},
   ];
   pendingStats={
-    diseases:6525,
+    diseases:6535,
     species:21,
     drugs:682,
     symptoms:106,
@@ -3434,6 +3434,18 @@ function renderResults(data){
   }
   const sevLabels=t("sevLabels");
   let html=`<div class="severity-bar ${severity}">${t("overallAssessment")}${sevLabels[severity]||severity}</div>`;
+  /* 候補ジャンプ・ストリップ（2026-10 第83弾）: 鑑別結果は「よくある/稀」の2相＋
+     並び替えで数画面に及び、スマホでは上位候補を比べるのに長いスクロールが要った。
+     信頼度上位5件を「1位 疾患名」チップで先頭に並べ、タップで該当カードを展開して
+     sticky ヘッダー直下に着地（折りたたみ中の候補は表示してから着地）。 */
+  if(diseases.length>1){
+    const ranked=[...diseases].sort((a,b)=>(b.match_percent||b.confidence||0)-(a.match_percent||a.confidence||0)).slice(0,5);
+    html+=`<div class="chat-cand-jump dx-cand-jump" role="navigation" aria-label="${currentLang==="ja"?"鑑別候補へジャンプ":"Jump to candidate"}">${ranked.map((d,i)=>{
+      const nm=currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
+      const short=nm.length>12?nm.slice(0,11)+"…":nm;
+      return `<button type="button" class="chat-cand-jump-btn dx-cand-jump-btn" data-dx-name="${escapeHtml(d.name||d.name_ja||"")}" data-rank="${i+1}">${i+1}${currentLang==="ja"?"位":"."} ${escapeHtml(short)}</button>`;
+    }).join("")}</div>`;
+  }
   /* Low-confidence warning: alert when symptom count <=2 or top confidence <50% */
   const topPct=diseases[0]?diseases[0].match_percent||diseases[0].confidence||0:0;
   const symCount=selectedSymptoms?selectedSymptoms.size:0;
@@ -3537,6 +3549,22 @@ function renderResults(data){
       const parent=moreBtn.parentElement;
       if(parent)parent.querySelectorAll(".disease-result.dx-hidden").forEach(c=>c.classList.remove("dx-hidden"));
       moreBtn.remove();
+      return;
+    }
+    const dxJump=e.target.closest(".dx-cand-jump-btn");
+    if(dxJump){
+      e.preventDefault();
+      const want=dxJump.dataset.dxName||"";
+      const card=[...contentDiv.querySelectorAll(".disease-result")].find(c=>c.dataset.dxName===want);
+      if(card){
+        card.classList.remove("dx-hidden");
+        const head=card.querySelector(".disease-head");
+        if(head&&head.getAttribute("aria-expanded")!=="true")toggleDetail(head);/* 展開＋着地 */
+        else scrollToAnchor(card);
+        card.classList.add("chat-card-flash");
+        setTimeout(()=>card.classList.remove("chat-card-flash"),1200);
+        trackEvent("checker_candidate_jump",{rank:dxJump.dataset.rank});
+      }
       return;
     }
     const drugLink=e.target.closest(".drug-nav-link");
@@ -4585,7 +4613,7 @@ function renderDiseaseCard(d,data){
   const matchRatioLabel=inputCount>0&&matchedCount>0
     ?(currentLang==="ja"?`${matchedCount}/${inputCount}症状一致`:`${matchedCount}/${inputCount} symptoms matched`)
     :"";
-  let html=`<div class="disease-result disease-${escapeHtml(likelihood)}" style="animation-delay:${delay}ms">
+  let html=`<div class="disease-result disease-${escapeHtml(likelihood)}" data-dx-name="${escapeHtml(nameEn)}" style="animation-delay:${delay}ms">
     <div class="disease-head" role="button" tabindex="0" aria-expanded="false">
       <div class="disease-head-info">
         <div class="disease-name-row">

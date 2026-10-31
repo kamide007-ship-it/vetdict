@@ -294,6 +294,12 @@ SPECIES_PREVALENCE = {
         # 先天奇形 — 猫の異所性尿管は犬よりさらに稀（Holt & Gibbs）。未tierのまま
         # 3所見セットのカバレッジで血尿+頻尿主訴のFIC/UTIを上回っていた
         "Feline Ectopic Ureter": "rare",
+        # 2026-10 第83弾: 嘔吐単独の主訴で未tierの稀少疾患が上位を占めていた —
+        # 猫自律神経障害（キー・ガスケル症候群）は1980年代英国の集団発生以降ごく稀、
+        # 筋無力症クリーゼも稀（Little, The Cat）
+        "Feline Dysautonomia (Key-Gaskell Syndrome) - Acute": "rare",
+        "Feline Myasthenic Crisis": "rare",
+        "Feline Polycystic Liver Disease": "uncommon",
         # 2026-10 第73弾: 曝露歴依存の外傷・市販食で実質不在の栄養欠乏が、口腔潰瘍＋
         # 流涎の主訴で慢性歯肉口内炎（FCGS）を上回っていた
         "Feline Electric Cord Bite Injury": "rare",
@@ -1391,6 +1397,13 @@ SPECIES_PREVALENCE = {
         # ビタミンC欠乏の関節症型はモルモットの古典的表現型（Quesenberry &
         # Carpenter 4th ed）— 壊血病本体と同格の common
         "Scurvy-Related Arthritis": "common",
+        # 歯肉出血・運動嫌忌はモルモットではビタミンC欠乏 until proven otherwise。
+        # くる病（日光照射・Ca/P/VitD 不足）とビタミンE欠乏はモルモットでは稀で、
+        # 壊血病と同じクローン症状セット（歯肉出血）を持ち未tierで上位を奪っていた
+        # （Quesenberry & Carpenter 4th ed; 2026-10 第83弾）
+        "Rickets": "rare",
+        "Vitamin E Deficiency": "uncommon",
+        "Hypovitaminosis C - Dental": "common",
         "Pregnancy Toxemia - Pre-partum": "uncommon",  # 繁殖雌限定の変異エントリ
         "Pleuritis": "uncommon",  # 肺炎等の続発病態
         "Diarrhea": "very_common",

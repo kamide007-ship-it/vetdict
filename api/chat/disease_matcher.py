@@ -445,6 +445,9 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     ("cat", frozenset({"muscle_weakness", "vocalization_changes"}), "Aortic Thromboembolism (Saddle Thrombus)", 1.35),
     # モルモットの激しい掻痒＋痙攣発作は Trixacarus caviae 疥癬の定義的像
     # （掻痒誘発性発作 — Quesenberry & Carpenter 4th ed）。
+    # モルモットの歯肉出血はビタミンC欠乏（壊血病）の定義的徴候（コラーゲン合成障害 —
+    # Quesenberry & Carpenter 4th ed; 2026-10 第83弾）
+    ("guinea_pig", frozenset({"bleeding_gums"}), "Scurvy (Vitamin C Deficiency)", 1.4),
     ("guinea_pig", frozenset({"itching", "seizures"}), "Trixacarus caviae (Sarcoptic Mange) - Severe", 1.45),
     ("guinea_pig", frozenset({"itching", "seizures"}), "Trixacarus caviae Mange", 1.45),
     # 発熱＋腹部膨満（腹水）の猫は滲出型FIP until proven otherwise — 猫の
