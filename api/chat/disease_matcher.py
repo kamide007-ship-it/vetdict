@@ -361,6 +361,10 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # backing — it exists to stop umbrella syndromes with long symptom lists
 # losing on coverage to narrow rarities.
 _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    # 肥満猫の多飲は糖尿病 until proven otherwise — 肥満は猫2型糖尿病の最大の危険因子
+    # （約4倍、Scarlett & Donoghue 1998; ISFM Consensus on DM 2015）。稀な副腎腫瘍・
+    # 先端巨大症が2所見カバレッジで上位を占めていた（2026-11 第83弾）
+    ("cat", frozenset({"weight_gain", "excessive_thirst"}), "Diabetes Mellitus", 1.45),
     # 猫の耳介の波動性腫脹（ぷよぷよ）は耳血腫 until proven otherwise — 外耳炎の
     # 頭振り・掻破に続発する（Little, The Cat; 2026-10 第80弾）
     ("cat", frozenset({"ear_swelling"}), "Feline Aural Hematoma", 1.4),

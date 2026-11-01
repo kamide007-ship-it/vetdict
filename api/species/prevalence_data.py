@@ -242,6 +242,9 @@ SPECIES_PREVALENCE = {
     # CAT — 230+ entries (expanded from ~73)
     # ==================================================================
     "cat": {
+        # 2026-11 第83弾: 猫の副腎腫瘍（アルドステロン産生腺腫等）は稀 — 肥満猫の多飲主訴で
+        # 糖尿病を上回っていた（Djajadiningrat-Laanen 2011 JVIM）
+        "Feline Adrenal Tumor": "uncommon",
         # 2026-10 第67弾: 跳躍不能（猫DJDの最頻の飼い主所見）主訴で未tierの稀な
         # 脊椎・栄養性エントリが変形性関節症を上回っていた
         "Feline Atlantoaxial Instability": "rare",

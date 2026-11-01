@@ -4020,6 +4020,61 @@ SYMPTOM_ALIASES = {
     "ダニがたくさん": "visible_mites",
     "ダニが沢山": "visible_mites",
     "ダニがいっぱい": "visible_mites",
+    # 2026-11 第83弾（チャット精度第58回）
+    # 挙上肢位の漢字形（「後ろ足を上げました」— 従来は「足を上げてる」のみ）
+    "後ろ足を上げ": "lameness_or_limping",
+    "前足を上げ": "lameness_or_limping",
+    "片足を上げ": "lameness_or_limping",
+    # 肛門周囲腫脹の素の形（「お尻の周りが腫れ」の周り省略形）
+    "おしりが腫れ": "perianal_swelling",
+    "お尻が腫れ": "perianal_swelling",
+    "肛門が腫れ": "perianal_swelling",
+    # 後躯の沈下（腰が落ちる＝後肢虚弱の飼い主表現）
+    "腰が落ち": "ataxia",
+    "腰が下が": "ataxia",
+    # 毛玉の頻回嘔吐（過剰グルーミング・毛球症の手がかり）
+    "毛玉をよく吐": "hairball_retching",
+    "毛玉をたくさん吐": "hairball_retching",
+    "毛玉ばかり吐": "hairball_retching",
+    # 腹部の舐め壊し（猫の過剰グルーミング — 「舐めている」より長いキー）
+    "お腹を舐めて": "excessive_grooming",
+    "お腹をなめて": "excessive_grooming",
+    "おなかを舐めて": "excessive_grooming",
+    "内股を舐めて": "excessive_grooming",
+    # 眼脂の膿性変化（「目から白い膿」— 汎用の「膿が出て」に負けていた）
+    "目から白い膿": "eye_discharge",
+    "目から黄色い膿": "eye_discharge",
+    "目から膿が出て": "eye_discharge",
+    "目やにが膿": "eye_discharge",
+    # 歯肉の腫瘤（「歯茎にしこり」— 汎用「しこり」で乳腺腫瘍へ散っていた）
+    "歯茎にしこり": "oral_mass",
+    "歯ぐきにしこり": "oral_mass",
+    "歯肉にしこり": "oral_mass",
+    "歯茎が盛り上が": "oral_mass",
+    # 肉球の亀裂・角化（趾端の病変として跛行/舐め鑑別へ）
+    "肉球がひび割れ": "foot_sores",
+    "肉球が割れ": "foot_sores",
+    "肉球がガサガサ": "foot_sores",
+    "肉球が硬く": "foot_sores",
+    # 黄疸の全身表現（部位修飾あり。裸の「黄色く」は尿・便と衝突するため登録しない）
+    "体が黄色く": "jaundice",
+    "全身が黄色く": "jaundice",
+    "肌が黄色く": "jaundice",
+    # 猫ざ瘡の形容詞連用形（「顎の下が黒く」— 既存は「顎の下に黒い」のみ）
+    "顎の下が黒く": "chin_swelling",
+    "あごの下が黒く": "chin_swelling",
+    "顎がぶつぶつ": "chin_swelling",
+    # 肥満（猫の糖尿病リスク因子の飼い主表現）
+    "太っていて": "weight_gain",
+    "太ってい": "weight_gain",
+    # 臀部への糞の固着（ウサギの盲腸便摂取障害）
+    "お尻に糞がこびりつ": "abnormal_cecotropes",
+    "お尻にうんちがこびりつ": "abnormal_cecotropes",
+    "お尻に便がこびりつ": "abnormal_cecotropes",
+    # 甲羅の穴・陥凹（カメの甲羅腐敗症）
+    "甲羅に穴": "shell_pitting",
+    "甲羅がへこんで臭": "shell_rot",
+    "甲羅が臭": "foul_odor",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

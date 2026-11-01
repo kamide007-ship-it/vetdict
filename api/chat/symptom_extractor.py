@@ -373,7 +373,7 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "polydipsia": ["excessive_thirst", "increased_thirst"],
     "polyuria": ["excessive_urination", "frequent_urination", "increased_urination"],
     # Musculoskeletal
-    "joint_pain_or_stiffness": ["joint_pain", "arthritis", "stiffness"],
+    "joint_pain_or_stiffness": ["joint_pain", "swollen_joints", "joint_swelling", "arthritis", "stiffness"],
     # Behavior
     "anxiety": ["restlessness", "pacing", "nervousness", "hyperactivity"],
     "self_mutilation": ["self_chewing", "self_harm", "overgrooming", "feather_plucking"],
@@ -835,13 +835,18 @@ _SUBSUMES: dict[str, set[str]] = {
     "back_pain": {"pain"},
     "abdominal_pain": {"pain"},
     # 肛門周囲の腫瘤（2026-10 第50回）は部位特異 — 汎用「しこり」で乳腺/皮膚腫瘍へ散らさない
-    "perianal_swelling": {"lumps", "lumps_and_bumps", "lumps_bumps"},
+    "perianal_swelling": {"lumps", "lumps_and_bumps", "lumps_bumps", "pain"},
     # 歯の吸収・欠損は口腔の局所痛を包含
     "tooth_loss": {"pain"},
     # 耳の触診痛（2026-10 第77弾）— 「耳を触ると痛がる」で汎用 pain が緑内障へ散らない
     "ear_pain": {"pain"},
     # 頸部痛（2026-10 第78弾）— 「首を痛がってキャンと鳴く」で汎用 pain が眼科へ散らない
     "neck_pain": {"pain"},
+    # 2026-11 第83弾: 肢の挙上・肛門周囲腫脹・眼脂の膿は部位特異 — 汎用 pain/膿瘍を包含
+    # （「後ろ足を上げました」「おしりが腫れて痛がる」で汎用 pain が緑内障へ散っていた）
+    "lameness_or_limping": {"pain"},
+    "eye_discharge": {"abscess"},
+    "oral_mass": {"lumps", "lumps_and_bumps", "lumps_bumps"},
 }
 
 # 眼の所見と同時に抽出された汎用「痛がる/痛そう」は眼痛として読む

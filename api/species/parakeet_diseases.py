@@ -2704,7 +2704,7 @@ DISEASES: List[Dict[str, Any]] = [
         "urgency": "moderate",
         "recommended_tests": ["clinical_examination", "radiography", "beak_correction"],
         "treatment": "Dental correction under anesthesia, pain management, dietary modification to high-fiber foods, and regular dental monitoring.",
-        "treatment_ja": "【インコにおける嘴不正咬合（シザービーク）】\n嘴不正咬合（シザービーク）の治療には全身麻酔下での歯科処置が必須（無麻酔処置は不十分かつ安全性に欠ける）。\n高速ダイヤモンドバーで臼歯研磨、過長切歯トリミング、インコの上下咬合バランス回復。\n膿瘍合併時は外科的排膿＋ドキシサイクリン 5-10 mg/kg PO q12h × 4-6週（嫌気性菌カバー）。\n鎮痛: メロキシカム 0.5-1 mg/kg PO q12-24h、強オピオイド使用時はモニタ強化。\n予防のため繊維質食材（チモシー、葉物野菜）を主食、咀嚼促進のためペレットを最小化。\n支持療法（鳥類）: 保温28-30℃（重症は30-32℃）、皮下/骨内輸液 50-100 mL/kg/日 （温乳酸リンゲルまたはノルモソルR）、強制給餌（Emeraid Omnivore/Carnivoreなど 20-30 mL/kg q4-6h）、酸素分圧40%以下を維持しつつ呼吸補助。\n【鑑別と経過観察】類似症候を呈する疾患の除外と、治療4-8週後の再評価が予後改善の鍵。重症度・併発症によってはインコの専門医紹介を考慮する。",
+        "treatment_ja": "【インコにおける嘴不正咬合（シザービーク）】\n嘴不正咬合（シザービーク）の処置は保定または短時間の鎮静・麻酔下で行う（過度の保定ストレスを避ける）。\n嘴の過長・変形は基礎疾患（肝疾患・栄養不良・疥癬・PBFD・外傷）の評価を優先し、回転工具ややすりで少量ずつ整形する（血管・神経が近く、出血・過熱に注意。必要に応じ数週毎に反復）。\n口腔・嘴の病変は生検で鑑別し、感染時は培養感受性に基づく抗菌薬を選択。\n鎮痛: メロキシカム 1.0-1.6 mg/kg PO q12-24h（オウム類の薬物動態 — Cole 2009; Carpenter 6th）。\n予防: 止まり木の材質・太さの多様化、硬さの異なる餌とカトルボーン・ミネラルブロックで嘴の自然な摩耗を促す。\n支持療法（鳥類）: 保温28-30℃（重症は30-32℃）、皮下/骨内輸液 50-100 mL/kg/日 （温乳酸リンゲルまたはノルモソルR）、強制給餌（Emeraid Omnivore/Carnivoreなど 20-30 mL/kg q4-6h）、酸素分圧40%以下を維持しつつ呼吸補助。\n【鑑別と経過観察】類似症候を呈する疾患の除外と、治療4-8週後の再評価が予後改善の鍵。重症度・併発症によってはインコの専門医紹介を考慮する。",
         "prognosis": "Fair to good with regular dental management. Hereditary malocclusion requires lifelong monitoring and periodic correction.",
         "prognosis_ja": "定期的な歯科管理で予後やや良好〜良好。遺伝性不正咬合は生涯にわたるモニタリングと定期的な処置が必要。",
         "onset_pattern": {"chronic"},
