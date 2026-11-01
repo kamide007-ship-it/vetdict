@@ -1071,6 +1071,9 @@ _TEMPLATE_MARKERS = (
     # listed for mites and dermatophytes — 第70弾)
     "Anti-parasitic therapy appropriate to the parasite (fenbendazole",
     "Species-appropriate antiparasitic (ivermectin, fenbendazole, praziquantel, or selamectin depending on parasite type)",
+    # 内容空虚な治療スタブ（「…の治療: 原因の鑑別診断に基づく特異的治療。支持療法…」）—
+    # 猫の口腔腫瘤・好酸球性肉芽腫等でキュレート済みJSONの治療文を押しのけていた（2026-11 第83弾）
+    "原因の鑑別診断に基づく特異的治療。支持療法（輸液・栄養・疼痛管理）。環境管理。定期的なモニタリングと治療調整。",
 )
 
 

@@ -246,6 +246,99 @@ def meloxicam_line_ja(species: str) -> str:
     return "鎮痛: メロキシカム 0.2-0.5 mg/kg PO q24h（小型哺乳類 — 種に応じて用量を調整）。"
 
 
+# 常生歯（切歯・臼歯とも生涯伸び続ける）の草食小型哺乳類 — 臼歯研磨・切歯トリミングが
+# 正しい処置になるのはこの群のみ（ハムスター・プレーリードッグは切歯のみ常生）
+ELODONT_SPECIES = frozenset({"rabbit", "guinea_pig", "chinchilla", "degu", "hamster", "exotic_other"})
+
+DENTAL_HEAD_DEFAULT_JA = "の治療には全身麻酔下での歯科処置が必須（無麻酔処置は不十分かつ安全性に欠ける）。"
+DENTAL_HEAD_JA = {
+    "horse": "の治療は立位鎮静下での歯科処置が基本（全身麻酔は外科的抜歯等に限る）。",
+    "bird": "の処置は保定または短時間の鎮静・麻酔下で行う（過度の保定ストレスを避ける）。",
+    "parakeet": "の処置は保定または短時間の鎮静・麻酔下で行う（過度の保定ストレスを避ける）。",
+    "parrot": "の処置は保定または短時間の鎮静・麻酔下で行う（過度の保定ストレスを避ける）。",
+    "tortoise": "の処置は保定または短時間の鎮静・麻酔下で行う（過度の保定ストレスを避ける）。",
+}
+BIRD_BEAK_PREVENTION_JA = (
+    "予防: 止まり木の材質・太さの多様化、硬さの異なる餌とカトルボーン・ミネラルブロックで嘴の自然な摩耗を促す。"
+)
+TORT_BEAK_PREVENTION_JA = "予防: 硬めの葉野菜・野草中心の給餌、カルシウム源と適切なUV-B照射で嘴の自然な摩耗を促す。"
+
+# 旧テンプレート（全種共通の常生歯プロトコル）の識別行 — fix_dental_template_species.py で使用
+LEGACY_DENTAL_TEMPLATE_LINES = (
+    "高速ダイヤモンドバーで臼歯研磨、過長切歯トリミング、",
+    "膿瘍合併時は外科的排膿＋ドキシサイクリン 5-10 mg/kg PO q12h × 4-6週（嫌気性菌カバー）。",
+    "鎮痛: メロキシカム 0.5-1 mg/kg PO q12-24h、強オピオイド使用時はモニタ強化。",
+    "予防のため繊維質食材（チモシー、葉物野菜）を主食、咀嚼促進のためペレットを最小化。",
+)
+
+
+def dental_lines_ja(species: str, name_ja: str) -> list[str]:
+    """Species-appropriate dental management lines (2026-11 第83弾).
+
+    旧版は全種に常生歯の処置（臼歯研磨・切歯トリミング・チモシー主食）と
+    メロキシカム 0.5-1 mg/kg（犬猫の5-10倍量）を出力していた。
+    """
+    species_ja = _species_label_ja(species)
+    head = f"{name_ja}{DENTAL_HEAD_JA.get(species, DENTAL_HEAD_DEFAULT_JA)}"
+    if species in ELODONT_SPECIES:
+        return [
+            head,
+            f"高速ダイヤモンドバーで臼歯研磨、過長切歯トリミング、{species_ja}の上下咬合バランス回復。",
+            "膿瘍合併時は外科的排膿＋ドキシサイクリン 5-10 mg/kg PO q12h × 4-6週（嫌気性菌カバー）。",
+            "鎮痛: メロキシカム 0.5-1 mg/kg PO q12-24h、強オピオイド使用時はモニタ強化。",
+            "予防のため繊維質食材（チモシー、葉物野菜）を主食、咀嚼促進のためペレットを最小化。",
+        ]
+    return [head] + dental_body_lines_ja(species)
+
+
+def dental_body_lines_ja(species: str) -> list[str]:
+    """The species-specific body that replaces the legacy elodont template lines."""
+    if species in ("dog", "cat"):
+        return [
+            "全顎歯科X線で歯根・歯槽骨を評価したうえで、スケーリング・ポリッシング、動揺歯・破折歯・吸収病変歯は抜歯（AAHA Dental Care Guidelines 2019）。",
+            "口腔内の腫瘤は切除前に生検で良性・悪性を鑑別し、悪性は広範切除（顎骨部分切除）±放射線を検討。",
+            "二次感染時はアモキシシリン・クラブラン酸 12.5-25 mg/kg PO q12h またはクリンダマイシン 5.5-11 mg/kg PO q12h。",
+            (
+                "鎮痛: ブプレノルフィン 0.02-0.03 mg/kg OTM q8h、NSAIDはメロキシカム 0.05 mg/kg 初回→0.025 mg/kg PO q24h（短期・腎機能と脱水を確認 — ISFM/AAFP 2010）。"
+                if species == "cat"
+                else "鎮痛: メロキシカム 0.2 mg/kg 初回→0.1 mg/kg PO q24h、抜歯後は局所麻酔（眼窩下/下顎孔ブロック）を併用。"
+            ),
+            "予防: 毎日の歯みがき（VOHC認定製品）と年1回の口腔検診。",
+        ]
+    if species == "horse":
+        return [
+            "鎮静（デトミジン 0.01-0.02 mg/kg IV＋ブトルファノール 0.01-0.02 mg/kg IV）下で開口器を用いて口腔内を精査し、鋭縁・段差をフローティング（削合）で是正（Baker & Easley, Equine Dentistry 3rd ed）。",
+            "歯根膿瘍・破折歯は頭部X線/CTで評価し、抜歯または経口抜去・排膿＋全身抗菌薬。",
+            "鎮痛: フルニキシン 1.1 mg/kg IV/PO q24h またはフェニルブタゾン 2.2-4.4 mg/kg PO q12-24h（短期間）。",
+            "予防: 6-12ヶ月毎の定期歯科検査、長物乾草中心の給餌で咀嚼を促す。",
+        ]
+    if species in ("ferret", "hedgehog", "sugar_glider"):
+        return [
+            f"全身麻酔下で歯石除去（スケーリング）・ポリッシングを行い、動揺歯・破折歯は歯科X線のうえ抜歯（{_species_label_ja(species)}の歯は常生歯ではなく、臼歯研磨・切歯トリミングは不要）。",
+            "膿瘍・歯周炎の二次感染時はアモキシシリン・クラブラン酸 12.5 mg/kg PO q12h（Carpenter 6th）。",
+            meloxicam_line_ja(species),
+            "予防: 軟らかい餌・甘味の多い補助食を避け、定期的な口腔検診。",
+        ]
+    if species in ("lizard", "reptile", "snake"):
+        return [
+            "鎮静/麻酔下で歯垢・歯石・壊死組織を除去し、罹患した歯槽骨を掻爬、クロルヘキシジン 0.05% で局所洗浄（端生歯のアガマ・カメレオンは再生しないため早期介入が重要 — Mehler & Bennett 2003; Mader 3rd ed）。",
+            "全身抗菌薬は培養感受性に基づく（経験的にはセフタジジム 20 mg/kg IM q72h）。",
+            meloxicam_line_ja(species),
+            "予防: 果物・柔らかい餌の偏重を避け、至適温度帯（POTZ）と適切な硬さの餌を維持。",
+        ]
+    if species in ("bird", "parakeet", "parrot", "tortoise"):
+        return [
+            "嘴の過長・変形は基礎疾患（肝疾患・栄養不良・疥癬・PBFD・外傷）の評価を優先し、回転工具ややすりで少量ずつ整形する（血管・神経が近く、出血・過熱に注意。必要に応じ数週毎に反復）。",
+            "口腔・嘴の病変は生検で鑑別し、感染時は培養感受性に基づく抗菌薬を選択。",
+            meloxicam_line_ja(species),
+            TORT_BEAK_PREVENTION_JA if species == "tortoise" else BIRD_BEAK_PREVENTION_JA,
+        ]
+    return [
+        "歯科X線で病変を評価し、スケーリング・抜歯等を種の歯の形態（常生歯か否か）に応じて選択。",
+        meloxicam_line_ja(species),
+    ]
+
+
 def _class_specific_lines(species: str, klass: str, name_ja: str) -> list[str]:
     """Provide clinical management lines specific to disease class + species."""
     species_ja = _species_label_ja(species)
@@ -338,13 +431,7 @@ def _class_specific_lines(species: str, klass: str, name_ja: str) -> list[str]:
             f"再発予防のため水分摂取増加（湿食、複数水場、温度管理）と{species_ja}用処方食を継続。",
         ]
     if klass == "dental":
-        return [
-            f"{name_ja}の治療には全身麻酔下での歯科処置が必須（無麻酔処置は不十分かつ安全性に欠ける）。",
-            f"高速ダイヤモンドバーで臼歯研磨、過長切歯トリミング、{species_ja}の上下咬合バランス回復。",
-            "膿瘍合併時は外科的排膿＋ドキシサイクリン 5-10 mg/kg PO q12h × 4-6週（嫌気性菌カバー）。",
-            "鎮痛: メロキシカム 0.5-1 mg/kg PO q12-24h、強オピオイド使用時はモニタ強化。",
-            "予防のため繊維質食材（チモシー、葉物野菜）を主食、咀嚼促進のためペレットを最小化。",
-        ]
+        return dental_lines_ja(species, name_ja)
     if klass == "endocrine":
         return [
             f"{name_ja}はホルモン基礎値＋負荷試験（ACTH/TRH/dex抑制）で内分泌軸の不全を確定する。",

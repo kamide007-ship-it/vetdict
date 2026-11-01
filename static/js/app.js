@@ -6342,7 +6342,7 @@ function guidedRenderInterim(data){
       // Use backend-calibrated confidence_percent (same field used in free-input chat results).
       const pct=Math.round(c.confidence_percent!=null?c.confidence_percent:(c.similarity_score||0)*100);
       const sevClass=pct>=70?"sev-high":pct>=45?"sev-med":"sev-low";
-      html+=`<div class="chat-disease-card">
+      html+=`<div class="chat-disease-card" data-rank="${i+1}">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
           <span class="chat-disease-name">${escapeHtml(currentLang==="ja"?(c.name_ja||c.name_en):(c.name_en||c.name_ja))}</span>
@@ -6556,6 +6556,14 @@ function guidedRenderFinalResults(data){
     let html=`<div class="guided-final-label">${t("guidedFinalTitle")}</div>`;
     html+='<div class="chat-disease-list">';
     html+=commonDxNote(diseases.slice(0,5),5);
+    /* 2026-11 第83弾: 問診モードの最終結果にも候補ジャンプ・ストリップ（自由入力と同じ） */
+    if(diseases.length>1){
+      html+=`<div class="chat-cand-jump" role="navigation" aria-label="${currentLang==="ja"?"鑑別候補へジャンプ":"Jump to candidate"}">`+diseases.slice(0,5).map((d,i)=>{
+        const nm=currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
+        const short=nm.length>12?nm.slice(0,11)+"…":nm;
+        return `<button type="button" class="chat-cand-jump-btn" data-rank="${i+1}">${i+1}${currentLang==="ja"?"位":"."} ${escapeHtml(short)}</button>`;
+      }).join("")+"</div>";
+    }
     diseases.slice(0,5).forEach((d,i)=>{
       const pct=d.match_percent||0;
       const sevClass=pct>=70?"sev-high":pct>=45?"sev-med":"sev-low";
@@ -6566,7 +6574,7 @@ function guidedRenderFinalResults(data){
         const found=details.find(s=>s.id===sid);
         return found?(currentLang==="ja"?(found.name_ja||found.name_en):(found.name_en||found.name_ja)):sid;
       }).join(", "));
-      html+=`<div class="chat-disease-card">
+      html+=`<div class="chat-disease-card" data-rank="${i+1}">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
           <span class="chat-disease-name">${name}</span>
@@ -8662,8 +8670,13 @@ function _attachChatNavHandlers(container){
       const res=candJump.closest(".chat-result")||candJump.closest(".chat-msg");
       const card=res&&res.querySelector('.chat-disease-card[data-rank="'+candJump.dataset.rank+'"]');
       if(card){
-        const top=card.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-8;
-        try{container.scrollTo({top:Math.max(0,top),behavior:"smooth"});}catch(err){container.scrollTop=Math.max(0,top);}
+        /* 問診モード等、チャット欄自体がスクロールしないコンテナではページを sticky 補正付きで着地 */
+        if(container.scrollHeight<=container.clientHeight+4){
+          scrollToAnchor(card);
+        }else{
+          const top=card.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-8;
+          try{container.scrollTo({top:Math.max(0,top),behavior:"smooth"});}catch(err){container.scrollTop=Math.max(0,top);}
+        }
         card.classList.add("chat-card-flash");
         setTimeout(()=>card.classList.remove("chat-card-flash"),1200);
         trackEvent("chat_candidate_jump",{rank:candJump.dataset.rank});
