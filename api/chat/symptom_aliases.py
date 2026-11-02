@@ -989,6 +989,23 @@ SYMPTOM_ALIASES = {
     "歯が無い": "missing_teeth",
     "歯がない": "missing_teeth",
     "欠歯": "missing_teeth",
+    # 2026-11 第83弾: 眼瞼腫瘤（マイボーム腺腫は高齢犬の最多眼瞼腫瘍 — Gelatt 6th）。
+    # 従来は汎用「できもの」→lumps で乳腺腫瘍・肥満細胞腫へ誘導されていた
+    "まぶたにできもの": "eyelid_mass",
+    "まぶたにしこり": "eyelid_mass",
+    "まぶたにイボ": "eyelid_mass",
+    "まぶたにいぼ": "eyelid_mass",
+    "まぶたのできもの": "eyelid_mass",
+    "まぶたのしこり": "eyelid_mass",
+    "瞼にできもの": "eyelid_mass",
+    "目の縁にできもの": "eyelid_mass",
+    "目のふちにできもの": "eyelid_mass",
+    "眼瞼腫瘤": "eyelid_mass",
+    # 猫がトイレの砂をかくだけで何も出ない＝尿道閉塞 until proven otherwise。
+    # 否定ガード回避のため「な」までをキーに含める
+    "砂をかいて何も出な": "straining_to_urinate",
+    "砂をかいても何も出な": "straining_to_urinate",
+    "砂をかくだけで何も出な": "straining_to_urinate",
     # ---------------------------------------------------------------
     # 鳥追加
     # ---------------------------------------------------------------

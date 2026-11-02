@@ -58,6 +58,7 @@ SPECIES_PREVALENCE = {
         # Interdigital furunculosis: frequent first-opinion dermatology
         # presentation, bulldog-type breeds predisposed (Muller & Kirk 7th ed)
         "Interdigital Cyst (Furuncle)": "common",
+        "Eyelid Mass (Meibomian Gland Adenoma)": "common",
         "Deciduous Malocclusion (Interceptive Orthodontics)": "common",
         "Missing Teeth (Hypodontia / Unerupted Teeth)": "common",
         "Urethral Sphincter Mechanism Incompetence (USMI)": "common",
@@ -568,6 +569,11 @@ SPECIES_PREVALENCE = {
         "Feline Degenerative Myelopathy": "rare",
         "Feline Ischemic Encephalopathy": "rare",
         "Dysautonomia (Key-Gaskell Syndrome)": "rare",
+        # 2026-11 第83弾: 未tierの稀少/続発エントリが単一の嘔吐主訴の上位を占めていた
+        "Feline Dysautonomia (Key-Gaskell Syndrome) - Acute": "rare",
+        "Feline Myasthenic Crisis": "rare",
+        "Feline Polycystic Liver Disease": "uncommon",
+        "Feline Peritonitis (Septic)": "uncommon",
         "Plague (Yersinia pestis)": "rare",
         "Tularemia": "rare",
         "Feline Leishmaniasis": "rare",

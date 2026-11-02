@@ -810,6 +810,14 @@ SYMPTOMS = [
     # 2026-10 第73弾: 眼球突出・眼球脱出（目が飛び出している）。従来は
     # eye_bulging→eye_swelling フォールバックで結膜炎・チェリーアイへ誤誘導
     # されていた（短頭種の外傷性眼球脱出は分単位の眼科救急）。
+    # 2026-11 第83弾: 眼瞼腫瘤（まぶたのできもの）。legacy ID が無く汎用 lumps で
+    # 乳腺腫瘍・肥満細胞腫へ誘導されていた。
+    {
+        "id": "eyelid_mass",
+        "name_ja": "まぶたのできもの（眼瞼腫瘤）",
+        "name_en": "Eyelid Mass / Growth",
+        "category": "ocular",
+    },
     {
         "id": "eye_bulging",
         "name_ja": "眼球突出（目が飛び出している）",
@@ -3863,6 +3871,29 @@ DISEASES = [
             "chihuahua": 1.3,
         },
     },
+    # 2026-11 第83弾: 眼瞼腫瘤（マイボーム腺腫）。高齢犬で最多の眼瞼腫瘍で、約80-90%が
+    # 良性（マイボーム腺腫/上皮腫・乳頭腫・メラノサイトーマ — Krehbiel & Langham 1975;
+    # Roberts 1986; Gelatt's Veterinary Ophthalmology 6th ed）。名前は犬モジュールと一致。
+    # 主訴ゲート設計（目やに・充血は結膜炎/KCSの所有物）。
+    {
+        "id": "eyelid_tumor",
+        "prevalence_tier": "common",
+        "name_ja": "眼瞼腫瘤（マイボーム腺腫）",
+        "name_en": "Eyelid Mass (Meibomian Gland Adenoma)",
+        "description_ja": "まぶたの縁にできる腫瘤で、高齢犬に多く、その大半（約80-90%）はマイボーム腺腫・上皮腫、乳頭腫、メラノサイトーマなどの良性腫瘍です。腫瘤が角膜をこすると流涙・目やに・充血・角膜潰瘍を起こします。小さく刺激の無いものは経過観察も可能ですが、増大・角膜刺激・出血がある場合は、眼瞼縁の1/4〜1/3以下なら楔状（V字/五角形）切除、局所麻酔下の凍結手術±切除＋減量（高齢・麻酔リスク例）を行い、摘出組織は病理検査に提出します。眼瞼縁の1/3を超える切除では眼瞼形成術が必要です。完全切除で再発は稀ですが、凍結単独では再発がありえます（Roberts 1986; Gelatt 6th ed）。",
+        "description_en": "A mass on the eyelid margin, common in older dogs; roughly 80-90% are benign (meibomian adenoma/epithelioma, papilloma, melanocytoma). Masses that rub the cornea cause epiphora, discharge, hyperaemia and corneal ulceration. Small non-irritating lesions may be monitored; growing, irritating or bleeding masses are removed by full-thickness wedge (V/pentagonal) resection when they involve less than a quarter to a third of the lid margin, or by debulking plus cryotherapy under local anaesthesia in high-risk elderly dogs, always with histopathology. Resections beyond one third of the margin need a blepharoplasty. Recurrence is rare after complete excision but possible after cryotherapy alone (Roberts 1986; Gelatt 6th ed).",
+        "symptoms": [
+            "eyelid_mass",
+        ],
+        "severity": "low",
+        "recommended_tests": ["eye_exam", "fluorescein_stain", "histopathology"],
+        "breed_risks": {
+            "beagle": 1.5,
+            "poodle": 1.5,
+            "golden_retriever": 1.3,
+            "labrador_retriever": 1.3,
+        },
+    },
     # 2026-10 第82弾: 会陰ヘルニア。チャットDBに便秘を主訴とする疾患が1件も無く、
     # 「便秘しています」が候補ゼロだった。中高齢の未去勢雄犬で骨盤隔膜（肛門挙筋・
     # 尾骨筋）の萎縮により直腸が偏位し、しぶり・便秘・扁平便を呈する（Ettinger 8th;
@@ -5381,6 +5412,8 @@ _PATHOGNOMONIC_CLUSTERS = [
     # An owner reporting an absent / never-erupted tooth is site-diagnostic
     # for the missing-tooth work-up — no other entry carries this sign (2026-10).
     (frozenset({"missing_teeth"}), "missing_teeth", 1.6),
+    # まぶたの腫瘤は部位診断的（2026-11 第83弾）
+    (frozenset({"eyelid_mass"}), "eyelid_tumor", 1.6),
     # Interdigital redness/swelling is site-diagnostic for pododermatitis
     # (Muller & Kirk 7th ed): the paw-localised complaint should rank the
     # interdigital entry above generic pruritic dermatoses.

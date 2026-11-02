@@ -23,6 +23,40 @@ SEVERITY_MODERATE = "moderate"  # 中等度（注意して使用）
 # 各エントリ: drug_a, drug_b は薬品ID（小文字スネークケース）
 # ---------------------------------------------------------------------------
 INTERACTIONS: list[dict[str, Any]] = [
+    # ====== 2026-11 第83弾: メトプロロール（β1遮断） ======
+    {
+        "drug_a": "metoprolol",
+        "drug_b": "diltiazem",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "陰性変時・変伝導作用の相加",
+        "effect_en": "Additive negative chronotropy and AV-nodal block — profound bradycardia, AV block or hypotension.",
+        "effect_ja": "陰性変時・変伝導作用の相加により高度な徐脈・房室ブロック・低血圧。",
+        "management_en": "Avoid combining for rate control; if unavoidable, start both at low doses with ECG and blood-pressure monitoring.",
+        "management_ja": "心拍数コントロールでの併用は避ける。やむを得ない場合は両剤とも低用量で開始し心電図・血圧を監視。",
+        "ref": "Plumb's 10th ed.",
+    },
+    {
+        "drug_a": "metoprolol",
+        "drug_b": "verapamil",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "房室結節遮断と心筋抑制の相加",
+        "effect_en": "Additive AV-nodal block and negative inotropy; risk of asystole with IV verapamil.",
+        "effect_ja": "房室結節遮断と陰性変力作用の相加。ベラパミル静注では心静止のリスク。",
+        "management_en": "Do not combine.",
+        "management_ja": "併用しない。",
+        "ref": "Plumb's 10th ed.",
+    },
+    {
+        "drug_a": "metoprolol",
+        "drug_b": "atenolol",
+        "severity": SEVERITY_MAJOR,
+        "mechanism": "β遮断の重複",
+        "effect_en": "Duplicate beta-blockade — additive bradycardia and hypotension.",
+        "effect_ja": "β遮断の重複により徐脈・低血圧が相加。",
+        "management_en": "Use a single beta-blocker.",
+        "management_ja": "β遮断薬は1剤のみ使用する。",
+        "ref": "Plumb's 10th ed.",
+    },
     # ====== NSAID 関連 ======
     {
         "drug_a": "meloxicam",
