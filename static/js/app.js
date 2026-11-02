@@ -1804,8 +1804,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:609,drugs:622,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:599,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:609,drugs:624,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:601,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:367,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:418,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:280,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1829,8 +1829,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6525,
     species:21,
-    drugs:682,
-    symptoms:106,
+    drugs:684,
+    symptoms:107,
     protocols:188
   };
   renderSpeciesGrid();
@@ -6555,6 +6555,15 @@ function guidedRenderFinalResults(data){
   if(diseases.length>0){
     let html=`<div class="guided-final-label">${t("guidedFinalTitle")}</div>`;
     html+='<div class="chat-disease-list">';
+    /* 候補ジャンプ・ストリップを問診の最終結果にも（自由入力チャットとのパリティ —
+       2026-11 第83弾。スマホでは5枚の候補カードが数画面に及んでいた） */
+    if(diseases.length>1){
+      html+=`<div class="chat-cand-jump" role="navigation" aria-label="${currentLang==="ja"?"鑑別候補へジャンプ":"Jump to candidate"}">`+diseases.slice(0,5).map((d,i)=>{
+        const nm=currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"");
+        const short=nm.length>12?nm.slice(0,11)+"…":nm;
+        return `<button type="button" class="chat-cand-jump-btn" data-rank="${i+1}">${i+1}${currentLang==="ja"?"位":"."} ${escapeHtml(short)}</button>`;
+      }).join("")+"</div>";
+    }
     html+=commonDxNote(diseases.slice(0,5),5);
     diseases.slice(0,5).forEach((d,i)=>{
       const pct=d.match_percent||0;
@@ -6566,7 +6575,7 @@ function guidedRenderFinalResults(data){
         const found=details.find(s=>s.id===sid);
         return found?(currentLang==="ja"?(found.name_ja||found.name_en):(found.name_en||found.name_ja)):sid;
       }).join(", "));
-      html+=`<div class="chat-disease-card">
+      html+=`<div class="chat-disease-card" data-rank="${i+1}">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
           <span class="chat-disease-name">${name}</span>
@@ -8662,8 +8671,14 @@ function _attachChatNavHandlers(container){
       const res=candJump.closest(".chat-result")||candJump.closest(".chat-msg");
       const card=res&&res.querySelector('.chat-disease-card[data-rank="'+candJump.dataset.rank+'"]');
       if(card){
-        const top=card.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-8;
-        try{container.scrollTo({top:Math.max(0,top),behavior:"smooth"});}catch(err){container.scrollTop=Math.max(0,top);}
+        /* チャット欄がスクロールコンテナでない場合はページ側をスクロールして
+           sticky ヘッダー直下に着地（2026-11 第83弾） */
+        if(container.scrollHeight>container.clientHeight+4){
+          const top=card.getBoundingClientRect().top-container.getBoundingClientRect().top+container.scrollTop-8;
+          try{container.scrollTo({top:Math.max(0,top),behavior:"smooth"});}catch(err){container.scrollTop=Math.max(0,top);}
+        }else{
+          scrollToAnchor(card);
+        }
         card.classList.add("chat-card-flash");
         setTimeout(()=>card.classList.remove("chat-card-flash"),1200);
         trackEvent("chat_candidate_jump",{rank:candJump.dataset.rank});

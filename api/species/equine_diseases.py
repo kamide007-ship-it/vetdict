@@ -12578,6 +12578,14 @@ _SYNDROME_FLOOR_SCORE_OVERRIDES: dict[str, float] = {
 # (Baxter, Adams & Stashak's Lameness 7th ed) — without this, two-finding
 # entries like DDF tendinitis win on trivially perfect coverage.
 _SYNDROME_PAIR_BOOSTS: list[tuple[frozenset, tuple[str, ...], float]] = [
+    # 下顎/咽喉頭リンパ節腫脹＋膿性鼻汁は腺疫 until proven otherwise
+    # （Boyle 2018 ACVIM consensus — 2026-11 第83弾。従来は「鼻から膿」が
+    # 抽出されず、リンパ節単独で SCC・スポロトリコーシスが上位だった）
+    (
+        frozenset({"gen_swollen_lymph", "resp_nasal_discharge"}),
+        ("Strangles",),
+        1.5,
+    ),
     # Acute lameness + a hot hoof is a hoof abscess or laminitis until proven
     # otherwise (Adams & Stashak 7th ed) — the abscess is the single most
     # common cause of acute severe lameness in practice.

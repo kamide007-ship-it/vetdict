@@ -571,6 +571,14 @@ ID_SYNONYMS: dict[str, list[str]] = {
         "visible_tooth_overgrowth",
         "difficulty_eating",
     ],
+    # 2026-11 第83弾: 眼瞼腫瘤。犬レガシーDBはネイティブ保有、他種は眼瞼腫脹・腫瘤系へ
+    "eyelid_mass": [
+        "eyelid_swelling",
+        "eyelid_tumor",
+        "lumps",
+        "lumps_and_bumps",
+        "eye_discharge",
+    ],
     # 2026-10: 欠歯主訴。犬レガシーDBは missing_teeth をネイティブ保有。
     # 非保有種は歯の喪失・摂食困難系へ安全にフォールバック
     "missing_teeth": [
@@ -842,6 +850,10 @@ _SUBSUMES: dict[str, set[str]] = {
     "ear_pain": {"pain"},
     # 頸部痛（2026-10 第78弾）— 「首を痛がってキャンと鳴く」で汎用 pain が眼科へ散らない
     "neck_pain": {"pain"},
+    # リンパ節腫大・眼瞼腫瘤は部位特異 — 汎用「しこり」で脂肪腫/乳腺腫瘍へ散らさない（2026-11 第83弾）
+    "lymph_node_enlargement": {"lumps", "lumps_and_bumps", "lumps_bumps"},
+    "swollen_lymph_nodes": {"lumps", "lumps_and_bumps", "lumps_bumps"},
+    "eyelid_mass": {"lumps", "lumps_and_bumps", "lumps_bumps"},
 }
 
 # 眼の所見と同時に抽出された汎用「痛がる/痛そう」は眼痛として読む
@@ -914,6 +926,8 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     ("ています", "ている"),
     ("でいます", "でいる"),
     ("てきました", "てきた"),
+    # 〜てくる の否定丁寧形（「卵が出てきません」が抽出ゼロだった — 2026-11 第83弾）
+    ("てきません", "てこない"),
     ("できません", "できない"),
     ("ありません", "ない"),
     ("ありました", "あった"),
