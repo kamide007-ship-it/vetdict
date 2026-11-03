@@ -998,6 +998,11 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     ("いきませんでした", "いかなかった"),
     # 振る（五段: 頭をよく振ります→振る — 2026-10 第73弾）
     ("振ります", "振る"),
+    # 動く（五段: 後ろ足が動きません→動かない — 2026-11 第83弾）
+    ("動きません", "動かない"),
+    ("動きませんでした", "動かなかった"),
+    ("動きました", "動いた"),
+    ("動きます", "動く"),
     ("振りました", "振った"),
     # 抜ける（一段: 毛が抜けます→抜ける — 2026-10 第76弾。毛が抜けるキー群が丁寧形で不発だった）
     ("抜けます", "抜ける"),
@@ -1044,6 +1049,14 @@ def normalize_chat_text(text: str) -> str:
     for polite, plain in _POLITE_NORMALIZATIONS:
         if polite in text:
             text = text.replace(polite, plain)
+    # 一段動詞・可能形（ます語幹がエ段: むせます→むせる、震えます→震える、
+    # 漏れます→漏れる、歩けません→歩けない）— 五段動詞のます語幹は必ずイ段
+    # なので、エ段＋ます は常に〜エ段＋る に戻せる（2026-11 第83弾）。
+    text = _E_ROW_POLITE_NEG_PAST.sub(r"\1なかった", text)
+    text = _E_ROW_POLITE_NEG.sub(r"\1ない", text)
+    text = _E_ROW_POLITE_PAST.sub(r"\1た", text)
+    text = _E_ROW_POLITE.sub(r"\1る", text)
+    text = text.replace("ないでした", "なかった")
     text = _ADVERB_STRIP.sub(r"\1", text)
     # 部位を明示しない「血が混じ」は尿語が無ければ文脈の部位に読み替える
     # （「下痢が続いて血が混じっています」「鼻水に血が混じります」が血尿→
@@ -1064,6 +1077,11 @@ def normalize_chat_text(text: str) -> str:
     return text
 
 
+_E_ROW = "えけげせぜてでねべぺめれへ"
+_E_ROW_POLITE_NEG_PAST = _neg_re.compile(rf"([{_E_ROW}])ませんでした")
+_E_ROW_POLITE_NEG = _neg_re.compile(rf"([{_E_ROW}])ません")
+_E_ROW_POLITE_PAST = _neg_re.compile(rf"([{_E_ROW}])ました")
+_E_ROW_POLITE = _neg_re.compile(rf"([{_E_ROW}])ます")
 _BLOOD_STOOL_CTX = _neg_re.compile(r"下痢|便|うんち|ウンチ|軟便")
 _BLOOD_URINE_CTX = _neg_re.compile(r"尿|おしっこ|オシッコ|排尿|トイレ")
 

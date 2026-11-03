@@ -392,8 +392,27 @@ DRUGS_BATCH_15: list[dict] = [
         "species_info": {
             "dog": {
                 "dose": "ProHeart 6: 0.17 mg/kg SC q6months; ProHeart 12: 0.5 mg/kg SC q12months",
-                "notes": "Heartworm prevention (compliance guarantee); also treats hookworms. Must be administered by veterinarian",
-                "notes_ja": "フィラリア予防（コンプライアンス保証）；鉤虫も治療。獣医師が投与必須",
+                "dosage": (
+                    "ProHeart 6 (3.4 mg/mL): 0.17 mg/kg (0.05 mL/kg) SC every 6 months, dogs >=6 months of age; "
+                    "ProHeart 12 (10 mg/mL): 0.5 mg/kg (0.05 mL/kg) SC once every 12 months, dogs >=12 months of age. "
+                    "Same volume per kg but different concentrations — never interchange the vials"
+                ),
+                "dosage_ja": (
+                    "プロハート6（3.4 mg/mL）: 0.17 mg/kg（0.05 mL/kg）皮下注射を6ヶ月毎、6ヶ月齢以上。"
+                    "プロハート12（10 mg/mL）: 0.5 mg/kg（0.05 mL/kg）皮下注射を12ヶ月毎、12ヶ月齢以上。"
+                    "1 kgあたりの液量は同じだが濃度が約3倍異なる — 製剤を取り違えない"
+                ),
+                "notes": (
+                    "Heartworm prevention (compliance guarantee); also treats hookworms. Must be administered by veterinarian. "
+                    "Test heartworm-negative before the first dose; do not give to sick, debilitated, underweight dogs or "
+                    "dogs with recent weight loss (label). Observe for anaphylaxis/hypersensitivity after injection "
+                    "(ProHeart 6/12 US labels — FDA NADA 141-189 / 141-519)"
+                ),
+                "notes_ja": (
+                    "フィラリア予防（コンプライアンス保証）；鉤虫も治療。獣医師が投与必須。"
+                    "初回投与前にフィラリア陰性を確認、病気・衰弱・低体重・最近体重減少のある犬には投与しない（添付文書）。"
+                    "投与後はアナフィラキシー・過敏反応を観察する（米国 ProHeart 6/12 ラベル）"
+                ),
             },
             "cat": {
                 "dose": "Not approved for cats",
@@ -403,8 +422,8 @@ DRUGS_BATCH_15: list[dict] = [
         },
         "side_effects": ["Injection site reactions", "Vomiting", "Lethargy", "Anaphylaxis (rare)", "Diarrhea"],
         "side_effects_ja": ["注射部位反応", "嘔吐", "嗜眠", "アナフィラキシー（稀）", "下痢"],
-        "contraindications": "Dogs <6 months, sick/debilitated/underweight dogs, known moxidectin hypersensitivity, heartworm-positive (must test negative first)",
-        "contraindications_ja": "6ヶ月齢未満の犬、病気/衰弱/低体重犬、モキシデクチン過敏症既知、フィラリア陽性（事前に陰性確認必須）",
+        "contraindications": "Dogs <6 months (ProHeart 6) / <12 months (ProHeart 12), sick/debilitated/underweight dogs, known moxidectin hypersensitivity, heartworm-positive (must test negative first)",
+        "contraindications_ja": "6ヶ月齢未満（プロハート6）／12ヶ月齢未満（プロハート12）の犬、病気/衰弱/低体重犬、モキシデクチン過敏症既知、フィラリア陽性（事前に陰性確認必須）",
         "drug_interactions": [
             {
                 "drug": "P-glycoprotein inhibitors",

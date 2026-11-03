@@ -3908,6 +3908,25 @@ SYMPTOM_ALIASES = {
     # 粘液便・猫ざ瘡（語順）・高所回避・腹部の脱毛（猫の過剰グルーミング）
     "暑い日に": "heat_exposure",
     "暑い中": "heat_exposure",
+    # 2026-11 第83弾: 「暑い日の散歩のあと」（の格）・「暑い時間に散歩」
+    "暑い日の": "heat_exposure",
+    # 2026-11 第83弾: 後ろ足で耳を掻く（語幹）・吐けず（ず形）・目の横の腫脹
+    "耳を掻": "ear_scratching",
+    "耳をかい": "ear_scratching",
+    "吐こうとしても吐けず": "unproductive_retching",
+    "吐けずに": "unproductive_retching",
+    "目の横が腫れ": "facial_swelling",
+    "目の横から膿": "eye_discharge",
+    "暑い時間に": "heat_exposure",
+    "真夏の散歩": "heat_exposure",
+    "暑い車": "heat_exposure",
+    # お腹（腹側）を床にこすりつける＝腹側の掻痒（接触性・アトピー — おしり＝肛門嚢とは別）
+    "お腹を地面にこす": "itching",
+    "おなかを地面にこす": "itching",
+    "お腹を床にこす": "itching",
+    "おなかを床にこす": "itching",
+    "お腹をこすりつけ": "itching",
+    "おなかをこすりつけ": "itching",
     "炎天下": "heat_exposure",
     "車内に": "heat_exposure",
     "車の中に": "heat_exposure",

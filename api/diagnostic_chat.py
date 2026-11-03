@@ -912,6 +912,8 @@ def extract_symptoms_from_text(text: str) -> list:
     # SYMPTOM_IDS (e.g. "weakness" from 起立不能, "dropsy" from 腹水, "anorexia"),
     # try a small synonym map to fall back to a valid generic ID.
     _LEGACY_FALLBACK = {
+        # 排膿（膿が出る）— レガシー犬は皮膚病変で保持（顔面腫脹とのペアで歯根膿瘍）
+        "abscess": ["skin_lesions"],
         # 耳介下垂（チンチラ向け ear_drooping キー）は犬では顔面神経麻痺/
         # 中耳炎の徴候 — facial_droop へ（2026-10 第39回）
         "weakness": ["lethargy", "exercise_intolerance"],
