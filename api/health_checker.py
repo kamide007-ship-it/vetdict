@@ -5260,6 +5260,8 @@ _PATHOGNOMONIC_CLUSTERS = [
     # 2026-10 第71弾: 包含エイリアスの雑音抽出（痒い→itching）を止めた結果、
     # 3所見の耳血腫が5所見の外耳炎をカバレッジで上回るのを防ぐ。
     (frozenset({"ear_scratching", "head_shaking"}), "otitis_externa", 1.3),
+    # 耳を掻く単独でも外耳炎が第一（耳血腫は耳介腫脹がある時のみ優先 — 2026-11 第83弾）
+    (frozenset({"ear_scratching"}), "otitis_externa", 1.2),
     # Acute allergic reaction: hives + facial swelling is the definitional
     # post-vaccine/insect-sting pair (Shmuel & Cortes, JVECC 2013).
     (frozenset({"hives", "facial_swelling"}), "acute_allergic_reaction", 1.8),
@@ -5272,6 +5274,8 @@ _PATHOGNOMONIC_CLUSTERS = [
     # purulent discharge below the eye is a tooth-root abscess until proven
     # otherwise in dogs (Niemiec, BSAVA Dental Manual).
     (frozenset({"facial_swelling", "eye_discharge"}), "tooth_root_abscess", 1.5),
+    # 「目の横が腫れて膿が出る」— 顔面腫脹＋排膿（犬の眼窩下膿瘍の典型像）
+    (frozenset({"facial_swelling", "abscess"}), "tooth_root_abscess", 1.5),
     # Conjunctivitis: red eye + ocular discharge without facial swelling is
     # the bread-and-butter conjunctivitis complaint (Maggs, Slatter's 6th ed);
     # the 5-sign entry was otherwise out-scored on coverage by 2-sign eyelid
@@ -5291,6 +5295,9 @@ _PATHOGNOMONIC_CLUSTERS = [
     # pyotraumatic dermatitis itself — the allergies that share the hot_spots
     # sign are underlying causes, not the lesion diagnosis (Muller & Kirk 7th).
     (frozenset({"hot_spots", "itching"}), "acute_moist_dermatitis", 1.4),
+    # 「皮膚が赤く湿ってじゅくじゅく」— 病変描写（発赤＋湿潤びらん）単独でも
+    # 病変診断が第一（2026-11 第83弾）
+    (frozenset({"hot_spots", "skin_rashes"}), "acute_moist_dermatitis", 1.4),
     # Parvovirus: bloody diarrhea + vomiting + lethargy in young dog
     (frozenset({"blood_in_stool", "vomiting", "diarrhea"}), "canine_parvovirus", 1.8),
     # Distemper: respiratory + neurological combination

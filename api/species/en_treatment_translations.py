@@ -59,10 +59,17 @@ def ja_treatment_upgrade(species: str, name: str, current: str | None) -> str | 
     return rich if len(body) > 1.5 * len(cur) else None
 
 
+_HIRAGANA = re.compile(r"[぀-ゟ]")
+
+
 def is_mostly_japanese(text: str | None) -> bool:
+    """True for Japanese prose. Dose-heavy Japanese protocols carry many Latin
+    drug names / units and can fall under the 30% CJK ratio (horse EED: 27%), so
+    a run of hiragana — absent from English text that merely glosses a Japanese
+    product name — also counts (2026-11 第83弾)."""
     if not text:
         return False
-    return len(_CJK.findall(text)) > len(text) * 0.3
+    return len(_CJK.findall(text)) > len(text) * 0.3 or len(_HIRAGANA.findall(text)) > 40
 
 
 def en_treatment_for(species: str, name: str) -> str | None:

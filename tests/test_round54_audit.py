@@ -84,5 +84,5 @@ def test_chat_cards_offer_direct_treatment_jump():
     assert "function openDiseaseAcrossSpecies(name,species,opts)" in APP_JS
     assert APP_JS.count('class="chat-disease-open chat-disease-treat" data-section="treatment"') == 2
     assert "openBtn.dataset.section?{section:openBtn.dataset.section}" in APP_JS
-    body = APP_JS.split("function openDiseaseAcrossSpecies(name,species,opts)", 1)[1][:2500]
-    assert 'data-jump="${sec}"' in body and "scrollToAnchor(el,{settle:false})" in body
+    body = APP_JS.split("function openDiseaseAcrossSpecies(name,species,opts)", 1)[1][:3500]
+    assert 'data-jump="${sec}"' in body and "scrollToAnchor(hit||el,{settle:false,extraOffset:" in body

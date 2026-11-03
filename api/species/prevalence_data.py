@@ -2107,6 +2107,10 @@ SPECIES_PREVALENCE = {
     # ==================================================================
     "sugar_glider": {
         "Malnutrition / Nutritional Deficiency": "very_common",
+        # 2026-11 第83弾: Neospora は症例報告レベル（未tierで後肢麻痺主訴の1位を
+        # 奪っていた）— 後肢麻痺は栄養性（Ca/D欠乏）・外傷が主因（Ness & Johnson-Delaney）
+        "Neosporosis": "rare",
+        "Sugar Glider Hindlimb Paralysis (HLP)": "common",
         "Upper Respiratory Infection": "very_common",
         "Intestinal Parasitism": "very_common",
         "Contact Dermatitis": "very_common",

@@ -5165,7 +5165,15 @@ function openDiseaseAcrossSpecies(name,species,opts){
         const go=()=>{
           const det=pick.querySelector(".disease-detail.open");
           const el=det&&(sec==="drugs"?det.querySelector(".treatment-drugs-section"):det.querySelector(`[data-jump="${sec}"]`));
-          if(el){scrollToAnchor(el,{settle:false});return;}
+          if(el){
+            /* data-jump sits on the section header (<dt>); the protocol text is
+               the following <dd>/body sibling. */
+            const hit=_highlightDrugMention(el,opts.highlight)||_highlightDrugMention(el.nextElementSibling,opts.highlight);
+            /* Clear the in-panel sticky jump bar on phones (it otherwise covered
+               the landed section header / highlighted mention). */
+            scrollToAnchor(hit||el,{settle:false,extraOffset:_jumpBarOverlay(det.querySelector(".detail-jump-bar"))+(hit?8:0)});
+            return;
+          }
           if(n++<20)setTimeout(go,100);
         };
         setTimeout(go,350);
@@ -5173,6 +5181,30 @@ function openDiseaseAcrossSpecies(name,species,opts){
     }
   };
   setTimeout(apply,needSwitch?200:0);
+}
+/* Wrap the first mention of any of `names` inside `root` in a <mark> and return
+   it (null when not found). Case-insensitive for Latin names. */
+function _highlightDrugMention(root,names){
+  if(!root||!names||!names.length)return null;
+  const old=root.querySelector("mark.drug-mention-hit");
+  if(old)return old;
+  const terms=names.map(n=>String(n).toLowerCase()).filter(n=>n.length>=2);
+  if(!terms.length)return null;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);
+  let node;
+  while((node=walker.nextNode())){
+    const txt=node.nodeValue||"";const low=txt.toLowerCase();
+    for(const term of terms){
+      const i=low.indexOf(term);
+      if(i<0)continue;
+      const range=document.createRange();
+      range.setStart(node,i);range.setEnd(node,i+term.length);
+      const mark=document.createElement("mark");mark.className="drug-mention-hit";
+      try{range.surroundContents(mark);}catch(_e){return null;}
+      return mark;
+    }
+  }
+  return null;
 }
 document.addEventListener("click",function(e){
   const btn=e.target.closest('[data-action="scroll-to-species"]');
@@ -8729,7 +8761,16 @@ function _attachDbItemHandlers(container){
     const ixSet=e.target.closest(".treatment-drugs-ix-check");
     if(ixSet){e.preventDefault();runInteractionCheckWithDrugs(ixSet.dataset.drugs||"");return;}
     const dChip=e.target.closest(".drug-disease-chip");
-    if(dChip){e.preventDefault();openDiseaseAcrossSpecies(dChip.dataset.disease,dChip.dataset.species||currentSpecies||"");return;}
+    if(dChip){
+      e.preventDefault();
+      /* 2026-11 第83弾: drug → "この薬品を使う疾患" lands on the disease's treatment
+         section and highlights where this drug is mentioned (the reason the vet
+         tapped) instead of the top of a long disease panel. */
+      const host=dChip.closest(".disease-db-item,[data-name]");
+      const hl=host?[host.dataset.nameJa,host.dataset.name].filter(Boolean).map(x=>String(x).split(/[（(]/)[0].trim()).filter(x=>x.length>=2):[];
+      openDiseaseAcrossSpecies(dChip.dataset.disease,dChip.dataset.species||currentSpecies||"",{section:"treatment",highlight:hl});
+      return;
+    }
     const anesthLink=e.target.closest(".anesthesia-nav-link");
     if(anesthLink){e.preventDefault();_pushNavHistory(currentView,"anesthesia","");switchView("anesthesia");_showBackNav("anesthesiaBackNav","anesthesiaSearch");const p=document.getElementById("viewAnesthesia");if(p)scrollToAnchor(p);return;}
     /* Disease detail → emergency protocol: open the matching 緊急対応 row. */
