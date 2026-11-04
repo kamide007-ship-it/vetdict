@@ -1830,7 +1830,7 @@ function setDefaultStats(){
     diseases:6525,
     species:21,
     drugs:682,
-    symptoms:106,
+    symptoms:107,
     protocols:188
   };
   renderSpeciesGrid();
@@ -7651,7 +7651,10 @@ function parseCriRate(doseText){
 function normalizeDrugSearchText(s){
   // NFKC（全角英数・半角カナの正規化）+ 小文字化 + ひらがな→カタカナ。
   // 「ばいとりる」「ﾊﾞｲﾄﾘﾙ」「ＢＡＹＴＲＩＬ」でも「バイトリル」に一致させる。
-  return (s||"").normalize("NFKC").toLowerCase().replace(/[ぁ-ゖ]/g,ch=>String.fromCharCode(ch.charCodeAt(0)+0x60));
+  // さらに外来語の表記ゆれ（ティ/チ・ディ/ジ・ヴ/ブ）を両側で同じ形に畳む —
+  // 麻酔・救急タブの「アティパメゾール」で薬品タブ（アチパメゾール）が0件だった（2026-11 第83弾）。
+  return (s||"").normalize("NFKC").toLowerCase().replace(/[ぁ-ゖ]/g,ch=>String.fromCharCode(ch.charCodeAt(0)+0x60))
+    .replace(/ティ/g,"チ").replace(/ディ/g,"ジ").replace(/ヴァ/g,"バ").replace(/ヴィ/g,"ビ").replace(/ヴェ/g,"ベ").replace(/ヴォ/g,"ボ").replace(/ヴ/g,"ブ");
 }
 function _drugMatchesSearch(d,q){
   // 一致した場合、どのフィールドで一致したかを返す（brand一致は結果カードに表示する）

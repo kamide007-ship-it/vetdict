@@ -859,6 +859,13 @@ SYMPTOMS = [
         "name_en": "Flat / Ribbon-like Stool",
         "category": "digestive",
     },
+    # 2026-11 第83弾: 直腸脱（肛門から赤い粘膜が突出 — 子犬の重度下痢・寄生虫・怒責に続発）
+    {
+        "id": "rectal_prolapse",
+        "name_ja": "肛門から赤いものが出ている（直腸脱）",
+        "name_en": "Red Tissue Protruding from Anus (Rectal Prolapse)",
+        "category": "digestive",
+    },
     {
         "id": "tail_chasing",
         "name_ja": "しっぽを追いかける・かじる（常同行動）",
@@ -3886,6 +3893,25 @@ DISEASES = [
             "boxer": 1.5,
         },
     },
+    # 2026-11 第83弾: 直腸脱。子犬の重度下痢（パルボ・寄生虫・腸炎）や怒責（便秘・
+    # 前立腺・会陰ヘルニア）に続発する。「お尻から赤いものが出ている」が抽出ゼロだった。
+    # 名前は犬モジュールと一致（疾患DBピボット着地）。主訴ゲート設計（突出所見のみ）。
+    {
+        "id": "rectal_prolapse",
+        "prevalence_tier": "uncommon",
+        "name_ja": "直腸脱",
+        "name_en": "Rectal Prolapse",
+        "description_ja": "直腸の粘膜（部分脱）または全層（完全脱）が肛門から突出する状態で、子犬の重度下痢（パルボウイルス・腸管寄生虫・腸炎）や、便秘・前立腺疾患・会陰ヘルニア・尿道閉塞による持続的な怒責に続発します。腸重積の脱出との鑑別が重要で、突出部と肛門の間にプローブが入る場合は腸重積を疑います（Ettinger 8th ed; Fossum, Small Animal Surgery 5th ed）。応急的には突出部を湿らせて乾燥・損傷を防ぎ、早期に受診します。治療は基礎疾患（駆虫・下痢治療）の是正と、浮腫軽減（高張糖液の局所適用）後の用手整復＋一時的な巾着縫合（5-7日）、再発・壊死例は結腸固定術または直腸切除。整復後の怒責を抑える鎮痛・便軟化が再発予防の要です。",
+        "description_en": "Protrusion of rectal mucosa (partial) or the full rectal wall (complete) through the anus, typically secondary to severe diarrhoea in puppies (parvovirus, intestinal parasites, enteritis) or persistent tenesmus (constipation, prostatic disease, perineal hernia, urethral obstruction). Distinguish it from a prolapsed intussusception — a probe passing between the mass and the anal ring suggests intussusception (Ettinger 8th ed; Fossum, Small Animal Surgery 5th ed). As first aid keep the tissue moist and protected and seek care promptly. Treatment addresses the cause (deworming, diarrhoea control) and replaces the tissue after reducing oedema (topical hypertonic dextrose), with a temporary purse-string suture for 5-7 days; recurrent or necrotic prolapse needs colopexy or resection. Analgesia and stool softening to prevent post-reduction straining are key to avoiding recurrence.",
+        # Complaint-gated: the protrusion itself is the defining sign.
+        "symptoms": [
+            "rectal_prolapse",
+        ],
+        "severity": "high",
+        "recommended_tests": ["rectal_exam", "fecal_exam", "ultrasound"],
+        # 明確な犬種素因の報告はない（若齢・下痢/怒責の基礎疾患が主因）
+        "breed_risks": {},
+    },
     # 2026-10 第77弾: 尿道括約筋機能不全（避妊後尿失禁）。成犬の尿失禁で最多の原因
     # （避妊済み雌の約5-20%、20 kg超で約20% — Arnold 1989; Thrusfield 1998）なのに
     # エントリが無く、「寝ている時におしっこが漏れる」が認知機能不全症候群へ誘導されていた。
@@ -5370,6 +5396,7 @@ _PATHOGNOMONIC_CLUSTERS = [
     (frozenset({"preputial_discharge", "constipation"}), "benign_prostatic_hyperplasia", 1.8),
     # 扁平便は直腸の外部圧迫を示す部位診断的所見（2026-10 第82弾）。排尿困難を
     # 伴えば前立腺腫大による尿道・直腸の同時圧迫（Johnston 2000; Smith 2008）
+    (frozenset({"rectal_prolapse"}), "rectal_prolapse", 1.6),
     (frozenset({"flat_stool"}), "benign_prostatic_hyperplasia", 1.5),
     (frozenset({"flat_stool", "preputial_discharge"}), "benign_prostatic_hyperplasia", 2.0),
     (frozenset({"flat_stool", "straining_to_urinate"}), "benign_prostatic_hyperplasia", 1.8),
