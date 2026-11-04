@@ -242,6 +242,9 @@ SPECIES_PREVALENCE = {
     # CAT — 230+ entries (expanded from ~73)
     # ==================================================================
     "cat": {
+        # 2026-11 第83弾: 猫のバルトネラは不顕性感染が多く、臨床疾患としては uncommon
+        # （Sykes, Canine and Feline Infectious Diseases）。未tierで口内炎主訴の1位を奪っていた
+        "Bartonellosis (Cat Scratch Disease agent)": "uncommon",
         # 2026-10 第67弾: 跳躍不能（猫DJDの最頻の飼い主所見）主訴で未tierの稀な
         # 脊椎・栄養性エントリが変形性関節症を上回っていた
         "Feline Atlantoaxial Instability": "rare",

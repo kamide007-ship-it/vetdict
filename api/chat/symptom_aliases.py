@@ -3964,6 +3964,50 @@ SYMPTOM_ALIASES = {
     "足がかさかさ": "crusty_lesions_on_legs",
     "皮膚がかさかさ": "dry_skin",
     "皮膚がガサガサ": "dry_skin",
+    # --- 2026-11 第83弾（チャット精度第58回） ---
+    # 足底からの出血（肉球の裂傷・趾間の外傷 — 汎用「血が出て」が部位を失っていた）
+    "足の裏から血": "foot_sores",
+    # 歯肉腫脹・口腔出血（歯周病の飼い主主訴）
+    "歯ぐきが腫れ": "bleeding_gums",
+    "歯茎が腫れ": "bleeding_gums",
+    "口から血が出": "bleeding_gums",
+    "口の中から血": "bleeding_gums",
+    # 後肢の不安定・脱力（「ガクガク」単独は振戦のままにし、後肢を伴う形のみ）
+    "後ろ足がガクガク": "hind_leg_weakness",
+    "後ろ足ががくがく": "hind_leg_weakness",
+    "腰がガクガク": "hind_leg_weakness",
+    "階段が上れ": "stiffness",
+    "階段が登れ": "stiffness",
+    "階段を上れ": "stiffness",
+    # 黄疸（「目の色が」形）
+    "目の色が黄色": "jaundice",
+    "白目の色が黄色": "jaundice",
+    "皮膚の色が黄色": "jaundice",
+    # トイレ内の反復怒責（雄猫の尿道閉塞が便秘と誤認される — 何度も 介在形）
+    "トイレで何度もいきん": "straining_to_urinate",
+    "トイレで何回もいきん": "straining_to_urinate",
+    "トイレで長くいきん": "straining_to_urinate",
+    # 外部寄生虫の目撃（「ダニがいる」形 — ついて/たくさん のみ収載だった）
+    "ダニがい": "visible_mites",
+    "ダニが付い": "visible_mites",
+    "ダニを見つけ": "visible_mites",
+    # 直腸脱（ひらがな「おしり」形）
+    "おしりから赤いもの": "rectal_prolapse",
+    "おしりから何か赤": "rectal_prolapse",
+    "おしりから何か出": "rectal_prolapse",
+    # 体重増加（太りました→太った 正規化後）・寒がり（甲状腺機能低下症の古典像）
+    "太ってしま": "weight_gain",
+    "寒がり": "lethargy",
+    # 発情出血の長期化・不正出血（陰部出血の飼い主表現）
+    "生理のような出血": "genital_discharge",
+    "生理が続": "genital_discharge",
+    "生理が長": "genital_discharge",
+    # 卵塞（出てこない 形 — 「卵が出てこず」のみ収載だった）
+    "卵が出てこれな": "egg_binding",
+    # 鼻孔の泡沫（爬虫類の呼吸器感染 — 「泡が出ている→嘔吐」の最長一致に負けていた）
+    "鼻から泡が出": "nasal_discharge",
+    "鼻の穴から泡": "nasal_discharge",
+    "鼻に泡": "nasal_discharge",
     # --- 2026-10 第82弾（チャット精度第57回） ---
     # 排尿後も続く怒責（尿道・膀胱・前立腺の下部尿路徴候 — 便秘と誤認されやすい）
     "おしっこをした後もいきん": "straining_to_urinate",

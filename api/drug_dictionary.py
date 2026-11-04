@@ -7057,10 +7057,10 @@ DRUGS: List[Dict[str, Any]] = [
             },
             "cat": {
                 "safe": True,
-                "dosage": "Same volume as medetomidine given IM",
-                "dosage_ja": "投与したメデトミジンと同容量を筋注",
-                "notes": "Effective reversal; reverses vomiting",
-                "notes_ja": "効果的な拮抗。嘔吐も消失",
+                "dosage": "Half the volume of medetomidine (Domitor 1 mg/mL) or dexmedetomidine (Dexdomitor 0.5 mg/mL) given, IM (= 2.5× the medetomidine dose by mass)",
+                "dosage_ja": "投与したメデトミジン（ドミトール1 mg/mL）またはデクスメデトミジン（デクスドミトール0.5 mg/mL）の半量の容量を筋注（メデトミジン投与量の2.5倍量）",
+                "notes": "Feline label (Antisedan SPC): the canine equal-volume rule overdoses cats — give half the volume. Reverses sedation within 5-10 min (also reverses analgesia; secure alternative analgesia first); monitor for re-sedation",
+                "notes_ja": "猫の承認用法（アンチセダン添付文書）: 犬の「同容量」則は猫では過量 — 半量の容量で投与。5-10分で拮抗（鎮痛も拮抗されるため先に代替鎮痛を確保）。再鎮静をモニタリング",
             },
             "horse": {
                 "safe": True,
@@ -12015,6 +12015,24 @@ for _vid, _vals in (
     ("amphotericin_b", ("アンフォテリシン",)),
 ):
     _KATAKANA_VARIANT_ALIASES[_vid] = _KATAKANA_VARIANT_ALIASES.get(_vid, ()) + _vals
+
+
+# 表記ゆれエイリアスは従来テキストマッチャー・リゾルバ専用で、薬品タブ／グローバル検索の
+# search_aliases には載っていなかった。麻酔タブ・救急プロトコルが「アティパメゾール」と
+# 表記するのに薬品タブで同じ語を検索すると0件だった（2026-11 第83弾）。
+# 自分の名前と重複しない別名だけを search_aliases に追記する（商品名マージと同じ規則）。
+for _vid, _vals in _KATAKANA_VARIANT_ALIASES.items():
+    _entry = _drug_index.get(_DRUG_ALIAS_TO_ID.get(_vid, _vid))
+    if _entry is None:
+        continue
+    _own_names = _normalize_search_text(f"{_entry.get('name', '')} {_entry.get('name_ja', '')}")
+    _alias_list = _entry.setdefault("search_aliases", [])
+    _existing_aliases = {_normalize_search_text(a) for a in _alias_list}
+    for _alias in _vals:
+        _norm = _normalize_search_text(_alias)
+        if _norm and _norm not in _own_names and _norm not in _existing_aliases:
+            _alias_list.append(_alias)
+            _existing_aliases.add(_norm)
 
 
 # Japanese dose-form / salt / strength suffixes that formulary names carry but

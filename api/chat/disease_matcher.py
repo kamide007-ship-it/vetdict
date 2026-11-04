@@ -360,10 +360,23 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # Keep this list tiny and only for presentations with unambiguous textbook
 # backing — it exists to stop umbrella syndromes with long symptom lists
 # losing on coverage to narrow rarities.
+# 高齢個体でのみ発火する組合せ（年齢が分かったときの事前確率の補正）。
+# 高齢猫の慢性嘔吐＋体重減少は甲状腺機能亢進症（罹患猫の約半数が嘔吐 — Peterson,
+# JFMS 2012）・消化器型リンパ腫・CKD がまず鑑別に挙がる（AAFP Senior Care 2021）。
+# 若齢猫の同主訴（寄生虫・食事性）を乗っ取らないよう年齢ゲート付き（2026-11 第83弾）
+_SENIOR_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    ("cat", frozenset({"vomiting", "weight_loss"}), "Hyperthyroidism", 1.9),
+    ("cat", frozenset({"vomiting", "weight_loss"}), "Alimentary Lymphoma", 1.2),
+    ("cat", frozenset({"vomiting", "weight_loss"}), "Chronic Kidney Disease (CKD)", 1.25),
+]
+
 _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # 猫の耳介の波動性腫脹（ぷよぷよ）は耳血腫 until proven otherwise — 外耳炎の
     # 頭振り・掻破に続発する（Little, The Cat; 2026-10 第80弾）
     ("cat", frozenset({"ear_swelling"}), "Feline Aural Hematoma", 1.4),
+    # 猫の口腔粘膜の発赤・腫脹・疼痛は慢性歯肉口内炎 until proven otherwise（FCV・
+    # FIV 等は基礎原因として同時に鑑別 — Lommer 2013 JFMS; 2026-11 第83弾）
+    ("cat", frozenset({"stomatitis"}), "Feline Chronic Gingivostomatitis", 1.35),
     # 毛玉を吐こうとして出ない非生産的えずきは毛球症 — ただし咳を毛玉吐きと誤認する
     # 猫喘息も同時に鑑別に残す（Padrid 2000; 2026-10 第81弾）
     ("cat", frozenset({"hairball_retching"}), "Feline Gastric Hairball Obstruction", 1.3),
@@ -793,6 +806,10 @@ def _match_species_symptoms_to_diseases(
         for cl_species, cl_signs, cl_disease, cl_boost in _PATHOGNOMONIC_PAIRS:
             if species == cl_species and disease_name == cl_disease and cl_signs <= symptom_set:
                 pathognomonic_boost = max(pathognomonic_boost, cl_boost)
+        if age_category and str(age_category).lower() in ("senior", "geriatric"):
+            for cl_species, cl_signs, cl_disease, cl_boost in _SENIOR_PAIRS:
+                if species == cl_species and disease_name == cl_disease and cl_signs <= symptom_set:
+                    pathognomonic_boost = max(pathognomonic_boost, cl_boost)
 
         # --- Age-predisposition factor (if user supplied patient age category) ---
         # age_category should be one of: puppy/kitten/foal/young/adult/senior/geriatric

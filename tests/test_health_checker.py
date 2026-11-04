@@ -30,7 +30,7 @@ class TestSymptomDatabase:
     """Verify symptom database structure and consistency."""
 
     def test_symptom_count(self):
-        assert len(SYMPTOMS) == 106  # +flat_stool (第82弾); 以前の増分は git 履歴参照
+        assert len(SYMPTOMS) == 107  # +rectal_prolapse (第83弾); 以前の増分は git 履歴参照
 
     def test_all_symptoms_have_required_fields(self):
         for s in SYMPTOMS:
@@ -69,7 +69,7 @@ class TestDiseaseDatabase:
     """Verify disease database structure and consistency."""
 
     def test_disease_count(self):
-        assert len(DISEASES) == 109  # +perineal_hernia (第82弾); 以前は git 履歴参照
+        assert len(DISEASES) == 110  # +rectal_prolapse (第83弾); 以前は git 履歴参照
 
     def test_all_diseases_have_required_fields(self):
         for d in DISEASES:
@@ -291,7 +291,7 @@ class TestGetSymptomsRoute:
         assert "total" in data
         assert "symptoms" in data
         assert "categories" in data
-        assert data["total"] == 106  # +flat_stool (第82弾); 詳細は test_symptom_count
+        assert data["total"] == 107  # +rectal_prolapse (第83弾); 詳細は test_symptom_count
 
     def test_filter_by_category(self, client):
         resp = client.get("/api/health-check/symptoms?category=respiratory")

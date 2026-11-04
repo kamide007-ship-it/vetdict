@@ -457,6 +457,12 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "運動後に咳": "resp_cough_at_exercise",
     "運動中に咳": "resp_cough_at_exercise",
     "運動時の咳": "resp_cough_at_exercise",
+    # 「咳が運動時に出ます」（語順逆転形 — 2026-11 第83弾）
+    "咳が運動時": "resp_cough_at_exercise",
+    "咳が運動中": "resp_cough_at_exercise",
+    "咳が運動後": "resp_cough_at_exercise",
+    "運動時に咳": "resp_cough_at_exercise",
+    "走ると咳": "resp_cough_at_exercise",
     "exercise intolerance": "resp_exercise_intolerance",
     "運動不耐性": "resp_exercise_intolerance",
     "すぐバテる": "resp_exercise_intolerance",
@@ -1167,6 +1173,11 @@ def extract_symptoms_from_text(text: str) -> list:
                 overlap = True
                 break
         if overlap:
+            # 「後ろ足がガクガク」の内部の「ガクガク」（振戦）は、より長い肢の不安定の
+            # 句に完全に含まれる場合は振戦として数えない — てんかん・子癇へ誘導していた
+            # （2026-11 第83弾）
+            if raw_id == "tremors" and any(cs <= pos and end <= ce for cs, ce in consumed_ranges):
+                continue
             # Still add the symptom (same region might describe multiple things)
             matched_symptoms.add(symptom_id)
             continue
@@ -1909,6 +1920,14 @@ def diagnostic_chat():
     elif species != "dog" and bool(get_species_data(species)):
         extracted = _extract_species_symptoms(message, species)
         all_symptoms = list(set(extracted + previous_symptoms))
+        # 猫の「高齢です」「12歳」は鑑別の重み付けに使う（高齢猫の嘔吐＋体重減少は
+        # 甲状腺機能亢進症・リンパ腫・CKD が上位 — AAFP Senior Care 2021。
+        # 寿命が大きく異なるエキゾチックには年数の閾値を当てはめない）
+        _free_age_category = None
+        if species == "cat":
+            _free_age = extract_age_from_text(message)
+            if _free_age is not None and _free_age >= 10:
+                _free_age_category = "senior"
         disease_matches = _match_species_symptoms_to_diseases(
             all_symptoms,
             species,
@@ -1916,6 +1935,7 @@ def diagnostic_chat():
             lab_values=lab_values,
             breed=breed,
             lang=lang,
+            age_category=_free_age_category,
         )
         sp_names = get_species_data(species)["symptom_names"]
 
