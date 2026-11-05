@@ -839,6 +839,14 @@ SYMPTOMS = [
         "name_en": "Weight Gain",
         "category": "general",
     },
+    # 2026-11 第83弾: 寒がり・熱源を探す（甲状腺機能低下症の代謝低下 — Ettinger 8th ed;
+    # Scott-Moncrieff 2015）。従来は「寒がる」→lethargy で非特異的だった
+    {
+        "id": "cold_intolerance",
+        "name_ja": "寒がり・暖かい場所から離れない",
+        "name_en": "Cold Intolerance / Heat Seeking",
+        "category": "general",
+    },
     {
         "id": "mammary_swelling",
         "name_ja": "乳腺・乳首の腫大（しこり）",
@@ -1796,6 +1804,7 @@ DISEASES = [
         "symptoms": [
             "lethargy",
             "weight_gain",
+            "cold_intolerance",
             "hair_loss",
             "dry_skin",
             "stiffness",
@@ -5371,6 +5380,8 @@ _PATHOGNOMONIC_CLUSTERS = [
     # 扁平便は直腸の外部圧迫を示す部位診断的所見（2026-10 第82弾）。排尿困難を
     # 伴えば前立腺腫大による尿道・直腸の同時圧迫（Johnston 2000; Smith 2008）
     (frozenset({"flat_stool"}), "benign_prostatic_hyperplasia", 1.5),
+    # 寒がり（熱源探索）は甲状腺機能低下症の代謝低下を示す（2026-11 第83弾）
+    (frozenset({"cold_intolerance"}), "hypothyroidism", 1.5),
     (frozenset({"flat_stool", "preputial_discharge"}), "benign_prostatic_hyperplasia", 2.0),
     (frozenset({"flat_stool", "straining_to_urinate"}), "benign_prostatic_hyperplasia", 1.8),
     # 点状出血は血小板/血管障害の部位診断的所見（2026-10 第69弾）

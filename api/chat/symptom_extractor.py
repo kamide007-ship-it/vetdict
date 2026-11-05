@@ -622,6 +622,9 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "red_legs": ["red_ventrum", "skin_redness", "hemorrhage"],
     "red_ventrum": ["red_legs", "skin_redness", "hemorrhage"],
     "edema": ["swelling", "bloating", "ascites"],
+    # 2026-11 第83弾: 猫の鼻平面病変（白猫の日光性SCC）・寒がり（甲状腺機能低下症）
+    "nasal_planum_lesion": ["crusting", "non_healing_wound", "skin_lesions", "nasal_discharge"],
+    "cold_intolerance": ["heat_seeking", "lethargy", "weakness"],
     # Effusion / ascites (dogs/cats use "bloated_abdomen" / "abdominal_pain")
     "effusion": ["pleural_effusion", "abdominal_distension", "ascites", "bloated_abdomen"],
     "pleural_effusion": ["effusion", "labored_breathing"],

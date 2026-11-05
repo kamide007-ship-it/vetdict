@@ -158,9 +158,15 @@ class TestEnglishTreatmentMirrors:
         if not DB.exists():
             pytest.skip("served DB not built")
         ja_entries = json.loads(path.read_text(encoding="utf-8")).get("ja_entries", {})
-        for key, ja in ja_entries.items():
-            assert verify(ja, data[key]) is None, key
         c = sqlite3.connect(DB)
+        for key, ja in ja_entries.items():
+            en = data.get(key)
+            if en is None:  # 2026-11: JA translation of a curated English protocol
+                sp, name = key.split("|", 1)
+                row = c.execute("select treatment from diseases where species=? and name=?", (sp, name)).fetchone()
+                assert row and row[0], key
+                en = row[0].split("[ECVN:Block]")[0]
+            assert verify(ja.split("[ECVN:Block]")[0], en) is None, key
         for key, en in data.items():
             sp, name = key.split("|", 1)
             if key in ja_entries or (sp, name) in MANUALLY_REVIEWED:

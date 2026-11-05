@@ -54,9 +54,30 @@ def ja_treatment_upgrade(species: str, name: str, current: str | None) -> str | 
     rich = _ja_table().get(f"{(species or '').lower()}|{name or ''}")
     if not rich:
         return None
-    cur = (current or "").split("[ECVN:Block]")[0].strip()
+    cur_full = current or ""
+    cur = cur_full.split("[ECVN:Block]")[0].strip()
     body = rich.split("[ECVN:Block]")[0].strip()
-    return rich if len(body) > 1.5 * len(cur) else None
+    if len(body) > 1.5 * len(cur):
+        return rich
+    # 2026-11 第83弾: the JA column carries the generic work-up template while the
+    # English column is curated — the verified JA translation of the curated English
+    # protocol replaces the template (sponsor adjunct block, if any, is preserved).
+    if any(m in cur for m in _JA_WORKUP_TEMPLATE_MARKS):
+        if "[ECVN:Block]" in cur_full and "[ECVN:Block]" not in rich:
+            return body + "\n\n[ECVN:Block]" + cur_full.split("[ECVN:Block]", 1)[1]
+        return rich
+    return None
+
+
+_JA_WORKUP_TEMPLATE_MARKS = (
+    "正確な臨床評価（病歴、身体検査、CBC・生化学、画像）から治療方針を決定",
+    # 小動物の歯科テンプレートが馬に混入（馬の定期歯科は立位鎮静で実施）
+    "の治療には全身麻酔下での歯科処置が必須",
+    # 抗菌薬テンプレートのウイルス・内分泌疾患への誤適用
+    "は培養感受性試験を診療指針とし",
+    "はホルモン基礎値＋負荷試験（ACTH/TRH/dex抑制）で内分泌軸の不全を確定",
+    "に対し、画像（超音波・X線）で結石型・部位・尿路閉塞有無を評価",
+)
 
 
 def is_mostly_japanese(text: str | None) -> bool:
@@ -69,6 +90,16 @@ def en_treatment_for(species: str, name: str) -> str | None:
     return _table().get(f"{(species or '').lower()}|{name or ''}")
 
 
+_EN_TEMPLATE_MARKS = (
+    # Exotic small-mammal fallback (wrong-species meloxicam dose) — 2026-11 第83弾
+    "Identify underlying cause through species-appropriate diagnostics",
+    "Dental correction under GA. ■Species-appropriate trimming/filing",
+    "Equine orthopedic disease: Rest/stall rest.",
+)
+
+
 def needs_en_treatment(current: str | None) -> bool:
-    """True when the English treatment field is empty or predominantly Japanese."""
-    return not (current or "").strip() or is_mostly_japanese(current)
+    """True when the English treatment field is empty, predominantly Japanese,
+    or the generic exotic-template fallback."""
+    cur = current or ""
+    return not cur.strip() or is_mostly_japanese(cur) or any(m in cur for m in _EN_TEMPLATE_MARKS)

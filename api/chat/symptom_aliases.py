@@ -1203,7 +1203,7 @@ SYMPTOM_ALIASES = {
     "太ってきた": "weight_gain",
     "太った": "weight_gain",
     "毛が薄くなった": "hair_loss",
-    "寒がる": "lethargy",
+    "寒がる": "cold_intolerance",
     # 鳥 — そのう
     "口をパクパク": "vomiting",
     "口をパクパクさせてる": "vomiting",
@@ -4020,6 +4020,68 @@ SYMPTOM_ALIASES = {
     "ダニがたくさん": "visible_mites",
     "ダニが沢山": "visible_mites",
     "ダニがいっぱい": "visible_mites",
+    # --- 2026-11 第83弾（チャット精度第58回） ---
+    # 食後の腹部膨満＋苦悶（GDVの典型的な飼い主表現 — 「苦しそう」終止形が欠落）
+    "苦しそう": "labored_breathing",
+    "食べた後にお腹が膨れ": "bloating",
+    "食後にお腹が膨れ": "bloating",
+    "ご飯の後にお腹が膨れ": "bloating",
+    # 肛門周囲を気にする（肛門嚢の古典的主訴 — 「肛門を舐め」のみ収載だった）
+    "肛門のまわりを気に": "scooting",
+    "肛門の周りを気に": "scooting",
+    "肛門を気にし": "scooting",
+    "お尻を気にし": "scooting",
+    "おしりを気にし": "scooting",
+    # 黒い耳垢（耳ダニ・外耳炎）の「汚れ」表現
+    "耳が黒く汚れ": "ear_discharge",
+    "耳の中が黒く汚れ": "ear_discharge",
+    "耳が汚れ": "ear_discharge",
+    "耳の中が汚れ": "ear_discharge",
+    # 頻回の毛玉嘔吐（「毛玉を吐く」に頻度副詞が割り込むと不一致だった）
+    "毛玉をよく吐": "vomiting",
+    "毛玉を頻繁に吐": "vomiting",
+    "毛玉をしょっちゅう吐": "vomiting",
+    # 寒がり（甲状腺機能低下症の熱源探索行動 — Ettinger 8th ed; 従来は lethargy）
+    "寒がり": "cold_intolerance",
+    "暖かい場所から離れな": "cold_intolerance",
+    "ストーブの前から離れな": "cold_intolerance",
+    # 尻尾の付け根の掻痒（ノミアレルギーの好発部位 — 脱毛/かさぶた形のみ収載だった）
+    "しっぽの付け根をかゆが": "flea_signs",
+    "しっぽの付け根を痒が": "flea_signs",
+    "しっぽの付け根を掻": "flea_signs",
+    "尻尾の付け根をかゆが": "flea_signs",
+    "尻尾の付け根を痒が": "flea_signs",
+    "尻尾の付け根を掻": "flea_signs",
+    "腰のあたりをかゆが": "flea_signs",
+    # 黄疸の「目の色が」形
+    "目の色が黄色": "jaundice",
+    "白目の色が黄色": "jaundice",
+    # 肉眼的血尿の強調形（「真っ赤」は「赤」を含まず不一致だった）
+    "おしっこが真っ赤": "blood_in_urine",
+    "尿が真っ赤": "blood_in_urine",
+    "おしっこが赤黒": "dark_urine",
+    # 猫の鼻平面の病変（白猫の扁平上皮癌の早期徴候 — Murphy 2013 JFMS）
+    "鼻の上にできもの": "nasal_planum_lesion",
+    "鼻の頭にできもの": "nasal_planum_lesion",
+    "鼻にできもの": "nasal_planum_lesion",
+    "鼻の上がただれ": "nasal_planum_lesion",
+    "鼻の頭がただれ": "nasal_planum_lesion",
+    "鼻がただれ": "nasal_planum_lesion",
+    # 腹囲膨満の終止形（「お腹が大きくな」連用形のみ収載だった）
+    "お腹が大きい": "bloating",
+    "おなかが大きい": "bloating",
+    "お腹が大きく": "bloating",
+    # ダニの存在表現
+    "ダニがい": "visible_mites",
+    "ダニが付い": "visible_mites",
+    "ダニを見つけ": "visible_mites",
+    # 体のむくみ（両生類の浮腫症候群・犬猫の皮下浮腫）
+    "体がむくん": "edema",
+    "全身がむくん": "edema",
+    "体がむくみ": "edema",
+    "体がむくんでい": "edema",
+    "全身がむくんでい": "edema",
+    "体がパンパンに": "edema",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

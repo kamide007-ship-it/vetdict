@@ -1830,7 +1830,7 @@ function setDefaultStats(){
     diseases:6525,
     species:21,
     drugs:682,
-    symptoms:106,
+    symptoms:107,
     protocols:188
   };
   renderSpeciesGrid();
@@ -2123,7 +2123,7 @@ function setupMobileBottomNav(){
     const btn=e.target.closest("button[data-view]");
     if(!btn)return;
     haptic(10);
-    switchView(btn.dataset.view,{focusSearch:true});
+    switchView(btn.dataset.view,{focusSearch:true,push:true});
     const target=_navLandingTarget(btn.dataset.view);
     if(target)scrollToAnchor(target);
   });
@@ -5449,6 +5449,24 @@ function _navLandingTarget(view){
   if(input)return input.closest(".symptom-search")||input;
   return document.getElementById("view"+view.charAt(0).toUpperCase()+view.slice(1));
 }
+let _inHistoryNav=false;
+let _popstateHandledAt=0;
+try{if("scrollRestoration" in history)history.scrollRestoration="manual";}catch(_){/* ignore */}
+function _recordViewHistory(view,push){
+  const prev=location.hash.replace("#","");
+  try{
+    if(push&&!_inHistoryNav&&prev!==view){
+      /* Save where the user was on the outgoing entry, then push the new tab. */
+      history.replaceState(Object.assign({},history.state||{},{vdView:prev||null,vdY:Math.round(window.scrollY||0)}),"",location.pathname+location.search+location.hash);
+      history.pushState({vdView:view},"","#"+view);
+    }else{
+      history.replaceState(Object.assign({},history.state||{},{vdView:view}),"","#"+view);
+    }
+  }catch(_){
+    try{history.replaceState(null,null,"#"+view);}catch(__){/* ignore */}
+  }
+}
+
 function switchView(view,opts){
   /* opts.silent — skip event tracking + auto-focus (used for initial hash routing
      on page load so the soft keyboard does not pop up unexpectedly on mobile).
@@ -5468,7 +5486,11 @@ function switchView(view,opts){
       else{panel.classList.add("hidden");panel.style.animation="";}
     }
   });
-  history.replaceState(null,null,"#"+view);
+  /* 2026-11 第83弾: explicit tab taps (opts.push) create a history entry and
+     remember the previous tab's scroll position, so the phone's Back button /
+     swipe-back returns to the previous tab where the user was reading instead
+     of jumping to the page top (the old replaceState left a single entry). */
+  _recordViewHistory(view,!!opts.push);
   updateBreadcrumb();
   updateMobileBottomNav();
   /* Re-measure the sticky chrome AFTER the breadcrumb is shown/updated: the
@@ -5533,7 +5555,7 @@ function setupNavigation(){
     if(!tab)return;
     const view=tab.dataset.view;
     const menuWasOpen=nav.classList.contains("open");
-    switchView(view,{focusSearch:true});
+    switchView(view,{focusSearch:true,push:true});
     /* On desktop the content panels sit far below the landing sections, so a
        bare view switch happens off-screen and looks like a no-op. Scroll the
        chosen panel (or the species picker, which is the checker's entry point)
@@ -5553,8 +5575,26 @@ function setupNavigation(){
     else if(e.key==="ArrowLeft")next=(idx-1+tabs.length)%tabs.length;
     if(next>=0){e.preventDefault();tabs[next].focus();switchView(tabs[next].dataset.view);}
   });
+  // Back/forward between tab entries pushed by _recordViewHistory: restore the
+  // tab and the scroll position it was left at (2026-11 第83弾).
+  window.addEventListener("popstate",e=>{
+    const st=e.state;
+    if(!st||!("vdView" in st))return;
+    _popstateHandledAt=Date.now();
+    if(_anchorWatchRelease){try{_anchorWatchRelease();}catch(_){/* ignore */}}
+    _inHistoryNav=true;
+    try{switchView(st.vdView||"checker",{silent:true});}finally{_inHistoryNav=false;}
+    if(typeof st.vdY==="number"){
+      const y=st.vdY;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{try{window.scrollTo({top:y,behavior:"instant"});}catch(_){window.scrollTo(0,y);}}));
+    }else{
+      const target=_navLandingTarget(st.vdView);
+      if(target)scrollToAnchor(target);
+    }
+  });
   // Listen for hash changes (browser back/forward)
   window.addEventListener("hashchange",()=>{
+    if(Date.now()-_popstateHandledAt<500)return; /* already handled by popstate */
     const hash=location.hash.replace("#","");
     if(["checker","database","chat","drugs","anesthesia","emergency"].includes(hash))switchView(hash);
     else _handleDeepLinkHash(hash);
