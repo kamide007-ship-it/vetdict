@@ -361,6 +361,11 @@ _PREVALENCE_MULTIPLIER: dict[str, float] = {
 # backing — it exists to stop umbrella syndromes with long symptom lists
 # losing on coverage to narrow rarities.
 _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
+    # 猫の腹囲膨満＋元気消失は滲出型FIP（腹水）を第一に考える — 嘔吐を伴わない膨満を
+    # 消化管異物が押さえていた（Pedersen 2014; Tasker 2023 ABCD/ISFM; 2026-11 第83弾）
+    ("cat", frozenset({"abdominal_distension", "lethargy"}), "Feline Infectious Peritonitis (FIP) - Wet Form", 1.3),
+    # 鼻平面の治らない痂皮は白猫の日光性扁平上皮癌 until proven otherwise（Murphy 2013 JFMS）
+    ("cat", frozenset({"nasal_planum_lesion"}), "Feline Squamous Cell Carcinoma (Nasal Planum)", 1.4),
     # 猫の耳介の波動性腫脹（ぷよぷよ）は耳血腫 until proven otherwise — 外耳炎の
     # 頭振り・掻破に続発する（Little, The Cat; 2026-10 第80弾）
     ("cat", frozenset({"ear_swelling"}), "Feline Aural Hematoma", 1.4),

@@ -479,6 +479,11 @@ EQUINE_SYMPTOM_ALIASES: dict[str, str | tuple[str, ...]] = {
     "pawing": "dig_colic_signs",
     "rolling": "dig_colic_signs",
     "立ちたがらない": "gen_recumbent",
+    # 2026-11 第83弾: 寝転がる・起き上がらない（疝痛の横臥・転がり — Reed & Bayly 4th ed）
+    "寝転ん": "dig_colic_signs",
+    "寝転が": "dig_colic_signs",
+    "起き上がろうとしな": "gen_recumbent",
+    "起き上がらな": "gen_recumbent",
     "diarrhea": "dig_diarrhea",
     "下痢": "dig_diarrhea",
     "constipation": "dig_constipation",
@@ -915,6 +920,9 @@ def extract_symptoms_from_text(text: str) -> list:
         # 耳介下垂（チンチラ向け ear_drooping キー）は犬では顔面神経麻痺/
         # 中耳炎の徴候 — facial_droop へ（2026-10 第39回）
         "weakness": ["lethargy", "exercise_intolerance"],
+        # 2026-11 第83弾: 鼻平面の痂皮→皮膚病変、両生類用の浮腫→腹部膨満
+        "nasal_planum_lesion": ["crusting", "skin_lesions"],
+        "edema": ["bloating"],
         # 関節を痛がる（2026-10 第67弾）— レガシー犬は関節腫脹/こわばりで保持
         "joint_pain_or_stiffness": ["joint_swelling", "stiffness"],
         "swollen_joints": ["joint_swelling"],

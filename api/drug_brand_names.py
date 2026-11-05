@@ -49,7 +49,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "florfenicol": ("ニューフロール", "Nuflor"),
     "tylosin": ("タイラン", "Tylan"),
     # --- 抗真菌薬 ---
-    "itraconazole": ("イトリゾール", "Itrizole"),
+    "itraconazole": ("イトリゾール", "Itrizole", "イトラフンゴール", "Itrafungol"),
     "ketoconazole": ("ニゾラール", "Nizoral"),
     "fluconazole": ("ジフルカン", "Diflucan"),
     "terbinafine": ("ラミシール", "Lamisil"),
@@ -69,7 +69,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "emodepside": ("プロフェンダー", "Profender"),
     "imidacloprid": ("アドバンテージ", "Advantage"),
     # --- NSAIDs・鎮痛 ---
-    "meloxicam": ("メタカム", "Metacam"),
+    "meloxicam": ("メタカム", "Metacam", "Rheumocam"),
     "grapiprant": ("ガリプラント", "Galliprant"),
     "deracoxib": ("デラマックス", "Deramaxx"),
     "piroxicam": ("フェルデン", "バキソ"),
@@ -120,7 +120,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "mexiletine": ("メキシチール",),
     "sotalol": ("ソタコール",),
     "ivabradine": ("コララン",),
-    "amlodipine": ("アムロジン", "ノルバスク", "Norvasc"),
+    "amlodipine": ("アムロジン", "ノルバスク", "Norvasc", "Amodip", "アモディップ"),
     "telmisartan": ("セミントラ", "ミカルディス", "Semintra"),
     "imidapril": ("タナトリル",),
     "hydralazine": ("アプレゾリン",),
@@ -233,7 +233,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "povidone_iodine": ("イソジン", "Isodine"),
     # --- 2026-10 第69弾: 括弧内にのみ載る主要ブランド（複数の剤形バリアントが同じ
     # ブランドを括弧に持つため相互作用チェッカーの一意部分一致で未解決だった）---
-    "selamectin": ("レボリューション", "Revolution", "ストロングホールド", "Stronghold"),
+    "selamectin": ("レボリューション", "Revolution", "ストロングホールド", "Stronghold", "Selehold"),
     "fipronil": ("フロントライン", "Frontline"),
     "fluralaner": ("ブラベクト", "Bravecto"),
     "maropitant": ("セレニア", "Cerenia", "プレボマックス", "Prevomax"),
@@ -252,4 +252,6 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "dimercaprol": ("BAL",),
     # 2026-10 第80弾: フザプラジブの米国商品名（FDA条件付き承認 2022）
     "fuzapladib": ("パノクエル", "Panoquell", "Panoquell-CA1"),
+    # 2026-11 第83弾: 臭化カリウムの米国承認製剤（KBroVet 完全承認 2026-02）
+    "potassium_bromide": ("KBroVet", "Libromide"),
 }

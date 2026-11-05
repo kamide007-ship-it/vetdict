@@ -3179,14 +3179,14 @@ DRUGS: List[Dict[str, Any]] = [
             },
             "cat": {
                 "safe": True,
-                "dosage": "FIRST-LINE antihypertensive in cats (ACVIM 2018 consensus, Acierno 2018 JVIM). Start 0.625 mg/cat PO q24h; if SBP >=200 mmHg or target-organ damage is present, may start at 1.25 mg. Recheck SBP at 1-2 week intervals and titrate to 1.25 mg (max 2.5 mg/cat q24h), targeting SBP <160 mmHg (ideally <140). Before diagnosing, exclude situational (white-coat) hypertension: acclimatize, average multiple readings in a quiet room, or confirm target-organ damage (hypertensive retinopathy, LVH, proteinuria).",
-                "dosage_ja": "猫の全身性高血圧の第一選択薬（ACVIM 2018 コンセンサス、Acierno 2018 JVIM）。開始: 0.625 mg/頭 経口 24時間毎（SBP ≥200 mmHg または標的臓器障害ありは1.25 mg開始可）。1-2週間隔でSBPを再測定し、SBP <160 mmHg（理想 <140）を目標に 1.25 mg → 最大2.5 mg/頭へ漸増。診断時は状況性高血圧（白衣効果）を除外 — 静かな部屋で馴化後に複数回測定の平均、または標的臓器障害（高血圧性網膜症・左室肥大・蛋白尿）で裏付ける。",
+                "dosage": "FIRST-LINE antihypertensive in cats (ACVIM 2018 consensus, Acierno 2018 JVIM). Start 0.625 mg/cat PO q24h; if SBP >=200 mmHg or target-organ damage is present, may start at 1.25 mg. Recheck SBP at 1-2 week intervals and titrate to 1.25 mg (max 2.5 mg/cat q24h), targeting SBP <160 mmHg (ideally <140). FDA-approved feline label (Amodip chewable tablets, Ceva, approved 29 Apr 2026): 0.125-0.25 mg/kg PO q24h; if SBP remains inadequately controlled after 14 days, increase to 0.25-0.5 mg/kg q24h; cannot be dosed accurately in cats <2.5 kg (field study: 64.1% vs 17.6% responders at day 28, mean SBP fall 28 mmHg). Before diagnosing, exclude situational (white-coat) hypertension: acclimatize, average multiple readings in a quiet room, or confirm target-organ damage (hypertensive retinopathy, LVH, proteinuria).",
+                "dosage_ja": "猫の全身性高血圧の第一選択薬（ACVIM 2018 コンセンサス、Acierno 2018 JVIM）。開始: 0.625 mg/頭 経口 24時間毎（SBP ≥200 mmHg または標的臓器障害ありは1.25 mg開始可）。1-2週間隔でSBPを再測定し、SBP <160 mmHg（理想 <140）を目標に 1.25 mg → 最大2.5 mg/頭へ漸増。診断時は状況性高血圧（白衣効果）を除外 — 静かな部屋で馴化後に複数回測定の平均、または標的臓器障害（高血圧性網膜症・左室肥大・蛋白尿）で裏付ける。　米国で猫用承認製剤（Amodip チュアブル錠、Ceva、2026年4月29日承認）: 0.125-0.25 mg/kg 経口 24時間毎、14日後も血圧管理不十分なら 0.25-0.5 mg/kg 24時間毎へ増量。2.5 kg未満の猫は錠剤で正確に投与できない（野外試験: 28日目の奏効 64.1% 対 17.6%、収縮期血圧の平均低下 28 mmHg）。国内未承認。",
                 "notes": "Work up and treat the underlying cause in parallel (CKD, hyperthyroidism, primary hyperaldosteronism). Add telmisartan or benazepril if proteinuric. Acute hypertensive retinopathy (sudden blindness, fixed dilated pupils) is an emergency - start antihypertensive therapy the same day; retinal reattachment and some vision can return with prompt control. Gingival hyperplasia is a rare long-term effect.",
                 "notes_ja": "基礎疾患（CKD・甲状腺機能亢進症・原発性アルドステロン症）の検索と治療を並行。蛋白尿併発例はテルミサルタン/ベナゼプリルを追加。急性高血圧性網膜症（突然の失明・散瞳固定）は緊急 — 即日降圧を開始（迅速な降圧で網膜復位・一部視力回復の可能性）。歯肉増殖は長期投与でまれに発生。",
             },
         },
-        "side_effects": ["hypotension", "tachycardia", "gingival hyperplasia (rare)"],
-        "side_effects_ja": ["低血圧", "頻脈", "歯肉増殖（まれ）"],
+        "side_effects": ["hypotension", "tachycardia", "gingival hyperplasia (dose- and time-dependent; seen in all cats from weeks 10-12 in the Amodip safety study)", "decreased appetite, vomiting, diarrhea"],
+        "side_effects_ja": ["低血圧", "頻脈", "歯肉増殖（用量・期間依存性。Amodip 安全性試験では10-12週以降に全例で発現）", "食欲低下・嘔吐・下痢"],
         "contraindications": "Severe aortic stenosis. Hypotension.",
         "contraindications_ja": "重度大動脈弁狭窄症。低血圧。",
     },
@@ -8695,10 +8695,10 @@ DRUGS: List[Dict[str, Any]] = [
         "species_info": {
             "dog": {
                 "safe": True,
-                "dosage": "20-30 mg/kg PO q24h (40-60 mg/kg if monotherapy)",
-                "dosage_ja": "20-30 mg/kg 経口 24時間毎（単独療法: 40-60 mg/kg）",
-                "notes": "Long half-life (25 days); takes 3-4 months for steady state. Monitor serum levels (1-3 mg/mL)",
-                "notes_ja": "長い半減期(25日)。定常状態まで3-4ヶ月。血中濃度モニタリング(1-3 mg/mL)",
+                "dosage": "20-30 mg/kg PO q24h (40-60 mg/kg if monotherapy). KBroVet chewable tablets (Pegasus/PRN Pharmacal, NADA 141-615) received full FDA approval in Feb 2026 for seizures of idiopathic epilepsy in dogs — once-daily dosing per label; not evaluated in dogs <6 months, breeding, pregnant or lactating dogs.",
+                "dosage_ja": "20-30 mg/kg 経口 24時間毎（単独療法: 40-60 mg/kg）。米国では KBroVet チュアブル錠（Pegasus/PRN Pharmacal、NADA 141-615）が2026年2月に犬の特発性てんかんの発作管理で完全承認 — 添付文書どおり1日1回投与。6ヶ月齢未満・繁殖・妊娠授乳犬での安全性は未評価。",
+                "notes": "Long half-life (≥21-25 days); takes 3-4 months for steady state. Monitor serum levels (1-3 mg/mL). Renally excreted — dogs with kidney disease are predisposed to bromide toxicity. Chloride intake changes serum bromide: avoid abrupt diet changes, and high-chloride IV fluids (0.9% NaCl) accelerate excretion and can precipitate breakthrough seizures. Bromide interferes with chloride assays (falsely high chloride).",
+                "notes_ja": "長い半減期(21-25日以上)。定常状態まで3-4ヶ月。血中濃度モニタリング(1-3 mg/mL)。腎排泄のため腎疾患の犬は臭化物中毒を起こしやすい。塩化物摂取量で血中濃度が変動する: 急な食事変更を避け、塩化物の多い輸液（生理食塩水）は排泄を早め発作再燃の原因となる。臭化物は塩化物測定を偽高値にする。",
             },
             "cat": {
                 "safe": False,
