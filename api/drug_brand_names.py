@@ -26,7 +26,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "marbofloxacin": ("マルボシル", "Marbocyl"),
     "pradofloxacin": ("ベラフロックス", "Veraflox"),
     "amoxicillin": ("サワシリン", "パセトシン"),
-    "amoxicillin_clavulanate": ("クラバモックス", "オーグメンチン", "Clavamox", "Augmentin"),
+    "amoxicillin_clavulanate": ("クラバモックス", "オーグメンチン", "Clavamox", "Augmentin", "シヌロックス", "Synulox"),
     "ampicillin": ("ビクシリン",),
     "cefazolin": ("セファメジン",),
     "cephalexin": ("リレキシン", "Rilexine"),
@@ -108,7 +108,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "selegiline": ("アニプリル", "エフピー", "Anipryl"),
     "clonidine": ("カタプレス",),
     # --- 循環器 ---
-    "pimobendan": ("ピモベハート", "アカルディ", "ベトメディン", "Vetmedin"),
+    "pimobendan": ("ピモベハート", "アカルディ", "ベトメディン", "Vetmedin", "カーディシュア", "Cardisure"),
     "digoxin": ("ジゴシン",),
     "atenolol": ("テノーミン",),
     "propranolol": ("インデラル", "Inderal"),
@@ -233,7 +233,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "povidone_iodine": ("イソジン", "Isodine"),
     # --- 2026-10 第69弾: 括弧内にのみ載る主要ブランド（複数の剤形バリアントが同じ
     # ブランドを括弧に持つため相互作用チェッカーの一意部分一致で未解決だった）---
-    "selamectin": ("レボリューション", "Revolution", "ストロングホールド", "Stronghold"),
+    "selamectin": ("レボリューション", "Revolution", "ストロングホールド", "Stronghold", "セラリッド", "Selarid"),
     "fipronil": ("フロントライン", "Frontline"),
     "fluralaner": ("ブラベクト", "Bravecto"),
     "maropitant": ("セレニア", "Cerenia", "プレボマックス", "Prevomax"),
@@ -241,7 +241,7 @@ BRAND_NAME_ALIASES: dict[str, tuple[str, ...]] = {
     "frunevetmab": ("ソレンシア", "Solensia"),
     "lotilaner": ("クレデリオ", "Credelio", "クレデリオキャット", "Credelio CAT"),
     "detomidine": ("ドルモセダン", "Dormosedan"),
-    "capromorelin": ("エルラ", "エンタイス", "Elura", "Entyce"),
+    "capromorelin": ("エルラ", "エルーラ", "エンタイス", "Elura", "Entyce"),
     "leflunomide": ("アラバ", "Arava"),
     "lomustine": ("CCNU",),
     "tranexamic_acid": ("トランサミン", "TXA"),

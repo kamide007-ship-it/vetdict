@@ -12557,6 +12557,13 @@ _SYNDROME_FINDING_FLOORS: dict[str, tuple[str, ...]] = {
     # 成馬の慢性的な体重減少は歯科疾患と内部寄生虫が最多原因（Reed & Bayly 4th ed）
     # — 皮膚腫瘍の2所見エントリが体重減少単独主訴を独占していた（第69弾）。減額フロア
     "gen_weight_loss": ("Malocclusion", "Internal Parasites"),
+    # 鼻出血は運動誘発性肺出血（EIPH）・喉嚢真菌症・篩骨血腫が主因（Reed & Bayly 4th
+    # ed; Hinchcliff 2015 ACVIM consensus）— 未tier/稀な血小板減少症エントリが単一所見で
+    # 独占していた（2026-11 第83弾）。最多原因でありパトグノモニックではないため減額フロア
+    "resp_epistaxis": ("Exercise-Induced Pulmonary Hemorrhage", "Guttural Pouch Mycosis", "Ethmoid Hematoma"),
+    # 角膜の白濁は角膜潰瘍（浮腫）が最多原因（Brooks, Equine Ophthalmology）— 先天性多発
+    # 眼異常（ロッキーマウンテンホース限局）が単一所見で1位だった。減額フロア
+    "eye_cloudiness": ("Superficial Corneal Ulcer",),
 }
 _SYNDROME_FLOOR_SCORE = 0.62
 # Findings that are the *most common cause* rather than pathognomonic get a
@@ -12571,6 +12578,8 @@ _SYNDROME_FLOOR_SCORE_OVERRIDES: dict[str, float] = {
     "hoof_heat": 0.42,
     "limb_filling": 0.46,
     "gen_weight_loss": 0.42,
+    "resp_epistaxis": 0.42,
+    "eye_cloudiness": 0.42,
 }
 
 # Sign PAIRS that define a syndrome even when the namesake checkbox wasn't

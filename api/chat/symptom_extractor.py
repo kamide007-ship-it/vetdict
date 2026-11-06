@@ -473,6 +473,10 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "red_ears": ["ear_redness"],
     "ear_redness": ["red_ears"],
     "mammary_swelling": ["mammary_masses", "mammary_enlargement", "lumps"],
+    # 瞬膜突出（2026-11 第83弾）— 犬はチェリーアイ/眼瞼腫脹、他種は眼の腫脹系へ
+    # 眼瞼腫瘤（マイボーム腺腫等）— 種語彙では眼瞼/眼の腫脹へ
+    "eyelid_mass": ["eyelid_swelling", "eye_swelling", "swollen_eyes"],
+    "third_eyelid_protrusion": ["prolapsed_third_eyelid", "cherry_eye", "eye_swelling", "swollen_eyes"],
     # Limbs / extremities
     "cold_limbs": ["cold_extremities", "poor_circulation"],
     "cold_extremities": ["cold_limbs", "poor_circulation"],
@@ -842,6 +846,13 @@ _SUBSUMES: dict[str, set[str]] = {
     "ear_pain": {"pain"},
     # 頸部痛（2026-10 第78弾）— 「首を痛がってキャンと鳴く」で汎用 pain が眼科へ散らない
     "neck_pain": {"pain"},
+    # 血尿と同時の「痛そう」は排尿痛（2026-11 第83弾 — 「尿が赤くて痛そう」で汎用 pain が緑内障へ散っていた）
+    "blood_in_urine": {"pain"},
+    # 口腔内腫瘤は部位特異 — 汎用「できもの」を脂肪腫/乳腺腫瘍へ散らさない
+    "oral_mass": {"lumps", "lumps_and_bumps", "lumps_bumps"},
+    "eyelid_mass": {"lumps", "lumps_and_bumps", "lumps_bumps"},
+    # 指の間のできもの・赤み（趾間フルンクル）— 汎用「できもの」を脂肪腫へ散らさない
+    "paw_redness": {"lumps", "lumps_and_bumps", "lumps_bumps"},
 }
 
 # 眼の所見と同時に抽出された汎用「痛がる/痛そう」は眼痛として読む
@@ -1003,6 +1014,9 @@ _POLITE_NORMALIZATIONS: list[tuple[str, str]] = [
     ("抜けます", "抜ける"),
     ("抜けました", "抜けた"),
     ("抜けません", "抜けない"),
+    # いきむ（五段: トイレで何度もいきみます→いきむ — 2026-11 第83弾）
+    ("いきみました", "いきんだ"),
+    ("いきみます", "いきむ"),
 ]
 # 長い置換を先に適用（「ていませんでした」が「ていません」より先）
 _POLITE_NORMALIZATIONS.sort(key=lambda p: len(p[0]), reverse=True)

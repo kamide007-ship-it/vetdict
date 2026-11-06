@@ -227,6 +227,7 @@ SPECIES_PREVALENCE = {
         # Tick paralysis is region-bound (Ixodes holocyclus in Australia,
         # Dermacentor in N.America) — uncommon at best outside those areas.
         "Tick Paralysis": "uncommon",
+        "Eyelid Mass (Meibomian Gland Adenoma)": "common",
         "Tooth Abscess": "common",
         "Tooth Fracture": "common",
         "Transitional Cell Carcinoma": "uncommon",
@@ -748,7 +749,28 @@ SPECIES_PREVALENCE = {
         "Esophageal Stricture": "uncommon",
         "Megaesophagus": "uncommon",
         "Pleuropneumonia": "uncommon",
-        "Sinusitis": "uncommon",
+        # 2026-11 第83弾: 片側性の膿性鼻汁は副鼻腔炎（原発性・歯性）が最多原因で、
+        # 未tierの歯牙破折・篩骨腫瘍・鼻咽頭瘢痕症候群が上位を占めていた（Dixon 2012
+        # Equine Vet J; Reed & Bayly 4th ed）
+        "Sinusitis": "common",
+        "Primary Sinusitis": "common",
+        "Paranasal Sinus Cyst": "uncommon",
+        "Fractured Tooth": "uncommon",
+        "Nasopharyngeal Cicatrix Syndrome": "rare",
+        "Ethmoid Carcinoma": "rare",
+        "Equine Rhinosporidiosis": "rare",
+        "Selective IgA Deficiency": "rare",
+        # 鼻出血: 運動誘発性肺出血・喉嚢真菌症・篩骨血腫が主因。免疫介在性血小板減少症・
+        # エヴァンス症候群・殺鼠剤中毒は稀（Reed & Bayly 4th ed; Hinchcliff 2015 ACVIM）
+        "Exercise-Induced Pulmonary Hemorrhage": "common",
+        "Ethmoid Hematoma": "uncommon",
+        "Immune-Mediated Thrombocytopenia": "uncommon",
+        "Evans Syndrome": "rare",
+        "Anticoagulant Rodenticide Toxicity": "rare",
+        # 角膜混濁: 多発性先天性眼異常はロッキーマウンテンホース等に限局、成馬のVitA欠乏は稀
+        "Multiple Congenital Ocular Anomalies": "rare",
+        "Vitamin A Deficiency": "rare",
+        "Eosinophilic Keratitis": "uncommon",
         "Guttural Pouch Empyema": "uncommon",
         "Guttural Pouch Mycosis": "uncommon",
         # 2026-09: 発熱+鼻汁の主訴で腺疫(common)より上位に出ていた汎用
@@ -846,6 +868,13 @@ SPECIES_PREVALENCE = {
     # RABBIT — 35+ entries (expanded from ~23)
     # ==================================================================
     "rabbit": {
+        # 2026-11 第83弾: 歯ぎしり＋じっとしている（疼痛性イレウス）の主訴で、未tierの
+        # 骨・Ca系エントリがGIうっ滞を上回っていた。ウサギは腸管Ca吸収が効率的で
+        # 市販ペレット飼育下の Ca 欠乏・骨異栄養症は稀、大動脈石灰化は主にVitD過剰の
+        # 続発（Harcourt-Brown, Textbook of Rabbit Medicine; Quesenberry & Carpenter 4th）
+        "Nutritional Osteodystrophy": "uncommon",
+        "Calcium Deficiency": "uncommon",
+        "Aortic Calcification": "uncommon",
         # 2026-10 第43回: 陰部出血の鑑別 — 未避妊雌の子宮腺癌が圧倒的（Saito 2002;
         # Walter 2010 — 4歳以上の未避妊雌の50-80%）。平滑筋腫・捻転は稀
         "Leiomyoma (Uterine)": "uncommon",
@@ -1987,6 +2016,11 @@ SPECIES_PREVALENCE = {
     # PARROT
     # ==================================================================
     "parrot": {
+        # 2026-11 第83弾: くしゃみ＋鼻汁でボルデテラ・後鼻孔閉鎖（先天性 — 主にヨウム）が
+        # 鼻炎/副鼻腔炎より上位だった（Ritchie & Harrison; Harrison & Lightfoot）
+        "Bordetella Infection": "rare",
+        "Choanal Atresia / Choanal Slit Abnormality": "rare",
+        "Chronic Rhinitis": "common",
         # Exposure-dependent toxicoses / incidental hemoparasites (see parakeet).
         "Copper Poisoning": "rare",
         "PTFE Toxicosis (Teflon Poisoning)": "rare",

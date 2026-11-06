@@ -912,6 +912,8 @@ def extract_symptoms_from_text(text: str) -> list:
     # SYMPTOM_IDS (e.g. "weakness" from 起立不能, "dropsy" from 腹水, "anorexia"),
     # try a small synonym map to fall back to a valid generic ID.
     _LEGACY_FALLBACK = {
+        # 眼瞼腫瘤・瞬膜突出（2026-11 第83弾）
+        "third_eyelid_protrusion": ["eye_swelling"],
         # 耳介下垂（チンチラ向け ear_drooping キー）は犬では顔面神経麻痺/
         # 中耳炎の徴候 — facial_droop へ（2026-10 第39回）
         "weakness": ["lethargy", "exercise_intolerance"],

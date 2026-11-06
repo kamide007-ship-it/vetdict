@@ -4020,6 +4020,63 @@ SYMPTOM_ALIASES = {
     "ダニがたくさん": "visible_mites",
     "ダニが沢山": "visible_mites",
     "ダニがいっぱい": "visible_mites",
+    # --- 2026-11 第83弾（チャット精度第58回） ---
+    # 肛門部を気にして振り返る（肛門嚢疾患の古典的行動）
+    "お尻を気にして": "scooting",
+    "おしりを気にして": "scooting",
+    "お尻を振り返": "scooting",
+    "おしりを振り返": "scooting",
+    "しきりに振り返": "scooting",
+    # 腰の左右の揺れ（後躯の運動失調 — ウォブラー・変性性脊髄症）
+    "腰が左右に": "ataxia",
+    "腰が揺れ": "ataxia",
+    "腰がゆれ": "ataxia",
+    # 尿臭の増強（尿路感染症）
+    "おしっこのにおいがきつ": "cloudy_urine",
+    "尿のにおいがきつ": "cloudy_urine",
+    # 口腔内の黒色腫瘤（色修飾語の介在形 — 「黒いできもの」→皮膚結節への最長一致負けを防ぐ）
+    "口の中に黒いできもの": "oral_mass",
+    "口の中に黒いしこり": "oral_mass",
+    "歯茎に黒いできもの": "oral_mass",
+    # 猫: 便秘の「ず」形・トイレでの怒責（閉塞との鑑別を並べる）
+    "便が出ず": "constipation",
+    "うんちが出ず": "constipation",
+    "トイレでいきむ": "straining_to_urinate",
+    "トイレでいきみ": "straining_to_urinate",
+    # 猫: 瞬膜（第三眼瞼）突出
+    "目の横の膜が出": "third_eyelid_protrusion",
+    "瞬膜が出": "third_eyelid_protrusion",
+    "第三眼瞼が出": "third_eyelid_protrusion",
+    "目に白い膜がかか": "third_eyelid_protrusion",
+    "目の内側から膜が": "third_eyelid_protrusion",
+    # フケの量の修飾形
+    "フケだらけ": "dandruff",
+    "フケがたくさん": "dandruff",
+    "フケがひど": "dandruff",
+    # 乳頭周囲の腫脹（ウサギ乳腺炎・乳腺腫瘍）— 「首が腫れ」への部分一致を防ぐ長キー
+    "乳首のあたりが腫れ": "mammary_swelling",
+    "乳首の周りが腫れ": "mammary_swelling",
+    "おっぱいが腫れ": "mammary_swelling",
+    # まぶたの腫瘤（マイボーム腺腫・霰粒腫 — 汎用「できもの」の皮下腫瘤扱いを防ぐ）
+    "まぶたにできもの": "eyelid_mass",
+    "まぶたにしこり": "eyelid_mass",
+    "まぶたにイボ": "eyelid_mass",
+    "まぶたにいぼ": "eyelid_mass",
+    # ひらがな「なめ」形（足先・肉球の舐め行動）
+    "足をなめ": "excessive_licking",
+    "足先をなめ": "excessive_licking",
+    "肉球をなめ": "excessive_licking",
+    # 頻度副詞の介在形（陰部舐め — 猫FIC・犬の尿路/膣炎）
+    "陰部をよく舐め": "excessive_grooming",
+    "陰部をなめ": "excessive_grooming",
+    "陰部をよくなめ": "excessive_grooming",
+    # 多食の「が」形
+    "食欲があるのに": "increased_appetite",
+    "よく食べるのに痩せ": "increased_appetite",
+    # 両生類: 白っぽく剥がれる皮膚（ツボカビ症の過剰脱皮）
+    "白っぽくはがれ": "excessive_shedding",
+    "白っぽく剥がれ": "excessive_shedding",
+    "皮がぼろぼろはがれ": "excessive_shedding",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

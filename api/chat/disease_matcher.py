@@ -443,6 +443,10 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # 2026-10 第71弾: 急な後肢の引きずり＋悲鳴は猫ATEの古典像（Smith 2003
     # JVIM）— 猫語彙では「後ろ足を引きずる」が muscle_weakness へ解決される。
     ("cat", frozenset({"muscle_weakness", "vocalization_changes"}), "Aortic Thromboembolism (Saddle Thrombus)", 1.35),
+    # 「後ろ足を引きずって冷たい」— 冷感を伴う後肢の脱力は ATE until proven otherwise
+    # （Smith 2003 JVIM; Borgeat 2014）。冷感は低K性ミオパチーには伴わない（2026-11 round-58）
+    ("cat", frozenset({"muscle_weakness", "cold_extremities"}), "Aortic Thromboembolism (Saddle Thrombus)", 1.5),
+    ("cat", frozenset({"muscle_weakness", "cold_extremities"}), "Feline Aortic Thromboembolism (Partial)", 1.4),
     # モルモットの激しい掻痒＋痙攣発作は Trixacarus caviae 疥癬の定義的像
     # （掻痒誘発性発作 — Quesenberry & Carpenter 4th ed）。
     ("guinea_pig", frozenset({"itching", "seizures"}), "Trixacarus caviae (Sarcoptic Mange) - Severe", 1.45),
@@ -557,6 +561,12 @@ _PATHOGNOMONIC_PAIRS: list[tuple[str, frozenset, str, float]] = [
     # (Saito 2002; Walter 2010). Narrow untiered uterine entries otherwise
     # won on coverage (2026-10 round-43).
     ("rabbit", frozenset({"vaginal_bleeding"}), "Uterine Adenocarcinoma", 1.35),
+    # Bruxism in a rabbit sitting hunched and still is the painful-ileus
+    # presentation of GI stasis — often reported before the owner notices the
+    # appetite / faecal change (Harcourt-Brown; Oglesbee). Without the pair the
+    # untiered osteodystrophy / Ca-deficiency clones won on coverage
+    # (2026-11 round-58).
+    ("rabbit", frozenset({"teeth_grinding", "lethargy"}), "Gastrointestinal Stasis", 1.5),
 ]
 
 # Per-species IDF data: {species: (symptom_disease_count, total_diseases)}.
