@@ -1805,7 +1805,7 @@ function loadSpeciesStats(){
 function setDefaultStats(){
   SPECIES=[
     {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:609,drugs:622,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:599,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:600,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:367,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:418,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:280,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1829,8 +1829,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6525,
     species:21,
-    drugs:682,
-    symptoms:106,
+    drugs:683,
+    symptoms:107,
     protocols:188
   };
   renderSpeciesGrid();
@@ -3503,6 +3503,8 @@ function renderResults(data){
   const phase1=diseasesByPhase.phase_1_common||[];
   const phase2=diseasesByPhase.phase_2_rare||[];
 
+  /* 2026-11 第83弾: 鑑別候補ジャンプ・ストリップ（スマホで長い結果の各カードへ1タップ着地） */
+  html+=`<div class="dx-jump" id="dxJumpStrip" role="navigation" aria-label="${currentLang==="ja"?"鑑別候補へ移動":"Jump to differential"}"></div>`;
   html+=`<div class="results-cards-area">`;
   // Render Phase 1 (Common/Very Common)
   if(phase1.length>0){
@@ -3575,6 +3577,18 @@ function renderResults(data){
     if(head)toggleDetail(head);
   });
   contentDiv.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){const head=e.target.closest(".disease-head");if(head){e.preventDefault();toggleDetail(head);}}});
+  /* 候補ジャンプ → 結果内の該当カードへ sticky ヘッダー補正で着地＋ハイライト */
+  contentDiv.addEventListener("click",function(e){
+    const jb=e.target.closest(".dx-jump-btn");
+    if(!jb)return;
+    e.preventDefault();
+    const card=contentDiv.querySelector('.disease-result[data-dxpos="'+jb.dataset.dxpos+'"]');
+    if(!card)return;
+    scrollToAnchor(card);
+    card.classList.add("dx-card-flash");
+    setTimeout(()=>card.classList.remove("dx-card-flash"),1200);
+    trackEvent("checker_candidate_jump",{rank:jb.dataset.rank});
+  });
   /* Sort buttons — "default" restores phase grouping; others render a flat sorted list */
   contentDiv.addEventListener("click",function(e){
     const sortBtn=e.target.closest(".results-sort-btn");
@@ -3602,6 +3616,7 @@ function renderResults(data){
         groupHtml+=`<div class="dx-group">${commonDxNote(diseases,DX_CAP_FLAT)}${renderDxCards(diseases,data,DX_CAP_FLAT)}</div>`;
       }
       cardsArea.innerHTML=groupHtml;
+      _buildDxJumpStrip(contentDiv);
       return;
     }
     const sevOrder={emergency:0,high:1,moderate:2,low:3};
@@ -3609,7 +3624,9 @@ function renderResults(data){
     if(mode==="confidence")sorted.sort((a,b)=>(b.match_percent||b.confidence||0)-(a.match_percent||a.confidence||0));
     else if(mode==="severity")sorted.sort((a,b)=>(sevOrder[a.severity]??4)-(sevOrder[b.severity]??4));
     cardsArea.innerHTML=`<div class="dx-group">${renderDxCards(sorted,data,DX_CAP_FLAT)}</div>`;
+    _buildDxJumpStrip(contentDiv);
   });
+  _buildDxJumpStrip(contentDiv);
   area.appendChild(contentDiv);
   area.appendChild(createFeedbackWidget());
   area.appendChild(createShareWidget(diseases));
@@ -3620,6 +3637,23 @@ function renderResults(data){
   if(typeof hydrateTreatmentDrugs==="function")hydrateTreatmentDrugs(area);
   /* Save diagnosis to history (localStorage) */
   saveDiagnosisHistory(data,diseases);
+}
+
+/* 鑑別候補ジャンプ・ストリップ: 表示中（dx-hidden 以外）の先頭5件のカードに data-dxpos を
+   振り、「1位 疾患名」チップを生成する。並び替え後も DOM から再構築するため順位と一致する。 */
+function _buildDxJumpStrip(root){
+  const strip=root.querySelector("#dxJumpStrip");
+  if(!strip)return;
+  const cards=[...root.querySelectorAll(".results-cards-area .disease-result")].filter(c=>!c.classList.contains("dx-hidden"));
+  if(cards.length<3){strip.innerHTML="";strip.hidden=true;return;}
+  strip.hidden=false;
+  strip.innerHTML=cards.slice(0,5).map((c,i)=>{
+    c.dataset.dxpos=String(i);
+    const nm=c.querySelector(".disease-name");
+    const full=(nm?nm.textContent:"").trim();
+    const short=full.length>14?full.slice(0,13)+"…":full;
+    return `<button type="button" class="dx-jump-btn" data-dxpos="${i}" data-rank="${i+1}">${i+1}${currentLang==="ja"?"位":"."} ${escapeHtml(short)}</button>`;
+  }).join("");
 }
 
 /* ===== Print / Export ===== */

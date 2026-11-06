@@ -49,8 +49,39 @@ def _avian_supportive(species: str) -> str:
     )
 
 
+# 肉食・雑食・食虫の小型哺乳類（2026-11 第83弾）: 旧ブロックは草食動物用の Critical Care
+# と齧歯類のメロキシカム用量（0.5-1.0 mg/kg）を全小型哺乳類に付けていた。フェレットは
+# 0.2 mg/kg、ハリネズミ・フクロモモンガは 0.1-0.2 mg/kg（Carpenter Exotic Animal Formulary
+# 6th; Quesenberry & Carpenter 4th ed）。フェレットは長時間絶食で低血糖（インスリノーマ）に陥る。
+NON_HERBIVORE_SMALL_MAMMAL_SUPPORTIVE = {
+    "ferret": (
+        "支持療法（フェレット）: 等張輸液 60-70 mL/kg/日 SC/IV（維持量）、保温、"
+        "肉食動物用流動食（Carnivore Care・a/d缶等）を少量頻回に給与し絶食は3時間以内にとどめる"
+        "（インスリノーマ併発例の低血糖予防）、メロキシカム 0.2 mg/kg PO/SC q24h で疼痛・炎症管理。"
+    ),
+    "hedgehog": (
+        "支持療法（ハリネズミ）: 等張輸液 50-100 mL/kg/日 SC、保温25-30℃（低体温で擬似冬眠に陥りやすい）、"
+        "食虫・肉食動物用流動食（Carnivore Care等）のシリンジ給餌、"
+        "メロキシカム 0.1-0.2 mg/kg PO/SC q24h で疼痛・炎症管理。"
+    ),
+    "sugar_glider": (
+        "支持療法（フクロモモンガ）: 等張輸液 80-100 mL/kg/日 SC、保温27-31℃、"
+        "雑食動物用流動食（Carnivore Care・ネクター系代用食等）のシリンジ給餌、"
+        "メロキシカム 0.1-0.2 mg/kg PO/SC q24h で疼痛・炎症管理。"
+    ),
+}
+
+OLD_SMALL_MAMMAL_SUPPORTIVE = (
+    "支持療法（小型哺乳類）: 等張輸液 80-100 mL/kg/日 SC/IV、保温（26-28℃）、"
+    "シリンジ給餌（Critical Care/Recovery 50-90 mL/kg/日を3-4回分割）、"
+    "メロキシカム 0.5-1.0 mg/kg PO q12-24h で疼痛・炎症管理。"
+)
+
+
 def _small_mammal_supportive(species: str) -> str:
     """Small-mammal supportive care — emphasizes pro-motility and analgesia."""
+    if species in NON_HERBIVORE_SMALL_MAMMAL_SUPPORTIVE:
+        return NON_HERBIVORE_SMALL_MAMMAL_SUPPORTIVE[species]
     species_specific = ""
     if species == "rabbit":
         species_specific = " ペニシリン系・セファロスポリン系の経口投与は腸内細菌叢を破壊し致死的になるため禁忌。"

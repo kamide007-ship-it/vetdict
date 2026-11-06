@@ -222,6 +222,8 @@ _MELOXICAM_JA = {
     "horse": "鎮痛: メロキシカム 0.6 mg/kg PO q24h、またはフェニルブタゾン 2.2-4.4 mg/kg PO q12-24h（短期・最小有効量）。",
     "rabbit": "鎮痛: メロキシカム 0.5-1.0 mg/kg PO q24h（ウサギは代謝が速く高用量を要する — Carpenter 6th）。",
     "ferret": "鎮痛: メロキシカム 0.2 mg/kg PO q24h。",
+    "hedgehog": "鎮痛: メロキシカム 0.1-0.2 mg/kg PO/SC q24h（Carpenter 6th）。",
+    "sugar_glider": "鎮痛: メロキシカム 0.1-0.2 mg/kg PO/SC q24h（Carpenter 6th）。",
 }
 _MELOXICAM_GROUP_JA = (
     (
@@ -244,6 +246,71 @@ def meloxicam_line_ja(species: str) -> str:
         if species in group:
             return line
     return "鎮痛: メロキシカム 0.2-0.5 mg/kg PO q24h（小型哺乳類 — 種に応じて用量を調整）。"
+
+
+# 常生歯（臼歯研磨・切歯トリミング）を持ち、高繊維粗飼料で歯を摩耗させる種
+_ELODONT_HERBIVORES = frozenset({"rabbit", "guinea_pig", "chinchilla", "degu", "hamster"})
+_ELODONT_DENTAL_TEMPLATE = (
+    "{name}の治療には全身麻酔下での歯科処置が必須（無麻酔処置は不十分かつ安全性に欠ける）。",
+    "高速ダイヤモンドバーで臼歯研磨、過長切歯トリミング、{species}の上下咬合バランス回復。",
+    "膿瘍合併時は外科的排膿＋ドキシサイクリン 5-10 mg/kg PO q12h × 4-6週（嫌気性菌カバー）。",
+    "鎮痛: メロキシカム 0.5-1 mg/kg PO q12-24h、強オピオイド使用時はモニタ強化。",
+    "予防のため繊維質食材（チモシー、葉物野菜）を主食、咀嚼促進のためペレットを最小化。",
+)
+
+
+def dental_lines_ja(species: str, name_ja: str) -> list[str]:
+    """Species-appropriate dental management lines.
+
+    The legacy dental fallback described elodont (continuously growing teeth)
+    herbivore dentistry — molar burring, incisor trimming, a timothy-hay diet —
+    with a rodent meloxicam dose (0.5-1 mg/kg, a 5-10x overdose for dogs and
+    up to 20x for cats) for EVERY species, so dog/cat/ferret/bird/reptile oral
+    disease received rabbit dentistry (2026-11 第83弾). Elodont herbivores keep
+    the original lines; other taxa get their own standard of care
+    (AAHA 2019 Dental Guidelines; Baker & Easley, Equine Dentistry 3rd ed;
+    Carpenter Exotic Animal Formulary 6th; Mader 3rd ed).
+    """
+    species_ja = _species_label_ja(species)
+    if species in _ELODONT_HERBIVORES:
+        return [line.format(name=name_ja, species=species_ja) for line in _ELODONT_DENTAL_TEMPLATE]
+    analgesia = meloxicam_line_ja(species)
+    if species == "horse":
+        return [
+            f"{name_ja}は立位鎮静下（α2作動薬±ブトルファノール）で開口器を装着し、口腔内を洗浄・精査する。",
+            "鋭利点・過長部・段差はパワーフロート/手用ラスプで整復（過度の削合は歯髄露出のリスク）。歯根・副鼻腔病変が疑われれば頭部X線/CT。",
+            "歯根膿瘍・副鼻腔炎合併時は抜歯±副鼻腔洗浄、培養に基づく抗菌薬（例: トリメトプリム・サルファ 30 mg/kg PO q12h）。",
+            analgesia,
+            "粗飼料主体の給与（長時間の咀嚼で歯を均等に摩耗）と、年1回以上の定期歯科検診。",
+        ]
+    if species in ("bird", "parakeet", "parrot"):
+        return [
+            f"{name_ja}は基礎疾患（肝疾患・栄養不良・疥癬・PBFD・外傷）の精査を優先する（嘴の変形は全身疾患の徴候であることが多い）。",
+            "過長・変形部は鎮静/イソフルラン麻酔下でロータリーツールにより少量ずつ整形する（知覚部・血管層を削らない）。",
+            "感染合併時は培養に基づく抗菌薬（例: ドキシサイクリン 25-50 mg/kg PO q12-24h — Carpenter 6th）。",
+            analgesia,
+            "ペレット主体の食事とかじり木・止まり木の材質変化で、嘴の自然な摩耗を促す。",
+        ]
+    if species in ("reptile", "lizard", "snake", "tortoise"):
+        return [
+            f"{name_ja}は全身麻酔下で口腔内を精査し、歯垢・歯石の除去、感染組織のデブリードマン、0.05%クロルヘキシジン洗浄を行う。"
+            if species != "tortoise"
+            else f"{name_ja}の過長部はロータリーツールで少量ずつ整形し、原因（代謝性骨疾患・軟らかい餌）を是正する。",
+            "膿瘍・骨髄炎は外科的掻爬と培養に基づく抗菌薬（例: セフタジジム 20 mg/kg IM q72h — Carpenter 6th）。",
+            "適温（POTZ）・紫外線（UV-B）とカルシウムを含む種適正な食事を整える。",
+            analgesia,
+            "昆虫食偏重・軟らかい餌に偏らない給餌と、定期的な口腔チェック。"
+            if species != "tortoise"
+            else "高繊維の野草・乾草主体の食事で、嘴の自然な摩耗を促す。",
+        ]
+    # 肉食・雑食の哺乳類（犬・猫・フェレット・ハリネズミ等）
+    return [
+        f"{name_ja}は全身麻酔・気管挿管下で口腔内を精査し、全顎歯科X線で歯根・骨病変を評価する（AAHA 2019 Dental Guidelines）。",
+        "病変に応じてスケーリング・ルートプレーニング、抜歯、腫瘤の切除生検（病理検査）を実施する。",
+        "膿瘍・重度歯周炎の合併時のみ全身抗菌薬（例: クリンダマイシン 5.5-11 mg/kg PO q12h、またはアモキシシリン・クラブラン酸 12.5-20 mg/kg PO q12h）。",
+        analgesia,
+        "術後は歯みがき（ホームケア）と定期的な歯科検診で再発を予防する。",
+    ]
 
 
 def _class_specific_lines(species: str, klass: str, name_ja: str) -> list[str]:
@@ -338,13 +405,7 @@ def _class_specific_lines(species: str, klass: str, name_ja: str) -> list[str]:
             f"再発予防のため水分摂取増加（湿食、複数水場、温度管理）と{species_ja}用処方食を継続。",
         ]
     if klass == "dental":
-        return [
-            f"{name_ja}の治療には全身麻酔下での歯科処置が必須（無麻酔処置は不十分かつ安全性に欠ける）。",
-            f"高速ダイヤモンドバーで臼歯研磨、過長切歯トリミング、{species_ja}の上下咬合バランス回復。",
-            "膿瘍合併時は外科的排膿＋ドキシサイクリン 5-10 mg/kg PO q12h × 4-6週（嫌気性菌カバー）。",
-            "鎮痛: メロキシカム 0.5-1 mg/kg PO q12-24h、強オピオイド使用時はモニタ強化。",
-            "予防のため繊維質食材（チモシー、葉物野菜）を主食、咀嚼促進のためペレットを最小化。",
-        ]
+        return dental_lines_ja(species, name_ja)
     if klass == "endocrine":
         return [
             f"{name_ja}はホルモン基礎値＋負荷試験（ACTH/TRH/dex抑制）で内分泌軸の不全を確定する。",

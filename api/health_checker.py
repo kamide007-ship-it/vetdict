@@ -860,6 +860,12 @@ SYMPTOMS = [
         "category": "digestive",
     },
     {
+        "id": "eyelid_mass",
+        "name_ja": "まぶたのできもの",
+        "name_en": "Eyelid Mass",
+        "category": "ocular",
+    },
+    {
         "id": "tail_chasing",
         "name_ja": "しっぽを追いかける・かじる（常同行動）",
         "name_en": "Tail Chasing / Chewing (Repetitive Behavior)",
@@ -4244,6 +4250,50 @@ DISEASES = [
         "severity": "high",
         "recommended_tests": ["blood_test", "cbc", "urinalysis"],
         "breed_risks": {},
+    },
+    # 2026-11 第83弾: eyelid mass — meibomian gland adenoma/epithelioma is the
+    # commonest canine eyelid tumour and is overwhelmingly benign (Gelatt's
+    # Veterinary Ophthalmology 6th ed; Krehbiel & Langham 1975). Mass-gated;
+    # name mirrors the dog module entry for the DB pivot.
+    {
+        "id": "eyelid_mass",
+        "prevalence_tier": "common",
+        "name_ja": "眼瞼腫瘤（マイボーム腺腫）",
+        "name_en": "Eyelid Mass (Meibomian Gland Adenoma)",
+        "description_ja": "高齢犬の眼瞼腫瘍で最も多いのはマイボーム腺腫・上皮腫で、大半は良性。睫毛縁の小さな隆起として気づかれ、増大すると角膜を擦過して流涙・目やに・結膜炎・角膜潰瘍を起こす。治療は小型なら経過観察か凍結手術、角膜刺激や増大があれば眼瞼のV字（楔状）切除（眼瞼長の約1/4〜1/3まで一次閉鎖可能）。メラノーマ・肥満細胞腫・組織球腫も眼瞼に発生するため、切除組織は病理検査に提出する（Gelatt's Veterinary Ophthalmology 6th ed; Slatter's 6th ed）。",
+        "description_en": "Meibomian gland adenoma/epithelioma is the commonest eyelid tumour in older dogs and is mostly benign. Noticed as a small lid-margin swelling; as it enlarges it rubs the cornea, causing tearing, discharge, conjunctivitis or ulceration. Small masses can be monitored or treated by cryosurgery; irritating or growing masses are removed by full-thickness V/wedge resection (up to about 1/4-1/3 of lid length closes primarily). Melanoma, mast cell tumour and histiocytoma also occur on the lids, so submit excised tissue for histopathology (Gelatt's Veterinary Ophthalmology 6th ed; Slatter's 6th ed).",
+        "symptoms": [
+            "eyelid_mass",
+        ],
+        "severity": "low",
+        "recommended_tests": ["ophthalmic_exam", "cytology", "biopsy"],
+        "breed_risks": {},
+    },
+    # 2026-11 第83弾: lipoma — the commonest canine skin/subcutaneous mass
+    # (O'Neill 2018 VetCompass; Withrow & MacEwen 6th ed) had no chat entry,
+    # so every「しこりがある」complaint landed on mammary tumor / MCT.
+    # Name matches the dog module「Lipoma」for the DB pivot. The description
+    # carries the safety rule that every mass needs fine-needle aspiration
+    # (MCT is the great mimic of lipoma).
+    {
+        "id": "lipoma",
+        "prevalence_tier": "very_common",
+        "name_ja": "脂肪腫",
+        "name_en": "Lipoma",
+        "description_ja": "皮下の脂肪細胞由来の良性腫瘍で、中高齢犬（特に肥満・避妊済み雌、ラブラドール等）の皮下腫瘤として最も多い。軟らかく可動性のある境界明瞭なしこりが典型。ただし肥満細胞腫は脂肪腫に酷似することがあり、外観・触診だけで良性と判断しない — すべての腫瘤は穿刺吸引細胞診（FNA）で確認し、大きさを記録して経過観察する（急速増大・硬化・固着・潰瘍化は再評価）。治療は通常経過観察で、増大・運動障害・浸潤性脂肪腫（筋間浸潤）では外科切除（浸潤性はCT評価±放射線）（Withrow & MacEwen 6th ed; O'Neill 2018）。",
+        "description_en": "Benign tumor of subcutaneous adipocytes — the most common subcutaneous mass in middle-aged and older dogs (especially overweight spayed females and Labradors). Typically a soft, mobile, well-demarcated swelling. Mast cell tumors can mimic lipomas, so never call a mass benign on appearance or palpation alone: aspirate every mass (FNA cytology), record its size and monitor (rapid growth, firmness, fixation or ulceration warrant re-assessment). Usually monitored; excise if enlarging, impairing movement, or infiltrative (intermuscular — CT staging ± radiation) (Withrow & MacEwen 6th ed; O'Neill 2018).",
+        # Mass-gated on purpose: the entry matches only the owner-felt lump,
+        # so it never competes in systemic complaints.
+        "symptoms": [
+            "lumps_bumps",
+        ],
+        "severity": "low",
+        "recommended_tests": ["fine_needle_aspirate", "cytology"],
+        "breed_risks": {
+            "labrador_retriever": 1.8,
+            "doberman_pinscher": 1.5,
+            "miniature_schnauzer": 1.4,
+        },
     },
 ]
 
