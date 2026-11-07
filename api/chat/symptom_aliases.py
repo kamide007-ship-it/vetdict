@@ -2379,6 +2379,27 @@ SYMPTOM_ALIASES = {
     # フクロモモンガ自咬: 「自分を噛んでしまう」のみで部位介在形が欠落
     "自分のお腹を噛": "self_mutilation",
     "自分の体を噛": "self_mutilation",
+    # 2026-11 第83弾: 「かじる」形（フクロモモンガ自咬の最頻の言い回し）が全欠落
+    "自分の体をかじ": "self_mutilation",
+    "自分の体を齧": "self_mutilation",
+    "体をかじって": "self_mutilation",
+    "自分をかじ": "self_mutilation",
+    # 猫の腹部過剰グルーミング（「お腹の毛が抜け」のみ収載だった）
+    "お腹の毛を舐め": "excessive_grooming",
+    "お腹を舐めて毛が": "excessive_grooming",
+    # 猫ATE: 「冷たくなって動かない」は冷感+麻痺の非連続形（既存キーは連続形のみ）
+    "後ろ足が冷たくなって動かな": "hind_limb_paralysis",
+    "後足が冷たくなって動かな": "hind_limb_paralysis",
+    # 犬の挙上跛行のカタカナ/ひらがな裸形（「ケンケンしながら」等のみ収載）
+    "ケンケン": "lameness_or_limping",
+    "けんけん": "lameness_or_limping",
+    # 散瞳の和語形（瞳孔/黒目の形のみ収載）
+    "瞳が大き": "dilated_pupils",
+    "瞳が開い": "dilated_pupils",
+    # 魚の水面呼吸のひらがな形（裸の「ぱくぱく」は「ぱくぱく食べる」と衝突するため付けない）
+    "水面でぱくぱく": "gasping_surface",
+    "水面で口をぱくぱく": "gasping_surface",
+    "水面で口をパクパク": "gasping_surface",
     "そのうが膨らん": "crop_distension",
     # 鳥そのう疾患: 連用形「そのうが膨らんで」/ 毛引きの語順ゆれ「羽を自分で抜く」
     "羽を自分で抜": "feather_plucking",
@@ -4126,3 +4147,12 @@ for _k, _v in list(SYMPTOM_ALIASES.items()):
     elif _k.endswith("ている") or _k.endswith("でいる"):
         SYMPTOM_ALIASES.setdefault(_k[:-2] + "る", _v)
 del _k, _v
+
+
+# 1つの表現が2所見を同時に記述するエイリアスの併記抽出（キー → 追加ID）。
+# 主IDは SYMPTOM_ALIASES の値。2026-11 第83弾: 猫ATEの「後ろ足が冷たくなって
+# 動かない」は冷感と麻痺の両方 — 最長一致で片方しか残らず ATE ペアが不発だった。
+ALIAS_COEXTRACT = {
+    "後ろ足が冷たくなって動かな": ("cold_extremities",),
+    "後足が冷たくなって動かな": ("cold_extremities",),
+}

@@ -4,7 +4,7 @@ Extracts symptom IDs from JP/EN text using longest-match-first strategy.
 """
 
 from api.chat.species_data import get_species_data
-from api.chat.symptom_aliases import SYMPTOM_ALIASES
+from api.chat.symptom_aliases import ALIAS_COEXTRACT, SYMPTOM_ALIASES
 
 # Cross-species ID mapping: dog aliases use "loss_of_appetite" but many
 # species modules use "appetite_loss", "anorexia", etc. for the same concept.
@@ -1123,6 +1123,12 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
             if resolved:
                 matched.add(resolved)
                 _consumed |= alias_range
+            # 1つの表現が2所見を同時に記述する場合の併記抽出（2026-11 第83弾 —
+            # 「後ろ足が冷たくなって動かない」= 後肢冷感＋後肢麻痺）
+            for co_id in ALIAS_COEXTRACT.get(alias, ()):
+                co_resolved = _resolve_id(co_id)
+                if co_resolved:
+                    matched.add(co_resolved)
 
     # Phase 2: Direct symptom name matches (ja/en)
     for sym_id, names in symptom_names.items():

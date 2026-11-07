@@ -11829,7 +11829,10 @@ _KATAKANA_VARIANT_ALIASES: dict[str, tuple[str, ...]] = {
         "インターフェロンω",
     ),  # canonical: 猫インターフェロンオメガ（…） — texts omit the 猫 prefix / use ω
     "pyrimethamine": ("ピリメサミン",),  # サ transliteration variant of ピリメタミン
-    "alpha_casozepine": ("α-カソゼピン",),  # canonical: αカソゼピン（ジルケーン） — texts hyphenate
+    # 2026-11 第83弾: 括弧内のラテン商品名は tier-4 索引対象外のため、行動学
+    # エントリの「Zylkene 15 mg/kg」「Anxitane 2.5-5 mg/kg」（各14参照）が未解決だった
+    "alpha_casozepine": ("α-カソゼピン", "zylkene", "ジルケーン"),
+    "l_theanine": ("anxitane", "アンキシタン"),
     # 2026-08 sweep #7: treatment texts cite these agents by variant spellings
     # that the canonical name_ja never reduces to.
     "dopamine": ("ドーパミン",),  # long-vowel variant of ドパミン — 19 treatment refs
