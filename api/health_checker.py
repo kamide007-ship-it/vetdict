@@ -5329,6 +5329,11 @@ _PATHOGNOMONIC_CLUSTERS = [
     # glaucoma/ulcer must outrank incidental 1-sign entries (corneal dystrophy
     # is non-painful — Maggs, Slatter's 6th ed).
     (frozenset({"cloudiness_in_eyes", "pain"}), "glaucoma", 1.5),
+    # 2026-11 第83弾: red eye + mydriasis/vision loss (飼い主表現「目が赤くて瞳が
+    # 大きい」→ dilated_pupils→vision_loss) is acute glaucoma until proven
+    # otherwise — conjunctivitis/eyelid disease does not dilate the pupil
+    # (Gelatt's Veterinary Ophthalmology 6th ed; Maggs, Slatter's 6th ed).
+    (frozenset({"redness_in_eyes", "vision_loss"}), "glaucoma", 1.4),
     (frozenset({"cloudiness_in_eyes", "pain"}), "corneal_ulcer", 1.4),
     # Lymphoma: swollen lymph nodes + weight loss + lethargy
     (frozenset({"swollen_lymph_nodes", "weight_loss", "lethargy"}), "lymphoma", 1.7),

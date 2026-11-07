@@ -5889,16 +5889,7 @@ function renderChatResult(container,data){
        読むのに長いスクロールが要った — 「2位 疾患名」をタップでそのカードへ着地
        （2026-10 第81弾） */
     if(candidates.length>1){
-      const jump=document.createElement("div");
-      jump.className="chat-cand-jump";
-      jump.setAttribute("role","navigation");
-      jump.setAttribute("aria-label",currentLang==="ja"?"鑑別候補へジャンプ":"Jump to candidate");
-      jump.innerHTML=candidates.slice(0,5).map((c,i)=>{
-        const nm=currentLang==="ja"?(c.name_ja||c.name_en||c.disease_id||""):(c.name_en||c.name_ja||c.disease_id||"");
-        const short=nm.length>12?nm.slice(0,11)+"…":nm;
-        return `<button type="button" class="chat-cand-jump-btn" data-rank="${i+1}">${i+1}${currentLang==="ja"?"位":"."} ${escapeHtml(short)}</button>`;
-      }).join("");
-      listDiv.insertBefore(jump,listDiv.firstChild);
+      listDiv.insertAdjacentHTML("afterbegin",_candJumpStripHtml(candidates.slice(0,5).map(c=>currentLang==="ja"?(c.name_ja||c.name_en||c.disease_id||""):(c.name_en||c.name_ja||c.disease_id||""))));
     }
     candidates.slice(0,5).forEach((c,i)=>{
       const card=document.createElement("div");
@@ -6501,6 +6492,17 @@ function guidedRenderContextQuestions(questions){
   });
 }
 
+/* 候補ジャンプ・ストリップ（自由入力チャット＋問診最終結果で共用 — 2026-11 第83弾で
+   問診モードにも拡張）: スマホでは5枚の候補カードが数画面に及ぶため「2位 疾患名」を
+   タップでそのカードへ着地。ルーティングは _attachChatNavHandlers の委譲ハンドラ。 */
+function _candJumpStripHtml(names){
+  if(!names||names.length<2)return "";
+  const btns=names.map((nm,i)=>{
+    const short=nm.length>12?nm.slice(0,11)+"…":nm;
+    return `<button type="button" class="chat-cand-jump-btn" data-rank="${i+1}">${i+1}${currentLang==="ja"?"位":"."} ${escapeHtml(short)}</button>`;
+  }).join("");
+  return `<div class="chat-cand-jump" role="navigation" aria-label="${currentLang==="ja"?"鑑別候補へジャンプ":"Jump to candidate"}">${btns}</div>`;
+}
 function guidedRenderFinalResults(data){
   const result=data.result||{};
   const diseases=result.suspected_diseases||[];
@@ -6555,6 +6557,7 @@ function guidedRenderFinalResults(data){
   if(diseases.length>0){
     let html=`<div class="guided-final-label">${t("guidedFinalTitle")}</div>`;
     html+='<div class="chat-disease-list">';
+    html+=_candJumpStripHtml(diseases.slice(0,5).map(d=>currentLang==="ja"?(d.name_ja||d.name||""):(d.name||d.name_ja||"")));
     html+=commonDxNote(diseases.slice(0,5),5);
     diseases.slice(0,5).forEach((d,i)=>{
       const pct=d.match_percent||0;
@@ -6566,7 +6569,7 @@ function guidedRenderFinalResults(data){
         const found=details.find(s=>s.id===sid);
         return found?(currentLang==="ja"?(found.name_ja||found.name_en):(found.name_en||found.name_ja)):sid;
       }).join(", "));
-      html+=`<div class="chat-disease-card">
+      html+=`<div class="chat-disease-card" data-rank="${i+1}">
         <div class="chat-disease-head">
           <span class="chat-disease-rank">${i+1}</span>
           <span class="chat-disease-name">${name}</span>
