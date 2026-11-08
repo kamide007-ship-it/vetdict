@@ -4020,6 +4020,41 @@ SYMPTOM_ALIASES = {
     "ダニがたくさん": "visible_mites",
     "ダニが沢山": "visible_mites",
     "ダニがいっぱい": "visible_mites",
+    # --- 2026-11 第83弾（チャット精度第58回） ---
+    # 低体温（猫の急性虚脱で「体温が低い」が抽出ゼロだった — ATE・ショックの徴候）
+    "体温が低": "hypothermia",
+    "体温が下が": "hypothermia",
+    "体温が低下": "hypothermia",
+    # 口腔出血（「血が出ている」(6字)→汎用 bleeding に負けないよう7字以上）
+    "口から血が出": "bleeding_gums",
+    "口から血が出てい": "bleeding_gums",
+    "口の中から血": "bleeding_gums",
+    "口から出血": "bleeding_gums",
+    # 腰を振る歩様（股関節形成不全・後肢虚弱の飼い主表現）
+    "腰が左右に揺れ": "hip_sway",
+    "腰を左右に振": "hip_sway",
+    "腰を振って歩": "hip_sway",
+    "お尻を振って歩": "hip_sway",
+    # 陰部舐め（ひらがな形）
+    "陰部をなめ": "excessive_grooming",
+    "陰部をよくなめ": "excessive_grooming",
+    # 猫の排尿姿勢での砂かき反復（ブロック猫の飼い主観察）
+    "砂をかいてばかり": "straining_to_urinate",
+    "砂をかき続け": "straining_to_urinate",
+    "砂を何度もかい": "straining_to_urinate",
+    # 耳掻き（ひらがな・後肢で掻く形）
+    "耳をかいて": "ear_scratching",
+    "耳を後ろ足でか": "ear_scratching",
+    "耳を後ろ足で掻": "ear_scratching",
+    # 乏尿・飲水低下（「水も飲まず」と同じ食欲/飲水低下プロキシ）
+    "おしっこが少な": "decreased_urination",
+    "尿が少な": "decreased_urination",
+    "水をあまり飲ま": "loss_of_appetite",
+    # ケンケン歩行（て形・辞書形）
+    "ケンケンして": "lameness_or_limping",
+    "ケンケンする": "lameness_or_limping",
+    # 後肢冷感＋不動（猫ATE — 「冷たくて動かない」は連続しないため専用キー）
+    "冷たくて動かな": "hind_limb_paralysis",
 }
 
 # --- 縮約形「〜てる/〜でる」と完全形「〜ている/〜でいる」の相互補完 ---

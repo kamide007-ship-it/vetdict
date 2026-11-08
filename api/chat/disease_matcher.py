@@ -202,6 +202,8 @@ _SYN: dict[str, list[str]] = {
     "decreased_urination": ["straining_to_urinate"],
     "straining_to_urinate": ["decreased_urination"],
     "cold_extremities": ["cold_limbs"],
+    # 低体温（2026-11 第83弾）— ATE・ショックの末梢冷感へ
+    "hypothermia": ["cold_extremities", "subnormal_temperature", "cold_body"],
     "self_mutilation": ["self_chewing", "feather_plucking"],
     "self_chewing": ["self_mutilation"],
     "behavioral_change": ["behavioral_changes", "aggression"],

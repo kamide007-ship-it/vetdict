@@ -1830,7 +1830,7 @@ function setDefaultStats(){
     diseases:6525,
     species:21,
     drugs:682,
-    symptoms:106,
+    symptoms:107,
     protocols:188
   };
   renderSpeciesGrid();
@@ -3530,8 +3530,42 @@ function renderResults(data){
   area.appendChild(createResultsDisclaimer());
   const contentDiv=document.createElement("div");
   contentDiv.innerHTML=html;
+  /* 鑑別候補ジャンプ・ストリップ（チャット第81弾とのパリティ — 2026-11 第83弾）:
+     スマホでは2相表示の候補カードが数画面に及び、2位以下を読むのに長いスクロールが
+     要った。表示中の上位カードへ sticky ヘッダー補正済みで1タップ着地＋展開。 */
+  {
+    const vis=[...contentDiv.querySelectorAll(".disease-result:not(.dx-hidden)")].slice(0,6);
+    const cardsArea=contentDiv.querySelector(".results-cards-area");
+    if(vis.length>1&&cardsArea){
+      vis.forEach((c,i)=>{c.dataset.dxRank=String(i+1);});
+      const strip=document.createElement("div");
+      strip.className="chat-cand-jump dx-cand-jump";
+      strip.setAttribute("role","navigation");
+      strip.setAttribute("aria-label",currentLang==="ja"?"鑑別候補へジャンプ":"Jump to candidate");
+      strip.innerHTML=vis.map((c,i)=>{
+        const nm=((c.querySelector(".disease-name")||{}).textContent||"").trim();
+        const short=nm.length>12?nm.slice(0,11)+"\u2026":nm;
+        return `<button type="button" class="chat-cand-jump-btn dx-cand-jump-btn" data-dx-rank="${i+1}">${i+1}${currentLang==="ja"?"位":"."} ${escapeHtml(short)}</button>`;
+      }).join("");
+      cardsArea.insertBefore(strip,cardsArea.firstChild);
+    }
+  }
   /* Disease card expand/collapse — event delegation on contentDiv */
   contentDiv.addEventListener("click",function(e){
+    const dxJump=e.target.closest(".dx-cand-jump-btn");
+    if(dxJump){
+      e.preventDefault();
+      const card=contentDiv.querySelector('.disease-result[data-dx-rank="'+dxJump.dataset.dxRank+'"]');
+      if(card){
+        const head=card.querySelector(".disease-head");
+        if(head&&head.getAttribute("aria-expanded")!=="true")toggleDetail(head);
+        scrollToAnchor(card);
+        card.classList.add("chat-card-flash");
+        setTimeout(()=>card.classList.remove("chat-card-flash"),1200);
+        trackEvent("checker_candidate_jump",{rank:dxJump.dataset.dxRank});
+      }
+      return;
+    }
     const moreBtn=e.target.closest(".dx-show-more");
     if(moreBtn){
       const parent=moreBtn.parentElement;

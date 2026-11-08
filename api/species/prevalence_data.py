@@ -242,6 +242,12 @@ SPECIES_PREVALENCE = {
     # CAT — 230+ entries (expanded from ~73)
     # ==================================================================
     "cat": {
+        # 2026-11 第83弾: 未tierで「急な虚脱+低体温」主訴の上位を占めていた稀少/曝露依存エントリ
+        "Feline Near-Drowning": "rare",
+        "Cold Agglutinin Disease": "rare",
+        "Feline Pure Red Cell Aplasia": "uncommon",
+        "Tea Tree Oil Toxicosis": "uncommon",
+        "Feline Sick Sinus Syndrome": "rare",
         # 2026-10 第67弾: 跳躍不能（猫DJDの最頻の飼い主所見）主訴で未tierの稀な
         # 脊椎・栄養性エントリが変形性関節症を上回っていた
         "Feline Atlantoaxial Instability": "rare",

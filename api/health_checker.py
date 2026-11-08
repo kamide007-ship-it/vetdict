@@ -859,6 +859,14 @@ SYMPTOMS = [
         "name_en": "Flat / Ribbon-like Stool",
         "category": "digestive",
     },
+    # 2026-11 第83弾: 腰を左右に振る歩様（股関節形成不全の古典的な飼い主観察 —
+    # bunny-hopping / swaying gait。Ettinger 8th; Fossum Small Animal Surgery 5th）
+    {
+        "id": "hip_sway",
+        "name_ja": "腰を左右に振って歩く（腰振り歩行）",
+        "name_en": "Swaying Hips When Walking",
+        "category": "musculoskeletal",
+    },
     {
         "id": "tail_chasing",
         "name_ja": "しっぽを追いかける・かじる（常同行動）",
@@ -1531,6 +1539,7 @@ DISEASES = [
             "reluctance_to_move",
             "muscle_wasting",
             "joint_swelling",
+            "hip_sway",
         ],
         "severity": "moderate",
         "recommended_tests": ["ofa_radiograph", "xray"],
@@ -5371,6 +5380,8 @@ _PATHOGNOMONIC_CLUSTERS = [
     # 扁平便は直腸の外部圧迫を示す部位診断的所見（2026-10 第82弾）。排尿困難を
     # 伴えば前立腺腫大による尿道・直腸の同時圧迫（Johnston 2000; Smith 2008）
     (frozenset({"flat_stool"}), "benign_prostatic_hyperplasia", 1.5),
+    # 腰振り歩行は股関節形成不全の古典像（2026-11 第83弾）
+    (frozenset({"hip_sway"}), "hip_dysplasia", 1.5),
     (frozenset({"flat_stool", "preputial_discharge"}), "benign_prostatic_hyperplasia", 2.0),
     (frozenset({"flat_stool", "straining_to_urinate"}), "benign_prostatic_hyperplasia", 1.8),
     # 点状出血は血小板/血管障害の部位診断的所見（2026-10 第69弾）

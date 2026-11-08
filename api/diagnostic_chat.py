@@ -1008,6 +1008,10 @@ def extract_symptoms_from_text(text: str) -> list:
         # is halitosis — without this the gingival-bleeding complaint lost a
         # symptom entirely.
         "bleeding_gums": ["bad_breath"],
+        # 2026-11 第83弾
+        "vulvar_swelling": ["vulvar_discharge"],
+        "hypothermia": ["lethargy"],
+        "hip_sway": ["limping"],
         # "顔が腫れて" resolves to facial_swelling (cat/bird vocabularies); the
         # legacy dog vocabulary's closest signals are periocular swelling and
         # a palpable mass (tooth-root abscess / sting presentations).
@@ -1117,6 +1121,7 @@ def extract_symptoms_from_text(text: str) -> list:
     # 「震えて背中を丸めて食べない」主訴で膵炎が top-6 圏外だった。
     _LEGACY_COEXTRACT = {
         "hunched_posture": ["abdominal_pain"],
+        # 腰を振る歩様は股関節形成不全の古典像 — こわばりを併記（2026-11 第83弾）
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

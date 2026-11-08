@@ -614,6 +614,11 @@ ID_SYNONYMS: dict[str, list[str]] = {
     "perineal_swelling": ["perianal_irritation", "swelling"],
     # Guinea pig scurvy
     "bleeding_gums": ["swollen_gums", "oral_bleeding"],
+    # 低体温（2026-11 第83弾）
+    "hypothermia": ["cold_body", "cold_extremities", "lethargy"],
+    "cold_body": ["hypothermia", "cold_extremities", "lethargy"],
+    # 腰を左右に振る歩様（股関節形成不全の bunny-hop / 後肢虚弱）
+    "hip_sway": ["hind_leg_weakness", "hind_limb_weakness", "ataxia", "lameness"],
     "swollen_joints": ["joint_swelling", "lameness_or_limping", "lameness"],
     # Fish
     "darkened_coloration": ["dark_coloration", "discoloration"],
@@ -828,6 +833,10 @@ ID_SYNONYMS: dict[str, list[str]] = {
 }
 
 # 部位特異的ID → それに包含される汎用ID（両方抽出された場合は汎用側を落とす）
+_SPECIES_COEXTRACT: dict[str, list[str]] = {
+    "冷たくて動かな": ["cold_extremities", "cold_limbs", "cold_body"],
+}
+
 _SUBSUMES: dict[str, set[str]] = {
     "palpable_thyroid_nodule": {"lumps", "lumps_and_bumps", "lumps_bumps"},
     # 部位を特定した疼痛（脊椎・尾根部/腹部）は「痛がる」の汎用 pain を包含する
@@ -1169,6 +1178,14 @@ def _extract_species_symptoms(text: str, species: str) -> list[str]:
     for _specific, _generic in _SUBSUMES.items():
         if _specific in matched:
             matched -= _generic
+    # 1つの句が2所見を同時に意味する場合の併記抽出（最長一致で一方が消費されるため）。
+    # 「後ろ足が冷たくて動かない」= 後肢麻痺＋末梢冷感（猫ATEの定義的ペア — 2026-11 第83弾）
+    for _phrase, _cands in _SPECIES_COEXTRACT.items():
+        if _phrase in text_lower:
+            for _cid in _cands:
+                if _cid in symptom_names:
+                    matched.add(_cid)
+                    break
     if (
         "pain" in matched
         and "eye_pain" in symptom_names
