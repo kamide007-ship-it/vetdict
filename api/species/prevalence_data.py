@@ -242,6 +242,13 @@ SPECIES_PREVALENCE = {
     # CAT — 230+ entries (expanded from ~73)
     # ==================================================================
     "cat": {
+        # 2026-10 第83弾: 嘔吐単独主訴で未tierの稀な神経・肝・食道エントリが上位
+        # （キー・ガスケル症候群は英国の散発例、筋無力症クリーゼは稀 — Little, The Cat）
+        "Feline Dysautonomia (Key-Gaskell Syndrome) - Acute": "rare",
+        "Feline Myasthenic Crisis": "rare",
+        "Feline Polycystic Liver Disease": "uncommon",
+        "Feline Esophageal Stricture": "uncommon",
+        "Feline Enteric Coronavirus (Non-FIP)": "uncommon",
         # 2026-10 第67弾: 跳躍不能（猫DJDの最頻の飼い主所見）主訴で未tierの稀な
         # 脊椎・栄養性エントリが変形性関節症を上回っていた
         "Feline Atlantoaxial Instability": "rare",
@@ -1007,6 +1014,13 @@ SPECIES_PREVALENCE = {
     # BIRD — 28+ entries (expanded from ~16)
     # ==================================================================
     "bird": {
+        # 2026-10 第83弾: 羽を膨らませた非特異的シックバードで未tierの稀なエントリが
+        # 腸炎・細菌感染の日常鑑別と並んでいた（Ritchie & Harrison）
+        "Visceral Gout – Acute Form": "uncommon",
+        "Endocarditis": "uncommon",
+        "Avian Haemoproteosis": "uncommon",
+        "Cochlosomosis": "uncommon",
+        "Atoxoplasmosis": "uncommon",
         # 未tierのまま「足を痛がって止まり木に止まれない」の上位を占めていた:
         # 捕獲性ミオパチーは主に野鳥の病態、末梢神経障害・合成内分泌栄養
         # エントリは非特異（趾瘤症・関節炎・痛風が日常鑑別 — Ritchie & Harrison）

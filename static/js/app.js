@@ -1804,8 +1804,8 @@ function loadSpeciesStats(){
 
 function setDefaultStats(){
   SPECIES=[
-    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:609,drugs:622,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
-    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:599,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
+    {id:"dog",name:"犬",nameEn:"Dog",icon:"\u{1F415}",diseases:609,drugs:624,description:"Comprehensive disease dictionary for dogs",description_ja:"最も一般的なペットの疾患辞典"},
+    {id:"cat",name:"猫",nameEn:"Cat",icon:"\u{1F408}",diseases:548,drugs:601,description:"Feline-specific diseases and symptoms",description_ja:"猫特有の疾患と症状"},
     {id:"horse",name:"馬",nameEn:"Horse",icon:"\u{1F434}",diseases:594,drugs:367,description:"Equine diseases and musculoskeletal disorders",description_ja:"馬の疾患・運動器障害を網羅"},
     {id:"rabbit",name:"うさぎ",nameEn:"Rabbit",icon:"\u{1F407}",diseases:418,drugs:262,description:"Common rabbit digestive and dental diseases",description_ja:"うさぎに多い消化器・歯科疾患"},
     {id:"hamster",name:"ハムスター",nameEn:"Hamster",icon:"\u{1F439}",diseases:280,drugs:72,description:"Hamster tumors, skin conditions, and more",description_ja:"ハムスターの腫瘍・皮膚疾患など"},
@@ -1829,8 +1829,8 @@ function setDefaultStats(){
   pendingStats={
     diseases:6525,
     species:21,
-    drugs:682,
-    symptoms:106,
+    drugs:684,
+    symptoms:108,
     protocols:188
   };
   renderSpeciesGrid();
@@ -3362,6 +3362,30 @@ function createShareWidget(diseases){
    tuck the long tail behind a "show more" toggle (all cards stay in the DOM,
    so search/print/expand-all keep working). */
 const DX_CAP_COMMON=12,DX_CAP_RARE=6,DX_CAP_FLAT=15;
+/* 2026-10 第83弾: 鑑別チェッカー結果の候補ジャンプ・ストリップ。スマホでは候補カードが
+   数画面に及び（第1相/第2相の見出し・各カードの治療抜粋）、2位以下を確認するのに長い
+   スクロールが要った — 相談チャット（第81弾）と同じ「1位 疾患名」チップを結果の先頭に
+   表示し、タップでそのカードへ sticky ヘッダー直下に着地する。並べ替えのたびに再構築。 */
+function _renderCheckerCandJump(contentDiv){
+  if(!contentDiv)return;
+  const old=contentDiv.querySelector(".checker-cand-jump");if(old)old.remove();
+  const area=contentDiv.querySelector(".results-cards-area");
+  if(!area)return;
+  const cards=[...area.querySelectorAll(".disease-result:not(.dx-hidden)")].slice(0,5);
+  if(cards.length<2)return;
+  const jump=document.createElement("div");
+  jump.className="chat-cand-jump checker-cand-jump";
+  jump.setAttribute("role","navigation");
+  jump.setAttribute("aria-label",currentLang==="ja"?"鑑別候補へジャンプ":"Jump to candidate");
+  jump.innerHTML=cards.map((c,i)=>{
+    const el=c.querySelector(".disease-name");
+    const nm=((el&&el.textContent)||"").trim();
+    const short=nm.length>12?nm.slice(0,11)+"…":nm;
+    return `<button type="button" class="chat-cand-jump-btn checker-cand-jump-btn" data-idx="${i}">${i+1}${currentLang==="ja"?"位":"."} ${escapeHtml(short)}</button>`;
+  }).join("");
+  area.parentNode.insertBefore(jump,area);
+}
+
 function renderDxCards(diseases,data,cap){
   let out="";
   diseases.forEach((d,i)=>{
@@ -3602,6 +3626,7 @@ function renderResults(data){
         groupHtml+=`<div class="dx-group">${commonDxNote(diseases,DX_CAP_FLAT)}${renderDxCards(diseases,data,DX_CAP_FLAT)}</div>`;
       }
       cardsArea.innerHTML=groupHtml;
+      _renderCheckerCandJump(contentDiv);
       return;
     }
     const sevOrder={emergency:0,high:1,moderate:2,low:3};
@@ -3609,8 +3634,22 @@ function renderResults(data){
     if(mode==="confidence")sorted.sort((a,b)=>(b.match_percent||b.confidence||0)-(a.match_percent||a.confidence||0));
     else if(mode==="severity")sorted.sort((a,b)=>(sevOrder[a.severity]??4)-(sevOrder[b.severity]??4));
     cardsArea.innerHTML=`<div class="dx-group">${renderDxCards(sorted,data,DX_CAP_FLAT)}</div>`;
+    _renderCheckerCandJump(contentDiv);
+  });
+  /* 候補ジャンプ・ストリップのクリック → 該当カードへ sticky ヘッダー補正で着地 */
+  contentDiv.addEventListener("click",function(e){
+    const b=e.target.closest(".checker-cand-jump-btn");
+    if(!b)return;
+    e.preventDefault();
+    const card=contentDiv.querySelectorAll(".results-cards-area .disease-result:not(.dx-hidden)")[+b.dataset.idx];
+    if(!card)return;
+    scrollToAnchor(card);
+    card.classList.add("chat-card-flash");
+    setTimeout(()=>card.classList.remove("chat-card-flash"),1200);
+    trackEvent("checker_candidate_jump",{rank:+b.dataset.idx+1});
   });
   area.appendChild(contentDiv);
+  _renderCheckerCandJump(contentDiv);
   area.appendChild(createFeedbackWidget());
   area.appendChild(createShareWidget(diseases));
   area.appendChild(createPrintButton());

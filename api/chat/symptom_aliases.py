@@ -3052,10 +3052,13 @@ SYMPTOM_ALIASES = {
     # 皮膚科疾患が上位を占めていた）
     # 注: 「舐めている」(5字, excessive_licking) と長さタイにならないよう
     # 6字以上のキーで登録する（タイは辞書挿入順で旧キーが勝つ）
-    "陰部を舐めて": "excessive_grooming",
-    "陰部を舐める": "excessive_grooming",
-    "陰部をしきりに舐め": "excessive_grooming",
-    "陰部をずっと舐め": "excessive_grooming",
+    "陰部を舐めて": "genital_licking",
+    # 2026-10 第83弾: 副詞「よく」介在形（「よく」は「よく食べる」等で意味を担うため一括除去しない）
+    "陰部をよく舐め": "genital_licking",
+    "陰部ばかり舐め": "genital_licking",
+    "陰部を舐める": "genital_licking",
+    "陰部をしきりに舐め": "genital_licking",
+    "陰部をずっと舐め": "genital_licking",
     "お尻のまわりを舐め": "excessive_grooming",
     # 排便困難の口語（「おしっこが出にくい」のみ収載で便側の「出にくそう」が
     # 抽出ゼロ — 鳥の卵詰まり・総排泄腔疾患の随伴主訴）
@@ -3517,6 +3520,12 @@ SYMPTOM_ALIASES = {
     "陰部が腫れ": "vulvar_swelling",
     # 腰背部〜尾根部の脱毛・丘疹はノミアレルギーの好発分布（Muller & Kirk 7th ed）
     "しっぽの付け根に脱毛": "flea_signs",
+    # 2026-10 第83弾: 尾根部を噛む＝ノミアレルギーの好発部位の掻痒行動
+    "しっぽの付け根を噛": "flea_signs",
+    "尻尾の付け根を噛": "flea_signs",
+    "尾の付け根を噛": "flea_signs",
+    "しっぽの付け根をかじ": "flea_signs",
+    "尻尾の付け根をかじ": "flea_signs",
     "しっぽの付け根の毛が": "flea_signs",
     "尻尾の付け根に脱毛": "flea_signs",
     "尻尾の付け根の毛が": "flea_signs",
@@ -3595,6 +3604,7 @@ SYMPTOM_ALIASES = {
     # --- 2026-10 第71弾（チャット精度第46回） ---
     # 頸部の腫瘤（下顎/浅頸リンパ節腫大 — 犬猫の多中心型リンパ腫の古典的主訴）
     "首にしこり": "swollen_lymph_nodes",
+    "しこりが首に": "swollen_lymph_nodes",  # 語順ゆれ（2026-10 第83弾）
     "首のしこり": "swollen_lymph_nodes",
     "首に大きなしこり": "swollen_lymph_nodes",
     "首のリンパ節": "swollen_lymph_nodes",
@@ -3916,6 +3926,11 @@ SYMPTOM_ALIASES = {
     "エアコンを切": "heat_exposure",
     "熱中症": "heat_exposure",
     "腰がふらつ": "ataxia",
+    # 2026-10 第83弾: 腰を左右に振る歩様（股関節形成不全のスウェイ歩様・変性性脊髄症）
+    "腰が左右に揺れ": "swaying_gait",
+    "腰を左右に振っ": "swaying_gait",
+    "お尻を振って歩": "swaying_gait",
+    "モンローウォーク": "swaying_gait",
     "腰がふらふら": "ataxia",
     "腰が抜けたよう": "ataxia",
     "舌が白っぽ": "pale_gums",

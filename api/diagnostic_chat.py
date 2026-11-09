@@ -988,6 +988,8 @@ def extract_symptoms_from_text(text: str) -> list:
         # shorter "ふらつく"→ataxia→tremors and orthopedic diseases never
         # ranked for the classic hindlimb-weakness complaint.
         "hind_leg_weakness": ["limping"],
+        # 腰を左右に振る歩様（スウェイ歩様 — 股関節形成不全の古典像。2026-10 第83弾）
+        "swaying_gait": ["limping"],
         # "ジャンプしなくなった" resolves to reluctance_to_jump (feline DJD
         # vocabulary); the legacy dog vocabulary expresses the same functional
         # decline as stiffness/reluctance_to_move (canine osteoarthritis).
@@ -1117,6 +1119,8 @@ def extract_symptoms_from_text(text: str) -> list:
     # 「震えて背中を丸めて食べない」主訴で膵炎が top-6 圏外だった。
     _LEGACY_COEXTRACT = {
         "hunched_posture": ["abdominal_pain"],
+        # スウェイ歩様は跛行であると同時に後躯のこわばり（股関節形成不全・DM）
+        "swaying_gait": ["stiffness"],
     }
 
     def _resolve_legacy_id(sid: str) -> str | None:

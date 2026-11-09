@@ -852,6 +852,20 @@ SYMPTOMS = [
         "name_en": "Milk Production (Lactation)",
         "category": "general",
     },
+    # 2026-10 第83弾: 陰部を舐める（尿路感染・膣炎の飼い主所見 — ISCAID 2019）
+    {
+        "id": "genital_licking",
+        "name_ja": "陰部をしきりに舐める",
+        "name_en": "Licking of the Genital Area",
+        "category": "urinary",
+    },
+    # 2026-10 第83弾: 腰を左右に振る歩様（股関節形成不全のスウェイ歩様・変性性脊髄症）
+    {
+        "id": "swaying_gait",
+        "name_ja": "腰を左右に振って歩く（スウェイ歩様）",
+        "name_en": "Swaying Hindquarter Gait",
+        "category": "musculoskeletal",
+    },
     # 2026-10 第82弾: 扁平便・リボン状便（前立腺腫大／会陰ヘルニアの直腸圧迫所見）
     {
         "id": "flat_stool",
@@ -1530,6 +1544,7 @@ DISEASES = [
             "stiffness",
             "reluctance_to_move",
             "muscle_wasting",
+            "swaying_gait",
             "joint_swelling",
         ],
         "severity": "moderate",
@@ -1622,6 +1637,7 @@ DISEASES = [
             "stiffness",
             "reluctance_to_move",
             "muscle_wasting",
+            "swaying_gait",
             "incontinence",
         ],
         "severity": "high",
@@ -1993,6 +2009,7 @@ DISEASES = [
             "blood_in_urine",
             "incontinence",
             "excessive_licking",
+            "genital_licking",
             "cloudy_urine",
         ],
         "severity": "low",
